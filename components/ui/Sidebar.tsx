@@ -4,6 +4,21 @@ import {
   ArrowLeftOnRectangleIcon,
   UsersIcon,
   KeyIcon,
+  CheckIcon,
+  ShieldCheckIcon,
+  LockClosedIcon,
+  EyeSlashIcon,
+  BuildingOffice2Icon,
+  ClipboardDocumentCheckIcon,
+  ArrowRightOnRectangleIcon,
+  DocumentMagnifyingGlassIcon,
+  ArrowUpOnSquareIcon,
+  QueueListIcon,
+  ShieldExclamationIcon,
+  QuestionMarkCircleIcon,
+  CheckBadgeIcon,
+  BuildingStorefrontIcon,
+  AcademicCapIcon,
 } from "@heroicons/react/24/solid";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -42,7 +57,7 @@ export default function Sidebar() {
                           viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                          <path d="M152.941 391.317c.812-.469 1.307-.202 1.752.57l3.92 6.789c.471.816.303 1.353-.507 1.82l-8.753 5.054c-.672.388-1.437.467-2.125.07l-7.666-4.427c-.956-.552-1.13-.95-.24-1.688.706-.585 1.479-1.092 2.255-1.577 1.238-.774 2.507-1.497 3.77-2.226l7.594-4.385" />
                         </svg>
                       </div>
                       <input
@@ -55,6 +70,7 @@ export default function Sidebar() {
                     </div>
                   </form>
                 </li>
+
                 <li>
                   <NavItem
                     href="/dashboard"
@@ -63,27 +79,119 @@ export default function Sidebar() {
                     active={router.pathname === "/dashboard"}
                   />
                 </li>
+                <li className="menu-title">
+                  <span>Privacy</span>
+                </li>
+                    <li>
+                      <NavItem
+                        href="/rpa"
+                        text="Record of Processing Activitis"
+                        icon={ClipboardDocumentCheckIcon}
+                        active={router.pathname === "/privacy"}
+                      />
+                    </li>
+                    <li>
+                      <NavItem
+                        href="/tia"
+                        text="Transfer Impact Assessment"
+                        icon={ArrowUpOnSquareIcon}
+                        active={router.pathname === "/privacy"}
+                      />
+                    </li>
+                    <li>
+                      <NavItem
+                        href="/dpia"
+                        text="Data Protection Impact Assessment"
+                        icon={DocumentMagnifyingGlassIcon}
+                        active={router.pathname === "/privacy"}
+                      />
+                    </li>
+                    <li>
+                      <NavItem
+                        href="/pqc"
+                        text="Processor Questionnaire"
+                        icon={QuestionMarkCircleIcon}
+                        active={router.pathname === "/privacy"}
+                      />
+                    </li>
+                
+                <li className="menu-title">
+                  <span>Security</span>
+                </li>
                 <li>
                   <NavItem
+                    href="/security"
+                    text="Cybersecurity Controls"
+                    icon={LockClosedIcon}
+                    active={router.pathname === "/security"}
+                  />
+                </li>
+                <li>
+                  <NavItem
+                    href="/security"
+                    text="Gap Analysis"
+                    icon={ShieldExclamationIcon}
+                    active={router.pathname === "/security"}
+                  />
+                </li>
+                <li>
+                  <NavItem
+                    href="/security"
+                    text="Vendor Assessment"
+                    icon={CheckBadgeIcon}
+                    active={router.pathname === "/security"}
+                  />
+                </li>
+                <li className="menu-title">
+                  <span>Compliance</span>
+                </li>
+                <li>
+                  <NavItem
+                    href="/compliance"
+                    text="Benchmark Report"
+                    icon={ShieldCheckIcon}
+                    active={router.pathname === "/compliance"}
+                  />
+                </li>
+                <li>
+                  <NavItem
+                    href="/compliance"
+                    text="Awareness Training"
+                    icon={AcademicCapIcon}
+                    active={router.pathname === "/compliance"}
+                  />
+                </li>
+                <li>
+                  <NavItem
+                    href="/compliance"
+                    text="Vendor Report"
+                    icon={BuildingStorefrontIcon}
+                    active={router.pathname === "/compliance"}
+                  />
+                </li>
+              </ul>
+
+               
+              <div className="space-y-2 pt-2">
+                <NavItem
                     href="/teams"
                     text="Teams"
                     icon={UsersIcon}
                     active={router.pathname === "/teams"}
                   />
-                </li>
-              </ul>
+              
               {team && (
                 <div className="space-y-2 pt-2">
                   <NavItem
                     href="javascript:void(0);"
                     text={team.name}
-                    icon={UsersIcon}
+                    icon={BuildingOffice2Icon}
                     active={false}
                   />
                   <TeamNav slug={slug} />
                 </div>
               )}
-              <div className="space-y-2 pt-2">
+
                 <NavItem
                   href="/account"
                   text="Account"

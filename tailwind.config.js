@@ -9,11 +9,11 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        boxyhq: {
-          primary: "#25c2a0",
-          secondary: "#303846",
-          accent: "#570DF8",
-          neutral: "#3D4451",
+        unicis: {
+          primary: "#388effff",
+          secondary: "#0052cc",
+          accent: "#0052ccff",
+          neutral: "#c7e3fb",
           "base-100": "#FFFFFF",
           info: "#3ABFF8",
           success: "#36D399",

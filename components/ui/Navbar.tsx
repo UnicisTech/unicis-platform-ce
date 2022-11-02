@@ -38,7 +38,7 @@ export default function Navbar() {
               href=""
               className="flex items-center text-xl font-bold lg:ml-2.5"
             >
-              <span className="self-center whitespace-nowrap">BoxyHQ</span>
+              <span className="self-center whitespace-nowrap">Unicis.App</span>
             </a>
             <form action="#" method="GET" className="hidden lg:block lg:pl-32">
               <label htmlFor="topbar-search" className="sr-only">
