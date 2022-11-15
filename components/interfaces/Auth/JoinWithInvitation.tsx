@@ -3,8 +3,7 @@ import * as Yup from "yup";
 import { Button } from "react-daisyui";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
-import axios from "axios";
-
+import { useTranslation } from "next-i18next";
 import type { User } from "@prisma/client";
 import type { ApiResponse } from "types";
 import { InputWithLabel, Loading, Error } from "@/components/ui";
@@ -18,6 +17,7 @@ const JoinWithInvitation = ({
   next: string;
 }) => {
   const router = useRouter();
+  const { t } = useTranslation("common");
 
   const { isLoading, isError, invitation } = useInvitation(inviteToken);
 
@@ -32,32 +32,22 @@ const JoinWithInvitation = ({
     }),
     enableReinitialize: true,
     onSubmit: async (values) => {
-      const { name, email } = values;
-
-      const response = await axios.post<ApiResponse<User>>("/api/auth/join", {
-        name,
-        email,
-        inviteToken,
+      const response = await fetch("/api/auth/join", {
+        method: "POST",
+        body: JSON.stringify(values),
       });
 
-      const { data: user, error } = response.data;
-
-      formik.resetForm();
+      const { error }: ApiResponse<User> = await response.json();
 
       if (error) {
         toast.error(error.message);
         return;
       }
 
-      if (user) {
-        toast.success("Successfully joined");
+      formik.resetForm();
+      toast.success(t("successfully-joined"));
 
-        if (next) {
-          router.push(next);
-        }
-
-        router.push("/auth/login");
-      }
+      return next ? router.push(next) : router.push("/auth/login");
     },
   });
 
@@ -96,13 +86,10 @@ const JoinWithInvitation = ({
         active={formik.dirty}
         fullWidth
       >
-        Create Account
+        {t("create-account")}
       </Button>
       <div>
-        <p className="text-sm">
-          Signing up signifies that you have read and agree to the Terms of
-          Service and our Privacy Policy.
-        </p>
+        <p className="text-sm">{t("sign-up-message")}</p>
       </div>
     </form>
   );

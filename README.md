@@ -138,6 +138,8 @@ _Note: HTML test report is generated inside the `report` folder. Currently supor
 - Sign in with Email and Password
 - Sign in with Magic Link
 - Sign in with SAML SSO
+- Sign in with Google [[Setting up Google OAuth](https://support.google.com/cloud/answer/6158849?hl=en)]
+- Sign in with Github [[Creating a Github OAuth App](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app)]
 - Directory Sync (SCIM)
 - Update account
 - Create team
@@ -145,6 +147,7 @@ _Note: HTML test report is generated inside the `report` folder. Currently supor
 - Manage team members
 - Update team settings
 - Webhooks & Events
+- Internationalization
 
 ## Coming Soon
 
@@ -153,7 +156,6 @@ _Note: HTML test report is generated inside the `report` folder. Currently supor
 - Dark mode
 - Mobile-first UI
 - Billing & subscriptions
-- Internationalization
 - Roles and Permissions
 
 ## Contributing

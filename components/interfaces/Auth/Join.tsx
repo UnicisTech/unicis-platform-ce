@@ -3,14 +3,14 @@ import * as Yup from "yup";
 import { Button } from "react-daisyui";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
-import axios from "axios";
-
+import { useTranslation } from "next-i18next";
 import type { User } from "@prisma/client";
 import type { ApiResponse } from "types";
 import { InputWithLabel } from "@/components/ui";
 
 const Join = () => {
   const router = useRouter();
+  const { t } = useTranslation("common");
 
   const formik = useFormik({
     initialValues: {
@@ -26,33 +26,26 @@ const Join = () => {
       team: Yup.string().required().min(3),
     }),
     onSubmit: async (values) => {
-      const { name, email, password, team } = values;
-
-      const response = await axios.post<ApiResponse<User>>("/api/auth/join", {
-        name,
-        email,
-        password,
-        team,
+      const response = await fetch("/api/auth/join", {
+        method: "POST",
+        body: JSON.stringify(values),
       });
 
-      const { data: user, error } = response.data;
-
-      formik.resetForm();
+      const { error }: ApiResponse<User> = await response.json();
 
       if (error) {
         toast.error(error.message);
         return;
       }
 
-      if (user) {
-        toast.success("Successfully joined");
-        router.push("/auth/login");
-      }
+      formik.resetForm();
+      toast.success(t("successfully-joined"));
+      router.push("/auth/login");
     },
   });
 
   return (
-    <form className="" onSubmit={formik.handleSubmit}>
+    <form onSubmit={formik.handleSubmit}>
       <div className="space-y-1">
         <InputWithLabel
           type="text"
@@ -99,12 +92,9 @@ const Join = () => {
           active={formik.dirty}
           fullWidth
         >
-          Create Account
+          {t("create-account")}
         </Button>
-        <p className="text-sm">
-          Signing up signifies that you have read and agree to the Terms of
-          Service and our Privacy Policy.
-        </p>
+        <p className="text-sm">{t("sign-up-message")}</p>
       </div>
     </form>
   );
