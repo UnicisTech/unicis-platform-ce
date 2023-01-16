@@ -87,9 +87,9 @@ export default function Sidebar() {
                     <li>
                       <NavItem
                         href="/rpa"
-                        text="Record of Processing Activitis"
+                        text="Record of Processing Activities"
                         icon={ClipboardDocumentCheckIcon}
-                        active={router.pathname === "/privacy"}
+                        active={router.pathname === "/rpa"}
                       />
                     </li>
                     <li>
@@ -97,7 +97,7 @@ export default function Sidebar() {
                         href="/tia"
                         text="Transfer Impact Assessment"
                         icon={ArrowUpOnSquareIcon}
-                        active={router.pathname === "/privacy"}
+                        active={router.pathname === "/tia"}
                       />
                     </li>
                     <li>
@@ -111,19 +111,19 @@ export default function Sidebar() {
                     <li>
                       <NavItem
                         href="/pqc"
-                        text="Processor Questionnaire"
+                        text="Self Assessment Questionnaire"
                         icon={QuestionMarkCircleIcon}
-                        active={router.pathname === "/privacy"}
+                        active={router.pathname === "/saq"}
                       />
                     </li>
                 
                 <li className="menu-title">
-                  <span>Security</span>
+                  <span>Cybersecurity</span>
                 </li>
                 <li>
                   <NavItem
                     href="/security"
-                    text="Cybersecurity Controls"
+                    text="Cybersecurity Management System"
                     icon={LockClosedIcon}
                     active={router.pathname === "/security"}
                   />
@@ -139,7 +139,7 @@ export default function Sidebar() {
                 <li>
                   <NavItem
                     href="/security"
-                    text="Vendor Assessment"
+                    text="Vendor Assessment Questionnaire"
                     icon={CheckBadgeIcon}
                     active={router.pathname === "/security"}
                   />
@@ -158,7 +158,7 @@ export default function Sidebar() {
                 <li>
                   <NavItem
                     href="/compliance"
-                    text="Awareness Training"
+                    text="Interactive Awareness Training"
                     icon={AcademicCapIcon}
                     active={router.pathname === "/compliance"}
                   />

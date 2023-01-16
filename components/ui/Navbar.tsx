@@ -1,5 +1,12 @@
+import Head from 'next/head';
+import Link from 'next/link';
+import { useState } from 'react';
+
 export default function Navbar() {
+  const [navbar, setNavbar] = useState(false);
+
   return (
+
     <nav className="fixed z-30 w-full border-b border-gray-200 bg-white">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
         <div className="flex items-center justify-between">
@@ -8,7 +15,9 @@ export default function Navbar() {
               aria-expanded="true"
               aria-controls="sidebar"
               className="mr-2 cursor-pointer rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 lg:hidden"
+              onClick={() => setNavbar(!navbar)}
             >
+              {navbar ? (
               <svg
                 className="h-6 w-6"
                 fill="currentColor"
@@ -21,6 +30,7 @@ export default function Navbar() {
                   clipRule="evenodd"
                 />
               </svg>
+              ) : (
               <svg
                 className="hidden h-6 w-6"
                 fill="currentColor"
@@ -33,6 +43,7 @@ export default function Navbar() {
                   clipRule="evenodd"
                 />
               </svg>
+              )}
             </button>
             <a
               href=""
@@ -44,7 +55,11 @@ export default function Navbar() {
               <label htmlFor="topbar-search" className="sr-only">
                 Search
               </label>
-              <div className="relative mt-1 lg:w-64">
+              <div 
+                    className={`relative mt-1 lg:w-64 ${
+                        navbar ? 'block' : 'hidden'
+                      }`}
+                    >
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
                     className="h-5 w-5 text-gray-500"
@@ -91,13 +106,7 @@ export default function Navbar() {
             </button>
             <div className="hidden items-center lg:flex">
               <span className="text-base font-normal text-gray-500">
-                {/* <iframe
-                  src="https://ghbtns.com/github-btn.html?user=boxyhq&repo=jackson&type=star&count=true&size=large"
-                  scrolling="0"
-                  width="170"
-                  height="30"
-                  title="GitHub"
-                ></iframe> */}
+               
               </span>
             </div>
           </div>

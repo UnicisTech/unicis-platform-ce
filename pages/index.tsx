@@ -7,9 +7,9 @@ import HeroSection from "@/components/ui/landing/HeroSection";
 import PricingSection from "@/components/ui/landing/PricingSection";
 import FAQSection from "@/components/ui/landing/FAQSection";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { GetServerSidePropsContext } from "next";
+import { GetServerSidePropsContext, InferGetStaticPropsType } from "next";
 
-const Home: NextPageWithLayout = () => {
+const Home: NextPageWithLayout = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { t } = useTranslation("common");
 
   return (
@@ -17,7 +17,7 @@ const Home: NextPageWithLayout = () => {
       <div className="navbar bg-base-100">
         <div className="flex-1">
           <Link href="/">
-            <a className="btn-ghost btn text-xl normal-case">BoxyHQ</a>
+            <a className="btn-ghost btn text-xl normal-case">Unicis.App</a>
           </Link>
         </div>
         <div className="flex-none">

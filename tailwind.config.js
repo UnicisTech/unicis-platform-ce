@@ -10,9 +10,9 @@ module.exports = {
     themes: [
       {
         unicis: {
-          primary: "#388effff",
-          secondary: "#0052cc",
-          accent: "#0052ccff",
+          primary: "#0052cc",
+          secondary: "#3578e5",
+          accent: "#538ce9",
           neutral: "#c7e3fb",
           "base-100": "#FFFFFF",
           info: "#3ABFF8",
