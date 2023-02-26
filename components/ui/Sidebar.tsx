@@ -86,6 +86,12 @@ export default function Sidebar() {
                 </li>
                     <li>
                       <NavItem
+                        href="/tasks"
+                        text="Task Manager"
+                        icon={ClipboardDocumentCheckIcon}
+                        active={router.pathname === "/tasks"}
+                      />
+                      <NavItem
                         href="/rpa"
                         text="Record of Processing Activities"
                         icon={ClipboardDocumentCheckIcon}
