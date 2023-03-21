@@ -40,55 +40,63 @@ interface Option {
   value: string;
 }
 
-const CreateTask = ({
+const EditTask = ({
   visible,
   setVisible,
+  task,
   teams
 }: {
   visible: boolean;
   setVisible: (visible: boolean) => void;
+  task: Task;
   teams: Array<TeamWithMemberCount>;
 }) => {
   const { mutateTasks } = useTasks()
   const { t } = useTranslation("common");
+
+  console.log('EditTask task', task)
   
   return (
     <Modal open={visible}>
       <Form<FormData>
         onSubmit={async (data, {reset}) => {
           const { title, status, team, duedate, description } = data
-          const response = await axios.post<ApiResponse<Task>>(
+          console.log('edit submit data', data)
+          const response = await axios.put<ApiResponse<Task>>(
             `/api/tasks`,
             {
-              title,
-              status: status?.value,
-              teamId: team?.value,
-              duedate,
-              description: description || ''
+                taskId: task.id,
+                data: {
+                    title,
+                    status: status?.value,
+                    teamId: team?.value,
+                    duedate,
+                    description: description || ''
+                  }
             }
           );
     
-          const { data: task, error } = response.data;
-    
+          const { data: updatedTask, error } = response.data;
+
           if (error) {
             toast.error(error.message);
             return;
           }
           
           mutateTasks();
-          reset({
-            title: '',
-            status: null,
-            team: null,
-            duedate: '',
-            description: ''
-          });
+        //   reset({
+        //     title: '',
+        //     status: null,
+        //     team: null,
+        //     duedate: '',
+        //     description: ''
+        //   });
           setVisible(false);
         }}
       >
         {({ formProps }) => (
           <form {...formProps}>
-            <Modal.Header className="font-bold">Create Task</Modal.Header>
+            <Modal.Header className="font-bold">Edit Task</Modal.Header>
             <Modal.Body>
               <div
                 style={{
@@ -103,6 +111,7 @@ const CreateTask = ({
                   name="title"
                   label="Title"
                   isRequired
+                  defaultValue={task?.title}
                 >
                   {({ fieldProps, error }) => (
                     <Fragment>
@@ -115,6 +124,7 @@ const CreateTask = ({
                   label="Status"
                   aria-required={true}
                   isRequired
+                  defaultValue={statuses.find(({value}) => value === task.status)}
                   validate={async (value) => {
                     if (value) {
                       return undefined;
@@ -139,6 +149,7 @@ const CreateTask = ({
                   label="Team"
                   aria-required={true}
                   isRequired
+                  defaultValue={teams.map(({id, name}) => ({label: name, value: id})).find(({value}) => value === task.teamId)}
                   validate={async (value) => {
                     if (value) {
                       return undefined;
@@ -161,7 +172,7 @@ const CreateTask = ({
                 <Field 
                   name="duedate" 
                   label="Due date" 
-                  defaultValue="" 
+                  defaultValue={task.duedate} 
                   isRequired
                   aria-required={true}
                   validate={async (value) => {
@@ -183,7 +194,11 @@ const CreateTask = ({
                     </Fragment>
                   )}
                 </Field>
-                <Field label="Description" name="description">
+                <Field 
+                    label="Description" 
+                    name="description"
+                    defaultValue={task.description || ""}
+                >
                   {({ fieldProps }: any) => (
                     <Fragment>
                       <TextArea
@@ -207,7 +222,7 @@ const CreateTask = ({
                 {t("close")}
               </AtlaskitButton>
               <AtlaskitButton type="submit" appearance="primary">
-                {t("create-task")}
+                {t("save-changes")}
               </AtlaskitButton>
             </Modal.Actions>
           </form>
@@ -218,4 +233,4 @@ const CreateTask = ({
   );
 };
 
-export default CreateTask;
+export default EditTask;

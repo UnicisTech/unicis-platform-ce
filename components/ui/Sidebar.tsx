@@ -92,6 +92,12 @@ export default function Sidebar() {
                         active={router.pathname === "/tasks"}
                       />
                       <NavItem
+                        href="/csc"
+                        text="CSC"
+                        icon={ClipboardDocumentCheckIcon}
+                        active={router.pathname === "/csc"}
+                      />
+                      <NavItem
                         href="/rpa"
                         text="Record of Processing Activities"
                         icon={ClipboardDocumentCheckIcon}

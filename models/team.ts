@@ -74,6 +74,24 @@ export const getTeams = async (userId: string) => {
   });
 };
 
+export const getOwnedTeams = async (userId: string) => {
+  return await prisma.team.findMany({
+    where: {
+      members: {
+        some: {
+          userId,
+          role: "owner",
+        },
+      },
+    },
+    include: {
+      _count: {
+        select: { members: true },
+      },
+    },
+  });
+};
+
 export async function isTeamMember(userId: string, teamId: string) {
   return (await prisma.teamMember.findFirstOrThrow({
     where: {
@@ -125,4 +143,15 @@ export const isTeamExists = async (condition: any) => {
       OR: condition,
     },
   });
+};
+
+export const incrementTaskIndex = async (teamId: string) => {
+  try {
+    await prisma.team.update({
+      where: { id: teamId },
+      data: { taskIndex: { increment: 1 } },
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };

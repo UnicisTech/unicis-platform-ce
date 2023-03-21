@@ -13,15 +13,14 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -43,32 +42,47 @@ model VerificationToken {
 }
 
 model User {
-  id            String    @id @default(uuid())
+  id            String       @id @default(uuid())
   name          String
-  email         String    @unique
+  email         String       @unique
   emailVerified DateTime?
   password      String
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @default(now())
-
-  teamMembers TeamMember[]
-  accounts    Account[]
-  sessions    Session[]
-  invitations Invitation[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @default(now())
+  accounts      Account[]
+  invitations   Invitation[]
+  sessions      Session[]
+  Task          Task[]
+  teamMembers   TeamMember[]
 }
 
 model Team {
-  id          String   @id @default(uuid())
+  id          String       @id @default(uuid())
+  taskIndex   Int          @default(1)
   name        String
-  slug        String   @unique
-  domain      String?  @unique
-  defaultRole String   @default("member")
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
-
-  members     TeamMember[]
+  slug        String       @unique
+  domain      String?      @unique
+  defaultRole String       @default("member")
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
   invitations Invitation[]
+  tasks       Task[]
+  members     TeamMember[]
+}
+
+model Task {
+  id          Int    @id @default(autoincrement())
+  taskNumber  Int    
+  teamId      String
+  authorId    String
+  title       String
+  status      String
+  duedate     String
+  description String
+  properties  Json
+  author      User   @relation(fields: [authorId], references: [id])
+  team        Team   @relation(fields: [teamId], references: [id], onDelete: Cascade)
 }
 
 model TeamMember {
@@ -78,9 +92,8 @@ model TeamMember {
   role      String   @default("member")
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
-
-  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([teamId, userId])
 }
@@ -95,9 +108,8 @@ model Invitation {
   invitedBy String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
-
-  user User @relation(fields: [invitedBy], references: [id], onDelete: Cascade)
-  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [invitedBy], references: [id], onDelete: Cascade)
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
 
   @@unique([teamId, email])
 }
