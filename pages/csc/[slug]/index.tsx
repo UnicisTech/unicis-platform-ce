@@ -66,19 +66,19 @@ const TeamMembers: NextPageWithLayout<
   const issueSelectorHandler = useCallback(async (action: string, dataToRemove: any, control: string) => {
     setIsSaving(true)
     const operation = action === "select-option" ? "add" : "remove"
-    for (const option of dataToRemove) {
-      const issueId = option.value
-      console.log('issueSelectorHandler ->', {action, control, operation, issueId})
-      const response = await axios.put(
-        `/api/tasks/${issueId}/csc`,
-        {
-          control,
-          operation
-        }
-      );
+    // for (const option of dataToRemove) {
+    //   const issueId = option.value
+    //   console.log('issueSelectorHandler ->', {action, control, operation, issueId})
+    //   const response = await axios.put(
+    //     `/api/tasks/${issueId}/csc`,
+    //     {
+    //       control,
+    //       operation
+    //     }
+    //   );
 
-      //TODO
-      }
+    //   //TODO
+    //   }
     setIsSaving(false)
   }, [])
 
