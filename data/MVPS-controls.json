@@ -1,0 +1,303 @@
+{
+"MVPS-Controls":[
+ {
+  "Code": "MVSP-1.1",
+  "Section": "Business controls",
+  "Control": "Vulnerability reports",
+  "Requirements": "Publish the point of contact for security reports on your website\nRespond to security reports within a reasonable time frame",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-1.2",
+  "Section": "Business controls",
+  "Control": "Customer testing",
+  "Requirements": "On request, enable your customers or their delegates to test the security of your application\nTest on a non-production environment if it closely resembles the production environment in functionality\nEnsure non-production environments do not contain production data",
+  "Status": "Defined"
+ },
+ {
+  "Code": "MVSP-1.3",
+  "Section": "Business controls",
+  "Control": "Self-assessment",
+  "Requirements": "Perform annual (at a minimum) security self-assessments using this document",
+  "Status": "Nonexistent"
+ },
+ {
+  "Code": "MVSP-1.4",
+  "Section": "Business controls",
+  "Control": "External testing",
+  "Requirements": "Contract a security vendor to perform annual, comprehensive penetration tests on your systems",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-1.5",
+  "Section": "Business controls",
+  "Control": "Training",
+  "Requirements": "Implement role-specific security training for your personnel that is relevant to their business function",
+  "Status": "Not applicable"
+ },
+ {
+  "Code": "MVSP-1.6",
+  "Section": "Business controls",
+  "Control": "Compliance",
+  "Requirements": "Comply with all industry security standards relevant to your business such as PCI DSS, HITRUST, ISO27001, and SSAE 18\nComply with local laws and regulations in jurisdictions applicable to your company and your customers, such as GDPR, Binding Corporate Rules, and Standard Contractual Clauses\nEnsure data localization requirements are implemented in line with local regulations and contractual obligations",
+  "Status": "Defined"
+ },
+ {
+  "Code": "MVSP-1.7",
+  "Section": "Business controls",
+  "Control": "Incident handling",
+  "Requirements": "Notify your customers about a breach without undue delay, no later than 72 hours upon discovery\nInclude the following information in the notification:  \n- Relevant point of contact\n- Preliminary technical analysis of the breach\n- Remediation plan with reasonable timelines",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-1.8",
+  "Section": "Business controls",
+  "Control": "Data handling",
+  "Requirements": "Ensure media sanitization processes based on NIST SP 800-88 or equivalent are implemented",
+  "Status": "Managed"
+ },
+ {
+  "Code": "MVSP-2.1",
+  "Section": "Application design controls",
+  "Control": "Single Sign-On",
+  "Requirements": "Implement single sign-on using modern and industry standard protocols",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-2.2",
+  "Section": "Application design controls",
+  "Control": "HTTPS-only",
+  "Requirements": "Redirect traffic from HTTP protocol (port 80) to HTTPS (port 443)\nNote: This does not apply to secure protocols designed to run on top of unencrypted connections, such as OCSP\nScan and address issues using freely available modern TLS scanning tools\nInclude the Strict-Transport-Security header on all pages with the includeSubdomains directive",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-2.3",
+  "Section": "Application design controls",
+  "Control": "Security Headers",
+  "Requirements": "Apply appropriate security headers to reduce the application attack surface and limit post exploitation:  \n- Set a minimally permissive Content Security Policy  \n- Limit the ability to iframe sensitive application content where appropriate",
+  "Status": "Optimized"
+ },
+ {
+  "Code": "MVSP-2.4",
+  "Section": "Application design controls",
+  "Control": "Password policy",
+  "Requirements": "If password authentication is used in addition to single sign-on:  \n- Do not limit the permitted characters that can be used  \n- Do not limit the length of the password to anything below 64 characters  \n- Do not use secret questions as a sole password reset requirement  \n- Require email verification of a password change request  \n- Require the current password in addition to the new password during password change  \n- Store passwords in a hashed and salted format using a memory-hard or CPU-hard one-way hash function  \n- Enforce appropriate account lockout and brute-force protection on account access",
+  "Status": "Initial"
+ },
+ {
+  "Code": "MVSP-2.5",
+  "Section": "Application design controls",
+  "Control": "Security libraries",
+  "Requirements": "Use frameworks, template languages, or libraries that systemically address implementation weaknesses by escaping the outputs and sanitizing the inputs\nExample: ORM for database access, UI framework for rendering DOM",
+  "Status": "Limited"
+ },
+ {
+  "Code": "MVSP-2.6",
+  "Section": "Application design controls",
+  "Control": "Dependency Patching",
+  "Requirements": "Apply security patches with a severity score of \"medium\" or higher, or ensure equivalent mitigations are available for all components of the application stack within one month of the patch release",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-2.7",
+  "Section": "Application design controls",
+  "Control": "Logging",
+  "Requirements": "Keep logs of:\n- Users logging in and out\n- Read, write, delete operations on application and system\n- Security settings changes (including disabling logging)\n- Application owner access to customer data (access transparency)\n\nLogs must include user ID, IP address, valid timestamp, type of action performed, and object of this action. Logs must be stored for at least 30 days, and should not contain sensitive data or payloads. Users\n and objects",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-2.8",
+  "Section": "Application design controls",
+  "Control": "Encryption",
+  "Requirements": "Use available means of encryption to protect sensitive data in transit between systems and at rest in online data storages and backups",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-3.1",
+  "Section": "Application implementation controls",
+  "Control": "List of data",
+  "Requirements": "Maintain a list of sensitive data types that the application is expected to process",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-3.2",
+  "Section": "Application implementation controls",
+  "Control": "Data flow diagram",
+  "Requirements": "Maintain an up-to-date diagram indicating how sensitive data reaches your systems and where it ends up being stored",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-3.3",
+  "Section": "Application implementation controls",
+  "Control": "Vulnerability prevention",
+  "Requirements": "Train your developers and implement development guidelines to prevent at least the following vulnerabilities:  \n- Authorization bypass. Example: Accessing other customers' data or admin features from a regular account  \n- Insecure session ID. Examples: Guessable token; a token stored in an insecure location (e.g. cookie without secure and httpOnly flags set)  \n- Injections. Examples: SQL injection, NoSQL injection, XXE, OS command injection  \n- Cross-site scripting. Examples: Calling insecure JavaScript functions, performing insecure DOM manipulations, echoing back user input into HTML without escaping  \n- Cross-site request forgery. Example: Accepting requests with an Origin header from a different domain  \n- Use of vulnerable libraries. Example: Using server-side frameworks or JavaScript libraries with known vulnerabilities",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-3.4",
+  "Section": "Application implementation controls",
+  "Control": "Time to fix vulnerabilities",
+  "Requirements": "Produce and deploy patches to address application vulnerabilities that materially impact security within 90 days of discovery",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-3.5",
+  "Section": "Application implementation controls",
+  "Control": "Build process",
+  "Requirements": "Build processes must be fully scripted\/automated and generate provenance (SLSA Level 1)",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-4.1",
+  "Section": "Operational controls",
+  "Control": "Physical access",
+  "Requirements": "Validate the physical security of relevant facilities by ensuring the following controls are in place:  \n- Layered perimeter controls and interior barriers  \n- Managed access to keys  \n- Entry and exit logs  \n- Appropriate response plan for intruder alerts",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-4.2",
+  "Section": "Operational controls",
+  "Control": "Logical access",
+  "Requirements": "- Limit sensitive data access exclusively to users with a legitimate need. The data owner must authorize such access  \n- Deactivate redundant accounts and expired access grants in a timely manner  \n- Perform regular reviews of access to validate need to know  \n- Ensure remote access to customer data or production systems requires the use of Multi-Factor Authentication",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-4.3",
+  "Section": "Operational controls",
+  "Control": "Sub-processors",
+  "Requirements": "- Publish a list of third-party companies with access to customer data on your website  \n- Assess third-party companies annually against this baseline",
+  "Status": "Unknown"
+ },
+ {
+  "Code": "MVSP-4.4",
+  "Section": "Operational controls",
+  "Control": "Backup and Disaster recovery",
+  "Requirements": "- Securely back up all data to a different location than where the application is running  \n- Maintain and periodically test disaster recovery plans  \n- Periodically test backup restoration",
+  "Status": "Unknown"
+ }
+],
+"Selection":[
+ {
+  "Status": "Unknown",
+  "Maturity level": 0,
+  "Meaning": "Has not even been checked yet",
+  "Column4": " "
+ },
+ {
+  "Status": "Not applicable",
+  "Maturity level": 0,
+  "Meaning": "Management can ignore them"
+ },
+ {
+  "Status": "Nonexistent",
+  "Maturity level": 1,
+  "Meaning": "Complete lack of recognizable policy, procedure, control etc."
+ },
+ {
+  "Status": "Initial",
+  "Maturity level": 2,
+  "Meaning": "Development has barely started and will require significant work to fulfill the requirements"
+ },
+ {
+  "Status": "Limited",
+  "Maturity level": 3,
+  "Meaning": "Progressing nicely but not yet complete"
+ },
+ {
+  "Status": "Defined",
+  "Maturity level": 4,
+  "Meaning": "Development is more or less complete although detail is lacking and\/or it is not yet implemented, enforced and actively supported by top management"
+ },
+ {
+  "Status": "Managed",
+  "Maturity level": 5,
+  "Meaning": "Development is complete, the process\/control has been implemented and recently started operating"
+ },
+ {
+  "Status": "Optimized",
+  "Maturity level": 6,
+  "Meaning": "The requirement is fully satisfied, is operating fully as expected, is being actively monitored and improved, and there is substantial evidence to prove all that to the auditors"
+ }
+],
+"Dashboard":[
+ {
+  "Status": "Unknown",
+  "Percentage": 0.68
+ },
+ {
+  "Status": "Not applicable",
+  "Percentage": 0.04
+ },
+ {
+  "Status": "Nonexistent",
+  "Percentage": 0.04
+ },
+ {
+  "Status": "Initial",
+  "Percentage": 0.04
+ },
+ {
+  "Status": "Limited",
+  "Percentage": 0.04
+ },
+ {
+  "Status": "Defined",
+  "Percentage": 0.08
+ },
+ {
+  "Status": "Managed",
+  "Percentage": 0.04
+ },
+ {
+  "Status": "Optimized",
+  "Percentage": 0.04,
+  "Column11": "https:\/\/www.chartjs.org\/docs\/latest\/charts\/radar.html"
+ },
+ {
+  "Column4": "https:\/\/www.chartjs.org\/docs\/latest\/samples\/other-charts\/pie.html"
+ },
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ null,
+ {
+  "Status": "Section",
+  "Percentage": "Maturity level"
+ },
+ {
+  "Status": "Business controls",
+  "Percentage": 3
+ },
+ {
+  "Status": "Application design controls",
+  "Percentage": 4
+ },
+ {
+  "Status": "Application implementation controls",
+  "Percentage": 2
+ },
+ {
+  "Status": "Operational controls",
+  "Percentage": 1
+ }
+]
+}

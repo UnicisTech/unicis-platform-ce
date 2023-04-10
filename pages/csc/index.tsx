@@ -1,18 +1,14 @@
 import type { NextPageWithLayout } from "types";
-import { Button } from "react-daisyui";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
-import { CreateTeam, Teams } from "@/components/interfaces/Team";
+import { Error, Loading } from "@/components/ui";
 import { GetServerSidePropsContext } from "next";
-import { CreateTask, AtlaskitModalTest } from "@/components/interfaces/Task";
-import DatePicker from "react-datepicker";
-import AtlaskitButton from '@atlaskit/button';
-import Select from '@atlaskit/select';
-import { DateTimePicker } from '@atlaskit/datetime-picker'
+import useTeams from "hooks/useTeams";
 import styled from 'styled-components'
-import TableUncontrolled from "./test/example";
+import { TeamSelector } from "@/components/interfaces/CSC";
+
 
 const WithoutRing = styled.div`
     input {
@@ -20,20 +16,32 @@ const WithoutRing = styled.div`
     }
 `
 
-const AllTasks: NextPageWithLayout = () => {
-  const [visible, setVisible] = useState(false);
+const CSC: NextPageWithLayout = () => {
+  const { isLoading, isError, teams, mutateTeams } = useTeams();
+
+  const router = useRouter();
 
   const { t } = useTranslation("common");
 
-  const [startDate, setStartDate] = useState<Date | null>(new Date())
+  useEffect(() => {
+    if (teams?.length === 1) {
+      const slug = teams[0].slug
+      router.push(`/csc/${slug}`)
+    }
+  }, [teams])
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error />;
+  }
 
   return (
-    <>
-    <TableUncontrolled/>
-      {/* <div className="flex items-center justify-between">
-        <TableUncontrolled/>
-       </div> */}
-    </>
+    <div style={{margin: "0px auto", width: "50%"}}>
+      <TeamSelector/>
+    </div>
   );
 };
 
@@ -45,4 +53,4 @@ export async function getStaticProps({ locale }: GetServerSidePropsContext) {
   };
 }
 
-export default AllTasks;
+export default CSC;

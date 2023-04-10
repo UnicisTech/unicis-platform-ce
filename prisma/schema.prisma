@@ -69,6 +69,7 @@ model Team {
   invitations Invitation[]
   tasks       Task[]
   members     TeamMember[]
+  properties  Json         @default("{}")
 }
 
 model Task {

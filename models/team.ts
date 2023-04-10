@@ -1,5 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { Team } from "@prisma/client";
+import json from "../data/MVPS-controls.json";
+
+const controls = json["MVPS-Controls"];
 
 export const createTeam = async (param: {
   userId: string;
@@ -128,7 +131,7 @@ export const getTeamMembers = async (slug: string) => {
   });
 };
 
-export const updateTeam = async (slug: string, data: Partial<Team>) => {
+export const updateTeam = async (slug: string, data: any) => {
   return await prisma.team.update({
     where: {
       slug,
@@ -154,4 +157,83 @@ export const incrementTaskIndex = async (teamId: string) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const getTeamPropertiesBySlug = async (slug: string) => {
+  const team = await prisma.team.findUnique({
+    where: {
+      slug: slug,
+    },
+    select: {
+      properties: true,
+    },
+  });
+
+  return team?.properties;
+};
+
+export const getCscStatusesBySlug = async (slug: string) => {
+  const team = await prisma.team.findUnique({
+    where: {
+      slug: slug,
+    },
+    select: {
+      properties: true,
+    },
+  });
+
+  const teamProperties = team?.properties as any;
+
+  if (teamProperties?.csc_statuses) {
+    return teamProperties?.csc_statuses;
+  }
+
+  const initial = {} as any;
+  controls.forEach((control) => (initial[control.Control] = "Unknown"));
+
+  await prisma.team.update({
+    where: { slug: slug },
+    data: {
+      properties: {
+        csc_statuses: initial,
+      },
+    },
+  });
+
+  return initial;
+};
+
+export const setCscStatus = async ({
+  slug,
+  control,
+  value,
+}: {
+  slug: string;
+  control: string;
+  value: string;
+}) => {
+  const team = await prisma.team.findUnique({
+    where: {
+      slug: slug,
+    },
+    select: {
+      properties: true,
+    },
+  });
+
+  const teamProperties = team?.properties as any;
+
+  const csc_statuses = teamProperties?.csc_statuses;
+  csc_statuses[control] = value;
+
+  await prisma.team.update({
+    where: { slug: slug },
+    data: {
+      properties: {
+        csc_statuses,
+      },
+    },
+  });
+
+  return csc_statuses;
 };

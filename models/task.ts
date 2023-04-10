@@ -64,3 +64,50 @@ export const getTasks = async (userId: string) => {
   });
   return tasks;
 };
+
+export const getTeamTasks = async (teamId: string) => {
+  const tasks = await prisma.task.findMany({
+    where: {
+      team: {
+        slug: teamId,
+      },
+    },
+  });
+  console.log("getTeamTasks tasks", tasks);
+  return tasks;
+};
+
+export const addControlToIssue = async (params: {
+  taskId: number;
+  control: string;
+}) => {
+  const { taskId, control } = params;
+  const task = await prisma.task.findUnique({
+    where: {
+      id: taskId,
+    },
+    select: {
+      properties: true,
+    },
+  });
+
+  const taskProperties = task?.properties as any;
+  let csc_controls = taskProperties?.csc_controls;
+
+  if (typeof csc_controls === "undefined") {
+    csc_controls = [control];
+  } else {
+    csc_controls = [...csc_controls, control];
+  }
+
+  await prisma.task.update({
+    where: {
+      id: taskId,
+    },
+    data: {
+      properties: {
+        csc_controls,
+      },
+    },
+  });
+};
