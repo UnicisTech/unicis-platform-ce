@@ -1,6 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "@/lib/session";
-import { addControlToIssue } from "models/task";
+import {
+  addControlToIssue,
+  removeControlFromIssue,
+  isUserHasAccess,
+} from "models/task";
 
 export default async function handler(
   req: NextApiRequest,
@@ -25,6 +29,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const { operation, control } = req.body;
 
   const session = await getSession(req, res);
+  const userId = session?.user?.id as string;
 
   if (!session) {
     return res.status(200).json({
@@ -33,8 +38,22 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
+  if (!(await isUserHasAccess({ userId, taskId: Number(slug) }))) {
+    return res.status(200).json({
+      data: null,
+      error: { message: "User has no access to this task." },
+    });
+  }
+
   if (operation === "add") {
     await addControlToIssue({
+      taskId: Number(slug) as number,
+      control: control as string,
+    });
+  }
+
+  if (operation === "remove") {
+    await removeControlFromIssue({
       taskId: Number(slug) as number,
       control: control as string,
     });

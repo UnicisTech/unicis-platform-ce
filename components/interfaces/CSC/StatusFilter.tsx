@@ -1,7 +1,8 @@
-import React from "react";
+import React, {Dispatch, SetStateAction} from "react";
 import Select from "@atlaskit/select";
-import { sections } from "./config";
+import { statusOptions } from "./config";
 import styled from "styled-components";
+import type { Option } from "types";
 
 const WithoutRing = styled.div`
   input {
@@ -9,19 +10,23 @@ const WithoutRing = styled.div`
   }
 `;
 
-const SectionFilter = ({ setSectionFilter }) => {
+const StatusFilter = ({
+   setStatusFilter 
+  }: {
+    setStatusFilter: Dispatch<SetStateAction<Option[] | null>>
+  }) => {
   return (
     <div style={{ margin: "0 5px" }}>
       <WithoutRing>
         <Select
-          inputId="multi-select-section-filter"
+          inputId="multi-select-status-filter"
           className="multi-select"
           classNamePrefix="react-select"
-          options={sections}
+          options={statusOptions}
           onChange={(value) => {
-            setSectionFilter([...value]);
+            setStatusFilter([...value]);
           }}
-          placeholder="Choose a section"
+          placeholder="Choose a status"
           isMulti
         />
       </WithoutRing>
@@ -29,4 +34,4 @@ const SectionFilter = ({ setSectionFilter }) => {
   );
 };
 
-export default SectionFilter;
+export default StatusFilter;

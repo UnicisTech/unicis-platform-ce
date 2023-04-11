@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Dispatch, SetStateAction} from "react";
 import Select from "@atlaskit/select";
 import { perPageOptions } from "./config";
 import styled from "styled-components";
@@ -9,7 +9,11 @@ const WithoutRing = styled.div`
   }
 `;
 
-const PerPageSelector = ({ setPerPage }) => {
+const PerPageSelector = ({ 
+  setPerPage 
+}: {
+  setPerPage: Dispatch<SetStateAction<number>>
+}) => {
   return (
     <div style={{ margin: "0 5px" }}>
       <WithoutRing>
@@ -18,7 +22,8 @@ const PerPageSelector = ({ setPerPage }) => {
           className="single-select"
           classNamePrefix="react-select"
           options={perPageOptions}
-          onChange={({ value }) => {
+          onChange={(option) => {
+            const value = option?.value as number
             setPerPage(value);
           }}
           defaultValue={{

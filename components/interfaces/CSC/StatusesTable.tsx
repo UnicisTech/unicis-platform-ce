@@ -2,15 +2,11 @@ import React, { useState, useEffect } from "react";
 import DynamicTable from '@atlaskit/dynamic-table';
 import { v4 as uuidv4 } from 'uuid';
 import StatusHeader from "./StatusHeader";
-import IssueSelector from "./IssueSelector";
+import TaskSelector from "./TaskSelector";
 import { controlOptions } from "./config"
-import type { Task } from "@prisma/client";
 import StatusSelector from "./StatusSelector"
-
-interface Option {
-  label: string,
-  value: number
-}
+import type { Option } from "types";
+import type { Task } from "@prisma/client";
 
 const head = {
   cells: [
@@ -60,61 +56,54 @@ const StatusesTable = ({
   perPage,
   isSaving,
   statusHandler,
-  issueSelectorHandler
+  taskSelectorHandler
 }: {
   tasks: Array<Task>;
   statuses: any;
-  sectionFilter: null | Array<Option>;
+  sectionFilter: null | Array<{label: string, value: string}>;
   statusFilter: null | Array<Option>;
   perPage: number;
   isSaving: boolean;
   statusHandler: (control: string, value: string) => Promise<void>;
-  issueSelectorHandler: (action: string, dataToRemove: any, control: string) => Promise<void>
+  taskSelectorHandler: (action: string, dataToRemove: any, control: string) => Promise<void>
 }) => {
   const [rows, setRows] = useState(Array<any>)
   const [filteredRows, setFilteredRows] = useState(Array<any>)
-  console.log('tasks in Statuses Tabke', tasks)
-
-
 
   useEffect(() => {
-    const asyncEffect = async () => {
-      const rows: Array<any> = []
-      controlOptions.forEach((option, index) => {
-        rows.push({
-          key: uuidv4(),
-          cells: [
-            {
-              key: index,
-              content: <span>{option.value.code}</span>
-            },
-            {
-              key: option.value.section + index,
-              content: <span>{option.value.section}</span>
-            },
-            {
-              key: option.value.control,
-              content: <span>{option.value.control}</span>
-            },
-            {
-              key: option.value.requirements,
-              content: <span style={{ whiteSpace: "pre-line" }}>{option.value.requirements}</span>
-            },
-            {
-              key: uuidv4(),
-              content: <StatusSelector statusValue={statuses[option.value.control]} control={option.value.control} handler={statusHandler} />
-            },
-            {
-              key: uuidv4(),
-              content: <IssueSelector issues={tasks} control={option.value.control} handler={issueSelectorHandler} />
-            }
-          ]
-        })
+    const rows: Array<any> = []
+    controlOptions.forEach((option, index) => {
+      rows.push({
+        key: uuidv4(),
+        cells: [
+          {
+            key: index,
+            content: <span>{option.value.code}</span>
+          },
+          {
+            key: option.value.section + index,
+            content: <span>{option.value.section}</span>
+          },
+          {
+            key: option.value.control,
+            content: <span>{option.value.control}</span>
+          },
+          {
+            key: option.value.requirements,
+            content: <span style={{ whiteSpace: "pre-line" }}>{option.value.requirements}</span>
+          },
+          {
+            key: uuidv4(),
+            content: <StatusSelector statusValue={statuses[option.value.control]} control={option.value.control} handler={statusHandler} />
+          },
+          {
+            key: uuidv4(),
+            content: <TaskSelector tasks={tasks} control={option.value.control} handler={taskSelectorHandler} />
+          }
+        ]
       })
-      setRows(rows)
-      //setIsLoading(false)
-    }
-    asyncEffect()
+    })
+    setRows(rows)
   }, [])
 
   useEffect(() => {

@@ -21,7 +21,7 @@ const sections = [
   },
 ];
 
-const perPageOptions = [
+const perPageOptions: { label: string; value: number }[] = [
   {
     label: "5",
     value: 5,
@@ -56,12 +56,7 @@ const controlOptions = controls.map(
   })
 );
 
-// const statusOptions = selections.map((option) => ({
-//     label: option.Status,
-//     value: option["Maturity level"]
-// }))
-
-const statusOptions = [
+const statusOptions: { label: string; value: number }[] = [
   {
     label: "Unknown",
     value: 0,
@@ -97,8 +92,8 @@ const statusOptions = [
 ];
 
 const colourStyles = {
-  control: (styles) => ({ ...styles }),
-  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+  control: (styles: any) => ({ ...styles }),
+  option: (styles: any, { data, isDisabled, isFocused, isSelected }: any) => {
     if (data.label === "Not Applicable") {
       return {
         ...styles,

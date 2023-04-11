@@ -5,7 +5,7 @@ import { statusOptions } from "./config";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const countStatuses = (statuses) => {
+const countStatuses = (statuses: { [key: string]: string; }) => {
   const labels = statusOptions.map(({ label }) => label);
   const countArray = labels.map(
     (name) =>
@@ -14,7 +14,11 @@ const countStatuses = (statuses) => {
   return countArray;
 };
 
-const PieChart = ({ statuses }) => {
+const PieChart = ({ 
+  statuses
+ }: { 
+  statuses: { [key: string]: string; }
+}) => {
   const data = {
     labels: [
       "Unknown",
@@ -55,7 +59,7 @@ const PieChart = ({ statuses }) => {
     ],
   };
 
-  const options = {
+  const options: any = {
     plugins: {
       legend: {
         position: "right",

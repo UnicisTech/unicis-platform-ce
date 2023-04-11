@@ -17,30 +17,30 @@ import {
   StatusFilter,
   PerPageSelector
 } from "@/components/interfaces/CSC";
-import { getSession } from "@/lib/session";
-import { getTeamTasks } from "models/task";
+import useTeamTasks from "hooks/useTeamTasks";
 import { getCscStatusesBySlug } from "models/team";
-
-interface Option {
-  label: string,
-  value: number
-}
+import type { Option } from "types";
 
 const TeamMembers: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ tasks, csc_statuses }) => {
+> = ({ 
+  csc_statuses 
+}: {
+  csc_statuses: {[key: string]: string;}
+}) => {
   const router = useRouter();
   const { t } = useTranslation("common");
   const { slug } = router.query;
 
   const [statuses, setStatuses] = useState(csc_statuses)
   const [isSaving, setIsSaving] = useState(false)
-  const [sectionFilter, setSectionFilter] = useState<null | [Option]>(null)
-  const [statusFilter, setStatusFilter] = useState<null | [Option]>(null)
-  const [perPage, setPerPage] = useState(10)
+  const [sectionFilter, setSectionFilter] = useState<null | {label: string, value: string}[]>(null)
+  const [statusFilter, setStatusFilter] = useState<null | Option[]>(null)
+  const [perPage, setPerPage] = useState<number>(10)
 
 
   const { isLoading, isError, team } = useTeam(slug as string);
+  const { tasks, mutateTasks } = useTeamTasks(slug as string)
 
   const statusHandler = useCallback(async (control: string, value: string) => {
     setIsSaving(true)
@@ -48,7 +48,7 @@ const TeamMembers: NextPageWithLayout<
       `/api/teams/${slug}/csc`,
       {
         control,
-        value
+        value,
       }
     );
 
@@ -63,26 +63,32 @@ const TeamMembers: NextPageWithLayout<
     setIsSaving(false)
   }, [])
 
-  const issueSelectorHandler = useCallback(async (action: string, dataToRemove: any, control: string) => {
+  const taskSelectorHandler = useCallback(async (action: string, dataToRemove: any, control: string) => {
     setIsSaving(true)
     const operation = action === "select-option" ? "add" : "remove"
-    // for (const option of dataToRemove) {
-    //   const issueId = option.value
-    //   console.log('issueSelectorHandler ->', {action, control, operation, issueId})
-    //   const response = await axios.put(
-    //     `/api/tasks/${issueId}/csc`,
-    //     {
-    //       control,
-    //       operation
-    //     }
-    //   );
+    for (const option of dataToRemove) {
+      const issueId = option.value
+      const response = await axios.put(
+        `/api/tasks/${issueId}/csc`,
+        {
+          control,
+          operation
+        }
+      );
 
-    //   //TODO
-    //   }
+      const { error } = response.data;
+
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+
+      mutateTasks()
+    }
     setIsSaving(false)
   }, [])
 
-  if (isLoading || !team) {
+  if (isLoading || !team || !tasks) {
     return <Loading />;
   }
 
@@ -110,7 +116,7 @@ const TeamMembers: NextPageWithLayout<
         perPage={perPage}
         isSaving={isSaving}
         statusHandler={statusHandler}
-        issueSelectorHandler={issueSelectorHandler}
+        taskSelectorHandler={taskSelectorHandler}
       />
     </>
   );
@@ -120,12 +126,12 @@ export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
   const { locale, query }: GetServerSidePropsContext = context;
+  const slug = query.slug as string
 
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ["common"]) : {}),
-      tasks: await getTeamTasks(query.slug as string),
-      csc_statuses: await getCscStatusesBySlug(query.slug as string)
+      csc_statuses: await getCscStatusesBySlug(slug),
     },
   };
 };

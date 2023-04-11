@@ -20,7 +20,10 @@ ChartJS.register(
   Legend
 );
 
-const getMaturityLevels = (statuses) => {
+const getMaturityLevels = (statuses: { [key: string]: string; }) => {
+  if (typeof statusOptions === "undefined") {
+    return
+  }
   const data = sections
     .map(({ label }) => label)
     .map((label) => {
@@ -29,8 +32,7 @@ const getMaturityLevels = (statuses) => {
         .map(({ Control }) => Control);
       const totalControlsValue = totalControls.reduce(
         (accumulator, control) =>
-          statusOptions.find(({ label }) => label === statuses[control]).value +
-          accumulator,
+          statusOptions.find(({ label }) => label === statuses[control])?.value! + accumulator,
         0
       );
       return totalControlsValue / totalControls.length;
@@ -39,7 +41,11 @@ const getMaturityLevels = (statuses) => {
   return roundedData;
 };
 
-const RadarChart = ({ statuses }) => {
+const RadarChart = ({
+  statuses
+}: {
+  statuses: { [key: string]: string; }
+}) => {
   getMaturityLevels(statuses);
   const options = {
     plugins: {

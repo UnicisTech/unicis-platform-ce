@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { getTeam, incrementTaskIndex } from "./team";
-import type { Task } from "@prisma/client";
+import { getTeam, incrementTaskIndex, isTeamMember } from "./team";
 
 export const createTask = async (param: {
   authorId: string;
@@ -65,15 +64,14 @@ export const getTasks = async (userId: string) => {
   return tasks;
 };
 
-export const getTeamTasks = async (teamId: string) => {
+export const getTeamTasks = async (slug: string) => {
   const tasks = await prisma.task.findMany({
     where: {
       team: {
-        slug: teamId,
+        slug,
       },
     },
   });
-  console.log("getTeamTasks tasks", tasks);
   return tasks;
 };
 
@@ -110,4 +108,57 @@ export const addControlToIssue = async (params: {
       },
     },
   });
+};
+
+export const removeControlFromIssue = async (params: {
+  taskId: number;
+  control: string;
+}) => {
+  const { taskId, control } = params;
+  const task = await prisma.task.findUnique({
+    where: {
+      id: taskId,
+    },
+    select: {
+      properties: true,
+    },
+  });
+
+  const taskProperties = task?.properties as any;
+  const csc_controls = taskProperties?.csc_controls as Array<string>;
+  const new_csc_controls = csc_controls.filter((item) => item !== control);
+
+  await prisma.task.update({
+    where: {
+      id: taskId,
+    },
+    data: {
+      properties: {
+        csc_controls: new_csc_controls,
+      },
+    },
+  });
+};
+
+export const isUserHasAccess = async (params: {
+  taskId: number;
+  userId: string;
+}) => {
+  const { taskId, userId } = params;
+  const task = await prisma.task.findUnique({
+    where: {
+      id: taskId,
+    },
+    select: {
+      teamId: true,
+    },
+  });
+
+  const teamId = task?.teamId as string;
+
+  if (!(await isTeamMember(userId, teamId))) {
+    return false;
+  }
+
+  return true;
 };

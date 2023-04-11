@@ -9,7 +9,15 @@ const WithoutRing = styled.div`
   }
 `;
 
-const StatusSelector = ({ statusValue, control, handler }) => {
+const StatusSelector = ({ 
+  statusValue, 
+  control, 
+  handler 
+}: {
+  statusValue: string;
+  control: string;
+  handler: (control: string, value: string) => Promise<void>;
+}) => {
   const [value, setValue] = useState(statusValue);
   return (
     <WithoutRing>
@@ -19,8 +27,9 @@ const StatusSelector = ({ statusValue, control, handler }) => {
         classNamePrefix="react-select"
         options={statusOptions}
         onChange={(selectedStatus) => {
-          setValue(selectedStatus.label);
-          handler(control, selectedStatus.label);
+          const label = selectedStatus?.label as string
+          setValue(label);
+          handler(control, label);
         }}
         styles={colourStyles}
         placeholder="Status"

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Select from '@atlaskit/select'
-import type { Task } from "@prisma/client";
 import styled from 'styled-components'
+import type { Task } from "@prisma/client";
+import type { Option } from 'types';
 
 const WithoutRing = styled.div`
     input {
@@ -9,17 +10,12 @@ const WithoutRing = styled.div`
     }
 `
 
-interface Option {
-    label: string,
-    value: number
-}
-
-const IssueSelector = ({ 
-    issues, 
+const TaskSelector = ({ 
+    tasks, 
     control, 
     handler 
 } : {
-    issues: Array<Task>
+    tasks: Array<Task>
     control: string,
     handler: (action: string, dataToRemove: any, control: string) => Promise<void>
 }) => {
@@ -27,10 +23,10 @@ const IssueSelector = ({
     const [options, setOptions] = useState<Option[]>([])
 
     useEffect(() => {
-        const options = issues.map(issue => ({ label: issue.title, value: issue.id }))
-        //const selectedOptions = issues.filter(issue => issue.properties["csc_controls"]?.find(item => item.control === control))?.map(issue => ({ label: issue.key, value: issue.id }))
+        const options = tasks.map(task => ({ label: task.title, value: task.id }))
+        const selectedOptions = tasks.filter((task: any) => task.properties?.csc_controls?.find((item: string) => item === control))?.map(issue => ({ label: issue.title, value: issue.id }))
         setOptions(options)
-        //setValue(selectedOptions)
+        setValue(selectedOptions)
     }, [])
     return (
         <WithoutRing>
@@ -46,11 +42,11 @@ const IssueSelector = ({
                     handler(action, dataToRemove, control)
                 }}
                 value={value}
-                placeholder="Issues"
+                placeholder="Tasks"
                 isMulti
             />
         </WithoutRing>
     )
 }
 
-export default IssueSelector
+export default TaskSelector

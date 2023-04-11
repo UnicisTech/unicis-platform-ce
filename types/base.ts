@@ -31,3 +31,8 @@ export type WebookFormSchema = {
   url: string;
   eventTypes: string[];
 };
+
+export type Option = {
+  label: string;
+  value: number;
+};
