@@ -38,7 +38,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <aside
+      <aside  
         className="transition-width fixed top-0 left-0 z-20 flex h-full w-64 flex-shrink-0 flex-col pt-16 duration-75 lg:flex"
         aria-label="Sidebar"
       >
@@ -80,23 +80,17 @@ export default function Sidebar() {
                     icon={HomeIcon}
                     active={router.pathname === "/dashboard"}
                   />
+                  <NavItem
+                        href="/tasks"
+                        text="Task Manager"
+                        icon={QueueListIcon}
+                        active={router.pathname === "/tasks"}
+                      />
                 </li>
                 <li className="menu-title">
                   <span>Privacy</span>
                 </li>
                     <li>
-                      <NavItem
-                        href="/tasks"
-                        text="Task Manager"
-                        icon={ClipboardDocumentCheckIcon}
-                        active={router.pathname === "/tasks"}
-                      />
-                      <NavItem
-                        href="/csc"
-                        text="CSC"
-                        icon={ClipboardDocumentCheckIcon}
-                        active={router.pathname === "/csc"}
-                      />
                       <NavItem
                         href="/rpa"
                         text="Record of Processing Activities"
@@ -134,11 +128,11 @@ export default function Sidebar() {
                 </li>
                 <li>
                   <NavItem
-                    href="/security"
-                    text="Cybersecurity Management System"
-                    icon={LockClosedIcon}
-                    active={router.pathname === "/security"}
-                  />
+                        href="/csc"
+                        text="Cybersecurity Management System"
+                        icon={LockClosedIcon}
+                        active={router.pathname === "/csc"}
+                    />
                 </li>
                 <li>
                   <NavItem
