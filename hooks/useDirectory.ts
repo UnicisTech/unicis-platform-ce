@@ -1,12 +1,13 @@
-import fetcher from '@/lib/fetcher';
-import { Directory } from '@boxyhq/saml-jackson';
-import useSWR, { mutate } from 'swr';
-import { ApiResponse } from 'types';
+import useSWR, { mutate } from "swr";
+
+import fetcher from "@/lib/fetcher";
+import { ApiResponse } from "types";
+import { Directory } from "@boxyhq/saml-jackson";
 
 const useDirectory = (slug: string) => {
   const url = `/api/teams/${slug}/directory-sync`;
 
-  const { data, error, isLoading } = useSWR<ApiResponse<Directory[]>>(
+  const { data, error } = useSWR<ApiResponse<Directory>>(
     slug ? url : null,
     fetcher
   );
@@ -16,9 +17,9 @@ const useDirectory = (slug: string) => {
   };
 
   return {
-    isLoading,
+    isLoading: !error && !data,
     isError: error,
-    directories: data?.data || [],
+    directory: data?.data,
     mutateDirectory,
   };
 };

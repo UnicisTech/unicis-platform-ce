@@ -1,6 +1,6 @@
-import { EndpointIn, Svix } from 'svix';
+import { Svix, EndpointIn } from "svix";
 
-import env from './env';
+import env from "./env";
 
 const svix = new Svix(env.svix.apiKey);
 

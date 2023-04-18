@@ -1,14 +1,13 @@
-import type { Team } from '@prisma/client';
-import axios from 'axios';
-import type { FormikHelpers } from 'formik';
-import useWebhooks from 'hooks/useWebhooks';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import toast from 'react-hot-toast';
-import type { ApiResponse } from 'types';
-import type { WebookFormSchema } from 'types';
-
-import ModalForm from './Form';
+import type { FormikHelpers } from "formik";
+import React from "react";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useTranslation } from "next-i18next";
+import type { ApiResponse } from "types";
+import type { Team } from "@prisma/client";
+import useWebhooks from "hooks/useWebhooks";
+import ModalForm from "./Form";
+import type { WebookFormSchema } from "types";
 
 const CreateWebhook = ({
   visible,
@@ -20,7 +19,7 @@ const CreateWebhook = ({
   team: Team;
 }) => {
   const { mutateWebhooks } = useWebhooks(team.slug);
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
 
   const onSubmit = async (
     values: WebookFormSchema,
@@ -30,11 +29,7 @@ const CreateWebhook = ({
 
     const response = await axios.post<ApiResponse>(
       `/api/teams/${team.slug}/webhooks`,
-      {
-        name,
-        url,
-        eventTypes,
-      }
+      { name, url, eventTypes }
     );
 
     const { data: webhooks, error } = response.data;
@@ -45,7 +40,7 @@ const CreateWebhook = ({
     }
 
     if (webhooks) {
-      toast.success(t('webhook-created'));
+      toast.success(t("webhook-created"));
     }
 
     mutateWebhooks();
@@ -58,8 +53,8 @@ const CreateWebhook = ({
       visible={visible}
       setVisible={setVisible}
       initialValues={{
-        name: '',
-        url: '',
+        name: "",
+        url: "",
         eventTypes: [],
       }}
       onSubmit={onSubmit}

@@ -1,5 +1,8 @@
-import { prisma } from '@/lib/prisma';
-import { Role, Team } from '@prisma/client';
+import { prisma } from "@/lib/prisma";
+import { Team } from "@prisma/client";
+import json from "../data/MVPS-controls.json";
+
+const controls = json["MVPS-Controls"];
 
 export const createTeam = async (param: {
   userId: string;
@@ -15,7 +18,7 @@ export const createTeam = async (param: {
     },
   });
 
-  await addTeamMember(team.id, userId, Role.OWNER);
+  await addTeamMember(team.id, userId, "owner");
 
   return team;
 };
@@ -35,7 +38,7 @@ export const deleteTeam = async (key: { id: string } | { slug: string }) => {
 export const addTeamMember = async (
   teamId: string,
   userId: string,
-  role: Role
+  role: string
 ) => {
   return await prisma.teamMember.create({
     data: {
@@ -74,44 +77,45 @@ export const getTeams = async (userId: string) => {
   });
 };
 
-// Check if the user is a member of the team
+export const getOwnedTeams = async (userId: string) => {
+  return await prisma.team.findMany({
+    where: {
+      members: {
+        some: {
+          userId,
+          role: "owner",
+        },
+      },
+    },
+    include: {
+      _count: {
+        select: { members: true },
+      },
+    },
+  });
+};
+
 export async function isTeamMember(userId: string, teamId: string) {
-  const teamMember = await prisma.teamMember.findFirstOrThrow({
+  return (await prisma.teamMember.findFirstOrThrow({
     where: {
       userId,
       teamId,
     },
-  });
-
-  return (
-    teamMember.role === Role.MEMBER ||
-    teamMember.role === Role.OWNER ||
-    teamMember.role === Role.ADMIN
-  );
+  }))
+    ? true
+    : false;
 }
 
-// Check if the user is an owner of the team
 export async function isTeamOwner(userId: string, teamId: string) {
-  const teamMember = await prisma.teamMember.findFirstOrThrow({
+  return (await prisma.teamMember.findFirstOrThrow({
     where: {
       userId,
       teamId,
+      role: "owner",
     },
-  });
-
-  return teamMember.role === Role.OWNER;
-}
-
-// Check if the user is an admin or owner of the team
-export async function isTeamAdmin(userId: string, teamId: string) {
-  const teamMember = await prisma.teamMember.findFirstOrThrow({
-    where: {
-      userId,
-      teamId,
-    },
-  });
-
-  return teamMember.role === Role.ADMIN || teamMember.role === Role.OWNER;
+  }))
+    ? true
+    : false;
 }
 
 export const getTeamMembers = async (slug: string) => {
@@ -127,7 +131,7 @@ export const getTeamMembers = async (slug: string) => {
   });
 };
 
-export const updateTeam = async (slug: string, data: Partial<Team>) => {
+export const updateTeam = async (slug: string, data: any) => {
   return await prisma.team.update({
     where: {
       slug,
@@ -142,4 +146,94 @@ export const isTeamExists = async (condition: any) => {
       OR: condition,
     },
   });
+};
+
+export const incrementTaskIndex = async (teamId: string) => {
+  try {
+    await prisma.team.update({
+      where: { id: teamId },
+      data: { taskIndex: { increment: 1 } },
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getTeamPropertiesBySlug = async (slug: string) => {
+  const team = await prisma.team.findUnique({
+    where: {
+      slug: slug,
+    },
+    select: {
+      properties: true,
+    },
+  });
+
+  return team?.properties;
+};
+
+export const getCscStatusesBySlug = async (slug: string) => {
+  const team = await prisma.team.findUnique({
+    where: {
+      slug: slug,
+    },
+    select: {
+      properties: true,
+    },
+  });
+
+  const teamProperties = team?.properties as any;
+
+  if (teamProperties?.csc_statuses) {
+    return teamProperties?.csc_statuses;
+  }
+
+  const initial = {} as any;
+  controls.forEach((control) => (initial[control.Control] = "Unknown"));
+
+  await prisma.team.update({
+    where: { slug: slug },
+    data: {
+      properties: {
+        csc_statuses: initial,
+      },
+    },
+  });
+
+  return initial;
+};
+
+export const setCscStatus = async ({
+  slug,
+  control,
+  value,
+}: {
+  slug: string;
+  control: string;
+  value: string;
+}) => {
+  const team = await prisma.team.findUnique({
+    where: {
+      slug: slug,
+    },
+    select: {
+      properties: true,
+    },
+  });
+
+  const teamProperties = team?.properties as any;
+
+  const csc_statuses = teamProperties?.csc_statuses;
+  csc_statuses[control] = value;
+
+  await prisma.team.update({
+    where: { slug: slug },
+    data: {
+      properties: {
+        csc_statuses,
+      },
+    },
+  });
+
+  return csc_statuses;
 };

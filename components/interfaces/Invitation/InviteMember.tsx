@@ -1,15 +1,14 @@
-import { getAxiosError } from '@/lib/common';
-import { availableRoles } from '@/lib/roles';
-import type { Invitation, Team } from '@prisma/client';
-import axios from 'axios';
-import { useFormik } from 'formik';
-import useInvitations from 'hooks/useInvitations';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import { Button, Input, Modal } from 'react-daisyui';
-import toast from 'react-hot-toast';
-import type { ApiResponse } from 'types';
-import * as Yup from 'yup';
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { Modal, Button, Input } from "react-daisyui";
+import { useTranslation } from "next-i18next";
+import type { Invitation, Team } from "@prisma/client";
+import type { ApiResponse } from "types";
+import { availableRoles } from "@/lib/roles";
+import useInvitations from "hooks/useInvitations";
 
 const InviteMember = ({
   visible,
@@ -21,36 +20,41 @@ const InviteMember = ({
   team: Team;
 }) => {
   const { mutateInvitation } = useInvitations(team.slug);
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      role: availableRoles[0].id,
+      email: "",
+      role: "member",
     },
     validationSchema: Yup.object().shape({
       email: Yup.string().email().required(),
-      role: Yup.string()
-        .required()
-        .oneOf(availableRoles.map((r) => r.id)),
+      role: Yup.string().required(),
     }),
     onSubmit: async (values) => {
-      try {
-        await axios.post<ApiResponse<Invitation>>(
-          `/api/teams/${team.slug}/invitations`,
-          {
-            ...values,
-          }
-        );
+      const { email, role } = values;
 
-        toast.success(t('invitation-sent'));
+      const response = await axios.post<ApiResponse<Invitation>>(
+        `/api/teams/${team.slug}/invitations`,
+        {
+          email,
+          role,
+        }
+      );
 
-        mutateInvitation();
-        setVisible(false);
-        formik.resetForm();
-      } catch (error: any) {
-        toast.error(getAxiosError(error));
+      const { data: invitation, error } = response.data;
+
+      if (error) {
+        toast.error(error.message);
       }
+
+      if (invitation) {
+        toast.success(t("invitation-sent"));
+      }
+
+      mutateInvitation();
+      setVisible(false);
+      formik.resetForm();
     },
   });
 
@@ -58,11 +62,11 @@ const InviteMember = ({
     <Modal open={visible}>
       <form onSubmit={formik.handleSubmit} method="POST">
         <Modal.Header className="font-bold">
-          {t('invite-new-member')}
+          {t("invite-new-member")}
         </Modal.Header>
         <Modal.Body>
           <div className="mt-2 flex flex-col space-y-4">
-            <p>{t('invite-member-message')}</p>
+            <p>{t("invite-member-message")}</p>
             <div className="flex justify-between space-x-3">
               <Input
                 name="email"
@@ -78,7 +82,7 @@ const InviteMember = ({
                 onChange={formik.handleChange}
                 required
               >
-                {availableRoles.map((role) => (
+                {availableRoles.map((role: any) => (
                   <option value={role.id} key={role.id}>
                     {role.name}
                   </option>
@@ -94,7 +98,7 @@ const InviteMember = ({
             loading={formik.isSubmitting}
             active={formik.dirty}
           >
-            {t('send-invite')}
+            {t("send-invite")}
           </Button>
           <Button
             type="button"
@@ -103,7 +107,7 @@ const InviteMember = ({
               setVisible(!visible);
             }}
           >
-            {t('close')}
+            {t("close")}
           </Button>
         </Modal.Actions>
       </form>
