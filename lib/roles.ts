@@ -1,10 +1,16 @@
+import { Role } from '@prisma/client';
+
 export const availableRoles = [
   {
-    id: "member",
-    name: "Member",
+    id: Role.MEMBER,
+    name: 'Member',
   },
   {
-    id: "owner",
-    name: "Owner",
+    id: Role.ADMIN,
+    name: 'Admin',
+  },
+  {
+    id: Role.OWNER,
+    name: 'Owner',
   },
 ];

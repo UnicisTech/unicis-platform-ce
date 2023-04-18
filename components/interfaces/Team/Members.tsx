@@ -1,27 +1,32 @@
-import { useSession } from "next-auth/react";
-import { Button } from "react-daisyui";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { useTranslation } from "next-i18next";
-import { Card, Error, LetterAvatar, Loading } from "@/components/ui";
-import { Team, TeamMember } from "@prisma/client";
-import useTeamMembers from "hooks/useTeamMembers";
-import { isTeamOwner } from "@/lib/teams";
+import { Card, Error, LetterAvatar, Loading } from '@/components/ui';
+import { availableRoles } from '@/lib/roles';
+import { isTeamAdmin } from '@/lib/teams';
+import { Team, TeamMember } from '@prisma/client';
+import axios from 'axios';
+import useTeamMembers from 'hooks/useTeamMembers';
+import { useSession } from 'next-auth/react';
+import { useTranslation } from 'next-i18next';
+import { Button } from 'react-daisyui';
+import toast from 'react-hot-toast';
 
 const Members = ({ team }: { team: Team }) => {
   const { data: session } = useSession();
+  const { t } = useTranslation('common');
 
   const { isLoading, isError, members, mutateTeamMembers } = useTeamMembers(
     team.slug
   );
-  const { t } = useTranslation("common");
 
-  if (isLoading || !members) {
+  if (isLoading) {
     return <Loading />;
   }
 
   if (isError || !session) {
     return <Error />;
+  }
+
+  if (!members) {
+    return null;
   }
 
   const removeTeamMember = async (member: TeamMember) => {
@@ -31,8 +36,19 @@ const Members = ({ team }: { team: Team }) => {
       },
     });
 
-    toast.success("Deleted the member successfully.");
     mutateTeamMembers();
+
+    toast.success('Deleted the member successfully.');
+  };
+
+  const isAdmin = isTeamAdmin(session.user, members);
+
+  const canUpdateRole = (member: TeamMember) => {
+    return session.user.id != member.userId && isAdmin;
+  };
+
+  const canRemoveMember = (member: TeamMember) => {
+    return session.user.id != member.userId && isAdmin;
   };
 
   return (
@@ -42,20 +58,17 @@ const Members = ({ team }: { team: Team }) => {
           <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                {t("name")}
+                {t('name')}
               </th>
               <th scope="col" className="px-6 py-3">
-                {t("email")}
+                {t('email')}
               </th>
               <th scope="col" className="px-6 py-3">
-                {t("role")}
+                {t('role')}
               </th>
-              <th scope="col" className="px-6 py-3">
-                {t("created-at")}
-              </th>
-              {isTeamOwner(session.user, members) && members.length > 1 && (
+              {isAdmin && (
                 <th scope="col" className="px-6 py-3">
-                  {t("action")}
+                  {t('action')}
                 </th>
               )}
             </tr>
@@ -74,23 +87,24 @@ const Members = ({ team }: { team: Team }) => {
                     </div>
                   </td>
                   <td className="px-6 py-3">{member.user.email}</td>
-                  <td className="px-6 py-3">{member.role}</td>
                   <td className="px-6 py-3">
-                    {new Date(member.createdAt).toDateString()}
+                    {canUpdateRole(member) ? (
+                      <UpdateRoleDropdown team={team} member={member} />
+                    ) : (
+                      <span>{member.role}</span>
+                    )}
                   </td>
-                  {isTeamOwner(session.user, members) && members.length > 1 && (
+                  {canRemoveMember(member) && (
                     <td className="px-6 py-3">
-                      {session.user.id != member.userId && (
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => {
-                            removeTeamMember(member);
-                          }}
-                        >
-                          {t("remove")}
-                        </Button>
-                      )}
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => {
+                          removeTeamMember(member);
+                        }}
+                      >
+                        {t('remove')}
+                      </Button>
                     </td>
                   )}
                 </tr>
@@ -100,6 +114,36 @@ const Members = ({ team }: { team: Team }) => {
         </table>
       </Card.Body>
     </Card>
+  );
+};
+
+const UpdateRoleDropdown = ({
+  team,
+  member,
+}: {
+  team: Team;
+  member: TeamMember;
+}) => {
+  const updateRole = async (member: TeamMember, role: string) => {
+    await axios.patch(`/api/teams/${team.slug}/members`, {
+      memberId: member.userId,
+      role,
+    });
+
+    toast.success('Updated the role successfully.');
+  };
+
+  return (
+    <select
+      className="rounded-md text-sm"
+      onChange={(e) => updateRole(member, e.target.value)}
+    >
+      {availableRoles.map((role) => (
+        <option value={role.id} key={role.id} selected={role.id == member.role}>
+          {role.id}
+        </option>
+      ))}
+    </select>
   );
 };
 
