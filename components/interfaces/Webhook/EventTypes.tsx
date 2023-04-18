@@ -1,11 +1,12 @@
-import React, { ReactElement } from 'react';
-import type { WebookFormSchema } from 'types';
+import React, { ReactElement } from "react";
+
+import type { WebookFormSchema } from "types";
 
 export const eventTypes = [
-  'member.created',
-  'member.removed',
-  'invitation.created',
-  'invitation.removed',
+  "member.created",
+  "member.removed",
+  "invitation.created",
+  "invitation.removed",
 ];
 
 const EventTypes = ({
@@ -13,7 +14,7 @@ const EventTypes = ({
   values,
 }: {
   onChange: any;
-  values: WebookFormSchema['eventTypes'];
+  values: WebookFormSchema["eventTypes"];
 }) => {
   const events: ReactElement[] = [];
 

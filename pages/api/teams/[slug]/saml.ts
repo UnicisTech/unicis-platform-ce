@@ -1,8 +1,9 @@
-import env from '@/lib/env';
-import jackson from '@/lib/jackson';
-import { getSession } from '@/lib/session';
-import { getTeam, isTeamMember } from 'models/team';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from "next";
+
+import env from "@/lib/env";
+import jackson from "@/lib/jackson";
+import { getSession } from "@/lib/session";
+import { getTeam, isTeamMember } from "models/team";
 
 export default async function handler(
   req: NextApiRequest,
@@ -11,82 +12,81 @@ export default async function handler(
   const { method } = req;
 
   switch (method) {
-    case 'GET':
-      return await handleGET(req, res);
-    case 'POST':
-      return await handlePOST(req, res);
+    case "GET":
+      return handleGET(req, res);
+    case "POST":
+      return handlePOST(req, res);
     default:
-      res.setHeader('Allow', 'GET, POST');
+      res.setHeader("Allow", ["GET", "POST"]);
       res.status(405).json({
+        data: null,
         error: { message: `Method ${method} Not Allowed` },
       });
   }
 }
 
-// Get the SAML connection for the team.
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { slug } = req.query as { slug: string };
-
-  const session = await getSession(req, res);
-
-  if (!session) {
-    return res.status(401).json({
-      error: { message: 'Unauthorized.' },
-    });
-  }
-
-  const team = await getTeam({ slug });
-
-  if (!(await isTeamMember(session.user.id, team.id))) {
-    return res.status(400).json({
-      error: { message: 'Bad request.' },
-    });
-  }
+  const { slug } = req.query;
 
   const { apiController } = await jackson();
 
+  const session = await getSession(req, res);
+  const userId = session?.user?.id as string;
+
+  const team = await getTeam({ slug: slug as string });
+
+  if (!(await isTeamMember(userId, team?.id))) {
+    return res.status(400).json({
+      data: null,
+      error: { message: "Bad request." },
+    });
+  }
+
   try {
-    const connections = await apiController.getConnections({
+    const samlConfig = await apiController.getConfig({
       tenant: team.id,
       product: env.product,
     });
 
-    const connection = {
-      config: connections.length > 0 ? connections[0] : [],
+    const config = {
+      config: samlConfig,
       issuer: env.saml.issuer,
       acs: env.saml.acs,
     };
 
-    return res.json({ data: connection });
+    return res.status(200).json({ data: config, error: null });
   } catch (error: any) {
     const { message } = error;
 
-    return res.status(500).json({ error: { message } });
+    return res.status(500).json({
+      data: null,
+      error: {
+        message: "Failed to load SAML Config.",
+        values: {
+          metadata: message,
+        },
+      },
+    });
   }
 };
 
-// Create a SAML connection for the team.
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { slug } = req.query as { slug: string };
   const { encodedRawMetadata } = req.body;
-
-  const session = await getSession(req, res);
-
-  if (!session) {
-    return res.status(401).json({
-      error: { message: 'Unauthorized.' },
-    });
-  }
-
-  const team = await getTeam({ slug });
-
-  if (!(await isTeamMember(session.user.id, team.id))) {
-    return res.status(400).json({
-      error: { message: 'Bad request.' },
-    });
-  }
+  const { slug } = req.query;
 
   const { apiController } = await jackson();
+
+  const session = await getSession(req, res);
+  const userId = session?.user?.id as string;
+
+  const team = await getTeam({ slug: slug as string });
+
+  if (!(await isTeamMember(userId, team?.id))) {
+    return res.status(400).json({
+      data: null,
+      error: { message: "Bad request." },
+    });
+  }
 
   try {
     const connection = await apiController.createSAMLConnection({
@@ -97,10 +97,18 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       product: env.product,
     });
 
-    return res.status(201).json({ data: connection });
+    return res.status(200).json({ data: connection, error: null });
   } catch (error: any) {
     const { message } = error;
 
-    return res.status(500).json({ error: { message } });
+    return res.status(500).json({
+      data: null,
+      error: {
+        message: "Failed to configure SAML.",
+        values: {
+          metadata: message,
+        },
+      },
+    });
   }
 };

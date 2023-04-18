@@ -1,12 +1,13 @@
-import fetcher from '@/lib/fetcher';
-import type { SAMLSSORecord } from '@boxyhq/saml-jackson';
-import useSWR, { mutate } from 'swr';
-import type { ApiResponse, SPSAMLConfig } from 'types';
+import useSWR, { mutate } from "swr";
+import type { SAMLSSORecord } from "@boxyhq/saml-jackson";
+
+import type { ApiResponse, SPSAMLConfig } from "types";
+import fetcher from "@/lib/fetcher";
 
 const useSAMLConfig = (slug: string | undefined) => {
   const url = `/api/teams/${slug}/saml`;
 
-  const { data, error, isLoading } = useSWR<
+  const { data, error } = useSWR<
     ApiResponse<SPSAMLConfig & { config: SAMLSSORecord }>
   >(slug ? url : null, fetcher);
 
@@ -15,7 +16,7 @@ const useSAMLConfig = (slug: string | undefined) => {
   };
 
   return {
-    isLoading,
+    isLoading: !error && !data,
     isError: error,
     samlConfig: data?.data,
     mutateSamlConfig,

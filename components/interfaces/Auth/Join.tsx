@@ -1,25 +1,23 @@
-import { InputWithLabel } from '@/components/ui';
-import { getAxiosError } from '@/lib/common';
-import type { User } from '@prisma/client';
-import axios from 'axios';
-import { useFormik } from 'formik';
-import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
-import { Button } from 'react-daisyui';
-import toast from 'react-hot-toast';
-import type { ApiResponse } from 'types';
-import * as Yup from 'yup';
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { Button } from "react-daisyui";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
+import type { User } from "@prisma/client";
+import type { ApiResponse } from "types";
+import { InputWithLabel } from "@/components/ui";
 
 const Join = () => {
   const router = useRouter();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
-      password: '',
-      team: '',
+      name: "",
+      email: "",
+      password: "",
+      team: "",
     },
     validationSchema: Yup.object().shape({
       name: Yup.string().required(),
@@ -28,17 +26,21 @@ const Join = () => {
       team: Yup.string().required().min(3),
     }),
     onSubmit: async (values) => {
-      try {
-        await axios.post<ApiResponse<User>>('/api/auth/join', {
-          ...values,
-        });
+      const response = await fetch("/api/auth/join", {
+        method: "POST",
+        body: JSON.stringify(values),
+      });
 
-        formik.resetForm();
-        toast.success(t('successfully-joined'));
-        router.push('/auth/login');
-      } catch (error: any) {
-        toast.error(getAxiosError(error));
+      const { error }: ApiResponse<User> = await response.json();
+
+      if (error) {
+        toast.error(error.message);
+        return;
       }
+
+      formik.resetForm();
+      toast.success(t("successfully-joined"));
+      router.push("/auth/login");
     },
   });
 
@@ -67,7 +69,7 @@ const Join = () => {
           type="email"
           label="Email"
           name="email"
-          placeholder="jackson@boxyhq.com"
+          placeholder="first.last@name.com"
           value={formik.values.email}
           error={formik.touched.email ? formik.errors.email : undefined}
           onChange={formik.handleChange}
@@ -90,9 +92,9 @@ const Join = () => {
           active={formik.dirty}
           fullWidth
         >
-          {t('create-account')}
+          {t("create-account")}
         </Button>
-        <p className="text-sm">{t('sign-up-message')}</p>
+        <p className="text-sm">{t("sign-up-message")}</p>
       </div>
     </form>
   );

@@ -1,5 +1,6 @@
-import { prisma } from '@/lib/prisma';
-import type { Session } from 'next-auth';
+import type { Session } from "next-auth";
+
+import { prisma } from "@/lib/prisma";
 
 export const createUser = async (param: {
   name: string;
@@ -12,7 +13,7 @@ export const createUser = async (param: {
     data: {
       name,
       email,
-      password: password ? password : '',
+      password: password ? password : "",
       emailVerified: new Date(),
     },
   });

@@ -1,16 +1,15 @@
-import type { NextApiRequest } from 'next';
+import type { NextApiRequest } from "next";
+import { createRandomString, extractAuthToken } from "../../lib/common";
 
-import { createRandomString, extractAuthToken } from '../../lib/common';
-
-describe('Lib - commom', () => {
-  describe('Random string', () => {
-    it('should create a random string with default length 6', () => {
+describe("Lib - commom", () => {
+  describe("Random string", () => {
+    it("should create a random string with default length 6", () => {
       const result = createRandomString();
       expect(result).toBeTruthy();
       expect(result.length).toBe(6);
     });
 
-    it('should create a random string with random length', () => {
+    it("should create a random string with random length", () => {
       const length = Math.round(Math.random() * 10);
       const result = createRandomString(length);
       expect(result).toBeTruthy();
@@ -18,8 +17,8 @@ describe('Lib - commom', () => {
     });
   });
 
-  describe('extractAuthToken', () => {
-    it('should return a token for a bearer token', () => {
+  describe("extractAuthToken", () => {
+    it("should return a token for a bearer token", () => {
       const token = createRandomString(10);
       const mock = {
         headers: { authorization: `Bearer ${token}` },
@@ -28,8 +27,8 @@ describe('Lib - commom', () => {
       expect(result).toBe(token);
     });
 
-    it('should return null when token is empty', () => {
-      const mock = { headers: { authorization: '' } } as NextApiRequest;
+    it("should return null when token is empty", () => {
+      const mock = { headers: { authorization: "" } } as NextApiRequest;
       const result = extractAuthToken(mock);
       expect(result).toBeNull();
     });

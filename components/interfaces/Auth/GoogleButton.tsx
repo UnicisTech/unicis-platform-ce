@@ -1,13 +1,13 @@
-import { signIn } from 'next-auth/react';
-import { Button } from 'react-daisyui';
+import { Button } from "react-daisyui";
+import { signIn } from "next-auth/react";
 
 const GoogleButton = () => {
   return (
     <Button
       className="btn-outline w-full"
       onClick={() => {
-        signIn('google', {
-          callbackUrl: '/dashboard',
+        signIn("google", {
+          callbackUrl: "/dashboard",
         });
       }}
     >

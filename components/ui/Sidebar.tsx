@@ -1,25 +1,41 @@
 import {
-  ArrowLeftOnRectangleIcon,
   HomeIcon,
-  KeyIcon,
   UserIcon,
+  ArrowLeftOnRectangleIcon,
   UsersIcon,
-} from '@heroicons/react/24/solid';
-import useTeam from 'hooks/useTeam';
-import { signOut } from 'next-auth/react';
-import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
+  KeyIcon,
+  CheckIcon,
+  ShieldCheckIcon,
+  LockClosedIcon,
+  EyeSlashIcon,
+  BuildingOffice2Icon,
+  ClipboardDocumentCheckIcon,
+  ArrowRightOnRectangleIcon,
+  DocumentMagnifyingGlassIcon,
+  ArrowUpOnSquareIcon,
+  QueueListIcon,
+  ShieldExclamationIcon,
+  QuestionMarkCircleIcon,
+  CheckBadgeIcon,
+  BuildingStorefrontIcon,
+  AcademicCapIcon,
+} from "@heroicons/react/24/solid";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
-import TeamNav from '../interfaces/Team/TeamNav';
-import NavItem from './NavItem';
+import NavItem from "./NavItem";
+import TeamNav from "../interfaces/Team/TeamNav";
+import useTeam from "hooks/useTeam";
 
 export default function Sidebar() {
   const router = useRouter();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
 
   const slug = router.query.slug as string;
 
   const { team } = useTeam(slug);
+  const activeTab = router.route.split("[slug]/")[1];
 
   return (
     <>
@@ -34,7 +50,7 @@ export default function Sidebar() {
                 <li>
                   <form action="#" method="GET" className="lg:hidden">
                     <label htmlFor="mobile-search" className="sr-only">
-                      {t('search')}
+                      {t("search")}
                     </label>
                     <div className="relative">
                       <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -44,7 +60,7 @@ export default function Sidebar() {
                           viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                          <path d="M152.941 391.317c.812-.469 1.307-.202 1.752.57l3.92 6.789c.471.816.303 1.353-.507 1.82l-8.753 5.054c-.672.388-1.437.467-2.125.07l-7.666-4.427c-.956-.552-1.13-.95-.24-1.688.706-.585 1.479-1.092 2.255-1.577 1.238-.774 2.507-1.497 3.77-2.226l7.594-4.385" />
                         </svg>
                       </div>
                       <input
@@ -57,46 +73,141 @@ export default function Sidebar() {
                     </div>
                   </form>
                 </li>
-                <li>
-                  <NavItem
-                    href="/dashboard"
-                    text="Dashboard"
-                    icon={HomeIcon}
-                    active={router.pathname === '/dashboard'}
-                  />
-                </li>
-                <li>
-                  <NavItem
-                    href="/teams"
-                    text="Teams"
-                    icon={UsersIcon}
-                    active={router.pathname === '/teams'}
-                  />
-                </li>
+                {team && (
+                  <>
+                    <div className="space-y-2 pt-2">
+                      <NavItem
+                        href="javascript:void(0);"
+                        text={team.name}
+                        icon={BuildingOffice2Icon}
+                        active={false}
+                      />
+                    </div>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/dashboard`}
+                        text="Dashboard"
+                        icon={HomeIcon}
+                        active={activeTab === "dashboard"}
+                      />
+                      <NavItem
+                        href={`/teams/${slug}/tasks`}
+                        text="Task Manager"
+                        icon={QueueListIcon}
+                        active={activeTab === "tasks"}
+                      />
+                    </li>
+                    <li className="menu-title">
+                      <span>Privacy</span>
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/rpa`}
+                        text="Record of Processing Activities"
+                        icon={ClipboardDocumentCheckIcon}
+                        active={activeTab === "rpa"}
+                      />
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/tia`}
+                        text="Transfer Impact Assessment"
+                        icon={ArrowUpOnSquareIcon}
+                        active={activeTab === "tia"}
+                      />
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/dpia`}
+                        text="Data Protection Impact Assessment"
+                        icon={DocumentMagnifyingGlassIcon}
+                        active={activeTab === "privacy"}
+                      />
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/saq`}
+                        text="Self Assessment Questionnaire"
+                        icon={QuestionMarkCircleIcon}
+                        active={activeTab === "saq"}
+                      />
+                    </li>
+                    <li className="menu-title">
+                      <span>Cybersecurity</span>
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/csc`}
+                        text="Cybersecurity Management System"
+                        icon={LockClosedIcon}
+                        active={activeTab === "csc"}
+                      />
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/security`}
+                        text="Gap Analysis"
+                        icon={ShieldExclamationIcon}
+                        active={activeTab === "security"}
+                      />
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/vaq`}
+                        text="Vendor Assessment Questionnaire"
+                        icon={CheckBadgeIcon}
+                        active={activeTab === "vaq"}
+                      />
+                    </li>
+                    <li className="menu-title">
+                      <span>Compliance</span>
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/compliance`}
+                        text="Benchmark Report"
+                        icon={ShieldCheckIcon}
+                        active={activeTab === "compliance"}
+                      />
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/iat`}
+                        text="Interactive Awareness Training"
+                        icon={AcademicCapIcon}
+                        active={activeTab === "iat"}
+                      />
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/compliance`}
+                        text="Vendor Report"
+                        icon={BuildingStorefrontIcon}
+                        active={activeTab === "compliance"}
+                      />
+                    </li>
+                  </>
+                )}
               </ul>
+
               {team && (
-                <div className="space-y-2 pt-2">
-                  <NavItem
-                    href="javascript:void(0);"
-                    text={team.name}
-                    icon={UsersIcon}
-                    active={false}
-                  />
+                <ul>
                   <TeamNav slug={slug} />
-                </div>
+                </ul>
               )}
+
               <div className="space-y-2 pt-2">
                 <NavItem
-                  href="/settings/account"
-                  text="Account"
-                  icon={UserIcon}
-                  active={router.pathname === '/settings/account'}
+                  href="/teams"
+                  text="Teams"
+                  icon={UsersIcon}
+                  active={router.pathname === "/teams"}
                 />
                 <NavItem
-                  href="/settings/password"
-                  text="Password"
-                  icon={KeyIcon}
-                  active={router.pathname === '/settings/password'}
+                  href="/account"
+                  text="Account"
+                  icon={UserIcon}
+                  active={router.pathname === "/account"}
                 />
                 <NavItem
                   href="#"

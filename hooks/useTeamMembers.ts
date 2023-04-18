@@ -1,14 +1,15 @@
-import fetcher from '@/lib/fetcher';
-import type { TeamMember, User } from '@prisma/client';
-import useSWR, { mutate } from 'swr';
-import type { ApiResponse } from 'types';
+import useSWR, { mutate } from "swr";
+
+import type { ApiResponse } from "types";
+import fetcher from "@/lib/fetcher";
+import type { TeamMember, User } from "@prisma/client";
 
 type TeamMemberWithUser = TeamMember & { user: User };
 
 const useTeamMembers = (slug: string) => {
   const url = `/api/teams/${slug}/members`;
 
-  const { data, error, isLoading } = useSWR<ApiResponse<TeamMemberWithUser[]>>(
+  const { data, error } = useSWR<ApiResponse<TeamMemberWithUser[]>>(
     url,
     fetcher
   );
@@ -18,7 +19,7 @@ const useTeamMembers = (slug: string) => {
   };
 
   return {
-    isLoading,
+    isLoading: !error && !data,
     isError: error,
     members: data?.data,
     mutateTeamMembers,
