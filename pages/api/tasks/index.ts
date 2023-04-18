@@ -30,9 +30,9 @@ export default async function handler(
 
 // Create a task
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { teamId, title, status, duedate, description } = req.body;
+  const { title, status, duedate, description, teamId } = req.body;
   const session = await getSession(req, res);
-  const team = await createTask({
+  await createTask({
     authorId: session?.user?.id as string,
     teamId,
     title,
@@ -41,7 +41,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     description,
   });
 
-  return res.status(200).json({ data: team, error: null });
+  return res.status(200).json({ data: {}, error: null });
 };
 
 // Edit a task

@@ -1,9 +1,10 @@
 import React, { Fragment } from "react";
-import type { TeamWithMemberCount } from "types";
+import { Team } from "@prisma/client";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Modal } from "react-daisyui";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 import { DatePicker } from '@atlaskit/datetime-picker'
 import TextField from '@atlaskit/textfield';
 import TextArea from '@atlaskit/textarea';
@@ -43,32 +44,35 @@ interface Option {
 const CreateTask = ({
   visible,
   setVisible,
-  teams
+  team
 }: {
   visible: boolean;
   setVisible: (visible: boolean) => void;
-  teams: Array<TeamWithMemberCount>;
+  team: Team
 }) => {
-  const { mutateTasks } = useTasks()
+  const router = useRouter();
+  const { slug } = router.query;
+  const { mutateTasks } = useTasks(slug as string)
   const { t } = useTranslation("common");
   
   return (
     <Modal open={visible}>
       <Form<FormData>
         onSubmit={async (data, {reset}) => {
-          const { title, status, team, duedate, description } = data
+          const { title, status, duedate, description } = data
           const response = await axios.post<ApiResponse<Task>>(
             `/api/tasks`,
             {
               title,
               status: status?.value,
-              teamId: team?.value,
+              teamSlug: slug,
+              teamId: team.id,
               duedate,
               description: description || ''
             }
           );
     
-          const { data: task, error } = response.data;
+          const { error } = response.data;
     
           if (error) {
             toast.error(error.message);
@@ -129,30 +133,6 @@ const CreateTask = ({
                     <Fragment>
                       <WithoutRing>
                         <Select inputId={id} {...rest} options={statuses} validationState={error ? 'error' : 'default'}/>
-                        {error && <ErrorMessage>{error}</ErrorMessage>}
-                      </WithoutRing>
-                    </Fragment>
-                  )}
-                </Field>
-                <Field<ValueType<Option>>
-                  name="team"
-                  label="Team"
-                  aria-required={true}
-                  isRequired
-                  validate={async (value) => {
-                    if (value) {
-                      return undefined;
-                    }
-  
-                    return new Promise((resolve) =>
-                      setTimeout(resolve, 300),
-                    ).then(() => 'Please select a team');
-                  }}
-                >
-                  {({ fieldProps: { id, ...rest }, error }) => (
-                    <Fragment>
-                      <WithoutRing>
-                        <Select inputId={id} {...rest} options={teams.map(({id, name}) => ({label: name, value: id}))} validationState={error ? 'error' : 'default'}/>
                         {error && <ErrorMessage>{error}</ErrorMessage>}
                       </WithoutRing>
                     </Fragment>

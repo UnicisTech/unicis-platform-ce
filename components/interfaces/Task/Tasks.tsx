@@ -1,5 +1,7 @@
 import { Button } from "react-daisyui";
+import Link from "next/link";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 import { Card, Error, Loading } from "@/components/ui";
 import useTasks from "hooks/useTasks";
 import statuses from "data/statuses.json";
@@ -16,7 +18,10 @@ const Tasks = ({
   setTaskToEdit: (task: Task) => void
   setEditVisible: (visible: boolean) => void;
 }) => {
-  const { isLoading, isError, tasks } = useTasks();
+  const router = useRouter();
+  const { slug } = router.query;
+  const { isLoading, isError, tasks } = useTasks(slug as string);
+
   const { t } = useTranslation("common");
 
   if (isLoading) {
@@ -33,8 +38,7 @@ const Tasks = ({
   };
 
   const openEditModal = async (task: Task) => {
-    console.log('task in openEditModal', task)
-    setTaskToEdit({...task})
+    setTaskToEdit({ ...task })
     setEditVisible(true)
   }
 
@@ -67,11 +71,17 @@ const Tasks = ({
                     className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
                   >
                     <td className="px-6 py-3">
-                      <span className="underline">{task.id}</span>
+                      <Link href={`/tasks/${task.id}`}>
+                        <a>
+                          <div className="flex items-center justify-start space-x-2">
+                            <span className="underline">{task.id}</span>
+                          </div>
+                        </a>
+                      </Link>
                     </td>
                     <td className="px-6 py-3">{task.title}</td>
                     <td className="px-6 py-3">
-                      {statuses.find(({value}) => value === task.status)?.label}
+                      {statuses.find(({ value }) => value === task.status)?.label}
                     </td>
                     <td className="px-6 py-3 btn-group">
                       <Button

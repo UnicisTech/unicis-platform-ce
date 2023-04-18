@@ -7,14 +7,12 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import type { Task } from "@prisma/client";
 import { GetServerSidePropsContext } from "next";
 import { CreateTask, Tasks, DeleteTask, EditTask } from "@/components/interfaces/Task";
-import styled from 'styled-components'
 
-import { getOwnedTeams } from "models/team";
-import { getSession } from "@/lib/session";
+import { getTeam } from "models/team";
 
 const AllTasks: NextPageWithLayout<
 InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ teams }) => {
+> = ({ team }) => {
   const [visible, setVisible] = useState(false);
 
   const [deleteVisible, setDeleteVisible] = useState(false)
@@ -39,8 +37,8 @@ InferGetServerSidePropsType<typeof getServerSideProps>
           {t("create-task")}
         </Button>
       </div>
-      <CreateTask visible={visible} setVisible={setVisible} teams={teams}/>
-      <EditTask visible={editVisible} setVisible={setEditVisible} teams={teams} task={taskToEdit}/>
+      <CreateTask visible={visible} setVisible={setVisible} team={team}/>
+      {editVisible && <EditTask visible={editVisible} setVisible={setEditVisible} team={team} task={taskToEdit}/>}
       <DeleteTask visible={deleteVisible} setVisible={setDeleteVisible} taskId={taskToDelete}/>
       <Tasks 
         setTaskToDelete={setTaskToDelete}
@@ -55,26 +53,16 @@ InferGetServerSidePropsType<typeof getServerSideProps>
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const { req, res, locale }: GetServerSidePropsContext = context;
+  const { locale, query }: GetServerSidePropsContext = context;
 
-  const session = await getSession(req, res);
+  const slug = query.slug as string
 
-  //deleteCookie("pending-invite", { req, res });
-  //TODO: should delete getOwnedTeams
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ["common"]) : {}),
-      teams: await getOwnedTeams(session?.user.id as string),
+      team: await getTeam({slug})
     },
   };
 };
-
-// export async function getStaticProps({ locale }: GetServerSidePropsContext) {
-//   return {
-//     props: {
-//       ...(locale ? await serverSideTranslations(locale, ["common"]) : {}),
-//     },
-//   };
-// }
 
 export default AllTasks;

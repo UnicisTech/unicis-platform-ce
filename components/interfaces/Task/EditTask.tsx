@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
-import type { TeamWithMemberCount } from "types";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Modal } from "react-daisyui";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 import { DatePicker } from '@atlaskit/datetime-picker'
 import TextField from '@atlaskit/textfield';
 import TextArea from '@atlaskit/textarea';
@@ -12,7 +12,7 @@ import Select, {
 } from '@atlaskit/select';
 
 import type { ApiResponse } from "types";
-import type { Task } from "@prisma/client";
+import type { Task, Team } from "@prisma/client";
 import AtlaskitButton from '@atlaskit/button/standard-button';
 import statuses from "data/statuses.json";
 
@@ -44,24 +44,23 @@ const EditTask = ({
   visible,
   setVisible,
   task,
-  teams
+  team
 }: {
   visible: boolean;
   setVisible: (visible: boolean) => void;
   task: Task;
-  teams: Array<TeamWithMemberCount>;
+  team: Team
 }) => {
-  const { mutateTasks } = useTasks()
+  const router = useRouter();
+  const { slug } = router.query;
+  const { mutateTasks } = useTasks(slug as string)
   const { t } = useTranslation("common");
-
-  console.log('EditTask task', task)
   
   return (
     <Modal open={visible}>
       <Form<FormData>
         onSubmit={async (data, {reset}) => {
-          const { title, status, team, duedate, description } = data
-          console.log('edit submit data', data)
+          const { title, status, duedate, description } = data
           const response = await axios.put<ApiResponse<Task>>(
             `/api/tasks`,
             {
@@ -69,14 +68,14 @@ const EditTask = ({
                 data: {
                     title,
                     status: status?.value,
-                    teamId: team?.value,
+                    teamId: team.id,
                     duedate,
                     description: description || ''
                   }
             }
           );
     
-          const { data: updatedTask, error } = response.data;
+          const { error } = response.data;
 
           if (error) {
             toast.error(error.message);
@@ -84,13 +83,7 @@ const EditTask = ({
           }
           
           mutateTasks();
-        //   reset({
-        //     title: '',
-        //     status: null,
-        //     team: null,
-        //     duedate: '',
-        //     description: ''
-        //   });
+
           setVisible(false);
         }}
       >
@@ -139,31 +132,6 @@ const EditTask = ({
                     <Fragment>
                       <WithoutRing>
                         <Select inputId={id} {...rest} options={statuses} validationState={error ? 'error' : 'default'}/>
-                        {error && <ErrorMessage>{error}</ErrorMessage>}
-                      </WithoutRing>
-                    </Fragment>
-                  )}
-                </Field>
-                <Field<ValueType<Option>>
-                  name="team"
-                  label="Team"
-                  aria-required={true}
-                  isRequired
-                  defaultValue={teams.map(({id, name}) => ({label: name, value: id})).find(({value}) => value === task.teamId)}
-                  validate={async (value) => {
-                    if (value) {
-                      return undefined;
-                    }
-  
-                    return new Promise((resolve) =>
-                      setTimeout(resolve, 300),
-                    ).then(() => 'Please select a team');
-                  }}
-                >
-                  {({ fieldProps: { id, ...rest }, error }) => (
-                    <Fragment>
-                      <WithoutRing>
-                        <Select inputId={id} {...rest} options={teams.map(({id, name}) => ({label: name, value: id}))} validationState={error ? 'error' : 'default'}/>
                         {error && <ErrorMessage>{error}</ErrorMessage>}
                       </WithoutRing>
                     </Fragment>

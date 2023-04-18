@@ -5,6 +5,7 @@ import { Modal, Button } from "react-daisyui";
 import { useTranslation } from "next-i18next";
 import type { ApiResponse } from "types";
 import useTasks from "hooks/useTasks";
+import { useRouter } from "next/router";
 import { useFormik } from "formik";
 
 const DeleteTask = ({
@@ -16,7 +17,9 @@ const DeleteTask = ({
   visible: boolean;
   setVisible: (visible: boolean) => void
 }) => {
-  const { mutateTasks } = useTasks()
+  const router = useRouter();
+  const { slug } = router.query;
+  const { mutateTasks } = useTasks(slug as string)
   const { t } = useTranslation("common");
 
   const formik = useFormik({
