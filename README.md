@@ -1,7 +1,4 @@
 # Enterprise SaaS Starter Kit
-#### Here's what you get out of the box, see images below 👇👇👇
-
-![saas-starter-kit-poster](/public/saas-starter-kit-poster.png)
 
 :warning: **This repository is still in an early stage of development.**
 
@@ -14,8 +11,6 @@
 </p>
 
 The Open Source Next.js SaaS boilerplate for Enterprise SaaS app development.
-
-Please check out the [Enterprise-ready Saas Starter Kit](https://boxyhq.com/blog/enterprise-ready-saas-starter-kit) blog where we go a little deeper on the subject to help you get started.
 
 Next.js based SaaS starter kit that saves you months of development by starting you off with all the features that are the same in every product, so you can focus on what makes your app unique.
 
@@ -56,6 +51,8 @@ Please follow these simple steps to get a local copy up and running.
 - Docker compose
 
 ### Development
+
+Please follow these simple steps to get a local copy up and running.
 
 #### 1. Setup
 
@@ -163,22 +160,15 @@ _Note: HTML test report is generated inside the `report` folder. Currently supor
 
 ## Contributing
 
-Thanks for taking the time to contribute! Contributions make the open-source community a fantastic place to learn, inspire, and create. Any contributions you make are greatly appreciated.
-
-Please try to create bug reports that are:
-
-- _Reproducible._ Include steps to reproduce the problem.
-- _Specific._ Include as much detail as possible: which version, what environment, etc.
-- _Unique._ Do not duplicate existing opened issues.
-- _Scoped to a Single Bug._ One bug per report.
+Contributions make the open-source community a fantastic place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
 [Contributing Guide](https://github.com/boxyhq/saas-starter-kit/blob/main/CONTRIBUTING.md)
 
 ## Community
 
-- [Discord](https://discord.gg/uyb7pYt4Pa) (For live discussion with the Open-Source Community and BoxyHQ team)
-- [Twitter](https://twitter.com/BoxyHQ) (Follow us)
-- [GitHub Issues](https://github.com/boxyhq/saas-starter-kit/issues) (Contributions, report issues and product ideas)
+- [Discord](https://discord.gg/uyb7pYt4Pa) (For live discussion with the Community and BoxyHQ team)
+- [GitHub](https://github.com/boxyhq/saas-starter-kit/issues) (Bug reports, Contributions)
+- [Twitter](https://twitter.com/BoxyHQ) (Get the news fast)
 
 ## License
 

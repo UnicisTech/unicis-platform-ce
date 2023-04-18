@@ -1,13 +1,12 @@
-import { InputWithLabel } from '@/components/ui';
-import type { FormikConfig } from 'formik';
-import { useFormik } from 'formik';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import { Button, Modal } from 'react-daisyui';
-import type { WebookFormSchema } from 'types';
-import * as Yup from 'yup';
-
-import EventTypes from './EventTypes';
+import type { FormikConfig } from "formik";
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { Modal, Button } from "react-daisyui";
+import { useTranslation } from "next-i18next";
+import type { WebookFormSchema } from "types";
+import { InputWithLabel } from "@/components/ui";
+import EventTypes from "./EventTypes";
 
 const Form = ({
   visible,
@@ -18,7 +17,7 @@ const Form = ({
   visible: boolean;
   setVisible: (visible: boolean) => void;
   initialValues: WebookFormSchema;
-  onSubmit: FormikConfig<WebookFormSchema>['onSubmit'];
+  onSubmit: FormikConfig<WebookFormSchema>["onSubmit"];
 }) => {
   const formik = useFormik<WebookFormSchema>({
     validationSchema: Yup.object().shape({
@@ -31,17 +30,17 @@ const Form = ({
     onSubmit,
   });
 
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
 
   return (
     <Modal open={visible}>
       <form onSubmit={formik.handleSubmit} method="POST">
         <Modal.Header className="font-bold">
-          {t('edit-webhook-endpoint')}
+          {t("edit-webhook-endpoint")}
         </Modal.Header>
         <Modal.Body>
           <div className="mt-2 flex flex-col space-y-4">
-            <p>{t('webhook-create-desc')}</p>
+            <p>{t("webhook-create-desc")}</p>
             <div className="flex flex-col space-y-2">
               <InputWithLabel
                 name="name"
@@ -63,15 +62,15 @@ const Form = ({
               <div className="divider"></div>
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text">{t('events-to-send')}</span>
+                  <span className="label-text">{t("events-to-send")}</span>
                 </label>
                 <p className="ml-1 mb-3 text-sm font-normal text-gray-500">
-                  {t('events-description')}
+                  {t("events-description")}
                 </p>
                 <div className="grid grid-cols-2 gap-2">
                   <EventTypes
                     onChange={formik.handleChange}
-                    values={initialValues['eventTypes']}
+                    values={initialValues["eventTypes"]}
                   />
                 </div>
               </div>
@@ -85,7 +84,7 @@ const Form = ({
             loading={formik.isSubmitting}
             active={formik.dirty}
           >
-            {t('create-webhook')}
+            {t("create-webhook")}
           </Button>
           <Button
             type="button"
@@ -95,7 +94,7 @@ const Form = ({
               formik.resetForm();
             }}
           >
-            {t('close')}
+            {t("close")}
           </Button>
         </Modal.Actions>
       </form>

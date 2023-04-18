@@ -1,14 +1,14 @@
-import { getAxiosError } from '@/lib/common';
-import type { Team } from '@prisma/client';
-import axios from 'axios';
-import { useFormik } from 'formik';
-import useTeams from 'hooks/useTeams';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import { Button, Input, Modal } from 'react-daisyui';
-import toast from 'react-hot-toast';
-import type { ApiResponse } from 'types';
-import * as Yup from 'yup';
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { Modal, Button, Input } from "react-daisyui";
+import { useTranslation } from "next-i18next";
+
+import type { ApiResponse } from "types";
+import type { Team } from "@prisma/client";
+import useTeams from "hooks/useTeams";
 
 const CreateTeam = ({
   visible,
@@ -17,33 +17,37 @@ const CreateTeam = ({
   visible: boolean;
   setVisible: (visible: boolean) => void;
 }) => {
-  const { t } = useTranslation('common');
   const { mutateTeams } = useTeams();
+  const { t } = useTranslation("common");
 
   const formik = useFormik({
     initialValues: {
-      name: '',
+      name: "",
     },
     validationSchema: Yup.object().shape({
       name: Yup.string().required(),
     }),
     onSubmit: async (values) => {
-      try {
-        const response = await axios.post<ApiResponse<Team>>('/api/teams/', {
-          ...values,
-        });
+      const { name } = values;
 
-        const { data: teamCreated } = response.data;
+      const response = await axios.post<ApiResponse<Team>>(`/api/teams`, {
+        name,
+      });
 
-        if (teamCreated) {
-          toast.success(t('team-created'));
-          mutateTeams();
-          formik.resetForm();
-          setVisible(false);
-        }
-      } catch (error: any) {
-        toast.error(getAxiosError(error));
+      const { data: invitation, error } = response.data;
+
+      if (error) {
+        toast.error(error.message);
+        return;
       }
+
+      if (invitation) {
+        toast.success(t("team-created"));
+      }
+
+      mutateTeams();
+      formik.resetForm();
+      setVisible(false);
     },
   });
 
@@ -53,14 +57,14 @@ const CreateTeam = ({
         <Modal.Header className="font-bold">Create Team</Modal.Header>
         <Modal.Body>
           <div className="mt-2 flex flex-col space-y-4">
-            <p>{t('members-of-a-team')}</p>
+            <p>{t("members-of-a-team")}</p>
             <div className="flex justify-between space-x-3">
               <Input
                 name="name"
                 className="flex-grow"
                 onChange={formik.handleChange}
                 value={formik.values.name}
-                placeholder="Team name"
+                placeholder="Eg: operations, backend-team, frontend"
               />
             </div>
           </div>
@@ -72,7 +76,7 @@ const CreateTeam = ({
             loading={formik.isSubmitting}
             active={formik.dirty}
           >
-            {t('create-team')}
+            {t("create-team")}
           </Button>
           <Button
             type="button"
@@ -81,7 +85,7 @@ const CreateTeam = ({
               setVisible(!visible);
             }}
           >
-            {t('close')}
+            {t("close")}
           </Button>
         </Modal.Actions>
       </form>

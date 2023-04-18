@@ -1,13 +1,13 @@
-import { Card, InputWithLabel } from '@/components/ui';
-import { getAxiosError } from '@/lib/common';
-import { User } from '@prisma/client';
-import axios from 'axios';
-import { useFormik } from 'formik';
-import { useTranslation } from 'next-i18next';
-import { Button } from 'react-daisyui';
-import toast from 'react-hot-toast';
-import type { ApiResponse } from 'types';
-import * as Yup from 'yup';
+import toast from "react-hot-toast";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+import { Button } from "react-daisyui";
+import { useTranslation } from "next-i18next";
+
+import type { ApiResponse } from "types";
+import { Card, InputWithLabel } from "@/components/ui";
+import { User } from "@prisma/client";
 
 const schema = Yup.object().shape({
   name: Yup.string().required(),
@@ -15,37 +15,43 @@ const schema = Yup.object().shape({
 });
 
 const UpdateAccount = ({ user }: { user: User }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
 
   const formik = useFormik({
     initialValues: {
-      name: user.name,
-      email: user.email,
+      name: user?.name,
+      email: user?.email,
     },
     validationSchema: schema,
     onSubmit: async (values) => {
-      try {
-        await axios.put<ApiResponse<User>>('/api/users', {
-          ...values,
-        });
+      const { name, email } = values;
 
-        toast.success(t('successfully-updated'));
-      } catch (error) {
-        toast.error(getAxiosError(error));
+      const response = await axios.put<ApiResponse<User>>("/api/users", {
+        name,
+        email,
+      });
+
+      const { error } = response.data;
+
+      if (error) {
+        toast.error(error.message);
+        return;
       }
+
+      toast.success(t("successfully-updated"));
     },
   });
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Card heading="Your Profile">
-        <Card.Body className="p-4">
-          <div className="flex flex-col space-y-2">
+      <Card heading="Update Account">
+        <Card.Body className="p-5">
+          <div className="flex flex-col space-y-3">
             <InputWithLabel
               type="text"
               label="Name"
               name="name"
-              placeholder={t('your-name')}
+              placeholder={t("your-name")}
               value={formik.values.name}
               error={formik.touched.name ? formik.errors.name : undefined}
               onChange={formik.handleChange}
@@ -54,7 +60,7 @@ const UpdateAccount = ({ user }: { user: User }) => {
               type="email"
               label="Email"
               name="email"
-              placeholder={t('your-email')}
+              placeholder={t("your-email")}
               value={formik.values.email}
               error={formik.touched.email ? formik.errors.email : undefined}
               onChange={formik.handleChange}
@@ -67,10 +73,9 @@ const UpdateAccount = ({ user }: { user: User }) => {
               type="submit"
               color="primary"
               loading={formik.isSubmitting}
-              disabled={!formik.dirty || !formik.isValid}
-              size="sm"
+              active={formik.dirty}
             >
-              {t('save-changes')}
+              {t("save-changes")}
             </Button>
           </div>
         </Card.Footer>

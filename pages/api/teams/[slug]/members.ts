@@ -1,15 +1,17 @@
-import { prisma } from '@/lib/prisma';
-import { getSession } from '@/lib/session';
-import { sendEvent } from '@/lib/svix';
-import { Role } from '@prisma/client';
+import type { NextApiRequest, NextApiResponse } from "next";
+
+import { getSession } from "@/lib/session";
 import {
   getTeam,
-  getTeamMembers,
-  isTeamAdmin,
   isTeamMember,
+  getTeamMembers,
   removeTeamMember,
-} from 'models/team';
-import type { NextApiRequest, NextApiResponse } from 'next';
+  isTeamOwner,
+} from "models/team";
+import { User } from "next-auth";
+import { Team, TeamMember } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
+import { sendEvent } from "@/lib/svix";
 
 export default async function handler(
   req: NextApiRequest,
@@ -18,17 +20,16 @@ export default async function handler(
   const { method } = req;
 
   switch (method) {
-    case 'GET':
-      return await handleGET(req, res);
-    case 'DELETE':
-      return await handleDELETE(req, res);
-    case 'PUT':
-      return await handlePUT(req, res);
-    case 'PATCH':
-      return await handlePATCH(req, res);
+    case "GET":
+      return handleGET(req, res);
+    case "DELETE":
+      return handleDELETE(req, res);
+    case "PUT":
+      return handlePUT(req, res);
     default:
-      res.setHeader('Allow', 'GET, DELETE, PUT, PATCH');
+      res.setHeader("Allow", ["GET", "DELETE", "PUT"]);
       res.status(405).json({
+        data: null,
         error: { message: `Method ${method} Not Allowed` },
       });
   }
@@ -36,130 +37,109 @@ export default async function handler(
 
 // Get members of a team
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { slug } = req.query as { slug: string };
+  const { slug } = req.query;
 
   const session = await getSession(req, res);
+  const userId = session?.user?.id as string;
 
-  if (!session) {
-    return res.status(400).json({
-      error: { message: 'Bad request.' },
-    });
-  }
+  const team = await getTeam({ slug: slug as string });
 
-  const userId = session.user.id;
-  const team = await getTeam({ slug });
-
-  if (!(await isTeamMember(userId, team.id))) {
+  if (!(await isTeamMember(userId, team?.id))) {
     return res.status(200).json({
-      error: { message: 'Bad request.' },
+      data: null,
+      error: { message: "Bad request." },
     });
   }
 
-  const members = await getTeamMembers(slug);
+  const members = await getTeamMembers(slug as string);
 
-  return res.status(200).json({ data: members });
+  return res.status(200).json({ data: members, error: null });
 };
 
 // Delete the member from the team
 const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { slug } = req.query as { slug: string };
+  const { slug } = req.query;
   const { memberId } = req.body;
 
   const session = await getSession(req, res);
 
   if (!session) {
-    return res.status(400).json({
-      error: { message: 'Bad request.' },
+    return res.status(200).json({
+      data: null,
+      error: { message: "Bad request." },
     });
   }
 
-  const team = await getTeam({ slug });
+  const team = await getTeam({ slug: slug as string });
 
-  if (!(await isTeamAdmin(session.user.id, team.id))) {
-    return res.status(400).json({
-      error: { message: 'You are not allowed to perform this action.' },
+  if (!(await canRemoveTeamMember(session?.user, team, memberId))) {
+    return res.status(200).json({
+      data: null,
+      error: { message: "Bad request." },
     });
   }
 
   const teamMember = await removeTeamMember(team.id, memberId);
 
-  await sendEvent(team.id, 'member.removed', teamMember);
+  await sendEvent(team.id, "member.removed", teamMember);
 
-  return res.status(200).json({ data: {} });
+  return res.status(200).json({ data: {}, error: null });
 };
 
 // Leave a team
 const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { slug } = req.query as { slug: string };
+  const { slug } = req.query;
 
   const session = await getSession(req, res);
+  const userId = session?.user?.id as string;
 
   if (!session) {
-    return res.status(400).json({
-      error: { message: 'Bad request.' },
+    return res.status(200).json({
+      data: null,
+      error: { message: "Bad request." },
     });
   }
 
-  const userId = session.user.id;
-  const team = await getTeam({ slug });
+  const team = await getTeam({ slug: slug as string });
 
   if (!(await isTeamMember(userId, team.id))) {
-    return res.status(400).json({
-      error: { message: 'Bad request.' },
+    return res.status(200).json({
+      data: null,
+      error: { message: "Bad request." },
     });
   }
 
   const totalTeamOwners = await prisma.teamMember.count({
     where: {
-      role: Role.OWNER,
+      role: "owner",
       teamId: team.id,
     },
   });
 
   if (totalTeamOwners <= 1) {
-    return res.status(400).json({
-      error: { message: 'A team should have at least one owner.' },
+    return res.status(200).json({
+      data: null,
+      error: { message: "A team should have at least 2 owners." },
     });
   }
 
   await removeTeamMember(team.id, userId);
 
-  return res.status(200).json({ data: {} });
+  return res.status(200).json({ data: {}, error: null });
 };
 
-// Update the role of a member
-const handlePATCH = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { slug } = req.query as { slug: string };
-  const { memberId, role } = req.body as { memberId: string; role: Role };
-
-  const session = await getSession(req, res);
-
-  if (!session) {
-    return res.status(400).json({
-      error: { message: 'Bad request.' },
-    });
+const canRemoveTeamMember = async (
+  user: User,
+  team: Team,
+  memberId: TeamMember["id"]
+) => {
+  if (!(await isTeamOwner(user.id, team.id))) {
+    return false;
   }
 
-  const userId = session.user.id;
-  const team = await getTeam({ slug });
-
-  if (!(await isTeamAdmin(userId, team.id))) {
-    return res.status(400).json({
-      error: { message: 'Bad request.' },
-    });
+  if (memberId === user.id) {
+    return false;
   }
 
-  const memberUpdated = await prisma.teamMember.update({
-    where: {
-      teamId_userId: {
-        teamId: team.id,
-        userId: memberId,
-      },
-    },
-    data: {
-      role,
-    },
-  });
-
-  return res.status(200).json({ data: memberUpdated });
+  return true;
 };

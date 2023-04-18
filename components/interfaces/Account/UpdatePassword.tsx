@@ -1,34 +1,43 @@
-import { Card, InputWithLabel } from '@/components/ui';
-import { getAxiosError } from '@/lib/common';
-import axios from 'axios';
-import { useFormik } from 'formik';
-import { useTranslation } from 'next-i18next';
-import { Button } from 'react-daisyui';
-import toast from 'react-hot-toast';
-import * as Yup from 'yup';
+import { useFormik } from "formik";
+import axios, { AxiosError } from "axios";
+import * as Yup from "yup";
+import toast from "react-hot-toast";
+import { Button } from "react-daisyui";
+import { useTranslation } from "next-i18next";
+
+import type { ApiResponse } from "types";
+import { Card, InputWithLabel } from "@/components/ui";
 
 const schema = Yup.object().shape({
   currentPassword: Yup.string().required(),
-  newPassword: Yup.string().required().min(7),
+  newPassword: Yup.string().required("Required"),
+  confirmationPassword: Yup.string()
+    .oneOf([Yup.ref("newPassword"), null], "Passwords don't match!")
+    .required("Required"),
 });
 
 const UpdatePassword = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
 
   const formik = useFormik({
     initialValues: {
-      currentPassword: '',
-      newPassword: '',
+      currentPassword: "",
+      newPassword: "",
+      confirmationPassword: "",
     },
     validationSchema: schema,
     onSubmit: async (values) => {
       try {
-        await axios.put(`/api/password`, values);
+        const { data } = await axios.patch(`/api/users`, values);
 
-        toast.success(t('successfully-updated'));
-        formik.resetForm();
-      } catch (error: any) {
-        toast.error(getAxiosError(error));
+        if (data) {
+          toast.success(t("successfully-updated"));
+        }
+      } catch (error: unknown | AxiosError) {
+        if (axios.isAxiosError(error)) {
+          const err = error as AxiosError<ApiResponse>;
+          toast.error(String(err?.response?.data.error?.message));
+        }
       }
     },
   });
@@ -36,14 +45,14 @@ const UpdatePassword = () => {
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
-        <Card heading="Password">
-          <Card.Body className="p-4">
-            <div className="flex flex-col space-y-3">
+        <Card heading="Update Password">
+          <Card.Body className="p-5">
+            <div className="flex flex-col space-y-6">
               <InputWithLabel
                 type="password"
                 label="Current password"
                 name="currentPassword"
-                placeholder="Current password"
+                placeholder="Type your current"
                 value={formik.values.currentPassword}
                 error={
                   formik.touched.currentPassword
@@ -56,11 +65,24 @@ const UpdatePassword = () => {
                 type="password"
                 label="New password"
                 name="newPassword"
-                placeholder="New password"
+                placeholder="Type your new password"
                 value={formik.values.newPassword}
                 error={
                   formik.touched.newPassword
                     ? formik.errors.newPassword
+                    : undefined
+                }
+                onChange={formik.handleChange}
+              />
+              <InputWithLabel
+                type="password"
+                label="Confirm password"
+                name="confirmationPassword"
+                placeholder="Confirm your password"
+                value={formik.values.confirmationPassword}
+                error={
+                  formik.touched.confirmationPassword
+                    ? formik.errors.confirmationPassword
                     : undefined
                 }
                 onChange={formik.handleChange}
@@ -73,10 +95,10 @@ const UpdatePassword = () => {
                 type="submit"
                 color="primary"
                 loading={formik.isSubmitting}
-                disabled={!formik.dirty || !formik.isValid}
-                size="sm"
+                active={formik.dirty}
+                disabled={!formik.isValid}
               >
-                {t('change-password')}
+                {t("change-password")}
               </Button>
             </div>
           </Card.Footer>

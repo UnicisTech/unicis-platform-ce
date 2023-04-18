@@ -1,5 +1,6 @@
-import { getInvitation } from 'models/invitation';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from "next";
+
+import { getInvitation } from "models/invitation";
 
 export default async function handler(
   req: NextApiRequest,
@@ -7,28 +8,23 @@ export default async function handler(
 ) {
   const { method } = req;
 
-  try {
-    switch (method) {
-      case 'GET':
-        return await handleGET(req, res);
-      default:
-        res.setHeader('Allow', 'GET');
-        res.status(405).json({
-          error: { message: `Method ${method} Not Allowed` },
-        });
-    }
-  } catch (error: any) {
-    return res.status(400).json({
-      error: { message: error.message },
-    });
+  switch (method) {
+    case "GET":
+      return handleGET(req, res);
+    default:
+      res.setHeader("Allow", ["GET"]);
+      res.status(405).json({
+        data: null,
+        error: { message: `Method ${method} Not Allowed` },
+      });
   }
 }
 
 // Get the invitation by token
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { token } = req.query as { token: string };
+  const { token } = req.query;
 
-  const invitation = await getInvitation({ token });
+  const invitation = await getInvitation({ token: token as string });
 
-  return res.status(200).json({ data: invitation });
+  return res.status(200).json({ data: invitation, error: null });
 };
