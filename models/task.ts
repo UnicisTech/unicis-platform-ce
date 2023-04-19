@@ -64,6 +64,35 @@ export const getTasks = async (userId: string) => {
   return tasks;
 };
 
+export const getTaskBySlugAndNumber = async (
+  taskNumber: number,
+  slug: string
+) => {
+  const task = await prisma.task.findFirst({
+    where: {
+      taskNumber: taskNumber,
+      team: {
+        slug: slug,
+      },
+    },
+    include: {
+      comments: {
+        include: {
+          createdBy: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              image: true,
+            },
+          },
+        },
+      },
+    },
+  });
+  return task;
+};
+
 export const getTeamTasks = async (slug: string) => {
   const tasks = await prisma.task.findMany({
     where: {
