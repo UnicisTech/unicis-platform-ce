@@ -71,10 +71,10 @@ const Tasks = ({
                     className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
                   >
                     <td className="px-6 py-3">
-                      <Link href={`/tasks/${task.id}`}>
+                      <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
                         <a>
                           <div className="flex items-center justify-start space-x-2">
-                            <span className="underline">{task.id}</span>
+                            <span className="underline">{task.taskNumber}</span>
                           </div>
                         </a>
                       </Link>

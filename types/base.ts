@@ -26,6 +26,16 @@ export type TeamWithMemberCount = Prisma.TeamGetPayload<{
   };
 }>;
 
+export type TaskWithComments = Prisma.TaskGetPayload<{
+  include: {
+    comments: {
+      include: {
+        createdBy: true;
+      };
+    };
+  };
+}>;
+
 export type WebookFormSchema = {
   name: string;
   url: string;

@@ -55,6 +55,7 @@ model User {
   sessions      Session[]
   Task          Task[]
   teamMembers   TeamMember[]
+  Comment       Comment[]
 }
 
 model Team {
@@ -73,17 +74,29 @@ model Team {
 }
 
 model Task {
-  id          Int    @id @default(autoincrement())
-  taskNumber  Int    
+  id          Int       @id @default(autoincrement())
+  taskNumber  Int
   teamId      String
   authorId    String
   title       String
   status      String
   duedate     String
   description String
+  comments    Comment[]
   properties  Json
-  author      User   @relation(fields: [authorId], references: [id])
-  team        Team   @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  author      User      @relation(fields: [authorId], references: [id])
+  team        Team      @relation(fields: [teamId], references: [id], onDelete: Cascade)
+}
+
+model Comment {
+  id          Int      @id @default(autoincrement())
+  text        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  taskId      Int
+  createdById String
+  task        Task     @relation(fields: [taskId], references: [id])
+  createdBy   User     @relation(fields: [createdById], references: [id])
 }
 
 model TeamMember {
