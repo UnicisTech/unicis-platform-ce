@@ -19,14 +19,8 @@ import statuses from "data/statuses.json";
 
 
 import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
-import styled from 'styled-components'
+import { WithoutRing } from "sharedStyles";
 import useTasks from "hooks/useTasks";
-
-const WithoutRing = styled.div`
-    input {
-        --tw-ring-shadow: 0 0 #000 !important;
-    }
-`
 
 interface FormData {
   title: string;

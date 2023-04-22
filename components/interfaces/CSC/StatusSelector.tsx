@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import Select from "@atlaskit/select";
 import { statusOptions, colourStyles } from "./config";
-import styled from "styled-components";
-
-const WithoutRing = styled.div`
-  input {
-    --tw-ring-shadow: 0 0 #000 !important;
-  }
-`;
+import { WithoutRing } from "sharedStyles";
 
 const StatusSelector = ({ 
   statusValue, 

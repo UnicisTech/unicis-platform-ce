@@ -1,10 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "@/lib/session";
-import {
-  addControlToIssue,
-  removeControlFromIssue,
-  isUserHasAccess,
-} from "models/task";
+import { isUserHasAccess } from "models/task";
+import { removeControlsFromIssue, addControlsToIssue } from "@/lib/csc";
 
 export default async function handler(
   req: NextApiRequest,
@@ -26,7 +23,7 @@ export default async function handler(
 
 const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const { slug } = req.query;
-  const { operation, control } = req.body;
+  const { operation, controls } = req.body;
 
   const session = await getSession(req, res);
   const userId = session?.user?.id as string;
@@ -46,16 +43,16 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (operation === "add") {
-    await addControlToIssue({
+    await addControlsToIssue({
       taskId: Number(slug) as number,
-      control: control as string,
+      controls,
     });
   }
 
   if (operation === "remove") {
-    await removeControlFromIssue({
+    await removeControlsFromIssue({
       taskId: Number(slug) as number,
-      control: control as string,
+      controls,
     });
   }
 

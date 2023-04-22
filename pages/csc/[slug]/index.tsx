@@ -71,7 +71,7 @@ const TeamMembers: NextPageWithLayout<
       const response = await axios.put(
         `/api/tasks/${issueId}/csc`,
         {
-          control,
+          controls: [control],
           operation
         }
       );

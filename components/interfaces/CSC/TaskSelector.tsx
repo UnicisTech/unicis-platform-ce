@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Select from '@atlaskit/select'
-import styled from 'styled-components'
+import { WithoutRing } from 'sharedStyles';
 import type { Task } from "@prisma/client";
 import type { Option } from 'types';
-
-const WithoutRing = styled.div`
-    input {
-        --tw-ring-shadow: 0 0 #000 !important;
-    }
-`
 
 const TaskSelector = ({ 
     tasks, 

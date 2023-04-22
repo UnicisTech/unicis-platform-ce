@@ -3,12 +3,9 @@ import type { ApiResponse } from "types";
 import type { TaskWithComments } from "types";
 import fetcher from "@/lib/fetcher";
 
-//TODO: remade to two param slug and taskNumber
-const useTask = (url: string) => {
-  const { data, error } = useSWR<ApiResponse<TaskWithComments>>(
-    url ? url : null,
-    fetcher
-  );
+const useTask = (slug: string, taskNumber: string) => {
+  const url = `/api/teams/${slug}/tasks/${taskNumber}`;
+  const { data, error } = useSWR<ApiResponse<TaskWithComments>>(url, fetcher);
 
   const mutateTask = async () => {
     mutate(url);

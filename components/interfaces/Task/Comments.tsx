@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import type { ApiResponse } from "types";
 import Button from '@atlaskit/button/standard-button';
-import Form, { Field, FormFooter, HelperMessage } from '@atlaskit/form';
+import Form, { Field, FormFooter } from '@atlaskit/form';
 import type { TaskWithComments } from 'types';
 
 import TextArea from '@atlaskit/textarea';
@@ -91,9 +91,6 @@ export default function AddComment({
                     placeholder="Add a comment..."
                     {...fieldProps}
                   />
-                  {/* <HelperMessage>
-                    Help or instruction text goes here
-                  </HelperMessage> */}
                 </Fragment>
               )}
             </Field>

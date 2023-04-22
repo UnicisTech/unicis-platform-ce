@@ -1,14 +1,8 @@
 import React, {Dispatch, SetStateAction} from "react";
 import Select from "@atlaskit/select";
 import { statusOptions } from "./config";
-import styled from "styled-components";
+import { WithoutRing } from "sharedStyles";
 import type { Option } from "types";
-
-const WithoutRing = styled.div`
-  input {
-    --tw-ring-shadow: 0 0 #000 !important;
-  }
-`;
 
 const StatusFilter = ({
    setStatusFilter 

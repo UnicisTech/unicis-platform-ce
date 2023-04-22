@@ -10,22 +10,13 @@ import TextArea from '@atlaskit/textarea';
 import Select, {
   ValueType,
 } from '@atlaskit/select';
-
 import type { ApiResponse } from "types";
 import type { Task, Team } from "@prisma/client";
 import AtlaskitButton from '@atlaskit/button/standard-button';
 import statuses from "data/statuses.json";
-
-
 import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
-import styled from 'styled-components'
+import { WithoutRing } from "sharedStyles";
 import useTasks from "hooks/useTasks";
-
-const WithoutRing = styled.div`
-    input {
-        --tw-ring-shadow: 0 0 #000 !important;
-    }
-`
 
 interface FormData {
   title: string;
