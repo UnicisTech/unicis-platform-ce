@@ -1,4 +1,5 @@
 import type { Prisma } from "@prisma/client";
+import type { Session } from "next-auth";
 
 export type ApiError = {
   code?: string;
@@ -45,4 +46,14 @@ export type WebookFormSchema = {
 export type Option = {
   label: string;
   value: number;
+};
+
+export type AuditLog = {
+  actor: Session["user"];
+  date: number;
+  event: string;
+  diff: {
+    prevValue: string | null;
+    nextValue: string;
+  };
 };

@@ -95,7 +95,7 @@ model Comment {
   updatedAt   DateTime @updatedAt
   taskId      Int
   createdById String
-  task        Task     @relation(fields: [taskId], references: [id])
+  task        Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
   createdBy   User     @relation(fields: [createdById], references: [id])
 }
 

@@ -13,7 +13,7 @@ const IssuePanel = ({
   mutateTask: () => Promise<void>
 }) => {
   const properties = task?.properties as any
-  const issueControls = properties?.csc_controls as string[] || []
+  const issueControls = properties?.csc_controls as string[] || ['']
 
   const [controls, setControls] = useState(issueControls)
   const [isDeleting, setIsDeleting] = useState(false)
@@ -50,16 +50,28 @@ const IssuePanel = ({
     setIsDeleting(false)
   }, [task, mutateTask ,setIsDeleting])
 
-  const controlHanlder = useCallback(async (control: string) => {
+  const controlHanlder = useCallback(async (oldControl: string, newControl: string) => {
     setIsSaving(true)
 
-    const response = await axios.put(
-      `/api/tasks/${task.id}/csc`,
-      {
-        controls: [control],
-        operation: 'add'
-      }
-    );
+    let response;
+
+    if (oldControl === '') {
+      response = await axios.put(
+        `/api/tasks/${task.id}/csc`,
+        {
+          controls: [newControl],
+          operation: 'add'
+        }
+      );
+    } else {
+      response = await axios.put(
+        `/api/tasks/${task.id}/csc`,
+        {
+          controls: [oldControl, newControl],
+          operation: 'change'
+        }
+      );
+    }
 
     const { error } = response.data;
 

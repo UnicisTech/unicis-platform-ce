@@ -10,7 +10,7 @@ import { GetServerSidePropsContext } from "next";
 import useTask from "hooks/useTask";
 import statuses from "data/statuses.json";
 import { Comments } from "@/components/interfaces/Task";
-import { IssuePanel } from "@/components/interfaces/CSC";
+import { AuditLogs, IssuePanel } from "@/components/interfaces/CSC";
 
 const TaskById: NextPageWithLayout = () => {
   const router = useRouter();
@@ -33,6 +33,8 @@ const TaskById: NextPageWithLayout = () => {
         <p>description: {task?.description}</p>
         <p>due date: {task?.duedate}</p>
         <IssuePanel task={task} mutateTask={mutateTask}/>
+        <hr/>
+        <AuditLogs task={task}/>
         <Comments task={task} mutateTask={mutateTask}/>
     </>
   );

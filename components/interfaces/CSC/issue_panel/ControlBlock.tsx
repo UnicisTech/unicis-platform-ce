@@ -17,7 +17,7 @@ const ControlBlock = ({
 } : {
   control: string
   controls: string[],
-  controlHanlder: (option: string) => void,
+  controlHanlder: (oldControl: string, newControl: string) => void,
   isSaving: boolean,
   isDeleting: boolean,
   deleteControlHandler: (control: string) => void
@@ -36,7 +36,7 @@ const ControlBlock = ({
               classNamePrefix="react-select"
               options={controlOptions.filter(option => !controls.find(item => item === option.value.control))}
               onChange={(option) => {
-                controlHanlder(option?.value?.control as string)
+                controlHanlder(control, option?.value?.control as string)
               }}
               value={controlOptions.find(({ value }) => value.control === control)}
               placeholder="Choose a control"

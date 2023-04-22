@@ -64,7 +64,6 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
 
 // Get tasks for user
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log("from api get");
   const session = await getSession(req, res);
   const userId = session?.user?.id as string;
 
