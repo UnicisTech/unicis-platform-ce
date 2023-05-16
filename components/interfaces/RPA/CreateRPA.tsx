@@ -12,8 +12,8 @@ import Select, {
 } from '@atlaskit/select';
 import { Checkbox } from '@atlaskit/checkbox';
 
-import type { ApiResponse } from "types";
-import type { Task, TeamMember, User } from "@prisma/client";
+import type { ApiResponse, TeamMemberWithUser } from "types";
+import type { Task } from "@prisma/client";
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
 
 
@@ -22,11 +22,7 @@ import { WithoutRing } from "sharedStyles";
 
 import Message from "./Message";
 import { format } from 'date-fns'
-import { config, fieldPropsMapping } from "./config";
-
-//TODO: declre type in types
-type TeamMemberWithUser = TeamMember & { user: User };
-
+import { config, fieldPropsMapping, headers } from "./config";
 
 interface Option {
   label: string;
@@ -105,7 +101,8 @@ const CreateRPA = ({
       return setValidationMessage(message);
     }
     if (stage === 4) {
-      await saveProcedure(procedure, reset)
+      const procedureToSave = procedure.length === 4 ? [...procedure, formData] : procedure
+      await saveProcedure(procedureToSave, reset)
     } else {
       setStage(stage + 1);
     }
@@ -147,6 +144,7 @@ const CreateRPA = ({
                   flexDirection: 'column',
                 }}
               >
+                <h3 className="text-1xl font-bold">{headers[stage]}</h3>
                 <Message
                   text={`The record of processing activities allows you to make an inventory of the data processing and to have
                     an overview of what you are

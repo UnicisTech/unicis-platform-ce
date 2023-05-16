@@ -4,8 +4,9 @@ import axios from "axios";
 import Button, { LoadingButton } from "@atlaskit/button";
 import ControlBlock from './ControlBlock'
 import type { Task } from "@prisma/client";
+import { IssuePanelContainer } from 'sharedStyles';
 
-const IssuePanel = ({
+const CscPanel = ({
   task,
   mutateTask
 }: {
@@ -110,7 +111,8 @@ const IssuePanel = ({
   }, [task, mutateTask, setIsDeleting])
 
   return (
-    <div style={{ backgroundColor: 'white', padding: '10px 20px' }}>
+    <IssuePanelContainer>
+      <h2 className="text-1xl font-bold">Cybersecurity Controls</h2>
       {controls.map((control, index) => (
         <ControlBlock
           key={index}
@@ -143,9 +145,8 @@ const IssuePanel = ({
           </LoadingButton>
         </div>
       </div>
-    </div>
-
+    </IssuePanelContainer>
   )
 }
 
-export default IssuePanel
+export default CscPanel

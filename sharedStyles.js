@@ -5,3 +5,9 @@ export const WithoutRing = styled.div`
     --tw-ring-shadow: 0 0 #000 !important;
   }
 `;
+
+export const IssuePanelContainer = styled.div`
+  background-color: white;
+  padding: 10px 20px;
+  margin: 10px 0px;
+`;

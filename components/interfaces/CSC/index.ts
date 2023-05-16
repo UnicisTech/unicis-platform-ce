@@ -4,5 +4,5 @@ export { default as RadarChart } from "./RadarChart";
 export { default as SectionFilter } from "./SectionFilter";
 export { default as StatusFilter } from "./StatusFilter";
 export { default as PerPageSelector } from "./PerPageSelector";
-export { default as IssuePanel } from "./issue_panel/IssuePanel";
+export { default as CscPanel } from "./issue_panel/CscPanel";
 export { default as AuditLogs } from "./AuditLogs";

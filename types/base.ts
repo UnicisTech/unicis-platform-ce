@@ -1,4 +1,4 @@
-import type { Prisma } from "@prisma/client";
+import type { Prisma, TeamMember, User } from "@prisma/client";
 import type { Session } from "next-auth";
 
 export type ApiError = {
@@ -57,3 +57,39 @@ export type AuditLog = {
     nextValue: string;
   };
 };
+
+export type TeamMemberWithUser = TeamMember & { user: User };
+
+type RpaOption = {
+  label: string;
+  value: string;
+};
+
+export type RpaProcedureInterface = [
+  {
+    reviewDate: string;
+    controller: string;
+    dpo: RpaOption;
+  },
+  {
+    purpose?: string;
+    category: RpaOption[];
+    datasubject: RpaOption[];
+    retentionperiod: RpaOption;
+    specialcategory: RpaOption[];
+    commentsretention?: string;
+  },
+  {
+    recipientType: RpaOption;
+    recipientdetails?: string;
+  },
+  {
+    datatransfer: boolean;
+    recipient: string;
+    country: RpaOption;
+    guarantee: RpaOption[];
+  },
+  {
+    toms: RpaOption[];
+  }
+];

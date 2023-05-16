@@ -31,6 +31,7 @@
     "@atlaskit/popup": "^1.5.5",
     "@atlaskit/section-message": "^6.4.1",
     "@atlaskit/select": "^16.1.5",
+    "@atlaskit/tabs": "^13.4.1",
     "@atlaskit/textarea": "^4.5.6",
     "@atlaskit/textfield": "^5.3.6",
     "@atlaskit/tokens": "^1.2.1",

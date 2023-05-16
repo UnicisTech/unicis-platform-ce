@@ -406,3 +406,11 @@ export const fieldPropsMapping = {
   guarantee: "Type of guarantees",
   toms: "Type of security measures",
 };
+
+export const headers = [
+  "Description/Stakeholders",
+  "Purpose and Categories",
+  "Recipients",
+  "Transfer",
+  "Security Measures/TOMs",
+];

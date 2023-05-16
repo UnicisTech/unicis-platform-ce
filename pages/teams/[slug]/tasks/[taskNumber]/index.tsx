@@ -11,8 +11,8 @@ import useTask from "hooks/useTask";
 import useTeamMembers from "hooks/useTeamMembers";
 import statuses from "data/statuses.json";
 import { Comments } from "@/components/interfaces/Task";
-import { AuditLogs, IssuePanel } from "@/components/interfaces/CSC";
-import { CreateRPA } from "@/components/interfaces/RPA";
+import { AuditLogs, CscPanel } from "@/components/interfaces/CSC";
+import { CreateRPA, RpaPanel } from "@/components/interfaces/RPA";
 
 const TaskById: NextPageWithLayout = () => {
   const [rpaVisible, setRpaVisible] = useState(false)
@@ -44,18 +44,21 @@ const TaskById: NextPageWithLayout = () => {
             {t("create-rpa")}
           </Button>
         </div>
-        <CreateRPA
-          visible={rpaVisible}
-          setVisible={setRpaVisible}
-          task={task}
-          members={members}
-          mutateTask={mutateTask}
-        />
+        {rpaVisible && 
+          <CreateRPA
+            visible={rpaVisible}
+            setVisible={setRpaVisible}
+            task={task}
+            members={members}
+            mutateTask={mutateTask}
+          />
+        }
         <p>title: {task?.title}</p>
         <p>status: {statuses.find(({value}) => task?.status === value)?.label}</p>
         <p>description: {task?.description}</p>
         <p>due date: {task?.duedate}</p>
-        <IssuePanel task={task} mutateTask={mutateTask}/>
+        <CscPanel task={task} mutateTask={mutateTask}/>
+        <RpaPanel task={task} />
         <hr/>
         <AuditLogs task={task}/>
         <Comments task={task} mutateTask={mutateTask}/>
