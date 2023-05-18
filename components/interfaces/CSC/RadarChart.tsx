@@ -59,6 +59,7 @@ const RadarChart = ({
         suggestedMax: 6,
       },
     },
+    maintainAspectRatio: false
   };
   const data = {
     labels: sections.map(({ label }) => label).map((label) => label.split(" ")),
@@ -72,7 +73,7 @@ const RadarChart = ({
       },
     ],
   };
-  return <Radar data={data} options={options} />;
+  return <Radar data={data} options={options}/>;
 };
 
 export default RadarChart;

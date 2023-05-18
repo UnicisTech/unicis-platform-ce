@@ -69,11 +69,12 @@ const PieChart = ({
         text: "Controls",
       },
     },
+    maintainAspectRatio: false
   };
 
   countStatuses(statuses);
 
-  return <Pie data={data} options={options} />;
+  return <Pie data={data} options={options}/>;
 };
 
 export default PieChart;

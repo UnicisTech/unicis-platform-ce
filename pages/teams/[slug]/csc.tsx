@@ -99,9 +99,13 @@ const TeamMembers: NextPageWithLayout<
   return (
     <>
       <h3 className="text-2xl font-bold">{"Cybersecurity Controls Dashboard: "}{team.name}</h3>
-      <div style={{ height: '400px', display: 'flex', justifyContent: 'space-around', marginBottom: '10px' }}>
-        <PieChart statuses={statuses} />
-        <RadarChart statuses={statuses} />
+      <div style={{ height: '400px', width: '100%', display: 'flex', justifyContent: 'space-around', marginBottom: '10px' }}>
+        <div style={{width: '50%'}}>
+          <PieChart statuses={statuses} />
+        </div>
+        <div style={{width: '50%'}}>
+          <RadarChart statuses={statuses} />
+        </div>
       </div>
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <SectionFilter setSectionFilter={setSectionFilter} />
