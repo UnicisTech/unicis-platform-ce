@@ -22,12 +22,14 @@ import { WithoutRing } from "sharedStyles";
 
 import Message from "./Message";
 import { format } from 'date-fns'
-import { config, fieldPropsMapping, headers } from "./config";
+import { config, headers } from "./config";
+import { fieldPropsMapping } from "data/configs/rpa";
+import { RpaOption } from "types";
 
-interface Option {
-  label: string;
-  value: string;
-}
+// interface Option {
+//   label: string;
+//   value: string;
+// }
 
 const CreateRPA = ({
   visible,
@@ -48,6 +50,7 @@ const CreateRPA = ({
   const [stage, setStage] = useState(0);
   const [validationMessage, setValidationMessage] = useState('');
   const [procedure, setProcedure] = useState<any[]>([]);
+  const [prevProcedure, setPrevProcedure] = useState<any[]>([])
 
   const cleanup = useCallback((reset: any) => {
     setProcedure([])
@@ -55,11 +58,18 @@ const CreateRPA = ({
     reset()
   }, [])
 
-  const saveProcedure = useCallback(async (procedure: any[], reset: any) => {
+  const saveProcedure = useCallback(async (procedure: any[], prevProcedure: any[], reset: any) => {
     setIsLoading(true)
-
+    // const taskProperties = task.properties as any
+    // const prevProcedure = taskProperties?.rpa_procedure || []
+    
+    console.log('rpa save in frontent:', {
+      prevProcedure: prevProcedure,
+      nextProcedure: procedure
+    })
     const response = await axios.post<ApiResponse<Task>>(`/api/tasks/${task.id}/rpa`, {
-      procedure
+      prevProcedure: prevProcedure,
+      nextProcedure: procedure,
     });
 
     const { error } = response.data;
@@ -75,7 +85,7 @@ const CreateRPA = ({
     setVisible(false)
 
     cleanup(reset)
-  }, [])
+  }, [prevProcedure])
 
   const validate = useCallback((formData: any) => {
     if (formData.reviewDate != null) {
@@ -102,11 +112,11 @@ const CreateRPA = ({
     }
     if (stage === 4) {
       const procedureToSave = procedure.length === 4 ? [...procedure, formData] : procedure
-      await saveProcedure(procedureToSave, reset)
+      await saveProcedure(procedureToSave, prevProcedure, reset)
     } else {
       setStage(stage + 1);
     }
-  }, [stage, procedure])
+  }, [stage, procedure, prevProcedure])
 
   const backHandler = useCallback(() => {
     if (stage > 0) {
@@ -124,6 +134,7 @@ const CreateRPA = ({
     const taskProperties = task.properties as any
     if (taskProperties?.rpa_procedure) {
       setProcedure(taskProperties.rpa_procedure)
+      setPrevProcedure([...taskProperties.rpa_procedure])
     }
   }, [])
 
@@ -210,7 +221,7 @@ const CreateRPA = ({
                         </Fragment>
                       )}
                     </Field>
-                    <Field<ValueType<Option>>
+                    <Field<ValueType<RpaOption>>
                       name="dpo"
                       label={fieldPropsMapping["dpo"]}
                       defaultValue={procedure[0] && procedure[0].dpo}
@@ -265,7 +276,7 @@ const CreateRPA = ({
                         </Fragment>
                       )}
                     </Field>
-                    <Field<ValueType<Option, true>>
+                    <Field<ValueType<RpaOption, true>>
                       name="category"
                       label={fieldPropsMapping["category"]}
                       defaultValue={procedure[1] && procedure[1].category}
@@ -291,7 +302,7 @@ const CreateRPA = ({
                         </Fragment>
                       )}
                     </Field>
-                    <Field<ValueType<Option, true>>
+                    <Field<ValueType<RpaOption, true>>
                       name="specialcategory"
                       label={fieldPropsMapping["specialcategory"]}
                       defaultValue={procedure[1] && procedure[1].specialcategory}
@@ -317,7 +328,7 @@ const CreateRPA = ({
                         </Fragment>
                       )}
                     </Field>
-                    <Field<ValueType<Option, true>>
+                    <Field<ValueType<RpaOption, true>>
                       name="datasubject"
                       label={fieldPropsMapping["datasubject"]}
                       defaultValue={procedure[1] && procedure[1].datasubject}
@@ -343,7 +354,7 @@ const CreateRPA = ({
                         </Fragment>
                       )}
                     </Field>
-                    <Field<ValueType<Option>>
+                    <Field<ValueType<RpaOption>>
                       name="retentionperiod"
                       label={fieldPropsMapping["retentionperiod"]}
                       defaultValue={procedure[1] && procedure[1].retentionperiod}
@@ -396,7 +407,7 @@ const CreateRPA = ({
                         </span>
                       }
                     />
-                    <Field<ValueType<Option>>
+                    <Field<ValueType<RpaOption>>
                       name="recipientType"
                       label={fieldPropsMapping["recipientType"]}
                       defaultValue={procedure[2] && procedure[2].recipientType}
@@ -473,7 +484,7 @@ const CreateRPA = ({
                         </Fragment>
                       )}
                     </Field>
-                    <Field<ValueType<Option>>
+                    <Field<ValueType<RpaOption>>
                       name="country"
                       label={fieldPropsMapping["country"]}
                       defaultValue={procedure[3] && procedure[3].country}
@@ -499,7 +510,7 @@ const CreateRPA = ({
                         </Fragment>
                       )}
                     </Field>
-                    <Field<ValueType<Option, true>>
+                    <Field<ValueType<RpaOption, true>>
                       name="guarantee"
                       label={fieldPropsMapping["guarantee"]}
                       defaultValue={procedure[3] && procedure[3].guarantee}
@@ -549,7 +560,7 @@ const CreateRPA = ({
                         </span>
                       }
                     />
-                    <Field<ValueType<Option, true>>
+                    <Field<ValueType<RpaOption, true>>
                       name="toms"
                       label={fieldPropsMapping["toms"]}
                       defaultValue={procedure[4] && procedure[4].toms}

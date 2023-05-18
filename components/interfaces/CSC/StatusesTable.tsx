@@ -5,7 +5,7 @@ import StatusHeader from "./StatusHeader";
 import TaskSelector from "./TaskSelector";
 import { controlOptions } from "./config"
 import StatusSelector from "./StatusSelector"
-import type { Option } from "types";
+import type { CscOption } from "types";
 import type { Task } from "@prisma/client";
 
 const head = {
@@ -61,7 +61,7 @@ const StatusesTable = ({
   tasks: Array<Task>;
   statuses: any;
   sectionFilter: null | Array<{label: string, value: string}>;
-  statusFilter: null | Array<Option>;
+  statusFilter: null | Array<CscOption>;
   perPage: number;
   isSaving: boolean;
   statusHandler: (control: string, value: string) => Promise<void>;

@@ -5,4 +5,4 @@ export { default as SectionFilter } from "./SectionFilter";
 export { default as StatusFilter } from "./StatusFilter";
 export { default as PerPageSelector } from "./PerPageSelector";
 export { default as CscPanel } from "./issue_panel/CscPanel";
-export { default as AuditLogs } from "./AuditLogs";
+export { default as CscAuditLogs } from "./CscAuditLogs";

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Select from '@atlaskit/select'
 import { WithoutRing } from 'sharedStyles';
 import type { Task } from "@prisma/client";
-import type { Option } from 'types';
+import type { CscOption } from 'types';
 
 const TaskSelector = ({ 
     tasks, 
@@ -13,8 +13,8 @@ const TaskSelector = ({
     control: string,
     handler: (action: string, dataToRemove: any, control: string) => Promise<void>
 }) => {
-    const [value, setValue] = useState<Option[]>([])
-    const [options, setOptions] = useState<Option[]>([])
+    const [value, setValue] = useState<CscOption[]>([])
+    const [options, setOptions] = useState<CscOption[]>([])
 
     useEffect(() => {
         const options = tasks.map(task => ({ label: task.title, value: task.id }))

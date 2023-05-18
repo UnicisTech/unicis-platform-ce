@@ -48,48 +48,4 @@ export type Option = {
   value: number;
 };
 
-export type AuditLog = {
-  actor: Session["user"];
-  date: number;
-  event: string;
-  diff: {
-    prevValue: string | null;
-    nextValue: string;
-  };
-};
-
 export type TeamMemberWithUser = TeamMember & { user: User };
-
-type RpaOption = {
-  label: string;
-  value: string;
-};
-
-export type RpaProcedureInterface = [
-  {
-    reviewDate: string;
-    controller: string;
-    dpo: RpaOption;
-  },
-  {
-    purpose?: string;
-    category: RpaOption[];
-    datasubject: RpaOption[];
-    retentionperiod: RpaOption;
-    specialcategory: RpaOption[];
-    commentsretention?: string;
-  },
-  {
-    recipientType: RpaOption;
-    recipientdetails?: string;
-  },
-  {
-    datatransfer: boolean;
-    recipient: string;
-    country: RpaOption;
-    guarantee: RpaOption[];
-  },
-  {
-    toms: RpaOption[];
-  }
-];

@@ -24,7 +24,7 @@ export default async function handler(
 
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const { slug } = req.query;
-  const { procedure } = req.body;
+  const { prevProcedure, nextProcedure } = req.body;
 
   const session = await getSession(req, res);
   const user = session?.user as Session["user"];
@@ -47,7 +47,8 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   await saveProcedure({
     user,
     taskId: Number(slug),
-    procedure,
+    prevProcedure,
+    nextProcedure,
   });
 
   return res.status(200).json({ data: {}, error: null });

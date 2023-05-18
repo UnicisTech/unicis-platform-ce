@@ -11,8 +11,8 @@ import useTask from "hooks/useTask";
 import useTeamMembers from "hooks/useTeamMembers";
 import statuses from "data/statuses.json";
 import { Comments } from "@/components/interfaces/Task";
-import { AuditLogs, CscPanel } from "@/components/interfaces/CSC";
-import { CreateRPA, RpaPanel } from "@/components/interfaces/RPA";
+import { CscAuditLogs, CscPanel } from "@/components/interfaces/CSC";
+import { CreateRPA, RpaPanel, RpaAuditLog } from "@/components/interfaces/RPA";
 
 const TaskById: NextPageWithLayout = () => {
   const [rpaVisible, setRpaVisible] = useState(false)
@@ -21,6 +21,8 @@ const TaskById: NextPageWithLayout = () => {
   const { taskNumber, slug } = router.query;
   const {task, isLoading, isError, mutateTask} = useTask(slug as string, taskNumber as string)
   const {members: members, isLoading: isMembersLoading, isError: isMembersError} = useTeamMembers(slug as string)
+
+  console.log('task ->', task)
 
   if (isLoading || isMembersLoading || !task) {
     return <Loading />;
@@ -60,7 +62,8 @@ const TaskById: NextPageWithLayout = () => {
         <CscPanel task={task} mutateTask={mutateTask}/>
         <RpaPanel task={task} />
         <hr/>
-        <AuditLogs task={task}/>
+        <CscAuditLogs task={task}/>
+        <RpaAuditLog task={task}/>
         <Comments task={task} mutateTask={mutateTask}/>
     </>
   );
