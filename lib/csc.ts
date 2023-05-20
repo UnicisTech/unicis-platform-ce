@@ -1,4 +1,3 @@
-import { controls } from "@/components/interfaces/CSC/config";
 import { prisma } from "@/lib/prisma";
 import type { Session } from "next-auth";
 

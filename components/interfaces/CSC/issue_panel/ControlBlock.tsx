@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import Select from '@atlaskit/select'
 import Button, { LoadingButton } from '@atlaskit/button'
 import TrashIcon from '@atlaskit/icon/glyph/trash'
-import TextArea from '@atlaskit/textarea';
-import Textfield from '@atlaskit/textfield';
+import TextArea from '@atlaskit/textarea'
+import Textfield from '@atlaskit/textfield'
 import {WithoutRing} from "sharedStyles"
-import { controlOptions } from '../config'
+import { controlOptions } from 'data/configs/csc'
 
 const ControlBlock = ({ 
   control, 

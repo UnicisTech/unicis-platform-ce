@@ -14,14 +14,15 @@ import {
   PieChart,
   RadarChart,
   SectionFilter,
-  StatusFilter,
-  PerPageSelector
+  StatusFilter
 } from "@/components/interfaces/CSC";
+import { PerPageSelector } from "@/components/ui/atlaskit";
+import { perPageOptions } from "data/configs/csc";
 import useTeamTasks from "hooks/useTeamTasks";
 import { getCscStatusesBySlug } from "models/team";
 import type { Option } from "types";
 
-const TeamMembers: NextPageWithLayout<
+const CscDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ 
   csc_statuses 
@@ -110,7 +111,15 @@ const TeamMembers: NextPageWithLayout<
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <SectionFilter setSectionFilter={setSectionFilter} />
         <StatusFilter setStatusFilter={setStatusFilter} />
-        <PerPageSelector setPerPage={setPerPage} />
+        <PerPageSelector 
+          setPerPage={setPerPage}
+          options={perPageOptions}
+          placeholder="Controls per page"
+          defaultValue={{
+            label: "10",
+            value: 10,
+          }}
+        />
       </div>
       <StatusesTable
         tasks={tasks}
@@ -140,4 +149,4 @@ export const getServerSideProps = async (
   };
 };
 
-export default TeamMembers;
+export default CscDashboard;

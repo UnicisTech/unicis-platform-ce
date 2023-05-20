@@ -1,4 +1,5 @@
-import json from "../../../data/MVPS-controls.json";
+//import json from "../../../data/MVPS-controls.json";
+import json from "../MVPS-controls.json";
 
 const controls = json["MVPS-Controls"];
 

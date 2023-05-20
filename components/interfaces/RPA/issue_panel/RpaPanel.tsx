@@ -1,7 +1,7 @@
 import React from 'react'
 import Tabs, { Tab, TabList, TabPanel } from '@atlaskit/tabs';
 import { IssuePanelContainer } from 'sharedStyles';
-import { headers, fieldPropsMapping } from '../config';
+import { headers, fieldPropsMapping } from 'data/configs/rpa';
 import Field from './Field';
 import type { Task } from "@prisma/client";
 import { RpaProcedureInterface } from 'types';

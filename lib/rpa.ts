@@ -1,9 +1,46 @@
-import { controls } from "@/components/interfaces/CSC/config";
 import { prisma } from "@/lib/prisma";
 import type { Session } from "next-auth";
 import { RpaProcedureInterface, RpaOption } from "types";
 import { config, fieldPropsMapping } from "data/configs/rpa";
 import { RpaConfig } from "types";
+
+export const deleteProcedure = async (params: {
+  user: Session["user"];
+  taskId: number;
+  prevProcedure: RpaProcedureInterface | [];
+  nextProcedure: RpaProcedureInterface | [];
+}) => {
+  const { taskId, user, prevProcedure, nextProcedure } = params;
+  const task = await prisma.task.findUnique({
+    where: {
+      id: taskId,
+    },
+    select: {
+      properties: true,
+    },
+  });
+  const taskProperties = task?.properties as any;
+  delete taskProperties.rpa_procedure;
+
+  await prisma.task.update({
+    where: {
+      id: taskId,
+    },
+    data: {
+      properties: {
+        ...taskProperties,
+      },
+    },
+  });
+
+  await addAuditLogs({
+    taskId,
+    taskProperties,
+    user,
+    prevProcedure,
+    nextProcedure,
+  });
+};
 
 export const saveProcedure = async (params: {
   user: Session["user"];
@@ -12,7 +49,6 @@ export const saveProcedure = async (params: {
   nextProcedure: RpaProcedureInterface | [];
 }) => {
   const { user, taskId, prevProcedure, nextProcedure } = params;
-  //console.log('rpa save:', {prevProcedure, nextProcedure})
   const task = await prisma.task.findUnique({
     where: {
       id: taskId,
@@ -36,8 +72,6 @@ export const saveProcedure = async (params: {
     },
   });
 
-  console.log("saveProcudure finishied in lib");
-
   await addAuditLogs({
     taskId,
     taskProperties,
@@ -45,8 +79,6 @@ export const saveProcedure = async (params: {
     prevProcedure,
     nextProcedure,
   });
-
-  console.log("after addAuditLogs");
 };
 
 export const addAuditLogs = async (params: {
@@ -73,8 +105,6 @@ export const addAuditLogs = async (params: {
     );
   }
 
-  console.log("newAuditItems -->", newAuditItems);
-
   let rpa_audit_logs = taskProperties?.rpa_audit_logs;
 
   if (typeof rpa_audit_logs === "undefined") {
@@ -96,24 +126,6 @@ export const addAuditLogs = async (params: {
     },
   });
 };
-
-// export const addAuditLog = async (issueKey, userId, prevProcedure, nextProcedure) => {
-//   const auditLog = await getAuditLog(issueKey);
-//   const newAuditItems = [];
-
-//   if (prevProcedure.length === 0 && nextProcedure.length !== 0) {
-//     newAuditItems.push(generateChangeLog(userId, "created", null));
-//   } else if(nextProcedure.length === 0)  {
-//     newAuditItems.push(generateChangeLog(userId, "deleted", null));
-//   } else {
-//     const diff = prevProcedure.length === 0 ? null : getDiff(prevProcedure, nextProcedure);
-//     newAuditItems.push(...diff.map(changeLog => {
-//       return generateChangeLog(userId, "updated", changeLog);
-//     }));
-//   }
-
-//   await properties.onJiraIssue(issueKey).set(prefix + "auditLog", [...auditLog, ...newAuditItems]);
-// }
 
 export const addAuditLog = async (params: {
   taskId: number;
@@ -184,7 +196,6 @@ export const getDiff = (o1: any, o2: any) => {
       let prevValue, nextValue;
       if (config[key as keyof RpaConfig] != null) {
         if (Array.isArray(prev[key]) || Array.isArray(next[key])) {
-          //console.log('1?', key)
           prevValue = prev[key].map(
             ({ value }: RpaOption) =>
               config[key as keyof RpaConfig]?.find(
@@ -198,7 +209,6 @@ export const getDiff = (o1: any, o2: any) => {
               )?.label
           );
         } else {
-          //console.log('2?', key)
           prevValue = config[key as keyof RpaConfig]?.find(
             (option) => option.value === prev[key]?.value
           )?.label;
@@ -207,7 +217,6 @@ export const getDiff = (o1: any, o2: any) => {
           )?.label;
         }
       } else {
-        //console.log('3?')
         prevValue = prev[key];
         nextValue = next[key];
       }

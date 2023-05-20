@@ -22,8 +22,6 @@ const TaskById: NextPageWithLayout = () => {
   const {task, isLoading, isError, mutateTask} = useTask(slug as string, taskNumber as string)
   const {members: members, isLoading: isMembersLoading, isError: isMembersError} = useTeamMembers(slug as string)
 
-  console.log('task ->', task)
-
   if (isLoading || isMembersLoading || !task) {
     return <Loading />;
   }
@@ -52,7 +50,7 @@ const TaskById: NextPageWithLayout = () => {
             setVisible={setRpaVisible}
             task={task}
             members={members}
-            mutateTask={mutateTask}
+            mutate={mutateTask}
           />
         }
         <p>title: {task?.title}</p>

@@ -3,7 +3,7 @@ import DynamicTable from '@atlaskit/dynamic-table';
 import { v4 as uuidv4 } from 'uuid';
 import StatusHeader from "./StatusHeader";
 import TaskSelector from "./TaskSelector";
-import { controlOptions } from "./config"
+import { controlOptions } from "data/configs/csc";
 import StatusSelector from "./StatusSelector"
 import type { CscOption } from "types";
 import type { Task } from "@prisma/client";

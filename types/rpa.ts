@@ -1,4 +1,5 @@
 import type { Session } from "next-auth";
+import type { Task } from "@prisma/client";
 
 export type RpaOption = {
   label: string;
@@ -53,4 +54,10 @@ export type RpaAuditLog = {
     prevValue: string | string[] | undefined;
     nextValue: string | string[];
   } | null;
+};
+
+export type TaskWithRpaProcedure = Task & {
+  properties: {
+    rpa_procedure: RpaProcedureInterface;
+  };
 };

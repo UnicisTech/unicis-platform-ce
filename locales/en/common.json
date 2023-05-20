@@ -100,5 +100,7 @@
   "title": "Title",
   "status": "Status",
   "save": "Save",
-  "next": "Next"
+  "next": "Next",
+  "delete": "Delete",
+  "back": "Back"
 }

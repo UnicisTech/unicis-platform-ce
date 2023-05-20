@@ -3,7 +3,6 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { Modal } from "react-daisyui";
 import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
 import { DatePicker } from '@atlaskit/datetime-picker'
 import TextField from '@atlaskit/textfield';
 import TextArea from '@atlaskit/textarea';
@@ -11,38 +10,30 @@ import Select, {
   ValueType,
 } from '@atlaskit/select';
 import { Checkbox } from '@atlaskit/checkbox';
-
-import type { ApiResponse, TeamMemberWithUser } from "types";
-import type { Task } from "@prisma/client";
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
-
-
 import Form, { ErrorMessage, Field, CheckboxField, FormFooter, HelperMessage } from '@atlaskit/form';
+
+import type { ApiResponse, TeamMemberWithUser, TaskWithRpaProcedure, RpaOption } from "types";
+import type { Task } from "@prisma/client";
+
 import { WithoutRing } from "sharedStyles";
 
 import Message from "./Message";
 import { format } from 'date-fns'
-import { config, headers } from "./config";
-import { fieldPropsMapping } from "data/configs/rpa";
-import { RpaOption } from "types";
-
-// interface Option {
-//   label: string;
-//   value: string;
-// }
+import { config, headers, fieldPropsMapping } from "data/configs/rpa";
 
 const CreateRPA = ({
   visible,
   setVisible,
   task,
   members,
-  mutateTask
+  mutate
 }: {
   visible: boolean;
   setVisible: (visible: boolean) => void;
-  task: Task;
+  task: Task | TaskWithRpaProcedure;
   members: TeamMemberWithUser[] | null | undefined;
-  mutateTask: () => Promise<void>
+  mutate: () => Promise<void>
 }) => {
   const { t } = useTranslation("common");
 
@@ -60,13 +51,7 @@ const CreateRPA = ({
 
   const saveProcedure = useCallback(async (procedure: any[], prevProcedure: any[], reset: any) => {
     setIsLoading(true)
-    // const taskProperties = task.properties as any
-    // const prevProcedure = taskProperties?.rpa_procedure || []
-    
-    console.log('rpa save in frontent:', {
-      prevProcedure: prevProcedure,
-      nextProcedure: procedure
-    })
+
     const response = await axios.post<ApiResponse<Task>>(`/api/tasks/${task.id}/rpa`, {
       prevProcedure: prevProcedure,
       nextProcedure: procedure,
@@ -79,7 +64,7 @@ const CreateRPA = ({
       return;
     }
 
-    mutateTask()
+    mutate()
 
     setIsLoading(false)
     setVisible(false)
@@ -609,7 +594,7 @@ const CreateRPA = ({
                 onClick={backHandler}
                 isDisabled={stage === 0 || isLoading}
               >
-                Back
+                {t("back")}
               </AtlaskitButton>
               <LoadingButton
                 type="submit"
