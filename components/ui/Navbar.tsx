@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [navbar, setNavbar] = useState(false);
@@ -49,7 +50,15 @@ export default function Navbar() {
               href=""
               className="flex items-center text-xl font-bold lg:ml-2.5"
             >
-              <span className="self-center whitespace-nowrap">Unicis.App</span>
+              <span className="self-center whitespace-nowrap">
+                <Image 
+                  src="/unicisapp-horizontal.svg"
+                  alt="Unicis.App"
+                   width={150}
+                   height={50}
+                  />
+
+                </span>
             </a>
             <form action="#" method="GET" className="hidden lg:block lg:pl-32">
               <label htmlFor="topbar-search" className="sr-only">

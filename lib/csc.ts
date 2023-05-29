@@ -1,0 +1,183 @@
+import { prisma } from "@/lib/prisma";
+import type { Session } from "next-auth";
+
+export const addControlsToIssue = async (params: {
+  user: Session["user"];
+  taskId: number;
+  controls: string[];
+}) => {
+  const { taskId, controls, user } = params;
+  const task = await prisma.task.findUnique({
+    where: {
+      id: taskId,
+    },
+    select: {
+      properties: true,
+    },
+  });
+
+  const taskProperties = task?.properties as any;
+  let csc_controls = taskProperties?.csc_controls;
+
+  if (typeof csc_controls === "undefined") {
+    csc_controls = [...controls];
+  } else {
+    csc_controls = [...csc_controls, ...controls];
+  }
+  taskProperties.csc_controls = csc_controls;
+
+  await prisma.task.update({
+    where: {
+      id: taskId,
+    },
+    data: {
+      properties: {
+        ...taskProperties,
+      },
+    },
+  });
+  for (const control of controls) {
+    await addAuditLog({
+      taskId,
+      user,
+      event: "added",
+      prevValue: null,
+      nextValue: control,
+      taskProperties,
+    });
+  }
+};
+
+export const removeControlsFromIssue = async (params: {
+  user: Session["user"];
+  taskId: number;
+  controls: string[];
+}) => {
+  const { taskId, controls, user } = params;
+  const task = await prisma.task.findUnique({
+    where: {
+      id: taskId,
+    },
+    select: {
+      properties: true,
+    },
+  });
+
+  const taskProperties = task?.properties as any;
+  const csc_controls = taskProperties?.csc_controls as Array<string>;
+  const new_csc_controls = csc_controls.filter(
+    (item) => !controls.includes(item)
+  );
+  taskProperties.csc_controls = new_csc_controls;
+
+  await prisma.task.update({
+    where: {
+      id: taskId,
+    },
+    data: {
+      properties: {
+        ...taskProperties,
+      },
+    },
+  });
+  for (const control of controls) {
+    await addAuditLog({
+      taskId,
+      user,
+      event: "removed",
+      prevValue: null,
+      nextValue: control,
+      taskProperties,
+    });
+  }
+};
+
+export const changeControlInIssue = async (params: {
+  user: Session["user"];
+  taskId: number;
+  controls: string[];
+}) => {
+  const { taskId, controls, user } = params;
+  const [oldControl, newControl] = controls;
+  const task = await prisma.task.findUnique({
+    where: {
+      id: taskId,
+    },
+    select: {
+      properties: true,
+    },
+  });
+  const taskProperties = task?.properties as any;
+  const csc_controls = taskProperties?.csc_controls as Array<string>;
+
+  const new_csc_controls = csc_controls.map((control) => {
+    if (control === oldControl) {
+      return newControl;
+    } else {
+      return control;
+    }
+  });
+
+  taskProperties.csc_controls = new_csc_controls;
+
+  await prisma.task.update({
+    where: {
+      id: taskId,
+    },
+    data: {
+      properties: {
+        ...taskProperties,
+      },
+    },
+  });
+  await addAuditLog({
+    taskId,
+    user,
+    event: "changed",
+    prevValue: oldControl,
+    nextValue: newControl,
+    taskProperties,
+  });
+};
+
+export const addAuditLog = async (params: {
+  taskId: number;
+  user: Session["user"];
+  event: string;
+  prevValue: string | null;
+  nextValue: string;
+  taskProperties: any;
+}) => {
+  const { taskId, user, event, prevValue, nextValue, taskProperties } = params;
+
+  const auditLog = {
+    actor: user,
+    date: new Date().getTime(),
+    event: event,
+    diff: {
+      prevValue: prevValue,
+      nextValue: nextValue,
+    },
+  };
+
+  let csc_audit_logs = taskProperties?.csc_audit_logs;
+
+  if (typeof csc_audit_logs === "undefined") {
+    csc_audit_logs = [auditLog];
+  } else {
+    csc_audit_logs = [...csc_audit_logs, auditLog];
+  }
+
+  taskProperties.csc_audit_logs = csc_audit_logs;
+
+  await prisma.task.update({
+    where: {
+      id: taskId,
+    },
+    data: {
+      properties: {
+        ...taskProperties,
+      },
+    },
+  });
+};

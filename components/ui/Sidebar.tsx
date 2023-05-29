@@ -35,6 +35,7 @@ export default function Sidebar() {
   const slug = router.query.slug as string;
 
   const { team } = useTeam(slug);
+  const activeTab = router.route.split("[slug]/")[1];
 
   return (
     <>
@@ -72,128 +73,136 @@ export default function Sidebar() {
                     </div>
                   </form>
                 </li>
-
-                <li>
-                  <NavItem
-                    href="/dashboard"
-                    text="Dashboard"
-                    icon={HomeIcon}
-                    active={router.pathname === "/dashboard"}
-                  />
-                </li>
-                <li className="menu-title">
-                  <span>Privacy</span>
-                </li>
+                {team && (
+                  <>
+                    <div className="space-y-2 pt-2">
+                      <NavItem
+                        href="javascript:void(0);"
+                        text={team.name}
+                        icon={BuildingOffice2Icon}
+                        active={false}
+                      />
+                    </div>
                     <li>
                       <NavItem
-                        href="/rpa"
+                        href={`/teams/${slug}/dashboard`}
+                        text="Dashboard"
+                        icon={HomeIcon}
+                        active={activeTab === "dashboard"}
+                      />
+                      <NavItem
+                        href={`/teams/${slug}/tasks`}
+                        text="Task Manager"
+                        icon={QueueListIcon}
+                        active={activeTab === "tasks"}
+                      />
+                    </li>
+                    <li className="menu-title">
+                      <span>Privacy</span>
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/rpa`}
                         text="Record of Processing Activities"
                         icon={ClipboardDocumentCheckIcon}
-                        active={router.pathname === "/rpa"}
+                        active={activeTab === "rpa"}
                       />
                     </li>
                     <li>
                       <NavItem
-                        href="/tia"
+                        href={`/teams/${slug}/tia`}
                         text="Transfer Impact Assessment"
                         icon={ArrowUpOnSquareIcon}
-                        active={router.pathname === "/tia"}
+                        active={activeTab === "tia"}
                       />
                     </li>
                     <li>
                       <NavItem
-                        href="/dpia"
+                        href={`/teams/${slug}/dpia`}
                         text="Data Protection Impact Assessment"
                         icon={DocumentMagnifyingGlassIcon}
-                        active={router.pathname === "/privacy"}
+                        active={activeTab === "privacy"}
                       />
                     </li>
                     <li>
                       <NavItem
-                        href="/pqc"
+                        href={`/teams/${slug}/saq`}
                         text="Self Assessment Questionnaire"
                         icon={QuestionMarkCircleIcon}
-                        active={router.pathname === "/saq"}
+                        active={activeTab === "saq"}
                       />
                     </li>
-                
-                <li className="menu-title">
-                  <span>Cybersecurity</span>
-                </li>
-                <li>
-                  <NavItem
-                    href="/security"
-                    text="Cybersecurity Management System"
-                    icon={LockClosedIcon}
-                    active={router.pathname === "/security"}
-                  />
-                </li>
-                <li>
-                  <NavItem
-                    href="/security"
-                    text="Gap Analysis"
-                    icon={ShieldExclamationIcon}
-                    active={router.pathname === "/security"}
-                  />
-                </li>
-                <li>
-                  <NavItem
-                    href="/security"
-                    text="Vendor Assessment Questionnaire"
-                    icon={CheckBadgeIcon}
-                    active={router.pathname === "/security"}
-                  />
-                </li>
-                <li className="menu-title">
-                  <span>Compliance</span>
-                </li>
-                <li>
-                  <NavItem
-                    href="/compliance"
-                    text="Benchmark Report"
-                    icon={ShieldCheckIcon}
-                    active={router.pathname === "/compliance"}
-                  />
-                </li>
-                <li>
-                  <NavItem
-                    href="/compliance"
-                    text="Interactive Awareness Training"
-                    icon={AcademicCapIcon}
-                    active={router.pathname === "/compliance"}
-                  />
-                </li>
-                <li>
-                  <NavItem
-                    href="/compliance"
-                    text="Vendor Report"
-                    icon={BuildingStorefrontIcon}
-                    active={router.pathname === "/compliance"}
-                  />
-                </li>
+                    <li className="menu-title">
+                      <span>Cybersecurity</span>
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/csc`}
+                        text="Cybersecurity Management System"
+                        icon={LockClosedIcon}
+                        active={activeTab === "csc"}
+                      />
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/security`}
+                        text="Gap Analysis"
+                        icon={ShieldExclamationIcon}
+                        active={activeTab === "security"}
+                      />
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/vaq`}
+                        text="Vendor Assessment Questionnaire"
+                        icon={CheckBadgeIcon}
+                        active={activeTab === "vaq"}
+                      />
+                    </li>
+                    <li className="menu-title">
+                      <span>Compliance</span>
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/compliance`}
+                        text="Benchmark Report"
+                        icon={ShieldCheckIcon}
+                        active={activeTab === "compliance"}
+                      />
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/iat`}
+                        text="Interactive Awareness Training"
+                        icon={AcademicCapIcon}
+                        active={activeTab === "iat"}
+                      />
+                    </li>
+                    <li>
+                      <NavItem
+                        href={`/teams/${slug}/compliance`}
+                        text="Vendor Report"
+                        icon={BuildingStorefrontIcon}
+                        active={activeTab === "compliance"}
+                      />
+                    </li>
+                  </>
+                )}
               </ul>
 
-               
-              <div className="space-y-2 pt-2">
-                <NavItem
-                    href="/teams"
-                    text="Teams"
-                    icon={UsersIcon}
-                    active={router.pathname === "/teams"}
-                  />
-              
               {team && (
-                <div className="space-y-2 pt-2">
-                  <NavItem
-                    href="javascript:void(0);"
-                    text={team.name}
-                    icon={BuildingOffice2Icon}
-                    active={false}
-                  />
+                <ul>
                   <TeamNav slug={slug} />
-                </div>
+                </ul>
               )}
 
+              <div className="space-y-2 pt-2">
+                <NavItem
+                  href="/teams"
+                  text="Teams"
+                  icon={UsersIcon}
+                  active={router.pathname === "/teams"}
+                />
                 <NavItem
                   href="/account"
                   text="Account"

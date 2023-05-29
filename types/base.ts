@@ -1,4 +1,5 @@
-import type { Prisma } from "@prisma/client";
+import type { Prisma, TeamMember, User } from "@prisma/client";
+import type { Session } from "next-auth";
 
 export type ApiError = {
   code?: string;
@@ -26,8 +27,25 @@ export type TeamWithMemberCount = Prisma.TeamGetPayload<{
   };
 }>;
 
+export type TaskWithComments = Prisma.TaskGetPayload<{
+  include: {
+    comments: {
+      include: {
+        createdBy: true;
+      };
+    };
+  };
+}>;
+
 export type WebookFormSchema = {
   name: string;
   url: string;
   eventTypes: string[];
 };
+
+export type Option = {
+  label: string;
+  value: number;
+};
+
+export type TeamMemberWithUser = TeamMember & { user: User };
