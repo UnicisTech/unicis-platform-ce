@@ -1,14 +1,14 @@
+import { sendAudit } from "@/lib/retraced";
+import { getSession } from "@/lib/session";
+import {
+  createWebhook,
+  deleteWebhook,
+  findOrCreateApp,
+  listWebhooks,
+} from "@/lib/svix";
+import { getTeam, isTeamMember } from "models/team";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { EndpointIn } from "svix";
-
-import { getSession } from "@/lib/session";
-import { getTeam, isTeamMember } from "models/team";
-import {
-  findOrCreateApp,
-  createWebhook,
-  listWebhooks,
-  deleteWebhook,
-} from "@/lib/svix";
 
 export default async function handler(
   req: NextApiRequest,
@@ -38,11 +38,16 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const { name, url, eventTypes } = req.body;
 
   const session = await getSession(req, res);
-  const userId = session?.user?.id as string;
+
+  if (!session) {
+    return res.status(401).json({
+      error: { message: "Unauthorized." },
+    });
+  }
 
   const team = await getTeam({ slug });
 
-  if (!(await isTeamMember(userId, team?.id))) {
+  if (!(await isTeamMember(session.user.id, team?.id))) {
     return res.status(200).json({
       data: null,
       error: { message: "Bad request." },
@@ -64,6 +69,13 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const endpoint = await createWebhook(app.id, data);
+
+  sendAudit({
+    action: "webhook.create",
+    crud: "c",
+    user: session.user,
+    team,
+  });
 
   return res.status(200).json({ data: endpoint, error: null });
 };
@@ -97,11 +109,16 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
   const { webhookId } = req.body;
 
   const session = await getSession(req, res);
-  const userId = session?.user?.id as string;
+
+  if (!session) {
+    return res.status(401).json({
+      error: { message: "Unauthorized." },
+    });
+  }
 
   const team = await getTeam({ slug });
 
-  if (!(await isTeamMember(userId, team?.id))) {
+  if (!(await isTeamMember(session.user.id, team?.id))) {
     return res.status(200).json({
       data: null,
       error: { message: "Bad request." },
@@ -118,6 +135,13 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   await deleteWebhook(app.id, webhookId);
+
+  sendAudit({
+    action: "webhook.delete",
+    crud: "d",
+    user: session.user,
+    team,
+  });
 
   return res.status(200).json({ data: {}, error: null });
 };

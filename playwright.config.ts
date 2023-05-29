@@ -1,4 +1,5 @@
-import { devices, PlaywrightTestConfig } from "@playwright/test";
+import { PlaywrightTestConfig, devices } from "@playwright/test";
+
 const config: PlaywrightTestConfig = {
   projects: [
     {

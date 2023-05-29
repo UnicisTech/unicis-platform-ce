@@ -1,19 +1,18 @@
-import NextAuth, { NextAuthOptions, Account, User } from "next-auth";
+import { hashPassword, verifyPassword } from "@/lib/auth";
+import { createRandomString } from "@/lib/common";
+import env from "@/lib/env";
+import jackson from "@/lib/jackson";
+import { prisma } from "@/lib/prisma";
+import type { OAuthTokenReq } from "@boxyhq/saml-jackson";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { getAccount } from "models/account";
+import { addTeamMember, getTeam } from "models/team";
+import { createUser, getUser } from "models/user";
+import NextAuth, { Account, NextAuthOptions, User } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import CredentialsProvider from "next-auth/providers/credentials";
-import type { OAuthTokenReq } from "@boxyhq/saml-jackson";
-
-import { prisma } from "@/lib/prisma";
-import env from "@/lib/env";
-import jackson from "@/lib/jackson";
-import { createUser, getUser } from "models/user";
-import { addTeamMember, getTeam } from "models/team";
-import { hashPassword, verifyPassword } from "@/lib/auth";
-import { createRandomString } from "@/lib/common";
-import { getAccount } from "models/account";
 
 const adapter = PrismaAdapter(prisma);
 
@@ -58,10 +57,14 @@ export const authOptions: NextAuthOptions = {
       id: "saml-sso",
       credentials: {
         code: { type: "text" },
-        state: { type: "state" },
+        state: { type: "text" },
       },
       async authorize(credentials) {
         const code = credentials?.code;
+
+        if (!code) {
+          throw new Error("No code found.");
+        }
 
         const { oauthController } = await jackson();
 
@@ -73,7 +76,6 @@ export const authOptions: NextAuthOptions = {
         } as OAuthTokenReq);
 
         const profile = await oauthController.userInfo(access_token);
-
         let user = await getUser({ email: profile.email });
 
         if (user === null) {
@@ -127,15 +129,23 @@ export const authOptions: NextAuthOptions = {
   secret: env.nextAuth.secret,
   callbacks: {
     async signIn({ user, account, profile }) {
+      if (
+        account?.provider === "email" ||
+        account?.provider === "credentials" ||
+        account?.provider === "saml-sso"
+      ) {
+        return true;
+      }
+
+      if (account?.provider != "github" && account?.provider != "google") {
+        return false;
+      }
+
       if (!user.email) {
         return false;
       }
 
-      if (account.provider === "email" || account.provider === "credentials") {
-        return true;
-      }
-
-      if (account.provider != "github" && account.provider != "google") {
+      if (!user.email) {
         return false;
       }
 
@@ -146,8 +156,8 @@ export const authOptions: NextAuthOptions = {
       if (!existingUser) {
         // Create user account if it doesn't exist
         const newUser = await createUser({
-          name: `${profile.name}`,
-          email: `${profile.email}`,
+          name: `${profile?.name}`,
+          email: `${profile?.email}`,
         });
 
         await linkAccount(newUser, account);

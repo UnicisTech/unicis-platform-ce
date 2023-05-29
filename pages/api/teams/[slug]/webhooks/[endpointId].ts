@@ -1,9 +1,9 @@
+import { sendAudit } from "@/lib/retraced";
+import { getSession } from "@/lib/session";
+import { findOrCreateApp, findWebhook, updateWebhook } from "@/lib/svix";
+import { getTeam, isTeamMember } from "models/team";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { EndpointIn } from "svix";
-
-import { getSession } from "@/lib/session";
-import { getTeam, isTeamMember } from "models/team";
-import { findOrCreateApp, updateWebhook, findWebhook } from "@/lib/svix";
 
 export default async function handler(
   req: NextApiRequest,
@@ -54,11 +54,16 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const { name, url, eventTypes } = req.body;
 
   const session = await getSession(req, res);
-  const userId = session?.user?.id as string;
+
+  if (!session) {
+    return res.status(401).json({
+      error: { message: "Unauthorized." },
+    });
+  }
 
   const team = await getTeam({ slug: slug as string });
 
-  if (!(await isTeamMember(userId, team?.id))) {
+  if (!(await isTeamMember(session.user.id, team?.id))) {
     return res.status(200).json({
       data: null,
       error: { message: "Bad request." },
@@ -78,6 +83,13 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const webhook = await updateWebhook(app.id, endpointId as string, data);
+
+  sendAudit({
+    action: "webhook.update",
+    crud: "u",
+    user: session.user,
+    team,
+  });
 
   return res.status(200).json({ data: webhook, error: null });
 };

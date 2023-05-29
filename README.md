@@ -1,5 +1,9 @@
 # Enterprise SaaS Starter Kit
 
+#### Here's what you get out of the box, see images below 👇👇👇
+
+![saas-starter-kit-poster](/public/saas-starter-kit-poster.png)
+
 :warning: **This repository is still in an early stage of development.**
 
 <p>
@@ -11,6 +15,10 @@
 </p>
 
 The Open Source Next.js SaaS boilerplate for Enterprise SaaS app development.
+
+## Additional Resources
+
+Video - [Live Discord Community Call Demo: Build a SaaS Application with BoxyHQ's SaaS Starter Kit](https://www.youtube.com/watch?v=oxbEHmhTYQo) <br> Blog - [Enterprise-ready Saas Starter Kit](https://boxyhq.com/blog/enterprise-ready-saas-starter-kit)
 
 Next.js based SaaS starter kit that saves you months of development by starting you off with all the features that are the same in every product, so you can focus on what makes your app unique.
 
@@ -24,6 +32,7 @@ Next.js based SaaS starter kit that saves you months of development by starting 
 - [TypeScript](https://www.typescriptlang.org)
 - [SAML Jackson](https://github.com/boxyhq/jackson) (Provides SAML SSO, Directory Sync)
 - [Svix](https://www.svix.com/) (Provides Webhook Orchestration)
+- [Retraced](https://github.com/retracedhq/retraced) (Provides Audit Logs Service)
 
 ## Deployment
 
@@ -51,8 +60,6 @@ Please follow these simple steps to get a local copy up and running.
 - Docker compose
 
 ### Development
-
-Please follow these simple steps to get a local copy up and running.
 
 #### 1. Setup
 
@@ -148,27 +155,34 @@ _Note: HTML test report is generated inside the `report` folder. Currently supor
 - Update team settings
 - Webhooks & Events
 - Internationalization
+- Audit logs
 
 ## Coming Soon
 
-- Audit logs
+- Billing & subscriptions
+- Roles and Permissions
 - Unit and integration tests
 - Dark mode
 - Mobile-first UI
-- Billing & subscriptions
-- Roles and Permissions
 
 ## Contributing
 
-Contributions make the open-source community a fantastic place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+Thanks for taking the time to contribute! Contributions make the open-source community a fantastic place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+
+Please try to create bug reports that are:
+
+- _Reproducible._ Include steps to reproduce the problem.
+- _Specific._ Include as much detail as possible: which version, what environment, etc.
+- _Unique._ Do not duplicate existing opened issues.
+- _Scoped to a Single Bug._ One bug per report.
 
 [Contributing Guide](https://github.com/boxyhq/saas-starter-kit/blob/main/CONTRIBUTING.md)
 
 ## Community
 
-- [Discord](https://discord.gg/uyb7pYt4Pa) (For live discussion with the Community and BoxyHQ team)
-- [GitHub](https://github.com/boxyhq/saas-starter-kit/issues) (Bug reports, Contributions)
-- [Twitter](https://twitter.com/BoxyHQ) (Get the news fast)
+- [Discord](https://discord.gg/uyb7pYt4Pa) (For live discussion with the Open-Source Community and BoxyHQ team)
+- [Twitter](https://twitter.com/BoxyHQ) (Follow us)
+- [GitHub Issues](https://github.com/boxyhq/saas-starter-kit/issues) (Contributions, report issues and product ideas)
 
 ## License
 

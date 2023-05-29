@@ -1,6 +1,5 @@
-import type { Session } from "next-auth";
-
 import { prisma } from "@/lib/prisma";
+import type { Session } from "next-auth";
 
 export const createUser = async (param: {
   name: string;

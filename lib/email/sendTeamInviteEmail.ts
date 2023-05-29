@@ -1,6 +1,6 @@
-import { Invitation, Team } from "@prisma/client";
-import { sendEmail } from "./sendEmail";
 import env from "../env";
+import { sendEmail } from "./sendEmail";
+import { Invitation, Team } from "@prisma/client";
 
 export const sendTeamInviteEmail = async (
   team: Team,

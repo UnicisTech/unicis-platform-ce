@@ -1,15 +1,16 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-
+import { sendTeamInviteEmail } from "@/lib/email/sendTeamInviteEmail";
+import { prisma } from "@/lib/prisma";
+import { sendAudit } from "@/lib/retraced";
 import { getSession } from "@/lib/session";
+import { sendEvent } from "@/lib/svix";
 import {
   createInvitation,
-  getInvitations,
-  getInvitation,
   deleteInvitation,
+  getInvitation,
+  getInvitations,
 } from "models/invitation";
-import { addTeamMember, getTeam, isTeamMember } from "models/team";
-import { sendTeamInviteEmail } from "@/lib/email/sendTeamInviteEmail";
-import { sendEvent } from "@/lib/svix";
+import { addTeamMember, getTeam, isTeamAdmin } from "models/team";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,17 +20,16 @@ export default async function handler(
 
   switch (method) {
     case "GET":
-      return handleGET(req, res);
+      return await handleGET(req, res);
     case "POST":
-      return handlePOST(req, res);
+      return await handlePOST(req, res);
     case "PUT":
-      return handlePUT(req, res);
+      return await handlePUT(req, res);
     case "DELETE":
-      return handleDELETE(req, res);
+      return await handleDELETE(req, res);
     default:
-      res.setHeader("Allow", ["POST", "PUT", "GET", "DELETE"]);
+      res.setHeader("Allow", "GET, POST, PUT, DELETE");
       res.status(405).json({
-        data: null,
         error: { message: `Method ${method} Not Allowed` },
       });
   }
@@ -38,23 +38,40 @@ export default async function handler(
 // Invite a user to an team
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, role } = req.body;
-  const { slug } = req.query;
+  const { slug } = req.query as { slug: string };
 
   const session = await getSession(req, res);
-  const userId = session?.user?.id as string;
 
-  const team = await getTeam({ slug: slug as string });
+  if (!session) {
+    return res.status(401).json({
+      error: { message: "Unauthorized." },
+    });
+  }
 
-  if (!(await isTeamMember(userId, team?.id))) {
+  const team = await getTeam({ slug });
+
+  if (!(await isTeamAdmin(session.user.id, team.id))) {
     return res.status(400).json({
-      data: null,
       error: { message: "Bad request." },
+    });
+  }
+
+  const invitationExists = await prisma.invitation.findFirst({
+    where: {
+      email,
+      teamId: team.id,
+    },
+  });
+
+  if (invitationExists) {
+    return res.status(400).json({
+      error: { message: "An invitation already exists for this email." },
     });
   }
 
   const invitation = await createInvitation({
     teamId: team.id,
-    invitedBy: userId,
+    invitedBy: session.user.id,
     email,
     role,
   });
@@ -63,52 +80,66 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   await sendTeamInviteEmail(team, invitation);
 
-  return res.status(200).json({ data: invitation, error: null });
+  sendAudit({
+    action: "member.invitation.create",
+    crud: "c",
+    user: session.user,
+    team,
+  });
+
+  return res.status(200).json({ data: invitation });
 };
 
 // Get all invitations for an organization
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { slug } = req.query;
+  const { slug } = req.query as { slug: string };
 
   const session = await getSession(req, res);
-  const userId = session?.user?.id as string;
 
-  const team = await getTeam({ slug: slug as string });
+  if (!session) {
+    return res.status(401).json({
+      error: { message: "Unauthorized." },
+    });
+  }
 
-  if (!(await isTeamMember(userId, team?.id))) {
+  const team = await getTeam({ slug });
+
+  if (!(await isTeamAdmin(session.user.id, team?.id))) {
     return res.status(400).json({
-      data: null,
       error: { message: "Bad request." },
     });
   }
 
   const invitations = await getInvitations(team.id);
 
-  return res.status(200).json({ data: invitations, error: null });
+  return res.status(200).json({ data: invitations });
 };
 
 // Delete an invitation
 const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
   const { id } = req.body;
-  const { slug } = req.query;
+  const { slug } = req.query as { slug: string };
 
   const session = await getSession(req, res);
-  const userId = session?.user?.id as string;
 
-  const team = await getTeam({ slug: slug as string });
+  if (!session) {
+    return res.status(401).json({
+      error: { message: "Unauthorized." },
+    });
+  }
 
-  if (!(await isTeamMember(userId, team?.id))) {
+  const team = await getTeam({ slug });
+
+  if (!(await isTeamAdmin(session.user.id, team?.id))) {
     return res.status(400).json({
-      data: null,
       error: { message: "Bad request." },
     });
   }
 
   const invitation = await getInvitation({ id });
 
-  if (invitation.invitedBy != userId || invitation.teamId != team.id) {
+  if (invitation.invitedBy != session.user.id || invitation.teamId != team.id) {
     return res.status(400).json({
-      data: null,
       error: {
         message: "You don't have permission to delete this invitation.",
       },
@@ -117,19 +148,26 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
 
   await deleteInvitation({ id });
 
+  sendAudit({
+    action: "member.invitation.delete",
+    crud: "d",
+    user: session.user,
+    team,
+  });
+
   await sendEvent(team.id, "invitation.removed", invitation);
 
-  return res.status(200).json({ data: {}, error: null });
+  return res.status(200).json({ data: {} });
 };
 
 // Accept an invitation to an organization
 const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { inviteToken } = req.body;
+  const { inviteToken } = req.body as { inviteToken: string };
 
   const session = await getSession(req, res);
   const userId = session?.user?.id as string;
 
-  const invitation = await getInvitation({ token: inviteToken as string });
+  const invitation = await getInvitation({ token: inviteToken });
 
   const teamMember = await addTeamMember(
     invitation.team.id,
@@ -139,7 +177,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
 
   await sendEvent(invitation.team.id, "member.created", teamMember);
 
-  await deleteInvitation({ token: inviteToken as string });
+  await deleteInvitation({ token: inviteToken });
 
-  return res.status(200).json({ data: {}, error: null });
+  return res.status(200).json({ data: {} });
 };

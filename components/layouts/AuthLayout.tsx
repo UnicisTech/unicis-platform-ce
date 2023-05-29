@@ -10,11 +10,10 @@ export default function AuthLayout({ children, heading, description }: Props) {
       <div className="w-full max-w-md space-y-8">
         <div>
           <img
-            src="https://www.unicis.tech/img/logo-unicis.png"
+            src="https://boxyhq.com/img/logo.png"
             className="mx-auto h-12 w-auto"
-            alt="Unicis.App"
+            alt="BoxyHQ"
           />
-
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             {heading}
           </h2>

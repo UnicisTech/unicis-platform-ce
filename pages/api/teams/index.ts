@@ -1,8 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-
+import { slugify } from "@/lib/common";
 import { getSession } from "@/lib/session";
 import { createTeam, getTeams, isTeamExists } from "models/team";
-import { slugify } from "@/lib/common";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
