@@ -10,8 +10,8 @@ export default function AuthLayout({ children, heading, description }: Props) {
       <div className="w-full max-w-md space-y-8">
         <div>
           <img
-            src="https://www.unicis.tech/img/logo-unicis.png"
-            className="mx-auto h-12 w-auto"
+            src="/unicisapp-horizontal.svg"
+            className="mx-auto h-28 w-auto"
             alt="Unicis.App"
           />
 

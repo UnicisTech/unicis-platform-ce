@@ -26,14 +26,13 @@ import { Task } from "@prisma/client";
 import { PerPageSelector } from "@/components/ui/atlaskit";
 import { perPageOptions } from "data/configs/rpa";
 import DeleteRpa from "@/components/interfaces/RPA/DeleteRpa";
+import { Button } from "react-daisyui";
 
 const RpaDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ 
-  csc_statuses 
-}: {
-  csc_statuses: {[key: string]: string;}
-}) => {
+                  csc_statuses 
+                }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { t } = useTranslation("common");
   const { slug } = router.query;
@@ -115,7 +114,19 @@ const RpaDashboard: NextPageWithLayout<
 
   return (
     <>
-      <h3 className="text-2xl font-bold">{"Records of Processing Activities Dashboard: "}{team.name}</h3>
+      <div className="flex items-center justify-between">
+        <h4>{"Records of Processing Activities Dashboard: "}{team.name}</h4>
+        <Button
+            size="sm"
+            color="primary"
+            className="text-white"
+            onClick={() => {
+              setRpaVisible(!rpaVisible);
+            }}
+          >
+            {t("create-rpa")}
+          </Button>
+      </div>
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <PerPageSelector
             setPerPage={setPerPage}

@@ -1,6 +1,7 @@
 import NextLink from "next/link";
 import classNames from "classnames";
 
+
 const NavItem = ({
   href,
   text,
