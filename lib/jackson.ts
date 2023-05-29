@@ -1,11 +1,10 @@
+import env from "./env";
 import jackson, {
-  DirectorySync,
   IConnectionAPIController,
+  IDirectorySyncController,
   IOAuthController,
   JacksonOption,
 } from "@boxyhq/saml-jackson";
-
-import env from "./env";
 
 const opts = {
   externalUrl: env.appUrl,
@@ -21,17 +20,17 @@ const opts = {
 
 let apiController: IConnectionAPIController;
 let oauthController: IOAuthController;
-let directorySync: DirectorySync;
+let directorySync: IDirectorySyncController;
 
 const g = global as any;
 
 export default async function init() {
-  if (!g.apiController || !g.oauthController) {
+  if (!g.apiController || !g.oauthController || !g.directorySync) {
     const ret = await jackson(opts);
 
     apiController = ret.apiController;
     oauthController = ret.oauthController;
-    directorySync = ret.directorySync;
+    directorySync = ret.directorySyncController;
 
     g.apiController = apiController;
     g.oauthController = oauthController;

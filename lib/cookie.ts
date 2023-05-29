@@ -1,5 +1,5 @@
-import type { GetServerSidePropsContext } from "next";
 import { getCookie } from "cookies-next";
+import type { GetServerSidePropsContext } from "next";
 
 export const getParsedCookie = (
   req: GetServerSidePropsContext["req"],

@@ -1,6 +1,5 @@
-import { Svix, EndpointIn } from "svix";
-
 import env from "./env";
+import { EndpointIn, Svix } from "svix";
 
 const svix = new Svix(env.svix.apiKey);
 
@@ -39,6 +38,9 @@ export const sendEvent = async (
 ) => {
   return await svix.message.create(appId, {
     eventType: eventType,
-    payload: payload,
+    payload: {
+      event: eventType,
+      data: payload,
+    },
   });
 };

@@ -1,5 +1,5 @@
-import type { NextApiRequest } from "next";
 import { createRandomString, extractAuthToken } from "../../lib/common";
+import type { NextApiRequest } from "next";
 
 describe("Lib - commom", () => {
   describe("Random string", () => {

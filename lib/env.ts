@@ -1,7 +1,7 @@
 const env = {
   databaseUrl: `${process.env.DATABASE_URL}`,
   appUrl: `${process.env.APP_URL}`,
-  product: "saas-next",
+  product: "boxyhq",
   redirectAfterSignIn: "/teams/switch",
 
   // SAML Jackson configuration
@@ -42,6 +42,15 @@ const env = {
   google: {
     clientId: `${process.env.GOOGLE_CLIENT_ID}`,
     clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
+  },
+
+  // Retraced configuration
+  retraced: {
+    url: process.env.RETRACED_URL
+      ? `${process.env.RETRACED_URL}/auditlog`
+      : undefined,
+    apiKey: process.env.RETRACED_API_KEY,
+    projectId: process.env.RETRACED_PROJECT_ID,
   },
 };
 

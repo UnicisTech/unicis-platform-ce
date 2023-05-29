@@ -1,6 +1,5 @@
-import nodemailer from "nodemailer";
-
 import env from "../env";
+import nodemailer from "nodemailer";
 
 interface EmailData {
   to: string;

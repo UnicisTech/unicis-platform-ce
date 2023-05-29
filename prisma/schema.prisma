@@ -7,20 +7,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  ADMIN
+  OWNER
+  MEMBER
+}
+
 model Account {
   id                String  @id @default(uuid())
   userId            String
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String?
-  access_token      String?
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String?
+  id_token          String? @db.Text
   session_state     String?
-  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -42,72 +49,44 @@ model VerificationToken {
 }
 
 model User {
-  id            String       @id @default(uuid())
+  id            String    @id @default(uuid())
   name          String
-  email         String       @unique
+  email         String    @unique
   emailVerified DateTime?
   password      String
   image         String?
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @default(now())
-  accounts      Account[]
-  invitations   Invitation[]
-  sessions      Session[]
-  Task          Task[]
-  teamMembers   TeamMember[]
-  Comment       Comment[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @default(now())
+
+  teamMembers TeamMember[]
+  accounts    Account[]
+  sessions    Session[]
+  invitations Invitation[]
 }
 
 model Team {
-  id          String       @id @default(uuid())
-  taskIndex   Int          @default(1)
+  id          String   @id @default(uuid())
   name        String
-  slug        String       @unique
-  domain      String?      @unique
-  defaultRole String       @default("member")
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @default(now())
-  invitations Invitation[]
-  tasks       Task[]
-  members     TeamMember[]
-  properties  Json         @default("{}")
-}
-
-model Task {
-  id          Int       @id @default(autoincrement())
-  taskNumber  Int
-  teamId      String
-  authorId    String
-  title       String
-  status      String
-  duedate     String
-  description String
-  comments    Comment[]
-  properties  Json
-  author      User      @relation(fields: [authorId], references: [id])
-  team        Team      @relation(fields: [teamId], references: [id], onDelete: Cascade)
-}
-
-model Comment {
-  id          Int      @id @default(autoincrement())
-  text        String
+  slug        String   @unique
+  domain      String?  @unique
+  defaultRole Role     @default(MEMBER)
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  taskId      Int
-  createdById String
-  task        Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  createdBy   User     @relation(fields: [createdById], references: [id])
+  updatedAt   DateTime @default(now())
+
+  members     TeamMember[]
+  invitations Invitation[]
 }
 
 model TeamMember {
   id        String   @id @default(uuid())
   teamId    String
   userId    String
-  role      String   @default("member")
+  role      Role     @default(MEMBER)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
-  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([teamId, userId])
 }
@@ -116,14 +95,15 @@ model Invitation {
   id        String   @id @default(uuid())
   teamId    String
   email     String
-  role      String   @default("member")
+  role      Role     @default(MEMBER)
   token     String   @unique
   expires   DateTime
   invitedBy String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
-  user      User     @relation(fields: [invitedBy], references: [id], onDelete: Cascade)
-  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  user User @relation(fields: [invitedBy], references: [id], onDelete: Cascade)
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
 
   @@unique([teamId, email])
 }
