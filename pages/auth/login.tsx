@@ -29,7 +29,7 @@ const Login: NextPageWithLayout<
   const { t } = useTranslation("common");
 
   if (status === "authenticated") {
-    router.push(redirectAfterSignIn);
+    router.push(redirectAfterSignIn || '/teams');
   }
 
   const formik = useFormik({

@@ -75,14 +75,6 @@ export default function Sidebar() {
                 </li>
                 {team && (
                   <>
-                    <div className="space-y-2 pt-2">
-                      <NavItem
-                        href="javascript:void(0);"
-                        text={team.name}
-                        icon={BuildingOffice2Icon}
-                        active={false}
-                      />
-                    </div>
                     <li>
                       <NavItem
                         href={`/teams/${slug}/dashboard`}

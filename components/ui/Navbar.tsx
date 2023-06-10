@@ -2,9 +2,38 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import Image from 'next/image';
+import useTeams from "hooks/useTeams";
+import { Error, Loading } from "@/components/ui";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
   const [navbar, setNavbar] = useState(false);
+  const router = useRouter();
+
+  const slug = router.query.slug as string;
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedTeam, setSelectedTeam] = useState<string | undefined>(slug);
+
+
+  const { isLoading, isError, teams } = useTeams();
+
+  const handleOptionSelect = (slug: string) => {
+    console.log('handleOptionSelect', slug)
+    router.push(`/teams/${slug}/tasks`);
+    setSelectedTeam(slug);
+    setIsOpen(false);
+  };
+
+  console.log('teams6', { teams, slug })
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error />;
+  }
 
   return (
 
@@ -19,31 +48,31 @@ export default function Navbar() {
               onClick={() => setNavbar(!navbar)}
             >
               {navbar ? (
-              <svg
-                className="h-6 w-6"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clipRule="evenodd"
-                />
-              </svg>
+                <svg
+                  className="h-6 w-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    clipRule="evenodd"
+                  />
+                </svg>
               ) : (
-              <svg
-                className="hidden h-6 w-6"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
+                <svg
+                  className="hidden h-6 w-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
               )}
             </button>
             <a
@@ -51,24 +80,41 @@ export default function Navbar() {
               className="flex items-center text-xl font-bold lg:ml-2.5"
             >
               <span className="self-center whitespace-nowrap">
-                <Image 
+                <Image
                   src="/unicisapp-horizontal.svg"
                   alt="Unicis.App"
-                   width={150}
-                   height={50}
-                  />
+                  width={150}
+                  height={50}
+                />
 
-                </span>
+              </span>
             </a>
+            <div className="relative inline-block">
+              <button
+                className="m-1 btn"
+                onClick={() => setIsOpen(!isOpen)}
+                style={{backgroundColor: "white", borderColor: "hsl(var(--b2)/var(--tw-bg-opacity))"}}
+              >
+                {selectedTeam ? selectedTeam : "Select team"}
+              </button>
+              {isOpen && (
+                <ul className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52 absolute z-10">
+                  {teams?.map((team, index) => (
+                    <li key={index}>
+                      <a onClick={() => handleOptionSelect(team.slug)}>{team.name}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
             <form action="#" method="GET" className="hidden lg:block lg:pl-32">
               <label htmlFor="topbar-search" className="sr-only">
                 Search
               </label>
-              <div 
-                    className={`relative mt-1 lg:w-64 ${
-                        navbar ? 'block' : 'hidden'
-                      }`}
-                    >
+              <div
+                className={`relative mt-1 lg:w-64 ${navbar ? 'block' : 'hidden'
+                  }`}
+              >
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
                     className="h-5 w-5 text-gray-500"
@@ -115,7 +161,7 @@ export default function Navbar() {
             </button>
             <div className="hidden items-center lg:flex">
               <span className="text-base font-normal text-gray-500">
-               
+
               </span>
             </div>
           </div>

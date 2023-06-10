@@ -1,7 +1,7 @@
 import React, { useState, useCallback, Fragment, useEffect } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { Modal } from "react-daisyui";
+import { Modal, Dropdown } from "react-daisyui";
 import { useTranslation } from "next-i18next";
 import { DatePicker } from '@atlaskit/datetime-picker'
 import TextField from '@atlaskit/textfield';
@@ -147,6 +147,15 @@ const CreateRPA = ({
                     doing with the concerned personal data. The recording obligation is stated by article 30 of the GDPR.
                     It is an application to help you to be compliant with the Regulation.`}
                 />
+                <div className="my-32">
+                  <Dropdown>
+                    <Dropdown.Toggle>Click</Dropdown.Toggle>
+                    <Dropdown.Menu className="w-52">
+                      <Dropdown.Item>Item 1</Dropdown.Item>
+                      <Dropdown.Item>Item 2</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
                 {stage === 0 &&
                   <>
                     <Message
