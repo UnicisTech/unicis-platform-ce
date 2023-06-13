@@ -62,6 +62,8 @@ const CreateRPA = ({
     if (error) {
       toast.error(error.message);
       return;
+    } else {
+      toast.success(t("rpa-created"));
     }
 
     mutate()
@@ -147,15 +149,6 @@ const CreateRPA = ({
                     doing with the concerned personal data. The recording obligation is stated by article 30 of the GDPR.
                     It is an application to help you to be compliant with the Regulation.`}
                 />
-                <div className="my-32">
-                  <Dropdown>
-                    <Dropdown.Toggle>Click</Dropdown.Toggle>
-                    <Dropdown.Menu className="w-52">
-                      <Dropdown.Item>Item 1</Dropdown.Item>
-                      <Dropdown.Item>Item 2</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </div>
                 {stage === 0 &&
                   <>
                     <Message
