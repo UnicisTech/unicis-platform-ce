@@ -3,66 +3,80 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { Button } from "react-daisyui";
-import { Loading, Error } from "@/components/ui";
+import { Loading, Error, Card } from "@/components/ui";
 
 import { GetServerSidePropsContext } from "next";
 import useTask from "hooks/useTask";
-import useTeamMembers from "hooks/useTeamMembers";
-import statuses from "data/statuses.json";
-import { Comments } from "@/components/interfaces/Task";
+import { Comments, CommentsTab, TaskDetails, TaskTab } from "@/components/interfaces/Task";
 import { CscAuditLogs, CscPanel } from "@/components/interfaces/CSC";
-import { CreateRPA, RpaPanel, RpaAuditLog } from "@/components/interfaces/RPA";
+import { RpaPanel, RpaAuditLog } from "@/components/interfaces/RPA";
+import useTeam from "hooks/useTeam";
+import { Team } from "@prisma/client";
 
 const TaskById: NextPageWithLayout = () => {
-  const [rpaVisible, setRpaVisible] = useState(false)
+  const [activeTab, setActiveTab] = useState("Overview")
+  const [activeCommentTab, setActiveCommentTab] = useState("Comments")
   const router = useRouter();
   const { t } = useTranslation("common");
   const { taskNumber, slug } = router.query;
-  const {task, isLoading, isError, mutateTask} = useTask(slug as string, taskNumber as string)
-  const {members: members, isLoading: isMembersLoading, isError: isMembersError} = useTeamMembers(slug as string)
+  const { team, isLoading: isTeamLoading, isError: isTeamError } = useTeam(slug as string)
+  const { task, isLoading, isError, mutateTask } = useTask(slug as string, taskNumber as string)
 
-  if (isLoading || isMembersLoading || !task) {
+  if (isLoading  || !task || isTeamLoading) {
     return <Loading />;
   }
 
-  if (isError|| isMembersError) {
+  if (isError  || isTeamError) {
     return <Error />;
   }
 
   return (
     <>
-        <div>
-          <Button
-            size="sm"
-            color="primary"
-            className="text-white"
-            onClick={() => {
-              setRpaVisible(!rpaVisible);
-            }}
-          >
-            {t("create-rpa")}
-          </Button>
-        </div>
-        {rpaVisible && 
-          <CreateRPA
-            visible={rpaVisible}
-            setVisible={setRpaVisible}
-            task={task}
-            members={members}
-            mutate={mutateTask}
-          />
-        }
-        <p>title: {task?.title}</p>
-        <p>status: {statuses.find(({value}) => task?.status === value)?.label}</p>
-        <p>description: {task?.description}</p>
-        <p>due date: {task?.duedate}</p>
-        <CscPanel task={task} mutateTask={mutateTask}/>
-        <RpaPanel task={task} />
-        <hr/>
-        <CscAuditLogs task={task}/>
-        <RpaAuditLog task={task}/>
-        <Comments task={task} mutateTask={mutateTask}/>
+      <h3 className="text-2xl font-bold">{task.title}</h3>
+      <TaskTab activeTab={activeTab} setActiveTab={setActiveTab} />
+      {activeTab === "Overview" && (
+        <Card heading="Details">
+          <Card.Body className="p-2 rounded-3xl m-2.5	">
+            <TaskDetails task={task} team={team as Team} />
+          </Card.Body>
+        </Card>
+      )}
+      {activeTab === "Processing Activities" && (
+        <Card heading="RPA panel">
+          <Card.Body className="p-2 rounded-3xl m-2.5	">
+            <RpaPanel task={task} />
+          </Card.Body>
+        </Card>
+      )}
+      {activeTab === "Cybersecurity Controls" && (
+        <Card heading="CSC panel">
+          <Card.Body className="p-2 rounded-3xl m-2.5	">
+            <CscPanel task={task} mutateTask={mutateTask} />
+          </Card.Body>
+        </Card>
+      )}
+      <CommentsTab activeTab={activeCommentTab} setActiveTab={setActiveCommentTab} />
+      {activeCommentTab === "Comments" && (
+        <Card heading="Comments">
+          <Card.Body className="p-2 rounded-3xl m-2.5	">
+            <Comments task={task} mutateTask={mutateTask} />
+          </Card.Body>
+        </Card>
+      )}
+      {activeCommentTab === "Audit logs" && (
+        <>
+          <Card heading="CSC Audit logs">
+            <Card.Body className="p-2 rounded-3xl m-2.5	">
+              <CscAuditLogs task={task} />
+            </Card.Body>
+          </Card>
+          <Card heading="RPA Audit logs">
+            <Card.Body className="p-2 rounded-3xl m-2.5	">
+              <RpaAuditLog task={task} />
+            </Card.Body>
+          </Card>
+        </>
+      )}
     </>
   );
 };

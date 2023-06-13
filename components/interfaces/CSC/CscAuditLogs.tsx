@@ -15,7 +15,7 @@ const CscAuditLogs = ({
         <IssuePanelContainer>
             <div style={{ backgroundColor: 'white', padding: '10px 20px' }}>
                 <h2 className="text-1xl font-bold">CSC audit logs</h2>
-                {auditLogs && auditLogs.reverse().map((log) => {
+                {auditLogs && auditLogs.sort((a, b) => b.date - a.date).map((log) => {
                     return (
                         <div style={{margin: '15px'}}>
                             <p>User: {log.actor.name}</p>
