@@ -14,3 +14,13 @@ export type CscAuditLog = {
     nextValue: string;
   };
 };
+
+export type ControlOption = {
+  label: string;
+  value: {
+    code: string;
+    control: string;
+    requirements: string;
+    section: string;
+  };
+};

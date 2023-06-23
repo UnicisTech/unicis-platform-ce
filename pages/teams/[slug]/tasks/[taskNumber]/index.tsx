@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Loading, Error, Card } from "@/components/ui";
-
+import { Button } from "react-daisyui";
 import { GetServerSidePropsContext } from "next";
 import useTask from "hooks/useTask";
 import { Comments, CommentsTab, TaskDetails, TaskTab } from "@/components/interfaces/Task";
@@ -12,8 +12,11 @@ import { CscAuditLogs, CscPanel } from "@/components/interfaces/CSC";
 import { RpaPanel, RpaAuditLog } from "@/components/interfaces/RPA";
 import useTeam from "hooks/useTeam";
 import { Team } from "@prisma/client";
+import useTeamMembers from "hooks/useTeamMembers";
+import {CreateRPA} from "@/components/interfaces/RPA";
 
 const TaskById: NextPageWithLayout = () => {
+  const [rpaVisible, setRpaVisible] = useState(false)
   const [activeTab, setActiveTab] = useState("Overview")
   const [activeCommentTab, setActiveCommentTab] = useState("Comments")
   const router = useRouter();
@@ -21,6 +24,9 @@ const TaskById: NextPageWithLayout = () => {
   const { taskNumber, slug } = router.query;
   const { team, isLoading: isTeamLoading, isError: isTeamError } = useTeam(slug as string)
   const { task, isLoading, isError, mutateTask } = useTask(slug as string, taskNumber as string)
+  const {members: members, isLoading: isMembersLoading, isError: isMembersError} = useTeamMembers(slug as string)
+
+
 
   if (isLoading  || !task || isTeamLoading) {
     return <Loading />;
@@ -55,6 +61,29 @@ const TaskById: NextPageWithLayout = () => {
           </Card.Body>
         </Card>
       )}
+      <div>
+          <Button
+            size="sm"
+            color="primary"
+            className="text-white"
+            onClick={() => {
+              setRpaVisible(!rpaVisible);
+            }}
+          >
+            {t("create-rpa")}
+          </Button>
+        </div>
+
+      {rpaVisible && 
+          <CreateRPA
+            visible={rpaVisible}
+            setVisible={setRpaVisible}
+            task={task}
+            members={members}
+            mutate={mutateTask}
+          />
+        }
+
       <CommentsTab activeTab={activeCommentTab} setActiveTab={setActiveCommentTab} />
       {activeCommentTab === "Comments" && (
         <Card heading="Comments">

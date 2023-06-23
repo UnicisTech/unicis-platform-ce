@@ -1,52 +1,12 @@
 import React, { useState, useEffect } from "react";
-import DynamicTable from '@atlaskit/dynamic-table';
-import { v4 as uuidv4 } from 'uuid';
 import StatusHeader from "./StatusHeader";
 import TaskSelector from "./TaskSelector";
 import { controlOptions } from "data/configs/csc";
 import StatusSelector from "./StatusSelector"
 import type { CscOption } from "types";
 import type { Task } from "@prisma/client";
-
-const head = {
-  cells: [
-    {
-      key: 'code',
-      content: 'Code',
-      width: 10,
-      isSortable: true
-    },
-    {
-      key: uuidv4(),
-      content: 'Section',
-      width: 10,
-      isSortable: true
-    },
-    {
-      key: uuidv4(),
-      content: 'Control',
-      width: 20,
-      isSortable: true
-    },
-    {
-      key: uuidv4(),
-      content: 'Requirements',
-      width: 25
-    },
-    {
-      key: uuidv4(),
-      content: <StatusHeader />,
-      width: 20
-    },
-    {
-      key: uuidv4(),
-      content: 'Tickets',
-      width: 15
-    }
-  ],
-};
-
-
+import usePagination from "hooks/usePagination";
+import { ControlOption } from "types";
 
 const StatusesTable = ({
   tasks,
@@ -60,79 +20,94 @@ const StatusesTable = ({
 }: {
   tasks: Array<Task>;
   statuses: any;
-  sectionFilter: null | Array<{label: string, value: string}>;
+  sectionFilter: null | Array<{ label: string, value: string }>;
   statusFilter: null | Array<CscOption>;
   perPage: number;
   isSaving: boolean;
   statusHandler: (control: string, value: string) => Promise<void>;
   taskSelectorHandler: (action: string, dataToRemove: any, control: string) => Promise<void>
 }) => {
-  const [rows, setRows] = useState(Array<any>)
-  const [filteredRows, setFilteredRows] = useState(Array<any>)
+  const [filteredControls, setFilteredControls] = useState<Array<ControlOption>>(controlOptions)
+
+  const {
+    currentPage,
+    totalPages,
+    pageData,
+    goToPreviousPage,
+    goToNextPage,
+    prevButtonDisabled,
+    nextButtonDisabled,
+  } = usePagination<ControlOption>(filteredControls, perPage);
 
   useEffect(() => {
-    const rows: Array<any> = []
-    controlOptions.forEach((option, index) => {
-      rows.push({
-        key: uuidv4(),
-        cells: [
-          {
-            key: index,
-            content: <span>{option.value.code}</span>
-          },
-          {
-            key: option.value.section + index,
-            content: <span>{option.value.section}</span>
-          },
-          {
-            key: option.value.control,
-            content: <span>{option.value.control}</span>
-          },
-          {
-            key: option.value.requirements,
-            content: <span style={{ whiteSpace: "pre-line" }}>{option.value.requirements}</span>
-          },
-          {
-            key: uuidv4(),
-            content: <StatusSelector statusValue={statuses[option.value.control]} control={option.value.control} handler={statusHandler} />
-          },
-          {
-            key: uuidv4(),
-            content: <TaskSelector tasks={tasks} control={option.value.control} handler={taskSelectorHandler} />
-          }
-        ]
-      })
-    })
-    setRows(rows)
-  }, [])
-
-  useEffect(() => {
+    let filteredControls = [...controlOptions]
     if ((sectionFilter === null || sectionFilter?.length === 0) && (statusFilter === null || statusFilter?.length === 0)) {
-      setFilteredRows(rows)
+      setFilteredControls(controlOptions)
       return
     }
-    let filteredRows = [...rows]
     if (sectionFilter?.length) {
-      filteredRows = filteredRows.filter(item => (sectionFilter.map(option => option.label)).includes(item.cells[1].content.props.children))
+      filteredControls = filteredControls.filter(control => (sectionFilter.map(option => option.label)).includes(control.value.section))
     }
     if (statusFilter?.length) {
-      filteredRows = filteredRows.filter(item => (statusFilter.map(option => option.label)).includes(item.cells[4].content.props.statusValue))
+      filteredControls = filteredControls.filter(control => (statusFilter.map(option => option.label)).includes(statuses[control.value.control]))
     }
-    setFilteredRows(filteredRows)
-  }, [sectionFilter, statusFilter, rows])
+    setFilteredControls(filteredControls)
+  }, [sectionFilter, statusFilter])
 
   return (
     <>
-      <DynamicTable
-        head={head}
-        rows={filteredRows}
-        rowsPerPage={perPage}
-        defaultPage={1}
-        loadingSpinnerSize="large"
-        defaultSortKey="code"
-        defaultSortOrder="ASC"
-        isLoading={isSaving}
-      />
+      <div
+        className="overflow-x-auto"
+      >
+        <table className="table table-xs min-w-full">
+          <thead>
+            <tr>
+              <th className="w-1/10">Code</th>
+              <th className="w-1/10">Section</th>
+              <th className="w-1/10">Control</th>
+              <th className="w-2/10">Requirements</th>
+              <th className="w-3/10"><StatusHeader /></th>
+              <th className="w-1.5/10">Tickets</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pageData.map((option, index) =>
+              <tr className="hover" key={option.value.control}>
+                <td>
+                  {option.value.code}
+                </td>
+                <td>
+                  {option.value.section}
+                </td>
+                <td>
+                  {option.value.control}
+                </td>
+                <td>
+                  <span style={{ whiteSpace: "pre-line" }}>{option.value.requirements}</span>
+                </td>
+                <td>
+                  <div className="w-60 min-w-max">
+                    <StatusSelector statusValue={statuses[option.value.control]} control={option.value.control} handler={statusHandler} />
+                  </div>
+                </td>
+                <td>
+                  <TaskSelector tasks={tasks} control={option.value.control} handler={taskSelectorHandler} />
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+      {pageData.length
+        ? <div className="flex justify-center w-30">
+          <div className="btn-group join grid grid-cols-10">
+            <button className="join-item btn btn-outline col-span-4" onClick={goToPreviousPage} disabled={prevButtonDisabled}>Previous page</button>
+            <button className="join-item btn btn-outline col-span-2">{`${currentPage}/${totalPages}`}</button>
+            <button className="join-item btn btn-outline col-span-4" onClick={goToNextPage} disabled={nextButtonDisabled}>Next</button>
+          </div>
+        </div>
+        : null
+      }
     </>
   )
 }
