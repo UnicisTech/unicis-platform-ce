@@ -28,6 +28,10 @@ import NavItem from "./NavItem";
 import TeamNav from "../interfaces/Team/TeamNav";
 import useTeam from "hooks/useTeam";
 
+//
+import Icon from "./Icon";
+//
+
 export default function Sidebar() {
   const router = useRouter();
   const { t } = useTranslation("common");
@@ -96,7 +100,7 @@ export default function Sidebar() {
                       <NavItem
                         href={`/teams/${slug}/rpa`}
                         text="Record of Processing Activities"
-                        icon={ClipboardDocumentCheckIcon}
+                        icon={() => <Icon src="/unicis-rpa-logo.png"/>}
                         active={activeTab === "rpa"}
                       />
                     </li>
@@ -104,26 +108,26 @@ export default function Sidebar() {
                       <NavItem
                         href={`/teams/${slug}/tia`}
                         text="Transfer Impact Assessment"
-                        icon={ArrowUpOnSquareIcon}
+                        icon={() => <Icon src="/unicis-tia-logo.png"/>}
                         active={activeTab === "tia"}
                       />
                     </li>
-                    <li>
+                    {/* <li>
                       <NavItem
                         href={`/teams/${slug}/dpia`}
                         text="Data Protection Impact Assessment"
-                        icon={DocumentMagnifyingGlassIcon}
+                        icon={Icon}
                         active={activeTab === "privacy"}
                       />
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                       <NavItem
                         href={`/teams/${slug}/saq`}
                         text="Self Assessment Questionnaire"
                         icon={QuestionMarkCircleIcon}
                         active={activeTab === "saq"}
                       />
-                    </li>
+                    </li> */}
                     <li className="menu-title">
                       <span>Cybersecurity</span>
                     </li>
@@ -131,53 +135,53 @@ export default function Sidebar() {
                       <NavItem
                         href={`/teams/${slug}/csc`}
                         text="Cybersecurity Management System"
-                        icon={LockClosedIcon}
+                        icon={() => <Icon src="/unicis-csc-logo.png"/>}
                         active={activeTab === "csc"}
                       />
                     </li>
-                    <li>
+                    {/* <li>
                       <NavItem
                         href={`/teams/${slug}/security`}
                         text="Gap Analysis"
                         icon={ShieldExclamationIcon}
                         active={activeTab === "security"}
                       />
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                       <NavItem
                         href={`/teams/${slug}/vaq`}
                         text="Vendor Assessment Questionnaire"
                         icon={CheckBadgeIcon}
                         active={activeTab === "vaq"}
                       />
-                    </li>
+                    </li> */}
                     <li className="menu-title">
                       <span>Compliance</span>
                     </li>
-                    <li>
+                    {/* <li>
                       <NavItem
                         href={`/teams/${slug}/compliance`}
                         text="Benchmark Report"
                         icon={ShieldCheckIcon}
                         active={activeTab === "compliance"}
                       />
-                    </li>
+                    </li> */}
                     <li>
                       <NavItem
                         href={`/teams/${slug}/iat`}
                         text="Interactive Awareness Training"
-                        icon={AcademicCapIcon}
+                        icon={() => <Icon src="/unicis-iap-logo.png"/>}
                         active={activeTab === "iat"}
                       />
                     </li>
-                    <li>
+                    {/* <li>
                       <NavItem
                         href={`/teams/${slug}/compliance`}
                         text="Vendor Report"
                         icon={BuildingStorefrontIcon}
                         active={activeTab === "compliance"}
                       />
-                    </li>
+                    </li> */}
                   </>
                 )}
               </ul>
