@@ -11,3 +11,9 @@ export const IssuePanelContainer = styled.div`
   padding: 10px 20px;
   margin: 10px 0px;
 `;
+
+export const TailwindTableWrapper = styled.div`
+  & :where(th, td) {
+    white-space: normal !important;
+  }
+`;

@@ -7,6 +7,7 @@ import type { CscOption } from "types";
 import type { Task } from "@prisma/client";
 import usePagination from "hooks/usePagination";
 import { ControlOption } from "types";
+import { TailwindTableWrapper } from "sharedStyles";
 
 const StatusesTable = ({
   tasks,
@@ -56,58 +57,63 @@ const StatusesTable = ({
 
   return (
     <>
-      <div
-        className="overflow-x-auto"
-      >
-        <table className="table table-xs min-w-full">
-          <thead>
-            <tr>
-              <th className="w-1/10">Code</th>
-              <th className="w-1/10">Section</th>
-              <th className="w-1/10">Control</th>
-              <th className="w-2/10">Requirements</th>
-              <th className="w-3/10"><StatusHeader /></th>
-              <th className="w-1.5/10">Tickets</th>
-            </tr>
-          </thead>
-          <tbody>
-            {pageData.map((option, index) =>
-              <tr className="hover" key={option.value.control}>
-                <td>
-                  {option.value.code}
-                </td>
-                <td>
-                  {option.value.section}
-                </td>
-                <td>
-                  {option.value.control}
-                </td>
-                <td>
-                  <span style={{ whiteSpace: "pre-line" }}>{option.value.requirements}</span>
-                </td>
-                <td>
-                  <div className="w-60 min-w-max">
-                    <StatusSelector statusValue={statuses[option.value.control]} control={option.value.control} handler={statusHandler} />
-                  </div>
-                </td>
-                <td>
-                  <TaskSelector tasks={tasks} control={option.value.control} handler={taskSelectorHandler} />
-                </td>
+      <TailwindTableWrapper>
+        <div
+          className="overflow-x-auto"
+        >
+          {/* <table className="table table-fixed  w-screen min-w-full"> */}
+          <table className="table min-w-full">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Section</th>
+                <th>Control</th>
+                <th>Requirements</th>
+                <th><StatusHeader /></th>
+                <th>Tickets</th>
               </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-      {pageData.length
-        ? <div className="flex justify-center w-30">
-          <div className="btn-group join grid grid-cols-10">
-            <button className="join-item btn btn-outline col-span-4" onClick={goToPreviousPage} disabled={prevButtonDisabled}>Previous page</button>
-            <button className="join-item btn btn-outline col-span-2">{`${currentPage}/${totalPages}`}</button>
-            <button className="join-item btn btn-outline col-span-4" onClick={goToNextPage} disabled={nextButtonDisabled}>Next</button>
-          </div>
+            </thead>
+            <tbody>
+              {pageData.map((option, index) =>
+                <tr className="hover" key={option.value.control}>
+                  <td>
+                    {option.value.code}
+                  </td>
+                  <td>
+                    {option.value.section}
+                  </td>
+                  <td>
+                    {option.value.control}
+                  </td>
+                  <td>
+                    <span style={{ whiteSpace: "pre-line" }}>{option.value.requirements}</span>
+                  </td>
+                  <td>
+                    <div className="w-40">
+                    {/* <div className=""> */}
+                    {/* min-w-max */}
+                      <StatusSelector statusValue={statuses[option.value.control]} control={option.value.control} handler={statusHandler} />
+                    </div>
+                  </td>
+                  <td className="w-40">
+                    <TaskSelector tasks={tasks} control={option.value.control} handler={taskSelectorHandler} />
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
-        : null
-      }
+        {pageData.length
+          ? <div className="flex justify-center w-30">
+            <div className="btn-group join grid grid-cols-10">
+              <button className="join-item btn btn-outline col-span-4" onClick={goToPreviousPage} disabled={prevButtonDisabled}>Previous page</button>
+              <button className="join-item btn btn-outline col-span-2">{`${currentPage}/${totalPages}`}</button>
+              <button className="join-item btn btn-outline col-span-4" onClick={goToNextPage} disabled={nextButtonDisabled}>Next</button>
+            </div>
+          </div>
+          : null
+        }
+      </TailwindTableWrapper>
     </>
   )
 }
