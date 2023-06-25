@@ -8,9 +8,11 @@ import { IssuePanelContainer } from 'sharedStyles';
 
 const CscPanel = ({
   task,
+  statuses,
   mutateTask
 }: {
   task: Task,
+  statuses: { [key: string]: string; }
   mutateTask: () => Promise<void>
 }) => {
   const properties = task?.properties as any
@@ -116,6 +118,7 @@ const CscPanel = ({
       {controls.map((control, index) => (
         <ControlBlock
           key={index}
+          status={statuses[control]}
           control={control}
           controls={controls}
           controlHanlder={controlHanlder}

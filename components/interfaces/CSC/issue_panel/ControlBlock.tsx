@@ -4,26 +4,28 @@ import Button, { LoadingButton } from '@atlaskit/button'
 import TrashIcon from '@atlaskit/icon/glyph/trash'
 import TextArea from '@atlaskit/textarea'
 import Textfield from '@atlaskit/textfield'
-import {WithoutRing} from "sharedStyles"
+import { WithoutRing } from "sharedStyles"
 import { controlOptions } from 'data/configs/csc'
 
-const ControlBlock = ({ 
-  control, 
-  controls, 
-  controlHanlder, 
-  isSaving, 
-  isDeleting, 
-  deleteControlHandler 
-} : {
-  control: string
-  controls: string[],
-  controlHanlder: (oldControl: string, newControl: string) => void,
-  isSaving: boolean,
-  isDeleting: boolean,
-  deleteControlHandler: (control: string) => void
+const ControlBlock = ({
+  status,
+  control,
+  controls,
+  controlHanlder,
+  isSaving,
+  isDeleting,
+  deleteControlHandler
+}: {
+  status: string;
+  control: string;
+  controls: string[];
+  controlHanlder: (oldControl: string, newControl: string) => void;
+  isSaving: boolean;
+  isDeleting: boolean;
+  deleteControlHandler: (control: string) => void;
 }) => {
   const [isButtonLoading, setIsButtonLoading] = useState(false)
-  const controlData = controlOptions.find(({value}) => value.control === control)?.value
+  const controlData = controlOptions.find(({ value }) => value.control === control)?.value
   return (
     <>
       <div>
@@ -43,9 +45,9 @@ const ControlBlock = ({
               isDisabled={isSaving || isDeleting}
             />
           </WithoutRing>
-          <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-            <LoadingButton 
-              appearance='danger' 
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <LoadingButton
+              appearance='danger'
               iconBefore={<TrashIcon size="medium" label="Delete" />}
               onClick={async () => {
                 setIsButtonLoading(true)
@@ -76,6 +78,13 @@ const ControlBlock = ({
           />
         </>
       }
+      <>
+        <p className='csc_label'>Status</p>
+        <Textfield
+          isReadOnly
+          value={status}
+        />
+      </>
       {controlData?.requirements &&
         <>
           <p className='csc_label'>Requirements</p>
