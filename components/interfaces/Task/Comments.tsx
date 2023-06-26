@@ -7,6 +7,7 @@ import type { ApiResponse } from "types";
 import Button from '@atlaskit/button/standard-button';
 import Form, { Field, FormFooter } from '@atlaskit/form';
 import type { TaskWithComments } from 'types';
+import { IssuePanelContainer } from 'sharedStyles';
 
 import TextArea from '@atlaskit/textarea';
 
@@ -25,9 +26,12 @@ export default function AddComment({
   const { slug, taskNumber } = router.query;
 
   return (
-    <> 
+    <IssuePanelContainer> 
       <div style={{marginTop: '30px'}}>
-        {task.comments.length && <h1>Comments:</h1>}
+        {task.comments.length 
+          ? <h1>Comments:</h1>
+          : null
+        }
         {task.comments.map(comment => (
           <div style={{margin: '15px'}}>
             <p>{`Author: ${comment.createdBy.name}`}</p>
@@ -102,6 +106,6 @@ export default function AddComment({
           </form>
         )}
       </Form>
-    </>
+    </IssuePanelContainer>
   );
 }

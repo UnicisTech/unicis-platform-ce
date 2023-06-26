@@ -48,21 +48,21 @@ const TaskById: NextPageWithLayout<
         <TaskTab activeTab={activeTab} setActiveTab={setActiveTab} />
         {activeTab === "Overview" && (
           <Card heading="Details">
-            <Card.Body className="p-2 rounded-3xl m-2.5	">
+            <Card.Body>
               <TaskDetails task={task} team={team as Team} />
             </Card.Body>
           </Card>
         )}
         {activeTab === "Processing Activities" && (
           <Card heading="RPA panel">
-            <Card.Body className="p-2 rounded-3xl m-2.5	">
+            <Card.Body>
               <RpaPanel task={task} />
             </Card.Body>
           </Card>
         )}
         {activeTab === "Cybersecurity Controls" && (
           <Card heading="CSC panel">
-            <Card.Body className="p-2 rounded-3xl m-2.5	">
+            <Card.Body>
               <CscPanel task={task} mutateTask={mutateTask} statuses={csc_statuses}/>
             </Card.Body>
           </Card>
@@ -93,7 +93,7 @@ const TaskById: NextPageWithLayout<
         <CommentsTab activeTab={activeCommentTab} setActiveTab={setActiveCommentTab} />
         {activeCommentTab === "Comments" && (
           <Card heading="Comments">
-            <Card.Body className="p-2 rounded-3xl m-2.5	">
+            <Card.Body>
               <Comments task={task} mutateTask={mutateTask} />
             </Card.Body>
           </Card>
@@ -101,12 +101,12 @@ const TaskById: NextPageWithLayout<
         {activeCommentTab === "Audit logs" && (
           <>
             <Card heading="CSC Audit logs">
-              <Card.Body className="p-2 rounded-3xl m-2.5	">
+              <Card.Body>
                 <CscAuditLogs task={task} />
               </Card.Body>
             </Card>
             <Card heading="RPA Audit logs">
-              <Card.Body className="p-2 rounded-3xl m-2.5	">
+              <Card.Body>
                 <RpaAuditLog task={task} />
               </Card.Body>
             </Card>

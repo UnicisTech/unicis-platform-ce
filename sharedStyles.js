@@ -8,8 +8,7 @@ export const WithoutRing = styled.div`
 
 export const IssuePanelContainer = styled.div`
   background-color: white;
-  padding: 10px 20px;
-  margin: 10px 0px;
+  padding: 20px 20px;
 `;
 
 export const TailwindTableWrapper = styled.div`

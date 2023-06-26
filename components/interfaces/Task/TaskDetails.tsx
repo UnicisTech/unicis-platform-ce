@@ -14,7 +14,7 @@ import type { Task, Team } from "@prisma/client";
 import AtlaskitButton from '@atlaskit/button/standard-button';
 import statuses from "data/statuses.json";
 import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
-import { WithoutRing } from "sharedStyles";
+import { WithoutRing, IssuePanelContainer } from "sharedStyles";
 import useTask from "hooks/useTask";
 
 interface FormData {
@@ -48,135 +48,137 @@ const TaskDetails = ({
     }, [])
 
     return (
-        <Form<FormData>
-            onSubmit={async (data, { reset }) => {
-                const { title, status, duedate, description } = data
-                const response = await axios.put<ApiResponse<Task>>(
-                    `/api/tasks`,
-                    {
-                        taskId: task.id,
-                        data: {
-                            title,
-                            status: status?.value,
-                            teamId: team.id,
-                            duedate,
-                            description: description || ''
+        <IssuePanelContainer>
+            <Form<FormData>
+                onSubmit={async (data, { reset }) => {
+                    const { title, status, duedate, description } = data
+                    const response = await axios.put<ApiResponse<Task>>(
+                        `/api/tasks`,
+                        {
+                            taskId: task.id,
+                            data: {
+                                title,
+                                status: status?.value,
+                                teamId: team.id,
+                                duedate,
+                                description: description || ''
+                            }
                         }
+                    );
+
+                    const { error } = response.data;
+
+                    if (error) {
+                        toast.error(error.message);
+                        return;
+                    } else {
+                        toast.success(t("task-updated"));
+                        setIsFormChanged(false)
                     }
-                );
 
-                const { error } = response.data;
-
-                if (error) {
-                    toast.error(error.message);
-                    return;
-                } else {
-                    toast.success(t("task-updated"));
-                    setIsFormChanged(false)
-                }
-
-                mutateTask();
-            }}
-        >
-            {({ formProps }) => (
-                <form
-                    {...formProps}
-                >
-                    <div
-                        style={{
-                            display: 'flex',
-                            width: '100%',
-                            margin: '0 auto',
-                            flexDirection: 'column',
-                        }}
+                    mutateTask();
+                }}
+            >
+                {({ formProps }) => (
+                    <form
+                        {...formProps}
                     >
-                        <Field
-                            aria-required={true}
-                            name="title"
-                            label="Title"
-                            isRequired
-                            defaultValue={task?.title}
-                        >
-                            {({ fieldProps, error }) => (
-                                <Fragment>
-                                    <TextField autoComplete="off" {...fieldProps} onInput={checkFormChanges}/>
-                                </Fragment>
-                            )}
-                        </Field>
-                        <Field<ValueType<Option>>
-                            name="status"
-                            label="Status"
-                            aria-required={true}
-                            isRequired
-                            defaultValue={statuses.find(({ value }) => value === task.status)}
-                            validate={async (value) => {
-                                if (value) {
-                                    return undefined;
-                                }
-
-                                return new Promise((resolve) =>
-                                    setTimeout(resolve, 300),
-                                ).then(() => 'Please select a status');
+                        <div
+                            style={{
+                                display: 'flex',
+                                width: '100%',
+                                margin: '0 auto',
+                                flexDirection: 'column',
                             }}
                         >
-                            {({ fieldProps: { id, ...rest }, error }) => (
-                                <Fragment>
-                                    <WithoutRing>
-                                        <Select inputId={id} {...rest} options={statuses} validationState={error ? 'error' : 'default'} onInputChange={checkFormChanges}/>
+                            <Field
+                                aria-required={true}
+                                name="title"
+                                label="Title"
+                                isRequired
+                                defaultValue={task?.title}
+                            >
+                                {({ fieldProps, error }) => (
+                                    <Fragment>
+                                        <TextField autoComplete="off" {...fieldProps} onInput={checkFormChanges} />
+                                    </Fragment>
+                                )}
+                            </Field>
+                            <Field<ValueType<Option>>
+                                name="status"
+                                label="Status"
+                                aria-required={true}
+                                isRequired
+                                defaultValue={statuses.find(({ value }) => value === task.status)}
+                                validate={async (value) => {
+                                    if (value) {
+                                        return undefined;
+                                    }
+
+                                    return new Promise((resolve) =>
+                                        setTimeout(resolve, 300),
+                                    ).then(() => 'Please select a status');
+                                }}
+                            >
+                                {({ fieldProps: { id, ...rest }, error }) => (
+                                    <Fragment>
+                                        <WithoutRing>
+                                            <Select inputId={id} {...rest} options={statuses} validationState={error ? 'error' : 'default'} onInputChange={checkFormChanges} />
+                                            {error && <ErrorMessage>{error}</ErrorMessage>}
+                                        </WithoutRing>
+                                    </Fragment>
+                                )}
+                            </Field>
+                            <Field
+                                name="duedate"
+                                label="Due date"
+                                defaultValue={task.duedate}
+                                isRequired
+                                aria-required={true}
+                                validate={async (value) => {
+                                    if (value) {
+                                        return undefined;
+                                    }
+
+                                    return new Promise((resolve) =>
+                                        setTimeout(resolve, 300),
+                                    ).then(() => 'Please select a due date');
+                                }}
+                            >
+                                {({ fieldProps: { id, ...rest }, error }) => (
+                                    <Fragment>
+                                        <WithoutRing>
+                                            <DatePicker selectProps={{ inputId: id }} {...rest} onFocus={checkFormChanges} />
+                                        </WithoutRing>
                                         {error && <ErrorMessage>{error}</ErrorMessage>}
-                                    </WithoutRing>
-                                </Fragment>
-                            )}
-                        </Field>
-                        <Field
-                            name="duedate"
-                            label="Due date"
-                            defaultValue={task.duedate}
-                            isRequired
-                            aria-required={true}
-                            validate={async (value) => {
-                                if (value) {
-                                    return undefined;
-                                }
-
-                                return new Promise((resolve) =>
-                                    setTimeout(resolve, 300),
-                                ).then(() => 'Please select a due date');
-                            }}
-                        >
-                            {({ fieldProps: { id, ...rest }, error }) => (
-                                <Fragment>
-                                    <WithoutRing>
-                                        <DatePicker selectProps={{ inputId: id }} {...rest} onFocus={checkFormChanges} />
-                                    </WithoutRing>
-                                    {error && <ErrorMessage>{error}</ErrorMessage>}
-                                </Fragment>
-                            )}
-                        </Field>
-                        <Field
-                            label="Description"
-                            name="description"
-                            defaultValue={task.description || ""}
-                        >
-                            {({ fieldProps }: any) => (
-                                <Fragment>
-                                    <TextArea
-                                        onInput={checkFormChanges}
-                                        placeholder=""
-                                        {...fieldProps}
-                                    />
-                                </Fragment>
-                            )}
-                        </Field>
-                        <FormFooter>
-                            <AtlaskitButton type="submit" appearance="primary" isDisabled={!isFormChanged}>
-                                {t("save-changes")}
-                            </AtlaskitButton>
-                        </FormFooter>
-                    </div>
-                </form>
-            )}
-        </Form>
+                                    </Fragment>
+                                )}
+                            </Field>
+                            <Field
+                                label="Description"
+                                name="description"
+                                defaultValue={task.description || ""}
+                            >
+                                {({ fieldProps }: any) => (
+                                    <Fragment>
+                                        <TextArea
+                                            onInput={checkFormChanges}
+                                            placeholder=""
+                                            {...fieldProps}
+                                        />
+                                    </Fragment>
+                                )}
+                            </Field>
+                            <FormFooter>
+                                <AtlaskitButton type="submit" appearance="primary" isDisabled={!isFormChanged}>
+                                    {t("save-changes")}
+                                </AtlaskitButton>
+                            </FormFooter>
+                        </div>
+                    </form>
+                )}
+            </Form>
+        </IssuePanelContainer>
     );
 };
 
