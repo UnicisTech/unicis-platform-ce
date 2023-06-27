@@ -85,12 +85,14 @@ export default function Sidebar() {
                         text="Dashboard"
                         icon={HomeIcon}
                         active={activeTab === "dashboard"}
+                        className={"fill-blue-600"}
                       />
                       <NavItem
                         href={`/teams/${slug}/tasks`}
                         text="Task Manager"
                         icon={QueueListIcon}
                         active={activeTab === "tasks"}
+                        className={"fill-blue-600"}
                       />
                     </li>
                     <li className="menu-title">

@@ -6,12 +6,14 @@ const NavItem = ({
   text,
   icon,
   active,
+  className,
   onClick,
 }: {
   href: string;
   text: string;
   icon: any;
   active: boolean;
+  className?: string;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }) => {
   const Icon = icon;
@@ -26,7 +28,7 @@ const NavItem = ({
           "flex items-center rounded-lg p-2 text-sm font-semibold text-gray-900 hover:bg-gray-100"
         )}
       >
-        <Icon className="h-5 w-5" />
+        <Icon className={`h-5 w-5 ${className ? className : ""}`} />
         <span className="ml-3">{text}</span>
       </a>
     </NextLink>
