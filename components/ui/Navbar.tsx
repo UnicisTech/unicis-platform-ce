@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import useTeams from "hooks/useTeams";
 import { Error, Loading } from "@/components/ui";
@@ -19,13 +19,16 @@ export default function Navbar() {
   const { isLoading, isError, teams } = useTeams();
 
   const handleOptionSelect = (slug: string) => {
-    console.log('handleOptionSelect', slug)
     router.push(`/teams/${slug}/tasks`);
     setSelectedTeam(slug);
     setIsOpen(false);
   };
 
-  console.log('teams6', { teams, slug })
+  useEffect(() => {
+    if (slug) {
+      setSelectedTeam(slug)
+    }
+  }, [slug])
 
   if (isLoading) {
     return <Loading />;
