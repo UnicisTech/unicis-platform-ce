@@ -39,22 +39,36 @@ const RpaTable = ({
         <div
           className="overflow-x-auto"
         >
-          <table className="table min-w-full">
-            <thead>
+          <table className="w-full table-fixed text-left text-sm text-gray-500 dark:text-gray-400">
+            <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th>Register of Procedures</th>
-                <th>Status</th>
-                <th>Data Protection Officer (DPO)</th>
-                <th>Review of the process</th>
-                <th>Data transfer</th>
-                <th>Special Category of Personal Data</th>
-                <th>Actions</th>
+                <th scope="col" className="px-6 py-3">
+                  {t("rpa")}
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  {t("status")}
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  {t("rpa-dpo")}
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  {t("rpa-review")}
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  {t("rpa-data-tranfer")}
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  {t("rpa-category")}
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  {t("actions")}
+                </th>
               </tr>
             </thead>
             <tbody>
               {pageData.map((task, index) =>
-                <tr key={index} className="hover">
-                  <th>
+                <tr key={index} className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
+                  <td className="px-6 py-3">
                     <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
                       <a>
                         <div className="flex items-center justify-start space-x-2">
@@ -62,17 +76,17 @@ const RpaTable = ({
                         </div>
                       </a>
                     </Link>
-                  </th>
-                  <td>
+                  </td>
+                  <td className="px-6 py-3">
                     <Lozenge>{statuses.find(({ value }) => value === task.status)?.label}</Lozenge>
                   </td>
-                  <td>
+                  <td className="px-6 py-3">
                     <span>{task.properties.rpa_procedure[0].dpo.label}</span>
                   </td>
-                  <td>
+                  <td className="px-6 py-3">
                     <Tag text={task.properties.rpa_procedure[0].reviewDate} />
                   </td>
-                  <td>
+                  <td className="px-6 py-3">
                     <>
                       {task.properties.rpa_procedure[3].datatransfer
                         ? <Lozenge appearance="success">Enabled</Lozenge>
@@ -80,12 +94,12 @@ const RpaTable = ({
                       }
                     </>
                   </td>
-                  <td>
+                  <td className="px-6 py-3">
                     <div className="flex flex-col">
                       {task.properties.rpa_procedure[1].specialcategory.map((category, index) => <Tag key={index} text={category.label} />)}
                     </div>
                   </td>
-                  <td>
+                  <td className="px-6 py-3">
                     <div className="btn-group">
                       <Button
                         size="sm"

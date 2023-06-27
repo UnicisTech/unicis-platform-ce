@@ -62,40 +62,40 @@ const StatusesTable = ({
           className="overflow-x-auto"
         >
           {/* <table className="table table-fixed  w-screen min-w-full"> */}
-          <table className="table min-w-full">
-            <thead>
+          <table className="w-full table-fixed text-left text-sm text-gray-500 dark:text-gray-400">
+            <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th>Code</th>
-                <th>Section</th>
-                <th>Control</th>
-                <th>Requirements</th>
-                <th><StatusHeader /></th>
-                <th>Tickets</th>
+                <th scope="col" className="px-6 py-3">Code</th>
+                <th scope="col" className="px-6 py-3">Section</th>
+                <th scope="col" className="px-6 py-3">Control</th>
+                <th scope="col" className="px-6 py-3">Requirements</th>
+                <th scope="col" className="px-6 py-3"><StatusHeader /></th>
+                <th scope="col" className="px-6 py-3">Tickets</th>
               </tr>
             </thead>
             <tbody>
               {pageData.map((option, index) =>
-                <tr className="hover" key={option.value.control}>
-                  <td>
+                <tr key={option.value.control} className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
+                  <td className="px-6 py-3">
                     {option.value.code}
                   </td>
-                  <td>
+                  <td className="px-6 py-3">
                     {option.value.section}
                   </td>
-                  <td>
+                  <td className="px-6 py-3">
                     {option.value.control}
                   </td>
-                  <td>
+                  <td className="px-6 py-3">
                     <span style={{ whiteSpace: "pre-line" }}>{option.value.requirements}</span>
                   </td>
-                  <td>
+                  <td className="px-6 py-3">
                     <div className="w-40">
                     {/* <div className=""> */}
                     {/* min-w-max */}
                       <StatusSelector statusValue={statuses[option.value.control]} control={option.value.control} handler={statusHandler} />
                     </div>
                   </td>
-                  <td className="w-40">
+                  <td className="px-6 py-3 w-40">
                     <TaskSelector tasks={tasks} control={option.value.control} handler={taskSelectorHandler} />
                   </td>
                 </tr>
