@@ -15,12 +15,17 @@ import Select, {
 import type { ApiResponse } from "types";
 import type { Task } from "@prisma/client";
 import AtlaskitButton from '@atlaskit/button/standard-button';
-import statuses from "data/statuses.json";
+import statusesData from "data/statuses.json";
 
 
 import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
 import { WithoutRing } from "sharedStyles";
 import useTasks from "hooks/useTasks";
+
+interface Status {
+  label: string;
+  value: string;
+}
 
 interface FormData {
   title: string;
@@ -34,6 +39,8 @@ interface Option {
   label: string;
   value: string;
 }
+
+const statuses: Status[] = statusesData
 
 const CreateTask = ({
   visible,
@@ -54,6 +61,7 @@ const CreateTask = ({
       <Form<FormData>
         onSubmit={async (data, {reset}) => {
           const { title, status, duedate, description } = data
+          console.log('data form', data)
           const response = await axios.post<ApiResponse<Task>>(
             `/api/tasks`,
             {
@@ -111,6 +119,7 @@ const CreateTask = ({
                 <Field<ValueType<Option>>
                   name="status"
                   label="Status"
+                  defaultValue={statuses.find(({value}) => value === "todo")}
                   aria-required={true}
                   isRequired
                   validate={async (value) => {
@@ -126,7 +135,13 @@ const CreateTask = ({
                   {({ fieldProps: { id, ...rest }, error }) => (
                     <Fragment>
                       <WithoutRing>
-                        <Select inputId={id} {...rest} options={statuses} validationState={error ? 'error' : 'default'}/>
+                        <Select 
+                          inputId={id} 
+                          {...rest} 
+                          options={statuses}
+                          defaultValue={statuses.find(({value}) => value === "todo")}
+                          validationState={error ? 'error' : 'default'}
+                        />
                         {error && <ErrorMessage>{error}</ErrorMessage>}
                       </WithoutRing>
                     </Fragment>

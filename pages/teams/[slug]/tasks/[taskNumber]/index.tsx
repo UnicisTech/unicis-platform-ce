@@ -54,32 +54,35 @@ const TaskById: NextPageWithLayout<
           </Card>
         )}
         {activeTab === "Processing Activities" && (
-          <Card heading="RPA panel">
-            <Card.Body>
-              <RpaPanel task={task} />
-            </Card.Body>
-          </Card>
+          <div>
+            <Card
+              heading="RPA panel"
+              button={
+                <Button
+                  size="sm"
+                  color="primary"
+                  className="text-white"
+                  onClick={() => {
+                    setRpaVisible(!rpaVisible);
+                  }}
+                >
+                  {t("create-rpa")}
+                </Button>
+              }
+            >
+              <Card.Body>
+                <RpaPanel task={task} />
+              </Card.Body>
+            </Card>
+          </div>
         )}
         {activeTab === "Cybersecurity Controls" && (
           <Card heading="CSC panel">
             <Card.Body>
-              <CscPanel task={task} mutateTask={mutateTask} statuses={csc_statuses}/>
+              <CscPanel task={task} mutateTask={mutateTask} statuses={csc_statuses} />
             </Card.Body>
           </Card>
         )}
-        <div>
-          <Button
-            size="sm"
-            color="primary"
-            className="text-white"
-            onClick={() => {
-              setRpaVisible(!rpaVisible);
-            }}
-          >
-            {t("create-rpa")}
-          </Button>
-        </div>
-
         {rpaVisible &&
           <CreateRPA
             visible={rpaVisible}
@@ -89,7 +92,6 @@ const TaskById: NextPageWithLayout<
             mutate={mutateTask}
           />
         }
-
         <CommentsTab activeTab={activeCommentTab} setActiveTab={setActiveCommentTab} />
         {activeCommentTab === "Comments" && (
           <Card heading="Comments">
@@ -118,15 +120,7 @@ const TaskById: NextPageWithLayout<
 
 export async function getServerSideProps({ locale, query }: GetServerSidePropsContext) {
   const slug = query.slug as string
-  // const { locale, query }: GetServerSidePropsContext = context;
-  // const slug = query.slug as string
-
-  // return {
-  //   props: {
-  //     ...(locale ? await serverSideTranslations(locale, ["common"]) : {}),
-  //     csc_statuses: await getCscStatusesBySlug(slug),
-  //   },
-  // };
+  
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ["common"]) : {}),
