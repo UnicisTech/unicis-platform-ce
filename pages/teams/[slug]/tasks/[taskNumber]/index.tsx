@@ -26,6 +26,7 @@ const TaskById: NextPageWithLayout<
 }) => {
     const [rpaVisible, setRpaVisible] = useState(false)
     const [activeTab, setActiveTab] = useState("Overview")
+    const [statuses, setStatuses] = useState(csc_statuses)
     const [activeCommentTab, setActiveCommentTab] = useState("Comments")
     const router = useRouter();
     const { t } = useTranslation("common");
@@ -79,7 +80,7 @@ const TaskById: NextPageWithLayout<
         {activeTab === "Cybersecurity Controls" && (
           <Card heading="CSC panel">
             <Card.Body>
-              <CscPanel task={task} mutateTask={mutateTask} statuses={csc_statuses} />
+              <CscPanel task={task} mutateTask={mutateTask} statuses={statuses} setStatuses={setStatuses}/>
             </Card.Body>
           </Card>
         )}
@@ -120,7 +121,7 @@ const TaskById: NextPageWithLayout<
 
 export async function getServerSideProps({ locale, query }: GetServerSidePropsContext) {
   const slug = query.slug as string
-  
+
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ["common"]) : {}),

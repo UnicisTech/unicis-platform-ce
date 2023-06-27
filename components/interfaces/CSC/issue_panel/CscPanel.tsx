@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect, Dispatch, SetStateAction } from 'react'
 import toast from "react-hot-toast";
 import axios from "axios";
 import Button, { LoadingButton } from "@atlaskit/button";
@@ -9,11 +9,15 @@ import { IssuePanelContainer } from 'sharedStyles';
 const CscPanel = ({
   task,
   statuses,
+  setStatuses,
   mutateTask
 }: {
-  task: Task,
-  statuses: { [key: string]: string; }
-  mutateTask: () => Promise<void>
+  task: Task;
+  statuses: { [key: string]: string; };
+  setStatuses: Dispatch<SetStateAction<{
+    [key: string]: string;
+  }>>
+  mutateTask: () => Promise<void>;
 }) => {
   const properties = task?.properties as any
   const issueControls = properties?.csc_controls as string[] || ['']
@@ -51,7 +55,7 @@ const CscPanel = ({
 
     mutateTask()
     setIsDeleting(false)
-  }, [task, mutateTask ,setIsDeleting])
+  }, [task, mutateTask, setIsDeleting])
 
   const controlHanlder = useCallback(async (oldControl: string, newControl: string) => {
     setIsSaving(true)
@@ -119,6 +123,7 @@ const CscPanel = ({
         <ControlBlock
           key={index}
           status={statuses[control]}
+          setStatuses={setStatuses}
           control={control}
           controls={controls}
           controlHanlder={controlHanlder}

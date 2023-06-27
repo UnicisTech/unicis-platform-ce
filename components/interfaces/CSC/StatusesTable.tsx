@@ -15,7 +15,6 @@ const StatusesTable = ({
   sectionFilter,
   statusFilter,
   perPage,
-  isSaving,
   statusHandler,
   taskSelectorHandler
 }: {
@@ -24,7 +23,6 @@ const StatusesTable = ({
   sectionFilter: null | Array<{ label: string, value: string }>;
   statusFilter: null | Array<CscOption>;
   perPage: number;
-  isSaving: boolean;
   statusHandler: (control: string, value: string) => Promise<void>;
   taskSelectorHandler: (action: string, dataToRemove: any, control: string) => Promise<void>
 }) => {
@@ -61,7 +59,6 @@ const StatusesTable = ({
         <div
           className="overflow-x-auto"
         >
-          {/* <table className="table table-fixed  w-screen min-w-full"> */}
           <table className="w-full table-fixed text-left text-sm text-gray-500 dark:text-gray-400">
             <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
               <tr>
@@ -90,8 +87,6 @@ const StatusesTable = ({
                   </td>
                   <td className="px-6 py-3">
                     <div className="w-40">
-                    {/* <div className=""> */}
-                    {/* min-w-max */}
                       <StatusSelector statusValue={statuses[option.value.control]} control={option.value.control} handler={statusHandler} />
                     </div>
                   </td>

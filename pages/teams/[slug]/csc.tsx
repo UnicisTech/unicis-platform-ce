@@ -34,7 +34,6 @@ const CscDashboard: NextPageWithLayout<
     const { slug } = router.query;
 
     const [statuses, setStatuses] = useState(csc_statuses)
-    const [isSaving, setIsSaving] = useState(false)
     const [sectionFilter, setSectionFilter] = useState<null | { label: string, value: string }[]>(null)
     const [statusFilter, setStatusFilter] = useState<null | Option[]>(null)
     const [perPage, setPerPage] = useState<number>(10)
@@ -44,7 +43,6 @@ const CscDashboard: NextPageWithLayout<
     const { tasks, mutateTasks } = useTeamTasks(slug as string)
 
     const statusHandler = useCallback(async (control: string, value: string) => {
-      setIsSaving(true)
       const response = await axios.put(
         `/api/teams/${slug}/csc`,
         {
@@ -61,11 +59,9 @@ const CscDashboard: NextPageWithLayout<
       }
 
       setStatuses(data.statuses)
-      setIsSaving(false)
     }, [])
 
     const taskSelectorHandler = useCallback(async (action: string, dataToRemove: any, control: string) => {
-      setIsSaving(true)
       const operation = action === "select-option" ? "add" : "remove"
       for (const option of dataToRemove) {
         const issueId = option.value
@@ -86,7 +82,6 @@ const CscDashboard: NextPageWithLayout<
 
         mutateTasks()
       }
-      setIsSaving(false)
     }, [])
 
     if (isLoading || !team || !tasks) {
@@ -139,7 +134,6 @@ const CscDashboard: NextPageWithLayout<
           sectionFilter={sectionFilter}
           statusFilter={statusFilter}
           perPage={perPage}
-          isSaving={isSaving}
           statusHandler={statusHandler}
           taskSelectorHandler={taskSelectorHandler}
         />

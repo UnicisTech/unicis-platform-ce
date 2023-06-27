@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, Dispatch, SetStateAction } from 'react'
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 import Select from '@atlaskit/select'
 import Button, { LoadingButton } from '@atlaskit/button'
 import TrashIcon from '@atlaskit/icon/glyph/trash'
@@ -6,6 +9,7 @@ import TextArea from '@atlaskit/textarea'
 import Textfield from '@atlaskit/textfield'
 import { WithoutRing } from "sharedStyles"
 import { controlOptions } from 'data/configs/csc'
+import StatusSelector from '../StatusSelector'
 
 const ControlBlock = ({
   status,
@@ -14,7 +18,8 @@ const ControlBlock = ({
   controlHanlder,
   isSaving,
   isDeleting,
-  deleteControlHandler
+  deleteControlHandler,
+  setStatuses
 }: {
   status: string;
   control: string;
@@ -23,9 +28,36 @@ const ControlBlock = ({
   isSaving: boolean;
   isDeleting: boolean;
   deleteControlHandler: (control: string) => void;
+  setStatuses: Dispatch<SetStateAction<{
+    [key: string]: string;
+  }>>
 }) => {
+  const router = useRouter();
+
+  const { slug } = router.query;
   const [isButtonLoading, setIsButtonLoading] = useState(false)
   const controlData = controlOptions.find(({ value }) => value.control === control)?.value
+
+  const statusHandler = useCallback(async (control: string, value: string) => {
+    const response = await axios.put(
+      `/api/teams/${slug}/csc`,
+      {
+        control,
+        value,
+      }
+    );
+
+    const { data, error } = response.data;
+
+    if (error) {
+      toast.error(error.message);
+      return;
+    } else {
+      toast.success("Status changed!")
+    }
+    setStatuses(data.statuses)
+  }, [])
+
   return (
     <>
       <div>
@@ -80,10 +112,15 @@ const ControlBlock = ({
       }
       <>
         <p className='csc_label'>Status</p>
-        <Textfield
+        <StatusSelector
+          statusValue={status}
+          control={control}
+          handler={statusHandler}
+        />
+        {/* <Textfield
           isReadOnly
           value={status}
-        />
+        /> */}
       </>
       {controlData?.requirements &&
         <>
