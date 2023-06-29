@@ -84,7 +84,7 @@ export default function Navbar() {
             >
               <span className="self-center whitespace-nowrap">
                 <Image
-                  src="/unicisapp-horizontal.svg"
+                  src="/unicis-platform-logo-hor.svg"
                   alt="Unicis.App"
                   width={150}
                   height={50}
