@@ -59,7 +59,8 @@ const RadarChart = ({
         suggestedMax: 6,
       },
     },
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
+    responsive: true
   };
   const data = {
     labels: sections.map(({ label }) => label).map((label) => label.split(" ")),

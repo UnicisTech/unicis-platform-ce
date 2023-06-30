@@ -96,23 +96,11 @@ const CscDashboard: NextPageWithLayout<
       <>
         <h3 className="text-2xl font-bold">{"Cybersecurity Controls Dashboard: "}{team.name}</h3>
         <div style={{ height: '400px', width: '100%', display: 'flex', justifyContent: 'space-around', marginBottom: '10px' }}>
-          <div style={{ width: '49%' }}>
-            <div className="stats shadow w-full h-full">
-              <div className="stat">
-                <div className="stat-value">
-                  <PieChart statuses={statuses}/>
-                </div>
-              </div>
-            </div>
+          <div style={{ width: '49%' }} className="stats stat-value shadow pl-4 py-4">
+            <PieChart statuses={statuses} />
           </div>
-          <div style={{ width: '49%' }}>
-          <div className="stats shadow w-full h-full">
-              <div className="stat">
-                <div className="stat-value">
-                  <RadarChart statuses={statuses}/>
-                </div>
-              </div>
-            </div>
+          <div style={{ width: '49%' }} className="stats stat-value shadow">
+            <RadarChart statuses={statuses} />
           </div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>

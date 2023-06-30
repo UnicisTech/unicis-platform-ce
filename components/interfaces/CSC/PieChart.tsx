@@ -69,7 +69,8 @@ const PieChart = ({
         text: "Controls",
       },
     },
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
+    responsive: true
   };
 
   countStatuses(statuses);
