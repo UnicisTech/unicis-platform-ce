@@ -37,7 +37,7 @@ export default function AddComment({
             </div>
             <p className="my-2">{comment.text}</p>
             <Button 
-              appearance='subtle-link' 
+              appearance='danger' 
               style={{padding: '0px'}} 
               spacing="compact" 
               onClick={async () => {
@@ -59,7 +59,7 @@ export default function AddComment({
                 mutateTask()
               }}
             >
-              <span style={{color: "#f08080"}}>Delete</span>
+              Delete
             </Button>
           </div>
         ))}
