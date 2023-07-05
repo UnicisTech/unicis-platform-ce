@@ -38,7 +38,7 @@ export const readFile = (
   req: NextApiRequest
 ): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {
   const options: formidable.Options = {};
-  options.maxFileSize = 4000 * 1024 * 1024;
+  options.maxFileSize = 10 * 1024 * 1024;
   const form = formidable(options);
   return new Promise((resolve, reject) => {
     form.parse(req, (err, fields, files) => {
