@@ -99,37 +99,48 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
 // Upload an attachment
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { fields, files } = await readFile(req);
+  try {
+    const { fields, files } = await readFile(req);
+    const { taskId } = fields;
+    const { slug } = req.query;
 
-  const { taskId } = fields;
-  const { slug } = req.query;
+    const session = await getSession(req, res);
+    const userId = session?.user?.id as string;
 
-  const session = await getSession(req, res);
-  const userId = session?.user?.id as string;
+    const team = await getTeam({ slug: slug as string });
 
-  const team = await getTeam({ slug: slug as string });
-
-  if (!(await isTeamMember(userId, team?.id))) {
-    return res.status(200).json({
-      data: null,
-      error: { message: "Bad request." },
-    });
-  }
-
-  const file = Object.values(files)[0] as formidable.File[];
-
-  const isAllowed = checkExtensionAndMIMEType(file[0] as formidable.File);
-
-  if (isAllowed) {
-    try {
-      const url = await saveFileAsAttachment(Number(taskId), file[0]);
-      res.status(200).json({ url });
-    } catch (error) {
-      console.error("Failed to save file as attachment:", error);
-      res.status(500).json({ error: "Failed to save file as attachment." });
+    if (!(await isTeamMember(userId, team?.id))) {
+      return res.status(200).json({
+        data: null,
+        error: { message: "Bad request." },
+      });
     }
-  } else {
-    res.status(200).json({ error: "Not supported type of file." });
+
+    const file = Object.values(files)[0] as formidable.File[];
+
+    const isAllowed = checkExtensionAndMIMEType(file[0] as formidable.File);
+
+    if (isAllowed) {
+      try {
+        const url = await saveFileAsAttachment(Number(taskId), file[0]);
+        res.status(200).json({ url });
+      } catch (error) {
+        console.error("Failed to save file as attachment:", error);
+        res
+          .status(500)
+          .json({ error: { message: "Failed to save file as attachment." } });
+      }
+    } else {
+      res
+        .status(200)
+        .json({ error: { message: "Not supported type of file." } });
+    }
+  } catch (e) {
+    res
+      .status(200)
+      .json({
+        error: { message: "File is too large. Maximum size of file is 10mb." },
+      });
   }
 };
 
