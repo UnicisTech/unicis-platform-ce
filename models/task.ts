@@ -88,6 +88,14 @@ export const getTaskBySlugAndNumber = async (
           },
         },
       },
+      attachments: {
+        select: {
+          filename: true,
+          url: true,
+          taskId: true,
+          id: true,
+        },
+      },
     },
   });
   return task;

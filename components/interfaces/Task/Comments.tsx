@@ -6,7 +6,7 @@ import axios from "axios";
 import type { ApiResponse } from "types";
 import Button from '@atlaskit/button';
 import Form, { Field, FormFooter } from '@atlaskit/form';
-import type { TaskWithComments } from 'types';
+import type { TaskExtended } from 'types';
 import { IssuePanelContainer } from 'sharedStyles';
 import { formatDate } from '@/lib/tasks';
 
@@ -20,7 +20,7 @@ export default function AddComment({
   task,
   mutateTask
 }: {
-  task: TaskWithComments;
+  task: TaskExtended;
   mutateTask: () => Promise<void>
 }) {
   const router = useRouter();

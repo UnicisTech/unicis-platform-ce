@@ -6,3 +6,4 @@ export { default as Comments } from "./Comments";
 export { default as TaskTab } from "./TaskTab";
 export { default as CommentsTab } from "./CommentsTab";
 export { default as TaskDetails } from "./TaskDetails";
+export { default as Attachments } from "./Attachments";

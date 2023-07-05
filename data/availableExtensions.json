@@ -1,0 +1,18 @@
+{
+    "availableExtensions": {
+      "pdf": "application/pdf",
+      "7z": "application/x-7z-compressed",
+      "zip": "application/zip",
+      "tar": "application/x-tar",
+      "gz": "application/gzip",
+      "docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "xls": "application/vnd.ms-excel",
+      "csv": "text/csv",
+      "json": "application/json",
+      "xml": "application/xml",
+      "txt": "text/plain",
+      "ods": "application/vnd.oasis.opendocument.spreadsheet",
+      "rtf": "application/rtf",
+      "odt": "application/vnd.oasis.opendocument.text"
+    }
+  }

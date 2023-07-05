@@ -7,7 +7,7 @@ import { Loading, Error, Card } from "@/components/ui";
 import { Button } from "react-daisyui";
 import { GetServerSidePropsContext } from "next";
 import useTask from "hooks/useTask";
-import { Comments, CommentsTab, TaskDetails, TaskTab } from "@/components/interfaces/Task";
+import { Attachments, Comments, CommentsTab, TaskDetails, TaskTab } from "@/components/interfaces/Task";
 import { CscAuditLogs, CscPanel } from "@/components/interfaces/CSC";
 import { RpaPanel, RpaAuditLog } from "@/components/interfaces/RPA";
 import useTeam from "hooks/useTeam";
@@ -54,6 +54,11 @@ const TaskById: NextPageWithLayout<
             </Card.Body>
           </Card>
         )}
+        {<Card heading="Attachments">
+          <Card.Body>
+            <Attachments task={task} mutateTask={mutateTask}/>
+          </Card.Body>
+        </Card>}
         {activeTab === "Processing Activities" && (
           <div>
             <Card
@@ -80,7 +85,7 @@ const TaskById: NextPageWithLayout<
         {activeTab === "Cybersecurity Controls" && (
           <Card heading="CSC panel">
             <Card.Body>
-              <CscPanel task={task} mutateTask={mutateTask} statuses={statuses} setStatuses={setStatuses}/>
+              <CscPanel task={task} mutateTask={mutateTask} statuses={statuses} setStatuses={setStatuses} />
             </Card.Body>
           </Card>
         )}

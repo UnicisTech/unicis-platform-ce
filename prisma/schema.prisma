@@ -83,6 +83,7 @@ model Task {
   duedate     String
   description String
   comments    Comment[]
+  attachments Attachment[]
   properties  Json
   author      User      @relation(fields: [authorId], references: [id])
   team        Team      @relation(fields: [teamId], references: [id], onDelete: Cascade)
@@ -97,6 +98,15 @@ model Comment {
   createdById String
   task        Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
   createdBy   User     @relation(fields: [createdById], references: [id])
+}
+
+model Attachment {
+  id        String   @id @default(uuid())
+  taskId    Int
+  filename  String
+  fileData  Bytes
+  url       String
+  task      Task     @relation(fields: [taskId], references: [id])
 }
 
 model TeamMember {

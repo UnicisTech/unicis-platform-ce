@@ -110,5 +110,6 @@
   "save": "Save",
   "next": "Next",
   "delete": "Delete",
-  "back": "Back"
+  "back": "Back",
+  "attachment-delete": "Delete this attachment?"
 }
