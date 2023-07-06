@@ -2,6 +2,11 @@ import { prisma } from '@/lib/prisma';
 import { findOrCreateApp } from '@/lib/svix';
 import { Role, Team, TeamMember } from '@prisma/client';
 
+//import json from "../data/MVPS-controls.json";
+import json from '../components/defaultLanding/data/MVPS-controls.json';
+
+const controls = json['MVPS-Controls'];
+
 export const createTeam = async (param: {
   userId: string;
   name: string;
@@ -86,6 +91,24 @@ export const getTeams = async (userId: string) => {
   });
 };
 
+export const getOwnedTeams = async (userId: string) => {
+  return await prisma.team.findMany({
+    where: {
+      members: {
+        some: {
+          userId,
+          role: Role.OWNER,
+        },
+      },
+    },
+    include: {
+      _count: {
+        select: { members: true },
+      },
+    },
+  });
+};
+
 // Check if the user is a member of the team
 export async function isTeamMember(userId: string, teamId: string) {
   const teamMember = await prisma.teamMember.findFirstOrThrow({
@@ -153,7 +176,7 @@ export const getTeamMembers = async (slug: string) => {
   });
 };
 
-export const updateTeam = async (slug: string, data: Partial<Team>) => {
+export const updateTeam = async (slug: string, data: any) => {
   return await prisma.team.update({
     where: {
       slug,
@@ -207,3 +230,92 @@ export async function hasTeamAccess(
 
   return false;
 }
+export const incrementTaskIndex = async (teamId: string) => {
+  try {
+    await prisma.team.update({
+      where: { id: teamId },
+      data: { taskIndex: { increment: 1 } },
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getTeamPropertiesBySlug = async (slug: string) => {
+  const team = await prisma.team.findUnique({
+    where: {
+      slug: slug,
+    },
+    select: {
+      properties: true,
+    },
+  });
+
+  return team?.properties;
+};
+
+export const getCscStatusesBySlug = async (slug: string) => {
+  const team = await prisma.team.findUnique({
+    where: {
+      slug: slug,
+    },
+    select: {
+      properties: true,
+    },
+  });
+
+  const teamProperties = team?.properties as any;
+
+  if (teamProperties?.csc_statuses) {
+    return teamProperties?.csc_statuses;
+  }
+
+  const initial = {} as any;
+  controls.forEach((control) => (initial[control.Control] = 'Unknown'));
+
+  await prisma.team.update({
+    where: { slug: slug },
+    data: {
+      properties: {
+        csc_statuses: initial,
+      },
+    },
+  });
+
+  return initial;
+};
+
+export const setCscStatus = async ({
+  slug,
+  control,
+  value,
+}: {
+  slug: string;
+  control: string;
+  value: string;
+}) => {
+  const team = await prisma.team.findUnique({
+    where: {
+      slug: slug,
+    },
+    select: {
+      properties: true,
+    },
+  });
+
+  const teamProperties = team?.properties as any;
+
+  const csc_statuses = teamProperties?.csc_statuses;
+  csc_statuses[control] = value;
+
+  await prisma.team.update({
+    where: { slug: slug },
+    data: {
+      properties: {
+        csc_statuses,
+      },
+    },
+  });
+
+  return csc_statuses;
+};

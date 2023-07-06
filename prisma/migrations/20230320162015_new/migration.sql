@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Team" ADD COLUMN     "taskIndex" INTEGER NOT NULL DEFAULT 1;

@@ -16,7 +16,7 @@ if (hideLandingPage) {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = withTM({
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     domains: ['boxyhq.com'],
   },

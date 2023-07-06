@@ -1,8 +1,8 @@
 const env = {
   databaseUrl: `${process.env.DATABASE_URL}`,
   appUrl: `${process.env.APP_URL}`,
-  product: 'boxyhq',
-  redirectAfterSignIn: '/teams/switch',
+  product: 'saas-next',
+  redirectAfterSignIn: '/teams',
 
   // SAML Jackson configuration
   saml: {

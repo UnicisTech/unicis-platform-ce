@@ -1,0 +1,22 @@
+[
+  {
+    "label": "To Do",
+    "value": "todo"
+  },
+  {
+    "label": "In Progress",
+    "value": "inprogress"
+  },
+  {
+    "label": "In Review",
+    "value": "inreview"
+  },
+  {
+    "label": "Feedback",
+    "value": "feedback"
+  },
+  {
+    "label": "Done",
+    "value": "done"
+  }
+]
