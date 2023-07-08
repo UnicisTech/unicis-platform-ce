@@ -2,9 +2,9 @@ import { Button } from "react-daisyui";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { Card, Error, Loading } from "@/components/ui";
+import { Card, Error, Loading } from "@/components/shared";
 import useTasks from "hooks/useTasks";
-import statuses from "data/statuses.json";
+import statuses from "@/components/defaultLanding/data/statuses.json"
 import type { Task } from "@prisma/client";
 
 const Tasks = ({
@@ -72,11 +72,9 @@ const Tasks = ({
                   >
                     <td className="px-6 py-3">
                       <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
-                        <a>
-                          <div className="flex items-center justify-start space-x-2">
-                            <span className="underline">{task.taskNumber}</span>
-                          </div>
-                        </a>
+                        <div className="flex items-center justify-start space-x-2">
+                          <span className="underline">{task.taskNumber}</span>
+                        </div>
                       </Link>
                     </td>
                     <td className="px-6 py-3">{task.title}</td>

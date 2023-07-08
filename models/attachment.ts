@@ -1,10 +1,9 @@
+import json from '@/components/defaultLanding/data/availableExtensions.json';
 import { PrismaClient } from '@prisma/client';
 import formidable from 'formidable';
 import fs from 'fs';
 import { NextApiRequest } from 'next';
 import { v4 as uuidv4 } from 'uuid';
-
-import json from '../data/availableExtensions.json';
 
 const availableExtensions = json['availableExtensions'] as any;
 

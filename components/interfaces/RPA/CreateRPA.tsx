@@ -20,7 +20,7 @@ import { WithoutRing } from "sharedStyles";
 
 import Message from "./Message";
 import { format } from 'date-fns'
-import { config, headers, fieldPropsMapping } from "data/configs/rpa";
+import { config, headers, fieldPropsMapping } from "@/components/defaultLanding/data/configs/rpa"
 
 const CreateRPA = ({
   visible,

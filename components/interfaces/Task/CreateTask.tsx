@@ -15,7 +15,8 @@ import Select, {
 import type { ApiResponse } from "types";
 import type { Task } from "@prisma/client";
 import AtlaskitButton from '@atlaskit/button/standard-button';
-import statusesData from "data/statuses.json";
+import statusesData from "@/components/defaultLanding/data/statuses.json"
+//import statusesData from "data/statuses.json";
 
 
 import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';

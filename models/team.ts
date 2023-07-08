@@ -1,9 +1,7 @@
+import json from '@/components/defaultLanding/data/MVPS-controls.json';
 import { prisma } from '@/lib/prisma';
 import { findOrCreateApp } from '@/lib/svix';
 import { Role, Team, TeamMember } from '@prisma/client';
-
-//import json from "../data/MVPS-controls.json";
-import json from '../components/defaultLanding/data/MVPS-controls.json';
 
 const controls = json['MVPS-Controls'];
 

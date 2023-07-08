@@ -3,18 +3,17 @@ import { useState, useCallback, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { Loading, Error } from "@/components/ui";
+import { Loading, Error } from "@/components/shared";
 import type { InferGetServerSidePropsType } from "next"
 import useTeam from "hooks/useTeam";
 import useTeamMembers from "hooks/useTeamMembers";
 import { GetServerSidePropsContext } from "next";
 import useTeamTasks from "hooks/useTeamTasks";
-import { getCscStatusesBySlug } from "models/team";
 import type { TaskWithRpaProcedure } from "types";
 import RpaTable from "@/components/interfaces/RPA/RpaTable";
 import { CreateRPA } from "@/components/interfaces/RPA";
-import { PerPageSelector } from "@/components/ui/atlaskit";
-import { perPageOptions } from "data/configs/rpa";
+import { PerPageSelector } from "@/components/shared/atlaskit";
+import { perPageOptions } from "@/components/defaultLanding/data/configs/rpa";
 import DeleteRpa from "@/components/interfaces/RPA/DeleteRpa";
 
 const RpaDashboard: NextPageWithLayout<

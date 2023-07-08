@@ -8,7 +8,7 @@ import TrashIcon from '@atlaskit/icon/glyph/trash'
 import TextArea from '@atlaskit/textarea'
 import Textfield from '@atlaskit/textfield'
 import { WithoutRing } from "sharedStyles"
-import { controlOptions } from 'data/configs/csc'
+import { controlOptions } from '@/components/defaultLanding/data/configs/csc';
 import StatusSelector from '../StatusSelector'
 
 const ControlBlock = ({

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Select from "@atlaskit/select";
-import { statusOptions, colourStyles } from "data/configs/csc";
+import { statusOptions, colourStyles } from "@/components/defaultLanding/data/configs/csc";
 import { WithoutRing } from "sharedStyles";
 
 const StatusSelector = ({ 

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { TaskExtended } from "types";
 import AttachmentsCard from "./AttachmentCard";
-import json from "../../../data/availableExtensions.json"
+import json from "@/components/defaultLanding/data/availableExtensions.json"
 
 const availableExtensions = json["availableExtensions"] as any
 

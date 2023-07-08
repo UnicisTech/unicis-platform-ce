@@ -5,7 +5,7 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Loading, Error } from "@/components/ui";
+import { Loading, Error } from "@/components/shared";
 import type { InferGetServerSidePropsType } from "next"
 import useTeam from "hooks/useTeam";
 import { GetServerSidePropsContext } from "next";
@@ -16,8 +16,8 @@ import {
   SectionFilter,
   StatusFilter,
 } from "@/components/interfaces/CSC";
-import { PerPageSelector } from "@/components/ui/atlaskit";
-import { perPageOptions } from "data/configs/csc";
+import { PerPageSelector } from "@/components/shared/atlaskit";
+import { perPageOptions } from "@/components/defaultLanding/data/configs/csc";
 import useTeamTasks from "hooks/useTeamTasks";
 import { getCscStatusesBySlug } from "models/team";
 import type { Option } from "types";
@@ -123,7 +123,6 @@ const TeamMembers: NextPageWithLayout<
         sectionFilter={sectionFilter}
         statusFilter={statusFilter}
         perPage={perPage}
-        isSaving={isSaving}
         statusHandler={statusHandler}
         taskSelectorHandler={taskSelectorHandler}
       />

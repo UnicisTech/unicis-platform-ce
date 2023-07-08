@@ -13,7 +13,7 @@ import Select, {
 import type { ApiResponse } from "types";
 import type { Task, Team } from "@prisma/client";
 import AtlaskitButton from '@atlaskit/button/standard-button';
-import statuses from "data/statuses.json";
+import statuses from "@/components/defaultLanding/data/statuses.json"
 import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
 import { WithoutRing } from "sharedStyles";
 import useTasks from "hooks/useTasks";

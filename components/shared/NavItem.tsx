@@ -6,9 +6,10 @@ interface NavItemProps {
   text: string;
   icon?: any;
   active: boolean;
+  className?: string;
 }
 
-const NavItem = ({ href, text, icon, active }: NavItemProps) => {
+const NavItem = ({ href, text, icon, active, className }: NavItemProps) => {
   const Icon = icon;
 
   return (
@@ -20,7 +21,7 @@ const NavItem = ({ href, text, icon, active }: NavItemProps) => {
       )}
     >
       <div className="flex gap-2">
-        {Icon && <Icon className="h-5 w-5" />}
+        {Icon && <Icon className={`h-5 w-5 ${className ? className : ""}`} />}
         <span>{text}</span>
       </div>
     </NextLink>

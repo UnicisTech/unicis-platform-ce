@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { Loading, Error, Card } from "@/components/ui";
+import { Loading, Error, Card } from "@/components/shared";
 import { Button } from "react-daisyui";
 import { GetServerSidePropsContext } from "next";
 import useTask from "hooks/useTask";

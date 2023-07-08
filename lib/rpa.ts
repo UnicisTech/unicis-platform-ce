@@ -1,8 +1,11 @@
+import {
+  config,
+  fieldPropsMapping,
+} from '@/components/defaultLanding/data/configs/rpa';
 import { prisma } from '@/lib/prisma';
-import { config, fieldPropsMapping } from 'data/configs/rpa';
 import type { Session } from 'next-auth';
 import { RpaOption, RpaProcedureInterface } from 'types';
-import { RpaConfig } from 'types';
+import { ChangeLog, RpaConfig } from 'types';
 
 export const deleteProcedure = async (params: {
   user: Session['user'];
@@ -89,7 +92,7 @@ export const addAuditLogs = async (params: {
   nextProcedure: RpaProcedureInterface | [];
 }) => {
   const { taskId, taskProperties, user, prevProcedure, nextProcedure } = params;
-  const newAuditItems = [];
+  const newAuditItems: ChangeLog[] = [];
 
   if (prevProcedure.length === 0 && nextProcedure.length !== 0) {
     newAuditItems.push(generateChangeLog(user, 'created', null));
@@ -173,7 +176,7 @@ const generateChangeLog = (
   user: Session['user'],
   event: string,
   diffLog: any
-) => {
+): ChangeLog => {
   return {
     actor: user,
     date: new Date().getTime(),
@@ -190,7 +193,7 @@ const reduceMultipleObj = (acc: any, x: any) => {
 export const getDiff = (o1: any, o2: any) => {
   const prev = o1.reduce(reduceMultipleObj, {});
   const next = o2.reduce(reduceMultipleObj, {});
-  const diff = [];
+  const diff: any[] = [];
   for (const [key, value] of Object.entries(fieldPropsMapping)) {
     if (JSON.stringify(prev[key]) !== JSON.stringify(next[key])) {
       let prevValue, nextValue;

@@ -9,7 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { Radar } from "react-chartjs-2";
-import { sections, controls, statusOptions } from "data/configs/csc";
+import { sections, controls, statusOptions } from "@/components/defaultLanding/data/configs/csc";
 
 ChartJS.register(
   RadialLinearScale,

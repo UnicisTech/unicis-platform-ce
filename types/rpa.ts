@@ -61,3 +61,10 @@ export type TaskWithRpaProcedure = Task & {
     rpa_procedure: RpaProcedureInterface;
   };
 };
+
+export type ChangeLog = {
+  actor: Session['user'];
+  date: number;
+  event: string;
+  diff: any;
+};

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Lozenge from '@atlaskit/lozenge';
 import { SimpleTag as Tag } from '@atlaskit/tag';
-import statuses from "data/statuses.json";
+import statuses from "@/components/defaultLanding/data/statuses.json"
 import type { TaskWithRpaProcedure } from "types";
 import { Button } from "react-daisyui";
 import { useTranslation } from "next-i18next";
@@ -70,11 +70,9 @@ const RpaTable = ({
                 <tr key={index} className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
                   <td className="px-6 py-3">
                     <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
-                      <a>
-                        <div className="flex items-center justify-start space-x-2">
-                          <span className="underline">{task.title}</span>
-                        </div>
-                      </a>
+                      <div className="flex items-center justify-start space-x-2">
+                        <span className="underline">{task.title}</span>
+                      </div>
                     </Link>
                   </td>
                   <td className="px-6 py-3">

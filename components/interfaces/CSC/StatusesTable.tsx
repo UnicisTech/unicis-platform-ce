@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StatusHeader from "./StatusHeader";
 import TaskSelector from "./TaskSelector";
-import { controlOptions } from "data/configs/csc";
+import { controlOptions } from "@/components/defaultLanding/data/configs/csc";
 import StatusSelector from "./StatusSelector"
 import type { CscOption } from "types";
 import type { Task } from "@prisma/client";
