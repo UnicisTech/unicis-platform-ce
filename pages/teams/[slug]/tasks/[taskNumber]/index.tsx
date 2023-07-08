@@ -48,17 +48,19 @@ const TaskById: NextPageWithLayout<
         <h3 className="text-2xl font-bold">{task.title}</h3>
         <TaskTab activeTab={activeTab} setActiveTab={setActiveTab} />
         {activeTab === "Overview" && (
-          <Card heading="Details">
-            <Card.Body>
-              <TaskDetails task={task} team={team as Team} />
-            </Card.Body>
-          </Card>
+          <>
+            <Card heading="Details">
+              <Card.Body>
+                <TaskDetails task={task} team={team as Team} />
+              </Card.Body>
+            </Card>
+            <Card heading="Attachments">
+              <Card.Body>
+                <Attachments task={task} mutateTask={mutateTask} />
+              </Card.Body>
+            </Card>
+          </>
         )}
-        {<Card heading="Attachments">
-          <Card.Body>
-            <Attachments task={task} mutateTask={mutateTask}/>
-          </Card.Body>
-        </Card>}
         {activeTab === "Processing Activities" && (
           <div>
             <Card
