@@ -49,3 +49,7 @@ a {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.unicis-textarea {
+  height: 8rem !important;
+}

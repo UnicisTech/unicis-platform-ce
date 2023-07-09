@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useRef, useEffect } from "react";
 import { Team } from "@prisma/client";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -52,15 +52,31 @@ const CreateTask = ({
   setVisible: (visible: boolean) => void;
   team: Team
 }) => {
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const submitButtonRef = useRef<HTMLButtonElement | null>(null);
   const router = useRouter();
   const { slug } = router.query;
   const { mutateTasks } = useTasks(slug as string)
   const { t } = useTranslation("common");
-  
+
+  // useEffect(() => {
+  //   submitButtonRef.current?.addEventListener('click', () => {
+  //     formRef.current?.submit();
+  //   });
+
+  //   return () => {
+  //     submitButtonRef.current?.removeEventListener('click', () => {
+  //       formRef.current?.submit();
+  //     });
+  //   };
+  // }, []);
+
+
   return (
-    <Modal open={visible}>
+    <Modal open={visible} style={{ height: "80%" }}>
+      <Modal.Header className="font-bold">Create Task</Modal.Header>
       <Form<FormData>
-        onSubmit={async (data, {reset}) => {
+        onSubmit={async (data, { reset }) => {
           const { title, status, duedate, description } = data
           console.log('data form', data)
           const response = await axios.post<ApiResponse<Task>>(
@@ -74,14 +90,14 @@ const CreateTask = ({
               description: description || ''
             }
           );
-    
+
           const { error } = response.data;
-    
+
           if (error) {
             toast.error(error.message);
             return;
           }
-          
+
           mutateTasks();
           reset({
             title: '',
@@ -94,8 +110,8 @@ const CreateTask = ({
         }}
       >
         {({ formProps }) => (
-          <form {...formProps}>
-            <Modal.Header className="font-bold">Create Task</Modal.Header>
+          <form {...formProps} ref={formRef} className="flex flex-col justify-between" style={{height: '92%'}}>
+
             <Modal.Body>
               <div
                 style={{
@@ -120,14 +136,14 @@ const CreateTask = ({
                 <Field<ValueType<Option>>
                   name="status"
                   label="Status"
-                  defaultValue={statuses.find(({value}) => value === "todo")}
+                  defaultValue={statuses.find(({ value }) => value === "todo")}
                   aria-required={true}
                   isRequired
                   validate={async (value) => {
                     if (value) {
                       return undefined;
                     }
-  
+
                     return new Promise((resolve) =>
                       setTimeout(resolve, 300),
                     ).then(() => 'Please select a status');
@@ -136,11 +152,11 @@ const CreateTask = ({
                   {({ fieldProps: { id, ...rest }, error }) => (
                     <Fragment>
                       <WithoutRing>
-                        <Select 
-                          inputId={id} 
-                          {...rest} 
+                        <Select
+                          inputId={id}
+                          {...rest}
                           options={statuses}
-                          defaultValue={statuses.find(({value}) => value === "todo")}
+                          defaultValue={statuses.find(({ value }) => value === "todo")}
                           validationState={error ? 'error' : 'default'}
                         />
                         {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -148,17 +164,17 @@ const CreateTask = ({
                     </Fragment>
                   )}
                 </Field>
-                <Field 
-                  name="duedate" 
-                  label="Due date" 
-                  defaultValue="" 
+                <Field
+                  name="duedate"
+                  label="Due date"
+                  defaultValue=""
                   isRequired
                   aria-required={true}
                   validate={async (value) => {
                     if (value) {
                       return undefined;
                     }
-  
+
                     return new Promise((resolve) =>
                       setTimeout(resolve, 300),
                     ).then(() => 'Please select a due date');
@@ -179,6 +195,8 @@ const CreateTask = ({
                       <TextArea
                         placeholder=""
                         {...fieldProps}
+                        shouldFitContainer
+                        className="unicis-textarea"
                       />
                     </Fragment>
                   )}
@@ -188,7 +206,7 @@ const CreateTask = ({
               </div>
             </Modal.Body>
             <Modal.Actions>
-              <AtlaskitButton 
+              <AtlaskitButton
                 appearance="default"
                 onClick={() => {
                   setVisible(!visible)
@@ -196,7 +214,7 @@ const CreateTask = ({
               >
                 {t("close")}
               </AtlaskitButton>
-              <AtlaskitButton type="submit" appearance="primary">
+              <AtlaskitButton type="submit" appearance="primary" ref={submitButtonRef}>
                 {t("create-task")}
               </AtlaskitButton>
             </Modal.Actions>
