@@ -41,7 +41,7 @@ export default function Navbar() {
               </svg>
             </button>
             <div className="flex items-center text-xl font-bold lg:ml-2.5 justify-start">
-              <Link href="/">
+              <Link href="/teams">
                 <Image
                   src="/unicis-platform-logo-hor.svg"
                   alt="Unicis.App"
