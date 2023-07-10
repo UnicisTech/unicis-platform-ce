@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
-export const WithoutRing = styled.div`
+export const WithoutRing = styled.div.attrs((_) => ({
+  className: 'atlaskit-input',
+}))`
   input {
-    --tw-ring-shadow: 0 0 #000 !important;
+    box-shadow: none !important;
   }
 `;
 

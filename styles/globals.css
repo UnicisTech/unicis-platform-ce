@@ -53,3 +53,7 @@ a {
 .unicis-textarea {
   height: 8rem !important;
 }
+
+.atlaskit-input input {
+  box-shadow: none !important;
+}
