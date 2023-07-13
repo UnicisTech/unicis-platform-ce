@@ -4,14 +4,9 @@ import { Button } from "react-daisyui";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
-import { Loading, Error } from "@/components/ui";
-import { TeamTab, Members } from "@/components/interfaces/Team";
-import {
-  InviteMember,
-  PendingInvitations,
-} from "@/components/interfaces/Invitation";
-
+import { Loading, Error } from "@/components/shared";
+import { TeamTab, Members } from "@/components/team";
+import { InviteMember, PendingInvitations } from "@/components/invitation";
 import useTeam from "hooks/useTeam";
 import { GetServerSidePropsContext } from "next";
 
@@ -34,7 +29,6 @@ const TeamMembers: NextPageWithLayout = () => {
 
   return (
     <>
-      <h3 className="text-2xl font-bold">{team.name}</h3>
       <TeamTab team={team} activeTab="members" />
       <div className="flex items-center justify-end">
         <Button
