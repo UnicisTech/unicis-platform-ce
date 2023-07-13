@@ -3,13 +3,14 @@ import Link from "next/link";
 import Lozenge from '@atlaskit/lozenge';
 import { SimpleTag as Tag } from '@atlaskit/tag';
 import statuses from "@/components/defaultLanding/data/statuses.json"
-import type { TaskWithRpaProcedure } from "types";
+import type { TaskWithRpaProcedure, TaskWithTiaProcedure } from "types";
 import { Button } from "react-daisyui";
 import { useTranslation } from "next-i18next";
 import usePagination from "hooks/usePagination";
 import { TailwindTableWrapper } from "sharedStyles";
+import { config, headers, fieldPropsMapping, questions } from '@/components/defaultLanding/data/configs/tia';
 
-const RpaTable = ({
+const TiaTable = ({
   slug,
   tasks,
   perPage,
@@ -17,10 +18,10 @@ const RpaTable = ({
   deleteHandler,
 }: {
   slug: string;
-  tasks: Array<TaskWithRpaProcedure>;
+  tasks: Array<TaskWithTiaProcedure>;
   perPage: number;
-  editHandler: (task: TaskWithRpaProcedure) => void
-  deleteHandler: (task: TaskWithRpaProcedure) => void
+  editHandler: (task: TaskWithTiaProcedure) => void
+  deleteHandler: (task: TaskWithTiaProcedure) => void
 }) => {
   const { t } = useTranslation("common");
   const {
@@ -31,7 +32,7 @@ const RpaTable = ({
     goToNextPage,
     prevButtonDisabled,
     nextButtonDisabled,
-  } = usePagination<TaskWithRpaProcedure>(tasks, perPage);
+  } = usePagination<TaskWithTiaProcedure>(tasks, perPage);
 
   return (
     <>
@@ -43,22 +44,25 @@ const RpaTable = ({
             <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-1.5 py-1.5">
-                  {t("rpa")}
+                  {t("tia")}
                 </th>
                 <th scope="col" className="px-1.5 py-1.5">
-                  {t("status")}
+                  {t("tia-data-exporter")}
                 </th>
                 <th scope="col" className="px-1.5 py-1.5">
-                  {t("rpa-dpo")}
+                  {t("tia-data-importer")}
                 </th>
                 <th scope="col" className="px-1.5 py-1.5">
-                  {t("rpa-review")}
+                  {t("tia-assessment-date")}
                 </th>
                 <th scope="col" className="px-1.5 py-1.5">
-                  {t("rpa-data-tranfer")}
+                  {t("tia-ending-date")}
                 </th>
                 <th scope="col" className="px-1.5 py-1.5">
-                  {t("rpa-category")}
+                  {t("tia-egal-analysis")}
+                </th>
+                <th scope="col" className="px-1.5 py-1.5">
+                  {t("tia-transfer-is")}
                 </th>
                 <th scope="col" className="px-1.5 py-1.5">
                   {t("actions")}
@@ -76,26 +80,22 @@ const RpaTable = ({
                     </Link>
                   </td>
                   <td className="px-1.5 py-1.5">
-                    <Lozenge>{statuses.find(({ value }) => value === task.status)?.label}</Lozenge>
+                    <span>{task.properties.tia_procedure[0].DataExporter}</span>
                   </td>
                   <td className="px-1.5 py-1.5">
-                    <span>{task.properties.rpa_procedure[0].dpo.label}</span>
+                    <span>{task.properties.tia_procedure[0].DataImporter}</span>
                   </td>
                   <td className="px-1.5 py-1.5">
-                    <Tag text={task.properties.rpa_procedure[0].reviewDate} />
+                    <Tag text={task.properties.tia_procedure[0].StartDateAssessment}/>
                   </td>
                   <td className="px-1.5 py-1.5">
-                    <>
-                      {task.properties.rpa_procedure[3].datatransfer
-                        ? <Lozenge appearance="success">Enabled</Lozenge>
-                        : <Lozenge appearance="removed">Disabled</Lozenge>
-                      }
-                    </>
+                    <Tag text={task.properties.tia_procedure[0].StartDateAssessment}/>
                   </td>
                   <td className="px-1.5 py-1.5">
-                    <div className="flex flex-col">
-                      {task.properties.rpa_procedure[1].specialcategory.map((category, index) => <Tag key={index} text={category.label} />)}
-                    </div>
+                    <span>{task.properties.tia_procedure[0].DataExporter}</span>
+                  </td>
+                  <td className="px-1.5 py-1.5">
+                    <span>{task.properties.tia_procedure[0].LawImporterCountry.label}</span>
                   </td>
                   <td className="px-1.5 py-1.5">
                     <div className="btn-group">
@@ -140,4 +140,4 @@ const RpaTable = ({
   )
 }
 
-export default RpaTable
+export default TiaTable

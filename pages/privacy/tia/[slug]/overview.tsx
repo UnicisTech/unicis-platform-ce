@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import { Card } from "@/components/ui";
 import { Loading, Error } from "@/components/ui";
-import { TIATab } from "@/components/interfaces/TIA";
+// import { TIATab } from "@/components/interfaces/TIA";
 import useTeam from "hooks/useTeam";
 import { Badge } from "react-daisyui";
 
@@ -24,7 +24,7 @@ const AuditLogs: NextPageWithLayout = (props) => {
   return (
     <>
       <h3 className="text-2xl font-bold">{team.name}</h3>
-      <TIATab team={team} activeTab="audit-logs" />
+      {/* <TIATab team={team} activeTab="audit-logs" /> */}
       <Card heading="Overview">
         <Card.Body className="px-3 py-3">
           <div className="space-y-3">

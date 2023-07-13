@@ -1,5 +1,5 @@
-import { deleteProcedure, saveProcedure } from '@/lib/rpa';
 import { getSession } from '@/lib/session';
+import { deleteProcedure, saveProcedure } from '@/lib/tia';
 import { isUserHasAccess } from 'models/task';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { Session } from 'next-auth';

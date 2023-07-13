@@ -18,6 +18,10 @@ export const taskNavigations = (activeTab: string) => {
       active: activeTab === 'Processing Activities',
     },
     {
+      name: 'Transfer Impact Assessment',
+      active: activeTab == 'Transfer Impact Assessment',
+    },
+    {
       name: 'Cybersecurity Controls',
       active: activeTab === 'Cybersecurity Controls',
     },

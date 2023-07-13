@@ -3,7 +3,7 @@ const Field = ({
     value
 } : {
     label: string,
-    value: string
+    value?: string | number | JSX.Element 
 }) => {
     return (
         <div style={{marginTop: '12px'}}>

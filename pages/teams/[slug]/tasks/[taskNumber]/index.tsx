@@ -9,13 +9,13 @@ import { GetServerSidePropsContext } from "next";
 import useTask from "hooks/useTask";
 import { Attachments, Comments, CommentsTab, TaskDetails, TaskTab } from "@/components/interfaces/Task";
 import { CscAuditLogs, CscPanel } from "@/components/interfaces/CSC";
-import { RpaPanel, RpaAuditLog } from "@/components/interfaces/RPA";
+import { CreateRPA, RpaPanel, RpaAuditLog } from "@/components/interfaces/RPA";
 import useTeam from "hooks/useTeam";
 import { Team } from "@prisma/client";
 import useTeamMembers from "hooks/useTeamMembers";
-import { CreateRPA } from "@/components/interfaces/RPA";
 import { getCscStatusesBySlug } from "models/team";
 import { InferGetServerSidePropsType } from "next";
+import { CreateTIA, TiaPanel } from "@/components/interfaces/TIA";
 
 const TaskById: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -25,6 +25,7 @@ const TaskById: NextPageWithLayout<
   csc_statuses: { [key: string]: string; }
 }) => {
     const [rpaVisible, setRpaVisible] = useState(false)
+    const [tiaVisible, setTiaVisible] = useState(false)
     const [activeTab, setActiveTab] = useState("Overview")
     const [statuses, setStatuses] = useState(csc_statuses)
     const [activeCommentTab, setActiveCommentTab] = useState("Comments")
@@ -42,6 +43,8 @@ const TaskById: NextPageWithLayout<
     if (isError || isTeamError) {
       return <Error />;
     }
+
+    console.log('taks:', task)
 
     return (
       <>
@@ -84,6 +87,29 @@ const TaskById: NextPageWithLayout<
             </Card>
           </div>
         )}
+        {activeTab === "Transfer Impact Assessment" && (
+          <div>
+            <Card
+              heading="TIA panel"
+              button={
+                <Button
+                  size="sm"
+                  color="primary"
+                  className="text-white"
+                  onClick={() => {
+                    setTiaVisible(!tiaVisible);
+                  }}
+                >
+                  {t("create-tia")}
+                </Button>
+              }
+            >
+              <Card.Body>
+                <TiaPanel task={task} />
+              </Card.Body>
+            </Card>
+          </div>
+        )}
         {activeTab === "Cybersecurity Controls" && (
           <Card heading="CSC panel">
             <Card.Body>
@@ -91,6 +117,24 @@ const TaskById: NextPageWithLayout<
             </Card.Body>
           </Card>
         )}
+        {tiaVisible &&
+          <CreateTIA
+            visible={tiaVisible}
+            setVisible={setTiaVisible}
+            task={task}
+            mutate={mutateTask}
+          />
+        }
+        {/* <Button
+          size="sm"
+          color="primary"
+          className="text-white"
+          onClick={() => {
+            setTiaVisible(!rpaVisible);
+          }}
+        >
+          {t("create-rpa")}
+        </Button> */}
         {rpaVisible &&
           <CreateRPA
             visible={rpaVisible}

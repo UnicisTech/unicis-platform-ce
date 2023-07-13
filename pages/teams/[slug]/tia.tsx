@@ -9,14 +9,16 @@ import useTeam from "hooks/useTeam";
 import useTeamMembers from "hooks/useTeamMembers";
 import { GetServerSidePropsContext } from "next";
 import useTeamTasks from "hooks/useTeamTasks";
-import type { TaskWithRpaProcedure } from "types";
-//import RpaTable from "@/components/interfaces/RPA/RpaTable";
-import { CreateRPA, RpaTable, DeleteRpa } from "@/components/interfaces/RPA";
+import type { TaskWithRpaProcedure, TaskWithTiaProcedure } from "types";
+import RpaTable from "@/components/interfaces/RPA/RpaTable";
+//import TiaTable from "@/components/interfaces/TIA/TiaTable";
+import { CreateRPA } from "@/components/interfaces/RPA";
+import { CreateTIA, TiaTable, DeleteTia } from "@/components/interfaces/TIA";
 import { PerPageSelector } from "@/components/shared/atlaskit";
 import { perPageOptions } from "@/components/defaultLanding/data/configs/rpa";
-//import DeleteRpa from "@/components/interfaces/RPA/DeleteRpa";
+import DeleteRpa from "@/components/interfaces/RPA/DeleteRpa";
 
-const RpaDashboard: NextPageWithLayout<
+const TiaDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = () => {
     const router = useRouter();
@@ -24,8 +26,8 @@ const RpaDashboard: NextPageWithLayout<
     const { slug } = router.query;
     const [isEditOpen, setIsEditOpen] = useState(false)
     const [isDeleteOpen, setIsDeleteOpen] = useState(false)
-    const [taskToEdit, setTaskToEdit] = useState<TaskWithRpaProcedure | null>(null)
-    const [taskToDelete, setTaskToDelete] = useState<TaskWithRpaProcedure | null>(null)
+    const [taskToEdit, setTaskToEdit] = useState<TaskWithTiaProcedure | null>(null)
+    const [taskToDelete, setTaskToDelete] = useState<TaskWithTiaProcedure | null>(null)
     const [perPage, setPerPage] = useState<number>(10)
 
     const { isLoading, isError, team } = useTeam(slug as string);
@@ -33,23 +35,23 @@ const RpaDashboard: NextPageWithLayout<
 
 
     const { tasks, mutateTasks } = useTeamTasks(slug as string)
-    const tasksWithProcedures = useMemo<Array<TaskWithRpaProcedure>>(() => {
+    const tasksWithProcedures = useMemo<Array<TaskWithTiaProcedure>>(() => {
       if (!tasks) {
         return []
       }
       return tasks.filter(task => {
         const taskProperties = task.properties as any
-        const procedure = taskProperties.rpa_procedure
+        const procedure = taskProperties.tia_procedure
         return procedure
-      }) as TaskWithRpaProcedure[]
+      }) as TaskWithTiaProcedure[]
     }, [tasks])
 
-    const onEditClickHandler = useCallback((task: TaskWithRpaProcedure) => {
+    const onEditClickHandler = useCallback((task: TaskWithTiaProcedure) => {
       setTaskToEdit(task)
       setIsEditOpen(true)
     }, [])
 
-    const onDeleteClickHandler = useCallback((task: TaskWithRpaProcedure) => {
+    const onDeleteClickHandler = useCallback((task: TaskWithTiaProcedure) => {
       setTaskToDelete(task)
       setIsDeleteOpen(true)
     }, [])
@@ -76,7 +78,7 @@ const RpaDashboard: NextPageWithLayout<
             }}
           />
         </div>
-        <RpaTable
+        <TiaTable
           slug={slug as string}
           tasks={tasksWithProcedures}
           perPage={perPage}
@@ -84,19 +86,19 @@ const RpaDashboard: NextPageWithLayout<
           deleteHandler={onDeleteClickHandler}
         />
         {taskToEdit && isEditOpen &&
-          <CreateRPA
+          <CreateTIA
             visible={isEditOpen}
             setVisible={setIsEditOpen}
-            task={taskToEdit as TaskWithRpaProcedure}
+            task={taskToEdit as TaskWithTiaProcedure}
             members={members}
             mutate={mutateTasks}
           />
         }
         {taskToDelete && isDeleteOpen &&
-          <DeleteRpa
+          <DeleteTia
             visible={isDeleteOpen}
             setVisible={setIsDeleteOpen}
-            task={taskToDelete as TaskWithRpaProcedure}
+            task={taskToDelete as TaskWithTiaProcedure}
             mutate={mutateTasks}
           />
         }
@@ -117,4 +119,4 @@ export const getServerSideProps = async (
   };
 };
 
-export default RpaDashboard;
+export default TiaDashboard;

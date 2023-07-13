@@ -18,7 +18,7 @@ import type { Task } from "@prisma/client";
 
 import { WithoutRing } from "sharedStyles";
 
-import Message from "./Message";
+import { Message } from "@/components/shared/atlaskit";
 import { format } from 'date-fns'
 import { config, headers, fieldPropsMapping } from "@/components/defaultLanding/data/configs/rpa"
 
