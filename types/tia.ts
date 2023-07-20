@@ -1,4 +1,5 @@
 import type { Task } from '@prisma/client';
+import type { Session } from 'next-auth';
 
 type R_Yes_No = 'yes' | 'no';
 
@@ -17,17 +18,19 @@ type Country = {
   value: string;
 };
 
-export type TiaTranferData = {
-  EncryptionInTransit: R_Yes_No_Na;
-  TransferMechanism: R_Yes_No_Na;
-  LawfulAccess: R_Yes_No_Na;
-  MassSurveillanceTelecommunications: R_Yes_No_Na;
-  SelfReportingObligations: R_Yes_No_Na;
-};
-
 export type TiaOption = {
   label: string;
   value: string;
+};
+
+export type TiaAuditLog = {
+  actor: Session['user'];
+  date: number;
+  event: string;
+  diff: {
+    prevValue: string | string[] | undefined;
+    nextValue: string | string[];
+  } | null;
 };
 
 export const defaultProcedure = [

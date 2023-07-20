@@ -595,7 +595,6 @@ export const defaultProcedure = [
     ReasonPastWarrantSubpoena: '',
     DataIssueInvestigation: '0',
     ReasonDataIssueInvestigation: '',
-
     LocalIssueWarrants: '2',
     ReasonLocalIssueWarrants: '',
     LocalMassSurveillance: '3',
@@ -630,7 +629,6 @@ export const defaultProcedure = [
     RelevantLegalGround: '',
     ProbabilityLegalGround: '',
     ReasonLegalGround: '',
-
     ConnectionTargetedAccess: 'yes',
     ReasonConnectionTargetedAccess: '',
     ConnectionSurveillanceTele: 'yes',

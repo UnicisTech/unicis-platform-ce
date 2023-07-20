@@ -15,7 +15,7 @@ import { Team } from "@prisma/client";
 import useTeamMembers from "hooks/useTeamMembers";
 import { getCscStatusesBySlug } from "models/team";
 import { InferGetServerSidePropsType } from "next";
-import { CreateTIA, TiaPanel } from "@/components/interfaces/TIA";
+import { CreateTIA, TiaAuditLogs, TiaPanel } from "@/components/interfaces/TIA";
 
 const TaskById: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -154,14 +154,19 @@ const TaskById: NextPageWithLayout<
         )}
         {activeCommentTab === "Audit logs" && (
           <>
-            <Card heading="CSC Audit logs">
-              <Card.Body>
-                <CscAuditLogs task={task} />
-              </Card.Body>
-            </Card>
             <Card heading="RPA Audit logs">
               <Card.Body>
                 <RpaAuditLog task={task} />
+              </Card.Body>
+            </Card>
+            <Card heading="Tia Audit logs">
+              <Card.Body>
+                <TiaAuditLogs task={task} />
+              </Card.Body>
+            </Card>
+            <Card heading="CSC Audit logs">
+              <Card.Body>
+                <CscAuditLogs task={task} />
               </Card.Body>
             </Card>
           </>

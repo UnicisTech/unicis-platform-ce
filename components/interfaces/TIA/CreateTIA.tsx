@@ -1,7 +1,7 @@
 import React, { useState, useCallback, Fragment, useEffect } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { Modal, Dropdown } from "react-daisyui";
+import { Modal } from "react-daisyui";
 import { useTranslation } from "next-i18next";
 import { DatePicker } from '@atlaskit/datetime-picker'
 import TextField from '@atlaskit/textfield';
@@ -9,15 +9,13 @@ import TextArea from '@atlaskit/textarea';
 import Select, {
   ValueType,
 } from '@atlaskit/select';
-import { Checkbox } from '@atlaskit/checkbox';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
-import Form, { Field, CheckboxField, RangeField, FieldProps, FormFooter, HelperMessage, ErrorMessage } from '@atlaskit/form';
+import Form, { Field, RangeField, FieldProps, FormFooter, HelperMessage, ErrorMessage } from '@atlaskit/form';
 import Range from '@atlaskit/range';
 import { RadioGroup } from '@atlaskit/radio';
-import { OptionsPropType } from '@atlaskit/radio/types';
 import Badge from '@atlaskit/badge';
 
-import type { ApiResponse, TeamMemberWithUser, TaskWithRpaProcedure, RpaOption, TiaOption, TiaTranferData } from "types";
+import type { ApiResponse, TeamMemberWithUser, TaskWithRpaProcedure, TiaOption } from "types";
 import type { Task } from "@prisma/client";
 
 import { WithoutRing } from "sharedStyles";
@@ -26,7 +24,7 @@ import { Message } from "@/components/shared/atlaskit";
 import RiskLevel from "./RiskLevel";
 import TransferIs from "./TransferIs";
 import { format } from 'date-fns'
-import { config, headers, fieldPropsMapping, questions, defaultProcedure, defaultProcedure2 } from "@/components/defaultLanding/data/configs/tia";
+import { config, headers, fieldPropsMapping, questions, defaultProcedure } from "@/components/defaultLanding/data/configs/tia";
 
 const shouldSkipTwoSteps = (formData: any) => (["LawfulAccess", "MassSurveillanceTelecommunications", "SelfReportingObligations"].map(prop => ["yes", "na"].includes(formData[prop])).every(result => result === true))
 
@@ -162,18 +160,6 @@ const CreateTIA = ({
     }
   }, [procedure])
 
-  //test
-  useEffect(() => {
-    console.log('transfer is update', transferIs)
-  }, [procedure])
-  //
-
-  //test
-  useEffect(() => {
-    console.log('procedure update', procedure)
-  }, [procedure])
-  //
-
   const cleanup = useCallback((reset: any) => {
     setProcedure([])
     setStage(0)
@@ -181,7 +167,6 @@ const CreateTIA = ({
   }, [])
 
   const saveProcedure = useCallback(async (procedure: any[], prevProcedure: any[], reset: any) => {
-    //return
     setIsLoading(true)
 
     const response = await axios.post<ApiResponse<Task>>(`/api/tasks/${task.id}/tia`, {
@@ -218,16 +203,13 @@ const CreateTIA = ({
   }, [])
 
   const onSubmit = useCallback(async (formData: any, { reset }: any) => {
-    console.log('ford data on submit', formData)
     const message = validate(formData);
 
     if (procedure[stage] != null) {
-      procedure[stage] = formData;
+      procedure[stage] = {...procedure[stage], ...formData};
     } else {
       setProcedure([...procedure, formData]);
     }
-
-    console.log('should skip?', {should: shouldSkipTwoSteps(formData), stage})
 
     if (stage === 1 && shouldSkipTwoSteps(formData)) {
       return setStage(stage + 3);
@@ -256,38 +238,28 @@ const CreateTIA = ({
 
   const closeHandler = useCallback((reset: (initialValues?: any) => void) => {
     setVisible(false)
-    setProcedure(defaultProcedure2)
+    setProcedure(defaultProcedure)
     setStage(0)
     reset()
   }, [])
 
   useEffect(() => {
-    //return
-    //TODO
     const taskProperties = task.properties as any
     if (taskProperties?.tia_procedure) {
       setProcedure(taskProperties.tia_procedure)
       setPrevProcedure([...taskProperties.tia_procedure])
     } else {
-      setProcedure(defaultProcedure2)
+      setProcedure(defaultProcedure)
     }
   }, [])
-
-  // if (procedure.length === 0) {
-  //   return <span> loading </span>
-  // }
 
   return (
     <Modal open={visible}>
       <Form
         onSubmit={onSubmit}
       >
-        {(test) => {
-          const { formProps, reset, setFieldValue } = test
-          console.log('formProps test ->', test)
-          console.log('formProps state ->', test.getState().values)
-          console.log('formProps values ->', test.getValues())
-          const values = { ...test.getState().values }
+        {(props) => {
+          const { formProps, reset, setFieldValue } = props
           return (
             <form {...formProps}>
               <Modal.Header className="font-bold">{`Register Transfer Impact Assessment ${stage + 1}/5`}</Modal.Header>
@@ -322,7 +294,6 @@ const CreateTIA = ({
                         name="DataExporter"
                         label={fieldPropsMapping["DataExporter"]}
                         defaultValue={procedure[0]?.DataExporter}
-                        //defaultValue={""}
                         aria-required={true}
                         isRequired
                       >

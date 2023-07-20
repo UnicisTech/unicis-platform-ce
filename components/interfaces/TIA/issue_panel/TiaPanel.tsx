@@ -25,6 +25,9 @@ const TiaPanel = ({
   const NOT_APLICABLE = "Not Applicable"
 
   useEffect(() => {
+    if (!procedure) {
+      return
+    }
     if (procedure[2]) {
       const {
         WarrantsSubpoenas,
@@ -56,6 +59,9 @@ const TiaPanel = ({
   }, [procedure])
 
   useEffect(() => {
+    if (!procedure) {
+      return
+    }
     if (procedure[1]) {
       const {
         EncryptionInTransit,
