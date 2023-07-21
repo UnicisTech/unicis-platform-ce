@@ -18,7 +18,7 @@ import { useSession } from 'next-auth/react';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Icon from './Icon';
 
 import NavItem from './NavItem';
@@ -28,6 +28,18 @@ export default function Sidebar() {
   const { t } = useTranslation('common');
 
   const { slug } = router.query;
+
+  useEffect(() => {
+    if (typeof slug === 'string') {
+      document.title = `Unicis Platform - ${slug}`
+    } else {
+      document.title = 'Unicis Platform';
+    }
+    
+    return () => {
+      document.title = 'Unicis Platform';
+    };
+  }, [slug])
 
   const sidebarMenus = {
     personal: [
@@ -57,22 +69,22 @@ export default function Sidebar() {
       {
         name: t('rpa-activities'),
         href: `/teams/${slug}/rpa`,
-        icon: () => <Icon src="/unicis-rpa-logo.png"/>,
+        icon: () => <Icon src="/unicis-rpa-logo.png" />,
       },
       {
         name: t('tia'),
         href: `/teams/${slug}/tia`,
-        icon: () => <Icon src="/unicis-tia-logo.png"/>,
+        icon: () => <Icon src="/unicis-tia-logo.png" />,
       },
       {
         name: t('csc'),
         href: `/teams/${slug}/csc`,
-        icon: () => <Icon src="/unicis-csc-logo.png"/>,
+        icon: () => <Icon src="/unicis-csc-logo.png" />,
       },
       {
         name: t('iap'),
         href: `/teams/${slug}/iap`,
-        icon: () => <Icon src="/unicis-iap-logo.png"/>
+        icon: () => <Icon src="/unicis-iap-logo.png" />
       },
       {
         name: t('all-products'),
