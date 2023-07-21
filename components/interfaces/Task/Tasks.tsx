@@ -77,7 +77,13 @@ const Tasks = ({
                         </div>
                       </Link>
                     </td>
-                    <td className="px-6 py-3">{task.title}</td>
+                    <td className="px-6 py-3">
+                      <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
+                        <div className="flex items-center justify-start space-x-2">
+                          <span className="underline">{task.title}</span>
+                        </div>
+                      </Link>
+                    </td>
                     <td className="px-6 py-3">
                       {statuses.find(({ value }) => value === task.status)?.label}
                     </td>

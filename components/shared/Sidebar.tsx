@@ -88,7 +88,7 @@ export default function Sidebar() {
       },
       {
         name: t('all-products'),
-        href: `/teams/${slug}/products`,
+        href: 'https://www.unicis.tech/docs',
         icon: CodeBracketIcon,
       },
       {
