@@ -81,11 +81,11 @@ export default function Sidebar() {
         href: `/teams/${slug}/csc`,
         icon: () => <Icon src="/unicis-csc-logo.png" />,
       },
-      {
-        name: t('iap'),
-        href: `/teams/${slug}/iap`,
-        icon: () => <Icon src="/unicis-iap-logo.png" />
-      },
+      // {
+      //   name: t('iap'),
+      //   href: `/teams/${slug}/iap`,
+      //   icon: () => <Icon src="/unicis-iap-logo.png" />
+      // },
       {
         name: t('all-products'),
         href: 'https://www.unicis.tech/docs',

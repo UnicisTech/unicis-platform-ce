@@ -66,7 +66,7 @@ const TiaDashboard: NextPageWithLayout<
 
     return (
       <>
-        <h3 className="text-2xl font-bold">{"Records of Processing Activities Dashboard"}</h3>
+        <h3 className="text-2xl font-bold">{"Transfer Impact Assessment Dashboard"}</h3>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <PerPageSelector
             setPerPage={setPerPage}
