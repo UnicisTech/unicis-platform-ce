@@ -72,7 +72,7 @@ const TaskById: NextPageWithLayout<
                 <Button
                   size="sm"
                   color="primary"
-                  className="text-white"
+                  variant="outline"
                   onClick={() => {
                     setRpaVisible(!rpaVisible);
                   }}
@@ -95,7 +95,7 @@ const TaskById: NextPageWithLayout<
                 <Button
                   size="sm"
                   color="primary"
-                  className="text-white"
+                  variant="outline"
                   onClick={() => {
                     setTiaVisible(!tiaVisible);
                   }}

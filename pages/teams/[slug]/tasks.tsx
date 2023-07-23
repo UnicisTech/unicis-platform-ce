@@ -29,7 +29,7 @@ InferGetServerSidePropsType<typeof getServerSideProps>
         <Button
           size="sm"
           color="primary"
-          className="text-white"
+          variant="outline"
           onClick={() => {
             setVisible(!visible);
           }}

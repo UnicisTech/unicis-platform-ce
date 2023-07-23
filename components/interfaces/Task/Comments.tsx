@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react';
 import { useRouter } from "next/router";
+import { useTranslation } from 'next-i18next';
 import type { Task } from '@prisma/client';
 import toast from "react-hot-toast";
 import axios from "axios";
 import type { ApiResponse } from "types";
-import Button from '@atlaskit/button';
+import AtlaskitButton from '@atlaskit/button';
+import { Button } from 'react-daisyui';
 import Form, { Field, FormFooter } from '@atlaskit/form';
 import type { TaskExtended } from 'types';
 import { IssuePanelContainer } from 'sharedStyles';
@@ -23,6 +25,7 @@ export default function AddComment({
   task: TaskExtended;
   mutateTask: () => Promise<void>
 }) {
+  const { t } = useTranslation('common');
   const router = useRouter();
   const { slug, taskNumber } = router.query;
 
@@ -36,10 +39,10 @@ export default function AddComment({
               <p>{formatDate(String(comment.createdAt))}</p>
             </div>
             <p className="my-2">{comment.text}</p>
-            <Button 
-              appearance='danger' 
-              style={{padding: '0px'}} 
-              spacing="compact" 
+            <AtlaskitButton
+              appearance='danger'
+              style={{ padding: '0px' }}
+              spacing="compact"
               onClick={async () => {
                 const response = await axios.delete<ApiResponse<unknown>>(
                   `/api/teams/${slug}/tasks/${taskNumber}/comments`,
@@ -60,7 +63,7 @@ export default function AddComment({
               }}
             >
               Delete
-            </Button>
+            </AtlaskitButton>
           </div>
         ))}
       </div>
@@ -103,9 +106,18 @@ export default function AddComment({
               )}
             </Field>
             <FormFooter>
-              <Button type="submit" appearance="primary">
-                Submit
+              <Button
+                size="sm"
+                color="primary"
+                variant="outline"
+                //className="text-white"
+                type="submit"
+              >
+                {t("submit")}
               </Button>
+              {/* <Button type="submit" appearance="primary">
+                Submit
+              </Button> */}
             </FormFooter>
           </form>
         )}

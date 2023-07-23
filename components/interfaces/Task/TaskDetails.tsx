@@ -9,9 +9,9 @@ import TextArea from '@atlaskit/textarea';
 import Select, {
     ValueType,
 } from '@atlaskit/select';
+import { Button } from 'react-daisyui';
 import type { ApiResponse } from "types";
 import type { Task, Team } from "@prisma/client";
-import AtlaskitButton from '@atlaskit/button/standard-button';
 import statuses from "@/components/defaultLanding/data/statuses.json"
 import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
 import { WithoutRing, IssuePanelContainer } from "sharedStyles";
@@ -51,6 +51,9 @@ const TaskDetails = ({
         <IssuePanelContainer>
             <Form<FormData>
                 onSubmit={async (data, { reset }) => {
+                    if (!isFormChanged) {
+                        return
+                    }
                     const { title, status, duedate, description } = data
                     //TODO: remove /api/tasks api
                     const response = await axios.put<ApiResponse<Task>>(
@@ -171,9 +174,15 @@ const TaskDetails = ({
                                 )}
                             </Field>
                             <FormFooter>
-                                <AtlaskitButton type="submit" appearance="primary" isDisabled={!isFormChanged}>
+                                <Button
+                                    color="primary"
+                                    variant="outline"
+                                    size="sm"
+                                    type="submit"
+                                    active={!isFormChanged}
+                                >
                                     {t("save-changes")}
-                                </AtlaskitButton>
+                                </Button>
                             </FormFooter>
                         </div>
                     </form>

@@ -192,5 +192,6 @@
   "save": "Save",
   "next": "Next",
   "back": "Back",
-  "attachment-delete": "Delete this attachment?"
+  "attachment-delete": "Delete this attachment?",
+  "submit": "Submit"
 }

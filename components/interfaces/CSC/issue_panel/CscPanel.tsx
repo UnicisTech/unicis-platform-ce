@@ -1,7 +1,9 @@
 import React, { useState, useCallback, useEffect, Dispatch, SetStateAction } from 'react'
 import toast from "react-hot-toast";
 import axios from "axios";
-import Button, { LoadingButton } from "@atlaskit/button";
+import { LoadingButton } from "@atlaskit/button";
+import { Button } from 'react-daisyui';
+
 import ControlBlock from './ControlBlock'
 import type { Task } from "@prisma/client";
 import { IssuePanelContainer } from 'sharedStyles';
@@ -134,23 +136,25 @@ const CscPanel = ({
       ))}
       <div style={{ marginTop: '15px', display: 'flex', justifyContent: 'flex-end' }}>
         <div style={{ margin: '0 5px' }}>
-          <LoadingButton
-            appearance="primary"
+          <Button
+            color="primary"
+            variant="outline"
+            size="sm"
             onClick={addControl}
-            isDisabled={isDeleting || isSaving}
-            isLoading={isSaving}
+            active={isDeleting || isSaving}
           >
-            {isSaving ? 'Saving' : '+ Add Control'}
-          </LoadingButton>
+            + Add Control
+          </Button>
         </div>
         <div style={{ margin: '0 5px' }}>
-          <LoadingButton
-            appearance="danger"
+          <Button
+            color="error"
+            size="sm"
             onClick={deleteControls}
-            isLoading={isDeleting}
+            active={isDeleting}
           >
             Delete
-          </LoadingButton>
+          </Button>
         </div>
       </div>
     </IssuePanelContainer>
