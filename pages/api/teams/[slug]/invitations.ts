@@ -9,7 +9,12 @@ import {
   getInvitation,
   getInvitations,
 } from 'models/invitation';
-import { addTeamMember, getTeam, isTeamAdmin } from 'models/team';
+import {
+  addTeamMember,
+  getTeam,
+  getTeamMembers,
+  isTeamAdmin,
+} from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
@@ -53,6 +58,16 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!(await isTeamAdmin(session.user.id, team.id))) {
     return res.status(400).json({
       error: { message: 'Bad request.' },
+    });
+  }
+
+  const members = await getTeamMembers(slug);
+
+  if (members.length >= 2) {
+    return res.status(400).json({
+      error: {
+        message: 'You have reached the maximum number of members per team.',
+      },
     });
   }
 
@@ -105,6 +120,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
   const team = await getTeam({ slug });
 
   if (!(await isTeamAdmin(session.user.id, team?.id))) {
+    console.log('no team admin?');
     return res.status(400).json({
       error: { message: 'Bad request.' },
     });
