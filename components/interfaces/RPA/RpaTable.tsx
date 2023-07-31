@@ -8,6 +8,8 @@ import { Button } from "react-daisyui";
 import { useTranslation } from "next-i18next";
 import usePagination from "hooks/usePagination";
 import { TailwindTableWrapper } from "sharedStyles";
+import { StatusBadge } from "@/components/shared";
+import Badge from "@/components/shared/Badge";
 
 const RpaTable = ({
   slug,
@@ -22,6 +24,8 @@ const RpaTable = ({
   editHandler: (task: TaskWithRpaProcedure) => void
   deleteHandler: (task: TaskWithRpaProcedure) => void
 }) => {
+
+  console.log('tasks', tasks)
   const { t } = useTranslation("common");
   const {
     currentPage,
@@ -76,7 +80,10 @@ const RpaTable = ({
                     </Link>
                   </td>
                   <td className="px-1.5 py-1.5">
-                    <Lozenge>{statuses.find(({ value }) => value === task.status)?.label}</Lozenge>
+                    <StatusBadge
+                      label={statuses.find(({ value }) => value === task.status)?.label as string}
+                      value={task.status}
+                    />
                   </td>
                   <td className="px-1.5 py-1.5">
                     <span>{task.properties.rpa_procedure[0].dpo.label}</span>
@@ -87,8 +94,8 @@ const RpaTable = ({
                   <td className="px-1.5 py-1.5">
                     <>
                       {task.properties.rpa_procedure[3].datatransfer
-                        ? <Lozenge appearance="success">Enabled</Lozenge>
-                        : <Lozenge appearance="removed">Disabled</Lozenge>
+                        ? <Badge color="success">Enabled</Badge>
+                        : <Badge color="error">Disabled</Badge>
                       }
                     </>
                   </td>

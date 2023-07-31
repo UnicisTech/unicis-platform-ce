@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { LoadingButton } from "@atlaskit/button";
 import { Button } from 'react-daisyui';
-
+import { useTranslation } from 'next-i18next';
 import ControlBlock from './ControlBlock'
 import type { Task } from "@prisma/client";
 import { IssuePanelContainer } from 'sharedStyles';
@@ -21,6 +21,8 @@ const CscPanel = ({
   }>>
   mutateTask: () => Promise<void>;
 }) => {
+  const { t } = useTranslation('common');
+
   const properties = task?.properties as any
   const issueControls = properties?.csc_controls as string[] || ['']
 
@@ -148,13 +150,20 @@ const CscPanel = ({
         </div>
         <div style={{ margin: '0 5px' }}>
           <Button
+            variant="outline"
+            size="sm"
+            onClick={deleteControls}
+          >
+            {t('remove')}
+          </Button>
+          {/* <Button
             color="error"
             size="sm"
             onClick={deleteControls}
             active={isDeleting}
           >
             Delete
-          </Button>
+          </Button> */}
         </div>
       </div>
     </IssuePanelContainer>

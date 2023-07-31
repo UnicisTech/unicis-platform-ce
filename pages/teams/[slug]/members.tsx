@@ -32,16 +32,16 @@ const TeamMembers: NextPageWithLayout = () => {
       <TeamTab activeTab="members" team={team} />
       <div className="flex flex-col">
         <div className="flex mt-4 justify-end">
-          <Button
-            color="primary"
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              setVisible(!visible);
-            }}
-          >
-            {t('add-member')}
-          </Button>
+            <Button
+              color="primary"
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                setVisible(!visible);
+              }}
+            >
+              {t('add-member')}
+            </Button>
         </div>
         <Members team={team} />
       </div>

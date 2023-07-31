@@ -2,7 +2,7 @@ import { Button } from "react-daisyui";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { Card, Error, Loading } from "@/components/shared";
+import { Card, Error, Loading, StatusBadge } from "@/components/shared";
 import useTasks from "hooks/useTasks";
 import statuses from "@/components/defaultLanding/data/statuses.json"
 import type { Task } from "@prisma/client";
@@ -85,7 +85,11 @@ const Tasks = ({
                       </Link>
                     </td>
                     <td className="px-6 py-3">
-                      {statuses.find(({ value }) => value === task.status)?.label}
+                      <StatusBadge
+                        value={task.status}
+                        label={statuses.find(({ value }) => value === task.status)?.label as string}
+                      />
+                      {/* {statuses.find(({ value }) => value === task.status)?.label} */}
                     </td>
                     <td className="px-6 py-3 btn-group">
                       <Button
