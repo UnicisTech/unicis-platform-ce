@@ -11,9 +11,8 @@ import { GetServerSidePropsContext } from "next";
 import useTeamTasks from "hooks/useTeamTasks";
 import type { TaskWithRpaProcedure } from "types";
 import { CreateRPA, RpaTable, DeleteRpa, DashboardCreateRPA } from "@/components/interfaces/RPA";
-import { PerPageSelector } from "@/components/shared/atlaskit";
-import { perPageOptions } from "@/components/defaultLanding/data/configs/rpa";
 import { Button } from "react-daisyui";
+import { PerPageSelector } from "@/components/shared";
 
 const RpaDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -72,13 +71,8 @@ const RpaDashboard: NextPageWithLayout<
         : <>
           <div className="flex justify-end items-center my-1">
             <PerPageSelector
+              perPage={perPage}
               setPerPage={setPerPage}
-              options={perPageOptions}
-              placeholder="Rows per page"
-              defaultValue={{
-                label: "10",
-                value: 10
-              }}
             />
             <Button
               size="sm"

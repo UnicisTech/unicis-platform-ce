@@ -10,10 +10,9 @@ import { GetServerSidePropsContext } from "next";
 import useTeamTasks from "hooks/useTeamTasks";
 import type { TaskWithTiaProcedure } from "types";
 import { CreateTIA, TiaTable, DeleteTia } from "@/components/interfaces/TIA";
-import { PerPageSelector } from "@/components/shared/atlaskit";
-import { perPageOptions } from "@/components/defaultLanding/data/configs/rpa";
 import { Button } from "react-daisyui";
 import { DashboardCreateTIA } from "@/components/interfaces/TIA";
+import { PerPageSelector } from "@/components/shared";
 
 const TiaDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -70,13 +69,8 @@ const TiaDashboard: NextPageWithLayout<
         : <>
           <div className="flex justify-end items-center my-1">
             <PerPageSelector
+              perPage={perPage}
               setPerPage={setPerPage}
-              options={perPageOptions}
-              placeholder="Rows per page"
-              defaultValue={{
-                label: "10",
-                value: 10
-              }}
             />
             <Button
               size="sm"
