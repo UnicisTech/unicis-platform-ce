@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Modal } from "react-daisyui";
@@ -6,27 +6,30 @@ import { useTranslation } from "next-i18next";
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
 import Form from '@atlaskit/form';
 
-import type { ApiResponse, TaskWithRpaProcedure } from "types";
+import type { ApiResponse } from "types";
 import type { Task } from "@prisma/client";
 import { defaultProcedure } from "@/components/defaultLanding/data/configs/tia";
 import CreateFormBody from "./CreateFormBody"
+import { TaskPickerFormBody } from "@/components/shared/atlaskit";
 
 const shouldSkipTwoSteps = (formData: any) => (["LawfulAccess", "MassSurveillanceTelecommunications", "SelfReportingObligations"].map(prop => ["yes", "na"].includes(formData[prop])).every(result => result === true))
 
-const CreateTIA = ({
+const DashboardCreateTIA = ({
   visible,
   setVisible,
-  task,
+  tasks,
   mutate
 }: {
   visible: boolean;
   setVisible: (visible: boolean) => void;
-  task: Task | TaskWithRpaProcedure;
+  tasks: Array<Task>;
   mutate: () => Promise<void>
 }) => {
   const { t } = useTranslation("common");
 
+  const [task, setTask] = useState<Task | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [modalStage, setModalStage] = useState(0)
   const [stage, setStage] = useState(0);
   const [validationMessage, setValidationMessage] = useState('');
   const [procedure, setProcedure] = useState<any[]>([]);
@@ -36,6 +39,17 @@ const CreateTIA = ({
   const [nonTargetedRisk, setNonTargetedRisk] = useState<number>(0)
   const [selfReportingRisk, setSelfReportingRisk] = useState<number>(0)
   const [isPermitted, setIsPermitted] = useState<boolean>(true)
+
+  const tasksWithoutProcedures = useMemo<Array<Task>>(() => {
+    if (!tasks) {
+      return []
+    }
+    return tasks.filter(task => {
+      const taskProperties = task.properties as any
+      const procedure = taskProperties.tia_procedure
+      return !procedure
+    }) as Task[]
+  }, [tasks])
 
   const procedureFieldHandler = useCallback((
     e: React.ChangeEvent<HTMLInputElement>,
@@ -150,6 +164,10 @@ const CreateTIA = ({
   }, [])
 
   const saveProcedure = useCallback(async (procedure: any[], prevProcedure: any[], reset: any) => {
+    if (!task) {
+      return
+    }
+
     setIsLoading(true)
 
     const response = await axios.post<ApiResponse<Task>>(`/api/tasks/${task.id}/tia`, {
@@ -172,7 +190,7 @@ const CreateTIA = ({
     setVisible(false)
 
     cleanup(reset)
-  }, [prevProcedure])
+  }, [prevProcedure, task])
 
   const validate = useCallback((formData: any) => {
     if (formData.reviewDate != null) {
@@ -186,10 +204,17 @@ const CreateTIA = ({
   }, [])
 
   const onSubmit = useCallback(async (formData: any, { reset }: any) => {
+    if (modalStage === 0) {
+      const task = formData.task.value
+      setTask(task)
+      setModalStage(1)
+      return
+    }
+
     const message = validate(formData);
 
     if (procedure[stage] != null) {
-      procedure[stage] = {...procedure[stage], ...formData};
+      procedure[stage] = { ...procedure[stage], ...formData };
     } else {
       setProcedure([...procedure, formData]);
     }
@@ -206,7 +231,7 @@ const CreateTIA = ({
     } else {
       setStage(stage + 1);
     }
-  }, [stage, procedure, prevProcedure])
+  }, [stage, procedure, prevProcedure, modalStage])
 
   const backHandler = useCallback(() => {
     if (stage > 0) {
@@ -226,13 +251,7 @@ const CreateTIA = ({
   }, [])
 
   useEffect(() => {
-    const taskProperties = task.properties as any
-    if (taskProperties?.tia_procedure) {
-      setProcedure(taskProperties.tia_procedure)
-      setPrevProcedure([...taskProperties.tia_procedure])
-    } else {
-      setProcedure(defaultProcedure)
-    }
+    setProcedure(defaultProcedure)
   }, [])
 
   return (
@@ -244,46 +263,79 @@ const CreateTIA = ({
           const { formProps, reset, setFieldValue } = props
           return (
             <form {...formProps}>
-              <Modal.Header className="font-bold">{`Register Transfer Impact Assessment ${stage + 1}/5`}</Modal.Header>
+              <Modal.Header className="font-bold">
+                {modalStage === 0 && `Select a task`}
+                {modalStage === 1 && `Register Transfer Impact Assessment ${stage + 1}/5`}
+              </Modal.Header>
               <Modal.Body>
-                <CreateFormBody
-                  stage={stage}
-                  validationMessage={validationMessage}
-                  procedure={procedure}
-                  transferIs={transferIs}
-                  targetedRisk={targetedRisk}
-                  nonTargetedRisk={nonTargetedRisk}
-                  selfReportingRisk={selfReportingRisk}
-                  isPermitted={isPermitted}
-                  procedureFieldHandler={procedureFieldHandler}
-                  setFieldValue={setFieldValue}
-                />
+                {modalStage === 0 &&
+                  <TaskPickerFormBody
+                    tasks={tasksWithoutProcedures}
+                  />
+                }
+                {modalStage === 1 &&
+                  <CreateFormBody
+                    stage={stage}
+                    validationMessage={validationMessage}
+                    procedure={procedure}
+                    transferIs={transferIs}
+                    targetedRisk={targetedRisk}
+                    nonTargetedRisk={nonTargetedRisk}
+                    selfReportingRisk={selfReportingRisk}
+                    isPermitted={isPermitted}
+                    procedureFieldHandler={procedureFieldHandler}
+                    setFieldValue={setFieldValue}
+                  />
+                }
               </Modal.Body>
               <Modal.Actions>
-                <AtlaskitButton
-                  appearance="default"
-                  onClick={() => closeHandler(reset)}
-                  isDisabled={isLoading}
-                >
-                  {t("close")}
-                </AtlaskitButton>
-                <AtlaskitButton
-                  appearance="default"
-                  onClick={backHandler}
-                  isDisabled={stage === 0 || isLoading}
-                >
-                  {t("back")}
-                </AtlaskitButton>
-                <LoadingButton
-                  type="submit"
-                  appearance="primary"
-                  isLoading={isLoading}
-                >
-                  {stage < 4
-                    ? t("next")
-                    : t("save")
-                  }
-                </LoadingButton>
+                {modalStage === 0 &&
+                  <>
+                    <AtlaskitButton
+                      appearance="default"
+                      onClick={() => closeHandler(reset)}
+                      isDisabled={isLoading}
+                    >
+                      {t("close")}
+                    </AtlaskitButton>
+                    <LoadingButton
+                      type="submit"
+                      appearance="primary"
+                      isLoading={isLoading}
+                    >
+                      {t("next")}
+                    </LoadingButton>
+                  </>
+                }
+                {modalStage === 1 &&
+                  <>
+                    <AtlaskitButton
+                      appearance="default"
+                      onClick={() => closeHandler(reset)}
+                      isDisabled={isLoading}
+                    >
+                      {t("close")}
+                    </AtlaskitButton>
+                    <AtlaskitButton
+                      appearance="default"
+                      onClick={backHandler}
+                      isDisabled={stage === 0 || isLoading}
+                    >
+                      {t("back")}
+                    </AtlaskitButton>
+                    <LoadingButton
+                      type="submit"
+                      appearance="primary"
+                      isLoading={isLoading}
+                    >
+                      {stage < 4
+                        ? t("next")
+                        : t("save")
+                      }
+                    </LoadingButton>
+                  </>
+                }
+
               </Modal.Actions>
             </form>
           )
@@ -294,4 +346,4 @@ const CreateTIA = ({
   );
 };
 
-export default CreateTIA;
+export default DashboardCreateTIA;

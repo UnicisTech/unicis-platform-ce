@@ -34,7 +34,7 @@ InferGetServerSidePropsType<typeof getServerSideProps>
             setVisible(!visible);
           }}
         >
-          {t("create-task")}
+          {t("create")}
         </Button>
       </div>
       <CreateTask visible={visible} setVisible={setVisible} team={team}/>

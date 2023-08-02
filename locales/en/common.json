@@ -162,7 +162,7 @@
   "new-team": "New Team",
   "profile": "Profile",
   "all-tasks": "All Tasks",
-  "create-task": "Create",
+  "create": "Create",
   "csc": "Cybersecurity Management System",
   "rpa": "Register of Procedures",
   "rpa-activities": "Record of Processing Activities",
@@ -180,6 +180,7 @@
   "tia-egal-analysis": "Legal analysis",
   "tia-transfer-is": "Transfer is",
   "create-tia": "Register Transfer Impact Assessment",
+  "tia-created": "Record of Transfer Impact Assessment created successfully.",
   "iap": "Interactive Awareness Training",
   "task-id": "Task ID",
   "delete-task": "Delete",
@@ -193,5 +194,6 @@
   "next": "Next",
   "back": "Back",
   "attachment-delete": "Delete this attachment?",
-  "submit": "Submit"
+  "submit": "Submit",
+  "choose": "Choose"
 }

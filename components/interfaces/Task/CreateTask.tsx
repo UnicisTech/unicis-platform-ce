@@ -215,7 +215,7 @@ const CreateTask = ({
                 {t("close")}
               </AtlaskitButton>
               <AtlaskitButton type="submit" appearance="primary" ref={submitButtonRef}>
-                {t("create-task")}
+                {t("create")}
               </AtlaskitButton>
             </Modal.Actions>
           </form>
