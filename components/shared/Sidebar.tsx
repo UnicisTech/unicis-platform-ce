@@ -4,10 +4,18 @@ import {
   LockClosedIcon,
   RectangleStackIcon,
   UserCircleIcon,
+  UsersIcon
 } from '@heroicons/react/24/outline';
+
+import {
+  QueueListIcon
+} from "@heroicons/react/24/solid";
+import useTeams from 'hooks/useTeams';
+import { useSession } from 'next-auth/react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
+import Icon from './Icon';
 
 import SidebarItem, { type SidebarMenuItem } from './SidebarItem';
 import TeamDropdown from './TeamDropdown';
@@ -21,6 +29,18 @@ export default function Sidebar() {
   const { t } = useTranslation('common');
 
   const { slug } = router.query;
+
+  useEffect(() => {
+    if (typeof slug === 'string') {
+      document.title = `Unicis Platform - ${slug}`
+    } else {
+      document.title = 'Unicis Platform';
+    }
+    
+    return () => {
+      document.title = 'Unicis Platform';
+    };
+  }, [slug])
 
   const sidebarMenus: SidebarMenus = {
     personal: [
@@ -42,8 +62,34 @@ export default function Sidebar() {
     ],
     team: [
       {
+        name: t('all-tasks'),
+        href: `/teams/${slug}/tasks`,
+        icon: QueueListIcon,
+        className: "fill-blue-600"
+      },
+      {
+        name: t('rpa-activities'),
+        href: `/teams/${slug}/rpa`,
+        icon: () => <Icon src="/unicis-rpa-logo.png" />,
+      },
+      {
+        name: t('tia'),
+        href: `/teams/${slug}/tia`,
+        icon: () => <Icon src="/unicis-tia-logo.png" />,
+      },
+      {
+        name: t('csc'),
+        href: `/teams/${slug}/csc`,
+        icon: () => <Icon src="/unicis-csc-logo.png" />,
+      },
+      // {
+      //   name: t('iap'),
+      //   href: `/teams/${slug}/iap`,
+      //   icon: () => <Icon src="/unicis-iap-logo.png" />
+      // },
+      {
         name: t('all-products'),
-        href: `/teams/${slug}/products`,
+        href: 'https://www.unicis.tech/docs',
         icon: CodeBracketIcon,
       },
       {

@@ -2,9 +2,9 @@ import packageInfo from '../package.json';
 
 const app = {
   version: packageInfo.version,
-  name: 'BoxyHQ',
-  logoUrl: 'https://boxyhq.com/img/logo.png',
-  url: 'http://localhost:4002',
+  name: 'Unicis Platform',
+  logoUrl: 'https://www.unicis.tech/img/logo-unicis.png',
+  url: 'http://localhost:3002',
 };
 
 export default app;

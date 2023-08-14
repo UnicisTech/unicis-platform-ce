@@ -1,4 +1,5 @@
 import app from '@/lib/app';
+import Image from 'next/image';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { Button } from 'react-daisyui';
@@ -39,11 +40,15 @@ export default function Navbar() {
                 />
               </svg>
             </button>
-            <div className="flex items-center text-xl font-bold lg:ml-2.5">
-              <Link href="/">
-                <span className="self-center whitespace-nowrap">
-                  {app.name}
-                </span>
+            <div className="flex items-center text-xl font-bold lg:ml-2.5 justify-start">
+              <Link href="/teams">
+                <Image
+                  src="/unicis-platform-logo-hor.svg"
+                  alt="Unicis.App"
+                  width={150}
+                  height={50}
+                  style={{ height: '50px' }}
+                />
               </Link>
             </div>
           </div>

@@ -19,15 +19,14 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -49,33 +48,72 @@ model VerificationToken {
 }
 
 model User {
-  id            String    @id @default(uuid())
+  id            String       @id @default(uuid())
   name          String
-  email         String    @unique
+  email         String       @unique
   emailVerified DateTime?
   password      String?
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @default(now())
-
-  teamMembers TeamMember[]
-  accounts    Account[]
-  sessions    Session[]
-  invitations Invitation[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @default(now())
+  accounts      Account[]
+  invitations   Invitation[]
+  sessions      Session[]
+  Task          Task[]
+  teamMembers   TeamMember[]
+  Comment       Comment[]
 }
 
 model Team {
-  id          String   @id @default(uuid())
+  id          String       @id @default(uuid())
+  taskIndex   Int          @default(1)
   name        String
   slug        String   @unique
   domain      String?  @unique
   defaultRole Role     @default(MEMBER)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
-
   members     TeamMember[]
   invitations Invitation[]
   apiKeys     ApiKey[]
+  tasks       Task[]
+  properties  Json         @default("{}")
+}
+
+model Task {
+  id          Int       @id @default(autoincrement())
+  taskNumber  Int
+  teamId      String
+  authorId    String
+  title       String
+  status      String
+  duedate     String
+  description String
+  comments    Comment[]
+  attachments Attachment[]
+  properties  Json
+  author      User      @relation(fields: [authorId], references: [id])
+  team        Team      @relation(fields: [teamId], references: [id], onDelete: Cascade)
+}
+
+model Comment {
+  id          Int      @id @default(autoincrement())
+  text        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  taskId      Int
+  createdById String
+  task        Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  createdBy   User     @relation(fields: [createdById], references: [id])
+}
+
+model Attachment {
+  id        String   @id @default(uuid())
+  taskId    Int
+  filename  String
+  fileData  Bytes
+  url       String
+  task      Task     @relation(fields: [taskId], references: [id])
 }
 
 model TeamMember {
@@ -85,9 +123,8 @@ model TeamMember {
   role      Role     @default(MEMBER)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
-
-  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([teamId, userId])
   @@index([userId])
@@ -103,9 +140,8 @@ model Invitation {
   invitedBy String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
-
-  user User @relation(fields: [invitedBy], references: [id], onDelete: Cascade)
-  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [invitedBy], references: [id], onDelete: Cascade)
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
 
   @@unique([teamId, email])
 }
