@@ -1,5 +1,5 @@
 import type { NextPageWithLayout } from "types";
-import type {InferGetServerSidePropsType} from "next"
+import type { InferGetServerSidePropsType } from "next"
 import { Button } from "react-daisyui";
 import { useState } from "react";
 import { useTranslation } from "next-i18next";
@@ -11,7 +11,7 @@ import { CreateTask, Tasks, DeleteTask, EditTask } from "@/components/interfaces
 import { getTeam } from "models/team";
 
 const AllTasks: NextPageWithLayout<
-InferGetServerSidePropsType<typeof getServerSideProps>
+  InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ team }) => {
   const [visible, setVisible] = useState(false);
 
@@ -37,10 +37,10 @@ InferGetServerSidePropsType<typeof getServerSideProps>
           {t("create")}
         </Button>
       </div>
-      <CreateTask visible={visible} setVisible={setVisible} team={team}/>
-      {editVisible && <EditTask visible={editVisible} setVisible={setEditVisible} team={team} task={taskToEdit}/>}
-      <DeleteTask visible={deleteVisible} setVisible={setDeleteVisible} taskId={taskToDelete}/>
-      <Tasks 
+      <CreateTask visible={visible} setVisible={setVisible} team={team} />
+      {editVisible && <EditTask visible={editVisible} setVisible={setEditVisible} team={team} task={taskToEdit} />}
+      <DeleteTask visible={deleteVisible} setVisible={setDeleteVisible} taskId={taskToDelete} />
+      <Tasks
         setTaskToDelete={setTaskToDelete}
         setDeleteVisible={setDeleteVisible}
         setTaskToEdit={setTaskToEdit}
@@ -57,10 +57,16 @@ export const getServerSideProps = async (
 
   const slug = query.slug as string
 
+  const team = await getTeam({ slug })
+
+  //Hotfix for not serializable team props
+  team.createdAt = team.createdAt.toString()
+  team.updatedAt = team.updatedAt.toString()
+
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ["common"]) : {}),
-      team: await getTeam({slug})
+      team: team
     },
   };
 };
