@@ -91,6 +91,7 @@ export const config: RpaConfig = {
   ],
   guarantee: [
     { label: 'Standard contractual clauses (SCC)', value: 'scc' },
+    { label: 'EU-US Data Privacy Framework (EU-US DPF)', value: 'dpf' },
     { label: 'Binding corporate rules', value: 'bcr' },
     {
       label: 'Country providing an adequate level of protection',
