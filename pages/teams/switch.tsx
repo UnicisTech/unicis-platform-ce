@@ -31,7 +31,11 @@ const Organizations: NextPageWithLayout<
       return;
     }
 
-    router.push(`/dashboard`);
+    if (teams[0]) {
+      router.push(`/teams/${teams[0].slug}/tasks`)
+    } else {
+      router.push(`/dashboard`);
+    }
   });
 
   return (
