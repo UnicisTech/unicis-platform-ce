@@ -110,5 +110,9 @@ export const permissions: RolePermissions = {
       resource: 'team',
       actions: ['read', 'leave'],
     },
+    {
+      resource: 'team_member',
+      actions: ['read'],
+    },
   ],
 };
