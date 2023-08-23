@@ -147,7 +147,11 @@ const EditTask = ({
                   {({ fieldProps: { id, ...rest }, error }) => (
                     <Fragment>
                       <WithoutRing>
-                        <DatePicker selectProps={{ inputId: id }} {...rest} />
+                        <DatePicker 
+                          selectProps={{ inputId: id }} 
+                          {...rest} 
+                          locale="en-GB"
+                        />
                       </WithoutRing>
                       {error && <ErrorMessage>{error}</ErrorMessage>}
                     </Fragment>

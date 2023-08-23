@@ -4,29 +4,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { TaskExtended } from "types";
 import AttachmentsCard from "./AttachmentCard";
-import json from "@/components/defaultLanding/data/availableExtensions.json"
-
-const availableExtensions = json["availableExtensions"] as any
-
-const getFileExtensionFromFileName = (fileName: string) => {
-  const lastDotIndex = fileName.lastIndexOf('.');
-  if (lastDotIndex !== -1 && lastDotIndex < fileName.length - 1) {
-    return fileName.substr(lastDotIndex + 1).toLowerCase();
-  }
-  return null;
-};
-
-const checkExtensionAndMIMEType = (file: File) => {
-  const extension = getFileExtensionFromFileName(file.name)
-  if (extension) {
-    const isAllowedExtension = availableExtensions[extension]
-    const isAllowedType = availableExtensions[extension] === file.type
-    if (isAllowedExtension && isAllowedType) {
-      return true
-    }
-  }
-  return false
-}
+import { checkExtensionAndMIMEType } from "@/components/services/taskService";
 
 const Attachments = ({
   task,

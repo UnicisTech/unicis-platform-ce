@@ -22,6 +22,7 @@ import statusesData from "@/components/defaultLanding/data/statuses.json"
 import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
 import { WithoutRing } from "sharedStyles";
 import useTasks from "hooks/useTasks";
+import { getCurrentStringDate } from "@/components/services/taskService";
 
 interface Status {
   label: string;
@@ -167,7 +168,7 @@ const CreateTask = ({
                 <Field
                   name="duedate"
                   label="Due date"
-                  defaultValue=""
+                  defaultValue={getCurrentStringDate()}
                   isRequired
                   aria-required={true}
                   validate={async (value) => {
@@ -183,7 +184,14 @@ const CreateTask = ({
                   {({ fieldProps: { id, ...rest }, error }) => (
                     <Fragment>
                       <WithoutRing>
-                        <DatePicker selectProps={{ inputId: id }} {...rest} />
+                        <DatePicker 
+                          selectProps={{ inputId: id }} 
+                          {...rest} 
+                          
+                          //placeholder={'ssss'}
+                          locale="en-GB"
+                          //onChange={event => console.log('change event', event)}
+                        />
                       </WithoutRing>
                       {error && <ErrorMessage>{error}</ErrorMessage>}
                     </Fragment>
