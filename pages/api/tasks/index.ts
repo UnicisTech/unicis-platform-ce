@@ -1,6 +1,8 @@
 import { getSession } from '@/lib/session';
 import { createTask, deleteTask, getTasks, updateTask } from 'models/task';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { sendEvent } from '@/lib/svix';
+import { throwIfNoTeamAccess } from 'models/team';
 
 export default async function handler(
   req: NextApiRequest,
@@ -29,8 +31,12 @@ export default async function handler(
 // Create a task
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const { title, status, duedate, description, teamId } = req.body;
+  const teamMember = await throwIfNoTeamAccess(req, res);
+
+  //todo:   throwIfNotAllowed(teamMember, 'team_webhook', 'delete');
+
   const session = await getSession(req, res);
-  await createTask({
+  const task = await createTask({
     authorId: session?.user?.id as string,
     teamId,
     title,
@@ -38,6 +44,8 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     duedate,
     description,
   });
+
+  await sendEvent(teamMember.teamId, 'task.created', task);
 
   return res.status(200).json({ data: {}, error: null });
 };
@@ -47,6 +55,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const { taskId, data } = req.body;
   const session = await getSession(req, res);
+  const teamMember = await throwIfNoTeamAccess(req, res);
 
   if (!session) {
     return res.status(200).json({
@@ -55,9 +64,11 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const updatedTask = await updateTask(taskId, data);
+  const task = await updateTask(taskId, data);
 
-  return res.status(200).json({ data: updatedTask, error: null });
+  await sendEvent(teamMember.teamId, 'task.updated', task);
+
+  return res.status(200).json({ data: task, error: null });
 };
 
 // Get tasks for user
@@ -74,6 +85,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
   const { taskId } = req.body;
   const session = await getSession(req, res);
+  const teamMember = await throwIfNoTeamAccess(req, res);
 
   if (!session) {
     return res.status(200).json({
@@ -82,7 +94,9 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  await deleteTask(taskId);
+  const task = await deleteTask(taskId);
+
+  await sendEvent(teamMember.teamId, 'task.deleted', task);
 
   return res.status(200).json({ data: {}, error: null });
 };

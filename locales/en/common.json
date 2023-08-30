@@ -32,6 +32,7 @@
   "send-invite": "Send Invite",
   "invite-new-member": "Invite New Member",
   "invite-member-message": "Invite new member by email to join your organization.",
+  "choose-subscription-message": "Choose your subscription plan.",
   "accept-invitation": "Accept invitation",
   "create-team": "Create Team",
   "remove-team": "Remove Team",
@@ -131,6 +132,7 @@
   "team-slug": "Team Slug",
   "team-slug-description": "A unique ID used to identify this team in URLs.",
   "team-domain": "Domain",
+  "team-subscription": "Team Subscription",
   "acs-url": "ACS URL",
   "metadata-url": "Metadata URL",
   "metadata-xml": "Metadata XML",
@@ -209,5 +211,6 @@
   "back": "Back",
   "attachment-delete": "Delete this attachment?",
   "submit": "Submit",
-  "choose": "Choose"
+  "choose": "Choose",
+  "subscribe": "Subscribe"
 }

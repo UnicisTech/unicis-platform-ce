@@ -2,6 +2,8 @@ import { getSession } from '@/lib/session';
 import { createComment, deleteComment } from 'models/comment';
 import { getTeam, isTeamMember } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { throwIfNoTeamAccess } from 'models/team';
+import { sendEvent } from '@/lib/svix';
 
 export default async function handler(
   req: NextApiRequest,
@@ -35,6 +37,8 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession(req, res);
   const userId = session?.user?.id as string;
 
+  const teamMember = await throwIfNoTeamAccess(req, res);
+
   const team = await getTeam({ slug: slug as string });
 
   if (!(await isTeamMember(userId, team?.id))) {
@@ -45,6 +49,9 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const comment = await createComment({ text, taskId, userId });
+
+  await sendEvent(teamMember.teamId, 'task.commented', comment);
+
   return res.status(200).json({ data: comment, error: null });
 };
 
