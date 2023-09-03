@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useEffect, useMemo } from "react";
+import { getAxiosError } from '@/lib/common';
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { Modal } from "react-daisyui";
 import { useTranslation } from "next-i18next";
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
@@ -26,6 +28,9 @@ const DashboardCreateTIA = ({
   mutate: () => Promise<void>
 }) => {
   const { t } = useTranslation("common");
+
+  const router = useRouter();
+  const { slug } = router.query;
 
   const [task, setTask] = useState<Task | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -168,28 +173,33 @@ const DashboardCreateTIA = ({
       return
     }
 
-    setIsLoading(true)
+    try {
+      setIsLoading(true)
 
-    const response = await axios.post<ApiResponse<Task>>(`/api/tasks/${task.id}/tia`, {
-      prevProcedure: prevProcedure,
-      nextProcedure: procedure,
-    });
+      const response = await axios.post<ApiResponse<Task>>(`/api/teams/${slug}/tasks/${task.id}/tia`, {
+        prevProcedure: prevProcedure,
+        nextProcedure: procedure,
+      });
 
-    const { error } = response.data;
+      const { error } = response.data;
 
-    if (error) {
-      toast.error(error.message);
-      return;
-    } else {
-      toast.success(t("tia-created"));
+      if (error) {
+        toast.error(error.message);
+        return;
+      } else {
+        toast.success(t("tia-created"));
+      }
+
+      mutate()
+
+      setIsLoading(false)
+      setVisible(false)
+
+      cleanup(reset)
+    } catch (error: any) {
+      setIsLoading(false)
+      toast.error(getAxiosError(error));
     }
-
-    mutate()
-
-    setIsLoading(false)
-    setVisible(false)
-
-    cleanup(reset)
   }, [prevProcedure, task])
 
   const validate = useCallback((formData: any) => {

@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Error, Loading } from '@/components/shared';
 import { DatePicker } from '@atlaskit/datetime-picker'
 import TextField from '@atlaskit/textfield';
 import TextArea from '@atlaskit/textarea';
@@ -7,10 +8,12 @@ import Select, {
 } from '@atlaskit/select';
 import { Checkbox } from '@atlaskit/checkbox';
 import { ErrorMessage, Field, CheckboxField, FormFooter, HelperMessage } from '@atlaskit/form';
-import type { TeamMemberWithUser, RpaOption } from "types";
+import type { RpaOption } from "types";
 import { WithoutRing } from "sharedStyles";
 import { Message } from "@/components/shared/atlaskit";
 import { format } from 'date-fns'
+import useTeamMembers from "hooks/useTeamMembers";
+import { useRouter } from "next/router";
 import { config, headers, fieldPropsMapping } from "@/components/defaultLanding/data/configs/rpa"
 
 
@@ -18,11 +21,24 @@ interface FormBodyProps {
   stage: number;
   validationMessage: string;
   procedure: any[];
-  members: TeamMemberWithUser[] | null | undefined;
-
 }
 
-const CreateFormBody = ({stage, validationMessage, procedure, members} : FormBodyProps) => {
+const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) => {
+
+  const router = useRouter();
+  const { slug } = router.query;
+  const { isLoading, isError, members } = useTeamMembers(
+    slug as string
+  );
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (!members || isError) {
+    return <Error message={isError.message} />;
+  }
+  
   return (
     <>
       <div

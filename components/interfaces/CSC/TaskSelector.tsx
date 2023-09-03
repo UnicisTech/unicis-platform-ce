@@ -17,8 +17,8 @@ const TaskSelector = ({
     const [options, setOptions] = useState<CscOption[]>([])
 
     useEffect(() => {
-        const options = tasks.map(task => ({ label: task.title, value: task.id }))
-        const selectedOptions = tasks.filter((task: any) => task.properties?.csc_controls?.find((item: string) => item === control))?.map(issue => ({ label: issue.title, value: issue.id }))
+        const options = tasks.map(task => ({ label: task.title, value: task.taskNumber }))
+        const selectedOptions = tasks.filter((task: any) => task.properties?.csc_controls?.find((item: string) => item === control))?.map(issue => ({ label: issue.title, value: issue.taskNumber }))
         setOptions(options)
         setValue(selectedOptions)
     }, [])

@@ -3,23 +3,41 @@ import { prisma } from '@/lib/prisma';
 export const createComment = async (params: {
   text: string;
   userId: string;
-  taskId: number;
+  taskNumber: number;
+  slug: string;
 }) => {
-  const { text, taskId, userId } = params;
+  const { text, taskNumber, slug, userId } = params;
+
+  const task = await prisma.task.findFirst({
+    where: {
+      taskNumber,
+      team: {
+        slug,
+      },
+    },
+  });
+
+  if (!task) {
+    return null;
+  }
+
   const comment = await prisma.comment.create({
     data: {
       text,
-      taskId,
+      taskId: task.id,
       createdById: userId,
     },
   });
+
   return comment;
 };
 
 export const deleteComment = async (id: number) => {
-  await prisma.comment.delete({
+  const comment = await prisma.comment.delete({
     where: {
       id,
     },
   });
+
+  return comment;
 };

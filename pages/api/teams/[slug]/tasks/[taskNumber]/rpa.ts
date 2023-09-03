@@ -1,8 +1,7 @@
-import { createComment, deleteComment } from 'models/comment';
+import { deleteProcedure, saveProcedure } from '@/lib/rpa';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
-import { sendEvent } from '@/lib/svix';
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,7 +15,7 @@ export default async function handler(
     case 'DELETE':
       return handleDELETE(req, res);
     default:
-      res.setHeader('Allow', ['GET', 'DELETE', 'PUT']);
+      res.setHeader('Allow', ['POST', 'DELETE']);
       res.status(405).json({
         data: null,
         error: { message: `Method ${method} Not Allowed` },
@@ -24,12 +23,12 @@ export default async function handler(
   }
 }
 
-// Create a comment
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
   throwIfNotAllowed(teamMember, 'task', 'update');
 
   const { slug, taskNumber } = req.query;
+
   const taskNumberAsNumber = Number(taskNumber);
 
   if (isNaN(taskNumberAsNumber)) {
@@ -40,43 +39,55 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const { text } = req.body;
-  const userId = teamMember.user.id;
+  const { prevProcedure, nextProcedure } = req.body;
 
-  const comment = await createComment({
-    text,
+  const task = await saveProcedure({
+    user: teamMember.user,
     taskNumber: taskNumberAsNumber,
     slug: slug as string,
-    userId,
+    prevProcedure,
+    nextProcedure,
   });
 
-  if (!comment) {
+  if (!task) {
     return res.status(400).json({
       error: {
-        message: 'Comment not created',
+        message: 'Something went wrong!',
       },
     });
   }
 
-  await sendEvent(teamMember.teamId, 'task.commented', comment);
-
-  return res.status(200).json({ data: comment, error: null });
+  return res.status(200).json({ data: {}, error: null });
 };
-
-// Delete a comment
 
 const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
   throwIfNotAllowed(teamMember, 'task', 'update');
 
-  const { id } = req.body;
+  const { slug, taskNumber } = req.query;
 
-  const comment = await deleteComment(id);
+  const taskNumberAsNumber = Number(taskNumber);
 
-  if (!comment) {
+  if (isNaN(taskNumberAsNumber)) {
     return res.status(400).json({
       error: {
-        message: 'Comment not deleted',
+        message: 'Invalid task number',
+      },
+    });
+  }
+
+  const task = await deleteProcedure({
+    user: teamMember.user,
+    taskNumber: taskNumberAsNumber,
+    slug: slug as string,
+    prevProcedure: [],
+    nextProcedure: [],
+  });
+
+  if (!task) {
+    return res.status(400).json({
+      error: {
+        message: 'Something went wrong!',
       },
     });
   }

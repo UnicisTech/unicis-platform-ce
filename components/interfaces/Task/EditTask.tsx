@@ -53,9 +53,8 @@ const EditTask = ({
         onSubmit={async (data, {reset}) => {
           const { title, status, duedate, description } = data
           const response = await axios.put<ApiResponse<Task>>(
-            `/api/tasks`,
+            `/api/teams/${team.slug}/tasks/${task.taskNumber}`,
             {
-                taskId: task.id,
                 data: {
                     title,
                     status: status?.value,

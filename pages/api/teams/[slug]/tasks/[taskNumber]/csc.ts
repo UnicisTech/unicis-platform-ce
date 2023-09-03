@@ -3,10 +3,9 @@ import {
   changeControlInIssue,
   removeControlsFromIssue,
 } from '@/lib/csc';
-import { getSession } from '@/lib/session';
-import { isUserHasAccess } from 'models/task';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { Session } from 'next-auth';
+import { throwIfNoTeamAccess } from 'models/team';
+import { throwIfNotAllowed } from 'models/user';
 
 export default async function handler(
   req: NextApiRequest,
@@ -27,47 +26,46 @@ export default async function handler(
 }
 
 const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { slug } = req.query;
+  const teamMember = await throwIfNoTeamAccess(req, res);
+  throwIfNotAllowed(teamMember, 'task', 'update');
+
+  const { slug, taskNumber } = req.query;
+
+  const taskNumberAsNumber = Number(taskNumber);
+
+  if (isNaN(taskNumberAsNumber)) {
+    return res.status(400).json({
+      error: {
+        message: 'Invalid task number',
+      },
+    });
+  }
+
   const { operation, controls } = req.body;
-
-  const session = await getSession(req, res);
-  const user = session?.user as Session['user'];
-  const userId = user?.id as string;
-
-  if (!session) {
-    return res.status(200).json({
-      data: null,
-      error: { message: 'Bad request.' },
-    });
-  }
-
-  if (!(await isUserHasAccess({ userId, taskId: Number(slug) }))) {
-    return res.status(200).json({
-      data: null,
-      error: { message: 'User has no access to this task.' },
-    });
-  }
 
   if (operation === 'add') {
     await addControlsToIssue({
-      user,
-      taskId: Number(slug),
+      user: teamMember.user,
+      taskNumber: taskNumberAsNumber,
+      slug: slug as string,
       controls,
     });
   }
 
   if (operation === 'remove') {
     await removeControlsFromIssue({
-      user,
-      taskId: Number(slug),
+      user: teamMember.user,
+      taskNumber: taskNumberAsNumber,
+      slug: slug as string,
       controls,
     });
   }
 
   if (operation === 'change') {
     await changeControlInIssue({
-      user,
-      taskId: Number(slug),
+      user: teamMember.user,
+      taskNumber: taskNumberAsNumber,
+      slug: slug as string,
       controls,
     });
   }

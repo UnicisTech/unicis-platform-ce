@@ -65,9 +65,9 @@ const CscDashboard: NextPageWithLayout<
     const taskSelectorHandler = useCallback(async (action: string, dataToRemove: any, control: string) => {
       const operation = action === "select-option" ? "add" : "remove"
       for (const option of dataToRemove) {
-        const issueId = option.value
+        const taskNumber = option.value
         const response = await axios.put(
-          `/api/tasks/${issueId}/csc`,
+          `/api/teams/${slug}/tasks/${taskNumber}/csc`,
           {
             controls: [control],
             operation

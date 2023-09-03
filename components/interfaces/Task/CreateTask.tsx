@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useEffect } from "react";
+import React, { Fragment, useRef } from "react";
 import { Team } from "@prisma/client";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -16,8 +16,6 @@ import type { ApiResponse } from "types";
 import type { Task } from "@prisma/client";
 import AtlaskitButton from '@atlaskit/button/standard-button';
 import statusesData from "@/components/defaultLanding/data/statuses.json"
-//import statusesData from "data/statuses.json";
-
 
 import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
 import { WithoutRing } from "sharedStyles";
@@ -60,33 +58,17 @@ const CreateTask = ({
   const { mutateTasks } = useTasks(slug as string)
   const { t } = useTranslation("common");
 
-  // useEffect(() => {
-  //   submitButtonRef.current?.addEventListener('click', () => {
-  //     formRef.current?.submit();
-  //   });
-
-  //   return () => {
-  //     submitButtonRef.current?.removeEventListener('click', () => {
-  //       formRef.current?.submit();
-  //     });
-  //   };
-  // }, []);
-
-
   return (
     <Modal open={visible} style={{ height: "80%" }}>
       <Modal.Header className="font-bold">Create Task</Modal.Header>
       <Form<FormData>
         onSubmit={async (data, { reset }) => {
           const { title, status, duedate, description } = data
-          console.log('data form', data)
           const response = await axios.post<ApiResponse<Task>>(
-            `/api/tasks`,
+            `/api/teams/${team.slug}/tasks`,
             {
               title,
               status: status?.value,
-              teamSlug: slug,
-              teamId: team.id,
               duedate,
               description: description || ''
             }

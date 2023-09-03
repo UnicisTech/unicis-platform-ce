@@ -1,12 +1,14 @@
 import React, { useState, useCallback, useEffect } from "react";
+import { getAxiosError } from '@/lib/common';
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Modal } from "react-daisyui";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
 import Form from '@atlaskit/form';
 
-import type { ApiResponse, TeamMemberWithUser, TaskWithRpaProcedure, RpaOption } from "types";
+import type { ApiResponse, TaskWithRpaProcedure } from "types";
 import type { Task } from "@prisma/client";
 import CreateFormBody from "./CreateFormBody";
 
@@ -14,16 +16,17 @@ const CreateRPA = ({
   visible,
   setVisible,
   task,
-  members,
   mutate
 }: {
   visible: boolean;
   setVisible: (visible: boolean) => void;
   task: Task | TaskWithRpaProcedure;
-  members: TeamMemberWithUser[] | null | undefined;
   mutate: () => Promise<void>
 }) => {
   const { t } = useTranslation("common");
+
+  const router = useRouter();
+  const { slug } = router.query;
 
   const [isLoading, setIsLoading] = useState(false)
   const [stage, setStage] = useState(0);
@@ -38,28 +41,34 @@ const CreateRPA = ({
   }, [])
 
   const saveProcedure = useCallback(async (procedure: any[], prevProcedure: any[], reset: any) => {
-    setIsLoading(true)
+    try {
+      setIsLoading(true)
 
-    const response = await axios.post<ApiResponse<Task>>(`/api/tasks/${task.id}/rpa`, {
-      prevProcedure: prevProcedure,
-      nextProcedure: procedure,
-    });
+      const response = await axios.post<ApiResponse<Task>>(`/api/teams/${slug}/tasks/${task.id}/rpa`, {
+        prevProcedure: prevProcedure,
+        nextProcedure: procedure,
+      });
 
-    const { error } = response.data;
+      const { error } = response.data;
 
-    if (error) {
-      toast.error(error.message);
-      return;
-    } else {
-      toast.success(t("rpa-created"));
+      if (error) {
+        toast.error(error.message);
+        return;
+      } else {
+        toast.success(t("rpa-created"));
+      }
+
+      mutate()
+
+      setIsLoading(false)
+      setVisible(false)
+
+      cleanup(reset)
+    } catch (error: any) {
+      setIsLoading(false)
+      toast.error(getAxiosError(error));
     }
 
-    mutate()
-
-    setIsLoading(false)
-    setVisible(false)
-
-    cleanup(reset)
   }, [prevProcedure])
 
   const validate = useCallback((formData: any) => {
@@ -126,7 +135,6 @@ const CreateRPA = ({
                 stage={stage}
                 validationMessage={validationMessage}
                 procedure={procedure}
-                members={members}
               />
             </Modal.Body>
             <Modal.Actions>

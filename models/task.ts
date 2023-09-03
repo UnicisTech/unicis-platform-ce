@@ -32,22 +32,52 @@ export const createTask = async (param: {
   return task;
 };
 
-export const updateTask = async (taskId: number, data: any) => {
-  return await prisma.task.update({
+export const updateTask = async (
+  taskNumber: number,
+  slug: string,
+  data: any
+) => {
+  const taskToEdit = await prisma.task.findFirst({
     where: {
-      id: taskId,
+      taskNumber,
+      team: {
+        slug,
+      },
     },
-    data: data,
   });
+  if (taskToEdit) {
+    const editedTask = await prisma.task.update({
+      where: {
+        id: taskToEdit.id,
+      },
+      data: data,
+    });
+    return editedTask;
+  } else {
+    return null;
+  }
 };
 
-export const deleteTask = async (taskId: number) => {
-  const deletedTask = await prisma.task.delete({
+export const deleteTask = async (taskNumber: number, slug: string) => {
+  const taskToDelete = await prisma.task.findFirst({
     where: {
-      id: taskId,
+      taskNumber,
+      team: {
+        slug,
+      },
     },
   });
-  return deletedTask;
+
+  if (taskToDelete) {
+    const deletedTask = await prisma.task.delete({
+      where: {
+        id: taskToDelete.id,
+      },
+    });
+    return deletedTask;
+  } else {
+    return null;
+  }
 };
 
 export const getTasks = async (userId: string) => {
@@ -66,12 +96,12 @@ export const getTasks = async (userId: string) => {
 };
 
 export const getTaskBySlugAndNumber = async (
-  taskNumber: number | string,
+  taskNumber: number,
   slug: string
 ) => {
   const task = await prisma.task.findFirst({
     where: {
-      taskNumber: Number(taskNumber),
+      taskNumber: taskNumber,
       team: {
         slug: slug,
       },

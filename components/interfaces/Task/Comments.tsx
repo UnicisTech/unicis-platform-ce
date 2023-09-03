@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { getAxiosError } from '@/lib/common';
 import { useRouter } from "next/router";
 import { useTranslation } from 'next-i18next';
 import type { Task } from '@prisma/client';
@@ -44,22 +45,26 @@ export default function AddComment({
               style={{ padding: '0px' }}
               spacing="compact"
               onClick={async () => {
-                const response = await axios.delete<ApiResponse<unknown>>(
-                  `/api/teams/${slug}/tasks/${taskNumber}/comments`,
-                  {
-                    data: {
-                      id: comment.id
+                try {
+                  const response = await axios.delete<ApiResponse<unknown>>(
+                    `/api/teams/${slug}/tasks/${taskNumber}/comments`,
+                    {
+                      data: {
+                        id: comment.id
+                      }
                     }
+                  );
+                  const { error } = response.data;
+
+                  if (error) {
+                    toast.error(error.message);
+                    return;
                   }
-                );
-                const { error } = response.data;
 
-                if (error) {
-                  toast.error(error.message);
-                  return;
+                  mutateTask()
+                } catch (error: any) {
+                  toast.error(getAxiosError(error));
                 }
-
-                mutateTask()
               }}
             >
               Delete
@@ -69,29 +74,31 @@ export default function AddComment({
       </div>
       <Form
         onSubmit={async (formState: FormData, { reset }) => {
-          const { text } = formState
-          const response = await axios.post<ApiResponse<Task>>(
-            `/api/teams/${slug}/tasks/${taskNumber}/comments`,
-            {
-              text,
-              taskId: task.id
+          try {
+            const { text } = formState
+            const response = await axios.post<ApiResponse<Task>>(
+              `/api/teams/${slug}/tasks/${taskNumber}/comments`,
+              {
+                text,
+              }
+            );
+
+            const { error } = response.data;
+
+            if (error) {
+              toast.error(error.message);
+              return;
             }
-          );
 
-          const { error } = response.data;
+            mutateTask()
 
-          if (error) {
-            toast.error(error.message);
-            return;
+            reset({
+              text: ''
+            })
+          } catch (error: any) {
+            toast.error(getAxiosError(error));
           }
-
-          mutateTask()
-
-          reset({
-            text: ''
-          })
-        }
-        }
+        }}
       >
         {({ formProps }: any) => (
           <form {...formProps}>

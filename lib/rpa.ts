@@ -9,23 +9,30 @@ import { ChangeLog, RpaConfig } from 'types';
 
 export const deleteProcedure = async (params: {
   user: Session['user'];
-  taskId: number;
+  taskNumber: number;
+  slug: string;
   prevProcedure: RpaProcedureInterface | [];
   nextProcedure: RpaProcedureInterface | [];
 }) => {
-  const { taskId, user, prevProcedure, nextProcedure } = params;
-  const task = await prisma.task.findUnique({
+  const { taskNumber, slug, user, prevProcedure, nextProcedure } = params;
+  const task = await prisma.task.findFirst({
     where: {
-      id: taskId,
-    },
-    select: {
-      properties: true,
+      taskNumber,
+      team: {
+        slug,
+      },
     },
   });
+
+  if (!task) {
+    return null;
+  }
+
+  const taskId = task.id;
   const taskProperties = task?.properties as any;
   delete taskProperties.rpa_procedure;
 
-  await prisma.task.update({
+  const updatedTask = await prisma.task.update({
     where: {
       id: taskId,
     },
@@ -43,28 +50,36 @@ export const deleteProcedure = async (params: {
     prevProcedure,
     nextProcedure,
   });
+
+  return updatedTask;
 };
 
 export const saveProcedure = async (params: {
   user: Session['user'];
-  taskId: number;
+  taskNumber: number;
+  slug: string;
   prevProcedure: RpaProcedureInterface | [];
   nextProcedure: RpaProcedureInterface | [];
 }) => {
-  const { user, taskId, prevProcedure, nextProcedure } = params;
-  const task = await prisma.task.findUnique({
+  const { user, taskNumber, slug, prevProcedure, nextProcedure } = params;
+  const task = await prisma.task.findFirst({
     where: {
-      id: taskId,
-    },
-    select: {
-      properties: true,
+      taskNumber,
+      team: {
+        slug,
+      },
     },
   });
 
+  if (!task) {
+    return null;
+  }
+
+  const taskId = task.id;
   const taskProperties = task?.properties as any;
   taskProperties.rpa_procedure = nextProcedure;
 
-  await prisma.task.update({
+  const updatedTask = await prisma.task.update({
     where: {
       id: taskId,
     },
@@ -82,6 +97,8 @@ export const saveProcedure = async (params: {
     prevProcedure,
     nextProcedure,
   });
+
+  return updatedTask;
 };
 
 export const addAuditLogs = async (params: {

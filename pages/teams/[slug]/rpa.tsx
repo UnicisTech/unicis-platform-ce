@@ -6,7 +6,6 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Loading, Error } from "@/components/shared";
 import type { InferGetServerSidePropsType } from "next"
 import useTeam from "hooks/useTeam";
-import useTeamMembers from "hooks/useTeamMembers";
 import { GetServerSidePropsContext } from "next";
 import useTeamTasks from "hooks/useTeamTasks";
 import type { TaskWithRpaProcedure } from "types";
@@ -28,8 +27,6 @@ const RpaDashboard: NextPageWithLayout<
   const [perPage, setPerPage] = useState<number>(10)
 
   const { isLoading, isError, team } = useTeam(slug as string);
-  const { members: members, isLoading: isMembersLoading, isError: isMembersError } = useTeamMembers(slug as string)
-
 
   const { tasks, mutateTasks } = useTeamTasks(slug as string)
   const tasksWithProcedures = useMemo<Array<TaskWithRpaProcedure>>(() => {
@@ -53,11 +50,11 @@ const RpaDashboard: NextPageWithLayout<
     setIsDeleteOpen(true)
   }, [])
 
-  if (isLoading || !team || !tasks || isMembersLoading) {
+  if (isLoading || !team || !tasks) {
     return <Loading />;
   }
 
-  if (isError || isMembersError) {
+  if (isError) {
     return <Error />;
   }
 
@@ -98,7 +95,6 @@ const RpaDashboard: NextPageWithLayout<
               setVisible={setIsCreateOpen}
               tasks={tasks}
               //task={taskToEdit as Task}
-              members={members}
               mutate={mutateTasks}
             />
           }
@@ -107,7 +103,6 @@ const RpaDashboard: NextPageWithLayout<
               visible={isEditOpen}
               setVisible={setIsEditOpen}
               task={taskToEdit as TaskWithRpaProcedure}
-              members={members}
               mutate={mutateTasks}
             />
           }

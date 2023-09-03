@@ -55,11 +55,9 @@ const TaskDetails = ({
                         return
                     }
                     const { title, status, duedate, description } = data
-                    //TODO: remove /api/tasks api
                     const response = await axios.put<ApiResponse<Task>>(
-                        `/api/tasks`,
+                        `/api/teams/${team.slug}/tasks/${task.taskNumber}`,
                         {
-                            taskId: task.id,
                             data: {
                                 title,
                                 status: status?.value,

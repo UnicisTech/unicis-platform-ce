@@ -12,7 +12,6 @@ import { CscAuditLogs, CscPanel } from "@/components/interfaces/CSC";
 import { CreateRPA, RpaPanel, RpaAuditLog } from "@/components/interfaces/RPA";
 import useTeam from "hooks/useTeam";
 import { Team } from "@prisma/client";
-import useTeamMembers from "hooks/useTeamMembers";
 import { getCscStatusesBySlug } from "models/team";
 import { InferGetServerSidePropsType } from "next";
 import { CreateTIA, TiaAuditLogs, TiaPanel } from "@/components/interfaces/TIA";
@@ -34,17 +33,14 @@ const TaskById: NextPageWithLayout<
     const { taskNumber, slug } = router.query;
     const { team, isLoading: isTeamLoading, isError: isTeamError } = useTeam(slug as string)
     const { task, isLoading, isError, mutateTask } = useTask(slug as string, taskNumber as string)
-    const { members: members, isLoading: isMembersLoading, isError: isMembersError } = useTeamMembers(slug as string)
 
-    if (isLoading || !task || isTeamLoading) {
+    if (isLoading || isTeamLoading) {
       return <Loading />;
     }
 
-    if (isError || isTeamError) {
-      return <Error />;
+    if (!task || isError || isTeamError) {
+      return <Error message={isError.message} />;
     }
-
-    console.log('taks:', task)
 
     return (
       <>
@@ -140,7 +136,6 @@ const TaskById: NextPageWithLayout<
             visible={rpaVisible}
             setVisible={setRpaVisible}
             task={task}
-            members={members}
             mutate={mutateTask}
           />
         }

@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect, Dispatch, SetStateAction } from 'react'
 import toast from "react-hot-toast";
 import axios from "axios";
-import { LoadingButton } from "@atlaskit/button";
 import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from "next/router";
 import ControlBlock from './ControlBlock'
 import type { Task } from "@prisma/client";
 import { IssuePanelContainer } from 'sharedStyles';
@@ -22,6 +22,9 @@ const CscPanel = ({
   mutateTask: () => Promise<void>;
 }) => {
   const { t } = useTranslation('common');
+
+  const router = useRouter();
+  const { slug } = router.query;
 
   const properties = task?.properties as any
   const issueControls = properties?.csc_controls as string[] || ['']
@@ -42,7 +45,7 @@ const CscPanel = ({
     setIsDeleting(true)
 
     const response = await axios.put(
-      `/api/tasks/${task.id}/csc`,
+      `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
       {
         controls: [...controls],
         operation: 'remove'
@@ -68,7 +71,7 @@ const CscPanel = ({
 
     if (oldControl === '') {
       response = await axios.put(
-        `/api/tasks/${task.id}/csc`,
+        `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
         {
           controls: [newControl],
           operation: 'add'
@@ -76,7 +79,7 @@ const CscPanel = ({
       );
     } else {
       response = await axios.put(
-        `/api/tasks/${task.id}/csc`,
+        `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
         {
           controls: [oldControl, newControl],
           operation: 'change'
@@ -100,7 +103,7 @@ const CscPanel = ({
     setIsDeleting(true)
 
     const response = await axios.put(
-      `/api/tasks/${task.id}/csc`,
+      `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
       {
         controls: [control],
         operation: 'remove'

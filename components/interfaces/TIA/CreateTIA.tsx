@@ -1,8 +1,10 @@
 import React, { useState, useCallback, useEffect } from "react";
+import { getAxiosError } from '@/lib/common';
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Modal } from "react-daisyui";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
 import Form from '@atlaskit/form';
 
@@ -25,6 +27,9 @@ const CreateTIA = ({
   mutate: () => Promise<void>
 }) => {
   const { t } = useTranslation("common");
+
+  const router = useRouter();
+  const { slug } = router.query;
 
   const [isLoading, setIsLoading] = useState(false)
   const [stage, setStage] = useState(0);
@@ -150,28 +155,33 @@ const CreateTIA = ({
   }, [])
 
   const saveProcedure = useCallback(async (procedure: any[], prevProcedure: any[], reset: any) => {
-    setIsLoading(true)
+    try {
+      setIsLoading(true)
 
-    const response = await axios.post<ApiResponse<Task>>(`/api/tasks/${task.id}/tia`, {
-      prevProcedure: prevProcedure,
-      nextProcedure: procedure,
-    });
+      const response = await axios.post<ApiResponse<Task>>(`/api/teams/${slug}/tasks/${task.id}/tia`, {
+        prevProcedure: prevProcedure,
+        nextProcedure: procedure,
+      });
 
-    const { error } = response.data;
+      const { error } = response.data;
 
-    if (error) {
-      toast.error(error.message);
-      return;
-    } else {
-      toast.success(t("tia-created"));
+      if (error) {
+        toast.error(error.message);
+        return;
+      } else {
+        toast.success(t("tia-created"));
+      }
+
+      mutate()
+
+      setIsLoading(false)
+      setVisible(false)
+
+      cleanup(reset)
+    } catch (error: any) {
+      setIsLoading(false)
+      toast.error(getAxiosError(error));
     }
-
-    mutate()
-
-    setIsLoading(false)
-    setVisible(false)
-
-    cleanup(reset)
   }, [prevProcedure])
 
   const validate = useCallback((formData: any) => {
@@ -189,7 +199,7 @@ const CreateTIA = ({
     const message = validate(formData);
 
     if (procedure[stage] != null) {
-      procedure[stage] = {...procedure[stage], ...formData};
+      procedure[stage] = { ...procedure[stage], ...formData };
     } else {
       setProcedure([...procedure, formData]);
     }

@@ -3,19 +3,25 @@ import type { Session } from 'next-auth';
 
 export const addControlsToIssue = async (params: {
   user: Session['user'];
-  taskId: number;
+  taskNumber: number;
+  slug: string;
   controls: string[];
 }) => {
-  const { taskId, controls, user } = params;
-  const task = await prisma.task.findUnique({
+  const { taskNumber, slug, controls, user } = params;
+  const task = await prisma.task.findFirst({
     where: {
-      id: taskId,
-    },
-    select: {
-      properties: true,
+      taskNumber,
+      team: {
+        slug,
+      },
     },
   });
 
+  if (!task) {
+    return null;
+  }
+
+  const taskId = task.id;
   const taskProperties = task?.properties as any;
   let csc_controls = taskProperties?.csc_controls;
 
@@ -50,19 +56,25 @@ export const addControlsToIssue = async (params: {
 
 export const removeControlsFromIssue = async (params: {
   user: Session['user'];
-  taskId: number;
+  taskNumber: number;
+  slug: string;
   controls: string[];
 }) => {
-  const { taskId, controls, user } = params;
-  const task = await prisma.task.findUnique({
+  const { taskNumber, slug, controls, user } = params;
+  const task = await prisma.task.findFirst({
     where: {
-      id: taskId,
-    },
-    select: {
-      properties: true,
+      taskNumber,
+      team: {
+        slug,
+      },
     },
   });
 
+  if (!task) {
+    return null;
+  }
+
+  const taskId = task.id;
   const taskProperties = task?.properties as any;
   const csc_controls = taskProperties?.csc_controls as Array<string>;
   const new_csc_controls = csc_controls.filter(
@@ -94,19 +106,26 @@ export const removeControlsFromIssue = async (params: {
 
 export const changeControlInIssue = async (params: {
   user: Session['user'];
-  taskId: number;
+  taskNumber: number;
+  slug: string;
   controls: string[];
 }) => {
-  const { taskId, controls, user } = params;
+  const { taskNumber, slug, controls, user } = params;
   const [oldControl, newControl] = controls;
-  const task = await prisma.task.findUnique({
+  const task = await prisma.task.findFirst({
     where: {
-      id: taskId,
-    },
-    select: {
-      properties: true,
+      taskNumber,
+      team: {
+        slug,
+      },
     },
   });
+
+  if (!task) {
+    return null;
+  }
+
+  const taskId = task.id;
   const taskProperties = task?.properties as any;
   const csc_controls = taskProperties?.csc_controls as Array<string>;
 
