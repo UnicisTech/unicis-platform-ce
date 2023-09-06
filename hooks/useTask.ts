@@ -5,7 +5,9 @@ import type { TaskExtended } from 'types';
 
 const useTask = (slug: string, taskNumber: string) => {
   const url = `/api/teams/${slug}/tasks/${taskNumber}`;
-  const { data, error } = useSWR<ApiResponse<TaskExtended>>(url, fetcher);
+  const resp = useSWR<ApiResponse<TaskExtended>>(url, fetcher);
+
+  const { data, error } = resp;
 
   const mutateTask = async () => {
     mutate(url);
