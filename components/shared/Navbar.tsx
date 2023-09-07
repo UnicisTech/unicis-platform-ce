@@ -1,9 +1,9 @@
+import app from '@/lib/app';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from 'react-daisyui';
 import { signOut } from 'next-auth/react';
 import { MouseEventHandler } from 'react';
-
-import app from '@/lib/app';
 
 export default function Navbar({
   toggleSidebar,
@@ -46,11 +46,15 @@ export default function Navbar({
                 />
               </svg>
             </button>
-            <div className="flex items-center text-xl font-bold lg:ml-2.5">
-              <Link href="/">
-                <span className="self-center whitespace-nowrap">
-                  {app.name}
-                </span>
+            <div className="flex items-center text-xl font-bold lg:ml-2.5 justify-start">
+              <Link href="/teams">
+                <Image
+                  src="/unicis-platform-logo-hor.svg"
+                  alt="Unicis.App"
+                  width={150}
+                  height={50}
+                  style={{ height: '50px' }}
+                />
               </Link>
             </div>
           </div>

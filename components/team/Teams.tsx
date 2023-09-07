@@ -72,7 +72,7 @@ const Teams = () => {
                       className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
                     >
                       <td className="px-6 py-3">
-                        <Link href={`/teams/${team.slug}/members`}>
+                        <Link href={`/teams/${team.slug}/tasks`}>
                           <div className="flex items-center justify-start space-x-2">
                             <LetterAvatar name={team.name} />
                             <span className="underline">{team.name}</span>

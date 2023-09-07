@@ -56,3 +56,18 @@ a {
 .btn-md {
   @apply min-h-8 h-10;
 }
+
+.truncate {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.unicis-textarea {
+  height: 8rem !important;
+}
+
+.atlaskit-input input {
+  box-shadow: none !important;
+}

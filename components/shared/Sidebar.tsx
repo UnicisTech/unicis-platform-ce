@@ -4,10 +4,18 @@ import {
   LockClosedIcon,
   RectangleStackIcon,
   UserCircleIcon,
+  UsersIcon
 } from '@heroicons/react/24/outline';
 import { forwardRef } from 'react';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
+import {
+  QueueListIcon
+} from "@heroicons/react/24/solid";
+import useTeams from 'hooks/useTeams';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import Icon from './Icon';
 
 import TeamDropdown from './TeamDropdown';
 import SidebarItem, { type SidebarMenuItem } from './SidebarItem';
@@ -21,6 +29,18 @@ export default forwardRef<HTMLElement, { isCollapsed: boolean }>(
     const router = useRouter();
     const { t } = useTranslation('common');
     const { slug } = router.query;
+
+    useEffect(() => {
+      if (typeof slug === 'string') {
+        document.title = `Unicis Platform - ${slug}`
+      } else {
+        document.title = 'Unicis Platform';
+      }
+
+      return () => {
+        document.title = 'Unicis Platform';
+      };
+    }, [slug])
 
     const sidebarMenus: SidebarMenus = {
       personal: [
@@ -39,16 +59,37 @@ export default forwardRef<HTMLElement, { isCollapsed: boolean }>(
           href: '/settings/password',
           icon: LockClosedIcon,
         },
-        {
-          name: t('settings'),
-          href: '/settings/general',
-          icon: Cog6ToothIcon,
-        },
       ],
       team: [
         {
+          name: t('all-tasks'),
+          href: `/teams/${slug}/tasks`,
+          icon: QueueListIcon,
+          className: "fill-blue-600"
+        },
+        {
+          name: t('rpa-activities'),
+          href: `/teams/${slug}/rpa`,
+          icon: () => <Icon src="/unicis-rpa-logo.png" />,
+        },
+        {
+          name: t('tia'),
+          href: `/teams/${slug}/tia`,
+          icon: () => <Icon src="/unicis-tia-logo.png" />,
+        },
+        {
+          name: t('csc'),
+          href: `/teams/${slug}/csc`,
+          icon: () => <Icon src="/unicis-csc-logo.png" />,
+        },
+        // {
+        //   name: t('iap'),
+        //   href: `/teams/${slug}/iap`,
+        //   icon: () => <Icon src="/unicis-iap-logo.png" />
+        // },
+        {
           name: t('all-products'),
-          href: `/teams/${slug}/products`,
+          href: 'https://www.unicis.tech/docs',
           icon: CodeBracketIcon,
         },
         {
@@ -60,20 +101,16 @@ export default forwardRef<HTMLElement, { isCollapsed: boolean }>(
     };
 
     const menus = sidebarMenus[slug ? 'team' : 'personal'];
+
     return (
       <>
         <aside
-          className={`fixed ${!isCollapsed && 'z-10'} h-screen w-10/12 lg:w-64`}
-          ref={ref}
+          className="transition-width fixed top-0 left-0 z-20 flex h-full w-64 flex-shrink-0 flex-col pt-12 duration-75 lg:flex"
           aria-label="Sidebar"
         >
-          <div
-            className={`relative ${
-              isCollapsed && 'invisible'
-            } lg:visible flex h-full flex-col border-r border-gray-200 dark:border-gray-600 bg-white dark:bg-black pt-0`}
-          >
+          <div className="relative flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white pt-0">
             <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
-              <div className="flex-1 space-y-1 divide-y dark:divide-gray-600">
+              <div className="flex-1 space-y-1 divide-y bg-white">
                 <TeamDropdown />
                 <div className="p-4">
                   <ul className="space-y-1">

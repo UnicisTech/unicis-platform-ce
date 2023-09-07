@@ -10,9 +10,14 @@ import {
   getInvitation,
   getInvitations,
 } from 'models/invitation';
-import { addTeamMember, throwIfNoTeamAccess } from 'models/team';
+import {
+  addTeamMember,
+  getTeamMembers,
+  throwIfNoTeamAccess,
+} from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { Role } from '@prisma/client';
 
 export default async function handler(
   req: NextApiRequest,
@@ -54,6 +59,19 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   throwIfNotAllowed(teamMember, 'team_invitation', 'create');
 
   const { email, role } = req.body;
+  const { slug } = req.query as { slug: string };
+
+  if (role !== Role.MEMBER) {
+    const members = await getTeamMembers(slug);
+
+    if (members.length >= 2) {
+      return res.status(400).json({
+        error: {
+          message: 'You have reached the maximum number of members per team.',
+        },
+      });
+    }
+  }
 
   const invitationExists = await prisma.invitation.findFirst({
     where: {

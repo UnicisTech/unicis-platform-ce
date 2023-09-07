@@ -51,8 +51,8 @@ const Login: NextPageWithLayout<
     router.push('/');
   }
 
-  if (status === 'authenticated') {
-    router.push(redirectAfterSignIn);
+  if (status === "authenticated") {
+    router.push(redirectAfterSignIn || '/teams');
   }
 
   const formik = useFormik({

@@ -23,6 +23,8 @@ export default function AccountLayout({ children }: AccountLayoutProps) {
           <main>
             <div className="flex h-screen w-full justify-center">
               <div className="lg:w-3/4 px-6 py-6 ">{children}</div>
+            {/* <div className="flex w-full">
+              <div className="w-full px-6 py-6 ">{children}</div> */}
             </div>
           </main>
         </div>

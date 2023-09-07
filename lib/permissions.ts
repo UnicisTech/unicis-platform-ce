@@ -10,7 +10,8 @@ export type Resource =
   | 'team_dsync'
   | 'team_audit_log'
   | 'team_webhook'
-  | 'team_api_key';
+  | 'team_api_key'
+  | 'task';
 
 export type RolePermissions = {
   [role in RoleType]: Permission[];
@@ -70,6 +71,10 @@ export const permissions: RolePermissions = {
       resource: 'team_api_key',
       actions: '*',
     },
+    {
+      resource: 'task',
+      actions: '*',
+    },
   ],
   ADMIN: [
     {
@@ -104,11 +109,23 @@ export const permissions: RolePermissions = {
       resource: 'team_api_key',
       actions: '*',
     },
+    {
+      resource: 'task',
+      actions: '*',
+    },
   ],
   MEMBER: [
     {
       resource: 'team',
       actions: ['read', 'leave'],
+    },
+    {
+      resource: 'team_member',
+      actions: ['read'],
+    },
+    {
+      resource: 'task',
+      actions: '*',
     },
   ],
 };
