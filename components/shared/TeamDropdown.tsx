@@ -11,12 +11,15 @@ import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import useCanAccess from 'hooks/useCanAccess';
+
 
 const TeamDropdown = () => {
   const router = useRouter();
   const { teams } = useTeams();
   const { data } = useSession();
   const { t } = useTranslation('common');
+  const { canAccess } = useCanAccess();
 
   const currentTeam = (teams || []).find(
     (team) => team.slug === router.query.slug
@@ -55,12 +58,16 @@ const TeamDropdown = () => {
           href: '/teams',
           icon: RectangleStackIcon,
         },
-        {
-          id: 'new-team',
-          name: t('new-team'),
-          href: '/teams?newTeam=true',
-          icon: FolderPlusIcon,
-        },
+        ...(canAccess('team', ['create'])
+          ? [
+            {
+              id: 'new-team',
+              name: t('new-team'),
+              href: '/teams?newTeam=true',
+              icon: FolderPlusIcon,
+            },
+          ]
+          : []),
       ],
     },
   ];
