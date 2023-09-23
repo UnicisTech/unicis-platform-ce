@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import type { Attachment } from "types"
 import { MouseEvent } from "react"
 import DeleteAttachment from "./DeleteAttachment";
+import useCanAccess from 'hooks/useCanAccess';
 
 const AttachmentsCard = ({
     attachment,
@@ -17,6 +18,8 @@ const AttachmentsCard = ({
     mutateTask: () => Promise<void>;
 }) => {
     const [isDeleteVisible, setIsDeleteVisible] = useState(false)
+    const { canAccess } = useCanAccess()
+
     const downloadHanlder = useCallback(async (event: MouseEvent<HTMLButtonElement>) => {
         try {
             event.preventDefault();
@@ -58,7 +61,7 @@ const AttachmentsCard = ({
             <div className="card card-compact w-36 bg-base-100 shadow-xl p-0.5 m-1">
                 <div className="flex">
                     <button className="btn btn-info btn-xs m-0.5" onClick={downloadHanlder}>Download</button>
-                    <button className="btn btn-error btn-xs m-0.5" onClick={openDeleteModal}>Delete</button>
+                    {canAccess('task', ['update']) && <button className="btn btn-error btn-xs m-0.5" onClick={openDeleteModal}>Delete</button>}
                 </div>
                 <div className="card-body">
                     <p className="text-sm truncate">{attachment.filename}</p>

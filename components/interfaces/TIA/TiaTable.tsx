@@ -7,6 +7,7 @@ import type { TaskWithRpaProcedure, TaskWithTiaProcedure } from "types";
 import { Button } from "react-daisyui";
 import { useTranslation } from "next-i18next";
 import usePagination from "hooks/usePagination";
+import useCanAccess from 'hooks/useCanAccess';
 import { TailwindTableWrapper } from "sharedStyles";
 import { config, headers, fieldPropsMapping, questions } from '@/components/defaultLanding/data/configs/tia';
 
@@ -24,6 +25,7 @@ const TiaTable = ({
   deleteHandler: (task: TaskWithTiaProcedure) => void
 }) => {
   const { t } = useTranslation("common");
+  const { canAccess } = useCanAccess();
   const {
     currentPage,
     totalPages,
@@ -64,9 +66,11 @@ const TiaTable = ({
                 <th scope="col" className="px-1.5 py-1.5">
                   {t("tia-transfer-is")}
                 </th>
-                <th scope="col" className="px-1.5 py-1.5">
-                  {t("actions")}
-                </th>
+                {canAccess('task', ['update']) &&
+                  <th scope="col" className="px-1.5 py-1.5">
+                    {t("actions")}
+                  </th>
+                }
               </tr>
             </thead>
             <tbody>
@@ -86,10 +90,10 @@ const TiaTable = ({
                     <span>{task.properties.tia_procedure[0].DataImporter}</span>
                   </td>
                   <td className="px-1.5 py-1.5">
-                    <Tag text={task.properties.tia_procedure[0].StartDateAssessment}/>
+                    <Tag text={task.properties.tia_procedure[0].StartDateAssessment} />
                   </td>
                   <td className="px-1.5 py-1.5">
-                    <Tag text={task.properties.tia_procedure[0].StartDateAssessment}/>
+                    <Tag text={task.properties.tia_procedure[0].StartDateAssessment} />
                   </td>
                   <td className="px-1.5 py-1.5">
                     <span>{task.properties.tia_procedure[0].DataExporter}</span>
@@ -97,29 +101,31 @@ const TiaTable = ({
                   <td className="px-1.5 py-1.5">
                     <span>{task.properties.tia_procedure[0].LawImporterCountry.label}</span>
                   </td>
-                  <td className="px-1.5 py-1.5">
-                    <div className="btn-group">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => {
-                          editHandler(task)
-                        }}
-                      >
-                        {t("edit-task")}
-                      </Button>
+                  {canAccess('task', ['update']) &&
+                    <td className="px-1.5 py-1.5">
+                      <div className="btn-group">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => {
+                            editHandler(task)
+                          }}
+                        >
+                          {t("edit-task")}
+                        </Button>
 
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => {
-                          deleteHandler(task)
-                        }}
-                      >
-                        {t("delete-task")}
-                      </Button>
-                    </div>
-                  </td>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => {
+                            deleteHandler(task)
+                          }}
+                        >
+                          {t("delete-task")}
+                        </Button>
+                      </div>
+                    </td>
+                  }
                 </tr>
               )}
             </tbody>

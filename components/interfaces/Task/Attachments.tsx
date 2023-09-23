@@ -5,6 +5,7 @@ import axios from "axios";
 import { TaskExtended } from "types";
 import AttachmentsCard from "./AttachmentCard";
 import { checkExtensionAndMIMEType } from "@/components/services/taskService";
+import useCanAccess from 'hooks/useCanAccess';
 
 const Attachments = ({
   task,
@@ -15,6 +16,7 @@ const Attachments = ({
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const { canAccess } = useCanAccess();
   const { slug, taskNumber } = router.query;
   const [isDragOver, setIsDragOver] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -93,7 +95,8 @@ const Attachments = ({
 
           toast.success("Attachment uploaded")
           mutateTask()
-        } catch (error) {
+        } catch (error: any) {
+          toast.error(error?.message)
           console.error(error);
         }
       }
@@ -101,6 +104,34 @@ const Attachments = ({
 
     uploadFile();
   }, [selectedFile]);
+
+  if (!canAccess('task', ['update'])) {
+    return (
+      <>
+        {task.attachments.length ? (
+          <div className="flex items-center justify-center w-full">
+            <div
+              className={`flex flex-wrap ${task.attachments.length ? 'justify-start' : 'justify-center'} h-full w-full px-4 py-2 transition bg-white border-2 ${isDragOver ? "border-blue-400" : "border-gray-300"
+                } border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none`}
+            >
+              {task.attachments.map((attachment, index) => (
+                <AttachmentsCard
+                  key={index}
+                  attachment={attachment}
+                  taskNumber={taskNumber as string}
+                  teamSlug={slug as string}
+                  mutateTask={mutateTask}
+                />
+              ))}
+            </div>
+          </div>
+        ) : <div className="flex flex-col items-center justify-center rounded-md lg:p-20 border-2 border-dashed gap-3 bg-white h-30 border-slate-600 m-5">
+          <h3 className='text-semibold text-emphasis text-center text-xl'>No attachments</h3>
+        </div>
+        }
+      </>
+    )
+  }
 
   return (
     <div className="flex items-center justify-center w-full">

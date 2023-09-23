@@ -16,6 +16,7 @@ import statuses from "@/components/defaultLanding/data/statuses.json"
 import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
 import { WithoutRing, IssuePanelContainer } from "sharedStyles";
 import useTask from "hooks/useTask";
+import useCanAccess from 'hooks/useCanAccess';
 
 interface FormData {
     title: string;
@@ -40,6 +41,7 @@ const TaskDetails = ({
     const router = useRouter();
     const { slug, taskNumber } = router.query;
     const { t } = useTranslation("common");
+    const { canAccess } = useCanAccess();
     const { mutateTask } = useTask(slug as string, taskNumber as string)
     const [isFormChanged, setIsFormChanged] = useState(false)
 
@@ -172,15 +174,17 @@ const TaskDetails = ({
                                 )}
                             </Field>
                             <FormFooter>
-                                <Button
-                                    color="primary"
-                                    variant="outline"
-                                    size="sm"
-                                    type="submit"
-                                    active={!isFormChanged}
-                                >
-                                    {t("save-changes")}
-                                </Button>
+                                {canAccess('task', ['update']) &&
+                                    <Button
+                                        color="primary"
+                                        variant="outline"
+                                        size="sm"
+                                        type="submit"
+                                        active={!isFormChanged}
+                                    >
+                                        {t("save-changes")}
+                                    </Button>
+                                }
                             </FormFooter>
                         </div>
                     </form>

@@ -5,12 +5,14 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-daisyui';
+import useCanAccess from 'hooks/useCanAccess';
 import type { NextPageWithLayout } from 'types';
 
 const AllTeams: NextPageWithLayout = () => {
   const [visible, setVisible] = useState(false);
 
   const router = useRouter();
+  const { canAccess } = useCanAccess();
   const { t } = useTranslation('common');
 
   const { newTeam } = router.query as { newTeam: string };
@@ -25,16 +27,18 @@ const AllTeams: NextPageWithLayout = () => {
     <>
       <div className="flex items-center justify-between">
         <h4>{t('all-teams')}</h4>
-        <Button
-          color="primary"
-          size="md"
-          variant="outline"
-          onClick={() => {
-            setVisible(!visible);
-          }}
-        >
-          {t('create-team')}
-        </Button>
+        {canAccess('team', ['create']) &&
+          <Button
+            color="primary"
+            size="md"
+            variant="outline"
+            onClick={() => {
+              setVisible(!visible);
+            }}
+          >
+            {t('create-team')}
+          </Button>
+        }
       </div>
       <CreateTeam visible={visible} setVisible={setVisible} />
       <Teams />

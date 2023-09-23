@@ -11,6 +11,7 @@ enum Role {
   ADMIN
   OWNER
   MEMBER
+  AUDITOR
 }
 
 model Account {

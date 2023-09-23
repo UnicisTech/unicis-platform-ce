@@ -4,8 +4,10 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { Card, Error, Loading, StatusBadge } from "@/components/shared";
 import useTasks from "hooks/useTasks";
+import useCanAccess from 'hooks/useCanAccess';
 import statuses from "@/components/defaultLanding/data/statuses.json"
 import type { Task } from "@prisma/client";
+
 
 const Tasks = ({
   setTaskToDelete,
@@ -23,6 +25,7 @@ const Tasks = ({
   const { isLoading, isError, tasks } = useTasks(slug as string);
 
   const { t } = useTranslation("common");
+  const { canAccess } = useCanAccess();
 
   if (isLoading) {
     return <Loading />;
@@ -92,25 +95,28 @@ const Tasks = ({
                       {/* {statuses.find(({ value }) => value === task.status)?.label} */}
                     </td>
                     <td className="px-6 py-3 btn-group">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => {
-                          openEditModal(task)
-                        }}
-                      >
-                        {t("edit-task")}
-                      </Button>
-
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => {
-                          openDeleteModal(task.id)
-                        }}
-                      >
-                        {t("delete-task")}
-                      </Button>
+                      {canAccess('task', ['update']) &&
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => {
+                            openEditModal(task)
+                          }}
+                        >
+                          {t("edit-task")}
+                        </Button>
+                      }
+                      {canAccess('task', ['delete']) &&
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => {
+                            openDeleteModal(task.id)
+                          }}
+                        >
+                          {t("delete-task")}
+                        </Button>
+                      }
                     </td>
                   </tr>
                 );

@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import ControlBlock from './ControlBlock'
 import type { Task } from "@prisma/client";
 import { IssuePanelContainer } from 'sharedStyles';
+import useCanAccess from 'hooks/useCanAccess';
+import ControlBlockViewOnly from './ControlBlockViewOnly';
 
 const CscPanel = ({
   task,
@@ -22,6 +24,7 @@ const CscPanel = ({
   mutateTask: () => Promise<void>;
 }) => {
   const { t } = useTranslation('common');
+  const { canAccess } = useCanAccess();
 
   const router = useRouter();
   const { slug } = router.query;
@@ -123,52 +126,59 @@ const CscPanel = ({
     setIsDeleting(false)
   }, [task, mutateTask, setIsDeleting])
 
+
   return (
     <IssuePanelContainer>
       <h2 className="text-1xl font-bold">Cybersecurity Controls</h2>
-      {controls.map((control, index) => (
-        <ControlBlock
-          key={index}
-          status={statuses[control]}
-          setStatuses={setStatuses}
-          control={control}
-          controls={controls}
-          controlHanlder={controlHanlder}
-          deleteControlHandler={deleteControlHandler}
-          isSaving={isSaving}
-          isDeleting={isDeleting}
-        />
-      ))}
-      <div style={{ marginTop: '15px', display: 'flex', justifyContent: 'flex-end' }}>
-        <div style={{ margin: '0 5px' }}>
-          <Button
-            color="primary"
-            variant="outline"
-            size="sm"
-            onClick={addControl}
-            active={isDeleting || isSaving}
-          >
-            + Add Control
-          </Button>
-        </div>
-        <div style={{ margin: '0 5px' }}>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={deleteControls}
-          >
-            {t('remove')}
-          </Button>
-          {/* <Button
-            color="error"
-            size="sm"
-            onClick={deleteControls}
-            active={isDeleting}
-          >
-            Delete
-          </Button> */}
-        </div>
-      </div>
+      {canAccess('task', ['update'])
+        ? <>
+          {controls.map((control, index) => (
+            <ControlBlock
+              key={index}
+              status={statuses[control]}
+              setStatuses={setStatuses}
+              control={control}
+              controls={controls}
+              controlHanlder={controlHanlder}
+              deleteControlHandler={deleteControlHandler}
+              isSaving={isSaving}
+              isDeleting={isDeleting}
+            />
+          ))}
+          <div style={{ marginTop: '15px', display: 'flex', justifyContent: 'flex-end' }}>
+            <div style={{ margin: '0 5px' }}>
+              <Button
+                color="primary"
+                variant="outline"
+                size="sm"
+                onClick={addControl}
+                active={isDeleting || isSaving}
+              >
+                + Add Control
+              </Button>
+            </div>
+            <div style={{ margin: '0 5px' }}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={deleteControls}
+              >
+                {t('remove')}
+              </Button>
+            </div>
+          </div>
+        </>
+        : <>
+          {controls.map((control, index) => 
+            <ControlBlockViewOnly
+              key={index}
+              status={statuses[control]}
+              control={control}
+            />
+          )}
+        </>
+      }
+
     </IssuePanelContainer>
   )
 }

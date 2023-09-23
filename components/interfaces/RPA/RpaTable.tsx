@@ -9,6 +9,7 @@ import { useTranslation } from "next-i18next";
 import usePagination from "hooks/usePagination";
 import { TailwindTableWrapper } from "sharedStyles";
 import { StatusBadge } from "@/components/shared";
+import useCanAccess from 'hooks/useCanAccess';
 import Badge from "@/components/shared/Badge";
 
 const RpaTable = ({
@@ -24,8 +25,7 @@ const RpaTable = ({
   editHandler: (task: TaskWithRpaProcedure) => void
   deleteHandler: (task: TaskWithRpaProcedure) => void
 }) => {
-
-  console.log('tasks', tasks)
+  const { canAccess } = useCanAccess();
   const { t } = useTranslation("common");
   const {
     currentPage,
@@ -64,9 +64,11 @@ const RpaTable = ({
                 <th scope="col" className="px-1.5 py-1.5">
                   {t("rpa-category")}
                 </th>
-                <th scope="col" className="px-1.5 py-1.5">
-                  {t("actions")}
-                </th>
+                {canAccess('task', ['update']) &&
+                  <th scope="col" className="px-1.5 py-1.5">
+                    {t("actions")}
+                  </th>
+                }
               </tr>
             </thead>
             <tbody>
@@ -104,29 +106,31 @@ const RpaTable = ({
                       {task.properties.rpa_procedure[1].specialcategory.map((category, index) => <Tag key={index} text={category.label} />)}
                     </div>
                   </td>
-                  <td className="px-1.5 py-1.5">
-                    <div className="btn-group">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => {
-                          editHandler(task)
-                        }}
-                      >
-                        {t("edit-task")}
-                      </Button>
+                  {canAccess('task', ['update']) &&
+                    <td className="px-1.5 py-1.5">
+                      <div className="btn-group">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => {
+                            editHandler(task)
+                          }}
+                        >
+                          {t("edit-task")}
+                        </Button>
 
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => {
-                          deleteHandler(task)
-                        }}
-                      >
-                        {t("delete-task")}
-                      </Button>
-                    </div>
-                  </td>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => {
+                            deleteHandler(task)
+                          }}
+                        >
+                          {t("delete-task")}
+                        </Button>
+                      </div>
+                    </td>
+                  }
                 </tr>
               )}
             </tbody>

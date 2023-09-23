@@ -8,6 +8,7 @@ import type { InferGetServerSidePropsType } from "next"
 import useTeam from "hooks/useTeam";
 import { GetServerSidePropsContext } from "next";
 import useTeamTasks from "hooks/useTeamTasks";
+import useCanAccess from 'hooks/useCanAccess';
 import type { TaskWithTiaProcedure } from "types";
 import { CreateTIA, TiaTable, DeleteTia } from "@/components/interfaces/TIA";
 import { Button } from "react-daisyui";
@@ -19,6 +20,7 @@ const TiaDashboard: NextPageWithLayout<
 > = () => {
   const router = useRouter();
   const { t } = useTranslation("common");
+  const { canAccess } = useCanAccess();
   const { slug } = router.query;
   const [isCreateOpen, setIsCreateOpen] = useState(false)
   const [isEditOpen, setIsEditOpen] = useState(false)
@@ -72,16 +74,18 @@ const TiaDashboard: NextPageWithLayout<
               perPage={perPage}
               setPerPage={setPerPage}
             />
-            <Button
-              size="sm"
-              color="primary"
-              variant="outline"
-              onClick={() => {
-                setIsCreateOpen(true);
-              }}
-            >
-              {t("create")}
-            </Button>
+            {canAccess('task', ['update']) &&
+              <Button
+                size="sm"
+                color="primary"
+                variant="outline"
+                onClick={() => {
+                  setIsCreateOpen(true);
+                }}
+              >
+                {t("create")}
+              </Button>
+            }
           </div>
           <TiaTable
             slug={slug as string}

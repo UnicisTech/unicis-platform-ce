@@ -11,6 +11,7 @@ import { Attachments, Comments, CommentsTab, TaskDetails, TaskTab } from "@/comp
 import { CscAuditLogs, CscPanel } from "@/components/interfaces/CSC";
 import { CreateRPA, RpaPanel, RpaAuditLog } from "@/components/interfaces/RPA";
 import useTeam from "hooks/useTeam";
+import useCanAccess from 'hooks/useCanAccess';
 import { Team } from "@prisma/client";
 import { getCscStatusesBySlug } from "models/team";
 import { InferGetServerSidePropsType } from "next";
@@ -30,6 +31,7 @@ const TaskById: NextPageWithLayout<
     const [activeCommentTab, setActiveCommentTab] = useState("Comments")
     const router = useRouter();
     const { t } = useTranslation("common");
+    const { canAccess } = useCanAccess();
     const { taskNumber, slug } = router.query;
     const { team, isLoading: isTeamLoading, isError: isTeamError } = useTeam(slug as string)
     const { task, isLoading, isError, mutateTask } = useTask(slug as string, taskNumber as string)
@@ -65,16 +67,18 @@ const TaskById: NextPageWithLayout<
             <Card
               heading="RPA panel"
               button={
-                <Button
-                  size="sm"
-                  color="primary"
-                  variant="outline"
-                  onClick={() => {
-                    setRpaVisible(!rpaVisible);
-                  }}
-                >
-                  {t("create-rpa")}
-                </Button>
+                canAccess('task', ['update'])
+                  ? <Button
+                    size="sm"
+                    color="primary"
+                    variant="outline"
+                    onClick={() => {
+                      setRpaVisible(!rpaVisible);
+                    }}
+                  >
+                    {t("create-rpa")}
+                  </Button>
+                  : null
               }
             >
               <Card.Body>
@@ -88,16 +92,18 @@ const TaskById: NextPageWithLayout<
             <Card
               heading="TIA panel"
               button={
-                <Button
-                  size="sm"
-                  color="primary"
-                  variant="outline"
-                  onClick={() => {
-                    setTiaVisible(!tiaVisible);
-                  }}
-                >
-                  {t("create-tia")}
-                </Button>
+                canAccess('task', ['update'])
+                  ? <Button
+                    size="sm"
+                    color="primary"
+                    variant="outline"
+                    onClick={() => {
+                      setTiaVisible(!tiaVisible);
+                    }}
+                  >
+                    {t("create-tia")}
+                  </Button>
+                  : null
               }
             >
               <Card.Body>
@@ -121,16 +127,6 @@ const TaskById: NextPageWithLayout<
             mutate={mutateTask}
           />
         }
-        {/* <Button
-          size="sm"
-          color="primary"
-          className="text-white"
-          onClick={() => {
-            setTiaVisible(!rpaVisible);
-          }}
-        >
-          {t("create-rpa")}
-        </Button> */}
         {rpaVisible &&
           <CreateRPA
             visible={rpaVisible}

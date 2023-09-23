@@ -7,8 +7,9 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import type { Task } from "@prisma/client";
 import { GetServerSidePropsContext } from "next";
 import { CreateTask, Tasks, DeleteTask, EditTask } from "@/components/interfaces/Task";
-
 import { getTeam } from "models/team";
+import useCanAccess from 'hooks/useCanAccess';
+
 
 const AllTasks: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -21,21 +22,24 @@ const AllTasks: NextPageWithLayout<
   const [editVisible, setEditVisible] = useState(false)
   const [taskToEdit, setTaskToEdit] = useState<Task>({} as Task)
   const { t } = useTranslation("common");
+  const { canAccess } = useCanAccess();
+
 
   return (
     <>
       <div className="flex items-center justify-between">
         <h4>{t("all-tasks")}</h4>
-        <Button
-          size="sm"
-          color="primary"
-          variant="outline"
-          onClick={() => {
-            setVisible(!visible);
-          }}
-        >
-          {t("create")}
-        </Button>
+        {canAccess('task', ['create']) &&
+          <Button
+            size="sm"
+            color="primary"
+            variant="outline"
+            onClick={() => {
+              setVisible(!visible);
+            }}
+          >
+            {t("create")}
+          </Button>}
       </div>
       <CreateTask visible={visible} setVisible={setVisible} team={team} />
       {editVisible && <EditTask visible={editVisible} setVisible={setEditVisible} team={team} task={taskToEdit} />}

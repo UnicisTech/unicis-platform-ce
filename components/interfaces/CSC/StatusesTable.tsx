@@ -6,8 +6,10 @@ import StatusSelector from "./StatusSelector"
 import type { CscOption } from "types";
 import type { Task } from "@prisma/client";
 import usePagination from "hooks/usePagination";
+import useCanAccess from 'hooks/useCanAccess';
 import { ControlOption } from "types";
 import { TailwindTableWrapper } from "sharedStyles";
+import TasksList from "./TasksList";
 
 const StatusesTable = ({
   tasks,
@@ -26,8 +28,8 @@ const StatusesTable = ({
   statusHandler: (control: string, value: string) => Promise<void>;
   taskSelectorHandler: (action: string, dataToRemove: any, control: string) => Promise<void>
 }) => {
+  const { canAccess } = useCanAccess();
   const [filteredControls, setFilteredControls] = useState<Array<ControlOption>>(controlOptions)
-
   const {
     currentPage,
     totalPages,
@@ -86,12 +88,19 @@ const StatusesTable = ({
                     <span style={{ whiteSpace: "pre-line" }}>{option.value.requirements}</span>
                   </td>
                   <td className="px-6 py-3">
-                    <div className="w-40">
-                      <StatusSelector statusValue={statuses[option.value.control]} control={option.value.control} handler={statusHandler} />
-                    </div>
+                      {canAccess('task', ['update'])
+                        ? <div className="w-40">
+                            <StatusSelector statusValue={statuses[option.value.control]} control={option.value.control} handler={statusHandler} />
+                          </div>
+                        : <span style={{ whiteSpace: "pre-line" }}>{statuses[option.value.control]}</span>
+                      }
                   </td>
                   <td className="px-6 py-3 w-40">
-                    <TaskSelector tasks={tasks} control={option.value.control} handler={taskSelectorHandler} />
+                    {canAccess('task', ['update'])
+                      ? <TaskSelector tasks={tasks} control={option.value.control} handler={taskSelectorHandler} />
+                      : <TasksList tasks={tasks} control={option.value.control}/>
+                    }
+                    
                   </td>
                 </tr>
               )}

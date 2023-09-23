@@ -35,6 +35,10 @@ export const availableRoles = [
     id: Role.OWNER,
     name: 'Owner',
   },
+  {
+    id: Role.AUDITOR,
+    name: 'Auditor',
+  },
 ];
 
 export const permissions: RolePermissions = {
@@ -126,6 +130,20 @@ export const permissions: RolePermissions = {
     {
       resource: 'task',
       actions: '*',
+    },
+  ],
+  AUDITOR: [
+    {
+      resource: 'team',
+      actions: ['read'],
+    },
+    {
+      resource: 'team_member',
+      actions: ['read'],
+    },
+    {
+      resource: 'task',
+      actions: ['read'],
     },
   ],
 };
