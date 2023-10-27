@@ -108,11 +108,11 @@ export default forwardRef<HTMLElement, { isCollapsed: boolean }>(
           className="transition-width fixed top-0 left-0 z-20 flex h-full w-64 flex-shrink-0 flex-col pt-12 duration-75 lg:flex"
           aria-label="Sidebar"
         >
-          <div className="relative flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white pt-0">
+          <div className="relative flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white pt-0 dark:border-gray-600 dark:bg-black">
             <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
-              <div className="flex-1 space-y-1 divide-y bg-white">
+              <div className="flex-1 space-y-1 divide-y bg-white dark:border-gray-600 bg-white dark:bg-black">
                 <TeamDropdown />
-                <div className="p-4">
+                <div className="p-4 dark:border-gray-600">
                   <ul className="space-y-1">
                     {menus.map((menu) => (
                       <li key={menu.name}>

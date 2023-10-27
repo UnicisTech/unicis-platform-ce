@@ -21,7 +21,8 @@ export default function AccountLayout({ children }: AccountLayoutProps) {
         <Sidebar isCollapsed={collapse} ref={sidebarRef} />
         <div className="relative h-full w-full overflow-y-auto lg:ml-64">
           <main>
-            <div className="flex h-screen w-full justify-center">
+          {/* <div className="flex h-screen w-full justify-center"> */}
+            <div className="flex h-screen w-full justify-center dark:border-gray-600 bg-white dark:bg-black">
               <div className="lg:w-3/4 px-6 py-6 ">{children}</div>
             {/* <div className="flex w-full">
               <div className="w-full px-6 py-6 ">{children}</div> */}

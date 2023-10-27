@@ -46,7 +46,7 @@ const Tasks = ({
   }
 
   return (
-    <Card heading="Teams Tasks">
+    <Card heading="Team tasks">
       <Card.Body>
         <table className="w-full table-fixed text-left text-sm text-gray-500 dark:text-gray-400">
           <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
@@ -97,6 +97,7 @@ const Tasks = ({
                     <td className="px-6 py-3 btn-group">
                       {canAccess('task', ['update']) &&
                         <Button
+                          className="dark:text-gray-100"
                           size="sm"
                           variant="outline"
                           onClick={() => {
@@ -108,6 +109,7 @@ const Tasks = ({
                       }
                       {canAccess('task', ['delete']) &&
                         <Button
+                          className="dark:text-gray-100"
                           size="sm"
                           variant="outline"
                           onClick={() => {

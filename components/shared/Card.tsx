@@ -16,7 +16,7 @@ const Card = (props: CardProps) => {
 
   return (
     <div className="mt-5 flex flex-col border border-gray-300">
-      <div className="border-b border-gray-300 bg-gray-100 px-3 py-3 text-sm font-medium text-gray-900 flex justify-between items-center">
+      <div className="border-b border-gray-300 bg-gray-100 px-3 py-3 text-sm font-medium text-gray-900 flex justify-between items-center dark:bg-gray-700 dark:text-gray-400">
         <div>
           {heading}
         </div>

@@ -59,7 +59,7 @@ export default function Navbar({
             </div>
           </div>
           <div>
-            <Button size="sm" variant="outline" onClick={() => signOut()}>
+            <Button className="dark:text-gray-100" size="sm" variant="outline" onClick={() => signOut()}>
               Sign Out
             </Button>
           </div>
