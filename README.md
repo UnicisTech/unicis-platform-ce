@@ -173,8 +173,7 @@ Please try to create bug reports that are:
 ## 🤩 Community
 
 - [Discord](https://discord.com/invite/8TwyeD97HD) (For live discussion with the Open-Source Community and Unicis team)
-- [X](https://twitter.com/UnicisTech) / [LinkedIn](https://www.linkedin.com/company/unicis-tech-oü/) (Follow us)
-- [Mastodon](https://mastodon.xyz/@unicis_tech)
+- [X](https://twitter.com/UnicisTech) / [LinkedIn](https://www.linkedin.com/company/unicis-tech-oü/) / [Mastodon](https://mastodon.xyz/@unicis_tech) (Follow us)
 - [Vimeo](https://vimeo.com/user183384852) (Watch community events and tutorials)
 - [GitHub Issues](https://github.com/UnicisTeh/unicis-platform-ce/issues) (Contributions, report issues, and product ideas)
 
