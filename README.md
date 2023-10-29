@@ -7,7 +7,6 @@
 ![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/UnicisTech)
 ![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F?logo=LinkedIn&label=LinkedIn&link=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F) | 
 <a href="https://discord.com/invite/8TwyeD97HD">Discord</a>
-![Discord](https://img.shields.io/discord/1110270854824214589)
 
 
 Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs. 
