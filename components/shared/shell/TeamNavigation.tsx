@@ -1,7 +1,8 @@
-import { Cog6ToothIcon, CodeBracketIcon } from '@heroicons/react/24/outline';
+import { Cog6ToothIcon, CodeBracketIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 import {
   QueueListIcon
 } from "@heroicons/react/24/solid";
+
 import { useTranslation } from 'next-i18next';
 import NavigationItems from './NavigationItems';
 import { NavigationProps, MenuItem } from './NavigationItems';
@@ -45,6 +46,11 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       name: t('all-products'),
       href: 'https://www.unicis.tech/docs',
       icon: CodeBracketIcon,
+    },
+    {
+      name: t('support'),
+      href: 'https://discord.com/invite/8TwyeD97HD',
+      icon: QuestionMarkCircleIcon,
     },
     {
       name: t('settings'),
