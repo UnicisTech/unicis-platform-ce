@@ -168,7 +168,7 @@ Please try to create bug reports that are:
 - _Unique._ Do not duplicate existing opened issues.
 - _Scoped to a Single Bug._ One bug per report.
 
-[Contributing Guide](https://github.com/boxyhq/saas-starter-kit/blob/main/CONTRIBUTING.md)
+[Contributing Guide](https://github.com/UnicisTeh/unicis-platform-ce/blob/main/CONTRIBUTING.md)
 
 ## 🤩 Community
 
