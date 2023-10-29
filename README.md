@@ -4,8 +4,8 @@
 ![Static Badge](https://img.shields.io/badge/Github%20stargazers%2C%20https%3A%2F%2Fgithub.com%2FUnicisTeh%2Funicis-platform-ce%2Fstargazers?logo=github&label=GitHub%20Star&link=https%3A%2F%2Fgithub.com%2FUnicisTeh%2Funicis-platform-ce%2Fstargazer)
 ![Static Badge](https://img.shields.io/badge/Github%20fork%2C%20https%3A%2F%2Fgithub.com%2FUnicisTeh%2Funicis-platform-ce%2Ffork?logo=github&label=GitHub%20Fork&link=https%3A%2F%2Fgithub.com%2FUnicisTeh%2Funicis-platform-ce%2Ffork)
 [Mastodon](https://mastodon.xyz/@unicis_tech) | 
-<a href="https://twitter.com/UnicisTech">X</a> |
-![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F?logo=LinkedIn&label=LinkedIn&link=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F)
+<a href="https://twitter.com/UnicisTech">X</a> | 
+![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F?logo=LinkedIn&label=LinkedIn&link=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F) | 
 <a href="https://discord.com/invite/8TwyeD97HD">Discord</a>
 
 Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs. 
