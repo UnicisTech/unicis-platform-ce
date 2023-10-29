@@ -6,6 +6,10 @@ export const eventTypes = [
   'member.removed',
   'invitation.created',
   'invitation.removed',
+  'task.created',
+  'task.updated',
+  'task.commented',
+  'task.deleted'
 ];
 
 const EventTypes = ({

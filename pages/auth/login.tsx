@@ -68,6 +68,15 @@ const Login: NextPageWithLayout<
     ? `/invitations/${token}`
     : env.redirectIfAuthenticated;
 
+  //TODO: should delete this
+  // if (status === 'authenticated') {
+  //   router.push('/');
+  // }
+
+  // if (status === "authenticated") {
+  //   router.push(redirectAfterSignIn || '/teams');
+  // }
+
   const formik = useFormik({
     initialValues: {
       email: '',

@@ -40,7 +40,8 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     <>
       <Head>
         <title>{app.name}</title>
-        <link rel="icon" href="https://boxyhq.com/img/favicon.ico" />
+        {/* <link rel="icon" href='https://www.unicis.tech/img/logo-unicis.png' /> */}
+        <link rel="icon" href='/unicis-app.svg' />
       </Head>
       <SessionProvider session={session}>
         <Toaster toastOptions={{ duration: 4000 }} />

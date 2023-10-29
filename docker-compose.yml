@@ -4,8 +4,8 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: admin
-      POSTGRES_USER: admin
-      POSTGRES_DB: saas-starter-kit
+      POSTGRES_PASSWORD: retraced
+      POSTGRES_USER: password
+      POSTGRES_DB: unicis_platform
     ports:
       - 5432:5432

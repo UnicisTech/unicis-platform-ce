@@ -10,7 +10,8 @@ export type Resource =
   | 'team_dsync'
   | 'team_audit_log'
   | 'team_webhook'
-  | 'team_api_key';
+  | 'team_api_key'
+  | 'task';
 
 export type RolePermissions = {
   [role in RoleType]: Permission[];
@@ -33,6 +34,10 @@ export const availableRoles = [
   {
     id: Role.OWNER,
     name: 'Owner',
+  },
+  {
+    id: Role.AUDITOR,
+    name: 'Auditor',
   },
 ];
 
@@ -70,6 +75,10 @@ export const permissions: RolePermissions = {
       resource: 'team_api_key',
       actions: '*',
     },
+    {
+      resource: 'task',
+      actions: '*',
+    },
   ],
   ADMIN: [
     {
@@ -104,11 +113,37 @@ export const permissions: RolePermissions = {
       resource: 'team_api_key',
       actions: '*',
     },
+    {
+      resource: 'task',
+      actions: '*',
+    },
   ],
   MEMBER: [
     {
       resource: 'team',
       actions: ['read', 'leave'],
+    },
+    {
+      resource: 'team_member',
+      actions: ['read'],
+    },
+    {
+      resource: 'task',
+      actions: '*',
+    },
+  ],
+  AUDITOR: [
+    {
+      resource: 'team',
+      actions: ['read'],
+    },
+    {
+      resource: 'team_member',
+      actions: ['read'],
+    },
+    {
+      resource: 'task',
+      actions: ['read'],
     },
   ],
 };

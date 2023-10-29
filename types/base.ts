@@ -1,4 +1,4 @@
-import type { Prisma } from '@prisma/client';
+import type { Prisma, TeamMember, User } from '@prisma/client';
 
 export type ApiError = {
   code?: string;
@@ -25,6 +25,24 @@ export type TeamWithMemberCount = Prisma.TeamGetPayload<{
     };
   };
 }>;
+
+export type TaskExtended = Prisma.TaskGetPayload<{
+  include: {
+    comments: {
+      include: {
+        createdBy: true;
+      };
+    };
+    attachments: true;
+  };
+}>;
+
+export type Attachment = {
+  filename: string;
+  id: string;
+  taskId: number;
+  url: string;
+};
 
 export type WebookFormSchema = {
   name: string;
@@ -57,7 +75,11 @@ export type AppEvent =
   | 'webhook.created'
   | 'webhook.removed'
   | 'webhook.fetched'
-  | 'webhook.updated';
+  | 'webhook.updated'
+  | 'task.created'
+  | 'task.updated'
+  | 'task.commented'
+  | 'task.deleted';
 
 export type AUTH_PROVIDER =
   | 'github'
@@ -73,3 +95,10 @@ export interface TeamFeature {
   webhook: boolean;
   apiKey: boolean;
 }
+
+export type Option = {
+  label: string;
+  value: number;
+};
+
+export type TeamMemberWithUser = TeamMember & { user: User };

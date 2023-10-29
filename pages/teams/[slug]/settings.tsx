@@ -1,7 +1,7 @@
 import { Error, Loading } from '@/components/shared';
 import { AccessControl } from '@/components/shared/AccessControl';
-import { RemoveTeam, TeamSettings, TeamTab } from '@/components/team';
 import env from '@/lib/env';
+import { Billing, RemoveTeam, TeamSettings, TeamTab } from '@/components/team';
 import useTeam from 'hooks/useTeam';
 import type { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
@@ -28,6 +28,7 @@ const Settings = ({ teamFeatures }) => {
       <TeamTab activeTab="settings" team={team} teamFeatures={teamFeatures} />
       <div className="space-y-6">
         <TeamSettings team={team} />
+        <Billing team={team} />
         <AccessControl resource="team" actions={['delete']}>
           <RemoveTeam team={team} />
         </AccessControl>

@@ -99,7 +99,7 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
           type="email"
           label={t('email')}
           name="email"
-          placeholder={t('email-placeholder')}
+          placeholder="first.last@name.com"
           value={formik.values.email}
           error={formik.touched.email ? formik.errors.email : undefined}
           onChange={formik.handleChange}
