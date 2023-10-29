@@ -1,11 +1,12 @@
 
 # Unicis Platform Community (free and open source)
 
-[![Stargazers repo roster for @UnicisTeh/unicis-platform-ce](https://reporoster.com/stars/UnicisTeh/unicis-platform-ce)](https://github.com/UnicisTeh/unicis-platform-ce/stargazers)
-[![Forkers repo roster for @UnicisTeh/unicis-platform-ce](https://reporoster.com/forks/UnicisTeh/unicis-platform-ce)](https://github.com/UnicisTeh/unicis-platform-ce/network/members)
-<a href="https://twitter.com/UnicisTech"><img src="https://img.shields.io/twitter/follow/BoxyHQ?style=social" alt="X"></a>
-<a href="https://www.linkedin.com/company/unicis-tech-oü/"><img src="https://img.shields.io/badge/LinkedIn-blue" alt="LinkedIn"></a>
-<a href="https://discord.com/invite/8TwyeD97HD"><img src="https://img.shields.io/discord/877585485235630130" alt="Discord"></a>
+![Static Badge](https://img.shields.io/badge/Github%20stargazers%2C%20https%3A%2F%2Fgithub.com%2FUnicisTeh%2Funicis-platform-ce%2Fstargazers?logo=github&label=GitHub%20Star&link=https%3A%2F%2Fgithub.com%2FUnicisTeh%2Funicis-platform-ce%2Fstargazer)
+![Static Badge](https://img.shields.io/badge/Github%20fork%2C%20https%3A%2F%2Fgithub.com%2FUnicisTeh%2Funicis-platform-ce%2Ffork?logo=github&label=GitHub%20Fork&link=https%3A%2F%2Fgithub.com%2FUnicisTeh%2Funicis-platform-ce%2Ffork)
+[Mastodon](https://mastodon.xyz/@unicis_tech) | 
+<a href="https://twitter.com/UnicisTech">X</a> |
+![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F?logo=LinkedIn&label=LinkedIn&link=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F)
+<a href="https://discord.com/invite/8TwyeD97HD">Discord</a>
 
 Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs. 
 
@@ -20,7 +21,7 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 
 - [SaaS-Starter-Kit](https://github.com/boxyhq/saas-starter-kit/)
 - [Next.js](https://nextjs.org)
-- [Tailwind CSS](https://tailwindcss.com)
+- [Tailwind CSS](https://tailwindcss.com) and [Atlaskit](https://atlaskit.atlassian.com/)
 - [Postgres](https://www.postgresql.org)
 - [React](https://reactjs.org)
 - [Prisma](https://www.prisma.io)
@@ -28,6 +29,7 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 - [SAML Jackson](https://github.com/boxyhq/jackson) (Provides SAML SSO, Directory Sync)
 - [Svix](https://www.svix.com/) (Provides Webhook Orchestration)
 - [Retraced](https://github.com/retracedhq/retraced) (Provides Audit Logs Service)
+- Endpoints collection (Provided by [Osquery](https://osquery.io/))
 
 ## 🚀 Deployment
 
@@ -172,6 +174,7 @@ Please try to create bug reports that are:
 
 - [Discord](https://discord.com/invite/8TwyeD97HD) (For live discussion with the Open-Source Community and Unicis team)
 - [X](https://twitter.com/UnicisTech) / [LinkedIn](https://www.linkedin.com/company/unicis-tech-oü/) (Follow us)
+- [Mastodon](https://mastodon.xyz/@unicis_tech)
 - [Vimeo](https://vimeo.com/user183384852) (Watch community events and tutorials)
 - [GitHub Issues](https://github.com/UnicisTeh/unicis-platform-ce/issues) (Contributions, report issues, and product ideas)
 
