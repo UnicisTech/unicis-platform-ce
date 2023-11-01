@@ -5,7 +5,7 @@ import packageInfo from '../package.json';
 const app = {
   version: packageInfo.version,
   name: 'Unicis Platform',
-  logoUrl: 'https://www.unicis.tech/img/logo-unicis.png',
+  logoUrl: '/unicis-platform-logo-hor-cropped.svg',
   url: 'http://localhost:3002',
 };
 
