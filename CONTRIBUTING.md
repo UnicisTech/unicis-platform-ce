@@ -29,7 +29,7 @@ Please follow these simple steps to get a local copy up and running.
 
 ### 1. Setup
 
-- [Fork](https://github.com/UnicisTeh/unicis-platform-ce/fork) the repository
+- [Fork](https://github.com/UnicisTech/unicis-platform-ce/fork) the repository
 - Clone the repository by using this command:
 
 ```bash

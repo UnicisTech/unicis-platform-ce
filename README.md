@@ -1,8 +1,8 @@
 
 # Unicis Platform Community (free and open source)
 
-![Static Badge](https://img.shields.io/badge/Github%20stargazers%2C%20https%3A%2F%2Fgithub.com%2FUnicisTeh%2Funicis-platform-ce%2Fstargazers?logo=github&label=GitHub%20Star&link=https%3A%2F%2Fgithub.com%2FUnicisTeh%2Funicis-platform-ce%2Fstargazer)
-![Static Badge](https://img.shields.io/badge/Github%20fork%2C%20https%3A%2F%2Fgithub.com%2FUnicisTeh%2Funicis-platform-ce%2Ffork?logo=github&label=GitHub%20Fork&link=https%3A%2F%2Fgithub.com%2FUnicisTeh%2Funicis-platform-ce%2Ffork)
+![Static Badge](https://img.shields.io/badge/Github%20stargazers%2C%20https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Fstargazers?logo=github&label=GitHub%20Star&link=https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Fstargazer)
+![Static Badge](https://img.shields.io/badge/Github%20fork%2C%20https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Ffork?logo=github&label=GitHub%20Fork&link=https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Ffork)
 [Mastodon](https://mastodon.xyz/@unicis_tech) | 
 ![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/UnicisTech)
 ![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F?logo=LinkedIn&label=LinkedIn&link=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F) | 
@@ -51,7 +51,7 @@ Please follow these simple steps to get a local copy up and running.
 
 #### 1. Setup
 
-- [Fork](https://github.com/UnicisTeh/unicis-platform-ce/fork) the repository
+- [Fork](https://github.com/UnicisTech/unicis-platform-ce/fork) the repository
 - Clone the repository by using this command:
 
 ```bash
@@ -169,23 +169,23 @@ Please try to create bug reports that are:
 - _Unique._ Do not duplicate existing opened issues.
 - _Scoped to a Single Bug._ One bug per report.
 
-[Contributing Guide](https://github.com/UnicisTeh/unicis-platform-ce/blob/main/CONTRIBUTING.md)
+[Contributing Guide](https://github.com/UnicisTech/unicis-platform-ce/blob/main/CONTRIBUTING.md)
 
 ## 🤩 Community
 
 - [Discord](https://discord.com/invite/8TwyeD97HD) (For live discussion with the Open-Source Community and Unicis team)
 - [X](https://twitter.com/UnicisTech) / [LinkedIn](https://www.linkedin.com/company/unicis-tech-oü/) / [Mastodon](https://mastodon.xyz/@unicis_tech) (Follow us)
 - [Vimeo](https://vimeo.com/user183384852) (Watch community events and tutorials)
-- [GitHub Issues](https://github.com/UnicisTeh/unicis-platform-ce/issues) (Contributions, report issues, and product ideas)
+- [GitHub Issues](https://github.com/UnicisTech/unicis-platform-ce/issues) (Contributions, report issues, and product ideas)
 
 ## 🌍 Contributors
 
-<a href="https://github.com/UnicisTeh/unicis-platform-ce/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=UnicisTeh/unicis-platform-ce" />
+<a href="https://github.com/UnicisTech/unicis-platform-ce/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=UnicisTech/unicis-platform-ce" />
 </a>
 
 Made with [contrib.rocks](https://contrib.rocks).
 
 ## 🛡️ License
 
-[Apache 2.0 License](https://github.com/UnicisTeh/unicis-platform-ce/blob/main/LICENSE)
+[Apache 2.0 License](https://github.com/UnicisTech/unicis-platform-ce/blob/community-edition/LICENSE)
