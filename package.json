@@ -65,7 +65,7 @@
     "next": "13.5.6",
     "next-auth": "4.24.3",
     "date-fns": "^2.30.0",
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.10",
     "flowbite-datepicker": "^1.2.2",
     "formidable": "3.5.0",
     "multer": "1.4.5-lts.1",
