@@ -32,7 +32,7 @@
     "@atlaskit/form": "^8.8.4",
     "@atlaskit/icon": "^21.11.5",
     "@atlaskit/lozenge": "^11.4.2",
-    "@atlaskit/modal-dialog": "^12.4.11",
+    "@atlaskit/modal-dialog": "^12.8.4",
     "@atlaskit/popup": "^1.5.5",
     "@atlaskit/radio": "^5.6.5",
     "@atlaskit/range": "^7.1.4",
