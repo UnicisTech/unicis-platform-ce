@@ -1,5 +1,5 @@
 import type { NextPageWithLayout } from "types";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -22,6 +22,7 @@ import { perPageOptions } from "@/components/defaultLanding/data/configs/csc";
 import useTeamTasks from "hooks/useTeamTasks";
 import { getCscStatusesBySlug } from "models/team";
 import type { Option } from "types";
+import useISO from "hooks/useISO";
 
 const CscDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -42,6 +43,7 @@ const CscDashboard: NextPageWithLayout<
 
     const { isLoading, isError, team } = useTeam(slug as string);
     const { tasks, mutateTasks } = useTeamTasks(slug as string)
+    const { ISO } = useISO(team)
 
     const statusHandler = useCallback(async (control: string, value: string) => {
       const response = await axios.put(
@@ -70,7 +72,8 @@ const CscDashboard: NextPageWithLayout<
           `/api/teams/${slug}/tasks/${taskNumber}/csc`,
           {
             controls: [control],
-            operation
+            operation,
+            ISO
           }
         );
 
@@ -83,9 +86,13 @@ const CscDashboard: NextPageWithLayout<
 
         mutateTasks()
       }
-    }, [])
+    }, [ISO])
 
-    if (isLoading || !team || !tasks) {
+    useEffect(() => {
+      console.log('CSC ISO', ISO)
+    }, [ISO])
+
+    if (isLoading || !team || !tasks || !ISO) {
       return <Loading />;
     }
 
@@ -104,11 +111,17 @@ const CscDashboard: NextPageWithLayout<
             <PieChart statuses={statuses} />
           </div>
           <div style={{ width: '49%' }} className="stats stat-value shadow">
-            <RadarChart statuses={statuses} />
+            <RadarChart 
+              statuses={statuses} 
+              ISO={ISO}
+            />
           </div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <SectionFilter setSectionFilter={setSectionFilter} />
+          <SectionFilter 
+            ISO={ISO}
+            setSectionFilter={setSectionFilter} 
+          />
           <StatusFilter setStatusFilter={setStatusFilter} />
           <PerPageSelector
             setPerPage={setPerPage}
@@ -121,6 +134,7 @@ const CscDashboard: NextPageWithLayout<
           />
         </div>
         <StatusesTable
+          ISO={ISO}
           tasks={tasks}
           statuses={statuses}
           sectionFilter={sectionFilter}
@@ -143,6 +157,7 @@ export const getServerSideProps = async (
     props: {
       ...(locale ? await serverSideTranslations(locale, ["common"]) : {}),
       csc_statuses: await getCscStatusesBySlug(slug),
+
     },
   };
 };

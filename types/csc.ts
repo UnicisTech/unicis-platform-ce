@@ -24,3 +24,18 @@ export type ControlOption = {
     section: string;
   };
 };
+
+export type Control = {
+  Code: string;
+  Section: string;
+  Control: string;
+  Requirements: string;
+  Status: string;
+};
+
+export type IsoControlMap = Record<string, Control[]>;
+
+export type Section = {
+  label: string;
+  value: string;
+};

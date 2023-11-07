@@ -12,6 +12,7 @@ import { CscAuditLogs, CscPanel } from "@/components/interfaces/CSC";
 import { CreateRPA, RpaPanel, RpaAuditLog } from "@/components/interfaces/RPA";
 import useTeam from "hooks/useTeam";
 import useCanAccess from 'hooks/useCanAccess';
+import useISO from "hooks/useISO";
 import { Team } from "@prisma/client";
 import { getCscStatusesBySlug } from "models/team";
 import { InferGetServerSidePropsType } from "next";
@@ -35,8 +36,9 @@ const TaskById: NextPageWithLayout<
     const { taskNumber, slug } = router.query;
     const { team, isLoading: isTeamLoading, isError: isTeamError } = useTeam(slug as string)
     const { task, isLoading, isError, mutateTask } = useTask(slug as string, taskNumber as string)
+    const { ISO } = useISO(team)
 
-    if (isLoading || isTeamLoading) {
+    if (isLoading || isTeamLoading || !ISO) {
       return <Loading />;
     }
 
@@ -115,7 +117,13 @@ const TaskById: NextPageWithLayout<
         {activeTab === "Cybersecurity Controls" && (
           <Card heading="CSC panel">
             <Card.Body>
-              <CscPanel task={task} mutateTask={mutateTask} statuses={statuses} setStatuses={setStatuses} />
+              <CscPanel 
+                task={task} 
+                mutateTask={mutateTask} 
+                statuses={statuses} 
+                setStatuses={setStatuses} 
+                ISO={ISO}
+              />
             </Card.Body>
           </Card>
         )}

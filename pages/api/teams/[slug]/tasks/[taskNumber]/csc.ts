@@ -41,7 +41,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const { operation, controls } = req.body;
+  const { operation, controls, ISO } = req.body;
 
   if (operation === 'add') {
     await addControlsToIssue({
@@ -49,6 +49,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       taskNumber: taskNumberAsNumber,
       slug: slug as string,
       controls,
+      ISO: ISO as string
     });
   }
 
@@ -58,6 +59,8 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       taskNumber: taskNumberAsNumber,
       slug: slug as string,
       controls,
+      ISO: ISO as string
+
     });
   }
 
@@ -67,6 +70,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       taskNumber: taskNumberAsNumber,
       slug: slug as string,
       controls,
+      ISO: ISO as string
     });
   }
 

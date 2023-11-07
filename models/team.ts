@@ -1,11 +1,13 @@
 import json from '@/components/defaultLanding/data/MVPS-controls.json';
 import { prisma } from '@/lib/prisma';
+import { getCscStatusesProp } from '@/lib/csc';
 import { getSession } from '@/lib/session';
 import { findOrCreateApp } from '@/lib/svix';
 import { Role } from '@prisma/client';
+import { controls } from '@/components/defaultLanding/data/configs/csc';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const controls = json['MVPS-Controls'];
+// const controls = json['MVPS-Controls'];
 
 export const createTeam = async (param: {
   userId: string;
@@ -240,7 +242,7 @@ export const incrementTaskIndex = async (teamId: string) => {
     console.error(error);
   }
 };
-
+//TODO: should delete
 export const getTeamPropertiesBySlug = async (slug: string) => {
   const team = await prisma.team.findUnique({
     where: {
@@ -255,7 +257,7 @@ export const getTeamPropertiesBySlug = async (slug: string) => {
 };
 
 export const getCscStatusesBySlug = async (slug: string) => {
-  const team = await prisma.team.findUnique({
+  const team = await prisma.team.findUniqueOrThrow({
     where: {
       slug: slug,
     },
@@ -264,20 +266,26 @@ export const getCscStatusesBySlug = async (slug: string) => {
     },
   });
 
-  const teamProperties = team?.properties as any;
+  const teamProperties: any = team ? team.properties : {};
+  const iso = teamProperties.csc_iso
+  const cscStatusesProp = getCscStatusesProp(iso)
 
-  if (teamProperties?.csc_statuses) {
-    return teamProperties?.csc_statuses;
+  console.log('cscStatusesProp', {cscStatusesProp, teamProperties})
+
+  if (teamProperties[cscStatusesProp]) {
+    console.log('return team properties', teamProperties[cscStatusesProp])
+    return teamProperties[cscStatusesProp];
   }
 
-  const initial = {} as any;
-  controls.forEach((control) => (initial[control.Control] = 'Unknown'));
+  const initial = {};
+  controls[iso].forEach((control) => (initial[control.Control] = 'Unknown'));
 
   await prisma.team.update({
     where: { slug: slug },
     data: {
       properties: {
-        csc_statuses: initial,
+        ...teamProperties,
+        [cscStatusesProp]: initial,
       },
     },
   });
@@ -303,19 +311,98 @@ export const setCscStatus = async ({
     },
   });
 
-  const teamProperties = team?.properties as any;
+  const teamProperties: any = team ? team.properties : {};
 
-  const csc_statuses = teamProperties?.csc_statuses;
-  csc_statuses[control] = value;
+  const iso = teamProperties.csc_iso
+
+  const cscStatusesProp = getCscStatusesProp(iso)
+
+  const cscStatuses = { ...teamProperties[cscStatusesProp] };
+  cscStatuses[control] = value;
+
+  console.log('set csc statuses', cscStatusesProp)
 
   await prisma.team.update({
     where: { slug: slug },
     data: {
       properties: {
-        csc_statuses,
+        ...teamProperties,
+        [cscStatusesProp]: cscStatuses,
       },
     },
   });
 
-  return csc_statuses;
+  return cscStatuses;
 };
+
+export const getCscIso = async ({
+  slug,
+}: {
+  slug: string;
+}) => {
+  const team = await prisma.team.findUnique({
+    where: {
+      slug: slug,
+    },
+    select: {
+      properties: true,
+    },
+  });
+
+  console.log('getCscIso team', team)
+
+  const teamProperties: any = team ? team.properties : {};
+
+  if (teamProperties?.csc_iso) {
+    return teamProperties?.csc_iso;
+  }
+
+  const initial = 'default'
+
+  const updatedProperties = {
+    ...teamProperties,
+    csc_iso: initial
+  };
+
+  await prisma.team.update({
+    where: { slug: slug },
+    data: {
+      properties: updatedProperties,
+    },
+  });
+
+  return initial
+}
+
+export const setCscIso = async ({
+  slug,
+  iso
+}: {
+  slug: string;
+  iso: string;
+}) => {
+  const team = await prisma.team.findUnique({
+    where: {
+      slug: slug,
+    },
+    select: {
+      properties: true,
+    },
+  });
+
+  const teamProperties: any = team ? team.properties : {};
+
+  const updatedProperties = {
+    ...teamProperties,
+    csc_iso: iso
+  };
+
+  await prisma.team.update({
+    where: { slug: slug },
+    data: {
+      properties: updatedProperties,
+    },
+  });
+
+  return iso;
+}

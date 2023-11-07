@@ -1,4 +1,4 @@
-import React, { useState, useCallback, Dispatch, SetStateAction } from 'react'
+import React, { useState, useCallback, Dispatch, SetStateAction, useMemo } from 'react'
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
@@ -8,10 +8,11 @@ import TrashIcon from '@atlaskit/icon/glyph/trash'
 import TextArea from '@atlaskit/textarea'
 import Textfield from '@atlaskit/textfield'
 import { WithoutRing } from "sharedStyles"
-import { controlOptions } from '@/components/defaultLanding/data/configs/csc';
+import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
 import StatusSelector from '../StatusSelector'
 
 const ControlBlock = ({
+  ISO,
   status,
   control,
   controls,
@@ -21,6 +22,7 @@ const ControlBlock = ({
   deleteControlHandler,
   setStatuses
 }: {
+  ISO: string;
   status: string;
   control: string;
   controls: string[];
@@ -32,10 +34,13 @@ const ControlBlock = ({
     [key: string]: string;
   }>>
 }) => {
+  console.log('status control block', status)
   const router = useRouter();
 
   const { slug } = router.query;
   const [isButtonLoading, setIsButtonLoading] = useState(false)
+
+  const controlOptions = useMemo(() => getControlOptions(ISO), [ISO])
   const controlData = controlOptions.find(({ value }) => value.control === control)?.value
 
   const statusHandler = useCallback(async (control: string, value: string) => {
@@ -117,10 +122,6 @@ const ControlBlock = ({
           control={control}
           handler={statusHandler}
         />
-        {/* <Textfield
-          isReadOnly
-          value={status}
-        /> */}
       </>
       {controlData?.requirements &&
         <>

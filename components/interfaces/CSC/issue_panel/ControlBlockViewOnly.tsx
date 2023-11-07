@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import TextArea from '@atlaskit/textarea'
 import Textfield from '@atlaskit/textfield'
-import { controlOptions } from '@/components/defaultLanding/data/configs/csc';
+import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
 
 const ControlBlockViewOnly = ({
 	status,
-	control
+	control,
+	ISO
 }: {
 	status: string;
 	control: string;
+	ISO: string;
 }) => {
+	const controlOptions = useMemo(() => getControlOptions(ISO), [ISO])
 	const controlData = controlOptions.find(({ value }) => value.control === control)?.value
 
 	return (

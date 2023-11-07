@@ -1,7 +1,7 @@
 import { Error, Loading } from '@/components/shared';
 import { AccessControl } from '@/components/shared/AccessControl';
 import env from '@/lib/env';
-import { Billing, RemoveTeam, TeamSettings, TeamTab } from '@/components/team';
+import { Billing, RemoveTeam, TeamSettings, TeamTab, CSCSettings } from '@/components/team';
 import useTeam from 'hooks/useTeam';
 import type { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
@@ -9,7 +9,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Settings = ({ teamFeatures }) => {
   const { t } = useTranslation('common');
-  const { isLoading, isError, team } = useTeam();
+  const { isLoading, isError, team, mutateTeam } = useTeam();
 
   if (isLoading) {
     return <Loading />;
@@ -29,6 +29,7 @@ const Settings = ({ teamFeatures }) => {
       <div className="space-y-6">
         <TeamSettings team={team} />
         <Billing team={team} />
+        <CSCSettings team={team} />
         <AccessControl resource="team" actions={['delete']}>
           <RemoveTeam team={team} />
         </AccessControl>

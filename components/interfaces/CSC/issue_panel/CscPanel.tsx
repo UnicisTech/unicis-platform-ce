@@ -9,15 +9,18 @@ import type { Task } from "@prisma/client";
 import { IssuePanelContainer } from 'sharedStyles';
 import useCanAccess from 'hooks/useCanAccess';
 import ControlBlockViewOnly from './ControlBlockViewOnly';
+import { getCscControlsProp } from '@/lib/csc';
 
 const CscPanel = ({
   task,
   statuses,
+  ISO,
   setStatuses,
   mutateTask
 }: {
   task: Task;
   statuses: { [key: string]: string; };
+  ISO: string;
   setStatuses: Dispatch<SetStateAction<{
     [key: string]: string;
   }>>
@@ -30,11 +33,13 @@ const CscPanel = ({
   const { slug } = router.query;
 
   const properties = task?.properties as any
-  const issueControls = properties?.csc_controls as string[] || ['']
+  const issueControls = properties?.[getCscControlsProp(ISO)] as string[] || ['']
 
   const [controls, setControls] = useState(issueControls)
   const [isDeleting, setIsDeleting] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
+
+  console.log('statuses', statuses)
 
   useEffect(() => {
     setControls(issueControls)
@@ -51,7 +56,8 @@ const CscPanel = ({
       `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
       {
         controls: [...controls],
-        operation: 'remove'
+        operation: 'remove',
+        ISO
       }
     );
 
@@ -77,7 +83,8 @@ const CscPanel = ({
         `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
         {
           controls: [newControl],
-          operation: 'add'
+          operation: 'add',
+          ISO
         }
       );
     } else {
@@ -85,7 +92,8 @@ const CscPanel = ({
         `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
         {
           controls: [oldControl, newControl],
-          operation: 'change'
+          operation: 'change',
+          ISO
         }
       );
     }
@@ -109,7 +117,8 @@ const CscPanel = ({
       `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
       {
         controls: [control],
-        operation: 'remove'
+        operation: 'remove',
+        ISO
       }
     );
 
@@ -135,6 +144,7 @@ const CscPanel = ({
           {controls.map((control, index) => (
             <ControlBlock
               key={index}
+              ISO={ISO}
               status={statuses[control]}
               setStatuses={setStatuses}
               control={control}
@@ -172,6 +182,7 @@ const CscPanel = ({
           {controls.map((control, index) => 
             <ControlBlockViewOnly
               key={index}
+              ISO={ISO}
               status={statuses[control]}
               control={control}
             />

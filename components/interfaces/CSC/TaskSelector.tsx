@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import Select from '@atlaskit/select'
 import { WithoutRing } from 'sharedStyles';
+import { getCscControlsProp } from '@/lib/csc';
 import type { Task } from "@prisma/client";
 import type { CscOption } from 'types';
 
 const TaskSelector = ({ 
     tasks, 
     control, 
-    handler 
+    handler,
+    ISO
 } : {
-    tasks: Array<Task>
-    control: string,
-    handler: (action: string, dataToRemove: any, control: string) => Promise<void>
+    tasks: Array<Task>;
+    control: string;
+    handler: (action: string, dataToRemove: any, control: string) => Promise<void>;
+    ISO: string
 }) => {
     const [value, setValue] = useState<CscOption[]>([])
     const [options, setOptions] = useState<CscOption[]>([])
 
     useEffect(() => {
         const options = tasks.map(task => ({ label: task.title, value: task.taskNumber }))
-        const selectedOptions = tasks.filter((task: any) => task.properties?.csc_controls?.find((item: string) => item === control))?.map(issue => ({ label: issue.title, value: issue.taskNumber }))
+        const cscStatusesProp = getCscControlsProp(ISO)
+        const selectedOptions = tasks.filter((task: any) => task.properties?.[cscStatusesProp]?.find((item: string) => item === control))?.map(issue => ({ label: issue.title, value: issue.taskNumber }))
         setOptions(options)
         setValue(selectedOptions)
     }, [])

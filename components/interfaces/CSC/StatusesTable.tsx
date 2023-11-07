@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StatusHeader from "./StatusHeader";
 import TaskSelector from "./TaskSelector";
-import { controlOptions } from "@/components/defaultLanding/data/configs/csc";
+import { getControlOptions } from "@/components/defaultLanding/data/configs/csc";
 import StatusSelector from "./StatusSelector"
 import type { CscOption } from "types";
 import type { Task } from "@prisma/client";
@@ -12,6 +12,7 @@ import { TailwindTableWrapper } from "sharedStyles";
 import TasksList from "./TasksList";
 
 const StatusesTable = ({
+  ISO,
   tasks,
   statuses,
   sectionFilter,
@@ -20,6 +21,7 @@ const StatusesTable = ({
   statusHandler,
   taskSelectorHandler
 }: {
+  ISO: string;
   tasks: Array<Task>;
   statuses: any;
   sectionFilter: null | Array<{ label: string, value: string }>;
@@ -29,7 +31,8 @@ const StatusesTable = ({
   taskSelectorHandler: (action: string, dataToRemove: any, control: string) => Promise<void>
 }) => {
   const { canAccess } = useCanAccess();
-  const [filteredControls, setFilteredControls] = useState<Array<ControlOption>>(controlOptions)
+  //TODO: maybe [] instead of getControlOptions
+  const [filteredControls, setFilteredControls] = useState<Array<ControlOption>>(getControlOptions(ISO))
   const {
     currentPage,
     totalPages,
@@ -41,13 +44,27 @@ const StatusesTable = ({
   } = usePagination<ControlOption>(filteredControls, perPage);
 
   useEffect(() => {
-    let filteredControls = [...controlOptions]
+    //TODO: getControlOptions
+    let filteredControls = [...getControlOptions(ISO)]
     if ((sectionFilter === null || sectionFilter?.length === 0) && (statusFilter === null || statusFilter?.length === 0)) {
-      setFilteredControls(controlOptions)
+      
+      //TODO: filteredControls intead of getControlOptions
+      setFilteredControls(getControlOptions(ISO))
       return
     }
+    // if (sectionFilter?.length) {
+    //   filteredControls = filteredControls.filter(control => (sectionFilter.map(option => option.label)).includes(control.value.section))
+    // }
     if (sectionFilter?.length) {
-      filteredControls = filteredControls.filter(control => (sectionFilter.map(option => option.label)).includes(control.value.section))
+      filteredControls = filteredControls.filter(item => {
+        const sections = sectionFilter.map(option => option.value);
+        const content = item.value.section
+        if (ISO === '2013') {
+          return sections.some(section => content.includes(section));
+        } else {
+          return sections.includes(content);
+        }
+      });
     }
     if (statusFilter?.length) {
       filteredControls = filteredControls.filter(control => (statusFilter.map(option => option.label)).includes(statuses[control.value.control]))
@@ -99,7 +116,7 @@ const StatusesTable = ({
                   </td>
                   <td className="px-6 py-3 w-40">
                     {canAccess('task', ['update'])
-                      ? <TaskSelector tasks={tasks} control={option.value.control} handler={taskSelectorHandler} />
+                      ? <TaskSelector tasks={tasks} control={option.value.control} handler={taskSelectorHandler} ISO={ISO} />
                       : <TasksList tasks={tasks} control={option.value.control} />
                     }
 

@@ -1,4 +1,4 @@
-import { setCscStatus } from 'models/team';
+import { setCscStatus, setCscIso, getCscIso } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
@@ -10,6 +10,8 @@ export default async function handler(
   const { method } = req;
 
   switch (method) {
+    case 'GET':
+      return handleGET(req, res);
     case 'PUT':
       return handlePUT(req, res);
     default:
@@ -21,18 +23,37 @@ export default async function handler(
   }
 }
 
+const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
+  const teamMember = await throwIfNoTeamAccess(req, res);
+  throwIfNotAllowed(teamMember, 'team', 'read');
+
+  const { slug } = req.query;
+
+  const responce = await getCscIso({
+    slug: slug as string
+  })
+
+  console.log('hande get iso responce', responce)
+
+  return res.status(200).json({ data: { iso: responce }, error: null });
+
+}
+
 const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
   throwIfNotAllowed(teamMember, 'team', 'read');
 
   const { slug } = req.query;
-  const { control, value } = req.body;
+  const { iso } = req.body;
 
-  const statuses = await setCscStatus({
+  console.log('hande put iso slug ', { slug, iso })
+
+  const responce = await setCscIso({
     slug: slug as string,
-    control: control as string,
-    value: value as string,
-  });
+    iso
+  })
 
-  return res.status(200).json({ data: { statuses }, error: null });
+  console.log('hande put isoresponce ', responce)
+
+  return res.status(200).json({ data: { iso: responce }, error: null });
 };

@@ -200,6 +200,8 @@
   "all-tasks": "All Tasks",
   "create": "Create",
   "csc": "Cybersecurity Management System",
+  "csc-choose-iso": "Framework controls",
+  "csc-settings": "Cybersecurity Settings",
   "rpa": "Register of Procedures",
   "rpa-activities": "Record of Processing Activities",
   "rpa-dpo": "Data Protection Officer (DPO)",

@@ -1,7 +1,7 @@
 import fetcher from '@/lib/fetcher';
 import type { Team } from '@prisma/client';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import type { ApiResponse } from 'types';
 
 const useTeam = (slug?: string) => {
@@ -14,10 +14,15 @@ const useTeam = (slug?: string) => {
     fetcher
   );
 
+  const mutateTeam = async () => {
+    mutate(`/api/teams/${teamSlug}`);
+  };
+
   return {
     isLoading,
     isError: error,
     team: data?.data,
+    mutateTeam
   };
 };
 

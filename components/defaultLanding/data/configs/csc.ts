@@ -1,7 +1,18 @@
 //import json from "../../../data/MVPS-controls.json";
-import json from '../MVPS-controls.json';
+import defaultJson from '../MVPS-controls.json';
+import iso2013Json from '../ISO-CSC-controls-2013.json'
+import iso2022Json from '../ISO-CSC-controls-2022.json'
 
-const controls = json['MVPS-Controls'];
+import { Control, IsoControlMap, Section } from 'types';
+
+// const controls = json['MVPS-Controls'];
+
+const controls = {
+  '2013': iso2013Json,
+  '2022': iso2022Json,
+  'default': defaultJson["MVPS-Controls"]
+}
+
 
 const sections = [
   {
@@ -21,6 +32,12 @@ const sections = [
     value: 'Operational controls',
   },
 ];
+
+const isoOptions = [
+  { label: 'ISO/IEC 27001:2013', value: '2013' },
+  { label: 'ISO/IEC 27001:2022', value: '2022' },
+  { label: 'MVSP v1.0-20211007', value: 'default' }
+]
 
 const perPageOptions: { label: string; value: number }[] = [
   {
@@ -45,17 +62,113 @@ const perPageOptions: { label: string; value: number }[] = [
   },
 ];
 
-const controlOptions = controls.map(
-  ({ Code, Control, Requirements, Section }) => ({
-    label: Control,
-    value: {
-      code: Code,
-      control: Control,
-      requirements: Requirements,
-      section: Section,
-    },
-  })
-);
+// const controlOptions = controls.map(
+//   ({ Code, Control, Requirements, Section }) => ({
+//     label: Control,
+//     value: {
+//       code: Code,
+//       control: Control,
+//       requirements: Requirements,
+//       section: Section,
+//     },
+//   })
+// );
+
+const trimToSecondDot = (inputString: string): string => inputString.split('.').slice(0, 2).join('.');
+
+const getSectionsLabels = (iso: string) => {
+  if (iso !== "2013") {
+    return getSections(iso).map(({ label }) => label)
+  }
+
+  //For ISO 2013 we should merge the sections because of their big amount
+  const labelSet = new Set();
+  controls[iso].forEach(item => {
+    labelSet.add(trimToSecondDot(item.Code));
+  });
+
+  const sections = (Array.from(labelSet) as string[])
+    .map((label: string) => label + " " + controls[iso].find(({ Code }) => Code.includes(label))?.Section.split(" - ")[0])
+
+  return sections
+}
+
+const getControlOptions = (iso: string) => controls[iso].map(({ Code, Control, Requirements, Section }) => ({
+  label: `${Code}: ${Section}, ${Control}`,
+  value: {
+    code: Code,
+    control: Control,
+    requirements: Requirements,
+    section: Section
+  }
+}))
+
+const mergePoints = (d) => {
+  const merged = [
+    d[0],
+    (d[1] + d[2]) / 2,
+    (d[3] + d[4] + d[5]) / 3,
+    (d[6] + d[7] + d[8]) / 3,
+    (d[9] + d[10] + d[11] + d[12]) / 4,
+    d[13],
+    (d[14] + d[15]) / 2,
+    (d[16] + d[17] + d[18] + d[19] + d[20] + d[21] + d[22]) / 7,
+    (d[23] + d[24]) / 2,
+    (d[25] + d[26] + d[27]) / 3,
+    (d[28] + d[29]) / 2,
+    d[30],
+    (d[31] + d[32]) / 2,
+    (d[33] + d[34]) / 2,
+  ]
+
+  const rounded = merged.map(value => Math.round(value))
+
+  return rounded
+}
+
+const getRadarChartLabels = (iso: string) => {
+  const labels = getSectionsLabels(iso)
+  return labels.map(label => label.split(" "))
+}
+
+const getSections = (iso: string): Section[] => {
+  const sectionSet = new Set<string>();
+
+  if (controls[iso]) {
+    controls[iso].forEach((item) => {
+      sectionSet.add(item.Section);
+    });
+  }
+
+  const sections: Section[] = Array.from(sectionSet).map((section) => ({
+    label: section,
+    value: section,
+  }));
+
+  return sections;
+}
+
+const getSectionFilterOptions = (iso: string) => {
+  if (iso !== '2013') {
+    return getSections(iso)
+  }
+
+  const labels = getSectionsLabels(iso)
+  const options = labels.map(label => ({
+    label,
+    value: removeBeforeFirstSpace(label)
+  }))
+
+  return options
+}
+
+const removeBeforeFirstSpace = (string) => {
+  const parts = string.split(' ');
+  if (parts.length > 1) {
+    return parts.slice(1).join(' ');
+  }
+  return string;
+}
 
 const statusOptions: { label: string; value: number }[] = [
   {
@@ -159,10 +272,14 @@ const colourStyles = {
 
 export {
   colourStyles,
-  controlOptions,
+  mergePoints,
+  getRadarChartLabels,
+  getControlOptions,
+  getSections,
+  getSectionFilterOptions,
   statusOptions,
-  json,
   sections,
   perPageOptions,
   controls,
+  isoOptions
 };

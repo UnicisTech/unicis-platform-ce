@@ -1,0 +1,800 @@
+[
+  {
+    "Code": "A.5.1.1",
+    "Section": "Information security policies - Management direction for information security",
+    "Control": "Policies for information security",
+    "Requirements": "A set of policies for information and cybersecurity shall be defined, approved by C-level, published and communicated to employees and relevant external parties.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.5.1.2",
+    "Section": "Information security policies - Management direction for information security",
+    "Control": "Review of the policies for information security",
+    "Requirements": "The policies for information and cybersecurity shall be reviewed at planned intervals or if significant changes occur to ensure their continuing suitability, adequacy, communication and effectiveness.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.6.1.1",
+    "Section": "Organization of information security - Internal Organization",
+    "Control": "Information security roles and responsibilities",
+    "Requirements": "All information and cybersecurity roles and responsibilities shall be defined and allocated.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.6.1.2",
+    "Section": "Organization of information security - Internal Organization",
+    "Control": "Segregation of duties",
+    "Requirements": "Conflicting tasks and areas of responsibility should be separated to reduce opportunities to change or misuse the assets of the organization without permission or unintended.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.6.1.3",
+    "Section": "Organization of information security - Internal Organization",
+    "Control": "Contact with authorities",
+    "Requirements": "It is necessary to maintain proper communications with the relevant authorities.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.6.1.4",
+    "Section": "Organization of information security - Internal Organization",
+    "Control": "Contact with special interest groups",
+    "Requirements": "Appropriate connections should be established with special interest organizations or other forums for professional security and professional associations.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.6.1.5",
+    "Section": "Organization of information security - Internal Organization",
+    "Control": "Information security in project management",
+    "Requirements": "Throughout project management, the confidentiality of information should be discussed irrespective of project type",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.6.2.1",
+    "Section": "Organization of information security - Mobile devices and teleworking",
+    "Control": "Mobile device policy",
+    "Requirements": "To manage the risks introduced by the use of mobile devices, a policy and supporting safety measures should be adopted.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.6.2.2",
+    "Section": "Organization of information security - Mobile devices and teleworking",
+    "Control": "Teleworking",
+    "Requirements": "To guard the accessed, processed, or stored information at teleworking sites, a policy and supporting security measures should be implemented.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.7.1.1",
+    "Section": "Human Resources Security - Prior to employment",
+    "Control": "Screening",
+    "Requirements": "Background verification checks on all job applicants will be performed in compliance with applicable rules, legislation, and ethics and should be proportionate to business criteria, classification of the information to be obtained, and potential risks.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.7.1.2",
+    "Section": "Human Resources Security - Prior to employment",
+    "Control": "Terms and conditions of employment",
+    "Requirements": "Contract agreements with employees and contractors would set out their responsibility for information security, and hence the responsibility of the company.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.7.2.1 ",
+    "Section": "Human Resources Security - During employment",
+    "Control": "Management responsibilities",
+    "Requirements": "Management should mandate all employees and contractors to exercise information security in accordance with established policies and procedures set by the organization.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.7.2.2 ",
+    "Section": "Human Resources Security - During employment",
+    "Control": "Information security awareness, education and training",
+    "Requirements": "All company workers and, where necessary, contractors will receive adequate awareness education and training, as well as daily updates on organizational policies and procedures, as applicable to their job function.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.7.2.3 ",
+    "Section": "Human Resources Security - During employment",
+    "Control": "Disciplinary process",
+    "Requirements": "A formal and informed administrative process will be in place to take action against employees who have committed an information security breach.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.7.3.1 ",
+    "Section": "Human Resources Security - Termination and change of employment",
+    "Control": "Termination or change of employment responsibilities",
+    "Requirements": "Responsibility and information/cyber security requirements that continue to be valid following termination or change of employment must be defined, communicated to, and implemented by the employee or contractor.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.8.1.1",
+    "Section": "Asset Management - Responsibility for assets",
+    "Control": "Inventory of assets",
+    "Requirements": "Assets related to information and information facilities of an organization should be identified and listed, inventory of these assets should also be maintained.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.8.1.2",
+    "Section": "Asset Management - Responsibility for assets",
+    "Control": "Ownership of assets",
+    "Requirements": "Assets in the inventory should have their owners (Asset-owner)",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.8.1.3",
+    "Section": "Asset Management - Responsibility for assets",
+    "Control": "Acceptable use of assets",
+    "Requirements": "Rules should be identified, documented, and implemented for the acceptable use of information and assets linked to information and information processing facilities.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.8.1.4 ",
+    "Section": "Asset Management - Responsibility for assets",
+    "Control": "Return of assets",
+    "Requirements": "Both workers and external stakeholders must return all the organizational assets in their possession upon termination of their job, contract or agreement",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.8.2.1 ",
+    "Section": "Asset Management - Information classification",
+    "Control": "Classification of information",
+    "Requirements": "Information should be classification in the basis of their legal provisions, criticality, and vulnerability to unwanted release or alteration",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.8.2.2 ",
+    "Section": "Asset Management - Information classification",
+    "Control": "Labelling of information",
+    "Requirements": "In accordance with the information classification scheme adopted by the organization, an adequate set of methods for labelling information should be established and implemented.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.8.2.3 ",
+    "Section": "Asset Management - Information classification",
+    "Control": "Handling of assets",
+    "Requirements": "Handling of assets in accordance with the organization’s information classification scheme should be developed and implemented.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.8.3.1 ",
+    "Section": "Asset Management - Media handling",
+    "Control": "Management of removable media",
+    "Requirements": "Procedures shall be implemented for the management of removable media in accordance with the classification scheme adopted by the organization.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.8.3.2 ",
+    "Section": "Asset Management - Media handling",
+    "Control": "Disposal of media",
+    "Requirements": "When not required by specific protocols, media should be disposed of securely.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.8.3.3 ",
+    "Section": "Asset Management - Media handling",
+    "Control": "Physical media transfer",
+    "Requirements": "Information media should be protected from unauthorized access, misuse or corruption during transportation.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.9.1.1 ",
+    "Section": "Access Control - Business requirements of access control",
+    "Control": "Access control policy",
+    "Requirements": "An access control policy with supporting business and information security requirements should be established, documented, and reviewed.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.9.1.2 ",
+    "Section": "Access Control - Business requirements of access control",
+    "Control": "Access to networks and network services",
+    "Requirements": "Only network and network facilities which have expressly been approved for use will be made available to users.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.9.2.1 ",
+    "Section": "Access Control - User access management",
+    "Control": "User registration and de-registration",
+    "Requirements": "Only network and network facilities which have expressly been approved for use will be made available to users.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.9.2.2 ",
+    "Section": "Access Control - User access management",
+    "Control": "User access provisioning",
+    "Requirements": "A formal process for granting access to users should be put in place to grant or remove access privileges for all categories of users to all systems and services.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.9.2.3 ",
+    "Section": "Access Control - User access management",
+    "Control": "Management of privileged access rights",
+    "Requirements": "A structured authorizing procedure in accordance with the appropriate access management policies should monitor the allocation and usage of delegated access privileges.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.9.2.4 ",
+    "Section": "Access Control - User access management",
+    "Control": "Management of secret authentication information of users",
+    "Requirements": "A structured management process should control the allocation of secret authentication information.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.9.2.5 ",
+    "Section": "Access Control - User access management",
+    "Control": "Review of user access rights",
+    "Requirements": "Access rights of users should be reviewed regularly by asset owners.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.9.2.6 ",
+    "Section": "Access Control - User access management",
+    "Control": "Removal or adjustment of access rights",
+    "Requirements": "Access rights of all employees and external users to information and information processing facilities should be waived upon termination of jobs, contract or agreement, or changed upon adjustment.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.9.3.1 ",
+    "Section": "Access Control - User responsibilities",
+    "Control": "Use of secret authentication information of users",
+    "Requirements": "Use of secret authentication information should be allowed for users to follow the organization’s practices.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.9.4.1 ",
+    "Section": "Access Control - System and application access control",
+    "Control": "Information access restriction",
+    "Requirements": "Access controls should be based on individual requirements for business applications and in compliance with a specified access control policy.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.9.4.2 ",
+    "Section": "Access Control - System and application access control",
+    "Control": "Secure log-on procedures",
+    "Requirements": "Access to systems and applications should be controlled by a secure log-on procedure when required by the Access Control Policy.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.9.4.3 ",
+    "Section": "Access Control - System and application access control",
+    "Control": "Password management system",
+    "Requirements": "Password management systems should be cooperative to ensure the quality of the passwords.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.9.4.4 ",
+    "Section": "Access Control - System and application access control",
+    "Control": "Use of privileged utility programs",
+    "Requirements": "The use of utility programs that could bypass system and application controls should be limited and tightly controlled.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.9.4.5 ",
+    "Section": "Access Control - System and application access control",
+    "Control": "Access control to program source code",
+    "Requirements": "Access should be limited to the source code of the program.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.10.1.1 ",
+    "Section": "Cryptography - Cryptographic controls",
+    "Control": "Policy on the use of cryptographic controls",
+    "Requirements": "A policy on the use of cryptographic controls for protection of information shall be developed and implemented.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.10.1.2 ",
+    "Section": "Cryptography - Cryptographic controls",
+    "Control": "Key management",
+    "Requirements": "A policy on the use, security, and lifetime of cryptographic keys should be created and enforced over their entire life cycle.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.11.1.1 ",
+    "Section": "Physical and Environmental Security - Secure Areas",
+    "Control": "Physical security perimeter",
+    "Requirements": "Security perimeters should be established in order to secure areas that contain either sensitive or confidential information and information processing facilities.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.11.1.2 ",
+    "Section": "Physical and Environmental Security - Secure Areas",
+    "Control": "Physical entry controls",
+    "Requirements": "Appropriate access controls should protect places to ensure that only authorized employees are allowed access.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.11.1.3 ",
+    "Section": "Physical and Environmental Security - Secure Areas",
+    "Control": "Securing offices, rooms and facilities",
+    "Requirements": "Physical security should be designed and implemented for the offices, rooms, and facilities.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.11.1.4 ",
+    "Section": "Physical and Environmental Security - Secure Areas",
+    "Control": "Protecting against external and environmental threats",
+    "Requirements": "Physical protection should be designed and applied against natural disasters, malicious attacks or accidents.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.11.1.5 ",
+    "Section": "Physical and Environmental Security - Secure Areas",
+    "Control": "Working in secure areas",
+    "Requirements": "Procedures should be designed and implemented for working in safe areas.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.11.1.6 ",
+    "Section": "Physical and Environmental Security - Secure Areas",
+    "Control": "Delivery and loading areas",
+    "Requirements": "It is important to track and, where possible, differentiate between access points such as the distribution and loading areas and other locations in order to avoid unauthorized access by unauthorized persons to the premises.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.11.2.1 ",
+    "Section": "Physical and Environmental Security - Equipment",
+    "Control": "Equipment siting and protection",
+    "Requirements": "To mitigate the risk of environmental hazards, risks, and unauthorized access, the equipment should be sited and secured.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.11.2.2 ",
+    "Section": "Physical and Environmental Security - Equipment",
+    "Control": "Supporting utilities",
+    "Requirements": "Equipment should be secured against power failures and other disruptions caused by the supporting infrastructure failures.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.11.2.3 ",
+    "Section": "Physical and Environmental Security - Equipment",
+    "Control": "Cabling security",
+    "Requirements": "Cable for power and telecommunications that carry data or support services should be safeguarded against interception, interference, or damage.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.11.2.4 ",
+    "Section": "Physical and Environmental Security - Equipment",
+    "Control": "Equipment maintenance",
+    "Requirements": "To ensure its continued availability and integrity, the equipment should be correctly maintained.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.11.2.5 ",
+    "Section": "Physical and Environmental Security - Equipment",
+    "Control": "Removal of assets",
+    "Requirements": "Without prior authorization, equipment, information, or software should not be taken off-site.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.11.2.6 ",
+    "Section": "Physical and Environmental Security - Equipment",
+    "Control": "Security of equipment and assets off-premises",
+    "Requirements": "The security of off-site assets should be applied to the various risks of working outside the premises of the organization in mind.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.11.2.7 ",
+    "Section": "Physical and Environmental Security - Equipment",
+    "Control": "Secure disposal or re-use of equipment",
+    "Requirements": "To avoid the removal or overriding of sensitive data and software by the disposal or reuse of any device containing storage medium, all devices must be reviewed.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.11.2.8 ",
+    "Section": "Physical and Environmental Security - Equipment",
+    "Control": "Unattended user equipment",
+    "Requirements": "Unattended equipment should be adequately protected by users.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.11.2.9 ",
+    "Section": "Physical and Environmental Security - Equipment",
+    "Control": "Clear desk and clear screen policy",
+    "Requirements": "A clear desk policy should be adopted for papers and removable storage media and a clear screen policy should be applied to information processing facilities.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.12.1.1",
+    "Section": "Operations security - Operational procedures and responsibilities",
+    "Control": "Documented operating procedures",
+    "Requirements": "Operating procedures should be documented and accessed by all users in need.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.12.1.2 ",
+    "Section": "Operations security - Operational procedures and responsibilities",
+    "Control": "Change management",
+    "Requirements": "Changes in the organization, organizational procedures, information management facilities, and information security systems should be controlled.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.12.1.3 ",
+    "Section": "Operations security - Operational procedures and responsibilities",
+    "Control": "Capacity management",
+    "Requirements": "In order to ensure necessary system performance, the use of resources should be monitored, adapted, and projected based on future capacity requirements.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.12.1.4 ",
+    "Section": "Operations security - Operational procedures and responsibilities",
+    "Control": "Separation of development, testing and operational environments",
+    "Requirements": "It is important to define and enforce the degree of separation between organizational, testing and development environments needed to avoid operational problems.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.12.2.1 ",
+    "Section": "Operations security - Protection from malware",
+    "Control": "Controls against malware",
+    "Requirements": "In combination with appropriate user awareness, the detection, prevention, and recovery controls to protect against malware should be implemented.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.12.3.1 ",
+    "Section": "Operations security - Backup",
+    "Control": "Information backup",
+    "Requirements": "In accordance with the agreed backup policy, copies of records, program and device images shall be collected and regularly tested.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.12.4.1 ",
+    "Section": "Operations security - Logging and monitoring",
+    "Control": "Event logging",
+    "Requirements": "Event logs should be produced, retained, and regularly reviewed to record user activities, exceptions, defects, and information security events.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.12.4.2 ",
+    "Section": "Operations security - Logging and monitoring",
+    "Control": "Protection of log information",
+    "Requirements": "Logging and log information should be secure from intrusion and unauthorized access.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.12.4.3 ",
+    "Section": "Operations security - Logging and monitoring",
+    "Control": "Administrator and operator logs",
+    "Requirements": "The activity of the System Manager and System Operator is to be logged, and the logs kept safe and monitored closely.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.12.4.4 ",
+    "Section": "Operations security - Logging and monitoring",
+    "Control": "Clock synchronization",
+    "Requirements": "Clocks in all related information management systems should be integrated into a single reference time source for an organization or safety domain.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.12.5.1 ",
+    "Section": "Operations security - Control of operational software",
+    "Control": "Installation of software on operational systems",
+    "Requirements": "To control the installation of software on operating systems, procedures should be implemented.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.12.6.1 ",
+    "Section": "Operations security - Technical Vulnerability Management",
+    "Control": "Management of technical vulnerabilities",
+    "Requirements": "Information on technological vulnerabilities of information systems used should be obtained in a timely manner, the exposure of the organization to such vulnerabilities should be assessed and appropriate measures taken to address the risk involved",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.12.6.2 ",
+    "Section": "Operations security - Technical Vulnerability Management",
+    "Control": "Restrictions on software installation",
+    "Requirements": "Users should set and implement rules governing software installation.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.12.7.1 ",
+    "Section": "Operations security - Information systems audit controls",
+    "Control": "Information system audit controls",
+    "Requirements": "The audit criteria and activities related to operating system verification should be carefully prepared and decided in order to reduce business process disturbance.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.13.1.1 ",
+    "Section": "Communications security - Network security management",
+    "Control": "Network controls",
+    "Requirements": "To protect information in systems and applications, networks should be managed and monitored.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.13.1.2 ",
+    "Section": "Communications security - Network security management",
+    "Control": "Security of network services",
+    "Requirements": "Security protocols, quality of service, and management criteria for all network services, whether in-house or outsourced, should be defined and included in-network services agreements.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.13.1.3 ",
+    "Section": "Communications security - Network security management",
+    "Control": "Segregation in networks",
+    "Requirements": "Network segregation should be established for information services, users, and information systems.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.13.2.1 ",
+    "Section": "Communications security - Information transfer",
+    "Control": "Information transfer policies and procedures",
+    "Requirements": "In order to protect the transferees by using all types of communication facilities, official transfer policies, procedures and controls should be developed.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.13.2.2 ",
+    "Section": "Communications security - Information transfer",
+    "Control": "Agreements on information transfer",
+    "Requirements": "Agreements should address secure transfers between the organization and outside parties of business information.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.13.2.3 ",
+    "Section": "Communications security - Information transfer",
+    "Control": "Electronic messaging",
+    "Requirements": "Electronic messaging information should be adequately protected.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.13.2.4 ",
+    "Section": "Communications security - Information transfer",
+    "Control": "Confidentiality or non-disclosure agreements",
+    "Requirements": "Information protection requirements of the organization for confidentiality or non-disclosure agreements should be identified, regularly reviewed, and documented.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.14.1.1 ",
+    "Section": "System acquisition, development and maintenance - Security requirements of information systems",
+    "Control": "Security requirements of information systems",
+    "Requirements": "Information security requirements for new information systems or enhancements to existing information systems should be included",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.14.1.2 ",
+    "Section": "System acquisition, development and maintenance - Security requirements of information systems",
+    "Control": "Securing application services on public networks",
+    "Requirements": "Application services which pass through public networks should be protected against fraudulent activities, contract disputes, unauthorized disclosure, and modification.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.14.1.3 ",
+    "Section": "System acquisition, development and maintenance - Security requirements of information systems",
+    "Control": "Protecting application services transactions",
+    "Requirements": "In order to avoid incomplete transmission, misrouting, unauthorized messaging modification, unauthorized dissemination, unauthorized message replication, or replay, information concerning application service transactions should be covered.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.14.2.1 ",
+    "Section": "System acquisition, development and maintenance - Security in development and support processes",
+    "Control": "Secure development policy",
+    "Requirements": "Regulations for software and system development should be laid down and applied to organizational developments.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.14.2.2 ",
+    "Section": "System acquisition, development and maintenance - Security in development and support processes",
+    "Control": "System change control procedures",
+    "Requirements": "Changes to processes can be managed through the implementation of structured change control procedures within the software lifecycle.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.14.2.3 ",
+    "Section": "System acquisition, development and maintenance - Security in development and support processes",
+    "Control": "Technical review of applications after operating platform changes",
+    "Requirements": "In changing operating platforms, critical applications of business should be revised and tested to ensure no adverse impacts on business or security.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.14.2.4 ",
+    "Section": "System acquisition, development and maintenance - Security in development and support processes",
+    "Control": "Restrictions on changes to software packages",
+    "Requirements": "Software package modifications should be discouraged, restricted to the modifications necessary, and all changes controlled strictly.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.14.2.5 ",
+    "Section": "System acquisition, development and maintenance - Security in development and support processes",
+    "Control": "Secure system engineering principles",
+    "Requirements": "In the implementation of any information system implementation project, standards for secure system engineered must be established, documented, maintained, and implemented.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.14.2.6 ",
+    "Section": "System acquisition, development and maintenance - Security in development and support processes",
+    "Control": "Secure development environment",
+    "Requirements": "Organizations should create secure development environments and integration efforts for the entire life cycle of system development, and should be adequately protected.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.14.2.7 ",
+    "Section": "System acquisition, development and maintenance - Security in development and support processes",
+    "Control": "Outsourced development",
+    "Requirements": "The organization must monitor activity for the development of the outsourced system.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.14.2.8 ",
+    "Section": "System acquisition, development and maintenance - Security in development and support processes",
+    "Control": "System security testing",
+    "Requirements": "During development, security functionality test should be conducted.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.14.2.9 ",
+    "Section": "System acquisition, development and maintenance - Security in development and support processes",
+    "Control": "System acceptance testing",
+    "Requirements": "New information systems, enhancements, and updated versions should be equipped with acceptance testing services and related requirements.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.14.3.1 ",
+    "Section": "System acquisition, development and maintenance - Test data",
+    "Control": "Protection of test data",
+    "Requirements": "Careful collection, security, and review of test data should be performed.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.15.1.1 ",
+    "Section": "Supplier relationships - Supplier relationships",
+    "Control": "Information security policy for supplier relationships",
+    "Requirements": "The supplier should be agreed with and documented information security requirements related to the risk mitigation of access by suppliers to organizational assets.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.15.1.2 ",
+    "Section": "Supplier relationships - Supplier relationships",
+    "Control": "Addressing security within supplier agreements",
+    "Requirements": "Any suppliers that view, process, store, communicate or provide IT infrastructure component information for the organization should be defined and agreed with all applicable information security requirements.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.15.1.3 ",
+    "Section": "Supplier relationships - Supplier relationships",
+    "Control": "Information and communication technology supply chain",
+    "Requirements": "Supplier agreements will contain provisions to mitigate information security risks associated with IT Services and the product supply chain.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.15.2.1 ",
+    "Section": "Supplier relationships - Supplier service delivery management",
+    "Control": "Monitoring and review of supplier services",
+    "Requirements": "Organizations shall monitor, review and audit the provision of service to suppliers on a regular basis.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.15.2.2 ",
+    "Section": "Supplier relationships - Supplier service delivery management",
+    "Control": "Managing changes to supplier services",
+    "Requirements": "Change in the provision of services by providers should be managed with the focus on the criticality of enterprise information, systems, processes, and reassessment of risks and should include maintaining and improving existing information security policies, procedures, and controls.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.16.1.1 ",
+    "Section": "Information security incident management - Management of information security incidents and improvements",
+    "Control": "Responsibilities and procedures",
+    "Requirements": "In order to ensure a quick, efficient, and organized response to ISO 27001 Annex : A.16 Information Security Incident Management roles and procedures should be defined.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.16.1.2 ",
+    "Section": "Information security incident management - Management of information security incidents and improvements",
+    "Control": "Reporting information security events",
+    "Requirements": "Information security incidents should be reported as quickly as possible through appropriate management channels.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.16.1.3 ",
+    "Section": "Information security incident management - Management of information security incidents and improvements",
+    "Control": "Reporting information security weaknesses",
+    "Requirements": "Any information security vulnerabilities found or suspected in systems or services in which employees and contractors are using the information systems and services of the organization should be recorded and documented.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.16.1.4 ",
+    "Section": "Information security incident management - Management of information security incidents and improvements",
+    "Control": "Assessment of and decision on information security events",
+    "Requirements": "Information security events should be analyzed and determined whether they should be listed as incidents related to information security.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.16.1.5 ",
+    "Section": "Information security incident management - Management of information security incidents and improvements",
+    "Control": "Response to information security incidents",
+    "Requirements": "In the context of the documented procedures, information security incidents should be responded to.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.16.1.6 ",
+    "Section": "Information security incident management - Management of information security incidents and improvements",
+    "Control": "Learning from information security incidents",
+    "Requirements": "To minimize the risk or effect of potential accidents, the experience obtained from the study and mitigation of information security accidents should be used.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.16.1.7 ",
+    "Section": "Information security incident management - Management of information security incidents and improvements",
+    "Control": "Collection of evidence",
+    "Requirements": "The organization will define, obtain, procure and retain information as documentation and implement procedures.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.17.1.1 ",
+    "Section": "Information security aspects of business continuity management - Information security continuity",
+    "Control": "Planning information security continuity",
+    "Requirements": "In adverse circumstances, e.g. during a crisis or a catastrophe, the company will determine the information security standards and consistency of information security management.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.17.1.2",
+    "Section": "Information security aspects of business continuity management - Information security continuity",
+    "Control": "Implementing information security continuity",
+    "Requirements": "In order to ensure the necessary degree of consistency of information security to adverse circumstances, the company should define, document, execute, and maintain processes, procedures, and controls.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.17.1.3 ",
+    "Section": "Information security aspects of business continuity management - Information security continuity",
+    "Control": "Verify, review and evaluate information security continuity",
+    "Requirements": "In order to ensure accurate and productive to adverse circumstances, the company must review on-going controls on safety information defined and enforced at regular intervals.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.17.2.1 ",
+    "Section": "Information security aspects of business continuity management - Redundancies",
+    "Control": "Availability of information processing facilities",
+    "Requirements": "How information processing facilities are implemented with redundancy sufficiency to meet availability requirements. Redundancy refers to implementing, typically, duplicate hardware to ensure availability of information processing systems.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.18.1.1 ",
+    "Section": "Compliance - Compliance with legal and contractual requirements",
+    "Control": "Identification of applicable legislation and contractual requirements",
+    "Requirements": "Each of information systems and organizations should specifically identify, document, and update all relevant statutory, regulatory, contractual requirements, and the approach of the organization towards compliance with these requirements.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.18.1.2 ",
+    "Section": "Compliance - Compliance with legal and contractual requirements",
+    "Control": "Intellectual property rights",
+    "Requirements": "Proper procedures will be followed to ensure that the legal, regulatory, and contractual provisions relating to ownership of intellectual property and the use of proprietary software products are complied upon.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.18.1.3 ",
+    "Section": "Compliance - Compliance with legal and contractual requirements",
+    "Control": "Protection of records",
+    "Requirements": "In accordance with the provisions to legislative, regulatory, contractual, and business requirements, to protect from loss, destruction, falsification, and unauthorized access and unauthorized release.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.18.1.4 ",
+    "Section": "Compliance - Compliance with legal and contractual requirements",
+    "Control": "Privacy and protection of personally identifiable information",
+    "Requirements": "Privacy and protection of personal data should be guaranteed, as required, in applicable laws and regulations.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.18.1.5 ",
+    "Section": "Compliance - Compliance with legal and contractual requirements",
+    "Control": "Regulation of cryptographic controls",
+    "Requirements": "In accordance with all relevant agreements, legislation, and regulations, cryptographic controls must be used.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.18.2.1 ",
+    "Section": "Compliance - Information security reviews",
+    "Control": "Independent review of information security",
+    "Requirements": "Each of these information systems and organizations should specifically identify, document, and update all relevant statutory, regulatory, contractual requirements, and the approach of the organization towards compliance with these requirements.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.18.2.2 ",
+    "Section": "Compliance - Information security reviews",
+    "Control": "Compliance with security policies and standards",
+    "Requirements": "Proper procedures will be followed to ensure that the legal, regulatory, and contractual provisions relating to ownership of intellectual property and the use of proprietary software products are complied upon.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "A.18.2.3 ",
+    "Section": "Compliance - Information security reviews",
+    "Control": "Technical compliance review",
+    "Requirements": "Information systems for compliance with the Information Security Policies and practices of an organization should be periodically reviewed.",
+    "Status": "Unknown"
+  }
+]

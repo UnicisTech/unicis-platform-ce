@@ -1,11 +1,13 @@
 import React, {Dispatch, SetStateAction} from "react";
 import Select from "@atlaskit/select";
-import { sections } from "@/components/defaultLanding/data/configs/csc";
+import { getSectionFilterOptions } from "@/components/defaultLanding/data/configs/csc";
 import { WithoutRing } from "sharedStyles";
 
 const SectionFilter = ({ 
+  ISO,
   setSectionFilter 
 }: {
+  ISO: string;
   setSectionFilter: Dispatch<SetStateAction<{label: string, value: string}[] | null>>
 }) => {
   return (
@@ -15,7 +17,7 @@ const SectionFilter = ({
           inputId="multi-select-section-filter"
           className="multi-select"
           classNamePrefix="react-select"
-          options={sections}
+          options={getSectionFilterOptions(ISO)}
           onChange={(value) => {
             setSectionFilter([...value]);
           }}
