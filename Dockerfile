@@ -5,7 +5,9 @@ WORKDIR /usr/src/app
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 COPY . /usr/src/app
 RUN npm install --force
-RUN npm run build
+RUN docker-compose up -d
+RUN npx prisma db push
+RUN npm run dev
 
 # production environment
 FROM nginx:1.13.9-alpine
