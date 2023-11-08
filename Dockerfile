@@ -1,15 +1,14 @@
 # build environment
-FROM node:16.16.0 as builder
+FROM node:latest as builder
 RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 COPY . /usr/src/app
 RUN npm install --force
-RUN npx prisma db push
 RUN npm run dev
 
 # production environment
-FROM nginx:1.13.9-alpine
+FROM nginx:latest
 RUN rm -rf /etc/nginx/conf.d
 RUN mkdir -p /etc/nginx/conf.d
 COPY ./default.conf /etc/nginx/conf.d/
