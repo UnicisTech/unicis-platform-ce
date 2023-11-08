@@ -1,17 +1,23 @@
-# build environment
-FROM node:latest as builder
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
-COPY . /usr/src/app
+# Use the official Node.js image as the base image
+FROM node:14-alpine
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install dependencies
 RUN npm install --force
+
+# Copy the entire application to the working directory
+COPY . .
+
+# Expose the port on which your Next.js app will run
+EXPOSE 3000
+
+# Build the Next.js app
 RUN npm run build
 
-# production environment
-FROM nginx:latest
-RUN rm -rf /etc/nginx/conf.d
-RUN mkdir -p /etc/nginx/conf.d
-COPY ./default.conf /etc/nginx/conf.d/
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Start the Next.js app
+CMD ["npm", "start"]

@@ -1,11 +1,11 @@
 {
   "name": "unicis-platform",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 4002",
+    "dev": "next dev --port 3000",
     "build": "prisma generate && prisma db push && next build",
-    "start": "next start --port 4002",
+    "start": "next start --port 3000",
     "check-types": "tsc --pretty --noEmit",
     "check-format": "prettier --check .",
     "check-lint": "eslint . --ext ts --ext tsx --ext js",
