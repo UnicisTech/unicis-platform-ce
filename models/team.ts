@@ -267,7 +267,7 @@ export const getCscStatusesBySlug = async (slug: string) => {
   });
 
   const teamProperties: any = team ? team.properties : {};
-  const iso = teamProperties.csc_iso
+  const iso = teamProperties.csc_iso || 'default'
   const cscStatusesProp = getCscStatusesProp(iso)
 
   console.log('cscStatusesProp', {cscStatusesProp, teamProperties})
