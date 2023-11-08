@@ -15,7 +15,7 @@ const redirects = [
 const nextConfig = {
   reactStrictMode: false,
   images: {
-    domains: ['boxyhq.com'],
+    domains: ['platform.unicis.tech'],
   },
   i18n,
   async redirects() {
