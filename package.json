@@ -1,6 +1,6 @@
 {
-  "name": "saas-starter-kit",
-  "version": "0.1.0",
+  "name": "unicis-platform-ce",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev --port 4002",
