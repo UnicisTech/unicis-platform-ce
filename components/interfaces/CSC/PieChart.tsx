@@ -1,11 +1,11 @@
-import React from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
-import { statusOptions } from "@/components/defaultLanding/data/configs/csc";
+import React from 'react';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
+import { statusOptions } from '@/components/defaultLanding/data/configs/csc';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const countStatuses = (statuses: { [key: string]: string; }) => {
+const countStatuses = (statuses: { [key: string]: string }) => {
   const labels = statusOptions.map(({ label }) => label);
   const countArray = labels.map(
     (name) =>
@@ -14,45 +14,41 @@ const countStatuses = (statuses: { [key: string]: string; }) => {
   return countArray;
 };
 
-const PieChart = ({ 
-  statuses
- }: { 
-  statuses: { [key: string]: string; }
-}) => {
+const PieChart = ({ statuses }: { statuses: { [key: string]: string } }) => {
   const data = {
     labels: [
-      "Unknown",
-      "Not Applicable",
-      "Not Performed",
-      "Performed Informally",
-      "Planned",
-      "Well Defined",
-      "Quantitatively Controlled",
-      "Continuously Improving",
+      'Unknown',
+      'Not Applicable',
+      'Not Performed',
+      'Performed Informally',
+      'Planned',
+      'Well Defined',
+      'Quantitatively Controlled',
+      'Continuously Improving',
     ],
     datasets: [
       {
-        label: "# of Controls",
+        label: '# of Controls',
         data: countStatuses(statuses),
         backgroundColor: [
-          "rgba(241, 241, 241, 1)",
-          "rgba(178, 178, 178, 1)",
-          "rgba(255, 0, 0, 1)",
-          "rgba(202, 0, 63, 1)",
-          "rgba(102, 102, 102, 1)",
-          "rgba(255, 190, 0, 1)",
-          "rgba(106, 217, 0, 1)",
-          "rgba(47, 143, 0, 1)",
+          'rgba(241, 241, 241, 1)',
+          'rgba(178, 178, 178, 1)',
+          'rgba(255, 0, 0, 1)',
+          'rgba(202, 0, 63, 1)',
+          'rgba(102, 102, 102, 1)',
+          'rgba(255, 190, 0, 1)',
+          'rgba(106, 217, 0, 1)',
+          'rgba(47, 143, 0, 1)',
         ],
         borderColor: [
-          "rgba(241, 241, 241, 1)",
-          "rgba(178, 178, 178, 1)",
-          "rgba(255, 0, 0, 1)",
-          "rgba(202, 0, 63, 1)",
-          "rgba(102, 102, 102, 1)",
-          "rgba(255, 190, 0, 1)",
-          "rgba(106, 217, 0, 1)",
-          "rgba(47, 143, 0, 1)",
+          'rgba(241, 241, 241, 1)',
+          'rgba(178, 178, 178, 1)',
+          'rgba(255, 0, 0, 1)',
+          'rgba(202, 0, 63, 1)',
+          'rgba(102, 102, 102, 1)',
+          'rgba(255, 190, 0, 1)',
+          'rgba(106, 217, 0, 1)',
+          'rgba(47, 143, 0, 1)',
         ],
         borderWidth: 1,
       },
@@ -62,20 +58,20 @@ const PieChart = ({
   const options: any = {
     plugins: {
       legend: {
-        position: "right",
+        position: 'right',
       },
       title: {
         display: true,
-        text: "Controls",
+        text: 'Controls',
       },
     },
     maintainAspectRatio: false,
-    responsive: true
+    responsive: true,
   };
 
   countStatuses(statuses);
 
-  return <Pie data={data} options={options}/>;
+  return <Pie data={data} options={options} />;
 };
 
 export default PieChart;

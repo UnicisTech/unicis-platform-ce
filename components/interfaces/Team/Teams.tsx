@@ -1,16 +1,16 @@
-import Link from "next/link";
-import { Button } from "react-daisyui";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { useTranslation } from "next-i18next";
-import { Card, Error, LetterAvatar, Loading } from "@/components/shared";
-import useTeams from "hooks/useTeams";
-import { Team } from "@prisma/client";
-import { ApiResponse } from "types";
+import Link from 'next/link';
+import { Button } from 'react-daisyui';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useTranslation } from 'next-i18next';
+import { Card, Error, LetterAvatar, Loading } from '@/components/shared';
+import useTeams from 'hooks/useTeams';
+import { Team } from '@prisma/client';
+import { ApiResponse } from 'types';
 
 const Teams = () => {
   const { isLoading, isError, teams, mutateTeams } = useTeams();
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   if (isLoading) {
     return <Loading />;
   }
@@ -31,7 +31,7 @@ const Teams = () => {
       return;
     }
 
-    toast.success(t("leave-team-success"));
+    toast.success(t('leave-team-success'));
 
     mutateTeams();
   };
@@ -43,16 +43,16 @@ const Teams = () => {
           <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                {t("name")}
+                {t('name')}
               </th>
               <th scope="col" className="px-6 py-3">
-                {t("members")}
+                {t('members')}
               </th>
               <th scope="col" className="px-6 py-3">
-                {t("created-at")}
+                {t('created-at')}
               </th>
               <th scope="col" className="px-6 py-3">
-                {t("actions")}
+                {t('actions')}
               </th>
             </tr>
           </thead>
@@ -84,7 +84,7 @@ const Teams = () => {
                           leaveTeam(team);
                         }}
                       >
-                        {t("leave-team")}
+                        {t('leave-team')}
                       </Button>
                     </td>
                   </tr>

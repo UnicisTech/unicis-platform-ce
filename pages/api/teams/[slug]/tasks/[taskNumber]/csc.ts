@@ -49,7 +49,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       taskNumber: taskNumberAsNumber,
       slug: slug as string,
       controls,
-      ISO: ISO as string
+      ISO: ISO as string,
     });
   }
 
@@ -59,8 +59,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       taskNumber: taskNumberAsNumber,
       slug: slug as string,
       controls,
-      ISO: ISO as string
-
+      ISO: ISO as string,
     });
   }
 
@@ -70,7 +69,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       taskNumber: taskNumberAsNumber,
       slug: slug as string,
       controls,
-      ISO: ISO as string
+      ISO: ISO as string,
     });
   }
 

@@ -9,7 +9,7 @@ export const eventTypes = [
   'task.created',
   'task.updated',
   'task.commented',
-  'task.deleted'
+  'task.deleted',
 ];
 
 const EventTypes = ({

@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
-import toast from "react-hot-toast";
-import { useRouter } from "next/router";
-import axios from "axios";
-import { TaskExtended } from "types";
-import AttachmentsCard from "./AttachmentCard";
-import { checkExtensionAndMIMEType } from "@/components/services/taskService";
+import React, { useState, useEffect, useRef } from 'react';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+import { TaskExtended } from 'types';
+import AttachmentsCard from './AttachmentCard';
+import { checkExtensionAndMIMEType } from '@/components/services/taskService';
 import useCanAccess from 'hooks/useCanAccess';
 
 const Attachments = ({
   task,
-  mutateTask
+  mutateTask,
 }: {
   task: TaskExtended;
   mutateTask: () => Promise<void>;
@@ -20,7 +20,6 @@ const Attachments = ({
   const { slug, taskNumber } = router.query;
   const [isDragOver, setIsDragOver] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
 
   const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -40,12 +39,12 @@ const Attachments = ({
     e.preventDefault();
     setIsDragOver(false);
     const files = Array.from(e.dataTransfer.files);
-    const file = files[0]
-    const isAvailable = checkExtensionAndMIMEType(file)
+    const file = files[0];
+    const isAvailable = checkExtensionAndMIMEType(file);
     if (isAvailable) {
-      setSelectedFile(file)
+      setSelectedFile(file);
     } else {
-      toast.error("Not supported type of file")
+      toast.error('Not supported type of file');
     }
   };
 
@@ -55,11 +54,11 @@ const Attachments = ({
 
       const reader = new FileReader();
       reader.onloadend = () => {
-        const isAvailable = checkExtensionAndMIMEType(file)
+        const isAvailable = checkExtensionAndMIMEType(file);
         if (isAvailable) {
-          setSelectedFile(file)
+          setSelectedFile(file);
         } else {
-          toast.error("Not supported type of file")
+          toast.error('Not supported type of file');
         }
       };
       reader.readAsDataURL(file);
@@ -74,17 +73,21 @@ const Attachments = ({
 
   useEffect(() => {
     const uploadFile = async () => {
-      if (selectedFile && typeof slug === "string") {
+      if (selectedFile && typeof slug === 'string') {
         try {
           const formData = new FormData();
           formData.append('file', selectedFile);
-          formData.append('slug', slug)
-          formData.append('taskId', String(task.id))
-          const response = await axios.post(`/api/teams/${slug}/tasks/${taskNumber}/attachments`, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          });
+          formData.append('slug', slug);
+          formData.append('taskId', String(task.id));
+          const response = await axios.post(
+            `/api/teams/${slug}/tasks/${taskNumber}/attachments`,
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            }
+          );
 
           const { error } = response.data;
 
@@ -93,10 +96,10 @@ const Attachments = ({
             return;
           }
 
-          toast.success("Attachment uploaded")
-          mutateTask()
+          toast.success('Attachment uploaded');
+          mutateTask();
         } catch (error: any) {
-          toast.error(error?.message)
+          toast.error(error?.message);
           console.error(error);
         }
       }
@@ -111,8 +114,11 @@ const Attachments = ({
         {task.attachments.length ? (
           <div className="flex items-center justify-center w-full">
             <div
-              className={`flex flex-wrap ${task.attachments.length ? 'justify-start' : 'justify-center'} h-full w-full px-4 py-2 transition bg-white border-2 ${isDragOver ? "border-blue-400" : "border-gray-300"
-                } border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none`}
+              className={`flex flex-wrap ${
+                task.attachments.length ? 'justify-start' : 'justify-center'
+              } h-full w-full px-4 py-2 transition bg-white border-2 ${
+                isDragOver ? 'border-blue-400' : 'border-gray-300'
+              } border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none`}
             >
               {task.attachments.map((attachment, index) => (
                 <AttachmentsCard
@@ -125,19 +131,25 @@ const Attachments = ({
               ))}
             </div>
           </div>
-        ) : <div className="flex flex-col items-center justify-center rounded-md lg:p-20 border-2 border-dashed gap-3 bg-white h-30 border-slate-600 m-5">
-          <h3 className='text-semibold text-emphasis text-center text-xl'>No attachments</h3>
-        </div>
-        }
+        ) : (
+          <div className="flex flex-col items-center justify-center rounded-md lg:p-20 border-2 border-dashed gap-3 bg-white h-30 border-slate-600 m-5">
+            <h3 className="text-semibold text-emphasis text-center text-xl">
+              No attachments
+            </h3>
+          </div>
+        )}
       </>
-    )
+    );
   }
 
   return (
     <div className="flex items-center justify-center w-full">
       <div
-        className={`flex flex-wrap ${task.attachments.length ? 'justify-start' : 'justify-center'} h-full w-full px-4 py-2 transition bg-white border-2 ${isDragOver ? "border-blue-400" : "border-gray-300"
-          } border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none`}
+        className={`flex flex-wrap ${
+          task.attachments.length ? 'justify-start' : 'justify-center'
+        } h-full w-full px-4 py-2 transition bg-white border-2 ${
+          isDragOver ? 'border-blue-400' : 'border-gray-300'
+        } border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none`}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
         onDragOver={handleDragOver}
@@ -172,7 +184,9 @@ const Attachments = ({
                 />
               </svg>
               <span className="font-medium text-gray-600">
-                {isDragOver ? "Release to attach files" : "Drop files to attach, or "}
+                {isDragOver
+                  ? 'Release to attach files'
+                  : 'Drop files to attach, or '}
                 <span className="text-blue-600 underline">browse</span>
               </span>
             </span>
@@ -187,8 +201,7 @@ const Attachments = ({
         />
       </div>
     </div>
-
-  )
+  );
 };
 
 export default Attachments;

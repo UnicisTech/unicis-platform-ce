@@ -13,7 +13,6 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import useCanAccess from 'hooks/useCanAccess';
 
-
 const TeamDropdown = () => {
   const router = useRouter();
   const { teams } = useTeams();
@@ -60,13 +59,13 @@ const TeamDropdown = () => {
         },
         ...(canAccess('team', ['create'])
           ? [
-            {
-              id: 'new-team',
-              name: t('new-team'),
-              href: '/teams?newTeam=true',
-              icon: FolderPlusIcon,
-            },
-          ]
+              {
+                id: 'new-team',
+                name: t('new-team'),
+                href: '/teams?newTeam=true',
+                icon: FolderPlusIcon,
+              },
+            ]
           : []),
       ],
     },

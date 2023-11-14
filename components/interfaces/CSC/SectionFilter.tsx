@@ -1,17 +1,19 @@
-import React, {Dispatch, SetStateAction} from "react";
-import Select from "@atlaskit/select";
-import { getSectionFilterOptions } from "@/components/defaultLanding/data/configs/csc";
-import { WithoutRing } from "sharedStyles";
+import React, { Dispatch, SetStateAction } from 'react';
+import Select from '@atlaskit/select';
+import { getSectionFilterOptions } from '@/components/defaultLanding/data/configs/csc';
+import { WithoutRing } from 'sharedStyles';
 
-const SectionFilter = ({ 
+const SectionFilter = ({
   ISO,
-  setSectionFilter 
+  setSectionFilter,
 }: {
   ISO: string;
-  setSectionFilter: Dispatch<SetStateAction<{label: string, value: string}[] | null>>
+  setSectionFilter: Dispatch<
+    SetStateAction<{ label: string; value: string }[] | null>
+  >;
 }) => {
   return (
-    <div style={{ margin: "0 5px" }}>
+    <div style={{ margin: '0 5px' }}>
       <WithoutRing>
         <Select
           inputId="multi-select-section-filter"

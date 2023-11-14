@@ -22,7 +22,7 @@ const useTeam = (slug?: string) => {
     isLoading,
     isError: error,
     team: data?.data,
-    mutateTeam
+    mutateTeam,
   };
 };
 

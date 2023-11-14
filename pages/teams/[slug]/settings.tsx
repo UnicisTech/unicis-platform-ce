@@ -1,7 +1,13 @@
 import { Error, Loading } from '@/components/shared';
 import { AccessControl } from '@/components/shared/AccessControl';
 import env from '@/lib/env';
-import { Billing, RemoveTeam, TeamSettings, TeamTab, CSCSettings } from '@/components/team';
+import {
+  Billing,
+  RemoveTeam,
+  TeamSettings,
+  TeamTab,
+  CSCSettings,
+} from '@/components/team';
 import useTeam from 'hooks/useTeam';
 import type { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';

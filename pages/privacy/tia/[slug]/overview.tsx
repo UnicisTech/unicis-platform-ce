@@ -1,11 +1,11 @@
-import type { NextPageWithLayout } from "types";
-import { useRouter } from "next/router";
+import type { NextPageWithLayout } from 'types';
+import { useRouter } from 'next/router';
 
-import { Card } from "@/components/ui";
-import { Loading, Error } from "@/components/ui";
+import { Card } from '@/components/ui';
+import { Loading, Error } from '@/components/ui';
 // import { TIATab } from "@/components/interfaces/TIA";
-import useTeam from "hooks/useTeam";
-import { Badge } from "react-daisyui";
+import useTeam from 'hooks/useTeam';
+import { Badge } from 'react-daisyui';
 
 const AuditLogs: NextPageWithLayout = (props) => {
   const router = useRouter();
@@ -29,7 +29,8 @@ const AuditLogs: NextPageWithLayout = (props) => {
         <Card.Body className="px-3 py-3">
           <div className="space-y-3">
             <p className="text-sm">
-              Overview displayed with: https://www.chartjs.org/docs/latest/charts/doughnut.html#doughnut
+              Overview displayed with:
+              https://www.chartjs.org/docs/latest/charts/doughnut.html#doughnut
             </p>
             <Badge color="warning">Coming Soon</Badge>
           </div>

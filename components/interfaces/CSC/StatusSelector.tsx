@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
-import Select from "@atlaskit/select";
-import { statusOptions, colourStyles } from "@/components/defaultLanding/data/configs/csc";
-import { WithoutRing } from "sharedStyles";
+import React, { useEffect, useState } from 'react';
+import Select from '@atlaskit/select';
+import {
+  statusOptions,
+  colourStyles,
+} from '@/components/defaultLanding/data/configs/csc';
+import { WithoutRing } from 'sharedStyles';
 
-const StatusSelector = ({ 
-  statusValue, 
-  control, 
-  handler 
+const StatusSelector = ({
+  statusValue,
+  control,
+  handler,
 }: {
   statusValue: string;
   control: string;
@@ -15,9 +18,9 @@ const StatusSelector = ({
   const [value, setValue] = useState(statusValue);
 
   useEffect(() => {
-    setValue(statusValue)
-  }, [statusValue])
-  
+    setValue(statusValue);
+  }, [statusValue]);
+
   return (
     <WithoutRing>
       <Select
@@ -26,7 +29,7 @@ const StatusSelector = ({
         classNamePrefix="react-select"
         options={statusOptions}
         onChange={(selectedStatus) => {
-          const label = selectedStatus?.label as string
+          const label = selectedStatus?.label as string;
           setValue(label);
           handler(control, label);
         }}

@@ -48,89 +48,89 @@ const Teams = () => {
 
   return (
     <>
-    <WithLoadingAndError isLoading={isLoading} error={isError}>
-      <div className="space-y-3">
-        <div className="flex justify-between items-center">
-          <div className="space-y-3">
-            <h2 className="text-xl font-medium leading-none tracking-tight">
-              {t('all-teams')}
-            </h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              {t('team-listed')}
-            </p>
+      <WithLoadingAndError isLoading={isLoading} error={isError}>
+        <div className="space-y-3">
+          <div className="flex justify-between items-center">
+            <div className="space-y-3">
+              <h2 className="text-xl font-medium leading-none tracking-tight">
+                {t('all-teams')}
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {t('team-listed')}
+              </p>
+            </div>
+            <Button
+              color="primary"
+              variant="outline"
+              size="md"
+              onClick={() => setCreateTeamVisible(!createTeamVisible)}
+            >
+              {t('create-team')}
+            </Button>
           </div>
-          <Button
-            color="primary"
-            variant="outline"
-            size="md"
-            onClick={() => setCreateTeamVisible(!createTeamVisible)}
+          <table className="text-sm table w-full border-b dark:border-base-200">
+            <thead className="bg-base-200">
+              <tr>
+                <th>{t('name')}</th>
+                <th>{t('members')}</th>
+                <th>{t('created-at')}</th>
+                <th>{t('actions')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {teams &&
+                teams.map((team) => {
+                  return (
+                    <tr key={team.id}>
+                      <td>
+                        <Link href={`/teams/${team.slug}/members`}>
+                          <div className="flex items-center justify-start space-x-2">
+                            <LetterAvatar name={team.name} />
+                            <span className="underline">{team.name}</span>
+                          </div>
+                        </Link>
+                      </td>
+                      <td>{team._count.members}</td>
+                      <td>{new Date(team.createdAt).toDateString()}</td>
+                      <td>
+                        <Button
+                          variant="outline"
+                          size="xs"
+                          color="error"
+                          onClick={() => {
+                            setTeam(team);
+                            setAskConfirmation(true);
+                          }}
+                        >
+                          {t('leave-team')}
+                        </Button>
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+          <ConfirmationDialog
+            visible={askConfirmation}
+            title={`${t('leave-team')} ${team?.name}`}
+            onCancel={() => setAskConfirmation(false)}
+            onConfirm={() => {
+              if (team) {
+                leaveTeam(team);
+              }
+            }}
+            confirmText={t('leave-team')}
           >
-            {t('create-team')}
-          </Button>
+            {t('leave-team-confirmation')}
+          </ConfirmationDialog>
+          <CreateTeam
+            visible={createTeamVisible}
+            setVisible={setCreateTeamVisible}
+          />
         </div>
-        <table className="text-sm table w-full border-b dark:border-base-200">
-          <thead className="bg-base-200">
-            <tr>
-              <th>{t('name')}</th>
-              <th>{t('members')}</th>
-              <th>{t('created-at')}</th>
-              <th>{t('actions')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {teams &&
-              teams.map((team) => {
-                return (
-                  <tr key={team.id}>
-                    <td>
-                      <Link href={`/teams/${team.slug}/members`}>
-                        <div className="flex items-center justify-start space-x-2">
-                          <LetterAvatar name={team.name} />
-                          <span className="underline">{team.name}</span>
-                        </div>
-                      </Link>
-                    </td>
-                    <td>{team._count.members}</td>
-                    <td>{new Date(team.createdAt).toDateString()}</td>
-                    <td>
-                      <Button
-                        variant="outline"
-                        size="xs"
-                        color="error"
-                        onClick={() => {
-                          setTeam(team);
-                          setAskConfirmation(true);
-                        }}
-                      >
-                        {t('leave-team')}
-                      </Button>
-                    </td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
-        <ConfirmationDialog
-          visible={askConfirmation}
-          title={`${t('leave-team')} ${team?.name}`}
-          onCancel={() => setAskConfirmation(false)}
-          onConfirm={() => {
-            if (team) {
-              leaveTeam(team);
-            }
-          }}
-          confirmText={t('leave-team')}
-        >
-          {t('leave-team-confirmation')}
-        </ConfirmationDialog>
-        <CreateTeam
-          visible={createTeamVisible}
-          setVisible={setCreateTeamVisible}
-        />
-      </div>
-    </WithLoadingAndError>
-          {/* {TODO: SHOULD DELETE IT} */}
-    {/* <>
+      </WithLoadingAndError>
+      {/* {TODO: SHOULD DELETE IT} */}
+      {/* <>
       <Card heading={t('all-teams')}>
         <Card.Body>
           <table className="w-full table-fixed text-left text-sm text-gray-500 dark:text-gray-400">

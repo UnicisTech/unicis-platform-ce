@@ -1,4 +1,4 @@
-import React, { useRef, Dispatch, SetStateAction } from 'react'
+import React, { useRef, Dispatch, SetStateAction } from 'react';
 import { ChevronUpDownIcon } from '@heroicons/react/24/outline';
 
 const perPageOptions: { label: string; value: number }[] = [
@@ -25,19 +25,19 @@ const perPageOptions: { label: string; value: number }[] = [
 ];
 
 interface PerPageSelectorProps {
-  perPage: number,
+  perPage: number;
   setPerPage: Dispatch<SetStateAction<number>>;
 }
 
 const PerPageSelector = ({ perPage, setPerPage }: PerPageSelectorProps) => {
-  const tabRef = useRef<HTMLUListElement | null>(null)
+  const tabRef = useRef<HTMLUListElement | null>(null);
   return (
     <div className="px-4">
       <div className="dropdown w-full">
         <div
           onClick={() => {
             if (tabRef.current) {
-              tabRef.current.style.display = "block";
+              tabRef.current.style.display = 'block';
             }
           }}
           tabIndex={0}
@@ -55,9 +55,9 @@ const PerPageSelector = ({ perPage, setPerPage }: PerPageSelectorProps) => {
             <div
               onClick={() => {
                 if (tabRef.current) {
-                  tabRef.current.style.display = "none";
+                  tabRef.current.style.display = 'none';
                 }
-                setPerPage(item.value)
+                setPerPage(item.value);
               }}
               className="flex cursor-pointer hover:bg-gray-100 focus:bg-gray-100 focus:outline-none py-2 px-2 rounded text-sm font-medium gap-2 items-center"
             >
@@ -67,7 +67,7 @@ const PerPageSelector = ({ perPage, setPerPage }: PerPageSelectorProps) => {
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PerPageSelector
+export default PerPageSelector;

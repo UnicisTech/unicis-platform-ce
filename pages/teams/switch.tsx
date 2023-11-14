@@ -32,7 +32,7 @@ const Organizations: NextPageWithLayout<
     }
 
     if (teams[0]) {
-      router.push(`/teams/${teams[0].slug}/tasks`)
+      router.push(`/teams/${teams[0].slug}/tasks`);
     } else {
       router.push(`/dashboard`);
     }

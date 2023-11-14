@@ -90,7 +90,7 @@ export const defaultHeaders = {
 
 export const passwordPolicies = {
   minLength: 8,
-}
+};
 
 export const getAxiosError = (error: any): string => {
   if (error.response) {

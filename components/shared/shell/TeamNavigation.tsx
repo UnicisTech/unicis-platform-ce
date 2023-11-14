@@ -1,7 +1,5 @@
 import { Cog6ToothIcon, CodeBracketIcon } from '@heroicons/react/24/outline';
-import {
-  QueueListIcon
-} from "@heroicons/react/24/solid";
+import { QueueListIcon } from '@heroicons/react/24/solid';
 import { useTranslation } from 'next-i18next';
 import NavigationItems from './NavigationItems';
 import { NavigationProps, MenuItem } from './NavigationItems';
@@ -19,7 +17,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       name: t('all-tasks'),
       href: `/teams/${slug}/tasks`,
       icon: QueueListIcon,
-      className: "fill-blue-600"
+      className: 'fill-blue-600',
     },
     {
       name: t('rpa-activities'),

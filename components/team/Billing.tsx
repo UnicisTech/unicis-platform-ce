@@ -16,17 +16,17 @@ import { AccessControl } from '../shared/AccessControl';
 const availableSubscription = [
   {
     id: 1,
-    name: "Pre-Seed"
+    name: 'Pre-Seed',
   },
   {
     id: 2,
-    name: "Growth"
+    name: 'Growth',
   },
   {
     id: 3,
-    name: "Scale"
+    name: 'Scale',
   },
-]
+];
 
 const Billing = ({ team }: { team: Team }) => {
   const router = useRouter();
@@ -52,9 +52,7 @@ const Billing = ({ team }: { team: Team }) => {
       //       ...values,
       //     }
       //   );
-
       //   const { data: teamUpdated } = response.data;
-
       //   if (teamUpdated) {
       //     toast.success(t('successfully-updated'));
       //     return router.push(`/teams/${teamUpdated.slug}/settings`);

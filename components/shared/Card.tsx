@@ -3,7 +3,7 @@ import React from 'react';
 interface CardProps {
   heading?: string;
   children: React.ReactNode;
-  button?: React.ReactNode
+  button?: React.ReactNode;
 }
 
 interface CardBodyProps {
@@ -19,20 +19,13 @@ const Card = (props: CardProps) => {
 
   return (
     // <div className="mt-5 flex flex-col border border-gray-300">
-    <div className='card w-full border border-rounded dark:bg-black dark:border-gray-600'>
+    <div className="card w-full border border-rounded dark:bg-black dark:border-gray-600">
       <div className="border-b border-gray-300 bg-gray-100 px-3 py-3 text-sm font-medium text-gray-900 flex justify-between items-center dark:bg-gray-700 dark:text-gray-400">
-        <div>
-          {heading || ""}
-        </div>
-        <div>
-          {button 
-            ? button
-            : null
-          }
-        </div>
+        <div>{heading || ''}</div>
+        <div>{button ? button : null}</div>
       </div>
       <div>{children}</div>
-     </div>
+    </div>
   );
 };
 
@@ -53,8 +46,18 @@ const Header = ({ children }: { children: React.ReactNode }) => {
 };
 
 //TODO: card fix className
-const Body = ({ children, className }: { children: React.ReactNode, className?: string }) => {
-  return <div className={`card-body dark:bg-black gap-6 p-6 ${className || ''}`}>{children}</div>;
+const Body = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <div className={`card-body dark:bg-black gap-6 p-6 ${className || ''}`}>
+      {children}
+    </div>
+  );
 };
 
 const Footer = ({ children }: { children: React.ReactNode }) => {

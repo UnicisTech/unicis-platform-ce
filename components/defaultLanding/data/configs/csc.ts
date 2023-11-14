@@ -1,7 +1,7 @@
 //import json from "../../../data/MVPS-controls.json";
 import defaultJson from '../MVPS-controls.json';
-import iso2013Json from '../ISO-CSC-controls-2013.json'
-import iso2022Json from '../ISO-CSC-controls-2022.json'
+import iso2013Json from '../ISO-CSC-controls-2013.json';
+import iso2022Json from '../ISO-CSC-controls-2022.json';
 
 import { Control, IsoControlMap, Section } from 'types';
 
@@ -10,9 +10,8 @@ import { Control, IsoControlMap, Section } from 'types';
 const controls = {
   '2013': iso2013Json,
   '2022': iso2022Json,
-  'default': defaultJson["MVPS-Controls"]
-}
-
+  default: defaultJson['MVPS-Controls'],
+};
 
 const sections = [
   {
@@ -36,8 +35,8 @@ const sections = [
 const isoOptions = [
   { label: 'ISO/IEC 27001:2013', value: '2013' },
   { label: 'ISO/IEC 27001:2022', value: '2022' },
-  { label: 'MVSP v1.0-20211007', value: 'default' }
-]
+  { label: 'MVSP v1.0-20211007', value: 'default' },
+];
 
 const perPageOptions: { label: string; value: number }[] = [
   {
@@ -74,34 +73,42 @@ const perPageOptions: { label: string; value: number }[] = [
 //   })
 // );
 
-const trimToSecondDot = (inputString: string): string => inputString.split('.').slice(0, 2).join('.');
+const trimToSecondDot = (inputString: string): string =>
+  inputString.split('.').slice(0, 2).join('.');
 
 const getSectionsLabels = (iso: string) => {
-  if (iso !== "2013") {
-    return getSections(iso).map(({ label }) => label)
+  if (iso !== '2013') {
+    return getSections(iso).map(({ label }) => label);
   }
 
   //For ISO 2013 we should merge the sections because of their big amount
   const labelSet = new Set();
-  controls[iso].forEach(item => {
+  controls[iso].forEach((item) => {
     labelSet.add(trimToSecondDot(item.Code));
   });
 
-  const sections = (Array.from(labelSet) as string[])
-    .map((label: string) => label + " " + controls[iso].find(({ Code }) => Code.includes(label))?.Section.split(" - ")[0])
+  const sections = (Array.from(labelSet) as string[]).map(
+    (label: string) =>
+      label +
+      ' ' +
+      controls[iso]
+        .find(({ Code }) => Code.includes(label))
+        ?.Section.split(' - ')[0]
+  );
 
-  return sections
-}
+  return sections;
+};
 
-const getControlOptions = (iso: string) => controls[iso].map(({ Code, Control, Requirements, Section }) => ({
-  label: `${Code}: ${Section}, ${Control}`,
-  value: {
-    code: Code,
-    control: Control,
-    requirements: Requirements,
-    section: Section
-  }
-}))
+const getControlOptions = (iso: string) =>
+  controls[iso].map(({ Code, Control, Requirements, Section }) => ({
+    label: `${Code}: ${Section}, ${Control}`,
+    value: {
+      code: Code,
+      control: Control,
+      requirements: Requirements,
+      section: Section,
+    },
+  }));
 
 const mergePoints = (d) => {
   const merged = [
@@ -119,17 +126,17 @@ const mergePoints = (d) => {
     d[30],
     (d[31] + d[32]) / 2,
     (d[33] + d[34]) / 2,
-  ]
+  ];
 
-  const rounded = merged.map(value => Math.round(value))
+  const rounded = merged.map((value) => Math.round(value));
 
-  return rounded
-}
+  return rounded;
+};
 
 const getRadarChartLabels = (iso: string) => {
-  const labels = getSectionsLabels(iso)
-  return labels.map(label => label.split(" "))
-}
+  const labels = getSectionsLabels(iso);
+  return labels.map((label) => label.split(' '));
+};
 
 const getSections = (iso: string): Section[] => {
   const sectionSet = new Set<string>();
@@ -146,21 +153,21 @@ const getSections = (iso: string): Section[] => {
   }));
 
   return sections;
-}
+};
 
 const getSectionFilterOptions = (iso: string) => {
   if (iso !== '2013') {
-    return getSections(iso)
+    return getSections(iso);
   }
 
-  const labels = getSectionsLabels(iso)
-  const options = labels.map(label => ({
+  const labels = getSectionsLabels(iso);
+  const options = labels.map((label) => ({
     label,
-    value: removeBeforeFirstSpace(label)
-  }))
+    value: removeBeforeFirstSpace(label),
+  }));
 
-  return options
-}
+  return options;
+};
 
 const removeBeforeFirstSpace = (string) => {
   const parts = string.split(' ');
@@ -168,7 +175,7 @@ const removeBeforeFirstSpace = (string) => {
     return parts.slice(1).join(' ');
   }
   return string;
-}
+};
 
 const statusOptions: { label: string; value: number }[] = [
   {
@@ -281,5 +288,5 @@ export {
   sections,
   perPageOptions,
   controls,
-  isoOptions
+  isoOptions,
 };

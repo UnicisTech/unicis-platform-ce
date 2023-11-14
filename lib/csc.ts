@@ -3,13 +3,13 @@ import type { Session } from 'next-auth';
 
 export const getCscControlsProp = (ISO: string) => {
   const cscStatusesProp = `csc_controls${ISO !== 'default' ? `_${ISO}` : ''}`;
-  return cscStatusesProp
-}
+  return cscStatusesProp;
+};
 
 export const getCscStatusesProp = (ISO: string) => {
   const cscStatusesProp = `csc_statuses${ISO !== 'default' ? `_${ISO}` : ''}`;
-  return cscStatusesProp
-}
+  return cscStatusesProp;
+};
 
 export const addControlsToIssue = async (params: {
   user: Session['user'];
@@ -32,7 +32,7 @@ export const addControlsToIssue = async (params: {
     return null;
   }
 
-  const cscStatusesProp = getCscControlsProp(ISO)
+  const cscStatusesProp = getCscControlsProp(ISO);
   const taskId = task.id;
   const taskProperties = task?.properties as any;
   let csc_controls = taskProperties?.[cscStatusesProp];
@@ -87,7 +87,7 @@ export const removeControlsFromIssue = async (params: {
     return null;
   }
 
-  const cscStatusesProp = getCscControlsProp(ISO)
+  const cscStatusesProp = getCscControlsProp(ISO);
   const taskId = task.id;
   const taskProperties = task?.properties as any;
   const csc_controls = taskProperties?.[cscStatusesProp] as Array<string>;
@@ -140,7 +140,7 @@ export const changeControlInIssue = async (params: {
     return null;
   }
 
-  const cscStatusesProp = getCscControlsProp(ISO)
+  const cscStatusesProp = getCscControlsProp(ISO);
   const taskId = task.id;
   const taskProperties = task?.properties as any;
   const csc_controls = taskProperties?.[cscStatusesProp] as Array<string>;

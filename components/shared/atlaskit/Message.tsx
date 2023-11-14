@@ -5,22 +5,20 @@ const Message = ({
   title,
   appearance,
   text,
-  isBold
+  isBold,
 }: {
-  title?: string,
-  appearance?: Appearance | undefined,
-  text: ReactNode
-  isBold?: boolean
+  title?: string;
+  appearance?: Appearance | undefined;
+  text: ReactNode;
+  isBold?: boolean;
 }) => {
   return (
     <div style={{ margin: '5px' }}>
       <SectionMessage title={title} appearance={appearance}>
-        <p className={`${isBold ? 'font-bold' : ''}`}>
-          {text}
-        </p>
+        <p className={`${isBold ? 'font-bold' : ''}`}>{text}</p>
       </SectionMessage>
     </div>
-  )
-}
+  );
+};
 
-export default Message
+export default Message;

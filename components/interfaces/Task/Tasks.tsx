@@ -1,29 +1,25 @@
 import { useState, useEffect } from 'react';
-import { Button } from "react-daisyui";
-import Link from "next/link";
-import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
-import { Card, Error, Loading, StatusBadge } from "@/components/shared";
-import useTasks from "hooks/useTasks";
+import { Button } from 'react-daisyui';
+import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import { Card, Error, Loading, StatusBadge } from '@/components/shared';
+import useTasks from 'hooks/useTasks';
 import useCanAccess from 'hooks/useCanAccess';
-import statuses from "@/components/defaultLanding/data/statuses.json"
-import { WithLoadingAndError } from "@/components/shared";
+import statuses from '@/components/defaultLanding/data/statuses.json';
+import { WithLoadingAndError } from '@/components/shared';
 // import CreateTask from './CreateTask';
-import type { Task, Team } from "@prisma/client";
+import type { Task, Team } from '@prisma/client';
 // import EditTask from './EditTask';
-import { CreateTask, DeleteTask, EditTask } from "@/components/interfaces/Task";
-
-
-
+import { CreateTask, DeleteTask, EditTask } from '@/components/interfaces/Task';
 
 const Tasks = ({
-  team,
-  // setTaskToDelete,
-  // setDeleteVisible,
-  // setTaskToEdit,
-  // setEditVisible
-}: {
-  team: Team,
+  team, // setTaskToDelete,
+} // setDeleteVisible,
+// setTaskToEdit,
+// setEditVisible
+: {
+  team: Team;
   // setTaskToDelete: (id: number | null) => void;
   // setDeleteVisible: (visible: boolean) => void;
   // setTaskToEdit: (task: Task) => void
@@ -35,12 +31,12 @@ const Tasks = ({
   // const { newTeam } = router.query as { newTeam: string };
   const [createTeamVisible, setCreateTeamVisible] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [editVisible, setEditVisible] = useState(false)
-  const [deleteVisible, setDeleteVisible] = useState(false)
-  const [taskToEdit, setTaskToEdit] = useState<Task>({} as Task)
-  const [taskToDelete, setTaskToDelete] = useState<null | number>(null)
+  const [editVisible, setEditVisible] = useState(false);
+  const [deleteVisible, setDeleteVisible] = useState(false);
+  const [taskToEdit, setTaskToEdit] = useState<Task>({} as Task);
+  const [taskToDelete, setTaskToDelete] = useState<null | number>(null);
 
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
 
   useEffect(() => {
@@ -58,14 +54,14 @@ const Tasks = ({
   }
 
   const openDeleteModal = async (id: number) => {
-    setTaskToDelete(id)
-    setDeleteVisible(true)
+    setTaskToDelete(id);
+    setDeleteVisible(true);
   };
 
   const openEditModal = async (task: Task) => {
-    setTaskToEdit({ ...task })
-    setEditVisible(true)
-  }
+    setTaskToEdit({ ...task });
+    setEditVisible(true);
+  };
 
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
@@ -80,7 +76,7 @@ const Tasks = ({
             </p>
           </div>
 
-          {canAccess('task', ['create']) &&
+          {canAccess('task', ['create']) && (
             <Button
               size="sm"
               color="primary"
@@ -89,24 +85,24 @@ const Tasks = ({
                 setVisible(!visible);
               }}
             >
-              {t("create")}
+              {t('create')}
             </Button>
-          }
+          )}
         </div>
-        <table className='text-sm table w-full border-b dark:border-base-200'>
+        <table className="text-sm table w-full border-b dark:border-base-200">
           <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                {t("task-id")}
+                {t('task-id')}
               </th>
               <th scope="col" className="px-6 py-3">
-                {t("title")}
+                {t('title')}
               </th>
               <th scope="col" className="px-6 py-3">
-                {t("status")}
+                {t('status')}
               </th>
               <th scope="col" className="px-6 py-3">
-                {t("actions")}
+                {t('actions')}
               </th>
             </tr>
           </thead>
@@ -135,35 +131,38 @@ const Tasks = ({
                     <td className="px-6 py-3">
                       <StatusBadge
                         value={task.status}
-                        label={statuses.find(({ value }) => value === task.status)?.label as string}
+                        label={
+                          statuses.find(({ value }) => value === task.status)
+                            ?.label as string
+                        }
                       />
                       {/* {statuses.find(({ value }) => value === task.status)?.label} */}
                     </td>
                     <td className="px-6 py-3 btn-group">
-                      {canAccess('task', ['update']) &&
+                      {canAccess('task', ['update']) && (
                         <Button
                           className="dark:text-gray-100"
                           size="sm"
                           variant="outline"
                           onClick={() => {
-                            openEditModal(task)
+                            openEditModal(task);
                           }}
                         >
-                          {t("edit-task")}
+                          {t('edit-task')}
                         </Button>
-                      }
-                      {canAccess('task', ['delete']) &&
+                      )}
+                      {canAccess('task', ['delete']) && (
                         <Button
                           className="dark:text-gray-100"
                           size="sm"
                           variant="outline"
                           onClick={() => {
-                            openDeleteModal(task.id)
+                            openDeleteModal(task.id);
                           }}
                         >
-                          {t("delete-task")}
+                          {t('delete-task')}
                         </Button>
-                      }
+                      )}
                     </td>
                   </tr>
                 );
@@ -171,8 +170,19 @@ const Tasks = ({
           </tbody>
         </table>
         <CreateTask visible={visible} setVisible={setVisible} team={team} />
-        {editVisible && <EditTask visible={editVisible} setVisible={setEditVisible} team={team} task={taskToEdit} />}
-        <DeleteTask visible={deleteVisible} setVisible={setDeleteVisible} taskId={taskToDelete} />
+        {editVisible && (
+          <EditTask
+            visible={editVisible}
+            setVisible={setEditVisible}
+            team={team}
+            task={taskToEdit}
+          />
+        )}
+        <DeleteTask
+          visible={deleteVisible}
+          setVisible={setDeleteVisible}
+          taskId={taskToDelete}
+        />
       </div>
     </WithLoadingAndError>
   );

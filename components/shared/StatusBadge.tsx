@@ -1,14 +1,14 @@
 import { Badge as BaseBadge } from 'react-daisyui';
 
 const colors = {
-    "todo": "ghost",
-    "inprogress": "secondary",
-    "inreview": "primary",
-    "feedback": "info",
-    "done": "success"
-}
+  todo: 'ghost',
+  inprogress: 'secondary',
+  inreview: 'primary',
+  feedback: 'info',
+  done: 'success',
+};
 
-const StatusBadge = ({ label, value } : { label: string, value: string}) => {
+const StatusBadge = ({ label, value }: { label: string; value: string }) => {
   return (
     <>
       <BaseBadge

@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import { getAxiosError } from '@/lib/common';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import type { Task } from '@prisma/client';
-import toast from "react-hot-toast";
-import axios from "axios";
-import type { ApiResponse } from "types";
+import toast from 'react-hot-toast';
+import axios from 'axios';
+import type { ApiResponse } from 'types';
 import AtlaskitButton from '@atlaskit/button';
 import { Button } from 'react-daisyui';
 import Form, { Field, FormFooter } from '@atlaskit/form';
@@ -21,10 +21,10 @@ interface FormData {
 
 export default function AddComment({
   task,
-  mutateTask
+  mutateTask,
 }: {
   task: TaskExtended;
-  mutateTask: () => Promise<void>
+  mutateTask: () => Promise<void>;
 }) {
   const { t } = useTranslation('common');
   const router = useRouter();
@@ -33,7 +33,7 @@ export default function AddComment({
   return (
     <IssuePanelContainer>
       <div style={{ marginTop: '30px' }}>
-        {task.comments.map(comment => (
+        {task.comments.map((comment) => (
           <div style={{ margin: '15px' }}>
             <div className="flex gap-3.5">
               <p className="font-bold ...">{comment.createdBy.name}</p>
@@ -41,7 +41,7 @@ export default function AddComment({
             </div>
             <p className="my-2">{comment.text}</p>
             <AtlaskitButton
-              appearance='danger'
+              appearance="danger"
               style={{ padding: '0px' }}
               spacing="compact"
               onClick={async () => {
@@ -50,8 +50,8 @@ export default function AddComment({
                     `/api/teams/${slug}/tasks/${taskNumber}/comments`,
                     {
                       data: {
-                        id: comment.id
-                      }
+                        id: comment.id,
+                      },
                     }
                   );
                   const { error } = response.data;
@@ -61,7 +61,7 @@ export default function AddComment({
                     return;
                   }
 
-                  mutateTask()
+                  mutateTask();
                 } catch (error: any) {
                   toast.error(getAxiosError(error));
                 }
@@ -75,7 +75,7 @@ export default function AddComment({
       <Form
         onSubmit={async (formState: FormData, { reset }) => {
           try {
-            const { text } = formState
+            const { text } = formState;
             const response = await axios.post<ApiResponse<Task>>(
               `/api/teams/${slug}/tasks/${taskNumber}/comments`,
               {
@@ -90,11 +90,11 @@ export default function AddComment({
               return;
             }
 
-            mutateTask()
+            mutateTask();
 
             reset({
-              text: ''
-            })
+              text: '',
+            });
           } catch (error: any) {
             toast.error(getAxiosError(error));
           }
@@ -105,10 +105,7 @@ export default function AddComment({
             <Field name="text">
               {({ fieldProps }: any) => (
                 <Fragment>
-                  <TextArea
-                    placeholder="Add a comment..."
-                    {...fieldProps}
-                  />
+                  <TextArea placeholder="Add a comment..." {...fieldProps} />
                 </Fragment>
               )}
             </Field>
@@ -120,7 +117,7 @@ export default function AddComment({
                 //className="text-white"
                 type="submit"
               >
-                {t("submit")}
+                {t('submit')}
               </Button>
               {/* <Button type="submit" appearance="primary">
                 Submit

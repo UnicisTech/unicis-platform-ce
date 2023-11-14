@@ -1,21 +1,28 @@
-import React, { Fragment } from "react";
+import React, { Fragment } from 'react';
 import { Error, Loading } from '@/components/shared';
-import { DatePicker } from '@atlaskit/datetime-picker'
+import { DatePicker } from '@atlaskit/datetime-picker';
 import TextField from '@atlaskit/textfield';
 import TextArea from '@atlaskit/textarea';
-import Select, {
-  ValueType,
-} from '@atlaskit/select';
+import Select, { ValueType } from '@atlaskit/select';
 import { Checkbox } from '@atlaskit/checkbox';
-import { ErrorMessage, Field, CheckboxField, FormFooter, HelperMessage } from '@atlaskit/form';
-import type { RpaOption } from "types";
-import { WithoutRing } from "sharedStyles";
-import { Message } from "@/components/shared/atlaskit";
-import { format } from 'date-fns'
-import useTeamMembers from "hooks/useTeamMembers";
-import { useRouter } from "next/router";
-import { config, headers, fieldPropsMapping } from "@/components/defaultLanding/data/configs/rpa"
-
+import {
+  ErrorMessage,
+  Field,
+  CheckboxField,
+  FormFooter,
+  HelperMessage,
+} from '@atlaskit/form';
+import type { RpaOption } from 'types';
+import { WithoutRing } from 'sharedStyles';
+import { Message } from '@/components/shared/atlaskit';
+import { format } from 'date-fns';
+import useTeamMembers from 'hooks/useTeamMembers';
+import { useRouter } from 'next/router';
+import {
+  config,
+  headers,
+  fieldPropsMapping,
+} from '@/components/defaultLanding/data/configs/rpa';
 
 interface FormBodyProps {
   stage: number;
@@ -23,13 +30,14 @@ interface FormBodyProps {
   procedure: any[];
 }
 
-const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) => {
-
+const CreateFormBody = ({
+  stage,
+  validationMessage,
+  procedure,
+}: FormBodyProps) => {
   const router = useRouter();
   const { slug } = router.query;
-  const { isLoading, isError, members } = useTeamMembers(
-    slug as string
-  );
+  const { isLoading, isError, members } = useTeamMembers(slug as string);
 
   if (isLoading) {
     return <Loading />;
@@ -38,7 +46,7 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
   if (!members || isError) {
     return <Error message={isError.message} />;
   }
-  
+
   return (
     <>
       <div
@@ -56,7 +64,7 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
                     doing with the concerned personal data. The recording obligation is stated by article 30 of the GDPR.
                     It is an application to help you to be compliant with the Regulation.`}
         />
-        {stage === 0 &&
+        {stage === 0 && (
           <>
             <Message
               appearance="warning"
@@ -66,16 +74,17 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
                         consultation, use, communication by diffusion, transmission or any other form of making available,
                         linkage).`}
             />
-            {validationMessage &&
-              <Message
-                appearance="error"
-                text={validationMessage}
-              />
-            }
+            {validationMessage && (
+              <Message appearance="error" text={validationMessage} />
+            )}
             <Field
               name="reviewDate"
-              label={fieldPropsMapping["reviewDate"]}
-              defaultValue={procedure[0] ? procedure[0].reviewDate : format(new Date(), 'yyyy-MM-dd')}
+              label={fieldPropsMapping['reviewDate']}
+              defaultValue={
+                procedure[0]
+                  ? procedure[0].reviewDate
+                  : format(new Date(), 'yyyy-MM-dd')
+              }
               isRequired
               aria-required={true}
               validate={async (value) => {
@@ -83,15 +92,19 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
                   return undefined;
                 }
 
-                return new Promise((resolve) =>
-                  setTimeout(resolve, 300),
-                ).then(() => 'Please select a due date');
+                return new Promise((resolve) => setTimeout(resolve, 300)).then(
+                  () => 'Please select a due date'
+                );
               }}
             >
               {({ fieldProps: { id, ...rest }, error }) => (
                 <Fragment>
                   <WithoutRing>
-                    <DatePicker placeholder={format(new Date(), "MM/dd/yyyy")} selectProps={{ inputId: id }} {...rest} />
+                    <DatePicker
+                      placeholder={format(new Date(), 'MM/dd/yyyy')}
+                      selectProps={{ inputId: id }}
+                      {...rest}
+                    />
                   </WithoutRing>
                   {!error && (
                     <HelperMessage>
@@ -105,7 +118,7 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
             <Field
               aria-required={true}
               name="controller"
-              label={fieldPropsMapping["controller"]}
+              label={fieldPropsMapping['controller']}
               defaultValue={procedure[0] && procedure[0].controller}
               isRequired
             >
@@ -117,7 +130,7 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
             </Field>
             <Field<ValueType<RpaOption>>
               name="dpo"
-              label={fieldPropsMapping["dpo"]}
+              label={fieldPropsMapping['dpo']}
               defaultValue={procedure[0] && procedure[0].dpo}
               aria-required={true}
               isRequired
@@ -126,39 +139,56 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
                   return undefined;
                 }
 
-                return new Promise((resolve) =>
-                  setTimeout(resolve, 300),
-                ).then(() => 'Please select a dpo');
+                return new Promise((resolve) => setTimeout(resolve, 300)).then(
+                  () => 'Please select a dpo'
+                );
               }}
             >
               {({ fieldProps: { id, ...rest }, error }) => (
                 <Fragment>
                   <WithoutRing>
-                    <Select inputId={id} {...rest} options={members?.map(({ user }) => ({ value: user.id, label: user.name }))} validationState={error ? 'error' : 'default'} />
+                    <Select
+                      inputId={id}
+                      {...rest}
+                      options={members?.map(({ user }) => ({
+                        value: user.id,
+                        label: user.name,
+                      }))}
+                      validationState={error ? 'error' : 'default'}
+                    />
                     {error && <ErrorMessage>{error}</ErrorMessage>}
                   </WithoutRing>
                 </Fragment>
               )}
             </Field>
           </>
-        }
-        {stage === 1 &&
+        )}
+        {stage === 1 && (
           <>
             <Message
               appearance="warning"
-              text={<span>A data processing operation must have a purpose, a finality, i.e. you cannot collect or process
-                personal data simply in case it would be useful to you one day. Each data processing operation must be
-                assigned a purpose, which must of course be lawful and legitimate in the context of your professional
-                activity.<br /><em>Example: You collect a lot of information from your customers, when you make a delivery, issue
-                  an
-                  invoice or offer a loyalty card. All these operations on these data represent your processing of
-                  personal
-                  data for the purpose of managing your customers.</em></span>
+              text={
+                <span>
+                  A data processing operation must have a purpose, a finality,
+                  i.e. you cannot collect or process personal data simply in
+                  case it would be useful to you one day. Each data processing
+                  operation must be assigned a purpose, which must of course be
+                  lawful and legitimate in the context of your professional
+                  activity.
+                  <br />
+                  <em>
+                    Example: You collect a lot of information from your
+                    customers, when you make a delivery, issue an invoice or
+                    offer a loyalty card. All these operations on these data
+                    represent your processing of personal data for the purpose
+                    of managing your customers.
+                  </em>
+                </span>
               }
             />
             <Field
               name="purpose"
-              label={fieldPropsMapping["purpose"]}
+              label={fieldPropsMapping['purpose']}
               defaultValue={procedure[1] && procedure[1].purpose}
             >
               {({ fieldProps }: any) => (
@@ -172,7 +202,7 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
             </Field>
             <Field<ValueType<RpaOption, true>>
               name="category"
-              label={fieldPropsMapping["category"]}
+              label={fieldPropsMapping['category']}
               defaultValue={procedure[1] && procedure[1].category}
               aria-required={true}
               isRequired
@@ -181,16 +211,26 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
                   return undefined;
                 }
 
-                return new Promise((resolve) =>
-                  setTimeout(resolve, 300),
-                ).then(() => 'Please select a categories');
+                return new Promise((resolve) => setTimeout(resolve, 300)).then(
+                  () => 'Please select a categories'
+                );
               }}
             >
               {({ fieldProps: { id, ...rest }, error }) => (
                 <Fragment>
                   <WithoutRing>
-                    <Select inputId={id} {...rest} options={config.category} validationState={error ? 'error' : 'default'} isMulti />
-                    {!error && <HelperMessage>Multiple selection possible for Personal Data</HelperMessage>}
+                    <Select
+                      inputId={id}
+                      {...rest}
+                      options={config.category}
+                      validationState={error ? 'error' : 'default'}
+                      isMulti
+                    />
+                    {!error && (
+                      <HelperMessage>
+                        Multiple selection possible for Personal Data
+                      </HelperMessage>
+                    )}
                     {error && <ErrorMessage>{error}</ErrorMessage>}
                   </WithoutRing>
                 </Fragment>
@@ -198,7 +238,7 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
             </Field>
             <Field<ValueType<RpaOption, true>>
               name="specialcategory"
-              label={fieldPropsMapping["specialcategory"]}
+              label={fieldPropsMapping['specialcategory']}
               defaultValue={procedure[1] && procedure[1].specialcategory}
               aria-required={true}
               isRequired
@@ -207,16 +247,24 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
                   return undefined;
                 }
 
-                return new Promise((resolve) =>
-                  setTimeout(resolve, 300),
-                ).then(() => 'Please select a categories');
+                return new Promise((resolve) => setTimeout(resolve, 300)).then(
+                  () => 'Please select a categories'
+                );
               }}
             >
               {({ fieldProps: { id, ...rest }, error }) => (
                 <Fragment>
                   <WithoutRing>
-                    <Select inputId={id} {...rest} options={config.specialcategory} validationState={error ? 'error' : 'default'} isMulti />
-                    {!error && <HelperMessage>Multiple selection possible</HelperMessage>}
+                    <Select
+                      inputId={id}
+                      {...rest}
+                      options={config.specialcategory}
+                      validationState={error ? 'error' : 'default'}
+                      isMulti
+                    />
+                    {!error && (
+                      <HelperMessage>Multiple selection possible</HelperMessage>
+                    )}
                     {error && <ErrorMessage>{error}</ErrorMessage>}
                   </WithoutRing>
                 </Fragment>
@@ -224,7 +272,7 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
             </Field>
             <Field<ValueType<RpaOption, true>>
               name="datasubject"
-              label={fieldPropsMapping["datasubject"]}
+              label={fieldPropsMapping['datasubject']}
               defaultValue={procedure[1] && procedure[1].datasubject}
               aria-required={true}
               isRequired
@@ -233,16 +281,27 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
                   return undefined;
                 }
 
-                return new Promise((resolve) =>
-                  setTimeout(resolve, 300),
-                ).then(() => 'Please select a categories');
+                return new Promise((resolve) => setTimeout(resolve, 300)).then(
+                  () => 'Please select a categories'
+                );
               }}
             >
               {({ fieldProps: { id, ...rest }, error }) => (
                 <Fragment>
                   <WithoutRing>
-                    <Select inputId={id} {...rest} options={config.datasubject} validationState={error ? 'error' : 'default'} isMulti />
-                    {!error && <HelperMessage>Multiple selection possible, and if others please specify on the ticket</HelperMessage>}
+                    <Select
+                      inputId={id}
+                      {...rest}
+                      options={config.datasubject}
+                      validationState={error ? 'error' : 'default'}
+                      isMulti
+                    />
+                    {!error && (
+                      <HelperMessage>
+                        Multiple selection possible, and if others please
+                        specify on the ticket
+                      </HelperMessage>
+                    )}
                     {error && <ErrorMessage>{error}</ErrorMessage>}
                   </WithoutRing>
                 </Fragment>
@@ -250,7 +309,7 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
             </Field>
             <Field<ValueType<RpaOption>>
               name="retentionperiod"
-              label={fieldPropsMapping["retentionperiod"]}
+              label={fieldPropsMapping['retentionperiod']}
               defaultValue={procedure[1] && procedure[1].retentionperiod}
               aria-required={true}
               isRequired
@@ -259,16 +318,25 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
                   return undefined;
                 }
 
-                return new Promise((resolve) =>
-                  setTimeout(resolve, 300),
-                ).then(() => 'Please select a period');
+                return new Promise((resolve) => setTimeout(resolve, 300)).then(
+                  () => 'Please select a period'
+                );
               }}
             >
               {({ fieldProps: { id, ...rest }, error }) => (
                 <Fragment>
                   <WithoutRing>
-                    <Select inputId={id} {...rest} options={config.retentionperiod} validationState={error ? 'error' : 'default'} />
-                    {!error && <HelperMessage>Please specify the data retention period</HelperMessage>}
+                    <Select
+                      inputId={id}
+                      {...rest}
+                      options={config.retentionperiod}
+                      validationState={error ? 'error' : 'default'}
+                    />
+                    {!error && (
+                      <HelperMessage>
+                        Please specify the data retention period
+                      </HelperMessage>
+                    )}
                     {error && <ErrorMessage>{error}</ErrorMessage>}
                   </WithoutRing>
                 </Fragment>
@@ -276,7 +344,7 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
             </Field>
             <Field
               name="commentsretention"
-              label={fieldPropsMapping["commentsretention"]}
+              label={fieldPropsMapping['commentsretention']}
               defaultValue={procedure[1] && procedure[1].commentsretention}
             >
               {({ fieldProps }: any) => (
@@ -290,20 +358,23 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
               )}
             </Field>
           </>
-        }
-        {stage === 2 &&
+        )}
+        {stage === 2 && (
           <>
             <Message
               appearance="warning"
               text={
                 <span>
-                  List all persons who have access to the data;<br />For example: recruitment department, IT department, management, service providers, partners, hosts, etc.
+                  List all persons who have access to the data;
+                  <br />
+                  For example: recruitment department, IT department,
+                  management, service providers, partners, hosts, etc.
                 </span>
               }
             />
             <Field<ValueType<RpaOption>>
               name="recipientType"
-              label={fieldPropsMapping["recipientType"]}
+              label={fieldPropsMapping['recipientType']}
               defaultValue={procedure[2] && procedure[2].recipientType}
               aria-required={true}
               isRequired
@@ -312,16 +383,26 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
                   return undefined;
                 }
 
-                return new Promise((resolve) =>
-                  setTimeout(resolve, 300),
-                ).then(() => 'Please select a type');
+                return new Promise((resolve) => setTimeout(resolve, 300)).then(
+                  () => 'Please select a type'
+                );
               }}
             >
               {({ fieldProps: { id, ...rest }, error }) => (
                 <Fragment>
                   <WithoutRing>
-                    <Select inputId={id} {...rest} options={config.recipientType} validationState={error ? 'error' : 'default'} />
-                    {!error && <HelperMessage>Please specify the type of recipient if not on a list specify on details</HelperMessage>}
+                    <Select
+                      inputId={id}
+                      {...rest}
+                      options={config.recipientType}
+                      validationState={error ? 'error' : 'default'}
+                    />
+                    {!error && (
+                      <HelperMessage>
+                        Please specify the type of recipient if not on a list
+                        specify on details
+                      </HelperMessage>
+                    )}
                     {error && <ErrorMessage>{error}</ErrorMessage>}
                   </WithoutRing>
                 </Fragment>
@@ -329,7 +410,7 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
             </Field>
             <Field
               name="recipientdetails"
-              label={fieldPropsMapping["recipientdetails"]}
+              label={fieldPropsMapping['recipientdetails']}
               defaultValue={procedure[2] && procedure[2].recipientdetails}
             >
               {({ fieldProps }: any) => (
@@ -342,45 +423,60 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
               )}
             </Field>
           </>
-        }
-        {stage === 3 &&
+        )}
+        {stage === 3 && (
           <>
             <Message
               appearance="warning"
               text={
                 <span>
                   When you transfer data outside the European Union: <br />
-                  - Check whether the country outside the EU to which you are transferring the data has data
-                  protection
-                  legislation and whether it is recognised as adequate by the European Commission. <br />
-                  - A map of the world presenting data protection legislation. <br />
-                  - Otherwise, you will have to provide a legal framework your transfers to ensure data protection
-                  abroad.
+                  - Check whether the country outside the EU to which you are
+                  transferring the data has data protection legislation and
+                  whether it is recognised as adequate by the European
+                  Commission. <br />- A map of the world presenting data
+                  protection legislation. <br />- Otherwise, you will have to
+                  provide a legal framework your transfers to ensure data
+                  protection abroad.
                 </span>
               }
             />
-            <CheckboxField name="datatransfer" defaultIsChecked={procedure[3] != null ? procedure[3].datatransfer : false}>
+            <CheckboxField
+              name="datatransfer"
+              defaultIsChecked={
+                procedure[3] != null ? procedure[3].datatransfer : false
+              }
+            >
               {({ fieldProps }) => (
-                <Checkbox {...fieldProps} label={fieldPropsMapping["datatransfer"]} />
+                <Checkbox
+                  {...fieldProps}
+                  label={fieldPropsMapping['datatransfer']}
+                />
               )}
             </CheckboxField>
             <Field
               aria-required={true}
               name="recipient"
-              label={fieldPropsMapping["recipient"]}
+              label={fieldPropsMapping['recipient']}
               defaultValue={procedure[3] && procedure[3].recipient}
               isRequired
             >
               {({ fieldProps, error }) => (
                 <Fragment>
                   <TextField autoComplete="off" {...fieldProps} />
-                  {!error && <HelperMessage>Recipient is a natural or legal person, public authority, agency or another body which the personal data are disclosed.</HelperMessage>}
+                  {!error && (
+                    <HelperMessage>
+                      Recipient is a natural or legal person, public authority,
+                      agency or another body which the personal data are
+                      disclosed.
+                    </HelperMessage>
+                  )}
                 </Fragment>
               )}
             </Field>
             <Field<ValueType<RpaOption>>
               name="country"
-              label={fieldPropsMapping["country"]}
+              label={fieldPropsMapping['country']}
               defaultValue={procedure[3] && procedure[3].country}
               aria-required={true}
               isRequired
@@ -389,16 +485,23 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
                   return undefined;
                 }
 
-                return new Promise((resolve) =>
-                  setTimeout(resolve, 300),
-                ).then(() => 'Please select a country');
+                return new Promise((resolve) => setTimeout(resolve, 300)).then(
+                  () => 'Please select a country'
+                );
               }}
             >
               {({ fieldProps: { id, ...rest }, error }) => (
                 <Fragment>
                   <WithoutRing>
-                    <Select inputId={id} {...rest} options={config.country} validationState={error ? 'error' : 'default'} />
-                    {!error && <HelperMessage>Please select from the list</HelperMessage>}
+                    <Select
+                      inputId={id}
+                      {...rest}
+                      options={config.country}
+                      validationState={error ? 'error' : 'default'}
+                    />
+                    {!error && (
+                      <HelperMessage>Please select from the list</HelperMessage>
+                    )}
                     {error && <ErrorMessage>{error}</ErrorMessage>}
                   </WithoutRing>
                 </Fragment>
@@ -406,7 +509,7 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
             </Field>
             <Field<ValueType<RpaOption, true>>
               name="guarantee"
-              label={fieldPropsMapping["guarantee"]}
+              label={fieldPropsMapping['guarantee']}
               defaultValue={procedure[3] && procedure[3].guarantee}
               aria-required={true}
               isRequired
@@ -415,16 +518,27 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
                   return undefined;
                 }
 
-                return new Promise((resolve) =>
-                  setTimeout(resolve, 300),
-                ).then(() => 'Please select at least one');
+                return new Promise((resolve) => setTimeout(resolve, 300)).then(
+                  () => 'Please select at least one'
+                );
               }}
             >
               {({ fieldProps: { id, ...rest }, error }) => (
                 <Fragment>
                   <WithoutRing>
-                    <Select inputId={id} {...rest} options={config.guarantee} validationState={error ? 'error' : 'default'} isMulti />
-                    {!error && <HelperMessage>Multiple selection possible, and if None please specify on the ticket</HelperMessage>}
+                    <Select
+                      inputId={id}
+                      {...rest}
+                      options={config.guarantee}
+                      validationState={error ? 'error' : 'default'}
+                      isMulti
+                    />
+                    {!error && (
+                      <HelperMessage>
+                        Multiple selection possible, and if None please specify
+                        on the ticket
+                      </HelperMessage>
+                    )}
                     {error && <ErrorMessage>{error}</ErrorMessage>}
                   </WithoutRing>
                 </Fragment>
@@ -432,31 +546,38 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
             </Field>
             <Message
               appearance="warning"
-              text={<span>Please attach relevant documents to the ticket.</span>}
+              text={
+                <span>Please attach relevant documents to the ticket.</span>
+              }
             />
           </>
-        }
-        {stage === 4 &&
+        )}
+        {stage === 4 && (
           <>
             <Message
               appearance="warning"
               text={
                 <span>
-                  Secure your data:<br />
-                  - Ensure the integrity of your data assets by minimizing the risk of data loss or
-                  hacking.<br />
-                  - The measures to be taken, whether electronic or physical, depend on the sensitiveness of the
-                  data you are processing and the risks to data subjects in the event of an incident. <br />
-                  - Various actions must be implemented: updating your antivirus and software, regularly
-                  changing passwords and adopting complex passwords, or encrypting your data in certain situations.
-                  In the event of loss or theft of an eletronic device,
-                  it will be more difficult for a third party to access it.
+                  Secure your data:
+                  <br />
+                  - Ensure the integrity of your data assets by minimizing the
+                  risk of data loss or hacking.
+                  <br />
+                  - The measures to be taken, whether electronic or physical,
+                  depend on the sensitiveness of the data you are processing and
+                  the risks to data subjects in the event of an incident. <br />
+                  - Various actions must be implemented: updating your antivirus
+                  and software, regularly changing passwords and adopting
+                  complex passwords, or encrypting your data in certain
+                  situations. In the event of loss or theft of an eletronic
+                  device, it will be more difficult for a third party to access
+                  it.
                 </span>
               }
             />
             <Field<ValueType<RpaOption, true>>
               name="toms"
-              label={fieldPropsMapping["toms"]}
+              label={fieldPropsMapping['toms']}
               defaultValue={procedure[4] && procedure[4].toms}
               aria-required={true}
               isRequired
@@ -465,16 +586,27 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
                   return undefined;
                 }
 
-                return new Promise((resolve) =>
-                  setTimeout(resolve, 300),
-                ).then(() => 'Please select at least one');
+                return new Promise((resolve) => setTimeout(resolve, 300)).then(
+                  () => 'Please select at least one'
+                );
               }}
             >
               {({ fieldProps: { id, ...rest }, error }) => (
                 <Fragment>
                   <WithoutRing>
-                    <Select inputId={id} {...rest} options={config.toms} validationState={error ? 'error' : 'default'} isMulti />
-                    {!error && <HelperMessage>Multiple selection possible, and if others please specify on the ticket</HelperMessage>}
+                    <Select
+                      inputId={id}
+                      {...rest}
+                      options={config.toms}
+                      validationState={error ? 'error' : 'default'}
+                      isMulti
+                    />
+                    {!error && (
+                      <HelperMessage>
+                        Multiple selection possible, and if others please
+                        specify on the ticket
+                      </HelperMessage>
+                    )}
                     {error && <ErrorMessage>{error}</ErrorMessage>}
                   </WithoutRing>
                 </Fragment>
@@ -485,12 +617,11 @@ const CreateFormBody = ({stage, validationMessage, procedure} : FormBodyProps) =
               text="Please attach the relevant security certification and documents to the ticket."
             />
           </>
-        }
-        <FormFooter>
-        </FormFooter>
+        )}
+        <FormFooter></FormFooter>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default CreateFormBody
+export default CreateFormBody;

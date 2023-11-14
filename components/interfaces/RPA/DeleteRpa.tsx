@@ -1,38 +1,40 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback } from 'react';
 import { getAxiosError } from '@/lib/common';
-import toast from "react-hot-toast";
-import axios from "axios";
-import { Modal } from "react-daisyui";
-import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
+import toast from 'react-hot-toast';
+import axios from 'axios';
+import { Modal } from 'react-daisyui';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
 import Form from '@atlaskit/form';
-import type { ApiResponse, TaskWithRpaProcedure } from "types";
-import type { Task } from "@prisma/client";
+import type { ApiResponse, TaskWithRpaProcedure } from 'types';
+import type { Task } from '@prisma/client';
 
 const DeleteRpa = ({
   visible,
   setVisible,
   task,
-  mutate
+  mutate,
 }: {
   visible: boolean;
   setVisible: (visible: boolean) => void;
   task: Task | TaskWithRpaProcedure;
-  mutate: () => Promise<void>
+  mutate: () => Promise<void>;
 }) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
 
   const router = useRouter();
   const { slug } = router.query;
 
-  const [isDeleting, setIsDeleting] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const deleteProcedure = useCallback(async () => {
     try {
-      setIsDeleting(true)
+      setIsDeleting(true);
 
-      const response = await axios.delete<ApiResponse<Task>>(`/api/teams/${slug}/tasks/${task.id}/rpa`);
+      const response = await axios.delete<ApiResponse<Task>>(
+        `/api/teams/${slug}/tasks/${task.id}/rpa`
+      );
 
       const { error } = response.data;
 
@@ -40,36 +42,37 @@ const DeleteRpa = ({
         toast.error(error.message);
         return;
       } else {
-        toast.success('Procedure deleted.')
+        toast.success('Procedure deleted.');
       }
 
-      mutate()
+      mutate();
 
-      setIsDeleting(false)
-      setVisible(false)
+      setIsDeleting(false);
+      setVisible(false);
     } catch (error: any) {
-      setIsDeleting(false)
+      setIsDeleting(false);
       toast.error(getAxiosError(error));
     }
-  }, [task])
-
-
+  }, [task]);
 
   const closeHandler = useCallback(() => {
-    setVisible(false)
-  }, [])
+    setVisible(false);
+  }, []);
 
   return (
     <Modal open={visible}>
-      <Form
-        onSubmit={() => { }}
-      >
+      <Form onSubmit={() => {}}>
         {({ formProps }) => (
           <form {...formProps}>
-            <Modal.Header className="font-bold">Remove Register of Procedure</Modal.Header>
+            <Modal.Header className="font-bold">
+              Remove Register of Procedure
+            </Modal.Header>
             <Modal.Body>
-              <div style={{ margin: "1.5rem 0" }}>
-                <p>Are you sure you want to remove Register of Procedure? Your task will not be removed.</p>
+              <div style={{ margin: '1.5rem 0' }}>
+                <p>
+                  Are you sure you want to remove Register of Procedure? Your
+                  task will not be removed.
+                </p>
               </div>
             </Modal.Body>
             <Modal.Actions>
@@ -78,20 +81,19 @@ const DeleteRpa = ({
                 onClick={() => closeHandler()}
                 isDisabled={isDeleting}
               >
-                {t("close")}
+                {t('close')}
               </AtlaskitButton>
               <LoadingButton
                 onClick={deleteProcedure}
                 appearance="primary"
                 isLoading={isDeleting}
               >
-                {t("delete")}
+                {t('delete')}
               </LoadingButton>
             </Modal.Actions>
           </form>
         )}
       </Form>
-
     </Modal>
   );
 };
