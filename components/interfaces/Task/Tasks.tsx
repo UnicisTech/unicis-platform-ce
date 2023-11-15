@@ -8,27 +8,13 @@ import useTasks from 'hooks/useTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import statuses from '@/components/defaultLanding/data/statuses.json';
 import { WithLoadingAndError } from '@/components/shared';
-// import CreateTask from './CreateTask';
 import type { Task, Team } from '@prisma/client';
-// import EditTask from './EditTask';
 import { CreateTask, DeleteTask, EditTask } from '@/components/interfaces/Task';
 
-const Tasks = ({
-  team, // setTaskToDelete,
-  // setTaskToEdit,
-} // setDeleteVisible,
-// setEditVisible
-: {
-  team: Team;
-  // setTaskToDelete: (id: number | null) => void;
-  // setDeleteVisible: (visible: boolean) => void;
-  // setTaskToEdit: (task: Task) => void
-  // setEditVisible: (visible: boolean) => void;
-}) => {
+const Tasks = ({ team }: { team: Team }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const { isLoading, isError, tasks } = useTasks(slug as string);
-  // const { newTeam } = router.query as { newTeam: string };
   const [createTeamVisible, setCreateTeamVisible] = useState(false);
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
@@ -136,7 +122,6 @@ const Tasks = ({
                             ?.label as string
                         }
                       />
-                      {/* {statuses.find(({ value }) => value === task.status)?.label} */}
                     </td>
                     <td className="px-6 py-3 btn-group">
                       {canAccess('task', ['update']) && (

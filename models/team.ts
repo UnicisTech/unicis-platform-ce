@@ -335,7 +335,11 @@ export const setCscStatus = async ({
   return cscStatuses;
 };
 
-export const getCscIso = async ({ slug }: { slug: string }) => {
+export const getCscIso = async ({
+  slug,
+}: {
+  slug: string;
+}): Promise<string> => {
   const team = await prisma.team.findUnique({
     where: {
       slug: slug,

@@ -25,13 +25,16 @@ export const getServerSideProps = async (
   const team = await getTeam({ slug });
 
   //Hotfix for not serializable team props
-  team.createdAt = team.createdAt.toString();
-  team.updatedAt = team.updatedAt.toString();
+  // team.createdAt = team.createdAt.toString();
+  // team.updatedAt = team.updatedAt.toString();
+
+  // team.createdAt = team.createdAt;
+  // team.updatedAt = team.updatedAt.toString();
 
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      team: team,
+      team: JSON.parse(JSON.stringify(team)),
     },
   };
 };

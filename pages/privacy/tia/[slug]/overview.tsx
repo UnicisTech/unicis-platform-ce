@@ -1,8 +1,9 @@
 import type { NextPageWithLayout } from 'types';
 import { useRouter } from 'next/router';
-
-import { Card } from '@/components/ui';
-import { Loading, Error } from '@/components/ui';
+import { Card, Loading, Error } from '@/components/shared';
+// import { Lo}
+// import { Card } from '@/components/ui';
+// import { Loading, Error } from '@/components/ui';
 // import { TIATab } from "@/components/interfaces/TIA";
 import useTeam from 'hooks/useTeam';
 import { Badge } from 'react-daisyui';

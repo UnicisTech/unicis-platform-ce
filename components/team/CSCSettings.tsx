@@ -13,10 +13,11 @@ import * as Yup from 'yup';
 
 const CSCSettings = ({ team }: { team: Team }) => {
   const { t } = useTranslation('common');
+  const teamProperties = team.properties as any;
 
   const formik = useFormik({
     initialValues: {
-      iso: team.properties?.csc_iso || 'default',
+      iso: (teamProperties.csc_iso as string) || 'default',
     },
     validationSchema: Yup.object().shape({
       iso: Yup.string().required('Choose ISO set'),

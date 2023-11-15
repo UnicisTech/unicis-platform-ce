@@ -6,8 +6,12 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import type { ApiResponse } from 'types';
 
+type IsoApiResponse = {
+  iso: string;
+};
+
 const useISO = (team: any) => {
-  const [ISO, setISO] = useState(null);
+  const [ISO, setISO] = useState<string | null>(null);
   const { t } = useTranslation('common');
 
   useEffect(() => {
@@ -21,11 +25,12 @@ const useISO = (team: any) => {
         setISO(iso);
       } else {
         try {
-          const response = await axios.get<ApiResponse<Team>>(
+          const response = await axios.get<ApiResponse<IsoApiResponse>>(
             `/api/teams/${team.slug}/csc/iso`
           );
 
-          const { data: iso } = response.data;
+          const iso = response.data.data.iso;
+
           if (iso) {
             setISO(iso);
           }
