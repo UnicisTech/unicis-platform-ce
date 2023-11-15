@@ -15,8 +15,8 @@ import { CreateTask, DeleteTask, EditTask } from '@/components/interfaces/Task';
 
 const Tasks = ({
   team, // setTaskToDelete,
+  // setTaskToEdit,
 } // setDeleteVisible,
-// setTaskToEdit,
 // setEditVisible
 : {
   team: Team;
