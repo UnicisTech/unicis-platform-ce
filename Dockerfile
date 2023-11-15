@@ -18,17 +18,17 @@ EXPOSE 4002
 
 # Set the DATABASE_URL environment variable
 # ENV DATABASE_URL="postgresql://platform:7emp1eAppe4rance5Rang3I5BNOffice@db.unicis.tech/unicis_platform?schema=platform"
-ENV NEXTAUTH_URL=${NEXTAUTH_URL}
-ENV NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
-ENV SMTP_HOST=${SMTP_HOST}
-ENV SMTP_PORT=${SMTP_PORT}
-ENV SMTP_USER=${SMTP_USER}
-ENV SMTP_PASSWORD=${SMTP_PASSWORD}
-ENV SMTP_FROM=${SMTP_FROM}
-ENV DATABASE_URL=${DATABASE_URL}
-ENV APP_URL=${APP_URL}
-ENV SVIX_URL=${SVIX_URL}
-ENV SVIX_API_KEY=${SVIX_API_KEY}
+ENV NEXTAUTH_URL=http://dev.platform.unicis.tech:4002
+ENV NEXTAUTH_SECRET=3Ala9FTcgaUG2y4kYvKaeo2E04kmQyMeaWZb7cXSewg=
+ENV SMTP_HOST=unicis.tech
+ENV SMTP_PORT=587
+ENV SMTP_USER=info@unicis.tech
+ENV SMTP_PASSWORD=Ch!n@5Y€51nflu3nceD3v€1opingCh!n@s
+ENV SMTP_FROM=info@unicis.tech
+ENV DATABASE_URL=postgresql://platform:7emp1eAppe4rance5Rang3I5BNOffice@db.unicis.tech/unicis_platform?schema=platform
+ENV APP_URL=http://dev.platform.unicis.tech:4002
+ENV SVIX_URL=https://api.eu.svix.com
+ENV SVIX_API_KEY=testsk_CYQgpc0x7u_q6Vndh4DGD43lvB2OW5Z1.eu
 
 # Build the Next.js app
 RUN npm run build
