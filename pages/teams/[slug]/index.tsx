@@ -1,3 +1,6 @@
+import TeamMembers from "./members";
+
+export default TeamMembers
 // import type { NextPageWithLayout } from "types";
 // import { useState } from "react";
 // import { Button } from "react-daisyui";
