@@ -17,7 +17,8 @@ COPY . .
 EXPOSE 4002
 
 # Set the DATABASE_URL environment variable
-ENV DATABASE_URL="postgresql://platform:7emp1eAppe4rance5Rang3I5BNOffice@db.unicis.tech/unicis_platform?schema=platform"
+ENV VAR_NAME_HERE=${VAR_NAME_HERE}
+# ENV DATABASE_URL="postgresql://platform:7emp1eAppe4rance5Rang3I5BNOffice@db.unicis.tech/unicis_platform?schema=platform"
 
 # Build the Next.js app
 RUN npm run build
