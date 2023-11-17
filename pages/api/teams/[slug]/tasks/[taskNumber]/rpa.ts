@@ -50,6 +50,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   if (!task) {
+    console.log('no task after saveprocedure')
     return res.status(400).json({
       error: {
         message: 'Something went wrong!',

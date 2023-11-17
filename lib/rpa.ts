@@ -71,6 +71,8 @@ export const saveProcedure = async (params: {
     },
   });
 
+  console.log('saveProcedure task', task)
+
   if (!task) {
     return null;
   }
@@ -78,6 +80,8 @@ export const saveProcedure = async (params: {
   const taskId = task.id;
   const taskProperties = task?.properties as TaskProperties;
   taskProperties.rpa_procedure = nextProcedure;
+
+  console.log('taskProperties updated in saveprocedure')
 
   const updatedTask = await prisma.task.update({
     where: {
@@ -90,6 +94,8 @@ export const saveProcedure = async (params: {
     },
   });
 
+  console.log('updated task in saveprocedure', updatedTask)
+
   await addAuditLogs({
     taskId,
     taskProperties,
@@ -97,6 +103,8 @@ export const saveProcedure = async (params: {
     prevProcedure,
     nextProcedure,
   });
+
+  console.log('after addAuditLogs in saveprocedure')
 
   return updatedTask;
 };
