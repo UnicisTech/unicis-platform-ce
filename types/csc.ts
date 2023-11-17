@@ -40,23 +40,23 @@ export type Section = {
   value: string;
 };
 
-export type ISO = "default" | "2013" | "2022"
+export type ISO = 'default' | '2013' | '2022';
 
 type CscStatusesPropMap = {
-  default: "csc_statuses";
-  2013: "csc_statuses_2013";
-  2022: "csc_statuses_2022";
+  default: 'csc_statuses';
+  2013: 'csc_statuses_2013';
+  2022: 'csc_statuses_2022';
 };
 
 export type CscStatusesProp = CscStatusesPropMap[ISO];
 
 type CscControlsPropMap = {
-  default: "csc_controls";
-  2013: "csc_controls_2013";
-  2022: "csc_controls_2022";
+  default: 'csc_controls';
+  2013: 'csc_controls_2013';
+  2022: 'csc_controls_2022';
 };
 
-export type CscControlsProp = CscControlsPropMap[ISO]
+export type CscControlsProp = CscControlsPropMap[ISO];
 
 export type TeamCscProperties = {
   csc_iso?: ISO;
@@ -67,4 +67,4 @@ export type TeamCscProperties = {
 export type TaskCscProperties = {
   csc_controls?: string[];
   csc_audit_logs: CscAuditLog[];
-}
+};

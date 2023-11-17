@@ -21,7 +21,11 @@ import { getCscStatusesBySlug } from 'models/team';
 import type { Option } from 'types';
 import useISO from 'hooks/useISO';
 
-const CscDashboard = ({ csc_statuses }: { csc_statuses: { [key: string]: string } }) => {
+const CscDashboard = ({
+  csc_statuses,
+}: {
+  csc_statuses: { [key: string]: string };
+}) => {
   const router = useRouter();
   const { slug } = router.query;
 
@@ -36,21 +40,24 @@ const CscDashboard = ({ csc_statuses }: { csc_statuses: { [key: string]: string 
   const { tasks, mutateTasks } = useTeamTasks(slug as string);
   const { ISO } = useISO(team);
 
-  const statusHandler = useCallback(async (control: string, value: string) => {
-    const response = await axios.put(`/api/teams/${slug}/csc`, {
-      control,
-      value,
-    });
+  const statusHandler = useCallback(
+    async (control: string, value: string) => {
+      const response = await axios.put(`/api/teams/${slug}/csc`, {
+        control,
+        value,
+      });
 
-    const { data, error } = response.data;
+      const { data, error } = response.data;
 
-    if (error) {
-      toast.error(error.message);
-      return;
-    }
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
 
-    setStatuses(data.statuses);
-  }, [slug]);
+      setStatuses(data.statuses);
+    },
+    [slug]
+  );
 
   const taskSelectorHandler = useCallback(
     async (action: string, dataToRemove: any, control: string) => {

@@ -1,14 +1,23 @@
 import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
-import type { ISO, CscStatusesProp, CscControlsProp, TaskProperties } from 'types';
+import type {
+  ISO,
+  CscStatusesProp,
+  CscControlsProp,
+  TaskProperties,
+} from 'types';
 
 export const getCscControlsProp = (ISO: ISO): CscControlsProp => {
-  const cscStatusesProp = `csc_controls${ISO !== 'default' ? `_${ISO}` : ''}` as CscControlsProp;
+  const cscStatusesProp = `csc_controls${
+    ISO !== 'default' ? `_${ISO}` : ''
+  }` as CscControlsProp;
   return cscStatusesProp;
 };
 
-export const getCscStatusesProp = (ISO: ISO) : CscStatusesProp => {
-  const cscStatusesProp = `csc_statuses${ISO !== 'default' ? `_${ISO}` : ''}` as CscStatusesProp;
+export const getCscStatusesProp = (ISO: ISO): CscStatusesProp => {
+  const cscStatusesProp = `csc_statuses${
+    ISO !== 'default' ? `_${ISO}` : ''
+  }` as CscStatusesProp;
   return cscStatusesProp;
 };
 

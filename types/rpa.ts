@@ -51,7 +51,7 @@ export type RpaAuditLog = {
   actor: Session['user'];
   date: number;
   event: string;
-  diff: Diff
+  diff: Diff;
 };
 
 export type TaskWithRpaProcedure = Task & {
@@ -63,4 +63,4 @@ export type TaskWithRpaProcedure = Task & {
 export type TaskRpaProperties = {
   rpa_procedure?: RpaProcedureInterface | [];
   rpa_audit_logs: RpaAuditLog[];
-}
+};

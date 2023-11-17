@@ -264,7 +264,7 @@ export const getCscStatusesBySlug = async (slug: string) => {
     },
   });
 
-  const teamProperties = team ? team.properties as TeamProperties : {};
+  const teamProperties = team ? (team.properties as TeamProperties) : {};
   const iso = teamProperties.csc_iso || 'default';
   const cscStatusesProp = getCscStatusesProp(iso);
 
@@ -309,7 +309,7 @@ export const setCscStatus = async ({
     },
   });
 
-  const teamProperties = team ? team.properties as TeamProperties : {};
+  const teamProperties = team ? (team.properties as TeamProperties) : {};
 
   const iso = teamProperties.csc_iso || 'default';
 
@@ -349,7 +349,7 @@ export const getCscIso = async ({
 
   console.log('getCscIso team', team);
 
-  const teamProperties = team ? team.properties as TeamProperties : {};
+  const teamProperties = team ? (team.properties as TeamProperties) : {};
 
   if (teamProperties?.csc_iso) {
     return teamProperties?.csc_iso;
@@ -388,7 +388,7 @@ export const setCscIso = async ({
     },
   });
 
-  const teamProperties = team ? team.properties as TeamProperties : {};
+  const teamProperties = team ? (team.properties as TeamProperties) : {};
 
   const updatedProperties = {
     ...teamProperties,

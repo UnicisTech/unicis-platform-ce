@@ -6,7 +6,6 @@ import iso2022Json from '../ISO-CSC-controls-2022.json';
 import { Section } from 'types';
 // import { Control, IsoControlMap, Section } from 'types';
 
-
 // const controls = json['MVPS-Controls'];
 
 const controls = {

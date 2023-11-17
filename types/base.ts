@@ -112,9 +112,11 @@ export type Diff = {
 
 export type TeamMemberWithUser = TeamMember & { user: User };
 
-export type TeamProperties = TeamCscProperties
+export type TeamProperties = TeamCscProperties;
 
-export type TaskProperties = TaskTiaProperties & TaskCscProperties & TaskRpaProperties
+export type TaskProperties = TaskTiaProperties &
+  TaskCscProperties &
+  TaskRpaProperties;
 
 // export type TeamProperties = {
 //   csc_iso?: ISO;

@@ -22,7 +22,11 @@ import { Team } from '@prisma/client';
 import { getCscStatusesBySlug } from 'models/team';
 import { CreateTIA, TiaAuditLogs, TiaPanel } from '@/components/interfaces/TIA';
 
-const TaskById = ({ csc_statuses }: { csc_statuses: { [key: string]: string } }) => {
+const TaskById = ({
+  csc_statuses,
+}: {
+  csc_statuses: { [key: string]: string };
+}) => {
   const [rpaVisible, setRpaVisible] = useState(false);
   const [tiaVisible, setTiaVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('Overview');

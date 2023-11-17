@@ -28,7 +28,7 @@ export type TiaAuditLog = {
   actor: Session['user'];
   date: number;
   event: string;
-  diff: Diff
+  diff: Diff;
 };
 
 export const defaultProcedure = [
@@ -209,7 +209,7 @@ export type TaskWithTiaProcedure = Task & {
 export type TaskTiaProperties = {
   tia_procedure?: TiaProcedureInterface | [];
   tia_audit_logs: TiaAuditLog[];
-}
+};
 
 // export type Diff = {
 //   field: string;

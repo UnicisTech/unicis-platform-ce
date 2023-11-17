@@ -17,7 +17,7 @@ const CSCSettings = ({ team }: { team: Team }) => {
 
   const formik = useFormik({
     initialValues: {
-      iso: (teamProperties.csc_iso) || 'default',
+      iso: teamProperties.csc_iso || 'default',
     },
     validationSchema: Yup.object().shape({
       iso: Yup.string().required('Choose ISO set'),

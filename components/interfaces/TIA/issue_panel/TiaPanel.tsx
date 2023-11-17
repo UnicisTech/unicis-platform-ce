@@ -188,7 +188,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
                 value={
                   config['EncryptionInTransit'].find(
                     ({ value }) => value === procedure[1].EncryptionInTransit
-                  )?.label || ""
+                  )?.label || ''
                 }
               />
               <Field
@@ -200,7 +200,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
                 value={
                   config['TransferMechanism'].find(
                     ({ value }) => value === procedure[1].TransferMechanism
-                  )?.label || ""
+                  )?.label || ''
                 }
               />
               <Field
@@ -212,7 +212,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
                 value={
                   config['LawfulAccess'].find(
                     ({ value }) => value === procedure[1].LawfulAccess
-                  )?.label || ""
+                  )?.label || ''
                 }
               />
               <Field
@@ -225,7 +225,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
                   config['MassSurveillanceTelecommunications'].find(
                     ({ value }) =>
                       value === procedure[1].MassSurveillanceTelecommunications
-                  )?.label || ""
+                  )?.label || ''
                 }
               />
               <Field
@@ -240,7 +240,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
                   config['SelfReportingObligations'].find(
                     ({ value }) =>
                       value === procedure[1].SelfReportingObligations
-                  )?.label || ""
+                  )?.label || ''
                 }
               />
               <Field

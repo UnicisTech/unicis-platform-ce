@@ -326,8 +326,8 @@ const СreateFormBody = ({
                       <ErrorMessage>{error}</ErrorMessage>
                     ) : (
                       <HelperMessage>
-                        Legal analysis on the lawful access laws of importer&apos;s
-                        country
+                        Legal analysis on the lawful access laws of
+                        importer&apos;s country
                       </HelperMessage>
                     )}
                   </WithoutRing>
@@ -747,8 +747,9 @@ const СreateFormBody = ({
                         In the past 5-10 years, the importer was already
                         required to produce the type of data at issue following
                         such a warrant or subpoena from a local authority (or,
-                        to the importer&apos;s best knowledge, one of its providers
-                        was required to grant access to the importer&apos;s data)
+                        to the importer&apos;s best knowledge, one of its
+                        providers was required to grant access to the
+                        importer&apos;s data)
                       </HelperMessage>
                       <RadioGroup
                         {...fieldProps}
