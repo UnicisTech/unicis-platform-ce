@@ -12,9 +12,9 @@ const RpaAuditLogs = ({ task }: { task: Task }) => {
       <div style={{ backgroundColor: 'white', padding: '10px 20px' }}>
         <h2 className="text-1xl font-bold">RPA audit logs</h2>
         {auditLogs &&
-          auditLogs.reverse().map((log) => {
+          auditLogs.reverse().map((log, index) => {
             return (
-              <div style={{ margin: '15px' }}>
+              <div key={index} style={{ margin: '15px' }}>
                 <p>User: {log.actor.name}</p>
                 <p>Action: {log.event}</p>
                 <p>Date: {new Date(log.date).toLocaleDateString()}</p>

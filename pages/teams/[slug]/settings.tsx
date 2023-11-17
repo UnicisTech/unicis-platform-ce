@@ -15,7 +15,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Settings = ({ teamFeatures }) => {
   const { t } = useTranslation('common');
-  const { isLoading, isError, team, mutateTeam } = useTeam();
+  const { isLoading, isError, team } = useTeam();
 
   if (isLoading) {
     return <Loading />;

@@ -6,11 +6,6 @@ interface CardProps {
   button?: React.ReactNode;
 }
 
-interface CardBodyProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
 const Card = (props: CardProps) => {
   const { heading, children, button } = props;
 

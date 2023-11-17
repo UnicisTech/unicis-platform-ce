@@ -112,7 +112,7 @@ const CreateTask = ({
                   label="Title"
                   isRequired
                 >
-                  {({ fieldProps, error }) => (
+                  {({ fieldProps }) => (
                     <Fragment>
                       <TextField autoComplete="off" {...fieldProps} />
                     </Fragment>

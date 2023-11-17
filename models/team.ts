@@ -1,4 +1,3 @@
-import json from '@/components/defaultLanding/data/MVPS-controls.json';
 import { prisma } from '@/lib/prisma';
 import { getCscStatusesProp } from '@/lib/csc';
 import { getSession } from '@/lib/session';
@@ -6,8 +5,7 @@ import { findOrCreateApp } from '@/lib/svix';
 import { Role } from '@prisma/client';
 import { controls } from '@/components/defaultLanding/data/configs/csc';
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-// const controls = json['MVPS-Controls'];
+import type { TeamProperties } from 'types';
 
 export const createTeam = async (param: {
   userId: string;
@@ -266,7 +264,7 @@ export const getCscStatusesBySlug = async (slug: string) => {
     },
   });
 
-  const teamProperties: any = team ? team.properties : {};
+  const teamProperties = team ? team.properties as TeamProperties : {};
   const iso = teamProperties.csc_iso || 'default';
   const cscStatusesProp = getCscStatusesProp(iso);
 
@@ -311,9 +309,9 @@ export const setCscStatus = async ({
     },
   });
 
-  const teamProperties: any = team ? team.properties : {};
+  const teamProperties = team ? team.properties as TeamProperties : {};
 
-  const iso = teamProperties.csc_iso;
+  const iso = teamProperties.csc_iso || 'default';
 
   const cscStatusesProp = getCscStatusesProp(iso);
 
@@ -351,7 +349,7 @@ export const getCscIso = async ({
 
   console.log('getCscIso team', team);
 
-  const teamProperties: any = team ? team.properties : {};
+  const teamProperties = team ? team.properties as TeamProperties : {};
 
   if (teamProperties?.csc_iso) {
     return teamProperties?.csc_iso;
@@ -390,7 +388,7 @@ export const setCscIso = async ({
     },
   });
 
-  const teamProperties: any = team ? team.properties : {};
+  const teamProperties = team ? team.properties as TeamProperties : {};
 
   const updatedProperties = {
     ...teamProperties,

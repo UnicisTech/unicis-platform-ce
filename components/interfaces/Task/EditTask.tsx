@@ -48,7 +48,7 @@ const EditTask = ({
   return (
     <Modal open={visible}>
       <Form<FormData>
-        onSubmit={async (data, { reset }) => {
+        onSubmit={async (data) => {
           const { title, status, duedate, description } = data;
           const response = await axios.put<ApiResponse<Task>>(
             `/api/teams/${team.slug}/tasks/${task.taskNumber}`,
@@ -94,7 +94,7 @@ const EditTask = ({
                   isRequired
                   defaultValue={task?.title}
                 >
-                  {({ fieldProps, error }) => (
+                  {({ fieldProps }) => (
                     <Fragment>
                       <TextField autoComplete="off" {...fieldProps} />
                     </Fragment>

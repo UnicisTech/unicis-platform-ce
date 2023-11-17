@@ -1,5 +1,6 @@
 import type { Task } from '@prisma/client';
 import type { Session } from 'next-auth';
+import type { Diff } from './base';
 
 export type RpaOption = {
   label: string;
@@ -50,10 +51,7 @@ export type RpaAuditLog = {
   actor: Session['user'];
   date: number;
   event: string;
-  diff: {
-    prevValue: string | string[] | undefined;
-    nextValue: string | string[];
-  } | null;
+  diff: Diff
 };
 
 export type TaskWithRpaProcedure = Task & {
@@ -62,9 +60,7 @@ export type TaskWithRpaProcedure = Task & {
   };
 };
 
-export type ChangeLog = {
-  actor: Session['user'];
-  date: number;
-  event: string;
-  diff: any;
-};
+export type TaskRpaProperties = {
+  rpa_procedure?: RpaProcedureInterface | [];
+  rpa_audit_logs: RpaAuditLog[];
+}

@@ -26,7 +26,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   throwIfNotAllowed(teamMember, 'team', 'read');
 
   const { slug } = req.query;
-  const { control, value, ISO } = req.body;
+  const { control, value } = req.body;
 
   const statuses = await setCscStatus({
     slug: slug as string,

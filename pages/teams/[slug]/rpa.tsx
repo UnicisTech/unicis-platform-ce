@@ -9,7 +9,7 @@ import useTeam from 'hooks/useTeam';
 import { GetServerSidePropsContext } from 'next';
 import useTeamTasks from 'hooks/useTeamTasks';
 import useCanAccess from 'hooks/useCanAccess';
-import type { TaskWithRpaProcedure } from 'types';
+import type { TaskWithRpaProcedure, TaskProperties } from 'types';
 import {
   CreateRPA,
   RpaTable,
@@ -45,7 +45,7 @@ const RpaDashboard: NextPageWithLayout<
       return [];
     }
     return tasks.filter((task) => {
-      const taskProperties = task.properties as any;
+      const taskProperties = task.properties as TaskProperties;
       const procedure = taskProperties.rpa_procedure;
       return procedure;
     }) as TaskWithRpaProcedure[];
@@ -146,8 +146,7 @@ const RpaDashboard: NextPageWithLayout<
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const { locale, query }: GetServerSidePropsContext = context;
-  const slug = query.slug as string;
+  const { locale }: GetServerSidePropsContext = context;
 
   return {
     props: {

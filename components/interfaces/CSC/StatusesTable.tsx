@@ -7,7 +7,7 @@ import type { CscOption } from 'types';
 import type { Task } from '@prisma/client';
 import usePagination from 'hooks/usePagination';
 import useCanAccess from 'hooks/useCanAccess';
-import { ControlOption } from 'types';
+import { ControlOption, ISO } from 'types';
 import { TailwindTableWrapper } from 'sharedStyles';
 import TasksList from './TasksList';
 
@@ -21,7 +21,7 @@ const StatusesTable = ({
   statusHandler,
   taskSelectorHandler,
 }: {
-  ISO: string;
+  ISO: ISO;
   tasks: Array<Task>;
   statuses: any;
   sectionFilter: null | Array<{ label: string; value: string }>;
@@ -114,7 +114,7 @@ const StatusesTable = ({
               </tr>
             </thead>
             <tbody>
-              {pageData.map((option, index) => (
+              {pageData.map((option) => (
                 <tr
                   key={option.value.control}
                   className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"

@@ -9,7 +9,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import Select from '@atlaskit/select';
-import Button, { LoadingButton } from '@atlaskit/button';
+import { LoadingButton } from '@atlaskit/button';
 import TrashIcon from '@atlaskit/icon/glyph/trash';
 import TextArea from '@atlaskit/textarea';
 import Textfield from '@atlaskit/textfield';

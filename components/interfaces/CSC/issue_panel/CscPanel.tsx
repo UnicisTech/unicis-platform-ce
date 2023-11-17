@@ -16,6 +16,7 @@ import { IssuePanelContainer } from 'sharedStyles';
 import useCanAccess from 'hooks/useCanAccess';
 import ControlBlockViewOnly from './ControlBlockViewOnly';
 import { getCscControlsProp } from '@/lib/csc';
+import type { ISO } from 'types';
 
 const CscPanel = ({
   task,
@@ -26,7 +27,7 @@ const CscPanel = ({
 }: {
   task: Task;
   statuses: { [key: string]: string };
-  ISO: string;
+  ISO: ISO;
   setStatuses: Dispatch<
     SetStateAction<{
       [key: string]: string;

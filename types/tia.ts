@@ -1,5 +1,6 @@
 import type { Task } from '@prisma/client';
 import type { Session } from 'next-auth';
+import type { Diff } from './base';
 
 type R_Yes_No = 'yes' | 'no';
 
@@ -27,10 +28,7 @@ export type TiaAuditLog = {
   actor: Session['user'];
   date: number;
   event: string;
-  diff: {
-    prevValue: string | string[] | undefined;
-    nextValue: string | string[];
-  } | null;
+  diff: Diff
 };
 
 export const defaultProcedure = [
@@ -207,3 +205,14 @@ export type TaskWithTiaProcedure = Task & {
     tia_procedure: TiaProcedureInterface;
   };
 };
+
+export type TaskTiaProperties = {
+  tia_procedure?: TiaProcedureInterface | [];
+  tia_audit_logs: TiaAuditLog[];
+}
+
+// export type Diff = {
+//   field: string;
+//   prevValue: string | string[] | undefined;
+//   nextValue: string | string[];
+// } | null;

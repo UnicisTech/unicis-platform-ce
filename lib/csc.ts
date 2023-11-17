@@ -1,13 +1,14 @@
 import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
+import type { ISO, CscStatusesProp, CscControlsProp, TaskProperties } from 'types';
 
-export const getCscControlsProp = (ISO: string) => {
-  const cscStatusesProp = `csc_controls${ISO !== 'default' ? `_${ISO}` : ''}`;
+export const getCscControlsProp = (ISO: ISO): CscControlsProp => {
+  const cscStatusesProp = `csc_controls${ISO !== 'default' ? `_${ISO}` : ''}` as CscControlsProp;
   return cscStatusesProp;
 };
 
-export const getCscStatusesProp = (ISO: string) => {
-  const cscStatusesProp = `csc_statuses${ISO !== 'default' ? `_${ISO}` : ''}`;
+export const getCscStatusesProp = (ISO: ISO) : CscStatusesProp => {
+  const cscStatusesProp = `csc_statuses${ISO !== 'default' ? `_${ISO}` : ''}` as CscStatusesProp;
   return cscStatusesProp;
 };
 
@@ -16,7 +17,7 @@ export const addControlsToIssue = async (params: {
   taskNumber: number;
   slug: string;
   controls: string[];
-  ISO: string;
+  ISO: ISO;
 }) => {
   const { taskNumber, slug, controls, user, ISO } = params;
   const task = await prisma.task.findFirst({
@@ -34,7 +35,7 @@ export const addControlsToIssue = async (params: {
 
   const cscStatusesProp = getCscControlsProp(ISO);
   const taskId = task.id;
-  const taskProperties = task?.properties as any;
+  const taskProperties = task?.properties as TaskProperties;
   let csc_controls = taskProperties?.[cscStatusesProp];
 
   if (typeof csc_controls === 'undefined') {
@@ -71,7 +72,7 @@ export const removeControlsFromIssue = async (params: {
   taskNumber: number;
   slug: string;
   controls: string[];
-  ISO: string;
+  ISO: ISO;
 }) => {
   const { taskNumber, slug, controls, user, ISO } = params;
   const task = await prisma.task.findFirst({
@@ -89,7 +90,7 @@ export const removeControlsFromIssue = async (params: {
 
   const cscStatusesProp = getCscControlsProp(ISO);
   const taskId = task.id;
-  const taskProperties = task?.properties as any;
+  const taskProperties = task?.properties as TaskProperties;
   const csc_controls = taskProperties?.[cscStatusesProp] as Array<string>;
   const new_csc_controls = csc_controls.filter(
     (item) => !controls.includes(item)
@@ -123,7 +124,7 @@ export const changeControlInIssue = async (params: {
   taskNumber: number;
   slug: string;
   controls: string[];
-  ISO: string;
+  ISO: ISO;
 }) => {
   const { taskNumber, slug, controls, user, ISO } = params;
   const [oldControl, newControl] = controls;
@@ -142,7 +143,7 @@ export const changeControlInIssue = async (params: {
 
   const cscStatusesProp = getCscControlsProp(ISO);
   const taskId = task.id;
-  const taskProperties = task?.properties as any;
+  const taskProperties = task?.properties as TaskProperties;
   const csc_controls = taskProperties?.[cscStatusesProp] as Array<string>;
 
   const new_csc_controls = csc_controls.map((control) => {
@@ -181,7 +182,7 @@ export const addAuditLog = async (params: {
   event: string;
   prevValue: string | null;
   nextValue: string;
-  taskProperties: any;
+  taskProperties: TaskProperties;
 }) => {
   const { taskId, user, event, prevValue, nextValue, taskProperties } = params;
 

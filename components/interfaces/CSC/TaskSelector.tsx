@@ -3,7 +3,7 @@ import Select from '@atlaskit/select';
 import { WithoutRing } from 'sharedStyles';
 import { getCscControlsProp } from '@/lib/csc';
 import type { Task } from '@prisma/client';
-import type { CscOption } from 'types';
+import type { CscOption, ISO } from 'types';
 
 const TaskSelector = ({
   tasks,
@@ -18,7 +18,7 @@ const TaskSelector = ({
     dataToRemove: any,
     control: string
   ) => Promise<void>;
-  ISO: string;
+  ISO: ISO;
 }) => {
   const [value, setValue] = useState<CscOption[]>([]);
   const [options, setOptions] = useState<CscOption[]>([]);

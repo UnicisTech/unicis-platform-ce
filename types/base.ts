@@ -1,4 +1,7 @@
 import type { Prisma, TeamMember, User } from '@prisma/client';
+import type { TaskCscProperties, TeamCscProperties } from './csc';
+import type { TaskTiaProperties } from './tia';
+import type { TaskRpaProperties } from './rpa';
 
 export type ApiError = {
   code?: string;
@@ -101,4 +104,19 @@ export type Option = {
   value: number;
 };
 
+export type Diff = {
+  field: string;
+  prevValue: string | string[] | undefined;
+  nextValue: string | string[];
+} | null;
+
 export type TeamMemberWithUser = TeamMember & { user: User };
+
+export type TeamProperties = TeamCscProperties
+
+export type TaskProperties = TaskTiaProperties & TaskCscProperties & TaskRpaProperties
+
+// export type TeamProperties = {
+//   csc_iso?: ISO;
+//   [key in CscStatusesProp | CscControlsProp]?: string;
+// };

@@ -16,9 +16,10 @@ const TaskTab = ({
         className="-mb-px flex space-x-5 border-b border-gray-300"
         aria-label="Tabs"
       >
-        {navigations.map((menu) => {
+        {navigations.map((menu, index) => {
           return (
             <a
+              key={index}
               className={classNames(
                 'inline-flex items-center border-b-2 py-4 text-sm font-medium cursor-pointer',
                 menu.active

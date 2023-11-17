@@ -53,6 +53,7 @@ const PerPageSelector = ({ perPage, setPerPage }: PerPageSelectorProps) => {
         >
           {perPageOptions.map((item, index) => (
             <div
+              key={index}
               onClick={() => {
                 if (tabRef.current) {
                   tabRef.current.style.display = 'none';

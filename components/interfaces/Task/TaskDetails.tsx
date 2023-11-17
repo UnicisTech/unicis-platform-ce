@@ -44,7 +44,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
   return (
     <IssuePanelContainer>
       <Form<FormData>
-        onSubmit={async (data, { reset }) => {
+        onSubmit={async (data) => {
           if (!isFormChanged) {
             return;
           }
@@ -92,7 +92,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                 isRequired
                 defaultValue={task?.title}
               >
-                {({ fieldProps, error }) => (
+                {({ fieldProps }) => (
                   <Fragment>
                     <TextField
                       autoComplete="off"

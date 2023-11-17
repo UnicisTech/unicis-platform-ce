@@ -4,11 +4,9 @@ import type { NextPageWithLayout } from 'types';
 import { Card } from '@/components/shared';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { GetServerSidePropsContext, InferGetStaticPropsType } from 'next';
+import { GetServerSidePropsContext } from 'next';
 
-const Dashboard: NextPageWithLayout = (
-  props: InferGetStaticPropsType<typeof getStaticProps>
-) => {
+const Dashboard: NextPageWithLayout = () => {
   const { data: session } = useSession();
 
   const { t } = useTranslation('common');

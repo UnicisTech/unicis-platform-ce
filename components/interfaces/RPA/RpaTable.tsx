@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import Lozenge from '@atlaskit/lozenge';
 import { SimpleTag as Tag } from '@atlaskit/tag';
 import statuses from '@/components/defaultLanding/data/statuses.json';
 import type { TaskWithRpaProcedure } from 'types';

@@ -1,20 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
-import Lozenge from '@atlaskit/lozenge';
 import { SimpleTag as Tag } from '@atlaskit/tag';
-import statuses from '@/components/defaultLanding/data/statuses.json';
-import type { TaskWithRpaProcedure, TaskWithTiaProcedure } from 'types';
+import type { TaskWithTiaProcedure } from 'types';
 import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import useCanAccess from 'hooks/useCanAccess';
 import { TailwindTableWrapper } from 'sharedStyles';
-import {
-  config,
-  headers,
-  fieldPropsMapping,
-  questions,
-} from '@/components/defaultLanding/data/configs/tia';
 
 const TiaTable = ({
   slug,

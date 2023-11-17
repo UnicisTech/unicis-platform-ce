@@ -3,7 +3,9 @@ import defaultJson from '../MVPS-controls.json';
 import iso2013Json from '../ISO-CSC-controls-2013.json';
 import iso2022Json from '../ISO-CSC-controls-2022.json';
 
-import { Control, IsoControlMap, Section } from 'types';
+import { Section } from 'types';
+// import { Control, IsoControlMap, Section } from 'types';
+
 
 // const controls = json['MVPS-Controls'];
 

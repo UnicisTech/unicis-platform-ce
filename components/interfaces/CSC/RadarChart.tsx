@@ -9,9 +9,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
-//TODO: GETSECTIONS INSTEAD OF SECTIONS
 import {
-  sections,
   controls,
   statusOptions,
   getRadarChartLabels,
@@ -28,30 +26,6 @@ ChartJS.register(
   Legend
 );
 
-// const mergeSections = (sections, points) => {
-//   const mergedSections = {};
-//   const mergedPoints = [];
-
-//   for (let i = 0; i < sections.length; i++) {
-//     const sectionLabel = sections[i].label;
-//     const sectionKey = sectionLabel.split(' - ')[0];
-
-//     if (!mergedSections[sectionKey]) {
-//       mergedSections[sectionKey] = {
-//         label: sectionKey,
-//         value: sectionKey,
-//       };
-//       mergedPoints.push(0);
-//     }
-
-//     mergedPoints[sections.indexOf(sections[i])] += points[i];
-//   }
-
-//   mergedPoints.filter(points => !isNaN(points))
-
-//   return mergedPoints;
-// }
-
 const getMaturityLevels = (
   statuses: { [key: string]: string },
   ISO: string
@@ -63,7 +37,6 @@ const getMaturityLevels = (
       const totalControls = controls[ISO].filter(
         ({ Section }) => Section === label
       ).map(({ Control }) => Control);
-      console.log('totalControls', { totalControls, statusOptions, statuses });
       const totalControlsValue = totalControls.reduce(
         (accumulator, control) =>
           (statusOptions.find(({ label }) => label === statuses[control])
@@ -78,27 +51,8 @@ const getMaturityLevels = (
     return roundedData;
   } else {
     const mergedPoints = mergePoints(roundedData);
-    console.log('mergedPoints', { mergedPoints, roundedData });
     return mergedPoints;
   }
-  // if (typeof statusOptions === "undefined") {
-  //   return
-  // }
-  // const data = sections
-  //   .map(({ label }) => label)
-  //   .map((label) => {
-  //     const totalControls = controls[ISO]
-  //       .filter(({ Section }) => Section === label)
-  //       .map(({ Control }) => Control);
-  //     const totalControlsValue = totalControls.reduce(
-  //       (accumulator, control) =>
-  //         statusOptions.find(({ label }) => label === statuses[control])?.value! + accumulator,
-  //       0
-  //     );
-  //     return totalControlsValue / totalControls.length;
-  //   });
-  // const roundedData = data.map((value) => Math.round(value));
-  // return roundedData;
 };
 
 const RadarChart = ({
@@ -108,7 +62,6 @@ const RadarChart = ({
   statuses: { [key: string]: string };
   ISO: string;
 }) => {
-  //getMaturityLevels(statuses);
   const options = {
     plugins: {
       legend: {
@@ -125,7 +78,6 @@ const RadarChart = ({
     responsive: true,
   };
   const data = {
-    // labels: sections.map(({ label }) => label).map((label) => label.split(" ")),
     labels: getRadarChartLabels(ISO),
     datasets: [
       {

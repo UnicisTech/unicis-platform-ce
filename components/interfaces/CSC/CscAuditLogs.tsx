@@ -13,9 +13,9 @@ const CscAuditLogs = ({ task }: { task: Task }) => {
         {auditLogs &&
           auditLogs
             .sort((a, b) => b.date - a.date)
-            .map((log) => {
+            .map((log, index) => {
               return (
-                <div style={{ margin: '15px' }}>
+                <div key={index} style={{ margin: '15px' }}>
                   <p>User: {log.actor.name}</p>
                   <p>Action: {log.event}</p>
                   <p>Date: {new Date(log.date).toLocaleDateString()}</p>

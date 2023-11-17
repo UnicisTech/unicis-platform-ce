@@ -33,8 +33,8 @@ export default function AddComment({
   return (
     <IssuePanelContainer>
       <div style={{ marginTop: '30px' }}>
-        {task.comments.map((comment) => (
-          <div style={{ margin: '15px' }}>
+        {task.comments.map((comment, index) => (
+          <div key={index} style={{ margin: '15px' }}>
             <div className="flex gap-3.5">
               <p className="font-bold ...">{comment.createdBy.name}</p>
               <p>{formatDate(String(comment.createdAt))}</p>

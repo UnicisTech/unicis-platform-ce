@@ -1,4 +1,4 @@
-import { setCscStatus, setCscIso, getCscIso } from 'models/team';
+import { setCscIso, getCscIso } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';

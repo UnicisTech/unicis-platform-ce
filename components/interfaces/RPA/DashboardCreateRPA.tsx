@@ -36,7 +36,7 @@ const DashboardCreateRPA = ({
   const [stage, setStage] = useState(0);
   const [validationMessage, setValidationMessage] = useState('');
   const [procedure, setProcedure] = useState<any[]>([]);
-  const [prevProcedure, setPrevProcedure] = useState<any[]>([]);
+  const [prevProcedure] = useState<any[]>([]);
 
   const tasksWithoutProcedures = useMemo<Array<Task>>(() => {
     if (!tasks) {
@@ -97,7 +97,7 @@ const DashboardCreateRPA = ({
 
   const validate = useCallback((formData: any) => {
     if (formData.reviewDate != null) {
-      let date = new Date();
+      const date = new Date();
       date.setHours(0, 0, 0, 0);
       if (new Date(formData.reviewDate) <= date) {
         return 'Review Date must not be in the past';

@@ -1,18 +1,15 @@
 import { getAxiosError } from '@/lib/common';
 import axios from 'axios';
-import type { Team } from '@prisma/client';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { useTranslation } from 'next-i18next';
-import type { ApiResponse } from 'types';
+import type { ApiResponse, ISO } from 'types';
 
 type IsoApiResponse = {
-  iso: string;
+  iso: ISO;
 };
 
 const useISO = (team: any) => {
-  const [ISO, setISO] = useState<string | null>(null);
-  const { t } = useTranslation('common');
+  const [ISO, setISO] = useState<ISO | null>(null);
 
   useEffect(() => {
     const asyncEffect = async () => {

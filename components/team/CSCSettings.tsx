@@ -8,16 +8,16 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
-import type { ApiResponse } from 'types';
+import type { ApiResponse, TeamProperties } from 'types';
 import * as Yup from 'yup';
 
 const CSCSettings = ({ team }: { team: Team }) => {
   const { t } = useTranslation('common');
-  const teamProperties = team.properties as any;
+  const teamProperties = team.properties as TeamProperties;
 
   const formik = useFormik({
     initialValues: {
-      iso: (teamProperties.csc_iso as string) || 'default',
+      iso: (teamProperties.csc_iso) || 'default',
     },
     validationSchema: Yup.object().shape({
       iso: Yup.string().required('Choose ISO set'),

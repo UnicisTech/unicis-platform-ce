@@ -1,17 +1,10 @@
-import { Card, InputWithLabel } from '@/components/shared';
-import { getAxiosError } from '@/lib/common';
+import { Card } from '@/components/shared';
 import { Team } from '@prisma/client';
-import axios from 'axios';
 import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import React from 'react';
 import { Button } from 'react-daisyui';
-import toast from 'react-hot-toast';
-import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
-
-import { AccessControl } from '../shared/AccessControl';
 
 const availableSubscription = [
   {
@@ -29,7 +22,6 @@ const availableSubscription = [
 ];
 
 const Billing = ({ team }: { team: Team }) => {
-  const router = useRouter();
   const { t } = useTranslation('common');
 
   const formik = useFormik({
@@ -44,7 +36,7 @@ const Billing = ({ team }: { team: Team }) => {
       domain: Yup.string().nullable(),
     }),
     enableReinitialize: true,
-    onSubmit: async (values) => {
+    onSubmit: async () => {
       // try {
       //   const response = await axios.put<ApiResponse<Team>>(
       //     `/api/teams/${team.slug}`,

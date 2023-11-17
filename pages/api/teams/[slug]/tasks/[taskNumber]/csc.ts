@@ -4,6 +4,7 @@ import {
   removeControlsFromIssue,
 } from '@/lib/csc';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import type { ISO } from 'types';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 
@@ -49,7 +50,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       taskNumber: taskNumberAsNumber,
       slug: slug as string,
       controls,
-      ISO: ISO as string,
+      ISO: ISO as ISO,
     });
   }
 
@@ -59,7 +60,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       taskNumber: taskNumberAsNumber,
       slug: slug as string,
       controls,
-      ISO: ISO as string,
+      ISO: ISO as ISO,
     });
   }
 
@@ -69,7 +70,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       taskNumber: taskNumberAsNumber,
       slug: slug as string,
       controls,
-      ISO: ISO as string,
+      ISO: ISO as ISO,
     });
   }
 

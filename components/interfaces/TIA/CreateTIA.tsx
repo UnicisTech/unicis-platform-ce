@@ -225,7 +225,7 @@ const CreateTIA = ({
 
   const validate = useCallback((formData: any) => {
     if (formData.reviewDate != null) {
-      let date = new Date();
+      const date = new Date();
       date.setHours(0, 0, 0, 0);
       if (new Date(formData.reviewDate) <= date) {
         return 'Review Date must not be in the past';

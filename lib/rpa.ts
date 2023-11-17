@@ -5,7 +5,7 @@ import {
 import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
 import { RpaOption, RpaProcedureInterface } from 'types';
-import { ChangeLog, RpaConfig } from 'types';
+import { RpaAuditLog, RpaConfig, Diff, TaskProperties } from 'types';
 
 export const deleteProcedure = async (params: {
   user: Session['user'];
@@ -29,7 +29,7 @@ export const deleteProcedure = async (params: {
   }
 
   const taskId = task.id;
-  const taskProperties = task?.properties as any;
+  const taskProperties = task?.properties as TaskProperties;
   delete taskProperties.rpa_procedure;
 
   const updatedTask = await prisma.task.update({
@@ -76,7 +76,7 @@ export const saveProcedure = async (params: {
   }
 
   const taskId = task.id;
-  const taskProperties = task?.properties as any;
+  const taskProperties = task?.properties as TaskProperties;
   taskProperties.rpa_procedure = nextProcedure;
 
   const updatedTask = await prisma.task.update({
@@ -103,13 +103,13 @@ export const saveProcedure = async (params: {
 
 export const addAuditLogs = async (params: {
   taskId: number;
-  taskProperties: any;
+  taskProperties: TaskProperties;
   user: Session['user'];
   prevProcedure: RpaProcedureInterface | [];
   nextProcedure: RpaProcedureInterface | [];
 }) => {
   const { taskId, taskProperties, user, prevProcedure, nextProcedure } = params;
-  const newAuditItems: ChangeLog[] = [];
+  const newAuditItems: RpaAuditLog[] = [];
 
   if (prevProcedure.length === 0 && nextProcedure.length !== 0) {
     newAuditItems.push(generateChangeLog(user, 'created', null));
@@ -153,7 +153,7 @@ export const addAuditLog = async (params: {
   event: string;
   prevValue: string | null;
   nextValue: string;
-  taskProperties: any;
+  taskProperties: TaskProperties;
 }) => {
   const { taskId, user, event, prevValue, nextValue, taskProperties } = params;
 
@@ -192,8 +192,8 @@ export const addAuditLog = async (params: {
 const generateChangeLog = (
   user: Session['user'],
   event: string,
-  diffLog: any
-): ChangeLog => {
+  diffLog: Diff
+): RpaAuditLog => {
   return {
     actor: user,
     date: new Date().getTime(),
@@ -202,15 +202,15 @@ const generateChangeLog = (
   };
 };
 
-const reduceMultipleObj = (acc: any, x: any) => {
+const reduceMultipleObj = (acc, x) => {
   for (const key in x) acc[key] = x?.[key];
   return acc;
 };
 
-export const getDiff = (o1: any, o2: any) => {
+export const getDiff = (o1, o2) => {
   const prev = o1.reduce(reduceMultipleObj, {});
   const next = o2.reduce(reduceMultipleObj, {});
-  const diff: any[] = [];
+  const diff: Diff[] = [];
   for (const [key, value] of Object.entries(fieldPropsMapping)) {
     if (JSON.stringify(prev[key]) !== JSON.stringify(next[key])) {
       let prevValue, nextValue;

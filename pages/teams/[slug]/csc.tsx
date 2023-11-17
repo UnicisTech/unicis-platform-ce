@@ -1,13 +1,10 @@
-import type { NextPageWithLayout } from 'types';
 import { useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Loading, Error } from '@/components/shared';
 //import { Loading, Error } from "@/components/ui";
-import type { InferGetServerSidePropsType } from 'next';
 import useTeam from 'hooks/useTeam';
 import { GetServerSidePropsContext } from 'next';
 import {
@@ -24,11 +21,8 @@ import { getCscStatusesBySlug } from 'models/team';
 import type { Option } from 'types';
 import useISO from 'hooks/useISO';
 
-const CscDashboard: NextPageWithLayout<
-  InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ csc_statuses }: { csc_statuses: { [key: string]: string } }) => {
+const CscDashboard = ({ csc_statuses }: { csc_statuses: { [key: string]: string } }) => {
   const router = useRouter();
-  const { t } = useTranslation('common');
   const { slug } = router.query;
 
   const [statuses, setStatuses] = useState(csc_statuses);
@@ -56,7 +50,7 @@ const CscDashboard: NextPageWithLayout<
     }
 
     setStatuses(data.statuses);
-  }, []);
+  }, [slug]);
 
   const taskSelectorHandler = useCallback(
     async (action: string, dataToRemove: any, control: string) => {
@@ -82,7 +76,7 @@ const CscDashboard: NextPageWithLayout<
         mutateTasks();
       }
     },
-    [ISO]
+    [ISO, slug, mutateTasks]
   );
 
   useEffect(() => {

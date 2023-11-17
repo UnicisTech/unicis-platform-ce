@@ -9,7 +9,7 @@ import useTeam from 'hooks/useTeam';
 import { GetServerSidePropsContext } from 'next';
 import useTeamTasks from 'hooks/useTeamTasks';
 import useCanAccess from 'hooks/useCanAccess';
-import type { TaskWithTiaProcedure } from 'types';
+import type { TaskWithTiaProcedure, TaskProperties } from 'types';
 import { CreateTIA, TiaTable, DeleteTia } from '@/components/interfaces/TIA';
 import { Button } from 'react-daisyui';
 import { DashboardCreateTIA } from '@/components/interfaces/TIA';
@@ -41,7 +41,7 @@ const TiaDashboard: NextPageWithLayout<
       return [];
     }
     return tasks.filter((task) => {
-      const taskProperties = task.properties as any;
+      const taskProperties = task.properties as TaskProperties;
       const procedure = taskProperties.tia_procedure;
       return procedure;
     }) as TaskWithTiaProcedure[];
@@ -140,8 +140,7 @@ const TiaDashboard: NextPageWithLayout<
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const { locale, query }: GetServerSidePropsContext = context;
-  const slug = query.slug as string;
+  const { locale }: GetServerSidePropsContext = context;
 
   return {
     props: {

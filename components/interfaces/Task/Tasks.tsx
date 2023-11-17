@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Button } from 'react-daisyui';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { Card, Error, Loading, StatusBadge } from '@/components/shared';
+import { Error, Loading, StatusBadge } from '@/components/shared';
 import useTasks from 'hooks/useTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import statuses from '@/components/defaultLanding/data/statuses.json';
@@ -15,7 +15,6 @@ const Tasks = ({ team }: { team: Team }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const { isLoading, isError, tasks } = useTasks(slug as string);
-  const [createTeamVisible, setCreateTeamVisible] = useState(false);
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [deleteVisible, setDeleteVisible] = useState(false);
@@ -24,12 +23,6 @@ const Tasks = ({ team }: { team: Team }) => {
 
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
-
-  useEffect(() => {
-    if (slug) {
-      setCreateTeamVisible(true);
-    }
-  }, [slug]);
 
   if (isLoading) {
     return <Loading />;

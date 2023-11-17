@@ -1,4 +1,3 @@
-import type { NextPageWithLayout } from 'types';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -21,12 +20,9 @@ import useCanAccess from 'hooks/useCanAccess';
 import useISO from 'hooks/useISO';
 import { Team } from '@prisma/client';
 import { getCscStatusesBySlug } from 'models/team';
-import { InferGetServerSidePropsType } from 'next';
 import { CreateTIA, TiaAuditLogs, TiaPanel } from '@/components/interfaces/TIA';
 
-const TaskById: NextPageWithLayout<
-  InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ csc_statuses }: { csc_statuses: { [key: string]: string } }) => {
+const TaskById = ({ csc_statuses }: { csc_statuses: { [key: string]: string } }) => {
   const [rpaVisible, setRpaVisible] = useState(false);
   const [tiaVisible, setTiaVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('Overview');

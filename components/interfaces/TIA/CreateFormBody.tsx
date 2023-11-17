@@ -85,7 +85,7 @@ const СreateFormBody = ({
               aria-required={true}
               isRequired
             >
-              {({ fieldProps, error }) => (
+              {({ fieldProps }) => (
                 <Fragment>
                   <TextArea
                     placeholder={`Specify the data exporter(s) or the sender in case of a relevant onward transfer`}
@@ -138,7 +138,7 @@ const СreateFormBody = ({
               aria-required={true}
               isRequired
             >
-              {({ fieldProps, error }) => (
+              {({ fieldProps }) => (
                 <Fragment>
                   <TextArea
                     placeholder={`Specify the data importer(s) or the sender in case of a relevant onward transfer`}
@@ -191,7 +191,7 @@ const СreateFormBody = ({
               aria-required={true}
               isRequired
             >
-              {({ fieldProps, error }) => (
+              {({ fieldProps }) => (
                 <Fragment>
                   <TextArea
                     placeholder={`Description of the transfer scenario`}
@@ -209,7 +209,7 @@ const СreateFormBody = ({
               aria-required={true}
               isRequired
             >
-              {({ fieldProps, error }) => (
+              {({ fieldProps }) => (
                 <Fragment>
                   <TextArea
                     placeholder={`Description of the data at issue`}
@@ -227,7 +227,7 @@ const СreateFormBody = ({
               aria-required={true}
               isRequired
             >
-              {({ fieldProps, error }) => (
+              {({ fieldProps }) => (
                 <Fragment>
                   <TextArea
                     placeholder={`Description how the data is transferred (e.g., remote access only), including any onward transfers`}
@@ -326,7 +326,7 @@ const СreateFormBody = ({
                       <ErrorMessage>{error}</ErrorMessage>
                     ) : (
                       <HelperMessage>
-                        Legal analysis on the lawful access laws of importer's
+                        Legal analysis on the lawful access laws of importer&apos;s
                         country
                       </HelperMessage>
                     )}
@@ -390,7 +390,7 @@ const СreateFormBody = ({
                     approved BCR, or - in the case of an onward transfer - a
                     back-to-back-contract in line with the EU SCC), and
                     compliance with it and its judicial enforcement be expected,
-                    insofar permitted under the importer's law?
+                    insofar permitted under the importer&apos;s law?
                   </HelperMessage>
                   <RadioGroup
                     {...fieldProps}
@@ -747,8 +747,8 @@ const СreateFormBody = ({
                         In the past 5-10 years, the importer was already
                         required to produce the type of data at issue following
                         such a warrant or subpoena from a local authority (or,
-                        to the importer's best knowledge, one of its providers
-                        was required to grant access to the importer's data)
+                        to the importer&apos;s best knowledge, one of its providers
+                        was required to grant access to the importer&apos;s data)
                       </HelperMessage>
                       <RadioGroup
                         {...fieldProps}

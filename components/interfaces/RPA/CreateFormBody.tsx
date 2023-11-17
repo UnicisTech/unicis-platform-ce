@@ -122,7 +122,7 @@ const CreateFormBody = ({
               defaultValue={procedure[0] && procedure[0].controller}
               isRequired
             >
-              {({ fieldProps, error }) => (
+              {({ fieldProps }) => (
                 <Fragment>
                   <TextField autoComplete="off" {...fieldProps} />
                 </Fragment>
