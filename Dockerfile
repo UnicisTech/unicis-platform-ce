@@ -10,6 +10,9 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install --force
 
+# Set up database schema
+RUN npx prisma db push
+
 # Copy the entire application to the working directory
 COPY . .
 
