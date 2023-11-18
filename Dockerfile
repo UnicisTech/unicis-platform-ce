@@ -22,7 +22,7 @@ EXPOSE 4002
 # Set the DATABASE_URL environment variable
 # ENV DATABASE_URL="postgresql://platform:7emp1eAppe4rance5Rang3I5BNOffice@db.unicis.tech/unicis_platform?schema=platform"
 # DEV DB -> ENV DATABASE_URL=postgresql://unicis_platform_dev:7emp1eAppe4rance5Rang3I5BNOffice-dev@srv-captain--db-dev:5432/unicis_platform_dev?sslmode=prefer
-ENV NEXTAUTH_URL=http://dev.platform.unicis.tech
+ENV NEXTAUTH_URL=http://dev.platform.unicis.tech:4002
 ENV NEXTAUTH_SECRET=3Ala9FTcgaUG2y4kYvKaeo2E04kmQyMeaWZb7cXSewg=
 ENV SMTP_HOST=unicis.tech
 ENV SMTP_PORT=587
