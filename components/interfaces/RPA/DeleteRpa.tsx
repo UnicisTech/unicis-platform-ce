@@ -33,7 +33,7 @@ const DeleteRpa = ({
       setIsDeleting(true);
 
       const response = await axios.delete<ApiResponse<Task>>(
-        `/api/teams/${slug}/tasks/${task.id}/rpa`
+        `/api/teams/${slug}/tasks/${task.taskNumber}/rpa`
       );
 
       const { error } = response.data;

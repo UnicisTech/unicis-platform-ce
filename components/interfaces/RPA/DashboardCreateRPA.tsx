@@ -65,7 +65,7 @@ const DashboardCreateRPA = ({
         setIsLoading(true);
 
         const response = await axios.post<ApiResponse<Task>>(
-          `/api/teams/${slug}/tasks/${task.id}/rpa`,
+          `/api/teams/${slug}/tasks/${task.taskNumber}/rpa`,
           {
             prevProcedure: prevProcedure,
             nextProcedure: procedure,

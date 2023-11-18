@@ -193,7 +193,7 @@ const CreateTIA = ({
         setIsLoading(true);
 
         const response = await axios.post<ApiResponse<Task>>(
-          `/api/teams/${slug}/tasks/${task.id}/tia`,
+          `/api/teams/${slug}/tasks/${task.taskNumber}/tia`,
           {
             prevProcedure: prevProcedure,
             nextProcedure: procedure,

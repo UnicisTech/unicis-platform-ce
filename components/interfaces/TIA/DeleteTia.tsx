@@ -32,7 +32,7 @@ const DeleteTia = ({
       setIsDeleting(true);
 
       const response = await axios.delete<ApiResponse<Task>>(
-        `/api/teams/${slug}/tasks/${task.id}/tia`
+        `/api/teams/${slug}/tasks/${task.taskNumber}/tia`
       );
 
       const { error } = response.data;
