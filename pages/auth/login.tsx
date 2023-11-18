@@ -35,7 +35,7 @@ interface Message {
 
 const Login: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ csrfToken, authProviders, recaptchaSiteKey }) => {
+> = ({ csrfToken, authProviders, recaptchaSiteKey }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { status } = useSession();
   const { t } = useTranslation('common');
@@ -234,7 +234,7 @@ const Login: NextPageWithLayout<
 
 Login.getLayout = function getLayout(page: ReactElement) {
   return (
-    <AuthLayout heading="Welcome back" description="Log in to your account">
+    <AuthLayout heading="Welcome" description="Log in to your account">
       {page}
     </AuthLayout>
   );
