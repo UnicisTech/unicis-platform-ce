@@ -45,6 +45,11 @@ ARG SVIX_URL=${SVIX_URL}
 ENV SVIX_URL=${SVIX_URL}
 ARG SVIX_API_KEY=${SVIX_API_KEY}
 ENV SVIX_API_KEY=${SVIX_API_KEY}
+# Users will need to confirm their email before accessing the app feature
+ARG CONFIRM_EMAIL=${CONFIRM_EMAIL}
+ENV CONFIRM_EMAIL=${CONFIRM_EMAIL}
+
+
 
 
 # Build the Next.js app
