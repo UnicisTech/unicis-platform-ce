@@ -21,6 +21,12 @@ const env = {
     from: process.env.SMTP_FROM,
   },
 
+  // Matomo configuration
+  matomo: {
+    url: `${process.env.NEXT_PUBLIC_MATOMO_URL}`,
+    siteId: `${process.env.NEXT_PUBLIC_MATOMO_SITE_ID}`,
+  },
+
   // NextAuth configuration
   nextAuth: {
     secret: process.env.NEXTAUTH_SECRET,

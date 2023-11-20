@@ -7,6 +7,8 @@ import colors from 'tailwindcss/colors';
 import type { AppPropsWithLayout } from 'types';
 import mixpanel from 'mixpanel-browser';
 
+import { init } from '@socialgouv/matomo-next';
+
 import '@boxyhq/react-ui/dist/style.css';
 import '../styles/globals.css';
 import { useEffect } from 'react';
@@ -26,6 +28,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         ignore_dnt: true,
         track_pageview: true,
       });
+    }
+
+    // Add Matomo
+    if (env.matomo.url && env.matomo.siteId) {
+      init({ url: env.matomo.url, siteId: env.matomo.siteId });
     }
 
     if (env.darkModeEnabled) {
