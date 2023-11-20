@@ -1,4 +1,7 @@
 {
     "WillLuke.nextjs.addTypesOnSave": true,
-    "WillLuke.nextjs.hasPrompted": true
+    "WillLuke.nextjs.hasPrompted": true,
+    "cSpell.words": [
+        "socialgouv"
+    ]
 }

@@ -1,9 +1,7 @@
-import { ServerConfiguration } from 'svix/dist/openapi';
-
 const env = {
   databaseUrl: `${process.env.DATABASE_URL}`,
   appUrl: `${process.env.APP_URL}`,
-  product: 'unicis-platform',
+  product: 'saas-next',
   // redirectAfterSignIn: '/teams',
   redirectIfAuthenticated: '/teams',
 
@@ -70,6 +68,7 @@ const env = {
     url: process.env.NEXT_PUBLIC_MATOMO_URL,
     site_id: process.env.NEXT_PUBLIC_MATOMO_SITE_ID,
   },
+
 
   disableNonBusinessEmailSignup:
     process.env.DISABLE_NON_BUSINESS_EMAIL_SIGNUP === 'true' ? true : false,

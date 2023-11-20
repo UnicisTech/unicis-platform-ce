@@ -7,7 +7,7 @@ import colors from 'tailwindcss/colors';
 import type { AppPropsWithLayout } from 'types';
 import mixpanel from 'mixpanel-browser';
 
-import { init } from '@socialgouv/matomo-next';
+import { init } from "@socialgouv/matomo-next";
 
 import '@boxyhq/react-ui/dist/style.css';
 import '../styles/globals.css';
@@ -20,9 +20,13 @@ import { AccountLayout } from '@/components/layouts';
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const { session, ...props } = pageProps;
 
+  const MATOMO_URL = process.env.NEXT_PUBLIC_MATOMO_URL;
+  const MATOMO_SITE_ID = process.env.NEXT_PUBLIC_MATOMO_SITE_ID;
+
   useEffect(() => {
-    // Add matomo next https://github.com/SocialGouv/matomo-next#readme
-    init({ url: env.matomo.url, siteId: env.matomo.site_id });
+
+    // Add matomo
+    init({ url: MATOMO_URL, siteId: MATOMO_SITE_ID });
 
     // Add mixpanel
     if (env.mixpanel.token) {
