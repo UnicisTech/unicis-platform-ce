@@ -28,7 +28,7 @@ const NavigationItems = ({ menus }: NavigationItemsProps) => {
     <ul role="list" className="flex flex-1 flex-col gap-1">
       {menus.map((menu) => (
         <li key={menu.name}>
-          <NavigationItem menu={menu} />
+          <NavigationItem menu={menu} className={menu.className || ''} />
           {menu.items && (
             <ul className="flex flex-col gap-1 mt-1">
               {menu.items.map((subitem) => (
@@ -57,6 +57,7 @@ const NavigationItem = ({ menu, className }: NavigationItemProps) => {
           className={classNames({
             'h-5 w-5 shrink-0': true,
             'text-primary': menu.active,
+            [className as string]: true
           })}
           aria-hidden="true"
         />
