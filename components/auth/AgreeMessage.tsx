@@ -10,15 +10,16 @@ const AgreeMessage = ({ text }) => {
       <Link
         rel="noopener noreferrer"
         target="_blank"
-        href={"https://www.unicis.tech/terms"}
+        href={'https://www.unicis.tech/terms'}
         className="font-medium text-primary hover:text-primary-focus"
       >
         {t('terms')}
-      </Link>{','}{' '}
+      </Link>
+      {','}{' '}
       <Link
         rel="noopener noreferrer"
         target="_blank"
-        href={"https://www.unicis.tech/privacy"}
+        href={'https://www.unicis.tech/privacy'}
         className="font-medium text-primary hover:text-primary-focus"
       >
         {t('privacy')}
@@ -27,7 +28,7 @@ const AgreeMessage = ({ text }) => {
       <Link
         rel="noopener noreferrer"
         target="_blank"
-        href={"https://www.unicis.tech/security"}
+        href={'https://www.unicis.tech/security'}
         className="font-medium text-primary hover:text-primary-focus"
       >
         {t('security')}

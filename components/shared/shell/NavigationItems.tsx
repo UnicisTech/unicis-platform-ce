@@ -57,7 +57,7 @@ const NavigationItem = ({ menu, className }: NavigationItemProps) => {
           className={classNames({
             'h-5 w-5 shrink-0': true,
             'text-primary': menu.active,
-            [className as string]: true
+            [className as string]: true,
           })}
           aria-hidden="true"
         />
