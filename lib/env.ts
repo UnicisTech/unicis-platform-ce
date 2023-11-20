@@ -1,7 +1,9 @@
+import { ServerConfiguration } from 'svix/dist/openapi';
+
 const env = {
   databaseUrl: `${process.env.DATABASE_URL}`,
   appUrl: `${process.env.APP_URL}`,
-  product: 'saas-next',
+  product: 'unicis-platform',
   // redirectAfterSignIn: '/teams',
   redirectIfAuthenticated: '/teams',
 
@@ -61,6 +63,12 @@ const env = {
   // Mixpanel configuration
   mixpanel: {
     token: process.env.NEXT_PUBLIC_MIXPANEL_TOKEN,
+  },
+
+  // Matomo Next configuration from https://github.com/SocialGouv/matomo-next#readme
+  matomo: {
+    url: process.env.NEXT_PUBLIC_MATOMO_URL,
+    site_id: process.env.NEXT_PUBLIC_MATOMO_SITE_ID,
   },
 
   disableNonBusinessEmailSignup:

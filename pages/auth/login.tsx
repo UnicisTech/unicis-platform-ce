@@ -35,7 +35,11 @@ interface Message {
 
 const Login: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ csrfToken, authProviders, recaptchaSiteKey }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+> = ({
+  csrfToken,
+  authProviders,
+  recaptchaSiteKey,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { status } = useSession();
   const { t } = useTranslation('common');
