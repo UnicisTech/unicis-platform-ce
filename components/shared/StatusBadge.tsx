@@ -12,7 +12,7 @@ const StatusBadge = ({ label, value }: { label: string; value: string }) => {
   return (
     <>
       <BaseBadge
-        className={`rounded text-xs py-2 text-white`}
+        className={`rounded text-xs py-2 text-white whitespace-nowrap`}
         color={colors[value]}
       >
         {label}

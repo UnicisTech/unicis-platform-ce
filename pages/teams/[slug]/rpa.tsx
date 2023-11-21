@@ -86,7 +86,7 @@ const RpaDashboard: NextPageWithLayout<
           <div className="flex justify-between items-center">
             <div className="space-y-3">
               <h2 className="text-xl font-medium leading-none tracking-tight">
-                Transfer Impact Assessment Dashboard
+                {t('rpa-dashboard')}
               </h2>
             </div>
             <div className="flex justify-end items-center my-1">
