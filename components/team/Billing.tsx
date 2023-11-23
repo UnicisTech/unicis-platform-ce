@@ -1,6 +1,7 @@
 import { Card } from '@/components/shared';
 import { Team } from '@prisma/client';
 import { useFormik } from 'formik';
+import useSubscription from 'hooks/useSubscription';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { Button } from 'react-daisyui';
@@ -9,20 +10,23 @@ import * as Yup from 'yup';
 const availableSubscription = [
   {
     id: 1,
-    name: 'Pre-Seed',
+    name: 'Community',
   },
   {
     id: 2,
-    name: 'Growth',
+    name: 'Premium',
   },
   {
     id: 3,
-    name: 'Scale',
+    name: 'Ultimate',
   },
 ];
 
 const Billing = ({ team }: { team: Team }) => {
+  const { subscription } = useSubscription(team.slug)
   const { t } = useTranslation('common');
+
+  console.log('Billing team', {team, subscription})
 
   const formik = useFormik({
     initialValues: {

@@ -1,4 +1,4 @@
-import { Card } from '@/components/shared';
+import { Card, Error, Loading } from '@/components/shared';
 import { getAxiosError } from '@/lib/common';
 import { Team } from '@prisma/client';
 import { isoOptions } from '../defaultLanding/data/configs/csc';
@@ -10,9 +10,12 @@ import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import type { ApiResponse, TeamProperties } from 'types';
 import * as Yup from 'yup';
+import useSubscription from 'hooks/useSubscription';
 
 const CSCSettings = ({ team }: { team: Team }) => {
+  const { subscription, isLoading, isError } = useSubscription(team.slug)
   const { t } = useTranslation('common');
+
   const teamProperties = team.properties as TeamProperties;
 
   const formik = useFormik({
@@ -42,6 +45,14 @@ const CSCSettings = ({ team }: { team: Team }) => {
     },
   });
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error />;
+  }
+
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
@@ -57,11 +68,14 @@ const CSCSettings = ({ team }: { team: Team }) => {
                   value={formik.values.iso}
                   required
                 >
-                  {isoOptions.map((option, index) => (
-                    <option value={option.value} key={index}>
-                      {option.label}
-                    </option>
-                  ))}
+                  {isoOptions.map((option, index) => {
+                    const isOptionDisabled: boolean = !Boolean(subscription?.avaliableISO.find(iso => iso === option.value))
+                    return (
+                      <option value={option.value} key={index} disabled={isOptionDisabled}>
+                        {option.label} {isOptionDisabled && " - avaliable on Premium and Ultimate plans only."}
+                      </option>
+                    )
+                  })}
                 </select>
                 <Button
                   type="submit"
