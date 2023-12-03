@@ -9,11 +9,11 @@ import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 
 const DeleteTask = ({
-  taskId,
+  taskNumber,
   visible,
   setVisible,
 }: {
-  taskId: null | number;
+  taskNumber: null | number;
   visible: boolean;
   setVisible: (visible: boolean) => void;
 }) => {
@@ -27,11 +27,7 @@ const DeleteTask = ({
       name: '',
     },
     onSubmit: async () => {
-      const response = await axios.delete<ApiResponse<unknown>>(`/api/tasks`, {
-        data: {
-          taskId,
-        },
-      });
+      const response = await axios.delete<ApiResponse<unknown>>(`/api/teams/${slug}/tasks/${taskNumber}`);
 
       const { error } = response.data;
 

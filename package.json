@@ -26,7 +26,6 @@
     "@atlaskit/datetime-picker": "^12.3.9",
     "@atlaskit/dropdown-menu": "^11.6.0",
     "@atlaskit/dynamic-table": "^14.8.12",
-    "@atlaskit/editor-core": "^189.4.2",
     "@atlaskit/form": "^8.8.4",
     "@atlaskit/icon": "^21.11.5",
     "@atlaskit/lozenge": "^11.4.2",

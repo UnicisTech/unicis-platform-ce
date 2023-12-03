@@ -135,7 +135,7 @@ const Tasks = ({ team }: { team: Team }) => {
                           size="sm"
                           variant="outline"
                           onClick={() => {
-                            openDeleteModal(task.id);
+                            openDeleteModal(task.taskNumber);
                           }}
                         >
                           {t('delete-task')}
@@ -159,7 +159,7 @@ const Tasks = ({ team }: { team: Team }) => {
         <DeleteTask
           visible={deleteVisible}
           setVisible={setDeleteVisible}
-          taskId={taskToDelete}
+          taskNumber={taskToDelete}
         />
       </div>
     </WithLoadingAndError>
