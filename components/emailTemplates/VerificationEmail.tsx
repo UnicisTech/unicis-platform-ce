@@ -37,7 +37,7 @@ const VerificationEmail = ({
             href={verificationLink}
             pX={20}
             pY={16}
-            className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center"
+            className="bg-[#0052cc] rounded text-white text-[12px] font-semibold no-underline text-center"
           >
             Confirm account
           </Button>
