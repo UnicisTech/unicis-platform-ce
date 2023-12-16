@@ -13,7 +13,7 @@ Unicis Platform Community Edition - an open core, enterprise-ready trust managem
 
 Please star ⭐ the repo if you want us to continue developing and improving the Unicis Platform! 😀
 
-Subscribe to our [newsletter]([https://www.unicis.tech/newsletter](https://www.unicis.tech/newsletter?mtm_campaign=github&mtm_source=github)) to stay informed.
+Subscribe to our [newsletter](https://www.unicis.tech/newsletter?mtm_campaign=github&mtm_source=github) to stay informed.
 
 ## 📖 Additional Resources
 
