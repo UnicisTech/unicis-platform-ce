@@ -12,6 +12,7 @@
 Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs. 
 
 Please star ⭐ the repo if you want us to continue developing and improving the Unicis Platform! 😀
+Subscribe to our [newsletter]((https://www.unicis.tech/newsletter)) to stay informed.
 
 ## 📖 Additional Resources
 
