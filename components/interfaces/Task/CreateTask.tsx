@@ -7,18 +7,19 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import TextField from '@atlaskit/textfield';
-import TextArea from '@atlaskit/textarea';
 import Select, { ValueType } from '@atlaskit/select';
-
 import type { ApiResponse } from 'types';
 import type { Task } from '@prisma/client';
-import AtlaskitButton from '@atlaskit/button/standard-button';
+import Button, { LoadingButton } from '@atlaskit/button';
 import statusesData from '@/components/defaultLanding/data/statuses.json';
-
 import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
 import { WithoutRing } from 'sharedStyles';
 import useTasks from 'hooks/useTasks';
 import { getCurrentStringDate } from '@/components/services/taskService';
+
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 interface Status {
   label: string;
@@ -39,6 +40,7 @@ interface Option {
 }
 
 const statuses: Status[] = statusesData;
+const DEFAULT_STATUS_VALUE = 'todo';
 
 const CreateTask = ({
   visible,
@@ -87,10 +89,11 @@ const CreateTask = ({
             duedate: '',
             description: '',
           });
+          toast.success(t("task-created"));
           setVisible(false);
         }}
       >
-        {({ formProps }) => (
+        {({ formProps, submitting }) => (
           <form
             {...formProps}
             ref={formRef}
@@ -121,7 +124,7 @@ const CreateTask = ({
                 <Field<ValueType<Option>>
                   name="status"
                   label="Status"
-                  defaultValue={statuses.find(({ value }) => value === 'todo')}
+                  defaultValue={statuses.find(({ value }) => value === DEFAULT_STATUS_VALUE)}
                   aria-required={true}
                   isRequired
                   validate={async (value) => {
@@ -142,7 +145,7 @@ const CreateTask = ({
                           {...rest}
                           options={statuses}
                           defaultValue={statuses.find(
-                            ({ value }) => value === 'todo'
+                            ({ value }) => value === DEFAULT_STATUS_VALUE
                           )}
                           validationState={error ? 'error' : 'default'}
                         />
@@ -173,9 +176,7 @@ const CreateTask = ({
                         <DatePicker
                           selectProps={{ inputId: id }}
                           {...rest}
-                          //placeholder={'ssss'}
                           locale="en-GB"
-                          //onChange={event => console.log('change event', event)}
                         />
                       </WithoutRing>
                       {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -185,13 +186,10 @@ const CreateTask = ({
                 <Field label="Description" name="description">
                   {({ fieldProps }: any) => (
                     <Fragment>
-                      <TextArea
-                        placeholder=""
+                      <ReactQuill
+                        theme='snow'
                         {...fieldProps}
-                        shouldFitContainer
-                        className="unicis-textarea"
                       />
-                      {/* <Editor/> */}
                     </Fragment>
                   )}
                 </Field>
@@ -199,21 +197,22 @@ const CreateTask = ({
               </div>
             </Modal.Body>
             <Modal.Actions>
-              <AtlaskitButton
+              <Button
                 appearance="default"
                 onClick={() => {
                   setVisible(!visible);
                 }}
               >
                 {t('close')}
-              </AtlaskitButton>
-              <AtlaskitButton
+              </Button>
+              <LoadingButton
                 type="submit"
                 appearance="primary"
                 ref={submitButtonRef}
+                isLoading={submitting}
               >
                 {t('create')}
-              </AtlaskitButton>
+              </LoadingButton>
             </Modal.Actions>
           </form>
         )}

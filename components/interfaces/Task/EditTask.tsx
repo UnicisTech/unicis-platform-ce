@@ -6,15 +6,18 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import TextField from '@atlaskit/textfield';
-import TextArea from '@atlaskit/textarea';
 import Select, { ValueType } from '@atlaskit/select';
 import type { ApiResponse } from 'types';
 import type { Task, Team } from '@prisma/client';
-import AtlaskitButton from '@atlaskit/button/standard-button';
+import Button, { LoadingButton } from '@atlaskit/button';
 import statuses from '@/components/defaultLanding/data/statuses.json';
 import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
 import { WithoutRing } from 'sharedStyles';
 import useTasks from 'hooks/useTasks';
+
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 interface FormData {
   title: string;
@@ -71,11 +74,11 @@ const EditTask = ({
           }
 
           mutateTasks();
-
+          toast.success(t("task-updated"));
           setVisible(false);
         }}
       >
-        {({ formProps }) => (
+        {({ formProps, submitting }) => (
           <form {...formProps}>
             <Modal.Header className="font-bold">Edit Task</Modal.Header>
             <Modal.Body>
@@ -168,7 +171,10 @@ const EditTask = ({
                 >
                   {({ fieldProps }: any) => (
                     <Fragment>
-                      <TextArea placeholder="" {...fieldProps} />
+                      <ReactQuill
+                        theme='snow'
+                        {...fieldProps}
+                      />
                     </Fragment>
                   )}
                 </Field>
@@ -176,17 +182,17 @@ const EditTask = ({
               </div>
             </Modal.Body>
             <Modal.Actions>
-              <AtlaskitButton
+              <Button
                 appearance="default"
                 onClick={() => {
                   setVisible(!visible);
                 }}
               >
                 {t('close')}
-              </AtlaskitButton>
-              <AtlaskitButton type="submit" appearance="primary">
+              </Button>
+              <LoadingButton type="submit" appearance="primary" isLoading={submitting}>
                 {t('save-changes')}
-              </AtlaskitButton>
+              </LoadingButton>
             </Modal.Actions>
           </form>
         )}

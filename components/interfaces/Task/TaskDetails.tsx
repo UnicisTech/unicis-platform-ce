@@ -5,7 +5,6 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import TextField from '@atlaskit/textfield';
-import TextArea from '@atlaskit/textarea';
 import Select, { ValueType } from '@atlaskit/select';
 import { Button } from 'react-daisyui';
 import type { ApiResponse } from 'types';
@@ -15,6 +14,10 @@ import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
 import { WithoutRing, IssuePanelContainer } from 'sharedStyles';
 import useTask from 'hooks/useTask';
 import useCanAccess from 'hooks/useCanAccess';
+
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 interface FormData {
   title: string;
@@ -75,7 +78,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
           mutateTask();
         }}
       >
-        {({ formProps }) => (
+        {({ formProps, submitting }) => (
           <form {...formProps}>
             <div
               style={{
@@ -171,10 +174,13 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
               >
                 {({ fieldProps }: any) => (
                   <Fragment>
-                    <TextArea
-                      onInput={checkFormChanges}
-                      placeholder=""
+                    <ReactQuill
+                      theme='snow'
                       {...fieldProps}
+                      onChange={(value) => {
+                        checkFormChanges()
+                        fieldProps.onChange(value)
+                      }}
                     />
                   </Fragment>
                 )}
@@ -187,6 +193,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                     size="sm"
                     type="submit"
                     active={!isFormChanged}
+                    loading={submitting}
                   >
                     {t('save-changes')}
                   </Button>
