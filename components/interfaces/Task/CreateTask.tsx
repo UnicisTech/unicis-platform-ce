@@ -89,7 +89,7 @@ const CreateTask = ({
             duedate: '',
             description: '',
           });
-          toast.success(t("task-created"));
+          toast.success(t('task-created'));
           setVisible(false);
         }}
       >
@@ -124,7 +124,9 @@ const CreateTask = ({
                 <Field<ValueType<Option>>
                   name="status"
                   label="Status"
-                  defaultValue={statuses.find(({ value }) => value === DEFAULT_STATUS_VALUE)}
+                  defaultValue={statuses.find(
+                    ({ value }) => value === DEFAULT_STATUS_VALUE
+                  )}
                   aria-required={true}
                   isRequired
                   validate={async (value) => {
@@ -186,10 +188,7 @@ const CreateTask = ({
                 <Field label="Description" name="description">
                   {({ fieldProps }: any) => (
                     <Fragment>
-                      <ReactQuill
-                        theme='snow'
-                        {...fieldProps}
-                      />
+                      <ReactQuill theme="snow" {...fieldProps} />
                     </Fragment>
                   )}
                 </Field>

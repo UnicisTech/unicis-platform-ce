@@ -9,7 +9,7 @@ export type SubscriptionPermissions = {
 
 export type Permission = {
   maxUsers: number;
-  avaliableISO: ISO[]
+  avaliableISO: ISO[];
 };
 
 export const availableRoles = [
@@ -24,20 +24,20 @@ export const availableRoles = [
   {
     id: Subscription.ULTIMATE,
     name: 'Ultimate',
-  }
+  },
 ];
 
 export const subscriptions: SubscriptionPermissions = {
-    COMMUNITY: {
-        maxUsers: 10,
-        avaliableISO: ['default']
-    },
-    PREMIUM: {
-        maxUsers: 150,
-        avaliableISO: ['default', "2013", "2022"]
-    },
-    ULTIMATE: {
-        maxUsers: 10000000,
-        avaliableISO: ['default', "2013", "2022"]
-    }
+  COMMUNITY: {
+    maxUsers: 10,
+    avaliableISO: ['default'],
+  },
+  PREMIUM: {
+    maxUsers: 150,
+    avaliableISO: ['default', '2013', '2022'],
+  },
+  ULTIMATE: {
+    maxUsers: 10000000,
+    avaliableISO: ['default', '2013', '2022'],
+  },
 };

@@ -175,11 +175,11 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                 {({ fieldProps }: any) => (
                   <Fragment>
                     <ReactQuill
-                      theme='snow'
+                      theme="snow"
                       {...fieldProps}
                       onChange={(value) => {
-                        checkFormChanges()
-                        fieldProps.onChange(value)
+                        checkFormChanges();
+                        fieldProps.onChange(value);
                       }}
                     />
                   </Fragment>

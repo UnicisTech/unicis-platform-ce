@@ -69,9 +69,7 @@ const TiaDashboard: NextPageWithLayout<
     <>
       {tasksWithProcedures.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-md lg:p-20 border-2 border-dashed gap-3 bg-white h-30 border-slate-600 m-5">
-          <h3 className="text-2xl font-bold">
-            {t("tia-dashboard")}
-          </h3>
+          <h3 className="text-2xl font-bold">{t('tia-dashboard')}</h3>
           <h5 className="text-semibold text-emphasis text-center text-xl">
             No records
           </h5>
@@ -81,7 +79,7 @@ const TiaDashboard: NextPageWithLayout<
           <div className="flex justify-between items-center">
             <div className="space-y-3">
               <h2 className="text-xl font-medium leading-none tracking-tight">
-                {t("tia-dashboard")}
+                {t('tia-dashboard')}
               </h2>
             </div>
             <div className="flex justify-end items-center my-1">

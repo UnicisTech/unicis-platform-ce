@@ -13,9 +13,6 @@ import type { TaskExtended } from 'types';
 import { IssuePanelContainer } from 'sharedStyles';
 import { formatDate } from '@/lib/tasks';
 
-import Markdown from 'react-markdown';
-import rehypeRaw from "rehype-raw";
-
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -44,9 +41,8 @@ export default function AddComment({
               <p className="font-bold ...">{comment.createdBy.name}</p>
               <p>{formatDate(String(comment.createdAt))}</p>
             </div>
-            {/* <p className="my-2">{comment.text}</p>
-            <pre className="my-2">{comment.text}</pre> */}
-            <Markdown rehypePlugins={[rehypeRaw]}>{comment.text}</Markdown>
+            <p className="my-2">{comment.text}</p>
+            {/* <Markdown rehypePlugins={[rehypeRaw]}>{comment.text}</Markdown> */}
             {/* <ReactQuill
               defaultValue={comment.text}
               readOnly={true}
@@ -120,19 +116,14 @@ export default function AddComment({
               {({ fieldProps }: any) => (
                 <Fragment>
                   <ReactQuill
-                    defaultValue={"Add a comment..."}
+                    defaultValue={'Add a comment...'}
                     {...fieldProps}
                   />
                 </Fragment>
               )}
             </Field>
             <FormFooter>
-              <Button
-                size="sm"
-                color="primary"
-                variant="outline"
-                type="submit"
-              >
+              <Button size="sm" color="primary" variant="outline" type="submit">
                 {t('submit')}
               </Button>
             </FormFooter>

@@ -74,7 +74,7 @@ const EditTask = ({
           }
 
           mutateTasks();
-          toast.success(t("task-updated"));
+          toast.success(t('task-updated'));
           setVisible(false);
         }}
       >
@@ -171,10 +171,7 @@ const EditTask = ({
                 >
                   {({ fieldProps }: any) => (
                     <Fragment>
-                      <ReactQuill
-                        theme='snow'
-                        {...fieldProps}
-                      />
+                      <ReactQuill theme="snow" {...fieldProps} />
                     </Fragment>
                   )}
                 </Field>
@@ -190,7 +187,11 @@ const EditTask = ({
               >
                 {t('close')}
               </Button>
-              <LoadingButton type="submit" appearance="primary" isLoading={submitting}>
+              <LoadingButton
+                type="submit"
+                appearance="primary"
+                isLoading={submitting}
+              >
                 {t('save-changes')}
               </LoadingButton>
             </Modal.Actions>

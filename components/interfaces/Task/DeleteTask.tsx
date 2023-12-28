@@ -27,7 +27,9 @@ const DeleteTask = ({
       name: '',
     },
     onSubmit: async () => {
-      const response = await axios.delete<ApiResponse<unknown>>(`/api/teams/${slug}/tasks/${taskNumber}`);
+      const response = await axios.delete<ApiResponse<unknown>>(
+        `/api/teams/${slug}/tasks/${taskNumber}`
+      );
 
       const { error } = response.data;
 

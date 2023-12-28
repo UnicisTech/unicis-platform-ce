@@ -13,7 +13,7 @@ import * as Yup from 'yup';
 import useSubscription from 'hooks/useSubscription';
 
 const CSCSettings = ({ team }: { team: Team }) => {
-  const { subscription, isLoading, isError } = useSubscription(team.slug)
+  const { subscription, isLoading, isError } = useSubscription(team.slug);
   const { t } = useTranslation('common');
 
   const teamProperties = team.properties as TeamProperties;
@@ -69,12 +69,21 @@ const CSCSettings = ({ team }: { team: Team }) => {
                   required
                 >
                   {isoOptions.map((option, index) => {
-                    const isOptionDisabled: boolean = !Boolean(subscription?.avaliableISO.find(iso => iso === option.value))
+                    const isOptionDisabled: boolean =
+                      !subscription?.avaliableISO.find(
+                        (iso) => iso === option.value
+                      );
                     return (
-                      <option value={option.value} key={index} disabled={isOptionDisabled}>
-                        {option.label} {isOptionDisabled && " - avaliable on Premium and Ultimate plans only."}
+                      <option
+                        value={option.value}
+                        key={index}
+                        disabled={isOptionDisabled}
+                      >
+                        {option.label}{' '}
+                        {isOptionDisabled &&
+                          ' - avaliable on Premium and Ultimate plans only.'}
                       </option>
-                    )
+                    );
                   })}
                 </select>
                 <Button

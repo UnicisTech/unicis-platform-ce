@@ -1,5 +1,4 @@
 import fetcher from '@/lib/fetcher';
-import type { Team } from '@prisma/client';
 import type { Permission } from '@/lib/subscriptions';
 import { useRouter } from 'next/router';
 import useSWR, { mutate } from 'swr';

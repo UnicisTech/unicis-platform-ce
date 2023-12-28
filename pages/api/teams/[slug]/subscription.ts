@@ -1,4 +1,3 @@
-import { permissions } from '@/lib/permissions';
 import { subscriptions } from '@/lib/subscriptions';
 import { throwIfNoTeamAccess } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';

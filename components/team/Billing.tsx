@@ -23,10 +23,10 @@ const availableSubscription = [
 ];
 
 const Billing = ({ team }: { team: Team }) => {
-  const { subscription } = useSubscription(team.slug)
+  const { subscription } = useSubscription(team.slug);
   const { t } = useTranslation('common');
 
-  console.log('Billing team', {team, subscription})
+  console.log('Billing team', { team, subscription });
 
   const formik = useFormik({
     initialValues: {
