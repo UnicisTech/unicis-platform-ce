@@ -79,3 +79,10 @@ a {
 .ql-editor {
   min-height: 100px;
 }
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0px;
+}
