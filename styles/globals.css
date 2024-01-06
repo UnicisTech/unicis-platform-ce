@@ -88,3 +88,10 @@ a {
 .quill-view-mode .ql-container.ql-snow {
   border: unset;
 }
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0px;
+}

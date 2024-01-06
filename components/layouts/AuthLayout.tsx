@@ -22,7 +22,7 @@ export default function AuthLayout({
           <Image
             //src={app.logoUrl}
             // src="/unicis-platform-logo-ver.png"
-            src="https://www.unicis.tech/img/unicis-platform-logo-ver.svg"
+            src="/unicis-platform-logo-ver-beta-cropped.svg"
             className="mx-auto h-48 w-auto"
             alt={app.name}
             width={48}
