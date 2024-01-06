@@ -138,7 +138,7 @@ const Tasks = ({ team }: { team: Team }) => {
                             openDeleteModal(task.taskNumber);
                           }}
                         >
-                          {t('delete-task')}
+                          {t('delete')}
                         </Button>
                       )}
                     </td>

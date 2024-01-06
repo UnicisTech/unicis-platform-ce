@@ -1,4 +1,4 @@
-import { createComment, deleteComment } from 'models/comment';
+import { createComment, updateComment, deleteComment } from 'models/comment';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
@@ -13,6 +13,8 @@ export default async function handler(
   switch (method) {
     case 'POST':
       return handlePOST(req, res);
+    case 'PUT':
+      return handlePUT(req, res);
     case 'DELETE':
       return handleDELETE(req, res);
     default:
@@ -63,8 +65,27 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   return res.status(200).json({ data: comment, error: null });
 };
 
-// Delete a comment
+// Edit a comment
+const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
+  const teamMember = await throwIfNoTeamAccess(req, res);
+  throwIfNotAllowed(teamMember, 'task', 'update');
 
+  const { text, id } = req.body;
+
+  const comment = await updateComment(id, text)
+
+  if (!comment) {
+    return res.status(503).json({
+      error: {
+        message: 'Comment is not updated.',
+      },
+    });
+  }
+
+  return res.status(200).json({ data: comment, error: null });
+}
+
+// Delete a comment
 const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
   throwIfNotAllowed(teamMember, 'task', 'update');

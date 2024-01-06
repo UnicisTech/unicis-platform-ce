@@ -268,10 +268,7 @@ export const getCscStatusesBySlug = async (slug: string) => {
   const iso = teamProperties.csc_iso || 'default';
   const cscStatusesProp = getCscStatusesProp(iso);
 
-  console.log('cscStatusesProp', { cscStatusesProp, teamProperties });
-
   if (teamProperties[cscStatusesProp]) {
-    console.log('return team properties', teamProperties[cscStatusesProp]);
     return teamProperties[cscStatusesProp];
   }
 
@@ -318,8 +315,6 @@ export const setCscStatus = async ({
   const cscStatuses = { ...teamProperties[cscStatusesProp] };
   cscStatuses[control] = value;
 
-  console.log('set csc statuses', cscStatusesProp);
-
   await prisma.team.update({
     where: { slug: slug },
     data: {
@@ -346,8 +341,6 @@ export const getCscIso = async ({
       properties: true,
     },
   });
-
-  console.log('getCscIso team', team);
 
   const teamProperties = team ? (team.properties as TeamProperties) : {};
 

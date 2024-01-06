@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useState, useCallback } from 'react';
 import { getAxiosError } from '@/lib/common';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -6,22 +6,18 @@ import type { Task } from '@prisma/client';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import type { ApiResponse } from 'types';
-import AtlaskitButton from '@atlaskit/button';
-import { Button } from 'react-daisyui';
-import Form, { Field, FormFooter } from '@atlaskit/form';
 import type { TaskExtended } from 'types';
 import { IssuePanelContainer } from 'sharedStyles';
-import { formatDate } from '@/lib/tasks';
-
-import 'react-quill/dist/quill.snow.css';
-import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import Comment from './comments/Comment';
+import CreateCommentForm from './comments/CreateCommentForm';
+import { AccessControl } from '@/components/shared/AccessControl';
+import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 
 interface FormData {
   text: string;
 }
 
-export default function AddComment({
+export default function Comments({
   task,
   mutateTask,
 }: {
@@ -31,105 +27,117 @@ export default function AddComment({
   const { t } = useTranslation('common');
   const router = useRouter();
   const { slug, taskNumber } = router.query;
+  const [commentToEdit, setCommentToEdit] = useState<number | null>(null)
+  const [commentToDelete, setCommentToDelete] = useState<number | null>(null)
+  const [confirmationDialogVisible, setConfirmationDialogVisible] = useState(false);
+
+  const onDeleteClick = useCallback((id: number) => {
+    setCommentToDelete(id)
+    setConfirmationDialogVisible(true)
+  }, [])
+
+  const handleCreateComment = useCallback(async (text: string, reset: (initialValues?: Partial<FormData> | undefined) => void) => {
+    try {
+      const response = await axios.post<ApiResponse<Task>>(
+        `/api/teams/${slug}/tasks/${taskNumber}/comments`,
+        {
+          text,
+        }
+      );
+
+      const { error } = response.data;
+
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+      reset({
+        text: ''
+      })
+      mutateTask();
+    } catch (error: any) {
+      toast.error(getAxiosError(error));
+    }
+  }, [])
+
+  const handleUpdateComment = useCallback(async (text: string, id: number) => {
+    try {
+      const response = await axios.put<ApiResponse<unknown>>(
+        `/api/teams/${slug}/tasks/${taskNumber}/comments`,
+        {
+          id,
+          text
+        }
+      );
+
+      const { error } = response.data;
+
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+
+      mutateTask();
+      setCommentToEdit(null);
+    } catch (error: any) {
+      toast.error(getAxiosError(error));
+    }
+  }, [])
+
+  const handleDeleteComment = useCallback(async (id: number | null) => {
+    if (!id) return;
+
+    try {
+      const response = await axios.delete<ApiResponse<unknown>>(
+        `/api/teams/${slug}/tasks/${taskNumber}/comments`,
+        {
+          data: {
+            id,
+          },
+        }
+      );
+      const { error } = response.data;
+
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+
+      mutateTask();
+    } catch (error: any) {
+      toast.error(getAxiosError(error));
+    }
+  }, [])
 
   return (
     <IssuePanelContainer>
       <div style={{ marginTop: '30px' }}>
-        {task.comments.map((comment, index) => (
-          <div key={index} style={{ margin: '15px' }}>
-            <div className="flex gap-3.5">
-              <p className="font-bold ...">{comment.createdBy.name}</p>
-              <p>{formatDate(String(comment.createdAt))}</p>
-            </div>
-            <p className="my-2">{comment.text}</p>
-            {/* <Markdown rehypePlugins={[rehypeRaw]}>{comment.text}</Markdown> */}
-            {/* <ReactQuill
-              defaultValue={comment.text}
-              readOnly={true}
-              modules={{
-                "toolbar": false
-              }}
-            /> */}
-            <AtlaskitButton
-              appearance="danger"
-              style={{ padding: '0px' }}
-              spacing="compact"
-              onClick={async () => {
-                try {
-                  const response = await axios.delete<ApiResponse<unknown>>(
-                    `/api/teams/${slug}/tasks/${taskNumber}/comments`,
-                    {
-                      data: {
-                        id: comment.id,
-                      },
-                    }
-                  );
-                  const { error } = response.data;
-
-                  if (error) {
-                    toast.error(error.message);
-                    return;
-                  }
-
-                  mutateTask();
-                } catch (error: any) {
-                  toast.error(getAxiosError(error));
-                }
-              }}
-            >
-              Delete
-            </AtlaskitButton>
-          </div>
-        ))}
+        {task.comments
+          .sort((a, b) => Date.parse(a.createdAt as any) - Date.parse(b.createdAt as any))
+          .map((comment) =>
+            <Comment
+              key={comment.id}
+              comment={comment}
+              commentToEdit={commentToEdit}
+              setCommentToEdit={setCommentToEdit}
+              updateComment={handleUpdateComment}
+              deleteComment={onDeleteClick}
+            />
+          )}
       </div>
-      <Form
-        onSubmit={async (formState: FormData, { reset }) => {
-          try {
-            const { text } = formState;
-            const response = await axios.post<ApiResponse<Task>>(
-              `/api/teams/${slug}/tasks/${taskNumber}/comments`,
-              {
-                text,
-              }
-            );
-
-            const { error } = response.data;
-
-            if (error) {
-              toast.error(error.message);
-              return;
-            }
-
-            mutateTask();
-
-            reset({
-              text: '',
-            });
-          } catch (error: any) {
-            toast.error(getAxiosError(error));
-          }
-        }}
+      <AccessControl resource="task" actions={['update']}>
+        <CreateCommentForm
+          handleCreate={handleCreateComment}
+        />
+      </AccessControl>
+      <ConfirmationDialog
+        visible={confirmationDialogVisible}
+        onCancel={() => setConfirmationDialogVisible(false)}
+        onConfirm={() => handleDeleteComment(commentToDelete)}
+        title={t('confirm-delete-comment')}
       >
-        {({ formProps }: any) => (
-          <form {...formProps}>
-            <Field name="text">
-              {({ fieldProps }: any) => (
-                <Fragment>
-                  <ReactQuill
-                    defaultValue={'Add a comment...'}
-                    {...fieldProps}
-                  />
-                </Fragment>
-              )}
-            </Field>
-            <FormFooter>
-              <Button size="sm" color="primary" variant="outline" type="submit">
-                {t('submit')}
-              </Button>
-            </FormFooter>
-          </form>
-        )}
-      </Form>
+        {t('delete-comment-warning')}
+      </ConfirmationDialog>
     </IssuePanelContainer>
   );
 }

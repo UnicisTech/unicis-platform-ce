@@ -224,7 +224,6 @@
   "tia-created": "Record of Transfer Impact Assessment created successfully.",
   "iap": "Interactive Awareness Training",
   "task-id": "Task ID",
-  "delete-task": "Delete",
   "delete-task-warning": "Are you sure you want to delete this task?",
   "tasks": "Tasks",
   "task-listed": "Tasks of the team",
@@ -240,5 +239,7 @@
   "attachment-delete": "Delete this attachment?",
   "submit": "Submit",
   "choose": "Choose",
-  "subscribe": "Subscribe"
+  "subscribe": "Subscribe",
+  "confirm-delete-comment": "Confirm delete comment",
+  "delete-comment-warning": "Are you sure you want to delete this comment?"
 }

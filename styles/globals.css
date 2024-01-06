@@ -79,3 +79,12 @@ a {
 .ql-editor {
   min-height: 100px;
 }
+
+.quill-view-mode .ql-editor {
+  min-height: unset;
+  padding: 0px;
+}
+
+.quill-view-mode .ql-container.ql-snow {
+  border: unset;
+}

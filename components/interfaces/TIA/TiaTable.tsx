@@ -134,7 +134,7 @@ const TiaTable = ({
                             deleteHandler(task);
                           }}
                         >
-                          {t('delete-task')}
+                          {t('delete')}
                         </Button>
                       </div>
                     </td>

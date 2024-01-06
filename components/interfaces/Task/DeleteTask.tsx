@@ -62,7 +62,7 @@ const DeleteTask = ({
             loading={formik.isSubmitting}
             active={formik.dirty}
           >
-            {t('delete-task')}
+            {t('delete')}
           </Button>
           <Button
             type="button"

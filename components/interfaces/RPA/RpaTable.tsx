@@ -136,7 +136,7 @@ const RpaTable = ({
                             deleteHandler(task);
                           }}
                         >
-                          {t('delete-task')}
+                          {t('delete')}
                         </Button>
                       </div>
                     </td>
