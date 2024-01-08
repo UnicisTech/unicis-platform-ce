@@ -27,38 +27,45 @@ export default function Comments({
   const { t } = useTranslation('common');
   const router = useRouter();
   const { slug, taskNumber } = router.query;
-  const [commentToEdit, setCommentToEdit] = useState<number | null>(null)
-  const [commentToDelete, setCommentToDelete] = useState<number | null>(null)
-  const [confirmationDialogVisible, setConfirmationDialogVisible] = useState(false);
+  const [commentToEdit, setCommentToEdit] = useState<number | null>(null);
+  const [commentToDelete, setCommentToDelete] = useState<number | null>(null);
+  const [confirmationDialogVisible, setConfirmationDialogVisible] =
+    useState(false);
 
   const onDeleteClick = useCallback((id: number) => {
-    setCommentToDelete(id)
-    setConfirmationDialogVisible(true)
-  }, [])
+    setCommentToDelete(id);
+    setConfirmationDialogVisible(true);
+  }, []);
 
-  const handleCreateComment = useCallback(async (text: string, reset: (initialValues?: Partial<FormData> | undefined) => void) => {
-    try {
-      const response = await axios.post<ApiResponse<Task>>(
-        `/api/teams/${slug}/tasks/${taskNumber}/comments`,
-        {
-          text,
+  const handleCreateComment = useCallback(
+    async (
+      text: string,
+      reset: (initialValues?: Partial<FormData> | undefined) => void
+    ) => {
+      try {
+        const response = await axios.post<ApiResponse<Task>>(
+          `/api/teams/${slug}/tasks/${taskNumber}/comments`,
+          {
+            text,
+          }
+        );
+
+        const { error } = response.data;
+
+        if (error) {
+          toast.error(error.message);
+          return;
         }
-      );
-
-      const { error } = response.data;
-
-      if (error) {
-        toast.error(error.message);
-        return;
+        reset({
+          text: '',
+        });
+        mutateTask();
+      } catch (error: any) {
+        toast.error(getAxiosError(error));
       }
-      reset({
-        text: ''
-      })
-      mutateTask();
-    } catch (error: any) {
-      toast.error(getAxiosError(error));
-    }
-  }, [])
+    },
+    []
+  );
 
   const handleUpdateComment = useCallback(async (text: string, id: number) => {
     try {
@@ -66,7 +73,7 @@ export default function Comments({
         `/api/teams/${slug}/tasks/${taskNumber}/comments`,
         {
           id,
-          text
+          text,
         }
       );
 
@@ -82,7 +89,7 @@ export default function Comments({
     } catch (error: any) {
       toast.error(getAxiosError(error));
     }
-  }, [])
+  }, []);
 
   const handleDeleteComment = useCallback(async (id: number | null) => {
     if (!id) return;
@@ -107,14 +114,17 @@ export default function Comments({
     } catch (error: any) {
       toast.error(getAxiosError(error));
     }
-  }, [])
+  }, []);
 
   return (
     <IssuePanelContainer>
       <div style={{ marginTop: '30px' }}>
         {task.comments
-          .sort((a, b) => Date.parse(a.createdAt as any) - Date.parse(b.createdAt as any))
-          .map((comment) =>
+          .sort(
+            (a, b) =>
+              Date.parse(a.createdAt as any) - Date.parse(b.createdAt as any)
+          )
+          .map((comment) => (
             <Comment
               key={comment.id}
               comment={comment}
@@ -123,12 +133,10 @@ export default function Comments({
               updateComment={handleUpdateComment}
               deleteComment={onDeleteClick}
             />
-          )}
+          ))}
       </div>
       <AccessControl resource="task" actions={['update']}>
-        <CreateCommentForm
-          handleCreate={handleCreateComment}
-        />
+        <CreateCommentForm handleCreate={handleCreateComment} />
       </AccessControl>
       <ConfirmationDialog
         visible={confirmationDialogVisible}

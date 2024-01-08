@@ -40,7 +40,7 @@ export const updateComment = async (id: number, text: string) => {
   });
 
   if (!commentToEdit) {
-    return null
+    return null;
   }
 
   const editedComment = await prisma.comment.update({
@@ -48,12 +48,12 @@ export const updateComment = async (id: number, text: string) => {
       id: commentToEdit.id,
     },
     data: {
-      text
-    }
+      text,
+    },
   });
 
-  return editedComment
-}
+  return editedComment;
+};
 
 export const deleteComment = async (id: number) => {
   const comment = await prisma.comment.delete({

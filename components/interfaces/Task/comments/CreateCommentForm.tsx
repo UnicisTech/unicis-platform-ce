@@ -8,42 +8,42 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 interface FormData {
-    text: string;
+  text: string;
 }
 
 interface CreateCommentFormProps {
-    handleCreate: (text: string, reset: (initialValues?: Partial<FormData> | undefined) => void) => Promise<void>
+  handleCreate: (
+    text: string,
+    reset: (initialValues?: Partial<FormData> | undefined) => void
+  ) => Promise<void>;
 }
 const CreateCommentForm = ({ handleCreate }: CreateCommentFormProps) => {
-    const { t } = useTranslation('common');
-    //TODO: remade to formik
-    return (
-        <Form
-            onSubmit={async (formState: FormData, { reset }) => {
-                await handleCreate(formState.text, reset)
-            }}
-        >
-            {({ formProps }: any) => (
-                <form {...formProps}>
-                    <Field name="text">
-                        {({ fieldProps }: any) => (
-                            <Fragment>
-                                <ReactQuill
-                                    defaultValue={'Add a comment...'}
-                                    {...fieldProps}
-                                />
-                            </Fragment>
-                        )}
-                    </Field>
-                    <FormFooter align='start'>
-                        <Button size="sm" color="primary" variant="outline" type="submit">
-                            {t('save')}
-                        </Button>
-                    </FormFooter>
-                </form>
+  const { t } = useTranslation('common');
+  //TODO: remade to formik
+  return (
+    <Form
+      onSubmit={async (formState: FormData, { reset }) => {
+        await handleCreate(formState.text, reset);
+      }}
+    >
+      {({ formProps }: any) => (
+        <form {...formProps}>
+          <Field name="text">
+            {({ fieldProps }: any) => (
+              <Fragment>
+                <ReactQuill defaultValue={'Add a comment...'} {...fieldProps} />
+              </Fragment>
             )}
-        </Form>
-    )
-}
+          </Field>
+          <FormFooter align="start">
+            <Button size="sm" color="primary" variant="outline" type="submit">
+              {t('save')}
+            </Button>
+          </FormFooter>
+        </form>
+      )}
+    </Form>
+  );
+};
 
-export default CreateCommentForm
+export default CreateCommentForm;

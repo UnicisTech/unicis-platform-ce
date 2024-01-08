@@ -72,7 +72,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { text, id } = req.body;
 
-  const comment = await updateComment(id, text)
+  const comment = await updateComment(id, text);
 
   if (!comment) {
     return res.status(503).json({
@@ -83,7 +83,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   return res.status(200).json({ data: comment, error: null });
-}
+};
 
 // Delete a comment
 const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
