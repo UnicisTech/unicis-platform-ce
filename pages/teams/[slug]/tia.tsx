@@ -3,7 +3,7 @@ import { useState, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Loading, Error } from '@/components/shared';
+import { Loading, Error, EmptyState } from '@/components/shared';
 import type { InferGetServerSidePropsType } from 'next';
 import useTeam from 'hooks/useTeam';
 import { GetServerSidePropsContext } from 'next';
@@ -68,12 +68,10 @@ const TiaDashboard: NextPageWithLayout<
   return (
     <>
       {tasksWithProcedures.length === 0 ? (
-        <div className="flex flex-col items-center justify-center rounded-md lg:p-20 border-2 border-dashed gap-3 bg-white h-30 border-slate-600 m-5">
-          <h3 className="text-2xl font-bold">{t('tia-dashboard')}</h3>
-          <h5 className="text-semibold text-emphasis text-center text-xl">
-            No records
-          </h5>
-        </div>
+        <EmptyState
+          title={t('tia-dashboard')}
+          description="No records"
+        />
       ) : (
         <>
           <div className="flex justify-between items-center">

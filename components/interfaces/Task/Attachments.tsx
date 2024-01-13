@@ -6,6 +6,8 @@ import { TaskExtended } from 'types';
 import AttachmentsCard from './AttachmentCard';
 import { checkExtensionAndMIMEType } from '@/components/services/taskService';
 import useCanAccess from 'hooks/useCanAccess';
+import { useTranslation } from 'next-i18next';
+import { EmptyState } from '@/components/shared';
 
 const Attachments = ({
   task,
@@ -16,6 +18,7 @@ const Attachments = ({
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
   const { slug, taskNumber } = router.query;
   const [isDragOver, setIsDragOver] = useState(false);
@@ -108,6 +111,7 @@ const Attachments = ({
     uploadFile();
   }, [selectedFile]);
 
+  //TODO: refactoring
   if (!canAccess('task', ['update'])) {
     return (
       <>
@@ -132,11 +136,9 @@ const Attachments = ({
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center rounded-md lg:p-20 border-2 border-dashed gap-3 bg-white h-30 border-slate-600 m-5">
-            <h3 className="text-semibold text-emphasis text-center text-xl">
-              No attachments
-            </h3>
-          </div>
+          <EmptyState
+            title={t('no-attachments')}
+          />
         )}
       </>
     );
