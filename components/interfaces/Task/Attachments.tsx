@@ -136,9 +136,7 @@ const Attachments = ({
             </div>
           </div>
         ) : (
-          <EmptyState
-            title={t('no-attachments')}
-          />
+          <EmptyState title={t('no-attachments')} />
         )}
       </>
     );

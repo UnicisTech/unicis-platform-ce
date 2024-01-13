@@ -68,10 +68,7 @@ const TiaDashboard: NextPageWithLayout<
   return (
     <>
       {tasksWithProcedures.length === 0 ? (
-        <EmptyState
-          title={t('tia-dashboard')}
-          description="No records"
-        />
+        <EmptyState title={t('tia-dashboard')} description="No records" />
       ) : (
         <>
           <div className="flex justify-between items-center">

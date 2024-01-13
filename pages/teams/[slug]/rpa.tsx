@@ -73,10 +73,7 @@ const RpaDashboard: NextPageWithLayout<
     <>
       {/* <h3 className="text-2xl font-bold">{"Records of Processing Activities Dashboard"}</h3> */}
       {tasksWithProcedures.length === 0 ? (
-        <EmptyState
-          title={t('rpa-dashboard')}
-          description="No records"
-        />
+        <EmptyState title={t('rpa-dashboard')} description="No records" />
       ) : (
         <>
           <div className="flex justify-between items-center">
