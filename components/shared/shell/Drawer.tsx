@@ -41,7 +41,7 @@ const Drawer = ({ sidebarOpen, setSidebarOpen }: DrawerProps) => {
       )}
 
       <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col">
-        <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 px-6">
+        <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 px-6 dark:border-gray-600">
           <Brand />
           <TeamDropdown />
           <Navigation />

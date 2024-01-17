@@ -9,13 +9,9 @@ interface CardProps {
 const Card = (props: CardProps) => {
   const { heading, children, button } = props;
 
-  //className="card w-full border border-rounded dark:bg-black dark:border-gray-600"</div>
-  //TODO: card fix
-
   return (
-    // <div className="mt-5 flex flex-col border border-gray-300">
     <div className="card w-full border border-rounded dark:bg-black dark:border-gray-600">
-      <div className="border-b border-gray-300 bg-gray-100 px-3 py-3 text-sm font-medium text-gray-900 flex justify-between items-center dark:bg-gray-700 dark:text-gray-400">
+      <div className="border-b border-gray-300 bg-gray-100 dark:border-gray-600 px-3 py-3 text-sm font-medium text-gray-900 flex justify-between items-center dark:bg-gray-700 dark:text-gray-400">
         <div>{heading || ''}</div>
         <div>{button ? button : null}</div>
       </div>

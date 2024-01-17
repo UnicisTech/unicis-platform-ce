@@ -8,8 +8,7 @@ const CscAuditLogs = ({ task }: { task: Task }) => {
   const auditLogs = taskProperties.csc_audit_logs as CscAuditLog[] | undefined;
   return (
     <IssuePanelContainer>
-      <div style={{ backgroundColor: 'white', padding: '10px 20px' }}>
-        <h2 className="text-1xl font-bold">CSC audit logs</h2>
+      <div style={{ padding: '10px 20px' }}>
         {auditLogs &&
           auditLogs
             .sort((a, b) => b.date - a.date)

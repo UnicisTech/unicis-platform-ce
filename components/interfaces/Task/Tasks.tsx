@@ -89,10 +89,7 @@ const Tasks = ({ team }: { team: Team }) => {
             {tasks &&
               tasks.map((task) => {
                 return (
-                  <tr
-                    key={task.id}
-                    className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
-                  >
+                  <tr key={task.id}>
                     <td className="px-6 py-3">
                       <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
                         <div className="flex items-center justify-start space-x-2">
@@ -116,31 +113,33 @@ const Tasks = ({ team }: { team: Team }) => {
                         }
                       />
                     </td>
-                    <td className="px-6 py-3 btn-group">
-                      {canAccess('task', ['update']) && (
-                        <Button
-                          className="dark:text-gray-100"
-                          size="sm"
-                          variant="outline"
-                          onClick={() => {
-                            openEditModal(task);
-                          }}
-                        >
-                          {t('edit-task')}
-                        </Button>
-                      )}
-                      {canAccess('task', ['delete']) && (
-                        <Button
-                          className="dark:text-gray-100"
-                          size="sm"
-                          variant="outline"
-                          onClick={() => {
-                            openDeleteModal(task.taskNumber);
-                          }}
-                        >
-                          {t('delete')}
-                        </Button>
-                      )}
+                    <td className="px-6 py-3">
+                      <div className=" btn-group">
+                        {canAccess('task', ['update']) && (
+                          <Button
+                            className="dark:text-gray-100"
+                            size="sm"
+                            variant="outline"
+                            onClick={() => {
+                              openEditModal(task);
+                            }}
+                          >
+                            {t('edit-task')}
+                          </Button>
+                        )}
+                        {canAccess('task', ['delete']) && (
+                          <Button
+                            className="dark:text-gray-100"
+                            size="sm"
+                            variant="outline"
+                            onClick={() => {
+                              openDeleteModal(task.taskNumber);
+                            }}
+                          >
+                            {t('delete')}
+                          </Button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 );

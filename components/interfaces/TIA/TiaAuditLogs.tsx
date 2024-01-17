@@ -9,8 +9,7 @@ const TiaAuditLogs = ({ task }: { task: Task }) => {
 
   return (
     <IssuePanelContainer>
-      <div style={{ backgroundColor: 'white', padding: '10px 20px' }}>
-        <h2 className="text-1xl font-bold">TIA audit logs</h2>
+      <div style={{ padding: '10px 20px' }}>
         {auditLogs &&
           auditLogs.reverse().map((log, index) => {
             return (

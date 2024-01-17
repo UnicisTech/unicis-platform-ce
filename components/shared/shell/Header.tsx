@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import {
   ArrowRightOnRectangleIcon,
@@ -11,14 +11,21 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import useTheme from 'hooks/useTheme';
 import env from '@/lib/env';
 import { signOut } from 'next-auth/react';
+import { ThemeModes } from '@atlaskit/theme/types';
 
 interface HeaderProps {
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  themeCallback: React.Dispatch<React.SetStateAction<ThemeModes>>;
 }
 
-const Header = ({ setSidebarOpen }: HeaderProps) => {
-  const { toggleTheme } = useTheme();
+const Header = ({ setSidebarOpen, themeCallback }: HeaderProps) => {
+  const { toggleTheme, theme } = useTheme();
+
   const { status, data } = useSession();
+
+  useEffect(() => {
+    themeCallback(theme as ThemeModes);
+  }, [theme]);
 
   if (status === 'loading' || !data) {
     return null;
@@ -27,7 +34,7 @@ const Header = ({ setSidebarOpen }: HeaderProps) => {
   const user = data.user;
 
   return (
-    <div className="sticky top-0 z-40 flex h-14 shrink-0 items-center border-b px-4 sm:gap-x-6 sm:px-6 lg:px-8 bg-white">
+    <div className="dark:bg-[color:hsla(var(--b1))] bg-white sticky top-0 z-40 flex h-14 shrink-0 items-center border-b px-4 sm:gap-x-6 sm:px-6 lg:px-8 dark:border-gray-600">
       <button
         type="button"
         className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
@@ -43,7 +50,7 @@ const Header = ({ setSidebarOpen }: HeaderProps) => {
             <div className="flex items-center cursor-pointer" tabIndex={0}>
               <span className="hidden lg:flex lg:items-center">
                 <button
-                  className="ml-4 text-sm font-semibold leading-6 text-gray-900"
+                  className="ml-4 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300"
                   aria-hidden="true"
                 >
                   {user.name}
@@ -67,7 +74,7 @@ const Header = ({ setSidebarOpen }: HeaderProps) => {
               >
                 <Link
                   href="/settings/account"
-                  className="block px-2 py-1 text-sm leading-6 text-gray-900 cursor-pointer"
+                  className="block px-2 py-1 text-sm leading-6 text-gray-900 cursor-pointer dark:text-gray-300"
                 >
                   <div className="flex items-center">
                     <UserCircleIcon className="w-5 h-5 mr-1" /> Account
@@ -78,7 +85,7 @@ const Header = ({ setSidebarOpen }: HeaderProps) => {
               {env.darkModeEnabled && (
                 <li>
                   <button
-                    className="block px-2 py-1 text-sm leading-6 text-gray-900 cursor-pointer"
+                    className="block px-2 py-1 text-sm leading-6 text-gray-900 cursor-pointer dark:text-gray-300"
                     type="button"
                     onClick={toggleTheme}
                   >
@@ -91,7 +98,7 @@ const Header = ({ setSidebarOpen }: HeaderProps) => {
 
               <li>
                 <button
-                  className="block px-2 py-1 text-sm leading-6 text-gray-900 cursor-pointer"
+                  className="block px-2 py-1 text-sm leading-6 text-gray-900 cursor-pointer dark:text-gray-300"
                   type="button"
                   onClick={() => signOut()}
                 >

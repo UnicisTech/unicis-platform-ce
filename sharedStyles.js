@@ -9,7 +9,6 @@ export const WithoutRing = styled.div.attrs(() => ({
 `;
 
 export const IssuePanelContainer = styled.div`
-  background-color: white;
   padding: 20px 20px;
 `;
 

@@ -1,13 +1,23 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Loading } from '@/components/shared';
 import { useSession } from 'next-auth/react';
 import React from 'react';
 import Header from './Header';
 import Drawer from './Drawer';
 
+import GlobalTheme from '@atlaskit/theme/components';
+import { ThemeModes } from '@atlaskit/theme/types';
+
 export default function AppShell({ children }) {
   const { status } = useSession();
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const [atlaskitTheme, setAtlaskitTheme] = useState<ThemeModes>('dark');
+
+  const getAtlaskitThemeMode = useCallback(() => {
+    return { mode: atlaskitTheme };
+  }, [atlaskitTheme]);
 
   if (status === 'loading') {
     return <Loading />;
@@ -18,14 +28,21 @@ export default function AppShell({ children }) {
   }
 
   return (
-    <div>
-      <Drawer sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <div className="lg:pl-64">
-        <Header setSidebarOpen={setSidebarOpen} />
-        <main className="py-10">
-          <div className="mx-auto px-4 sm:px-6 lg:px-8">{children}</div>
-        </main>
+    <GlobalTheme.Provider value={getAtlaskitThemeMode}>
+      <div id="emotion-theming" style={{ colorScheme: 'dark' }}>
+        <div>
+          <Drawer sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+          <div className="lg:pl-64 dark:border-gray-200">
+            <Header
+              setSidebarOpen={setSidebarOpen}
+              themeCallback={setAtlaskitTheme}
+            />
+            <main className="py-10">
+              <div className="mx-auto px-4 sm:px-6 lg:px-8">{children}</div>
+            </main>
+          </div>
+        </div>
       </div>
-    </div>
+    </GlobalTheme.Provider>
   );
 }
