@@ -10,7 +10,7 @@ const Card = (props: CardProps) => {
   const { heading, children, button } = props;
 
   return (
-    <div className="card w-full border border-rounded dark:bg-black dark:border-gray-600">
+    <div className="card w-full border border-rounded dark:border-gray-600">
       <div className="border-b border-gray-300 bg-gray-100 dark:border-gray-600 px-3 py-3 text-sm font-medium text-gray-900 flex justify-between items-center dark:bg-gray-700 dark:text-gray-400">
         <div>{heading || ''}</div>
         <div>{button ? button : null}</div>
@@ -45,7 +45,7 @@ const Body = ({
   className?: string;
 }) => {
   return (
-    <div className={`card-body dark:bg-black gap-6 p-6 ${className || ''}`}>
+    <div className={`card-body gap-6 p-6 ${className || ''}`}>
       {children}
     </div>
   );
@@ -53,7 +53,7 @@ const Body = ({
 
 const Footer = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="card-actions justify-end dark:border-gray-600 p-3 border-t bg-gray-50 dark:bg-black">
+    <div className="card-actions justify-end dark:border-gray-600 p-3 border-t bg-gray-50 dark:bg-inherit">
       {children}
     </div>
   );
