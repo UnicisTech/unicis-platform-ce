@@ -45,9 +45,7 @@ const Body = ({
   className?: string;
 }) => {
   return (
-    <div className={`card-body gap-6 p-6 ${className || ''}`}>
-      {children}
-    </div>
+    <div className={`card-body gap-6 p-6 ${className || ''}`}>{children}</div>
   );
 };
 
