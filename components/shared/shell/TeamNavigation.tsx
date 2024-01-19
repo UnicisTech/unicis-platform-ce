@@ -1,4 +1,8 @@
-import { Cog6ToothIcon, CodeBracketIcon } from '@heroicons/react/24/outline';
+import {
+  Cog6ToothIcon,
+  CodeBracketIcon,
+  ChatBubbleBottomCenterTextIcon,
+} from '@heroicons/react/24/outline';
 import { QueueListIcon } from '@heroicons/react/24/solid';
 import { useTranslation } from 'next-i18next';
 import NavigationItems from './NavigationItems';
@@ -46,11 +50,10 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname?.startsWith(`/teams/${slug}`) &&
         activePathname.includes('csc'),
     },
-    // {
-    //   name: t('iap'),
-    //   href: `/teams/${slug}/iap`,
-    //   icon: () => <Icon src="/unicis-iap-logo.png" />
-    // },
+    {
+      name: 'line-break',
+      href: '',
+    },
     {
       name: t('documentation'),
       href: 'https://www.unicis.tech/docs',
@@ -59,6 +62,15 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         activePathname.includes('documentation'),
+    },
+    {
+      name: t('feedback'),
+      href: 'https://feedback.unicis.tech',
+      icon: ChatBubbleBottomCenterTextIcon,
+      className: 'stroke-blue-600',
+      active:
+        activePathname?.startsWith(`/teams/${slug}`) &&
+        activePathname.includes('feedback'),
     },
     {
       name: t('settings'),

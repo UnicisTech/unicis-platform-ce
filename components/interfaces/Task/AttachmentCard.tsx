@@ -69,7 +69,7 @@ const AttachmentsCard = ({
 
   return (
     <>
-      <div className="card card-compact w-36 bg-base-100 shadow-xl p-0.5 m-1">
+      <div className="card card-compact w-36 bg-base-100 shadow-xl p-0.5 m-1 dark:bg-gray-500 dark:text-white">
         <div className="flex">
           <button
             className="btn btn-info btn-xs m-0.5"

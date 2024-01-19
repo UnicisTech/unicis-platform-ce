@@ -28,15 +28,21 @@ const NavigationItems = ({ menus }: NavigationItemsProps) => {
     <ul role="list" className="flex flex-1 flex-col gap-1">
       {menus.map((menu) => (
         <li key={menu.name}>
-          <NavigationItem menu={menu} className={menu.className || ''} />
-          {menu.items && (
-            <ul className="flex flex-col gap-1 mt-1">
-              {menu.items.map((subitem) => (
-                <li key={subitem.name}>
-                  <NavigationItem menu={subitem} className="pl-9" />
-                </li>
-              ))}
-            </ul>
+          {menu.name === 'line-break' ? (
+            <hr className="my-1 border-t border-gray-300 dark:border-gray-600" />
+          ) : (
+            <>
+              <NavigationItem menu={menu} className={menu.className || ''} />
+              {menu.items && (
+                <ul className="flex flex-col gap-1 mt-1">
+                  {menu.items.map((subitem) => (
+                    <li key={subitem.name}>
+                      <NavigationItem menu={subitem} className="pl-9" />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </>
           )}
         </li>
       ))}

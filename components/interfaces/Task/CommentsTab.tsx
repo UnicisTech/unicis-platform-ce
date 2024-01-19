@@ -23,7 +23,7 @@ const CommentsTab = ({
               className={classNames(
                 'inline-flex items-center border-b-2 py-4 text-sm font-medium cursor-pointer',
                 menu.active
-                  ? 'border-gray-900 text-gray-700'
+                  ? 'border-gray-900 text-gray-700 dark:text-gray-200'
                   : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
               )}
               onClick={() => {

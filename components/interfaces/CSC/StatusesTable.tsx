@@ -160,23 +160,25 @@ const StatusesTable = ({
           </table>
         </div>
         {pageData.length ? (
-          <div className="flex justify-center w-30">
-            <div className="btn-group join grid grid-cols-10">
-              <button
-                className="join-item btn btn-outline col-span-4"
-                onClick={goToPreviousPage}
-                disabled={prevButtonDisabled}
-              >
-                Previous page
-              </button>
-              <button className="join-item btn btn-outline col-span-2">{`${currentPage}/${totalPages}`}</button>
-              <button
-                className="join-item btn btn-outline col-span-4"
-                onClick={goToNextPage}
-                disabled={nextButtonDisabled}
-              >
-                Next
-              </button>
+          <div className="w-full mt-3">
+            <div className="flex justify-center w-30">
+              <div className="btn-group join grid grid-cols-10">
+                <button
+                  className="join-item btn btn-outline col-span-4"
+                  onClick={goToPreviousPage}
+                  disabled={prevButtonDisabled}
+                >
+                  Previous page
+                </button>
+                <button className="join-item btn btn-outline col-span-2">{`${currentPage}/${totalPages}`}</button>
+                <button
+                  className="join-item btn btn-outline col-span-4"
+                  onClick={goToNextPage}
+                  disabled={nextButtonDisabled}
+                >
+                  Next
+                </button>
+              </div>
             </div>
           </div>
         ) : null}

@@ -50,7 +50,7 @@ const Header = ({ setSidebarOpen, themeCallback }: HeaderProps) => {
             <div className="flex items-center cursor-pointer" tabIndex={0}>
               <span className="hidden lg:flex lg:items-center">
                 <button
-                  className="ml-4 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300"
+                  className="ml-4 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-400"
                   aria-hidden="true"
                 >
                   {user.name}
@@ -74,7 +74,7 @@ const Header = ({ setSidebarOpen, themeCallback }: HeaderProps) => {
               >
                 <Link
                   href="/settings/account"
-                  className="block px-2 py-1 text-sm leading-6 text-gray-900 cursor-pointer dark:text-gray-300"
+                  className="block px-2 py-1 text-sm leading-6 text-gray-900 cursor-pointer dark:text-gray-400"
                 >
                   <div className="flex items-center">
                     <UserCircleIcon className="w-5 h-5 mr-1" /> Account
@@ -85,7 +85,7 @@ const Header = ({ setSidebarOpen, themeCallback }: HeaderProps) => {
               {env.darkModeEnabled && (
                 <li>
                   <button
-                    className="block px-2 py-1 text-sm leading-6 text-gray-900 cursor-pointer dark:text-gray-300"
+                    className="block px-2 py-1 text-sm leading-6 text-gray-900 cursor-pointer dark:text-gray-400"
                     type="button"
                     onClick={toggleTheme}
                   >
@@ -98,7 +98,7 @@ const Header = ({ setSidebarOpen, themeCallback }: HeaderProps) => {
 
               <li>
                 <button
-                  className="block px-2 py-1 text-sm leading-6 text-gray-900 cursor-pointer dark:text-gray-300"
+                  className="block px-2 py-1 text-sm leading-6 text-gray-900 cursor-pointer dark:text-gray-400"
                   type="button"
                   onClick={() => signOut()}
                 >
