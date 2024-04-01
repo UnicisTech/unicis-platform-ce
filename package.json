@@ -65,6 +65,7 @@
     "formidable": "3.5.0",
     "formik": "2.4.5",
     "i18next": "22.5.1",
+    "mautic-tracking": "^0.9.3",
     "mixpanel-browser": "2.47.0",
     "moment": "2.29.4",
     "multer": "1.4.5-lts.1",
