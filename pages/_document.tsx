@@ -1,10 +1,12 @@
-import { Head, Html, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-export default function Document(props) {
-  return (
-    <Html lang="en" className="h-full" data-theme="boxyhq">
-      <Head>
-        <script
+class MyDocument extends Document {
+  render() {
+    return (
+      <Html>
+        <Head>
+          {/* Your other head elements */}
+          <script
             dangerouslySetInnerHTML={{
               __html: `
                 (function(w,d,t,u,n,a,m){w['MauticTrackingObject']=n;
@@ -12,15 +14,18 @@ export default function Document(props) {
                 m=d.getElementsByTagName(t)[0];a.async=1;a.src=u;m.parentNode.insertBefore(a,m)
                 })(window,document,'script','https://crm.unicis.tech/mtc.js','mt');
 
-                mt('send', 'pageview');
+                mt('send', 'pageview', {email: 'my@email.com', firstname: 'John', lastname: 'John', tags: 'CE'});
               `
             }}
           />
-      </Head>
-      <body className="h-full">
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
 }
+
+export default MyDocument;
