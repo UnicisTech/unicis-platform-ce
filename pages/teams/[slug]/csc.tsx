@@ -15,11 +15,12 @@ import {
   StatusFilter,
 } from '@/components/interfaces/CSC';
 import { PerPageSelector } from '@/components/shared/atlaskit';
-import { perPageOptions } from '@/components/defaultLanding/data/configs/csc';
+import { perPageOptions, getControlOptions } from '@/components/defaultLanding/data/configs/csc';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { getCscStatusesBySlug } from 'models/team';
 import type { Option } from 'types';
 import useISO from 'hooks/useISO';
+import FunctionFilter from '@/components/interfaces/CSC/FunctionFilter';
 
 const CscDashboard = ({
   csc_statuses,
@@ -30,6 +31,9 @@ const CscDashboard = ({
   const { slug } = router.query;
 
   const [statuses, setStatuses] = useState(csc_statuses);
+  const [functionFilter, setFunctionFilter] = useState<
+    null | { label: string; value: string }[]
+  >(null)
   const [sectionFilter, setSectionFilter] = useState<
     null | { label: string; value: string }[]
   >(null);
@@ -114,6 +118,7 @@ const CscDashboard = ({
           marginBottom: '10px',
         }}
       >
+
         <div
           style={{ width: '49%' }}
           className="stats stat-value shadow pl-4 py-4"
@@ -125,6 +130,11 @@ const CscDashboard = ({
         </div>
       </div>
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        {ISO === 'nistcsfv2' &&
+          <FunctionFilter
+            setFunctionFilter={setFunctionFilter}
+          />
+        }
         <SectionFilter ISO={ISO} setSectionFilter={setSectionFilter} />
         <StatusFilter setStatusFilter={setStatusFilter} />
         <PerPageSelector
@@ -141,6 +151,7 @@ const CscDashboard = ({
         ISO={ISO}
         tasks={tasks}
         statuses={statuses}
+        functionFilter={functionFilter}
         sectionFilter={sectionFilter}
         statusFilter={statusFilter}
         perPage={perPage}

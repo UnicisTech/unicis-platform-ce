@@ -77,7 +77,9 @@ const CSCSettings = ({ team }: { team: Team }) => {
                       <option
                         value={option.value}
                         key={index}
-                        disabled={isOptionDisabled}
+                        // Test: disabled until the subscription modal not connected
+                        disabled={false}
+                        // disabled={isOptionDisabled}
                       >
                         {option.label}{' '}
                         {isOptionDisabled &&

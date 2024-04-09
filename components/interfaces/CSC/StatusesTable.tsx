@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import StatusHeader from './StatusHeader';
 import TaskSelector from './TaskSelector';
 import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
@@ -15,6 +15,7 @@ const StatusesTable = ({
   ISO,
   tasks,
   statuses,
+  functionFilter,
   sectionFilter,
   statusFilter,
   perPage,
@@ -24,6 +25,7 @@ const StatusesTable = ({
   ISO: ISO;
   tasks: Array<Task>;
   statuses: any;
+  functionFilter: null | Array<{ label: string; value: string }>;
   sectionFilter: null | Array<{ label: string; value: string }>;
   statusFilter: null | Array<CscOption>;
   perPage: number;
@@ -49,20 +51,18 @@ const StatusesTable = ({
     nextButtonDisabled,
   } = usePagination<ControlOption>(filteredControls, perPage);
 
+  const options = useMemo(() => ISO ? getControlOptions(ISO) : [], [ISO])
+
   useEffect(() => {
-    //TODO: getControlOptions
     let filteredControls = [...getControlOptions(ISO)];
     if (
       (sectionFilter === null || sectionFilter?.length === 0) &&
-      (statusFilter === null || statusFilter?.length === 0)
+      (statusFilter === null || statusFilter?.length === 0) &&
+      (functionFilter === null || functionFilter?.length === 0)
     ) {
-      //TODO: filteredControls intead of getControlOptions
-      setFilteredControls(getControlOptions(ISO));
+      setFilteredControls(filteredControls);
       return;
     }
-    // if (sectionFilter?.length) {
-    //   filteredControls = filteredControls.filter(control => (sectionFilter.map(option => option.label)).includes(control.value.section))
-    // }
     if (sectionFilter?.length) {
       filteredControls = filteredControls.filter((item) => {
         const sections = sectionFilter.map((option) => option.value);
@@ -81,8 +81,16 @@ const StatusesTable = ({
           .includes(statuses[control.value.control])
       );
     }
+
+    if (functionFilter?.length) {
+      filteredControls = filteredControls.filter((item) =>
+        functionFilter
+          .map(option => option.label)
+          .includes(options.find(option => option.value.code === item.value.code)?.value?.function))
+    }
+
     setFilteredControls(filteredControls);
-  }, [sectionFilter, statusFilter]);
+  }, [functionFilter, sectionFilter, statusFilter]);
 
   return (
     <>
