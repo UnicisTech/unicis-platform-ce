@@ -1,15 +1,18 @@
 import defaultJson from '../MVPS-controls.json';
 import iso2013Json from '../ISO-CSC-controls-2013.json';
 import iso2022Json from '../ISO-CSC-controls-2022.json';
-import nistcsfv2 from '../CSF2_1.json'
+import nistcsfv2 from '../CSF2_1.json';
 import { Section } from 'types';
-
 
 const controls = {
   '2013': iso2013Json,
   '2022': iso2022Json,
   default: defaultJson['MVPS-Controls'],
-  'nistcsfv2': nistcsfv2.map(item => ({...item, Control: `${item.Code}: ${item.Control}`, ControlLabel: item.Control}))
+  nistcsfv2: nistcsfv2.map((item) => ({
+    ...item,
+    Control: `${item.Code}: ${item.Control}`,
+    ControlLabel: item.Control,
+  })),
 };
 
 const sections = [
@@ -35,7 +38,7 @@ const isoOptions = [
   { label: 'ISO/IEC 27001:2013', value: '2013' },
   { label: 'ISO/IEC 27001:2022', value: '2022' },
   { label: 'MVSP v1.0-20211007', value: 'default' },
-  { label: 'NIST CSF v2', value: 'nistcsfv2' }
+  { label: 'NIST CSF v2', value: 'nistcsfv2' },
 ];
 
 const perPageOptions: { label: string; value: number }[] = [
@@ -69,35 +72,43 @@ const getSectionsLabels = (iso: string) => {
     case '2022':
     case 'default':
     case 'nistcsfv2':
-      return getSections(iso).map(({ label }) => label)
+      return getSections(iso).map(({ label }) => label);
     // case 'nistcsfv2':
     //   return getFunctions().map(({ label }) => label)
     //For ISO 2013 we should merge the sections because of their big amount
     case '2013':
     default:
       const labelSet = new Set<string>();
-      controls[iso].forEach(item => {
+      controls[iso].forEach((item) => {
         labelSet.add(trimToSecondDot(item.Code));
       });
 
-      const sections = Array.from(labelSet)
-        .map(label => label + " " + controls[iso].find(({ Code }) => Code.includes(label))?.Section.split(" - ")[0])
+      const sections = Array.from(labelSet).map(
+        (label) =>
+          label +
+          ' ' +
+          controls[iso]
+            .find(({ Code }) => Code.includes(label))
+            ?.Section.split(' - ')[0]
+      );
 
-      return sections
+      return sections;
   }
 };
 
 const getControlOptions = (iso: string) =>
-  controls[iso].map(({ Code, Control, Requirements, Section, ControlLabel }) => ({
-    label: `${Code}: ${Section}, ${ControlLabel ? ControlLabel : Control}`,
-    value: {
-      code: Code,
-      control: Control,
-      requirements: Requirements,
-      section: Section,
-      controlLabel: ControlLabel
-    },
-  }));
+  controls[iso].map(
+    ({ Code, Control, Requirements, Section, ControlLabel }) => ({
+      label: `${Code}: ${Section}, ${ControlLabel ? ControlLabel : Control}`,
+      value: {
+        code: Code,
+        control: Control,
+        requirements: Requirements,
+        section: Section,
+        controlLabel: ControlLabel,
+      },
+    })
+  );
 
 const mergePoints = (d) => {
   const merged = [

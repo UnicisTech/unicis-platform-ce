@@ -117,7 +117,9 @@ const StatusesTable = ({
                 >
                   <td className="px-6 py-3">{option.value.code}</td>
                   <td className="px-6 py-3">{option.value.section}</td>
-                  <td className="px-6 py-3">{option.value.controlLabel || option.value.control}</td>
+                  <td className="px-6 py-3">
+                    {option.value.controlLabel || option.value.control}
+                  </td>
                   <td className="px-6 py-3">
                     <span style={{ whiteSpace: 'pre-line' }}>
                       {option.value.requirements}

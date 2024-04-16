@@ -15,7 +15,10 @@ import {
   StatusFilter,
 } from '@/components/interfaces/CSC';
 import { PerPageSelector } from '@/components/shared/atlaskit';
-import { perPageOptions, getControlOptions } from '@/components/defaultLanding/data/configs/csc';
+import {
+  perPageOptions,
+  getControlOptions,
+} from '@/components/defaultLanding/data/configs/csc';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { getCscStatusesBySlug } from 'models/team';
 import type { Option } from 'types';
@@ -114,7 +117,6 @@ const CscDashboard = ({
           marginBottom: '10px',
         }}
       >
-
         <div
           style={{ width: '49%' }}
           className="stats stat-value shadow pl-4 py-4"
