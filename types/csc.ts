@@ -20,6 +20,7 @@ export type ControlOption = {
   value: {
     code: string;
     control: string;
+    controlLabel?: string;
     requirements: string;
     section: string;
   };

@@ -15,7 +15,6 @@ import {
   getRadarChartLabels,
   mergePoints,
   getSections,
-  getFunctions
 } from '@/components/defaultLanding/data/configs/csc';
 
 ChartJS.register(
@@ -31,22 +30,6 @@ const getMaturityLevels = (
   statuses: { [key: string]: string },
   ISO: string
 ) => {
-  // For CSF we build RadarChart based on Function property, not section.
-  if (ISO === 'nistcsfv2') {
-    const functions = getFunctions()
-    const data = functions
-      .map(({ label }) => label)
-      .map(label => {
-        const totalControls = controls[ISO]
-          .filter(control => control.Function === label)
-          .map(({ Control }) => Control)
-        const totalControlsValue = totalControls.reduce((accumulator, control) => (statusOptions.find(({ label }) => label === statuses[control])?.value || 0) + accumulator, 0);
-        return totalControlsValue / totalControls.length
-      })
-    const roundedData = data.map(value => Math.round(value))
-    return roundedData
-  }
-
   const sections = getSections(ISO);
   const data = sections
     .map(({ label }) => label)

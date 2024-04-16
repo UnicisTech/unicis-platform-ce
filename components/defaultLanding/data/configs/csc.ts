@@ -1,7 +1,7 @@
 import defaultJson from '../MVPS-controls.json';
 import iso2013Json from '../ISO-CSC-controls-2013.json';
 import iso2022Json from '../ISO-CSC-controls-2022.json';
-import nistcsfv2 from '../CSF2.json'
+import nistcsfv2 from '../CSF2_1.json'
 import { Section } from 'types';
 
 
@@ -9,7 +9,7 @@ const controls = {
   '2013': iso2013Json,
   '2022': iso2022Json,
   default: defaultJson['MVPS-Controls'],
-  'nistcsfv2': nistcsfv2
+  'nistcsfv2': nistcsfv2.map(item => ({...item, Control: `${item.Code}: ${item.Control}`, ControlLabel: item.Control}))
 };
 
 const sections = [
@@ -68,9 +68,10 @@ const getSectionsLabels = (iso: string) => {
   switch (iso) {
     case '2022':
     case 'default':
-      return getSections(iso).map(({ label }) => label)
     case 'nistcsfv2':
-      return getFunctions().map(({ label }) => label)
+      return getSections(iso).map(({ label }) => label)
+    // case 'nistcsfv2':
+    //   return getFunctions().map(({ label }) => label)
     //For ISO 2013 we should merge the sections because of their big amount
     case '2013':
     default:
@@ -87,14 +88,14 @@ const getSectionsLabels = (iso: string) => {
 };
 
 const getControlOptions = (iso: string) =>
-  controls[iso].map(({ Code, Control, Requirements, Section, Function }) => ({
-    label: `${Code}: ${Section}, ${Control}`,
+  controls[iso].map(({ Code, Control, Requirements, Section, ControlLabel }) => ({
+    label: `${Code}: ${Section}, ${ControlLabel ? ControlLabel : Control}`,
     value: {
       code: Code,
       control: Control,
       requirements: Requirements,
       section: Section,
-      function: Function
+      controlLabel: ControlLabel
     },
   }));
 
@@ -143,21 +144,21 @@ const getSections = (iso: string): Section[] => {
   return sections;
 };
 
-// Functions that used in CSF2
-const getFunctions = (): { label: string; value: string }[] => {
-  const functionSet = new Set<string>();
+// // Functions that used in CSF2
+// const getFunctions = (): { label: string; value: string }[] => {
+//   const functionSet = new Set<string>();
 
-  nistcsfv2.forEach(item => {
-    functionSet.add(item.Function);
-  });
+//   nistcsfv2.forEach(item => {
+//     functionSet.add(item.Function);
+//   });
 
-  const functions = Array.from(functionSet).map(item => ({
-    label: item,
-    value: item,
-  }));
+//   const functions = Array.from(functionSet).map(item => ({
+//     label: item,
+//     value: item,
+//   }));
 
-  return functions;
-}
+//   return functions;
+// }
 
 const getSectionFilterOptions = (iso: string) => {
   if (iso !== '2013') {
@@ -287,7 +288,6 @@ export {
   getRadarChartLabels,
   getControlOptions,
   getSections,
-  getFunctions,
   getSectionFilterOptions,
   statusOptions,
   sections,

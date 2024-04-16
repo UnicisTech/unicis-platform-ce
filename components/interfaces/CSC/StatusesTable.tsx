@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import StatusHeader from './StatusHeader';
 import TaskSelector from './TaskSelector';
 import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
@@ -15,7 +15,6 @@ const StatusesTable = ({
   ISO,
   tasks,
   statuses,
-  functionFilter,
   sectionFilter,
   statusFilter,
   perPage,
@@ -25,7 +24,6 @@ const StatusesTable = ({
   ISO: ISO;
   tasks: Array<Task>;
   statuses: any;
-  functionFilter: null | Array<{ label: string; value: string }>;
   sectionFilter: null | Array<{ label: string; value: string }>;
   statusFilter: null | Array<CscOption>;
   perPage: number;
@@ -51,14 +49,11 @@ const StatusesTable = ({
     nextButtonDisabled,
   } = usePagination<ControlOption>(filteredControls, perPage);
 
-  const options = useMemo(() => ISO ? getControlOptions(ISO) : [], [ISO])
-
   useEffect(() => {
     let filteredControls = [...getControlOptions(ISO)];
     if (
       (sectionFilter === null || sectionFilter?.length === 0) &&
-      (statusFilter === null || statusFilter?.length === 0) &&
-      (functionFilter === null || functionFilter?.length === 0)
+      (statusFilter === null || statusFilter?.length === 0)
     ) {
       setFilteredControls(filteredControls);
       return;
@@ -82,15 +77,8 @@ const StatusesTable = ({
       );
     }
 
-    if (functionFilter?.length) {
-      filteredControls = filteredControls.filter((item) =>
-        functionFilter
-          .map(option => option.label)
-          .includes(options.find(option => option.value.code === item.value.code)?.value?.function))
-    }
-
     setFilteredControls(filteredControls);
-  }, [functionFilter, sectionFilter, statusFilter]);
+  }, [sectionFilter, statusFilter]);
 
   return (
     <>
@@ -129,7 +117,7 @@ const StatusesTable = ({
                 >
                   <td className="px-6 py-3">{option.value.code}</td>
                   <td className="px-6 py-3">{option.value.section}</td>
-                  <td className="px-6 py-3">{option.value.control}</td>
+                  <td className="px-6 py-3">{option.value.controlLabel || option.value.control}</td>
                   <td className="px-6 py-3">
                     <span style={{ whiteSpace: 'pre-line' }}>
                       {option.value.requirements}
