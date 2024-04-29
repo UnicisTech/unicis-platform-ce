@@ -1,7 +1,6 @@
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { getTeam } from "models/team";
-import { ChartBarIcon } from "@heroicons/react/24/solid";
+
 
 const ProcessingActivitiesAnalysis = () => {
   const router = useRouter();
@@ -12,7 +11,7 @@ const ProcessingActivitiesAnalysis = () => {
   return (
     <>
       {/* Processing Analysis */}
-      <div className="mx-auto mt-4 w-full max-w-7xl rounded-md bg-gray-50 p-2">
+      <div className="mx-auto mt-4 w-full max-w-7xl rounded-md p-2">
         <div className="mb-2 flex items-center justify-between">
           <h4>{t("Processing Activities")}</h4>
         </div>
