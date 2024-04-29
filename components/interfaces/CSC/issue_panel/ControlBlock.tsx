@@ -96,6 +96,7 @@ const ControlBlock = ({
               value={controlOptions.find(
                 ({ value }) => value.control === control
               )}
+              formatOptionLabel={({value}) => `${value.code}: ${value.section}, ${value.controlLabel}, ${value.requirements}`}
               placeholder="Choose a control"
               isDisabled={isSaving || isDeleting}
             />
