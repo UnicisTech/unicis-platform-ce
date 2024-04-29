@@ -134,6 +134,7 @@ const ControlBlock = ({
           statusValue={status}
           control={control}
           handler={statusHandler}
+          isDisabled={false}
         />
       </>
       {controlData?.requirements && (
