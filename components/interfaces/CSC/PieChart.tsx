@@ -58,7 +58,7 @@ const PieChart = ({ statuses }: { statuses: { [key: string]: string } }) => {
   const options: any = {
     plugins: {
       legend: {
-        position: 'right',
+        position: 'top',
       },
       title: {
         display: true,

@@ -59,7 +59,7 @@ const Signup: NextPageWithLayout<
 
         {(authProviders.github || authProviders.google) &&
           authProviders.credentials && <div className="divider">or</div>} */}
-
+        {/* <>{authProviders.email? 'True' : 'False'}</> */}
         {authProviders.credentials && (
           <>
             {token ? (

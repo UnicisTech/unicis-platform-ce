@@ -3,7 +3,7 @@ import {
   CodeBracketIcon,
   ChatBubbleBottomCenterTextIcon,
 } from '@heroicons/react/24/outline';
-import { QueueListIcon } from '@heroicons/react/24/solid';
+import { QueueListIcon, ChartBarIcon } from '@heroicons/react/24/solid';
 import { useTranslation } from 'next-i18next';
 import NavigationItems from './NavigationItems';
 import { NavigationProps, MenuItem } from './NavigationItems';
@@ -17,6 +17,15 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   const { t } = useTranslation('common');
 
   const menus: MenuItem[] = [
+    {
+      name: t('Dashboard'),
+      href: `/teams/${slug}/dashboard`,
+      icon: ChartBarIcon,
+      className: 'fill-blue-600 stroke-blue-600',
+      active:
+        activePathname?.startsWith(`/teams/${slug}`) &&
+        activePathname.includes('dashboard'),
+    },
     {
       name: t('all-tasks'),
       href: `/teams/${slug}/tasks`,
