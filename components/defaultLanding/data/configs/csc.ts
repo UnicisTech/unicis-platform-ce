@@ -228,6 +228,29 @@ const statusOptions: { label: string; value: number }[] = [
   },
 ];
 
+const taskStatusOptions: { label: string; value: number }[] = [
+  {
+    label: 'To Do',
+    value: 0,
+  },
+  {
+    label: 'In Progress',
+    value: 1,
+  },
+  {
+    label: 'In Review',
+    value: 2,
+  },
+  {
+    label: 'Feedback',
+    value: 3,
+  },
+  {
+    label: 'Done',
+    value: 4,
+  },
+];
+
 const colourStyles = {
   control: (styles: any) => ({ ...styles }),
   option: (styles: any, { data }: any) => {
@@ -301,6 +324,7 @@ export {
   getSections,
   getSectionFilterOptions,
   statusOptions,
+  taskStatusOptions,
   sections,
   perPageOptions,
   controls,

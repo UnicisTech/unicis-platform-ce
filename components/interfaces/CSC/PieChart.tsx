@@ -1,35 +1,36 @@
 import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import { statusOptions } from '@/components/defaultLanding/data/configs/csc';
+import { statusOptions, taskStatusOptions } from '@/components/defaultLanding/data/configs/csc';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const countStatuses = (statuses: { [key: string]: string }) => {
-  const labels = statusOptions.map(({ label }) => label);
+const countStatuses = (
+  statuses: { [key: string]: string; },
+  page_name: string,
+) => {
+  let labels;
+
+  if (page_name === 'task') {
+    labels = taskStatusOptions.map(({ label }) => label);
+  } else{
+    labels = statusOptions.map(({ label }) => label);
+  }
   const countArray = labels.map(
     (name) =>
       Object.entries(statuses).filter(([_, status]) => status === name).length
   );
+
   return countArray;
 };
 
-const PieChart = ({ statuses }: { statuses: { [key: string]: string } }) => {
+const PieChart = ({ statuses, labels, page_name }: {page_name: string, statuses: { [key: string]: string }, labels: any[] }) => {
   const data = {
-    labels: [
-      'Unknown',
-      'Not Applicable',
-      'Not Performed',
-      'Performed Informally',
-      'Planned',
-      'Well Defined',
-      'Quantitatively Controlled',
-      'Continuously Improving',
-    ],
+    labels: labels,
     datasets: [
       {
         label: '# of Controls',
-        data: countStatuses(statuses),
+        data: countStatuses(statuses, page_name),
         backgroundColor: [
           'rgba(241, 241, 241, 1)',
           'rgba(178, 178, 178, 1)',
@@ -69,7 +70,7 @@ const PieChart = ({ statuses }: { statuses: { [key: string]: string } }) => {
     responsive: true,
   };
 
-  countStatuses(statuses);
+  countStatuses(statuses, page_name);
 
   return <Pie data={data} options={options} />;
 };

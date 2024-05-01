@@ -17,12 +17,22 @@ import {
 import { PerPageSelector } from '@/components/shared/atlaskit';
 import {
   perPageOptions,
-  getControlOptions,
 } from '@/components/defaultLanding/data/configs/csc';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { getCscStatusesBySlug } from 'models/team';
 import type { Option } from 'types';
 import useISO from 'hooks/useISO';
+
+const labels = [
+  'Unknown',
+  'Not Applicable',
+  'Not Performed',
+  'Performed Informally',
+  'Planned',
+  'Well Defined',
+  'Quantitatively Controlled',
+  'Continuously Improving',
+];
 
 const CscDashboard = ({
   csc_statuses,
@@ -121,7 +131,11 @@ const CscDashboard = ({
           style={{ width: '49%' }}
           className="stats stat-value shadow pl-4 py-4"
         >
-          <PieChart statuses={statuses} />
+          <PieChart
+            page_name={`csc`}
+            statuses={statuses}
+            labels={labels}
+          />
         </div>
         <div style={{ width: '49%' }} className="stats stat-value shadow">
           <RadarChart statuses={statuses} ISO={ISO} />
