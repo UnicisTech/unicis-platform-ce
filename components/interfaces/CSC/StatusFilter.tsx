@@ -1,14 +1,15 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Select from '@atlaskit/select';
-import { statusOptions } from '@/components/defaultLanding/data/configs/csc';
+import { statusOptions, taskStatusOptions } from '@/components/defaultLanding/data/configs/csc';
 import { WithoutRing } from 'sharedStyles';
-import type { CscOption } from 'types';
+import type { CscOption, UnicisPages } from 'types';
 
-const StatusFilter = ({
+const StatusCscFilter = ({
   setStatusFilter,
 }: {
   setStatusFilter: Dispatch<SetStateAction<CscOption[] | null>>;
-}) => {
+  }) => {
+
   return (
     <div style={{ margin: '0 5px' }}>
       <WithoutRing>
@@ -28,4 +29,31 @@ const StatusFilter = ({
   );
 };
 
-export default StatusFilter;
+const StatusTaskFilter = ({
+  setStatusFilter,
+}: {
+  setStatusFilter: Dispatch<SetStateAction<CscOption[] | null>>;
+}) => {
+  return (
+    <div style={{ margin: '0 5px' }}>
+      <WithoutRing>
+        <Select
+          inputId="multi-select-status-filter"
+          className="multi-select"
+          classNamePrefix="react-select"
+          options={taskStatusOptions}
+          onChange={(value) => {
+            setStatusFilter([...value]);
+          }}
+          placeholder="Choose a status"
+          isMulti
+        />
+      </WithoutRing>
+    </div>
+  );
+};
+
+export {
+  StatusCscFilter,
+  StatusTaskFilter,
+};

@@ -5,13 +5,12 @@ import { Error, Loading } from '@/components/shared';
 import { TeamTab } from '@/components/team';
 import env from '@/lib/env';
 import useISO from 'hooks/useISO';
-import useTasks from 'hooks/useTasks';
 import useTeam from 'hooks/useTeam';
 import { getCscStatusesBySlug } from 'models/team';
 import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const statusesData = {
   '12': 'Well Defined',
@@ -30,22 +29,21 @@ const labels = [
   'Well Defined',
   'Quantitatively Controlled',
   'Continuously Improving',
-]
-
+];
 
 const TeamDashboard = ({
   teamFeatures,
   csc_statuses,
+  slug,
 }: {
   teamFeatures: any;
   csc_statuses: { [key: string]: string };
+  slug: string;
 }) => {
   const { t } = useTranslation('common');
   const { isLoading: teamLoading, isError: teamError, team } = useTeam();
   const [statuses, setStatuses] = useState(csc_statuses);
   const { ISO } = useISO(team);
-
-  console.log(statuses);
 
   if (teamLoading) {
     return <Loading />;
@@ -99,6 +97,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
       teamFeatures: env.teamFeatures,
       csc_statuses: await getCscStatusesBySlug(slug),
+      slug: slug,
     },
   };
 }

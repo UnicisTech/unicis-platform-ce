@@ -4,7 +4,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Loading, Error } from '@/components/shared';
-//import { Loading, Error } from "@/components/ui";
 import useTeam from 'hooks/useTeam';
 import { GetServerSidePropsContext } from 'next';
 import {
@@ -12,7 +11,7 @@ import {
   PieChart,
   RadarChart,
   SectionFilter,
-  StatusFilter,
+  StatusCscFilter,
 } from '@/components/interfaces/CSC';
 import { PerPageSelector } from '@/components/shared/atlaskit';
 import {
@@ -143,7 +142,7 @@ const CscDashboard = ({
       </div>
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <SectionFilter ISO={ISO} setSectionFilter={setSectionFilter} />
-        <StatusFilter setStatusFilter={setStatusFilter} />
+        <StatusCscFilter setStatusFilter={setStatusFilter} />
         <PerPageSelector
           setPerPage={setPerPage}
           options={perPageOptions}

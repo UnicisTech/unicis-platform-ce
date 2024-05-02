@@ -1,7 +1,12 @@
+import axios from 'axios';
 import useTasks from 'hooks/useTasks';
+import type { Option } from 'types';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PieChart from '../PieChart';
+import { StatusTaskFilter } from '../StatusFilter';
+import { useCallback, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const statusesData = {
   '12': 'To Do',
@@ -11,20 +16,34 @@ const statusesData = {
   21: 'Done',
 };
 
-const labels = [
-  'To Do',
-  'In Progress',
-  'In Review',
-  'Feedback',
-  'Done',
-]
-
+const labels = ['To Do', 'In Progress', 'In Review', 'Feedback', 'Done'];
 
 const TasksAnalysis = () => {
   const router = useRouter();
   const { t } = useTranslation('translation');
   const { slug } = router.query;
+  const [statusFilter, setStatusFilter] = useState<null | Option[]>(null);
+  const [perPage, setPerPage] = useState<number>(10);
   const { isLoading, isError, tasks } = useTasks(slug as string);
+
+  const statusHandler = useCallback(
+    async (control: string, value: string) => {
+      const response = await axios.put(`/api/teams/${slug}/csc`, {
+        control,
+        value,
+      });
+
+      const { data, error } = response.data;
+
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+
+      setStatuses(data.statuses);
+    },
+    [slug]
+  );
 
   return (
     <>
@@ -42,15 +61,25 @@ const TasksAnalysis = () => {
             marginBottom: '10px',
           }}
         >
-          <div style={{ width: '49%' }} className="stats py-2 stat-value shadow">
-            <PieChart page_name={`task`} statuses={statusesData} labels={labels}/>
+          <div
+            style={{ width: '49%' }}
+            className="stats py-2 stat-value shadow"
+          >
+            <PieChart
+              page_name={`task`}
+              statuses={statusesData}
+              labels={labels}
+            />
           </div>
           <div style={{ width: '49%' }} className="shadow p-4">
-            <div className="flex gap-4">
+            <div className="flex px-2 gap-4">
               <h1 className="text-center text-sm font-bold">Total Tasks</h1>
               <span className="font-sans text-sm font-bold">
                 {tasks?.length}
               </span>
+            </div>
+            <div className='py-4'>
+              <StatusTaskFilter setStatusFilter={setStatusFilter} />
             </div>
           </div>
         </div>
@@ -60,3 +89,6 @@ const TasksAnalysis = () => {
 };
 
 export default TasksAnalysis;
+function setStatuses(statuses: any) {
+  throw new Error('Function not implemented.');
+}
