@@ -1,5 +1,5 @@
 import { PieChart, RadarChart } from '@/components/interfaces/CSC';
-import { TeamTaskAnalysis } from '@/components/interfaces/CSC/Analysis';
+import { TeamCscAnalysis, TeamTaskAnalysis } from '@/components/interfaces/CSC/Analysis';
 import ProcessingActivitiesAnalysis from '@/components/interfaces/CSC/Analysis/TeamProcessingActivitiesAnalysis';
 import { Error, Loading } from '@/components/shared';
 import { TeamTab } from '@/components/team';
@@ -10,26 +10,7 @@ import { getCscStatusesBySlug } from 'models/team';
 import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useCallback, useState } from 'react';
 
-const statusesData = {
-  '12': 'Well Defined',
-  '1': 'Quantitatively Controlled',
-  2: 'Quantitatively Controlled',
-  3: 'Performed Informally',
-  21: 'Planned',
-};
-
-const labels = [
-  'Unknown',
-  'Not Applicable',
-  'Not Performed',
-  'Performed Informally',
-  'Planned',
-  'Well Defined',
-  'Quantitatively Controlled',
-  'Continuously Improving',
-];
 
 const TeamDashboard = ({
   teamFeatures,
@@ -42,7 +23,6 @@ const TeamDashboard = ({
 }) => {
   const { t } = useTranslation('common');
   const { isLoading: teamLoading, isError: teamError, team } = useTeam();
-  const [statuses, setStatuses] = useState(csc_statuses);
   const { ISO } = useISO(team);
 
   if (teamLoading) {
@@ -61,28 +41,9 @@ const TeamDashboard = ({
     <>
       <TeamTab activeTab="dashboard" team={team} teamFeatures={teamFeatures} />
       <div className="space-y-6">
-        <TeamTaskAnalysis />
+        <TeamTaskAnalysis slug={slug} csc_statuses={csc_statuses} />
         <ProcessingActivitiesAnalysis />
-        <div
-          style={{
-            height: '400px',
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'space-around',
-            marginBottom: '10px',
-          }}
-        >
-          <div style={{ width: '49%' }} className="stats p-4 stat-value shadow">
-            <PieChart
-              page_name={`dashboard`}
-              statuses={statusesData}
-              labels={labels}
-            />
-          </div>
-          <div style={{ width: '49%' }} className="stats p-4 stat-value shadow">
-            <RadarChart ISO={'default'} statuses={statusesData} />
-          </div>
-        </div>
+        <TeamCscAnalysis slug={slug} csc_statuses={csc_statuses} />
       </div>
     </>
   );

@@ -1,49 +1,35 @@
-import axios from 'axios';
-import useTasks from 'hooks/useTasks';
-import type { Option } from 'types';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import PieChart from '../PieChart';
-import { StatusTaskFilter } from '../StatusFilter';
-import { useCallback, useState } from 'react';
-import toast from 'react-hot-toast';
-
-const statusesData = {
-  '12': 'To Do',
-  '1': 'In Progress',
-  2: 'In Review',
-  3: 'Feedback',
-  21: 'Done',
-};
+import { TaskStatusesDetail } from '@/components/interfaces/CSC';
+import useISO from 'hooks/useISO';
+import useTeam from 'hooks/useTeam';
+import useTeamTasks from 'hooks/useTeamTasks';
 
 const labels = ['To Do', 'In Progress', 'In Review', 'Feedback', 'Done'];
 
-const TasksAnalysis = () => {
-  const router = useRouter();
+const TasksAnalysis = ({
+  csc_statuses,
+  slug,
+}: {
+  csc_statuses: { [key: string]: string };
+  slug: string;
+}) => {
   const { t } = useTranslation('translation');
-  const { slug } = router.query;
-  const [statusFilter, setStatusFilter] = useState<null | Option[]>(null);
-  const [perPage, setPerPage] = useState<number>(10);
-  const { isLoading, isError, tasks } = useTasks(slug as string);
+  const { tasks, mutateTasks } = useTeamTasks(slug as string);
+  const {
+    isLoading: teamLoading,
+    isError: teamError,
+    team,
+  } = useTeam(slug as string);
+  const { ISO } = useISO(team);
 
-  const statusHandler = useCallback(
-    async (control: string, value: string) => {
-      const response = await axios.put(`/api/teams/${slug}/csc`, {
-        control,
-        value,
-      });
-
-      const { data, error } = response.data;
-
-      if (error) {
-        toast.error(error.message);
-        return;
+  const statuses: { [key: string]: string } =
+    tasks?.reduce((acc: { [key: string]: string }, task) => {
+      if (task.status && !acc[task.status.toLowerCase()]) {
+        acc[task.id] = getStatusName(task.status); // Store the original casing of the status name
       }
-
-      setStatuses(data.statuses);
-    },
-    [slug]
-  );
+      return acc;
+    }, {}) || {};
 
   return (
     <>
@@ -65,22 +51,14 @@ const TasksAnalysis = () => {
             style={{ width: '49%' }}
             className="stats py-2 stat-value shadow"
           >
-            <PieChart
-              page_name={`task`}
-              statuses={statusesData}
-              labels={labels}
-            />
+            <PieChart page_name={`task`} statuses={statuses} labels={labels} />
           </div>
           <div style={{ width: '49%' }} className="shadow p-4">
-            <div className="flex px-2 gap-4">
-              <h1 className="text-center text-sm font-bold">Total Tasks</h1>
-              <span className="font-sans text-sm font-bold">
-                {tasks?.length}
-              </span>
-            </div>
-            <div className='py-4'>
-              <StatusTaskFilter setStatusFilter={setStatusFilter} />
-            </div>
+            <TaskStatusesDetail
+              ISO={ISO || 'default'}
+              tasks={tasks}
+              statuses={statuses}
+            />
           </div>
         </div>
       </div>
@@ -89,6 +67,20 @@ const TasksAnalysis = () => {
 };
 
 export default TasksAnalysis;
-function setStatuses(statuses: any) {
-  throw new Error('Function not implemented.');
+
+function getStatusName(statusId: string): string {
+  switch (statusId.toLowerCase()) {
+    case 'todo':
+      return 'To Do';
+    case 'inprogress':
+      return 'In Progress';
+    case 'inreview':
+      return 'In Review';
+    case 'feedback':
+      return 'Feedback';
+    case 'done':
+      return 'Done';
+    default:
+      return statusId;
+  }
 }
