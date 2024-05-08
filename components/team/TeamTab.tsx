@@ -25,7 +25,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
 
   const navigations = [
     {
-      name: 'dashboard',
+      name: 'Dashboard',
       href: `/teams/${team.slug}/dashboard`,
       active: activeTab === 'dashboard',
       icon: ChartBarIcon,

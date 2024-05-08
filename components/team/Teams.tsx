@@ -83,7 +83,7 @@ const Teams = () => {
                   return (
                     <tr key={team.id}>
                       <td>
-                        <Link href={`/teams/${team.slug}/members`}>
+                        <Link href={`/teams/${team.slug}/dashboard`}>
                           <div className="flex items-center justify-start space-x-2">
                             <LetterAvatar name={team.name} />
                             <span className="underline">{team.name}</span>
