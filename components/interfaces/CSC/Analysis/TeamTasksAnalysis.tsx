@@ -26,7 +26,16 @@ const TasksAnalysis = ({
   const statuses: { [key: string]: string } =
     tasks?.reduce((acc: { [key: string]: string }, task) => {
       if (task.status && !acc[task.status.toLowerCase()]) {
-        acc[task.id] = getStatusName(task.status); // Store the original casing of the status name
+        acc[task.id] = getStatusName(task.status);
+      }
+      return acc;
+    }, {}) || {};
+  
+  const statusCounts: { [key: string]: number } =
+    tasks?.reduce((acc: { [key: string]: number }, task) => {
+      if (task.status) {
+        const statusKey = task.status.toLowerCase();
+        acc[statusKey] = (acc[statusKey] || 0) + 1;
       }
       return acc;
     }, {}) || {};
@@ -55,9 +64,8 @@ const TasksAnalysis = ({
           </div>
           <div style={{ width: '49%' }} className="shadow p-4">
             <TaskStatusesDetail
-              ISO={ISO || 'default'}
               tasks={tasks}
-              statuses={statuses}
+              statusCounts={statusCounts}
             />
           </div>
         </div>
