@@ -14,10 +14,14 @@ enum Role {
   AUDITOR
 }
 
-enum Subscription {
-  COMMUNITY
+enum Plan {
   PREMIUM
   ULTIMATE
+}
+
+enum PaymentStatus {
+  SUCCESS
+  FAILED
 }
 
 model Account {
@@ -55,41 +59,66 @@ model VerificationToken {
 }
 
 model User {
-  id            String       @id @default(uuid())
+  id            String         @id @default(uuid())
   name          String
-  email         String       @unique
+  email         String         @unique
   emailVerified DateTime?
   password      String?
   image         String?
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @default(now())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @default(now())
   accounts      Account[]
   invitations   Invitation[]
   sessions      Session[]
   Task          Task[]
   teamMembers   TeamMember[]
   Comment       Comment[]
+  Subscription  Subscription[]
 }
 
 model Team {
-  id          String       @id @default(uuid())
-  taskIndex   Int          @default(1)
-  name        String
-  slug        String   @unique
-  domain      String?  @unique
-  defaultRole Role     @default(MEMBER)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
-  members     TeamMember[]
-  invitations Invitation[]
-  apiKeys     ApiKey[]
-  tasks       Task[]
-  properties  Json         @default("{}")
-  subscription Subscription @default(COMMUNITY)
+  id           String        @id @default(uuid())
+  taskIndex    Int           @default(1)
+  name         String
+  slug         String        @unique
+  domain       String?       @unique
+  defaultRole  Role          @default(MEMBER)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @default(now())
+  members      TeamMember[]
+  invitations  Invitation[]
+  apiKeys      ApiKey[]
+  tasks        Task[]
+  properties   Json          @default("{}")
+  subscription Subscription?
+}
+
+model Subscription {
+  id              String    @id @default(uuid())
+  teamId          String    @unique
+  userEmail       String
+  plan            Plan
+  startDate       DateTime
+  nextInvoiceDate DateTime
+  payments        Payment[]
+
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userEmail], references: [email], onDelete: Cascade)
+}
+
+model Payment {
+  id             String        @id @default(uuid())
+  subscriptionId String
+  date           DateTime
+  amount         Int
+  status         PaymentStatus
+  paymentUrl     String
+
+  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
 }
 
 model Task {
-  id          Int       @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
   taskNumber  Int
   teamId      String
   authorId    String
@@ -100,8 +129,8 @@ model Task {
   comments    Comment[]
   attachments Attachment[]
   properties  Json
-  author      User      @relation(fields: [authorId], references: [id])
-  team        Team      @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  author      User         @relation(fields: [authorId], references: [id])
+  team        Team         @relation(fields: [teamId], references: [id], onDelete: Cascade)
 }
 
 model Comment {
@@ -116,12 +145,12 @@ model Comment {
 }
 
 model Attachment {
-  id        String   @id @default(uuid())
-  taskId    Int
-  filename  String
-  fileData  Bytes
-  url       String
-  task      Task     @relation(fields: [taskId], references: [id])
+  id       String @id @default(uuid())
+  taskId   Int
+  filename String
+  fileData Bytes
+  url      String
+  task     Task   @relation(fields: [taskId], references: [id])
 }
 
 model TeamMember {
