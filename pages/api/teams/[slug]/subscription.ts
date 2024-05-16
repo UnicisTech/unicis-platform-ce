@@ -1,5 +1,5 @@
 import { subscriptions } from '@/lib/subscriptions';
-import { throwIfNoTeamAccess } from 'models/team';
+// import { throwIfNoTeamAccess } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
@@ -27,7 +27,8 @@ export default async function handler(
 
 // Get permissions for a team for the current user
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
-  const teamRole = await throwIfNoTeamAccess(req, res);
-
-  res.json({ data: subscriptions[teamRole.team.subscription] });
+  // const teamRole = await throwIfNoTeamAccess(req, res);
+  // TEMP
+  res.json({ data: subscriptions[0] });
+  // res.json({ data: teamRole.team.subscription });
 };

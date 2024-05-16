@@ -223,7 +223,11 @@ export const getTeamMember = async (userId: string, slug: string) => {
       },
     },
     include: {
-      team: true,
+      team: {
+        include: {
+          subscription: true,
+        },
+      },
     },
   });
 

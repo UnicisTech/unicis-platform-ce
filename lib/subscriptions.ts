@@ -1,8 +1,8 @@
-import { Subscription } from '@prisma/client';
+// import { Subscription } from '@prisma/client';
 import type { ISO } from 'types';
 
-export type SubscriptionType = (typeof Subscription)[keyof typeof Subscription];
-
+// export type SubscriptionType = (typeof Subscription)[keyof typeof Subscription];
+type SubscriptionType = 'COMMUNITY' | 'PREMIUM' | 'ULTIMATE';
 export type SubscriptionPermissions = {
   [subscription in SubscriptionType]: Permission;
 };
@@ -12,20 +12,20 @@ export type Permission = {
   avaliableISO: ISO[];
 };
 
-export const availableRoles = [
-  {
-    id: Subscription.COMMUNITY,
-    name: 'Community',
-  },
-  {
-    id: Subscription.PREMIUM,
-    name: 'Premium',
-  },
-  {
-    id: Subscription.ULTIMATE,
-    name: 'Ultimate',
-  },
-];
+// export const availableRoles = [
+//   {
+//     id: Subscription.COMMUNITY,
+//     name: 'Community',
+//   },
+//   {
+//     id: Subscription.PREMIUM,
+//     name: 'Premium',
+//   },
+//   {
+//     id: Subscription.ULTIMATE,
+//     name: 'Ultimate',
+//   },
+// ];
 
 export const subscriptions: SubscriptionPermissions = {
   COMMUNITY: {

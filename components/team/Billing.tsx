@@ -7,7 +7,6 @@ import React from 'react';
 import { Button } from 'react-daisyui';
 import * as Yup from 'yup';
 import mautic from 'mautic-tracking';
- 
 
 const availableSubscription = [
   {
@@ -25,7 +24,6 @@ const availableSubscription = [
 ];
 
 const Billing = ({ team }: { team: Team }) => {
-  
   mautic.initialize('https://crm.unicis.tech/mtc.js'); //Mautic tracking
 
   const { subscription } = useSubscription(team.slug);
