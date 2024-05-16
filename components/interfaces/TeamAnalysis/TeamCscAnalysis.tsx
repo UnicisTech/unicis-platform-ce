@@ -1,8 +1,8 @@
-import useTasks from "hooks/useTasks";
-import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
-import PieChart from "../PieChart";
-import RadarChart from "../RadarChart";
+import useTasks from 'hooks/useTasks';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import PieChart from '../CSC/PieChart';
+import RadarChart from '../CSC/RadarChart';
 
 const statusesData = {
   '12': 'Well Defined',

@@ -1,20 +1,25 @@
-import useTasks from "hooks/useTasks";
-import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
-
+import useTasks from 'hooks/useTasks';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import CountrySelector from './CountrySelector';
 
 const ProcessingActivitiesAnalysis = () => {
   const router = useRouter();
-  const { t } = useTranslation("translation");
+  const { t } = useTranslation('translation');
   const { slug } = router.query;
   const { isLoading, isError, tasks } = useTasks(slug as string);
 
   return (
     <>
       {/* Processing Analysis */}
-      <div className="mx-auto mt-4 w-full max-w-7xl rounded-md p-2">
-        <div className="mb-2 flex items-center justify-between">
-          <h4>{t('Processing Activities')}</h4>
+      <div className="mx-auto bg-gray-800 mt-4 w-full max-w-7xl rounded-md p-2">
+        <div className='flex items-start justify-between mb-2'>
+          <div className="flex items-center justify-between">
+            <h4>{t('Processing Activities')}</h4>
+          </div>
+          <div className=''>
+            <CountrySelector countryValue="l" handler={async () => {}} />
+          </div>
         </div>
         <div className="flex items-center justify-between gap-4 sm:flex-row md:flex lg:flex-row">
           <div className="grid w-full grid-cols-3 gap-4">

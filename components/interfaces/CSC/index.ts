@@ -5,4 +5,4 @@ export { default as SectionFilter } from './SectionFilter';
 export { StatusCscFilter, StatusTaskFilter } from './StatusFilter';
 export { default as CscPanel } from './issue_panel/CscPanel';
 export { default as CscAuditLogs } from './CscAuditLogs';
-export { default as TaskStatusesDetail } from './TaskStatusesDetail';
+export { default as TaskStatusesDetail } from '../TeamAnalysis/TaskStatusesDetail';

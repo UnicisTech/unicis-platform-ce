@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import PieChart from '../PieChart';
+import PieChart from '../CSC/PieChart';
 import { TaskStatusesDetail } from '@/components/interfaces/CSC';
 import useISO from 'hooks/useISO';
 import useTeam from 'hooks/useTeam';
@@ -30,7 +30,7 @@ const TasksAnalysis = ({
       }
       return acc;
     }, {}) || {};
-  
+
   const statusCounts: { [key: string]: number } =
     tasks?.reduce((acc: { [key: string]: number }, task) => {
       if (task.status) {
@@ -63,10 +63,7 @@ const TasksAnalysis = ({
             <PieChart page_name={`task`} statuses={statuses} labels={labels} />
           </div>
           <div style={{ width: '49%' }} className="shadow p-4">
-            <TaskStatusesDetail
-              tasks={tasks}
-              statusCounts={statusCounts}
-            />
+            <TaskStatusesDetail tasks={tasks} statusCounts={statusCounts} />
           </div>
         </div>
       </div>

@@ -1,6 +1,10 @@
 import { PieChart, RadarChart } from '@/components/interfaces/CSC';
-import { TeamCscAnalysis, TeamTaskAnalysis } from '@/components/interfaces/CSC/Analysis';
-import ProcessingActivitiesAnalysis from '@/components/interfaces/CSC/Analysis/TeamProcessingActivitiesAnalysis';
+import {
+  TeamAssessmentAnalysis,
+  TeamCscAnalysis,
+  TeamTaskAnalysis,
+} from '@/components/interfaces/TeamAnalysis';
+import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamAnalysis/TeamProcessingActivities';
 import { Error, Loading } from '@/components/shared';
 import { TeamTab } from '@/components/team';
 import env from '@/lib/env';
@@ -10,7 +14,6 @@ import { getCscStatusesBySlug } from 'models/team';
 import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
 
 const TeamDashboard = ({
   teamFeatures,
@@ -43,6 +46,7 @@ const TeamDashboard = ({
       <div className="space-y-6">
         <TeamTaskAnalysis slug={slug} csc_statuses={csc_statuses} />
         <ProcessingActivitiesAnalysis />
+        <TeamAssessmentAnalysis />
         <TeamCscAnalysis slug={slug} csc_statuses={csc_statuses} />
       </div>
     </>
