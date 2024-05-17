@@ -52,15 +52,19 @@ const ProcessingActivitiesAnalysis = ({
             </div>
             <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
               <h1 className="text-center text-sm font-bold">
-                {totalRpaProcedures}
+                Total number of enabled data transfer
               </h1>
-              <span className="font-sans text-sm font-bold">{45}</span>
+              <span className="font-sans text-sm font-bold">
+                {totalRpaProcedures}
+              </span>
             </div>
             <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
               <h1 className="text-center text-sm font-bold">
-                {totalRpaProcedures}
+                Total number per Country
               </h1>
-              <span className="font-sans text-sm font-bold">{3}</span>
+              <span className="font-sans text-sm font-bold">
+                {totalRpaProcedures}
+              </span>
             </div>
           </div>
         </div>
