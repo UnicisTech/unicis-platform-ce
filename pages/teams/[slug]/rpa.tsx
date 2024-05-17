@@ -40,16 +40,6 @@ const RpaDashboard: NextPageWithLayout<
   const { isLoading, isError, team } = useTeam(slug as string);
 
   const { tasks, mutateTasks } = useTeamTasks(slug as string);
-  const tasksWithProcedures = useMemo<Array<TaskWithRpaProcedure>>(() => {
-    if (!tasks) {
-      return [];
-    }
-    return tasks.filter((task) => {
-      const taskProperties = task.properties as TaskProperties;
-      const procedure = taskProperties.rpa_procedure;
-      return procedure;
-    }) as TaskWithRpaProcedure[];
-  }, [tasks]);
 
   const onEditClickHandler = useCallback((task: TaskWithRpaProcedure) => {
     setTaskToEdit(task);
@@ -69,35 +59,46 @@ const RpaDashboard: NextPageWithLayout<
     return <Error />;
   }
 
+  const tasksWithProcedures = useMemo<Array<TaskWithRpaProcedure>>(() => {
+    if (!tasks) {
+      return [];
+    }
+    return tasks.filter((task) => {
+      const taskProperties = task.properties as TaskProperties;
+      const procedure = taskProperties.rpa_procedure;
+      return procedure;
+    }) as TaskWithRpaProcedure[];
+  }, [tasks]);
+
   return (
     <>
       {/* <h3 className="text-2xl font-bold">{"Records of Processing Activities Dashboard"}</h3> */}
+      <div className="flex justify-between items-center">
+        <div className="space-y-3">
+          <h2 className="text-xl font-medium leading-none tracking-tight">
+            {t('rpa-dashboard')}
+          </h2>
+        </div>
+        <div className="flex justify-end items-center my-1">
+          <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
+          {canAccess('task', ['update']) && (
+            <Button
+              size="sm"
+              color="primary"
+              variant="outline"
+              onClick={() => {
+                setIsCreateOpen(true);
+              }}
+            >
+              {t('create')}
+            </Button>
+          )}
+        </div>
+      </div>
       {tasksWithProcedures.length === 0 ? (
         <EmptyState title={t('rpa-dashboard')} description="No records" />
       ) : (
         <>
-          <div className="flex justify-between items-center">
-            <div className="space-y-3">
-              <h2 className="text-xl font-medium leading-none tracking-tight">
-                {t('rpa-dashboard')}
-              </h2>
-            </div>
-            <div className="flex justify-end items-center my-1">
-              <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
-              {canAccess('task', ['update']) && (
-                <Button
-                  size="sm"
-                  color="primary"
-                  variant="outline"
-                  onClick={() => {
-                    setIsCreateOpen(true);
-                  }}
-                >
-                  {t('create')}
-                </Button>
-              )}
-            </div>
-          </div>
           <RpaTable
             slug={slug as string}
             tasks={tasksWithProcedures}

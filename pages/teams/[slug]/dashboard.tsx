@@ -3,8 +3,8 @@ import {
   TeamAssessmentAnalysis,
   TeamCscAnalysis,
   TeamTaskAnalysis,
-} from '@/components/interfaces/TeamAnalysis';
-import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamAnalysis/TeamProcessingActivities';
+} from '@/components/interfaces/TeamDashboard';
+import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/TeamProcessingActivities';
 import { Error, Loading } from '@/components/shared';
 import { TeamTab } from '@/components/team';
 import env from '@/lib/env';
@@ -45,8 +45,8 @@ const TeamDashboard = ({
       <TeamTab activeTab="dashboard" team={team} teamFeatures={teamFeatures} />
       <div className="space-y-6">
         <TeamTaskAnalysis slug={slug} csc_statuses={csc_statuses} />
-        <ProcessingActivitiesAnalysis />
-        <TeamAssessmentAnalysis />
+        <ProcessingActivitiesAnalysis slug={slug} />
+        <TeamAssessmentAnalysis/>
         <TeamCscAnalysis slug={slug} csc_statuses={csc_statuses} />
       </div>
     </>

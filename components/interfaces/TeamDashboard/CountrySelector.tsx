@@ -28,7 +28,6 @@ const CountrySelector = ({
           setValue(label);
           handler(label);
         }}
-        // styles={colourStyles}
         placeholder="Total Per Country"
         value={config.country.find((option) => option.label === value)}
       />

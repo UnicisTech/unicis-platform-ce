@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
+import React from 'react';
 import type { Task } from '@prisma/client';
-import { ControlOption, ISO } from 'types';
 
 const TaskStatusesDetail = ({
   tasks,

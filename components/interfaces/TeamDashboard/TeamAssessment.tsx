@@ -2,13 +2,12 @@ import useTasks from "hooks/useTasks";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import CountrySelector from "./CountrySelector";
+import { Task } from "@prisma/client";
 
 
 const TeamAssessmentAnalysis = () => {
   const router = useRouter();
-  const { t } = useTranslation("translation");
-  const { slug } = router.query;
-  const { isLoading, isError, tasks } = useTasks(slug as string);
+  const { t } = useTranslation('translation');
 
   return (
     <>
@@ -18,8 +17,8 @@ const TeamAssessmentAnalysis = () => {
           <div className="flex items-center justify-between">
             <h4>{t('Team Assessment Analysis')}</h4>
           </div>
-          <div className="">
-            <CountrySelector countryValue="l" handler={async () => {}} />
+          <div className="w-1/5">
+            <CountrySelector countryValue={''} handler={async () => {}} />
           </div>
         </div>
         <div className="flex items-center justify-between gap-4 sm:flex-row md:flex lg:flex-row">
