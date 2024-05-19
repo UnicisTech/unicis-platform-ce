@@ -6,15 +6,19 @@ import type { Session } from 'next-auth';
 
 export const createUser = async (param: {
   name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password?: string;
   emailVerified?: Date | null;
 }) => {
-  const { name, email, password, emailVerified } = param;
+  const { name, firstName, lastName, email, password, emailVerified } = param;
 
   return await prisma.user.create({
     data: {
       name,
+      firstName,
+      lastName,
       email,
       password: password ? password : '',
       emailVerified: emailVerified ? emailVerified : null,
@@ -23,6 +27,7 @@ export const createUser = async (param: {
 };
 
 export const getUser = async (key: { id: string } | { email: string }) => {
+  console.log('getUser', key);
   return await prisma.user.findUnique({
     where: key,
   });

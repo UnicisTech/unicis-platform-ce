@@ -36,8 +36,19 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession(req, res);
   const toUpdate = {};
 
-  if ('name' in req.body && req.body.name) {
-    toUpdate['name'] = req.body.name;
+  if (
+    'firstName' in req.body &&
+    req.body.firstName &&
+    'lastName' in req.body &&
+    req.body.lastName
+  ) {
+    toUpdate['firstName'] = req.body.firstName;
+    toUpdate['lastName'] = req.body.lastName;
+    toUpdate['name'] = `${req.body.firstName} ${req.body.lastName}`;
+  }
+
+  if ('lastName' in req.body && req.body.lastName) {
+    toUpdate['lastName'] = req.body.lastName;
   }
 
   // Only allow email change if confirmEmail is false

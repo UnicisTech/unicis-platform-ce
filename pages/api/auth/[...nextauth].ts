@@ -158,8 +158,12 @@ export const authOptions: NextAuthOptions = {
 
       // First time users
       if (!existingUser) {
+        const [firstName, lastName] = user.name?.split(' ') || ['', ''];
+
         const newUser = await createUser({
           name: `${user.name}`,
+          firstName: firstName,
+          lastName: lastName,
           email: `${user.email}`,
         });
 
