@@ -67,32 +67,44 @@ const TiaDashboard: NextPageWithLayout<
 
   return (
     <>
+      <div className="flex justify-between items-center">
+        <div className="space-y-3">
+          <h2 className="text-xl font-medium leading-none tracking-tight">
+            {t('tia-dashboard')}
+          </h2>
+        </div>
+        <div className="flex justify-end items-center my-1">
+          {tasksWithProcedures.length > 0 && (
+            <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
+          )}
+          {canAccess('task', ['update']) && (
+            <Button
+              size="sm"
+              color="primary"
+              variant="outline"
+              onClick={() => {
+                setIsCreateOpen(true);
+              }}
+            >
+              {t('create')}
+            </Button>
+          )}
+        </div>
+      </div>
+      <>
+        {isCreateOpen && (
+          <DashboardCreateTIA
+            visible={isCreateOpen}
+            setVisible={setIsCreateOpen}
+            tasks={tasks}
+            mutate={mutateTasks}
+          />
+        )}
+      </>
       {tasksWithProcedures.length === 0 ? (
         <EmptyState title={t('tia-dashboard')} description="No records" />
       ) : (
         <>
-          <div className="flex justify-between items-center">
-            <div className="space-y-3">
-              <h2 className="text-xl font-medium leading-none tracking-tight">
-                {t('tia-dashboard')}
-              </h2>
-            </div>
-            <div className="flex justify-end items-center my-1">
-              <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
-              {canAccess('task', ['update']) && (
-                <Button
-                  size="sm"
-                  color="primary"
-                  variant="outline"
-                  onClick={() => {
-                    setIsCreateOpen(true);
-                  }}
-                >
-                  {t('create')}
-                </Button>
-              )}
-            </div>
-          </div>
           <TiaTable
             slug={slug as string}
             tasks={tasksWithProcedures}
@@ -100,14 +112,6 @@ const TiaDashboard: NextPageWithLayout<
             editHandler={onEditClickHandler}
             deleteHandler={onDeleteClickHandler}
           />
-          {isCreateOpen && (
-            <DashboardCreateTIA
-              visible={isCreateOpen}
-              setVisible={setIsCreateOpen}
-              tasks={tasks}
-              mutate={mutateTasks}
-            />
-          )}
           {taskToEdit && isEditOpen && (
             <CreateTIA
               visible={isEditOpen}

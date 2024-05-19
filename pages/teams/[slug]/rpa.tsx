@@ -80,7 +80,9 @@ const RpaDashboard: NextPageWithLayout<
           </h2>
         </div>
         <div className="flex justify-end items-center my-1">
-          <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
+          {tasksWithProcedures.length > 0 && (
+            <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
+          )}
           {canAccess('task', ['update']) && (
             <Button
               size="sm"
@@ -95,6 +97,17 @@ const RpaDashboard: NextPageWithLayout<
           )}
         </div>
       </div>
+      <>
+        {isCreateOpen && (
+          <DashboardCreateRPA
+            visible={isCreateOpen}
+            setVisible={setIsCreateOpen}
+            tasks={tasks}
+            //task={taskToEdit as Task}
+            mutate={mutateTasks}
+          />
+        )}
+      </>
       {tasksWithProcedures.length === 0 ? (
         <EmptyState title={t('rpa-dashboard')} description="No records" />
       ) : (
@@ -106,15 +119,6 @@ const RpaDashboard: NextPageWithLayout<
             editHandler={onEditClickHandler}
             deleteHandler={onDeleteClickHandler}
           />
-          {isCreateOpen && (
-            <DashboardCreateRPA
-              visible={isCreateOpen}
-              setVisible={setIsCreateOpen}
-              tasks={tasks}
-              //task={taskToEdit as Task}
-              mutate={mutateTasks}
-            />
-          )}
           {taskToEdit && isEditOpen && (
             <CreateRPA
               visible={isEditOpen}

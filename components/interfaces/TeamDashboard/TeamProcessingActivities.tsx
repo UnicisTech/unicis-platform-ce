@@ -1,32 +1,54 @@
-import type { Prisma, Task } from '@prisma/client';
+import type { Prisma } from '@prisma/client';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import CountrySelector from './CountrySelector';
 import useTeamTasks from 'hooks/useTeamTasks';
-import { JSONParser } from 'formidable/parsers';
-import { JsonObject } from '@prisma/client/runtime/library';
+import { useCallback, useState } from 'react';
 
-const ProcessingActivitiesAnalysis = ({
-  slug,
-}: {
-  slug: string;
-}) => {
+const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
   const { t } = useTranslation('translation');
   const { tasks, mutateTasks } = useTeamTasks(slug as string);
+  const [country, setCountry] = useState('');
 
-  let totalRpaProcedures = 0;
+  let totalTasksWithRpaProcedure = 0;
+  let totalEnabledDataTransfers = 0;
+  let tasksFilteredByCountry = 0;
 
   tasks?.forEach((task) => {
     const properties = task.properties as Prisma.JsonObject | null;
 
-    if (
-      properties &&
-      typeof properties === 'object' &&
-      Array.isArray(properties.rpa_procedure)
-    ) {
-      totalRpaProcedures += properties.rpa_procedure.length;
+    if (properties && Array.isArray(properties.rpa_procedure as any)) {
+      totalTasksWithRpaProcedure += 1;
+
+      const hasEnabledDataTransfer = (properties.rpa_procedure as any[]).some(
+        (procedure) => {
+          return procedure.datatransfer === true;
+        }
+      );
+
+      if (hasEnabledDataTransfer) {
+        totalEnabledDataTransfers += 1;
+      }
+
+      const isTargetCountry = (properties.rpa_procedure as any[]).some(
+        (procedure) => {
+          return (
+            procedure.country?.value.toLowerCase() === country.toLowerCase()
+          );
+        }
+      );
+
+      if (isTargetCountry) {
+        tasksFilteredByCountry += 1;
+      }
     }
   });
+
+  const countryHandler = useCallback(
+    async (value: string) => {
+      setCountry(value);
+    },
+    []
+  );
 
   return (
     <>
@@ -37,7 +59,7 @@ const ProcessingActivitiesAnalysis = ({
             <h4>{t('Processing Activities')}</h4>
           </div>
           <div className="w-1/5">
-            <CountrySelector countryValue={''} handler={async () => {}} />
+            <CountrySelector countryValue={country} handler={countryHandler} />
           </div>
         </div>
         <div className="flex items-center justify-between gap-4 sm:flex-row md:flex lg:flex-row">
@@ -47,7 +69,7 @@ const ProcessingActivitiesAnalysis = ({
                 Total number of records
               </h1>
               <span className="font-sans text-sm font-bold">
-                {totalRpaProcedures}
+                {totalTasksWithRpaProcedure}
               </span>
             </div>
             <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
@@ -55,7 +77,7 @@ const ProcessingActivitiesAnalysis = ({
                 Total number of enabled data transfer
               </h1>
               <span className="font-sans text-sm font-bold">
-                {totalRpaProcedures}
+                {totalEnabledDataTransfers}
               </span>
             </div>
             <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
@@ -63,7 +85,7 @@ const ProcessingActivitiesAnalysis = ({
                 Total number per Country
               </h1>
               <span className="font-sans text-sm font-bold">
-                {totalRpaProcedures}
+                {tasksFilteredByCountry}
               </span>
             </div>
           </div>

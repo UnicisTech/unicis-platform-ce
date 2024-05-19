@@ -46,7 +46,7 @@ const TeamDashboard = ({
       <div className="space-y-6">
         <TeamTaskAnalysis slug={slug} csc_statuses={csc_statuses} />
         <ProcessingActivitiesAnalysis slug={slug} />
-        <TeamAssessmentAnalysis/>
+        <TeamAssessmentAnalysis slug={slug} />
         <TeamCscAnalysis slug={slug} csc_statuses={csc_statuses} />
       </div>
     </>
