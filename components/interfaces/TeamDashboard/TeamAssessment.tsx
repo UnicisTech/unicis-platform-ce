@@ -17,8 +17,6 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
   let perAuthorization = 0;
   let notPermitAuthorization = 0;
 
-  console.log('Tasks: ', tasks);
-
   tasks?.forEach((task) => {
     const properties = task.properties as Prisma.JsonObject | null;
 
