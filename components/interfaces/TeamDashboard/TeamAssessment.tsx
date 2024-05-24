@@ -57,7 +57,7 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
   return (
     <>
       {/* Assessment Analysis */}
-      <div className="mx-auto bg-gray-800 mt-4 w-full max-w-7xl rounded-md p-2">
+      <div className="mx-auto bg-gray-50 dark:bg-gray-800 mt-4 w-full max-w-7xl rounded-md p-2">
         <div className="flex items-start justify-between mb-2">
           <div className="flex items-center justify-between">
             <h4>{t('Team Assessment Analysis')}</h4>

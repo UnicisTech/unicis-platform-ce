@@ -42,7 +42,11 @@ const TeamDashboard = ({
 
   return (
     <>
-      <TeamTab activeTab="dashboard" team={team} teamFeatures={teamFeatures} />
+      <div className="flex flex-col pb-6">
+        <h2 className="text-xl font-semibold mb-2">
+          {t('Team dashboard')} ({team?.name})
+        </h2>
+      </div>
       <div className="space-y-6">
         <TeamTaskAnalysis slug={slug} csc_statuses={csc_statuses} />
         <ProcessingActivitiesAnalysis slug={slug} />
