@@ -20,7 +20,7 @@ const CountrySelector = ({
     <WithoutRing>
       <Select
         inputId="single-select-status"
-        className="single-select text-sm ring-1 ring-black rounded"
+        className="single-select text-sm text-red-500 text ring-1 ring-red-500 rounded"
         classNamePrefix="react-select"
         options={config.country}
         onChange={(selectedStatus) => {

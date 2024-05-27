@@ -57,15 +57,18 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
   return (
     <>
       {/* Assessment Analysis */}
-      <div className="mx-auto dark:bg-gray-800 shadow mt-4 w-full max-w-7xl rounded-md p-2">
-        <div className="flex items-start justify-between mb-2">
+      <div
+        style={{ width: '49%' }}
+        className="dark:bg-gray-800 ring-1 ring-red-500 shadow shadow-red-500 mt-4 rounded-md p-2"
+      >
+        <div className="flex items-start justify-between mb-5">
           <div className="flex items-center justify-between">
             <h4>{t('Team Assessment Analysis')}</h4>
           </div>
         </div>
 
-        <div className="grid w-full gap-4">
-          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
+        <div className="grid w-full gap-4 text-red-500">
+          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-red-500">
             <h1 className="text-center text-sm font-bold">
               Number of Assessment
             </h1>
@@ -73,7 +76,7 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
               {totalNumberOfAssessment}
             </span>
           </div>
-          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
+          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-red-500">
             <h1 className="text-center text-sm font-bold">
               Assessment per country
             </h1>
@@ -81,7 +84,7 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
               {assessmentFilteredByCountry}
             </span>
           </div>
-          <div className="grid grid-cols-2 w-full text-center items-center rounded-md p-1 ring-1 ring-gray-300">
+          <div className="grid grid-cols-2 w-full text-center items-center rounded-md p-1 ring-1 ring-red-500">
             <div className="grid">
               <h1 className="text-center text-sm font-bold">Permit</h1>
               <span className="font-sans text-sm font-bold">

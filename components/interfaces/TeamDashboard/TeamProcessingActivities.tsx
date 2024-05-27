@@ -50,21 +50,24 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
   return (
     <>
       {/* Processing Analysis */}
-      <div className="mx-auto dark:bg-gray-800 shadow mt-4 w-full max-w-7xl rounded-md p-2">
-        <div className="flex items-start justify-between mb-2">
+      <div
+        style={{ width: '49%' }}
+        className="dark:bg-gray-800 ring-1 ring-red-500 shadow shadow-red-500 mt-4 rounded-md p-2"
+      >
+        <div className="flex items-start justify-between mb-5">
           <div className="flex items-center justify-between">
             <h4>{t('Processing Activities')}</h4>
           </div>
         </div>
 
-        <div className="grid w-full gap-4">
-          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
+        <div className="grid w-full gap-4 text-red-500">
+          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-red-500">
             <h1 className="text-center text-sm font-bold">Number of records</h1>
             <span className="font-sans text-sm font-bold">
               {totalTasksWithRpaProcedure}
             </span>
           </div>
-          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
+          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-red-500">
             <h1 className="text-center text-sm font-bold">
               Enabled data transfer
             </h1>
@@ -72,7 +75,7 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
               {totalEnabledDataTransfers}
             </span>
           </div>
-          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
+          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-red-500">
             <h1 className="text-center text-sm font-bold">
               Number per Country
             </h1>

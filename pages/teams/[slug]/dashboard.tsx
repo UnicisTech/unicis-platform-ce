@@ -49,7 +49,14 @@ const TeamDashboard = ({
       </div>
       <div className="space-y-6">
         <TeamTaskAnalysis slug={slug} csc_statuses={csc_statuses} />
-        <div className='grid grid-cols-2 gap-4'>
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'space-around',
+            marginBottom: '10px',
+          }}
+        >
           <ProcessingActivitiesAnalysis slug={slug} />
           <TeamAssessmentAnalysis slug={slug} />
         </div>
