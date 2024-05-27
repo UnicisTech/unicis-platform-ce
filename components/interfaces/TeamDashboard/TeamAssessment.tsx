@@ -57,47 +57,46 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
   return (
     <>
       {/* Assessment Analysis */}
-      <div className="mx-auto bg-gray-50 dark:bg-gray-800 mt-4 w-full max-w-7xl rounded-md p-2">
+      <div className="mx-auto dark:bg-gray-800 shadow mt-4 w-full max-w-7xl rounded-md p-2">
         <div className="flex items-start justify-between mb-2">
           <div className="flex items-center justify-between">
             <h4>{t('Team Assessment Analysis')}</h4>
           </div>
-          <div className="w-1/5">
-            <CountrySelector countryValue={country} handler={countryHandler} />
-          </div>
         </div>
-        <div className="flex items-center justify-between gap-4 sm:flex-row md:flex lg:flex-row">
-          <div className="grid w-full grid-cols-3 gap-4">
-            <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
-              <h1 className="text-center text-sm font-bold">
-                Total number of Assessment
-              </h1>
+
+        <div className="grid w-full gap-4">
+          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
+            <h1 className="text-center text-sm font-bold">
+              Number of Assessment
+            </h1>
+            <span className="font-sans text-sm font-bold">
+              {totalNumberOfAssessment}
+            </span>
+          </div>
+          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
+            <h1 className="text-center text-sm font-bold">
+              Assessment per country
+            </h1>
+            <span className="font-sans text-sm font-bold">
+              {assessmentFilteredByCountry}
+            </span>
+          </div>
+          <div className="grid grid-cols-2 w-full text-center items-center rounded-md p-1 ring-1 ring-gray-300">
+            <div className="grid">
+              <h1 className="text-center text-sm font-bold">Permit</h1>
               <span className="font-sans text-sm font-bold">
-                {totalNumberOfAssessment}
+                {perAuthorization}
               </span>
             </div>
-            <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
-              <h1 className="text-center text-sm font-bold">
-                Total number of assessment per country
-              </h1>
+            <div className="grid">
+              <h1 className="text-center text-sm font-bold">Not Permit</h1>
               <span className="font-sans text-sm font-bold">
-                {assessmentFilteredByCountry}
+                {notPermitAuthorization}
               </span>
             </div>
-            <div className="grid grid-cols-2 w-full text-center items-center rounded-md p-1 ring-1 ring-gray-300">
-              <div>
-                <h1 className="text-center text-sm font-bold">Permit</h1>
-                <span className="font-sans text-sm font-bold">
-                  {perAuthorization}
-                </span>
-              </div>
-              <div>
-                <h1 className="text-center text-sm font-bold">Not Permit</h1>
-                <span className="font-sans text-sm font-bold">
-                  {notPermitAuthorization}
-                </span>
-              </div>
-            </div>
+          </div>
+          <div className="w-1/2">
+            <CountrySelector countryValue={country} handler={countryHandler} />
           </div>
         </div>
       </div>
