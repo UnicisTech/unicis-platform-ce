@@ -65,7 +65,7 @@ const ProcessingActivitiesAnalysis = ({
           <div className="mb-2 flex items-center justify-between">
             <h4>{t('Cybersecurity Controls')}</h4>
           </div>
-          <div className="flex ">
+          <div className="flex">
             <StatusCscFilter setStatusFilter={setStatusFilter} />
             <ControlSelector controlValue={control} handler={controlHandler} />
           </div>

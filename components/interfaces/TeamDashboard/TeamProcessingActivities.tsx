@@ -54,10 +54,8 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
         style={{ width: '49%' }}
         className="dark:bg-gray-800 ring-1 ring-red-500 shadow shadow-red-500 mt-4 rounded-md p-2"
       >
-        <div className="flex items-start justify-between mb-5">
-          <div className="flex items-center justify-between">
-            <h4>{t('Processing Activities')}</h4>
-          </div>
+        <div className="flex mb-2 text-red-500 font-extrabold items-center justify-center">
+          <h4>{t('Records of Processing Activities')}</h4>
         </div>
 
         <div className="grid w-full gap-4 text-red-500">
@@ -83,9 +81,9 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
               {tasksFilteredByCountry}
             </span>
           </div>
-          <div className="w-1/2">
+          {/* <div className="w-1/2">
             <CountrySelector countryValue={country} handler={countryHandler} />
-          </div>
+          </div> */}
         </div>
       </div>
     </>

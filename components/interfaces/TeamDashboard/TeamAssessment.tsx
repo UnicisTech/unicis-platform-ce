@@ -61,10 +61,8 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
         style={{ width: '49%' }}
         className="dark:bg-gray-800 ring-1 ring-red-500 shadow shadow-red-500 mt-4 rounded-md p-2"
       >
-        <div className="flex items-start justify-between mb-5">
-          <div className="flex items-center justify-between">
-            <h4>{t('Team Assessment Analysis')}</h4>
-          </div>
+        <div className="flex mb-2 text-red-500 font-extrabold items-center justify-center">
+          <h4>{t('Transfer Impact Assessment')}</h4>
         </div>
 
         <div className="grid w-full gap-4 text-red-500">
@@ -84,23 +82,23 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
               {assessmentFilteredByCountry}
             </span>
           </div>
-          <div className="grid grid-cols-2 w-full text-center items-center rounded-md p-1 ring-1 ring-red-500">
-            <div className="grid">
+          <div className="grid grid-cols-2 gap-2 w-full text-center items-center">
+            <div className="grid rounded-md p-1 ring-1 ring-red-500">
               <h1 className="text-center text-sm font-bold">Permit</h1>
               <span className="font-sans text-sm font-bold">
                 {perAuthorization}
               </span>
             </div>
-            <div className="grid">
+            <div className="grid rounded-md p-1 ring-1 ring-red-500">
               <h1 className="text-center text-sm font-bold">Not Permit</h1>
               <span className="font-sans text-sm font-bold">
                 {notPermitAuthorization}
               </span>
             </div>
           </div>
-          <div className="w-1/2">
+          {/* <div className="w-1/2">
             <CountrySelector countryValue={country} handler={countryHandler} />
-          </div>
+          </div> */}
         </div>
       </div>
     </>
