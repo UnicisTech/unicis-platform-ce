@@ -57,10 +57,6 @@ const ProcessingActivitiesAnalysis = ({
     [slug]
   );
 
-
-  console.log(statuses);
-  
-
   return (
     <>
       {/* Processing Analysis */}
@@ -79,7 +75,7 @@ const ProcessingActivitiesAnalysis = ({
             Total number of controls
           </h4>
           <span className="font-sans text-sm font-bold">
-            {control}
+            {Object.keys(statuses).length}
           </span>
         </div>
         <div
