@@ -71,8 +71,7 @@ const CscDashboard = ({
     },
     [slug]
   );
-  
-  console.log(statuses)
+
   const taskSelectorHandler = useCallback(
     async (action: string, dataToRemove: any, control: string) => {
       const operation = action === 'select-option' ? 'add' : 'remove';
