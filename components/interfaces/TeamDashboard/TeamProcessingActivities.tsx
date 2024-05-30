@@ -48,7 +48,7 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
       {/* Processing Analysis */}
       <div
         style={{ width: '49%' }}
-        className="dark:bg-gray-800 shadow mt-4 rounded-md p-2"
+        className="dark:bg-gray-800 ring-1 ring-red-500 shadow mt-4 rounded-md p-2"
       >
         <div className="flex mb-2 text-red-500 font-extrabold items-center justify-center">
           <h4>{t('Records of Processing Activities')}</h4>
