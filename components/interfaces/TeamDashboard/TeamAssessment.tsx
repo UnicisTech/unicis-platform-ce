@@ -91,7 +91,7 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
                 <>
                   {countriesList.map((data, index) => (
                     <div key={index} className="">
-                      <p className="bg-red-100 ring-1 ring-red-500 py-0.5 px-1 text-xs text-red-700 rounded">
+                      <p className="ring-1 ring-red-500 py-0.5 px-1 text-xs text-red-700 rounded">
                         {capitalizeCountryName(data)}
                       </p>
                     </div>
