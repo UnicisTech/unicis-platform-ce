@@ -48,19 +48,19 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
       {/* Processing Analysis */}
       <div
         style={{ width: '49%' }}
-        className="dark:bg-gray-800 ring-1 ring-red-500 shadow mt-4 rounded-md p-2"
+        className="dark:bg-gray-800 shadow mt-4 rounded-md p-2"
       >
-        <div className="flex mb-2 text-red-500 font-extrabold items-center justify-center">
+        <div className="flex mb-2 font-extrabold items-center justify-center">
           <h4>{t('Records of Processing Activities')}</h4>
         </div>
-        <div className="grid w-full gap-4 text-red-500">
-          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-red-500">
+        <div className="grid w-full gap-4">
+          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
             <h1 className="text-center text-sm font-bold">Number of records</h1>
             <span className="font-sans text-sm font-bold">
               {totalTasksWithRpaProcedure}
             </span>
           </div>
-          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-red-500">
+          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
             <h1 className="text-center text-sm font-bold">
               Enabled data transfer
             </h1>
@@ -68,7 +68,7 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
               {totalEnabledDataTransfers}
             </span>
           </div>
-          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-red-500">
+          <div className="flex w-full flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
             <h1 className="text-center text-sm mb-1 font-bold">
               Processes per Country
             </h1>
@@ -77,7 +77,7 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
                 <>
                   {countriesList.map((data, index) => (
                     <div key={index}>
-                      <p className="ring-1 ring-red-500 py-0.5 px-1 text-xs text-red-700 rounded">
+                      <p className="ring-1 ring-gray-500 py-0.5 px-1 text-xs rounded">
                         {capitalizeCountryName(data)}
                       </p>
                     </div>

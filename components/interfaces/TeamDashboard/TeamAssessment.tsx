@@ -53,14 +53,14 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
       {/* Assessment Analysis */}
       <div
         style={{ width: '49%' }}
-        className="dark:bg-gray-800 ring-1 ring-red-500 shadow mt-4 rounded-md p-2"
+        className="dark:bg-gray-800 shadow mt-4 rounded-md p-2"
       >
-        <div className="flex mb-2 text-red-500 font-extrabold items-center justify-center">
+        <div className="flex mb-2 font-extrabold items-center justify-center">
           <h4>{t('Transfer Impact Assessment')}</h4>
         </div>
 
-        <div className="grid gap-4 text-red-500">
-          <div className="flex flex-col items-center rounded-md p-1 ring-1 ring-red-500">
+        <div className="grid gap-4">
+          <div className="flex flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
             <h1 className="text-center text-sm font-bold">
               Number of Assessment
             </h1>
@@ -69,20 +69,20 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
             </span>
           </div>
           <div className="grid grid-cols-2 gap-2 text-center items-center">
-            <div className="grid rounded-md p-1 ring-1 ring-red-500">
+            <div className="grid rounded-md p-1 ring-1 ring-gray-300">
               <h1 className="text-center text-sm font-bold">Permit</h1>
               <span className="font-sans text-sm font-bold">
                 {perAuthorization}
               </span>
             </div>
-            <div className="grid rounded-md p-1 ring-1 ring-red-500">
+            <div className="grid rounded-md p-1 ring-1 ring-gray-300">
               <h1 className="text-center text-sm font-bold">Not Permit</h1>
               <span className="font-sans text-sm font-bold">
                 {notPermitAuthorization}
               </span>
             </div>
           </div>
-          <div className="flex flex-col items-center rounded-md p-1 ring-1 ring-red-500">
+          <div className="flex flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
             <h1 className="text-center text-sm mb-1 font-bold">
               Assessment per country
             </h1>
@@ -91,7 +91,7 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
                 <>
                   {countriesList.map((data, index) => (
                     <div key={index} className="">
-                      <p className="ring-1 ring-red-500 py-0.5 px-1 text-xs text-red-700 rounded">
+                      <p className="ring-1 ring-gray-500 py-0.5 px-1 text-xs rounded">
                         {capitalizeCountryName(data)}
                       </p>
                     </div>
