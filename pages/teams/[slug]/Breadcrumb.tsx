@@ -3,15 +3,15 @@ import { Link } from 'react-daisyui';
 import { useTranslation } from 'react-i18next';
 
 const Breadcrumb = ({
-  slug,
-  base,
-  id,
-  back_to,
+  teamName,
+  taskTitle,
+  taskNumber,
+  backTo,
 }: {
-  slug: any;
-  base?: string;
-  id: any;
-  back_to?: string;
+  teamName: string;
+  taskTitle: string;
+  taskNumber: string;
+  backTo?: string;
 }) => {
   const { t } = useTranslation('common');
 
@@ -19,10 +19,12 @@ const Breadcrumb = ({
     <div className="text-sm breadcrumbs">
       <ul>
         <li>
-          <Link href={back_to? back_to : '/'}>{base ? base : 'Home'}</Link>
+          {teamName || t('Home')}
         </li>
-        <li>{slug}</li>
-        <li>{id}</li>
+        <li>
+          <Link href={backTo || '/'}>{t('Tasks')}</Link>
+        </li>
+        <li>{`${taskNumber} - ${taskTitle}`}</li>
       </ul>
     </div>
   );

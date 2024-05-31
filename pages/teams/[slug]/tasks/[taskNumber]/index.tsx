@@ -58,7 +58,7 @@ const TaskById = ({
 
   return (
     <>
-      <Breadcrumb base='Team' back_to={`/teams/${slug}/tasks`} slug={ slug } id={taskNumber} />
+      <Breadcrumb taskTitle='Team' backTo={`/teams/${slug}/tasks`} teamName={ slug as string } taskNumber={taskNumber as string} />
       <h3 className="text-2xl font-bold">{task.title}</h3>
       <TaskTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'Overview' && (
