@@ -138,7 +138,7 @@ const CscDashboard = ({
           />
         </div>
         <div style={{ width: '49%' }} className="stats stat-value shadow">
-          <RadarChart statuses={statuses} ISO={ISO} />
+          <RadarChart page_name='csc' labels={labels} statuses={statuses} ISO={ISO} />
         </div>
       </div>
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>

@@ -51,11 +51,9 @@ a {
   .modal-box {
     @apply rounded;
   }
+
 }
 
-.btn-md {
-  @apply min-h-8 h-10;
-}
 
 .truncate {
   max-width: 100%;

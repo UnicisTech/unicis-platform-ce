@@ -21,6 +21,7 @@ import useISO from 'hooks/useISO';
 import { Team } from '@prisma/client';
 import { getCscStatusesBySlug } from 'models/team';
 import { CreateTIA, TiaAuditLogs, TiaPanel } from '@/components/interfaces/TIA';
+import Breadcrumb from '../../Breadcrumb';
 
 const TaskById = ({
   csc_statuses,
@@ -57,6 +58,7 @@ const TaskById = ({
 
   return (
     <>
+      <Breadcrumb base='Team' back_to={`/teams/${slug}/tasks`} slug={ slug } id={taskNumber} />
       <h3 className="text-2xl font-bold">{task.title}</h3>
       <TaskTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'Overview' && (
