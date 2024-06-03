@@ -70,7 +70,7 @@ const ProcessingActivitiesAnalysis = ({
     return <Loading />;
   }
 
-  console.log(statuses)
+  console.log(statuses);
 
   return (
     <>
@@ -108,7 +108,12 @@ const ProcessingActivitiesAnalysis = ({
             />
           </div>
           <div style={{ width: '49%' }} className="stats p-4 stat-value shadow">
-            <RadarChart labels={labels} page_name='dashboard' ISO={ISO} statuses={statuses} />
+            <RadarChart
+              labels={labels}
+              page_name="dashboard"
+              ISO={ISO}
+              statuses={statuses}
+            />
           </div>
         </div>
       </div>

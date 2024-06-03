@@ -1,4 +1,3 @@
-
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { Prisma, Task } from '@prisma/client';

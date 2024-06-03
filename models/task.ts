@@ -193,7 +193,6 @@ export const assignTaskRpaProcedure = async (
       data: {
         properties: {
           rpa_procedure: data,
-
         },
       },
     });
@@ -202,4 +201,3 @@ export const assignTaskRpaProcedure = async (
     return null;
   }
 };
-

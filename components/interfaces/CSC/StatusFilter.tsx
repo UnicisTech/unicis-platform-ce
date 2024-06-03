@@ -1,6 +1,9 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Select from '@atlaskit/select';
-import { statusOptions, taskStatusOptions } from '@/components/defaultLanding/data/configs/csc';
+import {
+  statusOptions,
+  taskStatusOptions,
+} from '@/components/defaultLanding/data/configs/csc';
 import { WithoutRing } from 'sharedStyles';
 import type { CscOption, UnicisPages } from 'types';
 
@@ -8,8 +11,7 @@ const StatusCscFilter = ({
   setStatusFilter,
 }: {
   setStatusFilter: Dispatch<SetStateAction<CscOption[] | null>>;
-  }) => {
-
+}) => {
   return (
     <div style={{ margin: '0 5px' }}>
       <WithoutRing>
@@ -53,7 +55,4 @@ const StatusTaskFilter = ({
   );
 };
 
-export {
-  StatusCscFilter,
-  StatusTaskFilter,
-};
+export { StatusCscFilter, StatusTaskFilter };

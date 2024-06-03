@@ -11,9 +11,8 @@ const TasksList = ({
   control: string;
 }) => {
   const [selectedTasks] = useState<Array<Task>>(
-    tasks.filter(
-      (task: any) =>
-        task.properties?.csc_controls?.find((item: string) => item === control)
+    tasks.filter((task: any) =>
+      task.properties?.csc_controls?.find((item: string) => item === control)
     )
   );
 

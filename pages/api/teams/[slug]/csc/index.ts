@@ -33,6 +33,6 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     control: control as string,
     value: value as string,
   });
-  
+
   return res.status(200).json({ data: { statuses }, error: null });
 };

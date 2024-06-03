@@ -14,9 +14,7 @@ import {
   StatusCscFilter,
 } from '@/components/interfaces/CSC';
 import { PerPageSelector } from '@/components/shared/atlaskit';
-import {
-  perPageOptions,
-} from '@/components/defaultLanding/data/configs/csc';
+import { perPageOptions } from '@/components/defaultLanding/data/configs/csc';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { getCscStatusesBySlug } from 'models/team';
 import type { Option } from 'types';
@@ -66,7 +64,6 @@ const CscDashboard = ({
         return;
       }
 
-      
       setStatuses(data.statuses);
     },
     [slug]
@@ -131,14 +128,15 @@ const CscDashboard = ({
           style={{ width: '49%' }}
           className="stats stat-value shadow pl-4 py-4"
         >
-          <PieChart
-            page_name={`csc`}
-            statuses={statuses}
-            labels={labels}
-          />
+          <PieChart page_name={`csc`} statuses={statuses} labels={labels} />
         </div>
         <div style={{ width: '49%' }} className="stats stat-value shadow">
-          <RadarChart page_name='csc' labels={labels} statuses={statuses} ISO={ISO} />
+          <RadarChart
+            page_name="csc"
+            labels={labels}
+            statuses={statuses}
+            ISO={ISO}
+          />
         </div>
       </div>
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>

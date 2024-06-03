@@ -1,20 +1,23 @@
 import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import { statusOptions, taskStatusOptions } from '@/components/defaultLanding/data/configs/csc';
+import {
+  statusOptions,
+  taskStatusOptions,
+} from '@/components/defaultLanding/data/configs/csc';
 import { UnicisPages } from 'types';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const countStatuses = (
-  statuses: { [key: string]: string; },
+  statuses: { [key: string]: string },
   page_name: UnicisPages
 ) => {
   let labels;
 
   if (page_name === 'task') {
     labels = taskStatusOptions.map(({ label }) => label);
-  } else{
+  } else {
     labels = statusOptions.map(({ label }) => label);
   }
   const countArray = labels.map(
@@ -25,7 +28,15 @@ const countStatuses = (
   return countArray;
 };
 
-const PieChart = ({ statuses, labels, page_name }: {page_name: UnicisPages, statuses: { [key: string]: string }, labels: any[] }) => {
+const PieChart = ({
+  statuses,
+  labels,
+  page_name,
+}: {
+  page_name: UnicisPages;
+  statuses: { [key: string]: string };
+  labels: any[];
+}) => {
   const data = {
     labels: labels,
     datasets: [
