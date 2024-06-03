@@ -30,11 +30,10 @@ const TaskSelector = ({
     }));
     const cscStatusesProp = getCscControlsProp(ISO);
     const selectedOptions = tasks
-      .filter(
-        (task: any) =>
-          task.properties?.[cscStatusesProp]?.find(
-            (item: string) => item === control
-          )
+      .filter((task: any) =>
+        task.properties?.[cscStatusesProp]?.find(
+          (item: string) => item === control
+        )
       )
       ?.map((issue) => ({ label: issue.title, value: issue.taskNumber }));
     setOptions(options);
@@ -53,8 +52,8 @@ const TaskSelector = ({
           const dataToRemove = option
             ? [option]
             : removedValue
-            ? [removedValue]
-            : removedValues;
+              ? [removedValue]
+              : removedValues;
           handler(action, dataToRemove, control);
         }}
         value={value}
