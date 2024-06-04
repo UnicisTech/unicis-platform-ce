@@ -1,27 +1,26 @@
 import { useTranslation } from 'next-i18next';
 import PieChart from '../CSC/PieChart';
 import { TaskStatusesDetail } from '@/components/interfaces/CSC';
-import useISO from 'hooks/useISO';
-import useTeam from 'hooks/useTeam';
 import useTeamTasks from 'hooks/useTeamTasks';
 
 const labels = ['To Do', 'In Progress', 'In Review', 'Feedback', 'Done'];
 
+const barColors = [
+  'rgb(232, 232, 232)', // todo
+  'rgb(123, 146, 178)', // in progress
+  'rgb(77, 110, 255)', // in review
+  'rgb(0, 181, 255)', // feedback
+  'rgb(0, 169, 110)', // done
+];
+
 const TasksAnalysis = ({
-  csc_statuses,
   slug,
 }: {
   csc_statuses: { [key: string]: string };
   slug: string;
 }) => {
   const { t } = useTranslation('translation');
-  const { tasks, mutateTasks } = useTeamTasks(slug as string);
-  const {
-    isLoading: teamLoading,
-    isError: teamError,
-    team,
-  } = useTeam(slug as string);
-  const { ISO } = useISO(team);
+  const { tasks } = useTeamTasks(slug as string);
 
   const statuses: { [key: string]: string } =
     tasks?.reduce((acc: { [key: string]: string }, task) => {
@@ -60,7 +59,12 @@ const TasksAnalysis = ({
             style={{ width: '49%' }}
             className="stats py-2 stat-value shadow"
           >
-            <PieChart page_name={`task`} statuses={statuses} labels={labels} />
+            <PieChart
+              page_name={`task`}
+              statuses={statuses}
+              barColor={barColors}
+              labels={labels}
+            />
           </div>
           <div style={{ width: '49%' }} className="shadow p-4">
             <TaskStatusesDetail tasks={tasks} statusCounts={statusCounts} />

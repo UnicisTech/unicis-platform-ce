@@ -8,7 +8,6 @@ const TaskStatusesDetail = ({
   tasks: Array<Task> | any;
   statusCounts: { [key: string]: number };
 }) => {
-
   return (
     <div className="grid grid-cols-2 items-center lg:grid-cols-2 sm:grid-cols-2 gap-4">
       <div className="flex-1 bg-blue-100 dark:text-white dark:bg-blue-950 ring-1 ring-gray-300 rounded-md text-center justify-center p-4">

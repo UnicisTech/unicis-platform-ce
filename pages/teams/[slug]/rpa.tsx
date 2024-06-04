@@ -51,6 +51,17 @@ const RpaDashboard: NextPageWithLayout<
     setIsDeleteOpen(true);
   }, []);
 
+  const tasksWithProcedures = useMemo(() => {
+    if (!tasks) {
+      return [];
+    }
+    return tasks.filter((tasks) => {
+      const taskProperties = tasks.properties as TaskProperties;
+      const procedure = taskProperties.rpa_procedure;
+      return procedure;
+    }) as TaskWithRpaProcedure[];
+  }, [tasks]);
+
   if (isLoading || !team || !tasks) {
     return <Loading />;
   }
@@ -58,17 +69,6 @@ const RpaDashboard: NextPageWithLayout<
   if (isError) {
     return <Error />;
   }
-
-  const tasksWithProcedures = useMemo<Array<TaskWithRpaProcedure>>(() => {
-    if (!tasks) {
-      return [];
-    }
-    return tasks.filter((task) => {
-      const taskProperties = task.properties as TaskProperties;
-      const procedure = taskProperties.rpa_procedure;
-      return procedure;
-    }) as TaskWithRpaProcedure[];
-  }, [tasks]);
 
   return (
     <>

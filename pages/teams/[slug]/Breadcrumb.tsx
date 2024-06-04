@@ -1,4 +1,3 @@
-import router from 'next/router';
 import { Link } from 'react-daisyui';
 import { useTranslation } from 'react-i18next';
 
@@ -18,9 +17,7 @@ const Breadcrumb = ({
   return (
     <div className="text-sm breadcrumbs">
       <ul>
-        <li>
-          {teamName || t('Home')}
-        </li>
+        <li>{teamName || t('Home')}</li>
         <li>
           <Link href={backTo || '/'}>{t('Tasks')}</Link>
         </li>

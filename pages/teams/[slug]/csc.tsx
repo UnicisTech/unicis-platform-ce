@@ -14,9 +14,7 @@ import {
   StatusCscFilter,
 } from '@/components/interfaces/CSC';
 import { PerPageSelector } from '@/components/shared/atlaskit';
-import {
-  perPageOptions,
-} from '@/components/defaultLanding/data/configs/csc';
+import { perPageOptions } from '@/components/defaultLanding/data/configs/csc';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { getCscStatusesBySlug } from 'models/team';
 import type { Option } from 'types';
@@ -31,6 +29,17 @@ const labels = [
   'Well Defined',
   'Quantitatively Controlled',
   'Continuously Improving',
+];
+
+const barColors = [
+  'rgba(241, 241, 241, 1)',
+  'rgba(178, 178, 178, 1)',
+  'rgba(255, 0, 0, 1)',
+  'rgba(202, 0, 63, 1)',
+  'rgba(102, 102, 102, 1)',
+  'rgba(255, 190, 0, 1)',
+  'rgba(106, 217, 0, 1)',
+  'rgba(47, 143, 0, 1)',
 ];
 
 const CscDashboard = ({
@@ -66,7 +75,6 @@ const CscDashboard = ({
         return;
       }
 
-      
       setStatuses(data.statuses);
     },
     [slug]
@@ -134,11 +142,12 @@ const CscDashboard = ({
           <PieChart
             page_name={`csc`}
             statuses={statuses}
+            barColor={barColors}
             labels={labels}
           />
         </div>
         <div style={{ width: '49%' }} className="stats stat-value shadow">
-          <RadarChart page_name='csc' labels={labels} statuses={statuses} ISO={ISO} />
+          <RadarChart statuses={statuses} ISO={ISO} />
         </div>
       </div>
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>

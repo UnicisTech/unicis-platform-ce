@@ -1,14 +1,11 @@
-
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
-import { Prisma, Task } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { capitalizeCountryName } from '@/lib/utils';
 
 const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
-  const router = useRouter();
   const { t } = useTranslation('translation');
-  const { tasks, mutateTasks } = useTeamTasks(slug as string);
+  const { tasks } = useTeamTasks(slug as string);
 
   const countriesSet = new Set<string>();
 

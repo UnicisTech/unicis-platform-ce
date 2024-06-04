@@ -1,7 +1,6 @@
 import { prisma } from '@/lib/prisma';
-import { RpaAuditLog, RpaProcedureInterface } from 'types';
+import { RpaProcedureInterface } from 'types';
 import { getTeam, incrementTaskIndex, isTeamMember } from './team';
-import { Prisma } from '@prisma/client';
 
 export const createTask = async (param: {
   authorId: string;
@@ -181,11 +180,6 @@ export const assignTaskRpaProcedure = async (
     },
   });
   if (taskToEdit) {
-    const existingProperties =
-      (taskToEdit.properties as Prisma.JsonObject) || {};
-    const rpaAuditLogs =
-      (existingProperties.rpa_audit_logs as RpaAuditLog[]) || [];
-
     const editedTask = await prisma.task.update({
       where: {
         id: taskToEdit.id,
@@ -193,7 +187,6 @@ export const assignTaskRpaProcedure = async (
       data: {
         properties: {
           rpa_procedure: data,
-
         },
       },
     });
@@ -202,4 +195,3 @@ export const assignTaskRpaProcedure = async (
     return null;
   }
 };
-

@@ -1,4 +1,3 @@
-import { PieChart, RadarChart } from '@/components/interfaces/CSC';
 import {
   TeamAssessmentAnalysis,
   TeamCscAnalysis,
@@ -6,9 +5,7 @@ import {
 } from '@/components/interfaces/TeamDashboard';
 import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/TeamProcessingActivities';
 import { Error, Loading } from '@/components/shared';
-import { TeamTab } from '@/components/team';
 import env from '@/lib/env';
-import useISO from 'hooks/useISO';
 import useTeam from 'hooks/useTeam';
 import { getCscStatusesBySlug } from 'models/team';
 import { GetServerSidePropsContext } from 'next';
@@ -16,7 +13,6 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const TeamDashboard = ({
-  teamFeatures,
   csc_statuses,
   slug,
 }: {
@@ -26,7 +22,6 @@ const TeamDashboard = ({
 }) => {
   const { t } = useTranslation('common');
   const { isLoading: teamLoading, isError: teamError, team } = useTeam();
-  const { ISO } = useISO(team);
 
   if (teamLoading) {
     return <Loading />;

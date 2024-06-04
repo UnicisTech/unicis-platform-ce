@@ -16,7 +16,6 @@ import {
   mergePoints,
   getSections,
 } from '@/components/defaultLanding/data/configs/csc';
-import { UnicisPages } from 'types';
 
 ChartJS.register(
   RadialLinearScale,
@@ -58,13 +57,9 @@ const getMaturityLevels = (
 
 const RadarChart = ({
   statuses,
-  labels,
-  page_name,
   ISO,
 }: {
-  page_name: UnicisPages;
   statuses: { [key: string]: string };
-  labels: any[];
   ISO;
 }) => {
   const options = {
