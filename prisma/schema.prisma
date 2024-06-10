@@ -15,6 +15,7 @@ enum Role {
 }
 
 enum Plan {
+  COMMUNITY
   PREMIUM
   ULTIMATE
 }
@@ -99,9 +100,9 @@ model Subscription {
   id              String    @id @default(uuid())
   teamId          String    @unique
   userEmail       String
-  plan            Plan
-  startDate       DateTime
-  nextInvoiceDate DateTime
+  plan            Plan      @default(COMMUNITY)
+  startDate       DateTime  @default(now())
+  nextInvoiceDate DateTime?
   payments        Payment[]
 
   team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)

@@ -2,17 +2,18 @@ import { prisma } from '@/lib/prisma';
 import { getCscStatusesProp } from '@/lib/csc';
 import { getSession } from '@/lib/session';
 import { findOrCreateApp } from '@/lib/svix';
-import { Role } from '@prisma/client';
+import { Role, Plan } from '@prisma/client';
 import { controls } from '@/components/defaultLanding/data/configs/csc';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { TeamProperties } from 'types';
 
 export const createTeam = async (param: {
+  userEmail: string;
   userId: string;
   name: string;
   slug: string;
 }) => {
-  const { userId, name, slug } = param;
+  const { userId, userEmail, name, slug } = param;
 
   const team = await prisma.team.create({
     data: {
@@ -22,6 +23,8 @@ export const createTeam = async (param: {
   });
 
   await addTeamMember(team.id, userId, Role.OWNER);
+
+  await addSubscription(team.id, userEmail)
 
   await findOrCreateApp(team.name, team.id);
 
@@ -401,3 +404,13 @@ export const setCscIso = async ({
 
   return iso;
 };
+
+export const addSubscription = async (teamId: string, email: string) => {
+  await prisma.subscription.create({
+    data: {
+      teamId,
+      userEmail: email,
+      startDate: new Date(), 
+    },
+  });
+} 

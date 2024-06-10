@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Subscription" ALTER COLUMN "startDate" SET DEFAULT CURRENT_TIMESTAMP,
+ALTER COLUMN "nextInvoiceDate" DROP NOT NULL;

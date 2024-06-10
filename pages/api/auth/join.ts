@@ -104,6 +104,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     const slug = slugify(team);
 
     await createTeam({
+      userEmail: emailToUse,
       userId: user.id,
       name: team,
       slug,
