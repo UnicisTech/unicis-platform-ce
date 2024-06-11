@@ -28,5 +28,5 @@ export const sendEmail = async (data: EmailData) => {
     from: env.smtp.from,
   };
 
-  await transporter.sendMail({ ...emailDefaults, ...data });
+  return await transporter.sendMail({ ...emailDefaults, ...data });
 };

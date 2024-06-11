@@ -122,6 +122,18 @@ export type ExtendedComment = Comment & {
   createdBy: User;
 };
 
+export type TeamWithSubscription = Prisma.TeamGetPayload<{
+  include: {
+    subscription: true;
+  };
+}>;
+
+export type SubscriptionWithPayments = Prisma.SubscriptionGetPayload<{
+  include: {
+    payments: true;
+  };
+}>;
+
 // export type TeamProperties = {
 //   csc_iso?: ISO;
 //   [key in CscStatusesProp | CscControlsProp]?: string;

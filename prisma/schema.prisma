@@ -20,6 +20,12 @@ enum Plan {
   ULTIMATE
 }
 
+enum SubscriptionStatus {
+  ACTIVE
+  PENDING
+  DECLINED
+}
+
 enum PaymentStatus {
   SUCCESS
   FAILED
@@ -97,11 +103,12 @@ model Team {
 }
 
 model Subscription {
-  id              String    @id @default(uuid())
-  teamId          String    @unique
+  id              String             @id @default(uuid())
+  teamId          String             @unique
   userEmail       String
-  plan            Plan      @default(COMMUNITY)
-  startDate       DateTime  @default(now())
+  plan            Plan               @default(COMMUNITY)
+  status          SubscriptionStatus @default(ACTIVE)
+  startDate       DateTime           @default(now())
   nextInvoiceDate DateTime?
   payments        Payment[]
 
@@ -115,7 +122,7 @@ model Payment {
   date           DateTime
   amount         Int
   status         PaymentStatus
-  paymentUrl     String
+  paymentUrl     String?
 
   subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
 }

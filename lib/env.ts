@@ -94,6 +94,9 @@ const env = {
     siteKey: process.env.RECAPTCHA_SITE_KEY || null,
     secretKey: process.env.RECAPTCHA_SECRET_KEY || null,
   },
+
+  // Billing address
+  billingEmail: process.env.BILLING_EMAIL,
 };
 
 export default env;

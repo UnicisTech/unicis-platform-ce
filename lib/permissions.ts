@@ -6,6 +6,7 @@ export type Resource =
   | 'team'
   | 'team_member'
   | 'team_invitation'
+  | 'team_billing'
   | 'team_sso'
   | 'team_dsync'
   | 'team_audit_log'
@@ -56,6 +57,10 @@ export const permissions: RolePermissions = {
       actions: '*',
     },
     {
+      resource: 'team_billing',
+      actions: '*',
+    },
+    {
       resource: 'team_sso',
       actions: '*',
     },
@@ -91,6 +96,10 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'team_invitation',
+      actions: '*',
+    },
+    {
+      resource: 'team_billing',
       actions: '*',
     },
     {
