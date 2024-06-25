@@ -2,16 +2,17 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import { Button, Input } from 'react-daisyui';
+import { Button } from 'react-daisyui';
 
 import type { ApiResponse } from 'types';
-import { Card } from '@/components/shared';
+import { Card, InputWithLabel } from '@/components/shared';
 import { defaultHeaders } from '@/lib/common';
 import { User } from '@prisma/client';
 import { useSession } from 'next-auth/react';
 
 const schema = Yup.object().shape({
-  name: Yup.string().required(),
+  firstName: Yup.string().required(),
+  lastName: Yup.string().required(),
 });
 
 const UpdateName = ({ user }: { user: Partial<User> }) => {
@@ -20,7 +21,8 @@ const UpdateName = ({ user }: { user: Partial<User> }) => {
 
   const formik = useFormik({
     initialValues: {
-      name: user.name,
+      firstName: user.firstName,
+      lastName: user.lastName,
     },
     enableReinitialize: true,
     validationSchema: schema,
@@ -58,13 +60,26 @@ const UpdateName = ({ user }: { user: Partial<User> }) => {
             <Card.Title>{t('name')}</Card.Title>
             <Card.Description>{t('name-appearance')}</Card.Description>
           </Card.Header>
-          <Input
+          <InputWithLabel
             type="text"
-            name="name"
-            placeholder={t('your-name')}
-            value={formik.values.name}
+            label={t('first-name')}
+            name="firstName"
+            placeholder={t('your-first-name')}
+            value={formik.values.firstName}
+            error={
+              formik.touched.firstName ? formik.errors.firstName : undefined
+            }
             onChange={formik.handleChange}
-            className="w-full max-w-md"
+            required
+          />
+          <InputWithLabel
+            type="text"
+            label={t('last-name')}
+            name="lastName"
+            placeholder={t('your-last-name')}
+            value={formik.values.lastName}
+            error={formik.touched.lastName ? formik.errors.lastName : undefined}
+            onChange={formik.handleChange}
             required
           />
         </Card.Body>

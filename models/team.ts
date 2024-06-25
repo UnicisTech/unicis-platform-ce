@@ -6,13 +6,15 @@ import { Role } from '@prisma/client';
 import { controls } from '@/components/defaultLanding/data/configs/csc';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { TeamProperties } from 'types';
+import { addSubscription } from './subscription';
 
 export const createTeam = async (param: {
+  userEmail: string;
   userId: string;
   name: string;
   slug: string;
 }) => {
-  const { userId, name, slug } = param;
+  const { userId, userEmail, name, slug } = param;
 
   const team = await prisma.team.create({
     data: {
@@ -23,6 +25,8 @@ export const createTeam = async (param: {
 
   await addTeamMember(team.id, userId, Role.OWNER);
 
+  await addSubscription(team.id, userEmail);
+
   await findOrCreateApp(team.name, team.id);
 
   return team;
@@ -31,6 +35,13 @@ export const createTeam = async (param: {
 export const getTeam = async (key: { id: string } | { slug: string }) => {
   return await prisma.team.findUniqueOrThrow({
     where: key,
+    include: {
+      subscription: {
+        include: {
+          payments: true, // Include payments within the subscription
+        },
+      },
+    },
   });
 };
 
@@ -223,7 +234,11 @@ export const getTeamMember = async (userId: string, slug: string) => {
       },
     },
     include: {
-      team: true,
+      team: {
+        include: {
+          subscription: true,
+        },
+      },
     },
   });
 

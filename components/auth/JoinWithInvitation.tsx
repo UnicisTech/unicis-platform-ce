@@ -42,11 +42,13 @@ const JoinWithInvitation = ({
 
   const formik = useFormik({
     initialValues: {
-      name: '',
+      firstName: '',
+      lastName: '',
       password: '',
     },
     validationSchema: Yup.object().shape({
-      name: Yup.string().required(),
+      firstName: Yup.string().required(),
+      lastName: Yup.string().required(),
       password: Yup.string().required().min(passwordPolicies.minLength),
     }),
     enableReinitialize: true,
@@ -89,11 +91,20 @@ const JoinWithInvitation = ({
       <form className="space-y-3" onSubmit={formik.handleSubmit}>
         <InputWithLabel
           type="text"
-          label={t('name')}
-          name="name"
-          placeholder={t('your-name')}
-          value={formik.values.name}
-          error={formik.touched.name ? formik.errors.name : undefined}
+          label={t('first-name')}
+          name="firstName"
+          placeholder={t('your-first-name')}
+          value={formik.values.firstName}
+          error={formik.touched.firstName ? formik.errors.firstName : undefined}
+          onChange={formik.handleChange}
+        />
+        <InputWithLabel
+          type="text"
+          label={t('last-name')}
+          name="lastName"
+          placeholder={t('your-last-name')}
+          value={formik.values.lastName}
+          error={formik.touched.lastName ? formik.errors.lastName : undefined}
           onChange={formik.handleChange}
         />
         <InputWithLabel

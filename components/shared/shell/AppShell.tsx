@@ -1,7 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Loading } from '@/components/shared';
 import { useSession } from 'next-auth/react';
-import React from 'react';
 import Header from './Header';
 import Drawer from './Drawer';
 
@@ -9,7 +8,7 @@ import GlobalTheme from '@atlaskit/theme/components';
 import { ThemeModes } from '@atlaskit/theme/types';
 
 export default function AppShell({ children }) {
-  const { status } = useSession();
+  const { data, status } = useSession();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -18,6 +17,22 @@ export default function AppShell({ children }) {
   const getAtlaskitThemeMode = useCallback(() => {
     return { mode: atlaskitTheme };
   }, [atlaskitTheme]);
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      const { email, name } = data.user;
+      if (email && name) {
+        const [firstName, lastName] = name.split(' ') as string[];
+        (window as any).mt &&
+          (window as any).mt('send', 'pageview', {
+            email: email,
+            firstname: firstName,
+            lastname: lastName,
+            tags: 'CE',
+          });
+      }
+    }
+  }, [status]);
 
   if (status === 'loading') {
     return <Loading />;

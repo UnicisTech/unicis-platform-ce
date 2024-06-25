@@ -59,7 +59,7 @@ const CreateTask = ({
   const { t } = useTranslation('common');
 
   return (
-    <Modal open={visible} style={{ height: '80%' }}>
+    <Modal open={visible}>
       <Modal.Header className="font-bold">Create Task</Modal.Header>
       <Form<FormData>
         onSubmit={async (data, { reset }) => {

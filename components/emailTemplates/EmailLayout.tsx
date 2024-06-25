@@ -15,6 +15,7 @@ interface EmailLayoutProps {
 }
 
 const EmailLayout = ({ children }: EmailLayoutProps) => {
+  console.log('EmailLayout', app.logoUrl);
   return (
     <Tailwind>
       <Body className="bg-white my-auto mx-auto font-sans">

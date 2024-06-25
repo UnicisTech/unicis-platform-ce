@@ -51,14 +51,6 @@ const RpaDashboard: NextPageWithLayout<
     setIsDeleteOpen(true);
   }, []);
 
-  if (isLoading || !team || !tasks) {
-    return <Loading />;
-  }
-
-  if (isError) {
-    return <Error />;
-  }
-
   const tasksWithProcedures = useMemo<Array<TaskWithRpaProcedure>>(() => {
     if (!tasks) {
       return [];
@@ -69,6 +61,14 @@ const RpaDashboard: NextPageWithLayout<
       return procedure;
     }) as TaskWithRpaProcedure[];
   }, [tasks]);
+
+  if (isLoading || !team || !tasks) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error />;
+  }
 
   return (
     <>

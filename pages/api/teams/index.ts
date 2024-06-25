@@ -56,6 +56,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const team = await createTeam({
+    userEmail: session?.user?.email as string,
     userId: session?.user?.id as string,
     name,
     slug,

@@ -1,15 +1,14 @@
 import fetcher from '@/lib/fetcher';
-import type { Team } from '@prisma/client';
 import { useRouter } from 'next/router';
 import useSWR, { mutate } from 'swr';
-import type { ApiResponse } from 'types';
+import type { ApiResponse, TeamWithSubscription } from 'types';
 
 const useTeam = (slug?: string) => {
   const { query, isReady } = useRouter();
 
   const teamSlug = slug || (isReady ? query.slug : null);
 
-  const { data, error, isLoading } = useSWR<ApiResponse<Team>>(
+  const { data, error, isLoading } = useSWR<ApiResponse<TeamWithSubscription>>(
     teamSlug ? `/api/teams/${teamSlug}` : null,
     fetcher
   );
