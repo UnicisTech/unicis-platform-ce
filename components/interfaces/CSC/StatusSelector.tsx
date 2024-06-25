@@ -7,10 +7,12 @@ import {
 import { WithoutRing } from 'sharedStyles';
 
 const StatusSelector = ({
+  isDisabled,
   statusValue,
   control,
   handler,
 }: {
+  isDisabled: boolean;
   statusValue: string;
   control: string;
   handler: (control: string, value: string) => Promise<void>;
@@ -36,6 +38,7 @@ const StatusSelector = ({
         styles={colourStyles}
         placeholder="Status"
         value={statusOptions.find((option) => option.label === value)}
+        isDisabled={isDisabled}
       />
     </WithoutRing>
   );

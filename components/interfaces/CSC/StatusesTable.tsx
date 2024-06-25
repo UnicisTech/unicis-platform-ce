@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import StatusHeader from './StatusHeader';
 import TaskSelector from './TaskSelector';
 import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
+import { getCscControlsProp } from '@/lib/csc';
 import StatusSelector from './StatusSelector';
 import type { CscOption } from 'types';
 import type { Task } from '@prisma/client';
@@ -48,6 +49,8 @@ const StatusesTable = ({
     prevButtonDisabled,
     nextButtonDisabled,
   } = usePagination<ControlOption>(filteredControls, perPage);
+
+  const cscControlsProp = getCscControlsProp(ISO) 
 
   useEffect(() => {
     let filteredControls = [...getControlOptions(ISO)];
@@ -132,6 +135,13 @@ const StatusesTable = ({
                           statusValue={statuses[option.value.control]}
                           control={option.value.control}
                           handler={statusHandler}
+                          isDisabled={!Boolean(tasks
+                            .filter(
+                              (task: any) =>
+                                task.properties?.[cscControlsProp]?.find(
+                                  (item: string) => item === option.value.control
+                                )
+                            ).length)}
                         />
                       </div>
                     ) : (
