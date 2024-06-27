@@ -1,13 +1,11 @@
 import type { Prisma } from '@prisma/client';
 import { useTranslation } from 'next-i18next';
 import useTeamTasks from 'hooks/useTeamTasks';
-import { useCallback, useState } from 'react';
 import { capitalizeCountryName } from '@/lib/utils';
 
 const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
   const { t } = useTranslation('translation');
-  const { tasks, mutateTasks } = useTeamTasks(slug as string);
-  const [country, setCountry] = useState('');
+  const { tasks } = useTeamTasks(slug as string);
 
   const countriesSet = new Set<string>();
 

@@ -51,12 +51,12 @@ const RpaDashboard: NextPageWithLayout<
     setIsDeleteOpen(true);
   }, []);
 
-  const tasksWithProcedures = useMemo<Array<TaskWithRpaProcedure>>(() => {
+  const tasksWithProcedures = useMemo(() => {
     if (!tasks) {
       return [];
     }
-    return tasks.filter((task) => {
-      const taskProperties = task.properties as TaskProperties;
+    return tasks.filter((tasks) => {
+      const taskProperties = tasks.properties as TaskProperties;
       const procedure = taskProperties.rpa_procedure;
       return procedure;
     }) as TaskWithRpaProcedure[];

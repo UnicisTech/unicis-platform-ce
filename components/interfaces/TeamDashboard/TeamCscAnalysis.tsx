@@ -1,17 +1,10 @@
-import useTasks from 'hooks/useTasks';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import PieChart from '../CSC/PieChart';
 import RadarChart from '../CSC/RadarChart';
-import ControlSelector from './ControlSelector';
-import { useCallback, useEffect, useState } from 'react';
-import type { Option } from 'types';
-import axios from 'axios';
-import toast from 'react-hot-toast';
-import { StatusCscFilter } from '../CSC/StatusFilter';
+import { useEffect, useState } from 'react';
 import useISO from 'hooks/useISO';
 import useTeam from 'hooks/useTeam';
-import { Loading } from '@/components/shared';
+import { Loading, Error } from '@/components/shared';
 
 const labels = [
   'Unknown',
@@ -24,6 +17,17 @@ const labels = [
   'Continuously Improving',
 ];
 
+const barColors = [
+  'rgba(241, 241, 241, 1)',
+  'rgba(178, 178, 178, 1)',
+  'rgba(255, 0, 0, 1)',
+  'rgba(202, 0, 63, 1)',
+  'rgba(102, 102, 102, 1)',
+  'rgba(255, 190, 0, 1)',
+  'rgba(106, 217, 0, 1)',
+  'rgba(47, 143, 0, 1)',
+];
+
 const ProcessingActivitiesAnalysis = ({
   csc_statuses,
   slug,
@@ -31,36 +35,10 @@ const ProcessingActivitiesAnalysis = ({
   csc_statuses: { [key: string]: string };
   slug: string;
 }) => {
-  const router = useRouter();
   const { t } = useTranslation('translation');
-  const [statuses, setStatuses] = useState(csc_statuses);
-  const [statusFilter, setStatusFilter] = useState<null | Option[]>(null);
-  const [control, setControl] = useState('');
+  const [statuses] = useState(csc_statuses);
   const { isLoading, isError, team } = useTeam(slug as string);
   const { ISO } = useISO(team);
-
-  const controlHandler = useCallback(async (value: string) => {
-    setControl(value);
-  }, []);
-
-  const statusHandler = useCallback(
-    async (control: string, value: string) => {
-      const response = await axios.put(`/api/teams/${slug}/csc`, {
-        control,
-        value,
-      });
-
-      const { data, error } = response.data;
-
-      if (error) {
-        toast.error(error.message);
-        return;
-      }
-
-      setStatuses(data.statuses);
-    },
-    [slug]
-  );
 
   useEffect(() => {
     console.log('CSC ISO', ISO);
@@ -68,6 +46,10 @@ const ProcessingActivitiesAnalysis = ({
 
   if (isLoading || !team || !ISO) {
     return <Loading />;
+  }
+
+  if (isError) {
+    return <Error />;
   }
 
   console.log(statuses);
@@ -104,16 +86,12 @@ const ProcessingActivitiesAnalysis = ({
             <PieChart
               page_name={`dashboard`}
               statuses={statuses}
+              barColor={barColors}
               labels={labels}
             />
           </div>
           <div style={{ width: '49%' }} className="stats p-4 stat-value shadow">
-            <RadarChart
-              labels={labels}
-              page_name="dashboard"
-              ISO={ISO}
-              statuses={statuses}
-            />
+            <RadarChart ISO={ISO} statuses={statuses} />
           </div>
         </div>
       </div>

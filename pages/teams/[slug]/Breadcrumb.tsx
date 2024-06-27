@@ -1,4 +1,3 @@
-import router from 'next/router';
 import { Link } from 'react-daisyui';
 import { useTranslation } from 'react-i18next';
 

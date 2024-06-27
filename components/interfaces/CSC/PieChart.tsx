@@ -30,11 +30,13 @@ const countStatuses = (
 
 const PieChart = ({
   statuses,
+  barColor,
   labels,
   page_name,
 }: {
   page_name: UnicisPages;
   statuses: { [key: string]: string };
+  barColor: any[];
   labels: any[];
 }) => {
   const data = {
@@ -43,26 +45,8 @@ const PieChart = ({
       {
         label: '# of Controls',
         data: countStatuses(statuses, page_name),
-        backgroundColor: [
-          'rgba(241, 241, 241, 1)',
-          'rgba(178, 178, 178, 1)',
-          'rgba(255, 0, 0, 1)',
-          'rgba(202, 0, 63, 1)',
-          'rgba(102, 102, 102, 1)',
-          'rgba(255, 190, 0, 1)',
-          'rgba(106, 217, 0, 1)',
-          'rgba(47, 143, 0, 1)',
-        ],
-        borderColor: [
-          'rgba(241, 241, 241, 1)',
-          'rgba(178, 178, 178, 1)',
-          'rgba(255, 0, 0, 1)',
-          'rgba(202, 0, 63, 1)',
-          'rgba(102, 102, 102, 1)',
-          'rgba(255, 190, 0, 1)',
-          'rgba(106, 217, 0, 1)',
-          'rgba(47, 143, 0, 1)',
-        ],
+        backgroundColor: barColor,
+        borderColor: barColor,
         borderWidth: 1,
       },
     ],

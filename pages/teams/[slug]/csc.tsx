@@ -31,6 +31,17 @@ const labels = [
   'Continuously Improving',
 ];
 
+const barColors = [
+  'rgba(241, 241, 241, 1)',
+  'rgba(178, 178, 178, 1)',
+  'rgba(255, 0, 0, 1)',
+  'rgba(202, 0, 63, 1)',
+  'rgba(102, 102, 102, 1)',
+  'rgba(255, 190, 0, 1)',
+  'rgba(106, 217, 0, 1)',
+  'rgba(47, 143, 0, 1)',
+];
+
 const CscDashboard = ({
   csc_statuses,
 }: {
@@ -128,15 +139,15 @@ const CscDashboard = ({
           style={{ width: '49%' }}
           className="stats stat-value shadow pl-4 py-4"
         >
-          <PieChart page_name={`csc`} statuses={statuses} labels={labels} />
+          <PieChart
+            page_name={`csc`}
+            statuses={statuses}
+            barColor={barColors}
+            labels={labels}
+          />
         </div>
         <div style={{ width: '49%' }} className="stats stat-value shadow">
-          <RadarChart
-            page_name="csc"
-            labels={labels}
-            statuses={statuses}
-            ISO={ISO}
-          />
+          <RadarChart statuses={statuses} ISO={ISO} />
         </div>
       </div>
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
