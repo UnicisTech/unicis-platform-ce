@@ -1,6 +1,5 @@
 import { prisma } from '@/lib/prisma';
-import { RpaProcedureInterface } from 'types';
-import { getTeam, incrementTaskIndex, isTeamMember } from './team';
+import { getTeam, incrementTaskIndex } from './team';
 
 export const createTask = async (param: {
   authorId: string;
@@ -141,57 +140,4 @@ export const getTeamTasks = async (slug: string) => {
     },
   });
   return tasks;
-};
-
-export const isUserHasAccess = async (params: {
-  taskId: number;
-  userId: string;
-}) => {
-  const { taskId, userId } = params;
-  const task = await prisma.task.findUnique({
-    where: {
-      id: taskId,
-    },
-    select: {
-      teamId: true,
-    },
-  });
-
-  const teamId = task?.teamId as string;
-
-  if (!(await isTeamMember(userId, teamId))) {
-    return false;
-  }
-
-  return true;
-};
-
-export const assignTaskRpaProcedure = async (
-  taskNumber: number,
-  slug: string,
-  data: RpaProcedureInterface
-) => {
-  const taskToEdit = await prisma.task.findFirst({
-    where: {
-      taskNumber,
-      team: {
-        slug,
-      },
-    },
-  });
-  if (taskToEdit) {
-    const editedTask = await prisma.task.update({
-      where: {
-        id: taskToEdit.id,
-      },
-      data: {
-        properties: {
-          rpa_procedure: data,
-        },
-      },
-    });
-    return editedTask;
-  } else {
-    return null;
-  }
 };
