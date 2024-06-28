@@ -118,6 +118,23 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     throw new ApiError(400, 'An invitation already exists for this email.');
   }
 
+  const userExist = await prisma.teamMember.findFirst({
+    where: {
+      user: {
+        email: email,
+      },
+      teamId: teamMember.teamId,
+    },
+    include: {
+      user: true,
+      team: true,
+    },
+  });
+
+  if (userExist) {
+    throw new ApiError(400, 'This user already in your team.');
+  }
+
   const invitation = await createInvitation({
     teamId: teamMember.teamId,
     invitedBy: teamMember.userId,
