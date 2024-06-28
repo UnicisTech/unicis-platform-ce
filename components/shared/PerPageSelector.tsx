@@ -32,7 +32,7 @@ interface PerPageSelectorProps {
 const PerPageSelector = ({ perPage, setPerPage }: PerPageSelectorProps) => {
   const tabRef = useRef<HTMLUListElement | null>(null);
   return (
-    <div className="px-4">
+    <div className="px-4 z-50">
       <div className="dropdown w-full">
         <div
           onClick={() => {
