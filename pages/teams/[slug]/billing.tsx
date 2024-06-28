@@ -92,7 +92,7 @@ const Billing = ({ teamFeatures }) => {
         team={team}
         selectedSubscription={selectedSubscription}
       />
-      <WisePaymentCard team={team} />
+      {team.subscription && <WisePaymentCard team={team} />}
     </>
   );
 };
