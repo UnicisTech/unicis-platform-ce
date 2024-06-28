@@ -1,6 +1,6 @@
 import { defaultHeaders } from '@/lib/common';
 import { availableRoles } from '@/lib/permissions';
-import type { Invitation, Team } from '@prisma/client';
+import { Role, type Invitation, type Team } from '@prisma/client';
 import { useFormik } from 'formik';
 import useInvitations from 'hooks/useInvitations';
 import { useTranslation } from 'next-i18next';
@@ -77,6 +77,7 @@ const InviteMember = ({
               name="role"
               onChange={formik.handleChange}
               required
+              defaultValue={Role.MEMBER}
             >
               {availableRoles.map((role) => (
                 <option value={role.id} key={role.id}>
