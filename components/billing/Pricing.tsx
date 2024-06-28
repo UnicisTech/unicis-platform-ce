@@ -20,6 +20,7 @@ const Pricing = ({
   // const { team } = useTeam();
   const { t } = useTranslation('common');
   const currentStatus = team.subscription?.status;
+  console.log('team', team)
   const currentPlan =
     currentStatus === SubscriptionStatus.ACTIVE
       ? team.subscription?.plan
@@ -62,12 +63,12 @@ const Pricing = ({
               key={plan.id}
             >
               <div className="p-8">
-                <div className="flex items-center space-x-2 pb-8">
+                <div className="flex justify-center flex-col items-center space-x-2 pb-8">
                   <h3 className="font-display text-2xl font-bold text-black">
                     {plan.name}
                   </h3>
+                  <p className='text-sm'>Users: {plan.users}</p>
                 </div>
-                {/* <p className="mt-2 text-gray-500 h-20">{plan.description}</p> */}
                 <div className="flex items-center flex-col justify-center space-x-2">
                   <h3 className="font-display text-2xl font-bold text-black">
                     {plan.price}
@@ -103,51 +104,7 @@ const Pricing = ({
                     {t('order')}
                   </Button>
                 )}
-                {/* <Button
-                  key={plan.id}
-                  variant="outline"
-                  size="md"
-                  fullWidth
-                  disabled={team.subscription?.plan === plan.id}
-                  className="rounded-full"
-                  onClick={() => {
-                    setSelectedSubscription(plan.name)
-                    setVisible(true)
-                  }}
-                >
-                  {t('order')}
-                </Button> */}
-                {/* {plan.prices.map((price: any) =>
-                  false ? (
-                    <Button
-                      key={price.id}
-                      variant="outline"
-                      size="md"
-                      fullWidth
-                      disabled
-                      className="rounded-full"
-                    >
-                      {t('current')}
-                    </Button>
-                  ) : (
-                    <Button
-                      key={price.id}
-                      variant="outline"
-                      size="md"
-                      fullWidth
-                      disabled
-                      className="rounded-full"
-                    >
-                      {t('current')}
-                    </Button>
-                  )
-                )} */}
               </div>
-              {/* <div className="pt-8 pb-4 px-8">
-                <div className="flex items-center space-x-2">
-                  <span className="font-display text-1xl font-bold text-black">Applications</span>
-                </div>
-              </div> */}
               <ul className="mb-10 mt-5 space-y-4 px-8">
                 {plan.applications.map((application: string) => (
                   <li

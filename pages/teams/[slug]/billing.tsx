@@ -13,7 +13,7 @@ const plans = [
   {
     id: Plan.COMMUNITY,
     name: 'Community',
-    description: 'aaaaaa',
+    users: '1 - 10',
     price: 'Free',
     subprice: 'unlimited',
     applications: [
@@ -26,7 +26,7 @@ const plans = [
   {
     id: Plan.PREMIUM,
     name: 'Premium',
-    description: 'ccccc',
+    users: '11 - 150',
     price: '€49/mo',
     subprice: 'per tenant and up to 5 admins',
     applications: [
@@ -41,7 +41,7 @@ const plans = [
   {
     id: Plan.ULTIMATE,
     name: 'Ultimate',
-    description: 'bbbbbbb',
+    users: '150 -',
     price: '€89/mo',
     subprice: 'per tenant and > 6 admins',
     applications: [
