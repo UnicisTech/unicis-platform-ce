@@ -77,7 +77,7 @@ const getSectionsLabels = (iso: string) => {
     //   return getFunctions().map(({ label }) => label)
     //For ISO 2013 we should merge the sections because of their big amount
     case '2013':
-    default:
+    default: {
       const labelSet = new Set<string>();
       controls[iso].forEach((item) => {
         labelSet.add(trimToSecondDot(item.Code));
@@ -93,6 +93,7 @@ const getSectionsLabels = (iso: string) => {
       );
 
       return sections;
+    }
   }
 };
 

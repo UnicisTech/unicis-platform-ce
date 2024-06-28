@@ -1,8 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import Select from '@atlaskit/select';
-import {
-  statusOptions,
-} from '@/components/defaultLanding/data/configs/csc';
+import { statusOptions } from '@/components/defaultLanding/data/configs/csc';
 import { WithoutRing } from 'sharedStyles';
 import type { CscOption } from 'types';
 

@@ -29,8 +29,7 @@ const ResetPasswordEmail = ({ url }: ResetPasswordEmailProps) => {
         <Container className="text-center">
           <Button
             href={`${env.appUrl}/auth/reset-password/${url}`}
-            pX={20}
-            pY={16}
+            style={{ padding: '16px 20px' }}
             className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center"
           >
             Reset password

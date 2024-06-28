@@ -12,6 +12,26 @@ const env = {
     callback: `${process.env.APP_URL}`,
   },
 
+  // SAML Jackson configuration
+  jackson: {
+    url: process.env.JACKSON_URL,
+    externalUrl: process.env.JACKSON_EXTERNAL_URL || process.env.JACKSON_URL,
+    apiKey: process.env.JACKSON_API_KEY,
+    productId: process.env.JACKSON_PRODUCT_ID || 'boxyhq',
+    selfHosted: process.env.JACKSON_URL !== undefined,
+    sso: {
+      callback: `${process.env.APP_URL}`,
+      issuer: 'https://saml.boxyhq.com',
+      path: '/api/oauth/saml',
+      oidcPath: '/api/oauth/oidc',
+      idpLoginPath: '/auth/idp-login',
+    },
+    dsync: {
+      webhook_url: `${process.env.APP_URL}/api/webhooks/dsync`,
+      webhook_secret: process.env.JACKSON_WEBHOOK_SECRET,
+    },
+  },
+
   // SMTP configuration for NextAuth
   smtp: {
     host: process.env.SMTP_HOST,

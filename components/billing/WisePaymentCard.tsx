@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Card } from '@/components/shared';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -5,7 +6,7 @@ import { Button } from 'react-daisyui';
 import type { TeamWithSubscription, SubscriptionWithPayments } from 'types';
 import useTeamMembers from 'hooks/useTeamMembers';
 import { getTotalPrice, userPrice } from '@/lib/subscriptions';
-import format from 'date-fns/format';
+import { format } from 'date-fns/format';
 
 interface WisePaymentCardProps {
   team: TeamWithSubscription;
@@ -22,6 +23,8 @@ const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
   if (isLoading || isError || !members || !subscription) {
     return null;
   }
+
+  console.log('newestPayment.paymentUrl', newestPayment.paymentUrl);
 
   return (
     <Card>
@@ -67,15 +70,21 @@ const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
       {/* <AccessControl resource="team" actions={['update']}> */}
       <Card.Footer>
         <div className="flex justify-end">
-          <Button
-            type="submit"
-            color="primary"
-            href={newestPayment.paymentUrl || undefined}
-            disabled={!newestPayment.paymentUrl}
-            size="md"
+          <Link
+            rel="noopener noreferrer"
+            target="_blank"
+            style={newestPayment.paymentUrl ? {} : { pointerEvents: 'none' }}
+            href={newestPayment.paymentUrl || ''}
           >
-            {t('pay-now')}
-          </Button>
+            <Button
+              type="submit"
+              color="primary"
+              disabled={!newestPayment.paymentUrl}
+              size="md"
+            >
+              {t('pay-now')}
+            </Button>
+          </Link>
         </div>
       </Card.Footer>
       {/* </AccessControl> */}

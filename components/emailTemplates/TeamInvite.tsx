@@ -29,8 +29,7 @@ const TeamInviteEmail = ({ team, invitationLink }: TeamInviteEmailProps) => {
         <Container className="text-center">
           <Button
             href={invitationLink}
-            pX={20}
-            pY={16}
+            style={{ padding: '16px 20px' }}
             className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center"
           >
             Join team

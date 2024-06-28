@@ -50,7 +50,7 @@ const StatusesTable = ({
     nextButtonDisabled,
   } = usePagination<ControlOption>(filteredControls, perPage);
 
-  const cscControlsProp = getCscControlsProp(ISO) 
+  const cscControlsProp = getCscControlsProp(ISO);
 
   useEffect(() => {
     let filteredControls = [...getControlOptions(ISO)];
@@ -135,13 +135,13 @@ const StatusesTable = ({
                           statusValue={statuses[option.value.control]}
                           control={option.value.control}
                           handler={statusHandler}
-                          isDisabled={!Boolean(tasks
-                            .filter(
-                              (task: any) =>
-                                task.properties?.[cscControlsProp]?.find(
-                                  (item: string) => item === option.value.control
-                                )
-                            ).length)}
+                          isDisabled={
+                            !tasks.filter((task: any) =>
+                              task.properties?.[cscControlsProp]?.find(
+                                (item: string) => item === option.value.control
+                              )
+                            ).length
+                          }
                         />
                       </div>
                     ) : (
