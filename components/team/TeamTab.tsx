@@ -1,5 +1,4 @@
 import {
-  ChartBarIcon,
   Cog6ToothIcon,
   DocumentMagnifyingGlassIcon,
   KeyIcon,
@@ -24,12 +23,6 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   const { canAccess } = useCanAccess();
 
   const navigations = [
-    {
-      name: 'Dashboard',
-      href: `/teams/${team.slug}/dashboard`,
-      active: activeTab === 'dashboard',
-      icon: ChartBarIcon,
-    },
     {
       name: 'Settings',
       href: `/teams/${team.slug}/settings`,
