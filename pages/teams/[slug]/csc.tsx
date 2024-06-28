@@ -14,7 +14,7 @@ import {
   StatusCscFilter,
 } from '@/components/interfaces/CSC';
 import { PerPageSelector } from '@/components/shared/atlaskit';
-import { perPageOptions } from '@/components/defaultLanding/data/configs/csc';
+import { perPageOptions, isoOptions } from '@/components/defaultLanding/data/configs/csc';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { getCscStatusesBySlug } from 'models/team';
 import type { Option } from 'types';
@@ -150,18 +150,21 @@ const CscDashboard = ({
           <RadarChart statuses={statuses} ISO={ISO} />
         </div>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <SectionFilter ISO={ISO} setSectionFilter={setSectionFilter} />
-        <StatusCscFilter setStatusFilter={setStatusFilter} />
-        <PerPageSelector
-          setPerPage={setPerPage}
-          options={perPageOptions}
-          placeholder="Controls per page"
-          defaultValue={{
-            label: '10',
-            value: 10,
-          }}
-        />
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className='flex items-center'><p>{isoOptions.find(({ value }) => value === ISO)?.label}</p></div>
+        <div className='flex flex-row justify-end'>
+          <SectionFilter ISO={ISO} setSectionFilter={setSectionFilter} />
+          <StatusCscFilter setStatusFilter={setStatusFilter} />
+          <PerPageSelector
+            setPerPage={setPerPage}
+            options={perPageOptions}
+            placeholder="Controls per page"
+            defaultValue={{
+              label: '10',
+              value: 10,
+            }}
+          />
+        </div>
       </div>
       <StatusesTable
         ISO={ISO}
