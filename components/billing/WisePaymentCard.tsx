@@ -15,14 +15,18 @@ interface WisePaymentCardProps {
 const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
   const { t } = useTranslation('common');
   const subscription = team.subscription as SubscriptionWithPayments;
-  const newestPayment = subscription.payments.reduce((latest, payment) => {
-    return payment.date > latest.date ? payment : latest;
-  });
   const { members, isError, isLoading } = useTeamMembers(team.slug);
 
   if (isLoading || isError || !members || !subscription) {
     return null;
   }
+  if (subscription.payments.length === 0) {
+    return null
+  }
+  
+  const newestPayment = subscription.payments.reduce((latest, payment) => {
+    return payment.date > latest.date ? payment : latest;
+  });
 
   console.log('newestPayment.paymentUrl', newestPayment.paymentUrl);
 
