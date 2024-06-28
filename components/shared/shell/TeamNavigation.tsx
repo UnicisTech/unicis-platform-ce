@@ -88,7 +88,9 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       className: 'stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        /(settings|billing|members|saml|directory-sync|audit-logs|webhooks|api-keys)/.test(activePathname),
+        /(settings|billing|members|saml|directory-sync|audit-logs|webhooks|api-keys)/.test(
+          activePathname
+        ),
     },
   ];
 
