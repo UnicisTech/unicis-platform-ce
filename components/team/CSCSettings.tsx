@@ -81,7 +81,7 @@ const CSCSettings = ({ team }: { team: TeamWithSubscription }) => {
                       >
                         {option.label}{' '}
                         {isOptionDisabled &&
-                          ' - avaliable on Premium and Ultimate plans only.'}
+                          ' - avaliable on Premium and Ultimate plans only'}
                       </option>
                     );
                   })}
