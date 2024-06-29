@@ -5,7 +5,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Loading, Error } from '@/components/shared';
 import useTeam from 'hooks/useTeam';
-import { GetServerSidePropsContext } from 'next';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import {
   StatusesTable,
   PieChart,
@@ -43,10 +43,8 @@ const barColors = [
 ];
 
 const CscDashboard = ({
-  csc_statuses,
-}: {
-  csc_statuses: { [key: string]: string };
-}) => {
+          csc_statuses,
+        }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { slug } = router.query;
 
@@ -151,7 +149,7 @@ const CscDashboard = ({
         </div>
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div className='flex items-center'><p>{isoOptions.find(({ value }) => value === ISO)?.label}</p></div>
+        <div className='flex items-center'><p>Framework: <b>{isoOptions.find(({ value }) => value === ISO)?.label}</b></p></div>
         <div className='flex flex-row justify-end'>
           <SectionFilter ISO={ISO} setSectionFilter={setSectionFilter} />
           <StatusCscFilter setStatusFilter={setStatusFilter} />
