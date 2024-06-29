@@ -56,11 +56,11 @@ const ProcessingActivitiesAnalysis = ({
 
   return (
     <>
-      {/* Processing Analysis */}
+      {/* Cybersecurity Controls */}
       <div className="mx-auto mt-4 w-full max-w-7xl rounded-md p-2">
         <div className="flex items-start justify-between mb-2">
           <div className="mb-2 flex items-center justify-between">
-            <h4>{t('Cybersecurity Controls')}</h4>
+            <h4>{t('Cybersecurity Controls Overview')}</h4>
           </div>
           <div className="flex">
             {/* <StatusCscFilter setStatusFilter={setStatusFilter} /> */}

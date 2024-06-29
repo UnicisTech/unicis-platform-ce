@@ -44,6 +44,7 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
   return (
     <>
       {/* Processing Analysis */}
+      
       <div
         style={{ width: '49%' }}
         className="dark:bg-gray-800 shadow mt-4 rounded-md p-2"
@@ -88,6 +89,7 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
           </div>
         </div>
       </div>
+
     </>
   );
 };

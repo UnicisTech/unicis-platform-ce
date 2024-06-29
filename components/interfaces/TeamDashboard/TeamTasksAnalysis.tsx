@@ -43,7 +43,7 @@ const TasksAnalysis = ({
     <>
       {/* Team Tasks Analysis */}
       <div className="mb-2 mx-4 flex items-center justify-between">
-        <h4>{t(`${slug?.toString().toUpperCase()} Task Analysis`)}</h4>
+        <h4>{t(`${slug?.toString().toUpperCase()} Task Overview`)}</h4>
       </div>
       <div className="mx-auto mt-4 w-full max-w-7xl rounded-md p-2">
         <div
@@ -71,6 +71,7 @@ const TasksAnalysis = ({
           </div>
         </div>
       </div>
+      <h4>{t('Data Privacy Overview')}</h4>
     </>
   );
 };
