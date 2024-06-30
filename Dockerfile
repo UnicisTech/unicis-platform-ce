@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install --force
+RUN npm install --legacy-peer-deps
 
 # Set up database schema
 # RUN npx prisma db push
