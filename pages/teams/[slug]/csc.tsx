@@ -51,7 +51,7 @@ const CscDashboard = ({
   const router = useRouter();
   const { slug } = router.query;
 
-  const [statuses, setStatuses] = useState(csc_statuses);
+  const [statuses, setStatuses] = useState(csc_statuses || {});
   const [sectionFilter, setSectionFilter] = useState<
     null | { label: string; value: string }[]
   >(null);

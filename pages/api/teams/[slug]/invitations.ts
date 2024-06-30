@@ -20,7 +20,7 @@ import {
 import { throwIfNotAllowed } from 'models/user';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
-import { Role, Subscription } from '@prisma/client';
+import { Role } from '@prisma/client';
 
 export default async function handler(
   req: NextApiRequest,
