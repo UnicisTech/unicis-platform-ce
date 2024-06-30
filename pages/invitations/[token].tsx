@@ -45,7 +45,7 @@ const AcceptTeamInvitation: NextPageWithLayout = () => {
       return;
     }
 
-    router.push(`/teams`)
+    router.push(`/teams`);
   };
 
   const emailMatch = data?.user?.email === invitation.email;

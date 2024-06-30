@@ -21,9 +21,9 @@ const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
     return null;
   }
   if (subscription.payments.length === 0) {
-    return null
+    return null;
   }
-  
+
   const newestPayment = subscription.payments.reduce((latest, payment) => {
     return payment.date > latest.date ? payment : latest;
   });

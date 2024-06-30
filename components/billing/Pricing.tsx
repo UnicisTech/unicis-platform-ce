@@ -20,7 +20,7 @@ const Pricing = ({
   // const { team } = useTeam();
   const { t } = useTranslation('common');
   const currentStatus = team.subscription?.status;
-  console.log('team', team)
+  console.log('team', team);
   const currentPlan =
     currentStatus === SubscriptionStatus.ACTIVE
       ? team.subscription?.plan
@@ -67,7 +67,7 @@ const Pricing = ({
                   <h3 className="font-display text-2xl font-bold text-black">
                     {plan.name}
                   </h3>
-                  <p className='text-sm'>Users: {plan.users}</p>
+                  <p className="text-sm">Users: {plan.users}</p>
                 </div>
                 <div className="flex items-center flex-col justify-center space-x-2">
                   <h3 className="font-display text-2xl font-bold text-black">

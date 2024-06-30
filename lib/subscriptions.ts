@@ -46,6 +46,6 @@ export const getTotalPrice = (plan: Plan, amount: number) => {
 
 export const getCurrentPlan = (subscription: Subscription | null) => {
   return subscription?.status === SubscriptionStatus.ACTIVE
-      ? subscription.plan
-      : Plan.COMMUNITY;
-}
+    ? subscription.plan
+    : Plan.COMMUNITY;
+};

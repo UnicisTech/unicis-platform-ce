@@ -64,12 +64,14 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, role } = req.body;
   const { slug } = req.query as { slug: string };
 
-  const currentPlan = getCurrentPlan(teamMember.team.subscription)
-  const { maxAdmins, maxUsers } = subscriptions[currentPlan]
+  const currentPlan = getCurrentPlan(teamMember.team.subscription);
+  const { maxAdmins, maxUsers } = subscriptions[currentPlan];
 
-  const teamInvitations = await getInvitations(teamMember.teamId)
-  const invitationsAmount = teamInvitations.length
-  const adminInitationAmout = teamInvitations.filter(({role}) => role === Role.ADMIN || Role.OWNER).length
+  const teamInvitations = await getInvitations(teamMember.teamId);
+  const invitationsAmount = teamInvitations.length;
+  const adminInitationAmout = teamInvitations.filter(
+    ({ role }) => role === Role.ADMIN || Role.OWNER
+  ).length;
 
   const members = await getTeamMembers(slug);
 
@@ -84,13 +86,16 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   if (invitationsAmount + members.length >= maxUsers) {
     return res.status(400).json({
       error: {
-        message: 'You have reached the maximum number of invitations per team, reject them to invite new members.',
+        message:
+          'You have reached the maximum number of invitations per team, reject them to invite new members.',
       },
     });
   }
 
   if (role === Role.ADMIN || role === Role.OWNER) {
-    const adminsAmount = members.filter(({role}) => role === Role.ADMIN).length
+    const adminsAmount = members.filter(
+      ({ role }) => role === Role.ADMIN
+    ).length;
     if (adminsAmount >= maxAdmins) {
       return res.status(400).json({
         error: {
@@ -101,7 +106,8 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     if (adminsAmount + adminInitationAmout >= maxAdmins) {
       return res.status(400).json({
         error: {
-          message: 'You have reached the maximum number of admin invitations per team, reject them to invite new admins.',
+          message:
+            'You have reached the maximum number of admin invitations per team, reject them to invite new admins.',
         },
       });
     }
