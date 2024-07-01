@@ -3,7 +3,12 @@ import { throwIfNotAllowed } from 'models/user';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Plan, SubscriptionStatus } from '@prisma/client';
 import { sendSubscriptionRequest } from '@/lib/email/sendSubscriptionRequest';
-import { addInitialPayment, changeSubscription } from 'models/subscription';
+import {
+  addInitialPayment,
+  addSubscription,
+  changeSubscription,
+  isTeamHasSubscription,
+} from 'models/subscription';
 import env from '@/lib/env';
 
 export default async function handler(
@@ -51,12 +56,23 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     subscription,
   });
   if (response?.accepted.includes(env.billingEmail as string)) {
-    const createdSubscription = await changeSubscription(
-      team.id,
-      Plan[subscription],
-      SubscriptionStatus.PENDING
-    );
-    await addInitialPayment(team, createdSubscription);
+    const teamSubscription = await isTeamHasSubscription(team.id);
+    if (teamSubscription) {
+      const createdSubscription = await changeSubscription(
+        team.id,
+        Plan[subscription],
+        SubscriptionStatus.PENDING
+      );
+      await addInitialPayment(team, createdSubscription);
+    } else {
+      await addSubscription(team.id, email);
+      const createdSubscription = await changeSubscription(
+        team.id,
+        Plan[subscription],
+        SubscriptionStatus.PENDING
+      );
+      await addInitialPayment(team, createdSubscription);
+    }
   }
   console.log('restResp', response);
   res.status(200).json({ data: response });

@@ -8,6 +8,13 @@ import {
 } from '@prisma/client';
 import { getTeamMembers } from './team';
 
+export const isTeamHasSubscription = async (teamId: string) => {
+  const subscription = await prisma.subscription.findUnique({
+    where: { teamId },
+  });
+  return subscription;
+};
+
 export const addSubscription = async (teamId: string, email: string) => {
   await prisma.subscription.create({
     data: {

@@ -31,8 +31,6 @@ export const subscriptions: SubscriptionPermissions = {
   },
 };
 
-export const userPrice = 49;
-
 export const planPrice = {
   [Plan.COMMUNITY]: 0,
   [Plan.PREMIUM]: 49,
@@ -40,7 +38,7 @@ export const planPrice = {
 };
 
 export const getTotalPrice = (plan: Plan, amount: number) => {
-  const total: number = planPrice[plan] + userPrice * amount;
+  const total: number = planPrice[plan] * amount;
   return total;
 };
 

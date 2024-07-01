@@ -5,7 +5,7 @@ import React from 'react';
 import { Button } from 'react-daisyui';
 import type { TeamWithSubscription, SubscriptionWithPayments } from 'types';
 import useTeamMembers from 'hooks/useTeamMembers';
-import { getTotalPrice, userPrice } from '@/lib/subscriptions';
+import { getTotalPrice, planPrice } from '@/lib/subscriptions';
 import { format } from 'date-fns/format';
 
 interface WisePaymentCardProps {
@@ -48,7 +48,7 @@ const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
           </p>
           <p>
             <b>Price per user: </b>
-            <span>€{userPrice}</span>
+            <span>€{planPrice[subscription.plan]}</span>
           </p>
           <p>
             <b>Total: </b>
