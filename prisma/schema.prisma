@@ -7,30 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
-  ADMIN
-  OWNER
-  MEMBER
-  AUDITOR
-}
-
-enum Plan {
-  COMMUNITY
-  PREMIUM
-  ULTIMATE
-}
-
-enum SubscriptionStatus {
-  ACTIVE
-  PENDING
-  DECLINED
-}
-
-enum PaymentStatus {
-  SUCCESS
-  FAILED
-}
-
 model Account {
   id                String  @id @default(uuid())
   userId            String
@@ -68,21 +44,21 @@ model VerificationToken {
 model User {
   id            String         @id @default(uuid())
   name          String
-  firstName     String
-  lastName      String
   email         String         @unique
   emailVerified DateTime?
   password      String?
   image         String?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @default(now())
+  firstName     String         @default("")
+  lastName      String         @default("")
   accounts      Account[]
+  Comment       Comment[]
   invitations   Invitation[]
   sessions      Session[]
+  Subscription  Subscription[]
   Task          Task[]
   teamMembers   TeamMember[]
-  Comment       Comment[]
-  Subscription  Subscription[]
 }
 
 model Team {
@@ -94,12 +70,12 @@ model Team {
   defaultRole  Role          @default(MEMBER)
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @default(now())
-  members      TeamMember[]
-  invitations  Invitation[]
-  apiKeys      ApiKey[]
-  tasks        Task[]
   properties   Json          @default("{}")
+  apiKeys      ApiKey[]
+  invitations  Invitation[]
   subscription Subscription?
+  tasks        Task[]
+  members      TeamMember[]
 }
 
 model Subscription {
@@ -107,13 +83,12 @@ model Subscription {
   teamId          String             @unique
   userEmail       String
   plan            Plan               @default(COMMUNITY)
-  status          SubscriptionStatus @default(ACTIVE)
   startDate       DateTime           @default(now())
   nextInvoiceDate DateTime?
+  status          SubscriptionStatus @default(ACTIVE)
   payments        Payment[]
-
-  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userEmail], references: [email], onDelete: Cascade)
+  team            Team               @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user            User               @relation(fields: [userEmail], references: [email], onDelete: Cascade)
 }
 
 model Payment {
@@ -123,8 +98,7 @@ model Payment {
   amount         Int
   status         PaymentStatus
   paymentUrl     String?
-
-  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  subscription   Subscription  @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
 }
 
 model Task {
@@ -136,9 +110,9 @@ model Task {
   status      String
   duedate     String
   description String
-  comments    Comment[]
-  attachments Attachment[]
   properties  Json
+  attachments Attachment[]
+  comments    Comment[]
   author      User         @relation(fields: [authorId], references: [id])
   team        Team         @relation(fields: [teamId], references: [id], onDelete: Cascade)
 }
@@ -150,8 +124,8 @@ model Comment {
   updatedAt   DateTime @updatedAt
   taskId      Int
   createdById String
-  task        Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
   createdBy   User     @relation(fields: [createdById], references: [id])
+  task        Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
 }
 
 model Attachment {
@@ -211,6 +185,29 @@ model ApiKey {
   updatedAt  DateTime  @default(now())
   expiresAt  DateTime?
   lastUsedAt DateTime?
+  team       Team      @relation(fields: [teamId], references: [id], onDelete: Cascade)
+}
 
-  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+enum Role {
+  ADMIN
+  OWNER
+  MEMBER
+  AUDITOR
+}
+
+enum Plan {
+  PREMIUM
+  ULTIMATE
+  COMMUNITY
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PENDING
+  DECLINED
+}
+
+enum PaymentStatus {
+  SUCCESS
+  FAILED
 }
