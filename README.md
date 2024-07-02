@@ -1,11 +1,12 @@
 # Unicis Platform Community Edition (free and open source)
 
-![Static Badge](https://img.shields.io/badge/Github%20stargazers%2C%20https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Fstargazers?logo=github&label=GitHub%20Star&link=https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Fstargazer)
-![Static Badge](https://img.shields.io/badge/Github%20fork%2C%20https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Ffork?logo=github&label=GitHub%20Fork&link=https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Ffork)
-![Mastodon Follow](https://img.shields.io/mastodon/follow/110267135494682486)
-![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/UnicisTech)
-![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F?logo=LinkedIn&label=LinkedIn&link=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F)
-![Discord](https://img.shields.io/discord/1110270854824214589)
+![GitHub followers](https://img.shields.io/github/followers/UnicisTech)
+![GitHub Repo stars](https://img.shields.io/github/stars/UnicisTech/unicis-platform-ce)
+[![GitHub forks](https://img.shields.io/github/forks/UnicisTech/unicis-platform-ce)](https://img.shields.io/github/forks/UnicisTech/unicis-platform-ce)
+[![Mastodon Follow](https://img.shields.io/mastodon/follow/110267135494682486)](https://mastodon.xyz/@unicis_tech)
+[![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/UnicisTech)](https://twitter.com/UnicisTech)
+[![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F?logo=LinkedIn&label=LinkedIn&link=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F)](https://www.linkedin.com/company/unicis-tech-o%C3%BC/)
+[![Discord](https://img.shields.io/discord/1110270854824214589)](https://discord.com/invite/8TwyeD97HD)
 
 
 Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs.
