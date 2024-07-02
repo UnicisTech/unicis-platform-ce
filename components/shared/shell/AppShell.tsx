@@ -28,7 +28,7 @@ export default function AppShell({ children }) {
             email: email,
             firstname: firstName,
             lastname: lastName,
-            tags: 'BE',
+            tags: 'CE',
           });
       }
     }
