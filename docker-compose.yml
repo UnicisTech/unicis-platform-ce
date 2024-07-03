@@ -4,7 +4,7 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: 7emp1eAppe4rance5Rang3I5BNOffice
+      POSTGRES_PASSWORD:  
       POSTGRES_USER: unicis_platform
       POSTGRES_DB: unicis_platform
     ports:
