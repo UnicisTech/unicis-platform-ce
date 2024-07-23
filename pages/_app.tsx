@@ -17,6 +17,8 @@ import { Theme, applyTheme } from '@/lib/theme';
 import { Themer } from '@boxyhq/react-ui/shared';
 import { AccountLayout } from '@/components/layouts';
 
+import { FleetSetup } from '@/fleet/utils';
+
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const { session, ...props } = pageProps;
 
@@ -51,6 +53,8 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <link rel="icon" href="https://www.unicis.tech/favicon.ico" />
       </Head>
       <SessionProvider session={session}>
+        {/* Fleet API AUTH Handler*/}
+        <FleetSetup />
         <Toaster toastOptions={{ duration: 4000 }} />
         <Themer
           overrideTheme={{
