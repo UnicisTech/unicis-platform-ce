@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM node:18.18.2
+FROM node:18.18.2@sha256:a17842484dd30af97540e5416c9a62943c709583977ba41481d601ecffb7f31b
 
 # Set the working directory in the container
 WORKDIR /app
