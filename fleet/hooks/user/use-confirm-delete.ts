@@ -1,6 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { useDeleteAccountMutation } from '@/redux/features/userApiSlice';
-import { toast } from 'react-toastify';
+import { useDeleteAccountMutation } from '@/fleet/redux/features/userApiSlice';
 
 export function useConfirmDelete() {
 	const [deleteAccount, { isLoading }] = useDeleteAccountMutation();
@@ -33,10 +32,10 @@ export function useConfirmDelete() {
 		})
 			.unwrap()
 			.then(() => {
-				toast.success('Successfully deleted your acount.');
+				// toast.success('Successfully deleted your acount.');
 			})
 			.catch(() => {
-				toast.error('Account deletion failed try again later.');
+				// toast.error('Account deletion failed try again later.');
 			});
 	};
 	

@@ -6,9 +6,6 @@ export { default as useResetPasswordConfirm } from './auth/use-reset-password-co
 export { default as useResetPassword } from './auth/use-reset-password';
 
 // User Hooks
-export { useUpdateUser, useUpdateUsername } from './user/use-update-user';
-export { useUpdateProfile, useUpdateImage } from './user/use-update-profile';
-export { useUpdateAddress, useUpdateSocial } from './user/use-update-contact';
 export { useConfirmDelete } from './user/use-confirm-delete';
 
 // API Token Cookies setup
