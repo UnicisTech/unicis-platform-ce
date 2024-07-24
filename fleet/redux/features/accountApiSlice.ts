@@ -9,6 +9,18 @@ interface Token {
 const authApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
 
+		create: builder.mutation({
+			query: ({
+				username,
+				email,
+				password
+			}) => ({
+				url: '/v1/account/create',
+				method: 'POST',
+				body: { username, email, password },
+			}),
+		}),
+
 		createAPIToken: builder.mutation({
 			query: ({ username, email, token_name }) => ({
 				url: `/v1/account/token`,
@@ -24,6 +36,7 @@ const authApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
+	useCreateMutation,
 	useCreateAPITokenMutation,
 	useRetrieveTokensQuery,
 } = authApiSlice;

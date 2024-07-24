@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from '@/fleet/redux/hooks';
 import { setAuth, finishInitialLoad } from '@/fleet/redux/features/reducers/authSlice';
-import { setUID, setRole, setUser } from '@/fleet/redux/features/userSlice';
+import { setUID, setRole, setUser } from '@/fleet/redux/features/reducers/userSlice';
 
 import { useVerifyMutation } from '@/fleet/redux/features/authApiSlice';
 

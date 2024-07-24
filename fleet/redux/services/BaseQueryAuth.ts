@@ -20,6 +20,12 @@ export function baseQueryWithReauth(rootPath: string) {
     return null;
   };
 
+  const getApiToken = () => {
+    return localStorage.getItem('apiToken');
+    // TODO: This allow user to access the API using tokens
+    // But should be stores in localStorage
+  };
+
   const baseQuery = fetchBaseQuery({
     baseUrl: `${process.env.API_URL}/${rootPath}`,
     credentials: "include",
@@ -29,6 +35,12 @@ export function baseQueryWithReauth(rootPath: string) {
       if (csrfToken) {
         headers.set('X-CSRF-TOKEN', csrfToken);
       }
+
+      const apiToken = getApiToken(); // TODO: Note
+      if (apiToken) {
+        headers.set('Unicis-API-Key', `Token ${apiToken}`);
+      }
+      
       return headers;
     }, // TODO: remove is necessary and set JWT CSRF to False in API
   });

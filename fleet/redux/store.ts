@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { apiSlice } from './services/apiSlice';
-import { accountSlice } from './services/accountSlice';
 
 import authReducer from './features/reducers/authSlice';
 import userReducer from './features/reducers/userSlice';
@@ -9,14 +8,12 @@ import userReducer from './features/reducers/userSlice';
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
-    [accountSlice.reducerPath]: accountSlice.reducer,
     auth: authReducer,
     user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       apiSlice.middleware,
-      accountSlice.middleware,
     ),
   devTools: process.env.NODE_ENV !== "production",
 });
