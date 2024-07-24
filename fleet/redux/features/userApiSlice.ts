@@ -1,5 +1,5 @@
 'use client'
-import { accountSlice } from '../services/userSlice';
+import { apiSlice } from '../services/apiSlice';
 
 
 interface User {
@@ -14,47 +14,8 @@ interface User {
 	location: string;
 }
 
-interface Profile {
-	bio: string,
-	phone_number: number,
-	website: string,
-	location: string,
-	date_of_birth: string,
-	language: string,
-	profile_picture: string,
-	background_image: string,
-	avatar: string,
-}
 
-interface Address {
-	id: string, 
-	street: string, 
-	city: string,    
-	state: string, 
-	postal_code: string, 
-    country: string
-}
-
-interface Social {
-	id: string;
-	platform: string,
-	username: string, 
-	link: string
-}
-
-interface Socials {
-	count: number,
-	data: [Social],
-}
-
-interface ProfileImage {
-	profile_picture: any,
-	background_image: any,
-	avatar: any,
-}
-
-
-const userApiSlice = accountSlice.injectEndpoints({
+const userApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
 
 		// [GET] QUERY FOR USER ACCOUNT

@@ -6,7 +6,7 @@ import type {
   FetchArgs,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
-import { setAuth, logout } from "../features/authSlice";
+import { setAuth, logout } from "../features/reducers/authSlice";
 import { Mutex } from "async-mutex";
 
 export function baseQueryWithReauth(rootPath: string) {

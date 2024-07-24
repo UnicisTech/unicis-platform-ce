@@ -2,7 +2,7 @@ import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/fleet/redux/hooks";
 import { useLoginMutation } from "@/fleet/redux/features/authApiSlice";
-import { setAuth } from "@/fleet/redux/features/authSlice";
+import { setAuth } from "@/fleet/redux/features/reducers/authSlice";
 
 
 export default function useLogin() {

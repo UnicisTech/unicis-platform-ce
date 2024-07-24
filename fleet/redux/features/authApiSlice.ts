@@ -1,34 +1,6 @@
 'use client'
 import { apiSlice } from '../services/apiSlice';
 
-interface User {
-	id: string;
-	username: string;
-	get_full_name: string;
-	bio: string;
-	phone_number: number;
-	avatar: string;
-	first_name: string;
-	last_name: string;
-	other_name: string;
-	email: string;
-}
-
-interface Users {
-	data: [User],
-}
-
-interface SocialAuthArgs {
-	provider: string;
-	state: string;
-	code: string;
-}
-
-interface CreateUserResponse {
-	success: boolean;
-	user: User;
-}
-
 const authApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
 
