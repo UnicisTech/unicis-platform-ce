@@ -24,7 +24,7 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string>('');
   const recaptchaRef = useRef<ReCAPTCHA>(null);
-
+  
   const handlePasswordVisibility = () => {
     setIsPasswordVisible((prev) => !prev);
   };

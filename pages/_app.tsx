@@ -55,10 +55,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       </Head>
       <SessionProvider session={session}>
         {/* Custom Provider for Redux*/}
-        <CustomProvider>
-          {/* Fleet API AUTH Handler*/}
+        {/* <CustomProvider>
           <FleetSetup />
-        </CustomProvider>
+        </CustomProvider> */}
           <Toaster toastOptions={{ duration: 4000 }} />
           <Themer
             overrideTheme={{

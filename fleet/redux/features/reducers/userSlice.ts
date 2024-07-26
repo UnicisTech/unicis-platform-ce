@@ -3,11 +3,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface User {
   id?: string;
-  username?: string;
-  get_full_name: string;
-  first_name: string;
-  last_name: string;
-  other_name: string;
+  name: string;
+  firstname: string;
+  lastname: string;
   email: string;
 }
 
@@ -20,11 +18,9 @@ interface AuthorizationState {
 const initialState: AuthorizationState = {
   user: {
     id: undefined,
-    username: undefined,
-    get_full_name: '',
-    first_name: '',
-    last_name: '',
-    other_name: '',
+    name: '',
+    firstname: '',
+    lastname: '',
     email: ''
   },
   uid: undefined,

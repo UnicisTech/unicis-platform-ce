@@ -5,12 +5,14 @@ import { prisma } from '@/lib/prisma';
 import { isBusinessEmail } from '@/lib/email/utils';
 import env from '@/lib/env';
 import { ApiError } from '@/lib/errors';
-import { createTeam, isTeamExists } from 'models/team';
-import { createUser, getUser } from 'models/user';
+import { createTeam, isTeamExists, deleteTeam } from 'models/team';
+import { createUser, getUser, deleteUser } from 'models/user';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
 import { getInvitation, isInvitationExpired } from 'models/invitation';
 import { validateRecaptcha } from '@/lib/recaptcha';
+import { useCreateUserMutation } from '@/fleet/redux/features/accountApiSlice';
+import { useCreateTeamMutation } from '@/fleet/redux/features/teamApiSlice';
 
 export default async function handler(
   req: NextApiRequest,
@@ -89,6 +91,9 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
 
+  const [createFleetUser] = useCreateUserMutation()
+  const [createFleetTeam] = useCreateUserMutation()
+
   const user = await createUser({
     name,
     firstName,
@@ -103,12 +108,22 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!invitation) {
     const slug = slugify(team);
 
-    await createTeam({
+    await createFleetUser({ name: user.name, email: email, password: password })
+      .catch((err) => {
+        deleteUser(email)
+      });
+    
+    const teamObj = await createTeam({
       userEmail: emailToUse,
       userId: user.id,
       name: team,
       slug,
     });
+
+    createFleetTeam({ name: teamObj.name })
+     .catch((err) => {
+        deleteTeam(teamObj)
+      });
   }
 
   // Send account verification email

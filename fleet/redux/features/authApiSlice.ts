@@ -12,7 +12,6 @@ const authApiSlice = apiSlice.injectEndpoints({
 			}),
 		}),
 
-
 		login: builder.mutation({
 			query: ({ email, password }) => ({
 				url: '/v1/auth/login',

@@ -19,7 +19,7 @@ export default function useVerify() {
 					if (data) {
 						dispatch(setAuth());
 						dispatch(setUser(data));
-						dispatch(setUID(data?.identity))
+						dispatch(setUID(data?.id))
 						dispatch(setRole(data?.role))
 					}
 				})
