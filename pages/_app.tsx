@@ -55,9 +55,8 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       </Head>
       <SessionProvider session={session}>
         {/* Custom Provider for Redux*/}
-        {/* <CustomProvider>
+        <CustomProvider>
           <FleetSetup />
-        </CustomProvider> */}
           <Toaster toastOptions={{ duration: 4000 }} />
           <Themer
             overrideTheme={{
@@ -74,9 +73,10 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
               '--primary-color-900': colors.blue['900'],
               '--primary-color-950': colors.blue['950'],
             }}
-          >
+            >
             {getLayout(<Component {...props} />)}
           </Themer>
+        </CustomProvider>
       </SessionProvider>
     </>
   );

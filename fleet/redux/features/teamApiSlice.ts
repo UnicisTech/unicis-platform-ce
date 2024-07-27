@@ -21,10 +21,10 @@ const teamApiSlice = apiSlice.injectEndpoints({
 		}),
 
 		createAPIToken: builder.mutation({
-			query: ({ token_name }) => ({
+			query: ({ token_name, team_name }: Token) => ({
 				url: `/v1/team/create-token`,
 				method: 'POST',
-				body: { token_name }
+				body: { token_name, team_name }
 			}),
 		}),
 

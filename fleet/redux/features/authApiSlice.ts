@@ -4,14 +4,6 @@ import { apiSlice } from '../services/apiSlice';
 const authApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
 
-		createAPIToken: builder.mutation({
-			query: ({ token_name }) => ({
-				url: `/v1/api-token/`,
-				method: 'POST',
-				body: {token_name}
-			}),
-		}),
-
 		login: builder.mutation({
 			query: ({ email, password }) => ({
 				url: '/v1/auth/login',
@@ -74,7 +66,6 @@ const authApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-	useCreateAPITokenMutation,
 	useLoginMutation,
 	useRegisterMutation,
 	useVerifyMutation,

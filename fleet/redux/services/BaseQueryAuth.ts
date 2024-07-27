@@ -59,15 +59,14 @@ export function baseQueryWithReauth(rootPath: string) {
         try {
           const refreshResult = await baseQuery(
             {
-              url: "/v1/auth/token/refresh",
               method: "POST",
+              url: "/v1/auth/token/refresh",
             },
             api,
-            extraOptions
+            extraOptions,
           );
           if (refreshResult.data) {
             api.dispatch(setAuth());
-
             result = await baseQuery(args, api, extraOptions);
           } else {
             api.dispatch(logout());

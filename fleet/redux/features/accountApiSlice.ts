@@ -6,14 +6,14 @@ const accountApiSlice = apiSlice.injectEndpoints({
 
 		createUser: builder.mutation({
 			query: ({
-				fiestname,
-				lastName,
+				firstname,
+				lastname,
 				email,
 				password
 			}) => ({
 				url: '/v1/account/create',
 				method: 'POST',
-				body: { fiestname, lastName, email, password },
+				body: { firstname, lastname, email, password },
 			}),
 		}),
 

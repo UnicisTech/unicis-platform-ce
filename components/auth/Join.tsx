@@ -13,6 +13,10 @@ import TogglePasswordVisibility from '../shared/TogglePasswordVisibility';
 import AgreeMessage from './AgreeMessage';
 import GoogleReCAPTCHA from '../shared/GoogleReCAPTCHA';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { useCreateUserMutation, useAccessMutation } from '@/fleet/redux/features/accountApiSlice';
+import { useCreateTeamMutation } from '@/fleet/redux/features/teamApiSlice';
+import { deleteUser } from 'models/user';
+
 
 interface JoinProps {
   recaptchaSiteKey: string | null;
@@ -24,6 +28,11 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string>('');
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  // Fleet Reducers
+  const [createFleetAccess] = useAccessMutation();
+  const [createFleetTeam] = useCreateTeamMutation();
+  const [createFleetUser] = useCreateUserMutation();
+
   
   const handlePasswordVisibility = () => {
     setIsPasswordVisible((prev) => !prev);
@@ -65,6 +74,24 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
         return;
       }
 
+      await createFleetUser(
+        {
+          firstname: values.firstName,
+          lastname: values.lastName,
+          email: values.email,
+          password: values.password
+        }).then(async (user) => {
+          console.log(user)
+          await createFleetAccess({email: values.email, password: values.password})
+        })
+        .catch(async (error) => {
+          console.log(error)
+          await deleteUser({ email: values.email })
+          })
+        createFleetTeam({
+          name: values.team
+        });
+      
       formik.resetForm();
 
       if (json.data.confirmEmail) {

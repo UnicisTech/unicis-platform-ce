@@ -10,7 +10,7 @@ interface Props {
 export default function CustomProvider({ children }: Props) {
 	return(
 	<Provider store={store}>
-		<div className='bg-white bg-opacity-95'>
+		<div>
 		{children}
 		</div>
 	</Provider>
