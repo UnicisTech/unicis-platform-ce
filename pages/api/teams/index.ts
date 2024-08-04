@@ -2,6 +2,8 @@ import { slugify } from '@/lib/common';
 import { ApiError } from '@/lib/errors';
 import { getSession } from '@/lib/session';
 import { createTeam, getTeams, isTeamExists } from 'models/team';
+import { throwIfNoTeamAccess } from 'models/team';
+import { throwIfNotAllowed } from 'models/user';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
 
@@ -35,6 +37,9 @@ export default async function handler(
 
 // Get teams
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
+  const teamMember = await throwIfNoTeamAccess(req, res);
+  throwIfNotAllowed(teamMember, 'team', 'read');
+  
   const session = await getSession(req, res);
 
   const teams = await getTeams(session?.user.id as string);
