@@ -22,7 +22,7 @@ export default async function handler(
       res,
       5,
       getIpAddress(req)
-    ); // 10 requests per minute
+    ); // 5 requests per minute for IP address
     try {
       switch (req.method) {
         case 'POST':
