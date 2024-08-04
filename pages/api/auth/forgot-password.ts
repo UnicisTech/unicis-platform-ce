@@ -6,6 +6,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
 import { validateRecaptcha } from '@/lib/recaptcha';
 import rateLimit from '@/lib/rate-limit';
+import { getIpAddress } from '@/lib/utils';
 
 const limiter = rateLimit({
   interval: 60 * 1000, // 60 seconds
@@ -20,7 +21,7 @@ export default async function handler(
     await limiter.check(
       res,
       5,
-      (req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || 'unknown') as string
+      getIpAddress(req)
     ); // 10 requests per minute
     try {
       switch (req.method) {
