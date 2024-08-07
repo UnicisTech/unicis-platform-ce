@@ -19,9 +19,9 @@ export default async function handler(
 ) {
   try {
     await limiter.check(
-      res,
       5,
-      getIpAddress(req)
+      getIpAddress(req),
+      res,
     ); // 5 requests per minute for IP address
     try {
       switch (req.method) {

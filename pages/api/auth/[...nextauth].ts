@@ -16,10 +16,17 @@ import GoogleProvider from 'next-auth/providers/google';
 import { isAuthProviderEnabled } from '@/lib/auth';
 import type { Provider } from 'next-auth/providers';
 import { validateRecaptcha } from '@/lib/recaptcha';
+import rateLimit from '@/lib/rate-limit';
+import { getIpAddress } from '@/lib/utils';
 
 const adapter = PrismaAdapter(prisma);
 
 const providers: Provider[] = [];
+
+const limiter = rateLimit({
+  interval: 60 * 1000, // 60 seconds
+  uniqueTokenPerInterval: 500, // Max 500 requests per second
+});
 
 if (isAuthProviderEnabled('credentials')) {
   providers.push(
@@ -30,7 +37,16 @@ if (isAuthProviderEnabled('credentials')) {
         password: { type: 'password' },
         recaptchaToken: { type: 'text' },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
+        try {
+          await limiter.check(
+            5,
+            getIpAddress(req as any),
+          ); // 5 requests per minute for IP address
+        } catch (e) {
+          throw new Error('auth-limited')
+        }
+
         if (!credentials) {
           throw new Error('no-credentials');
         }
