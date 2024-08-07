@@ -5,6 +5,7 @@ import { recordMetric } from '@/lib/metrics';
 import { ApiError } from '@/lib/errors';
 import env from '@/lib/env';
 import { getUser } from 'models/user';
+import { isPrismaError } from '@/lib/prisma';
 
 export default async function handler(
   req: NextApiRequest,
@@ -27,6 +28,10 @@ export default async function handler(
     const message = error.message || 'Something went wrong';
     const status = error.status || 500;
 
+    if (isPrismaError(error)) {
+      return res.status(status).json({ error: "Prisma Error" });
+    }
+
     res.status(status).json({ error: { message } });
   }
 }
@@ -34,36 +39,37 @@ export default async function handler(
 const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const allowEmailChange = env.confirmEmail === false;
   const session = await getSession(req, res);
+
+  if (!session) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
   const toUpdate = {};
 
   if (
     'firstName' in req.body &&
-    req.body.firstName &&
+    typeof req.body.firstName === 'string' &&
     'lastName' in req.body &&
-    req.body.lastName
+    typeof req.body.lastName === 'string'
   ) {
-    toUpdate['firstName'] = req.body.firstName;
-    toUpdate['lastName'] = req.body.lastName;
-    toUpdate['name'] = `${req.body.firstName} ${req.body.lastName}`;
+    toUpdate['firstName'] = req.body.firstName.trim();
+    toUpdate['lastName'] = req.body.lastName.trim();
+    toUpdate['name'] = `${req.body.firstName.trim()} ${req.body.lastName.trim()}`;
   }
 
-  // if ('lastName' in req.body && req.body.lastName) {
-  //   toUpdate['lastName'] = req.body.lastName;
-  // }
-
   // Only allow email change if confirmEmail is false
-  if ('email' in req.body && req.body.email && allowEmailChange) {
-    const user = await getUser({ email: req.body.email });
+  if ('email' in req.body && typeof req.body.email === 'string' && allowEmailChange) {
+    const user = await getUser({ email: req.body.email.trim() });
 
     if (user && user.id !== session?.user.id) {
       throw new ApiError(400, 'Email already in use.');
     }
 
-    toUpdate['email'] = req.body.email;
+    toUpdate['email'] = req.body.email.trim();
   }
 
-  if ('image' in req.body) {
-    toUpdate['image'] = req.body.image;
+  if ('image' in req.body && typeof req.body.image === 'string') {
+    toUpdate['image'] = req.body.image.trim();
   }
 
   if (Object.keys(toUpdate).length === 0) {
