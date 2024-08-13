@@ -139,6 +139,29 @@ if (isAuthProviderEnabled('email')) {
   );
 }
 
+const cookiesOptions: Partial<Pick<NextAuthOptions, "cookies">> = process.env.NODE_ENV === "production" ? {
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: true
+      }
+    },
+    csrfToken: {
+      name: `__Host-next-auth.csrf-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: true
+      }
+    }
+  }
+} : {}
+
 export const authOptions: NextAuthOptions = {
   adapter,
   providers,
@@ -149,6 +172,7 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
+  ...cookiesOptions,
   secret: env.nextAuth.secret,
   callbacks: {
     async signIn({ user, account, profile }) {
