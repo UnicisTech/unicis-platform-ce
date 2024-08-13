@@ -106,6 +106,18 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
     });
   }
 
+  if (
+    teamFeatures.fleetApiKey &&
+    canAccess('team_api_key', ['create', 'update', 'read', 'delete'])
+  ) {
+    navigations.push({
+      name: 'Fleet API Keys',
+      href: `/teams/${team.slug}/fleet-api-keys`,
+      active: activeTab === 'fleet-api-keys',
+      icon: KeyIcon,
+    });
+  }
+
   return (
     <div className="flex flex-col pb-6">
       <h2 className="text-xl font-semibold mb-2">

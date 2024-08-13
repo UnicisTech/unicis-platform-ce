@@ -8,4 +8,4 @@ services:
       POSTGRES_USER: unicis_platform
       POSTGRES_DB: unicis_platform
     ports:
-      - 5401:5432
+      - 5433:5432

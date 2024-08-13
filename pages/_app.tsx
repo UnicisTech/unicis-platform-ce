@@ -17,8 +17,6 @@ import { Theme, applyTheme } from '@/lib/theme';
 import { Themer } from '@boxyhq/react-ui/shared';
 import { AccountLayout } from '@/components/layouts';
 
-import { FleetSetup } from '@/fleet/utils';
-import CustomProvider from '@/fleet/redux/provider';
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const { session, ...props } = pageProps;
@@ -55,8 +53,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       </Head>
       <SessionProvider session={session}>
         {/* Custom Provider for Redux*/}
-        <CustomProvider>
-          <FleetSetup />
           <Toaster toastOptions={{ duration: 4000 }} />
           <Themer
             overrideTheme={{
@@ -76,7 +72,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
             >
             {getLayout(<Component {...props} />)}
           </Themer>
-        </CustomProvider>
       </SessionProvider>
     </>
   );
