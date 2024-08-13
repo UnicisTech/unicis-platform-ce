@@ -134,7 +134,4 @@ export type SubscriptionWithPayments = Prisma.SubscriptionGetPayload<{
   };
 }>;
 
-// export type TeamProperties = {
-//   csc_iso?: ISO;
-//   [key in CscStatusesProp | CscControlsProp]?: string;
-// };
+export type UserReturned = Pick<User, "name" | "firstName" | "lastName">

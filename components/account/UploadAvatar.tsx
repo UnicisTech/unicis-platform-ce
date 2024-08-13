@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect, useCallback } from 'react';
 import { ArrowUpCircleIcon } from '@heroicons/react/24/outline';
 
-import type { ApiResponse } from 'types';
+import type { ApiResponse, UserReturned } from 'types';
 import type { User } from '@prisma/client';
 import { Card } from '@/components/shared';
 import { defaultHeaders } from '@/lib/common';
@@ -75,7 +75,7 @@ const UploadAvatar = ({ user }: { user: Partial<User> }) => {
       body: JSON.stringify({ image }),
     });
 
-    const json = (await response.json()) as ApiResponse<User>;
+    const json = (await response.json()) as ApiResponse<UserReturned>;
     setLoading(false);
 
     if (!response.ok) {

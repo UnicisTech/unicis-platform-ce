@@ -5,6 +5,7 @@ import { recordMetric } from '@/lib/metrics';
 import { ApiError, isPrismaError } from '@/lib/errors';
 import env from '@/lib/env';
 import { getUser } from 'models/user';
+import { UserReturned } from 'types';
 
 export default async function handler(
   req: NextApiRequest,
@@ -82,5 +83,11 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
 
   recordMetric('user.updated');
 
-  res.status(200).json({ data: user });
+  res.status(200).json({ 
+    data: {
+      name: user.name, 
+      firstName: user.firstName, 
+      lastName: user.lastName
+    } as UserReturned
+  });
 };

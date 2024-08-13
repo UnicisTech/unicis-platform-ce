@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { Button } from 'react-daisyui';
 
-import type { ApiResponse } from 'types';
+import type { ApiResponse, UserReturned } from 'types';
 import { Card, InputWithLabel } from '@/components/shared';
 import { defaultHeaders } from '@/lib/common';
 import { User } from '@prisma/client';
@@ -33,7 +33,7 @@ const UpdateName = ({ user }: { user: Partial<User> }) => {
         body: JSON.stringify(values),
       });
 
-      const json = (await response.json()) as ApiResponse<User>;
+      const json = (await response.json()) as ApiResponse<UserReturned>;
 
       if (!response.ok) {
         toast.error(json.error.message);
@@ -45,6 +45,8 @@ const UpdateName = ({ user }: { user: Partial<User> }) => {
         user: {
           ...session?.user,
           name: json.data.name,
+          firstName: json.data.firstName,
+          lastName: json.data.lastName
         },
       });
 
