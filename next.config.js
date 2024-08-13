@@ -21,6 +21,19 @@ const nextConfig = {
   async redirects() {
     return redirects;
   },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+        ],
+      },
+    ];
+  },
   rewrites: async () => {
     return [
       {
