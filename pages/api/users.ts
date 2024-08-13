@@ -2,10 +2,9 @@ import { prisma } from '@/lib/prisma';
 import { getSession } from '@/lib/session';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
-import { ApiError } from '@/lib/errors';
+import { ApiError, isPrismaError } from '@/lib/errors';
 import env from '@/lib/env';
 import { getUser } from 'models/user';
-import { isPrismaError } from '@/lib/prisma';
 
 export default async function handler(
   req: NextApiRequest,
