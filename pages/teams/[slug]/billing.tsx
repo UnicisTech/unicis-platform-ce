@@ -8,6 +8,11 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { DetailsModal, Pricing, WisePaymentCard } from '@/components/billing';
 import { Plan } from '@prisma/client';
+import { throwIfNotAllowed } from 'models/user';
+import { getSession } from '@/lib/session';
+import { getTeamMember } from 'models/team';
+import { NextPageWithLayout } from 'types';
+import { inferSSRProps } from '@/lib/inferSSRProps';
 
 const plans = [
   {
@@ -57,20 +62,21 @@ const plans = [
   },
 ];
 
-const Billing = ({ teamFeatures }) => {
+const Billing: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({ 
+  teamFeatures, 
+  error 
+}) => {
   const { t } = useTranslation('common');
   const { isLoading, isError, team } = useTeam();
   const [visible, setVisible] = useState(false);
   const [selectedSubscription, setSelectedSubscription] = useState('');
 
-  console.log('team billing', team);
-
   if (isLoading) {
     return <Loading />;
   }
 
-  if (isError) {
-    return <Error message={isError.message} />;
+  if (isError || error) {
+    return <Error message={isError?.message || error?.message} />;
   }
 
   if (!team) {
@@ -97,15 +103,37 @@ const Billing = ({ teamFeatures }) => {
   );
 };
 
-export async function getServerSideProps({
-  locale,
-}: GetServerSidePropsContext) {
-  return {
-    props: {
-      ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      teamFeatures: env.teamFeatures,
-    },
-  };
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { locale, req, res, query } = context;
+
+  const session = await getSession(req, res);
+  const teamMember = await getTeamMember(
+    session?.user.id as string,
+    query.slug as string
+  );
+
+  try {
+    throwIfNotAllowed(teamMember, 'team_audit_log', 'read')
+
+    return {
+      props: {
+        ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+        error: null,
+        teamFeatures: env.teamFeatures,
+      },
+    };
+  } catch (error: unknown) {
+    const { message } = error as { message: string };
+    return {
+      props: {
+        ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+        error: {
+          message,
+        },
+        teamFeatures: env.teamFeatures,
+      },
+    };
+  }
 }
 
 export default Billing;

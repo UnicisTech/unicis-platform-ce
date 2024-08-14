@@ -8,8 +8,17 @@ import toast from 'react-hot-toast';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import env from '@/lib/env';
 import { BOXYHQ_UI_CSS } from '@/components/styles';
+import { getSession } from '@/lib/session';
+import { getTeamMember } from 'models/team';
+import { throwIfNotAllowed } from 'models/user';
+import { NextPageWithLayout } from 'types';
+import { inferSSRProps } from '@/lib/inferSSRProps';
 
-const TeamSSO = ({ teamFeatures, SPConfigURL }) => {
+const TeamSSO: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({ 
+  teamFeatures, 
+  SPConfigURL,
+  error 
+}) => {
   const { t } = useTranslation('common');
 
   const { isLoading, isError, team } = useTeam();
@@ -18,8 +27,8 @@ const TeamSSO = ({ teamFeatures, SPConfigURL }) => {
     return <Loading />;
   }
 
-  if (isError) {
-    return <Error message={isError.message} />;
+  if (isError || error) {
+    return <Error message={isError?.message || error?.message} />;
   }
 
   if (!team) {
@@ -71,26 +80,50 @@ const TeamSSO = ({ teamFeatures, SPConfigURL }) => {
   );
 };
 
-export async function getServerSideProps({
-  locale,
-}: GetServerSidePropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { locale, req, res, query } = context;
+
   if (!env.teamFeatures.sso) {
     return {
       notFound: true,
     };
   }
 
-  const SPConfigURL = env.jackson.selfHosted
-    ? `${env.jackson.externalUrl}/.well-known/saml-configuration`
-    : '/well-known/saml-configuration';
+  const session = await getSession(req, res);
+  const teamMember = await getTeamMember(
+    session?.user.id as string,
+    query.slug as string
+  );
 
-  return {
-    props: {
-      ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      teamFeatures: env.teamFeatures,
-      SPConfigURL,
-    },
-  };
+  try {
+    throwIfNotAllowed(teamMember, 'team_sso', 'read')
+
+    const SPConfigURL = env.jackson.selfHosted
+      ? `${env.jackson.externalUrl}/.well-known/saml-configuration`
+      : '/well-known/saml-configuration';
+
+    return {
+      props: {
+        ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+        error: null,
+        teamFeatures: env.teamFeatures,
+        SPConfigURL,
+      },
+    };
+  } catch (error: unknown) {
+    const { message } = error as { message: string };
+
+    return {
+      props: {
+        ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+        error: {
+          message,
+        },
+        teamFeatures: env.teamFeatures,
+        SPConfigURL: null,
+      },
+    }
+  }
 }
 
 export default TeamSSO;

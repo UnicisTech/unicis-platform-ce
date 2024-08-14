@@ -29,13 +29,16 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
       active: activeTab === 'settings',
       icon: Cog6ToothIcon,
     },
-    {
+  ];
+
+  if (canAccess('team_billing', ['read', 'update'])) {
+    navigations.push({
       name: 'Billing',
       href: `/teams/${team.slug}/billing`,
       active: activeTab === 'billing',
       icon: Cog6ToothIcon,
-    },
-  ];
+    });
+  }
 
   if (canAccess('team_member', ['create', 'update', 'read', 'delete'])) {
     navigations.push({
