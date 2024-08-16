@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { Card, InputWithLabel } from '@/components/shared';
 import { defaultHeaders, passwordPolicies } from '@/lib/common';
 
+
 const schema = Yup.object().shape({
   currentPassword: Yup.string().required(),
   newPassword: Yup.string().required().min(passwordPolicies.minLength),

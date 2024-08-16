@@ -2,6 +2,7 @@ import {
   LockClosedIcon,
   RectangleStackIcon,
   UserCircleIcon,
+  CommandLineIcon
 } from '@heroicons/react/24/outline';
 import { useTranslation } from 'next-i18next';
 import NavigationItems from './NavigationItems';
@@ -22,6 +23,12 @@ const UserNavigation = ({ activePathname }: NavigationProps) => {
       href: '/settings/account',
       icon: UserCircleIcon,
       active: activePathname === '/settings/account',
+    },
+    {
+      name: t('fleet'),
+      href: '/settings/fleet',
+      icon: CommandLineIcon,
+      active: activePathname === '/settings/fleet',
     },
     {
       name: t('password'),

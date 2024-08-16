@@ -25,6 +25,17 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+model FleetAccount {
+  id         String  @id @default(uuid())
+  userId     String  @unique
+  fleetId    String
+  accessPhrase  String 
+  connected  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 model Session {
   id           String   @id @default(uuid())
   sessionToken String   @unique
@@ -59,6 +70,7 @@ model User {
   Subscription  Subscription[]
   Task          Task[]
   teamMembers   TeamMember[]
+  fleetAccount FleetAccount[]
 }
 
 model Team {

@@ -14,9 +14,6 @@ const redirects = [
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
-  env: {
-    API_URL: "https://172.27.0.7:5000",
-  },
   images: {
     domains: ['platform.unicis.tech'],
   },
