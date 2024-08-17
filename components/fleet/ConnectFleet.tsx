@@ -17,7 +17,7 @@ const schema = Yup.object().shape({
   email: Yup.string().required(),
   firstName: Yup.string().required(),
   lastName: Yup.string().required(),
-  newPassword: Yup.string().required().min(passwordPolicies.minLength),
+  fleetPassword: Yup.string().required().min(passwordPolicies.minLength),
 });
 
 const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccount: Partial<FleetAccount> }) => {
