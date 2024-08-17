@@ -3,10 +3,15 @@ import { createOrUpdateFleet } from 'models/fleet';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
-    const { userId, fleetId, accessPhrase } = req.body;
+    const { userId, fleetId, accessPhrase, connected } = req.body;
 
     try {
-      const fleetAccount = await createOrUpdateFleet({userId, fleetId, accessPhrase})
+      const fleetAccount = await createOrUpdateFleet({
+        userId,
+        fleetId,
+        accessPhrase,
+        connected
+      })
 
       res.status(200).json(fleetAccount);
     } catch (error) {

@@ -6,12 +6,9 @@ import * as Yup from 'yup';
 import { Card, InputWithLabel } from '@/components/shared';
 import { FleetAccount, User } from '@prisma/client';
 import FleetStatus from './FleetStatus';
-import { disconnectFleet } from 'models/fleet';
 import { defaultHeaders, passwordPolicies } from '@/lib/common';
-import axios from 'axios';
 import { useState } from 'react';
-import env from '@/lib/env';
-
+import { fleetV1 } from '@/lib/fleet/apiBase';
 
 const schema = Yup.object().shape({
   email: Yup.string().required(),
@@ -23,6 +20,7 @@ const schema = Yup.object().shape({
 const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccount: Partial<FleetAccount> }) => {
   const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = useState(false);
+  const userId = user.id;
 
   const formik = useFormik({
     initialValues: {
@@ -34,44 +32,46 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
     validationSchema: schema,
     onSubmit: async (values) => {
       try {
-        console.log(process.env.FLEET_APP_URL)
-
-        const response = await axios.post(`${env.fleetAPIUrl}/api/v1/account/create`, {
-          email: values.email,
-          firstname: values.firstName,
-          lastname: values.lastName,
-          password: values.fleetPassword,
-        });
-
-        if (response.status === 201) {
-          const { access_phrase, fleet_id } = response.data;
-
-          if (!access_phrase) {
-            throw new Error('Access phrase not received');
-          }
-
-          const connectResponse = await fetch('/api/fleet/connect', {
+        if (userId) {
+          const response = await fleetV1(`/account/create`, {
             method: 'POST',
             headers: defaultHeaders,
             body: JSON.stringify({
-              userId: user.id,
-              fleetId: fleet_id,
-              accessPhrase: access_phrase,
+              email: values.email,
+              firstname: values.firstName,
+              lastname: values.lastName,
+              password: values.fleetPassword,
             }),
           });
 
-          if (connectResponse.ok) {
-            toast.success(t('fleet-connected'));
-          } else {
-            throw new Error('Failed to connect to fleet');
-          }
+          const data = await response.json();
 
-        } else {
-          toast.error(t('fleet-connect-failed'));
+          if (response.ok) {
+            const { id: fleetId } = data;
+
+            // Create or update the fleet account
+            const response = await fetch('/api/fleet/connect', {
+              method: 'POST',
+              headers: defaultHeaders,
+              body: JSON.stringify(
+                {
+                  userId,
+                  fleetId,
+                  accessPhrase: '',
+                  connected: true,
+                }
+              ),
+            });
+            
+
+            console.log(fleetAccount);
+            toast.success(t('fleet-created'));
+          } else {
+            throw new Error(data.message || 'Error creating fleet');
+          }
         }
       } catch (error) {
         toast.error(t('fleet-connect-failed'));
-        console.error('Error connecting fleet:', error);
       }
     },
   });
@@ -80,7 +80,66 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
     if (user.id) {
       setIsLoading(true);
       try {
-        await disconnectFleet(user.id);
+        const Presponse = await fetch('/api/fleet/connect', {
+          method: 'POST',
+          headers: defaultHeaders,
+          body: JSON.stringify(
+            {
+              userId,
+              fleetId: fleetAccount.fleetId,
+              accessPhrase: '',
+              connected: false,
+            }
+          ),
+        });
+
+      } catch (error) {
+        console.error('Error disconnecting fleet:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      console.error('User ID is undefined');
+    }
+  };
+
+  const handleConnet = async () => {
+    const password = formik.values.fleetPassword;
+
+    if (user.id) {
+      setIsLoading(true);
+      try {
+        if (userId) {
+          const response = await fleetV1(`/account/connect`, {
+            method: 'POST',
+            headers: defaultHeaders,
+            body: JSON.stringify({
+              email: user.email,
+              password: password,
+            }),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            const fleetId = data.fleet_secret.id
+            const secret = data.fleet_secret.secret_key
+            
+            const Presponse = await fetch('/api/fleet/connect', {
+              method: 'POST',
+              headers: defaultHeaders,
+              body: JSON.stringify(
+                {
+                  userId,
+                  fleetId,
+                  accessPhrase: secret,
+                  connected: true,
+                }
+              ),
+            });
+
+          }
+        }
       } catch (error) {
         console.error('Error disconnecting fleet:', error);
       } finally {
@@ -100,7 +159,7 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
             <Card.Description>{t('fleet-connect-description')}</Card.Description>
           </Card.Header>
           <div className="flex flex-col space-y-3">
-            {fleetAccount == null ?
+            {fleetAccount == null || fleetAccount.connected == false ?
               <>
                 <FleetStatus/>
                 <InputWithLabel
@@ -126,6 +185,20 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
           </div>
         </Card.Body>
         <Card.Footer>
+          {fleetAccount.connected==false&&
+            <>
+              <Button
+                type="button"
+                color="success"
+                loading={isLoading}
+                disabled={false}
+                onClick={() => handleConnet()}
+                size="md"
+              >
+                {t('fleet-connect')}
+              </Button>
+            </>
+          }
           {fleetAccount?.connected ? (
             <Button
               type="button"
@@ -138,16 +211,18 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
               {t('fleet-disconnect')}
             </Button>
           ) : (
+            ''
+          )}
+          {fleetAccount == null &&
             <Button
               type="submit"
               color="primary"
               loading={formik.isSubmitting}
-              disabled={fleetAccount?.connected}
               size="md"
             >
               {t('fleet-order-connect')}
             </Button>
-          )}
+          }
         </Card.Footer>
       </Card>
     </form>

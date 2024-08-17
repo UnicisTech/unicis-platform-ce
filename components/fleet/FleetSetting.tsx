@@ -30,7 +30,11 @@ const FleetSetting = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
             <Card.Title>{t('fleet-settings')}</Card.Title>
             <Card.Description>{t('fleet-settings-description')}</Card.Description>
           </Card.Header>
-          <FleetStatus/>
+          {fleetAccount ?
+            <><FleetStatus status='connected'/></>
+            :
+            <><FleetStatus status='disconnected'/></>
+          }
         </Card.Body>
         <Card.Footer>
           <Button

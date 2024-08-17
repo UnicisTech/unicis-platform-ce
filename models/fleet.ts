@@ -1,21 +1,20 @@
 import { prisma } from '@/lib/prisma';
 
 
-
-export const createOrUpdateFleet = async (param: { userId: string, fleetId: string, accessPhrase: string }) => {
+export const createOrUpdateFleet = async (param: { userId: string, fleetId: string, accessPhrase: string, connected: boolean }) => {
   
-  const { accessPhrase, userId, fleetId } = param;
+  const { accessPhrase, userId, fleetId, connected } = param;
 
   return await prisma.fleetAccount.upsert({
     where: { userId },
     update: {
-      connected: true,
+      connected: connected,
       accessPhrase,
     },
     create: {
       userId,
       fleetId,
-      connected: true,
+      connected: connected,
       accessPhrase,
     },
   });

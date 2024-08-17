@@ -1,6 +1,5 @@
 import type { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { prisma } from '@/lib/prisma';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from 'models/user';
 import { FleetAccount } from '@/components/fleet';
@@ -29,6 +28,12 @@ export const getServerSideProps = async (
 
   const fleetAccount = await getFleet(user.id)
 
+  if (!fleetAccount) {
+    return { 
+      notFound: true,
+    }
+  }
+
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
@@ -40,7 +45,15 @@ export const getServerSideProps = async (
         lastName: user.lastName,
         image: user.image,
       },
-      fleetAccount: fleetAccount || null
+      fleetAccount: {
+        id: fleetAccount.id,
+        userId: fleetAccount.userId,
+        fleetId: fleetAccount.fleetId,
+        accessPhrase: fleetAccount.accessPhrase,
+        connected: fleetAccount.connected,
+        createdAt: fleetAccount.createdAt.toISOString(), // Serialize Date
+        updatedAt: fleetAccount.updatedAt.toISOString(), // Serialize Date
+      }
     },
   };
 };

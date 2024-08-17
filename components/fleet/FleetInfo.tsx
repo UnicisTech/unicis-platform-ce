@@ -15,10 +15,14 @@ const FleetInfo = ({ user, fleetAccount }: { user: Partial<User>, fleetAccount: 
                     <Card.Description>{t('fleet-info-description')}</Card.Description>
                 </Card.Header>
                 {fleetAccount ? (
-                    <div>
+                    <div className=''>
                         <p>Fleet ID: {fleetAccount.fleetId}</p>
-                        <p>Access Phrase: {fleetAccount.accessPhrase}</p>
-                        <p>Connected: {fleetAccount.connected ? 'Yes' : 'No'}</p>
+                        <p className='flex items-center gap-4'>Connected: {fleetAccount.connected ?
+                            <div className='h-2 w-2 rounded-full bg-green-500'></div>
+                            :
+                            <div className='h-2 w-2 rounded-full bg-red-500'></div>
+                        }
+                        </p>
                         <p>
                             Created At: {fleetAccount.createdAt ? new Date(fleetAccount.createdAt).toLocaleString() : 'N/A'}
                         </p>

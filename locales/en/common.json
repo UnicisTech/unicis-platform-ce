@@ -273,7 +273,7 @@
   "fleet-connect-failed": "Fleet connection failed",
   "fleet-not-connected": "You account is not connected to fleet server",
   "fleet-connect-description": "Connect your platform to Fleet API this will allow you to make changes to your fleet",
-  "fleet-connected": "Fleet connected successfully",
+  "fleet-connected": "Fleet connected",
   "fleet-password-description": "You are required to set a password for your fleet account.",
   "fleet-settings": "Fleet Settings",
   "fleet-settings-update": "Updated Fleet Settings",
