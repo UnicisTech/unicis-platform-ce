@@ -11,8 +11,8 @@ const FleetInfo = ({ user, fleetAccount }: { user: Partial<User>, fleetAccount: 
         <Card>
             <Card.Body>
                 <Card.Header>
-                    <Card.Title>{t('fleet-connect')}</Card.Title>
-                    <Card.Description>{t('fleet-connect-description')}</Card.Description>
+                    <Card.Title>{t('fleet-info')}</Card.Title>
+                    <Card.Description>{t('fleet-info-description')}</Card.Description>
                 </Card.Header>
                 {fleetAccount ? (
                     <div>
@@ -23,7 +23,7 @@ const FleetInfo = ({ user, fleetAccount }: { user: Partial<User>, fleetAccount: 
                             Created At: {fleetAccount.createdAt ? new Date(fleetAccount.createdAt).toLocaleString() : 'N/A'}
                         </p>
                         <p>
-                            Updated At: {fleetAccount.updatedAt ? new Date(fleetAccount.updatedAt).toLocaleString() : 'N/A'}
+                            Updated A: {fleetAccount.updatedAt ? new Date(fleetAccount.updatedAt).toLocaleString() : 'N/A'}
                         </p>
                     </div>
                 ) : (

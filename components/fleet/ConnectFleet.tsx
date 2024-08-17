@@ -29,17 +29,18 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
       email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
-      newPassword: '',
+      fleetPassword: '',
     },
     validationSchema: schema,
-    enableReinitialize: true,
     onSubmit: async (values) => {
       try {
+        console.log(process.env.FLEET_APP_URL)
+
         const response = await axios.post(`${env.fleetAPIUrl}/api/v1/account/create`, {
           email: values.email,
           firstname: values.firstName,
           lastname: values.lastName,
-          password: values.newPassword,
+          password: values.fleetPassword,
         });
 
         if (response.status === 201) {
@@ -98,21 +99,30 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
             <Card.Title>{t('fleet-connect')}</Card.Title>
             <Card.Description>{t('fleet-connect-description')}</Card.Description>
           </Card.Header>
-          <FleetStatus/>
           <div className="flex flex-col space-y-3">
-            <InputWithLabel
-              type="password"
-              label={t('new-password')}
-              name="newPassword"
-              placeholder={t('new-password')}
-              value={formik.values.newPassword}
-              error={
-                formik.touched.newPassword
-                  ? formik.errors.newPassword
-                  : undefined
-              }
-              onChange={formik.handleChange}
-            />
+            {fleetAccount == null ?
+              <>
+                <FleetStatus/>
+                <InputWithLabel
+                  type="password"
+                  label={t('fleet-set-password')}
+                  name="fleetPassword"
+                  placeholder={t('fleet-password')}
+                  value={formik.values.fleetPassword}
+                  error={
+                    formik.touched.fleetPassword
+                      ? formik.errors.fleetPassword
+                      : undefined
+                  }
+                  onChange={formik.handleChange}
+                />
+                <span className='text-xs'>{t('fleet-password-description')}</span>
+              </>
+                :
+              <>
+                <FleetStatus status='connected'/>
+              </>
+            }
           </div>
         </Card.Body>
         <Card.Footer>
@@ -120,7 +130,7 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
             <Button
               type="button"
               color="error"
-              loading={false}
+              loading={isLoading}
               disabled={!fleetAccount?.connected}
               onClick={handleDisconnect}
               size="md"

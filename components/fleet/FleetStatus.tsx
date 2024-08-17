@@ -12,22 +12,22 @@ const FleetStatus: React.FC<FleetStatusProps> = ({ status }) => {
     return (
         <div className="flex gap-6 flex-col">
             {status === 'connected' && (
-                <div>
+                <div className='text-green-500'>
                     {t('fleet-connected')}
                 </div>
             )}
             {status === 'disconnected' && (
-                <div>
+                <div className='text-yellow-500'>
                     {t('fleet-disconnected')}
                 </div>
             )}
             {status === 'not-found' && (
-                <div>
+                <div className='text-orange-500'>
                     {t('fleet-not-found')}
                 </div>
             )}
             {!status && (
-                <div>
+                <div className='text-red-500'>
                     {t('fleet-not-connected')}
                 </div>
             )}
