@@ -24,65 +24,51 @@ const FleetSecret = (
   const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = useState(false);
   const userId = user.id;
+  const teamID = fleetSecret.fleetTeamId
 
   const handleOrderSecret = async () => {
     try {
-        if (userId) {
-          const response = await fleetV1(`/team/create`, {
-            method: 'POST',
-            headers: defaultHeaders,
-            body: JSON.stringify({
-              teamId: team.id,
-            }),
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            const { id: fleetTeamId, secret } = data;
-
-            // Create or update the fleet account
-            const Presponse = await fetch('/api/fleet/secret', {
-              method: 'POST',
-              headers: defaultHeaders,
-              body: JSON.stringify(
-                {
-                  teamId: team.id,
-                  fleetTeamId: fleetTeamId,
-                  secret: secret,
-                  connected: true,
-                }
-              ),
-            });
-            
-            if (Presponse.ok) {
-              window.location.reload();
-            }
-            
-            console.log(fleetSecret);
-            toast.success(t('fleet-created'));
-          } else {
-            throw new Error(data.message || 'Error creating fleet');
-          }
-        }
-      } catch (error) {
-        toast.error(t('fleet-connect-failed'));
+      if (!userId) {
+        throw new Error('User ID is not defined');
       }
-  }
+
+      if (!teamID) {
+        const { fleet_team: fleetTeam, fleet_secret: fleetSecret } = await createFleetTeam(team.name);
+        await connectFleetSecret(team.id, fleetTeam.id, fleetSecret.secret);
+        toast.success(t('fleet-created'));
+        return;
+      }
+    } catch (error) {
+      console.error('Fleet order secret error:', error);
+      toast.error(t('fleet-connect-failed'));
+      return;
+    }
+  };
+
 
   const handleDisconnect = async () => {
-    
+    if (teamID) {
+        await disconnectFleetSecret(team.id, fleetSecret.fleetTeamId!);
+        toast.success(t('fleet-secret-disactivated'));
+        return;
+    }
   };
 
   const handleConnet = async () => {
-    await fleetV1(`/team/create`, {
-      method: 'POST',
-      headers: defaultHeaders,
-      body: JSON.stringify({
-        teamId: team.id,
-      }),
-    });
-   
+    if (teamID) {
+        await connectFleetSecret(team.id, fleetSecret.fleetTeamId!, fleetSecret.secret!);
+        toast.success(t('fleet-secret-activated'));
+        return;
+    }
+  };
+
+  const handleRenew = async () => {
+    if (teamID) {
+      const { secret: newSecret } = await renewFleetSecret(teamID);
+      await connectFleetSecret(team.id, fleetSecret.fleetTeamId!, newSecret);
+      toast.success(t('fleet-secret-renew'));
+      return;
+    }
   };
 
   return (
@@ -104,7 +90,7 @@ const FleetSecret = (
               </>
             }
             {!fleetAccount.connected &&
-            <FleetStatus status='access-not-granted'/>
+              <FleetStatus status='access-not-granted'/>
             }
           </div>
         </Card.Body>
@@ -114,7 +100,7 @@ const FleetSecret = (
               <Button
                 type="button"
                 color="success"
-                loading={isLoading}
+                loading={false}
                 disabled={false}
                 onClick={() => handleConnet()}
                 size="md"
@@ -127,7 +113,7 @@ const FleetSecret = (
             <Button
               type="button"
               color="error"
-              loading={isLoading}
+              loading={false}
               disabled={!fleetSecret?.active}
               onClick={() => handleDisconnect()}
               size="md"
@@ -136,11 +122,23 @@ const FleetSecret = (
             </Button>
           )}
 
+          {fleetSecret.id != null &&
+            <Button
+              type="button"
+              color="primary"
+              loading={false}
+              disabled={!fleetAccount.connected}
+              onClick={() => handleRenew()}
+              size="md"
+            >
+              {t('fleet-renew-secret')}
+            </Button>
+          }
           {fleetSecret.id == null &&
             <Button
               type="button"
               color="primary"
-              loading={isLoading}
+              loading={false}
               disabled={!fleetAccount.connected}
               onClick={() => handleOrderSecret()}
               size="md"
@@ -153,6 +151,73 @@ const FleetSecret = (
       </Card>
     </>
   );
+};
+
+const createFleetTeam = async (name: string) => {
+  const response = await fleetV1(`/team/create`, {
+    method: 'POST',
+    headers: defaultHeaders,
+    body: JSON.stringify({ name }),
+  });
+
+  if (!response.ok) {
+    const data = await response.json();
+    throw new Error(data.message || 'Error creating fleet team');
+  }
+
+  return response.json();
+};
+
+const renewFleetSecret = async (fleetTeamId: string) => {
+  const response = await fleetV1(`/team/${fleetTeamId}/secret`, {
+    method: 'POST',
+    headers: defaultHeaders,
+  });
+
+  if (!response.ok) {
+    const data = await response.json();
+    throw new Error(data.message || 'Error creating fleet team');
+  }
+
+  return response.json();
+};
+
+const connectFleetSecret = async (teamId: string, fleetTeamId: string, secret: string) => {
+  const response = await fetch('/api/fleet/secret', {
+    method: 'POST',
+    headers: defaultHeaders,
+    body: JSON.stringify({
+      teamId,
+      fleetTeamId,
+      secret,
+      active: true,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to connect fleet');
+  }
+
+  return response.json();
+};
+
+const disconnectFleetSecret = async (teamId: string, fleetTeamId: string) => {
+  const response = await fetch('/api/fleet/secret', {
+    method: 'POST',
+    headers: defaultHeaders,
+    body: JSON.stringify({
+      teamId,
+      fleetTeamId,
+      secret: '',
+      active: false,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to connect fleet');
+  }
+
+  return response.json();
 };
 
 export default FleetSecret;
