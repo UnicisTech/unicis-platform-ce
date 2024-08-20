@@ -1,5 +1,6 @@
 import {
   Cog6ToothIcon,
+  CommandLineIcon,
   CodeBracketIcon,
   ChatBubbleBottomCenterTextIcon,
 } from '@heroicons/react/24/outline';
@@ -80,6 +81,17 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         activePathname.includes('feedback'),
+    },
+    {
+      name: t('fleet'),
+      href: `/teams/${slug}/fleet`,
+      icon: CommandLineIcon,
+      className: 'stroke-blue-600',
+      active:
+        activePathname?.startsWith(`/teams/${slug}`) &&
+        /(fleet|packs)/.test(
+          activePathname
+        ),
     },
     {
       name: t('settings'),

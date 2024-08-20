@@ -25,12 +25,6 @@ const UserNavigation = ({ activePathname }: NavigationProps) => {
       active: activePathname === '/settings/account',
     },
     {
-      name: t('fleet'),
-      href: '/settings/fleet',
-      icon: CommandLineIcon,
-      active: activePathname === '/settings/fleet',
-    },
-    {
       name: t('password'),
       href: '/settings/password',
       icon: LockClosedIcon,

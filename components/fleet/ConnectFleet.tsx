@@ -50,7 +50,7 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
             const { id: fleetId } = data;
 
             // Create or update the fleet account
-            const response = await fetch('/api/fleet/connect', {
+            const Presponse = await fetch('/api/fleet/connect', {
               method: 'POST',
               headers: defaultHeaders,
               body: JSON.stringify(
@@ -63,7 +63,10 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
               ),
             });
             
-
+            if (Presponse.ok) {
+              window.location.reload();
+            }
+            
             console.log(fleetAccount);
             toast.success(t('fleet-created'));
           } else {
@@ -92,6 +95,9 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
             }
           ),
         });
+        if (Presponse.ok) {
+          window.location.reload();
+        }
 
       } catch (error) {
         console.error('Error disconnecting fleet:', error);
@@ -110,7 +116,8 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
       setIsLoading(true);
       try {
         if (userId) {
-          const response = await fleetV1(`/account/connect`, {
+
+          const response = await fleetV1(`/account/access`, {
             method: 'POST',
             headers: defaultHeaders,
             body: JSON.stringify({
@@ -122,8 +129,8 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
           const data = await response.json();
 
           if (response.ok) {
-            const fleetId = data.fleet_secret.id
-            const secret = data.fleet_secret.secret_key
+            const fleetId = data.user.id
+            const secret = data.fleet_access.secret_key
             
             const Presponse = await fetch('/api/fleet/connect', {
               method: 'POST',
@@ -137,6 +144,10 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
                 }
               ),
             });
+
+            if (Presponse.ok) {
+              window.location.reload();
+            }
 
           }
         }
@@ -164,7 +175,7 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
                 <FleetStatus/>
                 <InputWithLabel
                   type="password"
-                  label={t('fleet-set-password')}
+                  label={t('fleet-user-password')}
                   name="fleetPassword"
                   placeholder={t('fleet-password')}
                   value={formik.values.fleetPassword}
@@ -185,7 +196,7 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
           </div>
         </Card.Body>
         <Card.Footer>
-          {fleetAccount.connected==false&&
+          {fleetAccount.connected==false && fleetAccount.id &&
             <>
               <Button
                 type="button"
@@ -213,7 +224,7 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
           ) : (
             ''
           )}
-          {fleetAccount == null &&
+          {fleetAccount.id == null &&
             <Button
               type="submit"
               color="primary"

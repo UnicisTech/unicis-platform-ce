@@ -268,10 +268,10 @@
   "fleet-disconnected": "Disconnected Fleet",
   "fleet-not-found": "Not Found",
   "fleet-password": "Fleet Password",
-  "fleet-set-password": "Set Fleet Password",
+  "fleet-user-password": "Your Fleet Password",
   "fleet-connect": "Connect Fleet",
   "fleet-connect-failed": "Fleet connection failed",
-  "fleet-not-connected": "You account is not connected to fleet server",
+  "fleet-not-connected": "Your fleet account is not connected to fleet server.",
   "fleet-connect-description": "Connect your platform to Fleet API this will allow you to make changes to your fleet",
   "fleet-connected": "Fleet connected",
   "fleet-password-description": "You are required to set a password for your fleet account.",
@@ -284,5 +284,10 @@
   "fleet-server-token": "Fleet Server Token",
   "fleet-server-token-description": "Token for accessing Fleet API",
   "fleet-server-api-key": "Fleet Server API Key",
-  "fleet-server-api-key-description": "API Key for accessing Fleet API"
+  "fleet-server-api-key-description": "API Key for accessing Fleet API",
+  "fleet-secret": "Fleet OSquery Secret",
+  "fleet-secret-description": "Fleet secret allows teams to enroll nodes, and each node enrolled with the secret will be able to Identity the team the is query results belongs to.",
+  "fleet-order-secret": "Order and Save Secret",
+  "fleet-secret-not-found": "Secret Not Found",
+  "fleet-access-not-granted": "Access Not Granted, Connect to Fleet Account to proceed."
 }

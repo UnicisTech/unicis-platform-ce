@@ -2,7 +2,7 @@ import { useTranslation } from 'next-i18next';
 
 
 type FleetStatusProps = {
-  status?: 'connected' | 'disconnected' | 'not-found';
+  status?: 'connected' | 'disconnected' | 'not-found' | 'no-fleet-secret' | 'access-not-granted';
 };
 
 const FleetStatus: React.FC<FleetStatusProps> = ({ status }) => {
@@ -24,6 +24,16 @@ const FleetStatus: React.FC<FleetStatusProps> = ({ status }) => {
             {status === 'not-found' && (
                 <div className='text-orange-500'>
                     {t('fleet-not-found')}
+                </div>
+            )}
+            {status === 'no-fleet-secret' && (
+                <div className='text-red-500'>
+                    {t('fleet-secret-not-found')}
+                </div>
+            )}
+            {status === 'access-not-granted' && (
+                <div className='text-red-500'>
+                    {t('fleet-access-not-granted')}
                 </div>
             )}
             {!status && (

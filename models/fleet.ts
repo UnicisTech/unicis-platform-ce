@@ -43,3 +43,30 @@ export const disconnectFleet = async (userId: string) => {
     },
   });
 }
+
+export const createOrUpdateFleetSecret = async (param:
+  { teamId: string, fleetTeamId: string, secret: string, active: boolean }) => {
+  
+  const { secret, teamId, fleetTeamId, active } = param;
+
+  return await prisma.fleetSecret.upsert({
+    where: { teamId },
+    update: {
+      active: active,
+      secret,
+    },
+    create: {
+      teamId,
+      fleetTeamId,
+      active: active,
+      secret,
+    },
+  });
+};
+
+// Get Fleet Account by team ID
+export const getFleetSecret = async (teamId: string) => {
+  return await prisma.fleetSecret.findUnique({
+    where: {teamId},
+  });
+}

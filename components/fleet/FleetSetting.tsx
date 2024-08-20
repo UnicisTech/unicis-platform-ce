@@ -17,7 +17,6 @@ const FleetSetting = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
     enableReinitialize: true,
     onSubmit: async (values) => {
       
-
       toast.success(t('fleet-connected'));
     },
   });
@@ -30,10 +29,10 @@ const FleetSetting = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
             <Card.Title>{t('fleet-settings')}</Card.Title>
             <Card.Description>{t('fleet-settings-description')}</Card.Description>
           </Card.Header>
-          {fleetAccount ?
+          {fleetAccount.connected ?
             <><FleetStatus status='connected'/></>
             :
-            <><FleetStatus status='disconnected'/></>
+            <><FleetStatus/></>
           }
         </Card.Body>
         <Card.Footer>
@@ -41,7 +40,7 @@ const FleetSetting = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
             type="submit"
             color="primary"
             loading={formik.isSubmitting}
-            disabled={false}
+            disabled={!fleetAccount.connected}
             size="md"
           >
             {t('fleet-settings-update')}
