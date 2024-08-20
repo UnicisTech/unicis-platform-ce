@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { Button } from 'react-daisyui';
 import * as Yup from 'yup';
-import { Card, InputWithLabel } from '@/components/shared';
+import { Card, CopyToClipboardButton, InputWithLabel } from '@/components/shared';
 import { FleetAccount, FleetSecret as FSType, Team, User } from '@prisma/client';
 import { defaultHeaders, passwordPolicies } from '@/lib/common';
 import { useState } from 'react';
@@ -86,7 +86,14 @@ const FleetSecret = (
               </>
                 :
               <>
-                <FleetStatus status='connected'/>
+                <FleetStatus status='connected' />
+                <InputWithLabel
+                  type="password"
+                  label={t('fleet-secret')}
+                  name="fleetPassword"
+                  value={fleetSecret.secret}
+                  disabled={true}
+                />
               </>
             }
             {!fleetAccount.connected &&
@@ -95,6 +102,9 @@ const FleetSecret = (
           </div>
         </Card.Body>
         <Card.Footer>
+          {fleetSecret.secret != null &&
+            <CopyToClipboardButton value={fleetSecret.secret!} />
+          }
           {fleetSecret.active == false &&
             <>
               <Button
