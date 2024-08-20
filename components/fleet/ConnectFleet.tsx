@@ -31,133 +31,43 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
     },
     validationSchema: schema,
     onSubmit: async (values) => {
+      const userEmail = values.email;
+      const fleetPassword = values.fleetPassword;
+      const lastName = values.lastName;
+      const firstName = values.firstName;
+
+      if (userEmail || lastName || firstName || fleetPassword) {
+        console.error('Invalid data from user');
+        return;
+      }
       try {
         if (userId) {
-          const response = await fleetV1(`/account/create`, {
-            method: 'POST',
-            headers: defaultHeaders,
-            body: JSON.stringify({
-              email: values.email,
-              firstname: values.firstName,
-              lastname: values.lastName,
-              password: values.fleetPassword,
-            }),
-          });
+          await createFleetAccount(userEmail!, firstName!, lastName!, fleetPassword);
+          const { fleetId, secret } = await accessFleetAccount(userEmail!, fleetPassword);
 
-          const data = await response.json();
+          if (fleetId && secret) {
+            const connected = await connectFleetAccount(userId, fleetId, secret);
 
-          if (response.ok) {
-            const { id: fleetId } = data;
-
-            // Create or update the fleet account
-            const Presponse = await fetch('/api/fleet/connect', {
-              method: 'POST',
-              headers: defaultHeaders,
-              body: JSON.stringify(
-                {
-                  userId,
-                  fleetId,
-                  accessPhrase: '',
-                  connected: true,
-                }
-              ),
-            });
-            
-            if (Presponse.ok) {
-              window.location.reload();
+            if (connected) {
+              toast.success('Connected to fleet account');
+              return;
             }
-            
-            console.log(fleetAccount);
-            toast.success(t('fleet-created'));
-          } else {
-            throw new Error(data.message || 'Error creating fleet');
           }
         }
       } catch (error) {
-        toast.error(t('fleet-connect-failed'));
+        console.error('Error creating or connecting fleet:', error);
       }
     },
   });
 
   const handleDisconnect = async () => {
-    if (user.id) {
+    if (userId) {
       setIsLoading(true);
-      try {
-        const Presponse = await fetch('/api/fleet/connect', {
-          method: 'POST',
-          headers: defaultHeaders,
-          body: JSON.stringify(
-            {
-              userId,
-              fleetId: fleetAccount.fleetId,
-              accessPhrase: '',
-              connected: false,
-            }
-          ),
-        });
-        if (Presponse.ok) {
-          window.location.reload();
-        }
-
-      } catch (error) {
-        console.error('Error disconnecting fleet:', error);
-      } finally {
-        setIsLoading(false);
+      const disconnect = await disconnectFleetAccount(userId, fleetAccount.fleetId!);
+      if (disconnect) {
+        toast.success('Disconnected from fleet account');
+        return;
       }
-    } else {
-      console.error('User ID is undefined');
-    }
-  };
-
-  const handleConnet = async () => {
-    const password = formik.values.fleetPassword;
-
-    if (user.id) {
-      setIsLoading(true);
-      try {
-        if (userId) {
-
-          const response = await fleetV1(`/account/access`, {
-            method: 'POST',
-            headers: defaultHeaders,
-            body: JSON.stringify({
-              email: user.email,
-              password: password,
-            }),
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            const fleetId = data.user.id
-            const secret = data.fleet_access.secret_key
-            
-            const Presponse = await fetch('/api/fleet/connect', {
-              method: 'POST',
-              headers: defaultHeaders,
-              body: JSON.stringify(
-                {
-                  userId,
-                  fleetId,
-                  accessPhrase: secret,
-                  connected: true,
-                }
-              ),
-            });
-
-            if (Presponse.ok) {
-              window.location.reload();
-            }
-
-          }
-        }
-      } catch (error) {
-        console.error('Error disconnecting fleet:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    } else {
-      console.error('User ID is undefined');
     }
   };
 
@@ -196,20 +106,6 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
           </div>
         </Card.Body>
         <Card.Footer>
-          {fleetAccount.connected==false && fleetAccount.id &&
-            <>
-              <Button
-                type="button"
-                color="success"
-                loading={isLoading}
-                disabled={false}
-                onClick={() => handleConnet()}
-                size="md"
-              >
-                {t('fleet-connect')}
-              </Button>
-            </>
-          }
           {fleetAccount?.connected ? (
             <Button
               type="button"
@@ -222,22 +118,80 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
               {t('fleet-disconnect')}
             </Button>
           ) : (
-            ''
-          )}
-          {fleetAccount.id == null &&
             <Button
               type="submit"
               color="primary"
               loading={formik.isSubmitting}
               size="md"
             >
-              {t('fleet-order-connect')}
+              {t('fleet-connect')}
             </Button>
-          }
+          )}
         </Card.Footer>
       </Card>
     </form>
   );
 };
+
+
+const createFleetAccount = async (email: string, firstName: string, lastName: string, password: string) => {
+  try {
+    await fleetV1(`/account/create`, {
+      method: 'POST',
+      headers: defaultHeaders,
+      body: JSON.stringify({ email, firstname: firstName, lastname: lastName, password }),
+    });
+  } catch (err) {
+    console.error('Error creating fleet account:', err);
+  }
+};
+
+const accessFleetAccount = async (email: string, password: string) => {
+  const response = await fleetV1(`/account/access`, {
+    method: 'POST',
+    headers: defaultHeaders,
+    body: JSON.stringify({ email, password }),
+  });
+
+  const data = await response.json();
+
+  if (response.ok) {
+    return { fleetId: data.user.id, secret: data.fleet_access.secret_key };
+  } else {
+    console.error('Error accessing fleet account:', data);
+    throw new Error('Failed to access fleet account');
+  }
+};
+
+const connectFleetAccount = async (userId: string, fleetId: string, secret: string) => {
+  try {
+    const Presponse = await fetch('/api/fleet/connect', {
+      method: 'POST',
+      headers: defaultHeaders,
+      body: JSON.stringify({ userId, fleetId, accessPhrase: secret, connected: true }),
+    });
+
+    return Presponse.ok;
+  } catch (err) {
+    console.error('Error connecting fleet:', err);
+    return false;
+  }
+};
+
+const disconnectFleetAccount = async (userId: string, fleetId: string) => {
+  try {
+    const Presponse = await fetch('/api/fleet/connect', {
+      method: 'POST',
+      headers: defaultHeaders,
+      body: JSON.stringify({ userId, fleetId, accessPhrase: '', connected: false }),
+    });
+
+    return Presponse.ok;
+  } catch (err) {
+    console.error('Error connecting fleet:', err);
+    return false;
+  }
+};
+
 
 export default ConnectFleet;

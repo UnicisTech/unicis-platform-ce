@@ -1,9 +1,6 @@
 import { Error, Loading } from '@/components/shared';
 import { AccessControl } from '@/components/shared/AccessControl';
 import env from '@/lib/env';
-import {
-  FleetTab
-} from '@/components/fleet';
 import useTeam from 'hooks/useTeam';
 import type { GetServerSidePropsContext } from 'next';
 import { getSession } from '@/lib/session';
@@ -11,7 +8,7 @@ import { FleetSecret } from '@prisma/client';
 import { getUserBySession } from 'models/user';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { FleetAccount } from '@/components/fleet';
+import { FleetAccount, FleetInfo, FleetTab } from '@/components/fleet';
 import { getFleet, getFleetSecret } from '@/models/fleet';
 import FleetContainer from '@/components/fleet/FleetContainer';
 import ConnectFleet from '@/components/fleet/ConnectFleet';
@@ -37,7 +34,8 @@ const Fleet = ({ teamFeatures, fleetSecret, fleetAccount, user }) => {
     <>
       <FleetTab activeTab="fleet" team={team} teamFeatures={teamFeatures} />
       <div className="space-y-6">
-        <ConnectFleet fleetAccount={fleetAccount} user={user}/>
+        <ConnectFleet fleetAccount={fleetAccount} user={user} />
+        <FleetInfo fleetAccount={fleetAccount} user={user} />
         <FleetContainer fleetAccount={fleetAccount} user={user} teamFeatures={teamFeatures} fleetSecret={fleetSecret} />
       </div>
     </>
