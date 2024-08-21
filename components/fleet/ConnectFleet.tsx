@@ -6,9 +6,8 @@ import * as Yup from 'yup';
 import { Card, InputWithLabel } from '@/components/shared';
 import { FleetAccount, User } from '@prisma/client';
 import FleetStatus from './FleetStatus';
-import { defaultHeaders, passwordPolicies, fleetAuthAPIHeaders } from '@/lib/common';
+import { passwordPolicies } from '@/lib/common';
 import { useState } from 'react';
-import { fleetV1 } from '@/lib/fleet/apiBase';
 import {
   useCreateFleetAccount,
   useAccessFleetAccount,

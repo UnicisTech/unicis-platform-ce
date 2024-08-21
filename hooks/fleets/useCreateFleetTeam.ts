@@ -1,8 +1,11 @@
 import { fleetAuthAPIHeaders } from "@/lib/common";
 import { fleetV1 } from "@/lib/fleet/apiBase";
+import { FleetTeamResponse } from "@/types";
+
+import { useCallback } from 'react';
 
 export const useCreateFleetTeam = () => {
-  const createFleetTeam = async (name: string, accessPhrase: string) => {
+  const createFleetTeam = useCallback(async (name: string, accessPhrase: string): Promise<FleetTeamResponse> => {
     const response = await fleetV1(`/team/create`, {
       method: 'POST',
       headers: fleetAuthAPIHeaders(accessPhrase),
@@ -15,7 +18,7 @@ export const useCreateFleetTeam = () => {
     }
 
     return response.json();
-  };
+  }, []);
 
   return createFleetTeam;
 };

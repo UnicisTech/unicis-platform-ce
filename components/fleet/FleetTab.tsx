@@ -20,7 +20,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
 
   const navigations = [
     {
-      name: 'Fleet',
+      name: 'Connect',
       href: `/teams/${team.slug}/fleet`,
       active: activeTab === 'fleet',
       icon: Cog6ToothIcon,
