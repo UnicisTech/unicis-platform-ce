@@ -4,9 +4,9 @@ import { Button } from 'react-daisyui';
 import * as Yup from 'yup';
 import { Card, CopyToClipboardButton, InputWithLabel } from '@/components/shared';
 import { FleetAccount, FleetSecret as FSType, Team, User } from '@prisma/client';
-import { defaultHeaders, passwordPolicies, fleetAuthAPIHeaders } from '@/lib/common';
-import { fleetV1 } from '@/lib/fleet/apiBase';
+import { passwordPolicies } from '@/lib/common';
 import FleetStatus from './FleetStatus';
+import { useConnectFleetSecret, useCreateFleetTeam, useDisconnectFleetSecret, useRenewFleetSecret } from '@/hooks/fleets';
 
 const schema = Yup.object().shape({
   email: Yup.string().required(),
@@ -22,6 +22,11 @@ const FleetSecret = (
   const { t } = useTranslation('common');
   const userId = user.id;
   const teamFleetID = fleetSecret.fleetTeamId
+
+  const createFleetTeam = useCreateFleetTeam();
+  const connectFleetSecret = useConnectFleetSecret();
+  const disconnectFleetSecret = useDisconnectFleetSecret();
+  const renewFleetSecret = useRenewFleetSecret();
 
   const handleOrderSecret = async () => {
     try {
@@ -154,71 +159,5 @@ const FleetSecret = (
   );
 };
 
-const createFleetTeam = async (name: string, accessPhrase: string) => {
-  const response = await fleetV1(`/team/create`, {
-    method: 'POST',
-    headers: fleetAuthAPIHeaders(accessPhrase),
-    body: JSON.stringify({ name }),
-  });
-
-  if (!response.ok) {
-    const data = await response.json();
-    throw new Error(data.message || 'Error creating fleet team');
-  }
-
-  return response.json();
-};
-
-const renewFleetSecret = async (fleetTeamId: string, accessPhrase: string) => {
-  const response = await fleetV1(`/team/${fleetTeamId}/secret`, {
-    method: 'POST',
-    headers: fleetAuthAPIHeaders(accessPhrase),
-  });
-
-  if (!response.ok) {
-    const data = await response.json();
-    throw new Error(data.message || 'Error creating fleet team');
-  }
-
-  return response.json();
-};
-
-const connectFleetSecret = async (teamId: string, fleetTeamId: string, secret: string) => {
-  const response = await fetch('/api/fleet/secret', {
-    method: 'POST',
-    headers: defaultHeaders,
-    body: JSON.stringify({
-      teamId,
-      fleetTeamId,
-      secret,
-      active: true,
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to connect fleet');
-  }
-
-  return response.json();
-};
-
-const disconnectFleetSecret = async (teamId: string, fleetTeamId: string) => {
-  const response = await fetch('/api/fleet/secret', {
-    method: 'POST',
-    headers: defaultHeaders,
-    body: JSON.stringify({
-      teamId,
-      fleetTeamId,
-      secret: '',
-      active: false,
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to connect fleet');
-  }
-
-  return response.json();
-};
 
 export default FleetSecret;

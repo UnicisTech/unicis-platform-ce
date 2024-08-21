@@ -9,6 +9,12 @@ import FleetStatus from './FleetStatus';
 import { defaultHeaders, passwordPolicies, fleetAuthAPIHeaders } from '@/lib/common';
 import { useState } from 'react';
 import { fleetV1 } from '@/lib/fleet/apiBase';
+import {
+  useCreateFleetAccount,
+  useAccessFleetAccount,
+  useDisconnectFleetAccount,
+  useConnectFleetAccount
+} from '@/hooks/fleets/index';
 
 const schema = Yup.object().shape({
   email: Yup.string().required(),
@@ -21,6 +27,11 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
   const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = useState(false);
   const userId = user.id;
+
+  const createFleetAccount = useCreateFleetAccount();
+  const accessFleetAccount = useAccessFleetAccount();
+  const disconnectFleetAccount = useDisconnectFleetAccount();
+  const connectFleetAccount = useConnectFleetAccount();
 
   const formik = useFormik({
     initialValues: {
@@ -128,66 +139,6 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
       </Card>
     </form>
   );
-};
-
-
-const createFleetAccount = async (email: string, firstName: string, lastName: string, password: string) => {
-  try {
-    await fleetV1(`/account/create`, {
-      method: 'POST',
-      headers: defaultHeaders,
-      body: JSON.stringify({ email, firstname: firstName, lastname: lastName, password }),
-    });
-  } catch (err) {
-    console.error('Error creating fleet account:', err);
-  }
-};
-
-const accessFleetAccount = async (email: string, password: string) => {
-  const response = await fleetV1(`/account/access`, {
-    method: 'POST',
-    headers: defaultHeaders,
-    body: JSON.stringify({ email, password }),
-  });
-
-  const data = await response.json();
-
-  if (response.ok) {
-    return { fleetId: data.user.id, secret: data.fleet_access.secret_key };
-  } else {
-    console.error('Error accessing fleet account:', data);
-    throw new Error('Failed to access fleet account');
-  }
-};
-
-const connectFleetAccount = async (userId: string, fleetId: string, secret: string) => {
-  try {
-    const Presponse = await fetch('/api/fleet/connect', {
-      method: 'POST',
-      headers: defaultHeaders,
-      body: JSON.stringify({ userId, fleetId, accessPhrase: secret, connected: true }),
-    });
-
-    return Presponse.ok;
-  } catch (err) {
-    console.error('Error connecting fleet:', err);
-    return false;
-  }
-};
-
-const disconnectFleetAccount = async (userId: string, fleetId: string) => {
-  try {
-    const Presponse = await fetch('/api/fleet/connect', {
-      method: 'POST',
-      headers: defaultHeaders,
-      body: JSON.stringify({ userId, fleetId, accessPhrase: '', connected: false }),
-    });
-
-    return Presponse.ok;
-  } catch (err) {
-    console.error('Error connecting fleet:', err);
-    return false;
-  }
 };
 
 
