@@ -30,8 +30,8 @@ const FleetSecret = (
       }
 
       if (!teamFleetID) {
-        const { fleet_team: fleetTeam, fleet_secret: fleetSecret } = await createFleetTeam(team.name, fleetAccount.accessPhrase!);
-        await connectFleetSecret(team.id, fleetTeam.id, fleetSecret.secret);
+        const { id: fleetTeamId } = await createFleetTeam(team.name, fleetAccount.accessPhrase!);
+        await connectFleetSecret(team.id, fleetTeamId, '');
         toast.success(t('fleet-created'));
       }
     } catch (error) {
