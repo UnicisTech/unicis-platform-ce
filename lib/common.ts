@@ -1,4 +1,5 @@
 import { enc, lib } from 'crypto-js';
+import Cookies from 'js-cookie';
 import type { NextApiRequest } from 'next';
 
 export const createRandomString = (length = 6) => {
@@ -86,6 +87,21 @@ export const copyToClipboard = (text: string) => {
 
 export const defaultHeaders = {
   'Content-Type': 'application/json',
+};
+
+export const fleetAuthAPIHeaders = (token: string, accessToken?: string) => {
+  const authToken = accessToken || Cookies.get('access');
+
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    'Unicis-Fleet-API-Key': token,
+  }
+
+  if (accessToken) {
+    headers['Authorization'] = 'Bearer ' + authToken;
+  }
+
+  return headers;
 };
 
 export const passwordPolicies = {

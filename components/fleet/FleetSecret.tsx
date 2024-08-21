@@ -1,12 +1,10 @@
-import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { Button } from 'react-daisyui';
 import * as Yup from 'yup';
 import { Card, CopyToClipboardButton, InputWithLabel } from '@/components/shared';
 import { FleetAccount, FleetSecret as FSType, Team, User } from '@prisma/client';
-import { defaultHeaders, passwordPolicies } from '@/lib/common';
-import { useState } from 'react';
+import { defaultHeaders, passwordPolicies, fleetAuthAPIHeaders } from '@/lib/common';
 import { fleetV1 } from '@/lib/fleet/apiBase';
 import FleetStatus from './FleetStatus';
 
@@ -22,9 +20,8 @@ const FleetSecret = (
     :
   { user: Partial<User>, fleetAccount: Partial<FleetAccount>, fleetSecret: Partial<FSType>, team: Team }) => {
   const { t } = useTranslation('common');
-  const [isLoading, setIsLoading] = useState(false);
   const userId = user.id;
-  const teamID = fleetSecret.fleetTeamId
+  const teamFleetID = fleetSecret.fleetTeamId
 
   const handleOrderSecret = async () => {
     try {
@@ -32,42 +29,36 @@ const FleetSecret = (
         throw new Error('User ID is not defined');
       }
 
-      if (!teamID) {
-        const { fleet_team: fleetTeam, fleet_secret: fleetSecret } = await createFleetTeam(team.name);
+      if (!teamFleetID) {
+        const { fleet_team: fleetTeam, fleet_secret: fleetSecret } = await createFleetTeam(team.name, fleetAccount.accessPhrase!);
         await connectFleetSecret(team.id, fleetTeam.id, fleetSecret.secret);
         toast.success(t('fleet-created'));
-        return;
       }
     } catch (error) {
       console.error('Fleet order secret error:', error);
       toast.error(t('fleet-connect-failed'));
-      return;
     }
   };
 
-
   const handleDisconnect = async () => {
-    if (teamID) {
+    if (teamFleetID) {
         await disconnectFleetSecret(team.id, fleetSecret.fleetTeamId!);
         toast.success(t('fleet-secret-disactivated'));
-        return;
     }
   };
 
   const handleConnet = async () => {
-    if (teamID) {
+    if (teamFleetID) {
         await connectFleetSecret(team.id, fleetSecret.fleetTeamId!, fleetSecret.secret!);
         toast.success(t('fleet-secret-activated'));
-        return;
     }
   };
 
   const handleRenew = async () => {
-    if (teamID) {
-      const { secret: newSecret } = await renewFleetSecret(teamID);
+    if (teamFleetID) {
+      const { secret: newSecret } = await renewFleetSecret(teamFleetID, fleetAccount.accessPhrase!);
       await connectFleetSecret(team.id, fleetSecret.fleetTeamId!, newSecret);
       toast.success(t('fleet-secret-renew'));
-      return;
     }
   };
 
@@ -82,7 +73,7 @@ const FleetSecret = (
           <div className="flex flex-col space-y-3">
             {fleetSecret.secret == null ?
               <>
-                <FleetStatus status='no-fleet-secret'/>
+                <FleetStatus status='no-fleet-secret' />
               </>
                 :
               <>
@@ -163,10 +154,10 @@ const FleetSecret = (
   );
 };
 
-const createFleetTeam = async (name: string) => {
+const createFleetTeam = async (name: string, accessPhrase: string) => {
   const response = await fleetV1(`/team/create`, {
     method: 'POST',
-    headers: defaultHeaders,
+    headers: fleetAuthAPIHeaders(accessPhrase),
     body: JSON.stringify({ name }),
   });
 
@@ -178,10 +169,10 @@ const createFleetTeam = async (name: string) => {
   return response.json();
 };
 
-const renewFleetSecret = async (fleetTeamId: string) => {
+const renewFleetSecret = async (fleetTeamId: string, accessPhrase: string) => {
   const response = await fleetV1(`/team/${fleetTeamId}/secret`, {
     method: 'POST',
-    headers: defaultHeaders,
+    headers: fleetAuthAPIHeaders(accessPhrase),
   });
 
   if (!response.ok) {

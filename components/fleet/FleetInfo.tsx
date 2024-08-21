@@ -17,13 +17,13 @@ const FleetInfo = ({ user, fleetAccount }: { user: Partial<User>, fleetAccount: 
                 {fleetAccount.id != null ? (
                     <>
                         <div className="grid grid-cols-2 items-center lg:grid-cols-2 sm:grid-cols-2 gap-4">
-                            <div className="flex-1 bg-blue-100 dark:text-white dark:bg-blue-950 ring-1 ring-gray-300 rounded-md text-center justify-center p-4">
+                            <div className="flex-1 bg-blue-100 dark:text-white dark:bg-blue-950 ring-1 ring-gray-300 rounded-md text-center justify-center">
                                 <h1 className="text-md font-bold">Fleet ID</h1>
                                 <span className="font-sans text-sm font-bold">
                                     {fleetAccount.fleetId}
                                 </span>
                             </div>
-                            <div className="flex-1 bg-blue-100 dark:text-white dark:bg-blue-950 ring-1 ring-gray-300 rounded-md text-center justify-center p-4">
+                            <div className="flex-1 bg-blue-100 dark:text-white dark:bg-blue-950 ring-1 ring-gray-300 rounded-md text-center justify-center">
                                 <h1 className="flex text-md font-bold justify-center items-center gap-2">
                                     Status
                                     {fleetAccount.connected ?
@@ -40,13 +40,13 @@ const FleetInfo = ({ user, fleetAccount }: { user: Partial<User>, fleetAccount: 
                                     }
                                 </span>
                             </div>
-                            <div className="flex-1 bg-blue-100 dark:text-white dark:bg-blue-950 ring-1 ring-gray-300 rounded-md text-center justify-center p-4">
+                            <div className="flex-1 bg-blue-100 dark:text-white dark:bg-blue-950 ring-1 ring-gray-300 rounded-md text-center justify-center">
                                 <h1 className="text-md font-bold">Date Created</h1>
                                 <span className="font-sans text-sm font-bold">
                                     {fleetAccount.createdAt ? new Date(fleetAccount.createdAt).toLocaleString() : 'N/A'}
                                 </span>
                             </div>
-                            <div className="flex-1 bg-blue-100 dark:text-white dark:bg-blue-950 ring-1 ring-gray-300 rounded-md text-center justify-center p-4">
+                            <div className="flex-1 bg-blue-100 dark:text-white dark:bg-blue-950 ring-1 ring-gray-300 rounded-md text-center justify-center">
                                 <h1 className="text-md font-bold">Date Updated Last</h1>
                                 <span className="font-sans text-sm font-bold">
                                     {fleetAccount.updatedAt ? new Date(fleetAccount.updatedAt).toLocaleString() : 'N/A'}
