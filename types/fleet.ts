@@ -32,3 +32,19 @@ export interface FleetTeamResponse {
   members: FleetMember[];
   secret: FleetSecret;
 }
+
+export interface FleetAccess {
+    expiration_date: string;
+    id: string;
+    is_active: boolean;
+    secret_key: string;
+    user: string;
+}
+
+export interface LoginResponse {
+    access_token: string;
+    fleet_access: FleetAccess;
+    msg: string;
+    refresh_token: string;
+    user: FleetUser;
+}

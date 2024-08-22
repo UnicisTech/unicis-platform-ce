@@ -37,7 +37,7 @@ const FleetSecret = (
       if (!teamFleetID) {
         const fleetTeam = await createFleetTeam(team.name, fleetAccount.accessPhrase!);
         await connectFleetSecret(team.id, fleetTeam.id, fleetTeam.secret.secret);
-        toast.success(t('fleet-created'));
+        // toast.success(t('fleet-created'));
       }
     } catch (error) {
       console.error('Fleet order secret error:', error);

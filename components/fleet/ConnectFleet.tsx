@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { Button } from 'react-daisyui';
 import * as Yup from 'yup';
 import { Card, InputWithLabel } from '@/components/shared';
-import { FleetAccount, User } from '@prisma/client';
+import { FleetAccount, Team, User } from '@prisma/client';
 import FleetStatus from './FleetStatus';
 import { passwordPolicies } from '@/lib/common';
 import { useState } from 'react';
@@ -12,7 +12,9 @@ import {
   useCreateFleetAccount,
   useAccessFleetAccount,
   useDisconnectFleetAccount,
-  useConnectFleetAccount
+  useConnectFleetAccount,
+  useCreateFleetTeam,
+  useConnectFleetSecret
 } from '@/hooks/fleets/index';
 
 const schema = Yup.object().shape({
@@ -22,15 +24,28 @@ const schema = Yup.object().shape({
   fleetPassword: Yup.string().required().min(passwordPolicies.minLength),
 });
 
-const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccount: Partial<FleetAccount> }) => {
+const ConnectFleet = ({
+  user,
+  fleetAccount,
+  team
+}: {
+    user: Partial<User>,
+    fleetAccount: Partial<FleetAccount>,
+    team: Partial<Team>,
+}) => {
   const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = useState(false);
   const userId = user.id;
+  const teamId = team.id;
+  const teamName = team.name;
 
   const createFleetAccount = useCreateFleetAccount();
   const accessFleetAccount = useAccessFleetAccount();
   const disconnectFleetAccount = useDisconnectFleetAccount();
   const connectFleetAccount = useConnectFleetAccount();
+
+  const createFleetTeam = useCreateFleetTeam();
+  const connectFleetSecret = useConnectFleetSecret();
 
   const formik = useFormik({
     initialValues: {
@@ -50,13 +65,15 @@ const ConnectFleet = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
         console.error('Invalid data from user');
       }
       try {
-        if (userId) {
+        if (userId && teamId && teamName) {
           await createFleetAccount(userEmail!, firstName!, lastName!, fleetPassword);
-          const { fleetId, secret } = await accessFleetAccount(userEmail!, fleetPassword);
+          const { user, fleet_access } = await accessFleetAccount(userEmail!, fleetPassword);
+          const fleetTeam = await createFleetTeam(teamName, fleetAccount.accessPhrase!);
 
-          if (fleetId && secret) {
-            const connected = await connectFleetAccount(userId, fleetId, secret);
-
+          if (user && fleet_access && fleetTeam) {
+            const connected = await connectFleetAccount(userId, user.id, fleet_access.secret_key);
+            await connectFleetSecret(teamId, fleetTeam.id, fleetTeam.secret.secret);
+            toast.success(t('fleet-created'));
             if (connected) {
               toast.success('Connected to fleet account');
             }

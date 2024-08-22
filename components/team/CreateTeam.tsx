@@ -11,6 +11,7 @@ import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
 import Modal from '../shared/Modal';
 import { InputWithLabel } from '../shared';
+import { useConnectFleetAccount, useCreateFleetTeam } from '@/hooks/fleets';
 
 interface CreateTeamProps {
   visible: boolean;
@@ -21,6 +22,9 @@ const CreateTeam = ({ visible, setVisible }: CreateTeamProps) => {
   const { t } = useTranslation('common');
   const { mutateTeams } = useTeams();
   const router = useRouter();
+
+  const createFleetTeam = useCreateFleetTeam();
+  const connectFleetAccount = useConnectFleetAccount();
 
   const formik = useFormik({
     initialValues: {

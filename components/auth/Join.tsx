@@ -13,7 +13,7 @@ import TogglePasswordVisibility from '../shared/TogglePasswordVisibility';
 import AgreeMessage from './AgreeMessage';
 import GoogleReCAPTCHA from '../shared/GoogleReCAPTCHA';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { useAccessFleetAccount, useConnectFleetAccount, useCreateFleetAccount, useCreateFleetTeam } from '@/hooks/fleets';
+import { useCreateFleetAccount } from '@/hooks/fleets';
 
 
 interface JoinProps {
@@ -28,9 +28,6 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const createFleetAccount = useCreateFleetAccount();
-  const accessFleetAccount = useAccessFleetAccount();
-  const connectFleetAccount = useConnectFleetAccount();
-  const createFleetTeam = useCreateFleetTeam();
 
   const handlePasswordVisibility = () => {
     setIsPasswordVisible((prev) => !prev);
@@ -65,8 +62,6 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
         User & { confirmEmail: boolean }
         >;
       
-      const data = json.data
-    
       recaptchaRef.current?.reset();
 
       if (!response.ok) {
@@ -74,16 +69,7 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
         return;
       }
       if (response.ok) {
-        await createFleetAccount(data.email, data.firstName, data.lastName, values.password);
-        const { fleetId, secret } = await accessFleetAccount(data.email, values.password);
-
-        if (fleetId && secret) {
-          const connected = await connectFleetAccount(data.id, fleetId, secret);
-          await createFleetTeam(values.team, secret);
-          if (connected) {
-            toast.success('Connected to fleet account');
-          }
-        }
+        await createFleetAccount(values.email, values.firstName, values.lastName, values.password);
       }
     },
   });

@@ -34,7 +34,7 @@ const Fleet = ({ teamFeatures, fleetSecret, fleetAccount, user }) => {
     <>
       <FleetTab activeTab="fleet" team={team} teamFeatures={teamFeatures} />
       <div className="space-y-6">
-        <ConnectFleet fleetAccount={fleetAccount} user={user} />
+        <ConnectFleet team={team} fleetAccount={fleetAccount} user={user} />
         <FleetInfo fleetAccount={fleetAccount} user={user} />
         <FleetContainer fleetAccount={fleetAccount} user={user} teamFeatures={teamFeatures} fleetSecret={fleetSecret} />
       </div>

@@ -114,9 +114,7 @@ const Login: NextPageWithLayout<
         return;
       }
 
-      if (response.ok) {
-        await accessFleetAccount(email, password);
-      }
+      await accessFleetAccount(values.email, values.password);
     },
   });
 
