@@ -65,8 +65,8 @@ export const createOrUpdateFleetSecret = async (param:
 };
 
 // Get Fleet Account by team ID
-export const getFleetSecret = async (teamId: string) => {
+export const getFleetSecretByTeamId = async (teamId: string) => {
   return await prisma.fleetSecret.findUnique({
-    where: {teamId},
+    where: { teamId },
   });
-}
+};

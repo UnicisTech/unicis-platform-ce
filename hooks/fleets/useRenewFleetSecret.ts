@@ -3,7 +3,7 @@ import { fleetV1 } from "@/lib/fleet/apiBase";
 
 export const useRenewFleetSecret = () => {
   const renewFleetSecret = async (fleetTeamId: string, accessPhrase: string) => {
-    const response = await fleetV1(`/team/${fleetTeamId}/secret`, {
+    const response = await fleetV1(`/fleet/teams/${fleetTeamId}/secret`, {
       method: 'POST',
       headers: fleetAuthAPIHeaders(accessPhrase),
     });

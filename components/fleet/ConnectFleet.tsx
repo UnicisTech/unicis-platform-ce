@@ -3,19 +3,21 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { Button } from 'react-daisyui';
 import * as Yup from 'yup';
-import { Card, InputWithLabel } from '@/components/shared';
-import { FleetAccount, Team, User } from '@prisma/client';
+import { Card, InputWithLabel, Loading } from '@/components/shared';
+import { FleetAccount, Team, User, FleetSecret as FSType, } from '@prisma/client';
 import FleetStatus from './FleetStatus';
 import { passwordPolicies } from '@/lib/common';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   useCreateFleetAccount,
   useAccessFleetAccount,
   useDisconnectFleetAccount,
   useConnectFleetAccount,
   useCreateFleetTeam,
-  useConnectFleetSecret
+  useConnectFleetSecret,
+  useDisconnectFleetSecret
 } from '@/hooks/fleets/index';
+import { getFleetSecret } from '@/hooks/fleets/useFleetSecret';
 
 const schema = Yup.object().shape({
   email: Yup.string().required(),
@@ -38,14 +40,33 @@ const ConnectFleet = ({
   const userId = user.id;
   const teamId = team.id;
   const teamName = team.name;
-
+  
+  const [fleetSecret, setFleetSecret] = useState<Partial<FSType> | null>(null);
+  const [isError, setIsError] = useState<string | null>(null);
+  
   const createFleetAccount = useCreateFleetAccount();
   const accessFleetAccount = useAccessFleetAccount();
   const disconnectFleetAccount = useDisconnectFleetAccount();
+  const disconnectFleetSecret = useDisconnectFleetSecret();
   const connectFleetAccount = useConnectFleetAccount();
 
   const createFleetTeam = useCreateFleetTeam();
   const connectFleetSecret = useConnectFleetSecret();
+
+  useEffect(() => {
+    const fetchSecret = async () => {
+      try {
+        const secret = await getFleetSecret(teamId!);
+        setFleetSecret(secret);
+      } catch (error) {
+        setIsError('error.message');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchSecret();
+  }, [teamId]);
 
   const formik = useFormik({
     initialValues: {
@@ -68,12 +89,11 @@ const ConnectFleet = ({
         if (userId && teamId && teamName) {
           await createFleetAccount(userEmail!, firstName!, lastName!, fleetPassword);
           const { user, fleet_access } = await accessFleetAccount(userEmail!, fleetPassword);
-          const fleetTeam = await createFleetTeam(teamName, fleetAccount.accessPhrase!);
+          const fleetTeam = await createFleetTeam(teamName, fleet_access.secret_key);
 
           if (user && fleet_access && fleetTeam) {
             const connected = await connectFleetAccount(userId, user.id, fleet_access.secret_key);
             await connectFleetSecret(teamId, fleetTeam.id, fleetTeam.secret.secret);
-            toast.success(t('fleet-created'));
             if (connected) {
               toast.success('Connected to fleet account');
             }
@@ -89,6 +109,7 @@ const ConnectFleet = ({
     if (userId) {
       setIsLoading(true);
       const disconnect = await disconnectFleetAccount(userId, fleetAccount.fleetId!);
+      await disconnectFleetSecret(teamId!, fleetSecret?.fleetTeamId!);
       if (disconnect) {
         toast.success('Disconnected from fleet account');
       }

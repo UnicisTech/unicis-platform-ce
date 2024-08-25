@@ -1,20 +1,18 @@
 import { Error, Loading } from '@/components/shared';
-import { AccessControl } from '@/components/shared/AccessControl';
 import env from '@/lib/env';
 import useTeam from 'hooks/useTeam';
 import type { GetServerSidePropsContext } from 'next';
 import { getSession } from '@/lib/session';
-import { FleetSecret } from '@prisma/client';
 import { getUserBySession } from 'models/user';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { FleetAccount, FleetInfo, FleetTab } from '@/components/fleet';
-import { getFleet, getFleetSecret } from '@/models/fleet';
+import { FleetTab } from '@/components/fleet';
+import { getFleet} from '@/models/fleet';
 import FleetContainer from '@/components/fleet/FleetContainer';
-import ConnectFleet from '@/components/fleet/ConnectFleet';
+import { FleetAccount } from '@prisma/client';
 
 
-const Fleet = ({ teamFeatures, fleetSecret, fleetAccount, user }) => {
+const Fleet = ({ teamFeatures, fleetAccount, user }) => {
   const { t } = useTranslation('common');
   const { isLoading, isError, team } = useTeam();
 
@@ -29,14 +27,12 @@ const Fleet = ({ teamFeatures, fleetSecret, fleetAccount, user }) => {
   if (!team) {
     return <Error message={t('team-not-found')} />;
   }
-
+  
   return (
     <>
       <FleetTab activeTab="fleet" team={team} teamFeatures={teamFeatures} />
       <div className="space-y-6">
-        <ConnectFleet team={team} fleetAccount={fleetAccount} user={user} />
-        <FleetInfo fleetAccount={fleetAccount} user={user} />
-        <FleetContainer fleetAccount={fleetAccount} user={user} teamFeatures={teamFeatures} fleetSecret={fleetSecret} />
+        <FleetContainer fleetAccount={fleetAccount} user={user} teamFeatures={teamFeatures}/>
       </div>
     </>
   );
@@ -56,7 +52,6 @@ export const getServerSideProps = async (
   }
 
   const fleetAccount = await getFleet(user.id) || {} as FleetAccount;
-  const FleetSecret = await getFleetSecret(user.id) || {} as FleetSecret;
 
   return {
     props: {
@@ -71,22 +66,13 @@ export const getServerSideProps = async (
         image: user.image,
       },
       fleetAccount: {
-        id: fleetAccount.id || null,
-        userId: fleetAccount.userId || null,
-        fleetId: fleetAccount.fleetId || null,
-        accessPhrase: fleetAccount.accessPhrase || null,
+        id: fleetAccount.id,
+        userId: fleetAccount.userId,
+        fleetId: fleetAccount.fleetId,
+        accessPhrase: fleetAccount.accessPhrase,
         connected: fleetAccount.connected || false,
-        createdAt: fleetAccount.createdAt?.toISOString() || null, // Serialize Date
-        updatedAt: fleetAccount.updatedAt?.toISOString() || null, // Serialize Date
-      },
-      fleetSecret: {
-        id: FleetSecret.id || null,
-        teamId: FleetSecret.teamId || null,
-        fleetTeamId: FleetSecret.fleetTeamId || null,
-        secret: FleetSecret.secret || null,
-        active: FleetSecret.active || null,
-        createdAt: FleetSecret.createdAt?.toISOString() || null, // Serialize Date
-        updatedAt: FleetSecret.updatedAt?.toISOString() || null, // Serialize Date
+        createdAt: fleetAccount.createdAt?.toISOString(), // Serialize Date
+        updatedAt: fleetAccount.updatedAt?.toISOString(), // Serialize Date
       }
     },
   };
