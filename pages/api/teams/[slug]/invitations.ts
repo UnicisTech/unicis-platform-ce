@@ -64,7 +64,6 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, role } = req.body;
   const { slug } = req.query as { slug: string };
 
-<<<<<<< HEAD
   const currentPlan = getCurrentPlan(teamMember.team.subscription);
   const { maxAdmins, maxUsers } = subscriptions[currentPlan];
 
@@ -113,20 +112,6 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       });
     }
   }
-=======
-  //TODO: remove limits for community pack
-  // if (role !== Role.MEMBER) {
-  //   const members = await getTeamMembers(slug);
-
-  //   if (members.length >= 2) {
-  //     return res.status(400).json({
-  //       error: {
-  //         message: 'You have reached the maximum number of members per team.',
-  //       },
-  //     });
-  //   }
-  // }
->>>>>>> community-edition
 
   const invitationExists = await prisma.invitation.findFirst({
     where: {
