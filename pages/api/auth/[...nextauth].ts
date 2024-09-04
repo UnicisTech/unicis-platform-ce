@@ -39,12 +39,9 @@ if (isAuthProviderEnabled('credentials')) {
       },
       async authorize(credentials, req) {
         try {
-          await limiter.check(
-            5,
-            getIpAddress(req as any),
-          ); // 5 requests per minute for IP address
+          await limiter.check(5, getIpAddress(req as any)); // 5 requests per minute for IP address
         } catch (e) {
-          throw new Error('auth-limited')
+          throw new Error('auth-limited');
         }
 
         if (!credentials) {
@@ -139,28 +136,31 @@ if (isAuthProviderEnabled('email')) {
   );
 }
 
-const cookiesOptions: Partial<Pick<NextAuthOptions, "cookies">> = process.env.NODE_ENV === "production" ? {
-  cookies: {
-    sessionToken: {
-      name: `__Secure-next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: true
+const cookiesOptions: Partial<Pick<NextAuthOptions, 'cookies'>> =
+  process.env.NODE_ENV === 'production'
+    ? {
+        cookies: {
+          sessionToken: {
+            name: `__Secure-next-auth.session-token`,
+            options: {
+              httpOnly: true,
+              sameSite: 'lax',
+              path: '/',
+              secure: true,
+            },
+          },
+          csrfToken: {
+            name: `__Host-next-auth.csrf-token`,
+            options: {
+              httpOnly: true,
+              sameSite: 'lax',
+              path: '/',
+              secure: true,
+            },
+          },
+        },
       }
-    },
-    csrfToken: {
-      name: `__Host-next-auth.csrf-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: true
-      }
-    }
-  }
-} : {}
+    : {};
 
 export const authOptions: NextAuthOptions = {
   adapter,

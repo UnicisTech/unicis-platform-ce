@@ -18,11 +18,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    await limiter.check(
-      5,
-      getIpAddress(req),
-      res,
-    ); // 5 requests per minute for IP address
+    await limiter.check(5, getIpAddress(req), res); // 5 requests per minute for IP address
     try {
       switch (req.method) {
         case 'POST':
@@ -40,7 +36,7 @@ export default async function handler(
       res.status(status).json({ error: { message } });
     }
   } catch (error: any) {
-    res.status(429).json({ error: { message: "Rate limit exceeded" } });
+    res.status(429).json({ error: { message: 'Rate limit exceeded' } });
   }
 }
 

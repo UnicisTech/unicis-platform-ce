@@ -46,7 +46,7 @@ const UpdateName = ({ user }: { user: Partial<User> }) => {
           ...session?.user,
           name: json.data.name,
           firstName: json.data.firstName,
-          lastName: json.data.lastName
+          lastName: json.data.lastName,
         },
       });
 

@@ -39,7 +39,7 @@ export default async function handler(
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
   throwIfNotAllowed(teamMember, 'team', 'read');
-  
+
   const session = await getSession(req, res);
 
   const teams = await getTeams(session?.user.id as string);

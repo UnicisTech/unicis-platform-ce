@@ -62,9 +62,9 @@ const plans = [
   },
 ];
 
-const Billing: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({ 
-  teamFeatures, 
-  error 
+const Billing: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({
+  teamFeatures,
+  error,
 }) => {
   const { t } = useTranslation('common');
   const { isLoading, isError, team } = useTeam();
@@ -113,7 +113,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   );
 
   try {
-    throwIfNotAllowed(teamMember, 'team_audit_log', 'read')
+    throwIfNotAllowed(teamMember, 'team_audit_log', 'read');
 
     return {
       props: {
