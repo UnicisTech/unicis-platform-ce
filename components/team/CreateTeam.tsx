@@ -11,7 +11,7 @@ import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
 import Modal from '../shared/Modal';
 import { InputWithLabel } from '../shared';
-import { useConnectFleetAccount, useCreateFleetTeam } from '@/hooks/fleets';
+import { useConnectFleetSecret, useCreateFleetTeam } from '@/hooks/fleets';
 
 interface CreateTeamProps {
   visible: boolean;
@@ -24,7 +24,7 @@ const CreateTeam = ({ visible, setVisible }: CreateTeamProps) => {
   const router = useRouter();
 
   const createFleetTeam = useCreateFleetTeam();
-  const connectFleetAccount = useConnectFleetAccount();
+  const connectFleetSecret = useConnectFleetSecret();
 
   const formik = useFormik({
     initialValues: {
@@ -45,6 +45,18 @@ const CreateTeam = ({ visible, setVisible }: CreateTeamProps) => {
       if (!response.ok) {
         toast.error(json.error.message);
         return;
+      }
+
+      try {
+        if (values) {
+          // const fleetTeam = await createFleetTeam(values.name, '');
+
+          // if (fleetTeam) {
+          //   await connectFleetSecret(teamId, fleetTeam.id, fleetTeam.secret.secret);
+          // }
+        }
+      } catch (error) {
+        console.error('Error creating or connecting fleet:', error);
       }
 
       formik.resetForm();

@@ -9,11 +9,10 @@ import {
 } from '@/components/interfaces/Task';
 import useTeam from 'hooks/useTeam';
 import useCanAccess from 'hooks/useCanAccess';
-import { getCscStatusesBySlug } from 'models/team';
 import Breadcrumb from '../../../../../components/interfaces/Task/Breadcrumb';
-import PackTab from '@/components/interfaces/Pack/PackTab';
+import QueryTab from '@/components/interfaces/Query/QueryTab';
 
-const TaskById = ({
+const QueryById = ({
 }: {
 }) => {
   const [activeTab, setActiveTab] = useState('Overview');
@@ -26,26 +25,19 @@ const TaskById = ({
     isLoading: isTeamLoading,
     isError: isTeamError,
   } = useTeam(slug as string);
-
-  if (isTeamLoading) {
-    return <Loading />;
-  }
-
-  if (isTeamError) {
-    return <Error message={'isError.message'} />;
-  }
+  
 
   return (
     <>
       <Breadcrumb
-        taskTitle={'Task'}
-        backTo={`/teams/${slug}/packs`}
+        taskTitle={''}
+        backTo={`/teams/${slug}/querys`}
         teamName={slug as string}
         taskNumber={taskNumber as string}
       />
       <h3 className="text-2xl font-bold">{'Title'}</h3>
-      <PackTab activeTab={activeTab} setActiveTab={setActiveTab} />
-
+      <QueryTab activeTab={activeTab} setActiveTab={setActiveTab} />
+      
     </>
   );
 };
@@ -59,9 +51,9 @@ export async function getServerSideProps({
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      csc_statuses: await getCscStatusesBySlug(slug),
+
     },
   };
 }
 
-export default TaskById;
+export default QueryById;

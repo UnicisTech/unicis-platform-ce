@@ -27,7 +27,6 @@ import TogglePasswordVisibility from '@/components/shared/TogglePasswordVisibili
 import AgreeMessage from '@/components/auth/AgreeMessage';
 import GoogleReCAPTCHA from '@/components/shared/GoogleReCAPTCHA';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { useAccessFleetAccount } from '@/hooks/fleets';
 
 
 interface Message {
@@ -49,8 +48,6 @@ const Login: NextPageWithLayout<
   const [message, setMessage] = useState<Message>({ text: null, status: null });
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
-
-  const accessFleetAccount = useAccessFleetAccount();
 
   const { error, success, token } = router.query as {
     error: string;
@@ -114,7 +111,6 @@ const Login: NextPageWithLayout<
         return;
       }
 
-      await accessFleetAccount(values.email, values.password);
     },
   });
 

@@ -15,7 +15,7 @@ import { getFleetSecret } from '@/hooks/fleets/useFleetSecret';
 
 
 
-const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<FleetAccount> }) => {
+const Querys = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<FleetAccount> }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const [visible, setVisible] = useState(false);
@@ -205,4 +205,4 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
   );
 };
 
-export default Packs;
+export default Querys;

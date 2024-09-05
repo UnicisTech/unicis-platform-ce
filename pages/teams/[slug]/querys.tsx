@@ -2,23 +2,23 @@ import type { NextPageWithLayout } from 'types';
 import type { InferGetServerSidePropsType } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSidePropsContext } from 'next';
-import { Packs } from '@/components/interfaces/Pack';
 import { getTeam } from 'models/team';
 import env from '@/lib/env';
 import { getFleet } from '@/models/fleet';
 import { FleetAccount } from '@prisma/client';
 import { getUserBySession } from '@/models/user';
 import { getSession } from '@/lib/session';
+import { Querys } from '@/components/interfaces/Query';
 import { TeamTab } from '@/components/team';
 
 
-const AllPacks: NextPageWithLayout<
+const AllQuerys: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ team, teamFeatures, fleetAccount }) => {
   return (
     <>
-      <TeamTab activeTab="packs" team={team} teamFeatures={teamFeatures} />
-      <Packs fleetAccount={fleetAccount} team={team} />
+      <TeamTab activeTab="querys" team={team} teamFeatures={teamFeatures} />
+      <Querys fleetAccount={fleetAccount} team={team} />
     </>
   );
 };
@@ -63,4 +63,4 @@ export const getServerSideProps = async (
   };
 };
 
-export default AllPacks;
+export default AllQuerys;

@@ -13,7 +13,6 @@ import TogglePasswordVisibility from '../shared/TogglePasswordVisibility';
 import AgreeMessage from './AgreeMessage';
 import GoogleReCAPTCHA from '../shared/GoogleReCAPTCHA';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { useCreateFleetAccount } from '@/hooks/fleets';
 
 
 interface JoinProps {
@@ -26,8 +25,6 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string>('');
   const recaptchaRef = useRef<ReCAPTCHA>(null);
-
-  const createFleetAccount = useCreateFleetAccount();
 
   const handlePasswordVisibility = () => {
     setIsPasswordVisible((prev) => !prev);
@@ -67,9 +64,6 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
       if (!response.ok) {
         toast.error(json.error.message);
         return;
-      }
-      if (response.ok) {
-        await createFleetAccount(values.email, values.firstName, values.lastName, values.password);
       }
     },
   });

@@ -98,6 +98,10 @@ export interface TeamFeature {
   webhook: boolean;
   apiKey: boolean;
   fleetApiKey: boolean;
+  fleetConnect: boolean;
+  fleetQuery: boolean;
+  fleetPack: boolean;
+  fleetTag: boolean;
 }
 
 export type Option = {

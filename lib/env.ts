@@ -108,8 +108,12 @@ const env = {
     dsync: process.env.FEATURE_TEAM_DSYNC === 'false' ? false : true,
     webhook: process.env.FEATURE_TEAM_WEBHOOK === 'false' ? false : true,
     apiKey: process.env.FEATURE_TEAM_API_KEY === 'false' ? false : true,
-    fleetApiKey: process.env.FEATURE_TEAM_FLEET_API_KEY === 'false' ? false : true,
     auditLog: process.env.FEATURE_TEAM_AUDIT_LOG === 'false' ? false : true,
+    fleetApiKey: process.env.FEATURE_TEAM_FLEET_API_KEY === 'false' ? false : true,
+    fleetConnect: process.env.FEATURE_TEAM_FLEET_CONNECT === 'false' ? false : true,
+    fleetQuery: process.env.FEATURE_TEAM_FLEET_QUERY === 'false' ? false : true,
+    fleetPack: process.env.FEATURE_TEAM_FLEET_PACK === 'false' ? false : true,
+    fleetTag: process.env.FEATURE_TEAM_FLEET_TAG === 'false' ? false : true,
   },
 
   recaptcha: {

@@ -20,7 +20,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
 
   const navigations = [
     {
-      name: 'Connect',
+      name: 'Fleet',
       href: `/teams/${team.slug}/fleet`,
       active: activeTab === 'fleet',
       icon: Cog6ToothIcon,
@@ -29,6 +29,18 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
       name: 'Packs',
       href: `/teams/${team.slug}/packs`,
       active: activeTab === 'packs',
+      icon: CodeBracketIcon,
+    },
+    {
+      name: 'Querys',
+      href: `/teams/${team.slug}/querys`,
+      active: activeTab === 'querys',
+      icon: CodeBracketIcon,
+    },
+    {
+      name: 'Tags',
+      href: `/teams/${team.slug}/tags`,
+      active: activeTab === 'tags',
       icon: CodeBracketIcon,
     },
   ];

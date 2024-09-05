@@ -109,8 +109,8 @@ const FleetSecret = (
           <Card.Description>{t('fleet-secret-description')}</Card.Description>
         </Card.Header>
         <div className="flex flex-col space-y-3">
-            {fleetSecret?.secret == null ?
-              <FleetStatus status='no-fleet-secret' />
+            {!fleetAccount.connected ?
+              <FleetStatus status='access-not-granted'/>
               :
             <>
               <FleetStatus status='connected' />
@@ -118,7 +118,7 @@ const FleetSecret = (
                 type={isPasswordVisible ? "text" : "password"}
                 label={t('fleet-secret')}
                 name="fleetPassword"
-                value={fleetSecret.secret}
+                value={fleetSecret?.secret}
                 disabled={true}
               />
               <button
@@ -139,8 +139,8 @@ const FleetSecret = (
               }
             </>
           }
-          {!fleetAccount.connected &&
-            <FleetStatus status='access-not-granted'/>
+          {fleetSecret?.secret == null &&
+            <FleetStatus status='no-fleet-secret' />
           }
         </div>
       </Card.Body>
@@ -162,7 +162,7 @@ const FleetSecret = (
             type="button"
             color="error"
             loading={false}
-            disabled={!fleetSecret?.active}
+            disabled={!fleetSecret?.active || !fleetAccount.connected}
             onClick={handleDisconnect}
             size="md"
           >

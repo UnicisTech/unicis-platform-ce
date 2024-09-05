@@ -6,10 +6,10 @@ import { getSession } from '@/lib/session';
 import { getUserBySession } from 'models/user';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { FleetTab } from '@/components/fleet';
 import { getFleet} from '@/models/fleet';
-import FleetContainer from '@/components/fleet/FleetContainer';
+import FleetContainer from '@/components/interfaces/Fleet/FleetContainer';
 import { FleetAccount } from '@prisma/client';
+import { TeamTab } from '@/components/team';
 
 
 const Fleet = ({ teamFeatures, fleetAccount, user }) => {
@@ -30,9 +30,9 @@ const Fleet = ({ teamFeatures, fleetAccount, user }) => {
   
   return (
     <>
-      <FleetTab activeTab="fleet" team={team} teamFeatures={teamFeatures} />
+      <TeamTab activeTab="fleet" team={team} teamFeatures={teamFeatures} />
       <div className="space-y-6">
-        <FleetContainer fleetAccount={fleetAccount} user={user} teamFeatures={teamFeatures}/>
+        <FleetContainer fleetAccount={fleetAccount} user={user}/>
       </div>
     </>
   );

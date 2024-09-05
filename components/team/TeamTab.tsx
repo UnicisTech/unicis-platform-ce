@@ -1,10 +1,13 @@
 import {
+  CodeBracketIcon,
   Cog6ToothIcon,
   DocumentMagnifyingGlassIcon,
   KeyIcon,
   PaperAirplaneIcon,
   ShieldExclamationIcon,
   UserPlusIcon,
+  TagIcon,
+  CodeBracketSquareIcon
 } from '@heroicons/react/24/outline';
 import type { Team } from '@prisma/client';
 import classNames from 'classnames';
@@ -103,6 +106,54 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
       href: `/teams/${team.slug}/api-keys`,
       active: activeTab === 'api-keys',
       icon: KeyIcon,
+    });
+  }
+
+  if (
+    teamFeatures.fleetConnect &&
+    canAccess('team_fleet_connect', ['create', 'update', 'read', 'delete'])
+  ) {
+    navigations.push({
+      name: 'Fleet',
+      href: `/teams/${team.slug}/fleet`,
+      active: activeTab === 'fleet',
+      icon: Cog6ToothIcon,
+    });
+  }
+
+  if (
+    teamFeatures.fleetTag &&
+    canAccess('team_fleet_tag', ['create', 'update', 'read', 'delete'])
+  ) {
+    navigations.push({
+      name: 'Tags',
+      href: `/teams/${team.slug}/tags`,
+      active: activeTab === 'tags',
+      icon: TagIcon,
+    });
+  }
+
+  if (
+    teamFeatures.fleetQuery &&
+    canAccess('team_fleet_query', ['create', 'update', 'read', 'delete'])
+  ) {
+    navigations.push({
+      name: 'Querys',
+      href: `/teams/${team.slug}/querys`,
+      active: activeTab === 'querys',
+      icon: CodeBracketIcon,
+    });
+  }
+
+  if (
+    teamFeatures.fleetPack &&
+    canAccess('team_fleet_pack', ['create', 'update', 'read', 'delete'])
+  ) {
+    navigations.push({
+      name: 'Packs',
+      href: `/teams/${team.slug}/packs`,
+      active: activeTab === 'packs',
+      icon: CodeBracketSquareIcon,
     });
   }
   

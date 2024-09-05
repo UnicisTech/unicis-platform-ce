@@ -48,3 +48,16 @@ export interface LoginResponse {
     refresh_token: string;
     user: FleetUser;
 }
+
+export interface Pack {
+  id: number;
+  name: string;
+  platform?: string;
+  version: string;
+  description?: string;
+  shard?: number;
+}
+
+export interface PacksResponse {
+  packs: Pack[];
+}

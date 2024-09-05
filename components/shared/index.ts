@@ -11,4 +11,5 @@ export { default as WithLoadingAndError } from './WithLoadingAndError';
 export { default as InputWithCopyButton } from './InputWithCopyButton';
 export { default as CopyToClipboardButton } from './CopyToClipboardButton';
 export { default as StatusBadge } from './StatusBadge';
+export { default as PlatformBadge } from './PlatformBadge';
 export { default as PerPageSelector } from './PerPageSelector';

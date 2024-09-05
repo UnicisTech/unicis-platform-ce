@@ -83,24 +83,13 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname.includes('feedback'),
     },
     {
-      name: t('fleet'),
-      href: `/teams/${slug}/fleet`,
-      icon: CommandLineIcon,
-      className: 'stroke-blue-600',
-      active:
-        activePathname?.startsWith(`/teams/${slug}`) &&
-        /(fleet|packs)/.test(
-          activePathname
-        ),
-    },
-    {
       name: t('settings'),
       href: `/teams/${slug}/settings`,
       icon: Cog6ToothIcon,
       className: 'stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        /(settings|billing|members|saml|directory-sync|audit-logs|webhooks|api-keys)/.test(
+        /(settings|billing|members|saml|directory-sync|audit-logs|webhooks|api-keys|fleet|querys|tags|packs)/.test(
           activePathname
         ),
     },

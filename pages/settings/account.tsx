@@ -7,14 +7,17 @@ import { getUserBySession } from 'models/user';
 import { inferSSRProps } from '@/lib/inferSSRProps';
 import { UpdateAccount } from '@/components/account';
 import env from '@/lib/env';
+import { getFleet } from '@/models/fleet';
+import { FleetAccount } from '@prisma/client';
 
 type AccountProps = inferSSRProps<typeof getServerSideProps>;
 
 const Account: NextPageWithLayout<AccountProps> = ({
   user,
+  fleetAccount,
   allowEmailChange,
 }) => {
-  return <UpdateAccount user={user} allowEmailChange={allowEmailChange} />;
+  return <UpdateAccount fleetAccount={fleetAccount} user={user} allowEmailChange={allowEmailChange} />;
 };
 
 export const getServerSideProps = async (
@@ -30,6 +33,8 @@ export const getServerSideProps = async (
     };
   }
 
+  const fleetAccount = await getFleet(user.id) as FleetAccount;
+
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
@@ -42,6 +47,15 @@ export const getServerSideProps = async (
         image: user.image,
       },
       allowEmailChange: env.confirmEmail === false,
+      fleetAccount: {
+        id: fleetAccount?.id,
+        userId: fleetAccount?.userId,
+        fleetId: fleetAccount?.fleetId,
+        accessPhrase: fleetAccount?.accessPhrase,
+        connected: fleetAccount?.connected || false,
+        createdAt: fleetAccount?.createdAt.toISOString(),
+        updatedAt: fleetAccount?.updatedAt.toISOString(),
+      } as unknown as FleetAccount
     },
   };
 };
