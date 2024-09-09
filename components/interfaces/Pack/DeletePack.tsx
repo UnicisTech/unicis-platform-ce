@@ -9,11 +9,11 @@ import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 
 const DeletePack = ({
-  taskNumber,
+  packId,
   visible,
   setVisible,
 }: {
-  taskNumber: null | number;
+  packId: null | string;
   visible: boolean;
   setVisible: (visible: boolean) => void;
 }) => {
@@ -27,18 +27,8 @@ const DeletePack = ({
       name: '',
     },
     onSubmit: async () => {
-      const response = await axios.delete<ApiResponse<unknown>>(
-        `/api/teams/${slug}/tasks/${taskNumber}`
-      );
 
-      const { error } = response.data;
-
-      if (error) {
-        toast.error(error.message);
-        return;
-      }
-
-      toast.success(t('task-deleted'));
+      toast.success(t('pack-deleted'));
 
       mutateTasks();
       formik.resetForm();
@@ -52,7 +42,7 @@ const DeletePack = ({
         <Modal.Header className="font-bold">{`Delete task`}</Modal.Header>
         <Modal.Body>
           <div className="mt-2 flex flex-col space-y-4">
-            <p>{t('delete-task-warning')}</p>
+            <p>{t('delete-pack-warning')}</p>
           </div>
         </Modal.Body>
         <Modal.Actions>

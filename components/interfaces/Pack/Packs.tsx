@@ -22,8 +22,8 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [deleteVisible, setDeleteVisible] = useState(false);
-  const [taskToEdit, setTaskToEdit] = useState<Pack>({} as Pack);
-  const [taskToDelete, setTaskToDelete] = useState<null | number>(null);
+  const [packToEdit, setPackToEdit] = useState<Pack>({} as Pack);
+  const [packToDelete, setPackToDelete] = useState<null | string>(null);
   
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
@@ -62,19 +62,19 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
     );
   }
 
-  const openDeleteModal = async (id: number) => {
-    setTaskToDelete(id);
+  const openDeleteModal = async (id: string) => {
+    setPackToDelete(id);
     setDeleteVisible(true);
   };
 
   const openEditModal = async (pack: Pack) => {
-    setTaskToEdit({ ...pack });
+    setPackToEdit({ ...pack });
     setEditVisible(true);
   };
 
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
-      {!fleetAccount.connected ?
+      {fleetAccount.connected ?
         <div className="space-y-3">
         <div className="flex justify-between items-center">
           <div className="space-y-3">
@@ -103,6 +103,9 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
           <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
+                {t('Index')}
+              </th>
+              <th scope="col" className="px-6 py-3">
                 {t('fleet-pack-id')}
               </th>
               <th scope="col" className="px-6 py-3">
@@ -127,6 +130,13 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
               packs.map((pack) => {
                 return (
                   <tr key={pack.id}>
+                    <td className="px-6 py-3">
+                      <Link href={`/teams/${slug}/packs/${pack.id}`}>
+                        <div className="flex items-center justify-start space-x-2">
+                          <span className="underline">{pack.index}</span>
+                        </div>
+                      </Link>
+                    </td>
                     <td className="px-6 py-3">
                       <Link href={`/teams/${slug}/packs/${pack.id}`}>
                         <div className="flex items-center justify-start space-x-2">
@@ -199,13 +209,13 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
             visible={editVisible}
             setVisible={setEditVisible}
             team={team}
-            pack={taskToEdit}
+            pack={packToEdit}
           />
         )}
         <DeletePack
           visible={deleteVisible}
           setVisible={setDeleteVisible}
-          taskNumber={taskToDelete}
+          packId={packToDelete}
         />
         </div>
         :
