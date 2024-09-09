@@ -8,8 +8,8 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { getFleet} from '@/models/fleet';
 import FleetContainer from '@/components/interfaces/Fleet/FleetContainer';
-import { FleetAccount } from '@prisma/client';
 import { TeamTab } from '@/components/team';
+import { FleetAccount } from '@prisma/client';
 
 
 const Fleet = ({ teamFeatures, fleetAccount, user }) => {
@@ -51,7 +51,7 @@ export const getServerSideProps = async (
     };
   }
 
-  const fleetAccount = await getFleet(user.id) || {} as FleetAccount;
+  const fleetAccount = await getFleet(user.id);
 
   return {
     props: {
@@ -66,13 +66,11 @@ export const getServerSideProps = async (
         image: user.image,
       },
       fleetAccount: {
-        id: fleetAccount.id,
-        userId: fleetAccount.userId,
-        fleetId: fleetAccount.fleetId,
-        accessPhrase: fleetAccount.accessPhrase,
-        connected: fleetAccount.connected || false,
-        createdAt: fleetAccount.createdAt?.toISOString(), // Serialize Date
-        updatedAt: fleetAccount.updatedAt?.toISOString(), // Serialize Date
+        id: fleetAccount?.id!, // Ensure id is not undefined
+        userId: fleetAccount?.userId!,
+        fleetId: fleetAccount?.fleetId!,
+        accessPhrase: fleetAccount?.accessPhrase!,
+        connected: fleetAccount?.connected!, // Default to false if undefined
       }
     },
   };

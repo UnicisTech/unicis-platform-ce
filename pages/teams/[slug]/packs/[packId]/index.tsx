@@ -45,7 +45,6 @@ const TaskById = ({
       />
       <h3 className="text-2xl font-bold">{'Title'}</h3>
       <PackTab activeTab={activeTab} setActiveTab={setActiveTab} />
-
     </>
   );
 };

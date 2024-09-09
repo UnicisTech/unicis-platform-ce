@@ -12,6 +12,7 @@ import { usePacks } from '@/hooks/fleets/packs/usePack';
 import { Pack } from '@/types/fleet';
 import { PLATFORMS } from '@/lib/fleet/constants';
 import { getFleetSecret } from '@/hooks/fleets/useFleetSecret';
+import FleetStatus from '../Fleet/FleetStatus';
 
 
 
@@ -46,14 +47,19 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
     fetchSecret();
   }, [team.id]);
 
-  const { packs, isLoading, isError } = usePacks(fleetTeam?.fleetTeamId || '', fleetAccount.accessPhrase || '');
+  const { packs, isLoading, isError } = usePacks(fleetTeam?.fleetTeamId || '', fleetAccount?.accessPhrase!);
 
   if (isLoading || secretLoading) {
     return <Loading />;
   }
 
   if (isError) {
-    return <Error />;
+    return (
+      <>
+        <FleetStatus />
+        {/* <Error /> */}
+      </>
+    );
   }
 
   const openDeleteModal = async (id: number) => {
@@ -68,7 +74,8 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
 
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
-      <div className="space-y-3">
+      {!fleetAccount.connected ?
+        <div className="space-y-3">
         <div className="flex justify-between items-center">
           <div className="space-y-3">
             <h2 className="text-xl font-medium leading-none tracking-tight">
@@ -200,7 +207,12 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
           setVisible={setDeleteVisible}
           taskNumber={taskToDelete}
         />
-      </div>
+        </div>
+        :
+        <>
+          <FleetStatus status='disconnected' />
+        </>
+    }
     </WithLoadingAndError>
   );
 };

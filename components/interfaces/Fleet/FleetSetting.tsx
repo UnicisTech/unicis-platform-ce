@@ -21,6 +21,7 @@ const FleetSetting = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
     },
   });
 
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <Card>
@@ -29,7 +30,7 @@ const FleetSetting = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
             <Card.Title>{t('fleet-settings')}</Card.Title>
             <Card.Description>{t('fleet-settings-description')}</Card.Description>
           </Card.Header>
-          {fleetAccount.connected ?
+          {fleetAccount?.connected ?
             <><FleetStatus status='connected'/></>
             :
             <><FleetStatus/></>
@@ -40,7 +41,7 @@ const FleetSetting = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
             type="submit"
             color="primary"
             loading={formik.isSubmitting}
-            disabled={!fleetAccount.connected}
+            disabled={!fleetAccount?.connected}
             size="md"
           >
             {t('fleet-settings-update')}

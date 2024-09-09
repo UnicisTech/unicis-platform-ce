@@ -51,7 +51,6 @@ const FleetSecret = (
   }, [teamId]);
 
   if (isLoading) return <div>{t('loading')}</div>;
-  if (isError) return <div>{t('error-loading-secret')}</div>;
 
   const handleOrderSecret = async () => {
     try {
@@ -109,7 +108,7 @@ const FleetSecret = (
           <Card.Description>{t('fleet-secret-description')}</Card.Description>
         </Card.Header>
         <div className="flex flex-col space-y-3">
-            {!fleetAccount.connected ?
+            {!fleetAccount?.connected ?
               <FleetStatus status='access-not-granted'/>
               :
             <>
@@ -162,7 +161,7 @@ const FleetSecret = (
             type="button"
             color="error"
             loading={false}
-            disabled={!fleetSecret?.active || !fleetAccount.connected}
+            disabled={!fleetSecret?.active || !fleetAccount?.connected}
             onClick={handleDisconnect}
             size="md"
           >
@@ -174,7 +173,7 @@ const FleetSecret = (
             type="button"
             color="primary"
             loading={false}
-            disabled={!fleetAccount.connected}
+            disabled={!fleetAccount?.connected}
             onClick={handleRenew}
             size="md"
           >
@@ -186,7 +185,7 @@ const FleetSecret = (
             type="button"
             color="primary"
             loading={false}
-            disabled={!fleetAccount.connected}
+            disabled={!fleetAccount?.connected}
             onClick={handleOrderSecret}
             size="md"
           >

@@ -57,7 +57,7 @@ const Querys = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Flee
     return (
       <>
         <FleetStatus />
-        {/* <Error /> */}
+        <Error />
       </>
     );
   }

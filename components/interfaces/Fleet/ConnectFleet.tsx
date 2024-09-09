@@ -32,7 +32,7 @@ const ConnectFleet = ({
   const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = useState(false);
   const userId = user.id;
-  const fleetAccountId = fleetAccount.fleetId
+  const fleetAccountId = fleetAccount?.fleetId
   
   const createFleetAccount = useCreateFleetAccount();
   const accessFleetAccount = useAccessFleetAccount();
@@ -95,7 +95,7 @@ const ConnectFleet = ({
             <Card.Description>{t('fleet-connect-description')}</Card.Description>
           </Card.Header>
           <div className="flex flex-col space-y-3">
-            {fleetAccount == null || fleetAccount.connected == false ?
+            {fleetAccount == null || fleetAccount?.connected == false ?
               <>
                 <FleetStatus/>
                 <InputWithLabel

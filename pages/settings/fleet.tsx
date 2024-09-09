@@ -5,22 +5,21 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from 'models/user';
 import { inferSSRProps } from '@/lib/inferSSRProps';
-import { UpdateAccount } from '@/components/account';
+import { FleetAccountManager } from '@/components/account';
 import env from '@/lib/env';
 import { getFleet } from '@/models/fleet';
-import AccountTab from '@/components/account/AccountTab';
 
 
 type AccountProps = inferSSRProps<typeof getServerSideProps>;
 
-const Account: NextPageWithLayout<AccountProps> = ({
+const Fleet: NextPageWithLayout<AccountProps> = ({
   user,
+  fleetAccount,
   allowEmailChange,
 }) => {
   return (
     <>
-      <AccountTab activeTab="account" user={user}/>
-      <UpdateAccount user={user} allowEmailChange={allowEmailChange} />
+      <FleetAccountManager fleetAccount={fleetAccount} user={user} allowEmailChange={allowEmailChange} />
     </>
   )
 };
@@ -38,6 +37,8 @@ export const getServerSideProps = async (
     };
   }
 
+  const fleetAccount = await getFleet(user.id);
+
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
@@ -50,8 +51,15 @@ export const getServerSideProps = async (
         image: user.image,
       },
       allowEmailChange: env.confirmEmail === false,
+      fleetAccount: {
+        id: fleetAccount?.id, // Ensure id is not undefined
+        userId: fleetAccount?.userId,
+        fleetId: fleetAccount?.fleetId,
+        accessPhrase: fleetAccount?.accessPhrase,
+        connected: fleetAccount?.connected,
+      }
     },
   };
 };
 
-export default Account;
+export default Fleet;
