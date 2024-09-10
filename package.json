@@ -37,6 +37,7 @@
     "@atlaskit/select": "^17.10.0",
     "@atlaskit/tabs": "^16.1.1",
     "@atlaskit/tag": "^12.2.2",
+    "@atlaskit/tag-group": "^10.5.0",
     "@atlaskit/textarea": "^5.4.0",
     "@atlaskit/textfield": "^6.3.1",
     "@atlaskit/theme": "^12.8.0",

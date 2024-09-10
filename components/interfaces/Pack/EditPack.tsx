@@ -11,6 +11,8 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { PLATFORMS } from '@/lib/fleet/constants';
 import { Pack } from '@/types';
+import { useUpdatePack } from '@/hooks/fleets/packs/useUpdatePack';
+import toast from 'react-hot-toast';
 
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -34,21 +36,30 @@ const EditPack = ({
   setVisible,
   pack,
   team,
+  fleetTeamId,
+  fleetAccessPhrase
 }: {
   visible: boolean;
   setVisible: (visible: boolean) => void;
   pack: Pack;
   team: Team;
+  fleetTeamId: string;
+  fleetAccessPhrase: string;
 }) => {
   const { t } = useTranslation('common');
+  const updatePack = useUpdatePack();
 
   return (
     <Modal open={visible}>
       <Form<FormData>
         onSubmit={async (data) => {
           const { name, platform, version, shard, description } = data;
-          const packData = {name, platform: data.platform?.value, version, shard, description};
-          
+          const packData = {name, platform: platform?.value, version, shard, description};
+          try {
+            await updatePack(fleetTeamId, packData, pack.id, fleetAccessPhrase);
+          } catch (err) {
+            toast.error(t('error-updating-pack'));
+          };
         }}
       >
         {({ formProps, submitting }) => (

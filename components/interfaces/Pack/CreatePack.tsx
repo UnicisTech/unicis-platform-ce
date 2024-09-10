@@ -68,6 +68,7 @@ const CreatePack = ({
           const packData = {name, platform: data.platform?.value, version, shard, description};
           try {
             await createPack(fleetTeamId, packData, fleetAccount?.accessPhrase);
+            toast.success(t('success-creating-pack'));
           } catch (err) {
             toast.error(t('error-creating-pack'));
           };

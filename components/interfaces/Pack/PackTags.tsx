@@ -17,7 +17,9 @@ import Select, { ValueType } from '@atlaskit/select';
 import TextField from '@atlaskit/textfield';
 import { useUpdatePack } from '@/hooks/fleets/packs/useUpdatePack';
 import toast from 'react-hot-toast';
-import DeletePack from './DeletePack';
+import Tag from '@atlaskit/tag';
+import TagGroup from '@atlaskit/tag-group';
+
 
 interface FormData {
   name,
@@ -33,7 +35,7 @@ interface Option {
   value: string;
 }
 
-const PackDetails = ({ teamId, fleetAccount, packID }: { teamId: string, fleetAccount: Partial<FleetAccount>, packID: string }) => {
+const PackTags = ({ teamId, fleetAccount, packID }: { teamId: string, fleetAccount: Partial<FleetAccount>, packID: string }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const [visible, setVisible] = useState(false);
@@ -111,101 +113,13 @@ const PackDetails = ({ teamId, fleetAccount, packID }: { teamId: string, fleetAc
                 flexDirection: 'column',
               }}
             >
-              <Field
-                aria-required={true}
-                name="name"
-                label="Name"
-                isRequired
-                defaultValue={pack?.name}
-              >
-                {({ fieldProps }) => (
-                  <Fragment>
-                    <TextField autoComplete="off" {...fieldProps} />
-                  </Fragment>
-                )}
-              </Field>
-              
-              <Field<ValueType<Option>>
-                name="platform"
-                label="Platform"
-                aria-required={true}
-                isRequired
-                defaultValue={PLATFORMS.find(
-                  ({ value }) => value === pack?.platform
-                )}
-                validate={async (value) => {
-                  if (value) {
-                    return undefined;
-                  }
-
-                  return new Promise((resolve) =>
-                    setTimeout(resolve, 300)
-                  ).then(() => 'Please select a platform');
-                }}
-              >
-                {({ fieldProps: { id, ...rest }, error }) => (
-                  <Fragment>
-                    <WithoutRing>
-                      <Select
-                        inputId={id}
-                        {...rest}
-                        options={PLATFORMS}
-                        validationState={error ? 'error' : 'default'}
-                      />
-                      {error && <ErrorMessage>{error}</ErrorMessage>}
-                    </WithoutRing>
-                  </Fragment>
-                )}
-              </Field>
-
-              <div className='grid grid-cols-2 gap-2'>
-                <Field
-                  aria-required={true}
-                  name="version"
-                  label="Version"
-                  isRequired
-                  defaultValue={pack?.version}
-                >
-                  {({ fieldProps }) => (
-                    <Fragment>
-                      <TextField autoComplete="off" {...fieldProps} />
-                    </Fragment>
-                  )}
-                </Field>
-
-                <Field
-                  aria-required={true}
-                  name="shard"
-                  label="Shard"
-                  isRequired
-                  defaultValue={pack?.shard}
-                >
-                  {({ fieldProps }) => (
-                    <Fragment>
-                      <TextField autoComplete="off" {...fieldProps} />
-                    </Fragment>
-                  )}
-                </Field>
+              <div>
+                <TagGroup alignment="start">
+                  {pack?.tags.map((tag) => (
+                    <Tag text={`${tag.value}`} removeButtonLabel="Remove" href={`/teams/${slug}/tags/${tag.id}`} />
+                  ))}
+                </TagGroup>
               </div>
-
-              {/* <Field
-                label="Description"
-                name="description"
-                defaultValue={pack?.description}
-              >
-                {({ fieldProps }: any) => (
-                  <Fragment>
-                    <ReactQuill
-                      theme="snow"
-                      {...fieldProps}
-                      onChange={(value) => {
-                        checkFormChanges();
-                        fieldProps.onChange(value);
-                      }}
-                    />
-                  </Fragment>
-                )}
-              </Field> */}
               <FormFooter>
                 {canAccess('team_fleet_pack', ['update']) && (
                   <Button
@@ -236,15 +150,8 @@ const PackDetails = ({ teamId, fleetAccount, packID }: { teamId: string, fleetAc
           </form>
         )}
       </Form>
-      <DeletePack
-        visible={deleteVisible}
-        setVisible={setDeleteVisible}
-        packId={packToDelete!}
-        fleetTeamId={fleetTeam?.fleetTeamId!}
-        fleetAccessPhrase={fleetAccount.accessPhrase!}
-      />
     </IssuePanelContainer>
   );
 };
 
-export default PackDetails;
+export default PackTags;

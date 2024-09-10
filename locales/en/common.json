@@ -296,5 +296,7 @@
   "fleet-secret-description": "Fleet secret allows teams to enroll nodes, and each node enrolled with the secret will be able to Identity the team the is query results belongs to.",
   "fleet-order-secret": "Order and Save Secret",
   "fleet-secret-not-found": "Secret Not Found",
-  "fleet-access-not-granted": "Access Not Granted, Connect to Fleet Account to proceed."
+  "fleet-access-not-granted": "Access Not Granted, Connect to Fleet Account to proceed.",
+  "fleet-delete-pack-description": "DPack also involves deleting all objects associated with it permanently.",
+  "fleet-delete-pack-warning": "Are you sure you want to delete pack"
 }

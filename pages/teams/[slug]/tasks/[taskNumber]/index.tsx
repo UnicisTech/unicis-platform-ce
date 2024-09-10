@@ -21,7 +21,8 @@ import useISO from 'hooks/useISO';
 import { Team } from '@prisma/client';
 import { getCscStatusesBySlug } from 'models/team';
 import { CreateTIA, TiaAuditLogs, TiaPanel } from '@/components/interfaces/TIA';
-import Breadcrumb from '../../../../../components/interfaces/Task/Breadcrumb';
+import Breadcrumb from '@/components/shared/Breadcrumb';
+
 
 const TaskById = ({
   csc_statuses,

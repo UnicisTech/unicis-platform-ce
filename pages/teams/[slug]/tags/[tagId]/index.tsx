@@ -15,7 +15,7 @@ import env from '@/lib/env';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import PackTags from '@/components/interfaces/Pack/PackTags';
 
-const PackById = ({teamFeatures, fleetAccount, user}) => {
+const TagById = ({teamFeatures, fleetAccount, user}) => {
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
   const { t } = useTranslation('common');
@@ -98,4 +98,4 @@ export const getServerSideProps = async (
   };
 };
 
-export default PackById;
+export default TagById;

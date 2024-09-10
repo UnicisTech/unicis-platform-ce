@@ -5,7 +5,7 @@ const Breadcrumb = ({
   teamName,
   taskTitle,
   taskNumber,
-  backTo,
+  backTo
 }: {
   teamName: string;
   taskTitle: string;
@@ -19,9 +19,9 @@ const Breadcrumb = ({
       <ul>
         <li>{teamName || t('Home')}</li>
         <li>
-          <Link href={backTo || '/'}>{t('Tasks')}</Link>
+          <Link href={backTo || '/'}>{taskTitle}</Link>
         </li>
-        <li>{`${taskNumber} - ${taskTitle}`}</li>
+        <li>{`${taskNumber}`}</li>
       </ul>
     </div>
   );

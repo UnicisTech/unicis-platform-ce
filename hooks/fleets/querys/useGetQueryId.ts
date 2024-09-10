@@ -1,31 +1,30 @@
 import { fleetAuthAPIHeaders } from "@/lib/common";
 import { fleetV1 } from "@/lib/fleet/apiBase";
-import { Pack, PacksResponse } from "@/types/fleet";
+import { PackWithRelationships } from "@/types/fleet";
 import { useEffect, useState } from "react";
 
-export const usePacks = (teamId: string, accessPhrase: string) => {
-  const [packs, setPacks] = useState<Pack[]>([]);
+export const useGetQueryId = (teamId: string, queryId: string,  accessPhrase?: string) => {
+  const [pack, setPack] = useState<PackWithRelationships>();
   const [isLoading, setLoading] = useState<boolean>(true);
   const [isError, setError] = useState<string | null>(null);
-  
+
   useEffect(() => {
-    const fetchPacks = async () => {
+    const fetchQuery = async () => {
       setLoading(true);
       setError(null);
 
       try {
-        const response = await fleetV1(`/manager/${teamId}/packs`, {
+        const response = await fleetV1(`/manager/${teamId}/query/${queryId}`, {
           method: 'GET',
           headers: fleetAuthAPIHeaders(accessPhrase!),
         });
 
         if (!response.ok) {
           const data = await response.json();
-          throw new Error(data.message || 'Error fetching packs');
         }
 
-        const data: PacksResponse = await response.json();
-        setPacks(data.packs);
+        const data: PackWithRelationships = await response.json();
+        setPack(data);
       } catch (err) {
         setError('An unexpected error occurred.');
       } finally {
@@ -33,8 +32,8 @@ export const usePacks = (teamId: string, accessPhrase: string) => {
       }
     };
 
-    fetchPacks();
-  }, [teamId, accessPhrase]);
+    fetchQuery();
+  }, [teamId, queryId, accessPhrase]);
 
-  return { packs, isLoading, isError };
+  return { pack, isLoading, isError };
 };

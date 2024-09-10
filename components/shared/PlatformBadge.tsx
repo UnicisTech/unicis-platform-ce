@@ -36,14 +36,13 @@ const PlatformBadge = ({ label, value }: { label: string; value: string }) => {
         // color={colors[value]}
       >
         {Icon && (
-          <div style={{ filter: 'invert(100%)' }}>
+          <div style={{ filter: 'invert(100%)'}} className='h-4 w-4 mr-2'>
             <Image
               src={Icon}
               alt={`${value} icon`}
               width={16}
               layout='fixed'
               height={16}
-              className="mr-2"
             />
           </div>
         )}

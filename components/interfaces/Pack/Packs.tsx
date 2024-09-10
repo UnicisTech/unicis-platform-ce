@@ -210,12 +210,16 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
             setVisible={setEditVisible}
             team={team}
             pack={packToEdit}
+            fleetAccessPhrase={fleetAccount.accessPhrase!}
+            fleetTeamId={fleetTeam?.fleetTeamId!}
           />
         )}
         <DeletePack
           visible={deleteVisible}
           setVisible={setDeleteVisible}
-          packId={packToDelete}
+          packId={packToDelete!}
+          fleetTeamId={fleetTeam?.fleetTeamId!}
+          fleetAccessPhrase={fleetAccount.accessPhrase!}
         />
         </div>
         :

@@ -22,8 +22,8 @@ const Querys = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Flee
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [deleteVisible, setDeleteVisible] = useState(false);
-  const [taskToEdit, setTaskToEdit] = useState<Pack>({} as Pack);
-  const [taskToDelete, setTaskToDelete] = useState<null | number>(null);
+  const [tagToEdit, setTagToEdit] = useState<Pack>({} as Pack);
+  const [tagToDelete, setTagToDelete] = useState<null | string>(null);
   
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
@@ -62,13 +62,13 @@ const Querys = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Flee
     );
   }
 
-  const openDeleteModal = async (id: number) => {
-    setTaskToDelete(id);
+  const openDeleteModal = async (id: string) => {
+    setTagToDelete(id);
     setDeleteVisible(true);
   };
 
   const openEditModal = async (pack: Pack) => {
-    setTaskToEdit({ ...pack });
+    setTagToEdit({ ...pack });
     setEditVisible(true);
   };
 
@@ -86,7 +86,7 @@ const Querys = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Flee
               </p>
             </div>
 
-            {canAccess('task', ['create']) && (
+            {canAccess('team_fleet_tag', ['create']) && (
               <Button
                 size="sm"
                 color="primary"
@@ -194,19 +194,19 @@ const Querys = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Flee
             </tbody>
           </table>
           <CreatePack fleetAccount={fleetAccount} fleetTeamId={fleetTeam?.fleetTeamId!} visible={visible} setVisible={setVisible} team={team} />
-          {editVisible && (
+          {/* {editVisible && (
             <EditPack
               visible={editVisible}
               setVisible={setEditVisible}
               team={team}
-              pack={taskToEdit}
+              pack={tagToEdit}
             />
-          )}
-          <DeletePack
+          )} */}
+          {/* <DeletePack
             visible={deleteVisible}
             setVisible={setDeleteVisible}
-            taskNumber={taskToDelete}
-          />
+            taskNumber={tagToDelete}
+          /> */}
         </div>
         :
         <>
