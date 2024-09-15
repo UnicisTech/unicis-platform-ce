@@ -1,23 +1,48 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { createOrUpdateFleet } from 'models/fleet';
+import { prisma } from '@/lib/prisma';
+import { getSession } from '@/lib/session';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
-    const { userId, fleetId, accessPhrase, connected } = req.body;
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const { method } = req;
 
-    try {
-      const fleetAccount = await createOrUpdateFleet({
-        userId,
-        fleetId,
-        accessPhrase,
-        connected
-      })
-
-      res.status(200).json(fleetAccount);
-    } catch (error) {
-      res.status(500).json({ error: 'Failed to connect fleet connection' });
+  try {
+    switch (method) {
+      case 'PUT':
+        await handlePUT(req, res);
+        break;
+      default:
+        res.setHeader('Allow', 'PUT');
+        res.status(405).json({
+          error: { message: `Method ${method} Not Allowed` },
+        });
     }
-  } else {
-    res.status(405).json({ error: 'Method not allowed' });
+  } catch (error: any) {
+    const message = error.message || 'Something went wrong';
+    const status = error.status || 500;
+
+    res.status(status).json({ error: { message } });
   }
 }
+
+const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await getSession(req, res);
+
+  const { fleetId, fleetAccessPhrase } = req.body as {
+    fleetId: string;
+    fleetAccessPhrase: string;
+  };
+
+  const user = await prisma.user.findFirstOrThrow({
+    where: { id: session?.user.id },
+  });
+
+  await prisma.user.update({
+    where: { id: session?.user.id },
+    data: { fleetAccessPhrase: fleetAccessPhrase, fleetId: fleetId },
+  });
+
+  res.status(200).json({ data: user });
+};

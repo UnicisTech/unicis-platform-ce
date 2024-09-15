@@ -1,43 +1,49 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { createOrUpdateFleetSecret, getFleetSecretByTeamId } from 'models/fleet';
+import { prisma } from '@/lib/prisma';
+import { getSession } from '@/lib/session';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
-    const { teamId, fleetTeamId, secret, active } = req.body;
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const { method } = req;
 
-    try {
-      const fleetSecret = await createOrUpdateFleetSecret({
-        teamId,
-        fleetTeamId,
-        secret,
-        active
-      });
-
-      res.status(200).json(fleetSecret);
-    } catch (error) {
-      console.error('Error creating or updating fleet secret:', error);
-      res.status(500).json({ error: 'Failed to connect fleet connection' });
+  try {
+    switch (method) {
+      case 'PUT':
+        await handlePUT(req, res);
+        break;
+      default:
+        res.setHeader('Allow', 'PUT');
+        res.status(405).json({
+          error: { message: `Method ${method} Not Allowed` },
+        });
     }
-  } else if (req.method === 'GET') {
-    const { teamId } = req.query;
+  } catch (error: any) {
+    const message = error.message || 'Something went wrong';
+    const status = error.status || 500;
 
-    if (!teamId || typeof teamId !== 'string') {
-      return res.status(400).json({ error: 'teamId is required and must be a string' });
-    }
-
-    try {
-      const fleetSecret = await getFleetSecretByTeamId(teamId);
-
-      if (!fleetSecret) {
-        return res.status(404).json({ error: 'Fleet secret not found' });
-      }
-
-      return res.status(200).json(fleetSecret);
-    } catch (error) {
-      console.error('Error fetching fleet secret:', error);
-      return res.status(500).json({ error: 'Internal server error' });
-    }
-  } else {
-    res.status(405).json({ error: 'Method not allowed' });
+    res.status(status).json({ error: { message } });
   }
 }
+
+const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await getSession(req, res);
+
+  const { fleetTeamId, secret, teamId } = req.body as {
+    fleetTeamId: string;
+    secret: string;
+    teamId: string;
+  };
+
+  const team = await prisma.team.findFirstOrThrow({
+    where: { id: teamId },
+  });
+
+  await prisma.team.update({
+    where: { id: teamId },
+    data: { fleetSecret: secret, fleetTeamId: fleetTeamId },
+  });
+
+  res.status(200).json({ data: team });
+};

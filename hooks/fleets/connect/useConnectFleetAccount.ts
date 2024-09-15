@@ -1,12 +1,12 @@
 import { defaultHeaders } from "@/lib/common";
 
 export const useConnectFleetAccount = () => {
-  const connectFleetAccount = async (userId: string, fleetId: string, secret: string) => {
+  const connectFleetAccount = async (userId: string, fleetId: string, fleetAccessPhrase: string) => {
     try {
       const Presponse = await fetch('/api/fleet/connect', {
-        method: 'POST',
+        method: 'PUT',
         headers: defaultHeaders,
-        body: JSON.stringify({ userId, fleetId, accessPhrase: secret, connected: true }),
+        body: JSON.stringify({ userId, fleetId, fleetAccessPhrase }),
       });
 
       return Presponse.ok;

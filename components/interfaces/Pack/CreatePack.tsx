@@ -1,26 +1,18 @@
-import React, { Fragment, useRef, useState } from 'react';
-import { Team } from '@prisma/client';
+import React, { Fragment, useRef } from 'react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
-import { DatePicker } from '@atlaskit/datetime-picker';
 import TextField from '@atlaskit/textfield';
 import Select, { ValueType } from '@atlaskit/select';
-import type { ApiResponse } from 'types';
-import type { FleetAccount, Task } from '@prisma/client';
+import type { User } from '@prisma/client';
 import Button, { LoadingButton } from '@atlaskit/button';
-import statusesData from '@/components/defaultLanding/data/statuses.json';
 import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
 import { WithoutRing } from 'sharedStyles';
-import useTasks from 'hooks/useTasks';
-import { getCurrentStringDate } from '@/components/services/taskService';
-
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { PLATFORMS } from "@/lib/fleet/constants";
 import { useCreatePack } from '@/hooks/fleets/packs/useCreatePack';
+
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 
@@ -43,15 +35,13 @@ const DEFAULT_PLATFORM_VALUE = 'all';
 const CreatePack = ({
   visible,
   setVisible,
-  team,
-  fleetTeamId,
-  fleetAccount
+  user,
+  fleetTeamId
 }: {
   visible: boolean;
   setVisible: (visible: boolean) => void;
-  team: Team;
+  user: Partial<User>;
   fleetTeamId: string;
-  fleetAccount: Partial<FleetAccount>
 }) => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -65,9 +55,9 @@ const CreatePack = ({
       <Form<FormData>
         onSubmit={async (data, { reset }) => {
           const { name, platform, version, shard, description } = data;
-          const packData = {name, platform: data.platform?.value, version, shard, description};
+          const packData = {name, platform: platform?.value, version, shard, description};
           try {
-            await createPack(fleetTeamId, packData, fleetAccount?.accessPhrase);
+            await createPack(fleetTeamId, packData, user?.fleetAccessPhrase!);
             toast.success(t('success-creating-pack'));
           } catch (err) {
             toast.error(t('error-creating-pack'));

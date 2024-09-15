@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button } from 'react-daisyui';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
@@ -6,57 +6,37 @@ import { useRouter } from 'next/router';
 import { Error, Loading, PlatformBadge } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
 import { WithLoadingAndError } from '@/components/shared';
-import type { Team, FleetSecret as FSType, FleetAccount } from '@prisma/client';
-import { CreatePack, DeletePack, EditPack } from '@/components/interfaces/Pack';
-import { usePacks } from '@/hooks/fleets/packs/usePack';
-import { Pack } from '@/types/fleet';
+import type { Team, User } from '@prisma/client';
+import { Tag } from '@/types/fleet';
 import { PLATFORMS } from '@/lib/fleet/constants';
-import { getFleetSecret } from '@/hooks/fleets/useFleetSecret';
 import FleetStatus from '../Fleet/FleetStatus';
+import CreateTag from './CreateTag';
+import { useTags } from '@/hooks/fleets/Tags/useTags';
+import FormattedDate from '@/components/shared/Date';
 
 
 
-const Querys = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<FleetAccount> }) => {
+const Tags = ({ team, user }: { team: Team, user: Partial<User> }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [deleteVisible, setDeleteVisible] = useState(false);
-  const [tagToEdit, setTagToEdit] = useState<Pack>({} as Pack);
+  const [tagToEdit, setTagToEdit] = useState<Tag>({} as Tag);
   const [tagToDelete, setTagToDelete] = useState<null | string>(null);
   
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
-  const [fleetTeam, setfleetTeam] = useState<Partial<FSType> | null>(null);
-  const [secretLoading, setIsLoading] = useState(true);
-  const [secretError, setIsError] = useState<string | null>(null);
   
-  
-  useEffect(() => {
-    const fetchSecret = async () => {
-      try {
-        const secret = await getFleetSecret(team.id);
-        setfleetTeam(secret);
-      } catch (error) {
-        setIsError('error.message');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    
-    fetchSecret();
-  }, [team.id]);
+  const { tags, isLoading, isError } = useTags(team.fleetTeamId!, user?.fleetAccessPhrase!);
 
-  const { packs, isLoading, isError } = usePacks(fleetTeam?.fleetTeamId || '', fleetAccount?.accessPhrase!);
-
-  if (isLoading || secretLoading) {
+  if (isLoading) {
     return <Loading />;
   }
 
   if (isError) {
     return (
       <>
-        <FleetStatus />
         <Error />
       </>
     );
@@ -67,14 +47,14 @@ const Querys = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Flee
     setDeleteVisible(true);
   };
 
-  const openEditModal = async (pack: Pack) => {
-    setTagToEdit({ ...pack });
+  const openEditModal = async (tag: Tag) => {
+    setTagToEdit({ ...tag });
     setEditVisible(true);
   };
 
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
-      {!fleetAccount ?
+      {user.fleetAccessPhrase ?
         <div className="space-y-3">
           <div className="flex justify-between items-center">
             <div className="space-y-3">
@@ -103,19 +83,19 @@ const Querys = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Flee
             <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">
-                  {t('fleet-pack-id')}
+                  {t('index')}
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  {t('name')}
+                  {t('value')}
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  {t('platform')}
+                  {t('created_at')}
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  {t('version')}
+                  {t('updated_at')}
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  {t('shard')}
+                  {t('Analysis')}
                 </th>
                 <th scope="col" className="px-6 py-3">
                   {t('actions')}
@@ -123,41 +103,52 @@ const Querys = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Flee
               </tr>
             </thead>
             <tbody>
-              {packs &&
-                packs.map((pack) => {
+              {tags &&
+                tags.map((tag) => {
                   return (
-                    <tr key={pack.id}>
+                    <tr key={tag.id}>
                       <td className="px-6 py-3">
-                        <Link href={`/teams/${slug}/packs/${pack.id}`}>
+                        <Link href={`/teams/${slug}/tags/${tag.id}`}>
                           <div className="flex items-center justify-start space-x-2">
-                            <span className="underline">{pack.id}</span>
+                            <span className="underline">{tag.index}</span>
                           </div>
                         </Link>
                       </td>
                       <td className="px-6 py-3">
-                        <Link href={`/teams/${slug}/packs/${pack.id}`}>
+                        <Link href={`/teams/${slug}/tags/${tag.id}`}>
                           <div className="flex items-center justify-start space-x-2">
-                            <span className="underline">{pack.name}</span>
+                            <span className="underline">{tag.value}</span>
                           </div>
                         </Link>
-                      </td>
-                      <td className="px-6 py-3">
-                        <PlatformBadge
-                          value={pack.platform!}
-                          label={
-                            PLATFORMS.find(({ value }) => value === pack.platform)
-                              ?.label as string
-                          }
-                        />
                       </td>
                       <td className="px-6 py-3">
                         <div className="flex items-center justify-start space-x-2">
-                          <span className="">{pack.version}</span>
+                          <FormattedDate dateString={tag.created_at} />
                         </div>
                       </td>
                       <td className="px-6 py-3">
                         <div className="flex items-center justify-start space-x-2">
-                          <span className="">{pack.shard}</span>
+                          <FormattedDate dateString={tag.updated_at} />
+                        </div>
+                      </td>
+                      <td className="px-6 py-3 w-80">
+                        <div className="grid grid-cols-4 gap-1 text-center font-bold items-center justify-start">
+                          <div className="bg-gray-900 rounded-md">
+                            <h1 className="rounded-full text-[10px] bg-gray-800">nodes</h1>
+                            <span className="text-[10px]">{tag.nodes_count}</span>
+                          </div>
+                          <div className="bg-gray-900 rounded-md">
+                            <h1 className="rounded-full text-[10px] bg-gray-800">queries</h1>
+                            <span className="text-[10px]">{tag.queries_count}</span>
+                          </div>
+                          <div className="bg-gray-900 rounded-md">
+                            <h1 className="rounded-full text-[10px] bg-gray-800">files</h1>
+                            <span className="text-[10px]">{tag.file_paths_count}</span>
+                          </div>
+                          <div className="bg-gray-900 rounded-md">
+                            <h1 className="rounded-full text-[10px] bg-gray-800">packs</h1>
+                            <span className="text-[10px]">{tag.packs_count}</span>
+                          </div>
                         </div>
                       </td>
                       <td className="px-6 py-3">
@@ -168,7 +159,7 @@ const Querys = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Flee
                               size="sm"
                               variant="outline"
                               onClick={() => {
-                                openEditModal(pack);
+                                openEditModal(tag);
                               }}
                             >
                               {t('edit-task')}
@@ -180,7 +171,7 @@ const Querys = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Flee
                               size="sm"
                               variant="outline"
                               onClick={() => {
-                                openDeleteModal(pack.id);
+                                openDeleteModal(tag.id);
                               }}
                             >
                               {t('delete')}
@@ -193,7 +184,7 @@ const Querys = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Flee
                 })}
             </tbody>
           </table>
-          <CreatePack fleetAccount={fleetAccount} fleetTeamId={fleetTeam?.fleetTeamId!} visible={visible} setVisible={setVisible} team={team} />
+          <CreateTag user={user} fleetTeamId={team?.fleetTeamId!} visible={visible} setVisible={setVisible}/>
           {/* {editVisible && (
             <EditPack
               visible={editVisible}
@@ -217,4 +208,4 @@ const Querys = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Flee
   );
 };
 
-export default Querys;
+export default Tags;

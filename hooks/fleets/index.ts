@@ -1,8 +1,8 @@
 export { useCreateFleetAccount } from './useCreateFleetAccount';
-export { useDisconnectFleetSecret } from './useDisconnectFleetSecret';
+export { useDisconnectFleetSecret } from './connect/useDisconnectFleetSecret';
 export { useAccessFleetAccount } from './useAccessFleetAccount';
 export { useRenewFleetSecret } from './useRenewFleetSecret';
-export { useConnectFleetAccount } from './useConnectFleetAccount';
+export { useConnectFleetAccount } from './connect/useConnectFleetAccount';
 export { useCreateFleetTeam } from './useCreateFleetTeam';
-export { useDisconnectFleetAccount } from './useDisconnectFleetAccount';
-export { useConnectFleetSecret } from './useConnectFleetSecret';
+export { useDisconnectFleetAccount } from './connect/useDisconnectFleetAccount';
+export { useConnectFleetSecret } from './connect/useConnectFleetSecret';

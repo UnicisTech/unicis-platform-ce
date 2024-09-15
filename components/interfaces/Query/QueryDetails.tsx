@@ -1,19 +1,18 @@
 import { Fragment, useCallback, useState } from 'react';
 import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
-import { Error, Loading } from '@/components/shared';
+import { Error, Loading, PlatformBadge } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
 import type { User } from '@prisma/client';
 import { PLATFORMS } from '@/lib/fleet/constants';
-import { useGetPackId } from '@/hooks/fleets/packs/useGetPackId';
 import { IssuePanelContainer, WithoutRing } from '@/sharedStyles';
 import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
 import Select, { ValueType } from '@atlaskit/select';
 import TextField from '@atlaskit/textfield';
-import { useUpdatePack } from '@/hooks/fleets/packs/useUpdatePack';
 import toast from 'react-hot-toast';
-import DeletePack from './DeletePack';
+import DeleteQuery from './DeleteQuery';
+import { useGetQueryId } from '@/hooks/fleets/querys/useGetQueryId';
+import { useUpdateQuery } from '@/hooks/fleets/querys/useUpdateQuery';
 
 interface FormData {
   name,
@@ -29,20 +28,21 @@ interface Option {
   value: string;
 }
 
-const PackDetails = ({ fleetTeamId, packID, user }: { fleetTeamId: string, user: Partial<User>, packID: string }) => {  
+const QueryDetails = ({ user, queryID, fleetTeamId }: { user: Partial<User>, queryID: string, fleetTeamId: string }) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
   const [isFormChanged, setIsFormChanged] = useState(false);
-  const updatePack = useUpdatePack();
+  const updateQuery = useUpdateQuery();
 
   const [deleteVisible, setDeleteVisible] = useState(false);
-  const [packToDelete, setPackToDelete] = useState<null | string>(null);
+  const [queryToDelete, setQueryToDelete] = useState<null | string>(null);
 
   const checkFormChanges = useCallback(() => {
     setIsFormChanged(true);
   }, []);
   
-  const { pack, isLoading, isError } = useGetPackId(fleetTeamId, packID, user?.fleetAccessPhrase!);
+
+  const { query, isLoading, isError } = useGetQueryId(fleetTeamId, queryID, user.fleetAccessPhrase!);
 
   if (isLoading) {
     return <Loading />;
@@ -57,7 +57,7 @@ const PackDetails = ({ fleetTeamId, packID, user }: { fleetTeamId: string, user:
   }
 
   const openDeleteModal = async (id: string) => {
-    setPackToDelete(id);
+    setQueryToDelete(id);
     setDeleteVisible(true);
   };
 
@@ -66,11 +66,11 @@ const PackDetails = ({ fleetTeamId, packID, user }: { fleetTeamId: string, user:
       <Form<FormData>
         onSubmit={async (data) => {
           const { name, platform, version, shard, description } = data;
-          const packData = {name, platform: platform?.value, version, shard, description};
+          const queryData = {name, platform: platform?.value, version, shard, description};
           try {
-            await updatePack(fleetTeamId, packData, packID, user.fleetAccessPhrase!);
+            await updateQuery(fleetTeamId!, queryData, queryID, user.fleetAccessPhrase!);
           } catch (err) {
-            toast.error(t('error-updating-pack'));
+            toast.error(t('error-updating-query'));
           };
         }}
       >
@@ -89,7 +89,7 @@ const PackDetails = ({ fleetTeamId, packID, user }: { fleetTeamId: string, user:
                 name="name"
                 label="Name"
                 isRequired
-                defaultValue={pack?.name}
+                defaultValue={query?.name}
               >
                 {({ fieldProps }) => (
                   <Fragment>
@@ -104,7 +104,7 @@ const PackDetails = ({ fleetTeamId, packID, user }: { fleetTeamId: string, user:
                 aria-required={true}
                 isRequired
                 defaultValue={PLATFORMS.find(
-                  ({ value }) => value === pack?.platform
+                  ({ value }) => value === query?.platform
                 )}
                 validate={async (value) => {
                   if (value) {
@@ -137,7 +137,7 @@ const PackDetails = ({ fleetTeamId, packID, user }: { fleetTeamId: string, user:
                   name="version"
                   label="Version"
                   isRequired
-                  defaultValue={pack?.version}
+                  defaultValue={query?.version}
                 >
                   {({ fieldProps }) => (
                     <Fragment>
@@ -151,7 +151,7 @@ const PackDetails = ({ fleetTeamId, packID, user }: { fleetTeamId: string, user:
                   name="shard"
                   label="Shard"
                   isRequired
-                  defaultValue={pack?.shard}
+                  defaultValue={query?.shard}
                 >
                   {({ fieldProps }) => (
                     <Fragment>
@@ -180,7 +180,7 @@ const PackDetails = ({ fleetTeamId, packID, user }: { fleetTeamId: string, user:
                 )}
               </Field> */}
               <FormFooter>
-                {canAccess('team_fleet_pack', ['update']) && (
+                {canAccess('team_fleet_query', ['update']) && (
                   <Button
                     color="primary"
                     variant="outline"
@@ -192,13 +192,13 @@ const PackDetails = ({ fleetTeamId, packID, user }: { fleetTeamId: string, user:
                     {t('save-changes')}
                   </Button>
                 )}
-                {canAccess('team_fleet_pack', ['delete']) && (
+                {canAccess('team_fleet_query', ['delete']) && (
                   <Button
                     className="dark:text-gray-100"
                     size="sm"
                     variant="outline"
                     onClick={() => {
-                      openDeleteModal(pack?.id!);
+                      openDeleteModal(query?.id!);
                     }}
                   >
                     {t('delete')}
@@ -209,15 +209,15 @@ const PackDetails = ({ fleetTeamId, packID, user }: { fleetTeamId: string, user:
           </form>
         )}
       </Form>
-      <DeletePack
+      <DeleteQuery
         visible={deleteVisible}
         setVisible={setDeleteVisible}
-        packId={packToDelete!}
-        fleetTeamId={fleetTeamId}
+        queryId={queryToDelete!}
+        fleetTeamId={fleetTeamId!}
         fleetAccessPhrase={user.fleetAccessPhrase!}
       />
     </IssuePanelContainer>
   );
 };
 
-export default PackDetails;
+export default QueryDetails;

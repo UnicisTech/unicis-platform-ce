@@ -6,17 +6,16 @@ import { useRouter } from 'next/router';
 import { Error, Loading, PlatformBadge } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
 import { WithLoadingAndError } from '@/components/shared';
-import type { Team, FleetSecret as FSType, FleetAccount } from '@prisma/client';
+import type { Team, User } from '@prisma/client';
 import { CreatePack, DeletePack, EditPack } from '@/components/interfaces/Pack';
 import { usePacks } from '@/hooks/fleets/packs/usePack';
 import { Pack } from '@/types/fleet';
 import { PLATFORMS } from '@/lib/fleet/constants';
-import { getFleetSecret } from '@/hooks/fleets/useFleetSecret';
 import FleetStatus from '../Fleet/FleetStatus';
 
 
 
-const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<FleetAccount> }) => {
+const Packs = ({ team, user }: { team: Team, user: Partial<User> }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const [visible, setVisible] = useState(false);
@@ -27,37 +26,17 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
   
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
-  const [fleetTeam, setfleetTeam] = useState<Partial<FSType> | null>(null);
-  const [secretLoading, setIsLoading] = useState(true);
-  const [secretError, setIsError] = useState<string | null>(null);
   
-  
-  useEffect(() => {
-    const fetchSecret = async () => {
-      try {
-        const secret = await getFleetSecret(team.id);
-        setfleetTeam(secret);
-      } catch (error) {
-        setIsError('error.message');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    
-    fetchSecret();
-  }, [team.id]);
+  const { packs, isLoading, isError } = usePacks(team?.fleetTeamId || '', user?.fleetAccessPhrase!);
 
-  const { packs, isLoading, isError } = usePacks(fleetTeam?.fleetTeamId || '', fleetAccount?.accessPhrase!);
-
-  if (isLoading || secretLoading) {
+  if (isLoading) {
     return <Loading />;
   }
 
   if (isError) {
     return (
       <>
-        <FleetStatus />
-        {/* <Error /> */}
+        <Error />
       </>
     );
   }
@@ -74,7 +53,7 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
 
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
-      {fleetAccount.connected ?
+      {user.fleetAccessPhrase ?
         <div className="space-y-3">
         <div className="flex justify-between items-center">
           <div className="space-y-3">
@@ -86,7 +65,7 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
             </p>
           </div>
 
-          {canAccess('task', ['create']) && (
+          {canAccess('team_fleet_pack', ['create']) && (
             <Button
               size="sm"
               color="primary"
@@ -105,9 +84,9 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
               <th scope="col" className="px-6 py-3">
                 {t('Index')}
               </th>
-              <th scope="col" className="px-6 py-3">
+              {/* <th scope="col" className="px-6 py-3">
                 {t('fleet-pack-id')}
-              </th>
+              </th> */}
               <th scope="col" className="px-6 py-3">
                 {t('name')}
               </th>
@@ -137,13 +116,13 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
                         </div>
                       </Link>
                     </td>
-                    <td className="px-6 py-3">
+                    {/* <td className="px-6 py-3">
                       <Link href={`/teams/${slug}/packs/${pack.id}`}>
                         <div className="flex items-center justify-start space-x-2">
                           <span className="underline">{pack.id}</span>
                         </div>
                       </Link>
-                    </td>
+                    </td> */}
                     <td className="px-6 py-3">
                       <Link href={`/teams/${slug}/packs/${pack.id}`}>
                         <div className="flex items-center justify-start space-x-2">
@@ -172,7 +151,7 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
                     </td>
                     <td className="px-6 py-3">
                       <div className="gap-2 btn-group">
-                        {canAccess('task', ['update']) && (
+                        {canAccess('team_fleet_pack', ['update']) && (
                           <Button
                             className="dark:text-gray-100"
                             size="sm"
@@ -184,7 +163,7 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
                             {t('edit-task')}
                           </Button>
                         )}
-                        {canAccess('task', ['delete']) && (
+                        {canAccess('team_fleet_pack', ['delete']) && (
                           <Button
                             className="dark:text-gray-100"
                             size="sm"
@@ -203,23 +182,23 @@ const Packs = ({ team, fleetAccount }: { team: Team, fleetAccount: Partial<Fleet
               })}
           </tbody>
         </table>
-        <CreatePack fleetAccount={fleetAccount} fleetTeamId={fleetTeam?.fleetTeamId!} visible={visible} setVisible={setVisible} team={team} />
+        <CreatePack user={user} fleetTeamId={team?.fleetTeamId!} visible={visible} setVisible={setVisible}/>
         {editVisible && (
           <EditPack
             visible={editVisible}
             setVisible={setEditVisible}
             team={team}
             pack={packToEdit}
-            fleetAccessPhrase={fleetAccount.accessPhrase!}
-            fleetTeamId={fleetTeam?.fleetTeamId!}
+            fleetTeamId={team?.fleetTeamId!}
+            fleetAccessPhrase={user.fleetAccessPhrase!}
           />
         )}
         <DeletePack
           visible={deleteVisible}
           setVisible={setDeleteVisible}
           packId={packToDelete!}
-          fleetTeamId={fleetTeam?.fleetTeamId!}
-          fleetAccessPhrase={fleetAccount.accessPhrase!}
+          fleetTeamId={team?.fleetTeamId!}
+          fleetAccessPhrase={user.fleetAccessPhrase!}
         />
         </div>
         :

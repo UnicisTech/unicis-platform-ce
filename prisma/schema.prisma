@@ -16,6 +16,7 @@ model Account {
   refresh_token     String?
   access_token      String?
   expires_at        Int?
+  fleetAccess       String?
   token_type        String?
   scope             String?
   id_token          String?
@@ -42,54 +43,25 @@ model VerificationToken {
 }
 
 model User {
-  id            String         @id @default(uuid())
-  name          String
-  email         String         @unique
-  emailVerified DateTime?
-  password      String?
-  image         String?
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @default(now())
-  firstName     String         @default("")
-  lastName      String         @default("")
-  accounts      Account[]
-  Comment       Comment[]
-  invitations   Invitation[]
-  sessions      Session[]
-  Subscription  Subscription[]
-  Task          Task[]
-  teamMembers   TeamMember[]
-  fleetAccount  FleetAccount?
-}
-
-model FleetAccount {
-  id            String    @id @default(uuid())
-  userId        String    @unique
-  fleetId       String    @unique
-  accessPhrase  String 
-  connected     Boolean   @default(false)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model FleetSecret {
-  id            String    @id @default(uuid())
-  teamId        String    @unique
-  fleetTeamId   String    @unique
-  secret        String
-  active        Boolean   @default(false)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  team          Team      @relation(fields: [teamId], references: [id], onDelete: Cascade)
-}
-
-model FleetSetting {
-  id         String    @id @default(uuid())
-  teamId     String    @unique
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @default(now())
-  team       Team      @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  id                  String         @id @default(uuid())
+  name                String
+  email               String         @unique
+  emailVerified       DateTime?
+  password            String?
+  image               String?
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @default(now())
+  firstName           String         @default("")
+  lastName            String         @default("")
+  fleetId             String?        @unique
+  fleetAccessPhrase   String?     
+  accounts            Account[]
+  Comment             Comment[]
+  invitations         Invitation[]
+  sessions            Session[]
+  Subscription        Subscription[]
+  Task                Task[]
+  teamMembers         TeamMember[]
 }
 
 model Team {
@@ -102,13 +74,13 @@ model Team {
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @default(now())
   properties      Json          @default("{}")
+  fleetTeamId     String?       @unique
+  fleetSecret     String?       @unique
   apiKeys         ApiKey[]
   invitations     Invitation[]
   subscription    Subscription?
   tasks           Task[]
   members         TeamMember[]
-  fleetSecret     FleetSecret?
-  fleetSettings   FleetSetting?
 }
 
 model Subscription {
@@ -179,8 +151,7 @@ model TeamMember {
   updatedAt DateTime @default(now())
   team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  // fleet     FleetAccount     @relation(fields: [fleetId], references: [id], onDelete: Cascade)
-
+ 
   @@unique([teamId, userId])
   @@index([userId])
 }

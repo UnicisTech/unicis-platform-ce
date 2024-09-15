@@ -7,19 +7,17 @@ import { getUserBySession } from 'models/user';
 import { inferSSRProps } from '@/lib/inferSSRProps';
 import { FleetAccountManager } from '@/components/account';
 import env from '@/lib/env';
-import { getFleet } from '@/models/fleet';
 
 
 type AccountProps = inferSSRProps<typeof getServerSideProps>;
 
 const Fleet: NextPageWithLayout<AccountProps> = ({
   user,
-  fleetAccount,
   allowEmailChange,
 }) => {
   return (
     <>
-      <FleetAccountManager fleetAccount={fleetAccount} user={user} allowEmailChange={allowEmailChange} />
+      <FleetAccountManager user={user} allowEmailChange={allowEmailChange} />
     </>
   )
 };
@@ -37,8 +35,6 @@ export const getServerSideProps = async (
     };
   }
 
-  const fleetAccount = await getFleet(user.id);
-
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
@@ -49,15 +45,10 @@ export const getServerSideProps = async (
         firstName: user.firstName,
         lastName: user.lastName,
         image: user.image,
+        fleetId: user.fleetId,
+        fleetAccessPhrase: user.fleetAccessPhrase
       },
       allowEmailChange: env.confirmEmail === false,
-      fleetAccount: {
-        id: fleetAccount?.id, // Ensure id is not undefined
-        userId: fleetAccount?.userId,
-        fleetId: fleetAccount?.fleetId,
-        accessPhrase: fleetAccount?.accessPhrase,
-        connected: fleetAccount?.connected,
-      }
     },
   };
 };

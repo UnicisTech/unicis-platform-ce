@@ -2,7 +2,7 @@ import { fleetAuthAPIHeaders } from "@/lib/common";
 import { fleetV1 } from "@/lib/fleet/apiBase";
 
 
-export const useQueryPack = () => {
+export const useCreateQuery = () => {
   const createQuery = async (fleetTeamId: string, data, accessPhrase?: string) => {
     try {
       const response = await fleetV1(`/manager/${fleetTeamId}/query/add`, {

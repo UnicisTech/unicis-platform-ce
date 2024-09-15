@@ -3,10 +3,10 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { Button } from 'react-daisyui';
 import { Card } from '@/components/shared';
-import { User, FleetAccount } from '@prisma/client';
+import { User } from '@prisma/client';
 import FleetStatus from './FleetStatus';
 
-const FleetSetting = ({ user, fleetAccount }: { user: Partial<User>, fleetAccount: Partial<FleetAccount> }) => {
+const FleetSetting = ({ user }: { user: Partial<User> }) => {
   const { t } = useTranslation('common');
 
   const formik = useFormik({
@@ -30,7 +30,7 @@ const FleetSetting = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
             <Card.Title>{t('fleet-settings')}</Card.Title>
             <Card.Description>{t('fleet-settings-description')}</Card.Description>
           </Card.Header>
-          {fleetAccount?.connected ?
+          {user.fleetAccessPhrase ?
             <><FleetStatus status='connected'/></>
             :
             <><FleetStatus/></>
@@ -41,7 +41,7 @@ const FleetSetting = ({ user, fleetAccount }: { user: Partial<User>, fleetAccoun
             type="submit"
             color="primary"
             loading={formik.isSubmitting}
-            disabled={!fleetAccount?.connected}
+            disabled={!user.fleetAccessPhrase}
             size="md"
           >
             {t('fleet-settings-update')}

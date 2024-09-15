@@ -1,10 +1,10 @@
 import { fleetAuthAPIHeaders } from "@/lib/common";
 import { fleetV1 } from "@/lib/fleet/apiBase";
-import { PackWithRelationships } from "@/types/fleet";
+import { Query } from "@/types/fleet";
 import { useEffect, useState } from "react";
 
 export const useGetQueryId = (teamId: string, queryId: string,  accessPhrase?: string) => {
-  const [pack, setPack] = useState<PackWithRelationships>();
+  const [query, setQuery] = useState<Query>();
   const [isLoading, setLoading] = useState<boolean>(true);
   const [isError, setError] = useState<string | null>(null);
 
@@ -23,8 +23,8 @@ export const useGetQueryId = (teamId: string, queryId: string,  accessPhrase?: s
           const data = await response.json();
         }
 
-        const data: PackWithRelationships = await response.json();
-        setPack(data);
+        const data: Query = await response.json();
+        setQuery(data);
       } catch (err) {
         setError('An unexpected error occurred.');
       } finally {
@@ -35,5 +35,5 @@ export const useGetQueryId = (teamId: string, queryId: string,  accessPhrase?: s
     fetchQuery();
   }, [teamId, queryId, accessPhrase]);
 
-  return { pack, isLoading, isError };
+  return { query, isLoading, isError };
 };

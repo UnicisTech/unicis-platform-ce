@@ -1,18 +1,16 @@
 import { Error, Loading } from '@/components/shared';
 import useTeam from 'hooks/useTeam';
 import { useTranslation } from 'next-i18next';
-import type { FleetAccount, FleetSecret as FSType, User } from '@prisma/client';
+import type { User } from '@prisma/client';
 import FleetSecret from './FleetSecret';
 import FleetSetting from './FleetSetting';
 
 
 const FleetContainer = (
   {
-    user,
-    fleetAccount
+    user
   }: {
       user: Partial<User>,
-      fleetAccount: Partial<FleetAccount>,
   }) => {
   const { t } = useTranslation('common');
 
@@ -32,8 +30,8 @@ const FleetContainer = (
 
   return (
     <>
-      <FleetSecret user={user} fleetAccount={fleetAccount} team={team}/>
-      <FleetSetting user={user} fleetAccount={fleetAccount}/>
+      <FleetSecret user={user} team={team}/>
+      <FleetSetting user={user} />
     </>
   );
 };

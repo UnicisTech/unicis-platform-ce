@@ -64,13 +64,34 @@ export interface Pack extends FleetBase {
   team: string;
 }
 
-export interface PacksResponse extends FleetBase {
+export interface QuerysResponse {
+  queries: Query[];
+}
+
+export interface PacksResponse {
   packs: Pack[];
+}
+
+export interface TagsResponse {
+  tags: Tag[];
+}
+
+export interface TagsWithRelationships {
+  packs: Pack[];
+  queries: Query[];
+}
+
+export interface TagsWithRelationshipsResponse {
+  tags: TagsWithRelationships[];
 }
 
 export interface Tag extends FleetBase {
   team: string;
   value: string;
+  packs_count: number;
+  nodes_count: number;
+  queries_count: number;
+  file_paths_count: number;
 };
 
 export interface Query extends FleetBase {

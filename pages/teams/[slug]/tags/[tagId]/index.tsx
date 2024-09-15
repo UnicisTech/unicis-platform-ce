@@ -8,14 +8,13 @@ import useTeam from 'hooks/useTeam';
 import useCanAccess from 'hooks/useCanAccess';
 import PackTab from '@/components/interfaces/Pack/PackTab';
 import PackDetails from '@/components/interfaces/Pack/PackDetails';
-import { getFleet } from '@/models/fleet';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import PackTags from '@/components/interfaces/Pack/PackTags';
 
-const TagById = ({teamFeatures, fleetAccount, user}) => {
+const TagById = ({teamFeatures, user}) => {
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
   const { t } = useTranslation('common');
@@ -48,12 +47,7 @@ const TagById = ({teamFeatures, fleetAccount, user}) => {
       <PackTab activeTab={activeTab} setActiveTab={setActiveTab} />
       <Card heading="Details">
         <Card.Body>
-          <PackDetails fleetAccount={fleetAccount} teamId={team?.id!} packID={packId as string} />
-        </Card.Body>
-      </Card>
-      <Card heading="Tags">
-        <Card.Body>
-          <PackTags fleetAccount={fleetAccount} teamId={team?.id!} packID={packId as string} />
+          <PackDetails user={user} fleetTeamId={team?.fleetTeamId!} packID={packId as string} />
         </Card.Body>
       </Card>
     </>
@@ -73,8 +67,6 @@ export const getServerSideProps = async (
     };
   }
 
-  const fleetAccount = await getFleet(user.id);
-
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
@@ -86,14 +78,8 @@ export const getServerSideProps = async (
         firstName: user.firstName,
         lastName: user.lastName,
         image: user.image,
+        fleetId: user.fleetId,
       },
-      fleetAccount: {
-        id: fleetAccount?.id!,
-        userId: fleetAccount?.userId!,
-        fleetId: fleetAccount?.fleetId!,
-        accessPhrase: fleetAccount?.accessPhrase!,
-        connected: fleetAccount?.connected!,
-      }
     },
   };
 };

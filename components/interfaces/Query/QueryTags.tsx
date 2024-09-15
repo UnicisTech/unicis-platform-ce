@@ -3,16 +3,17 @@ import { Button } from 'react-daisyui';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { Error, Loading } from '@/components/shared';
+import { Error, Loading, PlatformBadge } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
-import type { User } from '@prisma/client';
-import FleetStatus from '../Fleet/FleetStatus';
+import { PLATFORMS } from '@/lib/fleet/constants';
 import { useGetPackId } from '@/hooks/fleets/packs/useGetPackId';
 import { IssuePanelContainer } from '@/sharedStyles';
 import { ValueType } from '@atlaskit/select';
 import { useUpdatePack } from '@/hooks/fleets/packs/useUpdatePack';
+import toast from 'react-hot-toast';
 import Tag from '@atlaskit/tag';
 import TagGroup from '@atlaskit/tag-group';
+import { User } from '@prisma/client';
 
 
 interface FormData {
@@ -29,7 +30,7 @@ interface Option {
   value: string;
 }
 
-const PackTags = ({ fleetTeamId, packID, user }: { fleetTeamId: string, user: Partial<User>, packID: string }) => {
+const PackTags = ({ fleetTeamId, packID, user }: { fleetTeamId: string, packID: string, user: Partial<User> }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const [visible, setVisible] = useState(false);
@@ -46,7 +47,7 @@ const PackTags = ({ fleetTeamId, packID, user }: { fleetTeamId: string, user: Pa
     setIsFormChanged(true);
   }, []);
 
-  const { pack, isLoading, isError } = useGetPackId(fleetTeamId!, packID, user.fleetAccessPhrase!);
+  const { pack, isLoading, isError } = useGetPackId(fleetTeamId, packID, user?.fleetAccessPhrase!);
 
   if (isLoading) {
     return <Loading />;
@@ -55,8 +56,7 @@ const PackTags = ({ fleetTeamId, packID, user }: { fleetTeamId: string, user: Pa
   if (isError) {
     return (
       <>
-        <FleetStatus />
-        {/* <Error /> */}
+        <Error />
       </>
     );
   }

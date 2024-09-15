@@ -1,12 +1,12 @@
 import { defaultHeaders } from "@/lib/common";
 
 export const useDisconnectFleetAccount = () => {
-  const disconnectFleetAccount = async (userId: string, fleetId: string) => {
+  const disconnectFleetAccount = async (userId: string) => {
     try {
       const Presponse = await fetch('/api/fleet/connect', {
-        method: 'POST',
+        method: 'PUT',
         headers: defaultHeaders,
-        body: JSON.stringify({ userId, fleetId, accessPhrase: '', connected: false }),
+        body: JSON.stringify({ userId, fleetAccessPhrase: null }),
       });
 
       return Presponse.ok;

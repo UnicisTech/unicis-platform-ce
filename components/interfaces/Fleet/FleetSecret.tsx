@@ -2,22 +2,19 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { Button } from 'react-daisyui';
 import { Card, CopyToClipboardButton, InputWithLabel } from '@/components/shared';
-import { FleetAccount, FleetSecret as FSType, Team, User } from '@prisma/client';
+import { Team, User } from '@prisma/client';
 import FleetStatus from './FleetStatus';
 import { useConnectFleetSecret, useCreateFleetTeam, useDisconnectFleetSecret, useRenewFleetSecret } from '@/hooks/fleets';
-import { getFleetSecret } from '@/hooks/fleets/useFleetSecret';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 
 const FleetSecret = (
   {
     user,
-    team,
-    fleetAccount
-  }:{
+    team
+  }: {
     user: Partial<User>,
-    fleetAccount: Partial<FleetAccount>,
     team: Team
   }) => {
   const { t } = useTranslation('common');
@@ -28,29 +25,7 @@ const FleetSecret = (
   const connectFleetSecret = useConnectFleetSecret();
   const disconnectFleetSecret = useDisconnectFleetSecret();
   const renewFleetSecret = useRenewFleetSecret();
-  
-  const [fleetSecret, setFleetSecret] = useState<Partial<FSType> | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState<string | null>(null);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
-
-  useEffect(() => {
-    const fetchSecret = async () => {
-      try {
-        const secret = await getFleetSecret(teamId);
-        setFleetSecret(secret);
-      } catch (error) {
-        setIsError('error.message');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchSecret();
-  }, [teamId]);
-
-  if (isLoading) return <div>{t('loading')}</div>;
 
   const handleOrderSecret = async () => {
     try {
@@ -58,12 +33,11 @@ const FleetSecret = (
         throw new Error('User ID is not defined');
       }
 
-      if (!fleetSecret) {
-        const fleetTeam = await createFleetTeam(team.name, fleetAccount.accessPhrase!);
+      if (!team.fleetSecret) {
+        const fleetTeam = await createFleetTeam(team.name, user.fleetAccessPhrase as string);
         const saved = await connectFleetSecret(teamId, fleetTeam.id, fleetTeam.secret.secret);
         console.log(saved);
         toast.success(t('fleet-created'));
-        setFleetSecret(saved);  // Update the state with the newly created fleet secret
       }
     } catch (error) {
       console.error('Fleet order secret error:', error);
@@ -72,27 +46,25 @@ const FleetSecret = (
   };
 
   const handleDisconnect = async () => {
-    if (fleetSecret?.fleetTeamId) {
-      await disconnectFleetSecret(teamId, fleetSecret.fleetTeamId);
+    if (team.fleetTeamId!) {
+      await disconnectFleetSecret(teamId);
       toast.success(t('fleet-secret-disactivated'));
-      setFleetSecret(null);  // Reset the fleet secret state
     }
   };
 
   const handleConnect = async () => {
-    if (fleetSecret?.fleetTeamId) {
-      await connectFleetSecret(teamId, fleetSecret.fleetTeamId, fleetSecret.secret!);
+    if (team.fleetTeamId!) {
+      await connectFleetSecret(teamId, team.fleetTeamId!, team.fleetSecret!);
       toast.success(t('fleet-secret-activated'));
     }
   };
 
   const handleRenew = async () => {
-    if (fleetSecret?.fleetTeamId) {
-      const { secret: newSecret } = await renewFleetSecret(fleetSecret.fleetTeamId, fleetAccount.accessPhrase!);
-      const saved = await connectFleetSecret(teamId, fleetSecret.fleetTeamId, newSecret);
+    if (team.fleetTeamId!) {
+      const { secret: newSecret } = await renewFleetSecret(team.fleetTeamId!, user.fleetAccessPhrase as string);
+      const saved = await connectFleetSecret(teamId, team.fleetTeamId!, newSecret);
       console.log(saved);
       toast.success(t('fleet-secret-renew'));
-      setFleetSecret(saved);  // Update the state with the renewed secret
     }
   };
 
@@ -108,7 +80,7 @@ const FleetSecret = (
           <Card.Description>{t('fleet-secret-description')}</Card.Description>
         </Card.Header>
         <div className="flex flex-col space-y-3">
-            {!fleetAccount?.connected ?
+            {!user.fleetAccessPhrase ?
               <FleetStatus status='access-not-granted'/>
               :
             <>
@@ -117,7 +89,7 @@ const FleetSecret = (
                 type={isPasswordVisible ? "text" : "password"}
                 label={t('fleet-secret')}
                 name="fleetPassword"
-                value={fleetSecret?.secret}
+                value={team.fleetSecret!}
                 disabled={true}
               />
               <button
@@ -131,65 +103,62 @@ const FleetSecret = (
                     <EyeIcon className="h-5 w-5 text-gray-500" />
                   )}
                 </button>
-              {fleetSecret?.secret != null &&
+              {team.fleetSecret! != null &&
                 <div>
-                  <CopyToClipboardButton value={fleetSecret.secret!} />
+                  <CopyToClipboardButton value={team.fleetSecret!} />
                 </div>
               }
             </>
           }
-          {fleetSecret?.secret == null &&
+          {team.fleetSecret! == null &&
             <FleetStatus status='no-fleet-secret' />
           }
         </div>
       </Card.Body>
       <Card.Footer>
-        {fleetSecret?.active == false &&
+        {team.fleetSecret == null &&
           <Button
             type="button"
             color="success"
             loading={false}
-            disabled={false}
+            disabled={team.fleetSecret! === null}
             onClick={handleConnect}
             size="md"
           >
             {t('fleet-secret-active')}
           </Button>
         }
-        {fleetSecret?.active && (
-          <Button
-            type="button"
-            color="error"
-            loading={false}
-            disabled={!fleetSecret?.active || !fleetAccount?.connected}
-            onClick={handleDisconnect}
-            size="md"
-          >
-            {t('fleet-secret-deactivate')}
-          </Button>
-        )}
-        {fleetSecret?.id != null &&
-          <Button
-            type="button"
-            color="primary"
-            loading={false}
-            disabled={!fleetAccount?.connected}
-            onClick={handleRenew}
-            size="md"
-          >
-            {t('fleet-renew-secret')}
-          </Button>
-        }
-        {fleetSecret?.id == null &&
+        <Button
+          type="button"
+          color="primary"
+          loading={false}
+          disabled={team.fleetSecret! === null}
+          onClick={handleRenew}
+          size="md"
+        >
+          {t('fleet-renew-secret')}
+        </Button>
+        {team.fleetSecret! === null ?
           <Button
             type="button"
             color="primary"
             loading={false}
-            disabled={!fleetAccount?.connected}
+            disabled={team.fleetSecret! !== null}
             onClick={handleOrderSecret}
             size="md"
           >
             {t('fleet-order-secret')}
+          </Button>
+          :
+          <Button
+            type="button"
+            color="error"
+            loading={false}
+            disabled={!team.fleetSecret! || !user?.fleetAccessPhrase}
+            onClick={handleDisconnect}
+            size="md"
+          >
+            {t('fleet-secret-deactivate')}
           </Button>
         }
       </Card.Footer>

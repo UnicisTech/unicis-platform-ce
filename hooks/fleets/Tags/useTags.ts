@@ -1,30 +1,31 @@
 import { fleetAuthAPIHeaders } from "@/lib/common";
 import { fleetV1 } from "@/lib/fleet/apiBase";
-import { Query, QuerysResponse } from "@/types/fleet";
+import { TagsResponse, Tag } from "@/types/fleet";
 import { useEffect, useState } from "react";
 
-export const useQuerys = (teamId: string, accessPhrase: string) => {
-  const [querys, setQuerys] = useState<Query[]>([]);
+export const useTags = (teamId: string, accessPhrase: string) => {
+  const [tags, setTags] = useState<Tag[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
   const [isError, setError] = useState<string | null>(null);
   
   useEffect(() => {
-    const fetchQuerys = async () => {
+    const fetchTags = async () => {
       setLoading(true);
       setError(null);
 
       try {
-        const response = await fleetV1(`/manager/${teamId}/queries`, {
+        const response = await fleetV1(`/manager/${teamId}/tags`, {
           method: 'GET',
           headers: fleetAuthAPIHeaders(accessPhrase!),
         });
 
         if (!response.ok) {
           const data = await response.json();
+          throw new Error(data.message || 'Error fetching tags');
         }
 
-        const data: QuerysResponse = await response.json();
-        setQuerys(data.queries);
+        const data: TagsResponse = await response.json();
+        setTags(data.tags);
       } catch (err) {
         setError('An unexpected error occurred.');
       } finally {
@@ -32,8 +33,8 @@ export const useQuerys = (teamId: string, accessPhrase: string) => {
       }
     };
 
-    fetchQuerys();
+    fetchTags();
   }, [teamId, accessPhrase]);
 
-  return { querys, isLoading, isError };
+  return { tags, isLoading, isError };
 };

@@ -4,8 +4,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSidePropsContext } from 'next';
 import { getTeam } from 'models/team';
 import env from '@/lib/env';
-import { getFleet } from '@/models/fleet';
-import { FleetAccount } from '@prisma/client';
 import { getUserBySession } from '@/models/user';
 import { getSession } from '@/lib/session';
 import { Querys } from '@/components/interfaces/Query';
@@ -14,11 +12,11 @@ import { TeamTab } from '@/components/team';
 
 const AllQuerys: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ team, teamFeatures, fleetAccount }) => {
+> = ({ team, teamFeatures, user }) => {
   return (
     <>
       <TeamTab activeTab="querys" team={team} teamFeatures={teamFeatures} />
-      <Querys fleetAccount={fleetAccount} team={team} />
+      <Querys user={user} team={team} />
     </>
   );
 };
@@ -37,7 +35,6 @@ export const getServerSideProps = async (
       notFound: true,
     };
   }
-  const fleetAccount = await getFleet(user.id);
 
   return {
     props: {
@@ -51,14 +48,9 @@ export const getServerSideProps = async (
         firstName: user.firstName,
         lastName: user.lastName,
         image: user.image,
+        fleetId: user.fleetId,
+        fleetAccessPhrase: user.fleetAccessPhrase
       },
-      fleetAccount: {
-        id: fleetAccount?.id!, // Ensure id is not undefined
-        userId: fleetAccount?.userId!,
-        fleetId: fleetAccount?.fleetId!,
-        accessPhrase: fleetAccount?.accessPhrase!,
-        connected: fleetAccount?.connected!, // Default to false if undefined
-      }
     },
   };
 };

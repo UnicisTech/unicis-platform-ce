@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { Button } from 'react-daisyui';
 import * as Yup from 'yup';
 import { Card, InputWithLabel } from '@/components/shared';
-import { FleetAccount, User } from '@prisma/client';
+import { User } from '@prisma/client';
 import FleetStatus from './FleetStatus';
 import { passwordPolicies } from '@/lib/common';
 import { useState } from 'react';
@@ -24,15 +24,12 @@ const schema = Yup.object().shape({
 
 const ConnectFleet = ({
   user,
-  fleetAccount,
 }: {
     user: Partial<User>,
-    fleetAccount: Partial<FleetAccount>,
 }) => {
   const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = useState(false);
   const userId = user.id;
-  const fleetAccountId = fleetAccount?.fleetId
   
   const createFleetAccount = useCreateFleetAccount();
   const accessFleetAccount = useAccessFleetAccount();
@@ -57,7 +54,7 @@ const ConnectFleet = ({
         console.error('Invalid data from user');
       }
       try {
-        if (!fleetAccountId) {
+        if (!user.fleetId) {
           await createFleetAccount(userEmail!, firstName!, lastName!, fleetPassword);
         }
         if (userId) {
@@ -79,7 +76,7 @@ const ConnectFleet = ({
   const handleDisconnect = async () => {
     if (userId) {
       setIsLoading(true);
-      const disconnect = await disconnectFleetAccount(userId, fleetAccount.fleetId!);
+      const disconnect = await disconnectFleetAccount(userId);
       if (disconnect) {
         toast.success('Disconnected from fleet account');
       }
@@ -95,7 +92,8 @@ const ConnectFleet = ({
             <Card.Description>{t('fleet-connect-description')}</Card.Description>
           </Card.Header>
           <div className="flex flex-col space-y-3">
-            {fleetAccount == null || fleetAccount?.connected == false ?
+          
+            {user.fleetAccessPhrase == null ?
               <>
                 <FleetStatus/>
                 <InputWithLabel
@@ -121,12 +119,12 @@ const ConnectFleet = ({
           </div>
         </Card.Body>
         <Card.Footer>
-          {fleetAccount?.connected ? (
+          {user.fleetAccessPhrase ? (
             <Button
               type="button"
               color="error"
               loading={isLoading}
-              disabled={!fleetAccount?.connected}
+              disabled={!user.fleetAccessPhrase}
               onClick={handleDisconnect}
               size="md"
             >

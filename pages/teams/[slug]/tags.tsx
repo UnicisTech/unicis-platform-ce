@@ -1,21 +1,22 @@
-import env from '@/lib/env';
-import type { GetServerSidePropsContext } from 'next';
-import { getSession } from '@/lib/session';
-import { getUserBySession } from 'models/user';
+import type { NextPageWithLayout } from 'types';
+import type { InferGetServerSidePropsType } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import FleetContainer from '@/components/interfaces/Fleet/FleetContainer';
+import { GetServerSidePropsContext } from 'next';
+import { getTeam } from 'models/team';
+import env from '@/lib/env';
+import { getUserBySession } from '@/models/user';
+import { getSession } from '@/lib/session';
 import { TeamTab } from '@/components/team';
-import { getTeam } from '@/models/team';
+import Tags from '@/components/interfaces/Tag/Tags';
 
 
-const Fleet = ({ teamFeatures, team, user }) => {
-  
+const AllTags: NextPageWithLayout<
+  InferGetServerSidePropsType<typeof getServerSideProps>
+> = ({ user, team, teamFeatures }) => {
   return (
     <>
-      <TeamTab activeTab="fleet" team={team} teamFeatures={teamFeatures} />
-      <div className="space-y-6">
-        <FleetContainer user={user}/>
-      </div>
+      <TeamTab activeTab="tags" team={team} teamFeatures={teamFeatures} />
+      <Tags team={team} user={user} />
     </>
   );
 };
@@ -54,4 +55,4 @@ export const getServerSideProps = async (
   };
 };
 
-export default Fleet;
+export default AllTags;

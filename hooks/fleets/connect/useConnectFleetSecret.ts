@@ -1,24 +1,23 @@
 import { defaultHeaders } from "@/lib/common";
 
-export const useDisconnectFleetSecret = () => {
-  const disconnectFleetSecret = async (teamId: string, fleetTeamId: string) => {
+export const useConnectFleetSecret = () => {
+  const connectFleetSecret = async (teamId: string, fleetTeamId: string, secret: string) => {
     const response = await fetch('/api/fleet/secret', {
-      method: 'POST',
+      method: 'PUT',
       headers: defaultHeaders,
       body: JSON.stringify({
         teamId,
         fleetTeamId,
-        secret: '',
-        active: false,
+        secret,
       }),
     });
 
     if (!response.ok) {
-      throw new Error('Failed to disconnect fleet');
+      throw new Error('Failed to connect fleet');
     }
 
     return response.json();
   };
 
-  return disconnectFleetSecret;
+  return connectFleetSecret;
 };
