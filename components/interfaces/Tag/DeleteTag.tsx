@@ -1,30 +1,32 @@
 import React from 'react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { Modal, Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
-import type { ApiResponse } from 'types';
+import useTasks from 'hooks/useTasks';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
-import { useDeleteQuery } from '@/hooks/fleets/querys/useDeleteQuery';
 import { InputWithLabel } from '@/components/shared';
+import { useDeleteTag } from '@/hooks/fleets/Tags/useDeleteTag';
 
-const DeleteQuery = ({
-  queryId,
+const DeleteTag = ({
+  tagId,
   visible,
   setVisible,
   fleetTeamId,
   fleetAccessPhrase
 }: {
-  queryId: string;
+  tagId: string;
   visible: boolean;
   setVisible: (visible: boolean) => void;
   fleetTeamId: string;
-  fleetAccessPhrase?: string;
+  fleetAccessPhrase: string;
 }) => {
+  const router = useRouter();
+  const { slug } = router.query;
+  const { mutateTasks } = useTasks(slug as string);
   const { t } = useTranslation('common');
 
-  const deleteQuery = useDeleteQuery();
+  const deleteTag = useDeleteTag();
 
   const formik = useFormik({
     initialValues: {
@@ -32,9 +34,10 @@ const DeleteQuery = ({
     },
     onSubmit: async (values) => {
 
-      if (values.name === 'DELETE QUERY') {
-        await deleteQuery(fleetTeamId, queryId, fleetAccessPhrase)
-        toast.loading(t('Delete Query'));
+      if (values.name === 'DELETE TAG') {
+        await deleteTag(fleetTeamId, tagId, fleetAccessPhrase)
+        toast.loading(t('Delete Tag'));
+        mutateTasks();
         formik.resetForm();
         setVisible(false);
       } else {
@@ -47,11 +50,11 @@ const DeleteQuery = ({
   return (
     <Modal open={visible}>
       <form onSubmit={formik.handleSubmit} method="DELETE">
-        <Modal.Header className="font-bold">{`Delete query`}</Modal.Header>
+        <Modal.Header className="font-bold">{`Delete tag`}</Modal.Header>
         <Modal.Body>
           <div className="mt-2 flex flex-col space-y-4">
-            <p>{t('fleet-delete-pack-warning')}</p>
-            <p className='text-gray-300 text-xs'>This is the confirm text <span className='text-orange-400'>DELETE QUERY</span></p>
+            <p>{t('fleet-delete-tag-warning')}</p>
+            <p className='text-gray-300 text-xs'>This is the confirm text <span className='text-orange-400'>DELETE TAG</span></p>
           </div>
           <InputWithLabel
             type="text"
@@ -66,7 +69,7 @@ const DeleteQuery = ({
             } 
             onChange={formik.handleChange}
           />
-          <span className='text-xs'>{t('fleet-delete-pack-description')}</span>
+          <span className='text-xs'>{t('fleet-delete-tag-description')}</span>
         </Modal.Body>
         <Modal.Actions>
           <Button
@@ -92,4 +95,4 @@ const DeleteQuery = ({
   );
 };
 
-export default DeleteQuery;
+export default DeleteTag;

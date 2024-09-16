@@ -3,16 +3,15 @@ import { Button } from 'react-daisyui';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { Error, Loading, PlatformBadge } from '@/components/shared';
+import { Error, Loading } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
 import { WithLoadingAndError } from '@/components/shared';
 import type { Team, User } from '@prisma/client';
-import { Tag } from '@/types/fleet';
-import { PLATFORMS } from '@/lib/fleet/constants';
 import FleetStatus from '../Fleet/FleetStatus';
 import CreateTag from './CreateTag';
 import { useTags } from '@/hooks/fleets/Tags/useTags';
 import FormattedDate from '@/components/shared/Date';
+import DeleteTag from './DeleteTag';
 
 
 
@@ -20,9 +19,7 @@ const Tags = ({ team, user }: { team: Team, user: Partial<User> }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const [visible, setVisible] = useState(false);
-  const [editVisible, setEditVisible] = useState(false);
   const [deleteVisible, setDeleteVisible] = useState(false);
-  const [tagToEdit, setTagToEdit] = useState<Tag>({} as Tag);
   const [tagToDelete, setTagToDelete] = useState<null | string>(null);
   
   const { t } = useTranslation('common');
@@ -47,11 +44,6 @@ const Tags = ({ team, user }: { team: Team, user: Partial<User> }) => {
     setDeleteVisible(true);
   };
 
-  const openEditModal = async (tag: Tag) => {
-    setTagToEdit({ ...tag });
-    setEditVisible(true);
-  };
-
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
       {user.fleetAccessPhrase ?
@@ -59,10 +51,10 @@ const Tags = ({ team, user }: { team: Team, user: Partial<User> }) => {
           <div className="flex justify-between items-center">
             <div className="space-y-3">
               <h2 className="text-xl font-medium leading-none tracking-tight">
-                {t('fleet-all-packs')}
+                {t('fleet-all-tags')}
               </h2>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                {t('fleet-pack-listed')}
+                {t('fleet-tag-listed')}
               </p>
             </div>
 
@@ -90,9 +82,6 @@ const Tags = ({ team, user }: { team: Team, user: Partial<User> }) => {
                 </th>
                 <th scope="col" className="px-6 py-3">
                   {t('created_at')}
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  {t('updated_at')}
                 </th>
                 <th scope="col" className="px-6 py-3">
                   {t('Analysis')}
@@ -123,12 +112,7 @@ const Tags = ({ team, user }: { team: Team, user: Partial<User> }) => {
                       </td>
                       <td className="px-6 py-3">
                         <div className="flex items-center justify-start space-x-2">
-                          <FormattedDate dateString={tag.created_at} />
-                        </div>
-                      </td>
-                      <td className="px-6 py-3">
-                        <div className="flex items-center justify-start space-x-2">
-                          <FormattedDate dateString={tag.updated_at} />
+                          <FormattedDate style={'text-xs'}  dateString={tag.updated_at} />
                         </div>
                       </td>
                       <td className="px-6 py-3 w-80">
@@ -153,19 +137,7 @@ const Tags = ({ team, user }: { team: Team, user: Partial<User> }) => {
                       </td>
                       <td className="px-6 py-3">
                         <div className="gap-2 btn-group">
-                          {canAccess('task', ['update']) && (
-                            <Button
-                              className="dark:text-gray-100"
-                              size="sm"
-                              variant="outline"
-                              onClick={() => {
-                                openEditModal(tag);
-                              }}
-                            >
-                              {t('edit-task')}
-                            </Button>
-                          )}
-                          {canAccess('task', ['delete']) && (
+                          {canAccess('team_fleet_tag', ['delete']) && (
                             <Button
                               className="dark:text-gray-100"
                               size="sm"
@@ -185,19 +157,13 @@ const Tags = ({ team, user }: { team: Team, user: Partial<User> }) => {
             </tbody>
           </table>
           <CreateTag user={user} fleetTeamId={team?.fleetTeamId!} visible={visible} setVisible={setVisible}/>
-          {/* {editVisible && (
-            <EditPack
-              visible={editVisible}
-              setVisible={setEditVisible}
-              team={team}
-              pack={tagToEdit}
-            />
-          )} */}
-          {/* <DeletePack
+          <DeleteTag
             visible={deleteVisible}
             setVisible={setDeleteVisible}
-            taskNumber={tagToDelete}
-          /> */}
+            tagId={tagToDelete!}
+            fleetAccessPhrase={user.fleetAccessPhrase!}
+            fleetTeamId={team?.fleetTeamId!}
+          />
         </div>
         :
         <>

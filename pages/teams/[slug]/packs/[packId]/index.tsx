@@ -41,7 +41,7 @@ const PackById = ({teamFeatures, user}) => {
         taskTitle={'Packs'}
         backTo={`/teams/${slug}/packs`}
         teamName={slug as string}
-        taskNumber={packId as string}
+        path={packId as string}
       />
       <h3 className="text-2xl font-bold">{'Pack Details'}</h3>
       <PackTab activeTab={activeTab} setActiveTab={setActiveTab} />

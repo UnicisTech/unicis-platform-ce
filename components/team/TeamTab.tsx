@@ -156,6 +156,18 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
       icon: CodeBracketSquareIcon,
     });
   }
+
+  if (
+    teamFeatures.fleetPack &&
+    canAccess('team_fleet_pack', ['create', 'update', 'read', 'delete'])
+  ) {
+    navigations.push({
+      name: 'Nodes',
+      href: `/teams/${team.slug}/nodes`,
+      active: activeTab === 'nodes',
+      icon: CodeBracketSquareIcon,
+    });
+  }
   
   return (
     <div className="flex flex-col pb-6">

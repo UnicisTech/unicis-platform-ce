@@ -21,6 +21,7 @@ interface FormData {
   platform: ValueType<Option>,
   version,
   shard,
+  tags,
   description,
   [key: string]: string | ValueType<Option>;
 }
@@ -54,8 +55,8 @@ const CreatePack = ({
       <Modal.Header className="font-bold">Create Pack</Modal.Header>
       <Form<FormData>
         onSubmit={async (data, { reset }) => {
-          const { name, platform, version, shard, description } = data;
-          const packData = {name, platform: platform?.value, version, shard, description};
+          const { name, platform, version, shard, description, tags } = data;
+          const packData = {name, platform: platform?.value, version, shard, description, tags};
           try {
             await createPack(fleetTeamId, packData, user?.fleetAccessPhrase!);
             toast.success(t('success-creating-pack'));
@@ -164,6 +165,20 @@ const CreatePack = ({
                     </Fragment>
                   )}
                 </Field>
+
+                <Field
+                    aria-required={false}
+                    name="tags"
+                    label="Tags"
+                    isRequired={false}
+                  >
+                    {({ fieldProps }) => (
+                      <Fragment>
+                        <TextField autoComplete="off" {...fieldProps} />
+                      </Fragment>
+                    )}
+                </Field>
+                
                 <FormFooter></FormFooter>
               </div>
             </Modal.Body>

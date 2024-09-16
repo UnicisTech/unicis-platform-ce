@@ -114,6 +114,7 @@ const env = {
     fleetQuery: process.env.FEATURE_TEAM_FLEET_QUERY === 'false' ? false : true,
     fleetPack: process.env.FEATURE_TEAM_FLEET_PACK === 'false' ? false : true,
     fleetTag: process.env.FEATURE_TEAM_FLEET_TAG === 'false' ? false : true,
+    fleetNode: process.env.FEATURE_TEAM_FLEET_NODE === 'false' ? false : true,
   },
 
   recaptcha: {

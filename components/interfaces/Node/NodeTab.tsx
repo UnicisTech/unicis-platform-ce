@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { queryNavigations } from '@/lib/fleet/querys';
 
-const TagsTab = ({
+const NodeTab = ({
   activeTab,
   setActiveTab,
 }: {
@@ -39,4 +39,4 @@ const TagsTab = ({
   );
 };
 
-export default TagsTab;
+export default NodeTab;

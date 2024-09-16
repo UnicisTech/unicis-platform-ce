@@ -6,20 +6,20 @@ import { Loading, Error, Card } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
 import useTeam from 'hooks/useTeam';
 import useCanAccess from 'hooks/useCanAccess';
-import PackTab from '@/components/interfaces/Pack/PackTab';
 import PackDetails from '@/components/interfaces/Pack/PackDetails';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
 import Breadcrumb from '@/components/shared/Breadcrumb';
-import PackTags from '@/components/interfaces/Pack/PackTags';
+import TagsTab from '@/components/interfaces/Tag/TagsTab';
+import TagDetails from '@/components/interfaces/Tag/TagDetails';
 
 const TagById = ({teamFeatures, user}) => {
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
-  const { packId, slug } = router.query;
+  const { tagId, slug } = router.query;
 
   const {
     team,
@@ -38,16 +38,36 @@ const TagById = ({teamFeatures, user}) => {
   return (
     <>
       <Breadcrumb
-        taskTitle={'Packs'}
-        backTo={`/teams/${slug}/packs`}
+        taskTitle={'Tags'}
+        backTo={`/teams/${slug}/tags`}
         teamName={slug as string}
-        taskNumber={packId as string}
+        path={tagId as string}
       />
       <h3 className="text-2xl font-bold">{'Pack Details'}</h3>
-      <PackTab activeTab={activeTab} setActiveTab={setActiveTab} />
+      <TagsTab activeTab={activeTab} setActiveTab={setActiveTab} />
       <Card heading="Details">
         <Card.Body>
-          <PackDetails user={user} fleetTeamId={team?.fleetTeamId!} packID={packId as string} />
+          <TagDetails user={user} fleetTeamId={team?.fleetTeamId!} tagID={tagId as string} />
+        </Card.Body>
+      </Card>
+       <Card heading="Nodes">
+        <Card.Body>
+          Nodes
+        </Card.Body>
+      </Card>
+      <Card heading="Querys">
+        <Card.Body>
+          Querys
+        </Card.Body>
+      </Card>
+       <Card heading="Pack">
+        <Card.Body>
+          Pack
+        </Card.Body>
+      </Card>
+      <Card heading="Flies Path">
+        <Card.Body>
+          Flies Path
         </Card.Body>
       </Card>
     </>
@@ -79,6 +99,7 @@ export const getServerSideProps = async (
         lastName: user.lastName,
         image: user.image,
         fleetId: user.fleetId,
+        fleetAccessPhrase: user.fleetAccessPhrase
       },
     },
   };

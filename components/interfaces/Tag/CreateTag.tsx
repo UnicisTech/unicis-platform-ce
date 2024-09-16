@@ -3,26 +3,15 @@ import toast from 'react-hot-toast';
 import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import TextField from '@atlaskit/textfield';
-import Select, { ValueType } from '@atlaskit/select';
 import type { User } from '@prisma/client';
 import Button, { LoadingButton } from '@atlaskit/button';
-import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
-import { WithoutRing } from 'sharedStyles';
+import Form, { Field, FormFooter } from '@atlaskit/form';
 import 'react-quill/dist/quill.snow.css';
-import dynamic from 'next/dynamic';
-import { PLATFORMS } from "@/lib/fleet/constants";
-import { useCreatePack } from '@/hooks/fleets/packs/useCreatePack';
-
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import { useCreateTag } from '@/hooks/fleets/Tags/useCreateTag';
 
 
 interface FormData {
-  name,
-  platform: ValueType<Option>,
-  version,
-  shard,
-  description,
-  [key: string]: string | ValueType<Option>;
+  values;
 }
 
 interface Option {
@@ -45,21 +34,21 @@ const CreateTag = ({
 }) => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
-  const createPack = useCreatePack();
+  const createTag = useCreateTag();
   const { t } = useTranslation('common');
 
   return (
     <Modal open={visible}>
-      <Modal.Header className="font-bold">Create Pack</Modal.Header>
+      <Modal.Header className="font-bold">Create Tag</Modal.Header>
       <Form<FormData>
         onSubmit={async (data, { reset }) => {
-          const { name, platform, version, shard, description } = data;
-          const packData = {name, platform: data.platform?.value, version, shard, description};
+          const { values } = data;
+          const packData = {values};
           try {
-            await createPack(fleetTeamId, packData, user?.fleetAccessPhrase!);
-            toast.success(t('success-creating-pack'));
+            await createTag(fleetTeamId, packData, user?.fleetAccessPhrase!);
+            toast.success(t('success-creating-tag'));
           } catch (err) {
-            toast.error(t('error-creating-pack'));
+            toast.error(t('error-creating-tag'));
           };
         }}
       >
@@ -81,85 +70,13 @@ const CreateTag = ({
               >
                 <Field
                   aria-required={true}
-                  name="name"
-                  label="Name"
+                  name="values"
+                  label="Values"
                   isRequired
                 >
                   {({ fieldProps }) => (
                     <Fragment>
                       <TextField autoComplete="off" {...fieldProps} />
-                    </Fragment>
-                  )}
-                </Field>
-                
-                <Field<ValueType<Option>>
-                  name="platform"
-                  label="Platform"
-                  defaultValue={PLATFORMS.find(
-                    ({ value }) => value === DEFAULT_PLATFORM_VALUE
-                  )}
-                  aria-required={true}
-                  isRequired
-                  validate={async (value) => {
-                    if (value) {
-                      return undefined;
-                    }
-
-                    return new Promise((resolve) =>
-                      setTimeout(resolve, 300)
-                    ).then(() => 'Please select a platform');
-                  }}
-                >
-                  {({ fieldProps: { id, ...rest }, error }) => (
-                    <Fragment>
-                      <WithoutRing>
-                        <Select
-                          inputId={id}
-                          {...rest}
-                          options={PLATFORMS}
-                          defaultValue={PLATFORMS.find(
-                            ({ value }) => value === DEFAULT_PLATFORM_VALUE
-                          )}
-                          validationState={error ? 'error' : 'default'}
-                        />
-                        {error && <ErrorMessage>{error}</ErrorMessage>}
-                      </WithoutRing>
-                    </Fragment>
-                  )}
-                </Field>
-                
-                <div className='grid grid-cols-2 gap-2'>
-                  <Field
-                    aria-required={true}
-                    name="version"
-                    label="Version"
-                    isRequired
-                  >
-                    {({ fieldProps }) => (
-                      <Fragment>
-                        <TextField autoComplete="off" {...fieldProps} />
-                      </Fragment>
-                    )}
-                  </Field>
-
-                  <Field
-                    aria-required={true}
-                    name="shard"
-                    label="Shard"
-                    isRequired
-                  >
-                    {({ fieldProps }) => (
-                      <Fragment>
-                        <TextField autoComplete="off" {...fieldProps} />
-                      </Fragment>
-                    )}
-                  </Field>
-                </div>
-                
-                <Field label="Description" name="description">
-                  {({ fieldProps }: any) => (
-                    <Fragment>
-                      <ReactQuill theme="snow" {...fieldProps} />
                     </Fragment>
                   )}
                 </Field>

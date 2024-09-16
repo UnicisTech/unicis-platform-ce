@@ -63,7 +63,7 @@ const TaskById = ({
         taskTitle={task.title}
         backTo={`/teams/${slug}/tasks`}
         teamName={slug as string}
-        taskNumber={taskNumber as string}
+        path={taskNumber as string}
       />
       <h3 className="text-2xl font-bold">{task.title}</h3>
       <TaskTab activeTab={activeTab} setActiveTab={setActiveTab} />

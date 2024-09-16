@@ -17,6 +17,7 @@ export type Resource =
   | 'team_fleet_pack'
   | 'team_fleet_query'
   | 'team_fleet_tag'
+  | 'team_fleet_node'
   | 'task';
 
 export type RolePermissions = {
@@ -105,6 +106,10 @@ export const permissions: RolePermissions = {
       resource: 'team_fleet_tag',
       actions: '*',
     },
+    {
+      resource: 'team_fleet_node',
+      actions: '*',
+    },
   ],
   ADMIN: [
     {
@@ -163,6 +168,10 @@ export const permissions: RolePermissions = {
       resource: 'team_fleet_tag',
       actions: '*',
     },
+    {
+      resource: 'team_fleet_node',
+      actions: '*',
+    },
   ],
   MEMBER: [
     {
@@ -193,6 +202,10 @@ export const permissions: RolePermissions = {
       resource: 'team_fleet_tag',
       actions: ['read'],
     },
+    {
+      resource: 'team_fleet_node',
+      actions: ['read'],
+    },
   ],
   AUDITOR: [
     {
@@ -217,6 +230,10 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'team_fleet_query',
+      actions: ['read'],
+    },
+    {
+      resource: 'team_fleet_node',
       actions: ['read'],
     },
   ],

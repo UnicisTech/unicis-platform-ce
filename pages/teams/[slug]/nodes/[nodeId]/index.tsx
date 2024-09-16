@@ -6,25 +6,27 @@ import { Loading, Error, Card } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
 import useTeam from 'hooks/useTeam';
 import useCanAccess from 'hooks/useCanAccess';
-import QueryTab from '@/components/interfaces/Query/QueryTab';
-import Breadcrumb from '@/components/shared/Breadcrumb';
-import QueryDetails from '@/components/interfaces/Query/QueryDetails';
+import PackTab from '@/components/interfaces/Pack/PackTab';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
+import Breadcrumb from '@/components/shared/Breadcrumb';
+import NodeDetails from '@/components/interfaces/Node/NodeDetails';
 
-const QueryById = ({teamFeatures, user}) => {
+
+const NodeById = ({teamFeatures, user}) => {
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
-  const { queryId, slug } = router.query;
+  const { nodeId, slug } = router.query;
+
   const {
     team,
     isLoading: isTeamLoading,
     isError: isTeamError,
   } = useTeam(slug as string);
-  
+
   if (isTeamLoading) {
     return <Loading />;
   }
@@ -36,16 +38,26 @@ const QueryById = ({teamFeatures, user}) => {
   return (
     <>
       <Breadcrumb
-        taskTitle={'Query'}
-        backTo={`/teams/${slug}/querys`}
+        taskTitle={'Nodes'}
+        backTo={`/teams/${slug}/nodes`}
         teamName={slug as string}
-        path={queryId as string}
+        path={nodeId as string}
       />
-      <h3 className="text-2xl font-bold">{'Querys'}</h3>
-      <QueryTab activeTab={activeTab} setActiveTab={setActiveTab} />
+      <h3 className="text-2xl font-bold">{'Node Details'}</h3>
+      <PackTab activeTab={activeTab} setActiveTab={setActiveTab} />
       <Card heading="Details">
         <Card.Body>
-          <QueryDetails user={user} fleetTeamId={team?.fleetTeamId!} queryID={queryId as string} />
+          <NodeDetails user={user} fleetTeamId={team?.fleetTeamId!} nodeID={nodeId as string} />
+        </Card.Body>
+      </Card>
+      <Card heading="Querys">
+        <Card.Body>
+          Querys
+        </Card.Body>
+      </Card>
+      <Card heading="Tags">
+        <Card.Body>
+          Tags
         </Card.Body>
       </Card>
     </>
@@ -78,9 +90,9 @@ export const getServerSideProps = async (
         image: user.image,
         fleetId: user.fleetId,
         fleetAccessPhrase: user.fleetAccessPhrase
-      }
+      },
     },
   };
 };
 
-export default QueryById;
+export default NodeById;

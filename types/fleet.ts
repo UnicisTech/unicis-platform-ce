@@ -62,6 +62,7 @@ export interface Pack extends FleetBase {
   description?: string;
   shard?: number;
   team: string;
+  tags?: Tag[];
 }
 
 export interface QuerysResponse {
@@ -76,7 +77,7 @@ export interface TagsResponse {
   tags: Tag[];
 }
 
-export interface TagsWithRelationships {
+export interface TagsWithRelationships extends Tag {
   packs: Pack[];
   queries: Query[];
 }
@@ -109,13 +110,7 @@ export interface Query extends FleetBase {
   shard: number;
 };
 
-export interface PackWithRelationships extends FleetBase {
-  name: string;
-  platform?: string;
-  version: string;
-  description?: string;
-  shard?: number;
-  team: string;
+export interface PackWithRelationships extends Pack {
   queries: Query[];
   tags: Tag[]
 }
@@ -127,9 +122,21 @@ export interface Node extends FleetBase{
   enrolled_on?: string;
   host_identifier?: string;
   last_checkin?: string;
-  node_info?: Record<string, any>;
+  node_info?: NodeInfo;
   is_active: boolean;
   last_ip?: string;
+}
+
+export interface NodesResponse {
+  nodes: Node[];
+};
+
+export interface NodeWithRelationships extends Node {
+  tags: Tag[];
+}
+
+export interface NodesWithRelationshipsResponse {
+  nodes: NodeWithRelationships[];
 }
 
 export interface DistributedQuery extends FleetBase{
@@ -156,4 +163,92 @@ export interface StatusLog extends FleetBase {
 
 export interface DistributedQueryResult extends FleetBase {
   distributed_query_id: number;
+}
+
+
+// NODE INFOMATION
+
+// Interface for OS Version details
+interface OSVersion {
+  _id: string;
+  arch: string;
+  codename: string;
+  major: string;
+  minor: string;
+  name: string;
+  patch: string;
+  pid_with_namespace: string;
+  platform: string;
+  platform_like: string;
+  version: string;
+}
+
+// Interface for OSQuery Info
+interface OSQueryInfo {
+  build_distro: string;
+  build_platform: string;
+  config_hash: string;
+  config_valid: string;
+  extensions: string;
+  instance_id: string;
+  pid: string;
+  platform_mask: string;
+  start_time: string;
+  uuid: string;
+  version: string;
+  watcher: string;
+}
+
+// Interface for Platform Info
+interface PlatformInfo {
+  address: string;
+  date: string;
+  extra: string;
+  firmware_type: string;
+  revision: string;
+  size: string;
+  vendor: string;
+  version: string;
+  volume_size: string;
+}
+
+// Interface for System Info
+interface SystemInfo {
+  board_model: string;
+  board_serial: string;
+  board_vendor: string;
+  board_version: string;
+  computer_name: string;
+  cpu_brand: string;
+  cpu_logical_cores: string;
+  cpu_microcode: string;
+  cpu_physical_cores: string;
+  cpu_sockets: string;
+  cpu_subtype: string;
+  cpu_type: string;
+  hardware_model: string;
+  hardware_serial: string;
+  hardware_vendor: string;
+  hardware_version: string;
+  hostname: string;
+  local_hostname: string;
+  physical_memory: string;
+  uuid: string;
+}
+
+// Interface for Host Details
+interface HostDetails {
+  os_version: OSVersion;
+  osquery_info: OSQueryInfo;
+  platform_info: PlatformInfo;
+  system_info: SystemInfo;
+}
+
+// Main NodeInfo interface
+export interface NodeInfo {
+  enroll_secret: string;
+  host_identifier: string;
+  platform_type: string;
+  host_details: HostDetails;
+  node_key?: string;
 }

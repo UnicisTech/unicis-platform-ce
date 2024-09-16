@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next';
 const Breadcrumb = ({
   teamName,
   taskTitle,
-  taskNumber,
+  path,
   backTo
 }: {
   teamName: string;
   taskTitle: string;
-  taskNumber: string;
+  path: string;
   backTo?: string;
 }) => {
   const { t } = useTranslation('common');
@@ -21,7 +21,7 @@ const Breadcrumb = ({
         <li>
           <Link href={backTo || '/'}>{taskTitle}</Link>
         </li>
-        <li>{`${taskNumber}`}</li>
+        <li>{`${path}`}</li>
       </ul>
     </div>
   );

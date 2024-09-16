@@ -49,7 +49,7 @@ const DeletePack = ({
 
   return (
     <Modal open={visible}>
-      <form onSubmit={formik.handleSubmit} method="POST">
+      <form onSubmit={formik.handleSubmit} method="DELETE">
         <Modal.Header className="font-bold">{`Delete pack`}</Modal.Header>
         <Modal.Body>
           <div className="mt-2 flex flex-col space-y-4">
