@@ -263,5 +263,6 @@
   "wise-payment-details": "Payment link will be added as soon as your request is processed.",
   "pay-now": "Pay Now",
   "auth-limited": "Too many login attempts. Please try again in 1 minute.",
-  "support": "Support"
+  "support": "Support",
+  "ai-chatbot": "AI Chatbot"
 }

@@ -135,3 +135,11 @@ export type SubscriptionWithPayments = Prisma.SubscriptionGetPayload<{
 }>;
 
 export type UserReturned = Pick<User, 'name' | 'firstName' | 'lastName'>;
+
+export type ChatbotResponse = {
+  content: string;
+  role: string;
+};
+export type ChatbotResponseReturned = {
+  response: ChatbotResponse;
+};

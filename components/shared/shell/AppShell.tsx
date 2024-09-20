@@ -7,6 +7,8 @@ import Drawer from './Drawer';
 import GlobalTheme from '@atlaskit/theme/components';
 import { ThemeModes } from '@atlaskit/theme/types';
 
+import AiChat from './AiChat';
+
 export default function AppShell({ children }) {
   const { data, status } = useSession();
 
@@ -45,6 +47,7 @@ export default function AppShell({ children }) {
   return (
     <GlobalTheme.Provider value={getAtlaskitThemeMode}>
       <Drawer sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <AiChat />
       <div className="lg:pl-64 dark:border-gray-200">
         <Header
           setSidebarOpen={setSidebarOpen}
