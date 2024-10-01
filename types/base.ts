@@ -2,6 +2,7 @@ import type { Prisma, TeamMember, User, Comment } from '@prisma/client';
 import type { TaskCscProperties, TeamCscProperties } from './csc';
 import type { TaskTiaProperties } from './tia';
 import type { TaskRpaProperties } from './rpa';
+import { TeamIapProperties } from './iap';
 
 export type ApiError = {
   code?: string;
@@ -112,7 +113,7 @@ export type Diff = {
 
 export type TeamMemberWithUser = TeamMember & { user: User };
 
-export type TeamProperties = TeamCscProperties;
+export type TeamProperties = TeamCscProperties & TeamIapProperties;
 
 export type TaskProperties = TaskTiaProperties &
   TaskCscProperties &
