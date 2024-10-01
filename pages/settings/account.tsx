@@ -7,7 +7,6 @@ import { getUserBySession } from 'models/user';
 import { inferSSRProps } from '@/lib/inferSSRProps';
 import { UpdateAccount } from '@/components/account';
 import env from '@/lib/env';
-import { getFleet } from '@/models/fleet';
 import AccountTab from '@/components/account/AccountTab';
 
 

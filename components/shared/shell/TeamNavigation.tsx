@@ -1,6 +1,6 @@
 import {
   Cog6ToothIcon,
-  CommandLineIcon,
+  ComputerDesktopIcon,
   CodeBracketIcon,
   ChatBubbleBottomCenterTextIcon,
 } from '@heroicons/react/24/outline';
@@ -61,6 +61,15 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname.includes('csc'),
     },
     {
+      name: t('Asset Dashboard'),
+      href: `/teams/${slug}/asset`,
+      icon: ComputerDesktopIcon,
+      className: 'fill-blue-600 stroke-blue-600',
+      active:
+        activePathname?.startsWith(`/teams/${slug}`) &&
+        activePathname.includes('asset'),
+    },
+    {
       name: 'line-break',
       href: '',
     },
@@ -89,7 +98,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       className: 'stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        /(settings|billing|members|saml|directory-sync|audit-logs|webhooks|api-keys|fleet|querys|tags|packs)/.test(
+        /(settings|billing|members|saml|directory-sync|audit-logs|webhooks|api-keys|fleet|querys|tags|packs|distributors|asset-management)/.test(
           activePathname
         ),
     },

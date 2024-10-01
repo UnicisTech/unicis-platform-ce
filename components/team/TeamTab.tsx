@@ -7,7 +7,7 @@ import {
   ShieldExclamationIcon,
   UserPlusIcon,
   TagIcon,
-  CodeBracketSquareIcon
+  CodeBracketSquareIcon,
 } from '@heroicons/react/24/outline';
 import type { Team } from '@prisma/client';
 import classNames from 'classnames';
@@ -110,62 +110,14 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   }
 
   if (
-    teamFeatures.fleetConnect &&
+    teamFeatures.fleetTag &&
     canAccess('team_fleet_connect', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({
-      name: 'Fleet',
-      href: `/teams/${team.slug}/fleet`,
-      active: activeTab === 'fleet',
-      icon: Cog6ToothIcon,
-    });
-  }
-
-  if (
-    teamFeatures.fleetTag &&
-    canAccess('team_fleet_tag', ['create', 'update', 'read', 'delete'])
-  ) {
-    navigations.push({
-      name: 'Tags',
-      href: `/teams/${team.slug}/tags`,
-      active: activeTab === 'tags',
+      name: 'Asset Management',
+      href: `/teams/${team.slug}/asset-management`,
+      active: activeTab === 'asset-management',
       icon: TagIcon,
-    });
-  }
-
-  if (
-    teamFeatures.fleetQuery &&
-    canAccess('team_fleet_query', ['create', 'update', 'read', 'delete'])
-  ) {
-    navigations.push({
-      name: 'Querys',
-      href: `/teams/${team.slug}/querys`,
-      active: activeTab === 'querys',
-      icon: CodeBracketIcon,
-    });
-  }
-
-  if (
-    teamFeatures.fleetPack &&
-    canAccess('team_fleet_pack', ['create', 'update', 'read', 'delete'])
-  ) {
-    navigations.push({
-      name: 'Packs',
-      href: `/teams/${team.slug}/packs`,
-      active: activeTab === 'packs',
-      icon: CodeBracketSquareIcon,
-    });
-  }
-
-  if (
-    teamFeatures.fleetPack &&
-    canAccess('team_fleet_pack', ['create', 'update', 'read', 'delete'])
-  ) {
-    navigations.push({
-      name: 'Nodes',
-      href: `/teams/${team.slug}/nodes`,
-      active: activeTab === 'nodes',
-      icon: CodeBracketSquareIcon,
     });
   }
   

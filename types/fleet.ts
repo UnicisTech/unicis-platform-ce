@@ -122,7 +122,7 @@ export interface Node extends FleetBase{
   enrolled_on?: string;
   host_identifier?: string;
   last_checkin?: string;
-  node_info?: NodeInfo;
+  node_info?: HostDetails;
   is_active: boolean;
   last_ip?: string;
 }
@@ -140,7 +140,7 @@ export interface NodesWithRelationshipsResponse {
 }
 
 export interface DistributedQuery extends FleetBase{
-  team: string; 
+  team: string;
   sql: string;
   description?: string;
   not_before?: string;
@@ -148,11 +148,15 @@ export interface DistributedQuery extends FleetBase{
   tags?: Tag[];
 }
 
+export interface DistributedQueryResponse {
+  distributor: DistributedQuery[];
+}
+
 export interface DistributedQueryTask extends FleetBase {
   guid: string;
   status: 0 | 1 | 2 | 3;
   timestamp?: string;
-  distributed_query_id: number;
+  distributed_query_id: string;
   node_id: string;
 }
 
@@ -162,7 +166,7 @@ export interface StatusLog extends FleetBase {
 }
 
 export interface DistributedQueryResult extends FleetBase {
-  distributed_query_id: number;
+  distributed_query_id: string;
 }
 
 
@@ -244,11 +248,3 @@ interface HostDetails {
   system_info: SystemInfo;
 }
 
-// Main NodeInfo interface
-export interface NodeInfo {
-  enroll_secret: string;
-  host_identifier: string;
-  platform_type: string;
-  host_details: HostDetails;
-  node_key?: string;
-}
