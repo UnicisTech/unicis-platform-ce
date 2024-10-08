@@ -1,22 +1,15 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { getAxiosError } from '@/lib/common';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
-import Form from '@atlaskit/form';
-import type { ApiResponse, IapCourse, TaskWithRpaProcedure, TeamCourseWithProgress } from 'types';
-import type { Task } from '@prisma/client';
+import AtlaskitButton from '@atlaskit/button';
+import type { ApiResponse, TeamCourseWithProgress } from 'types';
 import { defaultHeaders } from '@/lib/common';
 import CompletionResultsChart from './CompletionResultsChart';
-import ProgressBadge from './ProgressBadge';
-import { countCourseAnswers } from '@/lib/iap';
-import { StatusBadge } from '@/components/shared';
-import StatusResultsChart from './StatusREsultsChart';
+import ProgressBadge from '../shared/ProgressBadge';
 
-const StatusResults = ({
+const CompletionResults = ({
     teamCourse,
     visible,
     setVisible,
@@ -45,35 +38,20 @@ const StatusResults = ({
 
                 const json = (await response.json()) as ApiResponse<any>;
 
-                console.log('completion-results', json)
-
                 if (!response.ok) {
                     toast.error(json.error.message);
                     return;
                 }
 
-                //TODO: rename state, we filter only completed, or change api enpoint
-
-                setTeamMembersWithProgress(json.data.teamMembersWithProgress.filter(member => member?.progress?.progress === 100))
-
-
-
-                // toast.success(t('iap-course-saved'));
-                // mutateProgress();
+                setTeamMembersWithProgress(json.data.teamMembersWithProgress)
             } catch (e) {
-                //TODO: catch error
-            } finally {
-                // setIsSaving(false)
-
+                toast.error(t('iap-completion-results-failed'));
             }
         }
 
         fetchCompletionResults()
     }, [])
 
-    //const { right, wrong } = countCourseAnswers(answers, course.questions)
-
-    console.log('teamMembersWithProgress complted', teamMembersWithProgress)
     return (
         <Modal open={visible} className='w-10/12 max-w-5xl'>
             <Modal.Header className="font-bold">
@@ -82,11 +60,11 @@ const StatusResults = ({
             <Modal.Body>
                 <div className='grid grid-cols-2 gap-1'>
                     <div className='col-span-1 h-[300px]'>
-                        {/* //TODO: use different endpoint */}
                         {teamMembersWithProgress &&
-                            <StatusResultsChart
-                                passed={teamMembersWithProgress.filter(member => countCourseAnswers(member.progress.answers, teamCourse.course.questions)?.wrong === 0)?.length}
-                                failed={teamMembersWithProgress.filter(member => countCourseAnswers(member.progress.answers, teamCourse.course.questions)?.wrong !== 0)?.length}
+                            <CompletionResultsChart
+                                todo={teamMembersWithProgress.filter(({ progress }) => !progress || progress?.progress === 0).length}
+                                inprogress={teamMembersWithProgress.filter(({ progress }) => progress && (progress.progress > 0 && progress.progress < 100)).length}
+                                completed={teamMembersWithProgress.filter(({ progress }) => progress && progress.progress === 100).length}
                             />
                         }
                     </div>
@@ -95,25 +73,16 @@ const StatusResults = ({
                             <thead className="bg-base-200">
                                 <tr>
                                     <th>User</th>
-                                    <th>Right</th>
-                                    <th>Wrong</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {teamMembersWithProgress?.map((member: any) => {
-                                    const { right, wrong } = countCourseAnswers(member.progress.answers, teamCourse.course.questions)
                                     return (
                                         <tr key={member.id}>
                                             <td>{member?.user?.name}</td>
-                                            <td>{right}</td>
-                                            <td>{wrong}</td>
                                             <td>
-                                                {!wrong
-                                                    ? <StatusBadge label='Passed' value='done' />
-                                                    : <StatusBadge label='Failed' value='failed' />
-                                                }
-                                            
+                                                <ProgressBadge progress={member?.progress?.progress} />
                                             </td>
                                         </tr>
                                     );
@@ -122,9 +91,6 @@ const StatusResults = ({
                         </table>
                     </div>
                 </div>
-                {/* <div style={{ margin: '1.5rem 0' }}>
-                                
-                            </div> */}
             </Modal.Body>
             <Modal.Actions>
                 <AtlaskitButton
@@ -133,17 +99,10 @@ const StatusResults = ({
                 >
                     {t('close')}
                 </AtlaskitButton>
-                {/* <LoadingButton
-                onClick={deleteCourse}
-                appearance="primary"
-                isLoading={isDeleting}
-              >
-                {t('delete')}
-              </LoadingButton> */}
             </Modal.Actions>
 
         </Modal>
     );
 };
 
-export default StatusResults;
+export default CompletionResults;

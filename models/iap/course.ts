@@ -3,6 +3,7 @@ import { CourseContentType, PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export const getTeamCourses = async (teamId: string, teamMemberId: string) => {
+  // TODO: progress where teamMemberId: permissions check? or calculate the status here
   try {
     const teamCourses = await prisma.teamCourse.findMany({
       where: {
@@ -10,11 +11,12 @@ export const getTeamCourses = async (teamId: string, teamMemberId: string) => {
       },
       include: {
         course: true,
-        progress: {
-          where: {
-            teamMemberId
-          }
-        }
+        progress: true,
+        // progress: {
+        //   where: {
+        //     teamMemberId
+        //   }
+        // }
       }
     })
     return teamCourses
@@ -23,32 +25,6 @@ export const getTeamCourses = async (teamId: string, teamMemberId: string) => {
     throw new Error('Failed to fetch courses for team');
   }
 }
-
-// export const getCoursesByTeam = async (teamId: string, userId?: string) => {
-//   try {
-//     const courses = await prisma.course.findMany({
-//       where: {
-//         teams: {
-//           some: {
-//             teamId: teamId,
-//           },
-//         },
-//       },
-//       include: {
-//         teams: true, // Includes TeamCourse relation
-//         progress: {
-//           where: {
-//             userId: userId, // Filter CourseProgress by the passed userId
-//           },
-//         },
-//       },
-//     });
-//     return courses;
-//   } catch (error) {
-//     console.error('Error fetching courses for team:', error);
-//     throw new Error('Failed to fetch courses for team');
-//   }
-// }
 
 export const getCourse = async (teamCourseId: string, teamMemberId: string) => {
   return await prisma.teamCourse.findFirstOrThrow({
@@ -64,9 +40,6 @@ export const getCourse = async (teamCourseId: string, teamMemberId: string) => {
       }
     }
   })
-  // return await prisma.course.findUniqueOrThrow({
-  //   where: { id: courseId },
-  // });
 }
 
 export const createCourse = async ({
@@ -139,18 +112,23 @@ export const editCourse = async ({
   thumbnail?: string;
 }) => {
   // Rewrite only question that was changed and leave the rest
-  // const updateQuestions = (oldQuestions: any[], updatedQuestions: any[]) => {
-  //   return oldQuestions.map((question, index) => {
-  //     if (index < updatedQuestions.length) {
-  //       return updatedQuestions[index];
-  //     }
-  //     return question;
-  //   });
-  // };
+  const updateQuestions = (oldQuestions: any[], updatedQuestions: any[]) => {
+    const result = [...oldQuestions];
 
-  // const oldCourse = await prisma.course.findFirstOrThrow({
-  //   where: { id: courseId },
-  // })
+    updatedQuestions.forEach((updatedQuestion, index) => {
+      if (updatedQuestion) {
+        result[index] = updatedQuestion;
+      }
+    });
+
+    return result;
+  };
+
+  const oldCourse = await prisma.course.findFirstOrThrow({
+    where: { id: courseId },
+  })
+
+  const updatedQuestions = updateQuestions(oldCourse.questions as any[], questions)
 
   const course = await prisma.course.update({
     where: { id: courseId },
@@ -158,8 +136,7 @@ export const editCourse = async ({
       name,
       categoryId,
       contentType,
-      questions,
-      // questions: updatedQuestions,
+      questions: updatedQuestions,
       programContent,
       description,
       url,

@@ -1,6 +1,5 @@
 import { CourseContentType, CourseProgress, TeamCourse } from "@prisma/client";
 import { Course } from "@prisma/client";
-import { $Enums } from "@prisma/client";
 
 export type TeamIapProperties = {
     iap_categories?: string[];
@@ -11,15 +10,6 @@ type Option = {
     label: string;
     value: string;
 }
-
-// export const questionTypes = [
-//     { label: "Checkbox single answer", value: 'checkboxsingle'},
-//     { label: "Checkbox multiple answers", value: 'checkboxmulti'},
-//     { label: "Dropdown order number", value: 'order'},
-//     { label: "Free text answer", value: 'text'}
-// ]
-
-// type QuestionType = 'checkboxsingle' | 'checkboxmulti' | 'order' | 'text'
 
 export enum QuestionType {
     SINGLE_CHOICE = 'checkboxsingle',
@@ -46,7 +36,6 @@ export type CourseFormData = {
 
 export type QuestionBase = {
     question: string;
-    type: QuestionType;
 }
 
 export type SingleChoiceQuestion = QuestionBase & {
@@ -69,22 +58,9 @@ export type TextQuestion = QuestionBase & {
     answer: string;
 }
 
-export type Question = SingleChoiceQuestion | MultipleChoiceQuestion | OrderQuestion | TextQuestion;
-
-// export type IapCourse = any
-
-// type CourseBase = Course & {
-//     questions: Question[]
-// }
-
-
-// type PresentationCourse = CourseBase & {
-//     contentType: CourseContentType.EMBEDDED_VIDEO;
-// };
-
-// type PresentationCourse = CourseBase & {
-//     contentType: CourseContentType.EMBEDDED_VIDEO
-// }
+export type Question = {
+    question: string;
+} & (SingleChoiceQuestion | MultipleChoiceQuestion | OrderQuestion | TextQuestion)
 
 export type IapCourse = Course & {
     questions: Question[]

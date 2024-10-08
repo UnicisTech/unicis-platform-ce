@@ -66,7 +66,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       icon: () => <Icon src="/unicis-iap-logo.png" />,
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        activePathname.includes('iap'),
+        activePathname.includes('iap') && !activePathname.includes('iap/admin'),
     },
     {
       name: 'line-break',
@@ -102,7 +102,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       className: 'stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        /(settings|billing|members|saml|directory-sync|audit-logs|webhooks|api-keys)/.test(
+        /(settings|billing|members|saml|directory-sync|audit-logs|webhooks|api-keys|iap\/admin)/.test(
           activePathname
         ),
     },

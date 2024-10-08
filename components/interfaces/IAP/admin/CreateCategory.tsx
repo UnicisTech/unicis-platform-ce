@@ -1,8 +1,7 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React from 'react';
 import toast from 'react-hot-toast';
 import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
 import Form, { Field } from '@atlaskit/form';
 import TextField from '@atlaskit/textfield';
@@ -22,12 +21,7 @@ const CreateIapCategory = ({
 }) => {
     const { t } = useTranslation('common');
 
-    const router = useRouter();
-    const { slug } = router.query;
-
-    const onSubmit = async (formData: any, { reset }: any) => {
-            console.log('onSubmit', formData)
-
+    const onSubmit = async (formData: any) => {
             const response = await fetch(`/api/teams/${teamSlug}/iap/category`, {
                 method: 'POST',
                 headers: defaultHeaders,
@@ -35,8 +29,6 @@ const CreateIapCategory = ({
             });
 
             const json = (await response.json()) as ApiResponse<any>;
-
-            console.log('category created json', json)
 
             if (!response.ok) {
                 toast.error(json.error.message);
@@ -51,7 +43,7 @@ const CreateIapCategory = ({
     return (
         <Modal open={visible}>
             <Form onSubmit={onSubmit}>
-                {({ formProps, reset }) => (
+                {({ formProps }) => (
                     <form {...formProps}>
                         <Modal.Header className="font-bold">{t("create-category-title")}</Modal.Header>
                         <Modal.Body>

@@ -9,6 +9,11 @@ const labels = [
     'Failed',
 ];
 
+const colors = [
+    'rgba(0, 135, 90, 0.7)',
+    'rgba(222, 53, 11, 0.7)',
+]
+
 const StatusResultsChart = ({
     passed,
     failed,
@@ -16,21 +21,14 @@ const StatusResultsChart = ({
     passed: number;
     failed: number;
 }) => {
-    console.log('StatusResultsChart', {passed, failed})
     const data = {
         labels: labels,
         datasets: [
             {
                 label: 'Answers',
                 data: [passed, failed],
-                backgroundColor: [
-                    'rgba(0, 135, 90, 0.7)',
-                    'rgba(222, 53, 11, 0.7)',
-                ],
-                borderColor: [
-                    'rgba(0, 135, 90, 0.7)',
-                    'rgba(222, 53, 11, 0.7)',
-                ],
+                backgroundColor: colors,
+                borderColor: colors,
                 borderWidth: 1,
             },
         ],

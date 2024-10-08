@@ -1,4 +1,3 @@
-import { CourseContentType } from "@prisma/client";
 import { QuestionType } from "types";
 
 export const extractYouTubeVideoId = (url: string) => {
@@ -18,8 +17,6 @@ export const shuffleArray = <T>(array: T[]): T[] => {
 
 export const validateAnswer = (questionType: QuestionType, answer: any): boolean => {
     try {
-        console.log('validateAnswer', { questionType, answer });
-
         switch (questionType) {
             case QuestionType.SINGLE_CHOICE:
                 return typeof answer === 'string';

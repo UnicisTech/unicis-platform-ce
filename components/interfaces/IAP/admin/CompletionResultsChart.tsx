@@ -1,20 +1,8 @@
 import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
 import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-
-const labels = [
-    'To do',
-    'In progress',
-    'Completed'
-];
-
-const colors = [
-    'rgba(255, 0, 0, 1)',
-    'rgba(47, 143, 0, 1)',
-]
 
 const CompletionResultsChart = ({
     todo,
@@ -26,7 +14,11 @@ const CompletionResultsChart = ({
     completed: number
 }) => {
     const data = {
-        labels: labels,
+        labels: [
+            'To do',
+            'In progress',
+            'Completed'
+        ],
         datasets: [
             {
                 label: 'Answers',

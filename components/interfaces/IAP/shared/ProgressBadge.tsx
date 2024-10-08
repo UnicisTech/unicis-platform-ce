@@ -1,5 +1,3 @@
-//TODO: rename
-
 import { StatusBadge } from '@/components/shared';
 
 const ProgressBadge = ({progress} : {progress: number}) => {

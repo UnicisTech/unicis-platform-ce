@@ -3,7 +3,6 @@ import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import { CourseFormData } from 'types';
 import { isPrismaError } from '@/lib/errors';
-import { getSession } from '@/lib/session';
 import { createCourse, getTeamCourses } from 'models/iap/course';
 
 export default async function handler(
@@ -20,7 +19,7 @@ export default async function handler(
                 await handlePOST(req, res);
                 break;
             default:
-                res.setHeader('Allow', ['POST', 'DELETE', 'PUT']);
+                res.setHeader('Allow', ['GET', 'POST']);
                 res.status(405).json({
                     data: null,
                     error: { message: `Method ${method} Not Allowed` },
@@ -43,16 +42,9 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
     const teamMember = await throwIfNoTeamAccess(req, res);
     throwIfNotAllowed(teamMember, 'iap', 'read');
 
-    const session = await getSession(req, res);
-    const userId = session?.user.id;
-
     const team = teamMember.team;
 
-    // const courses = await getCoursesByTeam(team.id, userId)
-
     const teamCourses = await getTeamCourses(team.id, teamMember.id)
-
-    console.log('Get IAP coursescourses', { teamCourses: teamCourses.length})
 
     return res.status(200).json({ data: teamCourses, error: null });
 }

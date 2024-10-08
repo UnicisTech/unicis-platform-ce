@@ -7,8 +7,7 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
 import Form from '@atlaskit/form';
-import type { ApiResponse, IapCourse, TaskWithRpaProcedure, TeamCourseWithProgress } from 'types';
-import type { Task } from '@prisma/client';
+import type { ApiResponse, TeamCourseWithProgress } from 'types';
 
 const DeleteCourse = ({
   visible,
@@ -33,12 +32,9 @@ const DeleteCourse = ({
     try {
       setIsDeleting(true);
 
-      //TODO: rename enpoint to TeamCourse id
       const response = await axios.delete<ApiResponse<any>>(
         `/api/teams/${slug}/iap/course/${teamCourse.id}`
       );
-
-      console.log('DELETE RESPONSE', response)
 
       const { error } = response.data;
 
@@ -46,7 +42,7 @@ const DeleteCourse = ({
         toast.error(error.message);
         return;
       } else {
-        toast.success('Procedure deleted.');
+        toast.success(t('iap-course-deleted'));
       }
 
       mutate();

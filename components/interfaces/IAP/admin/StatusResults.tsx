@@ -1,19 +1,16 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { getAxiosError } from '@/lib/common';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
-import Form from '@atlaskit/form';
-import type { ApiResponse, IapCourse, TaskWithRpaProcedure, TeamCourseWithProgress } from 'types';
-import type { Task } from '@prisma/client';
+import AtlaskitButton from '@atlaskit/button';
+import type { ApiResponse, TeamCourseWithProgress } from 'types';
 import { defaultHeaders } from '@/lib/common';
-import CompletionResultsChart from './CompletionResultsChart';
-import ProgressBadge from './ProgressBadge';
+import { countCourseAnswers } from '@/lib/iap';
+import { StatusBadge } from '@/components/shared';
+import StatusResultsChart from './StatusResultsChart';
 
-const CompletionResults = ({
+const StatusResults = ({
     teamCourse,
     visible,
     setVisible,
@@ -42,17 +39,14 @@ const CompletionResults = ({
 
                 const json = (await response.json()) as ApiResponse<any>;
 
-                console.log('completion-results', json)
-
                 if (!response.ok) {
                     toast.error(json.error.message);
                     return;
                 }
 
-                setTeamMembersWithProgress(json.data.teamMembersWithProgress)
+                //TODO: rename state, we filter only completed, or change api enpoint
 
-                // toast.success(t('iap-course-saved'));
-                // mutateProgress();
+                setTeamMembersWithProgress(json.data.teamMembersWithProgress.filter(member => member?.progress?.progress === 100))
             } catch (e) {
                 //TODO: catch error
             } finally {
@@ -72,11 +66,11 @@ const CompletionResults = ({
             <Modal.Body>
                 <div className='grid grid-cols-2 gap-1'>
                     <div className='col-span-1 h-[300px]'>
+                        {/* //TODO: use different endpoint */}
                         {teamMembersWithProgress &&
-                            <CompletionResultsChart
-                                todo={teamMembersWithProgress.filter(({ progress }) => !progress || progress?.progress === 0).length}
-                                inprogress={teamMembersWithProgress.filter(({ progress }) => progress && (progress.progress > 0 && progress.progress < 100)).length}
-                                completed={teamMembersWithProgress.filter(({ progress }) => progress && progress.progress === 100).length}
+                            <StatusResultsChart
+                                passed={teamMembersWithProgress.filter(member => countCourseAnswers(member.progress.answers, teamCourse.course.questions)?.wrong === 0)?.length}
+                                failed={teamMembersWithProgress.filter(member => countCourseAnswers(member.progress.answers, teamCourse.course.questions)?.wrong !== 0)?.length}
                             />
                         }
                     </div>
@@ -85,16 +79,24 @@ const CompletionResults = ({
                             <thead className="bg-base-200">
                                 <tr>
                                     <th>User</th>
+                                    <th>Right</th>
+                                    <th>Wrong</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {teamMembersWithProgress?.map((member: any) => {
+                                    const { right, wrong } = countCourseAnswers(member.progress.answers, teamCourse.course.questions)
                                     return (
                                         <tr key={member.id}>
                                             <td>{member?.user?.name}</td>
+                                            <td>{right}</td>
+                                            <td>{wrong}</td>
                                             <td>
-                                                <ProgressBadge progress={member?.progress?.progress} />
+                                                {!wrong
+                                                    ? <StatusBadge label='Passed' value='done' />
+                                                    : <StatusBadge label='Failed' value='failed' />
+                                                }
                                             </td>
                                         </tr>
                                     );
@@ -103,9 +105,6 @@ const CompletionResults = ({
                         </table>
                     </div>
                 </div>
-                {/* <div style={{ margin: '1.5rem 0' }}>
-                                
-                            </div> */}
             </Modal.Body>
             <Modal.Actions>
                 <AtlaskitButton
@@ -114,17 +113,9 @@ const CompletionResults = ({
                 >
                     {t('close')}
                 </AtlaskitButton>
-                {/* <LoadingButton
-                onClick={deleteCourse}
-                appearance="primary"
-                isLoading={isDeleting}
-              >
-                {t('delete')}
-              </LoadingButton> */}
             </Modal.Actions>
-
         </Modal>
     );
 };
 
-export default CompletionResults;
+export default StatusResults;

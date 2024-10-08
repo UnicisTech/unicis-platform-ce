@@ -12,18 +12,14 @@ export const getUserCourseProgress = async (teamMemberId: string, teamCourseId: 
                     teamCourseId,
                     teamMemberId
                 }
-                // courseId_userId: {
-                //     courseId,
-                //     userId,
-                // },
             },
             include: {
-                teamCourse: true,  // Include course details if needed
+                teamCourse: true,
                 teamMember: {
                     include: {
                         user: true
                     }
-                },    // Include user details if needed
+                },
             },
         });
 
@@ -41,7 +37,6 @@ export const getUserCourseProgress = async (teamMemberId: string, teamCourseId: 
 export const saveUserCourseProgress = async (teamMemberId: string, teamCourseId: string, answers: any) => {
     try {
         const progress = countCourseProgress(answers)
-        console.log('saveUserCourseProgress progress', progress)
         const courseProgress = await prisma.courseProgress.upsert({
             where: {
                 teamCourseId_teamMemberId: {

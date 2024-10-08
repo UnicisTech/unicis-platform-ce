@@ -1,12 +1,7 @@
-import { getAxiosError } from '@/lib/common';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
-import type { Category, Course } from '@prisma/client';
 import fetcher from '@/lib/fetcher';
 import { useRouter } from 'next/router';
 import useSWR, { mutate } from 'swr';
-import type { ApiResponse, IapCourse, TeamCourseWithProgress, TeamWithSubscription } from 'types';
+import type { ApiResponse, TeamCourseWithProgress } from 'types';
 
 const useIapCourse = (slug: string, courseId: string) => {
     const { query, isReady } = useRouter();

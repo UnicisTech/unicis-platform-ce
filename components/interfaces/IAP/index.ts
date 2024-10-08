@@ -1,15 +1,14 @@
-export {default as AdminPage} from './AdminPage'
-export {default as Certificate} from './Certificate'
-export {default as CompletionResults} from './CompletionResults'
-export {default as CourseCard} from './CourseCard'
-export {default as CoursePage} from './CoursePage'
-export {default as CoursesTable} from './CoursesTable'
+export {default as AdminPage} from './admin/AdminPage'
+export {default as CompletionResults} from './admin/CompletionResults'
+export {default as CourseCard} from './dashboard/CourseCard'
+export {default as CoursePage} from './course-page/CoursePage'
+export {default as CoursesTable} from './admin/CoursesTable'
 
-export {default as CreateCategory} from './CreateCategory'
-export {default as CreateCourse} from './CreateCourse'
-export {default as DeleteCourse} from './DeleteCourse'
-export {default as IapDashboard} from './IapDashboard'
-export {default as UserResultPieChart} from './UserResultPieChart'
+export {default as CreateCategory} from './admin/CreateCategory'
+export {default as CreateCourse} from './admin/CreateCourse'
+export {default as DeleteCourse} from './admin/DeleteCourse'
+export {default as IapDashboard} from './dashboard/IapDashboard'
+export {default as UserResultPieChart} from './course-page/UserResultPieChart'
 
 
 

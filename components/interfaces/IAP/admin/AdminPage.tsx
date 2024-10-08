@@ -1,10 +1,9 @@
 import React, { useCallback, useState } from 'react';
-import Link from 'next/link';
 import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import useCanAccess from 'hooks/useCanAccess';
-import { Category, Course, Team } from '@prisma/client';
-import { IapCourse, TeamProperties, IapCourseWithProgress, TeamCourseWithProgress } from 'types';
+import { Category, Team } from '@prisma/client';
+import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
 import { CompletionResults, CoursesTable, DeleteCourse, CreateCourse, CreateCategory } from "@/components/interfaces/IAP"
 import StatusResults from './StatusResults';
 
@@ -13,18 +12,13 @@ interface IapDashboardProps {
   teamCourses: TeamCourseWithProgress[];
   team: Team;
   teams: Team[];
+  members: TeamMemberWithUser[]
   mutateIap: () => Promise<void>;
 }
 
-const AdminPage = ({ categories, teamCourses, team, teams, mutateIap }: IapDashboardProps) => {
-  console.log('team', team)
+const AdminPage = ({ categories, teamCourses, team, teams, members, mutateIap }: IapDashboardProps) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
-  // const teamProperties = team.properties as TeamProperties
-
-  // const [categories, setCategories] = useState(teamProperties.iap_categories || defaultCategories)
-  // const [courses, setCourses] = useState(teamProperties.iap_courses || [])
-
   const [isCreateCategoryOpen, setIsCreateCategoryOpen] = useState(false);
   const [isCreateCourseOpen, setIsCreateCourseOpen] = useState(false)
   const [isDeleteCourseOpen, setIsDeleteCourseOpen] = useState(false)
@@ -36,8 +30,6 @@ const AdminPage = ({ categories, teamCourses, team, teams, mutateIap }: IapDashb
   const [courseToDelete, setCourseToDelete] = useState<TeamCourseWithProgress | null>(null)
   const [courseToCompletionResults, setCourseToCompletionResults] = useState<TeamCourseWithProgress | null>(null)
   const [courseToStatusResults, setCourseToStatusResults] = useState<TeamCourseWithProgress | null>(null)
-
-  console.log('courseToEdit', courseToEdit)
 
   const editCourseClickHandler = useCallback((teamCourse: TeamCourseWithProgress) => {
     setCourseToEdit(teamCourse)
@@ -59,10 +51,6 @@ const AdminPage = ({ categories, teamCourses, team, teams, mutateIap }: IapDashb
     setIsStatusResultsOpen(true)
   }, [])
 
-  console.log('Admin page', {isCreateCourseOpen})
-
-
-  console.log('categories and courses', { categories, teamCourses })
   return (
     <>
       <div className="flex justify-between items-center">
@@ -107,7 +95,9 @@ const AdminPage = ({ categories, teamCourses, team, teams, mutateIap }: IapDashb
         </div>
       </div>
       <CoursesTable
+        team={team}
         teamCourses={teamCourses}
+        members={members}
         categories={categories}
         editHandler={editCourseClickHandler}
         deleteHandler={deleteCourseClickHandler}

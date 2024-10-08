@@ -22,7 +22,7 @@ export default async function handler(
                 await handleDELETE(req, res);
                 break;
             default:
-                res.setHeader('Allow', ['PUT', 'DELETE']);
+                res.setHeader('Allow', ['GET', 'PUT', 'DELETE']);
                 res.status(405).json({
                     data: null,
                     error: { message: `Method ${method} Not Allowed` },
@@ -49,10 +49,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
         courseId: string;
     };
     
-
     const course = await getCourse(courseId, teamMember.id)
-
-    console.log('GET COURSE BY ID', {course, courseId})
 
     return res.status(200).json({ data: course, error: null });
 }
@@ -67,8 +64,6 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     const { courseId } = req.query as {
         courseId: string;
     };
-
-    console.log('PUT COURSE', course)
 
     const {
         name,

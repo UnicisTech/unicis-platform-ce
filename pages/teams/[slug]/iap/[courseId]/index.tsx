@@ -1,17 +1,15 @@
 
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
-import { Loading, Error, Card } from '@/components/shared';
+import { Loading, Error } from '@/components/shared';
 import useIapCourse from 'hooks/useIapCourse';
 import { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import env from '@/lib/env';
-import CoursePage from '@/components/interfaces/IAP/CoursePage';
+import { CoursePage } from '@/components/interfaces/IAP';
 import useTeam from 'hooks/useTeam';
 
 const IapCourse = () => {
     const router = useRouter();
-    const { t } = useTranslation('common');
     const { courseId, slug } = router.query;
 
     const { teamCourse, isError, isLoading } = useIapCourse(slug as string, courseId as string)
@@ -25,7 +23,7 @@ const IapCourse = () => {
         return <Error message={isError.message} />
     }
 
-    return <CoursePage teamCourse={teamCourse} team={team} />
+    return <CoursePage teamCourse={teamCourse} />
 
 }
 

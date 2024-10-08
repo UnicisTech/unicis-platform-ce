@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import DynamicTable from '@atlaskit/dynamic-table';
-import CheckCircleIcon from '@atlaskit/icon/glyph/check-circle'
-import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle'
-import unicislogo from "../placeholders/unicis-lms-logo.png"
-import SectionMessage from '@atlaskit/section-message';
+import React from 'react';
 import { PDFDownloadLink, Page, Text, Font, Document, StyleSheet, Image } from '@react-pdf/renderer';
 import Button from '@atlaskit/button';
-import { Course, Team } from '@prisma/client';
+import { Course } from '@prisma/client';
 
 interface CertificateProps {
     userName: string;
     course: Course,
-    team: Team
 }
 
 Font.register({
@@ -66,13 +60,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: 'Roboto'
     },
-    key: {
-        margin: 14,
-        fontSize: 14,
-        textAlign: 'center',
-        fontFamily: 'Roboto',
-        marginTop: 30,
-    },
     program: {
         margin: 12,
         fontSize: 16,
@@ -89,22 +76,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'grey',
     },
-    pageNumber: {
-        position: 'absolute',
-        fontSize: 12,
-        bottom: 30,
-        left: 0,
-        right: 0,
-        textAlign: 'center',
-        color: 'grey',
-    },
 });
 
 
 const Quixote = ({
     userName,
     course,
-    team
 }: CertificateProps) => (
     <Document>
         <Page wrap={false} style={styles.body}>
@@ -144,9 +121,9 @@ const Quixote = ({
     </Document>
 );
 
-const Certificate = ({ userName, course, team }: CertificateProps) => {
+const Certificate = ({ userName, course }: CertificateProps) => {
     return (
-        <PDFDownloadLink document={<Quixote userName={userName} course={course} team={team} />} fileName={`${userName} ${course.name} Certificate.pdf`}>
+        <PDFDownloadLink document={<Quixote userName={userName} course={course} />} fileName={`${userName} ${course.name} Certificate.pdf`}>
             <Button style={{ marginTop: "5px" }}>
                 Download certificate
             </Button>

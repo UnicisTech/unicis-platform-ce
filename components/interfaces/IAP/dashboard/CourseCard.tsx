@@ -1,11 +1,11 @@
 
 import { useRouter } from 'next/router';
-import { StatusBadge } from '@/components/shared';
 import { SimpleTag as Tag } from '@atlaskit/tag';
-import { Category, Course } from '@prisma/client';
+import { Category } from '@prisma/client';
 import { Card } from 'react-daisyui';
 import { Button } from 'react-daisyui';
-import { IapCourseWithProgress, TeamCourseWithProgress } from 'types';
+import { TeamCourseWithProgress } from 'types';
+import ProgressBadge from '../shared/ProgressBadge';
 
 const CourseCard = ({ teamCourse, categories }: { teamCourse: TeamCourseWithProgress, categories: Category[] }) => {
     const router = useRouter();
@@ -31,13 +31,7 @@ const CourseCard = ({ teamCourse, categories }: { teamCourse: TeamCourseWithProg
                     <Tag text={categories.find(({ id }) => id === course.categoryId)?.name || ''} color="blueLight" />
                 </div>
                 <div className="mt-[5px]">
-                    {teamCourse.progress?.[0]?.progress === 100
-                        ? <StatusBadge label='Passed' value='done' />
-                        : teamCourse.progress?.[0]?.progress > 0
-                            ? <StatusBadge label='In progress' value='inprogress' />
-                            : <StatusBadge label='To do' value='todo' />
-                    }
-
+                    <ProgressBadge progress={teamCourse.progress?.[0]?.progress}/>
                     {course?.estimatedTime ? <p>Estimated: {course.estimatedTime} minutes</p> : null}
                 </div>
                 <Card.Actions className="justify-end">

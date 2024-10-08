@@ -1,32 +1,37 @@
-import AdminPage from '@/components/interfaces/IAP/AdminPage';
-import IapDashboard from '@/components/interfaces/IAP/IapDashboard';
-import { PendingInvitations } from '@/components/invitation';
+// import AdminPage from '@/components/interfaces/IAP/admin/AdminPage';
+import { AdminPage } from '@/components/interfaces/IAP';
+import { useRouter } from 'next/router';
 import { Error, Loading } from '@/components/shared';
-import { Members, TeamTab } from '@/components/team';
+import { TeamTab } from '@/components/team';
 import env from '@/lib/env';
 import useIap from 'hooks/useIAP';
 import useTeam from 'hooks/useTeam';
+import useTeamMembers from 'hooks/useTeamMembers';
 import useTeams from 'hooks/useTeams';
 import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const IAP = ({ teamFeatures }) => {
+    const router = useRouter();
+    const { slug } = router.query;
+
     const { t } = useTranslation('common');
-    const { isLoading, isError, team, mutateTeam } = useTeam();
+    const { isLoading: isTeamLoading, isError: isTeamError, team, mutateTeam } = useTeam();
     const { categories, teamCourses, isLoading: isIapDataLoading, isError: isIapError, mutateIap } = useIap(team?.slug)
     const { teams, isLoading: isTeamsLoading, isError: isTeamsError } = useTeams()
+    const { members, isLoading: isMembersLoading, isError: isMembersError} = useTeamMembers(slug as string)
 
+    const isLoading = isTeamLoading || isIapDataLoading || isTeamsLoading || isMembersLoading
+    const isError = isTeamError || isIapError || isTeamsError | isMembersError
 
-    console.log('courses', teamCourses)
-    console.log('IAP categories', categories)
-
-    if (isLoading || isIapDataLoading || isTeamsLoading) {
+    if (isLoading) {
         return <Loading />;
     }
 
-    if (isError || isIapError || isTeamsError) {
-        return <Error message={isError?.message || isIapError?.message || isTeamsError?.message} />;
+    if (isError) {
+        const message = isError?.message || isIapError?.message || isTeamsError?.message || isMembersError?.message
+        return <Error message={message} />;
     }
 
     if (!team || !teams) {
@@ -34,7 +39,7 @@ const IAP = ({ teamFeatures }) => {
     }
 
 
-    if (!teamCourses || !categories) {
+    if (!teamCourses || !categories || !members) {
         //TODO: return message
         return <Error message={t('team-not-found')} />;
     }
@@ -47,6 +52,7 @@ const IAP = ({ teamFeatures }) => {
                 <AdminPage
                     team={team}
                     teams={teams}
+                    members={members}
                     teamCourses={teamCourses}
                     categories={categories}
                     mutateIap={mutateIap}
