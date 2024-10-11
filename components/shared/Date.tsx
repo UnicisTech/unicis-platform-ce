@@ -1,3 +1,4 @@
+
 const FormattedDate = ({ dateString, style }) => {
   const formatDate = (dateStr) => {
     // Check if the input is a Unix timestamp (number or a string of digits)
