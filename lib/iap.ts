@@ -44,7 +44,6 @@ export const countCourseAnswers = (answers: any[], questions: Question[]) => {
 
     answers.forEach((answer, index) => {
         const question = questions[index]
-        console.log('answers.forEach', { answer, question })
         switch (question.type) {
             case QuestionType.SINGLE_CHOICE:
                 const correctAnswer = question.answers.find(item => item.isCorrect)?.answer

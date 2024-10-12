@@ -13,7 +13,8 @@ export type Resource =
   | 'team_webhook'
   | 'team_api_key'
   | 'task'
-  | 'iap';
+  | 'iap'
+  | 'iap_admin';
 
 export type RolePermissions = {
   [role in RoleType]: Permission[];
@@ -89,6 +90,10 @@ export const permissions: RolePermissions = {
       resource: 'iap',
       actions: '*',
     },
+    {
+      resource: 'iap_admin',
+      actions: '*'
+    }
   ],
   ADMIN: [
     {
@@ -135,6 +140,10 @@ export const permissions: RolePermissions = {
       resource: 'iap',
       actions: '*',
     },
+    {
+      resource: 'iap_admin',
+      actions: '*'
+    }
   ],
   MEMBER: [
     {

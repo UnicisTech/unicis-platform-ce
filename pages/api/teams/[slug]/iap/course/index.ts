@@ -42,9 +42,17 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
     const teamMember = await throwIfNoTeamAccess(req, res);
     throwIfNotAllowed(teamMember, 'iap', 'read');
 
+    const { role } = req.query;
+
+    const isAdminAccess = role === 'admin'
+
+    if (isAdminAccess) {
+        throwIfNotAllowed(teamMember, 'iap_admin', 'read');
+    }
+
     const team = teamMember.team;
 
-    const teamCourses = await getTeamCourses(team.id, teamMember.id)
+    const teamCourses = await getTeamCourses(team.id, teamMember.id, isAdminAccess)
 
     return res.status(200).json({ data: teamCourses, error: null });
 }

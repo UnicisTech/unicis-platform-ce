@@ -11,6 +11,7 @@ import useTeams from 'hooks/useTeams';
 import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { Role } from '@prisma/client';
 
 const IAP = ({ teamFeatures }) => {
     const router = useRouter();
@@ -18,7 +19,7 @@ const IAP = ({ teamFeatures }) => {
 
     const { t } = useTranslation('common');
     const { isLoading: isTeamLoading, isError: isTeamError, team, mutateTeam } = useTeam();
-    const { categories, teamCourses, isLoading: isIapDataLoading, isError: isIapError, mutateIap } = useIap(team?.slug)
+    const { categories, teamCourses, isLoading: isIapDataLoading, isError: isIapError, mutateIap } = useIap(true, team?.slug)
     const { teams, isLoading: isTeamsLoading, isError: isTeamsError } = useTeams()
     const { members, isLoading: isMembersLoading, isError: isMembersError} = useTeamMembers(slug as string)
 
@@ -52,7 +53,7 @@ const IAP = ({ teamFeatures }) => {
                 <AdminPage
                     team={team}
                     teams={teams}
-                    members={members}
+                    members={members.filter(({role}) => role !== Role.AUDITOR)}
                     teamCourses={teamCourses}
                     categories={categories}
                     mutateIap={mutateIap}

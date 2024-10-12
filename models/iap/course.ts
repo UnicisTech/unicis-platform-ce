@@ -2,8 +2,7 @@ import { CourseContentType, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const getTeamCourses = async (teamId: string, teamMemberId: string) => {
-  // TODO: progress where teamMemberId: permissions check? or calculate the status here
+export const getTeamCourses = async (teamId: string, teamMemberId: string, adminAccess: boolean) => {
   try {
     const teamCourses = await prisma.teamCourse.findMany({
       where: {
@@ -11,12 +10,11 @@ export const getTeamCourses = async (teamId: string, teamMemberId: string) => {
       },
       include: {
         course: true,
-        progress: true,
-        // progress: {
-        //   where: {
-        //     teamMemberId
-        //   }
-        // }
+        progress: adminAccess ? true : {
+          where: {
+            teamMemberId
+          }
+        }
       }
     })
     return teamCourses

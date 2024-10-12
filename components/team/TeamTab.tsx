@@ -22,8 +22,6 @@ interface TeamTabProps {
 const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   const { canAccess } = useCanAccess();
 
-  console.log('activeTab', activeTab)
-
   const navigations = [
     {
       name: 'Settings',
@@ -53,7 +51,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
 
   if (canAccess('iap', ['create'])) {
     navigations.push({
-      name: 'IAP',
+      name: 'Training',
       href: `/teams/${team.slug}/iap/admin`,
       active: activeTab === 'iap/admin',
       icon: UserPlusIcon,

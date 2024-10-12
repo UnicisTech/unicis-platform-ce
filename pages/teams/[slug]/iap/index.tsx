@@ -10,7 +10,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 const IAP = () => {
   const { t } = useTranslation('common');
   const { isLoading, isError, team } = useTeam();
-  const { categories, teamCourses, isLoading: isIapDataLoading, isError: isIapError } = useIap(team?.slug)
+  const { categories, teamCourses, isLoading: isIapDataLoading, isError: isIapError } = useIap(false, team?.slug)
   const { teams, isLoading: isTeamsLoading, isError: isTeamsError } = useTeams()
 
   if (isLoading || isIapDataLoading || isTeamsLoading) {

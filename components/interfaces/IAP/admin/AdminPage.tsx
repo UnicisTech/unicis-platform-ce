@@ -95,7 +95,6 @@ const AdminPage = ({ categories, teamCourses, team, teams, members, mutateIap }:
         </div>
       </div>
       <CoursesTable
-        team={team}
         teamCourses={teamCourses}
         members={members}
         categories={categories}
@@ -136,6 +135,7 @@ const AdminPage = ({ categories, teamCourses, team, teams, members, mutateIap }:
       {isCompletionResultsOpen && courseToCompletionResults &&
         <CompletionResults
           teamCourse={courseToCompletionResults}
+          members={members}
           visible={isCompletionResultsOpen}
           setVisible={setIsCompletionResultsOpen}
         />
@@ -143,6 +143,7 @@ const AdminPage = ({ categories, teamCourses, team, teams, members, mutateIap }:
       {isStatusResultsOpen && courseToStatusResults &&
         <StatusResults
           teamCourse={courseToStatusResults}
+          members={members}
           visible={isStatusResultsOpen}
           setVisible={setIsStatusResultsOpen}
         />

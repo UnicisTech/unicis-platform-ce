@@ -5,7 +5,6 @@ import TrashIcon from '@atlaskit/icon/glyph/trash';
 import GraphLineIcon from '@atlaskit/icon/glyph/graph-line'
 import TableIcon from '@atlaskit/icon/glyph/table'
 import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
-import { Team } from '@prisma/client';
 import { getCourseStatus } from '../services/helpers';
 import { StatusBadge } from '@/components/shared';
 
@@ -25,7 +24,6 @@ const statuses = {
 }
 
 const CoursesTable = ({
-    team,
     teamCourses,
     members,
     categories,
@@ -34,7 +32,6 @@ const CoursesTable = ({
     completionHandler,
     statusHandler
 }: {
-    team: Team,
     teamCourses: TeamCourseWithProgress[],
     members: TeamMemberWithUser[],
     categories: any[],

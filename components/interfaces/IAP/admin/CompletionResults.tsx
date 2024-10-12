@@ -1,56 +1,30 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import toast from 'react-hot-toast';
+import React, { useCallback } from 'react';
 import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import AtlaskitButton from '@atlaskit/button';
-import type { ApiResponse, TeamCourseWithProgress } from 'types';
-import { defaultHeaders } from '@/lib/common';
+import type { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
 import CompletionResultsChart from './CompletionResultsChart';
 import ProgressBadge from '../shared/ProgressBadge';
+import { findMemberProgressInTeamCourse } from '../services/helpers';
+
+const getMemberProgress = (teamCourse: TeamCourseWithProgress, memberId: string): number => findMemberProgressInTeamCourse(teamCourse, memberId)?.progress || 0
 
 const CompletionResults = ({
     teamCourse,
+    members,
     visible,
     setVisible,
 }: {
-    teamCourse: TeamCourseWithProgress
+    teamCourse: TeamCourseWithProgress;
+    members: TeamMemberWithUser[];
     visible: boolean;
     setVisible: (visible: boolean) => void;
 }) => {
     const { t } = useTranslation('common');
 
-    const router = useRouter();
-    const { slug } = router.query;
-    const [teamMembersWithProgress, setTeamMembersWithProgress] = useState<any | null>(null)
-
     const closeHandler = useCallback(() => {
         setVisible(false);
     }, []);
-
-    useEffect(() => {
-        const fetchCompletionResults = async () => {
-            try {
-                const response = await fetch(`/api/teams/${slug}/iap/course/${teamCourse.id}/completion-results`, {
-                    method: 'GET',
-                    headers: defaultHeaders,
-                });
-
-                const json = (await response.json()) as ApiResponse<any>;
-
-                if (!response.ok) {
-                    toast.error(json.error.message);
-                    return;
-                }
-
-                setTeamMembersWithProgress(json.data.teamMembersWithProgress)
-            } catch (e) {
-                toast.error(t('iap-completion-results-failed'));
-            }
-        }
-
-        fetchCompletionResults()
-    }, [])
 
     return (
         <Modal open={visible} className='w-10/12 max-w-5xl'>
@@ -60,13 +34,14 @@ const CompletionResults = ({
             <Modal.Body>
                 <div className='grid grid-cols-2 gap-1'>
                     <div className='col-span-1 h-[300px]'>
-                        {teamMembersWithProgress &&
-                            <CompletionResultsChart
-                                todo={teamMembersWithProgress.filter(({ progress }) => !progress || progress?.progress === 0).length}
-                                inprogress={teamMembersWithProgress.filter(({ progress }) => progress && (progress.progress > 0 && progress.progress < 100)).length}
-                                completed={teamMembersWithProgress.filter(({ progress }) => progress && progress.progress === 100).length}
-                            />
-                        }
+                        <CompletionResultsChart
+                            todo={members.filter(({ id }) => getMemberProgress(teamCourse, id) === 0).length}
+                            inprogress={members.filter(({ id }) => {
+                                const progress = getMemberProgress(teamCourse, id);
+                                return progress > 0 && progress < 100;
+                            }).length}
+                            completed={members.filter(({ id }) => getMemberProgress(teamCourse, id) === 100).length}
+                        />
                     </div>
                     <div className='col-span-1'>
                         <table className="text-sm table w-full border-b dark:border-base-200">
@@ -77,15 +52,15 @@ const CompletionResults = ({
                                 </tr>
                             </thead>
                             <tbody>
-                                {teamMembersWithProgress?.map((member: any) => {
+                                {members.map(member => {
                                     return (
                                         <tr key={member.id}>
                                             <td>{member?.user?.name}</td>
                                             <td>
-                                                <ProgressBadge progress={member?.progress?.progress} />
+                                                <ProgressBadge progress={getMemberProgress(teamCourse, member.id)} />
                                             </td>
                                         </tr>
-                                    );
+                                    )
                                 })}
                             </tbody>
                         </table>

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import useSWR, { mutate } from 'swr';
 import type { ApiResponse, TeamCourseWithProgress } from 'types';
 
-const useIap = (slug?: string) => {
+const useIap = (adminAccess: boolean, slug?: string) => {
     const { query, isReady } = useRouter();
 
     const teamSlug = slug || (isReady ? query.slug : null);
@@ -15,7 +15,7 @@ const useIap = (slug?: string) => {
     );
 
     const { data: teamCourses, error: coursesError, isLoading: isCoursesLoading } = useSWR<ApiResponse<TeamCourseWithProgress[]>>(
-        teamSlug ? `/api/teams/${teamSlug}/iap/course` : null,
+        teamSlug ? `/api/teams/${teamSlug}/iap/course?${adminAccess ? 'role=admin' : ''}` : null,
         fetcher
     );
 

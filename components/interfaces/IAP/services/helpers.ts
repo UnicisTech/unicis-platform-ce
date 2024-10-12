@@ -1,4 +1,4 @@
-import { Role } from "@prisma/client";
+import { CourseProgress, Role } from "@prisma/client";
 import { TeamCourseWithProgress, TeamMemberWithUser } from "types";
 
 export const getCourseStatus = (teamCourse: TeamCourseWithProgress, members: TeamMemberWithUser[]): 'todo' | 'inprogress' | 'done' => {
@@ -8,3 +8,5 @@ export const getCourseStatus = (teamCourse: TeamCourseWithProgress, members: Tea
     if ((teamCourse.progress.length === membersToPassCourse.length) && teamCourse.progress.every(({progress}) => progress === 100)) return 'done'
     return 'todo'
 }
+
+export const findMemberProgressInTeamCourse = (teamCourse: TeamCourseWithProgress, memberId: string): CourseProgress | undefined => teamCourse.progress.find(({ teamMemberId }) => teamMemberId === memberId)
