@@ -6,7 +6,7 @@ export const fleetV1 = async (endpoint: string, options?: RequestInit): Promise<
   const response = await fetch(`${env.fleetAPIUrl}/api/v1${endpoint}`, {
     ...options,
     mode: 'cors'
-  });
+  }); 
 
   if (!response.ok) {
     // Handle HTTP errors here

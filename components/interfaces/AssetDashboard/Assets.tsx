@@ -1,18 +1,18 @@
+import AssetCard, { AssetProps } from '@/components/shared/AssetCard'
 import React from 'react'
 
-const Assets = () => {
+interface Assets {
+  assets: AssetProps[]
+}
+ 
+
+const Assets = ({assets}: Assets) => {
+
   return (
-    <div>
-      <div className="card bg-neutral text-neutral-content w-96">
-        <div className="card-body items-center text-center">
-          <h2 className="card-title">Cookies!</h2>
-          <p>We are using cookies for no reason.</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Accept</button>
-            <button className="btn btn-ghost">Deny</button>
-          </div>
-        </div>
-      </div>
+    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+      {assets.map((asset, index) =>
+        <AssetCard key={index} host={asset.host} total={asset.total}/>
+      )}
     </div>
   )
 }
