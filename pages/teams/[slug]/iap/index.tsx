@@ -3,6 +3,7 @@ import { Error, Loading } from '@/components/shared';
 import useIap from 'hooks/useIAP';
 import useTeam from 'hooks/useTeam';
 import useTeams from 'hooks/useTeams';
+import useCanAccess from 'hooks/useCanAccess';
 import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -12,6 +13,12 @@ const IAP = () => {
   const { isLoading, isError, team } = useTeam();
   const { categories, teamCourses, isLoading: isIapDataLoading, isError: isIapError } = useIap(false, team?.slug)
   const { teams, isLoading: isTeamsLoading, isError: isTeamsError } = useTeams()
+
+  const { canAccess } = useCanAccess()
+
+  if (!canAccess('iap_course', ['update'])) {
+    return <Error message={t('forbidden-resource')}/>
+  }
 
   if (isLoading || isIapDataLoading || isTeamsLoading) {
     return <Loading />;

@@ -38,7 +38,7 @@ export default async function handler(
 
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
     const teamMember = await throwIfNoTeamAccess(req, res);
-    throwIfNotAllowed(teamMember, 'iap', 'read');
+    throwIfNotAllowed(teamMember, 'iap_course', 'read');
 
     const { courseId } = req.query as {
         courseId: string;
@@ -51,7 +51,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     const teamMember = await throwIfNoTeamAccess(req, res);
-    throwIfNotAllowed(teamMember, 'iap', 'create');
+    throwIfNotAllowed(teamMember, 'iap_course', 'update');
 
     const answers = req.body as any
 

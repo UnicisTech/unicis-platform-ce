@@ -13,8 +13,8 @@ export type Resource =
   | 'team_webhook'
   | 'team_api_key'
   | 'task'
-  | 'iap'
-  | 'iap_admin';
+  | 'iap_course'
+  | 'iap_category';
 
 export type RolePermissions = {
   [role in RoleType]: Permission[];
@@ -87,13 +87,13 @@ export const permissions: RolePermissions = {
       actions: '*',
     },
     {
-      resource: 'iap',
-      actions: '*',
+      resource: 'iap_course',
+      actions: '*'
     },
     {
-      resource: 'iap_admin',
+      resource: 'iap_category',
       actions: '*'
-    }
+    },
   ],
   ADMIN: [
     {
@@ -137,13 +137,13 @@ export const permissions: RolePermissions = {
       actions: '*',
     },
     {
-      resource: 'iap',
-      actions: '*',
+      resource: 'iap_course',
+      actions: '*'
     },
     {
-      resource: 'iap_admin',
+      resource: 'iap_category',
       actions: '*'
-    }
+    },
   ],
   MEMBER: [
     {
@@ -159,13 +159,13 @@ export const permissions: RolePermissions = {
       actions: '*',
     },
     {
-      resource: 'iap',
-      actions: ['read', 'create'],
+      resource: 'iap_course',
+      actions: ['read', 'update'],
     },
     {
-      resource: 'iap_admin',
+      resource: 'iap_category',
       actions: ['read'],
-    },
+    }
   ],
   AUDITOR: [
     {
@@ -178,6 +178,14 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'task',
+      actions: ['read'],
+    },
+    {
+      resource: 'iap_course',
+      actions: ['read'],
+    },
+    {
+      resource: 'iap_category',
       actions: ['read'],
     },
   ],

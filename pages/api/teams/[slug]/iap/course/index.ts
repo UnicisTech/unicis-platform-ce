@@ -40,15 +40,11 @@ export default async function handler(
 // Get team courses
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
     const teamMember = await throwIfNoTeamAccess(req, res);
-    throwIfNotAllowed(teamMember, 'iap', 'read');
+    throwIfNotAllowed(teamMember, 'iap_course', 'read');
 
     const { role } = req.query;
 
     const isAdminAccess = role === 'admin'
-
-    if (isAdminAccess) {
-        throwIfNotAllowed(teamMember, 'iap_admin', 'read');
-    }
 
     const team = teamMember.team;
 
@@ -59,7 +55,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     const teamMember = await throwIfNoTeamAccess(req, res);
-    throwIfNotAllowed(teamMember, 'iap_admin', 'create');
+    throwIfNotAllowed(teamMember, 'iap_course', 'create');
 
     const course = req.body as CourseFormData
 

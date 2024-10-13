@@ -17,7 +17,7 @@ interface NavigationItemsProps extends NavigationProps {
 
 const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess()
+  const { canAccess } = useCanAccess();
   const menus: (MenuItem | null)[] = [
     {
       name: t('Dashboard'),
@@ -61,7 +61,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname?.startsWith(`/teams/${slug}`) &&
         activePathname.includes('csc'),
     },
-    canAccess('iap', ['read']) ? {
+    canAccess('iap_course', ['update']) ? {
       name: t('iap'),
       href: `/teams/${slug}/iap`,
       icon: () => <Icon src="/unicis-iap-logo.png" />,

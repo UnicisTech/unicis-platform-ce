@@ -64,33 +64,33 @@ const AdminPage = ({ categories, teamCourses, team, teams, members, mutateIap }:
         </div>
         <div className="flex justify-end items-center my-1">
 
-          {canAccess('iap_admin', ['create']) && (
-            <>
-              <div className="mx-1.5 my-0">
-                <Button
-                  size="sm"
-                  color="primary"
-                  variant="outline"
-                  onClick={() => {
-                    setIsCreateCategoryOpen(true);
-                  }}
-                >
-                  {t('create-category')}
-                </Button>
-              </div>
-              <div className="mx-1.5 my-0">
-                <Button
-                  size="sm"
-                  color="primary"
-                  variant="outline"
-                  onClick={() => {
-                    setIsCreateCourseOpen(true);
-                  }}
-                >
-                  {t('create-course')}
-                </Button>
-              </div>
-            </>
+          {canAccess('iap_category', ['create']) && (
+            <div className="mx-1.5 my-0">
+              <Button
+                size="sm"
+                color="primary"
+                variant="outline"
+                onClick={() => {
+                  setIsCreateCategoryOpen(true);
+                }}
+              >
+                {t('create-category')}
+              </Button>
+            </div>
+          )}
+          {canAccess('iap_course', ['create']) && (
+            <div className="mx-1.5 my-0">
+              <Button
+                size="sm"
+                color="primary"
+                variant="outline"
+                onClick={() => {
+                  setIsCreateCourseOpen(true);
+                }}
+              >
+                {t('create-course')}
+              </Button>
+            </div>
           )}
         </div>
       </div>

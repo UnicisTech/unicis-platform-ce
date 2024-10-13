@@ -19,9 +19,9 @@ const head = {
 }
 
 const statuses = {
-    'todo': <StatusBadge label='To do' value='todo'/>,
-    'inprogress': <StatusBadge label='In progress' value='inprogress'/>,
-    'done': <StatusBadge label='Completed' value='done'/>
+    'todo': <StatusBadge label='To do' value='todo' />,
+    'inprogress': <StatusBadge label='In progress' value='inprogress' />,
+    'done': <StatusBadge label='Completed' value='done' />
 }
 
 const CoursesTable = ({
@@ -54,20 +54,23 @@ const CoursesTable = ({
                     key: 'actions',
                     content:
                         <div className='flex items-center gap-0.5'>
-                            <Button
-                                startIcon={<EditIcon label='Edit course' />}
-                                shape="square"
-                                size="sm"
-                                onClick={() => editHandler(teamCourse)}
-                                disabled={!canAccess('iap_admin', ['update']) || Boolean(teamCourse.progress.length)}
-                            />
-                            <Button
-                                startIcon={<TrashIcon label='Delete course' />}
-                                shape="square"
-                                size="sm"
-                                onClick={() => deleteHandler(teamCourse)}
-                                disabled={!canAccess('iap_admin', ['delete'])}
-                            />
+                            {canAccess('iap_course', ['create']) &&
+                                <Button
+                                    startIcon={<EditIcon label='Edit course' />}
+                                    shape="square"
+                                    size="sm"
+                                    onClick={() => editHandler(teamCourse)}
+                                    disabled={Boolean(teamCourse.progress.length)}
+                                />
+                            }
+                            {canAccess('iap_course', ['delete']) &&
+                                <Button
+                                    startIcon={<TrashIcon label='Delete course' />}
+                                    shape="square"
+                                    size="sm"
+                                    onClick={() => deleteHandler(teamCourse)}
+                                />
+                            }
                             <Button
                                 startIcon={<GraphLineIcon label='Completion results' />}
                                 shape="square"

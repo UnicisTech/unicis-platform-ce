@@ -288,5 +288,6 @@
   "iap-course-deleted": "Course deleted.",
   "answer": "Answer",
   "add-answer": "Add answer",
-  "remove-answer": "Remove answer"
+  "remove-answer": "Remove answer",
+  "forbidden-resource": "This resource is forbidden"
 }

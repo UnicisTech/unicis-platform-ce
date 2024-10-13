@@ -38,7 +38,7 @@ export default async function handler(
 // Get team IAP categories
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
     const teamMember = await throwIfNoTeamAccess(req, res);
-    throwIfNotAllowed(teamMember, 'iap', 'read');
+    throwIfNotAllowed(teamMember, 'iap_category', 'read');
 
     const team = teamMember.team;
 
@@ -50,7 +50,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 // Create new category
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     const teamMember = await throwIfNoTeamAccess(req, res);
-    throwIfNotAllowed(teamMember, 'iap_admin', 'create');
+    throwIfNotAllowed(teamMember, 'iap_category', 'create');
 
     const category = createCategory({name: req.body.name as string, teamId: teamMember.team.id})
 
