@@ -28,7 +28,7 @@ const StatusResults = ({
     return (
         <Modal open={visible} className='w-10/12 max-w-5xl'>
             <Modal.Header className="font-bold">
-                {`Course Completion Results - ${teamCourse.course.name}`}
+                {`Course Status Results - ${teamCourse.course.name}`}
             </Modal.Header>
             <Modal.Body>
                 <div className='grid grid-cols-2 gap-1'>

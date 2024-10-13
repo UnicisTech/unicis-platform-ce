@@ -4,16 +4,6 @@ import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const labels = [
-    'Passed',
-    'Failed',
-];
-
-const colors = [
-    'rgba(0, 135, 90, 0.7)',
-    'rgba(222, 53, 11, 0.7)',
-]
-
 const StatusResultsChart = ({
     passed,
     failed,
@@ -22,13 +12,22 @@ const StatusResultsChart = ({
     failed: number;
 }) => {
     const data = {
-        labels: labels,
+        labels: [
+            'Passed',
+            'Failed',
+        ],
         datasets: [
             {
                 label: 'Answers',
                 data: [passed, failed],
-                backgroundColor: colors,
-                borderColor: colors,
+                backgroundColor: [
+                    'rgba(0, 135, 90, 0.7)',
+                    'rgba(222, 53, 11, 0.7)',
+                ],
+                borderColor: [
+                    'rgba(0, 135, 90, 0.2)',
+                    'rgba(222, 53, 11, 0.2)',
+                ],
                 borderWidth: 1,
             },
         ],
