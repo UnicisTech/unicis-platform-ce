@@ -57,7 +57,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 // Update course by id
 const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     const teamMember = await throwIfNoTeamAccess(req, res);
-    throwIfNotAllowed(teamMember, 'iap', 'create');
+    throwIfNotAllowed(teamMember, 'iap_admin', 'update');
 
     const course = req.body as CourseFormData
 
@@ -96,7 +96,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
 // Delete course by id
 const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
     const teamMember = await throwIfNoTeamAccess(req, res);
-    throwIfNotAllowed(teamMember, 'iap', 'delete');
+    throwIfNotAllowed(teamMember, 'iap_admin', 'delete');
 
 
     const { courseId } = req.query as {

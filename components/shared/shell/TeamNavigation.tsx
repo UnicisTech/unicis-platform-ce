@@ -6,6 +6,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { QueueListIcon, ChartBarIcon } from '@heroicons/react/24/solid';
 import { useTranslation } from 'next-i18next';
+import useCanAccess from 'hooks/useCanAccess';
 import NavigationItems from './NavigationItems';
 import { NavigationProps, MenuItem } from './NavigationItems';
 import Icon from '../Icon';
@@ -16,8 +17,8 @@ interface NavigationItemsProps extends NavigationProps {
 
 const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   const { t } = useTranslation('common');
-
-  const menus: MenuItem[] = [
+  const { canAccess } = useCanAccess()
+  const menus: (MenuItem | null)[] = [
     {
       name: t('Dashboard'),
       href: `/teams/${slug}/dashboard`,
@@ -60,14 +61,14 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname?.startsWith(`/teams/${slug}`) &&
         activePathname.includes('csc'),
     },
-    {
+    canAccess('iap', ['read']) ? {
       name: t('iap'),
       href: `/teams/${slug}/iap`,
       icon: () => <Icon src="/unicis-iap-logo.png" />,
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         activePathname.includes('iap') && !activePathname.includes('iap/admin'),
-    },
+    } : null,
     {
       name: 'line-break',
       href: '',

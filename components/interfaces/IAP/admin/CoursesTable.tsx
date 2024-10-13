@@ -4,6 +4,7 @@ import EditIcon from '@atlaskit/icon/glyph/edit'
 import TrashIcon from '@atlaskit/icon/glyph/trash';
 import GraphLineIcon from '@atlaskit/icon/glyph/graph-line'
 import TableIcon from '@atlaskit/icon/glyph/table'
+import useCanAccess from 'hooks/useCanAccess';
 import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
 import { getCourseStatus } from '../services/helpers';
 import { StatusBadge } from '@/components/shared';
@@ -40,6 +41,8 @@ const CoursesTable = ({
     completionHandler: (course: TeamCourseWithProgress) => void;
     statusHandler: (teamCourse: TeamCourseWithProgress) => void;
 }) => {
+    const { canAccess } = useCanAccess();
+
     const rows = teamCourses.map((teamCourse, index) => {
         const status = getCourseStatus(teamCourse, members)
         return ({
@@ -56,13 +59,14 @@ const CoursesTable = ({
                                 shape="square"
                                 size="sm"
                                 onClick={() => editHandler(teamCourse)}
-                                disabled={Boolean(teamCourse.progress.length)}
+                                disabled={!canAccess('iap_admin', ['update']) || Boolean(teamCourse.progress.length)}
                             />
                             <Button
                                 startIcon={<TrashIcon label='Delete course' />}
                                 shape="square"
                                 size="sm"
                                 onClick={() => deleteHandler(teamCourse)}
+                                disabled={!canAccess('iap_admin', ['delete'])}
                             />
                             <Button
                                 startIcon={<GraphLineIcon label='Completion results' />}

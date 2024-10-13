@@ -50,9 +50,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 // Create new category
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     const teamMember = await throwIfNoTeamAccess(req, res);
-    throwIfNotAllowed(teamMember, 'iap', 'create');
-
-    console.log('handlePOST categories', req.body)
+    throwIfNotAllowed(teamMember, 'iap_admin', 'create');
 
     const category = createCategory({name: req.body.name as string, teamId: teamMember.team.id})
 

@@ -162,6 +162,10 @@ export const permissions: RolePermissions = {
       resource: 'iap',
       actions: ['read', 'create'],
     },
+    {
+      resource: 'iap_admin',
+      actions: ['read'],
+    },
   ],
   AUDITOR: [
     {
@@ -174,10 +178,6 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'task',
-      actions: ['read'],
-    },
-    {
-      resource: 'iap',
       actions: ['read'],
     },
   ],

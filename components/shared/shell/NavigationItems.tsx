@@ -15,7 +15,7 @@ export interface NavigationProps {
 }
 
 interface NavigationItemsProps {
-  menus: MenuItem[];
+  menus: (MenuItem | null)[];
 }
 
 interface NavigationItemProps {
@@ -26,7 +26,7 @@ interface NavigationItemProps {
 const NavigationItems = ({ menus }: NavigationItemsProps) => {
   return (
     <ul role="list" className="flex flex-1 flex-col gap-1">
-      {menus.map((menu) => (
+      {menus.map((menu) => menu ? (
         <li key={menu.name}>
           {menu.name === 'line-break' ? (
             <hr className="my-1 border-t border-gray-300 dark:border-gray-600" />
@@ -45,7 +45,7 @@ const NavigationItems = ({ menus }: NavigationItemsProps) => {
             </>
           )}
         </li>
-      ))}
+      ) : <></>)}
     </ul>
   );
 };

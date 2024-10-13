@@ -59,7 +59,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     const teamMember = await throwIfNoTeamAccess(req, res);
-    throwIfNotAllowed(teamMember, 'iap', 'create');
+    throwIfNotAllowed(teamMember, 'iap_admin', 'create');
 
     const course = req.body as CourseFormData
 

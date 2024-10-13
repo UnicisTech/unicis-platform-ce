@@ -64,7 +64,7 @@ const AdminPage = ({ categories, teamCourses, team, teams, members, mutateIap }:
         </div>
         <div className="flex justify-end items-center my-1">
 
-          {canAccess('iap', ['create']) && (
+          {canAccess('iap_admin', ['create']) && (
             <>
               <div className="mx-1.5 my-0">
                 <Button
