@@ -31,6 +31,7 @@
     "@atlaskit/lozenge": "^11.7.2",
     "@atlaskit/modal-dialog": "^12.13.4",
     "@atlaskit/popup": "^1.17.2",
+    "@atlaskit/progress-tracker": "^8.9.3",
     "@atlaskit/radio": "^6.3.0",
     "@atlaskit/range": "^7.2.0",
     "@atlaskit/section-message": "^6.5.2",

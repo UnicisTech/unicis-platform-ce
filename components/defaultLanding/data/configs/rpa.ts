@@ -1,5 +1,21 @@
 import { RpaConfig } from 'types';
 
+type Option = {
+  label: string;
+  value: string;
+};
+
+type Options = {
+  [key: string]: Option[];
+};
+
+const options: Options = {
+  RadioButton_Yes_No: [
+    { label: 'Yes', value: 'yes' },
+    { label: 'No', value: 'no' },
+  ],
+}
+
 export const config: RpaConfig = {
   category: [
     { value: 'marital', label: 'Marital status' },
@@ -389,6 +405,18 @@ export const config: RpaConfig = {
     { label: 'Zimbabwe', value: 'zimbabwe' },
     { label: 'Other', value: 'other' },
   ],
+  involveProfiling: options.RadioButton_Yes_No,
+  useAutomated: options.RadioButton_Yes_No,
+  involveSurveillance: options.RadioButton_Yes_No,
+  processedSpecialCategories: options.RadioButton_Yes_No,
+  isBigData: options.RadioButton_Yes_No,
+  dataSetsCombined: options.RadioButton_Yes_No,
+  multipleControllers: options.RadioButton_Yes_No,
+  imbalanceInRelationship: options.RadioButton_Yes_No,
+  innovativeTechnologyUsed: options.RadioButton_Yes_No,
+  transferredOutside: options.RadioButton_Yes_No,
+  rightsRestricted: options.RadioButton_Yes_No,
+  piaNeeded: options.RadioButton_Yes_No,
 };
 
 export const fieldPropsMapping = {
@@ -408,12 +436,25 @@ export const fieldPropsMapping = {
   country: 'Country',
   guarantee: 'Type of guarantees',
   toms: 'Type of security measures',
+  involveProfiling: '1. Does it involve profiling?',
+  useAutomated: '2. Does it use automated decision-making?',
+  involveSurveillance: '3. Does it involve surveillance, GPS, or monitoring?',
+  processedSpecialCategories: '4. Are special categories like criminal records processed?',
+  isBigData: '5. Is a large amount of data processed (Big Data)?',
+  dataSetsCombined: '6. Are data sets combined?',
+  multipleControllers: '7. Are there multiple controllers?',
+  imbalanceInRelationship: '8. Is there an imbalance in the controller-subject relationship?',
+  innovativeTechnologyUsed: '9. Is an innovative technology used?',
+  transferredOutside: '10. Is data transferred outside the EU?',
+  rightsRestricted: `11. Are subjects' rights restricted?`,
+  piaNeeded: '12. Is a data protection impact assessment needed?',
 };
 
 export const headers = [
-  'Description/Stakeholders',
+  'Description / Stakeholders',
   'Purpose and Categories',
   'Recipients',
   'Transfer',
   'Security Measures/TOMs',
+  'Data Protection Impact Assessment'
 ];
