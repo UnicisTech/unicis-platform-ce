@@ -45,12 +45,12 @@ const CreateDistributors = ({
 }) => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
+  const [selectedNodes, setSelectedNodes] = useState<string[]>([]);
   const createQuery = useCreateQuery();
-  const [nodesId, setNodeId] = useState<string[]>([]);
   const { t } = useTranslation('common');
 
-  const handleNodeSelect = (nodeId: string) => {
-    setNodeId((prevNodes) => [...(prevNodes || []), nodeId]);
+  const handleNodeSelection = (nodeIds: string[]) => {
+    console.log("Selected Node IDs:", nodeIds);
   };
 
   return (
@@ -62,7 +62,7 @@ const CreateDistributors = ({
             const queryData = {
               description,
               interval,
-              nodes: nodesId,
+              nodes: selectedNodes,
               not_before,
               sql,
               tags,
@@ -117,7 +117,14 @@ const CreateDistributors = ({
                   )}
                 </Field>
                 
-                <NodesSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={user.fleetAccessPhrase!} onSelect={handleNodeSelect} />
+                <Field label="Assign Nodes" name="nodes">
+                  {({ fieldProps }: any) => (
+                    <Fragment>
+                      <NodesSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={user.fleetAccessPhrase!} setSectionNode={setSelectedNodes} onSelect={handleNodeSelection} />
+                    </Fragment>
+                  )}
+                </Field>
+                
                 
                 <Field label="Description" name="description">
                   {({ fieldProps }: any) => (
@@ -158,7 +165,6 @@ const CreateDistributors = ({
                 appearance="primary"
                 ref={submitButtonRef}
                 isLoading={submitting}
-                isDisabled={nodesId.length === 0}
               >
                 {t('create')}
               </LoadingButton>

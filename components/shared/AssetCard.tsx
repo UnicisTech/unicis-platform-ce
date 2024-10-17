@@ -19,11 +19,11 @@ const platformIcons = {
 
 const platformBGs = {
   linux: 'bg-green-500',
-  windows: 'bg-green-500',
-  darwin: 'bg-green-500',
-  freebsd: 'bg-green-500',
-  posix: 'bg-green-500',
-  all: 'bg-green-500',
+  windows: 'bg-blue-500',
+  darwin: 'bg-gray-500',
+  freebsd: 'bg-red-500',
+  posix: 'bg-purple-500',
+  all: 'bg-yellow-500',
 };
 
 export interface AssetProps {

@@ -54,12 +54,10 @@ const ConnectFleet = ({
         console.error('Invalid data from user');
       }
       try {
-        if (!user.fleetId) {
-          await createFleetAccount(userEmail!, firstName!, lastName!, fleetPassword);
-        }
+        await createFleetAccount(userEmail!, firstName!, lastName!, fleetPassword);
         if (userId) {
           const { user, fleet_access } = await accessFleetAccount(userEmail!, fleetPassword);
-         
+      
           if (user && fleet_access) {
             const connected = await connectFleetAccount(userId, user.id, fleet_access.secret_key);
             if (connected) {

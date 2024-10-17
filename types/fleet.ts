@@ -15,6 +15,13 @@ export interface FleetUser {
   updated_at: string;
 }
 
+export interface FleetTeam {
+  id: string;
+  name: string;
+  user: FleetUser;
+}
+
+
 export interface FleetMember {
   id: string;
   joined_at: string;
@@ -61,7 +68,7 @@ export interface Pack extends FleetBase {
   version: string;
   description?: string;
   shard?: number;
-  team: string;
+  team: FleetTeam;
   tags?: Tag[];
 }
 
@@ -87,7 +94,7 @@ export interface TagsWithRelationshipsResponse {
 }
 
 export interface Tag extends FleetBase {
-  team: string;
+  team: FleetTeam;
   value: string;
   packs_count: number;
   nodes_count: number;
@@ -96,7 +103,7 @@ export interface Tag extends FleetBase {
 };
 
 export interface Query extends FleetBase {
-  team: string;
+  team: FleetTeam;
   name: string;
   sql: string;
   interval: number;
@@ -116,7 +123,7 @@ export interface PackWithRelationships extends Pack {
 }
 
 export interface Node extends FleetBase{
-  team: string;
+  team: FleetTeam;
   node_key: string;
   enroll_secret?: string;
   enrolled_on?: string;
@@ -140,7 +147,7 @@ export interface NodesWithRelationshipsResponse {
 }
 
 export interface DistributedQuery extends FleetBase{
-  team: string;
+  team: FleetTeam;
   sql: string;
   description?: string;
   not_before?: string;

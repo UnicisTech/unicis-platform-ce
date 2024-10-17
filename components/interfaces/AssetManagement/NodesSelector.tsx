@@ -1,52 +1,54 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useNodes } from '@/hooks/fleets/Nodes/useNodes';
-
+import { WithoutRing } from 'sharedStyles';
+import Select from '@atlaskit/select';
 
 interface NodesSelectorProps {
-    fleetTeamId: string;
-    fleetAccessPhrase: string;
-    onSelect: (nodeId: string) => void;
+  fleetTeamId: string;
+  fleetAccessPhrase: string;
+  onSelect: (nodeIds: string[]) => void;
+  setSectionNode: (nodeIds: string[]) => void;
 }
 
-const NodesSelector: React.FC<NodesSelectorProps> = ({ fleetTeamId, fleetAccessPhrase, onSelect }) => {
+const NodesSelector: React.FC<NodesSelectorProps> = ({ fleetTeamId, fleetAccessPhrase, onSelect, setSectionNode }) => {
 
   const { nodes, isLoading, isError } = useNodes(fleetTeamId!, fleetAccessPhrase!, status);
-
+  
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>{isError}</p>;
 
+  const nodeOptions = nodes.map((node) => ({
+    value: node.id,
+    label: `${node.node_info?.system_info?.computer_name || 'Unknown Host'} - ${node.host_identifier} - ${node.is_active ? '🟢 Active' : '🔴 Inactive'}`
+  }));
+
+  const handleNodeChange = (selectedOptions: any) => {
+    // Extract only the values (node IDs) from the selected options
+    const selectedNodeIds = selectedOptions.map((option: { value: string }) => option.value);
+
+    // Set the selected node IDs to state
+    setSectionNode(selectedNodeIds);
+
+    // Call onSelect with the selected node IDs
+    onSelect(selectedNodeIds);
+  };
+
   return (
-    <div>
+    <WithoutRing>
       {nodes.length === 0 ? (
         <p>No nodes found</p>
       ) : (
-        <ul className="node-list">
-          {nodes.map((node) => (
-            <li
-              key={node.node_key}
-              className="node-item border p-2 mb-2 cursor-pointer hover:bg-gray-100"
-              onClick={() => onSelect(node.node_key)}
-            >
-              <div>
-                <strong>Node Key:</strong> {node.node_key}
-              </div>
-              <div>
-                <strong>Host Identifier:</strong> {node.host_identifier || 'N/A'}
-              </div>
-              <div>
-                <strong>Last IP:</strong> {node.last_ip || 'N/A'}
-              </div>
-              <div>
-                <strong>Status:</strong> {node.is_active ? 'Active' : 'Inactive'}
-              </div>
-              <div>
-                <strong>Last Check-in:</strong> {node.last_checkin || 'N/A'}
-              </div>
-            </li>
-          ))}
-        </ul>
+       <Select
+        inputId="multi-select-nodes"
+        className="multi-select text-sm text-red-500 ring-1 ring-red-500 rounded"
+        classNamePrefix="react-select"
+        options={nodeOptions}
+        onChange={handleNodeChange}
+        placeholder="Select a node"
+        isMulti
+      />
       )}
-    </div>
+    </WithoutRing>
   );
 };
 
