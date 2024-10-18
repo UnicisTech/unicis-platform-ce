@@ -61,6 +61,14 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname.includes('csc'),
     },
     {
+      name: t('rm'),
+      href: `/teams/${slug}/risk-management`,
+      icon: () => <Icon src="/unicis-csc-logo.png" />,
+      active:
+        activePathname?.startsWith(`/teams/${slug}`) &&
+        activePathname.includes('risk-management'),
+    },
+    {
       name: 'line-break',
       href: '',
     },
