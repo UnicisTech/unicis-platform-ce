@@ -14,13 +14,6 @@ interface FormData {
   values;
 }
 
-interface Option {
-  label: string;
-  value: string;
-}
-
-const DEFAULT_PLATFORM_VALUE = 'all';
-
 const CreateTag = ({
   visible,
   setVisible,

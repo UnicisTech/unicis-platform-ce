@@ -1,5 +1,4 @@
-import React, { Fragment, useRef } from 'react';
-import { Team } from '@prisma/client';
+import React, { Fragment, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
@@ -14,6 +13,9 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { PLATFORMS } from "@/lib/fleet/constants";
 import { useCreateQuery } from '@/hooks/fleets/querys/useCreateQuery';
+import PacksSelector from '../PacksSelector';
+import TagsSelector from '../TagsSelector';
+import { TimePicker } from '@atlaskit/datetime-picker';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -53,6 +55,8 @@ const CreateQuery = ({
 }) => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
+  const [selectedPacks, setSelectedPacks] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const createQuery = useCreateQuery();
   const { t } = useTranslation('common');
 
@@ -61,7 +65,7 @@ const CreateQuery = ({
       <Modal.Header className="font-bold">Create Query</Modal.Header>
       <Form<FormData>
         onSubmit={async (data, { reset }) => {
-            const { name, platform, version, shard, description, interval, packs, removed, sql, tags, value } = data;
+            const { name, platform, version, shard, description, interval, removed, sql, tags, value } = data;
             const queryData = {
                 name,
                 platform: platform?.value,
@@ -69,17 +73,17 @@ const CreateQuery = ({
                 shard,
                 description,
                 interval,
-                packs,
+                packs: selectedPacks,
                 removed,
                 sql,
-                tags,
+                tags: selectedTags.join(','),
                 value
             };
             try {
                 await createQuery(fleetTeamId, queryData, user.fleetAccessPhrase!);
-                toast.success(t('success-creating-pack'));
+                toast.success(t('success-creating-query'));
             } catch (err) {
-                toast.error(t('error-creating-pack'));
+                toast.error(t('error-creating-query'));
             };
         }}
       >
@@ -110,9 +114,9 @@ const CreateQuery = ({
                       <TextField autoComplete="off" {...fieldProps} />
                     </Fragment>
                   )}
-                              </Field>
-                              
-                              <Field
+                </Field>
+                
+                <Field
                   aria-required={true}
                   name="sql"
                   label="SQL Code"
@@ -238,20 +242,27 @@ const CreateQuery = ({
                     </Fragment>
                   )}
                 </Field>
+                
+                <Field label="Assign Packs" name="nodes">
+                  {({ fieldProps }: any) => (
+                    <Fragment>
+                      <PacksSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={user.fleetAccessPhrase!} setSectionPack={setSelectedPacks} onSelect={()=>{}}/>
+                    </Fragment>
+                  )}
+                </Field>
 
-
-                  <Field
-                    aria-required={false}
-                    name="tags"
-                    label="Tags"
-                    isRequired={false}
-                  >
-                    {({ fieldProps }) => (
-                      <Fragment>
-                        <TextField autoComplete="off" {...fieldProps} />
-                      </Fragment>
-                    )}
-                  </Field>
+                <Field
+                  aria-required={false}
+                  name="tags"
+                  label="Tags"
+                  isRequired={false}
+                >
+                  {({ fieldProps }) => (
+                    <Fragment>
+                      <TagsSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={user.fleetAccessPhrase!} setSectionTag={setSelectedTags} onSelect={()=>{}}/>
+                    </Fragment>
+                  )}
+                </Field>
                 <FormFooter>
                 </FormFooter>
               </div>

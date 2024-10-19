@@ -1,7 +1,7 @@
 import { Fragment, useCallback, useState } from 'react';
 import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
-import { Error, Loading, PlatformBadge } from '@/components/shared';
+import { Error, Loading } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
 import type { User } from '@prisma/client';
 import { PLATFORMS } from '@/lib/fleet/constants';

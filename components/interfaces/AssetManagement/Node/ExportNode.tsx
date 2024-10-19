@@ -2,7 +2,6 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { Modal, Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import { InputWithLabel } from '@/components/shared';
 import { useDeleteNode } from '@/hooks/fleets/Nodes/useDeleteNode';
@@ -20,8 +19,6 @@ const ExportNode = ({
   fleetTeamId: string;
   fleetAccessPhrase: string;
 }) => {
-  const router = useRouter();
-  const { slug } = router.query;
   const { t } = useTranslation('common');
 
   const deleteNode = useDeleteNode();

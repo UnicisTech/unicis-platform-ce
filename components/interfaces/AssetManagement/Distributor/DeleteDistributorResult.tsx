@@ -1,10 +1,7 @@
 import React from 'react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { Modal, Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
-import type { ApiResponse } from 'types';
-import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import { useDeleteQuery } from '@/hooks/fleets/querys/useDeleteQuery';
 import { InputWithLabel } from '@/components/shared';

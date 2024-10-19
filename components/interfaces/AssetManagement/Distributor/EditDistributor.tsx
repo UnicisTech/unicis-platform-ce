@@ -3,14 +3,13 @@ import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import TextField from '@atlaskit/textfield';
 import Select, { ValueType } from '@atlaskit/select';
-import type { Team } from '@prisma/client';
 import Button, { LoadingButton } from '@atlaskit/button';
 import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
 import { WithoutRing } from 'sharedStyles';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { PLATFORMS } from '@/lib/fleet/constants';
-import { DistributedQuery, Query } from '@/types';
+import { DistributedQuery } from '@/types';
 import { useUpdateQuery } from '@/hooks/fleets/querys/useUpdateQuery';
 import toast from 'react-hot-toast';
 

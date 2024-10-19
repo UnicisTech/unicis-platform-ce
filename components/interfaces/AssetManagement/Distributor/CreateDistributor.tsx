@@ -3,14 +3,16 @@ import toast from 'react-hot-toast';
 import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import TextField from '@atlaskit/textfield';
+import { DateTimePicker } from '@atlaskit/datetime-picker';
 import { ValueType } from '@atlaskit/select';
 import type { User } from '@prisma/client';
 import Button, { LoadingButton } from '@atlaskit/button';
 import Form, { Field, FormFooter } from '@atlaskit/form';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
-import { useCreateQuery } from '@/hooks/fleets/querys/useCreateQuery';
 import NodesSelector from '../NodesSelector';
+import { useCreateDistributors } from '@/hooks/fleets/distributors/useCreateDistributor';
+import TagsSelector from '../TagsSelector';
 
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -20,7 +22,7 @@ interface FormData {
   sql: string;
   not_before: string;
   nodes: string[];
-  tags: string;
+  tags: string[];
   description;
   [key: string]: string | ValueType<Option> | boolean | number | string[];
 }
@@ -46,16 +48,16 @@ const CreateDistributors = ({
   const formRef = useRef<HTMLFormElement | null>(null);
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
   const [selectedNodes, setSelectedNodes] = useState<string[]>([]);
-  const createQuery = useCreateQuery();
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const { t } = useTranslation('common');
-
-  const handleNodeSelection = (nodeIds: string[]) => {
-    console.log("Selected Node IDs:", nodeIds);
+  const createDistributor = useCreateDistributors();
+  const handleNodeSelection = (nodeKeys: string[]) => {
+    console.log("Selected Node Keys:", nodeKeys);
   };
 
   return (
     <Modal open={visible}>
-      <Modal.Header className="font-bold">Create Query</Modal.Header>
+      <Modal.Header className="font-bold">Create Distributor</Modal.Header>
       <Form<FormData>
         onSubmit={async (data, { reset }) => {
             const { description, interval, sql, tags, not_before } = data;
@@ -65,13 +67,13 @@ const CreateDistributors = ({
               nodes: selectedNodes,
               not_before,
               sql,
-              tags,
+              tags: selectedTags,
             };
             try {
-                await createQuery(fleetTeamId, queryData, user.fleetAccessPhrase!);
-                toast.success(t('success-creating-pack'));
+              await createDistributor(fleetTeamId, queryData, user.fleetAccessPhrase!);
+              toast.success(t('success'));
             } catch (err) {
-                toast.error(t('error-creating-pack'));
+              toast.error(t('error'));
             };
         }}
       >
@@ -91,19 +93,6 @@ const CreateDistributors = ({
                   flexDirection: 'column',
                 }}
               >
-                <Field
-                  aria-required={true}
-                  name="not_before"
-                  label="Not Before"
-                  isRequired
-                >
-                  {({ fieldProps }) => (
-                    <Fragment>
-                      <TextField autoComplete="off" {...fieldProps} />
-                    </Fragment>
-                  )}
-                </Field>
-                
                 <Field
                   aria-required={true}
                   name="sql"
@@ -134,6 +123,23 @@ const CreateDistributors = ({
                   )}
                 </Field>
 
+                <Field
+                  aria-required={true}
+                  name="not_before"
+                  label="Not Before"
+                  isRequired
+                >
+                  {({ fieldProps }) => (
+                    <Fragment>
+                      <DateTimePicker
+                        dateFormat="YYYY-MM-DD"
+                        timeFormat="HH:mm:ss"
+                        timeIsEditable={true}
+                        {...fieldProps}
+                      />
+                    </Fragment>
+                  )}     
+                </Field>
 
                 <Field
                   aria-required={false}
@@ -143,7 +149,7 @@ const CreateDistributors = ({
                 >
                   {({ fieldProps }) => (
                     <Fragment>
-                      <TextField autoComplete="off" {...fieldProps} />
+                      <TagsSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={user.fleetAccessPhrase!} setSectionTag={setSelectedTags} onSelect={()=>{}}/>
                     </Fragment>
                   )}
                 </Field>

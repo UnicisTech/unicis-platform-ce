@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
@@ -12,6 +12,7 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { PLATFORMS } from "@/lib/fleet/constants";
 import { useCreatePack } from '@/hooks/fleets/packs/useCreatePack';
+import TagsSelector from '../TagsSelector';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -46,6 +47,7 @@ const CreatePack = ({
 }) => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const createPack = useCreatePack();
   const { t } = useTranslation('common');
 
@@ -56,7 +58,7 @@ const CreatePack = ({
       <Form<FormData>
         onSubmit={async (data, { reset }) => {
           const { name, platform, version, shard, description, tags } = data;
-          const packData = {name, platform: platform?.value, version, shard, description, tags};
+          const packData = {name, platform: platform?.value, version, shard, description, tags: selectedTags.join(',')};
           try {
             await createPack(fleetTeamId, packData, user?.fleetAccessPhrase!);
             toast.success(t('success-creating-pack'));
@@ -167,16 +169,16 @@ const CreatePack = ({
                 </Field>
 
                 <Field
-                    aria-required={false}
-                    name="tags"
-                    label="Tags"
-                    isRequired={false}
-                  >
-                    {({ fieldProps }) => (
-                      <Fragment>
-                        <TextField autoComplete="off" {...fieldProps} />
-                      </Fragment>
-                    )}
+                  aria-required={false}
+                  name="tags"
+                  label="Tags"
+                  isRequired={false}
+                >
+                  {({ fieldProps }) => (
+                    <Fragment>
+                      <TagsSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={user.fleetAccessPhrase!} setSectionTag={setSelectedTags} onSelect={()=>{}}/>
+                    </Fragment>
+                  )}
                 </Field>
                 
                 <FormFooter></FormFooter>
