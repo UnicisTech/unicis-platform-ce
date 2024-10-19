@@ -20,6 +20,10 @@ const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
   if (isLoading || isError || !members || !subscription) {
     return null;
   }
+
+  const totalPrice = getTotalPrice(subscription.plan, members.length);
+  const paymentUrl = `https://wise.com/pay/business/unicistechou?currency=EUR&amount=${totalPrice}`;
+
   if (subscription.payments.length === 0) {
     return null;
   }
@@ -71,25 +75,17 @@ const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
           </p>
         </div>
       </Card.Body>
-      {/* <AccessControl resource="team" actions={['update']}> */}
       <Card.Footer>
         <div className="flex justify-end">
           <Link
             rel="noopener noreferrer"
             target="_blank"
-            style={newestPayment.paymentUrl ? {} : { pointerEvents: 'none' }}
-            href={newestPayment.paymentUrl || ''}
+            href={paymentUrl}
           >
-              <img src="/pww-button.svg" alt="Pay Now" />
-            <div className="pay-now-button">
-              <a href="/pay-now">
-                
-              </a>
-             </div>
+            <img src="/pww-button.svg" alt="Pay with WISE" />
           </Link>
         </div>
       </Card.Footer>
-      {/* </AccessControl> */}
     </Card>
   );
 };
