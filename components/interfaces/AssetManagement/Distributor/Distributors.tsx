@@ -14,6 +14,8 @@ import { Code } from '@atlaskit/code';
 import { useDistributors } from '@/hooks/fleets/distributors/useDistributors';
 import EditDistributor from './EditDistributor';
 import DeleteDistributor from './DeleteDistributorResult';
+import FormattedDate from '@/components/shared/Date';
+import StatusValue from '../StatusValue';
 
 
 const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
@@ -28,7 +30,7 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
 
-  const { distributors, isLoading, isError } = useDistributors(team?.fleetTeamId || '', user?.fleetAccessPhrase!);
+  const { tasks, isLoading, isError } = useDistributors(team?.fleetTeamId || '', user?.fleetAccessPhrase!);
 
   if (isLoading) {
     return <Loading />;
@@ -93,7 +95,7 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
                 {t('sql')}
               </th>
               <th scope="col" className="px-6 py-3">
-                {t('discription')}
+                {t('task')}
               </th>
               <th scope="col" className="px-6 py-3">
                 {t('actions')}
@@ -101,36 +103,62 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
             </tr>
           </thead>
           <tbody>
-            {distributors &&
-              distributors.map((distributor) => {
+            {tasks &&
+              tasks.map((task, index) => {
                 return (
-                  <tr key={distributor.id}>
+                  <tr key={task.id}>
                     <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/distributors/${distributor.id}`}>
+                      <Link href={`/teams/${slug}/asset-management/distributors/${task.id}`}>
                         <div className="flex items-center justify-start space-x-2">
-                          <span className="underline">{distributor.index}</span>
+                          <span className="underline">{index}</span>
                         </div>
                       </Link>
                     </td>
                     <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/distributors/${distributor.id}`}>
+                      <Link href={`/teams/${slug}/asset-management/distributors/${task.id}`}>
                         <div className="flex items-center justify-start space-x-2">
-                          <span className="underline">{distributor.not_before}</span>
+                          <span className="">{task.distributed_query.not_before}</span>
                         </div>
                       </Link>
                     </td>
                     <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/distributors/${distributor.id}`}>
+                      <Link href={`/teams/${slug}/asset-management/distributors/${task.id}`}>
                         <div className="flex items-center justify-start space-x-2">
-                          <Code onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>{distributor.sql}</Code>
+                          <Code onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>{task.distributed_query.sql}</Code>
                         </div>
                       </Link>
                     </td>
-                    <td className="px-6 py-3">
-                      <div className="flex items-center justify-start space-x-2">
-                        <span className="">{distributor.description}</span>
-                      </div>
-                    </td>
+                     <td className="py-3 w-[25%] align-top">
+                        <div className="grid grid-cols-4 gap-1 text-center font-bold items-center justify-start">
+                          <div className="bg-gray-700 rounded-xs">
+                            <h1 className="rounded-xs text-[10px] bg-gray-600">GUID</h1>
+                            <span className="text-[10px] line-clamp-1 px-2 overflow-hidden">{task.guid}</span>
+                          </div>
+                          <div className="bg-gray-700 rounded-xs">
+                          <h1 className="rounded-xs text-[10px] bg-gray-600">Status</h1>
+
+                            <span className="text-[10px] line-clamp-1 px-2 overflow-hidden">{StatusValue(task.status)}</span>
+                          </div>
+                          <div className="bg-gray-700 rounded-xs">
+                          <h1 className="rounded-xs text-[10px] bg-gray-600">Node</h1>
+                            <div className='grid justify-center p-1'>
+                              {task.node.is_active ?
+                              <div className='p-1.5 rounded-full bg-green-500'></div>
+                              :
+                              <div className='p-1.5 rounded-full bg-red-500'></div>
+                              }
+                            </div>
+                          </div>
+                          <div className="bg-gray-700 rounded-xs">
+                          <h1 className="rounded-xs text-[10px] bg-gray-600">Timestamp</h1>
+                          {task.timestamp != null ?
+                            <FormattedDate style={'text-[10px]'} dateString={task.timestamp} />
+                            :
+                            'Null'
+                          }
+                          </div>
+                        </div>
+                      </td>
                     <td className="px-6 py-3">
                       <div className="gap-2 btn-group">
                         {canAccess('team_fleet_pack', ['update']) && (
@@ -139,7 +167,7 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
                             size="sm"
                             variant="outline"
                             onClick={() => {
-                              openEditModal(distributor);
+                              openEditModal(task.distributed_query);
                             }}
                           >
                             {t('edit-task')}
@@ -151,7 +179,7 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
                             size="sm"
                             variant="outline"
                             onClick={() => {
-                              openDeleteModal(distributor.id);
+                              openDeleteModal(task.distributed_query.id);
                             }}
                           >
                             {t('delete')}

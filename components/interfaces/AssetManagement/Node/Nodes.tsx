@@ -131,13 +131,13 @@ const Nodes = ({ team, user }: { team: Team, user: Partial<User> }) => {
             </thead>
             <tbody>
               {nodes &&
-                nodes.map((node) => {
+                nodes.map((node, index) => {
                   return (
                     <tr key={node.id}>
                       <td className="px-6 py-3 align-top">
                         <Link href={`/teams/${slug}/asset-management/nodes/${node.id}`}>
                           <div className="flex items-center justify-start">
-                            <span className="underline">{node.index}</span>
+                            <span className="underline">{index}</span>
                           </div>
                         </Link>
                       </td>

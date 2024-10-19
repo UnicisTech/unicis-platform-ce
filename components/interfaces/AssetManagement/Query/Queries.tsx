@@ -109,13 +109,13 @@ const Querys = ({ team, user }: { team: Team, user: Partial<User> }) => {
           </thead>
           <tbody>
             {querys &&
-              querys.map((query) => {
+              querys.map((query, index) => {
                 return (
                   <tr key={query.id}>
                     <td className="px-6 py-3">
                       <Link href={`/teams/${slug}/asset-management/querys/${query.id}`}>
                         <div className="flex items-center justify-start space-x-2">
-                          <span className="underline">{query.index}</span>
+                          <span className="underline">{index}</span>
                         </div>
                       </Link>
                     </td>

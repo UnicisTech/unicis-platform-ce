@@ -106,13 +106,13 @@ const Packs = ({ team, user }: { team: Team, user: Partial<User> }) => {
           </thead>
           <tbody>
             {packs &&
-              packs.map((pack) => {
+              packs.map((pack, index) => {
                 return (
                   <tr key={pack.id}>
                     <td className="px-6 py-3">
                       <Link href={`/teams/${slug}/asset-management/packs/${pack.id}`}>
                         <div className="flex items-center justify-start space-x-2">
-                          <span className="underline">{pack.index}</span>
+                          <span className="underline">{index}</span>
                         </div>
                       </Link>
                     </td>

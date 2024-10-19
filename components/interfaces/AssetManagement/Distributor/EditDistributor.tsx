@@ -88,21 +88,7 @@ const EditDistributors = ({
                   margin: '0 auto',
                   flexDirection: 'column',
                 }}
-              >
-                <Field
-                  aria-required={true}
-                  name="name"
-                  label="Name"
-                  isRequired
-                  defaultValue={distributor.index}
-                >
-                  {({ fieldProps }) => (
-                    <Fragment>
-                      <TextField autoComplete="off" {...fieldProps} />
-                    </Fragment>
-                  )}
-                </Field>
-                
+              > 
                 <Field<ValueType<Option>>
                   name="platform"
                   label="Platform"

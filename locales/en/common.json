@@ -144,6 +144,7 @@
   "revoke-api-key-confirm": "Are you sure you want to revoke this API Key? This action can not be undone.",
   "delete": "Delete",
   "export": "Export",
+  "task": "Task",
   "copy-to-clipboard": "Copy",
   "copied-to-clipboard": "Copied to clipboard",
   "api-key": "API Key",
@@ -316,5 +317,6 @@
   "platform-info": "Platform Info",
   "active-nodes": "Active Nodes",
   "inactive-nodes": "Inactive Nodes",
-  "all-nodes": "All Nodes"
+  "all-nodes": "All Nodes",
+  "distributors": "Distributors"
 }

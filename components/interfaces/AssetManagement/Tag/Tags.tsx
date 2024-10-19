@@ -93,13 +93,13 @@ const Tags = ({ team, user }: { team: Team, user: Partial<User> }) => {
             </thead>
             <tbody>
               {tags &&
-                tags.map((tag) => {
+                tags.map((tag, index) => {
                   return (
                     <tr key={tag.id}>
                       <td className="px-6 py-3">
                         <Link href={`/teams/${slug}/asset-management/tags/${tag.id}`}>
                           <div className="flex items-center justify-start space-x-2">
-                            <span className="underline">{tag.index}</span>
+                            <span className="underline">{index}</span>
                           </div>
                         </Link>
                       </td>

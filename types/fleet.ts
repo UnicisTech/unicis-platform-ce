@@ -2,7 +2,6 @@ export interface FleetBase {
   id: string;
   updated_at: string;
   created_at: string;
-  index?: string;
 }
 
 export interface FleetUser {
@@ -163,10 +162,13 @@ export interface DistributedQueryTask extends FleetBase {
   guid: string;
   status: 0 | 1 | 2 | 3;
   timestamp?: string;
-  distributed_query_id: string;
-  node_id: string;
+  distributed_query: DistributedQuery;
+  node: Node;
 }
 
+export interface DistributedQueryTaskResponse {
+  tasks: DistributedQueryTask[];
+}
 
 export interface StatusLog extends FleetBase {
 
