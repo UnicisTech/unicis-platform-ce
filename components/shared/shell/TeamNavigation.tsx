@@ -95,6 +95,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       name: t('support'),
       href: 'https://discord.com/invite/8TwyeD97HD',
       icon: QuestionMarkCircleIcon,
+      className: 'stroke-blue-600',
     },
     {
       name: t('settings'),
