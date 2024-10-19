@@ -129,7 +129,7 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
                       </Link>
                     </td>
                      <td className="py-3 w-[25%] align-top">
-                        <div className="grid grid-cols-4 gap-1 text-center font-bold items-center justify-start">
+                        <div className="grid grid-cols-1 gap-1 text-center font-bold items-center justify-start">
                           <div className="bg-gray-700 rounded-xs">
                             <h1 className="rounded-xs text-[10px] bg-gray-600">GUID</h1>
                             <span className="text-[10px] line-clamp-1 px-2 overflow-hidden">{task.guid}</span>
@@ -140,7 +140,7 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
                             <span className="text-[10px] line-clamp-1 px-2 overflow-hidden">{StatusValue(task.status)}</span>
                           </div>
                           <div className="bg-gray-700 rounded-xs">
-                          <h1 className="rounded-xs text-[10px] bg-gray-600">Node</h1>
+                          <h1 className="rounded-xs text-[10px] bg-gray-600">Node Status</h1>
                             <div className='grid justify-center p-1'>
                               {task.node.is_active ?
                               <div className='p-1.5 rounded-full bg-green-500'></div>
