@@ -259,7 +259,7 @@
   "send": "Send",
   "current": "Current",
   "subscription-request-sent": "Request sent!",
-  "wise-payment": "Wise Payment",
+  "wise-payment": "Payment",
   "wise-payment-details": "Payment link will be added as soon as your request is processed.",
   "pay-now": "Pay Now",
   "auth-limited": "Too many login attempts. Please try again in 1 minute.",

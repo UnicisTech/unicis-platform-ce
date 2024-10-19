@@ -80,14 +80,12 @@ const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
             style={newestPayment.paymentUrl ? {} : { pointerEvents: 'none' }}
             href={newestPayment.paymentUrl || ''}
           >
-            <Button
-              type="submit"
-              color="primary"
-              disabled={!newestPayment.paymentUrl}
-              size="md"
-            >
-              {t('pay-now')}
-            </Button>
+              <img src="/pww-button.svg" alt="Pay Now" />
+            <div className="pay-now-button">
+              <a href="/pay-now">
+                
+              </a>
+             </div>
           </Link>
         </div>
       </Card.Footer>
