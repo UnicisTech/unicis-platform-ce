@@ -11,8 +11,8 @@ import Select, { ValueType } from '@atlaskit/select';
 import TextField from '@atlaskit/textfield';
 import toast from 'react-hot-toast';
 import DeleteQuery from './DeleteDistributorResult';
-import { useGetQueryId } from '@/hooks/fleets/querys/useGetQueryId';
 import { useUpdateQuery } from '@/hooks/fleets/querys/useUpdateQuery';
+import { useGetDistributedIdResult } from '@/hooks/fleets/distributors/useGetDistributorIdResult';
 
 interface FormData {
   name,
@@ -28,9 +28,10 @@ interface Option {
   value: string;
 }
 
-const DistributorsDetails = ({ user, queryID, fleetTeamId }: { user: Partial<User>, queryID: string, fleetTeamId: string }) => {
+const DistributorsDetails = ({ user, distributorId, fleetTeamId }: { user: Partial<User>, distributorId: string, fleetTeamId: string }) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
+  const [status, setStatus] = useState<'new' | 'pending' | 'complete' | 'failed'>('new');
   const [isFormChanged, setIsFormChanged] = useState(false);
   const updateQuery = useUpdateQuery();
 
@@ -42,7 +43,7 @@ const DistributorsDetails = ({ user, queryID, fleetTeamId }: { user: Partial<Use
   }, []);
   
 
-  const { query, isLoading, isError } = useGetQueryId(fleetTeamId, queryID, user.fleetAccessPhrase!);
+  const { distributorsResult, isLoading, isError } = useGetDistributedIdResult(fleetTeamId, distributorId, status, user.fleetAccessPhrase!);
 
   if (isLoading) {
     return <Loading />;
@@ -68,9 +69,9 @@ const DistributorsDetails = ({ user, queryID, fleetTeamId }: { user: Partial<Use
           const { name, platform, version, shard, description } = data;
           const queryData = {name, platform: platform?.value, version, shard, description};
           try {
-            await updateQuery(fleetTeamId!, queryData, queryID, user.fleetAccessPhrase!);
+            await updateQuery(fleetTeamId!, queryData, distributorId, user.fleetAccessPhrase!);
           } catch (err) {
-            toast.error(t('error-updating-query'));
+            toast.error(t('error-updating'));
           };
         }}
       >
@@ -86,10 +87,10 @@ const DistributorsDetails = ({ user, queryID, fleetTeamId }: { user: Partial<Use
             >
               <Field
                 aria-required={true}
-                name="name"
-                label="Name"
+                name="sql"
+                label="Sql Code"
                 isRequired
-                defaultValue={query?.name}
+                defaultValue={distributorsResult?.query.sql}
               >
                 {({ fieldProps }) => (
                   <Fragment>
@@ -104,7 +105,7 @@ const DistributorsDetails = ({ user, queryID, fleetTeamId }: { user: Partial<Use
                 aria-required={true}
                 isRequired
                 defaultValue={PLATFORMS.find(
-                  ({ value }) => value === query?.platform
+                  ({ value }) => value === distributorsResult?.distributed_id
                 )}
                 validate={async (value) => {
                   if (value) {
@@ -137,7 +138,7 @@ const DistributorsDetails = ({ user, queryID, fleetTeamId }: { user: Partial<Use
                   name="version"
                   label="Version"
                   isRequired
-                  defaultValue={query?.version}
+                  defaultValue={distributorsResult?.query.version}
                 >
                   {({ fieldProps }) => (
                     <Fragment>
@@ -151,7 +152,7 @@ const DistributorsDetails = ({ user, queryID, fleetTeamId }: { user: Partial<Use
                   name="shard"
                   label="Shard"
                   isRequired
-                  defaultValue={query?.shard}
+                  defaultValue={distributorsResult?.pagination.display_msg}
                 >
                   {({ fieldProps }) => (
                     <Fragment>
@@ -198,7 +199,7 @@ const DistributorsDetails = ({ user, queryID, fleetTeamId }: { user: Partial<Use
                     size="sm"
                     variant="outline"
                     onClick={() => {
-                      openDeleteModal(query?.id!);
+                      openDeleteModal(distributorsResult?.distributed_id!);
                     }}
                   >
                     {t('delete')}
@@ -212,7 +213,7 @@ const DistributorsDetails = ({ user, queryID, fleetTeamId }: { user: Partial<Use
       <DeleteQuery
         visible={deleteVisible}
         setVisible={setDeleteVisible}
-        queryId={queryToDelete!}
+        distributorId={queryToDelete!}
         fleetTeamId={fleetTeamId!}
         fleetAccessPhrase={user.fleetAccessPhrase!}
       />

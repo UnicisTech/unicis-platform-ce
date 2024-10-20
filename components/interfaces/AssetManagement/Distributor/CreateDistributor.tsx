@@ -13,6 +13,7 @@ import dynamic from 'next/dynamic';
 import NodesSelector from '../NodesSelector';
 import { useCreateDistributors } from '@/hooks/fleets/distributors/useCreateDistributor';
 import TagsSelector from '../TagsSelector';
+import TextArea from '@atlaskit/textarea';
 
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -101,7 +102,15 @@ const CreateDistributors = ({
                 >
                   {({ fieldProps }) => (
                     <Fragment>
-                      <TextField autoComplete="off" {...fieldProps} />
+                      <TextArea
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                        resize="auto"
+                        maxHeight="20vh"
+                        defaultValue="SELECT ALL FROM osquery_info;"
+                        name="sql"
+                        id="sql"
+                      />
                     </Fragment>
                   )}
                 </Field>

@@ -15,7 +15,7 @@ import { PLATFORMS } from "@/lib/fleet/constants";
 import { useCreateQuery } from '@/hooks/fleets/querys/useCreateQuery';
 import PacksSelector from '../PacksSelector';
 import TagsSelector from '../TagsSelector';
-import { TimePicker } from '@atlaskit/datetime-picker';
+import TextArea from '@atlaskit/textarea';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -120,11 +120,18 @@ const CreateQuery = ({
                   aria-required={true}
                   name="sql"
                   label="SQL Code"
-                  isRequired
                 >
                   {({ fieldProps }) => (
                     <Fragment>
-                      <TextField autoComplete="off" {...fieldProps} />
+                      <TextArea
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                        resize="auto"
+                        maxHeight="20vh"
+                        defaultValue="SELECT ALL FROM osquery_info;"
+                        name="sql"
+                        id="sql"
+                      />
                     </Fragment>
                   )}
                 </Field>

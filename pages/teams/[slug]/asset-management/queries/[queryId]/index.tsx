@@ -36,12 +36,12 @@ const QueryById = ({teamFeatures, user}) => {
   return (
     <>
       <Breadcrumb
-        taskTitle={'Query'}
-        backTo={`/teams/${slug}/asset-management/querys`}
+        taskTitle={'Queries'}
+        backTo={`/teams/${slug}/asset-management/queries`}
         teamName={slug as string}
         path={queryId as string}
       />
-      <h3 className="text-2xl font-bold">{'Querys'}</h3>
+      <h3 className="text-2xl font-bold">{'Queries'}</h3>
       <QueryTab activeTab={activeTab} setActiveTab={setActiveTab} />
       <Card heading="Details">
         <Card.Body>

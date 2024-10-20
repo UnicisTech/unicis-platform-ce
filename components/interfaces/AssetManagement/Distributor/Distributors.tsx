@@ -10,7 +10,7 @@ import type { Team, User } from '@prisma/client';
 import { DistributedQuery } from '@/types/fleet';
 import FleetStatus from '../Fleet/FleetStatus';
 import CreateQuery from './CreateDistributor';
-import { Code } from '@atlaskit/code';
+import { CodeBlock } from '@atlaskit/code';
 import { useDistributors } from '@/hooks/fleets/distributors/useDistributors';
 import EditDistributor from './EditDistributor';
 import DeleteDistributor from './DeleteDistributorResult';
@@ -108,23 +108,23 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
                 return (
                   <tr key={task.id}>
                     <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/distributors/${task.id}`}>
+                      <Link href={`/teams/${slug}/asset-management/distributors/${task.distributed_query.id}`}>
                         <div className="flex items-center justify-start space-x-2">
                           <span className="underline">{index}</span>
                         </div>
                       </Link>
                     </td>
                     <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/distributors/${task.id}`}>
+                      <Link href={`/teams/${slug}/asset-management/distributors/${task.distributed_query.id}`}>
                         <div className="flex items-center justify-start space-x-2">
                           <span className="">{task.distributed_query.not_before}</span>
                         </div>
                       </Link>
                     </td>
                     <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/distributors/${task.id}`}>
+                      <Link href={`/teams/${slug}/asset-management/distributors/${task.distributed_query.id}`}>
                         <div className="flex items-center justify-start space-x-2">
-                          <Code onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>{task.distributed_query.sql}</Code>
+                          <CodeBlock language="sql" showLineNumbers={false} text={task.distributed_query.sql} />
                         </div>
                       </Link>
                     </td>
@@ -206,7 +206,7 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
           <DeleteDistributor
             visible={deleteVisible}
             setVisible={setDeleteVisible}
-            queryId={distributorToDelete!}
+            distributorId={distributorToDelete!}
             fleetAccessPhrase={user.fleetAccessPhrase!}
             fleetTeamId={team?.fleetTeamId!}
           />

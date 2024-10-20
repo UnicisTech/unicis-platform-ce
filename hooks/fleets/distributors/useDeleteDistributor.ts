@@ -1,21 +1,12 @@
 import { fleetAuthAPIHeaders } from "@/lib/common";
 import { fleetV1 } from "@/lib/fleet/apiBase";
-import { Query } from "@/types/fleet";
 import { useEffect, useState } from "react";
 
-export const useGetDistributedIdResult = (teamId: string, distributorId: string,  accessPhrase?: string) => {
-  const [distributorsResult, setDistributorsResult] = useState<Query>();
-  const [isLoading, setLoading] = useState<boolean>(true);
-  const [isError, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchDistributorResult = async () => {
-      setLoading(true);
-      setError(null);
-
+export const useDeleteDistributed = () => {
+  const deleteDistributor = async (teamId: string, distributorId: string,  accessPhrase?: string) => {
       try {
         const response = await fleetV1(`/manager/${teamId}/queries/distributed/delete/${distributorId}`, {
-          method: 'GET',
+          method: 'DELETE',
           headers: fleetAuthAPIHeaders(accessPhrase!),
         });
 
@@ -23,17 +14,9 @@ export const useGetDistributedIdResult = (teamId: string, distributorId: string,
           const data = await response.json();
         }
 
-        const data: Query = await response.json();
-        setDistributorsResult(data);
       } catch (err) {
-        setError('An unexpected error occurred.');
-      } finally {
-        setLoading(false);
       }
-    };
-
-    fetchDistributorResult();
-  }, [teamId, distributorId, accessPhrase]);
-
-  return { distributorsResult, isLoading, isError };
+  };
+  
+  return deleteDistributor;
 };

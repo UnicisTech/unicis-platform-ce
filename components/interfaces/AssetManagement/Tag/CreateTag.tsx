@@ -11,7 +11,7 @@ import { useCreateTag } from '@/hooks/fleets/Tags/useCreateTag';
 
 
 interface FormData {
-  values;
+  tags: string;
 }
 
 const CreateTag = ({
@@ -35,8 +35,8 @@ const CreateTag = ({
       <Modal.Header className="font-bold">Create Tag</Modal.Header>
       <Form<FormData>
         onSubmit={async (data, { reset }) => {
-          const { values } = data;
-          const packData = {values};
+          const { tags } = data;
+          const packData = {tags};
           try {
             await createTag(fleetTeamId, packData, user?.fleetAccessPhrase!);
             toast.success(t('success-creating-tag'));
@@ -63,8 +63,8 @@ const CreateTag = ({
               >
                 <Field
                   aria-required={true}
-                  name="values"
-                  label="Values"
+                  name="tags"
+                  label="Tags"
                   isRequired
                 >
                   {({ fieldProps }) => (

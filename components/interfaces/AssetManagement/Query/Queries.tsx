@@ -12,7 +12,7 @@ import { PLATFORMS } from '@/lib/fleet/constants';
 import FleetStatus from '../Fleet/FleetStatus';
 import CreateQuery from './CreateQuery';
 import { useQuerys } from '@/hooks/fleets/querys/useQuery';
-import { Code } from '@atlaskit/code';
+import { CodeBlock } from '@atlaskit/code';
 import DeleteQuery from './DeleteQuery';
 import EditQuery from './EditQuery';
 
@@ -129,7 +129,7 @@ const Querys = ({ team, user }: { team: Team, user: Partial<User> }) => {
                     <td className="px-6 py-3">
                       <Link href={`/teams/${slug}/asset-management/querys/${query.id}`}>
                         <div className="flex items-center justify-start space-x-2">
-                          <Code onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>{query.sql}</Code>
+                          <CodeBlock language="sql" showLineNumbers={false} text={query.sql} />
                         </div>
                       </Link>
                     </td>

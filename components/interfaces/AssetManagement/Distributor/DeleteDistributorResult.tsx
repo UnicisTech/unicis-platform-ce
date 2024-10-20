@@ -3,25 +3,24 @@ import toast from 'react-hot-toast';
 import { Modal, Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { useFormik } from 'formik';
-import { useDeleteQuery } from '@/hooks/fleets/querys/useDeleteQuery';
 import { InputWithLabel } from '@/components/shared';
+import { useDeleteDistributed } from '@/hooks/fleets/distributors/useDeleteDistributor';
 
 const DeleteDistributors = ({
-  queryId,
+  distributorId,
   visible,
   setVisible,
   fleetTeamId,
   fleetAccessPhrase
 }: {
-  queryId: string;
+  distributorId: string;
   visible: boolean;
   setVisible: (visible: boolean) => void;
   fleetTeamId: string;
   fleetAccessPhrase?: string;
 }) => {
   const { t } = useTranslation('common');
-
-  const deleteQuery = useDeleteQuery();
+  const deleteDistributor = useDeleteDistributed();
 
   const formik = useFormik({
     initialValues: {
@@ -29,9 +28,9 @@ const DeleteDistributors = ({
     },
     onSubmit: async (values) => {
 
-      if (values.name === 'DELETE QUERY') {
-        await deleteQuery(fleetTeamId, queryId, fleetAccessPhrase)
-        toast.loading(t('Delete Query'));
+      if (values.name === 'DELETE DISTRIBUTOR') {
+        toast.loading(t('deleted'));
+        await deleteDistributor(fleetTeamId, distributorId, fleetAccessPhrase)
         formik.resetForm();
         setVisible(false);
       } else {
@@ -44,11 +43,11 @@ const DeleteDistributors = ({
   return (
     <Modal open={visible}>
       <form onSubmit={formik.handleSubmit} method="DELETE">
-        <Modal.Header className="font-bold">{`Delete query`}</Modal.Header>
+        <Modal.Header className="font-bold">{`Delete distributor`}</Modal.Header>
         <Modal.Body>
           <div className="mt-2 flex flex-col space-y-4">
             <p>{t('fleet-delete-pack-warning')}</p>
-            <p className='text-gray-300 text-xs'>This is the confirm text <span className='text-orange-400'>DELETE QUERY</span></p>
+            <p className='text-gray-300 text-xs'>This is the confirm text <span className='text-orange-400'>DELETE DISTRIBUTOR</span></p>
           </div>
           <InputWithLabel
             type="text"
@@ -63,7 +62,7 @@ const DeleteDistributors = ({
             } 
             onChange={formik.handleChange}
           />
-          <span className='text-xs'>{t('fleet-delete-pack-description')}</span>
+          <span className='text-xs'>{t('fleet-delete-distributor-description')}</span>
         </Modal.Body>
         <Modal.Actions>
           <Button

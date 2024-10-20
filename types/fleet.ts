@@ -128,7 +128,7 @@ export interface Node extends FleetBase{
   enrolled_on?: string;
   host_identifier?: string;
   last_checkin?: string;
-  node_info?: HostDetails;
+  node_info?: NodeInfo;
   is_active: boolean;
   last_ip?: string;
 }
@@ -139,6 +139,8 @@ export interface NodesResponse {
 
 export interface NodeWithRelationships extends Node {
   tags: Tag[];
+  status_logs: StatusLog[];
+  result_logs: any[];
 }
 
 export interface NodesWithRelationshipsResponse {
@@ -152,6 +154,7 @@ export interface DistributedQuery extends FleetBase{
   not_before?: string;
   nodes: Node[];
   tags?: Tag[];
+  results?: Result;
 }
 
 export interface DistributedQueryResponse {
@@ -171,11 +174,46 @@ export interface DistributedQueryTaskResponse {
 }
 
 export interface StatusLog extends FleetBase {
-
+  filename: string;
+  id: string;
+  line: number;
+  message: string;
 }
 
-export interface DistributedQueryResult extends FleetBase {
-  distributed_query_id: string;
+export interface Result extends FleetBase {
+  columns: { [key: string]: any };
+  created_at: string;
+  distributed_query: string;
+  distributed_query_task: string;
+  id: string;
+  timestamp: string;
+  updated_at: string;
+}
+
+export interface DistributedQueryResult {
+  distributed_id: string;
+  pagination: {
+    alignment: string;
+    bs_version: string;
+    display_msg: string;
+    page: string;
+    per_page: string;
+    record_name: string;
+    show_single_page: boolean;
+    total: string;
+  };
+  query: Query;
+  results: Result[];
+  status: string | null;
+  tasks: Task[];
+}
+
+export interface Task {
+  created_at: string;
+  distributed_query: DistributedQuery;
+  guid: string;
+  id: string;
+  node: Node;
 }
 
 
@@ -250,7 +288,7 @@ interface SystemInfo {
 }
 
 // Interface for Host Details
-interface HostDetails {
+interface NodeInfo {
   os_version: OSVersion;
   osquery_info: OSQueryInfo;
   platform_info: PlatformInfo;
