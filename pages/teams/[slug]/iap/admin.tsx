@@ -12,8 +12,10 @@ import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Role } from '@prisma/client';
+import useCanAccess from 'hooks/useCanAccess';
 
 const IAP = ({ teamFeatures }) => {
+    const { canAccess } = useCanAccess()
     const router = useRouter();
     const { slug } = router.query;
 
@@ -21,7 +23,7 @@ const IAP = ({ teamFeatures }) => {
     const { isLoading: isTeamLoading, isError: isTeamError, team, mutateTeam } = useTeam();
     const { categories, teamCourses, isLoading: isIapDataLoading, isError: isIapError, mutateIap } = useIap(true, team?.slug)
     const { teams, isLoading: isTeamsLoading, isError: isTeamsError } = useTeams()
-    const { members, isLoading: isMembersLoading, isError: isMembersError} = useTeamMembers(slug as string)
+    const { members, isLoading: isMembersLoading, isError: isMembersError } = useTeamMembers(slug as string)
 
     const isLoading = isTeamLoading || isIapDataLoading || isTeamsLoading || isMembersLoading
     const isError = isTeamError || isIapError || isTeamsError | isMembersError
@@ -45,22 +47,26 @@ const IAP = ({ teamFeatures }) => {
         return <Error message={t('team-not-found')} />;
     }
 
-    return (
-        <>
-            <TeamTab activeTab="iap/admin" team={team} teamFeatures={teamFeatures} />
+    if (!canAccess('iap_reports', ['read'])) {
+        return <Error message={t('forbidden-resource')}/>
+    }
 
-            <div className="space-y-6">
-                <AdminPage
-                    team={team}
-                    teams={teams}
-                    members={members.filter(({role}) => role !== Role.AUDITOR)}
-                    teamCourses={teamCourses}
-                    categories={categories}
-                    mutateIap={mutateIap}
-                />
-            </div>
-        </>
-    );
+        return (
+            <>
+                <TeamTab activeTab="iap/admin" team={team} teamFeatures={teamFeatures} />
+
+                <div className="space-y-6">
+                    <AdminPage
+                        team={team}
+                        teams={teams}
+                        members={members.filter(({ role }) => role !== Role.AUDITOR)}
+                        teamCourses={teamCourses}
+                        categories={categories}
+                        mutateIap={mutateIap}
+                    />
+                </div>
+            </>
+        );
 };
 
 export async function getServerSideProps({
