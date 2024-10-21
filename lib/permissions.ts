@@ -14,7 +14,8 @@ export type Resource =
   | 'team_api_key'
   | 'task'
   | 'iap_course'
-  | 'iap_category';
+  | 'iap_category'
+  | 'iap_reports';
 
 export type RolePermissions = {
   [role in RoleType]: Permission[];
@@ -94,6 +95,10 @@ export const permissions: RolePermissions = {
       resource: 'iap_category',
       actions: '*'
     },
+    {
+      resource: 'iap_reports',
+      actions: '*'
+    },
   ],
   ADMIN: [
     {
@@ -144,6 +149,10 @@ export const permissions: RolePermissions = {
       resource: 'iap_category',
       actions: '*'
     },
+    {
+      resource: 'iap_reports',
+      actions: '*'
+    },
   ],
   MEMBER: [
     {
@@ -187,6 +196,10 @@ export const permissions: RolePermissions = {
     {
       resource: 'iap_category',
       actions: ['read'],
+    },
+    {
+      resource: 'iap_reports',
+      actions: ['read']
     },
   ],
 };

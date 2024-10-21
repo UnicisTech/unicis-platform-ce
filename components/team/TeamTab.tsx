@@ -49,7 +49,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
     });
   }
 
-  if (canAccess('iap_course', ['read'])) {
+  if (canAccess('iap_course', ['read']) && canAccess('iap_reports', ['read'])) {
     navigations.push({
       name: 'Training',
       href: `/teams/${team.slug}/iap/admin`,
