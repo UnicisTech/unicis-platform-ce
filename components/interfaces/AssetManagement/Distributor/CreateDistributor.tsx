@@ -102,15 +102,7 @@ const CreateDistributors = ({
                 >
                   {({ fieldProps }) => (
                     <Fragment>
-                      <TextArea
-                        onPointerEnterCapture={undefined}
-                        onPointerLeaveCapture={undefined}
-                        resize="auto"
-                        maxHeight="20vh"
-                        defaultValue="SELECT ALL FROM osquery_info;"
-                        name="sql"
-                        id="sql"
-                      />
+                      <TextField height={50} autoComplete="off" {...fieldProps} />
                     </Fragment>
                   )}
                 </Field>
@@ -122,7 +114,6 @@ const CreateDistributors = ({
                     </Fragment>
                   )}
                 </Field>
-                
                 
                 <Field label="Description" name="description">
                   {({ fieldProps }: any) => (

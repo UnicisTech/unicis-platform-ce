@@ -152,9 +152,8 @@ export interface DistributedQuery extends FleetBase{
   sql: string;
   description?: string;
   not_before?: string;
-  nodes: Node[];
   tags?: Tag[];
-  results?: Result;
+  total_results?: number;
 }
 
 export interface DistributedQueryResponse {
@@ -181,7 +180,7 @@ export interface StatusLog extends FleetBase {
 }
 
 export interface Result extends FleetBase {
-  columns: { [key: string]: any };
+  columns: string;
   created_at: string;
   distributed_query: string;
   distributed_query_task: string;
@@ -203,17 +202,16 @@ export interface DistributedQueryResult {
     total: string;
   };
   query: Query;
-  results: Result[];
-  status: string | null;
+  results: JSON[]; /// This returns results columes only no extral References
+  status: string;
   tasks: Task[];
 }
 
-export interface Task {
-  created_at: string;
+export interface Task extends FleetBase {
   distributed_query: DistributedQuery;
   guid: string;
-  id: string;
   node: Node;
+  results: Result[];
 }
 
 

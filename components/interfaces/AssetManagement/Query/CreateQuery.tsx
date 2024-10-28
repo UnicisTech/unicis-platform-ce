@@ -120,18 +120,11 @@ const CreateQuery = ({
                   aria-required={true}
                   name="sql"
                   label="SQL Code"
+                  isRequired
                 >
                   {({ fieldProps }) => (
                     <Fragment>
-                      <TextArea
-                        onPointerEnterCapture={undefined}
-                        onPointerLeaveCapture={undefined}
-                        resize="auto"
-                        maxHeight="20vh"
-                        defaultValue="SELECT ALL FROM osquery_info;"
-                        name="sql"
-                        id="sql"
-                      />
+                      <TextField height={50} autoComplete="off" {...fieldProps} />
                     </Fragment>
                   )}
                 </Field>

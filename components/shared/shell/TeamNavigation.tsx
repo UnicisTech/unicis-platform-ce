@@ -63,7 +63,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
     {
       name: t('Asset Dashboard'),
       href: `/teams/${slug}/asset`,
-      icon: ComputerDesktopIcon,
+      icon: () => <Icon src="/asset-dashboard.png" />,
       className: 'fill-blue-600 stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&

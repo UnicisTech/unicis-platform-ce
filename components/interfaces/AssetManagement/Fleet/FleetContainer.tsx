@@ -3,7 +3,7 @@ import useTeam from 'hooks/useTeam';
 import { useTranslation } from 'next-i18next';
 import type { User } from '@prisma/client';
 import FleetSecret from './FleetSecret';
-import FleetSetting from './FleetSetting';
+import FleetHelper from './FleetHelper';
 
 
 const FleetContainer = (
@@ -31,7 +31,7 @@ const FleetContainer = (
   return (
     <>
       <FleetSecret user={user} team={team}/>
-      <FleetSetting user={user} />
+      <FleetHelper team={team}/>
     </>
   );
 };

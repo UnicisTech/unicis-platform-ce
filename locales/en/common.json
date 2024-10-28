@@ -288,8 +288,8 @@
   "fleet-settings": "Fleet Settings",
   "fleet-settings-update": "Updated Fleet Settings",
   "fleet-settings-description": "Configuration settings for your fleet server access",
-  "fleet-info": "Fleet Account Information",
-  "fleet-info-description": "Below a full description of your fleet server",
+  "fleet-info": "Fleet Helper Information",
+  "fleet-info-description": "Below a full description of your fleet osquery bash information",
   "fleet-server-url": "Fleet Server URL",
   "fleet-all-packs": "All Packs",
   "fleet-pack-id": "Pack ID",
@@ -318,5 +318,9 @@
   "active-nodes": "Active Nodes",
   "inactive-nodes": "Inactive Nodes",
   "all-nodes": "All Nodes",
+  "total-results": "Total Results",
+  "not-before": "Not Before",
+  "sql": "SQL Code",
+  "nodes-on-task": "Nodes on Task",
   "distributors": "Distributors"
 }

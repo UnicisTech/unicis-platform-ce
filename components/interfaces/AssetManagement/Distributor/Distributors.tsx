@@ -89,10 +89,13 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
                 {t('index')}
               </th>
               <th scope="col" className="px-6 py-3">
-                {t('not_before')}
+                {t('sql')}
               </th>
               <th scope="col" className="px-6 py-3">
-                {t('sql')}
+                {t('total-results')}
+              </th>
+              <th scope="col" className="px-6 py-3">
+                {t('not-before')}
               </th>
               <th scope="col" className="px-6 py-3">
                 {t('task')}
@@ -117,62 +120,42 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
                     <td className="px-6 py-3">
                       <Link href={`/teams/${slug}/asset-management/distributors/${task.distributed_query.id}`}>
                         <div className="flex items-center justify-start space-x-2">
-                          <span className="">{task.distributed_query.not_before}</span>
+                          <CodeBlock language="sql" shouldWrapLongLines codeBidiWarningTooltipEnabled i18nIsDynamicList={true} showLineNumbers={false} text={task.distributed_query.sql} />
                         </div>
                       </Link>
                     </td>
                     <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/distributors/${task.distributed_query.id}`}>
-                        <div className="flex items-center justify-start space-x-2">
-                          <CodeBlock language="sql" showLineNumbers={false} text={task.distributed_query.sql} />
-                        </div>
-                      </Link>
+                      <div className="flex items-center justify-start space-x-2">
+                        <span className="">{task.distributed_query.total_results}</span>
+                      </div>
                     </td>
-                     <td className="py-3 w-[25%] align-top">
-                        <div className="grid grid-cols-1 gap-1 text-center font-bold items-center justify-start">
-                          <div className="bg-gray-700 rounded-xs">
-                            <h1 className="rounded-xs text-[10px] bg-gray-600">GUID</h1>
-                            <span className="text-[10px] line-clamp-1 px-2 overflow-hidden">{task.guid}</span>
-                          </div>
-                          <div className="bg-gray-700 rounded-xs">
+                    <td className="px-6 py-3">
+                      <div className="flex items-center justify-start space-x-2">
+                        <span className="">{task.distributed_query.not_before}</span>
+                      </div>
+                    </td>
+                    <td className="py-3 w-[25%] align-top">
+                      <div className="grid grid-cols-1 gap-1 text-center font-bold items-center justify-start">
+                        <div className="bg-gray-700 rounded-xs">
+                          <h1 className="rounded-xs text-[10px] bg-gray-600">GUID</h1>
+                          <span className="text-[10px] line-clamp-1 px-2 overflow-hidden">{task.guid}</span>
+                        </div>
+                        <div className="bg-gray-700 rounded-xs">
                           <h1 className="rounded-xs text-[10px] bg-gray-600">Status</h1>
-
-                            <span className="text-[10px] line-clamp-1 px-2 overflow-hidden">{StatusValue(task.status)}</span>
-                          </div>
-                          <div className="bg-gray-700 rounded-xs">
-                          <h1 className="rounded-xs text-[10px] bg-gray-600">Node Status</h1>
-                            <div className='grid justify-center p-1'>
-                              {task.node.is_active ?
-                              <div className='p-1.5 rounded-full bg-green-500'></div>
-                              :
-                              <div className='p-1.5 rounded-full bg-red-500'></div>
-                              }
-                            </div>
-                          </div>
-                          <div className="bg-gray-700 rounded-xs">
+                          <span className="text-[10px] line-clamp-1 px-2 overflow-hidden">{StatusValue(task.status)}</span>
+                        </div>
+                        <div className="bg-gray-700 rounded-xs">
                           <h1 className="rounded-xs text-[10px] bg-gray-600">Timestamp</h1>
                           {task.timestamp != null ?
                             <FormattedDate style={'text-[10px]'} dateString={task.timestamp} />
                             :
                             'Null'
                           }
-                          </div>
                         </div>
-                      </td>
+                      </div>
+                    </td>
                     <td className="px-6 py-3">
                       <div className="gap-2 btn-group">
-                        {canAccess('team_fleet_pack', ['update']) && (
-                          <Button
-                            className="dark:text-gray-100"
-                            size="sm"
-                            variant="outline"
-                            onClick={() => {
-                              openEditModal(task.distributed_query);
-                            }}
-                          >
-                            {t('edit-task')}
-                          </Button>
-                        )}
                         {canAccess('team_fleet_pack', ['delete']) && (
                           <Button
                             className="dark:text-gray-100"
@@ -192,17 +175,7 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
               })}
           </tbody>
           </table>
-
           <CreateQuery user={user} fleetTeamId={team?.fleetTeamId!} visible={visible} setVisible={setVisible} />
-          {editVisible && (
-            <EditDistributor
-              visible={editVisible}
-              setVisible={setEditVisible}
-              distributor={distributorToEdit}
-              fleetAccessPhrase={user.fleetAccessPhrase!}
-              fleetTeamId={team?.fleetTeamId!}
-            />
-          )}
           <DeleteDistributor
             visible={deleteVisible}
             setVisible={setDeleteVisible}

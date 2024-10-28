@@ -20,7 +20,7 @@ const FormattedDate = ({ dateString, style }) => {
   };
 
   return (
-    <span className={`${style}`}>{formatDate(dateString)}</span>
+    <div className={`${style}`}>{formatDate(dateString)}</div>
   );
 };
 

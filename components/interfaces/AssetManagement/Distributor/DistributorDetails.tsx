@@ -13,6 +13,9 @@ import toast from 'react-hot-toast';
 import DeleteQuery from './DeleteDistributorResult';
 import { useUpdateQuery } from '@/hooks/fleets/querys/useUpdateQuery';
 import { useGetDistributedIdResult } from '@/hooks/fleets/distributors/useGetDistributorIdResult';
+import { CodeBlock } from '@atlaskit/code';
+import FormattedDate from '@/components/shared/Date';
+import StatusValue from '../StatusValue';
 
 interface FormData {
   name,
@@ -64,152 +67,33 @@ const DistributorsDetails = ({ user, distributorId, fleetTeamId }: { user: Parti
 
   return (
     <IssuePanelContainer>
-      <Form<FormData>
-        onSubmit={async (data) => {
-          const { name, platform, version, shard, description } = data;
-          const queryData = {name, platform: platform?.value, version, shard, description};
-          try {
-            await updateQuery(fleetTeamId!, queryData, distributorId, user.fleetAccessPhrase!);
-          } catch (err) {
-            toast.error(t('error-updating'));
-          };
-        }}
-      >
-        {({ formProps, submitting }) => (
-          <form {...formProps}>
-            <div
-              style={{
-                display: 'flex',
-                width: '100%',
-                margin: '0 auto',
-                flexDirection: 'column',
-              }}
-            >
-              <Field
-                aria-required={true}
-                name="sql"
-                label="Sql Code"
-                isRequired
-                defaultValue={distributorsResult?.query.sql}
-              >
-                {({ fieldProps }) => (
-                  <Fragment>
-                    <TextField autoComplete="off" {...fieldProps} />
-                  </Fragment>
-                )}
-              </Field>
-              
-              <Field<ValueType<Option>>
-                name="platform"
-                label="Platform"
-                aria-required={true}
-                isRequired
-                defaultValue={PLATFORMS.find(
-                  ({ value }) => value === distributorsResult?.distributed_id
-                )}
-                validate={async (value) => {
-                  if (value) {
-                    return undefined;
-                  }
-
-                  return new Promise((resolve) =>
-                    setTimeout(resolve, 300)
-                  ).then(() => 'Please select a platform');
-                }}
-              >
-                {({ fieldProps: { id, ...rest }, error }) => (
-                  <Fragment>
-                    <WithoutRing>
-                      <Select
-                        inputId={id}
-                        {...rest}
-                        options={PLATFORMS}
-                        validationState={error ? 'error' : 'default'}
-                      />
-                      {error && <ErrorMessage>{error}</ErrorMessage>}
-                    </WithoutRing>
-                  </Fragment>
-                )}
-              </Field>
-
-              <div className='grid grid-cols-2 gap-2'>
-                <Field
-                  aria-required={true}
-                  name="version"
-                  label="Version"
-                  isRequired
-                  defaultValue={distributorsResult?.query.version}
-                >
-                  {({ fieldProps }) => (
-                    <Fragment>
-                      <TextField autoComplete="off" {...fieldProps} />
-                    </Fragment>
-                  )}
-                </Field>
-
-                <Field
-                  aria-required={true}
-                  name="shard"
-                  label="Shard"
-                  isRequired
-                  defaultValue={distributorsResult?.pagination.display_msg}
-                >
-                  {({ fieldProps }) => (
-                    <Fragment>
-                      <TextField autoComplete="off" {...fieldProps} />
-                    </Fragment>
-                  )}
-                </Field>
-              </div>
-
-              {/* <Field
-                label="Description"
-                name="description"
-                defaultValue={pack?.description}
-              >
-                {({ fieldProps }: any) => (
-                  <Fragment>
-                    <ReactQuill
-                      theme="snow"
-                      {...fieldProps}
-                      onChange={(value) => {
-                        checkFormChanges();
-                        fieldProps.onChange(value);
-                      }}
-                    />
-                  </Fragment>
-                )}
-              </Field> */}
-              <FormFooter>
-                {canAccess('team_fleet_query', ['update']) && (
-                  <Button
-                    color="primary"
-                    variant="outline"
-                    size="sm"
-                    type="submit"
-                    active={!isFormChanged}
-                    loading={submitting}
-                  >
-                    {t('save-changes')}
-                  </Button>
-                )}
-                {canAccess('team_fleet_query', ['delete']) && (
-                  <Button
-                    className="dark:text-gray-100"
-                    size="sm"
-                    variant="outline"
-                    onClick={() => {
-                      openDeleteModal(distributorsResult?.distributed_id!);
-                    }}
-                  >
-                    {t('delete')}
-                  </Button>
-                )}
-              </FormFooter>
-            </div>
-          </form>
+      <div className='grid gap-2 text-black'>
+        <span className="flex items-center gap-2 bg-blue-200 rounded-badge px-2">ID: {distributorsResult?.distributed_id}</span>
+        <div className="bg-gray-700 rounded-xs">
+          {distributorsResult?.query.id}
+          <span className="ml-2">Team: {distributorsResult?.query.team.id}</span>
+          <span className="ml-2">Shard: {distributorsResult?.query.shard}</span>
+          <span className="ml-2">Created At: <FormattedDate style={``} dateString={distributorsResult?.query.created_at} /></span>
+        </div>
+        <div className="items-center justify-start">
+          <CodeBlock language="sql" shouldWrapLongLines codeBidiWarningTooltipEnabled i18nIsDynamicList={true} showLineNumbers={false} text={distributorsResult?.query.sql!} />
+        </div>
+        {distributorsResult?.tasks.map((task) => 
+          <div key={task.id} className='grid grid-cols-1 gap-2'>
+              {task?.results.map((result) => 
+                <div key={result.id} className='grid p-2 rounded-md bg-gray-100 gap-1'>
+                  <div className='bg-blue-200 rounded-badge px-2'>ID: {result.id}</div>
+                  <div>
+                    <CodeBlock language="JSON" shouldWrapLongLines codeBidiWarningTooltipEnabled showLineNumbers={true}  text={JSON.stringify(result.columns)} />
+                  </div>
+                  <div className='flex items-center gap-2 bg-blue-200 rounded-badge px-2'>Timestamp: <FormattedDate style={``} dateString={result.timestamp} /></div>
+                  <div className='flex items-center gap-2 bg-blue-200 rounded-badge px-2'>Created At: <FormattedDate style={``} dateString={result.created_at} /></div>
+                  <div className='flex items-center gap-2 bg-blue-200 rounded-badge px-2'>Updated At: <FormattedDate style={``} dateString={result.updated_at} /></div>
+                </div>
+              )}
+          </div>
         )}
-      </Form>
+      </div>
       <DeleteQuery
         visible={deleteVisible}
         setVisible={setDeleteVisible}
