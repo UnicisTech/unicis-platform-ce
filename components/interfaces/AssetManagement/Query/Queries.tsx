@@ -113,21 +113,21 @@ const Querys = ({ team, user }: { team: Team, user: Partial<User> }) => {
                 return (
                   <tr key={query.id}>
                     <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/querys/${query.id}`}>
+                      <Link href={`/teams/${slug}/asset-management/queries/${query.id}`}>
                         <div className="flex items-center justify-start space-x-2">
                           <span className="underline">{index}</span>
                         </div>
                       </Link>
                     </td>
                     <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/querys/${query.id}`}>
+                      <Link href={`/teams/${slug}/asset-management/queries/${query.id}`}>
                         <div className="flex items-center justify-start space-x-2">
                           <span className="underline">{query.name}</span>
                         </div>
                       </Link>
                     </td>
                     <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/querys/${query.id}`}>
+                      <Link href={`/teams/${slug}/asset-management/queries/${query.id}`}>
                         <div className="flex items-center justify-start space-x-2">
                           <CodeBlock language="sql" showLineNumbers={false} text={query.sql} />
                         </div>

@@ -17,7 +17,7 @@ const Breadcrumb = ({
   return (
     <div className="text-sm breadcrumbs">
       <ul>
-        <li>{teamName || t('Home')}</li>
+        <li>{<Link href={`/teams/${teamName}/dashboard`}>{teamName}</Link> || t('Home')}</li>
         <li>
           <Link href={backTo || '/'}>{taskTitle}</Link>
         </li>

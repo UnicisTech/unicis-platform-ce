@@ -310,6 +310,7 @@
   "fleet-node-id": "Node ID",
   "fleet-node-info": "Node Info",
   "fleet-node-info-description": "Below a full description of your node",
+  "fleet-distributor-discription": "Retrieve all distributed queries assigned to a particular node in the NEW state. This function will change the state of the distributed query to PENDING, however will not commit the change.",
   "index": "Index",
   "node-model": "Node Model",
   "osquery-info": "OSquery Info",

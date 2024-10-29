@@ -45,19 +45,9 @@ const NodeById = ({teamFeatures, user}) => {
       />
       <h3 className="text-2xl font-bold">{'Node Details'}</h3>
       <PackTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <Card heading="Details">
+      <Card heading="Node Details">
         <Card.Body>
           <NodeDetails user={user} fleetTeamId={team?.fleetTeamId!} nodeID={nodeId as string} />
-        </Card.Body>
-      </Card>
-      <Card heading="Querys">
-        <Card.Body>
-          Querys
-        </Card.Body>
-      </Card>
-      <Card heading="Tags">
-        <Card.Body>
-          Tags
         </Card.Body>
       </Card>
     </>

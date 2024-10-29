@@ -61,10 +61,10 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
           <div className="flex justify-between items-center">
             <div className="space-y-3">
               <h2 className="text-xl font-medium leading-none tracking-tight">
-                {t('fleet-all-querys')}
+                {t('distributor')}
               </h2>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                {t('fleet-querys-listed')}
+                {t('fleet-distributor-discription')}
               </p>
             </div>
           

@@ -16,8 +16,6 @@ import env from '@/lib/env';
 const QueryById = ({teamFeatures, user}) => {
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
-  const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
   const { queryId, slug } = router.query;
   const {
     team,

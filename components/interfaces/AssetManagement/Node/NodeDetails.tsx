@@ -1,44 +1,16 @@
-import { useCallback, useState } from 'react';
-import { Button } from 'react-daisyui';
-import { useTranslation } from 'next-i18next';
+import { useState } from 'react';
 import { Error, Loading } from '@/components/shared';
-import useCanAccess from 'hooks/useCanAccess';
 import type { User } from '@prisma/client';
 import { IssuePanelContainer } from '@/sharedStyles';
-import Form, { FormFooter } from '@atlaskit/form';
-import { ValueType } from '@atlaskit/select';
-import { useUpdatePack } from '@/hooks/fleets/packs/useUpdatePack';
-import toast from 'react-hot-toast';
 import { useGetNodeId } from '@/hooks/fleets/Nodes/useGetNodeId';
 import DeleteNode from './DeleteNode';
 import FormattedDate from '@/components/shared/Date';
 
-interface FormData {
-  name,
-  platform: ValueType<Option>,
-  version,
-  shard,
-  description,
-  [key: string]: string | ValueType<Option>;
-}
-
-interface Option {
-  label: string;
-  value: string;
-}
 
 const NodeDetails = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user: Partial<User>, nodeID: string }) => {  
-  const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
-  const [isFormChanged, setIsFormChanged] = useState(false);
 
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [nodeToDelete, setNodeToDelete] = useState<null | string>(null);
-  const updateNode = useUpdatePack();
-
-  const checkFormChanges = useCallback(() => {
-    setIsFormChanged(true);
-  }, []);
   
   const { node, isLoading, isError } = useGetNodeId(fleetTeamId, nodeID, user?.fleetAccessPhrase!);
 
