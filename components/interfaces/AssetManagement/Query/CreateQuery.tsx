@@ -243,7 +243,7 @@ const CreateQuery = ({
                   )}
                 </Field>
                 
-                <Field label="Assign Packs" name="nodes">
+                <Field label="Assign Packs" name="packs">
                   {({ fieldProps }: any) => (
                     <Fragment>
                       <PacksSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={user.fleetAccessPhrase!} setSectionPack={setSelectedPacks} onSelect={()=>{}}/>

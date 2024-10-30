@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { WithoutRing } from 'sharedStyles';
 import Select from '@atlaskit/select';
 import { usePacks } from '@/hooks/fleets/packs/usePack';
+import { Pack } from '@/types';
 
 interface PacksSelectorProps {
   fleetTeamId: string;
   fleetAccessPhrase: string;
-  onSelect: (nodeIds: string[]) => void;
+  onSelect: (packIds: string[]) => void;
   setSectionPack: (packIds: string[]) => void;
+  preSelectedPack?: Pack[];
 }
 
-const PacksSelector: React.FC<PacksSelectorProps> = ({ fleetTeamId, fleetAccessPhrase, onSelect, setSectionPack }) => {
+const PacksSelector: React.FC<PacksSelectorProps> = ({ fleetTeamId, fleetAccessPhrase, onSelect, setSectionPack, preSelectedPack = [] }) => {
 
   const { packs, isLoading, isError } = usePacks(fleetTeamId!, fleetAccessPhrase!);
+  const [selectedPackOptions, setSelectedPackOptions] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Set initial selected options based on preSelectedPackIds
+    if (packs && preSelectedPack.length > 0) {
+      const initialSelectedOptions = packs
+        .filter(pack => preSelectedPack.some(prePack => prePack.id === pack.id))
+        .map((pack) => ({
+          value: pack.id,
+          label: `${pack.name || 'Unknown Pack'} - ${pack.platform} - v${pack.version}`
+        }));
+      setSelectedPackOptions(initialSelectedOptions);
+    }
+  }, [packs, preSelectedPack]);
+
   
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>{isError}</p>;
@@ -23,13 +40,10 @@ const PacksSelector: React.FC<PacksSelectorProps> = ({ fleetTeamId, fleetAccessP
   }));
 
   const handlePackChange = (selectedOptions: any) => {
-    // Extract only the values (pack IDs) from the selected options
     const selectedPackIds = selectedOptions.map((option: { value: string }) => option.value);
 
-    // Set the selected pack IDs to state
+    setSelectedPackOptions(selectedOptions);
     setSectionPack(selectedPackIds);
-
-    // Call onSelect with the selected pack IDs
     onSelect(selectedPackIds);
   };
 
@@ -44,6 +58,7 @@ const PacksSelector: React.FC<PacksSelectorProps> = ({ fleetTeamId, fleetAccessP
         classNamePrefix="react-select"
         options={packOptions}
         onChange={handlePackChange}
+        value={selectedPackOptions}
         placeholder="Select a Pack(s)"
         isMulti
       />

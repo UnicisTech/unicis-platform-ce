@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { WithoutRing } from 'sharedStyles';
 import Select from '@atlaskit/select';
 import { useTags } from '@/hooks/fleets/Tags/useTags';
+import { Tag } from '@/types';
 
 interface TagsSelectorProps {
   fleetTeamId: string;
   fleetAccessPhrase: string;
-  onSelect: (nodeIds: string[]) => void;
+  onSelect: (packIds: string[]) => void;
   setSectionTag: (tagIds: string[]) => void;
+  preSelectedTag?: Tag[];
 }
 
-const TagsSelector: React.FC<TagsSelectorProps> = ({ fleetTeamId, fleetAccessPhrase, onSelect, setSectionTag }) => {
+const TagsSelector: React.FC<TagsSelectorProps> = ({ fleetTeamId, fleetAccessPhrase, onSelect, setSectionTag, preSelectedTag = []}) => {
 
   const { tags, isLoading, isError } = useTags(fleetTeamId!, fleetAccessPhrase!);
+  const [selectedTagOptions, setSelectedTagOptions] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (tags && preSelectedTag.length > 0) {
+      const initialSelectedOptions = tags
+        .filter(tag => preSelectedTag.some(preTag => preTag.value === tag.value))
+        .map((tag) => ({
+          value: tag.value,
+          label: `${tag.value || 'Unknown Tag'} - p:${tag.packs_count} - n:${tag.nodes_count}`
+        }));
+      setSelectedTagOptions(initialSelectedOptions);
+    }
+  }, [tags, preSelectedTag]);
   
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>{isError}</p>;
@@ -23,13 +38,10 @@ const TagsSelector: React.FC<TagsSelectorProps> = ({ fleetTeamId, fleetAccessPhr
   }));
 
   const handleTagChange = (selectedOptions: any) => {
-    // Extract only the values (tag IDs) from the selected options
     const selectedTagIds = selectedOptions.map((option: { value: string }) => option.value);
 
-    // Set the selected tag IDs to state
+    setSelectedTagOptions(selectedOptions);
     setSectionTag(selectedTagIds);
-
-    // Call onSelect with the selected tag IDs
     onSelect(selectedTagIds);
   };
 
@@ -44,6 +56,7 @@ const TagsSelector: React.FC<TagsSelectorProps> = ({ fleetTeamId, fleetAccessPhr
         classNamePrefix="react-select"
         options={tagOptions}
         onChange={handleTagChange}
+        value={selectedTagOptions}
         placeholder="Select a Tag(s)"
         isMulti
       />

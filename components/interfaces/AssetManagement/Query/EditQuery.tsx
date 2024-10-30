@@ -242,10 +242,10 @@ const EditQuery = ({
                   )}
                 </Field>
                 
-                <Field label="Assign Packs" name="nodes">
+                <Field label="Assign Packs" name="packs">
                   {({ fieldProps }: any) => (
                     <Fragment>
-                      <PacksSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={fleetAccessPhrase!} setSectionPack={setSelectedPacks} onSelect={()=>{}}/>
+                      <PacksSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={fleetAccessPhrase!} preSelectedPack={query.packs} setSectionPack={setSelectedPacks} onSelect={(packIds)=>{}}/>
                     </Fragment>
                   )}
                 </Field>
@@ -258,7 +258,7 @@ const EditQuery = ({
                 >
                   {({ fieldProps }) => (
                     <Fragment>
-                      <TagsSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={fleetAccessPhrase!} setSectionTag={setSelectedTags} onSelect={()=>{}}/>
+                      <TagsSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={fleetAccessPhrase!} preSelectedTag={query.tags} setSectionTag={setSelectedTags} onSelect={(tagIds)=>{}}/>
                     </Fragment>
                   )}
                 </Field>

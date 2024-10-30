@@ -12,7 +12,6 @@ import FleetStatus from '../Fleet/FleetStatus';
 import CreateQuery from './CreateDistributor';
 import { CodeBlock } from '@atlaskit/code';
 import { useDistributors } from '@/hooks/fleets/distributors/useDistributors';
-import EditDistributor from './EditDistributor';
 import DeleteDistributor from './DeleteDistributorResult';
 import FormattedDate from '@/components/shared/Date';
 import StatusValue from '../StatusValue';
