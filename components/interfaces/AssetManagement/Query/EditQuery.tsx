@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import TextField from '@atlaskit/textfield';
@@ -13,6 +13,8 @@ import { PLATFORMS } from '@/lib/fleet/constants';
 import { Query } from '@/types';
 import { useUpdateQuery } from '@/hooks/fleets/querys/useUpdateQuery';
 import toast from 'react-hot-toast';
+import PacksSelector from '../PacksSelector';
+import TagsSelector from '../TagsSelector';
 
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -51,7 +53,9 @@ const EditQuery = ({
   team: Team;
   fleetTeamId: string;
   fleetAccessPhrase?: string;
-}) => {
+  }) => {
+  const [selectedPacks, setSelectedPacks] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const { t } = useTranslation('common');
   const updateQuery = useUpdateQuery();
 
@@ -59,7 +63,7 @@ const EditQuery = ({
     <Modal open={visible}>
       <Form<FormData>
         onSubmit={async (data) => {
-            const { name, platform, version, shard, description, interval, packs, removed, sql, tags, value } = data;
+            const { name, platform, version, shard, description, interval, removed, sql, value } = data;
             const queryData = {
                 name,
                 platform: platform?.value,
@@ -67,10 +71,10 @@ const EditQuery = ({
                 shard,
                 description,
                 interval,
-                packs,
+                packs: selectedPacks,
                 removed,
                 sql,
-                tags,
+                tags: selectedTags.join(','),
                 value
             };
           try {
@@ -106,14 +110,28 @@ const EditQuery = ({
                   )}
                 </Field>
                 
+                <Field
+                  aria-required={true}
+                  name="sql"
+                  label="SQL Code"
+                  isRequired
+                  defaultValue={query.sql}
+                >
+                  {({ fieldProps }) => (
+                    <Fragment>
+                      <TextField height={50} autoComplete="off" {...fieldProps} />
+                    </Fragment>
+                  )}
+                </Field>
+                
                 <Field<ValueType<Option>>
                   name="platform"
                   label="Platform"
-                  aria-required={true}
-                  isRequired
                   defaultValue={PLATFORMS.find(
                     ({ value }) => value === query.platform
                   )}
+                  aria-required={true}
+                  isRequired
                   validate={async (value) => {
                     if (value) {
                       return undefined;
@@ -131,6 +149,9 @@ const EditQuery = ({
                           inputId={id}
                           {...rest}
                           options={PLATFORMS}
+                          defaultValue={PLATFORMS.find(
+                            ({ value }) => value === query.platform
+                          )}
                           validationState={error ? 'error' : 'default'}
                         />
                         {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -138,7 +159,7 @@ const EditQuery = ({
                     </Fragment>
                   )}
                 </Field>
-
+                
                 <div className='grid grid-cols-2 gap-2'>
                   <Field
                     aria-required={true}
@@ -166,13 +187,78 @@ const EditQuery = ({
                         <TextField autoComplete="off" {...fieldProps} />
                       </Fragment>
                     )}
+                    </Field>
+                                  
+                </div>
+
+                <div className='grid grid-cols-2 gap-2'>
+                  <Field
+                      aria-required={true}
+                      name="interval"
+                      label="Interval"
+                    isRequired
+                    defaultValue={query.interval}
+                    >
+                    {({ fieldProps }) => (
+                      <Fragment>
+                        <TextField autoComplete="off" {...fieldProps} />
+                      </Fragment>
+                    )}
                   </Field>
+                  <Field
+                    aria-required={true}
+                    name="value"
+                    label="Value"
+                    isRequired
+                    defaultValue={query.value}
+                  >
+                    {({ fieldProps }) => (
+                      <Fragment>
+                        <TextField autoComplete="off" {...fieldProps} />
+                      </Fragment>
+                    )}
+                  </Field>
+ 
+                {/* <Field
+                    aria-required={false}
+                    name="removed"
+                    label="Removed"
+                    isRequired
+                  >
+                    {({ fieldProps }) => (
+                      <Fragment>
+                        <Radio onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} autoComplete="off" {...fieldProps} />
+                      </Fragment>
+                    )}
+                  </Field> */}
+                  
                 </div>
                 
                 <Field label="Description" name="description" defaultValue={query.description}>
                   {({ fieldProps }: any) => (
                     <Fragment>
                       <ReactQuill theme="snow" {...fieldProps} />
+                    </Fragment>
+                  )}
+                </Field>
+                
+                <Field label="Assign Packs" name="nodes">
+                  {({ fieldProps }: any) => (
+                    <Fragment>
+                      <PacksSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={fleetAccessPhrase!} setSectionPack={setSelectedPacks} onSelect={()=>{}}/>
+                    </Fragment>
+                  )}
+                </Field>
+
+                <Field
+                  aria-required={false}
+                  name="tags"
+                  label="Tags"
+                  isRequired={false}
+                >
+                  {({ fieldProps }) => (
+                    <Fragment>
+                      <TagsSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={fleetAccessPhrase!} setSectionTag={setSelectedTags} onSelect={()=>{}}/>
                     </Fragment>
                   )}
                 </Field>

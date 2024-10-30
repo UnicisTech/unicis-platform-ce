@@ -42,12 +42,16 @@ const NodeDetails = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user:
         <div>Node Serial Number: {node?.node_info?.system_info.hardware_serial}</div>
         <div>Node Address: {node?.node_info?.platform_info.address}</div>
         <div>Node Last Checkin: {node?.last_checkin? <FormattedDate style={''} dateString={node?.last_checkin} /> : 'Never'}</div>
-        {node?.status_logs.map((log) => (
+        {node?.status_logs.map((log, index) => (
           <div key={log.id}>
-            <div>{log.message}</div>
-            <div>{log.filename}</div>
-            <div>{log.line}</div>
-            <div>At: {log.created_at}</div>
+            <div tabIndex={index} className="collapse collapse-plus border-base-300 bg-base-200 border">
+              <div className="collapse-title text-xl font-medium">{log.message}</div>
+              <div className="collapse-content">
+                <div>{log.filename}</div>
+                <div>{log.line}</div>
+                <div>At: {log.created_at}</div>
+              </div>
+            </div>
           </div>
         ))}
       </div>

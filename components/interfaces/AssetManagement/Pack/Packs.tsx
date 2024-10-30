@@ -81,9 +81,6 @@ const Packs = ({ team, user }: { team: Team, user: Partial<User> }) => {
         <table className="text-sm table w-full border-b dark:border-base-200">
           <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" className="px-6 py-3">
-                {t('Index')}
-              </th>
               {/* <th scope="col" className="px-6 py-3">
                 {t('fleet-pack-id')}
               </th> */}
@@ -109,13 +106,6 @@ const Packs = ({ team, user }: { team: Team, user: Partial<User> }) => {
               packs.map((pack, index) => {
                 return (
                   <tr key={pack.id}>
-                    <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/packs/${pack.id}`}>
-                        <div className="flex items-center justify-start space-x-2">
-                          <span className="underline">{index}</span>
-                        </div>
-                      </Link>
-                    </td>
                     {/* <td className="px-6 py-3">
                       <Link href={`/teams/${slug}/asset-management/packs/${pack.id}`}>
                         <div className="flex items-center justify-start space-x-2">

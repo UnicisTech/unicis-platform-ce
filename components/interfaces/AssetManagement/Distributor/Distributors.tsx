@@ -86,9 +86,6 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
           <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                {t('index')}
-              </th>
-              <th scope="col" className="px-6 py-3">
                 {t('sql')}
               </th>
               <th scope="col" className="px-6 py-3">
@@ -110,13 +107,6 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
               tasks.map((task, index) => {
                 return (
                   <tr key={task.id}>
-                    <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/distributors/${task.distributed_query.id}`}>
-                        <div className="flex items-center justify-start space-x-2">
-                          <span className="underline">{index}</span>
-                        </div>
-                      </Link>
-                    </td>
                     <td className="px-6 py-3">
                       <Link href={`/teams/${slug}/asset-management/distributors/${task.distributed_query.id}`}>
                         <div className="flex items-center justify-start space-x-2">

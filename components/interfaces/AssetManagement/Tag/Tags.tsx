@@ -75,9 +75,6 @@ const Tags = ({ team, user }: { team: Team, user: Partial<User> }) => {
             <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">
-                  {t('index')}
-                </th>
-                <th scope="col" className="px-6 py-3">
                   {t('value')}
                 </th>
                 <th scope="col" className="px-6 py-3">
@@ -96,13 +93,6 @@ const Tags = ({ team, user }: { team: Team, user: Partial<User> }) => {
                 tags.map((tag, index) => {
                   return (
                     <tr key={tag.id}>
-                      <td className="px-6 py-3">
-                        <Link href={`/teams/${slug}/asset-management/tags/${tag.id}`}>
-                          <div className="flex items-center justify-start space-x-2">
-                            <span className="underline">{index}</span>
-                          </div>
-                        </Link>
-                      </td>
                       <td className="px-6 py-3">
                         <Link href={`/teams/${slug}/asset-management/tags/${tag.id}`}>
                           <div className="flex items-center justify-start space-x-2">

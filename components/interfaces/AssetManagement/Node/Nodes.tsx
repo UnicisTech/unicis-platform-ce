@@ -110,9 +110,6 @@ const Nodes = ({ team, user }: { team: Team, user: Partial<User> }) => {
             <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-3 py-3">
-                  {t('index')}
-                </th>
-                <th scope="col" className="px-3 py-3">
                   {t('node-model')}
                 </th>
                 <th scope="col" className="px-3 py-3">
@@ -134,13 +131,6 @@ const Nodes = ({ team, user }: { team: Team, user: Partial<User> }) => {
                 nodes.map((node, index) => {
                   return (
                     <tr key={node.id}>
-                      <td className="px-6 py-3 align-top">
-                        <Link href={`/teams/${slug}/asset-management/nodes/${node.id}`}>
-                          <div className="flex items-center justify-start">
-                            <span className="underline">{index}</span>
-                          </div>
-                        </Link>
-                      </td>
                       <td className="w-[25%] py-3 align-top">
                         <Link href={`/teams/${slug}/asset-management/nodes/${node.id}`}>
                           <div className="grid grid-cols-1 gap-1 text-center font-bold items-center justify-start">
