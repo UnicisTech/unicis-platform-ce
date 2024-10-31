@@ -2,6 +2,7 @@ const env = {
   databaseUrl: `${process.env.DATABASE_URL}`,
   appUrl: `${process.env.APP_URL}`,
   fleetAPIUrl: `http://192.168.15.144:5000`,
+  fleetAPI: `192.168.15.144:5000`,
   // fleetAPIUrl: `https://api.fleet.unicis.tech`,
   product: 'unicis-platform',
   // redirectAfterSignIn: '/teams',
