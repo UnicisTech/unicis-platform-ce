@@ -50,16 +50,6 @@ const PackById = ({teamFeatures, user}) => {
           <PackDetails user={user} fleetTeamId={team?.fleetTeamId!} packID={packId as string} />
         </Card.Body>
       </Card>
-      <Card heading="Querys">
-        <Card.Body>
-          Querys
-        </Card.Body>
-      </Card>
-      <Card heading="Tags">
-        <Card.Body>
-          Tags
-        </Card.Body>
-      </Card>
     </>
   );
 };

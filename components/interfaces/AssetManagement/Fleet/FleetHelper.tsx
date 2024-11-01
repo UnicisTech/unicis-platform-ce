@@ -9,7 +9,7 @@ import env from '@/lib/env';
 
 const FleetHelper = ({ team }: { team: Partial<Team>}) => {
     const { t } = useTranslation('common');
-    const OsqueryEntry = OSQUERY_ENTRY({ secret: team.fleetSecret, teamName: team.name, apiUrl: env.fleetAPI })
+    const OsqueryEntry = OSQUERY_ENTRY({ secret: team.fleetSecret, teamName: team.name, apiUrl: env.fleetAPI });
     
     return (
         <Card>
@@ -20,7 +20,7 @@ const FleetHelper = ({ team }: { team: Partial<Team>}) => {
                 </Card.Header>
                 {team?.fleetSecret != null ? (
                     <div>
-                        <CopyToClipboardButton value={OsqueryEntry} />
+                        <CopyToClipboardButton value={OsqueryEntry!} />
                         <CodeBlock
                             language="sh"
                             codeBidiWarningTooltipEnabled

@@ -21,7 +21,6 @@ export const useGetPackId = (teamId: string, packId: string,  accessPhrase?: str
 
         if (!response.ok) {
           const data = await response.json();
-          throw new Error(data.message || 'Error fetching packs');
         }
 
         const data: PackWithRelationships = await response.json();

@@ -14,6 +14,7 @@ import TextField from '@atlaskit/textfield';
 import { useUpdatePack } from '@/hooks/fleets/packs/useUpdatePack';
 import toast from 'react-hot-toast';
 import DeletePack from './DeletePack';
+import ReactQuill from 'react-quill';
 
 interface FormData {
   name,

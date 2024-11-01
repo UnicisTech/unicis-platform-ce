@@ -80,11 +80,26 @@ const DistributorsDetails = ({ user, distributorId, fleetTeamId }: { user: Parti
         </div>
         {distributorsResult?.tasks.map((task) => 
           <div key={task.id} className='grid grid-cols-1 gap-2'>
-              {task?.results.map((result) => 
+              {task?.results.map((result, index) => 
                 <div key={result.id} className='grid p-2 rounded-md bg-gray-100 gap-1'>
                   <div className='bg-blue-200 rounded-badge px-2'>ID: {result.id}</div>
-                  <div>
-                    <CodeBlock language="JSON" shouldWrapLongLines codeBidiWarningTooltipEnabled showLineNumbers={true}  text={JSON.stringify(result.columns)} />
+                  <div className='overflow-x-auto'>
+                    <table className="table">
+                      <thead>
+                        <tr>
+                          <th>Key</th>
+                          <th>Value</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {Object.entries(result.columns).map(([key, value]) => (
+                          <tr key={key}>
+                            <td>{key}</td>
+                            <td>{value}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                   <div className='flex items-center gap-2 bg-blue-200 rounded-badge px-2'>Timestamp: <FormattedDate style={``} dateString={result.timestamp} /></div>
                   <div className='flex items-center gap-2 bg-blue-200 rounded-badge px-2'>Created At: <FormattedDate style={``} dateString={result.created_at} /></div>

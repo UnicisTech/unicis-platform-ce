@@ -5,7 +5,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Loading, Error, Card } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
 import useTeam from 'hooks/useTeam';
-import useCanAccess from 'hooks/useCanAccess';
 import PackTab from '@/components/interfaces/AssetManagement/Pack/PackTab';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
@@ -18,7 +17,6 @@ const NodeById = ({teamFeatures, user}) => {
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
   const { nodeId, slug } = router.query;
 
   const {

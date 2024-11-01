@@ -50,26 +50,6 @@ const TagById = ({teamFeatures, user}) => {
           <TagDetails user={user} fleetTeamId={team?.fleetTeamId!} tagID={tagId as string} />
         </Card.Body>
       </Card>
-       <Card heading="Nodes">
-        <Card.Body>
-          Nodes
-        </Card.Body>
-      </Card>
-      <Card heading="Querys">
-        <Card.Body>
-          Querys
-        </Card.Body>
-      </Card>
-       <Card heading="Pack">
-        <Card.Body>
-          Pack
-        </Card.Body>
-      </Card>
-      <Card heading="Flies Path">
-        <Card.Body>
-          Flies Path
-        </Card.Body>
-      </Card>
     </>
   );
 };

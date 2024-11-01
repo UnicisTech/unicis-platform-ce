@@ -5,10 +5,6 @@ export const packNavigations = (activeTab: string) => {
     {
       name: 'Overview',
       active: activeTab === 'Overview',
-    },
-    {
-      name: 'Reports',
-      active: activeTab === 'Reports',
-    },
+    }
   ];
 };

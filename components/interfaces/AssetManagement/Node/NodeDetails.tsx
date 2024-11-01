@@ -54,6 +54,16 @@ const NodeDetails = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user:
             </div>
           </div>
         ))}
+        {node?.result_logs.map((log, index) => (
+          <div key={log.id}>
+            <div tabIndex={index} className="collapse collapse-plus border-base-300 bg-base-200 border">
+              <div className="collapse-title text-xl font-medium">{log.message}</div>
+              <div className="collapse-content">
+                <div>At: {log.created_at}</div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
       <DeleteNode
         visible={deleteVisible}
