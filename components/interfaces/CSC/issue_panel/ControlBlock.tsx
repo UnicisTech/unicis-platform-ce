@@ -69,7 +69,7 @@ const ControlBlock = ({
     }
     setStatuses(data.statuses);
   }, []);
-
+  console.log('controlOptions', controlOptions)
   return (
     <>
       <div>
@@ -97,7 +97,7 @@ const ControlBlock = ({
                 ({ value }) => value.control === control
               )}
               formatOptionLabel={({ value }) =>
-                `${value.code}: ${value.section}, ${value.controlLabel}, ${value.requirements}`
+                `${value.code}: ${value.section}, ${value.controlLabel || value.control}, ${value.requirements}`
               }
               placeholder="Choose a control"
               isDisabled={isSaving || isDeleting}
