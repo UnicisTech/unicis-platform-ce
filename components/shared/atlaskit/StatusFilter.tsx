@@ -1,14 +1,17 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import Select from '@atlaskit/select';
-import { statusOptions } from '@/components/defaultLanding/data/configs/csc';
+// import { statusOptions } from '@/components/defaultLanding/data/configs/csc';
 import { WithoutRing } from 'sharedStyles';
-import type { CscOption } from 'types';
 
-const StatusCscFilter = ({
+interface StatusCscFilterProps<T> {
+  options: T[]
+  setStatusFilter: Dispatch<SetStateAction<T[] | null>>;
+}
+
+const StatusFilter = <T,>({
+  options,
   setStatusFilter,
-}: {
-  setStatusFilter: Dispatch<SetStateAction<CscOption[] | null>>;
-}) => {
+}: StatusCscFilterProps<T>) => {
   return (
     <div style={{ margin: '0 5px' }}>
       <WithoutRing>
@@ -16,7 +19,7 @@ const StatusCscFilter = ({
           inputId="multi-select-status-filter"
           className="multi-select"
           classNamePrefix="react-select"
-          options={statusOptions}
+          options={options}
           onChange={(value) => {
             setStatusFilter([...value]);
           }}
@@ -28,4 +31,4 @@ const StatusCscFilter = ({
   );
 };
 
-export default StatusCscFilter;
+export default StatusFilter;

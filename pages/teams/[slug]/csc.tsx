@@ -22,6 +22,7 @@ import useTeamTasks from 'hooks/useTeamTasks';
 import { getCscStatusesBySlug } from 'models/team';
 import type { Option } from 'types';
 import useISO from 'hooks/useISO';
+import { statusOptions } from '@/components/defaultLanding/data/configs/csc';
 
 const labels = [
   'Unknown',
@@ -160,7 +161,7 @@ const CscDashboard = ({
         </div>
         <div className="flex flex-row justify-end">
           <SectionFilter ISO={ISO} setSectionFilter={setSectionFilter} />
-          <StatusCscFilter setStatusFilter={setStatusFilter} />
+          <StatusCscFilter setStatusFilter={setStatusFilter} options={statusOptions} />
           <PerPageSelector
             setPerPage={setPerPage}
             options={perPageOptions}
