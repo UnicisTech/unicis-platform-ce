@@ -5,9 +5,11 @@ import TextField from '@atlaskit/textfield';
 import TextArea from '@atlaskit/textarea';
 import Select, { ValueType } from '@atlaskit/select';
 import { Checkbox } from '@atlaskit/checkbox';
+import { RadioGroup } from '@atlaskit/radio';
 import {
   ErrorMessage,
   Field,
+  FieldProps,
   CheckboxField,
   FormFooter,
   HelperMessage,
@@ -20,7 +22,6 @@ import useTeamMembers from 'hooks/useTeamMembers';
 import { useRouter } from 'next/router';
 import {
   config,
-  headers,
   fieldPropsMapping,
 } from '@/components/defaultLanding/data/configs/rpa';
 
@@ -57,7 +58,6 @@ const CreateFormBody = ({
           flexDirection: 'column',
         }}
       >
-        <h3 className="text-1xl font-bold">{headers[stage]}</h3>
         <Message
           text={`The record of processing activities allows you to make an inventory of the data processing and to have
                     an overview of what you are
@@ -547,7 +547,7 @@ const CreateFormBody = ({
             <Message
               appearance="warning"
               text={
-                <span>Please attach relevant documents to the ticket.</span>
+                <span>Please attach relevant documents to the task.</span>
               }
             />
           </>
@@ -614,8 +614,153 @@ const CreateFormBody = ({
             </Field>
             <Message
               appearance="warning"
-              text="Please attach the relevant security certification and documents to the ticket."
+              text="Please attach the relevant security certification and documents to the task."
             />
+          </>
+        )}
+        {stage === 5 && (
+          <>
+            <Field
+              label={fieldPropsMapping['involveProfiling']}
+              name="involveProfiling"
+              defaultValue={procedure[5]?.involveProfiling || 'no'}
+            >
+              {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
+                <>
+                  <RadioGroup
+                    {...fieldProps}
+                    options={config['involveProfiling']}
+                  />
+                </>
+              )}
+            </Field>
+            <Field
+              label={fieldPropsMapping['useAutomated']}
+              name="useAutomated"
+              defaultValue={procedure[5]?.useAutomated || 'no'}
+            >
+              {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
+                <>
+                  <RadioGroup
+                    {...fieldProps}
+                    options={config['useAutomated']}
+                  />
+                </>
+              )}
+            </Field>
+            <Field
+              label={fieldPropsMapping['involveSurveillance']}
+              name="involveSurveillance"
+              defaultValue={procedure[5]?.involveSurveillance || 'no'}
+            >
+              {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
+                <>
+                  <RadioGroup
+                    {...fieldProps}
+                    options={config['involveSurveillance']}
+                  />
+                </>
+              )}
+            </Field>
+            <Field
+              label={fieldPropsMapping['processedSpecialCategories']}
+              name="processedSpecialCategories"
+              defaultValue={procedure[5]?.processedSpecialCategories || 'no'}
+            >
+              {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
+                <>
+                  <RadioGroup {...fieldProps} options={config['processedSpecialCategories']} />
+                </>
+              )}
+            </Field>
+            <Field
+              label={fieldPropsMapping['isBigData']}
+              name="isBigData"
+              defaultValue={procedure[5]?.isBigData || 'no'}
+            >
+              {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
+                <>
+                  <RadioGroup {...fieldProps} options={config['isBigData']} />
+                </>
+              )}
+            </Field>
+            <Field
+              label={fieldPropsMapping['dataSetsCombined']}
+              name="dataSetsCombined"
+              defaultValue={procedure[5]?.dataSetsCombined || 'no'}
+            >
+              {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
+                <>
+                  <RadioGroup {...fieldProps} options={config['dataSetsCombined']} />
+                </>
+              )}
+            </Field>
+            <Field
+              label={fieldPropsMapping['multipleControllers']}
+              name="multipleControllers"
+              defaultValue={procedure[5]?.multipleControllers || 'no'}
+            >
+              {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
+                <>
+                  <RadioGroup {...fieldProps} options={config['multipleControllers']} />
+                </>
+              )}
+            </Field>
+            <Field
+              label={fieldPropsMapping['imbalanceInRelationship']}
+              name="imbalanceInRelationship"
+              defaultValue={procedure[5]?.imbalanceInRelationship || 'no'}
+            >
+              {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
+                <>
+                  <RadioGroup {...fieldProps} options={config['imbalanceInRelationship']} />
+                </>
+              )}
+            </Field>
+            <Field
+              label={fieldPropsMapping['innovativeTechnologyUsed']}
+              name="innovativeTechnologyUsed"
+              defaultValue={procedure[5]?.innovativeTechnologyUsed || 'no'}
+            >
+              {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
+                <>
+                  <RadioGroup {...fieldProps} options={config['innovativeTechnologyUsed']} />
+                </>
+              )}
+            </Field>
+            <Field
+              label={fieldPropsMapping['transferredOutside']}
+              name="transferredOutside"
+              defaultValue={procedure[5]?.transferredOutside || 'no'}
+            >
+              {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
+                <>
+                  <RadioGroup {...fieldProps} options={config['transferredOutside']} />
+                </>
+              )}
+            </Field>
+            <Field
+              label={fieldPropsMapping['rightsRestricted']}
+              name="rightsRestricted"
+              defaultValue={procedure[5]?.rightsRestricted || 'no'}
+            >
+              {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
+                <>
+                  <RadioGroup {...fieldProps} options={config['rightsRestricted']} />
+                </>
+              )}
+            </Field>
+            <Field
+              label={fieldPropsMapping['piaNeeded']}
+              name="piaNeeded"
+              defaultValue={procedure[5]?.piaNeeded || 'no'}
+            >
+              {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
+                <>
+                  <RadioGroup {...fieldProps} options={config['piaNeeded']} />
+                </>
+              )}
+            </Field>
           </>
         )}
         <FormFooter></FormFooter>

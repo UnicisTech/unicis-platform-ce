@@ -4,3 +4,4 @@ export * from './rpa';
 export * from './csc';
 export * from './tia';
 export * from './pages';
+export * from './iap';

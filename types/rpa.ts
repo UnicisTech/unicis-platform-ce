@@ -45,6 +45,18 @@ export interface RpaConfig {
   guarantee: RpaOption[];
   toms: RpaOption[];
   country: RpaOption[];
+  involveProfiling: RpaOption[];
+  useAutomated: RpaOption[];
+  involveSurveillance: RpaOption[];
+  processedSpecialCategories: RpaOption[];
+  isBigData: RpaOption[];
+  dataSetsCombined: RpaOption[];
+  multipleControllers: RpaOption[];
+  imbalanceInRelationship: RpaOption[];
+  innovativeTechnologyUsed: RpaOption[];
+  transferredOutside: RpaOption[];
+  rightsRestricted: RpaOption[];
+  piaNeeded: RpaOption[];
 }
 
 export type RpaAuditLog = {
