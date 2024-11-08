@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import TextField from '@atlaskit/textfield';
+import CheckboxField from '@atlaskit/checkbox';
 import Select, { ValueType } from '@atlaskit/select';
 import type { Team } from '@prisma/client';
 import Button, { LoadingButton } from '@atlaskit/button';
@@ -11,7 +12,7 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { PLATFORMS } from '@/lib/fleet/constants';
 import { Query } from '@/types';
-import { useUpdateQuery } from '@/hooks/fleets/querys/useUpdateQuery';
+import { useUpdateQuery } from '@/hooks/fleets/queries/useUpdateQuery';
 import toast from 'react-hot-toast';
 import PacksSelector from '../PacksSelector';
 import TagsSelector from '../TagsSelector';
@@ -219,7 +220,7 @@ const EditQuery = ({
                     )}
                   </Field>
  
-                {/* <Field
+                <Field
                     aria-required={false}
                     name="removed"
                     label="Removed"
@@ -227,10 +228,10 @@ const EditQuery = ({
                   >
                     {({ fieldProps }) => (
                       <Fragment>
-                        <Radio onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} autoComplete="off" {...fieldProps} />
+                        <CheckboxField isChecked={query?.removed} autoComplete="off" {...fieldProps} />
                       </Fragment>
                     )}
-                  </Field> */}
+                  </Field>
                   
                 </div>
                 

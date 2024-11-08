@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import TextField from '@atlaskit/textfield';
-import { Radio } from '@atlaskit/radio';
+import CheckboxField from '@atlaskit/checkbox';
 import Select, { ValueType } from '@atlaskit/select';
 import type { User } from '@prisma/client';
 import Button, { LoadingButton } from '@atlaskit/button';
@@ -12,10 +12,9 @@ import { WithoutRing } from 'sharedStyles';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { PLATFORMS } from "@/lib/fleet/constants";
-import { useCreateQuery } from '@/hooks/fleets/querys/useCreateQuery';
+import { useCreateQuery } from '@/hooks/fleets/queries/useCreateQuery';
 import PacksSelector from '../PacksSelector';
 import TagsSelector from '../TagsSelector';
-import TextArea from '@atlaskit/textarea';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -220,7 +219,7 @@ const CreateQuery = ({
                     )}
                   </Field>
  
-                {/* <Field
+                <Field
                     aria-required={false}
                     name="removed"
                     label="Removed"
@@ -228,10 +227,10 @@ const CreateQuery = ({
                   >
                     {({ fieldProps }) => (
                       <Fragment>
-                        <Radio onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} autoComplete="off" {...fieldProps} />
+                        <CheckboxField autoComplete="off" {...fieldProps} />
                       </Fragment>
                     )}
-                  </Field> */}
+                  </Field>
                   
                 </div>
                 

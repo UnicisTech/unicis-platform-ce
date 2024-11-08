@@ -71,81 +71,83 @@ const Tags = ({ team, user }: { team: Team, user: Partial<User> }) => {
               </Button>
             )}
           </div>
-          <table className="text-sm table w-full border-b dark:border-base-200">
-            <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  {t('value')}
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  {t('created_at')}
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  {t('Analysis')}
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  {t('actions')}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {tags &&
-                tags.map((tag, index) => {
-                  return (
-                    <tr key={tag.id}>
-                      <td className="px-6 py-3">
-                        <Link href={`/teams/${slug}/asset-management/tags/${tag.id}`}>
+          <div className='overflow-x-auto'>
+            <table className="text-sm table w-full border-b dark:border-base-200">
+              <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    {t('value')}
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    {t('created-at')}
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    {t('analysis')}
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    {t('actions')}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {tags &&
+                  tags.map((tag, index) => {
+                    return (
+                      <tr key={tag.id}>
+                        <td className="px-6 py-3">
+                          <Link href={`/teams/${slug}/asset-management/tags/${tag.id}`}>
+                            <div className="flex items-center justify-start space-x-2">
+                              <span className="underline">{tag.value}</span>
+                            </div>
+                          </Link>
+                        </td>
+                        <td className="px-6 py-3">
                           <div className="flex items-center justify-start space-x-2">
-                            <span className="underline">{tag.value}</span>
+                            <FormattedDate style={'text-xs'}  dateString={tag.updated_at} />
                           </div>
-                        </Link>
-                      </td>
-                      <td className="px-6 py-3">
-                        <div className="flex items-center justify-start space-x-2">
-                          <FormattedDate style={'text-xs'}  dateString={tag.updated_at} />
-                        </div>
-                      </td>
-                      <td className="px-6 py-3 w-80">
-                        <div className="grid grid-cols-4 gap-1 text-center font-bold items-center justify-start">
-                          <div className="bg-gray-900 rounded-md">
-                            <h1 className="rounded-full text-[10px] bg-gray-800">nodes</h1>
-                            <span className="text-[10px]">{tag.nodes_count}</span>
+                        </td>
+                        <td className="px-6 py-3">
+                          <div className="grid grid-cols-4 gap-1 font-bold items-center justify-start">
+                            <div className="rounded-md">
+                              <h1 className="rounded-full text-[10px]">assets</h1>
+                              <span className="text-[10px]">{tag.nodes_count}</span>
+                            </div>
+                            <div className="rounded-md">
+                              <h1 className="rounded-full text-[10px]">queries</h1>
+                              <span className="text-[10px]">{tag.queries_count}</span>
+                            </div>
+                            <div className="rounded-md">
+                              <h1 className="rounded-full text-[10px] ">files</h1>
+                              <span className="text-[10px]">{tag.file_paths_count}</span>
+                            </div>
+                            <div className="rounded-md">
+                              <h1 className="rounded-full text-[10px]">packs</h1>
+                              <span className="text-[10px]">{tag.packs_count}</span>
+                            </div>
                           </div>
-                          <div className="bg-gray-900 rounded-md">
-                            <h1 className="rounded-full text-[10px] bg-gray-800">queries</h1>
-                            <span className="text-[10px]">{tag.queries_count}</span>
+                        </td>
+                        <td className="px-6 py-3">
+                          <div className="gap-2 btn-group">
+                            {canAccess('team_fleet_tag', ['delete']) && (
+                              <Button
+                                className="dark:text-gray-100"
+                                size="sm"
+                                variant="outline"
+                                onClick={() => {
+                                  openDeleteModal(tag.id);
+                                }}
+                              >
+                                {t('delete')}
+                              </Button>
+                            )}
                           </div>
-                          <div className="bg-gray-900 rounded-md">
-                            <h1 className="rounded-full text-[10px] bg-gray-800">files</h1>
-                            <span className="text-[10px]">{tag.file_paths_count}</span>
-                          </div>
-                          <div className="bg-gray-900 rounded-md">
-                            <h1 className="rounded-full text-[10px] bg-gray-800">packs</h1>
-                            <span className="text-[10px]">{tag.packs_count}</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-3">
-                        <div className="gap-2 btn-group">
-                          {canAccess('team_fleet_tag', ['delete']) && (
-                            <Button
-                              className="dark:text-gray-100"
-                              size="sm"
-                              variant="outline"
-                              onClick={() => {
-                                openDeleteModal(tag.id);
-                              }}
-                            >
-                              {t('delete')}
-                            </Button>
-                          )}
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
           <CreateTag user={user} fleetTeamId={team?.fleetTeamId!} visible={visible} setVisible={setVisible}/>
           <DeleteTag
             visible={deleteVisible}

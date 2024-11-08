@@ -1,19 +1,28 @@
-import AssetCard, { AssetProps } from '@/components/shared/AssetCard'
-import React from 'react'
+import React, { useState } from 'react'
+import Nodes from './Node/Nodes'
+import { Team, User } from '@prisma/client'
+import AssetsAnalysis from './AssetAnalysis'
+import { WithLoadingAndError } from '@/components/shared'
+import { useNodes } from '@/hooks/fleets/Nodes/useNodes'
 
 interface Assets {
-  assets: AssetProps[]
+  team: Team,
+  user: Partial<User>
 }
  
 
-const Assets = ({assets}: Assets) => {
-
+const Assets = ({ team, user }: Assets) => {
+  const [status, setStatus] = useState('all');
+  
+  const { nodes, isLoading, isError } = useNodes(team.fleetTeamId!, user?.fleetAccessPhrase!, status);
+  
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
-      {assets.map((asset, index) =>
-        <AssetCard key={index} host={asset.host} total={asset.total}/>
-      )}
-    </div>
+    <WithLoadingAndError isLoading={isLoading} error={isError}>
+      <div className='gap-4'>
+        <AssetsAnalysis nodes={nodes} team={team} user={user}/>
+        <Nodes nodes={nodes} team={team} user={user} setStatus={setStatus} status={status} />
+      </div>
+    </WithLoadingAndError>
   )
 }
 

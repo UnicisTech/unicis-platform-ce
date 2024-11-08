@@ -19,7 +19,7 @@ const AssetManagement = ({ teamFeatures, team, user }) => {
       <TeamTab activeTab="asset-management" team={team} teamFeatures={teamFeatures} />
       <AssetTab activeTab="fleet" team={team} teamFeatures={teamFeatures} />
       <div className="space-y-6">
-        <FleetContainer user={user}/>
+        <FleetContainer user={user} team={team}/>
       </div>
     </>
   );

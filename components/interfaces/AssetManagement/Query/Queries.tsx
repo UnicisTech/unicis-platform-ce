@@ -11,7 +11,7 @@ import { Query } from '@/types/fleet';
 import { PLATFORMS } from '@/lib/fleet/constants';
 import FleetStatus from '../Fleet/FleetStatus';
 import CreateQuery from './CreateQuery';
-import { useQuerys } from '@/hooks/fleets/querys/useQuery';
+import { useQuerys } from '@/hooks/fleets/queries/useQuery';
 import { CodeBlock } from '@atlaskit/code';
 import DeleteQuery from './DeleteQuery';
 import EditQuery from './EditQuery';
@@ -60,10 +60,10 @@ const Querys = ({ team, user }: { team: Team, user: Partial<User> }) => {
           <div className="flex justify-between items-center">
             <div className="space-y-3">
               <h2 className="text-xl font-medium leading-none tracking-tight">
-                {t('fleet-all-querys')}
+                {t('fleet-all-queries')}
               </h2>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                {t('fleet-querys-listed')}
+                {t('fleet-queries-listed')}
               </p>
             </div>
           
@@ -80,101 +80,102 @@ const Querys = ({ team, user }: { team: Team, user: Partial<User> }) => {
               </Button>
             )}
           </div>
-
-          <table className="text-sm table w-full border-b dark:border-base-200">
-          <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                {t('name')}
-              </th>
-              <th scope="col" className="px-6 py-3">
-                {t('sql')}
-              </th>
-              <th scope="col" className="px-6 py-3">
-                {t('platform')}
-              </th>
-              <th scope="col" className="px-6 py-3">
-                {t('version')}
-              </th>
-              <th scope="col" className="px-6 py-3">
-                {t('interval')}
-              </th>
-              <th scope="col" className="px-6 py-3">
-                {t('actions')}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {querys &&
-              querys.map((query, index) => {
-                return (
-                  <tr key={query.id}>
-                    <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/queries/${query.id}`}>
+          <div className='overflow-x-auto'>
+            <table className="text-sm table w-full border-b dark:border-base-200">
+            <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" className="px-6 py-3">
+                  {t('name')}
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  {t('sql')}
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  {t('platform')}
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  {t('version')}
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  {t('interval')}
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  {t('actions')}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {querys &&
+                querys.map((query, index) => {
+                  return (
+                    <tr key={query.id}>
+                      <td className="px-6 py-3">
+                        <Link href={`/teams/${slug}/asset-management/queries/${query.id}`}>
+                          <div className="flex items-center justify-start space-x-2">
+                            <span className="underline">{query.name}</span>
+                          </div>
+                        </Link>
+                      </td>
+                      <td className="px-6 py-3">
+                        <Link href={`/teams/${slug}/asset-management/queries/${query.id}`}>
+                          <div className="flex items-center justify-start space-x-2">
+                            <CodeBlock language="sql" showLineNumbers={false} text={query.sql} />
+                          </div>
+                        </Link>
+                      </td>
+                      <td className="px-6 py-3">
+                        <PlatformBadge
+                          value={query.platform!}
+                          label={
+                            PLATFORMS.find(({ value }) => value === query.platform)
+                              ?.label as string
+                          }
+                        />
+                      </td>
+                      <td className="px-6 py-3">
                         <div className="flex items-center justify-start space-x-2">
-                          <span className="underline">{query.name}</span>
+                          <span className="">{query.version}</span>
                         </div>
-                      </Link>
-                    </td>
-                    <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/queries/${query.id}`}>
+                      </td>
+                      <td className="px-6 py-3">
                         <div className="flex items-center justify-start space-x-2">
-                          <CodeBlock language="sql" showLineNumbers={false} text={query.sql} />
+                          <span className="">{query.shard}</span>
                         </div>
-                      </Link>
-                    </td>
-                    <td className="px-6 py-3">
-                      <PlatformBadge
-                        value={query.platform!}
-                        label={
-                          PLATFORMS.find(({ value }) => value === query.platform)
-                            ?.label as string
-                        }
-                      />
-                    </td>
-                    <td className="px-6 py-3">
-                      <div className="flex items-center justify-start space-x-2">
-                        <span className="">{query.version}</span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-3">
-                      <div className="flex items-center justify-start space-x-2">
-                        <span className="">{query.shard}</span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-3">
-                      <div className="gap-2 btn-group">
-                        {canAccess('team_fleet_pack', ['update']) && (
-                          <Button
-                            className="dark:text-gray-100"
-                            size="sm"
-                            variant="outline"
-                            onClick={() => {
-                              openEditModal(query);
-                            }}
-                          >
-                            {t('edit-task')}
-                          </Button>
-                        )}
-                        {canAccess('team_fleet_pack', ['delete']) && (
-                          <Button
-                            className="dark:text-gray-100"
-                            size="sm"
-                            variant="outline"
-                            onClick={() => {
-                              openDeleteModal(query.id);
-                            }}
-                          >
-                            {t('delete')}
-                          </Button>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-          </tbody>
-          </table>
+                      </td>
+                      <td className="px-6 py-3">
+                        <div className="gap-2 btn-group">
+                          {canAccess('team_fleet_pack', ['update']) && (
+                            <Button
+                              className="dark:text-gray-100"
+                              size="sm"
+                              variant="outline"
+                              onClick={() => {
+                                openEditModal(query);
+                              }}
+                            >
+                              {t('edit-task')}
+                            </Button>
+                          )}
+                          {canAccess('team_fleet_pack', ['delete']) && (
+                            <Button
+                              className="dark:text-gray-100"
+                              size="sm"
+                              variant="outline"
+                              onClick={() => {
+                                openDeleteModal(query.id);
+                              }}
+                            >
+                              {t('delete')}
+                            </Button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+            </table>
+          </div>
 
           <CreateQuery user={user} fleetTeamId={team?.fleetTeamId!} visible={visible} setVisible={setVisible} />
           {editVisible && (

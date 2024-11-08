@@ -2,10 +2,10 @@
 // In the future
 
 export const PLATFORMS = [
-    { value: 'all', label: 'All' },
-    { value: 'darwin', label: 'Darwin' },
-    { value: 'linux', label: 'Linux' },
-    { value: 'freebsd', label: 'FreeBSD' },
-    { value: 'posix', label: 'POSIX Compatible' },
     { value: 'windows', label: 'Windows' },
+    { value: 'linux', label: 'Linux' },
+    { value: 'apple', label: 'Apple' },
 ];
+
+
+export const defaultLabels = ['Windows', 'Linux', 'Apple'];

@@ -10,7 +10,7 @@ const FleetStatus: React.FC<FleetStatusProps> = ({ status }) => {
 
 
     return (
-        <div className="flex gap-6 flex-col">
+        <div className="flex gap-6 flex-col text-xl">
             {status === 'connected' && (
                 <div className='text-green-500'>
                     {t('fleet-connected')}

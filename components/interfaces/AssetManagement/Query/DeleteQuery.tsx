@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next';
 import type { ApiResponse } from 'types';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
-import { useDeleteQuery } from '@/hooks/fleets/querys/useDeleteQuery';
+import { useDeleteQuery } from '@/hooks/fleets/queries/useDeleteQuery';
 import { InputWithLabel } from '@/components/shared';
 
 const DeleteQuery = ({

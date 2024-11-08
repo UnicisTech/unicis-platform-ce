@@ -77,101 +77,103 @@ const Packs = ({ team, user }: { team: Team, user: Partial<User> }) => {
               {t('create')}
             </Button>
           )}
-        </div>
-        <table className="text-sm table w-full border-b dark:border-base-200">
-          <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              {/* <th scope="col" className="px-6 py-3">
-                {t('fleet-pack-id')}
-              </th> */}
-              <th scope="col" className="px-6 py-3">
-                {t('name')}
-              </th>
-              <th scope="col" className="px-6 py-3">
-                {t('platform')}
-              </th>
-              <th scope="col" className="px-6 py-3">
-                {t('version')}
-              </th>
-              <th scope="col" className="px-6 py-3">
-                {t('shard')}
-              </th>
-              <th scope="col" className="px-6 py-3">
-                {t('actions')}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {packs &&
-              packs.map((pack, index) => {
-                return (
-                  <tr key={pack.id}>
-                    {/* <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/packs/${pack.id}`}>
-                        <div className="flex items-center justify-start space-x-2">
-                          <span className="underline">{pack.id}</span>
-                        </div>
-                      </Link>
-                    </td> */}
-                    <td className="px-6 py-3">
-                      <Link href={`/teams/${slug}/asset-management/packs/${pack.id}`}>
-                        <div className="flex items-center justify-start space-x-2">
-                          <span className="underline">{pack.name}</span>
-                        </div>
-                      </Link>
-                    </td>
-                    <td className="px-6 py-3">
-                      <PlatformBadge
-                        value={pack.platform!}
-                        label={
-                          PLATFORMS.find(({ value }) => value === pack.platform)
-                            ?.label as string
-                        }
-                      />
-                    </td>
-                    <td className="px-6 py-3">
-                      <div className="flex items-center justify-start space-x-2">
-                        <span className="">{pack.version}</span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-3">
-                      <div className="flex items-center justify-start space-x-2">
-                        <span className="">{pack.shard}</span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-3">
-                      <div className="gap-2 btn-group">
-                        {canAccess('team_fleet_pack', ['update']) && (
-                          <Button
-                            className="dark:text-gray-100"
-                            size="sm"
-                            variant="outline"
-                            onClick={() => {
-                              openEditModal(pack);
-                            }}
-                          >
-                            {t('edit-task')}
-                          </Button>
-                        )}
-                        {canAccess('team_fleet_pack', ['delete']) && (
-                          <Button
-                            className="dark:text-gray-100"
-                            size="sm"
-                            variant="outline"
-                            onClick={() => {
-                              openDeleteModal(pack.id);
-                            }}
-                          >
-                            {t('delete')}
-                          </Button>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
+          </div>
+          <div className='overflow-x-auto'>
+            <table className="text-sm table w-full border-b dark:border-base-200">
+              <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  {/* <th scope="col" className="px-6 py-3">
+                    {t('fleet-pack-id')}
+                  </th> */}
+                  <th scope="col" className="px-6 py-3">
+                    {t('name')}
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    {t('platform')}
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    {t('version')}
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    {t('shard')}
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    {t('actions')}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {packs &&
+                  packs.map((pack, index) => {
+                    return (
+                      <tr key={pack.id}>
+                        {/* <td className="px-6 py-3">
+                          <Link href={`/teams/${slug}/asset-management/packs/${pack.id}`}>
+                            <div className="flex items-center justify-start space-x-2">
+                              <span className="underline">{pack.id}</span>
+                            </div>
+                          </Link>
+                        </td> */}
+                        <td className="px-6 py-3">
+                          <Link href={`/teams/${slug}/asset-management/packs/${pack.id}`}>
+                            <div className="flex items-center justify-start space-x-2">
+                              <span className="underline">{pack.name}</span>
+                            </div>
+                          </Link>
+                        </td>
+                        <td className="px-6 py-3">
+                          <PlatformBadge
+                            value={pack.platform!}
+                            label={
+                              PLATFORMS.find(({ value }) => value === pack.platform)
+                                ?.label as string
+                            }
+                          />
+                        </td>
+                        <td className="px-6 py-3">
+                          <div className="flex items-center justify-start space-x-2">
+                            <span className="">{pack.version}</span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-3">
+                          <div className="flex items-center justify-start space-x-2">
+                            <span className="">{pack.shard}</span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-3">
+                          <div className="gap-2 btn-group">
+                            {canAccess('team_fleet_pack', ['update']) && (
+                              <Button
+                                className="dark:text-gray-100"
+                                size="sm"
+                                variant="outline"
+                                onClick={() => {
+                                  openEditModal(pack);
+                                }}
+                              >
+                                {t('edit-task')}
+                              </Button>
+                            )}
+                            {canAccess('team_fleet_pack', ['delete']) && (
+                              <Button
+                                className="dark:text-gray-100"
+                                size="sm"
+                                variant="outline"
+                                onClick={() => {
+                                  openDeleteModal(pack.id);
+                                }}
+                              >
+                                {t('delete')}
+                              </Button>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
         <CreatePack user={user} fleetTeamId={team?.fleetTeamId!} visible={visible} setVisible={setVisible}/>
         {editVisible && (
           <EditPack

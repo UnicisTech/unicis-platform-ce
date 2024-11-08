@@ -10,7 +10,7 @@ import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
 import Breadcrumb from '@/components/shared/Breadcrumb';
-import NodeDetails from '@/components/interfaces/AssetManagement/Node/NodeDetails';
+import NodeDetails from '@/components/interfaces/AssetDashboard/Node/NodeDetails';
 
 
 const NodeById = ({teamFeatures, user}) => {

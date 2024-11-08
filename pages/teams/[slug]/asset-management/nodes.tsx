@@ -6,7 +6,7 @@ import { getTeam } from 'models/team';
 import env from '@/lib/env';
 import { getUserBySession } from '@/models/user';
 import { getSession } from '@/lib/session';
-import Nodes from '@/components/interfaces/AssetManagement/Node/Nodes';
+import Nodes from '@/components/interfaces/AssetDashboard/Node/Nodes';
 import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import { TeamTab } from '@/components/team';
 

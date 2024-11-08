@@ -61,7 +61,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname.includes('csc'),
     },
     {
-      name: t('Asset Dashboard'),
+      name: t('Asset Management'),
       href: `/teams/${slug}/asset`,
       icon: () => <Icon src="/asset-dashboard.png" />,
       className: 'fill-blue-600 stroke-blue-600',

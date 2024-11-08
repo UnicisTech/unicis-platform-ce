@@ -7,9 +7,9 @@ import { OSQUERY_ENTRY } from '@/lib/fleet/tools';
 import env from '@/lib/env';
 
 
-const FleetHelper = ({ team }: { team: Partial<Team>}) => {
+const FleetHelper = ({ team, safe=true }: { team: Partial<Team>, safe?: boolean}) => {
     const { t } = useTranslation('common');
-    const OsqueryEntry = OSQUERY_ENTRY({ secret: team.fleetSecret, teamName: team.name, apiUrl: env.fleetAPI });
+    const OsqueryEntry = OSQUERY_ENTRY({ secret: team.fleetSecret!, teamName: team.name!, apiUrl: env.fleetAPI, safe: safe });
     
     return (
         <Card>
@@ -20,7 +20,7 @@ const FleetHelper = ({ team }: { team: Partial<Team>}) => {
                 </Card.Header>
                 {team?.fleetSecret != null ? (
                     <div>
-                        <CopyToClipboardButton value={OsqueryEntry!} />
+                        <CopyToClipboardButton value={OSQUERY_ENTRY({ secret: team.fleetSecret!, teamName: team.name!, apiUrl: env.fleetAPI, safe: safe, isCopy: true })!} />
                         <CodeBlock
                             language="sh"
                             codeBidiWarningTooltipEnabled
@@ -29,7 +29,6 @@ const FleetHelper = ({ team }: { team: Partial<Team>}) => {
                             shouldWrapLongLines={true} showLineNumbers={true}
                             text={OsqueryEntry}
                         />
-                        <span>For more Information visit <a className='text-blue-600' href="https://osquery.readthedocs.io/en/stable/installation/cli-flags/">Command Line Flags</a></span>
                     </div>
                 ) : (
                     <FleetStatus />

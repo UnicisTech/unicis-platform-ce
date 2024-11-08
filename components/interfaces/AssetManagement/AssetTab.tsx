@@ -67,18 +67,6 @@ const AssetTab = ({ activeTab, team, heading, teamFeatures }: AssetTabProps) => 
   }
 
   if (
-    teamFeatures.fleetPack &&
-    canAccess('team_fleet_node', ['create', 'update', 'read', 'delete'])
-  ) {
-    navigations.push({
-      name: 'Nodes',
-      href: `/teams/${team.slug}/asset-management/nodes`,
-      active: activeTab === 'nodes',
-      icon: CodeBracketSquareIcon,
-    });
-  }
-
-  if (
     teamFeatures.fleetQuery &&
     canAccess('team_fleet_query', ['create', 'update', 'read', 'delete'])
   ) {

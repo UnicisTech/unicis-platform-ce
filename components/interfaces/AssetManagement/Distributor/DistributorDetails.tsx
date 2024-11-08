@@ -11,11 +11,12 @@ import Select, { ValueType } from '@atlaskit/select';
 import TextField from '@atlaskit/textfield';
 import toast from 'react-hot-toast';
 import DeleteQuery from './DeleteDistributorResult';
-import { useUpdateQuery } from '@/hooks/fleets/querys/useUpdateQuery';
+import { useUpdateQuery } from '@/hooks/fleets/queries/useUpdateQuery';
 import { useGetDistributedIdResult } from '@/hooks/fleets/distributors/useGetDistributorIdResult';
 import { CodeBlock } from '@atlaskit/code';
 import FormattedDate from '@/components/shared/Date';
 import StatusValue from '../StatusValue';
+import TableBuilder from '../TableBuilder';
 
 interface FormData {
   name,
@@ -78,7 +79,7 @@ const DistributorsDetails = ({ user, distributorId, fleetTeamId }: { user: Parti
         <div className="items-center justify-start">
           <CodeBlock language="sql" shouldWrapLongLines codeBidiWarningTooltipEnabled i18nIsDynamicList={true} showLineNumbers={false} text={distributorsResult?.query.sql!} />
         </div>
-        {distributorsResult?.tasks.map((task) => 
+        {/* {distributorsResult?.tasks.map((task) => 
           <div key={task.id} className='grid grid-cols-1 gap-2'>
               {task?.results.map((result, index) => 
                 <div key={result.id} className='grid p-2 rounded-md bg-gray-100 gap-1'>
@@ -107,7 +108,9 @@ const DistributorsDetails = ({ user, distributorId, fleetTeamId }: { user: Parti
                 </div>
               )}
           </div>
-        )}
+        )} */}
+        <h1 className='text-gray-100'>Processed Results</h1>
+        <TableBuilder data={distributorsResult!.results} />
       </div>
       <DeleteQuery
         visible={deleteVisible}

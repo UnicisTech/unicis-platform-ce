@@ -5,6 +5,8 @@ import { IssuePanelContainer } from '@/sharedStyles';
 import { useGetNodeId } from '@/hooks/fleets/Nodes/useGetNodeId';
 import DeleteNode from './DeleteNode';
 import FormattedDate from '@/components/shared/Date';
+import TableBuilder from '../../AssetManagement/TableBuilder';
+import { CodeBlock } from '@atlaskit/code';
 
 
 const NodeDetails = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user: Partial<User>, nodeID: string }) => {  
@@ -42,28 +44,14 @@ const NodeDetails = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user:
         <div>Node Serial Number: {node?.node_info?.system_info.hardware_serial}</div>
         <div>Node Address: {node?.node_info?.platform_info.address}</div>
         <div>Node Last Checkin: {node?.last_checkin? <FormattedDate style={''} dateString={node?.last_checkin} /> : 'Never'}</div>
-        {node?.status_logs.map((log, index) => (
-          <div key={log.id}>
-            <div tabIndex={index} className="collapse collapse-plus border-base-300 bg-base-200 border">
-              <div className="collapse-title text-xl font-medium">{log.message}</div>
-              <div className="collapse-content">
-                <div>{log.filename}</div>
-                <div>{log.line}</div>
-                <div>At: {log.created_at}</div>
-              </div>
-            </div>
-          </div>
-        ))}
-        {node?.result_logs.map((log, index) => (
-          <div key={log.id}>
-            <div tabIndex={index} className="collapse collapse-plus border-base-300 bg-base-200 border">
-              <div className="collapse-title text-xl font-medium">{log.message}</div>
-              <div className="collapse-content">
-                <div>At: {log.created_at}</div>
-              </div>
-            </div>
-          </div>
-        ))}
+        <div className="items-center justify-start">
+          <h1>Node Config</h1>
+          <CodeBlock language="JSON" shouldWrapLongLines codeBidiWarningTooltipEnabled i18nIsDynamicList={true} showLineNumbers={false} text={JSON.stringify(node?.node_config)} />
+        </div>
+        <h1 className='text-gray-100'>Status Logs</h1>
+        <TableBuilder data={node!.status_logs} />
+        <h1 className='text-gray-100'>Result Logs</h1>
+        <TableBuilder data={node!.result_logs} />
       </div>
       <DeleteNode
         visible={deleteVisible}

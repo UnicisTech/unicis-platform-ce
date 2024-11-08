@@ -4,18 +4,21 @@ import { Button } from 'react-daisyui';
 import { Card, CopyToClipboardButton, InputWithLabel } from '@/components/shared';
 import { Team, User } from '@prisma/client';
 import FleetStatus from './FleetStatus';
-import { useConnectFleetSecret, useCreateFleetTeam, useDisconnectFleetSecret, useRenewFleetSecret } from '@/hooks/fleets';
+import { useConnectFleetSecret, useCreateFleetTeam, useDisconnectFleetSecret } from '@/hooks/fleets';
 import { useState } from 'react';
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import RenewFleetSecret from './RenewFleetSecret';
+import useCanAccess from '@/hooks/useCanAccess';
 
 
 const FleetSecret = (
   {
     user,
-    team
+    team,
+    safe = true
   }: {
     user: Partial<User>,
-    team: Team
+      team: Team,
+    safe?: boolean
   }) => {
   const { t } = useTranslation('common');
   const userId = user.id;
@@ -24,8 +27,9 @@ const FleetSecret = (
   const createFleetTeam = useCreateFleetTeam();
   const connectFleetSecret = useConnectFleetSecret();
   const disconnectFleetSecret = useDisconnectFleetSecret();
-  const renewFleetSecret = useRenewFleetSecret();
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [renewVisible, setRenewVisible] = useState(false);
+
+  const { canAccess } = useCanAccess();
 
   const handleOrderSecret = async () => {
     try {
@@ -45,7 +49,7 @@ const FleetSecret = (
     }
   };
 
-  const handleDisconnect = async () => {
+  const handleReset = async () => {
     if (team.fleetTeamId!) {
       await disconnectFleetSecret(teamId);
       toast.success(t('fleet-secret-disactivated'));
@@ -59,17 +63,8 @@ const FleetSecret = (
     }
   };
 
-  const handleRenew = async () => {
-    if (team.fleetTeamId!) {
-      const { secret: newSecret } = await renewFleetSecret(team.fleetTeamId!, user.fleetAccessPhrase as string);
-      const saved = await connectFleetSecret(teamId, team.fleetTeamId!, newSecret);
-      console.log(saved);
-      toast.success(t('fleet-secret-renew'));
-    }
-  };
-
-  const togglePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
+  const openRenewModal = () => {
+    setRenewVisible(true);
   };
 
   return (
@@ -86,23 +81,12 @@ const FleetSecret = (
             <>
               <FleetStatus status='connected' />
               <InputWithLabel
-                type={isPasswordVisible ? "text" : "password"}
+                type={safe ? "password" : "text"}
                 label={t('fleet-secret')}
                 name="fleetPassword"
                 value={team.fleetSecret!}
                 disabled={true}
               />
-              <button
-                  type="button"
-                  className="absolute right-2 top-9 transform -translate-y-1/2"
-                  onClick={togglePasswordVisibility}
-                >
-                  {isPasswordVisible ? (
-                    <EyeSlashIcon className="h-5 w-5 text-gray-500" />
-                  ) : (
-                    <EyeIcon className="h-5 w-5 text-gray-500" />
-                  )}
-                </button>
               {team.fleetSecret! != null &&
                 <div>
                   <CopyToClipboardButton value={team.fleetSecret!} />
@@ -119,7 +103,6 @@ const FleetSecret = (
         {team.fleetSecret == null &&
           <Button
             type="button"
-            color="success"
             loading={false}
             disabled={team.fleetSecret! === null}
             onClick={handleConnect}
@@ -128,20 +111,21 @@ const FleetSecret = (
             {t('fleet-secret-active')}
           </Button>
         }
-        <Button
-          type="button"
-          color="primary"
-          loading={false}
-          disabled={team.fleetSecret! === null}
-          onClick={handleRenew}
-          size="md"
-        >
-          {t('fleet-renew-secret')}
-        </Button>
+        {canAccess('team_fleet_node', ['delete']) && (
+          <Button
+            type="button"
+            loading={false}
+            size="md"
+            onClick={() => {
+              openRenewModal();
+            }}
+          >
+            {t('fleet-renew-secret')}
+          </Button>
+        )}
         {team.fleetSecret! === null ?
           <Button
             type="button"
-            color="primary"
             loading={false}
             disabled={team.fleetSecret! !== null}
             onClick={handleOrderSecret}
@@ -152,16 +136,22 @@ const FleetSecret = (
           :
           <Button
             type="button"
-            color="error"
             loading={false}
             disabled={!team.fleetSecret! || !user?.fleetAccessPhrase}
-            onClick={handleDisconnect}
+            onClick={handleReset}
             size="md"
           >
-            {t('fleet-secret-deactivate')}
+            {t('fleet-secret-reset')}
           </Button>
         }
       </Card.Footer>
+      <RenewFleetSecret
+        teamId={teamId}
+        fleetTeamId={team.fleetTeamId!}
+        fleetAccessPhrase={user.fleetAccessPhrase!}
+        setVisible={setRenewVisible}
+        visible={renewVisible}
+      />
     </Card>
   );
 };

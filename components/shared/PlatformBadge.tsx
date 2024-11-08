@@ -32,11 +32,11 @@ const PlatformBadge = ({ label, value }: { label: string; value: string }) => {
   return (
     <>
       <BaseBadge
-        className={`rounded text-xs py-2 text-white whitespace-nowrap flex items-center`}
+        className={`rounded text-xs whitespace-nowrap flex items-center`}
         // color={colors[value]}
       >
         {Icon && (
-          <div style={{ filter: 'invert(100%)'}} className='h-4 w-4 mr-2'>
+          <div className='h-4 w-4 mr-2'>
             <Image
               src={Icon}
               alt={`${value} icon`}

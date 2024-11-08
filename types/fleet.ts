@@ -1,3 +1,4 @@
+
 export interface FleetBase {
   id: string;
   updated_at: string;
@@ -18,6 +19,8 @@ export interface FleetTeam {
   id: string;
   name: string;
   user: FleetUser;
+  ca_certificate: any;
+  ca_private_key: any;
 }
 
 
@@ -141,6 +144,7 @@ export interface NodeWithRelationships extends Node {
   tags: Tag[];
   status_logs: StatusLog[];
   result_logs: any[];
+  node_config: string;
 }
 
 export interface NodesWithRelationshipsResponse {
@@ -202,7 +206,7 @@ export interface DistributedQueryResult {
     total: string;
   };
   query: Query;
-  results: JSON[]; /// This returns results columes only no extral References
+  results: Array<Record<string, any>>; /// This returns results columes only no extral References
   status: string;
   tasks: Task[];
 }

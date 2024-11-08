@@ -1,75 +1,30 @@
 import { Assets } from '@/components/interfaces/AssetDashboard';
-import AssetsAllocator from '@/components/interfaces/AssetDashboard/AssetsAllocator';
-import { Error, Loading } from '@/components/shared';
-import { useNodes } from '@/hooks/fleets/Nodes/useNodes';
 import env from '@/lib/env';
 import { getUserBySession } from '@/models/user';
-import useTeam from 'hooks/useTeam';
 import { GetServerSidePropsContext } from 'next';
 import { getSession } from '@/lib/session';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { getTeam } from '@/models/team';
 
-const assetsData = [
-  {
-    host: 'linux',
-    total: 15300,
-  },
-  {
-    host: 'windows',
-    total: 443,
-  },
-  {
-    host: 'darwin',
-    total: 1232,
-  },
-  {
-    host: 'freebsd',
-    total: 65762,
-  },
-  {
-    host: 'posix',
-    total: 4521,
-  },
-  {
-    host: 'all',
-    total: 340,
-  }
-]
 
 const TeamAssetDashboard = ({
   slug,
   user,
+  team,
   teamFeatures,
   }) => {
   const { t } = useTranslation('common');
-  const { isLoading: teamLoading, isError: teamError, team } = useTeam();
-  const { nodes, isLoading: nodesLoading, isError: nodesError } = useNodes(
-    team?.fleetTeamId!,
-    user?.fleetAccessPhrase!,
-  );
-
-  // Combine loading states for team and nodes
-  if (teamLoading || nodesLoading) {
-    return <Loading />;
-  }
-
-  // Combine error states for team and nodes
-  if (teamError || nodesError) {
-    return <Error message={t('team-not-found')} />;
-  }
-
 
   return (
     <>
       <div className="flex flex-col pb-6">
         <h2 className="text-xl font-semibold mb-2">
-          {t('Asset dashboard')} ({team?.name})
+          {t('asset-management-dashboard')} ({team?.name})
         </h2>
       </div>
       <div className="space-y-6">
-        <Assets assets={assetsData} />
-        <AssetsAllocator nodes={nodes}/>
+        <Assets user={user} team={team} />
       </div>
     </>
   );
@@ -80,6 +35,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { locale, query }: GetServerSidePropsContext = context;
   const slug = query.slug as string;
   const user = await getUserBySession(session);
+  const team = await getTeam({ slug });
 
   if (!user) {
     return {
@@ -91,6 +47,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
       teamFeatures: env.teamFeatures,
+      team: JSON.parse(JSON.stringify(team)),
       slug: slug,
       user: {
         id: user.id,
