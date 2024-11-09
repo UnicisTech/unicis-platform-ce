@@ -3,6 +3,7 @@ import {
   CodeBracketIcon,
   ChatBubbleBottomCenterTextIcon,
   QuestionMarkCircleIcon,
+  LifebuoyIcon,
 } from '@heroicons/react/24/outline';
 import { QueueListIcon, ChartBarIcon } from '@heroicons/react/24/solid';
 import { useTranslation } from 'next-i18next';
@@ -77,6 +78,15 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       name: t('documentation'),
       href: 'https://www.unicis.tech/docs',
       icon: CodeBracketIcon,
+      className: 'stroke-blue-600',
+      active:
+        activePathname?.startsWith(`/teams/${slug}`) &&
+        activePathname.includes('documentation'),
+    },
+    {
+      name: t('knowledge-base'),
+      href: 'https://www.unicis.tech/kb',
+      icon: LifebuoyIcon,
       className: 'stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
