@@ -12,7 +12,7 @@ const CopyrightItem = () => {
           </a>
           . <br />
           Version: 2024-25-08 <br />
-          Made with 💙 in 🇪🇺. 
+          Made with 💙 in 🇪🇺
         </p>
       </li>
     </ul>
