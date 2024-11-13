@@ -43,7 +43,7 @@ const QueryById = ({teamFeatures, user}) => {
       <QueryTab activeTab={activeTab} setActiveTab={setActiveTab} />
       <Card heading="Details">
         <Card.Body>
-          <QueryDetails user={user} fleetTeamId={team?.fleetTeamId!} queryID={queryId as string} />
+          <QueryDetails user={user} fleetTeamId={team?.id!} queryID={queryId as string} />
         </Card.Body>
       </Card>
     </>
@@ -74,8 +74,6 @@ export const getServerSideProps = async (
         firstName: user.firstName,
         lastName: user.lastName,
         image: user.image,
-        fleetId: user.fleetId,
-        fleetAccessPhrase: user.fleetAccessPhrase
       }
     },
   };

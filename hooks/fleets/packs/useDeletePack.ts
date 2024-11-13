@@ -2,23 +2,21 @@ import { fleetAuthAPIHeaders } from "@/lib/common";
 import { fleetV1 } from "@/lib/fleet/apiBase";
 
 export const useDeletePack = () => {
-  const deletePack = async (fleetTeamId: string, packId: string, accessPhrase?: string) => {
+  const deletePack = async (fleetTeamId: string, packId: string) => {
     try {
       const response = await fleetV1(`/manager/${fleetTeamId}/pack/${packId}/delete`, {
         method: 'DELETE',
-        headers: fleetAuthAPIHeaders(accessPhrase!),
+        headers: fleetAuthAPIHeaders(),
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'An error occurred while deleting the pack.');
+        const data = await response.json();
       }
 
       return response.json();
     } catch (error) {
       // Optional: Handle or log the error more specifically here if needed
       console.error('Error deleting pack:', error);
-      throw error;
     }
   };
 

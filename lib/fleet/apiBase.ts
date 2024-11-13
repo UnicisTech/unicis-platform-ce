@@ -5,6 +5,7 @@ import env from "@/lib/env";
 export const fleetV1 = async (endpoint: string, options?: RequestInit): Promise<Response> => {
   const response = await fetch(`${env.fleetAPIUrl}/api/v1${endpoint}`, {
     ...options,
+    credentials: 'include',
   }); 
 
   if (!response.ok) {
@@ -18,7 +19,7 @@ export const fleetV1 = async (endpoint: string, options?: RequestInit): Promise<
 export const fleetV2 = async (endpoint: string, options?: RequestInit): Promise<Response> => {
   const response = await fetch(`${env.fleetAPIUrl}/api/v2${endpoint}`, {
     ...options,
-    // mode: 'cors'
+    credentials: 'include',
   });
 
   if (!response.ok) {

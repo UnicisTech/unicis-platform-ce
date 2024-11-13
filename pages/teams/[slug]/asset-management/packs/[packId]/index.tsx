@@ -47,7 +47,7 @@ const PackById = ({teamFeatures, user}) => {
       <PackTab activeTab={activeTab} setActiveTab={setActiveTab} />
       <Card heading="Details">
         <Card.Body>
-          <PackDetails user={user} fleetTeamId={team?.fleetTeamId!} packID={packId as string} />
+          <PackDetails user={user} fleetTeamId={team?.id!} packID={packId as string} />
         </Card.Body>
       </Card>
     </>
@@ -78,8 +78,6 @@ export const getServerSideProps = async (
         firstName: user.firstName,
         lastName: user.lastName,
         image: user.image,
-        fleetId: user.fleetId,
-        fleetAccessPhrase: user.fleetAccessPhrase
       },
     },
   };

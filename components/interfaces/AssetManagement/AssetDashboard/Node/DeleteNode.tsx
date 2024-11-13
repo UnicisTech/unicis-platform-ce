@@ -12,13 +12,11 @@ const DeleteNode = ({
   visible,
   setVisible,
   fleetTeamId,
-  fleetAccessPhrase
 }: {
   nodeId: string;
   visible: boolean;
   setVisible: (visible: boolean) => void;
   fleetTeamId: string;
-  fleetAccessPhrase: string;
 }) => {
   const router = useRouter();
   const { slug } = router.query;
@@ -33,7 +31,7 @@ const DeleteNode = ({
     onSubmit: async (values) => {
 
       if (values.name === 'DELETE NODE') {
-        await deleteNode(fleetTeamId, nodeId, fleetAccessPhrase)
+        await deleteNode(fleetTeamId, nodeId)
         toast.loading(t('Delete Node'));
         formik.resetForm();
         setVisible(false);

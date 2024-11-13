@@ -13,13 +13,11 @@ const DeletePack = ({
   visible,
   setVisible,
   fleetTeamId,
-  fleetAccessPhrase
 }: {
   packId: string;
   visible: boolean;
   setVisible: (visible: boolean) => void;
   fleetTeamId: string;
-  fleetAccessPhrase: string;
 }) => {
   const router = useRouter();
   const { slug } = router.query;
@@ -35,7 +33,7 @@ const DeletePack = ({
     onSubmit: async (values) => {
 
       if (values.name === 'DELETE PACK') {
-        await deletePack(fleetTeamId, packId, fleetAccessPhrase)
+        await deletePack(fleetTeamId, packId)
         toast.loading(t('Delete Pack'));
         mutateTasks();
         formik.resetForm();

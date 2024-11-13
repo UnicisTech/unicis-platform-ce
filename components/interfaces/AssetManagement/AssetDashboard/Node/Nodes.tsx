@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import useCanAccess from 'hooks/useCanAccess';
 import type { Team, User } from '@prisma/client';
-import FleetStatus from '../../AssetManagement/Fleet/FleetStatus';
+import FleetStatus from '../../Fleet/FleetStatus';
 import FormattedDate from '@/components/shared/Date';
 import DeleteNode from './DeleteNode';
 import ExportNode from './ExportNode';
@@ -23,7 +23,7 @@ const Nodes = ({ team, user, nodes, setStatus, status }: { team: Team, user: Par
   const [addVisible, setAddVisible] = useState(false);
   const [nodeToExport, setNodeToExport] = useState<null | string>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  
+
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
 
@@ -48,7 +48,7 @@ const Nodes = ({ team, user, nodes, setStatus, status }: { team: Team, user: Par
 
   return (
     <>
-      {user.fleetAccessPhrase ?
+      {user != null ?
         <div className="space-y-3">
           <div className="flex justify-between items-center">
             <div className="space-y-3">
@@ -62,10 +62,10 @@ const Nodes = ({ team, user, nodes, setStatus, status }: { team: Team, user: Par
 
             <div className='w-fit gap-2 flex'>
               <TextField
-                type="text" 
-                placeholder="Search by name or asset" 
-                height={50} 
-                autoComplete="off" 
+                type="text"
+                placeholder="Search by name or asset"
+                height={50}
+                autoComplete="off"
                 value={searchTerm}
                 onChange={handleSearchChange}
                 className='h-8 m-0'
@@ -75,7 +75,7 @@ const Nodes = ({ team, user, nodes, setStatus, status }: { team: Team, user: Par
                 <Button
                   size="xs"
                   color="neutral"
-                  disabled={status==='inactive'}
+                  disabled={status === 'inactive'}
                   variant="outline"
                   onClick={() => {
                     setStatus('inactive');
@@ -89,7 +89,7 @@ const Nodes = ({ team, user, nodes, setStatus, status }: { team: Team, user: Par
                 <Button
                   size="xs"
                   color="neutral"
-                  disabled={status==='active'}
+                  disabled={status === 'active'}
                   variant="outline"
                   onClick={() => {
                     setStatus('active');
@@ -102,7 +102,7 @@ const Nodes = ({ team, user, nodes, setStatus, status }: { team: Team, user: Par
                 <Button
                   size="xs"
                   color="neutral"
-                  disabled={status==='all'}
+                  disabled={status === 'all'}
                   variant="outline"
                   onClick={() => {
                     setStatus('all');
@@ -156,23 +156,22 @@ const Nodes = ({ team, user, nodes, setStatus, status }: { team: Team, user: Par
                     return (
                       <tr key={node.id}>
                         <td className="py-3 align-top">
-                          <Link href={`/teams/${slug}/asset-management/nodes/${node.id}`}>
+                          <Link href={`/teams/${slug}/assets/${node.id}`}>
                             <div className="flex items-center justify-start">
-                              <span className="">{node.team.user?.firstname!} {node.team.user?.lastname[0].toUpperCase()}</span>
+                              <span className="">{node.owner.user?.firstname!} {node.owner.user?.lastname[0].toUpperCase()}</span>
                             </div>
-                            <span className="">{node.team.user?.email!}</span>
+                            <span className="">{node.owner.user?.email!}</span>
                           </Link>
                         </td>
                         <td className="py-3 align-top">
-                          <Link href={`/teams/${slug}/asset-management/nodes/${node.id}`}>
+                          <Link href={`/teams/${slug}/assets/${node.id}`}>
                             <div className="grid grid-cols-1 gap-1 font-bold justify-start">
                               <div className="rounded-xs">
-                                {/* <h1 className="rounded-xs text-[10px]">Active</h1> */}
                                 <div className=''>
                                   {node.is_active ?
-                                  <div className='w-4 h-4 rounded-full bg-green-500'></div>
-                                  :
-                                  <div className='w-4 h-4 rounded-full bg-red-500'></div>
+                                    <div className='w-4 h-4 rounded-full bg-green-500'></div>
+                                    :
+                                    <div className='w-4 h-4 rounded-full bg-red-500'></div>
                                   }
                                 </div>
                               </div>
@@ -208,7 +207,7 @@ const Nodes = ({ team, user, nodes, setStatus, status }: { team: Team, user: Par
                         <td className="py-3 align-top">
                           <div className="grid grid-cols-1 gap-1 font-bold justify-start">
                             <div className="rounded-xs">
-                              <FormattedDate style={'text-[10px]'}  dateString={node.enrolled_on} />
+                              <FormattedDate style={'text-[10px]'} dateString={node.enrolled_on} />
                             </div>
                           </div>
                         </td>
@@ -250,15 +249,13 @@ const Nodes = ({ team, user, nodes, setStatus, status }: { team: Team, user: Par
             visible={deleteVisible}
             setVisible={setDeleteVisible}
             nodeId={nodeToDelete!}
-            fleetAccessPhrase={user.fleetAccessPhrase!}
-            fleetTeamId={team?.fleetTeamId!}
+            fleetTeamId={team.id}
           />
           <ExportNode
             visible={exportVisible}
             setVisible={setExportVisible}
             nodeId={nodeToExport!}
-            fleetAccessPhrase={user.fleetAccessPhrase!}
-            fleetTeamId={team?.fleetTeamId!}
+            fleetTeamId={team.id}
           />
           <AddAsset
             visible={addVisible}
@@ -269,7 +266,7 @@ const Nodes = ({ team, user, nodes, setStatus, status }: { team: Team, user: Par
         </div>
         :
         <>
-          <FleetStatus status='disconnected'/>
+          <FleetStatus status='disconnected' />
         </>
       }
     </>

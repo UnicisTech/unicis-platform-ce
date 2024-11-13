@@ -16,7 +16,6 @@ model Account {
   refresh_token     String?
   access_token      String?
   expires_at        Int?
-  fleetAccess       String?
   token_type        String?
   scope             String?
   id_token          String?
@@ -53,8 +52,6 @@ model User {
   updatedAt           DateTime       @default(now())
   firstName           String         @default("")
   lastName            String         @default("")
-  fleetId             String?        @unique
-  fleetAccessPhrase   String?     
   accounts            Account[]
   Comment             Comment[]
   invitations         Invitation[]
@@ -74,8 +71,6 @@ model Team {
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @default(now())
   properties      Json          @default("{}")
-  fleetTeamId     String?       @unique
-  fleetSecret     String?       @unique
   apiKeys         ApiKey[]
   invitations     Invitation[]
   subscription    Subscription?

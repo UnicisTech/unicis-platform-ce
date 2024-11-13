@@ -47,7 +47,7 @@ const PackTags = ({ fleetTeamId, packID, user }: { fleetTeamId: string, packID: 
     setIsFormChanged(true);
   }, []);
 
-  const { pack, isLoading, isError } = useGetPackId(fleetTeamId, packID, user?.fleetAccessPhrase!);
+  const { pack, isLoading, isError } = useGetPackId(fleetTeamId, packID);
 
   if (isLoading) {
     return <Loading />;

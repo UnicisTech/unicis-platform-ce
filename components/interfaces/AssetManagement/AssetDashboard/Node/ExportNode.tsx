@@ -36,13 +36,11 @@ const ExportNode = ({
   visible,
   setVisible,
   fleetTeamId,
-  fleetAccessPhrase
 }: {
   nodeId: string;
   visible: boolean;
   setVisible: (visible: boolean) => void;
   fleetTeamId: string;
-  fleetAccessPhrase: string;
 }) => {
   const { t } = useTranslation('common');
 

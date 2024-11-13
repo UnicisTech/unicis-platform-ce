@@ -1,3 +1,6 @@
+// Please dont change logics here if not fully understoold 
+// Author: Abdulsamad A | agastronics@gmail.com
+
 import React, { useEffect, useState } from 'react';
 import { useNodes } from '@/hooks/fleets/Nodes/useNodes';
 import { WithoutRing } from 'sharedStyles';
@@ -6,15 +9,14 @@ import { Node } from '@/types';
 
 interface NodesSelectorProps {
   fleetTeamId: string;
-  fleetAccessPhrase: string;
   onSelect: (nodeKeys: string[]) => void;
   setSectionNode: (nodeKeys: string[]) => void;
   preSelectedNode?: Node[];
 }
 
-const NodesSelector: React.FC<NodesSelectorProps> = ({ fleetTeamId, fleetAccessPhrase, onSelect, setSectionNode, preSelectedNode = [] }) => {
+const NodesSelector: React.FC<NodesSelectorProps> = ({ fleetTeamId, onSelect, setSectionNode, preSelectedNode = [] }) => {
 
-  const { nodes, isLoading, isError } = useNodes(fleetTeamId!, fleetAccessPhrase!);
+  const { nodes, isLoading, isError } = useNodes(fleetTeamId!);
   const [selectedNodeOptions, setSelectedNodeOptions] = useState<any[]>([]);
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const NodesSelector: React.FC<NodesSelectorProps> = ({ fleetTeamId, fleetAccessP
         .filter(node => preSelectedNode.some(preNode => preNode.id === node.id))
         .map((node) => ({
           value: node.node_key,
-          label: `${node.node_info?.system_info?.computer_name || 'Unknown Host'} - ${node.host_identifier} - ${node.is_active ? '🟢 Active' : '🔴 Inactive'}`
+          label: `${node.node_info?.system_info?.computer_name || 'Unknown Host'} - ${node.host_identifier} - owner: ${node.owner.user.name} - ${node.is_active ? '🟢 Active' : '🔴 Inactive'}`
         }));
       setSelectedNodeOptions(initialSelectedOptions);
     }
@@ -34,7 +36,7 @@ const NodesSelector: React.FC<NodesSelectorProps> = ({ fleetTeamId, fleetAccessP
 
   const nodeOptions = nodes.map((node) => ({
     value: node.node_key,
-    label: `${node.node_info?.system_info?.computer_name || 'Unknown Host'} - ${node.host_identifier} - ${node.is_active ? '🟢 Active' : '🔴 Inactive'}`
+    label: `${node.node_info?.system_info?.computer_name || 'Unknown Host'} - ${node.host_identifier} - owner: ${node.owner.user.name} - ${node.is_active ? '🟢 Active' : '🔴 Inactive'}`
   }));
 
   const handleNodeChange = (selectedOptions: any) => {

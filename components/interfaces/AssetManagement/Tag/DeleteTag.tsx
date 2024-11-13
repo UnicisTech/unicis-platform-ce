@@ -13,13 +13,11 @@ const DeleteTag = ({
   visible,
   setVisible,
   fleetTeamId,
-  fleetAccessPhrase
 }: {
   tagId: string;
   visible: boolean;
   setVisible: (visible: boolean) => void;
   fleetTeamId: string;
-  fleetAccessPhrase: string;
 }) => {
   const router = useRouter();
   const { slug } = router.query;
@@ -35,7 +33,7 @@ const DeleteTag = ({
     onSubmit: async (values) => {
 
       if (values.name === 'DELETE TAG') {
-        await deleteTag(fleetTeamId, tagId, fleetAccessPhrase)
+        await deleteTag(fleetTeamId, tagId)
         toast.loading(t('Delete Tag'));
         mutateTasks();
         formik.resetForm();

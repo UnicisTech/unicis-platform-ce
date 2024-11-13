@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button } from 'react-daisyui';
-import DropdownItem from 'react-daisyui/dist/Dropdown/DropdownItem';
 
 const AssetsSortDropdown = ({ setStatus, canAccess, t }: { setStatus: (status: string) => void; canAccess: Function; t: Function }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);

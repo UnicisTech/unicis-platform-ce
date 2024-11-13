@@ -38,10 +38,10 @@ const CreateTag = ({
           const { tags } = data;
           const packData = {tags};
           try {
-            await createTag(fleetTeamId, packData, user?.fleetAccessPhrase!);
-            toast.success(t('success-creating-tag'));
+            await createTag(fleetTeamId, packData);
+            toast.success(t('success'));
           } catch (err) {
-            toast.error(t('error-creating-tag'));
+            toast.error(t('error'));
           };
         }}
       >
@@ -69,7 +69,7 @@ const CreateTag = ({
                 >
                   {({ fieldProps }) => (
                     <Fragment>
-                      <TextField autoComplete="off" {...fieldProps} />
+                      <TextField {...fieldProps} />
                     </Fragment>
                   )}
                 </Field>

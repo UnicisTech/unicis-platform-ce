@@ -13,7 +13,6 @@ import dynamic from 'next/dynamic';
 import NodesSelector from '../NodesSelector';
 import { useCreateDistributors } from '@/hooks/fleets/distributors/useCreateDistributor';
 import TagsSelector from '../TagsSelector';
-import TextArea from '@atlaskit/textarea';
 
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -71,7 +70,7 @@ const CreateDistributors = ({
               tags: selectedTags,
             };
             try {
-              await createDistributor(fleetTeamId, queryData, user.fleetAccessPhrase!);
+              await createDistributor(fleetTeamId, queryData);
               toast.success(t('success'));
             } catch (err) {
               toast.error(t('error'));
@@ -110,7 +109,7 @@ const CreateDistributors = ({
                 <Field label="Assign Nodes" name="nodes">
                   {({ fieldProps }: any) => (
                     <Fragment>
-                      <NodesSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={user.fleetAccessPhrase!} setSectionNode={setSelectedNodes} onSelect={handleNodeSelection} />
+                      <NodesSelector fleetTeamId={fleetTeamId} setSectionNode={setSelectedNodes} onSelect={handleNodeSelection} />
                     </Fragment>
                   )}
                 </Field>
@@ -149,7 +148,7 @@ const CreateDistributors = ({
                 >
                   {({ fieldProps }) => (
                     <Fragment>
-                      <TagsSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={user.fleetAccessPhrase!} setSectionTag={setSelectedTags} onSelect={()=>{}}/>
+                      <TagsSelector fleetTeamId={fleetTeamId} setSectionTag={setSelectedTags} onSelect={()=>{}}/>
                     </Fragment>
                   )}
                 </Field>

@@ -11,13 +11,11 @@ const DeleteDistributors = ({
   visible,
   setVisible,
   fleetTeamId,
-  fleetAccessPhrase
 }: {
   distributorId: string;
   visible: boolean;
   setVisible: (visible: boolean) => void;
   fleetTeamId: string;
-  fleetAccessPhrase?: string;
 }) => {
   const { t } = useTranslation('common');
   const deleteDistributor = useDeleteDistributed();
@@ -30,7 +28,7 @@ const DeleteDistributors = ({
 
       if (values.name === 'DELETE DISTRIBUTOR') {
         toast.loading(t('deleted'));
-        await deleteDistributor(fleetTeamId, distributorId, fleetAccessPhrase)
+        await deleteDistributor(fleetTeamId, distributorId)
         formik.resetForm();
         setVisible(false);
       } else {

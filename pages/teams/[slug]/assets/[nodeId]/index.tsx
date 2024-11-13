@@ -10,10 +10,10 @@ import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
 import Breadcrumb from '@/components/shared/Breadcrumb';
-import NodeDetails from '@/components/interfaces/AssetDashboard/Node/NodeDetails';
+import NodeDetails from '@/components/interfaces/AssetManagement/AssetDashboard/Node/NodeDetails';
 
 
-const NodeById = ({teamFeatures, user}) => {
+const NodeById = ({ teamFeatures, user }) => {
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
   const { t } = useTranslation('common');
@@ -36,16 +36,16 @@ const NodeById = ({teamFeatures, user}) => {
   return (
     <>
       <Breadcrumb
-        taskTitle={'Nodes'}
-        backTo={`/teams/${slug}/asset-management/nodes`}
+        taskTitle={'Assets'}
+        backTo={`/teams/${slug}/asset`}
         teamName={slug as string}
         path={nodeId as string}
       />
-      <h3 className="text-2xl font-bold">{'Node Details'}</h3>
+      <h3 className="text-2xl font-bold">{'Asset Details'}</h3>
       <PackTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <Card heading="Node Details">
+      <Card heading="Asset Details">
         <Card.Body>
-          <NodeDetails user={user} fleetTeamId={team?.fleetTeamId!} nodeID={nodeId as string} />
+          <NodeDetails user={user} fleetTeamId={team?.id!} nodeID={nodeId as string} />
         </Card.Body>
       </Card>
     </>
@@ -76,8 +76,6 @@ export const getServerSideProps = async (
         firstName: user.firstName,
         lastName: user.lastName,
         image: user.image,
-        fleetId: user.fleetId,
-        fleetAccessPhrase: user.fleetAccessPhrase
       },
     },
   };

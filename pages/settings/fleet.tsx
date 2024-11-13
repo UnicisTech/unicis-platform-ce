@@ -45,8 +45,6 @@ export const getServerSideProps = async (
         firstName: user.firstName,
         lastName: user.lastName,
         image: user.image,
-        fleetId: user.fleetId,
-        fleetAccessPhrase: user.fleetAccessPhrase
       },
       allowEmailChange: env.confirmEmail === false,
     },

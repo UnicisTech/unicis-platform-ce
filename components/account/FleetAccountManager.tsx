@@ -1,12 +1,12 @@
 import type { User } from '@prisma/client';
-import ConnectFleet from '../interfaces/AssetManagement/Fleet/ConnectFleet';
+import SettingsFleet from '../interfaces/AssetManagement/Fleet/FleetSettings';
 import AccountTab from './AccountTab';
 import FleetAccountTab from './FleetAccountTab';
 import { useState } from 'react';
 
 interface FleetAccountProps {
-  user: Partial<User>;
-  allowEmailChange: boolean;
+    user: Partial<User>;
+    allowEmailChange: boolean;
 }
 
 const FleetAccountManager = ({ user, allowEmailChange }: FleetAccountProps) => {
@@ -14,11 +14,11 @@ const FleetAccountManager = ({ user, allowEmailChange }: FleetAccountProps) => {
 
     return (
         <div>
-            <AccountTab activeTab="fleet" user={user}/>
+            <AccountTab activeTab="fleet" user={user} />
             <FleetAccountTab activeTab={activeTab} setActiveTab={setActiveTab} />
             {activeTab === 'Connect' && (
                 <>
-                    <ConnectFleet user={user} />
+                    <SettingsFleet user={user} />
                 </>
             )}
             {activeTab === 'Webhook' && (

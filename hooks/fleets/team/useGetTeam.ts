@@ -3,7 +3,7 @@ import { fleetV1 } from "@/lib/fleet/apiBase";
 import { FleetTeam } from "@/types/fleet";
 import { useEffect, useState } from "react";
 
-export const useGetTeam = (teamId: string, accessPhrase?: string) => {
+export const useGetTeam = (teamId: string) => {
   const [fleetTeam, setTeam] = useState<FleetTeam>();
   const [isLoading, setLoading] = useState<boolean>(true);
   const [isError, setError] = useState<string | null>(null);
@@ -16,7 +16,7 @@ export const useGetTeam = (teamId: string, accessPhrase?: string) => {
       try {
         const response = await fleetV1(`/team/${teamId}`, {
           method: 'GET',
-          headers: fleetAuthAPIHeaders(accessPhrase!),
+          headers: fleetAuthAPIHeaders(),
         });
 
         if (!response.ok) {
@@ -33,7 +33,7 @@ export const useGetTeam = (teamId: string, accessPhrase?: string) => {
     };
 
     fetchTeam();
-  }, [teamId, accessPhrase]);
+  }, [teamId]);
 
   return { fleetTeam, isLoading, isError };
 };

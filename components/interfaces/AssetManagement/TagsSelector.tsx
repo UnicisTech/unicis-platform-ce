@@ -1,3 +1,6 @@
+// Please dont change logics here if not fully understoold 
+// Author: Abdulsamad A | agastronics@gmail.com
+
 import React, { useEffect, useState } from 'react';
 import { WithoutRing } from 'sharedStyles';
 import Select from '@atlaskit/select';
@@ -6,15 +9,14 @@ import { Tag } from '@/types';
 
 interface TagsSelectorProps {
   fleetTeamId: string;
-  fleetAccessPhrase: string;
   onSelect: (packIds: string[]) => void;
   setSectionTag: (tagIds: string[]) => void;
   preSelectedTag?: Tag[];
 }
 
-const TagsSelector: React.FC<TagsSelectorProps> = ({ fleetTeamId, fleetAccessPhrase, onSelect, setSectionTag, preSelectedTag = []}) => {
+const TagsSelector: React.FC<TagsSelectorProps> = ({ fleetTeamId, onSelect, setSectionTag, preSelectedTag = []}) => {
 
-  const { tags, isLoading, isError } = useTags(fleetTeamId!, fleetAccessPhrase!);
+  const { tags, isLoading, isError } = useTags(fleetTeamId!);
   const [selectedTagOptions, setSelectedTagOptions] = useState<any[]>([]);
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const TagsSelector: React.FC<TagsSelectorProps> = ({ fleetTeamId, fleetAccessPhr
         .filter(tag => preSelectedTag.some(preTag => preTag.value === tag.value))
         .map((tag) => ({
           value: tag.value,
-          label: `${tag.value || 'Unknown Tag'} - p:${tag.packs_count} - n:${tag.nodes_count}`
+          label: `${tag.value || 'Unknown Tag'} - p:${tag.packs_count} - n:${tag.nodes_count} - q:${tag.queries_count}`
         }));
       setSelectedTagOptions(initialSelectedOptions);
     }
@@ -34,7 +36,7 @@ const TagsSelector: React.FC<TagsSelectorProps> = ({ fleetTeamId, fleetAccessPhr
 
   const tagOptions = tags.map((tag) => ({
     value: tag.value,
-    label: `${tag.value || 'Unknown Tag'} - p:${tag.packs_count} - n:${tag.nodes_count} - n:${tag.nodes_count}`
+    label: `${tag.value || 'Unknown Tag'} - p:${tag.packs_count} - n:${tag.nodes_count} - q:${tag.queries_count}`
   }));
 
   const handleTagChange = (selectedOptions: any) => {

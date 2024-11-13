@@ -1,13 +1,12 @@
 import { fleetAuthAPIHeaders } from "@/lib/common";
 import { fleetV1 } from "@/lib/fleet/apiBase";
-import { useEffect, useState } from "react";
 
 export const useDeleteDistributed = () => {
-  const deleteDistributor = async (teamId: string, distributorId: string,  accessPhrase?: string) => {
+  const deleteDistributor = async (teamId: string, distributorId: string) => {
       try {
         const response = await fleetV1(`/manager/${teamId}/queries/distributed/delete/${distributorId}`, {
           method: 'DELETE',
-          headers: fleetAuthAPIHeaders(accessPhrase!),
+          headers: fleetAuthAPIHeaders(),
         });
 
         if (!response.ok) {

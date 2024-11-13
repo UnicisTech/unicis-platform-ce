@@ -49,18 +49,19 @@ export interface FleetTeamResponse extends FleetBase {
 }
 
 export interface FleetAccess extends FleetBase {
-    expiration_date: string;
-    is_active: boolean;
-    secret_key: string;
-    user: string;
+  expiration_date: string;
+  is_active: boolean;
+  is_expired: boolean;
+  secret_key: string;
+  user: string;
 }
 
 export interface LoginResponse {
-    access_token: string;
-    fleet_access: FleetAccess;
-    msg: string;
-    refresh_token: string;
-    user: FleetUser;
+  access_token: string;
+  fleet_access: FleetAccess;
+  msg: string;
+  refresh_token: string;
+  user: FleetUser;
 }
 
 export interface Pack extends FleetBase {
@@ -126,6 +127,7 @@ export interface PackWithRelationships extends Pack {
 
 export interface Node extends FleetBase{
   team: FleetTeam;
+  owner: FleetMember;
   node_key: string;
   enroll_secret?: string;
   enrolled_on?: string;

@@ -1,10 +1,13 @@
+// Please dont change logics here if not fully understoold 
+// Author: Abdulsamad A | agastronics@gmail.com
+
 interface TableBuilderProps {
   data: Array<Record<string, any>>;
 }
 
 const TableBuilder: React.FC<TableBuilderProps> = ({ data }) => {
   if (data.length === 0) {
-    return <p className="text-gray-100">No data available</p>;
+    return <p className="rounded bg-gray-200">No data available</p>;
   }
 
   const headers = Array.from(new Set(data.flatMap((item) => Object.keys(item))));

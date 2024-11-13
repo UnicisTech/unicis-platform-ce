@@ -1,7 +1,8 @@
-import AssetCard from '@/components/interfaces/AssetDashboard/AssetCard'
+// Please dont change logics here if not fully understoold 
+// Author: Abdulsamad A | agastronics@gmail.com
+
+import AssetCard from '@/components/interfaces/AssetManagement/AssetDashboard/AssetCard'
 import React from 'react'
-import { Loading, Error } from '@/components/shared';
-import { useNodes } from '@/hooks/fleets/Nodes/useNodes';
 import { Team, User } from '@prisma/client';
 import AssetPieChart from './AssetPieChart';
 import { defaultLabels } from '@/lib/fleet/constants';
@@ -19,9 +20,9 @@ const platformColors: { [key: string]: string } = {
   apple: 'rgb(0, 169, 110)',      // Apple color
 };
 
-const AssetsAnalysis = ({team, user, nodes}: Assets) => {
+const AssetsAnalysis = ({ team, user, nodes }: Assets) => {
 
-  const platformCounts: { [key: string]: number } = 
+  const platformCounts: { [key: string]: number } =
     nodes?.reduce((acc: { [key: string]: number }, node) => {
       const platform = node.node_info?.osquery_info.build_platform?.toLowerCase();
       if (platform && node.is_active) {
@@ -61,32 +62,32 @@ const AssetsAnalysis = ({team, user, nodes}: Assets) => {
   return (
     <div className=''>
       <div
-          style={{
-            height: '400px',
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'space-around',
-            marginBottom: '10px',
-          }}
+        style={{
+          height: '400px',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'space-around',
+          marginBottom: '10px',
+        }}
+      >
+        <div
+          style={{ width: '49%' }}
+          className="stats py-2 stat-value shadow"
         >
-          <div
-            style={{ width: '49%' }}
-            className="stats py-2 stat-value shadow"
-        >
-            <AssetPieChart
-              hostData={hostData}
-              barColor={barColors}
-              labels={labels}
-            />
-          </div>
-          <div style={{ width: '49%' }} className="shadow p-4 overflow-y-auto">
-            <div className='grid grid-cols-1 gap-4'>
-              {platformsData.map((asset, index) =>
-                <AssetCard key={index} host={asset.platform} total={asset.total}/>
-              )}
-            </div>
+          <AssetPieChart
+            hostData={hostData}
+            barColor={barColors}
+            labels={labels}
+          />
+        </div>
+        <div style={{ width: '49%' }} className="shadow p-4 overflow-y-auto">
+          <div className='grid grid-cols-1 gap-4'>
+            {platformsData.map((asset, index) =>
+              <AssetCard key={index} host={asset.platform} total={asset.total} />
+            )}
           </div>
         </div>
+      </div>
     </div>
   )
 }

@@ -89,16 +89,15 @@ export const defaultHeaders = {
   'Content-Type': 'application/json',
 };
 
-export const fleetAuthAPIHeaders = (token: string, accessToken?: string) => {
-  const authToken = accessToken || Cookies.get('access');
+export const fleetAuthAPIHeaders = () => {
+  const userSecret = Cookies.get('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA'); // Dont change 
 
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
-    'Unicis-Fleet-API-Key': token,
   }
 
-  if (accessToken) {
-    headers['Authorization'] = 'Bearer ' + authToken;
+  if (userSecret) {
+    headers['Unicis-Fleet-API-Key'] = userSecret;
   }
 
   return headers;
@@ -106,6 +105,7 @@ export const fleetAuthAPIHeaders = (token: string, accessToken?: string) => {
 
 export const passwordPolicies = {
   minLength: 8,
+  fleetMinLength: 11,
 };
 
 export const getAxiosError = (error: any): string => {

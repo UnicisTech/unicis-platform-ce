@@ -332,6 +332,7 @@
   "total-results": "Total Results",
   "schedule": "Scheduled",
   "sql": "SQL Code",
+  "disconnect": "Disconnect",
   "assets-on-task": "Assets on Task",
   "distributors": "Distributors",
   "interval": "Interval",
@@ -343,7 +344,7 @@
   "add-asset": "Add Asset",
   "asset-management-dashboard": "Assets Management Dashboard",
   "fleet-renew-secret": "Renew secret",
-  "fleet-secret-reset": "Reset secret",
+  "fleet-secret-reset": "Delete secret",
   "fleet-secret-not-renewed": "Secret not renewed.",
   "fleet-secret-not-found-warning": "Secret not found. Please generate a new secret."
 }

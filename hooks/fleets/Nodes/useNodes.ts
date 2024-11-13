@@ -3,7 +3,7 @@ import { fleetV1 } from "@/lib/fleet/apiBase";
 import { NodesResponse, Node } from "@/types/fleet";
 import { useEffect, useState } from "react";
 
-export const useNodes = (teamId: string, accessPhrase: string, status?: string) => {
+export const useNodes = (teamId: string, status?: string) => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
   const [isError, setError] = useState<string | null>(null);
@@ -20,19 +20,18 @@ export const useNodes = (teamId: string, accessPhrase: string, status?: string) 
           // Fetch all nodes if status is 'all' or undefined
           response = await fleetV1(`/manager/${teamId}/nodes`, {
             method: 'GET',
-            headers: fleetAuthAPIHeaders(accessPhrase!),
+            headers: fleetAuthAPIHeaders(),
           });
         } else if (status === 'active' || status === 'inactive') {
           // Fetch nodes based on status ('active' or 'inactive')
           response = await fleetV1(`/manager/${teamId}/nodes/${status}`, {
             method: 'GET',
-            headers: fleetAuthAPIHeaders(accessPhrase!),
+            headers: fleetAuthAPIHeaders(),
           });
         }
 
         if (!response || !response.ok) {
           const data = await response.json();
-          throw new Error(data.message || 'Error fetching nodes');
         }
 
         const data: NodesResponse = await response.json();
@@ -45,7 +44,7 @@ export const useNodes = (teamId: string, accessPhrase: string, status?: string) 
     };
 
     fetchNodes();
-  }, [teamId, status, accessPhrase]);
+  }, [teamId, status]);
 
   return { nodes, isLoading, isError };
 };

@@ -3,7 +3,7 @@ import { fleetV1 } from "@/lib/fleet/apiBase";
 import { Query, QuerysResponse } from "@/types/fleet";
 import { useEffect, useState } from "react";
 
-export const useQuerys = (teamId: string, accessPhrase: string) => {
+export const useQuerys = (teamId: string) => {
   const [querys, setQuerys] = useState<Query[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
   const [isError, setError] = useState<string | null>(null);
@@ -16,7 +16,7 @@ export const useQuerys = (teamId: string, accessPhrase: string) => {
       try {
         const response = await fleetV1(`/manager/${teamId}/queries`, {
           method: 'GET',
-          headers: fleetAuthAPIHeaders(accessPhrase!),
+          headers: fleetAuthAPIHeaders(),
         });
 
         if (!response.ok) {
@@ -33,7 +33,7 @@ export const useQuerys = (teamId: string, accessPhrase: string) => {
     };
 
     fetchQuerys();
-  }, [teamId, accessPhrase]);
+  }, [teamId]);
 
   return { querys, isLoading, isError };
 };

@@ -3,7 +3,7 @@ import { fleetV1 } from "@/lib/fleet/apiBase";
 import { Pack, PacksResponse } from "@/types/fleet";
 import { useEffect, useState } from "react";
 
-export const usePacks = (teamId: string, accessPhrase: string) => {
+export const usePacks = (teamId: string) => {
   const [packs, setPacks] = useState<Pack[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
   const [isError, setError] = useState<string | null>(null);
@@ -16,12 +16,11 @@ export const usePacks = (teamId: string, accessPhrase: string) => {
       try {
         const response = await fleetV1(`/manager/${teamId}/packs`, {
           method: 'GET',
-          headers: fleetAuthAPIHeaders(accessPhrase!),
+          headers: fleetAuthAPIHeaders(),
         });
 
         if (!response.ok) {
           const data = await response.json();
-          throw new Error(data.message || 'Error fetching packs');
         }
 
         const data: PacksResponse = await response.json();
@@ -34,7 +33,7 @@ export const usePacks = (teamId: string, accessPhrase: string) => {
     };
 
     fetchPacks();
-  }, [teamId, accessPhrase]);
+  }, [teamId]);
 
   return { packs, isLoading, isError };
 };

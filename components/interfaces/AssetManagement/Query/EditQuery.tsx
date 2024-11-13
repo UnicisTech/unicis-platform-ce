@@ -27,7 +27,6 @@ interface FormData {
     platform: ValueType<Option>;
     version;
     value;
-    removed: boolean;
     packs: string[];
     tags: string;
     shard: number;
@@ -45,18 +44,15 @@ const EditQuery = ({
   setVisible,
   query,
   team,
-  fleetTeamId,
-  fleetAccessPhrase
 }: {
   visible: boolean;
   setVisible: (visible: boolean) => void;
   query: Query;
   team: Team;
-  fleetTeamId: string;
-  fleetAccessPhrase?: string;
   }) => {
   const [selectedPacks, setSelectedPacks] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [removed, setRemoved] = useState<boolean>(query.removed);
   const { t } = useTranslation('common');
   const updateQuery = useUpdateQuery();
 
@@ -64,7 +60,7 @@ const EditQuery = ({
     <Modal open={visible}>
       <Form<FormData>
         onSubmit={async (data) => {
-            const { name, platform, version, shard, description, interval, removed, sql, value } = data;
+            const { name, platform, version, shard, description, interval, sql, value } = data;
             const queryData = {
                 name,
                 platform: platform?.value,
@@ -73,13 +69,13 @@ const EditQuery = ({
                 description,
                 interval,
                 packs: selectedPacks,
-                removed,
+                removed: removed,
                 sql,
                 tags: selectedTags.join(','),
                 value
             };
           try {
-            await updateQuery(fleetTeamId, queryData, query.id, fleetAccessPhrase);
+            await updateQuery(team.id, queryData, query.id);
           } catch (err) {
             toast.error(t('error-updating-query'));
           };
@@ -219,16 +215,15 @@ const EditQuery = ({
                       </Fragment>
                     )}
                   </Field>
- 
+                    
                 <Field
                     aria-required={false}
                     name="removed"
                     label="Removed"
-                    isRequired
                   >
                     {({ fieldProps }) => (
                       <Fragment>
-                        <CheckboxField isChecked={query?.removed} autoComplete="off" {...fieldProps} />
+                        <CheckboxField isChecked={removed} onClick={() => { setRemoved(!removed) }} autoComplete="off" {...fieldProps} />
                       </Fragment>
                     )}
                   </Field>
@@ -246,7 +241,7 @@ const EditQuery = ({
                 <Field label="Assign Packs" name="packs">
                   {({ fieldProps }: any) => (
                     <Fragment>
-                      <PacksSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={fleetAccessPhrase!} preSelectedPack={query.packs} setSectionPack={setSelectedPacks} onSelect={(packIds)=>{}}/>
+                      <PacksSelector fleetTeamId={team.id} preSelectedPack={query.packs} setSectionPack={setSelectedPacks} onSelect={(packIds)=>{}}/>
                     </Fragment>
                   )}
                 </Field>
@@ -259,7 +254,7 @@ const EditQuery = ({
                 >
                   {({ fieldProps }) => (
                     <Fragment>
-                      <TagsSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={fleetAccessPhrase!} preSelectedTag={query.tags} setSectionTag={setSelectedTags} onSelect={(tagIds)=>{}}/>
+                      <TagsSelector fleetTeamId={team.id} preSelectedTag={query.tags} setSectionTag={setSelectedTags} onSelect={(tagIds)=>{}}/>
                     </Fragment>
                   )}
                 </Field>

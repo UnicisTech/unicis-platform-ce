@@ -3,7 +3,7 @@ import { fleetV1 } from "@/lib/fleet/apiBase";
 import { TagsWithRelationships } from "@/types/fleet";
 import { useEffect, useState } from "react";
 
-export const useGetTagId = (teamId: string, tagId: string,  accessPhrase?: string) => {
+export const useGetTagId = (teamId: string, tagId: string) => {
   const [tag, setTag] = useState<TagsWithRelationships>();
   const [isLoading, setLoading] = useState<boolean>(true);
   const [isError, setError] = useState<string | null>(null);
@@ -16,7 +16,7 @@ export const useGetTagId = (teamId: string, tagId: string,  accessPhrase?: strin
       try {
         const response = await fleetV1(`/manager/${teamId}/tag/${tagId}`, {
           method: 'GET',
-          headers: fleetAuthAPIHeaders(accessPhrase!),
+          headers: fleetAuthAPIHeaders(),
         });
 
         if (!response.ok) {
@@ -33,7 +33,7 @@ export const useGetTagId = (teamId: string, tagId: string,  accessPhrase?: strin
     };
 
     fetchTag();
-  }, [teamId, tagId, accessPhrase]);
+  }, [teamId, tagId]);
 
   return { tag, isLoading, isError };
 };

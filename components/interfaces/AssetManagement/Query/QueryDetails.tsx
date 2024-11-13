@@ -41,24 +41,25 @@ const QueryDetails = ({ user, queryID, fleetTeamId }: { user: Partial<User>, que
   const updateQuery = useUpdateQuery();
   const [selectedPacks, setSelectedPacks] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [queryToDelete, setQueryToDelete] = useState<null | string>(null);
-
-  const { query, isLoading, isError } = useGetQueryId(fleetTeamId, queryID, user.fleetAccessPhrase!);
-
+  
+  const { query, isLoading, isError } = useGetQueryId(fleetTeamId, queryID);
+  
   if (isLoading) {
     return <Loading />;
   }
-
-  if (isError) {
-    return (
-      <>
-        <Error />
-      </>
-    );
-  }
-
+  
+  // if (isError) {
+    //   return (
+      //     <>
+      //       <Error />
+      //     </>
+      //   );
+      // }
+      
+  const [removed, setRemoved] = useState<boolean>(query?.removed!);
+  
   const openDeleteModal = async (id: string) => {
     setQueryToDelete(id);
     setDeleteVisible(true);
@@ -68,7 +69,7 @@ const QueryDetails = ({ user, queryID, fleetTeamId }: { user: Partial<User>, que
     <IssuePanelContainer>
       <Form<FormData>
         onSubmit={async (data, { reset }) => {
-            const { name, platform, version, shard, description, interval, removed, sql, tags, value } = data;
+            const { name, platform, version, shard, description, interval, sql, tags, value } = data;
             const queryData = {
                 name,
                 platform: platform?.value,
@@ -77,13 +78,13 @@ const QueryDetails = ({ user, queryID, fleetTeamId }: { user: Partial<User>, que
                 description,
                 interval,
                 packs: selectedPacks,
-                removed,
+                removed: removed,
                 sql,
                 tags: selectedTags.join(','),
                 value
             };
             try {
-                await updateQuery(fleetTeamId, queryData, user.fleetAccessPhrase!);
+                await updateQuery(fleetTeamId, queryData, queryID);
                 toast.success(t('success-creating-query'));
             } catch (err) {
                 toast.error(t('error-creating-query'));
@@ -233,11 +234,10 @@ const QueryDetails = ({ user, queryID, fleetTeamId }: { user: Partial<User>, que
                     aria-required={false}
                     name="removed"
                     label="Removed"
-                    isRequired
                   >
                     {({ fieldProps }) => (
                       <Fragment>
-                        <CheckboxField isChecked={query?.removed} autoComplete="off" {...fieldProps} />
+                        <CheckboxField isChecked={removed} onClick={() => { setRemoved(!removed) }} autoComplete="off" {...fieldProps} />
                       </Fragment>
                     )}
                   </Field>
@@ -255,7 +255,7 @@ const QueryDetails = ({ user, queryID, fleetTeamId }: { user: Partial<User>, que
                 <Field label="Assign Packs" name="packs">
                   {({ fieldProps }: any) => (
                     <Fragment>
-                      <PacksSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={user.fleetAccessPhrase!} preSelectedPack={query?.packs} setSectionPack={setSelectedPacks} onSelect={(packIds)=>{}}/>
+                      <PacksSelector fleetTeamId={fleetTeamId} preSelectedPack={query?.packs} setSectionPack={setSelectedPacks} onSelect={(packIds)=>{}}/>
                     </Fragment>
                   )}
                 </Field>
@@ -268,7 +268,7 @@ const QueryDetails = ({ user, queryID, fleetTeamId }: { user: Partial<User>, que
                 >
                   {({ fieldProps }) => (
                     <Fragment>
-                      <TagsSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={user.fleetAccessPhrase!} preSelectedTag={query?.tags} setSectionTag={setSelectedTags} onSelect={(tagIds)=>{}}/>
+                      <TagsSelector fleetTeamId={fleetTeamId} preSelectedTag={query?.tags} setSectionTag={setSelectedTags} onSelect={(tagIds)=>{}}/>
                     </Fragment>
                   )}
                 </Field>
@@ -291,7 +291,7 @@ const QueryDetails = ({ user, queryID, fleetTeamId }: { user: Partial<User>, que
                 ref={submitButtonRef}
                 isLoading={submitting}
               >
-                {t('create')}
+                {t('save-changes')}
               </LoadingButton>
             </Modal.Actions>
           </form>
@@ -302,7 +302,6 @@ const QueryDetails = ({ user, queryID, fleetTeamId }: { user: Partial<User>, que
         setVisible={setDeleteVisible}
         queryId={queryToDelete!}
         fleetTeamId={fleetTeamId!}
-        fleetAccessPhrase={user.fleetAccessPhrase!}
       />
     </IssuePanelContainer>
   );

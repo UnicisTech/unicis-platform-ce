@@ -3,7 +3,7 @@ import { fleetV1 } from "@/lib/fleet/apiBase";
 import { TagsResponse, Tag } from "@/types/fleet";
 import { useEffect, useState } from "react";
 
-export const useTags = (teamId: string, accessPhrase: string) => {
+export const useTags = (teamId: string) => {
   const [tags, setTags] = useState<Tag[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
   const [isError, setError] = useState<string | null>(null);
@@ -16,12 +16,11 @@ export const useTags = (teamId: string, accessPhrase: string) => {
       try {
         const response = await fleetV1(`/manager/${teamId}/tags`, {
           method: 'GET',
-          headers: fleetAuthAPIHeaders(accessPhrase!),
+          headers: fleetAuthAPIHeaders(),
         });
 
         if (!response.ok) {
           const data = await response.json();
-          throw new Error(data.message || 'Error fetching tags');
         }
 
         const data: TagsResponse = await response.json();
@@ -34,7 +33,7 @@ export const useTags = (teamId: string, accessPhrase: string) => {
     };
 
     fetchTags();
-  }, [teamId, accessPhrase]);
+  }, [teamId]);
 
   return { tags, isLoading, isError };
 };

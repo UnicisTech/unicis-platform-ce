@@ -26,7 +26,6 @@ interface FormData {
     platform: ValueType<Option>;
     version;
     value;
-    removed: boolean;
     packs: string[];
     tags: string;
     shard: number;
@@ -56,6 +55,7 @@ const CreateQuery = ({
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
   const [selectedPacks, setSelectedPacks] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [removed, setRemoved] = useState<boolean>(false);
   const createQuery = useCreateQuery();
   const { t } = useTranslation('common');
 
@@ -64,7 +64,7 @@ const CreateQuery = ({
       <Modal.Header className="font-bold">Create Query</Modal.Header>
       <Form<FormData>
         onSubmit={async (data, { reset }) => {
-            const { name, platform, version, shard, description, interval, removed, sql, tags, value } = data;
+            const { name, platform, version, shard, description, interval, sql, tags, value } = data;
             const queryData = {
                 name,
                 platform: platform?.value,
@@ -73,16 +73,16 @@ const CreateQuery = ({
                 description,
                 interval,
                 packs: selectedPacks,
-                removed,
+                removed: removed,
                 sql,
                 tags: selectedTags.join(','),
                 value
             };
             try {
-                await createQuery(fleetTeamId, queryData, user.fleetAccessPhrase!);
-                toast.success(t('success-creating-query'));
+                await createQuery(fleetTeamId, queryData);
+                toast.success(t('success'));
             } catch (err) {
-                toast.error(t('error-creating-query'));
+                toast.error(t('error'));
             };
         }}
       >
@@ -123,7 +123,7 @@ const CreateQuery = ({
                 >
                   {({ fieldProps }) => (
                     <Fragment>
-                      <TextField height={50} autoComplete="off" {...fieldProps} />
+ <                     TextField height={50} autoComplete="off" {...fieldProps} />
                     </Fragment>
                   )}
                 </Field>
@@ -223,11 +223,10 @@ const CreateQuery = ({
                     aria-required={false}
                     name="removed"
                     label="Removed"
-                    isRequired
                   >
                     {({ fieldProps }) => (
                       <Fragment>
-                        <CheckboxField autoComplete="off" {...fieldProps} />
+                        <CheckboxField isChecked={removed} onClick={()=>{setRemoved(!removed)}} autoComplete="off" {...fieldProps} />
                       </Fragment>
                     )}
                   </Field>
@@ -245,7 +244,7 @@ const CreateQuery = ({
                 <Field label="Assign Packs" name="packs">
                   {({ fieldProps }: any) => (
                     <Fragment>
-                      <PacksSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={user.fleetAccessPhrase!} setSectionPack={setSelectedPacks} onSelect={()=>{}}/>
+                      <PacksSelector fleetTeamId={fleetTeamId} setSectionPack={setSelectedPacks} onSelect={()=>{}}/>
                     </Fragment>
                   )}
                 </Field>
@@ -258,7 +257,7 @@ const CreateQuery = ({
                 >
                   {({ fieldProps }) => (
                     <Fragment>
-                      <TagsSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={user.fleetAccessPhrase!} setSectionTag={setSelectedTags} onSelect={()=>{}}/>
+                      <TagsSelector fleetTeamId={fleetTeamId} setSectionTag={setSelectedTags} onSelect={()=>{}}/>
                     </Fragment>
                   )}
                 </Field>

@@ -1,29 +1,26 @@
-import { useCallback, useState } from 'react';
+import { Fragment, useCallback, useState } from 'react';
 import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
-import { Error, Loading } from '@/components/shared';
+import { Card, Error, Loading } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
 import type { User } from '@prisma/client';
 import { IssuePanelContainer } from '@/sharedStyles';
-import Form, { FormFooter } from '@atlaskit/form';
-import { useUpdatePack } from '@/hooks/fleets/packs/useUpdatePack';
+import Form, { Field, FormFooter } from '@atlaskit/form';
 import toast from 'react-hot-toast';
 import DeleteTag from './DeleteTag';
 import { useGetTagId } from '@/hooks/fleets/Tags/useGetTagId';
+import { useUpdateTag } from '@/hooks/fleets/Tags/useUpdateTag';
+import TextField from '@atlaskit/textfield';
 
 interface FormData {
-  values
+  value
 }
 
-interface Option {
-  label: string;
-  value: string;
-}
 const TagDetails = ({ fleetTeamId, tagID, user }: { fleetTeamId: string, user: Partial<User>, tagID: string }) => {  
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
   const [isFormChanged, setIsFormChanged] = useState(false);
-  const updateTag = useUpdatePack();
+  const updateTag = useUpdateTag();
 
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [tagToDelete, setTagToDelete] = useState<null | string>(null);
@@ -32,7 +29,7 @@ const TagDetails = ({ fleetTeamId, tagID, user }: { fleetTeamId: string, user: P
     setIsFormChanged(true);
   }, []);
   
-  const { tag, isLoading, isError } = useGetTagId(fleetTeamId, tagID, user?.fleetAccessPhrase!);
+  const { tag, isLoading, isError } = useGetTagId(fleetTeamId, tagID);
 
   if (isLoading) {
     return <Loading />;
@@ -52,15 +49,16 @@ const TagDetails = ({ fleetTeamId, tagID, user }: { fleetTeamId: string, user: P
   };
 
   return (
+
     <IssuePanelContainer>
       <Form<FormData>
         onSubmit={async (data) => {
-          const { values } = data;
-          const tagData = {values};
+          const { value } = data;
+          const tagData = {value};
           try {
-            await updateTag(fleetTeamId, tagData, tagID, user.fleetAccessPhrase!);
+            await updateTag(fleetTeamId, tagData, tagID);
           } catch (err) {
-            toast.error(t('error-updating-pack'));
+            toast.error(t('error'));
           };
         }}
       >
@@ -74,7 +72,19 @@ const TagDetails = ({ fleetTeamId, tagID, user }: { fleetTeamId: string, user: P
                 flexDirection: 'column',
               }}
             >
-              ...
+              <Field
+                aria-required={true}
+                name="value"
+                label="Tag Value"
+                defaultValue={tag?.value}
+                isRequired
+              >
+                {({ fieldProps }) => (
+                  <Fragment>
+                    <TextField {...fieldProps} />
+                  </Fragment>
+                )}
+              </Field>
 
               <FormFooter>
                 {canAccess('team_fleet_tag', ['update']) && (
@@ -111,8 +121,24 @@ const TagDetails = ({ fleetTeamId, tagID, user }: { fleetTeamId: string, user: P
         setVisible={setDeleteVisible}
         tagId={tagToDelete!}
         fleetTeamId={fleetTeamId}
-        fleetAccessPhrase={user.fleetAccessPhrase!}
       />
+
+      <Card heading="Packs">
+        {tag?.packs.map((pack) =>
+          <div key={pack.id} className='rounded mb-2'>
+            <p className='text-xl'>{pack.name}</p>
+          </div>
+        )}
+      </Card>
+
+      <Card heading="Queyies">
+        {tag?.queries.map((query) =>
+          <div key={query.id} className='rounded mb-2'>
+            <p className='text-xl'>{query.name}</p>
+          </div>
+        )}
+      </Card>
+      
     </IssuePanelContainer>
   );
 };

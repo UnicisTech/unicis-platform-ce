@@ -60,10 +60,10 @@ const CreatePack = ({
           const { name, platform, version, shard, description, tags } = data;
           const packData = {name, platform: platform?.value, version, shard, description, tags: selectedTags.join(',')};
           try {
-            await createPack(fleetTeamId, packData, user?.fleetAccessPhrase!);
-            toast.success(t('success-creating-pack'));
+            await createPack(fleetTeamId, packData);
+            toast.success(t('success'));
           } catch (err) {
-            toast.error(t('error-creating-pack'));
+            toast.error(t('error'));
           };
         }}
       >
@@ -176,7 +176,7 @@ const CreatePack = ({
                 >
                   {({ fieldProps }) => (
                     <Fragment>
-                      <TagsSelector fleetTeamId={fleetTeamId} fleetAccessPhrase={user.fleetAccessPhrase!} setSectionTag={setSelectedTags} onSelect={()=>{}}/>
+                      <TagsSelector fleetTeamId={fleetTeamId} setSectionTag={setSelectedTags} onSelect={()=>{}}/>
                     </Fragment>
                   )}
                 </Field>

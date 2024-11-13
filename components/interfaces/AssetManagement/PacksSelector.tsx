@@ -1,3 +1,6 @@
+// Please dont change logics here if not fully understoold 
+// Author: Abdulsamad A | agastronics@gmail.com
+
 import React, { useEffect, useState } from 'react';
 import { WithoutRing } from 'sharedStyles';
 import Select from '@atlaskit/select';
@@ -6,15 +9,14 @@ import { Pack } from '@/types';
 
 interface PacksSelectorProps {
   fleetTeamId: string;
-  fleetAccessPhrase: string;
   onSelect: (packIds: string[]) => void;
   setSectionPack: (packIds: string[]) => void;
   preSelectedPack?: Pack[];
 }
 
-const PacksSelector: React.FC<PacksSelectorProps> = ({ fleetTeamId, fleetAccessPhrase, onSelect, setSectionPack, preSelectedPack = [] }) => {
+const PacksSelector: React.FC<PacksSelectorProps> = ({ fleetTeamId, onSelect, setSectionPack, preSelectedPack = [] }) => {
 
-  const { packs, isLoading, isError } = usePacks(fleetTeamId!, fleetAccessPhrase!);
+  const { packs, isLoading, isError } = usePacks(fleetTeamId!);
   const [selectedPackOptions, setSelectedPackOptions] = useState<any[]>([]);
 
   useEffect(() => {

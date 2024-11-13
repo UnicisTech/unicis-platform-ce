@@ -1,10 +1,7 @@
 import React from 'react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { Modal, Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
-import type { ApiResponse } from 'types';
-import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import { useDeleteQuery } from '@/hooks/fleets/queries/useDeleteQuery';
 import { InputWithLabel } from '@/components/shared';
@@ -14,13 +11,11 @@ const DeleteQuery = ({
   visible,
   setVisible,
   fleetTeamId,
-  fleetAccessPhrase
 }: {
   queryId: string;
   visible: boolean;
   setVisible: (visible: boolean) => void;
   fleetTeamId: string;
-  fleetAccessPhrase?: string;
 }) => {
   const { t } = useTranslation('common');
 
@@ -33,7 +28,7 @@ const DeleteQuery = ({
     onSubmit: async (values) => {
 
       if (values.name === 'DELETE QUERY') {
-        await deleteQuery(fleetTeamId, queryId, fleetAccessPhrase)
+        await deleteQuery(fleetTeamId, queryId)
         toast.loading(t('Delete Query'));
         formik.resetForm();
         setVisible(false);

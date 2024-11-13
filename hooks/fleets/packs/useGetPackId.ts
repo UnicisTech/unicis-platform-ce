@@ -3,7 +3,7 @@ import { fleetV1 } from "@/lib/fleet/apiBase";
 import { PackWithRelationships } from "@/types/fleet";
 import { useEffect, useState } from "react";
 
-export const useGetPackId = (teamId: string, packId: string,  accessPhrase?: string) => {
+export const useGetPackId = (teamId: string, packId: string) => {
   const [pack, setPack] = useState<PackWithRelationships>();
   const [isLoading, setLoading] = useState<boolean>(true);
   const [isError, setError] = useState<string | null>(null);
@@ -16,7 +16,7 @@ export const useGetPackId = (teamId: string, packId: string,  accessPhrase?: str
       try {
         const response = await fleetV1(`/manager/${teamId}/pack/${packId}`, {
           method: 'GET',
-          headers: fleetAuthAPIHeaders(accessPhrase!),
+          headers: fleetAuthAPIHeaders(),
         });
 
         if (!response.ok) {
@@ -33,7 +33,7 @@ export const useGetPackId = (teamId: string, packId: string,  accessPhrase?: str
     };
 
     fetchPack();
-  }, [teamId, packId, accessPhrase]);
+  }, [teamId, packId]);
 
   return { pack, isLoading, isError };
 };

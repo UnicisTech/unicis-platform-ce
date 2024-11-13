@@ -3,7 +3,7 @@ import { fleetV1 } from "@/lib/fleet/apiBase";
 import { DistributedQueryTaskResponse, DistributedQueryTask } from "@/types/fleet";
 import { useEffect, useState } from "react";
 
-export const useDistributors = (teamId: string, accessPhrase: string) => {
+export const useDistributors = (teamId: string) => {
   const [tasks, setDistributorsTasks] = useState<DistributedQueryTask[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
   const [isError, setError] = useState<string | null>(null);
@@ -16,7 +16,7 @@ export const useDistributors = (teamId: string, accessPhrase: string) => {
       try {
         const response = await fleetV1(`/manager/${teamId}/queries/distributed`, {
           method: 'GET',
-          headers: fleetAuthAPIHeaders(accessPhrase!),
+          headers: fleetAuthAPIHeaders(),
         });
 
         if (!response.ok) {
@@ -33,7 +33,7 @@ export const useDistributors = (teamId: string, accessPhrase: string) => {
     };
 
     fetchDistributors();
-  }, [teamId, accessPhrase]);
+  }, [teamId]);
 
   return { tasks, isLoading, isError };
 };

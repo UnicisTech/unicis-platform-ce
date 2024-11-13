@@ -1,4 +1,4 @@
-import { Assets } from '@/components/interfaces/AssetDashboard';
+import { Assets } from '@/components/interfaces/AssetManagement/AssetDashboard';
 import env from '@/lib/env';
 import { getUserBySession } from '@/models/user';
 import { GetServerSidePropsContext } from 'next';
@@ -13,7 +13,7 @@ const TeamAssetDashboard = ({
   user,
   team,
   teamFeatures,
-  }) => {
+}) => {
   const { t } = useTranslation('common');
 
   return (
@@ -56,8 +56,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         firstName: user.firstName,
         lastName: user.lastName,
         image: user.image,
-        fleetId: user.fleetId,
-        fleetAccessPhrase: user.fleetAccessPhrase
       },
     },
   };

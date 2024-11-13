@@ -23,7 +23,7 @@ const AssetTab = ({ activeTab, team, heading, teamFeatures }: AssetTabProps) => 
 
   const navigations = [
     {
-      name: 'Fleet',
+      name: 'Asset',
       href: `/teams/${team.slug}/asset-management`,
       active: activeTab === 'fleet',
       icon: Cog6ToothIcon,

@@ -6,7 +6,6 @@ import { Loading, Error, Card } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
 import useTeam from 'hooks/useTeam';
 import useCanAccess from 'hooks/useCanAccess';
-import PackDetails from '@/components/interfaces/AssetManagement/Pack/PackDetails';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
@@ -47,7 +46,7 @@ const TagById = ({teamFeatures, user}) => {
       <TagsTab activeTab={activeTab} setActiveTab={setActiveTab} />
       <Card heading="Details">
         <Card.Body>
-          <TagDetails user={user} fleetTeamId={team?.fleetTeamId!} tagID={tagId as string} />
+          <TagDetails user={user} fleetTeamId={team?.id!} tagID={tagId as string} />
         </Card.Body>
       </Card>
     </>
@@ -78,8 +77,6 @@ export const getServerSideProps = async (
         firstName: user.firstName,
         lastName: user.lastName,
         image: user.image,
-        fleetId: user.fleetId,
-        fleetAccessPhrase: user.fleetAccessPhrase
       },
     },
   };

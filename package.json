@@ -73,6 +73,7 @@
     "hooks": "^0.3.2",
     "i": "^0.3.7",
     "i18next": "23.11.5",
+    "jwt-decode": "^4.0.0",
     "mautic-tracking": "^0.9.3",
     "mixpanel-browser": "2.51.0",
     "moment": "2.30.1",

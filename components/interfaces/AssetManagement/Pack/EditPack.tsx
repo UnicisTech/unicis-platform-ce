@@ -37,14 +37,12 @@ const EditPack = ({
   pack,
   team,
   fleetTeamId,
-  fleetAccessPhrase
 }: {
   visible: boolean;
   setVisible: (visible: boolean) => void;
   pack: Pack;
   team: Team;
   fleetTeamId: string;
-  fleetAccessPhrase: string;
 }) => {
   const { t } = useTranslation('common');
   const updatePack = useUpdatePack();
@@ -56,7 +54,7 @@ const EditPack = ({
           const { name, platform, version, shard, description } = data;
           const packData = {name, platform: platform?.value, version, shard, description};
           try {
-            await updatePack(fleetTeamId, packData, pack.id, fleetAccessPhrase);
+            await updatePack(fleetTeamId, packData, pack.id);
           } catch (err) {
             toast.error(t('error-updating-pack'));
           };
