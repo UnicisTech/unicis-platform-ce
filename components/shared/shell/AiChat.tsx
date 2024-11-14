@@ -107,7 +107,7 @@ const AiChat = () => {
         )}
         style={{ height: '80vh' }}
       >
-        <Card className="shadow-lg border border-gray-300 relative bg-white flex flex-col h-full w-[32rem]">
+        <Card className="shadow-lg border border-gray-300 relative bg-white flex flex-col h-full w-[20rem] md:w-[32rem]">
           <button
             onClick={togglePopup}
             className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
