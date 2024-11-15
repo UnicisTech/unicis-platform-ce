@@ -13,6 +13,7 @@ const NodeDetails = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user:
 
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [nodeToDelete, setNodeToDelete] = useState<null | string>(null);
+  const [status, setStatusToDelete] = useState<string>();
 
   const { node, isLoading, isError } = useGetNodeId(fleetTeamId, nodeID);
 
@@ -33,6 +34,10 @@ const NodeDetails = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user:
     setDeleteVisible(true);
   };
 
+  const handleDeleteStatus = (id: string) => {
+    setStatusToDelete(id)
+  };
+
   return (
     <IssuePanelContainer>
       <div className='grid gap-2'>
@@ -42,16 +47,8 @@ const NodeDetails = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user:
         <div>Asset Hardware Model: {node?.node_info?.system_info.hardware_model}</div>
         <div>Asset Operating System: {node?.node_info?.os_version.name}</div>
         <div>Asset Serial Number: {node?.node_info?.system_info.hardware_serial}</div>
-        <div>Asset Address: {node?.node_info?.platform_info.address}</div>
+        <div>Asset Address: {node?.node_info?.platform_info?.address}</div>
         <div>Asset Last Checkin: {node?.last_checkin ? <FormattedDate style={''} dateString={node?.last_checkin} /> : 'Never'}</div>
-        <div className="items-center justify-start">
-          <h1>Asset Config</h1>
-          <CodeBlock language="JSON" shouldWrapLongLines codeBidiWarningTooltipEnabled i18nIsDynamicList={true} showLineNumbers={false} text={JSON.stringify(node?.node_config)} />
-        </div>
-        <h1 className=''>Status Logs</h1>
-        <TableBuilder data={node!.status_logs} />
-        <h1 className=''>Result Logs</h1>
-        <TableBuilder data={node!.result_logs} />
       </div>
       <DeleteNode
         visible={deleteVisible}

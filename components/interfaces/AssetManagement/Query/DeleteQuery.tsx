@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 import { useFormik } from 'formik';
 import { useDeleteQuery } from '@/hooks/fleets/queries/useDeleteQuery';
 import { InputWithLabel } from '@/components/shared';
+import { useQueries } from '@/hooks/fleets/queries/useQueries';
 
 const DeleteQuery = ({
   queryId,
@@ -20,6 +21,7 @@ const DeleteQuery = ({
   const { t } = useTranslation('common');
 
   const deleteQuery = useDeleteQuery();
+  const { mutateQueries } = useQueries(fleetTeamId);
 
   const formik = useFormik({
     initialValues: {
@@ -27,9 +29,10 @@ const DeleteQuery = ({
     },
     onSubmit: async (values) => {
 
-      if (values.name === 'DELETE QUERY') {
+      if (values.name.toLowerCase() === 'DELETE QUERY'.toLowerCase()) {
         await deleteQuery(fleetTeamId, queryId)
         toast.loading(t('Delete Query'));
+        mutateQueries();
         formik.resetForm();
         setVisible(false);
       } else {

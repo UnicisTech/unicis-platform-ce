@@ -16,6 +16,7 @@ import { useUpdateQuery } from '@/hooks/fleets/queries/useUpdateQuery';
 import toast from 'react-hot-toast';
 import PacksSelector from '../PacksSelector';
 import TagsSelector from '../TagsSelector';
+import { useQueries } from '@/hooks/fleets/queries/useQueries';
 
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -55,6 +56,7 @@ const EditQuery = ({
   const [removed, setRemoved] = useState<boolean>(query.removed);
   const { t } = useTranslation('common');
   const updateQuery = useUpdateQuery();
+  const { mutateQueries } = useQueries(team?.id);
 
   return (
     <Modal open={visible}>
@@ -76,8 +78,11 @@ const EditQuery = ({
             };
           try {
             await updateQuery(team.id, queryData, query.id);
+            toast.success(t('Successfully updated'));
+            mutateQueries();
+            setVisible(false);
           } catch (err) {
-            toast.error(t('error-updating-query'));
+            toast.error(t('Error updating'));
           };
         }}
       >

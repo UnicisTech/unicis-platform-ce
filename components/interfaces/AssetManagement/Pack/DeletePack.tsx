@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import { useDeletePack } from '@/hooks/fleets/packs/useDeletePack';
 import { InputWithLabel } from '@/components/shared';
+import { usePacks } from '@/hooks/fleets/packs/usePacks';
 
 const DeletePack = ({
   packId,
@@ -21,10 +22,10 @@ const DeletePack = ({
 }) => {
   const router = useRouter();
   const { slug } = router.query;
-  const { mutateTasks } = useTasks(slug as string);
   const { t } = useTranslation('common');
 
   const deletePack = useDeletePack();
+  const { mutatePacks } = usePacks(fleetTeamId);
 
   const formik = useFormik({
     initialValues: {
@@ -35,7 +36,7 @@ const DeletePack = ({
       if (values.name === 'DELETE PACK') {
         await deletePack(fleetTeamId, packId)
         toast.loading(t('Delete Pack'));
-        mutateTasks();
+        mutatePacks();
         formik.resetForm();
         setVisible(false);
       } else {

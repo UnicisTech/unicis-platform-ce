@@ -1,18 +1,17 @@
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { Button } from 'react-daisyui';
-import { Card, CopyToClipboardButton, InputWithLabel } from '@/components/shared';
+import { Card, CopyToClipboardButton } from '@/components/shared';
 import { Team, User } from '@prisma/client';
 import FleetStatus from './FleetStatus';
 import { useCreateFleetTeam } from '@/hooks/fleets';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import RenewFleetSecret from './RenewFleetSecret';
 import useCanAccess from '@/hooks/useCanAccess';
 import { useOrderFleetSecret } from '@/hooks/fleets/connect/useOrderFleetSecret';
 import { useGetFleetSecret } from '@/hooks/fleets/connect/useGetFleetSecret';
 import { useDeleteFleetSecret } from '@/hooks/fleets/connect/useDeleteFleetSecret';
 import { CodeBlock } from '@atlaskit/code';
-import useSWR from 'swr';
 
 
 const FleetSecret = (
@@ -36,8 +35,7 @@ const FleetSecret = (
 
   const { canAccess } = useCanAccess();
 
-  const { secret, isLoading, isError } = useGetFleetSecret(team.id);
-  const { data, mutate } = useSWR('/api/your-endpoint', useGetFleetSecret);
+  const { secret, isLoading, isError, mutateFleetSecret } = useGetFleetSecret(team.id);
 
   const handleOrderSecret = async () => {
     try {
@@ -47,16 +45,22 @@ const FleetSecret = (
       if (secret?.id === undefined) {
         await createFleetTeam(team.name, team.id);
         await orderFleetSecret(team.id);
+        mutateFleetSecret();
         toast.success(t('Fleet Enrollment Secret Ordered'));
       }
     } catch (error) {
-
+        toast.error(isError?.message);
     }
   };
 
   const handleDelete = async () => {
-    await deleteFleetSecret(teamId);
-    toast.success(t('fleet-secret-delete'));
+    try {
+      await deleteFleetSecret(teamId);
+      mutateFleetSecret();
+      toast.success(t('Successfully deleted'));
+    } catch {
+      toast.error(t('Error deleting fleet secret'));
+    }
   };
 
   return (
@@ -72,10 +76,10 @@ const FleetSecret = (
             :
             <>
               {/* <FleetStatus status='connected' /> */}
-              <CodeBlock language='text' shouldWrapLongLines={true} text={safe ? '*'.repeat(data?.secret?.secret.length!) : `${data?.secret?.secret!}`} />
-              {data?.secret?.secret! != null &&
+              <CodeBlock language='text' shouldWrapLongLines={true} text={safe ? '*'.repeat(secret?.secret.length!) : `${secret?.secret!}`} />
+              {secret?.secret! != null &&
                 <div>
-                  <CopyToClipboardButton value={data?.secret?.secret!} />
+                  <CopyToClipboardButton value={secret?.secret!} />
                 </div>
               }
             </>
@@ -89,7 +93,7 @@ const FleetSecret = (
         {secret?.secret === undefined ?
           <Button
             type="button"
-            loading={false}
+            loading={isLoading}
             disabled={secret?.id === null}
             onClick={handleOrderSecret}
             size="md"
@@ -99,7 +103,7 @@ const FleetSecret = (
           :
           <Button
             type="button"
-            loading={false}
+            loading={isLoading}
             disabled={!secret?.secret!}
             onClick={handleDelete}
             size="md"
@@ -110,7 +114,7 @@ const FleetSecret = (
         {secret?.secret !== undefined &&
           <Button
             type="button"
-            loading={false}
+            loading={isLoading}
             disabled={!secret?.secret!}
             onClick={() => setRenewVisible(true)}
             size="md"

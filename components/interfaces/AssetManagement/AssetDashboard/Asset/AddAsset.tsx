@@ -26,7 +26,6 @@ const AddAsset = ({
 }) => {
   const { t } = useTranslation('common');
   const [platform, setPlatformTab] = useState('windows');
-  const [include, setInclude] = useState(false);
   const [isSafe, setIsPasswordVisible] = useState(false);
   const [isCopy, setIsCopy] = useState(false);
 
@@ -44,7 +43,7 @@ const AddAsset = ({
   const agentEndpoint = (os: string, version: string) => {
     if (os === 'windows') {
       return `osquery-${version}.msi`;
-    } else if (os === 'mac') {
+    } else if (os === 'macos') {
       return `osquery-${version}_1.macos_arm64.tar.gz`;
     } else if (os === 'linux-deb') {
       return `osquery_${version}-1.linux_amd64.deb`;
@@ -57,7 +56,7 @@ const AddAsset = ({
 
   const generateCliInstaller = (os: string) => {
     const url = `https://github.com/osquery/osquery/releases/download/${env.agentVersion}/${agentEndpoint(os, env.agentVersion )}`;
-    return platform === 'advanced' ? agentEndpoint(os, env.agentVersion) : `curl -sSL ${url} | tar -xzf -`;
+    return `curl -sSL ${url} | tar -xzf -`;
   };
 
   const generateUrlInstaller = (os: string) => {
@@ -96,21 +95,21 @@ const AddAsset = ({
       <Modal.Body>
         <PlatformTab activeTab={platform} setTab={setPlatformTab}/>
         <div>
-          {platform === 'advanced' &&
+          {/* {platform === 'advanced' &&
             <div className='grid grid-cols-4 gap-2 mb-4'>
               <CheckboxField autoComplete="off" isChecked={include} onChange={() => {  }} label={'Logger'} />
               <CheckboxField autoComplete="off" isChecked={include} onChange={() => {  }} label={'Daemon'} />
               <CheckboxField autoComplete="off" isChecked={include} onChange={() => {  }} label={'Shell'} />
               <CheckboxField autoComplete="off" isChecked={include} onChange={() => {  }} label={'Re-enroll'} />
             </div>
-          }
+          } */}
           <div className='flex justify-between'>
             <h1 className='underline'>With CLI installer:</h1>
             <CopyToClipboardButton value={osqueryEntry} />
           </div>
           <CodeBlock language="sh" shouldWrapLongLines codeBidiWarningTooltipEnabled i18nIsDynamicList={true} showLineNumbers={false} text={generateCliInstaller(platform)} />
           <div className='flex justify-between'>
-            <h1 className='underline'>With the <a download={generateUrlInstaller(platform)} className='text-blue-500'>Fleet command-line tool</a> installed:</h1>
+            <h1 className='underline'>With the <a href={generateUrlInstaller(platform)} className='text-blue-500'>Fleet command-line tool</a> installed:</h1>
             <CopyToClipboardButton value={osqueryEntry} />
           </div>
           <CodeBlock language="sh" shouldWrapLongLines codeBidiWarningTooltipEnabled i18nIsDynamicList={true} showLineNumbers={false} text={osqueryEntry} />

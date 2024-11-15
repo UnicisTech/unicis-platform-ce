@@ -14,7 +14,18 @@ import AddAsset from './AddAsset';
 import { Node } from 'types'
 
 
-const Nodes = ({ team, user, nodes, setStatus, status }: { team: Team, user: Partial<User>, nodes: Node[], setStatus: (status: string) => void, status: string }) => {
+const Nodes = ({
+  team,
+  user,
+  nodes,
+  setStatus,
+  status
+}: {
+  team: Team,
+  user: Partial<User>,
+  nodes: Node[],
+  setStatus: (status: string) => void, status: string
+}) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const [deleteVisible, setDeleteVisible] = useState(false);

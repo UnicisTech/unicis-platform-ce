@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import { InputWithLabel } from '@/components/shared';
 import { useDeleteNode } from '@/hooks/fleets/Nodes/useDeleteNode';
+import { useNodes } from '@/hooks/fleets/Nodes/useNodes';
 
 const DeleteNode = ({
   nodeId,
@@ -23,6 +24,7 @@ const DeleteNode = ({
   const { t } = useTranslation('common');
 
   const deleteNode = useDeleteNode();
+  const { mutateNodes } = useNodes(fleetTeamId, 'all');
 
   const formik = useFormik({
     initialValues: {
@@ -35,6 +37,7 @@ const DeleteNode = ({
         toast.loading(t('Delete Node'));
         formik.resetForm();
         setVisible(false);
+        mutateNodes();
       } else {
         toast.error(t('Type confirmation text'));
       }

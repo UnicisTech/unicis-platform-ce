@@ -54,12 +54,12 @@ const TagsSelector: React.FC<TagsSelectorProps> = ({ fleetTeamId, onSelect, setS
       ) : (
        <Select
         inputId="multi-select-tags"
-        className="multi-select text-sm text-red-500 ring-1 ring-red-500 rounded"
+        className="multi-select text-sm ring-1 rounded"
         classNamePrefix="react-select"
         options={tagOptions}
         onChange={handleTagChange}
         value={selectedTagOptions}
-        placeholder="Select a Tag(s)"
+        placeholder="Select Tag(s)"
         isMulti
       />
       )}

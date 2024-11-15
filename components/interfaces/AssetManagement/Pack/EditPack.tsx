@@ -13,6 +13,7 @@ import { PLATFORMS } from '@/lib/fleet/constants';
 import { Pack } from '@/types';
 import { useUpdatePack } from '@/hooks/fleets/packs/useUpdatePack';
 import toast from 'react-hot-toast';
+import { usePacks } from '@/hooks/fleets/packs/usePacks';
 
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -46,6 +47,7 @@ const EditPack = ({
 }) => {
   const { t } = useTranslation('common');
   const updatePack = useUpdatePack();
+  const { mutatePacks } = usePacks(team?.id);
 
   return (
     <Modal open={visible}>
@@ -55,6 +57,9 @@ const EditPack = ({
           const packData = {name, platform: platform?.value, version, shard, description};
           try {
             await updatePack(fleetTeamId, packData, pack.id);
+            toast.success(t('success'));
+            mutatePacks();
+            setVisible(false);
           } catch (err) {
             toast.error(t('error-updating-pack'));
           };

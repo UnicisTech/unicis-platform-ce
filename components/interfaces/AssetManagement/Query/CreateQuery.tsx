@@ -15,6 +15,7 @@ import { PLATFORMS } from "@/lib/fleet/constants";
 import { useCreateQuery } from '@/hooks/fleets/queries/useCreateQuery';
 import PacksSelector from '../PacksSelector';
 import TagsSelector from '../TagsSelector';
+import { useQueries } from '@/hooks/fleets/queries/useQueries';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -59,6 +60,8 @@ const CreateQuery = ({
   const createQuery = useCreateQuery();
   const { t } = useTranslation('common');
 
+  const { mutateQueries } = useQueries(fleetTeamId);
+
   return (
     <Modal open={visible}>
       <Modal.Header className="font-bold">Create Query</Modal.Header>
@@ -80,7 +83,9 @@ const CreateQuery = ({
             };
             try {
                 await createQuery(fleetTeamId, queryData);
-                toast.success(t('success'));
+              toast.success(t('success'));
+              mutateQueries();
+              setVisible(false);
             } catch (err) {
                 toast.error(t('error'));
             };

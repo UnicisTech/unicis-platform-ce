@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import { InputWithLabel } from '@/components/shared';
 import { useDeleteTag } from '@/hooks/fleets/Tags/useDeleteTag';
+import { useTags } from '@/hooks/fleets/Tags/useTags';
 
 const DeleteTag = ({
   tagId,
@@ -21,10 +22,10 @@ const DeleteTag = ({
 }) => {
   const router = useRouter();
   const { slug } = router.query;
-  const { mutateTasks } = useTasks(slug as string);
   const { t } = useTranslation('common');
 
   const deleteTag = useDeleteTag();
+  const { mutateTags } = useTags(fleetTeamId);
 
   const formik = useFormik({
     initialValues: {
@@ -35,9 +36,9 @@ const DeleteTag = ({
       if (values.name === 'DELETE TAG') {
         await deleteTag(fleetTeamId, tagId)
         toast.loading(t('Delete Tag'));
-        mutateTasks();
-        formik.resetForm();
+        mutateTags();
         setVisible(false);
+        formik.resetForm();
       } else {
         toast.error(t('Type confirmation text'));
       }

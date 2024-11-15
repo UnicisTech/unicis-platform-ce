@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { queryNavigations } from '@/lib/fleet/querys';
+import { distributorNavigations } from '@/lib/fleet/distributed';
 
 const QueryTab = ({
   activeTab,
@@ -8,7 +8,7 @@ const QueryTab = ({
   activeTab: string;
   setActiveTab: (name: string) => void;
 }) => {
-  const navigations = queryNavigations(activeTab);
+  const navigations = distributorNavigations(activeTab);
 
   return (
     <div className="mb-5">

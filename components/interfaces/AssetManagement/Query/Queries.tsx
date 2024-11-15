@@ -11,7 +11,7 @@ import { Query } from '@/types/fleet';
 import { PLATFORMS } from '@/lib/fleet/constants';
 import FleetStatus from '../Fleet/FleetStatus';
 import CreateQuery from './CreateQuery';
-import { useQuerys } from '@/hooks/fleets/queries/useQuery';
+import { useQueries } from '@/hooks/fleets/queries/useQueries';
 import { CodeBlock } from '@atlaskit/code';
 import DeleteQuery from './DeleteQuery';
 import EditQuery from './EditQuery';
@@ -30,7 +30,7 @@ const Querys = ({ team, user }: { team: Team, user: Partial<User> }) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
 
-  const { querys, isLoading, isError } = useQuerys(team?.id);
+  const { queries, isLoading, isError } = useQueries(team?.id);
 
   if (isLoading) {
     return <Loading />;
@@ -108,8 +108,8 @@ const Querys = ({ team, user }: { team: Team, user: Partial<User> }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {querys &&
-                    querys.map((query, index) => {
+                    {queries &&
+                      queries.map((query, index) => {
                       return (
                         <tr key={query.id}>
                           <td className="px-6 py-3">

@@ -30,7 +30,7 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
 
-  const { tasks, isLoading, isError } = useDistributors(team?.id);
+  const { tasks, isLoading, isError, mutateDistributorsTasks } = useDistributors(team?.id);
 
   if (isLoading) {
     return <Loading />;
@@ -46,11 +46,13 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
 
   const openDeleteModal = async (id: string) => {
     setDistributorToDelete(id);
+    mutateDistributorsTasks();
     setDeleteVisible(true);
   };
 
   const openEditModal = async (distributor: DistributedQuery) => {
     setDistributorToEdit({ ...distributor });
+    mutateDistributorsTasks();
     setEditVisible(true);
   };
 
@@ -91,6 +93,9 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
                       {t('sql')}
                     </th>
                     <th scope="col" className="px-6 py-3">
+                      {t('asset')}
+                    </th>
+                    <th scope="col" className="px-6 py-3">
                       {t('total-results')}
                     </th>
                     <th scope="col" className="px-6 py-3">
@@ -117,21 +122,28 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
                             </Link>
                           </td>
                           <td className="align-top">
+                            {task.node.node_key}
+                          </td>
+                          <td className="align-top">
                             {task.distributed_query.total_results}
                           </td>
                           <td className="align-top">
                             {task.distributed_query.not_before}
                           </td>
                           <td className="align-top">
-                            <div className="grid grid-cols-1 gap-1 font-bold justify-start">
-                              <h1 className="rounded-xs text-[10px]">Status</h1>
-                              {StatusValue(task.status)}
-                              <h1 className="rounded-xs text-[10px]">Timestamp</h1>
+                            <div className='grid grid-cols-1'>
+                              <div>
+                                <h1 className="rounded-xs text-[10px]">Status</h1>
+                                {StatusValue(task.status)}
+                              </div>
+                              <div>  
+                                <h1 className="rounded-xs text-[10px]">Timestamp</h1>
                                 {task.timestamp != null ?
-                                  <FormattedDate style={''} dateString={task.timestamp} />
+                                  <FormattedDate style={'text-md'} dateString={task.timestamp} />
                                   :
                                   'Null'
                                 }
+                              </div>
                             </div>
                           </td>
                           <td className="align-top">

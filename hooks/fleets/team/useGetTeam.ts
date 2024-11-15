@@ -1,39 +1,19 @@
-import { fleetAuthAPIHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
+import fleetFetcher from "@/lib/fleet/fleetFetcher";
 import { FleetTeam } from "@/types/fleet";
-import { useEffect, useState } from "react";
+import useSWR, { mutate } from "swr";
 
 export const useGetTeam = (teamId: string) => {
-  const [fleetTeam, setTeam] = useState<FleetTeam>();
-  const [isLoading, setLoading] = useState<boolean>(true);
-  const [isError, setError] = useState<string | null>(null);
+  const url = `/team/${teamId}`;
+  const { data, error, isLoading } = useSWR<FleetTeam>(url, fleetFetcher);
 
-  useEffect(() => {
-    const fetchTeam = async () => {
-      setLoading(true);
-      setError(null);
+  const mutateTeam = async () => {
+    mutate(url);
+  };
 
-      try {
-        const response = await fleetV1(`/team/${teamId}`, {
-          method: 'GET',
-          headers: fleetAuthAPIHeaders(),
-        });
-
-        if (!response.ok) {
-          const data = await response.json();
-        }
-
-        const data: FleetTeam = await response.json();
-        setTeam(data);
-      } catch (err) {
-        setError('An unexpected error occurred.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTeam();
-  }, [teamId]);
-
-  return { fleetTeam, isLoading, isError };
+  return {
+    fleetTeam: data,
+    isLoading: isLoading,
+    isError: error,
+    mutateTeam
+  };
 };

@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { WithoutRing } from 'sharedStyles';
 import Select from '@atlaskit/select';
-import { usePacks } from '@/hooks/fleets/packs/usePack';
+import { usePacks } from '@/hooks/fleets/packs/usePacks';
 import { Pack } from '@/types';
 
 interface PacksSelectorProps {
@@ -56,12 +56,12 @@ const PacksSelector: React.FC<PacksSelectorProps> = ({ fleetTeamId, onSelect, se
       ) : (
        <Select
         inputId="multi-select-packs"
-        className="multi-select text-sm text-red-500 ring-1 ring-red-500 rounded"
+        className="multi-select text-sm ring-1 rounded"
         classNamePrefix="react-select"
         options={packOptions}
         onChange={handlePackChange}
         value={selectedPackOptions}
-        placeholder="Select a Pack(s)"
+        placeholder="Select Pack(s)"
         isMulti
       />
       )}

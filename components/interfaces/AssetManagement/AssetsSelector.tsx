@@ -7,14 +7,14 @@ import { WithoutRing } from 'sharedStyles';
 import Select from '@atlaskit/select';
 import { Node } from '@/types';
 
-interface NodesSelectorProps {
+interface AssetsSelectorProps {
   fleetTeamId: string;
   onSelect: (nodeKeys: string[]) => void;
   setSectionNode: (nodeKeys: string[]) => void;
   preSelectedNode?: Node[];
 }
 
-const NodesSelector: React.FC<NodesSelectorProps> = ({ fleetTeamId, onSelect, setSectionNode, preSelectedNode = [] }) => {
+const NodesSelector: React.FC<AssetsSelectorProps> = ({ fleetTeamId, onSelect, setSectionNode, preSelectedNode = [] }) => {
 
   const { nodes, isLoading, isError } = useNodes(fleetTeamId!);
   const [selectedNodeOptions, setSelectedNodeOptions] = useState<any[]>([]);
@@ -39,7 +39,7 @@ const NodesSelector: React.FC<NodesSelectorProps> = ({ fleetTeamId, onSelect, se
     label: `${node.node_info?.system_info?.computer_name || 'Unknown Host'} - ${node.host_identifier} - owner: ${node.owner.user.name} - ${node.is_active ? '🟢 Active' : '🔴 Inactive'}`
   }));
 
-  const handleNodeChange = (selectedOptions: any) => {
+  const handleAssetChange = (selectedOptions: any) => {
     const selectedNodeKeys = selectedOptions.map((option: { value: string }) => option.value);
 
     setSelectedNodeOptions(selectedOptions);
@@ -53,13 +53,13 @@ const NodesSelector: React.FC<NodesSelectorProps> = ({ fleetTeamId, onSelect, se
         <p>No nodes found</p>
       ) : (
        <Select
-        inputId="multi-select-nodes"
-        className="multi-select text-sm text-red-500 ring-1 ring-red-500 rounded"
+        inputId="multi-select-assets"
+        className="multi-select text-sm ring-1 rounded"
         classNamePrefix="react-select"
         options={nodeOptions}
-            onChange={handleNodeChange}
-            value={selectedNodeOptions}
-        placeholder="Select a node(s)"
+        onChange={handleAssetChange}
+        value={selectedNodeOptions}
+        placeholder="Select Asset(s)"
         isMulti
       />
       )}

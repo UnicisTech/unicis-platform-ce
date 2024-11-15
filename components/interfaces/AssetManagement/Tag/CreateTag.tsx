@@ -8,6 +8,7 @@ import Button, { LoadingButton } from '@atlaskit/button';
 import Form, { Field, FormFooter } from '@atlaskit/form';
 import 'react-quill/dist/quill.snow.css';
 import { useCreateTag } from '@/hooks/fleets/Tags/useCreateTag';
+import { useTags } from '@/hooks/fleets/Tags/useTags';
 
 
 interface FormData {
@@ -30,6 +31,8 @@ const CreateTag = ({
   const createTag = useCreateTag();
   const { t } = useTranslation('common');
 
+  const { mutateTags } = useTags(fleetTeamId);
+
   return (
     <Modal open={visible}>
       <Modal.Header className="font-bold">Create Tag</Modal.Header>
@@ -40,6 +43,8 @@ const CreateTag = ({
           try {
             await createTag(fleetTeamId, packData);
             toast.success(t('success'));
+            mutateTags();
+            setVisible(false);
           } catch (err) {
             toast.error(t('error'));
           };

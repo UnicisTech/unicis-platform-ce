@@ -6,6 +6,7 @@ import Form, { Field } from '@atlaskit/form';
 import { type OptionsPropType } from '@atlaskit/radio/types';
 import toast from 'react-hot-toast';
 import { useRenewFleetSecret } from '@/hooks/fleets';
+import { useGetFleetSecret } from '@/hooks/fleets/connect/useGetFleetSecret';
 
 interface FormData {
   [key: string]: string;
@@ -27,9 +28,12 @@ const RenewFleetSecret = ({
 }) => {
   const { t } = useTranslation('common');
   const renewFleetSecret = useRenewFleetSecret();
+  const { mutateFleetSecret } = useGetFleetSecret(teamId);
 
   const handleRenew = async () => {
     await renewFleetSecret(teamId);
+    mutateFleetSecret();
+    setVisible(false);
     toast.success(t('fleet-secret-renew'));
   };
 

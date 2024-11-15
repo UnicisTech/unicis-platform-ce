@@ -8,7 +8,7 @@ import useCanAccess from 'hooks/useCanAccess';
 import { WithLoadingAndError } from '@/components/shared';
 import type { Team, User } from '@prisma/client';
 import { CreatePack, DeletePack, EditPack } from '@/components/interfaces/AssetManagement/Pack';
-import { usePacks } from '@/hooks/fleets/packs/usePack';
+import { usePacks } from '@/hooks/fleets/packs/usePacks';
 import { Pack } from '@/types/fleet';
 import { PLATFORMS } from '@/lib/fleet/constants';
 import FleetStatus from '../Fleet/FleetStatus';

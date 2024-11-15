@@ -1,39 +1,19 @@
-import { fleetAuthAPIHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
+import fleetFetcher from "@/lib/fleet/fleetFetcher";
 import { DistributedQueryResult } from "@/types/fleet";
-import { useEffect, useState } from "react";
+import useSWR, { mutate } from "swr";
 
 export const useGetDistributedIdResult = (teamId: string, distributorId: string, distributorStatus: 'new' | 'pending' | 'complete' | 'failed') => {
-  const [distributorsResult, setDistributorsResult] = useState<DistributedQueryResult>();
-  const [isLoading, setLoading] = useState<boolean>(true);
-  const [isError, setError] = useState<string | null>(null);
+  const url = `/manager/${teamId}/queries/distributed/results/${distributorId}`;
+  const { data, error, isLoading } = useSWR<DistributedQueryResult>(url, fleetFetcher);
 
-  useEffect(() => {
-    const fetchDistributorResult = async () => {
-      setLoading(true);
-      setError(null);
+  const mutateDistributorResult = async () => {
+    mutate(url);
+  };
 
-      try {
-        const response = await fleetV1(`/manager/${teamId}/queries/distributed/results/${distributorId}`, {
-          method: 'GET',
-          headers: fleetAuthAPIHeaders(),
-        });
-
-        if (!response.ok) {
-          const data = await response.json();
-        }
-
-        const data: DistributedQueryResult = await response.json();
-        setDistributorsResult(data);
-      } catch (err) {
-        setError('An unexpected error occurred.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchDistributorResult();
-  }, [teamId, distributorId]);
-
-  return { distributorsResult, isLoading, isError };
+  return {
+    distributorsResult: data,
+    isLoading,
+    isError: error,
+    mutateDistributorResult
+  };
 };

@@ -13,6 +13,7 @@ import dynamic from 'next/dynamic';
 import { PLATFORMS } from "@/lib/fleet/constants";
 import { useCreatePack } from '@/hooks/fleets/packs/useCreatePack';
 import TagsSelector from '../TagsSelector';
+import { usePacks } from '@/hooks/fleets/packs/usePacks';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -49,6 +50,7 @@ const CreatePack = ({
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const createPack = useCreatePack();
+  const { mutatePacks } = usePacks(fleetTeamId);
   const { t } = useTranslation('common');
 
 
@@ -62,6 +64,8 @@ const CreatePack = ({
           try {
             await createPack(fleetTeamId, packData);
             toast.success(t('success'));
+            mutatePacks();
+            setVisible(false);
           } catch (err) {
             toast.error(t('error'));
           };

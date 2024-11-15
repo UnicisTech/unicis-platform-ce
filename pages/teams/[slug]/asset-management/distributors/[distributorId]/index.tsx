@@ -10,8 +10,9 @@ import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
 import DistributorsDetails from '@/components/interfaces/AssetManagement/Distributor/DistributorDetails';
+import DistributorsResults from '@/components/interfaces/AssetManagement/Distributor/DistributorResults';
 
-const DistributorById = ({teamFeatures, user}) => {
+const DistributorById = ({ teamFeatures, user }) => {
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
   const { distributorId, slug } = router.query;
@@ -20,7 +21,7 @@ const DistributorById = ({teamFeatures, user}) => {
     isLoading: isTeamLoading,
     isError: isTeamError,
   } = useTeam(slug as string);
-  
+
   if (isTeamLoading) {
     return <Loading />;
   }
@@ -39,11 +40,13 @@ const DistributorById = ({teamFeatures, user}) => {
       />
       <h3 className="text-2xl font-bold">{'Querys'}</h3>
       <QueryTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <Card heading="Details">
-        <Card.Body>
-          <DistributorsDetails user={user} fleetTeamId={team?.id!} distributorId={distributorId as string} />
-        </Card.Body>
-      </Card>
+
+      {activeTab === 'Overview' &&
+        <DistributorsDetails user={user} fleetTeamId={team?.id!} distributorId={distributorId as string} />
+      }
+      {activeTab === 'Results' &&
+        <DistributorsResults user={user} fleetTeamId={team?.id!} distributorId={distributorId as string} />
+      }
     </>
   );
 };

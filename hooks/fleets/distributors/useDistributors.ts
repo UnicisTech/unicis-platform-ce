@@ -1,39 +1,19 @@
-import { fleetAuthAPIHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
-import { DistributedQueryTaskResponse, DistributedQueryTask } from "@/types/fleet";
-import { useEffect, useState } from "react";
+import fleetFetcher from "@/lib/fleet/fleetFetcher";
+import { DistributedQueryTaskResponse } from "@/types/fleet";
+import useSWR, { mutate } from "swr";
 
 export const useDistributors = (teamId: string) => {
-  const [tasks, setDistributorsTasks] = useState<DistributedQueryTask[]>([]);
-  const [isLoading, setLoading] = useState<boolean>(true);
-  const [isError, setError] = useState<string | null>(null);
+  const url = `/manager/${teamId}/queries/distributed`;
+  const { data, error, isLoading } = useSWR<DistributedQueryTaskResponse>(url, fleetFetcher);
+
+  const mutateDistributorsTasks = async () => {
+    mutate(url);
+  };
   
-  useEffect(() => {
-    const fetchDistributors = async () => {
-      setLoading(true);
-      setError(null);
-
-      try {
-        const response = await fleetV1(`/manager/${teamId}/queries/distributed`, {
-          method: 'GET',
-          headers: fleetAuthAPIHeaders(),
-        });
-
-        if (!response.ok) {
-          const data = await response.json();
-        }
-
-        const data: DistributedQueryTaskResponse = await response.json();
-        setDistributorsTasks(data.tasks);
-      } catch (err) {
-        setError('An unexpected error occurred.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchDistributors();
-  }, [teamId]);
-
-  return { tasks, isLoading, isError };
+  return {
+    tasks: data?.tasks!,
+    isLoading: isLoading,
+    isError: error,
+    mutateDistributorsTasks,
+  };
 };

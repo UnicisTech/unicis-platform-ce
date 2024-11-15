@@ -1,39 +1,19 @@
-import { fleetAuthAPIHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
-import { TagsResponse, Tag } from "@/types/fleet";
-import { useEffect, useState } from "react";
+import fleetFetcher from "@/lib/fleet/fleetFetcher";
+import { TagsResponse } from "@/types/fleet";
+import useSWR, { mutate } from "swr";
 
 export const useTags = (teamId: string) => {
-  const [tags, setTags] = useState<Tag[]>([]);
-  const [isLoading, setLoading] = useState<boolean>(true);
-  const [isError, setError] = useState<string | null>(null);
-  
-  useEffect(() => {
-    const fetchTags = async () => {
-      setLoading(true);
-      setError(null);
+  const url = `/manager/${teamId}/tags`;
+  const { data, error, isLoading } = useSWR<TagsResponse>(url, fleetFetcher);
 
-      try {
-        const response = await fleetV1(`/manager/${teamId}/tags`, {
-          method: 'GET',
-          headers: fleetAuthAPIHeaders(),
-        });
+  const mutateTags = async () => {
+    mutate(url);
+  };
 
-        if (!response.ok) {
-          const data = await response.json();
-        }
-
-        const data: TagsResponse = await response.json();
-        setTags(data.tags);
-      } catch (err) {
-        setError('An unexpected error occurred.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTags();
-  }, [teamId]);
-
-  return { tags, isLoading, isError };
+  return {
+    tags: data?.tags!,
+    isLoading: isLoading,
+    isError: error,
+    mutateTags
+  };
 };

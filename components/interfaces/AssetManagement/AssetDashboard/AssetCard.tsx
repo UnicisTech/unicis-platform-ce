@@ -1,18 +1,8 @@
 import React from 'react'
 import NumberFormatter from '@/components/shared/NumberFormatter';
 import { Icon } from '@iconify/react';
+import { platformBGs, platformIcons } from '@/lib/fleet/tools';
 
-const platformIcons = {
-  linux: "uim:linux",
-  windows: "uim:windows",
-  apple: "uim:apple",
-};
-
-const platformBGs = {
-  linux: 'bg-gray-300',
-  windows: 'bg-blue-300',
-  apple: 'bg-green-300',
-};
 
 export interface AssetProps {
   host: string;

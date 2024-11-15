@@ -1,50 +1,25 @@
-import { fleetAuthAPIHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
-import { NodesResponse, Node } from "@/types/fleet";
-import { useEffect, useState } from "react";
+import fleetFetcher from "@/lib/fleet/fleetFetcher";
+import { NodesResponse } from "@/types/fleet";
+import useSWR, { mutate } from "swr";
 
 export const useNodes = (teamId: string, status?: string) => {
-  const [nodes, setNodes] = useState<Node[]>([]);
-  const [isLoading, setLoading] = useState<boolean>(true);
-  const [isError, setError] = useState<string | null>(null);
   
-  useEffect(() => {
-    const fetchNodes = async () => {
-      setLoading(true);
-      setError(null);
+  let url = `/manager/${teamId}/nodes`;
 
-      try {
-        let response;
+  if (status && status !== 'all') {
+    url = `/manager/${teamId}/nodes/status/${status}`;
+  }
+  
+  const { data, error, isLoading } = useSWR<NodesResponse>(url, fleetFetcher);
 
-        if (!status || status === 'all') {
-          // Fetch all nodes if status is 'all' or undefined
-          response = await fleetV1(`/manager/${teamId}/nodes`, {
-            method: 'GET',
-            headers: fleetAuthAPIHeaders(),
-          });
-        } else if (status === 'active' || status === 'inactive') {
-          // Fetch nodes based on status ('active' or 'inactive')
-          response = await fleetV1(`/manager/${teamId}/nodes/${status}`, {
-            method: 'GET',
-            headers: fleetAuthAPIHeaders(),
-          });
-        }
-
-        if (!response || !response.ok) {
-          const data = await response.json();
-        }
-
-        const data: NodesResponse = await response.json();
-        setNodes(data.nodes);
-      } catch (err) {
-        setError('An unexpected error occurred.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchNodes();
-  }, [teamId, status]);
-
-  return { nodes, isLoading, isError };
+  const mutateNodes = async () => {
+    mutate(url);
+  };
+  
+  return {
+    nodes: data?.nodes!,
+    isLoading: isLoading,
+    isError: error,
+    mutateNodes
+  };
 };

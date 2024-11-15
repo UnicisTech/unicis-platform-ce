@@ -172,6 +172,7 @@ export interface DistributedQueryTask extends FleetBase {
   timestamp?: string;
   distributed_query: DistributedQuery;
   node: Node;
+  results: Array<Record<string, any>>;
 }
 
 export interface DistributedQueryTaskResponse {
@@ -185,6 +186,23 @@ export interface StatusLog extends FleetBase {
   message: string;
 }
 
+export interface ResultLog extends FleetBase {
+  name: string;
+  timestamp: string;
+}
+
+export interface StatusLogResponse {
+  node: Node;
+  status_logs: StatusLog[];
+  pagination: Pagination;
+}
+
+export interface ResultLogResponse {
+  node: Node;
+  recent: any;
+  queries: Query[];
+}
+
 export interface Result extends FleetBase {
   columns: string;
   created_at: string;
@@ -195,18 +213,20 @@ export interface Result extends FleetBase {
   updated_at: string;
 }
 
+interface Pagination {
+  alignment: string;
+  bs_version: string;
+  display_msg: string;
+  page: string;
+  per_page: string;
+  record_name: string;
+  show_single_page: boolean;
+  total: string;
+}
+
 export interface DistributedQueryResult {
   distributed_id: string;
-  pagination: {
-    alignment: string;
-    bs_version: string;
-    display_msg: string;
-    page: string;
-    per_page: string;
-    record_name: string;
-    show_single_page: boolean;
-    total: string;
-  };
+  pagination: Pagination;
   query: Query;
   results: Array<Record<string, any>>; /// This returns results columes only no extral References
   status: string;

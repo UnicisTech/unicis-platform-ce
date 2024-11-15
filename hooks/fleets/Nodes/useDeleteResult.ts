@@ -1,10 +1,10 @@
 import { fleetAuthAPIHeaders } from "@/lib/common";
 import { fleetV1 } from "@/lib/fleet/apiBase";
 
-export const useDeleteFleetSecret = () => {
-  const deleteSecret = async (teamId: string) => {
+export const useDeleteAssetResultLog = () => {
+  const deleteAssetResultLog = async (fleetTeamId: string, nodeId: string, resultId: string) => {
     try {
-      const response = await fleetV1(`/fleet/teams/${teamId}/secret`, {
+      const response = await fleetV1(`/manager/${fleetTeamId}/node/${nodeId}/delete/result/${resultId}`, {
         method: 'DELETE',
         headers: fleetAuthAPIHeaders(),
       });
@@ -12,11 +12,13 @@ export const useDeleteFleetSecret = () => {
       if (!response.ok) {
         const data = await response.json();
       }
+
+      return response.json();
     } catch (error) {
       // Optional: Handle or log the error more specifically here if needed
-      console.error('Error deleting secret:', error);
+      console.error('Error deleting asset result:', error);
     }
   };
 
-  return deleteSecret;
+  return deleteAssetResultLog;
 };

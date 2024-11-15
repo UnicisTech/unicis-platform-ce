@@ -5,12 +5,15 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Loading, Error, Card } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
 import useTeam from 'hooks/useTeam';
-import PackTab from '@/components/interfaces/AssetManagement/Pack/PackTab';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
 import Breadcrumb from '@/components/shared/Breadcrumb';
-import NodeDetails from '@/components/interfaces/AssetManagement/AssetDashboard/Node/NodeDetails';
+import NodeDetails from '@/components/interfaces/AssetManagement/AssetDashboard/Asset/NodeDetails';
+import NodeTab from '@/components/interfaces/AssetManagement/AssetDashboard/Asset/NodeTab';
+import AssetLogs from '@/components/interfaces/AssetManagement/AssetDashboard/Asset/AssetLogs';
+import ResultLogs from '@/components/interfaces/AssetManagement/AssetDashboard/Asset/ResultLogs';
+import AssetConfig from '@/components/interfaces/AssetManagement/AssetDashboard/Asset/AssetConfig';
 
 
 const NodeById = ({ teamFeatures, user }) => {
@@ -42,12 +45,35 @@ const NodeById = ({ teamFeatures, user }) => {
         path={nodeId as string}
       />
       <h3 className="text-2xl font-bold">{'Asset Details'}</h3>
-      <PackTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <Card heading="Asset Details">
-        <Card.Body>
-          <NodeDetails user={user} fleetTeamId={team?.id!} nodeID={nodeId as string} />
-        </Card.Body>
-      </Card>
+      <NodeTab activeTab={activeTab} setActiveTab={setActiveTab} />
+      {activeTab === 'Overview' &&
+            <NodeDetails user={user} fleetTeamId={team?.id!} nodeID={nodeId as string} />
+        // <Card heading={activeTab}>
+        //   <Card.Body>
+        //   </Card.Body>
+        // </Card>
+      }
+      {activeTab === 'Status Logs' &&
+            <AssetLogs user={user} fleetTeamId={team?.id!} nodeID={nodeId as string} />
+        // <Card heading={activeTab}>
+        //   <Card.Body>
+        //   </Card.Body>
+        // </Card>
+      }
+      {activeTab === 'Result Logs' &&
+            <ResultLogs user={user} fleetTeamId={team?.id!} nodeID={nodeId as string} />
+        // <Card heading={activeTab}>
+        //   <Card.Body>
+        //   </Card.Body>
+        // </Card>
+      }
+      {activeTab === 'Asset Configurations' &&
+            <AssetConfig user={user} fleetTeamId={team?.id!} nodeID={nodeId as string} />
+        // <Card heading={activeTab}>
+        //   <Card.Body>
+        //   </Card.Body>
+        // </Card>
+      }
     </>
   );
 };

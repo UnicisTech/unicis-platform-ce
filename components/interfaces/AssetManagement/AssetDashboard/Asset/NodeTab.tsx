@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { queryNavigations } from '@/lib/fleet/querys';
+import { assetNavigations } from '@/lib/fleet/assets';
 
 const NodeTab = ({
   activeTab,
@@ -8,7 +8,7 @@ const NodeTab = ({
   activeTab: string;
   setActiveTab: (name: string) => void;
 }) => {
-  const navigations = queryNavigations(activeTab);
+  const navigations = assetNavigations(activeTab);
 
   return (
     <div className="mb-5">

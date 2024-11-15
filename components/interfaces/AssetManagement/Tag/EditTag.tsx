@@ -8,6 +8,7 @@ import Form, { Field, FormFooter } from '@atlaskit/form';
 import 'react-quill/dist/quill.snow.css';
 import { Tag } from '@/types/fleet';
 import { useUpdateTag } from '@/hooks/fleets/Tags/useUpdateTag';
+import { useTags } from '@/hooks/fleets/Tags/useTags';
 
 
 interface FormData {
@@ -29,6 +30,7 @@ const EditTag = ({
     const submitButtonRef = useRef<HTMLButtonElement | null>(null);
     const updateTag = useUpdateTag();
     const { t } = useTranslation('common');
+    const { mutateTags } = useTags(fleetTeamId);
 
     return (
         <Modal open={visible}>
@@ -40,6 +42,8 @@ const EditTag = ({
                     try {
                         await updateTag(fleetTeamId, tagData, tag.id);
                         toast.success(t('success'));
+                        mutateTags();
+                        setVisible(false);
                     } catch (err) {
                         toast.error(t('error'));
                     };

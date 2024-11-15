@@ -10,9 +10,10 @@ import Button, { LoadingButton } from '@atlaskit/button';
 import Form, { Field, FormFooter } from '@atlaskit/form';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
-import NodesSelector from '../NodesSelector';
+import NodesSelector from '../AssetsSelector';
 import { useCreateDistributors } from '@/hooks/fleets/distributors/useCreateDistributor';
 import TagsSelector from '../TagsSelector';
+import { useDistributors } from '@/hooks/fleets/distributors/useDistributors';
 
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -51,6 +52,9 @@ const CreateDistributors = ({
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const { t } = useTranslation('common');
   const createDistributor = useCreateDistributors();
+
+  const { mutateDistributorsTasks } = useDistributors(fleetTeamId);
+  
   const handleNodeSelection = (nodeKeys: string[]) => {
     console.log("Selected Node Keys:", nodeKeys);
   };
@@ -72,6 +76,8 @@ const CreateDistributors = ({
             try {
               await createDistributor(fleetTeamId, queryData);
               toast.success(t('success'));
+              mutateDistributorsTasks();
+              setVisible(false);
             } catch (err) {
               toast.error(t('error'));
             };
