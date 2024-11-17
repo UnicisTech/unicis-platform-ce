@@ -1,13 +1,19 @@
 import React from 'react'
 import NumberFormatter from '@/components/shared/NumberFormatter';
 import { Icon } from '@iconify/react';
-import { platformBGs, platformIcons } from '@/lib/fleet/tools';
+import { platformIcons } from '@/lib/fleet/tools';
 
 
 export interface AssetProps {
   host: string;
   total: number;
 }
+
+export const platformBGs = {
+  linux: 'bg-gray-300',
+  windows: 'bg-blue-300',
+  apple: 'bg-green-300',
+};
 
 const AssetCard = ({ host, total } : AssetProps) => {
   const iconString = platformIcons[host];
@@ -19,7 +25,7 @@ const AssetCard = ({ host, total } : AssetProps) => {
   return (
     <div className="grid grid-cols-2 w-full rounded-sm p-4 ring-1 ring-gray-300 items-center justify-between">
       <div className={`w-fit flex items-center justify-center rounded-full ${bgColor} p-1 ring-gray-300 ring-1`}>
-        <Icon className='h-16 w-16' icon={`${iconString}`} />
+        <Icon className='h-[72px] w-[72px]' icon={`${iconString}`} />
       </div>
       <div className='flex-1 justify-between'>
         <NumberFormatter number={total} />

@@ -28,7 +28,7 @@ export const OSQUERY_ENTRY = ({
   const createSecretFile = `echo ${safe && !isCopy ? '*'.repeat(secret.length) : `'${secret}'`} > ${secretPath}`;
 
   let osqueryCommand = `${createSecretFile} && sudo osqueryd \
-    --D
+    --D \
     --pidfile=/tmp/${filePrefix}-osquery.pid \
     --host_identifier=uuid \
     --database_path=/tmp/${filePrefix}-osquery.db \
@@ -55,7 +55,7 @@ export const OSQUERY_ENTRY = ({
     --config_check \
     --config_dump \
     --database_dump
-  `;
+  ` + `&`;
 
   if (flags) {
     const flagEntries = Object.entries(flags);
@@ -82,10 +82,4 @@ export const platformIcons = {
   linux: "uim:linux",
   windows: "uim:windows",
   apple: "uim:apple",
-};
-
-export const platformBGs = {
-  linux: 'bg-gray-300',
-  windows: 'bg-blue-300',
-  apple: 'bg-green-300',
 };

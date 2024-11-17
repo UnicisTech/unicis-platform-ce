@@ -9,6 +9,7 @@ import { useTranslation } from 'next-i18next';
 import NavigationItems from './NavigationItems';
 import { NavigationProps, MenuItem } from './NavigationItems';
 import Icon from '../Icon';
+import useCanAccess from '@/hooks/useCanAccess';
 
 interface NavigationItemsProps extends NavigationProps {
   slug: string;
@@ -16,6 +17,7 @@ interface NavigationItemsProps extends NavigationProps {
 
 const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   const { t } = useTranslation('common');
+  const { canAccess } = useCanAccess();
 
   const menus: MenuItem[] = [
     {
@@ -60,7 +62,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname?.startsWith(`/teams/${slug}`) &&
         activePathname.includes('csc'),
     },
-    {
+    canAccess('asset_dashboard', ['create', 'update', 'read', 'delete']) && {
       name: t('Asset Management'),
       href: `/teams/${slug}/asset`,
       icon: () => <Icon src="/asset-dashboard.png" />,
@@ -100,7 +102,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
           activePathname
         ),
     },
-  ];
+  ].filter((menu): menu is MenuItem => Boolean(menu)); // Don't remove this filter : Menu type excape
 
   return <NavigationItems menus={menus} />;
 };

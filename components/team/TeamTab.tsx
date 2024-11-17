@@ -110,8 +110,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   }
 
   if (
-    teamFeatures.fleetTag &&
-    canAccess('team_fleet_connect', ['create', 'update', 'read', 'delete'])
+    canAccess('asset_settings', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({
       name: 'Asset Management',

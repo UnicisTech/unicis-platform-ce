@@ -112,7 +112,7 @@ const AddAsset = ({
             <h1 className='underline'>With the <a href={generateUrlInstaller(platform)} className='text-blue-500'>Fleet command-line tool</a> installed:</h1>
             <CopyToClipboardButton value={osqueryEntry} />
           </div>
-          <CodeBlock language="sh" shouldWrapLongLines codeBidiWarningTooltipEnabled i18nIsDynamicList={true} showLineNumbers={false} text={osqueryEntry} />
+          <CodeBlock language="sh" shouldWrapLongLines codeBidiWarningTooltipEnabled showLineNumbers={false} text={osqueryEntry} />
           {platform === 'advanced' &&
             <>
             <h1>Team TLS Certificate</h1>

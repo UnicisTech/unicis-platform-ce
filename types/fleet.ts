@@ -191,6 +191,18 @@ export interface ResultLog extends FleetBase {
   timestamp: string;
 }
 
+export interface TaskAnalysis {
+  total_queries_task: number;
+  new_queries_task: number;
+  pending_queries_task: number;
+  completed_queries_task: number;
+  failed_queries_task: number;
+}
+
+export interface TaskResultAnalysis {
+  total_queries_result: number;
+}
+
 export interface StatusLogResponse {
   node: Node;
   status_logs: StatusLog[];
@@ -201,6 +213,11 @@ export interface ResultLogResponse {
   node: Node;
   recent: any;
   queries: Query[];
+}
+
+export interface NodeDistributedQueryResult {
+  node: Node;
+  query: Query;
 }
 
 export interface Result extends FleetBase {

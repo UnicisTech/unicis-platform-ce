@@ -60,14 +60,13 @@ const AssetsAnalysis = ({ team, user, nodes }: Assets) => {
 
 
   return (
-    <div className=''>
+    <>
       <div
         style={{
           height: '400px',
           width: '100%',
           display: 'flex',
           justifyContent: 'space-around',
-          marginBottom: '10px',
         }}
       >
         <div
@@ -88,7 +87,7 @@ const AssetsAnalysis = ({ team, user, nodes }: Assets) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 import { useFormik } from 'formik';
 import { InputWithLabel } from '@/components/shared';
 import { useDeleteDistributed } from '@/hooks/fleets/distributors/useDeleteDistributor';
+import { useDistributors } from '@/hooks/fleets/distributors/useDistributors';
 
 const DeleteDistributors = ({
   distributorId,
@@ -19,6 +20,7 @@ const DeleteDistributors = ({
 }) => {
   const { t } = useTranslation('common');
   const deleteDistributor = useDeleteDistributed();
+  const { mutateDistributorsTasks } = useDistributors(fleetTeamId);
 
   const formik = useFormik({
     initialValues: {
@@ -28,8 +30,9 @@ const DeleteDistributors = ({
 
       if (values.name === 'DELETE DISTRIBUTOR') {
         toast.loading(t('deleted'));
-        await deleteDistributor(fleetTeamId, distributorId)
+        await deleteDistributor(fleetTeamId, distributorId);
         formik.resetForm();
+        mutateDistributorsTasks();
         setVisible(false);
       } else {
         toast.error(t('Type confirmation text'));

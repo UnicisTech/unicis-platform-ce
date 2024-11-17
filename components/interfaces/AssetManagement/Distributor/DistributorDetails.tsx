@@ -34,6 +34,7 @@ const DistributorsDetails = ({ user, distributorId, fleetTeamId }: { user: Parti
   const openDeleteModal = async (id: string) => {
     setQueryToDelete(id);
     setDeleteVisible(true);
+    mutateDistributorResult();
   };
 
   return (

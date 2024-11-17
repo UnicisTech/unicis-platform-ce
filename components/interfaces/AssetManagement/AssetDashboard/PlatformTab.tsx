@@ -53,7 +53,7 @@ const PlatformTab = ({ activeTab, setTab } : PlatformTabProps) => {
     return (
         <div className="flex flex-col pb-6">
             <nav
-                className="flex space-x-5 border-b border-gray-300"
+                className="flex space-x-5"
                 aria-label="Tabs"
             >
                 {navigations.map((menu) => {
@@ -64,7 +64,7 @@ const PlatformTab = ({ activeTab, setTab } : PlatformTabProps) => {
                             className={classNames(
                                 'inline-flex decoration-transparent items-center border-b-2 py-4 text-sm font-medium',
                                 menu.active
-                                    ? 'border-gray-900 text-gray-700 dark:text-gray-100'
+                                    ? 'border-gray-300 text-gray-700 dark:text-gray-100'
                                     : 'border-transparent text-gray-500 hover:border-gray-300  hover:text-gray-700 hover:dark:text-gray-100'
                             )}
                         >

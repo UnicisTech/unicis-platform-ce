@@ -18,6 +18,8 @@ export type Resource =
   | 'team_fleet_query'
   | 'team_fleet_tag'
   | 'team_fleet_node'
+  | 'asset_dashboard'
+  | 'asset_settings'
   | 'task';
 
 export type RolePermissions = {
@@ -52,6 +54,14 @@ export const permissions: RolePermissions = {
   OWNER: [
     {
       resource: 'team',
+      actions: '*',
+    },
+    {
+      resource: 'asset_dashboard',
+      actions: '*',
+    },
+    {
+      resource: 'asset_settings',
       actions: '*',
     },
     {
@@ -114,6 +124,14 @@ export const permissions: RolePermissions = {
   ADMIN: [
     {
       resource: 'team',
+      actions: '*',
+    },
+     {
+      resource: 'asset_dashboard',
+      actions: '*',
+    },
+    {
+      resource: 'asset_settings',
       actions: '*',
     },
     {
@@ -185,27 +203,7 @@ export const permissions: RolePermissions = {
     {
       resource: 'task',
       actions: '*',
-    },
-    {
-      resource: 'team_fleet_connect',
-      actions: ['read'],
-    },
-    {
-      resource: 'team_fleet_pack',
-      actions: ['read'],
-    },
-    {
-      resource: 'team_fleet_query',
-      actions: ['read'],
-    },
-    {
-      resource: 'team_fleet_tag',
-      actions: ['read'],
-    },
-    {
-      resource: 'team_fleet_node',
-      actions: ['read'],
-    },
+    }
   ],
   AUDITOR: [
     {
