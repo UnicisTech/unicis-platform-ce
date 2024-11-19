@@ -21,13 +21,7 @@ const AccountTab = ({ activeTab, heading, user }: AccountTabProps) => {
       href: `/settings/account`,
       active: activeTab === 'account',
       icon: UserIcon,
-    },
-    {
-      name: 'Fleet Account',
-      href: `/settings/fleet`,
-      active: activeTab === 'fleet',
-      icon: UserIcon,
-    },
+    }
   ];
 
   return (
