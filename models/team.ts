@@ -7,6 +7,7 @@ import { controls } from '@/components/defaultLanding/data/configs/csc';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { TeamProperties } from 'types';
 import { addSubscription } from './subscription';
+import { useCreateFleetTeam } from '@/hooks/fleets';
 
 export const createTeam = async (param: {
   userEmail: string;
@@ -15,6 +16,7 @@ export const createTeam = async (param: {
   slug: string;
 }) => {
   const { userId, userEmail, name, slug } = param;
+  const createFleetTeam = useCreateFleetTeam();
 
   const team = await prisma.team.create({
     data: {
@@ -28,6 +30,8 @@ export const createTeam = async (param: {
   await addSubscription(team.id, userEmail);
 
   await findOrCreateApp(team.name, team.id);
+
+  await createFleetTeam(team.name, team.id);
 
   return team;
 };
