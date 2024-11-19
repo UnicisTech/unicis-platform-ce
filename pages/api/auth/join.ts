@@ -11,6 +11,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
 import { getInvitation, isInvitationExpired } from 'models/invitation';
 import { validateRecaptcha } from '@/lib/recaptcha';
+import { Team } from '@prisma/client';
 
 export default async function handler(
   req: NextApiRequest,
@@ -49,6 +50,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     recaptchaToken,
   } = req.body;
   const name = `${firstName} ${lastName}`;
+  let teamData = {} as Team;
   await validateRecaptcha(recaptchaToken);
 
   const invitation = inviteToken
@@ -104,7 +106,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!invitation) {
     const slug = slugify(team);
 
-    await createTeam({
+    teamData = await createTeam({
       userEmail: emailToUse,
       userId: user.id,
       name: team,
@@ -132,6 +134,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     data: {
       user,
       confirmEmail: env.confirmEmail && !user.emailVerified,
+      team: teamData,
     },
   });
 };

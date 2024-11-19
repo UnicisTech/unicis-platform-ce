@@ -31,7 +31,7 @@ const DeleteTag = ({
     onSubmit: async (values) => {
 
       if (values.confirm.toLowerCase() === 'DELETE'.toLowerCase()) {
-        await deleteTag(fleetTeamId, tagId)
+        await deleteTag(fleetTeamId, tagId);
         toast.loading(t('Delete Tag'));
         mutateTags();
         setVisible(false);

@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { InputWithLabel } from '@/components/shared';
 import { defaultHeaders, passwordPolicies } from '@/lib/common';
-import type { User } from '@prisma/client';
+import type { Team, User } from '@prisma/client';
 import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -13,8 +13,9 @@ import TogglePasswordVisibility from '../shared/TogglePasswordVisibility';
 import AgreeMessage from './AgreeMessage';
 import GoogleReCAPTCHA from '../shared/GoogleReCAPTCHA';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { useCreateFleetAccount } from '@/hooks/fleets';
+import { useCreateFleetAccount, useCreateFleetTeam } from '@/hooks/fleets';
 import { deleteUser } from '@/models/user';
+import { deleteTeam } from '@/models/team';
 
 
 interface JoinProps {
@@ -29,6 +30,7 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const createFleetAccount = useCreateFleetAccount();
+  const createFleetTeam = useCreateFleetTeam();
 
   const handlePasswordVisibility = () => {
     setIsPasswordVisible((prev) => !prev);
@@ -60,11 +62,15 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
       });
 
       const json = (await response.json()) as ApiResponse<
-        User & { confirmEmail: boolean }
-      >;
+        User & { confirmEmail: boolean } & {team: Team}
+        >;
 
       try {
-        await createFleetAccount(json.data.id, json.data.email, json.data.firstName, json.data.lastName, values.password);
+        await createFleetAccount(json.data.id, json.data.email, json.data.firstName, json.data.lastName, values.password)
+          .then(async () => {
+            await createFleetTeam(json.data.team.name, json.data.team.id)
+              .then(team => { }).catch(async (err) => { await deleteTeam({ id: json.data.id }) })
+        });
       } catch (error) {
         await deleteUser({ id: json.data.id })
       }

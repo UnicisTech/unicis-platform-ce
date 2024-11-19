@@ -7,7 +7,6 @@ import { IssuePanelContainer } from '@/sharedStyles';
 import DeleteQuery from './DeleteDistributorResult';
 import { useGetDistributedIdResult } from '@/hooks/fleets/distributors/useGetDistributorIdResult';
 import { CodeBlock } from '@atlaskit/code';
-import FormattedDate from '@/components/shared/Date';
 import DataInfo from '@/components/shared/DataInfo';
 
 

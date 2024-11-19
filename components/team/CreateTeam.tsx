@@ -11,6 +11,8 @@ import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
 import Modal from '../shared/Modal';
 import { InputWithLabel } from '../shared';
+import { useCreateFleetTeam } from '@/hooks/fleets';
+import { deleteTeam } from '@/models/team';
 
 interface CreateTeamProps {
   visible: boolean;
@@ -20,6 +22,8 @@ interface CreateTeamProps {
 const CreateTeam = ({ visible, setVisible }: CreateTeamProps) => {
   const { t } = useTranslation('common');
   const { mutateTeams } = useTeams();
+  const createFleetTeam = useCreateFleetTeam();
+
   const router = useRouter();
 
   const formik = useFormik({
@@ -42,6 +46,9 @@ const CreateTeam = ({ visible, setVisible }: CreateTeamProps) => {
         toast.error(json.error.message);
         return;
       }
+
+      await createFleetTeam(json.data.name, json.data.id)
+        .then(team => { }).catch(async (err) => {await deleteTeam({id: json.data.id})})
 
       formik.resetForm();
       mutateTeams();

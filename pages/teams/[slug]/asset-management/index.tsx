@@ -6,13 +6,10 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import FleetContainer from '@/components/interfaces/AssetManagement/Fleet/FleetContainer';
 import { getTeam } from '@/models/team';
 import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
-import { useRouter } from 'next/router';
 import { TeamTab } from '@/components/team';
 
 
 const AssetManagement = ({ teamFeatures, team, user }) => {
-  const router = useRouter();
-  const { slug } = router.query;
 
   return (
     <>
