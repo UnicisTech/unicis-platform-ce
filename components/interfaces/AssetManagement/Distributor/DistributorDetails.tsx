@@ -8,6 +8,7 @@ import DeleteQuery from './DeleteDistributorResult';
 import { useGetDistributedIdResult } from '@/hooks/fleets/distributors/useGetDistributorIdResult';
 import { CodeBlock } from '@atlaskit/code';
 import FormattedDate from '@/components/shared/Date';
+import DataInfo from '@/components/shared/DataInfo';
 
 
 const DistributorsDetails = ({ user, distributorId, fleetTeamId }: { user: Partial<User>, distributorId: string, fleetTeamId: string }) => {
@@ -41,11 +42,12 @@ const DistributorsDetails = ({ user, distributorId, fleetTeamId }: { user: Parti
     <IssuePanelContainer>
       <div className='grid gap-2 text-black'>
         <span className="flex items-center gap-2 bg-blue-200 rounded-badge px-2">ID: {distributorsResult?.distributed_id}</span>
-        <div className="rounded-xs">
-          {distributorsResult?.query?.id}
-          <span className="ml-2">Team: {distributorsResult?.query?.team.id}</span>
-          <span className="ml-2">Shard: {distributorsResult?.query?.shard}</span>
-          <span className="ml-2">Created At: <FormattedDate style={``} dateString={distributorsResult?.query.created_at} /></span>
+        <div className="grid grid-cols-2 gap-2">
+          <DataInfo header='ID' data={distributorsResult?.distributed_id} />
+          <DataInfo header='Script Status' data={distributorsResult?.status} />
+          <DataInfo header='Script Query ID' data={distributorsResult?.query.id} />
+          <DataInfo header='Created At' data={distributorsResult?.query?.created_at} />
+          <DataInfo header='Updated At' data={distributorsResult?.query?.updated_at} />
         </div>
         <div className="items-center justify-start">
           <CodeBlock language="sql" shouldWrapLongLines codeBidiWarningTooltipEnabled i18nIsDynamicList={true} showLineNumbers={false} text={distributorsResult?.query?.sql!} />

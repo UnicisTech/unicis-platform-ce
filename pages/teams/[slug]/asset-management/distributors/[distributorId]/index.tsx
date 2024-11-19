@@ -38,7 +38,7 @@ const DistributorById = ({ teamFeatures, user }) => {
         teamName={slug as string}
         path={distributorId as string}
       />
-      <h3 className="text-2xl font-bold">{'Querys'}</h3>
+      <h3 className="text-2xl font-bold">{'Script'}</h3>
       <QueryTab activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {activeTab === 'Overview' &&
