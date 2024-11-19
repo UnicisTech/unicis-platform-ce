@@ -11,7 +11,6 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
 import { getInvitation, isInvitationExpired } from 'models/invitation';
 import { validateRecaptcha } from '@/lib/recaptcha';
-import { Team } from '@prisma/client';
 
 export default async function handler(
   req: NextApiRequest,
@@ -50,7 +49,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     recaptchaToken,
   } = req.body;
   const name = `${firstName} ${lastName}`;
-  let teamData = {} as Team;
+  let teamData;
   await validateRecaptcha(recaptchaToken);
 
   const invitation = inviteToken

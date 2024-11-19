@@ -12,7 +12,7 @@ import * as Yup from 'yup';
 import Modal from '../shared/Modal';
 import { InputWithLabel } from '../shared';
 import { useCreateFleetTeam } from '@/hooks/fleets';
-import { deleteTeam } from '@/models/team';
+// import { deleteTeam } from '@/models/team';
 
 interface CreateTeamProps {
   visible: boolean;
@@ -48,7 +48,9 @@ const CreateTeam = ({ visible, setVisible }: CreateTeamProps) => {
       }
 
       await createFleetTeam(json.data.name, json.data.id)
-        .then(team => { }).catch(async (err) => {await deleteTeam({id: json.data.id})})
+        .then(team => { }).catch(async (err) => {
+          // await deleteTeam({ id: json.data.id })
+        })
 
       formik.resetForm();
       mutateTeams();

@@ -15,7 +15,7 @@ import GoogleReCAPTCHA from '../shared/GoogleReCAPTCHA';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useCreateFleetAccount, useCreateFleetTeam } from '@/hooks/fleets';
 import { deleteUser } from '@/models/user';
-import { deleteTeam } from '@/models/team';
+// import { deleteTeam } from '@/models/team';
 
 
 interface JoinProps {
@@ -69,7 +69,9 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
         await createFleetAccount(json.data.id, json.data.email, json.data.firstName, json.data.lastName, values.password)
           .then(async () => {
             await createFleetTeam(json.data.team.name, json.data.team.id)
-              .then(team => { }).catch(async (err) => { await deleteTeam({ id: json.data.id }) })
+              .then(team => { }).catch(async (err) => {
+                // await deleteTeam({ id: json.data.id })
+              })
         });
       } catch (error) {
         await deleteUser({ id: json.data.id })
