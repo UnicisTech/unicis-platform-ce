@@ -25,11 +25,11 @@ const DeleteQuery = ({
 
   const formik = useFormik({
     initialValues: {
-      name: '',
+      confirm: '',
     },
     onSubmit: async (values) => {
 
-      if (values.name.toLowerCase() === 'DELETE QUERY'.toLowerCase()) {
+      if (values.confirm.toLowerCase() === 'DELETE'.toLowerCase()) {
         await deleteQuery(fleetTeamId, queryId)
         toast.loading(t('Delete Query'));
         mutateQueries();
@@ -45,26 +45,26 @@ const DeleteQuery = ({
   return (
     <Modal open={visible}>
       <form onSubmit={formik.handleSubmit} method="DELETE">
-        <Modal.Header className="font-bold">{`Delete query`}</Modal.Header>
+        <Modal.Header className="font-bold">{`Confirm Permanent Query Delete?`}</Modal.Header>
         <Modal.Body>
           <div className="mt-2 flex flex-col space-y-4">
-            <p>{t('fleet-delete-pack-warning')}</p>
-            <p className='text-gray-300 text-xs'>This is the confirm text <span className='text-orange-400'>DELETE QUERY</span></p>
+            <p className='text-xs'>{t('query')}: <span className='text-orange-400'>{queryId}</span></p>
+            <p>{t('fleet-delete-warning')}</p>
           </div>
           <InputWithLabel
             type="text"
-            label={t('Confirm')}
-            name="name"
+            label={t('confirm')}
+            name="confirm"
             placeholder={t('Enter confirmation text')}
-            value={formik.values.name}
+            value={formik.values.confirm}
             error={
-              formik.touched.name
-                ? formik.errors.name
+              formik.touched.confirm
+                ? formik.errors.confirm
                 : undefined
             } 
             onChange={formik.handleChange}
           />
-          <span className='text-xs'>{t('fleet-delete-pack-description')}</span>
+          <span className='text-xs'>{t('fleet-delete-description')}</span>
         </Modal.Body>
         <Modal.Actions>
           <Button

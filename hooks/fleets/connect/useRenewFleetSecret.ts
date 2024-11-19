@@ -5,7 +5,7 @@ export const useRenewFleetSecret = () => {
   const renewFleetSecret = async (fleetTeamId: string) => {
     const response = await fleetV1(`/fleet/teams/${fleetTeamId}/secret/renew`, {
       method: 'POST',
-      headers: fleetAuthAPIHeaders(),
+      headers: await fleetAuthAPIHeaders(),
     });
 
     if (!response.ok) {

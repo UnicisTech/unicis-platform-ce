@@ -7,7 +7,7 @@ export const useUpdateTag = () => {
     try {
       const response = await fleetV1(`/manager/${fleetTeamId}/tag/${tagID}/update`, {
         method: 'PUT',
-        headers: fleetAuthAPIHeaders(),
+        headers: await fleetAuthAPIHeaders(),
         body: JSON.stringify(data),
       });
 

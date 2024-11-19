@@ -5,6 +5,7 @@ import { recordMetric } from '@/lib/metrics';
 import { ApiError } from '@/lib/errors';
 import env from '@/lib/env';
 import { getUser } from 'models/user';
+import { getAccount } from '@/models/account';
 
 export default async function handler(
   req: NextApiRequest,

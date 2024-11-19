@@ -15,8 +15,8 @@ export const useGetDistributedIdResult = (teamId: string, distributorId: string,
 
       try {
         const response = await fleetV1(`/manager/${teamId}/queries/distributed/${distributorId}/results/delete/${resultId}`, {
-          method: 'GET',
-          headers: fleetAuthAPIHeaders(),
+          method: 'DELETE',
+          headers: await fleetAuthAPIHeaders(),
         });
 
         if (!response.ok) {

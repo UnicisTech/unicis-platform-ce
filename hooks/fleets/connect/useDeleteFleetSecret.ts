@@ -6,7 +6,7 @@ export const useDeleteFleetSecret = () => {
     try {
       const response = await fleetV1(`/fleet/teams/${teamId}/secret`, {
         method: 'DELETE',
-        headers: fleetAuthAPIHeaders(),
+        headers: await fleetAuthAPIHeaders(),
       });
 
       if (!response.ok) {

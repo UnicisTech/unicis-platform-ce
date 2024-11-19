@@ -53,20 +53,6 @@ export const deleteUser = async (key: { id: string } | { email: string }) => {
   });
 };
 
-export const updateUserFleet = async (
-  key: { id: string } | { email: string },
-  data: {
-    fleetId: string;
-    fleetPhrase: string;
-  }
-) => {
-  const { fleetId, fleetPhrase } = data;
-
-  return await prisma.user.update({
-    where: key,
-    data: { fleetId, fleetAccessPhrase: fleetPhrase },
-  });
-};
 
 export const isAllowed = (role: Role, resource: Resource, action: Action) => {
   const rolePermissions = permissions[role];

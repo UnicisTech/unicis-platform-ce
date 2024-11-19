@@ -13,13 +13,13 @@ import { TeamTab } from '@/components/team';
 const AssetManagement = ({ teamFeatures, team, user }) => {
   const router = useRouter();
   const { slug } = router.query;
-  
+
   return (
     <>
       <TeamTab activeTab="asset-management" team={team} teamFeatures={teamFeatures} />
       <AssetTab activeTab="fleet" team={team} teamFeatures={teamFeatures} />
       <div className="space-y-6">
-        <FleetContainer user={user} team={team}/>
+        <FleetContainer user={user} team={team} />
       </div>
     </>
   );

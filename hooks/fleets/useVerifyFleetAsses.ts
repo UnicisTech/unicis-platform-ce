@@ -16,7 +16,7 @@ export const useVerifyFleetAsses = () => {
       try {
         const response = await fleetV1(`/account/access/verify`, {
           method: 'GET',
-          headers: fleetAuthAPIHeaders(),
+          headers: await fleetAuthAPIHeaders(),
         });
 
         if (!response.ok) {

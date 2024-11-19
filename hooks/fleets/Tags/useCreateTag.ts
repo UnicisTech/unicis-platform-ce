@@ -7,7 +7,7 @@ export const useCreateTag = () => {
     try {
       const response = await fleetV1(`/manager/${fleetTeamId}/tag/add`, {
         method: 'POST',
-        headers: fleetAuthAPIHeaders(),
+        headers: await fleetAuthAPIHeaders(),
         body: JSON.stringify(data),
       });
 

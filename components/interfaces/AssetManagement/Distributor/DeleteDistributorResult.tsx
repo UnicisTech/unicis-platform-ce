@@ -24,11 +24,11 @@ const DeleteDistributors = ({
 
   const formik = useFormik({
     initialValues: {
-      name: '',
+      confirm: '',
     },
     onSubmit: async (values) => {
 
-      if (values.name === 'DELETE DISTRIBUTOR') {
+      if (values.confirm.toLowerCase() === 'DELETE'.toLowerCase()) {
         toast.loading(t('deleted'));
         await deleteDistributor(fleetTeamId, distributorId);
         formik.resetForm();
@@ -44,26 +44,26 @@ const DeleteDistributors = ({
   return (
     <Modal open={visible}>
       <form onSubmit={formik.handleSubmit} method="DELETE">
-        <Modal.Header className="font-bold">{`Delete distributor`}</Modal.Header>
+        <Modal.Header className="font-bold">{`Confirm Permanent Script Delete?`}</Modal.Header>
         <Modal.Body>
           <div className="mt-2 flex flex-col space-y-4">
-            <p>{t('fleet-delete-pack-warning')}</p>
-            <p className='text-gray-300 text-xs'>This is the confirm text <span className='text-orange-400'>DELETE DISTRIBUTOR</span></p>
+            <p className='text-xs'>{t('script')}: <span className='text-orange-400'>{distributorId}</span></p>
+            <p>{t('fleet-delete-warning')}</p>
           </div>
           <InputWithLabel
             type="text"
-            label={t('Confirm')}
-            name="name"
+            label={t('confirm')}
+            name="confirm"
             placeholder={t('Enter confirmation text')}
-            value={formik.values.name}
+            value={formik.values.confirm}
             error={
-              formik.touched.name
-                ? formik.errors.name
+              formik.touched.confirm
+                ? formik.errors.confirm
                 : undefined
             } 
             onChange={formik.handleChange}
           />
-          <span className='text-xs'>{t('fleet-delete-distributor-description')}</span>
+          <span className='text-xs'>{t('fleet-delete-description')}</span>
         </Modal.Body>
         <Modal.Actions>
           <Button

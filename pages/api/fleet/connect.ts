@@ -39,10 +39,5 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     where: { id: session?.user.id },
   });
 
-  await prisma.user.update({
-    where: { id: session?.user.id },
-    data: { fleetAccessPhrase: fleetAccessPhrase, fleetId: fleetId },
-  });
-
   res.status(200).json({ data: user });
 };

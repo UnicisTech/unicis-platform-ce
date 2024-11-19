@@ -16,7 +16,7 @@ export const useGetQueryId = (teamId: string, queryId: string) => {
       try {
         const response = await fleetV1(`/manager/${teamId}/query/${queryId}`, {
           method: 'GET',
-          headers: fleetAuthAPIHeaders(),
+          headers: await fleetAuthAPIHeaders(),
         });
 
         if (!response.ok) {

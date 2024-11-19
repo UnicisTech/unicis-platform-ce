@@ -6,7 +6,7 @@ export const useDeletePack = () => {
     try {
       const response = await fleetV1(`/manager/${fleetTeamId}/pack/${packId}/delete`, {
         method: 'DELETE',
-        headers: fleetAuthAPIHeaders(),
+        headers: await fleetAuthAPIHeaders(),
       });
 
       if (!response.ok) {

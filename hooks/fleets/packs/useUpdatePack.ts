@@ -7,7 +7,7 @@ export const useUpdatePack = () => {
     try {
       const response = await fleetV1(`/manager/${fleetTeamId}/pack/${packId}/update`, {
         method: 'PUT',
-        headers: fleetAuthAPIHeaders(),
+        headers: await fleetAuthAPIHeaders(),
         body: JSON.stringify(data),
       });
 

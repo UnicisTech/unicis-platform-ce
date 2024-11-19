@@ -4,7 +4,7 @@ import { fleetV1 } from "./apiBase";
 const fleetFetcher = async (url: string) => {
   const response = await fleetV1(url, {
           method: 'GET',
-          headers: fleetAuthAPIHeaders(),
+          headers: await fleetAuthAPIHeaders(),
         });
   const json = await response.json();
 

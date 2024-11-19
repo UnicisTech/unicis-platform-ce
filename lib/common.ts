@@ -1,6 +1,7 @@
 import { enc, lib } from 'crypto-js';
-import Cookies from 'js-cookie';
 import type { NextApiRequest } from 'next';
+import { getSession, getCsrfToken } from 'next-auth/react';
+import Cookies from 'js-cookie';
 
 export const createRandomString = (length = 6) => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -89,15 +90,14 @@ export const defaultHeaders = {
   'Content-Type': 'application/json',
 };
 
-export const fleetAuthAPIHeaders = () => {
-  const userSecret = Cookies.get('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA'); // Dont change 
-
+export const fleetAuthAPIHeaders = async () => {
+  const csrfToken = await getCsrfToken();
+  const session = await getSession();
+  const token = Cookies.get('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA');
+ 
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
-  }
-
-  if (userSecret) {
-    headers['Unicis-Fleet-API-Key'] = userSecret;
+    'Unicis-Fleet-API-Authorization': `UnicisBearer ${token}`,
   }
 
   return headers;

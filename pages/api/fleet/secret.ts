@@ -40,10 +40,6 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     where: { id: teamId },
   });
 
-  await prisma.team.update({
-    where: { id: teamId },
-    data: { fleetSecret: secret, fleetTeamId: fleetTeamId },
-  });
 
   res.status(200).json({ data: team });
 };

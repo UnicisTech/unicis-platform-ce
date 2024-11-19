@@ -4,12 +4,12 @@ import { LoginResponse } from "@/types";
 import { useCallback } from "react";
 
 export const useAccessFleetAccount = () => {
-  const accessFleetAccount = useCallback(async (id: string, email: string, password: string, expiration: string): Promise<LoginResponse> => {
+  const accessFleetAccount = useCallback(async (email: string, password: string): Promise<LoginResponse> => {
 
     const response = await fleetV1(`/account/access`, {
       method: 'POST',
       headers: defaultHeaders,
-      body: JSON.stringify({ id, email, password, expiration }),
+      body: JSON.stringify({email, password}),
     });
 
     if (!response.ok) {

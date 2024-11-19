@@ -50,7 +50,7 @@ const NodesSelector: React.FC<AssetsSelectorProps> = ({ fleetTeamId, onSelect, s
   return (
     <WithoutRing>
       {nodes.length === 0 ? (
-        <p>No nodes found</p>
+        <p>No assets found</p>
       ) : (
        <Select
         inputId="multi-select-assets"

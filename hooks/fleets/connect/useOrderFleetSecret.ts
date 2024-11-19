@@ -5,7 +5,7 @@ export const useOrderFleetSecret = () => {
   const orderFleetSecret = async (fleetTeamId: string) => {
     const response = await fleetV1(`/fleet/teams/${fleetTeamId}/secret`, {
       method: 'POST',
-      headers: fleetAuthAPIHeaders(),
+      headers: await fleetAuthAPIHeaders(),
     });
 
     if (!response.ok) {

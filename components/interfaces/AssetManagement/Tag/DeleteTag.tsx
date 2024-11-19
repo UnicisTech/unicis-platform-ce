@@ -2,7 +2,6 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { Modal, Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
-import useTasks from 'hooks/useTasks';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import { InputWithLabel } from '@/components/shared';
@@ -20,8 +19,6 @@ const DeleteTag = ({
   setVisible: (visible: boolean) => void;
   fleetTeamId: string;
 }) => {
-  const router = useRouter();
-  const { slug } = router.query;
   const { t } = useTranslation('common');
 
   const deleteTag = useDeleteTag();
@@ -29,11 +26,11 @@ const DeleteTag = ({
 
   const formik = useFormik({
     initialValues: {
-      name: '',
+      confirm: '',
     },
     onSubmit: async (values) => {
 
-      if (values.name === 'DELETE TAG') {
+      if (values.confirm.toLowerCase() === 'DELETE'.toLowerCase()) {
         await deleteTag(fleetTeamId, tagId)
         toast.loading(t('Delete Tag'));
         mutateTags();
@@ -49,26 +46,26 @@ const DeleteTag = ({
   return (
     <Modal open={visible}>
       <form onSubmit={formik.handleSubmit} method="DELETE">
-        <Modal.Header className="font-bold">{`Delete tag`}</Modal.Header>
+        <Modal.Header className="font-bold">{`Confirm Permanent Tag Delete?`}</Modal.Header>
         <Modal.Body>
           <div className="mt-2 flex flex-col space-y-4">
-            <p>{t('fleet-delete-tag-warning')}</p>
-            <p className='text-gray-300 text-xs'>This is the confirm text <span className='text-orange-400'>DELETE TAG</span></p>
+            <p className='text-xs'>{t('tag')}: <span className='text-orange-400'>{tagId}</span></p>
+            <p>{t('fleet-delete-warning')}</p>
           </div>
           <InputWithLabel
             type="text"
-            label={t('Confirm')}
-            name="name"
+            label={t('confirm')}
+            name="confirm"
             placeholder={t('Enter confirmation text')}
-            value={formik.values.name}
+            value={formik.values.confirm}
             error={
-              formik.touched.name
-                ? formik.errors.name
+              formik.touched.confirm
+                ? formik.errors.confirm
                 : undefined
             } 
             onChange={formik.handleChange}
           />
-          <span className='text-xs'>{t('fleet-delete-tag-description')}</span>
+          <span className='text-xs'>{t('fleet-delete-description')}</span>
         </Modal.Body>
         <Modal.Actions>
           <Button

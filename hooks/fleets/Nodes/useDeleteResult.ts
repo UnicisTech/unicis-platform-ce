@@ -6,7 +6,7 @@ export const useDeleteAssetResultLog = () => {
     try {
       const response = await fleetV1(`/manager/${fleetTeamId}/node/${nodeId}/delete/result/${resultId}`, {
         method: 'DELETE',
-        headers: fleetAuthAPIHeaders(),
+        headers: await fleetAuthAPIHeaders(),
       });
 
       if (!response.ok) {

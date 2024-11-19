@@ -74,7 +74,7 @@ const FleetConnectRequired = ({ user, children }: FleetConnectRequiredProps) => 
 
             try {
                 await createFleetAccount(values.id, values.email, values.firstName, values.lastName, values.fleetPassword);
-                const { user, fleet_access } = await accessFleetAccount(values.id, values.email, values.fleetPassword, values.expiresOn);
+                const { user, fleet_access } = await accessFleetAccount(values.email, values.fleetPassword);
                 Cookies.set('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA', fleet_access.secret_key, {
                     sameSite: 'strict',   // Prevents cross-site requests from sending this cookie
                 });

@@ -53,47 +53,43 @@ const SettingsFleet = ({
   });
 
   return (
-    <FleetConnectRequired user={user}>
-      {({ isAuthenticated, hasRole, logout }) => (
-        <form onSubmit={formik.handleSubmit}>
-          <Card>
-            <Card.Body>
-              <Card.Header>
-                <Card.Title>{t('fleet-settings')}</Card.Title>
-                <Card.Description>{t('fleet-settings-description')}</Card.Description>
-              </Card.Header>
-              <div className="flex flex-col space-y-3">
-              
-                {isAuthenticated &&
-                  <>
-                    <FleetStatus status='connected'/>
-                  </>
-                }
-              </div>
-            </Card.Body>
-            <Card.Footer>
-              {isAuthenticated &&
-                <Button
-                  type="button"
-                  size="md"
-                  onClick={() => { logout() }}
-                >
-                  {t('disconnect')}
-                </Button>
-              }
-              {isAuthenticated &&
-                <Button
-                  type="submit"
-                  size="md"
-                >
-                  {t('save')}
-                </Button>
-              }
-            </Card.Footer>
-          </Card>
-        </form>
-      )}
-    </FleetConnectRequired>
+    <form onSubmit={formik.handleSubmit}>
+      <Card>
+        <Card.Body>
+          <Card.Header>
+            <Card.Title>{t('fleet-settings')}</Card.Title>
+            <Card.Description>{t('fleet-settings-description')}</Card.Description>
+          </Card.Header>
+          <div className="flex flex-col space-y-3">
+
+            {user &&
+              <>
+                <FleetStatus status='connected' />
+              </>
+            }
+          </div>
+        </Card.Body>
+        <Card.Footer>
+          {user &&
+            <Button
+              type="button"
+              size="md"
+              onClick={() => { }}
+            >
+              {t('disconnect')}
+            </Button>
+          }
+          {user &&
+            <Button
+              type="submit"
+              size="md"
+            >
+              {t('save')}
+            </Button>
+          }
+        </Card.Footer>
+      </Card>
+    </form>
   );
 };
 

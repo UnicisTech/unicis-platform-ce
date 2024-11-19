@@ -2,7 +2,6 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { Modal, Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
-import useTasks from 'hooks/useTasks';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import { useDeletePack } from '@/hooks/fleets/packs/useDeletePack';
@@ -20,8 +19,6 @@ const DeletePack = ({
   setVisible: (visible: boolean) => void;
   fleetTeamId: string;
 }) => {
-  const router = useRouter();
-  const { slug } = router.query;
   const { t } = useTranslation('common');
 
   const deletePack = useDeletePack();
@@ -29,11 +26,11 @@ const DeletePack = ({
 
   const formik = useFormik({
     initialValues: {
-      name: '',
+      confirm: '',
     },
     onSubmit: async (values) => {
 
-      if (values.name === 'DELETE PACK') {
+      if (values.confirm.toLowerCase() === 'DELETE'.toLowerCase()) {
         await deletePack(fleetTeamId, packId)
         toast.loading(t('Delete Pack'));
         mutatePacks();
@@ -49,21 +46,21 @@ const DeletePack = ({
   return (
     <Modal open={visible}>
       <form onSubmit={formik.handleSubmit} method="DELETE">
-        <Modal.Header className="font-bold">{`Delete pack`}</Modal.Header>
+        <Modal.Header className="font-bold">{`Confirm Permanent Package Delete?`}</Modal.Header>
         <Modal.Body>
           <div className="mt-2 flex flex-col space-y-4">
-            <p>{t('fleet-delete-pack-warning')}</p>
-            <p className='text-gray-300 text-xs'>This is the confirm text <span className='text-orange-400'>DELETE PACK</span></p>
+            <p className='text-xs'>{t('package')}: <span className='text-orange-400'>{packId}</span></p>
+            <p>{t('fleet-delete-warning')}</p>
           </div>
           <InputWithLabel
             type="text"
             label={t('Confirm')}
-            name="name"
+            name="confirm"
             placeholder={t('Enter confirmation text')}
-            value={formik.values.name}
+            value={formik.values.confirm}
             error={
-              formik.touched.name
-                ? formik.errors.name
+              formik.touched.confirm
+                ? formik.errors.confirm
                 : undefined
             } 
             onChange={formik.handleChange}

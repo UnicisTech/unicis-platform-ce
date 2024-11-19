@@ -7,7 +7,7 @@ export const useCreatePack = () => {
     try {
       const response = await fleetV1(`/manager/${fleetTeamId}/pack/add`, {
         method: 'POST',
-        headers: fleetAuthAPIHeaders(),
+        headers: await fleetAuthAPIHeaders(),
         body: JSON.stringify(data),
       });
 

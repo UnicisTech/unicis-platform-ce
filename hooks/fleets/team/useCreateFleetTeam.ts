@@ -8,7 +8,7 @@ export const useCreateFleetTeam = () => {
   const createFleetTeam = useCallback(async (name: string, id: string): Promise<FleetTeamResponse> => {
     const response = await fleetV1(`/team/create`, {
       method: 'POST',
-      headers: fleetAuthAPIHeaders(),
+      headers: await fleetAuthAPIHeaders(),
       body: JSON.stringify({ name, id }),
     });
 

@@ -8,7 +8,7 @@ export const useDeleteDistributedResult = () => {
       try {
         const response = await fleetV1(`/manager/${teamId}/queries/distributed/${distributorId}/results/delete/${resultId}`, {
           method: 'DELETE',
-          headers: fleetAuthAPIHeaders(),
+          headers: await fleetAuthAPIHeaders(),
         });
 
         if (!response.ok) {

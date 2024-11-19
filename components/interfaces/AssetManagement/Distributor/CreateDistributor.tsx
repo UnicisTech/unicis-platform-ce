@@ -18,7 +18,6 @@ import { useDistributors } from '@/hooks/fleets/distributors/useDistributors';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
-
 interface FormData {
   sql: string;
   not_before: string;
@@ -33,7 +32,6 @@ interface Option {
   value: string;
 }
 
-const DEFAULT_PLATFORM_VALUE = 'all';
 
 const CreateDistributors = ({
   visible,
@@ -56,12 +54,12 @@ const CreateDistributors = ({
   const { mutateDistributorsTasks } = useDistributors(fleetTeamId);
   
   const handleNodeSelection = (nodeKeys: string[]) => {
-    console.log("Selected Node Keys:", nodeKeys);
+    console.log("Selected Asset Keys:", nodeKeys);
   };
 
   return (
     <Modal open={visible}>
-      <Modal.Header className="font-bold">Create Distributor</Modal.Header>
+      <Modal.Header className="font-bold">Create Script</Modal.Header>
       <Form<FormData>
         onSubmit={async (data, { reset }) => {
             const { description, interval, sql, tags, not_before } = data;
@@ -112,7 +110,7 @@ const CreateDistributors = ({
                   )}
                 </Field>
                 
-                <Field label="Assign Nodes" name="nodes">
+                <Field label="Assign Assets" name="nodes">
                   {({ fieldProps }: any) => (
                     <Fragment>
                       <NodesSelector fleetTeamId={fleetTeamId} setSectionNode={setSelectedNodes} onSelect={handleNodeSelection} />
@@ -140,6 +138,7 @@ const CreateDistributors = ({
                         dateFormat="YYYY-MM-DD"
                         timeFormat="HH:mm:ss"
                         timeIsEditable={true}
+                        locale="en-GB"
                         {...fieldProps}
                       />
                     </Fragment>

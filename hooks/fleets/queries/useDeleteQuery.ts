@@ -6,7 +6,7 @@ export const useDeleteQuery = () => {
     try {
       const response = await fleetV1(`/manager/${fleetTeamId}/query/${queryId}/delete`, {
         method: 'DELETE',
-        headers: fleetAuthAPIHeaders(),
+        headers: await fleetAuthAPIHeaders(),
       });
 
       if (!response.ok) {

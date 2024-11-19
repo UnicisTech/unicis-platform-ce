@@ -7,7 +7,7 @@ export const useCreateDistributors = () => {
       try {
         const response = await fleetV1(`/manager/${teamId}/queries/distributed/add`, {
           method: 'POST',
-          headers: fleetAuthAPIHeaders(),
+          headers: await fleetAuthAPIHeaders(),
           body: JSON.stringify(body),
         });
 

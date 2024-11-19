@@ -7,7 +7,7 @@ export const useCreateQuery = () => {
     try {
       const response = await fleetV1(`/manager/${fleetTeamId}/query/add`, {
         method: 'POST',
-        headers: fleetAuthAPIHeaders(),
+        headers: await fleetAuthAPIHeaders(),
         body: JSON.stringify(data),
       });
 

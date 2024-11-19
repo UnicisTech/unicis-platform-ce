@@ -13,6 +13,8 @@ import TogglePasswordVisibility from '../shared/TogglePasswordVisibility';
 import AgreeMessage from './AgreeMessage';
 import GoogleReCAPTCHA from '../shared/GoogleReCAPTCHA';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { useCreateFleetAccount } from '@/hooks/fleets';
+import { deleteUser } from '@/models/user';
 
 
 interface JoinProps {
@@ -25,6 +27,8 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string>('');
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  const createFleetAccount = useCreateFleetAccount();
 
   const handlePasswordVisibility = () => {
     setIsPasswordVisible((prev) => !prev);
@@ -57,8 +61,14 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
 
       const json = (await response.json()) as ApiResponse<
         User & { confirmEmail: boolean }
-        >;
-      
+      >;
+
+      try {
+        await createFleetAccount(json.data.id, json.data.email, json.data.firstName, json.data.lastName, values.password);
+      } catch (error) {
+        await deleteUser({ id: json.data.id })
+      }
+
       recaptchaRef.current?.reset();
 
       if (!response.ok) {

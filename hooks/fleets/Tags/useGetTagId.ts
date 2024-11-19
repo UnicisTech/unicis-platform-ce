@@ -16,7 +16,7 @@ export const useGetTagId = (teamId: string, tagId: string) => {
       try {
         const response = await fleetV1(`/manager/${teamId}/tag/${tagId}`, {
           method: 'GET',
-          headers: fleetAuthAPIHeaders(),
+          headers: await fleetAuthAPIHeaders(),
         });
 
         if (!response.ok) {

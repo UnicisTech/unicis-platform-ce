@@ -179,11 +179,7 @@ const Nodes = ({
                             <div className="grid grid-cols-1 gap-1 font-bold justify-start">
                               <div className="rounded-xs">
                                 <div className=''>
-                                  {node.is_active ?
-                                    <div className='w-4 h-4 rounded-full bg-green-500'></div>
-                                    :
-                                    <div className='w-4 h-4 rounded-full bg-red-500'></div>
-                                  }
+                                  {node.is_active ? '🟢 Active' : '🔴 Inactive'}
                                 </div>
                               </div>
                             </div>

@@ -16,6 +16,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import { isAuthProviderEnabled } from '@/lib/auth';
 import type { Provider } from 'next-auth/providers';
 import { validateRecaptcha } from '@/lib/recaptcha';
+import Cookies from 'js-cookie';
 
 const adapter = PrismaAdapter(prisma);
 
@@ -186,20 +187,32 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
 
-    async session({ session, token }) {
-      if (token && session) {
-        session.user.id = token.sub as string;
-      }
-
-      return session;
-    },
-
-    async jwt({ token, user, trigger, session }) {
+    async jwt({ token, user, trigger, session, account }) {
       if (trigger === 'update' && session?.user.name) {
         const updateUsername = { ...user, name: session.user.name };
         return { ...token, ...updateUsername };
       }
+
+      if (user) {
+        token.sub = user.id; // Dont remove I used this to sync auth with fleet api 
+      }
+
+      if (account && account.access_token) {
+        token.accessToken = account.access_token
+      }
+
+      Cookies.set('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA', account?.access_token);
+
       return { ...token, ...user };
+    },
+
+    async session({ session, token }) {
+      if (token && session) {
+        session.token = token.accessToken || 'fffffff';
+        session.user.id = token.sub as string;
+      }
+
+      return { ...session, token: token };
     },
   },
 };

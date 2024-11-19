@@ -16,7 +16,7 @@ export const useGetPackId = (teamId: string, packId: string) => {
       try {
         const response = await fleetV1(`/manager/${teamId}/pack/${packId}`, {
           method: 'GET',
-          headers: fleetAuthAPIHeaders(),
+          headers: await fleetAuthAPIHeaders(),
         });
 
         if (!response.ok) {

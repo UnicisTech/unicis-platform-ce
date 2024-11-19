@@ -1,7 +1,6 @@
 import { Fragment, useCallback, useState } from 'react';
 import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import { Error, Loading } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
 import type { User } from '@prisma/client';
@@ -14,7 +13,6 @@ import TextField from '@atlaskit/textfield';
 import { useUpdatePack } from '@/hooks/fleets/packs/useUpdatePack';
 import toast from 'react-hot-toast';
 import DeletePack from './DeletePack';
-import ReactQuill from 'react-quill';
 import FleetConnectRequired from '../FleetConnectRequired';
 
 interface FormData {
@@ -50,13 +48,13 @@ const PackDetails = ({ fleetTeamId, packID, user }: { fleetTeamId: string, user:
     return <Loading />;
   }
 
-  // if (isError) {
-  //   return (
-  //     <>
-  //       <Error />
-  //     </>
-  //   );
-  // }
+  if (isError) {
+    return (
+      <>
+        <Error />
+      </>
+    );
+  }
 
   const openDeleteModal = async (id: string) => {
     setPackToDelete(id);

@@ -6,7 +6,7 @@ export const useDeleteTag = () => {
     try {
       const response = await fleetV1(`/manager/${fleetTeamId}/tag/${tagId}/delete`, {
         method: 'DELETE',
-        headers: fleetAuthAPIHeaders(),
+        headers: await fleetAuthAPIHeaders(),
       });
 
       if (!response.ok) {

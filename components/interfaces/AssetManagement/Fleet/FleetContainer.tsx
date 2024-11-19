@@ -4,8 +4,6 @@ import { useTranslation } from 'next-i18next';
 import type { Team, User } from '@prisma/client';
 import FleetSecret from './FleetSecret';
 import { useState } from 'react';
-import FleetConnectRequired from '../FleetConnectRequired';
-import Button from '@atlaskit/button';
 
 
 const FleetContainer = (
@@ -28,27 +26,21 @@ const FleetContainer = (
   };
 
   return (
-    <FleetConnectRequired user={user}>
-      {({ isAuthenticated, hasRole, logout }) => (
-        <>
-          <button
-            type="button"
-            className="flex gap-2"
-            onClick={togglePasswordVisibility}
-          >
-            Safe Sensitives
-            {isSafe ? (
-              <EyeSlashIcon className="h-5 w-5 text-gray-500" />
-            ) : (
-              <EyeIcon className="h-5 w-5 text-gray-500" />
-            )}
-          </button>
-          <FleetSecret user={user} team={team} safe={isSafe} />
-          {/* <FleetTools fleetTeam={fleetTeam}/>
-      <FleetHelper team={team} safe={isSafe} /> */}
-        </>
-      )}
-    </FleetConnectRequired>
+    <>
+      <button
+        type="button"
+        className="flex gap-2"
+        onClick={togglePasswordVisibility}
+      >
+        Safe Sensitives
+        {isSafe ? (
+          <EyeSlashIcon className="h-5 w-5 text-gray-500" />
+        ) : (
+          <EyeIcon className="h-5 w-5 text-gray-500" />
+        )}
+      </button>
+      <FleetSecret user={user} team={team} safe={isSafe} />
+    </>
   );
 };
 

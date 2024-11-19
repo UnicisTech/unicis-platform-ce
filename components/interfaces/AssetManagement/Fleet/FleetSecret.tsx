@@ -12,6 +12,7 @@ import { useOrderFleetSecret } from '@/hooks/fleets/connect/useOrderFleetSecret'
 import { useGetFleetSecret } from '@/hooks/fleets/connect/useGetFleetSecret';
 import { useDeleteFleetSecret } from '@/hooks/fleets/connect/useDeleteFleetSecret';
 import { CodeBlock } from '@atlaskit/code';
+import { getSession } from 'next-auth/react';
 
 
 const FleetSecret = (
@@ -38,6 +39,8 @@ const FleetSecret = (
   const { secret, isLoading, isError, mutateFleetSecret } = useGetFleetSecret(team.id);
 
   const handleOrderSecret = async () => {
+    const session = await getSession();
+    console.log(session)
     try {
       if (!userId) {
         throw new Error('User ID is not defined');

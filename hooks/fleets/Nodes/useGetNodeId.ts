@@ -16,7 +16,7 @@ export const useGetNodeId = (teamId: string, nodeId: string) => {
       try {
         const response = await fleetV1(`/manager/${teamId}/node/${nodeId}`, {
           method: 'GET',
-          headers: fleetAuthAPIHeaders(),
+          headers: await fleetAuthAPIHeaders(),
         });
 
         if (!response.ok) {

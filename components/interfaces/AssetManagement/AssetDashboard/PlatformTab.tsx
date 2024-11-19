@@ -1,8 +1,5 @@
 import {
-    CodeBracketIcon,
     Cog6ToothIcon,
-    TagIcon,
-    CodeBracketSquareIcon,
 } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import useCanAccess from 'hooks/useCanAccess';

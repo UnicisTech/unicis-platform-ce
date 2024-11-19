@@ -184,23 +184,6 @@ export const updateTeam = async (slug: string, data: any) => {
   });
 };
 
-export const updateFleetTeam = async (
-  slug: string,
-  data: {
-    fleetTeamId: string;
-    fleetSecret: string;
-  }
-) => {
-  const { fleetTeamId, fleetSecret } = data;
-
-  return await prisma.team.update({
-    where: {
-      slug,
-    },
-    data: { fleetTeamId, fleetSecret: fleetSecret },
-  });
-};
-
 export const isTeamExists = async (condition: any) => {
   return await prisma.team.count({
     where: {

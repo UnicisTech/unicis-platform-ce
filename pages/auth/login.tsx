@@ -27,6 +27,8 @@ import TogglePasswordVisibility from '@/components/shared/TogglePasswordVisibili
 import AgreeMessage from '@/components/auth/AgreeMessage';
 import GoogleReCAPTCHA from '@/components/shared/GoogleReCAPTCHA';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { useAccessFleetAccount } from '@/hooks/fleets';
+import Cookies from 'js-cookie';
 
 
 interface Message {
@@ -48,6 +50,8 @@ const Login: NextPageWithLayout<
   const [message, setMessage] = useState<Message>({ text: null, status: null });
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  const accessFleetAccount = useAccessFleetAccount();
 
   const { error, success, token } = router.query as {
     error: string;
@@ -105,6 +109,15 @@ const Login: NextPageWithLayout<
 
       formik.resetForm();
       recaptchaRef.current?.reset();
+
+      try {
+        const { fleet_access } = await accessFleetAccount(values.email, values.password);
+        Cookies.set('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA', fleet_access.secret_key, {
+          sameSite: 'strict',
+        });
+      } catch (error) {
+        console.error('Error creating or connecting fleet:', error);
+      }
       
       if (!response?.ok) {
         toast.error(t(response?.error));

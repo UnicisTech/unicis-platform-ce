@@ -3,6 +3,7 @@ const env = {
   appUrl: `${process.env.APP_URL}`,
   fleetAPI: `api.fleet.unicis.tech`,
   fleetAPIUrl: `https://api.fleet.unicis.tech`,
+  // fleetAPIUrl: `http://192.168.97.144:5000`,
   product: 'unicis-platform',
   // redirectAfterSignIn: '/teams',
   redirectIfAuthenticated: '/teams',
