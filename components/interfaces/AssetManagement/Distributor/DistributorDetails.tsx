@@ -41,7 +41,6 @@ const DistributorsDetails = ({ user, distributorId, fleetTeamId }: { user: Parti
   return (
     <IssuePanelContainer>
       <div className='grid gap-2 text-black'>
-        <span className="flex items-center gap-2 bg-blue-200 rounded-badge px-2">ID: {distributorsResult?.distributed_id}</span>
         <div className="grid grid-cols-2 gap-2">
           <DataInfo header='ID' data={distributorsResult?.distributed_id} />
           <DataInfo header='Script Status' data={distributorsResult?.status} />
