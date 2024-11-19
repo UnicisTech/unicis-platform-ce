@@ -26,9 +26,9 @@ export const OSQUERY_ENTRY = ({
   const secretPath = `${filePrefix}_enroll_secret.txt`;
 
   const createSecretFile = `echo ${safe && !isCopy ? '*'.repeat(secret.length) : `'${secret}'`} > ${secretPath}`;
+  const agent = platform === 'windows' ? `osqueryd.exe` : `sudo osqueryd`
 
-  let osqueryCommand = `${createSecretFile} && sudo osqueryd \
-    --D \
+  let osqueryCommand = `${createSecretFile} && ${agent} \
     --pidfile=/tmp/${filePrefix}-osquery.pid \
     --host_identifier=uuid \
     --database_path=/tmp/${filePrefix}-osquery.db \
@@ -51,11 +51,8 @@ export const OSQUERY_ENTRY = ({
     --pack_delimiter=/ \
     --utc \
     --verbose \
-    --enroll_always \
-    --config_check \
-    --config_dump \
-    --database_dump
-  ` + `&`;
+    --enroll_always &
+  `;
 
   if (flags) {
     const flagEntries = Object.entries(flags);
