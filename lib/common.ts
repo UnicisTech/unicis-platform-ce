@@ -91,8 +91,6 @@ export const defaultHeaders = {
 };
 
 export const fleetAuthAPIHeaders = async () => {
-  const csrfToken = await getCsrfToken();
-  const session = await getSession();
   const token = Cookies.get('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA');
  
   const headers: Record<string, string> = {

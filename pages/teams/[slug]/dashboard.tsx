@@ -1,3 +1,4 @@
+import AssetsAnalysis from '@/components/interfaces/AssetManagement/AssetDashboard/AssetAnalysis';
 import {
   TeamAssessmentAnalysis,
   TeamCscAnalysis,
@@ -6,34 +7,47 @@ import {
 import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/TeamProcessingActivities';
 import { Error, Loading } from '@/components/shared';
 import env from '@/lib/env';
+import { getCurrentPlan } from '@/lib/subscriptions';
+import { isTeamHasSubscription } from '@/models/subscription';
+import { getUserBySession } from '@/models/user';
+import { Subscription, Team, User } from '@prisma/client';
 import useTeam from 'hooks/useTeam';
-import { getCscStatusesBySlug } from 'models/team';
+import { getCscStatusesBySlug, getTeam } from 'models/team';
 import { GetServerSidePropsContext } from 'next';
+import { getSession } from '@/lib/session';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useNodes } from '@/hooks/fleets/Nodes/useNodes';
 
 const TeamDashboard = ({
   csc_statuses,
   slug,
+  user,
+  team,
+  teamSubscription
 }: {
   teamFeatures: any;
+  teamSubscription: Subscription;
+  user: User;
+  team: Team;
   csc_statuses: { [key: string]: string };
   slug: string;
 }) => {
   const { t } = useTranslation('common');
-  const { isLoading: teamLoading, isError: teamError, team } = useTeam();
+  const currentPlan = getCurrentPlan(teamSubscription);
+  const { nodes, isLoading, isError } = useNodes(team.id, 'all');
 
-  if (teamLoading) {
-    return <Loading />;
-  }
+  // if (teamLoading) {
+  //   return <Loading />;
+  // }
 
-  if (teamError) {
-    return <Error message={teamError.message} />;
-  }
+  // if (teamError) {
+  //   return <Error message={teamError.message} />;
+  // }
 
-  if (!team) {
-    return <Error message={t('team-not-found')} />;
-  }
+  // if (!team) {
+  //   return <Error message={t('team-not-found')} />;
+  // }
 
   return (
     <>
@@ -43,6 +57,9 @@ const TeamDashboard = ({
         </h2>
       </div>
       <div className="space-y-6">
+        {currentPlan === 'ULTIMATE' &&
+          <AssetsAnalysis nodes={nodes} team={team} user={user} />
+        }
         <TeamTaskAnalysis slug={slug} csc_statuses={csc_statuses} />
         <div
           style={{
@@ -62,15 +79,35 @@ const TeamDashboard = ({
 };
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context.req, context.res);
   const { locale, query }: GetServerSidePropsContext = context;
   const slug = query.slug as string;
+  const user = await getUserBySession(session);
+  const team = await getTeam({ slug });
+  const teamSubscription = await isTeamHasSubscription(team.id);
+
+  if (!user) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
       teamFeatures: env.teamFeatures,
+      team: JSON.parse(JSON.stringify(team)),
+      teamSubscription: JSON.parse(JSON.stringify(teamSubscription)),
       csc_statuses: await getCscStatusesBySlug(slug),
       slug: slug,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        image: user.image,
+      },
     },
   };
 }
