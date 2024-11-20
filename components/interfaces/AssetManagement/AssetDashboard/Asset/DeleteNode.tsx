@@ -32,7 +32,7 @@ const DeleteNode = ({
     },
     onSubmit: async (values) => {
 
-      if (values.confirm === 'DELETE NODE') {
+      if (values.confirm.toLowerCase() === 'DELETE'.toLowerCase()) {
         await deleteNode(fleetTeamId, nodeId)
         toast.loading(t('Delete Node'));
         formik.resetForm();
