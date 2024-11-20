@@ -14,7 +14,7 @@ const PlatformBadge = ({ label, value }: { label: string; value: string }) => {
   return (
     <div className={`flex items-end gap-2`}>
         {Icon && (
-        <Icon className={`h-10 w-10 ${bgColor} rounded-full`} icon={`${IconsString}`} />
+        <Icon className={`h-8 w-8 rounded-full`} icon={`${IconsString}`} />
         )}
         <span className='text-lg'>{label}</span>
     </div>

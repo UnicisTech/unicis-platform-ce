@@ -24,7 +24,7 @@ const AssetCard = ({ host, total } : AssetProps) => {
 
   return (
     <div className="grid grid-cols-2 w-full rounded-sm p-4 ring-1 ring-gray-300 items-center justify-between">
-      <div className={`w-fit flex items-center justify-center rounded-full ${bgColor} p-1 ring-gray-300 ring-1`}>
+      <div className={`w-fit flex items-center justify-center rounded-full p-1 ring-gray-300 ring-1`}>
         <Icon className='h-[72px] w-[72px]' icon={`${iconString}`} />
       </div>
       <div className='flex-1 justify-between'>

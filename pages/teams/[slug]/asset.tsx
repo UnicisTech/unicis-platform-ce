@@ -6,6 +6,7 @@ import { getSession } from '@/lib/session';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { getTeam } from '@/models/team';
+import { isTeamHasSubscription } from '@/models/subscription';
 
 
 const TeamAssetDashboard = ({
@@ -13,6 +14,7 @@ const TeamAssetDashboard = ({
   user,
   team,
   teamFeatures,
+  teamSubscription
 }) => {
   const { t } = useTranslation('common');
 
@@ -24,7 +26,7 @@ const TeamAssetDashboard = ({
         </h2>
       </div>
       <div className="space-y-6">
-        <Assets user={user} team={team} />
+        <Assets user={user} team={team} teamSubscription={teamSubscription} />
       </div>
     </>
   );
@@ -36,7 +38,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const slug = query.slug as string;
   const user = await getUserBySession(session);
   const team = await getTeam({ slug });
-
+  const teamSubscription = await isTeamHasSubscription(team.id);
+  
   if (!user) {
     return {
       notFound: true,
@@ -48,6 +51,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
       teamFeatures: env.teamFeatures,
       team: JSON.parse(JSON.stringify(team)),
+      teamSubscription: JSON.parse(JSON.stringify(teamSubscription)),
       slug: slug,
       user: {
         id: user.id,
