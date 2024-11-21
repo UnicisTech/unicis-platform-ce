@@ -3,7 +3,7 @@
   "version": "0.2.1",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 0.0.0.0 --port 4002",
+    "dev": "next dev --port 4002",
     "build": "prisma generate && prisma db push && next build",
     "start": "next start --port 4002",
     "check-types": "tsc --pretty --noEmit",
