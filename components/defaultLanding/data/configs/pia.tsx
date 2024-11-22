@@ -1,5 +1,14 @@
 import { PiaConfig, RiskProbability, RiskSecurity } from "types/pia";
 
+export const headers = [
+    'Data processing and its purpose proportionality',
+    'Confidentiality and Integrity',
+    'Availability',
+    'Transparency, anonymization and data minimization',
+    'Results',
+    'Corrective measures',
+]
+
 export const fieldPropsMapping = {
     isDataProcessingNecessary: 'Is the data processing necessary',
     isDataProcessingNecessaryAssessment: 'Assessment',
