@@ -17,7 +17,7 @@ const Dashboard = ({ team }: DashboardProps) => {
     const { t } = useTranslation('common');
     const router = useRouter();
     const { slug } = router.query;
-    const { tasks } = useTeamTasks(slug as string);
+    const { tasks, mutateTasks } = useTeamTasks(slug as string);
 
     const [isCreateOpen, setIsCreateOpen] = useState(false);
 
@@ -44,7 +44,14 @@ const Dashboard = ({ team }: DashboardProps) => {
                     )}
                 </div>
             </div>
-            {isCreateOpen && tasks && <CreateRisk tasks={tasks} visible={isCreateOpen} setVisible={setIsCreateOpen}/>}
+            {isCreateOpen && tasks && 
+                <CreateRisk 
+                    tasks={tasks}
+                    mutateTasks={mutateTasks}
+                    visible={isCreateOpen} 
+                    setVisible={setIsCreateOpen}
+                />
+            }
         </>
     )
 }

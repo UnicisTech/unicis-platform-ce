@@ -5,4 +5,4 @@ export * from './csc';
 export * from './tia';
 export * from './pages';
 export * from './iap';
-// export * from './pia';
+export * from './pia';

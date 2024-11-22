@@ -1,4 +1,4 @@
-import { PiaConfig } from "types/pia";
+import { PiaConfig, RiskProbability, RiskSecurity } from "types/pia";
 
 export const fieldPropsMapping = {
     isDataProcessingNecessary: 'Is the data processing necessary',
@@ -18,6 +18,13 @@ export const fieldPropsMapping = {
     transparencyRiskProbability: 'Probability of the risk',
     transparencyRiskSecurity: 'Security of the risk',
     transparencyAssessment: 'Assessment',
+
+    guarantees: "Guarantees",
+    securityMeasures: "Security measures",
+    securityCompliance: "Compliance with security notices issued by supervisory authorities",
+    dealingWithResidualRisk: "Dealing with existing residual risk",
+    dealingWithResidualRiskAssessment: "Assessment",
+    supervisoryAuthorityInvolvement: "Involvement of the supervisory authority if the risk is unacceptable",
 };
 
 export const config: PiaConfig = {
@@ -27,13 +34,14 @@ export const config: PiaConfig = {
     ],
     isProportionalToPurpose: [
         { value: 'proportional', label: 'proportional' },
-        { value: 'not proportional', label: 'not proportional' },
+        { value: 'not_proportional', label: 'not proportional' },
     ],
     confidentialityRiskProbability: [
         { value: 'rare', label: 'Rare' },
         { value: 'unlikely', label: 'Unlikely' },
         { value: 'possible', label: 'Possible' },
         { value: 'probable', label: 'Probable' },
+        { value: 'severe', label: 'Severe' },
     ],
     confidentialityRiskSecurity: [
         { value: 'insignificant', label: <span><b>Insignificant:</b> The loss of confidentiality and integrity of personal data, where processing has minimal operational impact and negligible costs, and does not notably affect the data subject's business or finances.</span> },
@@ -47,6 +55,7 @@ export const config: PiaConfig = {
         { value: 'unlikely', label: 'Unlikely' },
         { value: 'possible', label: 'Possible' },
         { value: 'probable', label: 'Probable' },
+        { value: 'severe', label: 'Severe' },
     ],
     availabilityRiskSecurity: [
         { value: 'insignificant', label: <span><b>Insignificant:</b> The loss of availability of personal data, where processing has minimal operational impact and negligible costs, and does not notably affect the data subject's business or finances.</span> },
@@ -60,6 +69,7 @@ export const config: PiaConfig = {
         { value: 'unlikely', label: 'Unlikely' },
         { value: 'possible', label: 'Possible' },
         { value: 'probable', label: 'Probable' },
+        { value: 'severe', label: 'Severe' },
     ],
     transparencyRiskSecurity: [
         { value: 'insignificant', label: <span><b>Insignificant:</b> The loss of transparency, appropriateness, and data minimization in processing personal data, where it has minimal operational impact, negligible costs, and does not notably affect the data subject's business or finances.</span> },
@@ -67,5 +77,30 @@ export const config: PiaConfig = {
         { value: 'moderate', label: <span><b>Moderate:</b> The loss of transparency, appropriateness, and data minimization in processing personal data, where it results in substantial operational impact, is very costly, and may cause significant business or financial harm to the data subject, but without involving special categories that pose major risks to their rights.</span> },
         { value: 'major', label: <span><b>Major:</b> The loss of transparency, appropriateness, and data minimization in processing personal data, where it causes severe operational disruption, is highly damaging and extremely costly. It may involve special categories (e.g., sensitive data or criminal histories), with a potential for significant risks to the data subject's rights and freedoms.</span> },
         { value: 'extreme', label: <span><b>Extreme:</b> The loss of transparency, appropriateness, and data minimization in processing personal data, where it leads to complete operational failure, posing potential threats to life or personal freedoms, with serious impacts on the rights of data subjects.</span> }
+    ],
+    dealingWithResidualRisk: [
+        { value: "acceptable", label: "Acceptable" },
+        { value: "acceptable_with_conditions", label: "Acceptable with limitations under certain conditions" },
+        { value: "not_acceptable", label: "Not acceptable" },
+    ],
+    supervisoryAuthorityInvolvement: [
+        { value: "yes", label: "Yes" },
+        { value: "no", label: "No" },
     ]
 }
+
+export const riskProbabilityPoints: Record<RiskProbability, number> = {
+    rare: 0,
+    unlikely: 1,
+    possible: 2,
+    probable: 3,
+    severe: 5,
+};
+
+export const riskSecurityPoints: Record<RiskSecurity, number> = {
+    insignificant: 0,
+    minor: 1,
+    moderate: 2,
+    major: 3,
+    extreme: 5,
+};
