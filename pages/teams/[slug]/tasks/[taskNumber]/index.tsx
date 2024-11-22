@@ -21,6 +21,7 @@ import useISO from 'hooks/useISO';
 import { Team } from '@prisma/client';
 import { getCscStatusesBySlug } from 'models/team';
 import { CreateTIA, TiaAuditLogs, TiaPanel } from '@/components/interfaces/TIA';
+import { PiaPanel } from '@/components/interfaces/PIA'
 import Breadcrumb from '../../Breadcrumb';
 
 const TaskById = ({
@@ -140,6 +141,13 @@ const TaskById = ({
               setStatuses={setStatuses}
               ISO={ISO}
             />
+          </Card.Body>
+        </Card>
+      )}
+      {activeTab === 'Privacy Impact Assessment' && (
+        <Card heading="PIA panel">
+          <Card.Body>
+            <PiaPanel task={task}/>
           </Card.Body>
         </Card>
       )}
