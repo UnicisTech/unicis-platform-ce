@@ -19,8 +19,7 @@ const riskColors = {
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, Legend, Title, Tooltip);
 
-const RiskMatrixBubbleChart = ({datasets}: any) => {
-  console.log('RiskMatrixBubbleChart datasets', )
+const RiskMatrixBubbleChart = ({ datasets }: any) => {
   const data = {
     datasets
   };
@@ -111,13 +110,11 @@ const RiskMatrixBubbleChart = ({datasets}: any) => {
 
 
   return (
-    <div>
-      <Bubble
-        data={data}
-        options={options}
-        plugins={[backgroundPlugin]}
-      />
-    </div>
+    <Bubble
+      data={data}
+      options={options}
+      plugins={[backgroundPlugin]}
+    />
   );
 };
 

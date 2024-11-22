@@ -17,7 +17,7 @@ import Form, {
     HelperMessage,
 } from '@atlaskit/form';
 import TextArea from '@atlaskit/textarea';
-import { fieldPropsMapping, config, riskSecurityPoints, riskProbabilityPoints } from '@/components/defaultLanding/data/configs/pia';
+import { fieldPropsMapping, config, riskSecurityPoints, riskProbabilityPoints, headers } from '@/components/defaultLanding/data/configs/pia';
 import { TaskPickerFormBody } from '@/components/shared/atlaskit';
 import type { Task } from '@prisma/client';
 import RiskMatrixBubbleChart from './RiskMatrixBubbleChart';
@@ -148,7 +148,10 @@ const CreateRisk = ({ tasks, visible, setVisible, mutateTasks }: CreateRiskProps
             <Form onSubmit={onSubmit}>
                 {({ formProps }) => (
                     <form {...formProps}>
-                        <Modal.Header className="font-bold">Header</Modal.Header>
+                        <Modal.Header className="font-bold">
+                            {stage === 0 && 'Select a task'}
+                            {stage > 0 && headers[stage - 1]}
+                        </Modal.Header>
                         <Modal.Body>
                             {stage === 0 && <TaskPickerFormBody tasks={tasks} />}
                             {stage === 1 && <FirstStage risk={prevRisk} />}
@@ -396,7 +399,7 @@ const Results = ({ risk }: { risk: PiaRisk }) => {
             <RiskMatrixBubbleChart
                 datasets={[
                     {
-                        label: "Confidentiality and Integrity Risk",
+                        label: "Availability",
                         borderWidth: 1,
                         data: [{
                             x: riskSecurityPoints[risk[2].availabilityRiskSecurity],
@@ -412,7 +415,7 @@ const Results = ({ risk }: { risk: PiaRisk }) => {
             <RiskMatrixBubbleChart
                 datasets={[
                     {
-                        label: "Confidentiality and Integrity Risk",
+                        label: "Transparency, purpose limitation and data minimization",
                         borderWidth: 1,
                         data: [{
                             x: riskSecurityPoints[risk[3].transparencyRiskSecurity],
