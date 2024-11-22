@@ -2,7 +2,6 @@ import {
   LockClosedIcon,
   RectangleStackIcon,
   UserCircleIcon,
-  CommandLineIcon
 } from '@heroicons/react/24/outline';
 import { useTranslation } from 'next-i18next';
 import NavigationItems from './NavigationItems';

@@ -1,6 +1,5 @@
 import {
   Cog6ToothIcon,
-  ComputerDesktopIcon,
   CodeBracketIcon,
   ChatBubbleBottomCenterTextIcon,
 } from '@heroicons/react/24/outline';
@@ -10,6 +9,14 @@ import NavigationItems from './NavigationItems';
 import { NavigationProps, MenuItem } from './NavigationItems';
 import Icon from '../Icon';
 import useCanAccess from '@/hooks/useCanAccess';
+import { GetServerSidePropsContext } from 'next';
+import { prisma } from '@/lib/prisma';
+import useTeam from '@/hooks/useTeam';
+import { getCurrentPlan } from '@/lib/subscriptions';
+import Loading from '../Loading';
+import useHasPlan from '@/hooks/useHasPlan';
+import { useEffect, useState } from 'react';
+
 
 interface NavigationItemsProps extends NavigationProps {
   slug: string;
@@ -18,6 +25,12 @@ interface NavigationItemsProps extends NavigationProps {
 const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
+  const { hasPlan } = useHasPlan(slug);
+  const [checkedHasPlan, setCheckedHasPlan] = useState<Promise<boolean>>();
+
+  useEffect(() => {
+    setCheckedHasPlan(hasPlan('ULTIMATE'));
+  }, []);
 
   const menus: MenuItem[] = [
     {
@@ -62,7 +75,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname?.startsWith(`/teams/${slug}`) &&
         activePathname.includes('csc'),
     },
-    canAccess('asset_dashboard', ['create', 'update', 'read', 'delete']) && {
+    canAccess('asset_dashboard', ['create', 'update', 'read', 'delete']) && !checkedHasPlan && {
       name: t('Asset Management'),
       href: `/teams/${slug}/asset`,
       icon: () => <Icon src="/asset-dashboard.png" />,
@@ -107,4 +120,33 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   return <NavigationItems menus={menus} />;
 };
 
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const { query }: GetServerSidePropsContext = context;
+
+  const slug = query.slug as string;
+  const { isLoading, team } = useTeam(slug as string);
+
+  if (isLoading || !team) {
+    return <Loading />;
+  }
+
+  const subscription = async (teamId: string) => {
+    const subscription = await prisma.subscription.findUnique({
+      where: { teamId },
+    });
+    return subscription;
+  };
+  const currentPlan = await getCurrentPlan(await subscription(team.id!));
+  console.log('PLAN: ', currentPlan);
+
+  return {
+    props: {
+      currentPlan: currentPlan,
+    },
+  };
+};
+
 export default TeamNavigation;
+

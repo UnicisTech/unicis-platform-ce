@@ -1,5 +1,5 @@
+import useHasPlan from '@/hooks/useHasPlan';
 import {
-  CodeBracketIcon,
   Cog6ToothIcon,
   DocumentMagnifyingGlassIcon,
   KeyIcon,
@@ -7,13 +7,14 @@ import {
   ShieldExclamationIcon,
   UserPlusIcon,
   TagIcon,
-  CodeBracketSquareIcon,
 } from '@heroicons/react/24/outline';
-import type { Team } from '@prisma/client';
+import type { $Enums, Team } from '@prisma/client';
 import classNames from 'classnames';
 import useCanAccess from 'hooks/useCanAccess';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { TeamFeature } from 'types';
+
 
 interface TeamTabProps {
   activeTab: string;
@@ -24,6 +25,12 @@ interface TeamTabProps {
 
 const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   const { canAccess } = useCanAccess();
+  const { hasPlan } = useHasPlan(team.slug);
+  const [checkedHasPlan, setCheckedHasPlan] = useState<Promise<boolean>>();
+
+  useEffect(() => {
+    setCheckedHasPlan(hasPlan('ULTIMATE'));
+  }, []);
 
   const navigations = [
     {
@@ -110,7 +117,8 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   }
 
   if (
-    canAccess('asset_settings', ['create', 'update', 'read', 'delete'])
+    canAccess('asset_settings', ['create', 'update', 'read', 'delete']) &&
+    !checkedHasPlan
   ) {
     navigations.push({
       name: 'Asset Management',
@@ -119,7 +127,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
       icon: TagIcon,
     });
   }
-  
+
   return (
     <div className="flex flex-col pb-6">
       <h2 className="text-xl font-semibold mb-2">

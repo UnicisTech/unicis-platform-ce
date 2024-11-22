@@ -7,6 +7,7 @@ import Drawer from './Drawer';
 import GlobalTheme from '@atlaskit/theme/components';
 import { ThemeModes } from '@atlaskit/theme/types';
 
+
 export default function AppShell({ children }) {
   const { data, status } = useSession();
 
