@@ -38,7 +38,7 @@ const RiskMatrixBubbleChart = ({datasets}: any) => {
         ticks: {
           stepSize: 1,
         },
-        position: 'top'
+        position: 'bottom'
       },
       y: {
         title: {
@@ -47,7 +47,7 @@ const RiskMatrixBubbleChart = ({datasets}: any) => {
         },
         min: 0,
         max: 5,
-        reverse: true,
+        reverse: false,
         ticks: {
           stepSize: 1,
         },
@@ -112,9 +112,6 @@ const RiskMatrixBubbleChart = ({datasets}: any) => {
 
   return (
     <div>
-      {/* <div style={{ textAlign: "center", marginBottom: "10px" }}>
-        <h3>Security of the Risk</h3>
-      </div> */}
       <Bubble
         data={data}
         options={options}
