@@ -3,6 +3,7 @@ import { getToken } from 'next-auth/jwt';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+
 // Add routes that don't require authentication
 const unAuthenticatedRoutes = [
   '/api/hello',
@@ -16,8 +17,14 @@ const unAuthenticatedRoutes = [
   '/terms-condition',
 ];
 
+const ulimitedPlanRoutes = [
+  '/teams/:slug/asset/**',
+  '/teams/:slug/asset-management/**'
+];
+
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+  const patterns = ulimitedPlanRoutes.map((route) => route.replace(':slug', '*'));
 
   // Bypass routes that don't require authentication
   if (micromatch.isMatch(pathname, unAuthenticatedRoutes)) {
@@ -34,6 +41,24 @@ export default async function middleware(req: NextRequest) {
     url.searchParams.set('callbackUrl ', encodeURI(req.url));
 
     return NextResponse.redirect(url);
+  }
+
+  if (micromatch.isMatch(pathname, patterns)) {
+    const slugMatch = pathname.match(/\/teams\/([^/]+)\/(asset|asset-management)/);
+    const slug = slugMatch ? slugMatch[1] : null;
+    
+    const response = await fetch(`${req.nextUrl.origin}/api/check-plan`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token.accessToken}`,
+      },
+      body: JSON.stringify({ slug }),
+    });
+
+    if (!response.ok) {
+      return NextResponse.redirect(new URL('/upgrade', req.url));
+    }
   }
 
   // All good, let the request through
