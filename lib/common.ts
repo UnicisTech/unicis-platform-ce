@@ -2,6 +2,7 @@ import { enc, lib } from 'crypto-js';
 import type { NextApiRequest } from 'next';
 import { getSession, getCsrfToken } from 'next-auth/react';
 import Cookies from 'js-cookie';
+import useUFA from '@/hooks/useUFA';
 
 export const createRandomString = (length = 6) => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -92,10 +93,12 @@ export const defaultHeaders = {
 
 export const fleetAuthAPIHeaders = async () => {
   const token = Cookies.get('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA');
+  // const { ufa } = useUFA();
  
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
     'Unicis-Fleet-API-Authorization': `UnicisBearer ${token}`,
+    // 'Unicis-Fleet-API-UFA': `UnicisBearer ${ufa}`
   }
 
   return headers;
