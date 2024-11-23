@@ -52,13 +52,12 @@ export default async function middleware(req: NextRequest) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token.accessToken}`,
       },
       body: JSON.stringify({ slug }),
     });
 
     if (!response.ok) {
-      return NextResponse.redirect(new URL(`/${slug}/billing`, req.url));
+      return NextResponse.redirect(new URL(`/teams/${slug}/billing`, req.url));
     }
   }
 
