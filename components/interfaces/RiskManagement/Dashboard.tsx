@@ -4,6 +4,8 @@ import { useTranslation } from 'next-i18next';
 import useCanAccess from 'hooks/useCanAccess';
 import { Team } from "@prisma/client"
 import CreateRisk from "./CreateRisk";
+import useTeamTasks from "hooks/useTeamTasks";
+import { useRouter } from 'next/router';
 
 
 interface DashboardProps {
@@ -13,6 +15,9 @@ interface DashboardProps {
 const Dashboard = ({ team }: DashboardProps) => {
     const { canAccess } = useCanAccess();
     const { t } = useTranslation('common');
+    const router = useRouter();
+    const { slug } = router.query;
+    const { tasks } = useTeamTasks(slug as string);
 
 
     const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -40,7 +45,7 @@ const Dashboard = ({ team }: DashboardProps) => {
                     )}
                 </div>
             </div>
-            {isCreateOpen && <CreateRisk visible={isCreateOpen} setVisible={setIsCreateOpen}/>}
+            {isCreateOpen && tasks  && <CreateRisk tasks={tasks} visible={isCreateOpen} setVisible={setIsCreateOpen}/>}
         </>
     )
 }
