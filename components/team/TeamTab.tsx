@@ -8,11 +8,11 @@ import {
   UserPlusIcon,
   TagIcon,
 } from '@heroicons/react/24/outline';
-import type { $Enums, Team } from '@prisma/client';
+import { $Enums, Team } from '@prisma/client';
 import classNames from 'classnames';
 import useCanAccess from 'hooks/useCanAccess';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { TeamFeature } from 'types';
 
 
@@ -25,12 +25,16 @@ interface TeamTabProps {
 
 const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   const { canAccess } = useCanAccess();
-  const { hasPlan } = useHasPlan(team.slug);
-  const [checkedHasPlan, setCheckedHasPlan] = useState<Promise<boolean>>();
+  const { hasPlan, checkedHasPlan } = useHasPlan(team.slug);
 
   useEffect(() => {
-    setCheckedHasPlan(hasPlan('ULTIMATE'));
-  }, []);
+    const checkPlan = async () => {
+      const result = await hasPlan($Enums.Plan.ULTIMATE);
+      console.log("Does the team have the plan?", result);
+    };
+
+    checkPlan();
+  }, [hasPlan]);
 
   const navigations = [
     {
@@ -118,7 +122,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
 
   if (
     canAccess('asset_settings', ['create', 'update', 'read', 'delete']) &&
-    !checkedHasPlan
+    checkedHasPlan
   ) {
     navigations.push({
       name: 'Asset Management',

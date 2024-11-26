@@ -7,8 +7,6 @@ import FleetContainer from '@/components/interfaces/AssetManagement/Fleet/FleetC
 import { getTeam } from '@/models/team';
 import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import { TeamTab } from '@/components/team';
-import { isTeamHasSubscription } from '@/models/subscription';
-import { getCurrentPlan } from '@/lib/subscriptions';
 
 
 const AssetManagement = ({ teamFeatures, team, user }) => {

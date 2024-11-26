@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const currentPlan = getCurrentPlan(subscription);
       const isPlanActive = currentPlan === plan;
 
-      res.status(200).json({ hasPlan: isPlanActive });
+      res.status(200).json({ hasPlan: isPlanActive, currentPlan: currentPlan });
     } catch (error) {
       console.error("Error fetching subscription:", error);
       res.status(500).json({ error: "Internal Server Error." });

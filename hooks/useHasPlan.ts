@@ -1,8 +1,10 @@
 import { $Enums } from '@prisma/client';
 import useTeam from './useTeam';
+import { useState } from 'react';
 
 const useHasPlan = (slug: string) => {
   const { team } = useTeam(slug);
+  const [checkedHasPlan, setCheckedHasPlan] = useState<boolean>();
 
   const hasPlan = async (plan: $Enums.Plan): Promise<boolean> => {
     if (!team?.id) {
@@ -23,7 +25,7 @@ const useHasPlan = (slug: string) => {
       }
 
       const data = await response.json();
-      console.log(data);
+      setCheckedHasPlan(data.hasPlan);
       return data.hasPlan;
     } catch (error) {
       console.error("Error fetching plan:", error);
@@ -33,6 +35,7 @@ const useHasPlan = (slug: string) => {
 
   return {
     hasPlan,
+    checkedHasPlan
   };
 };
 

@@ -15,7 +15,8 @@ import useTeam from '@/hooks/useTeam';
 import { getCurrentPlan } from '@/lib/subscriptions';
 import Loading from '../Loading';
 import useHasPlan from '@/hooks/useHasPlan';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { $Enums } from '@prisma/client';
 
 
 interface NavigationItemsProps extends NavigationProps {
@@ -25,12 +26,16 @@ interface NavigationItemsProps extends NavigationProps {
 const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
-  const { hasPlan } = useHasPlan(slug);
-  const [checkedHasPlan, setCheckedHasPlan] = useState<Promise<boolean>>();
-
+  const { hasPlan, checkedHasPlan } = useHasPlan(slug);
+  
   useEffect(() => {
-    setCheckedHasPlan(hasPlan('ULTIMATE'));
-  }, []);
+    const checkPlan = async () => {
+      const result = await hasPlan($Enums.Plan.ULTIMATE); 
+      console.log("Does the team have the plan?", result);
+    };
+
+    checkPlan();
+  }, [hasPlan]);
 
   const menus: MenuItem[] = [
     {
@@ -75,7 +80,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname?.startsWith(`/teams/${slug}`) &&
         activePathname.includes('csc'),
     },
-    canAccess('asset_dashboard', ['create', 'update', 'read', 'delete']) && !checkedHasPlan && {
+    canAccess('asset_dashboard', ['create', 'update', 'read', 'delete']) && checkedHasPlan && {
       name: t('Asset Management'),
       href: `/teams/${slug}/asset`,
       icon: () => <Icon src="/asset-dashboard.png" />,
