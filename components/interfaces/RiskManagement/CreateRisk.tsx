@@ -166,6 +166,10 @@ const FirstStage = () => {
                                 validationState={error ? 'error' : 'default'}
                             />
                             {error && <ErrorMessage>{error}</ErrorMessage>}
+                            <HelperMessage>
+                            Who is the Information Asset Owner, the person accountable if the risk treatments are inadequate, 
+                            incidents occur, and the organization is adversely impacted? This person must assess and treat risks adequately.
+                            </HelperMessage>
                         </WithoutRing>
                     </Fragment>
                 )}
@@ -197,7 +201,10 @@ const FirstStage = () => {
                 {({ fieldProps }) => {
                     console.log('fieldProps range', fieldProps);
                     return (
-                        <>
+                        <>  
+                            <HelperMessage>
+                                Enter the likelihood that the risk would occur untreated, as a percentage value. 
+                            </HelperMessage>
                             <Range min={1} max={100} step={1} {...fieldProps} />
                             <HelperMessage>
                                 {`${fieldProps?.value} percent (max. 100)`}
@@ -216,6 +223,9 @@ const FirstStage = () => {
                     console.log('fieldProps range', fieldProps);
                     return (
                         <>
+                            <HelperMessage>
+                                Enter the potential business impact if the risk occurred without any treatment, as a percentage value.
+                            </HelperMessage>
                             <Range min={1} max={100} step={1} {...fieldProps} />
                             <HelperMessage>
                                 {`${fieldProps?.value} percent (max. 100)`}
@@ -275,7 +285,11 @@ const SecondStage = () => {
                 {({ fieldProps }) => {
                     console.log('fieldProps range', fieldProps);
                     return (
-                        <>
+                        <>  
+                            <HelperMessage>
+                                To what extent is the planned treatment in place? 0% means only a plan exists; 
+                                100% means the treatment is fully operational.
+                            </HelperMessage>
                             <Range min={1} max={100} step={1} {...fieldProps} />
                             <HelperMessage>
                                 {`${fieldProps?.value} percent (max. 100)`}
@@ -294,6 +308,9 @@ const SecondStage = () => {
                     console.log('fieldProps range', fieldProps);
                     return (
                         <>
+                            <HelperMessage>
+                                Enter the probability that the risk will occur after mitigation.
+                            </HelperMessage>
                             <Range min={1} max={100} step={1} {...fieldProps} />
                             <HelperMessage>
                                 {`${fieldProps?.value} percent (max. 100)`}
@@ -312,6 +329,10 @@ const SecondStage = () => {
                     console.log('fieldProps range', fieldProps);
                     return (
                         <>
+                            <HelperMessage>
+                            Enter the likely impact after mitigation. Incidents due to control failures may have higher impacts. 
+                            Bold treated values if they differ from raw values.
+                            </HelperMessage>
                             <Range min={1} max={100} step={1} {...fieldProps} />
                             <HelperMessage>
                                 {`${fieldProps?.value} percent (max. 100)`}
