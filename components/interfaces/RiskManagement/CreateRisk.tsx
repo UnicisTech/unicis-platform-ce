@@ -23,30 +23,66 @@ import { useRouter } from 'next/router';
 import useTeamMembers from 'hooks/useTeamMembers';
 import { WithoutRing } from 'sharedStyles';
 import Select, { ValueType } from '@atlaskit/select';
-import { RmOption } from 'types';
+import { RmOption, ApiResponse, TaskProperties, RMProcedureInterface } from 'types';
 import { Error, Loading } from '@/components/shared';
 
 interface CreateRiskProps {
     tasks: Task[];
     visible: boolean;
     setVisible: Dispatch<SetStateAction<boolean>>
+    mutateTasks: () => Promise<void>;
 }
 
-const CreateRisk = ({ tasks, visible, setVisible }: CreateRiskProps) => {
+const CreateRisk = ({ tasks, visible, setVisible, mutateTasks }: CreateRiskProps) => {
     const { t } = useTranslation('common');
+    const router = useRouter();
+    const { slug } = router.query;
+
 
     // stage 0 - task selection
     // stage 1 - impact form
     // stage 2 - treatment form
     const [stage, setStage] = useState<number>(0)
     const [task, setTask] = useState<Task | null>(null);
+    const [risk, setRisk] = useState<any>([]);
+    const [prevRisk, setPrevRisk] = useState<any>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    
+    const saveRisk = async ({ risk, prevRisk }: { risk: any, prevRisk: any }) => {
+        try {
+            setIsLoading(true)
+            if (!task) {
+                return
+            }
+
+            const response = await axios.post<ApiResponse<Task>>(
+                `/api/teams/${slug}/tasks/${task.taskNumber}/rm`,
+                {
+                    prevRisk: prevRisk,
+                    nextRisk: risk,
+                }
+            );
+
+            const { error } = response.data;
+
+            if (error) {
+                toast.error(error.message);
+                return;
+            } else {
+                toast.success(t('rm-created'));
+            }
+
+            mutateTasks()
+            setVisible(false)
+        } catch (error: any) {
+            toast.error('Unexpected error')
+        } finally {
+            setIsLoading(false)
+        }
+    }
 
 
     const onSubmit = (formData: any) => {
-        console.log('onSubmit formData', { formData, stage });
-
         switch (stage) {
             case 0: {
                 const task = formData.task.value;
@@ -54,10 +90,18 @@ const CreateRisk = ({ tasks, visible, setVisible }: CreateRiskProps) => {
                 setStage(1);
                 break;
             }
-            case 1:
-            case 2: {
-                // TODO: Saving logic for stages 1 and 2
+            case 1: {
+                const riskToSave = [...risk]
+                riskToSave[stage - 1] = formData
+                setRisk(riskToSave)
                 setStage(stage + 1);
+                break;
+            }
+            case 2: {
+                const riskToSave = [...risk]
+                riskToSave[stage - 1] = formData
+                setRisk(riskToSave)
+                saveRisk({ risk: riskToSave, prevRisk })
                 break;
             }
             default: {
@@ -66,6 +110,18 @@ const CreateRisk = ({ tasks, visible, setVisible }: CreateRiskProps) => {
             }
         }
     };
+
+    useEffect(() => {
+        if (!task) {
+            return
+        }
+
+        const prevRisk = (task.properties as TaskProperties)?.rm_risk
+
+        if (prevRisk) {
+            setPrevRisk(prevRisk)
+        }
+    }, [task])
 
     return (
         <Modal open={visible}>
@@ -79,8 +135,8 @@ const CreateRisk = ({ tasks, visible, setVisible }: CreateRiskProps) => {
                         </Modal.Header>
                         <Modal.Body>
                             {stage === 0 && <TaskPickerFormBody tasks={tasks} />}
-                            {stage === 1 && <FirstStage />}
-                            {stage === 2 && <SecondStage />}
+                            {stage === 1 && <FirstStage risk={prevRisk} />}
+                            {stage === 2 && <SecondStage risk={prevRisk} />}
                         </Modal.Body>
                         <Modal.Actions>
                             <AtlaskitButton
@@ -92,6 +148,7 @@ const CreateRisk = ({ tasks, visible, setVisible }: CreateRiskProps) => {
                             <LoadingButton
                                 type="submit"
                                 appearance="primary"
+                                isLoading={isLoading}
                             >
                                 {stage < 2 ? t('next') : t('save')}
                             </LoadingButton>
@@ -103,7 +160,7 @@ const CreateRisk = ({ tasks, visible, setVisible }: CreateRiskProps) => {
     )
 }
 
-const FirstStage = () => {
+const FirstStage = ({ risk }: { risk: RMProcedureInterface }) => {
 
     const router = useRouter();
     const { slug } = router.query;
@@ -122,7 +179,7 @@ const FirstStage = () => {
             <Field
                 name="Risk"
                 label={fieldPropsMapping['Risk']}
-                //   defaultValue={procedure[0]?.DataExporter}
+                defaultValue={risk[0]?.Risk}
                 aria-required={true}
                 isRequired
             >
@@ -140,7 +197,7 @@ const FirstStage = () => {
             <Field<ValueType<RmOption>>
                 name="AssetOwner"
                 label={fieldPropsMapping['AssetOwner']}
-                //   defaultValue={procedure[0] && procedure[0].dpo}
+                defaultValue={risk[0]?.AssetOwner}
                 aria-required={true}
                 isRequired
                 validate={async (value) => {
@@ -167,8 +224,8 @@ const FirstStage = () => {
                             />
                             {error && <ErrorMessage>{error}</ErrorMessage>}
                             <HelperMessage>
-                            Who is the Information Asset Owner, the person accountable if the risk treatments are inadequate, 
-                            incidents occur, and the organization is adversely impacted? This person must assess and treat risks adequately.
+                                Who is the Information Asset Owner, the person accountable if the risk treatments are inadequate,
+                                incidents occur, and the organization is adversely impacted? This person must assess and treat risks adequately.
                             </HelperMessage>
                         </WithoutRing>
                     </Fragment>
@@ -178,7 +235,7 @@ const FirstStage = () => {
             <Field
                 name="Impact"
                 label={fieldPropsMapping['Impact']}
-                //   defaultValue={procedure[0]?.DataExporter}
+                defaultValue={risk[0]?.Impact}
                 aria-required={true}
                 isRequired
             >
@@ -196,14 +253,14 @@ const FirstStage = () => {
             <RangeField
                 name="RawProbability"
                 label={fieldPropsMapping['RawProbability']}
-                defaultValue={0} //To be added from procedure[0]
+                defaultValue={risk[0]?.RawProbability}
             >
                 {({ fieldProps }) => {
                     console.log('fieldProps range', fieldProps);
                     return (
-                        <>  
+                        <>
                             <HelperMessage>
-                                Enter the likelihood that the risk would occur untreated, as a percentage value. 
+                                Enter the likelihood that the risk would occur untreated, as a percentage value.
                             </HelperMessage>
                             <Range min={1} max={100} step={1} {...fieldProps} />
                             <HelperMessage>
@@ -217,7 +274,7 @@ const FirstStage = () => {
             <RangeField
                 name="RawImpact"
                 label={fieldPropsMapping['RawImpact']}
-                defaultValue={0} //To be added from procedure[0]
+                defaultValue={risk[0]?.RawImpact}
             >
                 {({ fieldProps }) => {
                     console.log('fieldProps range', fieldProps);
@@ -238,13 +295,13 @@ const FirstStage = () => {
     )
 }
 
-const SecondStage = () => {
+const SecondStage = ({ risk }: { risk: RMProcedureInterface }) => {
     return (
         <>
             <Field
                 name="RiskTreatment"
                 label={fieldPropsMapping['RiskTreatment']}
-                //   defaultValue={procedure[0]?.DataExporter}
+                defaultValue={risk[1]?.RiskTreatment}
                 aria-required={true}
                 isRequired
             >
@@ -262,7 +319,7 @@ const SecondStage = () => {
             <Field
                 name="TreatmentCost"
                 label={fieldPropsMapping['TreatmentCost']}
-                //   defaultValue={procedure[0]?.DataExporter}
+                defaultValue={risk[1]?.TreatmentCost}
                 aria-required={true}
                 isRequired
             >
@@ -280,14 +337,14 @@ const SecondStage = () => {
             <RangeField
                 name="TreatmentStatus"
                 label={fieldPropsMapping['TreatmentStatus']}
-                defaultValue={0} //To be added from procedure[0]
+                defaultValue={risk[1]?.TreatmentStatus}
             >
                 {({ fieldProps }) => {
                     console.log('fieldProps range', fieldProps);
                     return (
-                        <>  
+                        <>
                             <HelperMessage>
-                                To what extent is the planned treatment in place? 0% means only a plan exists; 
+                                To what extent is the planned treatment in place? 0% means only a plan exists;
                                 100% means the treatment is fully operational.
                             </HelperMessage>
                             <Range min={1} max={100} step={1} {...fieldProps} />
@@ -302,7 +359,7 @@ const SecondStage = () => {
             <RangeField
                 name="TreatedProbability"
                 label={fieldPropsMapping['TreatedProbability']}
-                defaultValue={0} //To be added from procedure[0]
+                defaultValue={risk[1]?.TreatedProbability}
             >
                 {({ fieldProps }) => {
                     console.log('fieldProps range', fieldProps);
@@ -323,15 +380,15 @@ const SecondStage = () => {
             <RangeField
                 name="TreatedImpact"
                 label={fieldPropsMapping['TreatedImpact']}
-                defaultValue={0} //To be added from procedure[0]
+                defaultValue={risk[1]?.TreatedImpact}
             >
                 {({ fieldProps }) => {
                     console.log('fieldProps range', fieldProps);
                     return (
                         <>
                             <HelperMessage>
-                            Enter the likely impact after mitigation. Incidents due to control failures may have higher impacts. 
-                            Bold treated values if they differ from raw values.
+                                Enter the likely impact after mitigation. Incidents due to control failures may have higher impacts.
+                                Bold treated values if they differ from raw values.
                             </HelperMessage>
                             <Range min={1} max={100} step={1} {...fieldProps} />
                             <HelperMessage>
