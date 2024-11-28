@@ -182,7 +182,7 @@
   "verify-your-account": "Verify your account",
   "verify-account-expired": "This verification link has expired. Please enter the email address associated with your account, and we'll send you another verification link.",
   "verify-account-link-sent": "Verification link sent. Please check your email.",
-  "homepage-title": "Enterprise SaaS Starter Kit by BoxyHQ",
+  "homepage-title": "Unicis Platform - Open source",
   "sign-up-title": "Sign Up",
   "login-title": "Login",
   "forgot-password-title": "Reset Password",
@@ -352,6 +352,6 @@
   "fleet-secret-reset": "Delete secret",
   "fleet-secret-not-renewed": "Secret not renewed.",
   "fleet-secret-not-found-warning": "Secret not found. Please generate a new secret.",
-  "fleet-delete-description": "Type DELETE in the text box above to comfirm deletion.",
+  "fleet-delete-description": "Type DELETE in the text box above to confirm deletion.",
   "fleet-delete-warning": "Please note this action is not reversible!"
 }
