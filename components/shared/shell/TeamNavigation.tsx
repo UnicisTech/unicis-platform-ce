@@ -17,6 +17,7 @@ import Loading from '../Loading';
 import useHasPlan from '@/hooks/useHasPlan';
 import { useEffect } from 'react';
 import { $Enums } from '@prisma/client';
+import env from '@/lib/env';
 
 
 interface NavigationItemsProps extends NavigationProps {
@@ -30,7 +31,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   
   useEffect(() => {
     const checkPlan = async () => {
-      const result = await hasPlan($Enums.Plan.ULTIMATE); 
+      const result = await hasPlan(env.assetRequiredPlan); 
       console.log("Does the team have the plan?", result);
     };
 

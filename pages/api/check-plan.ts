@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
 import { getCurrentPlan } from '@/lib/subscriptions';
 import { $Enums } from '@prisma/client';
+import env from '@/lib/env';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -33,7 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const currentPlan = getCurrentPlan(subscription);
 
-    if (currentPlan !== $Enums.Plan.ULTIMATE) {
+    if (currentPlan !== env.assetRequiredPlan) {
       return res.status(403).json({ error: 'Insufficient plan' });
     }
 

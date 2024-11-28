@@ -43,7 +43,6 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  console.log('TOKEN ACCESS: ', token.accessToken)
   if (micromatch.isMatch(pathname, patterns)) {
     const slugMatch = pathname.match(/\/teams\/([^/]+)\/(asset|asset-management)/);
     const slug = slugMatch ? slugMatch[1] : null;

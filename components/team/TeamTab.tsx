@@ -1,4 +1,5 @@
 import useHasPlan from '@/hooks/useHasPlan';
+import env from '@/lib/env';
 import {
   Cog6ToothIcon,
   DocumentMagnifyingGlassIcon,
@@ -29,7 +30,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
 
   useEffect(() => {
     const checkPlan = async () => {
-      const result = await hasPlan($Enums.Plan.ULTIMATE);
+      const result = await hasPlan(env.assetRequiredPlan);
       console.log("Does the team have the plan?", result);
     };
 

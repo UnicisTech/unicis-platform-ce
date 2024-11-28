@@ -1,14 +1,17 @@
+import { $Enums } from "@prisma/client";
+
 const env = {
   databaseUrl: `${process.env.DATABASE_URL}`,
   appUrl: `${process.env.APP_URL}`,
-  fleetAPI: `api.fleet.unicis.tech`,
-  fleetAPIUrl: `https://api.fleet.unicis.tech`,
-  // fleetAPIUrl: `http://192.168.97.144:5000`,
+
+  fleetAPI: `${process.env.FLEET_API_HOST}`,
+  fleetAPIUrl: `${process.env.FLEET_API_URL}`,
+  agentVersion: `${process.env.OSQUERY_AGENT_VERSION}`,
+  assetRequiredPlan: `${process.env.ASSET_REQUIRED_PLAN}` as $Enums.Plan || $Enums.Plan.ULTIMATE,
+
   product: 'unicis-platform',
   // redirectAfterSignIn: '/teams',
   redirectIfAuthenticated: '/teams',
-
-  agentVersion: '5.14.1',
 
   // SAML Jackson configuration
   saml: {
