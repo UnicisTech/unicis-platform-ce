@@ -307,7 +307,7 @@
   "fleet-server-api-key-description": "API Key for accessing Fleet API",
   "fleet-secret": "Asset Secret",
   "fleet-secret-description": "Asset secret allows teams to enroll assets, and each asset enrolled with the secret will be able to Identity the team the is query results belongs to.",
-  "fleet-order-secret": "Order and Save Secret",
+  "fleet-order-secret": "Order a Secret",
   "fleet-secret-not-found": "Secret Not Found",
   "fleet-access-not-granted": "Access Not Granted, Connect to Fleet Account to proceed.",
   "fleet-delete-pack-description": "Pack also involves deleting all objects associated with it permanently.",

@@ -4,9 +4,6 @@ import type { User } from '@prisma/client';
 import { IssuePanelContainer } from '@/sharedStyles';
 import { useGetNodeId } from '@/hooks/fleets/Nodes/useGetNodeId';
 import DeleteNode from './DeleteNode';
-import FormattedDate from '@/components/shared/Date';
-import TableBuilder from '../../TableBuilder';
-import { CodeBlock } from '@atlaskit/code';
 import DataInfo from '@/components/shared/DataInfo';
 
 

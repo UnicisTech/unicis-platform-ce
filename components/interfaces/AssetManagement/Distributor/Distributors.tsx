@@ -15,7 +15,6 @@ import { useDistributors } from '@/hooks/fleets/distributors/useDistributors';
 import DeleteDistributor from './DeleteDistributorResult';
 import FormattedDate from '@/components/shared/Date';
 import StatusValue from '../StatusValue';
-import FleetConnectRequired from '../FleetConnectRequired';
 
 
 const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
@@ -36,13 +35,13 @@ const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {
     return <Loading />;
   }
 
-  // if (isError) {
-  //   return (
-  //     <>
-  //       <Error />
-  //     </>
-  //   );
-  // }
+  if (isError) {
+    return (
+      <>
+        <Error />
+      </>
+    );
+  }
 
   const openDeleteModal = async (id: string) => {
     setDistributorToDelete(id);

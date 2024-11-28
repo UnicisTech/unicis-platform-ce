@@ -6,6 +6,7 @@ import { useNodes } from '@/hooks/fleets/Nodes/useNodes'
 import AssetTaskAnalysis from './AssetTaskAnalysis'
 import useCanAccess from '@/hooks/useCanAccess'
 import { getCurrentPlan } from '@/lib/subscriptions'
+import env from '@/lib/env'
 
 interface Assets {
   team: Team,
@@ -24,7 +25,7 @@ const Assets = ({ team, user, teamSubscription }: Assets) => {
     <>
       {canAccess('asset_dashboard', ['read', 'create', 'delete', 'update']) && (
         <div className='grid gap-8'>
-          {currentPlan === 'ULTIMATE' &&
+          {currentPlan === env.assetRequiredPlan &&
             <AssetsAnalysis nodes={nodes} team={team} user={user} />
           }
           <AssetTaskAnalysis teamId={team.id} />

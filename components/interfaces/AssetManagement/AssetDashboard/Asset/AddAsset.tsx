@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { Icon } from '@iconify/react';
-import CheckboxField from '@atlaskit/checkbox';
 import { CodeBlock } from '@atlaskit/code';
 import { Loading, Error, CopyToClipboardButton } from '@/components/shared';
 import { Team, User } from '@prisma/client';
