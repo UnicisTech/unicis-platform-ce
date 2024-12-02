@@ -27,13 +27,14 @@ import { RmOption, ApiResponse, TaskProperties, RMProcedureInterface } from 'typ
 import { Error, Loading } from '@/components/shared';
 
 interface CreateRiskProps {
+    selectedTask?: Task;
     tasks: Task[];
     visible: boolean;
     setVisible: Dispatch<SetStateAction<boolean>>
     mutateTasks: () => Promise<void>;
 }
 
-const CreateRisk = ({ tasks, visible, setVisible, mutateTasks }: CreateRiskProps) => {
+const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: CreateRiskProps) => {
     const { t } = useTranslation('common');
     const router = useRouter();
     const { slug } = router.query;
@@ -43,10 +44,12 @@ const CreateRisk = ({ tasks, visible, setVisible, mutateTasks }: CreateRiskProps
     // stage 1 - impact form
     // stage 2 - treatment form
     const [stage, setStage] = useState<number>(0)
-    const [task, setTask] = useState<Task | null>(null);
+    const [task, setTask] = useState<Task | undefined>(selectedTask);
     const [risk, setRisk] = useState<any>([]);
     const [prevRisk, setPrevRisk] = useState<any>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    console.log('prevRisk',prevRisk)
 
     const saveRisk = async ({ risk, prevRisk }: { risk: any, prevRisk: any }) => {
         try {
@@ -120,6 +123,7 @@ const CreateRisk = ({ tasks, visible, setVisible, mutateTasks }: CreateRiskProps
 
         if (prevRisk) {
             setPrevRisk(prevRisk)
+            setStage(1)
         }
     }, [task])
 
@@ -253,7 +257,7 @@ const FirstStage = ({ risk }: { risk: RMProcedureInterface }) => {
             <RangeField
                 name="RawProbability"
                 label={fieldPropsMapping['RawProbability']}
-                defaultValue={risk[0]?.RawProbability}
+                defaultValue={risk[0]?.RawProbability || 50}
             >
                 {({ fieldProps }) => {
                     console.log('fieldProps range', fieldProps);
@@ -274,7 +278,7 @@ const FirstStage = ({ risk }: { risk: RMProcedureInterface }) => {
             <RangeField
                 name="RawImpact"
                 label={fieldPropsMapping['RawImpact']}
-                defaultValue={risk[0]?.RawImpact}
+                defaultValue={risk[0]?.RawImpact || 50}
             >
                 {({ fieldProps }) => {
                     console.log('fieldProps range', fieldProps);
@@ -337,7 +341,7 @@ const SecondStage = ({ risk }: { risk: RMProcedureInterface }) => {
             <RangeField
                 name="TreatmentStatus"
                 label={fieldPropsMapping['TreatmentStatus']}
-                defaultValue={risk[1]?.TreatmentStatus}
+                defaultValue={risk[1]?.TreatmentStatus || 50}
             >
                 {({ fieldProps }) => {
                     console.log('fieldProps range', fieldProps);
@@ -359,7 +363,7 @@ const SecondStage = ({ risk }: { risk: RMProcedureInterface }) => {
             <RangeField
                 name="TreatedProbability"
                 label={fieldPropsMapping['TreatedProbability']}
-                defaultValue={risk[1]?.TreatedProbability}
+                defaultValue={risk[1]?.TreatedProbability || 50}
             >
                 {({ fieldProps }) => {
                     console.log('fieldProps range', fieldProps);
@@ -380,7 +384,7 @@ const SecondStage = ({ risk }: { risk: RMProcedureInterface }) => {
             <RangeField
                 name="TreatedImpact"
                 label={fieldPropsMapping['TreatedImpact']}
-                defaultValue={risk[1]?.TreatedImpact}
+                defaultValue={risk[1]?.TreatedImpact || 50}
             >
                 {({ fieldProps }) => {
                     console.log('fieldProps range', fieldProps);

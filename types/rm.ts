@@ -1,3 +1,4 @@
+import { Task } from "@prisma/client";
 import type { AuditLog } from "./base";
 
 export type RmOption = {
@@ -26,3 +27,9 @@ export type TaskRmProperties = {
     rm_risk?: RMProcedureInterface | [];
     rm_audit_logs: AuditLog[] | [];
 };
+
+export type TaskWithRmRisk = Task & {
+    properties: {
+      rm_risk: RMProcedureInterface;
+    };
+  };
