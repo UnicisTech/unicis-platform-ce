@@ -22,6 +22,7 @@ import { Team } from '@prisma/client';
 import { getCscStatusesBySlug } from 'models/team';
 import { CreateTIA, TiaAuditLogs, TiaPanel } from '@/components/interfaces/TIA';
 import Breadcrumb from '../../Breadcrumb';
+import RmTaskPanel from '@/components/interfaces/RiskManagement/TaskPanel';
 
 const TaskById = ({
   csc_statuses,
@@ -140,6 +141,13 @@ const TaskById = ({
               setStatuses={setStatuses}
               ISO={ISO}
             />
+          </Card.Body>
+        </Card>
+      )}
+      {activeTab === 'Risk Management' && (
+        <Card heading="RM panel">
+          <Card.Body>
+            <RmTaskPanel task={task} />
           </Card.Body>
         </Card>
       )}

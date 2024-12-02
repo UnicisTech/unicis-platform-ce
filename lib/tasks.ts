@@ -25,6 +25,10 @@ export const taskNavigations = (activeTab: string) => {
       name: 'Cybersecurity Controls',
       active: activeTab === 'Cybersecurity Controls',
     },
+    {
+      name: 'Risk Management',
+      active: activeTab === 'Risk Management',
+    },
   ];
 };
 
