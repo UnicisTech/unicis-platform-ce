@@ -1,3 +1,4 @@
+import { Task } from "@prisma/client";
 import { AuditLog } from "./base";
 
 export type RiskProbability = "rare" | "unlikely" | "possible" | "probable" | "severe"
@@ -73,6 +74,12 @@ export interface PiaConfig {
   // rightsRestricted: RpaOption[];
   // piaNeeded: RpaOption[];
 }
+
+export type TaskWithPiaRisk = Task & {
+  properties: {
+    pia_risk: PiaRisk;
+  };
+};
 
 export type TaskPiaProperties = {
   pia_risk?: PiaRisk | [];

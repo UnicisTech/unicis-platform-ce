@@ -32,6 +32,7 @@ const shouldShowExtraFields = (risk: PiaRisk): boolean => {
 }
 
 interface CreateRiskProps {
+    selectedTask?: Task;
     tasks: Task[];
     visible: boolean;
     setVisible: Dispatch<SetStateAction<boolean>>;
@@ -39,18 +40,18 @@ interface CreateRiskProps {
 
 }
 
-const CreateRisk = ({ tasks, visible, setVisible, mutateTasks }: CreateRiskProps) => {
+const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: CreateRiskProps) => {
     const { t } = useTranslation('common');
 
     const router = useRouter();
     const { slug } = router.query;
 
     const [stage, setStage] = useState<number>(0)
-    const [task, setTask] = useState<Task | null>(null);
+    const [task, setTask] = useState<Task | undefined>(selectedTask);
     const [risk, setRisk] = useState<any>([])
     const [prevRisk, setPrevRisk] = useState<any>([])
     const [isLoading, setIsLoading] = useState<boolean>(false)
-
+ 
     const saveRisk = async ({ risk, prevRisk }: { risk: any, prevRisk: any }) => {
         try {
             setIsLoading(true)
@@ -129,7 +130,6 @@ const CreateRisk = ({ tasks, visible, setVisible, mutateTasks }: CreateRiskProps
         }
     };
 
-    // TODO: set previous saved risk to prefill the fields by default values
     useEffect(() => {
         if (!task) {
             return
@@ -139,6 +139,7 @@ const CreateRisk = ({ tasks, visible, setVisible, mutateTasks }: CreateRiskProps
 
         if (prevRisk) {
             setPrevRisk(prevRisk)
+            setStage(1)
         }
     }, [task])
 
@@ -153,7 +154,7 @@ const CreateRisk = ({ tasks, visible, setVisible, mutateTasks }: CreateRiskProps
                             {stage > 0 && headers[stage - 1]}
                         </Modal.Header>
                         <Modal.Body>
-                            {stage === 0 && <TaskPickerFormBody tasks={tasks} />}
+                            {stage === 0 && <TaskPickerFormBody tasks={tasks.filter(task => !(task.properties as any)?.pia_risk)} />}
                             {stage === 1 && <FirstStage risk={prevRisk} />}
                             {stage === 2 && <SecondStage risk={prevRisk}/>}
                             {stage === 3 && <ThirdStage risk={prevRisk}/>}

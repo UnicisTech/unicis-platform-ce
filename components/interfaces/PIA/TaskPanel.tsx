@@ -28,7 +28,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
             <Tab>{headers[2]}</Tab>
             <Tab>{headers[3]}</Tab>
             <Tab>{headers[4]}</Tab>
-            <Tab>{headers[5]}</Tab>
+            {risk[4] && <Tab>{headers[5]}</Tab>}
           </TabList>
           <TabPanel>
             <div>
