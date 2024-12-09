@@ -6,8 +6,6 @@ import {
     fieldPropsMapping,
 } from '@/components/defaultLanding/data/configs/rm';
 import { Field } from '@/components/shared/atlaskit';
-// import RiskMatrixBubbleChart from './RiskMatrixBubbleChart';
-// import { riskSecurityPoints, riskProbabilityPoints } from '@/components/defaultLanding/data/configs/rm';
 import type { Task } from '@prisma/client';
 import { RMProcedureInterface, TaskProperties } from 'types';
 
@@ -17,7 +15,7 @@ const RmTaskPanel = ({ task }: { task: Task }) => {
 
     return (
         <IssuePanelContainer>
-            <h2 className="text-1xl font-bold">View Privacy Impact Assessment</h2>
+            <h2 className="text-1xl font-bold">View Risk Management</h2>
             {risk ? (
                 <Tabs
                     id="default"
@@ -42,11 +40,11 @@ const RmTaskPanel = ({ task }: { task: Task }) => {
                             />
                             <Field
                                 label={fieldPropsMapping['RawProbability']}
-                                value={risk[0]?.RawProbability}
+                                value={`${risk[0]?.RawProbability}%`}
                             />
                             <Field
                                 label={fieldPropsMapping['RawImpact']}
-                                value={risk[0]?.RawImpact}
+                                value={`${risk[0]?.RawImpact}%`}
                             />
                         </div>
                     </TabPanel>
@@ -62,15 +60,15 @@ const RmTaskPanel = ({ task }: { task: Task }) => {
                             />
                             <Field
                                 label={fieldPropsMapping['TreatmentStatus']}
-                                value={risk[1]?.TreatmentStatus}
+                                value={`${risk[1]?.TreatmentStatus}%`}
                             />
                             <Field
                                 label={fieldPropsMapping['TreatedProbability']}
-                                value={risk[1]?.TreatedProbability}
+                                value={`${risk[1]?.TreatedProbability}%`}
                             />
                             <Field
                                 label={fieldPropsMapping['TreatedImpact']}
-                                value={risk[1]?.TreatedImpact}
+                                value={`${risk[1]?.TreatedImpact}%`}
                             />
                         </div>
                     </TabPanel>
