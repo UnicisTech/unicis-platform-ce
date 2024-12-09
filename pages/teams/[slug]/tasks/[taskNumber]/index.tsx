@@ -15,6 +15,7 @@ import {
 } from '@/components/interfaces/Task';
 import { CscAuditLogs, CscPanel } from '@/components/interfaces/CSC';
 import { CreateRPA, RpaPanel, RpaAuditLog } from '@/components/interfaces/RPA';
+import { CreateRiskManagementRisk, RiskManagementTaskPanel } from '@/components/interfaces/RiskManagement';
 import useTeam from 'hooks/useTeam';
 import useCanAccess from 'hooks/useCanAccess';
 import useISO from 'hooks/useISO';
@@ -22,7 +23,6 @@ import { Team } from '@prisma/client';
 import { getCscStatusesBySlug } from 'models/team';
 import { CreateTIA, TiaAuditLogs, TiaPanel } from '@/components/interfaces/TIA';
 import Breadcrumb from '../../Breadcrumb';
-import RmTaskPanel from '@/components/interfaces/RiskManagement/TaskPanel';
 
 const TaskById = ({
   csc_statuses,
@@ -31,6 +31,8 @@ const TaskById = ({
 }) => {
   const [rpaVisible, setRpaVisible] = useState(false);
   const [tiaVisible, setTiaVisible] = useState(false);
+  const [rmVisible, setRmVisible] = useState(false);
+
   const [activeTab, setActiveTab] = useState('Overview');
   const [statuses, setStatuses] = useState(csc_statuses);
   const [activeCommentTab, setActiveCommentTab] = useState('Comments');
@@ -145,9 +147,25 @@ const TaskById = ({
         </Card>
       )}
       {activeTab === 'Risk Management' && (
-        <Card heading="RM panel">
+        <Card 
+          heading="RM panel"
+          button={
+            canAccess('task', ['update']) ? (
+              <Button
+                size="sm"
+                color="primary"
+                variant="outline"
+                onClick={() => {
+                  setRmVisible(!rmVisible);
+                }}
+              >
+                {t('create')}
+              </Button>
+            ) : null
+          }  
+        >
           <Card.Body>
-            <RmTaskPanel task={task} />
+            <RiskManagementTaskPanel task={task} />
           </Card.Body>
         </Card>
       )}
@@ -165,6 +183,14 @@ const TaskById = ({
           setVisible={setRpaVisible}
           task={task}
           mutate={mutateTask}
+        />
+      )}
+      {rmVisible && (
+        <CreateRiskManagementRisk
+          visible={rmVisible}
+          setVisible={setRmVisible}
+          selectedTask={task}
+          mutateTasks={mutateTask}
         />
       )}
       <CommentsTab

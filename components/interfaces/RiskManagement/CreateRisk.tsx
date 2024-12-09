@@ -1,6 +1,5 @@
-import React, { Fragment, useState, useCallback, useEffect, Dispatch, SetStateAction } from 'react';
+import React, { Fragment, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import TextArea from '@atlaskit/textarea';
-import { getAxiosError } from '@/lib/common';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { Modal } from 'react-daisyui';
@@ -14,8 +13,6 @@ import Range from '@atlaskit/range';
 import {
     Field,
     RangeField,
-    FieldProps,
-    FormFooter,
     HelperMessage,
     ErrorMessage,
 } from '@atlaskit/form';
@@ -28,7 +25,7 @@ import { Error, Loading } from '@/components/shared';
 
 interface CreateRiskProps {
     selectedTask?: Task;
-    tasks: Task[];
+    tasks?: Task[];
     visible: boolean;
     setVisible: Dispatch<SetStateAction<boolean>>
     mutateTasks: () => Promise<void>;
@@ -48,8 +45,6 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
     const [risk, setRisk] = useState<any>([]);
     const [prevRisk, setPrevRisk] = useState<any>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-
-    console.log('prevRisk',prevRisk)
 
     const saveRisk = async ({ risk, prevRisk }: { risk: any, prevRisk: any }) => {
         try {
@@ -123,8 +118,9 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
 
         if (prevRisk) {
             setPrevRisk(prevRisk)
-            setStage(1)
         }
+
+        setStage(1)
     }, [task])
 
     return (
@@ -138,7 +134,7 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
                             {stage === 2 && `Add Risk 2/2 `}
                         </Modal.Header>
                         <Modal.Body>
-                            {stage === 0 && <TaskPickerFormBody tasks={tasks} />}
+                            {stage === 0 && tasks && <TaskPickerFormBody tasks={tasks} />}
                             {stage === 1 && <FirstStage risk={prevRisk} />}
                             {stage === 2 && <SecondStage risk={prevRisk} />}
                         </Modal.Body>
