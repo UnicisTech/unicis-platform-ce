@@ -33,7 +33,7 @@ const shouldShowExtraFields = (risk: PiaRisk): boolean => {
 
 interface CreateRiskProps {
     selectedTask?: Task;
-    tasks: Task[];
+    tasks?: Task[];
     visible: boolean;
     setVisible: Dispatch<SetStateAction<boolean>>;
     mutateTasks: () => Promise<void>;
@@ -139,8 +139,9 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
 
         if (prevRisk) {
             setPrevRisk(prevRisk)
-            setStage(1)
         }
+
+        setStage(1)
     }, [task])
 
 
@@ -154,12 +155,12 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
                             {stage > 0 && headers[stage - 1]}
                         </Modal.Header>
                         <Modal.Body>
-                            {stage === 0 && <TaskPickerFormBody tasks={tasks.filter(task => !(task.properties as any)?.pia_risk)} />}
+                            {stage === 0 && tasks && <TaskPickerFormBody tasks={tasks.filter(task => !(task.properties as any)?.pia_risk)} />}
                             {stage === 1 && <FirstStage risk={prevRisk} />}
                             {stage === 2 && <SecondStage risk={prevRisk}/>}
                             {stage === 3 && <ThirdStage risk={prevRisk}/>}
                             {stage === 4 && <FourthStage risk={prevRisk}/>}
-                            {stage === 5 && <Results risk={risk} />}
+                            {stage === 5 && <Results risk={risk}/>}
                             {stage === 6 && <ExtraStage risk={prevRisk}/>}
                         </Modal.Body>
                         <Modal.Actions>

@@ -21,7 +21,7 @@ import useISO from 'hooks/useISO';
 import { Team } from '@prisma/client';
 import { getCscStatusesBySlug } from 'models/team';
 import { CreateTIA, TiaAuditLogs, TiaPanel } from '@/components/interfaces/TIA';
-import { PiaPanel } from '@/components/interfaces/PIA'
+import { CreatePiaRisk, PiaPanel } from '@/components/interfaces/PIA'
 import Breadcrumb from '../../Breadcrumb';
 
 const TaskById = ({
@@ -31,6 +31,7 @@ const TaskById = ({
 }) => {
   const [rpaVisible, setRpaVisible] = useState(false);
   const [tiaVisible, setTiaVisible] = useState(false);
+  const [piaVisible, setPiaVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('Overview');
   const [statuses, setStatuses] = useState(csc_statuses);
   const [activeCommentTab, setActiveCommentTab] = useState('Comments');
@@ -145,9 +146,25 @@ const TaskById = ({
         </Card>
       )}
       {activeTab === 'Privacy Impact Assessment' && (
-        <Card heading="PIA panel">
+        <Card
+          heading="PIA panel"
+          button={
+            canAccess('task', ['update']) ? (
+              <Button
+                size="sm"
+                color="primary"
+                variant="outline"
+                onClick={() => {
+                  setPiaVisible(!piaVisible);
+                }}
+              >
+                {t('create')}
+              </Button>
+            ) : null
+          }
+        >
           <Card.Body>
-            <PiaPanel task={task}/>
+            <PiaPanel task={task} />
           </Card.Body>
         </Card>
       )}
@@ -165,6 +182,14 @@ const TaskById = ({
           setVisible={setRpaVisible}
           task={task}
           mutate={mutateTask}
+        />
+      )}
+      {piaVisible && (
+        <CreatePiaRisk
+          visible={piaVisible}
+          setVisible={setPiaVisible}
+          selectedTask={task}
+          mutateTasks={mutateTask}
         />
       )}
       <CommentsTab
