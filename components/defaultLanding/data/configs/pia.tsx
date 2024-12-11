@@ -103,7 +103,7 @@ export const riskProbabilityPoints: Record<RiskProbability, number> = {
     unlikely: 1,
     possible: 2,
     probable: 3,
-    severe: 5,
+    severe: 4,
 };
 
 export const riskSecurityPoints: Record<RiskSecurity, number> = {
@@ -111,5 +111,5 @@ export const riskSecurityPoints: Record<RiskSecurity, number> = {
     minor: 1,
     moderate: 2,
     major: 3,
-    extreme: 5,
+    extreme: 4,
 };

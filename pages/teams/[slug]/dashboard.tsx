@@ -2,7 +2,9 @@ import {
   TeamAssessmentAnalysis,
   TeamCscAnalysis,
   TeamTaskAnalysis,
+  PiaAnalysis
 } from '@/components/interfaces/TeamDashboard';
+// import PiaAnalysis from '@/components/interfaces/TeamDashboard/PiaAnalysis';
 import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/TeamProcessingActivities';
 import { Error, Loading } from '@/components/shared';
 import env from '@/lib/env';
@@ -56,6 +58,9 @@ const TeamDashboard = ({
           <TeamAssessmentAnalysis slug={slug} />
         </div>
         <TeamCscAnalysis slug={slug} csc_statuses={csc_statuses} />
+      </div>
+      <div className="space-y-6">
+        <PiaAnalysis slug={slug}/>
       </div>
     </>
   );
