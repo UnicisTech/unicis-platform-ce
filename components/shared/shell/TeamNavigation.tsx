@@ -27,11 +27,11 @@ interface NavigationItemsProps extends NavigationProps {
 const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
-  const { hasPlan, checkedHasPlan } = useHasPlan(slug);
-  
+  const { hasPlan, checkedHasPlan } = useHasPlan();
+
   useEffect(() => {
     const checkPlan = async () => {
-      const result = await hasPlan(env.assetRequiredPlan); 
+      const result = await hasPlan(slug);
       console.log("Does the team have the plan?", result);
     };
 

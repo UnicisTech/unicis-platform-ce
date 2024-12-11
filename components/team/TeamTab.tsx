@@ -26,11 +26,11 @@ interface TeamTabProps {
 
 const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   const { canAccess } = useCanAccess();
-  const { hasPlan, checkedHasPlan } = useHasPlan(team.slug);
+  const { hasPlan, checkedHasPlan } = useHasPlan();
 
   useEffect(() => {
     const checkPlan = async () => {
-      const result = await hasPlan(env.assetRequiredPlan);
+      const result = await hasPlan(team.slug);
       console.log("Does the team have the plan?", result);
     };
 

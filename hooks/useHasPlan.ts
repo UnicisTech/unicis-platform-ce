@@ -1,26 +1,20 @@
-import { $Enums } from '@prisma/client';
-import useTeam from './useTeam';
 import { useState } from 'react';
 
-const useHasPlan = (slug: string) => {
-  const { team } = useTeam(slug);
+const useHasPlan = () => {
   const [checkedHasPlan, setCheckedHasPlan] = useState<boolean>();
 
-  const hasPlan = async (plan: $Enums.Plan): Promise<boolean> => {
-    if (!team?.id) {
-      console.error("Team ID is not available");
-      return false;
-    }
-
+  const hasPlan = async (slug: string): Promise<boolean> => {
     try {
-      const response = await fetch("/api/has-plan", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ teamId: team.id, plan }),
+
+      const response = await fetch("/api/check-plan", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ slug }),
       });
 
       if (!response.ok) {
-        console.error("Failed to fetch plan:", await response.text());
         return false;
       }
 
@@ -28,7 +22,6 @@ const useHasPlan = (slug: string) => {
       setCheckedHasPlan(data.hasPlan);
       return data.hasPlan;
     } catch (error) {
-      console.error("Error fetching plan:", error);
       return false;
     }
   };
