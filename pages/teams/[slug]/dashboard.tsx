@@ -3,6 +3,7 @@ import {
   TeamCscAnalysis,
   TeamTaskAnalysis,
 } from '@/components/interfaces/TeamDashboard';
+import RmAnalysis from '@/components/interfaces/TeamDashboard/RmAnalysis';
 import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/TeamProcessingActivities';
 import { Error, Loading } from '@/components/shared';
 import env from '@/lib/env';
@@ -56,6 +57,10 @@ const TeamDashboard = ({
           <TeamAssessmentAnalysis slug={slug} />
         </div>
         <TeamCscAnalysis slug={slug} csc_statuses={csc_statuses} />
+        <div className="space-y-6">
+          <RmAnalysis slug={slug} />
+        </div>
+
       </div>
     </>
   );

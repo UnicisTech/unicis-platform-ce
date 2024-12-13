@@ -10,12 +10,12 @@ import useCanAccess from 'hooks/useCanAccess';
 const verticalTextStyles =
     "px-1.5 py-1.5 whitespace-nowrap align-middle text-center [writing-mode:vertical-rl] rotate-180";
 
-const calculateRiskRating = (probability: number, impact: number) => {
+export const calculateRiskRating = (probability: number, impact: number) => {
     const result = (probability / 100) * (impact / 100);
     return Math.floor(result * 100);
 }
 
-const calculateCurrentRiskRating = (rawRiskRating: number, targetRiskRating: number, treatmentStatus: number) => {
+export const calculateCurrentRiskRating = (rawRiskRating: number, targetRiskRating: number, treatmentStatus: number) => {
     const decimalTreatmentStatus = treatmentStatus / 100 // 50% -> 0.5
     const result = rawRiskRating - (decimalTreatmentStatus * (rawRiskRating - targetRiskRating))
     return Math.floor(result)
