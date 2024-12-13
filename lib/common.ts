@@ -93,8 +93,8 @@ export const defaultHeaders = {
 
 export const fleetAuthAPIHeaders = async () => {
   const token = Cookies.get('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA');
-  const { ufa } = await useUFA();
-  console.log('UFA: ', ufa);
+  // const { ufa } = await useUFA();
+  // console.log('UFA: ', ufa);
  
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',

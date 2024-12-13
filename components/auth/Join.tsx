@@ -13,9 +13,9 @@ import TogglePasswordVisibility from '../shared/TogglePasswordVisibility';
 import AgreeMessage from './AgreeMessage';
 import GoogleReCAPTCHA from '../shared/GoogleReCAPTCHA';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { useCreateFleetAccount, useCreateFleetTeam } from '@/hooks/fleets';
+import { useAccessFleetAccount, useCreateFleetAccount, useCreateFleetTeam } from '@/hooks/fleets';
 import { deleteUser } from '@/models/user';
-// import { deleteTeam } from '@/models/team';
+import Cookies from 'js-cookie';
 
 
 interface JoinProps {
@@ -30,6 +30,7 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const createFleetAccount = useCreateFleetAccount();
+  const accessFleetAccount = useAccessFleetAccount();
   const createFleetTeam = useCreateFleetTeam();
 
   const handlePasswordVisibility = () => {
@@ -62,19 +63,21 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
       });
 
       const json = (await response.json()) as ApiResponse<
-        User & { confirmEmail: boolean } & {team: Team}
-        >;
+        { user: User } & { confirmEmail: boolean } & { team: Team }
+      >;
 
       try {
-        await createFleetAccount(json.data.id, json.data.email, json.data.firstName, json.data.lastName, values.password)
+        await createFleetAccount(json.data.user.id, json.data.user.email, json.data.user.firstName, json.data.user.lastName, values.password)
           .then(async () => {
+            const { fleet_access } = await accessFleetAccount(values.email, values.password);
+            Cookies.set('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA', fleet_access.secret_key);
             await createFleetTeam(json.data.team.name, json.data.team.id)
               .then(team => { }).catch(async (err) => {
                 // await deleteTeam({ id: json.data.id })
               })
-        });
+          });
       } catch (error) {
-        await deleteUser({ id: json.data.id })
+        await deleteUser({ id: json.data.user.id })
       }
 
       recaptchaRef.current?.reset();

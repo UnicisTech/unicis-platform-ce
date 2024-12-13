@@ -112,9 +112,7 @@ const Login: NextPageWithLayout<
 
       try {
         const { fleet_access } = await accessFleetAccount(values.email, values.password);
-        Cookies.set('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA', fleet_access.secret_key, {
-          sameSite: 'strict',
-        });
+        Cookies.set('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA', fleet_access.secret_key);
       } catch (error) {
         console.error('Error creating or connecting fleet:', error);
       }

@@ -5,7 +5,7 @@ const env = {
   appUrl: `${process.env.APP_URL}`,
 
   fleetAPI: `${process.env.FLEET_API_HOST}`,
-  fleetAPIUrl: `${process.env.FLEET_API_URL}`,
+  fleetAPIUrl: `https://fleet.platform.unicis.tech`,
   agentVersion: `${process.env.OSQUERY_AGENT_VERSION}`,
   assetRequiredPlan: `${process.env.ASSET_REQUIRED_PLAN}` as $Enums.Plan || $Enums.Plan.ULTIMATE,
 

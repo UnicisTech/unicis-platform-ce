@@ -1,4 +1,3 @@
-import { $Enums } from '@prisma/client';
 
 const useUFA = () => {
   const ufa = async (): Promise<string> => {
