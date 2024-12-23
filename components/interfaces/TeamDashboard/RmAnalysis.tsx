@@ -4,6 +4,7 @@ import { RMProcedureInterface, TaskProperties } from "types";
 import DashboardChart from "../RiskManagement/DashboardChart";
 import { Task } from "@prisma/client";
 import { calculateCurrentRiskRating, calculateRiskRating } from "../RiskManagement/RisksTable";
+import { DashboardMatrixChart } from "../RiskManagement";
 
 interface PiaAnalysisProps {
     slug: string;
@@ -38,6 +39,36 @@ function calculateRiskDistribution(tasks: Task[]): number[] {
     return riskCounts;
 }
 
+function transformToRange(value: number): number {
+    return Math.floor(value / 20);
+}
+
+const computeRiskMap = (tasks: Task[]): Map<string, number> | null => {
+    if (!tasks) return null;
+
+    const riskMap = new Map<string, number>();
+
+    tasks
+        .filter(task => (task.properties as TaskProperties)?.rm_risk)
+        .map(task => (task.properties as TaskProperties)?.rm_risk)
+        .forEach((risk) => {
+            const security = risk?.[1]?.["TreatedImpact"] as number;
+            const probability = risk?.[1]?.["TreatedProbability"] as number;
+
+            if (!security || !probability) return;
+
+            const x = transformToRange(security);
+            const y = transformToRange(probability);
+
+            const key = `${x},${y}`;
+
+            riskMap.set(key, (riskMap.get(key) || 0) + 1);
+        });
+
+    return riskMap;
+};
+
+
 const RmAnalysis = ({ slug }: PiaAnalysisProps) => {
     const { tasks, isLoading, isError } = useTeamTasks(slug as string);
 
@@ -49,11 +80,14 @@ const RmAnalysis = ({ slug }: PiaAnalysisProps) => {
         return <Error />;
     }
 
+    const riskMap = computeRiskMap(tasks)
+
     return (
         <div style={{ width: '100%', margin: '0px 13px', justifyContent: 'center', display: 'flex' }} className="p-4 shadow">
             <DashboardChart
                 data={calculateRiskDistribution(tasks)}
             />
+            <DashboardMatrixChart datasets={[]} counterMap={riskMap}/>
         </div>
     );
 };
