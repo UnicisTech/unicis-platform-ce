@@ -293,5 +293,6 @@
   "remove-answer": "Remove answer",
   "forbidden-resource": "This resource is forbidden",
   "pia": "Privacy Impact Assessment",
-  "pia-dashboard": "Privacy Impact Assessment Dashboard"
+  "pia-dashboard": "Privacy Impact Assessment Dashboard",
+  "create-pia": "Register Privacy Impact Assessment"
 }

@@ -391,7 +391,7 @@ const Results = ({ risk }: { risk: PiaRisk }) => {
                         data: [{
                             x: riskSecurityPoints[risk[1].confidentialityRiskSecurity],
                             y: riskProbabilityPoints[risk[1].confidentialityRiskProbability],
-                            r: 20
+                            r: 15
                         }],
                         backgroundColor: "rgba(0, 0, 0, 0.7)",
                     }
@@ -406,7 +406,7 @@ const Results = ({ risk }: { risk: PiaRisk }) => {
                         data: [{
                             x: riskSecurityPoints[risk[2].availabilityRiskSecurity],
                             y: riskProbabilityPoints[risk[2].availabilityRiskProbability],
-                            r: 20
+                            r: 15
                         }],
                         backgroundColor: "rgba(0, 0, 0, 0.7)",
 
@@ -422,7 +422,7 @@ const Results = ({ risk }: { risk: PiaRisk }) => {
                         data: [{
                             x: riskSecurityPoints[risk[3].transparencyRiskSecurity],
                             y: riskProbabilityPoints[risk[3].transparencyRiskProbability],
-                            r: 20
+                            r: 15
                         }],
                         backgroundColor: "rgba(0, 0, 0, 0.7)",
                     }
