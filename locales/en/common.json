@@ -294,5 +294,6 @@
   "forbidden-resource": "This resource is forbidden",
   "pia": "Privacy Impact Assessment",
   "pia-dashboard": "Privacy Impact Assessment Dashboard",
-  "create-pia": "Register Privacy Impact Assessment"
+  "create-pia": "Register Privacy Impact Assessment",
+  "pia-overview": "Privacy Impact Assessment Overview"
 }

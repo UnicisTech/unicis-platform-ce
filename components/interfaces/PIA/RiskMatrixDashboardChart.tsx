@@ -12,7 +12,6 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, Legend, Title, Tooltip);
 
-const CELL_SIZE = 80; // Width and height of one cell in pixels
 const MATRIX_SIZE = 5; // 5x5 matrix
 
 const riskColors = {
@@ -22,11 +21,11 @@ const riskColors = {
   extreme: "rgba(255, 0, 0, 0.3)",
 };
 
-const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
+const RiskMatrixDashboardChart = ({ datasets, counterMap, cellSize = 40 }: any) => {
     const chartRef = useRef<any>(null);
     const [points, setPoints] = useState<any[]>([]);
-    const chartWidth = CELL_SIZE * MATRIX_SIZE * 1.5;
-    const chartHeight = CELL_SIZE * MATRIX_SIZE;
+    const chartWidth = cellSize * MATRIX_SIZE * 1.5;
+    const chartHeight = cellSize * MATRIX_SIZE;
 
     const options: any = {
         responsive: true,
@@ -138,8 +137,8 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
                         left: `${point.x}px`,
                         top: `${point.y}px`,
                         transform: "translate(-50%, -50%)",
-                        width: `${CELL_SIZE * 0.8}px`, // Scale to fit inside cell
-                        height: `${CELL_SIZE * 0.8}px`,
+                        width: `${cellSize * 0.8}px`, // Scale to fit inside cell
+                        height: `${cellSize * 0.8}px`,
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
