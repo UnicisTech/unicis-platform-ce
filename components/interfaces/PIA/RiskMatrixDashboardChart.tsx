@@ -32,7 +32,7 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap, cellSize = 40 }: any) 
         maintainAspectRatio: false,
         scales: {
             x: {
-                title: { display: true, text: "Security of the Risk" },
+                title: { display: true, text: "Risk impact" },
                 min: 0,
                 max: MATRIX_SIZE,
                 ticks: {
@@ -41,7 +41,7 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap, cellSize = 40 }: any) 
                 },
             },
             y: {
-                title: { display: true, text: "Probability of the Risk" },
+                title: { display: true, text: "Risk probability" },
                 min: 0,
                 max: MATRIX_SIZE,
                 ticks: {

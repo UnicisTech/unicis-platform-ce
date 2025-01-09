@@ -113,3 +113,24 @@ export const riskSecurityPoints: Record<RiskSecurity, number> = {
     major: 3,
     extreme: 4,
 };
+
+export const piaDashboardConfig = [
+    {
+        id: 1,
+        title: "Confidentiality and Integrity",
+        security: "confidentialityRiskSecurity",
+        probability: "confidentialityRiskProbability",
+    },
+    {
+        id: 2,
+        title: "Availability",
+        security: "availabilityRiskSecurity",
+        probability: "availabilityRiskProbability",
+    },
+    {
+        id: 3,
+        title: "Transparency, purpose limitation and data minimization",
+        security: "transparencyRiskSecurity",
+        probability: "transparencyRiskProbability",
+    },
+];
