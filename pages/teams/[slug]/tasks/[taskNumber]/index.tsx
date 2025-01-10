@@ -159,7 +159,7 @@ const TaskById = ({
                   setRmVisible(!rmVisible);
                 }}
               >
-                {t('create')}
+                {t('rm-register-risk-record')}
               </Button>
             ) : null
           }  

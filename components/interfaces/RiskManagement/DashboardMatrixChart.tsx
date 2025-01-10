@@ -34,7 +34,7 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
         maintainAspectRatio: false,
         scales: {
             x: {
-                title: { display: true, text: "Impact of the Risk" },
+                title: { display: true, text: "Treated impact" },
                 min: 0,
                 max: MATRIX_SIZE,
                 ticks: {
@@ -43,7 +43,7 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
                 },
             },
             y: {
-                title: { display: true, text: "Probability of the Risk" },
+                title: { display: true, text: "Treadet probability" },
                 min: 0,
                 max: MATRIX_SIZE,
                 ticks: {

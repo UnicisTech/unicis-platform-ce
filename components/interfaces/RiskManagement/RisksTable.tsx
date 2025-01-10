@@ -6,42 +6,10 @@ import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import { TailwindTableWrapper } from 'sharedStyles';
 import useCanAccess from 'hooks/useCanAccess';
+import { calculateCurrentRiskRating, calculateRiskRating, getGradientColor, getInitials } from '@/lib/rm';
 
 const verticalTextStyles =
     "px-1.5 py-1.5 whitespace-nowrap align-middle text-center [writing-mode:vertical-rl] rotate-180";
-
-export const calculateRiskRating = (probability: number, impact: number) => {
-    const result = (probability / 100) * (impact / 100);
-    return Math.floor(result * 100);
-}
-
-export const calculateCurrentRiskRating = (rawRiskRating: number, targetRiskRating: number, treatmentStatus: number) => {
-    const decimalTreatmentStatus = treatmentStatus / 100 // 50% -> 0.5
-    const result = rawRiskRating - (decimalTreatmentStatus * (rawRiskRating - targetRiskRating))
-    return Math.floor(result)
-}
-
-const getGradientColor = (value: number): string => {
-    // Ensure value is between 0 and 100
-    const clampedValue = Math.max(0, Math.min(100, value));
-
-    // Interpolate between green (0, 255, 0) and red (255, 0, 0)
-    const red = Math.floor((clampedValue / 100) * 255);
-    const green = 255 - red;
-
-    return `rgb(${red}, ${green}, 0)`;
-};
-
-const getInitials = (name: string) => {
-    const words = name.trim().split(" ");
-
-    const initials = words
-        .filter(word => word.length > 0)
-        .map(word => word[0].toUpperCase())
-        .join("");
-
-    return initials;
-}
 
 const RisksTable = ({
     slug,
@@ -75,16 +43,16 @@ const RisksTable = ({
                     <table className="text-sm table w-full border-b dark:border-base-200">
                         <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" className="px-1.5 py-1.5">
+                                <th className={verticalTextStyles}>
                                     Risk ID
                                 </th>
-                                <th>
+                                <th className={verticalTextStyles}>
                                     Risk
                                 </th>
                                 <th className={verticalTextStyles}>
                                     Asset Owner
                                 </th>
-                                <th>
+                                <th className={verticalTextStyles}>
                                     Impact
                                 </th>
                                 <th className={verticalTextStyles}>
@@ -96,7 +64,7 @@ const RisksTable = ({
                                 <th className={verticalTextStyles}>
                                     Raw risk rating
                                 </th>
-                                <th>
+                                <th className={verticalTextStyles}>
                                     Treatment
                                 </th>
                                 <th className={verticalTextStyles}>
@@ -118,7 +86,7 @@ const RisksTable = ({
                                     Current risk rating
                                 </th>
                                 {canAccess('task', ['update']) && (
-                                    <th scope="col" className="px-1.5 py-1.5">
+                                    <th scope="col" className={verticalTextStyles}>
                                         {t('actions')}
                                     </th>
                                 )}

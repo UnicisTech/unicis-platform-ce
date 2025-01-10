@@ -9,12 +9,12 @@ const BarChart = ({ data }) => {
     labels: ['0% - 20%', '20% - 40%', '40% - 60%', '60% - 80%', '80% - 100%'],
     datasets: [
       {
-        label: 'Amounts',
+        label: 'Count',
         data: data,
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
-        barPercentage: 1,
+        barPercentage: 0.5,
         categoryPercentage: 0.8,
       },
     ],
@@ -38,18 +38,19 @@ const BarChart = ({ data }) => {
         beginAtZero: true,
         title: {
           display: true,
-          text: 'Amount of risks',
+          text: 'Risk count',
         },
         ticks: {
           precision: 0,
         },
       },
     },
+    plugins: { legend: { display: false } }
   };
   
 
   return (
-    <div style={{ height: '400px', width: '600px' }}>
+    <div style={{ height: '400px'}}>
       <Bar data={chartData} options={options} />
     </div>
   );
