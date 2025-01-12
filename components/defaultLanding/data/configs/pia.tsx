@@ -1,10 +1,10 @@
 import { PiaConfig, RiskProbability, RiskSecurity } from "types/pia";
 
 export const headers = [
-    'Data processing and its purpose proportionality',
+    'Data processing',
     'Confidentiality and Integrity',
     'Availability',
-    'Transparency, anonymization and data minimization',
+    'Transparency, and data minimization',
     'Results',
     'Corrective measures',
 ]
