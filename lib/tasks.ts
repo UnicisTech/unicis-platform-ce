@@ -22,12 +22,12 @@ export const taskNavigations = (activeTab: string) => {
       active: activeTab == 'Transfer Impact Assessment',
     },
     {
-      name: 'Cybersecurity Controls',
-      active: activeTab === 'Cybersecurity Controls',
-    },
-    {
       name: 'Privacy Impact Assessment',
       active: activeTab === 'Privacy Impact Assessment'
+    },
+    {
+      name: 'Cybersecurity Controls',
+      active: activeTab === 'Cybersecurity Controls',
     }
   ];
 };

@@ -25,8 +25,8 @@ import { CreatePiaRisk, PiaPanel } from '@/components/interfaces/PIA'
 import Breadcrumb from '../../Breadcrumb';
 
 const TaskById = ({
-      csc_statuses,
-    }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+          csc_statuses,
+        }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [rpaVisible, setRpaVisible] = useState(false);
   const [tiaVisible, setTiaVisible] = useState(false);
   const [piaVisible, setPiaVisible] = useState(false);
@@ -83,7 +83,7 @@ const TaskById = ({
       {activeTab === 'Processing Activities' && (
         <div>
           <Card
-            heading="RPA panel"
+            heading="Processing Activities panel"
             button={
               canAccess('task', ['update']) ? (
                 <Button
@@ -108,7 +108,7 @@ const TaskById = ({
       {activeTab === 'Transfer Impact Assessment' && (
         <div>
           <Card
-            heading="TIA panel"
+            heading="Transfer Impact Assessment panel"
             button={
               canAccess('task', ['update']) ? (
                 <Button
@@ -131,7 +131,7 @@ const TaskById = ({
         </div>
       )}
       {activeTab === 'Cybersecurity Controls' && (
-        <Card heading="CSC panel">
+        <Card heading="Cybersecurity Controls panel">
           <Card.Body>
             <CscPanel
               task={task}
@@ -145,7 +145,7 @@ const TaskById = ({
       )}
       {activeTab === 'Privacy Impact Assessment' && (
         <Card
-          heading="PIA panel"
+          heading="Privacy Impact Assessment panel"
           button={
             canAccess('task', ['update']) ? (
               <Button
