@@ -38,12 +38,12 @@ export const fieldPropsMapping = {
 
 export const config: PiaConfig = {
     isDataProcessingNecessary: [
-        { value: 'necessary', label: 'necessary' },
-        { value: 'unnecessary', label: 'unnecessary' },
+        { value: 'necessary', label: 'Necessary' },
+        { value: 'unnecessary', label: 'Unnecessary' },
     ],
     isProportionalToPurpose: [
-        { value: 'proportional', label: 'proportional' },
-        { value: 'not_proportional', label: 'not proportional' },
+        { value: 'proportional', label: 'Proportional' },
+        { value: 'not_proportional', label: 'Not proportional' },
     ],
     confidentialityRiskProbability: [
         { value: 'rare', label: 'Rare' },
