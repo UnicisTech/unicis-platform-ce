@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Loading, Error, Card } from '@/components/shared';
 import { Button } from 'react-daisyui';
-import { GetServerSidePropsContext } from 'next';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import useTask from 'hooks/useTask';
 import {
   Attachments,
@@ -25,10 +25,8 @@ import { CreatePiaRisk, PiaPanel } from '@/components/interfaces/PIA'
 import Breadcrumb from '../../Breadcrumb';
 
 const TaskById = ({
-  csc_statuses,
-}: {
-  csc_statuses: { [key: string]: string };
-}) => {
+      csc_statuses,
+    }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [rpaVisible, setRpaVisible] = useState(false);
   const [tiaVisible, setTiaVisible] = useState(false);
   const [piaVisible, setPiaVisible] = useState(false);
@@ -205,17 +203,17 @@ const TaskById = ({
       )}
       {activeCommentTab === 'Audit logs' && (
         <>
-          <Card heading="RPA Audit logs">
+          <Card heading="Record of Processing Activities Audit logs">
             <Card.Body>
               <RpaAuditLog task={task} />
             </Card.Body>
           </Card>
-          <Card heading="Tia Audit logs">
+          <Card heading="Transfer Impact Assessment Audit logs">
             <Card.Body>
               <TiaAuditLogs task={task} />
             </Card.Body>
           </Card>
-          <Card heading="CSC Audit logs">
+          <Card heading="Cybersecurity Controls Audit logs">
             <Card.Body>
               <CscAuditLogs task={task} />
             </Card.Body>
