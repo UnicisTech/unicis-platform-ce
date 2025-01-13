@@ -1,6 +1,6 @@
 export const headers = [
-    'Describe the the risk and impact',
-    'Determine the treatment',
+    'Risk and Impact',
+    'Risk Treatment',
 ];
 
 export const tabs = [
