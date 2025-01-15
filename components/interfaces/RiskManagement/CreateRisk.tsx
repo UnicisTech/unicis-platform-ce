@@ -134,7 +134,7 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
                             {stage === 2 && `Add Risk 2/2 `}
                         </Modal.Header>
                         <Modal.Body>
-                            {stage === 0 && tasks && <TaskPickerFormBody tasks={tasks} />}
+                            {stage === 0 && tasks && <TaskPickerFormBody tasks={tasks.filter(task => !(task.properties as any)?.rm_risk)} />}
                             {stage === 1 && <FirstStage risk={prevRisk} />}
                             {stage === 2 && <SecondStage risk={prevRisk} />}
                         </Modal.Body>
