@@ -1,9 +1,8 @@
 import useTeamTasks from "hooks/useTeamTasks";
 import { useTranslation } from 'next-i18next';
 import { Error, Loading } from '@/components/shared';
-import DashboardChart from "../RiskManagement/DashboardChart";
 import { computeRiskMap, calculateRiskDistribution } from "@/lib/rm";
-import { DashboardMatrixChart } from "../RiskManagement";
+import { DashboardMatrixChart, DashboardPieChart } from "../RiskManagement";
 
 interface PiaAnalysisProps {
     slug: string;
@@ -40,8 +39,8 @@ const RmAnalysis = ({ slug }: PiaAnalysisProps) => {
                         </div>
                         <div className="flex justify-between gap-4">
                             <div className="flex-1 relative">
-                                <DashboardChart
-                                    data={calculateRiskDistribution(tasks)}
+                                <DashboardPieChart
+                                    datasets={calculateRiskDistribution(tasks)}
                                 />
                             </div>
                             <div className="flex-1 relative">
