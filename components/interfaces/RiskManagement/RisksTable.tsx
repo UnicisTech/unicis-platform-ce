@@ -126,7 +126,7 @@ const RisksTable = ({
                                         <td>
                                             <span>{risk[0].RawImpact}%</span>
                                         </td>
-                                        <td style={{backgroundColor: getGradientColor(rawRiskRating)}}>
+                                        <td style={{backgroundColor: getGradientColor(rawRiskRating)}} className='dark:text-black'>
                                             {rawRiskRating}%
                                         </td>
                                         <td>
@@ -144,10 +144,10 @@ const RisksTable = ({
                                         <td>
                                             {risk[1].TreatedImpact}%
                                         </td>
-                                        <td style={{ backgroundColor: getGradientColor(targetRiskRating)}}>
+                                        <td style={{ backgroundColor: getGradientColor(targetRiskRating)}} className='dark:text-black'>
                                             {targetRiskRating}%
                                         </td>
-                                        <td style={{ backgroundColor: getGradientColor(currentRiskRating)}}>
+                                        <td style={{ backgroundColor: getGradientColor(currentRiskRating)}} className='dark:text-black'>
                                             {currentRiskRating}%
                                         </td>
                                         {canAccess('task', ['update']) && (
