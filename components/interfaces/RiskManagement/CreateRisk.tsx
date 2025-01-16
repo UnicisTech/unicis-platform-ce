@@ -118,6 +118,7 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
 
         if (prevRisk) {
             setPrevRisk(prevRisk)
+            setRisk(prevRisk)
         }
 
         setStage(1)
@@ -135,8 +136,8 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
                         </Modal.Header>
                         <Modal.Body>
                             {stage === 0 && tasks && <TaskPickerFormBody tasks={tasks.filter(task => !(task.properties as any)?.rm_risk)} />}
-                            {stage === 1 && <FirstStage risk={prevRisk} />}
-                            {stage === 2 && <SecondStage risk={prevRisk} />}
+                            {stage === 1 && <FirstStage risk={risk} />}
+                            {stage === 2 && <SecondStage risk={risk} />}
                         </Modal.Body>
                         <Modal.Actions>
                             <AtlaskitButton
@@ -144,6 +145,13 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
                                 onClick={() => setVisible(false)}
                             >
                                 {t('close')}
+                            </AtlaskitButton>
+                            <AtlaskitButton
+                                appearance="default"
+                                onClick={() => setStage(prev => prev - 1)}
+                                isDisabled={stage <= 1 || isLoading}
+                            >
+                                {t('back')}
                             </AtlaskitButton>
                             <LoadingButton
                                 type="submit"
