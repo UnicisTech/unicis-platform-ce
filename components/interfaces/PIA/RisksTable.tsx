@@ -62,7 +62,7 @@ const RisksTable = ({
                                     Availability
                                 </th>
                                 <th scope="col" className="px-1.5 py-1.5">
-                                    Transparency and minimization
+                                    Transparency, purpose limitation and data minimization
                                 </th>
                                 {canAccess('task', ['update']) && (
                                     <th scope="col" className="px-1.5 py-1.5">
