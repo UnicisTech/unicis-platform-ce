@@ -123,7 +123,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
                     backgroundColor: "rgba(0, 0, 0, 0.7)",
                   },
                   {
-                    label: "Transparency, purpose limitation and data minimization",
+                    label: "Transparency and data minimization",
                     borderWidth: 1,
                     data: [{
                       x: riskSecurityPoints[risk[3].transparencyRiskSecurity],
