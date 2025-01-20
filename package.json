@@ -19,6 +19,7 @@
     "build-ci": "next build"
   },
   "dependencies": {
+    "@atlaskit/app-provider": "^1.6.1",
     "@atlaskit/avatar": "^21.9.0",
     "@atlaskit/badge": "^16.1.1",
     "@atlaskit/button": "^17.17.1",
@@ -84,7 +85,6 @@
     "openai": "^4.56.0",
     "react": "18.3.1",
     "react-chartjs-2": "^5.2.0",
-    "remark-gfm": "^4.0.0",
     "react-daisyui": "5.0.0",
     "react-datepicker": "^6.9.0",
     "react-dom": "18.3.1",
@@ -96,6 +96,7 @@
     "react-markdown": "^9.0.1",
     "react-quill": "^2.0.0",
     "react-youtube": "^10.1.0",
+    "remark-gfm": "^4.0.0",
     "styled-components": "^6.1.11",
     "superjson": "2.2.1",
     "svix": "1.24.0",

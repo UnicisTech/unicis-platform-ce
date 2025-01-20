@@ -1,10 +1,9 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Loading } from '@/components/shared';
 import { useSession } from 'next-auth/react';
 import Header from './Header';
 import Drawer from './Drawer';
-
-import GlobalTheme from '@atlaskit/theme/components';
+import AppProvider from '@atlaskit/app-provider';
 import { ThemeModes } from '@atlaskit/theme/types';
 
 import AiChat from './AiChat';
@@ -15,10 +14,6 @@ export default function AppShell({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const [atlaskitTheme, setAtlaskitTheme] = useState<ThemeModes>('dark');
-
-  const getAtlaskitThemeMode = useCallback(() => {
-    return { mode: atlaskitTheme };
-  }, [atlaskitTheme]);
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -45,18 +40,18 @@ export default function AppShell({ children }) {
   }
 
   return (
-    <GlobalTheme.Provider value={getAtlaskitThemeMode}>
-      <Drawer sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <AiChat />
-      <div className="lg:pl-64 dark:border-gray-200">
-        <Header
-          setSidebarOpen={setSidebarOpen}
-          themeCallback={setAtlaskitTheme}
-        />
-        <main className="py-10 dark:bg-black">
-          <div className="mx-auto px-4 sm:px-6 lg:px-8">{children}</div>
-        </main>
-      </div>
-    </GlobalTheme.Provider>
+    <AppProvider defaultColorMode={atlaskitTheme}>
+        <Drawer sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <AiChat />
+        <div className="lg:pl-64 dark:border-gray-200">
+          <Header
+            setSidebarOpen={setSidebarOpen}
+            themeCallback={setAtlaskitTheme}
+          />
+          <main className="py-10 dark:bg-black">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8">{children}</div>
+          </main>
+        </div>
+    </AppProvider>
   );
 }

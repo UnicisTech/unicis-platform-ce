@@ -194,6 +194,7 @@ const FirstStage = ({ risk }: { risk: PiaRisk | [] }) => {
                 name="isDataProcessingNecessary"
                 defaultValue={risk[0]?.isDataProcessingNecessary || ""}
                 isRequired
+                id='test10'
             >
                 {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
                     <RadioGroup
