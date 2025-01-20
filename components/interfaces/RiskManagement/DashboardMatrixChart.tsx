@@ -10,16 +10,32 @@ import {
     Tooltip,
 } from "chart.js";
 
+const impactLabels = [
+    'Insignificant',
+    'Minor',
+    'Moderate',
+    'Major',
+    'Extreme',
+]
+
+const probabilityLabels = [
+    'Rare',
+    'Unlikely',
+    'Possible',
+    'Probable',
+    '(Almost) certain',
+]
+
 ChartJS.register(CategoryScale, LinearScale, PointElement, Legend, Title, Tooltip);
 
 const CELL_SIZE = 80; // Width and height of one cell in pixels
 const MATRIX_SIZE = 5; // 5x5 matrix
 
 const riskColors = {
-  low: "rgba(0, 255, 0, 0.3)",
-  medium: "rgba(255, 255, 0, 0.3)",
-  high: "rgba(255, 165, 0, 0.3)",
-  extreme: "rgba(255, 0, 0, 0.3)",
+    low: "rgba(0, 255, 0, 0.3)",
+    medium: "rgba(255, 255, 0, 0.3)",
+    high: "rgba(255, 165, 0, 0.3)",
+    extreme: "rgba(255, 0, 0, 0.3)",
 };
 
 //TODO: this component dublicates the PIA one, move it to shared
@@ -29,6 +45,33 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
     const chartWidth = CELL_SIZE * MATRIX_SIZE * 1.5;
     const chartHeight = CELL_SIZE * MATRIX_SIZE;
 
+    // const options: any = {
+    //     responsive: true,
+    //     maintainAspectRatio: false,
+    //     scales: {
+    //         x: {
+    //             title: { display: true, text: "Treated impact" },
+    //             min: 0,
+    //             max: MATRIX_SIZE,
+    //             ticks: {
+    //                 stepSize: 1,
+    //                 callback: (value: number) => `${(value / MATRIX_SIZE) * 100}%`,
+    //             },
+    //         },
+    //         y: {
+    //             title: { display: true, text: "Treadet probability" },
+    //             min: 0,
+    //             max: MATRIX_SIZE,
+    //             ticks: {
+    //                 stepSize: 1,
+    //                 callback: (value: number) => `${(value / MATRIX_SIZE) * 100}%`,
+    //             },
+    //             reverse: false,
+    //         },
+    //     },
+    //     plugins: { legend: { display: false } },
+    // };
+
     const options: any = {
         responsive: true,
         maintainAspectRatio: false,
@@ -37,24 +80,158 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
                 title: { display: true, text: "Treated impact" },
                 min: 0,
                 max: MATRIX_SIZE,
+                // ticks: {
+                //     stepSize: 1,
+                //     callback: (value: number, index: number) => {
+                //         if (index > 0 && index <= impactLabels.length) {
+                //             return impactLabels[index - 1];
+                //         }
+                //         return "";
+                //     },
+                // },
                 ticks: {
-                    stepSize: 1,
-                    callback: (value: number) => `${(value / MATRIX_SIZE) * 100}%`,
+                    stepSize: 0.5, 
+                    display: true, 
+                    callback: (value) => {
+                        const labelIndex = Math.round(value * 2) - 1; // Adjust for 0.5 step
+                        if (labelIndex % 2 === 0) { 
+                            return impactLabels[Math.floor(labelIndex / 2)]; 
+                        } else {
+                            return ''; 
+                        }
+                    },
                 },
+                // offset: true,
+                // grid: { offset: true }
+                // gridLines: { offsetGridLines: true }
+
             },
             y: {
-                title: { display: true, text: "Treadet probability" },
+                title: { display: true, text: "Treated probability" },
                 min: 0,
                 max: MATRIX_SIZE,
+                // ticks: {
+                //     stepSize: 1,
+                //     backdropPadding: {top: 10},
+                //     padding: 100,
+                //     callback: (value: number, index: number) => {
+                //         if (index > 0 && index <= probabilityLabels.length) {
+                //             return probabilityLabels[index - 1];
+                //         }
+                //         return "";
+                //     },
+                //     // callback(value, index, values) {
+                //     //     values.push({ value: 0.5, label: 'Critical' })
+                //     //     values.push({ value: 1.5, label: 'Needs Work' })
+                //     //     values.push({ value: 2.5, label: 'Neutral' })
+                //     // },
+                // },
                 ticks: {
-                    stepSize: 1,
-                    callback: (value: number) => `${(value / MATRIX_SIZE) * 100}%`,
+                    stepSize: 0.5,
+                    callback: (value) => {
+                        const labelIndex = Math.round(value * 2) - 1;
+                        if (labelIndex % 2 === 0) {
+                            return probabilityLabels[Math.floor(labelIndex / 2)];
+                        } else {
+                            return '';
+                        }
+                    },
                 },
+                // display: (tick) => tick.value % 1 === 0, 
+
                 reverse: false,
+                // gridLines: { offsetGridLines: true }
+                // offset: true,
+                // grid: { offset: true }
             },
         },
         plugins: { legend: { display: false } },
     };
+
+    // const options: any = {
+    //     responsive: true,
+    //     maintainAspectRatio: false,
+    //     scales: {
+    //         x: {
+    //             title: { display: true, text: "Treated impact" },
+    //             min: 0,
+    //             max: MATRIX_SIZE,
+    //             ticks: {
+    //                 stepSize: 1,
+    //                 callback: (value: number) => {
+    //                     const index = Math.floor(value) - 0.5; // Adjust for midpoint
+    //                     if (index >= 0 && index < impactLabels.length) {
+    //                         return impactLabels[index];
+    //                     }
+    //                     return "";
+    //                 },
+    //             },
+    //             grid: {
+    //                 offset: true, // Ensures grid lines are offset to align labels correctly
+    //             },
+    //         },
+    //         y: {
+    //             title: { display: true, text: "Treated probability" },
+    //             min: 0,
+    //             max: MATRIX_SIZE,
+    //             ticks: {
+    //                 stepSize: 1,
+    //                 callback: (value: number) => {
+    //                     const index = Math.floor(value) - 0.5; // Adjust for midpoint
+    //                     if (index >= 0 && index < probabilityLabels.length) {
+    //                         return probabilityLabels[index];
+    //                     }
+    //                     return "";
+    //                 },
+    //             },
+    //             grid: {
+    //                 offset: true, // Ensures grid lines are offset to align labels correctly
+    //             },
+    //             reverse: false,
+    //         },
+    //     },
+    //     plugins: { legend: { display: false } },
+    // };
+
+    // const options: any = {
+    //     responsive: true,
+    //     maintainAspectRatio: false,
+    //     scales: {
+    //         x: {
+    //             title: { display: true, text: "Treated impact" },
+    //             min: 0,
+    //             max: MATRIX_SIZE,
+    //             ticks: {
+    //                 stepSize: 1,
+    //                 callback: (value: number) => {
+    //                     if (value >= 0.5 && value < MATRIX_SIZE + 0.5) {
+    //                         const index = Math.floor(value - 0.5); // Correctly map ticks to labels
+    //                         return impactLabels[index];
+    //                     }
+    //                     return "";
+    //                 },
+    //             },
+    //         },
+    //         y: {
+    //             title: { display: true, text: "Treated probability" },
+    //             min: 0,
+    //             max: MATRIX_SIZE,
+    //             ticks: {
+    //                 stepSize: 1,
+    //                 callback: (value: number) => {
+    //                     if (value >= 0.5 && value < MATRIX_SIZE + 0.5) {
+    //                         const index = Math.floor(value - 0.5); // Correctly map ticks to labels
+    //                         return probabilityLabels[index];
+    //                     }
+    //                     return "";
+    //                 },
+    //             },
+    //             reverse: false,
+    //         },
+    //     },
+    //     plugins: { legend: { display: false } },
+    // };
+
 
     const backgroundPlugin = {
         id: "backgroundPlugin",
@@ -104,17 +281,19 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
         },
     };
 
+
+
     useEffect(() => {
         const chartInstance = chartRef.current?.chartInstance || chartRef.current;
         if (chartInstance) {
             const scales = chartInstance.scales;
-            const newPoints = Array.from({ length: 5 }, (_, x) => 
+            const newPoints = Array.from({ length: 5 }, (_, x) =>
                 Array.from({ length: 5 }, (_, y) => ({
-                  x: scales.x.getPixelForValue(x + 0.5),
-                  y: scales.y.getPixelForValue(y + 0.5),
-                  value: counterMap.get(`${x},${y}`) || 0
+                    x: scales.x.getPixelForValue(x + 0.5),
+                    y: scales.y.getPixelForValue(y + 0.5),
+                    value: counterMap.get(`${x},${y}`) || 0
                 }))
-              ).flat();
+            ).flat();
             setPoints(newPoints);
         }
     }, [datasets]);
@@ -128,7 +307,7 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
                 margin: "auto",
             }}
         >
-            <Bubble ref={chartRef} data={{ datasets }} options={options} plugins={[backgroundPlugin]}/>
+            <Bubble ref={chartRef} data={{ datasets }} options={options} plugins={[backgroundPlugin]} />
 
             {/* Overlayed Components */}
             {points.map((point, index) => (
