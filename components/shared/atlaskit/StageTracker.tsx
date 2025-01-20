@@ -1,8 +1,6 @@
 import { ProgressTracker, type Stages } from '@atlaskit/progress-tracker';
-import { headers } from '@/components/defaultLanding/data/configs/rpa';
 
-//TODO: delete, use shared/atlaskit instead
-const StageTracker = ({ currentStage }: { currentStage: number }) => {
+const StageTracker = ({ currentStage, headers }: { currentStage: number, headers: string[] }) => {
   const items: Stages = Array(6).fill(null).map((_, index) => ({
     id: `step-${index + 1}`,
     label: headers[index],

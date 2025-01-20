@@ -18,7 +18,7 @@ import Form, {
 } from '@atlaskit/form';
 import TextArea from '@atlaskit/textarea';
 import { fieldPropsMapping, config, riskSecurityPoints, riskProbabilityPoints, headers } from '@/components/defaultLanding/data/configs/pia';
-import { TaskPickerFormBody } from '@/components/shared/atlaskit';
+import { StageTracker, TaskPickerFormBody } from '@/components/shared/atlaskit';
 import type { Task } from '@prisma/client';
 import RiskMatrixBubbleChart from './RiskMatrixBubbleChart';
 import type { PiaRisk, ApiResponse, TaskProperties } from 'types';
@@ -146,13 +146,13 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
 
 
     return (
-        <Modal open={visible}>
+        <Modal open={visible} className='w-11/12 max-w-3xl'>
             <Form onSubmit={onSubmit}>
                 {({ formProps }) => (
                     <form {...formProps}>
                         <Modal.Header className="font-bold">
                             {stage === 0 && 'Select a task'}
-                            {stage > 0 && headers[stage - 1]}
+                            {stage > 0  && <StageTracker headers={headers} currentStage={stage - 1}/>}
                         </Modal.Header>
                         <Modal.Body>
                             {stage === 0 && tasks && <TaskPickerFormBody tasks={tasks.filter(task => !(task.properties as any)?.pia_risk)} />}

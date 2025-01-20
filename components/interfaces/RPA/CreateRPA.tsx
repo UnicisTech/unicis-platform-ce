@@ -138,6 +138,7 @@ const CreateRPA = ({
         {({ formProps, reset }) => (
           <form {...formProps}>
             <Modal.Header>
+              {/* TODO: use shared/atlaskit component */}
               <StageTracker currentStage={stage}/>
             </Modal.Header>
             <Modal.Body>
