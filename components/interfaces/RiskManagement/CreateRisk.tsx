@@ -7,8 +7,8 @@ import { useTranslation } from 'next-i18next';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
 import Form from '@atlaskit/form';
 import type { Task } from '@prisma/client';
-import { TaskPickerFormBody } from '@/components/shared/atlaskit';
-import { fieldPropsMapping } from '@/components/defaultLanding/data/configs/rm';
+import { StageTracker, TaskPickerFormBody } from '@/components/shared/atlaskit';
+import { fieldPropsMapping, headers } from '@/components/defaultLanding/data/configs/rm';
 import Range from '@atlaskit/range';
 import {
     Field,
@@ -131,8 +131,9 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
                     <form {...formProps}>
                         <Modal.Header className="font-bold">
                             {stage === 0 && `Select a task`}
-                            {stage === 1 && `Add Risk 1/2 `}
-                            {stage === 2 && `Add Risk 2/2 `}
+                            {stage > 0 && <StageTracker headers={headers} currentStage={stage - 1}/>}
+                            {/* {stage === 1 && `Add Risk 1/2 `}
+                            {stage === 2 && `Add Risk 2/2 `} */}
                         </Modal.Header>
                         <Modal.Body>
                             {stage === 0 && tasks && <TaskPickerFormBody tasks={tasks.filter(task => !(task.properties as any)?.rm_risk)} />}
