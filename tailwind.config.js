@@ -6,6 +6,17 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
     'node_modules/daisyui/dist/**/*.js',
   ],
+  theme: {
+    extend: {
+      colors: {
+        'risk-extreme-low': 'rgba(0, 255, 0, 0.5)', 
+        'risk-low': 'rgba(0, 255, 0, 0.3)', 
+        'risk-medium': 'rgba(255, 255, 0, 0.3)',
+        'risk-high': 'rgba(255, 165, 0, 0.3)',
+        'risk-extreme': 'rgba(255, 0, 0, 0.3)',
+      },
+    },
+  },
   daisyui: {
     //themes: ['corporate'],
     themes: [
@@ -27,4 +38,11 @@ module.exports = {
     ],
   },
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
+  safelist: [
+    'bg-risk-extreme-low',
+    'bg-risk-low',
+    'bg-risk-medium',
+    'bg-risk-high',
+    'bg-risk-extreme'
+  ]
 };

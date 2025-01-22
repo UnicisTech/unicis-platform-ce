@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { SimpleTag as Tag } from '@atlaskit/tag';
 import statuses from '@/components/defaultLanding/data/statuses.json';
 import type { TaskWithPiaRisk } from 'types';
 import { Button } from 'react-daisyui';
@@ -9,12 +8,32 @@ import usePagination from 'hooks/usePagination';
 import { TailwindTableWrapper } from 'sharedStyles';
 import { StatusBadge } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
-import Badge from '@/components/shared/Badge';
 import { riskProbabilityPoints, riskSecurityPoints } from '@/components/defaultLanding/data/configs/pia';
 
-const toPercentage = (input: number): string => {
-    const percentage = (input / 25) * 100;
+const calculatePercentage = (input: number): number => {
+    return (input / 16) * 100;
+};
+
+const formatPercentage = (percentage: number): string => {
     return `${percentage.toFixed(0)}%`;
+};
+
+const getBgColorClass = (riskLevel: number): string => {
+    const riskLevels = [
+        { max: 20, class: 'risk-extreme-low' },
+        { max: 40, class: 'risk-low' },
+        { max: 60, class: 'risk-medium' },
+        { max: 80, class: 'risk-high' },
+        { max: 100, class: 'risk-extreme' },
+    ];
+
+    for (const { max, class: riskClass } of riskLevels) {
+        if (riskLevel <= max) {
+            return 'bg-' + riskClass;
+        }
+    }
+
+    return "";
 }
 
 const RisksTable = ({
@@ -41,7 +60,7 @@ const RisksTable = ({
         prevButtonDisabled,
         nextButtonDisabled,
     } = usePagination<TaskWithPiaRisk>(tasks, perPage);
-
+    
     return (
         <>
             <TailwindTableWrapper>
@@ -72,72 +91,78 @@ const RisksTable = ({
                             </tr>
                         </thead>
                         <tbody>
-                            {pageData.map((task, index) => (
-                                <tr
-                                    key={index}
-                                    className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
-                                >
-                                    <td className="px-1.5 py-1.5">
-                                        <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
-                                            <div className="flex items-center justify-start space-x-2">
-                                                <span className="underline">{task.title}</span>
-                                            </div>
-                                        </Link>
-                                    </td>
-                                    <td className="px-1.5 py-1.5">
-                                        <StatusBadge
-                                            label={
-                                                statuses.find(({ value }) => value === task.status)
-                                                    ?.label as string
-                                            }
-                                            value={task.status}
-                                        />
-                                    </td>
-                                    <td className="px-1.5 py-1.5">
-                                        {toPercentage(
-                                            riskProbabilityPoints[task.properties.pia_risk[1].confidentialityRiskProbability] *
-                                            riskSecurityPoints[task.properties.pia_risk[1].confidentialityRiskSecurity]
-                                        )}
-                                    </td>
-                                    <td className="px-1.5 py-1.5">
-                                        {toPercentage(
-                                            riskProbabilityPoints[task.properties.pia_risk[2].availabilityRiskProbability] *
-                                            riskSecurityPoints[task.properties.pia_risk[2].availabilityRiskSecurity]
-                                        )}
-                                    </td>
-                                    <td className="px-1.5 py-1.5">
-                                        {toPercentage(
-                                            riskProbabilityPoints[task.properties.pia_risk[3].transparencyRiskProbability] *
-                                            riskSecurityPoints[task.properties.pia_risk[3].transparencyRiskSecurity]
-                                        )}
-                                    </td>
-                                    {canAccess('task', ['update']) && (
-                                        <td className="px-1.5 py-1.5">
-                                            <div className="btn-group">
-                                                <Button
-                                                    size="sm"
-                                                    variant="outline"
-                                                    onClick={() => {
-                                                        editHandler(task);
-                                                    }}
-                                                >
-                                                    {t('edit-task')}
-                                                </Button>
+                            {pageData.map((task, index) => {
+                                const confidentialityValue = calculatePercentage(
+                                    riskProbabilityPoints[task.properties.pia_risk[1].confidentialityRiskProbability] *
+                                    riskSecurityPoints[task.properties.pia_risk[1].confidentialityRiskSecurity]
+                                )
+                                const availabilityValue = calculatePercentage(
+                                    riskProbabilityPoints[task.properties.pia_risk[2].availabilityRiskProbability] *
+                                    riskSecurityPoints[task.properties.pia_risk[2].availabilityRiskSecurity]
+                                )
+                                const transparencyValue = calculatePercentage(
+                                    riskProbabilityPoints[task.properties.pia_risk[3].transparencyRiskProbability] *
+                                    riskSecurityPoints[task.properties.pia_risk[3].transparencyRiskSecurity]
+                                )
 
-                                                <Button
-                                                    size="sm"
-                                                    variant="outline"
-                                                    onClick={() => {
-                                                        deleteHandler(task);
-                                                    }}
-                                                >
-                                                    {t('delete')}
-                                                </Button>
-                                            </div>
+                                return (
+                                    <tr
+                                        key={index}
+                                        className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
+                                    >
+                                        <td className="px-1.5 py-1.5">
+                                            <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
+                                                <div className="flex items-center justify-start space-x-2">
+                                                    <span className="underline">{task.title}</span>
+                                                </div>
+                                            </Link>
                                         </td>
-                                    )}
-                                </tr>
-                            ))}
+                                        <td className="px-1.5 py-1.5">
+                                            <StatusBadge
+                                                label={
+                                                    statuses.find(({ value }) => value === task.status)
+                                                        ?.label as string
+                                                }
+                                                value={task.status}
+                                            />
+                                        </td>
+                                        <td className={`px-1.5 py-1.5 ${getBgColorClass(confidentialityValue)}`}>
+                                            {formatPercentage(confidentialityValue)}
+                                        </td>
+                                        <td className={`px-1.5 py-1.5 ${getBgColorClass(availabilityValue)}`}>
+                                            {formatPercentage(availabilityValue)}
+                                        </td>
+                                        <td className={`px-1.5 py-1.5 ${getBgColorClass(transparencyValue)}`}>
+                                            {formatPercentage(transparencyValue)}
+                                        </td>
+                                        {canAccess('task', ['update']) && (
+                                            <td className="px-1.5 py-1.5">
+                                                <div className="btn-group">
+                                                    <Button
+                                                        size="sm"
+                                                        variant="outline"
+                                                        onClick={() => {
+                                                            editHandler(task);
+                                                        }}
+                                                    >
+                                                        {t('edit-task')}
+                                                    </Button>
+
+                                                    <Button
+                                                        size="sm"
+                                                        variant="outline"
+                                                        onClick={() => {
+                                                            deleteHandler(task);
+                                                        }}
+                                                    >
+                                                        {t('delete')}
+                                                    </Button>
+                                                </div>
+                                            </td>
+                                        )}
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </table>
                 </div>
