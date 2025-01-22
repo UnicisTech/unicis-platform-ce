@@ -17,15 +17,15 @@ export const fieldPropsMapping = {
     isProportionalToPurposeAssessment: 'Assessment',
 
     confidentialityRiskProbability: 'Probability of the risk',
-    confidentialityRiskSecurity: 'Security of the risk',
+    confidentialityRiskSecurity: 'Impact of the risk',
     confidentialityAssessment: 'Assessment',
 
     availabilityRiskProbability: 'Probability of the risk',
-    availabilityRiskSecurity: 'Security of the risk',
+    availabilityRiskSecurity: 'Impact of the risk',
     availabilityAssessment: 'Assessment',
 
     transparencyRiskProbability: 'Probability of the risk',
-    transparencyRiskSecurity: 'Security of the risk',
+    transparencyRiskSecurity: 'Impact of the risk',
     transparencyAssessment: 'Assessment',
 
     guarantees: "Guarantees",
