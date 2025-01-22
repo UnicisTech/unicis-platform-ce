@@ -1,5 +1,4 @@
-import React, { useState, useCallback, useEffect, Dispatch, SetStateAction } from 'react';
-import { getAxiosError } from '@/lib/common';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { Modal } from 'react-daisyui';
@@ -7,7 +6,6 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
 import { RadioGroup } from '@atlaskit/radio';
-import Textfield from '@atlaskit/textfield';
 import Form, {
     ErrorMessage,
     Field,
@@ -22,6 +20,7 @@ import { StageTracker, TaskPickerFormBody } from '@/components/shared/atlaskit';
 import type { Task } from '@prisma/client';
 import RiskMatrixBubbleChart from './RiskMatrixBubbleChart';
 import type { PiaRisk, ApiResponse, TaskProperties } from 'types';
+import { AtlaskitDarkThemeWrapper } from 'sharedStyles';
 
 const shouldShowExtraFields = (risk: PiaRisk): boolean => {
     const confidentialityRisk = riskProbabilityPoints[risk[1].confidentialityRiskProbability] * riskSecurityPoints[risk[1].confidentialityRiskSecurity]
@@ -51,7 +50,7 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
     const [risk, setRisk] = useState<any>([])
     const [prevRisk, setPrevRisk] = useState<any>([])
     const [isLoading, setIsLoading] = useState<boolean>(false)
- 
+
     const saveRisk = async ({ risk, prevRisk }: { risk: any, prevRisk: any }) => {
         try {
             setIsLoading(true)
@@ -139,6 +138,7 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
 
         if (prevRisk) {
             setPrevRisk(prevRisk)
+            setRisk(prevRisk)
         }
 
         setStage(1)
@@ -152,16 +152,18 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
                     <form {...formProps}>
                         <Modal.Header className="font-bold">
                             {stage === 0 && 'Select a task'}
-                            {stage > 0  && <StageTracker headers={headers} currentStage={stage - 1}/>}
+                            {stage > 0 && <StageTracker headers={headers} currentStage={stage - 1} />}
                         </Modal.Header>
                         <Modal.Body>
-                            {stage === 0 && tasks && <TaskPickerFormBody tasks={tasks.filter(task => !(task.properties as any)?.pia_risk)} />}
-                            {stage === 1 && <FirstStage risk={prevRisk} />}
-                            {stage === 2 && <SecondStage risk={prevRisk}/>}
-                            {stage === 3 && <ThirdStage risk={prevRisk}/>}
-                            {stage === 4 && <FourthStage risk={prevRisk}/>}
-                            {stage === 5 && <Results risk={risk}/>}
-                            {stage === 6 && <ExtraStage risk={prevRisk}/>}
+                            <AtlaskitDarkThemeWrapper>
+                                {stage === 0 && tasks && <TaskPickerFormBody tasks={tasks.filter(task => !(task.properties as any)?.pia_risk)} />}
+                                {stage === 1 && <FirstStage risk={risk} />}
+                                {stage === 2 && <SecondStage risk={risk} />}
+                                {stage === 3 && <ThirdStage risk={risk} />}
+                                {stage === 4 && <FourthStage risk={risk} />}
+                                {stage === 5 && <Results risk={risk} />}
+                                {stage === 6 && <ExtraStage risk={risk} />}
+                            </AtlaskitDarkThemeWrapper>
                         </Modal.Body>
                         <Modal.Actions>
                             <AtlaskitButton
@@ -169,6 +171,13 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
                                 onClick={() => setVisible(false)}
                             >
                                 {t('close')}
+                            </AtlaskitButton>
+                            <AtlaskitButton
+                                appearance="default"
+                                onClick={() => setStage(prev => prev - 1)}
+                                isDisabled={stage <= 1 || isLoading}
+                            >
+                                {t('back')}
                             </AtlaskitButton>
                             <LoadingButton
                                 type="submit"
@@ -242,7 +251,7 @@ const FirstStage = ({ risk }: { risk: PiaRisk | [] }) => {
     )
 }
 
-const SecondStage = ({ risk }: {risk: PiaRisk | []}) => {
+const SecondStage = ({ risk }: { risk: PiaRisk | [] }) => {
     return (
         <>
             <p>What are the risks to the privacy and rights of the people whose data is being processed?</p>
@@ -288,7 +297,7 @@ const SecondStage = ({ risk }: {risk: PiaRisk | []}) => {
     )
 }
 
-const ThirdStage = ({ risk }: { risk: PiaRisk | []}) => {
+const ThirdStage = ({ risk }: { risk: PiaRisk | [] }) => {
     return (
         <>
             <p>What are the risks to the privacy and rights of the people whose data is being processed?</p>
@@ -334,7 +343,7 @@ const ThirdStage = ({ risk }: { risk: PiaRisk | []}) => {
     )
 }
 
-const FourthStage = ({ risk }: {risk: PiaRisk | []}) => {
+const FourthStage = ({ risk }: { risk: PiaRisk | [] }) => {
     return (
         <>
             <p>What are the risks to the privacy and rights of the people whose data is being processed?</p>
@@ -433,7 +442,7 @@ const Results = ({ risk }: { risk: PiaRisk }) => {
     )
 }
 
-const ExtraStage = ({ risk }: { risk: PiaRisk | []}) => {
+const ExtraStage = ({ risk }: { risk: PiaRisk | [] }) => {
     return (
         <>
             <p>Corrective measures</p>
