@@ -21,7 +21,7 @@ import useISO from 'hooks/useISO';
 import { Team } from '@prisma/client';
 import { getCscStatusesBySlug } from 'models/team';
 import { CreateTIA, TiaAuditLogs, TiaPanel } from '@/components/interfaces/TIA';
-import { CreatePiaRisk, PiaPanel } from '@/components/interfaces/PIA'
+import { CreatePiaRisk, PiaPanel, PiaAuditLogs } from '@/components/interfaces/PIA'
 import Breadcrumb from '../../Breadcrumb';
 
 const TaskById = ({
@@ -216,6 +216,11 @@ const TaskById = ({
           <Card heading="Cybersecurity Controls Audit logs">
             <Card.Body>
               <CscAuditLogs task={task} />
+            </Card.Body>
+          </Card>
+          <Card heading="Privacy Impact Assessment Audit logs">
+            <Card.Body>
+              <PiaAuditLogs task={task} />
             </Card.Body>
           </Card>
         </>

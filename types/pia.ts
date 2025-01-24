@@ -53,26 +53,6 @@ export interface PiaConfig {
   transparencyRiskSecurity: Option[],
   dealingWithResidualRisk: Option[],
   supervisoryAuthorityInvolvement: Option[],
-  // category: RpaOption[];
-  // specialcategory: RpaOption[];
-  // datasubject: RpaOption[];
-  // retentionperiod: RpaOption[];
-  // recipientType: RpaOption[];
-  // guarantee: RpaOption[];
-  // toms: RpaOption[];
-  // country: RpaOption[];
-  // involveProfiling: RpaOption[];
-  // useAutomated: RpaOption[];
-  // involveSurveillance: RpaOption[];
-  // processedSpecialCategories: RpaOption[];
-  // isBigData: RpaOption[];
-  // dataSetsCombined: RpaOption[];
-  // multipleControllers: RpaOption[];
-  // imbalanceInRelationship: RpaOption[];
-  // innovativeTechnologyUsed: RpaOption[];
-  // transferredOutside: RpaOption[];
-  // rightsRestricted: RpaOption[];
-  // piaNeeded: RpaOption[];
 }
 
 export type TaskWithPiaRisk = Task & {

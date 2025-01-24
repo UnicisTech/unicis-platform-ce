@@ -118,7 +118,7 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
                 const riskToSave = [...risk]
                 riskToSave[4] = formData
                 setRisk(riskToSave)
-                saveRisk({ risk, prevRisk });
+                saveRisk({ risk: riskToSave, prevRisk });
                 break;
             }
 
