@@ -37,3 +37,5 @@ export const defaultProcedure = [
         TreatedImpact: '',
     },
 ];
+
+export const config: any = {}

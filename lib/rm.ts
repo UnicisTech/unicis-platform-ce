@@ -1,7 +1,17 @@
 import { prisma } from '@/lib/prisma';
 import type { Task } from '@prisma/client';
 import type { Session } from 'next-auth';
-import type { RMProcedureInterface, TaskProperties } from "types";
+import type { RMProcedureInterface, TaskProperties, AuditLog, Diff } from "types";
+import { fieldPropsMapping, config } from '@/components/defaultLanding/data/configs/rm';
+
+//TODO: no need config at all for Rm
+type RmConfig = any
+
+type Option = {
+  label: string,
+  value: string,
+}
+
 
 export const saveRisk = async (params: {
   user: Session['user'];
@@ -39,13 +49,13 @@ export const saveRisk = async (params: {
     },
   });
 
-  // await addAuditLogs({
-  //   taskId,
-  //   taskProperties,
-  //   user,
-  //   prevProcedure,
-  //   nextProcedure,
-  // });
+  await addAuditLogs({
+    taskId,
+    taskProperties,
+    user,
+    prevRisk,
+    nextRisk,
+  });
 
   return updatedTask;
 };
@@ -86,16 +96,129 @@ export const deleteRisk = async (params: {
     },
   });
 
-  // await addAuditLogs({
-  //   taskId,
-  //   taskProperties,
-  //   user,
-  //   prevProcedure,
-  //   nextProcedure,
-  // });
+  await addAuditLogs({
+    taskId,
+    taskProperties,
+    user,
+    prevRisk,
+    nextRisk,
+  });
 
   return updatedTask;
 };
+
+export const addAuditLogs = async (params: {
+  taskId: number;
+  taskProperties: TaskProperties;
+  user: Session['user'];
+  prevRisk: RMProcedureInterface | [];
+  nextRisk: RMProcedureInterface | [];
+}) => {
+  const { taskId, taskProperties, user, prevRisk, nextRisk } = params;
+  const newAuditItems: AuditLog[] = [];
+
+  if (prevRisk.length === 0 && nextRisk.length !== 0) {
+    newAuditItems.push(generateChangeLog(user, 'created', null));
+  } else if (nextRisk.length === 0) {
+    newAuditItems.push(generateChangeLog(user, 'deleted', null));
+  } else {
+    const diff =
+    prevRisk.length === 0 ? [] : getDiff(prevRisk, nextRisk);
+    newAuditItems.push(
+      ...diff.map((changeLog) => {
+        return generateChangeLog(user, 'updated', changeLog);
+      })
+    );
+  }
+
+  let rm_audit_logs = taskProperties?.rm_audit_logs;
+
+  if (typeof rm_audit_logs === 'undefined') {
+    rm_audit_logs = [...newAuditItems];
+  } else {
+    rm_audit_logs = [...rm_audit_logs, ...newAuditItems];
+  }
+
+  taskProperties.rm_audit_logs = rm_audit_logs;
+
+  await prisma.task.update({
+    where: {
+      id: taskId,
+    },
+    data: {
+      properties: {
+        ...taskProperties,
+      },
+    },
+  });
+};
+
+const generateChangeLog = (
+  user: Session['user'],
+  event: string,
+  diffLog: Diff
+): AuditLog => {
+  return {
+    actor: user,
+    date: new Date().getTime(),
+    event: event,
+    diff: diffLog,
+  };
+};
+
+const reduceMultipleObj = (acc, x) => {
+  for (const key in x) acc[key] = x?.[key];
+  return acc;
+};
+
+export const getDiff = (o1, o2) => {
+  const prev = o1.reduce(reduceMultipleObj, {});
+  const next = o2.reduce(reduceMultipleObj, {});
+  const diff: Diff[] = [];
+  for (const [key, value] of Object.entries(fieldPropsMapping)) {
+    if (JSON.stringify(prev[key]) !== JSON.stringify(next[key])) {
+      let prevValue, nextValue;
+      if (config[key as keyof RmConfig] != null) {
+        if (Array.isArray(prev[key]) || Array.isArray(next[key])) {
+          prevValue = prev[key].map(
+            ({ value }: Option) =>
+              config[key as keyof RmConfig]?.find(
+                (option) => option.value === value
+              )?.label
+          );
+          nextValue = next[key].map(
+            ({ value }: Option) =>
+              config[key as keyof RmConfig]?.find(
+                (option) => option.value === value
+              )?.label
+          );
+        } else {
+          prevValue = config[key as keyof RmConfig]?.find(
+            (option) =>
+              option.value ===
+              (typeof prev[key] === 'string' ? prev[key] : prev[key]?.value)
+          )?.label;
+          nextValue = config[key as keyof RmConfig]?.find(
+            (option) =>
+              option.value ===
+              (typeof next[key] === 'string' ? next[key] : next[key]?.value)
+          )?.label;
+        }
+      } else {
+        prevValue = prev[key];
+        nextValue = next[key];
+      }
+      diff.push({
+        field: value,
+        prevValue: JSON.stringify(prevValue),
+        nextValue: JSON.stringify(nextValue),
+      });
+    }
+  }
+
+  return diff;
+};
+
 
 const transformToRange = (value: number): number => {
   return Math.floor(value / 20);

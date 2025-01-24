@@ -15,7 +15,7 @@ import {
 } from '@/components/interfaces/Task';
 import { CscAuditLogs, CscPanel } from '@/components/interfaces/CSC';
 import { CreateRPA, RpaPanel, RpaAuditLog } from '@/components/interfaces/RPA';
-import { CreateRiskManagementRisk, RiskManagementTaskPanel } from '@/components/interfaces/RiskManagement';
+import { CreateRiskManagementRisk, RiskManagementTaskPanel, RmAuditLogs } from '@/components/interfaces/RiskManagement';
 import useTeam from 'hooks/useTeam';
 import useCanAccess from 'hooks/useCanAccess';
 import useISO from 'hooks/useISO';
@@ -219,6 +219,11 @@ const TaskById = ({
           <Card heading="CSC Audit logs">
             <Card.Body>
               <CscAuditLogs task={task} />
+            </Card.Body>
+          </Card>
+          <Card heading="Risk Management Audit logs">
+            <Card.Body>
+              <RmAuditLogs task={task} />
             </Card.Body>
           </Card>
         </>
