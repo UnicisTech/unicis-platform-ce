@@ -289,17 +289,6 @@ export const calculateRiskDistribution = (tasks: Task[]): number[] => {
   return riskCounts;
 }
 
-export const getGradientColor = (value: number): string => {
-  // Ensure value is between 0 and 100
-  const clampedValue = Math.max(0, Math.min(100, value));
-
-  // Interpolate between green (0, 255, 0) and red (255, 0, 0)
-  const red = Math.floor((clampedValue / 100) * 255);
-  const green = 255 - red;
-
-  return `rgb(${red}, ${green}, 0)`;
-};
-
 export const getInitials = (name: string) => {
   const words = name.trim().split(" ");
 

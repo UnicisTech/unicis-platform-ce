@@ -12,13 +12,21 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 //     'rgb(254, 1, 0)',
 //   ];
 
+// const barColors = [
+//   'rgba(47, 143, 0, 1)',
+//   'rgba(106, 217, 0, 1)',
+//   'rgba(255, 190, 0, 1)',
+//   'rgba(255, 111, 3)',
+//   'rgba(255, 0, 0, 1)',
+// ];
+
 const barColors = [
-  'rgba(47, 143, 0, 1)',
-  'rgba(106, 217, 0, 1)',
-  'rgba(255, 190, 0, 1)',
-  'rgba(255, 111, 3)',
-  'rgba(255, 0, 0, 1)',
-];
+  'rgba(211, 211, 211, 0.5)', 
+  'rgba(0, 255, 0, 0.3)', 
+  'rgba(255, 255, 0, 0.3)',
+  'rgba(255, 165, 0, 0.3)',
+  'rgba(255, 0, 0, 0.3)',
+]
 
 const DashboardChart = ({
   datasets

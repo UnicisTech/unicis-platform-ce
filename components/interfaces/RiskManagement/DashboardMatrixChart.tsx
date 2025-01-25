@@ -45,33 +45,6 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
     const chartWidth = CELL_SIZE * MATRIX_SIZE * 1.5;
     const chartHeight = CELL_SIZE * MATRIX_SIZE;
 
-    // const options: any = {
-    //     responsive: true,
-    //     maintainAspectRatio: false,
-    //     scales: {
-    //         x: {
-    //             title: { display: true, text: "Treated impact" },
-    //             min: 0,
-    //             max: MATRIX_SIZE,
-    //             ticks: {
-    //                 stepSize: 1,
-    //                 callback: (value: number) => `${(value / MATRIX_SIZE) * 100}%`,
-    //             },
-    //         },
-    //         y: {
-    //             title: { display: true, text: "Treadet probability" },
-    //             min: 0,
-    //             max: MATRIX_SIZE,
-    //             ticks: {
-    //                 stepSize: 1,
-    //                 callback: (value: number) => `${(value / MATRIX_SIZE) * 100}%`,
-    //             },
-    //             reverse: false,
-    //         },
-    //     },
-    //     plugins: { legend: { display: false } },
-    // };
-
     const options: any = {
         responsive: true,
         maintainAspectRatio: false,
@@ -80,15 +53,6 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
                 title: { display: true, text: "Treated impact" },
                 min: 0,
                 max: MATRIX_SIZE,
-                // ticks: {
-                //     stepSize: 1,
-                //     callback: (value: number, index: number) => {
-                //         if (index > 0 && index <= impactLabels.length) {
-                //             return impactLabels[index - 1];
-                //         }
-                //         return "";
-                //     },
-                // },
                 ticks: {
                     stepSize: 0.5, 
                     display: true, 
@@ -101,31 +65,11 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
                         }
                     },
                 },
-                // offset: true,
-                // grid: { offset: true }
-                // gridLines: { offsetGridLines: true }
-
             },
             y: {
                 title: { display: true, text: "Treated probability" },
                 min: 0,
                 max: MATRIX_SIZE,
-                // ticks: {
-                //     stepSize: 1,
-                //     backdropPadding: {top: 10},
-                //     padding: 100,
-                //     callback: (value: number, index: number) => {
-                //         if (index > 0 && index <= probabilityLabels.length) {
-                //             return probabilityLabels[index - 1];
-                //         }
-                //         return "";
-                //     },
-                //     // callback(value, index, values) {
-                //     //     values.push({ value: 0.5, label: 'Critical' })
-                //     //     values.push({ value: 1.5, label: 'Needs Work' })
-                //     //     values.push({ value: 2.5, label: 'Neutral' })
-                //     // },
-                // },
                 ticks: {
                     stepSize: 0.5,
                     callback: (value) => {
@@ -137,101 +81,11 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
                         }
                     },
                 },
-                // display: (tick) => tick.value % 1 === 0, 
-
                 reverse: false,
-                // gridLines: { offsetGridLines: true }
-                // offset: true,
-                // grid: { offset: true }
             },
         },
         plugins: { legend: { display: false } },
     };
-
-    // const options: any = {
-    //     responsive: true,
-    //     maintainAspectRatio: false,
-    //     scales: {
-    //         x: {
-    //             title: { display: true, text: "Treated impact" },
-    //             min: 0,
-    //             max: MATRIX_SIZE,
-    //             ticks: {
-    //                 stepSize: 1,
-    //                 callback: (value: number) => {
-    //                     const index = Math.floor(value) - 0.5; // Adjust for midpoint
-    //                     if (index >= 0 && index < impactLabels.length) {
-    //                         return impactLabels[index];
-    //                     }
-    //                     return "";
-    //                 },
-    //             },
-    //             grid: {
-    //                 offset: true, // Ensures grid lines are offset to align labels correctly
-    //             },
-    //         },
-    //         y: {
-    //             title: { display: true, text: "Treated probability" },
-    //             min: 0,
-    //             max: MATRIX_SIZE,
-    //             ticks: {
-    //                 stepSize: 1,
-    //                 callback: (value: number) => {
-    //                     const index = Math.floor(value) - 0.5; // Adjust for midpoint
-    //                     if (index >= 0 && index < probabilityLabels.length) {
-    //                         return probabilityLabels[index];
-    //                     }
-    //                     return "";
-    //                 },
-    //             },
-    //             grid: {
-    //                 offset: true, // Ensures grid lines are offset to align labels correctly
-    //             },
-    //             reverse: false,
-    //         },
-    //     },
-    //     plugins: { legend: { display: false } },
-    // };
-
-    // const options: any = {
-    //     responsive: true,
-    //     maintainAspectRatio: false,
-    //     scales: {
-    //         x: {
-    //             title: { display: true, text: "Treated impact" },
-    //             min: 0,
-    //             max: MATRIX_SIZE,
-    //             ticks: {
-    //                 stepSize: 1,
-    //                 callback: (value: number) => {
-    //                     if (value >= 0.5 && value < MATRIX_SIZE + 0.5) {
-    //                         const index = Math.floor(value - 0.5); // Correctly map ticks to labels
-    //                         return impactLabels[index];
-    //                     }
-    //                     return "";
-    //                 },
-    //             },
-    //         },
-    //         y: {
-    //             title: { display: true, text: "Treated probability" },
-    //             min: 0,
-    //             max: MATRIX_SIZE,
-    //             ticks: {
-    //                 stepSize: 1,
-    //                 callback: (value: number) => {
-    //                     if (value >= 0.5 && value < MATRIX_SIZE + 0.5) {
-    //                         const index = Math.floor(value - 0.5); // Correctly map ticks to labels
-    //                         return probabilityLabels[index];
-    //                     }
-    //                     return "";
-    //                 },
-    //             },
-    //             reverse: false,
-    //         },
-    //     },
-    //     plugins: { legend: { display: false } },
-    // };
-
 
     const backgroundPlugin = {
         id: "backgroundPlugin",

@@ -6,10 +6,28 @@ import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import { TailwindTableWrapper } from 'sharedStyles';
 import useCanAccess from 'hooks/useCanAccess';
-import { calculateCurrentRiskRating, calculateRiskRating, getGradientColor, getInitials } from '@/lib/rm';
+import { calculateCurrentRiskRating, calculateRiskRating, getInitials } from '@/lib/rm';
 
 const verticalTextStyles =
     "px-1.5 py-1.5 whitespace-nowrap align-middle text-center [writing-mode:vertical-rl] rotate-180";
+
+const getBgColorClass = (riskLevel: number): string => {
+    const riskLevels = [
+        { max: 20, class: 'risk-extreme-low' },
+        { max: 40, class: 'risk-low' },
+        { max: 60, class: 'risk-medium' },
+        { max: 80, class: 'risk-high' },
+        { max: 100, class: 'risk-extreme' },
+    ];
+
+    for (const { max, class: riskClass } of riskLevels) {
+        if (riskLevel <= max) {
+            return 'bg-' + riskClass;
+        }
+    }
+
+    return "";
+}
 
 const RisksTable = ({
     slug,
@@ -98,7 +116,7 @@ const RisksTable = ({
                                 const rawRiskRating = calculateRiskRating(risk[0].RawProbability, risk[0].RawImpact)
                                 const targetRiskRating = calculateRiskRating(risk[1].TreatedProbability, risk[1].TreatedImpact)
                                 const currentRiskRating = calculateCurrentRiskRating(rawRiskRating, targetRiskRating, risk[1].TreatmentStatus)
-                                
+
                                 return (
                                     <tr
                                         key={index}
@@ -126,7 +144,7 @@ const RisksTable = ({
                                         <td>
                                             <span>{risk[0].RawImpact}%</span>
                                         </td>
-                                        <td style={{backgroundColor: getGradientColor(rawRiskRating)}} className='dark:text-black'>
+                                        <td className={`dark:text-black ${getBgColorClass(rawRiskRating)}`}>
                                             {rawRiskRating}%
                                         </td>
                                         <td>
@@ -144,10 +162,10 @@ const RisksTable = ({
                                         <td>
                                             {risk[1].TreatedImpact}%
                                         </td>
-                                        <td style={{ backgroundColor: getGradientColor(targetRiskRating)}} className='dark:text-black'>
+                                        <td className={`dark:text-black ${getBgColorClass(targetRiskRating)}`}>
                                             {targetRiskRating}%
                                         </td>
-                                        <td style={{ backgroundColor: getGradientColor(currentRiskRating)}} className='dark:text-black'>
+                                        <td className={`dark:text-black ${getBgColorClass(currentRiskRating)}`}>
                                             {currentRiskRating}%
                                         </td>
                                         {canAccess('task', ['update']) && (
