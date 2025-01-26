@@ -12,6 +12,22 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, Legend, Title, Tooltip);
 
+const impactLabels = [
+    'Insignificant',
+    'Minor',
+    'Moderate',
+    'Major',
+    'Extreme',
+]
+
+const probabilityLabels = [
+    'Rare',
+    'Unlikely',
+    'Possible',
+    'Probable',
+    '(Almost) certain',
+]
+
 const MATRIX_SIZE = 5; // 5x5 matrix
 
 const riskColors = {
@@ -36,8 +52,18 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap, cellSize = 40 }: any) 
                 min: 0,
                 max: MATRIX_SIZE,
                 ticks: {
-                    stepSize: 1,
-                    callback: (value: number) => `${(value / MATRIX_SIZE) * 100}%`,
+                    stepSize: 0.5, 
+                    display: true, 
+                    callback: (value) => {
+                        const labelIndex = Math.round(value * 2) - 1; // Adjust for 0.5 step
+                        if (labelIndex % 2 === 0) { 
+                            console.log('1')
+                            return impactLabels[Math.floor(labelIndex / 2)]; 
+                        } else {
+                            console.log('2')
+                            return ''; 
+                        }
+                    },
                 },
             },
             y: {
@@ -45,8 +71,17 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap, cellSize = 40 }: any) 
                 min: 0,
                 max: MATRIX_SIZE,
                 ticks: {
-                    stepSize: 1,
-                    callback: (value: number) => `${(value / MATRIX_SIZE) * 100}%`,
+                    stepSize: 0.5,
+                    callback: (value) => {
+                        const labelIndex = Math.round(value * 2) - 1;
+                        if (labelIndex % 2 === 0) {
+                            console.log('1')
+                            return probabilityLabels[Math.floor(labelIndex / 2)];
+                        } else {
+                            console.log('2')
+                            return '';
+                        }
+                    },
                 },
                 reverse: false,
             },
