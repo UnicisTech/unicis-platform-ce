@@ -25,7 +25,7 @@ const PiaAnalysis = ({ tasks }: PiaAnalysisProps) => {
         <>
             <h4>{t("pia-overview")}</h4>
             <div className="w-full p-4 shadow-lg mx-3">
-                <div className="flex gap-6 overflow-x-scroll">
+                <div className="flex flex-col md:flex-row justify-center gap-6 overflow-x-scroll">
                     {riskSections.map(({ title, id, map }, index) => (
                         <div>
                         <div key={id} className="flex-1 text-center text-lg font-semibold">
