@@ -28,7 +28,7 @@ const probabilityLabels = [
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, Legend, Title, Tooltip);
 
-const CELL_SIZE = 80; // Width and height of one cell in pixels
+const CELL_SIZE = 60; // Width and height of one cell in pixels
 const MATRIX_SIZE = 5; // 5x5 matrix
 
 const riskColors = {

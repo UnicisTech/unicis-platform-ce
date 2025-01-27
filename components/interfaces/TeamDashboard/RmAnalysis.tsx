@@ -25,28 +25,21 @@ const RmAnalysis = ({ slug }: PiaAnalysisProps) => {
     return (
         <>
             <h4>{t('rm-overview')}</h4>
-
-            <div style={{ width: '100%'}}>
-                <div className="w-full p-4 shadow-lg mx-3">
-                    <div className="flex flex-col gap-6">
-                        <div className="flex justify-between gap-4">
-                            <div className="flex-1 text-center text-lg font-semibold">
-                                {t('current-risk-rating')}
-                            </div>
-                            <div className="flex-1 text-center text-lg font-semibold">
-                                {t('target-risk-rating')}
-                            </div>
-                        </div>
-                        <div className="flex justify-between gap-4">
-                            <div className="flex-1 relative">
-                                <DashboardPieChart
-                                    datasets={calculateRiskDistribution(tasks)}
-                                />
-                            </div>
-                            <div className="flex-1 relative">
-                                <DashboardMatrixChart datasets={[]} counterMap={riskMap} />
-                            </div>
-                        </div>
+            <div className="flex flex-wrap md:flex-nowrap md:flex-row justify-around mb-2 w-full">
+                <div className="w-full md:w-[49%] flex flex-col items-center stats p-4 stat-value shadow">
+                    <div className="text-center text-lg font-semibold">
+                        {t('current-risk-rating')}
+                    </div>
+                    <div className="flex-grow flex items-center justify-center w-full">
+                        <DashboardPieChart datasets={calculateRiskDistribution(tasks)} />
+                    </div>
+                </div>
+                <div className="w-full md:w-[49%] flex flex-col items-center stats p-4 stat-value shadow">
+                    <div className="text-center text-lg font-semibold">
+                        {t('target-risk-rating')}
+                    </div>
+                    <div className="flex-grow flex items-center justify-center w-full">
+                        <DashboardMatrixChart datasets={[]} counterMap={riskMap} />
                     </div>
                 </div>
             </div>
