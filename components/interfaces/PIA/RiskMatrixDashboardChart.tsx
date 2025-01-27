@@ -57,10 +57,8 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap, cellSize = 40 }: any) 
                     callback: (value) => {
                         const labelIndex = Math.round(value * 2) - 1; // Adjust for 0.5 step
                         if (labelIndex % 2 === 0) { 
-                            console.log('1')
                             return impactLabels[Math.floor(labelIndex / 2)]; 
                         } else {
-                            console.log('2')
                             return ''; 
                         }
                     },
@@ -75,10 +73,8 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap, cellSize = 40 }: any) 
                     callback: (value) => {
                         const labelIndex = Math.round(value * 2) - 1;
                         if (labelIndex % 2 === 0) {
-                            console.log('1')
                             return probabilityLabels[Math.floor(labelIndex / 2)];
                         } else {
-                            console.log('2')
                             return '';
                         }
                     },

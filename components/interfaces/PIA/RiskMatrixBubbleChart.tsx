@@ -21,6 +21,22 @@ const MATRIX_SIZE = 5;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, Legend, Title, Tooltip);
 
+const impactLabels = [
+  'Insignificant',
+  'Minor',
+  'Moderate',
+  'Major',
+  'Extreme',
+]
+
+const probabilityLabels = [
+  'Rare',
+  'Unlikely',
+  'Possible',
+  'Probable',
+  '(Almost) certain',
+]
+
 const RiskMatrixBubbleChart = ({ datasets }: any) => {
   // Adjust points by adding 0.5 to both x and y
   const adjustedDatasets = datasets.map((dataset: any) => ({
@@ -47,8 +63,16 @@ const RiskMatrixBubbleChart = ({ datasets }: any) => {
         min: 0,
         max: 5,
         ticks: {
-          stepSize: 1,
-          callback: (value: number) => `${(value / MATRIX_SIZE) * 100}%`,
+          stepSize: 0.5,
+          display: true,
+          callback: (value) => {
+            const labelIndex = Math.round(value * 2) - 1; // Adjust for 0.5 step
+            if (labelIndex % 2 === 0) {
+              return impactLabels[Math.floor(labelIndex / 2)];
+            } else {
+              return '';
+            }
+          },
         },
         position: "bottom",
       },
@@ -61,8 +85,15 @@ const RiskMatrixBubbleChart = ({ datasets }: any) => {
         max: 5,
         reverse: false,
         ticks: {
-          stepSize: 1,
-          callback: (value: number) => `${(value / MATRIX_SIZE) * 100}%`,
+          stepSize: 0.5,
+          callback: (value) => {
+            const labelIndex = Math.round(value * 2) - 1;
+            if (labelIndex % 2 === 0) {
+              return probabilityLabels[Math.floor(labelIndex / 2)];
+            } else {
+              return '';
+            }
+          },
         },
       },
     },
