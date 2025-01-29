@@ -17,3 +17,9 @@ export const TailwindTableWrapper = styled.div`
     white-space: normal !important;
   }
 `;
+
+export const AtlaskitDarkThemeWrapper = styled.div`
+  label span:not([title="required"]) {
+    color: var(--fallback-bc, oklch(var(--bc) / 1));
+  }
+`;

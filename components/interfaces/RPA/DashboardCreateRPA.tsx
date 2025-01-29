@@ -158,6 +158,7 @@ const DashboardCreateRPA = ({
           <form {...formProps}>
             <Modal.Header className="font-bold">
               {modalStage === 0 && `Select a task`}
+              {/* TODO: use shared/atlaskit component */}
               {modalStage === 1 && <StageTracker currentStage={stage} />}
             </Modal.Header>
             <Modal.Body>

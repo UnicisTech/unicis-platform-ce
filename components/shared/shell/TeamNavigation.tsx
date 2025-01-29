@@ -55,6 +55,14 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname.includes('tia'),
     },
     {
+      name: t('pia'),
+      href: `/teams/${slug}/pia`,
+      icon: () => <Icon src="/unicis-csc-logo.png" />,
+      active:
+        activePathname?.startsWith(`/teams/${slug}`) &&
+        activePathname.includes('pia'),
+    },
+    {
       name: t('csc'),
       href: `/teams/${slug}/csc`,
       icon: () => <Icon src="/unicis-csc-logo.png" />,

@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Loading, Error, Card } from '@/components/shared';
 import { Button } from 'react-daisyui';
-import { GetServerSidePropsContext } from 'next';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import useTask from 'hooks/useTask';
 import {
   Attachments,
@@ -21,15 +21,15 @@ import useISO from 'hooks/useISO';
 import { Team } from '@prisma/client';
 import { getCscStatusesBySlug } from 'models/team';
 import { CreateTIA, TiaAuditLogs, TiaPanel } from '@/components/interfaces/TIA';
+import { CreatePiaRisk, PiaPanel, PiaAuditLogs } from '@/components/interfaces/PIA'
 import Breadcrumb from '../../Breadcrumb';
 
 const TaskById = ({
-  csc_statuses,
-}: {
-  csc_statuses: { [key: string]: string };
-}) => {
+          csc_statuses,
+        }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [rpaVisible, setRpaVisible] = useState(false);
   const [tiaVisible, setTiaVisible] = useState(false);
+  const [piaVisible, setPiaVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('Overview');
   const [statuses, setStatuses] = useState(csc_statuses);
   const [activeCommentTab, setActiveCommentTab] = useState('Comments');
@@ -83,7 +83,7 @@ const TaskById = ({
       {activeTab === 'Processing Activities' && (
         <div>
           <Card
-            heading="RPA panel"
+            heading="Processing Activities panel"
             button={
               canAccess('task', ['update']) ? (
                 <Button
@@ -108,7 +108,7 @@ const TaskById = ({
       {activeTab === 'Transfer Impact Assessment' && (
         <div>
           <Card
-            heading="TIA panel"
+            heading="Transfer Impact Assessment panel"
             button={
               canAccess('task', ['update']) ? (
                 <Button
@@ -131,7 +131,7 @@ const TaskById = ({
         </div>
       )}
       {activeTab === 'Cybersecurity Controls' && (
-        <Card heading="CSC panel">
+        <Card heading="Cybersecurity Controls panel">
           <Card.Body>
             <CscPanel
               task={task}
@@ -140,6 +140,29 @@ const TaskById = ({
               setStatuses={setStatuses}
               ISO={ISO}
             />
+          </Card.Body>
+        </Card>
+      )}
+      {activeTab === 'Privacy Impact Assessment' && (
+        <Card
+          heading="Privacy Impact Assessment panel"
+          button={
+            canAccess('task', ['update']) ? (
+              <Button
+                size="sm"
+                color="primary"
+                variant="outline"
+                onClick={() => {
+                  setPiaVisible(!piaVisible);
+                }}
+              >
+                {t('create-pia')}
+              </Button>
+            ) : null
+          }
+        >
+          <Card.Body>
+            <PiaPanel task={task} />
           </Card.Body>
         </Card>
       )}
@@ -159,6 +182,14 @@ const TaskById = ({
           mutate={mutateTask}
         />
       )}
+      {piaVisible && (
+        <CreatePiaRisk
+          visible={piaVisible}
+          setVisible={setPiaVisible}
+          selectedTask={task}
+          mutateTasks={mutateTask}
+        />
+      )}
       <CommentsTab
         activeTab={activeCommentTab}
         setActiveTab={setActiveCommentTab}
@@ -172,19 +203,24 @@ const TaskById = ({
       )}
       {activeCommentTab === 'Audit logs' && (
         <>
-          <Card heading="RPA Audit logs">
+          <Card heading="Record of Processing Activities Audit logs">
             <Card.Body>
               <RpaAuditLog task={task} />
             </Card.Body>
           </Card>
-          <Card heading="Tia Audit logs">
+          <Card heading="Transfer Impact Assessment Audit logs">
             <Card.Body>
               <TiaAuditLogs task={task} />
             </Card.Body>
           </Card>
-          <Card heading="CSC Audit logs">
+          <Card heading="Cybersecurity Controls Audit logs">
             <Card.Body>
               <CscAuditLogs task={task} />
+            </Card.Body>
+          </Card>
+          <Card heading="Privacy Impact Assessment Audit logs">
+            <Card.Body>
+              <PiaAuditLogs task={task} />
             </Card.Body>
           </Card>
         </>

@@ -291,5 +291,9 @@
   "answer": "Answer",
   "add-answer": "Add answer",
   "remove-answer": "Remove answer",
-  "forbidden-resource": "This resource is forbidden"
+  "forbidden-resource": "This resource is forbidden",
+  "pia": "Privacy Impact Assessment",
+  "pia-dashboard": "Privacy Impact Assessment Dashboard",
+  "create-pia": "Register Privacy Impact Assessment",
+  "pia-overview": "Privacy Impact Assessment Overview"
 }

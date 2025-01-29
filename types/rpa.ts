@@ -59,6 +59,7 @@ export interface RpaConfig {
   piaNeeded: RpaOption[];
 }
 
+//TODO: RpaAuditLog and TiaAuditLog, use AuditLog from base.ts instead
 export type RpaAuditLog = {
   actor: Session['user'];
   date: number;
