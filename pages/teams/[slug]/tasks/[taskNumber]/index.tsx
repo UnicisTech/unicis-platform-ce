@@ -15,6 +15,7 @@ import {
 } from '@/components/interfaces/Task';
 import { CscAuditLogs, CscPanel } from '@/components/interfaces/CSC';
 import { CreateRPA, RpaPanel, RpaAuditLog } from '@/components/interfaces/RPA';
+import { CreateRiskManagementRisk, RiskManagementTaskPanel, RmAuditLogs } from '@/components/interfaces/RiskManagement';
 import useTeam from 'hooks/useTeam';
 import useCanAccess from 'hooks/useCanAccess';
 import useISO from 'hooks/useISO';
@@ -30,6 +31,8 @@ const TaskById = ({
   const [rpaVisible, setRpaVisible] = useState(false);
   const [tiaVisible, setTiaVisible] = useState(false);
   const [piaVisible, setPiaVisible] = useState(false);
+  const [rmVisible, setRmVisible] = useState(false);
+
   const [activeTab, setActiveTab] = useState('Overview');
   const [statuses, setStatuses] = useState(csc_statuses);
   const [activeCommentTab, setActiveCommentTab] = useState('Comments');
@@ -166,6 +169,29 @@ const TaskById = ({
           </Card.Body>
         </Card>
       )}
+      {activeTab === 'Risk Management' && (
+        <Card 
+          heading="RM panel"
+          button={
+            canAccess('task', ['update']) ? (
+              <Button
+                size="sm"
+                color="primary"
+                variant="outline"
+                onClick={() => {
+                  setRmVisible(!rmVisible);
+                }}
+              >
+                {t('rm-register-risk-record')}
+              </Button>
+            ) : null
+          }  
+        >
+          <Card.Body>
+            <RiskManagementTaskPanel task={task} />
+            </Card.Body>
+        </Card>
+      )}
       {tiaVisible && (
         <CreateTIA
           visible={tiaVisible}
@@ -186,6 +212,14 @@ const TaskById = ({
         <CreatePiaRisk
           visible={piaVisible}
           setVisible={setPiaVisible}
+          selectedTask={task}
+          mutateTasks={mutateTask}
+          />
+      )}
+      {rmVisible && (
+        <CreateRiskManagementRisk
+          visible={rmVisible}
+          setVisible={setRmVisible}
           selectedTask={task}
           mutateTasks={mutateTask}
         />
@@ -221,6 +255,11 @@ const TaskById = ({
           <Card heading="Privacy Impact Assessment Audit logs">
             <Card.Body>
               <PiaAuditLogs task={task} />
+            </Card.Body>
+          </Card>
+          <Card heading="Risk Management Audit logs">
+            <Card.Body>
+              <RmAuditLogs task={task} />
             </Card.Body>
           </Card>
         </>

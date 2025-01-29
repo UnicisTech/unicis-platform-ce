@@ -4,6 +4,7 @@ import type { TaskTiaProperties } from './tia';
 import type { TaskRpaProperties } from './rpa';
 import type { TaskPiaProperties } from './pia';
 import { TeamIapProperties } from './iap';
+import type { TaskRmProperties } from './rm';
 import type { Session } from 'next-auth';
 
 export type ApiError = {
@@ -128,7 +129,8 @@ export type TaskProperties =
   TaskTiaProperties &
   TaskCscProperties &
   TaskRpaProperties &
-  TaskPiaProperties;
+  TaskPiaProperties &
+  TaskRmProperties;
 
 export type ExtendedComment = Comment & {
   createdBy: User;

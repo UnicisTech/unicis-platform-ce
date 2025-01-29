@@ -4,6 +4,7 @@ import {
   TeamTaskAnalysis,
   PiaAnalysis,
 } from '@/components/interfaces/TeamDashboard';
+import RmAnalysis from '@/components/interfaces/TeamDashboard/RmAnalysis';
 import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/TeamProcessingActivities';
 import { Error, Loading } from '@/components/shared';
 import env from '@/lib/env';
@@ -59,6 +60,10 @@ const TeamDashboard = ({
           <PiaAnalysis tasks={tasks} />
         </div>
         <TeamCscAnalysis slug={slug} csc_statuses={csc_statuses} />
+        <div className="space-y-6">
+          <RmAnalysis slug={slug} />
+        </div>
+
       </div>
     </>
   );
