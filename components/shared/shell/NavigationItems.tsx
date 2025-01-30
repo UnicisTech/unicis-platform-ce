@@ -51,12 +51,15 @@ const NavigationItems = ({ menus }: NavigationItemsProps) => {
 };
 
 const NavigationItem = ({ menu, className }: NavigationItemProps) => {
+  const isExternal = menu.href.startsWith('http');
+
   return (
     <Link
       href={menu.href}
       className={`flex items-center rounded text-sm text-gray-900 hover:bg-gray-100 px-2 p-2 gap-2 dark:text-gray-500 hover:dark:text-black ${
         menu.active ? 'bg-gray-100 font-semibold dark:text-black' : ''
       }${className}`}
+      target={isExternal ? '_blank' : undefined}
     >
       {menu.icon && (
         <menu.icon
