@@ -13,7 +13,7 @@ const verticalTextStyles =
 
 const getBgColorClass = (riskLevel: number): string => {
     const riskLevels = [
-        { max: 20, class: 'risk-extreme-low' },
+        { max: 1, class: 'risk-extreme-low' },
         { max: 40, class: 'risk-low' },
         { max: 60, class: 'risk-medium' },
         { max: 80, class: 'risk-high' },
@@ -28,6 +28,24 @@ const getBgColorClass = (riskLevel: number): string => {
 
     return "";
 }
+
+const riskValueToLabel = (value: number): string => {
+    const riskLevels = [
+        { max: 20, label: 'Insignificant' },
+        { max: 40, label: 'Minor' },
+        { max: 60, label: 'Moderate' },
+        { max: 80, label: 'Major' },
+        { max: 100, label: 'Extreme' },
+    ];
+
+    for (const { max, label: riskLabel } of riskLevels) {
+        if (value <= max) {
+            return riskLabel;
+        }
+    }
+
+    return "";
+};
 
 const RisksTable = ({
     slug,
@@ -139,13 +157,13 @@ const RisksTable = ({
                                             <span>{risk[0].Impact}</span>
                                         </td>
                                         <td>
-                                            <span>{risk[0].RawProbability}%</span>
+                                            <span>{riskValueToLabel(risk[0].RawProbability)}</span>
                                         </td>
                                         <td>
-                                            <span>{risk[0].RawImpact}%</span>
+                                            <span>{riskValueToLabel(risk[0].RawImpact)}</span>
                                         </td>
                                         <td className={`dark:text-black ${getBgColorClass(rawRiskRating)}`}>
-                                            {rawRiskRating}%
+                                            {riskValueToLabel(rawRiskRating)}
                                         </td>
                                         <td>
                                             {risk[1].RiskTreatment}
@@ -154,19 +172,19 @@ const RisksTable = ({
                                             {risk[1].TreatmentCost}
                                         </td>
                                         <td>
-                                            {risk[1].TreatmentStatus}%
+                                            {riskValueToLabel(risk[1].TreatmentStatus)}
                                         </td>
                                         <td>
-                                            {risk[1].TreatedProbability}%
+                                            {riskValueToLabel(risk[1].TreatedProbability)}
                                         </td>
                                         <td>
-                                            {risk[1].TreatedImpact}%
+                                            {riskValueToLabel(risk[1].TreatedImpact)}
                                         </td>
                                         <td className={`dark:text-black ${getBgColorClass(targetRiskRating)}`}>
-                                            {targetRiskRating}%
+                                            {riskValueToLabel(targetRiskRating)}
                                         </td>
                                         <td className={`dark:text-black ${getBgColorClass(currentRiskRating)}`}>
-                                            {currentRiskRating}%
+                                            {riskValueToLabel(currentRiskRating)}
                                         </td>
                                         {canAccess('task', ['update']) && (
                                             <td className="px-1.5 py-1.5">
