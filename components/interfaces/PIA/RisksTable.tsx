@@ -14,13 +14,27 @@ const calculatePercentage = (input: number): number => {
     return (input / 16) * 100;
 };
 
-const formatPercentage = (percentage: number): string => {
-    return `${percentage.toFixed(0)}%`;
+const riskValueToLabel = (value: number): string => {
+    const riskLevels = [
+        { max: 20, label: 'Insignificant' },
+        { max: 40, label: 'Minor' },
+        { max: 60, label: 'Moderate' },
+        { max: 80, label: 'Major' },
+        { max: 100, label: 'Extreme' },
+    ];
+
+    for (const { max, label: riskLabel } of riskLevels) {
+        if (value <= max) {
+            return riskLabel;
+        }
+    }
+
+    return "";
 };
 
 const getBgColorClass = (riskLevel: number): string => {
     const riskLevels = [
-        { max: 20, class: 'risk-extreme-low' },
+        { max: 1, class: 'risk-extreme-low' },
         { max: 40, class: 'risk-low' },
         { max: 60, class: 'risk-medium' },
         { max: 80, class: 'risk-high' },
@@ -127,13 +141,13 @@ const RisksTable = ({
                                             />
                                         </td>
                                         <td className={`px-1.5 py-1.5 ${getBgColorClass(confidentialityValue)}`}>
-                                            {formatPercentage(confidentialityValue)}
+                                            {riskValueToLabel(confidentialityValue)}
                                         </td>
                                         <td className={`px-1.5 py-1.5 ${getBgColorClass(availabilityValue)}`}>
-                                            {formatPercentage(availabilityValue)}
+                                            {riskValueToLabel(availabilityValue)}
                                         </td>
                                         <td className={`px-1.5 py-1.5 ${getBgColorClass(transparencyValue)}`}>
-                                            {formatPercentage(transparencyValue)}
+                                            {riskValueToLabel(transparencyValue)}
                                         </td>
                                         {canAccess('task', ['update']) && (
                                             <td className="px-1.5 py-1.5">
