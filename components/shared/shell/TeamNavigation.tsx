@@ -19,6 +19,7 @@ interface NavigationItemsProps extends NavigationProps {
 const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
+  const relativePath = activePathname?.slice(`/teams/${slug}`.length) || ''
   const menus: (MenuItem | null)[] = [
     {
       name: t('Dashboard'),
@@ -27,7 +28,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       className: 'fill-blue-600 stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        activePathname.includes('dashboard'),
+        relativePath.includes('dashboard'),
     },
     {
       name: t('all-tasks'),
@@ -36,7 +37,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       className: 'fill-blue-600 stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        activePathname.includes('tasks'),
+        relativePath.includes('tasks'),
     },
     {
       name: t('rpa-activities'),
@@ -44,7 +45,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       icon: () => <Icon src="/unicis-rpa-logo.png" />,
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        activePathname.includes('rpa'),
+        relativePath.includes('rpa'),
     },
     {
       name: t('tia'),
@@ -52,7 +53,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       icon: () => <Icon src="/unicis-tia-logo.png" />,
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        activePathname.includes('tia'),
+        relativePath.includes('tia'),
     },
     {
       name: t('pia'),
@@ -60,7 +61,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       icon: () => <Icon src="/unicis-csc-logo.png" />,
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        activePathname.includes('pia'),
+        relativePath.includes('pia'),
     },
     {
       name: t('csc'),
@@ -68,7 +69,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       icon: () => <Icon src="/unicis-csc-logo.png" />,
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        activePathname.includes('csc'),
+        relativePath.includes('csc'),
     },
     canAccess('iap_course', ['update']) ? {
       name: t('iap'),
@@ -76,7 +77,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       icon: () => <Icon src="/unicis-iap-logo.png" />,
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        activePathname.includes('iap') && !activePathname.includes('iap/admin'),
+        relativePath.includes('iap') && !relativePath.includes('iap/admin'),
     } : null,
     {
       name: t('rm'),
@@ -84,7 +85,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       icon: () => <Icon src="/unicis-csc-logo.png" />,
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        activePathname.includes('risk-management'),
+        relativePath.includes('risk-management'),
     },
     {
       name: 'line-break',
@@ -97,7 +98,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       className: 'stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        activePathname.includes('documentation'),
+        relativePath.includes('documentation'),
     },
     {
       name: t('knowledge-base'),
@@ -106,7 +107,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       className: 'stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        activePathname.includes('documentation'),
+        relativePath.includes('documentation'),
     },
     {
       name: t('feedback'),
@@ -115,7 +116,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       className: 'stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        activePathname.includes('feedback'),
+        relativePath.includes('feedback'),
     },
     {
       name: t('support'),
@@ -131,7 +132,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         /(settings|billing|members|saml|directory-sync|audit-logs|webhooks|api-keys|iap\/admin)/.test(
-          activePathname
+          relativePath
         ),
     },
   ];
