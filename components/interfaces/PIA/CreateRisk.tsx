@@ -7,12 +7,8 @@ import { useRouter } from 'next/router';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
 import { RadioGroup } from '@atlaskit/radio';
 import Form, {
-    ErrorMessage,
     Field,
     FieldProps,
-    CheckboxField,
-    FormFooter,
-    HelperMessage,
 } from '@atlaskit/form';
 import TextArea from '@atlaskit/textarea';
 import { fieldPropsMapping, config, riskSecurityPoints, riskProbabilityPoints, headers } from '@/components/defaultLanding/data/configs/pia';
@@ -22,7 +18,9 @@ import RiskMatrixBubbleChart from './RiskMatrixBubbleChart';
 import type { PiaRisk, ApiResponse, TaskProperties } from 'types';
 import { AtlaskitDarkThemeWrapper } from 'sharedStyles';
 
-const shouldShowExtraFields = (risk: PiaRisk): boolean => {
+const shouldShowExtraStage = (risk: PiaRisk | []): boolean => {
+    if (!risk[1] || !risk[2] || !risk[3]) return false;
+
     const confidentialityRisk = riskProbabilityPoints[risk[1].confidentialityRiskProbability] * riskSecurityPoints[risk[1].confidentialityRiskSecurity]
     const availabilityRisk = riskProbabilityPoints[risk[2].availabilityRiskProbability] * riskSecurityPoints[risk[2].availabilityRiskSecurity]
     const transparencyRisk = riskProbabilityPoints[risk[3].transparencyRiskProbability] * riskSecurityPoints[risk[3].transparencyRiskSecurity]
@@ -50,6 +48,8 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
     const [risk, setRisk] = useState<any>([])
     const [prevRisk, setPrevRisk] = useState<any>([])
     const [isLoading, setIsLoading] = useState<boolean>(false)
+
+    const showExtraStage = shouldShowExtraStage(risk)
 
     const saveRisk = async ({ risk, prevRisk }: { risk: any, prevRisk: any }) => {
         try {
@@ -104,9 +104,7 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
                 setStage(stage + 1);
                 break;
             case 5: {
-                const showNextStage = shouldShowExtraFields(risk)
-
-                if (showNextStage) {
+                if (showExtraStage) {
                     setStage(stage + 1);
                     break;
                 } else {
@@ -184,7 +182,7 @@ const CreateRisk = ({ selectedTask, tasks, visible, setVisible, mutateTasks }: C
                                 appearance="primary"
                                 isLoading={isLoading}
                             >
-                                {stage < 2 ? t('next') : t('save')}
+                                {stage < (showExtraStage ? 6 : 5) ? t('next') : t('save')}
                             </LoadingButton>
                         </Modal.Actions>
                     </form>
