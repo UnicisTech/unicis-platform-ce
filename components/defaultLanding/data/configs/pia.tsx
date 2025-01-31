@@ -150,7 +150,7 @@ export const piaDashboardConfig = [
     },
     {
         id: 3,
-        title: "Transparency, purpose limitation and data minimization",
+        title: "Transparency, and data minimization",
         security: "transparencyRiskSecurity",
         probability: "transparencyRiskProbability",
     },
