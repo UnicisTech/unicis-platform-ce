@@ -92,7 +92,7 @@ const RisksTable = ({
                                     Impact
                                 </th>
                                 <th className={verticalTextStyles}>
-                                    Raw probabiltity
+                                    Raw probability
                                 </th>
                                 <th className={verticalTextStyles}>
                                     Raw impact
@@ -116,7 +116,7 @@ const RisksTable = ({
                                     Treated impact
                                 </th>
                                 <th className={verticalTextStyles}>
-                                    Targer risk rating
+                                    Target risk rating
                                 </th>
                                 <th className={verticalTextStyles}>
                                     Current risk rating
