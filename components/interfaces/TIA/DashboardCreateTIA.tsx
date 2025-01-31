@@ -10,9 +10,9 @@ import Form from '@atlaskit/form';
 
 import type { ApiResponse } from 'types';
 import type { Task } from '@prisma/client';
-import { defaultProcedure } from '@/components/defaultLanding/data/configs/tia';
+import { defaultProcedure, headers } from '@/components/defaultLanding/data/configs/tia';
 import CreateFormBody from './CreateFormBody';
-import { TaskPickerFormBody } from '@/components/shared/atlaskit';
+import { StageTracker, TaskPickerFormBody } from '@/components/shared/atlaskit';
 
 const shouldSkipTwoSteps = (formData: any) =>
   [
@@ -315,8 +315,7 @@ const DashboardCreateTIA = ({
             <form {...formProps}>
               <Modal.Header className="font-bold">
                 {modalStage === 0 && `Select a task`}
-                {modalStage === 1 &&
-                  `Register Transfer Impact Assessment ${stage + 1}/5`}
+                {modalStage === 1 && <StageTracker currentStage={stage} headers={headers}/>}
               </Modal.Header>
               <Modal.Body>
                 {modalStage === 0 && (

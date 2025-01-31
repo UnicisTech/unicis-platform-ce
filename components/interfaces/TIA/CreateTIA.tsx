@@ -10,8 +10,9 @@ import Form from '@atlaskit/form';
 
 import type { ApiResponse, TaskWithRpaProcedure } from 'types';
 import type { Task } from '@prisma/client';
-import { defaultProcedure } from '@/components/defaultLanding/data/configs/tia';
+import { defaultProcedure, headers } from '@/components/defaultLanding/data/configs/tia';
 import CreateFormBody from './CreateFormBody';
+import { StageTracker } from '@/components/shared/atlaskit';
 
 const shouldSkipTwoSteps = (formData: any) =>
   [
@@ -294,9 +295,9 @@ const CreateTIA = ({
           const { formProps, reset, setFieldValue } = props;
           return (
             <form {...formProps}>
-              <Modal.Header className="font-bold">{`Register Transfer Impact Assessment ${
-                stage + 1
-              }/5`}</Modal.Header>
+              <Modal.Header className="font-bold">
+                <StageTracker currentStage={stage} headers={headers}/>
+              </Modal.Header>
               <Modal.Body>
                 <CreateFormBody
                   stage={stage}
