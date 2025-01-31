@@ -11,7 +11,8 @@ import Form from '@atlaskit/form';
 import type { ApiResponse, TaskWithRpaProcedure } from 'types';
 import type { Task } from '@prisma/client';
 import CreateFormBody from './CreateFormBody';
-import StageTracker from './StageTracker';
+import { StageTracker } from '@/components/shared/atlaskit';
+import { headers } from '@/components/defaultLanding/data/configs/rpa';
 
 const CreateRPA = ({
   visible,
@@ -138,8 +139,7 @@ const CreateRPA = ({
         {({ formProps, reset }) => (
           <form {...formProps}>
             <Modal.Header>
-              {/* TODO: use shared/atlaskit component */}
-              <StageTracker currentStage={stage}/>
+              <StageTracker currentStage={stage} headers={headers}/>
             </Modal.Header>
             <Modal.Body>
               <CreateFormBody

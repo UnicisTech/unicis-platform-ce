@@ -13,7 +13,8 @@ import type { ApiResponse } from 'types';
 import type { Task } from '@prisma/client';
 import CreateFormBody from './CreateFormBody';
 import { TaskPickerFormBody } from '@/components/shared/atlaskit';
-import StageTracker from './StageTracker';
+import { StageTracker } from '@/components/shared/atlaskit';
+import { headers } from '@/components/defaultLanding/data/configs/rpa';
 
 const DashboardCreateRPA = ({
   visible,
@@ -158,8 +159,7 @@ const DashboardCreateRPA = ({
           <form {...formProps}>
             <Modal.Header className="font-bold">
               {modalStage === 0 && `Select a task`}
-              {/* TODO: use shared/atlaskit component */}
-              {modalStage === 1 && <StageTracker currentStage={stage} />}
+              {modalStage === 1 && <StageTracker currentStage={stage} headers={headers}/>}
             </Modal.Header>
             <Modal.Body>
               {modalStage === 0 && (
