@@ -299,3 +299,21 @@ export const getInitials = (name: string) => {
 
   return initials;
 }
+
+export const riskValueToLabel = (value: number): string => {
+  const riskLevels = [
+      { max: 20, label: 'Insignificant' },
+      { max: 40, label: 'Minor' },
+      { max: 60, label: 'Moderate' },
+      { max: 80, label: 'Major' },
+      { max: 100, label: 'Extreme' },
+  ];
+
+  for (const { max, label: riskLabel } of riskLevels) {
+      if (value <= max) {
+          return riskLabel;
+      }
+  }
+
+  return "";
+};

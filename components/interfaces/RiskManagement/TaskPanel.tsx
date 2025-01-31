@@ -8,6 +8,7 @@ import {
 import { Field } from '@/components/shared/atlaskit';
 import type { Task } from '@prisma/client';
 import { RMProcedureInterface, TaskProperties } from 'types';
+import { riskValueToLabel } from '@/lib/rm';
 
 const RmTaskPanel = ({ task }: { task: Task }) => {
     const properties = task?.properties as TaskProperties;
@@ -40,11 +41,12 @@ const RmTaskPanel = ({ task }: { task: Task }) => {
                             />
                             <Field
                                 label={fieldPropsMapping['RawProbability']}
-                                value={`${risk[0]?.RawProbability}%`}
+                                value={`${riskValueToLabel(risk[0]?.RawProbability)} (${risk[0]?.RawProbability}%)`}
                             />
                             <Field
                                 label={fieldPropsMapping['RawImpact']}
-                                value={`${risk[0]?.RawImpact}%`}
+                                value={`${riskValueToLabel(risk[0]?.RawImpact)} (${risk[0]?.RawImpact}%)`}
+
                             />
                         </div>
                     </TabPanel>
@@ -60,15 +62,15 @@ const RmTaskPanel = ({ task }: { task: Task }) => {
                             />
                             <Field
                                 label={fieldPropsMapping['TreatmentStatus']}
-                                value={`${risk[1]?.TreatmentStatus}%`}
+                                value={`${riskValueToLabel(risk[1]?.TreatmentStatus)} (${risk[1]?.TreatmentStatus}%)`}
                             />
                             <Field
                                 label={fieldPropsMapping['TreatedProbability']}
-                                value={`${risk[1]?.TreatedProbability}%`}
+                                value={`${riskValueToLabel(risk[1]?.TreatedProbability)} (${risk[1]?.TreatedProbability}%)`}
                             />
                             <Field
                                 label={fieldPropsMapping['TreatedImpact']}
-                                value={`${risk[1]?.TreatedImpact}%`}
+                                value={`${riskValueToLabel(risk[1]?.TreatedImpact)} (${risk[1]?.TreatedImpact}%)`}
                             />
                         </div>
                     </TabPanel>

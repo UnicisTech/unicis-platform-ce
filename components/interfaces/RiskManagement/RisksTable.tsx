@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import { TailwindTableWrapper } from 'sharedStyles';
 import useCanAccess from 'hooks/useCanAccess';
-import { calculateCurrentRiskRating, calculateRiskRating, getInitials } from '@/lib/rm';
+import { calculateCurrentRiskRating, calculateRiskRating, getInitials, riskValueToLabel } from '@/lib/rm';
 
 const verticalTextStyles =
     "px-1.5 py-1.5 whitespace-nowrap align-middle text-center [writing-mode:vertical-rl] rotate-180";
@@ -28,24 +28,6 @@ const getBgColorClass = (riskLevel: number): string => {
 
     return "";
 }
-
-const riskValueToLabel = (value: number): string => {
-    const riskLevels = [
-        { max: 20, label: 'Insignificant' },
-        { max: 40, label: 'Minor' },
-        { max: 60, label: 'Moderate' },
-        { max: 80, label: 'Major' },
-        { max: 100, label: 'Extreme' },
-    ];
-
-    for (const { max, label: riskLabel } of riskLevels) {
-        if (value <= max) {
-            return riskLabel;
-        }
-    }
-
-    return "";
-};
 
 const RisksTable = ({
     slug,
