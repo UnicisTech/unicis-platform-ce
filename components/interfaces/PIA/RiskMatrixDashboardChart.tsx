@@ -37,7 +37,7 @@ const riskColors = {
   extreme: "rgba(255, 0, 0, 0.3)",
 };
 
-const RiskMatrixDashboardChart = ({ datasets, counterMap, cellSize = 40 }: any) => {
+const RiskMatrixDashboardChart = ({ datasets, counterMap, cellSize = 55 }: any) => {
     const chartRef = useRef<any>(null);
     const [points, setPoints] = useState<any[]>([]);
     const chartWidth = cellSize * MATRIX_SIZE * 1.5;
@@ -169,7 +169,7 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap, cellSize = 40 }: any) 
                         top: `${point.y}px`,
                         transform: "translate(-50%, -50%)",
                         width: `${cellSize * 0.8}px`, // Scale to fit inside cell
-                        height: `${cellSize * 0.8}px`,
+                        height: `${cellSize * 0.6}px`,
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
