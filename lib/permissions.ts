@@ -15,7 +15,12 @@ export type Resource =
   | 'task'
   | 'iap_course'
   | 'iap_category'
-  | 'iap_reports';
+  | 'iap_reports'
+  | 'rpa'
+  | 'tia'
+  | 'pia'
+  | 'csc'
+  | 'rm';
 
 export type RolePermissions = {
   [role in RoleType]: Permission[];
@@ -99,6 +104,26 @@ export const permissions: RolePermissions = {
       resource: 'iap_reports',
       actions: '*'
     },
+    {
+      resource: 'rpa',
+      actions: '*'
+    },
+    {
+      resource: 'tia',
+      actions: '*'
+    },
+    {
+      resource: 'pia',
+      actions: '*'
+    },
+    {
+      resource: 'csc',
+      actions: '*'
+    },
+    {
+      resource: 'rm',
+      actions: '*'
+    },
   ],
   ADMIN: [
     {
@@ -151,6 +176,26 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'iap_reports',
+      actions: '*'
+    },
+    {
+      resource: 'rpa',
+      actions: '*'
+    },
+    {
+      resource: 'tia',
+      actions: '*'
+    },
+    {
+      resource: 'pia',
+      actions: '*'
+    },
+    {
+      resource: 'csc',
+      actions: '*'
+    },
+    {
+      resource: 'rm',
       actions: '*'
     },
   ],

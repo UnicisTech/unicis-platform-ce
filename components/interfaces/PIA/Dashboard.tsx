@@ -6,7 +6,7 @@ import useCanAccess from 'hooks/useCanAccess';
 import useTeamTasks from "hooks/useTeamTasks";
 import { Team } from "@prisma/client"
 import CreateRisk from "./CreateRisk";
-import { EmptyState } from "@/components/shared";
+import { EmptyState, Error } from "@/components/shared";
 import { TaskProperties, TaskWithPiaRisk } from "types";
 import RisksTable from "./RisksTable";
 import DeleteRisk from "./DeleteRisk";
@@ -54,6 +54,10 @@ const Dashboard = ({ team }: DashboardProps) => {
         setTaskToDelete(task);
         setIsDeleteOpen(true);
     }, []);
+
+    if (!canAccess('pia', ['read'])) {
+        return <Error message={t('forbidden-resource')} />
+    }
 
     return (
         <>

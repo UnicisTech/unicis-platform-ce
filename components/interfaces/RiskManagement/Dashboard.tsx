@@ -7,7 +7,7 @@ import CreateRisk from "./CreateRisk";
 import useTeamTasks from "hooks/useTeamTasks";
 import { useRouter } from 'next/router';
 import { TaskProperties, TaskWithRmRisk } from "types";
-import { EmptyState } from "@/components/shared";
+import { EmptyState, Error } from "@/components/shared";
 import RisksTable from "./RisksTable";
 import DeleteRisk from "./DeleteRisk";
 
@@ -58,8 +58,9 @@ const Dashboard = ({ team }: DashboardProps) => {
         setIsDeleteOpen(true);
     }, []);
 
-
-
+    if (!canAccess('rm', ['read'])) {
+        return <Error message={t('forbidden-resource')}/>
+    }
 
     return (
         <>

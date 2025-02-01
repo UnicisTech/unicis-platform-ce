@@ -23,6 +23,8 @@ import { getCscStatusesBySlug } from 'models/team';
 import type { Option } from 'types';
 import useISO from 'hooks/useISO';
 import { statusOptions } from '@/components/defaultLanding/data/configs/csc';
+import useCanAccess from 'hooks/useCanAccess';
+import { useTranslation } from 'react-i18next';
 
 const labels = [
   'Unknown',
@@ -49,6 +51,7 @@ const barColors = [
 const CscDashboard = ({
   csc_statuses,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { t } = useTranslation('common');
   const router = useRouter();
   const { slug } = router.query;
 
@@ -62,6 +65,8 @@ const CscDashboard = ({
   const { isLoading, isError, team } = useTeam(slug as string);
   const { tasks, mutateTasks } = useTeamTasks(slug as string);
   const { ISO } = useISO(team);
+
+  const { canAccess } = useCanAccess()
 
   const statusHandler = useCallback(
     async (control: string, value: string) => {
@@ -112,6 +117,10 @@ const CscDashboard = ({
   useEffect(() => {
     console.log('CSC ISO', ISO);
   }, [ISO]);
+
+  if (!canAccess('csc', ['read'])) {
+    return <Error message={t('forbidden-resource')}/>
+  }
 
   if (isLoading || !team || !tasks || !ISO) {
     return <Loading />;

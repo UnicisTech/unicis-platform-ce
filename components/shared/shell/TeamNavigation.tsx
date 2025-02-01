@@ -39,38 +39,38 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('tasks'),
     },
-    {
+    canAccess('rpa', ['read']) ? {
       name: t('rpa-activities'),
       href: `/teams/${slug}/rpa`,
       icon: () => <Icon src="/unicis-rpa-logo.png" />,
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('rpa'),
-    },
-    {
+    } : null,
+    canAccess('tia', ['read']) ? {
       name: t('tia'),
       href: `/teams/${slug}/tia`,
       icon: () => <Icon src="/unicis-tia-logo.png" />,
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('tia'),
-    },
-    {
+    }: null,
+    canAccess('pia', ['read']) ? {
       name: t('pia'),
       href: `/teams/${slug}/pia`,
       icon: () => <Icon src="/unicis-csc-logo.png" />,
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('pia'),
-    },
-    {
+    } : null,
+    canAccess('csc', ['read']) ? {
       name: t('csc'),
       href: `/teams/${slug}/csc`,
       icon: () => <Icon src="/unicis-csc-logo.png" />,
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('csc'),
-    },
+    } : null,
     canAccess('iap_course', ['update']) ? {
       name: t('iap'),
       href: `/teams/${slug}/iap`,
@@ -79,14 +79,14 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('iap') && !relativePath.includes('iap/admin'),
     } : null,
-    {
+    canAccess('rm', ['read']) ? {
       name: t('rm'),
       href: `/teams/${slug}/risk-management`,
       icon: () => <Icon src="/unicis-csc-logo.png" />,
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('risk-management'),
-    },
+    } : null,
     {
       name: 'line-break',
       href: '',
