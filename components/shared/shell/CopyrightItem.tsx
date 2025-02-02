@@ -11,7 +11,7 @@ const CopyrightItem = () => {
             Unicis.Tech OÜ
           </a>
           . <br />
-          Version: 2024-25-08 <br />
+          Version: 2025-02-02 <br />
           Made with 💙 in 🇪🇺
         </p>
       </li>
