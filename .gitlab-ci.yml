@@ -1,0 +1,61 @@
+ stages:
+  - build
+  - deploy
+
+variables:
+  AZURE_RESOURCE_GROUP: "platform"
+  AZURE_WEBAPP_NAME: "Platform-PROD"
+  AZURE_SUBSCRIPTION_ID: "3b1f2414-aca0-4526-aef9-ff80bd0bd1fa"
+  AZURE_CREDENTIALS_JSON: "/.azure/credentials.json"  # Path to service principal credentials file
+
+before_script:
+  - echo "Setting up Azure CLI"
+  - curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+  - az login --service-principal -u $(cat $AZURE_CREDENTIALS_JSON | jq -r .clientId) -p $(cat $AZURE_CREDENTIALS_JSON | jq -r .clientSecret) --tenant $(cat $AZURE_CREDENTIALS_JSON | jq -r .tenantId)
+  - az account set --subscription $AZURE_SUBSCRIPTION_ID
+
+build:
+  stage: build
+  script:
+    - echo "Building the Node.js application"
+    - docker build -t your-image-name .
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying to Azure Web App"
+    # Set environment variables from Azure
+    - |
+      az webapp config appsettings set \
+        --name $AZURE_WEBAPP_NAME \
+        --resource-group $AZURE_RESOURCE_GROUP \
+        --settings \
+          NEXTAUTH_URL=$NEXTAUTH_URL \
+          NEXTAUTH_SECRET=$NEXTAUTH_SECRET \
+          SMTP_HOST=$SMTP_HOST \
+          SMTP_PORT=$SMTP_PORT \
+          SMTP_USER=$SMTP_USER \
+          SMTP_PASSWORD=$SMTP_PASSWORD \
+          SMTP_FROM=$SMTP_FROM \
+          DATABASE_URL=$DATABASE_URL \
+          APP_URL=$APP_URL \
+          SVIX_URL=$SVIX_URL \
+          SVIX_API_KEY=$SVIX_API_KEY \
+          CONFIRM_EMAIL=$CONFIRM_EMAIL \
+          NEXT_PUBLIC_MATOMO_URL=$NEXT_PUBLIC_MATOMO_URL \
+          NEXT_PUBLIC_MATOMO_SITE_ID=$NEXT_PUBLIC_MATOMO_SITE_ID \
+          RETRACED_URL=$RETRACED_URL \
+          RETRACED_API_KEY=$RETRACED_API_KEY \
+          RETRACED_PROJECT_ID=$RETRACED_PROJECT_ID \
+          FEATURE_TEAM_SSO=$FEATURE_TEAM_SSO \
+          FEATURE_TEAM_DSYNCL=$FEATURE_TEAM_DSYNCL \
+          FEATURE_TEAM_AUDIT_LOG=$FEATURE_TEAM_AUDIT_LOG \
+          FEATURE_TEAM_WEBHOOK=$FEATURE_TEAM_WEBHOOK \
+          FEATURE_TEAM_API_KEY=$FEATURE_TEAM_API_KEY \
+          BILLING_EMAIL=$BILLING_EMAIL
+    - echo "Deploying Docker image to Azure Web App"
+    - az webapp config container set \
+        --name $AZURE_WEBAPP_NAME \
+        --resource-group $AZURE_RESOURCE_GROUP \
+        --docker-custom-image-name your-image-name:latest
+    - az webapp restart --name $AZURE_WEBAPP_NAME --resource-group $AZURE_RESOURCE_GROUP
