@@ -14,7 +14,13 @@ interface DropdownProps<T> {
   icon?: ReactNode;
 }
 
-const Dropdown = <T,>({ options, selectedValue, placeholder, onChange, icon }: DropdownProps<T>) => {
+const Dropdown = <T,>({
+  options,
+  selectedValue,
+  placeholder,
+  onChange,
+  icon,
+}: DropdownProps<T>) => {
   const tabRef = useRef<HTMLUListElement | null>(null);
 
   return (
@@ -29,8 +35,15 @@ const Dropdown = <T,>({ options, selectedValue, placeholder, onChange, icon }: D
           tabIndex={0}
           className="btn btn-sm btn-outline border border-gray-300 flex items-center px-4 justify-between cursor-pointer rounded text-sm font-bold"
         >
-          <div>{options.find(option => option.value === selectedValue)?.label || placeholder}</div>
-          {<span className="ml-2">{icon || <ChevronDownIcon className="w-5 h-5" />}</span>}
+          <div>
+            {options.find((option) => option.value === selectedValue)?.label ||
+              placeholder}
+          </div>
+          {
+            <span className="ml-2">
+              {icon || <ChevronDownIcon className="w-5 h-5" />}
+            </span>
+          }
         </div>
         <ul
           ref={tabRef}

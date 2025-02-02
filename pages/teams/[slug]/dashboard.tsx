@@ -16,12 +16,16 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const TeamDashboard = ({
-          csc_statuses,
-          slug,
-        }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  csc_statuses,
+  slug,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { t } = useTranslation('common');
   const { isLoading: teamLoading, isError: teamError, team } = useTeam();
-  const { tasks, isLoading: tasksLoading, isError: tasksError } = useTeamTasks(slug);
+  const {
+    tasks,
+    isLoading: tasksLoading,
+    isError: tasksError,
+  } = useTeamTasks(slug);
 
   if (teamLoading || tasksLoading) {
     return <Loading />;
@@ -52,7 +56,6 @@ const TeamDashboard = ({
             marginBottom: '10px',
           }}
         >
-          
           <ProcessingActivitiesAnalysis slug={slug} />
           <TeamAssessmentAnalysis slug={slug} />
         </div>
@@ -63,7 +66,6 @@ const TeamDashboard = ({
         <div className="space-y-6">
           <RmAnalysis slug={slug} />
         </div>
-
       </div>
     </>
   );

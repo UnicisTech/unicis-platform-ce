@@ -14,7 +14,7 @@ const options: Options = {
     { label: 'Yes', value: 'yes' },
     { label: 'No', value: 'no' },
   ],
-}
+};
 
 export const config: RpaConfig = {
   category: [
@@ -439,11 +439,13 @@ export const fieldPropsMapping = {
   involveProfiling: '1. Does it involve profiling?',
   useAutomated: '2. Does it use automated decision-making?',
   involveSurveillance: '3. Does it involve surveillance, GPS, or monitoring?',
-  processedSpecialCategories: '4. Are special categories like criminal records processed?',
+  processedSpecialCategories:
+    '4. Are special categories like criminal records processed?',
   isBigData: '5. Is a large amount of data processed (Big Data)?',
   dataSetsCombined: '6. Are data sets combined?',
   multipleControllers: '7. Are there multiple controllers?',
-  imbalanceInRelationship: '8. Is there an imbalance in the controller-subject relationship?',
+  imbalanceInRelationship:
+    '8. Is there an imbalance in the controller-subject relationship?',
   innovativeTechnologyUsed: '9. Is an innovative technology used?',
   transferredOutside: '10. Is data transferred outside the EU?',
   rightsRestricted: `11. Are subjects' rights restricted?`,
@@ -456,5 +458,5 @@ export const headers = [
   'Recipients',
   'Transfer',
   'Security Measures/TOMs',
-  'Data Protection Impact Assessment'
+  'Data Protection Impact Assessment',
 ];

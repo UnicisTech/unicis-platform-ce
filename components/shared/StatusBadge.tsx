@@ -6,7 +6,7 @@ const colors = {
   inreview: 'primary',
   feedback: 'info',
   done: 'success',
-  failed: 'error'
+  failed: 'error',
 };
 
 const StatusBadge = ({ label, value }: { label: string; value: string }) => {

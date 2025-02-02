@@ -19,7 +19,7 @@ export const TailwindTableWrapper = styled.div`
 `;
 
 export const AtlaskitDarkThemeWrapper = styled.div`
-  label span:not([title="required"]) {
+  label span:not([title='required']) {
     color: var(--fallback-bc, oklch(var(--bc) / 1));
   }
 `;

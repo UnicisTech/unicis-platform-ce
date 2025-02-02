@@ -61,7 +61,9 @@ const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
             </p>
             <p>
               <b>Invoice Date: </b>
-              <span>{format(new Date(newestPayment.date), 'MMMM d, yyyy')}</span>
+              <span>
+                {format(new Date(newestPayment.date), 'MMMM d, yyyy')}
+              </span>
             </p>
             <p>
               <b>Next invoice Date: </b>
@@ -82,16 +84,12 @@ const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
               className="max-w-full h-auto"
               data-tip="Scan this QR code to make a quick payment with Wise"
             />
-        </div>
+          </div>
         </div>
       </Card.Body>
       <Card.Footer>
         <div className="flex justify-end">
-          <Link
-            rel="noopener noreferrer"
-            target="_blank"
-            href={paymentUrl}
-          >
+          <Link rel="noopener noreferrer" target="_blank" href={paymentUrl}>
             <img src="/pww-button.svg" alt="Pay with WISE" />
           </Link>
         </div>

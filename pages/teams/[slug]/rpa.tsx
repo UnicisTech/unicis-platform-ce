@@ -63,7 +63,7 @@ const RpaDashboard: NextPageWithLayout<
   }, [tasks]);
 
   if (!canAccess('rpa', ['read'])) {
-    return <Error message={t('forbidden-resource')}/>
+    return <Error message={t('forbidden-resource')} />;
   }
 
   if (isLoading || !team || !tasks) {

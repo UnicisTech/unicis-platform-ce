@@ -10,7 +10,10 @@ import Form from '@atlaskit/form';
 
 import type { ApiResponse, TaskWithRpaProcedure } from 'types';
 import type { Task } from '@prisma/client';
-import { defaultProcedure, headers } from '@/components/defaultLanding/data/configs/tia';
+import {
+  defaultProcedure,
+  headers,
+} from '@/components/defaultLanding/data/configs/tia';
 import CreateFormBody from './CreateFormBody';
 import { StageTracker } from '@/components/shared/atlaskit';
 
@@ -296,7 +299,7 @@ const CreateTIA = ({
           return (
             <form {...formProps}>
               <Modal.Header className="font-bold">
-                <StageTracker currentStage={stage} headers={headers}/>
+                <StageTracker currentStage={stage} headers={headers} />
               </Modal.Header>
               <Modal.Body>
                 <CreateFormBody

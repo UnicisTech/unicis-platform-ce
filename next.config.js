@@ -19,7 +19,7 @@ const nextConfig = {
   images: {
     domains: ['platform.unicis.tech'],
   },
-  i18n,  // Localization settings
+  i18n, // Localization settings
   async redirects() {
     return redirects;
   },

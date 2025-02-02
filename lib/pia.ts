@@ -1,14 +1,20 @@
 import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
 import type { Task } from '@prisma/client';
-import { riskSecurityPoints, riskProbabilityPoints } from '@/components/defaultLanding/data/configs/pia';
-import type { AuditLog, Diff, PiaConfig, PiaRisk, TaskProperties } from "types";
-import { fieldPropsMapping, config } from '@/components/defaultLanding/data/configs/pia';
+import {
+  riskSecurityPoints,
+  riskProbabilityPoints,
+} from '@/components/defaultLanding/data/configs/pia';
+import type { AuditLog, Diff, PiaConfig, PiaRisk, TaskProperties } from 'types';
+import {
+  fieldPropsMapping,
+  config,
+} from '@/components/defaultLanding/data/configs/pia';
 
 type Option = {
-  label: string,
-  value: string,
-}
+  label: string;
+  value: string;
+};
 
 export const saveRisk = async (params: {
   user: Session['user'];
@@ -114,20 +120,20 @@ export const computeRiskMap = (
   const riskMap = new Map<string, number>();
 
   tasks
-      .filter(task => (task.properties as TaskProperties)?.pia_risk)
-      .map(task => (task.properties as TaskProperties)?.pia_risk)
-      .forEach((risk) => {
-          const security = risk?.[riskKey]?.[keys.security];
-          const probability = risk?.[riskKey]?.[keys.probability];
+    .filter((task) => (task.properties as TaskProperties)?.pia_risk)
+    .map((task) => (task.properties as TaskProperties)?.pia_risk)
+    .forEach((risk) => {
+      const security = risk?.[riskKey]?.[keys.security];
+      const probability = risk?.[riskKey]?.[keys.probability];
 
-          if (!security || !probability) return;
+      if (!security || !probability) return;
 
-          const x = riskSecurityPoints[security];
-          const y = riskProbabilityPoints[probability];
-          const key = `${x},${y}`;
+      const x = riskSecurityPoints[security];
+      const y = riskProbabilityPoints[probability];
+      const key = `${x},${y}`;
 
-          riskMap.set(key, (riskMap.get(key) || 0) + 1);
-      });
+      riskMap.set(key, (riskMap.get(key) || 0) + 1);
+    });
 
   return riskMap;
 };
@@ -147,8 +153,7 @@ export const addAuditLogs = async (params: {
   } else if (nextRisk.length === 0) {
     newAuditItems.push(generateChangeLog(user, 'deleted', null));
   } else {
-    const diff =
-    prevRisk.length === 0 ? [] : getDiff(prevRisk, nextRisk);
+    const diff = prevRisk.length === 0 ? [] : getDiff(prevRisk, nextRisk);
     newAuditItems.push(
       ...diff.map((changeLog) => {
         return generateChangeLog(user, 'updated', changeLog);

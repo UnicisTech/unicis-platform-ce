@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Task } from '@prisma/client';
-import type { AuditLog,  } from 'types';
+import type { AuditLog } from 'types';
 import { IssuePanelContainer } from 'sharedStyles';
 
 const AuditLogs = ({ task }: { task: Task }) => {
@@ -12,7 +12,7 @@ const AuditLogs = ({ task }: { task: Task }) => {
       <div style={{ padding: '10px 20px' }}>
         {auditLogs &&
           auditLogs.reverse().map((log, index) => {
-            console.log('auditLogs log', log)
+            console.log('auditLogs log', log);
             return (
               <div key={index} style={{ margin: '15px' }}>
                 <p>User: {log.actor.name}</p>

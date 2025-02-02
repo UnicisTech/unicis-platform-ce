@@ -546,9 +546,7 @@ const CreateFormBody = ({
             </Field>
             <Message
               appearance="warning"
-              text={
-                <span>Please attach relevant documents to the task.</span>
-              }
+              text={<span>Please attach relevant documents to the task.</span>}
             />
           </>
         )}
@@ -669,7 +667,10 @@ const CreateFormBody = ({
             >
               {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
                 <>
-                  <RadioGroup {...fieldProps} options={config['processedSpecialCategories']} />
+                  <RadioGroup
+                    {...fieldProps}
+                    options={config['processedSpecialCategories']}
+                  />
                 </>
               )}
             </Field>
@@ -691,7 +692,10 @@ const CreateFormBody = ({
             >
               {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
                 <>
-                  <RadioGroup {...fieldProps} options={config['dataSetsCombined']} />
+                  <RadioGroup
+                    {...fieldProps}
+                    options={config['dataSetsCombined']}
+                  />
                 </>
               )}
             </Field>
@@ -702,7 +706,10 @@ const CreateFormBody = ({
             >
               {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
                 <>
-                  <RadioGroup {...fieldProps} options={config['multipleControllers']} />
+                  <RadioGroup
+                    {...fieldProps}
+                    options={config['multipleControllers']}
+                  />
                 </>
               )}
             </Field>
@@ -713,7 +720,10 @@ const CreateFormBody = ({
             >
               {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
                 <>
-                  <RadioGroup {...fieldProps} options={config['imbalanceInRelationship']} />
+                  <RadioGroup
+                    {...fieldProps}
+                    options={config['imbalanceInRelationship']}
+                  />
                 </>
               )}
             </Field>
@@ -724,7 +734,10 @@ const CreateFormBody = ({
             >
               {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
                 <>
-                  <RadioGroup {...fieldProps} options={config['innovativeTechnologyUsed']} />
+                  <RadioGroup
+                    {...fieldProps}
+                    options={config['innovativeTechnologyUsed']}
+                  />
                 </>
               )}
             </Field>
@@ -735,7 +748,10 @@ const CreateFormBody = ({
             >
               {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
                 <>
-                  <RadioGroup {...fieldProps} options={config['transferredOutside']} />
+                  <RadioGroup
+                    {...fieldProps}
+                    options={config['transferredOutside']}
+                  />
                 </>
               )}
             </Field>
@@ -746,7 +762,10 @@ const CreateFormBody = ({
             >
               {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
                 <>
-                  <RadioGroup {...fieldProps} options={config['rightsRestricted']} />
+                  <RadioGroup
+                    {...fieldProps}
+                    options={config['rightsRestricted']}
+                  />
                 </>
               )}
             </Field>

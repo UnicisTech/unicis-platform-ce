@@ -15,19 +15,27 @@ import {
 } from '@/components/interfaces/Task';
 import { CscAuditLogs, CscPanel } from '@/components/interfaces/CSC';
 import { CreateRPA, RpaPanel, RpaAuditLog } from '@/components/interfaces/RPA';
-import { CreateRiskManagementRisk, RiskManagementTaskPanel, RmAuditLogs } from '@/components/interfaces/RiskManagement';
+import {
+  CreateRiskManagementRisk,
+  RiskManagementTaskPanel,
+  RmAuditLogs,
+} from '@/components/interfaces/RiskManagement';
 import useTeam from 'hooks/useTeam';
 import useCanAccess from 'hooks/useCanAccess';
 import useISO from 'hooks/useISO';
 import { Team } from '@prisma/client';
 import { getCscStatusesBySlug } from 'models/team';
 import { CreateTIA, TiaAuditLogs, TiaPanel } from '@/components/interfaces/TIA';
-import { CreatePiaRisk, PiaPanel, PiaAuditLogs } from '@/components/interfaces/PIA'
+import {
+  CreatePiaRisk,
+  PiaPanel,
+  PiaAuditLogs,
+} from '@/components/interfaces/PIA';
 import Breadcrumb from '../../Breadcrumb';
 
 const TaskById = ({
-          csc_statuses,
-        }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  csc_statuses,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [rpaVisible, setRpaVisible] = useState(false);
   const [tiaVisible, setTiaVisible] = useState(false);
   const [piaVisible, setPiaVisible] = useState(false);
@@ -170,7 +178,7 @@ const TaskById = ({
         </Card>
       )}
       {activeTab === 'Risk Management' && (
-        <Card 
+        <Card
           heading="RM panel"
           button={
             canAccess('task', ['update']) ? (
@@ -185,11 +193,11 @@ const TaskById = ({
                 {t('rm-register-risk-record')}
               </Button>
             ) : null
-          }  
+          }
         >
           <Card.Body>
             <RiskManagementTaskPanel task={task} />
-            </Card.Body>
+          </Card.Body>
         </Card>
       )}
       {tiaVisible && (
@@ -214,7 +222,7 @@ const TaskById = ({
           setVisible={setPiaVisible}
           selectedTask={task}
           mutateTasks={mutateTask}
-          />
+        />
       )}
       {rmVisible && (
         <CreateRiskManagementRisk

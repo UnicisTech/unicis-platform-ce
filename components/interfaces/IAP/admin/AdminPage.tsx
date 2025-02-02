@@ -4,7 +4,13 @@ import { useTranslation } from 'next-i18next';
 import useCanAccess from 'hooks/useCanAccess';
 import { Category, Team } from '@prisma/client';
 import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
-import { CompletionResults, CoursesTable, DeleteCourse, CreateCourse, CreateCategory } from "@/components/interfaces/IAP"
+import {
+  CompletionResults,
+  CoursesTable,
+  DeleteCourse,
+  CreateCourse,
+  CreateCategory,
+} from '@/components/interfaces/IAP';
 import StatusResults from './StatusResults';
 
 interface IapDashboardProps {
@@ -12,44 +18,66 @@ interface IapDashboardProps {
   teamCourses: TeamCourseWithProgress[];
   team: Team;
   teams: Team[];
-  members: TeamMemberWithUser[]
+  members: TeamMemberWithUser[];
   mutateIap: () => Promise<void>;
 }
 
-const AdminPage = ({ categories, teamCourses, team, teams, members, mutateIap }: IapDashboardProps) => {
+const AdminPage = ({
+  categories,
+  teamCourses,
+  team,
+  teams,
+  members,
+  mutateIap,
+}: IapDashboardProps) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
   const [isCreateCategoryOpen, setIsCreateCategoryOpen] = useState(false);
-  const [isCreateCourseOpen, setIsCreateCourseOpen] = useState(false)
-  const [isDeleteCourseOpen, setIsDeleteCourseOpen] = useState(false)
-  const [isCompletionResultsOpen, setIsCompletionResultsOpen] = useState(false)
-  const [isStatusResultsOpen, setIsStatusResultsOpen] = useState(false)
+  const [isCreateCourseOpen, setIsCreateCourseOpen] = useState(false);
+  const [isDeleteCourseOpen, setIsDeleteCourseOpen] = useState(false);
+  const [isCompletionResultsOpen, setIsCompletionResultsOpen] = useState(false);
+  const [isStatusResultsOpen, setIsStatusResultsOpen] = useState(false);
 
+  const [courseToEdit, setCourseToEdit] =
+    useState<TeamCourseWithProgress | null>(null);
+  const [courseToDelete, setCourseToDelete] =
+    useState<TeamCourseWithProgress | null>(null);
+  const [courseToCompletionResults, setCourseToCompletionResults] =
+    useState<TeamCourseWithProgress | null>(null);
+  const [courseToStatusResults, setCourseToStatusResults] =
+    useState<TeamCourseWithProgress | null>(null);
 
-  const [courseToEdit, setCourseToEdit] = useState<TeamCourseWithProgress | null>(null)
-  const [courseToDelete, setCourseToDelete] = useState<TeamCourseWithProgress | null>(null)
-  const [courseToCompletionResults, setCourseToCompletionResults] = useState<TeamCourseWithProgress | null>(null)
-  const [courseToStatusResults, setCourseToStatusResults] = useState<TeamCourseWithProgress | null>(null)
+  const editCourseClickHandler = useCallback(
+    (teamCourse: TeamCourseWithProgress) => {
+      setCourseToEdit(teamCourse);
+      setIsCreateCourseOpen(true);
+    },
+    []
+  );
 
-  const editCourseClickHandler = useCallback((teamCourse: TeamCourseWithProgress) => {
-    setCourseToEdit(teamCourse)
-    setIsCreateCourseOpen(true)
-  }, [])
+  const deleteCourseClickHandler = useCallback(
+    (teamCourse: TeamCourseWithProgress) => {
+      setCourseToDelete(teamCourse);
+      setIsDeleteCourseOpen(true);
+    },
+    []
+  );
 
-  const deleteCourseClickHandler = useCallback((teamCourse: TeamCourseWithProgress) => {
-    setCourseToDelete(teamCourse)
-    setIsDeleteCourseOpen(true)
-  }, [])
+  const completionResultsClickHandler = useCallback(
+    (teamCourse: TeamCourseWithProgress) => {
+      setCourseToCompletionResults(teamCourse);
+      setIsCompletionResultsOpen(true);
+    },
+    []
+  );
 
-  const completionResultsClickHandler = useCallback((teamCourse: TeamCourseWithProgress) => {
-    setCourseToCompletionResults(teamCourse)
-    setIsCompletionResultsOpen(true)
-  }, [])
-
-  const statusResultsClickHandler = useCallback((teamCourse: TeamCourseWithProgress) => {
-    setCourseToStatusResults(teamCourse)
-    setIsStatusResultsOpen(true)
-  }, [])
+  const statusResultsClickHandler = useCallback(
+    (teamCourse: TeamCourseWithProgress) => {
+      setCourseToStatusResults(teamCourse);
+      setIsStatusResultsOpen(true);
+    },
+    []
+  );
 
   return (
     <>
@@ -63,7 +91,6 @@ const AdminPage = ({ categories, teamCourses, team, teams, members, mutateIap }:
           </p>
         </div>
         <div className="flex justify-end items-center my-1">
-
           {canAccess('iap_category', ['create']) && (
             <div className="mx-1.5 my-0">
               <Button
@@ -104,15 +131,15 @@ const AdminPage = ({ categories, teamCourses, team, teams, members, mutateIap }:
         statusHandler={statusResultsClickHandler}
       />
 
-      {isCreateCategoryOpen &&
+      {isCreateCategoryOpen && (
         <CreateCategory
           teamSlug={team.slug}
           visible={isCreateCategoryOpen}
           setVisible={setIsCreateCategoryOpen}
           mutate={mutateIap}
         />
-      }
-      {isCreateCourseOpen &&
+      )}
+      {isCreateCourseOpen && (
         <CreateCourse
           teams={teams}
           categories={categories}
@@ -123,33 +150,33 @@ const AdminPage = ({ categories, teamCourses, team, teams, members, mutateIap }:
           mutate={mutateIap}
           selectedTeamCourse={courseToEdit || null}
         />
-      }
-      {isDeleteCourseOpen && courseToDelete &&
+      )}
+      {isDeleteCourseOpen && courseToDelete && (
         <DeleteCourse
           visible={isDeleteCourseOpen}
           setVisible={setIsDeleteCourseOpen}
           teamCourse={courseToDelete}
           mutate={mutateIap}
         />
-      }
-      {isCompletionResultsOpen && courseToCompletionResults &&
+      )}
+      {isCompletionResultsOpen && courseToCompletionResults && (
         <CompletionResults
           teamCourse={courseToCompletionResults}
           members={members}
           visible={isCompletionResultsOpen}
           setVisible={setIsCompletionResultsOpen}
         />
-      }
-      {isStatusResultsOpen && courseToStatusResults &&
+      )}
+      {isStatusResultsOpen && courseToStatusResults && (
         <StatusResults
           teamCourse={courseToStatusResults}
           members={members}
           visible={isStatusResultsOpen}
           setVisible={setIsStatusResultsOpen}
         />
-      }
+      )}
     </>
-  )
-}
+  );
+};
 
-export default AdminPage
+export default AdminPage;

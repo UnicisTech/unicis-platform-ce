@@ -1,17 +1,24 @@
 import { prisma } from '@/lib/prisma';
 import type { Task } from '@prisma/client';
 import type { Session } from 'next-auth';
-import type { RMProcedureInterface, TaskProperties, AuditLog, Diff } from "types";
-import { fieldPropsMapping, config } from '@/components/defaultLanding/data/configs/rm';
+import type {
+  RMProcedureInterface,
+  TaskProperties,
+  AuditLog,
+  Diff,
+} from 'types';
+import {
+  fieldPropsMapping,
+  config,
+} from '@/components/defaultLanding/data/configs/rm';
 
 //TODO: no need config at all for Rm
-type RmConfig = any
+type RmConfig = any;
 
 type Option = {
-  label: string,
-  value: string,
-}
-
+  label: string;
+  value: string;
+};
 
 export const saveRisk = async (params: {
   user: Session['user'];
@@ -122,8 +129,7 @@ export const addAuditLogs = async (params: {
   } else if (nextRisk.length === 0) {
     newAuditItems.push(generateChangeLog(user, 'deleted', null));
   } else {
-    const diff =
-    prevRisk.length === 0 ? [] : getDiff(prevRisk, nextRisk);
+    const diff = prevRisk.length === 0 ? [] : getDiff(prevRisk, nextRisk);
     newAuditItems.push(
       ...diff.map((changeLog) => {
         return generateChangeLog(user, 'updated', changeLog);
@@ -219,21 +225,25 @@ export const getDiff = (o1, o2) => {
   return diff;
 };
 
-
 const transformToRange = (value: number): number => {
   return Math.floor(value / 20);
-}
+};
 
 export const calculateRiskRating = (probability: number, impact: number) => {
   const result = (probability / 100) * (impact / 100);
   return Math.floor(result * 100);
-}
+};
 
-export const calculateCurrentRiskRating = (rawRiskRating: number, targetRiskRating: number, treatmentStatus: number) => {
-  const decimalTreatmentStatus = treatmentStatus / 100 // 50% -> 0.5
-  const result = rawRiskRating - (decimalTreatmentStatus * (rawRiskRating - targetRiskRating))
-  return Math.floor(result)
-}
+export const calculateCurrentRiskRating = (
+  rawRiskRating: number,
+  targetRiskRating: number,
+  treatmentStatus: number
+) => {
+  const decimalTreatmentStatus = treatmentStatus / 100; // 50% -> 0.5
+  const result =
+    rawRiskRating - decimalTreatmentStatus * (rawRiskRating - targetRiskRating);
+  return Math.floor(result);
+};
 
 export const computeRiskMap = (tasks: Task[]): Map<string, number> | null => {
   if (!tasks) return null;
@@ -241,11 +251,11 @@ export const computeRiskMap = (tasks: Task[]): Map<string, number> | null => {
   const riskMap = new Map<string, number>();
 
   tasks
-    .filter(task => (task.properties as TaskProperties)?.rm_risk)
-    .map(task => (task.properties as TaskProperties)?.rm_risk)
+    .filter((task) => (task.properties as TaskProperties)?.rm_risk)
+    .map((task) => (task.properties as TaskProperties)?.rm_risk)
     .forEach((risk) => {
-      const security = risk?.[1]?.["TreatedImpact"] as number;
-      const probability = risk?.[1]?.["TreatedProbability"] as number;
+      const security = risk?.[1]?.['TreatedImpact'] as number;
+      const probability = risk?.[1]?.['TreatedProbability'] as number;
 
       if (!security || !probability) return;
 
@@ -264,56 +274,67 @@ export const calculateRiskDistribution = (tasks: Task[]): number[] => {
   const riskCounts = [0, 0, 0, 0, 0];
 
   tasks.forEach((task) => {
-      const risk = (task.properties as TaskProperties).rm_risk as RMProcedureInterface | undefined;
-      if (!risk) {
-          return
-      }
-      const rawRiskRating = calculateRiskRating(risk[0].RawProbability, risk[0].RawImpact)
-      const targetRiskRating = calculateRiskRating(risk[1].TreatedProbability, risk[1].TreatedImpact)
-      const currentRiskRating = calculateCurrentRiskRating(rawRiskRating, targetRiskRating, risk[1].TreatmentStatus)
+    const risk = (task.properties as TaskProperties).rm_risk as
+      | RMProcedureInterface
+      | undefined;
+    if (!risk) {
+      return;
+    }
+    const rawRiskRating = calculateRiskRating(
+      risk[0].RawProbability,
+      risk[0].RawImpact
+    );
+    const targetRiskRating = calculateRiskRating(
+      risk[1].TreatedProbability,
+      risk[1].TreatedImpact
+    );
+    const currentRiskRating = calculateCurrentRiskRating(
+      rawRiskRating,
+      targetRiskRating,
+      risk[1].TreatmentStatus
+    );
 
-
-      if (currentRiskRating >= 0 && currentRiskRating < 20) {
-          riskCounts[0] += 1; // 0-20%
-      } else if (currentRiskRating >= 20 && currentRiskRating < 40) {
-          riskCounts[1] += 1; // 20-40%
-      } else if (currentRiskRating >= 40 && currentRiskRating < 60) {
-          riskCounts[2] += 1; // 40-60%
-      } else if (currentRiskRating >= 60 && currentRiskRating < 80) {
-          riskCounts[3] += 1; // 60-80%
-      } else if (currentRiskRating >= 80 && currentRiskRating <= 100) {
-          riskCounts[4] += 1; // 80-100%
-      }
+    if (currentRiskRating >= 0 && currentRiskRating < 20) {
+      riskCounts[0] += 1; // 0-20%
+    } else if (currentRiskRating >= 20 && currentRiskRating < 40) {
+      riskCounts[1] += 1; // 20-40%
+    } else if (currentRiskRating >= 40 && currentRiskRating < 60) {
+      riskCounts[2] += 1; // 40-60%
+    } else if (currentRiskRating >= 60 && currentRiskRating < 80) {
+      riskCounts[3] += 1; // 60-80%
+    } else if (currentRiskRating >= 80 && currentRiskRating <= 100) {
+      riskCounts[4] += 1; // 80-100%
+    }
   });
 
   return riskCounts;
-}
+};
 
 export const getInitials = (name: string) => {
-  const words = name.trim().split(" ");
+  const words = name.trim().split(' ');
 
   const initials = words
-      .filter(word => word.length > 0)
-      .map(word => word[0].toUpperCase())
-      .join("");
+    .filter((word) => word.length > 0)
+    .map((word) => word[0].toUpperCase())
+    .join('');
 
   return initials;
-}
+};
 
 export const riskValueToLabel = (value: number): string => {
   const riskLevels = [
-      { max: 20, label: 'Insignificant' },
-      { max: 40, label: 'Minor' },
-      { max: 60, label: 'Moderate' },
-      { max: 80, label: 'Major' },
-      { max: 100, label: 'Extreme' },
+    { max: 20, label: 'Insignificant' },
+    { max: 40, label: 'Minor' },
+    { max: 60, label: 'Moderate' },
+    { max: 80, label: 'Major' },
+    { max: 100, label: 'Extreme' },
   ];
 
   for (const { max, label: riskLabel } of riskLevels) {
-      if (value <= max) {
-          return riskLabel;
-      }
+    if (value <= max) {
+      return riskLabel;
+    }
   }
 
-  return "";
+  return '';
 };

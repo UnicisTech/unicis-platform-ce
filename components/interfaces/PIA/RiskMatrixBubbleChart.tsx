@@ -1,5 +1,5 @@
-import React from "react";
-import { Bubble } from "react-chartjs-2";
+import React from 'react';
+import { Bubble } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,26 +8,27 @@ import {
   Legend,
   Title,
   Tooltip,
-} from "chart.js";
+} from 'chart.js';
 
 const riskColors = {
-  low: "rgba(0, 255, 0, 0.3)",
-  medium: "rgba(255, 255, 0, 0.3)",
-  high: "rgba(255, 165, 0, 0.3)",
-  extreme: "rgba(255, 0, 0, 0.3)",
+  low: 'rgba(0, 255, 0, 0.3)',
+  medium: 'rgba(255, 255, 0, 0.3)',
+  high: 'rgba(255, 165, 0, 0.3)',
+  extreme: 'rgba(255, 0, 0, 0.3)',
 };
 
 const MATRIX_SIZE = 5;
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, Legend, Title, Tooltip);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  Legend,
+  Title,
+  Tooltip
+);
 
-const impactLabels = [
-  'Insignificant',
-  'Minor',
-  'Moderate',
-  'Major',
-  'Extreme',
-]
+const impactLabels = ['Insignificant', 'Minor', 'Moderate', 'Major', 'Extreme'];
 
 const probabilityLabels = [
   'Rare',
@@ -35,7 +36,7 @@ const probabilityLabels = [
   'Possible',
   'Probable',
   '(Almost) certain',
-]
+];
 
 const RiskMatrixBubbleChart = ({ datasets }: any) => {
   // Adjust points by adding 0.5 to both x and y
@@ -58,7 +59,7 @@ const RiskMatrixBubbleChart = ({ datasets }: any) => {
       x: {
         title: {
           display: true,
-          text: "Risk impact",
+          text: 'Risk impact',
         },
         min: 0,
         max: 5,
@@ -74,12 +75,12 @@ const RiskMatrixBubbleChart = ({ datasets }: any) => {
             }
           },
         },
-        position: "bottom",
+        position: 'bottom',
       },
       y: {
         title: {
           display: true,
-          text: "Risk probability",
+          text: 'Risk probability',
         },
         min: 0,
         max: 5,
@@ -100,13 +101,13 @@ const RiskMatrixBubbleChart = ({ datasets }: any) => {
     plugins: {
       legend: {
         display: false,
-        position: "top" as const,
+        position: 'top' as const,
       },
     },
   };
 
   const backgroundPlugin = {
-    id: "backgroundPlugin",
+    id: 'backgroundPlugin',
     beforeDraw: (chart) => {
       const { ctx, scales } = chart;
 

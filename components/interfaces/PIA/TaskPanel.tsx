@@ -7,7 +7,10 @@ import {
 } from '@/components/defaultLanding/data/configs/pia';
 import { Field } from '@/components/shared/atlaskit';
 import RiskMatrixBubbleChart from './RiskMatrixBubbleChart';
-import { riskSecurityPoints, riskProbabilityPoints } from '@/components/defaultLanding/data/configs/pia';
+import {
+  riskSecurityPoints,
+  riskProbabilityPoints,
+} from '@/components/defaultLanding/data/configs/pia';
 import type { Task } from '@prisma/client';
 import { PiaRisk, TaskProperties } from 'types';
 
@@ -19,9 +22,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
     <IssuePanelContainer>
       <h2 className="text-1xl font-bold">View Privacy Impact Assessment</h2>
       {risk ? (
-        <Tabs
-          id="default"
-        >
+        <Tabs id="default">
           <TabList>
             <Tab>{headers[0]}</Tab>
             <Tab>{headers[1]}</Tab>
@@ -103,40 +104,54 @@ const TiaPanel = ({ task }: { task: Task }) => {
               <RiskMatrixBubbleChart
                 datasets={[
                   {
-                    label: "Confidentiality and Integrity Risk",
+                    label: 'Confidentiality and Integrity Risk',
                     borderWidth: 1,
-                    data: [{
-                      x: riskSecurityPoints[risk[1].confidentialityRiskSecurity],
-                      y: riskProbabilityPoints[risk[1].confidentialityRiskProbability],
-                      r: 20
-                    }],
-                    backgroundColor: "rgba(0, 0, 0, 0.7)",
+                    data: [
+                      {
+                        x: riskSecurityPoints[
+                          risk[1].confidentialityRiskSecurity
+                        ],
+                        y: riskProbabilityPoints[
+                          risk[1].confidentialityRiskProbability
+                        ],
+                        r: 20,
+                      },
+                    ],
+                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
                   },
                   {
-                    label: "Availability",
+                    label: 'Availability',
                     borderWidth: 1,
-                    data: [{
-                      x: riskSecurityPoints[risk[2].availabilityRiskSecurity],
-                      y: riskProbabilityPoints[risk[2].availabilityRiskProbability],
-                      r: 20
-                    },],
-                    backgroundColor: "rgba(0, 0, 0, 0.7)",
+                    data: [
+                      {
+                        x: riskSecurityPoints[risk[2].availabilityRiskSecurity],
+                        y: riskProbabilityPoints[
+                          risk[2].availabilityRiskProbability
+                        ],
+                        r: 20,
+                      },
+                    ],
+                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
                   },
                   {
-                    label: "Transparency and data minimization",
+                    label: 'Transparency and data minimization',
                     borderWidth: 1,
-                    data: [{
-                      x: riskSecurityPoints[risk[3].transparencyRiskSecurity],
-                      y: riskProbabilityPoints[risk[3].transparencyRiskProbability],
-                      r: 20
-                    }],
-                    backgroundColor: "rgba(0, 0, 0, 0.7)",
-                  }
+                    data: [
+                      {
+                        x: riskSecurityPoints[risk[3].transparencyRiskSecurity],
+                        y: riskProbabilityPoints[
+                          risk[3].transparencyRiskProbability
+                        ],
+                        r: 20,
+                      },
+                    ],
+                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                  },
                 ]}
               />
             </div>
           </TabPanel>
-          {risk[4] &&
+          {risk[4] && (
             <TabPanel>
               <div>
                 <Field
@@ -165,7 +180,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
                 />
               </div>
             </TabPanel>
-          }
+          )}
         </Tabs>
       ) : (
         <div style={{ margin: '10px 0px' }}>

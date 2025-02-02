@@ -26,26 +26,30 @@ interface NavigationItemProps {
 const NavigationItems = ({ menus }: NavigationItemsProps) => {
   return (
     <ul role="list" className="flex flex-1 flex-col gap-1">
-      {menus.map((menu) => menu ? (
-        <li key={menu.name}>
-          {menu.name === 'line-break' ? (
-            <hr className="my-1 border-t border-gray-300 dark:border-gray-600" />
-          ) : (
-            <>
-              <NavigationItem menu={menu} className={menu.className || ''} />
-              {menu.items && (
-                <ul className="flex flex-col gap-1 mt-1">
-                  {menu.items.map((subitem) => (
-                    <li key={subitem.name}>
-                      <NavigationItem menu={subitem} className="pl-9" />
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </>
-          )}
-        </li>
-      ) : <></>)}
+      {menus.map((menu) =>
+        menu ? (
+          <li key={menu.name}>
+            {menu.name === 'line-break' ? (
+              <hr className="my-1 border-t border-gray-300 dark:border-gray-600" />
+            ) : (
+              <>
+                <NavigationItem menu={menu} className={menu.className || ''} />
+                {menu.items && (
+                  <ul className="flex flex-col gap-1 mt-1">
+                    {menu.items.map((subitem) => (
+                      <li key={subitem.name}>
+                        <NavigationItem menu={subitem} className="pl-9" />
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </>
+            )}
+          </li>
+        ) : (
+          <></>
+        )
+      )}
     </ul>
   );
 };

@@ -21,26 +21,16 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 // ];
 
 const barColors = [
-  'rgba(211, 211, 211, 0.5)', 
-  'rgba(0, 255, 0, 0.3)', 
+  'rgba(211, 211, 211, 0.5)',
+  'rgba(0, 255, 0, 0.3)',
   'rgba(255, 255, 0, 0.3)',
   'rgba(255, 165, 0, 0.3)',
   'rgba(255, 0, 0, 0.3)',
-]
+];
 
-const DashboardChart = ({
-  datasets
-}: {
-  datasets: number[]
-}) => {
+const DashboardChart = ({ datasets }: { datasets: number[] }) => {
   const data = {
-    labels: [
-      'Insignificant',
-      'Minor',
-      'Moderate',
-      'Major',
-      'Extreme',
-    ],
+    labels: ['Insignificant', 'Minor', 'Moderate', 'Major', 'Extreme'],
     datasets: [
       {
         label: 'Risk count',
@@ -65,7 +55,6 @@ const DashboardChart = ({
     maintainAspectRatio: false,
     responsive: true,
   };
-
 
   return <Pie data={data} options={options} />;
 };

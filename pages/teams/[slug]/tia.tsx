@@ -58,7 +58,7 @@ const TiaDashboard: NextPageWithLayout<
   }, []);
 
   if (!canAccess('tia', ['read'])) {
-    return <Error message={t('forbidden-resource')}/>
+    return <Error message={t('forbidden-resource')} />;
   }
 
   if (isLoading || !team || !tasks) {

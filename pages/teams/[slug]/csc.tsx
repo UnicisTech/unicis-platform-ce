@@ -66,7 +66,7 @@ const CscDashboard = ({
   const { tasks, mutateTasks } = useTeamTasks(slug as string);
   const { ISO } = useISO(team);
 
-  const { canAccess } = useCanAccess()
+  const { canAccess } = useCanAccess();
 
   const statusHandler = useCallback(
     async (control: string, value: string) => {
@@ -119,7 +119,7 @@ const CscDashboard = ({
   }, [ISO]);
 
   if (!canAccess('csc', ['read'])) {
-    return <Error message={t('forbidden-resource')}/>
+    return <Error message={t('forbidden-resource')} />;
   }
 
   if (isLoading || !team || !tasks || !ISO) {
@@ -170,7 +170,10 @@ const CscDashboard = ({
         </div>
         <div className="flex flex-row justify-end">
           <SectionFilter ISO={ISO} setSectionFilter={setSectionFilter} />
-          <StatusCscFilter setStatusFilter={setStatusFilter} options={statusOptions} />
+          <StatusCscFilter
+            setStatusFilter={setStatusFilter}
+            options={statusOptions}
+          />
           <PerPageSelector
             setPerPage={setPerPage}
             options={perPageOptions}

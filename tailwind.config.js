@@ -9,8 +9,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'risk-extreme-low': 'rgba(211, 211, 211, 0.5)', 
-        'risk-low': 'rgba(0, 255, 0, 0.3)', 
+        'risk-extreme-low': 'rgba(211, 211, 211, 0.5)',
+        'risk-low': 'rgba(0, 255, 0, 0.3)',
         'risk-medium': 'rgba(255, 255, 0, 0.3)',
         'risk-high': 'rgba(255, 165, 0, 0.3)',
         'risk-extreme': 'rgba(255, 0, 0, 0.3)',
@@ -43,6 +43,6 @@ module.exports = {
     'bg-risk-low',
     'bg-risk-medium',
     'bg-risk-high',
-    'bg-risk-extreme'
-  ]
+    'bg-risk-extreme',
+  ],
 };

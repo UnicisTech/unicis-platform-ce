@@ -94,35 +94,35 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'iap_course',
-      actions: '*'
+      actions: '*',
     },
     {
       resource: 'iap_category',
-      actions: '*'
+      actions: '*',
     },
     {
       resource: 'iap_reports',
-      actions: '*'
+      actions: '*',
     },
     {
       resource: 'rpa',
-      actions: '*'
+      actions: '*',
     },
     {
       resource: 'tia',
-      actions: '*'
+      actions: '*',
     },
     {
       resource: 'pia',
-      actions: '*'
+      actions: '*',
     },
     {
       resource: 'csc',
-      actions: '*'
+      actions: '*',
     },
     {
       resource: 'rm',
-      actions: '*'
+      actions: '*',
     },
   ],
   ADMIN: [
@@ -168,35 +168,35 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'iap_course',
-      actions: '*'
+      actions: '*',
     },
     {
       resource: 'iap_category',
-      actions: '*'
+      actions: '*',
     },
     {
       resource: 'iap_reports',
-      actions: '*'
+      actions: '*',
     },
     {
       resource: 'rpa',
-      actions: '*'
+      actions: '*',
     },
     {
       resource: 'tia',
-      actions: '*'
+      actions: '*',
     },
     {
       resource: 'pia',
-      actions: '*'
+      actions: '*',
     },
     {
       resource: 'csc',
-      actions: '*'
+      actions: '*',
     },
     {
       resource: 'rm',
-      actions: '*'
+      actions: '*',
     },
   ],
   MEMBER: [
@@ -219,7 +219,7 @@ export const permissions: RolePermissions = {
     {
       resource: 'iap_category',
       actions: ['read'],
-    }
+    },
   ],
   AUDITOR: [
     {
@@ -244,7 +244,7 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'iap_reports',
-      actions: ['read']
+      actions: ['read'],
     },
   ],
 };

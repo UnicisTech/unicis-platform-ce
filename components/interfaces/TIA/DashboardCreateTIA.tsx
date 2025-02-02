@@ -10,7 +10,10 @@ import Form from '@atlaskit/form';
 
 import type { ApiResponse } from 'types';
 import type { Task } from '@prisma/client';
-import { defaultProcedure, headers } from '@/components/defaultLanding/data/configs/tia';
+import {
+  defaultProcedure,
+  headers,
+} from '@/components/defaultLanding/data/configs/tia';
 import CreateFormBody from './CreateFormBody';
 import { StageTracker, TaskPickerFormBody } from '@/components/shared/atlaskit';
 
@@ -315,7 +318,9 @@ const DashboardCreateTIA = ({
             <form {...formProps}>
               <Modal.Header className="font-bold">
                 {modalStage === 0 && `Select a task`}
-                {modalStage === 1 && <StageTracker currentStage={stage} headers={headers}/>}
+                {modalStage === 1 && (
+                  <StageTracker currentStage={stage} headers={headers} />
+                )}
               </Modal.Header>
               <Modal.Body>
                 {modalStage === 0 && (

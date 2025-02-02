@@ -9,13 +9,13 @@ export const getAvailableCategoriesForTeam = async (teamId: string) => {
       where: {
         OR: [
           {
-            isDefault: true
+            isDefault: true,
           },
           {
-            teamId: teamId
-          }
-        ]
-      }
+            teamId: teamId,
+          },
+        ],
+      },
     });
 
     return categories;
@@ -23,9 +23,15 @@ export const getAvailableCategoriesForTeam = async (teamId: string) => {
     console.error('Error fetching categories:', error);
     throw new Error('Could not fetch categories');
   }
-}
+};
 
-export const createCategory = async ({ name, teamId }: { name: string; teamId: string }) => {
+export const createCategory = async ({
+  name,
+  teamId,
+}: {
+  name: string;
+  teamId: string;
+}) => {
   try {
     const category = await prisma.category.create({
       data: {
@@ -39,4 +45,4 @@ export const createCategory = async ({ name, teamId }: { name: string; teamId: s
     console.error('Error creating category:', error);
     throw new Error('Failed to create category');
   }
-}
+};

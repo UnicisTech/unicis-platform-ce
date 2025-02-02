@@ -125,8 +125,7 @@ export type TeamMemberWithUser = TeamMember & { user: User };
 
 export type TeamProperties = TeamCscProperties & TeamIapProperties;
 
-export type TaskProperties = 
-  TaskTiaProperties &
+export type TaskProperties = TaskTiaProperties &
   TaskCscProperties &
   TaskRpaProperties &
   TaskPiaProperties &

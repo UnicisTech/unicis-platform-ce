@@ -2,43 +2,49 @@ import { CourseContentType, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const getTeamCourses = async (teamId: string, teamMemberId: string, adminAccess: boolean) => {
+export const getTeamCourses = async (
+  teamId: string,
+  teamMemberId: string,
+  adminAccess: boolean
+) => {
   try {
     const teamCourses = await prisma.teamCourse.findMany({
       where: {
-        teamId
+        teamId,
       },
       include: {
         course: true,
-        progress: adminAccess ? true : {
-          where: {
-            teamMemberId
-          }
-        }
-      }
-    })
-    return teamCourses
+        progress: adminAccess
+          ? true
+          : {
+              where: {
+                teamMemberId,
+              },
+            },
+      },
+    });
+    return teamCourses;
   } catch (error) {
     console.error('Error fetching courses for team:', error);
     throw new Error('Failed to fetch courses for team');
   }
-}
+};
 
 export const getCourse = async (teamCourseId: string, teamMemberId: string) => {
   return await prisma.teamCourse.findFirstOrThrow({
     where: {
-      id: teamCourseId
+      id: teamCourseId,
     },
     include: {
       course: true,
       progress: {
         where: {
-          teamMemberId
-        }
-      }
-    }
-  })
-}
+          teamMemberId,
+        },
+      },
+    },
+  });
+};
 
 export const createCourse = async ({
   name,
@@ -76,15 +82,15 @@ export const createCourse = async ({
       estimatedTime,
       thumbnail,
       teams: {
-        create: teamIds.map(teamId => ({
-          team: { connect: { id: teamId } }  // Connect existing teams by ID
-        }))
-      }
-    }
+        create: teamIds.map((teamId) => ({
+          team: { connect: { id: teamId } }, // Connect existing teams by ID
+        })),
+      },
+    },
   });
 
   return course;
-}
+};
 
 export const editCourse = async ({
   courseId,
@@ -124,9 +130,12 @@ export const editCourse = async ({
 
   const oldCourse = await prisma.course.findFirstOrThrow({
     where: { id: courseId },
-  })
+  });
 
-  const updatedQuestions = updateQuestions(oldCourse.questions as any[], questions)
+  const updatedQuestions = updateQuestions(
+    oldCourse.questions as any[],
+    questions
+  );
 
   const course = await prisma.course.update({
     where: { id: courseId },
@@ -140,7 +149,7 @@ export const editCourse = async ({
       url,
       estimatedTime,
       thumbnail,
-    }
+    },
   });
 
   return course;
@@ -149,5 +158,5 @@ export const editCourse = async ({
 export const deleteCourse = async (courseId: string) => {
   return await prisma.teamCourse.delete({
     where: { id: courseId },
-  })
-}
+  });
+};

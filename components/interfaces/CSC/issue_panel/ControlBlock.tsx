@@ -69,7 +69,7 @@ const ControlBlock = ({
     }
     setStatuses(data.statuses);
   }, []);
-  console.log('controlOptions', controlOptions)
+  console.log('controlOptions', controlOptions);
   return (
     <>
       <div>

@@ -20,7 +20,7 @@ const DeleteCourse = ({
   teamCourse: TeamCourseWithProgress;
   mutate: () => Promise<void>;
 }) => {
-  const course = teamCourse.course
+  const course = teamCourse.course;
   const { t } = useTranslation('common');
 
   const router = useRouter();
@@ -64,14 +64,10 @@ const DeleteCourse = ({
       <Form onSubmit={() => {}}>
         {({ formProps }) => (
           <form {...formProps}>
-            <Modal.Header className="font-bold">
-              Delete course
-            </Modal.Header>
+            <Modal.Header className="font-bold">Delete course</Modal.Header>
             <Modal.Body>
               <div style={{ margin: '1.5rem 0' }}>
-                <p>
-                  Are you sure you want to delete course?
-                </p>
+                <p>Are you sure you want to delete course?</p>
               </div>
             </Modal.Body>
             <Modal.Actions>

@@ -1,9 +1,19 @@
-import { Task } from "@prisma/client";
-import { AuditLog } from "./base";
+import { Task } from '@prisma/client';
+import { AuditLog } from './base';
 
-export type RiskProbability = "rare" | "unlikely" | "possible" | "probable" | "severe"
+export type RiskProbability =
+  | 'rare'
+  | 'unlikely'
+  | 'possible'
+  | 'probable'
+  | 'severe';
 
-export type RiskSecurity = "insignificant" | "minor" | "moderate" | "major" | "extreme"
+export type RiskSecurity =
+  | 'insignificant'
+  | 'minor'
+  | 'moderate'
+  | 'major'
+  | 'extreme';
 
 type Option = {
   label: string | any;
@@ -12,47 +22,50 @@ type Option = {
 
 export type PiaRisk = [
   {
-    isDataProcessingNecessary: "necessary" | "unnecessary",
-    isDataProcessingNecessaryAssessment: string,
-    isProportionalToPurpose: "proportional" | "not_proportional",
-    isProportionalToPurposeAssessment: string,
+    isDataProcessingNecessary: 'necessary' | 'unnecessary';
+    isDataProcessingNecessaryAssessment: string;
+    isProportionalToPurpose: 'proportional' | 'not_proportional';
+    isProportionalToPurposeAssessment: string;
   },
   {
-    confidentialityRiskProbability: RiskProbability,
-    confidentialityRiskSecurity: RiskSecurity,
-    confidentialityAssessment: string,
+    confidentialityRiskProbability: RiskProbability;
+    confidentialityRiskSecurity: RiskSecurity;
+    confidentialityAssessment: string;
   },
   {
-    availabilityRiskProbability: RiskProbability,
-    availabilityRiskSecurity: RiskSecurity,
-    availabilityAssessment: string,
+    availabilityRiskProbability: RiskProbability;
+    availabilityRiskSecurity: RiskSecurity;
+    availabilityAssessment: string;
   },
   {
-    transparencyRiskProbability: RiskProbability,
-    transparencyRiskSecurity: RiskSecurity,
-    transparencyAssessment: string,
+    transparencyRiskProbability: RiskProbability;
+    transparencyRiskSecurity: RiskSecurity;
+    transparencyAssessment: string;
   },
   {
-    guarantees: string,
-    securityMeasures: string,
-    securityCompliance: string,
-    dealingWithResidualRisk: "acceptable" | "acceptable_with_conditions" |  "not_acceptable",
-    dealingWithResidualRiskAssessment: string,
-    supervisoryAuthorityInvolvement: "yes" | "no",
-  } | null
-]
+    guarantees: string;
+    securityMeasures: string;
+    securityCompliance: string;
+    dealingWithResidualRisk:
+      | 'acceptable'
+      | 'acceptable_with_conditions'
+      | 'not_acceptable';
+    dealingWithResidualRiskAssessment: string;
+    supervisoryAuthorityInvolvement: 'yes' | 'no';
+  } | null,
+];
 
 export interface PiaConfig {
-  isDataProcessingNecessary: Option[]
-  isProportionalToPurpose: Option[]
-  confidentialityRiskProbability: Option[],
-  confidentialityRiskSecurity: Option[],
-  availabilityRiskProbability: Option[],
-  availabilityRiskSecurity: Option[],
-  transparencyRiskProbability: Option[],
-  transparencyRiskSecurity: Option[],
-  dealingWithResidualRisk: Option[],
-  supervisoryAuthorityInvolvement: Option[],
+  isDataProcessingNecessary: Option[];
+  isProportionalToPurpose: Option[];
+  confidentialityRiskProbability: Option[];
+  confidentialityRiskSecurity: Option[];
+  availabilityRiskProbability: Option[];
+  availabilityRiskSecurity: Option[];
+  transparencyRiskProbability: Option[];
+  transparencyRiskSecurity: Option[];
+  dealingWithResidualRisk: Option[];
+  supervisoryAuthorityInvolvement: Option[];
 }
 
 export type TaskWithPiaRisk = Task & {

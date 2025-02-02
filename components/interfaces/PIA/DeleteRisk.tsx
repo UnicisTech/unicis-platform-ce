@@ -70,8 +70,8 @@ const DeleteRisk = ({
             <Modal.Body>
               <div style={{ margin: '1.5rem 0' }}>
                 <p>
-                  Are you sure you want to remove Privacy Impact Assessment Risk? Your
-                  task will not be removed.
+                  Are you sure you want to remove Privacy Impact Assessment
+                  Risk? Your task will not be removed.
                 </p>
               </div>
             </Modal.Body>

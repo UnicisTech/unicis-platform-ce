@@ -4,7 +4,7 @@ import Select from '@atlaskit/select';
 import { WithoutRing } from 'sharedStyles';
 
 interface StatusCscFilterProps<T> {
-  options: T[]
+  options: T[];
   setStatusFilter: Dispatch<SetStateAction<T[] | null>>;
 }
 

@@ -153,13 +153,15 @@ const DashboardCreateRPA = ({
   }, []);
 
   return (
-    <Modal open={visible} className='w-11/12 max-w-3xl'>
+    <Modal open={visible} className="w-11/12 max-w-3xl">
       <Form onSubmit={onSubmit}>
         {({ formProps, reset }) => (
           <form {...formProps}>
             <Modal.Header className="font-bold">
               {modalStage === 0 && `Select a task`}
-              {modalStage === 1 && <StageTracker currentStage={stage} headers={headers}/>}
+              {modalStage === 1 && (
+                <StageTracker currentStage={stage} headers={headers} />
+              )}
             </Modal.Header>
             <Modal.Body>
               {modalStage === 0 && (

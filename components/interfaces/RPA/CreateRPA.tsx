@@ -134,12 +134,12 @@ const CreateRPA = ({
   }, []);
 
   return (
-    <Modal open={visible} className='w-11/12 max-w-3xl'>
+    <Modal open={visible} className="w-11/12 max-w-3xl">
       <Form onSubmit={onSubmit}>
         {({ formProps, reset }) => (
           <form {...formProps}>
             <Modal.Header>
-              <StageTracker currentStage={stage} headers={headers}/>
+              <StageTracker currentStage={stage} headers={headers} />
             </Modal.Header>
             <Modal.Body>
               <CreateFormBody
