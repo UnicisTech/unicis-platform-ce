@@ -42,7 +42,7 @@ yarn-error.log*
 .sentryclirc
 
 .env
-.gitlab-ci.yml
+.gitlab-ci.yml.bck
 .azure
 .azure/credentials.json
 
