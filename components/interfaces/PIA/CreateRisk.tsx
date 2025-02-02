@@ -113,12 +113,13 @@ const CreateRisk = ({
       case 1:
       case 2:
       case 3:
-      case 4:
+      case 4: {
         const riskToSave = [...risk];
         riskToSave[stage - 1] = formData;
         setRisk(riskToSave);
         setStage(stage + 1);
         break;
+      }
       case 5: {
         if (showExtraStage) {
           setStage(stage + 1);

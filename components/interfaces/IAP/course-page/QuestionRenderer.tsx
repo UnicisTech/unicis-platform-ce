@@ -61,8 +61,8 @@ const MultipleChoiseQuestion = ({
     <>
       <p className="text-xl font-semibold mb-2">{question.question}</p>
       <p className="text-xs font-light">Multiple options</p>
-      {question.answers.map(({ answer }) => (
-        <div className="flex m-2">
+      {question.answers.map(({ answer }, index) => (
+        <div className="flex m-2" key={index}>
           <Checkbox
             onChange={(e) => {
               const isChecked = e.target.checked;

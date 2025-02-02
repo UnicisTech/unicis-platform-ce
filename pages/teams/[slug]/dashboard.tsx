@@ -47,7 +47,11 @@ const TeamDashboard = ({
         </h2>
       </div>
       <div className="space-y-6">
-        <TeamTaskAnalysis slug={slug} csc_statuses={csc_statuses} />
+        {/* TODO: { [key: string]: string; } is temporary solution */}
+        <TeamTaskAnalysis
+          slug={slug}
+          csc_statuses={csc_statuses as { [key: string]: string }}
+        />
         <div
           style={{
             width: '100%',
@@ -62,7 +66,11 @@ const TeamDashboard = ({
         <div className="space-y-6">
           <PiaAnalysis tasks={tasks} />
         </div>
-        <TeamCscAnalysis slug={slug} csc_statuses={csc_statuses} />
+        {/* TODO: { [key: string]: string; } is temporary solution */}
+        <TeamCscAnalysis
+          slug={slug}
+          csc_statuses={csc_statuses as { [key: string]: string }}
+        />
         <div className="space-y-6">
           <RmAnalysis slug={slug} />
         </div>

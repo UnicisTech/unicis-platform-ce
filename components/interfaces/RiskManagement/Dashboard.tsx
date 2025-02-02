@@ -2,7 +2,6 @@ import { useCallback, useMemo, useState } from 'react';
 import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import useCanAccess from 'hooks/useCanAccess';
-import { Team } from '@prisma/client';
 import CreateRisk from './CreateRisk';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { useRouter } from 'next/router';
@@ -11,17 +10,14 @@ import { EmptyState, Error } from '@/components/shared';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
 
-interface DashboardProps {
-  team: Team;
-}
-
-const Dashboard = ({ team }: DashboardProps) => {
+const Dashboard = () => {
   const { canAccess } = useCanAccess();
   const { t } = useTranslation('common');
   const router = useRouter();
   const { slug } = router.query;
   const { tasks, mutateTasks } = useTeamTasks(slug as string);
-  const [perPage, setPerPage] = useState<number>(10);
+  //TODO: setPerPage
+  const [perPage] = useState<number>(10);
 
   console.log('tasks', tasks);
 

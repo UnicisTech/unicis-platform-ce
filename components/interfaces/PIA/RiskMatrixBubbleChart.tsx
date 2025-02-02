@@ -17,8 +17,6 @@ const riskColors = {
   extreme: 'rgba(255, 0, 0, 0.3)',
 };
 
-const MATRIX_SIZE = 5;
-
 ChartJS.register(
   CategoryScale,
   LinearScale,

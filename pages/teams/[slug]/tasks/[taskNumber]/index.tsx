@@ -147,7 +147,8 @@ const TaskById = ({
             <CscPanel
               task={task}
               mutateTask={mutateTask}
-              statuses={statuses}
+              // {/* TODO: { [key: string]: string; } is temporary solution */}
+              statuses={statuses as { [key: string]: string }}
               setStatuses={setStatuses}
               ISO={ISO}
             />

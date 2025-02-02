@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropdown from './DropDown';
+import Dropdown from './Dropdown';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
 interface StatusFilterProps {

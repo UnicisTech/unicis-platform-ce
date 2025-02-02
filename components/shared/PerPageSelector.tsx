@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropdown from './DropDown';
+import Dropdown from './Dropdown';
 import { ChevronUpDownIcon } from '@heroicons/react/24/outline';
 
 const perPageOptions = [

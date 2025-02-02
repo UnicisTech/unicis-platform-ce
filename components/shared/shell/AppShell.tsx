@@ -3,8 +3,6 @@ import { Loading } from '@/components/shared';
 import { useSession } from 'next-auth/react';
 import Header from './Header';
 import Drawer from './Drawer';
-import AppProvider from '@atlaskit/app-provider';
-import { ThemeModes } from '@atlaskit/theme/types';
 
 import AiChat from './AiChat';
 
@@ -12,8 +10,6 @@ export default function AppShell({ children }) {
   const { data, status } = useSession();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const [atlaskitTheme, setAtlaskitTheme] = useState<ThemeModes>('dark');
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -46,7 +42,8 @@ export default function AppShell({ children }) {
       <div className="lg:pl-64 dark:border-gray-200">
         <Header
           setSidebarOpen={setSidebarOpen}
-          themeCallback={setAtlaskitTheme}
+          //TODO: remove
+          themeCallback={() => {}}
         />
         <main className="py-10 dark:bg-black">
           <div className="mx-auto px-4 sm:px-6 lg:px-8">{children}</div>

@@ -20,12 +20,7 @@ const IAP = ({ teamFeatures }) => {
   const { slug } = router.query;
 
   const { t } = useTranslation('common');
-  const {
-    isLoading: isTeamLoading,
-    isError: isTeamError,
-    team,
-    mutateTeam,
-  } = useTeam();
+  const { isLoading: isTeamLoading, isError: isTeamError, team } = useTeam();
   const {
     categories,
     teamCourses,

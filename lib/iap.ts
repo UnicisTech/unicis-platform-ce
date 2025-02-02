@@ -44,8 +44,9 @@ export const countCourseAnswers = (answers: any[], questions: Question[]) => {
 
   answers.forEach((answer, index) => {
     const question = questions[index];
+
     switch (question.type) {
-      case QuestionType.SINGLE_CHOICE:
+      case QuestionType.SINGLE_CHOICE: {
         const correctAnswer = question.answers.find(
           (item) => item.isCorrect
         )?.answer;
@@ -55,14 +56,15 @@ export const countCourseAnswers = (answers: any[], questions: Question[]) => {
         );
         correctAnswer === answer ? right++ : wrong++;
         break;
-      case QuestionType.MULTIPLE_CHOICE:
+      }
+      case QuestionType.MULTIPLE_CHOICE: {
         const correctAnswers = question.answers
           .filter((item) => item.isCorrect)
-          ?.map(({ answer }) => answer);
+          .map(({ answer }) => answer);
         haveSameElements(correctAnswers, answer) ? right++ : wrong++;
         break;
-
-      case QuestionType.ORDER:
+      }
+      case QuestionType.ORDER: {
         haveSameElementsInOrder(
           answers.map(({ second }) => second),
           answer.map(({ second }) => second)
@@ -70,8 +72,11 @@ export const countCourseAnswers = (answers: any[], questions: Question[]) => {
           ? right++
           : wrong++;
         break;
-      case QuestionType.TEXT:
+      }
+      case QuestionType.TEXT: {
         (question as TextQuestion).answer === answer ? right++ : wrong++;
+        break;
+      }
     }
   });
 

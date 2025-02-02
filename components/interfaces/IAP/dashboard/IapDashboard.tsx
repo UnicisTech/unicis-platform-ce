@@ -23,7 +23,11 @@ const IapDashboard = ({ categories, teamCourses }: IapDashboardProps) => {
       </div>
       <div className="grid gap-5 grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] p-6">
         {teamCourses.map((teamCourse) => (
-          <CourseCard teamCourse={teamCourse} categories={categories} />
+          <CourseCard
+            teamCourse={teamCourse}
+            categories={categories}
+            key={teamCourse.id}
+          />
         ))}
       </div>
     </>

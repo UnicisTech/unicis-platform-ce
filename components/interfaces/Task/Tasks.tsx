@@ -8,7 +8,6 @@ import {
   Loading,
   PerPageSelector,
   StatusBadge,
-  StatusFilter,
 } from '@/components/shared';
 import useTasks from 'hooks/useTasks';
 import useCanAccess from 'hooks/useCanAccess';

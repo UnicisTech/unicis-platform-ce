@@ -4,24 +4,20 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeamTasks from 'hooks/useTeamTasks';
-import { Team } from '@prisma/client';
 import CreateRisk from './CreateRisk';
 import { EmptyState, Error } from '@/components/shared';
 import { TaskProperties, TaskWithPiaRisk } from 'types';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
 
-interface DashboardProps {
-  team: Team;
-}
-
-const Dashboard = ({ team }: DashboardProps) => {
+const Dashboard = () => {
   const { canAccess } = useCanAccess();
   const { t } = useTranslation('common');
   const router = useRouter();
   const { slug } = router.query;
   const { tasks, mutateTasks } = useTeamTasks(slug as string);
-  const [perPage, setPerPage] = useState<number>(10);
+  //TODO: setPerPage
+  const [perPage] = useState<number>(10);
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);

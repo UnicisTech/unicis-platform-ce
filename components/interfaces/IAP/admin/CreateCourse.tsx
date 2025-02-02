@@ -152,7 +152,7 @@ const CreateCourse = ({
   };
 
   // onSubmit function uses only for native validation on current step
-  const onSubmit = async (formData: any, meta: any, other: any) => {
+  const onSubmit = async (formData: any) => {
     if (stage === 0) {
       const courseValidationErrors = validateCourse(
         formData,
@@ -570,7 +570,7 @@ const CreateCourse = ({
                         })}
                       {questionType === QuestionType.ORDER &&
                         range(answersAmount).map((index) => (
-                          <div className="mt-4">
+                          <div className="mt-4" key={index}>
                             <span className="label-text-alt">
                               Pair №{index + 1}
                             </span>

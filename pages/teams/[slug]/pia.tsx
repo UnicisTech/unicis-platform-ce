@@ -7,10 +7,10 @@ import Dashboard from '@/components/interfaces/PIA/Dashboard';
 
 const RiskManagement: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ team }) => {
+> = () => {
   return (
     <>
-      <Dashboard team={team} />
+      <Dashboard />
     </>
   );
 };

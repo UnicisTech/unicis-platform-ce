@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { Card } from '@/components/shared';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { Button } from 'react-daisyui';
 import type { TeamWithSubscription, SubscriptionWithPayments } from 'types';
 import useTeamMembers from 'hooks/useTeamMembers';
 import { getTotalPrice, planPrice } from '@/lib/subscriptions';
