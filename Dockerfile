@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install --legacy-peer-deps
 
 # Set up database schema
-# RUN npx prisma db push
+RUN npx prisma db push
 
 # Copy the entire application to the working directory
 COPY . .
@@ -20,8 +20,6 @@ COPY . .
 EXPOSE 4002
 
 # Set the DATABASE_URL environment variable
-# ENV DATABASE_URL="postgresql://platform:7emp1eAppe4rance5Rang3I5BNOffice@db.unicis.tech/unicis_platform?schema=platform"
-# DEV DB -> ENV DATABASE_URL=postgresql://unicis_platform_dev:7emp1eAppe4rance5Rang3I5BNOffice-dev@srv-captain--db-dev:5432/unicis_platform_dev?sslmode=prefer
 
 ARG NEXTAUTH_URL=${NEXTAUTH_URL}
 ENV NEXTAUTH_URL=${NEXTAUTH_URL}
