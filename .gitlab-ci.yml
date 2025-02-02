@@ -52,4 +52,13 @@ deploy:
           RETRACED_PROJECT_ID=$RETRACED_PROJECT_ID \
           FEATURE_TEAM_SSO=$FEATURE_TEAM_SSO \
           FEATURE_TEAM_DSYNCL=$FEATURE_TEAM_DSYNCL \
-          FEATURE
+          FEATURE_TEAM_AUDIT_LOG=$FEATURE_TEAM_AUDIT_LOG \
+          FEATURE_TEAM_WEBHOOK=$FEATURE_TEAM_WEBHOOK \
+          FEATURE_TEAM_API_KEY=$FEATURE_TEAM_API_KEY \
+          BILLING_EMAIL=$BILLING_EMAIL
+    - echo "Deploying Docker image to Azure Web App"
+    - az webapp config container set \
+        --name $AZURE_WEBAPP_NAME \
+        --resource-group $AZURE_RESOURCE_GROUP \
+        --docker-custom-image-name your-image-name:latest
+    - az webapp restart --name $AZURE_WEBAPP_NAME --resource-group $AZURE_RESOURCE_GROUP
