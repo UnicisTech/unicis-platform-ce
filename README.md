@@ -179,7 +179,7 @@ Please try to create bug reports that are:
 
 ## 🤩 Community
 
-Let's develop an open-source competitor to Drata, Vanta, Auditboard, Strike Graph, and Secureframe, and more. 
+Let's develop an open-source competitor to Drata, Vanta, Auditboard, Strike Graph, and Secureframe, and more.
 Help us build a future GRC by [supporting us](https://www.unicis.tech/community).
 
 - [Discord](https://discord.com/invite/8TwyeD97HD) (For live discussion with the Open-Source Community and Unicis team)
