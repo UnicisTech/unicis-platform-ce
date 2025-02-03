@@ -31,7 +31,7 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 
 ## 🚀 Deployment
 
-To Be Done
+We are working on one-click deployment solution with popular platforms. For advance users please use the below section.
 
 ## ✨ Getting Started
 
@@ -127,13 +127,16 @@ _Note: HTML test report is generated inside the `report` folder. Currently suppo
 
 #### Free and open source community edition - all-in-one tools for security, privacy and compliance team
 
-![unicis-platform-beta-poster](https://www.unicis.tech/img/unicis-platform-beta-001.png)
+![unicis-platform-beta-poster](https://www.unicis.tech/img/unicis-platform-early-access.png)
 
-## Applications
+## Modules
 
-- [Record of Processing Activities](https://www.unicis.tech/docs/rpa)
-- [Transfer Impact Assessment](https://www.unicis.tech/docs/tia)
-- [Cybersecurity Controls: MVSP](https://www.unicis.tech/docs/csc)
+- [Record of Processing Activities](https://www.unicis.tech/docs/platform/using/record-processing-actitivities)
+- [Transfer Impact Assessment](https://www.unicis.tech/docs/platform/using/transfer-impact-assessment)
+- [Privacy Impact Assessment](https://www.unicis.tech/docs/platform/using/privacy-impact-assessment)
+- [Cybersecurity Controls: MVSP](https://www.unicis.tech/docs/platform/using/cybersecurity-management-system)
+- [Interactive Awareness Program](https://www.unicis.tech/docs/platform/using/awareness-program)
+- [Cybersecurity Risk Management](https://www.unicis.tech/docs/platform/using/risk-management)
 
 ## 🥇 Features
 
@@ -170,10 +173,17 @@ Please try to create bug reports that are:
 
 ## 🤩 Community
 
+Let's develop an open-source competitor to Drata, Vanta, Auditboard, Strike Graph, and Secureframe, and more. 
+Help us build a future GRC by [supporting us](https://www.unicis.tech/community).
+
 - [Discord](https://discord.com/invite/8TwyeD97HD) (For live discussion with the Open-Source Community and Unicis team)
 - [X](https://twitter.com/UnicisTech) / [LinkedIn](https://www.linkedin.com/company/unicis-tech-oü/) / [Mastodon](https://mastodon.xyz/@unicis_tech) (Follow us)
 - [Vimeo](https://vimeo.com/user183384852) (Watch community events and tutorials)
 - [GitHub Issues](https://github.com/UnicisTech/unicis-platform-ce/issues) (Contributions, report issues, and product ideas)
+
+## 📘 Knowledge Hub
+
+On [this page](https://www.unicis.tech/kb) you will find everything you may need to know in order to install, configure, maintain and customize an Unicis Platform. Use the links below to navigate.
 
 ## 🌍 Contributors
 
