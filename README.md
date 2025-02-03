@@ -1,4 +1,8 @@
-![unicis-platform-beta-poster](https://www.unicis.tech/img/unicis-platform-logo-horizonatal.svg)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://www.unicis.tech/img/logo_unicis_white-1.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://www.unicis.tech/img/unicis-platform-logo-horizonatal.svg">
+  <img alt="Unicis Platform Community Banner" src="https://www.unicis.tech/img/unicis-platform-logo-horizonatal.svg">
+</picture>
 
 # ⭐️ Unicis Platform Community (free and open source)
 
