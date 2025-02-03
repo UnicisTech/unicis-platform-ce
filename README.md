@@ -1,4 +1,6 @@
-# Unicis Platform Community (free and open source)
+![unicis-platform-beta-poster](https://www.unicis.tech/img/unicis-platform-logo-horizonatal.svg)
+
+# ⭐️ Unicis Platform Community (free and open source)
 
 ![Static Badge](https://img.shields.io/badge/Github%20stargazers%2C%20https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Fstargazers?logo=github&label=GitHub%20Star&link=https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Fstargazer)
 ![Static Badge](https://img.shields.io/badge/Github%20fork%2C%20https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Ffork?logo=github&label=GitHub%20Fork&link=https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Ffork)
