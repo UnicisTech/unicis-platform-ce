@@ -191,6 +191,10 @@ Help us build a future GRC by [supporting us](https://www.unicis.tech/community)
 
 On [this page](https://www.unicis.tech/kb) you will find everything you may need to know in order to install, configure, maintain and customize an Unicis Platform. Use the links below to navigate.
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=UnicisTech/unicis-platform-ce&type=Date)](https://star-history.com/#UnicisTech/unicis-platform-ce&Date)
+
 ## 🌍 Contributors
 
 <a href="https://github.com/UnicisTech/unicis-platform-ce/graphs/contributors">
