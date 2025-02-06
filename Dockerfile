@@ -20,9 +20,6 @@ COPY . .
 EXPOSE 4002
 
 # Set the DATABASE_URL environment variable
-# ENV DATABASE_URL="postgresql://platform:7emp1eAppe4rance5Rang3I5BNOffice@db.unicis.tech/unicis_platform?schema=platform"
-# DEV DB -> ENV DATABASE_URL=postgresql://unicis_platform_dev:7emp1eAppe4rance5Rang3I5BNOffice-dev@srv-captain--db-dev:5432/unicis_platform_dev?sslmode=prefer
-
 ARG NEXTAUTH_URL=${NEXTAUTH_URL}
 ENV NEXTAUTH_URL=${NEXTAUTH_URL}
 ARG NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
