@@ -20,10 +20,9 @@ import { getTeamMember } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import { inferSSRProps } from '@/lib/inferSSRProps';
 
-const DirectorySync: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({
-  teamFeatures,
-  error
-}) => {
+const DirectorySync: NextPageWithLayout<
+  inferSSRProps<typeof getServerSideProps>
+> = ({ teamFeatures, error }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
 
@@ -136,7 +135,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   );
 
   try {
-    throwIfNotAllowed(teamMember, 'team_dsync', 'read')
+    throwIfNotAllowed(teamMember, 'team_dsync', 'read');
 
     return {
       props: {

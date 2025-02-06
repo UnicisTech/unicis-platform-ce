@@ -1,7 +1,10 @@
 import type { NextApiRequest } from 'next';
 
 export const getIpAddress = (req: NextApiRequest): string => {
-  return (req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.connection?.remoteAddress || 'unknown') as string;
+  return (req.headers['x-forwarded-for'] ||
+    req.socket.remoteAddress ||
+    req.connection?.remoteAddress ||
+    'unknown') as string;
 };
 
 export const capitalizeCountryName = (name: string) => {

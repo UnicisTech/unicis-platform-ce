@@ -14,10 +14,10 @@ import { throwIfNotAllowed } from 'models/user';
 import { NextPageWithLayout } from 'types';
 import { inferSSRProps } from '@/lib/inferSSRProps';
 
-const TeamSSO: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({ 
-  teamFeatures, 
+const TeamSSO: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({
+  teamFeatures,
   SPConfigURL,
-  error 
+  error,
 }) => {
   const { t } = useTranslation('common');
 
@@ -96,7 +96,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   );
 
   try {
-    throwIfNotAllowed(teamMember, 'team_sso', 'read')
+    throwIfNotAllowed(teamMember, 'team_sso', 'read');
 
     const SPConfigURL = env.jackson.selfHosted
       ? `${env.jackson.externalUrl}/.well-known/saml-configuration`
@@ -122,7 +122,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         teamFeatures: env.teamFeatures,
         SPConfigURL: null,
       },
-    }
+    };
   }
 }
 

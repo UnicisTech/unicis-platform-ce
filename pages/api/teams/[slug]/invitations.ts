@@ -11,10 +11,7 @@ import {
   getInvitations,
   isInvitationExpired,
 } from 'models/invitation';
-import {
-  addTeamMember,
-  throwIfNoTeamAccess,
-} from 'models/team';
+import { addTeamMember, throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';

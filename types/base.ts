@@ -134,4 +134,4 @@ export type SubscriptionWithPayments = Prisma.SubscriptionGetPayload<{
   };
 }>;
 
-export type UserReturned = Pick<User, "name" | "firstName" | "lastName">
+export type UserReturned = Pick<User, 'name' | 'firstName' | 'lastName'>;

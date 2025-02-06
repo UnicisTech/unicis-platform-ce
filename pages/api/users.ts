@@ -29,7 +29,7 @@ export default async function handler(
     const status = error.status || 500;
 
     if (isPrismaError(error)) {
-      return res.status(status).json({ error: "Prisma Error" });
+      return res.status(status).json({ error: 'Prisma Error' });
     }
 
     res.status(status).json({ error: { message } });
@@ -54,11 +54,16 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   ) {
     toUpdate['firstName'] = req.body.firstName.trim();
     toUpdate['lastName'] = req.body.lastName.trim();
-    toUpdate['name'] = `${req.body.firstName.trim()} ${req.body.lastName.trim()}`;
+    toUpdate['name'] =
+      `${req.body.firstName.trim()} ${req.body.lastName.trim()}`;
   }
 
   // Only allow email change if confirmEmail is false
-  if ('email' in req.body && typeof req.body.email === 'string' && allowEmailChange) {
+  if (
+    'email' in req.body &&
+    typeof req.body.email === 'string' &&
+    allowEmailChange
+  ) {
     const user = await getUser({ email: req.body.email.trim() });
 
     if (user && user.id !== session?.user.id) {
@@ -83,11 +88,11 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
 
   recordMetric('user.updated');
 
-  res.status(200).json({ 
+  res.status(200).json({
     data: {
-      name: user.name, 
-      firstName: user.firstName, 
-      lastName: user.lastName
-    } as UserReturned
+      name: user.name,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    } as UserReturned,
   });
 };
