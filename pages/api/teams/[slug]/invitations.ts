@@ -4,7 +4,6 @@ import { prisma } from '@/lib/prisma';
 import { sendAudit } from '@/lib/retraced';
 import { getSession } from '@/lib/session';
 import { sendEvent } from '@/lib/svix';
-import { getCurrentPlan, subscriptions } from '@/lib/subscriptions';
 import {
   createInvitation,
   deleteInvitation,
@@ -14,13 +13,11 @@ import {
 } from 'models/invitation';
 import {
   addTeamMember,
-  getTeamMembers,
   throwIfNoTeamAccess,
 } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
-import { Role } from '@prisma/client';
 
 export default async function handler(
   req: NextApiRequest,
@@ -62,71 +59,6 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   throwIfNotAllowed(teamMember, 'team_invitation', 'create');
 
   const { email, role } = req.body;
-  const { slug } = req.query as { slug: string };
-
-<<<<<<< HEAD
-  const currentPlan = getCurrentPlan(teamMember.team.subscription);
-  const { maxAdmins, maxUsers } = subscriptions[currentPlan];
-
-  const teamInvitations = await getInvitations(teamMember.teamId);
-  const invitationsAmount = teamInvitations.length;
-  const adminInitationAmout = teamInvitations.filter(
-    ({ role }) => role === Role.ADMIN || Role.OWNER
-  ).length;
-
-  const members = await getTeamMembers(slug);
-
-  if (members.length >= maxUsers) {
-    return res.status(400).json({
-      error: {
-        message: 'You have reached the maximum number of members per team.',
-      },
-    });
-  }
-
-  if (invitationsAmount + members.length >= maxUsers) {
-    return res.status(400).json({
-      error: {
-        message:
-          'You have reached the maximum number of invitations per team, reject them to invite new members.',
-      },
-    });
-  }
-
-  if (role === Role.ADMIN || role === Role.OWNER) {
-    const adminsAmount = members.filter(
-      ({ role }) => role === Role.ADMIN
-    ).length;
-    if (adminsAmount >= maxAdmins) {
-      return res.status(400).json({
-        error: {
-          message: 'You have reached the maximum number of admins per team.',
-        },
-      });
-    }
-    if (adminsAmount + adminInitationAmout >= maxAdmins) {
-      return res.status(400).json({
-        error: {
-          message:
-            'You have reached the maximum number of admin invitations per team, reject them to invite new admins.',
-        },
-      });
-    }
-  }
-=======
-  //TODO: remove limits for community pack
-  // if (role !== Role.MEMBER) {
-  //   const members = await getTeamMembers(slug);
-
-  //   if (members.length >= 2) {
-  //     return res.status(400).json({
-  //       error: {
-  //         message: 'You have reached the maximum number of members per team.',
-  //       },
-  //     });
-  //   }
-  // }
->>>>>>> community-edition
 
   const invitationExists = await prisma.invitation.findFirst({
     where: {

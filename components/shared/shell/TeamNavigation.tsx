@@ -1,17 +1,10 @@
-<<<<<<< HEAD
 import {
   Cog6ToothIcon,
   CodeBracketIcon,
   ChatBubbleBottomCenterTextIcon,
+  QuestionMarkCircleIcon
 } from '@heroicons/react/24/outline';
 import { QueueListIcon, ChartBarIcon } from '@heroicons/react/24/solid';
-=======
-import { Cog6ToothIcon, CodeBracketIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
-import {
-  QueueListIcon
-} from "@heroicons/react/24/solid";
-
->>>>>>> community-edition
 import { useTranslation } from 'next-i18next';
 import NavigationItems from './NavigationItems';
 import { NavigationProps, MenuItem } from './NavigationItems';
