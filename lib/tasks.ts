@@ -22,8 +22,16 @@ export const taskNavigations = (activeTab: string) => {
       active: activeTab == 'Transfer Impact Assessment',
     },
     {
+      name: 'Privacy Impact Assessment',
+      active: activeTab === 'Privacy Impact Assessment',
+    },
+    {
       name: 'Cybersecurity Controls',
       active: activeTab === 'Cybersecurity Controls',
+    },
+    {
+      name: 'Risk Management',
+      active: activeTab === 'Risk Management',
     },
   ];
 };

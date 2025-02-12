@@ -12,9 +12,6 @@ interface PaginationResult<T> {
 
 const usePagination = <T>(data: T[], perPage: number): PaginationResult<T> => {
   const [currentPage, setCurrentPage] = useState(1);
-
-  console.log('usePagination data', data);
-
   const totalPages = Math.ceil(data.length / perPage);
 
   const startIndex = (currentPage - 1) * perPage;

@@ -117,6 +117,10 @@ const env = {
 
   // Billing address
   billingEmail: process.env.BILLING_EMAIL,
+
+  ai: {
+    llamaToken: process.env.LLAMA_TOKEN,
+  },
 };
 
 export default env;

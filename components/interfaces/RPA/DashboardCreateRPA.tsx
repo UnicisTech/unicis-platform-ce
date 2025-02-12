@@ -13,6 +13,8 @@ import type { ApiResponse } from 'types';
 import type { Task } from '@prisma/client';
 import CreateFormBody from './CreateFormBody';
 import { TaskPickerFormBody } from '@/components/shared/atlaskit';
+import { StageTracker } from '@/components/shared/atlaskit';
+import { headers } from '@/components/defaultLanding/data/configs/rpa';
 
 const DashboardCreateRPA = ({
   visible,
@@ -127,9 +129,9 @@ const DashboardCreateRPA = ({
       if (message !== '') {
         return setValidationMessage(message);
       }
-      if (stage === 4) {
+      if (stage === 5) {
         const procedureToSave =
-          procedure.length === 4 ? [...procedure, formData] : procedure;
+          procedure.length === 5 ? [...procedure, formData] : procedure;
         await saveProcedure(procedureToSave, prevProcedure, reset);
       } else {
         setStage(stage + 1);
@@ -151,14 +153,15 @@ const DashboardCreateRPA = ({
   }, []);
 
   return (
-    <Modal open={visible}>
+    <Modal open={visible} className="w-11/12 max-w-3xl">
       <Form onSubmit={onSubmit}>
         {({ formProps, reset }) => (
           <form {...formProps}>
             <Modal.Header className="font-bold">
               {modalStage === 0 && `Select a task`}
-              {modalStage === 1 &&
-                `Register Record of Processing Activities ${stage + 1}/5`}
+              {modalStage === 1 && (
+                <StageTracker currentStage={stage} headers={headers} />
+              )}
             </Modal.Header>
             <Modal.Body>
               {modalStage === 0 && (
@@ -212,7 +215,7 @@ const DashboardCreateRPA = ({
                     appearance="primary"
                     isLoading={isLoading}
                   >
-                    {stage < 4 ? t('next') : t('save')}
+                    {stage < 5 ? t('next') : t('save')}
                   </LoadingButton>
                 </>
               )}

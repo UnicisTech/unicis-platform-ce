@@ -49,6 +49,15 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
     });
   }
 
+  if (canAccess('iap_course', ['read']) && canAccess('iap_reports', ['read'])) {
+    navigations.push({
+      name: 'Training',
+      href: `/teams/${team.slug}/iap/admin`,
+      active: activeTab === 'iap/admin',
+      icon: UserPlusIcon,
+    });
+  }
+
   if (
     teamFeatures.sso &&
     canAccess('team_sso', ['create', 'update', 'read', 'delete'])

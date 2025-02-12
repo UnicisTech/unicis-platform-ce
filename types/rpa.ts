@@ -45,8 +45,21 @@ export interface RpaConfig {
   guarantee: RpaOption[];
   toms: RpaOption[];
   country: RpaOption[];
+  involveProfiling: RpaOption[];
+  useAutomated: RpaOption[];
+  involveSurveillance: RpaOption[];
+  processedSpecialCategories: RpaOption[];
+  isBigData: RpaOption[];
+  dataSetsCombined: RpaOption[];
+  multipleControllers: RpaOption[];
+  imbalanceInRelationship: RpaOption[];
+  innovativeTechnologyUsed: RpaOption[];
+  transferredOutside: RpaOption[];
+  rightsRestricted: RpaOption[];
+  piaNeeded: RpaOption[];
 }
 
+//TODO: RpaAuditLog and TiaAuditLog, use AuditLog from base.ts instead
 export type RpaAuditLog = {
   actor: Session['user'];
   date: number;
