@@ -15,16 +15,14 @@ import usePagination from 'hooks/usePagination';
 import statuses from '@/components/defaultLanding/data/statuses.json';
 import { WithLoadingAndError } from '@/components/shared';
 import type { Task, Team } from '@prisma/client';
-import { CreateTask, DeleteTask, EditTask } from '@/components/interfaces/Task';
+import { CreateTask, DeleteTask } from '@/components/interfaces/Task';
 
 const Tasks = ({ team }: { team: Team }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const { isLoading, isError, tasks } = useTasks(slug as string);
   const [visible, setVisible] = useState(false);
-  const [editVisible, setEditVisible] = useState(false);
   const [deleteVisible, setDeleteVisible] = useState(false);
-  const [taskToEdit, setTaskToEdit] = useState<Task>({} as Task);
   const [taskToDelete, setTaskToDelete] = useState<null | number>(null);
 
   const [perPage, setPerPage] = useState<number>(10);
@@ -54,11 +52,6 @@ const Tasks = ({ team }: { team: Team }) => {
   const openDeleteModal = async (id: number) => {
     setTaskToDelete(id);
     setDeleteVisible(true);
-  };
-
-  const openEditModal = async (task: Task) => {
-    setTaskToEdit({ ...task });
-    setEditVisible(true);
   };
 
   return (
@@ -148,7 +141,8 @@ const Tasks = ({ team }: { team: Team }) => {
                           size="sm"
                           variant="outline"
                           onClick={() => {
-                            openEditModal(task);
+                            // openEditModal(task);
+                            router.push(`/teams/${slug}/tasks/${task.taskNumber}`)
                           }}
                         >
                           {t('edit-task')}
@@ -195,14 +189,6 @@ const Tasks = ({ team }: { team: Team }) => {
           </div>
         ) : null}
         <CreateTask visible={visible} setVisible={setVisible} team={team} />
-        {editVisible && (
-          <EditTask
-            visible={editVisible}
-            setVisible={setEditVisible}
-            team={team}
-            task={taskToEdit}
-          />
-        )}
         <DeleteTask
           visible={deleteVisible}
           setVisible={setDeleteVisible}
