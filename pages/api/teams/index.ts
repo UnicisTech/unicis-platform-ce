@@ -51,6 +51,9 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
 // Create a team
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
+  const teamMember = await throwIfNoTeamAccess(req, res);
+  throwIfNotAllowed(teamMember, 'team', 'create');
+
   const { name } = req.body;
 
   const session = await getSession(req, res);

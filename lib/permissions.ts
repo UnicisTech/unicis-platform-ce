@@ -54,7 +54,7 @@ export const permissions: RolePermissions = {
   OWNER: [
     {
       resource: 'team',
-      actions: '*',
+      actions: ['read','leave', 'update'],
     },
     {
       resource: 'team_member',

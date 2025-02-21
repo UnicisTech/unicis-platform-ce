@@ -3,6 +3,7 @@ import { defaultHeaders } from '@/lib/common';
 import { Team } from '@prisma/client';
 import useTeams from 'hooks/useTeams';
 import { useTranslation } from 'next-i18next';
+import useCanAccess from 'hooks/useCanAccess';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Button } from 'react-daisyui';
@@ -16,6 +17,8 @@ import CreateTeam from './CreateTeam';
 const Teams = () => {
   const router = useRouter();
   const { t } = useTranslation('common');
+  const { canAccess } = useCanAccess();
+
   const [team, setTeam] = useState<Team | null>(null);
   const { isLoading, isError, teams, mutateTeams } = useTeams();
   const [askConfirmation, setAskConfirmation] = useState(false);
@@ -59,14 +62,14 @@ const Teams = () => {
                 {t('team-listed')}
               </p>
             </div>
-            <Button
+            {canAccess('team', ['create']) && <Button
               color="primary"
               variant="outline"
               size="md"
               onClick={() => setCreateTeamVisible(!createTeamVisible)}
             >
               {t('create-team')}
-            </Button>
+            </Button>}
           </div>
           <table className="text-sm table w-full border-b dark:border-base-200">
             <thead className="bg-base-200">
