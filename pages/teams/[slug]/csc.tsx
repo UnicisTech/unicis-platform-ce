@@ -118,9 +118,6 @@ const CscDashboard = ({
     console.log('CSC ISO', ISO);
   }, [ISO]);
 
-  if (!canAccess('csc', ['read'])) {
-    return <Error message={t('forbidden-resource')} />;
-  }
 
   if (isLoading || !team || !tasks || !ISO) {
     return <Loading />;
@@ -128,6 +125,10 @@ const CscDashboard = ({
 
   if (isError) {
     return <Error />;
+  }
+
+  if (!canAccess('csc', ['read'])) {
+    return <Error message={t('forbidden-resource')} />;
   }
 
   return (

@@ -62,16 +62,16 @@ const RpaDashboard: NextPageWithLayout<
     }) as TaskWithRpaProcedure[];
   }, [tasks]);
 
-  if (!canAccess('rpa', ['read'])) {
-    return <Error message={t('forbidden-resource')} />;
-  }
-
   if (isLoading || !team || !tasks) {
     return <Loading />;
   }
 
   if (isError) {
     return <Error />;
+  }
+
+  if (!canAccess('rpa', ['read'])) {
+    return <Error message={t('forbidden-resource')} />;
   }
 
   return (

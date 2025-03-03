@@ -25,12 +25,12 @@ const IAP = () => {
 
   const { canAccess } = useCanAccess();
 
-  if (!canAccess('iap_course', ['update'])) {
-    return <Error message={t('forbidden-resource')} />;
-  }
-
   if (isLoading || isIapDataLoading || isTeamsLoading) {
     return <Loading />;
+  }
+
+  if (!canAccess('iap_course', ['update'])) {
+    return <Error message={t('forbidden-resource')} />;
   }
 
   if (isError || isIapError || isTeamsError) {
