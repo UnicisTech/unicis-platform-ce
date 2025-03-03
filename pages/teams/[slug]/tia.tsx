@@ -57,16 +57,16 @@ const TiaDashboard: NextPageWithLayout<
     setIsDeleteOpen(true);
   }, []);
 
-  if (!canAccess('tia', ['read'])) {
-    return <Error message={t('forbidden-resource')} />;
-  }
-
   if (isLoading || !team || !tasks) {
     return <Loading />;
   }
 
   if (isError) {
     return <Error />;
+  }
+
+  if (!canAccess('tia', ['read'])) {
+    return <Error message={t('forbidden-resource')} />;
   }
 
   return (
