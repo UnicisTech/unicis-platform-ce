@@ -14,7 +14,7 @@ import {
   TaskTab,
 } from '@/components/interfaces/Task';
 import { CscAuditLogs, CscPanel } from '@/components/interfaces/CSC';
-import { CreateRPA, RpaPanel, RpaAuditLog } from '@/components/interfaces/RPA';
+import { CreateProcedure as CreateRpaProcedure, RpaPanel, RpaAuditLog } from '@/components/interfaces/RPA';
 import {
   CreateRiskManagementRisk,
   RiskManagementTaskPanel,
@@ -210,11 +210,11 @@ const TaskById = ({
         />
       )}
       {rpaVisible && (
-        <CreateRPA
+        <CreateRpaProcedure
           visible={rpaVisible}
           setVisible={setRpaVisible}
-          task={task}
-          mutate={mutateTask}
+          selectedTask={task}
+          mutateTasks={mutateTask}
         />
       )}
       {piaVisible && (

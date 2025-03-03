@@ -11,10 +11,9 @@ import useTeamTasks from 'hooks/useTeamTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import type { TaskWithRpaProcedure, TaskProperties } from 'types';
 import {
-  CreateRPA,
   RpaTable,
   DeleteRpa,
-  DashboardCreateRPA,
+  CreateProcedure,
 } from '@/components/interfaces/RPA';
 import { Button } from 'react-daisyui';
 import { PerPageSelector } from '@/components/shared';
@@ -103,12 +102,11 @@ const RpaDashboard: NextPageWithLayout<
       </div>
       <>
         {isCreateOpen && (
-          <DashboardCreateRPA
+          <CreateProcedure
             visible={isCreateOpen}
             setVisible={setIsCreateOpen}
             tasks={tasks}
-            //task={taskToEdit as Task}
-            mutate={mutateTasks}
+            mutateTasks={mutateTasks}
           />
         )}
       </>
@@ -124,11 +122,11 @@ const RpaDashboard: NextPageWithLayout<
             deleteHandler={onDeleteClickHandler}
           />
           {taskToEdit && isEditOpen && (
-            <CreateRPA
+            <CreateProcedure
               visible={isEditOpen}
               setVisible={setIsEditOpen}
-              task={taskToEdit as TaskWithRpaProcedure}
-              mutate={mutateTasks}
+              selectedTask={taskToEdit as TaskWithRpaProcedure}
+              mutateTasks={mutateTasks}
             />
           )}
           {taskToDelete && isDeleteOpen && (
