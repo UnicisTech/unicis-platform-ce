@@ -88,10 +88,6 @@ export const defaultHeaders = {
   'Content-Type': 'application/json',
 };
 
-export const passwordPolicies = {
-  minLength: 8,
-};
-
 export const getAxiosError = (error: any): string => {
   if (error.response) {
     return error.response.data.error.message;

@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { InputWithLabel } from '@/components/shared';
-import { defaultHeaders, passwordPolicies } from '@/lib/common';
+import { defaultHeaders, validatePassword } from '@/lib/common';
 import type { User } from '@prisma/client';
 import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
@@ -41,7 +41,8 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
       firstName: Yup.string().required(),
       lastName: Yup.string().required(),
       email: Yup.string().required().email(),
-      password: Yup.string().required().min(passwordPolicies.minLength),
+      password: Yup.string().required()
+        .test('is-strong', 'Password must include uppercase, lowercase, number, and special character', validatePassword),
       team: Yup.string().required().min(3),
     }),
     onSubmit: async (values) => {
