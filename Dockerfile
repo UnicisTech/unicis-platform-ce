@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install --legacy-peer-deps
 
 # Set up database schema
-# RUN npx prisma db push
+RUN npx prisma db push
 
 # Copy the entire application to the working directory
 COPY . .
