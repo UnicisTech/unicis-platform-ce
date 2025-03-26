@@ -45,6 +45,7 @@ interface CreateRiskProps {
   visible: boolean;
   setVisible: Dispatch<SetStateAction<boolean>>;
   mutateTasks: () => Promise<void>;
+  completeCallback?: () => void;
 }
 
 const CreateRisk = ({
@@ -53,6 +54,7 @@ const CreateRisk = ({
   visible,
   setVisible,
   mutateTasks,
+  completeCallback,
 }: CreateRiskProps) => {
   const { t } = useTranslation('common');
 
@@ -91,6 +93,7 @@ const CreateRisk = ({
         toast.success(t('tia-created'));
       }
 
+      completeCallback?.()
       mutateTasks();
       setVisible(false);
     } catch (error: any) {

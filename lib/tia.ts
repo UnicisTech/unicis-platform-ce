@@ -4,6 +4,7 @@ import {
 } from '@/components/defaultLanding/data/configs/tia';
 import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
+import { useFormState } from '@atlaskit/form';
 import { TiaOption, TiaProcedureInterface, TaskProperties } from 'types';
 import { TiaAuditLog, RpaConfig, Diff } from 'types';
 
@@ -212,3 +213,153 @@ export const getDiff = (o1, o2) => {
 
   return diff;
 };
+
+export const shouldSkipTwoSteps = (formData: any) =>
+  [
+    'LawfulAccess',
+    'MassSurveillanceTelecommunications',
+    'SelfReportingObligations',
+  ]
+    .map((prop) => ['yes', 'na'].includes(formData[prop]))
+    .every((result) => result === true);
+
+export const isTranferPermitted = (procedure: any): boolean => {
+  if (!procedure[1]) return false;
+
+  const {
+    EncryptionInTransit,
+    TransferMechanism,
+    LawfulAccess,
+    MassSurveillanceTelecommunications,
+    SelfReportingObligations,
+  } = procedure[1];
+
+  const {
+    ConnectionTargetedAccess,
+    ConnectionSurveillanceTele,
+    ConnectionSelfreportingObligations,
+  } = procedure[3];
+
+  if (EncryptionInTransit === 'no' || TransferMechanism === 'no') {
+    return false;
+  }
+
+  if (LawfulAccess === 'no' && ConnectionTargetedAccess === 'yes') {
+    return false;
+  }
+
+  if (
+    MassSurveillanceTelecommunications === 'no' &&
+    ConnectionSurveillanceTele === 'yes'
+  ) {
+    return false;
+  }
+
+  if (
+    SelfReportingObligations === 'no' &&
+    ConnectionSelfreportingObligations === 'yes'
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+export const getTargetedRisk = (): number | undefined => {
+  const state = useFormState({
+    values: true
+  })
+
+  if (!state?.values) return;
+
+  const {
+    WarrantsSubpoenas,
+    ViolationLocalLaw,
+    HighViolationLocalLaw,
+    HighViolationDataIssue,
+    InvestigatingImporter,
+    PastWarrantSubpoena,
+  } = state.values
+
+  const targetedRisk =
+    Number(WarrantsSubpoenas) +
+    Number(ViolationLocalLaw) +
+    Number(HighViolationLocalLaw) +
+    Number(HighViolationDataIssue) +
+    Number(InvestigatingImporter) +
+    Number(PastWarrantSubpoena);
+
+  return targetedRisk
+}
+
+export const getNonTargetedRisk = (): number | undefined => {
+  const state = useFormState({
+    values: true
+  })
+
+  if (!state?.values) return;
+
+  const {
+    LocalIssueWarrants,
+    LocalMassSurveillance,
+    LocalAccessMassSurveillance,
+    LocalRoutinelyMonitor,
+    PassMassSurveillance,
+  } = state.values;
+
+  const nonTargetedRisk =
+    Number(LocalIssueWarrants) +
+    Number(LocalMassSurveillance) +
+    Number(LocalAccessMassSurveillance) +
+    Number(LocalRoutinelyMonitor) +
+    Number(PassMassSurveillance);
+
+  return nonTargetedRisk
+}
+
+export const getSelfReportingRisk = (): number | undefined => {
+  const state = useFormState({
+    values: true
+  })
+
+  if (!state?.values) return;
+
+  const {
+    ImporterObligation,
+    LocalSelfReporting,
+    PastSelfReporting,
+  } = state.values;
+
+  const selfReportingRisk =
+    Number(ImporterObligation) +
+    Number(LocalSelfReporting) +
+    Number(PastSelfReporting);
+
+  return selfReportingRisk
+}
+
+export const getTransferIsValue = (formData: any) => {
+  if (!formData || !formData.values) return 'NOT PERMITTED';
+
+  const {
+    EncryptionInTransit,
+    TransferMechanism,
+    LawfulAccess,
+    MassSurveillanceTelecommunications,
+    SelfReportingObligations,
+  } = formData.values;
+
+  if (EncryptionInTransit === 'no' || TransferMechanism === 'no') {
+    return 'NOT PERMITTED'
+  }
+
+  if (
+    LawfulAccess === 'no' ||
+    MassSurveillanceTelecommunications === 'no' ||
+    SelfReportingObligations === 'no'
+  ) {
+    return 'PERMITTED, SUBJECT TO STEP 4'
+  }
+
+  return 'PERMITTED'
+}
