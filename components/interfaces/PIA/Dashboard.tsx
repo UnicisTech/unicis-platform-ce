@@ -11,7 +11,7 @@ import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
 
 const Dashboard = () => {
-  const { canAccess } = useCanAccess();
+  const { canAccess, isLoading } = useCanAccess();
   const { t } = useTranslation('common');
   const router = useRouter();
   const { slug } = router.query;
@@ -47,6 +47,10 @@ const Dashboard = () => {
     setTaskToDelete(task);
     setIsDeleteOpen(true);
   }, []);
+
+  if (isLoading) {
+    return null
+  }
 
   if (!canAccess('pia', ['read'])) {
     return <Error message={t('forbidden-resource')} />;

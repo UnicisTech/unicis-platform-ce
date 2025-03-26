@@ -31,9 +31,19 @@ import {
   ApiResponse,
   TaskProperties,
   RpaOption,
+  ProcedureQueueItem,
 } from 'types';
 import type { Task } from '@prisma/client';
 import { Error, Loading } from '@/components/shared';
+
+const createProceduresQueue = (procedure: any): ProcedureQueueItem[] => {
+  const result: ProcedureQueueItem[] = []
+
+  if (procedure[3].datatransfer) result.push('TIA')
+  if (procedure[5]?.piaNeeded === "yes") result.push('PIA')
+  console.log('createProceduresQueue', {result, procedure})
+  return result
+}
 
 interface CreateProcedureProps {
   selectedTask?: Task;
@@ -41,6 +51,7 @@ interface CreateProcedureProps {
   visible: boolean;
   setVisible: Dispatch<SetStateAction<boolean>>;
   mutateTasks: () => Promise<void>;
+  completeCallback?: (procedureQueue: ProcedureQueueItem[], selectedTask: Task) => void
 }
 
 const CreateProcedure = ({
@@ -49,6 +60,7 @@ const CreateProcedure = ({
   visible,
   setVisible,
   mutateTasks,
+  completeCallback,
 }: CreateProcedureProps) => {
   const { t } = useTranslation('common');
   const router = useRouter();
@@ -83,7 +95,8 @@ const CreateProcedure = ({
       } else {
         toast.success(t('rm-created'));
       }
-
+      
+      completeCallback?.(createProceduresQueue(procedure), task)
       mutateTasks();
       setVisible(false);
     } catch (error: any) {
@@ -96,7 +109,7 @@ const CreateProcedure = ({
   const onSubmit = (formData: any) => {
     switch (stage) {
       case 0: {
-        const task = formData.task.value;
+        const task = formData.task.value as Task;
         setTask(task);
         setStage(1);
         break;
