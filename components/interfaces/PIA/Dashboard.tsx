@@ -49,7 +49,7 @@ const Dashboard = () => {
   }, []);
 
   if (isLoading) {
-    return null
+    return null;
   }
 
   if (!canAccess('pia', ['read'])) {

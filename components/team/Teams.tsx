@@ -62,14 +62,16 @@ const Teams = () => {
                 {t('team-listed')}
               </p>
             </div>
-            {canAccess('team', ['create']) && <Button
-              color="primary"
-              variant="outline"
-              size="md"
-              onClick={() => setCreateTeamVisible(!createTeamVisible)}
-            >
-              {t('create-team')}
-            </Button>}
+            {canAccess('team', ['create']) && (
+              <Button
+                color="primary"
+                variant="outline"
+                size="md"
+                onClick={() => setCreateTeamVisible(!createTeamVisible)}
+              >
+                {t('create-team')}
+              </Button>
+            )}
           </div>
           <table className="text-sm table w-full border-b dark:border-base-200">
             <thead className="bg-base-200">

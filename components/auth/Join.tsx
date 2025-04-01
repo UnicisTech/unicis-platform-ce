@@ -41,8 +41,13 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
       firstName: Yup.string().required(),
       lastName: Yup.string().required(),
       email: Yup.string().required().email(),
-      password: Yup.string().required()
-        .test('is-strong', 'Password must include uppercase, lowercase, number, and special character', validatePassword),
+      password: Yup.string()
+        .required()
+        .test(
+          'is-strong',
+          'Password must include uppercase, lowercase, number, and special character',
+          validatePassword
+        ),
       team: Yup.string().required().min(3),
     }),
     onSubmit: async (values) => {

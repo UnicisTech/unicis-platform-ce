@@ -4,7 +4,6 @@ import {
 } from '@/components/defaultLanding/data/configs/tia';
 import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
-import { useFormState } from '@atlaskit/form';
 import { TiaOption, TiaProcedureInterface, TaskProperties } from 'types';
 import { TiaAuditLog, RpaConfig, Diff } from 'types';
 
@@ -263,80 +262,7 @@ export const isTranferPermitted = (procedure: any): boolean => {
   }
 
   return true;
-}
-
-export const getTargetedRisk = (): number | undefined => {
-  const state = useFormState({
-    values: true
-  })
-
-  if (!state?.values) return;
-
-  const {
-    WarrantsSubpoenas,
-    ViolationLocalLaw,
-    HighViolationLocalLaw,
-    HighViolationDataIssue,
-    InvestigatingImporter,
-    PastWarrantSubpoena,
-  } = state.values
-
-  const targetedRisk =
-    Number(WarrantsSubpoenas) +
-    Number(ViolationLocalLaw) +
-    Number(HighViolationLocalLaw) +
-    Number(HighViolationDataIssue) +
-    Number(InvestigatingImporter) +
-    Number(PastWarrantSubpoena);
-
-  return targetedRisk
-}
-
-export const getNonTargetedRisk = (): number | undefined => {
-  const state = useFormState({
-    values: true
-  })
-
-  if (!state?.values) return;
-
-  const {
-    LocalIssueWarrants,
-    LocalMassSurveillance,
-    LocalAccessMassSurveillance,
-    LocalRoutinelyMonitor,
-    PassMassSurveillance,
-  } = state.values;
-
-  const nonTargetedRisk =
-    Number(LocalIssueWarrants) +
-    Number(LocalMassSurveillance) +
-    Number(LocalAccessMassSurveillance) +
-    Number(LocalRoutinelyMonitor) +
-    Number(PassMassSurveillance);
-
-  return nonTargetedRisk
-}
-
-export const getSelfReportingRisk = (): number | undefined => {
-  const state = useFormState({
-    values: true
-  })
-
-  if (!state?.values) return;
-
-  const {
-    ImporterObligation,
-    LocalSelfReporting,
-    PastSelfReporting,
-  } = state.values;
-
-  const selfReportingRisk =
-    Number(ImporterObligation) +
-    Number(LocalSelfReporting) +
-    Number(PastSelfReporting);
-
-  return selfReportingRisk
-}
+};
 
 export const getTransferIsValue = (formData: any) => {
   if (!formData || !formData.values) return 'NOT PERMITTED';
@@ -350,7 +276,7 @@ export const getTransferIsValue = (formData: any) => {
   } = formData.values;
 
   if (EncryptionInTransit === 'no' || TransferMechanism === 'no') {
-    return 'NOT PERMITTED'
+    return 'NOT PERMITTED';
   }
 
   if (
@@ -358,8 +284,82 @@ export const getTransferIsValue = (formData: any) => {
     MassSurveillanceTelecommunications === 'no' ||
     SelfReportingObligations === 'no'
   ) {
-    return 'PERMITTED, SUBJECT TO STEP 4'
+    return 'PERMITTED, SUBJECT TO STEP 4';
   }
 
-  return 'PERMITTED'
-}
+  return 'PERMITTED';
+};
+
+export const getTiaRisks = (state) => {
+  if (!state?.values) {
+    return {
+      targetedRisk: 0,
+      nonTargetedRisk: 0,
+      selfReportingRisk: 0,
+    };
+  }
+
+  const {
+    WarrantsSubpoenas,
+    ViolationLocalLaw,
+    HighViolationLocalLaw,
+    HighViolationDataIssue,
+    InvestigatingImporter,
+    PastWarrantSubpoena,
+    LocalIssueWarrants,
+    LocalMassSurveillance,
+    LocalAccessMassSurveillance,
+    LocalRoutinelyMonitor,
+    PassMassSurveillance,
+    ImporterObligation,
+    LocalSelfReporting,
+    PastSelfReporting,
+  } = state.values;
+
+  const targetedRisk =
+    Number(WarrantsSubpoenas) +
+    Number(ViolationLocalLaw) +
+    Number(HighViolationLocalLaw) +
+    Number(HighViolationDataIssue) +
+    Number(InvestigatingImporter) +
+    Number(PastWarrantSubpoena);
+
+  const nonTargetedRisk =
+    Number(LocalIssueWarrants) +
+    Number(LocalMassSurveillance) +
+    Number(LocalAccessMassSurveillance) +
+    Number(LocalRoutinelyMonitor) +
+    Number(PassMassSurveillance);
+
+  const selfReportingRisk =
+    Number(ImporterObligation) +
+    Number(LocalSelfReporting) +
+    Number(PastSelfReporting);
+
+  return { targetedRisk, nonTargetedRisk, selfReportingRisk };
+};
+
+export const getProblematicLawfulAccesses = (formState: any) => {
+  const formData = formState?.values;
+
+  if (!formData) {
+    return {
+      isDataIssueInvestigationEqualToTwo: false,
+      isPassMassSurveillanceConnectionEqualToFour: false,
+      isAssessmentProduceReportEqualToFour: false,
+    };
+  }
+
+  const isDataIssueInvestigationProblematic =
+    formData.DataIssueInvestigation === '2';
+  const isPassMassSurveillanceConnectionProblematic =
+    formData.PassMassSurveillanceConnection === '4';
+  const isAssessmentProduceReportProblematic =
+    formData.AssessmentProduceReport === '4';
+
+  return {
+    isDataIssueInvestigationProblematic,
+    isPassMassSurveillanceConnectionProblematic,
+    isAssessmentProduceReportProblematic,
+  };
+};

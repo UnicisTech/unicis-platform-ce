@@ -33,6 +33,9 @@ export function authProviderEnabled() {
 
 export const validatePasswordPolicy = (password: string) => {
   if (!validatePassword(password)) {
-    throw new ApiError(422, 'Password must have at least 8 characters, including uppercase, lowercase, number, and special character.');
+    throw new ApiError(
+      422,
+      'Password must have at least 8 characters, including uppercase, lowercase, number, and special character.'
+    );
   }
 };

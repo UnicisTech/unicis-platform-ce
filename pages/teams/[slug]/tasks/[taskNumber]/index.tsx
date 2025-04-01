@@ -14,7 +14,11 @@ import {
   TaskTab,
 } from '@/components/interfaces/Task';
 import { CscAuditLogs, CscPanel } from '@/components/interfaces/CSC';
-import { RpaPanel, RpaAuditLog, CreateProcedureTest } from '@/components/interfaces/RPA';
+import {
+  RpaPanel,
+  RpaAuditLog,
+  CreateProcedureTest,
+} from '@/components/interfaces/RPA';
 import {
   CreateRiskManagementRisk,
   RiskManagementTaskPanel,
@@ -25,7 +29,11 @@ import useCanAccess from 'hooks/useCanAccess';
 import useISO from 'hooks/useISO';
 import { Team } from '@prisma/client';
 import { getCscStatusesBySlug } from 'models/team';
-import { TiaAuditLogs, TiaPanel, CreateProcedure as CreateTiaProcedure } from '@/components/interfaces/TIA';
+import {
+  TiaAuditLogs,
+  TiaPanel,
+  CreateProcedure as CreateTiaProcedure,
+} from '@/components/interfaces/TIA';
 import {
   CreatePiaRisk,
   PiaPanel,
@@ -59,7 +67,7 @@ const TaskById = ({
   );
   const { ISO } = useISO(team);
 
-  const rpaState = useRpaCreation(task)
+  const rpaState = useRpaCreation(task);
 
   if (isLoading || isTeamLoading || !ISO) {
     return <Loading />;
@@ -211,10 +219,7 @@ const TaskById = ({
           mutate={mutateTask}
         />
       )}
-      <CreateProcedureTest
-        mutateTasks={mutateTask}
-        {...rpaState}
-      />
+      <CreateProcedureTest mutateTasks={mutateTask} {...rpaState} />
       {piaVisible && (
         <CreatePiaRisk
           visible={piaVisible}

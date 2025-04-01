@@ -79,7 +79,7 @@ export type TaskRpaProperties = {
   rpa_audit_logs: RpaAuditLog[];
 };
 
-export type ProcedureQueueItem = 'TIA' | 'PIA'
+export type ProcedureQueueItem = 'TIA' | 'PIA';
 
 export interface UseRpaCreationState {
   selectedTask: Task | undefined;
@@ -89,6 +89,9 @@ export interface UseRpaCreationState {
   setIsRpaOpen: Dispatch<SetStateAction<boolean>>;
   setIsPiaOpen: Dispatch<SetStateAction<boolean>>;
   setIsTiaOpen: Dispatch<SetStateAction<boolean>>;
-  onRpaCompletedCallback: (procedureQueue: ProcedureQueueItem[], selectedTask: Task) => void;
+  onRpaCompletedCallback: (
+    procedureQueue: ProcedureQueueItem[],
+    selectedTask: Task
+  ) => void;
   onProcedureCompletedCallback: (procedure: ProcedureQueueItem) => void;
 }
