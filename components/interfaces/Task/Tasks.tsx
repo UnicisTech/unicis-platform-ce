@@ -142,7 +142,9 @@ const Tasks = ({ team }: { team: Team }) => {
                           variant="outline"
                           onClick={() => {
                             // openEditModal(task);
-                            router.push(`/teams/${slug}/tasks/${task.taskNumber}`)
+                            router.push(
+                              `/teams/${slug}/tasks/${task.taskNumber}`
+                            );
                           }}
                         >
                           {t('edit-task')}

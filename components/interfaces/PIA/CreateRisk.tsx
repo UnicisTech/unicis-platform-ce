@@ -93,7 +93,7 @@ const CreateRisk = ({
         toast.success(t('tia-created'));
       }
 
-      completeCallback?.()
+      completeCallback?.();
       mutateTasks();
       setVisible(false);
     } catch (error: any) {

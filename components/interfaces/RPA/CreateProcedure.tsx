@@ -11,13 +11,23 @@ import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { format } from 'date-fns';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
-import Form, { Field, HelperMessage, ErrorMessage, CheckboxField, FieldProps } from '@atlaskit/form';
+import Form, {
+  Field,
+  HelperMessage,
+  ErrorMessage,
+  CheckboxField,
+  FieldProps,
+} from '@atlaskit/form';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import TextArea from '@atlaskit/textarea';
 import TextField from '@atlaskit/textfield';
 import { Checkbox } from '@atlaskit/checkbox';
 import { RadioGroup } from '@atlaskit/radio';
-import { StageTracker, TaskPickerFormBody, Message } from '@/components/shared/atlaskit';
+import {
+  StageTracker,
+  TaskPickerFormBody,
+  Message,
+} from '@/components/shared/atlaskit';
 import {
   fieldPropsMapping,
   headers,
@@ -37,13 +47,13 @@ import type { Task } from '@prisma/client';
 import { Error, Loading } from '@/components/shared';
 
 const createProceduresQueue = (procedure: any): ProcedureQueueItem[] => {
-  const result: ProcedureQueueItem[] = []
+  const result: ProcedureQueueItem[] = [];
 
-  if (procedure[3].datatransfer) result.push('TIA')
-  if (procedure[5]?.piaNeeded === "yes") result.push('PIA')
-  console.log('createProceduresQueue', {result, procedure})
-  return result
-}
+  if (procedure[3].datatransfer) result.push('TIA');
+  if (procedure[5]?.piaNeeded === 'yes') result.push('PIA');
+  console.log('createProceduresQueue', { result, procedure });
+  return result;
+};
 
 interface CreateProcedureProps {
   selectedTask?: Task;
@@ -51,7 +61,10 @@ interface CreateProcedureProps {
   visible: boolean;
   setVisible: Dispatch<SetStateAction<boolean>>;
   mutateTasks: () => Promise<void>;
-  completeCallback?: (procedureQueue: ProcedureQueueItem[], selectedTask: Task) => void
+  completeCallback?: (
+    procedureQueue: ProcedureQueueItem[],
+    selectedTask: Task
+  ) => void;
 }
 
 const CreateProcedure = ({
@@ -72,7 +85,13 @@ const CreateProcedure = ({
   const [prevProcedure, setPrevProcedure] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const saveProcedure = async ({ procedure, prevProcedure }: { procedure: any; prevProcedure: any }) => {
+  const saveProcedure = async ({
+    procedure,
+    prevProcedure,
+  }: {
+    procedure: any;
+    prevProcedure: any;
+  }) => {
     try {
       setIsLoading(true);
       if (!task) {
@@ -95,8 +114,8 @@ const CreateProcedure = ({
       } else {
         toast.success(t('rm-created'));
       }
-      
-      completeCallback?.(createProceduresQueue(procedure), task)
+
+      completeCallback?.(createProceduresQueue(procedure), task);
       mutateTasks();
       setVisible(false);
     } catch (error: any) {
@@ -117,7 +136,7 @@ const CreateProcedure = ({
       case 1:
       case 2:
       case 3:
-      case 4: 
+      case 4:
       case 5: {
         const procedureToSave = [...procedure];
         procedureToSave[stage - 1] = formData;
@@ -129,7 +148,7 @@ const CreateProcedure = ({
         const procedureToSave = [...procedure];
         procedureToSave[stage - 1] = formData;
         setProcedure(procedureToSave);
-        saveProcedure({ procedure: procedureToSave, prevProcedure })
+        saveProcedure({ procedure: procedureToSave, prevProcedure });
         break;
       }
       default: {
@@ -173,12 +192,14 @@ const CreateProcedure = ({
                   )}
                 />
               )}
-              {stage !== 0 && <Message
-                text={`The record of processing activities allows you to make an inventory of the data processing and to have
+              {stage !== 0 && (
+                <Message
+                  text={`The record of processing activities allows you to make an inventory of the data processing and to have
                     an overview of what you are
                     doing with the concerned personal data. The recording obligation is stated by article 30 of the GDPR.
                     It is an application to help you to be compliant with the Regulation.`}
-              />}
+                />
+              )}
               {stage === 1 && <FirstStage procedure={procedure} />}
               {stage === 2 && <SecondStage procedure={procedure} />}
               {stage === 3 && <ThirdStage procedure={procedure} />}
@@ -326,8 +347,8 @@ const FirstStage = ({ procedure }: { procedure: any }) => {
         )}
       </Field>
     </>
-  )
-}
+  );
+};
 
 const SecondStage = ({ procedure }: { procedure: any }) => {
   return (
@@ -336,19 +357,17 @@ const SecondStage = ({ procedure }: { procedure: any }) => {
         appearance="warning"
         text={
           <span>
-            A data processing operation must have a purpose, a finality,
-            i.e. you cannot collect or process personal data simply in
-            case it would be useful to you one day. Each data processing
-            operation must be assigned a purpose, which must of course be
-            lawful and legitimate in the context of your professional
-            activity.
+            A data processing operation must have a purpose, a finality, i.e.
+            you cannot collect or process personal data simply in case it would
+            be useful to you one day. Each data processing operation must be
+            assigned a purpose, which must of course be lawful and legitimate in
+            the context of your professional activity.
             <br />
             <em>
-              Example: You collect a lot of information from your
-              customers, when you make a delivery, issue an invoice or
-              offer a loyalty card. All these operations on these data
-              represent your processing of personal data for the purpose
-              of managing your customers.
+              Example: You collect a lot of information from your customers,
+              when you make a delivery, issue an invoice or offer a loyalty
+              card. All these operations on these data represent your processing
+              of personal data for the purpose of managing your customers.
             </em>
           </span>
         }
@@ -465,8 +484,8 @@ const SecondStage = ({ procedure }: { procedure: any }) => {
               />
               {!error && (
                 <HelperMessage>
-                  Multiple selection possible, and if others please
-                  specify on the ticket
+                  Multiple selection possible, and if others please specify on
+                  the ticket
                 </HelperMessage>
               )}
               {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -525,8 +544,8 @@ const SecondStage = ({ procedure }: { procedure: any }) => {
         )}
       </Field>
     </>
-  )
-}
+  );
+};
 
 const ThirdStage = ({ procedure }: { procedure: any }) => {
   return (
@@ -537,8 +556,8 @@ const ThirdStage = ({ procedure }: { procedure: any }) => {
           <span>
             List all persons who have access to the data;
             <br />
-            For example: recruitment department, IT department,
-            management, service providers, partners, hosts, etc.
+            For example: recruitment department, IT department, management,
+            service providers, partners, hosts, etc.
           </span>
         }
       />
@@ -569,8 +588,8 @@ const ThirdStage = ({ procedure }: { procedure: any }) => {
               />
               {!error && (
                 <HelperMessage>
-                  Please specify the type of recipient if not on a list
-                  specify on details
+                  Please specify the type of recipient if not on a list specify
+                  on details
                 </HelperMessage>
               )}
               {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -593,8 +612,8 @@ const ThirdStage = ({ procedure }: { procedure: any }) => {
         )}
       </Field>
     </>
-  )
-}
+  );
+};
 
 const FourthStage = ({ procedure }: { procedure: any }) => {
   return (
@@ -605,12 +624,11 @@ const FourthStage = ({ procedure }: { procedure: any }) => {
           <span>
             When you transfer data outside the European Union: <br />
             - Check whether the country outside the EU to which you are
-            transferring the data has data protection legislation and
-            whether it is recognised as adequate by the European
-            Commission. <br />- A map of the world presenting data
-            protection legislation. <br />- Otherwise, you will have to
-            provide a legal framework your transfers to ensure data
-            protection abroad.
+            transferring the data has data protection legislation and whether it
+            is recognised as adequate by the European Commission. <br />- A map
+            of the world presenting data protection legislation. <br />-
+            Otherwise, you will have to provide a legal framework your transfers
+            to ensure data protection abroad.
           </span>
         }
       />
@@ -621,10 +639,7 @@ const FourthStage = ({ procedure }: { procedure: any }) => {
         }
       >
         {({ fieldProps }) => (
-          <Checkbox
-            {...fieldProps}
-            label={fieldPropsMapping['datatransfer']}
-          />
+          <Checkbox {...fieldProps} label={fieldPropsMapping['datatransfer']} />
         )}
       </CheckboxField>
       <Field
@@ -639,9 +654,8 @@ const FourthStage = ({ procedure }: { procedure: any }) => {
             <TextField autoComplete="off" {...fieldProps} />
             {!error && (
               <HelperMessage>
-                Recipient is a natural or legal person, public authority,
-                agency or another body which the personal data are
-                disclosed.
+                Recipient is a natural or legal person, public authority, agency
+                or another body which the personal data are disclosed.
               </HelperMessage>
             )}
           </Fragment>
@@ -708,8 +722,8 @@ const FourthStage = ({ procedure }: { procedure: any }) => {
               />
               {!error && (
                 <HelperMessage>
-                  Multiple selection possible, and if None please specify
-                  on the ticket
+                  Multiple selection possible, and if None please specify on the
+                  ticket
                 </HelperMessage>
               )}
               {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -722,8 +736,8 @@ const FourthStage = ({ procedure }: { procedure: any }) => {
         text={<span>Please attach relevant documents to the task.</span>}
       />
     </>
-  )
-}
+  );
+};
 
 const FifthStage = ({ procedure }: { procedure: any }) => {
   return (
@@ -734,18 +748,17 @@ const FifthStage = ({ procedure }: { procedure: any }) => {
           <span>
             Secure your data:
             <br />
-            - Ensure the integrity of your data assets by minimizing the
-            risk of data loss or hacking.
+            - Ensure the integrity of your data assets by minimizing the risk of
+            data loss or hacking.
             <br />
-            - The measures to be taken, whether electronic or physical,
-            depend on the sensitiveness of the data you are processing and
-            the risks to data subjects in the event of an incident. <br />
-            - Various actions must be implemented: updating your antivirus
-            and software, regularly changing passwords and adopting
-            complex passwords, or encrypting your data in certain
-            situations. In the event of loss or theft of an eletronic
-            device, it will be more difficult for a third party to access
-            it.
+            - The measures to be taken, whether electronic or physical, depend
+            on the sensitiveness of the data you are processing and the risks to
+            data subjects in the event of an incident. <br />- Various actions
+            must be implemented: updating your antivirus and software, regularly
+            changing passwords and adopting complex passwords, or encrypting
+            your data in certain situations. In the event of loss or theft of an
+            eletronic device, it will be more difficult for a third party to
+            access it.
           </span>
         }
       />
@@ -777,8 +790,8 @@ const FifthStage = ({ procedure }: { procedure: any }) => {
               />
               {!error && (
                 <HelperMessage>
-                  Multiple selection possible, and if others please
-                  specify on the ticket
+                  Multiple selection possible, and if others please specify on
+                  the ticket
                 </HelperMessage>
               )}
               {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -791,8 +804,8 @@ const FifthStage = ({ procedure }: { procedure: any }) => {
         text="Please attach the relevant security certification and documents to the task."
       />
     </>
-  )
-}
+  );
+};
 
 const SixthStage = ({ procedure }: { procedure: any }) => {
   return (
@@ -804,10 +817,7 @@ const SixthStage = ({ procedure }: { procedure: any }) => {
       >
         {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
           <>
-            <RadioGroup
-              {...fieldProps}
-              options={config['involveProfiling']}
-            />
+            <RadioGroup {...fieldProps} options={config['involveProfiling']} />
           </>
         )}
       </Field>
@@ -818,10 +828,7 @@ const SixthStage = ({ procedure }: { procedure: any }) => {
       >
         {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
           <>
-            <RadioGroup
-              {...fieldProps}
-              options={config['useAutomated']}
-            />
+            <RadioGroup {...fieldProps} options={config['useAutomated']} />
           </>
         )}
       </Field>
@@ -871,10 +878,7 @@ const SixthStage = ({ procedure }: { procedure: any }) => {
       >
         {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
           <>
-            <RadioGroup
-              {...fieldProps}
-              options={config['dataSetsCombined']}
-            />
+            <RadioGroup {...fieldProps} options={config['dataSetsCombined']} />
           </>
         )}
       </Field>
@@ -941,10 +945,7 @@ const SixthStage = ({ procedure }: { procedure: any }) => {
       >
         {({ fieldProps }: { fieldProps: FieldProps<string> }) => (
           <>
-            <RadioGroup
-              {...fieldProps}
-              options={config['rightsRestricted']}
-            />
+            <RadioGroup {...fieldProps} options={config['rightsRestricted']} />
           </>
         )}
       </Field>
@@ -960,7 +961,7 @@ const SixthStage = ({ procedure }: { procedure: any }) => {
         )}
       </Field>
     </>
-  )
-}
+  );
+};
 
 export default CreateProcedure;

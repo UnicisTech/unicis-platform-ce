@@ -9,8 +9,13 @@ import { defaultHeaders, validatePassword } from '@/lib/common';
 
 const schema = Yup.object().shape({
   currentPassword: Yup.string().required(),
-  newPassword: Yup.string().required()
-    .test('is-strong', 'Password must include uppercase, lowercase, number, and special character', validatePassword),
+  newPassword: Yup.string()
+    .required()
+    .test(
+      'is-strong',
+      'Password must include uppercase, lowercase, number, and special character',
+      validatePassword
+    ),
 });
 
 const UpdatePassword = () => {

@@ -21,8 +21,13 @@ const ResetPassword = () => {
       confirmPassword: '',
     },
     validationSchema: Yup.object().shape({
-      password: Yup.string().required()
-        .test('is-strong', 'Password must include uppercase, lowercase, number, and special character', validatePassword),
+      password: Yup.string()
+        .required()
+        .test(
+          'is-strong',
+          'Password must include uppercase, lowercase, number, and special character',
+          validatePassword
+        ),
       confirmPassword: Yup.string().test(
         'passwords-match',
         'Passwords must match',

@@ -113,23 +113,19 @@ const ControlBlock = ({
             />
           </div>
         </div>
-
-      </div >
+      </div>
       {controlData?.code && (
         <>
           <p className="csc_label">Code</p>
           <Textfield isReadOnly value={controlData.code} />
         </>
-      )
-      }
-      {
-        controlData?.section && (
-          <>
-            <p className="csc_label">Section</p>
-            <Textfield isReadOnly value={controlData?.section} />
-          </>
-        )
-      }
+      )}
+      {controlData?.section && (
+        <>
+          <p className="csc_label">Section</p>
+          <Textfield isReadOnly value={controlData?.section} />
+        </>
+      )}
       <>
         <p className="csc_label">Status</p>
         <StatusSelector
@@ -139,22 +135,20 @@ const ControlBlock = ({
           isDisabled={false}
         />
       </>
-      {
-        controlData?.requirements && (
-          <>
-            <p className="csc_label">Requirements</p>
-            <TextArea
-              resize="auto"
-              maxHeight="20vh"
-              name="area"
-              value={controlData?.requirements}
-              isReadOnly
-              // Temporary solution to escape type errors
-              {...({} as any)}
-            />
-          </>
-        )
-      }
+      {controlData?.requirements && (
+        <>
+          <p className="csc_label">Requirements</p>
+          <TextArea
+            resize="auto"
+            maxHeight="20vh"
+            name="area"
+            value={controlData?.requirements}
+            isReadOnly
+            // Temporary solution to escape type errors
+            {...({} as any)}
+          />
+        </>
+      )}
       <div
         style={{
           height: '1px',

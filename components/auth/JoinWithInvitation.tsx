@@ -49,8 +49,13 @@ const JoinWithInvitation = ({
     validationSchema: Yup.object().shape({
       firstName: Yup.string().required(),
       lastName: Yup.string().required(),
-      password: Yup.string().required()
-        .test('is-strong', 'Password must include uppercase, lowercase, number, and special character', validatePassword),
+      password: Yup.string()
+        .required()
+        .test(
+          'is-strong',
+          'Password must include uppercase, lowercase, number, and special character',
+          validatePassword
+        ),
     }),
     enableReinitialize: true,
     onSubmit: async (values) => {

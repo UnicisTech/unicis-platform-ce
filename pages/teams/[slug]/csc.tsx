@@ -118,7 +118,6 @@ const CscDashboard = ({
     console.log('CSC ISO', ISO);
   }, [ISO]);
 
-
   if (isLoading || !team || !tasks || !ISO) {
     return <Loading />;
   }

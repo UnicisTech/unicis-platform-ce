@@ -10,7 +10,11 @@ import { GetServerSidePropsContext } from 'next';
 import useTeamTasks from 'hooks/useTeamTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import type { TaskWithTiaProcedure, TaskProperties } from 'types';
-import { TiaTable, DeleteTia, CreateProcedure as CreateTiaProcedure } from '@/components/interfaces/TIA';
+import {
+  TiaTable,
+  DeleteTia,
+  CreateProcedure as CreateTiaProcedure,
+} from '@/components/interfaces/TIA';
 import { Button } from 'react-daisyui';
 import { PerPageSelector } from '@/components/shared';
 
@@ -96,7 +100,7 @@ const TiaDashboard: NextPageWithLayout<
       </div>
       <>
         {isCreateOpen && (
-          <CreateTiaProcedure 
+          <CreateTiaProcedure
             visible={isCreateOpen}
             setVisible={setIsCreateOpen}
             tasks={tasks}
