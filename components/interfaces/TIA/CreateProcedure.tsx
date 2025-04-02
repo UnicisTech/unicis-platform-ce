@@ -191,6 +191,28 @@ const CreateProcedure = ({
     setStage(1);
   }, [task]);
 
+	return (
+		<Modal open={visible}>
+			<Form onSubmit={onSubmit}>
+				{({ formProps }) => (
+					<form {...formProps}>
+						<Modal.Header className="font-bold">
+							<h3>{t('tia')}</h3>
+							{stage === 0 && `Select a task`}
+							{stage > 0 && (
+								<StageTracker headers={headers} currentStage={stage - 1} />
+							)}
+						</Modal.Header>
+						<Modal.Body>
+							{stage === 0 && tasks && (
+								<TaskPickerFormBody
+									tasks={tasks.filter(
+										(task) => !(task.properties as any)?.tia_procedure
+									)}
+								/>
+							)}
+							{stage !== 0 && <Message
+								text={`Add a Transfer Impact Assessment if you are using the EU Standard Contractual Clauses (EU SCC) or under the other GDPR (or CH DPA) legal situations.
   return (
     <Modal open={visible}>
       <Form onSubmit={onSubmit}>
