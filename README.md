@@ -131,7 +131,7 @@ npm run test:e2e
 
 _Note: HTML test report is generated inside the `report` folder. Currently supported browsers for test execution `chromium` and `firefox`_
 
-##### Generate SBOM
+#### 10. Generate SBOM
 
 We use [syft](https://github.com/anchore/syft) tool for generating SBOM
 
