@@ -143,12 +143,11 @@ const CreateRisk = ({
         {({ formProps }) => (
           <form {...formProps}>
             <Modal.Header className="font-bold">
+              <h3>{t('rm')}</h3>
               {stage === 0 && `Select a task`}
               {stage > 0 && (
                 <StageTracker headers={headers} currentStage={stage - 1} />
               )}
-              {/* {stage === 1 && `Add Risk 1/2 `}
-                            {stage === 2 && `Add Risk 2/2 `} */}
             </Modal.Header>
             <Modal.Body>
               {stage === 0 && tasks && (

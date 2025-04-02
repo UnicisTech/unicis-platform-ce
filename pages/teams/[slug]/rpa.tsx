@@ -11,13 +11,13 @@ import useTeamTasks from 'hooks/useTeamTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import type { TaskWithRpaProcedure, TaskProperties } from 'types';
 import {
-  CreateRPA,
   RpaTable,
   DeleteRpa,
-  DashboardCreateRPA,
+  CreateProcedureTest,
 } from '@/components/interfaces/RPA';
 import { Button } from 'react-daisyui';
 import { PerPageSelector } from '@/components/shared';
+import useRpaCreation from 'hooks/useRpaCreation';
 
 const RpaDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -26,7 +26,6 @@ const RpaDashboard: NextPageWithLayout<
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
   const { slug } = router.query;
-  const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskWithRpaProcedure | null>(
@@ -35,6 +34,9 @@ const RpaDashboard: NextPageWithLayout<
   const [taskToDelete, setTaskToDelete] = useState<TaskWithRpaProcedure | null>(
     null
   );
+
+  const rpaState = useRpaCreation();
+
   const [perPage, setPerPage] = useState<number>(10);
 
   const { isLoading, isError, team } = useTeam(slug as string);
@@ -44,6 +46,7 @@ const RpaDashboard: NextPageWithLayout<
   const onEditClickHandler = useCallback((task: TaskWithRpaProcedure) => {
     setTaskToEdit(task);
     setIsEditOpen(true);
+    rpaState.setIsRpaOpen(true);
   }, []);
 
   const onDeleteClickHandler = useCallback((task: TaskWithRpaProcedure) => {
@@ -62,16 +65,16 @@ const RpaDashboard: NextPageWithLayout<
     }) as TaskWithRpaProcedure[];
   }, [tasks]);
 
-  if (!canAccess('rpa', ['read'])) {
-    return <Error message={t('forbidden-resource')} />;
-  }
-
   if (isLoading || !team || !tasks) {
     return <Loading />;
   }
 
   if (isError) {
     return <Error />;
+  }
+
+  if (!canAccess('rpa', ['read'])) {
+    return <Error message={t('forbidden-resource')} />;
   }
 
   return (
@@ -93,7 +96,7 @@ const RpaDashboard: NextPageWithLayout<
               color="primary"
               variant="outline"
               onClick={() => {
-                setIsCreateOpen(true);
+                rpaState.setIsRpaOpen(true);
               }}
             >
               {t('create')}
@@ -102,15 +105,11 @@ const RpaDashboard: NextPageWithLayout<
         </div>
       </div>
       <>
-        {isCreateOpen && (
-          <DashboardCreateRPA
-            visible={isCreateOpen}
-            setVisible={setIsCreateOpen}
-            tasks={tasks}
-            //task={taskToEdit as Task}
-            mutate={mutateTasks}
-          />
-        )}
+        <CreateProcedureTest
+          tasks={tasks}
+          mutateTasks={mutateTasks}
+          {...rpaState}
+        />
       </>
       {tasksWithProcedures.length === 0 ? (
         <EmptyState title={t('rpa-dashboard')} description="No records" />
@@ -124,11 +123,10 @@ const RpaDashboard: NextPageWithLayout<
             deleteHandler={onDeleteClickHandler}
           />
           {taskToEdit && isEditOpen && (
-            <CreateRPA
-              visible={isEditOpen}
-              setVisible={setIsEditOpen}
-              task={taskToEdit as TaskWithRpaProcedure}
-              mutate={mutateTasks}
+            <CreateProcedureTest
+              mutateTasks={mutateTasks}
+              {...rpaState}
+              selectedTask={taskToEdit as TaskWithRpaProcedure}
             />
           )}
           {taskToDelete && isDeleteOpen && (

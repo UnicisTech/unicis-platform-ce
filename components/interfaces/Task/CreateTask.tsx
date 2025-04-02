@@ -42,6 +42,7 @@ interface Option {
 const statuses: Status[] = statusesData;
 const DEFAULT_STATUS_VALUE = 'todo';
 
+//TODO: move visible to parent component
 const CreateTask = ({
   visible,
   setVisible,

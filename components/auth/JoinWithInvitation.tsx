@@ -4,7 +4,7 @@ import {
   Loading,
   WithLoadingAndError,
 } from '@/components/shared';
-import { defaultHeaders, passwordPolicies } from '@/lib/common';
+import { defaultHeaders, validatePassword } from '@/lib/common';
 import type { User } from '@prisma/client';
 import { useFormik } from 'formik';
 import useInvitation from 'hooks/useInvitation';
@@ -49,7 +49,13 @@ const JoinWithInvitation = ({
     validationSchema: Yup.object().shape({
       firstName: Yup.string().required(),
       lastName: Yup.string().required(),
-      password: Yup.string().required().min(passwordPolicies.minLength),
+      password: Yup.string()
+        .required()
+        .test(
+          'is-strong',
+          'Password must include uppercase, lowercase, number, and special character',
+          validatePassword
+        ),
     }),
     enableReinitialize: true,
     onSubmit: async (values) => {

@@ -10,9 +10,12 @@ import { GetServerSidePropsContext } from 'next';
 import useTeamTasks from 'hooks/useTeamTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import type { TaskWithTiaProcedure, TaskProperties } from 'types';
-import { CreateTIA, TiaTable, DeleteTia } from '@/components/interfaces/TIA';
+import {
+  TiaTable,
+  DeleteTia,
+  CreateProcedure as CreateTiaProcedure,
+} from '@/components/interfaces/TIA';
 import { Button } from 'react-daisyui';
-import { DashboardCreateTIA } from '@/components/interfaces/TIA';
 import { PerPageSelector } from '@/components/shared';
 
 const TiaDashboard: NextPageWithLayout<
@@ -57,16 +60,16 @@ const TiaDashboard: NextPageWithLayout<
     setIsDeleteOpen(true);
   }, []);
 
-  if (!canAccess('tia', ['read'])) {
-    return <Error message={t('forbidden-resource')} />;
-  }
-
   if (isLoading || !team || !tasks) {
     return <Loading />;
   }
 
   if (isError) {
     return <Error />;
+  }
+
+  if (!canAccess('tia', ['read'])) {
+    return <Error message={t('forbidden-resource')} />;
   }
 
   return (
@@ -97,7 +100,7 @@ const TiaDashboard: NextPageWithLayout<
       </div>
       <>
         {isCreateOpen && (
-          <DashboardCreateTIA
+          <CreateTiaProcedure
             visible={isCreateOpen}
             setVisible={setIsCreateOpen}
             tasks={tasks}
@@ -117,10 +120,10 @@ const TiaDashboard: NextPageWithLayout<
             deleteHandler={onDeleteClickHandler}
           />
           {taskToEdit && isEditOpen && (
-            <CreateTIA
+            <CreateTiaProcedure
               visible={isEditOpen}
               setVisible={setIsEditOpen}
-              task={taskToEdit as TaskWithTiaProcedure}
+              selectedTask={taskToEdit as TaskWithTiaProcedure}
               mutate={mutateTasks}
             />
           )}

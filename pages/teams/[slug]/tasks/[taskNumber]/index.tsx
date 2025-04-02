@@ -14,7 +14,11 @@ import {
   TaskTab,
 } from '@/components/interfaces/Task';
 import { CscAuditLogs, CscPanel } from '@/components/interfaces/CSC';
-import { CreateRPA, RpaPanel, RpaAuditLog } from '@/components/interfaces/RPA';
+import {
+  RpaPanel,
+  RpaAuditLog,
+  CreateProcedureTest,
+} from '@/components/interfaces/RPA';
 import {
   CreateRiskManagementRisk,
   RiskManagementTaskPanel,
@@ -25,18 +29,22 @@ import useCanAccess from 'hooks/useCanAccess';
 import useISO from 'hooks/useISO';
 import { Team } from '@prisma/client';
 import { getCscStatusesBySlug } from 'models/team';
-import { CreateTIA, TiaAuditLogs, TiaPanel } from '@/components/interfaces/TIA';
+import {
+  TiaAuditLogs,
+  TiaPanel,
+  CreateProcedure as CreateTiaProcedure,
+} from '@/components/interfaces/TIA';
 import {
   CreatePiaRisk,
   PiaPanel,
   PiaAuditLogs,
 } from '@/components/interfaces/PIA';
 import Breadcrumb from '../../Breadcrumb';
+import useRpaCreation from 'hooks/useRpaCreation';
 
 const TaskById = ({
   csc_statuses,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const [rpaVisible, setRpaVisible] = useState(false);
   const [tiaVisible, setTiaVisible] = useState(false);
   const [piaVisible, setPiaVisible] = useState(false);
   const [rmVisible, setRmVisible] = useState(false);
@@ -58,6 +66,8 @@ const TaskById = ({
     taskNumber as string
   );
   const { ISO } = useISO(team);
+
+  const rpaState = useRpaCreation(task);
 
   if (isLoading || isTeamLoading || !ISO) {
     return <Loading />;
@@ -102,7 +112,7 @@ const TaskById = ({
                   color="primary"
                   variant="outline"
                   onClick={() => {
-                    setRpaVisible(!rpaVisible);
+                    rpaState.setIsRpaOpen(!rpaState.isRpaOpen);
                   }}
                 >
                   {t('create-rpa')}
@@ -202,21 +212,14 @@ const TaskById = ({
         </Card>
       )}
       {tiaVisible && (
-        <CreateTIA
+        <CreateTiaProcedure
           visible={tiaVisible}
           setVisible={setTiaVisible}
-          task={task}
+          selectedTask={task}
           mutate={mutateTask}
         />
       )}
-      {rpaVisible && (
-        <CreateRPA
-          visible={rpaVisible}
-          setVisible={setRpaVisible}
-          task={task}
-          mutate={mutateTask}
-        />
-      )}
+      <CreateProcedureTest mutateTasks={mutateTask} {...rpaState} />
       {piaVisible && (
         <CreatePiaRisk
           visible={piaVisible}

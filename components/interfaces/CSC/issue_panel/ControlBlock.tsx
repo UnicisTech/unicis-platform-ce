@@ -74,35 +74,31 @@ const ControlBlock = ({
     <>
       <div>
         <p className="csc_label">Select a control</p>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '11fr 1fr',
-            alignItems: 'center',
-          }}
-        >
-          <WithoutRing>
-            <Select
-              inputId="single-select-control"
-              className="single-select"
-              classNamePrefix="react-select"
-              options={controlOptions.filter(
-                (option) =>
-                  !controls.find((item) => item === option.value.control)
-              )}
-              onChange={(option) => {
-                controlHanlder(control, option?.value?.control as string);
-              }}
-              value={controlOptions.find(
-                ({ value }) => value.control === control
-              )}
-              formatOptionLabel={({ value }) =>
-                `${value.code}: ${value.section}, ${value.controlLabel || value.control}, ${value.requirements}`
-              }
-              placeholder="Choose a control"
-              isDisabled={isSaving || isDeleting}
-            />
-          </WithoutRing>
+        <div className="grid grid-cols-[11fr_1fr] items-center">
+          <div className="min-w-0">
+            <WithoutRing>
+              <Select
+                inputId="single-select-control"
+                className="single-select"
+                classNamePrefix="react-select"
+                options={controlOptions.filter(
+                  (option) =>
+                    !controls.find((item) => item === option.value.control)
+                )}
+                onChange={(option) =>
+                  controlHanlder(control, option?.value?.control as string)
+                }
+                value={controlOptions.find(
+                  ({ value }) => value.control === control
+                )}
+                formatOptionLabel={({ value }) =>
+                  `${value.code}: ${value.section}, ${value.controlLabel || value.control}, ${value.requirements}`
+                }
+                placeholder="Choose a control"
+                isDisabled={isSaving || isDeleting}
+              />
+            </WithoutRing>
+          </div>
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <LoadingButton
               appearance="danger"
@@ -114,7 +110,7 @@ const ControlBlock = ({
               }}
               isLoading={isButtonLoading}
               isDisabled={isSaving}
-            ></LoadingButton>
+            />
           </div>
         </div>
       </div>

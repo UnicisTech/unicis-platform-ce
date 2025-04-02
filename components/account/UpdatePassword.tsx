@@ -5,11 +5,17 @@ import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 
 import { Card, InputWithLabel } from '@/components/shared';
-import { defaultHeaders, passwordPolicies } from '@/lib/common';
+import { defaultHeaders, validatePassword } from '@/lib/common';
 
 const schema = Yup.object().shape({
   currentPassword: Yup.string().required(),
-  newPassword: Yup.string().required().min(passwordPolicies.minLength),
+  newPassword: Yup.string()
+    .required()
+    .test(
+      'is-strong',
+      'Password must include uppercase, lowercase, number, and special character',
+      validatePassword
+    ),
 });
 
 const UpdatePassword = () => {
