@@ -191,13 +191,13 @@ const CreateProcedure = ({
     setStage(1);
   }, [task]);
 
-<<<<<<< HEAD
   return (
     <Modal open={visible}>
       <Form onSubmit={onSubmit}>
         {({ formProps }) => (
           <form {...formProps}>
             <Modal.Header className="font-bold">
+              <h3>{t('tia')}</h3>
               {stage === 0 && `Select a task`}
               {stage > 0 && (
                 <StageTracker headers={headers} currentStage={stage - 1} />
@@ -214,30 +214,6 @@ const CreateProcedure = ({
               {stage !== 0 && (
                 <Message
                   text={`Add a Transfer Impact Assessment if you are using the EU Standard Contractual Clauses (EU SCC) or under the other GDPR (or CH DPA) legal situations.
-=======
-	return (
-		<Modal open={visible}>
-			<Form onSubmit={onSubmit}>
-				{({ formProps }) => (
-					<form {...formProps}>
-						<Modal.Header className="font-bold">
-							<h3>{t('tia')}</h3>
-							{stage === 0 && `Select a task`}
-							{stage > 0 && (
-								<StageTracker headers={headers} currentStage={stage - 1} />
-							)}
-						</Modal.Header>
-						<Modal.Body>
-							{stage === 0 && tasks && (
-								<TaskPickerFormBody
-									tasks={tasks.filter(
-										(task) => !(task.properties as any)?.tia_procedure
-									)}
-								/>
-							)}
-							{stage !== 0 && <Message
-								text={`Add a Transfer Impact Assessment if you are using the EU Standard Contractual Clauses (EU SCC) or under the other GDPR (or CH DPA) legal situations.
->>>>>>> 9a91043 (added titles on the modal)
 											Transfer Impact Assessment (TIA) for use under the EU General Data Protection Regulation (GDPR) and Swiss Data Protection Act (CH DPA), including for complying with the EU Standard Contractual Clauses (EU SCC).`}
                 />
               )}
