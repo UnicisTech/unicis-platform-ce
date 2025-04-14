@@ -3,6 +3,8 @@ import env from "@/lib/env";
 // process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 export const fleetV1 = async (endpoint: string, options?: RequestInit): Promise<Response> => {
+  console.log('env', env);
+
   const response = await fetch(`${env.fleetAPIUrl}/api/v1${endpoint}`, {
     ...options,
     credentials: 'include',

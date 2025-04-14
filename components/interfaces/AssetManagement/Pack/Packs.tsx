@@ -11,7 +11,6 @@ import { usePacks } from '@/hooks/fleets/packs/usePacks';
 import { Pack } from '@/types/fleet';
 import { PLATFORMS } from '@/lib/fleet/constants';
 import FleetStatus from '../Fleet/FleetStatus';
-import FleetConnectRequired from '../FleetConnectRequired';
 
 
 

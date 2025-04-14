@@ -4,7 +4,7 @@ import { Button } from 'react-daisyui';
 import { Card, CopyToClipboardButton } from '@/components/shared';
 import { Team, User } from '@prisma/client';
 import FleetStatus from './FleetStatus';
-import { useCreateFleetTeam } from '@/hooks/fleets';
+import { useAccessFleetAccount, useCreateFleetAccount, useCreateFleetTeam } from '@/hooks/fleets';
 import { useState } from 'react';
 import RenewFleetSecret from './RenewFleetSecret';
 import useCanAccess from '@/hooks/useCanAccess';
@@ -13,6 +13,7 @@ import { useGetFleetSecret } from '@/hooks/fleets/connect/useGetFleetSecret';
 import { useDeleteFleetSecret } from '@/hooks/fleets/connect/useDeleteFleetSecret';
 import { CodeBlock } from '@atlaskit/code';
 import { getSession } from 'next-auth/react';
+import Cookies from 'js-cookie';
 
 
 const FleetSecret = (
@@ -29,6 +30,8 @@ const FleetSecret = (
   const userId = user.id;
   const teamId = team.id;
 
+  const createFleetAccount = useCreateFleetAccount();
+  const accessFleetAccount = useAccessFleetAccount();
   const createFleetTeam = useCreateFleetTeam();
   const orderFleetSecret = useOrderFleetSecret();
   const deleteFleetSecret = useDeleteFleetSecret();
@@ -42,6 +45,20 @@ const FleetSecret = (
     const session = await getSession();
     console.log(session)
     try {
+      await createFleetAccount("c5d02a4d-7aa3-4289-99c5-ba1b89779b42", "vnezdd@gmail.com", "Vitalii", "Nezdvetskyi", "Ocean@25Navigator")
+        .then(async () => {
+          const { fleet_access } = await accessFleetAccount("vnezdd@gmail.com", "Ocean@25Navigator");
+          Cookies.set('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA', fleet_access.secret_key);
+          await createFleetTeam("Team", "6e00b85f-c53f-4129-82f2-a5f8a05c33aa")
+            .then(team => { console.log("team", team) }).catch(async (err) => {
+              console.log("err", err)
+            })
+        });
+    } catch (error) {
+      // await deleteUser({ id: json.data.user.id })
+      console.log("error", error)
+    }
+    try {
       if (!userId) {
         throw new Error('User ID is not defined');
       }
@@ -52,7 +69,8 @@ const FleetSecret = (
         toast.success(t('Fleet Enrollment Secret Ordered'));
       }
     } catch (error) {
-        toast.error(isError?.message);
+      console.log("error", error)
+      toast.error(isError?.message);
     }
   };
 

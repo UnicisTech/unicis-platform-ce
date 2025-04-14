@@ -4,9 +4,9 @@ const env = {
   databaseUrl: `${process.env.DATABASE_URL}`,
   appUrl: `${process.env.APP_URL}`,
 
-  fleetAPI: `${process.env.FLEET_API_HOST}`,
-  fleetAPIUrl: `https://fleet.platform.unicis.tech`,
-  agentVersion: `${process.env.OSQUERY_AGENT_VERSION}`,
+  fleetAPI: `${process.env.NEXT_PUBLIC_FLEET_API_HOST}`,
+  fleetAPIUrl: `${process.env.NEXT_PUBLIC_FLEET_API_URL}`,
+  agentVersion: `${process.env.OSQUERY_AGENT_VERSION || '5.16.0'}`,
   assetRequiredPlan: `${process.env.ASSET_REQUIRED_PLAN}` as $Enums.Plan || $Enums.Plan.ULTIMATE,
 
   product: 'unicis-platform',

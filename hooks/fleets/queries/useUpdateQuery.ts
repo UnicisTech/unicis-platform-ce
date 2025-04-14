@@ -7,7 +7,7 @@ export const useUpdateQuery = () => {
     try {
       const response = await fleetV1(`/manager/${fleetTeamId}/query/${queryId}/update`, {
         method: 'PUT',
-        headers: fleetAuthAPIHeaders(),
+        headers: await fleetAuthAPIHeaders(),
         body: JSON.stringify(data),
       });
 

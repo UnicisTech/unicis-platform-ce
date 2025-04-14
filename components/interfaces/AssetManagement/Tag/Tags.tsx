@@ -12,7 +12,6 @@ import CreateTag from './CreateTag';
 import { useTags } from '@/hooks/fleets/Tags/useTags';
 import FormattedDate from '@/components/shared/Date';
 import DeleteTag from './DeleteTag';
-import FleetConnectRequired from '../FleetConnectRequired';
 import EditTag from './EditTag';
 import { Tag } from '@/types';
 

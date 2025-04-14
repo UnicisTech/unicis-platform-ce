@@ -11,7 +11,11 @@ export const useCreateFleetAccount = () => {
         body: JSON.stringify({ id, email, firstname: firstName, lastname: lastName, password }),
       });
     } catch (err) {
-      console.error('Error creating fleet account:', err);
+      if (err instanceof Error) {
+        console.error('Error creating fleet account:', err.message);
+      } else {
+        console.error('Error creating fleet account:', err);
+      }
     }
   };
 
