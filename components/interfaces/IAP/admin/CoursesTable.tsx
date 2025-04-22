@@ -1,4 +1,3 @@
-import DynamicTable from '@atlaskit/dynamic-table';
 import { Button } from 'react-daisyui';
 import EditIcon from '@atlaskit/icon/glyph/edit';
 import TrashIcon from '@atlaskit/icon/glyph/trash';
@@ -8,34 +7,6 @@ import useCanAccess from 'hooks/useCanAccess';
 import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
 import { getCourseStatus } from '../services/helpers';
 import { StatusBadge } from '@/components/shared';
-
-const head = {
-  cells: [
-    {
-      key: 'name',
-      content: <a style={{ fontSize: '14px' }}>Name</a>,
-      width: 20,
-    },
-    {
-      key: 'category',
-      content: <a style={{ fontSize: '14px' }}>Category</a>,
-      isSortable: true,
-      width: 40,
-    },
-    {
-      key: 'status',
-      content: <a style={{ fontSize: '14px' }}>Status</a>,
-      isSortable: true,
-      width: 15,
-    },
-    {
-      key: 'actions',
-      content: <a style={{ fontSize: '14px' }}>Actions</a>,
-      isSortable: true,
-      width: 15,
-    },
-  ],
-};
 
 const statuses = {
   todo: <StatusBadge label="To do" value="todo" />,
@@ -62,68 +33,73 @@ const CoursesTable = ({
 }) => {
   const { canAccess } = useCanAccess();
 
-  const rows = teamCourses.map((teamCourse, index) => {
-    const status = getCourseStatus(teamCourse, members);
-    return {
-      cells: [
-        { key: 'name', content: teamCourse.course.name },
-        {
-          key: 'category',
-          content: categories.find(
-            ({ id }) => id === teamCourse.course.categoryId
-          )?.name,
-        },
-        { key: 'status', content: statuses[status] },
-        {
-          key: 'actions',
-          content: (
-            <div className="flex items-center gap-0.5">
-              {canAccess('iap_course', ['create']) && (
-                <Button
-                  startIcon={<EditIcon label="Edit course" />}
-                  shape="square"
-                  size="sm"
-                  onClick={() => editHandler(teamCourse)}
-                  disabled={Boolean(teamCourse.progress.length)}
-                />
-              )}
-              {canAccess('iap_course', ['delete']) && (
-                <Button
-                  startIcon={<TrashIcon label="Delete course" />}
-                  shape="square"
-                  size="sm"
-                  onClick={() => deleteHandler(teamCourse)}
-                />
-              )}
-              <Button
-                startIcon={<GraphLineIcon label="Completion results" />}
-                shape="square"
-                size="sm"
-                onClick={() => completionHandler(teamCourse)}
-              />
-              <Button
-                startIcon={<TableIcon label="Status results" />}
-                shape="square"
-                size="sm"
-                onClick={() => statusHandler(teamCourse)}
-              />
-            </div>
-          ),
-        },
-      ],
-      key: teamCourse.course.name + index,
-    };
-  });
-
   return (
-    <DynamicTable
-      head={head}
-      rows={rows}
-      defaultPage={1}
-      defaultSortOrder="ASC"
-      isFixedSize={true}
-      rowsPerPage={10}
-    />
+    <div className="overflow-x-auto">
+      <table className="table w-full border-b text-sm">
+        <thead className="bg-base-200">
+          <tr>
+            <th style={{ width: '20%' }}>Name</th>
+            <th style={{ width: '40%' }}>Category</th>
+            <th style={{ width: '15%' }}>Status</th>
+            <th style={{ width: '25%' }}>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {teamCourses.map((teamCourse, index) => {
+            const status = getCourseStatus(teamCourse, members);
+            const categoryName = categories.find(
+              ({ id }) => id === teamCourse.course.categoryId
+            )?.name;
+
+            return (
+              <tr key={teamCourse.course.name + index}>
+                <td>{teamCourse.course.name}</td>
+                <td>{categoryName}</td>
+                <td>{statuses[status]}</td>
+                <td>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {canAccess('iap_course', ['create']) && (
+                      <Button
+                        size="sm"
+                        shape="square"
+                        onClick={() => editHandler(teamCourse)}
+                        disabled={Boolean(teamCourse.progress.length)}
+                      >
+                        <EditIcon label="Edit course" />
+                      </Button>
+                    )}
+                    {canAccess('iap_course', ['delete']) && (
+                      <Button
+                        size="sm"
+                        shape="square"
+                        color="error"
+                        onClick={() => deleteHandler(teamCourse)}
+                      >
+                        <TrashIcon label="Delete course" />
+                      </Button>
+                    )}
+                    <Button
+                      size="sm"
+                      shape="square"
+                      onClick={() => completionHandler(teamCourse)}
+                    >
+                      <GraphLineIcon label="Completion results" />
+                    </Button>
+                    <Button
+                      size="sm"
+                      shape="square"
+                      onClick={() => statusHandler(teamCourse)}
+                    >
+                      <TableIcon label="Status results" />
+                    </Button>
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
