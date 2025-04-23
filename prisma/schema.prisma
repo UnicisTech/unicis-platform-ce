@@ -43,42 +43,6 @@ model VerificationToken {
 }
 
 model User {
-<<<<<<< HEAD
-  id                  String         @id @default(uuid())
-  name                String
-  email               String         @unique
-  emailVerified       DateTime?
-  password            String?
-  image               String?
-  createdAt           DateTime       @default(now())
-  updatedAt           DateTime       @default(now())
-  firstName           String         @default("")
-  lastName            String         @default("")
-  accounts            Account[]
-  Comment             Comment[]
-  invitations         Invitation[]
-  sessions            Session[]
-  Subscription        Subscription[]
-  Task                Task[]
-  teamMembers         TeamMember[]
-}
-
-model Team {
-  id              String        @id @default(uuid())
-  taskIndex       Int           @default(1)
-  name            String
-  slug            String        @unique
-  domain          String?       @unique
-  defaultRole     Role          @default(MEMBER)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @default(now())
-  properties      Json          @default("{}")
-  apiKeys         ApiKey[]
-  invitations     Invitation[]
-  subscription    Subscription?
-  tasks           Task[]
-  members         TeamMember[]
-=======
   id             String           @id @default(uuid())
   name           String
   email          String           @unique
@@ -115,7 +79,6 @@ model Team {
   members      TeamMember[]
   TeamCourse   TeamCourse[]
   Category     Category[]
->>>>>>> origin/main
 }
 
 model Subscription {
@@ -187,7 +150,7 @@ model TeamMember {
   updatedAt DateTime @default(now())
   team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@unique([teamId, userId])
   @@index([userId])
   

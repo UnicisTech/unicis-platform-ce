@@ -18,8 +18,6 @@ import { getCurrentPlan } from '@/lib/subscriptions';
 import Loading from '../Loading';
 import useHasPlan from '@/hooks/useHasPlan';
 import { useEffect } from 'react';
-import { $Enums } from '@prisma/client';
-import env from '@/lib/env';
 
 
 interface NavigationItemsProps extends NavigationProps {
@@ -29,16 +27,7 @@ interface NavigationItemsProps extends NavigationProps {
 const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
-  const { hasPlan, checkedHasPlan } = useHasPlan();
 
-  useEffect(() => {
-    const checkPlan = async () => {
-      const result = await hasPlan(slug);
-      console.log("Does the team have the plan?", result);
-    };
-
-    checkPlan();
-  }, [hasPlan]);
 
   const relativePath = activePathname?.slice(`/teams/${slug}`.length) || '';
   const menus: (MenuItem | null)[] = [
@@ -60,7 +49,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('tasks'),
     },
-    canAccess('asset_dashboard', ['create', 'update', 'read', 'delete']) && checkedHasPlan && {
+    canAccess('asset_dashboard', ['create', 'update', 'read', 'delete']) && {
       name: t('Asset Management'),
       href: `/teams/${slug}/asset`,
       icon: () => <Icon src="/asset-dashboard.png" />,
@@ -181,33 +170,34 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   return <NavigationItems menus={menus} />;
 };
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  const { query }: GetServerSidePropsContext = context;
+// export const getServerSideProps = async (
+//   context: GetServerSidePropsContext
+// ) => {
+//   const { query }: GetServerSidePropsContext = context;
 
-  const slug = query.slug as string;
-  const { isLoading, team } = useTeam(slug as string);
+//   const slug = query.slug as string;
+//   const { isLoading, team } = useTeam(slug as string);
 
-  if (isLoading || !team) {
-    return <Loading />;
-  }
+//   if (isLoading || !team) {
+//     return <Loading />;
+//   }
 
-  const subscription = async (teamId: string) => {
-    const subscription = await prisma.subscription.findUnique({
-      where: { teamId },
-    });
-    return subscription;
-  };
-  const currentPlan = await getCurrentPlan(await subscription(team.id!));
-  console.log('PLAN: ', currentPlan);
+//   const subscription = async (teamId: string) => {
+//     const subscription = await prisma.subscription.findUnique({
+//       where: { teamId },
+//     });
+//     return subscription;
+//   };
 
-  return {
-    props: {
-      currentPlan: currentPlan,
-    },
-  };
-};
+//   const currentPlan = await getCurrentPlan(await subscription(team.id!));
+//   console.log('PLAN: ', currentPlan);
+
+//   return {
+//     props: {
+//       currentPlan: currentPlan,
+//     },
+//   };
+// };
 
 export default TeamNavigation;
 

@@ -29,11 +29,6 @@ import useCanAccess from 'hooks/useCanAccess';
 import useISO from 'hooks/useISO';
 import { Team } from '@prisma/client';
 import { getCscStatusesBySlug } from 'models/team';
-<<<<<<< HEAD
-import { CreateTIA, TiaAuditLogs, TiaPanel } from '@/components/interfaces/TIA';
-import Breadcrumb from '@/components/shared/Breadcrumb';
-
-=======
 import {
   TiaAuditLogs,
   TiaPanel,
@@ -44,9 +39,8 @@ import {
   PiaPanel,
   PiaAuditLogs,
 } from '@/components/interfaces/PIA';
-import Breadcrumb from '../../Breadcrumb';
 import useRpaCreation from 'hooks/useRpaCreation';
->>>>>>> origin/main
+import Breadcrumb from '@/components/shared/Breadcrumb';
 
 const TaskById = ({
   csc_statuses,
@@ -56,7 +50,7 @@ const TaskById = ({
   const [rmVisible, setRmVisible] = useState(false);
 
   const [activeTab, setActiveTab] = useState('Overview');
-  const [statuses, setStatuses] = useState(csc_statuses);
+  const [statuses, setStatuses] = useState<any>(csc_statuses);
   const [activeCommentTab, setActiveCommentTab] = useState('Comments');
   const router = useRouter();
   const { t } = useTranslation('common');

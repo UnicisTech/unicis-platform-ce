@@ -13,68 +13,45 @@ import { getCurrentPlan } from '@/lib/subscriptions';
 import { isTeamHasSubscription } from '@/models/subscription';
 import { getUserBySession } from '@/models/user';
 import { Subscription, Team, User } from '@prisma/client';
-import useTeam from 'hooks/useTeam';
-<<<<<<< HEAD
 import { getCscStatusesBySlug, getTeam } from 'models/team';
-import { GetServerSidePropsContext } from 'next';
 import { getSession } from '@/lib/session';
-=======
 import useTeamTasks from 'hooks/useTeamTasks';
-import { getCscStatusesBySlug } from 'models/team';
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
->>>>>>> origin/main
+import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useNodes } from '@/hooks/fleets/Nodes/useNodes';
 
 const TeamDashboard = ({
-  csc_statuses,
-  slug,
-<<<<<<< HEAD
-  user,
-  team,
-  teamSubscription
-}: {
-  teamFeatures: any;
-  teamSubscription: Subscription;
-  user: User;
-  team: Team;
-  csc_statuses: { [key: string]: string };
-  slug: string;
-}) => {
+    csc_statuses,
+    slug,
+    user,
+    team,
+    teamSubscription
+  } : {
+    teamFeatures: any;
+    teamSubscription: Subscription;
+    user: User;
+    team: Team;
+    csc_statuses: { [key: string]: string };
+    slug: string;
+  }) => {
   const { t } = useTranslation('common');
   const currentPlan = getCurrentPlan(teamSubscription);
   const { nodes, isLoading, isError } = useNodes(team.id, 'all');
-
-  // if (teamLoading) {
-  //   return <Loading />;
-  // }
-
-  // if (teamError) {
-  //   return <Error message={teamError.message} />;
-  // }
-=======
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { t } = useTranslation('common');
-  const { isLoading: teamLoading, isError: teamError, team } = useTeam();
+  
   const {
     tasks,
     isLoading: tasksLoading,
     isError: tasksError,
   } = useTeamTasks(slug);
 
-  if (teamLoading || tasksLoading) {
+  if (tasksLoading) {
     return <Loading />;
   }
 
-  if (teamError || tasksError) {
-    return <Error message={teamError?.message || tasksError?.message} />;
+  if (tasksError) {
+    return <Error message={tasksError?.message} />;
   }
->>>>>>> origin/main
-
-  // if (!team) {
-  //   return <Error message={t('team-not-found')} />;
-  // }
 
   return (
     <>
@@ -84,18 +61,14 @@ const TeamDashboard = ({
         </h2>
       </div>
       <div className="space-y-6">
-<<<<<<< HEAD
         {currentPlan === 'ULTIMATE' &&
           <AssetsAnalysis nodes={nodes} team={team} user={user} />
         }
-        <TeamTaskAnalysis slug={slug} csc_statuses={csc_statuses} />
-=======
         {/* TODO: { [key: string]: string; } is temporary solution */}
         <TeamTaskAnalysis
           slug={slug}
           csc_statuses={csc_statuses as { [key: string]: string }}
         />
->>>>>>> origin/main
         <div
           style={{
             width: '100%',

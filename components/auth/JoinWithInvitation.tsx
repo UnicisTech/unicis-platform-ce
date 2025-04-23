@@ -20,7 +20,7 @@ import AgreeMessage from './AgreeMessage';
 import GoogleReCAPTCHA from '../shared/GoogleReCAPTCHA';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useCreateFleetAccount, useCreateFleetTeam } from '@/hooks/fleets';
-import { deleteUser } from '@/models/user';
+// import { deleteUser } from '@/models/user';
 
 interface JoinWithInvitationProps {
   inviteToken: string;
@@ -78,7 +78,7 @@ const JoinWithInvitation = ({
       try {
         await createFleetAccount(json.data.id, json.data.email, json.data.firstName, json.data.lastName, values.password)
       } catch (error) {
-        await deleteUser({ id: json.data.id })
+        // await deleteUser({ id: json.data.id })
       }
 
       recaptchaRef.current?.reset();

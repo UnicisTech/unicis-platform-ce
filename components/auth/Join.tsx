@@ -14,7 +14,7 @@ import AgreeMessage from './AgreeMessage';
 import GoogleReCAPTCHA from '../shared/GoogleReCAPTCHA';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useAccessFleetAccount, useCreateFleetAccount, useCreateFleetTeam } from '@/hooks/fleets';
-import { deleteUser } from '@/models/user';
+// import { deleteUser } from '@/models/user';
 import Cookies from 'js-cookie';
 
 
@@ -83,7 +83,7 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
               })
           });
       } catch (error) {
-        await deleteUser({ id: json.data.user.id })
+        // await deleteUser({ id: json.data.user.id })
       }
 
       recaptchaRef.current?.reset();

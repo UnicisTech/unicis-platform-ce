@@ -22,16 +22,12 @@ const UserNavigation = ({ activePathname }: NavigationProps) => {
       name: t('account'),
       href: '/settings/account',
       icon: UserCircleIcon,
-<<<<<<< HEAD
       active:
         activePathname?.startsWith(`/settings`) &&
         /(account|fleet)/.test(
           activePathname
         ),
-=======
-      active: activePathname === '/settings/account',
-      className: 'stroke-blue-600',
->>>>>>> origin/main
+      className: 'stroke-blue-600'
     },
     {
       name: t('password'),
