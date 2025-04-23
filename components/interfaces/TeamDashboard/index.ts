@@ -4,3 +4,4 @@ export { default as TeamCscAnalysis } from './TeamCscAnalysis';
 export { default as TeamAssessmentAnalysis } from './TeamAssessment';
 
 export { default as CountrySelector } from './CountrySelector';
+export { default as PiaAnalysis } from './PiaAnalysis';

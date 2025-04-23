@@ -16,11 +16,17 @@ import GoogleProvider from 'next-auth/providers/google';
 import { isAuthProviderEnabled } from '@/lib/auth';
 import type { Provider } from 'next-auth/providers';
 import { validateRecaptcha } from '@/lib/recaptcha';
-import Cookies from 'js-cookie';
+import rateLimit from '@/lib/rate-limit';
+import { getIpAddress } from '@/lib/utils';
 
 const adapter = PrismaAdapter(prisma);
 
 const providers: Provider[] = [];
+
+const limiter = rateLimit({
+  interval: 60 * 1000, // 60 seconds
+  uniqueTokenPerInterval: 500, // Max 500 requests per second
+});
 
 if (isAuthProviderEnabled('credentials')) {
   providers.push(
@@ -31,7 +37,13 @@ if (isAuthProviderEnabled('credentials')) {
         password: { type: 'password' },
         recaptchaToken: { type: 'text' },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
+        try {
+          await limiter.check(5, getIpAddress(req as any)); // 5 requests per minute for IP address
+        } catch (e) {
+          throw new Error('auth-limited');
+        }
+
         if (!credentials) {
           throw new Error('no-credentials');
         }
@@ -124,6 +136,32 @@ if (isAuthProviderEnabled('email')) {
   );
 }
 
+// const cookiesOptions: Partial<Pick<NextAuthOptions, 'cookies'>> =
+//   process.env.NODE_ENV === 'production'
+//     ? {
+//         cookies: {
+//           sessionToken: {
+//             name: `__Secure-next-auth.session-token`,
+//             options: {
+//               httpOnly: true,
+//               sameSite: 'lax',
+//               path: '/',
+//               secure: true,
+//             },
+//           },
+//           csrfToken: {
+//             name: `__Host-next-auth.csrf-token`,
+//             options: {
+//               httpOnly: true,
+//               sameSite: 'lax',
+//               path: '/',
+//               secure: true,
+//             },
+//           },
+//         },
+//       }
+//     : {};
+
 export const authOptions: NextAuthOptions = {
   adapter,
   providers,
@@ -134,6 +172,7 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
+  // ...cookiesOptions,
   secret: env.nextAuth.secret,
   callbacks: {
     async signIn({ user, account, profile }) {

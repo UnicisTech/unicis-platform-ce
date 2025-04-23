@@ -24,6 +24,7 @@ export type TiaOption = {
   value: string;
 };
 
+//TODO: RpaAuditLog and TiaAuditLog, use AuditLog from base.ts instead
 export type TiaAuditLog = {
   actor: Session['user'];
   date: number;

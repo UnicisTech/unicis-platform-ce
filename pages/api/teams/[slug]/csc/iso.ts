@@ -46,7 +46,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const { iso } = req.body;
 
   console.log('hande put iso slug ', { slug, iso });
-
+  //TODO: check if subscription allows to change to this ISO
   const responce = await setCscIso({
     slug: slug as string,
     iso,

@@ -8,10 +8,10 @@ type Options = {
 };
 
 export const headers = [
-  'Describe the intended transfer scenario',
-  'Determine the scenarios of problematic lawful access that are relevant',
-  'Determine factors that indicate a risk of problematic lawful access',
-  'Determine probability of a problematic lawful access',
+  'Transfer scenario',
+  'Problematic lawful access',
+  'Risk',
+  'Probability',
   'Conclusion',
 ];
 

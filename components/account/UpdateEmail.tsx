@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { Button, Input } from 'react-daisyui';
 
-import type { ApiResponse } from 'types';
+import type { ApiResponse, UserReturned } from 'types';
 import { Card } from '@/components/shared';
 import { defaultHeaders } from '@/lib/common';
 import type { User } from '@prisma/client';
@@ -33,7 +33,7 @@ const UpdateEmail = ({ user, allowEmailChange }: UpdateEmailProps) => {
         body: JSON.stringify(values),
       });
 
-      const json = (await response.json()) as ApiResponse<User>;
+      const json = (await response.json()) as ApiResponse<UserReturned>;
 
       if (!response.ok) {
         toast.error(json.error.message);

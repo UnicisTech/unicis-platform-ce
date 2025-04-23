@@ -93,6 +93,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
+  //TODO: bug: role: Role.OWNER or Role.ADMIN
   if (totalTeamOwners <= 1) {
     throw new ApiError(400, 'A team should have at least one owner.');
   }

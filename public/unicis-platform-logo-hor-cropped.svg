@@ -9,8 +9,8 @@
    style="clip-rule:evenodd;fill-rule:evenodd;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
    viewBox="1800.86 5256.45 4298.2971 210.04528"
    id="svg504"
-   sodipodi:docname="unicis-platform-logo-hor-3.svg"
-   inkscape:version="1.2.2 (b0a84865, 2022-12-01)"
+   sodipodi:docname="unicis-platform-logo-hor-cropped.svg"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -26,14 +26,14 @@
    inkscape:deskcolor="#d1d1d1"
    inkscape:document-units="in"
    showgrid="false"
-   inkscape:zoom="0.78239463"
-   inkscape:cx="56.876669"
-   inkscape:cy="99.693936"
-   inkscape:window-width="1440"
-   inkscape:window-height="790"
+   inkscape:zoom="0.3611637"
+   inkscape:cx="56.760964"
+   inkscape:cy="98.293377"
+   inkscape:window-width="1200"
+   inkscape:window-height="1186"
    inkscape:window-x="0"
    inkscape:window-y="25"
-   inkscape:window-maximized="1"
+   inkscape:window-maximized="0"
    inkscape:current-layer="Layer_x0020_1" />
  <defs
    id="defs465">
@@ -216,14 +216,7 @@
    transform="translate(-53.278184,-2545.3225)">
   <metadata
    id="CorelCorpID_0Corel-Layer" />
-  <rect
-   class="fil0"
-   x="1906.3674"
-   y="7349.8721"
-   width="4298.2969"
-   height="1197.6204"
-   id="rect468"
-   style="stroke-width:0.312043" />
+  
   <g
    id="_2054450621936"
    transform="translate(52.229247,2089.1699)">

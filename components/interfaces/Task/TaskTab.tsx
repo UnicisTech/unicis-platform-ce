@@ -13,7 +13,7 @@ const TaskTab = ({
   return (
     <div className="mb-5">
       <nav
-        className="-mb-px flex space-x-5 border-b border-gray-300"
+        className="-mb-px flex space-x-5 border-b border-gray-300 overflow-x-auto"
         aria-label="Tabs"
       >
         {navigations.map((menu, index) => {

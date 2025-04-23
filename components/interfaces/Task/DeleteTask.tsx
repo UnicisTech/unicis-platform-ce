@@ -8,6 +8,7 @@ import useTasks from 'hooks/useTasks';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 
+//TODO: move visible to parent component
 const DeleteTask = ({
   taskNumber,
   visible,

@@ -3,7 +3,7 @@ import { compare, hash } from 'bcryptjs';
 import env from './env';
 import { ApiError } from './errors';
 import type { AUTH_PROVIDER } from 'types';
-import { passwordPolicies } from './common';
+import { validatePassword } from './common';
 
 export async function hashPassword(password: string) {
   return await hash(password, 12);
@@ -32,14 +32,10 @@ export function authProviderEnabled() {
 }
 
 export const validatePasswordPolicy = (password: string) => {
-  const { minLength } = passwordPolicies;
-
-  if (password.length < minLength) {
+  if (!validatePassword(password)) {
     throw new ApiError(
       422,
-      `Password must have at least ${minLength} characters.`
+      'Password must have at least 8 characters, including uppercase, lowercase, number, and special character.'
     );
   }
-
-  // TODO: Add more password policies
 };

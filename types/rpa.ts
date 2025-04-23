@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from 'react';
 import type { Task } from '@prisma/client';
 import type { Session } from 'next-auth';
 import type { Diff } from './base';
@@ -45,8 +46,21 @@ export interface RpaConfig {
   guarantee: RpaOption[];
   toms: RpaOption[];
   country: RpaOption[];
+  involveProfiling: RpaOption[];
+  useAutomated: RpaOption[];
+  involveSurveillance: RpaOption[];
+  processedSpecialCategories: RpaOption[];
+  isBigData: RpaOption[];
+  dataSetsCombined: RpaOption[];
+  multipleControllers: RpaOption[];
+  imbalanceInRelationship: RpaOption[];
+  innovativeTechnologyUsed: RpaOption[];
+  transferredOutside: RpaOption[];
+  rightsRestricted: RpaOption[];
+  piaNeeded: RpaOption[];
 }
 
+//TODO: RpaAuditLog and TiaAuditLog, use AuditLog from base.ts instead
 export type RpaAuditLog = {
   actor: Session['user'];
   date: number;
@@ -64,3 +78,20 @@ export type TaskRpaProperties = {
   rpa_procedure?: RpaProcedureInterface | [];
   rpa_audit_logs: RpaAuditLog[];
 };
+
+export type ProcedureQueueItem = 'TIA' | 'PIA';
+
+export interface UseRpaCreationState {
+  selectedTask: Task | undefined;
+  isRpaOpen: boolean;
+  isPiaOpen: boolean;
+  isTiaOpen: boolean;
+  setIsRpaOpen: Dispatch<SetStateAction<boolean>>;
+  setIsPiaOpen: Dispatch<SetStateAction<boolean>>;
+  setIsTiaOpen: Dispatch<SetStateAction<boolean>>;
+  onRpaCompletedCallback: (
+    procedureQueue: ProcedureQueueItem[],
+    selectedTask: Task
+  ) => void;
+  onProcedureCompletedCallback: (procedure: ProcedureQueueItem) => void;
+}

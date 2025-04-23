@@ -43,6 +43,7 @@ model VerificationToken {
 }
 
 model User {
+<<<<<<< HEAD
   id                  String         @id @default(uuid())
   name                String
   email               String         @unique
@@ -77,6 +78,44 @@ model Team {
   subscription    Subscription?
   tasks           Task[]
   members         TeamMember[]
+=======
+  id             String           @id @default(uuid())
+  name           String
+  email          String           @unique
+  emailVerified  DateTime?
+  password       String?
+  image          String?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @default(now())
+  firstName      String           @default("")
+  lastName       String           @default("")
+  accounts       Account[]
+  Comment        Comment[]
+  invitations    Invitation[]
+  sessions       Session[]
+  Subscription   Subscription[]
+  Task           Task[]
+  teamMembers    TeamMember[]
+}
+
+model Team {
+  id           String        @id @default(uuid())
+  taskIndex    Int           @default(1)
+  name         String
+  slug         String        @unique
+  domain       String?       @unique
+  defaultRole  Role          @default(MEMBER)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @default(now())
+  properties   Json          @default("{}")
+  apiKeys      ApiKey[]
+  invitations  Invitation[]
+  subscription Subscription?
+  tasks        Task[]
+  members      TeamMember[]
+  TeamCourse   TeamCourse[]
+  Category     Category[]
+>>>>>>> origin/main
 }
 
 model Subscription {
@@ -143,6 +182,7 @@ model TeamMember {
   teamId    String
   userId    String
   role      Role     @default(MEMBER)
+  CourseProgress CourseProgress[]
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
@@ -150,6 +190,7 @@ model TeamMember {
  
   @@unique([teamId, userId])
   @@index([userId])
+  
 }
 
 model Invitation {
@@ -166,6 +207,61 @@ model Invitation {
   team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
 
   @@unique([teamId, email])
+}
+
+model Course {
+  id             String            @id @default(uuid())
+  name           String
+  categoryId     String? // Relation to Category
+  category       Category?         @relation(fields: [categoryId], references: [id])
+  contentType    CourseContentType
+  programContent String?
+  description    String?
+  url            String?
+  estimatedTime  Int?
+  thumbnail      String?
+  questions      Json
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  teams          TeamCourse[] // Many-to-many relation with Team through TeamCourse
+}
+
+model TeamCourse {
+  id        String   @id @default(uuid())
+  teamId    String
+  courseId  String
+  progress  CourseProgress[] // Tracks user progress
+  createdAt DateTime @default(now())
+
+  team   Team   @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, courseId])
+}
+
+model CourseProgress {
+  id           String      @id @default(uuid())
+  teamCourseId String      
+  teamMemberId String      
+  progress     Int         // Could store progress as percentage or other measure (e.g., 0–100)
+  answers      Json        
+  updatedAt    DateTime    @updatedAt
+
+  teamCourse   TeamCourse  @relation(fields: [teamCourseId], references: [id], onDelete: Cascade)
+  teamMember   TeamMember  @relation(fields: [teamMemberId], references: [id], onDelete: Cascade)
+
+  @@unique([teamCourseId, teamMemberId]) // Ensures progress is unique for each team member on a course
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  name      String
+  isDefault Boolean  @default(false) // Indicates if it's a default category
+  teamId    String? // Optional, if it's a team-specific category
+  team      Team?    @relation(fields: [teamId], references: [id]) // Relation to Team
+  courses   Course[] // Relation to Courses
+
+  @@unique([name, teamId]) // Unique category name within a team
 }
 
 model PasswordReset {
@@ -211,4 +307,10 @@ enum SubscriptionStatus {
 enum PaymentStatus {
   SUCCESS
   FAILED
+}
+
+enum CourseContentType {
+  EMBEDDED_VIDEO
+  PRESENTATION_PDF
+  OPEN_TEXT
 }

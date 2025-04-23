@@ -28,6 +28,7 @@ yarn-error.log*
 # local env files
 .env
 .env.local
+.env
 .env.development.local
 .env.test.local
 .env.production.local
@@ -41,6 +42,10 @@ yarn-error.log*
 # Sentry
 .sentryclirc
 
+.env
+.gitlab-ci.yml.bck
+.azure
+.azure/credentials.json
 
 # Tests
 /report

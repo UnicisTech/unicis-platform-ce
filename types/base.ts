@@ -2,6 +2,10 @@ import type { Prisma, TeamMember, User, Comment } from '@prisma/client';
 import type { TaskCscProperties, TeamCscProperties } from './csc';
 import type { TaskTiaProperties } from './tia';
 import type { TaskRpaProperties } from './rpa';
+import type { TaskPiaProperties } from './pia';
+import { TeamIapProperties } from './iap';
+import type { TaskRmProperties } from './rm';
+import type { Session } from 'next-auth';
 
 export type ApiError = {
   code?: string;
@@ -115,13 +119,22 @@ export type Diff = {
   nextValue: string | string[];
 } | null;
 
+export type AuditLog = {
+  actor: Session['user'];
+  date: number;
+  event: string;
+  diff: Diff;
+};
+
 export type TeamMemberWithUser = TeamMember & { user: User };
 
-export type TeamProperties = TeamCscProperties;
+export type TeamProperties = TeamCscProperties & TeamIapProperties;
 
 export type TaskProperties = TaskTiaProperties &
   TaskCscProperties &
-  TaskRpaProperties;
+  TaskRpaProperties &
+  TaskPiaProperties &
+  TaskRmProperties;
 
 export type ExtendedComment = Comment & {
   createdBy: User;
@@ -139,7 +152,12 @@ export type SubscriptionWithPayments = Prisma.SubscriptionGetPayload<{
   };
 }>;
 
-// export type TeamProperties = {
-//   csc_iso?: ISO;
-//   [key in CscStatusesProp | CscControlsProp]?: string;
-// };
+export type UserReturned = Pick<User, 'name' | 'firstName' | 'lastName'>;
+
+export type ChatbotResponse = {
+  content: string;
+  role: string;
+};
+export type ChatbotResponseReturned = {
+  response: ChatbotResponse;
+};

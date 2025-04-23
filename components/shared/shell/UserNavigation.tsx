@@ -16,22 +16,29 @@ const UserNavigation = ({ activePathname }: NavigationProps) => {
       href: '/teams',
       icon: RectangleStackIcon,
       active: activePathname === '/teams',
+      className: 'stroke-blue-600',
     },
     {
       name: t('account'),
       href: '/settings/account',
       icon: UserCircleIcon,
+<<<<<<< HEAD
       active:
         activePathname?.startsWith(`/settings`) &&
         /(account|fleet)/.test(
           activePathname
         ),
+=======
+      active: activePathname === '/settings/account',
+      className: 'stroke-blue-600',
+>>>>>>> origin/main
     },
     {
       name: t('password'),
       href: '/settings/password',
       icon: LockClosedIcon,
       active: activePathname === '/settings/password',
+      className: 'stroke-blue-600',
     },
   ];
 

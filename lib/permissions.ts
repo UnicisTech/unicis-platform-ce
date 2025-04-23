@@ -20,7 +20,15 @@ export type Resource =
   | 'team_fleet_node'
   | 'asset_dashboard'
   | 'asset_settings'
-  | 'task';
+  | 'task'
+  | 'iap_course'
+  | 'iap_category'
+  | 'iap_reports'
+  | 'rpa'
+  | 'tia'
+  | 'pia'
+  | 'csc'
+  | 'rm';
 
 export type RolePermissions = {
   [role in RoleType]: Permission[];
@@ -54,7 +62,7 @@ export const permissions: RolePermissions = {
   OWNER: [
     {
       resource: 'team',
-      actions: '*',
+      actions: ['read', 'leave', 'update'],
     },
     {
       resource: 'asset_dashboard',
@@ -118,6 +126,38 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'team_fleet_node',
+      actions: '*',
+    },
+    {      
+      resource: 'iap_course',
+      actions: '*',
+    },
+    {
+      resource: 'iap_category',
+      actions: '*',
+    },
+    {
+      resource: 'iap_reports',
+      actions: '*',
+    },
+    {
+      resource: 'rpa',
+      actions: '*',
+    },
+    {
+      resource: 'tia',
+      actions: '*',
+    },
+    {
+      resource: 'pia',
+      actions: '*',
+    },
+    {
+      resource: 'csc',
+      actions: '*',
+    },
+    {
+      resource: 'rm',
       actions: '*',
     },
   ],
@@ -190,6 +230,38 @@ export const permissions: RolePermissions = {
       resource: 'team_fleet_node',
       actions: '*',
     },
+    {
+      resource: 'iap_course',
+      actions: '*',
+    },
+    {
+      resource: 'iap_category',
+      actions: '*',
+    },
+    {
+      resource: 'iap_reports',
+      actions: '*',
+    },
+    {
+      resource: 'rpa',
+      actions: '*',
+    },
+    {
+      resource: 'tia',
+      actions: '*',
+    },
+    {
+      resource: 'pia',
+      actions: '*',
+    },
+    {
+      resource: 'csc',
+      actions: '*',
+    },
+    {
+      resource: 'rm',
+      actions: '*',
+    },
   ],
   MEMBER: [
     {
@@ -203,7 +275,15 @@ export const permissions: RolePermissions = {
     {
       resource: 'task',
       actions: '*',
-    }
+    },
+    {
+      resource: 'iap_course',
+      actions: ['read', 'update'],
+    },
+    {
+      resource: 'iap_category',
+      actions: ['read'],
+    },
   ],
   AUDITOR: [
     {
@@ -232,6 +312,18 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'team_fleet_node',
+      actions: ['read'],
+    },
+    {
+      resource: 'iap_course',
+      actions: ['read'],
+    },
+    {
+      resource: 'iap_category',
+      actions: ['read'],
+    },
+    {
+      resource: 'iap_reports',
       actions: ['read'],
     },
   ],

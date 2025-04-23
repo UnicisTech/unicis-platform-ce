@@ -13,3 +13,4 @@ export { default as CopyToClipboardButton } from './CopyToClipboardButton';
 export { default as StatusBadge } from './StatusBadge';
 export { default as PlatformBadge } from './PlatformBadge';
 export { default as PerPageSelector } from './PerPageSelector';
+export { default as StatusFilter } from './StatusFilter';

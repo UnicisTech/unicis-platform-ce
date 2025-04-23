@@ -44,19 +44,31 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
       active: activeTab === 'settings',
       icon: Cog6ToothIcon,
     },
-    {
+  ];
+
+  if (canAccess('team_billing', ['read', 'update'])) {
+    navigations.push({
       name: 'Billing',
       href: `/teams/${team.slug}/billing`,
       active: activeTab === 'billing',
       icon: Cog6ToothIcon,
-    },
-  ];
+    });
+  }
 
   if (canAccess('team_member', ['create', 'update', 'read', 'delete'])) {
     navigations.push({
       name: 'Members',
       href: `/teams/${team.slug}/members`,
       active: activeTab === 'members',
+      icon: UserPlusIcon,
+    });
+  }
+
+  if (canAccess('iap_course', ['read']) && canAccess('iap_reports', ['read'])) {
+    navigations.push({
+      name: 'Training',
+      href: `/teams/${team.slug}/iap/admin`,
+      active: activeTab === 'iap/admin',
       icon: UserPlusIcon,
     });
   }

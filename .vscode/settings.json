@@ -3,5 +3,6 @@
     "WillLuke.nextjs.hasPrompted": true,
     "cSpell.words": [
         "socialgouv"
-    ]
+    ],
+    "postman.settings.dotenv-detection-notification-visibility": false
 }

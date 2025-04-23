@@ -5,27 +5,38 @@ import { prisma } from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
 import { validateRecaptcha } from '@/lib/recaptcha';
+import rateLimit from '@/lib/rate-limit';
+import { getIpAddress } from '@/lib/utils';
+
+const limiter = rateLimit({
+  interval: 60 * 1000, // 60 seconds
+  uniqueTokenPerInterval: 500, // Max 500 requests per second
+});
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    switch (req.method) {
-      case 'POST':
-        await handlePOST(req, res);
-        break;
-      default:
-        res.setHeader('Allow', 'POST');
-        res.status(405).json({
-          error: { message: `Method ${req.method} Not Allowed` },
-        });
+    await limiter.check(5, getIpAddress(req), res); // 5 requests per minute for IP address
+    try {
+      switch (req.method) {
+        case 'POST':
+          await handlePOST(req, res);
+          break;
+        default:
+          res.setHeader('Allow', 'POST');
+          res.status(405).json({
+            error: { message: `Method ${req.method} Not Allowed` },
+          });
+      }
+    } catch (error: any) {
+      const message = error.message || 'Something went wrong';
+      const status = error.status || 500;
+      res.status(status).json({ error: { message } });
     }
   } catch (error: any) {
-    const message = error.message || 'Something went wrong';
-    const status = error.status || 500;
-
-    res.status(status).json({ error: { message } });
+    res.status(429).json({ error: { message: 'Rate limit exceeded' } });
   }
 }
 
