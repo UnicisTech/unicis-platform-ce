@@ -6,8 +6,8 @@ import type { User } from '@prisma/client';
 import { IssuePanelContainer } from '@/sharedStyles';
 import DeleteQuery from './DeleteDistributorResult';
 import { useGetDistributedIdResult } from '@/hooks/fleets/distributors/useGetDistributorIdResult';
-import { CodeBlock } from '@atlaskit/code';
 import DataInfo from '@/components/shared/DataInfo';
+import { CodeBlock } from '@/components/shared/CodeBlock';
 
 
 const DistributorsDetails = ({ user, distributorId, fleetTeamId }: { user: Partial<User>, distributorId: string, fleetTeamId: string }) => {

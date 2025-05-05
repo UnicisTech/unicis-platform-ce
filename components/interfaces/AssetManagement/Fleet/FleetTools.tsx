@@ -2,9 +2,9 @@ import { useTranslation } from 'next-i18next';
 import { Card, CopyToClipboardButton } from '@/components/shared';
 import { Button } from 'react-daisyui';
 import { FleetTeam } from '@/types';
-import { CodeBlock } from '@atlaskit/code';
 import toast from 'react-hot-toast';
 import { copyToClipboard } from '@/lib/common';
+import { CodeBlock } from '@/components/shared/CodeBlock';
 
 const FleetTools = ({ fleetTeam }: { fleetTeam?: FleetTeam}) => {
     const { t } = useTranslation('common');

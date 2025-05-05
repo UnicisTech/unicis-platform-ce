@@ -3,7 +3,7 @@ import { Error, Loading } from '@/components/shared';
 import type { User } from '@prisma/client';
 import { IssuePanelContainer } from '@/sharedStyles';
 import { useAssetConfig } from '@/hooks/fleets/Nodes';
-import { CodeBlock } from '@atlaskit/code';
+import { CodeBlock } from '@/components/shared/CodeBlock';
 
 
 const AssetConfig = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user: Partial<User>, nodeID: string }) => {

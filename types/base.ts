@@ -1,4 +1,4 @@
-import type { Prisma, TeamMember, User, Comment } from '@prisma/client';
+import type { Prisma, TeamMember, User, Comment, Team } from '@prisma/client';
 import type { TaskCscProperties, TeamCscProperties } from './csc';
 import type { TaskTiaProperties } from './tia';
 import type { TaskRpaProperties } from './rpa';
@@ -22,6 +22,12 @@ export type ApiResponse<T = unknown> =
       data: never;
       error: ApiError;
     };
+
+export type JoinApiResponse = ApiResponse<{
+  user: User;
+  confirmEmail: boolean;
+  team: Team;
+}>;
 
 export type Role = 'owner' | 'member';
 

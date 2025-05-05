@@ -2,11 +2,10 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
 import { Button } from 'react-daisyui';
 import * as Yup from 'yup';
-import { Card, InputWithLabel } from '@/components/shared';
+import { Card } from '@/components/shared';
 import { User } from '@prisma/client';
 import FleetStatus from './FleetStatus';
 import { passwordPolicies } from '@/lib/common';
-import FleetConnectRequired from '../FleetConnectRequired';
 
 const schema = Yup.object().shape({
   id: Yup.string().required(),

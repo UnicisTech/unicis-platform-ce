@@ -20,6 +20,7 @@ import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useNodes } from '@/hooks/fleets/Nodes/useNodes';
+import { useEffect } from 'react';
 
 const TeamDashboard = ({
     csc_statuses,
@@ -38,6 +39,10 @@ const TeamDashboard = ({
   const { t } = useTranslation('common');
   const currentPlan = getCurrentPlan(teamSubscription);
   const { nodes, isLoading, isError } = useNodes(team.id, 'all');
+
+  useEffect(() => {
+    console.log("user", user)
+  }, [user])
   
   const {
     tasks,

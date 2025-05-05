@@ -10,11 +10,11 @@ import type { Team, User } from '@prisma/client';
 import { DistributedQuery } from '@/types/fleet';
 import FleetStatus from '../Fleet/FleetStatus';
 import CreateQuery from './CreateDistributor';
-import { CodeBlock } from '@atlaskit/code';
 import { useDistributors } from '@/hooks/fleets/distributors/useDistributors';
 import DeleteDistributor from './DeleteDistributorResult';
 import FormattedDate from '@/components/shared/Date';
 import StatusValue from '../StatusValue';
+import { CodeBlock } from '@/components/shared/CodeBlock';
 
 
 const Distributors = ({ team, user }: { team: Team, user: Partial<User> }) => {

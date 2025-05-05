@@ -7,7 +7,7 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
-import type { ApiResponse } from 'types';
+import type { ApiResponse, JoinApiResponse } from 'types';
 import * as Yup from 'yup';
 import TogglePasswordVisibility from '../shared/TogglePasswordVisibility';
 import AgreeMessage from './AgreeMessage';
@@ -68,9 +68,7 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
         }),
       });
 
-      const json = (await response.json()) as ApiResponse<
-        { user: User } & { confirmEmail: boolean } & { team: Team }
-      >;
+      const json = (await response.json()) as JoinApiResponse;
 
       try {
         await createFleetAccount(json.data.user.id, json.data.user.email, json.data.user.firstName, json.data.user.lastName, values.password)

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { Icon } from '@iconify/react';
-import { CodeBlock } from '@atlaskit/code';
 import { Loading, Error, CopyToClipboardButton } from '@/components/shared';
 import { Team, User } from '@prisma/client';
 import { useGetTeam } from '@/hooks/fleets/team/useGetTeam';
@@ -11,6 +10,7 @@ import env from '@/lib/env';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { useGetFleetSecret } from '@/hooks/fleets/connect/useGetFleetSecret';
 import PlatformTab from '../PlatformTab';
+import { CodeBlock } from '@/components/shared/CodeBlock';
 
 const AddAsset = ({
   visible,

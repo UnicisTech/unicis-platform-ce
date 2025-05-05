@@ -61,12 +61,13 @@ const FleetConnectRequired = ({ user, children }: FleetConnectRequiredProps) => 
 
     const createFleetAccount = useCreateFleetAccount();
     const accessFleetAccount = useAccessFleetAccount();
-    const { access, isLoading: assesVerificationLoading, isError: assesVerificationError } = useVerifyFleetAsses();
+    const { access, isLoading: assetsVerificationLoading, isError: assesVerificationError } = useVerifyFleetAsses();
 
     const formik = useFormik({
         initialValues: { email: user.email, id: user.id, firstName: user.firstName, lastName: user.lastName, fleetPassword: '', expiresOn: new Date(Date.now() + 1000 * 60 * 60 * 24).toTimeString() },
         validationSchema: schema,
         onSubmit: async (values) => {
+            console.log("values", values)
             if (!values.email || !values.firstName || !values.lastName || !values.fleetPassword || !values.id || !values.expiresOn) {
                 console.error('Invalid data from user');
                 return;
@@ -76,7 +77,7 @@ const FleetConnectRequired = ({ user, children }: FleetConnectRequiredProps) => 
                 await createFleetAccount(values.id, values.email, values.firstName, values.lastName, values.fleetPassword);
                 const { user, fleet_access } = await accessFleetAccount(values.email, values.fleetPassword);
                 Cookies.set('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA', fleet_access.secret_key, {
-                    sameSite: 'strict',   // Prevents cross-site requests from sending this cookie
+                    sameSite: 'strict',
                 });
                 if (fleet_access.secret_key) {
                     setIsAuthenticated(true);
@@ -115,13 +116,13 @@ const FleetConnectRequired = ({ user, children }: FleetConnectRequiredProps) => 
         return fleetUser?.roles.includes(role) ?? false;
     };
 
-    if (assesVerificationLoading) {
+    if (assetsVerificationLoading) {
         return <Loading />;
     }
 
     return (
         <>
-            {isAuthenticated && !assesVerificationLoading ? (
+            {isAuthenticated && !assetsVerificationLoading ? (
                 children({ isAuthenticated, fleetUser, hasRole, logout })
             ) : (
                 <div className="hero rounded ring-1 ring-gray-300 min-h-3.5">
@@ -129,15 +130,15 @@ const FleetConnectRequired = ({ user, children }: FleetConnectRequiredProps) => 
                         <div className="max-w-md">
                             <h1 className="text-2xl font-bold">Fleet Connection Is Required</h1>
                             <p className="py-6">Please connect to Fleet API to continue.</p>
-                            <Button color="neutral" loading={assesVerificationLoading} onClick={() => setVisible(!visible)} size="md">
+                            <Button color="neutral" loading={assetsVerificationLoading} onClick={() => setVisible(!visible)} size="md">
                                 {t('fleet-connect')}
                             </Button>
                         </div>
                     </div>
                 </div>
             )}
-            {!isAuthenticated && !assesVerificationLoading &&
-                <Modal open={!isAuthenticated && !visible && !assesVerificationLoading}>
+            {!isAuthenticated && !assetsVerificationLoading &&
+                <Modal open={!isAuthenticated && !visible && !assetsVerificationLoading}>
                     <Form<FormData> onSubmit={(data) => formik.handleSubmit()}>
                         {({ formProps }) => (
                             <form {...formProps}>
@@ -167,7 +168,6 @@ const FleetConnectRequired = ({ user, children }: FleetConnectRequiredProps) => 
                                         error={formik.touched.expiresOn ? formik.errors.expiresOn : undefined}
                                         onChange={formik.handleChange}
                                     />
-                        
                                     <span className="text-xs">{t('fleet-password-description')}</span>
                                 </Modal.Body>
                                 <Modal.Actions>

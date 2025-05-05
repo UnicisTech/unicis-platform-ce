@@ -11,9 +11,9 @@ import useCanAccess from '@/hooks/useCanAccess';
 import { useOrderFleetSecret } from '@/hooks/fleets/connect/useOrderFleetSecret';
 import { useGetFleetSecret } from '@/hooks/fleets/connect/useGetFleetSecret';
 import { useDeleteFleetSecret } from '@/hooks/fleets/connect/useDeleteFleetSecret';
-import { CodeBlock } from '@atlaskit/code';
 import { getSession } from 'next-auth/react';
 import Cookies from 'js-cookie';
+import { CodeBlock } from '@/components/shared/CodeBlock';
 
 
 const FleetSecret = (
@@ -44,20 +44,18 @@ const FleetSecret = (
   const handleOrderSecret = async () => {
     const session = await getSession();
     console.log(session)
-    try {
-      await createFleetAccount("c5d02a4d-7aa3-4289-99c5-ba1b89779b42", "vnezdd@gmail.com", "Vitalii", "Nezdvetskyi", "Ocean@25Navigator")
-        .then(async () => {
-          const { fleet_access } = await accessFleetAccount("vnezdd@gmail.com", "Ocean@25Navigator");
-          Cookies.set('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA', fleet_access.secret_key);
-          await createFleetTeam("Team", "6e00b85f-c53f-4129-82f2-a5f8a05c33aa")
-            .then(team => { console.log("team", team) }).catch(async (err) => {
-              console.log("err", err)
-            })
-        });
-    } catch (error) {
-      // await deleteUser({ id: json.data.user.id })
-      console.log("error", error)
-    }
+    // try {
+    //   await createFleetAccount("7258eda7-cd4d-49df-bccc-1ca0ab70c211", "vnezdd@gmail.com", "Vitalii", "Nezdvetskyi", "Ocean@25Navigator")
+    //     .then(async () => {
+    //       const { fleet_access } = await accessFleetAccount("vnezdd@gmail.com", "Ocean@25Navigator");
+    //       console.log("fleet_access", fleet_access)
+    //       Cookies.set('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA', fleet_access.secret_key);
+    //     });
+    // } catch (error) {
+    //   // await deleteUser({ id: json.data.user.id })
+    //   console.log("createFleetAccount error", error)
+    // }
+    
     try {
       if (!userId) {
         throw new Error('User ID is not defined');

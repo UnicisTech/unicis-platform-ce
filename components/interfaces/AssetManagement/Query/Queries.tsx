@@ -12,10 +12,10 @@ import { PLATFORMS } from '@/lib/fleet/constants';
 import FleetStatus from '../Fleet/FleetStatus';
 import CreateQuery from './CreateQuery';
 import { useQueries } from '@/hooks/fleets/queries/useQueries';
-import { CodeBlock } from '@atlaskit/code';
 import DeleteQuery from './DeleteQuery';
 import EditQuery from './EditQuery';
 import FleetConnectRequired from '../FleetConnectRequired';
+import { CodeBlock } from '@/components/shared/CodeBlock';
 
 
 const Querys = ({ team, user }: { team: Team, user: Partial<User> }) => {
