@@ -1,13 +1,13 @@
-import Badge from '@atlaskit/badge';
+import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 
 const TransferIs = ({ value }: { value: string }) => (
   <div>
     <span className="font-bold">
       Based on the answers given above, the transfer is
     </span>
-    <Badge appearance={value === 'NOT PERMITTED' ? 'important' : 'added'}>
+    <DaisyBadge appearance={value === 'NOT PERMITTED' ? 'important' : 'added'}>
       {value}
-    </Badge>
+    </DaisyBadge>
   </div>
 );
 

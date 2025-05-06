@@ -1,22 +1,31 @@
 import { ReactNode } from 'react';
-import SectionMessage, { Appearance } from '@atlaskit/section-message';
+
+export type AlertAppearance = 'info' | 'success' | 'warning' | 'error';
+
+const appearanceMap: Record<AlertAppearance, string> = {
+  info: 'alert-info',
+  success: 'alert-success',
+  warning: 'alert-warning',
+  error: 'alert-error',
+};
 
 const Message = ({
   title,
-  appearance,
+  appearance = 'info',
   text,
   isBold,
 }: {
   title?: string;
-  appearance?: Appearance | undefined;
+  appearance?: AlertAppearance;
   text: ReactNode;
   isBold?: boolean;
 }) => {
   return (
-    <div style={{ margin: '5px' }}>
-      <SectionMessage title={title} appearance={appearance}>
-        <p className={`${isBold ? 'font-bold' : ''}`}>{text}</p>
-      </SectionMessage>
+    <div className={`alert ${appearanceMap[appearance]} alert-soft shadow-sm rounded-xl my-2`}>
+      <div className="flex flex-col">
+        {title && <span className="font-semibold">{title}</span>}
+        <span className={isBold ? 'font-bold' : ''}>{text}</span>
+      </div>
     </div>
   );
 };

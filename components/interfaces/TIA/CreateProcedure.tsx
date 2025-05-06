@@ -22,7 +22,6 @@ import Form, {
 import { DatePicker } from '@atlaskit/datetime-picker';
 import TextArea from '@atlaskit/textarea';
 import TextField from '@atlaskit/textfield';
-import Badge from '@atlaskit/badge';
 import { RadioGroup } from '@atlaskit/radio';
 import Range from '@atlaskit/range';
 import {
@@ -50,6 +49,7 @@ import {
   getTiaRisks,
   getProblematicLawfulAccesses,
 } from '@/lib/tia';
+import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 
 const TransferIs = () => {
   const formData = useFormState({
@@ -63,9 +63,9 @@ const TransferIs = () => {
       <span className="font-bold">
         Based on the answers given above, the transfer is
       </span>
-      <Badge appearance={value === 'NOT PERMITTED' ? 'important' : 'added'}>
+      <DaisyBadge appearance={value === 'NOT PERMITTED' ? 'important' : 'added'}>
         {value}
-      </Badge>
+      </DaisyBadge>
     </div>
   );
 };
@@ -960,9 +960,9 @@ const ThirdStage = ({ procedure }: { procedure: any }) => {
 
           {isDataIssueInvestigationProblematic && (
             <p>
-              <Badge appearance="removed">
+              <DaisyBadge appearance="removed">
                 Problematic Lawful Access expected!
-              </Badge>
+              </DaisyBadge>
             </p>
           )}
         </>
@@ -1176,9 +1176,9 @@ const ThirdStage = ({ procedure }: { procedure: any }) => {
 
           {isPassMassSurveillanceConnectionProblematic && (
             <p>
-              <Badge appearance="removed">
+              <DaisyBadge appearance="removed">
                 Problematic Lawful Access expected!
-              </Badge>
+              </DaisyBadge>
             </p>
           )}
         </>
@@ -1322,9 +1322,9 @@ const ThirdStage = ({ procedure }: { procedure: any }) => {
 
           {isAssessmentProduceReportProblematic && (
             <p>
-              <Badge appearance="removed">
+              <DaisyBadge appearance="removed">
                 Problematic Lawful Access expected!
-              </Badge>
+              </DaisyBadge>
             </p>
           )}
         </>
@@ -1499,9 +1499,9 @@ const FourthStage = ({ procedure }: { procedure: any }) => {
         <span>
           ... a problematic targeted lawful access concerning the data at issue?
           {procedure[2].DataIssueInvestigation === '2' ? (
-            <Badge appearance="added">Yes</Badge>
+            <DaisyBadge appearance="added">Yes</DaisyBadge>
           ) : (
-            <Badge appearance="removed">No</Badge>
+            <DaisyBadge appearance="removed">No</DaisyBadge>
           )}
         </span>
       </p>
@@ -1510,9 +1510,9 @@ const FourthStage = ({ procedure }: { procedure: any }) => {
         <span>
           ... a problematic mass surveillance involving the data at issue?
           {procedure[2].PassMassSurveillanceConnection === '4' ? (
-            <Badge appearance="added">Yes</Badge>
+            <DaisyBadge appearance="added">Yes</DaisyBadge>
           ) : (
-            <Badge appearance="removed">No</Badge>
+            <DaisyBadge appearance="removed">No</DaisyBadge>
           )}
         </span>
       </p>
@@ -1522,9 +1522,9 @@ const FourthStage = ({ procedure }: { procedure: any }) => {
           ... a problematic self-reporting obligation (according to the
           Importer):
           {procedure[2].AssessmentProduceReport === '4' ? (
-            <Badge appearance="added">Yes</Badge>
+            <DaisyBadge appearance="added">Yes</DaisyBadge>
           ) : (
-            <Badge appearance="removed">No</Badge>
+            <DaisyBadge appearance="removed">No</DaisyBadge>
           )}
         </span>
       </p>
@@ -1649,9 +1649,9 @@ const FifthStage = ({ procedure }: { procedure: any }) => {
           is:
         </span>
         {isTranferPermitted(procedure) ? (
-          <Badge appearance="added">PERMITTED</Badge>
+          <DaisyBadge appearance="added">PERMITTED</DaisyBadge>
         ) : (
-          <Badge appearance="removed">NOT PERMITTED</Badge>
+          <DaisyBadge appearance="removed">NOT PERMITTED</DaisyBadge>
         )}
       </p>
     </>

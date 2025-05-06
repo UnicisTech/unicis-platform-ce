@@ -13,7 +13,6 @@ import {
 } from '@atlaskit/form';
 import Range from '@atlaskit/range';
 import { RadioGroup } from '@atlaskit/radio';
-import Badge from '@atlaskit/badge';
 import type { TiaOption } from 'types';
 import { WithoutRing } from 'sharedStyles';
 import { Message } from '@/components/shared/atlaskit';
@@ -26,6 +25,7 @@ import {
   fieldPropsMapping,
   questions,
 } from '@/components/defaultLanding/data/configs/tia';
+import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 
 interface FormBodyProps {
   stage: number;
@@ -815,9 +815,9 @@ const СreateFormBody = ({
 
                 {procedure[2].DataIssueInvestigation === '2' ? (
                   <p>
-                    <Badge appearance="removed">
+                    <DaisyBadge appearance="removed">
                       Problematic Lawful Access expected!
-                    </Badge>
+                    </DaisyBadge>
                   </p>
                 ) : null}
               </>
@@ -1055,9 +1055,9 @@ const СreateFormBody = ({
 
                 {procedure[2].PassMassSurveillanceConnection === '4' ? (
                   <p>
-                    <Badge appearance="removed">
+                    <DaisyBadge appearance="removed">
                       Problematic Lawful Access expected!
-                    </Badge>
+                    </DaisyBadge>
                   </p>
                 ) : null}
               </>
@@ -1217,9 +1217,9 @@ const СreateFormBody = ({
 
                 {procedure[2].AssessmentProduceReport === '4' ? (
                   <p>
-                    <Badge appearance="removed">
+                    <DaisyBadge appearance="removed">
                       Problematic Lawful Access expected!
-                    </Badge>
+                    </DaisyBadge>
                   </p>
                 ) : null}
               </>
@@ -1402,9 +1402,9 @@ const СreateFormBody = ({
                 ... a problematic targeted lawful access concerning the data at
                 issue?
                 {procedure[2].DataIssueInvestigation === '2' ? (
-                  <Badge appearance="added">Yes</Badge>
+                  <DaisyBadge appearance="added">Yes</DaisyBadge>
                 ) : (
-                  <Badge appearance="removed">No</Badge>
+                  <DaisyBadge appearance="removed">No</DaisyBadge>
                 )}
               </span>
             </p>
@@ -1412,9 +1412,9 @@ const СreateFormBody = ({
               <span>
                 ... a problematic mass surveillance involving the data at issue?
                 {procedure[2].PassMassSurveillanceConnection === '4' ? (
-                  <Badge appearance="added">Yes</Badge>
+                  <DaisyBadge appearance="added">Yes</DaisyBadge>
                 ) : (
-                  <Badge appearance="removed">No</Badge>
+                  <DaisyBadge appearance="removed">No</DaisyBadge>
                 )}
               </span>
             </p>
@@ -1423,9 +1423,9 @@ const СreateFormBody = ({
                 ... a problematic self-reporting obligation (according to the
                 Importer):
                 {procedure[2].AssessmentProduceReport === '4' ? (
-                  <Badge appearance="added">Yes</Badge>
+                  <DaisyBadge appearance="added">Yes</DaisyBadge>
                 ) : (
-                  <Badge appearance="removed">No</Badge>
+                  <DaisyBadge appearance="removed">No</DaisyBadge>
                 )}
               </span>
             </p>
@@ -1564,9 +1564,9 @@ const СreateFormBody = ({
                 transfer is:
               </span>
               {isPermitted ? (
-                <Badge appearance="added">PERMITTED</Badge>
+                <DaisyBadge appearance="added">PERMITTED</DaisyBadge>
               ) : (
-                <Badge appearance="removed">NOT PERMITTED</Badge>
+                <DaisyBadge appearance="removed">NOT PERMITTED</DaisyBadge>
               )}
             </p>
           </>

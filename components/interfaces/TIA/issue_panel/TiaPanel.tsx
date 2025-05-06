@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { SimpleTag as Tag } from '@atlaskit/tag';
-import Badge from '@atlaskit/badge';
 import { IssuePanelContainer } from 'sharedStyles';
 import {
   config,
@@ -12,6 +11,7 @@ import { Field } from '@/components/shared/atlaskit';
 import type { Task } from '@prisma/client';
 import { TiaProcedureInterface } from 'types';
 import RiskLevel from '../RiskLevel';
+import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 
 const TiaPanel = ({ task }: { task: Task }) => {
   const properties = task?.properties as any;
@@ -565,9 +565,9 @@ const TiaPanel = ({ task }: { task: Task }) => {
               label="In view of the above and applicable data protection laws, the transfer is"
               value={
                 isPermitted ? (
-                  <Badge appearance="added">PERMITTED</Badge>
+                  <DaisyBadge appearance="added">PERMITTED</DaisyBadge>
                 ) : (
-                  <Badge appearance="removed">NOT PERMITTED</Badge>
+                  <DaisyBadge appearance="removed">NOT PERMITTED</DaisyBadge>
                 )
               }
             />
