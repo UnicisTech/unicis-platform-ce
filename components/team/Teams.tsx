@@ -6,13 +6,13 @@ import { useTranslation } from 'next-i18next';
 import useCanAccess from 'hooks/useCanAccess';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import { useRouter } from 'next/router';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
 import { WithLoadingAndError } from '@/components/shared';
 import CreateTeam from './CreateTeam';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 const Teams = () => {
   const router = useRouter();
@@ -63,14 +63,14 @@ const Teams = () => {
               </p>
             </div>
             {canAccess('team', ['create']) && (
-              <Button
+              <DaisyButton
                 color="primary"
                 variant="outline"
                 size="md"
                 onClick={() => setCreateTeamVisible(!createTeamVisible)}
               >
                 {t('create-team')}
-              </Button>
+              </DaisyButton>
             )}
           </div>
           <table className="text-sm table w-full border-b dark:border-base-200">
@@ -98,7 +98,7 @@ const Teams = () => {
                       <td>{team._count.members}</td>
                       <td>{new Date(team.createdAt).toDateString()}</td>
                       <td>
-                        <Button
+                        <DaisyButton
                           variant="outline"
                           size="xs"
                           color="error"
@@ -108,7 +108,7 @@ const Teams = () => {
                           }}
                         >
                           {t('leave-team')}
-                        </Button>
+                        </DaisyButton>
                       </td>
                     </tr>
                   );
@@ -176,7 +176,7 @@ const Teams = () => {
                         {new Date(team.createdAt).toDateString()}
                       </td>
                       <td className="px-6 py-3">
-                        <Button
+                        <DaisyButton
                           variant="outline"
                           size="xs"
                           color="error"
@@ -186,7 +186,7 @@ const Teams = () => {
                           }}
                         >
                           {t('leave-team')}
-                        </Button>
+                        </DaisyButton>
                       </td>
                     </tr>
                   );

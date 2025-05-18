@@ -1,5 +1,4 @@
 import toast from 'react-hot-toast';
-import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect, useCallback } from 'react';
 import { ArrowUpCircleIcon } from '@heroicons/react/24/outline';
@@ -8,6 +7,7 @@ import type { ApiResponse, UserReturned } from 'types';
 import type { User } from '@prisma/client';
 import { Card } from '@/components/shared';
 import { defaultHeaders } from '@/lib/common';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 const UploadAvatar = ({ user }: { user: Partial<User> }) => {
   const { t } = useTranslation('common');
@@ -159,7 +159,7 @@ const UploadAvatar = ({ user }: { user: Partial<User> }) => {
           </div>
         </Card.Body>
         <Card.Footer>
-          <Button
+          <DaisyButton
             type="submit"
             color="primary"
             size="md"
@@ -167,7 +167,7 @@ const UploadAvatar = ({ user }: { user: Partial<User> }) => {
             loading={loading}
           >
             {t('save-changes')}
-          </Button>
+          </DaisyButton>
         </Card.Footer>
       </Card>
     </form>

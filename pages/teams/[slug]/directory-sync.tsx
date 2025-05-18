@@ -11,7 +11,6 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { Button } from 'react-daisyui';
 import { toast } from 'react-hot-toast';
 import type { ApiResponse, NextPageWithLayout } from 'types';
 import env from '@/lib/env';
@@ -19,6 +18,7 @@ import { getSession } from '@/lib/session';
 import { getTeamMember } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import { inferSSRProps } from '@/lib/inferSSRProps';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const DirectorySync: NextPageWithLayout<
   inferSSRProps<typeof getServerSideProps>
@@ -84,23 +84,23 @@ const DirectorySync: NextPageWithLayout<
           <div className="mb-3 flex items-center justify-between">
             <p className="text-sm">{t('provision')}</p>
             {directory === null ? (
-              <Button
+              <DaisyButton
                 onClick={() => setVisible(!visible)}
                 variant="outline"
                 color="primary"
                 size="md"
               >
                 {t('configure')}
-              </Button>
+              </DaisyButton>
             ) : (
-              <Button
+              <DaisyButton
                 onClick={() => setConfirmationDialogVisible(true)}
                 variant="outline"
                 color="error"
                 size="md"
               >
                 {t('remove')}
-              </Button>
+              </DaisyButton>
             )}
           </div>
           <Directory team={team} />

@@ -15,9 +15,9 @@ import {
   DeleteRpa,
   CreateProcedureTest,
 } from '@/components/interfaces/RPA';
-import { Button } from 'react-daisyui';
 import { PerPageSelector } from '@/components/shared';
 import useRpaCreation from 'hooks/useRpaCreation';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const RpaDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -91,7 +91,7 @@ const RpaDashboard: NextPageWithLayout<
             <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
           )}
           {canAccess('task', ['update']) && (
-            <Button
+            <DaisyButton
               size="sm"
               color="primary"
               variant="outline"
@@ -100,7 +100,7 @@ const RpaDashboard: NextPageWithLayout<
               }}
             >
               {t('create')}
-            </Button>
+            </DaisyButton>
           )}
         </div>
       </div>

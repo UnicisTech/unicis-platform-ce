@@ -3,9 +3,9 @@ import type { FormikConfig } from 'formik';
 import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { Button } from 'react-daisyui';
 import type { WebookFormSchema } from 'types';
 import * as Yup from 'yup';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 import Modal from '../shared/Modal';
 import EventTypes from './EventTypes';
 
@@ -86,7 +86,7 @@ const Form = ({
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button
+          <DaisyButton
             type="button"
             variant="outline"
             onClick={() => {
@@ -95,8 +95,8 @@ const Form = ({
             size="md"
           >
             {t('close')}
-          </Button>
-          <Button
+          </DaisyButton>
+          <DaisyButton
             type="submit"
             color="primary"
             loading={formik.isSubmitting}
@@ -104,7 +104,7 @@ const Form = ({
             size="md"
           >
             {t('create-webhook')}
-          </Button>
+          </DaisyButton>
         </Modal.Footer>
       </form>
     </Modal>

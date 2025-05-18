@@ -6,11 +6,11 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import type { ApiResponse, TeamProperties, TeamWithSubscription } from 'types';
 import * as Yup from 'yup';
 import useSubscription from 'hooks/useSubscription';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 const CSCSettings = ({ team }: { team: TeamWithSubscription }) => {
   console.log('CSCSettings team', team);
@@ -86,7 +86,7 @@ const CSCSettings = ({ team }: { team: TeamWithSubscription }) => {
                     );
                   })}
                 </select>
-                <Button
+                <DaisyButton
                   type="submit"
                   color="primary"
                   loading={formik.isSubmitting}
@@ -94,7 +94,7 @@ const CSCSettings = ({ team }: { team: TeamWithSubscription }) => {
                   size="md"
                 >
                   {t('choose')}
-                </Button>
+                </DaisyButton>
               </div>
             </div>
           </Card.Body>

@@ -6,11 +6,12 @@ import { Team } from '@prisma/client';
 import { useFormik } from 'formik';
 import useDirectory from 'hooks/useDirectory';
 import { useTranslation } from 'next-i18next';
-import { Button, Modal } from 'react-daisyui';
+import { Modal } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import useSWR from 'swr';
 import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 const CreateDirectory = ({
   visible,
@@ -66,7 +67,7 @@ const CreateDirectory = ({
 
   return (
     <Modal open={visible}>
-      <Button
+      <DaisyButton
         type="button"
         size="sm"
         shape="circle"
@@ -75,7 +76,7 @@ const CreateDirectory = ({
         aria-label={t('close')}
       >
         ✕
-      </Button>
+      </DaisyButton>
       <form onSubmit={formik.handleSubmit} method="POST">
         <Modal.Header className="font-bold">
           {t('create-directory-connection')}
@@ -114,7 +115,7 @@ const CreateDirectory = ({
           </div>
         </Modal.Body>
         <Modal.Actions>
-          <Button
+          <DaisyButton
             type="submit"
             color="primary"
             loading={formik.isSubmitting}
@@ -122,7 +123,7 @@ const CreateDirectory = ({
             size="md"
           >
             {t('create-directory')}
-          </Button>
+          </DaisyButton>
         </Modal.Actions>
       </form>
     </Modal>

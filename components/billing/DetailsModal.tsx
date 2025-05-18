@@ -3,13 +3,13 @@ import type { Invitation, Team } from '@prisma/client';
 import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
 import Modal from '../shared/Modal';
 import { InputWithLabel, WithLabel } from '../shared';
 import countries from '../defaultLanding/data/configs/countries';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 const DetailsModal = ({
   selectedSubscription,
@@ -148,7 +148,7 @@ const DetailsModal = ({
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button
+          <DaisyButton
             type="button"
             variant="outline"
             onClick={() => {
@@ -157,8 +157,8 @@ const DetailsModal = ({
             size="md"
           >
             {t('close')}
-          </Button>
-          <Button
+          </DaisyButton>
+          <DaisyButton
             type="submit"
             color="primary"
             loading={formik.isSubmitting}
@@ -166,7 +166,7 @@ const DetailsModal = ({
             size="md"
           >
             {t('send')}
-          </Button>
+          </DaisyButton>
         </Modal.Footer>
       </form>
     </Modal>

@@ -4,10 +4,10 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { Button } from 'react-daisyui';
 import { toast } from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 const ResetPassword = () => {
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -89,7 +89,7 @@ const ResetPassword = () => {
           />
         </div>
         <div className="mt-4">
-          <Button
+          <DaisyButton
             type="submit"
             color="primary"
             loading={submitting}
@@ -98,7 +98,7 @@ const ResetPassword = () => {
             size="md"
           >
             {t('reset-password')}
-          </Button>
+          </DaisyButton>
         </div>
       </form>
     </div>

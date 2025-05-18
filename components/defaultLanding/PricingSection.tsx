@@ -1,6 +1,7 @@
 import { CheckIcon } from '@heroicons/react/20/solid';
 import { useTranslation } from 'next-i18next';
-import { Button, Card } from 'react-daisyui';
+import { Card } from 'react-daisyui';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 import plans from './data/pricing.json';
 
@@ -48,13 +49,13 @@ const PricingSection = () => {
                     </div>
                   </Card.Body>
                   <Card.Actions className="justify-center m-2">
-                    <Button
+                    <DaisyButton
                       color="primary"
                       className="md:w-full w-3/4 rounded-md"
                       size="md"
                     >
                       {t('buy-now')}
-                    </Button>
+                    </DaisyButton>
                   </Card.Actions>
                 </Card>
               );

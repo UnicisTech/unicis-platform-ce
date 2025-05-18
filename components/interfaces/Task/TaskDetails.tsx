@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import TextField from '@atlaskit/textfield';
 import Select, { ValueType } from '@atlaskit/select';
-import { Button } from 'react-daisyui';
 import type { ApiResponse } from 'types';
 import type { Task, Team } from '@prisma/client';
 import statuses from '@/components/defaultLanding/data/statuses.json';
@@ -17,6 +16,7 @@ import useCanAccess from 'hooks/useCanAccess';
 
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 interface FormData {
@@ -187,7 +187,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
               </Field>
               <FormFooter>
                 {canAccess('task', ['update']) && (
-                  <Button
+                  <DaisyButton
                     color="primary"
                     variant="outline"
                     size="sm"
@@ -196,7 +196,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                     loading={submitting}
                   >
                     {t('save-changes')}
-                  </Button>
+                  </DaisyButton>
                 )}
               </FormFooter>
             </div>

@@ -7,7 +7,6 @@ import * as Yup from 'yup';
 import Link from 'next/link';
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
-import { Button } from 'react-daisyui';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React, { type ReactElement, useEffect, useState, useRef } from 'react';
@@ -27,6 +26,7 @@ import TogglePasswordVisibility from '@/components/shared/TogglePasswordVisibili
 import AgreeMessage from '@/components/auth/AgreeMessage';
 import GoogleReCAPTCHA from '@/components/shared/GoogleReCAPTCHA';
 import ReCAPTCHA from 'react-google-recaptcha';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 interface Message {
   text: string | null;
@@ -187,7 +187,7 @@ const Login: NextPageWithLayout<
               />
             </div>
             <div className="mt-3 space-y-3">
-              <Button
+              <DaisyButton
                 type="submit"
                 color="primary"
                 loading={formik.isSubmitting}
@@ -196,7 +196,7 @@ const Login: NextPageWithLayout<
                 size="md"
               >
                 {t('sign-in')}
-              </Button>
+              </DaisyButton>
               <AgreeMessage text="sign-in" />
             </div>
           </form>

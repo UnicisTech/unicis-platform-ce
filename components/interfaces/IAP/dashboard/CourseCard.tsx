@@ -2,9 +2,9 @@ import { useRouter } from 'next/router';
 import { SimpleTag as Tag } from '@atlaskit/tag';
 import { Category } from '@prisma/client';
 import { Card } from 'react-daisyui';
-import { Button } from 'react-daisyui';
 import { TeamCourseWithProgress } from 'types';
 import ProgressBadge from '../shared/ProgressBadge';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const CourseCard = ({
   teamCourse,
@@ -50,7 +50,7 @@ const CourseCard = ({
           ) : null}
         </div>
         <Card.Actions className="justify-end">
-          <Button onClick={openCourse}>Open</Button>
+          <DaisyButton onClick={openCourse}>Open</DaisyButton>
         </Card.Actions>
       </Card.Body>
     </Card>

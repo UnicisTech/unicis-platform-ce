@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
-import { Button } from 'react-daisyui';
 import Form, { Field, FormFooter } from '@atlaskit/form';
 import { useTranslation } from 'next-i18next';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -36,9 +36,9 @@ const CreateCommentForm = ({ handleCreate }: CreateCommentFormProps) => {
             )}
           </Field>
           <FormFooter align="start">
-            <Button size="sm" color="primary" variant="outline" type="submit">
+            <DaisyButton size="sm" color="primary" variant="outline" type="submit">
               {t('save')}
-            </Button>
+            </DaisyButton>
           </FormFooter>
         </form>
       )}

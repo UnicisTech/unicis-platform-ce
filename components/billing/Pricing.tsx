@@ -1,8 +1,8 @@
-import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { SubscriptionStatus, Plan } from '@prisma/client';
 import React from 'react';
 import { TeamWithSubscription } from 'types';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 interface PricingProps {
   team: TeamWithSubscription;
@@ -78,7 +78,7 @@ const Pricing = ({
               </div>
               <div className="flex justify-center flex-col gap-2 border-gray-200 px-8 h-10">
                 {currentPlan === plan.id ? (
-                  <Button
+                  <DaisyButton
                     key={plan.id}
                     variant="outline"
                     size="md"
@@ -87,9 +87,9 @@ const Pricing = ({
                     className="rounded-full"
                   >
                     {t('current')}
-                  </Button>
+                  </DaisyButton>
                 ) : (
-                  <Button
+                  <DaisyButton
                     key={plan.id}
                     variant="outline"
                     size="md"
@@ -102,7 +102,7 @@ const Pricing = ({
                     }}
                   >
                     {t('order')}
-                  </Button>
+                  </DaisyButton>
                 )}
               </div>
               <ul className="mb-10 mt-5 space-y-4 px-8">

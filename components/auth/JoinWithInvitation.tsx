@@ -10,7 +10,6 @@ import { useFormik } from 'formik';
 import useInvitation from 'hooks/useInvitation';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
@@ -19,6 +18,7 @@ import { useRef, useState } from 'react';
 import AgreeMessage from './AgreeMessage';
 import GoogleReCAPTCHA from '../shared/GoogleReCAPTCHA';
 import ReCAPTCHA from 'react-google-recaptcha';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 interface JoinWithInvitationProps {
   inviteToken: string;
@@ -140,7 +140,7 @@ const JoinWithInvitation = ({
           siteKey={recaptchaSiteKey}
         />
         <div className="space-y-3">
-          <Button
+          <DaisyButton
             type="submit"
             color="primary"
             loading={formik.isSubmitting}
@@ -149,7 +149,7 @@ const JoinWithInvitation = ({
             size="md"
           >
             {t('create-account')}
-          </Button>
+          </DaisyButton>
           <AgreeMessage text="create-account" />
         </div>
       </form>

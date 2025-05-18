@@ -1,4 +1,5 @@
-import { Button, Modal as DModal } from 'react-daisyui';
+import { Modal as DModal } from 'react-daisyui';
+import DaisyButton from './daisyUI/DaisyButton';
 
 interface ModalProps {
   open: boolean;
@@ -14,7 +15,7 @@ interface BodyProps {
 const Modal = ({ open, close, children }: ModalProps) => {
   return (
     <DModal open={open}>
-      <Button
+      <DaisyButton
         type="button"
         size="sm"
         shape="circle"
@@ -23,7 +24,7 @@ const Modal = ({ open, close, children }: ModalProps) => {
         aria-label="close"
       >
         x
-      </Button>
+      </DaisyButton>
       <div>{children}</div>
     </DModal>
   );

@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import type { TaskWithRmRisk } from 'types';
-import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import { TailwindTableWrapper } from 'sharedStyles';
@@ -12,6 +11,7 @@ import {
   getInitials,
   riskValueToLabel,
 } from '@/lib/rm';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const verticalTextStyles =
   'px-1.5 py-1.5 whitespace-nowrap align-middle text-center [writing-mode:vertical-rl] rotate-180';
@@ -154,7 +154,7 @@ const RisksTable = ({
                     {canAccess('task', ['update']) && (
                       <td className="px-1.5 py-1.5">
                         <div className="btn-group">
-                          <Button
+                          <DaisyButton
                             size="sm"
                             variant="outline"
                             onClick={() => {
@@ -162,9 +162,9 @@ const RisksTable = ({
                             }}
                           >
                             {t('edit-task')}
-                          </Button>
+                          </DaisyButton>
 
-                          <Button
+                          <DaisyButton
                             size="sm"
                             variant="outline"
                             onClick={() => {
@@ -172,7 +172,7 @@ const RisksTable = ({
                             }}
                           >
                             {t('delete')}
-                          </Button>
+                          </DaisyButton>
                         </div>
                       </td>
                     )}

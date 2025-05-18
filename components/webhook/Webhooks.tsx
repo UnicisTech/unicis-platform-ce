@@ -4,7 +4,6 @@ import { Team } from '@prisma/client';
 import useWebhooks from 'hooks/useWebhooks';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import type { EndpointOut } from 'svix';
 
@@ -13,6 +12,7 @@ import EditWebhook from './EditWebhook';
 import { defaultHeaders } from '@/lib/common';
 import type { ApiResponse } from 'types';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 const Webhooks = ({ team }: { team: Team }) => {
   const { t } = useTranslation('common');
@@ -67,14 +67,14 @@ const Webhooks = ({ team }: { team: Team }) => {
               Webhooks are used to send notifications to your external apps.
             </p>
           </div>
-          <Button
+          <DaisyButton
             color="primary"
             variant="outline"
             size="md"
             onClick={() => setCreateWebhookVisible(!createWebhookVisible)}
           >
             {t('add-webhook')}
-          </Button>
+          </DaisyButton>
         </div>
         {webhooks?.length === 0 ? (
           <EmptyState title={t('no-webhook-title')} />
@@ -98,7 +98,7 @@ const Webhooks = ({ team }: { team: Team }) => {
                       <td>{webhook.createdAt.toLocaleString()}</td>
                       <td>
                         <div className="flex space-x-2">
-                          <Button
+                          <DaisyButton
                             size="xs"
                             variant="outline"
                             onClick={() => {
@@ -107,8 +107,8 @@ const Webhooks = ({ team }: { team: Team }) => {
                             }}
                           >
                             {t('edit')}
-                          </Button>
-                          <Button
+                          </DaisyButton>
+                          <DaisyButton
                             size="xs"
                             color="error"
                             variant="outline"
@@ -118,7 +118,7 @@ const Webhooks = ({ team }: { team: Team }) => {
                             }}
                           >
                             {t('remove')}
-                          </Button>
+                          </DaisyButton>
                         </div>
                       </td>
                     </tr>

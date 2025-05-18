@@ -1,5 +1,4 @@
 import { useState, useMemo, useCallback } from 'react';
-import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import useCanAccess from 'hooks/useCanAccess';
@@ -9,6 +8,7 @@ import { EmptyState, Error } from '@/components/shared';
 import { TaskProperties, TaskWithPiaRisk } from 'types';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const Dashboard = () => {
   const { canAccess, isLoading } = useCanAccess();
@@ -66,7 +66,7 @@ const Dashboard = () => {
         </div>
         <div className="flex justify-end items-center my-1">
           {canAccess('task', ['update']) && (
-            <Button
+            <DaisyButton
               size="sm"
               color="primary"
               variant="outline"
@@ -75,7 +75,7 @@ const Dashboard = () => {
               }}
             >
               {t('create')}
-            </Button>
+            </DaisyButton>
           )}
         </div>
       </div>

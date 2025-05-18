@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Loading, Error, Card } from '@/components/shared';
-import { Button } from 'react-daisyui';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import useTask from 'hooks/useTask';
 import {
@@ -41,6 +40,7 @@ import {
 } from '@/components/interfaces/PIA';
 import Breadcrumb from '../../Breadcrumb';
 import useRpaCreation from 'hooks/useRpaCreation';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const TaskById = ({
   csc_statuses,
@@ -107,7 +107,7 @@ const TaskById = ({
             heading="Processing Activities panel"
             button={
               canAccess('task', ['update']) ? (
-                <Button
+                <DaisyButton
                   size="sm"
                   color="primary"
                   variant="outline"
@@ -116,7 +116,7 @@ const TaskById = ({
                   }}
                 >
                   {t('create-rpa')}
-                </Button>
+                </DaisyButton>
               ) : null
             }
           >
@@ -132,7 +132,7 @@ const TaskById = ({
             heading="Transfer Impact Assessment panel"
             button={
               canAccess('task', ['update']) ? (
-                <Button
+                <DaisyButton
                   size="sm"
                   color="primary"
                   variant="outline"
@@ -141,7 +141,7 @@ const TaskById = ({
                   }}
                 >
                   {t('create-tia')}
-                </Button>
+                </DaisyButton>
               ) : null
             }
           >
@@ -170,7 +170,7 @@ const TaskById = ({
           heading="Privacy Impact Assessment panel"
           button={
             canAccess('task', ['update']) ? (
-              <Button
+              <DaisyButton
                 size="sm"
                 color="primary"
                 variant="outline"
@@ -179,7 +179,7 @@ const TaskById = ({
                 }}
               >
                 {t('create-pia')}
-              </Button>
+              </DaisyButton>
             ) : null
           }
         >
@@ -193,7 +193,7 @@ const TaskById = ({
           heading="RM panel"
           button={
             canAccess('task', ['update']) ? (
-              <Button
+              <DaisyButton
                 size="sm"
                 color="primary"
                 variant="outline"
@@ -202,7 +202,7 @@ const TaskById = ({
                 }}
               >
                 {t('rm-register-risk-record')}
-              </Button>
+              </DaisyButton>
             ) : null
           }
         >

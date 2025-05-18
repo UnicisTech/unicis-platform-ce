@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Button, Card } from 'react-daisyui';
+import { Card } from 'react-daisyui';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import clsx from 'clsx';
@@ -12,6 +12,7 @@ import type {
   ChatbotResponseReturned,
 } from 'types';
 import { useTranslation } from 'next-i18next';
+import DaisyButton from '../daisyUI/DaisyButton';
 
 const AiChat = () => {
   const [visible, setVisible] = useState(false);
@@ -69,7 +70,7 @@ const AiChat = () => {
 
   return (
     <>
-      {/* Button with transition */}
+      {/* DaisyButton with transition */}
       <div
         className={clsx(
           'fixed right-4 bottom-4 z-50 transition-all duration-300 transform',
@@ -78,7 +79,7 @@ const AiChat = () => {
             : 'opacity-100 translate-y-0'
         )}
       >
-        <Button onClick={togglePopup}>
+        <DaisyButton onClick={togglePopup}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -94,7 +95,7 @@ const AiChat = () => {
             />
           </svg>
           {t('ai-chatbot')}
-        </Button>
+        </DaisyButton>
       </div>
 
       {/* Popup with Chat */}

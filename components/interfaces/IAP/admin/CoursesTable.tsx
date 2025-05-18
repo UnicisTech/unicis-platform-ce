@@ -1,4 +1,3 @@
-import { Button } from 'react-daisyui';
 import EditIcon from '@atlaskit/icon/glyph/edit';
 import TrashIcon from '@atlaskit/icon/glyph/trash';
 import GraphLineIcon from '@atlaskit/icon/glyph/graph-line';
@@ -7,6 +6,7 @@ import useCanAccess from 'hooks/useCanAccess';
 import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
 import { getCourseStatus } from '../services/helpers';
 import { StatusBadge } from '@/components/shared';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const statuses = {
   todo: <StatusBadge label="To do" value="todo" />,
@@ -59,39 +59,39 @@ const CoursesTable = ({
                 <td>
                   <div className="flex items-center gap-2 flex-wrap">
                     {canAccess('iap_course', ['create']) && (
-                      <Button
+                      <DaisyButton
                         size="sm"
                         shape="square"
                         onClick={() => editHandler(teamCourse)}
                         disabled={Boolean(teamCourse.progress.length)}
                       >
                         <EditIcon label="Edit course" />
-                      </Button>
+                      </DaisyButton>
                     )}
                     {canAccess('iap_course', ['delete']) && (
-                      <Button
+                      <DaisyButton
                         size="sm"
                         shape="square"
                         color="error"
                         onClick={() => deleteHandler(teamCourse)}
                       >
                         <TrashIcon label="Delete course" />
-                      </Button>
+                      </DaisyButton>
                     )}
-                    <Button
+                    <DaisyButton
                       size="sm"
                       shape="square"
                       onClick={() => completionHandler(teamCourse)}
                     >
                       <GraphLineIcon label="Completion results" />
-                    </Button>
-                    <Button
+                    </DaisyButton>
+                    <DaisyButton
                       size="sm"
                       shape="square"
                       onClick={() => statusHandler(teamCourse)}
                     >
                       <TableIcon label="Status results" />
-                    </Button>
+                    </DaisyButton>
                   </div>
                 </td>
               </tr>

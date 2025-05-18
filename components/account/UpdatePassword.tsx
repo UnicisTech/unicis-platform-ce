@@ -1,11 +1,11 @@
 import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 
 import { Card, InputWithLabel } from '@/components/shared';
 import { defaultHeaders, validatePassword } from '@/lib/common';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 const schema = Yup.object().shape({
   currentPassword: Yup.string().required(),
@@ -86,7 +86,7 @@ const UpdatePassword = () => {
           </Card.Body>
           <Card.Footer>
             <div className="flex justify-end">
-              <Button
+              <DaisyButton
                 type="submit"
                 color="primary"
                 loading={formik.isSubmitting}
@@ -94,7 +94,7 @@ const UpdatePassword = () => {
                 size="md"
               >
                 {t('change-password')}
-              </Button>
+              </DaisyButton>
             </div>
           </Card.Footer>
         </Card>

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Button } from 'react-daisyui';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -16,6 +15,7 @@ import statuses from '@/components/defaultLanding/data/statuses.json';
 import { WithLoadingAndError } from '@/components/shared';
 import type { Task, Team } from '@prisma/client';
 import { CreateTask, DeleteTask } from '@/components/interfaces/Task';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const Tasks = ({ team }: { team: Team }) => {
   const router = useRouter();
@@ -76,7 +76,7 @@ const Tasks = ({ team }: { team: Team }) => {
               <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
             )}
             {canAccess('task', ['create']) && (
-              <Button
+              <DaisyButton
                 size="sm"
                 color="primary"
                 variant="outline"
@@ -85,7 +85,7 @@ const Tasks = ({ team }: { team: Team }) => {
                 }}
               >
                 {t('create')}
-              </Button>
+              </DaisyButton>
             )}
           </div>
         </div>
@@ -136,7 +136,7 @@ const Tasks = ({ team }: { team: Team }) => {
                   <td className="px-6 py-3">
                     <div className=" btn-group">
                       {canAccess('task', ['update']) && (
-                        <Button
+                        <DaisyButton
                           className="dark:text-gray-100"
                           size="sm"
                           variant="outline"
@@ -148,10 +148,10 @@ const Tasks = ({ team }: { team: Team }) => {
                           }}
                         >
                           {t('edit-task')}
-                        </Button>
+                        </DaisyButton>
                       )}
                       {canAccess('task', ['delete']) && (
-                        <Button
+                        <DaisyButton
                           className="dark:text-gray-100"
                           size="sm"
                           variant="outline"
@@ -160,7 +160,7 @@ const Tasks = ({ team }: { team: Team }) => {
                           }}
                         >
                           {t('delete')}
-                        </Button>
+                        </DaisyButton>
                       )}
                     </div>
                   </td>

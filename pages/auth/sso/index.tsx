@@ -9,11 +9,11 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { type ReactElement } from 'react';
-import { Button } from 'react-daisyui';
 import { toast } from 'react-hot-toast';
 import type { NextPageWithLayout } from 'types';
 import * as Yup from 'yup';
 import Head from 'next/head';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const SSO: NextPageWithLayout = () => {
   const { t } = useTranslation('common');
@@ -73,7 +73,7 @@ const SSO: NextPageWithLayout = () => {
               error={formik.touched.slug ? formik.errors.slug : undefined}
               onChange={formik.handleChange}
             />
-            <Button
+            <DaisyButton
               type="submit"
               color="primary"
               loading={formik.isSubmitting}
@@ -82,7 +82,7 @@ const SSO: NextPageWithLayout = () => {
               size="md"
             >
               {t('continue-with-saml-sso')}
-            </Button>
+            </DaisyButton>
           </div>
         </form>
         <div className="divider"></div>

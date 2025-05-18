@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -12,6 +11,7 @@ import { Loading, Error } from '@/components/shared';
 import { defaultHeaders } from '@/lib/common';
 import { validateAnswer } from '../services/passCourseService';
 import { TeamCourseWithProgress, ApiResponse } from 'types';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
   const course = teamCourse.course;
@@ -124,7 +124,7 @@ const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
       </div>
       {!started ? (
         <div className="flex justify-center">
-          <Button onClick={() => setStarted(true)}>Start</Button>
+          <DaisyButton onClick={() => setStarted(true)}>Start</DaisyButton>
         </div>
       ) : (
         <div className="flex justify-center">
@@ -140,9 +140,9 @@ const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
             />
             <div className="flex justify-end">
               {isLastQuestion ? (
-                <Button onClick={saveHandler}>{t('save')}</Button>
+                <DaisyButton onClick={saveHandler}>{t('save')}</DaisyButton>
               ) : (
-                <Button onClick={nextHandler}>{t('next')}</Button>
+                <DaisyButton onClick={nextHandler}>{t('next')}</DaisyButton>
               )}
             </div>
           </div>

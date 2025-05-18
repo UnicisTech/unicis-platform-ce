@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import ControlBlock from './ControlBlock';
@@ -17,6 +16,7 @@ import useCanAccess from 'hooks/useCanAccess';
 import ControlBlockViewOnly from './ControlBlockViewOnly';
 import { getCscControlsProp } from '@/lib/csc';
 import type { ISO } from 'types';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const CscPanel = ({
   task,
@@ -179,7 +179,7 @@ const CscPanel = ({
             }}
           >
             <div style={{ margin: '0 5px' }}>
-              <Button
+              <DaisyButton
                 color="primary"
                 variant="outline"
                 size="sm"
@@ -187,12 +187,12 @@ const CscPanel = ({
                 active={isDeleting || isSaving}
               >
                 + Add Control
-              </Button>
+              </DaisyButton>
             </div>
             <div style={{ margin: '0 5px' }}>
-              <Button variant="outline" size="sm" onClick={deleteControls}>
+              <DaisyButton variant="outline" size="sm" onClick={deleteControls}>
                 {t('remove')}
-              </Button>
+              </DaisyButton>
             </div>
           </div>
         </>

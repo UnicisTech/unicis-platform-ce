@@ -1,12 +1,13 @@
 import React from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { Modal, Button } from 'react-daisyui';
+import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import type { ApiResponse } from 'types';
 import useTasks from 'hooks/useTasks';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 //TODO: move visible to parent component
 const DeleteTask = ({
@@ -57,15 +58,15 @@ const DeleteTask = ({
           </div>
         </Modal.Body>
         <Modal.Actions>
-          <Button
+          <DaisyButton
             type="submit"
             color="error"
             loading={formik.isSubmitting}
             active={formik.dirty}
           >
             {t('delete')}
-          </Button>
-          <Button
+          </DaisyButton>
+          <DaisyButton
             type="button"
             variant="outline"
             onClick={() => {
@@ -73,7 +74,7 @@ const DeleteTask = ({
             }}
           >
             {t('close')}
-          </Button>
+          </DaisyButton>
         </Modal.Actions>
       </form>
     </Modal>

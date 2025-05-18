@@ -4,10 +4,10 @@ import { Invitation, Team } from '@prisma/client';
 import useInvitations from 'hooks/useInvitations';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 const PendingInvitations = ({ team }: { team: Team }) => {
   const [selectedInvitation, setSelectedInvitation] =
@@ -90,7 +90,7 @@ const PendingInvitations = ({ team }: { team: Team }) => {
                 <td>{invitation.role}</td>
                 <td>{new Date(invitation.expires).toDateString()}</td>
                 <td>
-                  <Button
+                  <DaisyButton
                     size="sm"
                     color="error"
                     variant="outline"
@@ -100,7 +100,7 @@ const PendingInvitations = ({ team }: { team: Team }) => {
                     }}
                   >
                     {t('remove')}
-                  </Button>
+                  </DaisyButton>
                 </td>
               </tr>
             );

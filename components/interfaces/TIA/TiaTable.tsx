@@ -2,11 +2,11 @@ import React from 'react';
 import Link from 'next/link';
 import { SimpleTag as Tag } from '@atlaskit/tag';
 import type { TaskWithTiaProcedure } from 'types';
-import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import useCanAccess from 'hooks/useCanAccess';
 import { TailwindTableWrapper } from 'sharedStyles';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const TiaTable = ({
   slug,
@@ -117,7 +117,7 @@ const TiaTable = ({
                   {canAccess('task', ['update']) && (
                     <td className="px-1.5 py-1.5">
                       <div className="btn-group">
-                        <Button
+                        <DaisyButton
                           size="sm"
                           variant="outline"
                           onClick={() => {
@@ -125,9 +125,9 @@ const TiaTable = ({
                           }}
                         >
                           {t('edit-task')}
-                        </Button>
+                        </DaisyButton>
 
-                        <Button
+                        <DaisyButton
                           size="sm"
                           variant="outline"
                           onClick={() => {
@@ -135,7 +135,7 @@ const TiaTable = ({
                           }}
                         >
                           {t('delete')}
-                        </Button>
+                        </DaisyButton>
                       </div>
                     </td>
                   )}

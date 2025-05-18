@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react';
-import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import useCanAccess from 'hooks/useCanAccess';
 import { Category, Team } from '@prisma/client';
@@ -12,6 +11,7 @@ import {
   CreateCategory,
 } from '@/components/interfaces/IAP';
 import StatusResults from './StatusResults';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 interface IapDashboardProps {
   categories: Category[];
@@ -93,7 +93,7 @@ const AdminPage = ({
         <div className="flex justify-end items-center my-1">
           {canAccess('iap_category', ['create']) && (
             <div className="mx-1.5 my-0">
-              <Button
+              <DaisyButton
                 size="sm"
                 color="primary"
                 variant="outline"
@@ -102,12 +102,12 @@ const AdminPage = ({
                 }}
               >
                 {t('create-category')}
-              </Button>
+              </DaisyButton>
             </div>
           )}
           {canAccess('iap_course', ['create']) && (
             <div className="mx-1.5 my-0">
-              <Button
+              <DaisyButton
                 size="sm"
                 color="primary"
                 variant="outline"
@@ -116,7 +116,7 @@ const AdminPage = ({
                 }}
               >
                 {t('create-course')}
-              </Button>
+              </DaisyButton>
             </div>
           )}
         </div>

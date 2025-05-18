@@ -15,8 +15,8 @@ import {
   DeleteTia,
   CreateProcedure as CreateTiaProcedure,
 } from '@/components/interfaces/TIA';
-import { Button } from 'react-daisyui';
 import { PerPageSelector } from '@/components/shared';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const TiaDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -85,7 +85,7 @@ const TiaDashboard: NextPageWithLayout<
             <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
           )}
           {canAccess('task', ['update']) && (
-            <Button
+            <DaisyButton
               size="sm"
               color="primary"
               variant="outline"
@@ -94,7 +94,7 @@ const TiaDashboard: NextPageWithLayout<
               }}
             >
               {t('create')}
-            </Button>
+            </DaisyButton>
           )}
         </div>
       </div>

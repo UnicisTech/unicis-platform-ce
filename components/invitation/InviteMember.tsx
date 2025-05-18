@@ -5,10 +5,11 @@ import { useFormik } from 'formik';
 import useInvitations from 'hooks/useInvitations';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { Button, Input } from 'react-daisyui';
+import { Input } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 import Modal from '../shared/Modal';
 
 const InviteMember = ({
@@ -88,7 +89,7 @@ const InviteMember = ({
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button
+          <DaisyButton
             type="button"
             variant="outline"
             onClick={() => {
@@ -97,8 +98,8 @@ const InviteMember = ({
             size="md"
           >
             {t('close')}
-          </Button>
-          <Button
+          </DaisyButton>
+          <DaisyButton
             type="submit"
             color="primary"
             loading={formik.isSubmitting}
@@ -106,7 +107,7 @@ const InviteMember = ({
             size="md"
           >
             {t('send-invite')}
-          </Button>
+          </DaisyButton>
         </Modal.Footer>
       </form>
     </Modal>

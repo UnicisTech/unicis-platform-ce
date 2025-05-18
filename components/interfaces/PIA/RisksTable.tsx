@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import statuses from '@/components/defaultLanding/data/statuses.json';
 import type { TaskWithPiaRisk } from 'types';
-import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import { TailwindTableWrapper } from 'sharedStyles';
@@ -12,6 +11,7 @@ import {
   riskProbabilityPoints,
   riskSecurityPoints,
 } from '@/components/defaultLanding/data/configs/pia';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const calculatePercentage = (input: number): number => {
   return (input / 16) * 100;
@@ -173,7 +173,7 @@ const RisksTable = ({
                     {canAccess('task', ['update']) && (
                       <td className="px-1.5 py-1.5">
                         <div className="btn-group">
-                          <Button
+                          <DaisyButton
                             size="sm"
                             variant="outline"
                             onClick={() => {
@@ -181,9 +181,9 @@ const RisksTable = ({
                             }}
                           >
                             {t('edit-task')}
-                          </Button>
+                          </DaisyButton>
 
-                          <Button
+                          <DaisyButton
                             size="sm"
                             variant="outline"
                             onClick={() => {
@@ -191,7 +191,7 @@ const RisksTable = ({
                             }}
                           >
                             {t('delete')}
-                          </Button>
+                          </DaisyButton>
                         </div>
                       </td>
                     )}

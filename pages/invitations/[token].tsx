@@ -9,10 +9,10 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import type { ReactElement } from 'react';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import type { ApiResponse, NextPageWithLayout } from 'types';
 import { signOut } from 'next-auth/react';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const AcceptTeamInvitation: NextPageWithLayout = () => {
   const { status, data } = useSession();
@@ -65,7 +65,7 @@ const AcceptTeamInvitation: NextPageWithLayout = () => {
           {status === 'unauthenticated' && (
             <>
               <h3 className="text-center">{t('invite-create-account')}</h3>
-              <Button
+              <DaisyButton
                 variant="outline"
                 fullWidth
                 onClick={() => {
@@ -74,8 +74,8 @@ const AcceptTeamInvitation: NextPageWithLayout = () => {
                 size="md"
               >
                 {t('create-a-new-account')}
-              </Button>
-              <Button
+              </DaisyButton>
+              <DaisyButton
                 variant="outline"
                 fullWidth
                 onClick={() => {
@@ -84,7 +84,7 @@ const AcceptTeamInvitation: NextPageWithLayout = () => {
                 size="md"
               >
                 {t('login')}
-              </Button>
+              </DaisyButton>
             </>
           )}
 
@@ -92,14 +92,14 @@ const AcceptTeamInvitation: NextPageWithLayout = () => {
           {status === 'authenticated' && emailMatch && (
             <>
               <h3 className="text-center">{t('accept-invite')}</h3>
-              <Button
+              <DaisyButton
                 onClick={acceptInvitation}
                 fullWidth
                 color="primary"
                 size="md"
               >
                 {t('accept-invitation')}
-              </Button>
+              </DaisyButton>
             </>
           )}
 
@@ -112,7 +112,7 @@ const AcceptTeamInvitation: NextPageWithLayout = () => {
                 sign in or create a new account using the same email address
                 used in the invitation.
               </p>
-              <Button
+              <DaisyButton
                 fullWidth
                 color="error"
                 size="md"
@@ -122,7 +122,7 @@ const AcceptTeamInvitation: NextPageWithLayout = () => {
                 }}
               >
                 Sign out
-              </Button>
+              </DaisyButton>
             </>
           )}
         </div>

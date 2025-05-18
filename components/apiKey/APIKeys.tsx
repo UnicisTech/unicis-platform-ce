@@ -5,10 +5,10 @@ import fetcher from '@/lib/fetcher';
 import type { ApiKey, Team } from '@prisma/client';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
-import { Button } from 'react-daisyui';
 import { toast } from 'react-hot-toast';
 import useSWR from 'swr';
 import type { ApiResponse } from 'types';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 import NewAPIKey from './NewAPIKey';
 
 interface APIKeysProps {
@@ -66,14 +66,14 @@ const APIKeys = ({ team }: APIKeysProps) => {
               API keys allow you to authenticate with the API.
             </p>
           </div>
-          <Button
+          <DaisyButton
             color="primary"
             variant="outline"
             size="md"
             onClick={() => setCreateModalVisible(true)}
           >
             {t('create-api-key')}
-          </Button>
+          </DaisyButton>
         </div>
         {apiKeys.length === 0 ? (
           <EmptyState
@@ -101,7 +101,7 @@ const APIKeys = ({ team }: APIKeysProps) => {
                       </td>
                       <td>{new Date(apiKey.createdAt).toLocaleDateString()}</td>
                       <td>
-                        <Button
+                        <DaisyButton
                           size="xs"
                           color="error"
                           variant="outline"
@@ -111,7 +111,7 @@ const APIKeys = ({ team }: APIKeysProps) => {
                           }}
                         >
                           {t('revoke')}
-                        </Button>
+                        </DaisyButton>
                       </td>
                     </tr>
                   );

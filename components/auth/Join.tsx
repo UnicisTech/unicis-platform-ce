@@ -5,7 +5,6 @@ import type { User } from '@prisma/client';
 import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
@@ -13,6 +12,7 @@ import TogglePasswordVisibility from '../shared/TogglePasswordVisibility';
 import AgreeMessage from './AgreeMessage';
 import GoogleReCAPTCHA from '../shared/GoogleReCAPTCHA';
 import ReCAPTCHA from 'react-google-recaptcha';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 interface JoinProps {
   recaptchaSiteKey: string | null;
@@ -143,7 +143,7 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
         />
       </div>
       <div className="mt-3 space-y-3">
-        <Button
+        <DaisyButton
           type="submit"
           color="primary"
           loading={formik.isSubmitting}
@@ -152,7 +152,7 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
           size="md"
         >
           {t('create-account')}
-        </Button>
+        </DaisyButton>
         <AgreeMessage text="create-account" />
       </div>
     </form>

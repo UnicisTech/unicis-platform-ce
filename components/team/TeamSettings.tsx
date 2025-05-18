@@ -5,12 +5,12 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
 
 import { AccessControl } from '../shared/AccessControl';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 const TeamSettings = ({ team }: { team: Team }) => {
   const router = useRouter();
@@ -85,7 +85,7 @@ const TeamSettings = ({ team }: { team: Team }) => {
           <AccessControl resource="team" actions={['update']}>
             <Card.Footer>
               <div className="flex justify-end">
-                <Button
+                <DaisyButton
                   type="submit"
                   color="primary"
                   loading={formik.isSubmitting}
@@ -93,7 +93,7 @@ const TeamSettings = ({ team }: { team: Team }) => {
                   size="md"
                 >
                   {t('save-changes')}
-                </Button>
+                </DaisyButton>
               </div>
             </Card.Footer>
           </AccessControl>

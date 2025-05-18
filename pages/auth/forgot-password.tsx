@@ -11,13 +11,13 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRef, type ReactElement, useState } from 'react';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import type { ApiResponse, NextPageWithLayout } from 'types';
 import * as Yup from 'yup';
 import GoogleReCAPTCHA from '@/components/shared/GoogleReCAPTCHA';
 import ReCAPTCHA from 'react-google-recaptcha';
 import env from '@/lib/env';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const ForgotPassword: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -81,7 +81,7 @@ const ForgotPassword: NextPageWithLayout<
             />
           </div>
           <div className="mt-4">
-            <Button
+            <DaisyButton
               type="submit"
               color="primary"
               loading={formik.isSubmitting}
@@ -90,7 +90,7 @@ const ForgotPassword: NextPageWithLayout<
               size="md"
             >
               {t('email-password-reset-link')}
-            </Button>
+            </DaisyButton>
           </div>
         </form>
       </div>

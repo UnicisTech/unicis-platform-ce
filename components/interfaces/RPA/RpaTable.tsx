@@ -3,13 +3,13 @@ import Link from 'next/link';
 import { SimpleTag as Tag } from '@atlaskit/tag';
 import statuses from '@/components/defaultLanding/data/statuses.json';
 import type { TaskWithRpaProcedure } from 'types';
-import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import { TailwindTableWrapper } from 'sharedStyles';
 import { StatusBadge } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
 import Badge from '@/components/shared/Badge';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const RpaTable = ({
   slug,
@@ -119,7 +119,7 @@ const RpaTable = ({
                   {canAccess('task', ['update']) && (
                     <td className="px-1.5 py-1.5">
                       <div className="btn-group">
-                        <Button
+                        <DaisyButton
                           size="sm"
                           variant="outline"
                           onClick={() => {
@@ -127,9 +127,9 @@ const RpaTable = ({
                           }}
                         >
                           {t('edit-task')}
-                        </Button>
+                        </DaisyButton>
 
-                        <Button
+                        <DaisyButton
                           size="sm"
                           variant="outline"
                           onClick={() => {
@@ -137,7 +137,7 @@ const RpaTable = ({
                           }}
                         >
                           {t('delete')}
-                        </Button>
+                        </DaisyButton>
                       </div>
                     </td>
                   )}
