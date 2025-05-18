@@ -2,13 +2,13 @@ import React, { useState, useCallback } from 'react';
 import { getAxiosError } from '@/lib/common';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
 import Form from '@atlaskit/form';
 import type { ApiResponse, TaskWithRpaProcedure } from 'types';
 import type { Task } from '@prisma/client';
+import DaisyModal from '@/components/shared/daisyUI/DaisyModal';
 
 const DeleteRisk = ({
   visible,
@@ -60,22 +60,22 @@ const DeleteRisk = ({
   }, []);
 
   return (
-    <Modal open={visible}>
+    <DaisyModal open={visible}>
       <Form onSubmit={() => {}}>
         {({ formProps }) => (
           <form {...formProps}>
-            <Modal.Header className="font-bold">
+            <DaisyModal.Header className="font-bold">
               Remove Risk Management
-            </Modal.Header>
-            <Modal.Body>
+            </DaisyModal.Header>
+            <DaisyModal.Body>
               <div style={{ margin: '1.5rem 0' }}>
                 <p>
                   Are you sure you want to remove Risk Management record from
                   the task? Your task will not be removed.
                 </p>
               </div>
-            </Modal.Body>
-            <Modal.Actions>
+            </DaisyModal.Body>
+            <DaisyModal.Actions>
               <AtlaskitButton
                 appearance="default"
                 onClick={() => closeHandler()}
@@ -90,11 +90,11 @@ const DeleteRisk = ({
               >
                 {t('delete')}
               </LoadingButton>
-            </Modal.Actions>
+            </DaisyModal.Actions>
           </form>
         )}
       </Form>
-    </Modal>
+    </DaisyModal>
   );
 };
 

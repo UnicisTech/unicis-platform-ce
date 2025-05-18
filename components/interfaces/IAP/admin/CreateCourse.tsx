@@ -7,7 +7,6 @@ import React, {
   SetStateAction,
 } from 'react';
 import toast from 'react-hot-toast';
-import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
 import Select, { ValueType } from '@atlaskit/select';
@@ -41,6 +40,7 @@ import {
 } from '../services/createCourseService';
 import { Category, CourseContentType, Team } from '@prisma/client';
 import { MDEditor } from '@/components/shared/uiw/Markdown';
+import DaisyModal from '@/components/shared/daisyUI/DaisyModal';
 
 const CreateCourse = ({
   teams,
@@ -205,16 +205,16 @@ const CreateCourse = ({
   }, [selectedCourse]);
 
   return (
-    <Modal open={visible}>
+    <DaisyModal open={visible}>
       <Form onSubmit={onSubmit}>
         {(formData) => {
           const { formProps, getState, setFieldValue, reset } = formData;
           return (
             <form {...formProps}>
-              <Modal.Header className="font-bold">
+              <DaisyModal.Header className="font-bold">
                 {t('create-course-title')}
-              </Modal.Header>
-              <Modal.Body>
+              </DaisyModal.Header>
+              <DaisyModal.Body>
                 {stage === 0 && (
                   <>
                     <Field
@@ -654,8 +654,8 @@ const CreateCourse = ({
                     </div>
                   </>
                 )}
-              </Modal.Body>
-              <Modal.Actions>
+              </DaisyModal.Body>
+              <DaisyModal.Actions>
                 <AtlaskitButton appearance="default" onClick={closeHandler}>
                   {t('close')}
                 </AtlaskitButton>
@@ -699,12 +699,12 @@ const CreateCourse = ({
                 >
                   {stage === 0 ? t('next') : t('save')}
                 </LoadingButton>
-              </Modal.Actions>
+              </DaisyModal.Actions>
             </form>
           );
         }}
       </Form>
-    </Modal>
+    </DaisyModal>
   );
 };
 

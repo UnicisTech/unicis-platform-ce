@@ -10,6 +10,7 @@ import { StatusBadge } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
 import Badge from '@/components/shared/Badge';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 
 const RpaTable = ({
   slug,
@@ -101,9 +102,9 @@ const RpaTable = ({
                   <td className="px-1.5 py-1.5">
                     <>
                       {task.properties.rpa_procedure[3].datatransfer ? (
-                        <Badge color="success">Enabled</Badge>
+                        <DaisyBadge color="success">Enabled</DaisyBadge>
                       ) : (
-                        <Badge color="error">Disabled</Badge>
+                        <DaisyBadge color="error">Disabled</DaisyBadge>
                       )}
                     </>
                   </td>

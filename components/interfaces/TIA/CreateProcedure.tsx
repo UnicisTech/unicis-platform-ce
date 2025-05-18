@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { format } from 'date-fns';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
@@ -50,6 +49,7 @@ import {
   getProblematicLawfulAccesses,
 } from '@/lib/tia';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
+import DaisyModal from '@/components/shared/daisyUI/DaisyModal';
 
 const TransferIs = () => {
   const formData = useFormState({
@@ -192,18 +192,18 @@ const CreateProcedure = ({
   }, [task]);
 
   return (
-    <Modal open={visible}>
+    <DaisyModal open={visible}>
       <Form onSubmit={onSubmit}>
         {({ formProps }) => (
           <form {...formProps}>
-            <Modal.Header className="font-bold">
+            <DaisyModal.Header className="font-bold">
               <h3>{t('tia')}</h3>
               {stage === 0 && `Select a task`}
               {stage > 0 && (
                 <StageTracker headers={headers} currentStage={stage - 1} />
               )}
-            </Modal.Header>
-            <Modal.Body>
+            </DaisyModal.Header>
+            <DaisyModal.Body>
               {stage === 0 && tasks && (
                 <TaskPickerFormBody
                   tasks={tasks.filter(
@@ -222,8 +222,8 @@ const CreateProcedure = ({
               {stage === 3 && <ThirdStage procedure={procedure} />}
               {stage === 4 && <FourthStage procedure={procedure} />}
               {stage === 5 && <FifthStage procedure={procedure} />}
-            </Modal.Body>
-            <Modal.Actions>
+            </DaisyModal.Body>
+            <DaisyModal.Actions>
               <AtlaskitButton
                 appearance="default"
                 onClick={() => setVisible(false)}
@@ -251,11 +251,11 @@ const CreateProcedure = ({
               >
                 {stage < 5 ? t('next') : t('save')}
               </LoadingButton>
-            </Modal.Actions>
+            </DaisyModal.Actions>
           </form>
         )}
       </Form>
-    </Modal>
+    </DaisyModal>
   );
 };
 

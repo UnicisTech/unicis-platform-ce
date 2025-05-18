@@ -7,10 +7,9 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState, type ReactElement, useEffect } from 'react';
-import type { ComponentStatus } from 'react-daisyui/dist/types';
 import { toast } from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import { ApiResponse, NextPageWithLayout } from 'types';
+import { ApiResponse, ComponentStatus, NextPageWithLayout } from 'types';
 import * as Yup from 'yup';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 

@@ -1,10 +1,10 @@
 import React, { useCallback, MouseEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import type { Attachment } from 'types';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import DaisyModal from '@/components/shared/daisyUI/DaisyModal';
 
 const DeleteAttachment = ({
   visible,
@@ -51,16 +51,16 @@ const DeleteAttachment = ({
   );
 
   return (
-    <Modal open={visible}>
-      <Modal.Header className="font-bold">
+    <DaisyModal open={visible}>
+      <DaisyModal.Header className="font-bold">
         {t('attachment-delete')}
-      </Modal.Header>
-      <Modal.Body>
+      </DaisyModal.Header>
+      <DaisyModal.Body>
         <div className="mt-2 flex flex-col space-y-4">
           <p>Attachment will be deleted.</p>
         </div>
-      </Modal.Body>
-      <Modal.Actions>
+      </DaisyModal.Body>
+      <DaisyModal.Actions>
         <DaisyButton color="error" onClick={deleteHandler} loading={isLoading}>
           {t('delete')}
         </DaisyButton>
@@ -73,8 +73,8 @@ const DeleteAttachment = ({
         >
           {t('close')}
         </DaisyButton>
-      </Modal.Actions>
-    </Modal>
+      </DaisyModal.Actions>
+    </DaisyModal>
   );
 };
 

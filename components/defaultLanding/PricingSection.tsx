@@ -1,7 +1,7 @@
 import { CheckIcon } from '@heroicons/react/20/solid';
 import { useTranslation } from 'next-i18next';
-import { Card } from 'react-daisyui';
 import DaisyButton from '../shared/daisyUI/DaisyButton';
+import DaisyCard from '../shared/daisyUI/DaisyCard';
 
 import plans from './data/pricing.json';
 
@@ -21,14 +21,14 @@ const PricingSection = () => {
           <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
             {plans.map((plan, index) => {
               return (
-                <Card
+                <DaisyCard
                   key={`plan-${index}`}
                   className="rounded-md dark:border-gray-200 border border-gray-300"
                 >
-                  <Card.Body>
-                    <Card.Title tag="h2">
+                  <DaisyCard.Body>
+                    <DaisyCard.Title tag="h2">
                       {plan.currency} {plan.amount} / {plan.duration}
-                    </Card.Title>
+                    </DaisyCard.Title>
                     <p>{plan.description}</p>
                     <div className="mt-5">
                       <ul className="flex flex-col space-y-2">
@@ -47,8 +47,8 @@ const PricingSection = () => {
                         )}
                       </ul>
                     </div>
-                  </Card.Body>
-                  <Card.Actions className="justify-center m-2">
+                  </DaisyCard.Body>
+                  <DaisyCard.Actions className="justify-center m-2">
                     <DaisyButton
                       color="primary"
                       className="md:w-full w-3/4 rounded-md"
@@ -56,8 +56,8 @@ const PricingSection = () => {
                     >
                       {t('buy-now')}
                     </DaisyButton>
-                  </Card.Actions>
-                </Card>
+                  </DaisyCard.Actions>
+                </DaisyCard>
               );
             })}
           </div>

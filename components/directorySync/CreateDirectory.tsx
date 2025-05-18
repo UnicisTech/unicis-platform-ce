@@ -6,12 +6,12 @@ import { Team } from '@prisma/client';
 import { useFormik } from 'formik';
 import useDirectory from 'hooks/useDirectory';
 import { useTranslation } from 'next-i18next';
-import { Modal } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import useSWR from 'swr';
 import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
 import DaisyButton from '../shared/daisyUI/DaisyButton';
+import DaisyModal from '../shared/daisyUI/DaisyModal';
 
 const CreateDirectory = ({
   visible,
@@ -66,7 +66,7 @@ const CreateDirectory = ({
   const providers = data.data;
 
   return (
-    <Modal open={visible}>
+    <DaisyModal open={visible}>
       <DaisyButton
         type="button"
         size="sm"
@@ -78,10 +78,10 @@ const CreateDirectory = ({
         ✕
       </DaisyButton>
       <form onSubmit={formik.handleSubmit} method="POST">
-        <Modal.Header className="font-bold">
+        <DaisyModal.Header className="font-bold">
           {t('create-directory-connection')}
-        </Modal.Header>
-        <Modal.Body>
+        </DaisyModal.Header>
+        <DaisyModal.Body>
           <div className="mt-2 flex flex-col space-y-2">
             <p>{t('create-directory-message')}</p>
             <InputWithLabel
@@ -113,8 +113,8 @@ const CreateDirectory = ({
               </select>
             </div>
           </div>
-        </Modal.Body>
-        <Modal.Actions>
+        </DaisyModal.Body>
+        <DaisyModal.Actions>
           <DaisyButton
             type="submit"
             color="primary"
@@ -124,9 +124,9 @@ const CreateDirectory = ({
           >
             {t('create-directory')}
           </DaisyButton>
-        </Modal.Actions>
+        </DaisyModal.Actions>
       </form>
-    </Modal>
+    </DaisyModal>
   );
 };
 

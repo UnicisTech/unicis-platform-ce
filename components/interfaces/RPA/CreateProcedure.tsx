@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { format } from 'date-fns';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
@@ -45,6 +44,7 @@ import {
 } from 'types';
 import type { Task } from '@prisma/client';
 import { Error, Loading } from '@/components/shared';
+import DaisyModal from '@/components/shared/daisyUI/DaisyModal';
 
 const createProceduresQueue = (procedure: any): ProcedureQueueItem[] => {
   const result: ProcedureQueueItem[] = [];
@@ -174,18 +174,18 @@ const CreateProcedure = ({
   }, [task]);
 
   return (
-    <Modal open={visible}>
+    <DaisyModal open={visible}>
       <Form onSubmit={onSubmit}>
         {({ formProps }) => (
           <form {...formProps}>
-            <Modal.Header className="font-bold">
+            <DaisyModal.Header className="font-bold">
               <h3>{t('rpa-activities')}</h3>
               {stage === 0 && `Select a task`}
               {stage > 0 && (
                 <StageTracker headers={headers} currentStage={stage - 1} />
               )}
-            </Modal.Header>
-            <Modal.Body>
+            </DaisyModal.Header>
+            <DaisyModal.Body>
               {stage === 0 && tasks && (
                 <TaskPickerFormBody
                   tasks={tasks.filter(
@@ -207,8 +207,8 @@ const CreateProcedure = ({
               {stage === 4 && <FourthStage procedure={procedure} />}
               {stage === 5 && <FifthStage procedure={procedure} />}
               {stage === 6 && <SixthStage procedure={procedure} />}
-            </Modal.Body>
-            <Modal.Actions>
+            </DaisyModal.Body>
+            <DaisyModal.Actions>
               <AtlaskitButton
                 appearance="default"
                 onClick={() => setVisible(false)}
@@ -229,11 +229,11 @@ const CreateProcedure = ({
               >
                 {stage < 2 ? t('next') : t('save')}
               </LoadingButton>
-            </Modal.Actions>
+            </DaisyModal.Actions>
           </form>
         )}
       </Form>
-    </Modal>
+    </DaisyModal>
   );
 };
 

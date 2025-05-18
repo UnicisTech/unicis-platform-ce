@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
-import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import AtlaskitButton from '@atlaskit/button';
 import type { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
 import CompletionResultsChart from './CompletionResultsChart';
 import ProgressBadge from '../shared/ProgressBadge';
 import { findMemberProgressInTeamCourse } from '../services/helpers';
+import DaisyModal from '@/components/shared/daisyUI/DaisyModal';
 
 const getMemberProgress = (
   teamCourse: TeamCourseWithProgress,
@@ -31,11 +31,11 @@ const CompletionResults = ({
   }, []);
 
   return (
-    <Modal open={visible} className="w-10/12 max-w-5xl">
-      <Modal.Header className="font-bold">
+    <DaisyModal open={visible} className="w-10/12 max-w-5xl">
+      <DaisyModal.Header className="font-bold">
         {`Course Completion Results - ${teamCourse.course.name}`}
-      </Modal.Header>
-      <Modal.Body>
+      </DaisyModal.Header>
+      <DaisyModal.Body>
         <div className="grid grid-cols-2 gap-1">
           <div className="col-span-1 h-[300px]">
             <CompletionResultsChart
@@ -82,13 +82,13 @@ const CompletionResults = ({
             </table>
           </div>
         </div>
-      </Modal.Body>
-      <Modal.Actions>
+      </DaisyModal.Body>
+      <DaisyModal.Actions>
         <AtlaskitButton appearance="default" onClick={() => closeHandler()}>
           {t('close')}
         </AtlaskitButton>
-      </Modal.Actions>
-    </Modal>
+      </DaisyModal.Actions>
+    </DaisyModal>
   );
 };
 

@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import { SimpleTag as Tag } from '@atlaskit/tag';
 import { Category } from '@prisma/client';
-import { Card } from 'react-daisyui';
 import { TeamCourseWithProgress } from 'types';
 import ProgressBadge from '../shared/ProgressBadge';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import DaisyCard from '@/components/shared/daisyUI/DaisyCard';
 
 const CourseCard = ({
   teamCourse,
@@ -22,7 +22,7 @@ const CourseCard = ({
   const course = teamCourse.course;
 
   return (
-    <Card
+    <DaisyCard
       className="w-[350px] m-4 hover:shadow-lg hover:shadow-black/25 dark:bg-gray-800"
       bordered
     >
@@ -33,8 +33,8 @@ const CourseCard = ({
           alt="Course Thumbnail"
         />
       </div>
-      <Card.Body>
-        <Card.Title tag="h2">{course.name}</Card.Title>
+      <DaisyCard.Body>
+        <DaisyCard.Title tag="h2">{course.name}</DaisyCard.Title>
         <div className="flex justify-start">
           <Tag
             text={
@@ -49,11 +49,11 @@ const CourseCard = ({
             <p>Estimated: {course.estimatedTime} minutes</p>
           ) : null}
         </div>
-        <Card.Actions className="justify-end">
+        <DaisyCard.Actions className="justify-end">
           <DaisyButton onClick={openCourse}>Open</DaisyButton>
-        </Card.Actions>
-      </Card.Body>
-    </Card>
+        </DaisyCard.Actions>
+      </DaisyCard.Body>
+    </DaisyCard>
   );
 };
 

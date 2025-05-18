@@ -1,13 +1,13 @@
 import React from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import type { ApiResponse } from 'types';
 import useTasks from 'hooks/useTasks';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import DaisyModal from '@/components/shared/daisyUI/DaisyModal';
 
 //TODO: move visible to parent component
 const DeleteTask = ({
@@ -49,15 +49,15 @@ const DeleteTask = ({
   });
 
   return (
-    <Modal open={visible}>
+    <DaisyModal open={visible}>
       <form onSubmit={formik.handleSubmit} method="POST">
-        <Modal.Header className="font-bold">{`Delete task`}</Modal.Header>
-        <Modal.Body>
+        <DaisyModal.Header className="font-bold">{`Delete task`}</DaisyModal.Header>
+        <DaisyModal.Body>
           <div className="mt-2 flex flex-col space-y-4">
             <p>{t('delete-task-warning')}</p>
           </div>
-        </Modal.Body>
-        <Modal.Actions>
+        </DaisyModal.Body>
+        <DaisyModal.Actions>
           <DaisyButton
             type="submit"
             color="error"
@@ -75,9 +75,9 @@ const DeleteTask = ({
           >
             {t('close')}
           </DaisyButton>
-        </Modal.Actions>
+        </DaisyModal.Actions>
       </form>
-    </Modal>
+    </DaisyModal>
   );
 };
 

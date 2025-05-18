@@ -1,12 +1,12 @@
 import React from 'react';
 import toast from 'react-hot-toast';
-import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
 import Form, { Field } from '@atlaskit/form';
 import TextField from '@atlaskit/textfield';
 import { defaultHeaders } from '@/lib/common';
 import { ApiResponse } from 'types';
+import DaisyModal from '@/components/shared/daisyUI/DaisyModal';
 
 const CreateIapCategory = ({
   teamSlug,
@@ -41,14 +41,14 @@ const CreateIapCategory = ({
   };
 
   return (
-    <Modal open={visible}>
+    <DaisyModal open={visible}>
       <Form onSubmit={onSubmit}>
         {({ formProps }) => (
           <form {...formProps}>
-            <Modal.Header className="font-bold">
+            <DaisyModal.Header className="font-bold">
               {t('create-category-title')}
-            </Modal.Header>
-            <Modal.Body>
+            </DaisyModal.Header>
+            <DaisyModal.Body>
               <Field
                 aria-required={true}
                 name="name"
@@ -59,8 +59,8 @@ const CreateIapCategory = ({
                   <TextField autoComplete="off" {...fieldProps} />
                 )}
               </Field>
-            </Modal.Body>
-            <Modal.Actions>
+            </DaisyModal.Body>
+            <DaisyModal.Actions>
               <AtlaskitButton
                 appearance="default"
                 onClick={() => setVisible(false)}
@@ -70,11 +70,11 @@ const CreateIapCategory = ({
               <LoadingButton type="submit" appearance="primary">
                 {t('save')}
               </LoadingButton>
-            </Modal.Actions>
+            </DaisyModal.Actions>
           </form>
         )}
       </Form>
-    </Modal>
+    </DaisyModal>
   );
 };
 

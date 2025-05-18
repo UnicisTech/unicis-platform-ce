@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
@@ -20,6 +19,7 @@ import type { Task } from '@prisma/client';
 import RiskMatrixBubbleChart from './RiskMatrixBubbleChart';
 import type { PiaRisk, ApiResponse, TaskProperties } from 'types';
 import { AtlaskitDarkThemeWrapper } from 'sharedStyles';
+import DaisyModal from '@/components/shared/daisyUI/DaisyModal';
 
 const shouldShowExtraStage = (risk: PiaRisk | []): boolean => {
   if (!risk[1] || !risk[2] || !risk[3]) return false;
@@ -163,18 +163,18 @@ const CreateRisk = ({
   }, [task]);
 
   return (
-    <Modal open={visible} className="w-11/12 max-w-3xl">
+    <DaisyModal open={visible} className="w-11/12 max-w-3xl">
       <Form onSubmit={onSubmit}>
         {({ formProps }) => (
           <form {...formProps}>
-            <Modal.Header className="font-bold">
+            <DaisyModal.Header className="font-bold">
               <h3>{t('pia')}</h3>
               {stage === 0 && 'Select a task'}
               {stage > 0 && (
                 <StageTracker headers={headers} currentStage={stage - 1} />
               )}
-            </Modal.Header>
-            <Modal.Body>
+            </DaisyModal.Header>
+            <DaisyModal.Body>
               <AtlaskitDarkThemeWrapper>
                 {stage === 0 && tasks && (
                   <TaskPickerFormBody
@@ -190,8 +190,8 @@ const CreateRisk = ({
                 {stage === 5 && <Results risk={risk} />}
                 {stage === 6 && <ExtraStage risk={risk} />}
               </AtlaskitDarkThemeWrapper>
-            </Modal.Body>
-            <Modal.Actions>
+            </DaisyModal.Body>
+            <DaisyModal.Actions>
               <AtlaskitButton
                 appearance="default"
                 onClick={() => setVisible(false)}
@@ -212,11 +212,11 @@ const CreateRisk = ({
               >
                 {stage < (showExtraStage ? 6 : 5) ? t('next') : t('save')}
               </LoadingButton>
-            </Modal.Actions>
+            </DaisyModal.Actions>
           </form>
         )}
       </Form>
-    </Modal>
+    </DaisyModal>
   );
 };
 

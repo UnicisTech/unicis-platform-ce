@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { Card } from 'react-daisyui';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import clsx from 'clsx';
@@ -13,6 +12,7 @@ import type {
 } from 'types';
 import { useTranslation } from 'next-i18next';
 import DaisyButton from '../daisyUI/DaisyButton';
+import DaisyCard from '../daisyUI/DaisyCard';
 
 const AiChat = () => {
   const [visible, setVisible] = useState(false);
@@ -108,7 +108,7 @@ const AiChat = () => {
         )}
         style={{ height: '80vh' }}
       >
-        <Card className="shadow-lg border border-gray-300 relative bg-white flex flex-col h-full w-[20rem] md:w-[32rem]">
+        <DaisyCard className="shadow-lg border border-gray-300 relative bg-white flex flex-col h-full w-[20rem] md:w-[32rem]">
           <button
             onClick={togglePopup}
             className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
@@ -116,7 +116,7 @@ const AiChat = () => {
             <XMarkIcon className="h-5 w-5" />
           </button>
 
-          <Card.Title className="font-bold p-4">{t('ai-chatbot')}</Card.Title>
+          <DaisyCard.Title className="font-bold p-4">{t('ai-chatbot')}</DaisyCard.Title>
 
           {/* Chat Messages */}
           <div className="flex-grow overflow-auto px-4 pb-4">
@@ -197,7 +197,7 @@ const AiChat = () => {
               </button>
             </div>
           </form>
-        </Card>
+        </DaisyCard>
       </div>
     </>
   );

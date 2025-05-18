@@ -2,7 +2,6 @@ import React, { Fragment, useRef } from 'react';
 import { Team } from '@prisma/client';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { DatePicker } from '@atlaskit/datetime-picker';
@@ -19,6 +18,7 @@ import { getCurrentStringDate } from '@/components/services/taskService';
 
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
+import DaisyModal from '@/components/shared/daisyUI/DaisyModal';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 interface Status {
@@ -60,8 +60,8 @@ const CreateTask = ({
   const { t } = useTranslation('common');
 
   return (
-    <Modal open={visible}>
-      <Modal.Header className="font-bold">Create Task</Modal.Header>
+    <DaisyModal open={visible}>
+      <DaisyModal.Header className="font-bold">Create Task</DaisyModal.Header>
       <Form<FormData>
         onSubmit={async (data, { reset }) => {
           const { title, status, duedate, description } = data;
@@ -101,7 +101,7 @@ const CreateTask = ({
             className="flex flex-col justify-between"
             style={{ height: '92%' }}
           >
-            <Modal.Body>
+            <DaisyModal.Body>
               <div
                 style={{
                   display: 'flex',
@@ -195,8 +195,8 @@ const CreateTask = ({
                 </Field>
                 <FormFooter></FormFooter>
               </div>
-            </Modal.Body>
-            <Modal.Actions>
+            </DaisyModal.Body>
+            <DaisyModal.Actions>
               <Button
                 appearance="default"
                 onClick={() => {
@@ -213,11 +213,11 @@ const CreateTask = ({
               >
                 {t('create')}
               </LoadingButton>
-            </Modal.Actions>
+            </DaisyModal.Actions>
           </form>
         )}
       </Form>
-    </Modal>
+    </DaisyModal>
   );
 };
 

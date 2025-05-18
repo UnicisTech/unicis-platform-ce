@@ -1,24 +1,28 @@
-import { Badge as BaseBadge } from 'react-daisyui';
+import DaisyBadge, { ThemeAppearance } from "./daisyUI/DaisyBadge";
 
-const colors = {
-  todo: 'ghost',
-  inprogress: 'secondary',
-  inreview: 'primary',
+
+const colors: Record<string, ThemeAppearance> = {
+  todo: 'default',
+  inprogress: 'primary',
+  inreview: 'info',
   feedback: 'info',
   done: 'success',
   failed: 'error',
 };
 
-const StatusBadge = ({ label, value }: { label: string; value: string }) => {
+const StatusBadge = ({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) => {
+  const color = colors[value] || 'default';
+
   return (
-    <>
-      <BaseBadge
-        className={`rounded text-xs py-2 text-white whitespace-nowrap`}
-        color={colors[value]}
-      >
-        {label}
-      </BaseBadge>
-    </>
+    <DaisyBadge color={color}>
+      {label}
+    </DaisyBadge>
   );
 };
 

@@ -2,12 +2,12 @@ import React, { useState, useCallback } from 'react';
 import { getAxiosError } from '@/lib/common';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
 import Form from '@atlaskit/form';
 import type { ApiResponse, TeamCourseWithProgress } from 'types';
+import DaisyModal from '@/components/shared/daisyUI/DaisyModal';
 
 const DeleteCourse = ({
   visible,
@@ -60,17 +60,17 @@ const DeleteCourse = ({
   }, []);
 
   return (
-    <Modal open={visible}>
+    <DaisyModal open={visible}>
       <Form onSubmit={() => {}}>
         {({ formProps }) => (
           <form {...formProps}>
-            <Modal.Header className="font-bold">Delete course</Modal.Header>
-            <Modal.Body>
+            <DaisyModal.Header className="font-bold">Delete course</DaisyModal.Header>
+            <DaisyModal.Body>
               <div style={{ margin: '1.5rem 0' }}>
                 <p>Are you sure you want to delete course?</p>
               </div>
-            </Modal.Body>
-            <Modal.Actions>
+            </DaisyModal.Body>
+            <DaisyModal.Actions>
               <AtlaskitButton
                 appearance="default"
                 onClick={() => closeHandler()}
@@ -85,11 +85,11 @@ const DeleteCourse = ({
               >
                 {t('delete')}
               </LoadingButton>
-            </Modal.Actions>
+            </DaisyModal.Actions>
           </form>
         )}
       </Form>
-    </Modal>
+    </DaisyModal>
   );
 };
 

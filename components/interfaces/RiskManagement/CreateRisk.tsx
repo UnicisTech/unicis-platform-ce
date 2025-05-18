@@ -8,7 +8,6 @@ import React, {
 import TextArea from '@atlaskit/textarea';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { Modal } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
 import Form from '@atlaskit/form';
@@ -31,6 +30,7 @@ import {
   RMProcedureInterface,
 } from 'types';
 import { Error, Loading } from '@/components/shared';
+import DaisyModal from '@/components/shared/daisyUI/DaisyModal';
 
 interface CreateRiskProps {
   selectedTask?: Task;
@@ -138,18 +138,18 @@ const CreateRisk = ({
   }, [task]);
 
   return (
-    <Modal open={visible}>
+    <DaisyModal open={visible}>
       <Form onSubmit={onSubmit}>
         {({ formProps }) => (
           <form {...formProps}>
-            <Modal.Header className="font-bold">
+            <DaisyModal.Header className="font-bold">
               <h3>{t('rm')}</h3>
               {stage === 0 && `Select a task`}
               {stage > 0 && (
                 <StageTracker headers={headers} currentStage={stage - 1} />
               )}
-            </Modal.Header>
-            <Modal.Body>
+            </DaisyModal.Header>
+            <DaisyModal.Body>
               {stage === 0 && tasks && (
                 <TaskPickerFormBody
                   tasks={tasks.filter(
@@ -159,8 +159,8 @@ const CreateRisk = ({
               )}
               {stage === 1 && <FirstStage risk={risk} />}
               {stage === 2 && <SecondStage risk={risk} />}
-            </Modal.Body>
-            <Modal.Actions>
+            </DaisyModal.Body>
+            <DaisyModal.Actions>
               <AtlaskitButton
                 appearance="default"
                 onClick={() => setVisible(false)}
@@ -181,11 +181,11 @@ const CreateRisk = ({
               >
                 {stage < 2 ? t('next') : t('save')}
               </LoadingButton>
-            </Modal.Actions>
+            </DaisyModal.Actions>
           </form>
         )}
       </Form>
-    </Modal>
+    </DaisyModal>
   );
 };
 

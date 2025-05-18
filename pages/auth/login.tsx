@@ -10,12 +10,11 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React, { type ReactElement, useEffect, useState, useRef } from 'react';
-import type { ComponentStatus } from 'react-daisyui/dist/types';
 import { getCsrfToken, signIn, useSession } from 'next-auth/react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import env from '@/lib/env';
-import type { NextPageWithLayout } from 'types';
+import type { ComponentStatus, NextPageWithLayout } from 'types';
 import { AuthLayout } from '@/components/layouts';
 // import GithubButton from '@/components/auth/GithubButton';
 // import GoogleButton from '@/components/auth/GoogleButton';

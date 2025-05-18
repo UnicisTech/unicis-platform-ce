@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import { Card } from 'react-daisyui';
+import DaisyCard from '../shared/daisyUI/DaisyCard';
 
 import faqs from './data/faq.json';
 
@@ -19,12 +19,12 @@ const FAQSection = () => {
           <div className="grid grid-cols-1 gap-2">
             {faqs.map((faq, index) => {
               return (
-                <Card key={index} className="border-none">
-                  <Card.Body className="items-left dark:border-gray-200 border border-gray-300">
-                    <Card.Title tag="h2">Q. {faq.question}</Card.Title>
+                <DaisyCard key={index} className="border-none">
+                  <DaisyCard.Body className="items-left dark:border-gray-200 border border-gray-300">
+                    <DaisyCard.Title tag="h2">Q. {faq.question}</DaisyCard.Title>
                     <p>A. {faq.answer}</p>
-                  </Card.Body>
-                </Card>
+                  </DaisyCard.Body>
+                </DaisyCard>
               );
             })}
           </div>
