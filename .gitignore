@@ -53,3 +53,4 @@ yarn-error.log*
 .eslintcache
 
 .vscode
+certificates
