@@ -1,13 +1,29 @@
 import React from 'react';
-import { Alert as AlertCore, AlertProps } from 'react-daisyui';
 
-const Alert = (props: AlertProps) => {
-  const { children, className, ...rest } = props;
+export type AlertStatus = 'info' | 'success' | 'warning' | 'error';
 
+interface CustomAlertProps {
+  children: React.ReactNode;
+  status?: AlertStatus;
+  className?: string;
+}
+
+const statusMap: Record<AlertStatus, string> = {
+  info: 'alert-info',
+  success: 'alert-success',
+  warning: 'alert-warning',
+  error: 'alert-error',
+};
+
+const Alert = ({
+  children,
+  status = 'info',
+  className = '',
+}: CustomAlertProps) => {
   return (
-    <AlertCore {...rest} className={`${className} rounded px-4 py-3`}>
+    <div className={`alert ${statusMap[status]} rounded px-4 py-3 ${className}`}>
       {children}
-    </AlertCore>
+    </div>
   );
 };
 

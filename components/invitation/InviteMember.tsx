@@ -5,7 +5,6 @@ import { useFormik } from 'formik';
 import useInvitations from 'hooks/useInvitations';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { Input } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
@@ -55,6 +54,7 @@ const InviteMember = ({
       formik.resetForm();
     },
   });
+
   const toggleVisible = () => {
     setVisible(!visible);
   };
@@ -66,15 +66,17 @@ const InviteMember = ({
         <Modal.Description>{t('invite-member-message')}</Modal.Description>
         <Modal.Body>
           <div className="flex flex-col gap-4">
-            <Input
+            <input
+              type="email"
               name="email"
-              onChange={formik.handleChange}
-              value={formik.values.email}
+              className="input input-bordered w-full"
               placeholder="email@unicis.tech"
+              value={formik.values.email}
+              onChange={formik.handleChange}
               required
             />
             <select
-              className="select-bordered select rounded"
+              className="select select-bordered w-full"
               name="role"
               onChange={formik.handleChange}
               required
@@ -92,9 +94,7 @@ const InviteMember = ({
           <DaisyButton
             type="button"
             variant="outline"
-            onClick={() => {
-              setVisible(!visible);
-            }}
+            onClick={toggleVisible}
             size="md"
           >
             {t('close')}

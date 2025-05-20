@@ -1,6 +1,5 @@
 import YouTube from 'react-youtube';
 import { extractYouTubeVideoId } from '../services/passCourseService';
-import { Artboard } from 'react-daisyui';
 import { MarkdownPreview } from '@/components/shared/uiw/Markdown';
 import { CourseContentType } from '@prisma/client';
 import { IapCourse } from 'types';
@@ -22,14 +21,14 @@ const ContentPreview = ({ course }: { course: IapCourse }) => {
     case CourseContentType.OPEN_TEXT:
       return (
         <div className="container">
-          <Artboard className="bg-white dark:bg-gray-800">
+          <div className="artboard artboard-demo bg-white dark:bg-gray-800">
             <div className="p-4">
               <MarkdownPreview
                 source={course.description as string}
                 className="mt-30"
               />
             </div>
-          </Artboard>
+          </div>
         </div>
       );
     default:

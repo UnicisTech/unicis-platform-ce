@@ -62,5 +62,6 @@ const ModalActions = ({
 DaisyModal.Header = ModalHeader;
 DaisyModal.Body = ModalBody;
 DaisyModal.Actions = ModalActions;
+DaisyModal.Footer = ModalActions;
 
 export default DaisyModal;

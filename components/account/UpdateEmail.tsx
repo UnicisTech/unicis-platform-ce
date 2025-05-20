@@ -2,7 +2,6 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import { Input } from 'react-daisyui';
 
 import type { ApiResponse, UserReturned } from 'types';
 import { Card } from '@/components/shared';
@@ -55,13 +54,13 @@ const UpdateEmail = ({ user, allowEmailChange }: UpdateEmailProps) => {
               {t('email-address-description')}
             </Card.Description>
           </Card.Header>
-          <Input
+          <input
             type="email"
             name="email"
             placeholder={t('your-email')}
             value={formik.values.email}
             onChange={formik.handleChange}
-            className="w-full max-w-md"
+            className="input input-bordered w-full max-w-md"
             required
             disabled={!allowEmailChange}
           />

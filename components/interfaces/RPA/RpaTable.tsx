@@ -8,7 +8,6 @@ import usePagination from 'hooks/usePagination';
 import { TailwindTableWrapper } from 'sharedStyles';
 import { StatusBadge } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
-import Badge from '@/components/shared/Badge';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 

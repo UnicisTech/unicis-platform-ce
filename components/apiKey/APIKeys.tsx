@@ -1,5 +1,4 @@
 import { EmptyState, WithLoadingAndError } from '@/components/shared';
-import Badge from '@/components/shared/Badge';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import fetcher from '@/lib/fetcher';
 import type { ApiKey, Team } from '@prisma/client';
@@ -8,6 +7,7 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import useSWR from 'swr';
 import type { ApiResponse } from 'types';
+import DaisyBadge from '../shared/daisyUI/DaisyBadge';
 import DaisyButton from '../shared/daisyUI/DaisyButton';
 import NewAPIKey from './NewAPIKey';
 
@@ -97,7 +97,7 @@ const APIKeys = ({ team }: APIKeysProps) => {
                     <tr key={apiKey.id}>
                       <td>{apiKey.name}</td>
                       <td>
-                        <Badge color="success">{t('active')}</Badge>
+                        <DaisyBadge color="success">{t('active')}</DaisyBadge>
                       </td>
                       <td>{new Date(apiKey.createdAt).toLocaleDateString()}</td>
                       <td>
