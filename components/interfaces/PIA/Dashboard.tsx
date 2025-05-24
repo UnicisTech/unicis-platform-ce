@@ -9,6 +9,7 @@ import { TaskProperties, TaskWithPiaRisk } from 'types';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import CreateRiskShadcn from './CreateRiskShadcn';
 
 const Dashboard = () => {
   const { canAccess, isLoading } = useCanAccess();
@@ -20,6 +21,8 @@ const Dashboard = () => {
   const [perPage] = useState<number>(10);
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [isShadcnCreateOpen, setIsShadcnCreateOpen] = useState(false);
+
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskWithPiaRisk | null>(null);
@@ -65,6 +68,7 @@ const Dashboard = () => {
           </h2>
         </div>
         <div className="flex justify-end items-center my-1">
+          {/* <CreateRiskShadcn open={isCreateOpen} onOpenChange={setIsCreateOpen} tasks={tasks || []} /> */}
           {canAccess('task', ['update']) && (
             <DaisyButton
               size="sm"
@@ -77,6 +81,18 @@ const Dashboard = () => {
               {t('create')}
             </DaisyButton>
           )}
+          {canAccess('task', ['update']) && (
+            <DaisyButton
+              size="sm"
+              color="primary"
+              variant="outline"
+              onClick={() => {
+                setIsShadcnCreateOpen(true);
+              }}
+            >
+              Create but shadcn
+            </DaisyButton>
+          )}
         </div>
       </div>
       {isCreateOpen && tasks && (
@@ -87,6 +103,8 @@ const Dashboard = () => {
           setVisible={setIsCreateOpen}
         />
       )}
+      <CreateRiskShadcn open={isShadcnCreateOpen} onOpenChange={setIsShadcnCreateOpen} tasks={tasks || []} />
+
       {tasksWithRisks.length === 0 ? (
         <EmptyState title={t('rpa-dashboard')} description="No records" />
       ) : (
@@ -98,13 +116,23 @@ const Dashboard = () => {
             editHandler={onEditClickHandler}
             deleteHandler={onDeleteClickHandler}
           />
-          {taskToEdit && isEditOpen && (
+          {/* {taskToEdit && isEditOpen && (
             <CreateRisk
               tasks={tasks || []}
               visible={isEditOpen}
               setVisible={setIsEditOpen}
               selectedTask={taskToEdit}
               mutateTasks={mutateTasks}
+            />
+          )} */}
+          {taskToEdit && isEditOpen && (
+            <CreateRiskShadcn
+              open={isEditOpen}
+              prevRisk={taskToEdit.properties.pia_risk}
+              onOpenChange={setIsEditOpen}
+              tasks={tasks || []}
+              selectedTaskId={String(taskToEdit.id)}
+              // mutateTasks={mutateTasks}
             />
           )}
           {taskToDelete && isDeleteOpen && (
