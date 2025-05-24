@@ -1,222 +1,162 @@
-import React, { Fragment, useRef } from 'react';
-import { Team } from '@prisma/client';
+import React, { useRef, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import dynamic from 'next/dynamic';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
-import { DatePicker } from '@atlaskit/datetime-picker';
-import TextField from '@atlaskit/textfield';
-import Select, { ValueType } from '@atlaskit/select';
+
+import { Team } from '@prisma/client';
 import type { ApiResponse } from 'types';
 import type { Task } from '@prisma/client';
-import Button, { LoadingButton } from '@atlaskit/button';
 import statusesData from '@/components/defaultLanding/data/statuses.json';
-import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
-import { WithoutRing } from 'sharedStyles';
-import useTasks from 'hooks/useTasks';
 import { getCurrentStringDate } from '@/components/services/taskService';
-
-import 'react-quill/dist/quill.snow.css';
-import dynamic from 'next/dynamic';
+import useTasks from 'hooks/useTasks';
 import DaisyModal from '@/components/shared/daisyUI/DaisyModal';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import { Input } from '@/components/shadcn/ui/input';
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+} from '@/components/shadcn/ui/select';
+import { Calendar } from '@/components/shadcn/ui/calendar';
+import { Popover, PopoverTrigger, PopoverContent } from '@/components/shadcn/ui/popover';
+import { CalendarIcon } from 'lucide-react';
+import { format } from 'date-fns';
+
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
-interface Status {
-  label: string;
-  value: string;
-}
-
-interface FormData {
-  title: string;
-  status: ValueType<Option>;
-  team: ValueType<Option>;
-  duedate: string;
-  [key: string]: string | ValueType<Option>;
-}
-
-interface Option {
-  label: string;
-  value: string;
-}
-
-const statuses: Status[] = statusesData;
+const statuses = statusesData;
 const DEFAULT_STATUS_VALUE = 'todo';
 
-//TODO: move visible to parent component
-const CreateTask = ({
-  visible,
-  setVisible,
-  team,
-}: {
-  visible: boolean;
-  setVisible: (visible: boolean) => void;
-  team: Team;
-}) => {
-  const formRef = useRef<HTMLFormElement | null>(null);
-  const submitButtonRef = useRef<HTMLButtonElement | null>(null);
+const CreateTask = ({ visible, setVisible, team }: { visible: boolean; setVisible: (visible: boolean) => void; team: Team }) => {
   const router = useRouter();
   const { slug } = router.query;
   const { mutateTasks } = useTasks(slug as string);
   const { t } = useTranslation('common');
 
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
+
+  const formik = useFormik({
+    initialValues: {
+      title: '',
+      status: DEFAULT_STATUS_VALUE,
+      duedate: getCurrentStringDate(),
+      description: '',
+    },
+    validationSchema: Yup.object().shape({
+      title: Yup.string().required('Title is required'),
+      status: Yup.string().required('Status is required'),
+      duedate: Yup.string().required('Due date is required'),
+      description: Yup.string(),
+    }),
+    onSubmit: async (values, { resetForm }) => {
+      const response = await axios.post<ApiResponse<Task>>(
+        `/api/teams/${team.slug}/tasks`,
+        values
+      );
+
+      const { error } = response.data;
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+
+      mutateTasks();
+      toast.success(t('task-created'));
+      resetForm();
+      setVisible(false);
+    },
+  });
+
   return (
-    <DaisyModal open={visible}>
-      <DaisyModal.Header className="font-bold">Create Task</DaisyModal.Header>
-      <Form<FormData>
-        onSubmit={async (data, { reset }) => {
-          const { title, status, duedate, description } = data;
-          const response = await axios.post<ApiResponse<Task>>(
-            `/api/teams/${team.slug}/tasks`,
-            {
-              title,
-              status: status?.value,
-              duedate,
-              description: description || '',
-            }
-          );
+    <DaisyModal open={visible} onClose={() => setVisible(false)}>
+      <DaisyModal.Header>Create Task</DaisyModal.Header>
+      <form onSubmit={formik.handleSubmit} className="flex flex-col justify-between h-[92%]">
+        <DaisyModal.Body>
+          <div className="flex flex-col space-y-4">
+            <div className="form-control">
+              <label className="label-text font-medium mb-1">Title</label>
+              <Input
+                type="text"
+                name="title"
+                value={formik.values.title}
+                onChange={formik.handleChange}
+                placeholder="Enter task title"
+              />
+            </div>
 
-          const { error } = response.data;
-
-          if (error) {
-            toast.error(error.message);
-            return;
-          }
-
-          mutateTasks();
-          reset({
-            title: '',
-            status: null,
-            team: null,
-            duedate: '',
-            description: '',
-          });
-          toast.success(t('task-created'));
-          setVisible(false);
-        }}
-      >
-        {({ formProps, submitting }) => (
-          <form
-            {...formProps}
-            ref={formRef}
-            className="flex flex-col justify-between"
-            style={{ height: '92%' }}
-          >
-            <DaisyModal.Body>
-              <div
-                style={{
-                  display: 'flex',
-                  width: '100%',
-                  margin: '0 auto',
-                  flexDirection: 'column',
-                }}
+            <div className="form-control">
+              <label className="label-text font-medium mb-1">Status</label>
+              <Select
+                value={formik.values.status}
+                onValueChange={(val) => formik.setFieldValue('status', val)}
               >
-                <Field
-                  aria-required={true}
-                  name="title"
-                  label="Title"
-                  isRequired
-                >
-                  {({ fieldProps }) => (
-                    <Fragment>
-                      <TextField autoComplete="off" {...fieldProps} />
-                    </Fragment>
-                  )}
-                </Field>
-                <Field<ValueType<Option>>
-                  name="status"
-                  label="Status"
-                  defaultValue={statuses.find(
-                    ({ value }) => value === DEFAULT_STATUS_VALUE
-                  )}
-                  aria-required={true}
-                  isRequired
-                  validate={async (value) => {
-                    if (value) {
-                      return undefined;
-                    }
+                <SelectTrigger className="w-full" />
+                <SelectContent>
+                  {statuses.map((status) => (
+                    <SelectItem key={status.value} value={status.value}>
+                      {status.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
 
-                    return new Promise((resolve) =>
-                      setTimeout(resolve, 300)
-                    ).then(() => 'Please select a status');
-                  }}
-                >
-                  {({ fieldProps: { id, ...rest }, error }) => (
-                    <Fragment>
-                      <WithoutRing>
-                        <Select
-                          inputId={id}
-                          {...rest}
-                          options={statuses}
-                          defaultValue={statuses.find(
-                            ({ value }) => value === DEFAULT_STATUS_VALUE
-                          )}
-                          validationState={error ? 'error' : 'default'}
-                        />
-                        {error && <ErrorMessage>{error}</ErrorMessage>}
-                      </WithoutRing>
-                    </Fragment>
-                  )}
-                </Field>
-                <Field
-                  name="duedate"
-                  label="Due date"
-                  defaultValue={getCurrentStringDate()}
-                  isRequired
-                  aria-required={true}
-                  validate={async (value) => {
-                    if (value) {
-                      return undefined;
-                    }
+            <div className="form-control">
+              <label className="label-text font-medium mb-1">Due Date</label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <DaisyButton
+                    type="button"
+                    variant="outline"
+                    className="w-full justify-start text-left font-normal"
+                  >
+                    {formik.values.duedate ? (
+                      format(new Date(formik.values.duedate), "PPP")
+                    ) : (
+                      <span>Pick a date</span>
+                    )}
+                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                  </DaisyButton>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={selectedDate}
+                    onSelect={(date) => {
+                      setSelectedDate(date);
+                      formik.setFieldValue("duedate", date?.toISOString().split("T")[0]);
+                    }}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
 
-                    return new Promise((resolve) =>
-                      setTimeout(resolve, 300)
-                    ).then(() => 'Please select a due date');
-                  }}
-                >
-                  {({ fieldProps: { id, ...rest }, error }) => (
-                    <Fragment>
-                      <WithoutRing>
-                        <DatePicker
-                          selectProps={{ inputId: id }}
-                          {...rest}
-                          locale="en-GB"
-                        />
-                      </WithoutRing>
-                      {error && <ErrorMessage>{error}</ErrorMessage>}
-                    </Fragment>
-                  )}
-                </Field>
-                <Field label="Description" name="description">
-                  {({ fieldProps }: any) => (
-                    <Fragment>
-                      <ReactQuill theme="snow" {...fieldProps} />
-                    </Fragment>
-                  )}
-                </Field>
-                <FormFooter></FormFooter>
-              </div>
-            </DaisyModal.Body>
-            <DaisyModal.Actions>
-              <Button
-                appearance="default"
-                onClick={() => {
-                  setVisible(!visible);
-                }}
-              >
-                {t('close')}
-              </Button>
-              <LoadingButton
-                type="submit"
-                appearance="primary"
-                ref={submitButtonRef}
-                isLoading={submitting}
-              >
-                {t('create')}
-              </LoadingButton>
-            </DaisyModal.Actions>
-          </form>
-        )}
-      </Form>
+            <div className="form-control">
+              <label className="label-text font-medium mb-1">Description</label>
+              <ReactQuill
+                theme="snow"
+                value={formik.values.description}
+                onChange={(val) => formik.setFieldValue('description', val)}
+              />
+            </div>
+          </div>
+        </DaisyModal.Body>
+
+        <DaisyModal.Actions>
+          <DaisyButton type="button" color="ghost" onClick={() => setVisible(false)}>
+            {t('close')}
+          </DaisyButton>
+          <DaisyButton type="submit" color="primary" loading={formik.isSubmitting}>
+            {t('create')}
+          </DaisyButton>
+        </DaisyModal.Actions>
+      </form>
     </DaisyModal>
   );
 };
