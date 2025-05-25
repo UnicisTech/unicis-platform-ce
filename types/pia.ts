@@ -75,6 +75,6 @@ export type TaskWithPiaRisk = Task & {
 };
 
 export type TaskPiaProperties = {
-  pia_risk?: PiaRisk | [];
+  pia_risk?: PiaRisk;
   pia_audit_logs: AuditLog[] | [];
 };

@@ -41,6 +41,7 @@ import {
 import Breadcrumb from '../../Breadcrumb';
 import useRpaCreation from 'hooks/useRpaCreation';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import { TaskProperties } from 'types';
 
 const TaskById = ({
   csc_statuses,
@@ -222,9 +223,10 @@ const TaskById = ({
       <CreateProcedureTest mutateTasks={mutateTask} {...rpaState} />
       {piaVisible && (
         <CreatePiaRisk
-          visible={piaVisible}
-          setVisible={setPiaVisible}
-          selectedTask={task}
+          open={piaVisible}
+          onOpenChange={setPiaVisible}
+          selectedTaskId={String(task.id)}
+          prevRisk={(task.properties as TaskProperties)?.pia_risk}
           mutateTasks={mutateTask}
         />
       )}
