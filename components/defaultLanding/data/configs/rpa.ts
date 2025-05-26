@@ -1,9 +1,4 @@
-import { RpaConfig } from 'types';
-
-type Option = {
-  label: string;
-  value: string;
-};
+import { RpaConfig, Option } from 'types';
 
 type Options = {
   [key: string]: Option[];

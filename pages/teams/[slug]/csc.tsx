@@ -20,7 +20,6 @@ import {
 } from '@/components/defaultLanding/data/configs/csc';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { getCscStatusesBySlug } from 'models/team';
-import type { Option } from 'types';
 import useISO from 'hooks/useISO';
 import { statusOptions } from '@/components/defaultLanding/data/configs/csc';
 import useCanAccess from 'hooks/useCanAccess';
@@ -59,7 +58,7 @@ const CscDashboard = ({
   const [sectionFilter, setSectionFilter] = useState<
     null | { label: string; value: string }[]
   >(null);
-  const [statusFilter, setStatusFilter] = useState<null | Option[]>(null);
+  const [statusFilter, setStatusFilter] = useState<null | { label: string; value: number; }[]>(null);
   const [perPage, setPerPage] = useState<number>(10);
 
   const { isLoading, isError, team } = useTeam(slug as string);

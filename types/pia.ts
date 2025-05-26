@@ -15,6 +15,8 @@ export type RiskSecurity =
   | 'major'
   | 'extreme';
 
+
+  // TODO: why any there?
 type Option = {
   label: string | any;
   value: string;
@@ -75,6 +77,6 @@ export type TaskWithPiaRisk = Task & {
 };
 
 export type TaskPiaProperties = {
-  pia_risk?: PiaRisk;
+  pia_risk?: PiaRisk | [];
   pia_audit_logs: AuditLog[] | [];
 };
