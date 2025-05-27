@@ -167,7 +167,7 @@ export default function RiskAssessmentDialog({
                 toast.error(error.message);
                 return;
             } else {
-                toast.success(t('tia-created'));
+                toast.success(t('pia-created'));
             }
 
             completeCallback?.();
@@ -184,13 +184,19 @@ export default function RiskAssessmentDialog({
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto p-6">
                 <DialogHeader>
-                    <DialogTitle>Risk Assessment</DialogTitle>
+                    <DialogTitle>{t('pia')}</DialogTitle>
                 </DialogHeader>
 
                 {currentStep === 0 && tasks && (
                     <Form {...taskForm}>
                         <form className="space-y-4">
-                            <TaskPicker control={taskForm.control} name="taskId" tasks={tasks} />
+                            <TaskPicker
+                                control={taskForm.control}
+                                name="taskId"
+                                tasks={tasks.filter(
+                                    (task) => !(task.properties as any)?.pia_risk
+                                )}
+                            />
                         </form>
                     </Form>
                 )}
@@ -223,11 +229,11 @@ export default function RiskAssessmentDialog({
                 )}
 
                 <DialogFooter className="flex justify-end space-x-2">
-                    <DialogClose asChild><Button variant="outline">Close</Button></DialogClose>
-                    {currentStep > 0 && <Button variant="outline" onClick={back}>Back</Button>}
+                    <DialogClose asChild><Button variant="outline">{t('close')}</Button></DialogClose>
+                    {currentStep > 0 && <Button variant="outline" onClick={back}>{t('back')}</Button>}
                     <Button onClick={next} disabled={isSaving}>
-                        {isSaving && <Loader2 className="animate-spin"/>}
-                        {currentStep < (extraRequired ? 6 : 5) ? 'Next' : 'Finish'}
+                        {isSaving && <Loader2 className="animate-spin" />}
+                        {currentStep < (extraRequired ? 6 : 5) ? t('next') : t('save')}
                     </Button>
                 </DialogFooter>
             </DialogContent>

@@ -103,12 +103,12 @@ const Dashboard = () => {
           setVisible={setIsCreateOpen}
         />
       )}
-      <CreateRisk
+      {isCreateOpen && <CreateRisk
         open={isShadcnCreateOpen}
         onOpenChange={setIsShadcnCreateOpen}
         tasks={tasks || []}
         mutateTasks={mutateTasks}
-      />
+      />}
       {tasksWithRisks.length === 0 ? (
         <EmptyState title={t('rpa-dashboard')} description="No records" />
       ) : (
