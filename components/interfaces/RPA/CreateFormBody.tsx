@@ -14,7 +14,7 @@ import {
   FormFooter,
   HelperMessage,
 } from '@atlaskit/form';
-import type { RpaOption } from 'types';
+import type { Option } from 'types';
 import { WithoutRing } from 'sharedStyles';
 import { Message } from '@/components/shared/atlaskit';
 import { format } from 'date-fns';
@@ -128,7 +128,7 @@ const CreateFormBody = ({
                 </Fragment>
               )}
             </Field>
-            <Field<ValueType<RpaOption>>
+            <Field<ValueType<Option>>
               name="dpo"
               label={fieldPropsMapping['dpo']}
               defaultValue={procedure[0] && procedure[0].dpo}
@@ -200,7 +200,7 @@ const CreateFormBody = ({
                 </Fragment>
               )}
             </Field>
-            <Field<ValueType<RpaOption, true>>
+            <Field<ValueType<Option, true>>
               name="category"
               label={fieldPropsMapping['category']}
               defaultValue={procedure[1] && procedure[1].category}
@@ -236,7 +236,7 @@ const CreateFormBody = ({
                 </Fragment>
               )}
             </Field>
-            <Field<ValueType<RpaOption, true>>
+            <Field<ValueType<Option, true>>
               name="specialcategory"
               label={fieldPropsMapping['specialcategory']}
               defaultValue={procedure[1] && procedure[1].specialcategory}
@@ -270,7 +270,7 @@ const CreateFormBody = ({
                 </Fragment>
               )}
             </Field>
-            <Field<ValueType<RpaOption, true>>
+            <Field<ValueType<Option, true>>
               name="datasubject"
               label={fieldPropsMapping['datasubject']}
               defaultValue={procedure[1] && procedure[1].datasubject}
@@ -307,7 +307,7 @@ const CreateFormBody = ({
                 </Fragment>
               )}
             </Field>
-            <Field<ValueType<RpaOption>>
+            <Field<ValueType<Option>>
               name="retentionperiod"
               label={fieldPropsMapping['retentionperiod']}
               defaultValue={procedure[1] && procedure[1].retentionperiod}
@@ -372,7 +372,7 @@ const CreateFormBody = ({
                 </span>
               }
             />
-            <Field<ValueType<RpaOption>>
+            <Field<ValueType<Option>>
               name="recipientType"
               label={fieldPropsMapping['recipientType']}
               defaultValue={procedure[2] && procedure[2].recipientType}
@@ -474,7 +474,7 @@ const CreateFormBody = ({
                 </Fragment>
               )}
             </Field>
-            <Field<ValueType<RpaOption>>
+            <Field<ValueType<Option>>
               name="country"
               label={fieldPropsMapping['country']}
               defaultValue={procedure[3] && procedure[3].country}
@@ -507,7 +507,7 @@ const CreateFormBody = ({
                 </Fragment>
               )}
             </Field>
-            <Field<ValueType<RpaOption, true>>
+            <Field<ValueType<Option, true>>
               name="guarantee"
               label={fieldPropsMapping['guarantee']}
               defaultValue={procedure[3] && procedure[3].guarantee}
@@ -573,7 +573,7 @@ const CreateFormBody = ({
                 </span>
               }
             />
-            <Field<ValueType<RpaOption, true>>
+            <Field<ValueType<Option, true>>
               name="toms"
               label={fieldPropsMapping['toms']}
               defaultValue={procedure[4] && procedure[4].toms}
