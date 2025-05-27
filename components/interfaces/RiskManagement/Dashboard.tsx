@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import useCanAccess from 'hooks/useCanAccess';
-import CreateRisk from './CreateRisk';
+import CreateLegacyRisk from './CreateRisk';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { useRouter } from 'next/router';
 import { TaskProperties, TaskWithRmRisk } from 'types';
@@ -9,6 +9,8 @@ import { EmptyState, Error } from '@/components/shared';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import CreateRisk from './RiskForm/RmRiskDialog';
+
 
 const Dashboard = () => {
   const { canAccess } = useCanAccess();
@@ -22,6 +24,8 @@ const Dashboard = () => {
   console.log('tasks', tasks);
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [isCreateLegacyOpen, setIsCreateLegacyOpen] = useState(false);
+
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskWithRmRisk | null>(null);
@@ -67,22 +71,40 @@ const Dashboard = () => {
               color="primary"
               variant="outline"
               onClick={() => {
-                setIsCreateOpen(true);
+                setIsCreateLegacyOpen(true);
               }}
             >
               {t('create')}
             </DaisyButton>
           )}
+          {canAccess('task', ['update']) && (
+            <DaisyButton
+              size="sm"
+              color="primary"
+              variant="outline"
+              onClick={() => {
+                setIsCreateOpen(true);
+              }}
+            >
+              Create with shadcn
+            </DaisyButton>
+          )}
         </div>
       </div>
-      {isCreateOpen && tasks && (
-        <CreateRisk
+      {isCreateLegacyOpen && tasks && (
+        <CreateLegacyRisk
           tasks={tasks}
-          visible={isCreateOpen}
-          setVisible={setIsCreateOpen}
+          visible={isCreateLegacyOpen}
+          setVisible={setIsCreateLegacyOpen}
           mutateTasks={mutateTasks}
         />
       )}
+      {isCreateOpen && <CreateRisk
+        open={isCreateOpen}
+        onOpenChange={setIsCreateOpen}
+        tasks={tasks || []}
+        mutateTasks={mutateTasks}
+      />}
       {tasksWithRisks.length === 0 ? (
         //TODO: change title
         <EmptyState title={t('rpa-dashboard')} description="No records" />
@@ -96,7 +118,7 @@ const Dashboard = () => {
             deleteHandler={onDeleteClickHandler}
           />
           {taskToEdit && isEditOpen && (
-            <CreateRisk
+            <CreateLegacyRisk
               tasks={tasks || []}
               visible={isEditOpen}
               setVisible={setIsEditOpen}
