@@ -94,6 +94,7 @@ const CreateProcedure = ({
   const [stage, setStage] = useState<number>(0);
   const [task, setTask] = useState<Task | undefined>(selectedTask);
   const [procedure, setProcedure] = useState<any>(defaultProcedure);
+  console.log('TIA procedure', procedure)
   const [prevProcedure, setPrevProcedure] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -536,7 +537,7 @@ const SecondStage = ({ procedure }: { procedure: any }) => {
           <>
             <HelperMessage>
               Is the personal data at issue protected with adequate encryption
-              in-transit (i.e. when transmitted)?v
+              in-transit (i.e. when transmitted)?
             </HelperMessage>
             <RadioGroup
               {...fieldProps}

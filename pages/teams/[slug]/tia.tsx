@@ -13,7 +13,8 @@ import type { TaskWithTiaProcedure, TaskProperties } from 'types';
 import {
   TiaTable,
   DeleteTia,
-  CreateProcedure as CreateTiaProcedure,
+  CreateProcedureLegacy,
+  CreateProcedure
 } from '@/components/interfaces/TIA';
 import { PerPageSelector } from '@/components/shared';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
@@ -25,7 +26,9 @@ const TiaDashboard: NextPageWithLayout<
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
   const { slug } = router.query;
+  const [isLegacyCreateOpen, setIsLegacyCreateOpen] = useState(false);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskWithTiaProcedure | null>(
@@ -90,23 +93,41 @@ const TiaDashboard: NextPageWithLayout<
               color="primary"
               variant="outline"
               onClick={() => {
-                setIsCreateOpen(true);
+                setIsLegacyCreateOpen(true);
               }}
             >
               {t('create')}
             </DaisyButton>
           )}
+          {canAccess('task', ['update']) && (
+            <DaisyButton
+              size="sm"
+              color="primary"
+              variant="outline"
+              onClick={() => {
+                setIsCreateOpen(true);
+              }}
+            >
+              Create with shadcn
+            </DaisyButton>
+          )}
         </div>
       </div>
       <>
-        {isCreateOpen && (
-          <CreateTiaProcedure
-            visible={isCreateOpen}
-            setVisible={setIsCreateOpen}
+        {isLegacyCreateOpen && (
+          <CreateProcedureLegacy
+            visible={isLegacyCreateOpen}
+            setVisible={setIsLegacyCreateOpen}
             tasks={tasks}
             mutate={mutateTasks}
           />
         )}
+        {isCreateOpen && <CreateProcedure
+          open={isCreateOpen}
+          onOpenChange={setIsCreateOpen}
+          tasks={tasks}
+          mutateTasks={mutateTasks}
+        />}
       </>
       {tasksWithProcedures.length === 0 ? (
         <EmptyState title={t('tia-dashboard')} description="No records" />
@@ -120,11 +141,13 @@ const TiaDashboard: NextPageWithLayout<
             deleteHandler={onDeleteClickHandler}
           />
           {taskToEdit && isEditOpen && (
-            <CreateTiaProcedure
-              visible={isEditOpen}
-              setVisible={setIsEditOpen}
-              selectedTask={taskToEdit as TaskWithTiaProcedure}
-              mutate={mutateTasks}
+            <CreateProcedure
+              open={isEditOpen}
+              onOpenChange={setIsEditOpen}
+              prevProcudere={taskToEdit.properties.tia_procedure}
+              tasks={tasks}
+              selectedTaskId={String(taskToEdit.id)}
+              mutateTasks={mutateTasks}
             />
           )}
           {taskToDelete && isDeleteOpen && (

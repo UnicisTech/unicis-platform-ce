@@ -265,15 +265,17 @@ export const isTranferPermitted = (procedure: any): boolean => {
 };
 
 export const getTransferIsValue = (formData: any) => {
-  if (!formData || !formData.values) return 'NOT PERMITTED';
+  //TODO: remove legacy verison
+  if (!formData) return 'NOT PERMITTED';
 
+  //legacy version is formData.values
   const {
     EncryptionInTransit,
     TransferMechanism,
     LawfulAccess,
     MassSurveillanceTelecommunications,
     SelfReportingObligations,
-  } = formData.values;
+  } = formData.values || formData;
 
   if (EncryptionInTransit === 'no' || TransferMechanism === 'no') {
     return 'NOT PERMITTED';
@@ -291,7 +293,8 @@ export const getTransferIsValue = (formData: any) => {
 };
 
 export const getTiaRisks = (state) => {
-  if (!state?.values) {
+  //TODO: remove legacy version
+  if (!state) {
     return {
       targetedRisk: 0,
       nonTargetedRisk: 0,
@@ -314,7 +317,7 @@ export const getTiaRisks = (state) => {
     ImporterObligation,
     LocalSelfReporting,
     PastSelfReporting,
-  } = state.values;
+  } = state || state.values;
 
   const targetedRisk =
     Number(WarrantsSubpoenas) +
@@ -340,7 +343,9 @@ export const getTiaRisks = (state) => {
 };
 
 export const getProblematicLawfulAccesses = (formState: any) => {
-  const formData = formState?.values;
+  //TODO: remove legacy version
+  // const formData = formState?.values;
+  const formData = formState
 
   if (!formData) {
     return {
