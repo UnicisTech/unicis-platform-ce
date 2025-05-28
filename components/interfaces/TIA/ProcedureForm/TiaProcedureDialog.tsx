@@ -15,10 +15,9 @@ import { Loader2 } from "lucide-react"
 import { Task } from "@prisma/client";
 import { ApiResponse, defaultProcedure, TiaProcedureInterface } from "types";
 import { TransferScenarioStep, ProblematicLawfulAccessStep, RiskStep, ProbabilityStep, ConclusionStep } from "./steps";
-import { useTransferScenarioStepForm, useProblematicLawfulAccessStepForm, useRiskStepForm } from "./hooks";
+import { useTransferScenarioStepForm, useProblematicLawfulAccessStepForm, useRiskStepForm, useProbabilityStepForm } from "./hooks";
 import TaskPicker from "@/components/shared/shadcn/TaskPicker";
 import { shouldSkipTwoSteps } from "@/lib/tia";
-import { useProbabilityStepForm } from "./hooks/useProbabilityStepForm";
 import { Message } from "@/components/shared/atlaskit";
 
 interface TiaProcedureDialogProps {

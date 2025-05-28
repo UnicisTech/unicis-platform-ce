@@ -3,7 +3,7 @@ import type { TiaProcedureInterface } from "types";
 import type { ProbabilityStepValues } from "../types";
 
 //TODO: instead of ?? "" we can use defaultProcudure from types/tia.ts in all hooks
-export function useProbabilityStepForm(
+export default function useProbabilityStepForm(
   procedure: TiaProcedureInterface
 ) {
   const initial = procedure[3] || {};
