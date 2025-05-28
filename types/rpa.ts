@@ -77,7 +77,7 @@ export type TaskRpaProperties = {
 export type ProcedureQueueItem = 'TIA' | 'PIA';
 
 export interface UseRpaCreationState {
-  selectedTask: Task | undefined;
+  selectedTask: TaskWithRpaProcedure | undefined;
   isRpaOpen: boolean;
   isPiaOpen: boolean;
   isTiaOpen: boolean;
