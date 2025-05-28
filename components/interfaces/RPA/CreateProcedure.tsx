@@ -39,7 +39,7 @@ import Select, { ValueType } from '@atlaskit/select';
 import {
   ApiResponse,
   TaskProperties,
-  RpaOption,
+  Option,
   ProcedureQueueItem,
 } from 'types';
 import type { Task } from '@prisma/client';
@@ -314,7 +314,7 @@ const FirstStage = ({ procedure }: { procedure: any }) => {
           </Fragment>
         )}
       </Field>
-      <Field<ValueType<RpaOption>>
+      <Field<ValueType<Option>>
         name="dpo"
         label={fieldPropsMapping['dpo']}
         defaultValue={procedure[0] && procedure[0].dpo}
@@ -387,7 +387,7 @@ const SecondStage = ({ procedure }: { procedure: any }) => {
           </Fragment>
         )}
       </Field>
-      <Field<ValueType<RpaOption, true>>
+      <Field<ValueType<Option, true>>
         name="category"
         label={fieldPropsMapping['category']}
         defaultValue={procedure[1] && procedure[1].category}
@@ -423,7 +423,7 @@ const SecondStage = ({ procedure }: { procedure: any }) => {
           </Fragment>
         )}
       </Field>
-      <Field<ValueType<RpaOption, true>>
+      <Field<ValueType<Option, true>>
         name="specialcategory"
         label={fieldPropsMapping['specialcategory']}
         defaultValue={procedure[1] && procedure[1].specialcategory}
@@ -457,7 +457,7 @@ const SecondStage = ({ procedure }: { procedure: any }) => {
           </Fragment>
         )}
       </Field>
-      <Field<ValueType<RpaOption, true>>
+      <Field<ValueType<Option, true>>
         name="datasubject"
         label={fieldPropsMapping['datasubject']}
         defaultValue={procedure[1] && procedure[1].datasubject}
@@ -494,7 +494,7 @@ const SecondStage = ({ procedure }: { procedure: any }) => {
           </Fragment>
         )}
       </Field>
-      <Field<ValueType<RpaOption>>
+      <Field<ValueType<Option>>
         name="retentionperiod"
         label={fieldPropsMapping['retentionperiod']}
         defaultValue={procedure[1] && procedure[1].retentionperiod}
@@ -562,7 +562,7 @@ const ThirdStage = ({ procedure }: { procedure: any }) => {
           </span>
         }
       />
-      <Field<ValueType<RpaOption>>
+      <Field<ValueType<Option>>
         name="recipientType"
         label={fieldPropsMapping['recipientType']}
         defaultValue={procedure[2] && procedure[2].recipientType}
@@ -662,7 +662,7 @@ const FourthStage = ({ procedure }: { procedure: any }) => {
           </Fragment>
         )}
       </Field>
-      <Field<ValueType<RpaOption>>
+      <Field<ValueType<Option>>
         name="country"
         label={fieldPropsMapping['country']}
         defaultValue={procedure[3] && procedure[3].country}
@@ -695,7 +695,7 @@ const FourthStage = ({ procedure }: { procedure: any }) => {
           </Fragment>
         )}
       </Field>
-      <Field<ValueType<RpaOption, true>>
+      <Field<ValueType<Option, true>>
         name="guarantee"
         label={fieldPropsMapping['guarantee']}
         defaultValue={procedure[3] && procedure[3].guarantee}
@@ -763,7 +763,7 @@ const FifthStage = ({ procedure }: { procedure: any }) => {
           </span>
         }
       />
-      <Field<ValueType<RpaOption, true>>
+      <Field<ValueType<Option, true>>
         name="toms"
         label={fieldPropsMapping['toms']}
         defaultValue={procedure[4] && procedure[4].toms}

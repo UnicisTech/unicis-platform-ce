@@ -26,7 +26,7 @@ const RpaDashboard: NextPageWithLayout<
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
   const { slug } = router.query;
-  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskWithRpaProcedure | null>(
     null
@@ -96,6 +96,7 @@ const RpaDashboard: NextPageWithLayout<
               color="primary"
               variant="outline"
               onClick={() => {
+                setTaskToEdit(null);
                 rpaState.setIsRpaOpen(true);
               }}
             >
@@ -109,6 +110,7 @@ const RpaDashboard: NextPageWithLayout<
           tasks={tasks}
           mutateTasks={mutateTasks}
           {...rpaState}
+          selectedTask={taskToEdit || undefined}
         />
       </>
       {tasksWithProcedures.length === 0 ? (
@@ -122,13 +124,13 @@ const RpaDashboard: NextPageWithLayout<
             editHandler={onEditClickHandler}
             deleteHandler={onDeleteClickHandler}
           />
-          {taskToEdit && isEditOpen && (
+          {/* {taskToEdit && isEditOpen && (
             <CreateProcedureTest
               mutateTasks={mutateTasks}
               {...rpaState}
               selectedTask={taskToEdit as TaskWithRpaProcedure}
             />
-          )}
+          )} */}
           {taskToDelete && isDeleteOpen && (
             <DeleteRpa
               visible={isDeleteOpen}

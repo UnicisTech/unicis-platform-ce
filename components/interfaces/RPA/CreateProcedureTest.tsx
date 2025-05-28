@@ -1,8 +1,9 @@
 import { CreateProcedure as CreateRpaProcedure } from '@/components/interfaces/RPA';
+import RpaProcedureDialog from './ProcedureForm/RpaProcedureDialog';
 import { CreatePiaRisk } from '@/components/interfaces/PIA';
 import { CreateProcedure as CreateTiaProcedure } from '@/components/interfaces/TIA';
 import { Task } from '@prisma/client';
-import { UseRpaCreationState } from 'types';
+import { TaskProperties, UseRpaCreationState } from 'types';
 
 interface CreateProcedureTestProps extends UseRpaCreationState {
   tasks?: Task[];
@@ -24,12 +25,24 @@ const CreateProcedureTest = ({
 }: CreateProcedureTestProps) => {
   return (
     <>
-      {isCreateOpen && (
+      {/* {isCreateOpen && (
         <CreateRpaProcedure
           visible={isCreateOpen}
           setVisible={setIsCreateOpen}
           tasks={tasks}
           selectedTask={selectedTask}
+          mutateTasks={mutateTasks}
+          completeCallback={onRpaCompletedCallback}
+        />
+      )} */}
+
+      {isCreateOpen && (
+        <RpaProcedureDialog
+          open={isCreateOpen}
+          onOpenChange={setIsCreateOpen}
+          prevProcedure={selectedTask?.properties?.rpa_procedure}
+          tasks={tasks}
+          selectedTaskId={selectedTask?.id ? String(selectedTask?.id) : undefined}
           mutateTasks={mutateTasks}
           completeCallback={onRpaCompletedCallback}
         />

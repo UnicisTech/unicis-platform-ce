@@ -24,7 +24,6 @@ import useTeamMembers from 'hooks/useTeamMembers';
 import { WithoutRing } from 'sharedStyles';
 import Select, { ValueType } from '@atlaskit/select';
 import {
-  RmOption,
   ApiResponse,
   TaskProperties,
   RMProcedureInterface,
@@ -60,6 +59,7 @@ const CreateRisk = ({
   const [prevRisk, setPrevRisk] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  console.log('CreateRisk Legacy', {risk, prevRisk})
   const saveRisk = async ({ risk, prevRisk }: { risk: any; prevRisk: any }) => {
     try {
       setIsLoading(true);
@@ -222,7 +222,10 @@ const FirstStage = ({ risk }: { risk: RMProcedureInterface }) => {
         )}
       </Field>
 
-      <Field<ValueType<RmOption>>
+      <Field<ValueType<{
+        label: string;
+        value: string;
+      }>>
         name="AssetOwner"
         label={fieldPropsMapping['AssetOwner']}
         defaultValue={risk[0]?.AssetOwner}

@@ -3,13 +3,13 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeamTasks from 'hooks/useTeamTasks';
-import CreateRisk from './CreateRisk';
+import CreateRiskLegacy from './CreateRisk';
 import { EmptyState, Error } from '@/components/shared';
 import { TaskProperties, TaskWithPiaRisk } from 'types';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
-import CreateRiskShadcn from './CreateRiskShadcn';
+import CreateRisk from './RiskForm/RiskAssessmentDialog';
 
 const Dashboard = () => {
   const { canAccess, isLoading } = useCanAccess();
@@ -96,15 +96,19 @@ const Dashboard = () => {
         </div>
       </div>
       {isCreateOpen && tasks && (
-        <CreateRisk
+        <CreateRiskLegacy
           tasks={tasks}
           mutateTasks={mutateTasks}
           visible={isCreateOpen}
           setVisible={setIsCreateOpen}
         />
       )}
-      <CreateRiskShadcn open={isShadcnCreateOpen} onOpenChange={setIsShadcnCreateOpen} tasks={tasks || []} />
-
+      {isCreateOpen && <CreateRisk
+        open={isShadcnCreateOpen}
+        onOpenChange={setIsShadcnCreateOpen}
+        tasks={tasks || []}
+        mutateTasks={mutateTasks}
+      />}
       {tasksWithRisks.length === 0 ? (
         <EmptyState title={t('rpa-dashboard')} description="No records" />
       ) : (
@@ -116,23 +120,14 @@ const Dashboard = () => {
             editHandler={onEditClickHandler}
             deleteHandler={onDeleteClickHandler}
           />
-          {/* {taskToEdit && isEditOpen && (
-            <CreateRisk
-              tasks={tasks || []}
-              visible={isEditOpen}
-              setVisible={setIsEditOpen}
-              selectedTask={taskToEdit}
-              mutateTasks={mutateTasks}
-            />
-          )} */}
           {taskToEdit && isEditOpen && (
-            <CreateRiskShadcn
+            <CreateRisk
               open={isEditOpen}
               prevRisk={taskToEdit.properties.pia_risk}
               onOpenChange={setIsEditOpen}
               tasks={tasks || []}
               selectedTaskId={String(taskToEdit.id)}
-              // mutateTasks={mutateTasks}
+              mutateTasks={mutateTasks}
             />
           )}
           {taskToDelete && isDeleteOpen && (

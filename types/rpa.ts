@@ -1,63 +1,58 @@
 import type { Dispatch, SetStateAction } from 'react';
 import type { Task } from '@prisma/client';
 import type { Session } from 'next-auth';
-import type { Diff } from './base';
-
-export type RpaOption = {
-  label: string;
-  value: string;
-};
+import type { Diff, Option } from './base';
 
 export type RpaProcedureInterface = [
   {
     reviewDate: string;
     controller: string;
-    dpo: RpaOption;
+    dpo: Option;
   },
   {
     purpose?: string;
-    category: RpaOption[];
-    datasubject: RpaOption[];
-    retentionperiod: RpaOption;
-    specialcategory: RpaOption[];
+    category: Option[];
+    datasubject: Option[];
+    retentionperiod: Option;
+    specialcategory: Option[];
     commentsretention?: string;
   },
   {
-    recipientType: RpaOption;
+    recipientType: Option;
     recipientdetails?: string;
   },
   {
     datatransfer: boolean;
     recipient: string;
-    country: RpaOption;
-    guarantee: RpaOption[];
+    country: Option;
+    guarantee: Option[];
   },
   {
-    toms: RpaOption[];
+    toms: Option[];
   },
 ];
 
 export interface RpaConfig {
-  category: RpaOption[];
-  specialcategory: RpaOption[];
-  datasubject: RpaOption[];
-  retentionperiod: RpaOption[];
-  recipientType: RpaOption[];
-  guarantee: RpaOption[];
-  toms: RpaOption[];
-  country: RpaOption[];
-  involveProfiling: RpaOption[];
-  useAutomated: RpaOption[];
-  involveSurveillance: RpaOption[];
-  processedSpecialCategories: RpaOption[];
-  isBigData: RpaOption[];
-  dataSetsCombined: RpaOption[];
-  multipleControllers: RpaOption[];
-  imbalanceInRelationship: RpaOption[];
-  innovativeTechnologyUsed: RpaOption[];
-  transferredOutside: RpaOption[];
-  rightsRestricted: RpaOption[];
-  piaNeeded: RpaOption[];
+  category: Option[];
+  specialcategory: Option[];
+  datasubject: Option[];
+  retentionperiod: Option[];
+  recipientType: Option[];
+  guarantee: Option[];
+  toms: Option[];
+  country: Option[];
+  involveProfiling: Option[];
+  useAutomated: Option[];
+  involveSurveillance: Option[];
+  processedSpecialCategories: Option[];
+  isBigData: Option[];
+  dataSetsCombined: Option[];
+  multipleControllers: Option[];
+  imbalanceInRelationship: Option[];
+  innovativeTechnologyUsed: Option[];
+  transferredOutside: Option[];
+  rightsRestricted: Option[];
+  piaNeeded: Option[];
 }
 
 //TODO: RpaAuditLog and TiaAuditLog, use AuditLog from base.ts instead
@@ -82,7 +77,7 @@ export type TaskRpaProperties = {
 export type ProcedureQueueItem = 'TIA' | 'PIA';
 
 export interface UseRpaCreationState {
-  selectedTask: Task | undefined;
+  selectedTask: TaskWithRpaProcedure | undefined;
   isRpaOpen: boolean;
   isPiaOpen: boolean;
   isTiaOpen: boolean;

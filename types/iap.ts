@@ -1,14 +1,10 @@
 import { CourseContentType, CourseProgress, TeamCourse } from '@prisma/client';
 import { Course } from '@prisma/client';
+import type { Option } from './base';
 
 export type TeamIapProperties = {
   iap_categories?: string[];
   iap_courses?: any[];
-};
-
-type Option = {
-  label: string;
-  value: string;
 };
 
 export enum QuestionType {
