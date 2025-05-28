@@ -1,32 +1,33 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import Select from '@atlaskit/select';
-// import { statusOptions } from '@/components/defaultLanding/data/configs/csc';
-import { WithoutRing } from 'sharedStyles';
+import { MultiSelect } from '@/components/shadcn/ui/multi-select';
+import { Option } from 'types';
 
-interface StatusCscFilterProps<T> {
-  options: T[];
-  setStatusFilter: Dispatch<SetStateAction<T[] | null>>;
+
+interface StatusCscFilterProps {
+  options: Option[];
+  setStatusFilter: Dispatch<SetStateAction<Option[] | null>>;
 }
 
-const StatusFilter = <T,>({
-  options,
-  setStatusFilter,
-}: StatusCscFilterProps<T>) => {
+const StatusFilter = ({ options, setStatusFilter }: StatusCscFilterProps) => {
+  const handleValueChange = (selectedValues: string[]) => {
+    const selectedOptions = options.filter((opt) =>
+      selectedValues.includes(opt.value.toString())
+    );
+    setStatusFilter(selectedOptions);
+  };
+
   return (
-    <div style={{ margin: '0 5px' }}>
-      <WithoutRing>
-        <Select
-          inputId="multi-select-status-filter"
-          className="multi-select"
-          classNamePrefix="react-select"
-          options={options}
-          onChange={(value) => {
-            setStatusFilter([...value]);
-          }}
-          placeholder="Choose a status"
-          isMulti
-        />
-      </WithoutRing>
+    <div className="w-full max-w-xs mx-1">
+      <MultiSelect
+        options={options.map((opt) => ({
+          ...opt,
+          value: String(opt.value),
+        }))}
+        onValueChange={handleValueChange}
+        placeholder="Choose a status"
+        animation={0.2}
+        maxCount={3}
+      />
     </div>
   );
 };
