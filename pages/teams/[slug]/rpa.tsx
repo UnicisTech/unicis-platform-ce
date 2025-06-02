@@ -26,7 +26,6 @@ const RpaDashboard: NextPageWithLayout<
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
   const { slug } = router.query;
-  const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskWithRpaProcedure | null>(
     null
@@ -45,7 +44,6 @@ const RpaDashboard: NextPageWithLayout<
 
   const onEditClickHandler = useCallback((task: TaskWithRpaProcedure) => {
     setTaskToEdit(task);
-    setIsEditOpen(true);
     rpaState.setIsRpaOpen(true);
   }, []);
 
@@ -105,14 +103,12 @@ const RpaDashboard: NextPageWithLayout<
           )}
         </div>
       </div>
-      <>
-        <CreateProcedureTest
-          tasks={tasks}
-          mutateTasks={mutateTasks}
-          {...rpaState}
-          selectedTask={taskToEdit || undefined}
-        />
-      </>
+      <CreateProcedureTest
+        tasks={tasks}
+        mutateTasks={mutateTasks}
+        {...rpaState}
+        selectedTask={taskToEdit || rpaState.selectedTask}
+      />
       {tasksWithProcedures.length === 0 ? (
         <EmptyState title={t('rpa-dashboard')} description="No records" />
       ) : (
@@ -124,13 +120,6 @@ const RpaDashboard: NextPageWithLayout<
             editHandler={onEditClickHandler}
             deleteHandler={onDeleteClickHandler}
           />
-          {/* {taskToEdit && isEditOpen && (
-            <CreateProcedureTest
-              mutateTasks={mutateTasks}
-              {...rpaState}
-              selectedTask={taskToEdit as TaskWithRpaProcedure}
-            />
-          )} */}
           {taskToDelete && isDeleteOpen && (
             <DeleteRpa
               visible={isDeleteOpen}

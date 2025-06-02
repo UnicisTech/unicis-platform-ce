@@ -41,7 +41,7 @@ import {
 import Breadcrumb from '../../Breadcrumb';
 import useRpaCreation from 'hooks/useRpaCreation';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
-import { TaskProperties } from 'types';
+import { PiaRisk, RMProcedureInterface, TaskProperties, TiaProcedureInterface } from 'types';
 
 const TaskById = ({
   csc_statuses,
@@ -214,10 +214,12 @@ const TaskById = ({
       )}
       {tiaVisible && (
         <CreateTiaProcedure
-          visible={tiaVisible}
-          setVisible={setTiaVisible}
+          open={tiaVisible}
+          onOpenChange={setTiaVisible}
           selectedTask={task}
-          mutate={mutateTask}
+          prevProcudere={(task.properties as TaskProperties)?.tia_procedure as TiaProcedureInterface | undefined}
+          //TODO: mutateTasks or mutateTask? maybe just rename prop to mutate
+          mutateTasks={mutateTask}
         />
       )}
       <CreateProcedureTest mutateTasks={mutateTask} {...rpaState} />
@@ -225,16 +227,17 @@ const TaskById = ({
         <CreatePiaRisk
           open={piaVisible}
           onOpenChange={setPiaVisible}
-          selectedTaskId={String(task.id)}
-          prevRisk={(task.properties as TaskProperties)?.pia_risk}
+          //TODO: get rid of [] type
+          prevRisk={(task.properties as TaskProperties)?.pia_risk as PiaRisk | undefined}
           mutateTasks={mutateTask}
         />
       )}
       {rmVisible && (
         <CreateRiskManagementRisk
-          visible={rmVisible}
-          setVisible={setRmVisible}
+          open={rmVisible}
+          onOpenChange={setRmVisible}
           selectedTask={task}
+          prevRisk={(task.properties as TaskProperties)?.rm_risk as RMProcedureInterface | undefined}
           mutateTasks={mutateTask}
         />
       )}

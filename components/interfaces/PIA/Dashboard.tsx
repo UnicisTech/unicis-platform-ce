@@ -103,7 +103,7 @@ const Dashboard = () => {
           setVisible={setIsCreateOpen}
         />
       )}
-      {isCreateOpen && <CreateRisk
+      {isShadcnCreateOpen && <CreateRisk
         open={isShadcnCreateOpen}
         onOpenChange={setIsShadcnCreateOpen}
         tasks={tasks || []}
@@ -126,7 +126,7 @@ const Dashboard = () => {
               prevRisk={taskToEdit.properties.pia_risk}
               onOpenChange={setIsEditOpen}
               tasks={tasks || []}
-              selectedTaskId={String(taskToEdit.id)}
+              selectedTask={taskToEdit}
               mutateTasks={mutateTasks}
             />
           )}
