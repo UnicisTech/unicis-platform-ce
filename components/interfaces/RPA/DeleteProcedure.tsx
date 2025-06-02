@@ -1,31 +1,41 @@
 import * as React from "react";
 import { useState, useCallback } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/shadcn/ui/dialog";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { getAxiosError } from "@/lib/common";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogClose,
+} from "@/components/shadcn/ui/dialog";
 import { Button } from "@/components/shadcn/ui/button";
 import { Loader2 } from "lucide-react";
+
 import type { ApiResponse, TaskWithRpaProcedure } from "types";
 import type { Task } from "@prisma/client";
 
-interface DeleteRiskProps {
+interface DeleteProcedureProps {
   visible: boolean;
-  setVisible: (visible: boolean) => void;
+  setVisible: (open: boolean) => void;
   task: Task | TaskWithRpaProcedure;
   mutate: () => Promise<void>;
 }
 
-export default function DeleteRisk({
+export default function DeleteProcedure({
   visible,
   setVisible,
   task,
   mutate,
-}: DeleteRiskProps) {
+}: DeleteProcedureProps) {
   const { t } = useTranslation("common");
   const router = useRouter();
-  const { slug } = router.query as { slug: string };
+  const { slug } = router.query;
 
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -34,45 +44,43 @@ export default function DeleteRisk({
       setIsDeleting(true);
 
       const response = await axios.delete<ApiResponse<Task>>(
-        `/api/teams/${slug}/tasks/${task.taskNumber}/rm`
+        `/api/teams/${slug}/tasks/${task.taskNumber}/pia`
       );
       const { error } = response.data;
 
       if (error) {
         toast.error(error.message);
-        setIsDeleting(false);
         return;
+      } else {
+        toast.success(t("riskDeleted", "Risk deleted."));
       }
 
-      toast.success(t("risk_deleted") || "Risk deleted.");
       await mutate();
       setVisible(false);
-      setIsDeleting(false);
     } catch (err: any) {
+      toast.error(getAxiosError(err));
+    } finally {
       setIsDeleting(false);
-      toast.error(err.response?.data?.message || err.message);
     }
   }, [slug, task, mutate, setVisible, t]);
 
-  const closeHandler = useCallback(() => {
-    setVisible(false);
-  }, [setVisible]);
-
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
-      <DialogContent className="max-w-md p-6">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{t("rm-remove-title")}</DialogTitle>
+          <DialogTitle>  
+            {t("rpa-delete-title")}
+          </DialogTitle>
         </DialogHeader>
 
         <div className="my-4 text-sm">
-          {t("rm-remove-description")}
+          {t("rpa-delete-description")}
         </div>
 
         <DialogFooter className="flex justify-end space-x-2">
           <DialogClose asChild>
             <Button variant="outline" disabled={isDeleting}>
-              {t("close") || "Close"}
+              {t("close", "Close")}
             </Button>
           </DialogClose>
           <Button
@@ -80,8 +88,10 @@ export default function DeleteRisk({
             onClick={deleteRisk}
             disabled={isDeleting}
           >
-            {isDeleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {t("delete") || "Delete"}
+            {isDeleting && (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            )}
+            {t("delete", "Delete")}
           </Button>
         </DialogFooter>
       </DialogContent>

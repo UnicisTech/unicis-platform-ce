@@ -12,7 +12,7 @@ import useCanAccess from 'hooks/useCanAccess';
 import type { TaskWithTiaProcedure, TaskProperties } from 'types';
 import {
   TiaTable,
-  DeleteTia,
+  DeleteProcedure,
   CreateProcedureLegacy,
   CreateProcedure
 } from '@/components/interfaces/TIA';
@@ -151,7 +151,7 @@ const TiaDashboard: NextPageWithLayout<
             />
           )}
           {taskToDelete && isDeleteOpen && (
-            <DeleteTia
+            <DeleteProcedure
               visible={isDeleteOpen}
               setVisible={setIsDeleteOpen}
               task={taskToDelete as TaskWithTiaProcedure}

@@ -10,31 +10,31 @@ import { Loader2 } from "lucide-react";
 import type { ApiResponse, TaskWithRpaProcedure } from "types";
 import type { Task } from "@prisma/client";
 
-interface DeleteRiskProps {
+interface DeleteTiaProps {
   visible: boolean;
   setVisible: (visible: boolean) => void;
   task: Task | TaskWithRpaProcedure;
   mutate: () => Promise<void>;
 }
 
-export default function DeleteRisk({
+export default function DeleteProcedure({
   visible,
   setVisible,
   task,
   mutate,
-}: DeleteRiskProps) {
+}: DeleteTiaProps) {
   const { t } = useTranslation("common");
   const router = useRouter();
   const { slug } = router.query as { slug: string };
 
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const deleteRisk = useCallback(async () => {
+  const deleteProcedure = useCallback(async () => {
     try {
       setIsDeleting(true);
 
       const response = await axios.delete<ApiResponse<Task>>(
-        `/api/teams/${slug}/tasks/${task.taskNumber}/rm`
+        `/api/teams/${slug}/tasks/${task.taskNumber}/tia`
       );
       const { error } = response.data;
 
@@ -44,15 +44,15 @@ export default function DeleteRisk({
         return;
       }
 
-      toast.success(t("risk_deleted") || "Risk deleted.");
+      toast.success("Procedure deleted.");
       await mutate();
-      setVisible(false);
       setIsDeleting(false);
+      setVisible(false);
     } catch (err: any) {
       setIsDeleting(false);
       toast.error(err.response?.data?.message || err.message);
     }
-  }, [slug, task, mutate, setVisible, t]);
+  }, [slug, task.taskNumber, mutate, setVisible, t]);
 
   const closeHandler = useCallback(() => {
     setVisible(false);
@@ -62,22 +62,25 @@ export default function DeleteRisk({
     <Dialog open={visible} onOpenChange={setVisible}>
       <DialogContent className="max-w-md p-6">
         <DialogHeader>
-          <DialogTitle>{t("rm-remove-title")}</DialogTitle>
+          <DialogTitle>
+            {t("tia-delete-title")}
+          </DialogTitle>
         </DialogHeader>
 
         <div className="my-4 text-sm">
-          {t("rm-remove-description")}
+          {t("tia-delete-description")}
         </div>
 
         <DialogFooter className="flex justify-end space-x-2">
           <DialogClose asChild>
-            <Button variant="outline" disabled={isDeleting}>
+            <Button variant="outline" disabled={isDeleting} onClick={closeHandler}>
               {t("close") || "Close"}
             </Button>
           </DialogClose>
+
           <Button
             variant="destructive"
-            onClick={deleteRisk}
+            onClick={deleteProcedure}
             disabled={isDeleting}
           >
             {isDeleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

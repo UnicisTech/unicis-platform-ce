@@ -12,7 +12,7 @@ import useCanAccess from 'hooks/useCanAccess';
 import type { TaskWithRpaProcedure, TaskProperties } from 'types';
 import {
   RpaTable,
-  DeleteRpa,
+  DeleteProcedure,
   CreateProcedureTest,
 } from '@/components/interfaces/RPA';
 import { PerPageSelector } from '@/components/shared';
@@ -121,7 +121,7 @@ const RpaDashboard: NextPageWithLayout<
             deleteHandler={onDeleteClickHandler}
           />
           {taskToDelete && isDeleteOpen && (
-            <DeleteRpa
+            <DeleteProcedure
               visible={isDeleteOpen}
               setVisible={setIsDeleteOpen}
               task={taskToDelete as TaskWithRpaProcedure}

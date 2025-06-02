@@ -217,6 +217,8 @@
   "rpa-category": "Special Category of Personal Data",
   "create-rpa": "Register Record of Processing Activities",
   "rpa-created": "Record of Processing Activities created successfully.",
+  "rpa-delete-title": "Remove Register of Procedure",
+  "rpa-delete-description": "Are you sure you want to remove Register of Procedure? Your task will not be removed.",
   "tia": "Transfer Impact Assessment",
   "tia-dashboard": "Transfer Impact Assessment Dashboard",
   "tia-data-exporter": "Data exporter(s)",
@@ -225,6 +227,8 @@
   "tia-ending-date": "Ending Date",
   "tia-egal-analysis": "Legal analysis",
   "tia-transfer-is": "Transfer is",
+  "tia-delete-title": "Remove Transfer Impact Assessment",
+  "tia-delete-description": "Are you sure you want to remove the Transfer Impact Assessment? Your task will not be removed.",
   "create-tia": "Register Transfer Impact Assessment",
   "tia-created": "Record of Transfer Impact Assessment created successfully.",
   "rm": "Risk Management",
@@ -232,6 +236,8 @@
   "rm-created": "Risk created successfully.",
   "rm-overview": "Risk Management Overview",
   "rm-register-risk-record": "Register Risk Management",
+  "rm-remove-title": "Remove Risk Management",
+  "rm-remove-description": "Are you sure you want to remove the Risk Management record from the task? Your task itself will not be removed.",
   "current-risk-rating": "Current Risk Rating",
   "target-risk-rating": "Target Risk Rating",
   "iap": "Interactive Awareness Training",
@@ -302,5 +308,7 @@
   "pia": "Privacy Impact Assessment",
   "pia-dashboard": "Privacy Impact Assessment Dashboard",
   "create-pia": "Register Privacy Impact Assessment",
-  "pia-overview": "Privacy Impact Assessment Overview"
+  "pia-overview": "Privacy Impact Assessment Overview",
+  "pia-remove-title": "Remove Privacy Impact Assessment Risk",
+  "pia-remove-description": "Are you sure you want to remove Privacy Impact Assessment Risk? Your task will not be removed."
 }
