@@ -24,6 +24,7 @@ import useISO from 'hooks/useISO';
 import { statusOptions } from '@/components/defaultLanding/data/configs/csc';
 import useCanAccess from 'hooks/useCanAccess';
 import { useTranslation } from 'react-i18next';
+import { CscOption, Option } from 'types';
 
 const labels = [
   'Unknown',
@@ -58,7 +59,7 @@ const CscDashboard = ({
   const [sectionFilter, setSectionFilter] = useState<
     null | { label: string; value: string }[]
   >(null);
-  const [statusFilter, setStatusFilter] = useState<null | { label: string; value: number; }[]>(null);
+  const [statusFilter, setStatusFilter] = useState<null | CscOption[]>(null);
   const [perPage, setPerPage] = useState<number>(10);
 
   const { isLoading, isError, team } = useTeam(slug as string);

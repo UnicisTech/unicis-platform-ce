@@ -1,11 +1,11 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { MultiSelect } from '@/components/shadcn/ui/multi-select';
-import { Option } from 'types';
+import { CscOption } from 'types';
 
 
 interface StatusCscFilterProps {
-  options: Option[];
-  setStatusFilter: Dispatch<SetStateAction<Option[] | null>>;
+  options: CscOption[];
+  setStatusFilter: Dispatch<SetStateAction<CscOption[] | null>>;
 }
 
 const StatusFilter = ({ options, setStatusFilter }: StatusCscFilterProps) => {

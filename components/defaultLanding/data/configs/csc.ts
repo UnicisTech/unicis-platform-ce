@@ -201,31 +201,31 @@ const statusOptions: { label: string; value: number }[] = [
   },
   {
     label: 'Not Applicable',
-    value: 0,
-  },
-  {
-    label: 'Not Performed',
     value: 1,
   },
   {
-    label: 'Performed Informally',
+    label: 'Not Performed',
     value: 2,
   },
   {
-    label: 'Planned',
+    label: 'Performed Informally',
     value: 3,
   },
   {
-    label: 'Well Defined',
+    label: 'Planned',
     value: 4,
   },
   {
-    label: 'Quantitatively Controlled',
+    label: 'Well Defined',
     value: 5,
   },
   {
-    label: 'Continuously Improving',
+    label: 'Quantitatively Controlled',
     value: 6,
+  },
+  {
+    label: 'Continuously Improving',
+    value: 7,
   },
 ];
 
