@@ -1,4 +1,4 @@
-import { Message } from "@/components/shared/atlaskit";
+import { Message } from "@/components/shared";
 import DaisyBadge from "@/components/shared/daisyUI/DaisyBadge";
 import { isTranferPermitted } from "@/lib/tia";
 

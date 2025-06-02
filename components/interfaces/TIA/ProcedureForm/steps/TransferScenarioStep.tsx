@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { Control } from "react-hook-form";
 import {
@@ -17,7 +15,7 @@ import { Slider } from "@/components/shadcn/ui/slider";
 import { config, fieldPropsMapping } from "@/components/defaultLanding/data/configs/tia";
 import type { TransferScenarioStepValues } from "../types";
 import { DatePickerInput } from "@/components/shadcn/ui/date-picker";
-import { Message } from "@/components/shared/atlaskit";
+import { Message } from "@/components/shared";
 
 interface TransferScenarioStepProps {
     control: Control<TransferScenarioStepValues>;

@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { Control } from "react-hook-form";
 import {
@@ -15,7 +13,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/shadcn/ui/radio-group";
 
 import { config, fieldPropsMapping, questions } from "@/components/defaultLanding/data/configs/tia";
 import type { ProbabilityStepValues } from "../types";
-import { Message } from "@/components/shared/atlaskit";
+import { Message } from "@/components/shared";
 import { Input } from "@/components/shadcn/ui/input";
 import DaisyBadge from "@/components/shared/daisyUI/DaisyBadge";
 import { TiaProcedureInterface } from "types";

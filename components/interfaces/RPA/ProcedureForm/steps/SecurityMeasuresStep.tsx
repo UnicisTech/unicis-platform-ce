@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { Control } from "react-hook-form";
 import {
@@ -14,7 +12,7 @@ import { MultiSelect } from "@/components/shadcn/ui/multi-select";
 import { config, fieldPropsMapping } from "@/components/defaultLanding/data/configs/rpa";
 import type { Option } from "types";
 import type { SecurityMeasuresStepValues } from "../types";
-import { Message } from "@/components/shared/atlaskit";
+import { Message } from "@/components/shared";
 
 export interface SecurityMeasuresStepProps {
   control: Control<SecurityMeasuresStepValues>;

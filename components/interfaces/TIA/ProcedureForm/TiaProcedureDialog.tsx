@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import toast from 'react-hot-toast';
 import axios from 'axios';
@@ -18,7 +16,7 @@ import { TransferScenarioStep, ProblematicLawfulAccessStep, RiskStep, Probabilit
 import { useTransferScenarioStepForm, useProblematicLawfulAccessStepForm, useRiskStepForm, useProbabilityStepForm } from "./hooks";
 import TaskPicker from "@/components/shared/shadcn/TaskPicker";
 import { shouldSkipTwoSteps } from "@/lib/tia";
-import { Message } from "@/components/shared/atlaskit";
+import { Message } from "@/components/shared";
 
 interface TiaProcedureDialogProps {
     prevProcudere?: TiaProcedureInterface;

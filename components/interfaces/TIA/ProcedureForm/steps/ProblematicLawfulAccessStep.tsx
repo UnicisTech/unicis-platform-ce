@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { Control, useFormContext } from "react-hook-form";
 import {
@@ -18,7 +16,7 @@ import type { TiaProcedureInterface } from "types";
 import type { ProblematicLawfulAccessValues } from "../types";
 import DaisyBadge from "@/components/shared/daisyUI/DaisyBadge";
 import { getTransferIsValue } from "@/lib/tia";
-import { Message } from "@/components/shared/atlaskit";
+import { Message } from "@/components/shared";
 
 export function TransferIs() {
     const { getValues } = useFormContext();

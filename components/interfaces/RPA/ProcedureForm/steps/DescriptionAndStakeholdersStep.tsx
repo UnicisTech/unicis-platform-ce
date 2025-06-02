@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { useRouter } from "next/router";
 import { Control } from "react-hook-form";
@@ -12,15 +10,13 @@ import {
     FormDescription,
 } from "@/components/shadcn/ui/form";
 import { Input } from "@/components/shadcn/ui/input";
-import { Textarea } from "@/components/shadcn/ui/textarea";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/shadcn/ui/select";
 import { DatePickerInput } from "@/components/shadcn/ui/date-picker";
 import useTeamMembers from "hooks/useTeamMembers";
 import { Loading, Error } from "@/components/shared";
-import format from "date-fns/format";
 import type { DescriptionAndStakeholdersStepValues } from "../types";
 import type { Option } from "types";
-import { Message } from "@/components/shared/atlaskit";
+import { Message } from "@/components/shared";
 
 export interface DescriptionAndStakeholdersStepProps {
     control: Control<DescriptionAndStakeholdersStepValues>;

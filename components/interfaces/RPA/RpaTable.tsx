@@ -24,6 +24,7 @@ const RpaTable = ({
   editHandler: (task: TaskWithRpaProcedure) => void;
   deleteHandler: (task: TaskWithRpaProcedure) => void;
 }) => {
+  console.log('rpa table use atlaskit tag?')
   const { canAccess } = useCanAccess();
   const { t } = useTranslation('common');
   const {
@@ -97,6 +98,7 @@ const RpaTable = ({
                   </td>
                   <td className="px-1.5 py-1.5">
                     <Tag text={task.properties.rpa_procedure[0].reviewDate} />
+                    <DaisyBadge>{task.properties.rpa_procedure[0].reviewDate}</DaisyBadge>
                   </td>
                   <td className="px-1.5 py-1.5">
                     <>

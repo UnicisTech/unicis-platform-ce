@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import toast from 'react-hot-toast';
 import axios from 'axios';
@@ -15,7 +13,7 @@ import { Loader2 } from "lucide-react"
 import { Task } from "@prisma/client";
 import { ApiResponse, defaultProcedure, ProcedureQueueItem, RpaProcedureInterface } from "types";
 import TaskPicker from "@/components/shared/shadcn/TaskPicker";
-import { Message } from "@/components/shared/atlaskit";
+import { Message } from "@/components/shared";
 import { useDescriptionAndStakeholdersStepForm, usePurposeAndCategoriesStepForm, useRecipientsStepForm, useSecurityMeasuresStepForm, useTiaStepForm } from "./hooks";
 import { DescriptionAndStakeholdersStep, PurposeAndCategoriesStep, RecipientsStep, TiaStep } from "./steps";
 import { SecurityMeasuresStep } from "./steps/SecurityMeasuresStep";

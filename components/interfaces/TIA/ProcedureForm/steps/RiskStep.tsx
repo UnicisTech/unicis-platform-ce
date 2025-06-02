@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { Control, useFormContext } from "react-hook-form";
 import {
@@ -19,7 +17,7 @@ import { config, fieldPropsMapping } from "@/components/defaultLanding/data/conf
 import type { TiaProcedureInterface } from "types";
 import type { RiskStepValues } from "../types";
 import RiskLevel from "../../RiskLevel";
-import { Message } from "@/components/shared/atlaskit";
+import { Message } from "@/components/shared";
 
 interface RiskStepProps {
   problematicLawfulAccessValues: TiaProcedureInterface[1];

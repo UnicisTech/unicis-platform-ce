@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { Control } from "react-hook-form";
 import {
@@ -15,7 +13,7 @@ import { MultiSelect } from "@/components/shadcn/ui/multi-select";
 import { config, fieldPropsMapping } from "@/components/defaultLanding/data/configs/rpa";
 import type { Option } from "types";
 import type { PurposeAndCategoriesStepValues } from "../types";
-import { Message } from "@/components/shared/atlaskit";
+import { Message } from "@/components/shared";
 
 export interface PurposeAndCategoriesStepProps {
     control: Control<PurposeAndCategoriesStepValues>;

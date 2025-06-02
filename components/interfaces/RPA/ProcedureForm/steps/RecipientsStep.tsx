@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { Control } from "react-hook-form";
 import {
@@ -14,7 +12,7 @@ import { Textarea } from "@/components/shadcn/ui/textarea";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/shadcn/ui/select";
 import { config, fieldPropsMapping } from "@/components/defaultLanding/data/configs/rpa";
 import type { RecipientsStepValues } from "../types";
-import { Message } from "@/components/shared/atlaskit";
+import { Message } from "@/components/shared";
 
 export interface RecipientsStepProps {
     control: Control<RecipientsStepValues>;
