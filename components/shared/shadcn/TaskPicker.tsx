@@ -5,8 +5,8 @@ import { Control } from "react-hook-form";
 import type { Task } from "@prisma/client";
 
 interface Props {
-    control: Control<{ taskId: string }>;
-    name: "taskId";
+    control: Control<{ task: Task }>;
+    name: "task";
     tasks: Task[];
 }
 
@@ -20,7 +20,13 @@ export default function TaskPicker({ control, name, tasks }: Props) {
                 <FormItem>
                     <FormLabel>Task</FormLabel>
                     <FormControl>
-                        <Select onValueChange={field.onChange} value={field.value}>
+                        <Select 
+                            onValueChange={(taskId) => {
+                                const task = tasks.find(t => String(t.id) === taskId);
+                                return field.onChange(task)
+                            }}
+                            value={field.value?.id ? String(field.value.id) : undefined}
+                            >
                             <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Select a task" />
                             </SelectTrigger>

@@ -22,7 +22,7 @@ import { Message } from "@/components/shared/atlaskit";
 
 interface TiaProcedureDialogProps {
     prevProcudere?: TiaProcedureInterface;
-    selectedTaskId?: string;
+    selectedTask?: Task;
     tasks?: Task[];
     open: boolean;
     onOpenChange: (open: boolean) => void;
@@ -33,7 +33,7 @@ interface TiaProcedureDialogProps {
 export default function TiaProcedureDialog({
     prevProcudere,
     tasks,
-    selectedTaskId,
+    selectedTask,
     open,
     onOpenChange,
     mutateTasks,
@@ -43,14 +43,12 @@ export default function TiaProcedureDialog({
     const router = useRouter();
     const { slug } = router.query;
 
-    const [currentStep, setCurrentStep] = React.useState(selectedTaskId ? 1 : 0);
+    const [currentStep, setCurrentStep] = React.useState(selectedTask ? 1 : 0);
     const [procedureData, setProcedureData] = React.useState<any>(prevProcudere || defaultProcedure);
-    const [taskId, setTaskId] = React.useState<string | null>(selectedTaskId || null);
+    const [task, setTask] = React.useState<Task | null>(selectedTask || null);
     const [isSaving, setIsSaving] = React.useState<boolean>(false);
 
-    console.log('procedureData', procedureData, prevProcudere)
-
-    const taskForm = useForm<{ taskId: string }>({ defaultValues: { taskId: selectedTaskId ?? "" }, mode: "onChange" });
+    const taskForm = useForm<{ task: Task }>({ mode: "onChange" });
     const transferScenarioForm = useTransferScenarioStepForm(procedureData);
     const problematicLawfulAccessForm = useProblematicLawfulAccessStepForm(procedureData);
     const riskForm = useRiskStepForm(procedureData)
@@ -58,10 +56,10 @@ export default function TiaProcedureDialog({
 
     const next = () => {
         if (currentStep === 0) {
-            taskForm.handleSubmit(({ taskId }) => {
-                setTaskId(taskId);
+            taskForm.handleSubmit(({ task }) => {
+                setTask(task);
                 setCurrentStep(1);
-                // setProcedureData([]);
+                setProcedureData([]);
             })();
         } else if (currentStep === 1) {
             transferScenarioForm.handleSubmit((data) => {
@@ -104,12 +102,12 @@ export default function TiaProcedureDialog({
     const handleSubmit = async (procedure: any, prevProcedure?: any) => {
         try {
             setIsSaving(true);
-            if (!taskId) {
+            if (!task) {
                 return;
             }
 
             const response = await axios.post<ApiResponse<Task>>(
-                `/api/teams/${slug}/tasks/${taskId}/tia`,
+                `/api/teams/${slug}/tasks/${task.taskNumber}/tia`,
                 {
                     prevProcedure: prevProcedure || [],
                     nextProcedure: procedure,
@@ -147,7 +145,7 @@ export default function TiaProcedureDialog({
                         <form className="space-y-4">
                             <TaskPicker
                                 control={taskForm.control}
-                                name="taskId"
+                                name="task"
                                 tasks={tasks.filter(
                                     (task) => !(task.properties as any)?.tia_procedure
                                 )}

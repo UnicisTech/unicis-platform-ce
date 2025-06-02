@@ -30,6 +30,20 @@ export type RpaProcedureInterface = [
   {
     toms: Option[];
   },
+  {
+    involveProfiling: string;
+    useAutomated: string;
+    involveSurveillance: string;
+    processedSpecialCategories: string;
+    isBigData: string;
+    dataSetsCombined: string;
+    multipleControllers: string;
+    imbalanceInRelationship: string;
+    innovativeTechnologyUsed: string;
+    transferredOutside: string;
+    rightsRestricted: string;
+    piaNeeded: string;
+  }
 ];
 
 export interface RpaConfig {
@@ -77,7 +91,7 @@ export type TaskRpaProperties = {
 export type ProcedureQueueItem = 'TIA' | 'PIA';
 
 export interface UseRpaCreationState {
-  selectedTask: TaskWithRpaProcedure | undefined;
+  selectedTask: Task | undefined;
   isRpaOpen: boolean;
   isPiaOpen: boolean;
   isTiaOpen: boolean;

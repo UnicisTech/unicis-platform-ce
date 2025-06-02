@@ -21,7 +21,7 @@ import { RiskAndImpactStep, RiskTreatmentStep} from "./steps";
 
 interface RmRiskDialogProps {
     prevRisk?: RMProcedureInterface;
-    selectedTaskId?: string;
+    selectedTask?: Task;
     tasks?: Task[];
     open: boolean;
     onOpenChange: (open: boolean) => void;
@@ -31,7 +31,7 @@ interface RmRiskDialogProps {
 
 export default function RmRiskDialog({
     prevRisk,
-    selectedTaskId,
+    selectedTask,
     tasks,
     open,
     onOpenChange,
@@ -43,19 +43,19 @@ export default function RmRiskDialog({
     const router = useRouter();
     const { slug } = router.query;
 
-    const [currentStep, setCurrentStep] = React.useState(selectedTaskId ? 1 : 0);
+    const [currentStep, setCurrentStep] = React.useState(selectedTask ? 1 : 0);
     const [riskData, setRiskData] = React.useState<any>(prevRisk || []);
-    const [taskId, setTaskId] = React.useState<string | null>(selectedTaskId || null);
+    const [task, setTask] = React.useState<Task | null>(selectedTask || null);
     const [isSaving, setIsSaving] = React.useState<boolean>(false);
 
-    const taskForm = useForm<{ taskId: string }>({ defaultValues: { taskId: selectedTaskId ?? "" }, mode: "onChange" });
+    const taskForm = useForm<{ task: Task }>({ mode: "onChange" });
     const riskAndImpactForm = useRiskAndImpactStepForm(riskData);
     const riskTreatmentForm = useRiskTreatmentStepForm(riskData);
 
     const next = () => {
         if (currentStep === 0) {
-            taskForm.handleSubmit(({ taskId }) => {
-                setTaskId(taskId);
+            taskForm.handleSubmit(({ task }) => {
+                setTask(task);
                 setCurrentStep(1);
                 setRiskData([]);
             })();
@@ -81,12 +81,12 @@ export default function RmRiskDialog({
     const handleSubmit = async (risk: any, prevRisk?: any) => {
         try {
             setIsSaving(true);
-            if (!taskId) {
+            if (!task) {
                 return;
             }
 
             const response = await axios.post<ApiResponse<Task>>(
-                `/api/teams/${slug}/tasks/${taskId}/rm`,
+                `/api/teams/${slug}/tasks/${task.taskNumber}/rm`,
                 {
                     prevRisk: prevRisk || [],
                     nextRisk: risk,
@@ -124,7 +124,7 @@ export default function RmRiskDialog({
                         <form className="space-y-4">
                             <TaskPicker
                                 control={taskForm.control}
-                                name="taskId"
+                                name="task"
                                 tasks={tasks.filter(
                                     (task) => !(task.properties as any)?.rm_risk
                                 )}

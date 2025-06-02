@@ -21,8 +21,6 @@ const Dashboard = () => {
   //TODO: setPerPage
   const [perPage] = useState<number>(10);
 
-  console.log('tasks', tasks);
-
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isCreateLegacyOpen, setIsCreateLegacyOpen] = useState(false);
 
@@ -118,11 +116,12 @@ const Dashboard = () => {
             deleteHandler={onDeleteClickHandler}
           />
           {taskToEdit && isEditOpen && (
-            <CreateLegacyRisk
-              tasks={tasks || []}
-              visible={isEditOpen}
-              setVisible={setIsEditOpen}
+            <CreateRisk
+              open={isEditOpen}
+              onOpenChange={setIsEditOpen}
               selectedTask={taskToEdit}
+              prevRisk={taskToEdit.properties.rm_risk}
+              tasks={tasks || []}
               mutateTasks={mutateTasks}
             />
           )}

@@ -146,7 +146,7 @@ const TiaDashboard: NextPageWithLayout<
               onOpenChange={setIsEditOpen}
               prevProcudere={taskToEdit.properties.tia_procedure}
               tasks={tasks}
-              selectedTaskId={String(taskToEdit.id)}
+              selectedTask={taskToEdit}
               mutateTasks={mutateTasks}
             />
           )}

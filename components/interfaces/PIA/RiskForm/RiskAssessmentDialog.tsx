@@ -22,7 +22,7 @@ import type { Task } from "@prisma/client";
 
 interface RiskAssessmentDialogProps {
     prevRisk?: PiaRisk;
-    selectedTaskId?: string;
+    selectedTask?: Task;
     tasks?: Task[];
     open: boolean;
     onOpenChange: (open: boolean) => void;
@@ -50,7 +50,7 @@ const shouldShowExtraStep = (risk: PiaRisk | []): boolean => {
 
 export default function RiskAssessmentDialog({
     prevRisk,
-    selectedTaskId,
+    selectedTask,
     tasks,
     open,
     onOpenChange,
@@ -62,14 +62,12 @@ export default function RiskAssessmentDialog({
     const router = useRouter();
     const { slug } = router.query;
 
-    const [currentStep, setCurrentStep] = React.useState(selectedTaskId ? 1 : 0);
+    const [currentStep, setCurrentStep] = React.useState(selectedTask ? 1 : 0);
     const [riskData, setRiskData] = React.useState<any>(prevRisk || []);
-    const [taskId, setTaskId] = React.useState<string | null>(selectedTaskId || null);
+    const [task, setTask] = React.useState<Task | null>(selectedTask || null);
     const [isSaving, setIsSaving] = React.useState<boolean>(false);
 
-    console.log('RiskAssessmentDialog - currentStep:', { currentStep, riskData, prevRisk, selectedTaskId });
-    // Forms for each step
-    const taskForm = useForm<{ taskId: string }>({ defaultValues: { taskId: selectedTaskId ?? "" }, mode: "onChange" });
+    const taskForm = useForm<{ task: Task }>({ mode: "onChange" });
     const dataTransparancyForm = useDataProcessingStepForm(riskData);
     const confidentialityForm = useConfidentialityStepForm(riskData);
     const availabilityForm = useAvailabilityStepForm(riskData);
@@ -78,25 +76,10 @@ export default function RiskAssessmentDialog({
 
     const extraRequired = shouldShowExtraStep(riskData);
 
-    // Reset on dialog close
-    React.useEffect(() => {
-        if (!open) {
-            setCurrentStep(prevRisk ? 1 : 0);
-            setRiskData(prevRisk ?? []);
-            taskForm.reset({ taskId: selectedTaskId ?? "" });
-            dataTransparancyForm.reset();
-            confidentialityForm.reset();
-            availabilityForm.reset();
-            transparencyForm.reset();
-            correctiveForm.reset();
-        }
-    }, [open, prevRisk, selectedTaskId]);
-
-    // Navigation handlers
     const next = () => {
         if (currentStep === 0) {
-            taskForm.handleSubmit(({ taskId }) => {
-                setTaskId(taskId);
+            taskForm.handleSubmit(({ task }) => {
+                setTask(task);
                 setCurrentStep(1);
                 setRiskData([]);
             })();
@@ -149,12 +132,12 @@ export default function RiskAssessmentDialog({
     const handleSubmit = async (risk: any, prevRisk?: any) => {
         try {
             setIsSaving(true);
-            if (!taskId) {
+            if (!task) {
                 return;
             }
 
             const response = await axios.post<ApiResponse<Task>>(
-                `/api/teams/${slug}/tasks/${taskId}/pia`,
+                `/api/teams/${slug}/tasks/${task.taskNumber}/pia`,
                 {
                     prevRisk: prevRisk || [],
                     nextRisk: risk,
@@ -192,7 +175,7 @@ export default function RiskAssessmentDialog({
                         <form className="space-y-4">
                             <TaskPicker
                                 control={taskForm.control}
-                                name="taskId"
+                                name="task"
                                 tasks={tasks.filter(
                                     (task) => !(task.properties as any)?.pia_risk
                                 )}
@@ -206,22 +189,27 @@ export default function RiskAssessmentDialog({
                         <DataProcessingStep initial={riskData[0]} control={dataTransparancyForm.control} />
                     </Form>
                 )}
+
                 {currentStep === 2 && (
                     <Form {...confidentialityForm}>
                         <ConfidentialityStep initial={riskData[1]} control={confidentialityForm.control} />
                     </Form>
                 )}
+
                 {currentStep === 3 && (
                     <Form {...availabilityForm}>
                         <AvailabilityStep initial={riskData[2]} control={availabilityForm.control} />
                     </Form>
                 )}
+
                 {currentStep === 4 && (
                     <Form {...transparencyForm}>
                         <TransparencyStep initial={riskData[3]} control={transparencyForm.control} />
                     </Form>
                 )}
+                
                 {currentStep === 5 && <ResultsStep risk={riskData} />}
+
                 {currentStep === 6 && (
                     <Form {...correctiveForm}>
                         <CorrectiveMeasuresStep initial={riskData[4]} control={correctiveForm.control} />

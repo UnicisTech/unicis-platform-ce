@@ -1,12 +1,6 @@
-import type { TiaProcedureInterface, Option } from "types";
+import type { TiaProcedureInterface } from "types";
 
-type StringifiedOption<T> = {
-    [P in keyof T]: T[P] extends Option ? string : T[P];
-};
-
-// export type TransferScenarioStepValues = StringifiedOption<TiaProcedureInterface[0]>
 export type TransferScenarioStepValues = TiaProcedureInterface[0]
-
 
 export type ProblematicLawfulAccessValues = TiaProcedureInterface[1]
 
