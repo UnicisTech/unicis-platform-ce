@@ -228,6 +228,7 @@ const TaskById = ({
           open={piaVisible}
           onOpenChange={setPiaVisible}
           //TODO: get rid of [] type
+          selectedTask={task}
           prevRisk={(task.properties as TaskProperties)?.pia_risk as PiaRisk | undefined}
           mutateTasks={mutateTask}
         />
