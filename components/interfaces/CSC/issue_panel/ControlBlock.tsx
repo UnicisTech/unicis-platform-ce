@@ -158,7 +158,7 @@ const ControlBlock = ({
       )}
 
       <div className="space-y-1">
-        <Label>Description</Label>
+        <Label>Status</Label>
         <StatusSelector
           statusValue={status}
           control={control}
