@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { SimpleTag as Tag } from '@atlaskit/tag';
 import { IssuePanelContainer } from 'sharedStyles';
 import {
   config,
@@ -151,7 +150,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
               />
               <Field
                 label={fieldPropsMapping['StartDateAssessment']}
-                value={<Tag text={procedure[0].StartDateAssessment} />}
+                value={<DaisyBadge color="tag">{procedure[0].StartDateAssessment}</DaisyBadge>}
               />
               <Field
                 label={fieldPropsMapping['HowDataTransfer']}
