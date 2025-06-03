@@ -31,6 +31,7 @@ export default function Comments({
   const [commentToDelete, setCommentToDelete] = useState<number | null>(null);
   const [confirmationDialogVisible, setConfirmationDialogVisible] =
     useState(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   const onDeleteClick = useCallback((id: number) => {
     setCommentToDelete(id);
@@ -95,6 +96,8 @@ export default function Comments({
     if (!id) return;
 
     try {
+      setIsDeleting(true);
+
       const response = await axios.delete<ApiResponse<unknown>>(
         `/api/teams/${slug}/tasks/${taskNumber}/comments`,
         {
@@ -113,6 +116,8 @@ export default function Comments({
       mutateTask();
     } catch (error: any) {
       toast.error(getAxiosError(error));
+    } finally {
+      setIsDeleting(false);
     }
   }, []);
 
@@ -136,10 +141,13 @@ export default function Comments({
           ))}
       </div>
       <AccessControl resource="task" actions={['update']}>
-        <CreateCommentForm handleCreate={handleCreateComment} />
+        <div className='mt-4'>
+          <CreateCommentForm handleCreate={handleCreateComment} />
+        </div>
       </AccessControl>
       <ConfirmationDialog
         visible={confirmationDialogVisible}
+        isLoading={isDeleting}
         onCancel={() => setConfirmationDialogVisible(false)}
         onConfirm={() => handleDeleteComment(commentToDelete)}
         title={t('confirm-delete-comment')}
