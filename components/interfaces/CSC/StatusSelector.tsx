@@ -33,7 +33,6 @@ const StatusSelector = ({
   const [value, setValue] = useState<string>(statusValue);
 
   useEffect(() => {
-    console.log("statusValue", statusValue, statusOptions.find((option) => option.label === statusValue))
     setValue(statusValue);
   }, [statusValue]);
 

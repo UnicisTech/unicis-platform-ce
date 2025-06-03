@@ -153,7 +153,7 @@ const TaskById = ({
         </div>
       )}
       {activeTab === 'Cybersecurity Controls' && (
-        <Card heading="Cybersecurity Controls panel">
+        <Card heading="Cybersecurity Controls Panel">
           <Card.Body>
             <CscPanel
               task={task}
