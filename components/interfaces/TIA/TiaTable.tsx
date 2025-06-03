@@ -1,12 +1,22 @@
 import React from 'react';
 import Link from 'next/link';
-import { SimpleTag as Tag } from '@atlaskit/tag';
 import type { TaskWithTiaProcedure } from 'types';
 import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import useCanAccess from 'hooks/useCanAccess';
 import { TailwindTableWrapper } from 'sharedStyles';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
+
+const getEndDate = (dateStr, yearsToAdd) => {
+  const d = new Date(dateStr);
+  d.setFullYear(d.getFullYear() + yearsToAdd);
+
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
 
 const TiaTable = ({
   slug,
@@ -90,18 +100,17 @@ const TiaTable = ({
                     <span>{task.properties.tia_procedure[0].DataImporter}</span>
                   </td>
                   <td className="px-1.5 py-1.5">
-                    <Tag
-                      text={
-                        task.properties.tia_procedure[0].StartDateAssessment
-                      }
-                    />
+                    <DaisyBadge color="tag">
+                      {task.properties.tia_procedure[0].StartDateAssessment}
+                    </DaisyBadge>
                   </td>
                   <td className="px-1.5 py-1.5">
-                    <Tag
-                      text={
-                        task.properties.tia_procedure[0].StartDateAssessment
-                      }
-                    />
+                    <DaisyBadge color="tag">
+                      {getEndDate(
+                        task.properties.tia_procedure[0].StartDateAssessment,
+                        task.properties.tia_procedure[0].AssessmentYears
+                      )}
+                    </DaisyBadge>
                   </td>
                   <td className="px-1.5 py-1.5">
                     <span>{task.properties.tia_procedure[0].DataExporter}</span>

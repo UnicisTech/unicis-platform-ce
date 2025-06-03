@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { SimpleTag as Tag } from '@atlaskit/tag';
 import statuses from '@/components/defaultLanding/data/statuses.json';
 import type { TaskWithRpaProcedure } from 'types';
 import { useTranslation } from 'next-i18next';
@@ -24,7 +23,6 @@ const RpaTable = ({
   editHandler: (task: TaskWithRpaProcedure) => void;
   deleteHandler: (task: TaskWithRpaProcedure) => void;
 }) => {
-  console.log('rpa table use atlaskit tag?')
   const { canAccess } = useCanAccess();
   const { t } = useTranslation('common');
   const {
@@ -97,8 +95,7 @@ const RpaTable = ({
                     <span>{task.properties.rpa_procedure[0].dpo.label}</span>
                   </td>
                   <td className="px-1.5 py-1.5">
-                    <Tag text={task.properties.rpa_procedure[0].reviewDate} />
-                    <DaisyBadge>{task.properties.rpa_procedure[0].reviewDate}</DaisyBadge>
+                    <DaisyBadge color='tag'>{task.properties.rpa_procedure[0].reviewDate}</DaisyBadge>
                   </td>
                   <td className="px-1.5 py-1.5">
                     <>
@@ -113,7 +110,7 @@ const RpaTable = ({
                     <div className="flex flex-col">
                       {task.properties.rpa_procedure[1].specialcategory.map(
                         (category, index) => (
-                          <Tag key={index} text={category.label} />
+                          <DaisyBadge key={index} color='tag'>{category.label}</DaisyBadge>
                         )
                       )}
                     </div>

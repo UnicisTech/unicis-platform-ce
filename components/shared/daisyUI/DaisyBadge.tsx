@@ -10,7 +10,8 @@ export type ThemeAppearance =
   | 'success'
   | 'error'
   | 'warning'
-  | 'info';
+  | 'info'
+  | 'tag';
 
 const appearanceMap: Record<ThemeAppearance, string> = {
   added: 'bg-green-600 text-green-100',
@@ -20,6 +21,7 @@ const appearanceMap: Record<ThemeAppearance, string> = {
   warning: 'bg-yellow-600 text-yellow-100',
   primary: 'bg-blue-600 text-blue-100',
   info: 'bg-blue-600 text-blue-100',
+  tag: 'bg-gray-100',
   primaryInverted: 'bg-blue-600 text-white',
   removed: 'bg-red-600 text-red-100',
   error: 'bg-red-600 text-red-100',
