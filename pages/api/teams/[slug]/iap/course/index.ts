@@ -26,6 +26,7 @@ export default async function handler(
         });
     }
   } catch (error: any) {
+    console.log('error catched there?', error);
     const message = error.message || 'Something went wrong';
     const status = error.status || 500;
 
@@ -76,12 +77,12 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     questions,
   } = course;
 
-  const createdCourse = createCourse({
+  const createdCourse = await createCourse({
     name,
-    categoryId: category.value,
-    contentType: type.value,
+    categoryId: category,
+    contentType: type,
     programContent,
-    teamIds: teams.map(({ value }) => value),
+    teamIds: teams,
     estimatedTime: Number(estimatedTime),
     thumbnail: thumbnailLink,
     description,

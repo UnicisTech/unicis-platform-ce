@@ -1,11 +1,11 @@
-import React, { useCallback } from 'react';
-import { useTranslation } from 'next-i18next';
-import AtlaskitButton from '@atlaskit/button';
-import type { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
-import CompletionResultsChart from './CompletionResultsChart';
-import ProgressBadge from '../shared/ProgressBadge';
-import { findMemberProgressInTeamCourse } from '../services/helpers';
-import DaisyModal from '@/components/shared/daisyUI/DaisyModal';
+import * as React from "react";
+import { useTranslation } from "next-i18next";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/shadcn/ui/dialog";
+import { Button } from "@/components/shadcn/ui/button";
+import type { TeamCourseWithProgress, TeamMemberWithUser } from "types";
+import CompletionResultsChart from "./CompletionResultsChart";
+import ProgressBadge from "../shared/ProgressBadge";
+import { findMemberProgressInTeamCourse } from "../services/helpers";
 
 const getMemberProgress = (
   teamCourse: TeamCourseWithProgress,
@@ -13,67 +13,66 @@ const getMemberProgress = (
 ): number =>
   findMemberProgressInTeamCourse(teamCourse, memberId)?.progress || 0;
 
-const CompletionResults = ({
-  teamCourse,
-  members,
-  visible,
-  setVisible,
-}: {
+interface CompletionResultsProps {
   teamCourse: TeamCourseWithProgress;
   members: TeamMemberWithUser[];
   visible: boolean;
   setVisible: (visible: boolean) => void;
-}) => {
-  const { t } = useTranslation('common');
+}
 
-  const closeHandler = useCallback(() => {
-    setVisible(false);
-  }, []);
+export default function CompletionResults({
+  teamCourse,
+  members,
+  visible,
+  setVisible,
+}: CompletionResultsProps) {
+  const { t } = useTranslation("common");
+
+  const todoCount = members.filter(
+    ({ id }) => getMemberProgress(teamCourse, id) === 0
+  ).length;
+  const inProgressCount = members.filter(({ id }) => {
+    const p = getMemberProgress(teamCourse, id);
+    return p > 0 && p < 100;
+  }).length;
+  const completedCount = members.filter(
+    ({ id }) => getMemberProgress(teamCourse, id) === 100
+  ).length;
 
   return (
-    <DaisyModal open={visible} className="w-10/12 max-w-5xl">
-      <DaisyModal.Header className="font-bold">
-        {`Course Completion Results - ${teamCourse.course.name}`}
-      </DaisyModal.Header>
-      <DaisyModal.Body>
-        <div className="grid grid-cols-2 gap-1">
-          <div className="col-span-1 h-[300px]">
+    <Dialog open={visible} onOpenChange={setVisible}>
+      <DialogContent className="w-[90vw] max-w-5xl max-h-[90vh] overflow-y-auto p-6">
+        <DialogHeader>
+          <DialogTitle>
+            {t("course-completion-results", "Course Completion Results")} -{" "}
+            {teamCourse.course.name}
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <div className="h-72">
             <CompletionResultsChart
-              todo={
-                members.filter(
-                  ({ id }) => getMemberProgress(teamCourse, id) === 0
-                ).length
-              }
-              inprogress={
-                members.filter(({ id }) => {
-                  const progress = getMemberProgress(teamCourse, id);
-                  return progress > 0 && progress < 100;
-                }).length
-              }
-              completed={
-                members.filter(
-                  ({ id }) => getMemberProgress(teamCourse, id) === 100
-                ).length
-              }
+              todo={todoCount}
+              inprogress={inProgressCount}
+              completed={completedCount}
             />
           </div>
-          <div className="col-span-1">
-            <table className="text-sm table w-full border-b dark:border-base-200">
-              <thead className="bg-base-200">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead className="bg-muted">
                 <tr>
-                  <th>User</th>
-                  <th>Status</th>
+                  <th className="px-4 py-2 text-left">{t("user", "User")}</th>
+                  <th className="px-4 py-2 text-left">{t("status", "Status")}</th>
                 </tr>
               </thead>
               <tbody>
                 {members.map((member) => {
+                  const progress = getMemberProgress(teamCourse, member.id);
                   return (
-                    <tr key={member.id}>
-                      <td>{member?.user?.name}</td>
-                      <td>
-                        <ProgressBadge
-                          progress={getMemberProgress(teamCourse, member.id)}
-                        />
+                    <tr key={member.id} className="border-t">
+                      <td className="px-4 py-2">{member.user?.name}</td>
+                      <td className="px-4 py-2">
+                        <ProgressBadge progress={progress} />
                       </td>
                     </tr>
                   );
@@ -82,14 +81,13 @@ const CompletionResults = ({
             </table>
           </div>
         </div>
-      </DaisyModal.Body>
-      <DaisyModal.Actions>
-        <AtlaskitButton appearance="default" onClick={() => closeHandler()}>
-          {t('close')}
-        </AtlaskitButton>
-      </DaisyModal.Actions>
-    </DaisyModal>
-  );
-};
 
-export default CompletionResults;
+        <DialogFooter className="mt-4 flex justify-end">
+          <DialogClose asChild>
+            <Button variant="outline">{t("close", "Close")}</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}

@@ -147,7 +147,6 @@ export default function Comments({
       </AccessControl>
       <ConfirmationDialog
         visible={confirmationDialogVisible}
-        isLoading={isDeleting}
         onCancel={() => setConfirmationDialogVisible(false)}
         onConfirm={() => handleDeleteComment(commentToDelete)}
         title={t('confirm-delete-comment')}

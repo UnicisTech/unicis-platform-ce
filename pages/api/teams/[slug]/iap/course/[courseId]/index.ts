@@ -80,8 +80,8 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const createdCourse = editCourse({
     courseId,
     name,
-    categoryId: category.value,
-    contentType: type.value,
+    categoryId: category,
+    contentType: type,
     programContent,
     estimatedTime: Number(estimatedTime),
     thumbnail: thumbnailLink,

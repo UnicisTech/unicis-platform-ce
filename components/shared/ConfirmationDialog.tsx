@@ -15,7 +15,6 @@ import { Loader2 } from "lucide-react"
 interface ConfirmationDialogProps {
   title: string;
   visible: boolean;
-  isLoading?: boolean;
   onConfirm: () => void | Promise<any>;
   onCancel: () => void;
   confirmText?: string;
@@ -26,7 +25,6 @@ interface ConfirmationDialogProps {
 export default function ConfirmationDialog({
   title,
   children,
-  isLoading = false,
   visible,
   onConfirm,
   onCancel,
@@ -34,9 +32,12 @@ export default function ConfirmationDialog({
   cancelText,
 }: ConfirmationDialogProps) {
   const { t } = useTranslation("common");
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const handleConfirm = useCallback(async () => {
+    setIsLoading(true);
     await onConfirm();
+    setIsLoading(false);
     onCancel();
   }, [onConfirm, onCancel]);
 

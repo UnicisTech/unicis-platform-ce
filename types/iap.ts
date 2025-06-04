@@ -1,6 +1,5 @@
 import { CourseContentType, CourseProgress, TeamCourse } from '@prisma/client';
 import { Course } from '@prisma/client';
-import type { Option } from './base';
 
 export type TeamIapProperties = {
   iap_categories?: string[];
@@ -16,13 +15,10 @@ export enum QuestionType {
 
 export type CourseFormData = {
   name: string;
-  category: Option;
-  type: {
-    label: string;
-    value: CourseContentType;
-  };
+  category: string;
+  type: CourseContentType
   programContent: string;
-  teams: Option[];
+  teams: string[];
   estimatedTime: string;
   thumbnailLink: string;
   description: string;
