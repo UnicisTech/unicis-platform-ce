@@ -17,6 +17,8 @@ import { useTransferScenarioStepForm, useProblematicLawfulAccessStepForm, useRis
 import TaskPicker from "@/components/shared/shadcn/TaskPicker";
 import { shouldSkipTwoSteps } from "@/lib/tia";
 import { Message } from "@/components/shared";
+import { StageTracker } from "@/components/shared/atlaskit";
+import { headers } from "@/components/defaultLanding/data/configs/tia";
 
 interface TiaProcedureDialogProps {
     prevProcudere?: TiaProcedureInterface;
@@ -136,6 +138,10 @@ export default function TiaProcedureDialog({
             <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto p-6">
                 <DialogHeader>
                     <DialogTitle>{t('tia')}</DialogTitle>
+                    {currentStep === 0 && `Select a task`}
+                    {currentStep > 0 && (
+                        <StageTracker headers={headers} currentStage={currentStep - 1} />
+                    )}
                 </DialogHeader>
 
                 {currentStep === 0 && tasks && (
