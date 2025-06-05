@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { SimpleTag as Tag } from '@atlaskit/tag';
+import { Badge } from '@/components/shadcn/ui/badge';
 import { Category } from '@prisma/client';
 import { TeamCourseWithProgress } from 'types';
 import ProgressBadge from '../shared/ProgressBadge';
@@ -36,12 +36,9 @@ const CourseCard = ({
       <DaisyCard.Body>
         <DaisyCard.Title tag="h2">{course.name}</DaisyCard.Title>
         <div className="flex justify-start">
-          <Tag
-            text={
-              categories.find(({ id }) => id === course.categoryId)?.name || ''
-            }
-            color="blueLight"
-          />
+          <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100 hover:bg-blue-100 cursor-default">
+            {categories.find(({ id }) => id === course.categoryId)?.name || ''}
+          </Badge>
         </div>
         <div className="mt-[5px]">
           <ProgressBadge progress={teamCourse.progress?.[0]?.progress} />
