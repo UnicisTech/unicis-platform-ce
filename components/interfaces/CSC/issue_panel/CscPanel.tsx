@@ -11,7 +11,6 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import ControlBlock from './ControlBlock';
 import type { Task } from '@prisma/client';
-import { IssuePanelContainer } from 'sharedStyles';
 import useCanAccess from 'hooks/useCanAccess';
 import ControlBlockViewOnly from './ControlBlockViewOnly';
 import { getCscControlsProp } from '@/lib/csc';
@@ -153,7 +152,7 @@ const CscPanel = ({
   );
 
   return (
-    <IssuePanelContainer>
+    <div className="p-5">
       <h2 className="text-1xl font-bold">Cybersecurity Controls</h2>
       {canAccess('task', ['update']) ? (
         <>
@@ -208,7 +207,7 @@ const CscPanel = ({
           ))}
         </>
       )}
-    </IssuePanelContainer>
+    </div>
   );
 };
 

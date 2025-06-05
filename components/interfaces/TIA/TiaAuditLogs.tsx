@@ -1,14 +1,13 @@
 import React from 'react';
 import type { Task } from '@prisma/client';
 import type { TiaAuditLog } from 'types';
-import { IssuePanelContainer } from 'sharedStyles';
 
 const TiaAuditLogs = ({ task }: { task: Task }) => {
   const taskProperties = task?.properties as any;
   const auditLogs = taskProperties.tia_audit_logs as TiaAuditLog[] | undefined;
 
   return (
-    <IssuePanelContainer>
+    <div className="p-5">
       <div style={{ padding: '10px 20px' }}>
         {auditLogs &&
           auditLogs.reverse().map((log, index) => {
@@ -23,7 +22,7 @@ const TiaAuditLogs = ({ task }: { task: Task }) => {
             );
           })}
       </div>
-    </IssuePanelContainer>
+    </div>
   );
 };
 

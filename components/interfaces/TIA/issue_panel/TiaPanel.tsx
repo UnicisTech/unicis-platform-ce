@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { IssuePanelContainer } from 'sharedStyles';
 import {
   config,
   headers,
@@ -578,7 +577,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
   };
 
   return (
-    <IssuePanelContainer>
+    <div className="p-5">
       <h2 className="text-1xl font-bold mb-4">View Transfer Impact Assessment</h2>
       {procedure ? (
         <div>
@@ -601,7 +600,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
           <p>Procedure has not been created for this issue.</p>
         </div>
       )}
-    </IssuePanelContainer>
+    </div>
   );
 };
 

@@ -7,7 +7,6 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import type { ApiResponse } from 'types';
 import type { TaskExtended } from 'types';
-import { IssuePanelContainer } from 'sharedStyles';
 import Comment from './comments/Comment';
 import CreateCommentForm from './comments/CreateCommentForm';
 import { AccessControl } from '@/components/shared/AccessControl';
@@ -122,7 +121,7 @@ export default function Comments({
   }, []);
 
   return (
-    <IssuePanelContainer>
+    <div className="p-5">
       <div style={{ marginTop: '30px' }}>
         {task.comments
           .sort(
@@ -153,6 +152,6 @@ export default function Comments({
       >
         {t('delete-comment-warning')}
       </ConfirmationDialog>
-    </IssuePanelContainer>
+    </div>
   );
 }

@@ -17,7 +17,6 @@ import { Button } from '@/components/shadcn/ui/button';
 import { Input } from '@/components/shadcn/ui/input';
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/shadcn/ui/select';
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/shadcn/ui/form';
-import { IssuePanelContainer } from 'sharedStyles';
 import statuses from '@/components/defaultLanding/data/statuses.json';
 import useTask from 'hooks/useTask';
 import useCanAccess from 'hooks/useCanAccess';
@@ -91,7 +90,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
   };
 
   return (
-    <IssuePanelContainer>
+    <div className="p-5">
       <FormProvider {...methods}>
         <Form {...methods}>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -209,7 +208,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
           </form>
         </Form>
       </FormProvider>
-    </IssuePanelContainer>
+    </div>
   );
 };
 

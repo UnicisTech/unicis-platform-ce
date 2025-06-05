@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { IssuePanelContainer } from 'sharedStyles';
 import {
   headers,
   fieldPropsMapping,
@@ -117,7 +116,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
   };
 
   return (
-    <IssuePanelContainer>
+    <div className="p-5">
       <h2 className="text-xl font-bold mb-4">View Privacy Impact Assessment</h2>
       {risk ? (
         <div className="w-full">
@@ -143,7 +142,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
           <p>Risk has not been created for this task.</p>
         </div>
       )}
-    </IssuePanelContainer>
+    </div>
   );
 };
 

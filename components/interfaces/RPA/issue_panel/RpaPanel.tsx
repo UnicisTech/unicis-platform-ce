@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { IssuePanelContainer } from 'sharedStyles';
 import {
   headers,
   fieldPropsMapping,
@@ -14,7 +13,7 @@ const RpaPanel = ({ task }: { task: Task }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <IssuePanelContainer>
+    <div className="p-5">
       <h2 className="text-1xl font-bold mb-4">View Register of Procedures</h2>
       {procedure ? (
         <>
@@ -133,7 +132,7 @@ const RpaPanel = ({ task }: { task: Task }) => {
           <p>Procedure has not been created for this issue.</p>
         </div>
       )}
-    </IssuePanelContainer>
+    </div>
   );
 };
 

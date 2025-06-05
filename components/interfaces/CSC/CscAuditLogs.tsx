@@ -1,13 +1,12 @@
 import React from 'react';
 import type { Task } from '@prisma/client';
 import type { CscAuditLog } from 'types';
-import { IssuePanelContainer } from 'sharedStyles';
 
 const CscAuditLogs = ({ task }: { task: Task }) => {
   const taskProperties = task?.properties as any;
   const auditLogs = taskProperties.csc_audit_logs as CscAuditLog[] | undefined;
   return (
-    <IssuePanelContainer>
+    <div className="p-5">
       <div style={{ padding: '10px 20px' }}>
         {auditLogs &&
           auditLogs
@@ -24,7 +23,7 @@ const CscAuditLogs = ({ task }: { task: Task }) => {
               );
             })}
       </div>
-    </IssuePanelContainer>
+    </div>
   );
 };
 

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { IssuePanelContainer } from 'sharedStyles';
 import {
   headers,
   fieldPropsMapping,
@@ -15,7 +14,7 @@ const RmTaskPanel = ({ task }: { task: Task }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <IssuePanelContainer>
+    <div className="p-5">
       <h2 className="text-1xl font-bold mb-4">View Risk Management</h2>
       {risk ? (
         <>
@@ -89,7 +88,7 @@ const RmTaskPanel = ({ task }: { task: Task }) => {
           <p>Risk has not been created for this task.</p>
         </div>
       )}
-    </IssuePanelContainer>
+    </div>
   );
 };
 
