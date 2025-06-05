@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import useCanAccess from 'hooks/useCanAccess';
-import CreateLegacyRisk from './CreateRisk';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { useRouter } from 'next/router';
 import { TaskProperties, TaskWithRmRisk } from 'types';
@@ -22,8 +21,6 @@ const Dashboard = () => {
   const [perPage] = useState<number>(10);
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [isCreateLegacyOpen, setIsCreateLegacyOpen] = useState(false);
-
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskWithRmRisk | null>(null);
@@ -69,34 +66,14 @@ const Dashboard = () => {
               color="primary"
               variant="outline"
               onClick={() => {
-                setIsCreateLegacyOpen(true);
+                setIsCreateOpen(true);
               }}
             >
               {t('create')}
             </DaisyButton>
           )}
-          {canAccess('task', ['update']) && (
-            <DaisyButton
-              size="sm"
-              color="primary"
-              variant="outline"
-              onClick={() => {
-                setIsCreateOpen(true);
-              }}
-            >
-              Create with shadcn
-            </DaisyButton>
-          )}
         </div>
       </div>
-      {isCreateLegacyOpen && tasks && (
-        <CreateLegacyRisk
-          tasks={tasks}
-          visible={isCreateLegacyOpen}
-          setVisible={setIsCreateLegacyOpen}
-          mutateTasks={mutateTasks}
-        />
-      )}
       {isCreateOpen && <CreateRisk
         open={isCreateOpen}
         onOpenChange={setIsCreateOpen}

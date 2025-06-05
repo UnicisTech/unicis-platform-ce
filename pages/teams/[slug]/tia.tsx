@@ -13,7 +13,6 @@ import type { TaskWithTiaProcedure, TaskProperties } from 'types';
 import {
   TiaTable,
   DeleteProcedure,
-  CreateProcedureLegacy,
   CreateProcedure
 } from '@/components/interfaces/TIA';
 import { PerPageSelector } from '@/components/shared';
@@ -26,7 +25,6 @@ const TiaDashboard: NextPageWithLayout<
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
   const { slug } = router.query;
-  const [isLegacyCreateOpen, setIsLegacyCreateOpen] = useState(false);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -93,35 +91,15 @@ const TiaDashboard: NextPageWithLayout<
               color="primary"
               variant="outline"
               onClick={() => {
-                setIsLegacyCreateOpen(true);
+                setIsCreateOpen(true);
               }}
             >
               {t('create')}
             </DaisyButton>
           )}
-          {canAccess('task', ['update']) && (
-            <DaisyButton
-              size="sm"
-              color="primary"
-              variant="outline"
-              onClick={() => {
-                setIsCreateOpen(true);
-              }}
-            >
-              Create with shadcn
-            </DaisyButton>
-          )}
         </div>
       </div>
       <>
-        {isLegacyCreateOpen && (
-          <CreateProcedureLegacy
-            visible={isLegacyCreateOpen}
-            setVisible={setIsLegacyCreateOpen}
-            tasks={tasks}
-            mutate={mutateTasks}
-          />
-        )}
         {isCreateOpen && <CreateProcedure
           open={isCreateOpen}
           onOpenChange={setIsCreateOpen}

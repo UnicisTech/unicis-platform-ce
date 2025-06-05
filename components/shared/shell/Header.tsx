@@ -11,21 +11,15 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import useTheme from 'hooks/useTheme';
 import env from '@/lib/env';
 import { signOut } from 'next-auth/react';
-import { ThemeModes } from '@atlaskit/theme/types';
 
 interface HeaderProps {
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  themeCallback: React.Dispatch<React.SetStateAction<ThemeModes>>;
 }
 
-const Header = ({ setSidebarOpen, themeCallback }: HeaderProps) => {
-  const { toggleTheme, theme } = useTheme();
+const Header = ({ setSidebarOpen }: HeaderProps) => {
+  const { toggleTheme } = useTheme();
 
   const { status, data } = useSession();
-
-  useEffect(() => {
-    themeCallback(theme as ThemeModes);
-  }, [theme]);
 
   if (status === 'loading' || !data) {
     return null;

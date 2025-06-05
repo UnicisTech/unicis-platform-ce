@@ -42,8 +42,6 @@ export default function AppShell({ children }) {
       <div className="lg:pl-64 dark:border-gray-200">
         <Header
           setSidebarOpen={setSidebarOpen}
-          //TODO: remove
-          themeCallback={() => {}}
         />
         <main className="py-10 dark:bg-black">
           <div className="mx-auto px-4 sm:px-6 lg:px-8">{children}</div>

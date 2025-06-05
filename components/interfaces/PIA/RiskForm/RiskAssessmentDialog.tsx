@@ -22,8 +22,7 @@ import type { Task } from "@prisma/client";
 
 interface RiskAssessmentDialogProps {
     prevRisk?: PiaRisk | [];
-    selectedTask: any;
-    selectedTaskId?: string;
+    selectedTask?: any;
     tasks?: Task[];
     open: boolean;
     onOpenChange: (open: boolean) => void;

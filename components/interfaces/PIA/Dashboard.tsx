@@ -3,7 +3,6 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeamTasks from 'hooks/useTeamTasks';
-import CreateRiskLegacy from './CreateRisk';
 import { EmptyState, Error } from '@/components/shared';
 import { TaskProperties, TaskWithPiaRisk } from 'types';
 import RisksTable from './RisksTable';
@@ -21,7 +20,6 @@ const Dashboard = () => {
   const [perPage] = useState<number>(10);
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [isShadcnCreateOpen, setIsShadcnCreateOpen] = useState(false);
 
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -68,7 +66,6 @@ const Dashboard = () => {
           </h2>
         </div>
         <div className="flex justify-end items-center my-1">
-          {/* <CreateRiskShadcn open={isCreateOpen} onOpenChange={setIsCreateOpen} tasks={tasks || []} /> */}
           {canAccess('task', ['update']) && (
             <DaisyButton
               size="sm"
@@ -81,31 +78,11 @@ const Dashboard = () => {
               {t('create')}
             </DaisyButton>
           )}
-          {canAccess('task', ['update']) && (
-            <DaisyButton
-              size="sm"
-              color="primary"
-              variant="outline"
-              onClick={() => {
-                setIsShadcnCreateOpen(true);
-              }}
-            >
-              Create but shadcn
-            </DaisyButton>
-          )}
         </div>
       </div>
-      {isCreateOpen && tasks && (
-        <CreateRiskLegacy
-          tasks={tasks}
-          mutateTasks={mutateTasks}
-          visible={isCreateOpen}
-          setVisible={setIsCreateOpen}
-        />
-      )}
-      {isShadcnCreateOpen && <CreateRisk
-        open={isShadcnCreateOpen}
-        onOpenChange={setIsShadcnCreateOpen}
+      {isCreateOpen && <CreateRisk
+        open={isCreateOpen}
+        onOpenChange={setIsCreateOpen}
         tasks={tasks || []}
         mutateTasks={mutateTasks}
       />}
