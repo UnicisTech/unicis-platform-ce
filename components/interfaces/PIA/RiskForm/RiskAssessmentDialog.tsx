@@ -16,9 +16,10 @@ import { Loader2 } from "lucide-react"
 
 import { useDataProcessingStepForm, useConfidentialityStepForm, useAvailabilityStepForm, useTransparencyStepForm, useCorrectiveMeasuresStepForm } from "./hooks";
 import { DataProcessingStep, ConfidentialityStep, AvailabilityStep, TransparencyStep, ResultsStep, CorrectiveMeasuresStep } from "./steps";
-import { riskProbabilityPoints, riskSecurityPoints } from "@/components/defaultLanding/data/configs/pia";
+import { headers, riskProbabilityPoints, riskSecurityPoints } from "@/components/defaultLanding/data/configs/pia";
 import type { ApiResponse, PiaRisk } from "types";
 import type { Task } from "@prisma/client";
+import { StageTracker } from "@/components/shared/atlaskit";
 
 interface RiskAssessmentDialogProps {
     prevRisk?: PiaRisk | [];
@@ -168,6 +169,9 @@ export default function RiskAssessmentDialog({
             <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto p-6">
                 <DialogHeader>
                     <DialogTitle>{t('pia')}</DialogTitle>
+                    {currentStep > 0 && (
+                        <StageTracker headers={headers} currentStage={currentStep - 1} />
+                    )}
                 </DialogHeader>
 
                 {currentStep === 0 && tasks && (

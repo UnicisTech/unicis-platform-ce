@@ -19,6 +19,8 @@ import { DescriptionAndStakeholdersStep, PurposeAndCategoriesStep, RecipientsSte
 import { SecurityMeasuresStep } from "./steps/SecurityMeasuresStep";
 import { usePiaStepForm } from "./hooks/usePiaStepForm";
 import { PiaStep } from "./steps/PiaStep";
+import { StageTracker } from "@/components/shared/atlaskit";
+import { headers } from "@/components/defaultLanding/data/configs/rpa";
 
 const createProceduresQueue = (procedure: any): ProcedureQueueItem[] => {
     const result: ProcedureQueueItem[] = [];
@@ -163,6 +165,9 @@ export default function RpaProcedureDialog({
             <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto p-6">
                 <DialogHeader>
                     <DialogTitle>{t('rpa-activities')}</DialogTitle>
+                    {currentStep > 0 && (
+                        <StageTracker headers={headers} currentStage={currentStep - 1} />
+                    )}
                 </DialogHeader>
 
                 {currentStep === 0 && tasks && (

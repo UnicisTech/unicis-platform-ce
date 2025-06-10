@@ -138,7 +138,6 @@ export default function TiaProcedureDialog({
             <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto p-6">
                 <DialogHeader>
                     <DialogTitle>{t('tia')}</DialogTitle>
-                    {currentStep === 0 && `Select a task`}
                     {currentStep > 0 && (
                         <StageTracker headers={headers} currentStage={currentStep - 1} />
                     )}

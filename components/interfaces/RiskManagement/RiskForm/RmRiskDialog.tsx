@@ -18,6 +18,8 @@ import type { ApiResponse, RMProcedureInterface } from "types";
 import type { Task } from "@prisma/client";
 import { useRiskAndImpactStepForm, useRiskTreatmentStepForm } from "./hooks";
 import { RiskAndImpactStep, RiskTreatmentStep} from "./steps";
+import { StageTracker } from "@/components/shared/atlaskit";
+import { headers } from "@/components/defaultLanding/data/configs/rm";
 
 interface RmRiskDialogProps {
     prevRisk?: RMProcedureInterface;
@@ -117,6 +119,9 @@ export default function RmRiskDialog({
             <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto p-6">
                 <DialogHeader>
                     <DialogTitle>{t('pia')}</DialogTitle>
+                    {currentStep > 0 && (
+                        <StageTracker headers={headers} currentStage={currentStep - 1} />
+                    )}
                 </DialogHeader>
 
                 {currentStep === 0 && tasks && (
