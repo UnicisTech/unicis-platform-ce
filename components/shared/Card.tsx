@@ -46,7 +46,7 @@ const Body = ({
 }) => {
   return (
     <div
-      className={`card-body gap-6 p-6 dark:bg-[color:hsla(var(--b1))] ${
+      className={`card-body gap-6 p-6 dark:bg-[hsla(var(--b1))] ${
         className || ''
       }`}
     >

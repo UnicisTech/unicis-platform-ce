@@ -99,7 +99,7 @@ const CreateDirectory = ({
                 <span className="label-text-alt"></span>
               </label>
               <select
-                className="select-bordered select flex-grow"
+                className="select-bordered select grow"
                 name="provider"
                 onChange={formik.handleChange}
                 value={formik.values.provider}

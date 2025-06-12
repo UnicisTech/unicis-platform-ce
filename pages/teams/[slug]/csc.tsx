@@ -148,7 +148,7 @@ const CscDashboard = ({
       >
         <div
           style={{ width: '49%' }}
-          className="stats stat-value shadow pl-4 py-4"
+          className="stats stat-value shadow-sm pl-4 py-4"
         >
           <PieChart
             page_name={`csc`}
@@ -157,7 +157,7 @@ const CscDashboard = ({
             labels={labels}
           />
         </div>
-        <div style={{ width: '49%' }} className="stats stat-value shadow">
+        <div style={{ width: '49%' }} className="stats stat-value shadow-sm">
           <RadarChart statuses={statuses} ISO={ISO} />
         </div>
       </div>

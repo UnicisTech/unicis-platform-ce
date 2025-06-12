@@ -1,41 +1,64 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --corporate, dark --prefersdark, cupcake;
+}
+@config "../tailwind.config.js";
 
-:root {
-  color-scheme: dark light;
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
 }
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    Segoe UI,
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    Fira Sans,
-    Droid Sans,
-    Helvetica Neue,
-    sans-serif;
+@utility btn {
+  @apply rounded normal-case;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+@utility modal-box {
+  @apply rounded;
 }
 
-* {
-  box-sizing: border-box;
+@layer utilities {
+  :root {
+    color-scheme: dark light;
+  }
+
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    font-family:
+      -apple-system,
+      BlinkMacSystemFont,
+      Segoe UI,
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      Fira Sans,
+      Droid Sans,
+      Helvetica Neue,
+      sans-serif;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 @layer base {
   input {
-    @apply rounded !important;
+    @apply rounded!;
   }
   :root {
     --background: 0 0% 100%;
@@ -96,49 +119,43 @@ a {
   #__next {
     @apply h-full;
   }
+}
 
-  .btn {
-    @apply rounded normal-case;
+@layer utilities {
+  .truncate {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
-  .modal-box {
-    @apply rounded;
+  .unicis-textarea {
+    height: 8rem !important;
   }
-}
 
-.truncate {
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+  .ql-container {
+    font-size: 14px !important;
+  }
 
-.unicis-textarea {
-  height: 8rem !important;
-}
+  .ql-editor {
+    min-height: 100px;
+  }
 
-.ql-container {
-  font-size: 14px !important;
-}
+  .quill-view-mode .ql-editor {
+    min-height: unset;
+    padding: 0px;
+  }
 
-.ql-editor {
-  min-height: 100px;
-}
+  .quill-view-mode .ql-container.ql-snow {
+    border: unset;
+  }
 
-.quill-view-mode .ql-editor {
-  min-height: unset;
-  padding: 0px;
-}
-
-.quill-view-mode .ql-container.ql-snow {
-  border: unset;
-}
-
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border-radius: 0px;
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0px;
+  }
 }
 
 

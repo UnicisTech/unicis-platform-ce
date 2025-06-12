@@ -12,7 +12,7 @@ export type ButtonColor =
   | 'error'
   | 'ghost';
 
-export type ButtonVariant = 'outline' | 'link';
+export type ButtonVariant = 'outline-solid' | 'link';
 export type ButtonSize = 'lg' | 'md' | 'sm' | 'xs';
 export type ButtonShape = 'circle' | 'square';
 

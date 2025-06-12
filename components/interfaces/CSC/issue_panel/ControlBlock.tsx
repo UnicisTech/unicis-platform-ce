@@ -108,7 +108,7 @@ const ControlBlock = ({
               </SelectValue>
             </SelectTrigger>
             <SelectContent
-              className="w-[var(--radix-select-trigger-width)] max-w-full"
+              className="w-(--radix-select-trigger-width) max-w-full"
               align="start"
             >
               {availableOptions.map((option) => (

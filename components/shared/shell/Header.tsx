@@ -28,7 +28,7 @@ const Header = ({ setSidebarOpen }: HeaderProps) => {
   const user = data.user;
 
   return (
-    <div className="dark:bg-[color:hsla(var(--b1))] bg-white sticky top-0 z-40 flex h-14 shrink-0 items-center border-b px-4 sm:gap-x-6 sm:px-6 lg:px-8 dark:border-gray-600">
+    <div className="dark:bg-[hsla(var(--b1))] bg-white sticky top-0 z-40 flex h-14 shrink-0 items-center border-b px-4 sm:gap-x-6 sm:px-6 lg:px-8 dark:border-gray-600">
       <button
         type="button"
         className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
@@ -57,7 +57,7 @@ const Header = ({ setSidebarOpen }: HeaderProps) => {
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 border rounded w-40 space-y-1"
+              className="dropdown-content z-1 menu p-2 shadow-sm bg-base-100 border rounded w-40 space-y-1"
             >
               <li
                 onClick={() => {

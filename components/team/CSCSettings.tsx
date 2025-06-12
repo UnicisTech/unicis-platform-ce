@@ -63,7 +63,7 @@ const CSCSettings = ({ team }: { team: TeamWithSubscription }) => {
               <p>{t('csc-choose-iso')}</p>
               <div className="flex justify-between space-x-3 w-1/2 items-center">
                 <select
-                  className="select-bordered select flex-grow"
+                  className="select-bordered select grow"
                   name="iso"
                   onChange={formik.handleChange}
                   value={formik.values.iso}

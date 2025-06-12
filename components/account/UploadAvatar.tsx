@@ -103,7 +103,7 @@ const UploadAvatar = ({ user }: { user: Partial<User> }) => {
               className="group relative mt-1 flex h-24 w-24 cursor-pointer flex-col items-center justify-center rounded-full border border-gray-300 bg-white transition-all hover:bg-gray-50"
             >
               <div
-                className="absolute z-[5] h-full w-full rounded-full"
+                className="absolute z-5 h-full w-full rounded-full"
                 onDragOver={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
@@ -126,7 +126,7 @@ const UploadAvatar = ({ user }: { user: Partial<User> }) => {
                   dragActive
                     ? 'cursor-copy border-2 border-black bg-gray-50 opacity-100'
                     : ''
-                } absolute z-[3] flex h-full w-full flex-col items-center justify-center rounded-full bg-white transition-all ${
+                } absolute z-3 flex h-full w-full flex-col items-center justify-center rounded-full bg-white transition-all ${
                   image
                     ? 'opacity-0 group-hover:opacity-100'
                     : 'group-hover:bg-gray-50'
@@ -146,7 +146,7 @@ const UploadAvatar = ({ user }: { user: Partial<User> }) => {
                 />
               )}
             </label>
-            <div className="mt-1 flex rounded-full shadow-sm">
+            <div className="mt-1 flex rounded-full shadow-xs">
               <input
                 id="image"
                 name="image"

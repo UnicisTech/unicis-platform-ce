@@ -59,7 +59,7 @@ const Dropdown = <T,>({
                 }
                 onChange(item.value);
               }}
-              className="flex cursor-pointer hover:bg-gray-100 focus:bg-gray-100 focus:outline-none py-2 px-2 rounded text-sm font-medium gap-2 items-center"
+              className="flex cursor-pointer hover:bg-gray-100 focus:bg-gray-100 focus:outline-hidden py-2 px-2 rounded text-sm font-medium gap-2 items-center"
             >
               {item.label}
             </div>

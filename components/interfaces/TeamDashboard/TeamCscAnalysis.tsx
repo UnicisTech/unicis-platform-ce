@@ -82,7 +82,7 @@ const ProcessingActivitiesAnalysis = ({
             marginBottom: '10px',
           }}
         >
-          <div style={{ width: '49%' }} className="stats p-4 stat-value shadow">
+          <div style={{ width: '49%' }} className="stats p-4 stat-value shadow-sm">
             <PieChart
               page_name={`dashboard`}
               statuses={statuses}
@@ -90,7 +90,7 @@ const ProcessingActivitiesAnalysis = ({
               labels={labels}
             />
           </div>
-          <div style={{ width: '49%' }} className="stats p-4 stat-value shadow">
+          <div style={{ width: '49%' }} className="stats p-4 stat-value shadow-sm">
             <RadarChart ISO={ISO} statuses={statuses} />
           </div>
         </div>

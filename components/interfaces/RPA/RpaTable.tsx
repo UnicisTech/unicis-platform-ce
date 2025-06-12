@@ -35,7 +35,7 @@ const RpaTable = ({
   } = usePagination<TaskWithRpaProcedure>(tasks, perPage);
 
   return (
-    <div className="[&_th]:!whitespace-normal [&_td]:!whitespace-normal">
+    <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
       <div className="overflow-x-auto">
         <table className="text-sm table w-full border-b dark:border-base-200">
           <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
