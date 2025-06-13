@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -16,6 +16,8 @@ import { WithLoadingAndError } from '@/components/shared';
 import type { Task, Team } from '@prisma/client';
 import { CreateTask, DeleteTask } from '@/components/interfaces/Task';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import ModuleBadge from '@/components/shared/ModuleBadge';
+import TaskFilters from '@/components/interfaces/Task/TaskFilters';
 
 const Tasks = ({ team }: { team: Team }) => {
   const router = useRouter();
@@ -24,9 +26,19 @@ const Tasks = ({ team }: { team: Team }) => {
   const [visible, setVisible] = useState(false);
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState<null | number>(null);
+  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
+  const [selectedModules, setSelectedModules] = useState<string[]>([]);
 
   const [perPage, setPerPage] = useState<number>(10);
   // const [statusFilter, setStatusFilter] = useState<string>('')
+
+  const filteredTasks = tasks?.filter((task) => {
+    const statusMatch = !selectedStatuses.length || selectedStatuses.includes(task.status);
+    const moduleMatch =
+      !selectedModules.length ||
+      selectedModules.some((mod) => typeof task.properties === 'object' && task.properties && mod in task.properties);
+    return statusMatch && moduleMatch;
+  });
 
   const {
     currentPage,
@@ -36,10 +48,14 @@ const Tasks = ({ team }: { team: Team }) => {
     goToNextPage,
     prevButtonDisabled,
     nextButtonDisabled,
-  } = usePagination<Task>(tasks || [], perPage);
+  } = usePagination<Task>(filteredTasks || [], perPage);
 
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
+
+  useEffect(() => {
+    console.log("tasks", tasks);
+  }, [tasks]);
 
   if (isLoading) {
     return <Loading />;
@@ -89,6 +105,12 @@ const Tasks = ({ team }: { team: Team }) => {
             )}
           </div>
         </div>
+        <TaskFilters
+          selectedStatuses={selectedStatuses}
+          setSelectedStatuses={setSelectedStatuses}
+          selectedModules={selectedModules}
+          setSelectedModules={setSelectedModules}
+        />
         <table className="text-sm table w-full border-b dark:border-base-200">
           <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -100,6 +122,9 @@ const Tasks = ({ team }: { team: Team }) => {
               </th>
               <th scope="col" className="px-6 py-3">
                 {t('status')}
+              </th>
+              <th scope="col" className="px-6 py-3">
+                {t('registered-modules')}
               </th>
               <th scope="col" className="px-6 py-3">
                 {t('actions')}
@@ -132,6 +157,23 @@ const Tasks = ({ team }: { team: Team }) => {
                           ?.label as string
                       }
                     />
+                  </td>
+                  <td className="px-6 py-3">
+                    <div className="flex gap-2 flex-wrap">
+                      {[
+                        "rpa_procedure",
+                        "tia_procedure",
+                        "pia_risk",
+                        "rm_risk",
+                      ].map((key) =>
+                        typeof task.properties === 'object' &&
+                        task.properties !== null &&
+                        key in task.properties &&
+                        (task.properties as any)[key] ? (
+                          <ModuleBadge key={key} propName={key} />
+                        ) : null
+                      )}
+                    </div>
                   </td>
                   <td className="px-6 py-3">
                     <div className=" btn-group">
