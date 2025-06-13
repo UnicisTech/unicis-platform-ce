@@ -2,6 +2,10 @@
 @plugin "daisyui" {
   themes: light --corporate, dark --prefersdark, cupcake;
 }
+/* @plugin "daisyui" {
+  themes: ["light", "dark"];
+} */
+/* @plugin "daisyui" */
 @config "../tailwind.config.js";
 
 
@@ -12,6 +16,12 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@layer base {
+  button, [role="button"] {
+    cursor: pointer;
   }
 }
 
