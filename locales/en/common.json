@@ -315,5 +315,7 @@
   "pia-remove-title": "Remove Privacy Impact Assessment Risk",
   "pia-remove-description": "Are you sure you want to remove Privacy Impact Assessment Risk? Your task will not be removed.",
   "change-theme-header": "Change theme",
-  "logout": "Logout"
+  "logout": "Logout",
+  "ai-type-a-question": "Type a question",
+  "ai-is-typing": "AI Chat Assistant is typing..."
 }
