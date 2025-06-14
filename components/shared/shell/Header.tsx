@@ -17,7 +17,13 @@ const Header = ({ setSidebarOpen }: HeaderProps) => {
   }
 
   return (
-    <div className="dark:bg-[hsla(var(--b1))] bg-white sticky top-0 z-40 flex h-14 shrink-0 items-center border-b px-4 sm:gap-x-6 sm:px-6 lg:px-8 dark:border-gray-600">
+    <div
+      className="
+        sticky top-0 z-40 flex h-14 shrink-0 items-center
+        bg-background border-b border-border
+        px-4 sm:gap-x-6 sm:px-6 lg:px-8
+      "
+    >
       <button
         type="button"
         className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
@@ -29,7 +35,7 @@ const Header = ({ setSidebarOpen }: HeaderProps) => {
       <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
         <div className="relative flex flex-1"></div>
         <div className="flex items-center gap-x-4 lg:gap-x-6">
-          <AccountDropdown/>
+          <AccountDropdown />
         </div>
       </div>
     </div>
