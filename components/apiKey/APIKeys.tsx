@@ -10,6 +10,7 @@ import type { ApiResponse } from 'types';
 import DaisyBadge from '../shared/daisyUI/DaisyBadge';
 import DaisyButton from '../shared/daisyUI/DaisyButton';
 import NewAPIKey from './NewAPIKey';
+import { Button } from '../shadcn/ui/button';
 
 interface APIKeysProps {
   team: Team;
@@ -66,14 +67,12 @@ const APIKeys = ({ team }: APIKeysProps) => {
               API keys allow you to authenticate with the API.
             </p>
           </div>
-          <DaisyButton
-            color="primary"
-            variant="outline"
-            size="md"
+          <Button
+            color='primary'
             onClick={() => setCreateModalVisible(true)}
           >
-            {t('create-api-key')}
-          </DaisyButton>
+          {t('create-api-key')}
+          </Button>
         </div>
         {apiKeys.length === 0 ? (
           <EmptyState
@@ -104,7 +103,6 @@ const APIKeys = ({ team }: APIKeysProps) => {
                         <DaisyButton
                           size="xs"
                           color="error"
-                          variant="outline"
                           onClick={() => {
                             setSelectedApiKey(apiKey);
                             setConfirmationDialogVisible(true);
