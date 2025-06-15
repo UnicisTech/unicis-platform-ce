@@ -30,6 +30,7 @@
   "team-invite": "is inviting you to join their team.",
   "successfully-joined": "You have successfully created your account.",
   "invitation-sent": "Invitation sent!",
+  "invitation-error-accepting": "There was an error accepting the invitation. Please try again later.",
   "invitation-deleted": "Invitation deleted",
   "send-invite": "Send Invite",
   "invite-new-member": "Invite New Member",
@@ -100,6 +101,7 @@
   "reset-password": "Reset Password",
   "forgot-password": "Forgot your password?",
   "password-updated": "Password updated successfully.",
+  "password-criteria": "Password must include uppercase, lowercase, number, and special character",
   "teams": "Teams",
   "account": "Account",
   "password": "Password",
@@ -316,6 +318,7 @@
   "pia-remove-description": "Are you sure you want to remove Privacy Impact Assessment Risk? Your task will not be removed.",
   "change-theme-header": "Change theme",
   "logout": "Logout",
+  "sign-out": "Sign out",
   "ai-type-a-question": "Type a question",
   "ai-is-typing": "AI Chat Assistant is typing..."
 }
