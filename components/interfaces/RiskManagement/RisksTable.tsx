@@ -61,10 +61,10 @@ const RisksTable = ({
   return (
     <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
       <div className="overflow-x-auto">
-        <table className="text-sm table w-full border-b dark:border-base-200">
-          <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
+        <table className="w-fit divide-y divide-border text-sm">
+          <thead className="bg-muted">
             <tr>
-              <th className={verticalTextStyles}>Risk ID</th>
+              <th scope="col">Risk ID</th>
               <th className={verticalTextStyles}>Risk</th>
               <th className={verticalTextStyles}>Asset Owner</th>
               <th className={verticalTextStyles}>Impact</th>
@@ -103,49 +103,46 @@ const RisksTable = ({
               );
 
               return (
-                <tr
-                  key={index}
-                  className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
-                >
-                  <td>
+                <tr key={index}>
+                  <td className='px-1.5 py-1.5'>
                     <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
                       <div className="flex items-center justify-start space-x-2">
                         <span className="underline">{task.title}</span>
                       </div>
                     </Link>
                   </td>
-                  <td>
+                  <td className='px-1.5 py-1.5'>
                     <span>{risk[0].Risk}</span>
                   </td>
-                  <td>
+                  <td className='px-1.5 py-1.5'>
                     <span>{getInitials(risk[0].AssetOwner.label)}</span>
                   </td>
-                  <td>
+                  <td className='px-1.5 py-1.5'>
                     <span>{risk[0].Impact}</span>
                   </td>
-                  <td>
+                  <td className='px-1.5 py-1.5'>
                     <span>{riskValueToLabel(risk[0].RawProbability)}</span>
                   </td>
-                  <td>
+                  <td className='px-1.5 py-1.5'>
                     <span>{riskValueToLabel(risk[0].RawImpact)}</span>
                   </td>
                   <td
-                    className={`dark:text-black ${getBgColorClass(rawRiskRating)}`}
+                    className={`px-1.5 py-1.5 ${getBgColorClass(rawRiskRating)}`}
                   >
                     {riskValueToLabel(rawRiskRating)}
                   </td>
-                  <td>{risk[1].RiskTreatment}</td>
-                  <td>{risk[1].TreatmentCost}</td>
-                  <td>{riskValueToLabel(risk[1].TreatmentStatus)}</td>
-                  <td>{riskValueToLabel(risk[1].TreatedProbability)}</td>
-                  <td>{riskValueToLabel(risk[1].TreatedImpact)}</td>
+                  <td className='px-1.5 py-1.5'>{risk[1].RiskTreatment}</td>
+                  <td className='px-1.5 py-1.5'>{risk[1].TreatmentCost}</td>
+                  <td className='px-1.5 py-1.5'>{riskValueToLabel(risk[1].TreatmentStatus)}</td>
+                  <td className='px-1.5 py-1.5'>{riskValueToLabel(risk[1].TreatedProbability)}</td>
+                  <td className='px-1.5 py-1.5'>{riskValueToLabel(risk[1].TreatedImpact)}</td>
                   <td
-                    className={`dark:text-black ${getBgColorClass(targetRiskRating)}`}
+                    className={`px-1.5 py-1.5 ${getBgColorClass(targetRiskRating)}`}
                   >
                     {riskValueToLabel(targetRiskRating)}
                   </td>
                   <td
-                    className={`dark:text-black ${getBgColorClass(currentRiskRating)}`}
+                    className={`px-1.5 py-1.5 ${getBgColorClass(currentRiskRating)}`}
                   >
                     {riskValueToLabel(currentRiskRating)}
                   </td>
