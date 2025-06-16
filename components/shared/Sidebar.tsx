@@ -105,7 +105,7 @@
 //     return (
 //       <>
 //         <aside
-//           className="transition-width fixed top-0 left-0 z-20 flex h-full w-64 flex-shrink-0 flex-col pt-12 duration-75 lg:flex"
+//           className="transition-width fixed top-0 left-0 z-20 flex h-full w-64 shrink-0 flex-col pt-12 duration-75 lg:flex"
 //           aria-label="Sidebar"
 //         >
 //           <div className="relative flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white pt-0 dark:border-gray-600 dark:bg-black">

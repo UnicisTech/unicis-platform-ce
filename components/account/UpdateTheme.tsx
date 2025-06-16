@@ -32,7 +32,7 @@ const UpdateTheme = () => {
             {themes.map((theme) => (
               <li key={theme.id}>
                 <button
-                  className="w-full flex hover:bg-gray-100 hover:dark:text-black focus:bg-gray-100 focus:outline-none py-2 px-2 rounded text-sm font-medium gap-2 items-center"
+                  className="w-full flex hover:bg-gray-100 dark:hover:text-black focus:bg-gray-100 focus:outline-hidden py-2 px-2 rounded text-sm font-medium gap-2 items-center"
                   onClick={() => {
                     applyTheme(theme.id);
                     setTheme(theme.id);

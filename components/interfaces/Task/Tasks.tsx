@@ -112,45 +112,45 @@ const Tasks = ({ team }: { team: Team }) => {
           selectedModules={selectedModules}
           setSelectedModules={setSelectedModules}
         />
-        <table className="text-sm table w-full border-b dark:border-base-200">
-          <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
+        <table className="w-full min-w-full divide-y divide-border text-sm">
+          <thead className="bg-muted">
             <tr>
-              <th scope="col" className="px-6 py-3">
+              <th className="w-1/10 px-4 py-2 text-left">
                 {t('task-id')}
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th className="w-2/5 px-4 py-2 text-left">
                 {t('title')}
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th className="w-1/10 px-4 py-2 text-left">
                 {t('status')}
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th className="w-1/10 px-4 py-2 text-left">
                 {t('registered-modules')}
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th className="w-1/5 px-4 py-2 text-left">
                 {t('actions')}
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-border">
             {pageData.map((task) => {
               return (
                 <tr key={task.id}>
-                  <td className="px-6 py-3">
+                  <td className="px-4 py-2">
                     <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
                       <div className="flex items-center justify-start space-x-2">
                         <span className="underline">{task.taskNumber}</span>
                       </div>
                     </Link>
                   </td>
-                  <td className="px-6 py-3">
+                  <td className="px-4 py-2">
                     <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
                       <div className="flex items-center justify-start space-x-2">
                         <span className="underline">{task.title}</span>
                       </div>
                     </Link>
                   </td>
-                  <td className="px-6 py-3">
+                  <td className="px-4 py-2">
                     <StatusBadge
                       value={task.status}
                       label={
@@ -159,7 +159,7 @@ const Tasks = ({ team }: { team: Team }) => {
                       }
                     />
                   </td>
-                  <td className="px-6 py-3">
+                  <td className="px-4 py-2">
                     <div className="flex gap-2 flex-wrap">
                       {[
                         "rpa_procedure",
@@ -176,7 +176,8 @@ const Tasks = ({ team }: { team: Team }) => {
                       )}
                     </div>
                   </td>
-                  <td className="px-6 py-3">
+                  {/* <td className="px-6 py-3"> */}
+                  <td className="px-4 py-2">
                     <div className=" btn-group">
                       {canAccess('task', ['update']) && (
                         <DaisyButton
@@ -184,7 +185,6 @@ const Tasks = ({ team }: { team: Team }) => {
                           size="sm"
                           variant="outline"
                           onClick={() => {
-                            // openEditModal(task);
                             router.push(
                               `/teams/${slug}/tasks/${task.taskNumber}`
                             );

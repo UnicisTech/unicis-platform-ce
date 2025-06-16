@@ -151,7 +151,7 @@ const CreateTask = ({ visible, setVisible, team }: { visible: boolean; setVisibl
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
-                    <PopoverContent forceMount className="pointer-events-auto w-auto p-0 z-[60]" align="start">
+                    <PopoverContent forceMount className="pointer-events-auto w-auto p-0 z-60" align="start">
                       <Calendar
                         mode="single"
                         selected={field.value}

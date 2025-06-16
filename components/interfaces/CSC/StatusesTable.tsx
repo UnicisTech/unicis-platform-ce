@@ -84,39 +84,34 @@ const StatusesTable = ({
   }, [sectionFilter, statusFilter]);
 
   return (
-    <div className="[&_th]:!whitespace-normal [&_td]:!whitespace-normal">
+    <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
       <div className="overflow-x- mt-2">
-        {/* <table className="w-full table-fixed text-left text-sm text-gray-500 dark:text-gray-400">
-            <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400"> */}
-        <table className="text-sm table w-full border-b dark:border-base-200">
-          <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
+        <table className="w-full min-w-full divide-y divide-border text-sm">
+          <thead className="bg-muted">
             <tr>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 text-left">
                 Code
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 text-left">
                 Section
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 text-left">
                 Control
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 text-left">
                 Requirements
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 text-left">
                 <StatusHeader />
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 text-left">
                 Tasks
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-border">
             {pageData.map((option) => (
-              <tr
-                key={option.value.control}
-                className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
-              >
+              <tr key={option.value.control}>
                 <td className="px-6 py-3">{option.value.code}</td>
                 <td className="px-6 py-3">{option.value.section}</td>
                 <td className="px-6 py-3">

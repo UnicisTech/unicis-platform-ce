@@ -1,5 +1,4 @@
 import { CreateDirectory, Directory } from '@/components/directorySync';
-import { Card } from '@/components/shared';
 import { Error, Loading } from '@/components/shared';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import { TeamTab } from '@/components/team';
@@ -18,7 +17,8 @@ import { getSession } from '@/lib/session';
 import { getTeamMember } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import { inferSSRProps } from '@/lib/inferSSRProps';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/shadcn/ui/card";
+import { Button } from "@/components/shadcn/ui/button";
 
 const DirectorySync: NextPageWithLayout<
   inferSSRProps<typeof getServerSideProps>
@@ -80,31 +80,26 @@ const DirectorySync: NextPageWithLayout<
         teamFeatures={teamFeatures}
       />
       <Card>
-        <Card.Body>
+        <CardHeader>
+          <CardTitle>
+            {t("directory-sync")}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
           <div className="mb-3 flex items-center justify-between">
-            <p className="text-sm">{t('provision')}</p>
-            {directory === null ? (
-              <DaisyButton
-                onClick={() => setVisible(!visible)}
-                variant="outline"
-                color="primary"
-                size="md"
-              >
-                {t('configure')}
-              </DaisyButton>
+            <p className="text-sm text-muted-foreground">{t("provision")}</p>
+            {directory ? (
+              <Button variant="destructive" onClick={() => setConfirmationDialogVisible(true)}>
+                {t("remove")}
+              </Button>
             ) : (
-              <DaisyButton
-                onClick={() => setConfirmationDialogVisible(true)}
-                variant="outline"
-                color="error"
-                size="md"
-              >
-                {t('remove')}
-              </DaisyButton>
+              <Button variant="outline" onClick={() => setVisible(true)}>
+                {t("configure")}
+              </Button>
             )}
           </div>
           <Directory team={team} />
-        </Card.Body>
+        </CardContent>
       </Card>
       <CreateDirectory visible={visible} setVisible={setVisible} team={team} />
       <ConfirmationDialog

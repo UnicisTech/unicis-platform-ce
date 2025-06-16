@@ -1,3 +1,4 @@
+import { useState, type ReactElement } from 'react';
 import { AuthLayout } from '@/components/layouts';
 import { Error, Loading } from '@/components/shared';
 import { defaultHeaders } from '@/lib/common';
@@ -8,17 +9,18 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import type { ReactElement } from 'react';
 import toast from 'react-hot-toast';
 import type { ApiResponse, NextPageWithLayout } from 'types';
 import { signOut } from 'next-auth/react';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import { Button } from '@/components/shadcn/ui/button';
+import { Loader2 } from "lucide-react"
 
 const AcceptTeamInvitation: NextPageWithLayout = () => {
   const { status, data } = useSession();
   const router = useRouter();
   const { t } = useTranslation('common');
   const { isLoading, error, invitation } = useInvitation();
+  const [isAccepting, setIsAccepting] = useState(false);
 
   if (isLoading) {
     return <Loading />;
@@ -29,23 +31,30 @@ const AcceptTeamInvitation: NextPageWithLayout = () => {
   }
 
   const acceptInvitation = async () => {
-    const response = await fetch(
-      `/api/teams/${invitation.team.slug}/invitations`,
-      {
-        method: 'PUT',
-        headers: defaultHeaders,
-        body: JSON.stringify({ inviteToken: invitation.token }),
+    try {
+      setIsAccepting(true);
+      const response = await fetch(
+        `/api/teams/${invitation.team.slug}/invitations`,
+        {
+          method: 'PUT',
+          headers: defaultHeaders,
+          body: JSON.stringify({ inviteToken: invitation.token }),
+        }
+      );
+  
+      const json = (await response.json()) as ApiResponse;
+  
+      if (!response.ok) {
+        toast.error(json.error.message);
+        return;
       }
-    );
-
-    const json = (await response.json()) as ApiResponse;
-
-    if (!response.ok) {
-      toast.error(json.error.message);
-      return;
+  
+      router.push(`/teams`);
+    } catch (error) {
+      toast.error(t('invitation-error-accepting'));
+    } finally {
+      setIsAccepting(false);
     }
-
-    router.push(`/teams`);
   };
 
   const emailMatch = data?.user?.email === invitation.email;
@@ -65,26 +74,24 @@ const AcceptTeamInvitation: NextPageWithLayout = () => {
           {status === 'unauthenticated' && (
             <>
               <h3 className="text-center">{t('invite-create-account')}</h3>
-              <DaisyButton
+              <Button
                 variant="outline"
-                fullWidth
+                size="full"
                 onClick={() => {
                   router.push(`/auth/join?token=${invitation.token}`);
                 }}
-                size="md"
               >
                 {t('create-a-new-account')}
-              </DaisyButton>
-              <DaisyButton
+              </Button>
+              <Button
                 variant="outline"
-                fullWidth
+                size="full"
                 onClick={() => {
                   router.push(`/auth/login?token=${invitation.token}`);
                 }}
-                size="md"
               >
                 {t('login')}
-              </DaisyButton>
+              </Button>
             </>
           )}
 
@@ -92,14 +99,14 @@ const AcceptTeamInvitation: NextPageWithLayout = () => {
           {status === 'authenticated' && emailMatch && (
             <>
               <h3 className="text-center">{t('accept-invite')}</h3>
-              <DaisyButton
+              <Button
                 onClick={acceptInvitation}
-                fullWidth
                 color="primary"
-                size="md"
+                size="full"
               >
+                {isAccepting && <Loader2 className="animate-spin" />}
                 {t('accept-invitation')}
-              </DaisyButton>
+              </Button>
             </>
           )}
 
@@ -112,17 +119,15 @@ const AcceptTeamInvitation: NextPageWithLayout = () => {
                 sign in or create a new account using the same email address
                 used in the invitation.
               </p>
-              <DaisyButton
-                fullWidth
-                color="error"
-                size="md"
-                variant="outline"
+              <Button
+                variant="destructive"
+                size="full"
                 onClick={() => {
                   signOut();
                 }}
               >
-                Sign out
-              </DaisyButton>
+                {t('sign-out')}
+              </Button>
             </>
           )}
         </div>

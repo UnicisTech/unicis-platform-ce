@@ -14,8 +14,8 @@ import {
   CreateCategory,
 } from '@/components/interfaces/IAP';
 import StatusResults from './StatusResults';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
+import { Button } from '@/components/shadcn/ui/button';
 
 interface IapDashboardProps {
   categories: Category[];
@@ -123,30 +123,26 @@ const AdminPage = ({
         <div className="flex justify-end items-center my-1">
           {canAccess('iap_category', ['create']) && (
             <div className="mx-1.5 my-0">
-              <DaisyButton
-                size="sm"
+              <Button
                 color="primary"
-                variant="outline"
                 onClick={() => {
                   setIsCreateCategoryOpen(true);
                 }}
               >
                 {t('create-category')}
-              </DaisyButton>
+              </Button>
             </div>
           )}
           {canAccess('iap_course', ['create']) && (
             <div className="mx-1.5 my-0">
-              <DaisyButton
-                size="sm"
+              <Button
                 color="primary"
-                variant="outline"
                 onClick={() => {
                   setIsCreateCourseOpen(true);
                 }}
               >
                 {t('create-course')}
-              </DaisyButton>
+              </Button>
             </div>
           )}
         </div>

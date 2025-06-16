@@ -43,7 +43,6 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { companyName, address, zipCode, country, vatId, email, subscription } =
     req.body;
-  console.log('req.body', req.body);
   const team = teamMember.team;
   const response = await sendSubscriptionRequest({
     team,
@@ -74,6 +73,5 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       await addInitialPayment(team, createdSubscription);
     }
   }
-  console.log('restResp', response);
   res.status(200).json({ data: response });
 };

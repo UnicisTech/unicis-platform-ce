@@ -1,12 +1,13 @@
-import Link from 'next/link';
-import classNames from 'classnames';
+import Link from "next/link";
+import classNames from "classnames";
+import { Separator } from "@/components/shadcn/ui/separator";
 
 export interface MenuItem {
   name: string;
   href: string;
-  icon?: any;
+  icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   active?: boolean;
-  items?: Omit<MenuItem, 'icon' | 'items'>[];
+  items?: Omit<MenuItem, "icon" | "items">[];
   className?: string;
 }
 
@@ -23,47 +24,47 @@ interface NavigationItemProps {
   className?: string;
 }
 
-const NavigationItems = ({ menus }: NavigationItemsProps) => {
-  return (
-    <ul role="list" className="flex flex-1 flex-col gap-1">
-      {menus.map((menu) =>
-        menu ? (
-          <li key={menu.name}>
-            {menu.name === 'line-break' ? (
-              <hr className="my-1 border-t border-gray-300 dark:border-gray-600" />
-            ) : (
-              <>
-                <NavigationItem menu={menu} className={menu.className || ''} />
-                {menu.items && (
-                  <ul className="flex flex-col gap-1 mt-1">
-                    {menu.items.map((subitem) => (
-                      <li key={subitem.name}>
-                        <NavigationItem menu={subitem} className="pl-9" />
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </>
-            )}
-          </li>
-        ) : (
-          <></>
-        )
-      )}
-    </ul>
-  );
-};
+export const NavigationItems: React.FC<NavigationItemsProps> = ({ menus }) => (
+  <ul role="list" className="flex flex-1 flex-col gap-1">
+    {menus.map((menu) =>
+      menu ? (
+        <li key={menu.name}>
+          {menu.name === "line-break" ? (
+            <Separator className="my-1" />
+          ) : (
+            <>
+              <NavigationItem menu={menu} className={menu.className} />
+              {menu.items && (
+                <ul className="flex flex-col gap-1 mt-1">
+                  {menu.items.map((sub) => (
+                    <li key={sub.name}>
+                      <NavigationItem menu={sub} className="pl-9" />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </>
+          )}
+        </li>
+      ) : null
+    )}
+  </ul>
+);
 
-const NavigationItem = ({ menu, className }: NavigationItemProps) => {
-  const isExternal = menu.href.startsWith('http');
+const NavigationItem: React.FC<NavigationItemProps> = ({ menu, className }) => {
+  const isExternal = menu.href.startsWith("http");
 
   return (
     <Link
       href={menu.href}
-      className={`flex items-center rounded text-sm text-gray-900 hover:bg-gray-100 px-2 p-2 gap-2 dark:text-gray-500 hover:dark:text-black ${
-        menu.active ? 'bg-gray-100 font-semibold dark:text-black' : ''
-      }${className}`}
-      target={isExternal ? '_blank' : undefined}
+      target={isExternal ? "_blank" : undefined}
+      className={classNames(
+        "flex items-center rounded-md text-sm px-2 p-2 gap-2",
+        menu.active
+          ? "bg-muted font-semibold text-foreground"
+          : "text-foreground hover:bg-muted hover:text-foreground",
+        className
+      )}
     >
       {menu.icon && (
         <menu.icon

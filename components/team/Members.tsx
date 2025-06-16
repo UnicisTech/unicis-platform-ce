@@ -13,6 +13,7 @@ import type { ApiResponse } from 'types';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
 import { useState } from 'react';
 import DaisyButton from '../shared/daisyUI/DaisyButton';
+import { Button } from '../shadcn/ui/button';
 
 const Members = ({ team }: { team: Team }) => {
   const { data: session } = useSession();
@@ -86,14 +87,12 @@ const Members = ({ team }: { team: Team }) => {
             Team members and their roles.
           </p>
         </div>
-        <DaisyButton
+        <Button
           color="primary"
-          variant="outline"
-          size="md"
           onClick={() => setVisible(!visible)}
         >
           {t('add-member')}
-        </DaisyButton>
+        </Button>
       </div>
       <table className="text-sm table w-full border-b dark:border-base-200">
         <thead className="bg-base-200">
