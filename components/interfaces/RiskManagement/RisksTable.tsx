@@ -11,6 +11,7 @@ import {
   riskValueToLabel,
 } from '@/lib/rm';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 
 const verticalTextStyles =
   'px-1.5 py-1.5 whitespace-nowrap align-middle text-center [writing-mode:vertical-rl] rotate-180';
@@ -180,27 +181,18 @@ const RisksTable = ({
           </tbody>
         </table>
       </div>
-      {pageData.length ? (
-        <div className="flex justify-center w-30">
-          <div className="btn-group join grid grid-cols-10">
-            <button
-              className="join-item btn btn-outline col-span-4"
-              onClick={goToPreviousPage}
-              disabled={prevButtonDisabled}
-            >
-              Previous page
-            </button>
-            <button className="join-item btn btn-outline col-span-2">{`${currentPage}/${totalPages}`}</button>
-            <button
-              className="join-item btn btn-outline col-span-4"
-              onClick={goToNextPage}
-              disabled={nextButtonDisabled}
-            >
-              Next
-            </button>
-          </div>
-        </div>
-      ) : null}
+      {pageData.length > 0 && (
+        <PaginationControls
+          page={currentPage}
+          totalPages={totalPages}
+          onChange={(page) => {
+            if (page > currentPage) goToNextPage();
+            else if (page < currentPage) goToPreviousPage();
+          }}
+          prevButtonDisabled={prevButtonDisabled}
+          nextButtonDisabled={nextButtonDisabled}
+        />
+      )}
     </div>
   )
 };

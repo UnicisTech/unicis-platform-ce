@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { Category } from '@prisma/client';
 import { TeamCourseWithProgress } from 'types';
 import CourseCard from './CourseCard';
+import EmptyState from '@/components/shared/EmptyState';
 
 interface IapDashboardProps {
   categories: Category[];
@@ -21,15 +22,22 @@ const IapDashboard = ({ categories, teamCourses }: IapDashboardProps) => {
           </h2>
         </div>
       </div>
-      <div className="grid gap-5 grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] p-6">
-        {teamCourses.map((teamCourse) => (
-          <CourseCard
-            teamCourse={teamCourse}
-            categories={categories}
-            key={teamCourse.id}
-          />
-        ))}
-      </div>
+
+      {teamCourses.length > 0 ? (
+        <div className="grid gap-5 grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] p-6">
+          {teamCourses.map((teamCourse) => (
+            <CourseCard
+              teamCourse={teamCourse}
+              categories={categories}
+              key={teamCourse.id}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="p-6">
+          <EmptyState title={t('iap-dashboard')} description="No records" />
+        </div>
+      )}
     </>
   );
 };

@@ -10,6 +10,7 @@ import usePagination from 'hooks/usePagination';
 import useCanAccess from 'hooks/useCanAccess';
 import { ControlOption, ISO } from 'types';
 import TasksList from './TasksList';
+import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 
 const StatusesTable = ({
   ISO,
@@ -165,29 +166,18 @@ const StatusesTable = ({
           </tbody>
         </table>
       </div>
-      {pageData.length ? (
-        <div className="w-full mt-3">
-          <div className="flex justify-center w-30">
-            <div className="btn-group join grid grid-cols-10">
-              <button
-                className="join-item btn btn-outline col-span-4"
-                onClick={goToPreviousPage}
-                disabled={prevButtonDisabled}
-              >
-                Previous page
-              </button>
-              <button className="join-item btn btn-outline col-span-2">{`${currentPage}/${totalPages}`}</button>
-              <button
-                className="join-item btn btn-outline col-span-4"
-                onClick={goToNextPage}
-                disabled={nextButtonDisabled}
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : null}
+      {pageData.length > 0 && (
+        <PaginationControls
+          page={currentPage}
+          totalPages={totalPages}
+          onChange={(page) => {
+            if (page > currentPage) goToNextPage();
+            else if (page < currentPage) goToPreviousPage();
+          }}
+          prevButtonDisabled={prevButtonDisabled}
+          nextButtonDisabled={nextButtonDisabled}
+        />
+      )}
     </div>
   );
 };

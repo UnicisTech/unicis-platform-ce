@@ -256,29 +256,19 @@ const TaskById = ({
       {activeCommentTab === 'Audit logs' && (
         <>
           <Card heading="Record of Processing Activities Audit logs">
-            <Card.Body>
-              <RpaAuditLog task={task} />
-            </Card.Body>
+            <RpaAuditLog task={task} />
           </Card>
           <Card heading="Transfer Impact Assessment Audit logs">
-            <Card.Body>
-              <TiaAuditLogs task={task} />
-            </Card.Body>
+            <TiaAuditLogs task={task} />
           </Card>
           <Card heading="Cybersecurity Controls Audit logs">
-            <Card.Body>
-              <CscAuditLogs task={task} />
-            </Card.Body>
+            <CscAuditLogs task={task} />
           </Card>
           <Card heading="Privacy Impact Assessment Audit logs">
-            <Card.Body>
-              <PiaAuditLogs task={task} />
-            </Card.Body>
+            <PiaAuditLogs task={task} />
           </Card>
           <Card heading="Risk Management Audit logs">
-            <Card.Body>
-              <RmAuditLogs task={task} />
-            </Card.Body>
+            <RmAuditLogs task={task} />
           </Card>
         </>
       )}

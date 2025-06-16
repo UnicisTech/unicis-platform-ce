@@ -18,6 +18,7 @@ import { CreateTask, DeleteTask } from '@/components/interfaces/Task';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import ModuleBadge from '@/components/shared/ModuleBadge';
 import TaskFilters from '@/components/interfaces/Task/TaskFilters';
+import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 
 const Tasks = ({ team }: { team: Team }) => {
   const router = useRouter();
@@ -211,27 +212,18 @@ const Tasks = ({ team }: { team: Team }) => {
             })}
           </tbody>
         </table>
-        {pageData.length ? (
-          <div className="flex justify-center w-30">
-            <div className="btn-group join grid grid-cols-10">
-              <button
-                className="join-item btn btn-outline col-span-4"
-                onClick={goToPreviousPage}
-                disabled={prevButtonDisabled}
-              >
-                Previous page
-              </button>
-              <button className="join-item btn btn-outline col-span-2">{`${currentPage}/${totalPages}`}</button>
-              <button
-                className="join-item btn btn-outline col-span-4"
-                onClick={goToNextPage}
-                disabled={nextButtonDisabled}
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        ) : null}
+        {pageData.length > 0 && (
+          <PaginationControls
+            page={currentPage}
+            totalPages={totalPages}
+            onChange={(page) => {
+              if (page > currentPage) goToNextPage();
+              else if (page < currentPage) goToPreviousPage();
+            }}
+            prevButtonDisabled={prevButtonDisabled}
+            nextButtonDisabled={nextButtonDisabled}
+          />
+        )}
         <CreateTask visible={visible} setVisible={setVisible} team={team} />
         <DeleteTask
           visible={deleteVisible}
