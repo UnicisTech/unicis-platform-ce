@@ -1,106 +1,111 @@
-import { Card } from '@/components/shared';
-import { getAxiosError } from '@/lib/common';
-import { Subscription, Team } from '@prisma/client';
-import { isoOptions } from '../defaultLanding/data/configs/csc';
-import axios from 'axios';
-import { useFormik } from 'formik';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import toast from 'react-hot-toast';
-import type { ApiResponse, TeamProperties, TeamWithSubscription } from 'types';
-import * as Yup from 'yup';
-import useSubscription from 'hooks/useSubscription';
-import DaisyButton from '../shared/daisyUI/DaisyButton';
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useTranslation } from "next-i18next";
+import { getAxiosError } from "@/lib/common";
+import type { ApiResponse, TeamProperties, TeamWithSubscription } from "types";
+import { Subscription } from "@prisma/client";
+import useSubscription from "hooks/useSubscription";
+import { isoOptions } from "../defaultLanding/data/configs/csc";
 
-const CSCSettings = ({ team }: { team: TeamWithSubscription }) => {
-  console.log('CSCSettings team', team);
-  const { avaliableISO } = useSubscription(team.subscription as Subscription);
-  const { t } = useTranslation('common');
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@/components/shadcn/ui/card";
+import { Label } from "@/components/shadcn/ui/label";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/shadcn/ui/select";
+import { Button } from "@/components/shadcn/ui/button";
+import { Loader2 } from "lucide-react"
 
+interface CSCSettingsProps {
+  team: TeamWithSubscription;
+}
+
+const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
+  const { t } = useTranslation("common");
+  const { avaliableISO } = useSubscription(
+    team.subscription as Subscription
+  );
   const teamProperties = team.properties as TeamProperties;
 
   const formik = useFormik({
     initialValues: {
-      iso: teamProperties.csc_iso || 'default',
+      iso: teamProperties.csc_iso || isoOptions[0].value,
     },
-    validationSchema: Yup.object().shape({
-      iso: Yup.string().required('Choose ISO set'),
+    validationSchema: Yup.object({
+      iso: Yup.string().required(t("choose-iso-required")),
     }),
     enableReinitialize: true,
     onSubmit: async (values) => {
       try {
-        const response = await axios.put<ApiResponse<Team>>(
+        //TODO: handle uncorrect ISO selection
+        const res = await axios.put<ApiResponse<TeamProperties>>(
           `/api/teams/${team.slug}/csc/iso`,
-          {
-            ...values,
-          }
+          values
         );
-
-        const { data: iso } = response.data;
-        if (iso) {
-          toast.success(t('successfully-updated'));
-        }
-      } catch (error) {
-        toast.error(getAxiosError(error));
+        toast.success(t("successfully-updated"));
+      } catch (err) {
+        toast.error(getAxiosError(err));
       }
     },
   });
 
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
-
-  // if (isError) {
-  //   return <Error />;
-  // }
-
   return (
-    <>
-      <form onSubmit={formik.handleSubmit}>
-        <Card heading={t('csc-settings')}>
-          <Card.Body className="px-3 py-3">
-            <div className="mt-2 flex flex-col space-y-4">
-              <p>{t('csc-choose-iso')}</p>
-              <div className="flex justify-between space-x-3 w-1/2 items-center">
-                <select
-                  className="select-bordered select grow"
-                  name="iso"
-                  onChange={formik.handleChange}
-                  value={formik.values.iso}
-                  required
-                >
-                  {isoOptions.map((option, index) => {
-                    const isOptionDisabled: boolean = !avaliableISO.find(
-                      (iso) => iso === option.value
-                    );
+    <form onSubmit={formik.handleSubmit}>
+      <Card>
+        <CardHeader>
+          <CardTitle>{t("csc-settings")}</CardTitle>
+        </CardHeader>
+
+        <CardContent className="space-y-4">
+          <p>{t("csc-choose-iso")}</p>
+          <div className="flex items-center space-x-3 w-1/2">
+            <div className="flex-1">
+              <Label htmlFor="iso" className="sr-only">
+                {t("iso")}
+              </Label>
+              <Select
+                name="iso"
+                value={formik.values.iso}
+                onValueChange={(val) => formik.setFieldValue("iso", val)}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder={t("select-iso")} />
+                </SelectTrigger>
+                <SelectContent>
+                  {isoOptions.map(({ label, value }) => {
+                    const disabled = !avaliableISO.includes(value);
                     return (
-                      <option
-                        value={option.value}
-                        key={index}
-                        disabled={isOptionDisabled}
-                      >
-                        {option.label}{' '}
-                        {isOptionDisabled &&
-                          ' - avaliable on Premium and Ultimate plans only'}
-                      </option>
+                      <SelectItem key={value} value={value} disabled={disabled}>
+                        {label}
+                        {disabled && ` - ${t("csc-premium-and-ultimate only")}`}
+                      </SelectItem>
                     );
                   })}
-                </select>
-                <DaisyButton
-                  type="submit"
-                  color="primary"
-                  loading={formik.isSubmitting}
-                  disabled={!formik.isValid || !formik.dirty}
-                  size="md"
-                >
-                  {t('choose')}
-                </DaisyButton>
-              </div>
+                </SelectContent>
+              </Select>
             </div>
-          </Card.Body>
-        </Card>
-      </form>
-    </>
+            <Button
+              type="submit"
+              disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
+            >
+              {formik.isSubmitting && <Loader2 className="animate-spin" />}
+              {t("choose")}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </form>
   );
 };
 
