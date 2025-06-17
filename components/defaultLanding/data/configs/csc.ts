@@ -2,6 +2,7 @@ import defaultJson from '../MVPS-controls.json';
 import iso2013Json from '../ISO-CSC-controls-2013.json';
 import iso2022Json from '../ISO-CSC-controls-2022.json';
 import nistcsfv2 from '../CSF2_1.json';
+import eunis2 from '../eu-nis2.json';
 import { Section } from 'types';
 
 const controls = {
@@ -13,6 +14,7 @@ const controls = {
     Control: `${item.Code}: ${item.Control}`,
     ControlLabel: item.Control,
   })),
+  eunis2: eunis2,
 };
 
 const sections = [
@@ -39,6 +41,7 @@ const isoOptions = [
   { label: 'ISO/IEC 27001:2022', value: '2022' },
   { label: 'MVSP v1.0-20211007', value: 'default' },
   { label: 'NIST CSF v2', value: 'nistcsfv2' },
+  { label: 'EU NIS2', value: 'eunis2' },
 ];
 
 const perPageOptions: { label: string; value: number }[] = [
@@ -71,6 +74,7 @@ const getSectionsLabels = (iso: string) => {
   switch (iso) {
     case '2022':
     case 'default':
+    case 'eunist2':
     case 'nistcsfv2':
       return getSections(iso).map(({ label }) => label);
     // case 'nistcsfv2':
