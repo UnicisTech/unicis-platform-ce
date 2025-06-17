@@ -41,7 +41,7 @@ export type Section = {
   value: string;
 };
 
-export type ISO = 'default' | '2013' | '2022' | 'nistcsfv2' | 'eunis2' | 'gdpr';
+export type ISO = 'default' | '2013' | '2022' | 'nistcsfv2' | 'eunis2' | 'gdpr' | 'cisv81';
 
 type CscStatusesPropMap = {
   default: 'csc_statuses';
@@ -50,6 +50,7 @@ type CscStatusesPropMap = {
   nistcsfv2: 'csc_statuses_nistcsfv2';
   eunis2: 'csc_statuses_eunis2';
   gdpr: 'csc_statuses_gdpr';
+  cisv81: 'csc_statuses_cisv81';
 };
 
 export type CscStatusesProp = CscStatusesPropMap[ISO];
@@ -61,6 +62,7 @@ type CscControlsPropMap = {
   nistcsfv2: 'csc_controls_nistcsfv2';
   eunis2: 'csc_controls_eunis2';
   gdpr: 'csc_controls_gdpr';
+  cisv81: 'csc_controls_cisv81';
 };
 
 export type CscControlsProp = CscControlsPropMap[ISO];
