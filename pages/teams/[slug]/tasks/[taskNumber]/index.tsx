@@ -1,47 +1,62 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Loading, Error, Card } from '@/components/shared';
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import useTask from 'hooks/useTask';
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import { Loading, Error } from "@/components/shared";
 import {
   Attachments,
   Comments,
   CommentsTab,
   TaskDetails,
   TaskTab,
-} from '@/components/interfaces/Task';
-import { CscAuditLogs, CscPanel } from '@/components/interfaces/CSC';
+} from "@/components/interfaces/Task";
+import {
+  CscAuditLogs,
+  CscPanel,
+} from "@/components/interfaces/CSC";
 import {
   RpaPanel,
   RpaAuditLog,
   CreateProcedureTest,
-} from '@/components/interfaces/RPA';
+} from "@/components/interfaces/RPA";
 import {
   CreateRiskManagementRisk,
   RiskManagementTaskPanel,
   RmAuditLogs,
-} from '@/components/interfaces/RiskManagement';
-import useTeam from 'hooks/useTeam';
-import useCanAccess from 'hooks/useCanAccess';
-import useISO from 'hooks/useISO';
-import { Team } from '@prisma/client';
-import { getCscStatusesBySlug } from 'models/team';
+} from "@/components/interfaces/RiskManagement";
+import useTask from "hooks/useTask";
+import useTeam from "hooks/useTeam";
+import useCanAccess from "hooks/useCanAccess";
+import useISO from "hooks/useISO";
+import { Team } from "@prisma/client";
+import { getCscStatusesBySlug } from "models/team";
 import {
   TiaAuditLogs,
   TiaPanel,
   CreateProcedure as CreateTiaProcedure,
-} from '@/components/interfaces/TIA';
+} from "@/components/interfaces/TIA";
 import {
   CreatePiaRisk,
   PiaPanel,
   PiaAuditLogs,
-} from '@/components/interfaces/PIA';
-import Breadcrumb from '../../Breadcrumb';
-import useRpaCreation from 'hooks/useRpaCreation';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
-import { PiaRisk, RMProcedureInterface, TaskProperties, TiaProcedureInterface } from 'types';
+} from "@/components/interfaces/PIA";
+import Breadcrumb from "../../Breadcrumb";
+import useRpaCreation from "hooks/useRpaCreation";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle
+} from "@/components/shadcn/ui/card";
+import { Button } from "@/components/shadcn/ui/button";
+import type {
+  PiaRisk,
+  RMProcedureInterface,
+  TaskProperties,
+  TiaProcedureInterface,
+} from "types";
 
 const TaskById = ({
   csc_statuses,
@@ -53,163 +68,143 @@ const TaskById = ({
   const [activeTab, setActiveTab] = useState('Overview');
   const [statuses, setStatuses] = useState(csc_statuses);
   const [activeCommentTab, setActiveCommentTab] = useState('Comments');
+
   const router = useRouter();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
   const { canAccess } = useCanAccess();
-  const { taskNumber, slug } = router.query;
+  const { taskNumber, slug } = router.query as { slug: string; taskNumber: string };
+
   const {
     team,
-    isLoading: isTeamLoading,
-    isError: isTeamError,
-  } = useTeam(slug as string);
-  const { task, isLoading, isError, mutateTask } = useTask(
-    slug as string,
-    taskNumber as string
-  );
+    isLoading: teamLoading,
+    isError: teamError,
+  } = useTeam(slug);
+  const { task, isLoading, isError, mutateTask } = useTask(slug as string, taskNumber as string);
   const { ISO } = useISO(team);
-
   const rpaState = useRpaCreation(task);
 
-  if (isLoading || isTeamLoading || !ISO) {
-    return <Loading />;
-  }
-
-  if (!task || isError || isTeamError) {
-    return <Error message={isError.message} />;
-  }
+  if (isLoading || teamLoading || !ISO) return <Loading />;
+  if (!task || isError || teamError) return <Error message={(isError || teamError)?.message || ""} />;
 
   return (
     <>
       <Breadcrumb
         taskTitle={task.title}
         backTo={`/teams/${slug}/tasks`}
-        teamName={slug as string}
-        taskNumber={taskNumber as string}
+        teamName={slug}
+        taskNumber={taskNumber}
       />
-      <h3 className="text-2xl font-bold">{task.title}</h3>
+      <h3 className="text-2xl font-bold mb-4">{task.title}</h3>
       <TaskTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === 'Overview' && (
+      {activeTab === "Overview" && (
         <>
-          <Card heading="Details">
-            <Card.Body>
+          <Card>
+            <CardHeader>
+              <CardTitle>{t("details")}</CardTitle>
+            </CardHeader>
+            <CardContent>
               <TaskDetails task={task} team={team as Team} />
-            </Card.Body>
+            </CardContent>
           </Card>
-          <Card heading="Attachments">
-            <Card.Body>
+
+          <Card className="mt-4">
+            <CardHeader>
+              <CardTitle>{t("attachments")}</CardTitle>
+            </CardHeader>
+            <CardContent>
               <Attachments task={task} mutateTask={mutateTask} />
-            </Card.Body>
+            </CardContent>
           </Card>
         </>
       )}
-      {activeTab === 'Processing Activities' && (
-        <div>
-          <Card
-            heading="Processing Activities panel"
-            button={
-              canAccess('task', ['update']) ? (
-                <DaisyButton
-                  size="sm"
-                  color="primary"
+      {activeTab === "Processing Activities" && (
+        <Card className="mt-4">
+          <CardHeader>
+            <div className="flex items-center justify-between px-4 pt-6">
+              <CardTitle>{t("processing-activities-panel")}</CardTitle>
+              {canAccess('task', ['update']) && (
+                <Button
                   variant="outline"
-                  onClick={() => {
-                    rpaState.setIsRpaOpen(!rpaState.isRpaOpen);
-                  }}
+                  size="sm"
+                  onClick={() => rpaState.setIsRpaOpen(!rpaState.isRpaOpen)}
                 >
                   {t('create-rpa')}
-                </DaisyButton>
-              ) : null
-            }
-          >
-            <Card.Body>
-              <RpaPanel task={task} />
-            </Card.Body>
-          </Card>
-        </div>
+                </Button>
+              )}
+            </div>
+          </CardHeader>
+          <CardContent>
+            <RpaPanel task={task} />
+          </CardContent>
+        </Card>
       )}
-      {activeTab === 'Transfer Impact Assessment' && (
-        <div>
-          <Card
-            heading="Transfer Impact Assessment panel"
-            button={
-              canAccess('task', ['update']) ? (
-                <DaisyButton
-                  size="sm"
-                  color="primary"
-                  variant="outline"
-                  onClick={() => {
-                    setTiaVisible(!tiaVisible);
-                  }}
-                >
-                  {t('create-tia')}
-                </DaisyButton>
-              ) : null
-            }
-          >
-            <Card.Body>
-              <TiaPanel task={task} />
-            </Card.Body>
-          </Card>
-        </div>
+      {activeTab === "Transfer Impact Assessment" && (
+        <Card className="mt-4">
+          <CardHeader>
+            <div className="flex items-center justify-between px-4 pt-6">
+              <CardTitle>{t("transfer-impact-assessment-panel")}</CardTitle>
+              {canAccess('task', ['update']) && (
+                <Button variant="outline" size="sm" onClick={() => setTiaVisible(!tiaVisible)}>
+                  {t("create-tia")}
+                </Button>
+              )}
+            </div>
+          </CardHeader>
+          <CardContent>
+            <TiaPanel task={task} />
+          </CardContent>
+        </Card>
       )}
-      {activeTab === 'Cybersecurity Controls' && (
-        <Card heading="Cybersecurity Controls Panel">
-          <Card.Body>
+      {activeTab === "Cybersecurity Controls" && (
+        <Card className="mt-4">
+          <CardHeader>
+            <div className="flex items-center justify-between px-4 pt-6">
+              <CardTitle>{t("cybersecurity-controls-panel")}</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent>
             <CscPanel
               task={task}
-              mutateTask={mutateTask}
-              // {/* TODO: { [key: string]: string; } is temporary solution */}
               statuses={statuses as { [key: string]: string }}
               setStatuses={setStatuses}
               ISO={ISO}
+              mutateTask={mutateTask}
             />
-          </Card.Body>
+          </CardContent>
         </Card>
       )}
-      {activeTab === 'Privacy Impact Assessment' && (
-        <Card
-          heading="Privacy Impact Assessment panel"
-          button={
-            canAccess('task', ['update']) ? (
-              <DaisyButton
-                size="sm"
-                color="primary"
-                variant="outline"
-                onClick={() => {
-                  setPiaVisible(!piaVisible);
-                }}
-              >
-                {t('create-pia')}
-              </DaisyButton>
-            ) : null
-          }
-        >
-          <Card.Body>
+      {activeTab === "Privacy Impact Assessment" && (
+        <Card className="mt-4">
+          <CardHeader>
+            <div className="flex items-center justify-between px-4 pt-6">
+              <CardTitle>{t("privacy-impact-assessment-panel")}</CardTitle>
+              {canAccess('task', ['update']) && (
+                <Button variant="outline" size="sm" onClick={() => setPiaVisible(!piaVisible)}>
+                  {t("create-pia")}
+                </Button>
+              )}
+            </div>
+          </CardHeader>
+          <CardContent>
             <PiaPanel task={task} />
-          </Card.Body>
+          </CardContent>
         </Card>
       )}
-      {activeTab === 'Risk Management' && (
-        <Card
-          heading="RM panel"
-          button={
-            canAccess('task', ['update']) ? (
-              <DaisyButton
-                size="sm"
-                color="primary"
-                variant="outline"
-                onClick={() => {
-                  setRmVisible(!rmVisible);
-                }}
-              >
-                {t('rm-register-risk-record')}
-              </DaisyButton>
-            ) : null
-          }
-        >
-          <Card.Body>
+      {activeTab === "Risk Management" && (
+        <Card className="mt-4">
+          <CardHeader>
+            <div className="flex items-center justify-between px-4 pt-6">
+              <CardTitle>{t("risk-management-panel")}</CardTitle>
+              {canAccess('task', ['update']) && (
+                <Button variant="outline" size="sm" onClick={() => setRmVisible(!rmVisible)}>
+                  {t("rm-register-risk-record")}
+                </Button>
+              )}
+            </div>
+          </CardHeader>
+          <CardContent>
             <RiskManagementTaskPanel task={task} />
-          </Card.Body>
+          </CardContent>
         </Card>
       )}
       {tiaVisible && (
@@ -217,8 +212,7 @@ const TaskById = ({
           open={tiaVisible}
           onOpenChange={setTiaVisible}
           selectedTask={task}
-          prevProcudere={(task.properties as TaskProperties)?.tia_procedure as TiaProcedureInterface | undefined}
-          //TODO: mutateTasks or mutateTask? maybe just rename prop to mutate
+          prevProcedure={(task.properties as TaskProperties)?.tia_procedure as TiaProcedureInterface | undefined}
           mutateTasks={mutateTask}
         />
       )}
@@ -227,9 +221,8 @@ const TaskById = ({
         <CreatePiaRisk
           open={piaVisible}
           onOpenChange={setPiaVisible}
-          //TODO: get rid of [] type
           selectedTask={task}
-          prevRisk={(task.properties as TaskProperties)?.pia_risk as PiaRisk | undefined}
+          prevRisk={(task.properties as TaskProperties)?.pia_risk as PiaRisk}
           mutateTasks={mutateTask}
         />
       )}
@@ -238,37 +231,61 @@ const TaskById = ({
           open={rmVisible}
           onOpenChange={setRmVisible}
           selectedTask={task}
-          prevRisk={(task.properties as TaskProperties)?.rm_risk as RMProcedureInterface | undefined}
+          prevRisk={(task.properties as TaskProperties)?.rm_risk as RMProcedureInterface}
           mutateTasks={mutateTask}
         />
       )}
-      <CommentsTab
-        activeTab={activeCommentTab}
-        setActiveTab={setActiveCommentTab}
-      />
-      {activeCommentTab === 'Comments' && (
-        <Card heading="Comments">
-          <Card.Body>
+      <CommentsTab activeTab={activeCommentTab} setActiveTab={setActiveCommentTab} />
+      {activeCommentTab === "Comments" ? (
+        <Card className="mt-4">
+          <CardHeader>
+            <CardTitle>{t("comments")}</CardTitle>
+          </CardHeader>
+          <CardContent>
             <Comments task={task} mutateTask={mutateTask} />
-          </Card.Body>
+          </CardContent>
         </Card>
-      )}
-      {activeCommentTab === 'Audit logs' && (
+      ) : (
         <>
-          <Card heading="Record of Processing Activities Audit logs">
-            <RpaAuditLog task={task} />
+          <Card className="mt-4">
+            <CardHeader>
+              <CardTitle>{t("rpa-audit-logs")}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <RpaAuditLog task={task} />
+            </CardContent>
           </Card>
-          <Card heading="Transfer Impact Assessment Audit logs">
-            <TiaAuditLogs task={task} />
+          <Card className="mt-4">
+            <CardHeader>
+              <CardTitle>{t("tia-audit-logs")}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <TiaAuditLogs task={task} />
+            </CardContent>
           </Card>
-          <Card heading="Cybersecurity Controls Audit logs">
-            <CscAuditLogs task={task} />
+          <Card className="mt-4">
+            <CardHeader>
+              <CardTitle>{t("csc-audit-logs")}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CscAuditLogs task={task} />
+            </CardContent>
           </Card>
-          <Card heading="Privacy Impact Assessment Audit logs">
-            <PiaAuditLogs task={task} />
+          <Card className="mt-4">
+            <CardHeader>
+              <CardTitle>{t("pia-audit-logs")}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <PiaAuditLogs task={task} />
+            </CardContent>
           </Card>
-          <Card heading="Risk Management Audit logs">
-            <RmAuditLogs task={task} />
+          <Card className="mt-4">
+            <CardHeader>
+              <CardTitle>{t("rm-audit-logs")}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <RmAuditLogs task={task} />
+            </CardContent>
           </Card>
         </>
       )}
@@ -276,15 +293,11 @@ const TaskById = ({
   );
 };
 
-export async function getServerSideProps({
-  locale,
-  query,
-}: GetServerSidePropsContext) {
+export async function getServerSideProps({ locale, query }: GetServerSidePropsContext) {
   const slug = query.slug as string;
-
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+      ...(locale ? await serverSideTranslations(locale, ["common"]) : {}),
       csc_statuses: await getCscStatusesBySlug(slug),
     },
   };

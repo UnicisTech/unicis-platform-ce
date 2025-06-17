@@ -3,6 +3,7 @@ import { extractYouTubeVideoId } from '../services/passCourseService';
 import { MarkdownPreview } from '@/components/shared/uiw/Markdown';
 import { CourseContentType } from '@prisma/client';
 import { IapCourse } from 'types';
+import { Card, CardContent } from '@/components/shadcn/ui/card';
 
 const ContentPreview = ({ course }: { course: IapCourse }) => {
   switch (course.contentType) {
@@ -20,15 +21,15 @@ const ContentPreview = ({ course }: { course: IapCourse }) => {
       );
     case CourseContentType.OPEN_TEXT:
       return (
-        <div className="container">
-          <div className="artboard artboard-demo bg-white dark:bg-gray-800">
-            <div className="p-4">
+        <div className="container my-4">
+          <Card className="bg-background text-foreground shadow-sm">
+            <CardContent className="p-6">
               <MarkdownPreview
                 source={course.description as string}
-                className="mt-30"
+                className="prose dark:prose-invert max-w-none"
               />
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       );
     default:

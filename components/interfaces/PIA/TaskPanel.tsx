@@ -117,7 +117,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
 
   return (
     <div className="p-5">
-      <h2 className="text-xl font-bold mb-4">View Privacy Impact Assessment</h2>
+      <h2 className="text-1xl font-bold mb-4">View Privacy Impact Assessment</h2>
       {risk ? (
         <div className="w-full">
           <div role="tablist" className="tabs tabs-bordered">

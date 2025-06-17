@@ -322,5 +322,19 @@
   "logout": "Logout",
   "sign-out": "Sign out",
   "ai-type-a-question": "Type a question",
-  "ai-is-typing": "AI Chat Assistant is typing..."
+  "ai-is-typing": "AI Chat Assistant is typing...",
+  "details": "Details",
+  "attachments": "Attachments",
+  "processing-activities-panel": "Processing Activities Panel",
+  "transfer-impact-assessment-panel": "Transfer Impact Assessment Panel",
+  "cybersecurity-controls-panel": "Cybersecurity Controls Panel",
+  "privacy-impact-assessment-panel": "Privacy Impact Assessment Panel",
+  "risk-management-panel": "RM Panel",
+  "comments": "Comments",
+  "rpa-audit-logs": "Record of Processing Activities Audit Logs",
+  "tia-audit-logs": "Transfer Impact Assessment Audit Logs",
+  "csc-audit-logs": "Cybersecurity Controls Audit Logs",
+  "pia-audit-logs": "Privacy Impact Assessment Audit Logs",
+  "rm-audit-logs": "Risk Management Audit Logs"
+
 }

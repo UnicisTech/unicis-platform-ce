@@ -14,7 +14,7 @@ const RpaPanel = ({ task }: { task: Task }) => {
 
   return (
     <div className="p-5">
-      <h2 className="text-1xl font-bold mb-4">View Register of Procedures</h2>
+      <h2 className="text-base font-bold mb-4">View Register of Procedures</h2>
       {procedure ? (
         <>
           <div role="tablist" className="tabs tabs-bordered mb-4">
@@ -129,7 +129,7 @@ const RpaPanel = ({ task }: { task: Task }) => {
         </>
       ) : (
         <div className="mt-4">
-          <p>Procedure has not been created for this issue.</p>
+          <p className='text-xs'>Procedure has not been created for this issue.</p>
         </div>
       )}
     </div>

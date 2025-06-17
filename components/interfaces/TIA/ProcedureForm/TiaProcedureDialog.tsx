@@ -21,7 +21,7 @@ import { StageTracker } from "@/components/shared/atlaskit";
 import { headers } from "@/components/defaultLanding/data/configs/tia";
 
 interface TiaProcedureDialogProps {
-    prevProcudere?: TiaProcedureInterface;
+    prevProcedure?: TiaProcedureInterface;
     selectedTask?: Task;
     tasks?: Task[];
     open: boolean;
@@ -31,7 +31,7 @@ interface TiaProcedureDialogProps {
 }
 
 export default function TiaProcedureDialog({
-    prevProcudere,
+    prevProcedure,
     tasks,
     selectedTask,
     open,
@@ -44,7 +44,7 @@ export default function TiaProcedureDialog({
     const { slug } = router.query;
 
     const [currentStep, setCurrentStep] = React.useState(selectedTask ? 1 : 0);
-    const [procedureData, setProcedureData] = React.useState<any>(prevProcudere || defaultProcedure);
+    const [procedureData, setProcedureData] = React.useState<any>(prevProcedure || defaultProcedure);
     const [task, setTask] = React.useState<Task | null>(selectedTask || null);
     const [isSaving, setIsSaving] = React.useState<boolean>(false);
 

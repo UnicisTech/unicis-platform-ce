@@ -1,3 +1,11 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/shadcn/ui/table";
 import { Button } from "@/components/shadcn/ui/button";
 import { Edit2, Trash2, BarChart2, Table as TableIcon } from "lucide-react";
 import useCanAccess from "hooks/useCanAccess";
@@ -34,28 +42,28 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full min-w-full divide-y divide-border text-sm">
-        <thead className="bg-muted">
-          <tr>
-            <th className="w-1/5 px-4 py-2 text-left">Name</th>
-            <th className="w-2/5 px-4 py-2 text-left">Category</th>
-            <th className="w-[15%] px-4 py-2 text-left">Status</th>
-            <th className="w-1/4 px-4 py-2 text-left">Actions</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-border">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-1/5">Name</TableHead>
+            <TableHead className="w-2/5">Category</TableHead>
+            <TableHead className="w-[15%]">Status</TableHead>
+            <TableHead className="w-1/4">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {teamCourses.map((teamCourse, idx) => {
             const status = getCourseStatus(teamCourse, members);
-            const categoryName = categories.find(
-              (c) => c.id === teamCourse.course.categoryId
-            )?.name;
+            const categoryName =
+              categories.find((c) => c.id === teamCourse.course.categoryId)
+                ?.name || "-";
 
             return (
-              <tr key={`${teamCourse.course.name}-${idx}`}>
-                <td className="px-4 py-2">{teamCourse.course.name}</td>
-                <td className="px-4 py-2">{categoryName || "-"}</td>
-                <td className="px-4 py-2">{statusBadges[status]}</td>
-                <td className="px-4 py-2">
+              <TableRow key={`${teamCourse.course.name}-${idx}`}>
+                <TableCell>{teamCourse.course.name}</TableCell>
+                <TableCell>{categoryName}</TableCell>
+                <TableCell>{statusBadges[status]}</TableCell>
+                <TableCell>
                   <div className="flex items-center gap-2 flex-wrap">
                     {canAccess("iap_course", ["create"]) && (
                       <Button
@@ -91,12 +99,12 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
                       <TableIcon className="h-4 w-4" />
                     </Button>
                   </div>
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             );
           })}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
   );
 };

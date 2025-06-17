@@ -122,7 +122,7 @@ const TiaDashboard: NextPageWithLayout<
             <CreateProcedure
               open={isEditOpen}
               onOpenChange={setIsEditOpen}
-              prevProcudere={taskToEdit.properties.tia_procedure}
+              prevProcedure={taskToEdit.properties.tia_procedure}
               tasks={tasks}
               selectedTask={taskToEdit}
               mutateTasks={mutateTasks}
