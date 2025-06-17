@@ -24,7 +24,7 @@ import useISO from 'hooks/useISO';
 import { statusOptions } from '@/components/defaultLanding/data/configs/csc';
 import useCanAccess from 'hooks/useCanAccess';
 import { useTranslation } from 'react-i18next';
-import { CscOption, Option } from 'types';
+import { CscOption } from 'types';
 
 const labels = [
   'Unknown',
