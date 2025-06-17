@@ -3,6 +3,7 @@ import iso2013Json from '../ISO-CSC-controls-2013.json';
 import iso2022Json from '../ISO-CSC-controls-2022.json';
 import nistcsfv2 from '../CSF2_1.json';
 import eunis2 from '../eu-nis2.json';
+import gdpr from '../gdpr_controls.json';
 import { Section } from 'types';
 
 const controls = {
@@ -15,6 +16,7 @@ const controls = {
     ControlLabel: item.Control,
   })),
   eunis2: eunis2,
+  gdpr: gdpr,
 };
 
 const sections = [
@@ -42,6 +44,7 @@ const isoOptions = [
   { label: 'MVSP v1.0-20211007', value: 'default' },
   { label: 'NIST CSF v2', value: 'nistcsfv2' },
   { label: 'EU NIS2', value: 'eunis2' },
+  { label: 'GDPR', value: 'gdpr' },
 ];
 
 const perPageOptions: { label: string; value: number }[] = [
@@ -75,6 +78,7 @@ const getSectionsLabels = (iso: string) => {
     case '2022':
     case 'default':
     case 'eunist2':
+    case 'gdpr':
     case 'nistcsfv2':
       return getSections(iso).map(({ label }) => label);
     // case 'nistcsfv2':

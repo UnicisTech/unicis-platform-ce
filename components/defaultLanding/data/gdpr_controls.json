@@ -1,0 +1,387 @@
+[
+  {
+    "Code": "Art. 12, 13",
+    "Section": "Notice and Consent",
+    "Control": "Privacy Notice",
+    "Requirements": "The organization defines and documents a process to inform users with a Privacy Notice for collecting and processing their personal data.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 13, 14",
+    "Section": "Notice and Consent",
+    "Control": "Updated Privacy Notice",
+    "Requirements": "The organization timely notifies users about any changes to personal data processing.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 7, 12",
+    "Section": "Notice and Consent",
+    "Control": "Cookie Policy",
+    "Requirements": "The organization displays a cookie consent banner for users to accept or decline the cookie policy.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 7",
+    "Section": "Notice and Consent",
+    "Control": "Cookie - Banner",
+    "Requirements": "The organization obtains consent from data subjects for processing activities where consent is the legal basis.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 7",
+    "Section": "Notice and Consent",
+    "Control": "Consent - Obtain",
+    "Requirements": "The organization maintains records of consent given by data subjects.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 7",
+    "Section": "Notice and Consent",
+    "Control": "Consent - Record",
+    "Requirements": "The organization allows data subjects to withdraw their consent.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 8",
+    "Section": "Notice and Consent",
+    "Control": "Consent - Obtain and Withdrawal",
+    "Requirements": "The organization collects user data after receiving their consent.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 8",
+    "Section": "Notice and Consent",
+    "Control": "Parental Consent",
+    "Requirements": "The organization collects data after obtaining verifiable parental consent for the processing of personal data of children below the legal age.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 30",
+    "Section": "Data Management",
+    "Control": "Personal Data Inventory",
+    "Requirements": "The organization has developed and maintains Personal Data Inventories for all processing activities.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 5",
+    "Section": "Data Management",
+    "Control": "Purpose Limitation",
+    "Requirements": "Personal data attributes processed by the organization are minimized to what is required for fulfilling the stated purpose.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 5, 17, 18, 21",
+    "Section": "Data Management",
+    "Control": "Data Minimization",
+    "Requirements": "The organization has implemented a process for granting and removing users' access to personal data.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 5",
+    "Section": "Data Management",
+    "Control": "Retention Timelines",
+    "Requirements": "The organization identifies and defines timelines for retaining personal data as per legal and contractual requirements.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 32",
+    "Section": "Data Management",
+    "Control": "Insights-Data Aggregation",
+    "Requirements": "The organization ensures insights generated from personal data using third-party analytics engines are at an aggregated level.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 15",
+    "Section": "Data Management",
+    "Control": "Anonymization",
+    "Requirements": "The organization anonymizes and de-identifies personal data attributes wherever possible.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 15",
+    "Section": "Data Subject Rights",
+    "Control": "Access",
+    "Requirements": "The organization has mechanisms to let data subjects access their data.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 5, 16, 19",
+    "Section": "Data Management",
+    "Control": "Accuracy/ Update",
+    "Requirements": "The organization allows data subjects to update their data and keep it accurate.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 17",
+    "Section": "Data Subject Rights",
+    "Control": "Deletion, Restriction, Notification, Portability, Objection, Automated Decision-Making",
+    "Requirements": "The organization allows data subjects to delete or restrict data processing, ensures portability, objection rights, and limits automated processing.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 24",
+    "Section": "Accountability",
+    "Control": "Responsibility and Accountability",
+    "Requirements": "The organization documents responsibilities of privacy and security roles.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 24",
+    "Section": "Accountability",
+    "Control": "Data Protection Policy",
+    "Requirements": "The organization maintains a data protection policy to ensure compliance with data protection laws.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 24",
+    "Section": "Accountability",
+    "Control": "Training and Awareness",
+    "Requirements": "The organization provides periodic training and awareness programs for employees on data protection and privacy requirements.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 24",
+    "Section": "Accountability",
+    "Control": "Monitoring and Review",
+    "Requirements": "The organization conducts regular monitoring and reviews of its data protection measures and policies to ensure ongoing compliance and effectiveness.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 25",
+    "Section": "Security",
+    "Control": "Data Protection by Design",
+    "Requirements": "The organization implements data protection principles in the design and operation of its systems and processes.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 25",
+    "Section": "Security",
+    "Control": "Data Protection by Default",
+    "Requirements": "The organization ensures that, by default, only personal data necessary for each specific purpose of the processing is processed.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 27",
+    "Section": "Security",
+    "Control": "Representative",
+    "Requirements": "The organization appoints a representative in the EU for compliance with GDPR requirements when not established in the EU.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 28",
+    "Section": "Security",
+    "Control": "Processor Contracts",
+    "Requirements": "The organization ensures that contracts with data processors include clauses requiring the processor to comply with data protection regulations.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 28",
+    "Section": "Disclosure",
+    "Control": "Data Processing Agreement",
+    "Requirements": "The organization executes Data Processing Agreements with all third parties that may have access to personal data processed by the application.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 28",
+    "Section": "Disclosure",
+    "Control": "Third Party Integration",
+    "Requirements": "The organization integrates with third-party service providers in a manner that exposes only minimal requisite personal data attributes to these third parties.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 29, Art. 37",
+    "Section": "DPO",
+    "Control": "Appointment of DPO",
+    "Requirements": "The organization appoints a Data Protection Officer (DPO) to oversee GDPR compliance.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 29",
+    "Section": "DPO",
+    "Control": "Position and Role of DPO",
+    "Requirements": "The organization ensures that the DPO's position and role are properly defined and communicated.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 29, Art. 38",
+    "Section": "DPO",
+    "Control": "Independence of DPO",
+    "Requirements": "The organization ensures that the DPO operates independently and reports directly to the highest management level.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 29",
+    "Section": "DPO",
+    "Control": "Resources and Support for DPO",
+    "Requirements": "The organization provides adequate resources, training, and support for the DPO to carry out their tasks effectively.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 29",
+    "Section": "DPO",
+    "Control": "Expertise of DPO",
+    "Requirements": "The organization ensures that the DPO has the necessary expertise/professional competence in data protection law and practices.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 30",
+    "Section": "Accountability",
+    "Control": "Records of Processing Activities",
+    "Requirements": "The organization maintains records of processing activities (ROPA), including the purposes of processing, categories of data subjects and personal data, and recipients of personal data.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 31",
+    "Section": "Security",
+    "Control": "Cooperation with Authorities",
+    "Requirements": "The organization cooperates with data protection authorities in the performance of their tasks, providing necessary information and access to data processing activities.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 32",
+    "Section": "Security",
+    "Control": "Access Restriction",
+    "Requirements": "The organization restricts access to personal data processed only to authorized personnel.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 32",
+    "Section": "Security",
+    "Control": "Product - Version",
+    "Requirements": "The organization releases security updates in a timely manner, upon identification of vulnerabilities, bugs, or security enhancements.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 32",
+    "Section": "Security",
+    "Control": "Backup",
+    "Requirements": "The organization backs up critical data on a periodic basis.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 32",
+    "Section": "Security",
+    "Control": "Audit Logging",
+    "Requirements": "The organization enables audit logging on all systems and ensures the same can be extracted for all Products.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 32",
+    "Section": "Security",
+    "Control": "Web Application Firewall",
+    "Requirements": "The organization has implemented a Web Application firewall to protect the product from malicious attacks.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 32",
+    "Section": "Security",
+    "Control": "Encryption at Rest",
+    "Requirements": "The organization protects personal data stored with a secure level of encryption.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 32",
+    "Section": "Security",
+    "Control": "Encryption in Transit",
+    "Requirements": "The organization protects all client-server communications with an appropriate level of encryption.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 32",
+    "Section": "Security",
+    "Control": "Vulnerability Assessment",
+    "Requirements": "The organization subjects systems to periodic Vulnerability Assessments and patches critical vulnerabilities without undue delay.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 32",
+    "Section": "Security",
+    "Control": "Backend Integration",
+    "Requirements": "The organization protects backend integrations using secure APIs/Web services.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 33",
+    "Section": "Security",
+    "Control": "Breach Notification to Customer",
+    "Requirements": "The organization notifies customers of a personal data breach within 48 hours unless the breach is unlikely to result in a risk to rights and freedoms.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 34",
+    "Section": "Security",
+    "Control": "Breach Notification to Data Subjects",
+    "Requirements": "The organization communicates a breach to data subjects without undue delay when it likely results in a high risk to their rights and freedoms.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 35",
+    "Section": "Privacy in SDLC",
+    "Control": "Change Management",
+    "Requirements": "The organization ensures changes to processing personal data are subject to prior approval before development.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 35",
+    "Section": "Privacy in SDLC",
+    "Control": "Risk Mitigation",
+    "Requirements": "The organization addresses and mitigates risks identified in Privacy Assessments in a timely manner.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 35",
+    "Section": "Privacy in SDLC",
+    "Control": "Segregation of environment",
+    "Requirements": "The organization ensures development, test, and production environments are segregated and access to production is restricted.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 35",
+    "Section": "Privacy in SDLC",
+    "Control": "Testing",
+    "Requirements": "The organization tests only in test environments and does not use production data for testing.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 35",
+    "Section": "Accountability",
+    "Control": "Data Protection Impact Assessment",
+    "Requirements": "The organization performs DPIAs periodically and addresses medium and high risks in a timely manner.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 36",
+    "Section": "Accountability",
+    "Control": "Prior Consultation",
+    "Requirements": "The organization consults supervisory authority before processing if DPIA indicates high risk without mitigation.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 37",
+    "Section": "Accountability",
+    "Control": "DPO Accessibility",
+    "Requirements": "The organization makes the DPO easily accessible to data subjects and authorities.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 44, Art. 46",
+    "Section": "International Transfers",
+    "Control": "Data Transfers Outside EU",
+    "Requirements": "The organization ensures data transferred outside the EU is protected by appropriate safeguards.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 45",
+    "Section": "International Transfers",
+    "Control": "Adequacy Decisions",
+    "Requirements": "The organization transfers personal data only to jurisdictions with adequate levels of protection.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "Art. 40, Art. 42",
+    "Section": "International Transfers",
+    "Control": "Codes of Conduct and Certifications",
+    "Requirements": "The organization adheres to approved codes of conduct and certifications to demonstrate GDPR compliance when transferring data.",
+    "Status": "Unknown"
+  }
+]
