@@ -1,19 +1,29 @@
-import { InputWithLabel } from '@/components/shared';
-import type { FormikConfig } from 'formik';
-import { useFormik } from 'formik';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import type { WebookFormSchema } from 'types';
-import * as Yup from 'yup';
-import DaisyButton from '../shared/daisyUI/DaisyButton';
-import Modal from '../shared/Modal';
-import EventTypes from './EventTypes';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/shadcn/ui/dialog";
+import { Button } from "@/components/shadcn/ui/button";
+import { Label } from "@/components/shadcn/ui/label";
+import { Input } from "@/components/shadcn/ui/input";
+
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import React from "react";
+import { useTranslation } from "next-i18next";
+import type { WebookFormSchema } from "types";
+import type { FormikConfig } from "formik";
+import EventTypes from "./EventTypes";
+import { cn } from "../shadcn/lib/utils";
 
 interface FormProps {
   visible: boolean;
   setVisible: (visible: boolean) => void;
   initialValues: WebookFormSchema;
-  onSubmit: FormikConfig<WebookFormSchema>['onSubmit'];
+  onSubmit: FormikConfig<WebookFormSchema>["onSubmit"];
   title: string;
 }
 
@@ -24,11 +34,13 @@ const Form = ({
   onSubmit,
   title,
 }: FormProps) => {
+  const { t } = useTranslation("common");
+
   const formik = useFormik<WebookFormSchema>({
     validationSchema: Yup.object().shape({
       name: Yup.string().required(),
       url: Yup.string().required().url(),
-      eventTypes: Yup.array().min(1, 'Please choose at least one event type'),
+      eventTypes: Yup.array().min(1, "Please choose at least one event type"),
     }),
     initialValues,
     enableReinitialize: true,
@@ -36,78 +48,87 @@ const Form = ({
     validateOnBlur: false,
   });
 
-  const { t } = useTranslation('common');
-
   const toggleVisible = () => {
     setVisible(!visible);
     formik.resetForm();
   };
 
   return (
-    <Modal open={visible} close={toggleVisible}>
-      <form onSubmit={formik.handleSubmit} method="POST">
-        <Modal.Header>{title}</Modal.Header>
-        <Modal.Description>{t('webhook-create-desc')}</Modal.Description>
-        <Modal.Body>
-          <div className="flex flex-col space-y-3">
-            <InputWithLabel
-              name="name"
-              label="Description"
-              onChange={formik.handleChange}
-              value={formik.values.name}
-              placeholder="Description of what this endpoint is used for."
-              error={formik.errors.name}
-            />
-            <InputWithLabel
-              name="url"
-              label="Endpoint"
-              onChange={formik.handleChange}
-              value={formik.values.url}
-              placeholder="https://api.example.com/svix-webhooks"
-              error={formik.errors.url}
-              descriptionText="The endpoint URL must be HTTPS"
-            />
-            <div className="divider"></div>
-            <div className="form-control w-full">
-              <label className="label">
-                <span className="label-text">{t('events-to-send')}</span>
-              </label>
-              <p className="ml-1 mb-3 text-sm font-normal text-gray-500">
-                {t('events-description')}
+    <Dialog open={visible} onOpenChange={toggleVisible}>
+      <DialogContent className="sm:max-w-md">
+        <form onSubmit={formik.handleSubmit} method="POST">
+          <DialogHeader>
+            <DialogTitle>{title}</DialogTitle>
+            <DialogDescription>{t("webhook-create-desc")}</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div>
+              <Label htmlFor="name">Description</Label>
+              <Input
+                id="name"
+                name="name"
+                placeholder="Description of what this endpoint is used for."
+                onChange={formik.handleChange}
+                value={formik.values.name}
+                className={cn(
+                  formik.errors.name && "border-destructive focus-visible:ring-destructive"
+                )}
+              />
+              {formik.errors.name && (
+                <p className="text-xs text-destructive mt-1">{formik.errors.name}</p>
+              )}
+            </div>
+            <div>
+              <Label htmlFor="url">Endpoint</Label>
+              <Input
+                id="url"
+                name="url"
+                type="url"
+                placeholder="https://api.example.com/svix-webhooks"
+                onChange={formik.handleChange}
+                value={formik.values.url}
+                className={cn(
+                  formik.errors.url && "border-destructive focus-visible:ring-destructive"
+                )}
+              />
+              <p className="text-sm text-muted-foreground mt-1">
+                The endpoint URL must be HTTPS
               </p>
-              <div className="grid grid-cols-2 gap-2">
-                <EventTypes
-                  onChange={formik.handleChange}
-                  values={initialValues['eventTypes']}
-                  error={formik.errors.eventTypes}
-                />
-              </div>
+              {formik.errors.url && (
+                <p className="text-xs text-destructive mt-1">{formik.errors.url}</p>
+              )}
+            </div>
+            <div>
+              <Label>{t("events-to-send")}</Label>
+              <p className="text-sm text-muted-foreground mb-2">
+                {t("events-description")}
+              </p>
+              <EventTypes
+                setFieldValue={formik.setFieldValue}
+                values={formik.values.eventTypes}
+                error={formik.errors.eventTypes}
+              />
             </div>
           </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <DaisyButton
-            type="button"
-            variant="outline"
-            onClick={() => {
-              setVisible(!visible);
-            }}
-            size="md"
-          >
-            {t('close')}
-          </DaisyButton>
-          <DaisyButton
-            type="submit"
-            color="primary"
-            loading={formik.isSubmitting}
-            active={formik.dirty}
-            size="md"
-          >
-            {t('create-webhook')}
-          </DaisyButton>
-        </Modal.Footer>
-      </form>
-    </Modal>
+
+          <DialogFooter className="flex flex-row justify-between sm:justify-end gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={toggleVisible}
+            >
+              {t("close")}
+            </Button>
+            <Button
+              type="submit"
+              disabled={formik.isSubmitting || !formik.dirty}
+            >
+              {t("create-webhook")}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 };
 
