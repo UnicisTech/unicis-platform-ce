@@ -1,107 +1,83 @@
-import { useTranslation } from 'next-i18next';
-import { Prisma } from '@prisma/client';
-import useTeamTasks from 'hooks/useTeamTasks';
-import { capitalizeCountryName } from '@/lib/utils';
+import { useTranslation } from "next-i18next";
+import { Prisma } from "@prisma/client";
+import useTeamTasks from "hooks/useTeamTasks";
+import { capitalizeCountryName } from "@/lib/utils";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/shadcn/ui/card";
+import { Badge } from "@/components/shadcn/ui/badge";
 
 const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
-  const { t } = useTranslation('translation');
-  const { tasks } = useTeamTasks(slug as string);
+  const { t } = useTranslation("translation");
+  const { tasks } = useTeamTasks(slug);
 
   const countriesSet = new Set<string>();
-
   let totalNumberOfAssessment = 0;
   let perAuthorization = 0;
   let notPermitAuthorization = 0;
 
   tasks?.forEach((task) => {
     const properties = task.properties as Prisma.JsonObject | null;
-    console.log(properties);
+    const procedures = properties?.tia_procedure as any[];
 
-    if (properties && Array.isArray(properties.tia_procedure as any)) {
+    if (Array.isArray(procedures)) {
       totalNumberOfAssessment += 1;
 
-      (properties.tia_procedure as any[]).some((procedure) => {
-        if (procedure.CountryDataImporter?.value) {
-          const countryName = procedure.CountryDataImporter.value;
-          if (!Array.from(countriesSet).includes(countryName)) {
-            countriesSet.add(countryName);
-          }
+      procedures.forEach((proc) => {
+        if (proc.CountryDataImporter?.value) {
+          countriesSet.add(proc.CountryDataImporter.value.toLowerCase());
         }
       });
 
-      const isAuthorized = (properties.tia_procedure as any[]).some(
-        (procedure) => {
-          return procedure.TransferMechanism === 'yes';
-        }
+      const isAuthorized = procedures.some(
+        (proc) => proc.TransferMechanism === "yes"
       );
 
-      if (isAuthorized) {
-        perAuthorization += 1;
-      } else {
-        notPermitAuthorization += 1;
-      }
+      isAuthorized ? perAuthorization++ : notPermitAuthorization++;
     }
   });
 
   const countriesList = Array.from(countriesSet);
 
   return (
-    <>
-      {/* Assessment Analysis */}
-      <div
-        style={{ width: '49%' }}
-        className="dark:bg-gray-800 shadow-sm mt-4 rounded-md p-2"
-      >
-        <div className="flex mb-2 font-extrabold items-center justify-center">
-          <h4>{t('Transfer Impact Assessment')}</h4>
+    <Card className="w-full shadow-sm">
+      <CardHeader>
+        <CardTitle className="text-center text-lg font-semibold">
+          {t("Transfer Impact Assessment")}
+        </CardTitle>
+      </CardHeader>
+
+      <CardContent className="grid gap-4">
+        <div className="flex flex-col items-center gap-1 rounded-md border p-3">
+          <p className="text-sm font-medium">Number of Assessments</p>
+          <span className="text-lg font-bold">{totalNumberOfAssessment}</span>
         </div>
 
-        <div className="grid gap-4">
-          <div className="flex flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
-            <h1 className="text-center text-sm font-bold">
-              Number of Assessment
-            </h1>
-            <span className="font-sans text-sm font-bold">
-              {totalNumberOfAssessment}
-            </span>
+        <div className="grid grid-cols-2 gap-3">
+          <div className="flex flex-col items-center rounded-md border p-3">
+            <p className="text-sm font-medium">Permit</p>
+            <span className="text-lg font-bold">{perAuthorization}</span>
           </div>
-          <div className="grid grid-cols-2 gap-2 text-center items-center">
-            <div className="grid rounded-md p-1 ring-1 ring-gray-300">
-              <h1 className="text-center text-sm font-bold">Permit</h1>
-              <span className="font-sans text-sm font-bold">
-                {perAuthorization}
-              </span>
-            </div>
-            <div className="grid rounded-md p-1 ring-1 ring-gray-300">
-              <h1 className="text-center text-sm font-bold">Not Permit</h1>
-              <span className="font-sans text-sm font-bold">
-                {notPermitAuthorization}
-              </span>
-            </div>
-          </div>
-          <div className="flex flex-col items-center rounded-md p-1 ring-1 ring-gray-300">
-            <h1 className="text-center text-sm mb-1 font-bold">
-              Assessment per country
-            </h1>
-            <div className="flex flex-wrap gap-2 justify-center font-sans text-sm font-bold">
-              {countriesList.length > 0 ? (
-                <>
-                  {countriesList.map((data, index) => (
-                    <div key={index} className="">
-                      <p className="ring-1 ring-gray-500 py-0.5 px-1 text-xs rounded">
-                        {capitalizeCountryName(data)}
-                      </p>
-                    </div>
-                  ))}
-                </>
-              ) : (
-                <span>No country</span>
-              )}
-            </div>
+          <div className="flex flex-col items-center rounded-md border p-3">
+            <p className="text-sm font-medium">Not Permit</p>
+            <span className="text-lg font-bold">{notPermitAuthorization}</span>
           </div>
         </div>
-      </div>
-    </>
+
+        <div className="flex flex-col items-center gap-2 rounded-md border p-3">
+          <p className="text-sm font-medium">Assessment per Country</p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {countriesList.length > 0 ? (
+              countriesList.map((country, idx) => (
+                <Badge key={idx} variant="secondary">
+                  {capitalizeCountryName(country)}
+                </Badge>
+              ))
+            ) : (
+              <span className="text-xs text-muted-foreground">No country</span>
+            )}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
