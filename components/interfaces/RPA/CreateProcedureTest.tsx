@@ -65,7 +65,7 @@ const CreateProcedureTest = ({
           key={selectedTask?.id || 'create-tia'}
           open={isTiaOpen}
           onOpenChange={setIsTiaOpen}
-          prevProcudere={
+          prevProcedure={
             (selectedTask?.properties as TaskProperties)?.tia_procedure as
               | TiaProcedureInterface
               | undefined

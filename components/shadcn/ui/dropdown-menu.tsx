@@ -101,7 +101,7 @@ function DropdownMenuCheckboxItem({
           <CheckIcon className="size-4" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
-      {children}
+      {children as any}
     </DropdownMenuPrimitive.CheckboxItem>
   );
 }
@@ -136,7 +136,7 @@ function DropdownMenuRadioItem({
           <CircleIcon className="size-2 fill-current" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
-      {children}
+      {children as any}
     </DropdownMenuPrimitive.RadioItem>
   );
 }
@@ -214,7 +214,7 @@ function DropdownMenuSubTrigger({
       )}
       {...props}
     >
-      {children}
+      {children as any}
       <ChevronRightIcon className="ml-auto size-4" />
     </DropdownMenuPrimitive.SubTrigger>
   );

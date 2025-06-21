@@ -9,12 +9,11 @@ interface StepperProps {
   onStepChange?: (step: number) => void;
 }
 
-export function Stepper({ steps, currentStep, onStepChange }: StepperProps) {
+export function Stepper({ steps, currentStep }: StepperProps) {
   return (
     <div className="flex w-full justify-between items-start gap-1 sm:gap-3">
       {steps.map((step, index) => {
         const isActive = index === currentStep;
-        const isCompleted = index < currentStep;
 
         return (
           <div

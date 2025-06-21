@@ -21,7 +21,6 @@ import {
   SelectItem,
   SelectValue,
 } from '@/components/shadcn/ui/select';
-import { cn } from '@/components/shadcn/lib/utils';
 import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
 import StatusSelector from '../StatusSelector';
 import { Loader2, Trash2 } from 'lucide-react';

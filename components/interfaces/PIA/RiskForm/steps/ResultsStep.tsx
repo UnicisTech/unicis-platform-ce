@@ -6,7 +6,7 @@ import {
   riskProbabilityPoints,
 } from '@/components/defaultLanding/data/configs/pia';
 import RiskMatrixBubbleChart from '../../RiskMatrixBubbleChart';
-import type { PiaRisk, TaskProperties } from 'types';
+import type { PiaRisk } from 'types';
 
 const Results = ({ risk }: { risk: PiaRisk }) => (
   <>

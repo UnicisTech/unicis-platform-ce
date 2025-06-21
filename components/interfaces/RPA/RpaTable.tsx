@@ -35,8 +35,8 @@ const RpaTable = ({
     nextButtonDisabled,
   } = usePagination<TaskWithRpaProcedure>(tasks, perPage);
 
-  const getStatusLabel = (value: string) =>
-    statuses.find((s) => s.value === value)?.label || value;
+  // const getStatusLabel = (value: string) =>
+  //   statuses.find((s) => s.value === value)?.label || value;
 
   return (
     <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">

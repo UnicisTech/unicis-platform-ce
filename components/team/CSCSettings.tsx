@@ -47,7 +47,7 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
     onSubmit: async (values) => {
       try {
         //TODO: handle uncorrect ISO selection
-        const res = await axios.put<ApiResponse<TeamProperties>>(
+        await axios.put<ApiResponse<TeamProperties>>(
           `/api/teams/${team.slug}/csc/iso`,
           values
         );

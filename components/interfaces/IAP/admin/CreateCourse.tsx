@@ -54,7 +54,6 @@ import {
   validateCourse,
   validateQuestion,
 } from '../services/createCourseService';
-import { questions } from '@/components/defaultLanding/data/configs/tia';
 import { Loader2 } from 'lucide-react';
 
 interface CreateCourseProps {

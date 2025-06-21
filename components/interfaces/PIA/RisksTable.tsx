@@ -107,7 +107,7 @@ const RisksTable = ({
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {pageData.map((task, index) => {
+            {pageData.map((task) => {
               const confidentialityValue = calculatePercentage(
                 riskProbabilityPoints[
                   task.properties.pia_risk[1].confidentialityRiskProbability

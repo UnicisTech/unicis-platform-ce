@@ -111,8 +111,8 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
             <FormLabel>Impact</FormLabel>
             <FormDescription>
               Describe the potential impacts in business terms if the risk
-              occurs. Decide whether to use "worst case" or "anticipated"
-              impacts consistently.
+              occurs. Decide whether to use &quot;worst case&quot; or
+              &quot;anticipated&quot; impacts consistently.
             </FormDescription>
             <FormControl>
               <Textarea {...field} placeholder="Enter impact description" />

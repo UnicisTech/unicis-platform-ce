@@ -45,7 +45,6 @@ interface ProblematicLawfulAccessStepProps {
 }
 
 export default function ProblematicLawfulAccessStep({
-  initial,
   control,
 }: ProblematicLawfulAccessStepProps) {
   return (

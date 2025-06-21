@@ -8,13 +8,7 @@ import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import React, {
-  ReactElement,
-  useEffect,
-  useState,
-  useRef,
-  FormEvent,
-} from 'react';
+import React, { ReactElement, useEffect, useState, useRef } from 'react';
 import { getCsrfToken, signIn, useSession } from 'next-auth/react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 

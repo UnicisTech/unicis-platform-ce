@@ -1,4 +1,3 @@
-import { Label } from '@/components/shadcn/ui/label';
 import { MultiSelect } from '@/components/shadcn/ui/multi-select';
 
 const moduleOptions = [

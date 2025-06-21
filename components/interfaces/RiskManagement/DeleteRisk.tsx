@@ -61,10 +61,6 @@ export default function DeleteRisk({
     }
   }, [slug, task, mutate, setVisible, t]);
 
-  const closeHandler = useCallback(() => {
-    setVisible(false);
-  }, [setVisible]);
-
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
       <DialogContent className="max-w-md p-6">

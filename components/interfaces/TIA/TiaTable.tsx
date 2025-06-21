@@ -78,7 +78,7 @@ const TiaTable = ({
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {pageData.map((task, index) => (
+            {pageData.map((task) => (
               <tr key={task.id}>
                 <td className="px-1.5 py-1.5">
                   <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>

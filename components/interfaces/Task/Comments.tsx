@@ -30,7 +30,7 @@ export default function Comments({
   const [commentToDelete, setCommentToDelete] = useState<number | null>(null);
   const [confirmationDialogVisible, setConfirmationDialogVisible] =
     useState(false);
-  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  // const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   const onDeleteClick = useCallback((id: number) => {
     setCommentToDelete(id);
@@ -95,7 +95,7 @@ export default function Comments({
     if (!id) return;
 
     try {
-      setIsDeleting(true);
+      // setIsDeleting(true);
 
       const response = await axios.delete<ApiResponse<unknown>>(
         `/api/teams/${slug}/tasks/${taskNumber}/comments`,
@@ -116,7 +116,7 @@ export default function Comments({
     } catch (error: any) {
       toast.error(getAxiosError(error));
     } finally {
-      setIsDeleting(false);
+      // setIsDeleting(false);
     }
   }, []);
 
