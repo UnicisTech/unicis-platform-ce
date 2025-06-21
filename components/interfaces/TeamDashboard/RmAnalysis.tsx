@@ -3,7 +3,12 @@ import { useTranslation } from 'next-i18next';
 import { Error, Loading } from '@/components/shared';
 import { computeRiskMap, calculateRiskDistribution } from '@/lib/rm';
 import { DashboardMatrixChart, DashboardPieChart } from '../RiskManagement';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/shadcn/ui/card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/shadcn/ui/card';
 
 interface RmAnalysisProps {
   slug: string;

@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react';
 import {
   Pagination,
   PaginationContent,
@@ -7,49 +7,49 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/shadcn/ui/pagination"
+} from '@/components/shadcn/ui/pagination';
 
 type PaginationControlsProps = {
-  page: number
-  totalPages: number
-  onChange: (page: number) => void
-  className?: string
-  siblingCount?: number
-  prevButtonDisabled?: boolean
-  nextButtonDisabled?: boolean
-}
+  page: number;
+  totalPages: number;
+  onChange: (page: number) => void;
+  className?: string;
+  siblingCount?: number;
+  prevButtonDisabled?: boolean;
+  nextButtonDisabled?: boolean;
+};
 
 const PaginationControls: React.FC<PaginationControlsProps> = ({
   page,
   totalPages,
   onChange,
-  className = "",
+  className = '',
   siblingCount = 1,
   prevButtonDisabled,
   nextButtonDisabled,
 }) => {
   const getPageNumbers = () => {
-    const range: (number | "dots")[] = []
-    const start = Math.max(2, page - siblingCount)
-    const end = Math.min(totalPages - 1, page + siblingCount)
+    const range: (number | 'dots')[] = [];
+    const start = Math.max(2, page - siblingCount);
+    const end = Math.min(totalPages - 1, page + siblingCount);
 
-    range.push(1)
+    range.push(1);
 
-    if (start > 2) range.push("dots")
+    if (start > 2) range.push('dots');
 
     for (let i = start; i <= end; i++) {
-      range.push(i)
+      range.push(i);
     }
 
-    if (end < totalPages - 1) range.push("dots")
+    if (end < totalPages - 1) range.push('dots');
 
-    if (totalPages > 1) range.push(totalPages)
+    if (totalPages > 1) range.push(totalPages);
 
-    return range
-  }
+    return range;
+  };
 
   const pageItems = getPageNumbers().map((item, idx) =>
-    item === "dots" ? (
+    item === 'dots' ? (
       <PaginationItem key={`dots-${idx}`}>
         <PaginationEllipsis />
       </PaginationItem>
@@ -59,15 +59,15 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
           href="#"
           isActive={item === page}
           onClick={(e) => {
-            e.preventDefault()
-            if (typeof item === "number") onChange(item)
+            e.preventDefault();
+            if (typeof item === 'number') onChange(item);
           }}
         >
           {item}
         </PaginationLink>
       </PaginationItem>
     )
-  )
+  );
 
   return (
     <div className={`w-full flex justify-center py-4 ${className}`}>
@@ -76,10 +76,14 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
           <PaginationItem>
             <PaginationPrevious
               onClick={(e) => {
-                e.preventDefault()
-                if (!prevButtonDisabled && page > 1) onChange(page - 1)
+                e.preventDefault();
+                if (!prevButtonDisabled && page > 1) onChange(page - 1);
               }}
-              className={prevButtonDisabled || page === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+              className={
+                prevButtonDisabled || page === 1
+                  ? 'pointer-events-none opacity-50'
+                  : 'cursor-pointer'
+              }
               aria-disabled={prevButtonDisabled ?? page === 1}
             />
           </PaginationItem>
@@ -89,17 +93,22 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
           <PaginationItem>
             <PaginationNext
               onClick={(e) => {
-                e.preventDefault()
-                if (!nextButtonDisabled && page < totalPages) onChange(page + 1)
+                e.preventDefault();
+                if (!nextButtonDisabled && page < totalPages)
+                  onChange(page + 1);
               }}
-              className={nextButtonDisabled || page === totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+              className={
+                nextButtonDisabled || page === totalPages
+                  ? 'pointer-events-none opacity-50'
+                  : 'cursor-pointer'
+              }
               aria-disabled={nextButtonDisabled ?? page === totalPages}
             />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
     </div>
-  )
-}
+  );
+};
 
-export default PaginationControls
+export default PaginationControls;

@@ -1,24 +1,24 @@
-'use client'
+'use client';
 
-import React, { useMemo } from 'react'
-import { getControlOptions } from '@/components/defaultLanding/data/configs/csc'
-import { Input } from '@/components/shadcn/ui/input'
-import { Textarea } from '@/components/shadcn/ui/textarea'
-import { Label } from '@/components/shadcn/ui/label'
+import React, { useMemo } from 'react';
+import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
+import { Input } from '@/components/shadcn/ui/input';
+import { Textarea } from '@/components/shadcn/ui/textarea';
+import { Label } from '@/components/shadcn/ui/label';
 
 const ControlBlockViewOnly = ({
   status,
   control,
   ISO,
 }: {
-  status: string
-  control: string
-  ISO: string
+  status: string;
+  control: string;
+  ISO: string;
 }) => {
-  const controlOptions = useMemo(() => getControlOptions(ISO), [ISO])
+  const controlOptions = useMemo(() => getControlOptions(ISO), [ISO]);
   const controlData = controlOptions.find(
     ({ value }) => value.control === control
-  )?.value
+  )?.value;
 
   return (
     <div className="space-y-4">
@@ -64,7 +64,7 @@ const ControlBlockViewOnly = ({
 
       <div className="h-px w-full bg-muted my-6" />
     </div>
-  )
-}
+  );
+};
 
-export default ControlBlockViewOnly
+export default ControlBlockViewOnly;

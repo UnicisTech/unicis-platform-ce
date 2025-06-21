@@ -1,12 +1,8 @@
 'use client';
 
 import { useState, useEffect, ChangeEvent } from 'react';
-import {
-  Checkbox,
-} from '@/components/shadcn/ui/checkbox';
-import {
-  Input
-} from '@/components/shadcn/ui/input';
+import { Checkbox } from '@/components/shadcn/ui/checkbox';
+import { Input } from '@/components/shadcn/ui/input';
 import {
   Select,
   SelectTrigger,
@@ -134,12 +130,15 @@ const OrderQuestion = ({
             value={selectedAnswer[index]?.second ?? ''}
             onValueChange={(val) => {
               const updated = [...selectedAnswer];
-              updated[index] = { first, second: val === "__clear__" ? null : val };
+              updated[index] = {
+                first,
+                second: val === '__clear__' ? null : val,
+              };
               setSelectedAnswer(updated);
             }}
           >
             <SelectTrigger>
-              <SelectValue placeholder="Choose" >
+              <SelectValue placeholder="Choose">
                 {selectedAnswer[index]?.second ?? ''}
               </SelectValue>
             </SelectTrigger>
@@ -212,17 +211,11 @@ const QuestionRenderer = ({
       );
     case QuestionType.ORDER:
       return (
-        <OrderQuestion
-          question={question}
-          onAnswerUpdate={onAnswerUpdate}
-        />
+        <OrderQuestion question={question} onAnswerUpdate={onAnswerUpdate} />
       );
     case QuestionType.TEXT:
       return (
-        <TextQuestion
-          question={question}
-          onAnswerUpdate={onAnswerUpdate}
-        />
+        <TextQuestion question={question} onAnswerUpdate={onAnswerUpdate} />
       );
     default:
       return <p>Unknown question type.</p>;

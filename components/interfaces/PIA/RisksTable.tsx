@@ -110,27 +110,27 @@ const RisksTable = ({
             {pageData.map((task, index) => {
               const confidentialityValue = calculatePercentage(
                 riskProbabilityPoints[
-                task.properties.pia_risk[1].confidentialityRiskProbability
+                  task.properties.pia_risk[1].confidentialityRiskProbability
                 ] *
-                riskSecurityPoints[
-                task.properties.pia_risk[1].confidentialityRiskSecurity
-                ]
+                  riskSecurityPoints[
+                    task.properties.pia_risk[1].confidentialityRiskSecurity
+                  ]
               );
               const availabilityValue = calculatePercentage(
                 riskProbabilityPoints[
-                task.properties.pia_risk[2].availabilityRiskProbability
+                  task.properties.pia_risk[2].availabilityRiskProbability
                 ] *
-                riskSecurityPoints[
-                task.properties.pia_risk[2].availabilityRiskSecurity
-                ]
+                  riskSecurityPoints[
+                    task.properties.pia_risk[2].availabilityRiskSecurity
+                  ]
               );
               const transparencyValue = calculatePercentage(
                 riskProbabilityPoints[
-                task.properties.pia_risk[3].transparencyRiskProbability
+                  task.properties.pia_risk[3].transparencyRiskProbability
                 ] *
-                riskSecurityPoints[
-                task.properties.pia_risk[3].transparencyRiskSecurity
-                ]
+                  riskSecurityPoints[
+                    task.properties.pia_risk[3].transparencyRiskSecurity
+                  ]
               );
 
               return (

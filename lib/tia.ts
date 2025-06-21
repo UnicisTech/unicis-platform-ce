@@ -345,7 +345,7 @@ export const getTiaRisks = (state) => {
 export const getProblematicLawfulAccesses = (formState: any) => {
   //TODO: remove legacy version
   // const formData = formState?.values;
-  const formData = formState
+  const formData = formState;
 
   if (!formData) {
     return {

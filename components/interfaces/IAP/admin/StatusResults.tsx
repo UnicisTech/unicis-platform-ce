@@ -1,12 +1,18 @@
-import React, { useCallback, useMemo } from "react";
-import { useTranslation } from "next-i18next";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/shadcn/ui/dialog";
-import { Button } from "@/components/shadcn/ui/button";
-import type { TeamCourseWithProgress, TeamMemberWithUser } from "types";
-import { countCourseAnswers } from "@/lib/iap";
-import { StatusBadge } from "@/components/shared";
-import StatusResultsChart from "./StatusResultsChart";
-import { findMemberProgressInTeamCourse } from "../services/helpers";
+import React, { useCallback, useMemo } from 'react';
+import { useTranslation } from 'next-i18next';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/shadcn/ui/dialog';
+import { Button } from '@/components/shadcn/ui/button';
+import type { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
+import { countCourseAnswers } from '@/lib/iap';
+import { StatusBadge } from '@/components/shared';
+import StatusResultsChart from './StatusResultsChart';
+import { findMemberProgressInTeamCourse } from '../services/helpers';
 
 interface StatusResultsProps {
   teamCourse: TeamCourseWithProgress;
@@ -21,7 +27,7 @@ const StatusResults: React.FC<StatusResultsProps> = ({
   visible,
   setVisible,
 }) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
 
   const closeHandler = useCallback(() => {
     setVisible(false);
@@ -108,7 +114,7 @@ const StatusResults: React.FC<StatusResultsProps> = ({
 
         <DialogFooter className="mt-4">
           <Button variant="secondary" onClick={closeHandler}>
-            {t("close")}
+            {t('close')}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -1,14 +1,21 @@
-import * as React from "react";
-import { useState, useCallback } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/shadcn/ui/dialog";
-import { Button } from "@/components/shadcn/ui/button";
-import { Loader2 } from "lucide-react";
-import type { ApiResponse, TaskWithRpaProcedure } from "types";
-import type { Task } from "@prisma/client";
+import * as React from 'react';
+import { useState, useCallback } from 'react';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogClose,
+} from '@/components/shadcn/ui/dialog';
+import { Button } from '@/components/shadcn/ui/button';
+import { Loader2 } from 'lucide-react';
+import type { ApiResponse, TaskWithRpaProcedure } from 'types';
+import type { Task } from '@prisma/client';
 
 interface DeleteRiskProps {
   visible: boolean;
@@ -23,7 +30,7 @@ export default function DeleteRisk({
   task,
   mutate,
 }: DeleteRiskProps) {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   const router = useRouter();
   const { slug } = router.query as { slug: string };
 
@@ -44,7 +51,7 @@ export default function DeleteRisk({
         return;
       }
 
-      toast.success(t("risk_deleted") || "Risk deleted.");
+      toast.success(t('risk_deleted') || 'Risk deleted.');
       await mutate();
       setVisible(false);
       setIsDeleting(false);
@@ -62,17 +69,15 @@ export default function DeleteRisk({
     <Dialog open={visible} onOpenChange={setVisible}>
       <DialogContent className="max-w-md p-6">
         <DialogHeader>
-          <DialogTitle>{t("rm-remove-title")}</DialogTitle>
+          <DialogTitle>{t('rm-remove-title')}</DialogTitle>
         </DialogHeader>
 
-        <div className="my-4 text-sm">
-          {t("rm-remove-description")}
-        </div>
+        <div className="my-4 text-sm">{t('rm-remove-description')}</div>
 
         <DialogFooter className="flex justify-end space-x-2">
           <DialogClose asChild>
             <Button variant="outline" disabled={isDeleting}>
-              {t("close") || "Close"}
+              {t('close') || 'Close'}
             </Button>
           </DialogClose>
           <Button
@@ -81,11 +86,10 @@ export default function DeleteRisk({
             disabled={isDeleting}
           >
             {isDeleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {t("delete") || "Delete"}
+            {t('delete') || 'Delete'}
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
 }
-

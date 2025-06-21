@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Image,
 } from '@react-pdf/renderer';
-import { Button } from '@/components/shadcn/ui/button'
+import { Button } from '@/components/shadcn/ui/button';
 import { Course } from '@prisma/client';
 
 interface CertificateProps {

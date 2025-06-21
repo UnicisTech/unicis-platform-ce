@@ -1,6 +1,6 @@
-import { useForm } from "react-hook-form";
-import type { RiskTreatmentStepValues } from "../types";
-import type { RMProcedureInterface } from "types";
+import { useForm } from 'react-hook-form';
+import type { RiskTreatmentStepValues } from '../types';
+import type { RMProcedureInterface } from 'types';
 
 export default function useRiskTreatmentStepForm(
   procedure: RMProcedureInterface
@@ -8,12 +8,12 @@ export default function useRiskTreatmentStepForm(
   const initial = procedure[1] || ({} as RiskTreatmentStepValues);
   return useForm<RiskTreatmentStepValues>({
     defaultValues: {
-      RiskTreatment: initial.RiskTreatment ?? "",
-      TreatmentCost: initial.TreatmentCost ?? "",
+      RiskTreatment: initial.RiskTreatment ?? '',
+      TreatmentCost: initial.TreatmentCost ?? '',
       TreatmentStatus: initial.TreatmentStatus ?? 50,
       TreatedProbability: initial.TreatedProbability ?? 50,
       TreatedImpact: initial.TreatedImpact ?? 50,
     },
-    mode: "onChange",
+    mode: 'onChange',
   });
 }

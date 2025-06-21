@@ -5,7 +5,7 @@ const StageTracker = ({
   currentStage,
   headers,
 }: {
-  currentStage: number; 
+  currentStage: number;
   headers: string[];
 }) => {
   const { theme } = useTheme();

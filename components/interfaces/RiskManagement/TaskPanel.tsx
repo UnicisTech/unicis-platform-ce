@@ -38,7 +38,10 @@ const RmTaskPanel = ({ task }: { task: Task }) => {
           <div className="mt-4">
             {activeTab === 0 && (
               <div>
-                <Field label={fieldPropsMapping['Risk']} value={risk[0]?.Risk} />
+                <Field
+                  label={fieldPropsMapping['Risk']}
+                  value={risk[0]?.Risk}
+                />
                 <Field
                   label={fieldPropsMapping['AssetOwner']}
                   value={risk[0]?.AssetOwner?.label}

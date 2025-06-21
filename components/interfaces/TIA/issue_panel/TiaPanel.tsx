@@ -118,52 +118,56 @@ const TiaPanel = ({ task }: { task: Task }) => {
     switch (selectedTab) {
       case 0:
         return (
-<div>
-              <Field
-                label={fieldPropsMapping['DataExporter']}
-                value={procedure[0].DataExporter}
-              />
-              <Field
-                label={fieldPropsMapping['CountryDataExporter']}
-                value={procedure[0].CountryDataExporter.label}
-              />
-              <Field
-                label={fieldPropsMapping['DataImporter']}
-                value={procedure[0].DataImporter}
-              />
-              <Field
-                label={fieldPropsMapping['CountryDataImporter']}
-                value={procedure[0].CountryDataImporter.label}
-              />
-              <Field
-                label={fieldPropsMapping['TransferScenario']}
-                value={procedure[0].TransferScenario}
-              />
-              <Field
-                label={fieldPropsMapping['DataAtIssue']}
-                value={procedure[0].DataAtIssue}
-              />
-              <Field
-                label={fieldPropsMapping['HowDataTransfer']}
-                value={procedure[0].HowDataTransfer}
-              />
-              <Field
-                label={fieldPropsMapping['StartDateAssessment']}
-                value={<DaisyBadge color="tag">{procedure[0].StartDateAssessment}</DaisyBadge>}
-              />
-              <Field
-                label={fieldPropsMapping['HowDataTransfer']}
-                value={procedure[0].HowDataTransfer}
-              />
-              <Field
-                label={fieldPropsMapping['AssessmentYears']}
-                value={procedure[0].AssessmentYears}
-              />
-              <Field
-                label={fieldPropsMapping['LawImporterCountry']}
-                value={procedure[0].LawImporterCountry.label}
-              />
-            </div>
+          <div>
+            <Field
+              label={fieldPropsMapping['DataExporter']}
+              value={procedure[0].DataExporter}
+            />
+            <Field
+              label={fieldPropsMapping['CountryDataExporter']}
+              value={procedure[0].CountryDataExporter.label}
+            />
+            <Field
+              label={fieldPropsMapping['DataImporter']}
+              value={procedure[0].DataImporter}
+            />
+            <Field
+              label={fieldPropsMapping['CountryDataImporter']}
+              value={procedure[0].CountryDataImporter.label}
+            />
+            <Field
+              label={fieldPropsMapping['TransferScenario']}
+              value={procedure[0].TransferScenario}
+            />
+            <Field
+              label={fieldPropsMapping['DataAtIssue']}
+              value={procedure[0].DataAtIssue}
+            />
+            <Field
+              label={fieldPropsMapping['HowDataTransfer']}
+              value={procedure[0].HowDataTransfer}
+            />
+            <Field
+              label={fieldPropsMapping['StartDateAssessment']}
+              value={
+                <DaisyBadge color="tag">
+                  {procedure[0].StartDateAssessment}
+                </DaisyBadge>
+              }
+            />
+            <Field
+              label={fieldPropsMapping['HowDataTransfer']}
+              value={procedure[0].HowDataTransfer}
+            />
+            <Field
+              label={fieldPropsMapping['AssessmentYears']}
+              value={procedure[0].AssessmentYears}
+            />
+            <Field
+              label={fieldPropsMapping['LawImporterCountry']}
+              value={procedure[0].LawImporterCountry.label}
+            />
+          </div>
         );
       case 1:
         return (
@@ -223,8 +227,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
               label={fieldPropsMapping['SelfReportingObligations']}
               value={
                 config['SelfReportingObligations'].find(
-                  ({ value }) =>
-                    value === procedure[1].SelfReportingObligations
+                  ({ value }) => value === procedure[1].SelfReportingObligations
                 )?.label || ''
               }
             />
@@ -275,9 +278,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
             />
             <Field
               label={fieldPropsMapping['ReasonHighViolationLocalLaw']}
-              value={
-                procedure[2].ReasonHighViolationLocalLaw || NOT_APLICABLE
-              }
+              value={procedure[2].ReasonHighViolationLocalLaw || NOT_APLICABLE}
             />
             <Field
               label={fieldPropsMapping['HighViolationDataIssue']}
@@ -289,9 +290,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
             />
             <Field
               label={fieldPropsMapping['ReasonHighViolationDataIssue']}
-              value={
-                procedure[2].ReasonHighViolationDataIssue || NOT_APLICABLE
-              }
+              value={procedure[2].ReasonHighViolationDataIssue || NOT_APLICABLE}
             />
             <Field
               label={fieldPropsMapping['InvestigatingImporter']}
@@ -303,9 +302,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
             />
             <Field
               label={fieldPropsMapping['ReasonInvestigatingImporter']}
-              value={
-                procedure[2].ReasonInvestigatingImporter || NOT_APLICABLE
-              }
+              value={procedure[2].ReasonInvestigatingImporter || NOT_APLICABLE}
             />
             <Field
               label={fieldPropsMapping['PastWarrantSubpoena']}
@@ -330,9 +327,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
             />
             <Field
               label={fieldPropsMapping['ReasonDataIssueInvestigation']}
-              value={
-                procedure[2].ReasonDataIssueInvestigation || NOT_APLICABLE
-              }
+              value={procedure[2].ReasonDataIssueInvestigation || NOT_APLICABLE}
             />
 
             <Field
@@ -357,9 +352,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
             />
             <Field
               label={fieldPropsMapping['ReasonLocalMassSurveillance']}
-              value={
-                procedure[2].ReasonLocalMassSurveillance || NOT_APLICABLE
-              }
+              value={procedure[2].ReasonLocalMassSurveillance || NOT_APLICABLE}
             />
             <Field
               label={fieldPropsMapping['LocalAccessMassSurveillance']}
@@ -373,8 +366,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
             <Field
               label={fieldPropsMapping['ReasonLocalAccessMassSurveillance']}
               value={
-                procedure[2].ReasonLocalAccessMassSurveillance ||
-                NOT_APLICABLE
+                procedure[2].ReasonLocalAccessMassSurveillance || NOT_APLICABLE
               }
             />
             <Field
@@ -387,9 +379,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
             />
             <Field
               label={fieldPropsMapping['ReasonLocalRoutinelyMonitor']}
-              value={
-                procedure[2].ReasonLocalRoutinelyMonitor || NOT_APLICABLE
-              }
+              value={procedure[2].ReasonLocalRoutinelyMonitor || NOT_APLICABLE}
             />
             <Field
               label={fieldPropsMapping['PassMassSurveillance']}
@@ -414,9 +404,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
               }
             />
             <Field
-              label={
-                fieldPropsMapping['ReasonPassMassSurveillanceConnection']
-              }
+              label={fieldPropsMapping['ReasonPassMassSurveillanceConnection']}
               value={
                 procedure[2].ReasonPassMassSurveillanceConnection ||
                 NOT_APLICABLE
@@ -464,8 +452,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
               label={fieldPropsMapping['AssessmentProduceReport']}
               value={
                 config['AssessmentProduceReport'].find(
-                  ({ value }) =>
-                    value === procedure[2].AssessmentProduceReport
+                  ({ value }) => value === procedure[2].AssessmentProduceReport
                 )?.label || NOT_APLICABLE
               }
             />
@@ -483,9 +470,7 @@ const TiaPanel = ({ task }: { task: Task }) => {
             <Field label={questions['DataTransferImporter']} />
             <Field
               label={fieldPropsMapping['RelevantDataTransferImporter']}
-              value={
-                procedure[3].RelevantDataTransferImporter || NOT_APLICABLE
-              }
+              value={procedure[3].RelevantDataTransferImporter || NOT_APLICABLE}
             />
             <Field
               label={fieldPropsMapping['ProbabilityDataTransferImporter']}
@@ -578,7 +563,9 @@ const TiaPanel = ({ task }: { task: Task }) => {
 
   return (
     <div className="p-5">
-      <h2 className="text-1xl font-bold mb-4">View Transfer Impact Assessment</h2>
+      <h2 className="text-1xl font-bold mb-4">
+        View Transfer Impact Assessment
+      </h2>
       {procedure ? (
         <div>
           <div role="tablist" className="tabs tabs-bordered">

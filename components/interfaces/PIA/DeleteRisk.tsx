@@ -1,10 +1,10 @@
-import * as React from "react";
-import { useState, useCallback } from "react";
-import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { getAxiosError } from "@/lib/common";
+import * as React from 'react';
+import { useState, useCallback } from 'react';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { getAxiosError } from '@/lib/common';
 
 import {
   Dialog,
@@ -13,11 +13,11 @@ import {
   DialogTitle,
   DialogFooter,
   DialogClose,
-} from "@/components/shadcn/ui/dialog";
-import { Button } from "@/components/shadcn/ui/button";
-import { Loader2 } from "lucide-react";
+} from '@/components/shadcn/ui/dialog';
+import { Button } from '@/components/shadcn/ui/button';
+import { Loader2 } from 'lucide-react';
 
-import type { ApiResponse, TaskWithRpaProcedure } from "types";
+import type { ApiResponse, TaskWithRpaProcedure } from 'types';
 import type { Task } from '@prisma/client';
 
 interface DeleteRiskProps {
@@ -33,7 +33,7 @@ export default function DeleteRisk({
   task,
   mutate,
 }: DeleteRiskProps) {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   const router = useRouter();
   const { slug } = router.query;
 
@@ -52,7 +52,7 @@ export default function DeleteRisk({
         toast.error(error.message);
         return;
       } else {
-        toast.success(t("riskDeleted", "Risk deleted."));
+        toast.success(t('riskDeleted', 'Risk deleted.'));
       }
 
       await mutate();
@@ -68,19 +68,15 @@ export default function DeleteRisk({
     <Dialog open={visible} onOpenChange={setVisible}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>  
-            {t("pia-remove-title")}
-          </DialogTitle>
+          <DialogTitle>{t('pia-remove-title')}</DialogTitle>
         </DialogHeader>
 
-        <div className="my-4 text-sm">
-          {t("pia-remove-description")}
-        </div>
+        <div className="my-4 text-sm">{t('pia-remove-description')}</div>
 
         <DialogFooter className="flex justify-end space-x-2">
           <DialogClose asChild>
             <Button variant="outline" disabled={isDeleting}>
-              {t("close", "Close")}
+              {t('close', 'Close')}
             </Button>
           </DialogClose>
           <Button
@@ -88,10 +84,8 @@ export default function DeleteRisk({
             onClick={deleteRisk}
             disabled={isDeleting}
           >
-            {isDeleting && (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            )}
-            {t("delete", "Delete")}
+            {isDeleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {t('delete', 'Delete')}
           </Button>
         </DialogFooter>
       </DialogContent>

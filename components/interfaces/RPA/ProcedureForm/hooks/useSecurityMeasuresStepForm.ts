@@ -1,6 +1,6 @@
-import { useForm } from "react-hook-form";
-import type { RpaProcedureInterface } from "types";
-import type { SecurityMeasuresStepValues } from "../types";
+import { useForm } from 'react-hook-form';
+import type { RpaProcedureInterface } from 'types';
+import type { SecurityMeasuresStepValues } from '../types';
 
 export default function useSecurityMeasuresStepForm(
   procedure: RpaProcedureInterface
@@ -10,6 +10,6 @@ export default function useSecurityMeasuresStepForm(
     defaultValues: {
       toms: initial.toms ?? [],
     },
-    mode: "onChange",
+    mode: 'onChange',
   });
 }

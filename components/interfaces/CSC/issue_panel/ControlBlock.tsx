@@ -47,9 +47,12 @@ const ControlBlock = ({
   isDeleting: boolean;
   deleteControlHandler: (control: string) => void;
   setStatuses: Dispatch<
-    SetStateAction<{
-      [key: string]: string;
-    } | undefined>
+    SetStateAction<
+      | {
+          [key: string]: string;
+        }
+      | undefined
+    >
   >;
 }) => {
   const router = useRouter();
@@ -86,9 +89,9 @@ const ControlBlock = ({
   );
 
   useEffect(() => {
-    console.log("availableOptions", availableOptions)
-    console.log("controlOptions", controlOptions)
-  }, [availableOptions, controlOptions])
+    console.log('availableOptions', availableOptions);
+    console.log('controlOptions', controlOptions);
+  }, [availableOptions, controlOptions]);
 
   return (
     <div className="space-y-4">
@@ -102,9 +105,10 @@ const ControlBlock = ({
           >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Choose a control">
-                {controlOptions.find(
-                  ({ value }) => value.control === control
-                )?.label}
+                {
+                  controlOptions.find(({ value }) => value.control === control)
+                    ?.label
+                }
               </SelectValue>
             </SelectTrigger>
             <SelectContent
@@ -121,7 +125,8 @@ const ControlBlock = ({
                     {option.value.code}: {option.value.section}
                   </div>
                   <div className="text-xs text-muted-foreground leading-snug">
-                    {option.value.controlLabel || option.value.control} – {option.value.requirements}
+                    {option.value.controlLabel || option.value.control} –{' '}
+                    {option.value.requirements}
                   </div>
                 </SelectItem>
               ))}
@@ -138,7 +143,11 @@ const ControlBlock = ({
               setIsButtonLoading(false);
             }}
           >
-            {isButtonLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
+            {isButtonLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Trash2 className="h-4 w-4" />
+            )}
           </Button>
         </div>
       </div>

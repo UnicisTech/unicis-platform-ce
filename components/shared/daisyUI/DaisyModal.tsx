@@ -7,7 +7,12 @@ export type ModalProps = {
   className?: string;
 };
 
-const DaisyModal = ({ open, onClose, children, className = '' }: ModalProps) => {
+const DaisyModal = ({
+  open,
+  onClose,
+  children,
+  className = '',
+}: ModalProps) => {
   return (
     <dialog className={`modal ${open ? 'modal-open' : ''}`}>
       <div className={`modal-box relative ${className}`}>
@@ -35,9 +40,7 @@ const ModalHeader = ({
   children: ReactNode;
   tag?: ElementType;
   className?: string;
-}) => (
-  <Tag className={`font-bold text-lg ${className}`}>{children}</Tag>
-);
+}) => <Tag className={`font-bold text-lg ${className}`}>{children}</Tag>;
 
 const ModalBody = ({
   children,
@@ -45,9 +48,7 @@ const ModalBody = ({
 }: {
   children: ReactNode;
   className?: string;
-}) => (
-  <div className={`py-4 ${className}`}>{children}</div>
-);
+}) => <div className={`py-4 ${className}`}>{children}</div>;
 
 const ModalActions = ({
   children,
@@ -55,9 +56,7 @@ const ModalActions = ({
 }: {
   children: ReactNode;
   className?: string;
-}) => (
-  <div className={`modal-action ${className}`}>{children}</div>
-);
+}) => <div className={`modal-action ${className}`}>{children}</div>;
 
 DaisyModal.Header = ModalHeader;
 DaisyModal.Body = ModalBody;

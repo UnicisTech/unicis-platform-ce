@@ -15,8 +15,7 @@ export type RiskSecurity =
   | 'major'
   | 'extreme';
 
-
-  // TODO: why any there?
+// TODO: why any there?
 type Option = {
   label: string | any;
   value: string;

@@ -20,9 +20,14 @@ const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
   const { slug, courseId } = router.query as { slug: string; courseId: string };
   const { data } = useSession();
 
-  const { userProgress, isError, isLoading, mutateProgress } = useIapProgress(slug, courseId);
+  const { userProgress, isError, isLoading, mutateProgress } = useIapProgress(
+    slug,
+    courseId
+  );
 
-  const [answers, setAnswers] = useState<any>(Array(course.questions.length).fill(null));
+  const [answers, setAnswers] = useState<any>(
+    Array(course.questions.length).fill(null)
+  );
   const [started, setStarted] = useState<boolean>(false);
   const [finished, setFinished] = useState<boolean>(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
@@ -76,7 +81,10 @@ const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
   useEffect(() => {
     if (!userProgress) return;
 
-    const { progress, answers } = userProgress as { progress: number; answers: any };
+    const { progress, answers } = userProgress as {
+      progress: number;
+      answers: any;
+    };
     setStarted(true);
     setAnswers(answers);
     setFinished(progress === 100);

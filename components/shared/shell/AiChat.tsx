@@ -205,34 +205,37 @@
 
 // export default AiChat;
 
-
-import { useState, useEffect, useRef, FormEvent } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { XMarkIcon, PaperAirplaneIcon, ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/outline";
-import toast from "react-hot-toast";
-import { defaultHeaders } from "@/lib/common";
+import { useState, useEffect, useRef, FormEvent } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import {
+  XMarkIcon,
+  PaperAirplaneIcon,
+  ChatBubbleBottomCenterTextIcon,
+} from '@heroicons/react/24/outline';
+import toast from 'react-hot-toast';
+import { defaultHeaders } from '@/lib/common';
 import type {
   ApiResponse,
   ChatbotResponse,
   ChatbotResponseReturned,
-} from "types";
-import { useTranslation } from "next-i18next";
-import { Button } from "@/components/shadcn/ui/button";
+} from 'types';
+import { useTranslation } from 'next-i18next';
+import { Button } from '@/components/shadcn/ui/button';
 import {
   Card,
   CardHeader,
   CardTitle,
   CardContent,
   CardFooter,
-} from "@/components/shadcn/ui/card";
-import { Input } from "@/components/shadcn/ui/input";
+} from '@/components/shadcn/ui/card';
+import { Input } from '@/components/shadcn/ui/input';
 
 const AiChat: React.FC = () => {
   const [visible, setVisible] = useState(false);
   const [messages, setMessages] = useState<ChatbotResponse[]>([]);
   const [isTyping, setIsTyping] = useState(false);
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const togglePopup = () => {
@@ -242,21 +245,21 @@ const AiChat: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
-    const input = form.elements.namedItem("prompt") as HTMLInputElement;
+    const input = form.elements.namedItem('prompt') as HTMLInputElement;
     const userText = input.value.trim();
     if (!userText) return;
 
     const newMessages: ChatbotResponse[] = [
       ...messages,
-      { content: userText, role: "user" },
+      { content: userText, role: 'user' },
     ];
     form.reset();
     setMessages(newMessages);
     setIsTyping(true);
 
     try {
-      const res = await fetch("/api/chatbot", {
-        method: "POST",
+      const res = await fetch('/api/chatbot', {
+        method: 'POST',
         headers: defaultHeaders,
         body: JSON.stringify(newMessages),
       });
@@ -267,14 +270,14 @@ const AiChat: React.FC = () => {
         setMessages((prev) => [...prev, json.data.response]);
       }
     } catch {
-      toast.error(t("something-went-wrong"));
+      toast.error(t('something-went-wrong'));
     } finally {
       setIsTyping(false);
     }
   };
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   return (
@@ -283,13 +286,17 @@ const AiChat: React.FC = () => {
       <div
         className={`fixed right-4 bottom-4 z-50 transition-all duration-300 transform ${
           visible
-            ? "opacity-0 translate-y-4 pointer-events-none"
-            : "opacity-100 translate-y-0"
+            ? 'opacity-0 translate-y-4 pointer-events-none'
+            : 'opacity-100 translate-y-0'
         }`}
       >
-        <Button onClick={togglePopup} variant="secondary" className="flex items-center gap-2">
+        <Button
+          onClick={togglePopup}
+          variant="secondary"
+          className="flex items-center gap-2"
+        >
           <ChatBubbleBottomCenterTextIcon className="w-5 h-5" />
-          {t("ai-chatbot")}
+          {t('ai-chatbot')}
         </Button>
       </div>
 
@@ -297,10 +304,10 @@ const AiChat: React.FC = () => {
       <div
         className={`fixed right-4 bottom-16 z-50 transition-all duration-300 transform ${
           visible
-            ? "opacity-100 translate-x-0"
-            : "opacity-0 translate-x-full pointer-events-none"
+            ? 'opacity-100 translate-x-0'
+            : 'opacity-0 translate-x-full pointer-events-none'
         }`}
-        style={{ height: "80vh" }}
+        style={{ height: '80vh' }}
       >
         <Card className="relative w-[20rem] md:w-[32rem] h-full flex flex-col shadow-lg border">
           <button
@@ -311,22 +318,22 @@ const AiChat: React.FC = () => {
           </button>
 
           <CardHeader className="p-4">
-            <CardTitle>{t("ai-chatbot")}</CardTitle>
+            <CardTitle>{t('ai-chatbot')}</CardTitle>
           </CardHeader>
 
           <CardContent className="grow overflow-auto px-4 pb-4">
             {messages.map((msg, i) => (
               <div
                 key={i}
-                className={`chat ${msg.role === "assistant" ? "chat-start" : "chat-end"}`}
+                className={`chat ${msg.role === 'assistant' ? 'chat-start' : 'chat-end'}`}
               >
                 <div className="chat-image avatar">
                   <div className="w-10 rounded-full">
                     <img
                       src={
-                        msg.role === "assistant"
-                          ? "/chatbot_assistant.png"
-                          : "/chatbot_user.png"
+                        msg.role === 'assistant'
+                          ? '/chatbot_assistant.png'
+                          : '/chatbot_user.png'
                       }
                       alt={msg.role}
                     />
@@ -339,15 +346,15 @@ const AiChat: React.FC = () => {
                       ol: ({ children }) => (
                         <ol
                           style={{
-                            padding: "0.5rem 0 0.5rem 1.5rem",
-                            listStyleType: "decimal",
+                            padding: '0.5rem 0 0.5rem 1.5rem',
+                            listStyleType: 'decimal',
                           }}
                         >
                           {children}
                         </ol>
                       ),
                       li: ({ children }) => (
-                        <li style={{ marginBottom: "0.5rem" }}>{children}</li>
+                        <li style={{ marginBottom: '0.5rem' }}>{children}</li>
                       ),
                     }}
                   >
@@ -359,7 +366,7 @@ const AiChat: React.FC = () => {
             <div ref={messagesEndRef} />
             {isTyping && (
               <p className="mt-2 text-sm italic text-gray-500 animate-pulse">
-                {t("ai-is-typing")}
+                {t('ai-is-typing')}
               </p>
             )}
           </CardContent>
@@ -368,7 +375,7 @@ const AiChat: React.FC = () => {
             <form onSubmit={handleSubmit} className="flex w-full gap-2">
               <Input
                 name="prompt"
-                placeholder={t("ai-type-a-question")}
+                placeholder={t('ai-type-a-question')}
                 className="flex-1"
               />
               <Button type="submit" variant="ghost" className="p-2">

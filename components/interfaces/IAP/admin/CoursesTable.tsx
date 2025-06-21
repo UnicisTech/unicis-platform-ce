@@ -5,13 +5,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/shadcn/ui/table";
-import { Button } from "@/components/shadcn/ui/button";
-import { Edit2, Trash2, BarChart2, Table as TableIcon } from "lucide-react";
-import useCanAccess from "hooks/useCanAccess";
-import { TeamCourseWithProgress, TeamMemberWithUser } from "types";
-import { getCourseStatus } from "../services/helpers";
-import { StatusBadge } from "@/components/shared";
+} from '@/components/shadcn/ui/table';
+import { Button } from '@/components/shadcn/ui/button';
+import { Edit2, Trash2, BarChart2, Table as TableIcon } from 'lucide-react';
+import useCanAccess from 'hooks/useCanAccess';
+import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
+import { getCourseStatus } from '../services/helpers';
+import { StatusBadge } from '@/components/shared';
 
 const statusBadges = {
   todo: <StatusBadge label="To do" value="todo" />,
@@ -56,7 +56,7 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
             const status = getCourseStatus(teamCourse, members);
             const categoryName =
               categories.find((c) => c.id === teamCourse.course.categoryId)
-                ?.name || "-";
+                ?.name || '-';
 
             return (
               <TableRow key={`${teamCourse.course.name}-${idx}`}>
@@ -65,7 +65,7 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
                 <TableCell>{statusBadges[status]}</TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2 flex-wrap">
-                    {canAccess("iap_course", ["create"]) && (
+                    {canAccess('iap_course', ['create']) && (
                       <Button
                         variant="outline"
                         size="icon"
@@ -75,7 +75,7 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
                         <Edit2 className="h-4 w-4" />
                       </Button>
                     )}
-                    {canAccess("iap_course", ["delete"]) && (
+                    {canAccess('iap_course', ['delete']) && (
                       <Button
                         variant="destructive"
                         size="icon"

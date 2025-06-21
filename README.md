@@ -140,8 +140,6 @@ syft dir:unicis-platform -o spdx-json > sbom-spdx.json
 syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 ```
 
-
-
 #### Free and open source community edition - all-in-one tools for security, privacy and compliance team
 
 ![unicis-platform-beta-poster](https://www.unicis.tech/img/unicis-platform-early-access.png)

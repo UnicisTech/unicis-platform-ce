@@ -80,7 +80,10 @@ const ProcessingActivitiesAnalysis = ({
               labels={labels}
             />
           </div>
-          <div style={{ width: '49%' }} className="stats p-4 stat-value shadow-sm">
+          <div
+            style={{ width: '49%' }}
+            className="stats p-4 stat-value shadow-sm"
+          >
             <RadarChart ISO={ISO} statuses={statuses} />
           </div>
         </Card>

@@ -1,5 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/shadcn/ui/card";
-import type { Task } from "@prisma/client";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/shadcn/ui/card';
+import type { Task } from '@prisma/client';
 
 const TaskStatusesDetail = ({
   tasks,
@@ -9,12 +14,12 @@ const TaskStatusesDetail = ({
   statusCounts: { [key: string]: number };
 }) => {
   const stats = [
-    { label: "Total Tasks", value: tasks?.length || 0 },
-    { label: "To Do", value: statusCounts?.todo || 0 },
-    { label: "In Progress", value: statusCounts?.inprogress || 0 },
-    { label: "In Review", value: statusCounts?.inreview || 0 },
-    { label: "Feedback", value: statusCounts?.feedback || 0 },
-    { label: "Done", value: statusCounts?.done || 0 },
+    { label: 'Total Tasks', value: tasks?.length || 0 },
+    { label: 'To Do', value: statusCounts?.todo || 0 },
+    { label: 'In Progress', value: statusCounts?.inprogress || 0 },
+    { label: 'In Review', value: statusCounts?.inreview || 0 },
+    { label: 'Feedback', value: statusCounts?.feedback || 0 },
+    { label: 'Done', value: statusCounts?.done || 0 },
   ];
 
   return (

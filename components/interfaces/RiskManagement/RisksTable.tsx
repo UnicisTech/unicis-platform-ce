@@ -105,26 +105,26 @@ const RisksTable = ({
 
               return (
                 <tr key={index}>
-                  <td className='px-1.5 py-1.5'>
+                  <td className="px-1.5 py-1.5">
                     <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
                       <div className="flex items-center justify-start space-x-2">
                         <span className="underline">{task.title}</span>
                       </div>
                     </Link>
                   </td>
-                  <td className='px-1.5 py-1.5'>
+                  <td className="px-1.5 py-1.5">
                     <span>{risk[0].Risk}</span>
                   </td>
-                  <td className='px-1.5 py-1.5'>
+                  <td className="px-1.5 py-1.5">
                     <span>{getInitials(risk[0].AssetOwner.label)}</span>
                   </td>
-                  <td className='px-1.5 py-1.5'>
+                  <td className="px-1.5 py-1.5">
                     <span>{risk[0].Impact}</span>
                   </td>
-                  <td className='px-1.5 py-1.5'>
+                  <td className="px-1.5 py-1.5">
                     <span>{riskValueToLabel(risk[0].RawProbability)}</span>
                   </td>
-                  <td className='px-1.5 py-1.5'>
+                  <td className="px-1.5 py-1.5">
                     <span>{riskValueToLabel(risk[0].RawImpact)}</span>
                   </td>
                   <td
@@ -132,11 +132,17 @@ const RisksTable = ({
                   >
                     {riskValueToLabel(rawRiskRating)}
                   </td>
-                  <td className='px-1.5 py-1.5'>{risk[1].RiskTreatment}</td>
-                  <td className='px-1.5 py-1.5'>{risk[1].TreatmentCost}</td>
-                  <td className='px-1.5 py-1.5'>{riskValueToLabel(risk[1].TreatmentStatus)}</td>
-                  <td className='px-1.5 py-1.5'>{riskValueToLabel(risk[1].TreatedProbability)}</td>
-                  <td className='px-1.5 py-1.5'>{riskValueToLabel(risk[1].TreatedImpact)}</td>
+                  <td className="px-1.5 py-1.5">{risk[1].RiskTreatment}</td>
+                  <td className="px-1.5 py-1.5">{risk[1].TreatmentCost}</td>
+                  <td className="px-1.5 py-1.5">
+                    {riskValueToLabel(risk[1].TreatmentStatus)}
+                  </td>
+                  <td className="px-1.5 py-1.5">
+                    {riskValueToLabel(risk[1].TreatedProbability)}
+                  </td>
+                  <td className="px-1.5 py-1.5">
+                    {riskValueToLabel(risk[1].TreatedImpact)}
+                  </td>
                   <td
                     className={`px-1.5 py-1.5 ${getBgColorClass(targetRiskRating)}`}
                   >
@@ -191,7 +197,7 @@ const RisksTable = ({
         />
       )}
     </div>
-  )
+  );
 };
 
 export default RisksTable;

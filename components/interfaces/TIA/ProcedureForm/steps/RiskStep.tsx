@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Control, useFormContext } from "react-hook-form";
+import * as React from 'react';
+import { Control, useFormContext } from 'react-hook-form';
 import {
   FormField,
   FormItem,
@@ -7,29 +7,40 @@ import {
   FormControl,
   FormMessage,
   FormDescription,
-} from "@/components/shadcn/ui/form";
-import { RadioGroup, RadioGroupItem } from "@/components/shadcn/ui/radio-group";
-import { Textarea } from "@/components/shadcn/ui/textarea";
-import DaisyBadge from "@/components/shared/daisyUI/DaisyBadge";
+} from '@/components/shadcn/ui/form';
+import { RadioGroup, RadioGroupItem } from '@/components/shadcn/ui/radio-group';
+import { Textarea } from '@/components/shadcn/ui/textarea';
+import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 
-import { getTiaRisks, getProblematicLawfulAccesses } from "@/lib/tia";
-import { config, fieldPropsMapping } from "@/components/defaultLanding/data/configs/tia";
-import type { TiaProcedureInterface } from "types";
-import type { RiskStepValues } from "../types";
-import RiskLevel from "../../RiskLevel";
-import { Message } from "@/components/shared";
+import { getTiaRisks, getProblematicLawfulAccesses } from '@/lib/tia';
+import {
+  config,
+  fieldPropsMapping,
+} from '@/components/defaultLanding/data/configs/tia';
+import type { TiaProcedureInterface } from 'types';
+import type { RiskStepValues } from '../types';
+import RiskLevel from '../../RiskLevel';
+import { Message } from '@/components/shared';
 
 interface RiskStepProps {
   problematicLawfulAccessValues: TiaProcedureInterface[1];
   control: Control<RiskStepValues>;
 }
 
-export default function RiskStep({ problematicLawfulAccessValues, control }: RiskStepProps) {
+export default function RiskStep({
+  problematicLawfulAccessValues,
+  control,
+}: RiskStepProps) {
   const { getValues } = useFormContext();
   const values = getValues();
 
-  const { targetedRisk, nonTargetedRisk, selfReportingRisk } = getTiaRisks(values);
-  const { isDataIssueInvestigationProblematic, isPassMassSurveillanceConnectionProblematic, isAssessmentProduceReportProblematic } = getProblematicLawfulAccesses(values);
+  const { targetedRisk, nonTargetedRisk, selfReportingRisk } =
+    getTiaRisks(values);
+  const {
+    isDataIssueInvestigationProblematic,
+    isPassMassSurveillanceConnectionProblematic,
+    isAssessmentProduceReportProblematic,
+  } = getProblematicLawfulAccesses(values);
   return (
     <>
       <Message text={`To be completed by the importer`} />
@@ -43,7 +54,7 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="WarrantsSubpoenas"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{fieldPropsMapping.WarrantsSubpoenas}</FormLabel>
@@ -53,9 +64,15 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
                   described above for the type of data at issue
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.WarrantsSubpoenas.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -72,7 +89,9 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
             name="ReasonWarrantsSubpoenas"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonWarrantsSubpoenas}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonWarrantsSubpoenas}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -88,7 +107,7 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="ViolationLocalLaw"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{fieldPropsMapping.ViolationLocalLaw}</FormLabel>
@@ -99,9 +118,15 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
                   for political reasons or as a scheme of extortion)
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.ViolationLocalLaw.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -118,7 +143,9 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
             name="ReasonViolationLocalLaw"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonViolationLocalLaw}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonViolationLocalLaw}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -134,7 +161,7 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="HighViolationLocalLaw"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{fieldPropsMapping.HighViolationLocalLaw}</FormLabel>
@@ -145,9 +172,15 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
                   violations
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.HighViolationLocalLaw.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -164,7 +197,9 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
             name="ReasonHighViolationLocalLaw"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonHighViolationLocalLaw}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonHighViolationLocalLaw}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -180,19 +215,27 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="HighViolationDataIssue"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.HighViolationDataIssue}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.HighViolationDataIssue}
+                </FormLabel>
                 <FormDescription>
                   The importer has a high probability of violating local laws,
                   and the data at issue would be particularly interesting to
                   investigate these violations
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.HighViolationDataIssue.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -209,7 +252,9 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
             name="ReasonHighViolationDataIssue"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonHighViolationDataIssue}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonHighViolationDataIssue}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -225,7 +270,7 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="InvestigatingImporter"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{fieldPropsMapping.InvestigatingImporter}</FormLabel>
@@ -237,9 +282,15 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
                   the data at issue from the importer or its providers
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.InvestigatingImporter.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -256,7 +307,9 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
             name="ReasonInvestigatingImporter"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonInvestigatingImporter}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonInvestigatingImporter}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -272,7 +325,7 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="PastWarrantSubpoena"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{fieldPropsMapping.PastWarrantSubpoena}</FormLabel>
@@ -284,9 +337,15 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
                   access to the importer&apos;s data)
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.PastWarrantSubpoena.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -303,7 +362,9 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
             name="ReasonPastWarrantSubpoena"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonPastWarrantSubpoena}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonPastWarrantSubpoena}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -321,10 +382,12 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="DataIssueInvestigation"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.DataIssueInvestigation}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.DataIssueInvestigation}
+                </FormLabel>
                 <FormDescription>
                   Based on the above and the legal analysis, does the importer
                   have reason to believe that during the assessment period it
@@ -332,9 +395,15 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
                   data at issue for an investigation as described above?
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.DataIssueInvestigation.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -349,10 +418,12 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="ReasonDataIssueInvestigation"
-            rules={{ required: "Please provide a reason." }}
+            rules={{ required: 'Please provide a reason.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonDataIssueInvestigation}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonDataIssueInvestigation}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -375,7 +446,8 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
         </>
       )}
 
-      {problematicLawfulAccessValues.MassSurveillanceTelecommunications === 'no' && (
+      {problematicLawfulAccessValues.MassSurveillanceTelecommunications ===
+        'no' && (
         <>
           <Message
             isBold={true}
@@ -387,7 +459,7 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="LocalIssueWarrants"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{fieldPropsMapping.LocalIssueWarrants}</FormLabel>
@@ -397,9 +469,15 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
                   type of data at issue
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.LocalIssueWarrants.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -414,10 +492,12 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="ReasonLocalIssueWarrants"
-            rules={{ required: "Please provide a reason." }}
+            rules={{ required: 'Please provide a reason.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonLocalIssueWarrants}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonLocalIssueWarrants}
+                </FormLabel>
                 <FormControl>
                   <Textarea {...field} placeholder="Provide details" />
                 </FormControl>
@@ -429,7 +509,7 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="LocalMassSurveillance"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{fieldPropsMapping.LocalMassSurveillance}</FormLabel>
@@ -440,9 +520,15 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
                   could be of relevance for national security purposes)
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.LocalMassSurveillance.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -457,10 +543,12 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="ReasonLocalMassSurveillance"
-            rules={{ required: "Please provide a reason." }}
+            rules={{ required: 'Please provide a reason.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonLocalMassSurveillance}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonLocalMassSurveillance}
+                </FormLabel>
                 <FormControl>
                   <Textarea {...field} placeholder="Provide details" />
                 </FormControl>
@@ -472,10 +560,12 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="LocalAccessMassSurveillance"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.LocalAccessMassSurveillance}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.LocalAccessMassSurveillance}
+                </FormLabel>
                 <FormDescription>
                   The local authorities could consider the importer to be a
                   provider that has access to such type of data (e.g., because
@@ -483,9 +573,15 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
                   process such data)
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.LocalAccessMassSurveillance.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -500,10 +596,12 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="ReasonLocalAccessMassSurveillance"
-            rules={{ required: "Please provide a reason." }}
+            rules={{ required: 'Please provide a reason.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonLocalAccessMassSurveillance}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonLocalAccessMassSurveillance}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -519,7 +617,7 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="LocalRoutinelyMonitor"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{fieldPropsMapping.LocalRoutinelyMonitor}</FormLabel>
@@ -531,9 +629,15 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
                   economic espionage by the local government)
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.LocalRoutinelyMonitor.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -548,12 +652,18 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="ReasonLocalRoutinelyMonitor"
-            rules={{ required: "Please provide a reason." }}
+            rules={{ required: 'Please provide a reason.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonLocalRoutinelyMonitor}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonLocalRoutinelyMonitor}
+                </FormLabel>
                 <FormControl>
-                  <Textarea {...field} autoComplete="off" placeholder="Provide details" />
+                  <Textarea
+                    {...field}
+                    autoComplete="off"
+                    placeholder="Provide details"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -563,7 +673,7 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="PassMassSurveillance"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{fieldPropsMapping.PassMassSurveillance}</FormLabel>
@@ -572,9 +682,15 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
                   engage in mass surveillance for the local authorities
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.PassMassSurveillance.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -589,10 +705,12 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="ReasonPassMassSurveillance"
-            rules={{ required: "Please provide a reason." }}
+            rules={{ required: 'Please provide a reason.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonPassMassSurveillance}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonPassMassSurveillance}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -610,10 +728,12 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="PassMassSurveillanceConnection"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.PassMassSurveillanceConnection}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.PassMassSurveillanceConnection}
+                </FormLabel>
                 <FormDescription>
                   Based on the above and the legal analysis, does the importer
                   have reason to believe that during the assessment period it
@@ -621,9 +741,15 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
                   with such mass surveillance?
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.PassMassSurveillanceConnection.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -638,10 +764,12 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="ReasonPassMassSurveillanceConnection"
-            rules={{ required: "Please provide a reason." }}
+            rules={{ required: 'Please provide a reason.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonPassMassSurveillanceConnection}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonPassMassSurveillanceConnection}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -674,7 +802,7 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="ImporterObligation"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{fieldPropsMapping.ImporterObligation}</FormLabel>
@@ -683,9 +811,15 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
                   obligation with regard to the type of data at issue
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.ImporterObligation.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -700,10 +834,12 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="ReasonImporterObligation"
-            rules={{ required: "Please provide a reason." }}
+            rules={{ required: 'Please provide a reason.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonImporterObligation}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonImporterObligation}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -719,7 +855,7 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="LocalSelfReporting"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{fieldPropsMapping.LocalSelfReporting}</FormLabel>
@@ -731,9 +867,15 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
                   are not in-scope)
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.LocalSelfReporting.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -748,10 +890,12 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="ReasonLocalSelfReporting"
-            rules={{ required: "Please provide a reason." }}
+            rules={{ required: 'Please provide a reason.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonLocalSelfReporting}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonLocalSelfReporting}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -767,7 +911,7 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="PastSelfReporting"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{fieldPropsMapping.PastSelfReporting}</FormLabel>
@@ -776,9 +920,15 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
                   of this type to the authorities
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.PastSelfReporting.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -793,10 +943,12 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="ReasonPastSelfReporting"
-            rules={{ required: "Please provide a reason." }}
+            rules={{ required: 'Please provide a reason.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonPastSelfReporting}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonPastSelfReporting}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -814,19 +966,27 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="AssessmentProduceReport"
-            rules={{ required: "Please select an option." }}
+            rules={{ required: 'Please select an option.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.AssessmentProduceReport}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.AssessmentProduceReport}
+                </FormLabel>
                 <FormDescription>
                   Based on the above and the legal analysis, does the importer
                   have reason to believe that it will during the assessment
                   period have to produce the data at issue as described above?
                 </FormDescription>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} value={field.value}>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
                     {config.AssessmentProduceReport.map((opt) => (
-                      <div key={opt.value} className="flex items-center space-x-2">
+                      <div
+                        key={opt.value}
+                        className="flex items-center space-x-2"
+                      >
                         <RadioGroupItem value={opt.value} id={opt.value} />
                         <label htmlFor={opt.value}>{opt.label}</label>
                       </div>
@@ -841,10 +1001,12 @@ export default function RiskStep({ problematicLawfulAccessValues, control }: Ris
           <FormField
             control={control}
             name="ReasonAssessmentProduceReport"
-            rules={{ required: "Please provide a reason." }}
+            rules={{ required: 'Please provide a reason.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ReasonAssessmentProduceReport}</FormLabel>
+                <FormLabel>
+                  {fieldPropsMapping.ReasonAssessmentProduceReport}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}

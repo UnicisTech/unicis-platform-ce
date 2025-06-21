@@ -27,9 +27,12 @@ const Members = ({ team }: { team: Team }) => {
   const { canAccess } = useCanAccess();
   const [visible, setVisible] = useState(false);
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
-  const [confirmationDialogVisible, setConfirmationDialogVisible] = useState(false);
+  const [confirmationDialogVisible, setConfirmationDialogVisible] =
+    useState(false);
 
-  const { isLoading, isError, members, mutateTeamMembers } = useTeamMembers(team.slug);
+  const { isLoading, isError, members, mutateTeamMembers } = useTeamMembers(
+    team.slug
+  );
 
   if (isLoading) return <Loading />;
   if (isError) return <Error message={isError.message} />;
@@ -39,10 +42,13 @@ const Members = ({ team }: { team: Team }) => {
     if (!member) return;
     const sp = new URLSearchParams({ memberId: member.userId });
 
-    const response = await fetch(`/api/teams/${team.slug}/members?${sp.toString()}`, {
-      method: 'DELETE',
-      headers: defaultHeaders,
-    });
+    const response = await fetch(
+      `/api/teams/${team.slug}/members?${sp.toString()}`,
+      {
+        method: 'DELETE',
+        headers: defaultHeaders,
+      }
+    );
 
     const json = (await response.json()) as ApiResponse;
 
@@ -64,8 +70,12 @@ const Members = ({ team }: { team: Team }) => {
     <div className="space-y-3">
       <div className="flex justify-between items-center">
         <div className="space-y-3">
-          <h2 className="text-xl font-medium leading-none tracking-tight">Members</h2>
-          <p className="text-sm text-muted-foreground">Team members and their roles.</p>
+          <h2 className="text-xl font-medium leading-none tracking-tight">
+            Members
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            Team members and their roles.
+          </p>
         </div>
         <Button onClick={() => setVisible(!visible)}>{t('add-member')}</Button>
       </div>
@@ -76,7 +86,9 @@ const Members = ({ team }: { team: Team }) => {
             <TableHead>{t('name')}</TableHead>
             <TableHead>{t('email')}</TableHead>
             <TableHead>{t('role')}</TableHead>
-            {canAccess('team_member', ['delete']) && <TableHead>{t('action')}</TableHead>}
+            {canAccess('team_member', ['delete']) && (
+              <TableHead>{t('action')}</TableHead>
+            )}
           </TableRow>
         </TableHeader>
         <TableBody>

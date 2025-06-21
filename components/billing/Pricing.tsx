@@ -1,9 +1,9 @@
-import React from "react";
-import { useTranslation } from "next-i18next";
-import { SubscriptionStatus, Plan } from "@prisma/client";
-import type { TeamWithSubscription } from "types";
-import { Button } from "@/components/shadcn/ui/button";
-import { Check } from "lucide-react";
+import React from 'react';
+import { useTranslation } from 'next-i18next';
+import { SubscriptionStatus, Plan } from '@prisma/client';
+import type { TeamWithSubscription } from 'types';
+import { Button } from '@/components/shadcn/ui/button';
+import { Check } from 'lucide-react';
 
 interface PricingProps {
   team: TeamWithSubscription;
@@ -11,12 +11,8 @@ interface PricingProps {
   onPlanSelect: (planId: string) => void;
 }
 
-const Pricing: React.FC<PricingProps> = ({
-  team,
-  plans,
-  onPlanSelect,
-}) => {
-  const { t } = useTranslation("common");
+const Pricing: React.FC<PricingProps> = ({ team, plans, onPlanSelect }) => {
+  const { t } = useTranslation('common');
   const currentStatus = team.subscription?.status;
   const currentPlan =
     currentStatus === SubscriptionStatus.ACTIVE
@@ -37,16 +33,14 @@ const Pricing: React.FC<PricingProps> = ({
                   {plan.name}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  {t("users")}: {plan.users}
+                  {t('users')}: {plan.users}
                 </p>
               </div>
               <div className="flex flex-col items-center space-y-2">
                 <h3 className="text-2xl font-bold text-foreground">
                   {plan.price}
                 </h3>
-                <span className="text-muted-foreground">
-                  {plan.subprice}
-                </span>
+                <span className="text-muted-foreground">{plan.subprice}</span>
               </div>
             </div>
 
@@ -57,7 +51,7 @@ const Pricing: React.FC<PricingProps> = ({
                   className="w-full rounded-full"
                   disabled
                 >
-                  {t("current")}
+                  {t('current')}
                 </Button>
               ) : (
                 <Button
@@ -68,7 +62,7 @@ const Pricing: React.FC<PricingProps> = ({
                   }}
                   disabled={team.subscription?.plan === plan.id}
                 >
-                  {t("order")}
+                  {t('order')}
                 </Button>
               )}
             </div>

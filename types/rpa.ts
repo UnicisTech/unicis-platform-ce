@@ -43,7 +43,7 @@ export type RpaProcedureInterface = [
     transferredOutside: string;
     rightsRestricted: string;
     piaNeeded: string;
-  }
+  },
 ];
 
 export interface RpaConfig {

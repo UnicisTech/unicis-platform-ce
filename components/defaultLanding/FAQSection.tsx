@@ -21,7 +21,9 @@ const FAQSection = () => {
               return (
                 <DaisyCard key={index} className="border-none">
                   <DaisyCard.Body className="items-left dark:border-gray-200 border border-gray-300">
-                    <DaisyCard.Title tag="h2">Q. {faq.question}</DaisyCard.Title>
+                    <DaisyCard.Title tag="h2">
+                      Q. {faq.question}
+                    </DaisyCard.Title>
                     <p>A. {faq.answer}</p>
                   </DaisyCard.Body>
                 </DaisyCard>

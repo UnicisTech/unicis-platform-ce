@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSession } from 'next-auth/react';
-import {
-  Bars3Icon,
-} from '@heroicons/react/24/outline';
+import { Bars3Icon } from '@heroicons/react/24/outline';
 import AccountDropdown from './AccountDropdown';
 
 interface HeaderProps {

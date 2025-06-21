@@ -27,21 +27,29 @@ ChartJS.register(
   Legend
 );
 
-const getMaturityLevels = (statuses: { [key: string]: string }, ISO: string) => {
+const getMaturityLevels = (
+  statuses: { [key: string]: string },
+  ISO: string
+) => {
   const sections = getSections(ISO);
-  const data = sections.map(({ label }) => label).map((label) => {
-    const totalControls = controls[ISO].filter(
-      ({ Section }) => Section === label
-    ).map(({ Control }) => Control);
-    const totalControlsValue = totalControls.reduce(
-      (acc, control) =>
-        (statusOptions.find(({ label }) => label === statuses[control])?.value || 0) + acc,
-      0
-    );
-    return totalControlsValue / totalControls.length;
-  });
+  const data = sections
+    .map(({ label }) => label)
+    .map((label) => {
+      const totalControls = controls[ISO].filter(
+        ({ Section }) => Section === label
+      ).map(({ Control }) => Control);
+      const totalControlsValue = totalControls.reduce(
+        (acc, control) =>
+          (statusOptions.find(({ label }) => label === statuses[control])
+            ?.value || 0) + acc,
+        0
+      );
+      return totalControlsValue / totalControls.length;
+    });
 
-  return ISO === '2013' ? mergePoints(data.map(Math.round)) : data.map(Math.round);
+  return ISO === '2013'
+    ? mergePoints(data.map(Math.round))
+    : data.map(Math.round);
 };
 
 const RadarChart = ({

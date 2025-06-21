@@ -13,7 +13,7 @@ import toast from 'react-hot-toast';
 import type { ApiResponse, NextPageWithLayout } from 'types';
 import { signOut } from 'next-auth/react';
 import { Button } from '@/components/shadcn/ui/button';
-import { Loader2 } from "lucide-react"
+import { Loader2 } from 'lucide-react';
 
 const AcceptTeamInvitation: NextPageWithLayout = () => {
   const { status, data } = useSession();
@@ -41,14 +41,14 @@ const AcceptTeamInvitation: NextPageWithLayout = () => {
           body: JSON.stringify({ inviteToken: invitation.token }),
         }
       );
-  
+
       const json = (await response.json()) as ApiResponse;
-  
+
       if (!response.ok) {
         toast.error(json.error.message);
         return;
       }
-  
+
       router.push(`/teams`);
     } catch (error) {
       toast.error(t('invitation-error-accepting'));
@@ -99,11 +99,7 @@ const AcceptTeamInvitation: NextPageWithLayout = () => {
           {status === 'authenticated' && emailMatch && (
             <>
               <h3 className="text-center">{t('accept-invite')}</h3>
-              <Button
-                onClick={acceptInvitation}
-                color="primary"
-                size="full"
-              >
+              <Button onClick={acceptInvitation} color="primary" size="full">
                 {isAccepting && <Loader2 className="animate-spin" />}
                 {t('accept-invitation')}
               </Button>

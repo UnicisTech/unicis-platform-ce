@@ -21,7 +21,9 @@ const Alert = ({
   className = '',
 }: CustomAlertProps) => {
   return (
-    <div className={`alert ${statusMap[status]} rounded px-4 py-3 ${className}`}>
+    <div
+      className={`alert ${statusMap[status]} rounded px-4 py-3 ${className}`}
+    >
       {children}
     </div>
   );

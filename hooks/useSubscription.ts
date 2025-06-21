@@ -11,7 +11,15 @@ const params = {
   },
   ULTIMATE: {
     maxUsers: 10000000,
-    avaliableISO: ['default', '2013', '2022', 'nistcsfv2', 'uenis2', 'gdpr', 'cisv81'],
+    avaliableISO: [
+      'default',
+      '2013',
+      '2022',
+      'nistcsfv2',
+      'uenis2',
+      'gdpr',
+      'cisv81',
+    ],
   },
 };
 

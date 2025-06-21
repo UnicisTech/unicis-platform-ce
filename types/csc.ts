@@ -41,7 +41,14 @@ export type Section = {
   value: string;
 };
 
-export type ISO = 'default' | '2013' | '2022' | 'nistcsfv2' | 'eunis2' | 'gdpr' | 'cisv81';
+export type ISO =
+  | 'default'
+  | '2013'
+  | '2022'
+  | 'nistcsfv2'
+  | 'eunis2'
+  | 'gdpr'
+  | 'cisv81';
 
 type CscStatusesPropMap = {
   default: 'csc_statuses';

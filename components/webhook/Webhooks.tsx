@@ -19,10 +19,15 @@ const Webhooks = ({ team }: { team: Team }) => {
   const [createWebhookVisible, setCreateWebhookVisible] = useState(false);
   const [updateWebhookVisible, setUpdateWebhookVisible] = useState(false);
   const [endpoint, setEndpoint] = useState<EndpointOut | null>(null);
-  const [confirmationDialogVisible, setConfirmationDialogVisible] = useState(false);
-  const [selectedWebhook, setSelectedWebhook] = useState<EndpointOut | null>(null);
+  const [confirmationDialogVisible, setConfirmationDialogVisible] =
+    useState(false);
+  const [selectedWebhook, setSelectedWebhook] = useState<EndpointOut | null>(
+    null
+  );
 
-  const { isLoading, isError, webhooks, mutateWebhooks } = useWebhooks(team.slug);
+  const { isLoading, isError, webhooks, mutateWebhooks } = useWebhooks(
+    team.slug
+  );
 
   const deleteWebhook = async (webhook: EndpointOut | null) => {
     if (!webhook) return;
@@ -53,13 +58,15 @@ const Webhooks = ({ team }: { team: Team }) => {
       <div className="space-y-3">
         <div className="flex justify-between items-center">
           <div className="space-y-3">
-            <h2 className="text-xl font-medium leading-none tracking-tight">Webhooks</h2>
+            <h2 className="text-xl font-medium leading-none tracking-tight">
+              Webhooks
+            </h2>
             <p className="text-sm text-muted-foreground">
               Webhooks are used to send notifications to your external apps.
             </p>
           </div>
           <Button
-            color='primary'
+            color="primary"
             onClick={() => setCreateWebhookVisible(!createWebhookVisible)}
           >
             {t('add-webhook')}

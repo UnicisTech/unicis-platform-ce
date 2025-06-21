@@ -26,9 +26,7 @@ const Title = ({
   children: ReactNode;
   tag?: ElementType;
   className?: string;
-}) => (
-  <Tag className={`card-title font-bold ${className}`}>{children}</Tag>
-);
+}) => <Tag className={`card-title font-bold ${className}`}>{children}</Tag>;
 
 const Body = ({
   children,

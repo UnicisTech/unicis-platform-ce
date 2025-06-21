@@ -57,15 +57,15 @@ const TasksAnalysis = ({
             marginBottom: '10px',
           }}
         >
-            <Card className="flex-1 h-full flex flex-col p-2 mr-4 justify-between">
-              <PieChart
-                page_name={`task`}
-                statuses={statuses}
-                barColor={barColors}
-                labels={labels}
-              />
-            </Card>
-            <TaskStatusesDetail tasks={tasks} statusCounts={statusCounts} />
+          <Card className="flex-1 h-full flex flex-col p-2 mr-4 justify-between">
+            <PieChart
+              page_name={`task`}
+              statuses={statuses}
+              barColor={barColors}
+              labels={labels}
+            />
+          </Card>
+          <TaskStatusesDetail tasks={tasks} statusCounts={statusCounts} />
         </div>
       </div>
     </>

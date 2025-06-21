@@ -26,7 +26,9 @@ const PerPageSelector = ({
 }) => {
   return (
     <div className="w-full max-w-[150px] mx-1">
-      <Label htmlFor="per-page-select" className="sr-only">Per Page</Label>
+      <Label htmlFor="per-page-select" className="sr-only">
+        Per Page
+      </Label>
       <Select
         defaultValue={String(defaultValue.value)}
         onValueChange={(val) => setPerPage(Number(val))}

@@ -6,7 +6,7 @@ import type {
   TaskProperties,
   AuditLog,
   Diff,
-  Option
+  Option,
 } from 'types';
 import {
   fieldPropsMapping,

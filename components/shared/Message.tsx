@@ -21,7 +21,9 @@ const Message = ({
   isBold?: boolean;
 }) => {
   return (
-    <div className={`rounded-xl p-4 my-2 text-sm shadow-xs ${appearanceMap[appearance]}`}>
+    <div
+      className={`rounded-xl p-4 my-2 text-sm shadow-xs ${appearanceMap[appearance]}`}
+    >
       <div className="flex flex-col">
         {title && <span className="font-semibold">{title}</span>}
         <span className={isBold ? 'font-bold' : ''}>{text}</span>

@@ -1,6 +1,6 @@
-import * as React from "react";
-import { useTranslation } from "next-i18next";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import * as React from 'react';
+import { useTranslation } from 'next-i18next';
+import { useForm, type SubmitHandler } from 'react-hook-form';
 import {
   Form,
   FormField,
@@ -8,9 +8,9 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from "@/components/shadcn/ui/form";
-import { Input } from "@/components/shadcn/ui/input";
-import { Button } from "@/components/shadcn/ui/button";
+} from '@/components/shadcn/ui/form';
+import { Input } from '@/components/shadcn/ui/input';
+import { Button } from '@/components/shadcn/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -18,10 +18,10 @@ import {
   DialogTitle,
   DialogFooter,
   DialogClose,
-} from "@/components/shadcn/ui/dialog";
-import { defaultHeaders } from "@/lib/common";
-import toast from "react-hot-toast";
-import type { ApiResponse } from "types";
+} from '@/components/shadcn/ui/dialog';
+import { defaultHeaders } from '@/lib/common';
+import toast from 'react-hot-toast';
+import type { ApiResponse } from 'types';
 
 interface IapCategoryFormData {
   name: string;
@@ -40,13 +40,13 @@ export default function CreateIapCategory({
   setVisible,
   mutate,
 }: CreateIapCategoryProps) {
-  const { t } = useTranslation("common");
-  const form = useForm<IapCategoryFormData>({ defaultValues: { name: "" } });
+  const { t } = useTranslation('common');
+  const form = useForm<IapCategoryFormData>({ defaultValues: { name: '' } });
 
   const onSubmit: SubmitHandler<IapCategoryFormData> = async (data) => {
     try {
       const response = await fetch(`/api/teams/${teamSlug}/iap/category`, {
-        method: "POST",
+        method: 'POST',
         headers: defaultHeaders,
         body: JSON.stringify(data),
       });
@@ -57,7 +57,7 @@ export default function CreateIapCategory({
         return;
       }
 
-      toast.success(t("iap-category-saved"));
+      toast.success(t('iap-category-saved'));
       await mutate();
       setVisible(false);
       form.reset();
@@ -70,7 +70,7 @@ export default function CreateIapCategory({
     <Dialog open={visible} onOpenChange={setVisible}>
       <DialogContent className="max-w-md p-6">
         <DialogHeader>
-          <DialogTitle>{t("create-category-title")}</DialogTitle>
+          <DialogTitle>{t('create-category-title')}</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
@@ -79,11 +79,12 @@ export default function CreateIapCategory({
               control={form.control}
               name="name"
               rules={{
-                required: t("category-name-required") || "Category name is required.",
+                required:
+                  t('category-name-required') || 'Category name is required.',
               }}
               render={({ field, fieldState }) => (
                 <FormItem>
-                  <FormLabel>{t("category-name")}</FormLabel>
+                  <FormLabel>{t('category-name')}</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -96,12 +97,18 @@ export default function CreateIapCategory({
 
             <DialogFooter className="flex justify-end space-x-2">
               <DialogClose asChild>
-                <Button variant="outline" disabled={form.formState.isSubmitting} onClick={() => setVisible(false)}>
-                  {t("close")}
+                <Button
+                  variant="outline"
+                  disabled={form.formState.isSubmitting}
+                  onClick={() => setVisible(false)}
+                >
+                  {t('close')}
                 </Button>
               </DialogClose>
               <Button type="submit" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? t("saving") || "Saving..." : t("save")}
+                {form.formState.isSubmitting
+                  ? t('saving') || 'Saving...'
+                  : t('save')}
               </Button>
             </DialogFooter>
           </form>

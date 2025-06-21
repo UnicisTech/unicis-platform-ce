@@ -1,6 +1,6 @@
-import app from "@/lib/app";
-import { useTranslation } from "next-i18next";
-import Image from "next/image";
+import app from '@/lib/app';
+import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ export default function AuthLayout({
   heading,
   description,
 }: AuthLayoutProps) {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-20 lg:px-8">
@@ -31,14 +31,10 @@ export default function AuthLayout({
           </h2>
         )}
         {description && (
-          <p className="mt-2 text-muted-foreground">
-            {t(description)}
-          </p>
+          <p className="mt-2 text-muted-foreground">{t(description)}</p>
         )}
       </div>
-      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md">
-        {children}
-      </div>
+      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md">{children}</div>
     </div>
   );
 }

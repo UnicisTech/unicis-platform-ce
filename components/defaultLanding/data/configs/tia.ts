@@ -1,4 +1,4 @@
-import type { Option } from "types";
+import type { Option } from 'types';
 
 type Options = {
   [key: string]: Option[];

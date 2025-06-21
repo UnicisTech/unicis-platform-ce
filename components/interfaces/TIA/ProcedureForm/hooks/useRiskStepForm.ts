@@ -1,10 +1,8 @@
-import { useForm } from "react-hook-form";
-import type { TiaProcedureInterface } from "types";
-import type { RiskStepValues } from "../types";
+import { useForm } from 'react-hook-form';
+import type { TiaProcedureInterface } from 'types';
+import type { RiskStepValues } from '../types';
 
-export default function useRiskStepForm(
-  procedure: TiaProcedureInterface
-) {
+export default function useRiskStepForm(procedure: TiaProcedureInterface) {
   const initial = procedure[2] || {};
   return useForm<RiskStepValues>({
     defaultValues: {
@@ -27,13 +25,16 @@ export default function useRiskStepForm(
       LocalMassSurveillance: initial.LocalMassSurveillance ?? '3',
       ReasonLocalMassSurveillance: initial.ReasonLocalMassSurveillance ?? '',
       LocalAccessMassSurveillance: initial.LocalAccessMassSurveillance ?? '1',
-      ReasonLocalAccessMassSurveillance: initial.ReasonLocalAccessMassSurveillance ?? '',
+      ReasonLocalAccessMassSurveillance:
+        initial.ReasonLocalAccessMassSurveillance ?? '',
       LocalRoutinelyMonitor: initial.LocalRoutinelyMonitor ?? '2',
       ReasonLocalRoutinelyMonitor: initial.ReasonLocalRoutinelyMonitor ?? '',
       PassMassSurveillance: initial.PassMassSurveillance ?? '4',
       ReasonPassMassSurveillance: initial.ReasonPassMassSurveillance ?? '',
-      PassMassSurveillanceConnection: initial.PassMassSurveillanceConnection ?? '4',
-      ReasonPassMassSurveillanceConnection: initial.ReasonPassMassSurveillanceConnection ?? '',
+      PassMassSurveillanceConnection:
+        initial.PassMassSurveillanceConnection ?? '4',
+      ReasonPassMassSurveillanceConnection:
+        initial.ReasonPassMassSurveillanceConnection ?? '',
       ImporterObligation: initial.ImporterObligation ?? '2',
       ReasonImporterObligation: initial.ReasonImporterObligation ?? '',
       LocalSelfReporting: initial.LocalSelfReporting ?? '2',
@@ -41,7 +42,8 @@ export default function useRiskStepForm(
       PastSelfReporting: initial.PastSelfReporting ?? '4',
       ReasonPastSelfReporting: initial.ReasonPastSelfReporting ?? '',
       AssessmentProduceReport: initial.AssessmentProduceReport ?? '4',
-      ReasonAssessmentProduceReport: initial.ReasonAssessmentProduceReport ?? '',
+      ReasonAssessmentProduceReport:
+        initial.ReasonAssessmentProduceReport ?? '',
     },
     mode: 'onChange',
   });

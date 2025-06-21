@@ -48,7 +48,9 @@ const RpaTable = ({
               <th className="px-1.5 py-1.5 text-left">{t('status')}</th>
               <th className="px-1.5 py-1.5 text-left">{t('rpa-dpo')}</th>
               <th className="px-1.5 py-1.5 text-left">{t('rpa-review')}</th>
-              <th className="px-1.5 py-1.5 text-left">{t('rpa-data-tranfer')}</th>
+              <th className="px-1.5 py-1.5 text-left">
+                {t('rpa-data-tranfer')}
+              </th>
               <th className="px-1.5 py-1.5 text-left">{t('rpa-category')}</th>
               {canAccess('task', ['update']) && (
                 <th className="px-1.5 py-1.5 text-left">{t('actions')}</th>
@@ -81,7 +83,13 @@ const RpaTable = ({
                   </Badge>
                 </td>
                 <td className="px-1.5 py-1.5">
-                  <Badge variant={task.properties.rpa_procedure[3].datatransfer ? 'default' : 'destructive'}>
+                  <Badge
+                    variant={
+                      task.properties.rpa_procedure[3].datatransfer
+                        ? 'default'
+                        : 'destructive'
+                    }
+                  >
                     {task.properties.rpa_procedure[3].datatransfer
                       ? 'Enabled'
                       : 'Disabled'}
@@ -89,9 +97,13 @@ const RpaTable = ({
                 </td>
                 <td className="px-1.5 py-1.5">
                   <div className="flex flex-col gap-1">
-                    {task.properties.rpa_procedure[1].specialcategory.map((cat, i) => (
-                      <Badge key={i} variant="secondary">{cat.label}</Badge>
-                    ))}
+                    {task.properties.rpa_procedure[1].specialcategory.map(
+                      (cat, i) => (
+                        <Badge key={i} variant="secondary">
+                          {cat.label}
+                        </Badge>
+                      )
+                    )}
                   </div>
                 </td>
                 {canAccess('task', ['update']) && (

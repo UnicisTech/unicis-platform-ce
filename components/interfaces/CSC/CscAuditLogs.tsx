@@ -42,7 +42,9 @@ const CscAuditLogs = ({ task }: { task: Task }) => {
                 <TableRow key={index}>
                   <TableCell>{log.actor?.name || '—'}</TableCell>
                   <TableCell>{log.event}</TableCell>
-                  <TableCell>{new Date(log.date).toLocaleDateString()}</TableCell>
+                  <TableCell>
+                    {new Date(log.date).toLocaleDateString()}
+                  </TableCell>
                   <TableCell className="text-muted-foreground">
                     {log.diff?.prevValue?.toString() || '—'}
                   </TableCell>
@@ -63,7 +65,9 @@ const CscAuditLogs = ({ task }: { task: Task }) => {
           )}
         </>
       ) : (
-        <p className="text-sm text-muted-foreground">No audit logs available.</p>
+        <p className="text-sm text-muted-foreground">
+          No audit logs available.
+        </p>
       )}
     </div>
   );

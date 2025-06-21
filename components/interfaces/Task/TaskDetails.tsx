@@ -12,11 +12,28 @@ import { z } from 'zod';
 import { format, parseISO } from 'date-fns';
 
 import { Calendar } from '@/components/shadcn/ui/calendar';
-import { Popover, PopoverTrigger, PopoverContent } from '@/components/shadcn/ui/popover';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from '@/components/shadcn/ui/popover';
 import { Button } from '@/components/shadcn/ui/button';
 import { Input } from '@/components/shadcn/ui/input';
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/shadcn/ui/select';
-import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/shadcn/ui/form';
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from '@/components/shadcn/ui/select';
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from '@/components/shadcn/ui/form';
 import statuses from '@/components/defaultLanding/data/statuses.json';
 import useTask from 'hooks/useTask';
 import useCanAccess from 'hooks/useCanAccess';
@@ -161,7 +178,9 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
                         mode="single"
-                        selected={field.value ? parseISO(field.value) : undefined}
+                        selected={
+                          field.value ? parseISO(field.value) : undefined
+                        }
                         onSelect={(date) => {
                           if (date) {
                             checkFormChanges();

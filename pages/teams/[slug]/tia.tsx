@@ -13,7 +13,7 @@ import type { TaskWithTiaProcedure, TaskProperties } from 'types';
 import {
   TiaTable,
   DeleteProcedure,
-  CreateProcedure
+  CreateProcedure,
 } from '@/components/interfaces/TIA';
 import { PerPageSelector } from '@/components/shared';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
@@ -100,12 +100,14 @@ const TiaDashboard: NextPageWithLayout<
         </div>
       </div>
       <>
-        {isCreateOpen && <CreateProcedure
-          open={isCreateOpen}
-          onOpenChange={setIsCreateOpen}
-          tasks={tasks}
-          mutateTasks={mutateTasks}
-        />}
+        {isCreateOpen && (
+          <CreateProcedure
+            open={isCreateOpen}
+            onOpenChange={setIsCreateOpen}
+            tasks={tasks}
+            mutateTasks={mutateTasks}
+          />
+        )}
       </>
       {tasksWithProcedures.length === 0 ? (
         <EmptyState title={t('tia-dashboard')} description="No records" />

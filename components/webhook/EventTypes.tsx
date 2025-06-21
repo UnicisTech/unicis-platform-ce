@@ -1,22 +1,22 @@
-import { Checkbox } from "@/components/shadcn/ui/checkbox";
-import { Label } from "@/components/shadcn/ui/label";
-import type { WebookFormSchema } from "types";
+import { Checkbox } from '@/components/shadcn/ui/checkbox';
+import { Label } from '@/components/shadcn/ui/label';
+import type { WebookFormSchema } from 'types';
 
 interface Props {
-  values: WebookFormSchema["eventTypes"];
+  values: WebookFormSchema['eventTypes'];
   error?: string | string[];
   setFieldValue: (field: string, value: any) => void;
 }
 
 export const eventTypes = [
-  "member.created",
-  "member.removed",
-  "invitation.created",
-  "invitation.removed",
-  "task.created",
-  "task.updated",
-  "task.commented",
-  "task.deleted",
+  'member.created',
+  'member.removed',
+  'invitation.created',
+  'invitation.removed',
+  'task.created',
+  'task.updated',
+  'task.commented',
+  'task.deleted',
 ];
 
 const EventTypes = ({ values, error, setFieldValue }: Props) => {
@@ -25,7 +25,7 @@ const EventTypes = ({ values, error, setFieldValue }: Props) => {
       ? [...values, eventType]
       : values.filter((val) => val !== eventType);
 
-    setFieldValue("eventTypes", updated);
+    setFieldValue('eventTypes', updated);
   };
 
   return (
@@ -44,7 +44,7 @@ const EventTypes = ({ values, error, setFieldValue }: Props) => {
           </Label>
         </div>
       ))}
-      {error && typeof error === "string" && (
+      {error && typeof error === 'string' && (
         <div className="col-span-2 text-sm text-destructive mt-1">{error}</div>
       )}
     </div>

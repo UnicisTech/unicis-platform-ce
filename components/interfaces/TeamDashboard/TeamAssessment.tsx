@@ -1,12 +1,17 @@
-import { useTranslation } from "next-i18next";
-import { Prisma } from "@prisma/client";
-import useTeamTasks from "hooks/useTeamTasks";
-import { capitalizeCountryName } from "@/lib/utils";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/shadcn/ui/card";
-import { Badge } from "@/components/shadcn/ui/badge";
+import { useTranslation } from 'next-i18next';
+import { Prisma } from '@prisma/client';
+import useTeamTasks from 'hooks/useTeamTasks';
+import { capitalizeCountryName } from '@/lib/utils';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/shadcn/ui/card';
+import { Badge } from '@/components/shadcn/ui/badge';
 
 const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
-  const { t } = useTranslation("translation");
+  const { t } = useTranslation('translation');
   const { tasks } = useTeamTasks(slug);
 
   const countriesSet = new Set<string>();
@@ -28,7 +33,7 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
       });
 
       const isAuthorized = procedures.some(
-        (proc) => proc.TransferMechanism === "yes"
+        (proc) => proc.TransferMechanism === 'yes'
       );
 
       isAuthorized ? perAuthorization++ : notPermitAuthorization++;
@@ -41,7 +46,7 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
     <Card className="w-full shadow-sm">
       <CardHeader>
         <CardTitle className="text-center text-lg font-semibold">
-          {t("Transfer Impact Assessment")}
+          {t('Transfer Impact Assessment')}
         </CardTitle>
       </CardHeader>
 

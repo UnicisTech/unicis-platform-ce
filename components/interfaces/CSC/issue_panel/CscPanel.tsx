@@ -28,9 +28,12 @@ const CscPanel = ({
   statuses: { [key: string]: string };
   ISO: ISO;
   setStatuses: Dispatch<
-    SetStateAction<{
-      [key: string]: string;
-    } | undefined>
+    SetStateAction<
+      | {
+          [key: string]: string;
+        }
+      | undefined
+    >
   >;
   mutateTask: () => Promise<void>;
 }) => {

@@ -1,32 +1,32 @@
-import { useRouter } from 'next/router'
-import { Badge } from '@/components/shadcn/ui/badge'
-import { Button } from '@/components/shadcn/ui/button'
+import { useRouter } from 'next/router';
+import { Badge } from '@/components/shadcn/ui/badge';
+import { Button } from '@/components/shadcn/ui/button';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/shadcn/ui/card'
-import { Category } from '@prisma/client'
-import { TeamCourseWithProgress } from 'types'
-import ProgressBadge from '../shared/ProgressBadge'
-import { cn } from '@/components/shadcn/lib/utils'
+} from '@/components/shadcn/ui/card';
+import { Category } from '@prisma/client';
+import { TeamCourseWithProgress } from 'types';
+import ProgressBadge from '../shared/ProgressBadge';
+import { cn } from '@/components/shadcn/lib/utils';
 
 const CourseCard = ({
   teamCourse,
   categories,
 }: {
-  teamCourse: TeamCourseWithProgress
-  categories: Category[]
+  teamCourse: TeamCourseWithProgress;
+  categories: Category[];
 }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   const openCourse = () => {
-    router.push(`${router.asPath}/${teamCourse.id}`)
-  }
+    router.push(`${router.asPath}/${teamCourse.id}`);
+  };
 
-  const course = teamCourse.course
+  const course = teamCourse.course;
 
   return (
     <Card
@@ -65,15 +65,15 @@ const CourseCard = ({
       <CardFooter className="justify-end">
         <Button
           onClick={(e) => {
-            e.stopPropagation()
-            openCourse()
+            e.stopPropagation();
+            openCourse();
           }}
         >
           Open
         </Button>
       </CardFooter>
     </Card>
-  )
-}
+  );
+};
 
-export default CourseCard
+export default CourseCard;

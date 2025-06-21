@@ -20,7 +20,9 @@ const RpaAuditLogs = ({ task }: { task: Task }) => {
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(auditLogs.length / LOGS_PER_PAGE);
   const start = (page - 1) * LOGS_PER_PAGE;
-  const paginatedLogs = [...auditLogs].reverse().slice(start, start + LOGS_PER_PAGE);
+  const paginatedLogs = [...auditLogs]
+    .reverse()
+    .slice(start, start + LOGS_PER_PAGE);
 
   return (
     <div className="space-y-4">
@@ -41,7 +43,9 @@ const RpaAuditLogs = ({ task }: { task: Task }) => {
                 <TableRow key={index}>
                   <TableCell>{log.actor?.name || '—'}</TableCell>
                   <TableCell>{log.event}</TableCell>
-                  <TableCell>{new Date(log.date).toLocaleDateString()}</TableCell>
+                  <TableCell>
+                    {new Date(log.date).toLocaleDateString()}
+                  </TableCell>
                   <TableCell className="text-muted-foreground">
                     {log.diff?.prevValue?.toString() || '—'}
                   </TableCell>
@@ -62,7 +66,9 @@ const RpaAuditLogs = ({ task }: { task: Task }) => {
           )}
         </>
       ) : (
-        <p className="text-sm text-muted-foreground">No audit logs available.</p>
+        <p className="text-sm text-muted-foreground">
+          No audit logs available.
+        </p>
       )}
     </div>
   );

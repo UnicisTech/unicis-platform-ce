@@ -1,11 +1,18 @@
-import * as React from "react";
-import { useTranslation } from "next-i18next";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/shadcn/ui/dialog";
-import { Button } from "@/components/shadcn/ui/button";
-import type { TeamCourseWithProgress, TeamMemberWithUser } from "types";
-import CompletionResultsChart from "./CompletionResultsChart";
-import ProgressBadge from "../shared/ProgressBadge";
-import { findMemberProgressInTeamCourse } from "../services/helpers";
+import * as React from 'react';
+import { useTranslation } from 'next-i18next';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogClose,
+} from '@/components/shadcn/ui/dialog';
+import { Button } from '@/components/shadcn/ui/button';
+import type { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
+import CompletionResultsChart from './CompletionResultsChart';
+import ProgressBadge from '../shared/ProgressBadge';
+import { findMemberProgressInTeamCourse } from '../services/helpers';
 
 const getMemberProgress = (
   teamCourse: TeamCourseWithProgress,
@@ -26,7 +33,7 @@ export default function CompletionResults({
   visible,
   setVisible,
 }: CompletionResultsProps) {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
 
   const todoCount = members.filter(
     ({ id }) => getMemberProgress(teamCourse, id) === 0
@@ -44,7 +51,7 @@ export default function CompletionResults({
       <DialogContent className="w-[90vw] max-w-5xl max-h-[90vh] overflow-y-auto p-6">
         <DialogHeader>
           <DialogTitle>
-            {t("course-completion-results", "Course Completion Results")} -{" "}
+            {t('course-completion-results', 'Course Completion Results')} -{' '}
             {teamCourse.course.name}
           </DialogTitle>
         </DialogHeader>
@@ -61,8 +68,10 @@ export default function CompletionResults({
             <table className="w-full text-sm border-collapse">
               <thead className="bg-muted">
                 <tr>
-                  <th className="px-4 py-2 text-left">{t("user", "User")}</th>
-                  <th className="px-4 py-2 text-left">{t("status", "Status")}</th>
+                  <th className="px-4 py-2 text-left">{t('user', 'User')}</th>
+                  <th className="px-4 py-2 text-left">
+                    {t('status', 'Status')}
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -84,7 +93,7 @@ export default function CompletionResults({
 
         <DialogFooter className="mt-4 flex justify-end">
           <DialogClose asChild>
-            <Button variant="outline">{t("close", "Close")}</Button>
+            <Button variant="outline">{t('close', 'Close')}</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

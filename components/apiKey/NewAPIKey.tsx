@@ -94,7 +94,12 @@ const CreateAPIKeyForm = ({
         />
       </Modal.Body>
       <Modal.Footer>
-        <DaisyButton type="button" variant="outline" onClick={closeModal} size="md">
+        <DaisyButton
+          type="button"
+          variant="outline"
+          onClick={closeModal}
+          size="md"
+        >
           {t('close')}
         </DaisyButton>
         <DaisyButton
@@ -126,7 +131,12 @@ const DisplayAPIKey = ({ apiKey, closeModal }: DisplayAPIKeyProps) => {
         />
       </Modal.Body>
       <Modal.Footer>
-        <DaisyButton type="button" variant="outline" onClick={closeModal} size="md">
+        <DaisyButton
+          type="button"
+          variant="outline"
+          onClick={closeModal}
+          size="md"
+        >
           {t('close')}
         </DaisyButton>
       </Modal.Footer>

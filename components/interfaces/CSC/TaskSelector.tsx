@@ -4,19 +4,23 @@ import { getCscControlsProp } from '@/lib/csc';
 import type { Task } from '@prisma/client';
 import type { CscOption, ISO } from 'types';
 
-const getSelectedOptions = (ISO: ISO, control: string, tasks: Array<Task>): CscOption[] => {
+const getSelectedOptions = (
+  ISO: ISO,
+  control: string,
+  tasks: Array<Task>
+): CscOption[] => {
   const cscStatusesProp = getCscControlsProp(ISO);
   const initialSelected = tasks
-  .filter((task: any) =>
-    task.properties?.[cscStatusesProp]?.includes(control)
-  )
-  .map((task) => ({
-    label: task.title,
-    value: task.taskNumber,
-  }));
+    .filter((task: any) =>
+      task.properties?.[cscStatusesProp]?.includes(control)
+    )
+    .map((task) => ({
+      label: task.title,
+      value: task.taskNumber,
+    }));
 
-  return initialSelected
-}
+  return initialSelected;
+};
 
 const TaskSelector = ({
   tasks,
@@ -33,10 +37,10 @@ const TaskSelector = ({
   ) => Promise<void>;
   ISO: ISO;
 }) => {
-  const options:CscOption[] = tasks.map((task) => ({
+  const options: CscOption[] = tasks.map((task) => ({
     label: task.title,
     value: task.taskNumber,
-  }))
+  }));
   const selected: CscOption[] = getSelectedOptions(ISO, control, tasks);
   //TODO: review if prevSelectedRef is still needed
   const prevSelectedRef = useRef<CscOption[]>([]);
@@ -45,7 +49,9 @@ const TaskSelector = ({
     const all = options;
     const prev = prevSelectedRef.current;
 
-    const newSelected = all.filter((opt) => newValues.includes(opt.value.toString()));
+    const newSelected = all.filter((opt) =>
+      newValues.includes(opt.value.toString())
+    );
 
     const added = newSelected.filter(
       (newOpt) => !prev.some((oldOpt) => oldOpt.value === newOpt.value)

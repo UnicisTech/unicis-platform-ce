@@ -4,19 +4,22 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/shadcn/ui/select"
+} from '@/components/shadcn/ui/select';
 
 interface PerPageSelectorProps {
-  perPage: number
-  setPerPage: React.Dispatch<React.SetStateAction<number>>
+  perPage: number;
+  setPerPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const perPageOptions = [5, 10, 25, 50, 100]
+const perPageOptions = [5, 10, 25, 50, 100];
 
 const PerPageSelector = ({ perPage, setPerPage }: PerPageSelectorProps) => {
   return (
     <div className="w-[100px] mr-2">
-      <Select value={perPage.toString()} onValueChange={(val) => setPerPage(Number(val))}>
+      <Select
+        value={perPage.toString()}
+        onValueChange={(val) => setPerPage(Number(val))}
+      >
         <SelectTrigger className="h-8 px-2 text-sm">
           <SelectValue placeholder="Per page" />
         </SelectTrigger>
@@ -29,7 +32,7 @@ const PerPageSelector = ({ perPage, setPerPage }: PerPageSelectorProps) => {
         </SelectContent>
       </Select>
     </div>
-  )
-}
+  );
+};
 
-export default PerPageSelector
+export default PerPageSelector;

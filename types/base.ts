@@ -7,9 +7,13 @@ import { TeamIapProperties } from './iap';
 import type { TaskRmProperties } from './rm';
 import type { Session } from 'next-auth';
 
-export const componentStatuses = ['info', 'success', 'warning', 'error'] as const;
+export const componentStatuses = [
+  'info',
+  'success',
+  'warning',
+  'error',
+] as const;
 export type ComponentStatus = (typeof componentStatuses)[number];
-
 
 export type ApiError = {
   code?: string;

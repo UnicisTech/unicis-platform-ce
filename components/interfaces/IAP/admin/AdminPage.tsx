@@ -103,7 +103,6 @@ const AdminPage = ({
       }
 
       mutateIap();
-
     } catch (error: any) {
       toast.error(getAxiosError(error));
     }

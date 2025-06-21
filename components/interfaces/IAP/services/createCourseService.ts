@@ -141,7 +141,6 @@ export function createQuestion(formData: any, answersAmount: number) {
   // const type = formData.questionType.value;
   const type = formData.questionType;
 
-
   if (type === 'text') {
     return {
       type: type,

@@ -1,12 +1,17 @@
-import type { Prisma } from "@prisma/client";
-import { useTranslation } from "next-i18next";
-import useTeamTasks from "hooks/useTeamTasks";
-import { capitalizeCountryName } from "@/lib/utils";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/shadcn/ui/card";
-import { Badge } from "@/components/shadcn/ui/badge";
+import type { Prisma } from '@prisma/client';
+import { useTranslation } from 'next-i18next';
+import useTeamTasks from 'hooks/useTeamTasks';
+import { capitalizeCountryName } from '@/lib/utils';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from '@/components/shadcn/ui/card';
+import { Badge } from '@/components/shadcn/ui/badge';
 
 const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
-  const { t } = useTranslation("translation");
+  const { t } = useTranslation('translation');
   const { tasks } = useTeamTasks(slug);
 
   const countriesSet = new Set<string>();
@@ -41,14 +46,16 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
     <Card className="w-full shadow-sm mr-4">
       <CardHeader>
         <CardTitle className="text-center text-lg font-semibold">
-          {t("Records of Processing Activities")}
+          {t('Records of Processing Activities')}
         </CardTitle>
       </CardHeader>
 
       <CardContent className="grid gap-4">
         <div className="flex flex-col items-center gap-1 rounded-md border p-3">
           <p className="text-sm font-medium">Number of records</p>
-          <span className="text-lg font-bold">{totalTasksWithRpaProcedure}</span>
+          <span className="text-lg font-bold">
+            {totalTasksWithRpaProcedure}
+          </span>
         </div>
 
         <div className="flex flex-col items-center gap-1 rounded-md border p-3">

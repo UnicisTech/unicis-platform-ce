@@ -1,5 +1,5 @@
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import React from "react";
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import React from 'react';
 
 interface TogglePasswordVisibilityProps {
   isPasswordVisible: boolean;
@@ -14,7 +14,7 @@ const TogglePasswordVisibility: React.FC<TogglePasswordVisibilityProps> = ({
     <button
       type="button"
       onClick={handlePasswordVisibility}
-      aria-label={isPasswordVisible ? "Hide password" : "Show password"}
+      aria-label={isPasswordVisible ? 'Hide password' : 'Show password'}
       className="absolute inset-y-0 right-2 flex items-center p-1 text-primary"
     >
       {isPasswordVisible ? (

@@ -1,10 +1,10 @@
-import React from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
-import { useTranslation } from "next-i18next";
-import useTeams from "hooks/useTeams";
-import useCanAccess from "hooks/useCanAccess";
+import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
+import { useTranslation } from 'next-i18next';
+import useTeams from 'hooks/useTeams';
+import useCanAccess from 'hooks/useCanAccess';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -12,31 +12,31 @@ import {
   DropdownMenuLabel,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "@/components/shadcn/ui/dropdown-menu";
-import { Button } from "@/components/shadcn/ui/button";
+} from '@/components/shadcn/ui/dropdown-menu';
+import { Button } from '@/components/shadcn/ui/button';
 import {
   ChevronUpDownIcon,
   FolderIcon,
   FolderPlusIcon,
   RectangleStackIcon,
   UserCircleIcon,
-} from "@heroicons/react/24/outline";
+} from '@heroicons/react/24/outline';
 
 const TeamDropdown: React.FC = () => {
   const router = useRouter();
   const { teams } = useTeams();
   const { data } = useSession();
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
 
   const currentTeamName =
     teams?.find((t) => t.slug === router.query.slug)?.name ||
     data?.user?.name ||
-    "";
+    '';
 
   const sections = [
     {
-      label: t("teams"),
+      label: t('teams'),
       items:
         teams?.map((team) => ({
           key: team.id,
@@ -46,34 +46,33 @@ const TeamDropdown: React.FC = () => {
         })) || [],
     },
     {
-      label: t("profile"),
-      items:
-        data?.user
-          ? [
-              {
-                key: data.user.id,
-                name: data.user.name,
-                href: "/settings/account",
-                Icon: UserCircleIcon,
-              },
-            ]
-          : [],
+      label: t('profile'),
+      items: data?.user
+        ? [
+            {
+              key: data.user.id,
+              name: data.user.name,
+              href: '/settings/account',
+              Icon: UserCircleIcon,
+            },
+          ]
+        : [],
     },
     {
-      label: "",
+      label: '',
       items: [
         {
-          key: "all-teams",
-          name: t("all-teams"),
-          href: "/teams",
+          key: 'all-teams',
+          name: t('all-teams'),
+          href: '/teams',
           Icon: RectangleStackIcon,
         },
-        ...(canAccess("team", ["create"])
+        ...(canAccess('team', ['create'])
           ? [
               {
-                key: "new-team",
-                name: t("new-team"),
-                href: "/teams?newTeam=true",
+                key: 'new-team',
+                name: t('new-team'),
+                href: '/teams?newTeam=true',
                 Icon: FolderPlusIcon,
               },
             ]

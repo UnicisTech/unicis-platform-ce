@@ -80,12 +80,14 @@ const Dashboard = () => {
           )}
         </div>
       </div>
-      {isCreateOpen && <CreateRisk
-        open={isCreateOpen}
-        onOpenChange={setIsCreateOpen}
-        tasks={tasks || []}
-        mutateTasks={mutateTasks}
-      />}
+      {isCreateOpen && (
+        <CreateRisk
+          open={isCreateOpen}
+          onOpenChange={setIsCreateOpen}
+          tasks={tasks || []}
+          mutateTasks={mutateTasks}
+        />
+      )}
       {tasksWithRisks.length === 0 ? (
         <EmptyState title={t('rpa-dashboard')} description="No records" />
       ) : (

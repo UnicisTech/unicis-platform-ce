@@ -1,6 +1,6 @@
-import * as React from "react";
-import { useCallback } from "react";
-import { useTranslation } from "next-i18next";
+import * as React from 'react';
+import { useCallback } from 'react';
+import { useTranslation } from 'next-i18next';
 import {
   Dialog,
   DialogContent,
@@ -8,9 +8,9 @@ import {
   DialogTitle,
   DialogFooter,
   DialogClose,
-} from "@/components/shadcn/ui/dialog";
-import { Button } from "@/components/shadcn/ui/button";
-import { Loader2 } from "lucide-react"
+} from '@/components/shadcn/ui/dialog';
+import { Button } from '@/components/shadcn/ui/button';
+import { Loader2 } from 'lucide-react';
 
 interface ConfirmationDialogProps {
   title: string;
@@ -31,7 +31,7 @@ export default function ConfirmationDialog({
   confirmText,
   cancelText,
 }: ConfirmationDialogProps) {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const handleConfirm = useCallback(async () => {
@@ -53,12 +53,12 @@ export default function ConfirmationDialog({
         <DialogFooter className="flex justify-end space-x-2">
           <DialogClose asChild>
             <Button variant="outline" onClick={onCancel}>
-              {cancelText || t("cancel")}
+              {cancelText || t('cancel')}
             </Button>
           </DialogClose>
           <Button variant="destructive" onClick={handleConfirm}>
             {isLoading && <Loader2 className="animate-spin" />}
-            {confirmText || t("delete")}
+            {confirmText || t('delete')}
           </Button>
         </DialogFooter>
       </DialogContent>

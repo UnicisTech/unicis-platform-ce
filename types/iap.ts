@@ -16,7 +16,7 @@ export enum QuestionType {
 export type CourseFormData = {
   name: string;
   category: string;
-  type: CourseContentType
+  type: CourseContentType;
   programContent: string;
   teams: string[];
   estimatedTime: string;

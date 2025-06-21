@@ -62,14 +62,14 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const sessionToken = await getCookie(sessionTokenCookieName, { req, res });
 
-    await deleteManySessions({
-      where: {
-        userId: session?.user.id,
-        NOT: {
-          sessionToken,
-        },
+  await deleteManySessions({
+    where: {
+      userId: session?.user.id,
+      NOT: {
+        sessionToken,
       },
-    });
+    },
+  });
 
   recordMetric('user.password.updated');
 

@@ -34,10 +34,16 @@ const Tasks = ({ team }: { team: Team }) => {
   // const [statusFilter, setStatusFilter] = useState<string>('')
 
   const filteredTasks = tasks?.filter((task) => {
-    const statusMatch = !selectedStatuses.length || selectedStatuses.includes(task.status);
+    const statusMatch =
+      !selectedStatuses.length || selectedStatuses.includes(task.status);
     const moduleMatch =
       !selectedModules.length ||
-      selectedModules.some((mod) => typeof task.properties === 'object' && task.properties && mod in task.properties);
+      selectedModules.some(
+        (mod) =>
+          typeof task.properties === 'object' &&
+          task.properties &&
+          mod in task.properties
+      );
     return statusMatch && moduleMatch;
   });
 
@@ -55,7 +61,7 @@ const Tasks = ({ team }: { team: Team }) => {
   const { canAccess } = useCanAccess();
 
   useEffect(() => {
-    console.log("tasks", tasks);
+    console.log('tasks', tasks);
   }, [tasks]);
 
   if (isLoading) {
@@ -115,21 +121,13 @@ const Tasks = ({ team }: { team: Team }) => {
         <table className="w-full min-w-full divide-y divide-border text-sm">
           <thead className="bg-muted">
             <tr>
-              <th className="w-1/10 px-4 py-2 text-left">
-                {t('task-id')}
-              </th>
-              <th className="w-2/5 px-4 py-2 text-left">
-                {t('title')}
-              </th>
-              <th className="w-1/10 px-4 py-2 text-left">
-                {t('status')}
-              </th>
+              <th className="w-1/10 px-4 py-2 text-left">{t('task-id')}</th>
+              <th className="w-2/5 px-4 py-2 text-left">{t('title')}</th>
+              <th className="w-1/10 px-4 py-2 text-left">{t('status')}</th>
               <th className="w-1/10 px-4 py-2 text-left">
                 {t('registered-modules')}
               </th>
-              <th className="w-1/5 px-4 py-2 text-left">
-                {t('actions')}
-              </th>
+              <th className="w-1/5 px-4 py-2 text-left">{t('actions')}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
@@ -162,10 +160,10 @@ const Tasks = ({ team }: { team: Team }) => {
                   <td className="px-4 py-2">
                     <div className="flex gap-2 flex-wrap">
                       {[
-                        "rpa_procedure",
-                        "tia_procedure",
-                        "pia_risk",
-                        "rm_risk",
+                        'rpa_procedure',
+                        'tia_procedure',
+                        'pia_risk',
+                        'rm_risk',
                       ].map((key) =>
                         typeof task.properties === 'object' &&
                         task.properties !== null &&

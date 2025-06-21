@@ -1,10 +1,8 @@
-import { useForm } from "react-hook-form";
-import type { RpaProcedureInterface } from "types";
-import type { PiaStepValues } from "../types";
+import { useForm } from 'react-hook-form';
+import type { RpaProcedureInterface } from 'types';
+import type { PiaStepValues } from '../types';
 
-export function usePiaStepForm(
-  procedure: RpaProcedureInterface
-) {
+export function usePiaStepForm(procedure: RpaProcedureInterface) {
   const initial = procedure[5] || ({} as PiaStepValues);
   return useForm<PiaStepValues>({
     defaultValues: {
@@ -21,6 +19,6 @@ export function usePiaStepForm(
       rightsRestricted: initial.rightsRestricted ?? 'no',
       piaNeeded: initial.piaNeeded ?? 'no',
     },
-    mode: "onChange",
+    mode: 'onChange',
   });
 }

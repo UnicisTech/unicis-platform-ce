@@ -17,8 +17,13 @@ import { getSession } from '@/lib/session';
 import { getTeamMember } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import { inferSSRProps } from '@/lib/inferSSRProps';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/shadcn/ui/card";
-import { Button } from "@/components/shadcn/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/shadcn/ui/card';
+import { Button } from '@/components/shadcn/ui/button';
 
 const DirectorySync: NextPageWithLayout<
   inferSSRProps<typeof getServerSideProps>
@@ -81,20 +86,21 @@ const DirectorySync: NextPageWithLayout<
       />
       <Card>
         <CardHeader>
-          <CardTitle>
-            {t("directory-sync")}
-          </CardTitle>
+          <CardTitle>{t('directory-sync')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="mb-3 flex items-center justify-between">
-            <p className="text-sm text-muted-foreground">{t("provision")}</p>
+            <p className="text-sm text-muted-foreground">{t('provision')}</p>
             {directory ? (
-              <Button variant="destructive" onClick={() => setConfirmationDialogVisible(true)}>
-                {t("remove")}
+              <Button
+                variant="destructive"
+                onClick={() => setConfirmationDialogVisible(true)}
+              >
+                {t('remove')}
               </Button>
             ) : (
               <Button variant="outline" onClick={() => setVisible(true)}>
-                {t("configure")}
+                {t('configure')}
               </Button>
             )}
           </div>

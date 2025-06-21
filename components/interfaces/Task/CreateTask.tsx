@@ -16,16 +16,26 @@ import {
   DialogFooter,
   DialogTitle,
   DialogDescription,
-} from "@/components/shadcn/ui/dialog";
+} from '@/components/shadcn/ui/dialog';
 import { Team, Task } from '@prisma/client';
 import { Button } from '@/components/shadcn/ui/button';
 import statusesData from '@/components/defaultLanding/data/statuses.json';
 import { getCurrentStringDate } from '@/components/services/taskService';
 import useTasks from 'hooks/useTasks';
 import { Input } from '@/components/shadcn/ui/input';
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/shadcn/ui/select';
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from '@/components/shadcn/ui/select';
 import { Calendar } from '@/components/shadcn/ui/calendar';
-import { Popover, PopoverTrigger, PopoverContent } from '@/components/shadcn/ui/popover';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from '@/components/shadcn/ui/popover';
 import {
   Form,
   FormField,
@@ -47,7 +57,15 @@ const schema = Yup.object().shape({
   description: Yup.string().nullable(),
 });
 
-const CreateTask = ({ visible, setVisible, team }: { visible: boolean; setVisible: (visible: boolean) => void; team: Team }) => {
+const CreateTask = ({
+  visible,
+  setVisible,
+  team,
+}: {
+  visible: boolean;
+  setVisible: (visible: boolean) => void;
+  team: Team;
+}) => {
   const router = useRouter();
   const { slug } = router.query;
   const { mutateTasks } = useTasks(slug as string);
@@ -110,12 +128,11 @@ const CreateTask = ({ visible, setVisible, team }: { visible: boolean; setVisibl
               control={form.control}
               name="status"
               render={({ field }) => (
-                
                 <FormItem>
                   <FormLabel>Status</FormLabel>
                   <FormControl>
                     <Select value={field.value} onValueChange={field.onChange}>
-                      <SelectTrigger className="w-full" >
+                      <SelectTrigger className="w-full">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -146,12 +163,20 @@ const CreateTask = ({ visible, setVisible, team }: { visible: boolean; setVisibl
                           type="button"
                           className="w-full justify-start text-left font-normal"
                         >
-                          {field.value ? format(field.value, 'PPP') : <span>Pick a date</span>}
+                          {field.value ? (
+                            format(field.value, 'PPP')
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
-                    <PopoverContent forceMount className="pointer-events-auto w-auto p-0 z-60" align="start">
+                    <PopoverContent
+                      forceMount
+                      className="pointer-events-auto w-auto p-0 z-60"
+                      align="start"
+                    >
                       <Calendar
                         mode="single"
                         selected={field.value}
@@ -183,11 +208,15 @@ const CreateTask = ({ visible, setVisible, team }: { visible: boolean; setVisibl
               )}
             />
             <DialogFooter className="pt-2">
-              <Button variant="ghost" type="button" onClick={() => setVisible(false)}>
-                {t("close")}
+              <Button
+                variant="ghost"
+                type="button"
+                onClick={() => setVisible(false)}
+              >
+                {t('close')}
               </Button>
               <Button type="submit" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? 'Creating...' : t("create")}
+                {form.formState.isSubmitting ? 'Creating...' : t('create')}
               </Button>
             </DialogFooter>
           </form>

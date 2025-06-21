@@ -140,7 +140,7 @@ export default function Comments({
           ))}
       </div>
       <AccessControl resource="task" actions={['update']}>
-        <div className='mt-4'>
+        <div className="mt-4">
           <CreateCommentForm handleCreate={handleCreateComment} />
         </div>
       </AccessControl>

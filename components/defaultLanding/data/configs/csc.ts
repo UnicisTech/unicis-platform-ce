@@ -4,7 +4,7 @@ import iso2022Json from '../ISO-CSC-controls-2022.json';
 import nistcsfv2 from '../CSF2_1.json';
 import eunis2 from '../eu-nis2.json';
 import gdpr from '../gdpr_controls.json';
-import cisv81 from '../cis_v81_1.json'
+import cisv81 from '../cis_v81_1.json';
 import { Section } from 'types';
 
 const controls = {

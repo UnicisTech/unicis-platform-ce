@@ -1,13 +1,13 @@
-import Link from "next/link";
-import classNames from "classnames";
-import { Separator } from "@/components/shadcn/ui/separator";
+import Link from 'next/link';
+import classNames from 'classnames';
+import { Separator } from '@/components/shadcn/ui/separator';
 
 export interface MenuItem {
   name: string;
   href: string;
   icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   active?: boolean;
-  items?: Omit<MenuItem, "icon" | "items">[];
+  items?: Omit<MenuItem, 'icon' | 'items'>[];
   className?: string;
 }
 
@@ -29,7 +29,7 @@ export const NavigationItems: React.FC<NavigationItemsProps> = ({ menus }) => (
     {menus.map((menu) =>
       menu ? (
         <li key={menu.name}>
-          {menu.name === "line-break" ? (
+          {menu.name === 'line-break' ? (
             <Separator className="my-1" />
           ) : (
             <>
@@ -52,17 +52,17 @@ export const NavigationItems: React.FC<NavigationItemsProps> = ({ menus }) => (
 );
 
 const NavigationItem: React.FC<NavigationItemProps> = ({ menu, className }) => {
-  const isExternal = menu.href.startsWith("http");
+  const isExternal = menu.href.startsWith('http');
 
   return (
     <Link
       href={menu.href}
-      target={isExternal ? "_blank" : undefined}
+      target={isExternal ? '_blank' : undefined}
       className={classNames(
-        "flex items-center rounded-md text-sm px-2 p-2 gap-2",
+        'flex items-center rounded-md text-sm px-2 p-2 gap-2',
         menu.active
-          ? "bg-muted font-semibold text-foreground"
-          : "text-foreground hover:bg-muted hover:text-foreground",
+          ? 'bg-muted font-semibold text-foreground'
+          : 'text-foreground hover:bg-muted hover:text-foreground',
         className
       )}
     >

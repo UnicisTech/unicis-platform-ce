@@ -58,15 +58,21 @@ const RpaPanel = ({ task }: { task: Task }) => {
                 )}
                 <Field
                   label={fieldPropsMapping['category']}
-                  value={procedure[1].category.map(({ label }) => label).join(', ')}
+                  value={procedure[1].category
+                    .map(({ label }) => label)
+                    .join(', ')}
                 />
                 <Field
                   label={fieldPropsMapping['specialcategory']}
-                  value={procedure[1].specialcategory.map(({ label }) => label).join(', ')}
+                  value={procedure[1].specialcategory
+                    .map(({ label }) => label)
+                    .join(', ')}
                 />
                 <Field
                   label={fieldPropsMapping['datasubject']}
-                  value={procedure[1].datasubject.map(({ label }) => label).join(', ')}
+                  value={procedure[1].datasubject
+                    .map(({ label }) => label)
+                    .join(', ')}
                 />
                 <Field
                   label={fieldPropsMapping['retentionperiod']}
@@ -112,7 +118,9 @@ const RpaPanel = ({ task }: { task: Task }) => {
                 />
                 <Field
                   label={fieldPropsMapping['guarantee']}
-                  value={procedure[3].guarantee.map(({ label }) => label).join(', ')}
+                  value={procedure[3].guarantee
+                    .map(({ label }) => label)
+                    .join(', ')}
                 />
               </div>
             )}
@@ -129,7 +137,9 @@ const RpaPanel = ({ task }: { task: Task }) => {
         </>
       ) : (
         <div className="mt-4">
-          <p className='text-xs'>Procedure has not been created for this issue.</p>
+          <p className="text-xs">
+            Procedure has not been created for this issue.
+          </p>
         </div>
       )}
     </div>

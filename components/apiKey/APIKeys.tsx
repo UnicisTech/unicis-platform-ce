@@ -67,11 +67,8 @@ const APIKeys = ({ team }: APIKeysProps) => {
               API keys allow you to authenticate with the API.
             </p>
           </div>
-          <Button
-            color='primary'
-            onClick={() => setCreateModalVisible(true)}
-          >
-          {t('create-api-key')}
+          <Button color="primary" onClick={() => setCreateModalVisible(true)}>
+            {t('create-api-key')}
           </Button>
         </div>
         {apiKeys.length === 0 ? (

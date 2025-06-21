@@ -13,10 +13,10 @@ const getEndDate = (dateStr, yearsToAdd) => {
   d.setFullYear(d.getFullYear() + yearsToAdd);
 
   const yyyy = d.getFullYear();
-  const mm = String(d.getMonth() + 1).padStart(2, "0");
-  const dd = String(d.getDate()).padStart(2, "0");
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
   return `${yyyy}-${mm}-${dd}`;
-}
+};
 
 const TiaTable = ({
   slug,
@@ -111,10 +111,7 @@ const TiaTable = ({
                 </td>
                 <td className="px-1.5 py-1.5">
                   <span>
-                    {
-                      task.properties.tia_procedure[0].LawImporterCountry
-                        .label
-                    }
+                    {task.properties.tia_procedure[0].LawImporterCountry.label}
                   </span>
                 </td>
                 {canAccess('task', ['update']) && (

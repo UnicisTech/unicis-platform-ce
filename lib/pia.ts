@@ -5,7 +5,14 @@ import {
   riskSecurityPoints,
   riskProbabilityPoints,
 } from '@/components/defaultLanding/data/configs/pia';
-import type { AuditLog, Diff, PiaConfig, PiaRisk, TaskProperties, Option } from 'types';
+import type {
+  AuditLog,
+  Diff,
+  PiaConfig,
+  PiaRisk,
+  TaskProperties,
+  Option,
+} from 'types';
 import {
   fieldPropsMapping,
   config,
