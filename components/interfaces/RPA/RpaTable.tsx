@@ -29,8 +29,7 @@ const RpaTable = ({
     currentPage,
     totalPages,
     pageData,
-    goToPreviousPage,
-    goToNextPage,
+    goToPage,
     prevButtonDisabled,
     nextButtonDisabled,
   } = usePagination<TaskWithRpaProcedure>(tasks, perPage);
@@ -136,10 +135,7 @@ const RpaTable = ({
         <PaginationControls
           page={currentPage}
           totalPages={totalPages}
-          onChange={(page) => {
-            if (page > currentPage) goToNextPage();
-            else if (page < currentPage) goToPreviousPage();
-          }}
+          onChange={goToPage}
           prevButtonDisabled={prevButtonDisabled}
           nextButtonDisabled={nextButtonDisabled}
         />

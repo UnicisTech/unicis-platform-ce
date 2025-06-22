@@ -37,8 +37,7 @@ const TiaTable = ({
     currentPage,
     totalPages,
     pageData,
-    goToPreviousPage,
-    goToNextPage,
+    goToPage,
     prevButtonDisabled,
     nextButtonDisabled,
   } = usePagination<TaskWithTiaProcedure>(tasks, perPage);
@@ -148,10 +147,7 @@ const TiaTable = ({
         <PaginationControls
           page={currentPage}
           totalPages={totalPages}
-          onChange={(page) => {
-            if (page > currentPage) goToNextPage();
-            else if (page < currentPage) goToPreviousPage();
-          }}
+          onChange={goToPage}
           prevButtonDisabled={prevButtonDisabled}
           nextButtonDisabled={nextButtonDisabled}
         />

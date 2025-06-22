@@ -44,8 +44,7 @@ const StatusesTable = ({
     currentPage,
     totalPages,
     pageData,
-    goToPreviousPage,
-    goToNextPage,
+    goToPage,
     prevButtonDisabled,
     nextButtonDisabled,
   } = usePagination<ControlOption>(filteredControls, perPage);
@@ -165,10 +164,7 @@ const StatusesTable = ({
         <PaginationControls
           page={currentPage}
           totalPages={totalPages}
-          onChange={(page) => {
-            if (page > currentPage) goToNextPage();
-            else if (page < currentPage) goToPreviousPage();
-          }}
+          onChange={goToPage}
           prevButtonDisabled={prevButtonDisabled}
           nextButtonDisabled={nextButtonDisabled}
         />

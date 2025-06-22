@@ -51,8 +51,7 @@ const Tasks = ({ team }: { team: Team }) => {
     currentPage,
     totalPages,
     pageData,
-    goToPreviousPage,
-    goToNextPage,
+    goToPage,
     prevButtonDisabled,
     nextButtonDisabled,
   } = usePagination<Task>(filteredTasks || [], perPage);
@@ -214,10 +213,7 @@ const Tasks = ({ team }: { team: Team }) => {
           <PaginationControls
             page={currentPage}
             totalPages={totalPages}
-            onChange={(page) => {
-              if (page > currentPage) goToNextPage();
-              else if (page < currentPage) goToPreviousPage();
-            }}
+            onChange={goToPage}
             prevButtonDisabled={prevButtonDisabled}
             nextButtonDisabled={nextButtonDisabled}
           />

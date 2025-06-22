@@ -53,8 +53,7 @@ const RisksTable = ({
     currentPage,
     totalPages,
     pageData,
-    goToPreviousPage,
-    goToNextPage,
+    goToPage,
     prevButtonDisabled,
     nextButtonDisabled,
   } = usePagination<TaskWithRmRisk>(tasks, perPage);
@@ -188,10 +187,7 @@ const RisksTable = ({
         <PaginationControls
           page={currentPage}
           totalPages={totalPages}
-          onChange={(page) => {
-            if (page > currentPage) goToNextPage();
-            else if (page < currentPage) goToPreviousPage();
-          }}
+          onChange={goToPage}
           prevButtonDisabled={prevButtonDisabled}
           nextButtonDisabled={nextButtonDisabled}
         />
