@@ -7,12 +7,12 @@ import {
   Loading,
   PerPageSelector,
   StatusBadge,
+  WithLoadingAndError,
 } from '@/components/shared';
 import useTasks from 'hooks/useTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import usePagination from 'hooks/usePagination';
 import statuses from '@/components/defaultLanding/data/statuses.json';
-import { WithLoadingAndError } from '@/components/shared';
 import type { Task, Team } from '@prisma/client';
 import { CreateTask, DeleteTask } from '@/components/interfaces/Task';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
@@ -29,20 +29,19 @@ const Tasks = ({ team }: { team: Team }) => {
   const [taskToDelete, setTaskToDelete] = useState<null | number>(null);
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
   const [selectedModules, setSelectedModules] = useState<string[]>([]);
-
   const [perPage, setPerPage] = useState<number>(10);
-  // const [statusFilter, setStatusFilter] = useState<string>('')
+  const { t } = useTranslation('common');
+  const { canAccess } = useCanAccess();
 
   const filteredTasks = tasks?.filter((task) => {
     const statusMatch =
       !selectedStatuses.length || selectedStatuses.includes(task.status);
     const moduleMatch =
       !selectedModules.length ||
-      selectedModules.some(
-        (mod) =>
-          typeof task.properties === 'object' &&
-          task.properties &&
-          mod in task.properties
+      selectedModules.some((mod) =>
+        typeof task.properties === 'object' &&
+        task.properties &&
+        mod in task.properties
       );
     return statusMatch && moduleMatch;
   });
@@ -56,20 +55,12 @@ const Tasks = ({ team }: { team: Team }) => {
     nextButtonDisabled,
   } = usePagination<Task>(filteredTasks || [], perPage);
 
-  const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
-
   useEffect(() => {
     console.log('tasks', tasks);
   }, [tasks]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (isError) {
-    return <Error />;
-  }
+  if (isLoading) return <Loading />;
+  if (isError) return <Error />;
 
   const openDeleteModal = async (id: number) => {
     setTaskToDelete(id);
@@ -89,11 +80,6 @@ const Tasks = ({ team }: { team: Team }) => {
             </p>
           </div>
           <div className="flex justify-end items-center my-1">
-            {/* <StatusFilter 
-              options={[{label: 'test', value: 'test'}]}
-              handler={setStatusFilter}
-              value={statusFilter}
-            /> */}
             {tasks && tasks.length > 0 && (
               <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
             )}
@@ -102,113 +88,99 @@ const Tasks = ({ team }: { team: Team }) => {
                 size="sm"
                 color="primary"
                 variant="outline"
-                onClick={() => {
-                  setVisible(!visible);
-                }}
+                onClick={() => setVisible(!visible)}
               >
                 {t('create')}
               </DaisyButton>
             )}
           </div>
         </div>
+
         <TaskFilters
           selectedStatuses={selectedStatuses}
           setSelectedStatuses={setSelectedStatuses}
           selectedModules={selectedModules}
           setSelectedModules={setSelectedModules}
         />
+
         <table className="w-full min-w-full divide-y divide-border text-sm">
           <thead className="bg-muted">
             <tr>
               <th className="w-1/10 px-4 py-2 text-left">{t('task-id')}</th>
               <th className="w-2/5 px-4 py-2 text-left">{t('title')}</th>
               <th className="w-1/10 px-4 py-2 text-left">{t('status')}</th>
-              <th className="w-1/10 px-4 py-2 text-left">
-                {t('registered-modules')}
-              </th>
+              <th className="w-1/10 px-4 py-2 text-left">{t('due-date')}</th>
               <th className="w-1/5 px-4 py-2 text-left">{t('actions')}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {pageData.map((task) => {
-              return (
-                <tr key={task.id}>
-                  <td className="px-4 py-2">
+            {pageData.map((task) => (
+              <tr key={task.id}>
+                <td className="px-4 py-2">
+                  <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
+                    <span className="underline">{task.taskNumber}</span>
+                  </Link>
+                </td>
+                <td className="px-4 py-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
-                      <div className="flex items-center justify-start space-x-2">
-                        <span className="underline">{task.taskNumber}</span>
-                      </div>
+                      <span className="underline font-medium">{task.title}</span>
                     </Link>
-                  </td>
-                  <td className="px-4 py-2">
-                    <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
-                      <div className="flex items-center justify-start space-x-2">
-                        <span className="underline">{task.title}</span>
-                      </div>
-                    </Link>
-                  </td>
-                  <td className="px-4 py-2">
-                    <StatusBadge
-                      value={task.status}
-                      label={
-                        statuses.find(({ value }) => value === task.status)
-                          ?.label as string
-                      }
-                    />
-                  </td>
-                  <td className="px-4 py-2">
-                    <div className="flex gap-2 flex-wrap">
-                      {[
-                        'rpa_procedure',
-                        'tia_procedure',
-                        'pia_risk',
-                        'rm_risk',
-                      ].map((key) =>
+                    {["rpa_procedure", "tia_procedure", "pia_risk", "rm_risk"].map(
+                      (key) =>
                         typeof task.properties === 'object' &&
-                        task.properties !== null &&
+                        task.properties &&
                         key in task.properties &&
                         (task.properties as any)[key] ? (
                           <ModuleBadge key={key} propName={key} />
                         ) : null
-                      )}
-                    </div>
-                  </td>
-                  {/* <td className="px-6 py-3"> */}
-                  <td className="px-4 py-2">
-                    <div className=" btn-group">
-                      {canAccess('task', ['update']) && (
-                        <DaisyButton
-                          className="dark:text-gray-100"
-                          size="sm"
-                          variant="outline"
-                          onClick={() => {
-                            router.push(
-                              `/teams/${slug}/tasks/${task.taskNumber}`
-                            );
-                          }}
-                        >
-                          {t('edit-task')}
-                        </DaisyButton>
-                      )}
-                      {canAccess('task', ['delete']) && (
-                        <DaisyButton
-                          className="dark:text-gray-100"
-                          size="sm"
-                          variant="outline"
-                          onClick={() => {
-                            openDeleteModal(task.taskNumber);
-                          }}
-                        >
-                          {t('delete')}
-                        </DaisyButton>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
+                    )}
+                  </div>
+                </td>
+                <td className="px-4 py-2">
+                  <StatusBadge
+                    value={task.status}
+                    label={
+                      statuses.find(({ value }) => value === task.status)?.label || task.status
+                    }
+                  />
+                </td>
+                <td className="px-4 py-2">
+                  <span className="text-sm">
+                    {task.duedate
+                      ? new Date(task.duedate).toLocaleDateString()
+                      : t('no-due-date')}
+                  </span>
+                </td>
+                <td className="px-4 py-2">
+                  <div className="btn-group">
+                    {canAccess('task', ['update']) && (
+                      <DaisyButton
+                        size="sm"
+                        variant="outline"
+                        onClick={() =>
+                          router.push(`/teams/${slug}/tasks/${task.taskNumber}`)
+                        }
+                      >
+                        {t('edit-task')}
+                      </DaisyButton>
+                    )}
+                    {canAccess('task', ['delete']) && (
+                      <DaisyButton
+                        size="sm"
+                        variant="outline"
+                        onClick={() => openDeleteModal(task.taskNumber)}
+                      >
+                        {t('delete')}
+                      </DaisyButton>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
+
         {pageData.length > 0 && (
           <PaginationControls
             page={currentPage}
@@ -218,6 +190,7 @@ const Tasks = ({ team }: { team: Team }) => {
             nextButtonDisabled={nextButtonDisabled}
           />
         )}
+
         <CreateTask visible={visible} setVisible={setVisible} team={team} />
         <DeleteTask
           visible={deleteVisible}

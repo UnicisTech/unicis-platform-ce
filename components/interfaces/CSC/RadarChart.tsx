@@ -62,9 +62,9 @@ const RadarChart = ({
   const { theme } = useTheme();
 
   const isDark = theme === 'dark';
-  const textColor = isDark ? '#e5e7eb' : '#0f172a'; // gray-200 vs slate-900
-  const gridColor = isDark ? '#374151' : '#e5e7eb'; // gray-700 vs gray-200
-  const lineColor = isDark ? '#3b82f6' : '#2563eb'; // blue-500 vs blue-600
+  const textColor = isDark ? '#e5e7eb' : '#0f172a';
+  const gridColor = isDark ? '#374151' : '#e5e7eb';
+  const lineColor = isDark ? '#3b82f6' : '#2563eb';
 
   const data = {
     labels: getRadarChartLabels(ISO),
@@ -72,7 +72,7 @@ const RadarChart = ({
       {
         label: 'Maturity level (0–6)',
         data: getMaturityLevels(statuses, ISO),
-        backgroundColor: `${lineColor}33`, // 20% opacity
+        backgroundColor: `${lineColor}33`,
         borderColor: lineColor,
         pointBackgroundColor: lineColor,
         pointBorderColor: '#fff',
