@@ -1,37 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
-import type { TaskWithRmRisk } from 'types';
 import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import useCanAccess from 'hooks/useCanAccess';
-import {
-  calculateCurrentRiskRating,
-  calculateRiskRating,
-  getInitials,
-  riskValueToLabel,
-} from '@/lib/rm';
+import { calculateCurrentRiskRating, calculateRiskRating, getInitials, riskValueToLabel } from '@/lib/rm';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
+import type { TaskWithRmRisk } from 'types';
 
-const verticalTextStyles =
-  'px-1.5 py-1.5 whitespace-nowrap align-middle text-center [writing-mode:vertical-rl] rotate-180';
-
-const getBgColorClass = (riskLevel: number): string => {
-  const riskLevels = [
-    { max: 1, class: 'risk-extreme-low' },
-    { max: 40, class: 'risk-low' },
-    { max: 60, class: 'risk-medium' },
-    { max: 80, class: 'risk-high' },
-    { max: 100, class: 'risk-extreme' },
-  ];
-
-  for (const { max, class: riskClass } of riskLevels) {
-    if (riskLevel <= max) {
-      return 'bg-' + riskClass;
-    }
-  }
-
-  return '';
+const getRiskColor = (value: number): string => {
+  if (value <= 1) return 'bg-risk-extreme-low';
+  if (value <= 40) return 'bg-risk-low';
+  if (value <= 60) return 'bg-risk-medium';
+  if (value <= 80) return 'bg-risk-high';
+  return 'bg-risk-extreme';
 };
 
 const RisksTable = ({
@@ -42,13 +24,14 @@ const RisksTable = ({
   deleteHandler,
 }: {
   slug: string;
-  tasks: Array<TaskWithRmRisk>;
+  tasks: TaskWithRmRisk[];
   perPage: number;
   editHandler: (task: TaskWithRmRisk) => void;
   deleteHandler: (task: TaskWithRmRisk) => void;
 }) => {
   const { canAccess } = useCanAccess();
   const { t } = useTranslation('common');
+
   const {
     currentPage,
     totalPages,
@@ -56,122 +39,64 @@ const RisksTable = ({
     goToPage,
     prevButtonDisabled,
     nextButtonDisabled,
-  } = usePagination<TaskWithRmRisk>(tasks, perPage);
+  } = usePagination(tasks, perPage);
+
+  const verticalHeader = (label: string) =>
+    <div className="px-2 py-1 text-center whitespace-nowrap rotate-180 [writing-mode:vertical-rl]">{label}</div>;
 
   return (
-    <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
-      <div className="overflow-x-auto">
-        <table className="w-fit divide-y divide-border text-sm">
+    <div className="space-y-4">
+      <div className="overflow-x-auto border rounded-md">
+        <table className="min-w-full text-sm">
           <thead className="bg-muted">
             <tr>
-              <th scope="col">Risk ID</th>
-              <th className={verticalTextStyles}>Risk</th>
-              <th className={verticalTextStyles}>Asset Owner</th>
-              <th className={verticalTextStyles}>Impact</th>
-              <th className={verticalTextStyles}>Raw probability</th>
-              <th className={verticalTextStyles}>Raw impact</th>
-              <th className={verticalTextStyles}>Raw risk rating</th>
-              <th className={verticalTextStyles}>Treatment</th>
-              <th className={verticalTextStyles}>Treatment cost</th>
-              <th className={verticalTextStyles}>Treatment status</th>
-              <th className={verticalTextStyles}>Treated probability</th>
-              <th className={verticalTextStyles}>Treated impact</th>
-              <th className={verticalTextStyles}>Target risk rating</th>
-              <th className={verticalTextStyles}>Current risk rating</th>
-              {canAccess('task', ['update']) && (
-                <th scope="col" className={verticalTextStyles}>
-                  {t('actions')}
-                </th>
-              )}
+              <th>{t('risk-id')}</th>
+              {[
+                'Risk', 'Asset Owner', 'Impact',
+                'Raw probability', 'Raw impact', 'Raw risk rating',
+                'Treatment', 'Treatment cost', 'Treatment status',
+                'Treated probability', 'Treated impact', 'Target risk rating',
+                'Current risk rating',
+              ].map((label) => (
+                <th key={label}>{verticalHeader(label)}</th>
+              ))}
+              {canAccess('task', ['update']) && <th>{verticalHeader(t('actions'))}</th>}
             </tr>
           </thead>
           <tbody>
-            {pageData.map((task, index) => {
+            {pageData.map((task, idx) => {
               const risk = task.properties.rm_risk;
-              const rawRiskRating = calculateRiskRating(
-                risk[0].RawProbability,
-                risk[0].RawImpact
-              );
-              const targetRiskRating = calculateRiskRating(
-                risk[1].TreatedProbability,
-                risk[1].TreatedImpact
-              );
-              const currentRiskRating = calculateCurrentRiskRating(
-                rawRiskRating,
-                targetRiskRating,
-                risk[1].TreatmentStatus
-              );
+              const raw = calculateRiskRating(risk[0].RawProbability, risk[0].RawImpact);
+              const target = calculateRiskRating(risk[1].TreatedProbability, risk[1].TreatedImpact);
+              const current = calculateCurrentRiskRating(raw, target, risk[1].TreatmentStatus);
 
               return (
-                <tr key={index}>
-                  <td className="px-1.5 py-1.5">
-                    <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
-                      <div className="flex items-center justify-start space-x-2">
-                        <span className="underline">{task.title}</span>
-                      </div>
+                <tr key={idx} className="border-t">
+                  <td className="px-2 py-1">
+                    <Link href={`/teams/${slug}/tasks/${task.taskNumber}`} className="underline">
+                      {task.title}
                     </Link>
                   </td>
-                  <td className="px-1.5 py-1.5">
-                    <span>{risk[0].Risk}</span>
-                  </td>
-                  <td className="px-1.5 py-1.5">
-                    <span>{getInitials(risk[0].AssetOwner.label)}</span>
-                  </td>
-                  <td className="px-1.5 py-1.5">
-                    <span>{risk[0].Impact}</span>
-                  </td>
-                  <td className="px-1.5 py-1.5">
-                    <span>{riskValueToLabel(risk[0].RawProbability)}</span>
-                  </td>
-                  <td className="px-1.5 py-1.5">
-                    <span>{riskValueToLabel(risk[0].RawImpact)}</span>
-                  </td>
-                  <td
-                    className={`px-1.5 py-1.5 ${getBgColorClass(rawRiskRating)}`}
-                  >
-                    {riskValueToLabel(rawRiskRating)}
-                  </td>
-                  <td className="px-1.5 py-1.5">{risk[1].RiskTreatment}</td>
-                  <td className="px-1.5 py-1.5">{risk[1].TreatmentCost}</td>
-                  <td className="px-1.5 py-1.5">
-                    {riskValueToLabel(risk[1].TreatmentStatus)}
-                  </td>
-                  <td className="px-1.5 py-1.5">
-                    {riskValueToLabel(risk[1].TreatedProbability)}
-                  </td>
-                  <td className="px-1.5 py-1.5">
-                    {riskValueToLabel(risk[1].TreatedImpact)}
-                  </td>
-                  <td
-                    className={`px-1.5 py-1.5 ${getBgColorClass(targetRiskRating)}`}
-                  >
-                    {riskValueToLabel(targetRiskRating)}
-                  </td>
-                  <td
-                    className={`px-1.5 py-1.5 ${getBgColorClass(currentRiskRating)}`}
-                  >
-                    {riskValueToLabel(currentRiskRating)}
-                  </td>
+                  <td className="px-2 py-1">{risk[0].Risk}</td>
+                  <td className="px-2 py-1">{getInitials(risk[0].AssetOwner.label)}</td>
+                  <td className="px-2 py-1">{risk[0].Impact}</td>
+                  <td className="px-2 py-1">{riskValueToLabel(risk[0].RawProbability)}</td>
+                  <td className="px-2 py-1">{riskValueToLabel(risk[0].RawImpact)}</td>
+                  <td className={`px-2 py-1 ${getRiskColor(raw)}`}>{riskValueToLabel(raw)}</td>
+                  <td className="px-2 py-1">{risk[1].RiskTreatment}</td>
+                  <td className="px-2 py-1">{risk[1].TreatmentCost}</td>
+                  <td className="px-2 py-1">{riskValueToLabel(risk[1].TreatmentStatus)}</td>
+                  <td className="px-2 py-1">{riskValueToLabel(risk[1].TreatedProbability)}</td>
+                  <td className="px-2 py-1">{riskValueToLabel(risk[1].TreatedImpact)}</td>
+                  <td className={`px-2 py-1 ${getRiskColor(target)}`}>{riskValueToLabel(target)}</td>
+                  <td className={`px-2 py-1 ${getRiskColor(current)}`}>{riskValueToLabel(current)}</td>
                   {canAccess('task', ['update']) && (
-                    <td className="px-1.5 py-1.5">
-                      <div className="btn-group">
-                        <DaisyButton
-                          size="sm"
-                          variant="outline"
-                          onClick={() => {
-                            editHandler(task);
-                          }}
-                        >
+                    <td className="px-2 py-1">
+                      <div className="flex gap-1">
+                        <DaisyButton size="sm" variant="outline" onClick={() => editHandler(task)}>
                           {t('edit-task')}
                         </DaisyButton>
-
-                        <DaisyButton
-                          size="sm"
-                          variant="outline"
-                          onClick={() => {
-                            deleteHandler(task);
-                          }}
-                        >
+                        <DaisyButton size="sm" variant="outline" onClick={() => deleteHandler(task)}>
                           {t('delete')}
                         </DaisyButton>
                       </div>
@@ -183,6 +108,7 @@ const RisksTable = ({
           </tbody>
         </table>
       </div>
+
       {pageData.length > 0 && (
         <PaginationControls
           page={currentPage}

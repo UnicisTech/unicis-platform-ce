@@ -75,6 +75,11 @@ const TeamDashboard = ({
           csc_statuses={csc_statuses as { [key: string]: string }}
         />
         <div className="space-y-6">
+          <div className="mb-4 px-4 flex items-center justify-between">
+            <h2 className="text-2xl font-semibold tracking-tight">
+              {t('rm-overview')}
+            </h2>
+          </div>
           <RmAnalysis slug={slug} />
         </div>
       </div>

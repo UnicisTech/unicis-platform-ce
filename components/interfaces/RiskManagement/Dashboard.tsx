@@ -9,6 +9,7 @@ import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import CreateRisk from './RiskForm/RmRiskDialog';
+import RmAnalysis from '../TeamDashboard/RmAnalysis';
 
 const Dashboard = () => {
   const { canAccess } = useCanAccess();
@@ -86,6 +87,9 @@ const Dashboard = () => {
         <EmptyState title={t('rpa-dashboard')} description="No records" />
       ) : (
         <>
+          <div className="m-2">
+            <RmAnalysis slug={slug as string} />
+          </div>
           <RisksTable
             slug={slug as string}
             tasks={tasksWithRisks}
