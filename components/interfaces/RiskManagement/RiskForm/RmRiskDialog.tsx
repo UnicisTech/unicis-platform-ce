@@ -123,7 +123,7 @@ export default function RmRiskDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto p-6">
         <DialogHeader>
-          <DialogTitle>{t('pia')}</DialogTitle>
+          <DialogTitle>{t('rm')}</DialogTitle>
           {currentStep > 0 && (
             <StageTracker headers={headers} currentStage={currentStep - 1} />
           )}
