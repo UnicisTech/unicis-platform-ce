@@ -1,15 +1,25 @@
-import * as Yup from 'yup';
-import { useFormik } from 'formik';
-import toast from 'react-hot-toast';
-import { useTranslation } from 'next-i18next';
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import toast from "react-hot-toast";
+import { useTranslation } from "next-i18next";
+import { defaultHeaders } from "@/lib/common";
+import type { ApiResponse, UserReturned } from "types";
+import type { User } from "@prisma/client";
 
-import type { ApiResponse, UserReturned } from 'types';
-import { Card } from '@/components/shared';
-import { defaultHeaders } from '@/lib/common';
-import type { User } from '@prisma/client';
-import DaisyButton from '../shared/daisyUI/DaisyButton';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/shadcn/ui/card";
+import { Label } from "@/components/shadcn/ui/label";
+import { Input } from "@/components/shadcn/ui/input";
+import { Button } from "@/components/shadcn/ui/button";
+import { Loader2 } from "lucide-react";
 
-const schema = Yup.object().shape({
+const schema = Yup.object({
   email: Yup.string().required(),
 });
 
@@ -18,64 +28,70 @@ interface UpdateEmailProps {
   allowEmailChange: boolean;
 }
 
-const UpdateEmail = ({ user, allowEmailChange }: UpdateEmailProps) => {
-  const { t } = useTranslation('common');
+const UpdateEmail: React.FC<UpdateEmailProps> = ({
+  user,
+  allowEmailChange,
+}) => {
+  const { t } = useTranslation("common");
 
   const formik = useFormik({
-    initialValues: {
-      email: user.email,
-    },
+    initialValues: { email: user.email || "" },
     validationSchema: schema,
     onSubmit: async (values) => {
-      const response = await fetch('/api/users', {
-        method: 'PUT',
+      const res = await fetch("/api/users", {
+        method: "PUT",
         headers: defaultHeaders,
         body: JSON.stringify(values),
       });
+      const json = (await res.json()) as ApiResponse<UserReturned>;
 
-      const json = (await response.json()) as ApiResponse<UserReturned>;
-
-      if (!response.ok) {
+      if (!res.ok) {
         toast.error(json.error.message);
-        return;
+      } else {
+        toast.success(t("successfully-updated"));
       }
-
-      toast.success(t('successfully-updated'));
     },
   });
 
   return (
     <form onSubmit={formik.handleSubmit}>
       <Card>
-        <Card.Body>
-          <Card.Header>
-            <Card.Title>{t('email-address')}</Card.Title>
-            <Card.Description>
-              {t('email-address-description')}
-            </Card.Description>
-          </Card.Header>
-          <input
-            type="email"
-            name="email"
-            placeholder={t('your-email')}
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            className="input input-bordered w-full max-w-md"
-            required
-            disabled={!allowEmailChange}
-          />
-        </Card.Body>
-        <Card.Footer>
-          <DaisyButton
+        <CardHeader>
+          <CardTitle>{t("email-address")}</CardTitle>
+          <CardDescription>
+            {t("email-address-description")}
+          </CardDescription>
+        </CardHeader>
+
+        <CardContent className="space-y-4">
+          <div className="grid gap-1">
+            <Label htmlFor="email">{t("email-address")}</Label>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              placeholder={t("your-email")}
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              disabled={!allowEmailChange}
+            />
+            {formik.touched.email && formik.errors.email && (
+              <p className="text-destructive text-sm">
+                {formik.errors.email}
+              </p>
+            )}
+          </div>
+        </CardContent>
+
+        <CardFooter className="flex justify-end">
+          <Button
             type="submit"
-            color="primary"
-            loading={formik.isSubmitting}
             disabled={!formik.dirty || !formik.isValid}
-            size="md"
           >
-            {t('save-changes')}
-          </DaisyButton>
-        </Card.Footer>
+            {formik.isSubmitting && <Loader2 className="animate-spin" />}
+            {t("save-changes")}
+          </Button>
+        </CardFooter>
       </Card>
     </form>
   );
