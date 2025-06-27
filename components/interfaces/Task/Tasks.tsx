@@ -20,8 +20,9 @@ import ModuleBadge from '@/components/shared/ModuleBadge';
 import TaskFilters from '@/components/interfaces/Task/TaskFilters';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Button } from '@/components/shadcn/ui/button';
+import { TeamTaskAnalysis } from '../TeamDashboard';
 
-const Tasks = ({ team }: { team: Team }) => {
+const Tasks = ({ team, csc_statuses }: { team: Team, csc_statuses: any }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const { isLoading, isError, tasks } = useTasks(slug as string);
@@ -71,11 +72,15 @@ const Tasks = ({ team }: { team: Team }) => {
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
       <div className="space-y-3">
+        <h2 className="text-xl font-medium leading-none tracking-tight">
+          {t('all-tasks')}
+        </h2>
+        <TeamTaskAnalysis
+          slug={slug}
+          csc_statuses={csc_statuses as { [key: string]: string }}
+        />
         <div className="flex justify-between items-center">
           <div className="space-y-3">
-            <h2 className="text-xl font-medium leading-none tracking-tight">
-              {t('all-tasks')}
-            </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               {t('task-listed')}
             </p>
@@ -94,7 +99,6 @@ const Tasks = ({ team }: { team: Team }) => {
             )}
           </div>
         </div>
-
         <TaskFilters
           selectedStatuses={selectedStatuses}
           setSelectedStatuses={setSelectedStatuses}

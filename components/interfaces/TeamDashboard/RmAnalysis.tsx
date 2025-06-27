@@ -25,12 +25,6 @@ const RmAnalysis = ({ slug }: RmAnalysisProps) => {
 
   return (
     <div className="w-full max-w-7xl mx-auto">
-      <div className="mb-4 px-4 flex items-center justify-between">
-        <h2 className="text-2xl font-semibold tracking-tight">
-          {t('rm-overview')}
-        </h2>
-      </div>
-
       <div className="flex flex-col lg:flex-row gap-4 px-2">
         <Card className="w-full lg:w-1/2 shadow-sm">
           <CardHeader>

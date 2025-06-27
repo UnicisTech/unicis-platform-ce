@@ -9,6 +9,7 @@ import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
 import CreateRisk from './RiskForm/RiskAssessmentDialog';
 import { Button } from '@/components/shadcn/ui/button';
+import { PiaAnalysis } from '../TeamDashboard';
 
 const Dashboard = () => {
   const { canAccess, isLoading } = useCanAccess();
@@ -59,6 +60,9 @@ const Dashboard = () => {
 
   return (
     <>
+      <PiaAnalysis 
+        tasks={tasks}
+      />
       <div className="flex justify-between items-center">
         <div className="space-y-3">
           <h2 className="text-xl font-medium leading-none tracking-tight">

@@ -18,6 +18,7 @@ import {
 import { PerPageSelector } from '@/components/shared';
 import useRpaCreation from 'hooks/useRpaCreation';
 import { Button } from '@/components/shadcn/ui/button';
+import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/TeamProcessingActivities';
 
 const RpaDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -111,6 +112,9 @@ const RpaDashboard: NextPageWithLayout<
         <EmptyState title={t('rpa-dashboard')} description="No records" />
       ) : (
         <>
+          <div className="m-2">
+            <ProcessingActivitiesAnalysis slug={slug as string} />
+          </div>
           <RpaTable
             slug={slug as string}
             tasks={tasksWithProcedures}

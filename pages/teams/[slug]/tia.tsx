@@ -17,6 +17,8 @@ import {
 } from '@/components/interfaces/TIA';
 import { PerPageSelector } from '@/components/shared';
 import { Button } from '@/components/shadcn/ui/button';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import { TeamAssessmentAnalysis } from '@/components/interfaces/TeamDashboard';
 
 const TiaDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -111,6 +113,9 @@ const TiaDashboard: NextPageWithLayout<
         <EmptyState title={t('tia-dashboard')} description="No records" />
       ) : (
         <>
+          <div className="m-2">
+            <TeamAssessmentAnalysis slug={slug as string} />
+          </div>
           <TiaTable
             slug={slug as string}
             tasks={tasksWithProcedures}
