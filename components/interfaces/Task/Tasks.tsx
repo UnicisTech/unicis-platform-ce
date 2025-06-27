@@ -22,7 +22,7 @@ import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Button } from '@/components/shadcn/ui/button';
 import { TeamTaskAnalysis } from '../TeamDashboard';
 
-const Tasks = ({ team, csc_statuses }: { team: Team, csc_statuses: any }) => {
+const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const { isLoading, isError, tasks } = useTasks(slug as string);
@@ -40,10 +40,11 @@ const Tasks = ({ team, csc_statuses }: { team: Team, csc_statuses: any }) => {
       !selectedStatuses.length || selectedStatuses.includes(task.status);
     const moduleMatch =
       !selectedModules.length ||
-      selectedModules.some((mod) =>
-        typeof task.properties === 'object' &&
-        task.properties &&
-        mod in task.properties
+      selectedModules.some(
+        (mod) =>
+          typeof task.properties === 'object' &&
+          task.properties &&
+          mod in task.properties
       );
     return statusMatch && moduleMatch;
   });
@@ -90,10 +91,7 @@ const Tasks = ({ team, csc_statuses }: { team: Team, csc_statuses: any }) => {
               <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
             )}
             {canAccess('task', ['create']) && (
-              <Button
-                color="primary"
-                onClick={() => setVisible(!visible)}
-              >
+              <Button color="primary" onClick={() => setVisible(!visible)}>
                 {t('create')}
               </Button>
             )}
@@ -127,16 +125,22 @@ const Tasks = ({ team, csc_statuses }: { team: Team, csc_statuses: any }) => {
                 <td className="px-4 py-2">
                   <div className="flex flex-wrap items-center gap-2">
                     <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
-                      <span className="underline font-medium">{task.title}</span>
+                      <span className="underline font-medium">
+                        {task.title}
+                      </span>
                     </Link>
-                    {["rpa_procedure", "tia_procedure", "pia_risk", "rm_risk"].map(
-                      (key) =>
-                        typeof task.properties === 'object' &&
-                          task.properties &&
-                          key in task.properties &&
-                          (task.properties as any)[key] ? (
-                          <ModuleBadge key={key} propName={key} />
-                        ) : null
+                    {[
+                      'rpa_procedure',
+                      'tia_procedure',
+                      'pia_risk',
+                      'rm_risk',
+                    ].map((key) =>
+                      typeof task.properties === 'object' &&
+                      task.properties &&
+                      key in task.properties &&
+                      (task.properties as any)[key] ? (
+                        <ModuleBadge key={key} propName={key} />
+                      ) : null
                     )}
                   </div>
                 </td>
@@ -144,7 +148,8 @@ const Tasks = ({ team, csc_statuses }: { team: Team, csc_statuses: any }) => {
                   <StatusBadge
                     value={task.status}
                     label={
-                      statuses.find(({ value }) => value === task.status)?.label || task.status
+                      statuses.find(({ value }) => value === task.status)
+                        ?.label || task.status
                     }
                   />
                 </td>

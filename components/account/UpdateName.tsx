@@ -1,11 +1,11 @@
-import * as Yup from "yup";
-import { useFormik } from "formik";
-import toast from "react-hot-toast";
-import { useTranslation } from "next-i18next";
-import { useSession } from "next-auth/react";
-import type { ApiResponse, UserReturned } from "types";
-import type { User } from "@prisma/client";
-import { defaultHeaders } from "@/lib/common";
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import toast from 'react-hot-toast';
+import { useTranslation } from 'next-i18next';
+import { useSession } from 'next-auth/react';
+import type { ApiResponse, UserReturned } from 'types';
+import type { User } from '@prisma/client';
+import { defaultHeaders } from '@/lib/common';
 
 import {
   Card,
@@ -14,11 +14,11 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@/components/shadcn/ui/card";
-import { Label } from "@/components/shadcn/ui/label";
-import { Input } from "@/components/shadcn/ui/input";
-import { Button } from "@/components/shadcn/ui/button";
-import { Loader2 } from "lucide-react";
+} from '@/components/shadcn/ui/card';
+import { Label } from '@/components/shadcn/ui/label';
+import { Input } from '@/components/shadcn/ui/input';
+import { Button } from '@/components/shadcn/ui/button';
+import { Loader2 } from 'lucide-react';
 
 const schema = Yup.object({
   firstName: Yup.string().required(),
@@ -26,19 +26,19 @@ const schema = Yup.object({
 });
 
 const UpdateName: React.FC<{ user: Partial<User> }> = ({ user }) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   const { data: session, update } = useSession();
 
   const formik = useFormik({
     initialValues: {
-      firstName: user.firstName || "",
-      lastName: user.lastName || "",
+      firstName: user.firstName || '',
+      lastName: user.lastName || '',
     },
     enableReinitialize: true,
     validationSchema: schema,
     onSubmit: async (values) => {
-      const res = await fetch("/api/users", {
-        method: "PUT",
+      const res = await fetch('/api/users', {
+        method: 'PUT',
         headers: defaultHeaders,
         body: JSON.stringify(values),
       });
@@ -59,7 +59,7 @@ const UpdateName: React.FC<{ user: Partial<User> }> = ({ user }) => {
         },
       });
 
-      toast.success(t("successfully-updated"));
+      toast.success(t('successfully-updated'));
     },
   });
 
@@ -67,17 +67,17 @@ const UpdateName: React.FC<{ user: Partial<User> }> = ({ user }) => {
     <form onSubmit={formik.handleSubmit}>
       <Card>
         <CardHeader>
-          <CardTitle>{t("name")}</CardTitle>
-          <CardDescription>{t("name-appearance")}</CardDescription>
+          <CardTitle>{t('name')}</CardTitle>
+          <CardDescription>{t('name-appearance')}</CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-4">
           <div className="grid gap-1">
-            <Label htmlFor="firstName">{t("first-name")}</Label>
+            <Label htmlFor="firstName">{t('first-name')}</Label>
             <Input
               id="firstName"
               name="firstName"
-              placeholder={t("your-first-name")}
+              placeholder={t('your-first-name')}
               value={formik.values.firstName}
               onChange={formik.handleChange}
             />
@@ -89,11 +89,11 @@ const UpdateName: React.FC<{ user: Partial<User> }> = ({ user }) => {
           </div>
 
           <div className="grid gap-1">
-            <Label htmlFor="lastName">{t("last-name")}</Label>
+            <Label htmlFor="lastName">{t('last-name')}</Label>
             <Input
               id="lastName"
               name="lastName"
-              placeholder={t("your-last-name")}
+              placeholder={t('your-last-name')}
               value={formik.values.lastName}
               onChange={formik.handleChange}
             />
@@ -106,12 +106,9 @@ const UpdateName: React.FC<{ user: Partial<User> }> = ({ user }) => {
         </CardContent>
 
         <CardFooter className="flex justify-end">
-          <Button
-            type="submit"
-            disabled={!formik.dirty || !formik.isValid}
-          >
-          {formik.isSubmitting && <Loader2 className="animate-spin" />}
-          {t("save-changes")}
+          <Button type="submit" disabled={!formik.dirty || !formik.isValid}>
+            {formik.isSubmitting && <Loader2 className="animate-spin" />}
+            {t('save-changes')}
           </Button>
         </CardFooter>
       </Card>

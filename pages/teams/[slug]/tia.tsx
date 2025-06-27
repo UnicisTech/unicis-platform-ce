@@ -17,7 +17,6 @@ import {
 } from '@/components/interfaces/TIA';
 import { PerPageSelector } from '@/components/shared';
 import { Button } from '@/components/shadcn/ui/button';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import { TeamAssessmentAnalysis } from '@/components/interfaces/TeamDashboard';
 
 const TiaDashboard: NextPageWithLayout<

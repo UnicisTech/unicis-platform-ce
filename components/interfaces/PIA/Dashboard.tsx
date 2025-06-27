@@ -60,9 +60,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <PiaAnalysis 
-        tasks={tasks}
-      />
+      <PiaAnalysis tasks={tasks} />
       <div className="flex justify-between items-center">
         <div className="space-y-3">
           <h2 className="text-xl font-medium leading-none tracking-tight">
@@ -80,8 +78,8 @@ const Dashboard = () => {
               {t('create')}
             </Button>
           )}
-        </div >
-      </div >
+        </div>
+      </div>
       {isCreateOpen && (
         <CreateRisk
           open={isCreateOpen}
@@ -90,39 +88,37 @@ const Dashboard = () => {
           mutateTasks={mutateTasks}
         />
       )}
-      {
-        tasksWithRisks.length === 0 ? (
-          <EmptyState title={t('rpa-dashboard')} description="No records" />
-        ) : (
-          <>
-            <RisksTable
-              slug={slug as string}
-              tasks={tasksWithRisks}
-              perPage={perPage}
-              editHandler={onEditClickHandler}
-              deleteHandler={onDeleteClickHandler}
+      {tasksWithRisks.length === 0 ? (
+        <EmptyState title={t('rpa-dashboard')} description="No records" />
+      ) : (
+        <>
+          <RisksTable
+            slug={slug as string}
+            tasks={tasksWithRisks}
+            perPage={perPage}
+            editHandler={onEditClickHandler}
+            deleteHandler={onDeleteClickHandler}
+          />
+          {taskToEdit && isEditOpen && (
+            <CreateRisk
+              open={isEditOpen}
+              prevRisk={taskToEdit.properties.pia_risk}
+              onOpenChange={setIsEditOpen}
+              tasks={tasks || []}
+              selectedTask={taskToEdit}
+              mutateTasks={mutateTasks}
             />
-            {taskToEdit && isEditOpen && (
-              <CreateRisk
-                open={isEditOpen}
-                prevRisk={taskToEdit.properties.pia_risk}
-                onOpenChange={setIsEditOpen}
-                tasks={tasks || []}
-                selectedTask={taskToEdit}
-                mutateTasks={mutateTasks}
-              />
-            )}
-            {taskToDelete && isDeleteOpen && (
-              <DeleteRisk
-                visible={isDeleteOpen}
-                setVisible={setIsDeleteOpen}
-                task={taskToDelete}
-                mutate={mutateTasks}
-              />
-            )}
-          </>
-        )
-      }
+          )}
+          {taskToDelete && isDeleteOpen && (
+            <DeleteRisk
+              visible={isDeleteOpen}
+              setVisible={setIsDeleteOpen}
+              task={taskToDelete}
+              mutate={mutateTasks}
+            />
+          )}
+        </>
+      )}
     </>
   );
 };

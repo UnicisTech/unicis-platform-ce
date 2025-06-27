@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
-import toast from "react-hot-toast";
-import { useTranslation } from "next-i18next";
-import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
-import type { User } from "@prisma/client";
-import type { ApiResponse, UserReturned } from "types";
-import { defaultHeaders } from "@/lib/common";
+import React, { useState, useEffect, useCallback } from 'react';
+import toast from 'react-hot-toast';
+import { useTranslation } from 'next-i18next';
+import { ArrowUpCircleIcon } from '@heroicons/react/24/outline';
+import type { User } from '@prisma/client';
+import type { ApiResponse, UserReturned } from 'types';
+import { defaultHeaders } from '@/lib/common';
 
 import {
   Card,
@@ -13,12 +13,12 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@/components/shadcn/ui/card";
-import { Button } from "@/components/shadcn/ui/button";
-import { Loader2 } from "lucide-react";
+} from '@/components/shadcn/ui/card';
+import { Button } from '@/components/shadcn/ui/button';
+import { Loader2 } from 'lucide-react';
 
 const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   const [dragActive, setDragActive] = useState(false);
   const [image, setImage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -26,17 +26,17 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
   useEffect(() => {
     setImage(
       user.image ||
-      `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}`
+        `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}`
     );
   }, [user]);
 
   const uploadFile = (file: File) => {
     if (file.size / 1024 / 1024 > 2) {
-      toast.error(t("file-too-big"));
+      toast.error(t('file-too-big'));
       return;
     }
-    if (!["image/png", "image/jpeg"].includes(file.type)) {
-      toast.error(t("file-type-not-supported"));
+    if (!['image/png', 'image/jpeg'].includes(file.type)) {
+      toast.error(t('file-type-not-supported'));
       return;
     }
     const reader = new FileReader();
@@ -51,36 +51,34 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
     if (file) uploadFile(file);
   };
 
-  const onChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (file) uploadFile(file);
-    },
-    []
-  );
+  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) uploadFile(file);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const res = await fetch("/api/users", {
-      method: "PUT",
+    const res = await fetch('/api/users', {
+      method: 'PUT',
       headers: defaultHeaders,
       body: JSON.stringify({ image }),
     });
     const json = (await res.json()) as ApiResponse<UserReturned>;
     setLoading(false);
     if (!res.ok) toast.error(json.error.message);
-    else toast.success(t("successfully-updated"));
+    else toast.success(t('successfully-updated'));
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <Card>
         <CardHeader>
-          <CardTitle>{t("avatar")}</CardTitle>
+          <CardTitle>{t('avatar')}</CardTitle>
           <CardDescription>
-            {t("custom-avatar")}<br />
-            {t("avatar-type")}
+            {t('custom-avatar')}
+            <br />
+            {t('avatar-type')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -116,7 +114,7 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
               <div
                 className={`
                   absolute inset-0 flex items-center justify-center bg-background/50 
-                  transition-opacity ${dragActive ? "opacity-100" : "opacity-0"} 
+                  transition-opacity ${dragActive ? 'opacity-100' : 'opacity-0'} 
                   group-hover:opacity-100`}
               >
                 <ArrowUpCircleIcon className="h-10 w-10 text-muted-foreground" />
@@ -125,12 +123,9 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
           </div>
         </CardContent>
         <CardFooter className="flex justify-end">
-          <Button
-            type="submit"
-            disabled={!image || image === user.image}
-          >
+          <Button type="submit" disabled={!image || image === user.image}>
             {loading && <Loader2 className="animate-spin" />}
-            {t("save-changes")}
+            {t('save-changes')}
           </Button>
         </CardFooter>
       </Card>

@@ -10,10 +10,7 @@ const AllTasks: NextPageWithLayout<
 > = ({ team, csc_statuses }) => {
   return (
     <>
-      <Tasks 
-        team={team} 
-        csc_statuses={csc_statuses}
-      />
+      <Tasks team={team} csc_statuses={csc_statuses} />
     </>
   );
 };

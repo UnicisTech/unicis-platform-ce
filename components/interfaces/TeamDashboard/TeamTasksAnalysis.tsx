@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next';
 import PieChart from '../CSC/PieChart';
 import { TaskStatusesDetail } from '@/components/interfaces/CSC';
 import useTeamTasks from 'hooks/useTeamTasks';
@@ -20,7 +19,6 @@ const TasksAnalysis = ({
   csc_statuses: { [key: string]: string };
   slug: string;
 }) => {
-  const { t } = useTranslation('translation');
   const { tasks } = useTeamTasks(slug as string);
 
   const statuses: { [key: string]: string } =

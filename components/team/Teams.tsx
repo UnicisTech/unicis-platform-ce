@@ -78,7 +78,9 @@ const Teams = () => {
               <tr>
                 <th className="w-4/10 px-4 py-2 text-left">{t('name')}</th>
                 <th className="w-2/10 px-4 py-2 text-left">{t('members')}</th>
-                <th className="w-2/10 px-4 py-2 text-left">{t('created-at')}</th>
+                <th className="w-2/10 px-4 py-2 text-left">
+                  {t('created-at')}
+                </th>
                 <th className="w-2/10 px-4 py-2 text-left">{t('actions')}</th>
               </tr>
             </thead>
@@ -96,7 +98,9 @@ const Teams = () => {
                         </Link>
                       </td>
                       <td className="px-4 py-2">{team._count.members}</td>
-                      <td className="px-4 py-2">{new Date(team.createdAt).toDateString()}</td>
+                      <td className="px-4 py-2">
+                        {new Date(team.createdAt).toDateString()}
+                      </td>
                       <td className="px-4 py-2">
                         <DaisyButton
                           variant="outline"
