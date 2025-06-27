@@ -73,21 +73,21 @@ const Teams = () => {
               </DaisyButton>
             )}
           </div>
-          <table className="text-sm table w-full border-b dark:border-base-200">
-            <thead className="bg-base-200">
+          <table className="w-full min-w-full divide-y divide-border text-sm">
+            <thead className="bg-muted">
               <tr>
-                <th>{t('name')}</th>
-                <th>{t('members')}</th>
-                <th>{t('created-at')}</th>
-                <th>{t('actions')}</th>
+                <th className="w-4/10 px-4 py-2 text-left">{t('name')}</th>
+                <th className="w-2/10 px-4 py-2 text-left">{t('members')}</th>
+                <th className="w-2/10 px-4 py-2 text-left">{t('created-at')}</th>
+                <th className="w-2/10 px-4 py-2 text-left">{t('actions')}</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-border">
               {teams &&
                 teams.map((team) => {
                   return (
                     <tr key={team.id}>
-                      <td>
+                      <td className="px-4 py-2">
                         <Link href={`/teams/${team.slug}/dashboard`}>
                           <div className="flex items-center justify-start space-x-2">
                             <LetterAvatar name={team.name} />
@@ -95,9 +95,9 @@ const Teams = () => {
                           </div>
                         </Link>
                       </td>
-                      <td>{team._count.members}</td>
-                      <td>{new Date(team.createdAt).toDateString()}</td>
-                      <td>
+                      <td className="px-4 py-2">{team._count.members}</td>
+                      <td className="px-4 py-2">{new Date(team.createdAt).toDateString()}</td>
+                      <td className="px-4 py-2">
                         <DaisyButton
                           variant="outline"
                           size="xs"
