@@ -233,11 +233,12 @@ export const isTranferPermitted = (procedure: any): boolean => {
     SelfReportingObligations,
   } = procedure[1];
 
+  // procedure[3] || [] - procedure[3] may not exist if the procedure is permitted on second step
   const {
     ConnectionTargetedAccess,
     ConnectionSurveillanceTele,
     ConnectionSelfreportingObligations,
-  } = procedure[3];
+  } = procedure[3] || [];
 
   if (EncryptionInTransit === 'no' || TransferMechanism === 'no') {
     return false;
