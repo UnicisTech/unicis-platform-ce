@@ -7,8 +7,8 @@ import { EmptyState, Error } from '@/components/shared';
 import { TaskProperties, TaskWithPiaRisk } from 'types';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import CreateRisk from './RiskForm/RiskAssessmentDialog';
+import { Button } from '@/components/shadcn/ui/button';
 
 const Dashboard = () => {
   const { canAccess, isLoading } = useCanAccess();
@@ -67,19 +67,17 @@ const Dashboard = () => {
         </div>
         <div className="flex justify-end items-center my-1">
           {canAccess('task', ['update']) && (
-            <DaisyButton
-              size="sm"
+            <Button
               color="primary"
-              variant="outline"
               onClick={() => {
                 setIsCreateOpen(true);
               }}
             >
               {t('create')}
-            </DaisyButton>
+            </Button>
           )}
-        </div>
-      </div>
+        </div >
+      </div >
       {isCreateOpen && (
         <CreateRisk
           open={isCreateOpen}
@@ -88,37 +86,39 @@ const Dashboard = () => {
           mutateTasks={mutateTasks}
         />
       )}
-      {tasksWithRisks.length === 0 ? (
-        <EmptyState title={t('rpa-dashboard')} description="No records" />
-      ) : (
-        <>
-          <RisksTable
-            slug={slug as string}
-            tasks={tasksWithRisks}
-            perPage={perPage}
-            editHandler={onEditClickHandler}
-            deleteHandler={onDeleteClickHandler}
-          />
-          {taskToEdit && isEditOpen && (
-            <CreateRisk
-              open={isEditOpen}
-              prevRisk={taskToEdit.properties.pia_risk}
-              onOpenChange={setIsEditOpen}
-              tasks={tasks || []}
-              selectedTask={taskToEdit}
-              mutateTasks={mutateTasks}
+      {
+        tasksWithRisks.length === 0 ? (
+          <EmptyState title={t('rpa-dashboard')} description="No records" />
+        ) : (
+          <>
+            <RisksTable
+              slug={slug as string}
+              tasks={tasksWithRisks}
+              perPage={perPage}
+              editHandler={onEditClickHandler}
+              deleteHandler={onDeleteClickHandler}
             />
-          )}
-          {taskToDelete && isDeleteOpen && (
-            <DeleteRisk
-              visible={isDeleteOpen}
-              setVisible={setIsDeleteOpen}
-              task={taskToDelete}
-              mutate={mutateTasks}
-            />
-          )}
-        </>
-      )}
+            {taskToEdit && isEditOpen && (
+              <CreateRisk
+                open={isEditOpen}
+                prevRisk={taskToEdit.properties.pia_risk}
+                onOpenChange={setIsEditOpen}
+                tasks={tasks || []}
+                selectedTask={taskToEdit}
+                mutateTasks={mutateTasks}
+              />
+            )}
+            {taskToDelete && isDeleteOpen && (
+              <DeleteRisk
+                visible={isDeleteOpen}
+                setVisible={setIsDeleteOpen}
+                task={taskToDelete}
+                mutate={mutateTasks}
+              />
+            )}
+          </>
+        )
+      }
     </>
   );
 };

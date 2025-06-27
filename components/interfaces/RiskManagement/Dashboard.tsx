@@ -7,8 +7,8 @@ import { TaskProperties, TaskWithRmRisk } from 'types';
 import { EmptyState, Error } from '@/components/shared';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import CreateRisk from './RiskForm/RmRiskDialog';
+import { Button } from '@/components/shadcn/ui/button';
 
 const Dashboard = () => {
   const { canAccess } = useCanAccess();
@@ -60,16 +60,14 @@ const Dashboard = () => {
         </div>
         <div className="flex justify-end items-center my-1">
           {canAccess('task', ['update']) && (
-            <DaisyButton
-              size="sm"
+            <Button
               color="primary"
-              variant="outline"
               onClick={() => {
                 setIsCreateOpen(true);
               }}
             >
               {t('create')}
-            </DaisyButton>
+            </Button>
           )}
         </div>
       </div>

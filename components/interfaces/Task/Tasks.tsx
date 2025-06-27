@@ -19,6 +19,7 @@ import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import ModuleBadge from '@/components/shared/ModuleBadge';
 import TaskFilters from '@/components/interfaces/Task/TaskFilters';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
+import { Button } from '@/components/shadcn/ui/button';
 
 const Tasks = ({ team }: { team: Team }) => {
   const router = useRouter();
@@ -84,14 +85,12 @@ const Tasks = ({ team }: { team: Team }) => {
               <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
             )}
             {canAccess('task', ['create']) && (
-              <DaisyButton
-                size="sm"
+              <Button
                 color="primary"
-                variant="outline"
                 onClick={() => setVisible(!visible)}
               >
                 {t('create')}
-              </DaisyButton>
+              </Button>
             )}
           </div>
         </div>
@@ -129,9 +128,9 @@ const Tasks = ({ team }: { team: Team }) => {
                     {["rpa_procedure", "tia_procedure", "pia_risk", "rm_risk"].map(
                       (key) =>
                         typeof task.properties === 'object' &&
-                        task.properties &&
-                        key in task.properties &&
-                        (task.properties as any)[key] ? (
+                          task.properties &&
+                          key in task.properties &&
+                          (task.properties as any)[key] ? (
                           <ModuleBadge key={key} propName={key} />
                         ) : null
                     )}

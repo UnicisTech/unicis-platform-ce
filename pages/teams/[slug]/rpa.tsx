@@ -17,7 +17,7 @@ import {
 } from '@/components/interfaces/RPA';
 import { PerPageSelector } from '@/components/shared';
 import useRpaCreation from 'hooks/useRpaCreation';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import { Button } from '@/components/shadcn/ui/button';
 
 const RpaDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -89,17 +89,15 @@ const RpaDashboard: NextPageWithLayout<
             <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
           )}
           {canAccess('task', ['update']) && (
-            <DaisyButton
-              size="sm"
+            <Button
               color="primary"
-              variant="outline"
               onClick={() => {
                 setTaskToEdit(null);
                 rpaState.setIsRpaOpen(true);
               }}
             >
               {t('create')}
-            </DaisyButton>
+            </Button>
           )}
         </div>
       </div>
