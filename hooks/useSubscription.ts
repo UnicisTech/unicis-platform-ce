@@ -7,7 +7,7 @@ const params = {
   },
   PREMIUM: {
     maxUsers: 150,
-    avaliableISO: ['default', '2013', '2022', 'uenis2', 'gdpr', 'cisv81'],
+    avaliableISO: ['default', '2013', '2022', 'eunis2', 'gdpr', 'cisv81'],
   },
   ULTIMATE: {
     maxUsers: 10000000,
@@ -16,7 +16,7 @@ const params = {
       '2013',
       '2022',
       'nistcsfv2',
-      'uenis2',
+      'eunis2',
       'gdpr',
       'cisv81',
     ],
