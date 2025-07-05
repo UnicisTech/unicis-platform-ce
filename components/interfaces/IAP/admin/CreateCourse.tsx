@@ -143,6 +143,7 @@ export default function CreateCourse2({
 
   const questionType = questionForm.watch('questionType');
 
+  console.log('questionForm', questionForm)
   // Whenever we switch to stage 1, prefill answer fields if editing
   useEffect(() => {
     if (!currentQuestion) {
@@ -287,6 +288,18 @@ export default function CreateCourse2({
       setIsSaving(false);
     }
   };
+
+  useEffect(() => {
+    if (questionType === QuestionType.SINGLE_CHOICE) {
+      // find & reset all the “isCorrect” flags
+      const values = questionForm.getValues();
+      Object.keys(values)
+        .filter((k) => k.startsWith("isCorrect"))
+        .forEach((checkbox) => {
+          questionForm.resetField(checkbox, { defaultValue: false });
+        });
+    }
+  }, [questionType, questionForm]);
 
   return (
     <Dialog open={visible} onOpenChange={closeHandler}>
@@ -561,9 +574,7 @@ export default function CreateCourse2({
                   <FormLabel>{t('question-type')}</FormLabel>
                   <FormControl>
                     <Select
-                      onValueChange={(val: any) => {
-                        field.onChange(val);
-                      }}
+                      onValueChange={field.onChange}
                       value={field.value}
                     >
                       <SelectTrigger className="w-full">
