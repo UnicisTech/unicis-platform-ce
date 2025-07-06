@@ -196,66 +196,68 @@ export default function RiskAssessmentDialog({
           )}
         </DialogHeader>
 
-        {currentStep === 0 && tasks && (
-          <Form {...taskForm}>
-            <form className="space-y-4">
-              <TaskPicker
-                control={taskForm.control}
-                name="task"
-                tasks={tasks.filter(
-                  (task) => !(task.properties as any)?.pia_risk
-                )}
+        <div className="max-w-md">
+          {currentStep === 0 && tasks && (
+            <Form {...taskForm}>
+              <form className="space-y-4">
+                <TaskPicker
+                  control={taskForm.control}
+                  name="task"
+                  tasks={tasks.filter(
+                    (task) => !(task.properties as any)?.pia_risk
+                  )}
+                />
+              </form>
+            </Form>
+          )}
+
+          {currentStep === 1 && (
+            <Form {...dataTransparancyForm}>
+              <DataProcessingStep
+                initial={riskData[0]}
+                control={dataTransparancyForm.control}
               />
-            </form>
-          </Form>
-        )}
+            </Form>
+          )}
 
-        {currentStep === 1 && (
-          <Form {...dataTransparancyForm}>
-            <DataProcessingStep
-              initial={riskData[0]}
-              control={dataTransparancyForm.control}
-            />
-          </Form>
-        )}
+          {currentStep === 2 && (
+            <Form {...confidentialityForm}>
+              <ConfidentialityStep
+                initial={riskData[1]}
+                control={confidentialityForm.control}
+              />
+            </Form>
+          )}
 
-        {currentStep === 2 && (
-          <Form {...confidentialityForm}>
-            <ConfidentialityStep
-              initial={riskData[1]}
-              control={confidentialityForm.control}
-            />
-          </Form>
-        )}
+          {currentStep === 3 && (
+            <Form {...availabilityForm}>
+              <AvailabilityStep
+                initial={riskData[2]}
+                control={availabilityForm.control}
+              />
+            </Form>
+          )}
 
-        {currentStep === 3 && (
-          <Form {...availabilityForm}>
-            <AvailabilityStep
-              initial={riskData[2]}
-              control={availabilityForm.control}
-            />
-          </Form>
-        )}
+          {currentStep === 4 && (
+            <Form {...transparencyForm}>
+              <TransparencyStep
+                initial={riskData[3]}
+                control={transparencyForm.control}
+              />
+            </Form>
+          )}
 
-        {currentStep === 4 && (
-          <Form {...transparencyForm}>
-            <TransparencyStep
-              initial={riskData[3]}
-              control={transparencyForm.control}
-            />
-          </Form>
-        )}
+          {currentStep === 5 && <ResultsStep risk={riskData} />}
 
-        {currentStep === 5 && <ResultsStep risk={riskData} />}
-
-        {currentStep === 6 && (
-          <Form {...correctiveForm}>
-            <CorrectiveMeasuresStep
-              initial={riskData[4]}
-              control={correctiveForm.control}
-            />
-          </Form>
-        )}
+          {currentStep === 6 && (
+            <Form {...correctiveForm}>
+              <CorrectiveMeasuresStep
+                initial={riskData[4]}
+                control={correctiveForm.control}
+              />
+            </Form>
+          )}
+        </div>
 
         <DialogFooter className="flex justify-end space-x-2">
           <DialogClose asChild>

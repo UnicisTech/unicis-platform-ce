@@ -129,31 +129,33 @@ export default function RmRiskDialog({
           )}
         </DialogHeader>
 
-        {currentStep === 0 && tasks && (
-          <Form {...taskForm}>
-            <form className="space-y-4">
-              <TaskPicker
-                control={taskForm.control}
-                name="task"
-                tasks={tasks.filter(
-                  (task) => !(task.properties as any)?.rm_risk
-                )}
-              />
-            </form>
-          </Form>
-        )}
+        <div className="max-w-md">
+          {currentStep === 0 && tasks && (
+            <Form {...taskForm}>
+              <form className="space-y-4">
+                <TaskPicker
+                  control={taskForm.control}
+                  name="task"
+                  tasks={tasks.filter(
+                    (task) => !(task.properties as any)?.rm_risk
+                  )}
+                />
+              </form>
+            </Form>
+          )}
 
-        {currentStep === 1 && (
-          <Form {...riskAndImpactForm}>
-            <RiskAndImpactStep control={riskAndImpactForm.control} />
-          </Form>
-        )}
+          {currentStep === 1 && (
+            <Form {...riskAndImpactForm}>
+              <RiskAndImpactStep control={riskAndImpactForm.control} />
+            </Form>
+          )}
 
-        {currentStep === 2 && (
-          <Form {...riskTreatmentForm}>
-            <RiskTreatmentStep control={riskTreatmentForm.control} />
-          </Form>
-        )}
+          {currentStep === 2 && (
+            <Form {...riskTreatmentForm}>
+              <RiskTreatmentStep control={riskTreatmentForm.control} />
+            </Form>
+          )}
+        </div>
 
         <DialogFooter className="flex justify-end space-x-2">
           <DialogClose asChild>
