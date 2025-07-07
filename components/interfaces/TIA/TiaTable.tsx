@@ -7,6 +7,7 @@ import useCanAccess from 'hooks/useCanAccess';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
+import { isTranferPermitted } from '@/lib/tia';
 
 const getEndDate = (dateStr, yearsToAdd) => {
   const d = new Date(dateStr);
@@ -110,7 +111,12 @@ const TiaTable = ({
                 </td>
                 <td className="px-1.5 py-1.5">
                   <span>
-                    {task.properties.tia_procedure[0].LawImporterCountry.label}
+                    {/* TODO: reuse the component from Conclusion step*/}
+                    {isTranferPermitted(task.properties.tia_procedure) ? (
+                      <DaisyBadge appearance="added">PERMITTED</DaisyBadge>
+                    ) : (
+                      <DaisyBadge appearance="removed">NOT PERMITTED</DaisyBadge>
+                    )}
                   </span>
                 </td>
                 {canAccess('task', ['update']) && (
