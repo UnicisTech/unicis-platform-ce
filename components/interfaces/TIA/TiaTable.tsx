@@ -115,7 +115,9 @@ const TiaTable = ({
                     {isTranferPermitted(task.properties.tia_procedure) ? (
                       <DaisyBadge appearance="added">PERMITTED</DaisyBadge>
                     ) : (
-                      <DaisyBadge appearance="removed">NOT PERMITTED</DaisyBadge>
+                      <DaisyBadge appearance="removed">
+                        NOT PERMITTED
+                      </DaisyBadge>
                     )}
                   </span>
                 </td>
