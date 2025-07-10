@@ -143,7 +143,7 @@ const StatusesTable = ({
                     </span>
                   )}
                 </td>
-                <td className="px-6 py-3 w-40">
+                <td className="px-6 py-3 w-80">
                   {canAccess('task', ['update']) ? (
                     <TaskSelector
                       tasks={tasks}
