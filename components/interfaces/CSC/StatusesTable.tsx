@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import StatusHeader from './StatusHeader';
 import TaskSelector from './TaskSelector';
 import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
@@ -36,10 +36,37 @@ const StatusesTable = ({
   ) => Promise<void>;
 }) => {
   const { canAccess } = useCanAccess();
-  //TODO: maybe [] instead of getControlOptions
-  const [filteredControls, setFilteredControls] = useState<
-    Array<ControlOption>
-  >(getControlOptions(ISO));
+  const cscControlsProp = getCscControlsProp(ISO);
+
+  // Compute filteredControls whenever ISO, filters, or statuses change
+  const filteredControls = useMemo<ControlOption[]>(() => {
+    let ctrls = getControlOptions(ISO);
+
+    // no filters? just return everything
+    const noSection = !sectionFilter?.length;
+    const noStatus  = !statusFilter?.length;
+    if (noSection && noStatus) return ctrls;
+
+    if (sectionFilter?.length) {
+      const sections = sectionFilter.map((o) => o.value);
+      ctrls = ctrls.filter((item) => {
+        const content = item.value.section;
+        return ISO === '2013'
+          ? sections.some((sec) => content.includes(sec))
+          : sections.includes(content);
+      });
+    }
+
+    if (statusFilter?.length) {
+      const labels = statusFilter.map((o) => o.label);
+      ctrls = ctrls.filter(
+        (c) => labels.includes(statuses[c.value.control])
+      );
+    }
+
+    return ctrls;
+  }, [ISO, sectionFilter, statusFilter, statuses]);
+
   const {
     currentPage,
     totalPages,
@@ -48,39 +75,6 @@ const StatusesTable = ({
     prevButtonDisabled,
     nextButtonDisabled,
   } = usePagination<ControlOption>(filteredControls, perPage);
-
-  const cscControlsProp = getCscControlsProp(ISO);
-
-  useEffect(() => {
-    let filteredControls = [...getControlOptions(ISO)];
-    if (
-      (sectionFilter === null || sectionFilter?.length === 0) &&
-      (statusFilter === null || statusFilter?.length === 0)
-    ) {
-      setFilteredControls(filteredControls);
-      return;
-    }
-    if (sectionFilter?.length) {
-      filteredControls = filteredControls.filter((item) => {
-        const sections = sectionFilter.map((option) => option.value);
-        const content = item.value.section;
-        if (ISO === '2013') {
-          return sections.some((section) => content.includes(section));
-        } else {
-          return sections.includes(content);
-        }
-      });
-    }
-    if (statusFilter?.length) {
-      filteredControls = filteredControls.filter((control) =>
-        statusFilter
-          .map((option) => option.label)
-          .includes(statuses[control.value.control])
-      );
-    }
-
-    setFilteredControls(filteredControls);
-  }, [sectionFilter, statusFilter]);
 
   return (
     <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
