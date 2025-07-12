@@ -122,6 +122,13 @@ body {
   @apply bg-background;
 }
 
+/* Workaround: undo lingering `pointer-events: none` that Radix’s inert/polyfill 
+   applies to <body> when a Dialog/Select portal is closed, so clicks remain enabled */
+body {
+  @apply text-foreground;
+  pointer-events: auto !important;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #333333;
