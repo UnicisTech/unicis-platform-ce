@@ -88,9 +88,11 @@ const Billing: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({
       <TeamTab activeTab="billing" team={team} teamFeatures={teamFeatures} />
       <Pricing
         plans={plans}
-        setVisible={setVisible}
         team={team}
-        setSelectedSubscription={setSelectedSubscription}
+        onPlanSelect={(planId) => {
+          setSelectedSubscription(planId);
+          setVisible(true);
+        }}
       />
       <DetailsModal
         visible={visible}

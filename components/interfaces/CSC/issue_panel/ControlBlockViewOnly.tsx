@@ -1,7 +1,10 @@
+'use client';
+
 import React, { useMemo } from 'react';
-import TextArea from '@atlaskit/textarea';
-import Textfield from '@atlaskit/textfield';
 import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
+import { Input } from '@/components/shadcn/ui/input';
+import { Textarea } from '@/components/shadcn/ui/textarea';
+import { Label } from '@/components/shadcn/ui/label';
 
 const ControlBlockViewOnly = ({
   status,
@@ -18,55 +21,49 @@ const ControlBlockViewOnly = ({
   )?.value;
 
   return (
-    <>
+    <div className="space-y-4">
       <div>
-        <p className="csc_label">Select a control</p>
-        <Textfield
-          isReadOnly
+        <Label>Select a control</Label>
+        <Input
           value={
             controlOptions.find(({ value }) => value.control === control)?.label
           }
+          readOnly
         />
       </div>
+
       {controlData?.code && (
-        <>
-          <p className="csc_label">Code</p>
-          <Textfield isReadOnly value={controlData.code} />
-        </>
+        <div>
+          <Label>Code</Label>
+          <Input value={controlData.code} readOnly />
+        </div>
       )}
+
       {controlData?.section && (
-        <>
-          <p className="csc_label">Section</p>
-          <Textfield isReadOnly value={controlData?.section} />
-        </>
+        <div>
+          <Label>Section</Label>
+          <Input value={controlData.section} readOnly />
+        </div>
       )}
-      <>
-        <p className="csc_label">Status</p>
-        <Textfield isReadOnly value={status} />
-      </>
+
+      <div>
+        <Label>Status</Label>
+        <Input value={status} readOnly />
+      </div>
+
       {controlData?.requirements && (
-        <>
-          <p className="csc_label">Requirements</p>
-          <TextArea
-            resize="auto"
-            maxHeight="20vh"
-            name="area"
-            value={controlData?.requirements}
-            isReadOnly
-            // Temporary solution to escape type errors
-            {...({} as any)}
+        <div>
+          <Label>Requirements</Label>
+          <Textarea
+            value={controlData.requirements}
+            readOnly
+            className="resize-y max-h-[20vh]"
           />
-        </>
+        </div>
       )}
-      <div
-        style={{
-          height: '1px',
-          width: '100%',
-          backgroundColor: 'rgb(223, 225, 231)',
-          margin: '24px 0px',
-        }}
-      ></div>
-    </>
+
+      <div className="h-px w-full bg-muted my-6" />
+    </div>
   );
 };
 

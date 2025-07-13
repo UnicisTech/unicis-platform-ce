@@ -2,6 +2,9 @@ import defaultJson from '../MVPS-controls.json';
 import iso2013Json from '../ISO-CSC-controls-2013.json';
 import iso2022Json from '../ISO-CSC-controls-2022.json';
 import nistcsfv2 from '../CSF2_1.json';
+import eunis2 from '../eu-nis2.json';
+import gdpr from '../gdpr_controls.json';
+import cisv81 from '../cis_v81_1.json';
 import { Section } from 'types';
 
 const controls = {
@@ -13,6 +16,9 @@ const controls = {
     Control: `${item.Code}: ${item.Control}`,
     ControlLabel: item.Control,
   })),
+  eunis2: eunis2,
+  gdpr: gdpr,
+  cisv81: cisv81,
 };
 
 const sections = [
@@ -39,6 +45,9 @@ const isoOptions = [
   { label: 'ISO/IEC 27001:2022', value: '2022' },
   { label: 'MVSP v1.0-20211007', value: 'default' },
   { label: 'NIST CSF v2', value: 'nistcsfv2' },
+  { label: 'EU NIS2', value: 'eunis2' },
+  { label: 'GDPR', value: 'gdpr' },
+  { label: 'CIS CSC v8.1', value: 'cisv81' },
 ];
 
 const perPageOptions: { label: string; value: number }[] = [
@@ -71,6 +80,9 @@ const getSectionsLabels = (iso: string) => {
   switch (iso) {
     case '2022':
     case 'default':
+    case 'eunist2':
+    case 'gdpr':
+    case 'cisv81':
     case 'nistcsfv2':
       return getSections(iso).map(({ label }) => label);
     // case 'nistcsfv2':
@@ -201,31 +213,31 @@ const statusOptions: { label: string; value: number }[] = [
   },
   {
     label: 'Not Applicable',
-    value: 0,
-  },
-  {
-    label: 'Not Performed',
     value: 1,
   },
   {
-    label: 'Performed Informally',
+    label: 'Not Performed',
     value: 2,
   },
   {
-    label: 'Planned',
+    label: 'Performed Informally',
     value: 3,
   },
   {
-    label: 'Well Defined',
+    label: 'Planned',
     value: 4,
   },
   {
-    label: 'Quantitatively Controlled',
+    label: 'Well Defined',
     value: 5,
   },
   {
-    label: 'Continuously Improving',
+    label: 'Quantitatively Controlled',
     value: 6,
+  },
+  {
+    label: 'Continuously Improving',
+    value: 7,
   },
 ];
 

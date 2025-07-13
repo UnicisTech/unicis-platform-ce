@@ -1,8 +1,14 @@
-import { CreateProcedure as CreateRpaProcedure } from '@/components/interfaces/RPA';
+import RpaProcedureDialog from './ProcedureForm/RpaProcedureDialog';
 import { CreatePiaRisk } from '@/components/interfaces/PIA';
 import { CreateProcedure as CreateTiaProcedure } from '@/components/interfaces/TIA';
 import { Task } from '@prisma/client';
-import { UseRpaCreationState } from 'types';
+import {
+  PiaRisk,
+  RpaProcedureInterface,
+  TaskProperties,
+  TiaProcedureInterface,
+  UseRpaCreationState,
+} from 'types';
 
 interface CreateProcedureTestProps extends UseRpaCreationState {
   tasks?: Task[];
@@ -25,9 +31,14 @@ const CreateProcedureTest = ({
   return (
     <>
       {isCreateOpen && (
-        <CreateRpaProcedure
-          visible={isCreateOpen}
-          setVisible={setIsCreateOpen}
+        <RpaProcedureDialog
+          open={isCreateOpen}
+          onOpenChange={setIsCreateOpen}
+          prevProcedure={
+            (selectedTask?.properties as TaskProperties)?.rpa_procedure as
+              | RpaProcedureInterface
+              | undefined
+          }
           tasks={tasks}
           selectedTask={selectedTask}
           mutateTasks={mutateTasks}
@@ -37,9 +48,14 @@ const CreateProcedureTest = ({
       {isPiaOpen && (
         <CreatePiaRisk
           key={selectedTask?.id || 'create-pia'}
-          visible={isPiaOpen}
-          setVisible={setIsPiaOpen}
-          selectedTask={selectedTask || undefined}
+          open={isPiaOpen}
+          onOpenChange={setIsPiaOpen}
+          prevRisk={
+            (selectedTask?.properties as TaskProperties)?.pia_risk as
+              | PiaRisk
+              | undefined
+          }
+          selectedTask={selectedTask}
           mutateTasks={mutateTasks}
           completeCallback={() => onProcedureCompletedCallback('PIA')}
         />
@@ -47,10 +63,15 @@ const CreateProcedureTest = ({
       {isTiaOpen && (
         <CreateTiaProcedure
           key={selectedTask?.id || 'create-tia'}
-          visible={isTiaOpen}
-          setVisible={setIsTiaOpen}
-          selectedTask={selectedTask as Task}
-          mutate={mutateTasks}
+          open={isTiaOpen}
+          onOpenChange={setIsTiaOpen}
+          prevProcedure={
+            (selectedTask?.properties as TaskProperties)?.tia_procedure as
+              | TiaProcedureInterface
+              | undefined
+          }
+          selectedTask={selectedTask}
+          mutateTasks={mutateTasks}
           completeCallback={() => onProcedureCompletedCallback('TIA')}
         />
       )}

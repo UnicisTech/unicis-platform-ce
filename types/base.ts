@@ -7,6 +7,14 @@ import { TeamIapProperties } from './iap';
 import type { TaskRmProperties } from './rm';
 import type { Session } from 'next-auth';
 
+export const componentStatuses = [
+  'info',
+  'success',
+  'warning',
+  'error',
+] as const;
+export type ComponentStatus = (typeof componentStatuses)[number];
+
 export type ApiError = {
   code?: string;
   message: string;
@@ -105,7 +113,7 @@ export interface TeamFeature {
 
 export type Option = {
   label: string;
-  value: number;
+  value: string;
 };
 
 export type Diff = {

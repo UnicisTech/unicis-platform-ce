@@ -6,11 +6,6 @@ export type TeamIapProperties = {
   iap_courses?: any[];
 };
 
-type Option = {
-  label: string;
-  value: string;
-};
-
 export enum QuestionType {
   SINGLE_CHOICE = 'checkboxsingle',
   MULTIPLE_CHOICE = 'checkboxmulti',
@@ -20,13 +15,10 @@ export enum QuestionType {
 
 export type CourseFormData = {
   name: string;
-  category: Option;
-  type: {
-    label: string;
-    value: CourseContentType;
-  };
+  category: string;
+  type: CourseContentType;
   programContent: string;
-  teams: Option[];
+  teams: string[];
   estimatedTime: string;
   thumbnailLink: string;
   description: string;

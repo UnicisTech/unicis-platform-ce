@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Button } from 'react-daisyui';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
@@ -7,6 +6,7 @@ import { Card, Error, LetterAvatar, Loading } from '@/components/shared';
 import useTeams from 'hooks/useTeams';
 import { Team } from '@prisma/client';
 import { ApiResponse } from 'types';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const Teams = () => {
   const { isLoading, isError, teams, mutateTeams } = useTeams();
@@ -77,7 +77,7 @@ const Teams = () => {
                       {new Date(team.createdAt).toDateString()}
                     </td>
                     <td className="px-6 py-3">
-                      <Button
+                      <DaisyButton
                         size="sm"
                         variant="outline"
                         onClick={() => {
@@ -85,7 +85,7 @@ const Teams = () => {
                         }}
                       >
                         {t('leave-team')}
-                      </Button>
+                      </DaisyButton>
                     </td>
                   </tr>
                 );

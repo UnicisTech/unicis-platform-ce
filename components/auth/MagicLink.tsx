@@ -7,9 +7,9 @@ import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 interface MagicLinkProps {
   csrfToken: string | undefined;
@@ -82,7 +82,7 @@ const MagicLink = ({ csrfToken }: MagicLinkProps) => {
               error={formik.touched.email ? formik.errors.email : undefined}
               onChange={formik.handleChange}
             />
-            <Button
+            <DaisyButton
               type="submit"
               color="primary"
               loading={formik.isSubmitting}
@@ -91,7 +91,7 @@ const MagicLink = ({ csrfToken }: MagicLinkProps) => {
               size="md"
             >
               {t('send-magic-link')}
-            </Button>
+            </DaisyButton>
           </div>
         </form>
         <div className="divider"></div>

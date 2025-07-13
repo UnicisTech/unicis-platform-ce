@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Image,
 } from '@react-pdf/renderer';
-import Button from '@atlaskit/button';
+import { Button } from '@/components/shadcn/ui/button';
 import { Course } from '@prisma/client';
 
 interface CertificateProps {
@@ -125,7 +125,9 @@ const Certificate = ({ userName, course }: CertificateProps) => {
       document={<Quixote userName={userName} course={course} />}
       fileName={`${userName} ${course.name} Certificate.pdf`}
     >
-      <Button style={{ marginTop: '5px' }}>Download certificate</Button>
+      <Button variant="outline" className="mt-2">
+        Download certificate
+      </Button>
     </PDFDownloadLink>
   );
 };

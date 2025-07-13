@@ -12,12 +12,13 @@ import useCanAccess from 'hooks/useCanAccess';
 import type { TaskWithRpaProcedure, TaskProperties } from 'types';
 import {
   RpaTable,
-  DeleteRpa,
+  DeleteProcedure,
   CreateProcedureTest,
 } from '@/components/interfaces/RPA';
-import { Button } from 'react-daisyui';
 import { PerPageSelector } from '@/components/shared';
 import useRpaCreation from 'hooks/useRpaCreation';
+import { Button } from '@/components/shadcn/ui/button';
+import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/TeamProcessingActivities';
 
 const RpaDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -26,7 +27,6 @@ const RpaDashboard: NextPageWithLayout<
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
   const { slug } = router.query;
-  const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskWithRpaProcedure | null>(
     null
@@ -45,7 +45,6 @@ const RpaDashboard: NextPageWithLayout<
 
   const onEditClickHandler = useCallback((task: TaskWithRpaProcedure) => {
     setTaskToEdit(task);
-    setIsEditOpen(true);
     rpaState.setIsRpaOpen(true);
   }, []);
 
@@ -92,10 +91,9 @@ const RpaDashboard: NextPageWithLayout<
           )}
           {canAccess('task', ['update']) && (
             <Button
-              size="sm"
               color="primary"
-              variant="outline"
               onClick={() => {
+                setTaskToEdit(null);
                 rpaState.setIsRpaOpen(true);
               }}
             >
@@ -104,17 +102,19 @@ const RpaDashboard: NextPageWithLayout<
           )}
         </div>
       </div>
-      <>
-        <CreateProcedureTest
-          tasks={tasks}
-          mutateTasks={mutateTasks}
-          {...rpaState}
-        />
-      </>
+      <CreateProcedureTest
+        tasks={tasks}
+        mutateTasks={mutateTasks}
+        {...rpaState}
+        selectedTask={taskToEdit || rpaState.selectedTask}
+      />
       {tasksWithProcedures.length === 0 ? (
         <EmptyState title={t('rpa-dashboard')} description="No records" />
       ) : (
         <>
+          <div className="m-2">
+            <ProcessingActivitiesAnalysis slug={slug as string} />
+          </div>
           <RpaTable
             slug={slug as string}
             tasks={tasksWithProcedures}
@@ -122,15 +122,8 @@ const RpaDashboard: NextPageWithLayout<
             editHandler={onEditClickHandler}
             deleteHandler={onDeleteClickHandler}
           />
-          {taskToEdit && isEditOpen && (
-            <CreateProcedureTest
-              mutateTasks={mutateTasks}
-              {...rpaState}
-              selectedTask={taskToEdit as TaskWithRpaProcedure}
-            />
-          )}
           {taskToDelete && isDeleteOpen && (
-            <DeleteRpa
+            <DeleteProcedure
               visible={isDeleteOpen}
               setVisible={setIsDeleteOpen}
               task={taskToDelete as TaskWithRpaProcedure}

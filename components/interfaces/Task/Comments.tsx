@@ -7,7 +7,6 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import type { ApiResponse } from 'types';
 import type { TaskExtended } from 'types';
-import { IssuePanelContainer } from 'sharedStyles';
 import Comment from './comments/Comment';
 import CreateCommentForm from './comments/CreateCommentForm';
 import { AccessControl } from '@/components/shared/AccessControl';
@@ -31,6 +30,7 @@ export default function Comments({
   const [commentToDelete, setCommentToDelete] = useState<number | null>(null);
   const [confirmationDialogVisible, setConfirmationDialogVisible] =
     useState(false);
+  // const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   const onDeleteClick = useCallback((id: number) => {
     setCommentToDelete(id);
@@ -95,6 +95,8 @@ export default function Comments({
     if (!id) return;
 
     try {
+      // setIsDeleting(true);
+
       const response = await axios.delete<ApiResponse<unknown>>(
         `/api/teams/${slug}/tasks/${taskNumber}/comments`,
         {
@@ -113,11 +115,13 @@ export default function Comments({
       mutateTask();
     } catch (error: any) {
       toast.error(getAxiosError(error));
+    } finally {
+      // setIsDeleting(false);
     }
   }, []);
 
   return (
-    <IssuePanelContainer>
+    <div className="p-5">
       <div style={{ marginTop: '30px' }}>
         {task.comments
           .sort(
@@ -136,7 +140,9 @@ export default function Comments({
           ))}
       </div>
       <AccessControl resource="task" actions={['update']}>
-        <CreateCommentForm handleCreate={handleCreateComment} />
+        <div className="mt-4">
+          <CreateCommentForm handleCreate={handleCreateComment} />
+        </div>
       </AccessControl>
       <ConfirmationDialog
         visible={confirmationDialogVisible}
@@ -146,6 +152,6 @@ export default function Comments({
       >
         {t('delete-comment-warning')}
       </ConfirmationDialog>
-    </IssuePanelContainer>
+    </div>
   );
 }

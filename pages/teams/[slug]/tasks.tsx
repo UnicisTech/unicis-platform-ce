@@ -3,14 +3,14 @@ import type { InferGetServerSidePropsType } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSidePropsContext } from 'next';
 import { Tasks } from '@/components/interfaces/Task';
-import { getTeam } from 'models/team';
+import { getCscStatusesBySlug, getTeam } from 'models/team';
 
 const AllTasks: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ team }) => {
+> = ({ team, csc_statuses }) => {
   return (
     <>
-      <Tasks team={team} />
+      <Tasks team={team} csc_statuses={csc_statuses} />
     </>
   );
 };
@@ -35,6 +35,7 @@ export const getServerSideProps = async (
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
       team: JSON.parse(JSON.stringify(team)),
+      csc_statuses: await getCscStatusesBySlug(slug),
     },
   };
 };

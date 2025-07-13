@@ -1,30 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Task } from '@prisma/client';
 import type { AuditLog } from 'types';
-import { IssuePanelContainer } from 'sharedStyles';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/shadcn/ui/table';
+import Pagination from '@/components/shadcn/ui/audit-pagination';
+
+const ITEMS_PER_PAGE = 20;
 
 const AuditLogs = ({ task }: { task: Task }) => {
   const taskProperties = task?.properties as any;
-  const auditLogs = taskProperties.pia_audit_logs as AuditLog[] | undefined;
+  const auditLogs = (taskProperties?.pia_audit_logs || []) as AuditLog[];
+
+  const [page, setPage] = useState(1);
+  const totalPages = Math.ceil(auditLogs.length / ITEMS_PER_PAGE);
+  const currentLogs = [...auditLogs]
+    .sort((a, b) => b.date - a.date)
+    .slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
 
   return (
-    <IssuePanelContainer>
-      <div style={{ padding: '10px 20px' }}>
-        {auditLogs &&
-          auditLogs.reverse().map((log, index) => {
-            console.log('auditLogs log', log);
-            return (
-              <div key={index} style={{ margin: '15px' }}>
-                <p>User: {log.actor.name}</p>
-                <p>Action: {log.event}</p>
-                <p>Date: {new Date(log.date).toLocaleDateString()}</p>
-                <p>Previous value: {log.diff?.prevValue?.toString()}</p>
-                <p>Next value: {log.diff?.nextValue?.toString()}</p>
-              </div>
-            );
-          })}
-      </div>
-    </IssuePanelContainer>
+    <div>
+      {auditLogs.length > 0 ? (
+        <>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>User</TableHead>
+                <TableHead>Action</TableHead>
+                <TableHead>Date</TableHead>
+                <TableHead>Previous Value</TableHead>
+                <TableHead>Next Value</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {currentLogs.map((log, index) => (
+                <TableRow key={index}>
+                  <TableCell>{log.actor?.name || '—'}</TableCell>
+                  <TableCell>{log.event}</TableCell>
+                  <TableCell>
+                    {new Date(log.date).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {log.diff?.prevValue?.toString() || '—'}
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {log.diff?.nextValue?.toString() || '—'}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          {totalPages > 1 && (
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              onChange={setPage}
+            />
+          )}
+        </>
+      ) : (
+        <p className="text-sm text-muted-foreground">
+          No audit logs available.
+        </p>
+      )}
+    </div>
   );
 };
 

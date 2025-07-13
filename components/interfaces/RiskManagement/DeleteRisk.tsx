@@ -1,30 +1,38 @@
-import React, { useState, useCallback } from 'react';
-import { getAxiosError } from '@/lib/common';
-import toast from 'react-hot-toast';
+import * as React from 'react';
+import { useState, useCallback } from 'react';
 import axios from 'axios';
-import { Modal } from 'react-daisyui';
+import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
-import Form from '@atlaskit/form';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogClose,
+} from '@/components/shadcn/ui/dialog';
+import { Button } from '@/components/shadcn/ui/button';
+import { Loader2 } from 'lucide-react';
 import type { ApiResponse, TaskWithRpaProcedure } from 'types';
 import type { Task } from '@prisma/client';
 
-const DeleteRisk = ({
-  visible,
-  setVisible,
-  task,
-  mutate,
-}: {
+interface DeleteRiskProps {
   visible: boolean;
   setVisible: (visible: boolean) => void;
   task: Task | TaskWithRpaProcedure;
   mutate: () => Promise<void>;
-}) => {
-  const { t } = useTranslation('common');
+}
 
+export default function DeleteRisk({
+  visible,
+  setVisible,
+  task,
+  mutate,
+}: DeleteRiskProps) {
+  const { t } = useTranslation('common');
   const router = useRouter();
-  const { slug } = router.query;
+  const { slug } = router.query as { slug: string };
 
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -35,67 +43,49 @@ const DeleteRisk = ({
       const response = await axios.delete<ApiResponse<Task>>(
         `/api/teams/${slug}/tasks/${task.taskNumber}/rm`
       );
-
       const { error } = response.data;
 
       if (error) {
         toast.error(error.message);
+        setIsDeleting(false);
         return;
-      } else {
-        toast.success('Risk deleted.');
       }
 
-      mutate();
-
-      setIsDeleting(false);
+      toast.success(t('risk_deleted') || 'Risk deleted.');
+      await mutate();
       setVisible(false);
-    } catch (error: any) {
       setIsDeleting(false);
-      toast.error(getAxiosError(error));
+    } catch (err: any) {
+      setIsDeleting(false);
+      toast.error(err.response?.data?.message || err.message);
     }
-  }, [task]);
-
-  const closeHandler = useCallback(() => {
-    setVisible(false);
-  }, []);
+  }, [slug, task, mutate, setVisible, t]);
 
   return (
-    <Modal open={visible}>
-      <Form onSubmit={() => {}}>
-        {({ formProps }) => (
-          <form {...formProps}>
-            <Modal.Header className="font-bold">
-              Remove Risk Management
-            </Modal.Header>
-            <Modal.Body>
-              <div style={{ margin: '1.5rem 0' }}>
-                <p>
-                  Are you sure you want to remove Risk Management record from
-                  the task? Your task will not be removed.
-                </p>
-              </div>
-            </Modal.Body>
-            <Modal.Actions>
-              <AtlaskitButton
-                appearance="default"
-                onClick={() => closeHandler()}
-                isDisabled={isDeleting}
-              >
-                {t('close')}
-              </AtlaskitButton>
-              <LoadingButton
-                onClick={deleteRisk}
-                appearance="primary"
-                isLoading={isDeleting}
-              >
-                {t('delete')}
-              </LoadingButton>
-            </Modal.Actions>
-          </form>
-        )}
-      </Form>
-    </Modal>
-  );
-};
+    <Dialog open={visible} onOpenChange={setVisible}>
+      <DialogContent className="max-w-md p-6">
+        <DialogHeader>
+          <DialogTitle>{t('rm-remove-title')}</DialogTitle>
+        </DialogHeader>
 
-export default DeleteRisk;
+        <div className="my-4 text-sm">{t('rm-remove-description')}</div>
+
+        <DialogFooter className="flex justify-end space-x-2">
+          <DialogClose asChild>
+            <Button variant="outline" disabled={isDeleting}>
+              {t('close') || 'Close'}
+            </Button>
+          </DialogClose>
+          <Button
+            variant="destructive"
+            onClick={deleteRisk}
+            disabled={isDeleting}
+          >
+            {isDeleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {t('delete') || 'Delete'}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}

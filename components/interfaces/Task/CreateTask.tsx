@@ -1,48 +1,62 @@
-import React, { Fragment, useRef } from 'react';
-import { Team } from '@prisma/client';
+import React from 'react';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import dynamic from 'next/dynamic';
+import * as Yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { Modal } from 'react-daisyui';
-import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
-import { DatePicker } from '@atlaskit/datetime-picker';
-import TextField from '@atlaskit/textfield';
-import Select, { ValueType } from '@atlaskit/select';
-import type { ApiResponse } from 'types';
-import type { Task } from '@prisma/client';
-import Button, { LoadingButton } from '@atlaskit/button';
+import { format } from 'date-fns';
+import { CalendarIcon } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/shadcn/ui/dialog';
+import { Team } from '@prisma/client';
+import { Button } from '@/components/shadcn/ui/button';
 import statusesData from '@/components/defaultLanding/data/statuses.json';
-import Form, { ErrorMessage, Field, FormFooter } from '@atlaskit/form';
-import { WithoutRing } from 'sharedStyles';
-import useTasks from 'hooks/useTasks';
 import { getCurrentStringDate } from '@/components/services/taskService';
+import useTasks from 'hooks/useTasks';
+import { Input } from '@/components/shadcn/ui/input';
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from '@/components/shadcn/ui/select';
+import { Calendar } from '@/components/shadcn/ui/calendar';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from '@/components/shadcn/ui/popover';
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from '@/components/shadcn/ui/form';
 
-import 'react-quill/dist/quill.snow.css';
-import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
-interface Status {
-  label: string;
-  value: string;
-}
-
-interface FormData {
-  title: string;
-  status: ValueType<Option>;
-  team: ValueType<Option>;
-  duedate: string;
-  [key: string]: string | ValueType<Option>;
-}
-
-interface Option {
-  label: string;
-  value: string;
-}
-
-const statuses: Status[] = statusesData;
+const statuses = statusesData;
 const DEFAULT_STATUS_VALUE = 'todo';
 
-//TODO: move visible to parent component
+const schema = Yup.object().shape({
+  title: Yup.string().required('Title is required'),
+  status: Yup.string().required('Status is required'),
+  duedate: Yup.date().required('Due date is required'),
+  description: Yup.string().nullable(),
+});
+
 const CreateTask = ({
   visible,
   setVisible,
@@ -52,172 +66,163 @@ const CreateTask = ({
   setVisible: (visible: boolean) => void;
   team: Team;
 }) => {
-  const formRef = useRef<HTMLFormElement | null>(null);
-  const submitButtonRef = useRef<HTMLButtonElement | null>(null);
   const router = useRouter();
   const { slug } = router.query;
   const { mutateTasks } = useTasks(slug as string);
   const { t } = useTranslation('common');
 
+  const form = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      title: '',
+      status: DEFAULT_STATUS_VALUE,
+      duedate: new Date(getCurrentStringDate()),
+      description: '',
+    },
+  });
+
+  const onSubmit = async (values: any) => {
+    const response = await axios.post(`/api/teams/${team.slug}/tasks`, {
+      ...values,
+      duedate: values.duedate.toISOString().split('T')[0],
+    });
+
+    const { error } = response.data;
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+
+    mutateTasks();
+    toast.success(t('task-created'));
+    form.reset();
+    setVisible(false);
+  };
+
   return (
-    <Modal open={visible}>
-      <Modal.Header className="font-bold">Create Task</Modal.Header>
-      <Form<FormData>
-        onSubmit={async (data, { reset }) => {
-          const { title, status, duedate, description } = data;
-          const response = await axios.post<ApiResponse<Task>>(
-            `/api/teams/${team.slug}/tasks`,
-            {
-              title,
-              status: status?.value,
-              duedate,
-              description: description || '',
-            }
-          );
+    <Dialog open={visible} onOpenChange={setVisible}>
+      <DialogContent className="sm:max-w-[600px] overflow-visible">
+        <DialogHeader>
+          <DialogTitle>Create Task</DialogTitle>
+          <DialogDescription>Fill in the task details</DialogDescription>
+        </DialogHeader>
 
-          const { error } = response.data;
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <FormField
+              control={form.control}
+              rules={{ required: true }}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter task title" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-          if (error) {
-            toast.error(error.message);
-            return;
-          }
+            <FormField
+              control={form.control}
+              name="status"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Status</FormLabel>
+                  <FormControl>
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {statuses.map((status) => (
+                          <SelectItem key={status.value} value={status.value}>
+                            {status.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-          mutateTasks();
-          reset({
-            title: '',
-            status: null,
-            team: null,
-            duedate: '',
-            description: '',
-          });
-          toast.success(t('task-created'));
-          setVisible(false);
-        }}
-      >
-        {({ formProps, submitting }) => (
-          <form
-            {...formProps}
-            ref={formRef}
-            className="flex flex-col justify-between"
-            style={{ height: '92%' }}
-          >
-            <Modal.Body>
-              <div
-                style={{
-                  display: 'flex',
-                  width: '100%',
-                  margin: '0 auto',
-                  flexDirection: 'column',
-                }}
-              >
-                <Field
-                  aria-required={true}
-                  name="title"
-                  label="Title"
-                  isRequired
-                >
-                  {({ fieldProps }) => (
-                    <Fragment>
-                      <TextField autoComplete="off" {...fieldProps} />
-                    </Fragment>
-                  )}
-                </Field>
-                <Field<ValueType<Option>>
-                  name="status"
-                  label="Status"
-                  defaultValue={statuses.find(
-                    ({ value }) => value === DEFAULT_STATUS_VALUE
-                  )}
-                  aria-required={true}
-                  isRequired
-                  validate={async (value) => {
-                    if (value) {
-                      return undefined;
-                    }
-
-                    return new Promise((resolve) =>
-                      setTimeout(resolve, 300)
-                    ).then(() => 'Please select a status');
-                  }}
-                >
-                  {({ fieldProps: { id, ...rest }, error }) => (
-                    <Fragment>
-                      <WithoutRing>
-                        <Select
-                          inputId={id}
-                          {...rest}
-                          options={statuses}
-                          defaultValue={statuses.find(
-                            ({ value }) => value === DEFAULT_STATUS_VALUE
+            <FormField
+              control={form.control}
+              name="duedate"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Due Date</FormLabel>
+                  <Popover modal={false}>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant="outline"
+                          type="button"
+                          className="w-full justify-start text-left font-normal"
+                        >
+                          {field.value ? (
+                            format(field.value, 'PPP')
+                          ) : (
+                            <span>Pick a date</span>
                           )}
-                          validationState={error ? 'error' : 'default'}
-                        />
-                        {error && <ErrorMessage>{error}</ErrorMessage>}
-                      </WithoutRing>
-                    </Fragment>
-                  )}
-                </Field>
-                <Field
-                  name="duedate"
-                  label="Due date"
-                  defaultValue={getCurrentStringDate()}
-                  isRequired
-                  aria-required={true}
-                  validate={async (value) => {
-                    if (value) {
-                      return undefined;
-                    }
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent
+                      forceMount
+                      className="pointer-events-auto w-auto p-0 z-60"
+                      align="start"
+                    >
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-                    return new Promise((resolve) =>
-                      setTimeout(resolve, 300)
-                    ).then(() => 'Please select a due date');
-                  }}
-                >
-                  {({ fieldProps: { id, ...rest }, error }) => (
-                    <Fragment>
-                      <WithoutRing>
-                        <DatePicker
-                          selectProps={{ inputId: id }}
-                          {...rest}
-                          locale="en-GB"
-                        />
-                      </WithoutRing>
-                      {error && <ErrorMessage>{error}</ErrorMessage>}
-                    </Fragment>
-                  )}
-                </Field>
-                <Field label="Description" name="description">
-                  {({ fieldProps }: any) => (
-                    <Fragment>
-                      <ReactQuill theme="snow" {...fieldProps} />
-                    </Fragment>
-                  )}
-                </Field>
-                <FormFooter></FormFooter>
-              </div>
-            </Modal.Body>
-            <Modal.Actions>
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <ReactQuill
+                      theme="snow"
+                      value={field.value ?? ''}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <DialogFooter className="pt-2">
               <Button
-                appearance="default"
-                onClick={() => {
-                  setVisible(!visible);
-                }}
+                variant="ghost"
+                type="button"
+                onClick={() => setVisible(false)}
               >
                 {t('close')}
               </Button>
-              <LoadingButton
-                type="submit"
-                appearance="primary"
-                ref={submitButtonRef}
-                isLoading={submitting}
-              >
-                {t('create')}
-              </LoadingButton>
-            </Modal.Actions>
+              <Button type="submit" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting ? 'Creating...' : t('create')}
+              </Button>
+            </DialogFooter>
           </form>
-        )}
-      </Form>
-    </Modal>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 };
 

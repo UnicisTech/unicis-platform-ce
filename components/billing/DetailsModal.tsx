@@ -1,175 +1,225 @@
-import { defaultHeaders } from '@/lib/common';
-import type { Invitation, Team } from '@prisma/client';
-import { useFormik } from 'formik';
-import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { Button } from 'react-daisyui';
-import toast from 'react-hot-toast';
-import type { ApiResponse } from 'types';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Modal from '../shared/Modal';
-import { InputWithLabel, WithLabel } from '../shared';
+import toast from 'react-hot-toast';
+import { useTranslation } from 'next-i18next';
+import { defaultHeaders } from '@/lib/common';
 import countries from '../defaultLanding/data/configs/countries';
+import type { Team, Invitation } from '@prisma/client';
+import type { ApiResponse } from 'types';
+import useInvitations from 'hooks/useInvitations';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/shadcn/ui/dialog';
+import { Label } from '@/components/shadcn/ui/label';
+import { Input } from '@/components/shadcn/ui/input';
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from '@/components/shadcn/ui/select';
+import { Button } from '@/components/shadcn/ui/button';
+import { Loader2 } from 'lucide-react';
 
-const DetailsModal = ({
-  selectedSubscription,
-  visible,
-  setVisible,
-  team,
-}: {
+interface DetailsModalProps {
   selectedSubscription: string;
   visible: boolean;
   setVisible: (visible: boolean) => void;
   team: Team;
+}
+
+const DetailsModal: React.FC<DetailsModalProps> = ({
+  selectedSubscription,
+  visible,
+  setVisible,
+  team,
 }) => {
   const { t } = useTranslation('common');
+  const { mutateInvitation } = useInvitations(team.slug);
 
-  // console.log('countries', countries)
-  //TODO: #6 check if email exist in teamMembers and its admin or owner
   const formik = useFormik({
     initialValues: {
       companyName: '',
       address: '',
       zipCode: '',
-      country: 'Germany',
+      country: countries[0].label,
       vatId: '',
       email: '',
     },
-    validationSchema: Yup.object().shape({
-      companyName: Yup.string().required(),
-      address: Yup.string().required(),
-      zipCode: Yup.string().required(),
-      country: Yup.string().required('Country is a required field.'),
-      vatId: Yup.string().required(),
-      email: Yup.string().required().email(),
+    validationSchema: Yup.object({
+      companyName: Yup.string().required(t('required')),
+      address: Yup.string().required(t('required')),
+      zipCode: Yup.string().required(t('required')),
+      country: Yup.string().required(t('required')),
+      vatId: Yup.string().required(t('required')),
+      email: Yup.string().email(t('invalid-email')).required(t('required')),
     }),
     onSubmit: async (values) => {
-      console.log('values', { ...values, subscription: selectedSubscription });
-      const response = await fetch(`/api/teams/${team.slug}/billing`, {
+      const res = await fetch(`/api/teams/${team.slug}/billing`, {
         method: 'POST',
         headers: defaultHeaders,
         body: JSON.stringify({ ...values, subscription: selectedSubscription }),
       });
-      console.log('post billing response', response);
-
-      const json = (await response.json()) as ApiResponse<Invitation>;
-
-      if (!response.ok) {
+      const json = (await res.json()) as ApiResponse<Invitation>;
+      if (!res.ok) {
         toast.error(json.error.message);
-        return;
+      } else {
+        toast.success(t('request-sent'));
+        mutateInvitation();
+        setVisible(false);
+        formik.resetForm();
       }
-
-      toast.success(t('invitation-sent'));
-      // mutateInvitation();
-      setVisible(false);
-      formik.resetForm();
     },
   });
-  const toggleVisible = () => {
-    setVisible(!visible);
-  };
 
   return (
-    <Modal open={visible} close={toggleVisible}>
-      <form onSubmit={formik.handleSubmit} method="POST">
-        <Modal.Header>
-          {t('request-subscription', { subscription: selectedSubscription })}
-        </Modal.Header>
-        {/* <Modal.Description>{t('invite-member-message')}</Modal.Description> */}
-        <Modal.Body>
-          <div className="flex flex-col gap-4">
-            <InputWithLabel
-              type="text"
-              label={t('company-name')}
-              name="companyName"
-              value={formik.values.companyName}
-              error={
-                formik.touched.companyName
-                  ? formik.errors.companyName
-                  : undefined
-              }
-              onChange={formik.handleChange}
-              required
-            />
-            <InputWithLabel
-              type="text"
-              label={t('address')}
-              name="address"
-              value={formik.values.address}
-              error={formik.touched.address ? formik.errors.address : undefined}
-              onChange={formik.handleChange}
-              required
-            />
-            <InputWithLabel
-              type="text"
-              label={t('zip-code')}
-              name="zipCode"
-              value={formik.values.zipCode}
-              error={formik.touched.zipCode ? formik.errors.zipCode : undefined}
-              onChange={formik.handleChange}
-              required
-            />
-            <WithLabel
-              label={t('countries')}
-              error={formik.touched.country ? formik.errors.country : undefined}
-            >
-              <select
-                className="select-bordered select rounded"
-                name="country"
+    <Dialog open={visible} onOpenChange={setVisible}>
+      <DialogContent className="sm:max-w-lg">
+        <form onSubmit={formik.handleSubmit}>
+          <DialogHeader>
+            <DialogTitle>
+              {t('request-subscription', {
+                subscription: selectedSubscription,
+              })}
+            </DialogTitle>
+          </DialogHeader>
+
+          <div className="grid gap-4 py-4">
+            {/* Company Name */}
+            <div className="grid gap-1">
+              <Label htmlFor="companyName">{t('company-name')}</Label>
+              <Input
+                id="companyName"
+                name="companyName"
+                value={formik.values.companyName}
                 onChange={formik.handleChange}
+                placeholder={t('company-name')}
+              />
+              {formik.touched.companyName && formik.errors.companyName && (
+                <p className="text-destructive text-sm">
+                  {formik.errors.companyName}
+                </p>
+              )}
+            </div>
+
+            {/* Address */}
+            <div className="grid gap-1">
+              <Label htmlFor="address">{t('address')}</Label>
+              <Input
+                id="address"
+                name="address"
+                value={formik.values.address}
+                onChange={formik.handleChange}
+                placeholder={t('address')}
+              />
+              {formik.touched.address && formik.errors.address && (
+                <p className="text-destructive text-sm">
+                  {formik.errors.address}
+                </p>
+              )}
+            </div>
+
+            {/* Zip Code */}
+            <div className="grid gap-1">
+              <Label htmlFor="zipCode">{t('zip-code')}</Label>
+              <Input
+                id="zipCode"
+                name="zipCode"
+                value={formik.values.zipCode}
+                onChange={formik.handleChange}
+                placeholder={t('zip-code')}
+              />
+              {formik.touched.zipCode && formik.errors.zipCode && (
+                <p className="text-destructive text-sm">
+                  {formik.errors.zipCode}
+                </p>
+              )}
+            </div>
+
+            {/* Country */}
+            <div className="grid gap-1">
+              <Label htmlFor="country">{t('country')}</Label>
+              <Select
+                name="country"
                 value={formik.values.country}
-                required
+                onValueChange={(val) => formik.setFieldValue('country', val)}
               >
-                {countries.map(({ label, value }) => (
-                  <option value={label} key={value}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-            </WithLabel>
-            <InputWithLabel
-              type="text"
-              label={t('vat-id')}
-              name="vatId"
-              value={formik.values.vatId}
-              error={formik.touched.vatId ? formik.errors.vatId : undefined}
-              onChange={formik.handleChange}
-              required
-            />
-            <InputWithLabel
-              type="email"
-              label={t('email')}
-              name="email"
-              // placeholder="first.last@name.com"
-              value={formik.values.email}
-              error={formik.touched.email ? formik.errors.email : undefined}
-              onChange={formik.handleChange}
-            />
+                <SelectTrigger>
+                  <SelectValue placeholder={t('select-country')} />
+                </SelectTrigger>
+                <SelectContent>
+                  {countries.map((c) => (
+                    <SelectItem key={c.value} value={c.label}>
+                      {c.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {formik.touched.country && formik.errors.country && (
+                <p className="text-destructive text-sm">
+                  {formik.errors.country}
+                </p>
+              )}
+            </div>
+
+            {/* VAT ID */}
+            <div className="grid gap-1">
+              <Label htmlFor="vatId">{t('vat-id')}</Label>
+              <Input
+                id="vatId"
+                name="vatId"
+                value={formik.values.vatId}
+                onChange={formik.handleChange}
+                placeholder={t('vat-id')}
+              />
+              {formik.touched.vatId && formik.errors.vatId && (
+                <p className="text-destructive text-sm">
+                  {formik.errors.vatId}
+                </p>
+              )}
+            </div>
+
+            {/* Email */}
+            <div className="grid gap-1">
+              <Label htmlFor="email">{t('email')}</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                placeholder="email@example.com"
+              />
+              {formik.touched.email && formik.errors.email && (
+                <p className="text-destructive text-sm">
+                  {formik.errors.email}
+                </p>
+              )}
+            </div>
           </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => {
-              setVisible(!visible);
-            }}
-            size="md"
-          >
-            {t('close')}
-          </Button>
-          <Button
-            type="submit"
-            color="primary"
-            loading={formik.isSubmitting}
-            active={formik.dirty}
-            size="md"
-          >
-            {t('send')}
-          </Button>
-        </Modal.Footer>
-      </form>
-    </Modal>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setVisible(false)}>
+              {t('close')}
+            </Button>
+            <Button
+              type="submit"
+              className="ml-2"
+              disabled={formik.isSubmitting}
+            >
+              {formik.isSubmitting && <Loader2 className="animate-spin" />}
+              {t('send')}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 };
 

@@ -1,8 +1,8 @@
 import { copyToClipboard } from '@/lib/common';
 import { ClipboardDocumentIcon } from '@heroicons/react/24/outline';
 import { useTranslation } from 'next-i18next';
-import { Button } from 'react-daisyui';
 import { toast } from 'react-hot-toast';
+import DaisyButton from './daisyUI/DaisyButton';
 
 interface CopyToClipboardProps {
   value: string;
@@ -17,7 +17,7 @@ const CopyToClipboardButton = ({ value }: CopyToClipboardProps) => {
   };
 
   return (
-    <Button
+    <DaisyButton
       variant="link"
       size="xs"
       className="tooltip p-0"
@@ -25,7 +25,7 @@ const CopyToClipboardButton = ({ value }: CopyToClipboardProps) => {
       onClick={handleCopy}
     >
       <ClipboardDocumentIcon className="w-5 h-5 text-secondary" />
-    </Button>
+    </DaisyButton>
   );
 };
 

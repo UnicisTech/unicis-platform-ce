@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Button } from 'react-daisyui';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -8,46 +7,63 @@ import {
   Loading,
   PerPageSelector,
   StatusBadge,
+  WithLoadingAndError,
 } from '@/components/shared';
 import useTasks from 'hooks/useTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import usePagination from 'hooks/usePagination';
 import statuses from '@/components/defaultLanding/data/statuses.json';
-import { WithLoadingAndError } from '@/components/shared';
 import type { Task, Team } from '@prisma/client';
 import { CreateTask, DeleteTask } from '@/components/interfaces/Task';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import ModuleBadge from '@/components/shared/ModuleBadge';
+import TaskFilters from '@/components/interfaces/Task/TaskFilters';
+import PaginationControls from '@/components/shadcn/ui/audit-pagination';
+import { Button } from '@/components/shadcn/ui/button';
+import { TeamTaskAnalysis } from '../TeamDashboard';
 
-const Tasks = ({ team }: { team: Team }) => {
+const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const { isLoading, isError, tasks } = useTasks(slug as string);
   const [visible, setVisible] = useState(false);
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState<null | number>(null);
-
+  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
+  const [selectedModules, setSelectedModules] = useState<string[]>([]);
   const [perPage, setPerPage] = useState<number>(10);
-  // const [statusFilter, setStatusFilter] = useState<string>('')
+  const { t } = useTranslation('common');
+  const { canAccess } = useCanAccess();
+
+  const filteredTasks = tasks?.filter((task) => {
+    const statusMatch =
+      !selectedStatuses.length || selectedStatuses.includes(task.status);
+    const moduleMatch =
+      !selectedModules.length ||
+      selectedModules.some(
+        (mod) =>
+          typeof task.properties === 'object' &&
+          task.properties &&
+          mod in task.properties
+      );
+    return statusMatch && moduleMatch;
+  });
 
   const {
     currentPage,
     totalPages,
     pageData,
-    goToPreviousPage,
-    goToNextPage,
+    goToPage,
     prevButtonDisabled,
     nextButtonDisabled,
-  } = usePagination<Task>(tasks || [], perPage);
+  } = usePagination<Task>(filteredTasks || [], perPage);
 
-  const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
+  useEffect(() => {
+    console.log('tasks', tasks);
+  }, [tasks]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (isError) {
-    return <Error />;
-  }
+  if (isLoading) return <Loading />;
+  if (isError) return <Error />;
 
   const openDeleteModal = async (id: number) => {
     setTaskToDelete(id);
@@ -57,139 +73,132 @@ const Tasks = ({ team }: { team: Team }) => {
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
       <div className="space-y-3">
+        <h2 className="text-xl font-medium leading-none tracking-tight">
+          {t('all-tasks')}
+        </h2>
+        <TeamTaskAnalysis
+          slug={slug}
+          csc_statuses={csc_statuses as { [key: string]: string }}
+        />
         <div className="flex justify-between items-center">
           <div className="space-y-3">
-            <h2 className="text-xl font-medium leading-none tracking-tight">
-              {t('all-tasks')}
-            </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               {t('task-listed')}
             </p>
           </div>
           <div className="flex justify-end items-center my-1">
-            {/* <StatusFilter 
-              options={[{label: 'test', value: 'test'}]}
-              handler={setStatusFilter}
-              value={statusFilter}
-            /> */}
             {tasks && tasks.length > 0 && (
               <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
             )}
             {canAccess('task', ['create']) && (
-              <Button
-                size="sm"
-                color="primary"
-                variant="outline"
-                onClick={() => {
-                  setVisible(!visible);
-                }}
-              >
+              <Button color="primary" onClick={() => setVisible(!visible)}>
                 {t('create')}
               </Button>
             )}
           </div>
         </div>
-        <table className="text-sm table w-full border-b dark:border-base-200">
-          <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
+        <TaskFilters
+          selectedStatuses={selectedStatuses}
+          setSelectedStatuses={setSelectedStatuses}
+          selectedModules={selectedModules}
+          setSelectedModules={setSelectedModules}
+        />
+
+        <table className="w-full min-w-full divide-y divide-border text-sm">
+          <thead className="bg-muted">
             <tr>
-              <th scope="col" className="px-6 py-3">
-                {t('task-id')}
-              </th>
-              <th scope="col" className="px-6 py-3">
-                {t('title')}
-              </th>
-              <th scope="col" className="px-6 py-3">
-                {t('status')}
-              </th>
-              <th scope="col" className="px-6 py-3">
-                {t('actions')}
-              </th>
+              <th className="w-1/10 px-4 py-2 text-left">{t('task-id')}</th>
+              <th className="w-2/5 px-4 py-2 text-left">{t('title')}</th>
+              <th className="w-1/10 px-4 py-2 text-left">{t('status')}</th>
+              <th className="w-1/10 px-4 py-2 text-left">{t('due-date')}</th>
+              <th className="w-1/5 px-4 py-2 text-left">{t('actions')}</th>
             </tr>
           </thead>
-          <tbody>
-            {pageData.map((task) => {
-              return (
-                <tr key={task.id}>
-                  <td className="px-6 py-3">
+          <tbody className="divide-y divide-border">
+            {pageData.map((task) => (
+              <tr key={task.id}>
+                <td className="px-4 py-2">
+                  <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
+                    <span className="underline">{task.taskNumber}</span>
+                  </Link>
+                </td>
+                <td className="px-4 py-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
-                      <div className="flex items-center justify-start space-x-2">
-                        <span className="underline">{task.taskNumber}</span>
-                      </div>
+                      <span className="underline font-medium">
+                        {task.title}
+                      </span>
                     </Link>
-                  </td>
-                  <td className="px-6 py-3">
-                    <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
-                      <div className="flex items-center justify-start space-x-2">
-                        <span className="underline">{task.title}</span>
-                      </div>
-                    </Link>
-                  </td>
-                  <td className="px-6 py-3">
-                    <StatusBadge
-                      value={task.status}
-                      label={
-                        statuses.find(({ value }) => value === task.status)
-                          ?.label as string
-                      }
-                    />
-                  </td>
-                  <td className="px-6 py-3">
-                    <div className=" btn-group">
-                      {canAccess('task', ['update']) && (
-                        <Button
-                          className="dark:text-gray-100"
-                          size="sm"
-                          variant="outline"
-                          onClick={() => {
-                            // openEditModal(task);
-                            router.push(
-                              `/teams/${slug}/tasks/${task.taskNumber}`
-                            );
-                          }}
-                        >
-                          {t('edit-task')}
-                        </Button>
-                      )}
-                      {canAccess('task', ['delete']) && (
-                        <Button
-                          className="dark:text-gray-100"
-                          size="sm"
-                          variant="outline"
-                          onClick={() => {
-                            openDeleteModal(task.taskNumber);
-                          }}
-                        >
-                          {t('delete')}
-                        </Button>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
+                    {[
+                      'rpa_procedure',
+                      'tia_procedure',
+                      'pia_risk',
+                      'rm_risk',
+                    ].map((key) =>
+                      typeof task.properties === 'object' &&
+                      task.properties &&
+                      key in task.properties &&
+                      (task.properties as any)[key] ? (
+                        <ModuleBadge key={key} propName={key} />
+                      ) : null
+                    )}
+                  </div>
+                </td>
+                <td className="px-4 py-2">
+                  <StatusBadge
+                    value={task.status}
+                    label={
+                      statuses.find(({ value }) => value === task.status)
+                        ?.label || task.status
+                    }
+                  />
+                </td>
+                <td className="px-4 py-2">
+                  <span className="text-sm">
+                    {task.duedate
+                      ? new Date(task.duedate).toLocaleDateString()
+                      : t('no-due-date')}
+                  </span>
+                </td>
+                <td className="px-4 py-2">
+                  <div className="btn-group">
+                    {canAccess('task', ['update']) && (
+                      <DaisyButton
+                        size="sm"
+                        variant="outline"
+                        onClick={() =>
+                          router.push(`/teams/${slug}/tasks/${task.taskNumber}`)
+                        }
+                      >
+                        {t('edit-task')}
+                      </DaisyButton>
+                    )}
+                    {canAccess('task', ['delete']) && (
+                      <DaisyButton
+                        size="sm"
+                        variant="outline"
+                        onClick={() => openDeleteModal(task.taskNumber)}
+                      >
+                        {t('delete')}
+                      </DaisyButton>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
-        {pageData.length ? (
-          <div className="flex justify-center w-30">
-            <div className="btn-group join grid grid-cols-10">
-              <button
-                className="join-item btn btn-outline col-span-4"
-                onClick={goToPreviousPage}
-                disabled={prevButtonDisabled}
-              >
-                Previous page
-              </button>
-              <button className="join-item btn btn-outline col-span-2">{`${currentPage}/${totalPages}`}</button>
-              <button
-                className="join-item btn btn-outline col-span-4"
-                onClick={goToNextPage}
-                disabled={nextButtonDisabled}
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        ) : null}
+
+        {pageData.length > 0 && (
+          <PaginationControls
+            page={currentPage}
+            totalPages={totalPages}
+            onChange={goToPage}
+            prevButtonDisabled={prevButtonDisabled}
+            nextButtonDisabled={nextButtonDisabled}
+          />
+        )}
+
         <CreateTask visible={visible} setVisible={setVisible} team={team} />
         <DeleteTask
           visible={deleteVisible}

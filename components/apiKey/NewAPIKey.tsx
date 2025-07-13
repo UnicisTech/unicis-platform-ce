@@ -2,10 +2,10 @@ import { InputWithCopyButton, InputWithLabel } from '@/components/shared';
 import type { Team } from '@prisma/client';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
-import { Button } from 'react-daisyui';
 import { toast } from 'react-hot-toast';
 import { useSWRConfig } from 'swr';
 import type { ApiResponse } from 'types';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 import Modal from '../shared/Modal';
 
 const NewAPIKey = ({
@@ -94,10 +94,15 @@ const CreateAPIKeyForm = ({
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button type="button" variant="outline" onClick={closeModal} size="md">
+        <DaisyButton
+          type="button"
+          variant="outline"
+          onClick={closeModal}
+          size="md"
+        >
           {t('close')}
-        </Button>
-        <Button
+        </DaisyButton>
+        <DaisyButton
           color="primary"
           type="submit"
           loading={submitting}
@@ -105,7 +110,7 @@ const CreateAPIKeyForm = ({
           size="md"
         >
           {t('create-api-key')}
-        </Button>
+        </DaisyButton>
       </Modal.Footer>
     </form>
   );
@@ -126,9 +131,14 @@ const DisplayAPIKey = ({ apiKey, closeModal }: DisplayAPIKeyProps) => {
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button type="button" variant="outline" onClick={closeModal} size="md">
+        <DaisyButton
+          type="button"
+          variant="outline"
+          onClick={closeModal}
+          size="md"
+        >
           {t('close')}
-        </Button>
+        </DaisyButton>
       </Modal.Footer>
     </>
   );

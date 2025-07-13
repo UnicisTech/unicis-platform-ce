@@ -7,12 +7,11 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState, type ReactElement, useEffect } from 'react';
-import { Button } from 'react-daisyui';
-import type { ComponentStatus } from 'react-daisyui/dist/types';
 import { toast } from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import { ApiResponse, NextPageWithLayout } from 'types';
+import { ApiResponse, ComponentStatus, NextPageWithLayout } from 'types';
 import * as Yup from 'yup';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const VerifyAccount: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -84,7 +83,7 @@ const VerifyAccount: NextPageWithLayout<
             />
           </div>
           <div className="mt-4">
-            <Button
+            <DaisyButton
               type="submit"
               color="primary"
               loading={formik.isSubmitting}
@@ -93,7 +92,7 @@ const VerifyAccount: NextPageWithLayout<
               size="md"
             >
               {t('resend-link')}
-            </Button>
+            </DaisyButton>
           </div>
         </form>
       </div>

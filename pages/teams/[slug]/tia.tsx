@@ -12,11 +12,12 @@ import useCanAccess from 'hooks/useCanAccess';
 import type { TaskWithTiaProcedure, TaskProperties } from 'types';
 import {
   TiaTable,
-  DeleteTia,
-  CreateProcedure as CreateTiaProcedure,
+  DeleteProcedure,
+  CreateProcedure,
 } from '@/components/interfaces/TIA';
-import { Button } from 'react-daisyui';
 import { PerPageSelector } from '@/components/shared';
+import { Button } from '@/components/shadcn/ui/button';
+import { TeamAssessmentAnalysis } from '@/components/interfaces/TeamDashboard';
 
 const TiaDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -26,6 +27,7 @@ const TiaDashboard: NextPageWithLayout<
   const { canAccess } = useCanAccess();
   const { slug } = router.query;
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskWithTiaProcedure | null>(
@@ -86,9 +88,7 @@ const TiaDashboard: NextPageWithLayout<
           )}
           {canAccess('task', ['update']) && (
             <Button
-              size="sm"
               color="primary"
-              variant="outline"
               onClick={() => {
                 setIsCreateOpen(true);
               }}
@@ -100,11 +100,11 @@ const TiaDashboard: NextPageWithLayout<
       </div>
       <>
         {isCreateOpen && (
-          <CreateTiaProcedure
-            visible={isCreateOpen}
-            setVisible={setIsCreateOpen}
+          <CreateProcedure
+            open={isCreateOpen}
+            onOpenChange={setIsCreateOpen}
             tasks={tasks}
-            mutate={mutateTasks}
+            mutateTasks={mutateTasks}
           />
         )}
       </>
@@ -112,6 +112,9 @@ const TiaDashboard: NextPageWithLayout<
         <EmptyState title={t('tia-dashboard')} description="No records" />
       ) : (
         <>
+          <div className="m-2">
+            <TeamAssessmentAnalysis slug={slug as string} />
+          </div>
           <TiaTable
             slug={slug as string}
             tasks={tasksWithProcedures}
@@ -120,15 +123,17 @@ const TiaDashboard: NextPageWithLayout<
             deleteHandler={onDeleteClickHandler}
           />
           {taskToEdit && isEditOpen && (
-            <CreateTiaProcedure
-              visible={isEditOpen}
-              setVisible={setIsEditOpen}
-              selectedTask={taskToEdit as TaskWithTiaProcedure}
-              mutate={mutateTasks}
+            <CreateProcedure
+              open={isEditOpen}
+              onOpenChange={setIsEditOpen}
+              prevProcedure={taskToEdit.properties.tia_procedure}
+              tasks={tasks}
+              selectedTask={taskToEdit}
+              mutateTasks={mutateTasks}
             />
           )}
           {taskToDelete && isDeleteOpen && (
-            <DeleteTia
+            <DeleteProcedure
               visible={isDeleteOpen}
               setVisible={setIsDeleteOpen}
               task={taskToDelete as TaskWithTiaProcedure}

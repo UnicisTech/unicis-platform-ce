@@ -3,47 +3,52 @@ import { useTranslation } from 'next-i18next';
 import { Error, Loading } from '@/components/shared';
 import { computeRiskMap, calculateRiskDistribution } from '@/lib/rm';
 import { DashboardMatrixChart, DashboardPieChart } from '../RiskManagement';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/shadcn/ui/card';
 
-interface PiaAnalysisProps {
+interface RmAnalysisProps {
   slug: string;
 }
 
-const RmAnalysis = ({ slug }: PiaAnalysisProps) => {
-  const { tasks, isLoading, isError } = useTeamTasks(slug as string);
+const RmAnalysis = ({ slug }: RmAnalysisProps) => {
+  const { tasks, isLoading, isError } = useTeamTasks(slug);
   const { t } = useTranslation('common');
 
-  if (isLoading || !tasks) {
-    return <Loading />;
-  }
-
-  if (isError) {
-    return <Error />;
-  }
+  if (isLoading || !tasks) return <Loading />;
+  if (isError) return <Error />;
 
   const riskMap = computeRiskMap(tasks);
 
   return (
-    <>
-      <h4>{t('rm-overview')}</h4>
-      <div className="flex flex-wrap md:flex-nowrap md:flex-row justify-around mb-2 w-full">
-        <div className="w-full md:w-[49%] flex flex-col items-center p-4 stat-value shadow">
-          <div className="text-center text-lg font-semibold">
-            {t('current-risk-rating')}
-          </div>
-          <div className="flex-grow flex items-center justify-center w-full">
+    <div className="w-full max-w-7xl mx-auto">
+      <div className="flex flex-col lg:flex-row gap-4 px-2">
+        <Card className="w-full lg:w-1/2 shadow-sm">
+          <CardHeader>
+            <CardTitle className="text-center text-lg font-medium">
+              {t('current-risk-rating')}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex items-center justify-center h-[300px]">
             <DashboardPieChart datasets={calculateRiskDistribution(tasks)} />
-          </div>
-        </div>
-        <div className="w-full md:w-[49%] flex flex-col items-center p-4 stat-value shadow">
-          <div className="text-center text-lg font-semibold">
-            {t('target-risk-rating')}
-          </div>
-          <div className="flex-grow flex items-center justify-center w-full">
+          </CardContent>
+        </Card>
+
+        <Card className="w-full lg:w-1/2 shadow-sm">
+          <CardHeader>
+            <CardTitle className="text-center text-lg font-medium">
+              {t('target-risk-rating')}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex items-center justify-center h-[300px]">
             <DashboardMatrixChart datasets={[]} counterMap={riskMap} />
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
-    </>
+    </div>
   );
 };
 

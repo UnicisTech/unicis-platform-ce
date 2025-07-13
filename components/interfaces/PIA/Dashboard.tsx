@@ -1,14 +1,15 @@
 import { useState, useMemo, useCallback } from 'react';
-import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeamTasks from 'hooks/useTeamTasks';
-import CreateRisk from './CreateRisk';
 import { EmptyState, Error } from '@/components/shared';
 import { TaskProperties, TaskWithPiaRisk } from 'types';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
+import CreateRisk from './RiskForm/RiskAssessmentDialog';
+import { Button } from '@/components/shadcn/ui/button';
+import { PiaAnalysis } from '../TeamDashboard';
 
 const Dashboard = () => {
   const { canAccess, isLoading } = useCanAccess();
@@ -20,6 +21,7 @@ const Dashboard = () => {
   const [perPage] = useState<number>(10);
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskWithPiaRisk | null>(null);
@@ -58,6 +60,7 @@ const Dashboard = () => {
 
   return (
     <>
+      <PiaAnalysis tasks={tasks} />
       <div className="flex justify-between items-center">
         <div className="space-y-3">
           <h2 className="text-xl font-medium leading-none tracking-tight">
@@ -67,9 +70,7 @@ const Dashboard = () => {
         <div className="flex justify-end items-center my-1">
           {canAccess('task', ['update']) && (
             <Button
-              size="sm"
               color="primary"
-              variant="outline"
               onClick={() => {
                 setIsCreateOpen(true);
               }}
@@ -79,12 +80,12 @@ const Dashboard = () => {
           )}
         </div>
       </div>
-      {isCreateOpen && tasks && (
+      {isCreateOpen && (
         <CreateRisk
-          tasks={tasks}
+          open={isCreateOpen}
+          onOpenChange={setIsCreateOpen}
+          tasks={tasks || []}
           mutateTasks={mutateTasks}
-          visible={isCreateOpen}
-          setVisible={setIsCreateOpen}
         />
       )}
       {tasksWithRisks.length === 0 ? (
@@ -100,9 +101,10 @@ const Dashboard = () => {
           />
           {taskToEdit && isEditOpen && (
             <CreateRisk
+              open={isEditOpen}
+              prevRisk={taskToEdit.properties.pia_risk}
+              onOpenChange={setIsEditOpen}
               tasks={tasks || []}
-              visible={isEditOpen}
-              setVisible={setIsEditOpen}
               selectedTask={taskToEdit}
               mutateTasks={mutateTasks}
             />

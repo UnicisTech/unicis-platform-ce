@@ -1,4 +1,5 @@
-import { Button, Modal as DModal } from 'react-daisyui';
+import React from 'react';
+import DaisyButton from './daisyUI/DaisyButton';
 
 interface ModalProps {
   open: boolean;
@@ -13,19 +14,21 @@ interface BodyProps {
 
 const Modal = ({ open, close, children }: ModalProps) => {
   return (
-    <DModal open={open}>
-      <Button
-        type="button"
-        size="sm"
-        shape="circle"
-        className="absolute right-2 top-2 btn-ghost rounded-full"
-        onClick={close}
-        aria-label="close"
-      >
-        x
-      </Button>
-      <div>{children}</div>
-    </DModal>
+    <dialog className={`modal ${open ? 'modal-open' : ''}`}>
+      <div className="modal-box relative">
+        <DaisyButton
+          type="button"
+          size="sm"
+          shape="circle"
+          className="absolute right-2 top-2 btn-ghost"
+          onClick={close}
+          aria-label="Close"
+        >
+          ✕
+        </DaisyButton>
+        {children}
+      </div>
+    </dialog>
   );
 };
 
@@ -37,12 +40,12 @@ const Description = ({ children }: { children: React.ReactNode }) => {
   return <p className="text-sm text-gray-700 pt-1">{children}</p>;
 };
 
-const Body = ({ children, className }: BodyProps) => {
+const Body = ({ children, className = '' }: BodyProps) => {
   return <div className={`py-3 ${className}`}>{children}</div>;
 };
 
 const Footer = ({ children }: { children: React.ReactNode }) => {
-  return <div className="flex justify-end gap-2">{children}</div>;
+  return <div className="modal-action">{children}</div>;
 };
 
 Modal.Header = Header;

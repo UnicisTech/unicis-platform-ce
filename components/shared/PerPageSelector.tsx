@@ -1,28 +1,37 @@
-import React from 'react';
-import Dropdown from './Dropdown';
-import { ChevronUpDownIcon } from '@heroicons/react/24/outline';
-
-const perPageOptions = [
-  { label: '5', value: 5 },
-  { label: '10', value: 10 },
-  { label: '25', value: 25 },
-  { label: '50', value: 50 },
-  { label: '100', value: 100 },
-];
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/shadcn/ui/select';
 
 interface PerPageSelectorProps {
   perPage: number;
   setPerPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
+const perPageOptions = [5, 10, 25, 50, 100];
+
 const PerPageSelector = ({ perPage, setPerPage }: PerPageSelectorProps) => {
   return (
-    <Dropdown
-      options={perPageOptions}
-      selectedValue={perPage}
-      onChange={setPerPage}
-      icon={<ChevronUpDownIcon className="w-5 h-5" />} // Passing the icon here
-    />
+    <div className="w-[100px] mr-2">
+      <Select
+        value={perPage.toString()}
+        onValueChange={(val) => setPerPage(Number(val))}
+      >
+        <SelectTrigger className="h-9 px-2 text-sm">
+          <SelectValue placeholder="Per page" />
+        </SelectTrigger>
+        <SelectContent>
+          {perPageOptions.map((num) => (
+            <SelectItem key={num} value={num.toString()}>
+              {num}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
   );
 };
 

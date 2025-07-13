@@ -6,6 +6,5 @@ export { default as CoursesTable } from './admin/CoursesTable';
 
 export { default as CreateCategory } from './admin/CreateCategory';
 export { default as CreateCourse } from './admin/CreateCourse';
-export { default as DeleteCourse } from './admin/DeleteCourse';
 export { default as IapDashboard } from './dashboard/IapDashboard';
 export { default as UserResultPieChart } from './course-page/UserResultPieChart';

@@ -1,8 +1,8 @@
 import { signIn } from 'next-auth/react';
-import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import useInvitation from 'hooks/useInvitation';
 import env from '@/lib/env';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 const GithubButton = () => {
   const { t } = useTranslation('common');
@@ -13,7 +13,7 @@ const GithubButton = () => {
     : env.redirectIfAuthenticated;
 
   return (
-    <Button
+    <DaisyButton
       className="btn-outline w-full"
       onClick={() => {
         signIn('github', {
@@ -38,7 +38,7 @@ const GithubButton = () => {
         ></path>
       </svg>
       {t('continue-with-github')}
-    </Button>
+    </DaisyButton>
   );
 };
 

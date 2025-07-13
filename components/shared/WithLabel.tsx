@@ -1,11 +1,10 @@
-import React from 'react';
-import { InputProps } from 'react-daisyui';
+import React, { ReactNode, InputHTMLAttributes } from 'react';
 
-interface InputWithLabelProps extends InputProps {
-  children: React.ReactNode;
-  label: string | React.ReactNode;
+interface InputWithLabelProps extends InputHTMLAttributes<HTMLInputElement> {
+  label: string | ReactNode;
   error?: string;
   descriptionText?: string;
+  className?: string;
 }
 
 const InputWithLabel = (props: InputWithLabelProps) => {

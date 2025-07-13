@@ -1,15 +1,19 @@
-import { Input, InputProps } from 'react-daisyui';
-
+import React from 'react';
 import CopyToClipboardButton from './CopyToClipboardButton';
 
-interface InputWithCopyButtonProps extends InputProps {
+interface InputWithCopyButtonProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'color'> {
   label: string;
   description?: string;
 }
 
-const InputWithCopyButton = (props: InputWithCopyButtonProps) => {
-  const { label, value, description, ...rest } = props;
-
+const InputWithCopyButton = ({
+  label,
+  value,
+  description,
+  className = '',
+  ...rest
+}: InputWithCopyButtonProps) => {
   return (
     <div className="form-control w-full">
       <div className="flex justify-between items-center">
@@ -18,10 +22,10 @@ const InputWithCopyButton = (props: InputWithCopyButtonProps) => {
         </label>
         <CopyToClipboardButton value={value?.toString() || ''} />
       </div>
-      <Input
-        className="input input-bordered w-full"
+      <input
+        className={`input input-bordered w-full ${className}`}
+        value={value}
         {...rest}
-        defaultValue={value}
       />
       {description && (
         <label className="label">

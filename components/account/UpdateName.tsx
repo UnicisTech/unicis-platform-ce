@@ -2,40 +2,49 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import { Button } from 'react-daisyui';
-
-import type { ApiResponse, UserReturned } from 'types';
-import { Card, InputWithLabel } from '@/components/shared';
-import { defaultHeaders } from '@/lib/common';
-import { User } from '@prisma/client';
 import { useSession } from 'next-auth/react';
+import type { ApiResponse, UserReturned } from 'types';
+import type { User } from '@prisma/client';
+import { defaultHeaders } from '@/lib/common';
 
-const schema = Yup.object().shape({
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '@/components/shadcn/ui/card';
+import { Label } from '@/components/shadcn/ui/label';
+import { Input } from '@/components/shadcn/ui/input';
+import { Button } from '@/components/shadcn/ui/button';
+import { Loader2 } from 'lucide-react';
+
+const schema = Yup.object({
   firstName: Yup.string().required(),
   lastName: Yup.string().required(),
 });
 
-const UpdateName = ({ user }: { user: Partial<User> }) => {
+const UpdateName: React.FC<{ user: Partial<User> }> = ({ user }) => {
   const { t } = useTranslation('common');
   const { data: session, update } = useSession();
 
   const formik = useFormik({
     initialValues: {
-      firstName: user.firstName,
-      lastName: user.lastName,
+      firstName: user.firstName || '',
+      lastName: user.lastName || '',
     },
     enableReinitialize: true,
     validationSchema: schema,
     onSubmit: async (values) => {
-      const response = await fetch('/api/users', {
+      const res = await fetch('/api/users', {
         method: 'PUT',
         headers: defaultHeaders,
         body: JSON.stringify(values),
       });
+      const json = (await res.json()) as ApiResponse<UserReturned>;
 
-      const json = (await response.json()) as ApiResponse<UserReturned>;
-
-      if (!response.ok) {
+      if (!res.ok) {
         toast.error(json.error.message);
         return;
       }
@@ -57,45 +66,51 @@ const UpdateName = ({ user }: { user: Partial<User> }) => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Card>
-        <Card.Body>
-          <Card.Header>
-            <Card.Title>{t('name')}</Card.Title>
-            <Card.Description>{t('name-appearance')}</Card.Description>
-          </Card.Header>
-          <InputWithLabel
-            type="text"
-            label={t('first-name')}
-            name="firstName"
-            placeholder={t('your-first-name')}
-            value={formik.values.firstName}
-            error={
-              formik.touched.firstName ? formik.errors.firstName : undefined
-            }
-            onChange={formik.handleChange}
-            required
-          />
-          <InputWithLabel
-            type="text"
-            label={t('last-name')}
-            name="lastName"
-            placeholder={t('your-last-name')}
-            value={formik.values.lastName}
-            error={formik.touched.lastName ? formik.errors.lastName : undefined}
-            onChange={formik.handleChange}
-            required
-          />
-        </Card.Body>
-        <Card.Footer>
-          <Button
-            type="submit"
-            color="primary"
-            loading={formik.isSubmitting}
-            disabled={!formik.dirty || !formik.isValid}
-            size="md"
-          >
+        <CardHeader>
+          <CardTitle>{t('name')}</CardTitle>
+          <CardDescription>{t('name-appearance')}</CardDescription>
+        </CardHeader>
+
+        <CardContent className="space-y-4">
+          <div className="grid gap-1">
+            <Label htmlFor="firstName">{t('first-name')}</Label>
+            <Input
+              id="firstName"
+              name="firstName"
+              placeholder={t('your-first-name')}
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+            />
+            {formik.touched.firstName && formik.errors.firstName && (
+              <p className="text-destructive text-sm">
+                {formik.errors.firstName}
+              </p>
+            )}
+          </div>
+
+          <div className="grid gap-1">
+            <Label htmlFor="lastName">{t('last-name')}</Label>
+            <Input
+              id="lastName"
+              name="lastName"
+              placeholder={t('your-last-name')}
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+            />
+            {formik.touched.lastName && formik.errors.lastName && (
+              <p className="text-destructive text-sm">
+                {formik.errors.lastName}
+              </p>
+            )}
+          </div>
+        </CardContent>
+
+        <CardFooter className="flex justify-end">
+          <Button type="submit" disabled={!formik.dirty || !formik.isValid}>
+            {formik.isSubmitting && <Loader2 className="animate-spin" />}
             {t('save-changes')}
           </Button>
-        </Card.Footer>
+        </CardFooter>
       </Card>
     </form>
   );

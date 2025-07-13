@@ -7,7 +7,7 @@ const env = {
 
   // SAML Jackson configuration
   saml: {
-    issuer: 'https://saml.boxyhq.com',
+    issuer: 'https://saml.platform.unicis.tech',
     path: '/api/oauth/saml',
     callback: `${process.env.APP_URL}`,
   },
@@ -17,11 +17,11 @@ const env = {
     url: process.env.JACKSON_URL,
     externalUrl: process.env.JACKSON_EXTERNAL_URL || process.env.JACKSON_URL,
     apiKey: process.env.JACKSON_API_KEY,
-    productId: process.env.JACKSON_PRODUCT_ID || 'boxyhq',
+    productId: process.env.JACKSON_PRODUCT_ID || 'unicis-platform',
     selfHosted: process.env.JACKSON_URL !== undefined,
     sso: {
       callback: `${process.env.APP_URL}`,
-      issuer: 'https://saml.boxyhq.com',
+      issuer: 'https://saml.platform.unicis.tech',
       path: '/api/oauth/saml',
       oidcPath: '/api/oauth/oidc',
       idpLoginPath: '/auth/idp-login',

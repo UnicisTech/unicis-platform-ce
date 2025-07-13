@@ -6,6 +6,7 @@ import type {
   TaskProperties,
   AuditLog,
   Diff,
+  Option,
 } from 'types';
 import {
   fieldPropsMapping,
@@ -14,11 +15,6 @@ import {
 
 //TODO: no need config at all for Rm
 type RmConfig = any;
-
-type Option = {
-  label: string;
-  value: string;
-};
 
 export const saveRisk = async (params: {
   user: Session['user'];

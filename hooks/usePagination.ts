@@ -6,6 +6,7 @@ interface PaginationResult<T> {
   pageData: T[];
   goToPreviousPage: () => void;
   goToNextPage: () => void;
+  goToPage: (page: number) => void;
   prevButtonDisabled: boolean;
   nextButtonDisabled: boolean;
 }
@@ -30,6 +31,12 @@ const usePagination = <T>(data: T[], perPage: number): PaginationResult<T> => {
     }
   };
 
+  const goToPage = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
   const prevButtonDisabled = currentPage === 1;
   const nextButtonDisabled = currentPage === totalPages;
 
@@ -44,6 +51,7 @@ const usePagination = <T>(data: T[], perPage: number): PaginationResult<T> => {
     currentPage,
     totalPages,
     pageData,
+    goToPage,
     goToPreviousPage,
     goToNextPage,
     prevButtonDisabled,
