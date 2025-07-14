@@ -1,7 +1,7 @@
-import { useTranslation } from 'next-i18next';
 import PieChart from '../CSC/PieChart';
 import { TaskStatusesDetail } from '@/components/interfaces/CSC';
 import useTeamTasks from 'hooks/useTeamTasks';
+import { Card } from '@/components/shadcn/ui/card';
 
 const labels = ['To Do', 'In Progress', 'In Review', 'Feedback', 'Done'];
 
@@ -19,7 +19,6 @@ const TasksAnalysis = ({
   csc_statuses: { [key: string]: string };
   slug: string;
 }) => {
-  const { t } = useTranslation('translation');
   const { tasks } = useTeamTasks(slug as string);
 
   const statuses: { [key: string]: string } =
@@ -41,10 +40,6 @@ const TasksAnalysis = ({
 
   return (
     <>
-      {/* Team Tasks Analysis */}
-      <div className="mb-2 mx-4 flex items-center justify-between">
-        <h4>{t(`${slug?.toString().toUpperCase()} Task Overview`)}</h4>
-      </div>
       <div className="mx-auto mt-4 w-full max-w-7xl rounded-md p-2">
         <div
           style={{
@@ -55,23 +50,17 @@ const TasksAnalysis = ({
             marginBottom: '10px',
           }}
         >
-          <div
-            style={{ width: '49%' }}
-            className="stats py-2 stat-value shadow"
-          >
+          <Card className="flex-1 h-full flex flex-col p-2 mr-4 justify-between">
             <PieChart
               page_name={`task`}
               statuses={statuses}
               barColor={barColors}
               labels={labels}
             />
-          </div>
-          <div style={{ width: '49%' }} className="shadow p-4">
-            <TaskStatusesDetail tasks={tasks} statusCounts={statusCounts} />
-          </div>
+          </Card>
+          <TaskStatusesDetail tasks={tasks} statusCounts={statusCounts} />
         </div>
       </div>
-      <h4>{t('Data Privacy Overview')}</h4>
     </>
   );
 };

@@ -3,12 +3,12 @@ import { Team } from '@prisma/client';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 
 import ConfirmationDialog from '../shared/ConfirmationDialog';
 import { defaultHeaders } from '@/lib/common';
 import type { ApiResponse } from 'types';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 const RemoveTeam = ({ team }: { team: Team }) => {
   const router = useRouter();
@@ -47,7 +47,7 @@ const RemoveTeam = ({ team }: { team: Team }) => {
           </Card.Header>
         </Card.Body>
         <Card.Footer>
-          <Button
+          <DaisyButton
             color="error"
             onClick={() => setAskConfirmation(true)}
             loading={loading}
@@ -55,7 +55,7 @@ const RemoveTeam = ({ team }: { team: Team }) => {
             size="md"
           >
             {t('remove-team')}
-          </Button>
+          </DaisyButton>
         </Card.Footer>
       </Card>
       <ConfirmationDialog

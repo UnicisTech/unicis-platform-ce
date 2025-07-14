@@ -1,0 +1,121 @@
+[
+  {
+    "Code": "21",
+    "Section": "Cybersecurity risk-management measures",
+    "Control": "Article 21",
+    "Requirements": "Cybersecurity risk-management measures",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.1",
+    "Section": "Appropriate and proportionate measures",
+    "Control": "Article 21.1",
+    "Requirements": "Member States shall ensure that essential and important entities take appropriate and proportionate technical, operational and organisational measures to manage the risks posed to the security of network and information systems which those entities use for their operations or for the provision of their services, and to prevent or minimise the impact of incidents on recipients of their services and on other services.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.1.sp2",
+    "Section": "State-of-the-art security measures",
+    "Control": "Article 21.1.sp2",
+    "Requirements": "Taking into account the state-of-the-art and, where applicable, relevant European and international standards, as well as the cost of implementation, the measures referred to in the first subparagraph shall ensure a level of security of network and information systems appropriate to the risks posed.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.2",
+    "Section": "All-hazards approach",
+    "Control": "Article 21.2",
+    "Requirements": "The measures referred to in paragraph 1 shall be based on an all-hazards approach that aims to protect network and information systems and the physical environment of those systems from incidents, and shall include at least the following:",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.2.a",
+    "Section": "Risk analysis and system security",
+    "Control": "Article 21.2.a",
+    "Requirements": "Policies on risk analysis and information system security;",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.2.b",
+    "Section": "Incident handling",
+    "Control": "Article 21.2.b",
+    "Requirements": "Incident handling;",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.2.c",
+    "Section": "Business continuity",
+    "Control": "Article 21.2.c",
+    "Requirements": "Business continuity, such as backup management and disaster recovery, and crisis management;",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.2.d",
+    "Section": "Supply chain security",
+    "Control": "Article 21.2.d",
+    "Requirements": "Supply chain security, including security-related aspects concerning the relationships between each entity and its direct suppliers or service providers;",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.2.e",
+    "Section": "System acquisition and maintenance",
+    "Control": "Article 21.2.e",
+    "Requirements": "Security in network and information systems acquisition, development and maintenance, including vulnerability handling and disclosure;",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.2.f",
+    "Section": "Effectiveness assessment",
+    "Control": "Article 21.2.f",
+    "Requirements": "Policies and procedures to assess the effectiveness of cybersecurity risk-management measures;",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.2.g",
+    "Section": "Cyber hygiene training",
+    "Control": "Article 21.2.g",
+    "Requirements": "Basic cyber hygiene practices and cybersecurity training;",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.2.h",
+    "Section": "Cryptography policies",
+    "Control": "Article 21.2.h",
+    "Requirements": "Policies and procedures regarding the use of cryptography and, where appropriate, encryption;",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.2.i",
+    "Section": "Access control and asset management",
+    "Control": "Article 21.2.i",
+    "Requirements": "Human resources security, access control policies and asset management;",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.2.j",
+    "Section": "Authentication and secure communications",
+    "Control": "Article 21.2.j",
+    "Requirements": "The use of multi-factor authentication or continuous authentication solutions, secured voice, video and text communications and secured emergency communication systems within the entity, where appropriate.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.3",
+    "Section": "Supply chain vulnerabilities",
+    "Control": "Article 21.3",
+    "Requirements": "Member States shall ensure that, when considering which measures referred to in paragraph 2, point (d), of this Article are appropriate, entities take into account the vulnerabilities specific to each direct supplier and service provider and the overall quality of products and cybersecurity practices of their suppliers and service providers, including their secure development procedures. Member States shall also ensure that, when considering which measures referred to in that point are appropriate, entities are required to take into account the results of the coordinated security risk assessments of critical supply chains carried out in accordance with Article 22(1).",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.4",
+    "Section": "Corrective measures",
+    "Control": "Article 21.4",
+    "Requirements": "Member States shall ensure that an entity that finds that it does not comply with the measures provided for in paragraph 2 takes, without undue delay, all necessary, appropriate and proportionate corrective measures.",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "21.5",
+    "Section": "Implementing acts",
+    "Control": "Article 21.5",
+    "Requirements": "By 17 October 2024, the Commission shall adopt implementing acts laying down the technical and the methodological requirements of the measures referred to in paragraph 2 with regard to DNS service providers, TLD name registries, cloud computing service providers, data centre service providers, content delivery network providers, managed service providers, managed security service providers, providers of online market places, of online search engines and of social networking services platforms, and trust service providers. The Commission may adopt implementing acts laying down the technical and the methodological requirements, as well as sectoral requirements, as necessary, of the measures referred to in paragraph 2 with regard to essential and important entities other than those referred to in the first subparagraph of this paragraph. When preparing the implementing acts referred to in the first and second subparagraphs of this paragraph, the Commission shall, to the extent possible, follow European and international standards, as well as relevant technical specifications. The Commission shall exchange advice and cooperate with the Cooperation Group and ENISA on the draft implementing acts in accordance with Article 14(4), point (e). Those implementing acts shall be adopted in accordance with the examination procedure referred to in Article 39(2).",
+    "Status": "Unknown"
+  }
+]

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -12,6 +11,7 @@ import { Loading, Error } from '@/components/shared';
 import { defaultHeaders } from '@/lib/common';
 import { validateAnswer } from '../services/passCourseService';
 import { TeamCourseWithProgress, ApiResponse } from 'types';
+import { Button } from '@/components/shadcn/ui/button';
 
 const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
   const course = teamCourse.course;
@@ -24,9 +24,10 @@ const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
     slug,
     courseId
   );
+
   const [answers, setAnswers] = useState<any>(
     Array(course.questions.length).fill(null)
-  ); // Store answers here
+  );
   const [started, setStarted] = useState<boolean>(false);
   const [finished, setFinished] = useState<boolean>(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
@@ -37,23 +38,18 @@ const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
     const isValid = validateAnswer(currentQuestion?.type, answer);
 
     if (isValid) {
-      setAnswers((prevAnswers) => {
-        const updatedAnswers = [...prevAnswers];
-        updatedAnswers[currentQuestionIndex] = answer;
-        return updatedAnswers;
+      setAnswers((prev) => {
+        const updated = [...prev];
+        updated[currentQuestionIndex] = answer;
+        return updated;
       });
     }
   };
 
   const nextHandler = () => {
     for (let i = currentQuestionIndex; i < course.questions.length; i++) {
-      // Its last question
-      if (i === course.questions.length - 1) {
-        return saveHandler();
-      }
-      if (!answers[i + 1]) {
-        return setCurrentQuestionIndex(i + 1);
-      }
+      if (i === course.questions.length - 1) return saveHandler();
+      if (!answers[i + 1]) return setCurrentQuestionIndex(i + 1);
     }
   };
 
@@ -78,7 +74,7 @@ const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
       toast.success(t('iap-course-saved'));
       mutateProgress();
     } catch (e) {
-      //TODO: catch error
+      toast.error('Something went wrong.');
     }
   };
 
@@ -89,23 +85,16 @@ const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
       progress: number;
       answers: any;
     };
-
     setStarted(true);
     setAnswers(answers);
     setFinished(progress === 100);
 
-    const uncompletedQuestionIndex = answers.findIndex((item) => !item);
-    if (uncompletedQuestionIndex !== -1)
-      setCurrentQuestionIndex(uncompletedQuestionIndex);
+    const nextIndex = answers.findIndex((item) => !item);
+    if (nextIndex !== -1) setCurrentQuestionIndex(nextIndex);
   }, [userProgress]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (isError) {
-    return <Error message={isError.message} />;
-  }
+  if (isLoading) return <Loading />;
+  if (isError) return <Error message={isError.message} />;
 
   if (finished) {
     return (
@@ -118,7 +107,7 @@ const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
   }
 
   return (
-    <div style={{ minHeight: '50%' }}>
+    <div className="min-h-[50%]">
       <div className="mb-5 flex justify-center">
         <ContentPreview course={course} />
       </div>
@@ -128,11 +117,9 @@ const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
         </div>
       ) : (
         <div className="flex justify-center">
-          <div className="flex-col w-1/2">
-            <div>
-              <span>
-                {currentQuestionIndex + 1}/{course.questions.length}
-              </span>
+          <div className="flex flex-col w-full max-w-xl gap-4">
+            <div className="text-center font-medium">
+              {currentQuestionIndex + 1}/{course.questions.length}
             </div>
             <QuestionRenderer
               question={course.questions[currentQuestionIndex]}

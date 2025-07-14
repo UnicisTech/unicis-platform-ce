@@ -1,7 +1,4 @@
-type Option = {
-  label: string;
-  value: string;
-};
+import type { Option } from 'types';
 
 type Options = {
   [key: string]: Option[];

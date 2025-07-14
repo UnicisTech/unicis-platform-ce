@@ -1,17 +1,21 @@
 import React, { useCallback, useState } from 'react';
-import { Button } from 'react-daisyui';
+import { getAxiosError } from '@/lib/common';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import useCanAccess from 'hooks/useCanAccess';
 import { Category, Team } from '@prisma/client';
-import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
+import { ApiResponse, TeamCourseWithProgress, TeamMemberWithUser } from 'types';
 import {
   CompletionResults,
   CoursesTable,
-  DeleteCourse,
   CreateCourse,
   CreateCategory,
 } from '@/components/interfaces/IAP';
 import StatusResults from './StatusResults';
+import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
+import { Button } from '@/components/shadcn/ui/button';
 
 interface IapDashboardProps {
   categories: Category[];
@@ -31,6 +35,8 @@ const AdminPage = ({
   mutateIap,
 }: IapDashboardProps) => {
   const { t } = useTranslation('common');
+  const router = useRouter();
+  const { slug } = router.query;
   const { canAccess } = useCanAccess();
   const [isCreateCategoryOpen, setIsCreateCategoryOpen] = useState(false);
   const [isCreateCourseOpen, setIsCreateCourseOpen] = useState(false);
@@ -79,6 +85,29 @@ const AdminPage = ({
     []
   );
 
+  const deleteCourse = useCallback(async () => {
+    if (!courseToDelete) return;
+
+    try {
+      const response = await axios.delete<ApiResponse<any>>(
+        `/api/teams/${slug}/iap/course/${courseToDelete.id}`
+      );
+
+      const { error } = response.data;
+
+      if (error) {
+        toast.error(error.message);
+        return;
+      } else {
+        toast.success(t('iap-course-deleted'));
+      }
+
+      mutateIap();
+    } catch (error: any) {
+      toast.error(getAxiosError(error));
+    }
+  }, [courseToDelete]);
+
   return (
     <>
       <div className="flex justify-between items-center">
@@ -94,9 +123,7 @@ const AdminPage = ({
           {canAccess('iap_category', ['create']) && (
             <div className="mx-1.5 my-0">
               <Button
-                size="sm"
                 color="primary"
-                variant="outline"
                 onClick={() => {
                   setIsCreateCategoryOpen(true);
                 }}
@@ -108,9 +135,7 @@ const AdminPage = ({
           {canAccess('iap_course', ['create']) && (
             <div className="mx-1.5 my-0">
               <Button
-                size="sm"
                 color="primary"
-                variant="outline"
                 onClick={() => {
                   setIsCreateCourseOpen(true);
                 }}
@@ -151,14 +176,14 @@ const AdminPage = ({
           selectedTeamCourse={courseToEdit || null}
         />
       )}
-      {isDeleteCourseOpen && courseToDelete && (
-        <DeleteCourse
-          visible={isDeleteCourseOpen}
-          setVisible={setIsDeleteCourseOpen}
-          teamCourse={courseToDelete}
-          mutate={mutateIap}
-        />
-      )}
+      <ConfirmationDialog
+        visible={isDeleteCourseOpen}
+        title={t('delete-course')}
+        onCancel={() => setIsDeleteCourseOpen(false)}
+        onConfirm={deleteCourse}
+      >
+        {t('delete-course-confirmation')}
+      </ConfirmationDialog>
       {isCompletionResultsOpen && courseToCompletionResults && (
         <CompletionResults
           teamCourse={courseToCompletionResults}

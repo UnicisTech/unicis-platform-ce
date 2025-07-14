@@ -5,16 +5,18 @@ import {
   riskSecurityPoints,
   riskProbabilityPoints,
 } from '@/components/defaultLanding/data/configs/pia';
-import type { AuditLog, Diff, PiaConfig, PiaRisk, TaskProperties } from 'types';
+import type {
+  AuditLog,
+  Diff,
+  PiaConfig,
+  PiaRisk,
+  TaskProperties,
+  Option,
+} from 'types';
 import {
   fieldPropsMapping,
   config,
 } from '@/components/defaultLanding/data/configs/pia';
-
-type Option = {
-  label: string;
-  value: string;
-};
 
 export const saveRisk = async (params: {
   user: Session['user'];

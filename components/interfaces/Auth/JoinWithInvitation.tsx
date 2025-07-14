@@ -1,6 +1,5 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -8,6 +7,7 @@ import type { User } from '@prisma/client';
 import type { ApiResponse } from 'types';
 import { InputWithLabel, Loading, Error } from '@/components/shared';
 import useInvitation from 'hooks/useInvitation';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const JoinWithInvitation = ({
   inviteToken,
@@ -79,7 +79,7 @@ const JoinWithInvitation = ({
         error={formik.touched.email ? String(formik.errors.email) : undefined}
         onChange={formik.handleChange}
       />
-      <Button
+      <DaisyButton
         type="submit"
         color="primary"
         loading={formik.isSubmitting}
@@ -87,7 +87,7 @@ const JoinWithInvitation = ({
         fullWidth
       >
         {t('create-account')}
-      </Button>
+      </DaisyButton>
       <div>
         <p className="text-sm">{t('sign-up-message')}</p>
       </div>

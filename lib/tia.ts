@@ -212,3 +212,160 @@ export const getDiff = (o1, o2) => {
 
   return diff;
 };
+
+export const shouldSkipTwoSteps = (formData: any) =>
+  [
+    'LawfulAccess',
+    'MassSurveillanceTelecommunications',
+    'SelfReportingObligations',
+  ]
+    .map((prop) => ['yes', 'na'].includes(formData[prop]))
+    .every((result) => result === true);
+
+export const isTranferPermitted = (procedure: any): boolean => {
+  if (!procedure[1]) return false;
+
+  const {
+    EncryptionInTransit,
+    TransferMechanism,
+    LawfulAccess,
+    MassSurveillanceTelecommunications,
+    SelfReportingObligations,
+  } = procedure[1];
+
+  // procedure[3] || [] - procedure[3] may not exist if the procedure is permitted on second step
+  const {
+    ConnectionTargetedAccess,
+    ConnectionSurveillanceTele,
+    ConnectionSelfreportingObligations,
+  } = procedure[3] || [];
+
+  if (EncryptionInTransit === 'no' || TransferMechanism === 'no') {
+    return false;
+  }
+
+  if (LawfulAccess === 'no' && ConnectionTargetedAccess === 'yes') {
+    return false;
+  }
+
+  if (
+    MassSurveillanceTelecommunications === 'no' &&
+    ConnectionSurveillanceTele === 'yes'
+  ) {
+    return false;
+  }
+
+  if (
+    SelfReportingObligations === 'no' &&
+    ConnectionSelfreportingObligations === 'yes'
+  ) {
+    return false;
+  }
+
+  return true;
+};
+
+export const getTransferIsValue = (formData: any) => {
+  //TODO: remove legacy verison
+  if (!formData) return 'NOT PERMITTED';
+
+  //legacy version is formData.values
+  const {
+    EncryptionInTransit,
+    TransferMechanism,
+    LawfulAccess,
+    MassSurveillanceTelecommunications,
+    SelfReportingObligations,
+  } = formData.values || formData;
+
+  if (EncryptionInTransit === 'no' || TransferMechanism === 'no') {
+    return 'NOT PERMITTED';
+  }
+
+  if (
+    LawfulAccess === 'no' ||
+    MassSurveillanceTelecommunications === 'no' ||
+    SelfReportingObligations === 'no'
+  ) {
+    return 'PERMITTED, SUBJECT TO STEP 4';
+  }
+
+  return 'PERMITTED';
+};
+
+export const getTiaRisks = (state) => {
+  //TODO: remove legacy version
+  if (!state) {
+    return {
+      targetedRisk: 0,
+      nonTargetedRisk: 0,
+      selfReportingRisk: 0,
+    };
+  }
+
+  const {
+    WarrantsSubpoenas,
+    ViolationLocalLaw,
+    HighViolationLocalLaw,
+    HighViolationDataIssue,
+    InvestigatingImporter,
+    PastWarrantSubpoena,
+    LocalIssueWarrants,
+    LocalMassSurveillance,
+    LocalAccessMassSurveillance,
+    LocalRoutinelyMonitor,
+    PassMassSurveillance,
+    ImporterObligation,
+    LocalSelfReporting,
+    PastSelfReporting,
+  } = state || state.values;
+
+  const targetedRisk =
+    Number(WarrantsSubpoenas) +
+    Number(ViolationLocalLaw) +
+    Number(HighViolationLocalLaw) +
+    Number(HighViolationDataIssue) +
+    Number(InvestigatingImporter) +
+    Number(PastWarrantSubpoena);
+
+  const nonTargetedRisk =
+    Number(LocalIssueWarrants) +
+    Number(LocalMassSurveillance) +
+    Number(LocalAccessMassSurveillance) +
+    Number(LocalRoutinelyMonitor) +
+    Number(PassMassSurveillance);
+
+  const selfReportingRisk =
+    Number(ImporterObligation) +
+    Number(LocalSelfReporting) +
+    Number(PastSelfReporting);
+
+  return { targetedRisk, nonTargetedRisk, selfReportingRisk };
+};
+
+export const getProblematicLawfulAccesses = (formState: any) => {
+  //TODO: remove legacy version
+  // const formData = formState?.values;
+  const formData = formState;
+
+  if (!formData) {
+    return {
+      isDataIssueInvestigationEqualToTwo: false,
+      isPassMassSurveillanceConnectionEqualToFour: false,
+      isAssessmentProduceReportEqualToFour: false,
+    };
+  }
+
+  const isDataIssueInvestigationProblematic =
+    formData.DataIssueInvestigation === '2';
+  const isPassMassSurveillanceConnectionProblematic =
+    formData.PassMassSurveillanceConnection === '4';
+  const isAssessmentProduceReportProblematic =
+    formData.AssessmentProduceReport === '4';
+
+  return {
+    isDataIssueInvestigationProblematic,
+    isPassMassSurveillanceConnectionProblematic,
+    isAssessmentProduceReportProblematic,
+  };
+};

@@ -50,10 +50,6 @@ export const countCourseAnswers = (answers: any[], questions: Question[]) => {
         const correctAnswer = question.answers.find(
           (item) => item.isCorrect
         )?.answer;
-        console.log(
-          'correctAnswer in single question in countCourseAnswers',
-          correctAnswer
-        );
         correctAnswer === answer ? right++ : wrong++;
         break;
       }
@@ -65,10 +61,9 @@ export const countCourseAnswers = (answers: any[], questions: Question[]) => {
         break;
       }
       case QuestionType.ORDER: {
-        haveSameElementsInOrder(
-          answers.map(({ second }) => second),
-          answer.map(({ second }) => second)
-        )
+        const correctSequence = question.answers.map(({ second }) => second);
+        const userSequence = answer.map(({ second }) => second);
+        haveSameElementsInOrder(correctSequence, userSequence)
           ? right++
           : wrong++;
         break;

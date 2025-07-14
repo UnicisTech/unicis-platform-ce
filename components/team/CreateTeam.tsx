@@ -5,12 +5,12 @@ import useTeams from 'hooks/useTeams';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
 import Modal from '../shared/Modal';
 import { InputWithLabel } from '../shared';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 interface CreateTeamProps {
   visible: boolean;
@@ -67,7 +67,7 @@ const CreateTeam = ({ visible, setVisible }: CreateTeamProps) => {
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button
+          <DaisyButton
             type="button"
             variant="outline"
             onClick={() => {
@@ -76,8 +76,8 @@ const CreateTeam = ({ visible, setVisible }: CreateTeamProps) => {
             size="md"
           >
             {t('close')}
-          </Button>
-          <Button
+          </DaisyButton>
+          <DaisyButton
             type="submit"
             color="primary"
             loading={formik.isSubmitting}
@@ -85,7 +85,7 @@ const CreateTeam = ({ visible, setVisible }: CreateTeamProps) => {
             disabled={!formik.dirty || !formik.isValid}
           >
             {t('create-team')}
-          </Button>
+          </DaisyButton>
         </Modal.Footer>
       </form>
     </Modal>

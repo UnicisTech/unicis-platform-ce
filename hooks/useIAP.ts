@@ -30,8 +30,10 @@ const useIap = (adminAccess: boolean, slug?: string) => {
   );
 
   const mutateIap = async () => {
-    await mutate(`/api/teams/${teamSlug}/iap/category`);
-    await mutate(`/api/teams/${teamSlug}/iap/course`);
+    mutate(`/api/teams/${teamSlug}/iap/category`);
+    mutate(
+      `/api/teams/${teamSlug}/iap/course?${adminAccess ? 'role=admin' : ''}`
+    );
   };
 
   return {

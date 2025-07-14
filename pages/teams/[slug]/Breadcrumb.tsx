@@ -1,4 +1,3 @@
-import { Link } from 'react-daisyui';
 import { useTranslation } from 'react-i18next';
 
 const Breadcrumb = ({
@@ -19,7 +18,9 @@ const Breadcrumb = ({
       <ul>
         <li>{teamName || t('Home')}</li>
         <li>
-          <Link href={backTo || '/'}>{t('Tasks')}</Link>
+          <a href={backTo || '/'} className="link link-hover">
+            {t('Tasks')}
+          </a>
         </li>
         <li>{`${taskNumber} - ${taskTitle}`}</li>
       </ul>

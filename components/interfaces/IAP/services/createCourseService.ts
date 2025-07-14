@@ -138,7 +138,8 @@ export function validateTextQuestion(formData: any) {
 }
 
 export function createQuestion(formData: any, answersAmount: number) {
-  const type = formData.questionType.value;
+  // const type = formData.questionType.value;
+  const type = formData.questionType;
 
   if (type === 'text') {
     return {

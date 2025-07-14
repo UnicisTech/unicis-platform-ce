@@ -120,9 +120,9 @@ const Attachments = ({
             <div
               className={`flex flex-wrap ${
                 task.attachments.length ? 'justify-start' : 'justify-center'
-              } h-full w-full px-4 py-2 transition bg-white dark:bg-[color:hsla(var(--b1))] border-2 ${
+              } h-full w-full px-4 py-2 transition bg-white dark:bg-[hsla(var(--b1))] border-2 ${
                 isDragOver ? 'border-blue-400' : 'border-gray-300'
-              } border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none`}
+              } border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-hidden`}
             >
               {task.attachments.map((attachment, index) => (
                 <AttachmentsCard
@@ -147,9 +147,9 @@ const Attachments = ({
       <div
         className={`flex flex-wrap ${
           task.attachments.length ? 'justify-start' : 'justify-center'
-        } h-full w-full px-4 py-2 transition bg-white dark:bg-[color:hsla(var(--b1))] border-2 ${
+        } h-full w-full px-4 py-2 transition bg-white dark:bg-[hsla(var(--b1))] border-2 ${
           isDragOver ? 'border-blue-400' : 'border-gray-300'
-        } border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none`}
+        } border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-hidden`}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
         onDragOver={handleDragOver}

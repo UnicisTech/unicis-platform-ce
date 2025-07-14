@@ -4,7 +4,7 @@ import {
 } from '@/components/defaultLanding/data/configs/rpa';
 import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
-import { RpaOption, RpaProcedureInterface } from 'types';
+import { Option, RpaProcedureInterface } from 'types';
 import { RpaAuditLog, RpaConfig, Diff, TaskProperties } from 'types';
 
 export const deleteProcedure = async (params: {
@@ -217,13 +217,13 @@ export const getDiff = (o1, o2) => {
       if (config[key as keyof RpaConfig] != null) {
         if (Array.isArray(prev[key]) || Array.isArray(next[key])) {
           prevValue = prev[key].map(
-            ({ value }: RpaOption) =>
+            ({ value }: Option) =>
               config[key as keyof RpaConfig]?.find(
                 (option) => option.value === value
               )?.label
           );
           nextValue = next[key].map(
-            ({ value }: RpaOption) =>
+            ({ value }: Option) =>
               config[key as keyof RpaConfig]?.find(
                 (option) => option.value === value
               )?.label

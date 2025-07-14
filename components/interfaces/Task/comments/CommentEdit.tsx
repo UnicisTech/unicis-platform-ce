@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import type { Comment } from '@prisma/client';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -31,22 +31,22 @@ const CommentEdit = ({
         <ReactQuill defaultValue={comment.text} onChange={changeHandler} />
       </div>
       <div className="flex gap-1.5 mt-1.5">
-        <Button
+        <DaisyButton
           size="sm"
           color="primary"
           variant="outline"
           onClick={() => updateHandler(newContent, comment.id)}
         >
           {t('save')}
-        </Button>
-        <Button
+        </DaisyButton>
+        <DaisyButton
           size="sm"
           color="ghost"
           variant="outline"
           onClick={() => cancelHandler()}
         >
           {t('cancel')}
-        </Button>
+        </DaisyButton>
       </div>
     </>
   );

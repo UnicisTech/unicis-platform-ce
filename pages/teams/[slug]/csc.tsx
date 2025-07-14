@@ -20,11 +20,11 @@ import {
 } from '@/components/defaultLanding/data/configs/csc';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { getCscStatusesBySlug } from 'models/team';
-import type { Option } from 'types';
 import useISO from 'hooks/useISO';
 import { statusOptions } from '@/components/defaultLanding/data/configs/csc';
 import useCanAccess from 'hooks/useCanAccess';
 import { useTranslation } from 'react-i18next';
+import { CscOption } from 'types';
 
 const labels = [
   'Unknown',
@@ -59,7 +59,7 @@ const CscDashboard = ({
   const [sectionFilter, setSectionFilter] = useState<
     null | { label: string; value: string }[]
   >(null);
-  const [statusFilter, setStatusFilter] = useState<null | Option[]>(null);
+  const [statusFilter, setStatusFilter] = useState<null | CscOption[]>(null);
   const [perPage, setPerPage] = useState<number>(10);
 
   const { isLoading, isError, team } = useTeam(slug as string);
@@ -118,16 +118,16 @@ const CscDashboard = ({
     console.log('CSC ISO', ISO);
   }, [ISO]);
 
-  if (!canAccess('csc', ['read'])) {
-    return <Error message={t('forbidden-resource')} />;
-  }
-
   if (isLoading || !team || !tasks || !ISO) {
     return <Loading />;
   }
 
   if (isError) {
     return <Error />;
+  }
+
+  if (!canAccess('csc', ['read'])) {
+    return <Error message={t('forbidden-resource')} />;
   }
 
   return (
@@ -148,7 +148,7 @@ const CscDashboard = ({
       >
         <div
           style={{ width: '49%' }}
-          className="stats stat-value shadow pl-4 py-4"
+          className="stats stat-value shadow-sm pl-4 py-4"
         >
           <PieChart
             page_name={`csc`}
@@ -157,7 +157,7 @@ const CscDashboard = ({
             labels={labels}
           />
         </div>
-        <div style={{ width: '49%' }} className="stats stat-value shadow">
+        <div style={{ width: '49%' }} className="stats stat-value shadow-sm">
           <RadarChart statuses={statuses} ISO={ISO} />
         </div>
       </div>

@@ -1,15 +1,16 @@
 import { EmptyState, WithLoadingAndError } from '@/components/shared';
-import Badge from '@/components/shared/Badge';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import fetcher from '@/lib/fetcher';
 import type { ApiKey, Team } from '@prisma/client';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
-import { Button } from 'react-daisyui';
 import { toast } from 'react-hot-toast';
 import useSWR from 'swr';
 import type { ApiResponse } from 'types';
+import DaisyBadge from '../shared/daisyUI/DaisyBadge';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 import NewAPIKey from './NewAPIKey';
+import { Button } from '../shadcn/ui/button';
 
 interface APIKeysProps {
   team: Team;
@@ -66,12 +67,7 @@ const APIKeys = ({ team }: APIKeysProps) => {
               API keys allow you to authenticate with the API.
             </p>
           </div>
-          <Button
-            color="primary"
-            variant="outline"
-            size="md"
-            onClick={() => setCreateModalVisible(true)}
-          >
+          <Button color="primary" onClick={() => setCreateModalVisible(true)}>
             {t('create-api-key')}
           </Button>
         </div>
@@ -97,21 +93,20 @@ const APIKeys = ({ team }: APIKeysProps) => {
                     <tr key={apiKey.id}>
                       <td>{apiKey.name}</td>
                       <td>
-                        <Badge color="success">{t('active')}</Badge>
+                        <DaisyBadge color="success">{t('active')}</DaisyBadge>
                       </td>
                       <td>{new Date(apiKey.createdAt).toLocaleDateString()}</td>
                       <td>
-                        <Button
+                        <DaisyButton
                           size="xs"
                           color="error"
-                          variant="outline"
                           onClick={() => {
                             setSelectedApiKey(apiKey);
                             setConfirmationDialogVisible(true);
                           }}
                         >
                           {t('revoke')}
-                        </Button>
+                        </DaisyButton>
                       </td>
                     </tr>
                   );

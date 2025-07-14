@@ -48,15 +48,24 @@ const TeamDashboard = ({
       </div>
       <div className="space-y-6">
         {/* TODO: { [key: string]: string; } is temporary solution */}
+        <div className="mb-4 mx-4 flex items-center justify-between">
+          <h2 className="text-2xl font-semibold tracking-tight">
+            {t(`${slug?.toString().toUpperCase()} Task Overview`)}
+          </h2>
+        </div>
         <TeamTaskAnalysis
           slug={slug}
           csc_statuses={csc_statuses as { [key: string]: string }}
         />
+        <div className="mb-4 mx-4 flex items-center justify-between">
+          <h2 className="text-2xl font-semibold tracking-tight">
+            {t(`Data Privacy Overview`)}
+          </h2>
+        </div>
         <div
           style={{
             width: '100%',
             display: 'flex',
-            justifyContent: 'space-around',
             marginBottom: '10px',
           }}
         >
@@ -66,12 +75,16 @@ const TeamDashboard = ({
         <div className="space-y-6">
           <PiaAnalysis tasks={tasks} />
         </div>
-        {/* TODO: { [key: string]: string; } is temporary solution */}
         <TeamCscAnalysis
           slug={slug}
           csc_statuses={csc_statuses as { [key: string]: string }}
         />
         <div className="space-y-6">
+          <div className="mb-4 px-4 flex items-center justify-between">
+            <h2 className="text-2xl font-semibold tracking-tight">
+              {t('rm-overview')}
+            </h2>
+          </div>
           <RmAnalysis slug={slug} />
         </div>
       </div>

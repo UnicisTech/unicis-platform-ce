@@ -1,10 +1,17 @@
 import { useRouter } from 'next/router';
-import { SimpleTag as Tag } from '@atlaskit/tag';
+import { Badge } from '@/components/shadcn/ui/badge';
+import { Button } from '@/components/shadcn/ui/button';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/shadcn/ui/card';
 import { Category } from '@prisma/client';
-import { Card } from 'react-daisyui';
-import { Button } from 'react-daisyui';
 import { TeamCourseWithProgress } from 'types';
 import ProgressBadge from '../shared/ProgressBadge';
+import { cn } from '@/components/shadcn/lib/utils';
 
 const CourseCard = ({
   teamCourse,
@@ -23,36 +30,48 @@ const CourseCard = ({
 
   return (
     <Card
-      className="w-[350px] m-4 hover:shadow-lg hover:shadow-black/25 dark:bg-gray-800"
-      bordered
+      onClick={openCourse}
+      className={cn(
+        'w-[350px] m-4 cursor-pointer transition-all duration-200',
+        'hover:shadow-xl hover:scale-[1.02]'
+      )}
     >
       <div className="relative pt-[70%]">
         <img
-          className="absolute top-0 left-0 w-full h-full object-cover"
-          src={course?.thumbnail ? course.thumbnail : '/unicis-iap-logo.png'}
+          className="absolute top-0 left-0 w-full h-full object-cover rounded-t-md"
+          src={course?.thumbnail || '/unicis-iap-logo.png'}
           alt="Course Thumbnail"
         />
       </div>
-      <Card.Body>
-        <Card.Title tag="h2">{course.name}</Card.Title>
-        <div className="flex justify-start">
-          <Tag
-            text={
-              categories.find(({ id }) => id === course.categoryId)?.name || ''
-            }
-            color="blueLight"
-          />
+
+      <CardHeader>
+        <CardTitle className="text-lg">{course.name}</CardTitle>
+        <div className="flex justify-start mt-1">
+          <Badge variant="outline">
+            {categories.find(({ id }) => id === course.categoryId)?.name || ''}
+          </Badge>
         </div>
-        <div className="mt-[5px]">
-          <ProgressBadge progress={teamCourse.progress?.[0]?.progress} />
-          {course?.estimatedTime ? (
-            <p>Estimated: {course.estimatedTime} minutes</p>
-          ) : null}
-        </div>
-        <Card.Actions className="justify-end">
-          <Button onClick={openCourse}>Open</Button>
-        </Card.Actions>
-      </Card.Body>
+      </CardHeader>
+
+      <CardContent className="space-y-2">
+        <ProgressBadge progress={teamCourse.progress?.[0]?.progress} />
+        {course?.estimatedTime && (
+          <p className="text-sm text-muted-foreground">
+            Estimated: {course.estimatedTime} minutes
+          </p>
+        )}
+      </CardContent>
+
+      <CardFooter className="justify-end">
+        <Button
+          onClick={(e) => {
+            e.stopPropagation();
+            openCourse();
+          }}
+        >
+          Open
+        </Button>
+      </CardFooter>
     </Card>
   );
 };

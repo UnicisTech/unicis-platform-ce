@@ -1,14 +1,15 @@
 import { useCallback, useMemo, useState } from 'react';
-import { Button } from 'react-daisyui';
 import { useTranslation } from 'next-i18next';
 import useCanAccess from 'hooks/useCanAccess';
-import CreateRisk from './CreateRisk';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { useRouter } from 'next/router';
 import { TaskProperties, TaskWithRmRisk } from 'types';
 import { EmptyState, Error } from '@/components/shared';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
+import CreateRisk from './RiskForm/RmRiskDialog';
+import { Button } from '@/components/shadcn/ui/button';
+import RmAnalysis from '../TeamDashboard/RmAnalysis';
 
 const Dashboard = () => {
   const { canAccess } = useCanAccess();
@@ -18,8 +19,6 @@ const Dashboard = () => {
   const { tasks, mutateTasks } = useTeamTasks(slug as string);
   //TODO: setPerPage
   const [perPage] = useState<number>(10);
-
-  console.log('tasks', tasks);
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -63,9 +62,7 @@ const Dashboard = () => {
         <div className="flex justify-end items-center my-1">
           {canAccess('task', ['update']) && (
             <Button
-              size="sm"
               color="primary"
-              variant="outline"
               onClick={() => {
                 setIsCreateOpen(true);
               }}
@@ -75,11 +72,11 @@ const Dashboard = () => {
           )}
         </div>
       </div>
-      {isCreateOpen && tasks && (
+      {isCreateOpen && (
         <CreateRisk
-          tasks={tasks}
-          visible={isCreateOpen}
-          setVisible={setIsCreateOpen}
+          open={isCreateOpen}
+          onOpenChange={setIsCreateOpen}
+          tasks={tasks || []}
           mutateTasks={mutateTasks}
         />
       )}
@@ -88,6 +85,9 @@ const Dashboard = () => {
         <EmptyState title={t('rpa-dashboard')} description="No records" />
       ) : (
         <>
+          <div className="m-2">
+            <RmAnalysis slug={slug as string} />
+          </div>
           <RisksTable
             slug={slug as string}
             tasks={tasksWithRisks}
@@ -97,10 +97,11 @@ const Dashboard = () => {
           />
           {taskToEdit && isEditOpen && (
             <CreateRisk
-              tasks={tasks || []}
-              visible={isEditOpen}
-              setVisible={setIsEditOpen}
+              open={isEditOpen}
+              onOpenChange={setIsEditOpen}
               selectedTask={taskToEdit}
+              prevRisk={taskToEdit.properties.rm_risk}
+              tasks={tasks || []}
               mutateTasks={mutateTasks}
             />
           )}

@@ -1,32 +1,37 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import Select from '@atlaskit/select';
 import { getSectionFilterOptions } from '@/components/defaultLanding/data/configs/csc';
-import { WithoutRing } from 'sharedStyles';
+import { MultiSelect } from '@/components/shadcn/ui/multi-select';
+
+interface Option {
+  label: string;
+  value: string;
+}
 
 const SectionFilter = ({
   ISO,
   setSectionFilter,
 }: {
   ISO: string;
-  setSectionFilter: Dispatch<
-    SetStateAction<{ label: string; value: string }[] | null>
-  >;
+  setSectionFilter: Dispatch<SetStateAction<Option[] | null>>;
 }) => {
+  const options = getSectionFilterOptions(ISO);
+
+  const handleValueChange = (selectedValues: string[]) => {
+    const selectedOptions = options.filter((opt) =>
+      selectedValues.includes(opt.value)
+    );
+    setSectionFilter(selectedOptions);
+  };
+
   return (
-    <div style={{ margin: '0 5px' }}>
-      <WithoutRing>
-        <Select
-          inputId="multi-select-section-filter"
-          className="multi-select"
-          classNamePrefix="react-select"
-          options={getSectionFilterOptions(ISO)}
-          onChange={(value) => {
-            setSectionFilter([...value]);
-          }}
-          placeholder="Choose a section"
-          isMulti
-        />
-      </WithoutRing>
+    <div className="w-full max-w-xs mx-1">
+      <MultiSelect
+        options={options}
+        onValueChange={handleValueChange}
+        placeholder="Choose a section"
+        animation={0.2}
+        maxCount={3}
+      />
     </div>
   );
 };

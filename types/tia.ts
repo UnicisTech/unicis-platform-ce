@@ -19,6 +19,7 @@ type Country = {
   value: string;
 };
 
+//TODO: get rid of this type
 export type TiaOption = {
   label: string;
   value: string;

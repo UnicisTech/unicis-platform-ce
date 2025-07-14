@@ -1,18 +1,25 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/shadcn/ui/table';
 import { Error, LetterAvatar, Loading } from '@/components/shared';
 import { Team, TeamMember } from '@prisma/client';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeamMembers from 'hooks/useTeamMembers';
 import { useSession } from 'next-auth/react';
 import { useTranslation } from 'next-i18next';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
-
 import { InviteMember } from '@/components/invitation';
 import UpdateMemberRole from './UpdateMemberRole';
 import { defaultHeaders } from '@/lib/common';
 import type { ApiResponse } from 'types';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
 import { useState } from 'react';
+import { Button } from '../shadcn/ui/button';
 
 const Members = ({ team }: { team: Team }) => {
   const { data: session } = useSession();
@@ -27,21 +34,12 @@ const Members = ({ team }: { team: Team }) => {
     team.slug
   );
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (isError) {
-    return <Error message={isError.message} />;
-  }
-
-  if (!members) {
-    return null;
-  }
+  if (isLoading) return <Loading />;
+  if (isError) return <Error message={isError.message} />;
+  if (!members) return null;
 
   const removeTeamMember = async (member: TeamMember | null) => {
     if (!member) return;
-
     const sp = new URLSearchParams({ memberId: member.userId });
 
     const response = await fetch(
@@ -63,17 +61,10 @@ const Members = ({ team }: { team: Team }) => {
     toast.success(t('member-deleted'));
   };
 
-  const canUpdateRole = (member: TeamMember) => {
-    return (
-      session?.user.id != member.userId && canAccess('team_member', ['update'])
-    );
-  };
-
-  const canRemoveMember = (member: TeamMember) => {
-    return (
-      session?.user.id != member.userId && canAccess('team_member', ['delete'])
-    );
-  };
+  const canUpdateRole = (member: TeamMember) =>
+    session?.user.id !== member.userId && canAccess('team_member', ['update']);
+  const canRemoveMember = (member: TeamMember) =>
+    session?.user.id !== member.userId && canAccess('team_member', ['delete']);
 
   return (
     <div className="space-y-3">
@@ -82,68 +73,59 @@ const Members = ({ team }: { team: Team }) => {
           <h2 className="text-xl font-medium leading-none tracking-tight">
             Members
           </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-muted-foreground">
             Team members and their roles.
           </p>
         </div>
-        <Button
-          color="primary"
-          variant="outline"
-          size="md"
-          onClick={() => setVisible(!visible)}
-        >
-          {t('add-member')}
-        </Button>
+        <Button onClick={() => setVisible(!visible)}>{t('add-member')}</Button>
       </div>
-      <table className="text-sm table w-full border-b dark:border-base-200">
-        <thead className="bg-base-200">
-          <tr>
-            <th>{t('name')}</th>
-            <th>{t('email')}</th>
-            <th>{t('role')}</th>
-            {canAccess('team_member', ['delete']) && <th>{t('action')}</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {members.map((member) => {
-            return (
-              <tr key={member.id}>
-                <td>
-                  <div className="flex items-center justify-start space-x-2">
-                    <LetterAvatar name={member.user.name} />
-                    <span>{member.user.name}</span>
-                  </div>
-                </td>
-                <td>{member.user.email}</td>
-                <td>
-                  {canUpdateRole(member) ? (
-                    <UpdateMemberRole team={team} member={member} />
-                  ) : (
-                    <span>{member.role}</span>
-                  )}
-                </td>
-                <td>
-                  {canRemoveMember(member) ? (
-                    <Button
-                      size="sm"
-                      color="error"
-                      variant="outline"
-                      onClick={() => {
-                        setSelectedMember(member);
-                        setConfirmationDialogVisible(true);
-                      }}
-                    >
-                      {t('remove')}
-                    </Button>
-                  ) : (
-                    <span>-</span>
-                  )}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>{t('name')}</TableHead>
+            <TableHead>{t('email')}</TableHead>
+            <TableHead>{t('role')}</TableHead>
+            {canAccess('team_member', ['delete']) && (
+              <TableHead>{t('action')}</TableHead>
+            )}
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {members.map((member) => (
+            <TableRow key={member.id}>
+              <TableCell>
+                <div className="flex items-center space-x-2">
+                  <LetterAvatar name={member.user.name} />
+                  <span>{member.user.name}</span>
+                </div>
+              </TableCell>
+              <TableCell>{member.user.email}</TableCell>
+              <TableCell>
+                {canUpdateRole(member) ? (
+                  <UpdateMemberRole team={team} member={member} />
+                ) : (
+                  <span>{member.role}</span>
+                )}
+              </TableCell>
+              {canRemoveMember(member) && (
+                <TableCell>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setSelectedMember(member);
+                      setConfirmationDialogVisible(true);
+                    }}
+                  >
+                    {t('remove')}
+                  </Button>
+                </TableCell>
+              )}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+
       <ConfirmationDialog
         visible={confirmationDialogVisible}
         onCancel={() => setConfirmationDialogVisible(false)}
@@ -152,6 +134,7 @@ const Members = ({ team }: { team: Team }) => {
       >
         {t('delete-member-warning')}
       </ConfirmationDialog>
+
       <InviteMember visible={visible} setVisible={setVisible} team={team} />
     </div>
   );

@@ -1,81 +1,119 @@
-import React from 'react';
-import toast from 'react-hot-toast';
-import { Modal } from 'react-daisyui';
+import * as React from 'react';
 import { useTranslation } from 'next-i18next';
-import AtlaskitButton, { LoadingButton } from '@atlaskit/button';
-import Form, { Field } from '@atlaskit/form';
-import TextField from '@atlaskit/textfield';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from '@/components/shadcn/ui/form';
+import { Input } from '@/components/shadcn/ui/input';
+import { Button } from '@/components/shadcn/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogClose,
+} from '@/components/shadcn/ui/dialog';
 import { defaultHeaders } from '@/lib/common';
-import { ApiResponse } from 'types';
+import toast from 'react-hot-toast';
+import type { ApiResponse } from 'types';
 
-const CreateIapCategory = ({
+interface IapCategoryFormData {
+  name: string;
+}
+
+interface CreateIapCategoryProps {
+  teamSlug: string;
+  visible: boolean;
+  setVisible: (v: boolean) => void;
+  mutate: () => Promise<void>;
+}
+
+export default function CreateIapCategory({
   teamSlug,
   visible,
   setVisible,
   mutate,
-}: {
-  teamSlug: string;
-  visible: boolean;
-  setVisible: (visible: boolean) => void;
-  mutate: () => Promise<void>;
-}) => {
+}: CreateIapCategoryProps) {
   const { t } = useTranslation('common');
+  const form = useForm<IapCategoryFormData>({ defaultValues: { name: '' } });
 
-  const onSubmit = async (formData: any) => {
-    const response = await fetch(`/api/teams/${teamSlug}/iap/category`, {
-      method: 'POST',
-      headers: defaultHeaders,
-      body: JSON.stringify(formData),
-    });
+  const onSubmit: SubmitHandler<IapCategoryFormData> = async (data) => {
+    try {
+      const response = await fetch(`/api/teams/${teamSlug}/iap/category`, {
+        method: 'POST',
+        headers: defaultHeaders,
+        body: JSON.stringify(data),
+      });
+      const json = (await response.json()) as ApiResponse<any>;
 
-    const json = (await response.json()) as ApiResponse<any>;
+      if (!response.ok) {
+        toast.error(json.error.message);
+        return;
+      }
 
-    if (!response.ok) {
-      toast.error(json.error.message);
-      return;
+      toast.success(t('iap-category-saved'));
+      await mutate();
+      setVisible(false);
+      form.reset();
+    } catch (err: any) {
+      toast.error(err.message);
     }
-
-    toast.success(t('iap-category-saved'));
-    mutate();
-    setVisible(false);
   };
 
   return (
-    <Modal open={visible}>
-      <Form onSubmit={onSubmit}>
-        {({ formProps }) => (
-          <form {...formProps}>
-            <Modal.Header className="font-bold">
-              {t('create-category-title')}
-            </Modal.Header>
-            <Modal.Body>
-              <Field
-                aria-required={true}
-                name="name"
-                label={t('category-name')}
-                isRequired
-              >
-                {({ fieldProps }) => (
-                  <TextField autoComplete="off" {...fieldProps} />
-                )}
-              </Field>
-            </Modal.Body>
-            <Modal.Actions>
-              <AtlaskitButton
-                appearance="default"
-                onClick={() => setVisible(false)}
-              >
-                {t('close')}
-              </AtlaskitButton>
-              <LoadingButton type="submit" appearance="primary">
-                {t('save')}
-              </LoadingButton>
-            </Modal.Actions>
-          </form>
-        )}
-      </Form>
-    </Modal>
-  );
-};
+    <Dialog open={visible} onOpenChange={setVisible}>
+      <DialogContent className="max-w-md p-6">
+        <DialogHeader>
+          <DialogTitle>{t('create-category-title')}</DialogTitle>
+        </DialogHeader>
 
-export default CreateIapCategory;
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="name"
+              rules={{
+                required:
+                  t('category-name-required') || 'Category name is required.',
+              }}
+              render={({ field, fieldState }) => (
+                <FormItem>
+                  <FormLabel>{t('category-name')}</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage>
+                    {fieldState.error ? fieldState.error.message : null}
+                  </FormMessage>
+                </FormItem>
+              )}
+            />
+
+            <DialogFooter className="flex justify-end space-x-2">
+              <DialogClose asChild>
+                <Button
+                  variant="outline"
+                  disabled={form.formState.isSubmitting}
+                  onClick={() => setVisible(false)}
+                >
+                  {t('close')}
+                </Button>
+              </DialogClose>
+              <Button type="submit" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting
+                  ? t('saving') || 'Saving...'
+                  : t('save')}
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
+  );
+}
