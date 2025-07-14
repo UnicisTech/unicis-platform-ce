@@ -205,7 +205,7 @@ export const MultiSelect = React.forwardRef<
                       <Badge
                         key={value}
                         className={cn(
-                          // isAnimating ? 'animate-bounce' : '',
+                          'max-w-[80%] overflow-hidden text-ellipsis whitespace-nowrap',
                           multiSelectVariants({ variant })
                         )}
                         style={{ animationDuration: `${animation}s` }}
@@ -213,7 +213,7 @@ export const MultiSelect = React.forwardRef<
                         {IconComponent && (
                           <IconComponent className="h-4 w-4 mr-2" />
                         )}
-                        {option?.label}
+                        <span className="truncate">{option?.label}</span>
                         <XCircle
                           className="ml-2 h-4 w-4 cursor-pointer"
                           onClick={(event) => {
