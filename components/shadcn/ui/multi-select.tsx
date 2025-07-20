@@ -200,12 +200,16 @@ export const MultiSelect = React.forwardRef<
                 <div className="flex flex-wrap items-center">
                   {selectedValues.slice(0, maxCount).map((value) => {
                     const option = options.find((o) => o.value === value);
+                    const label =
+                      option && option.label && option.label.length > 50
+                        ? `${option.label.slice(0, 47)}...`
+                        : option?.label;
                     const IconComponent = option?.icon;
                     return (
                       <Badge
                         key={value}
                         className={cn(
-                          'max-w-[80%] overflow-hidden text-ellipsis whitespace-nowrap',
+                          'overflow-hidden text-ellipsis whitespace-nowrap',
                           multiSelectVariants({ variant })
                         )}
                         style={{ animationDuration: `${animation}s` }}
@@ -213,7 +217,7 @@ export const MultiSelect = React.forwardRef<
                         {IconComponent && (
                           <IconComponent className="h-4 w-4 mr-2" />
                         )}
-                        <span className="truncate">{option?.label}</span>
+                        <span className="truncate">{label}</span>
                         <XCircle
                           className="ml-2 h-4 w-4 cursor-pointer"
                           onClick={(event) => {
