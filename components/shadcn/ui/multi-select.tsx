@@ -48,7 +48,7 @@ const multiSelectVariants = cva(
  */
 interface MultiSelectProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof multiSelectVariants> {
+  VariantProps<typeof multiSelectVariants> {
   /**
    * An array of option objects to be displayed in the multi-select component.
    * Each option object has a label, value, and an optional icon.
@@ -196,14 +196,10 @@ export const MultiSelect = React.forwardRef<
             )}
           >
             {selectedValues.length > 0 ? (
-              <div className="flex justify-between items-center w-full">
-                <div className="flex flex-wrap items-center">
+              <div className="flex justify-between items-center w-full min-w-0">
+                <div className="flex flex-wrap items-center flex-1 min-w-0">
                   {selectedValues.slice(0, maxCount).map((value) => {
                     const option = options.find((o) => o.value === value);
-                    const label =
-                      option && option.label && option.label.length > 50
-                        ? `${option.label.slice(0, 47)}...`
-                        : option?.label;
                     const IconComponent = option?.icon;
                     return (
                       <Badge
@@ -212,12 +208,18 @@ export const MultiSelect = React.forwardRef<
                           'overflow-hidden text-ellipsis whitespace-nowrap',
                           multiSelectVariants({ variant })
                         )}
-                        style={{ animationDuration: `${animation}s` }}
+                        style={{
+                          animationDuration: `${animation}s`,
+                          maxWidth: 'calc(100% - 2.5rem)',
+                        }}
                       >
                         {IconComponent && (
                           <IconComponent className="h-4 w-4 mr-2" />
                         )}
-                        <span className="truncate">{label}</span>
+                        {/* <span className="truncate">{label}</span> */}
+                        <span className="truncate" title={option?.label}>
+                          {option?.label}
+                        </span>
                         <XCircle
                           className="ml-2 h-4 w-4 cursor-pointer"
                           onClick={(event) => {
@@ -248,9 +250,9 @@ export const MultiSelect = React.forwardRef<
                     </Badge>
                   )}
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between flex-shrink-0">
                   <XIcon
-                    className="h-4 mx-2 cursor-pointer text-muted-foreground"
+                    className="h-4 mx-2 cursor-pointer text-muted-foreground flex-shrink-0"
                     onClick={(event) => {
                       event.stopPropagation();
                       handleClear();
@@ -258,9 +260,9 @@ export const MultiSelect = React.forwardRef<
                   />
                   <Separator
                     orientation="vertical"
-                    className="flex min-h-6 h-full"
+                    className="flex min-h-6 h-full flex-shrink-0"
                   />
-                  <ChevronDown className="h-4 mx-2 cursor-pointer text-muted-foreground" />
+                  <ChevronDown className="h-4 mx-2 cursor-pointer text-muted-foreground flex-shrink-0" />
                 </div>
               </div>
             ) : (
