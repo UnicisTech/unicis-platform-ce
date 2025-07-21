@@ -19,6 +19,13 @@ module.exports = {
         'risk-medium-dark': 'rgba(251, 146, 60, 1)',
         'risk-high-dark': 'rgba(251, 146, 60, 1)',
         'risk-extreme-dark': 'rgba(239, 68, 68, 1)',
+        task: {
+          todo: 'rgb(232, 232, 232)',
+          inprogress: 'rgb(123, 146, 178)',
+          inreview: 'rgb(77, 110, 255)',
+          feedback: 'rgb(0, 181, 255)',
+          done: 'rgb(0, 169, 110)',
+        },
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -78,5 +85,10 @@ module.exports = {
     'bg-risk-medium-dark',
     'bg-risk-high-dark',
     'bg-risk-extreme-dark',
+    'bg-task-todo',
+    'bg-task-inprogress',
+    'bg-task-inreview',
+    'bg-task-feedback',
+    'bg-task-done',
   ],
 };
