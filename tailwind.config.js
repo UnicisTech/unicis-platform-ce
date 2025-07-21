@@ -14,6 +14,11 @@ module.exports = {
         'risk-medium': 'rgba(255, 255, 0, 0.3)',
         'risk-high': 'rgba(255, 165, 0, 0.3)',
         'risk-extreme': 'rgba(255, 0, 0, 0.3)',
+        'risk-extreme-low-dark': 'rgba(161, 161, 170, 1)',
+        'risk-low-dark': 'rgba(52, 211, 153, 1)',
+        'risk-medium-dark': 'rgba(251, 146, 60, 1)',
+        'risk-high-dark': 'rgba(251, 146, 60, 1)',
+        'risk-extreme-dark': 'rgba(239, 68, 68, 1)',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -68,5 +73,10 @@ module.exports = {
     'bg-risk-medium',
     'bg-risk-high',
     'bg-risk-extreme',
+    'bg-risk-extreme-low-dark',
+    'bg-risk-low-dark',
+    'bg-risk-medium-dark',
+    'bg-risk-high-dark',
+    'bg-risk-extreme-dark',
   ],
 };

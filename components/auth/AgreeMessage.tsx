@@ -4,32 +4,35 @@ import Link from 'next/link';
 const AgreeMessage = ({ text }) => {
   const { t } = useTranslation('common');
 
+  const linkClasses =
+    'text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300';
+
   return (
-    <p className="text-sm text-center">
+    <p className="text-sm text-center text-muted-foreground">
       {t('agree-message-part', { button: t(text) })}{' '}
       <Link
-        rel="noopener noreferrer"
+        href="https://www.unicis.tech/terms"
         target="_blank"
-        href={'https://www.unicis.tech/terms'}
-        className="font-medium text-primary hover:text-primary-focus"
+        rel="noopener noreferrer"
+        className={linkClasses}
       >
         {t('terms')}
       </Link>
-      {','}{' '}
+      {', '}
       <Link
-        rel="noopener noreferrer"
+        href="https://www.unicis.tech/privacy"
         target="_blank"
-        href={'https://www.unicis.tech/privacy'}
-        className="font-medium text-primary hover:text-primary-focus"
+        rel="noopener noreferrer"
+        className={linkClasses}
       >
         {t('privacy')}
       </Link>{' '}
       {t('and')}{' '}
       <Link
-        rel="noopener noreferrer"
+        href="https://www.unicis.tech/security"
         target="_blank"
-        href={'https://www.unicis.tech/security'}
-        className="font-medium text-primary hover:text-primary-focus"
+        rel="noopener noreferrer"
+        className={linkClasses}
       >
         {t('security')}
       </Link>

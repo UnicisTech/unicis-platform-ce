@@ -10,26 +10,11 @@ import {
   Tooltip,
 } from 'chart.js';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  Legend,
-  Title,
-  Tooltip
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, Legend, Title, Tooltip);
 
 const impactLabels = ['Insignificant', 'Minor', 'Moderate', 'Major', 'Extreme'];
-
-const probabilityLabels = [
-  'Rare',
-  'Unlikely',
-  'Possible',
-  'Probable',
-  '(Almost) certain',
-];
-
-const MATRIX_SIZE = 5; // 5x5 matrix
+const probabilityLabels = ['Rare', 'Unlikely', 'Possible', 'Probable', '(Almost) certain'];
+const MATRIX_SIZE = 5;
 
 const riskColors = {
   low: 'rgba(0, 255, 0, 0.3)',
@@ -58,14 +43,9 @@ const RiskMatrixDashboardChart = ({
         max: MATRIX_SIZE,
         ticks: {
           stepSize: 0.5,
-          display: true,
           callback: (value) => {
-            const labelIndex = Math.round(value * 2) - 1; // Adjust for 0.5 step
-            if (labelIndex % 2 === 0) {
-              return impactLabels[Math.floor(labelIndex / 2)];
-            } else {
-              return '';
-            }
+            const labelIndex = Math.round(value * 2) - 1;
+            return labelIndex % 2 === 0 ? impactLabels[Math.floor(labelIndex / 2)] : '';
           },
         },
       },
@@ -77,11 +57,7 @@ const RiskMatrixDashboardChart = ({
           stepSize: 0.5,
           callback: (value) => {
             const labelIndex = Math.round(value * 2) - 1;
-            if (labelIndex % 2 === 0) {
-              return probabilityLabels[Math.floor(labelIndex / 2)];
-            } else {
-              return '';
-            }
+            return labelIndex % 2 === 0 ? probabilityLabels[Math.floor(labelIndex / 2)] : '';
           },
         },
         reverse: false,
@@ -94,33 +70,19 @@ const RiskMatrixDashboardChart = ({
     id: 'backgroundPlugin',
     beforeDraw: (chart) => {
       const { ctx, scales } = chart;
-
-      // Define the colors for each cell in the matrix
       const cellColors = [
-        { x: 0, y: 0, color: riskColors.low },
-        { x: 0, y: 1, color: riskColors.low },
-        { x: 0, y: 2, color: riskColors.low },
-        { x: 0, y: 3, color: riskColors.medium },
-        { x: 0, y: 4, color: riskColors.medium },
-        { x: 1, y: 0, color: riskColors.low },
-        { x: 1, y: 1, color: riskColors.low },
-        { x: 1, y: 2, color: riskColors.medium },
-        { x: 1, y: 3, color: riskColors.medium },
-        { x: 1, y: 4, color: riskColors.high },
-        { x: 2, y: 0, color: riskColors.low },
-        { x: 2, y: 1, color: riskColors.medium },
-        { x: 2, y: 2, color: riskColors.medium },
-        { x: 2, y: 3, color: riskColors.high },
-        { x: 2, y: 4, color: riskColors.high },
-        { x: 3, y: 0, color: riskColors.medium },
-        { x: 3, y: 1, color: riskColors.medium },
-        { x: 3, y: 2, color: riskColors.high },
-        { x: 3, y: 3, color: riskColors.high },
-        { x: 3, y: 4, color: riskColors.extreme },
-        { x: 4, y: 0, color: riskColors.medium },
-        { x: 4, y: 1, color: riskColors.high },
-        { x: 4, y: 2, color: riskColors.high },
-        { x: 4, y: 3, color: riskColors.extreme },
+        { x: 0, y: 0, color: riskColors.low }, { x: 0, y: 1, color: riskColors.low },
+        { x: 0, y: 2, color: riskColors.low }, { x: 0, y: 3, color: riskColors.medium },
+        { x: 0, y: 4, color: riskColors.medium }, { x: 1, y: 0, color: riskColors.low },
+        { x: 1, y: 1, color: riskColors.low }, { x: 1, y: 2, color: riskColors.medium },
+        { x: 1, y: 3, color: riskColors.medium }, { x: 1, y: 4, color: riskColors.high },
+        { x: 2, y: 0, color: riskColors.low }, { x: 2, y: 1, color: riskColors.medium },
+        { x: 2, y: 2, color: riskColors.medium }, { x: 2, y: 3, color: riskColors.high },
+        { x: 2, y: 4, color: riskColors.high }, { x: 3, y: 0, color: riskColors.medium },
+        { x: 3, y: 1, color: riskColors.medium }, { x: 3, y: 2, color: riskColors.high },
+        { x: 3, y: 3, color: riskColors.high }, { x: 3, y: 4, color: riskColors.extreme },
+        { x: 4, y: 0, color: riskColors.medium }, { x: 4, y: 1, color: riskColors.high },
+        { x: 4, y: 2, color: riskColors.high }, { x: 4, y: 3, color: riskColors.extreme },
         { x: 4, y: 4, color: riskColors.extreme },
       ];
 
@@ -162,32 +124,17 @@ const RiskMatrixDashboardChart = ({
         margin: 'auto',
       }}
     >
-      <Bubble
-        ref={chartRef}
-        data={{ datasets }}
-        options={options}
-        plugins={[backgroundPlugin]}
-      />
-
-      {/* Overlayed Components */}
+      <Bubble ref={chartRef} data={{ datasets }} options={options} plugins={[backgroundPlugin]} />
       {points.map((point, index) => (
         <div
           key={index}
+          className="absolute flex items-center justify-center rounded-md text-sm font-semibold text-black dark:text-white bg-white/80 dark:bg-black/70 shadow"
           style={{
-            position: 'absolute',
             left: `${point.x}px`,
             top: `${point.y}px`,
             transform: 'translate(-50%, -50%)',
-            width: `${cellSize * 0.8}px`, // Scale to fit inside cell
+            width: `${cellSize * 0.8}px`,
             height: `${cellSize * 0.6}px`,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: 'rgba(255, 255, 255, 0.7)',
-            borderRadius: '8px',
-            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
-            fontSize: '14px',
-            textAlign: 'center',
           }}
         >
           {point.value}

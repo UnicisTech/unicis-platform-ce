@@ -5,6 +5,7 @@ const moduleOptions = [
   { label: 'TIA', value: 'tia_procedure' },
   { label: 'PIA', value: 'pia_risk' },
   { label: 'RM', value: 'rm_risk' },
+  { label: 'CSC', value: 'csc_controls' },
 ];
 
 const statusOptions = [
@@ -32,7 +33,6 @@ const TaskFilters = ({
   return (
     <div className="flex flex-wrap gap-4 my-2">
       <div>
-        {/* <Label className="mb-1 block">Statuses</Label> */}
         <MultiSelect
           options={statusOptions}
           defaultValue={selectedStatuses}
@@ -43,7 +43,6 @@ const TaskFilters = ({
       </div>
 
       <div>
-        {/* <Label className="mb-1 block">Modules</Label> */}
         <MultiSelect
           options={moduleOptions}
           defaultValue={selectedModules}

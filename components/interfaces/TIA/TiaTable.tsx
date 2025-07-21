@@ -7,6 +7,7 @@ import useCanAccess from 'hooks/useCanAccess';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
+import { Badge } from '@/components/shadcn/ui/badge';
 
 const getEndDate = (dateStr, yearsToAdd) => {
   const d = new Date(dateStr);
@@ -93,17 +94,17 @@ const TiaTable = ({
                   <span>{task.properties.tia_procedure[0].DataImporter}</span>
                 </td>
                 <td className="px-1.5 py-1.5">
-                  <DaisyBadge color="tag">
+                  <Badge variant="outline">
                     {task.properties.tia_procedure[0].StartDateAssessment}
-                  </DaisyBadge>
+                  </Badge>
                 </td>
                 <td className="px-1.5 py-1.5">
-                  <DaisyBadge color="tag">
+                  <Badge variant="outline">
                     {getEndDate(
                       task.properties.tia_procedure[0].StartDateAssessment,
                       task.properties.tia_procedure[0].AssessmentYears
                     )}
-                  </DaisyBadge>
+                  </Badge>
                 </td>
                 <td className="px-1.5 py-1.5">
                   <span>{task.properties.tia_procedure[0].DataExporter}</span>

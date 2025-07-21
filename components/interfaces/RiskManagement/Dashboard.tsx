@@ -85,7 +85,7 @@ const Dashboard = () => {
         <EmptyState title={t('rpa-dashboard')} description="No records" />
       ) : (
         <>
-          <div className="m-2">
+          <div className="mb-2">
             <RmAnalysis slug={slug as string} />
           </div>
           <RisksTable

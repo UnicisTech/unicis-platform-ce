@@ -40,7 +40,7 @@ const TasksAnalysis = ({
 
   return (
     <>
-      <div className="mx-auto mt-4 w-full max-w-7xl rounded-md p-2">
+      <div className="mx-auto mt-4 w-full max-w-7xl rounded-md">
         <div
           style={{
             height: '400px',
