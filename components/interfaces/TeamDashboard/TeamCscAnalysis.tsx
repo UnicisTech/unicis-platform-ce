@@ -57,7 +57,7 @@ const ProcessingActivitiesAnalysis = ({
 
   return (
     <>
-      <div className="mx-auto mt-4 w-full max-w-7xl rounded-md p-2">
+      <div className="mx-auto mt-4 w-full max-w-7xl rounded-md">
         <div className="mb-4 mx-4 flex items-center justify-between">
           <h2 className="text-2xl font-semibold tracking-tight">
             {t(`Cybersecurity Controls Overview`)}

@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeamTasks from 'hooks/useTeamTasks';
-import { EmptyState, Error } from '@/components/shared';
+import { EmptyState, Error, PerPageSelector } from '@/components/shared';
 import { TaskProperties, TaskWithPiaRisk } from 'types';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
@@ -18,7 +18,7 @@ const Dashboard = () => {
   const { slug } = router.query;
   const { tasks, mutateTasks } = useTeamTasks(slug as string);
   //TODO: setPerPage
-  const [perPage] = useState<number>(10);
+  const [perPage, setPerPage] = useState<number>(10);
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
 
@@ -60,7 +60,6 @@ const Dashboard = () => {
 
   return (
     <>
-      <PiaAnalysis tasks={tasks} />
       <div className="flex justify-between items-center">
         <div className="space-y-3">
           <h2 className="text-xl font-medium leading-none tracking-tight">
@@ -68,6 +67,9 @@ const Dashboard = () => {
           </h2>
         </div>
         <div className="flex justify-end items-center my-1">
+          {tasks && tasks.length > 0 && (
+            <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
+          )}
           {canAccess('task', ['update']) && (
             <Button
               color="primary"
@@ -92,6 +94,7 @@ const Dashboard = () => {
         <EmptyState title={t('rpa-dashboard')} description="No records" />
       ) : (
         <>
+        <PiaAnalysis tasks={tasks} />
           <RisksTable
             slug={slug as string}
             tasks={tasksWithRisks}

@@ -317,6 +317,7 @@
   "pia-dashboard": "Privacy Impact Assessment Dashboard",
   "create-pia": "Register Privacy Impact Assessment",
   "pia-overview": "Privacy Impact Assessment Overview",
+  "pia-created": "Privacy Impact Assessment Created",
   "pia-remove-title": "Remove Privacy Impact Assessment Risk",
   "pia-remove-description": "Are you sure you want to remove Privacy Impact Assessment Risk? Your task will not be removed.",
   "change-theme-header": "Change theme",

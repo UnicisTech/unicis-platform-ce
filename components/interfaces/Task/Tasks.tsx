@@ -21,6 +21,7 @@ import TaskFilters from '@/components/interfaces/Task/TaskFilters';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Button } from '@/components/shadcn/ui/button';
 import { TeamTaskAnalysis } from '../TeamDashboard';
+import { Badge } from '@/components/shadcn/ui/badge';
 
 const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
   const router = useRouter();
@@ -76,16 +77,13 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
         <h2 className="text-xl font-medium leading-none tracking-tight">
           {t('all-tasks')}
         </h2>
-        <TeamTaskAnalysis
-          slug={slug}
-          csc_statuses={csc_statuses as { [key: string]: string }}
-        />
         <div className="flex justify-between items-center">
-          <div className="space-y-3">
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              {t('task-listed')}
-            </p>
-          </div>
+          <TaskFilters
+            selectedStatuses={selectedStatuses}
+            setSelectedStatuses={setSelectedStatuses}
+            selectedModules={selectedModules}
+            setSelectedModules={setSelectedModules}
+          />
           <div className="flex justify-end items-center my-1">
             {tasks && tasks.length > 0 && (
               <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
@@ -97,13 +95,10 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
             )}
           </div>
         </div>
-        <TaskFilters
-          selectedStatuses={selectedStatuses}
-          setSelectedStatuses={setSelectedStatuses}
-          selectedModules={selectedModules}
-          setSelectedModules={setSelectedModules}
+        <TeamTaskAnalysis
+          slug={slug}
+          csc_statuses={csc_statuses as { [key: string]: string }}
         />
-
         <table className="w-full min-w-full divide-y divide-border text-sm">
           <thead className="bg-muted">
             <tr>
@@ -134,6 +129,7 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
                       'tia_procedure',
                       'pia_risk',
                       'rm_risk',
+                      'csc_controls'
                     ].map((key) =>
                       typeof task.properties === 'object' &&
                       task.properties &&
@@ -154,14 +150,14 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
                   />
                 </td>
                 <td className="px-4 py-2">
-                  <span className="text-sm">
+                  <Badge variant="outline">
                     {task.duedate
                       ? new Date(task.duedate).toLocaleDateString()
                       : t('no-due-date')}
-                  </span>
+                  </Badge>
                 </td>
-                <td className="px-4 py-2">
-                  <div className="btn-group">
+                <td className="px-4 py-2 text-right">
+                  <div className="inline-flex gap-2 justify-end">
                     {canAccess('task', ['update']) && (
                       <DaisyButton
                         size="sm"
