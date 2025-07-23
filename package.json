@@ -36,7 +36,7 @@
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slider": "^1.3.5",
     "@radix-ui/react-slot": "^1.2.3",
-    "@react-email/components": "0.0.19",
+    "@react-email/components": "0.3.2",
     "@react-pdf/renderer": "^4.0.0",
     "@retracedhq/logs-viewer": "2.7.4",
     "@retracedhq/retraced": "0.7.13",
