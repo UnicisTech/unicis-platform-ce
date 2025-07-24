@@ -140,6 +140,7 @@
   "revoke": "Revoke",
   "cancel": "Cancel",
   "revoke-api-key": "Revoke API Key",
+  "delete-attachment-confirm": "Attachment will be deleted.",
   "active": "Active",
   "no-api-key-title": "You haven't created any API Keys yet",
   "no-api-key-description": "API Keys allow your app to communicate with app",
