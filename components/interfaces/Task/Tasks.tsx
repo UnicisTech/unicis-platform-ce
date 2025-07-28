@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 import {
   Error,
   Loading,
@@ -22,11 +23,14 @@ import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Button } from '@/components/shadcn/ui/button';
 import { TeamTaskAnalysis } from '../TeamDashboard';
 import { Badge } from '@/components/shadcn/ui/badge';
+import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
+import { ApiResponse } from 'types';
+import toast from 'react-hot-toast';
 
 const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
-  const { isLoading, isError, tasks } = useTasks(slug as string);
+  const { isLoading, isError, tasks, mutateTasks } = useTasks(slug as string);
   const [visible, setVisible] = useState(false);
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState<null | number>(null);
@@ -70,6 +74,24 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
     setTaskToDelete(id);
     setDeleteVisible(true);
   };
+
+  const handleDelete = async () => {
+    const response = await axios.delete<ApiResponse<unknown>>(
+      `/api/teams/${slug}/tasks/${taskToDelete}`
+    );
+
+    const { error } = response.data;
+
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+
+    toast.success(t('task-deleted'));
+
+    mutateTasks();
+    setVisible(false);
+  }
 
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
@@ -196,11 +218,19 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
         )}
 
         <CreateTask visible={visible} setVisible={setVisible} team={team} />
-        <DeleteTask
+        {/* <DeleteTask
           visible={deleteVisible}
           setVisible={setDeleteVisible}
           taskNumber={taskToDelete}
-        />
+        /> */}
+        <ConfirmationDialog
+          title="Delete task"
+          visible={deleteVisible}
+          onConfirm={handleDelete}
+          onCancel={() => setDeleteVisible(false)}
+        >
+          {t('delete-task-warning')}
+        </ConfirmationDialog>
       </div>
     </WithLoadingAndError>
   );

@@ -1,9 +1,18 @@
+'use client';
+
 import { defaultHeaders } from '@/lib/common';
 import { availableRoles } from '@/lib/permissions';
 import { Team, TeamMember } from '@prisma/client';
 import { useTranslation } from 'next-i18next';
 import toast from 'react-hot-toast';
-import type { ApiResponse } from 'types';
+import { ApiResponse } from 'types';
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from '@/components/shadcn/ui/select';
 
 interface UpdateMemberRoleProps {
   team: Team;
@@ -13,7 +22,7 @@ interface UpdateMemberRoleProps {
 const UpdateMemberRole = ({ team, member }: UpdateMemberRoleProps) => {
   const { t } = useTranslation('common');
 
-  const updateRole = async (member: TeamMember, role: string) => {
+  const updateRole = async (role: string) => {
     const response = await fetch(`/api/teams/${team.slug}/members`, {
       method: 'PATCH',
       headers: defaultHeaders,
@@ -34,16 +43,21 @@ const UpdateMemberRole = ({ team, member }: UpdateMemberRoleProps) => {
   };
 
   return (
-    <select
-      className="select select-bordered select-sm rounded"
-      onChange={(e) => updateRole(member, e.target.value)}
+    <Select
+      defaultValue={member.role}
+      onValueChange={(value) => updateRole(value)}
     >
-      {availableRoles.map((role) => (
-        <option value={role.id} key={role.id} selected={role.id == member.role}>
-          {role.id}
-        </option>
-      ))}
-    </select>
+      <SelectTrigger className="w-[160px] h-8 text-sm rounded border" aria-label="Role">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        {availableRoles.map((role) => (
+          <SelectItem key={role.id} value={role.id}>
+            {role.id}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 };
 
