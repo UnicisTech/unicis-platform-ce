@@ -23,8 +23,9 @@ const params = {
   },
 };
 
+export const subscriptionParams = params;
+
 const useSubscription = (subscription: Subscription) => {
-  console.log('subsuseSubscription cription', subscription);
 
   const currentPlan =
     subscription?.status === SubscriptionStatus.ACTIVE

@@ -15,8 +15,7 @@ import useCanAccess from 'hooks/useCanAccess';
 import usePagination from 'hooks/usePagination';
 import statuses from '@/components/defaultLanding/data/statuses.json';
 import type { Task, Team } from '@prisma/client';
-import { CreateTask, DeleteTask } from '@/components/interfaces/Task';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import { CreateTask } from '@/components/interfaces/Task';
 import ModuleBadge from '@/components/shared/ModuleBadge';
 import TaskFilters from '@/components/interfaces/Task/TaskFilters';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
@@ -180,33 +179,32 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
                 </td>
                 <td className="px-4 py-2 text-right">
                   <div className="inline-flex gap-2 justify-end">
-                    {canAccess('task', ['update']) && (
-                      <DaisyButton
-                        size="sm"
-                        variant="outline"
-                        onClick={() =>
-                          router.push(`/teams/${slug}/tasks/${task.taskNumber}`)
-                        }
-                      >
-                        {t('edit-task')}
-                      </DaisyButton>
-                    )}
-                    {canAccess('task', ['delete']) && (
-                      <DaisyButton
-                        size="sm"
-                        variant="outline"
-                        onClick={() => openDeleteModal(task.taskNumber)}
-                      >
-                        {t('delete')}
-                      </DaisyButton>
-                    )}
+                  {canAccess('task', ['update']) && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() =>
+                        router.push(`/teams/${slug}/tasks/${task.taskNumber}`)
+                      }
+                    >
+                      {t('edit-task')}
+                    </Button>
+                  )}
+                  {canAccess('task', ['delete']) && (
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => openDeleteModal(task.taskNumber)}
+                    >
+                      {t('delete')}
+                    </Button>
+                  )}
                   </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-
         {pageData.length > 0 && (
           <PaginationControls
             page={currentPage}
@@ -216,13 +214,7 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
             nextButtonDisabled={nextButtonDisabled}
           />
         )}
-
-        <CreateTask visible={visible} setVisible={setVisible} team={team} />
-        {/* <DeleteTask
-          visible={deleteVisible}
-          setVisible={setDeleteVisible}
-          taskNumber={taskToDelete}
-        /> */}
+        <CreateTask visible={visible} setVisible={setVisible} team={team}/>
         <ConfirmationDialog
           title="Delete task"
           visible={deleteVisible}

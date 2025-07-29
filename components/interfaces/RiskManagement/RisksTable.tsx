@@ -13,6 +13,7 @@ import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import type { TaskWithRmRisk } from 'types';
 import useTheme from 'hooks/useTheme';
+import { Button } from '@/components/shadcn/ui/button';
 
 const getRiskColor = (value: number, theme: string | null): string => {
   const suffix = theme === 'dark' ? '-dark' : '';
@@ -145,20 +146,20 @@ const RisksTable = ({
                   {canAccess('task', ['update']) && (
                     <td className="px-2 py-1">
                       <div className="flex gap-1">
-                        <DaisyButton
+                        <Button
                           size="sm"
                           variant="outline"
                           onClick={() => editHandler(task)}
                         >
                           {t('edit-task')}
-                        </DaisyButton>
-                        <DaisyButton
+                        </Button>
+                        <Button
                           size="sm"
-                          variant="outline"
+                          variant="destructive"
                           onClick={() => deleteHandler(task)}
                         >
                           {t('delete')}
-                        </DaisyButton>
+                        </Button>
                       </div>
                     </td>
                   )}

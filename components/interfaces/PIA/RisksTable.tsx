@@ -12,6 +12,7 @@ import {
 } from '@/components/defaultLanding/data/configs/pia';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
+import { Button } from '@/components/shadcn/ui/button';
 
 const calculatePercentage = (input: number): number => {
   return (input / 16) * 100;
@@ -168,7 +169,7 @@ const RisksTable = ({
                   {canAccess('task', ['update']) && (
                     <td className="px-4 py-2 text-right">
                       <div className="inline-flex gap-2 justify-end">
-                        <DaisyButton
+                        <Button
                           size="sm"
                           variant="outline"
                           onClick={() => {
@@ -176,17 +177,16 @@ const RisksTable = ({
                           }}
                         >
                           {t('edit-task')}
-                        </DaisyButton>
-
-                        <DaisyButton
+                        </Button>
+                        <Button
                           size="sm"
-                          variant="outline"
+                          variant="destructive"
                           onClick={() => {
                             deleteHandler(task);
                           }}
                         >
                           {t('delete')}
-                        </DaisyButton>
+                        </Button>
                       </div>
                     </td>
                   )}
