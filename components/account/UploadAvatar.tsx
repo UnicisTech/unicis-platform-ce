@@ -23,8 +23,8 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
   const { t } = useTranslation('common');
   const [dragActive, setDragActive] = useState(false);
   const defaultImage =
-    user.image || `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}`
-  const [image, setImage] = useState<string | null>(defaultImage)
+    user.image || `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}`;
+  const [image, setImage] = useState<string | null>(defaultImage);
   const [loading, setLoading] = useState(false);
 
   const uploadFile = (file: File) => {

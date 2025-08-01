@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import StatusHeader from './StatusHeader';
 import TaskSelector from './TaskSelector';
 import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
@@ -44,7 +44,7 @@ const StatusesTable = ({
 
     // no filters? just return everything
     const noSection = !sectionFilter?.length;
-    const noStatus  = !statusFilter?.length;
+    const noStatus = !statusFilter?.length;
     if (noSection && noStatus) return ctrls;
 
     if (sectionFilter?.length) {
@@ -59,9 +59,7 @@ const StatusesTable = ({
 
     if (statusFilter?.length) {
       const labels = statusFilter.map((o) => o.label);
-      ctrls = ctrls.filter(
-        (c) => labels.includes(statuses[c.value.control])
-      );
+      ctrls = ctrls.filter((c) => labels.includes(statuses[c.value.control]));
     }
 
     return ctrls;

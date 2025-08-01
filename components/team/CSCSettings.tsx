@@ -86,7 +86,7 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
                     return (
                       <SelectItem key={value} value={value} disabled={disabled}>
                         {label}
-                        {disabled && ` - ${t('csc-premium-and-ultimate only')}`}
+                        {disabled && ` - ${t('csc-premium-and-ultimate-only')}`}
                       </SelectItem>
                     );
                   })}

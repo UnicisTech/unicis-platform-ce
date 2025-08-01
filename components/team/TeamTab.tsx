@@ -20,6 +20,7 @@ interface TeamTabProps {
 }
 
 const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
+  console.log('TeamTab', { activeTab, team, heading, teamFeatures });
   const { canAccess } = useCanAccess();
 
   const navigations = [
