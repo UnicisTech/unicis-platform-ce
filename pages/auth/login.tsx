@@ -211,7 +211,7 @@ const Login: NextPageWithLayout<
 };
 
 Login.getLayout = (page: ReactElement) => (
-  <AuthLayout heading="Welcome" description="Log in to your account">
+  <AuthLayout heading="Welcome" description="log-in-to-account">
     {page}
   </AuthLayout>
 );

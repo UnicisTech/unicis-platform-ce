@@ -212,7 +212,8 @@
   "csc": "Cybersecurity Management System",
   "csc-choose-iso": "Framework controls",
   "csc-settings": "Cybersecurity Settings",
-  "csc-premium-and-ultimate only": "avaliable on Premium and Ultimate plans only",
+  "csc-premium-and-ultimate-only": "avaliable on Premium and Ultimate plans only",
+  "csc-ultimate-only": "avaliable on Ultimate plan only",
   "rpa": "Register of Procedures",
   "rpa-dashboard": "Register of Procedures Dashboard",
   "rpa-activities": "Record of Processing Activities",
@@ -338,5 +339,11 @@
   "tia-audit-logs": "Transfer Impact Assessment Audit Logs",
   "csc-audit-logs": "Cybersecurity Controls Audit Logs",
   "pia-audit-logs": "Privacy Impact Assessment Audit Logs",
-  "rm-audit-logs": "Risk Management Audit Logs"
+  "rm-audit-logs": "Risk Management Audit Logs",
+  "welcome-back": "Welcome back",
+  "sso-login": "SSO Login",
+  "signin-with-saml-sso": "Sign in with SAML SSO",
+  "log-in-to-account": "Log in to your account",
+  "desc-sso-login": "Select an Identity Provider to continue with SSO",
+  "desc-signin-with-saml-sso": "Your ID is the slug after the hostname."
 }
