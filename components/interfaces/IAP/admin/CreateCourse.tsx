@@ -615,7 +615,7 @@ export default function CreateCourse2({
               )}
             />
 
-            <Separator/>
+            <Separator />
 
             <div className="w-4/5 mx-auto space-y-4">
               {/* SINGLE_CHOICE or MULTIPLE_CHOICE */}

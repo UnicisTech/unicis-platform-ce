@@ -53,8 +53,8 @@ const useTheme = () => {
       selectedTheme.id === 'light'
         ? 'dark'
         : selectedTheme.id === 'dark'
-        ? 'light'
-        : 'dark';
+          ? 'light'
+          : 'dark';
 
     localStorage.setItem('theme', newTheme);
     applyTheme(newTheme);

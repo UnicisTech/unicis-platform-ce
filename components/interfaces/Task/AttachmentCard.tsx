@@ -1,8 +1,7 @@
-import React, { useCallback, useState, MouseEvent, useEffect } from 'react';
+import React, { useCallback, useState, MouseEvent } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import type { Attachment } from 'types';
-import DeleteAttachment from './DeleteAttachment';
 import useCanAccess from 'hooks/useCanAccess';
 import useTheme from 'hooks/useTheme';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
@@ -66,26 +65,23 @@ const AttachmentsCard = ({
     [attachment.id, taskNumber, teamSlug]
   );
 
-  const deleteHandler = useCallback(
-    async () => {
-      // event.preventDefault();
-      // event.stopPropagation();
+  const deleteHandler = useCallback(async () => {
+    // event.preventDefault();
+    // event.stopPropagation();
 
-      const response = await axios.delete(
-        `/api/teams/${teamSlug}/tasks/${taskNumber}/attachments?id=${attachment.id}`
-      );
-      const { error } = response.data;
+    const response = await axios.delete(
+      `/api/teams/${teamSlug}/tasks/${taskNumber}/attachments?id=${attachment.id}`
+    );
+    const { error } = response.data;
 
-      if (error) {
-        toast.error(error.message);
-        return;
-      }
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
 
-      toast.success('Attachment deleted');
-      mutateTask();
-    },
-    []
-  );
+    toast.success('Attachment deleted');
+    mutateTask();
+  }, []);
 
   const openDeleteModal = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
@@ -106,11 +102,15 @@ const AttachmentsCard = ({
         className={`rounded-md shadow-md w-40 m-1 border ${borderColor} ${cardBg} ${textColor}`}
       >
         <div className="flex justify-between px-1 py-1">
-          <Button size={"sm"} className="mr-1" onClick={downloadHanlder}>
+          <Button size={'sm'} className="mr-1" onClick={downloadHanlder}>
             Download
           </Button>
           {canAccess('task', ['update']) && (
-            <Button variant={"destructive"} size={"sm"} onClick={openDeleteModal}>
+            <Button
+              variant={'destructive'}
+              size={'sm'}
+              onClick={openDeleteModal}
+            >
               Delete
             </Button>
           )}
@@ -120,14 +120,6 @@ const AttachmentsCard = ({
         </div>
       </div>
 
-      {/* <DeleteAttachment
-        visible={isDeleteVisible}
-        setVisible={setIsDeleteVisible}
-        taskNumber={taskNumber}
-        teamSlug={teamSlug}
-        attachment={attachment}
-        mutateTask={mutateTask}
-      /> */}
       <ConfirmationDialog
         title={t('attachment-delete')}
         visible={isDeleteVisible}

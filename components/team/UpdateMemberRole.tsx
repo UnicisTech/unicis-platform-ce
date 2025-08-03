@@ -47,7 +47,10 @@ const UpdateMemberRole = ({ team, member }: UpdateMemberRoleProps) => {
       defaultValue={member.role}
       onValueChange={(value) => updateRole(value)}
     >
-      <SelectTrigger className="w-[160px] h-8 text-sm rounded border" aria-label="Role">
+      <SelectTrigger
+        className="w-[160px] h-8 text-sm rounded border"
+        aria-label="Role"
+      >
         <SelectValue />
       </SelectTrigger>
       <SelectContent>

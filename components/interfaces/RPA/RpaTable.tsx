@@ -5,7 +5,6 @@ import type { TaskWithRpaProcedure } from 'types';
 import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import useCanAccess from 'hooks/useCanAccess';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Badge } from '@/components/shadcn/ui/badge';
 import { StatusBadge } from '@/components/shared';

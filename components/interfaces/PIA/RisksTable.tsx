@@ -10,7 +10,6 @@ import {
   riskProbabilityPoints,
   riskSecurityPoints,
 } from '@/components/defaultLanding/data/configs/pia';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Button } from '@/components/shadcn/ui/button';
 

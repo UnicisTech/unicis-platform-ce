@@ -1,6 +1,12 @@
 import React from 'react';
 import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, ChartOptions } from 'chart.js';
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  ChartOptions,
+} from 'chart.js';
 import useTheme from 'hooks/useTheme';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -10,14 +16,14 @@ const lightColors = [
   'rgba(0, 255, 0, 0.3)',
   'rgba(255, 255, 0, 0.3)',
   'rgba(255, 165, 0, 0.3)',
-  'rgba(255, 0, 0, 0.3)'
+  'rgba(255, 0, 0, 0.3)',
 ];
 const darkColors = [
   'rgba(161, 161, 170, 1)',
   'rgba(52, 211, 153, 1)',
   'rgba(251, 191, 36, 1)',
   'rgba(251, 146, 60, 1)',
-  'rgba(239, 68, 68, 1)', 
+  'rgba(239, 68, 68, 1)',
 ];
 
 const lightText = '#1f2937';
@@ -26,7 +32,7 @@ const darkText = '#f3f4f6';
 const DashboardChart = ({ datasets }: { datasets: number[] }) => {
   const { theme } = useTheme();
 
-  console.log("theme", theme)
+  console.log('theme', theme);
 
   const isDark = theme === 'dark';
   const colors = isDark ? darkColors : lightColors;

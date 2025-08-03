@@ -42,7 +42,7 @@ const RiskMatrixBubbleChart = ({ datasets }: any) => {
     data: dataset.data.map((point: any) => ({
       ...point,
       x: point.x + 0.5,
-      y: point.y + 0.5
+      y: point.y + 0.5,
     })),
   }));
 

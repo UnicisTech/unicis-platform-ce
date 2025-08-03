@@ -9,7 +9,6 @@ import {
   getInitials,
   riskValueToLabel,
 } from '@/lib/rm';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import type { TaskWithRmRisk } from 'types';
 import useTheme from 'hooks/useTheme';

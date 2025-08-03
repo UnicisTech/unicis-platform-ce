@@ -29,7 +29,7 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
   const [hasChanged, setHasChanged] = useState(false);
 
   const uploadFile = (file: File) => {
-    console.log('file.size', file.size)
+    console.log('file.size', file.size);
     if (file.size > MAX) {
       toast.error(t('file-too-big'));
       return;
@@ -46,7 +46,6 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
     };
     reader.readAsDataURL(file);
   };
-  
 
   const onDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -76,7 +75,6 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
       setHasChanged(false); // reset after saving
     }
   };
-  
 
   return (
     <form onSubmit={handleSubmit}>

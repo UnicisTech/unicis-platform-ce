@@ -89,8 +89,12 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
                         {disabled && (
                           <>
                             {' - '}
-                            {subscriptionParams.ULTIMATE.avaliableISO.includes(value) &&
-                            !subscriptionParams.PREMIUM.avaliableISO.includes(value)
+                            {subscriptionParams.ULTIMATE.avaliableISO.includes(
+                              value
+                            ) &&
+                            !subscriptionParams.PREMIUM.avaliableISO.includes(
+                              value
+                            )
                               ? t('csc-ultimate only')
                               : t('csc-premium-and-ultimate only')}
                           </>

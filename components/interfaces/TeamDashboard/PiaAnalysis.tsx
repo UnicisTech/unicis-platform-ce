@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next';
 import RiskMatrixDashboardChart from '../PIA/RiskMatrixDashboardChart';
 import { computeRiskMap } from '@/lib/pia';
 import { piaDashboardConfig } from '@/components/defaultLanding/data/configs/pia';
@@ -10,8 +9,6 @@ interface PiaAnalysisProps {
 }
 
 const PiaAnalysis = ({ tasks }: PiaAnalysisProps) => {
-  const { t } = useTranslation('common');
-
   if (!tasks) {
     return null;
   }

@@ -86,8 +86,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     where: { id: session?.user.id },
     data: toUpdate,
   });
-    console.log('Updating after:');
-
+  console.log('Updating after:');
 
   recordMetric('user.updated');
 

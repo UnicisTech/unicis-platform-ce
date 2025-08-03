@@ -1,5 +1,5 @@
 import type { NextPageWithLayout } from 'types';
-import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -76,7 +76,6 @@ const RpaDashboard: NextPageWithLayout<
     return <Error message={t('forbidden-resource')} />;
   }
 
-
   return (
     <>
       {/* <h3 className="text-2xl font-bold">{"Records of Processing Activities Dashboard"}</h3> */}
@@ -94,7 +93,7 @@ const RpaDashboard: NextPageWithLayout<
             <Button
               color="primary"
               onClick={() => {
-                console.log("clicked")
+                console.log('clicked');
                 setTaskToEdit(null);
                 rpaState.setIsRpaOpen(true);
               }}

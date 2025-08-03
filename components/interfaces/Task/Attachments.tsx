@@ -74,7 +74,7 @@ const Attachments = ({
   };
 
   const handleClick = () => {
-    console.log("handleClick")
+    console.log('handleClick');
     if (inputRef.current) {
       inputRef.current.click();
     }
@@ -118,13 +118,13 @@ const Attachments = ({
   }, [selectedFile]);
 
   const themeClasses =
-  theme === 'dark'
-    ? 'bg-muted text-muted-foreground border-gray-600 hover:border-gray-500'
-    : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400';
+    theme === 'dark'
+      ? 'bg-muted text-muted-foreground border-gray-600 hover:border-gray-500'
+      : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400';
 
-    const wrapperClasses = `flex flex-wrap h-full w-full px-4 py-2 transition border-2 border-dashed rounded-md appearance-none cursor-pointer focus:outline-hidden ${
-      task.attachments.length ? 'justify-start' : 'justify-center'
-    } ${isDragOver ? 'border-blue-400' : themeClasses}`;
+  const wrapperClasses = `flex flex-wrap h-full w-full px-4 py-2 transition border-2 border-dashed rounded-md appearance-none cursor-pointer focus:outline-hidden ${
+    task.attachments.length ? 'justify-start' : 'justify-center'
+  } ${isDragOver ? 'border-blue-400' : themeClasses}`;
 
   const renderDropzoneContent = () => (
     <div className="flex items-center justify-center">
@@ -144,9 +144,7 @@ const Attachments = ({
           />
         </svg>
         <span className="font-medium text-gray-600 dark:text-muted-foreground">
-          {isDragOver
-            ? 'Release to attach files'
-            : 'Drop files to attach, or '}
+          {isDragOver ? 'Release to attach files' : 'Drop files to attach, or '}
           <span className="text-blue-600 dark:text-blue-400 underline">
             browse
           </span>
