@@ -22,6 +22,7 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
   const [dragActive, setDragActive] = useState(false);
   const [image, setImage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [hasChanged, setHasChanged] = useState(false);
 
   useEffect(() => {
     setImage(
@@ -29,6 +30,10 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
         `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}`
     );
   }, [user]);
+
+  useEffect(() => {
+    console.log("image, user.image", image, user.image)
+  }, [image, user.image])
 
   const uploadFile = (file: File) => {
     if (file.size / 1024 / 1024 > 2) {
@@ -40,9 +45,14 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
       return;
     }
     const reader = new FileReader();
-    reader.onload = (e) => setImage(e.target?.result as string);
+    reader.onload = (e) => {
+      const newImage = e.target?.result as string;
+      setImage(newImage);
+      setHasChanged(true);
+    };
     reader.readAsDataURL(file);
   };
+  
 
   const onDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -67,8 +77,12 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
     const json = (await res.json()) as ApiResponse<UserReturned>;
     setLoading(false);
     if (!res.ok) toast.error(json.error.message);
-    else toast.success(t('successfully-updated'));
+    else {
+      toast.success(t('successfully-updated'));
+      setHasChanged(false); // reset after saving
+    }
   };
+  
 
   return (
     <form onSubmit={handleSubmit}>
@@ -123,7 +137,7 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
           </div>
         </CardContent>
         <CardFooter className="flex justify-end">
-          <Button type="submit" disabled={!image || image === user.image}>
+          <Button type="submit" disabled={!hasChanged}>
             {loading && <Loader2 className="animate-spin" />}
             {t('save-changes')}
           </Button>

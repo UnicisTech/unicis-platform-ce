@@ -112,7 +112,7 @@ const TiaTable = ({
                 </td>
                 <td className="px-1.5 py-1.5">
                   <span>
-                    {task.properties.tia_procedure[0].LawImporterCountry.label}
+                    {task.properties.tia_procedure[0].TransferScenario}
                   </span>
                 </td>
                 {canAccess('task', ['update']) && (

@@ -316,6 +316,7 @@
   "remove-answer": "Remove answer",
   "correct-answer": "Correct answer",
   "forbidden-resource": "This resource is forbidden",
+  "file-too-big": "File too large. Maximum allowed size is 2MB",
   "pia": "Privacy Impact Assessment",
   "pia-dashboard": "Privacy Impact Assessment Dashboard",
   "create-pia": "Register Privacy Impact Assessment",

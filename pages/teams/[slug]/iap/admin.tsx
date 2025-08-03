@@ -65,7 +65,7 @@ const IAP = ({ teamFeatures }) => {
     return <Error message={t('team-not-found')} />;
   }
 
-  if (!canAccess('iap_reports', ['read'])) {
+  if (!isLoading && !canAccess('iap_reports', ['read'])) {
     return <Error message={t('forbidden-resource')} />;
   }
 

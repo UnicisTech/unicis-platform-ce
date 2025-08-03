@@ -1,5 +1,5 @@
 import type { NextPageWithLayout } from 'types';
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -72,9 +72,10 @@ const RpaDashboard: NextPageWithLayout<
     return <Error />;
   }
 
-  if (!canAccess('rpa', ['read'])) {
+  if (!isLoading && !canAccess('rpa', ['read'])) {
     return <Error message={t('forbidden-resource')} />;
   }
+
 
   return (
     <>
@@ -93,6 +94,7 @@ const RpaDashboard: NextPageWithLayout<
             <Button
               color="primary"
               onClick={() => {
+                console.log("clicked")
                 setTaskToEdit(null);
                 rpaState.setIsRpaOpen(true);
               }}

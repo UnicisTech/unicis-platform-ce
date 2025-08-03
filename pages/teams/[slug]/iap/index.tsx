@@ -29,7 +29,7 @@ const IAP = () => {
     return <Loading />;
   }
 
-  if (!canAccess('iap_course', ['update'])) {
+  if (!isLoading && !canAccess('iap_course', ['update'])) {
     return <Error message={t('forbidden-resource')} />;
   }
 

@@ -54,7 +54,7 @@ const Dashboard = () => {
     return null;
   }
 
-  if (!canAccess('pia', ['read'])) {
+  if (!isLoading && !canAccess('pia', ['read'])) {
     return <Error message={t('forbidden-resource')} />;
   }
 
