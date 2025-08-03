@@ -7,7 +7,7 @@ import { useTranslation } from 'next-i18next';
 import { getAxiosError } from '@/lib/common';
 import type { ApiResponse, TeamProperties, TeamWithSubscription } from 'types';
 import { Subscription } from '@prisma/client';
-import useSubscription from 'hooks/useSubscription';
+import useSubscription, { subscriptionParams } from 'hooks/useSubscription';
 import { isoOptions } from '../defaultLanding/data/configs/csc';
 
 import {
@@ -86,7 +86,15 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
                     return (
                       <SelectItem key={value} value={value} disabled={disabled}>
                         {label}
-                        {disabled && ` - ${t('csc-premium-and-ultimate-only')}`}
+                        {disabled && (
+                          <>
+                            {' - '}
+                            {subscriptionParams.ULTIMATE.avaliableISO.includes(value) &&
+                            !subscriptionParams.PREMIUM.avaliableISO.includes(value)
+                              ? t('csc-ultimate only')
+                              : t('csc-premium-and-ultimate only')}
+                          </>
+                        )}
                       </SelectItem>
                     );
                   })}

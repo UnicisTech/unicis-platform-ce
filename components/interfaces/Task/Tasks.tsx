@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 import {
   Error,
   Loading,
@@ -14,18 +15,21 @@ import useCanAccess from 'hooks/useCanAccess';
 import usePagination from 'hooks/usePagination';
 import statuses from '@/components/defaultLanding/data/statuses.json';
 import type { Task, Team } from '@prisma/client';
-import { CreateTask, DeleteTask } from '@/components/interfaces/Task';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import { CreateTask } from '@/components/interfaces/Task';
 import ModuleBadge from '@/components/shared/ModuleBadge';
 import TaskFilters from '@/components/interfaces/Task/TaskFilters';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Button } from '@/components/shadcn/ui/button';
 import { TeamTaskAnalysis } from '../TeamDashboard';
+import { Badge } from '@/components/shadcn/ui/badge';
+import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
+import { ApiResponse } from 'types';
+import toast from 'react-hot-toast';
 
 const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
-  const { isLoading, isError, tasks } = useTasks(slug as string);
+  const { isLoading, isError, tasks, mutateTasks } = useTasks(slug as string);
   const [visible, setVisible] = useState(false);
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState<null | number>(null);
@@ -70,22 +74,37 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
     setDeleteVisible(true);
   };
 
+  const handleDelete = async () => {
+    const response = await axios.delete<ApiResponse<unknown>>(
+      `/api/teams/${slug}/tasks/${taskToDelete}`
+    );
+
+    const { error } = response.data;
+
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+
+    toast.success(t('task-deleted'));
+
+    mutateTasks();
+    setVisible(false);
+  }
+
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
       <div className="space-y-3">
         <h2 className="text-xl font-medium leading-none tracking-tight">
           {t('all-tasks')}
         </h2>
-        <TeamTaskAnalysis
-          slug={slug}
-          csc_statuses={csc_statuses as { [key: string]: string }}
-        />
         <div className="flex justify-between items-center">
-          <div className="space-y-3">
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              {t('task-listed')}
-            </p>
-          </div>
+          <TaskFilters
+            selectedStatuses={selectedStatuses}
+            setSelectedStatuses={setSelectedStatuses}
+            selectedModules={selectedModules}
+            setSelectedModules={setSelectedModules}
+          />
           <div className="flex justify-end items-center my-1">
             {tasks && tasks.length > 0 && (
               <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
@@ -97,13 +116,10 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
             )}
           </div>
         </div>
-        <TaskFilters
-          selectedStatuses={selectedStatuses}
-          setSelectedStatuses={setSelectedStatuses}
-          selectedModules={selectedModules}
-          setSelectedModules={setSelectedModules}
+        <TeamTaskAnalysis
+          slug={slug}
+          csc_statuses={csc_statuses as { [key: string]: string }}
         />
-
         <table className="w-full min-w-full divide-y divide-border text-sm">
           <thead className="bg-muted">
             <tr>
@@ -134,6 +150,7 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
                       'tia_procedure',
                       'pia_risk',
                       'rm_risk',
+                      'csc_controls'
                     ].map((key) =>
                       typeof task.properties === 'object' &&
                       task.properties &&
@@ -154,41 +171,40 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
                   />
                 </td>
                 <td className="px-4 py-2">
-                  <span className="text-sm">
+                  <Badge variant="outline">
                     {task.duedate
                       ? new Date(task.duedate).toLocaleDateString()
                       : t('no-due-date')}
-                  </span>
+                  </Badge>
                 </td>
-                <td className="px-4 py-2">
-                  <div className="btn-group">
-                    {canAccess('task', ['update']) && (
-                      <DaisyButton
-                        size="sm"
-                        variant="outline"
-                        onClick={() =>
-                          router.push(`/teams/${slug}/tasks/${task.taskNumber}`)
-                        }
-                      >
-                        {t('edit-task')}
-                      </DaisyButton>
-                    )}
-                    {canAccess('task', ['delete']) && (
-                      <DaisyButton
-                        size="sm"
-                        variant="outline"
-                        onClick={() => openDeleteModal(task.taskNumber)}
-                      >
-                        {t('delete')}
-                      </DaisyButton>
-                    )}
+                <td className="px-4 py-2 text-right">
+                  <div className="inline-flex gap-2 justify-end">
+                  {canAccess('task', ['update']) && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() =>
+                        router.push(`/teams/${slug}/tasks/${task.taskNumber}`)
+                      }
+                    >
+                      {t('edit-task')}
+                    </Button>
+                  )}
+                  {canAccess('task', ['delete']) && (
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => openDeleteModal(task.taskNumber)}
+                    >
+                      {t('delete')}
+                    </Button>
+                  )}
                   </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-
         {pageData.length > 0 && (
           <PaginationControls
             page={currentPage}
@@ -198,13 +214,15 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
             nextButtonDisabled={nextButtonDisabled}
           />
         )}
-
-        <CreateTask visible={visible} setVisible={setVisible} team={team} />
-        <DeleteTask
+        <CreateTask visible={visible} setVisible={setVisible} team={team}/>
+        <ConfirmationDialog
+          title="Delete task"
           visible={deleteVisible}
-          setVisible={setDeleteVisible}
-          taskNumber={taskToDelete}
-        />
+          onConfirm={handleDelete}
+          onCancel={() => setDeleteVisible(false)}
+        >
+          {t('delete-task-warning')}
+        </ConfirmationDialog>
       </div>
     </WithLoadingAndError>
   );

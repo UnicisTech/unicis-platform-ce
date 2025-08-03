@@ -109,9 +109,9 @@ const Members = ({ team }: { team: Team }) => {
                 )}
               </TableCell>
               {canRemoveMember(member) && (
-                <TableCell>
+                <TableCell className="text-right">
                   <Button
-                    variant="outline"
+                    variant="destructive"
                     onClick={() => {
                       setSelectedMember(member);
                       setConfirmationDialogVisible(true);

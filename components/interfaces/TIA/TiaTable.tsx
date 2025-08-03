@@ -4,10 +4,11 @@ import type { TaskWithTiaProcedure } from 'types';
 import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import useCanAccess from 'hooks/useCanAccess';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { isTranferPermitted } from '@/lib/tia';
+import { Badge } from '@/components/shadcn/ui/badge';
+import { Button } from '@/components/shadcn/ui/button';
 
 const getEndDate = (dateStr, yearsToAdd) => {
   const d = new Date(dateStr);
@@ -94,17 +95,17 @@ const TiaTable = ({
                   <span>{task.properties.tia_procedure[0].DataImporter}</span>
                 </td>
                 <td className="px-1.5 py-1.5">
-                  <DaisyBadge color="tag">
+                  <Badge variant="outline">
                     {task.properties.tia_procedure[0].StartDateAssessment}
-                  </DaisyBadge>
+                  </Badge>
                 </td>
                 <td className="px-1.5 py-1.5">
-                  <DaisyBadge color="tag">
+                  <Badge variant="outline">
                     {getEndDate(
                       task.properties.tia_procedure[0].StartDateAssessment,
                       task.properties.tia_procedure[0].AssessmentYears
                     )}
-                  </DaisyBadge>
+                  </Badge>
                 </td>
                 <td className="px-1.5 py-1.5">
                   <span>{task.properties.tia_procedure[0].DataExporter}</span>
@@ -113,9 +114,9 @@ const TiaTable = ({
                   <span>
                     {/* TODO: reuse the component from Conclusion step*/}
                     {isTranferPermitted(task.properties.tia_procedure) ? (
-                      <DaisyBadge appearance="added">PERMITTED</DaisyBadge>
+                      <DaisyBadge color="success">PERMITTED</DaisyBadge>
                     ) : (
-                      <DaisyBadge appearance="removed">
+                      <DaisyBadge color="error">
                         NOT PERMITTED
                       </DaisyBadge>
                     )}
@@ -123,8 +124,8 @@ const TiaTable = ({
                 </td>
                 {canAccess('task', ['update']) && (
                   <td className="px-1.5 py-1.5">
-                    <div className="btn-group">
-                      <DaisyButton
+                    <div className="flex gap-2">
+                      <Button
                         size="sm"
                         variant="outline"
                         onClick={() => {
@@ -132,17 +133,17 @@ const TiaTable = ({
                         }}
                       >
                         {t('edit-task')}
-                      </DaisyButton>
+                      </Button>
 
-                      <DaisyButton
+                      <Button
                         size="sm"
-                        variant="outline"
+                        variant="destructive"
                         onClick={() => {
                           deleteHandler(task);
                         }}
                       >
                         {t('delete')}
-                      </DaisyButton>
+                      </Button>
                     </div>
                   </td>
                 )}

@@ -26,11 +26,6 @@ const PiaAnalysis = ({ tasks }: PiaAnalysisProps) => {
 
   return (
     <>
-      <div className="mb-4 mx-4 flex items-center justify-between">
-        <h2 className="text-2xl font-semibold tracking-tight">
-          {t(`pia-overview`)}
-        </h2>
-      </div>
       <Card>
         <div className="w-full p-4 mx-3">
           <div className="flex flex-col md:flex-row justify-center gap-6 overflow-x-scroll">

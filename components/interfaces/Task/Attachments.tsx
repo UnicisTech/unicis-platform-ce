@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect, useRef } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
@@ -8,6 +10,7 @@ import { checkExtensionAndMIMEType } from '@/components/services/taskService';
 import useCanAccess from 'hooks/useCanAccess';
 import { useTranslation } from 'next-i18next';
 import { EmptyState } from '@/components/shared';
+import useTheme from 'hooks/useTheme';
 
 const Attachments = ({
   task,
@@ -23,6 +26,8 @@ const Attachments = ({
   const { slug, taskNumber } = router.query;
   const [isDragOver, setIsDragOver] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const { theme } = useTheme();
 
   const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -69,6 +74,7 @@ const Attachments = ({
   };
 
   const handleClick = () => {
+    console.log("handleClick")
     if (inputRef.current) {
       inputRef.current.click();
     }
@@ -111,29 +117,61 @@ const Attachments = ({
     uploadFile();
   }, [selectedFile]);
 
-  //TODO: refactoring
+  const themeClasses =
+  theme === 'dark'
+    ? 'bg-muted text-muted-foreground border-gray-600 hover:border-gray-500'
+    : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400';
+
+    const wrapperClasses = `flex flex-wrap h-full w-full px-4 py-2 transition border-2 border-dashed rounded-md appearance-none cursor-pointer focus:outline-hidden ${
+      task.attachments.length ? 'justify-start' : 'justify-center'
+    } ${isDragOver ? 'border-blue-400' : themeClasses}`;
+
+  const renderDropzoneContent = () => (
+    <div className="flex items-center justify-center">
+      <span className="flex items-center space-x-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-6 h-6 text-gray-600 dark:text-muted-foreground"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+          />
+        </svg>
+        <span className="font-medium text-gray-600 dark:text-muted-foreground">
+          {isDragOver
+            ? 'Release to attach files'
+            : 'Drop files to attach, or '}
+          <span className="text-blue-600 dark:text-blue-400 underline">
+            browse
+          </span>
+        </span>
+      </span>
+    </div>
+  );
+
+  const renderCards = () =>
+    task.attachments.map((attachment, index) => (
+      <AttachmentsCard
+        key={index}
+        attachment={attachment}
+        taskNumber={taskNumber as string}
+        teamSlug={slug as string}
+        mutateTask={mutateTask}
+      />
+    ));
+
   if (!canAccess('task', ['update'])) {
     return (
       <>
         {task.attachments.length ? (
           <div className="flex items-center justify-center w-full">
-            <div
-              className={`flex flex-wrap ${
-                task.attachments.length ? 'justify-start' : 'justify-center'
-              } h-full w-full px-4 py-2 transition bg-white dark:bg-[hsla(var(--b1))] border-2 ${
-                isDragOver ? 'border-blue-400' : 'border-gray-300'
-              } border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-hidden`}
-            >
-              {task.attachments.map((attachment, index) => (
-                <AttachmentsCard
-                  key={index}
-                  attachment={attachment}
-                  taskNumber={taskNumber as string}
-                  teamSlug={slug as string}
-                  mutateTask={mutateTask}
-                />
-              ))}
-            </div>
+            <div className={wrapperClasses}>{renderCards()}</div>
           </div>
         ) : (
           <EmptyState title={t('no-attachments')} />
@@ -145,53 +183,14 @@ const Attachments = ({
   return (
     <div className="flex items-center justify-center w-full">
       <div
-        className={`flex flex-wrap ${
-          task.attachments.length ? 'justify-start' : 'justify-center'
-        } h-full w-full px-4 py-2 transition bg-white dark:bg-[hsla(var(--b1))] border-2 ${
-          isDragOver ? 'border-blue-400' : 'border-gray-300'
-        } border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-hidden`}
+        className={wrapperClasses}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         onClick={handleClick}
       >
-        {task.attachments.length ? (
-          task.attachments.map((attachment, index) => (
-            <AttachmentsCard
-              key={index}
-              attachment={attachment}
-              taskNumber={taskNumber as string}
-              teamSlug={slug as string}
-              mutateTask={mutateTask}
-            />
-          ))
-        ) : (
-          <div className="flex items-center justify-center">
-            <span className="flex items-center space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 text-gray-600 dark:text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                />
-              </svg>
-              <span className="font-medium text-gray-600 dark:text-gray-400">
-                {isDragOver
-                  ? 'Release to attach files'
-                  : 'Drop files to attach, or '}
-                <span className="text-blue-600 underline">browse</span>
-              </span>
-            </span>
-          </div>
-        )}
+        {task.attachments.length ? renderCards() : renderDropzoneContent()}
         <input
           ref={inputRef}
           type="file"

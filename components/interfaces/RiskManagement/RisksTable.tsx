@@ -12,13 +12,16 @@ import {
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import type { TaskWithRmRisk } from 'types';
+import useTheme from 'hooks/useTheme';
+import { Button } from '@/components/shadcn/ui/button';
 
-const getRiskColor = (value: number): string => {
-  if (value <= 1) return 'bg-risk-extreme-low';
-  if (value <= 40) return 'bg-risk-low';
-  if (value <= 60) return 'bg-risk-medium';
-  if (value <= 80) return 'bg-risk-high';
-  return 'bg-risk-extreme';
+const getRiskColor = (value: number, theme: string | null): string => {
+  const suffix = theme === 'dark' ? '-dark' : '';
+  if (value <= 1) return `bg-risk-extreme-low${suffix}`;
+  if (value <= 40) return `bg-risk-low${suffix}`;
+  if (value <= 60) return `bg-risk-medium${suffix}`;
+  if (value <= 80) return `bg-risk-high${suffix}`;
+  return `bg-risk-extreme${suffix}`;
 };
 
 const RisksTable = ({
@@ -36,6 +39,7 @@ const RisksTable = ({
 }) => {
   const { canAccess } = useCanAccess();
   const { t } = useTranslation('common');
+  const { theme } = useTheme();
 
   const {
     currentPage,
@@ -119,7 +123,7 @@ const RisksTable = ({
                   <td className="px-2 py-1">
                     {riskValueToLabel(risk[0].RawImpact)}
                   </td>
-                  <td className={`px-2 py-1 ${getRiskColor(raw)}`}>
+                  <td className={`px-2 py-1 ${getRiskColor(raw, theme)}`}>
                     {riskValueToLabel(raw)}
                   </td>
                   <td className="px-2 py-1">{risk[1].RiskTreatment}</td>
@@ -133,29 +137,29 @@ const RisksTable = ({
                   <td className="px-2 py-1">
                     {riskValueToLabel(risk[1].TreatedImpact)}
                   </td>
-                  <td className={`px-2 py-1 ${getRiskColor(target)}`}>
+                  <td className={`px-2 py-1 ${getRiskColor(target, theme)}`}>
                     {riskValueToLabel(target)}
                   </td>
-                  <td className={`px-2 py-1 ${getRiskColor(current)}`}>
+                  <td className={`px-2 py-1 ${getRiskColor(current, theme)}`}>
                     {riskValueToLabel(current)}
                   </td>
                   {canAccess('task', ['update']) && (
                     <td className="px-2 py-1">
                       <div className="flex gap-1">
-                        <DaisyButton
+                        <Button
                           size="sm"
                           variant="outline"
                           onClick={() => editHandler(task)}
                         >
                           {t('edit-task')}
-                        </DaisyButton>
-                        <DaisyButton
+                        </Button>
+                        <Button
                           size="sm"
-                          variant="outline"
+                          variant="destructive"
                           onClick={() => deleteHandler(task)}
                         >
                           {t('delete')}
-                        </DaisyButton>
+                        </Button>
                       </div>
                     </td>
                   )}

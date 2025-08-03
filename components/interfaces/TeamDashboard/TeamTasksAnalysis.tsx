@@ -9,8 +9,8 @@ const barColors = [
   'rgb(232, 232, 232)', // todo
   'rgb(123, 146, 178)', // in progress
   'rgb(77, 110, 255)', // in review
-  'rgb(0, 181, 255)', // feedback
-  'rgb(0, 169, 110)', // done
+  'rgb(0, 181, 255)',  // feedback
+  'rgb(0, 169, 110)',  // done
 ];
 
 const TasksAnalysis = ({
@@ -21,47 +21,51 @@ const TasksAnalysis = ({
 }) => {
   const { tasks } = useTeamTasks(slug as string);
 
-  const statuses: { [key: string]: string } =
-    tasks?.reduce((acc: { [key: string]: string }, task) => {
+  if (!tasks || tasks.length === 0) {
+    return (
+      <div className="mx-auto mt-4 w-full max-w-7xl rounded-md">
+        <Card className="p-6 text-center text-muted-foreground">
+          No tasks available.
+        </Card>
+      </div>
+    );
+  }
+
+  const statuses: { [key: string]: string } = tasks.reduce(
+    (acc: { [key: string]: string }, task) => {
       if (task.status && !acc[task.status.toLowerCase()]) {
         acc[task.id] = getStatusName(task.status);
       }
       return acc;
-    }, {}) || {};
+    },
+    {}
+  );
 
-  const statusCounts: { [key: string]: number } =
-    tasks?.reduce((acc: { [key: string]: number }, task) => {
+  const statusCounts: { [key: string]: number } = tasks.reduce(
+    (acc: { [key: string]: number }, task) => {
       if (task.status) {
         const statusKey = task.status.toLowerCase();
         acc[statusKey] = (acc[statusKey] || 0) + 1;
       }
       return acc;
-    }, {}) || {};
+    },
+    {}
+  );
 
   return (
-    <>
-      <div className="mx-auto mt-4 w-full max-w-7xl rounded-md p-2">
-        <div
-          style={{
-            height: '400px',
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'space-around',
-            marginBottom: '10px',
-          }}
-        >
-          <Card className="flex-1 h-full flex flex-col p-2 mr-4 justify-between">
-            <PieChart
-              page_name={`task`}
-              statuses={statuses}
-              barColor={barColors}
-              labels={labels}
-            />
-          </Card>
-          <TaskStatusesDetail tasks={tasks} statusCounts={statusCounts} />
-        </div>
+    <div className="mx-auto mt-4 w-full max-w-7xl rounded-md">
+      <div className="flex justify-around mb-2" style={{ height: '400px' }}>
+        <Card className="flex-1 h-full flex flex-col p-2 mr-4 justify-between">
+          <PieChart
+            page_name="task"
+            statuses={statuses}
+            barColor={barColors}
+            labels={labels}
+          />
+        </Card>
+        <TaskStatusesDetail tasks={tasks} statusCounts={statusCounts} />
       </div>
-    </>
+    </div>
   );
 };
 
