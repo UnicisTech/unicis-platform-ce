@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { ArrowUpCircleIcon } from '@heroicons/react/24/outline';
@@ -17,26 +17,19 @@ import {
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 
+const MAX = 1_000_000; // 1 MB
+
 const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
   const { t } = useTranslation('common');
   const [dragActive, setDragActive] = useState(false);
-  const [image, setImage] = useState<string | null>(null);
+  const defaultImage =
+    user.image || `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}`
+  const [image, setImage] = useState<string | null>(defaultImage)
   const [loading, setLoading] = useState(false);
   const [hasChanged, setHasChanged] = useState(false);
 
-  useEffect(() => {
-    setImage(
-      user.image ||
-        `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}`
-    );
-  }, [user]);
-
-  useEffect(() => {
-    console.log("image, user.image", image, user.image)
-  }, [image, user.image])
-
   const uploadFile = (file: File) => {
-    if (file.size / 1024 / 1024 > 2) {
+    if (file.size > MAX) {
       toast.error(t('file-too-big'));
       return;
     }

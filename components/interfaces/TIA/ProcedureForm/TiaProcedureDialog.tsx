@@ -162,61 +162,63 @@ export default function TiaProcedureDialog({
           )}
         </DialogHeader>
 
-        {currentStep === 0 && tasks && (
-          <Form {...taskForm}>
-            <form className="space-y-4">
-              <TaskPicker
-                control={taskForm.control}
-                name="task"
-                tasks={tasks.filter(
-                  (task) => !(task.properties as any)?.tia_procedure
-                )}
-              />
-            </form>
-          </Form>
-        )}
+        <div className="max-w-md">
+          {currentStep === 0 && tasks && (
+            <Form {...taskForm}>
+              <form className="space-y-4">
+                <TaskPicker
+                  control={taskForm.control}
+                  name="task"
+                  tasks={tasks.filter(
+                    (task) => !(task.properties as any)?.tia_procedure
+                  )}
+                />
+              </form>
+            </Form>
+          )}
 
-        {currentStep !== 0 && (
-          <Message
-            text={`Add a Transfer Impact Assessment if you are using the EU Standard Contractual Clauses (EU SCC) or under the other GDPR (or CH DPA) legal situations.
+          {currentStep !== 0 && (
+            <Message
+              text={`Add a Transfer Impact Assessment if you are using the EU Standard Contractual Clauses (EU SCC) or under the other GDPR (or CH DPA) legal situations.
 											Transfer Impact Assessment (TIA) for use under the EU General Data Protection Regulation (GDPR) and Swiss Data Protection Act (CH DPA), including for complying with the EU Standard Contractual Clauses (EU SCC).`}
-          />
-        )}
-
-        {currentStep === 1 && (
-          <Form {...transferScenarioForm}>
-            <TransferScenarioStep control={transferScenarioForm.control} />
-          </Form>
-        )}
-
-        {currentStep === 2 && (
-          <Form {...problematicLawfulAccessForm}>
-            <ProblematicLawfulAccessStep
-              control={problematicLawfulAccessForm.control}
             />
-          </Form>
-        )}
+          )}
 
-        {currentStep === 3 && (
-          <Form {...riskForm}>
-            <RiskStep
-              control={riskForm.control}
-              problematicLawfulAccessValues={procedureData[1]}
-            />
-          </Form>
-        )}
+          {currentStep === 1 && (
+            <Form {...transferScenarioForm}>
+              <TransferScenarioStep control={transferScenarioForm.control} />
+            </Form>
+          )}
 
-        {currentStep === 4 && (
-          <Form {...probabilityForm}>
-            <ProbabilityStep
-              control={probabilityForm.control}
-              problematicLawfulAccessValues={procedureData[1]}
-              riskValues={procedureData[2]}
-            />
-          </Form>
-        )}
+          {currentStep === 2 && (
+            <Form {...problematicLawfulAccessForm}>
+              <ProblematicLawfulAccessStep
+                control={problematicLawfulAccessForm.control}
+              />
+            </Form>
+          )}
 
-        {currentStep === 5 && <ConclusionStep procedure={procedureData} />}
+          {currentStep === 3 && (
+            <Form {...riskForm}>
+              <RiskStep
+                control={riskForm.control}
+                problematicLawfulAccessValues={procedureData[1]}
+              />
+            </Form>
+          )}
+
+          {currentStep === 4 && (
+            <Form {...probabilityForm}>
+              <ProbabilityStep
+                control={probabilityForm.control}
+                problematicLawfulAccessValues={procedureData[1]}
+                riskValues={procedureData[2]}
+              />
+            </Form>
+          )}
+
+          {currentStep === 5 && <ConclusionStep procedure={procedureData} />}
+        </div>
 
         <DialogFooter className="flex justify-end space-x-2">
           <DialogClose asChild>

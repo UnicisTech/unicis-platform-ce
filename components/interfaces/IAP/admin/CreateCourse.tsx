@@ -289,6 +289,18 @@ export default function CreateCourse2({
     }
   };
 
+  useEffect(() => {
+    if (questionType === QuestionType.SINGLE_CHOICE) {
+      // find & reset all the “isCorrect” flags
+      const values = questionForm.getValues();
+      Object.keys(values)
+        .filter((k) => k.startsWith('isCorrect'))
+        .forEach((checkbox) => {
+          questionForm.resetField(checkbox, { defaultValue: false });
+        });
+    }
+  }, [questionType, questionForm]);
+
   return (
     <Dialog open={visible} onOpenChange={closeHandler}>
       <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto p-6">
@@ -560,12 +572,7 @@ export default function CreateCourse2({
                 <FormItem>
                   <FormLabel>{t('question-type')}</FormLabel>
                   <FormControl>
-                    <Select
-                      onValueChange={(val: any) => {
-                        field.onChange(val);
-                      }}
-                      value={field.value}
-                    >
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder={t('question-type')} />
                       </SelectTrigger>

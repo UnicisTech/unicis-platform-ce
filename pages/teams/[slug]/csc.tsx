@@ -136,7 +136,6 @@ const CscDashboard = ({
         {'Cybersecurity Controls Dashboard: '}
         {team.name}
       </h2>
-      {/* <h2 className="text-2xl font-bold">{"Cybersecurity Controls Dashboard: "}{team.name}</h2> */}
       <div
         style={{
           height: '400px',
