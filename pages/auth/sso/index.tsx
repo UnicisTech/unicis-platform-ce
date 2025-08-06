@@ -19,7 +19,7 @@ import { Loader2 } from 'lucide-react';
 
 const SSO: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ jacksonProductId }) => {
+> = ({ jacksonProductId }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { t } = useTranslation('common');
   const { status } = useSession();
   const router = useRouter();
@@ -90,7 +90,7 @@ const SSO: NextPageWithLayout<
                 type="email"
                 label="Email"
                 name="email"
-                placeholder="user@boxyhq.com"
+                placeholder="user@companyname.com"
                 value={formik.values.email}
                 error={formik.touched.email ? formik.errors.email : undefined}
                 onChange={formik.handleChange}
