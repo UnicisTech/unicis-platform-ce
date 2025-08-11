@@ -171,6 +171,13 @@ const Login: NextPageWithLayout<
                   {formik.isSubmitting && <Loader2 className="animate-spin" />}
                   {t('sign-in')}
                 </Button>
+
+                <Button asChild variant="link" className="w-full p-0 h-auto">
+                  <Link href={`/auth/forgot-password${params}`}>
+                    {t('forgot-password')}
+                  </Link>
+                </Button>
+
                 <AgreeMessage text="sign-in" />
               </div>
             </form>
