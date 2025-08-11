@@ -36,7 +36,6 @@ const VerificationEmail = ({
           <Button
             href={verificationLink}
             style={{ padding: '16px 20px' }}
-            className="bg-[#0052cc] rounded text-white text-[12px] font-semibold no-underline text-center"
           >
             Confirm account
           </Button>

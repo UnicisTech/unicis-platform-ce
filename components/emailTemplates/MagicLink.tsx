@@ -29,7 +29,6 @@ const MagicLink = ({ subject, url }: MagicLinkProps) => {
         <Container className="text-center">
           <Button
             href={url}
-            className="bg-brand text-white font-medium py-2 px-4 rounded"
           >
             Log in to {app.name}
           </Button>
