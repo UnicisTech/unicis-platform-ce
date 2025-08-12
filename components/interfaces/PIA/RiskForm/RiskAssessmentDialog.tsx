@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
@@ -39,7 +38,7 @@ import {
   riskProbabilityPoints,
   riskSecurityPoints,
 } from '@/components/defaultLanding/data/configs/pia';
-import type { ApiResponse, PiaRisk } from 'types';
+import type { PiaRisk } from 'types';
 import type { Task } from '@prisma/client';
 import { StageTracker } from '@/components/shared/atlaskit';
 
@@ -155,36 +154,34 @@ export default function RiskAssessmentDialog({
   const handleSubmit = async (risk: any, prevRisk?: any) => {
     try {
       setIsSaving(true);
-      if (!task) {
-        return;
-      }
+      if (!task) return;
 
-      const response = await axios.post<ApiResponse<Task>>(
-        `/api/teams/${slug}/tasks/${task.taskNumber}/pia`,
-        {
+      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/pia`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           prevRisk: prevRisk || [],
           nextRisk: risk,
-        }
-      );
+        }),
+      });
 
-      const { error } = response.data;
-
-      if (error) {
-        toast.error(error.message);
+      const { error } = await res.json();
+      if (!res.ok || error) {
+        toast.error(error?.message || 'Request failed');
         return;
-      } else {
-        toast.success(t('pia-created'));
       }
 
+      toast.success(t('pia-created'));
       completeCallback?.();
       mutateTasks();
       onOpenChange(false);
-    } catch (error: any) {
+    } catch {
       toast.error('Unexpected error');
     } finally {
       setIsSaving(false);
     }
   };
+
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

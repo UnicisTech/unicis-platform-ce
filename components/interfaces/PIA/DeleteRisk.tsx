@@ -2,10 +2,7 @@ import * as React from 'react';
 import { useState, useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import toast from 'react-hot-toast';
-import { getAxiosError } from '@/lib/common';
-
 import {
   Dialog,
   DialogContent,
@@ -17,7 +14,7 @@ import {
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 
-import type { ApiResponse, TaskWithRpaProcedure } from 'types';
+import type { TaskWithRpaProcedure } from 'types';
 import type { Task } from '@prisma/client';
 
 interface DeleteRiskProps {
@@ -43,26 +40,26 @@ export default function DeleteRisk({
     try {
       setIsDeleting(true);
 
-      const response = await axios.delete<ApiResponse<Task>>(
-        `/api/teams/${slug}/tasks/${task.taskNumber}/pia`
-      );
-      const { error } = response.data;
+      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/pia`, {
+        method: 'DELETE',
+      });
 
-      if (error) {
-        toast.error(error.message);
+      const { error } = await res.json();
+      if (!res.ok || error) {
+        toast.error(error?.message || 'Request failed');
         return;
-      } else {
-        toast.success(t('riskDeleted', 'Risk deleted.'));
       }
 
+      toast.success(t('riskDeleted', 'Risk deleted.'));
       await mutate();
       setVisible(false);
-    } catch (err: any) {
-      toast.error(getAxiosError(err));
+    } catch {
+      toast.error('Something went wrong');
     } finally {
       setIsDeleting(false);
     }
   }, [slug, task, mutate, setVisible, t]);
+
 
   return (
     <Dialog open={visible} onOpenChange={setVisible}>

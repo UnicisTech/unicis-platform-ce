@@ -1,6 +1,5 @@
 import * as React from 'react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
@@ -16,7 +15,7 @@ import {
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 import { Task } from '@prisma/client';
-import { ApiResponse, defaultProcedure, TiaProcedureInterface } from 'types';
+import { defaultProcedure, TiaProcedureInterface } from 'types';
 import {
   TransferScenarioStep,
   ProblematicLawfulAccessStep,
@@ -121,31 +120,28 @@ export default function TiaProcedureDialog({
   const handleSubmit = async (procedure: any, prevProcedure?: any) => {
     try {
       setIsSaving(true);
-      if (!task) {
-        return;
-      }
+      if (!task) return;
 
-      const response = await axios.post<ApiResponse<Task>>(
-        `/api/teams/${slug}/tasks/${task.taskNumber}/tia`,
-        {
+      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/tia`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           prevProcedure: prevProcedure || [],
           nextProcedure: procedure,
-        }
-      );
+        }),
+      });
 
-      const { error } = response.data;
-
-      if (error) {
-        toast.error(error.message);
+      const { error } = await res.json();
+      if (!res.ok || error) {
+        toast.error(error?.message || 'Request failed');
         return;
-      } else {
-        toast.success(t('tia-created'));
       }
 
+      toast.success(t('tia-created'));
       completeCallback?.();
       mutateTasks();
       onOpenChange(false);
-    } catch (error: any) {
+    } catch {
       toast.error('Unexpected error');
     } finally {
       setIsSaving(false);

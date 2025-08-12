@@ -1,6 +1,5 @@
 import * as React from 'react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
@@ -17,7 +16,6 @@ import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 import { Task } from '@prisma/client';
 import {
-  ApiResponse,
   defaultProcedure,
   ProcedureQueueItem,
   RpaProcedureInterface,
@@ -151,32 +149,28 @@ export default function RpaProcedureDialog({
   const handleSubmit = async (procedure: any, prevProcedure?: any) => {
     try {
       setIsSaving(true);
+      if (!task) return;
 
-      if (!task) {
-        return;
-      }
-
-      const response = await axios.post<ApiResponse<Task>>(
-        `/api/teams/${slug}/tasks/${task.taskNumber}/rpa`,
-        {
+      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/rpa`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           prevProcedure: prevProcedure || [],
           nextProcedure: procedure,
-        }
-      );
+        }),
+      });
 
-      const { error } = response.data;
-
-      if (error) {
-        toast.error(error.message);
+      const { error } = await res.json();
+      if (!res.ok || error) {
+        toast.error(error?.message || 'Request failed');
         return;
-      } else {
-        toast.success(t('rpa-created'));
       }
 
+      toast.success(t('rpa-created'));
       completeCallback?.(createProceduresQueue(procedure), task);
       mutateTasks();
       onOpenChange(false);
-    } catch (error: any) {
+    } catch {
       toast.error('Unexpected error');
     } finally {
       setIsSaving(false);

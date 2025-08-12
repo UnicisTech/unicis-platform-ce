@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import {
   Error,
   Loading,
@@ -23,7 +22,6 @@ import { Button } from '@/components/shadcn/ui/button';
 import { TeamTaskAnalysis } from '../TeamDashboard';
 import { Badge } from '@/components/shadcn/ui/badge';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
-import { ApiResponse } from 'types';
 import toast from 'react-hot-toast';
 
 const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
@@ -75,19 +73,17 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
   };
 
   const handleDelete = async () => {
-    const response = await axios.delete<ApiResponse<unknown>>(
-      `/api/teams/${slug}/tasks/${taskToDelete}`
-    );
+    const res = await fetch(`/api/teams/${slug}/tasks/${taskToDelete}`, {
+      method: 'DELETE',
+    });
 
-    const { error } = response.data;
-
-    if (error) {
-      toast.error(error.message);
+    const { error } = await res.json();
+    if (!res.ok || error) {
+      toast.error(error?.message || 'Request failed');
       return;
     }
 
     toast.success(t('task-deleted'));
-
     mutateTasks();
     setVisible(false);
   };

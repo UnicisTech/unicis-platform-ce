@@ -97,14 +97,6 @@ export const defaultHeaders = {
   'Content-Type': 'application/json',
 };
 
-export const getAxiosError = (error: any): string => {
-  if (error.response) {
-    return error.response.data.error.message;
-  }
-
-  return error.message;
-};
-
 // List of events used to create webhook endpoint
 export const eventTypes = [
   'member.created',

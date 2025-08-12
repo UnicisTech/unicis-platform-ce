@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useState, useCallback } from 'react';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -14,7 +13,7 @@ import {
 } from '@/components/shadcn/ui/dialog';
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
-import type { ApiResponse, TaskWithRpaProcedure } from 'types';
+import type { TaskWithRpaProcedure } from 'types';
 import type { Task } from '@prisma/client';
 
 interface DeleteTiaProps {
@@ -40,26 +39,25 @@ export default function DeleteProcedure({
     try {
       setIsDeleting(true);
 
-      const response = await axios.delete<ApiResponse<Task>>(
-        `/api/teams/${slug}/tasks/${task.taskNumber}/tia`
-      );
-      const { error } = response.data;
+      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/tia`, {
+        method: 'DELETE',
+      });
 
-      if (error) {
-        toast.error(error.message);
-        setIsDeleting(false);
+      const { error } = await res.json();
+      if (!res.ok || error) {
+        toast.error(error?.message || 'Request failed');
         return;
       }
 
       toast.success('Procedure deleted.');
       await mutate();
-      setIsDeleting(false);
       setVisible(false);
     } catch (err: any) {
+      toast.error(err?.message || 'Unexpected error');
+    } finally {
       setIsDeleting(false);
-      toast.error(err.response?.data?.message || err.message);
     }
-  }, [slug, task.taskNumber, mutate, setVisible, t]);
+  }, [slug, task.taskNumber, mutate, setVisible]);
 
   const closeHandler = useCallback(() => {
     setVisible(false);

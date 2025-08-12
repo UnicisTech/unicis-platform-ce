@@ -1,11 +1,7 @@
 import React, { useState, useCallback } from 'react';
-import { getAxiosError } from '@/lib/common';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import type { Task } from '@prisma/client';
 import toast from 'react-hot-toast';
-import axios from 'axios';
-import type { ApiResponse } from 'types';
 import type { TaskExtended } from 'types';
 import Comment from './comments/Comment';
 import CreateCommentForm from './comments/CreateCommentForm';
@@ -43,82 +39,76 @@ export default function Comments({
       reset: (initialValues?: Partial<FormData> | undefined) => void
     ) => {
       try {
-        const response = await axios.post<ApiResponse<Task>>(
-          `/api/teams/${slug}/tasks/${taskNumber}/comments`,
-          {
-            text,
-          }
-        );
+        const res = await fetch(`/api/teams/${slug}/tasks/${taskNumber}/comments`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text }),
+        });
 
-        const { error } = response.data;
-
-        if (error) {
-          toast.error(error.message);
+        const { error } = await res.json();
+        if (!res.ok || error) {
+          toast.error(error?.message || 'Request failed');
           return;
         }
-        reset({
-          text: '',
-        });
+
+        reset({ text: '' });
         mutateTask();
-      } catch (error: any) {
-        toast.error(getAxiosError(error));
+      } catch {
+        toast.error('Unexpected error');
       }
     },
-    []
+    [slug, taskNumber, mutateTask]
   );
 
-  const handleUpdateComment = useCallback(async (text: string, id: number) => {
-    try {
-      const response = await axios.put<ApiResponse<unknown>>(
-        `/api/teams/${slug}/tasks/${taskNumber}/comments`,
-        {
-          id,
-          text,
+  const handleUpdateComment = useCallback(
+    async (text: string, id: number) => {
+      try {
+        const res = await fetch(`/api/teams/${slug}/tasks/${taskNumber}/comments`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, text }),
+        });
+
+        const { error } = await res.json();
+        if (!res.ok || error) {
+          toast.error(error?.message || 'Request failed');
+          return;
         }
-      );
 
-      const { error } = response.data;
-
-      if (error) {
-        toast.error(error.message);
-        return;
+        mutateTask();
+        setCommentToEdit(null);
+      } catch {
+        toast.error('Unexpected error');
       }
+    },
+    [slug, taskNumber, mutateTask]
+  );
 
-      mutateTask();
-      setCommentToEdit(null);
-    } catch (error: any) {
-      toast.error(getAxiosError(error));
-    }
-  }, []);
+  const handleDeleteComment = useCallback(
+    async (id: number | null) => {
+      if (!id) return;
 
-  const handleDeleteComment = useCallback(async (id: number | null) => {
-    if (!id) return;
+      try {
+        const res = await fetch(`/api/teams/${slug}/tasks/${taskNumber}/comments`, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id }),
+        });
 
-    try {
-      // setIsDeleting(true);
-
-      const response = await axios.delete<ApiResponse<unknown>>(
-        `/api/teams/${slug}/tasks/${taskNumber}/comments`,
-        {
-          data: {
-            id,
-          },
+        const { error } = await res.json();
+        if (!res.ok || error) {
+          toast.error(error?.message || 'Request failed');
+          return;
         }
-      );
-      const { error } = response.data;
 
-      if (error) {
-        toast.error(error.message);
-        return;
+        mutateTask();
+      } catch {
+        toast.error('Unexpected error');
       }
+    },
+    [slug, taskNumber, mutateTask]
+  );
 
-      mutateTask();
-    } catch (error: any) {
-      toast.error(getAxiosError(error));
-    } finally {
-      // setIsDeleting(false);
-    }
-  }, []);
 
   return (
     <div className="p-5">

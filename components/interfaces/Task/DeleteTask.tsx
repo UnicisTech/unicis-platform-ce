@@ -1,8 +1,6 @@
 import React from 'react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { useTranslation } from 'next-i18next';
-import type { ApiResponse } from 'types';
 import useTasks from 'hooks/useTasks';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
@@ -29,19 +27,17 @@ const DeleteTask = ({
       name: '',
     },
     onSubmit: async () => {
-      const response = await axios.delete<ApiResponse<unknown>>(
-        `/api/teams/${slug}/tasks/${taskNumber}`
-      );
+      const res = await fetch(`/api/teams/${slug}/tasks/${taskNumber}`, {
+        method: 'DELETE',
+      });
 
-      const { error } = response.data;
-
-      if (error) {
-        toast.error(error.message);
+      const { error } = await res.json();
+      if (!res.ok || error) {
+        toast.error(error?.message || 'Request failed');
         return;
       }
 
       toast.success(t('task-deleted'));
-
       mutateTasks();
       formik.resetForm();
       setVisible(false);

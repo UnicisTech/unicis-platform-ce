@@ -6,7 +6,6 @@ import React, {
   SetStateAction,
 } from 'react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import ControlBlock from './ControlBlock';
@@ -15,7 +14,8 @@ import useCanAccess from 'hooks/useCanAccess';
 import ControlBlockViewOnly from './ControlBlockViewOnly';
 import { getCscControlsProp } from '@/lib/csc';
 import type { ISO } from 'types';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import { Button } from '@/components/shadcn/ui/button';
+import { Loader2 } from 'lucide-react';
 
 const CscPanel = ({
   task,
@@ -52,8 +52,6 @@ const CscPanel = ({
   const [isDeleting, setIsDeleting] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
-  console.log('statuses', statuses);
-
   useEffect(() => {
     setControls(issueControls);
   }, [issueControls]);
@@ -64,95 +62,72 @@ const CscPanel = ({
 
   const deleteControls = useCallback(async () => {
     setIsDeleting(true);
+    try {
+      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/csc`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ controls, operation: 'remove', ISO }),
+      });
 
-    const response = await axios.put(
-      `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
-      {
-        controls: [...controls],
-        operation: 'remove',
-        ISO,
-      }
-    );
+      const { error } = await res.json();
+      if (!res.ok || error) return toast.error(error?.message || 'Request failed');
 
-    const { error } = response.data;
-
-    if (error) {
-      toast.error(error.message);
+      mutateTask();
+    } catch {
+      toast.error('Something went wrong');
+    } finally {
       setIsDeleting(false);
-      return;
     }
-
-    mutateTask();
-    setIsDeleting(false);
-  }, [task, mutateTask, setIsDeleting]);
+  }, [slug, task, controls, ISO, mutateTask]);
 
   const controlHanlder = useCallback(
     async (oldControl: string, newControl: string) => {
       setIsSaving(true);
+      try {
+        const body =
+          oldControl === ''
+            ? { controls: [newControl], operation: 'add', ISO }
+            : { controls: [oldControl, newControl], operation: 'change', ISO };
 
-      let response;
+        const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/csc`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
 
-      if (oldControl === '') {
-        response = await axios.put(
-          `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
-          {
-            controls: [newControl],
-            operation: 'add',
-            ISO,
-          }
-        );
-      } else {
-        response = await axios.put(
-          `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
-          {
-            controls: [oldControl, newControl],
-            operation: 'change',
-            ISO,
-          }
-        );
-      }
+        const { error } = await res.json();
+        if (!res.ok || error) return toast.error(error?.message || 'Request failed');
 
-      const { error } = response.data;
-
-      if (error) {
-        toast.error(error.message);
+        mutateTask();
+      } catch {
+        toast.error('Something went wrong');
+      } finally {
         setIsSaving(false);
-        return;
       }
-
-      mutateTask();
-      setIsSaving(false);
     },
-    [task, mutateTask, setIsSaving]
+    [slug, task, ISO, mutateTask]
   );
 
-  const deleteControlHandler = useCallback(
-    async (control: string) => {
-      setIsDeleting(true);
+  const deleteControlHandler = useCallback(async (control: string) => {
+    setIsDeleting(true);
+    try {
+      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/csc`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ controls: [control], operation: 'remove', ISO }),
+      });
 
-      const response = await axios.put(
-        `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
-        {
-          controls: [control],
-          operation: 'remove',
-          ISO,
-        }
-      );
-
-      const { error } = response.data;
-
-      if (error) {
-        toast.error(error.message);
-        setIsDeleting(false);
-        return;
-      }
+      const { error } = await res.json();
+      if (!res.ok || error) return toast.error(error?.message || 'Request failed');
 
       mutateTask();
-
+    } catch {
+      toast.error('Something went wrong');
+    } finally {
       setIsDeleting(false);
-    },
-    [task, mutateTask, setIsDeleting]
-  );
+    }
+  }, [slug, task, ISO, mutateTask]);
+
 
   return (
     <div className="p-5">
@@ -181,20 +156,20 @@ const CscPanel = ({
             }}
           >
             <div style={{ margin: '0 5px' }}>
-              <DaisyButton
+              <Button
                 color="primary"
-                variant="outline"
                 size="sm"
                 onClick={addControl}
-                active={isDeleting || isSaving}
+                disabled={isDeleting || isSaving}
               >
+                {(isDeleting || isSaving) && <Loader2 className='animate-spin'/>}
                 + Add Control
-              </DaisyButton>
+              </Button>
             </div>
             <div style={{ margin: '0 5px' }}>
-              <DaisyButton variant="outline" size="sm" onClick={deleteControls}>
+              <Button variant="destructive" size="sm" onClick={deleteControls} disabled={isDeleting || isSaving}>
                 {t('remove')}
-              </DaisyButton>
+              </Button>
             </div>
           </div>
         </>

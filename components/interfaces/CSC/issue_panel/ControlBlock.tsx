@@ -6,9 +6,7 @@ import React, {
   Dispatch,
   SetStateAction,
   useMemo,
-  useEffect,
 } from 'react';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { Button } from '@/components/shadcn/ui/button';
@@ -48,8 +46,8 @@ const ControlBlock = ({
   setStatuses: Dispatch<
     SetStateAction<
       | {
-          [key: string]: string;
-        }
+        [key: string]: string;
+      }
       | undefined
     >
   >;
@@ -69,28 +67,30 @@ const ControlBlock = ({
 
   const statusHandler = useCallback(
     async (control: string, value: string) => {
-      const response = await axios.put(`/api/teams/${slug}/csc`, {
-        control,
-        value,
-      });
+      try {
+        const response = await fetch(`/api/teams/${slug}/csc`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ control, value }),
+        });
 
-      const { data, error } = response.data;
+        const { data, error } = await response.json();
 
-      if (error) {
-        toast.error(error.message);
-        return;
+        if (error) {
+          toast.error(error.message);
+          return;
+        }
+
+        toast.success('Status changed!');
+        setStatuses(data.statuses);
+      } catch (err) {
+        toast.error('Something went wrong');
       }
-
-      toast.success('Status changed!');
-      setStatuses(data.statuses);
     },
     [slug, setStatuses]
   );
-
-  useEffect(() => {
-    console.log('availableOptions', availableOptions);
-    console.log('controlOptions', controlOptions);
-  }, [availableOptions, controlOptions]);
 
   return (
     <div className="space-y-4">

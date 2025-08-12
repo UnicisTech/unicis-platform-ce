@@ -2,7 +2,6 @@
 
 import React, { useCallback, useState } from 'react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
@@ -84,20 +83,20 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
   const onSubmit = async (data: FormData) => {
     if (!isFormChanged) return;
 
-    const response = await axios.put<ApiResponse<Task>>(
-      `/api/teams/${team.slug}/tasks/${task.taskNumber}`,
-      {
+    const res = await fetch(`/api/teams/${team.slug}/tasks/${task.taskNumber}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         data: {
           ...data,
           teamId: team.id,
         },
-      }
-    );
+      }),
+    });
 
-    const { error } = response.data;
-
-    if (error) {
-      toast.error(error.message);
+    const { error } = await res.json();
+    if (!res.ok || error) {
+      toast.error(error?.message || 'Request failed');
       return;
     }
 
@@ -105,6 +104,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
     setIsFormChanged(false);
     mutateTask();
   };
+
 
   return (
     <div className="p-5">

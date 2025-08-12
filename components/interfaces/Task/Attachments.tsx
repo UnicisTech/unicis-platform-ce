@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import { TaskExtended } from 'types';
 import AttachmentsCard from './AttachmentCard';
 import { checkExtensionAndMIMEType } from '@/components/services/taskService';
@@ -80,6 +79,7 @@ const Attachments = ({
     }
   };
 
+  //TODO: remove this useEffect?
   useEffect(() => {
     const uploadFile = async () => {
       if (selectedFile && typeof slug === 'string') {
@@ -88,34 +88,32 @@ const Attachments = ({
           formData.append('file', selectedFile);
           formData.append('slug', slug);
           formData.append('taskId', String(task.id));
-          const response = await axios.post(
+
+          const res = await fetch(
             `/api/teams/${slug}/tasks/${taskNumber}/attachments`,
-            formData,
             {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
+              method: 'POST',
+              body: formData, // No need to set Content-Type manually for FormData
             }
           );
 
-          const { error } = response.data;
-
-          if (error) {
-            toast.error(error.message);
+          const { error } = await res.json();
+          if (!res.ok || error) {
+            toast.error(error?.message || 'Request failed');
             return;
           }
 
           toast.success('Attachment uploaded');
           mutateTask();
         } catch (error: any) {
-          toast.error(error?.message);
+          toast.error(error?.message || 'Unexpected error');
           console.error(error);
         }
       }
     };
 
     uploadFile();
-  }, [selectedFile]);
+  }, [selectedFile, slug, task.id, taskNumber, mutateTask]);
 
   const themeClasses =
     theme === 'dark'

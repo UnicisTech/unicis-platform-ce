@@ -46,7 +46,6 @@
     "@tailwindcss/typography": "0.5.13",
     "@uiw/react-md-editor": "^3.6.0",
     "autoprefixer": "10.4.19",
-    "axios": "^1.11.0",
     "bcryptjs": "2.4.3",
     "caniuse-lite": "^1.0.30001627",
     "chart.js": "^4.4.3",
