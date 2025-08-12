@@ -38,9 +38,8 @@ import useTask from 'hooks/useTask';
 import useCanAccess from 'hooks/useCanAccess';
 
 import type { Task, Team } from '@prisma/client';
-import type { ApiResponse } from 'types';
 
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),

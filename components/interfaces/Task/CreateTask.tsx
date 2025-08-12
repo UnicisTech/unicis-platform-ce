@@ -44,7 +44,7 @@ import {
   FormMessage,
 } from '@/components/shadcn/ui/form';
 
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
 const statuses = statusesData;
 const DEFAULT_STATUS_VALUE = 'todo';

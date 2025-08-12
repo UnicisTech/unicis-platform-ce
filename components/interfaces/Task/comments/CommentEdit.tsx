@@ -1,11 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
 import type { Comment } from '@prisma/client';
-import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
 interface CommentEditProps {
   comment: Comment;
