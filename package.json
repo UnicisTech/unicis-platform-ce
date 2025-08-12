@@ -58,7 +58,7 @@
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.11",
     "flowbite-datepicker": "^1.2.6",
-    "formidable": "3.5.1",
+    "formidable": "^3.5.4",
     "formik": "2.4.6",
     "i": "^0.3.7",
     "i18next": "23.11.5",
