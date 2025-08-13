@@ -83,7 +83,9 @@ const ResetPassword = () => {
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                aria-invalid={!!(formik.touched.password && formik.errors.password)}
+                aria-invalid={
+                  !!(formik.touched.password && formik.errors.password)
+                }
                 aria-describedby="password-error"
                 className="pr-10 text-base"
               />
@@ -112,7 +114,10 @@ const ResetPassword = () => {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 aria-invalid={
-                  !!(formik.touched.confirmPassword && formik.errors.confirmPassword)
+                  !!(
+                    formik.touched.confirmPassword &&
+                    formik.errors.confirmPassword
+                  )
                 }
                 aria-describedby="confirmPassword-error"
                 className="pr-10 text-base"
@@ -122,11 +127,15 @@ const ResetPassword = () => {
                 handlePasswordVisibility={() => setShowConfirm((v) => !v)}
               />
             </div>
-            {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-              <p id="confirmPassword-error" className="text-destructive text-sm">
-                {formik.errors.confirmPassword}
-              </p>
-            )}
+            {formik.touched.confirmPassword &&
+              formik.errors.confirmPassword && (
+                <p
+                  id="confirmPassword-error"
+                  className="text-destructive text-sm"
+                >
+                  {formik.errors.confirmPassword}
+                </p>
+              )}
           </div>
 
           <div className="pt-2">

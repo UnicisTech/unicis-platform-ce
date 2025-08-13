@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import PieChart from '../CSC/PieChart';
 import RadarChart from '../CSC/RadarChart';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useISO from 'hooks/useISO';
 import useTeam from 'hooks/useTeam';
 import { Loading, Error } from '@/components/shared';

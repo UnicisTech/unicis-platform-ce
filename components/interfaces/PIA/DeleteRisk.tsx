@@ -40,9 +40,12 @@ export default function DeleteRisk({
     try {
       setIsDeleting(true);
 
-      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/pia`, {
-        method: 'DELETE',
-      });
+      const res = await fetch(
+        `/api/teams/${slug}/tasks/${task.taskNumber}/pia`,
+        {
+          method: 'DELETE',
+        }
+      );
 
       const { error } = await res.json();
       if (!res.ok || error) {
@@ -59,7 +62,6 @@ export default function DeleteRisk({
       setIsDeleting(false);
     }
   }, [slug, task, mutate, setVisible, t]);
-
 
   return (
     <Dialog open={visible} onOpenChange={setVisible}>

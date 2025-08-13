@@ -39,9 +39,12 @@ export default function DeleteRisk({
     try {
       setIsDeleting(true);
 
-      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/rm`, {
-        method: 'DELETE',
-      });
+      const res = await fetch(
+        `/api/teams/${slug}/tasks/${task.taskNumber}/rm`,
+        {
+          method: 'DELETE',
+        }
+      );
 
       const { error } = await res.json();
       if (!res.ok || error) {

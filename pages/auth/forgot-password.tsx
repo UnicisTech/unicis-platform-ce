@@ -128,7 +128,9 @@ ForgotPassword.getLayout = function getLayout(page: ReactElement) {
   return <AuthLayout heading="Reset Password">{page}</AuthLayout>;
 };
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
   const { locale } = context;
 
   return {

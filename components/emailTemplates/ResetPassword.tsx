@@ -30,11 +30,7 @@ const ResetPasswordEmail = ({
           associated with {email}.
         </Text>
         <Container className="text-center">
-          <Button
-            href={url}
-          >
-            Reset your password
-          </Button>
+          <Button href={url}>Reset your password</Button>
         </Container>
         <Text>
           Please ignore this email if you did not request a password reset. No

@@ -84,22 +84,26 @@ const AdminPage = ({
   );
 
   const deleteCourse = useCallback(async () => {
-  if (!courseToDelete) return;
+    if (!courseToDelete) return;
 
-  try {
-    const res = await fetch(`/api/teams/${slug}/iap/course/${courseToDelete.id}`, {
-      method: 'DELETE',
-    });
+    try {
+      const res = await fetch(
+        `/api/teams/${slug}/iap/course/${courseToDelete.id}`,
+        {
+          method: 'DELETE',
+        }
+      );
 
-    const { error } = await res.json();
-    if (!res.ok || error) return toast.error(error?.message || 'Request failed');
+      const { error } = await res.json();
+      if (!res.ok || error)
+        return toast.error(error?.message || 'Request failed');
 
-    toast.success(t('iap-course-deleted'));
-    mutateIap();
-  } catch {
-    toast.error('Something went wrong');
-  }
-}, [slug, courseToDelete, mutateIap, t]);
+      toast.success(t('iap-course-deleted'));
+      mutateIap();
+    } catch {
+      toast.error('Something went wrong');
+    }
+  }, [slug, courseToDelete, mutateIap, t]);
 
   return (
     <>

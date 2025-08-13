@@ -156,14 +156,17 @@ export default function RiskAssessmentDialog({
       setIsSaving(true);
       if (!task) return;
 
-      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/pia`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          prevRisk: prevRisk || [],
-          nextRisk: risk,
-        }),
-      });
+      const res = await fetch(
+        `/api/teams/${slug}/tasks/${task.taskNumber}/pia`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prevRisk: prevRisk || [],
+            nextRisk: risk,
+          }),
+        }
+      );
 
       const { error } = await res.json();
       if (!res.ok || error) {
@@ -181,7 +184,6 @@ export default function RiskAssessmentDialog({
       setIsSaving(false);
     }
   };
-
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

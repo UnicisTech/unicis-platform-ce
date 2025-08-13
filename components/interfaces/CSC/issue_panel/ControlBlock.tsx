@@ -46,8 +46,8 @@ const ControlBlock = ({
   setStatuses: Dispatch<
     SetStateAction<
       | {
-        [key: string]: string;
-      }
+          [key: string]: string;
+        }
       | undefined
     >
   >;

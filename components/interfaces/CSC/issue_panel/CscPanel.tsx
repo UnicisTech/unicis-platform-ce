@@ -63,14 +63,18 @@ const CscPanel = ({
   const deleteControls = useCallback(async () => {
     setIsDeleting(true);
     try {
-      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/csc`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ controls, operation: 'remove', ISO }),
-      });
+      const res = await fetch(
+        `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
+        {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ controls, operation: 'remove', ISO }),
+        }
+      );
 
       const { error } = await res.json();
-      if (!res.ok || error) return toast.error(error?.message || 'Request failed');
+      if (!res.ok || error)
+        return toast.error(error?.message || 'Request failed');
 
       mutateTask();
     } catch {
@@ -89,14 +93,18 @@ const CscPanel = ({
             ? { controls: [newControl], operation: 'add', ISO }
             : { controls: [oldControl, newControl], operation: 'change', ISO };
 
-        const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/csc`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        });
+        const res = await fetch(
+          `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
+          {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          }
+        );
 
         const { error } = await res.json();
-        if (!res.ok || error) return toast.error(error?.message || 'Request failed');
+        if (!res.ok || error)
+          return toast.error(error?.message || 'Request failed');
 
         mutateTask();
       } catch {
@@ -108,26 +116,36 @@ const CscPanel = ({
     [slug, task, ISO, mutateTask]
   );
 
-  const deleteControlHandler = useCallback(async (control: string) => {
-    setIsDeleting(true);
-    try {
-      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/csc`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ controls: [control], operation: 'remove', ISO }),
-      });
+  const deleteControlHandler = useCallback(
+    async (control: string) => {
+      setIsDeleting(true);
+      try {
+        const res = await fetch(
+          `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
+          {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              controls: [control],
+              operation: 'remove',
+              ISO,
+            }),
+          }
+        );
 
-      const { error } = await res.json();
-      if (!res.ok || error) return toast.error(error?.message || 'Request failed');
+        const { error } = await res.json();
+        if (!res.ok || error)
+          return toast.error(error?.message || 'Request failed');
 
-      mutateTask();
-    } catch {
-      toast.error('Something went wrong');
-    } finally {
-      setIsDeleting(false);
-    }
-  }, [slug, task, ISO, mutateTask]);
-
+        mutateTask();
+      } catch {
+        toast.error('Something went wrong');
+      } finally {
+        setIsDeleting(false);
+      }
+    },
+    [slug, task, ISO, mutateTask]
+  );
 
   return (
     <div className="p-5">
@@ -162,12 +180,19 @@ const CscPanel = ({
                 onClick={addControl}
                 disabled={isDeleting || isSaving}
               >
-                {(isDeleting || isSaving) && <Loader2 className='animate-spin'/>}
+                {(isDeleting || isSaving) && (
+                  <Loader2 className="animate-spin" />
+                )}
                 + Add Control
               </Button>
             </div>
             <div style={{ margin: '0 5px' }}>
-              <Button variant="destructive" size="sm" onClick={deleteControls} disabled={isDeleting || isSaving}>
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={deleteControls}
+                disabled={isDeleting || isSaving}
+              >
                 {t('remove')}
               </Button>
             </div>

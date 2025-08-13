@@ -39,11 +39,14 @@ export default function Comments({
       reset: (initialValues?: Partial<FormData> | undefined) => void
     ) => {
       try {
-        const res = await fetch(`/api/teams/${slug}/tasks/${taskNumber}/comments`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text }),
-        });
+        const res = await fetch(
+          `/api/teams/${slug}/tasks/${taskNumber}/comments`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text }),
+          }
+        );
 
         const { error } = await res.json();
         if (!res.ok || error) {
@@ -63,11 +66,14 @@ export default function Comments({
   const handleUpdateComment = useCallback(
     async (text: string, id: number) => {
       try {
-        const res = await fetch(`/api/teams/${slug}/tasks/${taskNumber}/comments`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id, text }),
-        });
+        const res = await fetch(
+          `/api/teams/${slug}/tasks/${taskNumber}/comments`,
+          {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, text }),
+          }
+        );
 
         const { error } = await res.json();
         if (!res.ok || error) {
@@ -89,11 +95,14 @@ export default function Comments({
       if (!id) return;
 
       try {
-        const res = await fetch(`/api/teams/${slug}/tasks/${taskNumber}/comments`, {
-          method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id }),
-        });
+        const res = await fetch(
+          `/api/teams/${slug}/tasks/${taskNumber}/comments`,
+          {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id }),
+          }
+        );
 
         const { error } = await res.json();
         if (!res.ok || error) {
@@ -108,7 +117,6 @@ export default function Comments({
     },
     [slug, taskNumber, mutateTask]
   );
-
 
   return (
     <div className="p-5">

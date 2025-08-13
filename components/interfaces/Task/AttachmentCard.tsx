@@ -66,7 +66,6 @@ const AttachmentsCard = ({
     [attachment.id, attachment.filename, taskNumber, teamSlug]
   );
 
-
   const deleteHandler = useCallback(async () => {
     try {
       const res = await fetch(

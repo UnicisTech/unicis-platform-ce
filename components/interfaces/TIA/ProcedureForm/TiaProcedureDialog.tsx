@@ -122,14 +122,17 @@ export default function TiaProcedureDialog({
       setIsSaving(true);
       if (!task) return;
 
-      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/tia`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          prevProcedure: prevProcedure || [],
-          nextProcedure: procedure,
-        }),
-      });
+      const res = await fetch(
+        `/api/teams/${slug}/tasks/${task.taskNumber}/tia`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prevProcedure: prevProcedure || [],
+            nextProcedure: procedure,
+          }),
+        }
+      );
 
       const { error } = await res.json();
       if (!res.ok || error) {

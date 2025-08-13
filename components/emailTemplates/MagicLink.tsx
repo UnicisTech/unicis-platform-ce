@@ -27,11 +27,7 @@ const MagicLink = ({ subject, url }: MagicLinkProps) => {
           button will expire in 60 minutes.
         </Text>
         <Container className="text-center">
-          <Button
-            href={url}
-          >
-            Log in to {app.name}
-          </Button>
+          <Button href={url}>Log in to {app.name}</Button>
         </Container>
         <Text>
           If you did not request this email, you can safely ignore it.

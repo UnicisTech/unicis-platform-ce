@@ -82,16 +82,19 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
   const onSubmit = async (data: FormData) => {
     if (!isFormChanged) return;
 
-    const res = await fetch(`/api/teams/${team.slug}/tasks/${task.taskNumber}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        data: {
-          ...data,
-          teamId: team.id,
-        },
-      }),
-    });
+    const res = await fetch(
+      `/api/teams/${team.slug}/tasks/${task.taskNumber}`,
+      {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          data: {
+            ...data,
+            teamId: team.id,
+          },
+        }),
+      }
+    );
 
     const { error } = await res.json();
     if (!res.ok || error) {
@@ -103,7 +106,6 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
     setIsFormChanged(false);
     mutateTask();
   };
-
 
   return (
     <div className="p-5">

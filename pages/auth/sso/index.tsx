@@ -19,7 +19,9 @@ import { Loader2 } from 'lucide-react';
 
 const SSO: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ jacksonProductId }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+> = ({
+  jacksonProductId,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { t } = useTranslation('common');
   const { status } = useSession();
   const router = useRouter();

@@ -33,11 +33,7 @@ const TeamInviteEmail = ({
           Click the link below to accept the invitation and join the team.
         </Text>
         <Container className="text-center">
-          <Button
-            href={invitationLink}
-          >
-            Join the team
-          </Button>
+          <Button href={invitationLink}>Join the team</Button>
         </Container>
         <Text>
           You have 7 days to accept this invitation before it expires.

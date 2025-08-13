@@ -32,7 +32,6 @@ const Teams = () => {
     mutateTeams();
   };
 
-
   return (
     <Card heading="Your Teams">
       <Card.Body>

@@ -18,7 +18,7 @@ import { Button } from '@/components/shadcn/ui/button';
 import TaskPicker from '@/components/shared/shadcn/TaskPicker';
 import { Loader2 } from 'lucide-react';
 
-import type { ApiResponse, RMProcedureInterface } from 'types';
+import type { RMProcedureInterface } from 'types';
 import type { Task } from '@prisma/client';
 import { useRiskAndImpactStepForm, useRiskTreatmentStepForm } from './hooks';
 import { RiskAndImpactStep, RiskTreatmentStep } from './steps';
@@ -89,11 +89,14 @@ export default function RmRiskDialog({
       setIsSaving(true);
       if (!task) return;
 
-      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/rm`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prevRisk: prevRisk || [], nextRisk: risk }),
-      });
+      const res = await fetch(
+        `/api/teams/${slug}/tasks/${task.taskNumber}/rm`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prevRisk: prevRisk || [], nextRisk: risk }),
+        }
+      );
 
       const { error } = await res.json();
       if (!res.ok || error) {

@@ -14,7 +14,7 @@ import {
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 
-import type { ApiResponse, TaskWithRpaProcedure } from 'types';
+import type { TaskWithRpaProcedure } from 'types';
 import type { Task } from '@prisma/client';
 
 interface DeleteProcedureProps {
@@ -40,9 +40,12 @@ export default function DeleteProcedure({
     try {
       setIsDeleting(true);
 
-      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/pia`, {
-        method: 'DELETE',
-      });
+      const res = await fetch(
+        `/api/teams/${slug}/tasks/${task.taskNumber}/pia`,
+        {
+          method: 'DELETE',
+        }
+      );
 
       const { error } = await res.json();
       if (!res.ok || error) {
@@ -59,7 +62,6 @@ export default function DeleteProcedure({
       setIsDeleting(false);
     }
   }, [slug, task, mutate, setVisible, t]);
-
 
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
