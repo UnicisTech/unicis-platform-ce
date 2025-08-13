@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { TaskExtended } from 'types';
@@ -24,7 +24,6 @@ const Attachments = ({
   const { canAccess } = useCanAccess();
   const { slug, taskNumber } = router.query;
   const [isDragOver, setIsDragOver] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const { theme } = useTheme();
 
@@ -49,7 +48,7 @@ const Attachments = ({
     const file = files[0];
     const isAvailable = checkExtensionAndMIMEType(file);
     if (isAvailable) {
-      setSelectedFile(file);
+      uploadFile(file);
     } else {
       toast.error('Not supported type of file');
     }
@@ -63,7 +62,7 @@ const Attachments = ({
       reader.onloadend = () => {
         const isAvailable = checkExtensionAndMIMEType(file);
         if (isAvailable) {
-          setSelectedFile(file);
+          uploadFile(file);
         } else {
           toast.error('Not supported type of file');
         }
@@ -73,47 +72,41 @@ const Attachments = ({
   };
 
   const handleClick = () => {
-    console.log('handleClick');
     if (inputRef.current) {
       inputRef.current.click();
     }
   };
 
-  //TODO: remove this useEffect?
-  useEffect(() => {
-    const uploadFile = async () => {
-      if (selectedFile && typeof slug === 'string') {
-        try {
-          const formData = new FormData();
-          formData.append('file', selectedFile);
-          formData.append('slug', slug);
-          formData.append('taskId', String(task.id));
+  const uploadFile = async (selectedFile) => {
+    if (selectedFile && typeof slug === 'string') {
+      try {
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+        formData.append('slug', slug);
+        formData.append('taskId', String(task.id));
 
-          const res = await fetch(
-            `/api/teams/${slug}/tasks/${taskNumber}/attachments`,
-            {
-              method: 'POST',
-              body: formData, // No need to set Content-Type manually for FormData
-            }
-          );
-
-          const { error } = await res.json();
-          if (!res.ok || error) {
-            toast.error(error?.message || 'Request failed');
-            return;
+        const res = await fetch(
+          `/api/teams/${slug}/tasks/${taskNumber}/attachments`,
+          {
+            method: 'POST',
+            body: formData, // No need to set Content-Type manually for FormData
           }
+        );
 
-          toast.success('Attachment uploaded');
-          mutateTask();
-        } catch (error: any) {
-          toast.error(error?.message || 'Unexpected error');
-          console.error(error);
+        const { error } = await res.json();
+        if (!res.ok || error) {
+          toast.error(error?.message || 'Request failed');
+          return;
         }
-      }
-    };
 
-    uploadFile();
-  }, [selectedFile, slug, task.id, taskNumber, mutateTask]);
+        toast.success('Attachment uploaded');
+        mutateTask();
+      } catch (error: any) {
+        toast.error(error?.message || 'Unexpected error');
+        console.error(error);
+      }
+    }
+  };
 
   const themeClasses =
     theme === 'dark'
