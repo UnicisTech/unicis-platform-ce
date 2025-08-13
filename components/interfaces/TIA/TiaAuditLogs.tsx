@@ -18,8 +18,6 @@ const TiaAuditLogs = ({ task }: { task: Task }) => {
     []) as TiaAuditLog[];
   const reversedLogs = [...allLogs].reverse();
 
-  // console.log("taskProperties.tia_audit_logs", taskProperties.tia_audit_logs)
-
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(reversedLogs.length / ITEMS_PER_PAGE);
   const paginatedLogs = reversedLogs.slice(

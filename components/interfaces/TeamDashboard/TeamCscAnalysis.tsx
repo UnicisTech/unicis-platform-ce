@@ -41,10 +41,6 @@ const ProcessingActivitiesAnalysis = ({
   const { isLoading, isError, team } = useTeam(slug as string);
   const { ISO } = useISO(team);
 
-  useEffect(() => {
-    console.log('CSC ISO', ISO);
-  }, [ISO]);
-
   if (isLoading || !team || !ISO) {
     return <Loading />;
   }
@@ -52,8 +48,6 @@ const ProcessingActivitiesAnalysis = ({
   if (isError) {
     return <Error />;
   }
-
-  console.log(statuses);
 
   return (
     <>

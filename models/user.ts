@@ -56,7 +56,6 @@ export const upsertUser = async ({ where, update, create }) => {
 };
 
 export const getUser = async (key: { id: string } | { email: string }) => {
-  console.log('getUser', key);
   return await prisma.user.findUnique({
     where: key,
   });

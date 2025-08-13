@@ -81,12 +81,10 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     throw new ApiError(400, 'Invalid request');
   }
 
-  console.log('Updating before:');
   const user = await prisma.user.update({
     where: { id: session?.user.id },
     data: toUpdate,
   });
-  console.log('Updating after:');
 
   recordMetric('user.updated');
 

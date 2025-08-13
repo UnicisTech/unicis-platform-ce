@@ -32,8 +32,6 @@ const darkText = '#f3f4f6';
 const DashboardChart = ({ datasets }: { datasets: number[] }) => {
   const { theme } = useTheme();
 
-  console.log('theme', theme);
-
   const isDark = theme === 'dark';
   const colors = isDark ? darkColors : lightColors;
   const textColor = isDark ? darkText : lightText;

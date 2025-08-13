@@ -60,10 +60,6 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
     nextButtonDisabled,
   } = usePagination<Task>(filteredTasks || [], perPage);
 
-  useEffect(() => {
-    console.log('tasks', tasks);
-  }, [tasks]);
-
   if (isLoading) return <Loading />;
   if (isError) return <Error />;
 

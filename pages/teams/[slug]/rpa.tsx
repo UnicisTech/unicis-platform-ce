@@ -93,7 +93,6 @@ const RpaDashboard: NextPageWithLayout<
             <Button
               color="primary"
               onClick={() => {
-                console.log('clicked');
                 setTaskToEdit(null);
                 rpaState.setIsRpaOpen(true);
               }}

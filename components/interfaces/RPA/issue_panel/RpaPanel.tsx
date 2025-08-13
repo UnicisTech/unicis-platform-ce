@@ -97,7 +97,6 @@ const RpaPanel: React.FC<{ task: Task }> = ({ task }) => {
   const procedure = properties.rpa_procedure as RpaProcedureInterface;
   const [activeTab, setActiveTab] = useState(0);
 
-  console.log('rpa procedure', procedure);
   // Build tabs array
   const tabs = useMemo(
     () => [

@@ -7,7 +7,6 @@ const useISO = (team: any) => {
 
   useEffect(() => {
     const asyncEffect = async () => {
-      console.log('useISO async effect', team);
       if (!team) return;
 
       const iso = team?.properties?.csc_iso;

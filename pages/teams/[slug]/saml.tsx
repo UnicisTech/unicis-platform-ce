@@ -10,7 +10,6 @@ import env from '@/lib/env';
 import { BOXYHQ_UI_CSS } from '@/components/styles';
 
 const TeamSSO = ({ teamFeatures, SPConfigURL }) => {
-  console.log('SPConfigURL', SPConfigURL);
   const { t } = useTranslation('common');
 
   const { isLoading, isError, team } = useTeam();

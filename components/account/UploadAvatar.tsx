@@ -29,7 +29,6 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
   const [hasChanged, setHasChanged] = useState(false);
 
   const uploadFile = (file: File) => {
-    console.log('file.size', file.size);
     if (file.size > MAX) {
       toast.error(t('file-too-big'));
       return;

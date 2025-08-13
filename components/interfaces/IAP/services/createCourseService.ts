@@ -75,8 +75,6 @@ export function validateQuestion(formData: any, isSaving: boolean) {
   const questionTypeErrors = validateQuestionByType(formData);
   const combinedErrors = Object.assign(errors, questionTypeErrors);
 
-  console.log('combinedErrors', combinedErrors);
-
   const isValid = allPropsUndefined(combinedErrors);
   return isValid ? undefined : combinedErrors;
 }

@@ -16,7 +16,6 @@ const CommentView = ({
   activateEditForComment,
   deleteComment,
 }: CommentViewProps) => {
-  console.log('CommentView text', comment.text);
   return (
     <>
       <div>
