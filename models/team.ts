@@ -245,6 +245,12 @@ export const getTeamMember = async (userId: string, slug: string) => {
   return teamMember;
 };
 
+export const countTeamMembers = async ({ where }) => {
+  return await prisma.teamMember.count({
+    where,
+  });
+};
+
 export const incrementTaskIndex = async (teamId: string) => {
   try {
     await prisma.team.update({

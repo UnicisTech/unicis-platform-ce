@@ -26,7 +26,6 @@ const params = {
 export const subscriptionParams = params;
 
 const useSubscription = (subscription: Subscription) => {
-
   const currentPlan =
     subscription?.status === SubscriptionStatus.ACTIVE
       ? subscription.plan

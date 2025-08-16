@@ -1,7 +1,6 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Loading, Error } from '@/components/shared';
 import useTeam from 'hooks/useTeam';
@@ -70,15 +69,15 @@ const CscDashboard = ({
 
   const statusHandler = useCallback(
     async (control: string, value: string) => {
-      const response = await axios.put(`/api/teams/${slug}/csc`, {
-        control,
-        value,
+      const res = await fetch(`/api/teams/${slug}/csc`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ control, value }),
       });
 
-      const { data, error } = response.data;
-
-      if (error) {
-        toast.error(error.message);
+      const { data, error } = await res.json();
+      if (!res.ok || error) {
+        toast.error(error?.message || 'Request failed');
         return;
       }
 
@@ -90,21 +89,19 @@ const CscDashboard = ({
   const taskSelectorHandler = useCallback(
     async (action: string, dataToRemove: any, control: string) => {
       const operation = action === 'select-option' ? 'add' : 'remove';
+
       for (const option of dataToRemove) {
         const taskNumber = option.value;
-        const response = await axios.put(
-          `/api/teams/${slug}/tasks/${taskNumber}/csc`,
-          {
-            controls: [control],
-            operation,
-            ISO,
-          }
-        );
 
-        const { error } = response.data;
+        const res = await fetch(`/api/teams/${slug}/tasks/${taskNumber}/csc`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ controls: [control], operation, ISO }),
+        });
 
-        if (error) {
-          toast.error(error.message);
+        const { error } = await res.json();
+        if (!res.ok || error) {
+          toast.error(error?.message || 'Request failed');
           return;
         }
 
@@ -113,10 +110,6 @@ const CscDashboard = ({
     },
     [ISO, slug, mutateTasks]
   );
-
-  useEffect(() => {
-    console.log('CSC ISO', ISO);
-  }, [ISO]);
 
   if (isLoading || !team || !tasks || !ISO) {
     return <Loading />;

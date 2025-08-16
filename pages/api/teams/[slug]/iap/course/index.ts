@@ -26,7 +26,6 @@ export default async function handler(
         });
     }
   } catch (error: any) {
-    console.log('error catched there?', error);
     const message = error.message || 'Something went wrong';
     const status = error.status || 500;
 

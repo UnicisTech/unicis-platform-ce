@@ -1,12 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import { getAxiosError } from '@/lib/common';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import useCanAccess from 'hooks/useCanAccess';
 import { Category, Team } from '@prisma/client';
-import { ApiResponse, TeamCourseWithProgress, TeamMemberWithUser } from 'types';
+import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
 import {
   CompletionResults,
   CoursesTable,
@@ -89,24 +87,23 @@ const AdminPage = ({
     if (!courseToDelete) return;
 
     try {
-      const response = await axios.delete<ApiResponse<any>>(
-        `/api/teams/${slug}/iap/course/${courseToDelete.id}`
+      const res = await fetch(
+        `/api/teams/${slug}/iap/course/${courseToDelete.id}`,
+        {
+          method: 'DELETE',
+        }
       );
 
-      const { error } = response.data;
+      const { error } = await res.json();
+      if (!res.ok || error)
+        return toast.error(error?.message || 'Request failed');
 
-      if (error) {
-        toast.error(error.message);
-        return;
-      } else {
-        toast.success(t('iap-course-deleted'));
-      }
-
+      toast.success(t('iap-course-deleted'));
       mutateIap();
-    } catch (error: any) {
-      toast.error(getAxiosError(error));
+    } catch {
+      toast.error('Something went wrong');
     }
-  }, [courseToDelete]);
+  }, [slug, courseToDelete, mutateIap, t]);
 
   return (
     <>

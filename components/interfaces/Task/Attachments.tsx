@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import { TaskExtended } from 'types';
 import AttachmentsCard from './AttachmentCard';
 import { checkExtensionAndMIMEType } from '@/components/services/taskService';
@@ -25,7 +24,6 @@ const Attachments = ({
   const { canAccess } = useCanAccess();
   const { slug, taskNumber } = router.query;
   const [isDragOver, setIsDragOver] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const { theme } = useTheme();
 
@@ -50,7 +48,7 @@ const Attachments = ({
     const file = files[0];
     const isAvailable = checkExtensionAndMIMEType(file);
     if (isAvailable) {
-      setSelectedFile(file);
+      uploadFile(file);
     } else {
       toast.error('Not supported type of file');
     }
@@ -64,7 +62,7 @@ const Attachments = ({
       reader.onloadend = () => {
         const isAvailable = checkExtensionAndMIMEType(file);
         if (isAvailable) {
-          setSelectedFile(file);
+          uploadFile(file);
         } else {
           toast.error('Not supported type of file');
         }
@@ -74,57 +72,50 @@ const Attachments = ({
   };
 
   const handleClick = () => {
-    console.log("handleClick")
     if (inputRef.current) {
       inputRef.current.click();
     }
   };
 
-  useEffect(() => {
-    const uploadFile = async () => {
-      if (selectedFile && typeof slug === 'string') {
-        try {
-          const formData = new FormData();
-          formData.append('file', selectedFile);
-          formData.append('slug', slug);
-          formData.append('taskId', String(task.id));
-          const response = await axios.post(
-            `/api/teams/${slug}/tasks/${taskNumber}/attachments`,
-            formData,
-            {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
-            }
-          );
+  const uploadFile = async (selectedFile) => {
+    if (selectedFile && typeof slug === 'string') {
+      try {
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+        formData.append('slug', slug);
+        formData.append('taskId', String(task.id));
 
-          const { error } = response.data;
-
-          if (error) {
-            toast.error(error.message);
-            return;
+        const res = await fetch(
+          `/api/teams/${slug}/tasks/${taskNumber}/attachments`,
+          {
+            method: 'POST',
+            body: formData, // No need to set Content-Type manually for FormData
           }
+        );
 
-          toast.success('Attachment uploaded');
-          mutateTask();
-        } catch (error: any) {
-          toast.error(error?.message);
-          console.error(error);
+        const { error } = await res.json();
+        if (!res.ok || error) {
+          toast.error(error?.message || 'Request failed');
+          return;
         }
-      }
-    };
 
-    uploadFile();
-  }, [selectedFile]);
+        toast.success('Attachment uploaded');
+        mutateTask();
+      } catch (error: any) {
+        toast.error(error?.message || 'Unexpected error');
+        console.error(error);
+      }
+    }
+  };
 
   const themeClasses =
-  theme === 'dark'
-    ? 'bg-muted text-muted-foreground border-gray-600 hover:border-gray-500'
-    : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400';
+    theme === 'dark'
+      ? 'bg-muted text-muted-foreground border-gray-600 hover:border-gray-500'
+      : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400';
 
-    const wrapperClasses = `flex flex-wrap h-full w-full px-4 py-2 transition border-2 border-dashed rounded-md appearance-none cursor-pointer focus:outline-hidden ${
-      task.attachments.length ? 'justify-start' : 'justify-center'
-    } ${isDragOver ? 'border-blue-400' : themeClasses}`;
+  const wrapperClasses = `flex flex-wrap h-full w-full px-4 py-2 transition border-2 border-dashed rounded-md appearance-none cursor-pointer focus:outline-hidden ${
+    task.attachments.length ? 'justify-start' : 'justify-center'
+  } ${isDragOver ? 'border-blue-400' : themeClasses}`;
 
   const renderDropzoneContent = () => (
     <div className="flex items-center justify-center">
@@ -144,9 +135,7 @@ const Attachments = ({
           />
         </svg>
         <span className="font-medium text-gray-600 dark:text-muted-foreground">
-          {isDragOver
-            ? 'Release to attach files'
-            : 'Drop files to attach, or '}
+          {isDragOver ? 'Release to attach files' : 'Drop files to attach, or '}
           <span className="text-blue-600 dark:text-blue-400 underline">
             browse
           </span>

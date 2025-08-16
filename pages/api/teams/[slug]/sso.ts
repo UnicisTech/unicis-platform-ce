@@ -1,10 +1,17 @@
+import type { NextApiRequest, NextApiResponse } from 'next';
+
 import env from '@/lib/env';
 import { ApiError } from '@/lib/errors';
-import jackson from '@/lib/jackson';
 import { sendAudit } from '@/lib/retraced';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { ssoManager } from '@/lib/jackson/sso/index';
+import {
+  extractClientId,
+  throwIfNoAccessToConnection,
+} from '@/lib/guards/team-sso';
+
+const sso = ssoManager();
 
 export default async function handler(
   req: NextApiRequest,
@@ -37,44 +44,50 @@ export default async function handler(
         });
     }
   } catch (err: any) {
+    console.error(err);
+
     const message = err.message || 'Something went wrong';
     const status = err.status || 500;
-    console.error(err);
+
     res.status(status).json({ error: { message } });
   }
 }
 
-// Get the SAML connection for the team.
+// Get the SSO connection for the team.
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
+
   throwIfNotAllowed(teamMember, 'team_sso', 'read');
 
-  const { apiController } = await jackson();
+  if ('clientID' in req.query) {
+    await throwIfNoAccessToConnection({
+      teamId: teamMember.teamId,
+      clientId: extractClientId(req),
+    });
+  }
 
-  const connections = await apiController.getConnections({
-    tenant: teamMember.teamId,
-    product: env.product,
-  });
+  const params =
+    'clientID' in req.query
+      ? { clientID: req.query.clientID as string }
+      : { tenant: teamMember.teamId, product: env.jackson.productId };
 
-  res.json({ data: connections });
+  const connections = await sso.getConnections(params);
+
+  res.json(connections);
 };
 
-// Create a SAML connection for the team.
+// Create a SSO connection for the team
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
+
   throwIfNotAllowed(teamMember, 'team_sso', 'create');
 
-  const { metadataUrl, encodedRawMetadata } = req.body;
-
-  const { apiController } = await jackson();
-
-  const connection = await apiController.createSAMLConnection({
-    encodedRawMetadata,
-    metadataUrl,
-    defaultRedirectUrl: env.saml.callback,
-    redirectUrl: env.saml.callback,
+  const connection = await sso.createConnection({
+    ...req.body,
+    defaultRedirectUrl: env.jackson.sso.callback + env.jackson.sso.idpLoginPath,
+    redirectUrl: env.jackson.sso.callback,
+    product: env.jackson.productId,
     tenant: teamMember.teamId,
-    product: env.product,
   });
 
   sendAudit({
@@ -84,33 +97,23 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     team: teamMember.team,
   });
 
-  res.status(201).json({ data: connection });
+  res.status(201).json(connection);
 };
 
 const handlePATCH = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
+
   throwIfNotAllowed(teamMember, 'team_sso', 'create');
 
-  const {
-    metadataUrl,
-    encodedRawMetadata,
-    clientID,
-    clientSecret,
-    deactivated,
-  } = req.body;
+  await throwIfNoAccessToConnection({
+    teamId: teamMember.teamId,
+    clientId: extractClientId(req),
+  });
 
-  const { apiController } = await jackson();
-
-  const connection = await apiController.updateSAMLConnection({
-    clientID,
-    clientSecret,
-    encodedRawMetadata,
-    metadataUrl,
-    deactivated,
-    defaultRedirectUrl: env.saml.callback,
-    redirectUrl: env.saml.callback,
+  await sso.updateConnection({
+    ...req.body,
     tenant: teamMember.teamId,
-    product: env.product,
+    product: env.jackson.productId,
   });
 
   sendAudit({
@@ -120,21 +123,20 @@ const handlePATCH = async (req: NextApiRequest, res: NextApiResponse) => {
     team: teamMember.team,
   });
 
-  res.status(200).json({ data: connection });
+  res.status(204).end();
 };
 
 const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
+
   throwIfNotAllowed(teamMember, 'team_sso', 'delete');
 
-  const { clientID, clientSecret } = req.query as {
-    clientID: string;
-    clientSecret: string;
-  };
+  await throwIfNoAccessToConnection({
+    teamId: teamMember.teamId,
+    clientId: extractClientId(req),
+  });
 
-  const { apiController } = await jackson();
-
-  await apiController.deleteConnections({ clientID, clientSecret });
+  await sso.deleteConnection({ ...(req.query as any) });
 
   sendAudit({
     action: 'sso.connection.delete',
@@ -143,5 +145,5 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
     team: teamMember.team,
   });
 
-  res.json({ data: {} });
+  res.status(204).end();
 };

@@ -94,7 +94,7 @@ const Dashboard = () => {
         <EmptyState title={t('rpa-dashboard')} description="No records" />
       ) : (
         <>
-        <PiaAnalysis tasks={tasks} />
+          <PiaAnalysis tasks={tasks} />
           <RisksTable
             slug={slug as string}
             tasks={tasksWithRisks}

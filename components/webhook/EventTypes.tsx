@@ -1,3 +1,4 @@
+import { eventTypes } from '@/lib/common';
 import { Checkbox } from '@/components/shadcn/ui/checkbox';
 import { Label } from '@/components/shadcn/ui/label';
 import type { WebookFormSchema } from 'types';
@@ -7,17 +8,6 @@ interface Props {
   error?: string | string[];
   setFieldValue: (field: string, value: any) => void;
 }
-
-export const eventTypes = [
-  'member.created',
-  'member.removed',
-  'invitation.created',
-  'invitation.removed',
-  'task.created',
-  'task.updated',
-  'task.commented',
-  'task.deleted',
-];
 
 const EventTypes = ({ values, error, setFieldValue }: Props) => {
   const handleChange = (eventType: string, checked: boolean) => {

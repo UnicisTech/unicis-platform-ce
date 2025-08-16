@@ -1,7 +1,7 @@
 import { Team } from '@prisma/client';
 import { sendEmail } from './sendEmail';
 import { SubscriptionRequest } from '@/components/emailTemplates';
-import { render } from '@react-email/components';
+import { render } from '@react-email/render';
 import env from '../env';
 
 export const sendSubscriptionRequest = async ({
@@ -23,8 +23,12 @@ export const sendSubscriptionRequest = async ({
   team: Team;
   subscription: string;
 }) => {
-  // const invitationLink = `${env.appUrl}/invitations/${invitation.token}`;
-  const html = render(
+  //TODO: throw error if env.billingEmail is not set
+  if (!env.billingEmail) {
+    return;
+  }
+
+  const html = await render(
     SubscriptionRequest({
       companyName,
       address,
@@ -36,10 +40,7 @@ export const sendSubscriptionRequest = async ({
       subscription,
     })
   );
-  if (!env.billingEmail) {
-    return;
-  }
-  console.log('sending Email', subscription);
+
   return await sendEmail({
     to: env.billingEmail,
     subject: 'Subscription Request',

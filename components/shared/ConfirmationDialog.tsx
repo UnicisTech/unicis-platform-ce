@@ -56,8 +56,8 @@ export default function ConfirmationDialog({
               {cancelText || t('cancel')}
             </Button>
           </DialogClose>
-          <Button 
-            variant="destructive"   
+          <Button
+            variant="destructive"
             onClick={(event) => {
               event.preventDefault();
               event.stopPropagation();

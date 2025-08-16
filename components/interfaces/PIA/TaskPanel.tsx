@@ -1,10 +1,16 @@
-import React, { useState } from 'react'
-import { headers, fieldPropsMapping } from '@/components/defaultLanding/data/configs/pia'
-import { Field } from '@/components/shared/atlaskit'
-import RiskMatrixBubbleChart from './RiskMatrixBubbleChart'
-import { riskSecurityPoints, riskProbabilityPoints } from '@/components/defaultLanding/data/configs/pia'
-import type { Task } from '@prisma/client'
-import { PiaRisk, TaskProperties } from 'types'
+import React, { useState } from 'react';
+import {
+  headers,
+  fieldPropsMapping,
+} from '@/components/defaultLanding/data/configs/pia';
+import { Field } from '@/components/shared/atlaskit';
+import RiskMatrixBubbleChart from './RiskMatrixBubbleChart';
+import {
+  riskSecurityPoints,
+  riskProbabilityPoints,
+} from '@/components/defaultLanding/data/configs/pia';
+import type { Task } from '@prisma/client';
+import { PiaRisk, TaskProperties } from 'types';
 
 const tabFieldKeys: Record<number, Array<any>> = {
   0: [
@@ -36,7 +42,7 @@ const tabFieldKeys: Record<number, Array<any>> = {
     'dealingWithResidualRiskAssessment',
     'supervisoryAuthorityInvolvement',
   ],
-}
+};
 
 const FieldTab: React.FC<{ idx: number; risk: PiaRisk }> = ({ idx, risk }) => (
   <>
@@ -48,7 +54,7 @@ const FieldTab: React.FC<{ idx: number; risk: PiaRisk }> = ({ idx, risk }) => (
       />
     ))}
   </>
-)
+);
 
 const BubbleChartTab: React.FC<{ risk: PiaRisk }> = ({ risk }) => (
   <div style={{ minHeight: '200px', width: '100%' }}>
@@ -93,12 +99,12 @@ const BubbleChartTab: React.FC<{ risk: PiaRisk }> = ({ risk }) => (
       ]}
     />
   </div>
-)
+);
 
 const TiaPanel: React.FC<{ task: Task }> = ({ task }) => {
-  const [activeTab, setActiveTab] = useState(0)
-  const properties = task.properties as TaskProperties
-  const risk = properties.pia_risk as PiaRisk
+  const [activeTab, setActiveTab] = useState(0);
+  const properties = task.properties as TaskProperties;
+  const risk = properties.pia_risk as PiaRisk;
 
   const tabs = [
     <FieldTab key="0" idx={0} risk={risk} />,
@@ -107,7 +113,7 @@ const TiaPanel: React.FC<{ task: Task }> = ({ task }) => {
     <FieldTab key="3" idx={3} risk={risk} />,
     <BubbleChartTab key="4" risk={risk} />,
     <FieldTab key="5" idx={4} risk={risk} />,
-  ]
+  ];
 
   return (
     <div className="p-5">
@@ -120,7 +126,7 @@ const TiaPanel: React.FC<{ task: Task }> = ({ task }) => {
           <div role="tablist" className="tabs tabs-bordered">
             {headers.map((header, i) => {
               // skip tab 5 if there's no risk[4]
-              if (i === 5 && !risk[4]) return null
+              if (i === 5 && !risk[4]) return null;
               return (
                 <button
                   key={i}
@@ -130,7 +136,7 @@ const TiaPanel: React.FC<{ task: Task }> = ({ task }) => {
                 >
                   {header}
                 </button>
-              )
+              );
             })}
           </div>
 
@@ -142,7 +148,7 @@ const TiaPanel: React.FC<{ task: Task }> = ({ task }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default TiaPanel
+export default TiaPanel;

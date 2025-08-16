@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import PieChart from '../CSC/PieChart';
 import RadarChart from '../CSC/RadarChart';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useISO from 'hooks/useISO';
 import useTeam from 'hooks/useTeam';
 import { Loading, Error } from '@/components/shared';
@@ -41,10 +41,6 @@ const ProcessingActivitiesAnalysis = ({
   const { isLoading, isError, team } = useTeam(slug as string);
   const { ISO } = useISO(team);
 
-  useEffect(() => {
-    console.log('CSC ISO', ISO);
-  }, [ISO]);
-
   if (isLoading || !team || !ISO) {
     return <Loading />;
   }
@@ -52,8 +48,6 @@ const ProcessingActivitiesAnalysis = ({
   if (isError) {
     return <Error />;
   }
-
-  console.log(statuses);
 
   return (
     <>

@@ -7,7 +7,7 @@ const env = {
 
   // SAML Jackson configuration
   saml: {
-    issuer: 'https://saml.platform.unicis.tech',
+    issuer: `${process.env.SAML_ISSUER}`,
     path: '/api/oauth/saml',
     callback: `${process.env.APP_URL}`,
   },
@@ -21,7 +21,7 @@ const env = {
     selfHosted: process.env.JACKSON_URL !== undefined,
     sso: {
       callback: `${process.env.APP_URL}`,
-      issuer: 'https://saml.platform.unicis.tech',
+      issuer: `${process.env.SAML_ISSUER}`,
       path: '/api/oauth/saml',
       oidcPath: '/api/oauth/oidc',
       idpLoginPath: '/auth/idp-login',

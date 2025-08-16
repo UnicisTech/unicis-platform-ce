@@ -1,11 +1,10 @@
 import React from 'react';
 import { AccessControl } from '@/components/shared/AccessControl';
 import type { Comment } from '@prisma/client';
-import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
 interface CommentViewProps {
   comment: Comment;
@@ -17,7 +16,6 @@ const CommentView = ({
   activateEditForComment,
   deleteComment,
 }: CommentViewProps) => {
-  console.log('CommentView text', comment.text);
   return (
     <>
       <div>

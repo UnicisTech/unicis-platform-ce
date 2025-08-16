@@ -33,8 +33,6 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
     slug: slug as string,
   });
 
-  console.log('hande get iso responce', responce);
-
   return res.status(200).json({ data: { iso: responce }, error: null });
 };
 
@@ -45,14 +43,11 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const { slug } = req.query;
   const { iso } = req.body;
 
-  console.log('hande put iso slug ', { slug, iso });
   //TODO: check if subscription allows to change to this ISO
   const responce = await setCscIso({
     slug: slug as string,
     iso,
   });
-
-  console.log('hande put isoresponce ', responce);
 
   return res.status(200).json({ data: { iso: responce }, error: null });
 };

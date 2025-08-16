@@ -10,10 +10,23 @@ import {
   Tooltip,
 } from 'chart.js';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, Legend, Title, Tooltip);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  Legend,
+  Title,
+  Tooltip
+);
 
 const impactLabels = ['Insignificant', 'Minor', 'Moderate', 'Major', 'Extreme'];
-const probabilityLabels = ['Rare', 'Unlikely', 'Possible', 'Probable', '(Almost) certain'];
+const probabilityLabels = [
+  'Rare',
+  'Unlikely',
+  'Possible',
+  'Probable',
+  '(Almost) certain',
+];
 const MATRIX_SIZE = 5;
 
 const riskColors = {
@@ -45,7 +58,9 @@ const RiskMatrixDashboardChart = ({
           stepSize: 0.5,
           callback: (value) => {
             const labelIndex = Math.round(value * 2) - 1;
-            return labelIndex % 2 === 0 ? impactLabels[Math.floor(labelIndex / 2)] : '';
+            return labelIndex % 2 === 0
+              ? impactLabels[Math.floor(labelIndex / 2)]
+              : '';
           },
         },
       },
@@ -57,7 +72,9 @@ const RiskMatrixDashboardChart = ({
           stepSize: 0.5,
           callback: (value) => {
             const labelIndex = Math.round(value * 2) - 1;
-            return labelIndex % 2 === 0 ? probabilityLabels[Math.floor(labelIndex / 2)] : '';
+            return labelIndex % 2 === 0
+              ? probabilityLabels[Math.floor(labelIndex / 2)]
+              : '';
           },
         },
         reverse: false,
@@ -71,18 +88,30 @@ const RiskMatrixDashboardChart = ({
     beforeDraw: (chart) => {
       const { ctx, scales } = chart;
       const cellColors = [
-        { x: 0, y: 0, color: riskColors.low }, { x: 0, y: 1, color: riskColors.low },
-        { x: 0, y: 2, color: riskColors.low }, { x: 0, y: 3, color: riskColors.medium },
-        { x: 0, y: 4, color: riskColors.medium }, { x: 1, y: 0, color: riskColors.low },
-        { x: 1, y: 1, color: riskColors.low }, { x: 1, y: 2, color: riskColors.medium },
-        { x: 1, y: 3, color: riskColors.medium }, { x: 1, y: 4, color: riskColors.high },
-        { x: 2, y: 0, color: riskColors.low }, { x: 2, y: 1, color: riskColors.medium },
-        { x: 2, y: 2, color: riskColors.medium }, { x: 2, y: 3, color: riskColors.high },
-        { x: 2, y: 4, color: riskColors.high }, { x: 3, y: 0, color: riskColors.medium },
-        { x: 3, y: 1, color: riskColors.medium }, { x: 3, y: 2, color: riskColors.high },
-        { x: 3, y: 3, color: riskColors.high }, { x: 3, y: 4, color: riskColors.extreme },
-        { x: 4, y: 0, color: riskColors.medium }, { x: 4, y: 1, color: riskColors.high },
-        { x: 4, y: 2, color: riskColors.high }, { x: 4, y: 3, color: riskColors.extreme },
+        { x: 0, y: 0, color: riskColors.low },
+        { x: 0, y: 1, color: riskColors.low },
+        { x: 0, y: 2, color: riskColors.low },
+        { x: 0, y: 3, color: riskColors.medium },
+        { x: 0, y: 4, color: riskColors.medium },
+        { x: 1, y: 0, color: riskColors.low },
+        { x: 1, y: 1, color: riskColors.low },
+        { x: 1, y: 2, color: riskColors.medium },
+        { x: 1, y: 3, color: riskColors.medium },
+        { x: 1, y: 4, color: riskColors.high },
+        { x: 2, y: 0, color: riskColors.low },
+        { x: 2, y: 1, color: riskColors.medium },
+        { x: 2, y: 2, color: riskColors.medium },
+        { x: 2, y: 3, color: riskColors.high },
+        { x: 2, y: 4, color: riskColors.high },
+        { x: 3, y: 0, color: riskColors.medium },
+        { x: 3, y: 1, color: riskColors.medium },
+        { x: 3, y: 2, color: riskColors.high },
+        { x: 3, y: 3, color: riskColors.high },
+        { x: 3, y: 4, color: riskColors.extreme },
+        { x: 4, y: 0, color: riskColors.medium },
+        { x: 4, y: 1, color: riskColors.high },
+        { x: 4, y: 2, color: riskColors.high },
+        { x: 4, y: 3, color: riskColors.extreme },
         { x: 4, y: 4, color: riskColors.extreme },
       ];
 
@@ -124,7 +153,12 @@ const RiskMatrixDashboardChart = ({
         margin: 'auto',
       }}
     >
-      <Bubble ref={chartRef} data={{ datasets }} options={options} plugins={[backgroundPlugin]} />
+      <Bubble
+        ref={chartRef}
+        data={{ datasets }}
+        options={options}
+        plugins={[backgroundPlugin]}
+      />
       {points.map((point, index) => (
         <div
           key={index}

@@ -1,8 +1,17 @@
+import { maxLengthPolicies } from '@/lib/common';
 import { ApiError } from '@/lib/errors';
 import { Action, Resource, permissions } from '@/lib/permissions';
 import { prisma } from '@/lib/prisma';
 import { Role, TeamMember } from '@prisma/client';
 import type { Session } from 'next-auth';
+
+export const normalizeUser = (user) => {
+  if (user?.name) {
+    user.name = user.name.substring(0, maxLengthPolicies.name);
+  }
+
+  return user;
+};
 
 export const createUser = async (param: {
   name: string;
@@ -26,8 +35,27 @@ export const createUser = async (param: {
   });
 };
 
+export const updateUser = async ({ where, data }) => {
+  data = normalizeUser(data);
+
+  return await prisma.user.update({
+    where,
+    data,
+  });
+};
+
+export const upsertUser = async ({ where, update, create }) => {
+  update = normalizeUser(update);
+  create = normalizeUser(create);
+
+  return await prisma.user.upsert({
+    where,
+    update,
+    create,
+  });
+};
+
 export const getUser = async (key: { id: string } | { email: string }) => {
-  console.log('getUser', key);
   return await prisma.user.findUnique({
     where: key,
   });

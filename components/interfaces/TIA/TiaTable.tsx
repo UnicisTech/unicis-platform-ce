@@ -6,9 +6,9 @@ import usePagination from 'hooks/usePagination';
 import useCanAccess from 'hooks/useCanAccess';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
+import { isTranferPermitted } from '@/lib/tia';
 import { Badge } from '@/components/shadcn/ui/badge';
 import { Button } from '@/components/shadcn/ui/button';
-import { isTranferPermitted } from '@/lib/tia';
 
 const getEndDate = (dateStr, yearsToAdd) => {
   const d = new Date(dateStr);
@@ -114,11 +114,9 @@ const TiaTable = ({
                   <span>
                     {/* TODO: reuse the component from Conclusion step*/}
                     {isTranferPermitted(task.properties.tia_procedure) ? (
-                      <DaisyBadge appearance="added">PERMITTED</DaisyBadge>
+                      <DaisyBadge color="success">PERMITTED</DaisyBadge>
                     ) : (
-                      <DaisyBadge appearance="removed">
-                        NOT PERMITTED
-                      </DaisyBadge>
+                      <DaisyBadge color="error">NOT PERMITTED</DaisyBadge>
                     )}
                   </span>
                 </td>

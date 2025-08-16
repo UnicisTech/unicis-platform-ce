@@ -1,8 +1,6 @@
-import React, { useCallback, useState, MouseEvent, useEffect } from 'react';
-import axios from 'axios';
+import React, { useCallback, useState, MouseEvent } from 'react';
 import toast from 'react-hot-toast';
 import type { Attachment } from 'types';
-import DeleteAttachment from './DeleteAttachment';
 import useCanAccess from 'hooks/useCanAccess';
 import useTheme from 'hooks/useTheme';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
@@ -28,28 +26,30 @@ const AttachmentsCard = ({
 
   const isDark = theme === 'dark';
 
-  const downloadHanlder = useCallback(
+  const downloadHandler = useCallback(
     async (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
       event.stopPropagation();
 
       try {
-        const response = await axios.get(
-          `/api/teams/${teamSlug}/tasks/${taskNumber}/attachments?id=${attachment.id}`,
-          {
-            responseType: 'blob',
-          }
+        const res = await fetch(
+          `/api/teams/${teamSlug}/tasks/${taskNumber}/attachments?id=${attachment.id}`
         );
 
-        const { error } = response.data;
-        if (error) {
-          toast.error(error.message);
+        if (!res.ok) {
+          toast.error('Failed to download file');
           return;
         }
 
-        const blob = new Blob([response.data], {
-          type: response.headers['content-type'],
-        });
+        // Optional: check for JSON error response before treating as a blob
+        const contentType = res.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+          const { error } = await res.json();
+          toast.error(error?.message || 'Request failed');
+          return;
+        }
+
+        const blob = await res.blob();
         const url = window.URL.createObjectURL(blob);
 
         const link = document.createElement('a');
@@ -63,29 +63,28 @@ const AttachmentsCard = ({
         console.error(error);
       }
     },
-    [attachment.id, taskNumber, teamSlug]
+    [attachment.id, attachment.filename, taskNumber, teamSlug]
   );
 
-  const deleteHandler = useCallback(
-    async () => {
-      // event.preventDefault();
-      // event.stopPropagation();
-
-      const response = await axios.delete(
-        `/api/teams/${teamSlug}/tasks/${taskNumber}/attachments?id=${attachment.id}`
+  const deleteHandler = useCallback(async () => {
+    try {
+      const res = await fetch(
+        `/api/teams/${teamSlug}/tasks/${taskNumber}/attachments?id=${attachment.id}`,
+        { method: 'DELETE' }
       );
-      const { error } = response.data;
 
-      if (error) {
-        toast.error(error.message);
+      const { error } = await res.json();
+      if (!res.ok || error) {
+        toast.error(error?.message || 'Request failed');
         return;
       }
 
       toast.success('Attachment deleted');
       mutateTask();
-    },
-    []
-  );
+    } catch {
+      toast.error('Unexpected error');
+    }
+  }, [teamSlug, taskNumber, attachment.id, mutateTask]);
 
   const openDeleteModal = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
@@ -106,11 +105,15 @@ const AttachmentsCard = ({
         className={`rounded-md shadow-md w-40 m-1 border ${borderColor} ${cardBg} ${textColor}`}
       >
         <div className="flex justify-between px-1 py-1">
-          <Button size={"sm"} className="mr-1" onClick={downloadHanlder}>
+          <Button size={'sm'} className="mr-1" onClick={downloadHandler}>
             Download
           </Button>
           {canAccess('task', ['update']) && (
-            <Button variant={"destructive"} size={"sm"} onClick={openDeleteModal}>
+            <Button
+              variant={'destructive'}
+              size={'sm'}
+              onClick={openDeleteModal}
+            >
               Delete
             </Button>
           )}
@@ -120,14 +123,6 @@ const AttachmentsCard = ({
         </div>
       </div>
 
-      {/* <DeleteAttachment
-        visible={isDeleteVisible}
-        setVisible={setIsDeleteVisible}
-        taskNumber={taskNumber}
-        teamSlug={teamSlug}
-        attachment={attachment}
-        mutateTask={mutateTask}
-      /> */}
       <ConfirmationDialog
         title={t('attachment-delete')}
         visible={isDeleteVisible}

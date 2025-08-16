@@ -23,8 +23,8 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
   const { t } = useTranslation('common');
   const [dragActive, setDragActive] = useState(false);
   const defaultImage =
-    user.image || `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}`
-  const [image, setImage] = useState<string | null>(defaultImage)
+    user.image || `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}`;
+  const [image, setImage] = useState<string | null>(defaultImage);
   const [loading, setLoading] = useState(false);
   const [hasChanged, setHasChanged] = useState(false);
 
@@ -45,7 +45,6 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
     };
     reader.readAsDataURL(file);
   };
-  
 
   const onDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -75,7 +74,6 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
       setHasChanged(false); // reset after saving
     }
   };
-  
 
   return (
     <form onSubmit={handleSubmit}>

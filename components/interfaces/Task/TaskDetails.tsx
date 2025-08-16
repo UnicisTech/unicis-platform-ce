@@ -2,7 +2,6 @@
 
 import React, { useCallback, useState } from 'react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
@@ -39,9 +38,8 @@ import useTask from 'hooks/useTask';
 import useCanAccess from 'hooks/useCanAccess';
 
 import type { Task, Team } from '@prisma/client';
-import type { ApiResponse } from 'types';
 
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -84,20 +82,23 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
   const onSubmit = async (data: FormData) => {
     if (!isFormChanged) return;
 
-    const response = await axios.put<ApiResponse<Task>>(
+    const res = await fetch(
       `/api/teams/${team.slug}/tasks/${task.taskNumber}`,
       {
-        data: {
-          ...data,
-          teamId: team.id,
-        },
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          data: {
+            ...data,
+            teamId: team.id,
+          },
+        }),
       }
     );
 
-    const { error } = response.data;
-
-    if (error) {
-      toast.error(error.message);
+    const { error } = await res.json();
+    if (!res.ok || error) {
+      toast.error(error?.message || 'Request failed');
       return;
     }
 

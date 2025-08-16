@@ -31,8 +31,6 @@ const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
     return payment.date > latest.date ? payment : latest;
   });
 
-  console.log('newestPayment.paymentUrl', newestPayment.paymentUrl);
-
   return (
     <Card>
       <Card.Body>

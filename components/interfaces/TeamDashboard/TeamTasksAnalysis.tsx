@@ -9,8 +9,8 @@ const barColors = [
   'rgb(232, 232, 232)', // todo
   'rgb(123, 146, 178)', // in progress
   'rgb(77, 110, 255)', // in review
-  'rgb(0, 181, 255)',  // feedback
-  'rgb(0, 169, 110)',  // done
+  'rgb(0, 181, 255)', // feedback
+  'rgb(0, 169, 110)', // done
 ];
 
 const TasksAnalysis = ({
