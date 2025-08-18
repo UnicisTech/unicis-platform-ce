@@ -153,7 +153,9 @@ const ConclusionTab: React.FC<{ permitted: boolean }> = ({ permitted }) => (
   </div>
 );
 
-const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({ procedure }) => {
+const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({
+  procedure,
+}) => {
   const [selectedTab, setSelectedTab] = useState(0);
 
   const { targetedRisk, nonTargetedRisk, selfReportingRisk } = useMemo(() => {
@@ -213,8 +215,12 @@ const TiaPanelContainer: React.FC<{ task: Task }> = ({ task }) => {
   if (!raw) {
     return (
       <div className="p-5">
-        <h2 className="text-1xl font-bold mb-4">View Transfer Impact Assessment</h2>
-        <p className="mt-2 text-xs">Procedure has not been created for this issue.</p>
+        <h2 className="text-1xl font-bold mb-4">
+          View Transfer Impact Assessment
+        </h2>
+        <p className="mt-2 text-xs">
+          Procedure has not been created for this issue.
+        </p>
       </div>
     );
   }

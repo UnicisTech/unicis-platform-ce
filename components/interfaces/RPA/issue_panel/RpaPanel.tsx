@@ -99,13 +99,16 @@ const RpaPanel: React.FC<{ task: Task }> = ({ task }) => {
 
   // Build tabs array
   const tabs = useMemo(
-    () => procedure ? [
-      <DescriptionAndStakeholdersTab key={0} step={procedure[0]} />,
-      <PurposeAndCategoriesTab key={1} step={procedure[1]} />,
-      <RecipientsTab key={2} step={procedure[2]} />,
-      <TiaTab key={3} step={procedure[3]} />,
-      <SecurityMeasuresTab key={4} step={procedure[4]} />,
-    ] : [],
+    () =>
+      procedure
+        ? [
+            <DescriptionAndStakeholdersTab key={0} step={procedure[0]} />,
+            <PurposeAndCategoriesTab key={1} step={procedure[1]} />,
+            <RecipientsTab key={2} step={procedure[2]} />,
+            <TiaTab key={3} step={procedure[3]} />,
+            <SecurityMeasuresTab key={4} step={procedure[4]} />,
+          ]
+        : [],
     [procedure]
   );
 

@@ -107,14 +107,16 @@ const PiaPanel: React.FC<{ task: Task }> = ({ task }) => {
   const risk = properties.pia_risk as PiaRisk;
 
   //TODO: reorginize components scructure and RpaPanel.tsx and TiaPanel.tsx component
-  const tabs = risk ? [
-    <FieldTab key="0" idx={0} risk={risk} />,
-    <FieldTab key="1" idx={1} risk={risk} />,
-    <FieldTab key="2" idx={2} risk={risk} />,
-    <FieldTab key="3" idx={3} risk={risk} />,
-    <BubbleChartTab key="4" risk={risk} />,
-    <FieldTab key="5" idx={4} risk={risk} />,
-  ] : [];
+  const tabs = risk
+    ? [
+        <FieldTab key="0" idx={0} risk={risk} />,
+        <FieldTab key="1" idx={1} risk={risk} />,
+        <FieldTab key="2" idx={2} risk={risk} />,
+        <FieldTab key="3" idx={3} risk={risk} />,
+        <BubbleChartTab key="4" risk={risk} />,
+        <FieldTab key="5" idx={4} risk={risk} />,
+      ]
+    : [];
 
   const hasRisk = tabs.length > 0;
 
