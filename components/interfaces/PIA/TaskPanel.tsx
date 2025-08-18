@@ -101,19 +101,22 @@ const BubbleChartTab: React.FC<{ risk: PiaRisk }> = ({ risk }) => (
   </div>
 );
 
-const TiaPanel: React.FC<{ task: Task }> = ({ task }) => {
+const PiaPanel: React.FC<{ task: Task }> = ({ task }) => {
   const [activeTab, setActiveTab] = useState(0);
   const properties = task.properties as TaskProperties;
   const risk = properties.pia_risk as PiaRisk;
 
-  const tabs = [
+  //TODO: reorginize components scructure and RpaPanel.tsx and TiaPanel.tsx component
+  const tabs = risk ? [
     <FieldTab key="0" idx={0} risk={risk} />,
     <FieldTab key="1" idx={1} risk={risk} />,
     <FieldTab key="2" idx={2} risk={risk} />,
     <FieldTab key="3" idx={3} risk={risk} />,
     <BubbleChartTab key="4" risk={risk} />,
     <FieldTab key="5" idx={4} risk={risk} />,
-  ];
+  ] : [];
+
+  const hasRisk = tabs.length > 0;
 
   return (
     <div className="p-5">
@@ -121,7 +124,7 @@ const TiaPanel: React.FC<{ task: Task }> = ({ task }) => {
         View Privacy Impact Assessment
       </h2>
 
-      {risk ? (
+      {hasRisk ? (
         <div className="w-full">
           <div role="tablist" className="tabs tabs-bordered">
             {headers.map((header, i) => {
@@ -151,4 +154,4 @@ const TiaPanel: React.FC<{ task: Task }> = ({ task }) => {
   );
 };
 
-export default TiaPanel;
+export default PiaPanel;

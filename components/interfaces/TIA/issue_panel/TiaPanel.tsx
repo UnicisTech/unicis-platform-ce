@@ -153,9 +153,7 @@ const ConclusionTab: React.FC<{ permitted: boolean }> = ({ permitted }) => (
   </div>
 );
 
-const TiaPanel: React.FC<{ task: Task }> = ({ task }) => {
-  const properties = task.properties as any;
-  const procedure = properties.tia_procedure as TiaProcedureInterface;
+const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({ procedure }) => {
   const [selectedTab, setSelectedTab] = useState(0);
 
   const { targetedRisk, nonTargetedRisk, selfReportingRisk } = useMemo(() => {
@@ -208,4 +206,20 @@ const TiaPanel: React.FC<{ task: Task }> = ({ task }) => {
   );
 };
 
-export default TiaPanel;
+const TiaPanelContainer: React.FC<{ task: Task }> = ({ task }) => {
+  const properties = (task.properties as any) ?? {};
+  const raw = properties.tia_procedure as unknown;
+
+  if (!raw) {
+    return (
+      <div className="p-5">
+        <h2 className="text-1xl font-bold mb-4">View Transfer Impact Assessment</h2>
+        <p className="mt-2 text-xs">Procedure has not been created for this issue.</p>
+      </div>
+    );
+  }
+
+  return <TiaPanel procedure={raw as TiaProcedureInterface} />;
+};
+
+export default TiaPanelContainer;

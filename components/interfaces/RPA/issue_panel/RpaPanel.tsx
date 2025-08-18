@@ -99,20 +99,22 @@ const RpaPanel: React.FC<{ task: Task }> = ({ task }) => {
 
   // Build tabs array
   const tabs = useMemo(
-    () => [
+    () => procedure ? [
       <DescriptionAndStakeholdersTab key={0} step={procedure[0]} />,
       <PurposeAndCategoriesTab key={1} step={procedure[1]} />,
       <RecipientsTab key={2} step={procedure[2]} />,
       <TiaTab key={3} step={procedure[3]} />,
       <SecurityMeasuresTab key={4} step={procedure[4]} />,
-    ],
+    ] : [],
     [procedure]
   );
+
+  const hasProcedure = tabs.length > 0;
 
   return (
     <div className="p-5">
       <h2 className="text-base font-bold mb-4">View Register of Procedures</h2>
-      {procedure ? (
+      {hasProcedure ? (
         <>
           <div role="tablist" className="tabs tabs-bordered">
             {headers.slice(0, -1).map((header, index) => (
