@@ -1,12 +1,14 @@
 import { generateToken, validateEmail } from '@/lib/common';
 import { sendPasswordResetEmail } from '@/lib/email/sendPasswordResetEmail';
 import { ApiError } from '@/lib/errors';
-import { prisma } from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
 import { validateRecaptcha } from '@/lib/recaptcha';
 import rateLimit from '@/lib/rate-limit';
 import { getIpAddress } from '@/lib/utils';
+import { forgotPasswordSchema, validateWithSchema } from '@/lib/zod';
+import { getUser } from 'models/user';
+import { createPasswordReset } from 'models/passwordReset';
 
 const limiter = rateLimit({
   interval: 60 * 1000, // 60 seconds
@@ -41,7 +43,10 @@ export default async function handler(
 }
 
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { email, recaptchaToken } = req.body;
+  const { email, recaptchaToken } = validateWithSchema(
+    forgotPasswordSchema,
+    req.body
+  );
 
   await validateRecaptcha(recaptchaToken);
 
@@ -49,9 +54,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     throw new ApiError(422, 'The e-mail address you entered is invalid');
   }
 
-  const user = await prisma.user.findUnique({
-    where: { email },
-  });
+  const user = await getUser({ email });
 
   if (!user) {
     throw new ApiError(422, `We can't find a user with that e-mail address`);
@@ -59,7 +62,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const resetToken = generateToken();
 
-  await prisma.passwordReset.create({
+  await createPasswordReset({
     data: {
       email,
       token: resetToken,
@@ -67,7 +70,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-  await sendPasswordResetEmail(email, encodeURIComponent(resetToken));
+  await sendPasswordResetEmail(user, encodeURIComponent(resetToken));
 
   recordMetric('user.password.request');
 

@@ -1,13 +1,11 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import { getAxiosError } from '@/lib/common';
-import type { ApiResponse, TeamProperties, TeamWithSubscription } from 'types';
+import type { TeamProperties, TeamWithSubscription } from 'types';
 import { Subscription } from '@prisma/client';
-import useSubscription from 'hooks/useSubscription';
+import useSubscription, { subscriptionParams } from 'hooks/useSubscription';
 import { isoOptions } from '../defaultLanding/data/configs/csc';
 
 import {
@@ -46,14 +44,21 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
     enableReinitialize: true,
     onSubmit: async (values) => {
       try {
-        //TODO: handle uncorrect ISO selection
-        await axios.put<ApiResponse<TeamProperties>>(
-          `/api/teams/${team.slug}/csc/iso`,
-          values
-        );
+        // TODO: handle incorrect ISO selection
+        const res = await fetch(`/api/teams/${team.slug}/csc/iso`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(values),
+        });
+
+        if (!res.ok) {
+          const { error } = await res.json().catch(() => ({}));
+          throw new Error(error?.message || 'Request failed');
+        }
+
         toast.success(t('successfully-updated'));
-      } catch (err) {
-        toast.error(getAxiosError(err));
+      } catch (err: any) {
+        toast.error(err?.message || 'Unexpected error');
       }
     },
   });
@@ -86,7 +91,19 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
                     return (
                       <SelectItem key={value} value={value} disabled={disabled}>
                         {label}
-                        {disabled && ` - ${t('csc-premium-and-ultimate only')}`}
+                        {disabled && (
+                          <>
+                            {' - '}
+                            {subscriptionParams.ULTIMATE.avaliableISO.includes(
+                              value
+                            ) &&
+                            !subscriptionParams.PREMIUM.avaliableISO.includes(
+                              value
+                            )
+                              ? t('csc-ultimate only')
+                              : t('csc-premium-and-ultimate only')}
+                          </>
+                        )}
                       </SelectItem>
                     );
                   })}

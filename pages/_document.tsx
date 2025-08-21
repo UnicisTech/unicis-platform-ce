@@ -32,7 +32,6 @@ class MyDocument extends Document {
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  console.log('getServerSideProps _document');
   const session = await getSession(context.req, context.res);
   const user = await getUserBySession(session);
 

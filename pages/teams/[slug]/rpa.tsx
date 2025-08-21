@@ -72,7 +72,7 @@ const RpaDashboard: NextPageWithLayout<
     return <Error />;
   }
 
-  if (!canAccess('rpa', ['read'])) {
+  if (!isLoading && !canAccess('rpa', ['read'])) {
     return <Error message={t('forbidden-resource')} />;
   }
 

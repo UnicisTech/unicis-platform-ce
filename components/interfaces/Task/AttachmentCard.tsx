@@ -1,10 +1,11 @@
-import React, { useCallback, useState } from 'react';
-import axios from 'axios';
+import React, { useCallback, useState, MouseEvent } from 'react';
 import toast from 'react-hot-toast';
 import type { Attachment } from 'types';
-import { MouseEvent } from 'react';
-import DeleteAttachment from './DeleteAttachment';
 import useCanAccess from 'hooks/useCanAccess';
+import useTheme from 'hooks/useTheme';
+import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
+import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/shadcn/ui/button';
 
 const AttachmentsCard = ({
   attachment,
@@ -17,32 +18,38 @@ const AttachmentsCard = ({
   teamSlug: string;
   mutateTask: () => Promise<void>;
 }) => {
+  const { t } = useTranslation('common');
   const [isDeleteVisible, setIsDeleteVisible] = useState(false);
   const { canAccess } = useCanAccess();
 
-  const downloadHanlder = useCallback(
-    async (event: MouseEvent<HTMLButtonElement>) => {
-      try {
-        event.preventDefault();
-        event.stopPropagation();
+  const { theme } = useTheme();
 
-        const response = await axios.get(
-          `/api/teams/${teamSlug}/tasks/${taskNumber}/attachments?id=${attachment.id}`,
-          {
-            responseType: 'blob',
-          }
+  const isDark = theme === 'dark';
+
+  const downloadHandler = useCallback(
+    async (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      try {
+        const res = await fetch(
+          `/api/teams/${teamSlug}/tasks/${taskNumber}/attachments?id=${attachment.id}`
         );
 
-        const { error } = response.data;
-
-        if (error) {
-          toast.error(error.message);
+        if (!res.ok) {
+          toast.error('Failed to download file');
           return;
         }
 
-        const blob = new Blob([response.data], {
-          type: response.headers['content-type'],
-        });
+        // Optional: check for JSON error response before treating as a blob
+        const contentType = res.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+          const { error } = await res.json();
+          toast.error(error?.message || 'Request failed');
+          return;
+        }
+
+        const blob = await res.blob();
         const url = window.URL.createObjectURL(blob);
 
         const link = document.createElement('a');
@@ -52,14 +59,35 @@ const AttachmentsCard = ({
 
         window.URL.revokeObjectURL(url);
       } catch (error) {
-        // Handle error here
+        toast.error('Failed to download file');
+        console.error(error);
       }
     },
-    []
+    [attachment.id, attachment.filename, taskNumber, teamSlug]
   );
 
+  const deleteHandler = useCallback(async () => {
+    try {
+      const res = await fetch(
+        `/api/teams/${teamSlug}/tasks/${taskNumber}/attachments?id=${attachment.id}`,
+        { method: 'DELETE' }
+      );
+
+      const { error } = await res.json();
+      if (!res.ok || error) {
+        toast.error(error?.message || 'Request failed');
+        return;
+      }
+
+      toast.success('Attachment deleted');
+      mutateTask();
+    } catch {
+      toast.error('Unexpected error');
+    }
+  }, [teamSlug, taskNumber, attachment.id, mutateTask]);
+
   const openDeleteModal = useCallback(
-    async (event: MouseEvent<HTMLButtonElement>) => {
+    (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
       event.stopPropagation();
       setIsDeleteVisible(true);
@@ -67,37 +95,43 @@ const AttachmentsCard = ({
     []
   );
 
+  const cardBg = isDark ? 'bg-gray-700' : 'bg-white';
+  const borderColor = isDark ? 'border-gray-500' : 'border-gray-200';
+  const textColor = isDark ? 'text-white' : 'text-black';
+
   return (
     <>
-      <div className="card card-compact w-36 bg-base-100 shadow-xl p-0.5 m-1 dark:bg-gray-500 dark:text-white">
-        <div className="flex">
-          <button
-            className="btn btn-info btn-xs m-0.5"
-            onClick={downloadHanlder}
-          >
+      <div
+        className={`rounded-md shadow-md w-40 m-1 border ${borderColor} ${cardBg} ${textColor}`}
+      >
+        <div className="flex justify-between px-1 py-1">
+          <Button size={'sm'} className="mr-1" onClick={downloadHandler}>
             Download
-          </button>
+          </Button>
           {canAccess('task', ['update']) && (
-            <button
-              className="btn btn-error btn-xs m-0.5"
+            <Button
+              variant={'destructive'}
+              size={'sm'}
               onClick={openDeleteModal}
             >
               Delete
-            </button>
+            </Button>
           )}
         </div>
-        <div className="card-body">
+        <div className="px-2 py-1 border-t border-gray-300 dark:border-gray-600">
           <p className="text-sm truncate">{attachment.filename}</p>
         </div>
       </div>
-      <DeleteAttachment
+
+      <ConfirmationDialog
+        title={t('attachment-delete')}
         visible={isDeleteVisible}
-        setVisible={setIsDeleteVisible}
-        taskNumber={taskNumber}
-        teamSlug={teamSlug}
-        attachment={attachment}
-        mutateTask={mutateTask}
-      />
+        onConfirm={() => deleteHandler()}
+        onCancel={() => setIsDeleteVisible(false)}
+        cancelText={t('cancel')}
+      >
+        {t('delete-attachment-confirm')}
+      </ConfirmationDialog>
     </>
   );
 };

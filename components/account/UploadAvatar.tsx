@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { ArrowUpCircleIcon } from '@heroicons/react/24/outline';
@@ -17,21 +17,19 @@ import {
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 
+const MAX = 1_000_000; // 1 MB
+
 const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
   const { t } = useTranslation('common');
   const [dragActive, setDragActive] = useState(false);
-  const [image, setImage] = useState<string | null>(null);
+  const defaultImage =
+    user.image || `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}`;
+  const [image, setImage] = useState<string | null>(defaultImage);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setImage(
-      user.image ||
-        `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}`
-    );
-  }, [user]);
+  const [hasChanged, setHasChanged] = useState(false);
 
   const uploadFile = (file: File) => {
-    if (file.size / 1024 / 1024 > 2) {
+    if (file.size > MAX) {
       toast.error(t('file-too-big'));
       return;
     }
@@ -40,7 +38,11 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
       return;
     }
     const reader = new FileReader();
-    reader.onload = (e) => setImage(e.target?.result as string);
+    reader.onload = (e) => {
+      const newImage = e.target?.result as string;
+      setImage(newImage);
+      setHasChanged(true);
+    };
     reader.readAsDataURL(file);
   };
 
@@ -67,7 +69,10 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
     const json = (await res.json()) as ApiResponse<UserReturned>;
     setLoading(false);
     if (!res.ok) toast.error(json.error.message);
-    else toast.success(t('successfully-updated'));
+    else {
+      toast.success(t('successfully-updated'));
+      setHasChanged(false); // reset after saving
+    }
   };
 
   return (
@@ -123,7 +128,7 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
           </div>
         </CardContent>
         <CardFooter className="flex justify-end">
-          <Button type="submit" disabled={!image || image === user.image}>
+          <Button type="submit" disabled={!hasChanged}>
             {loading && <Loader2 className="animate-spin" />}
             {t('save-changes')}
           </Button>

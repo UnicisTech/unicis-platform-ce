@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
@@ -19,7 +18,7 @@ import { Button } from '@/components/shadcn/ui/button';
 import TaskPicker from '@/components/shared/shadcn/TaskPicker';
 import { Loader2 } from 'lucide-react';
 
-import type { ApiResponse, RMProcedureInterface } from 'types';
+import type { RMProcedureInterface } from 'types';
 import type { Task } from '@prisma/client';
 import { useRiskAndImpactStepForm, useRiskTreatmentStepForm } from './hooks';
 import { RiskAndImpactStep, RiskTreatmentStep } from './steps';
@@ -88,31 +87,28 @@ export default function RmRiskDialog({
   const handleSubmit = async (risk: any, prevRisk?: any) => {
     try {
       setIsSaving(true);
-      if (!task) {
-        return;
-      }
+      if (!task) return;
 
-      const response = await axios.post<ApiResponse<Task>>(
+      const res = await fetch(
         `/api/teams/${slug}/tasks/${task.taskNumber}/rm`,
         {
-          prevRisk: prevRisk || [],
-          nextRisk: risk,
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prevRisk: prevRisk || [], nextRisk: risk }),
         }
       );
 
-      const { error } = response.data;
-
-      if (error) {
-        toast.error(error.message);
+      const { error } = await res.json();
+      if (!res.ok || error) {
+        toast.error(error?.message || 'Request failed');
         return;
-      } else {
-        toast.success(t('rm-created'));
       }
 
+      toast.success(t('rm-created'));
       completeCallback?.();
       mutateTasks();
       onOpenChange(false);
-    } catch (error: any) {
+    } catch {
       toast.error('Unexpected error');
     } finally {
       setIsSaving(false);
@@ -129,31 +125,33 @@ export default function RmRiskDialog({
           )}
         </DialogHeader>
 
-        {currentStep === 0 && tasks && (
-          <Form {...taskForm}>
-            <form className="space-y-4">
-              <TaskPicker
-                control={taskForm.control}
-                name="task"
-                tasks={tasks.filter(
-                  (task) => !(task.properties as any)?.rm_risk
-                )}
-              />
-            </form>
-          </Form>
-        )}
+        <div className="max-w-md">
+          {currentStep === 0 && tasks && (
+            <Form {...taskForm}>
+              <form className="space-y-4">
+                <TaskPicker
+                  control={taskForm.control}
+                  name="task"
+                  tasks={tasks.filter(
+                    (task) => !(task.properties as any)?.rm_risk
+                  )}
+                />
+              </form>
+            </Form>
+          )}
 
-        {currentStep === 1 && (
-          <Form {...riskAndImpactForm}>
-            <RiskAndImpactStep control={riskAndImpactForm.control} />
-          </Form>
-        )}
+          {currentStep === 1 && (
+            <Form {...riskAndImpactForm}>
+              <RiskAndImpactStep control={riskAndImpactForm.control} />
+            </Form>
+          )}
 
-        {currentStep === 2 && (
-          <Form {...riskTreatmentForm}>
-            <RiskTreatmentStep control={riskTreatmentForm.control} />
-          </Form>
-        )}
+          {currentStep === 2 && (
+            <Form {...riskTreatmentForm}>
+              <RiskTreatmentStep control={riskTreatmentForm.control} />
+            </Form>
+          )}
+        </div>
 
         <DialogFooter className="flex justify-end space-x-2">
           <DialogClose asChild>

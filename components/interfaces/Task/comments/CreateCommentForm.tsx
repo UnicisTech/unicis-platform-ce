@@ -10,9 +10,8 @@ import {
   FormMessage,
 } from '@/components/shadcn/ui/form';
 import { Button } from '@/components/shadcn/ui/button';
-import 'react-quill/dist/quill.snow.css';
 
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
 interface FormData {
   text: string;

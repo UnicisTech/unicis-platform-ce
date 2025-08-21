@@ -73,6 +73,11 @@ const TeamDashboard = ({
           <TeamAssessmentAnalysis slug={slug} />
         </div>
         <div className="space-y-6">
+          <div className="mb-4 mx-4 flex items-center justify-between">
+            <h2 className="text-2xl font-semibold tracking-tight">
+              {t(`pia-overview`)}
+            </h2>
+          </div>
           <PiaAnalysis tasks={tasks} />
         </div>
         <TeamCscAnalysis

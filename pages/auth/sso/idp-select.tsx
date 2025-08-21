@@ -25,7 +25,7 @@ export default function IdPSelection({ connections }: IdPSelectionProps) {
             return (
               <button
                 type="button"
-                className="w-full btn-outline btn justify-start"
+                className="w-full btn btn-outline justify-start"
                 onClick={() => {
                   connectionSelected(connection.clientID);
                 }}
@@ -46,10 +46,7 @@ export default function IdPSelection({ connections }: IdPSelectionProps) {
 
 IdPSelection.getLayout = function getLayout(page: ReactElement) {
   return (
-    <AuthLayout
-      heading="SSO Login"
-      description="Select an Identity Provider to continue with SSO"
-    >
+    <AuthLayout heading="sso-login" description="desc-sso-login">
       {page}
     </AuthLayout>
   );
@@ -63,7 +60,7 @@ export const getServerSideProps = async ({
   const paramsToRelay = { ...query } as { [key: string]: string };
 
   const { authFlow, tenant, product, idp_hint } = query as {
-    authFlow: 'oauth';
+    authFlow: 'sp-initiated';
     tenant?: string;
     product?: string;
     idp_hint?: string;
@@ -84,7 +81,7 @@ export const getServerSideProps = async ({
     const params = new URLSearchParams(paramsToRelay).toString();
 
     const destinations = {
-      oauth: `/api/oauth/authorize?${params}`,
+      'sp-initiated': `/api/oauth/authorize?${params}`,
     };
 
     return {
@@ -113,7 +110,7 @@ export const getServerSideProps = async ({
       connection.name ||
       (idpMetadata
         ? idpMetadata.friendlyProviderName || idpMetadata.provider
-        : `${oidcProvider?.provider}`);
+        : oidcProvider?.friendlyProviderName || oidcProvider?.provider);
 
     return {
       clientID: connection.clientID,

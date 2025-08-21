@@ -13,7 +13,6 @@ const ResultPage = ({
   userName: string;
 }) => {
   const { right, wrong } = countCourseAnswers(answers, course.questions);
-  console.log('answers', answers);
   return (
     <div className="flex justify-center">
       <div className="flex flex-col w-1/2">

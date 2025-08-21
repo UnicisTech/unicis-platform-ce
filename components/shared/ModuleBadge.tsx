@@ -5,6 +5,7 @@ const colorMap: Record<string, ThemeAppearance> = {
   tia_procedure: 'primary',
   pia_risk: 'warning',
   rm_risk: 'success',
+  csc_controls: 'default',
 };
 
 const labelMap: Record<string, string> = {
@@ -12,6 +13,7 @@ const labelMap: Record<string, string> = {
   tia_procedure: 'TIA',
   pia_risk: 'PIA',
   rm_risk: 'RM',
+  csc_controls: 'CSC',
 };
 
 const ModuleBadge = ({ propName }: { propName: string }) => {

@@ -55,6 +55,7 @@ import {
   validateQuestion,
 } from '../services/createCourseService';
 import { Loader2 } from 'lucide-react';
+import { Separator } from '@/components/shadcn/ui/separator';
 
 interface CreateCourseProps {
   teams: Team[];
@@ -287,6 +288,18 @@ export default function CreateCourse2({
       setIsSaving(false);
     }
   };
+
+  useEffect(() => {
+    if (questionType === QuestionType.SINGLE_CHOICE) {
+      // find & reset all the “isCorrect” flags
+      const values = questionForm.getValues();
+      Object.keys(values)
+        .filter((k) => k.startsWith('isCorrect'))
+        .forEach((checkbox) => {
+          questionForm.resetField(checkbox, { defaultValue: false });
+        });
+    }
+  }, [questionType, questionForm]);
 
   return (
     <Dialog open={visible} onOpenChange={closeHandler}>
@@ -551,7 +564,6 @@ export default function CreateCourse2({
 
         {stage === 1 && (
           <Form {...questionForm}>
-            {/* Question Type */}
             <FormField
               control={questionForm.control}
               name="questionType"
@@ -560,12 +572,7 @@ export default function CreateCourse2({
                 <FormItem>
                   <FormLabel>{t('question-type')}</FormLabel>
                   <FormControl>
-                    <Select
-                      onValueChange={(val: any) => {
-                        field.onChange(val);
-                      }}
-                      value={field.value}
-                    >
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder={t('question-type')} />
                       </SelectTrigger>
@@ -608,7 +615,7 @@ export default function CreateCourse2({
               )}
             />
 
-            <hr className="border-t border-neutral-200" />
+            <Separator />
 
             <div className="w-4/5 mx-auto space-y-4">
               {/* SINGLE_CHOICE or MULTIPLE_CHOICE */}
@@ -636,7 +643,7 @@ export default function CreateCourse2({
                         control={questionForm.control}
                         name={`isCorrect${idx}`}
                         render={({ field }) => (
-                          <FormItem className="flex items-end space-x-2">
+                          <FormItem className="flex items-center gap-2 leading-tight">
                             <FormControl>
                               <Checkbox
                                 checked={field.value}
@@ -644,7 +651,6 @@ export default function CreateCourse2({
                                   if (
                                     questionType === QuestionType.SINGLE_CHOICE
                                   ) {
-                                    // Uncheck all first
                                     range(answersAmount).forEach((j) => {
                                       questionForm.setValue(
                                         `isCorrect${j}`,

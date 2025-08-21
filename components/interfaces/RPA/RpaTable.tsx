@@ -5,10 +5,10 @@ import type { TaskWithRpaProcedure } from 'types';
 import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import useCanAccess from 'hooks/useCanAccess';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Badge } from '@/components/shadcn/ui/badge';
 import { StatusBadge } from '@/components/shared';
+import { Button } from '@/components/shadcn/ui/button';
 
 const RpaTable = ({
   slug,
@@ -107,21 +107,21 @@ const RpaTable = ({
                 </td>
                 {canAccess('task', ['update']) && (
                   <td className="px-1.5 py-1.5">
-                    <div className="btn-group flex gap-2">
-                      <DaisyButton
-                        size="sm"
+                    <div className="flex gap-2">
+                      <Button
                         variant="outline"
+                        size="sm"
                         onClick={() => editHandler(task)}
                       >
                         {t('edit-task')}
-                      </DaisyButton>
-                      <DaisyButton
+                      </Button>
+                      <Button
+                        variant="destructive"
                         size="sm"
-                        variant="outline"
                         onClick={() => deleteHandler(task)}
                       >
                         {t('delete')}
-                      </DaisyButton>
+                      </Button>
                     </div>
                   </td>
                 )}

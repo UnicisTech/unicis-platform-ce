@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import {
@@ -45,7 +44,7 @@ import {
   FormMessage,
 } from '@/components/shadcn/ui/form';
 
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
 const statuses = statusesData;
 const DEFAULT_STATUS_VALUE = 'todo';
@@ -82,14 +81,18 @@ const CreateTask = ({
   });
 
   const onSubmit = async (values: any) => {
-    const response = await axios.post(`/api/teams/${team.slug}/tasks`, {
-      ...values,
-      duedate: values.duedate.toISOString().split('T')[0],
+    const res = await fetch(`/api/teams/${team.slug}/tasks`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ...values,
+        duedate: values.duedate.toISOString().split('T')[0],
+      }),
     });
 
-    const { error } = response.data;
-    if (error) {
-      toast.error(error.message);
+    const { error } = await res.json();
+    if (!res.ok || error) {
+      toast.error(error?.message || 'Request failed');
       return;
     }
 

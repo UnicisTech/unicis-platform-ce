@@ -4,6 +4,8 @@ import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+//TODO: insolate updateTeamSchema logic
+//import { updateTeamSchema } from '@/lib/zod';
 import { defaultHeaders, domainRegex } from '@/lib/common';
 import type { Team } from '@prisma/client';
 import type { ApiResponse } from 'types';

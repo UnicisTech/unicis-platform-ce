@@ -96,3 +96,11 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     } as UserReturned,
   });
 };
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '2mb',
+    },
+  },
+};

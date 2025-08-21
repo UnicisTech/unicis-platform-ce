@@ -1,6 +1,5 @@
 import * as React from 'react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
@@ -17,7 +16,6 @@ import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 import { Task } from '@prisma/client';
 import {
-  ApiResponse,
   defaultProcedure,
   ProcedureQueueItem,
   RpaProcedureInterface,
@@ -151,32 +149,31 @@ export default function RpaProcedureDialog({
   const handleSubmit = async (procedure: any, prevProcedure?: any) => {
     try {
       setIsSaving(true);
+      if (!task) return;
 
-      if (!task) {
-        return;
-      }
-
-      const response = await axios.post<ApiResponse<Task>>(
+      const res = await fetch(
         `/api/teams/${slug}/tasks/${task.taskNumber}/rpa`,
         {
-          prevProcedure: prevProcedure || [],
-          nextProcedure: procedure,
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prevProcedure: prevProcedure || [],
+            nextProcedure: procedure,
+          }),
         }
       );
 
-      const { error } = response.data;
-
-      if (error) {
-        toast.error(error.message);
+      const { error } = await res.json();
+      if (!res.ok || error) {
+        toast.error(error?.message || 'Request failed');
         return;
-      } else {
-        toast.success(t('rpa-created'));
       }
 
+      toast.success(t('rpa-created'));
       completeCallback?.(createProceduresQueue(procedure), task);
       mutateTasks();
       onOpenChange(false);
-    } catch (error: any) {
+    } catch {
       toast.error('Unexpected error');
     } finally {
       setIsSaving(false);
@@ -192,70 +189,70 @@ export default function RpaProcedureDialog({
             <StageTracker headers={headers} currentStage={currentStep - 1} />
           )}
         </DialogHeader>
+        <div className="max-w-md">
+          {currentStep === 0 && tasks && (
+            <Form {...taskForm}>
+              <form className="space-y-4">
+                <TaskPicker
+                  control={taskForm.control}
+                  name="task"
+                  tasks={tasks.filter(
+                    (task) => !(task.properties as any)?.tia_procedure
+                  )}
+                />
+              </form>
+            </Form>
+          )}
 
-        {currentStep === 0 && tasks && (
-          <Form {...taskForm}>
-            <form className="space-y-4">
-              <TaskPicker
-                control={taskForm.control}
-                name="task"
-                tasks={tasks.filter(
-                  (task) => !(task.properties as any)?.tia_procedure
-                )}
-              />
-            </form>
-          </Form>
-        )}
-
-        {currentStep !== 0 && (
-          <Message
-            text={`The record of processing activities allows you to make an inventory of the data processing and to have
+          {currentStep !== 0 && (
+            <Message
+              text={`The record of processing activities allows you to make an inventory of the data processing and to have
                                     an overview of what you are
                                     doing with the concerned personal data. The recording obligation is stated by article 30 of the GDPR.
                                     It is an application to help you to be compliant with the Regulation.`}
-          />
-        )}
-
-        {currentStep === 1 && (
-          <Form {...descriptionAndStakeholdersForm}>
-            <DescriptionAndStakeholdersStep
-              control={descriptionAndStakeholdersForm.control}
             />
-          </Form>
-        )}
+          )}
 
-        {currentStep === 2 && (
-          <Form {...purposeAndCategoriesForm}>
-            <PurposeAndCategoriesStep
-              control={purposeAndCategoriesForm.control}
-            />
-          </Form>
-        )}
+          {currentStep === 1 && (
+            <Form {...descriptionAndStakeholdersForm}>
+              <DescriptionAndStakeholdersStep
+                control={descriptionAndStakeholdersForm.control}
+              />
+            </Form>
+          )}
 
-        {currentStep === 3 && (
-          <Form {...recipeintsForm}>
-            <RecipientsStep control={recipeintsForm.control} />
-          </Form>
-        )}
+          {currentStep === 2 && (
+            <Form {...purposeAndCategoriesForm}>
+              <PurposeAndCategoriesStep
+                control={purposeAndCategoriesForm.control}
+              />
+            </Form>
+          )}
 
-        {currentStep === 4 && (
-          <Form {...tiaForm}>
-            <TiaStep control={tiaForm.control} />
-          </Form>
-        )}
+          {currentStep === 3 && (
+            <Form {...recipeintsForm}>
+              <RecipientsStep control={recipeintsForm.control} />
+            </Form>
+          )}
 
-        {currentStep === 5 && (
-          <Form {...securityMeasuresForm}>
-            <SecurityMeasuresStep control={securityMeasuresForm.control} />
-          </Form>
-        )}
+          {currentStep === 4 && (
+            <Form {...tiaForm}>
+              <TiaStep control={tiaForm.control} />
+            </Form>
+          )}
 
-        {currentStep === 6 && (
-          <Form {...piaForm}>
-            <PiaStep control={piaForm.control} />
-          </Form>
-        )}
+          {currentStep === 5 && (
+            <Form {...securityMeasuresForm}>
+              <SecurityMeasuresStep control={securityMeasuresForm.control} />
+            </Form>
+          )}
 
+          {currentStep === 6 && (
+            <Form {...piaForm}>
+              <PiaStep control={piaForm.control} />
+            </Form>
+          )}
+        </div>
         <DialogFooter className="flex justify-end space-x-2">
           <DialogClose asChild>
             <Button variant="outline">{t('close')}</Button>

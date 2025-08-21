@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import PieChart from '../CSC/PieChart';
 import RadarChart from '../CSC/RadarChart';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useISO from 'hooks/useISO';
 import useTeam from 'hooks/useTeam';
 import { Loading, Error } from '@/components/shared';
@@ -41,10 +41,6 @@ const ProcessingActivitiesAnalysis = ({
   const { isLoading, isError, team } = useTeam(slug as string);
   const { ISO } = useISO(team);
 
-  useEffect(() => {
-    console.log('CSC ISO', ISO);
-  }, [ISO]);
-
   if (isLoading || !team || !ISO) {
     return <Loading />;
   }
@@ -53,11 +49,9 @@ const ProcessingActivitiesAnalysis = ({
     return <Error />;
   }
 
-  console.log(statuses);
-
   return (
     <>
-      <div className="mx-auto mt-4 w-full max-w-7xl rounded-md p-2">
+      <div className="mx-auto mt-4 w-full max-w-7xl rounded-md">
         <div className="mb-4 mx-4 flex items-center justify-between">
           <h2 className="text-2xl font-semibold tracking-tight">
             {t(`Cybersecurity Controls Overview`)}

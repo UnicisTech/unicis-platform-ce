@@ -1,30 +1,23 @@
 import fetcher from '@/lib/fetcher';
 import type { Permission } from '@/lib/permissions';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import type { ApiResponse } from 'types';
 
 const usePermissions = () => {
-  const router = useRouter();
-  const [teamSlug, setTeamSlug] = useState<string | null>(null);
+  const { query, isReady } = useRouter();
+  const slug = Array.isArray(query.slug) ? query.slug[0] : query.slug;
 
-  const { slug } = router.query as { slug: string };
-
-  useEffect(() => {
-    if (slug) {
-      setTeamSlug(slug);
-    }
-  }, [slug]);
+  const shouldFetch = isReady && typeof slug === 'string';
 
   const { data, error, isLoading } = useSWR<ApiResponse<Permission[]>>(
-    teamSlug ? `/api/teams/${teamSlug}/permissions` : null,
+    shouldFetch ? `/api/teams/${slug}/permissions` : null,
     fetcher
   );
 
   return {
     isLoading,
-    isError: error,
+    isError: !!error,
     permissions: data?.data,
   };
 };

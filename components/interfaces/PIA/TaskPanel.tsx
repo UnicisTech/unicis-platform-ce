@@ -12,183 +12,125 @@ import {
 import type { Task } from '@prisma/client';
 import { PiaRisk, TaskProperties } from 'types';
 
-const TiaPanel = ({ task }: { task: Task }) => {
+const tabFieldKeys: Record<number, Array<any>> = {
+  0: [
+    'isDataProcessingNecessary',
+    'isDataProcessingNecessaryAssessment',
+    'isProportionalToPurpose',
+    'isProportionalToPurposeAssessment',
+  ],
+  1: [
+    'confidentialityRiskProbability',
+    'confidentialityRiskSecurity',
+    'confidentialityAssessment',
+  ],
+  2: [
+    'availabilityRiskProbability',
+    'availabilityRiskSecurity',
+    'availabilityAssessment',
+  ],
+  3: [
+    'transparencyRiskProbability',
+    'transparencyRiskSecurity',
+    'transparencyAssessment',
+  ],
+  4: [
+    'guarantees',
+    'securityMeasures',
+    'securityCompliance',
+    'dealingWithResidualRisk',
+    'dealingWithResidualRiskAssessment',
+    'supervisoryAuthorityInvolvement',
+  ],
+};
+
+const FieldTab: React.FC<{ idx: number; risk: PiaRisk }> = ({ idx, risk }) => (
+  <>
+    {tabFieldKeys[idx].map((key) => (
+      <Field
+        key={key as string}
+        label={fieldPropsMapping[key]}
+        value={(risk[idx] as any)[key]}
+      />
+    ))}
+  </>
+);
+
+const BubbleChartTab: React.FC<{ risk: PiaRisk }> = ({ risk }) => (
+  <div style={{ minHeight: '200px', width: '100%' }}>
+    <RiskMatrixBubbleChart
+      datasets={[
+        {
+          label: 'Confidentiality and Integrity Risk',
+          borderWidth: 1,
+          data: [
+            {
+              x: riskSecurityPoints[risk[1].confidentialityRiskSecurity],
+              y: riskProbabilityPoints[risk[1].confidentialityRiskProbability],
+              r: 20,
+            },
+          ],
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        },
+        {
+          label: 'Availability',
+          borderWidth: 1,
+          data: [
+            {
+              x: riskSecurityPoints[risk[2].availabilityRiskSecurity],
+              y: riskProbabilityPoints[risk[2].availabilityRiskProbability],
+              r: 20,
+            },
+          ],
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        },
+        {
+          label: 'Transparency and data minimization',
+          borderWidth: 1,
+          data: [
+            {
+              x: riskSecurityPoints[risk[3].transparencyRiskSecurity],
+              y: riskProbabilityPoints[risk[3].transparencyRiskProbability],
+              r: 20,
+            },
+          ],
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        },
+      ]}
+    />
+  </div>
+);
+
+const PiaPanel: React.FC<{ task: Task }> = ({ task }) => {
   const [activeTab, setActiveTab] = useState(0);
-  const properties = task?.properties as TaskProperties;
-  const risk = properties?.pia_risk as PiaRisk | undefined;
+  const properties = task.properties as TaskProperties;
+  const risk = properties.pia_risk as PiaRisk;
 
-  const renderTabContent = () => {
-    if (!risk) return null;
+  //TODO: reorginize components scructure and RpaPanel.tsx and TiaPanel.tsx component
+  const tabs = risk
+    ? [
+        <FieldTab key="0" idx={0} risk={risk} />,
+        <FieldTab key="1" idx={1} risk={risk} />,
+        <FieldTab key="2" idx={2} risk={risk} />,
+        <FieldTab key="3" idx={3} risk={risk} />,
+        <BubbleChartTab key="4" risk={risk} />,
+        <FieldTab key="5" idx={4} risk={risk} />,
+      ]
+    : [];
 
-    switch (activeTab) {
-      case 0:
-        return (
-          <>
-            <Field
-              label={fieldPropsMapping['isDataProcessingNecessary']}
-              value={risk[0]?.isDataProcessingNecessary}
-            />
-            <Field
-              label={fieldPropsMapping['isDataProcessingNecessaryAssessment']}
-              value={risk[0]?.isDataProcessingNecessaryAssessment}
-            />
-            <Field
-              label={fieldPropsMapping['isProportionalToPurpose']}
-              value={risk[0]?.isProportionalToPurpose}
-            />
-            <Field
-              label={fieldPropsMapping['isProportionalToPurposeAssessment']}
-              value={risk[0]?.isProportionalToPurposeAssessment}
-            />
-          </>
-        );
-      case 1:
-        return (
-          <>
-            <Field
-              label={fieldPropsMapping['confidentialityRiskProbability']}
-              value={risk[1]?.confidentialityRiskProbability}
-            />
-            <Field
-              label={fieldPropsMapping['confidentialityRiskSecurity']}
-              value={risk[1]?.confidentialityRiskSecurity}
-            />
-            <Field
-              label={fieldPropsMapping['confidentialityAssessment']}
-              value={risk[1]?.confidentialityAssessment}
-            />
-          </>
-        );
-      case 2:
-        return (
-          <>
-            <Field
-              label={fieldPropsMapping['availabilityRiskProbability']}
-              value={risk[2]?.availabilityRiskProbability}
-            />
-            <Field
-              label={fieldPropsMapping['availabilityRiskSecurity']}
-              value={risk[2]?.availabilityRiskSecurity}
-            />
-            <Field
-              label={fieldPropsMapping['availabilityAssessment']}
-              value={risk[2]?.availabilityAssessment}
-            />
-          </>
-        );
-      case 3:
-        return (
-          <>
-            <Field
-              label={fieldPropsMapping['transparencyRiskProbability']}
-              value={risk[3]?.transparencyRiskProbability}
-            />
-            <Field
-              label={fieldPropsMapping['transparencyRiskSecurity']}
-              value={risk[3]?.transparencyRiskSecurity}
-            />
-            <Field
-              label={fieldPropsMapping['transparencyAssessment']}
-              value={risk[3]?.transparencyAssessment}
-            />
-          </>
-        );
-      case 4:
-        return (
-          <div style={{ minHeight: '200px', width: '100%' }}>
-            <RiskMatrixBubbleChart
-              datasets={[
-                {
-                  label: 'Confidentiality and Integrity Risk',
-                  borderWidth: 1,
-                  data: [
-                    {
-                      x: riskSecurityPoints[
-                        risk[1].confidentialityRiskSecurity
-                      ],
-                      y: riskProbabilityPoints[
-                        risk[1].confidentialityRiskProbability
-                      ],
-                      r: 20,
-                    },
-                  ],
-                  backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                },
-                {
-                  label: 'Availability',
-                  borderWidth: 1,
-                  data: [
-                    {
-                      x: riskSecurityPoints[risk[2].availabilityRiskSecurity],
-                      y: riskProbabilityPoints[
-                        risk[2].availabilityRiskProbability
-                      ],
-                      r: 20,
-                    },
-                  ],
-                  backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                },
-                {
-                  label: 'Transparency and data minimization',
-                  borderWidth: 1,
-                  data: [
-                    {
-                      x: riskSecurityPoints[risk[3].transparencyRiskSecurity],
-                      y: riskProbabilityPoints[
-                        risk[3].transparencyRiskProbability
-                      ],
-                      r: 20,
-                    },
-                  ],
-                  backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                },
-              ]}
-            />
-          </div>
-        );
-      case 5:
-        return (
-          <>
-            <Field
-              label={fieldPropsMapping['guarantees']}
-              value={risk[4]?.guarantees}
-            />
-            <Field
-              label={fieldPropsMapping['securityMeasures']}
-              value={risk[4]?.securityMeasures}
-            />
-            <Field
-              label={fieldPropsMapping['securityCompliance']}
-              value={risk[4]?.securityCompliance}
-            />
-            <Field
-              label={fieldPropsMapping['dealingWithResidualRisk']}
-              value={risk[4]?.dealingWithResidualRisk}
-            />
-            <Field
-              label={fieldPropsMapping['dealingWithResidualRiskAssessment']}
-              value={risk[4]?.dealingWithResidualRiskAssessment}
-            />
-            <Field
-              label={fieldPropsMapping['supervisoryAuthorityInvolvement']}
-              value={risk[4]?.supervisoryAuthorityInvolvement}
-            />
-          </>
-        );
-      default:
-        return null;
-    }
-  };
+  const hasRisk = tabs.length > 0;
 
   return (
     <div className="p-5">
       <h2 className="text-1xl font-bold mb-4">
         View Privacy Impact Assessment
       </h2>
-      {risk ? (
+
+      {hasRisk ? (
         <div className="w-full">
           <div role="tablist" className="tabs tabs-bordered">
             {headers.map((header, i) => {
+              // skip tab 5 if there's no risk[4]
               if (i === 5 && !risk[4]) return null;
               return (
                 <button
@@ -202,7 +144,8 @@ const TiaPanel = ({ task }: { task: Task }) => {
               );
             })}
           </div>
-          <div className="mt-4 space-y-3">{renderTabContent()}</div>
+
+          <div className="mt-4 space-y-3">{tabs[activeTab]}</div>
         </div>
       ) : (
         <div className="my-4">
@@ -213,4 +156,4 @@ const TiaPanel = ({ task }: { task: Task }) => {
   );
 };
 
-export default TiaPanel;
+export default PiaPanel;

@@ -32,7 +32,6 @@ const WelcomeEmail = ({ name, subject, team }: WelcomeEmailProps) => {
           <Button
             href={`${env.appUrl}/auth/login`}
             style={{ padding: '16px 20px' }}
-            className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center"
           >
             Login to your account
           </Button>

@@ -37,13 +37,12 @@ const probabilityLabels = [
 ];
 
 const RiskMatrixBubbleChart = ({ datasets }: any) => {
-  // Adjust points by adding 0.5 to both x and y
   const adjustedDatasets = datasets.map((dataset: any) => ({
     ...dataset,
     data: dataset.data.map((point: any) => ({
       ...point,
-      x: point.x + 0.5, // Add 0.5 to x-axis
-      y: point.y + 0.5, // Add 0.5 to y-axis
+      x: point.x + 0.5,
+      y: point.y + 0.5,
     })),
   }));
 
@@ -65,7 +64,7 @@ const RiskMatrixBubbleChart = ({ datasets }: any) => {
           stepSize: 0.5,
           display: true,
           callback: (value) => {
-            const labelIndex = Math.round(value * 2) - 1; // Adjust for 0.5 step
+            const labelIndex = Math.round(value * 2) - 1;
             if (labelIndex % 2 === 0) {
               return impactLabels[Math.floor(labelIndex / 2)];
             } else {

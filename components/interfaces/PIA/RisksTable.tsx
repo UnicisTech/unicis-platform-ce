@@ -10,8 +10,8 @@ import {
   riskProbabilityPoints,
   riskSecurityPoints,
 } from '@/components/defaultLanding/data/configs/pia';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
+import { Button } from '@/components/shadcn/ui/button';
 
 const calculatePercentage = (input: number): number => {
   return (input / 16) * 100;
@@ -78,7 +78,7 @@ const RisksTable = ({
   } = usePagination<TaskWithPiaRisk>(tasks, perPage);
 
   return (
-    <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
+    <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal! mt-2">
       <div className="overflow-x-auto">
         <table className="w-full min-w-full divide-y divide-border text-sm">
           <thead className="bg-muted">
@@ -166,9 +166,9 @@ const RisksTable = ({
                     {riskValueToLabel(transparencyValue)}
                   </td>
                   {canAccess('task', ['update']) && (
-                    <td className="px-1.5 py-1.5">
-                      <div className="btn-group">
-                        <DaisyButton
+                    <td className="px-4 py-2 text-right">
+                      <div className="inline-flex gap-2 justify-end">
+                        <Button
                           size="sm"
                           variant="outline"
                           onClick={() => {
@@ -176,17 +176,16 @@ const RisksTable = ({
                           }}
                         >
                           {t('edit-task')}
-                        </DaisyButton>
-
-                        <DaisyButton
+                        </Button>
+                        <Button
                           size="sm"
-                          variant="outline"
+                          variant="destructive"
                           onClick={() => {
                             deleteHandler(task);
                           }}
                         >
                           {t('delete')}
-                        </DaisyButton>
+                        </Button>
                       </div>
                     </td>
                   )}

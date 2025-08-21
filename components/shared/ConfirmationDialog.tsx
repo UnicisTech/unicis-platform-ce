@@ -56,7 +56,14 @@ export default function ConfirmationDialog({
               {cancelText || t('cancel')}
             </Button>
           </DialogClose>
-          <Button variant="destructive" onClick={handleConfirm}>
+          <Button
+            variant="destructive"
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              handleConfirm();
+            }}
+          >
             {isLoading && <Loader2 className="animate-spin" />}
             {confirmText || t('delete')}
           </Button>

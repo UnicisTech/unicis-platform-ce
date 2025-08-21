@@ -1,18 +1,22 @@
-import DaisyBadge, { ThemeAppearance } from './daisyUI/DaisyBadge';
+import { Badge } from '@/components/shadcn/ui/badge';
 
-const colors: Record<string, ThemeAppearance> = {
-  todo: 'default',
-  inprogress: 'primary',
-  inreview: 'info',
-  feedback: 'info',
-  done: 'success',
-  failed: 'error',
+const statusColorMap: Record<string, string> = {
+  todo: 'bg-task-todo text-black',
+  inprogress: 'bg-task-inprogress text-white',
+  inreview: 'bg-task-inreview text-white',
+  feedback: 'bg-task-feedback text-white',
+  done: 'bg-task-done text-white',
 };
 
 const StatusBadge = ({ label, value }: { label: string; value: string }) => {
-  const color = colors[value] || 'default';
+  const normalized = value.toLowerCase();
+  const className = statusColorMap[normalized] || 'bg-muted text-white';
 
-  return <DaisyBadge color={color}>{label}</DaisyBadge>;
+  return (
+    <Badge variant="outline" className={className}>
+      {label}
+    </Badge>
+  );
 };
 
 export default StatusBadge;

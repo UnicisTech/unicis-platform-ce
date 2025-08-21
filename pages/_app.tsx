@@ -10,6 +10,7 @@ import { init } from '@socialgouv/matomo-next';
 
 import '@boxyhq/react-ui/dist/style.css';
 import '../styles/globals.css';
+import 'quill/dist/quill.snow.css';
 import { useEffect } from 'react';
 import env from '@/lib/env';
 import { Theme, applyTheme } from '@/lib/theme';

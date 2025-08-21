@@ -17,9 +17,9 @@ export default function ConclusionStep({ procedure }: ConclusionStepProps) {
           is:
         </span>
         {isTranferPermitted(procedure) ? (
-          <DaisyBadge appearance="added">PERMITTED</DaisyBadge>
+          <DaisyBadge color="success">PERMITTED</DaisyBadge>
         ) : (
-          <DaisyBadge appearance="removed">NOT PERMITTED</DaisyBadge>
+          <DaisyBadge color="error">NOT PERMITTED</DaisyBadge>
         )}
       </p>
     </>
