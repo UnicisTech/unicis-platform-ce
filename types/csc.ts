@@ -48,7 +48,8 @@ export type ISO =
   | 'nistcsfv2'
   | 'eunis2'
   | 'gdpr'
-  | 'cisv81';
+  | 'cisv81'
+  | 'soc2v2';
 
 type CscStatusesPropMap = {
   default: 'csc_statuses';
@@ -58,6 +59,7 @@ type CscStatusesPropMap = {
   eunis2: 'csc_statuses_eunis2';
   gdpr: 'csc_statuses_gdpr';
   cisv81: 'csc_statuses_cisv81';
+  soc2v2: 'csc_statuses_soc2v2';
 };
 
 export type CscStatusesProp = CscStatusesPropMap[ISO];
@@ -70,6 +72,7 @@ type CscControlsPropMap = {
   eunis2: 'csc_controls_eunis2';
   gdpr: 'csc_controls_gdpr';
   cisv81: 'csc_controls_cisv81';
+  soc2v2: 'csc_controls_soc2v2';
 };
 
 export type CscControlsProp = CscControlsPropMap[ISO];

@@ -5,6 +5,7 @@ import nistcsfv2 from '../CSF2_1.json';
 import eunis2 from '../eu-nis2.json';
 import gdpr from '../gdpr_controls.json';
 import cisv81 from '../cis_v81_1.json';
+import soc2v2 from '../soc2-v2.json';
 import { Section } from 'types';
 
 const controls = {
@@ -19,6 +20,11 @@ const controls = {
   eunis2: eunis2,
   gdpr: gdpr,
   cisv81: cisv81,
+  soc2v2: soc2v2.map((item) => ({
+    ...item,
+    Control: `${item.Code}: ${item.Control}`,
+    ControlLabel: item.Control,
+  })),
 };
 
 const sections = [
@@ -48,6 +54,8 @@ const isoOptions = [
   { label: 'EU NIS2', value: 'eunis2' },
   { label: 'GDPR', value: 'gdpr' },
   { label: 'CIS CSC v8.1', value: 'cisv81' },
+  { label: 'SOC2 v2', value: 'soc2v2' },
+  { label: 'C5 2020', value: 'c5_2020' },
 ];
 
 const perPageOptions: { label: string; value: number }[] = [
@@ -83,6 +91,7 @@ const getSectionsLabels = (iso: string) => {
     case 'eunist2':
     case 'gdpr':
     case 'cisv81':
+    case 'soc2v2':
     case 'nistcsfv2':
       return getSections(iso).map(({ label }) => label);
     // case 'nistcsfv2':

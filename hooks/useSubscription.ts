@@ -19,6 +19,7 @@ const params = {
       'eunis2',
       'gdpr',
       'cisv81',
+      'soc2v2',
     ],
   },
 };

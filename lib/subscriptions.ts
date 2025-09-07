@@ -35,6 +35,7 @@ export const subscriptions: SubscriptionPermissions = {
       'eunis2',
       'gdpr',
       'cisv81',
+      'soc2v2',
     ],
   },
 };
