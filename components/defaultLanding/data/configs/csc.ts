@@ -6,6 +6,7 @@ import eunis2 from '../eu-nis2.json';
 import gdpr from '../gdpr_controls.json';
 import cisv81 from '../cis_v81_1.json';
 import soc2v2 from '../soc2-v2.json';
+import c5_2020 from '../c5_2020.json';
 import { Section } from 'types';
 
 const controls = {
@@ -25,6 +26,7 @@ const controls = {
     Control: `${item.Code}: ${item.Control}`,
     ControlLabel: item.Control,
   })),
+  c5_2020: c5_2020,
 };
 
 const sections = [
@@ -92,6 +94,7 @@ const getSectionsLabels = (iso: string) => {
     case 'gdpr':
     case 'cisv81':
     case 'soc2v2':
+    case 'c5_2020':
     case 'nistcsfv2':
       return getSections(iso).map(({ label }) => label);
     // case 'nistcsfv2':

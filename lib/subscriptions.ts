@@ -22,7 +22,7 @@ export const subscriptions: SubscriptionPermissions = {
   PREMIUM: {
     maxUsers: 150,
     maxAdmins: 5,
-    avaliableISO: ['default', '2013', '2022', 'eunis2', 'gdpr', 'cisv81'],
+    avaliableISO: ['default', '2013', '2022', 'eunis2', 'gdpr', 'cisv81', 'c5_2020'],
   },
   ULTIMATE: {
     maxUsers: 1000000,
@@ -36,6 +36,7 @@ export const subscriptions: SubscriptionPermissions = {
       'gdpr',
       'cisv81',
       'soc2v2',
+      'c5_2020',
     ],
   },
 };
