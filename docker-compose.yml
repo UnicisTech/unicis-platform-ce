@@ -1,11 +1,11 @@
-version: '3'
+
 services:
   db:
-    image: postgres
+    image: postgres:latest
     restart: always
     environment:
       POSTGRES_PASSWORD: 7emp1eAppe4rance5Rang3I5BNOffice
       POSTGRES_USER: unicis_platform
       POSTGRES_DB: unicis_platform
     ports:
-      - 5432:5432
+      - 5433:5432

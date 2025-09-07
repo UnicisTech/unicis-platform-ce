@@ -1,0 +1,68 @@
+import { Assets } from '@/components/interfaces/AssetManagement/AssetDashboard';
+import env from '@/lib/env';
+import { getUserBySession } from '@/models/user';
+import { GetServerSidePropsContext } from 'next';
+import { getSession } from '@/lib/session';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { getTeam } from '@/models/team';
+import { isTeamHasSubscription } from '@/models/subscription';
+
+
+const TeamAssetDashboard = ({
+  slug,
+  user,
+  team,
+  teamFeatures,
+  teamSubscription
+}) => {
+  const { t } = useTranslation('common');
+
+  return (
+    <>
+      <div className="flex flex-col pb-6">
+        <h2 className="text-xl font-semibold mb-2">
+          {t('asset-management-dashboard')} ({team?.name})
+        </h2>
+      </div>
+      <div className="space-y-6">
+        <Assets user={user} team={team} teamSubscription={teamSubscription} />
+      </div>
+    </>
+  );
+};
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context.req, context.res);
+  const { locale, query }: GetServerSidePropsContext = context;
+  const slug = query.slug as string;
+  const user = await getUserBySession(session);
+  const team = await getTeam({ slug });
+  const teamSubscription = await isTeamHasSubscription(team.id);
+  
+  if (!user) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+      teamFeatures: env.teamFeatures,
+      team: JSON.parse(JSON.stringify(team)),
+      teamSubscription: JSON.parse(JSON.stringify(teamSubscription)),
+      slug: slug,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        image: user.image,
+      },
+    },
+  };
+}
+
+export default TeamAssetDashboard;

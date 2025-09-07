@@ -1,6 +1,14 @@
+import { $Enums } from "@prisma/client";
+
 const env = {
   databaseUrl: `${process.env.DATABASE_URL}`,
   appUrl: `${process.env.APP_URL}`,
+
+  fleetAPI: `${process.env.NEXT_PUBLIC_FLEET_API_HOST}`,
+  fleetAPIUrl: `${process.env.NEXT_PUBLIC_FLEET_API_URL}`,
+  agentVersion: `${process.env.OSQUERY_AGENT_VERSION || '5.16.0'}`,
+  assetRequiredPlan: `${process.env.ASSET_REQUIRED_PLAN}` as $Enums.Plan || $Enums.Plan.ULTIMATE,
+
   product: 'unicis-platform',
   // redirectAfterSignIn: '/teams',
   redirectIfAuthenticated: '/teams',
@@ -108,6 +116,12 @@ const env = {
     webhook: process.env.FEATURE_TEAM_WEBHOOK === 'false' ? false : true,
     apiKey: process.env.FEATURE_TEAM_API_KEY === 'false' ? false : true,
     auditLog: process.env.FEATURE_TEAM_AUDIT_LOG === 'false' ? false : true,
+    fleetApiKey: process.env.FEATURE_TEAM_FLEET_API_KEY === 'false' ? false : true,
+    fleetConnect: process.env.FEATURE_TEAM_FLEET_CONNECT === 'false' ? false : true,
+    fleetQuery: process.env.FEATURE_TEAM_FLEET_QUERY === 'false' ? false : true,
+    fleetPack: process.env.FEATURE_TEAM_FLEET_PACK === 'false' ? false : true,
+    fleetTag: process.env.FEATURE_TEAM_FLEET_TAG === 'false' ? false : true,
+    fleetNode: process.env.FEATURE_TEAM_FLEET_NODE === 'false' ? false : true,
   },
 
   recaptcha: {

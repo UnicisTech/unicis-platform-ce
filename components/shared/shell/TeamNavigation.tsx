@@ -4,151 +4,166 @@ import {
   ChatBubbleBottomCenterTextIcon,
   QuestionMarkCircleIcon,
   LifebuoyIcon,
-} from '@heroicons/react/24/outline';
-import { QueueListIcon, ChartBarIcon } from '@heroicons/react/24/solid';
-import { useTranslation } from 'next-i18next';
-import useCanAccess from 'hooks/useCanAccess';
-import NavigationItems from './NavigationItems';
-import { NavigationProps, MenuItem } from './NavigationItems';
-import Icon from '../Icon';
+} from "@heroicons/react/24/outline";
+import { QueueListIcon, ChartBarIcon } from "@heroicons/react/24/solid";
+import { useTranslation } from "next-i18next";
+import useCanAccess from "hooks/useCanAccess";
+import NavigationItems from "./NavigationItems";
+import type { NavigationProps, MenuItem } from "./NavigationItems";
+import Icon from "../Icon";
 
 interface NavigationItemsProps extends NavigationProps {
   slug: string;
+  activePathname?: string | null;
 }
 
 const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
   const { canAccess } = useCanAccess();
-  const relativePath = activePathname?.slice(`/teams/${slug}`.length) || '';
+
+  const relativePath = activePathname?.slice(`/teams/${slug}`.length) || "";
+
   const menus: (MenuItem | null)[] = [
     {
-      name: t('Dashboard'),
+      name: t("Dashboard"),
       href: `/teams/${slug}/dashboard`,
       icon: ChartBarIcon,
-      className: 'fill-blue-600 stroke-blue-600',
+      className: "h-5 w-5 fill-blue-600 stroke-blue-600",
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        relativePath.includes('dashboard'),
+        relativePath.includes("dashboard"),
     },
     {
-      name: t('all-tasks'),
+      name: t("all-tasks"),
       href: `/teams/${slug}/tasks`,
       icon: QueueListIcon,
-      className: 'fill-blue-600 stroke-blue-600',
+      className: "h-5 w-5 fill-blue-600 stroke-blue-600",
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        relativePath.includes('tasks'),
+        relativePath.includes("tasks"),
     },
-    canAccess('rpa', ['read'])
+    canAccess("asset_dashboard", ["create", "update", "read", "delete"])
       ? {
-          name: t('rpa-activities'),
+          name: t("Asset Management"),
+          href: `/teams/${slug}/asset`,
+          icon: () => <Icon src="/asset-dashboard.png" />,
+          className: "h-5 w-5",
+          active: activePathname === `/teams/${slug}/asset`,
+        }
+      : null,
+    canAccess("rpa", ["read"])
+      ? {
+          name: t("rpa-activities"),
           href: `/teams/${slug}/rpa`,
           icon: () => <Icon src="/unicis-rpa-logo.png" />,
+          className: "h-5 w-5",
           active:
             activePathname?.startsWith(`/teams/${slug}`) &&
-            relativePath.includes('rpa'),
+            relativePath.includes("rpa"),
         }
       : null,
-    canAccess('tia', ['read'])
+    canAccess("tia", ["read"])
       ? {
-          name: t('tia'),
+          name: t("tia"),
           href: `/teams/${slug}/tia`,
           icon: () => <Icon src="/unicis-tia-logo.png" />,
+          className: "h-5 w-5",
           active:
             activePathname?.startsWith(`/teams/${slug}`) &&
-            relativePath.includes('tia'),
+            relativePath.includes("tia"),
         }
       : null,
-    canAccess('pia', ['read'])
+    canAccess("pia", ["read"])
       ? {
-          name: t('pia'),
+          name: t("pia"),
           href: `/teams/${slug}/pia`,
           icon: () => <Icon src="/unicis-csc-logo.png" />,
+          className: "h-5 w-5",
           active:
             activePathname?.startsWith(`/teams/${slug}`) &&
-            relativePath.includes('pia'),
+            relativePath.includes("pia"),
         }
       : null,
-    canAccess('csc', ['read'])
+    canAccess("csc", ["read"])
       ? {
-          name: t('csc'),
+          name: t("csc"),
           href: `/teams/${slug}/csc`,
           icon: () => <Icon src="/unicis-csc-logo.png" />,
+          className: "h-5 w-5",
           active:
             activePathname?.startsWith(`/teams/${slug}`) &&
-            relativePath.includes('csc'),
+            relativePath.includes("csc"),
         }
       : null,
-    canAccess('iap_course', ['update'])
+    canAccess("iap_course", ["update"])
       ? {
-          name: t('iap'),
+          name: t("iap"),
           href: `/teams/${slug}/iap`,
           icon: () => <Icon src="/unicis-iap-logo.png" />,
+          className: "h-5 w-5",
           active:
             activePathname?.startsWith(`/teams/${slug}`) &&
-            relativePath.includes('iap') &&
-            !relativePath.includes('iap/admin'),
+            relativePath.includes("iap") &&
+            !relativePath.includes("iap/admin"),
         }
       : null,
-    canAccess('rm', ['read'])
+    canAccess("rm", ["read"])
       ? {
-          name: t('rm'),
+          name: t("rm"),
           href: `/teams/${slug}/risk-management`,
           icon: () => <Icon src="/unicis-csc-logo.png" />,
+          className: "h-5 w-5",
           active:
             activePathname?.startsWith(`/teams/${slug}`) &&
-            relativePath.includes('risk-management'),
+            relativePath.includes("risk-management"),
         }
       : null,
+    { name: "line-break", href: "" },
     {
-      name: 'line-break',
-      href: '',
-    },
-    {
-      name: t('documentation'),
-      href: 'https://www.unicis.tech/docs',
+      name: t("documentation"),
+      href: "https://www.unicis.tech/docs",
       icon: CodeBracketIcon,
-      className: 'stroke-blue-600',
+      className: "h-5 w-5 stroke-blue-600",
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        relativePath.includes('documentation'),
+        relativePath.includes("documentation"),
     },
     {
-      name: t('knowledge-base'),
-      href: 'https://www.unicis.tech/kb',
+      name: t("knowledge-base"),
+      href: "https://www.unicis.tech/kb",
       icon: LifebuoyIcon,
-      className: 'stroke-blue-600',
+      className: "h-5 w-5 stroke-blue-600",
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        relativePath.includes('documentation'),
+        relativePath.includes("documentation"),
     },
     {
-      name: t('feedback'),
-      href: 'https://feedback.unicis.tech',
+      name: t("feedback"),
+      href: "https://feedback.unicis.tech",
       icon: ChatBubbleBottomCenterTextIcon,
-      className: 'stroke-blue-600',
+      className: "h-5 w-5 stroke-blue-600",
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        relativePath.includes('feedback'),
+        relativePath.includes("feedback"),
     },
     {
-      name: t('support'),
-      href: 'https://discord.com/invite/8TwyeD97HD',
+      name: t("support"),
+      href: "https://discord.com/invite/8TwyeD97HD",
       icon: QuestionMarkCircleIcon,
-      className: 'stroke-blue-600',
+      className: "h-5 w-5 stroke-blue-600",
     },
     {
-      name: t('settings'),
+      name: t("settings"),
       href: `/teams/${slug}/settings`,
       icon: Cog6ToothIcon,
-      className: 'stroke-blue-600',
+      className: "h-5 w-5 stroke-blue-600",
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
-        /(settings|billing|members|saml|directory-sync|audit-logs|webhooks|api-keys|iap\/admin)/.test(
-          relativePath
+        /(settings|billing|members|saml|directory-sync|audit-logs|webhooks|api-keys|fleet|querys|tags|packs|distributors|asset-management|iap\/admin)/.test(
+          activePathname ?? relativePath
         ),
     },
-  ];
+  ].filter((m) => m !== null);
 
   return <NavigationItems menus={menus} />;
 };

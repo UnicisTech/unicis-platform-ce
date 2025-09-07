@@ -1,4 +1,5 @@
 import { enc, lib } from 'crypto-js';
+import Cookies from 'js-cookie';
 import type { NextApiRequest } from 'next';
 
 export const createRandomString = (length = 6) => {
@@ -13,6 +14,21 @@ export const createRandomString = (length = 6) => {
 
   return string;
 };
+
+export const fleetAuthAPIHeaders = async () => {
+  const token = Cookies.get('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA');
+  // const { ufa } = await useUFA();
+  // console.log('UFA: ', ufa);
+ 
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    'Unicis-Fleet-API-Authorization': `UnicisBearer ${token}`,
+    // 'Unicis-Fleet-API-UFA': `UnicisBearer ${ufa}`
+  }
+
+  return headers;
+};
+
 
 // Create token
 export function generateToken(length = 64) {
@@ -58,7 +74,9 @@ export const validateEmail = (email: string): boolean => {
 // TODO: combine this logic with validatePassword function
 export const passwordPolicies = {
   minLength: 8,
+  fleetMinLength: 11,
 };
+
 
 export const validatePassword = (password: string): boolean => {
   // Password should be at least 8 characters long

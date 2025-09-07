@@ -1,3 +1,5 @@
+import useHasPlan from '@/hooks/useHasPlan';
+import env from '@/lib/env';
 import {
   Cog6ToothIcon,
   DocumentMagnifyingGlassIcon,
@@ -5,12 +7,15 @@ import {
   PaperAirplaneIcon,
   ShieldExclamationIcon,
   UserPlusIcon,
+  TagIcon,
 } from '@heroicons/react/24/outline';
-import type { Team } from '@prisma/client';
+import { $Enums, Team } from '@prisma/client';
 import classNames from 'classnames';
 import useCanAccess from 'hooks/useCanAccess';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { TeamFeature } from 'types';
+
 
 interface TeamTabProps {
   activeTab: string;
@@ -21,6 +26,16 @@ interface TeamTabProps {
 
 const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   const { canAccess } = useCanAccess();
+  const { hasPlan, checkedHasPlan } = useHasPlan();
+
+  useEffect(() => {
+    const checkPlan = async () => {
+      const result = await hasPlan(team.slug);
+      console.log("Does the team have the plan?", result);
+    };
+
+    checkPlan();
+  }, [hasPlan]);
 
   const navigations = [
     {
@@ -115,6 +130,18 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
       href: `/teams/${team.slug}/api-keys`,
       active: activeTab === 'api-keys',
       icon: KeyIcon,
+    });
+  }
+
+  if (
+    canAccess('asset_settings', ['create', 'update', 'read', 'delete']) &&
+    checkedHasPlan
+  ) {
+    navigations.push({
+      name: 'Asset Management',
+      href: `/teams/${team.slug}/asset-management`,
+      active: activeTab === 'asset-management',
+      icon: TagIcon,
     });
   }
 

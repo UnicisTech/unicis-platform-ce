@@ -16,6 +16,7 @@ import env from '@/lib/env';
 import { Theme, applyTheme } from '@/lib/theme';
 import { AccountLayout } from '@/components/layouts';
 
+
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const { session, ...props } = pageProps;
 

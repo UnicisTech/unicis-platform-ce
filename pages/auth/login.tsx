@@ -31,6 +31,7 @@ import {
 import { Separator } from '@/components/shadcn/ui/separator';
 import { Loader2 } from 'lucide-react';
 import { authProviderEnabled } from '@/lib/auth';
+import { useAccessFleetAccount } from 'hooks/fleets';
 
 interface Message {
   text: string | null;
@@ -47,6 +48,8 @@ const Login: NextPageWithLayout<
   const [message, setMessage] = useState<Message>({ text: null, status: null });
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const recaptchaRef = useRef<any>(null);
+
+  const accessFleetAccount = useAccessFleetAccount();
 
   const { error, success, token } = router.query as {
     error?: string;
@@ -82,6 +85,7 @@ const Login: NextPageWithLayout<
       if (!resp?.ok) {
         toast.error(t(resp?.error ?? 'error'));
       }
+
     },
   });
 

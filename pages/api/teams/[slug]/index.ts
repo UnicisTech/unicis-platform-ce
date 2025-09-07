@@ -8,7 +8,7 @@ import {
 import { throwIfNotAllowed } from 'models/user';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
-import { validateDomain } from '@/lib/common';
+import { extractAuthToken, validateDomain } from '@/lib/common';
 import { ApiError } from '@/lib/errors';
 
 export default async function handler(

@@ -1,14 +1,15 @@
+import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
 const Breadcrumb = ({
   teamName,
   taskTitle,
-  taskNumber,
-  backTo,
+  path,
+  backTo
 }: {
   teamName: string;
   taskTitle: string;
-  taskNumber: string;
+  path: string;
   backTo?: string;
 }) => {
   const { t } = useTranslation('common');
@@ -16,13 +17,13 @@ const Breadcrumb = ({
   return (
     <div className="text-sm breadcrumbs">
       <ul>
-        <li>{teamName || t('Home')}</li>
+        <li>{<Link href={`/teams/${teamName}/dashboard`}>{teamName}</Link> || t('Home')}</li>
         <li>
           <a href={backTo || '/'} className="link link-hover">
             {t('Tasks')}
           </a>
         </li>
-        <li>{`${taskNumber} - ${taskTitle}`}</li>
+        <li>{`${path}`}</li>
       </ul>
     </div>
   );

@@ -7,6 +7,8 @@ import { getUserBySession } from 'models/user';
 import { inferSSRProps } from '@/lib/inferSSRProps';
 import { UpdateAccount } from '@/components/account';
 import env from '@/lib/env';
+import AccountTab from '@/components/account/AccountTab';
+
 
 type AccountProps = inferSSRProps<typeof getServerSideProps>;
 
@@ -14,7 +16,12 @@ const Account: NextPageWithLayout<AccountProps> = ({
   user,
   allowEmailChange,
 }) => {
-  return <UpdateAccount user={user} allowEmailChange={allowEmailChange} />;
+  return (
+    <>
+      <AccountTab activeTab="account" user={user}/>
+      <UpdateAccount user={user} allowEmailChange={allowEmailChange} />
+    </>
+  )
 };
 
 export const getServerSideProps = async (

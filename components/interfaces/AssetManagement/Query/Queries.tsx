@@ -1,0 +1,196 @@
+import { useState } from "react";
+import { Button } from "@/components/shadcn/ui/button";
+import Link from "next/link";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import { Error, Loading, PlatformBadge } from "@/components/shared";
+import useCanAccess from "hooks/useCanAccess";
+import { WithLoadingAndError } from "@/components/shared";
+import type { Team, User } from "@prisma/client";
+import { Query } from "@/types/fleet";
+import { PLATFORMS } from "@/lib/fleet/constants";
+import FleetStatus from "../Fleet/FleetStatus";
+import CreateQuery from "./CreateQuery";
+import { useQueries } from "@/hooks/fleets/queries/useQueries";
+import DeleteQuery from "./DeleteQuery";
+import EditQuery from "./EditQuery";
+import FleetConnectRequired from "../FleetConnectRequired";
+import { CodeBlock } from "@/components/shared/CodeBlock";
+
+const Querys = ({ team, user }: { team: Team; user: Partial<User> }) => {
+  const router = useRouter();
+  const { slug } = router.query as { slug: string };
+  const [visible, setVisible] = useState(false);
+  const [editVisible, setEditVisible] = useState(false);
+  const [deleteVisible, setDeleteVisible] = useState(false);
+  const [queryToEdit, setQueryToEdit] = useState<Query>({} as Query);
+  const [queryToDelete, setQueryToDelete] = useState<null | string>(null);
+
+  const { t } = useTranslation("common");
+  const { canAccess } = useCanAccess();
+
+  const { queries, isLoading, isError } = useQueries(team?.id);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  const openDeleteModal = async (id: string) => {
+    setQueryToDelete(id);
+    setDeleteVisible(true);
+  };
+
+  const openEditModal = async (query: Query) => {
+    setQueryToEdit({ ...query });
+    setEditVisible(true);
+  };
+
+  return (
+    <WithLoadingAndError isLoading={isLoading} error={isError}>
+      {user ? (
+        <div className="space-y-3">
+          <div className="flex justify-between items-center">
+            <div className="space-y-3">
+              <h2 className="text-xl font-medium leading-none tracking-tight">
+                {t("fleet-all-queries")}
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {t("fleet-queries-listed")}
+              </p>
+            </div>
+
+            {canAccess("team_fleet_query", ["create"]) && (
+              <Button size="sm" variant="default" onClick={() => setVisible(true)}>
+                {t("create")}
+              </Button>
+            )}
+          </div>
+          <div className="overflow-x-auto">
+            <table className="text-sm table w-full border-b dark:border-base-200">
+              <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    {t("name")}
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    {t("sql")}
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    {t("platform")}
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    {t("version")}
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    {t("interval")}
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    {t("actions")}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {queries &&
+                  queries.map((query) => {
+                    return (
+                      <tr key={query.id}>
+                        <td className="px-6 py-3">
+                          <Link
+                            href={`/teams/${slug}/asset-management/queries/${query.id}`}
+                          >
+                            <div className="flex items-center justify-start space-x-2">
+                              <span className="underline">{query.name}</span>
+                            </div>
+                          </Link>
+                        </td>
+                        <td className="px-6 py-3">
+                          <Link
+                            href={`/teams/${slug}/asset-management/queries/${query.id}`}
+                          >
+                            <div className="flex items-center justify-start space-x-2">
+                              <CodeBlock
+                                language="sql"
+                                showLineNumbers={false}
+                                text={query.sql}
+                              />
+                            </div>
+                          </Link>
+                        </td>
+                        <td className="px-6 py-3">
+                          <PlatformBadge
+                            value={query.platform!}
+                            label={
+                              PLATFORMS.find(
+                                ({ value }) => value === query.platform
+                              )?.label as string
+                            }
+                          />
+                        </td>
+                        <td className="px-6 py-3">
+                          <div className="flex items-center justify-start space-x-2">
+                            <span>{query.version}</span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-3">
+                          <div className="flex items-center justify-start space-x-2">
+                            <span>{query.shard}</span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-3">
+                          <div className="flex gap-2">
+                            {canAccess("team_fleet_pack", ["update"]) && (
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => openEditModal(query)}
+                              >
+                                {t("edit-task")}
+                              </Button>
+                            )}
+                            {canAccess("team_fleet_pack", ["delete"]) && (
+                              <Button
+                                size="sm"
+                                variant="destructive"
+                                onClick={() => openDeleteModal(query.id)}
+                              >
+                                {t("delete")}
+                              </Button>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
+
+          <CreateQuery
+            user={user}
+            fleetTeamId={team.id}
+            visible={visible}
+            setVisible={setVisible}
+          />
+          {editVisible && (
+            <EditQuery
+              visible={editVisible}
+              setVisible={setEditVisible}
+              team={team}
+              query={queryToEdit}
+            />
+          )}
+          <DeleteQuery
+            visible={deleteVisible}
+            setVisible={setDeleteVisible}
+            queryId={queryToDelete!}
+            fleetTeamId={team.id}
+          />
+        </div>
+      ) : (
+        <FleetStatus status="disconnected" />
+      )}
+    </WithLoadingAndError>
+  );
+};
+
+export default Querys;

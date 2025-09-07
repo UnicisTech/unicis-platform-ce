@@ -39,7 +39,6 @@ import {
   PiaPanel,
   PiaAuditLogs,
 } from '@/components/interfaces/PIA';
-import Breadcrumb from '../../Breadcrumb';
 import useRpaCreation from 'hooks/useRpaCreation';
 import {
   Card,
@@ -54,6 +53,7 @@ import type {
   TaskProperties,
   TiaProcedureInterface,
 } from 'types';
+import Breadcrumb from '@/components/shared/Breadcrumb';
 
 const TaskById = ({
   csc_statuses,
@@ -63,7 +63,7 @@ const TaskById = ({
   const [rmVisible, setRmVisible] = useState(false);
 
   const [activeTab, setActiveTab] = useState('Overview');
-  const [statuses, setStatuses] = useState(csc_statuses);
+  const [statuses, setStatuses] = useState<any>(csc_statuses);
   const [activeCommentTab, setActiveCommentTab] = useState('Comments');
 
   const router = useRouter();
@@ -92,7 +92,7 @@ const TaskById = ({
         taskTitle={task.title}
         backTo={`/teams/${slug}/tasks`}
         teamName={slug}
-        taskNumber={taskNumber}
+        path={taskNumber}
       />
       <h3 className="text-2xl font-bold mb-4">{task.title}</h3>
       <TaskTab activeTab={activeTab} setActiveTab={setActiveTab} />

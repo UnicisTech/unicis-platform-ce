@@ -12,6 +12,14 @@ export type Resource =
   | 'team_audit_log'
   | 'team_webhook'
   | 'team_api_key'
+  | 'team_fleet_connect'
+  | 'team_fleet_api_key'
+  | 'team_fleet_pack'
+  | 'team_fleet_query'
+  | 'team_fleet_tag'
+  | 'team_fleet_node'
+  | 'asset_dashboard'
+  | 'asset_settings'
   | 'task'
   | 'iap_course'
   | 'iap_category'
@@ -57,6 +65,14 @@ export const permissions: RolePermissions = {
       actions: ['read', 'leave', 'update'],
     },
     {
+      resource: 'asset_dashboard',
+      actions: '*',
+    },
+    {
+      resource: 'asset_settings',
+      actions: '*',
+    },
+    {
       resource: 'team_member',
       actions: '*',
     },
@@ -93,6 +109,26 @@ export const permissions: RolePermissions = {
       actions: '*',
     },
     {
+      resource: 'team_fleet_connect',
+      actions: '*',
+    },
+    {
+      resource: 'team_fleet_pack',
+      actions: '*',
+    },
+    {
+      resource: 'team_fleet_query',
+      actions: '*',
+    },
+    {
+      resource: 'team_fleet_tag',
+      actions: '*',
+    },
+    {
+      resource: 'team_fleet_node',
+      actions: '*',
+    },
+    {      
       resource: 'iap_course',
       actions: '*',
     },
@@ -130,6 +166,14 @@ export const permissions: RolePermissions = {
       resource: 'team',
       actions: '*',
     },
+     {
+      resource: 'asset_dashboard',
+      actions: '*',
+    },
+    {
+      resource: 'asset_settings',
+      actions: '*',
+    },
     {
       resource: 'team_member',
       actions: '*',
@@ -164,6 +208,26 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'task',
+      actions: '*',
+    },
+    {
+      resource: 'team_fleet_connect',
+      actions: '*',
+    },
+    {
+      resource: 'team_fleet_pack',
+      actions: '*',
+    },
+    {
+      resource: 'team_fleet_query',
+      actions: '*',
+    },
+    {
+      resource: 'team_fleet_tag',
+      actions: '*',
+    },
+    {
+      resource: 'team_fleet_node',
       actions: '*',
     },
     {
@@ -232,6 +296,22 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'task',
+      actions: ['read'],
+    },
+    {
+      resource: 'team_fleet_connect',
+      actions: ['read'],
+    },
+    {
+      resource: 'team_fleet_pack',
+      actions: ['read'],
+    },
+    {
+      resource: 'team_fleet_query',
+      actions: ['read'],
+    },
+    {
+      resource: 'team_fleet_node',
       actions: ['read'],
     },
     {
