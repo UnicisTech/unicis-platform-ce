@@ -38,7 +38,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
-  throwIfNotAllowed(teamMember, 'team', 'read');
+  throwIfNotAllowed(teamMember, 'team', 'update');
 
   const { slug } = req.query;
   const { iso } = req.body;
