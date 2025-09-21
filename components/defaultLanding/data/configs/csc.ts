@@ -7,7 +7,7 @@ import gdpr from '../gdpr_controls.json';
 import cisv81 from '../cis_v81_1.json';
 import soc2v2 from '../soc2-v2.json';
 import c5_2020 from '../c5_2020.json';
-import { Section } from 'types';
+import { ISO, Section } from 'types';
 
 const controls = {
   '2013': iso2013Json,
@@ -48,7 +48,10 @@ const sections = [
   },
 ];
 
-const isoOptions = [
+const isoOptions: {
+  label: string;
+  value: ISO;
+}[] = [
   { label: 'ISO/IEC 27001:2013', value: '2013' },
   { label: 'ISO/IEC 27001:2022', value: '2022' },
   { label: 'MVSP v1.0-20211007', value: 'default' },
@@ -341,6 +344,32 @@ const colourStyles = {
   },
 };
 
+const isoValueToLabel = (value: ISO) => isoOptions.find(option => option.value === value)?.label
+
+const labels = [
+  'Unknown',
+  'Not Applicable',
+  'Not Performed',
+  'Performed Informally',
+  'Planned',
+  'Well Defined',
+  'Quantitatively Controlled',
+  'Continuously Improving',
+];
+
+// TODO: use css vars
+const barColors = [
+  'rgba(241, 241, 241, 1)',
+  'rgba(178, 178, 178, 1)',
+  'rgba(255, 0, 0, 1)',
+  'rgba(202, 0, 63, 1)',
+  'rgba(102, 102, 102, 1)',
+  'rgba(255, 190, 0, 1)',
+  'rgba(106, 217, 0, 1)',
+  'rgba(47, 143, 0, 1)',
+];
+
+// TODO: remake to named exports
 export {
   colourStyles,
   mergePoints,
@@ -348,10 +377,13 @@ export {
   getControlOptions,
   getSections,
   getSectionFilterOptions,
+  isoValueToLabel,
   statusOptions,
   taskStatusOptions,
   sections,
   perPageOptions,
   controls,
   isoOptions,
+  labels,
+  barColors
 };

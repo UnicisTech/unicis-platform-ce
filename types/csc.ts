@@ -81,7 +81,7 @@ type CscControlsPropMap = {
 export type CscControlsProp = CscControlsPropMap[ISO];
 
 export type TeamCscProperties = {
-  csc_iso?: ISO;
+  csc_iso?: ISO[];
 } & {
   [key in CscStatusesProp]?: { [key: string]: string };
 };

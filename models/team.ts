@@ -5,7 +5,7 @@ import { findOrCreateApp } from '@/lib/svix';
 import { Role } from '@prisma/client';
 import { controls } from '@/components/defaultLanding/data/configs/csc';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { TeamProperties } from 'types';
+import type { ISO, TeamProperties } from 'types';
 import { addSubscription } from './subscription';
 
 export const createTeam = async (param: {
@@ -275,29 +275,28 @@ export const getTeamPropertiesBySlug = async (slug: string) => {
   return team?.properties;
 };
 
-export const getCscStatusesBySlug = async (slug: string) => {
+export const getCscStatusesBySlugAndIso = async (slug: string, iso: ISO) => {
   const team = await prisma.team.findUniqueOrThrow({
-    where: {
-      slug: slug,
-    },
-    select: {
-      properties: true,
-    },
+    where: { slug },
+    select: { properties: true },
   });
 
-  const teamProperties = team ? (team.properties as TeamProperties) : {};
-  const iso = teamProperties.csc_iso || 'default';
+  const teamProperties = (team?.properties as TeamProperties) || {};
   const cscStatusesProp = getCscStatusesProp(iso);
 
   if (teamProperties[cscStatusesProp]) {
+    // already exists → return it
     return teamProperties[cscStatusesProp];
   }
 
-  const initial = {};
-  controls[iso].forEach((control) => (initial[control.Control] = 'Unknown'));
+  // not found → initialize with "Unknown"
+  const initial: Record<string, string> = {};
+  controls[iso].forEach((control) => {
+    initial[control.Control] = 'Unknown';
+  });
 
   await prisma.team.update({
-    where: { slug: slug },
+    where: { slug },
     data: {
       properties: {
         ...teamProperties,
@@ -309,14 +308,17 @@ export const getCscStatusesBySlug = async (slug: string) => {
   return initial;
 };
 
+
 export const setCscStatus = async ({
   slug,
   control,
   value,
+  framework,
 }: {
   slug: string;
   control: string;
   value: string;
+  framework: ISO;
 }) => {
   const team = await prisma.team.findUnique({
     where: {
@@ -329,9 +331,7 @@ export const setCscStatus = async ({
 
   const teamProperties = team ? (team.properties as TeamProperties) : {};
 
-  const iso = teamProperties.csc_iso || 'default';
-
-  const cscStatusesProp = getCscStatusesProp(iso);
+  const cscStatusesProp = getCscStatusesProp(framework);
 
   const cscStatuses = { ...teamProperties[cscStatusesProp] };
   cscStatuses[control] = value;
@@ -353,7 +353,7 @@ export const getCscIso = async ({
   slug,
 }: {
   slug: string;
-}): Promise<string> => {
+}): Promise<ISO[]> => {
   const team = await prisma.team.findUnique({
     where: {
       slug: slug,
@@ -369,7 +369,8 @@ export const getCscIso = async ({
     return teamProperties?.csc_iso;
   }
 
-  const initial = 'default';
+  // TODO: create enum form ISO type
+  const initial = ['default'] as ISO[];
 
   const updatedProperties = {
     ...teamProperties,
@@ -391,7 +392,7 @@ export const setCscIso = async ({
   iso,
 }: {
   slug: string;
-  iso: string;
+  iso: ISO[];
 }) => {
   const team = await prisma.team.findUnique({
     where: {

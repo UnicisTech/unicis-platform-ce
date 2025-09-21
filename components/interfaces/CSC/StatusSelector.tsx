@@ -8,6 +8,7 @@ import {
 } from '@/components/shadcn/ui/select';
 import { cn } from '@/components/shadcn/lib/utils';
 
+// TODO: move to config
 const statusOptions = [
   { label: 'Unknown', value: '0' },
   {
@@ -56,7 +57,7 @@ const StatusSelector = ({
   isDisabled: boolean;
   statusValue: string;
   control: string;
-  handler: (control: string, value: string) => Promise<void>;
+  handler: (control: string, value: string) => Promise<string | undefined>;
 }) => {
   const [value, setValue] = useState<string>(statusValue);
 
@@ -67,7 +68,7 @@ const StatusSelector = ({
   const handleChange = async (val: string) => {
     const label = statusOptions.find((option) => option.value === val)
       ?.label as string;
-    setValue(val);
+    setValue(label);
     handler(control, label);
   };
 

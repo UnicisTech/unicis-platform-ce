@@ -61,6 +61,7 @@ const RadarChart = ({
 }) => {
   const { theme } = useTheme();
 
+  // TODO: move to css variables?
   const isDark = theme === 'dark';
   const textColor = isDark ? '#e5e7eb' : '#0f172a';
   const gridColor = isDark ? '#374151' : '#e5e7eb';

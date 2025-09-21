@@ -24,7 +24,7 @@ import { Badge } from '@/components/shadcn/ui/badge';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import toast from 'react-hot-toast';
 
-const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
+const Tasks = ({ team }: { team: Team; }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const { isLoading, isError, tasks, mutateTasks } = useTasks(slug as string);
@@ -110,7 +110,6 @@ const Tasks = ({ team, csc_statuses }: { team: Team; csc_statuses: any }) => {
         </div>
         <TeamTaskAnalysis
           slug={slug}
-          csc_statuses={csc_statuses as { [key: string]: string }}
         />
         <table className="w-full min-w-full divide-y divide-border text-sm">
           <thead className="bg-muted">

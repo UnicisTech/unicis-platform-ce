@@ -1,22 +1,14 @@
-import PieChart from '../CSC/PieChart';
 import { TaskStatusesDetail } from '@/components/interfaces/CSC';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { Card } from '@/components/shadcn/ui/card';
+import TasksPieChart from './TasksPieChart';
 
+//TODO: move to lib?
 const labels = ['To Do', 'In Progress', 'In Review', 'Feedback', 'Done'];
-
-const barColors = [
-  'rgb(232, 232, 232)', // todo
-  'rgb(123, 146, 178)', // in progress
-  'rgb(77, 110, 255)', // in review
-  'rgb(0, 181, 255)', // feedback
-  'rgb(0, 169, 110)', // done
-];
 
 const TasksAnalysis = ({
   slug,
 }: {
-  csc_statuses: { [key: string]: string };
   slug: string;
 }) => {
   const { tasks } = useTeamTasks(slug as string);
@@ -56,10 +48,8 @@ const TasksAnalysis = ({
     <div className="mx-auto mt-4 w-full max-w-7xl rounded-md">
       <div className="flex justify-around mb-2" style={{ height: '400px' }}>
         <Card className="flex-1 h-full flex flex-col p-2 mr-4 justify-between">
-          <PieChart
-            page_name="task"
+          <TasksPieChart
             statuses={statuses}
-            barColor={barColors}
             labels={labels}
           />
         </Card>
@@ -71,6 +61,7 @@ const TasksAnalysis = ({
 
 export default TasksAnalysis;
 
+// TODO: move to lib?
 function getStatusName(statusId: string): string {
   switch (statusId.toLowerCase()) {
     case 'todo':

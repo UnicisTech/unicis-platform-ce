@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState } from 'react';
 import {
   Popover,
@@ -8,6 +6,8 @@ import {
 } from '@/components/shadcn/ui/popover';
 import { Info } from 'lucide-react';
 
+
+//TODO: move to config
 const statusData = [
   {
     label: 'Unknown',

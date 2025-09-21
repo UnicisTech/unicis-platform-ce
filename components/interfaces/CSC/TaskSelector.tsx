@@ -30,11 +30,9 @@ const TaskSelector = ({
 }: {
   tasks: Array<Task>;
   control: string;
-  handler: (
-    action: string,
-    dataToRemove: CscOption[],
-    control: string
-  ) => Promise<void>;
+  handler: (action: string, dataToChange: {
+    value: number;
+  }[], control: string) => Promise<string | undefined>;
   ISO: ISO;
 }) => {
   const options: CscOption[] = tasks.map((task) => ({
@@ -43,7 +41,7 @@ const TaskSelector = ({
   }));
   const selected: CscOption[] = getSelectedOptions(ISO, control, tasks);
   //TODO: review if prevSelectedRef is still needed
-  const prevSelectedRef = useRef<CscOption[]>([]);
+  const prevSelectedRef = useRef<Array<{value: number}>>(selected);
 
   const handleValueChange = async (newValues: string[]) => {
     const all = options;

@@ -10,13 +10,11 @@ import { Error, Loading } from '@/components/shared';
 import env from '@/lib/env';
 import useTeam from 'hooks/useTeam';
 import useTeamTasks from 'hooks/useTeamTasks';
-import { getCscStatusesBySlug } from 'models/team';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const TeamDashboard = ({
-  csc_statuses,
   slug,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { t } = useTranslation('common');
@@ -55,7 +53,6 @@ const TeamDashboard = ({
         </div>
         <TeamTaskAnalysis
           slug={slug}
-          csc_statuses={csc_statuses as { [key: string]: string }}
         />
         <div className="mb-4 mx-4 flex items-center justify-between">
           <h2 className="text-2xl font-semibold tracking-tight">
@@ -81,8 +78,7 @@ const TeamDashboard = ({
           <PiaAnalysis tasks={tasks} />
         </div>
         <TeamCscAnalysis
-          slug={slug}
-          csc_statuses={csc_statuses as { [key: string]: string }}
+          team={team}
         />
         <div className="space-y-6">
           <div className="mb-4 px-4 flex items-center justify-between">
@@ -105,7 +101,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
       teamFeatures: env.teamFeatures,
-      csc_statuses: await getCscStatusesBySlug(slug),
       slug: slug,
     },
   };

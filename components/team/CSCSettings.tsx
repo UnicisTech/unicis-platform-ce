@@ -15,13 +15,7 @@ import {
   CardContent,
 } from '@/components/shadcn/ui/card';
 import { Label } from '@/components/shadcn/ui/label';
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@/components/shadcn/ui/select';
+import { MultiSelect } from '@/components/shadcn/ui/multi-select';
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 
@@ -34,12 +28,35 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
   const { avaliableISO } = useSubscription(team.subscription as Subscription);
   const teamProperties = team.properties as TeamProperties;
 
+  const frameworkOptions = isoOptions.map(option => {
+    const isDisabled = !avaliableISO.includes(option.value)
+    const message = isDisabled
+      ? ` - ${(subscriptionParams.ULTIMATE.avaliableISO.includes(
+        option.value
+      ) && !subscriptionParams.PREMIUM.avaliableISO.includes(
+        option.value
+      ))
+        ? t('csc-ultimate only')
+        : t('csc-premium-and-ultimate only')
+      }`
+      : null
+
+    return {
+      ...option,
+      ...(isDisabled ? {isDisabled: isDisabled, label: option.label + message} : {})
+    }
+  })
+
   const formik = useFormik({
     initialValues: {
-      iso: teamProperties.csc_iso || isoOptions[0].value,
+      iso: teamProperties.csc_iso,
     },
     validationSchema: Yup.object({
-      iso: Yup.string().required(t('choose-iso-required')),
+      iso: Yup.array(
+        Yup.string().oneOf(isoOptions.map(o => o.value))
+      )
+        .min(1, t('choose-iso-required'))
+        .required(),
     }),
     enableReinitialize: true,
     onSubmit: async (values) => {
@@ -77,38 +94,16 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
               <Label htmlFor="iso" className="sr-only">
                 {t('iso')}
               </Label>
-              <Select
-                name="iso"
+              <MultiSelect
+                name='iso'
+                options={frameworkOptions}
                 value={formik.values.iso}
-                onValueChange={(val) => formik.setFieldValue('iso', val)}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder={t('select-iso')} />
-                </SelectTrigger>
-                <SelectContent>
-                  {isoOptions.map(({ label, value }) => {
-                    const disabled = !avaliableISO.includes(value);
-                    return (
-                      <SelectItem key={value} value={value} disabled={disabled}>
-                        {label}
-                        {disabled && (
-                          <>
-                            {' - '}
-                            {subscriptionParams.ULTIMATE.avaliableISO.includes(
-                              value
-                            ) &&
-                            !subscriptionParams.PREMIUM.avaliableISO.includes(
-                              value
-                            )
-                              ? t('csc-ultimate only')
-                              : t('csc-premium-and-ultimate only')}
-                          </>
-                        )}
-                      </SelectItem>
-                    );
-                  })}
-                </SelectContent>
-              </Select>
+                onValueChange={(value: string[]) => {
+                  formik.setFieldValue('iso', value);
+                  formik.setFieldTouched('iso', true, false);
+                }}
+                defaultValue={teamProperties.csc_iso}
+              />
             </div>
             <Button
               type="submit"

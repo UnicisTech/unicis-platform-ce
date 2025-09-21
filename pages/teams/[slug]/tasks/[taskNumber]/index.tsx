@@ -1,4 +1,3 @@
-'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -28,7 +27,6 @@ import useTeam from 'hooks/useTeam';
 import useCanAccess from 'hooks/useCanAccess';
 import useISO from 'hooks/useISO';
 import { Team } from '@prisma/client';
-import { getCscStatusesBySlug } from 'models/team';
 import {
   TiaAuditLogs,
   TiaPanel,
@@ -55,15 +53,12 @@ import type {
   TiaProcedureInterface,
 } from 'types';
 
-const TaskById = ({
-  csc_statuses,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const TaskById = ({}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [tiaVisible, setTiaVisible] = useState(false);
   const [piaVisible, setPiaVisible] = useState(false);
   const [rmVisible, setRmVisible] = useState(false);
 
   const [activeTab, setActiveTab] = useState('Overview');
-  const [statuses, setStatuses] = useState(csc_statuses);
   const [activeCommentTab, setActiveCommentTab] = useState('Comments');
 
   const router = useRouter();
@@ -83,7 +78,7 @@ const TaskById = ({
   const rpaState = useRpaCreation(task);
 
   if (isLoading || teamLoading || !ISO) return <Loading />;
-  if (!task || isError || teamError)
+  if (!task || !team || isError || teamError)
     return <Error message={(isError || teamError)?.message || ''} />;
 
   return (
@@ -169,9 +164,7 @@ const TaskById = ({
           <CardContent>
             <CscPanel
               task={task}
-              statuses={statuses as { [key: string]: string }}
-              setStatuses={setStatuses}
-              ISO={ISO}
+              team={team}
               mutateTask={mutateTask}
             />
           </CardContent>
@@ -316,13 +309,10 @@ const TaskById = ({
 
 export async function getServerSideProps({
   locale,
-  query,
 }: GetServerSidePropsContext) {
-  const slug = query.slug as string;
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      csc_statuses: await getCscStatusesBySlug(slug),
     },
   };
 }
