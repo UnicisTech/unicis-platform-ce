@@ -48,7 +48,7 @@ const multiSelectVariants = cva(
  */
 interface MultiSelectProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof multiSelectVariants> {
+  VariantProps<typeof multiSelectVariants> {
   /**
    * An array of option objects to be displayed in the multi-select component.
    * Each option object has a label, value, and an optional icon.
@@ -60,6 +60,8 @@ interface MultiSelectProps
     value: string;
     /** Optional icon component to display alongside the option. */
     icon?: React.ComponentType<{ className?: string }>;
+    /** Optional state to siable option selection. */
+    isDisabled?: boolean;
   }[];
 
   /**
@@ -307,24 +309,31 @@ export const MultiSelect = React.forwardRef<
                 </CommandItem>
                 {options.map((option) => {
                   const isSelected = selectedValues.includes(option.value);
+                  const isDisabled = option.isDisabled;
+
                   return (
                     <CommandItem
                       key={option.value}
-                      onSelect={() => toggleOption(option.value)}
-                      className="cursor-pointer"
+                      onSelect={() => !isDisabled && toggleOption(option.value)}
+                      className={cn(
+                        "cursor-pointer",
+                        isDisabled && "opacity-50 cursor-not-allowed"
+                      )}
                     >
                       <div
                         className={cn(
-                          'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
+                          "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
                           isSelected
-                            ? 'bg-primary text-primary-foreground'
-                            : 'opacity-50 [&_svg]:invisible'
+                            ? "bg-primary text-primary-foreground"
+                            : "opacity-50 [&_svg]:invisible"
                         )}
                       >
                         <CheckIcon className="h-4 w-4" />
                       </div>
                       {option.icon && (
-                        <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+                        <option.icon
+                          className={cn("mr-2 h-4 w-4 text-muted-foreground", isDisabled && "opacity-50")}
+                        />
                       )}
                       <span>{option.label}</span>
                     </CommandItem>
