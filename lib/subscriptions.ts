@@ -10,6 +10,7 @@ export type SubscriptionPermissions = {
 export type Permission = {
   maxUsers: number;
   maxAdmins: number;
+  maxFrameworks: number;
   avaliableISO: ISO[];
 };
 
@@ -17,16 +18,19 @@ export const subscriptions: SubscriptionPermissions = {
   COMMUNITY: {
     maxUsers: 10,
     maxAdmins: 1,
+    maxFrameworks: 2,
     avaliableISO: ['default'],
   },
   PREMIUM: {
     maxUsers: 150,
     maxAdmins: 5,
+    maxFrameworks: 3,
     avaliableISO: ['default', '2013', '2022', 'eunis2', 'gdpr', 'cisv81', 'c5_2020'],
   },
   ULTIMATE: {
     maxUsers: 1000000,
     maxAdmins: 1000000,
+    maxFrameworks: 100,
     avaliableISO: [
       'default',
       '2013',
