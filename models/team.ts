@@ -23,7 +23,7 @@ export const createTeam = async (param: {
     },
   });
 
-  await addTeamMember(team.id, userId, Role.OWNER);
+  await addTeamMember(team.id, userId, Role.ADMIN);
 
   await addSubscription(team.id, userEmail);
 
