@@ -1,10 +1,7 @@
-'use client';
-
 import React, { useCallback, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -38,8 +35,7 @@ import useTask from 'hooks/useTask';
 import useCanAccess from 'hooks/useCanAccess';
 
 import type { Task, Team } from '@prisma/client';
-
-const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
+import QuillEditor from '@/components/shared/QuillEditor';
 
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -204,14 +200,16 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <ReactQuill
+                    <QuillEditor
                       theme="snow"
                       value={field.value}
                       onChange={(val) => {
                         checkFormChanges();
                         field.onChange(val);
                       }}
+                      
                     />
+                    
                   </FormControl>
                   <FormMessage />
                 </FormItem>

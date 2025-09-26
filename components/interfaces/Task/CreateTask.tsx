@@ -1,7 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import dynamic from 'next/dynamic';
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -43,8 +42,7 @@ import {
   FormControl,
   FormMessage,
 } from '@/components/shadcn/ui/form';
-
-const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
+import QuillEditor from '@/components/shared/QuillEditor';
 
 const statuses = statusesData;
 const DEFAULT_STATUS_VALUE = 'todo';
@@ -200,7 +198,7 @@ const CreateTask = ({
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <ReactQuill
+                    <QuillEditor
                       theme="snow"
                       value={field.value ?? ''}
                       onChange={field.onChange}
