@@ -18,7 +18,7 @@ export const subscriptions: SubscriptionPermissions = {
   COMMUNITY: {
     maxUsers: 10,
     maxAdmins: 1,
-    maxFrameworks: 2,
+    maxFrameworks: 1,
     avaliableISO: ['default'],
   },
   PREMIUM: {
