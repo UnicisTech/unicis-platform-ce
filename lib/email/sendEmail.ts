@@ -1,12 +1,9 @@
-
 import nodemailer from 'nodemailer';
 import env from '../env';
 
 const isEdge = typeof (globalThis as any).EdgeRuntime !== 'undefined';
 if (isEdge) {
-  throw new Error(
-    'Nodemailer does not support Edge Runtime.'
-  );
+  throw new Error('Nodemailer does not support Edge Runtime.');
 }
 
 const envProbe = {
@@ -77,7 +74,6 @@ export const sendEmail = async (data: EmailData) => {
     throw e;
   }
 };
-
 
 // import nodemailer from 'nodemailer';
 

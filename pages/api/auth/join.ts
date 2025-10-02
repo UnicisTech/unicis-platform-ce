@@ -55,7 +55,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const invitation = inviteToken
     ? await getInvitation({ token: inviteToken })
     : null;
-  
+
   console.log('[api/auth/join] invitation created');
 
   if (invitation && (await isInvitationExpired(invitation))) {
