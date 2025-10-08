@@ -25,7 +25,6 @@ import { Label } from '@/components/shadcn/ui/label';
 import { Button } from '@/components/shadcn/ui/button';
 import {
   Alert,
-  AlertTitle,
   AlertDescription,
 } from '@/components/shadcn/ui/alert';
 import { Separator } from '@/components/shadcn/ui/separator';
@@ -46,6 +45,7 @@ const Login: NextPageWithLayout<
   const [recaptchaToken, setRecaptchaToken] = useState('');
   const [message, setMessage] = useState<Message>({ text: null, status: null });
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isResendButtonVisible, setIsResendButtonVisible] = useState<boolean>(false)
   const recaptchaRef = useRef<any>(null);
 
   const { error, success, token } = router.query as {
@@ -81,6 +81,9 @@ const Login: NextPageWithLayout<
       recaptchaRef.current?.reset();
       if (!resp?.ok) {
         toast.error(t(resp?.error ?? 'error'));
+        if (resp?.error === "confirm-your-email") {
+          setIsResendButtonVisible(true)
+        }
       }
     },
   });
@@ -97,9 +100,6 @@ const Login: NextPageWithLayout<
           variant={message.status === 'error' ? 'destructive' : 'default'}
           className="mb-4"
         >
-          <AlertTitle>
-            {message.status === 'error' ? t('error') : t('success')}
-          </AlertTitle>
           <AlertDescription>{t(message.text)}</AlertDescription>
         </Alert>
       )}
@@ -172,6 +172,13 @@ const Login: NextPageWithLayout<
                   {t('sign-in')}
                 </Button>
 
+                {isResendButtonVisible && (
+                  <Button variant="outline" className="w-full" type="reset">
+                    <Link href={`/auth/resend-email-token`}>
+                      {t('resend-verification-email')}
+                    </Link>
+                  </Button>
+                )}
                 <Button asChild variant="link" className="w-full p-0 h-auto">
                   <Link href={`/auth/forgot-password${params}`}>
                     {t('forgot-password')}
