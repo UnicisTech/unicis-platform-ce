@@ -10,17 +10,17 @@ import CscChartsLayout from '../CSC/CscChartsLayout';
 
 const TeamCscAnalysis = ({
   slug,
-  cscFrameworks
+  cscFrameworks,
 }: {
   slug: string;
-  cscFrameworks: ISO[]
+  cscFrameworks: ISO[];
 }) => {
   const { t } = useTranslation('translation');
-  const [activeTab, setActiveTab] = useState<ISO>(cscFrameworks[0])
-  const { statuses } = useCscStatuses(slug, activeTab)
+  const [activeTab, setActiveTab] = useState<ISO>(cscFrameworks[0]);
+  const { statuses } = useCscStatuses(slug, activeTab);
 
   if (!statuses) {
-    return <Loading />
+    return <Loading />;
   }
   return (
     <div className="mx-auto mt-4 w-full max-w-7xl rounded-md">
@@ -34,23 +34,20 @@ const TeamCscAnalysis = ({
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
-      <CscChartsLayout
-        statuses={statuses}
-        iso={activeTab}
-      />
+      <CscChartsLayout statuses={statuses} iso={activeTab} />
     </div>
-  )
-}
+  );
+};
 
 //TODO: remake
 const WithISO = ({ team }: { team: Team }) => {
-  const { ISO } = useISO(team)
+  const { ISO } = useISO(team);
 
   if (!ISO) {
-    return <Loading />
+    return <Loading />;
   }
 
-  return <TeamCscAnalysis slug={team.slug} cscFrameworks={ISO} />
-}
+  return <TeamCscAnalysis slug={team.slug} cscFrameworks={ISO} />;
+};
 
 export default WithISO;

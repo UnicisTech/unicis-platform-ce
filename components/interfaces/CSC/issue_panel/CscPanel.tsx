@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useCallback,
-  useMemo,
-  useEffect,
-} from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import ControlBlock from './ControlBlock';
@@ -29,20 +24,17 @@ const CscPanel2 = ({
   team: Team;
   cscFrameworks: ISO[];
   mutateTask: () => Promise<void>;
-
 }) => {
-  const slug = team.slug
+  const slug = team.slug;
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
-  const [activeTab, setActiveTab] = useState<ISO>(cscFrameworks[0])
-  const { statuses, mutateStatuses } = useCscStatuses(slug, activeTab)
+  const [activeTab, setActiveTab] = useState<ISO>(cscFrameworks[0]);
+  const { statuses, mutateStatuses } = useCscStatuses(slug, activeTab);
 
   const properties = task.properties as any;
   const issueControls = useMemo(() => {
-    return (properties?.[getCscControlsProp(activeTab)] as string[]) || [
-      '',
-    ];
-  }, [properties, activeTab, task])
+    return (properties?.[getCscControlsProp(activeTab)] as string[]) || [''];
+  }, [properties, activeTab, task]);
 
   const [controls, setControls] = useState(issueControls);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -64,7 +56,11 @@ const CscPanel2 = ({
         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ controls, operation: 'remove', ISO: activeTab }),
+          body: JSON.stringify({
+            controls,
+            operation: 'remove',
+            ISO: activeTab,
+          }),
         }
       );
 
@@ -87,7 +83,11 @@ const CscPanel2 = ({
         const body =
           oldControl === ''
             ? { controls: [newControl], operation: 'add', ISO: activeTab }
-            : { controls: [oldControl, newControl], operation: 'change', ISO: activeTab };
+            : {
+                controls: [oldControl, newControl],
+                operation: 'change',
+                ISO: activeTab,
+              };
 
         const res = await fetch(
           `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
@@ -161,7 +161,7 @@ const CscPanel2 = ({
         }
 
         toast.success('Status changed!');
-        mutateStatuses()
+        mutateStatuses();
       } catch (err) {
         toast.error('Something went wrong');
       }
@@ -171,7 +171,7 @@ const CscPanel2 = ({
 
   return (
     <div className="p-5">
-      <h2 className="text-1xl font-bold">{t("csc-controls")}</h2>
+      <h2 className="text-1xl font-bold">{t('csc-controls')}</h2>
 
       <CscTabs
         iso={cscFrameworks}
@@ -240,27 +240,32 @@ const CscPanel2 = ({
         </>
       )}
     </div>
-  )
-
-}
+  );
+};
 
 const WithISO = ({
   team,
   task,
-  mutateTask
+  mutateTask,
 }: {
   team: Team;
   task: Task;
-  mutateTask: () => Promise<void>
+  mutateTask: () => Promise<void>;
 }) => {
-  const { ISO } = useISO(team)
+  const { ISO } = useISO(team);
 
   if (!ISO) {
-    return <Loading />
+    return <Loading />;
   }
 
-  return <CscPanel2 task={task} team={team} cscFrameworks={ISO} mutateTask={mutateTask} />
-
-}
+  return (
+    <CscPanel2
+      task={task}
+      team={team}
+      cscFrameworks={ISO}
+      mutateTask={mutateTask}
+    />
+  );
+};
 
 export default WithISO;

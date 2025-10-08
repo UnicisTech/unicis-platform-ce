@@ -308,7 +308,6 @@ export const getCscStatusesBySlugAndIso = async (slug: string, iso: ISO) => {
   return initial;
 };
 
-
 export const setCscStatus = async ({
   slug,
   control,
@@ -349,11 +348,7 @@ export const setCscStatus = async ({
   return cscStatuses;
 };
 
-export const getCscIso = async ({
-  slug,
-}: {
-  slug: string;
-}): Promise<ISO[]> => {
+export const getCscIso = async ({ slug }: { slug: string }): Promise<ISO[]> => {
   const team = await prisma.team.findUnique({
     where: {
       slug: slug,

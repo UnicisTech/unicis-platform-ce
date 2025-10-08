@@ -6,7 +6,6 @@ import {
 } from '@/components/shadcn/ui/popover';
 import { Info } from 'lucide-react';
 
-
 //TODO: move to config
 const statusData = [
   {

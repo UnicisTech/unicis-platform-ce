@@ -23,10 +23,7 @@ import { Card, CardContent } from '@/components/shadcn/ui/card';
 import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
 import { Button } from '@/components/shadcn/ui/button';
-import {
-  Alert,
-  AlertDescription,
-} from '@/components/shadcn/ui/alert';
+import { Alert, AlertDescription } from '@/components/shadcn/ui/alert';
 import { Separator } from '@/components/shadcn/ui/separator';
 import { Loader2 } from 'lucide-react';
 import { authProviderEnabled } from '@/lib/auth';
@@ -45,7 +42,8 @@ const Login: NextPageWithLayout<
   const [recaptchaToken, setRecaptchaToken] = useState('');
   const [message, setMessage] = useState<Message>({ text: null, status: null });
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isResendButtonVisible, setIsResendButtonVisible] = useState<boolean>(false)
+  const [isResendButtonVisible, setIsResendButtonVisible] =
+    useState<boolean>(false);
   const recaptchaRef = useRef<any>(null);
 
   const { error, success, token } = router.query as {
@@ -81,8 +79,8 @@ const Login: NextPageWithLayout<
       recaptchaRef.current?.reset();
       if (!resp?.ok) {
         toast.error(t(resp?.error ?? 'error'));
-        if (resp?.error === "confirm-your-email") {
-          setIsResendButtonVisible(true)
+        if (resp?.error === 'confirm-your-email') {
+          setIsResendButtonVisible(true);
         }
       }
     },

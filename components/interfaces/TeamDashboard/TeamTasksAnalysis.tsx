@@ -6,11 +6,7 @@ import TasksPieChart from './TasksPieChart';
 //TODO: move to lib?
 const labels = ['To Do', 'In Progress', 'In Review', 'Feedback', 'Done'];
 
-const TasksAnalysis = ({
-  slug,
-}: {
-  slug: string;
-}) => {
+const TasksAnalysis = ({ slug }: { slug: string }) => {
   const { tasks } = useTeamTasks(slug as string);
 
   if (!tasks || tasks.length === 0) {
@@ -48,10 +44,7 @@ const TasksAnalysis = ({
     <div className="mx-auto mt-4 w-full max-w-7xl rounded-md">
       <div className="flex justify-around mb-2" style={{ height: '400px' }}>
         <Card className="flex-1 h-full flex flex-col p-2 mr-4 justify-between">
-          <TasksPieChart
-            statuses={statuses}
-            labels={labels}
-          />
+          <TasksPieChart statuses={statuses} labels={labels} />
         </Card>
         <TaskStatusesDetail tasks={tasks} statusCounts={statusCounts} />
       </div>

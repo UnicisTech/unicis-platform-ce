@@ -86,11 +86,7 @@ const VerifyAccount: NextPageWithLayout<
             />
           </div>
           <div className="mt-4">
-            <Button
-              type="submit"
-              color="primary"
-              size="full"
-            >
+            <Button type="submit" color="primary" size="full">
               {formik.isSubmitting && <Loader2 className="animate-spin" />}
               {t('resend-link')}
             </Button>

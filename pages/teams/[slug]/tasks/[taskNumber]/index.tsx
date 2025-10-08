@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import { Loading, Error } from '@/components/shared';
 import {
   Attachments,
@@ -53,7 +53,7 @@ import type {
   TiaProcedureInterface,
 } from 'types';
 
-const TaskById = ({}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const TaskById = () => {
   const [tiaVisible, setTiaVisible] = useState(false);
   const [piaVisible, setPiaVisible] = useState(false);
   const [rmVisible, setRmVisible] = useState(false);
@@ -162,11 +162,7 @@ const TaskById = ({}: InferGetServerSidePropsType<typeof getServerSideProps>) =>
             </div>
           </CardHeader>
           <CardContent>
-            <CscPanel
-              task={task}
-              team={team}
-              mutateTask={mutateTask}
-            />
+            <CscPanel task={task} team={team} mutateTask={mutateTask} />
           </CardContent>
         </Card>
       )}

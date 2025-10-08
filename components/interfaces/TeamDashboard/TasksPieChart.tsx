@@ -1,9 +1,7 @@
 import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import {
-  taskStatusOptions,
-} from '@/components/defaultLanding/data/configs/csc';
+import { taskStatusOptions } from '@/components/defaultLanding/data/configs/csc';
 
 // TODO: move to config + use css variables
 const barColors = [
@@ -16,12 +14,13 @@ const barColors = [
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const countStatuses = (
-  statuses: { [key: string]: string },
-) => taskStatusOptions.map(({ label }) => label).map(
-  (name) =>
-    Object.entries(statuses).filter(([_, status]) => status === name).length
-);
+const countStatuses = (statuses: { [key: string]: string }) =>
+  taskStatusOptions
+    .map(({ label }) => label)
+    .map(
+      (name) =>
+        Object.entries(statuses).filter(([_, status]) => status === name).length
+    );
 
 const TasksPieChart = ({
   statuses,

@@ -1,5 +1,5 @@
-import PieChart from "./PieChart";
-import RadarChart from "./RadarChart";
+import PieChart from './PieChart';
+import RadarChart from './RadarChart';
 
 type Props = {
   statuses: Record<string, string>;
@@ -7,9 +7,7 @@ type Props = {
 };
 
 const Panel: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="h-full rounded-xl border shadow-sm p-4">
-    {children}
-  </div>
+  <div className="h-full rounded-xl border shadow-sm p-4">{children}</div>
 );
 
 const CscChartsLayout: React.FC<Props> = ({ statuses, iso }) => (

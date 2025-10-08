@@ -1,7 +1,4 @@
-import React, {
-  useState,
-  useMemo,
-} from 'react';
+import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/shadcn/ui/button';
 import { Input } from '@/components/shadcn/ui/input';
 import { Textarea } from '@/components/shadcn/ui/textarea';
@@ -34,7 +31,10 @@ const ControlBlock = ({
   controls: string[];
   isSaving: boolean;
   isDeleting: boolean;
-  onStatusChange: (control: string, value: string) => Promise<string | undefined>;
+  onStatusChange: (
+    control: string,
+    value: string
+  ) => Promise<string | undefined>;
   onControlChange: (oldControl: string, newControl: string) => void;
   onDeleteControl: (control: string) => void;
 }) => {

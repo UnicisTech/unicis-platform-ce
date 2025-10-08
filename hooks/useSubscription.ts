@@ -7,7 +7,15 @@ const params = {
   },
   PREMIUM: {
     maxUsers: 150,
-    avaliableISO: ['default', '2013', '2022', 'eunis2', 'gdpr', 'cisv81', 'c5_2020'],
+    avaliableISO: [
+      'default',
+      '2013',
+      '2022',
+      'eunis2',
+      'gdpr',
+      'cisv81',
+      'c5_2020',
+    ],
   },
   ULTIMATE: {
     maxUsers: 10000000,

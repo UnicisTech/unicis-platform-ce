@@ -9,18 +9,15 @@ import {
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const countStatuses = (
-  statuses: { [key: string]: string },
-) => statusOptions.map(({ label }) => label).map(
-  (name) =>
-    Object.entries(statuses).filter(([_, status]) => status === name).length
-);
+const countStatuses = (statuses: { [key: string]: string }) =>
+  statusOptions
+    .map(({ label }) => label)
+    .map(
+      (name) =>
+        Object.entries(statuses).filter(([_, status]) => status === name).length
+    );
 
-const PieChart = ({
-  statuses,
-}: {
-  statuses: { [key: string]: string };
-}) => {
+const PieChart = ({ statuses }: { statuses: { [key: string]: string } }) => {
   const data = {
     labels: labels,
     datasets: [

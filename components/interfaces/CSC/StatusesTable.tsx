@@ -28,10 +28,17 @@ const StatusesTable = ({
   sectionFilter: null | Array<{ label: string; value: string }>;
   statusFilter: null | Array<CscOption>;
   perPage: number;
-  statusHandler: (control: string, value: string) => Promise<string | undefined>;
-  taskSelectorHandler: (action: string, dataToChange: {
-    value: number;
-  }[], control: string) => Promise<string | undefined>;
+  statusHandler: (
+    control: string,
+    value: string
+  ) => Promise<string | undefined>;
+  taskSelectorHandler: (
+    action: string,
+    dataToChange: {
+      value: number;
+    }[],
+    control: string
+  ) => Promise<string | undefined>;
 }) => {
   const { canAccess } = useCanAccess();
   const cscControlsProp = getCscControlsProp(ISO);

@@ -207,9 +207,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                         checkFormChanges();
                         field.onChange(val);
                       }}
-                      
                     />
-                    
                   </FormControl>
                   <FormMessage />
                 </FormItem>

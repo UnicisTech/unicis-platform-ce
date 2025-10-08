@@ -21,7 +21,7 @@ const Settings = () => {
     return <Error message={t('team-not-found')} />;
   }
 
-  return <CscDashboard team={team}/>;
+  return <CscDashboard team={team} />;
 };
 
 export async function getServerSideProps({

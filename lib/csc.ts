@@ -228,8 +228,8 @@ export const addAuditLog = async (params: {
 };
 
 export const cscNavigations = (activeTab: ISO, iso: ISO[]) => {
-  return iso.map(item => ({
+  return iso.map((item) => ({
     name: item || 'Not found',
-    active: activeTab === item
-  }))
+    active: activeTab === item,
+  }));
 };

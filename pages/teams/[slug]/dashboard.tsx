@@ -51,9 +51,7 @@ const TeamDashboard = ({
             {t(`${slug?.toString().toUpperCase()} Task Overview`)}
           </h2>
         </div>
-        <TeamTaskAnalysis
-          slug={slug}
-        />
+        <TeamTaskAnalysis slug={slug} />
         <div className="mb-4 mx-4 flex items-center justify-between">
           <h2 className="text-2xl font-semibold tracking-tight">
             {t(`Data Privacy Overview`)}
@@ -77,9 +75,7 @@ const TeamDashboard = ({
           </div>
           <PiaAnalysis tasks={tasks} />
         </div>
-        <TeamCscAnalysis
-          team={team}
-        />
+        <TeamCscAnalysis team={team} />
         <div className="space-y-6">
           <div className="mb-4 px-4 flex items-center justify-between">
             <h2 className="text-2xl font-semibold tracking-tight">

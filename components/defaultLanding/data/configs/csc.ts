@@ -344,7 +344,8 @@ const colourStyles = {
   },
 };
 
-const isoValueToLabel = (value: ISO) => isoOptions.find(option => option.value === value)?.label
+const isoValueToLabel = (value: ISO) =>
+  isoOptions.find((option) => option.value === value)?.label;
 
 const labels = [
   'Unknown',
@@ -385,5 +386,5 @@ export {
   controls,
   isoOptions,
   labels,
-  barColors
+  barColors,
 };

@@ -44,14 +44,18 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   throwIfNotAllowed(teamMember, 'team', 'update');
 
   const { slug } = req.query;
-  const { iso } = req.body as { iso: ISO[]};
+  const { iso } = req.body as { iso: ISO[] };
   // TODO: improve .? logic, or migrate the db to make subscription mandatory
-  const maxFrameworks = subscriptions?.[teamMember.team.subscription?.plan || Plan.COMMUNITY].maxFrameworks
-  
+  const maxFrameworks =
+    subscriptions?.[teamMember.team.subscription?.plan || Plan.COMMUNITY]
+      .maxFrameworks;
+
   if (iso.length > maxFrameworks) {
     return res.status(403).json({
-      error: { message: `Your subscription plan allows up to ${maxFrameworks} frameworks to be selected.`}
-    })
+      error: {
+        message: `Your subscription plan allows up to ${maxFrameworks} frameworks to be selected.`,
+      },
+    });
   }
 
   //TODO: check if subscription allows to change to this ISO

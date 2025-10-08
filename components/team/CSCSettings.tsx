@@ -28,33 +28,31 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
   const { avaliableISO } = useSubscription(team.subscription as Subscription);
   const teamProperties = team.properties as TeamProperties;
 
-  const frameworkOptions = isoOptions.map(option => {
-    const isDisabled = !avaliableISO.includes(option.value)
+  const frameworkOptions = isoOptions.map((option) => {
+    const isDisabled = !avaliableISO.includes(option.value);
     const message = isDisabled
-      ? ` - ${(subscriptionParams.ULTIMATE.avaliableISO.includes(
-        option.value
-      ) && !subscriptionParams.PREMIUM.avaliableISO.includes(
-        option.value
-      ))
-        ? t('csc-ultimate only')
-        : t('csc-premium-and-ultimate only')
-      }`
-      : null
+      ? ` - ${
+          subscriptionParams.ULTIMATE.avaliableISO.includes(option.value) &&
+          !subscriptionParams.PREMIUM.avaliableISO.includes(option.value)
+            ? t('csc-ultimate only')
+            : t('csc-premium-and-ultimate only')
+        }`
+      : null;
 
     return {
       ...option,
-      ...(isDisabled ? {isDisabled: isDisabled, label: option.label + message} : {})
-    }
-  })
+      ...(isDisabled
+        ? { isDisabled: isDisabled, label: option.label + message }
+        : {}),
+    };
+  });
 
   const formik = useFormik({
     initialValues: {
       iso: teamProperties.csc_iso,
     },
     validationSchema: Yup.object({
-      iso: Yup.array(
-        Yup.string().oneOf(isoOptions.map(o => o.value))
-      )
+      iso: Yup.array(Yup.string().oneOf(isoOptions.map((o) => o.value)))
         .min(1, t('choose-iso-required'))
         .required(),
     }),
@@ -95,7 +93,7 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
                 {t('iso')}
               </Label>
               <MultiSelect
-                name='iso'
+                name="iso"
                 options={frameworkOptions}
                 value={formik.values.iso}
                 onValueChange={(value: string[]) => {

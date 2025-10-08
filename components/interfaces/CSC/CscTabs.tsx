@@ -12,7 +12,7 @@ const CscTabs = ({
   activeTab: ISO;
   setActiveTab: (name: ISO) => void;
 }) => {
-  const navigations = cscNavigations(activeTab, iso)
+  const navigations = cscNavigations(activeTab, iso);
 
   return (
     <div className="mb-5">
