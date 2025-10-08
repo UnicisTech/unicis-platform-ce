@@ -100,6 +100,9 @@ const RadarChart = ({
         },
         pointLabels: {
           color: textColor,
+          font: {
+            size: 9
+          },
         },
         grid: {
           color: gridColor,

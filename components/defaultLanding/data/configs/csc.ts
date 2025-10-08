@@ -93,7 +93,7 @@ const getSectionsLabels = (iso: string) => {
   switch (iso) {
     case '2022':
     case 'default':
-    case 'eunist2':
+    case 'eunis2':
     case 'gdpr':
     case 'cisv81':
     case 'soc2v2':
