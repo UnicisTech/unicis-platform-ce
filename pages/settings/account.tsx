@@ -37,6 +37,8 @@ export const getServerSideProps = async (
         id: user.id,
         email: user.email,
         name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
         image: user.image,
       },
       allowEmailChange: env.confirmEmail === false,

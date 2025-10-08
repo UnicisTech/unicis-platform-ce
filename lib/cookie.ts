@@ -1,5 +1,11 @@
 import { getCookie } from 'cookies-next';
+import env from '@/lib/env';
 import type { GetServerSidePropsContext } from 'next';
+
+const useSecureCookie = env.appUrl.startsWith('https://');
+
+export const sessionTokenCookieName =
+  (useSecureCookie ? '__Secure-' : '') + 'next-auth.session-token';
 
 export const getParsedCookie = (
   req: GetServerSidePropsContext['req'],

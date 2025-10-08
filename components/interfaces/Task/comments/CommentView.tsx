@@ -1,11 +1,8 @@
 import React from 'react';
-import { Button } from 'react-daisyui';
 import { AccessControl } from '@/components/shared/AccessControl';
 import type { Comment } from '@prisma/client';
-import 'react-quill/dist/quill.snow.css';
-import dynamic from 'next/dynamic';
-
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import QuillEditor from '@/components/shared/QuillEditor';
 
 interface CommentViewProps {
   comment: Comment;
@@ -17,11 +14,10 @@ const CommentView = ({
   activateEditForComment,
   deleteComment,
 }: CommentViewProps) => {
-  console.log('CommentView text', comment.text);
   return (
     <>
       <div>
-        <ReactQuill
+        <QuillEditor
           value={comment.text}
           readOnly={true}
           modules={{
@@ -33,7 +29,7 @@ const CommentView = ({
       </div>
       <div>
         <AccessControl resource="task" actions={['update']}>
-          <Button
+          <DaisyButton
             size="sm"
             variant="link"
             color="ghost"
@@ -41,8 +37,8 @@ const CommentView = ({
             onClick={() => activateEditForComment(comment.id)}
           >
             Edit
-          </Button>
-          <Button
+          </DaisyButton>
+          <DaisyButton
             size="sm"
             variant="link"
             color="ghost"
@@ -50,7 +46,7 @@ const CommentView = ({
             onClick={() => deleteComment(comment.id)}
           >
             Delete
-          </Button>
+          </DaisyButton>
         </AccessControl>
       </div>
     </>

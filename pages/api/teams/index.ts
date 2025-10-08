@@ -2,6 +2,8 @@ import { slugify } from '@/lib/common';
 import { ApiError } from '@/lib/errors';
 import { getSession } from '@/lib/session';
 import { createTeam, getTeams, isTeamExists } from 'models/team';
+import { throwIfNoTeamAccess } from 'models/team';
+import { throwIfNotAllowed } from 'models/user';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
 
@@ -35,6 +37,9 @@ export default async function handler(
 
 // Get teams
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
+  const teamMember = await throwIfNoTeamAccess(req, res);
+  throwIfNotAllowed(teamMember, 'team', 'read');
+
   const session = await getSession(req, res);
 
   const teams = await getTeams(session?.user.id as string);
@@ -46,6 +51,9 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
 // Create a team
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
+  const teamMember = await throwIfNoTeamAccess(req, res);
+  throwIfNotAllowed(teamMember, 'team', 'create');
+
   const { name } = req.body;
 
   const session = await getSession(req, res);
@@ -56,6 +64,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const team = await createTeam({
+    userEmail: session?.user?.email as string,
     userId: session?.user?.id as string,
     name,
     slug,

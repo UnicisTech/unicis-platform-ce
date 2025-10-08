@@ -1,11 +1,19 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/shadcn/ui/table';
+import { Badge } from '@/components/shadcn/ui/badge';
+import { Button } from '@/components/shadcn/ui/button';
 import { EmptyState, WithLoadingAndError } from '@/components/shared';
-import Badge from '@/components/shared/Badge';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import fetcher from '@/lib/fetcher';
 import type { ApiKey, Team } from '@prisma/client';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
-import { Button } from 'react-daisyui';
 import { toast } from 'react-hot-toast';
 import useSWR from 'swr';
 import type { ApiResponse } from 'types';
@@ -22,13 +30,11 @@ const APIKeys = ({ team }: APIKeysProps) => {
   const [confirmationDialogVisible, setConfirmationDialogVisible] =
     useState(false);
 
-  // Fetch API Keys
   const { data, isLoading, error, mutate } = useSWR<{ data: ApiKey[] }>(
     `/api/teams/${team.slug}/api-keys`,
     fetcher
   );
 
-  // Delete API Key
   const deleteApiKey = async (apiKey: ApiKey | null) => {
     if (!apiKey) return;
 
@@ -62,19 +68,15 @@ const APIKeys = ({ team }: APIKeysProps) => {
             <h2 className="text-xl font-medium leading-none tracking-tight">
               API Keys
             </h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-muted-foreground">
               API keys allow you to authenticate with the API.
             </p>
           </div>
-          <Button
-            color="primary"
-            variant="outline"
-            size="md"
-            onClick={() => setCreateModalVisible(true)}
-          >
+          <Button onClick={() => setCreateModalVisible(true)}>
             {t('create-api-key')}
           </Button>
         </div>
+
         {apiKeys.length === 0 ? (
           <EmptyState
             title={t('no-api-key-title')}
@@ -82,42 +84,42 @@ const APIKeys = ({ team }: APIKeysProps) => {
           />
         ) : (
           <>
-            <table className="text-sm table w-full border-b dark:border-base-200">
-              <thead className="bg-base-200">
-                <tr>
-                  <th>{t('name')}</th>
-                  <th>{t('status')}</th>
-                  <th>{t('created')}</th>
-                  <th>{t('actions')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {apiKeys.map((apiKey) => {
-                  return (
-                    <tr key={apiKey.id}>
-                      <td>{apiKey.name}</td>
-                      <td>
-                        <Badge color="success">{t('active')}</Badge>
-                      </td>
-                      <td>{new Date(apiKey.createdAt).toLocaleDateString()}</td>
-                      <td>
-                        <Button
-                          size="xs"
-                          color="error"
-                          variant="outline"
-                          onClick={() => {
-                            setSelectedApiKey(apiKey);
-                            setConfirmationDialogVisible(true);
-                          }}
-                        >
-                          {t('revoke')}
-                        </Button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>{t('name')}</TableHead>
+                  <TableHead>{t('status')}</TableHead>
+                  <TableHead>{t('created')}</TableHead>
+                  <TableHead className="text-right">{t('actions')}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {apiKeys.map((apiKey) => (
+                  <TableRow key={apiKey.id}>
+                    <TableCell>{apiKey.name}</TableCell>
+                    <TableCell>
+                      <Badge variant="default">{t('active')}</Badge>
+                    </TableCell>
+                    <TableCell>
+                      {new Date(apiKey.createdAt).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <Button
+                        size="sm"
+                        variant="destructive"
+                        onClick={() => {
+                          setSelectedApiKey(apiKey);
+                          setConfirmationDialogVisible(true);
+                        }}
+                      >
+                        {t('revoke')}
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+
             <ConfirmationDialog
               title={t('revoke-api-key')}
               visible={confirmationDialogVisible}
@@ -130,6 +132,7 @@ const APIKeys = ({ team }: APIKeysProps) => {
             </ConfirmationDialog>
           </>
         )}
+
         <NewAPIKey
           team={team}
           createModalVisible={createModalVisible}

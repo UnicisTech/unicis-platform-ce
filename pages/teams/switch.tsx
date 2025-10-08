@@ -34,6 +34,7 @@ const Organizations: NextPageWithLayout<
     if (teams[0]) {
       router.push(`/teams/${teams[0].slug}/tasks`);
     } else {
+      //TODO: /dashboard route is removed
       router.push(`/dashboard`);
     }
   });

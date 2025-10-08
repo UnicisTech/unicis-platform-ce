@@ -19,11 +19,13 @@ type Country = {
   value: string;
 };
 
+//TODO: get rid of this type
 export type TiaOption = {
   label: string;
   value: string;
 };
 
+//TODO: RpaAuditLog and TiaAuditLog, use AuditLog from base.ts instead
 export type TiaAuditLog = {
   actor: Session['user'];
   date: number;

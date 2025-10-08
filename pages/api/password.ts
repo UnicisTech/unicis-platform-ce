@@ -8,6 +8,9 @@ import { getSession } from '@/lib/session';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { ApiError } from 'next/dist/server/api-utils';
 import { recordMetric } from '@/lib/metrics';
+import { getCookie } from 'cookies-next';
+import { sessionTokenCookieName } from '@/lib/cookie';
+import { deleteManySessions } from 'models/session';
 
 export default async function handler(
   req: NextApiRequest,
@@ -57,7 +60,18 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     data: { password: await hashPassword(newPassword) },
   });
 
+  const sessionToken = await getCookie(sessionTokenCookieName, { req, res });
+
+  await deleteManySessions({
+    where: {
+      userId: session?.user.id,
+      NOT: {
+        sessionToken,
+      },
+    },
+  });
+
   recordMetric('user.password.updated');
 
-  res.status(200).json({ data: user });
+  res.status(200).json({});
 };

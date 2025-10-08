@@ -1,72 +1,36 @@
-import React, { useRef, Dispatch, SetStateAction } from 'react';
-import { ChevronUpDownIcon } from '@heroicons/react/24/outline';
-
-const perPageOptions: { label: string; value: number }[] = [
-  {
-    label: '5',
-    value: 5,
-  },
-  {
-    label: '10',
-    value: 10,
-  },
-  {
-    label: '25',
-    value: 25,
-  },
-  {
-    label: '50',
-    value: 50,
-  },
-  {
-    label: '100',
-    value: 100,
-  },
-];
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/shadcn/ui/select';
 
 interface PerPageSelectorProps {
   perPage: number;
-  setPerPage: Dispatch<SetStateAction<number>>;
+  setPerPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
+const perPageOptions = [5, 10, 25, 50, 100];
+
 const PerPageSelector = ({ perPage, setPerPage }: PerPageSelectorProps) => {
-  const tabRef = useRef<HTMLUListElement | null>(null);
   return (
-    <div className="px-4">
-      <div className="dropdown w-full">
-        <div
-          onClick={() => {
-            if (tabRef.current) {
-              tabRef.current.style.display = 'block';
-            }
-          }}
-          tabIndex={0}
-          className="btn btn-sm btn-outline border border-gray-300 flex items-center px-4 justify-between cursor-pointer rounded text-sm font-bold"
-        >
-          <div>{perPage}</div>
-          <ChevronUpDownIcon className="w-5 h-5" />
-        </div>
-        <ul
-          ref={tabRef}
-          tabIndex={0}
-          className="dropdown-content p-2 shadow-md bg-base-100 w-full rounded border px-2"
-        >
-          {perPageOptions.map((item, index) => (
-            <div
-              key={index}
-              onClick={() => {
-                if (tabRef.current) {
-                  tabRef.current.style.display = 'none';
-                }
-                setPerPage(item.value);
-              }}
-              className="flex cursor-pointer hover:bg-gray-100 focus:bg-gray-100 focus:outline-none py-2 px-2 rounded text-sm font-medium gap-2 items-center"
-            >
-              {item.label}
-            </div>
+    <div className="w-[100px] mr-2">
+      <Select
+        value={perPage.toString()}
+        onValueChange={(val) => setPerPage(Number(val))}
+      >
+        <SelectTrigger className="h-9 px-2 text-sm">
+          <SelectValue placeholder="Per page" />
+        </SelectTrigger>
+        <SelectContent>
+          {perPageOptions.map((num) => (
+            <SelectItem key={num} value={num.toString()}>
+              {num}
+            </SelectItem>
           ))}
-        </ul>
-      </div>
+        </SelectContent>
+      </Select>
     </div>
   );
 };

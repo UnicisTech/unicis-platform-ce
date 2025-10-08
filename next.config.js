@@ -1,8 +1,10 @@
 /* eslint @typescript-eslint/no-var-requires: "off" */
 const { i18n } = require('./next-i18next.config');
+const removeImports = require('next-remove-imports')({
+  test: /node_modules\/@uiw([\s\S]*?)\.(tsx|ts|js|mjs|jsx)$/, // Target only @uiw files
+});
 
-// Redirect root url to login page
-
+// Redirect root URL to login page
 const redirects = [
   {
     source: '/',
@@ -17,9 +19,30 @@ const nextConfig = {
   images: {
     domains: ['platform.unicis.tech'],
   },
-  i18n,
+  i18n, // Localization settings
   async redirects() {
     return redirects;
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+        ],
+      },
+    ];
   },
   rewrites: async () => {
     return [
@@ -35,4 +58,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = removeImports(nextConfig);

@@ -7,9 +7,9 @@ import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 interface MagicLinkProps {
   csrfToken: string | undefined;
@@ -76,13 +76,13 @@ const MagicLink = ({ csrfToken }: MagicLinkProps) => {
               type="email"
               label="Email"
               name="email"
-              placeholder="jackson@boxyhq.com"
+              placeholder="email@unicis.tech"
               value={formik.values.email}
               descriptionText="We’ll email you a magic link for a password-free sign in."
               error={formik.touched.email ? formik.errors.email : undefined}
               onChange={formik.handleChange}
             />
-            <Button
+            <DaisyButton
               type="submit"
               color="primary"
               loading={formik.isSubmitting}
@@ -91,7 +91,7 @@ const MagicLink = ({ csrfToken }: MagicLinkProps) => {
               size="md"
             >
               {t('send-magic-link')}
-            </Button>
+            </DaisyButton>
           </div>
         </form>
         <div className="divider"></div>

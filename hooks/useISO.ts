@@ -1,41 +1,35 @@
-import { getAxiosError } from '@/lib/common';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import type { ApiResponse, ISO } from 'types';
+import type { ISO, TeamProperties } from 'types';
 
-type IsoApiResponse = {
-  iso: ISO;
-};
-
+//TODO: rewrite to SWR
 const useISO = (team: any) => {
-  const [ISO, setISO] = useState<ISO | null>(null);
+  const [ISO, setISO] = useState<ISO[] | null>(null);
 
   useEffect(() => {
     const asyncEffect = async () => {
-      console.log('useISO async effect', team);
-      if (!team) {
-        return;
-      }
-      const iso = team?.properties?.csc_iso;
+      if (!team) return;
+
+      const iso = (team?.properties as TeamProperties)?.csc_iso;
       if (iso) {
         setISO(iso);
       } else {
         try {
-          const response = await axios.get<ApiResponse<IsoApiResponse>>(
-            `/api/teams/${team.slug}/csc/iso`
-          );
-
-          const iso = response.data.data.iso;
-
-          if (iso) {
-            setISO(iso);
+          const res = await fetch(`/api/teams/${team.slug}/csc/iso`);
+          if (!res.ok) {
+            throw new Error('Request failed');
           }
-        } catch (error) {
-          toast.error(getAxiosError(error));
+
+          const { data } = await res.json();
+          if (data?.iso) {
+            setISO(data.iso);
+          }
+        } catch (error: any) {
+          toast.error(error?.message || 'Unexpected error');
         }
       }
     };
+
     asyncEffect();
   }, [team]);
 

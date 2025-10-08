@@ -1,17 +1,32 @@
-//import json from "../../../data/MVPS-controls.json";
 import defaultJson from '../MVPS-controls.json';
 import iso2013Json from '../ISO-CSC-controls-2013.json';
 import iso2022Json from '../ISO-CSC-controls-2022.json';
-
-import { Section } from 'types';
-// import { Control, IsoControlMap, Section } from 'types';
-
-// const controls = json['MVPS-Controls'];
+import nistcsfv2 from '../CSF2_1.json';
+import eunis2 from '../eu-nis2.json';
+import gdpr from '../gdpr_controls.json';
+import cisv81 from '../cis_v81_1.json';
+import soc2v2 from '../soc2-v2.json';
+import c5_2020 from '../c5_2020.json';
+import { ISO, Section } from 'types';
 
 const controls = {
   '2013': iso2013Json,
   '2022': iso2022Json,
   default: defaultJson['MVPS-Controls'],
+  nistcsfv2: nistcsfv2.map((item) => ({
+    ...item,
+    Control: `${item.Code}: ${item.Control}`,
+    ControlLabel: item.Control,
+  })),
+  eunis2: eunis2,
+  gdpr: gdpr,
+  cisv81: cisv81,
+  soc2v2: soc2v2.map((item) => ({
+    ...item,
+    Control: `${item.Code}: ${item.Control}`,
+    ControlLabel: item.Control,
+  })),
+  c5_2020: c5_2020,
 };
 
 const sections = [
@@ -33,10 +48,19 @@ const sections = [
   },
 ];
 
-const isoOptions = [
+const isoOptions: {
+  label: string;
+  value: ISO;
+}[] = [
   { label: 'ISO/IEC 27001:2013', value: '2013' },
   { label: 'ISO/IEC 27001:2022', value: '2022' },
   { label: 'MVSP v1.0-20211007', value: 'default' },
+  { label: 'NIST CSF v2', value: 'nistcsfv2' },
+  { label: 'EU NIS2', value: 'eunis2' },
+  { label: 'GDPR', value: 'gdpr' },
+  { label: 'CIS CSC v8.1', value: 'cisv81' },
+  { label: 'SOC2 v2', value: 'soc2v2' },
+  { label: 'C5 2020', value: 'c5_2020' },
 ];
 
 const perPageOptions: { label: string; value: number }[] = [
@@ -62,54 +86,57 @@ const perPageOptions: { label: string; value: number }[] = [
   },
 ];
 
-// const controlOptions = controls.map(
-//   ({ Code, Control, Requirements, Section }) => ({
-//     label: Control,
-//     value: {
-//       code: Code,
-//       control: Control,
-//       requirements: Requirements,
-//       section: Section,
-//     },
-//   })
-// );
-
 const trimToSecondDot = (inputString: string): string =>
   inputString.split('.').slice(0, 2).join('.');
 
 const getSectionsLabels = (iso: string) => {
-  if (iso !== '2013') {
-    return getSections(iso).map(({ label }) => label);
+  switch (iso) {
+    case '2022':
+    case 'default':
+    case 'eunis2':
+    case 'gdpr':
+    case 'cisv81':
+    case 'soc2v2':
+    case 'c5_2020':
+    case 'nistcsfv2':
+      return getSections(iso).map(({ label }) => label);
+    // case 'nistcsfv2':
+    //   return getFunctions().map(({ label }) => label)
+    //For ISO 2013 we should merge the sections because of their big amount
+    case '2013':
+    default: {
+      const labelSet = new Set<string>();
+      controls[iso].forEach((item) => {
+        labelSet.add(trimToSecondDot(item.Code));
+      });
+
+      const sections = Array.from(labelSet).map(
+        (label) =>
+          label +
+          ' ' +
+          controls[iso]
+            .find(({ Code }) => Code.includes(label))
+            ?.Section.split(' - ')[0]
+      );
+
+      return sections;
+    }
   }
-
-  //For ISO 2013 we should merge the sections because of their big amount
-  const labelSet = new Set();
-  controls[iso].forEach((item) => {
-    labelSet.add(trimToSecondDot(item.Code));
-  });
-
-  const sections = (Array.from(labelSet) as string[]).map(
-    (label: string) =>
-      label +
-      ' ' +
-      controls[iso]
-        .find(({ Code }) => Code.includes(label))
-        ?.Section.split(' - ')[0]
-  );
-
-  return sections;
 };
 
 const getControlOptions = (iso: string) =>
-  controls[iso].map(({ Code, Control, Requirements, Section }) => ({
-    label: `${Code}: ${Section}, ${Control}`,
-    value: {
-      code: Code,
-      control: Control,
-      requirements: Requirements,
-      section: Section,
-    },
-  }));
+  controls[iso].map(
+    ({ Code, Control, Requirements, Section, ControlLabel }) => ({
+      label: `${Code}: ${Section}, ${ControlLabel ? ControlLabel : Control}`,
+      value: {
+        code: Code,
+        control: Control,
+        requirements: Requirements,
+        section: Section,
+        controlLabel: ControlLabel,
+      },
+    })
+  );
 
 const mergePoints = (d) => {
   const merged = [
@@ -156,6 +183,22 @@ const getSections = (iso: string): Section[] => {
   return sections;
 };
 
+// // Functions that used in CSF2
+// const getFunctions = (): { label: string; value: string }[] => {
+//   const functionSet = new Set<string>();
+
+//   nistcsfv2.forEach(item => {
+//     functionSet.add(item.Function);
+//   });
+
+//   const functions = Array.from(functionSet).map(item => ({
+//     label: item,
+//     value: item,
+//   }));
+
+//   return functions;
+// }
+
 const getSectionFilterOptions = (iso: string) => {
   if (iso !== '2013') {
     return getSections(iso);
@@ -185,31 +228,54 @@ const statusOptions: { label: string; value: number }[] = [
   },
   {
     label: 'Not Applicable',
-    value: 0,
-  },
-  {
-    label: 'Not Performed',
     value: 1,
   },
   {
-    label: 'Performed Informally',
+    label: 'Not Performed',
     value: 2,
   },
   {
-    label: 'Planned',
+    label: 'Performed Informally',
     value: 3,
   },
   {
-    label: 'Well Defined',
+    label: 'Planned',
     value: 4,
   },
   {
-    label: 'Quantitatively Controlled',
+    label: 'Well Defined',
     value: 5,
   },
   {
-    label: 'Continuously Improving',
+    label: 'Quantitatively Controlled',
     value: 6,
+  },
+  {
+    label: 'Continuously Improving',
+    value: 7,
+  },
+];
+
+const taskStatusOptions: { label: string; value: number }[] = [
+  {
+    label: 'To Do',
+    value: 0,
+  },
+  {
+    label: 'In Progress',
+    value: 1,
+  },
+  {
+    label: 'In Review',
+    value: 2,
+  },
+  {
+    label: 'Feedback',
+    value: 3,
+  },
+  {
+    label: 'Done',
+    value: 4,
   },
 ];
 
@@ -278,6 +344,32 @@ const colourStyles = {
   },
 };
 
+const isoValueToLabel = (value: ISO) => isoOptions.find(option => option.value === value)?.label
+
+const labels = [
+  'Unknown',
+  'Not Applicable',
+  'Not Performed',
+  'Performed Informally',
+  'Planned',
+  'Well Defined',
+  'Quantitatively Controlled',
+  'Continuously Improving',
+];
+
+// TODO: use css vars
+const barColors = [
+  'rgba(241, 241, 241, 1)',
+  'rgba(178, 178, 178, 1)',
+  'rgba(255, 0, 0, 1)',
+  'rgba(202, 0, 63, 1)',
+  'rgba(102, 102, 102, 1)',
+  'rgba(255, 190, 0, 1)',
+  'rgba(106, 217, 0, 1)',
+  'rgba(47, 143, 0, 1)',
+];
+
+// TODO: remake to named exports
 export {
   colourStyles,
   mergePoints,
@@ -285,9 +377,13 @@ export {
   getControlOptions,
   getSections,
   getSectionFilterOptions,
+  isoValueToLabel,
   statusOptions,
+  taskStatusOptions,
   sections,
   perPageOptions,
   controls,
   isoOptions,
+  labels,
+  barColors
 };

@@ -2,6 +2,9 @@ import { setCscIso, getCscIso } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
+import { subscriptions } from '@/lib/subscriptions';
+import { Plan } from '@prisma/client';
+import { ISO } from 'types';
 
 export default async function handler(
   req: NextApiRequest,
@@ -33,26 +36,29 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
     slug: slug as string,
   });
 
-  console.log('hande get iso responce', responce);
-
   return res.status(200).json({ data: { iso: responce }, error: null });
 };
 
 const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
-  throwIfNotAllowed(teamMember, 'team', 'read');
+  throwIfNotAllowed(teamMember, 'team', 'update');
 
   const { slug } = req.query;
-  const { iso } = req.body;
+  const { iso } = req.body as { iso: ISO[]};
+  // TODO: improve .? logic, or migrate the db to make subscription mandatory
+  const maxFrameworks = subscriptions?.[teamMember.team.subscription?.plan || Plan.COMMUNITY].maxFrameworks
+  
+  if (iso.length > maxFrameworks) {
+    return res.status(403).json({
+      error: { message: `Your subscription plan allows up to ${maxFrameworks} frameworks to be selected.`}
+    })
+  }
 
-  console.log('hande put iso slug ', { slug, iso });
-
+  //TODO: check if subscription allows to change to this ISO
   const responce = await setCscIso({
     slug: slug as string,
     iso,
   });
-
-  console.log('hande put isoresponce ', responce);
 
   return res.status(200).json({ data: { iso: responce }, error: null });
 };

@@ -7,9 +7,29 @@ const env = {
 
   // SAML Jackson configuration
   saml: {
-    issuer: 'https://saml.boxyhq.com',
+    issuer: `${process.env.SAML_ISSUER}`,
     path: '/api/oauth/saml',
     callback: `${process.env.APP_URL}`,
+  },
+
+  // SAML Jackson configuration
+  jackson: {
+    url: process.env.JACKSON_URL,
+    externalUrl: process.env.JACKSON_EXTERNAL_URL || process.env.JACKSON_URL,
+    apiKey: process.env.JACKSON_API_KEY,
+    productId: process.env.JACKSON_PRODUCT_ID || 'unicis-platform',
+    selfHosted: process.env.JACKSON_URL !== undefined,
+    sso: {
+      callback: `${process.env.APP_URL}`,
+      issuer: `${process.env.SAML_ISSUER}`,
+      path: '/api/oauth/saml',
+      oidcPath: '/api/oauth/oidc',
+      idpLoginPath: '/auth/idp-login',
+    },
+    dsync: {
+      webhook_url: `${process.env.APP_URL}/api/webhooks/dsync`,
+      webhook_secret: process.env.JACKSON_WEBHOOK_SECRET,
+    },
   },
 
   // SMTP configuration for NextAuth
@@ -93,6 +113,13 @@ const env = {
   recaptcha: {
     siteKey: process.env.RECAPTCHA_SITE_KEY || null,
     secretKey: process.env.RECAPTCHA_SECRET_KEY || null,
+  },
+
+  // Billing address
+  billingEmail: process.env.BILLING_EMAIL,
+
+  ai: {
+    llamaToken: process.env.LLAMA_TOKEN,
   },
 };
 

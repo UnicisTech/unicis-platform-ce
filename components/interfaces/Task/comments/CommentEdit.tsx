@@ -1,24 +1,17 @@
-import React, { useState, useCallback } from 'react';
-import { Button } from 'react-daisyui';
-import { useTranslation } from 'next-i18next';
-import type { Comment } from '@prisma/client';
-import 'react-quill/dist/quill.snow.css';
-import dynamic from 'next/dynamic';
-
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import React, { useState, useCallback } from "react";
+import { useTranslation } from "next-i18next";
+import type { Comment } from "@prisma/client";
+import DaisyButton from "@/components/shared/daisyUI/DaisyButton";
+import QuillEditor from "@/components/shared/QuillEditor";
 
 interface CommentEditProps {
   comment: Comment;
   cancelHandler: () => void;
   updateHandler: (text: string, id: number) => Promise<void>;
 }
-const CommentEdit = ({
-  comment,
-  cancelHandler,
-  updateHandler,
-}: CommentEditProps) => {
-  const { t } = useTranslation('common');
 
+const CommentEdit = ({ comment, cancelHandler, updateHandler }: CommentEditProps) => {
+  const { t } = useTranslation("common");
   const [newContent, setNewContent] = useState<string>(comment.text);
 
   const changeHandler = useCallback((content: string) => {
@@ -28,25 +21,24 @@ const CommentEdit = ({
   return (
     <>
       <div>
-        <ReactQuill defaultValue={comment.text} onChange={changeHandler} />
+        <QuillEditor
+          defaultValue={comment.text}
+          onChange={changeHandler}
+        />
       </div>
+
       <div className="flex gap-1.5 mt-1.5">
-        <Button
+        <DaisyButton
           size="sm"
           color="primary"
           variant="outline"
           onClick={() => updateHandler(newContent, comment.id)}
         >
-          {t('save')}
-        </Button>
-        <Button
-          size="sm"
-          color="ghost"
-          variant="outline"
-          onClick={() => cancelHandler()}
-        >
-          {t('cancel')}
-        </Button>
+          {t("save")}
+        </DaisyButton>
+        <DaisyButton size="sm" color="ghost" variant="outline" onClick={cancelHandler}>
+          {t("cancel")}
+        </DaisyButton>
       </div>
     </>
   );

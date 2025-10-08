@@ -31,11 +31,29 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
     },
   ];
 
+  if (canAccess('team_billing', ['read', 'update'])) {
+    navigations.push({
+      name: 'Billing',
+      href: `/teams/${team.slug}/billing`,
+      active: activeTab === 'billing',
+      icon: Cog6ToothIcon,
+    });
+  }
+
   if (canAccess('team_member', ['create', 'update', 'read', 'delete'])) {
     navigations.push({
       name: 'Members',
       href: `/teams/${team.slug}/members`,
       active: activeTab === 'members',
+      icon: UserPlusIcon,
+    });
+  }
+
+  if (canAccess('iap_course', ['read']) && canAccess('iap_reports', ['read'])) {
+    navigations.push({
+      name: 'Training',
+      href: `/teams/${team.slug}/iap/admin`,
+      active: activeTab === 'iap/admin',
       icon: UserPlusIcon,
     });
   }
@@ -118,7 +136,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
                 'inline-flex items-center border-b-2 py-4 text-sm font-medium',
                 menu.active
                   ? 'border-gray-900 text-gray-700 dark:text-gray-100'
-                  : 'border-transparent text-gray-500 hover:border-gray-300  hover:text-gray-700 hover:dark:text-gray-100'
+                  : 'border-transparent text-gray-500 hover:border-gray-300  hover:text-gray-700 dark:hover:text-gray-100'
               )}
             >
               {menu.name}

@@ -22,14 +22,8 @@ export const getServerSideProps = async (
 
   const slug = query.slug as string;
 
+  // TODO: replace with useTeam hook on client side
   const team = await getTeam({ slug });
-
-  //Hotfix for not serializable team props
-  // team.createdAt = team.createdAt.toString();
-  // team.updatedAt = team.updatedAt.toString();
-
-  // team.createdAt = team.createdAt;
-  // team.updatedAt = team.updatedAt.toString();
 
   return {
     props: {

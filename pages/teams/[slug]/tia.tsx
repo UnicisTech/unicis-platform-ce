@@ -10,10 +10,14 @@ import { GetServerSidePropsContext } from 'next';
 import useTeamTasks from 'hooks/useTeamTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import type { TaskWithTiaProcedure, TaskProperties } from 'types';
-import { CreateTIA, TiaTable, DeleteTia } from '@/components/interfaces/TIA';
-import { Button } from 'react-daisyui';
-import { DashboardCreateTIA } from '@/components/interfaces/TIA';
+import {
+  TiaTable,
+  DeleteProcedure,
+  CreateProcedure,
+} from '@/components/interfaces/TIA';
 import { PerPageSelector } from '@/components/shared';
+import { Button } from '@/components/shadcn/ui/button';
+import { TeamAssessmentAnalysis } from '@/components/interfaces/TeamDashboard';
 
 const TiaDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -23,6 +27,7 @@ const TiaDashboard: NextPageWithLayout<
   const { canAccess } = useCanAccess();
   const { slug } = router.query;
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskWithTiaProcedure | null>(
@@ -65,33 +70,50 @@ const TiaDashboard: NextPageWithLayout<
     return <Error />;
   }
 
+  if (!isLoading && !canAccess('tia', ['read'])) {
+    return <Error message={t('forbidden-resource')} />;
+  }
+
   return (
     <>
+      <div className="flex justify-between items-center">
+        <div className="space-y-3">
+          <h2 className="text-xl font-medium leading-none tracking-tight">
+            {t('tia-dashboard')}
+          </h2>
+        </div>
+        <div className="flex justify-end items-center my-1">
+          {tasksWithProcedures.length > 0 && (
+            <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
+          )}
+          {canAccess('task', ['update']) && (
+            <Button
+              color="primary"
+              onClick={() => {
+                setIsCreateOpen(true);
+              }}
+            >
+              {t('create')}
+            </Button>
+          )}
+        </div>
+      </div>
+      <>
+        {isCreateOpen && (
+          <CreateProcedure
+            open={isCreateOpen}
+            onOpenChange={setIsCreateOpen}
+            tasks={tasks}
+            mutateTasks={mutateTasks}
+          />
+        )}
+      </>
       {tasksWithProcedures.length === 0 ? (
         <EmptyState title={t('tia-dashboard')} description="No records" />
       ) : (
         <>
-          <div className="flex justify-between items-center">
-            <div className="space-y-3">
-              <h2 className="text-xl font-medium leading-none tracking-tight">
-                {t('tia-dashboard')}
-              </h2>
-            </div>
-            <div className="flex justify-end items-center my-1">
-              <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
-              {canAccess('task', ['update']) && (
-                <Button
-                  size="sm"
-                  color="primary"
-                  variant="outline"
-                  onClick={() => {
-                    setIsCreateOpen(true);
-                  }}
-                >
-                  {t('create')}
-                </Button>
-              )}
-            </div>
+          <div className="m-2">
+            <TeamAssessmentAnalysis slug={slug as string} />
           </div>
           <TiaTable
             slug={slug as string}
@@ -100,24 +122,18 @@ const TiaDashboard: NextPageWithLayout<
             editHandler={onEditClickHandler}
             deleteHandler={onDeleteClickHandler}
           />
-          {isCreateOpen && (
-            <DashboardCreateTIA
-              visible={isCreateOpen}
-              setVisible={setIsCreateOpen}
-              tasks={tasks}
-              mutate={mutateTasks}
-            />
-          )}
           {taskToEdit && isEditOpen && (
-            <CreateTIA
-              visible={isEditOpen}
-              setVisible={setIsEditOpen}
-              task={taskToEdit as TaskWithTiaProcedure}
-              mutate={mutateTasks}
+            <CreateProcedure
+              open={isEditOpen}
+              onOpenChange={setIsEditOpen}
+              prevProcedure={taskToEdit.properties.tia_procedure}
+              tasks={tasks}
+              selectedTask={taskToEdit}
+              mutateTasks={mutateTasks}
             />
           )}
           {taskToDelete && isDeleteOpen && (
-            <DeleteTia
+            <DeleteProcedure
               visible={isDeleteOpen}
               setVisible={setIsDeleteOpen}
               task={taskToDelete as TaskWithTiaProcedure}

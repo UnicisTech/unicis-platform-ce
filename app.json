@@ -1,9 +1,9 @@
 {
-  "name": "BoxyHQ Enterprise SaaS Starter Kit",
-  "description": "The Open Source Next.js Enterprise SaaS Starter Kit. Next.js based SaaS starter kit that saves you months of development by starting you off with all the features that are the same in every product, so you can focus on what makes your app unique.",
-  "repository": "https://github.com/boxyhq/saas-starter-kit",
-  "logo": "https://boxyhq.com/img/logo.png",
-  "keywords": ["saas", "starter", "kit", "enterprise"],
+  "name": "Unicis Platform",
+  "description": "An Open Source all-in-one application for the privacy, security, and compliance teams. ",
+  "repository": "https://github.com/UnicisTech/unicis-platform-ce",
+  "logo": "https://www.unicis.tech/img/unicis-platform-logo-ver.svg",
+  "keywords": ["saas", "grc", "risk", "compliance"],
   "env": {
     "NEXTAUTH_URL": {
       "description": "Next.js authentication URL."

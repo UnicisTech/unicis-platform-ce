@@ -62,7 +62,10 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
     const filename = attachment.filename;
 
     res.setHeader('Content-Type', 'application/octet-stream');
-    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename*=UTF-8''${encodeURIComponent(filename)}`
+    );
 
     const writeFileAsync = promisify(fs.writeFile);
     const tempFilePath = path.join('/tmp', filename);

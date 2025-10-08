@@ -1,28 +1,41 @@
-import fetcher from '@/lib/fetcher';
-import type { Permission } from '@/lib/subscriptions';
-import { useRouter } from 'next/router';
-import useSWR, { mutate } from 'swr';
-import type { ApiResponse } from 'types';
+import { Subscription, SubscriptionStatus, Plan } from '@prisma/client';
 
-const useSubscription = (slug?: string) => {
-  const { query, isReady } = useRouter();
+const params = {
+  COMMUNITY: {
+    maxUsers: 10,
+    avaliableISO: ['default'],
+  },
+  PREMIUM: {
+    maxUsers: 150,
+    avaliableISO: ['default', '2013', '2022', 'eunis2', 'gdpr', 'cisv81', 'c5_2020'],
+  },
+  ULTIMATE: {
+    maxUsers: 10000000,
+    avaliableISO: [
+      'default',
+      '2013',
+      '2022',
+      'nistcsfv2',
+      'eunis2',
+      'gdpr',
+      'cisv81',
+      'soc2v2',
+      'c5_2020',
+    ],
+  },
+};
 
-  const teamSlug = slug || (isReady ? query.slug : null);
+export const subscriptionParams = params;
 
-  const { data, error, isLoading } = useSWR<ApiResponse<Permission>>(
-    teamSlug ? `/api/teams/${teamSlug}/subscription` : null,
-    fetcher
-  );
-
-  const mutateSubscription = async () => {
-    mutate(`/api/teams/${teamSlug}/subscription`);
-  };
+const useSubscription = (subscription: Subscription) => {
+  const currentPlan =
+    subscription?.status === SubscriptionStatus.ACTIVE
+      ? subscription.plan
+      : Plan.COMMUNITY;
 
   return {
-    isLoading,
-    isError: error,
-    subscription: data?.data,
-    mutateSubscription,
+    currentPlan,
+    avaliableISO: params[currentPlan].avaliableISO,
   };
 };
 

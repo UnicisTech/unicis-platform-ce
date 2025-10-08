@@ -6,12 +6,21 @@ export type Resource =
   | 'team'
   | 'team_member'
   | 'team_invitation'
+  | 'team_billing'
   | 'team_sso'
   | 'team_dsync'
   | 'team_audit_log'
   | 'team_webhook'
   | 'team_api_key'
-  | 'task';
+  | 'task'
+  | 'iap_course'
+  | 'iap_category'
+  | 'iap_reports'
+  | 'rpa'
+  | 'tia'
+  | 'pia'
+  | 'csc'
+  | 'rm';
 
 export type RolePermissions = {
   [role in RoleType]: Permission[];
@@ -45,7 +54,7 @@ export const permissions: RolePermissions = {
   OWNER: [
     {
       resource: 'team',
-      actions: '*',
+      actions: ['read', 'leave', 'update'],
     },
     {
       resource: 'team_member',
@@ -53,6 +62,10 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'team_invitation',
+      actions: '*',
+    },
+    {
+      resource: 'team_billing',
       actions: '*',
     },
     {
@@ -77,6 +90,38 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'task',
+      actions: '*',
+    },
+    {
+      resource: 'iap_course',
+      actions: '*',
+    },
+    {
+      resource: 'iap_category',
+      actions: '*',
+    },
+    {
+      resource: 'iap_reports',
+      actions: '*',
+    },
+    {
+      resource: 'rpa',
+      actions: '*',
+    },
+    {
+      resource: 'tia',
+      actions: '*',
+    },
+    {
+      resource: 'pia',
+      actions: '*',
+    },
+    {
+      resource: 'csc',
+      actions: '*',
+    },
+    {
+      resource: 'rm',
       actions: '*',
     },
   ],
@@ -94,6 +139,10 @@ export const permissions: RolePermissions = {
       actions: '*',
     },
     {
+      resource: 'team_billing',
+      actions: '*',
+    },
+    {
       resource: 'team_sso',
       actions: '*',
     },
@@ -117,6 +166,38 @@ export const permissions: RolePermissions = {
       resource: 'task',
       actions: '*',
     },
+    {
+      resource: 'iap_course',
+      actions: '*',
+    },
+    {
+      resource: 'iap_category',
+      actions: '*',
+    },
+    {
+      resource: 'iap_reports',
+      actions: '*',
+    },
+    {
+      resource: 'rpa',
+      actions: '*',
+    },
+    {
+      resource: 'tia',
+      actions: '*',
+    },
+    {
+      resource: 'pia',
+      actions: '*',
+    },
+    {
+      resource: 'csc',
+      actions: '*',
+    },
+    {
+      resource: 'rm',
+      actions: '*',
+    },
   ],
   MEMBER: [
     {
@@ -131,6 +212,14 @@ export const permissions: RolePermissions = {
       resource: 'task',
       actions: '*',
     },
+    {
+      resource: 'iap_course',
+      actions: ['read', 'update'],
+    },
+    {
+      resource: 'iap_category',
+      actions: ['read'],
+    },
   ],
   AUDITOR: [
     {
@@ -143,6 +232,18 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'task',
+      actions: ['read'],
+    },
+    {
+      resource: 'iap_course',
+      actions: ['read'],
+    },
+    {
+      resource: 'iap_category',
+      actions: ['read'],
+    },
+    {
+      resource: 'iap_reports',
       actions: ['read'],
     },
   ],

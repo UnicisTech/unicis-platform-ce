@@ -3,19 +3,22 @@ import { defaultHeaders } from '@/lib/common';
 import { Team } from '@prisma/client';
 import useTeams from 'hooks/useTeams';
 import { useTranslation } from 'next-i18next';
+import useCanAccess from 'hooks/useCanAccess';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Button } from 'react-daisyui';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import { useRouter } from 'next/router';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
 import { WithLoadingAndError } from '@/components/shared';
 import CreateTeam from './CreateTeam';
+import DaisyButton from '../shared/daisyUI/DaisyButton';
 
 const Teams = () => {
   const router = useRouter();
   const { t } = useTranslation('common');
+  const { canAccess } = useCanAccess();
+
   const [team, setTeam] = useState<Team | null>(null);
   const { isLoading, isError, teams, mutateTeams } = useTeams();
   const [askConfirmation, setAskConfirmation] = useState(false);
@@ -59,41 +62,47 @@ const Teams = () => {
                 {t('team-listed')}
               </p>
             </div>
-            <Button
-              color="primary"
-              variant="outline"
-              size="md"
-              onClick={() => setCreateTeamVisible(!createTeamVisible)}
-            >
-              {t('create-team')}
-            </Button>
+            {canAccess('team', ['create']) && (
+              <DaisyButton
+                color="primary"
+                variant="outline"
+                size="md"
+                onClick={() => setCreateTeamVisible(!createTeamVisible)}
+              >
+                {t('create-team')}
+              </DaisyButton>
+            )}
           </div>
-          <table className="text-sm table w-full border-b dark:border-base-200">
-            <thead className="bg-base-200">
+          <table className="w-full min-w-full divide-y divide-border text-sm">
+            <thead className="bg-muted">
               <tr>
-                <th>{t('name')}</th>
-                <th>{t('members')}</th>
-                <th>{t('created-at')}</th>
-                <th>{t('actions')}</th>
+                <th className="w-4/10 px-4 py-2 text-left">{t('name')}</th>
+                <th className="w-2/10 px-4 py-2 text-left">{t('members')}</th>
+                <th className="w-2/10 px-4 py-2 text-left">
+                  {t('created-at')}
+                </th>
+                <th className="w-2/10 px-4 py-2 text-left">{t('actions')}</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-border">
               {teams &&
                 teams.map((team) => {
                   return (
                     <tr key={team.id}>
-                      <td>
-                        <Link href={`/teams/${team.slug}/members`}>
+                      <td className="px-4 py-2">
+                        <Link href={`/teams/${team.slug}/dashboard`}>
                           <div className="flex items-center justify-start space-x-2">
                             <LetterAvatar name={team.name} />
                             <span className="underline">{team.name}</span>
                           </div>
                         </Link>
                       </td>
-                      <td>{team._count.members}</td>
-                      <td>{new Date(team.createdAt).toDateString()}</td>
-                      <td>
-                        <Button
+                      <td className="px-4 py-2">{team._count.members}</td>
+                      <td className="px-4 py-2">
+                        {new Date(team.createdAt).toDateString()}
+                      </td>
+                      <td className="px-4 py-2">
+                        <DaisyButton
                           variant="outline"
                           size="xs"
                           color="error"
@@ -103,7 +112,7 @@ const Teams = () => {
                           }}
                         >
                           {t('leave-team')}
-                        </Button>
+                        </DaisyButton>
                       </td>
                     </tr>
                   );
@@ -171,7 +180,7 @@ const Teams = () => {
                         {new Date(team.createdAt).toDateString()}
                       </td>
                       <td className="px-6 py-3">
-                        <Button
+                        <DaisyButton
                           variant="outline"
                           size="xs"
                           color="error"
@@ -181,7 +190,7 @@ const Teams = () => {
                           }}
                         >
                           {t('leave-team')}
-                        </Button>
+                        </DaisyButton>
                       </td>
                     </tr>
                   );

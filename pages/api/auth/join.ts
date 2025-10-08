@@ -39,8 +39,16 @@ export default async function handler(
 
 // Signup the user
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { name, email, password, team, inviteToken, recaptchaToken } = req.body;
-
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    team,
+    inviteToken,
+    recaptchaToken,
+  } = req.body;
+  const name = `${firstName} ${lastName}`;
   await validateRecaptcha(recaptchaToken);
 
   const invitation = inviteToken
@@ -83,6 +91,8 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const user = await createUser({
     name,
+    firstName,
+    lastName,
     email: emailToUse,
     password: await hashPassword(password),
     emailVerified: invitation ? new Date() : null,
@@ -94,6 +104,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     const slug = slugify(team);
 
     await createTeam({
+      userEmail: emailToUse,
       userId: user.id,
       name: team,
       slug,

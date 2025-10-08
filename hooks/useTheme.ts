@@ -13,7 +13,19 @@ const useTheme = () => {
   const { t } = useTranslation('common');
 
   useEffect(() => {
-    setTheme(localStorage.getItem('theme'));
+    const current = localStorage.getItem('theme');
+    setTheme(current);
+
+    const handleStorageChange = () => {
+      const updated = localStorage.getItem('theme');
+      setTheme(updated);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   const themes: ThemesProps[] = [
@@ -37,18 +49,18 @@ const useTheme = () => {
   const selectedTheme = themes.find((t) => t.id === theme) || themes[0];
 
   const toggleTheme = () => {
-    selectedTheme.id === 'light' ? applyTheme('dark') : applyTheme('light');
+    const newTheme =
+      selectedTheme.id === 'light'
+        ? 'dark'
+        : selectedTheme.id === 'dark'
+          ? 'light'
+          : 'dark';
 
-    if (selectedTheme.id === 'light') {
-      applyTheme('dark');
-      setTheme('dark');
-    } else if (selectedTheme.id === 'dark') {
-      applyTheme('light');
-      setTheme('light');
-    } else if (selectedTheme.id === 'system') {
-      applyTheme('dark');
-      setTheme('dark');
-    }
+    localStorage.setItem('theme', newTheme);
+    applyTheme(newTheme);
+    setTheme(newTheme);
+
+    window.dispatchEvent(new StorageEvent('storage', { key: 'theme' }));
   };
 
   return { theme, setTheme, selectedTheme, toggleTheme, themes, applyTheme };

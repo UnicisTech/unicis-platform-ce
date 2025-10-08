@@ -1,6 +1,5 @@
 import { prisma } from '@/lib/prisma';
-
-import { getTeam, incrementTaskIndex, isTeamMember } from './team';
+import { getTeam, incrementTaskIndex } from './team';
 
 export const createTask = async (param: {
   authorId: string;
@@ -141,27 +140,4 @@ export const getTeamTasks = async (slug: string) => {
     },
   });
   return tasks;
-};
-
-export const isUserHasAccess = async (params: {
-  taskId: number;
-  userId: string;
-}) => {
-  const { taskId, userId } = params;
-  const task = await prisma.task.findUnique({
-    where: {
-      id: taskId,
-    },
-    select: {
-      teamId: true,
-    },
-  });
-
-  const teamId = task?.teamId as string;
-
-  if (!(await isTeamMember(userId, teamId))) {
-    return false;
-  }
-
-  return true;
 };

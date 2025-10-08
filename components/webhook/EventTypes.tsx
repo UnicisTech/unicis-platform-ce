@@ -1,51 +1,43 @@
-import React, { ReactElement } from 'react';
+import { eventTypes } from '@/lib/common';
+import { Checkbox } from '@/components/shadcn/ui/checkbox';
+import { Label } from '@/components/shadcn/ui/label';
 import type { WebookFormSchema } from 'types';
 
-export const eventTypes = [
-  'member.created',
-  'member.removed',
-  'invitation.created',
-  'invitation.removed',
-  'task.created',
-  'task.updated',
-  'task.commented',
-  'task.deleted',
-];
-
-const EventTypes = ({
-  onChange,
-  values,
-  error,
-}: {
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+interface Props {
   values: WebookFormSchema['eventTypes'];
-  error: string | string[] | undefined;
-}) => {
-  const events: ReactElement[] = [];
+  error?: string | string[];
+  setFieldValue: (field: string, value: any) => void;
+}
 
-  eventTypes.forEach((eventType) => {
-    events.push(
-      <div className="flex items-center" key={eventType}>
-        <input
-          type="checkbox"
-          name="eventTypes"
-          value={eventType}
-          onChange={onChange}
-          className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
-          defaultChecked={values ? values.includes(eventType) : false}
-        />
-        <label className="ml-2 text-sm text-gray-900">{eventType}</label>
-      </div>
-    );
-  });
+const EventTypes = ({ values, error, setFieldValue }: Props) => {
+  const handleChange = (eventType: string, checked: boolean) => {
+    const updated = checked
+      ? [...values, eventType]
+      : values.filter((val) => val !== eventType);
+
+    setFieldValue('eventTypes', updated);
+  };
 
   return (
-    <>
-      {events}
+    <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+      {eventTypes.map((eventType) => (
+        <div key={eventType} className="flex items-center space-x-2">
+          <Checkbox
+            id={eventType}
+            checked={values.includes(eventType)}
+            onCheckedChange={(checked) =>
+              handleChange(eventType, checked as boolean)
+            }
+          />
+          <Label htmlFor={eventType} className="text-sm">
+            {eventType}
+          </Label>
+        </div>
+      ))}
       {error && typeof error === 'string' && (
-        <div className="label-text-alt text-red-500">{error}</div>
+        <div className="col-span-2 text-sm text-destructive mt-1">{error}</div>
       )}
-    </>
+    </div>
   );
 };
 

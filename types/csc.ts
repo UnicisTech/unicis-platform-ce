@@ -20,6 +20,7 @@ export type ControlOption = {
   value: {
     code: string;
     control: string;
+    controlLabel?: string;
     requirements: string;
     section: string;
   };
@@ -40,12 +41,27 @@ export type Section = {
   value: string;
 };
 
-export type ISO = 'default' | '2013' | '2022';
+export type ISO =
+  | 'default'
+  | '2013'
+  | '2022'
+  | 'nistcsfv2'
+  | 'eunis2'
+  | 'gdpr'
+  | 'cisv81'
+  | 'soc2v2'
+  | 'c5_2020';
 
 type CscStatusesPropMap = {
   default: 'csc_statuses';
   2013: 'csc_statuses_2013';
   2022: 'csc_statuses_2022';
+  nistcsfv2: 'csc_statuses_nistcsfv2';
+  eunis2: 'csc_statuses_eunis2';
+  gdpr: 'csc_statuses_gdpr';
+  cisv81: 'csc_statuses_cisv81';
+  soc2v2: 'csc_statuses_soc2v2';
+  c5_2020: 'csc_statuses_c5_2020';
 };
 
 export type CscStatusesProp = CscStatusesPropMap[ISO];
@@ -54,12 +70,18 @@ type CscControlsPropMap = {
   default: 'csc_controls';
   2013: 'csc_controls_2013';
   2022: 'csc_controls_2022';
+  nistcsfv2: 'csc_controls_nistcsfv2';
+  eunis2: 'csc_controls_eunis2';
+  gdpr: 'csc_controls_gdpr';
+  cisv81: 'csc_controls_cisv81';
+  soc2v2: 'csc_controls_soc2v2';
+  c5_2020: 'csc_controls_c5_2020';
 };
 
 export type CscControlsProp = CscControlsPropMap[ISO];
 
 export type TeamCscProperties = {
-  csc_iso?: ISO;
+  csc_iso?: ISO[];
 } & {
   [key in CscStatusesProp]?: { [key: string]: string };
 };

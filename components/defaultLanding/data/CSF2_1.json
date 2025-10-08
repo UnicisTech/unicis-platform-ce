@@ -1,0 +1,744 @@
+[
+  {
+    "Code": "GV.OC-01",
+    "Section": "GOVERN",
+    "Control": "Organizational Context",
+    "Requirements": "The organizational mission is understood and informs cybersecurity risk management",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.OC-02",
+    "Section": "GOVERN",
+    "Control": "Organizational Context",
+    "Requirements": "Internal and external stakeholders are understood, and their needs and expectations regarding cybersecurity risk management are understood and considered",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.OC-03",
+    "Section": "GOVERN",
+    "Control": "Organizational Context",
+    "Requirements": "Legal, regulatory, and contractual requirements regarding cybersecurity - including privacy and civil liberties obligations - are understood and managed",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.OC-04",
+    "Section": "GOVERN",
+    "Control": "Organizational Context",
+    "Requirements": "Critical objectives, capabilities, and services that stakeholders depend on or expect from the organization are understood and communicated",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.OC-05",
+    "Section": "GOVERN",
+    "Control": "Organizational Context",
+    "Requirements": "Outcomes, capabilities, and services that the organization depends on are understood and communicated",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.RM-01",
+    "Section": "GOVERN",
+    "Control": "Risk Management Strategy",
+    "Requirements": "Risk management objectives are established and agreed to by organizational stakeholders",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.RM-02",
+    "Section": "GOVERN",
+    "Control": "Risk Management Strategy",
+    "Requirements": "Risk appetite and risk tolerance statements are established, communicated, and maintained",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.RM-03",
+    "Section": "GOVERN",
+    "Control": "Risk Management Strategy",
+    "Requirements": "Cybersecurity risk management activities and outcomes are included in enterprise risk management processes",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.RM-04",
+    "Section": "GOVERN",
+    "Control": "Risk Management Strategy",
+    "Requirements": "Strategic direction that describes appropriate risk response options is established and communicated",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.RM-05",
+    "Section": "GOVERN",
+    "Control": "Risk Management Strategy",
+    "Requirements": "Lines of communication across the organization are established for cybersecurity risks, including risks from suppliers and other third parties",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.RM-06",
+    "Section": "GOVERN",
+    "Control": "Risk Management Strategy",
+    "Requirements": "A standardized method for calculating, documenting, categorizing, and prioritizing cybersecurity risks is established and communicated",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.RM-07",
+    "Section": "GOVERN",
+    "Control": "Risk Management Strategy",
+    "Requirements": "Strategic opportunities (i.e., positive risks) are characterized and are included in organizational cybersecurity risk discussions",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.RR-01",
+    "Section": "GOVERN",
+    "Control": "Roles, Responsibilities, and Authorities",
+    "Requirements": "Organizational leadership is responsible and accountable for cybersecurity risk and fosters a culture that is risk-aware, ethical, and continually improving",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.RR-02",
+    "Section": "GOVERN",
+    "Control": "Roles, Responsibilities, and Authorities",
+    "Requirements": "Roles, responsibilities, and authorities related to cybersecurity risk management are established, communicated, understood, and enforced",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.RR-03",
+    "Section": "GOVERN",
+    "Control": "Roles, Responsibilities, and Authorities",
+    "Requirements": "Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.RR-04",
+    "Section": "GOVERN",
+    "Control": "Roles, Responsibilities, and Authorities",
+    "Requirements": "Cybersecurity is included in human resources practices",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.PO-01",
+    "Section": "GOVERN",
+    "Control": "Policy",
+    "Requirements": "Policy for managing cybersecurity risks is established based on organizational context, cybersecurity strategy, and priorities and is communicated and enforced",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.PO-02",
+    "Section": "GOVERN",
+    "Control": "Policy",
+    "Requirements": "Policy for managing cybersecurity risks is reviewed, updated, communicated, and enforced to reflect changes in requirements, threats, technology, and organizational mission",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.OV-01",
+    "Section": "GOVERN",
+    "Control": "Oversight",
+    "Requirements": "Cybersecurity risk management strategy outcomes are reviewed to inform and adjust strategy and direction",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.OV-02",
+    "Section": "GOVERN",
+    "Control": "Oversight",
+    "Requirements": "The cybersecurity risk management strategy is reviewed and adjusted to ensure coverage of organizational requirements and risks",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.OV-03",
+    "Section": "GOVERN",
+    "Control": "Oversight",
+    "Requirements": "Organizational cybersecurity risk management performance is evaluated and reviewed for adjustments needed",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.SC-01",
+    "Section": "GOVERN",
+    "Control": "Cybersecurity Supply Chain Risk Management",
+    "Requirements": "A cybersecurity supply chain risk management program, strategy, objectives, policies, and processes are established and agreed to by organizational stakeholders",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.SC-02",
+    "Section": "GOVERN",
+    "Control": "Cybersecurity Supply Chain Risk Management",
+    "Requirements": "Cybersecurity roles and responsibilities for suppliers, customers, and partners are established, communicated, and coordinated internally and externally",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.SC-03",
+    "Section": "GOVERN",
+    "Control": "Cybersecurity Supply Chain Risk Management",
+    "Requirements": "Cybersecurity supply chain risk management is integrated into cybersecurity and enterprise risk management, risk assessment, and improvement processes",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.SC-04",
+    "Section": "GOVERN",
+    "Control": "Cybersecurity Supply Chain Risk Management",
+    "Requirements": "Suppliers are known and prioritized by criticality",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.SC-05",
+    "Section": "GOVERN",
+    "Control": "Cybersecurity Supply Chain Risk Management",
+    "Requirements": "Requirements to address cybersecurity risks in supply chains are established, prioritized, and integrated into contracts and other types of agreements with suppliers and other relevant third parties",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.SC-06",
+    "Section": "GOVERN",
+    "Control": "Cybersecurity Supply Chain Risk Management",
+    "Requirements": "Planning and due diligence are performed to reduce risks before entering into formal supplier or other third-party relationships",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.SC-07",
+    "Section": "GOVERN",
+    "Control": "Cybersecurity Supply Chain Risk Management",
+    "Requirements": "The risks posed by a supplier, their products and services, and other third parties are understood, recorded, prioritized, assessed, responded to, and monitored over the course of the relationship",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.SC-08",
+    "Section": "GOVERN",
+    "Control": "Cybersecurity Supply Chain Risk Management",
+    "Requirements": "Relevant suppliers and other third parties are included in incident planning, response, and recovery activities",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.SC-09",
+    "Section": "GOVERN",
+    "Control": "Cybersecurity Supply Chain Risk Management",
+    "Requirements": "Supply chain security practices are integrated into cybersecurity and enterprise risk management programs, and their performance is monitored throughout the technology product and service life cycle",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "GV.SC-10",
+    "Section": "GOVERN",
+    "Control": "Cybersecurity Supply Chain Risk Management",
+    "Requirements": "Cybersecurity supply chain risk management plans include provisions for activities that occur after the conclusion of a partnership or service agreement",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.AM-01",
+    "Section": "IDENTIFY",
+    "Control": "Asset Management",
+    "Requirements": "Inventories of hardware managed by the organization are maintained",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.AM-02",
+    "Section": "IDENTIFY",
+    "Control": "Asset Management",
+    "Requirements": "Inventories of software, services, and systems managed by the organization are maintained",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.AM-03",
+    "Section": "IDENTIFY",
+    "Control": "Asset Management",
+    "Requirements": "Representations of the organization's authorized network communication and internal and external network data flows are maintained",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.AM-04",
+    "Section": "IDENTIFY",
+    "Control": "Asset Management",
+    "Requirements": "Inventories of services provided by suppliers are maintained",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.AM-05",
+    "Section": "IDENTIFY",
+    "Control": "Asset Management",
+    "Requirements": "Assets are prioritized based on classification, criticality, resources, and impact on the mission",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.AM-07",
+    "Section": "IDENTIFY",
+    "Control": "Asset Management",
+    "Requirements": "Inventories of data and corresponding metadata for designated data types are maintained",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.AM-08",
+    "Section": "IDENTIFY",
+    "Control": "Asset Management",
+    "Requirements": "Systems, hardware, software, services, and data are managed throughout their life cycles",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.RA-01",
+    "Section": "IDENTIFY",
+    "Control": "Risk Assessment",
+    "Requirements": "Vulnerabilities in assets are identified, validated, and recorded",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.RA-02",
+    "Section": "IDENTIFY",
+    "Control": "Risk Assessment",
+    "Requirements": "Cyber threat intelligence is received from information sharing forums and sources",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.RA-03",
+    "Section": "IDENTIFY",
+    "Control": "Risk Assessment",
+    "Requirements": "Internal and external threats to the organization are identified and recorded",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.RA-04",
+    "Section": "IDENTIFY",
+    "Control": "Risk Assessment",
+    "Requirements": "Potential impacts and likelihoods of threats exploiting vulnerabilities are identified and recorded",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.RA-05",
+    "Section": "IDENTIFY",
+    "Control": "Risk Assessment",
+    "Requirements": "Threats, vulnerabilities, likelihoods, and impacts are used to understand inherent risk and inform risk response prioritization",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.RA-06",
+    "Section": "IDENTIFY",
+    "Control": "Risk Assessment",
+    "Requirements": "Risk responses are chosen, prioritized, planned, tracked, and communicated",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.RA-07",
+    "Section": "IDENTIFY",
+    "Control": "Risk Assessment",
+    "Requirements": "Changes and exceptions are managed, assessed for risk impact, recorded, and tracked",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.RA-08",
+    "Section": "IDENTIFY",
+    "Control": "Risk Assessment",
+    "Requirements": "Processes for receiving, analyzing, and responding to vulnerability disclosures are established",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.RA-09",
+    "Section": "IDENTIFY",
+    "Control": "Risk Assessment",
+    "Requirements": "The authenticity and integrity of hardware and software are assessed prior to acquisition and use",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.RA-10",
+    "Section": "IDENTIFY",
+    "Control": "Risk Assessment",
+    "Requirements": "Critical suppliers are assessed prior to acquisition",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.IM-01",
+    "Section": "IDENTIFY",
+    "Control": "Improvement",
+    "Requirements": "Improvements are identified from evaluations",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.IM-02",
+    "Section": "IDENTIFY",
+    "Control": "Improvement",
+    "Requirements": "Improvements are identified from security tests and exercises, including those done in coordination with suppliers and relevant third parties",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.IM-03",
+    "Section": "IDENTIFY",
+    "Control": "Improvement",
+    "Requirements": "Improvements are identified from execution of operational processes, procedures, and activities",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "ID.IM-04",
+    "Section": "IDENTIFY",
+    "Control": "Improvement",
+    "Requirements": "Incident response plans and other cybersecurity plans that affect operations are established, communicated, maintained, and improved",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.AA-01",
+    "Section": "PROTECT",
+    "Control": "Identity Management, Authentication, and Access Requirements",
+    "Requirements": "Identities and credentials for authorized users, services, and hardware are managed by the organization",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.AA-02",
+    "Section": "PROTECT",
+    "Control": "Identity Management, Authentication, and Access Requirements",
+    "Requirements": "Identities are proofed and bound to credentials based on the context of interactions",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.AA-03",
+    "Section": "PROTECT",
+    "Control": "Identity Management, Authentication, and Access Requirements",
+    "Requirements": "Users, services, and hardware are authenticated",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.AA-04",
+    "Section": "PROTECT",
+    "Control": "Identity Management, Authentication, and Access Requirements",
+    "Requirements": "Identity assertions are protected, conveyed, and verified",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.AA-05",
+    "Section": "PROTECT",
+    "Control": "Identity Management, Authentication, and Access Requirements",
+    "Requirements": "Access permissions, entitlements, and authorizations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.AA-06",
+    "Section": "PROTECT",
+    "Control": "Identity Management, Authentication, and Access Requirements",
+    "Requirements": "Physical access to assets is managed, monitored, and enforced commensurate with risk",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.AT-01",
+    "Section": "PROTECT",
+    "Control": "Awareness and Training",
+    "Requirements": "Personnel are provided with awareness and training so that they possess the knowledge and skills to perform general tasks with cybersecurity risks in mind",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.AT-02",
+    "Section": "PROTECT",
+    "Control": "Awareness and Training",
+    "Requirements": "Individuals in specialized roles are provided with awareness and training so that they possess the knowledge and skills to perform relevant tasks with cybersecurity risks in mind",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.DS-01",
+    "Section": "PROTECT",
+    "Control": "Data Security",
+    "Requirements": "The confidentiality, integrity, and availability of data-at-rest are protected",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.DS-02",
+    "Section": "PROTECT",
+    "Control": "Data Security",
+    "Requirements": "The confidentiality, integrity, and availability of data-in-transit are protected",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.DS-10",
+    "Section": "PROTECT",
+    "Control": "Data Security",
+    "Requirements": "The confidentiality, integrity, and availability of data-in-use are protected",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.DS-11",
+    "Section": "PROTECT",
+    "Control": "Data Security",
+    "Requirements": "Backups of data are created, protected, maintained, and tested",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.PS-01",
+    "Section": "PROTECT",
+    "Control": "Platform Security",
+    "Requirements": "Configuration management practices are established and applied",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.PS-02",
+    "Section": "PROTECT",
+    "Control": "Platform Security",
+    "Requirements": "Software is maintained, replaced, and removed commensurate with risk",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.PS-03",
+    "Section": "PROTECT",
+    "Control": "Platform Security",
+    "Requirements": "Hardware is maintained, replaced, and removed commensurate with risk",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.PS-04",
+    "Section": "PROTECT",
+    "Control": "Platform Security",
+    "Requirements": "Log records are generated and made available for continuous monitoring",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.PS-05",
+    "Section": "PROTECT",
+    "Control": "Platform Security",
+    "Requirements": "Installation and execution of unauthorized software are prevented",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.PS-06",
+    "Section": "PROTECT",
+    "Control": "Platform Security",
+    "Requirements": "Secure software development practices are integrated, and their performance is monitored throughout the software development life cycle",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.IR-01",
+    "Section": "PROTECT",
+    "Control": "Technology Infrastructure Resilience",
+    "Requirements": "Networks and environments are protected from unauthorized logical access and usage",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.IR-02",
+    "Section": "PROTECT",
+    "Control": "Technology Infrastructure Resilience",
+    "Requirements": "The organization's technology assets are protected from environmental threats",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.IR-03",
+    "Section": "PROTECT",
+    "Control": "Technology Infrastructure Resilience",
+    "Requirements": "Mechanisms are implemented to achieve resilience requirements in normal and adverse situations",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "PR.IR-04",
+    "Section": "PROTECT",
+    "Control": "Technology Infrastructure Resilience",
+    "Requirements": "Adequate resource capacity to ensure availability is maintained",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "DE.CM-01",
+    "Section": "DETECT",
+    "Control": "Continuous Monitoring",
+    "Requirements": "Networks and network services are monitored to find potentially adverse events",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "DE.CM-02",
+    "Section": "DETECT",
+    "Control": "Continuous Monitoring",
+    "Requirements": "The physical environment is monitored to find potentially adverse events",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "DE.CM-03",
+    "Section": "DETECT",
+    "Control": "Continuous Monitoring",
+    "Requirements": "Personnel activity and technology usage are monitored to find potentially adverse events",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "DE.CM-06",
+    "Section": "DETECT",
+    "Control": "Continuous Monitoring",
+    "Requirements": "External service provider activities and services are monitored to find potentially adverse events",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "DE.CM-09",
+    "Section": "DETECT",
+    "Control": "Continuous Monitoring",
+    "Requirements": "Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "DE.AE-02",
+    "Section": "DETECT",
+    "Control": "Adverse Event Analysis",
+    "Requirements": "Potentially adverse events are analyzed to better understand associated activities",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "DE.AE-03",
+    "Section": "DETECT",
+    "Control": "Adverse Event Analysis",
+    "Requirements": "Information is correlated from multiple sources",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "DE.AE-04",
+    "Section": "DETECT",
+    "Control": "Adverse Event Analysis",
+    "Requirements": "The estimated impact and scope of adverse events are understood",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "DE.AE-06",
+    "Section": "DETECT",
+    "Control": "Adverse Event Analysis",
+    "Requirements": "Information on adverse events is provided to authorized staff and tools",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "DE.AE-07",
+    "Section": "DETECT",
+    "Control": "Adverse Event Analysis",
+    "Requirements": "Cyber threat intelligence and other contextual information are integrated into the analysis",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "DE.AE-08",
+    "Section": "DETECT",
+    "Control": "Adverse Event Analysis",
+    "Requirements": "Incidents are declared when adverse events meet the defined incident criteria",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RS.MA-01",
+    "Section": "RESPOND",
+    "Control": "Incident Management",
+    "Requirements": "The incident response plan is executed in coordination with relevant third parties once an incident is declared",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RS.MA-02",
+    "Section": "RESPOND",
+    "Control": "Incident Management",
+    "Requirements": "Incident reports are triaged and validated",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RS.MA-03",
+    "Section": "RESPOND",
+    "Control": "Incident Management",
+    "Requirements": "Incidents are categorized and prioritized",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RS.MA-04",
+    "Section": "RESPOND",
+    "Control": "Incident Management",
+    "Requirements": "Incidents are escalated or elevated as needed",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RS.MA-05",
+    "Section": "RESPOND",
+    "Control": "Incident Management",
+    "Requirements": "The criteria for initiating incident recovery are applied",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RS.AN-03",
+    "Section": "RESPOND",
+    "Control": "Incident Analysis",
+    "Requirements": "Analysis is performed to establish what has taken place during an incident and the root cause of the incident",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RS.AN-06",
+    "Section": "RESPOND",
+    "Control": "Incident Analysis",
+    "Requirements": "Actions performed during an investigation are recorded, and the records' integrity and provenance are preserved",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RS.AN-07",
+    "Section": "RESPOND",
+    "Control": "Incident Analysis",
+    "Requirements": "Incident data and metadata are collected, and their integrity and provenance are preserved",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RS.AN-08",
+    "Section": "RESPOND",
+    "Control": "Incident Analysis",
+    "Requirements": "An incident's magnitude is estimated and validated",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RS.CO-02",
+    "Section": "RESPOND",
+    "Control": "Incident Response Reporting and Communication",
+    "Requirements": "Internal and external stakeholders are notified of incidents",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RS.CO-03",
+    "Section": "RESPOND",
+    "Control": "Incident Response Reporting and Communication",
+    "Requirements": "Information is shared with designated internal and external stakeholders",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RS.MI-01",
+    "Section": "RESPOND",
+    "Control": "Incident Mitigation",
+    "Requirements": "Incidents are contained",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RS.MI-02",
+    "Section": "RESPOND",
+    "Control": "Incident Mitigation",
+    "Requirements": "Incidents are eradicated",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RC.RP-01",
+    "Section": "RECOVER",
+    "Control": "Incident Recovery Plan Execution",
+    "Requirements": "The recovery portion of the incident response plan is executed once initiated from the incident response process",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RC.RP-02",
+    "Section": "RECOVER",
+    "Control": "Incident Recovery Plan Execution",
+    "Requirements": "Recovery actions are selected, scoped, prioritized, and performed",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RC.RP-03",
+    "Section": "RECOVER",
+    "Control": "Incident Recovery Plan Execution",
+    "Requirements": "The integrity of backups and other restoration assets is verified before using them for restoration",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RC.RP-04",
+    "Section": "RECOVER",
+    "Control": "Incident Recovery Plan Execution",
+    "Requirements": "Critical mission Sections and cybersecurity risk management are considered to establish post-incident operational norms",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RC.RP-05",
+    "Section": "RECOVER",
+    "Control": "Incident Recovery Plan Execution",
+    "Requirements": "The integrity of restored assets is verified, systems and services are restored, and normal operating status is confirmed",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RC.RP-06",
+    "Section": "RECOVER",
+    "Control": "Incident Recovery Plan Execution",
+    "Requirements": "The end of incident recovery is declared based on criteria, and incident-related documentation is completed",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RC.CO-03",
+    "Section": "RECOVER",
+    "Control": "Incident Recovery Communication",
+    "Requirements": "Recovery activities and progress in restoring operational capabilities are communicated to designated internal and external stakeholders",
+    "Status": "Unknown"
+  },
+  {
+    "Code": "RC.CO-04",
+    "Section": "RECOVER",
+    "Control": "Incident Recovery Communication",
+    "Requirements": "Public updates on incident recovery are shared using approved methods and messaging",
+    "Status": "Unknown"
+  }
+]

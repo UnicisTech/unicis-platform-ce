@@ -1,5 +1,4 @@
 import { CreateDirectory, Directory } from '@/components/directorySync';
-import { Card } from '@/components/shared';
 import { Error, Loading } from '@/components/shared';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import { TeamTab } from '@/components/team';
@@ -11,12 +10,24 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { Button } from 'react-daisyui';
 import { toast } from 'react-hot-toast';
-import type { ApiResponse } from 'types';
+import type { ApiResponse, NextPageWithLayout } from 'types';
 import env from '@/lib/env';
+import { getSession } from '@/lib/session';
+import { getTeamMember } from 'models/team';
+import { throwIfNotAllowed } from 'models/user';
+import { inferSSRProps } from '@/lib/inferSSRProps';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/shadcn/ui/card';
+import { Button } from '@/components/shadcn/ui/button';
 
-const DirectorySync = ({ teamFeatures }) => {
+const DirectorySync: NextPageWithLayout<
+  inferSSRProps<typeof getServerSideProps>
+> = ({ teamFeatures, error }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
 
@@ -31,8 +42,8 @@ const DirectorySync = ({ teamFeatures }) => {
     return <Loading />;
   }
 
-  if (isError) {
-    return <Error message={isError.message} />;
+  if (isError || error) {
+    return <Error message={isError?.message || error?.message} />;
   }
 
   if (!team) {
@@ -74,31 +85,27 @@ const DirectorySync = ({ teamFeatures }) => {
         teamFeatures={teamFeatures}
       />
       <Card>
-        <Card.Body>
+        <CardHeader>
+          <CardTitle>{t('directory-sync')}</CardTitle>
+        </CardHeader>
+        <CardContent>
           <div className="mb-3 flex items-center justify-between">
-            <p className="text-sm">{t('provision')}</p>
-            {directory === null ? (
+            <p className="text-sm text-muted-foreground">{t('provision')}</p>
+            {directory ? (
               <Button
-                onClick={() => setVisible(!visible)}
-                variant="outline"
-                color="primary"
-                size="md"
-              >
-                {t('configure')}
-              </Button>
-            ) : (
-              <Button
+                variant="destructive"
                 onClick={() => setConfirmationDialogVisible(true)}
-                variant="outline"
-                color="error"
-                size="md"
               >
                 {t('remove')}
+              </Button>
+            ) : (
+              <Button variant="outline" onClick={() => setVisible(true)}>
+                {t('configure')}
               </Button>
             )}
           </div>
           <Directory team={team} />
-        </Card.Body>
+        </CardContent>
       </Card>
       <CreateDirectory visible={visible} setVisible={setVisible} team={team} />
       <ConfirmationDialog
@@ -113,21 +120,44 @@ const DirectorySync = ({ teamFeatures }) => {
   );
 };
 
-export async function getServerSideProps({
-  locale,
-}: GetServerSidePropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { locale, req, res, query } = context;
+
   if (!env.teamFeatures.dsync) {
     return {
       notFound: true,
     };
   }
 
-  return {
-    props: {
-      ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      teamFeatures: env.teamFeatures,
-    },
-  };
+  const session = await getSession(req, res);
+  const teamMember = await getTeamMember(
+    session?.user.id as string,
+    query.slug as string
+  );
+
+  try {
+    throwIfNotAllowed(teamMember, 'team_dsync', 'read');
+
+    return {
+      props: {
+        ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+        error: null,
+        teamFeatures: env.teamFeatures,
+      },
+    };
+  } catch (error: unknown) {
+    const { message } = error as { message: string };
+
+    return {
+      props: {
+        ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+        error: {
+          message,
+        },
+        teamFeatures: env.teamFeatures,
+      },
+    };
+  }
 }
 
 export default DirectorySync;
