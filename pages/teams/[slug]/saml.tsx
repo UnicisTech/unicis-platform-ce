@@ -28,7 +28,7 @@ const TeamSSO = ({ teamFeatures, SPConfigURL }) => {
 
   return (
     <>
-      <TeamTab activeTab="sso" team={team} teamFeatures={teamFeatures} />
+      <TeamTab activeTab="saml" team={team} teamFeatures={teamFeatures} />
       <ConnectionsWrapper
         urls={{
           spMetadata: SPConfigURL,
