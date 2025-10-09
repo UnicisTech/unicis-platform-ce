@@ -32,6 +32,7 @@ const PiaAnalysis = ({ tasks }: PiaAnalysisProps) => {
                   {title}
                 </div>
                 <div className="flex-1">
+                  {/* // TODO: remove datasets prop? */}
                   <RiskMatrixDashboardChart datasets={[]} counterMap={map} />
                 </div>
               </div>

@@ -46,26 +46,25 @@ const TeamDashboard = ({
       </div>
       <div className="space-y-6">
         {/* TODO: { [key: string]: string; } is temporary solution */}
-        <div className="mb-4 mx-4 flex items-center justify-between">
-          <h2 className="text-2xl font-semibold tracking-tight">
-            {t(`${slug?.toString().toUpperCase()} Task Overview`)}
-          </h2>
+        {/* TODO: remove space-y-6 wrappers around each block? */}
+        <div className="space-y-6">
+          <div className="mb-4 mx-4 flex items-center justify-between">
+            <h2 className="text-2xl font-semibold tracking-tight">
+              {t(`${slug?.toString().toUpperCase()} Task Overview`)}
+            </h2>
+          </div>
+          <TeamTaskAnalysis slug={slug} />
         </div>
-        <TeamTaskAnalysis slug={slug} />
         <div className="mb-4 mx-4 flex items-center justify-between">
           <h2 className="text-2xl font-semibold tracking-tight">
             {t(`Data Privacy Overview`)}
           </h2>
         </div>
-        <div
-          style={{
-            width: '100%',
-            display: 'flex',
-            marginBottom: '10px',
-          }}
-        >
-          <ProcessingActivitiesAnalysis slug={slug} />
-          <TeamAssessmentAnalysis slug={slug} />
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-4">
+            <ProcessingActivitiesAnalysis slug={slug} />
+            <TeamAssessmentAnalysis slug={slug} />
+          </div>
         </div>
         <div className="space-y-6">
           <div className="mb-4 mx-4 flex items-center justify-between">
