@@ -124,26 +124,25 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
         {heading ? heading : team.name}
       </h2>
       <nav
-        className=" flex space-x-5 border-b border-gray-300"
+        className="flex space-x-5 border-b border-gray-300 overflow-x-auto no-scrollbar"
         aria-label="Tabs"
       >
-        {navigations.map((menu) => {
-          return (
-            <Link
-              href={menu.href}
-              key={menu.href}
-              className={classNames(
-                'inline-flex items-center border-b-2 py-4 text-sm font-medium',
-                menu.active
-                  ? 'border-gray-900 text-gray-700 dark:text-gray-100'
-                  : 'border-transparent text-gray-500 hover:border-gray-300  hover:text-gray-700 dark:hover:text-gray-100'
-              )}
-            >
-              {menu.name}
-            </Link>
-          );
-        })}
+        {navigations.map((menu) => (
+          <Link
+            key={menu.href}
+            href={menu.href}
+            className={classNames(
+              'inline-flex items-center border-b-2 py-4 text-sm font-medium whitespace-nowrap',
+              menu.active
+                ? 'border-gray-900 text-gray-700 dark:text-gray-100'
+                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:hover:text-gray-100'
+            )}
+          >
+            {menu.name}
+          </Link>
+        ))}
       </nav>
+
     </div>
   );
 };
