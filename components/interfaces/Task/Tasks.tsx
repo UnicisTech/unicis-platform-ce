@@ -90,7 +90,7 @@ const Tasks = ({ team }: { team: Team }) => {
         <h2 className="text-xl font-medium leading-none tracking-tight">
           {t('all-tasks')}
         </h2>
-        <div className="flex flex-col lg:flex-row justify-between lg:align-end items-center">
+        <div className="flex flex-col lg:flex-row justify-between items-end items-center">
           <TaskFilters
             selectedStatuses={selectedStatuses}
             setSelectedStatuses={setSelectedStatuses}
@@ -117,7 +117,9 @@ const Tasks = ({ team }: { team: Team }) => {
                   <th className="w-1/10 px-4 py-2 text-left">{t('task-id')}</th>
                   <th className="w-2/5 px-4 py-2 text-left">{t('title')}</th>
                   <th className="w-1/10 px-4 py-2 text-left">{t('status')}</th>
-                  <th className="w-1/10 px-4 py-2 text-left">{t('due-date')}</th>
+                  <th className="w-1/10 px-4 py-2 text-left">
+                    {t('due-date')}
+                  </th>
                   <th className="w-1/5 px-4 py-2 text-left">{t('actions')}</th>
                 </tr>
               </thead>
@@ -144,9 +146,9 @@ const Tasks = ({ team }: { team: Team }) => {
                           'csc_controls',
                         ].map((key) =>
                           typeof task.properties === 'object' &&
-                            task.properties &&
-                            key in task.properties &&
-                            (task.properties as any)[key] ? (
+                          task.properties &&
+                          key in task.properties &&
+                          (task.properties as any)[key] ? (
                             <ModuleBadge key={key} propName={key} />
                           ) : null
                         )}
@@ -175,7 +177,9 @@ const Tasks = ({ team }: { team: Team }) => {
                             variant="outline"
                             size="sm"
                             onClick={() =>
-                              router.push(`/teams/${slug}/tasks/${task.taskNumber}`)
+                              router.push(
+                                `/teams/${slug}/tasks/${task.taskNumber}`
+                              )
                             }
                           >
                             {t('edit-task')}
