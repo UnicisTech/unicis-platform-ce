@@ -8,6 +8,7 @@ import cisv81 from '../cis_v81_1.json';
 import soc2v2 from '../soc2-v2.json';
 import c5_2020 from '../c5_2020.json';
 import { ISO, Section } from 'types';
+import { removeTrailingParenthesis, truncateText } from '@/lib/utils';
 
 const controls = {
   '2013': iso2013Json,
@@ -163,7 +164,22 @@ const mergePoints = (d) => {
 
 const getRadarChartLabels = (iso: string) => {
   const labels = getSectionsLabels(iso);
-  return labels.map((label) => label.split(' '));
+
+  return labels.map((label) => {
+    let processedLabel: string;
+
+    switch (iso) {
+      case 'c5_2020':
+        processedLabel = removeTrailingParenthesis(label);
+        break;
+      default:
+        processedLabel = label;
+    }
+
+    processedLabel = truncateText(processedLabel, 25);
+
+    return processedLabel.split(' ');
+  });
 };
 
 const getSections = (iso: string): Section[] => {
