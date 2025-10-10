@@ -17,7 +17,7 @@ const TaskStatusesDetail = ({
   ];
 
   return (
-    <div className='grid grid-cols-2 gap-4 w-full'>
+    <div className="grid grid-cols-2 gap-4 w-full">
       {stats.map(({ label, value }) => (
         <div
           key={label}

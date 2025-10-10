@@ -142,7 +142,6 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
           </Link>
         ))}
       </nav>
-
     </div>
   );
 };

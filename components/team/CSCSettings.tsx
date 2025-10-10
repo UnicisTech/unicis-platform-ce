@@ -31,11 +31,12 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
   const frameworkOptions = isoOptions.map((option) => {
     const isDisabled = !avaliableISO.includes(option.value);
     const message = isDisabled
-      ? ` - ${subscriptionParams.ULTIMATE.avaliableISO.includes(option.value) &&
-        !subscriptionParams.PREMIUM.avaliableISO.includes(option.value)
-        ? t('csc-ultimate only')
-        : t('csc-premium-and-ultimate only')
-      }`
+      ? ` - ${
+          subscriptionParams.ULTIMATE.avaliableISO.includes(option.value) &&
+          !subscriptionParams.PREMIUM.avaliableISO.includes(option.value)
+            ? t('csc-ultimate only')
+            : t('csc-premium-and-ultimate only')
+        }`
       : null;
 
     return {
@@ -102,10 +103,12 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
                 defaultValue={teamProperties.csc_iso}
               />
             </div>
-            <div className='items-center pt-0 flex justify-end'>
+            <div className="items-center pt-0 flex justify-end">
               <Button
                 type="submit"
-                disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
+                disabled={
+                  !formik.isValid || !formik.dirty || formik.isSubmitting
+                }
               >
                 {formik.isSubmitting && <Loader2 className="animate-spin" />}
                 {t('choose')}

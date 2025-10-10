@@ -14,11 +14,11 @@ export const capitalizeCountryName = (name: string) => {
 
 export const removeTrailingParenthesis = (text: string): string => {
   return text.replace(/\s*\([^()]*\)\s*$/, '').trim();
-}
+};
 
 export const truncateText = (text: string, limit: number): string => {
   if (text.length <= limit) return text;
 
   const maxLength = Math.max(limit - 3, 0); // prevent negative result
   return text.slice(0, maxLength) + '...';
-}
+};

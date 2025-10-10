@@ -1,6 +1,11 @@
 import { TaskStatusesDetail } from '@/components/interfaces/CSC';
 import useTeamTasks from 'hooks/useTeamTasks';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/shadcn/ui/card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/shadcn/ui/card';
 import TasksPieChart from './TasksPieChart';
 
 //TODO: move to lib?
@@ -58,7 +63,7 @@ const TasksAnalysis = ({ slug }: { slug: string }) => {
         </Card>
       </div>
     </div>
-  )
+  );
 };
 
 export default TasksAnalysis;
