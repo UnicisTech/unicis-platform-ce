@@ -90,7 +90,7 @@ const Tasks = ({ team }: { team: Team }) => {
         <h2 className="text-xl font-medium leading-none tracking-tight">
           {t('all-tasks')}
         </h2>
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col lg:flex-row justify-between lg:align-end items-center">
           <TaskFilters
             selectedStatuses={selectedStatuses}
             setSelectedStatuses={setSelectedStatuses}
