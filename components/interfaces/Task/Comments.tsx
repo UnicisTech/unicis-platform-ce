@@ -120,7 +120,7 @@ export default function Comments({
 
   return (
     <div className="p-5">
-      <div style={{ marginTop: '30px' }}>
+      <div className="mt-[30px]">
         {task.comments
           .sort(
             (a, b) =>

@@ -114,7 +114,7 @@ const StatusesTable = ({
                   {option.value.controlLabel || option.value.control}
                 </td>
                 <td className="px-6 py-3">
-                  <span style={{ whiteSpace: 'pre-line' }}>
+                  <span className="whitespace-pre-line">
                     {option.value.requirements}
                   </span>
                 </td>
@@ -135,7 +135,7 @@ const StatusesTable = ({
                       />
                     </div>
                   ) : (
-                    <span style={{ whiteSpace: 'pre-line' }}>
+                    <span className="whitespace-pre-line">
                       {statuses[option.value.control]}
                     </span>
                   )}

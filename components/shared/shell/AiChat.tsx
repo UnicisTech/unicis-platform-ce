@@ -302,12 +302,11 @@ const AiChat: React.FC = () => {
 
       {/* Chat Popup */}
       <div
-        className={`fixed right-4 bottom-16 z-50 transition-all duration-300 transform ${
+        className={`fixed right-4 bottom-16 z-50 h-[80vh] transition-all duration-300 transform ${
           visible
             ? 'opacity-100 translate-x-0'
             : 'opacity-0 translate-x-full pointer-events-none'
         }`}
-        style={{ height: '80vh' }}
       >
         <Card className="relative w-[20rem] md:w-[32rem] h-full flex flex-col shadow-lg border">
           <button
@@ -344,17 +343,12 @@ const AiChat: React.FC = () => {
                     remarkPlugins={[remarkGfm]}
                     components={{
                       ol: ({ children }) => (
-                        <ol
-                          style={{
-                            padding: '0.5rem 0 0.5rem 1.5rem',
-                            listStyleType: 'decimal',
-                          }}
-                        >
+                        <ol className="list-decimal py-2 pl-6">
                           {children}
                         </ol>
                       ),
                       li: ({ children }) => (
-                        <li style={{ marginBottom: '0.5rem' }}>{children}</li>
+                        <li className="mb-2">{children}</li>
                       ),
                     }}
                   >

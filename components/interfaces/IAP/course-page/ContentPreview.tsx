@@ -13,7 +13,7 @@ const ContentPreview = ({ course }: { course: IapCourse }) => {
       return (
         <iframe
           src={course.url as string}
-          style={{ display: 'block', margin: '10px auto' }}
+          className="block my-[10px] mx-auto"
           width="960"
           height="569"
           allowFullScreen={true}

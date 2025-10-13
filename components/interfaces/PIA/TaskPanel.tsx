@@ -57,7 +57,7 @@ const FieldTab: React.FC<{ idx: number; risk: PiaRisk }> = ({ idx, risk }) => (
 );
 
 const BubbleChartTab: React.FC<{ risk: PiaRisk }> = ({ risk }) => (
-  <div style={{ minHeight: '200px', width: '100%' }}>
+  <div className="min-h-[200px] w-full">
     <RiskMatrixBubbleChart
       datasets={[
         {

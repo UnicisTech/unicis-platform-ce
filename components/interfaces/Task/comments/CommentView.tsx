@@ -33,7 +33,7 @@ const CommentView = ({
             size="sm"
             variant="link"
             color="ghost"
-            style={{ color: 'grey', paddingLeft: '0px' }}
+            className="text-gray-500 pl-0"
             onClick={() => activateEditForComment(comment.id)}
           >
             Edit
@@ -42,7 +42,7 @@ const CommentView = ({
             size="sm"
             variant="link"
             color="ghost"
-            style={{ color: 'grey' }}
+            className="text-gray-500"
             onClick={() => deleteComment(comment.id)}
           >
             Delete

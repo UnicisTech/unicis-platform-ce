@@ -195,14 +195,8 @@ const CscPanel2 = ({
               isDeleting={isDeleting}
             />
           ))}
-          <div
-            style={{
-              marginTop: '15px',
-              display: 'flex',
-              justifyContent: 'flex-end',
-            }}
-          >
-            <div style={{ margin: '0 5px' }}>
+          <div className="mt-[15px] flex justify-end">
+            <div className="mx-[5px] my-0">
               <Button
                 color="primary"
                 size="sm"
@@ -215,7 +209,7 @@ const CscPanel2 = ({
                 + Add Control
               </Button>
             </div>
-            <div style={{ margin: '0 5px' }}>
+            <div className="mx-[5px] my-0">
               <Button
                 variant="destructive"
                 size="sm"

@@ -144,12 +144,8 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
 
   return (
     <div
-      style={{
-        position: 'relative',
-        width: `${chartWidth}px`,
-        height: `${chartHeight}px`,
-        margin: 'auto',
-      }}
+      className="relative mx-auto"
+      style={{ width: `${chartWidth}px`, height: `${chartHeight}px` }}
     >
       <Bubble
         ref={chartRef}
@@ -160,11 +156,10 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
       {points.map((point, index) => (
         <div
           key={index}
-          className="absolute flex items-center justify-center rounded-md text-sm font-semibold text-black dark:text-white bg-white/80 dark:bg-black/70 shadow"
+          className="absolute flex items-center justify-center rounded-md text-sm font-semibold text-black dark:text-white bg-white/80 dark:bg-black/70 shadow -translate-x-1/2 -translate-y-1/2"
           style={{
             left: `${point.x}px`,
             top: `${point.y}px`,
-            transform: 'translate(-50%, -50%)',
             width: `${CELL_SIZE * 0.7}px`,
             height: `${CELL_SIZE * 0.6}px`,
           }}
