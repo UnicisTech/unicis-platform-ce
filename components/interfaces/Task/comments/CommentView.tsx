@@ -1,8 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 import { AccessControl } from '@/components/shared/AccessControl';
 import type { Comment } from '@prisma/client';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import QuillEditor from '@/components/shared/QuillEditor';
+import { Button } from '@/components/shadcn/ui/button';
 
 interface CommentViewProps {
   comment: Comment;
@@ -14,6 +15,8 @@ const CommentView = ({
   activateEditForComment,
   deleteComment,
 }: CommentViewProps) => {
+  const { t } = useTranslation('common');
+  
   return (
     <>
       <div>
@@ -29,24 +32,20 @@ const CommentView = ({
       </div>
       <div>
         <AccessControl resource="task" actions={['update']}>
-          <DaisyButton
+          <Button
+            variant="subtle"
             size="sm"
-            variant="link"
-            color="ghost"
-            className="text-gray-500 pl-0"
             onClick={() => activateEditForComment(comment.id)}
           >
-            Edit
-          </DaisyButton>
-          <DaisyButton
+            {t('edit')}
+          </Button>
+          <Button
+            variant="subtle"
             size="sm"
-            variant="link"
-            color="ghost"
-            className="text-gray-500"
             onClick={() => deleteComment(comment.id)}
           >
-            Delete
-          </DaisyButton>
+            {t('delete')}
+          </Button>
         </AccessControl>
       </div>
     </>
