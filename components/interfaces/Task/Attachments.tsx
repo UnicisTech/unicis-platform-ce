@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState, useRef } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';

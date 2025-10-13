@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useEffect, ChangeEvent } from 'react';
 import { Checkbox } from '@/components/shadcn/ui/checkbox';
 import { Input } from '@/components/shadcn/ui/input';

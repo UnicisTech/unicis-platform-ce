@@ -1,5 +1,3 @@
-'use client';
-
 import * as React from 'react';
 import { Control } from 'react-hook-form';
 import {
