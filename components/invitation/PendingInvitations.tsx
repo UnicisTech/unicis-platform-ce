@@ -59,16 +59,16 @@ const PendingInvitations = ({ team }: { team: Team }) => {
   };
 
   const copyInviteLink = async (invitation: Invitation) => {
-    const invitationLink = generateInvitationLink(invitation.token)
+    const invitationLink = generateInvitationLink(invitation.token);
 
     try {
       await navigator.clipboard.writeText(invitationLink);
       toast.success(t('copied-to-clipboard'));
     } catch (err) {
       console.error('Failed to copy: ', err);
-      toast.error('Failed to copy link to clipboard!')
+      toast.error('Failed to copy link to clipboard!');
     }
-  }
+  };
 
   return (
     <div className="space-y-3">
@@ -109,7 +109,7 @@ const PendingInvitations = ({ team }: { team: Team }) => {
                     variant="outline"
                     aria-label="Copy"
                     onClick={() => {
-                      copyInviteLink(invitation)
+                      copyInviteLink(invitation);
                     }}
                   >
                     {t('copy-to-clipboard')}

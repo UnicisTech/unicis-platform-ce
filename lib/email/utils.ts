@@ -21,6 +21,6 @@ export function extractEmailDomain(email: string) {
   return email.split('@')[1];
 }
 
-export function generateInvitationLink(token: string) { 
-  return `${env.appUrl}/invitations/${token}`
+export function generateInvitationLink(token: string) {
+  return `${env.appUrl}/invitations/${token}`;
 }
