@@ -16,7 +16,6 @@ import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
-import { generateInvitationLink } from '@/lib/email/utils';
 
 const PendingInvitations = ({ team }: { team: Team }) => {
   const [selectedInvitation, setSelectedInvitation] =
@@ -59,7 +58,7 @@ const PendingInvitations = ({ team }: { team: Team }) => {
   };
 
   const copyInviteLink = async (invitation: Invitation) => {
-    const invitationLink = generateInvitationLink(invitation.token);
+    const invitationLink = `${window.location.origin}/invitations/${invitation.token}`;
 
     try {
       await navigator.clipboard.writeText(invitationLink);
