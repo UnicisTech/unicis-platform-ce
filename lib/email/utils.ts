@@ -20,3 +20,7 @@ export const isEmailAllowed = (email: string) => {
 export function extractEmailDomain(email: string) {
   return email.split('@')[1];
 }
+
+export function generateInvitationLink(token: string) { 
+  return `${env.appUrl}/invitations/${token}`
+}
