@@ -83,6 +83,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     crud: 'c',
     user: teamMember.user,
     team: teamMember.team,
+    subscriptionPlan: teamMember.team.subscription?.plan,
   });
 
   res.status(201).json({ data });
@@ -103,6 +104,7 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
     crud: 'd',
     user: teamMember.user,
     team: teamMember.team,
+    subscriptionPlan: teamMember.team.subscription?.plan,
   });
 
   res.status(200).json({ data: {} });
