@@ -21,7 +21,7 @@ export const sendEmail = async (data: EmailData) => {
     });
 
     if (response.error) {
-      throw new Error(response.error.message)
+      throw new Error(response.error.message);
     }
 
     return response;
@@ -30,4 +30,3 @@ export const sendEmail = async (data: EmailData) => {
     throw error;
   }
 };
-
