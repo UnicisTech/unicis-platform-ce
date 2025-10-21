@@ -39,7 +39,12 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 
 ### Coming Next
 
-- TISAX
+- EU Cyber Resilience Act (CRA)
+- EU Digital Operational Resilience Act (DORA)
+- Payment Card Industry Data Security Standard (PCI-DSS)
+- Cloud Controls Matrix and CAIQ v4 (CSA CCM v4)
+- ISO/IEC 42001:2023 - AI management systems
+- Trusted Information Security Assessment Exchange (TISAX)
 - EU IA Act
 - Custom ...
 
