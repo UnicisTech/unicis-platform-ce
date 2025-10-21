@@ -16,6 +16,22 @@
 Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs.
 
 Please star ⭐ the repo if you want us to continue developing and improving the Unicis Platform! 😀
+<p align="center">
+  <img src="https://d4.alternativeto.net/XZ4y8JadDsw7PevtL5HKWDZfmnKG0q0A4uniE1oIgKE/rs:fit:2400:2400:0/g:ce:0:0/YWJzOi8vZGlzdC9zL3VuaWNpcy1wbGF0Zm9ybV84NzMyNTVfZnVsbC5zdmc.jpg" 
+       alt="Unicis Platform Screenshot" 
+       width="800" 
+       style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin-bottom: 20px;">
+</p>
+
+<p align="center">
+  <img src="https://www.unicis.tech/img/frameworks/unicis-gdpr.svg" alt="Unicis GDPR" height="60">
+  <img src="https://www.unicis.tech/img/frameworks/unicis-mvsp.svg" alt="MVSP" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/img/frameworks/unicis-iso27k.svg" alt="Unicis ISO 27001" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/img/frameworks/unicis-nist2.svg" alt="Unicis NIST 2" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/img/frameworks/unicis-nis2.svg" alt="Unicis NIS 2" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/img/frameworks/unicis-cis.svg" alt="Unicis CIS" height="60" style="margin-left: 10px;">
+</p>
+
 
 ## 📖 Additional Resources
 
@@ -140,9 +156,8 @@ syft dir:unicis-platform -o spdx-json > sbom-spdx.json
 syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 ```
 
-#### Free and open source community edition - all-in-one tools for security, privacy and compliance team
 
-![unicis-platform-beta-poster](https://www.unicis.tech/img/unicis-platform-early-access.png)
+
 
 ## Modules
 
