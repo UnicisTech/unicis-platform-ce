@@ -8,10 +8,11 @@
 
 ![Static Badge](https://img.shields.io/badge/Github%20stargazers%2C%20https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Fstargazers?logo=github&label=GitHub%20Star&link=https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Fstargazer)
 ![Static Badge](https://img.shields.io/badge/Github%20fork%2C%20https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Ffork?logo=github&label=GitHub%20Fork&link=https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Ffork)
-[Mastodon](https://mastodon.xyz/@unicis_tech) |
+![Mastodon Follow](https://img.shields.io/mastodon/follow/110267135494682486)
 ![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/UnicisTech)
-![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F?logo=LinkedIn&label=LinkedIn&link=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F) |
-<a href="https://discord.com/invite/8TwyeD97HD">Discord</a>
+![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F?logo=LinkedIn&label=LinkedIn&link=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F)
+![Discord](https://img.shields.io/discord/1110270854824214589)
+
 
 Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs.
 
@@ -23,14 +24,24 @@ Please star ⭐ the repo if you want us to continue developing and improving the
        style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin-bottom: 20px;">
 </p>
 
+## 🗄️ Available Frameworks and Standards
+
 <p align="center">
   <img src="https://www.unicis.tech/img/frameworks/unicis-gdpr.svg" alt="Unicis GDPR" height="60">
   <img src="https://www.unicis.tech/img/frameworks/unicis-mvsp.svg" alt="MVSP" height="60" style="margin-left: 10px;">
   <img src="https://www.unicis.tech/img/frameworks/unicis-iso27k.svg" alt="Unicis ISO 27001" height="60" style="margin-left: 10px;">
   <img src="https://www.unicis.tech/img/frameworks/unicis-nist2.svg" alt="Unicis NIST 2" height="60" style="margin-left: 10px;">
-  <img src="https://www.unicis.tech/img/frameworks/unicis-nis2.svg" alt="Unicis NIS 2" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/img/frameworks/unicis-nis2.svg" alt="Unicis EU NIS 2" height="60" style="margin-left: 10px;">
   <img src="https://www.unicis.tech/img/frameworks/unicis-cis.svg" alt="Unicis CIS" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/img/frameworks/unicis-c5.svg" alt="Unicis C5" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/img/frameworks/unicis-soc2.svg" alt="Unicis SOC2 Type II" height="60" style="margin-left: 10px;">
 </p>
+
+### Coming Next
+
+- TISAX
+- EU IA Act
+- Custom ...
 
 
 ## 📖 Additional Resources
@@ -50,6 +61,8 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 - [Svix](https://www.svix.com/) (Provides Webhook Orchestration)
 - [Retraced](https://github.com/retracedhq/retraced) (Provides Audit Logs Service)
 - Endpoints collection (Provided by [Osquery](https://osquery.io/))
+- [Resend](https://resend.com/) (Email delivery)
+- [Bearer](https://github.com/Bearer/bearer) (Code security scanning tool (SAST))
 
 ## 🚀 Deployment
 
