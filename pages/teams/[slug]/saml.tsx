@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import env from '@/lib/env';
 import { BOXYHQ_UI_CSS } from '@/components/styles';
+import { getTeamFeatures } from '@/lib/subscriptions';
 
 const TeamSSO = ({ teamFeatures, SPConfigURL }) => {
   const { t } = useTranslation('common');
@@ -71,10 +72,12 @@ const TeamSSO = ({ teamFeatures, SPConfigURL }) => {
   );
 };
 
-export async function getServerSideProps({
-  locale,
-}: GetServerSidePropsContext) {
-  if (!env.teamFeatures.sso) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { locale, req, res, query } = context;
+
+  const teamFeatures = await getTeamFeatures(req, res, query);
+
+  if (!teamFeatures.sso) {
     return {
       notFound: true,
     };
@@ -87,7 +90,7 @@ export async function getServerSideProps({
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      teamFeatures: env.teamFeatures,
+      teamFeatures: teamFeatures,
       SPConfigURL,
     },
   };

@@ -4,12 +4,24 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import type { TeamWithSubscription, SubscriptionWithPayments } from 'types';
 import useTeamMembers from 'hooks/useTeamMembers';
-import { getTotalPrice, planPrice } from '@/lib/subscriptions';
 import { format } from 'date-fns/format';
+import { Plan } from '@prisma/client';
 
 interface WisePaymentCardProps {
   team: TeamWithSubscription;
 }
+
+// TODO: this logic duplicates subscriptions.ts as a hotfix
+const planPrice = {
+  [Plan.COMMUNITY]: 0,
+  [Plan.PREMIUM]: 49,
+  [Plan.ULTIMATE]: 89,
+};
+
+const getTotalPrice = (plan: Plan, amount: number) => {
+  const total: number = planPrice[plan] * amount;
+  return total;
+};
 
 const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
   const { t } = useTranslation('common');
