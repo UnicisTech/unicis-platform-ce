@@ -1,6 +1,5 @@
 import { Error, Loading } from '@/components/shared';
 import { AccessControl } from '@/components/shared/AccessControl';
-import env from '@/lib/env';
 import {
   RemoveTeam,
   TeamSettings,
@@ -11,6 +10,7 @@ import useTeam from 'hooks/useTeam';
 import type { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { getTeamFeatures } from '@/lib/subscriptions';
 
 const Settings = ({ teamFeatures }) => {
   const { t } = useTranslation('common');
@@ -42,13 +42,15 @@ const Settings = ({ teamFeatures }) => {
   );
 };
 
-export async function getServerSideProps({
-  locale,
-}: GetServerSidePropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { locale, req, res, query } = context;
+
+  const teamFeatures = await getTeamFeatures(req, res, query);
+
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      teamFeatures: env.teamFeatures,
+      teamFeatures: teamFeatures,
     },
   };
 }

@@ -5,6 +5,7 @@ import env from '@/lib/env';
 import { inferSSRProps } from '@/lib/inferSSRProps';
 import { getViewerToken } from '@/lib/retraced';
 import { getSession } from '@/lib/session';
+import { getTeamFeatures } from '@/lib/subscriptions';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeam from 'hooks/useTeam';
 import { getTeamMember } from 'models/team';
@@ -69,13 +70,16 @@ const Events: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({
 };
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  if (!env.teamFeatures.auditLog) {
+  const { locale, req, res, query } = context;
+
+  // TODO: dublicated logic of getSession and getTeamMember in getTeamFeatures
+  const teamFeatures = await getTeamFeatures(req, res, query);
+
+  if (!teamFeatures.auditLog) {
     return {
       notFound: true,
     };
   }
-
-  const { locale, req, res, query } = context;
 
   const session = await getSession(req, res);
   const teamMember = await getTeamMember(
@@ -97,7 +101,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         error: null,
         auditLogToken: auditLogToken ?? '',
         retracedHost: env.retraced.url ?? '',
-        teamFeatures: env.teamFeatures,
+        teamFeatures: teamFeatures,
       },
     };
   } catch (error: unknown) {
@@ -110,7 +114,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         },
         auditLogToken: null,
         retracedHost: null,
-        teamFeatures: env.teamFeatures,
+        teamFeatures: teamFeatures,
       },
     };
   }

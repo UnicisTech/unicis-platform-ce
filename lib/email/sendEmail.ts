@@ -1,16 +1,7 @@
-import nodemailer from 'nodemailer';
-
+import { Resend } from 'resend';
 import env from '../env';
 
-const transporter = nodemailer.createTransport({
-  host: env.smtp.host,
-  port: env.smtp.port,
-  secure: false,
-  auth: {
-    user: env.smtp.user,
-    pass: env.smtp.password,
-  },
-});
+const resend = new Resend(env.resend.apiKey);
 
 interface EmailData {
   to: string;
@@ -20,13 +11,22 @@ interface EmailData {
 }
 
 export const sendEmail = async (data: EmailData) => {
-  if (!env.smtp.host) {
-    return;
+  try {
+    const response = await resend.emails.send({
+      from: env.resend.from,
+      to: data.to,
+      subject: data.subject,
+      html: data.html,
+      text: data.text,
+    });
+
+    if (response.error) {
+      throw new Error(response.error.message);
+    }
+
+    return response;
+  } catch (error) {
+    console.error('Error sending email:', error);
+    throw error;
   }
-
-  const emailDefaults = {
-    from: env.smtp.from,
-  };
-
-  return await transporter.sendMail({ ...emailDefaults, ...data });
 };

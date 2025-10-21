@@ -87,7 +87,7 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
 
         <CardContent className="space-y-4">
           <p>{t('csc-choose-iso')}</p>
-          <div className="flex items-center space-x-3 w-1/2">
+          <div className="flex flex-col lg:flex-row gap-4">
             <div className="flex-1">
               <Label htmlFor="iso" className="sr-only">
                 {t('iso')}
@@ -103,13 +103,17 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
                 defaultValue={teamProperties.csc_iso}
               />
             </div>
-            <Button
-              type="submit"
-              disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
-            >
-              {formik.isSubmitting && <Loader2 className="animate-spin" />}
-              {t('choose')}
-            </Button>
+            <div className="items-center pt-0 flex justify-end">
+              <Button
+                type="submit"
+                disabled={
+                  !formik.isValid || !formik.dirty || formik.isSubmitting
+                }
+              >
+                {formik.isSubmitting && <Loader2 className="animate-spin" />}
+                {t('choose')}
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>

@@ -81,7 +81,7 @@ const StatusesTable = ({
 
   return (
     <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
-      <div className="overflow-x- mt-2">
+      <div className="overflow-x-auto mt-2">
         <table className="w-full min-w-full divide-y divide-border text-sm">
           <thead className="bg-muted">
             <tr>
@@ -140,7 +140,7 @@ const StatusesTable = ({
                     </span>
                   )}
                 </td>
-                <td className="px-6 py-3 w-80">
+                <td className="px-6 py-3 max-w-80">
                   {canAccess('task', ['update']) ? (
                     <TaskSelector
                       tasks={tasks}
