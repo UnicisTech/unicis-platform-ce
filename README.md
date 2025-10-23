@@ -13,10 +13,10 @@
 ![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F?logo=LinkedIn&label=LinkedIn&link=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F)
 ![Discord](https://img.shields.io/discord/1110270854824214589)
 
-
 Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs.
 
 Please star ⭐ the repo if you want us to continue developing and improving the Unicis Platform! 😀
+
 <p align="center">
   <img src="https://d4.alternativeto.net/XZ4y8JadDsw7PevtL5HKWDZfmnKG0q0A4uniE1oIgKE/rs:fit:2400:2400:0/g:ce:0:0/YWJzOi8vZGlzdC9zL3VuaWNpcy1wbGF0Zm9ybV84NzMyNTVfZnVsbC5zdmc.jpg" 
        alt="Unicis Platform Screenshot" 
@@ -47,7 +47,6 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 - Trusted Information Security Assessment Exchange (TISAX)
 - EU IA Act
 - Custom ...
-
 
 ## 📖 Additional Resources
 
@@ -173,9 +172,6 @@ We use [syft](https://github.com/anchore/syft) tool for generating SBOM
 syft dir:unicis-platform -o spdx-json > sbom-spdx.json
 syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 ```
-
-
-
 
 ## Modules
 
