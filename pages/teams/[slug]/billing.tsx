@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Error, Loading } from '@/components/shared';
-import env from '@/lib/env';
 import { TeamTab } from '@/components/team';
 import useTeam from 'hooks/useTeam';
 import type { GetServerSidePropsContext } from 'next';
@@ -13,6 +12,7 @@ import { getSession } from '@/lib/session';
 import { getTeamMember } from 'models/team';
 import { NextPageWithLayout } from 'types';
 import { inferSSRProps } from '@/lib/inferSSRProps';
+import { getTeamFeatures } from '@/lib/subscriptions';
 
 const plans = [
   {
@@ -108,6 +108,9 @@ const Billing: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { locale, req, res, query } = context;
 
+  // TODO: dublicated logic of getSession and getTeamMember in getTeamFeatures
+  const teamFeatures = await getTeamFeatures(req, res, query);
+
   const session = await getSession(req, res);
   const teamMember = await getTeamMember(
     session?.user.id as string,
@@ -121,7 +124,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       props: {
         ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
         error: null,
-        teamFeatures: env.teamFeatures,
+        teamFeatures: teamFeatures,
       },
     };
   } catch (error: unknown) {
@@ -132,7 +135,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         error: {
           message,
         },
-        teamFeatures: env.teamFeatures,
+        teamFeatures: teamFeatures,
       },
     };
   }

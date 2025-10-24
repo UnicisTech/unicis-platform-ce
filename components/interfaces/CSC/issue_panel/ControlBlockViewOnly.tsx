@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useMemo } from 'react';
 import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
 import { Input } from '@/components/shadcn/ui/input';

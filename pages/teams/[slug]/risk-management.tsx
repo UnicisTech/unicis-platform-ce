@@ -20,6 +20,7 @@ export const getServerSideProps = async (
 ) => {
   const { locale, query }: GetServerSidePropsContext = context;
   const slug = query.slug as string;
+  // TODO: move getTeam to client hook?
   const team = await getTeam({ slug });
 
   return {

@@ -57,6 +57,18 @@ const PendingInvitations = ({ team }: { team: Team }) => {
     toast.success(t('invitation-deleted'));
   };
 
+  const copyInviteLink = async (invitation: Invitation) => {
+    const invitationLink = `${window.location.origin}/invitations/${invitation.token}`;
+
+    try {
+      await navigator.clipboard.writeText(invitationLink);
+      toast.success(t('copied-to-clipboard'));
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      toast.error('Failed to copy link to clipboard!');
+    }
+  };
+
   return (
     <div className="space-y-3">
       <div className="space-y-3">
@@ -91,15 +103,26 @@ const PendingInvitations = ({ team }: { team: Team }) => {
                 {new Date(invitation.expires).toLocaleDateString()}
               </TableCell>
               <TableCell className="text-right">
-                <Button
-                  variant="destructive"
-                  onClick={() => {
-                    setSelectedInvitation(invitation);
-                    setConfirmationDialogVisible(true);
-                  }}
-                >
-                  {t('remove')}
-                </Button>
+                <div className="inline-flex gap-2 justify-end">
+                  <Button
+                    variant="outline"
+                    aria-label="Copy"
+                    onClick={() => {
+                      copyInviteLink(invitation);
+                    }}
+                  >
+                    {t('copy-to-clipboard')}
+                  </Button>
+                  <Button
+                    variant="destructive"
+                    onClick={() => {
+                      setSelectedInvitation(invitation);
+                      setConfirmationDialogVisible(true);
+                    }}
+                  >
+                    {t('remove')}
+                  </Button>
+                </div>
               </TableCell>
             </TableRow>
           ))}

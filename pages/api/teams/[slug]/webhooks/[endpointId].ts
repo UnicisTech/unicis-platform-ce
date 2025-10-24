@@ -96,6 +96,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     crud: 'u',
     user: teamMember.user,
     team: teamMember.team,
+    subscriptionPlan: teamMember.team.subscription?.plan,
   });
 
   recordMetric('webhook.updated');

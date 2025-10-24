@@ -74,6 +74,7 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
     crud: 'd',
     user: teamMember.user,
     team: teamMember.team,
+    subscriptionPlan: teamMember.team.subscription?.plan,
   });
 
   recordMetric('member.removed');
@@ -129,6 +130,7 @@ const handlePATCH = async (req: NextApiRequest, res: NextApiResponse) => {
     crud: 'u',
     user: teamMember.user,
     team: teamMember.team,
+    subscriptionPlan: teamMember.team.subscription?.plan,
   });
 
   recordMetric('member.role.updated');

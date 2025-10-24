@@ -121,6 +121,11 @@ const env = {
   ai: {
     llamaToken: process.env.LLAMA_TOKEN,
   },
+
+  resend: {
+    apiKey: process.env.RESEND_API_KEY!,
+    from: process.env.RESEND_FROM!,
+  },
 };
 
 export default env;
