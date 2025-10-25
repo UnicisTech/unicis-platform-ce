@@ -101,6 +101,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     crud: 'c',
     user: teamMember.user,
     team: teamMember.team,
+    subscriptionPlan: teamMember.team.subscription?.plan,
   });
 
   recordMetric('invitation.created');
@@ -146,6 +147,7 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
     crud: 'd',
     user: teamMember.user,
     team: teamMember.team,
+    subscriptionPlan: teamMember.team.subscription?.plan,
   });
 
   await sendEvent(teamMember.teamId, 'invitation.removed', invitation);

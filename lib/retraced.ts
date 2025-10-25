@@ -1,4 +1,5 @@
 import type { Team } from '@prisma/client';
+import { Plan } from '@prisma/client';
 import { Client } from '@retracedhq/retraced';
 import type { CRUD, Event } from '@retracedhq/retraced';
 import type { User } from 'next-auth';
@@ -27,6 +28,7 @@ type Request = {
   user: User;
   team: Team;
   crud: CRUD;
+  subscriptionPlan: Plan | undefined;
   // target: Target;
 };
 
@@ -49,6 +51,8 @@ const getRetracedClient = () => {
 };
 
 export const sendAudit = async (request: Request) => {
+  if (request.subscriptionPlan !== Plan.ULTIMATE) return;
+
   const retracedClient = getRetracedClient();
 
   if (!retracedClient) {

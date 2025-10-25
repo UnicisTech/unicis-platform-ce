@@ -60,6 +60,8 @@ interface MultiSelectProps
     value: string;
     /** Optional icon component to display alongside the option. */
     icon?: React.ComponentType<{ className?: string }>;
+    /** Optional state to siable option selection. */
+    isDisabled?: boolean;
   }[];
 
   /**
@@ -307,11 +309,16 @@ export const MultiSelect = React.forwardRef<
                 </CommandItem>
                 {options.map((option) => {
                   const isSelected = selectedValues.includes(option.value);
+                  const isDisabled = option.isDisabled;
+
                   return (
                     <CommandItem
                       key={option.value}
-                      onSelect={() => toggleOption(option.value)}
-                      className="cursor-pointer"
+                      onSelect={() => !isDisabled && toggleOption(option.value)}
+                      className={cn(
+                        'cursor-pointer',
+                        isDisabled && 'opacity-50 cursor-not-allowed'
+                      )}
                     >
                       <div
                         className={cn(
@@ -324,7 +331,12 @@ export const MultiSelect = React.forwardRef<
                         <CheckIcon className="h-4 w-4" />
                       </div>
                       {option.icon && (
-                        <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+                        <option.icon
+                          className={cn(
+                            'mr-2 h-4 w-4 text-muted-foreground',
+                            isDisabled && 'opacity-50'
+                          )}
+                        />
                       )}
                       <span>{option.label}</span>
                     </CommandItem>

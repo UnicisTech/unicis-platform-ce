@@ -5,13 +5,13 @@ const CopyrightItem = () => {
         <p className="text-xs text-center font-semibold">
           Copyright © {new Date().getFullYear()}{' '}
           <a
-            href="https://www.unicis.tech/?mtm_campaign=platform&mtm_source=platform_beta"
+            href="https://www.unicis.tech/?mtm_campaign=platform&mtm_source=platform"
             target="_blank"
           >
             Unicis.Tech OÜ
           </a>
           . <br />
-          Version: 2025-08-18
+          Version: 2025-10-24
           <br />
           Made with 💙 in 🇪🇺
         </p>

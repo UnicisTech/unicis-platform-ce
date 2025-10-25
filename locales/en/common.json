@@ -341,6 +341,7 @@
   "comments": "Comments",
   "rpa-audit-logs": "Record of Processing Activities Audit Logs",
   "tia-audit-logs": "Transfer Impact Assessment Audit Logs",
+  "csc-controls": "Cybersecurity Controls",
   "csc-audit-logs": "Cybersecurity Controls Audit Logs",
   "pia-audit-logs": "Privacy Impact Assessment Audit Logs",
   "rm-audit-logs": "Risk Management Audit Logs",
@@ -349,5 +350,6 @@
   "signin-with-saml-sso": "Sign in with SAML SSO",
   "log-in-to-account": "Log in to your account",
   "desc-sso-login": "Select an Identity Provider to continue with SSO",
-  "desc-signin-with-saml-sso": "Your ID is the slug after the hostname."
+  "desc-signin-with-saml-sso": "Your ID is the slug after the hostname.",
+  "resend-verification-email": "Resend verification email"
 }

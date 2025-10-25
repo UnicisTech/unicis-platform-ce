@@ -1,209 +1,37 @@
-import { useState, useCallback } from 'react';
-import { useRouter } from 'next/router';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import toast from 'react-hot-toast';
-import { Loading, Error } from '@/components/shared';
+import { Error, Loading } from '@/components/shared';
 import useTeam from 'hooks/useTeam';
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import {
-  StatusesTable,
-  PieChart,
-  RadarChart,
-  SectionFilter,
-  StatusCscFilter,
-} from '@/components/interfaces/CSC';
-import { PerPageSelector } from '@/components/shared/atlaskit';
-import {
-  perPageOptions,
-  isoOptions,
-} from '@/components/defaultLanding/data/configs/csc';
-import useTeamTasks from 'hooks/useTeamTasks';
-import { getCscStatusesBySlug } from 'models/team';
-import useISO from 'hooks/useISO';
-import { statusOptions } from '@/components/defaultLanding/data/configs/csc';
-import useCanAccess from 'hooks/useCanAccess';
-import { useTranslation } from 'react-i18next';
-import { CscOption } from 'types';
+import type { GetServerSidePropsContext } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { CscDashboard } from '@/components/interfaces/CSC';
 
-const labels = [
-  'Unknown',
-  'Not Applicable',
-  'Not Performed',
-  'Performed Informally',
-  'Planned',
-  'Well Defined',
-  'Quantitatively Controlled',
-  'Continuously Improving',
-];
-
-const barColors = [
-  'rgba(241, 241, 241, 1)',
-  'rgba(178, 178, 178, 1)',
-  'rgba(255, 0, 0, 1)',
-  'rgba(202, 0, 63, 1)',
-  'rgba(102, 102, 102, 1)',
-  'rgba(255, 190, 0, 1)',
-  'rgba(106, 217, 0, 1)',
-  'rgba(47, 143, 0, 1)',
-];
-
-const CscDashboard = ({
-  csc_statuses,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Settings = () => {
   const { t } = useTranslation('common');
-  const router = useRouter();
-  const { slug } = router.query;
+  const { isLoading, isError, team } = useTeam();
 
-  const [statuses, setStatuses] = useState(csc_statuses || {});
-  const [sectionFilter, setSectionFilter] = useState<
-    null | { label: string; value: string }[]
-  >(null);
-  const [statusFilter, setStatusFilter] = useState<null | CscOption[]>(null);
-  const [perPage, setPerPage] = useState<number>(10);
-
-  const { isLoading, isError, team } = useTeam(slug as string);
-  const { tasks, mutateTasks } = useTeamTasks(slug as string);
-  const { ISO } = useISO(team);
-
-  const { canAccess } = useCanAccess();
-
-  const statusHandler = useCallback(
-    async (control: string, value: string) => {
-      const res = await fetch(`/api/teams/${slug}/csc`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ control, value }),
-      });
-
-      const { data, error } = await res.json();
-      if (!res.ok || error) {
-        toast.error(error?.message || 'Request failed');
-        return;
-      }
-
-      setStatuses(data.statuses);
-    },
-    [slug]
-  );
-
-  const taskSelectorHandler = useCallback(
-    async (action: string, dataToRemove: any, control: string) => {
-      const operation = action === 'select-option' ? 'add' : 'remove';
-
-      for (const option of dataToRemove) {
-        const taskNumber = option.value;
-
-        const res = await fetch(`/api/teams/${slug}/tasks/${taskNumber}/csc`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ controls: [control], operation, ISO }),
-        });
-
-        const { error } = await res.json();
-        if (!res.ok || error) {
-          toast.error(error?.message || 'Request failed');
-          return;
-        }
-
-        mutateTasks();
-      }
-    },
-    [ISO, slug, mutateTasks]
-  );
-
-  if (isLoading || !team || !tasks || !ISO) {
+  if (isLoading) {
     return <Loading />;
   }
 
   if (isError) {
-    return <Error />;
+    return <Error message={isError.message} />;
   }
 
-  if (!canAccess('csc', ['read'])) {
-    return <Error message={t('forbidden-resource')} />;
+  if (!team) {
+    return <Error message={t('team-not-found')} />;
   }
 
-  return (
-    <>
-      <h2 className="text-xl font-medium leading-none tracking-tight">
-        {'Cybersecurity Controls Dashboard: '}
-        {team.name}
-      </h2>
-      {/* <h2 className="text-2xl font-bold">{"Cybersecurity Controls Dashboard: "}{team.name}</h2> */}
-      <div
-        style={{
-          height: '400px',
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'space-around',
-          marginBottom: '10px',
-        }}
-      >
-        <div
-          style={{ width: '49%' }}
-          className="stats stat-value shadow-sm pl-4 py-4"
-        >
-          <PieChart
-            page_name={`csc`}
-            statuses={statuses}
-            barColor={barColors}
-            labels={labels}
-          />
-        </div>
-        <div style={{ width: '49%' }} className="stats stat-value shadow-sm">
-          <RadarChart statuses={statuses} ISO={ISO} />
-        </div>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div className="flex items-center">
-          <p>
-            Framework:{' '}
-            <b>{isoOptions.find(({ value }) => value === ISO)?.label}</b>
-          </p>
-        </div>
-        <div className="flex flex-row justify-end">
-          <SectionFilter ISO={ISO} setSectionFilter={setSectionFilter} />
-          <StatusCscFilter
-            setStatusFilter={setStatusFilter}
-            options={statusOptions}
-          />
-          <PerPageSelector
-            setPerPage={setPerPage}
-            options={perPageOptions}
-            placeholder="Controls per page"
-            defaultValue={{
-              label: '10',
-              value: 10,
-            }}
-          />
-        </div>
-      </div>
-      <StatusesTable
-        ISO={ISO}
-        tasks={tasks}
-        statuses={statuses}
-        sectionFilter={sectionFilter}
-        statusFilter={statusFilter}
-        perPage={perPage}
-        statusHandler={statusHandler}
-        taskSelectorHandler={taskSelectorHandler}
-      />
-    </>
-  );
+  return <CscDashboard team={team} />;
 };
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  const { locale, query }: GetServerSidePropsContext = context;
-  const slug = query.slug as string;
-
+export async function getServerSideProps({
+  locale,
+}: GetServerSidePropsContext) {
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      csc_statuses: await getCscStatusesBySlug(slug),
     },
   };
-};
+}
 
-export default CscDashboard;
+export default Settings;

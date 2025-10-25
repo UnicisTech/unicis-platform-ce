@@ -1,14 +1,4 @@
-'use client';
-
-import React, {
-  useState,
-  useCallback,
-  Dispatch,
-  SetStateAction,
-  useMemo,
-} from 'react';
-import toast from 'react-hot-toast';
-import { useRouter } from 'next/router';
+import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/shadcn/ui/button';
 import { Input } from '@/components/shadcn/ui/input';
 import { Textarea } from '@/components/shadcn/ui/textarea';
@@ -29,31 +19,25 @@ const ControlBlock = ({
   status,
   control,
   controls,
-  controlHanlder,
   isSaving,
   isDeleting,
-  deleteControlHandler,
-  setStatuses,
+  onControlChange,
+  onStatusChange,
+  onDeleteControl,
 }: {
   ISO: string;
   status: string;
   control: string;
   controls: string[];
-  controlHanlder: (oldControl: string, newControl: string) => void;
   isSaving: boolean;
   isDeleting: boolean;
-  deleteControlHandler: (control: string) => void;
-  setStatuses: Dispatch<
-    SetStateAction<
-      | {
-          [key: string]: string;
-        }
-      | undefined
-    >
-  >;
+  onStatusChange: (
+    control: string,
+    value: string
+  ) => Promise<string | undefined>;
+  onControlChange: (oldControl: string, newControl: string) => void;
+  onDeleteControl: (control: string) => void;
 }) => {
-  const router = useRouter();
-  const { slug } = router.query;
   const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   const controlOptions = useMemo(() => getControlOptions(ISO), [ISO]);
@@ -65,33 +49,6 @@ const ControlBlock = ({
     ({ value }) => value.control === control
   )?.value;
 
-  const statusHandler = useCallback(
-    async (control: string, value: string) => {
-      try {
-        const response = await fetch(`/api/teams/${slug}/csc`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ control, value }),
-        });
-
-        const { data, error } = await response.json();
-
-        if (error) {
-          toast.error(error.message);
-          return;
-        }
-
-        toast.success('Status changed!');
-        setStatuses(data.statuses);
-      } catch (err) {
-        toast.error('Something went wrong');
-      }
-    },
-    [slug, setStatuses]
-  );
-
   return (
     <div className="space-y-4">
       <div className="space-y-1">
@@ -99,7 +56,7 @@ const ControlBlock = ({
         <div className="grid grid-cols-[1fr_auto] gap-2 items-center">
           <Select
             value={control}
-            onValueChange={(newVal) => controlHanlder(control, newVal)}
+            onValueChange={(newVal) => onControlChange(control, newVal)}
             disabled={isSaving || isDeleting}
           >
             <SelectTrigger className="w-full">
@@ -138,7 +95,7 @@ const ControlBlock = ({
             disabled={isSaving}
             onClick={async () => {
               setIsButtonLoading(true);
-              await deleteControlHandler(control);
+              await onDeleteControl(control);
               setIsButtonLoading(false);
             }}
           >
@@ -170,7 +127,7 @@ const ControlBlock = ({
         <StatusSelector
           statusValue={status}
           control={control}
-          handler={statusHandler}
+          handler={onStatusChange}
           isDisabled={false}
         />
       </div>

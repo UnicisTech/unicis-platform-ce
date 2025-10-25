@@ -1,52 +1,40 @@
-import React, {
-  useState,
-  useCallback,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-} from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import ControlBlock from './ControlBlock';
-import type { Task } from '@prisma/client';
+import type { Task, Team } from '@prisma/client';
 import useCanAccess from 'hooks/useCanAccess';
 import ControlBlockViewOnly from './ControlBlockViewOnly';
 import { getCscControlsProp } from '@/lib/csc';
 import type { ISO } from 'types';
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
+import { Loading } from '@/components/shared';
+import useISO from 'hooks/useISO';
+import CscTabs from '../CscTabs';
+import useCscStatuses from 'hooks/useCscStatuses';
 
-const CscPanel = ({
+const CscPanel2 = ({
   task,
-  statuses,
-  ISO,
-  setStatuses,
+  team,
+  cscFrameworks,
   mutateTask,
 }: {
   task: Task;
-  statuses: { [key: string]: string };
-  ISO: ISO;
-  setStatuses: Dispatch<
-    SetStateAction<
-      | {
-          [key: string]: string;
-        }
-      | undefined
-    >
-  >;
+  team: Team;
+  cscFrameworks: ISO[];
   mutateTask: () => Promise<void>;
 }) => {
+  const slug = team.slug;
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
+  const [activeTab, setActiveTab] = useState<ISO>(cscFrameworks[0]);
+  const { statuses, mutateStatuses } = useCscStatuses(slug, activeTab);
 
-  const router = useRouter();
-  const { slug } = router.query;
-
-  const properties = task?.properties as any;
-  const issueControls = (properties?.[getCscControlsProp(ISO)] as string[]) || [
-    '',
-  ];
+  const properties = task.properties as any;
+  const issueControls = useMemo(() => {
+    return (properties?.[getCscControlsProp(activeTab)] as string[]) || [''];
+  }, [properties, activeTab, task]);
 
   const [controls, setControls] = useState(issueControls);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -68,7 +56,11 @@ const CscPanel = ({
         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ controls, operation: 'remove', ISO }),
+          body: JSON.stringify({
+            controls,
+            operation: 'remove',
+            ISO: activeTab,
+          }),
         }
       );
 
@@ -82,7 +74,7 @@ const CscPanel = ({
     } finally {
       setIsDeleting(false);
     }
-  }, [slug, task, controls, ISO, mutateTask]);
+  }, [slug, task, controls, activeTab, mutateTask]);
 
   const controlHanlder = useCallback(
     async (oldControl: string, newControl: string) => {
@@ -90,8 +82,12 @@ const CscPanel = ({
       try {
         const body =
           oldControl === ''
-            ? { controls: [newControl], operation: 'add', ISO }
-            : { controls: [oldControl, newControl], operation: 'change', ISO };
+            ? { controls: [newControl], operation: 'add', ISO: activeTab }
+            : {
+                controls: [oldControl, newControl],
+                operation: 'change',
+                ISO: activeTab,
+              };
 
         const res = await fetch(
           `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
@@ -113,7 +109,7 @@ const CscPanel = ({
         setIsSaving(false);
       }
     },
-    [slug, task, ISO, mutateTask]
+    [slug, task, activeTab, mutateTask]
   );
 
   const deleteControlHandler = useCallback(
@@ -128,7 +124,7 @@ const CscPanel = ({
             body: JSON.stringify({
               controls: [control],
               operation: 'remove',
-              ISO,
+              ISO: activeTab,
             }),
           }
         );
@@ -144,24 +140,57 @@ const CscPanel = ({
         setIsDeleting(false);
       }
     },
-    [slug, task, ISO, mutateTask]
+    [slug, task, activeTab, mutateTask]
+  );
+
+  const statusHandler = useCallback(
+    async (control: string, value: string) => {
+      try {
+        const response = await fetch(`/api/teams/${slug}/csc`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ control, value, framework: activeTab }),
+        });
+
+        const { error } = await response.json();
+
+        if (error) {
+          return toast.error(error.message);
+        }
+
+        toast.success('Status changed!');
+        mutateStatuses();
+      } catch (err) {
+        toast.error('Something went wrong');
+      }
+    },
+    [slug, activeTab]
   );
 
   return (
     <div className="p-5">
-      <h2 className="text-1xl font-bold">Cybersecurity Controls</h2>
+      <h2 className="text-1xl font-bold">{t('csc-controls')}</h2>
+
+      <CscTabs
+        iso={cscFrameworks}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
+
       {canAccess('task', ['update']) ? (
         <>
           {controls.map((control, index) => (
             <ControlBlock
               key={index}
-              ISO={ISO}
+              ISO={activeTab}
               status={statuses[control]}
-              setStatuses={setStatuses}
               control={control}
               controls={controls}
-              controlHanlder={controlHanlder}
-              deleteControlHandler={deleteControlHandler}
+              onControlChange={controlHanlder}
+              onStatusChange={statusHandler}
+              onDeleteControl={deleteControlHandler}
               isSaving={isSaving}
               isDeleting={isDeleting}
             />
@@ -203,7 +232,7 @@ const CscPanel = ({
           {controls.map((control, index) => (
             <ControlBlockViewOnly
               key={index}
-              ISO={ISO}
+              ISO={activeTab}
               status={statuses[control]}
               control={control}
             />
@@ -214,4 +243,29 @@ const CscPanel = ({
   );
 };
 
-export default CscPanel;
+const WithISO = ({
+  team,
+  task,
+  mutateTask,
+}: {
+  team: Team;
+  task: Task;
+  mutateTask: () => Promise<void>;
+}) => {
+  const { ISO } = useISO(team);
+
+  if (!ISO) {
+    return <Loading />;
+  }
+
+  return (
+    <CscPanel2
+      task={task}
+      team={team}
+      cscFrameworks={ISO}
+      mutateTask={mutateTask}
+    />
+  );
+};
+
+export default WithISO;
