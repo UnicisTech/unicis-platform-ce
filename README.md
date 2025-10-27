@@ -37,14 +37,14 @@ Please star ⭐ the repo if you want us to continue developing and improving the
   <img src="https://www.unicis.tech/img/frameworks/unicis-soc2.svg" alt="Unicis SOC2 Type II" height="60" style="margin-left: 10px;">
 </p>
 
-- GDPR
-- MVSP
-- ISO 27001:2013 & ISO 27001:2022
-- NIST 2
-- EU NIS 2
-- CIS
-- C5
-- SOC2 Type II
+- [General Data Protection Regulation - GDPR](https://www.unicis.tech/frameworks/gdpr?mtm_campaign=GitHub%20readme)
+- [Minimum Viable Secure Product - MVSP](https://www.unicis.tech/frameworks/mvsp?mtm_campaign=GitHub%20readme)
+- [ISO 27001:2013 & ISO 27001:2022](https://www.unicis.tech/frameworks/iso27k?mtm_campaign=GitHub%20readme)
+- [NIST Cybersecurity Framework 2.0](https://www.unicis.tech/frameworks/nist-csf2?mtm_campaign=GitHub%20readme)
+- [Directive (EU) 2022/2555 NIS 2](https://www.unicis.tech/frameworks/eu-nis2?mtm_campaign=GitHub%20readme)
+- [CIS Critical Security Controls Version 8.1](https://www.unicis.tech/frameworks/cis?mtm_campaign=GitHub%20readme)
+- [Criteria Catalogue C5:2020](https://www.unicis.tech/frameworks/c5?mtm_campaign=GitHub%20readme)
+- [SOC2 Type II - System and Organization Controls](https://www.unicis.tech/frameworks/soc?mtm_campaign=GitHub%20readme)
 
 ### Coming Next
 
