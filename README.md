@@ -37,6 +37,15 @@ Please star ⭐ the repo if you want us to continue developing and improving the
   <img src="https://www.unicis.tech/img/frameworks/unicis-soc2.svg" alt="Unicis SOC2 Type II" height="60" style="margin-left: 10px;">
 </p>
 
+- GDPR
+- MVSP
+- ISO 27001:2013 & ISO 27001:2022
+- NIST 2
+- EU NIS 2
+- CIS
+- C5
+- SOC2 Type II
+
 ### Coming Next
 
 - EU Cyber Resilience Act (CRA)
@@ -45,7 +54,7 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 - Cloud Controls Matrix and CAIQ v4 (CSA CCM v4)
 - ISO/IEC 42001:2023 - AI management systems
 - Trusted Information Security Assessment Exchange (TISAX)
-- EU IA Act
+- EU AI Act
 - Custom ...
 
 ## 📖 Additional Resources
