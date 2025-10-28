@@ -395,6 +395,7 @@
   "thumbnail-link": "Thumbnail link",
   "video-url": "Video URL",
   "description": "Description",
+  "generate-installer-description": "Generates an installer that your devices will use to connect to Fleet",
   "presentation-url": "Presentation URL",
   "question-type": "Qustion Type",
   "question-title": "Text of the question",
@@ -441,5 +442,7 @@
   "signin-with-saml-sso": "Sign in with SAML SSO",
   "log-in-to-account": "Log in to your account",
   "desc-sso-login": "Select an Identity Provider to continue with SSO",
-  "desc-signin-with-saml-sso": "Your ID is the slug after the hostname."
+  "desc-signin-with-saml-sso": "Your ID is the slug after the hostname.",
+  "with-cli-installer": "With CLI installer:",
+  "team-tls-cert": "Team TLS Certificate"
 }

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { Team, User } from '@prisma/client';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import { Trans } from 'react-i18next';
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from '@/components/shadcn/ui/dialog';
 import { Button } from '@/components/shadcn/ui/button';
@@ -54,27 +55,20 @@ const AddAsset = ({ visible, team, user, setVisible }: AddAssetProps) => {
     return platform === 'advanced' ? agentEndpoint(os, env.agentVersion) : url;
   };
 
-  const osqueryEntry = OSQUERY_ENTRY({
-    secret: secret?.secret!,
-    teamName: team.name!,
-    apiUrl: env.fleetAPI,
-    safe: isSafe,
-    isCopy: isCopy,
-    platform: platform,
-  });
+  const osqueryEntry = OSQUERY_ENTRY({ secret: secret?.secret!, teamName: team.name!, apiUrl: env.fleetAPI, safe: isSafe, isCopy: isCopy, platform: platform });
 
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
       <DialogContent className="max-w-3xl overflow-y-auto max-h-[90vh]">
         <DialogHeader className="flex justify-between items-start gap-4">
           <DialogTitle className="text-lg font-bold">{t('add-asset')}</DialogTitle>
-          <Button
+          {/* <Button
             variant="ghost"
             size="icon"
             onClick={() => setIsPasswordVisible(!isSafe)}
           >
             {isSafe ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
-          </Button>
+          </Button> */}
         </DialogHeader>
 
         <div className="space-y-6">
@@ -83,12 +77,11 @@ const AddAsset = ({ visible, team, user, setVisible }: AddAssetProps) => {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <h2 className="underline">{t('with-cli-installer')}</h2>
-              <CopyToClipboardButton value={osqueryEntry} />
+              {/* <CopyToClipboardButton value={osqueryEntry} /> */}
             </div>
             <CodeBlock
               language="sh"
               shouldWrapLongLines
-              codeBidiWarningTooltipEnabled
               showLineNumbers={false}
               text={generateCliInstaller(platform)}
             />
@@ -96,15 +89,14 @@ const AddAsset = ({ visible, team, user, setVisible }: AddAssetProps) => {
 
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <h2 className="underline">
-                {t('with-fleet-cli')} <a href={generateUrlInstaller(platform)} className="text-blue-500">({t('download-link')})</a>
-              </h2>
-              <CopyToClipboardButton value={osqueryEntry} />
+            <h2 className="underline">
+              With the <a href={generateUrlInstaller(platform)} className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">Fleet command-line tool</a> installed:
+            </h2>
+              {/* <CopyToClipboardButton value={osqueryEntry} /> */}
             </div>
             <CodeBlock
               language="sh"
               shouldWrapLongLines
-              codeBidiWarningTooltipEnabled
               showLineNumbers={false}
               text={osqueryEntry}
             />
@@ -114,9 +106,7 @@ const AddAsset = ({ visible, team, user, setVisible }: AddAssetProps) => {
             <>
               <h2>{t('team-tls-cert')}</h2>
               <CodeBlock language="text" showLineNumbers={false} text={fleetTeam?.ca_certificate} />
-              <p>
-                {t('save-ca-in')} <span className="text-green-500">./ca-cert.pem</span>
-              </p>
+              <p>Save the CA content in <span className='text-green-500'>./ca-cert.pem</span> or any name with <span className='text-green-500'>.pem</span> extension</p>
             </>
           )}
 

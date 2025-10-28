@@ -1,32 +1,38 @@
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { CopyToClipboardButton } from '@/components/shared'
+import { cn } from '../shadcn/lib/utils'
 
-type CodeBlockProps = {
-  language: string;
-  text: string;
-  shouldWrapLongLines?: boolean;
-  codeBidiWarningTooltipEnabled?: boolean;
-  i18nIsDynamicList?: boolean;
-  showLineNumbers?: boolean;
-};
+interface CodeBlockProps {
+  text: string
+  language?: string
+  shouldWrapLongLines?: boolean
+  className?: string
+  showLineNumbers?: boolean
+}
 
 export const CodeBlock = ({
-  language,
   text,
-  shouldWrapLongLines = false,
-  showLineNumbers = false,
-}: CodeBlockProps) => (
-  <SyntaxHighlighter
-    language={language}
-    style={oneDark}
-    wrapLongLines={shouldWrapLongLines}
-    showLineNumbers={showLineNumbers}
-    customStyle={{
-      borderRadius: '0.5rem',
-      padding: '1rem',
-      fontSize: '0.875rem',
-    }}
-  >
-    {text}
-  </SyntaxHighlighter>
-);
+  shouldWrapLongLines = true,
+  className,
+}: CodeBlockProps) => {
+  return (
+    <div className={cn("relative w-full overflow-x-auto", className)}>
+      <pre
+        className={cn(
+          "relative bg-secondary/60 text-muted-foreground rounded-md p-4 font-mono text-sm border border-border",
+          shouldWrapLongLines
+            ? "whitespace-pre-wrap break-words"
+            : "whitespace-pre overflow-x-auto"
+        )}
+        style={{
+          maxWidth: "100%",
+          overflowX: "auto",
+          wordBreak: "break-word",
+          whiteSpace: shouldWrapLongLines ? "pre-wrap" : "pre",
+        }}
+      >
+        <code>{text}</code>
+        <CopyToClipboardButton value={text} />
+      </pre>
+    </div>
+  )
+}

@@ -87,7 +87,9 @@ const EditQuery = ({
 
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent
+        className="max-w-2xl max-h-[90vh] overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground/30"
+      >
         <form onSubmit={handleSubmit} className="space-y-5">
           <DialogHeader>
             <DialogTitle>{t("Edit Query")}</DialogTitle>

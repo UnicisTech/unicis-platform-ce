@@ -1,5 +1,5 @@
 import { Error } from '@/components/shared';
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+// import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { useTranslation } from 'next-i18next';
 import type { Team, User } from '@prisma/client';
 import FleetSecret from './FleetSecret';
@@ -27,7 +27,7 @@ const FleetContainer = (
 
   return (
     <>
-      <button
+      {/* <button
         type="button"
         className="flex gap-2"
         onClick={togglePasswordVisibility}
@@ -38,8 +38,12 @@ const FleetContainer = (
         ) : (
           <EyeIcon className="h-5 w-5 text-gray-500" />
         )}
-      </button>
-      <FleetSecret user={user} team={team} safe={isSafe} />
+      </button> */}
+      <FleetSecret 
+        user={user} 
+        team={team} 
+        // safe={isSafe} 
+      />
     </>
   );
 };

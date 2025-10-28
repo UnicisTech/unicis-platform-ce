@@ -1,17 +1,26 @@
 import { useState } from "react";
-import { Button } from "@/components/shadcn/ui/button";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { Button } from "@/components/shadcn/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/shadcn/ui/table";
 import { Error, Loading, WithLoadingAndError } from "@/components/shared";
 import useCanAccess from "hooks/useCanAccess";
 import type { Team, User } from "@prisma/client";
 import FleetStatus from "../Fleet/FleetStatus";
 import CreateTag from "./CreateTag";
-import { useTags } from "@/hooks/fleets/Tags/useTags";
-import FormattedDate from "@/components/shared/Date";
 import DeleteTag from "./DeleteTag";
 import EditTag from "./EditTag";
+import FormattedDate from "@/components/shared/Date";
+import { useTags } from "@/hooks/fleets/Tags/useTags";
 import { Tag } from "@/types";
 
 const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
@@ -25,12 +34,9 @@ const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
 
   const { t } = useTranslation("common");
   const { canAccess } = useCanAccess();
-
   const { tags, isLoading, isError } = useTags(team.id);
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  if (isLoading) return <Loading />;
 
   const openDeleteModal = (id: string) => {
     setTagToDelete(id);
@@ -40,82 +46,80 @@ const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
       {user ? (
-        <div className="space-y-3">
+        <div className="space-y-4">
+          {/* Header */}
           <div className="flex justify-between items-center">
-            <div className="space-y-3">
-              <h2 className="text-xl font-medium leading-none tracking-tight">
+            <div>
+              <h2 className="text-xl font-semibold leading-none tracking-tight">
                 {t("fleet-all-tags")}
               </h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-muted-foreground">
                 {t("fleet-tag-listed")}
               </p>
             </div>
 
             {canAccess("team_fleet_tag", ["create"]) && (
-              <Button size="sm" onClick={() => setVisible(!visible)}>
+              <Button size="sm" onClick={() => setVisible(true)}>
                 {t("create")}
               </Button>
             )}
           </div>
-          <div className="overflow-x-auto">
-            <table className="text-sm w-full border-b dark:border-base-200">
-              <thead className="bg-base-200 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  <th scope="col" className="px-6 py-3">
-                    {t("tag")}
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    {t("created-at")}
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    {t("analysis")}
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    {t("actions")}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {tags &&
+
+          {/* Table */}
+          <div className="rounded-md border">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>{t("tag")}</TableHead>
+                  <TableHead>{t("created-at")}</TableHead>
+                  <TableHead>{t("analysis")}</TableHead>
+                  <TableHead className="text-right">{t("actions")}</TableHead>
+                </TableRow>
+              </TableHeader>
+
+              <TableBody>
+                {tags && tags.length > 0 ? (
                   tags.map((tag) => (
-                    <tr key={tag.id}>
-                      <td className="px-6 py-3">
+                    <TableRow key={tag.id}>
+                      <TableCell>
                         <Link
                           href={`/teams/${slug}/asset-management/tags/${tag.id}`}
+                          className="underline text-blue-500 hover:text-blue-400"
                         >
-                          <span className="underline">{tag.value}</span>
+                          {tag.value}
                         </Link>
-                      </td>
-                      <td className="px-6 py-3">
+                      </TableCell>
+
+                      <TableCell>
                         <FormattedDate
-                          style={"text-xs"}
+                          style="text-xs text-muted-foreground"
                           dateString={tag.updated_at}
                         />
-                      </td>
-                      <td className="px-6 py-3">
-                        <div className="grid grid-cols-4 gap-1 font-bold">
+                      </TableCell>
+
+                      <TableCell>
+                        <div className="grid grid-cols-4 gap-1 text-[10px] font-semibold">
                           <div>
-                            <h1 className="text-[10px]">assets</h1>
-                            <span className="text-[10px]">{tag.nodes_count}</span>
+                            <p className="text-[10px] text-muted-foreground">assets</p>
+                            <span>{tag.nodes_count}</span>
                           </div>
                           <div>
-                            <h1 className="text-[10px]">queries</h1>
-                            <span className="text-[10px]">{tag.queries_count}</span>
+                            <p className="text-[10px] text-muted-foreground">queries</p>
+                            <span>{tag.queries_count}</span>
                           </div>
                           <div>
-                            <h1 className="text-[10px]">files</h1>
-                            <span className="text-[10px]">
-                              {tag.file_paths_count}
-                            </span>
+                            <p className="text-[10px] text-muted-foreground">files</p>
+                            <span>{tag.file_paths_count}</span>
                           </div>
                           <div>
-                            <h1 className="text-[10px]">packs</h1>
-                            <span className="text-[10px]">{tag.packs_count}</span>
+                            <p className="text-[10px] text-muted-foreground">packs</p>
+                            <span>{tag.packs_count}</span>
                           </div>
                         </div>
-                      </td>
-                      <td className="px-6 py-3">
-                        <div className="flex gap-2">
+                      </TableCell>
+
+                      <TableCell className="text-right">
+                        <div className="flex justify-end gap-2">
                           {canAccess("team_fleet_tag", ["delete"]) && (
                             <Button
                               size="sm"
@@ -138,13 +142,25 @@ const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
                             </Button>
                           )}
                         </div>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={4} className="text-center py-4 text-sm text-muted-foreground">
+                      {t("no-tags-found")}
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+
+              {/* <TableCaption className="text-xs text-muted-foreground">
+                {t("fleet-tag-caption")}
+              </TableCaption> */}
+            </Table>
           </div>
 
+          {/* Modals */}
           <CreateTag
             user={user}
             fleetTeamId={team.id}

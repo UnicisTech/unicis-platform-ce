@@ -107,25 +107,24 @@ export default function CreateQuery({
 
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent
+        className="max-w-2xl max-h-[90vh] overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground/30"
+      >
         <DialogHeader>
           <DialogTitle>Create Query</DialogTitle>
         </DialogHeader>
 
         <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Name */}
           <div>
             <Label htmlFor="name">Name</Label>
             <Input id="name" {...register("name", { required: true })} />
           </div>
 
-          {/* SQL */}
           <div>
             <Label htmlFor="sql">SQL Code</Label>
             <Input id="sql" {...register("sql", { required: true })} />
           </div>
 
-          {/* Platform */}
           <div>
             <Label>Platform</Label>
             <Controller
@@ -148,7 +147,6 @@ export default function CreateQuery({
             />
           </div>
 
-          {/* Version & Shard */}
           <div className="grid grid-cols-2 gap-2">
             <div>
               <Label htmlFor="version">Version</Label>
@@ -164,7 +162,6 @@ export default function CreateQuery({
             </div>
           </div>
 
-          {/* Interval & Value */}
           <div className="grid grid-cols-2 gap-2">
             <div>
               <Label htmlFor="interval">Interval</Label>
@@ -180,13 +177,11 @@ export default function CreateQuery({
             </div>
           </div>
 
-          {/* Removed */}
           <div className="flex items-center gap-2">
             <Checkbox id="removed" checked={removed} onCheckedChange={() => setRemoved(!removed)} />
             <Label htmlFor="removed">Removed</Label>
           </div>
 
-          {/* Description */}
           <div>
             <Label>Description</Label>
             <Controller
@@ -196,19 +191,16 @@ export default function CreateQuery({
             />
           </div>
 
-          {/* Assign Packs */}
           <div>
             <Label>Assign Packs</Label>
             <PacksSelector fleetTeamId={fleetTeamId} setSectionPack={setSelectedPacks} onSelect={() => {}} />
           </div>
 
-          {/* Tags */}
           <div>
             <Label>Tags</Label>
             <TagsSelector fleetTeamId={fleetTeamId} setSectionTag={setSelectedTags} onSelect={() => {}} />
           </div>
 
-          {/* Footer */}
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => setVisible(false)}>
               {t("close")}

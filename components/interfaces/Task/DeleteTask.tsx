@@ -7,7 +7,6 @@ import { useFormik } from 'formik';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import DaisyModal from '@/components/shared/daisyUI/DaisyModal';
 
-//TODO: move visible to parent component
 const DeleteTask = ({
   taskNumber,
   visible,

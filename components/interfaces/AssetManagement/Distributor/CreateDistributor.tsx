@@ -89,7 +89,6 @@ const CreateDistributors = ({
         </DialogHeader>
 
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-          {/* SQL */}
           <div className="space-y-2">
             <Label htmlFor="sql">{t("SQL Code")}</Label>
             <Input
@@ -100,7 +99,6 @@ const CreateDistributors = ({
             />
           </div>
 
-          {/* Nodes */}
           <div className="space-y-2">
             <Label>{t("Assign Assets")}</Label>
             <NodesSelector
@@ -110,13 +108,11 @@ const CreateDistributors = ({
             />
           </div>
 
-          {/* Description */}
           <div className="space-y-2">
             <Label htmlFor="description">{t("Description")}</Label>
             <ReactQuill theme="snow" id="description" />
           </div>
 
-          {/* Not Before Date */}
           <div className="space-y-2">
             <Label>{t("Not Before")}</Label>
             <Popover>
@@ -143,7 +139,6 @@ const CreateDistributors = ({
             </Popover>
           </div>
 
-          {/* Tags */}
           <div className="space-y-2">
             <Label>{t("Tags")}</Label>
             <TagsSelector

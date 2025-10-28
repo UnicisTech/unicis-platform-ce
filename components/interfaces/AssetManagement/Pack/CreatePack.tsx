@@ -101,7 +101,6 @@ const CreatePack = ({
             )}
           </div>
 
-          {/* Platform */}
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium">{t('Platform')}</label>
             <Select
@@ -124,7 +123,6 @@ const CreatePack = ({
             )}
           </div>
 
-          {/* Version & Shard */}
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium">{t('Version')}</label>
@@ -152,8 +150,7 @@ const CreatePack = ({
             </div>
           </div>
 
-          {/* Description */}
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 mb-10">
             <label className="text-sm font-medium">{t('Description')}</label>
             <ReactQuill
               theme="snow"
@@ -162,7 +159,6 @@ const CreatePack = ({
             />
           </div>
 
-          {/* Tags */}
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium">{t('Tags')}</label>
             <TagsSelector
