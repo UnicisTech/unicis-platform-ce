@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
 import type { Comment } from '@prisma/client';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import QuillEditor from '@/components/shared/QuillEditor';
 import { Button } from '@/components/shadcn/ui/button';
 
