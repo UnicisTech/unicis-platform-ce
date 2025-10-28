@@ -58,6 +58,16 @@ const APIKeys = ({ team }: APIKeysProps) => {
     }
   };
 
+  const copyApiKey= async (apiKey: ApiKey) => {
+    try {
+      await navigator.clipboard.writeText(apiKey.hashedKey);
+      toast.success(t('copied-to-clipboard'));
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      toast.error('Failed to copy link to clipboard!')
+    }
+  }
+
   const apiKeys = data?.data ?? [];
 
   return (
@@ -104,16 +114,27 @@ const APIKeys = ({ team }: APIKeysProps) => {
                       {new Date(apiKey.createdAt).toLocaleDateString()}
                     </TableCell>
                     <TableCell className="text-right">
-                      <Button
-                        size="sm"
-                        variant="destructive"
-                        onClick={() => {
-                          setSelectedApiKey(apiKey);
-                          setConfirmationDialogVisible(true);
-                        }}
-                      >
-                        {t('revoke')}
-                      </Button>
+                      <div className="inline-flex gap-2 justify-end">
+                        <Button
+                          variant="outline"
+                          aria-label="Copy"
+                          onClick={() => {
+                            copyApiKey(apiKey)
+                          }}
+                        >
+                          {t('copy-to-clipboard')}
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          onClick={() => {
+                            setSelectedApiKey(apiKey);
+                            setConfirmationDialogVisible(true);
+                          }}
+                        >
+                          {t('revoke')}
+                        </Button>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}
