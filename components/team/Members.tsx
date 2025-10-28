@@ -87,7 +87,7 @@ const Members = ({ team }: { team: Team }) => {
             <TableHead>{t('email')}</TableHead>
             <TableHead>{t('role')}</TableHead>
             {canAccess('team_member', ['delete']) && (
-              <TableHead>{t('action')}</TableHead>
+              <TableHead className="text-right">{t('actions')}</TableHead>
             )}
           </TableRow>
         </TableHeader>

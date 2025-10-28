@@ -118,6 +118,7 @@ const APIKeys = ({ team }: APIKeysProps) => {
                         <Button
                           variant="outline"
                           aria-label="Copy"
+                          size="sm"
                           onClick={() => {
                             copyApiKey(apiKey)
                           }}
