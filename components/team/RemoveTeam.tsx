@@ -9,6 +9,7 @@ import { defaultHeaders } from '@/lib/common';
 import type { ApiResponse } from 'types';
 import { Button } from '../shadcn/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '../shadcn/ui/card';
+import { Loader2 } from 'lucide-react';
 
 const RemoveTeam = ({ team }: { team: Team }) => {
   const router = useRouter();
@@ -53,6 +54,7 @@ const RemoveTeam = ({ team }: { team: Team }) => {
             variant='destructive'
             onClick={() => setAskConfirmation(true)}
           >
+            {loading && <Loader2 className="animate-spin" />}
             {t('remove-team')}
           </Button>
         </CardFooter>
