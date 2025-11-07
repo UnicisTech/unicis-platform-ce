@@ -21,6 +21,7 @@ import { Message } from '@/components/shared';
 import { Input } from '@/components/shadcn/ui/input';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 import { TiaProcedureInterface } from 'types';
+import { useTranslation } from 'next-i18next';
 
 interface ProbabilityStepProps {
   problematicLawfulAccessValues: TiaProcedureInterface[1];
@@ -33,11 +34,13 @@ export default function ProbabilityStep({
   problematicLawfulAccessValues,
   riskValues,
 }: ProbabilityStepProps) {
+  const { t } = useTranslation('common');
+
   return (
     <>
-      <Message text={`To be completed by the exporter`} />
+      <Message text={t('to-be-completed-by-the-exporter')} />
       <Message
-        text={`If a problematic lawful access were to occur on the part of the importer as per Step 3, the transfer is nevertheless permitted if one of the derogations provided for by Art. 49 GDPR or the corresponding provisions of the CH DPA applies:`}
+        text={t('if-problematic-lawful-access-derogations-description')}
       />
 
       <p>{questions['DataTransferImporter']}</p>
@@ -54,7 +57,7 @@ export default function ProbabilityStep({
               <Input
                 {...field}
                 autoComplete="off"
-                placeholder="Enter relevant data transfer details"
+                placeholder={t('enter-relevant-data-transfer-details')}
               />
             </FormControl>
             <FormMessage />
@@ -74,7 +77,7 @@ export default function ProbabilityStep({
               <Input
                 {...field}
                 autoComplete="off"
-                placeholder="Enter probability (e.g. high, low, etc.)"
+                placeholder={t('enter-probability-eg-high-low')}
               />
             </FormControl>
             <FormMessage />
@@ -94,7 +97,9 @@ export default function ProbabilityStep({
               <Textarea
                 {...field}
                 autoComplete="off"
-                placeholder="Provide reasoning for data transfer probability"
+                placeholder={t(
+                  'provide-reasoning-for-data-transfer-probability'
+                )}
               />
             </FormControl>
             <FormMessage />
@@ -212,7 +217,7 @@ export default function ProbabilityStep({
               <Input
                 {...field}
                 autoComplete="off"
-                placeholder="Describe the relevant legal ground"
+                placeholder={t('describe-the-relevant-legal-ground')}
               />
             </FormControl>
             <FormMessage />
@@ -230,7 +235,7 @@ export default function ProbabilityStep({
               <Input
                 {...field}
                 autoComplete="off"
-                placeholder="Enter probability"
+                placeholder={t('enter-probability-eg-high-low')}
               />
             </FormControl>
             <FormMessage />
@@ -248,7 +253,7 @@ export default function ProbabilityStep({
               <Textarea
                 {...field}
                 autoComplete="off"
-                placeholder="Provide reasoning for legal ground"
+                placeholder={t('provide-reasoning-for-legal-ground')}
               />
             </FormControl>
             <FormMessage />
@@ -256,44 +261,45 @@ export default function ProbabilityStep({
         )}
       />
 
-      <p className="font-bold">Importer has reason to expect …</p>
+      <p className="font-bold">{t('importer-has-reason-to-expect')}</p>
 
       <p>
         <span>
-          ... a problematic targeted lawful access concerning the data at issue?
+          {t('a-problematic-targeted-lawful-access-question')}
           {riskValues.DataIssueInvestigation === '2' ? (
-            <DaisyBadge appearance="added">Yes</DaisyBadge>
+            <DaisyBadge appearance="added">{t('yes')}</DaisyBadge>
           ) : (
-            <DaisyBadge appearance="removed">No</DaisyBadge>
+            <DaisyBadge appearance="removed">{t('no')}</DaisyBadge>
           )}
         </span>
       </p>
 
       <p>
         <span>
-          ... a problematic mass surveillance involving the data at issue?
+          {t('a-problematic-mass-surveillance-question')}
           {riskValues.PassMassSurveillanceConnection === '4' ? (
-            <DaisyBadge appearance="added">Yes</DaisyBadge>
+            <DaisyBadge appearance="added">{t('yes')}</DaisyBadge>
           ) : (
-            <DaisyBadge appearance="removed">No</DaisyBadge>
+            <DaisyBadge appearance="removed">{t('no')}</DaisyBadge>
           )}
         </span>
       </p>
 
       <p>
         <span>
-          ... a problematic self-reporting obligation (according to the
-          Importer):
+          {t('a-problematic-self-reporting-obligation-question')}
           {riskValues.AssessmentProduceReport === '4' ? (
-            <DaisyBadge appearance="added">Yes</DaisyBadge>
+            <DaisyBadge appearance="added">{t('yes')}</DaisyBadge>
           ) : (
-            <DaisyBadge appearance="removed">No</DaisyBadge>
+            <DaisyBadge appearance="removed">{t('no')}</DaisyBadge>
           )}
         </span>
       </p>
 
       <Message
-        text={`Based on the responses of the importer and the analysis done, does the exporter have reason to believe that (i) the importer will during the assessment period have to produce the data at issue) and (ii) it will be unable to justify such lawful access by way of one of the derogations of Art. 49 GDPR ...)`}
+        text={t(
+          'based-on-responses-does-exporter-believe-produce-data-and-no-derogations'
+        )}
       />
 
       {problematicLawfulAccessValues.LawfulAccess === 'no' && (
@@ -301,15 +307,14 @@ export default function ProbabilityStep({
           <FormField
             control={control}
             name="ConnectionTargetedAccess"
-            rules={{ required: 'Please select an option.' }}
+            rules={{ required: t('please-select-an-option') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
                   {fieldPropsMapping.ConnectionTargetedAccess}
                 </FormLabel>
                 <FormDescription>
-                  (e.g., investigations by the police, state prosecutors and
-                  other authorities)
+                  {t('targeted-access-eg-investigations')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -335,7 +340,7 @@ export default function ProbabilityStep({
           <FormField
             control={control}
             name="ReasonConnectionTargetedAccess"
-            rules={{ required: 'Please provide a reason.' }}
+            rules={{ required: t('please-provide-a-reason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -345,7 +350,7 @@ export default function ProbabilityStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder="Provide details"
+                    placeholder={t('provide-details')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -361,14 +366,14 @@ export default function ProbabilityStep({
           <FormField
             control={control}
             name="ConnectionSurveillanceTele"
-            rules={{ required: 'Please select an option.' }}
+            rules={{ required: t('please-select-an-option') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
                   {fieldPropsMapping.ConnectionSurveillanceTele}
                 </FormLabel>
                 <FormDescription>
-                  (e.g., by intelligence agencies)
+                  {t('eg-by-intelligence-agencies')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -394,7 +399,7 @@ export default function ProbabilityStep({
           <FormField
             control={control}
             name="ReasonConnectionSurveillanceTele"
-            rules={{ required: 'Please provide a reason.' }}
+            rules={{ required: t('please-provide-a-reason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -404,7 +409,7 @@ export default function ProbabilityStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder="Provide details"
+                    placeholder={t('provide-details')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -418,14 +423,14 @@ export default function ProbabilityStep({
           <FormField
             control={control}
             name="ConnectionSelfreportingObligations"
-            rules={{ required: 'Please select an option.' }}
+            rules={{ required: t('please-select-an-option') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
                   {fieldPropsMapping.ConnectionSelfreportingObligations}
                 </FormLabel>
                 <FormDescription>
-                  (e.g., by intelligence agencies)
+                  {t('eg-by-intelligence-agencies')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -451,7 +456,7 @@ export default function ProbabilityStep({
           <FormField
             control={control}
             name="ReasonConnectionSelfreportingObligations"
-            rules={{ required: 'Please provide a reason.' }}
+            rules={{ required: t('please-provide-a-reason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -461,7 +466,7 @@ export default function ProbabilityStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder="Provide details"
+                    placeholder={t('provide-details')}
                   />
                 </FormControl>
                 <FormMessage />

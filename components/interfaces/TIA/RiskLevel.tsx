@@ -1,10 +1,17 @@
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
+import { useTranslation } from 'next-i18next';
 
-const RiskLevel = ({ value }) => (
-  <div>
-    <span className="font-bold">Risk Level = {value}</span>
-    <DaisyBadge appearance="added">PERMITTED</DaisyBadge>
-  </div>
-);
+const RiskLevel = ({ value }) => {
+  const { t } = useTranslation('common');
+
+  return (
+    <div>
+      <span className="font-bold">
+        {t('risk-level')} = {value}
+      </span>
+      <DaisyBadge appearance="added">{t('tia-permitted-badge')}</DaisyBadge>
+    </div>
+  );
+};
 
 export default RiskLevel;

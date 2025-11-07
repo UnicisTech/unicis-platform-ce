@@ -25,12 +25,15 @@ import {
 import type { Option } from 'types';
 import type { TransferStepValues } from '../types';
 import { Message } from '@/components/shared';
+import { useTranslation } from 'next-i18next';
 
 export interface TransferStepProps {
   control: Control<TransferStepValues>;
 }
 
 export default function TransferStep({ control }: TransferStepProps) {
+  const { t } = useTranslation('common');
+
   // helper to map strings back to objects
   const mapOptions = (opts: Option[], vals: string[]): Option[] =>
     opts.filter((o) => vals.includes(o.value));
@@ -41,13 +44,10 @@ export default function TransferStep({ control }: TransferStepProps) {
         appearance="warning"
         text={
           <span>
-            When you transfer data outside the European Union: <br />
-            - Check whether the country outside the EU to which you are
-            transferring the data has data protection legislation and whether it
-            is recognised as adequate by the European Commission. <br />- A map
-            of the world presenting data protection legislation. <br />-
-            Otherwise, you will have to provide a legal framework your transfers
-            to ensure data protection abroad.
+            {t('when-you-transfer-data-outside-the-eu')} <br />-{' '}
+            {t('check-whether-country-has-data-protection-legislation')} <br />-{' '}
+            {t('a-map-of-the-world-presenting-data-protection-legislation')}{' '}
+            <br />- {t('otherwise-provide-legal-framework-for-transfers')}
           </span>
         }
       />
@@ -74,7 +74,7 @@ export default function TransferStep({ control }: TransferStepProps) {
       <FormField
         control={control}
         name="recipient"
-        rules={{ required: 'Please enter a recipient.' }}
+        rules={{ required: t('please-enter-a-recipient') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.recipient}</FormLabel>
@@ -82,10 +82,7 @@ export default function TransferStep({ control }: TransferStepProps) {
               <Input {...field} autoComplete="off" />
             </FormControl>
             <FormMessage />
-            <FormDescription>
-              Recipient is a natural or legal person, public authority, agency
-              or another body which the personal data are disclosed.
-            </FormDescription>
+            <FormDescription>{t('recipient-description')}</FormDescription>
           </FormItem>
         )}
       />
@@ -93,7 +90,7 @@ export default function TransferStep({ control }: TransferStepProps) {
       <FormField
         control={control}
         name="country"
-        rules={{ required: 'Please select a country.' }}
+        rules={{ required: t('please-select-a-country') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.country}</FormLabel>
@@ -106,7 +103,7 @@ export default function TransferStep({ control }: TransferStepProps) {
                 }}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select a country" />
+                  <SelectValue placeholder={t('select-a-country')} />
                 </SelectTrigger>
                 <SelectContent>
                   {config.country.map((opt) => (
@@ -118,7 +115,9 @@ export default function TransferStep({ control }: TransferStepProps) {
               </Select>
             </FormControl>
             <FormMessage />
-            <FormDescription>Please select from the list</FormDescription>
+            <FormDescription>
+              {t('please-select-from-the-list')}
+            </FormDescription>
           </FormItem>
         )}
       />
@@ -128,8 +127,8 @@ export default function TransferStep({ control }: TransferStepProps) {
         name="guarantee"
         rules={{
           validate: (v: Option[]) =>
-            v && v.length > 0 ? undefined : 'Please select at least one',
-          required: 'Please select at least one',
+            v && v.length > 0 ? undefined : t('please-select-at-least-one'),
+          required: t('please-select-at-least-one'),
         }}
         render={({ field, formState }) => (
           <FormItem>
@@ -146,8 +145,9 @@ export default function TransferStep({ control }: TransferStepProps) {
             </FormControl>
             {!formState.errors.guarantee ? (
               <FormDescription>
-                Multiple selection possible, and if None please specify on the
-                ticket
+                {t(
+                  'multiple-selection-possible-and-if-none-please-specify-on-the-ticket'
+                )}
               </FormDescription>
             ) : (
               <FormMessage>
@@ -160,7 +160,7 @@ export default function TransferStep({ control }: TransferStepProps) {
 
       <Message
         appearance="warning"
-        text={<span>Please attach relevant documents to the task.</span>}
+        text={<span>{t('please-attach-relevant-documents-to-the-task')}</span>}
       />
     </>
   );

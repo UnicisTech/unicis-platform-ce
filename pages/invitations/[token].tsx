@@ -109,11 +109,11 @@ const AcceptTeamInvitation: NextPageWithLayout = () => {
           {/* User authenticated and email does not match */}
           {status === 'authenticated' && !emailMatch && (
             <>
-              <p className="text-sm text-center">{`Your email address ${data?.user?.email} does not match the email address this invitation was sent to.`}</p>
               <p className="text-sm text-center">
-                To accept this invitation, you will need to sign out and then
-                sign in or create a new account using the same email address
-                used in the invitation.
+                {t('email-invitation-mismatch', { email: data?.user?.email })}
+              </p>
+              <p className="text-sm text-center">
+                {t('accept-invitation-instruction')}
               </p>
               <Button
                 variant="destructive"

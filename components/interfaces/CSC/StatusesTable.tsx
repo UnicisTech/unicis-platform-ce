@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useTranslation } from 'next-i18next';
 import StatusHeader from './StatusHeader';
 import TaskSelector from './TaskSelector';
 import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
@@ -40,14 +41,13 @@ const StatusesTable = ({
     control: string
   ) => Promise<string | undefined>;
 }) => {
+  const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
   const cscControlsProp = getCscControlsProp(ISO);
 
-  // Compute filteredControls whenever ISO, filters, or statuses change
   const filteredControls = useMemo<ControlOption[]>(() => {
     let ctrls = getControlOptions(ISO);
 
-    // no filters? just return everything
     const noSection = !sectionFilter?.length;
     const noStatus = !statusFilter?.length;
     if (noSection && noStatus) return ctrls;
@@ -86,22 +86,22 @@ const StatusesTable = ({
           <thead className="bg-muted">
             <tr>
               <th scope="col" className="px-6 py-3 text-left">
-                Code
+                {t('code')}
               </th>
               <th scope="col" className="px-6 py-3 text-left">
-                Section
+                {t('section')}
               </th>
               <th scope="col" className="px-6 py-3 text-left">
-                Control
+                {t('control')}
               </th>
               <th scope="col" className="px-6 py-3 text-left">
-                Requirements
+                {t('requirements')}
               </th>
               <th scope="col" className="px-6 py-3 text-left">
                 <StatusHeader />
               </th>
               <th scope="col" className="px-6 py-3 text-left">
-                Tasks
+                {t('tasks')}
               </th>
             </tr>
           </thead>

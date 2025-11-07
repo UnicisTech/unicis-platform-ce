@@ -65,10 +65,10 @@ const Webhooks = ({ team }: { team: Team }) => {
         <div className="flex justify-between items-center">
           <div className="space-y-3">
             <h2 className="text-xl font-medium leading-none tracking-tight">
-              Webhooks
+              {t('webhooks')}
             </h2>
             <p className="text-sm text-muted-foreground">
-              Webhooks are used to send notifications to your external apps.
+              {t('webhooks-description')}
             </p>
           </div>
           <Button

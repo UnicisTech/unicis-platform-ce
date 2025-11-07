@@ -4,11 +4,15 @@ import { MarkdownPreview } from '@/components/shared/uiw/Markdown';
 import { CourseContentType } from '@prisma/client';
 import { IapCourse } from 'types';
 import { Card, CardContent } from '@/components/shadcn/ui/card';
+import { useTranslation } from 'next-i18next';
 
 const ContentPreview = ({ course }: { course: IapCourse }) => {
+  const { t } = useTranslation('common');
+
   switch (course.contentType) {
     case CourseContentType.EMBEDDED_VIDEO:
       return <YouTube videoId={extractYouTubeVideoId(course.url as string)} />;
+
     case CourseContentType.PRESENTATION_PDF:
       return (
         <iframe
@@ -16,9 +20,11 @@ const ContentPreview = ({ course }: { course: IapCourse }) => {
           className="block my-[10px] mx-auto"
           width="960"
           height="569"
+          title={t('course-presentation')}
           allowFullScreen={true}
         />
       );
+
     case CourseContentType.OPEN_TEXT:
       return (
         <div className="container my-4">
@@ -32,8 +38,9 @@ const ContentPreview = ({ course }: { course: IapCourse }) => {
           </Card>
         </div>
       );
+
     default:
-      return <p>Unkown course type</p>;
+      return <p>{t('unknown-course-type')}</p>;
   }
 };
 

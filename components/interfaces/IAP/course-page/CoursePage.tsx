@@ -113,7 +113,7 @@ const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
       </div>
       {!started ? (
         <div className="flex justify-center">
-          <Button onClick={() => setStarted(true)}>Start</Button>
+          <Button onClick={() => setStarted(true)}>{t('start')}</Button>
         </div>
       ) : (
         <div className="flex justify-center">

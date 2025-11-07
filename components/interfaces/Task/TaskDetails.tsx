@@ -113,7 +113,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title</FormLabel>
+                  <FormLabel>{t('title')}</FormLabel>
                   <FormControl>
                     <Input {...field} onInput={checkFormChanges} />
                   </FormControl>
@@ -127,7 +127,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
               name="status"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Status</FormLabel>
+                  <FormLabel>{t('status')}</FormLabel>
                   <FormControl>
                     <Select
                       value={field.value}
@@ -158,7 +158,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
               name="duedate"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Due Date</FormLabel>
+                  <FormLabel>{t('due-date')}</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -198,7 +198,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>{t('description')}</FormLabel>
                   <FormControl>
                     <QuillEditor
                       theme="snow"

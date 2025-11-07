@@ -29,17 +29,10 @@ const CommentEdit = ({
       </div>
 
       <div className="flex gap-1.5 mt-1.5">
-        <Button
-          size="sm"
-          onClick={() => updateHandler(newContent, comment.id)}
-        >
+        <Button size="sm" onClick={() => updateHandler(newContent, comment.id)}>
           {t('save')}
         </Button>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={cancelHandler}
-        >
+        <Button variant="secondary" size="sm" onClick={cancelHandler}>
           {t('cancel')}
         </Button>
         {/* <DaisyButton

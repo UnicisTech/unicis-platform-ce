@@ -11,7 +11,7 @@ import {
 import { Badge } from '@/components/shadcn/ui/badge';
 
 const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
-  const { t } = useTranslation('translation');
+  const { t } = useTranslation('common');
   const { tasks } = useTeamTasks(slug);
 
   const countriesSet = new Set<string>();
@@ -52,19 +52,19 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
 
       <CardContent className="grid gap-4">
         <div className="flex flex-col items-center gap-1 rounded-md border p-3">
-          <p className="text-sm font-medium">Number of records</p>
+          <p className="text-sm font-medium">{t('number-of-records')}</p>
           <span className="text-lg font-bold">
             {totalTasksWithRpaProcedure}
           </span>
         </div>
 
         <div className="flex flex-col items-center gap-1 rounded-md border p-3">
-          <p className="text-sm font-medium">Enabled data transfer</p>
+          <p className="text-sm font-medium">{t('enabled-data-transfer')}</p>
           <span className="text-lg font-bold">{totalEnabledDataTransfers}</span>
         </div>
 
         <div className="flex flex-col items-center gap-2 rounded-md border p-3">
-          <p className="text-sm font-medium">Processes per Country</p>
+          <p className="text-sm font-medium">{t('processes-per-country')}</p>
           <div className="flex flex-wrap justify-center gap-2">
             {countriesList.length > 0 ? (
               countriesList.map((country, index) => (
@@ -73,7 +73,9 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
                 </Badge>
               ))
             ) : (
-              <span className="text-xs text-muted-foreground">No country</span>
+              <span className="text-xs text-muted-foreground">
+                {t('no-country')}
+              </span>
             )}
           </div>
         </div>

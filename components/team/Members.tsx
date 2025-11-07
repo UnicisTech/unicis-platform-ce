@@ -71,10 +71,10 @@ const Members = ({ team }: { team: Team }) => {
       <div className="flex justify-between items-center">
         <div className="space-y-3">
           <h2 className="text-xl font-medium leading-none tracking-tight">
-            Members
+            {t('members')}
           </h2>
           <p className="text-sm text-muted-foreground">
-            Team members and their roles.
+            {t('members-description')}
           </p>
         </div>
         <Button onClick={() => setVisible(!visible)}>{t('add-member')}</Button>

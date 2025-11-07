@@ -6,6 +6,7 @@ import {
 import { Field } from '@/components/shared/atlaskit';
 import type { Task } from '@prisma/client';
 import { RpaProcedureInterface } from 'types';
+import { useTranslation } from 'next-i18next';
 
 const DescriptionAndStakeholdersTab: React.FC<{
   step: RpaProcedureInterface[0];
@@ -66,20 +67,23 @@ const RecipientsTab: React.FC<{ step: RpaProcedureInterface[2] }> = ({
   </div>
 );
 
-const TiaTab: React.FC<{ step: RpaProcedureInterface[3] }> = ({ step }) => (
-  <div className="space-y-2">
-    <Field
-      label={fieldPropsMapping.datatransfer}
-      value={step.datatransfer ? 'Enabled' : 'Disabled'}
-    />
-    <Field label={fieldPropsMapping.recipient} value={step.recipient} />
-    <Field label={fieldPropsMapping.country} value={step.country.label} />
-    <Field
-      label={fieldPropsMapping.guarantee}
-      value={step.guarantee.map(({ label }) => label).join(', ')}
-    />
-  </div>
-);
+const TiaTab: React.FC<{ step: RpaProcedureInterface[3] }> = ({ step }) => {
+  const { t } = useTranslation('common');
+  return (
+    <div className="space-y-2">
+      <Field
+        label={fieldPropsMapping.datatransfer}
+        value={step.datatransfer ? t('enabled') : t('disabled')}
+      />
+      <Field label={fieldPropsMapping.recipient} value={step.recipient} />
+      <Field label={fieldPropsMapping.country} value={step.country.label} />
+      <Field
+        label={fieldPropsMapping.guarantee}
+        value={step.guarantee.map(({ label }) => label).join(', ')}
+      />
+    </div>
+  );
+};
 
 const SecurityMeasuresTab: React.FC<{ step: RpaProcedureInterface[4] }> = ({
   step,
@@ -93,11 +97,11 @@ const SecurityMeasuresTab: React.FC<{ step: RpaProcedureInterface[4] }> = ({
 );
 
 const RpaPanel: React.FC<{ task: Task }> = ({ task }) => {
+  const { t } = useTranslation('common');
   const properties = task.properties as any;
   const procedure = properties.rpa_procedure as RpaProcedureInterface;
   const [activeTab, setActiveTab] = useState(0);
 
-  // Build tabs array
   const tabs = useMemo(
     () =>
       procedure
@@ -116,7 +120,9 @@ const RpaPanel: React.FC<{ task: Task }> = ({ task }) => {
 
   return (
     <div className="p-5">
-      <h2 className="text-base font-bold mb-4">View Register of Procedures</h2>
+      <h2 className="text-base font-bold mb-4">
+        {t('view-register-of-procedures')}
+      </h2>
       {hasProcedure ? (
         <>
           <div role="tablist" className="tabs tabs-bordered">
@@ -137,7 +143,7 @@ const RpaPanel: React.FC<{ task: Task }> = ({ task }) => {
       ) : (
         <div className="mt-4">
           <p className="text-xs">
-            Procedure has not been created for this issue.
+            {t('procedure-has-not-been-created-for-this-issue')}
           </p>
         </div>
       )}

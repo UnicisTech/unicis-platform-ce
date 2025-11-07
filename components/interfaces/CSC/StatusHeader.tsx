@@ -5,6 +5,7 @@ import {
   PopoverTrigger,
 } from '@/components/shadcn/ui/popover';
 import { Info } from 'lucide-react';
+import { useTranslation } from 'next-i18next';
 
 //TODO: move to config
 const statusData = [
@@ -51,12 +52,13 @@ const statusData = [
 ];
 
 const Table = () => {
+  const { t } = useTranslation();
   return (
     <table className="text-sm w-full">
       <thead>
         <tr className="text-left">
-          <th className="py-2 px-3">Status</th>
-          <th className="py-2 px-3">Meaning</th>
+          <th className="py-2 px-3">{t('status')}</th>
+          <th className="py-2 px-3">{t('meaning')}</th>
         </tr>
       </thead>
       <tbody>
@@ -76,11 +78,12 @@ const Table = () => {
 
 const StatusHeader = () => {
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <div className="flex items-center gap-1">
-        <span>Status</span>
+        <span>{t('status')}</span>
         <PopoverTrigger asChild>
           <div className="w-5 h-5 flex items-center justify-center cursor-pointer">
             <Info className="w-3 h-3" />

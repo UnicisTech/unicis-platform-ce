@@ -22,12 +22,14 @@ import useTeamMembers from 'hooks/useTeamMembers';
 import { Error, Loading } from '@/components/shared';
 import type { RiskAndImpactStepValues } from '../types';
 import type { Option } from 'types';
+import { useTranslation } from 'next-i18next';
 
 export interface RiskAndImpactStepProps {
   control: Control<RiskAndImpactStepValues>;
 }
 
 export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
+  const { t } = useTranslation('common');
   const router = useRouter();
   const { slug } = router.query;
   const { isLoading, isError, members } = useTeamMembers(slug as string);
@@ -46,16 +48,13 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
       <FormField
         control={control}
         name="Risk"
-        rules={{ required: 'Please describe the risk.' }}
+        rules={{ required: t('please-describe-the-risk') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Risk</FormLabel>
-            <FormDescription>
-              Describe the information security risk briefly so that people will
-              understand what risk you are assessing.
-            </FormDescription>
+            <FormLabel>{t('risk')}</FormLabel>
+            <FormDescription>{t('risk-description')}</FormDescription>
             <FormControl>
-              <Textarea {...field} placeholder="Enter risk description" />
+              <Textarea {...field} placeholder={t('enter-risk-description')} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -65,10 +64,10 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
       <FormField
         control={control}
         name="AssetOwner"
-        rules={{ required: 'Please select an asset owner.' }}
+        rules={{ required: t('please-select-an-asset-owner') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Asset Owner</FormLabel>
+            <FormLabel>{t('asset-owner')}</FormLabel>
             <FormControl>
               <Select
                 value={field.value.value}
@@ -78,7 +77,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
                 }}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select an owner" />
+                  <SelectValue placeholder={t('select-an-owner')} />
                 </SelectTrigger>
                 <SelectContent>
                   {ownerOptions.map((opt) => (
@@ -90,12 +89,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
               </Select>
             </FormControl>
             <FormMessage />
-            <FormDescription>
-              Who is the Information Asset Owner, the person accountable if the
-              risk treatments are inadequate, incidents occur, and the
-              organization is adversely impacted? This person must assess and
-              treat risks adequately.
-            </FormDescription>
+            <FormDescription>{t('asset-owner-description')}</FormDescription>
           </FormItem>
         )}
       />
@@ -103,17 +97,16 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
       <FormField
         control={control}
         name="Impact"
-        rules={{ required: 'Please describe the impact.' }}
+        rules={{ required: t('please-describe-the-impact') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Impact</FormLabel>
-            <FormDescription>
-              Describe the potential impacts in business terms if the risk
-              occurs. Decide whether to use &quot;worst case&quot; or
-              &quot;anticipated&quot; impacts consistently.
-            </FormDescription>
+            <FormLabel>{t('impact')}</FormLabel>
+            <FormDescription>{t('impact-description')}</FormDescription>
             <FormControl>
-              <Textarea {...field} placeholder="Enter impact description" />
+              <Textarea
+                {...field}
+                placeholder={t('enter-impact-description')}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -125,10 +118,9 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
         name="RawProbability"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Raw Probability (%)</FormLabel>
+            <FormLabel>{t('raw-probability-percent')}</FormLabel>
             <FormDescription>
-              Enter the likelihood that the risk would occur untreated, as a
-              percentage value.
+              {t('raw-probability-description')}
             </FormDescription>
             <FormControl>
               <Slider
@@ -139,7 +131,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
                 step={1}
               />
             </FormControl>
-            <FormDescription>{`${field.value}% (max. 100)`}</FormDescription>
+            <FormDescription>{`${field.value}% ${t('max-100')}`}</FormDescription>
           </FormItem>
         )}
       />
@@ -149,11 +141,8 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
         name="RawImpact"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Raw Impact</FormLabel>
-            <FormDescription>
-              Enter the potential business impact if the risk occurred without
-              any treatment, as a percentage value.
-            </FormDescription>
+            <FormLabel>{t('raw-impact')}</FormLabel>
+            <FormDescription>{t('raw-impact-description')}</FormDescription>
             <FormControl>
               <Slider
                 value={[field.value]}
@@ -163,7 +152,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
                 step={1}
               />
             </FormControl>
-            <FormDescription>{`${field.value}% (max. 100)`}</FormDescription>
+            <FormDescription>{`${field.value}% ${t('max-100')}`}</FormDescription>
           </FormItem>
         )}
       />

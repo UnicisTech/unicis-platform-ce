@@ -114,9 +114,13 @@ const TiaTable = ({
                   <span>
                     {/* TODO: reuse the component from Conclusion step*/}
                     {isTranferPermitted(task.properties.tia_procedure) ? (
-                      <DaisyBadge color="success">PERMITTED</DaisyBadge>
+                      <DaisyBadge color="success">
+                        {t('tia-permitted-badge')}
+                      </DaisyBadge>
                     ) : (
-                      <DaisyBadge color="error">NOT PERMITTED</DaisyBadge>
+                      <DaisyBadge color="error">
+                        {t('tia-not-permitted-badge')}
+                      </DaisyBadge>
                     )}
                   </span>
                 </td>

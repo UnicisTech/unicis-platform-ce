@@ -106,7 +106,7 @@ const AttachmentsCard = ({
       >
         <div className="flex justify-between px-1 py-1">
           <Button size={'sm'} className="mr-1" onClick={downloadHandler}>
-            Download
+            {t('download')}
           </Button>
           {canAccess('task', ['update']) && (
             <Button
@@ -114,7 +114,7 @@ const AttachmentsCard = ({
               size={'sm'}
               onClick={openDeleteModal}
             >
-              Delete
+              {t('delete')}
             </Button>
           )}
         </div>

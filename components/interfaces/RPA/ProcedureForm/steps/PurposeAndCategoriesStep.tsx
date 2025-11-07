@@ -17,6 +17,7 @@ import {
 import type { Option } from 'types';
 import type { PurposeAndCategoriesStepValues } from '../types';
 import { Message } from '@/components/shared';
+import { useTranslation } from 'next-i18next';
 
 export interface PurposeAndCategoriesStepProps {
   control: Control<PurposeAndCategoriesStepValues>;
@@ -25,6 +26,8 @@ export interface PurposeAndCategoriesStepProps {
 export default function PurposeAndCategoriesStep({
   control,
 }: PurposeAndCategoriesStepProps) {
+  const { t } = useTranslation('common');
+
   // helper to map selected string values back to full objects
   const mapOptions = (allOpts: Option[], vals: string[]): Option[] =>
     allOpts.filter((o) => vals.includes(o.value));
@@ -35,18 +38,9 @@ export default function PurposeAndCategoriesStep({
         appearance="warning"
         text={
           <span>
-            A data processing operation must have a purpose, a finality, i.e.
-            you cannot collect or process personal data simply in case it would
-            be useful to you one day. Each data processing operation must be
-            assigned a purpose, which must of course be lawful and legitimate in
-            the context of your professional activity.
+            {t('processing-must-have-purpose')}
             <br />
-            <em>
-              Example: You collect a lot of information from your customers,
-              when you make a delivery, issue an invoice or offer a loyalty
-              card. All these operations on these data represent your processing
-              of personal data for the purpose of managing your customers.
-            </em>
+            <em>{t('processing-purpose-example')}</em>
           </span>
         }
       />
@@ -60,7 +54,7 @@ export default function PurposeAndCategoriesStep({
             <FormControl>
               <Textarea
                 {...field}
-                placeholder="Describe the principles to processing of personal data if any."
+                placeholder={t('describe-principles-to-processing')}
               />
             </FormControl>
             <FormMessage />
@@ -73,8 +67,8 @@ export default function PurposeAndCategoriesStep({
         name="category"
         rules={{
           validate: (v: Option[]) =>
-            v && v.length > 0 ? undefined : 'Please select a categories',
-          required: 'Please select a categories',
+            v && v.length > 0 ? undefined : t('please-select-a-categories'),
+          required: t('please-select-a-categories'),
         }}
         render={({ field, formState }) => (
           <FormItem>
@@ -91,7 +85,7 @@ export default function PurposeAndCategoriesStep({
             </FormControl>
             {!formState.errors.category ? (
               <FormDescription>
-                Multiple selection possible for Personal Data
+                {t('multiple-selection-possible-for-personal-data')}
               </FormDescription>
             ) : (
               <FormMessage>
@@ -107,8 +101,8 @@ export default function PurposeAndCategoriesStep({
         name="specialcategory"
         rules={{
           validate: (v: Option[]) =>
-            v && v.length > 0 ? undefined : 'Please select a categories',
-          required: 'Please select a categories',
+            v && v.length > 0 ? undefined : t('please-select-a-categories'),
+          required: t('please-select-a-categories'),
         }}
         render={({ field, formState }) => (
           <FormItem>
@@ -124,7 +118,9 @@ export default function PurposeAndCategoriesStep({
               />
             </FormControl>
             {!formState.errors.specialcategory ? (
-              <FormDescription>Multiple selection possible</FormDescription>
+              <FormDescription>
+                {t('multiple-selection-possible')}
+              </FormDescription>
             ) : (
               <FormMessage>
                 {String(formState.errors.specialcategory?.message)}
@@ -139,8 +135,8 @@ export default function PurposeAndCategoriesStep({
         name="datasubject"
         rules={{
           validate: (v: Option[]) =>
-            v && v.length > 0 ? undefined : 'Please select a categories',
-          required: 'Please select a categories',
+            v && v.length > 0 ? undefined : t('please-select-a-categories'),
+          required: t('please-select-a-categories'),
         }}
         render={({ field, formState }) => (
           <FormItem>
@@ -157,8 +153,9 @@ export default function PurposeAndCategoriesStep({
             </FormControl>
             {!formState.errors.datasubject ? (
               <FormDescription>
-                Multiple selection possible, and if others please specify on the
-                ticket
+                {t(
+                  'multiple-selection-possible-and-if-others-please-specify-on-the-ticket'
+                )}
               </FormDescription>
             ) : (
               <FormMessage>
@@ -172,7 +169,7 @@ export default function PurposeAndCategoriesStep({
       <FormField
         control={control}
         name="retentionperiod"
-        rules={{ required: 'Please select a period' }}
+        rules={{ required: t('please-select-a-period') }}
         render={({ field, formState }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.retentionperiod}</FormLabel>
@@ -193,7 +190,7 @@ export default function PurposeAndCategoriesStep({
             </FormControl>
             {!formState.errors.retentionperiod ? (
               <FormDescription>
-                Please specify the data retention period
+                {t('please-specify-the-data-retention-period')}
               </FormDescription>
             ) : (
               <FormMessage>
@@ -213,7 +210,7 @@ export default function PurposeAndCategoriesStep({
             <FormControl>
               <Textarea
                 {...field}
-                placeholder="In some cases (payroll management), it is necessary to retain certain data for a longer period of time, depending on your legal obligations or if the data are of administrative interest (litigation)."
+                placeholder={t('retention-comments-placeholder')}
               />
             </FormControl>
             <FormMessage />

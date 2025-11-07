@@ -4,6 +4,7 @@ type Options = {
   [key: string]: Option[];
 };
 
+//TODO: i18next
 export const headers = [
   'Transfer scenario',
   'Problematic lawful access',

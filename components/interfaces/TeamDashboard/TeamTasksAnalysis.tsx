@@ -1,4 +1,5 @@
 import { TaskStatusesDetail } from '@/components/interfaces/CSC';
+import { useTranslation } from 'next-i18next';
 import useTeamTasks from 'hooks/useTeamTasks';
 import {
   Card,
@@ -12,13 +13,14 @@ import TasksPieChart from './TasksPieChart';
 const labels = ['To Do', 'In Progress', 'In Review', 'Feedback', 'Done'];
 
 const TasksAnalysis = ({ slug }: { slug: string }) => {
+  const { t } = useTranslation('common');
   const { tasks } = useTeamTasks(slug as string);
 
   if (!tasks || tasks.length === 0) {
     return (
       <div className="mx-auto mt-4 w-full max-w-7xl rounded-md">
         <Card className="p-6 text-center text-muted-foreground">
-          No tasks available.
+          {t('no-tasks-available')}
         </Card>
       </div>
     );
@@ -55,7 +57,7 @@ const TasksAnalysis = ({ slug }: { slug: string }) => {
         </Card>
         <Card className="w-full lg:w-1/2 shadow-sm">
           <CardHeader>
-            <CardTitle>Status Summary</CardTitle>
+            <CardTitle>{t('status-summary')}</CardTitle>
           </CardHeader>
           <CardContent className="flex items-center justify-center h-[300px]">
             <TaskStatusesDetail tasks={tasks} statusCounts={statusCounts} />

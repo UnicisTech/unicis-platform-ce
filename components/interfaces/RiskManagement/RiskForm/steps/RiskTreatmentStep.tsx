@@ -11,27 +11,32 @@ import {
 import { Textarea } from '@/components/shadcn/ui/textarea';
 import { Slider } from '@/components/shadcn/ui/slider';
 import type { RiskTreatmentStepValues } from '../types';
+import { useTranslation } from 'next-i18next';
 
 export interface RiskTreatmentStepProps {
   control: Control<RiskTreatmentStepValues>;
 }
 
 export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
+  const { t } = useTranslation('common');
+
   return (
     <>
       <FormField
         control={control}
         name="RiskTreatment"
-        rules={{ required: 'Describe how the risk is to be treated.' }}
+        rules={{ required: t('describe-how-the-risk-is-to-be-treated') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Risk Treatment</FormLabel>
+            <FormLabel>{t('risk-treatment')}</FormLabel>
             <FormDescription>
-              Describe how the risk is to be treated (e.g., controlled, avoided,
-              transferred, or accepted).
+              {t('describe-how-the-risk-is-to-be-treated-description')}
             </FormDescription>
             <FormControl>
-              <Textarea {...field} placeholder="Describe treatment approach" />
+              <Textarea
+                {...field}
+                placeholder={t('describe-treatment-approach')}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -41,15 +46,15 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
       <FormField
         control={control}
         name="TreatmentCost"
-        rules={{ required: 'Estimate the total cost of mitigating the risk.' }}
+        rules={{ required: t('estimate-total-cost-of-mitigating-risk') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Treatment Cost</FormLabel>
+            <FormLabel>{t('treatment-cost')}</FormLabel>
             <FormDescription>
-              Estimate the total cost of mitigating the risk.
+              {t('estimate-total-cost-of-mitigating-risk')}
             </FormDescription>
             <FormControl>
-              <Textarea {...field} placeholder="Enter cost estimate" />
+              <Textarea {...field} placeholder={t('enter-cost-estimate')} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -61,7 +66,7 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
         name="TreatmentStatus"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Treatment Status (%)</FormLabel>
+            <FormLabel>{t('treatment-status-percent')}</FormLabel>
             <FormControl>
               <Slider
                 value={[field.value]}
@@ -72,10 +77,9 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
               />
             </FormControl>
             <FormDescription>
-              To what extent is the planned treatment in place? 0% means only a
-              plan exists; 100% means the treatment is fully operational.
+              {t('treatment-status-description')}
             </FormDescription>
-            <FormDescription>{`${field.value} percent (max. 100)`}</FormDescription>
+            <FormDescription>{`${field.value} ${t('percent-max-100')}`}</FormDescription>
           </FormItem>
         )}
       />
@@ -85,7 +89,7 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
         name="TreatedProbability"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Treated Probability (%)</FormLabel>
+            <FormLabel>{t('treated-probability-percent')}</FormLabel>
             <FormControl>
               <Slider
                 value={[field.value]}
@@ -96,9 +100,9 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
               />
             </FormControl>
             <FormDescription>
-              Enter the probability that the risk will occur after mitigation.
+              {t('treated-probability-description')}
             </FormDescription>
-            <FormDescription>{`${field.value} percent (max. 100)`}</FormDescription>
+            <FormDescription>{`${field.value} ${t('percent-max-100')}`}</FormDescription>
           </FormItem>
         )}
       />
@@ -108,7 +112,7 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
         name="TreatedImpact"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Treated Impact (%)</FormLabel>
+            <FormLabel>{t('treated-impact-percent')}</FormLabel>
             <FormControl>
               <Slider
                 value={[field.value]}
@@ -118,12 +122,8 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
                 step={1}
               />
             </FormControl>
-            <FormDescription>
-              Enter the likely impact after mitigation. Incidents due to control
-              failures may have higher impacts. Bold treated values if they
-              differ from raw values.
-            </FormDescription>
-            <FormDescription>{`${field.value} percent (max. 100)`}</FormDescription>
+            <FormDescription>{t('treated-impact-description')}</FormDescription>
+            <FormDescription>{`${field.value} ${t('percent-max-100')}`}</FormDescription>
           </FormItem>
         )}
       />

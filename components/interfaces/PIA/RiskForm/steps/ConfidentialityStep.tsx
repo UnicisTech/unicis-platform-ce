@@ -15,6 +15,7 @@ import {
 } from '@/components/defaultLanding/data/configs/pia';
 import type { PiaRisk } from 'types';
 import { ConfidentialityStepValues } from '../types';
+import { useTranslation } from 'next-i18next';
 
 const ConfidentialityStep = ({
   initial,
@@ -23,18 +24,17 @@ const ConfidentialityStep = ({
   initial?: PiaRisk[1];
   control: Control<ConfidentialityStepValues>;
 }) => {
+  const { t } = useTranslation('common');
+
   return (
     <>
-      <p>
-        What are the risks to the privacy and rights of the people whose data is
-        being processed?
-      </p>
-      <p>1. Confidentiality and Integrity</p>
+      <p>{t('what-are-the-risks-to-privacy')}</p>
+      <p>{t('one-confidentiality-and-integrity')}</p>
 
       <FormField
         control={control}
         name="confidentialityRiskProbability"
-        rules={{ required: 'Please select an option.' }}
+        rules={{ required: t('please-select-an-option') }}
         defaultValue={initial?.confidentialityRiskProbability ?? ''}
         render={({ field }) => (
           <FormItem>
@@ -59,7 +59,7 @@ const ConfidentialityStep = ({
       <FormField
         control={control}
         name="confidentialityRiskSecurity"
-        rules={{ required: 'Please select an option.' }}
+        rules={{ required: t('please-select-an-option') }}
         defaultValue={initial?.confidentialityRiskSecurity ?? ''}
         render={({ field }) => (
           <FormItem>

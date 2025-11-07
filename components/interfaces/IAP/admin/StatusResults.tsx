@@ -60,7 +60,7 @@ const StatusResults: React.FC<StatusResultsProps> = ({
       <DialogContent className="w-10/12 max-w-5xl">
         <DialogHeader>
           <DialogTitle>
-            {`Course Status Results - ${teamCourse.course.name}`}
+            {t('course-status-results', { name: teamCourse.course.name })}
           </DialogTitle>
         </DialogHeader>
 
@@ -73,10 +73,10 @@ const StatusResults: React.FC<StatusResultsProps> = ({
             <table className="w-full text-sm divide-y divide-border">
               <thead className="bg-muted">
                 <tr>
-                  <th className="px-4 py-2 text-left">User</th>
-                  <th className="px-4 py-2 text-left">Right</th>
-                  <th className="px-4 py-2 text-left">Wrong</th>
-                  <th className="px-4 py-2 text-left">Status</th>
+                  <th className="px-4 py-2 text-left">{t('user')}</th>
+                  <th className="px-4 py-2 text-left">{t('right')}</th>
+                  <th className="px-4 py-2 text-left">{t('wrong')}</th>
+                  <th className="px-4 py-2 text-left">{t('status')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
@@ -99,9 +99,9 @@ const StatusResults: React.FC<StatusResultsProps> = ({
                       <td className="px-4 py-2">{wrong}</td>
                       <td className="px-4 py-2">
                         {!wrong ? (
-                          <StatusBadge label="Passed" value="done" />
+                          <StatusBadge label={t('passed')} value="done" />
                         ) : (
-                          <StatusBadge label="Failed" value="failed" />
+                          <StatusBadge label={t('failed')} value="failed" />
                         )}
                       </td>
                     </tr>

@@ -63,9 +63,7 @@ const Teams = () => {
               </p>
             </div>
             {canAccess('team', ['create']) && (
-              <Button
-                onClick={() => setCreateTeamVisible(!createTeamVisible)}
-              >
+              <Button onClick={() => setCreateTeamVisible(!createTeamVisible)}>
                 {t('create-team')}
               </Button>
             )}

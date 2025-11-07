@@ -8,7 +8,13 @@ import ConfirmationDialog from '../shared/ConfirmationDialog';
 import { defaultHeaders } from '@/lib/common';
 import type { ApiResponse } from 'types';
 import { Button } from '../shadcn/ui/button';
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '../shadcn/ui/card';
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '../shadcn/ui/card';
 import { Loader2 } from 'lucide-react';
 
 const RemoveTeam = ({ team }: { team: Team }) => {
@@ -42,16 +48,12 @@ const RemoveTeam = ({ team }: { team: Team }) => {
     <>
       <Card>
         <CardHeader>
-          <CardTitle>
-            {t('remove-team')}
-          </CardTitle>
-          <CardDescription>
-            {t('remove-team-warning')}
-          </CardDescription>
+          <CardTitle>{t('remove-team')}</CardTitle>
+          <CardDescription>{t('remove-team-warning')}</CardDescription>
         </CardHeader>
         <CardFooter className="flex justify-end">
           <Button
-            variant='destructive'
+            variant="destructive"
             onClick={() => setAskConfirmation(true)}
           >
             {loading && <Loader2 className="animate-spin" />}

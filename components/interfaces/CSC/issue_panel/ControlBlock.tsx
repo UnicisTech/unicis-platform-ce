@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'next-i18next';
 import { Button } from '@/components/shadcn/ui/button';
 import { Input } from '@/components/shadcn/ui/input';
 import { Textarea } from '@/components/shadcn/ui/textarea';
@@ -38,6 +39,7 @@ const ControlBlock = ({
   onControlChange: (oldControl: string, newControl: string) => void;
   onDeleteControl: (control: string) => void;
 }) => {
+  const { t } = useTranslation('common');
   const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   const controlOptions = useMemo(() => getControlOptions(ISO), [ISO]);
@@ -52,7 +54,7 @@ const ControlBlock = ({
   return (
     <div className="space-y-4">
       <div className="space-y-1">
-        <Label>Select a control</Label>
+        <Label>{t('select-a-control')}</Label>
         <div className="grid grid-cols-[1fr_auto] gap-2 items-center">
           <Select
             value={control}
@@ -60,7 +62,7 @@ const ControlBlock = ({
             disabled={isSaving || isDeleting}
           >
             <SelectTrigger className="w-full">
-              <SelectValue placeholder="Choose a control">
+              <SelectValue placeholder={t('choose-a-control')}>
                 {
                   controlOptions.find(({ value }) => value.control === control)
                     ?.label
@@ -110,20 +112,20 @@ const ControlBlock = ({
 
       {controlData?.code && (
         <div className="space-y-1">
-          <Label>Code</Label>
+          <Label>{t('code')}</Label>
           <Input value={controlData.code} readOnly />
         </div>
       )}
 
       {controlData?.section && (
         <div className="space-y-1">
-          <Label>Section</Label>
+          <Label>{t('section')}</Label>
           <Input value={controlData.section} readOnly />
         </div>
       )}
 
       <div className="space-y-1">
-        <Label>Status</Label>
+        <Label>{t('status')}</Label>
         <StatusSelector
           statusValue={status}
           control={control}
@@ -134,7 +136,7 @@ const ControlBlock = ({
 
       {controlData?.requirements && (
         <div className="space-y-1">
-          <Label>Requirements</Label>
+          <Label>{t('requirements')}</Label>
           <Textarea
             value={controlData.requirements}
             readOnly

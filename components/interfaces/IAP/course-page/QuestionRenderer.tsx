@@ -12,19 +12,20 @@ import { Label } from '@/components/shadcn/ui/label';
 
 import { shuffleArray } from '../services/passCourseService';
 import type {
-  SingleChoiceQuestion,
-  MultipleChoiceQuestion,
-  OrderQuestion,
-  TextQuestion,
+  SingleChoiceQuestion as SingleChoiceQuestionType,
+  MultipleChoiceQuestion as MultipleChoiceQuestionType,
+  OrderQuestion as OrderQuestionType,
+  TextQuestion as TextQuestionType,
   Question,
 } from 'types';
 import { QuestionType } from 'types';
+import { useTranslation } from 'next-i18next';
 
 const SingleChoiceQuestion = ({
   question,
   onAnswerUpdate,
 }: {
-  question: SingleChoiceQuestion;
+  question: SingleChoiceQuestionType;
   onAnswerUpdate: (answer: any) => void;
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -56,9 +57,10 @@ const MultipleChoiceQuestion = ({
   question,
   onAnswerUpdate,
 }: {
-  question: MultipleChoiceQuestion;
+  question: MultipleChoiceQuestionType;
   onAnswerUpdate: (answer: any) => void;
 }) => {
+  const { t } = useTranslation('common');
   const [selectedAnswer, setSelectedAnswer] = useState<string[] | null>(null);
 
   useEffect(() => {
@@ -68,7 +70,7 @@ const MultipleChoiceQuestion = ({
   return (
     <>
       <Label className="text-xl font-semibold mb-1">{question.question}</Label>
-      <p className="text-xs font-light mb-2">Multiple options</p>
+      <p className="text-xs font-light mb-2">{t('multiple-options')}</p>
       {question.answers.map(({ answer }, index) => (
         <div className="flex items-center gap-2 mb-2" key={index}>
           <Checkbox
@@ -95,9 +97,10 @@ const OrderQuestion = ({
   question,
   onAnswerUpdate,
 }: {
-  question: OrderQuestion;
+  question: OrderQuestionType;
   onAnswerUpdate: (answer: any) => void;
 }) => {
+  const { t } = useTranslation('common');
   const [selectedAnswer, setSelectedAnswer] = useState<
     { first: string; second: string | null }[]
   >(question.answers.map((answer) => ({ ...answer, second: null })));
@@ -136,12 +139,12 @@ const OrderQuestion = ({
             }}
           >
             <SelectTrigger>
-              <SelectValue placeholder="Choose">
+              <SelectValue placeholder={t('choose')}>
                 {selectedAnswer[index]?.second ?? ''}
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="__clear__">— Clear selection —</SelectItem>
+              <SelectItem value="__clear__">{t('clear-selection')}</SelectItem>
               {shuffledOptions
                 .filter(
                   (option) =>
@@ -164,7 +167,7 @@ const TextQuestion = ({
   question,
   onAnswerUpdate,
 }: {
-  question: TextQuestion;
+  question: TextQuestionType;
   onAnswerUpdate: (answer: any) => void;
 }) => {
   const [answerInput, setAnswerInput] = useState<string | null>(null);
@@ -192,6 +195,8 @@ const QuestionRenderer = ({
   question: Question;
   onAnswerUpdate: (answer: any) => void;
 }) => {
+  const { t } = useTranslation('common');
+
   switch (question.type) {
     case QuestionType.SINGLE_CHOICE:
       return (
@@ -216,7 +221,7 @@ const QuestionRenderer = ({
         <TextQuestion question={question} onAnswerUpdate={onAnswerUpdate} />
       );
     default:
-      return <p>Unknown question type.</p>;
+      return <p>{t('unknown-question-type')}</p>;
   }
 };
 

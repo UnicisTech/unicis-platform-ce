@@ -23,6 +23,7 @@ import { Loading, Error } from '@/components/shared';
 import type { DescriptionAndStakeholdersStepValues } from '../types';
 import type { Option } from 'types';
 import { Message } from '@/components/shared';
+import { useTranslation } from 'next-i18next';
 
 export interface DescriptionAndStakeholdersStepProps {
   control: Control<DescriptionAndStakeholdersStepValues>;
@@ -31,6 +32,7 @@ export interface DescriptionAndStakeholdersStepProps {
 export default function DescriptionAndStakeholdersStep({
   control,
 }: DescriptionAndStakeholdersStepProps) {
+  const { t } = useTranslation('common');
   const router = useRouter();
   const { slug } = router.query;
   const { isLoading, isError, members } = useTeamMembers(slug as string);
@@ -49,33 +51,24 @@ export default function DescriptionAndStakeholdersStep({
 
   return (
     <>
-      <Message
-        appearance="warning"
-        text={`A personal data processing is an operation, or set of operations, involving personal data,
-                        whatever
-                        the method used (collection, recording, organisation, storage, adaptation, modification, extraction,
-                        consultation, use, communication by diffusion, transmission or any other form of making available,
-                        linkage).`}
-      />
+      <Message text={t('personal-data-processing-definition')} />
 
       <FormField
         control={control}
         name="reviewDate"
-        rules={{ required: 'Please select a due date.' }}
+        rules={{ required: t('please-select-a-due-date') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Review Date</FormLabel>
+            <FormLabel>{t('review-date')}</FormLabel>
             <FormControl>
               <DatePickerInput
                 value={field.value}
                 onChange={field.onChange}
-                placeholder="Select date"
+                placeholder={t('select-date')}
                 isModal
               />
             </FormControl>
-            <FormDescription>
-              Specify a future date for reviewing the record
-            </FormDescription>
+            <FormDescription>{t('specify-future-review-date')}</FormDescription>
             <FormMessage />
           </FormItem>
         )}
@@ -84,15 +77,15 @@ export default function DescriptionAndStakeholdersStep({
       <FormField
         control={control}
         name="controller"
-        rules={{ required: 'Please enter the controller.' }}
+        rules={{ required: t('please-enter-the-controller') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Controller</FormLabel>
+            <FormLabel>{t('controller')}</FormLabel>
             <FormControl>
               <Input
                 {...field}
                 autoComplete="off"
-                placeholder="Enter controller name"
+                placeholder={t('enter-controller-name')}
               />
             </FormControl>
             <FormMessage />
@@ -103,10 +96,10 @@ export default function DescriptionAndStakeholdersStep({
       <FormField
         control={control}
         name="dpo"
-        rules={{ required: 'Please select a DPO.' }}
+        rules={{ required: t('please-select-a-dpo') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Data Protection Officer</FormLabel>
+            <FormLabel>{t('data-protection-officer')}</FormLabel>
             <FormControl>
               <Select
                 value={field.value?.value}
@@ -116,7 +109,7 @@ export default function DescriptionAndStakeholdersStep({
                 }}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select a DPO" />
+                  <SelectValue placeholder={t('select-a-dpo')} />
                 </SelectTrigger>
                 <SelectContent>
                   {dpoOptions.map((opt) => (

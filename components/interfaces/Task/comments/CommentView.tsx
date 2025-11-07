@@ -16,7 +16,7 @@ const CommentView = ({
   deleteComment,
 }: CommentViewProps) => {
   const { t } = useTranslation('common');
-  
+
   return (
     <>
       <div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'next-i18next';
 import type { Task } from '@prisma/client';
 import type { RpaAuditLog } from 'types';
 import {
@@ -14,6 +15,8 @@ import Pagination from '@/components/shadcn/ui/audit-pagination';
 const LOGS_PER_PAGE = 20;
 
 const RpaAuditLogs = ({ task }: { task: Task }) => {
+  const { t } = useTranslation('common');
+
   const taskProperties = task?.properties as any;
   const auditLogs = (taskProperties.rpa_audit_logs || []) as RpaAuditLog[];
 
@@ -31,11 +34,11 @@ const RpaAuditLogs = ({ task }: { task: Task }) => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>User</TableHead>
-                <TableHead>Action</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Previous Value</TableHead>
-                <TableHead>Next Value</TableHead>
+                <TableHead>{t('user')}</TableHead>
+                <TableHead>{t('action')}</TableHead>
+                <TableHead>{t('date')}</TableHead>
+                <TableHead>{t('prev-value')}</TableHead>
+                <TableHead>{t('next-value')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -67,7 +70,7 @@ const RpaAuditLogs = ({ task }: { task: Task }) => {
         </>
       ) : (
         <p className="text-sm text-muted-foreground">
-          No audit logs available.
+          {t('no-logs-available')}
         </p>
       )}
     </div>

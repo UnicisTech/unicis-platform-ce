@@ -7,15 +7,17 @@ import { Field } from '@/components/shared/atlaskit';
 import type { Task } from '@prisma/client';
 import { RMProcedureInterface, TaskProperties } from 'types';
 import { riskValueToLabel } from '@/lib/rm';
+import { useTranslation } from 'next-i18next';
 
 const RmTaskPanel = ({ task }: { task: Task }) => {
+  const { t } = useTranslation('common');
   const properties = task?.properties as TaskProperties;
   const risk = properties?.rm_risk as RMProcedureInterface | undefined;
   const [activeTab, setActiveTab] = useState(0);
 
   return (
     <div className="p-5">
-      <h2 className="text-1xl font-bold mb-4">View Risk Management</h2>
+      <h2 className="text-1xl font-bold mb-4">{t('view-risk-management')}</h2>
       {risk ? (
         <>
           <div role="tablist" className="tabs tabs-bordered">
@@ -88,7 +90,7 @@ const RmTaskPanel = ({ task }: { task: Task }) => {
         </>
       ) : (
         <div className="mt-4">
-          <p>Risk has not been created for this task.</p>
+          <p>{t('risk-has-not-been-created-for-this-task')}</p>
         </div>
       )}
     </div>

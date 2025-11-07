@@ -5,31 +5,37 @@ import React from 'react';
 import type { TeamWithSubscription, SubscriptionWithPayments } from 'types';
 import useTeamMembers from 'hooks/useTeamMembers';
 import { getTotalPrice, planPrice } from '@/lib/subscriptions';
-import { format } from 'date-fns/format';
+import { format, addMonths } from 'date-fns';
 
 interface WisePaymentCardProps {
   team: TeamWithSubscription;
 }
 
+const formatEUR = (n: number) =>
+  new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR' }).format(
+    n ?? 0
+  );
+
 const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
   const { t } = useTranslation('common');
-  const subscription = team.subscription as SubscriptionWithPayments;
+  const subscription = team.subscription as
+    | SubscriptionWithPayments
+    | undefined;
   const { members, isError, isLoading } = useTeamMembers(team.slug);
 
-  if (isLoading || isError || !members || !subscription) {
-    return null;
-  }
+  if (isLoading || isError || !members || !subscription) return null;
+  if (!subscription.payments?.length) return null;
 
   const totalPrice = getTotalPrice(subscription.plan, members.length);
   const paymentUrl = `https://wise.com/pay/business/unicistechou?currency=EUR&amount=${totalPrice}`;
 
-  if (subscription.payments.length === 0) {
-    return null;
-  }
+  const newestPayment =
+    subscription.payments.reduce((latest, payment) =>
+      new Date(payment.date) > new Date(latest.date) ? payment : latest
+    ) ?? subscription.payments[0];
 
-  const newestPayment = subscription.payments.reduce((latest, payment) => {
-    return payment.date > latest.date ? payment : latest;
-  });
+  const newestDate = new Date(newestPayment.date);
+  const nextInvoiceDate = addMonths(newestDate, 1);
 
   return (
     <Card>
@@ -38,56 +44,55 @@ const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
           <Card.Title>{t('wise-payment')}</Card.Title>
           <Card.Description>{t('wise-payment-details')}</Card.Description>
         </Card.Header>
+
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div className="flex-1">
+          <div className="flex-1 space-y-1">
             <p>
-              <b>Team: </b>
+              <b>{t('team')}: </b>
               <span>{team.name}</span>
             </p>
             <p>
-              <b>Number of Members: </b>
-              <span>{members.length || ''}</span>
+              <b>{t('number-of-members')}: </b>
+              <span>{members.length}</span>
             </p>
             <p>
-              <b>Price per user: </b>
-              <span>€{planPrice[subscription.plan]}</span>
+              <b>{t('price-per-user')}: </b>
+              <span>{formatEUR(planPrice[subscription.plan])}</span>
             </p>
             <p>
-              <b>Total: </b>
-              <span>€{getTotalPrice(subscription.plan, members.length)}</span>
+              <b>{t('total')}: </b>
+              <span>{formatEUR(totalPrice)}</span>
             </p>
             <p>
-              <b>Invoice Date: </b>
-              <span>
-                {format(new Date(newestPayment.date), 'MMMM d, yyyy')}
-              </span>
+              <b>{t('invoice-date')}: </b>
+              <span>{format(newestDate, 'MMMM d, yyyy')}</span>
             </p>
             <p>
-              <b>Next invoice Date: </b>
-              <span>
-                {format(
-                  new Date(newestPayment.date).setDate(
-                    new Date(newestPayment.date).getDate() + 30
-                  ),
-                  'MMMM d, yyyy'
-                )}
-              </span>
+              <b>{t('next-invoice-date')}: </b>
+              <span>{format(nextInvoiceDate, 'MMMM d, yyyy')}</span>
             </p>
           </div>
+
           <div className="flex-2 flex justify-end items-center">
             <img
               src="/wise-quick-pay-qr-code-2.png"
-              alt="Wise Quick Pay QR Code"
+              alt={t('wise-qr-alt')}
               className="max-w-full h-auto"
-              data-tip="Scan this QR code to make a quick payment with Wise"
+              data-tip={t('scan-qr-tip')}
             />
           </div>
         </div>
       </Card.Body>
+
       <Card.Footer>
         <div className="flex justify-end">
-          <Link rel="noopener noreferrer" target="_blank" href={paymentUrl}>
-            <img src="/pww-button.svg" alt="Pay with WISE" />
+          <Link
+            rel="noopener noreferrer"
+            target="_blank"
+            href={paymentUrl}
+            aria-label={t('pay-with-wise')}
+          >
+            <img src="/pww-button.svg" alt={t('pay-with-wise')} />
           </Link>
         </div>
       </Card.Footer>

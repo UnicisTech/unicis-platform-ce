@@ -104,8 +104,8 @@ const CreateTask = ({
     <Dialog open={visible} onOpenChange={setVisible}>
       <DialogContent className="sm:max-w-[600px] overflow-visible">
         <DialogHeader>
-          <DialogTitle>Create Task</DialogTitle>
-          <DialogDescription>Fill in the task details</DialogDescription>
+          <DialogTitle>{t('create-task')}</DialogTitle>
+          <DialogDescription>{t('fill-in-the-task-details')}</DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
@@ -116,7 +116,7 @@ const CreateTask = ({
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title</FormLabel>
+                  <FormLabel>{t('title')}</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter task title" {...field} />
                   </FormControl>
@@ -130,7 +130,7 @@ const CreateTask = ({
               name="status"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Status</FormLabel>
+                  <FormLabel>{t('status')}</FormLabel>
                   <FormControl>
                     <Select value={field.value} onValueChange={field.onChange}>
                       <SelectTrigger className="w-full">
@@ -155,7 +155,7 @@ const CreateTask = ({
               name="duedate"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Due Date</FormLabel>
+                  <FormLabel>{t('due-date')}</FormLabel>
                   <Popover modal={false}>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -167,7 +167,7 @@ const CreateTask = ({
                           {field.value ? (
                             format(field.value, 'PPP')
                           ) : (
-                            <span>Pick a date</span>
+                            <span>{t('pick-a-date')}</span>
                           )}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
@@ -196,7 +196,7 @@ const CreateTask = ({
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>{t('description')}</FormLabel>
                   <FormControl>
                     <QuillEditor
                       theme="snow"

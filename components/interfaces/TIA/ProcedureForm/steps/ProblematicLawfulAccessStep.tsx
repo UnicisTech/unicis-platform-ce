@@ -20,8 +20,10 @@ import type { ProblematicLawfulAccessValues } from '../types';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 import { getTransferIsValue } from '@/lib/tia';
 import { Message } from '@/components/shared';
+import { useTranslation } from 'next-i18next';
 
 export function TransferIs() {
+  const { t } = useTranslation('common');
   const { getValues } = useFormContext();
   const values = getValues();
 
@@ -32,7 +34,7 @@ export function TransferIs() {
   return (
     <div className="flex items-center space-x-2">
       <span className="font-bold">
-        Based on the answers given above, the transfer is{' '}
+        {t('based-on-the-answers-transfer-is')}{' '}
         <DaisyBadge color={variant}>{status}</DaisyBadge>
       </span>
     </div>
@@ -47,21 +49,22 @@ interface ProblematicLawfulAccessStepProps {
 export default function ProblematicLawfulAccessStep({
   control,
 }: ProblematicLawfulAccessStepProps) {
+  const { t } = useTranslation('common');
+
   return (
     <>
-      <Message text={`To be completed by the exporter`} />
+      <Message text={t('to-be-completed-by-the-exporter')} />
 
       {/* Encryption in Transit */}
       <FormField
         control={control}
         name="EncryptionInTransit"
-        rules={{ required: 'Select yes or no.' }}
+        rules={{ required: t('select-yes-or-no') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.EncryptionInTransit}</FormLabel>
             <FormDescription>
-              Is the personal data at issue protected with adequate encryption
-              in-transit (i.e. when transmitted)?
+              {t('encryption-in-transit-description')}
             </FormDescription>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
@@ -82,12 +85,12 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="ReasonEncryptionInTransit"
-        rules={{ required: 'Enter a reason.' }}
+        rules={{ required: t('enter-a-reason') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.ReasonEncryptionInTransit}</FormLabel>
             <FormControl>
-              <Textarea {...field} placeholder="Provide details" />
+              <Textarea {...field} placeholder={t('provide-details')} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -98,17 +101,12 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="TransferMechanism"
-        rules={{ required: 'Select yes or no.' }}
+        rules={{ required: t('select-yes-or-no') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.TransferMechanism}</FormLabel>
             <FormDescription>
-              Is the personal data at issue protected by a transfer mechanism
-              approved by applicable data protection law (e.g., the EU Standard
-              Contractual Clauses in case of the GDPR, approved BCR, or - in the
-              case of an onward transfer - a back-to-back-contract in line with
-              the EU SCC), and compliance with it and its judicial enforcement
-              be expected, insofar permitted under the importer&apos;s law?
+              {t('transfer-mechanism-description')}
             </FormDescription>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
@@ -129,12 +127,12 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="ReasonTransferMechanism"
-        rules={{ required: 'Enter a reason.' }}
+        rules={{ required: t('enter-a-reason') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.ReasonTransferMechanism}</FormLabel>
             <FormControl>
-              <Textarea {...field} placeholder="Provide details" />
+              <Textarea {...field} placeholder={t('provide-details')} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -143,25 +141,25 @@ export default function ProblematicLawfulAccessStep({
 
       <Message
         appearance="warning"
-        text={`If the answer is NO please enter details into the EU Standard Contractual Clauses or similar safeguard!`}
+        text={t(
+          'if-answer-is-no-enter-details-into-eu-scc-or-similar-safeguard'
+        )}
       />
 
       <p className="font-bold">
-        Based on the legal analysis above, the lawful access laws in the country
-        of the importer are compatible with EU and CH law
+        {t('based-on-legal-analysis-lawful-access-laws-compatible')}
       </p>
 
       {/* Lawful Access */}
       <FormField
         control={control}
         name="LawfulAccess"
-        rules={{ required: 'Select yes or no.' }}
+        rules={{ required: t('select-yes-or-no') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.LawfulAccess}</FormLabel>
             <FormDescription>
-              … in connection with targeted lawful access (e.g., investigations
-              by the police, state prosecutors and other authorities)
+              {t('lawful-access-targeted-description')}
             </FormDescription>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
@@ -182,12 +180,12 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="ReasonLawfulAccess"
-        rules={{ required: 'Enter a reason.' }}
+        rules={{ required: t('enter-a-reason') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.ReasonLawfulAccess}</FormLabel>
             <FormControl>
-              <Textarea {...field} placeholder="Provide details" />
+              <Textarea {...field} placeholder={t('provide-details')} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -198,15 +196,14 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="MassSurveillanceTelecommunications"
-        rules={{ required: 'Select yes or no.' }}
+        rules={{ required: t('select-yes-or-no') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>
               {fieldPropsMapping.MassSurveillanceTelecommunications}
             </FormLabel>
             <FormDescription>
-              … in connection with mass surveillance of telecommunications,
-              online services, etc. (e.g., by intelligence agencies)
+              {t('mass-surveillance-telecommunications-description')}
             </FormDescription>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
@@ -227,14 +224,14 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="ReasonMassSurveillanceTelecommunications"
-        rules={{ required: 'Enter a reason.' }}
+        rules={{ required: t('enter-a-reason') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>
               {fieldPropsMapping.ReasonMassSurveillanceTelecommunications}
             </FormLabel>
             <FormControl>
-              <Textarea {...field} placeholder="Provide details" />
+              <Textarea {...field} placeholder={t('provide-details')} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -245,12 +242,12 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="SelfReportingObligations"
-        rules={{ required: 'Select yes or no.' }}
+        rules={{ required: t('select-yes-or-no') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.SelfReportingObligations}</FormLabel>
             <FormDescription>
-              … in connection with self-reporting obligations
+              {t('self-reporting-obligations-description')}
             </FormDescription>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
@@ -271,14 +268,14 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="ReasonSelfReportingObligations"
-        rules={{ required: 'Enter a reason.' }}
+        rules={{ required: t('enter-a-reason') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>
               {fieldPropsMapping.ReasonSelfReportingObligations}
             </FormLabel>
             <FormControl>
-              <Textarea {...field} placeholder="Provide details" />
+              <Textarea {...field} placeholder={t('provide-details')} />
             </FormControl>
             <FormMessage />
           </FormItem>

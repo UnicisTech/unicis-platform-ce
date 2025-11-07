@@ -12,6 +12,7 @@ import { Category } from '@prisma/client';
 import { TeamCourseWithProgress } from 'types';
 import ProgressBadge from '../shared/ProgressBadge';
 import { cn } from '@/components/shadcn/lib/utils';
+import { useTranslation } from 'next-i18next';
 
 const CourseCard = ({
   teamCourse,
@@ -21,6 +22,7 @@ const CourseCard = ({
   categories: Category[];
 }) => {
   const router = useRouter();
+  const { t } = useTranslation('common');
 
   const openCourse = () => {
     router.push(`${router.asPath}/${teamCourse.id}`);
@@ -40,7 +42,7 @@ const CourseCard = ({
         <img
           className="absolute top-0 left-0 w-full h-full object-cover rounded-t-md"
           src={course?.thumbnail || '/unicis-iap-logo.png'}
-          alt="Course Thumbnail"
+          alt={t('course-thumbnail')}
         />
       </div>
 
@@ -57,7 +59,7 @@ const CourseCard = ({
         <ProgressBadge progress={teamCourse.progress?.[0]?.progress} />
         {course?.estimatedTime && (
           <p className="text-sm text-muted-foreground">
-            Estimated: {course.estimatedTime} minutes
+            {t('estimated-minutes', { time: course.estimatedTime })}
           </p>
         )}
       </CardContent>
@@ -69,7 +71,7 @@ const CourseCard = ({
             openCourse();
           }}
         >
-          Open
+          {t('open')}
         </Button>
       </CardFooter>
     </Card>

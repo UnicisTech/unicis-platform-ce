@@ -16,12 +16,15 @@ import {
 import type { Option } from 'types';
 import type { SecurityMeasuresStepValues } from '../types';
 import { Message } from '@/components/shared';
+import { useTranslation } from 'next-i18next';
 
 export interface SecurityMeasuresStepProps {
   control: Control<SecurityMeasuresStepValues>;
 }
 
 export function SecurityMeasuresStep({ control }: SecurityMeasuresStepProps) {
+  const { t } = useTranslation('common');
+
   const mapOptions = (opts: Option[], vals: string[]): Option[] =>
     opts.filter((o) => vals.includes(o.value));
 
@@ -31,19 +34,10 @@ export function SecurityMeasuresStep({ control }: SecurityMeasuresStepProps) {
         appearance="warning"
         text={
           <span>
-            Secure your data:
-            <br />
-            - Ensure the integrity of your data assets by minimizing the risk of
-            data loss or hacking.
-            <br />
-            - The measures to be taken, whether electronic or physical, depend
-            on the sensitiveness of the data you are processing and the risks to
-            data subjects in the event of an incident.
-            <br />- Various actions must be implemented: updating your antivirus
-            and software, regularly changing passwords and adopting complex
-            passwords, or encrypting your data in certain situations. In the
-            event of loss or theft of an electronic device, it will be more
-            difficult for a third party to access it.
+            {t('secure-your-data')}
+            <br />- {t('ensure-integrity-minimize-risk')}
+            <br />- {t('measures-depend-on-sensitiveness-and-risks')}
+            <br />- {t('various-actions-antivirus-passwords-encrypting')}
           </span>
         }
       />
@@ -53,8 +47,8 @@ export function SecurityMeasuresStep({ control }: SecurityMeasuresStepProps) {
         name="toms"
         rules={{
           validate: (v: Option[]) =>
-            v && v.length > 0 ? undefined : 'Please select at least one',
-          required: 'Please select at least one',
+            v && v.length > 0 ? undefined : t('please-select-at-least-one'),
+          required: t('please-select-at-least-one'),
         }}
         render={({ field, formState }) => (
           <FormItem>
@@ -71,8 +65,9 @@ export function SecurityMeasuresStep({ control }: SecurityMeasuresStepProps) {
             </FormControl>
             {!formState.errors.toms ? (
               <FormDescription>
-                Multiple selection possible, and if others please specify on the
-                ticket
+                {t(
+                  'multiple-selection-possible-and-if-others-please-specify-on-the-ticket'
+                )}
               </FormDescription>
             ) : (
               <FormMessage>
@@ -85,7 +80,7 @@ export function SecurityMeasuresStep({ control }: SecurityMeasuresStepProps) {
 
       <Message
         appearance="warning"
-        text="Please attach the relevant security certification and documents to the task."
+        text={t('please-attach-security-certification-documents-to-task')}
       />
     </>
   );

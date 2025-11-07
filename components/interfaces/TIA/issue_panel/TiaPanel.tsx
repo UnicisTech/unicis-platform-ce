@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'next-i18next';
 import {
   config,
   headers,
@@ -138,24 +139,33 @@ const ProbabilityTab: React.FC<{ step: TiaProcedureInterface[3] }> = ({
 );
 
 // Tab 4: Final decision
-const ConclusionTab: React.FC<{ permitted: boolean }> = ({ permitted }) => (
-  <div>
-    <Field
-      label="Transfer decision"
-      value={
-        permitted ? (
-          <DaisyBadge appearance="added">PERMITTED</DaisyBadge>
-        ) : (
-          <DaisyBadge appearance="removed">NOT PERMITTED</DaisyBadge>
-        )
-      }
-    />
-  </div>
-);
+const ConclusionTab: React.FC<{ permitted: boolean }> = ({ permitted }) => {
+  const { t } = useTranslation('common');
+
+  return (
+    <div>
+      <Field
+        label="Transfer decision"
+        value={
+          permitted ? (
+            <DaisyBadge appearance="added">
+              {t('tia-permitted-badge')}
+            </DaisyBadge>
+          ) : (
+            <DaisyBadge appearance="removed">
+              {t('tia-not-permitted-badge')}
+            </DaisyBadge>
+          )
+        }
+      />
+    </div>
+  );
+};
 
 const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({
   procedure,
 }) => {
+  const { t } = useTranslation('common');
   const [selectedTab, setSelectedTab] = useState(0);
 
   const { targetedRisk, nonTargetedRisk, selfReportingRisk } = useMemo(() => {
@@ -180,9 +190,7 @@ const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({
 
   return (
     <div className="p-5">
-      <h2 className="text-1xl font-bold mb-4">
-        View Transfer Impact Assessment
-      </h2>
+      <h2 className="text-1xl font-bold mb-4">{t('view-tia')}</h2>
       {procedure ? (
         <>
           <div role="tablist" className="tabs tabs-bordered">
@@ -201,7 +209,7 @@ const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({
         </>
       ) : (
         <div className="mt-2">
-          <p>Procedure has not been created for this issue.</p>
+          <p>{t('procedure-has-not-been-created-for-this-issue')}</p>
         </div>
       )}
     </div>
@@ -209,17 +217,16 @@ const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({
 };
 
 const TiaPanelContainer: React.FC<{ task: Task }> = ({ task }) => {
+  const { t } = useTranslation('common');
   const properties = (task.properties as any) ?? {};
   const raw = properties.tia_procedure as unknown;
 
   if (!raw) {
     return (
       <div className="p-5">
-        <h2 className="text-1xl font-bold mb-4">
-          View Transfer Impact Assessment
-        </h2>
+        <h2 className="text-1xl font-bold mb-4">{t('view-tia')}</h2>
         <p className="mt-2 text-xs">
-          Procedure has not been created for this issue.
+          {t('procedure-has-not-been-created-for-this-issue')}
         </p>
       </div>
     );

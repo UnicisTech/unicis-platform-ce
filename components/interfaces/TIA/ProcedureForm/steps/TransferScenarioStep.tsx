@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Control } from 'react-hook-form';
+import { useTranslation } from 'next-i18next';
 import {
   FormField,
   FormItem,
@@ -33,22 +34,24 @@ interface TransferScenarioStepProps {
 export default function TransferScenarioStep({
   control,
 }: TransferScenarioStepProps) {
+  const { t } = useTranslation('common');
+
   return (
     <>
-      <Message text={`To be completed by the exporter`} />
+      <Message text={t('to-be-completed-by-the-exporter')} />
 
       {/* Data Exporter */}
       <FormField
         control={control}
         name="DataExporter"
-        rules={{ required: 'Please specify the data exporter.' }}
+        rules={{ required: t('please-specify-the-data-exporter') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.DataExporter}</FormLabel>
             <FormControl>
               <Textarea
                 {...field}
-                placeholder="Specify the data exporter(s) or the sender"
+                placeholder={t('specify-the-data-exporters-or-the-sender')}
                 autoComplete="off"
               />
             </FormControl>
@@ -61,7 +64,7 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="CountryDataExporter"
-        rules={{ required: 'Please select a country.' }}
+        rules={{ required: t('please-select-a-country') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.CountryDataExporter}</FormLabel>
@@ -76,7 +79,7 @@ export default function TransferScenarioStep({
                 value={field.value?.value}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select a country" />
+                  <SelectValue placeholder={t('select-a-country')} />
                 </SelectTrigger>
                 <SelectContent>
                   {config.countries.map((c) => (
@@ -88,7 +91,9 @@ export default function TransferScenarioStep({
               </Select>
             </FormControl>
             <FormMessage />
-            <FormDescription>Please select from the list</FormDescription>
+            <FormDescription>
+              {t('please-select-from-the-list')}
+            </FormDescription>
           </FormItem>
         )}
       />
@@ -97,14 +102,14 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="DataImporter"
-        rules={{ required: 'Please specify the data importer.' }}
+        rules={{ required: t('please-specify-the-data-importer') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.DataImporter}</FormLabel>
             <FormControl>
               <Textarea
                 {...field}
-                placeholder="Specify the data importer(s) or the receiver"
+                placeholder={t('specify-the-data-importers-or-the-receiver')}
                 autoComplete="off"
               />
             </FormControl>
@@ -117,7 +122,7 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="CountryDataImporter"
-        rules={{ required: 'Please select a country.' }}
+        rules={{ required: t('please-select-a-country') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.CountryDataImporter}</FormLabel>
@@ -132,7 +137,7 @@ export default function TransferScenarioStep({
                 value={field.value?.value}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select a country" />
+                  <SelectValue placeholder={t('select-a-country')} />
                 </SelectTrigger>
                 <SelectContent>
                   {config.countries.map((c) => (
@@ -144,7 +149,9 @@ export default function TransferScenarioStep({
               </Select>
             </FormControl>
             <FormMessage />
-            <FormDescription>Please select from the list</FormDescription>
+            <FormDescription>
+              {t('please-select-from-the-list')}
+            </FormDescription>
           </FormItem>
         )}
       />
@@ -153,14 +160,14 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="TransferScenario"
-        rules={{ required: 'Please describe the transfer scenario.' }}
+        rules={{ required: t('please-describe-the-transfer-scenario') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.TransferScenario}</FormLabel>
             <FormControl>
               <Textarea
                 {...field}
-                placeholder="Description of the transfer scenario"
+                placeholder={t('description-of-the-transfer-scenario')}
                 autoComplete="off"
               />
             </FormControl>
@@ -173,14 +180,14 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="DataAtIssue"
-        rules={{ required: 'Please describe the data at issue.' }}
+        rules={{ required: t('please-describe-the-data-at-issue') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.DataAtIssue}</FormLabel>
             <FormControl>
               <Textarea
                 {...field}
-                placeholder="Description of the data at issue"
+                placeholder={t('description-of-the-data-at-issue')}
                 autoComplete="off"
               />
             </FormControl>
@@ -193,14 +200,14 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="HowDataTransfer"
-        rules={{ required: 'Please describe how data is transferred.' }}
+        rules={{ required: t('please-describe-how-data-is-transferred') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.HowDataTransfer}</FormLabel>
             <FormControl>
               <Textarea
                 {...field}
-                placeholder="Description how the data is transferred (e.g., remote access only)"
+                placeholder={t('description-how-the-data-is-transferred')}
                 autoComplete="off"
               />
             </FormControl>
@@ -213,7 +220,7 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="StartDateAssessment"
-        rules={{ required: 'Please select a date.' }}
+        rules={{ required: t('please-select-a-date') }}
         // defaultValue={initial?.StartDateAssessment?.slice(0, 10) ?? new Date().toISOString().slice(0, 10)}
         render={({ field, formState }) => (
           <FormItem>
@@ -222,13 +229,13 @@ export default function TransferScenarioStep({
               <DatePickerInput
                 value={field.value}
                 onChange={field.onChange}
-                placeholder="Select date"
+                placeholder={t('select-a-date')}
                 error={formState.errors.StartDateAssessment?.message}
                 isModal
               />
             </FormControl>
             <FormMessage />
-            <FormDescription>Select the start date</FormDescription>
+            <FormDescription>{t('select-the-start-date')}</FormDescription>
           </FormItem>
         )}
       />
@@ -260,7 +267,7 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="LawImporterCountry"
-        rules={{ required: 'Please select a country.' }}
+        rules={{ required: t('please-select-a-country') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.LawImporterCountry}</FormLabel>
@@ -275,7 +282,7 @@ export default function TransferScenarioStep({
                 value={field.value?.value}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select a country" />
+                  <SelectValue placeholder={t('select-a-country')} />
                 </SelectTrigger>
                 <SelectContent>
                   {config.countries.map((c) => (
@@ -288,8 +295,9 @@ export default function TransferScenarioStep({
             </FormControl>
             <FormMessage />
             <FormDescription>
-              Legal analysis on the lawful access laws of importer&apos;s
-              country
+              {t(
+                'legal-analysis-on-the-lawful-access-laws-of-importers-country'
+              )}
             </FormDescription>
           </FormItem>
         )}

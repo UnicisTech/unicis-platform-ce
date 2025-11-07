@@ -136,9 +136,7 @@ const AiChat: React.FC = () => {
                     remarkPlugins={[remarkGfm]}
                     components={{
                       ol: ({ children }) => (
-                        <ol className="list-decimal py-2 pl-6">
-                          {children}
-                        </ol>
+                        <ol className="list-decimal py-2 pl-6">{children}</ol>
                       ),
                       li: ({ children }) => (
                         <li className="mb-2">{children}</li>

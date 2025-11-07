@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useTranslation } from 'next-i18next';
 import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
 import { Input } from '@/components/shadcn/ui/input';
 import { Textarea } from '@/components/shadcn/ui/textarea';
@@ -13,6 +14,7 @@ const ControlBlockViewOnly = ({
   control: string;
   ISO: string;
 }) => {
+  const { t } = useTranslation('common');
   const controlOptions = useMemo(() => getControlOptions(ISO), [ISO]);
   const controlData = controlOptions.find(
     ({ value }) => value.control === control
@@ -21,7 +23,7 @@ const ControlBlockViewOnly = ({
   return (
     <div className="space-y-4">
       <div>
-        <Label>Select a control</Label>
+        <Label>{t('select-a-control')}</Label>
         <Input
           value={
             controlOptions.find(({ value }) => value.control === control)?.label
@@ -32,26 +34,26 @@ const ControlBlockViewOnly = ({
 
       {controlData?.code && (
         <div>
-          <Label>Code</Label>
+          <Label>{t('code')}</Label>
           <Input value={controlData.code} readOnly />
         </div>
       )}
 
       {controlData?.section && (
         <div>
-          <Label>Section</Label>
+          <Label>{t('section')}</Label>
           <Input value={controlData.section} readOnly />
         </div>
       )}
 
       <div>
-        <Label>Status</Label>
+        <Label>{t('status')}</Label>
         <Input value={status} readOnly />
       </div>
 
       {controlData?.requirements && (
         <div>
-          <Label>Requirements</Label>
+          <Label>{t('requirements')}</Label>
           <Textarea
             value={controlData.requirements}
             readOnly

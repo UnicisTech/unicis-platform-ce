@@ -11,6 +11,7 @@ import {
 } from '@/components/defaultLanding/data/configs/pia';
 import type { Task } from '@prisma/client';
 import { PiaRisk, TaskProperties } from 'types';
+import { useTranslation } from 'next-i18next';
 
 const tabFieldKeys: Record<number, Array<any>> = {
   0: [
@@ -56,57 +57,62 @@ const FieldTab: React.FC<{ idx: number; risk: PiaRisk }> = ({ idx, risk }) => (
   </>
 );
 
-const BubbleChartTab: React.FC<{ risk: PiaRisk }> = ({ risk }) => (
-  <div className="min-h-[200px] w-full">
-    <RiskMatrixBubbleChart
-      datasets={[
-        {
-          label: 'Confidentiality and Integrity Risk',
-          borderWidth: 1,
-          data: [
-            {
-              x: riskSecurityPoints[risk[1].confidentialityRiskSecurity],
-              y: riskProbabilityPoints[risk[1].confidentialityRiskProbability],
-              r: 20,
-            },
-          ],
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-        },
-        {
-          label: 'Availability',
-          borderWidth: 1,
-          data: [
-            {
-              x: riskSecurityPoints[risk[2].availabilityRiskSecurity],
-              y: riskProbabilityPoints[risk[2].availabilityRiskProbability],
-              r: 20,
-            },
-          ],
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-        },
-        {
-          label: 'Transparency and data minimization',
-          borderWidth: 1,
-          data: [
-            {
-              x: riskSecurityPoints[risk[3].transparencyRiskSecurity],
-              y: riskProbabilityPoints[risk[3].transparencyRiskProbability],
-              r: 20,
-            },
-          ],
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-        },
-      ]}
-    />
-  </div>
-);
+const BubbleChartTab: React.FC<{ risk: PiaRisk }> = ({ risk }) => {
+  const { t } = useTranslation('common');
+  return (
+    <div className="min-h-[200px] w-full">
+      <RiskMatrixBubbleChart
+        datasets={[
+          {
+            label: t('confidentiality-and-integrity-risk'),
+            borderWidth: 1,
+            data: [
+              {
+                x: riskSecurityPoints[risk[1].confidentialityRiskSecurity],
+                y: riskProbabilityPoints[
+                  risk[1].confidentialityRiskProbability
+                ],
+                r: 20,
+              },
+            ],
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          },
+          {
+            label: t('availability'),
+            borderWidth: 1,
+            data: [
+              {
+                x: riskSecurityPoints[risk[2].availabilityRiskSecurity],
+                y: riskProbabilityPoints[risk[2].availabilityRiskProbability],
+                r: 20,
+              },
+            ],
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          },
+          {
+            label: t('transparency-and-data-minimization'),
+            borderWidth: 1,
+            data: [
+              {
+                x: riskSecurityPoints[risk[3].transparencyRiskSecurity],
+                y: riskProbabilityPoints[risk[3].transparencyRiskProbability],
+                r: 20,
+              },
+            ],
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          },
+        ]}
+      />
+    </div>
+  );
+};
 
 const PiaPanel: React.FC<{ task: Task }> = ({ task }) => {
+  const { t } = useTranslation('common');
   const [activeTab, setActiveTab] = useState(0);
   const properties = task.properties as TaskProperties;
   const risk = properties.pia_risk as PiaRisk;
 
-  //TODO: reorginize components scructure and RpaPanel.tsx and TiaPanel.tsx component
   const tabs = risk
     ? [
         <FieldTab key="0" idx={0} risk={risk} />,
@@ -123,14 +129,13 @@ const PiaPanel: React.FC<{ task: Task }> = ({ task }) => {
   return (
     <div className="p-5">
       <h2 className="text-1xl font-bold mb-4">
-        View Privacy Impact Assessment
+        {t('view-privacy-impact-assessment')}
       </h2>
 
       {hasRisk ? (
         <div className="w-full">
           <div role="tablist" className="tabs tabs-bordered">
             {headers.map((header, i) => {
-              // skip tab 5 if there's no risk[4]
               if (i === 5 && !risk[4]) return null;
               return (
                 <button
@@ -149,7 +154,7 @@ const PiaPanel: React.FC<{ task: Task }> = ({ task }) => {
         </div>
       ) : (
         <div className="my-4">
-          <p>Risk has not been created for this task.</p>
+          <p>{t('risk-has-not-been-created-for-this-task')}</p>
         </div>
       )}
     </div>

@@ -113,7 +113,7 @@ const AdminPage = ({
             {t('iap-dashboard')}
           </h2>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Manage courses and categories.
+            {t('manage-courses-and-categories')}
           </p>
         </div>
         <div className="flex justify-end items-center my-1">

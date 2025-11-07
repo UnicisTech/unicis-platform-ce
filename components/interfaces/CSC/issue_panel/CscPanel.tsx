@@ -206,7 +206,7 @@ const CscPanel2 = ({
                 {(isDeleting || isSaving) && (
                   <Loader2 className="animate-spin" />
                 )}
-                + Add Control
+                {t('add-control')}
               </Button>
             </div>
             <div className="mx-[5px] my-0">

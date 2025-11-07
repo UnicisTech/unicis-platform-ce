@@ -12,6 +12,7 @@ import useCanAccess from 'hooks/useCanAccess';
 import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
 import { getCourseStatus } from '../services/helpers';
 import { StatusBadge } from '@/components/shared';
+import { useTranslation } from 'next-i18next';
 
 const statusBadges = {
   todo: <StatusBadge label="To do" value="todo" />,
@@ -39,16 +40,17 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
   statusHandler,
 }) => {
   const { canAccess } = useCanAccess();
+  const { t } = useTranslation();
 
   return (
     <div className="overflow-x-auto">
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-1/5">Name</TableHead>
-            <TableHead className="w-2/5">Category</TableHead>
-            <TableHead className="w-[15%]">Status</TableHead>
-            <TableHead className="w-1/4">Actions</TableHead>
+            <TableHead className="w-1/5">{t('name')}</TableHead>
+            <TableHead className="w-2/5">{t('category')}</TableHead>
+            <TableHead className="w-[15%]">{t('status')}</TableHead>
+            <TableHead className="w-1/4">{t('actions')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

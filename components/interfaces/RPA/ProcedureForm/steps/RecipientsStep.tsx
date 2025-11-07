@@ -22,22 +22,24 @@ import {
 } from '@/components/defaultLanding/data/configs/rpa';
 import type { RecipientsStepValues } from '../types';
 import { Message } from '@/components/shared';
+import { useTranslation } from 'next-i18next';
 
 export interface RecipientsStepProps {
   control: Control<RecipientsStepValues>;
 }
 
 export default function RecipientsStep({ control }: RecipientsStepProps) {
+  const { t } = useTranslation('common');
+
   return (
     <>
       <Message
         appearance="warning"
         text={
           <span>
-            List all persons who have access to the data;
+            {t('list-all-persons-who-have-access-to-the-data')}
             <br />
-            For example: recruitment department, IT department, management,
-            service providers, partners, hosts, etc.
+            {t('for-example-recruitment-it-management-providers')}
           </span>
         }
       />
@@ -45,7 +47,7 @@ export default function RecipientsStep({ control }: RecipientsStepProps) {
       <FormField
         control={control}
         name="recipientType"
-        rules={{ required: 'Please select a type.' }}
+        rules={{ required: t('please-select-a-type') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{fieldPropsMapping.recipientType}</FormLabel>
@@ -60,7 +62,7 @@ export default function RecipientsStep({ control }: RecipientsStepProps) {
                 }}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select recipient type" />
+                  <SelectValue placeholder={t('select-recipient-type')} />
                 </SelectTrigger>
                 <SelectContent>
                   {config.recipientType.map((opt) => (
@@ -73,8 +75,9 @@ export default function RecipientsStep({ control }: RecipientsStepProps) {
             </FormControl>
             <FormMessage />
             <FormDescription>
-              Please specify the type of recipient if not on a list specify on
-              details
+              {t(
+                'please-specify-type-of-recipient-if-not-on-list-specify-on-details'
+              )}
             </FormDescription>
           </FormItem>
         )}
@@ -89,7 +92,9 @@ export default function RecipientsStep({ control }: RecipientsStepProps) {
             <FormControl>
               <Textarea
                 {...field}
-                placeholder="Write details if you select others or there is no recipeint type above."
+                placeholder={t(
+                  'write-details-if-you-select-others-or-no-recipient-type-above'
+                )}
               />
             </FormControl>
             <FormMessage />

@@ -1,3 +1,5 @@
+/* eslint-disable i18next/no-literal-string */
+
 import { Head, Html, Preview, Text } from '@react-email/components';
 import EmailLayout from './EmailLayout';
 import { Team } from '@prisma/client';

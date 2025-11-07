@@ -5,34 +5,16 @@ import type { TaskWithPiaRisk } from 'types';
 import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import { StatusBadge } from '@/components/shared';
-import useCanAccess from 'hooks/useCanAccess';
 import {
   riskProbabilityPoints,
   riskSecurityPoints,
 } from '@/components/defaultLanding/data/configs/pia';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Button } from '@/components/shadcn/ui/button';
+import useCanAccess from 'hooks/useCanAccess';
 
 const calculatePercentage = (input: number): number => {
   return (input / 16) * 100;
-};
-
-const riskValueToLabel = (value: number): string => {
-  const riskLevels = [
-    { max: 20, label: 'Insignificant' },
-    { max: 40, label: 'Minor' },
-    { max: 60, label: 'Moderate' },
-    { max: 80, label: 'Major' },
-    { max: 100, label: 'Extreme' },
-  ];
-
-  for (const { max, label: riskLabel } of riskLevels) {
-    if (value <= max) {
-      return riskLabel;
-    }
-  }
-
-  return '';
 };
 
 const getBgColorClass = (riskLevel: number): string => {
@@ -43,13 +25,9 @@ const getBgColorClass = (riskLevel: number): string => {
     { max: 80, class: 'risk-high' },
     { max: 100, class: 'risk-extreme' },
   ];
-
   for (const { max, class: riskClass } of riskLevels) {
-    if (riskLevel <= max) {
-      return 'bg-' + riskClass;
-    }
+    if (riskLevel <= max) return 'bg-' + riskClass;
   }
-
   return '';
 };
 
@@ -77,6 +55,20 @@ const RisksTable = ({
     nextButtonDisabled,
   } = usePagination<TaskWithPiaRisk>(tasks, perPage);
 
+  const riskValueToLabel = (value: number): string => {
+    const riskLevels = [
+      { max: 20, label: t('risk-level-insignificant') },
+      { max: 40, label: t('risk-level-minor') },
+      { max: 60, label: t('risk-level-moderate') },
+      { max: 80, label: t('risk-level-major') },
+      { max: 100, label: t('risk-level-extreme') },
+    ];
+    for (const { max, label } of riskLevels) {
+      if (value <= max) return label;
+    }
+    return '';
+  };
+
   return (
     <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal! mt-2">
       <div className="overflow-x-auto">
@@ -90,13 +82,13 @@ const RisksTable = ({
                 {t('status')}
               </th>
               <th scope="col" className="px-1.5 py-1.5 text-left">
-                Confidentiality and Integrity
+                {t('confidentiality-and-integrity')}
               </th>
               <th scope="col" className="px-1.5 py-1.5 text-left">
-                Availability
+                {t('availability')}
               </th>
               <th scope="col" className="px-1.5 py-1.5 text-left">
-                Transparency and data minimization
+                {t('transparency-and-data-minimization')}
               </th>
               {canAccess('task', ['update']) && (
                 <th scope="col" className="px-1.5 py-1.5 text-left">

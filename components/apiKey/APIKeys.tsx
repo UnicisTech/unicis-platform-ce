@@ -58,15 +58,15 @@ const APIKeys = ({ team }: APIKeysProps) => {
     }
   };
 
-  const copyApiKey= async (apiKey: ApiKey) => {
+  const copyApiKey = async (apiKey: ApiKey) => {
     try {
       await navigator.clipboard.writeText(apiKey.hashedKey);
       toast.success(t('copied-to-clipboard'));
     } catch (err) {
       console.error('Failed to copy: ', err);
-      toast.error('Failed to copy link to clipboard!')
+      toast.error('Failed to copy link to clipboard!');
     }
-  }
+  };
 
   const apiKeys = data?.data ?? [];
 
@@ -76,10 +76,10 @@ const APIKeys = ({ team }: APIKeysProps) => {
         <div className="flex justify-between items-center">
           <div className="space-y-3">
             <h2 className="text-xl font-medium leading-none tracking-tight">
-              API Keys
+              {t('api-keys')}
             </h2>
             <p className="text-sm text-muted-foreground">
-              API keys allow you to authenticate with the API.
+              {t('api-keys-description')}
             </p>
           </div>
           <Button onClick={() => setCreateModalVisible(true)}>
@@ -120,7 +120,7 @@ const APIKeys = ({ team }: APIKeysProps) => {
                           aria-label="Copy"
                           size="sm"
                           onClick={() => {
-                            copyApiKey(apiKey)
+                            copyApiKey(apiKey);
                           }}
                         >
                           {t('copy-to-clipboard')}
