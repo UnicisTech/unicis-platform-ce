@@ -30,25 +30,6 @@ const controls = {
   c5_2020: c5_2020,
 };
 
-const sections = [
-  {
-    label: 'Business controls',
-    value: 'Business controls',
-  },
-  {
-    label: 'Application design controls',
-    value: 'Application design controls',
-  },
-  {
-    label: 'Application implementation controls',
-    value: 'Application implementation controls',
-  },
-  {
-    label: 'Operational controls',
-    value: 'Operational controls',
-  },
-];
-
 const isoOptions: {
   label: string;
   value: ISO;
@@ -62,29 +43,6 @@ const isoOptions: {
   { label: 'CIS CSC v8.1', value: 'cisv81' },
   { label: 'SOC2 v2', value: 'soc2v2' },
   { label: 'C5 2020', value: 'c5_2020' },
-];
-
-const perPageOptions: { label: string; value: number }[] = [
-  {
-    label: '5',
-    value: 5,
-  },
-  {
-    label: '10',
-    value: 10,
-  },
-  {
-    label: '25',
-    value: 25,
-  },
-  {
-    label: '50',
-    value: 50,
-  },
-  {
-    label: '100',
-    value: 100,
-  },
 ];
 
 const trimToSecondDot = (inputString: string): string =>
@@ -199,22 +157,6 @@ const getSections = (iso: string): Section[] => {
   return sections;
 };
 
-// // Functions that used in CSF2
-// const getFunctions = (): { label: string; value: string }[] => {
-//   const functionSet = new Set<string>();
-
-//   nistcsfv2.forEach(item => {
-//     functionSet.add(item.Function);
-//   });
-
-//   const functions = Array.from(functionSet).map(item => ({
-//     label: item,
-//     value: item,
-//   }));
-
-//   return functions;
-// }
-
 const getSectionFilterOptions = (iso: string) => {
   if (iso !== '2013') {
     return getSections(iso);
@@ -269,29 +211,6 @@ const statusOptions: { label: string; value: number }[] = [
   {
     label: 'Continuously Improving',
     value: 7,
-  },
-];
-
-const taskStatusOptions: { label: string; value: number }[] = [
-  {
-    label: 'To Do',
-    value: 0,
-  },
-  {
-    label: 'In Progress',
-    value: 1,
-  },
-  {
-    label: 'In Review',
-    value: 2,
-  },
-  {
-    label: 'Feedback',
-    value: 3,
-  },
-  {
-    label: 'Done',
-    value: 4,
   },
 ];
 
@@ -396,9 +315,6 @@ export {
   getSectionFilterOptions,
   isoValueToLabel,
   statusOptions,
-  taskStatusOptions,
-  sections,
-  perPageOptions,
   controls,
   isoOptions,
   labels,
