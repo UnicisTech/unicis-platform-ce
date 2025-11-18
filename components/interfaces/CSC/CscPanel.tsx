@@ -1,10 +1,9 @@
 import { useState, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import { SectionFilter, StatusCscFilter, StatusesTable } from './';
-import { PerPageSelector } from '@/components/shared/atlaskit';
+import { PerPageSelector } from '@/components/shared';
 import {
   statusOptions,
-  perPageOptions,
 } from '@/components/defaultLanding/data/configs/csc';
 import { ISO } from 'types';
 import useCscStatuses from 'hooks/useCscStatuses';
@@ -127,10 +126,8 @@ export default function CscPanel({
           options={statusOptions}
         />
         <PerPageSelector
+          perPage={perPage}
           setPerPage={setPerPage}
-          options={perPageOptions}
-          placeholder="Controls per page"
-          defaultValue={{ label: '10', value: 10 }}
         />
       </div>
 
