@@ -1,6 +1,5 @@
 stages:
   - test
-  - build
   - deploy
 
 variables:
@@ -21,45 +20,13 @@ test:
   except:
     - tags
 
-build_dev:
-  stage: build
-  image: docker:24
-  services:
-    - docker:24-dind
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-  script:
-    - docker build -f Dockerfile.local -t $CI_REGISTRY_IMAGE:dev-$CI_COMMIT_SHORT_SHA .
-    - docker tag $CI_REGISTRY_IMAGE:dev-$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:dev-latest
-    - docker push $CI_REGISTRY_IMAGE:dev-$CI_COMMIT_SHORT_SHA
-    - docker push $CI_REGISTRY_IMAGE:dev-latest
-  only:
-    - merge_requests
-  except:
-    - tags
-
-build_prod:
-  stage: build
-  image: docker:24
-  services:
-    - docker:24-dind
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-  script:
-    - docker build -f Dockerfile.local -t $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG .
-    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG $CI_REGISTRY_IMAGE:latest
-    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
-    - docker push $CI_REGISTRY_IMAGE:latest
-  only:
-    - tags
-
 deploy_dev:
   stage: deploy
   image: node:18.18.2
   before_script:
     - npm install -g caprover
   script:
-    - caprover deploy --caproverUrl $CAPROVER_DEV_URL --caproverPassword $CAPROVER_DEV_PASSWORD --caproverApp $CAPROVER_APP_NAME --imageName $CI_REGISTRY_IMAGE:dev-$CI_COMMIT_SHORT_SHA
+    - caprover deploy --caproverUrl $CAPROVER_DEV_URL --caproverPassword $CAPROVER_DEV_PASSWORD --caproverApp $CAPROVER_APP_NAME --branch main
   only:
     - merge_requests
   except:
@@ -75,7 +42,7 @@ deploy_prod:
   before_script:
     - npm install -g caprover
   script:
-    - caprover deploy --caproverUrl $CAPROVER_PROD_URL --caproverPassword $CAPROVER_PROD_PASSWORD --caproverApp $CAPROVER_APP_NAME --imageName $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+    - caprover deploy --caproverUrl $CAPROVER_PROD_URL --caproverPassword $CAPROVER_PROD_PASSWORD --caproverApp $CAPROVER_APP_NAME --branch main
   only:
     - tags
   environment:
