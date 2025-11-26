@@ -9,7 +9,6 @@ variables:
   CAPROVER_DEV_URL: "https://captain.dev.unicis.tech"  
   CAPROVER_PROD_URL: "https://captain.platform.unicis.tech"
 
-
 test:
   stage: test
   image: node:18.18.2
@@ -26,7 +25,7 @@ deploy_dev:
   before_script:
     - npm install -g caprover
   script:
-    - caprover deploy --caproverUrl $CAPROVER_DEV_URL --caproverPassword $CAPROVER_DEV_PASSWORD --caproverApp $CAPROVER_APP_NAME --branch main
+    - caprover deploy --caproverUrl "$CAPROVER_DEV_URL" --caproverPassword "$CAPROVER_DEV_PASSWORD" --caproverApp "$CAPROVER_APP_NAME" --branch main
   only:
     - merge_requests
   except:
@@ -42,7 +41,7 @@ deploy_prod:
   before_script:
     - npm install -g caprover
   script:
-    - caprover deploy --caproverUrl $CAPROVER_PROD_URL --caproverPassword $CAPROVER_PROD_PASSWORD --caproverApp $CAPROVER_APP_NAME --branch main
+    - caprover deploy --caproverUrl "$CAPROVER_PROD_URL" --caproverPassword "$CAPROVER_PROD_PASSWORD" --caproverApp "$CAPROVER_APP_NAME" --branch main
   only:
     - tags
   environment:
