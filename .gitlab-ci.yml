@@ -28,8 +28,6 @@ sbom_dev:
     - npm install -g @cyclonedx/cyclonedx-npm
     - cyclonedx-npm --output-file sbom-dev.json
   artifacts:
-    reports:
-      sbom: sbom-dev.json
     paths:
       - sbom-dev.json
   only:
@@ -44,8 +42,6 @@ sbom_prod:
     - npm install -g @cyclonedx/cyclonedx-npm
     - cyclonedx-npm --output-file sbom-prod.json
   artifacts:
-    reports:
-      sbom: sbom-prod.json
     paths:
       - sbom-prod.json
   only:
