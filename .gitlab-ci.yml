@@ -6,8 +6,9 @@ variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: "/certs"
   CAPROVER_APP_NAME: "platform"
-  CAPROVER_DEV_URL: "https://captain.dev.unicis.tech"  
+  CAPROVER_DEV_URL: "https://captain.dev.unicis.tech"
   CAPROVER_PROD_URL: "https://captain.platform.unicis.tech"
+  GIT_DEPTH: 0
 
 test:
   stage: test
@@ -23,6 +24,8 @@ deploy_dev:
   stage: deploy
   image: node:18.18.2
   before_script:
+    - git fetch origin "$CI_COMMIT_REF_NAME" || git fetch --all
+    - git checkout -B "$CI_COMMIT_REF_NAME" "origin/$CI_COMMIT_REF_NAME" || true
     - npm install -g caprover
   script:
     - echo "Deploying branch $CI_COMMIT_REF_NAME "
@@ -39,6 +42,7 @@ deploy_prod:
   stage: deploy
   image: node:18.18.2
   before_script:
+    - git fetch --tags --prune || true
     - npm install -g caprover
   script:
     - caprover deploy --caproverUrl "$CAPROVER_PROD_URL" --caproverPassword "$CAPROVER_PROD_PASSWORD" --caproverApp "$CAPROVER_APP_NAME" --branch main
