@@ -23,11 +23,10 @@ deploy_dev:
   stage: deploy
   image: node:18.18.2
   before_script:
-    - env
     - npm install -g caprover
   script:
-    - echo "Deploying branch $CI_COMMIT_BRANCH"
-    - caprover deploy --caproverUrl "$CAPROVER_DEV_URL" --caproverPassword "$CAPROVER_DEV_PASSWORD" --caproverApp "$CAPROVER_APP_NAME" --branch "$CI_COMMIT_BRANCH"
+    - echo "Deploying branch $CI_COMMIT_REF_NAME "
+    - caprover deploy --caproverUrl "$CAPROVER_DEV_URL" --caproverPassword "$CAPROVER_DEV_PASSWORD" --caproverApp "$CAPROVER_APP_NAME" --branch "$CI_COMMIT_REF_NAME"
   only:
     - merge_requests
   except:
