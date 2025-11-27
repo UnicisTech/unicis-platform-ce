@@ -25,14 +25,13 @@ deploy_dev:
   before_script:
     - npm install -g caprover
   script:
-    - caprover deploy --caproverUrl "$CAPROVER_DEV_URL" --caproverPassword "$CAPROVER_DEV_PASSWORD" --caproverApp "$CAPROVER_APP_NAME" --branch main
+    - caprover deploy --caproverUrl "$CAPROVER_DEV_URL" --caproverPassword "$CAPROVER_DEV_PASSWORD" --caproverApp "$CAPROVER_APP_NAME" --branch "$CI_COMMIT_BRANCH"
   only:
     - merge_requests
   except:
     - tags
   environment:
     name: development
-    url: https://${CAPROVER_APP_NAME}.dev.unicis.tech
   when: manual
 
 deploy_prod:
