@@ -25,6 +25,7 @@ sbom_dev:
   stage: sbom
   image: node:18.18.2
   script:
+    - npm install
     - npm install -g @cyclonedx/cyclonedx-npm
     - cyclonedx-npm --output-file sbom-dev.json
   artifacts:
@@ -39,6 +40,7 @@ sbom_prod:
   stage: sbom
   image: node:18.18.2
   script:
+    - npm install
     - npm install -g @cyclonedx/cyclonedx-npm
     - cyclonedx-npm --output-file sbom-prod.json
   artifacts:
