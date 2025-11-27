@@ -25,6 +25,7 @@ deploy_dev:
   before_script:
     - npm install -g caprover
   script:
+    - echo "Deploying branch $CI_COMMIT_BRANCH"
     - caprover deploy --caproverUrl "$CAPROVER_DEV_URL" --caproverPassword "$CAPROVER_DEV_PASSWORD" --caproverApp "$CAPROVER_APP_NAME" --branch "$CI_COMMIT_BRANCH"
   only:
     - merge_requests
