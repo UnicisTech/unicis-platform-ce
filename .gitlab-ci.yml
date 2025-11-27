@@ -1,5 +1,6 @@
 stages:
   - test
+  - sbom
   - deploy
 
 variables:
@@ -18,6 +19,36 @@ test:
   only:
     - merge_requests
   except:
+    - tags
+
+sbom_dev:
+  stage: sbom
+  image: node:18.18.2
+  script:
+    - npm install -g @cyclonedx/cyclonedx-npm
+    - cyclonedx-npm --output-file sbom-dev.json
+  artifacts:
+    reports:
+      sbom: sbom-dev.json
+    paths:
+      - sbom-dev.json
+  only:
+    - merge_requests
+  except:
+    - tags
+
+sbom_prod:
+  stage: sbom
+  image: node:18.18.2
+  script:
+    - npm install -g @cyclonedx/cyclonedx-npm
+    - cyclonedx-npm --output-file sbom-prod.json
+  artifacts:
+    reports:
+      sbom: sbom-prod.json
+    paths:
+      - sbom-prod.json
+  only:
     - tags
 
 deploy_dev:
@@ -50,4 +81,3 @@ deploy_prod:
     - tags
   environment:
     name: production
-    url: https://${CAPROVER_APP_NAME}.platform.unicis.tech
