@@ -23,6 +23,7 @@ deploy_dev:
   stage: deploy
   image: node:18.18.2
   before_script:
+    - env
     - npm install -g caprover
   script:
     - echo "Deploying branch $CI_COMMIT_BRANCH"
