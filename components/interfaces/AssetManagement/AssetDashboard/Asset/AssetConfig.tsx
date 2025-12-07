@@ -30,7 +30,7 @@ const AssetConfig = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user:
 
     return (
         // <IssuePanelContainer>
-            <CodeBlock language="JSON" shouldWrapLongLines codeBidiWarningTooltipEnabled i18nIsDynamicList={true} showLineNumbers={false} text={JSON.stringify(config)} />
+            <CodeBlock language="JSON" shouldWrapLongLines i18nIsDynamicList={true} showLineNumbers={false} text={JSON.stringify(config)} />
         // </IssuePanelContainer>
     );
 };

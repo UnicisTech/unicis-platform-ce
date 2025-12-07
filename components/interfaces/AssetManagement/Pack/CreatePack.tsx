@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import dynamic from 'next/dynamic';
 import { useTranslation } from 'next-i18next';
@@ -16,7 +16,7 @@ import {
 import { Input } from '@/components/shadcn/ui/input';
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/shadcn/ui/select';
 import TagsSelector from '../TagsSelector';
-import { PLATFORMS } from "@/lib/fleet/constants";
+import { PLATFORMS } from '@/lib/fleet/constants';
 import { useCreatePack } from '@/hooks/fleets/packs/useCreatePack';
 import { usePacks } from '@/hooks/fleets/packs/usePacks';
 import type { User } from '@prisma/client';
@@ -35,7 +35,7 @@ const CreatePack = ({
   visible,
   setVisible,
   user,
-  fleetTeamId
+  fleetTeamId,
 }: {
   visible: boolean;
   setVisible: (visible: boolean) => void;
@@ -57,10 +57,10 @@ const CreatePack = ({
       tags: [] as string[],
     },
     validationSchema: Yup.object({
-      name: Yup.string().required(t('Name is required')),
-      platform: Yup.string().required(t('Platform is required')),
-      version: Yup.string().required(t('Version is required')),
-      shard: Yup.string().required(t('Shard is required')),
+      name: Yup.string().required(t('name-required')),
+      platform: Yup.string().required(t('platform-required')),
+      version: Yup.string().required(t('version-required')),
+      shard: Yup.string().required(t('shard-required')),
     }),
     onSubmit: async (values) => {
       try {
@@ -72,7 +72,7 @@ const CreatePack = ({
         toast.success(t('success'));
         mutatePacks();
         setVisible(false);
-      } catch (err) {
+      } catch {
         toast.error(t('error'));
       }
     },
@@ -83,18 +83,17 @@ const CreatePack = ({
       <DialogContent className="max-w-2xl">
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
           <DialogHeader>
-            <DialogTitle>{t('Create Pack')}</DialogTitle>
-            <DialogDescription>{t('Fill in the details to create a new pack')}</DialogDescription>
+            <DialogTitle>{t('create-pack')}</DialogTitle>
+            <DialogDescription>{t('fill-create-pack')}</DialogDescription>
           </DialogHeader>
 
-          {/* Name */}
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-medium">{t('Name')}</label>
+            <label className="text-sm font-medium">{t('name')}</label>
             <Input
               name="name"
               value={formik.values.name}
               onChange={formik.handleChange}
-              placeholder={t('Enter pack name')}
+              placeholder={t('enter-pack-name')}
             />
             {formik.touched.name && formik.errors.name && (
               <span className="text-sm text-red-500">{formik.errors.name}</span>
@@ -102,13 +101,13 @@ const CreatePack = ({
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-medium">{t('Platform')}</label>
+            <label className="text-sm font-medium">{t('platform')}</label>
             <Select
               value={formik.values.platform}
               onValueChange={(value) => formik.setFieldValue('platform', value)}
             >
               <SelectTrigger>
-                <SelectValue placeholder={t('Select platform')} />
+                <SelectValue placeholder={t('select-platform')} />
               </SelectTrigger>
               <SelectContent>
                 {PLATFORMS.map((option: Option) => (
@@ -125,24 +124,24 @@ const CreatePack = ({
 
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium">{t('Version')}</label>
+              <label className="text-sm font-medium">{t('version')}</label>
               <Input
                 name="version"
                 value={formik.values.version}
                 onChange={formik.handleChange}
-                placeholder={t('Enter version')}
+                placeholder={t('enter-version')}
               />
               {formik.touched.version && formik.errors.version && (
                 <span className="text-sm text-red-500">{formik.errors.version}</span>
               )}
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium">{t('Shard')}</label>
+              <label className="text-sm font-medium">{t('shard')}</label>
               <Input
                 name="shard"
                 value={formik.values.shard}
                 onChange={formik.handleChange}
-                placeholder={t('Enter shard')}
+                placeholder={t('enter-shard')}
               />
               {formik.touched.shard && formik.errors.shard && (
                 <span className="text-sm text-red-500">{formik.errors.shard}</span>
@@ -151,7 +150,7 @@ const CreatePack = ({
           </div>
 
           <div className="flex flex-col gap-1 mb-10">
-            <label className="text-sm font-medium">{t('Description')}</label>
+            <label className="text-sm font-medium">{t('description')}</label>
             <ReactQuill
               theme="snow"
               value={formik.values.description}
@@ -160,7 +159,7 @@ const CreatePack = ({
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-medium">{t('Tags')}</label>
+            <label className="text-sm font-medium">{t('tags')}</label>
             <TagsSelector
               fleetTeamId={fleetTeamId}
               setSectionTag={setSelectedTags}
@@ -169,18 +168,11 @@ const CreatePack = ({
           </div>
 
           <DialogFooter className="flex justify-end gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setVisible(false)}
-            >
+            <Button type="button" variant="outline" onClick={() => setVisible(false)}>
               {t('close')}
             </Button>
-            <Button
-              type="submit"
-              disabled={formik.isSubmitting}
-            >
-              {formik.isSubmitting ? t('Creating...') : t('create')}
+            <Button type="submit" disabled={formik.isSubmitting}>
+              {formik.isSubmitting ? t('creating') : t('create')}
             </Button>
           </DialogFooter>
         </form>

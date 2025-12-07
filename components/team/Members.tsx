@@ -65,16 +65,38 @@ const Members = ({ team }: { team: Team }) => {
     session?.user.id !== member.userId && canAccess('team_member', ['update']);
   const canRemoveMember = (member: TeamMember) =>
     session?.user.id !== member.userId && canAccess('team_member', ['delete']);
+  const fleetEnrollAvailable = (member: TeamMember) =>
+    session?.user.id !== member.userId && canAccess('team_member', ['delete']);
+
+
+  const handleEnrollFleet = async (member: any) => {
+    try {
+      const res = await fetch("/api/fleet/enroll", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: member.user.email,
+          teamName: team.name,
+        }),
+      });
+
+      if (!res.ok) throw new globalThis.Error();
+
+      toast.success(`Enrollment email sent to ${member.user.email}`);
+    } catch (err) {
+      toast.error("Failed to send enrollment email");
+    }
+  };
 
   return (
     <div className="space-y-3">
       <div className="flex justify-between items-center">
         <div className="space-y-3">
           <h2 className="text-xl font-medium leading-none tracking-tight">
-            Members
+            {t('members')}
           </h2>
           <p className="text-sm text-muted-foreground">
-            Team members and their roles.
+            {t('team-members')}
           </p>
         </div>
         <Button onClick={() => setVisible(!visible)}>{t('add-member')}</Button>
@@ -86,11 +108,10 @@ const Members = ({ team }: { team: Team }) => {
             <TableHead>{t('name')}</TableHead>
             <TableHead>{t('email')}</TableHead>
             <TableHead>{t('role')}</TableHead>
-            {canAccess('team_member', ['delete']) && (
-              <TableHead>{t('action')}</TableHead>
-            )}
+            <TableHead className="w-[120px]">{t('action')}</TableHead>
           </TableRow>
         </TableHeader>
+
         <TableBody>
           {members.map((member) => (
             <TableRow key={member.id}>
@@ -100,7 +121,9 @@ const Members = ({ team }: { team: Team }) => {
                   <span>{member.user.name}</span>
                 </div>
               </TableCell>
+
               <TableCell>{member.user.email}</TableCell>
+
               <TableCell>
                 {canUpdateRole(member) ? (
                   <UpdateMemberRole team={team} member={member} />
@@ -108,19 +131,28 @@ const Members = ({ team }: { team: Team }) => {
                   <span>{member.role}</span>
                 )}
               </TableCell>
-              {canRemoveMember(member) && (
-                <TableCell className="text-right">
+              <TableCell className="w-[120px]">
+                <div className="flex justify-end gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleEnrollFleet(member)}
+                  >
+                    {t('enroll-fleet')}
+                  </Button>
                   <Button
                     variant="destructive"
+                    size="sm"
+                    disabled={!canRemoveMember(member)}
                     onClick={() => {
                       setSelectedMember(member);
                       setConfirmationDialogVisible(true);
                     }}
-                  >
+                    >
                     {t('remove')}
                   </Button>
-                </TableCell>
-              )}
+                </div>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

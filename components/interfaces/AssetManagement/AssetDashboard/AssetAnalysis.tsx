@@ -1,6 +1,3 @@
-// Please dont change logics here if not fully understoold 
-// Author: Abdulsamad A | agastronics@gmail.com
-
 import AssetCard from '@/components/interfaces/AssetManagement/AssetDashboard/AssetCard'
 import React from 'react'
 import { Team, User } from '@prisma/client';
@@ -15,9 +12,9 @@ interface Assets {
 }
 
 const platformColors: { [key: string]: string } = {
-  windows: 'rgb(0, 181, 255)',      // Linux color
-  linux: 'rgb(123, 146, 178)',  // Windows color
-  apple: 'rgb(0, 169, 110)',      // Apple color
+  windows: 'rgb(0, 181, 255)',
+  linux: 'rgb(123, 146, 178)',
+  apple: 'rgb(0, 169, 110)',
 };
 
 const AssetsAnalysis = ({ team, user, nodes }: Assets) => {

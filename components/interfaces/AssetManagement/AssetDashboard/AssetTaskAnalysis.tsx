@@ -1,5 +1,6 @@
 import { useDistributorAnalysis, useDistributorResultAnalysis } from "@/hooks/fleets/distributors/useAnalysis";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const AssetTaskAnalysis = ({ teamId }: { teamId: string }) => {
   const {
@@ -15,6 +16,8 @@ const AssetTaskAnalysis = ({ teamId }: { teamId: string }) => {
     mutateDistributorResultAnalysis,
   } = useDistributorResultAnalysis(teamId);
 
+  const { t } = useTranslation('common');
+
   useEffect(() => {
     return () => {
       mutateDistributorAnalysis();
@@ -23,13 +26,13 @@ const AssetTaskAnalysis = ({ teamId }: { teamId: string }) => {
   }, []);
 
   const boxes = [
-    { label: "NEW QUERY TASK", value: distributorsAnalysis?.new_queries_task },
-    { label: "PENDING QUERY TASK", value: distributorsAnalysis?.pending_queries_task },
-    { label: "COMPLETED QUERY TASK", value: distributorsAnalysis?.completed_queries_task },
-    { label: "FAILED QUERY TASK", value: distributorsAnalysis?.failed_queries_task },
-    { label: "TOTAL QUERY TASK", value: distributorsAnalysis?.total_queries_task },
-    { label: "TOTAL QUERY RESULT", value: distributorsResultAnalysis?.total_queries_result },
-  ];
+    { label: t('new-query-task'), value: distributorsAnalysis?.new_queries_task },
+    { label: t('pending-query-task'), value: distributorsAnalysis?.pending_queries_task },
+    { label: t('completed-query-task'), value: distributorsAnalysis?.completed_queries_task },
+    { label: t('failed-query-task'), value: distributorsAnalysis?.failed_queries_task },
+    { label: t('total-query-task'), value: distributorsAnalysis?.total_queries_task },
+    { label: t('total-query-result'), value: distributorsResultAnalysis?.total_queries_result },
+  ];  
 
   return (
     <div>

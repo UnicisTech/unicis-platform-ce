@@ -67,7 +67,6 @@ const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
             )}
           </div>
 
-          {/* Table */}
           <div className="rounded-md border">
             <Table>
               <TableHeader>
@@ -85,7 +84,6 @@ const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
                 {tasks && tasks.length > 0 ? (
                   tasks.map((task) => (
                     <TableRow key={task.id}>
-                      {/* SQL */}
                       <TableCell className="align-top">
                         <Link
                           href={`/teams/${slug}/asset-management/distributors/${task.distributed_query.id}`}

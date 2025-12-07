@@ -37,13 +37,14 @@ const DeleteQuery = ({
     },
     onSubmit: async (values) => {
       if (values.confirm.toLowerCase() === "delete") {
+        toast.loading(t("deleting-query"));
         await deleteQuery(fleetTeamId, queryId);
-        toast.loading(t("Delete Query"));
         mutateQueries();
         formik.resetForm();
         setVisible(false);
+        toast.success(t("deleted-successfully"));
       } else {
-        toast.error(t("Type confirmation text"));
+        toast.error(t("type-confirmation-text"));
       }
     },
   });
@@ -53,9 +54,7 @@ const DeleteQuery = ({
       <DialogContent className="max-w-md">
         <form onSubmit={formik.handleSubmit} method="DELETE" className="space-y-4">
           <DialogHeader>
-            <DialogTitle>
-              {t("Confirm Permanent Query Delete?")}
-            </DialogTitle>
+            <DialogTitle>{t("confirm-permanent-query-delete")}</DialogTitle>
             <DialogDescription>
               <span className="text-xs">
                 {t("query")}: <span className="text-orange-400">{queryId}</span>
@@ -70,7 +69,7 @@ const DeleteQuery = ({
               type="text"
               label={t("confirm")}
               name="confirm"
-              placeholder={t("Enter confirmation text")}
+              placeholder={t("enter-confirmation-text")}
               value={formik.values.confirm}
               error={formik.touched.confirm ? formik.errors.confirm : undefined}
               onChange={formik.handleChange}

@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "next-i18next";
 import { useTags } from "@/hooks/fleets/Tags/useTags";
 import type { Tag } from "@/types";
 import { Button } from "@/components/shadcn/ui/button";
@@ -31,6 +32,7 @@ const TagsSelector: React.FC<TagsSelectorProps> = ({
   setSectionTag,
   preSelectedTag = [],
 }) => {
+  const { t } = useTranslation("common");
   const { tags, isLoading, isError } = useTags(fleetTeamId);
   const [open, setOpen] = useState(false);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
@@ -39,9 +41,9 @@ const TagsSelector: React.FC<TagsSelectorProps> = ({
     () =>
       (tags || []).map((tag) => ({
         value: tag.value,
-        label: `${tag.value || "Unknown Tag"} - p:${tag.packs_count} - n:${tag.nodes_count} - q:${tag.queries_count}`,
+        label: `${tag.value || t("unknown-tag")} - ${t("packs")}:${tag.packs_count} - ${t("nodes")}:${tag.nodes_count} - ${t("queries")}:${tag.queries_count}`,
       })),
-    [tags]
+    [tags, t]
   );
 
   useEffect(() => {
@@ -65,9 +67,9 @@ const TagsSelector: React.FC<TagsSelectorProps> = ({
     });
   };
 
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p className="text-red-500 text-sm">{String(isError)}</p>;
-  if (!tags || tags.length === 0) return <p>No tags found</p>;
+  if (isLoading) return <p>{t("loading")}</p>;
+  if (isError) return <p className="text-red-500 text-sm">{t("error-loading-tags")}</p>;
+  if (!tags || tags.length === 0) return <p>{t("no-tags-found")}</p>;
 
   const selectedLabels = options
     .filter((o) => selectedValues.includes(o.value))
@@ -85,17 +87,17 @@ const TagsSelector: React.FC<TagsSelectorProps> = ({
             className="w-full justify-between"
           >
             {selectedValues.length > 0
-              ? `${selectedValues.length} selected`
-              : "Select Tag(s)"}
+              ? t("selected-count", { count: selectedValues.length })
+              : t("select-tags")}
             <span className="ml-2 text-xs opacity-70">▾</span>
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[min(36rem,92vw)] p-0">
           <Command>
-            <CommandInput placeholder="Search tags..." />
+            <CommandInput placeholder={t("search-tags")} />
             <CommandList>
-              <CommandEmpty>No tags found.</CommandEmpty>
-              <CommandGroup heading="Tags">
+              <CommandEmpty>{t("no-tags-found")}</CommandEmpty>
+              <CommandGroup heading={t("tags")}>
                 {options.map((opt) => {
                   const checked = selectedValues.includes(opt.value);
                   return (

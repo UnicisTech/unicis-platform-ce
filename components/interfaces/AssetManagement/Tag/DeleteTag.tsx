@@ -1,19 +1,21 @@
-import React from "react";
-import toast from "react-hot-toast";
-import { useTranslation } from "next-i18next";
-import { useFormik } from "formik";
-import { InputWithLabel } from "@/components/shared";
-import { useDeleteTag } from "@/hooks/fleets/Tags/useDeleteTag";
-import { useTags } from "@/hooks/fleets/Tags/useTags";
+'use client'
 
+import React from 'react'
+import toast from 'react-hot-toast'
+import { useTranslation } from 'next-i18next'
+import { useFormik } from 'formik'
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from "@/components/shadcn/ui/dialog";
-import { Button } from "@/components/shadcn/ui/button";
+} from '@/components/shadcn/ui/dialog'
+import { Button } from '@/components/shadcn/ui/button'
+import { Input } from '@/components/shadcn/ui/input'
+import { Label } from '@/components/shadcn/ui/label'
+import { useDeleteTag } from '@/hooks/fleets/Tags/useDeleteTag'
+import { useTags } from '@/hooks/fleets/Tags/useTags'
 
 const DeleteTag = ({
   tagId,
@@ -21,80 +23,90 @@ const DeleteTag = ({
   setVisible,
   fleetTeamId,
 }: {
-  tagId: string;
-  visible: boolean;
-  setVisible: (visible: boolean) => void;
-  fleetTeamId: string;
+  tagId: string
+  visible: boolean
+  setVisible: (visible: boolean) => void
+  fleetTeamId: string
 }) => {
-  const { t } = useTranslation("common");
-
-  const deleteTag = useDeleteTag();
-  const { mutateTags } = useTags(fleetTeamId);
+  const { t } = useTranslation('common')
+  const deleteTag = useDeleteTag()
+  const { mutateTags } = useTags(fleetTeamId)
 
   const formik = useFormik({
     initialValues: {
-      confirm: "",
+      confirm: '',
     },
-    onSubmit: async (values, { setSubmitting, resetForm }) => {
-      if (values.confirm.toLowerCase() === "delete") {
+    onSubmit: async (values, { resetForm }) => {
+      if (values.confirm.toLowerCase() === 'delete') {
+        const toastId = toast.loading(t('deleting'))
         try {
-          await deleteTag(fleetTeamId, tagId);
-          toast.success(t("Delete Tag"));
-          mutateTags();
-          setVisible(false);
-          resetForm();
-        } catch {
-          toast.error(t("error"));
+          await deleteTag(fleetTeamId, tagId)
+          mutateTags()
+          toast.success(t('deleted-successfully'), { id: toastId })
+          resetForm()
+          setVisible(false)
+        } catch (err) {
+          toast.error(t('error-deleting-tag'), { id: toastId })
         }
       } else {
-        toast.error(t("Type confirmation text"));
+        toast.error(t('type-confirmation-text'))
       }
-      setSubmitting(false);
     },
-  });
+  })  
 
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
-      <DialogContent className="max-w-md">
-        <form onSubmit={formik.handleSubmit} method="DELETE" className="space-y-4">
+      <DialogContent
+        className="max-w-md max-h-[85vh] overflow-y-auto bg-background text-foreground border-border"
+      >
+        <form onSubmit={formik.handleSubmit} method="DELETE" className="space-y-6">
           <DialogHeader>
-            <DialogTitle>{t("Confirm Permanent Tag Delete?")}</DialogTitle>
+            <DialogTitle className="text-lg font-semibold text-destructive">
+              {t('confirm-permanent-tag-delete')}
+            </DialogTitle>
           </DialogHeader>
-
-          <div className="mt-2 flex flex-col space-y-4">
-            <p className="text-xs">
-              {t("tag")}: <span className="text-orange-400">{tagId}</span>
+  
+          <div className="space-y-3 text-sm">
+            <p>
+              {t('tag')}: <span className="text-orange-400 break-all">{tagId}</span>
             </p>
-            <p>{t("fleet-delete-warning")}</p>
+            <p className="text-muted-foreground">{t('fleet-delete-warning')}</p>
           </div>
-
-          <InputWithLabel
-            type="text"
-            label={t("confirm")}
-            name="confirm"
-            placeholder={t("Enter confirmation text")}
-            value={formik.values.confirm}
-            error={formik.touched.confirm ? formik.errors.confirm : undefined}
-            onChange={formik.handleChange}
-          />
-          <span className="text-xs">{t("fleet-delete-description")}</span>
-
-          <DialogFooter>
+  
+          <div className="space-y-2">
+            <Label htmlFor="confirm" className="text-sm font-medium">
+              {t('confirm')}
+            </Label>
+            <Input
+              id="confirm"
+              name="confirm"
+              placeholder={t('enter-confirmation-text')}
+              value={formik.values.confirm}
+              onChange={formik.handleChange}
+              className="bg-muted/30"
+            />
+            <p className="text-xs text-muted-foreground">
+              {t('fleet-delete-description')}
+            </p>
+          </div>
+  
+          <DialogFooter className="flex justify-end gap-2 pt-4">
+            <Button type="button" variant="outline" onClick={() => setVisible(false)}>
+              {t('close')}
+            </Button>
             <Button
               type="submit"
               variant="destructive"
-              disabled={formik.isSubmitting || !formik.dirty}
+              disabled={formik.isSubmitting || !formik.values.confirm}
             >
-              {formik.isSubmitting ? t("deleting...") : t("delete")}
-            </Button>
-            <Button type="button" variant="outline" onClick={() => setVisible(false)}>
-              {t("close")}
+              {formik.isSubmitting ? t('deleting') : t('delete')}
             </Button>
           </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+  
+}
 
-export default DeleteTag;
+export default DeleteTag

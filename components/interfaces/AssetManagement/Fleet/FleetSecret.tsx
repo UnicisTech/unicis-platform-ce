@@ -66,32 +66,30 @@ const FleetSecret = ({
     } catch (error) {
       console.log('createFleetAccount error', error)
     }
-
+  
     try {
-      if (!userId) {
-        throw new Error('User ID is not defined')
-      }
+      if (!userId) throw new Error('User ID is not defined')
       if (secret?.id === undefined) {
         await createFleetTeam(team.name, team.id)
         await orderFleetSecret(team.id)
         mutateFleetSecret()
-        toast.success(t('Fleet Enrollment Secret Ordered'))
+        toast.success(t('fleet-enrollment-secret-ordered'))
       }
     } catch (error: any) {
       console.log('error', error)
       toast.error(isError?.message)
     }
   }
-
+  
   const handleDelete = async () => {
     try {
       await deleteFleetSecret(teamId)
       mutateFleetSecret()
-      toast.success(t('Successfully deleted'))
+      toast.success(t('successfully-deleted'))
     } catch {
-      toast.error(t('Error deleting fleet secret'))
+      toast.error(t('error-deleting-fleet-secret'))
     }
-  }
+  }  
 
   const toggleSafe = () => setSafe(!safe)
 

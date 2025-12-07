@@ -7,7 +7,7 @@ const env = {
   fleetAPI: `${process.env.NEXT_PUBLIC_FLEET_API_HOST}`,
   fleetAPIUrl: `${process.env.NEXT_PUBLIC_FLEET_API_URL}`,
   agentVersion: `${process.env.OSQUERY_AGENT_VERSION || '5.16.0'}`,
-  assetRequiredPlan: `${process.env.ASSET_REQUIRED_PLAN}` as $Enums.Plan || $Enums.Plan.ULTIMATE,
+  assetRequiredPlan: `${process.env.NEXT_PUBLIC_ASSET_REQUIRED_PLAN}` as $Enums.Plan || $Enums.Plan.ULTIMATE,
 
   product: 'unicis-platform',
   // redirectAfterSignIn: '/teams',

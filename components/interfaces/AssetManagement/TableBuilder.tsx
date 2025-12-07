@@ -8,6 +8,7 @@ import {
   TableCell,
 } from "@/components/shadcn/ui/table";
 import { Button } from "@/components/shadcn/ui/button";
+import { useTranslation } from "react-i18next";
 
 interface TableBuilderProps {
   data: Array<Record<string, any>>;
@@ -25,6 +26,8 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
   loading,
 }) => {
   const [deleting, setDeleting] = useState<string | null>(null);
+
+  const { t } = useTranslation("common")
 
   if (!data || data.length === 0) {
     return (
@@ -124,7 +127,7 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
                           disabled={deleting === rowId || loading}
                           onClick={() => handleDelete(rowId)}
                         >
-                          {deleting === rowId ? "Deleting..." : "Delete"}
+                          {deleting === rowId ? t('deleting') : t('delete')}
                         </Button>
                       )}
                     </div>

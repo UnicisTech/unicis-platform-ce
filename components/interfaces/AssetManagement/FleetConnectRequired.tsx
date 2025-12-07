@@ -56,7 +56,11 @@ const FleetConnectRequired = ({ user, children }: FleetConnectRequiredProps) => 
 
   const createFleetAccount = useCreateFleetAccount();
   const accessFleetAccount = useAccessFleetAccount();
+  // const access = undefined
+  // const assetsVerificationLoading = undefined
   const { access, isLoading: assetsVerificationLoading } = useVerifyFleetAsses();
+
+  console.log("access", access)
 
   const formik = useFormik({
     initialValues: {
@@ -80,6 +84,7 @@ const FleetConnectRequired = ({ user, children }: FleetConnectRequiredProps) => 
         Cookies.set('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA', fleet_access.secret_key, {
           sameSite: 'strict',
         });
+        console.log("fleet_access", fleet_access)
         if (fleet_access.secret_key) {
           setIsAuthenticated(true);
         }
@@ -124,8 +129,8 @@ const FleetConnectRequired = ({ user, children }: FleetConnectRequiredProps) => 
         <div className="hero rounded ring-1 ring-gray-300 min-h-3.5">
           <div className="hero-content text-center">
             <div className="max-w-md">
-              <h1 className="text-2xl font-bold">Fleet Connection Is Required</h1>
-              <p className="py-6">Please connect to Fleet API to continue.</p>
+              <h1 className="text-2xl font-bold">{t('fleet-connection-required')}</h1>
+              <p className="py-6">{t('fleet-connection-prompt')}</p>
               <Button
                 variant="default"
                 disabled={assetsVerificationLoading}
@@ -138,13 +143,13 @@ const FleetConnectRequired = ({ user, children }: FleetConnectRequiredProps) => 
           </div>
         </div>
       )}
-
+  
       <Dialog open={visible} onOpenChange={setVisible}>
         <DialogContent>
           <form onSubmit={formik.handleSubmit}>
             <DialogHeader>
               <div className="flex items-center justify-between">
-                <DialogTitle>{t('Fleet Connect')}</DialogTitle>
+                <DialogTitle>{t('fleet-connect-title')}</DialogTitle>
                 <X
                   className="w-5 h-5 cursor-pointer"
                   onClick={() => setVisible(false)}
@@ -154,7 +159,7 @@ const FleetConnectRequired = ({ user, children }: FleetConnectRequiredProps) => 
                 {t('fleet-password-description')}
               </DialogDescription>
             </DialogHeader>
-
+  
             <div className="space-y-4">
               <InputWithLabel
                 type="password"
@@ -168,17 +173,17 @@ const FleetConnectRequired = ({ user, children }: FleetConnectRequiredProps) => 
               />
               <InputWithLabel
                 type="datetime-local"
-                label={t('Access End Day (Default 90 days, Max 180 days)')}
+                label={t('access-end-day')}
                 name="expiresOn"
                 value={formik.values.expiresOn}
                 error={formik.touched.expiresOn ? formik.errors.expiresOn : undefined}
                 onChange={formik.handleChange}
               />
             </div>
-
+  
             <DialogFooter>
               <Button type="submit" disabled={formik.isSubmitting}>
-                {formik.isSubmitting ? t('Connecting...') : t('fleet-connect')}
+                {formik.isSubmitting ? t('connecting') : t('fleet-connect')}
               </Button>
               <Button type="button" variant="outline" onClick={() => setVisible(false)}>
                 {t('close')}

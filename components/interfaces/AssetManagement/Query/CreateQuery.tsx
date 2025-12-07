@@ -206,7 +206,7 @@ export default function CreateQuery({
               {t("close")}
             </Button>
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Creating..." : t("create")}
+              {isSubmitting ? t('creating') : t('create')}
             </Button>
           </DialogFooter>
         </form>

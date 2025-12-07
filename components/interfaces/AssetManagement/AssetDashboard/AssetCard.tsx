@@ -19,7 +19,6 @@ const AssetCard = ({ host, total } : AssetProps) => {
   const iconString = platformIcons[host];
   const bgColor = platformBGs[host];
 
-  // Convert the first letter of the host to uppercase
   const formattedHost = host.charAt(0).toUpperCase() + host.slice(1);
 
   return (

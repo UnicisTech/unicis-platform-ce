@@ -61,9 +61,7 @@ const QueryDetails = ({
     }
   }, [query]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  if (isLoading) return <Loading />;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -85,9 +83,9 @@ const QueryDetails = ({
 
     try {
       await updateQuery(fleetTeamId, queryData, queryID);
-      toast.success(t("success-creating-query"));
-    } catch (err) {
-      toast.error(t("error-creating-query"));
+      toast.success(t("successfully-updated-query"));
+    } catch {
+      toast.error(t("error-updating-query"));
     }
   };
 
@@ -102,33 +100,29 @@ const QueryDetails = ({
         <DialogContent className="max-w-2xl">
           <form onSubmit={handleSubmit} className="space-y-4">
             <DialogHeader>
-              <DialogTitle>{t("edit-query")}</DialogTitle>
+              <DialogTitle>{t("query-details")}</DialogTitle>
             </DialogHeader>
 
-            {/* Name */}
             <div>
               <Label htmlFor="name">{t("name")}</Label>
               <Input name="name" defaultValue={query?.name} required />
             </div>
 
-            {/* SQL */}
             <div>
-              <Label htmlFor="sql">{t("sql")}</Label>
+              <Label htmlFor="sql">{t("sql-code")}</Label>
               <Input name="sql" defaultValue={query?.sql} required />
             </div>
 
-            {/* Platform */}
             <div>
               <Label htmlFor="platform">{t("platform")}</Label>
               <Select
                 name="platform"
                 defaultValue={
-                  PLATFORMS.find((p) => p.value === query?.platform)?.value ||
-                  "all"
+                  PLATFORMS.find((p) => p.value === query?.platform)?.value || "all"
                 }
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Select platform" />
+                  <SelectValue placeholder={t("select-platform")} />
                 </SelectTrigger>
                 <SelectContent>
                   {PLATFORMS.map((option: Option) => (
@@ -140,7 +134,6 @@ const QueryDetails = ({
               </Select>
             </div>
 
-            {/* Version + Shard */}
             <div className="grid grid-cols-2 gap-2">
               <div>
                 <Label htmlFor="version">{t("version")}</Label>
@@ -148,16 +141,10 @@ const QueryDetails = ({
               </div>
               <div>
                 <Label htmlFor="shard">{t("shard")}</Label>
-                <Input
-                  type="number"
-                  name="shard"
-                  defaultValue={query?.shard}
-                  required
-                />
+                <Input type="number" name="shard" defaultValue={query?.shard} required />
               </div>
             </div>
 
-            {/* Interval + Value */}
             <div className="grid grid-cols-2 gap-2">
               <div>
                 <Label htmlFor="interval">{t("interval")}</Label>
@@ -174,7 +161,6 @@ const QueryDetails = ({
               </div>
             </div>
 
-            {/* Removed */}
             <div className="flex items-center space-x-2">
               <Checkbox
                 checked={removed}
@@ -183,7 +169,6 @@ const QueryDetails = ({
               <Label htmlFor="removed">{t("removed")}</Label>
             </div>
 
-            {/* Packs */}
             <div>
               <Label>{t("assign-packs")}</Label>
               <PacksSelector
@@ -194,7 +179,6 @@ const QueryDetails = ({
               />
             </div>
 
-            {/* Tags */}
             <div>
               <Label>{t("tags")}</Label>
               <TagsSelector
@@ -206,11 +190,7 @@ const QueryDetails = ({
             </div>
 
             <DialogFooter>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setVisible(false)}
-              >
+              <Button type="button" variant="outline" onClick={() => setVisible(false)}>
                 {t("close")}
               </Button>
               <Button type="submit">{t("save-changes")}</Button>

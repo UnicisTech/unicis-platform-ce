@@ -106,7 +106,12 @@ const AddAsset = ({ visible, team, user, setVisible }: AddAssetProps) => {
             <>
               <h2>{t('team-tls-cert')}</h2>
               <CodeBlock language="text" showLineNumbers={false} text={fleetTeam?.ca_certificate} />
-              <p>Save the CA content in <span className='text-green-500'>./ca-cert.pem</span> or any name with <span className='text-green-500'>.pem</span> extension</p>
+              <p>
+                {t('save-ca-content', {
+                  file: '<span class="text-green-500">./ca-cert.pem</span>',
+                  ext: '<span class="text-green-500">.pem</span>',
+                })}
+              </p>
             </>
           )}
 

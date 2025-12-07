@@ -30,11 +30,6 @@ import {
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
-interface Option {
-  label: string;
-  value: string;
-}
-
 const EditQuery = ({
   visible,
   setVisible,
@@ -46,12 +41,8 @@ const EditQuery = ({
   query: Query;
   team: Team;
 }) => {
-  const [selectedPacks, setSelectedPacks] = useState<string[]>(
-    query.packs?.map((p) => p.id) || []
-  )
-  const [selectedTags, setSelectedTags] = useState<string[]>(
-    query.tags?.map((t) => t.id) || []
-  )
+  const [selectedPacks, setSelectedPacks] = useState<string[]>(query.packs?.map((p) => p.id) || []);
+  const [selectedTags, setSelectedTags] = useState<string[]>(query.tags?.map((t) => t.id) || []);
   const [removed, setRemoved] = useState<boolean>(query.removed);
   const { t } = useTranslation("common");
   const updateQuery = useUpdateQuery();
@@ -77,48 +68,42 @@ const EditQuery = ({
 
     try {
       await updateQuery(team.id, queryData, query.id);
-      toast.success(t("Successfully updated"));
+      toast.success(t("successfully-updated"));
       mutateQueries();
       setVisible(false);
-    } catch (err) {
-      toast.error(t("Error updating"));
+    } catch {
+      toast.error(t("error-updating-query"));
     }
   };
 
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
-      <DialogContent
-        className="max-w-2xl max-h-[90vh] overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground/30"
-      >
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground/30">
         <form onSubmit={handleSubmit} className="space-y-5">
           <DialogHeader>
-            <DialogTitle>{t("Edit Query")}</DialogTitle>
+            <DialogTitle>{t("edit-query")}</DialogTitle>
           </DialogHeader>
 
-          {/* Name */}
           <div>
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name">{t("name")}</Label>
             <Input name="name" defaultValue={query.name} required />
           </div>
 
-          {/* SQL */}
           <div>
-            <Label htmlFor="sql">SQL Code</Label>
+            <Label htmlFor="sql">{t("sql-code")}</Label>
             <Input name="sql" defaultValue={query.sql} required />
           </div>
 
-          {/* Platform */}
           <div>
-            <Label htmlFor="platform">Platform</Label>
+            <Label htmlFor="platform">{t("platform")}</Label>
             <Select
               name="platform"
               defaultValue={
-                PLATFORMS.find(({ value }) => value === query.platform)?.value ||
-                "all"
+                PLATFORMS.find(({ value }) => value === query.platform)?.value || "all"
               }
             >
               <SelectTrigger>
-                <SelectValue placeholder="Select platform" />
+                <SelectValue placeholder={t("select-platform")} />
               </SelectTrigger>
               <SelectContent>
                 {PLATFORMS.map((option) => (
@@ -130,53 +115,43 @@ const EditQuery = ({
             </Select>
           </div>
 
-          {/* Version + Shard */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="version">Version</Label>
+              <Label htmlFor="version">{t("version")}</Label>
               <Input name="version" defaultValue={query.version} required />
             </div>
             <div>
-              <Label htmlFor="shard">Shard</Label>
+              <Label htmlFor="shard">{t("shard")}</Label>
               <Input name="shard" defaultValue={query.shard} required />
             </div>
           </div>
 
-          {/* Interval + Value */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="interval">Interval</Label>
-              <Input
-                type="number"
-                name="interval"
-                defaultValue={query.interval}
-                required
-              />
+              <Label htmlFor="interval">{t("interval")}</Label>
+              <Input type="number" name="interval" defaultValue={query.interval} required />
             </div>
             <div>
-              <Label htmlFor="value">Value</Label>
+              <Label htmlFor="value">{t("value")}</Label>
               <Input name="value" defaultValue={query.value} required />
             </div>
           </div>
 
-          {/* Removed */}
           <div className="flex items-center gap-2">
             <Checkbox
               checked={removed}
               onCheckedChange={(checked) => setRemoved(!!checked)}
             />
-            <Label htmlFor="removed">Removed</Label>
+            <Label htmlFor="removed">{t("removed")}</Label>
           </div>
 
-          {/* Description */}
           <div>
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="description">{t("description")}</Label>
             <ReactQuill theme="snow" defaultValue={query.description} />
           </div>
 
-          {/* Packs */}
           <div>
-            <Label>Assign Packs</Label>
+            <Label>{t("assign-packs")}</Label>
             <PacksSelector
               fleetTeamId={team.id}
               preSelectedPack={query.packs}
@@ -185,9 +160,8 @@ const EditQuery = ({
             />
           </div>
 
-          {/* Tags */}
           <div>
-            <Label>Tags</Label>
+            <Label>{t("tags")}</Label>
             <TagsSelector
               fleetTeamId={team.id}
               preSelectedTag={query.tags}

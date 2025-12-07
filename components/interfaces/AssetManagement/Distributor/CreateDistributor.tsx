@@ -85,36 +85,36 @@ const CreateDistributors = ({
     <Dialog open={visible} onOpenChange={setVisible}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>{t("Create Script")}</DialogTitle>
+          <DialogTitle>{t('create-script')}</DialogTitle>
         </DialogHeader>
-
+  
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="sql">{t("SQL Code")}</Label>
+            <Label htmlFor="sql">{t('sql-code')}</Label>
             <Input
               id="sql"
               name="sql"
-              placeholder="Enter SQL code..."
+              placeholder={t('enter-sql-code')}
               required
             />
           </div>
-
+  
           <div className="space-y-2">
-            <Label>{t("Assign Assets")}</Label>
+            <Label>{t('assign-assets')}</Label>
             <NodesSelector
               fleetTeamId={fleetTeamId}
               setSectionNode={setSelectedNodes}
               onSelect={handleNodeSelection}
             />
           </div>
-
+  
           <div className="space-y-2">
-            <Label htmlFor="description">{t("Description")}</Label>
+            <Label htmlFor="description">{t('description')}</Label>
             <ReactQuill theme="snow" id="description" />
           </div>
-
+  
           <div className="space-y-2">
-            <Label>{t("Not Before")}</Label>
+            <Label>{t('not-before')}</Label>
             <Popover>
               <PopoverTrigger asChild>
                 <Button
@@ -125,7 +125,7 @@ const CreateDistributors = ({
                   <CalendarIcon className="mr-2 h-4 w-4" />
                   {notBeforeDate
                     ? notBeforeDate.toLocaleString()
-                    : t("Pick a date")}
+                    : t('pick-a-date')}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0" align="start">
@@ -138,32 +138,32 @@ const CreateDistributors = ({
               </PopoverContent>
             </Popover>
           </div>
-
+  
           <div className="space-y-2">
-            <Label>{t("Tags")}</Label>
+            <Label>{t('tags')}</Label>
             <TagsSelector
               fleetTeamId={fleetTeamId}
               setSectionTag={setSelectedTags}
               onSelect={() => {}}
             />
           </div>
-
+  
           <DialogFooter>
             <Button
               type="button"
               variant="outline"
               onClick={() => setVisible(false)}
             >
-              {t("close")}
+              {t('close')}
             </Button>
             <Button type="submit" ref={submitButtonRef}>
-              {t("create")}
+              {t('create')}
             </Button>
           </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>
-  );
+  );  
 };
 
 export default CreateDistributors;

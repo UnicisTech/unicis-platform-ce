@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
 import { usePacks } from "@/hooks/fleets/packs/usePacks";
 import { Pack } from "@/types";
 import { MultiSelect } from "@/components/shadcn/ui/multi-select";
@@ -16,6 +17,7 @@ const PacksSelector: React.FC<PacksSelectorProps> = ({
   setSectionPack,
   preSelectedPack = [],
 }) => {
+  const { t } = useTranslation("common");
   const { packs, isLoading, isError } = usePacks(fleetTeamId!);
   const [selectedPackIds, setSelectedPackIds] = useState<string[]>([]);
 
@@ -28,12 +30,12 @@ const PacksSelector: React.FC<PacksSelectorProps> = ({
     }
   }, [packs, preSelectedPack]);
 
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>{String(isError)}</p>;
+  if (isLoading) return <p>{t("loading")}</p>;
+  if (isError) return <p>{t("error-loading-packs")}</p>;
 
   const packOptions = packs.map((pack) => ({
     value: pack.id,
-    label: `${pack.name || "Unknown Pack"} - ${pack.platform} - v${pack.version}`,
+    label: `${pack.name || t("unknown-pack")} - ${pack.platform} - v${pack.version}`,
   }));
 
   const handlePackChange = (newSelected: string[]) => {
@@ -43,17 +45,17 @@ const PacksSelector: React.FC<PacksSelectorProps> = ({
   };
 
   return (
-      packs.length === 0 ? (
-        <p>No packs found</p>
-      ) : (
-        <MultiSelect
-          options={packOptions}
-          defaultValue={selectedPackIds}
-          onValueChange={handlePackChange}
-          placeholder="Select Pack(s)"
-          maxCount={3}
-        />
-      )
+    packs.length === 0 ? (
+      <p>{t("no-packs-found")}</p>
+    ) : (
+      <MultiSelect
+        options={packOptions}
+        defaultValue={selectedPackIds}
+        onValueChange={handlePackChange}
+        placeholder={t("select-packs")}
+        maxCount={3}
+      />
+    )
   );
 };
 

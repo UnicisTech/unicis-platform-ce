@@ -30,14 +30,6 @@ import { Label } from '@/components/shadcn/ui/label';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string().required('Name is required'),
-  platform: Yup.string().required('Platform is required'),
-  version: Yup.string().required('Version is required'),
-  shard: Yup.string().required('Shard is required'),
-  description: Yup.string().nullable(),
-});
-
 const EditPack = ({
   visible,
   setVisible,
@@ -55,6 +47,14 @@ const EditPack = ({
   const updatePack = useUpdatePack();
   const { mutatePacks } = usePacks(team?.id);
 
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required(t('name-required')),
+    platform: Yup.string().required(t('platform-required')),
+    version: Yup.string().required(t('version-required')),
+    shard: Yup.string().required(t('shard-required')),
+    description: Yup.string().nullable(),
+  });
+
   const formik = useFormik({
     initialValues: {
       name: pack.name || '',
@@ -70,7 +70,7 @@ const EditPack = ({
         toast.success(t('success'));
         mutatePacks();
         setVisible(false);
-      } catch (err) {
+      } catch {
         toast.error(t('error-updating-pack'));
       }
     },
@@ -81,34 +81,32 @@ const EditPack = ({
       <DialogContent className="max-w-2xl">
         <form onSubmit={formik.handleSubmit} className="space-y-4">
           <DialogHeader>
-            <DialogTitle>{t('Edit Pack')}</DialogTitle>
+            <DialogTitle>{t('edit-pack')}</DialogTitle>
           </DialogHeader>
 
-          {/* Name */}
           <div className="space-y-2">
-            <Label htmlFor="name">{t('Name')}</Label>
+            <Label htmlFor="name">{t('name')}</Label>
             <Input
               id="name"
               name="name"
               value={formik.values.name}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              placeholder={t('Enter name')}
+              placeholder={t('enter-name')}
             />
             {formik.touched.name && formik.errors.name && (
               <p className="text-sm text-red-500">{formik.errors.name}</p>
             )}
           </div>
 
-          {/* Platform */}
           <div className="space-y-2">
-            <Label htmlFor="platform">{t('Platform')}</Label>
+            <Label htmlFor="platform">{t('platform')}</Label>
             <Select
               value={formik.values.platform}
               onValueChange={(value) => formik.setFieldValue('platform', value)}
             >
               <SelectTrigger>
-                <SelectValue placeholder={t('Select a platform')} />
+                <SelectValue placeholder={t('select-platform')} />
               </SelectTrigger>
               <SelectContent>
                 {PLATFORMS.map((p) => (
@@ -123,17 +121,16 @@ const EditPack = ({
             )}
           </div>
 
-          {/* Version & Shard */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="version">{t('Version')}</Label>
+              <Label htmlFor="version">{t('version')}</Label>
               <Input
                 id="version"
                 name="version"
                 value={formik.values.version}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                placeholder={t('Enter version')}
+                placeholder={t('enter-version')}
               />
               {formik.touched.version && formik.errors.version && (
                 <p className="text-sm text-red-500">{formik.errors.version}</p>
@@ -141,14 +138,14 @@ const EditPack = ({
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="shard">{t('Shard')}</Label>
+              <Label htmlFor="shard">{t('shard')}</Label>
               <Input
                 id="shard"
                 name="shard"
                 value={formik.values.shard}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                placeholder={t('Enter shard')}
+                placeholder={t('enter-shard')}
               />
               {formik.touched.shard && formik.errors.shard && (
                 <p className="text-sm text-red-500">{formik.errors.shard}</p>
@@ -156,9 +153,8 @@ const EditPack = ({
             </div>
           </div>
 
-          {/* Description */}
           <div className="space-y-2">
-            <Label htmlFor="description">{t('Description')}</Label>
+            <Label htmlFor="description">{t('description')}</Label>
             <ReactQuill
               theme="snow"
               value={formik.values.description}
@@ -167,11 +163,7 @@ const EditPack = ({
           </div>
 
           <DialogFooter>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setVisible(false)}
-            >
+            <Button type="button" variant="outline" onClick={() => setVisible(false)}>
               {t('close')}
             </Button>
             <Button type="submit" disabled={formik.isSubmitting}>

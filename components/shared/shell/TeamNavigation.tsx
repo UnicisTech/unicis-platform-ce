@@ -36,14 +36,14 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       name: t('all-tasks'),
       href: `/teams/${slug}/tasks`,
       icon: QueueListIcon,
-      className: 'fill-blue-600 stroke-blue-600', // ← без h-5 w-5
+      className: 'fill-blue-600 stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('tasks'),
     },
     canAccess('asset_dashboard', ['create', 'update', 'read', 'delete']) 
       ? {
-        name: t('Asset Management'),
+        name: t('asset-management'),
         href: `/teams/${slug}/asset`,
         icon: () => <Icon src="/asset-dashboard.png" />,
         className: 'fill-blue-600 stroke-blue-600',
@@ -117,7 +117,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       name: t('documentation'),
       href: 'https://www.unicis.tech/docs',
       icon: CodeBracketIcon,
-      className: 'stroke-blue-600', // ← без h-5 w-5
+      className: 'stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('documentation'),
@@ -126,7 +126,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       name: t('knowledge-base'),
       href: 'https://www.unicis.tech/kb',
       icon: LifebuoyIcon,
-      className: 'stroke-blue-600', // ← без h-5 w-5
+      className: 'stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('documentation'),
@@ -135,7 +135,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       name: t('feedback'),
       href: 'https://feedback.unicis.tech',
       icon: ChatBubbleBottomCenterTextIcon,
-      className: 'stroke-blue-600', // ← без h-5 w-5
+      className: 'stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('feedback'),
@@ -144,13 +144,13 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       name: t('support'),
       href: 'https://discord.com/invite/8TwyeD97HD',
       icon: QuestionMarkCircleIcon,
-      className: 'stroke-blue-600', // ← без h-5 w-5
+      className: 'stroke-blue-600',
     },
     {
       name: t('settings'),
       href: `/teams/${slug}/settings`,
       icon: Cog6ToothIcon,
-      className: 'stroke-blue-600', // ← без h-5 w-5
+      className: 'stroke-blue-600',
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         /(settings|billing|members|saml|directory-sync|audit-logs|webhooks|api-keys|iap\/admin)/.test(

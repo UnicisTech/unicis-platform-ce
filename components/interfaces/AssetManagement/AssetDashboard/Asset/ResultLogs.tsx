@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Error, Loading } from '@/components/shared';
 import type { User } from '@prisma/client';
-// import { IssuePanelContainer } from '@/sharedStyles';
 import { useAssetActivities } from '@/hooks/fleets/Nodes';
 import TableBuilder from '../../TableBuilder';
 import { useDeleteAssetResultLog } from '@/hooks/fleets/Nodes/useDeleteResult';
@@ -33,9 +32,7 @@ const ResultLogs = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user: 
     };
 
     return (
-        // <IssuePanelContainer>
-            <TableBuilder data={result?.recent} onDelete={handleDeleteStatus} />
-        // </IssuePanelContainer>
+        <TableBuilder data={result?.recent} onDelete={handleDeleteStatus} />
     );
 };
 

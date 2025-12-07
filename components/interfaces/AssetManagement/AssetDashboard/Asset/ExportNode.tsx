@@ -65,13 +65,12 @@ const ExportNode = ({
       <DialogContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogHeader>
-            <DialogTitle>{t('Export Node')}</DialogTitle>
+            <DialogTitle>{t('export-node')}</DialogTitle>
           </DialogHeader>
 
           <div className="grid gap-4 py-4">
-            {/* Name */}
             <div className="grid gap-1">
-              <Label htmlFor="name">{t('Save As (Default to Node ID)')}</Label>
+              <Label htmlFor="name">{t('save-as-default-node-id')}</Label>
               <Input id="name" {...register('name')} />
               {errors.name && (
                 <span className="text-xs text-red-500">
@@ -80,17 +79,16 @@ const ExportNode = ({
               )}
             </div>
 
-            {/* RadioGroup */}
             <div className="grid gap-1">
-              <Label>{t('Export As PDF or CSV Documents')}</Label>
+              <Label>{t('export-as-documents')}</Label>
               <RadioGroup defaultValue="pdf" {...register('as')}>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="pdf" id="pdf" />
-                  <Label htmlFor="pdf">PDF File Format</Label>
+                  <Label htmlFor="pdf">{t('pdf-file-format')}</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="csv" id="csv" />
-                  <Label htmlFor="csv">CSV File Format</Label>
+                  <Label htmlFor="csv">{t('csv-file-format')}</Label>
                 </div>
               </RadioGroup>
               {errors.as && (
@@ -100,11 +98,10 @@ const ExportNode = ({
               )}
             </div>
 
-            {/* Checkbox */}
             <div className="flex items-center space-x-2">
               <Checkbox id="relatives" {...register('relatives')} />
               <Label htmlFor="relatives">
-                {t('Include Relatives [Query,Pack,Node Config, Distributor] and Results')}
+                {t('include-relatives')}
               </Label>
             </div>
 

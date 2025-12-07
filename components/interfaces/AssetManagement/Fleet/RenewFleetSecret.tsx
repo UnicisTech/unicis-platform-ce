@@ -33,7 +33,7 @@ const RenewFleetSecret = ({
   const handleRenew = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!confirmed) {
-      toast.error(t('Please confirm before renewing'));
+      toast.error(t('please-confirm-before-renewing'));
       return;
     }
 
@@ -42,9 +42,9 @@ const RenewFleetSecret = ({
       await renewFleetSecret(teamId);
       mutateFleetSecret();
       setVisible(false);
-      toast.success(t('fleet-secret-renew'));
+      toast.success(t('fleet-secret-renewed'));
     } catch {
-      toast.error(t('Error renewing fleet secret'));
+      toast.error(t('error-renewing-fleet-secret'));
     } finally {
       setIsSubmitting(false);
     }
@@ -55,7 +55,7 @@ const RenewFleetSecret = ({
       <DialogContent>
         <form onSubmit={handleRenew}>
           <DialogHeader>
-            <DialogTitle>{t('Confirm Fleet Secret Renew')}</DialogTitle>
+            <DialogTitle>{t('confirm-fleet-secret-renew')}</DialogTitle>
             <DialogDescription>
               {t('fleet-renew-node-description')}
             </DialogDescription>
@@ -71,7 +71,7 @@ const RenewFleetSecret = ({
               htmlFor="confirm_fleet_secret_renew"
               className="text-sm cursor-pointer"
             >
-              {t('I confirm that I want to renew the Fleet Secret')}
+              {t('confirm-renew-checkbox')}
             </label>
           </div>
 
@@ -80,7 +80,7 @@ const RenewFleetSecret = ({
               type="submit"
               disabled={!confirmed || isSubmitting}
             >
-              {isSubmitting ? t('Renewing...') : t('Renew')}
+              {isSubmitting ? t('renewing') : t('renew')}
             </Button>
             <Button
               type="button"
