@@ -46,7 +46,6 @@
     "@tailwindcss/typography": "0.5.13",
     "async-mutex": "^0.5.0",
     "autoprefixer": "10.4.19",
-    "axios": "^1.7.4",
     "@uiw/react-md-editor": "^4.0.8",
     "bcryptjs": "2.4.3",
     "chart.js": "^4.4.3",
@@ -134,8 +133,5 @@
     "prisma": "^6.6.0",
     "tailwindcss": "^4.1.10",
     "typescript": "5.4.5"
-  },
-  "overrides": {
-    "axios": "^1.12.0"
   }
 }
