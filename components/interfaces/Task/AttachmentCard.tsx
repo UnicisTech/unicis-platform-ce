@@ -4,7 +4,7 @@ import type { Attachment } from 'types';
 import useCanAccess from 'hooks/useCanAccess';
 import useTheme from 'hooks/useTheme';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { Button } from '@/components/shadcn/ui/button';
 
 const AttachmentsCard = ({

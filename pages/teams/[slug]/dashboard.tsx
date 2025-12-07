@@ -7,16 +7,14 @@ import {
 import RmAnalysis from '@/components/interfaces/TeamDashboard/RmAnalysis';
 import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/TeamProcessingActivities';
 import { Error, Loading } from '@/components/shared';
-import env from '@/lib/env';
+import { getTeamFeatures } from '@/lib/subscriptions';
 import useTeam from 'hooks/useTeam';
 import useTeamTasks from 'hooks/useTeamTasks';
-import { getCscStatusesBySlug } from 'models/team';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const TeamDashboard = ({
-  csc_statuses,
   slug,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { t } = useTranslation('common');
@@ -48,29 +46,25 @@ const TeamDashboard = ({
       </div>
       <div className="space-y-6">
         {/* TODO: { [key: string]: string; } is temporary solution */}
-        <div className="mb-4 mx-4 flex items-center justify-between">
-          <h2 className="text-2xl font-semibold tracking-tight">
-            {t(`${slug?.toString().toUpperCase()} Task Overview`)}
-          </h2>
+        {/* TODO: remove space-y-6 wrappers around each block? */}
+        <div className="space-y-6">
+          <div className="mb-4 mx-4 flex items-center justify-between">
+            <h2 className="text-2xl font-semibold tracking-tight">
+              {t(`${slug?.toString().toUpperCase()} Task Overview`)}
+            </h2>
+          </div>
+          <TeamTaskAnalysis slug={slug} />
         </div>
-        <TeamTaskAnalysis
-          slug={slug}
-          csc_statuses={csc_statuses as { [key: string]: string }}
-        />
         <div className="mb-4 mx-4 flex items-center justify-between">
           <h2 className="text-2xl font-semibold tracking-tight">
             {t(`Data Privacy Overview`)}
           </h2>
         </div>
-        <div
-          style={{
-            width: '100%',
-            display: 'flex',
-            marginBottom: '10px',
-          }}
-        >
-          <ProcessingActivitiesAnalysis slug={slug} />
-          <TeamAssessmentAnalysis slug={slug} />
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-4">
+            <ProcessingActivitiesAnalysis slug={slug} />
+            <TeamAssessmentAnalysis slug={slug} />
+          </div>
         </div>
         <div className="space-y-6">
           <div className="mb-4 mx-4 flex items-center justify-between">
@@ -80,10 +74,7 @@ const TeamDashboard = ({
           </div>
           <PiaAnalysis tasks={tasks} />
         </div>
-        <TeamCscAnalysis
-          slug={slug}
-          csc_statuses={csc_statuses as { [key: string]: string }}
-        />
+        <TeamCscAnalysis team={team} />
         <div className="space-y-6">
           <div className="mb-4 px-4 flex items-center justify-between">
             <h2 className="text-2xl font-semibold tracking-tight">
@@ -98,14 +89,15 @@ const TeamDashboard = ({
 };
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { locale, query }: GetServerSidePropsContext = context;
+  const { locale, query, req, res }: GetServerSidePropsContext = context;
   const slug = query.slug as string;
+
+  const teamFeatures = await getTeamFeatures(req, res, query);
 
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      teamFeatures: env.teamFeatures,
-      csc_statuses: await getCscStatusesBySlug(slug),
+      teamFeatures: teamFeatures,
       slug: slug,
     },
   };

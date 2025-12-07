@@ -6,6 +6,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const labels = ['Wrong', 'Right'];
 
+//TODO: use css vars
 const colors = ['rgba(255, 0, 0, 1)', 'rgba(47, 143, 0, 1)'];
 
 const UserResultPieChart = ({

@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import type { ISO } from 'types';
+import type { ISO, TeamProperties } from 'types';
 
+//TODO: rewrite to SWR
 const useISO = (team: any) => {
-  const [ISO, setISO] = useState<ISO | null>(null);
+  const [ISO, setISO] = useState<ISO[] | null>(null);
 
   useEffect(() => {
     const asyncEffect = async () => {
       if (!team) return;
 
-      const iso = team?.properties?.csc_iso;
+      const iso = (team?.properties as TeamProperties)?.csc_iso;
       if (iso) {
         setISO(iso);
       } else {

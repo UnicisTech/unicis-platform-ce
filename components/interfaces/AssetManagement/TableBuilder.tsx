@@ -8,7 +8,7 @@ import {
   TableCell,
 } from "@/components/shadcn/ui/table";
 import { Button } from "@/components/shadcn/ui/button";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'next-i18next';
 
 interface TableBuilderProps {
   data: Array<Record<string, any>>;

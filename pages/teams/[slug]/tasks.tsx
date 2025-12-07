@@ -3,14 +3,14 @@ import type { InferGetServerSidePropsType } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSidePropsContext } from 'next';
 import { Tasks } from '@/components/interfaces/Task';
-import { getCscStatusesBySlug, getTeam } from 'models/team';
+import { getTeam } from 'models/team';
 
 const AllTasks: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ team, csc_statuses }) => {
+> = ({ team }) => {
   return (
     <>
-      <Tasks team={team} csc_statuses={csc_statuses} />
+      <Tasks team={team} />
     </>
   );
 };
@@ -22,20 +22,13 @@ export const getServerSideProps = async (
 
   const slug = query.slug as string;
 
+  // TODO: replace with useTeam hook on client side
   const team = await getTeam({ slug });
-
-  //Hotfix for not serializable team props
-  // team.createdAt = team.createdAt.toString();
-  // team.updatedAt = team.updatedAt.toString();
-
-  // team.createdAt = team.createdAt;
-  // team.updatedAt = team.updatedAt.toString();
 
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
       team: JSON.parse(JSON.stringify(team)),
-      csc_statuses: await getCscStatusesBySlug(slug),
     },
   };
 };

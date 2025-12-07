@@ -3,7 +3,6 @@ import { Loading, Error } from '@/components/shared';
 import useIapCourse from 'hooks/useIapCourse';
 import { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import env from '@/lib/env';
 import { CoursePage } from '@/components/interfaces/IAP';
 import useTeam from 'hooks/useTeam';
 
@@ -38,7 +37,6 @@ export async function getServerSideProps({
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      teamFeatures: env.teamFeatures,
     },
   };
 }

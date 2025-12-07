@@ -10,7 +10,7 @@ import {
 import { Button } from '@/components/shadcn/ui/button';
 import { InputWithLabel, Loading } from '@/components/shared';
 import { passwordPolicies } from '@/lib/common';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import {

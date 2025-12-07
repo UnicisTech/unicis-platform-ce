@@ -51,10 +51,13 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const name = `${firstName} ${lastName}`;
   let teamData;
   await validateRecaptcha(recaptchaToken);
+  console.log('[api/auth/join] recaptcha validated');
 
   const invitation = inviteToken
     ? await getInvitation({ token: inviteToken })
     : null;
+
+  console.log('[api/auth/join] invitation created');
 
   if (invitation && (await isInvitationExpired(invitation))) {
     throw new ApiError(400, 'Invitation expired. Please request a new one.');
@@ -76,6 +79,8 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   validatePasswordPolicy(password);
 
+  console.log('[api/auth/join] password validated');
+
   // Check if team name is available
   if (!invitation) {
     if (!team) {
@@ -90,6 +95,8 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
 
+  console.log('[api/auth/join] team name is available');
+
   const user = await createUser({
     name,
     firstName,
@@ -99,7 +106,8 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     emailVerified: invitation ? new Date() : null,
   });
 
-  
+  console.log('[api/auth/join] user created');
+
   // Create team if user is not invited
   // So we can create the team with the user as the owner
   if (!invitation) {
@@ -114,8 +122,11 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   }
 
+  console.log('[api/auth/join] team created');
+
   // Send account verification email
   if (env.confirmEmail && !user.emailVerified) {
+    console.log('[api/auth/join] creating verification token...');
     const verificationToken = await prisma.verificationToken.create({
       data: {
         identifier: user.email,
@@ -123,7 +134,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
       },
     });
-
+    console.log('[api/auth/join] verification token created');
     await sendVerificationEmail({ user, verificationToken });
   }
 

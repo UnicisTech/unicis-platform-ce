@@ -10,7 +10,7 @@ import { createUser, getUser } from 'models/user';
 import NextAuth, { Account, NextAuthOptions, Profile, User } from 'next-auth';
 import BoxyHQSAMLProvider from 'next-auth/providers/boxyhq-saml';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import EmailProvider from 'next-auth/providers/email';
+// import EmailProvider from 'next-auth/providers/email';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import { isAuthProviderEnabled } from '@/lib/auth';
@@ -18,6 +18,7 @@ import type { Provider } from 'next-auth/providers';
 import { validateRecaptcha } from '@/lib/recaptcha';
 import rateLimit from '@/lib/rate-limit';
 import { getIpAddress } from '@/lib/utils';
+// import { sendMagicLink } from '@/lib/email/sendMagicLink';
 
 const adapter = PrismaAdapter(prisma);
 
@@ -120,21 +121,16 @@ if (isAuthProviderEnabled('saml')) {
   );
 }
 
-if (isAuthProviderEnabled('email')) {
-  providers.push(
-    EmailProvider({
-      server: {
-        host: env.smtp.host,
-        port: env.smtp.port,
-        auth: {
-          user: env.smtp.user,
-          pass: env.smtp.password,
-        },
-      },
-      from: env.smtp.from,
-    })
-  );
-}
+// if (isAuthProviderEnabled('email')) {
+//   providers.push(
+//     EmailProvider({
+//       sendVerificationRequest: async ({ identifier, url }) => {
+//         // TODO: should be tested
+//         sendMagicLink(identifier, url)
+//       },
+//     }),
+//   );
+// }
 
 // const cookiesOptions: Partial<Pick<NextAuthOptions, 'cookies'>> =
 //   process.env.NODE_ENV === 'production'

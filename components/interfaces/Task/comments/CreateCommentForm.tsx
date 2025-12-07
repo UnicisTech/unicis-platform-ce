@@ -1,5 +1,4 @@
 import * as React from 'react';
-import dynamic from 'next/dynamic';
 import { useTranslation } from 'next-i18next';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import {
@@ -10,8 +9,7 @@ import {
   FormMessage,
 } from '@/components/shadcn/ui/form';
 import { Button } from '@/components/shadcn/ui/button';
-
-const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
+import QuillEditor from '@/components/shared/QuillEditor';
 
 interface FormData {
   text: string;
@@ -58,9 +56,9 @@ export default function CreateCommentForm({
           render={({ field, fieldState }) => (
             <FormItem>
               <FormControl>
-                <ReactQuill
-                  onChange={(value) => field.onChange(value)}
+                <QuillEditor
                   defaultValue={field.value || ''}
+                  onChange={(value) => field.onChange(value)}
                 />
               </FormControl>
               <FormMessage>

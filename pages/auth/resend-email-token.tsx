@@ -1,5 +1,5 @@
 import { AuthLayout } from '@/components/layouts';
-import { Alert, InputWithLabel } from '@/components/shared';
+import { Alert } from '@/components/shared';
 import { defaultHeaders } from '@/lib/common';
 import { useFormik } from 'formik';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
@@ -11,7 +11,10 @@ import { toast } from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { ApiResponse, ComponentStatus, NextPageWithLayout } from 'types';
 import * as Yup from 'yup';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
+import { Button } from '@/components/shadcn/ui/button';
+import { Loader2 } from 'lucide-react';
+import { Input } from '@/components/shadcn/ui/input';
+import { Label } from '@/components/shadcn/ui/label';
 
 const VerifyAccount: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -72,27 +75,21 @@ const VerifyAccount: NextPageWithLayout<
       <div className="rounded p-6 border">
         <form onSubmit={formik.handleSubmit}>
           <div className="space-y-2">
-            <InputWithLabel
-              type="email"
-              label="Email"
+            <Label htmlFor="email">{t('email-address')}</Label>
+            <Input
+              id="email"
               name="email"
-              placeholder="Email"
+              type="email"
+              placeholder={t('your-email')}
               value={formik.values.email}
-              error={formik.touched.email ? formik.errors.email : undefined}
               onChange={formik.handleChange}
             />
           </div>
           <div className="mt-4">
-            <DaisyButton
-              type="submit"
-              color="primary"
-              loading={formik.isSubmitting}
-              active={formik.dirty}
-              fullWidth
-              size="md"
-            >
+            <Button type="submit" color="primary" size="full">
+              {formik.isSubmitting && <Loader2 className="animate-spin" />}
               {t('resend-link')}
-            </DaisyButton>
+            </Button>
           </div>
         </form>
       </div>

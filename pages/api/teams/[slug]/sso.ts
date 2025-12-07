@@ -57,6 +57,8 @@ export default async function handler(
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
 
+  teamMember.team.subscription?.plan;
+
   throwIfNotAllowed(teamMember, 'team_sso', 'read');
 
   if ('clientID' in req.query) {
@@ -95,6 +97,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     crud: 'c',
     user: teamMember.user,
     team: teamMember.team,
+    subscriptionPlan: teamMember.team.subscription?.plan,
   });
 
   res.status(201).json(connection);
@@ -121,6 +124,7 @@ const handlePATCH = async (req: NextApiRequest, res: NextApiResponse) => {
     crud: 'u',
     user: teamMember.user,
     team: teamMember.team,
+    subscriptionPlan: teamMember.team.subscription?.plan,
   });
 
   res.status(204).end();
@@ -143,6 +147,7 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
     crud: 'c',
     user: teamMember.user,
     team: teamMember.team,
+    subscriptionPlan: teamMember.team.subscription?.plan,
   });
 
   res.status(204).end();

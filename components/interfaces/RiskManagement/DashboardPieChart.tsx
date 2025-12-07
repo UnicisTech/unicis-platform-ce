@@ -11,6 +11,7 @@ import useTheme from 'hooks/useTheme';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+// TODO: move to config + use css variables
 const lightColors = [
   'rgba(211, 211, 211, 0.5)',
   'rgba(0, 255, 0, 0.3)',

@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { Team, User } from '@prisma/client';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
-import { Trans } from 'react-i18next';
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from '@/components/shadcn/ui/dialog';
 import { Button } from '@/components/shadcn/ui/button';

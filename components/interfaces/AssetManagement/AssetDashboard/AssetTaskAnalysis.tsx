@@ -1,6 +1,6 @@
 import { useDistributorAnalysis, useDistributorResultAnalysis } from "@/hooks/fleets/distributors/useAnalysis";
 import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'next-i18next';
 
 const AssetTaskAnalysis = ({ teamId }: { teamId: string }) => {
   const {

@@ -44,6 +44,8 @@ interface MultiSelectProps
     label: string;
     value: string;
     icon?: React.ComponentType<{ className?: string }>;
+    /** Optional state to siable option selection. */
+    isDisabled?: boolean;
   }[];
 
   onValueChange: (value: string[]) => void;
@@ -225,11 +227,16 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
                 </CommandItem>
                 {options.map((option) => {
                   const isSelected = selectedValues.includes(option.value);
+                  const isDisabled = option.isDisabled;
+
                   return (
                     <CommandItem
                       key={option.value}
-                      onSelect={() => toggleOption(option.value)}
-                      className="cursor-pointer"
+                      onSelect={() => !isDisabled && toggleOption(option.value)}
+                      className={cn(
+                        'cursor-pointer',
+                        isDisabled && 'opacity-50 cursor-not-allowed'
+                      )}
                     >
                       <div
                         className={cn(
@@ -242,7 +249,12 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
                         <CheckIcon className="h-4 w-4" />
                       </div>
                       {option.icon && (
-                        <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+                        <option.icon
+                          className={cn(
+                            'mr-2 h-4 w-4 text-muted-foreground',
+                            isDisabled && 'opacity-50'
+                          )}
+                        />
                       )}
                       <span>{option.label}</span>
                     </CommandItem>

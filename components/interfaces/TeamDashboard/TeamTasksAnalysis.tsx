@@ -1,24 +1,17 @@
-import PieChart from '../CSC/PieChart';
 import { TaskStatusesDetail } from '@/components/interfaces/CSC';
 import useTeamTasks from 'hooks/useTeamTasks';
-import { Card } from '@/components/shadcn/ui/card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/shadcn/ui/card';
+import TasksPieChart from './TasksPieChart';
 
+//TODO: move to lib?
 const labels = ['To Do', 'In Progress', 'In Review', 'Feedback', 'Done'];
 
-const barColors = [
-  'rgb(232, 232, 232)', // todo
-  'rgb(123, 146, 178)', // in progress
-  'rgb(77, 110, 255)', // in review
-  'rgb(0, 181, 255)', // feedback
-  'rgb(0, 169, 110)', // done
-];
-
-const TasksAnalysis = ({
-  slug,
-}: {
-  csc_statuses: { [key: string]: string };
-  slug: string;
-}) => {
+const TasksAnalysis = ({ slug }: { slug: string }) => {
   const { tasks } = useTeamTasks(slug as string);
 
   if (!tasks || tasks.length === 0) {
@@ -53,17 +46,21 @@ const TasksAnalysis = ({
   );
 
   return (
-    <div className="mx-auto mt-4 w-full max-w-7xl rounded-md">
-      <div className="flex justify-around mb-2" style={{ height: '400px' }}>
-        <Card className="flex-1 h-full flex flex-col p-2 mr-4 justify-between">
-          <PieChart
-            page_name="task"
-            statuses={statuses}
-            barColor={barColors}
-            labels={labels}
-          />
+    <div className="w-full max-w-7xl mx-auto">
+      <div className="flex flex-col lg:flex-row gap-4">
+        <Card className="w-full lg:w-1/2 shadow-sm">
+          <CardContent className="flex items-center justify-center h-[300px]">
+            <TasksPieChart statuses={statuses} labels={labels} />
+          </CardContent>
         </Card>
-        <TaskStatusesDetail tasks={tasks} statusCounts={statusCounts} />
+        <Card className="w-full lg:w-1/2 shadow-sm">
+          <CardHeader>
+            <CardTitle>Status Summary</CardTitle>
+          </CardHeader>
+          <CardContent className="flex items-center justify-center h-[300px]">
+            <TaskStatusesDetail tasks={tasks} statusCounts={statusCounts} />
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
@@ -71,6 +68,7 @@ const TasksAnalysis = ({
 
 export default TasksAnalysis;
 
+// TODO: move to lib?
 function getStatusName(statusId: string): string {
   switch (statusId.toLowerCase()) {
     case 'todo':
