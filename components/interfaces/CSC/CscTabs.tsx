@@ -1,18 +1,18 @@
 import classNames from 'classnames';
 import { ISO } from 'types';
 import { cscNavigations } from '@/lib/csc';
-import { isoValueToLabel } from '@/components/defaultLanding/data/configs/csc';
+import { isoValueToLabel } from '@/lib/csc/csc-frameworks';
 
 const CscTabs = ({
-  iso,
+  frameworks,
   activeTab,
   setActiveTab,
 }: {
-  iso: ISO[];
+  frameworks: ISO[];
   activeTab: ISO;
   setActiveTab: (name: ISO) => void;
 }) => {
-  const navigations = cscNavigations(activeTab, iso);
+  const navigations = cscNavigations(activeTab, frameworks);
 
   return (
     <div className="mb-5">

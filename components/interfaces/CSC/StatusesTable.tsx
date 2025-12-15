@@ -2,16 +2,16 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'next-i18next';
 import StatusHeader from './StatusHeader';
 import TaskSelector from './TaskSelector';
-import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
 import { getCscControlsProp } from '@/lib/csc';
 import StatusSelector from './StatusSelector';
-import type { CscOption } from 'types';
 import type { Task } from '@prisma/client';
 import usePagination from 'hooks/usePagination';
 import useCanAccess from 'hooks/useCanAccess';
-import { ControlOption, ISO } from 'types';
+import { ISO } from 'types';
 import TasksList from './TasksList';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
+import { CscStatus } from '@/lib/csc/csc-statuses';
+import frameworks from '@/lib/csc/frameworks';
 
 const StatusesTable = ({
   ISO,
@@ -26,8 +26,8 @@ const StatusesTable = ({
   ISO: ISO;
   tasks: Array<Task>;
   statuses: any;
-  sectionFilter: null | Array<{ label: string; value: string }>;
-  statusFilter: null | Array<CscOption>;
+  sectionFilter: string[] | null;
+  statusFilter: null | Array<CscStatus>;
   perPage: number;
   statusHandler: (
     control: string,
@@ -45,30 +45,23 @@ const StatusesTable = ({
   const { canAccess } = useCanAccess();
   const cscControlsProp = getCscControlsProp(ISO);
 
-  const filteredControls = useMemo<ControlOption[]>(() => {
-    let ctrls = getControlOptions(ISO);
-
+  const filteredControls = useMemo(() => {
+    let controls = frameworks[ISO].controls
     const noSection = !sectionFilter?.length;
     const noStatus = !statusFilter?.length;
-    if (noSection && noStatus) return ctrls;
+
+    if (noSection && noStatus) return controls;
 
     if (sectionFilter?.length) {
-      const sections = sectionFilter.map((o) => o.value);
-      ctrls = ctrls.filter((item) => {
-        const content = item.value.section;
-        return ISO === '2013'
-          ? sections.some((sec) => content.includes(sec))
-          : sections.includes(content);
-      });
+      controls = controls.filter(control => sectionFilter.includes(control.sectionId));
     }
 
     if (statusFilter?.length) {
-      const labels = statusFilter.map((o) => o.label);
-      ctrls = ctrls.filter((c) => labels.includes(statuses[c.value.control]));
+      controls = controls.filter(control => statusFilter.includes(statuses[control.id]))
     }
 
-    return ctrls;
-  }, [ISO, sectionFilter, statusFilter, statuses]);
+    return controls
+  }, [frameworks, sectionFilter, statusFilter])
 
   const {
     currentPage,
@@ -77,7 +70,7 @@ const StatusesTable = ({
     goToPage,
     prevButtonDisabled,
     nextButtonDisabled,
-  } = usePagination<ControlOption>(filteredControls, perPage);
+  } = usePagination(filteredControls, perPage);
 
   return (
     <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
@@ -106,29 +99,27 @@ const StatusesTable = ({
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {pageData.map((option) => (
-              <tr key={option.value.control}>
-                <td className="px-6 py-3">{option.value.code}</td>
-                <td className="px-6 py-3">{option.value.section}</td>
-                <td className="px-6 py-3">
-                  {option.value.controlLabel || option.value.control}
-                </td>
+            {pageData.map((control) => (
+              <tr key={control.id}>
+                <td className="px-6 py-3">{t(`csc/${ISO}:controls.${control.id}.code`)}</td>
+                <td className="px-6 py-3">{t(`csc/${ISO}:sections.${control.sectionId}.label`)}</td>
+                <td className="px-6 py-3">{t(`csc/${ISO}:controls.${control.id}.control`)}</td>
                 <td className="px-6 py-3">
                   <span className="whitespace-pre-line">
-                    {option.value.requirements}
+                    {t(`csc/${ISO}:controls.${control.id}.requirements`)}
                   </span>
                 </td>
                 <td className="px-6 py-3">
                   {canAccess('task', ['update']) ? (
                     <div className="w-40">
                       <StatusSelector
-                        statusValue={statuses[option.value.control]}
-                        control={option.value.control}
+                        statusValue={statuses[control.id]}
+                        control={control.id}
                         handler={statusHandler}
                         isDisabled={
                           !tasks.filter((task: any) =>
                             task.properties?.[cscControlsProp]?.find(
-                              (item: string) => item === option.value.control
+                              (item: string) => item === control.id
                             )
                           ).length
                         }
@@ -136,7 +127,7 @@ const StatusesTable = ({
                     </div>
                   ) : (
                     <span className="whitespace-pre-line">
-                      {statuses[option.value.control]}
+                      {statuses[control.id]}
                     </span>
                   )}
                 </td>
@@ -144,12 +135,12 @@ const StatusesTable = ({
                   {canAccess('task', ['update']) ? (
                     <TaskSelector
                       tasks={tasks}
-                      control={option.value.control}
+                      control={control.id}
                       handler={taskSelectorHandler}
                       ISO={ISO}
                     />
                   ) : (
-                    <TasksList tasks={tasks} control={option.value.control} />
+                    <TasksList tasks={tasks} control={control.id} />
                   )}
                 </td>
               </tr>
@@ -171,3 +162,4 @@ const StatusesTable = ({
 };
 
 export default StatusesTable;
+

@@ -1,9 +1,10 @@
+import { ISO, CscStatusesMap } from 'types';
 import PieChart from './PieChart';
 import RadarChart from './RadarChart';
 
 type Props = {
-  statuses: Record<string, string>;
-  iso: string;
+  statuses: CscStatusesMap;
+  iso: ISO;
 };
 
 const Panel: React.FC<{ children: React.ReactNode }> = ({ children }) => (

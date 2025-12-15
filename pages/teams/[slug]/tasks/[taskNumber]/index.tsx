@@ -81,6 +81,8 @@ const TaskById = () => {
   if (!task || !team || isError || teamError)
     return <Error message={(isError || teamError)?.message || ''} />;
 
+  console.log('task', task)
+
   return (
     <>
       <Breadcrumb
@@ -306,9 +308,21 @@ const TaskById = () => {
 export async function getServerSideProps({
   locale,
 }: GetServerSidePropsContext) {
+  const cscTranslations = [
+    'csc/2013',
+    'csc/2022',
+    'csc/mvps',
+    'csc/nistcsfv2',
+    'csc/eunis2',
+    'csc/gdpr',
+    'csc/cisv81',
+    'csc/soc2v2',
+    'csc/c5_2020',
+  ]
+
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+      ...(locale ? await serverSideTranslations(locale, ['common', ...cscTranslations]) : {}),
     },
   };
 }

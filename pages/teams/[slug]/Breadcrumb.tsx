@@ -1,5 +1,6 @@
 import { useTranslation } from 'next-i18next';
 
+// TODO: move to shared folder?
 const Breadcrumb = ({
   teamName,
   taskTitle,

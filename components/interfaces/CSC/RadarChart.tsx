@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 import { Radar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -9,14 +10,11 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import {
-  controls,
-  statusOptions,
-  getRadarChartLabels,
-  mergePoints,
-  getSections,
-} from '@/components/defaultLanding/data/configs/csc';
+import frameworks from '@/lib/csc/frameworks';
 import useTheme from 'hooks/useTheme';
+import { ISO } from 'types';
+import { removeTrailingParenthesis, truncateText } from '@/lib/utils';
+import { CSC_STATUS_TO_VALUE } from '@/lib/csc/csc-statuses';
 
 ChartJS.register(
   RadialLinearScale,
@@ -27,29 +25,71 @@ ChartJS.register(
   Legend
 );
 
-const getMaturityLevels = (
-  statuses: { [key: string]: string },
-  ISO: string
-) => {
-  const sections = getSections(ISO);
-  const data = sections
-    .map(({ label }) => label)
-    .map((label) => {
-      const totalControls = controls[ISO].filter(
-        ({ Section }) => Section === label
-      ).map(({ Control }) => Control);
-      const totalControlsValue = totalControls.reduce(
-        (acc, control) =>
-          (statusOptions.find(({ label }) => label === statuses[control])
-            ?.value || 0) + acc,
-        0
-      );
-      return totalControlsValue / totalControls.length;
-    });
+const getRadarChartLabels = (iso: ISO, labels: string[]) => {
+  return labels.map((label) => {
+    let processedLabel: string;
 
-  return ISO === '2013'
-    ? mergePoints(data.map(Math.round))
-    : data.map(Math.round);
+    switch (iso) {
+      case 'c5_2020':
+        processedLabel = removeTrailingParenthesis(label);
+        break;
+      default:
+        processedLabel = label;
+    }
+
+    processedLabel = truncateText(processedLabel, 25);
+
+    return processedLabel.split(' ');
+  });
+};
+
+const mergePoints = (d) => {
+  const merged = [
+    d[0],
+    (d[1] + d[2]) / 2,
+    (d[3] + d[4] + d[5]) / 3,
+    (d[6] + d[7] + d[8]) / 3,
+    (d[9] + d[10] + d[11] + d[12]) / 4,
+    d[13],
+    (d[14] + d[15]) / 2,
+    (d[16] + d[17] + d[18] + d[19] + d[20] + d[21] + d[22]) / 7,
+    (d[23] + d[24]) / 2,
+    (d[25] + d[26] + d[27]) / 3,
+    (d[28] + d[29]) / 2,
+    d[30],
+    (d[31] + d[32]) / 2,
+    (d[33] + d[34]) / 2,
+  ];
+
+  const rounded = merged.map((value) => Math.round(value));
+
+  return rounded;
+};
+
+const getMaturityLevels = (
+  statuses: Record<string, string>,
+  iso: ISO
+) => {
+  const { sections, controls } = frameworks[iso];
+
+  const rawLevels = sections.map(section => {
+    const sectionControls = controls.filter(
+      control => control.sectionId === section.id
+    );
+
+    if (sectionControls.length === 0) return 0;
+
+    const totalValue = sectionControls.reduce((sum, control) => {
+      const status = statuses[control.id];
+      return sum + (CSC_STATUS_TO_VALUE[status] ?? 0);
+    }, 0);
+
+    return totalValue / sectionControls.length;
+  });
+
+  const rounded = rawLevels.map(Math.round);
+
+  return iso === '2013' ? mergePoints(rounded) : rounded;
 };
 
 const RadarChart = ({
@@ -57,9 +97,17 @@ const RadarChart = ({
   ISO,
 }: {
   statuses: { [key: string]: string };
-  ISO: string;
+  ISO: ISO;
 }) => {
+  const { t } = useTranslation()
   const { theme } = useTheme();
+  const labels = getRadarChartLabels(
+    ISO, 
+    frameworks[ISO].sections
+      .map(sections => sections.id)
+      .map(sectionId => t(`csc/${ISO}:sections.${sectionId}.label`))
+  )
+  const pointsData = getMaturityLevels(statuses, ISO)
 
   // TODO: move to css variables?
   const isDark = theme === 'dark';
@@ -68,11 +116,11 @@ const RadarChart = ({
   const lineColor = isDark ? '#3b82f6' : '#2563eb';
 
   const data = {
-    labels: getRadarChartLabels(ISO),
+    labels: labels,
     datasets: [
       {
-        label: 'Maturity level (0–6)',
-        data: getMaturityLevels(statuses, ISO),
+        label: 'Maturity level (0-6)',
+        data: pointsData,
         backgroundColor: `${lineColor}33`,
         borderColor: lineColor,
         pointBackgroundColor: lineColor,

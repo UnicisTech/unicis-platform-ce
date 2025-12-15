@@ -7,46 +7,8 @@ import {
   SelectValue,
 } from '@/components/shadcn/ui/select';
 import { cn } from '@/components/shadcn/lib/utils';
-
-// TODO: move to config
-const statusOptions = [
-  { label: 'Unknown', value: '0' },
-  {
-    label: 'Not Applicable',
-    value: '1',
-    className: 'bg-[#B2B2B2] text-white font-bold',
-  },
-  {
-    label: 'Not Performed',
-    value: '2',
-    className: 'bg-[#FF0000] text-white font-bold',
-  },
-  {
-    label: 'Performed Informally',
-    value: '3',
-    className: 'bg-[#CA003F] text-white font-bold',
-  },
-  {
-    label: 'Planned',
-    value: '4',
-    className: 'bg-[#666666] text-white font-bold',
-  },
-  {
-    label: 'Well Defined',
-    value: '5',
-    className: 'bg-[#FFBE00] text-white font-bold',
-  },
-  {
-    label: 'Quantitatively Controlled',
-    value: '6',
-    className: 'bg-[#6AD900] text-white font-bold',
-  },
-  {
-    label: 'Continuously Improving',
-    value: '7',
-    className: 'bg-[#2F8F00] text-white font-bold',
-  },
-];
+import { CSC_STATUS_TO_CSS, CSC_STATUSES } from '@/lib/csc/csc-statuses';
+import { useTranslation } from 'next-i18next';
 
 const StatusSelector = ({
   isDisabled,
@@ -60,35 +22,40 @@ const StatusSelector = ({
   handler: (control: string, value: string) => Promise<string | undefined>;
 }) => {
   const [value, setValue] = useState<string>(statusValue);
+  const { t } = useTranslation()
 
   useEffect(() => {
     setValue(statusValue);
   }, [statusValue]);
 
   const handleChange = async (val: string) => {
-    const label = statusOptions.find((option) => option.value === val)
-      ?.label as string;
-    setValue(label);
-    handler(control, label);
+    const prev = value;
+    setValue(val);
+
+    try {
+      await handler(control, val);
+    } catch (e) {
+      setValue(prev);
+    }
   };
 
   return (
     <Select
-      value={statusOptions.find((option) => option.label === value)?.value}
+      value={value}
       onValueChange={handleChange}
       disabled={isDisabled}
     >
       <SelectTrigger className="w-full h-10">
-        <SelectValue placeholder="Status" />
+        <SelectValue placeholder={t('status')} />
       </SelectTrigger>
       <SelectContent>
-        {statusOptions.map((option) => (
+        {CSC_STATUSES.map(status => (
           <SelectItem
-            key={option.value}
-            value={option.value}
-            className={cn('cursor-pointer', option.className)}
+            key={status}
+            value={status}
+            className={cn('cursor-pointer font-bold', CSC_STATUS_TO_CSS[status])}
           >
-            {option.label}
+            {t(`statuses.${status}.label`)}
           </SelectItem>
         ))}
       </SelectContent>

@@ -6,10 +6,12 @@ import useISO from 'hooks/useISO';
 import { Loading } from '@/components/shared';
 import CscPanel from './CscPanel';
 import useTeamTasks from 'hooks/useTeamTasks';
+import { useTranslation } from 'next-i18next';
 
 const Dashboard = ({ team, iso }: { team: Team; iso: ISO[] }) => {
   const [activeTab, setActiveTab] = useState<ISO>(iso[0]);
   const { tasks, mutateTasks } = useTeamTasks(team.slug);
+  const { t } = useTranslation(['common', 'test', 'csc/2013']);
 
   if (!tasks) {
     return <Loading />;
@@ -21,7 +23,7 @@ const Dashboard = ({ team, iso }: { team: Team; iso: ISO[] }) => {
         {'Cybersecurity Controls Dashboard: '}
         {team.name}
       </h2>
-      <CscTabs iso={iso} activeTab={activeTab} setActiveTab={setActiveTab} />
+      <CscTabs frameworks={iso} activeTab={activeTab} setActiveTab={setActiveTab} />
       <CscPanel
         key={activeTab}
         slug={team.slug}

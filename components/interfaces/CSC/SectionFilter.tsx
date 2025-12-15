@@ -1,33 +1,27 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { getSectionFilterOptions } from '@/components/defaultLanding/data/configs/csc';
 import { MultiSelect } from '@/components/shadcn/ui/multi-select';
-
-interface Option {
-  label: string;
-  value: string;
-}
+import frameworks from '@/lib/csc/frameworks';
+import { ISO } from 'types';
+import { useTranslation } from 'next-i18next';
 
 const SectionFilter = ({
   ISO,
   setSectionFilter,
 }: {
-  ISO: string;
-  setSectionFilter: Dispatch<SetStateAction<Option[] | null>>;
+  ISO: ISO;
+  setSectionFilter: Dispatch<SetStateAction<string[] | null>>;
 }) => {
-  const options = getSectionFilterOptions(ISO);
-
-  const handleValueChange = (selectedValues: string[]) => {
-    const selectedOptions = options.filter((opt) =>
-      selectedValues.includes(opt.value)
-    );
-    setSectionFilter(selectedOptions);
-  };
-
+  const { t } = useTranslation()
+  const options = frameworks[ISO].sections.map(section => ({
+    label: t(`csc/${ISO}:sections.${section.id}.label`),
+    value: section.id
+  }))
+  
   return (
     <div className="w-full max-w-xs mx-1">
       <MultiSelect
         options={options}
-        onValueChange={handleValueChange}
+        onValueChange={setSectionFilter}
         placeholder="Choose a section"
         animation={0.2}
         maxCount={3}

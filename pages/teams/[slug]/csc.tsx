@@ -27,9 +27,22 @@ const Settings = () => {
 export async function getServerSideProps({
   locale,
 }: GetServerSidePropsContext) {
+  // TODO: define which translations should be added based on csc_iso team prop
+  const cscTranslations = [
+    'csc/2013',
+    'csc/2022',
+    'csc/mvps',
+    'csc/nistcsfv2',
+    'csc/eunis2',
+    'csc/gdpr',
+    'csc/cisv81',
+    'csc/soc2v2',
+    'csc/c5_2020',
+  ]
+
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+      ...(locale ? await serverSideTranslations(locale, ['common', 'test', ...cscTranslations]) : {}),
     },
   };
 }

@@ -30,7 +30,7 @@ const TeamCscAnalysis = ({
         </h2>
       </div>
       <CscTabs
-        iso={cscFrameworks}
+        frameworks={cscFrameworks}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />

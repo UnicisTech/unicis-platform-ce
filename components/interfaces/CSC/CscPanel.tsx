@@ -1,14 +1,13 @@
 import { useState, useCallback } from 'react';
 import toast from 'react-hot-toast';
-import { SectionFilter, StatusCscFilter, StatusesTable } from './';
+import { SectionFilter, StatusesTable } from './';
+import StatusFilter from './StatusFilter';
 import { PerPageSelector } from '@/components/shared';
-import {
-  statusOptions,
-} from '@/components/defaultLanding/data/configs/csc';
 import { ISO } from 'types';
 import useCscStatuses from 'hooks/useCscStatuses';
 import { Task } from '@prisma/client';
 import CscChartsLayout from './CscChartsLayout';
+import { CscStatus } from '@/lib/csc/csc-statuses';
 
 export async function updateCscStatus(params: {
   slug: string;
@@ -72,10 +71,8 @@ export default function CscPanel({
   mutateTasks,
 }: CscPanelProps) {
   const { statuses, mutateStatuses } = useCscStatuses(slug, iso);
-  const [sectionFilter, setSectionFilter] = useState<
-    null | { label: string; value: string }[]
-  >(null);
-  const [statusFilter, setStatusFilter] = useState<any[] | null>(null);
+  const [sectionFilter, setSectionFilter] = useState<string[] | null>(null);
+  const [statusFilter, setStatusFilter] = useState<CscStatus[] | null>(null);
   const [perPage, setPerPage] = useState<number>(10);
 
   const statusHandler = useCallback(
@@ -121,9 +118,8 @@ export default function CscPanel({
 
       <div className="flex flex-row justify-end">
         <SectionFilter ISO={iso} setSectionFilter={setSectionFilter} />
-        <StatusCscFilter
+        <StatusFilter
           setStatusFilter={setStatusFilter}
-          options={statusOptions}
         />
         <PerPageSelector
           perPage={perPage}

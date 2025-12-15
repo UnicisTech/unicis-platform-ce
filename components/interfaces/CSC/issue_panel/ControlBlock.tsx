@@ -10,10 +10,11 @@ import {
   SelectItem,
   SelectValue,
 } from '@/components/shadcn/ui/select';
-import { getControlOptions } from '@/components/defaultLanding/data/configs/csc';
 import StatusSelector from '../StatusSelector';
 import { Loader2, Trash2 } from 'lucide-react';
 import { Label } from '@/components/shadcn/ui/label';
+import { ISO } from 'types';
+import frameworks from '@/lib/csc/frameworks';
 
 const ControlBlock = ({
   ISO,
@@ -26,7 +27,7 @@ const ControlBlock = ({
   onStatusChange,
   onDeleteControl,
 }: {
-  ISO: string;
+  ISO: ISO;
   status: string;
   control: string;
   controls: string[];
@@ -42,14 +43,16 @@ const ControlBlock = ({
   const { t } = useTranslation('common');
   const [isButtonLoading, setIsButtonLoading] = useState(false);
 
-  const controlOptions = useMemo(() => getControlOptions(ISO), [ISO]);
-  const availableOptions = controlOptions.filter(
-    (option) => !controls.includes(option.value.control)
-  );
+  const availableControls = useMemo(() => {
+    return frameworks[ISO].controls.filter(control => !controls.includes(control.id))
+  }, [controls, ISO])
 
-  const controlData = controlOptions.find(
-    ({ value }) => value.control === control
-  )?.value;
+  const codeLabel = t(`csc/${ISO}:controls.${control}.code`)
+  const controlLabel = t(`csc/${ISO}:controls.${control}.control`)
+  const requirementsLabel = t(`csc/${ISO}:controls.${control}.requirements`)
+
+  const sectionId = frameworks[ISO].controls.find(({id}) => id === control)?.sectionId
+  const sectionLabel = t(`csc/${ISO}:sections.${sectionId}.label`)
 
   return (
     <div className="space-y-4">
@@ -63,31 +66,35 @@ const ControlBlock = ({
           >
             <SelectTrigger className="w-full">
               <SelectValue placeholder={t('choose-a-control')}>
-                {
-                  controlOptions.find(({ value }) => value.control === control)
-                    ?.label
-                }
+                {`${codeLabel}: ${sectionLabel}, ${controlLabel}`}
               </SelectValue>
             </SelectTrigger>
             <SelectContent
               className="w-(--radix-select-trigger-width) max-w-full"
               align="start"
             >
-              {availableOptions.map((option) => (
-                <SelectItem
-                  key={option.value.control}
-                  value={option.value.control}
-                  className="whitespace-normal break-words"
-                >
-                  <div className="text-sm font-medium leading-snug">
-                    {option.value.code}: {option.value.section}
-                  </div>
-                  <div className="text-xs text-muted-foreground leading-snug">
-                    {option.value.controlLabel || option.value.control} –{' '}
-                    {option.value.requirements}
-                  </div>
-                </SelectItem>
-              ))}
+              {availableControls.map(control => {
+                const codeLabel = t(`csc/${ISO}:controls.${control.id}.code`)
+                const controlLabel = t(`csc/${ISO}:controls.${control.id}.control`)
+                const requirementsLabel = t(`csc/${ISO}:controls.${control.id}.requirements`)
+                const sectionLabel = t(`csc/${ISO}:sections.${control.sectionId}.label`)
+
+                return (
+                  <SelectItem
+                    key={control.id}
+                    value={control.id}
+                    className="whitespace-normal break-words"
+                  >
+                    <div className="text-sm font-medium leading-snug">
+                      {codeLabel}: {sectionLabel}
+                    </div>
+                    <div className="text-xs text-muted-foreground leading-snug">
+                      {controlLabel} –{' '}
+                      {requirementsLabel}
+                    </div>
+                  </SelectItem>
+                )
+              })}
             </SelectContent>
           </Select>
 
@@ -110,41 +117,36 @@ const ControlBlock = ({
         </div>
       </div>
 
-      {controlData?.code && (
-        <div className="space-y-1">
-          <Label>{t('code')}</Label>
-          <Input value={controlData.code} readOnly />
-        </div>
-      )}
-
-      {controlData?.section && (
-        <div className="space-y-1">
-          <Label>{t('section')}</Label>
-          <Input value={controlData.section} readOnly />
-        </div>
-      )}
-
-      <div className="space-y-1">
-        <Label>{t('status')}</Label>
-        <StatusSelector
-          statusValue={status}
-          control={control}
-          handler={onStatusChange}
-          isDisabled={false}
-        />
-      </div>
-
-      {controlData?.requirements && (
-        <div className="space-y-1">
-          <Label>{t('requirements')}</Label>
-          <Textarea
-            value={controlData.requirements}
-            readOnly
-            className="resize-y max-h-[20vh]"
-          />
-        </div>
-      )}
-
+      {control === ""
+        ? null
+        : <>
+            <div className="space-y-1">
+              <Label>{t('code')}</Label>
+              <Input value={codeLabel} readOnly />
+            </div>
+            <div className="space-y-1">
+              <Label>{t('section')}</Label>
+              <Input value={sectionLabel} readOnly />
+            </div>
+            <div className="space-y-1">
+              <Label>{t('status')}</Label>
+              <StatusSelector
+                statusValue={status}
+                control={control}
+                handler={onStatusChange}
+                isDisabled={false}
+              />
+            </div>
+            <div className="space-y-1">
+              <Label>{t('requirements')}</Label>
+              <Textarea
+                value={requirementsLabel}
+                readOnly
+                className="resize-y max-h-[20vh]"
+              />
+            </div>
+          </>
+      }
       <div className="h-px w-full bg-muted my-6" />
     </div>
   );

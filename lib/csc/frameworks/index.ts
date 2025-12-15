@@ -8,8 +8,7 @@ import gdpr from './gdpr'
 import cis_v_81 from './cis_v_81'
 import soc2V2 from './soc2-v2'
 
-import { ISO } from 'types'
-import { CscFremaworkControl } from '@/components/defaultLanding/data/configs/csc'
+import { ISO, FrameworkData } from 'types'
 
 const frameworks = {
     '2013': iso_2013,
@@ -21,7 +20,6 @@ const frameworks = {
     'cisv81': cis_v_81,
     'soc2v2': soc2V2,
     'c5_2020': c5_2020,
-
 }
 
-export default frameworks as Record<ISO, CscFremaworkControl[]>
+export default frameworks as Record<ISO, FrameworkData>

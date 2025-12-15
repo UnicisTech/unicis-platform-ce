@@ -1,2867 +1,1451 @@
-export default [
-    {
-        id: "soc2-v2-cc1-1",
-        section: "Control Environment",
-        code: "CC1.1",
-        label: "COSO Principle 1",
-        control: "CC1.1: COSO Principle 1",
-        requirements: "The entity demonstrates a commitment to integrity and ethical values."
-    },
-    {
-        id: "soc2-v2-cc1-1-1",
-        section: "Control Environment",
-        code: "CC1.1.1",
-        label: "COSO Principle 1",
-        control: "CC1.1.1: COSO Principle 1",
-        requirements: "Sets the Tone at the Top — The board of directors and management, at all levels, demonstrate through their directives, actions, and behavior the importance of integrity and ethical values to support the functioning of the system of internal control."
-    },
-    {
-        id: "soc2-v2-cc1-1-2",
-        section: "Control Environment",
-        code: "CC1.1.2",
-        label: "COSO Principle 1",
-        control: "CC1.1.2: COSO Principle 1",
-        requirements: "Establishes Standards of Conduct — The expectations of the board of directors and senior management concerning integrity and ethical values are defined in the entity’s standards of conduct and understood at all levels of the entity and by outsourced service providers and business partners."
-    },
-    {
-        id: "soc2-v2-cc1-1-3",
-        section: "Control Environment",
-        code: "CC1.1.3",
-        label: "COSO Principle 1",
-        control: "CC1.1.3: COSO Principle 1",
-        requirements: "Evaluates Adherence to Standards of Conduct — Processes are in place to evaluate the performance of individuals and teams against the entity’s expected standards of conduct."
-    },
-    {
-        id: "soc2-v2-cc1-1-4",
-        section: "Control Environment",
-        code: "CC1.1.4",
-        label: "COSO Principle 1",
-        control: "CC1.1.4: COSO Principle 1",
-        requirements: "Addresses Deviations in a Timely Manner — Deviations from the entity’s expected standards of conduct are identified and remedied in a timely and consistent manner."
-    },
-    {
-        id: "soc2-v2-cc1-1-5",
-        section: "Control Environment",
-        code: "CC1.1.5",
-        label: "COSO Principle 1",
-        control: "CC1.1.5: COSO Principle 1",
-        requirements: "Considers Contractors and Vendor Employees in Demonstrating Its Commitment — Management and the board of directors consider the use of contractors and vendor employees in its processes for establishing standards of conduct, evaluating adherence to those standards, and addressing deviations in a timely manner."
-    },
-    {
-        id: "soc2-v2-cc1-2",
-        section: "Control Environment",
-        code: "CC1.2",
-        label: "COSO Principle 2",
-        control: "CC1.2: COSO Principle 2",
-        requirements: "The board of directors demonstrates independence from management and exercises oversight of the development and performance of internal control."
-    },
-    {
-        id: "soc2-v2-cc1-2-1",
-        section: "Control Environment",
-        code: "CC1.2.1",
-        label: "COSO Principle 2",
-        control: "CC1.2.1: COSO Principle 2",
-        requirements: "Establishes Oversight Responsibilities — The board of directors identifies and accepts its oversight responsibilities in relation to established requirements and expectations."
-    },
-    {
-        id: "soc2-v2-cc1-2-2",
-        section: "Control Environment",
-        code: "CC1.2.2",
-        label: "COSO Principle 2",
-        control: "CC1.2.2: COSO Principle 2",
-        requirements: "Applies Relevant Expertise — The board of directors defines, maintains, and periodically evaluates the skills and expertise needed among its members to enable them to ask probing questions of senior management and take commensurate action."
-    },
-    {
-        id: "soc2-v2-cc1-2-3",
-        section: "Control Environment",
-        code: "CC1.2.3",
-        label: "COSO Principle 2",
-        control: "CC1.2.3: COSO Principle 2",
-        requirements: "Operates Independently — The board of directors has sufficient members who are independent from management and objective in evaluations and decision making."
-    },
-    {
-        id: "soc2-v2-cc1-2-4",
-        section: "Control Environment",
-        code: "CC1.2.4",
-        label: "COSO Principle 2",
-        control: "CC1.2.4: COSO Principle 2",
-        requirements: "Supplements Board Expertise — The board of directors supplements its expertise relevant to security, availability, processing integrity, confidentiality, and privacy, as needed, through the use of a subcommittee or consultants."
-    },
-    {
-        id: "soc2-v2-cc1-3",
-        section: "Control Environment",
-        code: "CC1.3",
-        label: "COSO Principle 3",
-        control: "CC1.3: COSO Principle 3",
-        requirements: "Management establishes, with board oversight, structures, reporting lines, and appropriate authorities and responsibilities in the pursuit of objectives."
-    },
-    {
-        id: "soc2-v2-cc1-3-1",
-        section: "Control Environment",
-        code: "CC1.3.1",
-        label: "COSO Principle 3",
-        control: "CC1.3.1: COSO Principle 3",
-        requirements: "Considers All Structures of the Entity — Management and the board of directors consider the multiple structures used (including operating units, legal entities, geographic distribution, and outsourced service providers) to support the achievement of objectives."
-    },
-    {
-        id: "soc2-v2-cc1-3-2",
-        section: "Control Environment",
-        code: "CC1.3.2",
-        label: "COSO Principle 3",
-        control: "CC1.3.2: COSO Principle 3",
-        requirements: "Establishes Reporting Lines — Management designs and evaluates lines of reporting for each entity structure to enable execution of authorities and responsibilities and flow of information to manage the activities of the entity."
-    },
-    {
-        id: "soc2-v2-cc1-3-3",
-        section: "Control Environment",
-        code: "CC1.3.3",
-        label: "COSO Principle 3",
-        control: "CC1.3.3: COSO Principle 3",
-        requirements: "Defines, Assigns, and Limits Authorities and Responsibilities — Management and the board of directors delegate authority, define responsibilities, and use appropriate processes and technology to assign responsibility and segregate duties as necessary at the various levels of the organization."
-    },
-    {
-        id: "soc2-v2-cc1-3-4",
-        section: "Control Environment",
-        code: "CC1.3.4",
-        label: "COSO Principle 3",
-        control: "CC1.3.4: COSO Principle 3",
-        requirements: "Addresses Specific Requirements When Defining Authorities and Responsibilities — Management and the board of directors consider requirements relevant to security, availability, processing integrity, confidentiality, and privacy when defining authorities and responsibilities."
-    },
-    {
-        id: "soc2-v2-cc1-3-5",
-        section: "Control Environment",
-        code: "CC1.3.5",
-        label: "COSO Principle 3",
-        control: "CC1.3.5: COSO Principle 3",
-        requirements: "Considers Interactions With External Parties When Establishing Structures, Reporting Lines, Authorities, and Responsibilities — Management and the board of directors consider the need for the entity to interact with and monitor the activities of external parties when establishing structures, reporting lines, authorities, and responsibilities."
-    },
-    {
-        id: "soc2-v2-cc1-4",
-        section: "Control Environment",
-        code: "CC1.4",
-        label: "COSO Principle 4",
-        control: "CC1.4: COSO Principle 4",
-        requirements: "The entity demonstrates a commitment to attract, develop, and retain competent individuals in alignment with objectives."
-    },
-    {
-        id: "soc2-v2-cc1-4-1",
-        section: "Control Environment",
-        code: "CC1.4.1",
-        label: "COSO Principle 4",
-        control: "CC1.4.1: COSO Principle 4",
-        requirements: "Establishes Policies and Practices — Policies and practices reflect expectations of competence necessary to support the achievement of objectives."
-    },
-    {
-        id: "soc2-v2-cc1-4-2",
-        section: "Control Environment",
-        code: "CC1.4.2",
-        label: "COSO Principle 4",
-        control: "CC1.4.2: COSO Principle 4",
-        requirements: "Evaluates Competence and Addresses Shortcomings — The board of directors and management evaluate competence across the entity and in outsourced service providers in relation to established policies and practices and act as necessary to address shortcomings."
-    },
-    {
-        id: "soc2-v2-cc1-4-3",
-        section: "Control Environment",
-        code: "CC1.4.3",
-        label: "COSO Principle 4",
-        control: "CC1.4.3: COSO Principle 4",
-        requirements: "Attracts, Develops, and Retains Individuals — The entity provides the mentoring and training needed to attract, develop, and retain sufficient and competent personnel and outsourced service providers to support the achievement of objectives."
-    },
-    {
-        id: "soc2-v2-cc1-4-4",
-        section: "Control Environment",
-        code: "CC1.4.4",
-        label: "COSO Principle 4",
-        control: "CC1.4.4: COSO Principle 4",
-        requirements: "Plans and Prepares for Succession — Senior management and the board of directors develop contingency plans for assignments of responsibility important for internal control."
-    },
-    {
-        id: "soc2-v2-cc1-4-5",
-        section: "Control Environment",
-        code: "CC1.4.5",
-        label: "COSO Principle 4",
-        control: "CC1.4.5: COSO Principle 4",
-        requirements: "Considers the Background of Individuals — The entity considers the background of potential and existing personnel, contractors, and vendor employees when determining whether to employ and retain the individuals."
-    },
-    {
-        id: "soc2-v2-cc1-4-6",
-        section: "Control Environment",
-        code: "CC1.4.6",
-        label: "COSO Principle 4",
-        control: "CC1.4.6: COSO Principle 4",
-        requirements: "Considers the Technical Competency of Individuals — The entity considers the technical competency of potential and existing personnel, contractors, and vendor employees when determining whether to employ and retain the individuals."
-    },
-    {
-        id: "soc2-v2-cc1-4-7",
-        section: "Control Environment",
-        code: "CC1.4.7",
-        label: "COSO Principle 4",
-        control: "CC1.4.7: COSO Principle 4",
-        requirements: "Provides Training to Maintain Technical Competencies — The entity provides training programs, including continuing education and training, to ensure skill sets and technical competency of existing personnel, contractors, and vendor employees are developed and maintained."
-    },
-    {
-        id: "soc2-v2-cc1-5",
-        section: "Control Environment",
-        code: "CC1.5",
-        label: "COSO Principle 5",
-        control: "CC1.5: COSO Principle 5",
-        requirements: "The entity holds individuals accountable for their internal control responsibilities in the pursuit of objectives."
-    },
-    {
-        id: "soc2-v2-cc1-5-1",
-        section: "Control Environment",
-        code: "CC1.5.1",
-        label: "COSO Principle 5",
-        control: "CC1.5.1: COSO Principle 5",
-        requirements: "Enforces Accountability Through Structures, Authorities, and Responsibilities — Management and the board of directors establish the mechanisms to communicate and hold individuals accountable for performance of internal control responsibilities across the entity and implement corrective action as necessary."
-    },
-    {
-        id: "soc2-v2-cc1-5-2",
-        section: "Control Environment",
-        code: "CC1.5.2",
-        label: "COSO Principle 5",
-        control: "CC1.5.2: COSO Principle 5",
-        requirements: "Establishes Performance Measures, Incentives, and Rewards — Management and the board of directors establish performance measures, incentives, and other rewards appropriate for responsibilities at all levels of the entity, reflecting appropriate dimensions of performance and expected standards of conduct, and considering the achievement of both short-term and longer-term objectives."
-    },
-    {
-        id: "soc2-v2-cc1-5-3",
-        section: "Control Environment",
-        code: "CC1.5.3",
-        label: "COSO Principle 5",
-        control: "CC1.5.3: COSO Principle 5",
-        requirements: "Evaluates Performance Measures, Incentives, and Rewards for Ongoing Relevance — Management and the board of directors align incentives and rewards with the fulfillment of internal control responsibilities in the achievement of objectives."
-    },
-    {
-        id: "soc2-v2-cc1-5-4",
-        section: "Control Environment",
-        code: "CC1.5.4",
-        label: "COSO Principle 5",
-        control: "CC1.5.4: COSO Principle 5",
-        requirements: "Considers Excessive Pressures — Management and the board of directors evaluate and adjust pressures associated with the achievement of objectives as they assign responsibilities, develop performance measures, and evaluate performance."
-    },
-    {
-        id: "soc2-v2-cc1-5-5",
-        section: "Control Environment",
-        code: "CC1.5.5",
-        label: "COSO Principle 5",
-        control: "CC1.5.5: COSO Principle 5",
-        requirements: "Evaluates Performance and Rewards or Disciplines Individuals — Management and the board of directors evaluate performance of internal control responsibilities, including adherence to standards of conduct and expected levels of competence, and provide rewards or exercise disciplinary action, as appropriate."
-    },
-    {
-        id: "soc2-v2-cc2-1",
-        section: "Communication and Information",
-        code: "CC2.1",
-        label: "COSO Principle 13",
-        control: "CC2.1: COSO Principle 13",
-        requirements: "The entity obtains or generates and uses relevant, quality information to support the functioning of internal control."
-    },
-    {
-        id: "soc2-v2-cc2-1-1",
-        section: "Communication and Information",
-        code: "CC2.1.1",
-        label: "COSO Principle 13",
-        control: "CC2.1.1: COSO Principle 13",
-        requirements: "Identifies Information Requirements — A process is in place to identify the information required and expected to support the functioning of the other components of internal control and the achievement of the entity’s objectives."
-    },
-    {
-        id: "soc2-v2-cc2-1-2",
-        section: "Communication and Information",
-        code: "CC2.1.2",
-        label: "COSO Principle 13",
-        control: "CC2.1.2: COSO Principle 13",
-        requirements: "Captures Internal and External Sources of Data — Information systems capture internal and external sources of data."
-    },
-    {
-        id: "soc2-v2-cc2-1-3",
-        section: "Communication and Information",
-        code: "CC2.1.3",
-        label: "COSO Principle 13",
-        control: "CC2.1.3: COSO Principle 13",
-        requirements: "Processes Relevant Data Into Information — Information systems process and transform relevant data into information."
-    },
-    {
-        id: "soc2-v2-cc2-1-4",
-        section: "Communication and Information",
-        code: "CC2.1.4",
-        label: "COSO Principle 13",
-        control: "CC2.1.4: COSO Principle 13",
-        requirements: "Maintains Quality Throughout Processing — Information systems produce information that is timely, current, accurate, complete, accessible, protected, verifiable, and retained. Information is reviewed to assess its relevance in supporting the internal control components."
-    },
-    {
-        id: "soc2-v2-cc2-2",
-        section: "Communication and Information",
-        code: "CC2.2",
-        label: "COSO Principle 14",
-        control: "CC2.2: COSO Principle 14",
-        requirements: "The entity internally communicates information, including objectives and responsibilities for internal control, necessary to support the functioning of internal control."
-    },
-    {
-        id: "soc2-v2-cc2-2-1",
-        section: "Communication and Information",
-        code: "CC2.2.1",
-        label: "COSO Principle 14",
-        control: "CC2.2.1: COSO Principle 14",
-        requirements: "Communicates Internal Control Information — A process is in place to communicate required information to enable all personnel to understand and carry out their internal control responsibilities."
-    },
-    {
-        id: "soc2-v2-cc2-2-2",
-        section: "Communication and Information",
-        code: "CC2.2.2",
-        label: "COSO Principle 14",
-        control: "CC2.2.2: COSO Principle 14",
-        requirements: "Communicates With the Board of Directors — Communication exists between management and the board of directors so that both have information needed to fulfill their roles with respect to the entity’s objectives."
-    },
-    {
-        id: "soc2-v2-cc2-2-3",
-        section: "Communication and Information",
-        code: "CC2.2.3",
-        label: "COSO Principle 14",
-        control: "CC2.2.3: COSO Principle 14",
-        requirements: "Provides Separate Communication Lines — Separate communication channels, such as whistle-blower hotlines, are in place and serve as fail-safe mechanisms to enable anonymous or confidential communication when normal channels are inoperative or ineffective."
-    },
-    {
-        id: "soc2-v2-cc2-2-4",
-        section: "Communication and Information",
-        code: "CC2.2.4",
-        label: "COSO Principle 14",
-        control: "CC2.2.4: COSO Principle 14",
-        requirements: "Selects Relevant Method of Communication — The method of communication considers the timing, audience, and nature of the information."
-    },
-    {
-        id: "soc2-v2-cc2-2-5",
-        section: "Communication and Information",
-        code: "CC2.2.5",
-        label: "COSO Principle 14",
-        control: "CC2.2.5: COSO Principle 14",
-        requirements: "Communicates Responsibilities — Entity personnel with responsibility for designing, developing, implementing, operating, maintaining, or monitoring system controls receive communications about their responsibilities, including changes in their responsibilities, and have the information necessary to carry out those responsibilities."
-    },
-    {
-        id: "soc2-v2-cc2-2-6",
-        section: "Communication and Information",
-        code: "CC2.2.6",
-        label: "COSO Principle 14",
-        control: "CC2.2.6: COSO Principle 14",
-        requirements: "Communicates Information on Reporting Failures, Incidents, Concerns, and Other Matters — Entity personnel are provided with information on how to report systems failures, incidents, concerns, and other complaints to personnel."
-    },
-    {
-        id: "soc2-v2-cc2-2-7",
-        section: "Communication and Information",
-        code: "CC2.2.7",
-        label: "COSO Principle 14",
-        control: "CC2.2.7: COSO Principle 14",
-        requirements: "Communicates Objectives and Changes to Objectives — The entity communicates its objectives and changes to those objectives to personnel in a timely manner."
-    },
-    {
-        id: "soc2-v2-cc2-2-8",
-        section: "Communication and Information",
-        code: "CC2.2.8",
-        label: "COSO Principle 14",
-        control: "CC2.2.8: COSO Principle 14",
-        requirements: "Communicates Information to Improve Security Knowledge and Awareness — The entity communicates information to improve security knowledge and awareness and to model appropriate security behaviors to personnel through a security awareness training program."
-    },
-    {
-        id: "soc2-v2-cc2-2-9",
-        section: "Communication and Information",
-        code: "CC2.2.9",
-        label: "COSO Principle 14",
-        control: "CC2.2.9: COSO Principle 14",
-        requirements: "Communicates Information About System Operation and Boundaries — The entity prepares and communicates information about the design and operation of the system and its boundaries to authorized personnel to enable them to understand their role in the system and the results of system operation."
-    },
-    {
-        id: "soc2-v2-cc2-2-10",
-        section: "Communication and Information",
-        code: "CC2.2.10",
-        label: "COSO Principle 14",
-        control: "CC2.2.10: COSO Principle 14",
-        requirements: "Communicates System Objectives — The entity communicates its objectives to personnel to enable them to carry out their responsibilities."
-    },
-    {
-        id: "soc2-v2-cc2-2-11",
-        section: "Communication and Information",
-        code: "CC2.2.11",
-        label: "COSO Principle 14",
-        control: "CC2.2.11: COSO Principle 14",
-        requirements: "Communicates System Changes — System changes that affect responsibilities or the achievement of the entity's objectives are communicated in a timely manner."
-    },
-    {
-        id: "soc2-v2-cc2-3",
-        section: "Communication and Information",
-        code: "CC2.3",
-        label: "COSO Principle 15",
-        control: "CC2.3: COSO Principle 15",
-        requirements: "The entity communicates with external parties regarding matters affecting the functioning of internal control."
-    },
-    {
-        id: "soc2-v2-cc2-3-1",
-        section: "Communication and Information",
-        code: "CC2.3.1",
-        label: "COSO Principle 15",
-        control: "CC2.3.1: COSO Principle 15",
-        requirements: "Communicates to External Parties — Processes are in place to communicate relevant and timely information to external parties, including shareholders, partners, owners, regulators, customers, financial analysts, and other external parties."
-    },
-    {
-        id: "soc2-v2-cc2-3-2",
-        section: "Communication and Information",
-        code: "CC2.3.2",
-        label: "COSO Principle 15",
-        control: "CC2.3.2: COSO Principle 15",
-        requirements: "Enables Inbound Communications — Open communication channels allow input from customers, consumers, suppliers, external auditors, regulators, financial analysts, and others, providing management and the board of directors with relevant information."
-    },
-    {
-        id: "soc2-v2-cc2-3-3",
-        section: "Communication and Information",
-        code: "CC2.3.3",
-        label: "COSO Principle 15",
-        control: "CC2.3.3: COSO Principle 15",
-        requirements: "Communicates With the Board of Directors — Relevant information resulting from assessments conducted by external parties is communicated to the board of directors."
-    },
-    {
-        id: "soc2-v2-cc2-3-4",
-        section: "Communication and Information",
-        code: "CC2.3.4",
-        label: "COSO Principle 15",
-        control: "CC2.3.4: COSO Principle 15",
-        requirements: "Provides Separate Communication Lines — Separate communication channels, such as whistle-blower hotlines, are in place and serve as fail-safe mechanisms to enable anonymous or confidential communication when normal channels are inoperative or ineffective."
-    },
-    {
-        id: "soc2-v2-cc2-3-5",
-        section: "Communication and Information",
-        code: "CC2.3.5",
-        label: "COSO Principle 15",
-        control: "CC2.3.5: COSO Principle 15",
-        requirements: "Selects Relevant Method of Communication — The method of communication considers the timing, audience, and nature of the communication and legal, regulatory, and fiduciary requirements and expectations."
-    },
-    {
-        id: "soc2-v2-cc2-3-6",
-        section: "Communication and Information",
-        code: "CC2.3.6",
-        label: "COSO Principle 15",
-        control: "CC2.3.6: COSO Principle 15",
-        requirements: "Communicates Objectives Related to Confidentiality and Changes to Objectives — The entity communicates, to external users, vendors, business partners and others whose products and services are part of the system, objectives and changes to objectives related to confidentiality."
-    },
-    {
-        id: "soc2-v2-cc2-3-7",
-        section: "Communication and Information",
-        code: "CC2.3.7",
-        label: "COSO Principle 15",
-        control: "CC2.3.7: COSO Principle 15",
-        requirements: "Communicates Objectives Related to Privacy and Changes to Objectives — The entity communicates, to external users, vendors, business partners and others whose products and services are part of the system, objectives related to privacy and changes to those objectives."
-    },
-    {
-        id: "soc2-v2-cc2-3-8",
-        section: "Communication and Information",
-        code: "CC2.3.8",
-        label: "COSO Principle 15",
-        control: "CC2.3.8: COSO Principle 15",
-        requirements: "Communicates Information About System Operation and Boundaries—The entity prepares and communicates information about the design and operation of the system and its boundaries to authorized external users to permit users to understand their role in the system and the results of system operation."
-    },
-    {
-        id: "soc2-v2-cc2-3-9",
-        section: "Communication and Information",
-        code: "CC2.3.9",
-        label: "COSO Principle 15",
-        control: "CC2.3.9: COSO Principle 15",
-        requirements: "Communicates System Objectives — The entity communicates its system objectives to appropriate external users."
-    },
-    {
-        id: "soc2-v2-cc2-3-10",
-        section: "Communication and Information",
-        code: "CC2.3.10",
-        label: "COSO Principle 15",
-        control: "CC2.3.10: COSO Principle 15",
-        requirements: "Communicates System Responsibilities — External users with responsibility for designing, developing, implementing, operating, maintaining, and monitoring system controls receive communications about their responsibilities and have the information necessary to carry out those responsibilities."
-    },
-    {
-        id: "soc2-v2-cc2-3-11",
-        section: "Communication and Information",
-        code: "CC2.3.11",
-        label: "COSO Principle 15",
-        control: "CC2.3.11: COSO Principle 15",
-        requirements: "Communicates Information on Reporting System Failures, Incidents, Concerns, and Other Matters — External users are provided with information on how to report systems failures, incidents, concerns, and other complaints to appropriate personnel."
-    },
-    {
-        id: "soc2-v2-cc3-1",
-        section: "Risk Assessment",
-        code: "CC3.1",
-        label: "COSO Principle 6",
-        control: "CC3.1: COSO Principle 6",
-        requirements: "The entity specifies objectives with sufficient clarity to enable the identification and assessment of risks relating to objectives."
-    },
-    {
-        id: "soc2-v2-cc3-1-1",
-        section: "Risk Assessment",
-        code: "CC3.1.1",
-        label: "COSO Principle 6",
-        control: "CC3.1.1: COSO Principle 6",
-        requirements: "Operations Objectives — Reflects Management's Choices — Operations objectives reflect management's choices about structure, industry considerations, and performance of the entity."
-    },
-    {
-        id: "soc2-v2-cc3-1-2",
-        section: "Risk Assessment",
-        code: "CC3.1.2",
-        label: "COSO Principle 6",
-        control: "CC3.1.2: COSO Principle 6",
-        requirements: "Considers Tolerances for Risk — Management considers the acceptable levels of variation relative to the achievement of operations objectives."
-    },
-    {
-        id: "soc2-v2-cc3-1-3",
-        section: "Risk Assessment",
-        code: "CC3.1.3",
-        label: "COSO Principle 6",
-        control: "CC3.1.3: COSO Principle 6",
-        requirements: "Includes Operations and Financial Performance Goals — The organization reflects the desired level of operations and financial performance for the entity within operations objectives."
-    },
-    {
-        id: "soc2-v2-cc3-1-4",
-        section: "Risk Assessment",
-        code: "CC3.1.4",
-        label: "COSO Principle 6",
-        control: "CC3.1.4: COSO Principle 6",
-        requirements: "Forms a Basis for Committing of Resources — Management uses operations objectives as a basis for allocating resources needed to attain desired operations and financial performance."
-    },
-    {
-        id: "soc2-v2-cc3-1-5",
-        section: "Risk Assessment",
-        code: "CC3.1.5",
-        label: "COSO Principle 6",
-        control: "CC3.1.5: COSO Principle 6",
-        requirements: "External Financial Reporting Objectives — Complies With Applicable Accounting Standards — Financial reporting objectives are consistent with accounting principles suitable and available for that entity. The accounting principles selected are appropriate in the circumstances."
-    },
-    {
-        id: "soc2-v2-cc3-1-6",
-        section: "Risk Assessment",
-        code: "CC3.1.6",
-        label: "COSO Principle 6",
-        control: "CC3.1.6: COSO Principle 6",
-        requirements: "Considers Materiality — Management considers materiality in financial statement presentation."
-    },
-    {
-        id: "soc2-v2-cc3-1-7",
-        section: "Risk Assessment",
-        code: "CC3.1.7",
-        label: "COSO Principle 6",
-        control: "CC3.1.7: COSO Principle 6",
-        requirements: "Reflects Entity Activities — External reporting reflects the underlying transactions and events to show qualitative characteristics and assertions."
-    },
-    {
-        id: "soc2-v2-cc3-1-8",
-        section: "Risk Assessment",
-        code: "CC3.1.8",
-        label: "COSO Principle 6",
-        control: "CC3.1.8: COSO Principle 6",
-        requirements: "External Nonfinancial Reporting Objectives — Complies With Externally Established Frameworks — Management establishes objectives consistent with laws and regulations or standards and frameworks of recognized external organizations."
-    },
-    {
-        id: "soc2-v2-cc3-1-9",
-        section: "Risk Assessment",
-        code: "CC3.1.9",
-        label: "COSO Principle 6",
-        control: "CC3.1.9: COSO Principle 6",
-        requirements: "Considers the Required Level of Precision — Management reflects the required level of precision and accuracy suitable for user needs and based on criteria established by third parties in nonfinancial reporting."
-    },
-    {
-        id: "soc2-v2-cc3-1-10",
-        section: "Risk Assessment",
-        code: "CC3.1.10",
-        label: "COSO Principle 6",
-        control: "CC3.1.10: COSO Principle 6",
-        requirements: "Reflects Entity Activities — External reporting reflects the underlying transactions and events within a range of acceptable limits."
-    },
-    {
-        id: "soc2-v2-cc3-1-11",
-        section: "Risk Assessment",
-        code: "CC3.1.11",
-        label: "COSO Principle 6",
-        control: "CC3.1.11: COSO Principle 6",
-        requirements: "Internal Reporting Objectives — Reflects Management's Choices — Internal reporting provides management with accurate and complete information regarding management's choices and information needed in managing the entity."
-    },
-    {
-        id: "soc2-v2-cc3-1-12",
-        section: "Risk Assessment",
-        code: "CC3.1.12",
-        label: "COSO Principle 6",
-        control: "CC3.1.12: COSO Principle 6",
-        requirements: "Considers the Required Level of Precision — Management reflects the required level of precision and accuracy suitable for user needs in nonfinancial reporting objectives and materiality within financial reporting objectives."
-    },
-    {
-        id: "soc2-v2-cc3-1-13",
-        section: "Risk Assessment",
-        code: "CC3.1.13",
-        label: "COSO Principle 6",
-        control: "CC3.1.13: COSO Principle 6",
-        requirements: "Reflects Entity Activities — Internal reporting reflects the underlying transactions and events within a range of acceptable limits."
-    },
-    {
-        id: "soc2-v2-cc3-1-14",
-        section: "Risk Assessment",
-        code: "CC3.1.14",
-        label: "COSO Principle 6",
-        control: "CC3.1.14: COSO Principle 6",
-        requirements: "Compliance Objectives — Reflects External Laws and Regulations — Laws and regulations establish minimum standards of conduct, which the entity integrates into compliance objectives."
-    },
-    {
-        id: "soc2-v2-cc3-1-15",
-        section: "Risk Assessment",
-        code: "CC3.1.15",
-        label: "COSO Principle 6",
-        control: "CC3.1.15: COSO Principle 6",
-        requirements: "Considers Tolerances for Risk — Management considers the acceptable levels of variation relative to the achievement of operations objectives."
-    },
-    {
-        id: "soc2-v2-cc3-1-16",
-        section: "Risk Assessment",
-        code: "CC3.1.16",
-        label: "COSO Principle 6",
-        control: "CC3.1.16: COSO Principle 6",
-        requirements: "Establishes Sub-objectives to Support Objectives — Management identifies sub-objectives related to security, availability, processing integrity, confidentiality, and privacy to support the achievement of the entity’s objectives related to reporting, operations, and compliance."
-    },
-    {
-        id: "soc2-v2-cc3-2",
-        section: "Risk Assessment",
-        code: "CC3.2",
-        label: "COSO Principle 7",
-        control: "CC3.2: COSO Principle 7",
-        requirements: "The entity identifies risks to the achievement of its objectives across the entity and analyzes risks as a basis for determining how the risks should be managed."
-    },
-    {
-        id: "soc2-v2-cc3-2-1",
-        section: "Risk Assessment",
-        code: "CC3.2.1",
-        label: "COSO Principle 7",
-        control: "CC3.2.1: COSO Principle 7",
-        requirements: "Includes Entity, Subsidiary, Division, Operating Unit, and Functional Levels — The entity identifies and assesses risk at the entity, subsidiary, division, operating unit, and functional levels relevant to the achievement of objectives."
-    },
-    {
-        id: "soc2-v2-cc3-2-2",
-        section: "Risk Assessment",
-        code: "CC3.2.2",
-        label: "COSO Principle 7",
-        control: "CC3.2.2: COSO Principle 7",
-        requirements: "Analyzes Internal and External Factors — Risk identification considers both internal and external factors and their impact on the achievement of objectives."
-    },
-    {
-        id: "soc2-v2-cc3-2-3",
-        section: "Risk Assessment",
-        code: "CC3.2.3",
-        label: "COSO Principle 7",
-        control: "CC3.2.3: COSO Principle 7",
-        requirements: "Involves Appropriate Levels of Management — The entity puts into place effective risk assessment mechanisms that involve appropriate levels of management."
-    },
-    {
-        id: "soc2-v2-cc3-2-4",
-        section: "Risk Assessment",
-        code: "CC3.2.4",
-        label: "COSO Principle 7",
-        control: "CC3.2.4: COSO Principle 7",
-        requirements: "Estimates Significance of Risks Identified — Identified risks are analyzed through a process that includes estimating the potential significance of the risk."
-    },
-    {
-        id: "soc2-v2-cc3-2-5",
-        section: "Risk Assessment",
-        code: "CC3.2.5",
-        label: "COSO Principle 7",
-        control: "CC3.2.5: COSO Principle 7",
-        requirements: "Determines How to Respond to Risks — Risk assessment includes considering how the risk should be managed and whether to accept, avoid, reduce, or share the risk."
-    },
-    {
-        id: "soc2-v2-cc3-2-6",
-        section: "Risk Assessment",
-        code: "CC3.2.6",
-        label: "COSO Principle 7",
-        control: "CC3.2.6: COSO Principle 7",
-        requirements: "Identifies and Assesses Criticality of Information Assets and Identifies Threats and Vulnerabilities — The entity's risk identification and assessment process includes (1) identifying information assets, including physical devices and systems, virtual devices, software, data and data flows, external information systems, and organizational roles; (2) assessing the criticality of those information assets; (3) identifying the threats to the assets from intentional (including malicious) and unintentional acts and environmental events; and (4) identifying the vulnerabilities of the identified assets."
-    },
-    {
-        id: "soc2-v2-cc3-2-7",
-        section: "Risk Assessment",
-        code: "CC3.2.7",
-        label: "COSO Principle 7",
-        control: "CC3.2.7: COSO Principle 7",
-        requirements: "Analyzes Threats and Vulnerabilities From Vendors, Business Partners, and Other Parties — The entity's risk assessment process includes the analysis of potential threats and vulnerabilities arising from vendors providing goods and services, as well as threats and vulnerabilities arising from business partners, customers, and others with access to the entity's information systems."
-    },
-    {
-        id: "soc2-v2-cc3-2-8",
-        section: "Risk Assessment",
-        code: "CC3.2.8",
-        label: "COSO Principle 7",
-        control: "CC3.2.8: COSO Principle 7",
-        requirements: "Considers the Significance of the Risk — The entity’s consideration of the potential significance of the identified risks includes (1) determining the criticality of identified assets in meeting objectives; (2) assessing the impact of identified threats and vulnerabilities in meeting objectives; (3) assessing the likelihood of identified threats; and (4) determining the risk associated with assets based on asset criticality, threat impact, and likelihood."
-    },
-    {
-        id: "soc2-v2-cc3-3",
-        section: "Risk Assessment",
-        code: "CC3.3",
-        label: "COSO Principle 8",
-        control: "CC3.3: COSO Principle 8",
-        requirements: "The entity considers the potential for fraud in assessing risks to the achievement of objectives."
-    },
-    {
-        id: "soc2-v2-cc3-3-1",
-        section: "Risk Assessment",
-        code: "CC3.3.1",
-        label: "COSO Principle 8",
-        control: "CC3.3.1: COSO Principle 8",
-        requirements: "Considers Various Types of Fraud — The assessment of fraud considers fraudulent reporting, possible loss of assets, and corruption resulting from the various ways that fraud and misconduct can occur."
-    },
-    {
-        id: "soc2-v2-cc3-3-2",
-        section: "Risk Assessment",
-        code: "CC3.3.2",
-        label: "COSO Principle 8",
-        control: "CC3.3.2: COSO Principle 8",
-        requirements: "Assesses Incentives and Pressures — The assessment of fraud risks considers incentives and pressures."
-    },
-    {
-        id: "soc2-v2-cc3-3-3",
-        section: "Risk Assessment",
-        code: "CC3.3.3",
-        label: "COSO Principle 8",
-        control: "CC3.3.3: COSO Principle 8",
-        requirements: "Assesses Opportunities — The assessment of fraud risk considers opportunities for unauthorized acquisition, use, or disposal of assets, altering the entity’s reporting records, or committing other inappropriate acts."
-    },
-    {
-        id: "soc2-v2-cc3-3-4",
-        section: "Risk Assessment",
-        code: "CC3.3.4",
-        label: "COSO Principle 8",
-        control: "CC3.3.4: COSO Principle 8",
-        requirements: "Assesses Attitudes and Rationalizations — The assessment of fraud risk considers how management and other personnel might engage in or justify inappropriate actions."
-    },
-    {
-        id: "soc2-v2-cc3-3-5",
-        section: "Risk Assessment",
-        code: "CC3.3.5",
-        label: "COSO Principle 8",
-        control: "CC3.3.5: COSO Principle 8",
-        requirements: "Considers the Risks Related to the Use of IT and Access to Information — The assessment of fraud risks includes consideration of threats and vulnerabilities that arise specifically from the use of IT and access to information."
-    },
-    {
-        id: "soc2-v2-cc3-4",
-        section: "Risk Assessment",
-        code: "CC3.4",
-        label: "COSO Principle 9",
-        control: "CC3.4: COSO Principle 9",
-        requirements: "The entity identifies and assesses changes that could significantly impact the system of internal control."
-    },
-    {
-        id: "soc2-v2-cc3-4-1",
-        section: "Risk Assessment",
-        code: "CC3.4.1",
-        label: "COSO Principle 9",
-        control: "CC3.4.1: COSO Principle 9",
-        requirements: "Assesses Changes in the External Environment—The risk identification process considers changes to the regulatory, economic, and physical environment in which the entity operates."
-    },
-    {
-        id: "soc2-v2-cc3-4-2",
-        section: "Risk Assessment",
-        code: "CC3.4.2",
-        label: "COSO Principle 9",
-        control: "CC3.4.2: COSO Principle 9",
-        requirements: "Assesses Changes in the Business Model—The entity considers the potential impacts of new business lines, dramatically altered compositions of existing business lines, acquired or divested business operations on the system of internal control, rapid growth, changing reliance on foreign geographies, and new technologies."
-    },
-    {
-        id: "soc2-v2-cc3-4-3",
-        section: "Risk Assessment",
-        code: "CC3.4.3",
-        label: "COSO Principle 9",
-        control: "CC3.4.3: COSO Principle 9",
-        requirements: "Assesses Changes in Leadership—The entity considers changes in management and respective attitudes and philosophies on the system of internal control."
-    },
-    {
-        id: "soc2-v2-cc3-4-4",
-        section: "Risk Assessment",
-        code: "CC3.4.4",
-        label: "COSO Principle 9",
-        control: "CC3.4.4: COSO Principle 9",
-        requirements: "Assess Changes in Systems and Technology—The risk identification process considers changes arising from changes in the entity’s systems and changes in the technology environment."
-    },
-    {
-        id: "soc2-v2-cc3-4-5",
-        section: "Risk Assessment",
-        code: "CC3.4.5",
-        label: "COSO Principle 9",
-        control: "CC3.4.5: COSO Principle 9",
-        requirements: "Assess Changes in Vendor and Business Partner Relationships—The risk identification process considers changes in vendor and business partner relationships."
-    },
-    {
-        id: "soc2-v2-cc4-1",
-        section: "Monitoring Activities",
-        code: "CC4.1",
-        label: "COSO Principle 16",
-        control: "CC4.1: COSO Principle 16",
-        requirements: "The entity selects, develops, and performs ongoing and/or separate evaluations to ascertain whether the components of internal control are present and functioning."
-    },
-    {
-        id: "soc2-v2-cc4-1-1",
-        section: "Monitoring Activities",
-        code: "CC4.1.1",
-        label: "COSO Principle 16",
-        control: "CC4.1.1: COSO Principle 16",
-        requirements: "Considers a Mix of Ongoing and Separate Evaluations — Management includes a balance of ongoing and separate evaluations."
-    },
-    {
-        id: "soc2-v2-cc4-1-2",
-        section: "Monitoring Activities",
-        code: "CC4.1.2",
-        label: "COSO Principle 16",
-        control: "CC4.1.2: COSO Principle 16",
-        requirements: "Considers Rate of Change — Management considers the rate of change in business and business processes when selecting and developing ongoing and separate evaluations."
-    },
-    {
-        id: "soc2-v2-cc4-1-3",
-        section: "Monitoring Activities",
-        code: "CC4.1.3",
-        label: "COSO Principle 16",
-        control: "CC4.1.3: COSO Principle 16",
-        requirements: "Establishes Baseline Understanding — The design and current state of an internal control system are used to establish a baseline for ongoing and separate evaluations."
-    },
-    {
-        id: "soc2-v2-cc4-1-4",
-        section: "Monitoring Activities",
-        code: "CC4.1.4",
-        label: "COSO Principle 16",
-        control: "CC4.1.4: COSO Principle 16",
-        requirements: "Uses Knowledgeable Personnel — Evaluators performing ongoing and separate evaluations have sufficient knowledge to understand what is being evaluated."
-    },
-    {
-        id: "soc2-v2-cc4-1-5",
-        section: "Monitoring Activities",
-        code: "CC4.1.5",
-        label: "COSO Principle 16",
-        control: "CC4.1.5: COSO Principle 16",
-        requirements: "Integrates With Business Processes — Ongoing evaluations are built into the business processes and adjust to changing conditions."
-    },
-    {
-        id: "soc2-v2-cc4-1-6",
-        section: "Monitoring Activities",
-        code: "CC4.1.6",
-        label: "COSO Principle 16",
-        control: "CC4.1.6: COSO Principle 16",
-        requirements: "Adjusts Scope and Frequency — Management varies the scope and frequency of separate evaluations depending on risk."
-    },
-    {
-        id: "soc2-v2-cc4-1-7",
-        section: "Monitoring Activities",
-        code: "CC4.1.7",
-        label: "COSO Principle 16",
-        control: "CC4.1.7: COSO Principle 16",
-        requirements: "Objectively Evaluates — Separate evaluations are performed periodically to provide objective feedback."
-    },
-    {
-        id: "soc2-v2-cc4-1-8",
-        section: "Monitoring Activities",
-        code: "CC4.1.8",
-        label: "COSO Principle 16",
-        control: "CC4.1.8: COSO Principle 16",
-        requirements: "Considers Different Types of Ongoing and Separate Evaluations — Management uses a variety of different types of ongoing and separate evaluations, including penetration testing, independent certification made against established specifications (for example, ISO certifications), and internal audit assessments."
-    },
-    {
-        id: "soc2-v2-cc4-2",
-        section: "Monitoring Activities",
-        code: "CC4.2",
-        label: "COSO Principle 17",
-        control: "CC4.2: COSO Principle 17",
-        requirements: "The entity evaluates and communicates internal control deficiencies in a timely manner to those parties responsible for taking corrective action, including senior management and the board of directors, as appropriate."
-    },
-    {
-        id: "soc2-v2-cc4-2-1",
-        section: "Monitoring Activities",
-        code: "CC4.2.1",
-        label: "COSO Principle 17",
-        control: "CC4.2.1: COSO Principle 17",
-        requirements: "Assesses Results — Management and the board of directors, as appropriate, assess results of ongoing and separate evaluations."
-    },
-    {
-        id: "soc2-v2-cc4-2-2",
-        section: "Monitoring Activities",
-        code: "CC4.2.2",
-        label: "COSO Principle 17",
-        control: "CC4.2.2: COSO Principle 17",
-        requirements: "Communicates Deficiencies — Deficiencies are communicated to parties responsible for taking corrective action and to senior management and the board of directors, as appropriate."
-    },
-    {
-        id: "soc2-v2-cc4-2-3",
-        section: "Monitoring Activities",
-        code: "CC4.2.3",
-        label: "COSO Principle 17",
-        control: "CC4.2.3: COSO Principle 17",
-        requirements: "Monitors Corrective Action — Management tracks whether deficiencies are remedied on a timely basis."
-    },
-    {
-        id: "soc2-v2-cc5-1",
-        section: "Control Activities",
-        code: "CC5.1",
-        label: "COSO Principle 10",
-        control: "CC5.1: COSO Principle 10",
-        requirements: "The entity selects and develops control activities that contribute to the mitigation of risks to the achievement of objectives to acceptable levels."
-    },
-    {
-        id: "soc2-v2-cc5-1-1",
-        section: "Control Activities",
-        code: "CC5.1.1",
-        label: "COSO Principle 10",
-        control: "CC5.1.1: COSO Principle 10",
-        requirements: "Integrates With Risk Assessment — Control activities help ensure that risk responses that address and mitigate risks are carried out."
-    },
-    {
-        id: "soc2-v2-cc5-1-2",
-        section: "Control Activities",
-        code: "CC5.1.2",
-        label: "COSO Principle 10",
-        control: "CC5.1.2: COSO Principle 10",
-        requirements: "Considers Entity-Specific Factors — Management considers how the environment, complexity, nature, and scope of its operations, as well as the specific characteristics of its organization, affect the selection and development of control activities."
-    },
-    {
-        id: "soc2-v2-cc5-1-3",
-        section: "Control Activities",
-        code: "CC5.1.3",
-        label: "COSO Principle 10",
-        control: "CC5.1.3: COSO Principle 10",
-        requirements: "Determines Relevant Business Processes — Management determines which relevant business processes require control activities."
-    },
-    {
-        id: "soc2-v2-cc5-1-4",
-        section: "Control Activities",
-        code: "CC5.1.4",
-        label: "COSO Principle 10",
-        control: "CC5.1.4: COSO Principle 10",
-        requirements: "Evaluates a Mix of Control Activity Types — Control activities include a range and variety of controls and may include a balance of approaches to mitigate risks, considering both manual and automated controls, and preventive and detective controls."
-    },
-    {
-        id: "soc2-v2-cc5-1-5",
-        section: "Control Activities",
-        code: "CC5.1.5",
-        label: "COSO Principle 10",
-        control: "CC5.1.5: COSO Principle 10",
-        requirements: "Considers at What Level Activities Are Applied — Management considers control activities at various levels in the entity."
-    },
-    {
-        id: "soc2-v2-cc5-1-6",
-        section: "Control Activities",
-        code: "CC5.1.6",
-        label: "COSO Principle 10",
-        control: "CC5.1.6: COSO Principle 10",
-        requirements: "Addresses Segregation of Duties — Management segregates incompatible duties, and where such segregation is not practical, management selects and develops alternative control activities."
-    },
-    {
-        id: "soc2-v2-cc5-2",
-        section: "Control Activities",
-        code: "CC5.2",
-        label: "COSO Principle 11",
-        control: "CC5.2: COSO Principle 11",
-        requirements: "The entity also selects and develops general control activities over technology to support the achievement of objectives."
-    },
-    {
-        id: "soc2-v2-cc5-2-1",
-        section: "Control Activities",
-        code: "CC5.2.1",
-        label: "COSO Principle 11",
-        control: "CC5.2.1: COSO Principle 11",
-        requirements: "Determines Dependency Between the Use of Technology in Business Processes and Technology General Controls — Management understands and determines the dependency and linkage between business processes, automated control activities, and technology general controls."
-    },
-    {
-        id: "soc2-v2-cc5-2-2",
-        section: "Control Activities",
-        code: "CC5.2.2",
-        label: "COSO Principle 11",
-        control: "CC5.2.2: COSO Principle 11",
-        requirements: "Establishes Relevant Technology Infrastructure Control Activities — Management selects and develops control activities over the technology infrastructure, which are designed and implemented to help ensure the completeness, accuracy, and availability of technology processing."
-    },
-    {
-        id: "soc2-v2-cc5-2-3",
-        section: "Control Activities",
-        code: "CC5.2.3",
-        label: "COSO Principle 11",
-        control: "CC5.2.3: COSO Principle 11",
-        requirements: "Establishes Relevant Security Management Process Controls Activities — Management selects and develops control activities that are designed and implemented to restrict technology access rights to authorized users commensurate with their job responsibilities and to protect the entity’s assets from external threats."
-    },
-    {
-        id: "soc2-v2-cc5-2-4",
-        section: "Control Activities",
-        code: "CC5.2.4",
-        label: "COSO Principle 11",
-        control: "CC5.2.4: COSO Principle 11",
-        requirements: "Establishes Relevant Technology Acquisition, Development, and Maintenance Process Control Activities — Management selects and develops control activities over the acquisition, development, and maintenance of technology and its infrastructure to achieve management’s objectives."
-    },
-    {
-        id: "soc2-v2-cc5-3",
-        section: "Control Activities",
-        code: "CC5.3",
-        label: "COSO Principle 12",
-        control: "CC5.3: COSO Principle 12",
-        requirements: "The entity deploys control activities through policies that establish what is expected and in procedures that put policies into action."
-    },
-    {
-        id: "soc2-v2-cc5-3-1",
-        section: "Control Activities",
-        code: "CC5.3.1",
-        label: "COSO Principle 12",
-        control: "CC5.3.1: COSO Principle 12",
-        requirements: "Establishes Policies and Procedures to Support Deployment of Management ‘s Directives—Management establishes control activities that are built into business processes and employees’ day-to-day activities through policies establishing what is expected and relevant procedures specifying actions."
-    },
-    {
-        id: "soc2-v2-cc5-3-2",
-        section: "Control Activities",
-        code: "CC5.3.2",
-        label: "COSO Principle 12",
-        control: "CC5.3.2: COSO Principle 12",
-        requirements: "Establishes Responsibility and Accountability for Executing Policies and Procedures—Management establishes responsibility and accountability for control activities with management (or other designated personnel) of the business unit or function in which the relevant risks reside."
-    },
-    {
-        id: "soc2-v2-cc5-3-3",
-        section: "Control Activities",
-        code: "CC5.3.3",
-        label: "COSO Principle 12",
-        control: "CC5.3.3: COSO Principle 12",
-        requirements: "Performs in a Timely Manner—Responsible personnel perform control activities in a timely manner as defined by the policies and procedures."
-    },
-    {
-        id: "soc2-v2-cc5-3-4",
-        section: "Control Activities",
-        code: "CC5.3.4",
-        label: "COSO Principle 12",
-        control: "CC5.3.4: COSO Principle 12",
-        requirements: "Takes Corrective Action—Responsible personnel investigate and act on matters identified as a result of executing control activities."
-    },
-    {
-        id: "soc2-v2-cc5-3-5",
-        section: "Control Activities",
-        code: "CC5.3.5",
-        label: "COSO Principle 12",
-        control: "CC5.3.5: COSO Principle 12",
-        requirements: "Performs Using Competent Personnel—Competent personnel with sufficient authority perform control activities with diligence and continuing focus."
-    },
-    {
-        id: "soc2-v2-cc5-3-6",
-        section: "Control Activities",
-        code: "CC5.3.6",
-        label: "COSO Principle 12",
-        control: "CC5.3.6: COSO Principle 12",
-        requirements: "Reassesses Policies and Procedures—Management periodically reviews control activities to determine their continued relevance and refreshes them when necessary."
-    },
-    {
-        id: "soc2-v2-cc6-1",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.1",
-        label: "CC6.1",
-        control: "CC6.1: ",
-        requirements: "The entity implements logical access security software, infrastructure, and architectures over protected information assets to protect them from security events to meet the entity's objectives."
-    },
-    {
-        id: "soc2-v2-cc6-1-1",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.1.1",
-        label: "CC6.1.1",
-        control: "CC6.1.1: ",
-        requirements: "Identifies and Manages the Inventory of Information Assets — The entity identifies, inventories, classifies, and manages information assets."
-    },
-    {
-        id: "soc2-v2-cc6-1-2",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.1.2",
-        label: "CC6.1.2",
-        control: "CC6.1.2: ",
-        requirements: "Restricts Logical Access — Logical access to information assets, including hardware, data (at-rest, during processing, or in transmission), software, administrative authorities, mobile devices, output, and offline system components is restricted through the use of access control software and rule sets."
-    },
-    {
-        id: "soc2-v2-cc6-1-3",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.1.3",
-        label: "CC6.1.3",
-        control: "CC6.1.3: ",
-        requirements: "Identifies and Authenticates Users — Persons, infrastructure and software are identified and authenticated prior to accessing information assets, whether locally or remotely."
-    },
-    {
-        id: "soc2-v2-cc6-1-4",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.1.4",
-        label: "CC6.1.4",
-        control: "CC6.1.4: ",
-        requirements: "Considers Network Segmentation — Network segmentation permits unrelated portions of the entity's information system to be isolated from each other."
-    },
-    {
-        id: "soc2-v2-cc6-1-5",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.1.5",
-        label: "CC6.1.5",
-        control: "CC6.1.5: ",
-        requirements: "Manages Points of Access — Points of access by outside entities and the types of data that flow through the points of access are identified, inventoried, and managed. The types of individuals and systems using each point of access are identified, documented, and managed."
-    },
-    {
-        id: "soc2-v2-cc6-1-6",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.1.6",
-        label: "CC6.1.6",
-        control: "CC6.1.6: ",
-        requirements: "Restricts Access to Information Assets — Combinations of data classification, separate data structures, port restrictions, access protocol restrictions, user identification, and digital certificates are used to establish access control rules for information assets."
-    },
-    {
-        id: "soc2-v2-cc6-1-7",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.1.7",
-        label: "CC6.1.7",
-        control: "CC6.1.7: ",
-        requirements: "Manages Identification and Authentication — Identification and authentication requirements are established, documented, and managed for individuals and systems accessing entity information, infrastructure and software."
-    },
-    {
-        id: "soc2-v2-cc6-1-8",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.1.8",
-        label: "CC6.1.8",
-        control: "CC6.1.8: ",
-        requirements: "Manages Credentials for Infrastructure and Software — New internal and external infrastructure and software are registered, authorized, and documented prior to being granted access credentials and implemented on the network or access point. Credentials are removed and access is disabled when access is no longer required or the infrastructure and software are no longer in use."
-    },
-    {
-        id: "soc2-v2-cc6-1-9",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.1.9",
-        label: "CC6.1.9",
-        control: "CC6.1.9: ",
-        requirements: "Uses Encryption to Protect Data — The entity uses encryption to supplement other measures used to protect data-at-rest, when such protections are deemed appropriate based on assessed risk."
-    },
-    {
-        id: "soc2-v2-cc6-1-10",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.1.10",
-        label: "CC6.1.10",
-        control: "CC6.1.10: ",
-        requirements: "Protects Encryption Keys — Processes are in place to protect encryption keys during generation, storage, use, and destruction."
-    },
-    {
-        id: "soc2-v2-cc6-2",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.2",
-        label: "CC6.2",
-        control: "CC6.2: ",
-        requirements: "Prior to issuing system credentials and granting system access, the entity registers and authorizes new internal and external users whose access is administered by the entity. For those users whose access is administered by the entity, user system credentials are removed when user access is no longer authorized."
-    },
-    {
-        id: "soc2-v2-cc6-2-1",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.2.1",
-        label: "CC6.2.1",
-        control: "CC6.2.1: ",
-        requirements: "Controls Access Credentials to Protected Assets — Information asset access credentials are created based on an authorization from the system's asset owner or authorized custodian."
-    },
-    {
-        id: "soc2-v2-cc6-2-2",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.2.2",
-        label: "CC6.2.2",
-        control: "CC6.2.2: ",
-        requirements: "Removes Access to Protected Assets When Appropriate — Processes are in place to remove credential access when an individual no longer requires such access."
-    },
-    {
-        id: "soc2-v2-cc6-2-3",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.2.3",
-        label: "CC6.2.3",
-        control: "CC6.2.3: ",
-        requirements: "Reviews Appropriateness of Access Credentials — The appropriateness of access credentials is reviewed on a periodic basis for unnecessary and inappropriate individuals with credentials."
-    },
-    {
-        id: "soc2-v2-cc6-3",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.3",
-        label: "CC6.3",
-        control: "CC6.3: ",
-        requirements: "The entity authorizes, modifies, or removes access to data, software, functions, and other protected information assets based on roles, responsibilities, or the system design and changes, giving consideration to the concepts of least privilege and segregation of duties, to meet the entity’s objectives."
-    },
-    {
-        id: "soc2-v2-cc6-3-1",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.3.1",
-        label: "CC6.3.1",
-        control: "CC6.3.1: ",
-        requirements: "Creates or Modifies Access to Protected Information Assets — Processes are in place to create or modify access to protected information assets based on authorization from the asset’s owner."
-    },
-    {
-        id: "soc2-v2-cc6-3-2",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.3.2",
-        label: "CC6.3.2",
-        control: "CC6.3.2: ",
-        requirements: "Removes Access to Protected Information Assets — Processes are in place to remove access to protected information assets when an individual no longer requires access."
-    },
-    {
-        id: "soc2-v2-cc6-3-3",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.3.3",
-        label: "CC6.3.3",
-        control: "CC6.3.3: ",
-        requirements: "Uses Role-Based Access Controls — Role-based access control is utilized to support segregation of incompatible functions."
-    },
-    {
-        id: "soc2-v2-cc6-4",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.4",
-        label: "CC6.4",
-        control: "CC6.4: ",
-        requirements: "The entity restricts physical access to facilities and protected information assets (for example, data center facilities, back-up media storage, and other sensitive locations) to authorized personnel to meet the entity’s objectives."
-    },
-    {
-        id: "soc2-v2-cc6-4-1",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.4.1",
-        label: "CC6.4.1",
-        control: "CC6.4.1: ",
-        requirements: "Creates or Modifies Physical Access — Processes are in place to create or modify physical access to facilities such as data centers, office spaces, and work areas, based on authorization from the system's asset owner."
-    },
-    {
-        id: "soc2-v2-cc6-4-2",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.4.2",
-        label: "CC6.4.2",
-        control: "CC6.4.2: ",
-        requirements: "Removes Physical Access — Processes are in place to remove access to physical resources when an individual no longer requires access."
-    },
-    {
-        id: "soc2-v2-cc6-4-3",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.4.3",
-        label: "CC6.4.3",
-        control: "CC6.4.3: ",
-        requirements: "Reviews Physical Access — Processes are in place to periodically review physical access to ensure consistency with job responsibilities."
-    },
-    {
-        id: "soc2-v2-cc6-5",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.5",
-        label: "CC6.5",
-        control: "CC6.5: ",
-        requirements: "The entity discontinues logical and physical protections over physical assets only after the ability to read or recover data and software from those assets has been diminished and is no longer required to meet the entity’s objectives."
-    },
-    {
-        id: "soc2-v2-cc6-5-1",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.5.1",
-        label: "CC6.5.1",
-        control: "CC6.5.1: ",
-        requirements: "Identifies Data and Software for Disposal — Procedures are in place to identify data and software stored on equipment to be disposed and to render such data and software unreadable."
-    },
-    {
-        id: "soc2-v2-cc6-5-2",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.5.2",
-        label: "CC6.5.2",
-        control: "CC6.5.2: ",
-        requirements: "Removes Data and Software From Entity Control — Procedures are in place to remove data and software stored on equipment to be removed from the physical control of the entity and to render such data and software unreadable."
-    },
-    {
-        id: "soc2-v2-cc6-6",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.6",
-        label: "CC6.6",
-        control: "CC6.6: ",
-        requirements: "The entity implements logical access security measures to protect against threats from sources outside its system boundaries."
-    },
-    {
-        id: "soc2-v2-cc6-6-1",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.6.1",
-        label: "CC6.6.1",
-        control: "CC6.6.1: ",
-        requirements: "Restricts Access — The types of activities that can occur through a communication channel (for example, FTP site, router port) are restricted."
-    },
-    {
-        id: "soc2-v2-cc6-6-2",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.6.2",
-        label: "CC6.6.2",
-        control: "CC6.6.2: ",
-        requirements: "Protects Identification and Authentication Credentials — Identification and authentication credentials are protected during transmission outside its system boundaries."
-    },
-    {
-        id: "soc2-v2-cc6-6-3",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.6.3",
-        label: "CC6.6.3",
-        control: "CC6.6.3: ",
-        requirements: "Requires Additional Authentication or Credentials — Additional authentication information or credentials are required when accessing the system from outside its boundaries."
-    },
-    {
-        id: "soc2-v2-cc6-6-4",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.6.4",
-        label: "CC6.6.4",
-        control: "CC6.6.4: ",
-        requirements: "Implements Boundary Protection Systems — Boundary protection systems (for example, firewalls, demilitarized zones, and intrusion detection systems) are implemented to protect external access points from attempts and unauthorized access and are monitored to detect such attempts."
-    },
-    {
-        id: "soc2-v2-cc6-7",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.7",
-        label: "CC6.7",
-        control: "CC6.7: ",
-        requirements: "The entity restricts the transmission, movement, and removal of information to authorized internal and external users and processes, and protects it during transmission, movement, or removal to meet the entity’s objectives."
-    },
-    {
-        id: "soc2-v2-cc6-7-1",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.7.1",
-        label: "CC6.7.1",
-        control: "CC6.7.1: ",
-        requirements: "Restricts the Ability to Perform Transmission — Data loss prevention processes and technologies are used to restrict ability to authorize and execute transmission, movement and removal of information."
-    },
-    {
-        id: "soc2-v2-cc6-7-2",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.7.2",
-        label: "CC6.7.2",
-        control: "CC6.7.2: ",
-        requirements: "Uses Encryption Technologies or Secure Communication Channels to Protect Data — Encryption technologies or secured communication channels are used to protect transmission of data and other communications beyond connectivity access points."
-    },
-    {
-        id: "soc2-v2-cc6-7-3",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.7.3",
-        label: "CC6.7.3",
-        control: "CC6.7.3: ",
-        requirements: "Protects Removal Media — Encryption technologies and physical asset protections are used for removable media (such as USB drives and back-up tapes), as appropriate."
-    },
-    {
-        id: "soc2-v2-cc6-7-4",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.7.4",
-        label: "CC6.7.4",
-        control: "CC6.7.4: ",
-        requirements: "Protects Mobile Devices — Processes are in place to protect mobile devices (such as laptops, smart phones and tablets) that serve as information assets."
-    },
-    {
-        id: "soc2-v2-cc6-8",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.8",
-        label: "CC6.8",
-        control: "CC6.8: ",
-        requirements: "The entity implements controls to prevent or detect and act upon the introduction of unauthorized or malicious software to meet the entity’s objectives."
-    },
-    {
-        id: "soc2-v2-cc6-8-1",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.8.1",
-        label: "CC6.8.1",
-        control: "CC6.8.1: ",
-        requirements: "Restricts Application and Software Installation — The ability to install applications and software is restricted to authorized individuals."
-    },
-    {
-        id: "soc2-v2-cc6-8-2",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.8.2",
-        label: "CC6.8.2",
-        control: "CC6.8.2: ",
-        requirements: "Detects Unauthorized Changes to Software and Configuration Parameters — Processes are in place to detect changes to software and configuration parameters that may be indicative of unauthorized or malicious software."
-    },
-    {
-        id: "soc2-v2-cc6-8-3",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.8.3",
-        label: "CC6.8.3",
-        control: "CC6.8.3: ",
-        requirements: "Uses a Defined Change Control Process — A management-defined change control process is used for the implementation of software."
-    },
-    {
-        id: "soc2-v2-cc6-8-4",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.8.4",
-        label: "CC6.8.4",
-        control: "CC6.8.4: ",
-        requirements: "Uses Antivirus and Anti-Malware Software — Antivirus and anti-malware software is implemented and maintained to provide for the interception or detection and remediation of malware."
-    },
-    {
-        id: "soc2-v2-cc6-8-5",
-        section: "Logical and Physical Access Controls",
-        code: "CC6.8.5",
-        label: "CC6.8.5",
-        control: "CC6.8.5: ",
-        requirements: "Scans Information Assets from Outside the Entity for Malware and Other Unauthorized Software — Procedures are in place to scan information assets that have been transferred or returned to the entity’s custody for malware and other unauthorized software and to remove any items detected prior to its implementation on the network."
-    },
-    {
-        id: "soc2-v2-cc7-1",
-        section: "System Operations",
-        code: "CC7.1",
-        label: "CC7.1",
-        control: "CC7.1: ",
-        requirements: "To meet its objectives, the entity uses detection and monitoring procedures to identify (1) changes to configurations that result in the introduction of new vulnerabilities, and (2) susceptibilities to newly discovered vulnerabilities."
-    },
-    {
-        id: "soc2-v2-cc7-1-1",
-        section: "System Operations",
-        code: "CC7.1.1",
-        label: "CC7.1.1",
-        control: "CC7.1.1: ",
-        requirements: "Uses Defined Configuration Standards — Management has defined configuration standards."
-    },
-    {
-        id: "soc2-v2-cc7-1-2",
-        section: "System Operations",
-        code: "CC7.1.2",
-        label: "CC7.1.2",
-        control: "CC7.1.2: ",
-        requirements: "Monitors Infrastructure and Software — The entity monitors infrastructure and software for noncompliance with the standards, which could threaten the achievement of the entity's objectives."
-    },
-    {
-        id: "soc2-v2-cc7-1-3",
-        section: "System Operations",
-        code: "CC7.1.3",
-        label: "CC7.1.3",
-        control: "CC7.1.3: ",
-        requirements: "Implements Change-Detection Mechanisms — The IT system includes a change-detection mechanism (for example, file integrity monitoring tools) to alert personnel to unauthorized modifications of critical system files, configuration files, or content files."
-    },
-    {
-        id: "soc2-v2-cc7-1-4",
-        section: "System Operations",
-        code: "CC7.1.4",
-        label: "CC7.1.4",
-        control: "CC7.1.4: ",
-        requirements: "Detects Unknown or Unauthorized Components — Procedures are in place to detect the introduction of unknown or unauthorized components."
-    },
-    {
-        id: "soc2-v2-cc7-1-5",
-        section: "System Operations",
-        code: "CC7.1.5",
-        label: "CC7.1.5",
-        control: "CC7.1.5: ",
-        requirements: "Conducts Vulnerability Scans — The entity conducts vulnerability scans designed to identify potential vulnerabilities or misconfigurations on a periodic basis and after any significant change in the environment and takes action to remediate identified deficiencies on a timely basis."
-    },
-    {
-        id: "soc2-v2-cc7-2",
-        section: "System Operations",
-        code: "CC7.2",
-        label: "CC7.2",
-        control: "CC7.2: ",
-        requirements: "The entity monitors system components and the operation of those components for anomalies that are indicative of malicious acts, natural disasters, and errors affecting the entity's ability to meet its objectives; anomalies are analyzed to determine whether they represent security events."
-    },
-    {
-        id: "soc2-v2-cc7-2-1",
-        section: "System Operations",
-        code: "CC7.2.1",
-        label: "CC7.2.1",
-        control: "CC7.2.1: ",
-        requirements: "Implements Detection Policies, Procedures, and Tools — Detection policies and procedures are defined and implemented, and detection tools are implemented on Infrastructure and software to identify anomalies in the operation or unusual activity on systems. Procedures may include (1) a defined governance process for security event detection and management that includes provision of resources; (2) use of intelligence sources to identify newly discovered threats and vulnerabilities; and (3) logging of unusual system activities."
-    },
-    {
-        id: "soc2-v2-cc7-2-2",
-        section: "System Operations",
-        code: "CC7.2.2",
-        label: "CC7.2.2",
-        control: "CC7.2.2: ",
-        requirements: "Designs Detection Measures — Detection measures are designed to identify anomalies that could result from actual or attempted (1) compromise of physical barriers; (2) unauthorized actions of authorized personnel; (3) use of compromised identification and authentication credentials; (4) unauthorized access from outside the system boundaries; (5) compromise of authorized external parties; and (6) implementation or connection of unauthorized hardware and software."
-    },
-    {
-        id: "soc2-v2-cc7-2-3",
-        section: "System Operations",
-        code: "CC7.2.3",
-        label: "CC7.2.3",
-        control: "CC7.2.3: ",
-        requirements: "Implements Filters to Analyze Anomalies — Management has implemented procedures to filter, summarize, and analyze anomalies to identify security events."
-    },
-    {
-        id: "soc2-v2-cc7-2-4",
-        section: "System Operations",
-        code: "CC7.2.4",
-        label: "CC7.2.4",
-        control: "CC7.2.4: ",
-        requirements: "Monitors Detection Tools for Effective Operation — Management has implemented processes to monitor the effectiveness of detection tools."
-    },
-    {
-        id: "soc2-v2-cc7-3",
-        section: "System Operations",
-        code: "CC7.3",
-        label: "CC7.3",
-        control: "CC7.3: ",
-        requirements: "The entity evaluates security events to determine whether they could or have resulted in a failure of the entity to meet its objectives (security incidents) and, if so, takes actions to prevent or address such failures."
-    },
-    {
-        id: "soc2-v2-cc7-3-1",
-        section: "System Operations",
-        code: "CC7.3.1",
-        label: "CC7.3.1",
-        control: "CC7.3.1: ",
-        requirements: "Responds to Security Incidents — Procedures are in place for responding to security incidents and evaluating the effectiveness of those policies and procedures on a periodic basis."
-    },
-    {
-        id: "soc2-v2-cc7-3-2",
-        section: "System Operations",
-        code: "CC7.3.2",
-        label: "CC7.3.2",
-        control: "CC7.3.2: ",
-        requirements: "Communicates and Reviews Detected Security Events — Detected security events are communicated to and reviewed by the individuals responsible for the management of the security program and actions are taken, if necessary."
-    },
-    {
-        id: "soc2-v2-cc7-3-3",
-        section: "System Operations",
-        code: "CC7.3.3",
-        label: "CC7.3.3",
-        control: "CC7.3.3: ",
-        requirements: "Develops and Implements Procedures to Analyze Security Incidents — Procedures are in place to analyze security incidents and determine system impact."
-    },
-    {
-        id: "soc2-v2-cc7-3-4",
-        section: "System Operations",
-        code: "CC7.3.4",
-        label: "CC7.3.4",
-        control: "CC7.3.4: ",
-        requirements: "Assesses the Impact on Personal Information — Detected security events are evaluated to determine whether they could or did result in the unauthorized disclosure or use of personal information and whether there has been a failure to comply with applicable laws or regulations."
-    },
-    {
-        id: "soc2-v2-cc7-3-5",
-        section: "System Operations",
-        code: "CC7.3.5",
-        label: "CC7.3.5",
-        control: "CC7.3.5: ",
-        requirements: "Determines Personal Information Used or Disclosed — When an unauthorized use or disclosure of personal information has occurred, the affected information is identified."
-    },
-    {
-        id: "soc2-v2-cc7-4",
-        section: "System Operations",
-        code: "CC7.4",
-        label: "CC7.4",
-        control: "CC7.4: ",
-        requirements: "The entity responds to identified security incidents by executing a defined incident response program to understand, contain, remediate, and communicate security incidents, as appropriate."
-    },
-    {
-        id: "soc2-v2-cc7-4-1",
-        section: "System Operations",
-        code: "CC7.4.1",
-        label: "CC7.4.1",
-        control: "CC7.4.1: ",
-        requirements: "Assigns Roles and Responsibilities — Roles and responsibilities for the design, implementation, maintenance, and execution of the incident response program are assigned, including the use of external resources when necessary."
-    },
-    {
-        id: "soc2-v2-cc7-4-2",
-        section: "System Operations",
-        code: "CC7.4.2",
-        label: "CC7.4.2",
-        control: "CC7.4.2: ",
-        requirements: "Contains Security Incidents — Procedures are in place to contain security incidents that actively threaten entity objectives."
-    },
-    {
-        id: "soc2-v2-cc7-4-3",
-        section: "System Operations",
-        code: "CC7.4.3",
-        label: "CC7.4.3",
-        control: "CC7.4.3: ",
-        requirements: "Mitigates Ongoing Security Incidents — Procedures are in place to mitigate the effects of ongoing security incidents."
-    },
-    {
-        id: "soc2-v2-cc7-4-4",
-        section: "System Operations",
-        code: "CC7.4.4",
-        label: "CC7.4.4",
-        control: "CC7.4.4: ",
-        requirements: "Ends Threats Posed by Security Incidents — Procedures are in place to end the threats posed by security incidents through closure of the vulnerability, removal of unauthorized access, and other remediation actions."
-    },
-    {
-        id: "soc2-v2-cc7-4-5",
-        section: "System Operations",
-        code: "CC7.4.5",
-        label: "CC7.4.5",
-        control: "CC7.4.5: ",
-        requirements: "Restores Operations — Procedures are in place to restore data and business operations to an interim state that permits the achievement of entity objectives."
-    },
-    {
-        id: "soc2-v2-cc7-4-6",
-        section: "System Operations",
-        code: "CC7.4.6",
-        label: "CC7.4.6",
-        control: "CC7.4.6: ",
-        requirements: "Develops and Implements Communication Protocols for Security Incidents — Protocols for communicating security incidents and actions taken to affected parties are developed and implemented to meet the entity's objectives."
-    },
-    {
-        id: "soc2-v2-cc7-4-7",
-        section: "System Operations",
-        code: "CC7.4.7",
-        label: "CC7.4.7",
-        control: "CC7.4.7: ",
-        requirements: "Obtains Understanding of Nature of Incident and Determines Containment Strategy — An understanding of the nature (for example, the method by which the incident occurred and the affected system resources) and severity of the security incident is obtained to determine the appropriate containment strategy, including (1) a determination of the appropriate response time frame, and (2) the determination and execution of the containment approach."
-    },
-    {
-        id: "soc2-v2-cc7-4-8",
-        section: "System Operations",
-        code: "CC7.4.8",
-        label: "CC7.4.8",
-        control: "CC7.4.8: ",
-        requirements: "Remediates Identified Vulnerabilities — Identified vulnerabilities are remediated through the development and execution of remediation activities."
-    },
-    {
-        id: "soc2-v2-cc7-4-9",
-        section: "System Operations",
-        code: "CC7.4.9",
-        label: "CC7.4.9",
-        control: "CC7.4.9: ",
-        requirements: "Communicates Remediation Activities — Remediation activities are documented and communicated in accordance with the incident response program."
-    },
-    {
-        id: "soc2-v2-cc7-4-10",
-        section: "System Operations",
-        code: "CC7.4.10",
-        label: "CC7.4.10",
-        control: "CC7.4.10: ",
-        requirements: "Evaluates the Effectiveness of Incident Response — The design of incident response activities is evaluated for effectiveness on a periodic basis."
-    },
-    {
-        id: "soc2-v2-cc7-4-11",
-        section: "System Operations",
-        code: "CC7.4.11",
-        label: "CC7.4.11",
-        control: "CC7.4.11: ",
-        requirements: "Periodically Evaluates Incidents — Periodically, management reviews incidents related to security, availability, processing integrity, confidentiality, and privacy and identifies the need for system changes based on incident patterns and root causes."
-    },
-    {
-        id: "soc2-v2-cc7-4-12",
-        section: "System Operations",
-        code: "CC7.4.12",
-        label: "CC7.4.12",
-        control: "CC7.4.12: ",
-        requirements: "Communicates Unauthorized Use and Disclosure — Events that resulted in unauthorized use or disclosure of personal information are communicated to the data subjects, legal and regulatory authorities, and others as required."
-    },
-    {
-        id: "soc2-v2-cc7-4-13",
-        section: "System Operations",
-        code: "CC7.4.13",
-        label: "CC7.4.13",
-        control: "CC7.4.13: ",
-        requirements: "Application of Sanctions — The conduct of individuals and organizations operating under the authority of the entity and involved in the unauthorized use or disclosure of personal information is evaluated and, if appropriate, sanctioned in accordance with entity policies and legal and regulatory requirements."
-    },
-    {
-        id: "soc2-v2-cc7-5",
-        section: "System Operations",
-        code: "CC7.5",
-        label: "CC7.5",
-        control: "CC7.5: ",
-        requirements: "The entity identifies, develops, and implements activities to recover from identified security incidents."
-    },
-    {
-        id: "soc2-v2-cc7-5-1",
-        section: "System Operations",
-        code: "CC7.5.1",
-        label: "CC7.5.1",
-        control: "CC7.5.1: ",
-        requirements: "Restores the Affected Environment — The activities restore the affected environment to functional operation by rebuilding systems, updating software, installing patches, and changing configurations, as needed."
-    },
-    {
-        id: "soc2-v2-cc7-5-2",
-        section: "System Operations",
-        code: "CC7.5.2",
-        label: "CC7.5.2",
-        control: "CC7.5.2: ",
-        requirements: "Communicates Information About the Event — Communications about the nature of the incident, recovery actions taken, and activities required for the prevention of future security events are made to management and others as appropriate (internal and external)."
-    },
-    {
-        id: "soc2-v2-cc7-5-3",
-        section: "System Operations",
-        code: "CC7.5.3",
-        label: "CC7.5.3",
-        control: "CC7.5.3: ",
-        requirements: "Determines Root Cause of the Event — The root cause of the event is determined."
-    },
-    {
-        id: "soc2-v2-cc7-5-4",
-        section: "System Operations",
-        code: "CC7.5.4",
-        label: "CC7.5.4",
-        control: "CC7.5.4: ",
-        requirements: "Implements Changes to Prevent and Detect Recurrences — Additional architecture or changes to preventive and detective controls, or both, are implemented to prevent and detect recurrences on a timely basis."
-    },
-    {
-        id: "soc2-v2-cc7-5-5",
-        section: "System Operations",
-        code: "CC7.5.5",
-        label: "CC7.5.5",
-        control: "CC7.5.5: ",
-        requirements: "Improves Response and Recovery Procedures — Lessons learned are analyzed, and the incident response plan and recovery procedures are improved."
-    },
-    {
-        id: "soc2-v2-cc7-5-6",
-        section: "System Operations",
-        code: "CC7.5.6",
-        label: "CC7.5.6",
-        control: "CC7.5.6: ",
-        requirements: "Implements Incident Recovery Plan Testing — Incident recovery plan testing is performed on a periodic basis. The testing includes (1) development of testing scenarios based on threat likelihood and magnitude; (2) consideration of relevant system components from across the entity that can impair availability; (3) scenarios that consider the potential for the lack of availability of key personnel; and (4) revision of continuity plans and systems based on test results."
-    },
-    {
-        id: "soc2-v2-cc8-1",
-        section: "Change Management",
-        code: "CC8.1",
-        label: "CC8.1",
-        control: "CC8.1: ",
-        requirements: "The entity authorizes, designs, develops or acquires, configures, documents, tests, approves, and implements changes to infrastructure, data, software, and procedures to meet its objectives."
-    },
-    {
-        id: "soc2-v2-cc8-1-1",
-        section: "Change Management",
-        code: "CC8.1.1",
-        label: "CC8.1.1",
-        control: "CC8.1.1: ",
-        requirements: "Manages Changes Throughout the System Lifecycle — A process for managing system changes throughout the lifecycle of the system and its components (infrastructure, data, software and procedures) is used to support system availability and processing integrity."
-    },
-    {
-        id: "soc2-v2-cc8-1-2",
-        section: "Change Management",
-        code: "CC8.1.2",
-        label: "CC8.1.2",
-        control: "CC8.1.2: ",
-        requirements: "Authorizes Changes — A process is in place to authorize system changes prior to development."
-    },
-    {
-        id: "soc2-v2-cc8-1-3",
-        section: "Change Management",
-        code: "CC8.1.3",
-        label: "CC8.1.3",
-        control: "CC8.1.3: ",
-        requirements: "Designs and Develops Changes — A process is in place to design and develop system changes."
-    },
-    {
-        id: "soc2-v2-cc8-1-4",
-        section: "Change Management",
-        code: "CC8.1.4",
-        label: "CC8.1.4",
-        control: "CC8.1.4: ",
-        requirements: "Documents Changes — A process is in place to document system changes to support ongoing maintenance of the system and to support system users in performing their responsibilities."
-    },
-    {
-        id: "soc2-v2-cc8-1-5",
-        section: "Change Management",
-        code: "CC8.1.5",
-        label: "CC8.1.5",
-        control: "CC8.1.5: ",
-        requirements: "Tracks System Changes — A process is in place to track system changes prior to implementation."
-    },
-    {
-        id: "soc2-v2-cc8-1-6",
-        section: "Change Management",
-        code: "CC8.1.6",
-        label: "CC8.1.6",
-        control: "CC8.1.6: ",
-        requirements: "Configures Software — A process is in place to select and implement the configuration parameters used to control the functionality of software."
-    },
-    {
-        id: "soc2-v2-cc8-1-7",
-        section: "Change Management",
-        code: "CC8.1.7",
-        label: "CC8.1.7",
-        control: "CC8.1.7: ",
-        requirements: "Tests System Changes — A process is in place to test system changes prior to implementation."
-    },
-    {
-        id: "soc2-v2-cc8-1-8",
-        section: "Change Management",
-        code: "CC8.1.8",
-        label: "CC8.1.8",
-        control: "CC8.1.8: ",
-        requirements: "Approves System Changes — A process is in place to approve system changes prior to implementation."
-    },
-    {
-        id: "soc2-v2-cc8-1-9",
-        section: "Change Management",
-        code: "CC8.1.9",
-        label: "CC8.1.9",
-        control: "CC8.1.9: ",
-        requirements: "Deploys System Changes — A process is in place to implement system changes."
-    },
-    {
-        id: "soc2-v2-cc8-1-10",
-        section: "Change Management",
-        code: "CC8.1.10",
-        label: "CC8.1.10",
-        control: "CC8.1.10: ",
-        requirements: "Identifies and Evaluates System Changes — Objectives affected by system changes are identified, and the ability of the modified system to meet the objectives is evaluated throughout the system development life cycle."
-    },
-    {
-        id: "soc2-v2-cc8-1-11",
-        section: "Change Management",
-        code: "CC8.1.11",
-        label: "CC8.1.11",
-        control: "CC8.1.11: ",
-        requirements: "Identifies Changes in Infrastructure, Data, Software, and Procedures Required to Remediate Incidents — Changes in infrastructure, data, software, and procedures required to remediate incidents to continue to meet objectives are identified, and the change process is initiated upon identification."
-    },
-    {
-        id: "soc2-v2-cc8-1-12",
-        section: "Change Management",
-        code: "CC8.1.12",
-        label: "CC8.1.12",
-        control: "CC8.1.12: ",
-        requirements: "Creates Baseline Configuration of IT Technology — A baseline configuration of IT and control systems is created and maintained."
-    },
-    {
-        id: "soc2-v2-cc8-1-13",
-        section: "Change Management",
-        code: "CC8.1.13",
-        label: "CC8.1.13",
-        control: "CC8.1.13: ",
-        requirements: "Provides for Changes Necessary in Emergency Situations — A process is in place for authorizing, designing, testing, approving and implementing changes necessary in emergency situations (that is, changes that need to be implemented in an urgent timeframe)."
-    },
-    {
-        id: "soc2-v2-cc8-1-14",
-        section: "Change Management",
-        code: "CC8.1.14",
-        label: "CC8.1.14",
-        control: "CC8.1.14: ",
-        requirements: "Protects Confidential Information — The entity protects confidential information during system design, development, testing, implementation, and change processes to meet the entity’s objectives related to confidentiality."
-    },
-    {
-        id: "soc2-v2-cc8-1-15",
-        section: "Change Management",
-        code: "CC8.1.15",
-        label: "CC8.1.15",
-        control: "CC8.1.15: ",
-        requirements: "Protects Personal Information — The entity protects personal information during system design, development, testing, implementation, and change processes to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-cc9-1",
-        section: "Risk Mitigation",
-        code: "CC9.1",
-        label: "CC9.1",
-        control: "CC9.1: ",
-        requirements: "The entity identifies, selects, and develops risk mitigation activities for risks arising from potential business disruptions."
-    },
-    {
-        id: "soc2-v2-cc9-1-1",
-        section: "Risk Mitigation",
-        code: "CC9.1.1",
-        label: "CC9.1.1",
-        control: "CC9.1.1: ",
-        requirements: "Considers Mitigation of Risks of Business Disruption — Risk mitigation activities include the development of planned policies, procedures, communications, and alternative processing solutions to respond to, mitigate, and recover from security events that disrupt business operations. Those policies and procedures include monitoring processes and information and communications to meet the entity's objectives during response, mitigation, and recovery efforts."
-    },
-    {
-        id: "soc2-v2-cc9-1-2",
-        section: "Risk Mitigation",
-        code: "CC9.1.2",
-        label: "CC9.1.2",
-        control: "CC9.1.2: ",
-        requirements: "Considers the Use of Insurance to Mitigate Financial Impact Risks — The risk management activities consider the use of insurance to offset the financial impact of loss events that would otherwise impair the ability of the entity to meet its objectives."
-    },
-    {
-        id: "soc2-v2-cc9-2",
-        section: "Risk Mitigation",
-        code: "CC9.2",
-        label: "CC9.2",
-        control: "CC9.2: ",
-        requirements: "The entity assesses and manages risks associated with vendors and business partners."
-    },
-    {
-        id: "soc2-v2-cc9-2-1",
-        section: "Risk Mitigation",
-        code: "CC9.2.1",
-        label: "CC9.2.1",
-        control: "CC9.2.1: ",
-        requirements: "Establishes Requirements for Vendor and Business Partner Engagements — The entity establishes specific requirements for a vendor and business partner engagement that includes (1) scope of services and product specifications, (2) roles and responsibilities, (3) compliance requirements, and (4) service levels."
-    },
-    {
-        id: "soc2-v2-cc9-2-2",
-        section: "Risk Mitigation",
-        code: "CC9.2.2",
-        label: "CC9.2.2",
-        control: "CC9.2.2: ",
-        requirements: "Assesses Vendor and Business Partner Risks — The entity assesses, on a periodic basis, the risks that vendors and business partners (and those entities’ vendors and business partners) represent to the achievement of the entity's objectives."
-    },
-    {
-        id: "soc2-v2-cc9-2-3",
-        section: "Risk Mitigation",
-        code: "CC9.2.3",
-        label: "CC9.2.3",
-        control: "CC9.2.3: ",
-        requirements: "Assigns Responsibility and Accountability for Managing Vendors and Business Partners — The entity assigns responsibility and accountability for the management of risks associated with vendors and business partners."
-    },
-    {
-        id: "soc2-v2-cc9-2-4",
-        section: "Risk Mitigation",
-        code: "CC9.2.4",
-        label: "CC9.2.4",
-        control: "CC9.2.4: ",
-        requirements: "Establishes Communication Protocols for Vendors and Business Partners — The entity establishes communication and resolution protocols for service or product issues related to vendors and business partners."
-    },
-    {
-        id: "soc2-v2-cc9-2-5",
-        section: "Risk Mitigation",
-        code: "CC9.2.5",
-        label: "CC9.2.5",
-        control: "CC9.2.5: ",
-        requirements: "Establishes Exception Handling Procedures From Vendors and Business Partners — The entity establishes exception handling procedures for service or product issues related to vendors and business partners."
-    },
-    {
-        id: "soc2-v2-cc9-2-6",
-        section: "Risk Mitigation",
-        code: "CC9.2.6",
-        label: "CC9.2.6",
-        control: "CC9.2.6: ",
-        requirements: "Assesses Vendor and Business Partner Performance — The entity periodically assesses the performance of vendors and business partners."
-    },
-    {
-        id: "soc2-v2-cc9-2-7",
-        section: "Risk Mitigation",
-        code: "CC9.2.7",
-        label: "CC9.2.7",
-        control: "CC9.2.7: ",
-        requirements: "Implements Procedures for Addressing Issues Identified During Vendor and Business Partner Assessments — The entity implements procedures for addressing issues identified with vendor and business partner relationships."
-    },
-    {
-        id: "soc2-v2-cc9-2-8",
-        section: "Risk Mitigation",
-        code: "CC9.2.8",
-        label: "CC9.2.8",
-        control: "CC9.2.8: ",
-        requirements: "Implements Procedures for Terminating Vendor and Business Partner Relationships — The entity implements procedures for terminating vendor and business partner relationships."
-    },
-    {
-        id: "soc2-v2-cc9-2-9",
-        section: "Risk Mitigation",
-        code: "CC9.2.9",
-        label: "CC9.2.9",
-        control: "CC9.2.9: ",
-        requirements: "Obtains Confidentiality Commitments from Vendors and Business Partners — The entity obtains confidentiality commitments that are consistent with the entity’s confidentiality commitments and requirements from vendors and business partners who have access to confidential information."
-    },
-    {
-        id: "soc2-v2-cc9-2-10",
-        section: "Risk Mitigation",
-        code: "CC9.2.10",
-        label: "CC9.2.10",
-        control: "CC9.2.10: ",
-        requirements: "Assesses Compliance With Confidentiality Commitments of Vendors and Business Partners — On a periodic and as-needed basis, the entity assesses compliance by vendors and business partners with the entity’s confidentiality commitments and requirements."
-    },
-    {
-        id: "soc2-v2-cc9-2-11",
-        section: "Risk Mitigation",
-        code: "CC9.2.11",
-        label: "CC9.2.11",
-        control: "CC9.2.11: ",
-        requirements: "Obtains Privacy Commitments from Vendors and Business Partners — The entity obtains privacy commitments, consistent with the entity’s privacy commitments and requirements, from vendors and business partners who have access to personal information."
-    },
-    {
-        id: "soc2-v2-cc9-2-12",
-        section: "Risk Mitigation",
-        code: "CC9.2.12",
-        label: "CC9.2.12",
-        control: "CC9.2.12: ",
-        requirements: "Assesses Compliance with Privacy Commitments of Vendors and Business Partners — On a periodic and as-needed basis, the entity assesses compliance by vendors and business partners with the entity’s privacy commitments and requirements and takes corrective action as necessary."
-    },
-    {
-        id: "soc2-v2-a1-1",
-        section: "Additional Criteria for Availability",
-        code: "A1.1",
-        label: "A1.1",
-        control: "A1.1: ",
-        requirements: "The entity maintains, monitors, and evaluates current processing capacity and use of system components (infrastructure, data, and software) to manage capacity demand and to enable the implementation of additional capacity to help meet its objectives."
-    },
-    {
-        id: "soc2-v2-a1-1-1",
-        section: "Additional Criteria for Availability",
-        code: "A1.1.1",
-        label: "A1.1.1",
-        control: "A1.1.1: ",
-        requirements: "Measures Current Usage — The use of the system components is measured to establish a baseline for capacity management and to use when evaluating the risk of impaired availability due to capacity constraints."
-    },
-    {
-        id: "soc2-v2-a1-1-2",
-        section: "Additional Criteria for Availability",
-        code: "A1.1.2",
-        label: "A1.1.2",
-        control: "A1.1.2: ",
-        requirements: "Forecasts Capacity — The expected average and peak use of system components is forecasted and compared to system capacity and associated tolerances. Forecasting considers capacity in the event of the failure of system components that constrain capacity."
-    },
-    {
-        id: "soc2-v2-a1-1-3",
-        section: "Additional Criteria for Availability",
-        code: "A1.1.3",
-        label: "A1.1.3",
-        control: "A1.1.3: ",
-        requirements: "Makes Changes Based on Forecasts — The system change management process is initiated when forecasted usage exceeds capacity tolerances."
-    },
-    {
-        id: "soc2-v2-a1-2",
-        section: "Additional Criteria for Availability",
-        code: "A1.2",
-        label: "A1.2",
-        control: "A1.2: ",
-        requirements: "The entity authorizes, designs, develops or acquires, implements, operates, approves, maintains, and monitors environmental protections, software, data back-up processes, and recovery infrastructure to meet its objectives."
-    },
-    {
-        id: "soc2-v2-a1-2-1",
-        section: "Additional Criteria for Availability",
-        code: "A1.2.1",
-        label: "A1.2.1",
-        control: "A1.2.1: ",
-        requirements: "Identifies Environmental Threats — As part of the risk assessment process, management identifies environmental threats that could impair the availability of the system, including threats resulting from adverse weather, failure of environmental control systems, electrical discharge, fire, and water."
-    },
-    {
-        id: "soc2-v2-a1-2-2",
-        section: "Additional Criteria for Availability",
-        code: "A1.2.2",
-        label: "A1.2.2",
-        control: "A1.2.2: ",
-        requirements: "Designs Detection Measures — Detection measures are implemented to identify anomalies that could result from environmental threat events."
-    },
-    {
-        id: "soc2-v2-a1-2-3",
-        section: "Additional Criteria for Availability",
-        code: "A1.2.3",
-        label: "A1.2.3",
-        control: "A1.2.3: ",
-        requirements: "Implements and Maintains Environmental Protection Mechanisms — Management implements and maintains environmental protection mechanisms to prevent and mitigate against environmental events."
-    },
-    {
-        id: "soc2-v2-a1-2-4",
-        section: "Additional Criteria for Availability",
-        code: "A1.2.4",
-        label: "A1.2.4",
-        control: "A1.2.4: ",
-        requirements: "Implements Alerts to Analyze Anomalies — Management implements alerts that are communicated to personnel for analysis to identify environmental threat events."
-    },
-    {
-        id: "soc2-v2-a1-2-5",
-        section: "Additional Criteria for Availability",
-        code: "A1.2.5",
-        label: "A1.2.5",
-        control: "A1.2.5: ",
-        requirements: "Responds to Environmental Threat Events — Procedures are in place for responding to environmental threat events and for evaluating the effectiveness of those policies and procedures on a periodic basis. This includes automatic mitigation systems (for example, uninterruptable power system and generator back-up subsystem)."
-    },
-    {
-        id: "soc2-v2-a1-2-6",
-        section: "Additional Criteria for Availability",
-        code: "A1.2.6",
-        label: "A1.2.6",
-        control: "A1.2.6: ",
-        requirements: "Communicates and Reviews Detected Environmental Threat Events — Detected environmental threat events are communicated to and reviewed by the individuals responsible for the management of the system, and actions are taken, if necessary."
-    },
-    {
-        id: "soc2-v2-a1-2-7",
-        section: "Additional Criteria for Availability",
-        code: "A1.2.7",
-        label: "A1.2.7",
-        control: "A1.2.7: ",
-        requirements: "Determines Data Requiring Backup — Data is evaluated to determine whether backup is required."
-    },
-    {
-        id: "soc2-v2-a1-2-8",
-        section: "Additional Criteria for Availability",
-        code: "A1.2.8",
-        label: "A1.2.8",
-        control: "A1.2.8: ",
-        requirements: "Performs Data Backup — Procedures are in place for backing up data, monitoring to detect back-up failures, and initiating corrective action when such failures occur."
-    },
-    {
-        id: "soc2-v2-a1-2-9",
-        section: "Additional Criteria for Availability",
-        code: "A1.2.9",
-        label: "A1.2.9",
-        control: "A1.2.9: ",
-        requirements: "Addresses Offsite Storage — Back-up data is stored in a location at a distance from its principal storage location sufficient that the likelihood of a security or environmental threat event affecting both sets of data is reduced to an appropriate level."
-    },
-    {
-        id: "soc2-v2-a1-2-10",
-        section: "Additional Criteria for Availability",
-        code: "A1.2.10",
-        label: "A1.2.10",
-        control: "A1.2.10: ",
-        requirements: "Implements Alternate Processing Infrastructure — Measures are implemented for migrating processing to alternate infrastructure in the event normal processing infrastructure becomes unavailable."
-    },
-    {
-        id: "soc2-v2-a1-3",
-        section: "Additional Criteria for Availability",
-        code: "A1.3",
-        label: "A1.3",
-        control: "A1.3: ",
-        requirements: "The entity tests recovery plan procedures supporting system recovery to meet its objectives."
-    },
-    {
-        id: "soc2-v2-a1-3-1",
-        section: "Additional Criteria for Availability",
-        code: "A1.3.1",
-        label: "A1.3.1",
-        control: "A1.3.1: ",
-        requirements: "Implements Business Continuity Plan Testing — Business continuity plan testing is performed on a periodic basis. The testing includes (1) development of testing scenarios based on threat likelihood and magnitude; (2) consideration of system components from across the entity that can impair the availability; (3) scenarios that consider the potential for the lack of availability of key personnel; and (4) revision of continuity plans and systems based on test results."
-    },
-    {
-        id: "soc2-v2-a1-3-2",
-        section: "Additional Criteria for Availability",
-        code: "A1.3.2",
-        label: "A1.3.2",
-        control: "A1.3.2: ",
-        requirements: "Tests Integrity and Completeness of Back-Up Data — The integrity and completeness of back-up information is tested on a periodic basis."
-    },
-    {
-        id: "soc2-v2-c1-1",
-        section: "Additional Criteria for Confidentiality",
-        code: "C1.1",
-        label: "C1.1",
-        control: "C1.1: ",
-        requirements: "The entity identifies and maintains confidential information to meet the entity’s objectives related to confidentiality."
-    },
-    {
-        id: "soc2-v2-c1-1-1",
-        section: "Additional Criteria for Confidentiality",
-        code: "C1.1.1",
-        label: "C1.1.1",
-        control: "C1.1.1: ",
-        requirements: "Identifies Confidential information — Procedures are in place to identify and designate confidential information when it is received or created and to determine the period over which the confidential information is to be retained."
-    },
-    {
-        id: "soc2-v2-c1-1-2",
-        section: "Additional Criteria for Confidentiality",
-        code: "C1.1.2",
-        label: "C1.1.2",
-        control: "C1.1.2: ",
-        requirements: "Protects Confidential Information from Destruction — Procedures are in place to protect confidential information from erasure or destruction during the specified retention period of the information."
-    },
-    {
-        id: "soc2-v2-c1-2",
-        section: "Additional Criteria for Confidentiality",
-        code: "C1.2",
-        label: "C1.2",
-        control: "C1.2: ",
-        requirements: "The entity disposes of confidential information to meet the entity’s objectives related to confidentiality."
-    },
-    {
-        id: "soc2-v2-c1-2-1",
-        section: "Additional Criteria for Confidentiality",
-        code: "C1.2.1",
-        label: "C1.2.1",
-        control: "C1.2.1: ",
-        requirements: "Identifies Confidential Information for Destruction — Procedures are in place to identify confidential information requiring destruction when the end of the retention period is reached."
-    },
-    {
-        id: "soc2-v2-c1-2-2",
-        section: "Additional Criteria for Confidentiality",
-        code: "C1.2.2",
-        label: "C1.2.2",
-        control: "C1.2.2: ",
-        requirements: "Destroys Confidential Information — Procedures are in place to erase or otherwise destroy confidential information that has been identified for destruction."
-    },
-    {
-        id: "soc2-v2-pi1-1",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.1",
-        label: "PI1.1",
-        control: "PI1.1: ",
-        requirements: "The entity obtains or generates, uses, and communicates relevant, quality information regarding the objectives related to processing, including definitions of data processed and product and service specifications, to support the use of products and services."
-    },
-    {
-        id: "soc2-v2-pi1-1-1",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.1.1",
-        label: "PI1.1.1",
-        control: "PI1.1.1: ",
-        requirements: "Identifies Information Specifications — The entity identifies information specifications required to support the use of products and services."
-    },
-    {
-        id: "soc2-v2-pi1-1-2",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.1.2",
-        label: "PI1.1.2",
-        control: "PI1.1.2: ",
-        requirements: "Defines Data Necessary to Support a Product or Service — When data is provided as part of a service or product or as part of a reporting obligation related to a product or service: —  1. The definition of the data is available to the users of the data —  2. The definition of the data includes the following information: —  a. The population of events or instances included in the data —  b. The nature of each element (for example, field) of the data (that is, the event or instance to which the data element relates, for example, transaction price of a sale of XYZ Corporation stock for the last trade in that stock on a given day) —  c. Source(s) of the data —  d. The unit(s) of measurement of data elements (for example, fields) —  e. The accuracy/correctness/precision of measurement —  f. The uncertainty or confidence interval inherent in each data element and in the population of those elements —  g. The date the data was observed or the period of time during which the events relevant to the data occurred —  h. The factors in addition to the date and period of time used to determine the inclusion and exclusion of items in the data elements and population —  3. The definition is complete and accurate. —  4. The description of the data identifies any information that is necessary to understand each data element and the population in a manner consistent with its definition and intended purpose (meta-data) that has not been included within the data."
-    },
-    {
-        id: "soc2-v2-pi1-2",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.2",
-        label: "PI1.2",
-        control: "PI1.2: ",
-        requirements: "The entity implements policies and procedures over system inputs, including controls over completeness and accuracy, to result in products, services, and reporting to meet the entity’s objectives."
-    },
-    {
-        id: "soc2-v2-pi1-2-1",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.2.1",
-        label: "PI1.2.1",
-        control: "PI1.2.1: ",
-        requirements: "Defines Characteristics of Processing Inputs — The characteristics of processing inputs that are necessary to meet requirements are defined."
-    },
-    {
-        id: "soc2-v2-pi1-2-2",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.2.2",
-        label: "PI1.2.2",
-        control: "PI1.2.2: ",
-        requirements: "Evaluates Processing Inputs — Processing inputs are evaluated for compliance with defined input requirements."
-    },
-    {
-        id: "soc2-v2-pi1-2-3",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.2.3",
-        label: "PI1.2.3",
-        control: "PI1.2.3: ",
-        requirements: "Creates and Maintains Records of System Inputs — Records of system input activities are created and maintained completely and accurately in a timely manner."
-    },
-    {
-        id: "soc2-v2-pi1-3",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.3",
-        label: "PI1.3",
-        control: "PI1.3: ",
-        requirements: "The entity implements policies and procedures over system processing to result in products, services, and reporting to meet the entity’s objectives."
-    },
-    {
-        id: "soc2-v2-pi1-3-1",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.3.1",
-        label: "PI1.3.1",
-        control: "PI1.3.1: ",
-        requirements: "Defines Processing Specifications — The processing specifications that are necessary to meet product or service requirements are defined."
-    },
-    {
-        id: "soc2-v2-pi1-3-2",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.3.2",
-        label: "PI1.3.2",
-        control: "PI1.3.2: ",
-        requirements: "Defines Processing Activities — Processing activities are defined to result in products or services that meet specifications."
-    },
-    {
-        id: "soc2-v2-pi1-3-3",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.3.3",
-        label: "PI1.3.3",
-        control: "PI1.3.3: ",
-        requirements: "Detects and Corrects Production Errors — Errors in the production process are detected and corrected in a timely manner."
-    },
-    {
-        id: "soc2-v2-pi1-3-4",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.3.4",
-        label: "PI1.3.4",
-        control: "PI1.3.4: ",
-        requirements: "Records System Processing Activities — System processing activities are recorded completely and accurately in a timely manner."
-    },
-    {
-        id: "soc2-v2-pi1-3-5",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.3.5",
-        label: "PI1.3.5",
-        control: "PI1.3.5: ",
-        requirements: "Processes Inputs — Inputs are processed completely, accurately, and timely as authorized in accordance with defined processing activities."
-    },
-    {
-        id: "soc2-v2-pi1-4",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.4",
-        label: "PI1.4",
-        control: "PI1.4: ",
-        requirements: "The entity implements policies and procedures to make available or deliver output completely, accurately, and timely in accordance with specifications to meet the entity’s objectives."
-    },
-    {
-        id: "soc2-v2-pi1-4-1",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.4.1",
-        label: "PI1.4.1",
-        control: "PI1.4.1: ",
-        requirements: "Protects Output — Output is protected when stored or delivered, or both, to prevent theft, destruction, corruption, or deterioration that would prevent output from meeting specifications."
-    },
-    {
-        id: "soc2-v2-pi1-4-2",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.4.2",
-        label: "PI1.4.2",
-        control: "PI1.4.2: ",
-        requirements: "Distributes Output Only to Intended Parties — Output is distributed or made available only to intended parties."
-    },
-    {
-        id: "soc2-v2-pi1-4-3",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.4.3",
-        label: "PI1.4.3",
-        control: "PI1.4.3: ",
-        requirements: "Distributes Output Completely and Accurately — Procedures are in place to provide for the completeness, accuracy, and timeliness of distributed output."
-    },
-    {
-        id: "soc2-v2-pi1-4-4",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.4.4",
-        label: "PI1.4.4",
-        control: "PI1.4.4: ",
-        requirements: "Creates and Maintains Records of System Output Activities — Records of system output activities are created and maintained completely and accurately in a timely manner."
-    },
-    {
-        id: "soc2-v2-pi1-5",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.5",
-        label: "PI1.5",
-        control: "PI1.5: ",
-        requirements: "The entity implements policies and procedures to store inputs, items in processing, and outputs completely, accurately, and timely in accordance with system specifications to meet the entity’s objectives."
-    },
-    {
-        id: "soc2-v2-pi1-5-1",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.5.1",
-        label: "PI1.5.1",
-        control: "PI1.5.1: ",
-        requirements: "Protects Stored Items — Stored items are protected to prevent theft, corruption, destruction, or deterioration that would prevent output from meeting specifications."
-    },
-    {
-        id: "soc2-v2-pi1-5-2",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.5.2",
-        label: "PI1.5.2",
-        control: "PI1.5.2: ",
-        requirements: "Archives and Protects System Records — System records are archived, and archives are protected against theft, corruption, destruction, or deterioration that would prevent them from being used."
-    },
-    {
-        id: "soc2-v2-pi1-5-3",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.5.3",
-        label: "PI1.5.3",
-        control: "PI1.5.3: ",
-        requirements: "Stores Data Completely and Accurately — Procedures are in place to provide for the complete, accurate, and timely storage of data."
-    },
-    {
-        id: "soc2-v2-pi1-5-4",
-        section: "Additional Criteria for Processing Integrity",
-        code: "PI1.5.4",
-        label: "PI1.5.4",
-        control: "PI1.5.4: ",
-        requirements: "Creates and Maintains Records of System Storage Activities — Records of system storage activities are created and maintained completely and accurately in a timely manner."
-    },
-    {
-        id: "soc2-v2-p1-1",
-        section: "Additional Criteria for Privacy",
-        code: "P1.1",
-        label: "P1.1",
-        control: "P1.1: ",
-        requirements: "The entity provides notice to data subjects about its privacy practices to meet the entity’s objectives related to privacy. The notice is updated and communicated to data subjects in a timely manner for changes to the entity’s privacy practices, including changes in the use of personal information, to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p1-1-1",
-        section: "Additional Criteria for Privacy",
-        code: "P1.1.1",
-        label: "P1.1.1",
-        control: "P1.1.1: ",
-        requirements: "Communicates to Data Subjects — Notice is provided to data subjects regarding the following: — — Purpose for collecting personal information — — Choice and consent — — Types of personal information collected — — Methods of collection (for example, use of cookies or other tracking techniques) — — Use, retention, and disposal — — Access — — Disclosure to third parties — — Security for privacy — — Quality, including data subjects’ responsibilities for quality — — Monitoring and enforcement — If personal information is collected from sources other than the individual, such sources are described in the privacy notice."
-    },
-    {
-        id: "soc2-v2-p1-1-2",
-        section: "Additional Criteria for Privacy",
-        code: "P1.1.2",
-        label: "P1.1.2",
-        control: "P1.1.2: ",
-        requirements: "Provides Notice to Data Subjects — Notice is provided to data subjects (1) at or before the time personal information is collected or as soon as practical thereafter, (2) at or before the entity changes its privacy notice or as soon as practical thereafter, or (3) before personal information is used for new purposes not previously identified."
-    },
-    {
-        id: "soc2-v2-p1-1-3",
-        section: "Additional Criteria for Privacy",
-        code: "P1.1.3",
-        label: "P1.1.3",
-        control: "P1.1.3: ",
-        requirements: "Covers Entities and Activities in Notice — An objective description of the entities and activities covered is included in the entity’s privacy notice."
-    },
-    {
-        id: "soc2-v2-p1-1-4",
-        section: "Additional Criteria for Privacy",
-        code: "P1.1.4",
-        label: "P1.1.4",
-        control: "P1.1.4: ",
-        requirements: "Uses Clear and Conspicuous Language — The entity’s privacy notice is conspicuous and uses clear language."
-    },
-    {
-        id: "soc2-v2-p2-1",
-        section: "Additional Criteria for Privacy",
-        code: "P2.1",
-        label: "P2.1",
-        control: "P2.1: ",
-        requirements: "The entity communicates choices available regarding the collection, use, retention, disclosure, and disposal of personal information to the data subjects and the consequences, if any, of each choice. Explicit consent for the collection, use, retention, disclosure, and disposal of personal information is obtained from data subjects or other authorized persons, if required. Such consent is obtained only for the intended purpose of the information to meet the entity’s objectives related to privacy. The entity’s basis for determining implicit consent for the collection, use, retention, disclosure, and disposal of personal information is documented."
-    },
-    {
-        id: "soc2-v2-p2-1-1",
-        section: "Additional Criteria for Privacy",
-        code: "P2.1.1",
-        label: "P2.1.1",
-        control: "P2.1.1: ",
-        requirements: "Communicates to Data Subjects — Data subjects are informed (a) about the choices available to them with respect to the collection, use, and disclosure of personal information and (b) that implicit or explicit consent is required to collect, use, and disclose personal information, unless a law or regulation specifically requires or allows otherwise."
-    },
-    {
-        id: "soc2-v2-p2-1-2",
-        section: "Additional Criteria for Privacy",
-        code: "P2.1.2",
-        label: "P2.1.2",
-        control: "P2.1.2: ",
-        requirements: "Communicates Consequences of Denying or Withdrawing Consent — When personal information is collected, data subjects are informed of the consequences of refusing to provide personal information or denying or withdrawing consent to use personal information for purposes identified in the notice."
-    },
-    {
-        id: "soc2-v2-p2-1-3",
-        section: "Additional Criteria for Privacy",
-        code: "P2.1.3",
-        label: "P2.1.3",
-        control: "P2.1.3: ",
-        requirements: "Obtains Implicit or Explicit Consent — Implicit or explicit consent is obtained from data subjects at or before the time personal information is collected or soon thereafter. The individual’s preferences expressed in his or her consent are confirmed and implemented."
-    },
-    {
-        id: "soc2-v2-p2-1-4",
-        section: "Additional Criteria for Privacy",
-        code: "P2.1.4",
-        label: "P2.1.4",
-        control: "P2.1.4: ",
-        requirements: "Documents and Obtains Consent for New Purposes and Uses — If information that was previously collected is to be used for purposes not previously identified in the privacy notice, the new purpose is documented, the data subject is notified, and implicit or explicit consent is obtained prior to such new use or purpose."
-    },
-    {
-        id: "soc2-v2-p2-1-5",
-        section: "Additional Criteria for Privacy",
-        code: "P2.1.5",
-        label: "P2.1.5",
-        control: "P2.1.5: ",
-        requirements: "Obtains Explicit Consent for Sensitive Information — Explicit consent is obtained directly from the data subject when sensitive personal information is collected, used, or disclosed, unless a law or regulation specifically requires otherwise."
-    },
-    {
-        id: "soc2-v2-p2-1-6",
-        section: "Additional Criteria for Privacy",
-        code: "P2.1.6",
-        label: "P2.1.6",
-        control: "P2.1.6: ",
-        requirements: "Obtains Consent for Data Transfers — Consent is obtained before personal information is transferred to or from an individual’s computer or other similar device."
-    },
-    {
-        id: "soc2-v2-p3-1",
-        section: "Additional Criteria for Privacy",
-        code: "P3.1",
-        label: "P3.1",
-        control: "P3.1: ",
-        requirements: "Personal information is collected consistent with the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p3-1-1",
-        section: "Additional Criteria for Privacy",
-        code: "P3.1.1",
-        label: "P3.1.1",
-        control: "P3.1.1: ",
-        requirements: "Limits the Collection of Personal Information — The collection of personal information is limited to that necessary to meet the entity’s objectives."
-    },
-    {
-        id: "soc2-v2-p3-1-2",
-        section: "Additional Criteria for Privacy",
-        code: "P3.1.2",
-        label: "P3.1.2",
-        control: "P3.1.2: ",
-        requirements: "Collects Information by Fair and Lawful Means — Methods of collecting personal information are reviewed by management before they are implemented to confirm that personal information is obtained (a) fairly, without intimidation or deception, and (b) lawfully, adhering to all relevant rules of law, whether derived from statute or common law, relating to the collection of personal information."
-    },
-    {
-        id: "soc2-v2-p3-1-3",
-        section: "Additional Criteria for Privacy",
-        code: "P3.1.3",
-        label: "P3.1.3",
-        control: "P3.1.3: ",
-        requirements: "Collects Information From Reliable Sources — Management confirms that third parties from whom personal information is collected (that is, sources other than the individual) are reliable sources that collect information fairly and lawfully."
-    },
-    {
-        id: "soc2-v2-p3-1-4",
-        section: "Additional Criteria for Privacy",
-        code: "P3.1.4",
-        label: "P3.1.4",
-        control: "P3.1.4: ",
-        requirements: "Informs Data Subjects When Additional Information Is Acquired — Data subjects are informed if the entity develops or acquires additional information about them for its use."
-    },
-    {
-        id: "soc2-v2-p3-2",
-        section: "Additional Criteria for Privacy",
-        code: "P3.2",
-        label: "P3.2",
-        control: "P3.2: ",
-        requirements: "For information requiring explicit consent, the entity communicates the need for such consent, as well as the consequences of a failure to provide consent for the request for personal information, and obtains the consent prior to the collection of the information to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p3-2-1",
-        section: "Additional Criteria for Privacy",
-        code: "P3.2.1",
-        label: "P3.2.1",
-        control: "P3.2.1: ",
-        requirements: "Obtains Explicit Consent for Sensitive Information — Explicit consent is obtained directly from the data subject when sensitive personal information is collected, used, or disclosed, unless a law or regulation specifically requires otherwise."
-    },
-    {
-        id: "soc2-v2-p3-2-2",
-        section: "Additional Criteria for Privacy",
-        code: "P3.2.2",
-        label: "P3.2.2",
-        control: "P3.2.2: ",
-        requirements: "Documents Explicit Consent to Retain Information — Documentation of explicit consent for the collection, use, or disclosure of sensitive personal information is retained in accordance with objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p4-1",
-        section: "Additional Criteria for Privacy",
-        code: "P4.1",
-        label: "P4.1",
-        control: "P4.1: ",
-        requirements: "The entity limits the use of personal information to the purposes identified in the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p4-1-1",
-        section: "Additional Criteria for Privacy",
-        code: "P4.1.1",
-        label: "P4.1.1",
-        control: "P4.1.1: ",
-        requirements: "Uses Personal Information for Intended Purposes — Personal information is used only for the intended purposes for which it was collected and only when implicit or explicit consent has been obtained unless a law or regulation specifically requires otherwise."
-    },
-    {
-        id: "soc2-v2-p4-2",
-        section: "Additional Criteria for Privacy",
-        code: "P4.2",
-        label: "P4.2",
-        control: "P4.2: ",
-        requirements: "The entity retains personal information consistent with the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p4-2-1",
-        section: "Additional Criteria for Privacy",
-        code: "P4.2.1",
-        label: "P4.2.1",
-        control: "P4.2.1: ",
-        requirements: "Retains Personal Information — Personal information is retained for no longer than necessary to fulfill the stated purposes, unless a law or regulation specifically requires otherwise."
-    },
-    {
-        id: "soc2-v2-p4-2-2",
-        section: "Additional Criteria for Privacy",
-        code: "P4.2.2",
-        label: "P4.2.2",
-        control: "P4.2.2: ",
-        requirements: "Protects Personal Information — Policies and procedures have been implemented to protect personal information from erasure or destruction during the specified retention period of the information."
-    },
-    {
-        id: "soc2-v2-p4-3",
-        section: "Additional Criteria for Privacy",
-        code: "P4.3",
-        label: "P4.3",
-        control: "P4.3: ",
-        requirements: "The entity securely disposes of personal information to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p4-3-1",
-        section: "Additional Criteria for Privacy",
-        code: "P4.3.1",
-        label: "P4.3.1",
-        control: "P4.3.1: ",
-        requirements: "Captures, Identifies, and Flags Requests for Deletion — Requests for deletion of personal information are captured, and information related to the requests is identified and flagged for destruction to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p4-3-2",
-        section: "Additional Criteria for Privacy",
-        code: "P4.3.2",
-        label: "P4.3.2",
-        control: "P4.3.2: ",
-        requirements: "Disposes of, Destroys, and Redacts Personal Information — Personal information no longer retained is anonymized, disposed of, or destroyed in a manner that prevents loss, theft, misuse, or unauthorized access."
-    },
-    {
-        id: "soc2-v2-p4-3-3",
-        section: "Additional Criteria for Privacy",
-        code: "P4.3.3",
-        label: "P4.3.3",
-        control: "P4.3.3: ",
-        requirements: "Destroys Personal Information — Policies and procedures are implemented to erase or otherwise destroy personal information that has been identified for destruction."
-    },
-    {
-        id: "soc2-v2-p5-1",
-        section: "Additional Criteria for Privacy",
-        code: "P5.1",
-        label: "P5.1",
-        control: "P5.1: ",
-        requirements: "The entity grants identified and authenticated data subjects the ability to access their stored personal information for review and, upon request, provides physical or electronic copies of that information to data subjects to meet the entity’s objectives related to privacy. If access is denied, data subjects are informed of the denial and reason for such denial, as required, to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p5-1-1",
-        section: "Additional Criteria for Privacy",
-        code: "P5.1.1",
-        label: "P5.1.1",
-        control: "P5.1.1: ",
-        requirements: "Authenticates Data Subjects’ Identity — The identity of data subjects who request access to their personal information is authenticated before they are given access to that information."
-    },
-    {
-        id: "soc2-v2-p5-1-2",
-        section: "Additional Criteria for Privacy",
-        code: "P5.1.2",
-        label: "P5.1.2",
-        control: "P5.1.2: ",
-        requirements: "Permits Data Subjects Access to Their Personal Information — Data subjects are able to determine whether the entity maintains personal information about them and, upon request, may obtain access to their personal information."
-    },
-    {
-        id: "soc2-v2-p5-1-3",
-        section: "Additional Criteria for Privacy",
-        code: "P5.1.3",
-        label: "P5.1.3",
-        control: "P5.1.3: ",
-        requirements: "Provides Understandable Personal Information Within Reasonable Time — Personal information is provided to data subjects in an understandable form, in a reasonable time frame, and at a reasonable cost, if any."
-    },
-    {
-        id: "soc2-v2-p5-1-4",
-        section: "Additional Criteria for Privacy",
-        code: "P5.1.4",
-        label: "P5.1.4",
-        control: "P5.1.4: ",
-        requirements: "Informs Data Subjects If Access Is Denied — When data subjects are denied access to their personal information, the entity informs them of the denial and the reason for the denial in a timely manner, unless prohibited by law or regulation."
-    },
-    {
-        id: "soc2-v2-p5-2",
-        section: "Additional Criteria for Privacy",
-        code: "P5.2",
-        label: "P5.2",
-        control: "P5.2: ",
-        requirements: "The entity corrects, amends, or appends personal information based on information provided by data subjects and communicates such information to third parties, as committed or required, to meet the entity’s objectives related to privacy. If a request for correction is denied, data subjects are informed of the denial and reason for such denial to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p5-2-1",
-        section: "Additional Criteria for Privacy",
-        code: "P5.2.1",
-        label: "P5.2.1",
-        control: "P5.2.1: ",
-        requirements: "Communicates Denial of Access Requests — Data subjects are informed, in writing, of the reason a request for access to their personal information was denied, the source of the entity’s legal right to deny such access, if applicable, and the individual’s right, if any, to challenge such denial, as specifically permitted or required by law or regulation."
-    },
-    {
-        id: "soc2-v2-p5-2-2",
-        section: "Additional Criteria for Privacy",
-        code: "P5.2.2",
-        label: "P5.2.2",
-        control: "P5.2.2: ",
-        requirements: "Permits Data Subjects to Update or Correct Personal Information — Data subjects are able to update or correct personal information held by the entity. The entity provides such updated or corrected information to third parties that were previously provided with the data subject’s personal information consistent with the entity’s objective related to privacy."
-    },
-    {
-        id: "soc2-v2-p5-2-3",
-        section: "Additional Criteria for Privacy",
-        code: "P5.2.3",
-        label: "P5.2.3",
-        control: "P5.2.3: ",
-        requirements: "Communicates Denial of Correction Requests — Data subjects are informed, in writing, about the reason a request for correction of personal information was denied and how they may appeal."
-    },
-    {
-        id: "soc2-v2-p6-1",
-        section: "Additional Criteria for Privacy",
-        code: "P6.1",
-        label: "P6.1",
-        control: "P6.1: ",
-        requirements: "The entity discloses personal information to third parties with the explicit consent of data subjects, and such consent is obtained prior to disclosure to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p6-1-1",
-        section: "Additional Criteria for Privacy",
-        code: "P6.1.1",
-        label: "P6.1.1",
-        control: "P6.1.1: ",
-        requirements: "Communicates Privacy Policies to Third Parties — Privacy policies or other specific instructions or requirements for handling personal information are communicated to third parties to whom personal information is disclosed."
-    },
-    {
-        id: "soc2-v2-p6-1-2",
-        section: "Additional Criteria for Privacy",
-        code: "P6.1.2",
-        label: "P6.1.2",
-        control: "P6.1.2: ",
-        requirements: "Discloses Personal Information Only When Appropriate — Personal information is disclosed to third parties only for the purposes for which it was collected or created and only when implicit or explicit consent has been obtained from the data subject, unless a law or regulation specifically requires otherwise."
-    },
-    {
-        id: "soc2-v2-p6-1-3",
-        section: "Additional Criteria for Privacy",
-        code: "P6.1.3",
-        label: "P6.1.3",
-        control: "P6.1.3: ",
-        requirements: "Discloses Personal Information Only to Appropriate Third Parties — Personal information is disclosed only to third parties who have agreements with the entity to protect personal information in a manner consistent with the relevant aspects of the entity’s privacy notice or other specific instructions or requirements. The entity has procedures in place to evaluate that the third parties have effective controls to meet the terms of the agreement, instructions, or requirements."
-    },
-    {
-        id: "soc2-v2-p6-1-4",
-        section: "Additional Criteria for Privacy",
-        code: "P6.1.4",
-        label: "P6.1.4",
-        control: "P6.1.4: ",
-        requirements: "Discloses Information to Third Parties for New Purposes and Uses — Personal information is disclosed to third parties for new purposes or uses only with the prior implicit or explicit consent of data subjects."
-    },
-    {
-        id: "soc2-v2-p6-2",
-        section: "Additional Criteria for Privacy",
-        code: "P6.2",
-        label: "P6.2",
-        control: "P6.2: ",
-        requirements: "The entity creates and retains a complete, accurate, and timely record of authorized disclosures of personal information to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p6-2-1",
-        section: "Additional Criteria for Privacy",
-        code: "P6.2.1",
-        label: "P6.2.1",
-        control: "P6.2.1: ",
-        requirements: "Creates and Retains Record of Authorized Disclosures — The entity creates and maintains a record of authorized disclosures of personal information that is complete, accurate, and timely."
-    },
-    {
-        id: "soc2-v2-p6-3",
-        section: "Additional Criteria for Privacy",
-        code: "P6.3",
-        label: "P6.3",
-        control: "P6.3: ",
-        requirements: "The entity creates and retains a complete, accurate, and timely record of detected or reported unauthorized disclosures (including breaches) of personal information to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p6-3-1",
-        section: "Additional Criteria for Privacy",
-        code: "P6.3.1",
-        label: "P6.3.1",
-        control: "P6.3.1: ",
-        requirements: "Creates and Retains Record of Detected or Reported Unauthorized Disclosures — The entity creates and maintains a record of detected or reported unauthorized disclosures of personal information that is complete, accurate, and timely."
-    },
-    {
-        id: "soc2-v2-p6-4",
-        section: "Additional Criteria for Privacy",
-        code: "P6.4",
-        label: "P6.4",
-        control: "P6.4: ",
-        requirements: "The entity obtains privacy commitments from vendors and other third parties who have access to personal information to meet the entity’s objectives related to privacy. The entity assesses those parties’ compliance on a periodic and as-needed basis and takes corrective action, if necessary."
-    },
-    {
-        id: "soc2-v2-p6-4-1",
-        section: "Additional Criteria for Privacy",
-        code: "P6.4.1",
-        label: "P6.4.1",
-        control: "P6.4.1: ",
-        requirements: "Discloses Personal Information Only to Appropriate Third Parties — Personal information is disclosed only to third parties who have agreements with the entity to protect personal information in a manner consistent with the relevant aspects of the entity’s privacy notice or other specific instructions or requirements. The entity has procedures in place to evaluate that the third parties have effective controls to meet the terms of the agreement, instructions, or requirements."
-    },
-    {
-        id: "soc2-v2-p6-4-2",
-        section: "Additional Criteria for Privacy",
-        code: "P6.4.2",
-        label: "P6.4.2",
-        control: "P6.4.2: ",
-        requirements: "Remediates Misuse of Personal Information by a Third Party — The entity takes remedial action in response to misuse of personal information by a third party to whom the entity has transferred such information."
-    },
-    {
-        id: "soc2-v2-p6-5",
-        section: "Additional Criteria for Privacy",
-        code: "P6.5",
-        label: "P6.5",
-        control: "P6.5: ",
-        requirements: "The entity obtains commitments from vendors and other third parties with access to personal information to notify the entity in the event of actual or suspected unauthorized disclosures of personal information. Such notifications are reported to appropriate personnel and acted on in accordance with established incident response procedures to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p6-5-1",
-        section: "Additional Criteria for Privacy",
-        code: "P6.5.1",
-        label: "P6.5.1",
-        control: "P6.5.1: ",
-        requirements: "Remediates Misuse of Personal Information by a Third Party — The entity takes remedial action in response to misuse of personal information by a third party to whom the entity has transferred such information."
-    },
-    {
-        id: "soc2-v2-p6-5-2",
-        section: "Additional Criteria for Privacy",
-        code: "P6.5.2",
-        label: "P6.5.2",
-        control: "P6.5.2: ",
-        requirements: "Reports Actual or Suspected Unauthorized Disclosures — A process exists for obtaining commitments from vendors and other third parties to report to the entity actual or suspected unauthorized disclosures of personal information."
-    },
-    {
-        id: "soc2-v2-p6-6",
-        section: "Additional Criteria for Privacy",
-        code: "P6.6",
-        label: "P6.6",
-        control: "P6.6: ",
-        requirements: "The entity provides notification of breaches and incidents to affected data subjects, regulators, and others to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p6-6-1",
-        section: "Additional Criteria for Privacy",
-        code: "P6.6.1",
-        label: "P6.6.1",
-        control: "P6.6.1: ",
-        requirements: "Remediates Misuse of Personal Information by a Third Party — The entity takes remedial action in response to misuse of personal information by a third party to whom the entity has transferred such information."
-    },
-    {
-        id: "soc2-v2-p6-6-2",
-        section: "Additional Criteria for Privacy",
-        code: "P6.6.2",
-        label: "P6.6.2",
-        control: "P6.6.2: ",
-        requirements: "Provides Notice of Breaches and Incidents — The entity has a process for providing notice of breaches and incidents to affected data subjects, regulators, and others to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p6-7",
-        section: "Additional Criteria for Privacy",
-        code: "P6.7",
-        label: "P6.7",
-        control: "P6.7: ",
-        requirements: "The entity provides data subjects with an accounting of the personal information held and disclosure of the data subjects’ personal information, upon the data subjects’ request, to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p6-7-1",
-        section: "Additional Criteria for Privacy",
-        code: "P6.7.1",
-        label: "P6.7.1",
-        control: "P6.7.1: ",
-        requirements: "Identifies Types of Personal Information and Handling Process — The types of personal information and sensitive personal information and the related processes, systems, and third parties involved in the handling of such information are identified."
-    },
-    {
-        id: "soc2-v2-p6-7-2",
-        section: "Additional Criteria for Privacy",
-        code: "P6.7.2",
-        label: "P6.7.2",
-        control: "P6.7.2: ",
-        requirements: "Captures, Identifies, and Communicates Requests for Information — Requests for an accounting of personal information held and disclosures of the data subjects’ personal information are captured, and information related to the requests is identified and communicated to data subjects to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p7-1",
-        section: "Additional Criteria for Privacy",
-        code: "P7.1",
-        label: "P7.1",
-        control: "P7.1: ",
-        requirements: "The entity collects and maintains accurate, up-to-date, complete, and relevant personal information to meet the entity’s objectives related to privacy."
-    },
-    {
-        id: "soc2-v2-p7-1-1",
-        section: "Additional Criteria for Privacy",
-        code: "P7.1.1",
-        label: "P7.1.1",
-        control: "P7.1.1: ",
-        requirements: "Ensures Accuracy and Completeness of Personal Information — Personal information is accurate and complete for the purposes for which it is to be used."
-    },
-    {
-        id: "soc2-v2-p7-1-2",
-        section: "Additional Criteria for Privacy",
-        code: "P7.1.2",
-        label: "P7.1.2",
-        control: "P7.1.2: ",
-        requirements: "Ensures Relevance of Personal Information — Personal information is relevant to the purposes for which it is to be used."
-    },
-    {
-        id: "soc2-v2-p8-1",
-        section: "Additional Criteria for Privacy",
-        code: "P8.1",
-        label: "P8.1",
-        control: "P8.1: ",
-        requirements: "The entity implements a process for receiving, addressing, resolving, and communicating the resolution of inquiries, complaints, and disputes from data subjects and others and periodically monitors compliance to meet the entity’s objectives related to privacy. Corrections and other necessary actions related to identified deficiencies are made or taken in a timely manner."
-    },
-    {
-        id: "soc2-v2-p8-1-1",
-        section: "Additional Criteria for Privacy",
-        code: "P8.1.1",
-        label: "P8.1.1",
-        control: "P8.1.1: ",
-        requirements: "Communicates to Data Subjects — Data subjects are informed about how to contact the entity with inquiries, complaints, and disputes."
-    },
-    {
-        id: "soc2-v2-p8-1-2",
-        section: "Additional Criteria for Privacy",
-        code: "P8.1.2",
-        label: "P8.1.2",
-        control: "P8.1.2: ",
-        requirements: "Addresses Inquiries, Complaints, and Disputes — A process is in place to address inquiries, complaints, and disputes."
-    },
-    {
-        id: "soc2-v2-p8-1-3",
-        section: "Additional Criteria for Privacy",
-        code: "P8.1.3",
-        label: "P8.1.3",
-        control: "P8.1.3: ",
-        requirements: "Documents and Communicates Dispute Resolution and Recourse — Each complaint is addressed, and the resolution is documented and communicated to the individual."
-    },
-    {
-        id: "soc2-v2-p8-1-4",
-        section: "Additional Criteria for Privacy",
-        code: "P8.1.4",
-        label: "P8.1.4",
-        control: "P8.1.4: ",
-        requirements: "Documents and Reports Compliance Review Results — Compliance with objectives related to privacy are reviewed and documented, and the results of such reviews are reported to management. If problems are identified, remediation plans are developed and implemented."
-    },
-    {
-        id: "soc2-v2-p8-1-5",
-        section: "Additional Criteria for Privacy",
-        code: "P8.1.5",
-        label: "P8.1.5",
-        control: "P8.1.5: ",
-        requirements: "Documents and Reports Instances of Noncompliance — Instances of noncompliance with objectives related to privacy are documented and reported and, if needed, corrective and disciplinary measures are taken on a timely basis."
-    },
-    {
-        id: "soc2-v2-p8-1-6",
-        section: "Additional Criteria for Privacy",
-        code: "P8.1.6",
-        label: "P8.1.6",
-        control: "P8.1.6: ",
-        requirements: "Performs Ongoing Monitoring — Ongoing procedures are performed for monitoring the effectiveness of controls over personal information and for taking timely corrective actions when necessary."
-    },
-]
-
+export default {
+    sections: [
+        { id: "control-environment" },
+        { id: "communication-information" },
+        { id: "risk-assessment" },
+        { id: "monitoring-activities" },
+        { id: "control-activities" },
+        { id: "logical-physical-access" },
+        { id: "system-operations" },
+        { id: "change-management" },
+        { id: "risk-mitigation" },
+        { id: "availability" },
+        { id: "confidentiality" },
+        { id: "processing-integrity" },
+        { id: "privacy" }
+    ],
+    controls: [
+        {
+            "id": "soc2-v2-cc1-1",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-1-1",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-1-2",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-1-3",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-1-4",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-1-5",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-2",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-2-1",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-2-2",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-2-3",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-2-4",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-3",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-3-1",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-3-2",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-3-3",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-3-4",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-3-5",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-4",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-4-1",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-4-2",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-4-3",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-4-4",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-4-5",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-4-6",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-4-7",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-5",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-5-1",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-5-2",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-5-3",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-5-4",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc1-5-5",
+            "sectionId": "control-environment"
+        },
+        {
+            "id": "soc2-v2-cc2-1",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-1-1",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-1-2",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-1-3",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-1-4",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-2",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-2-1",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-2-2",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-2-3",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-2-4",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-2-5",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-2-6",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-2-7",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-2-8",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-2-9",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-2-10",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-2-11",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-3",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-3-1",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-3-2",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-3-3",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-3-4",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-3-5",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-3-6",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-3-7",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-3-8",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-3-9",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-3-10",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc2-3-11",
+            "sectionId": "communication-information"
+        },
+        {
+            "id": "soc2-v2-cc3-1",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-1",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-2",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-3",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-4",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-5",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-6",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-7",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-8",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-9",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-10",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-11",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-12",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-13",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-14",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-15",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-1-16",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-2",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-2-1",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-2-2",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-2-3",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-2-4",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-2-5",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-2-6",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-2-7",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-2-8",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-3",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-3-1",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-3-2",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-3-3",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-3-4",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-3-5",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-4",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-4-1",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-4-2",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-4-3",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-4-4",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc3-4-5",
+            "sectionId": "risk-assessment"
+        },
+        {
+            "id": "soc2-v2-cc4-1",
+            "sectionId": "monitoring-activities"
+        },
+        {
+            "id": "soc2-v2-cc4-1-1",
+            "sectionId": "monitoring-activities"
+        },
+        {
+            "id": "soc2-v2-cc4-1-2",
+            "sectionId": "monitoring-activities"
+        },
+        {
+            "id": "soc2-v2-cc4-1-3",
+            "sectionId": "monitoring-activities"
+        },
+        {
+            "id": "soc2-v2-cc4-1-4",
+            "sectionId": "monitoring-activities"
+        },
+        {
+            "id": "soc2-v2-cc4-1-5",
+            "sectionId": "monitoring-activities"
+        },
+        {
+            "id": "soc2-v2-cc4-1-6",
+            "sectionId": "monitoring-activities"
+        },
+        {
+            "id": "soc2-v2-cc4-1-7",
+            "sectionId": "monitoring-activities"
+        },
+        {
+            "id": "soc2-v2-cc4-1-8",
+            "sectionId": "monitoring-activities"
+        },
+        {
+            "id": "soc2-v2-cc4-2",
+            "sectionId": "monitoring-activities"
+        },
+        {
+            "id": "soc2-v2-cc4-2-1",
+            "sectionId": "monitoring-activities"
+        },
+        {
+            "id": "soc2-v2-cc4-2-2",
+            "sectionId": "monitoring-activities"
+        },
+        {
+            "id": "soc2-v2-cc4-2-3",
+            "sectionId": "monitoring-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-1",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-1-1",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-1-2",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-1-3",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-1-4",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-1-5",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-1-6",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-2",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-2-1",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-2-2",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-2-3",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-2-4",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-3",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-3-1",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-3-2",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-3-3",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-3-4",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-3-5",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc5-3-6",
+            "sectionId": "control-activities"
+        },
+        {
+            "id": "soc2-v2-cc6-1",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-1-1",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-1-2",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-1-3",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-1-4",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-1-5",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-1-6",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-1-7",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-1-8",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-1-9",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-1-10",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-2",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-2-1",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-2-2",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-2-3",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-3",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-3-1",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-3-2",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-3-3",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-4",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-4-1",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-4-2",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-4-3",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-5",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-5-1",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-5-2",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-6",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-6-1",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-6-2",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-6-3",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-6-4",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-7",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-7-1",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-7-2",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-7-3",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-7-4",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-8",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-8-1",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-8-2",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-8-3",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-8-4",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc6-8-5",
+            "sectionId": "logical-physical-access"
+        },
+        {
+            "id": "soc2-v2-cc7-1",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-1-1",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-1-2",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-1-3",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-1-4",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-1-5",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-2",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-2-1",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-2-2",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-2-3",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-2-4",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-3",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-3-1",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-3-2",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-3-3",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-3-4",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-3-5",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-4",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-4-1",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-4-2",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-4-3",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-4-4",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-4-5",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-4-6",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-4-7",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-4-8",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-4-9",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-4-10",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-4-11",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-4-12",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-4-13",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-5",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-5-1",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-5-2",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-5-3",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-5-4",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-5-5",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc7-5-6",
+            "sectionId": "system-operations"
+        },
+        {
+            "id": "soc2-v2-cc8-1",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc8-1-1",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc8-1-2",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc8-1-3",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc8-1-4",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc8-1-5",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc8-1-6",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc8-1-7",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc8-1-8",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc8-1-9",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc8-1-10",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc8-1-11",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc8-1-12",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc8-1-13",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc8-1-14",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc8-1-15",
+            "sectionId": "change-management"
+        },
+        {
+            "id": "soc2-v2-cc9-1",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-cc9-1-1",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-cc9-1-2",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-cc9-2",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-cc9-2-1",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-cc9-2-2",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-cc9-2-3",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-cc9-2-4",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-cc9-2-5",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-cc9-2-6",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-cc9-2-7",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-cc9-2-8",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-cc9-2-9",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-cc9-2-10",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-cc9-2-11",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-cc9-2-12",
+            "sectionId": "risk-mitigation"
+        },
+        {
+            "id": "soc2-v2-a1-1",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-1-1",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-1-2",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-1-3",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-2",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-2-1",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-2-2",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-2-3",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-2-4",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-2-5",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-2-6",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-2-7",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-2-8",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-2-9",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-2-10",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-3",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-3-1",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-a1-3-2",
+            "sectionId": "availability"
+        },
+        {
+            "id": "soc2-v2-c1-1",
+            "sectionId": "confidentiality"
+        },
+        {
+            "id": "soc2-v2-c1-1-1",
+            "sectionId": "confidentiality"
+        },
+        {
+            "id": "soc2-v2-c1-1-2",
+            "sectionId": "confidentiality"
+        },
+        {
+            "id": "soc2-v2-c1-2",
+            "sectionId": "confidentiality"
+        },
+        {
+            "id": "soc2-v2-c1-2-1",
+            "sectionId": "confidentiality"
+        },
+        {
+            "id": "soc2-v2-c1-2-2",
+            "sectionId": "confidentiality"
+        },
+        {
+            "id": "soc2-v2-pi1-1",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-1-1",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-1-2",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-2",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-2-1",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-2-2",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-2-3",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-3",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-3-1",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-3-2",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-3-3",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-3-4",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-3-5",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-4",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-4-1",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-4-2",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-4-3",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-4-4",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-5",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-5-1",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-5-2",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-5-3",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-pi1-5-4",
+            "sectionId": "processing-integrity"
+        },
+        {
+            "id": "soc2-v2-p1-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p1-1-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p1-1-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p1-1-3",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p1-1-4",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p2-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p2-1-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p2-1-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p2-1-3",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p2-1-4",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p2-1-5",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p2-1-6",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p3-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p3-1-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p3-1-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p3-1-3",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p3-1-4",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p3-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p3-2-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p3-2-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p4-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p4-1-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p4-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p4-2-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p4-2-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p4-3",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p4-3-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p4-3-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p4-3-3",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p5-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p5-1-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p5-1-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p5-1-3",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p5-1-4",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p5-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p5-2-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p5-2-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p5-2-3",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-1-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-1-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-1-3",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-1-4",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-2-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-3",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-3-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-4",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-4-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-4-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-5",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-5-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-5-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-6",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-6-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-6-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-7",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-7-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p6-7-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p7-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p7-1-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p7-1-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p8-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p8-1-1",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p8-1-2",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p8-1-3",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p8-1-4",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p8-1-5",
+            "sectionId": "privacy"
+        },
+        {
+            "id": "soc2-v2-p8-1-6",
+            "sectionId": "privacy"
+        }
+    ]
+}

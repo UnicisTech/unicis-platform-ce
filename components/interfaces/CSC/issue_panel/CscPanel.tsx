@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import ControlBlock from './ControlBlock';
@@ -14,7 +14,8 @@ import useISO from 'hooks/useISO';
 import CscTabs from '../CscTabs';
 import useCscStatuses from 'hooks/useCscStatuses';
 
-const CscPanel2 = ({
+// TODO: refactoring
+const CscPanel = ({
   task,
   team,
   cscFrameworks,
@@ -28,119 +29,176 @@ const CscPanel2 = ({
   const slug = team.slug;
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
+
   const [activeTab, setActiveTab] = useState<ISO>(cscFrameworks[0]);
   const { statuses, mutateStatuses } = useCscStatuses(slug, activeTab);
 
-  const properties = task.properties as any;
-  const issueControls = useMemo(() => {
-    return (properties?.[getCscControlsProp(activeTab)] as string[]) || [''];
-  }, [properties, activeTab, task]);
-
-  const [controls, setControls] = useState(issueControls);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
-  useEffect(() => {
-    setControls(issueControls);
-  }, [issueControls]);
+  // Draft controls per ISO tab (only local unsaved edits)
+  const [draftByIso, setDraftByIso] = useState<Record<string, string[]>>({});
+
+  const properties = task.properties as any;
+
+  // Source of truth from server for current tab
+  const serverControls = useMemo(() => {
+    return (properties?.[getCscControlsProp(activeTab)] as string[]) ?? [];
+  }, [properties, activeTab]);
+
+  // What we render right now (draft overrides server)
+  const controls = draftByIso[activeTab] ?? serverControls;
+
+  const setControlsForActiveTab = useCallback(
+    (updater: (prev: string[]) => string[]) => {
+      setDraftByIso((prev) => {
+        const current = prev[activeTab] ?? serverControls;
+        return { ...prev, [activeTab]: updater(current) };
+      });
+    },
+    [activeTab, serverControls]
+  );
+
+  const clearDraftForActiveTab = useCallback(() => {
+    setDraftByIso((prev) => {
+      if (!(activeTab in prev)) return prev;
+      const { [activeTab]: _removed, ...rest } = prev;
+      return rest;
+    });
+  }, [activeTab]);
 
   const addControl = useCallback(() => {
-    setControls((prev) => [...prev, '']);
-  }, [setControls]);
+    setControlsForActiveTab((prev) => [...prev, '']);
+  }, [setControlsForActiveTab]);
 
   const deleteControls = useCallback(async () => {
     setIsDeleting(true);
     try {
-      const res = await fetch(
-        `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
-        {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            controls,
-            operation: 'remove',
-            ISO: activeTab,
-          }),
-        }
-      );
+      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/csc`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          controls,
+          operation: 'remove',
+          ISO: activeTab,
+        }),
+      });
 
       const { error } = await res.json();
       if (!res.ok || error)
         return toast.error(error?.message || 'Request failed');
 
-      mutateTask();
+      clearDraftForActiveTab();
+      await mutateTask();
     } catch {
       toast.error('Something went wrong');
     } finally {
       setIsDeleting(false);
     }
-  }, [slug, task, controls, activeTab, mutateTask]);
+  }, [slug, task.taskNumber, controls, activeTab, mutateTask, clearDraftForActiveTab]);
 
   const controlHanlder = useCallback(
     async (oldControl: string, newControl: string) => {
+      // optimistic local update so UI does not flicker
+      setControlsForActiveTab((prev) => {
+        if (oldControl === '') {
+          // replace one empty slot with newControl
+          const idx = prev.findIndex((c) => c === '');
+          if (idx === -1) return prev;
+          const next = [...prev];
+          next[idx] = newControl;
+          return next;
+        }
+
+        // replace oldControl with newControl (first match)
+        const idx = prev.findIndex((c) => c === oldControl);
+        if (idx === -1) return prev;
+        const next = [...prev];
+        next[idx] = newControl;
+        return next;
+      });
+
       setIsSaving(true);
       try {
         const body =
           oldControl === ''
             ? { controls: [newControl], operation: 'add', ISO: activeTab }
-            : {
-                controls: [oldControl, newControl],
-                operation: 'change',
-                ISO: activeTab,
-              };
+            : { controls: [oldControl, newControl], operation: 'change', ISO: activeTab };
 
-        const res = await fetch(
-          `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
-          {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body),
-          }
-        );
+        const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/csc`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
 
         const { error } = await res.json();
-        if (!res.ok || error)
-          return toast.error(error?.message || 'Request failed');
+        if (!res.ok || error) {
+          toast.error(error?.message || 'Request failed');
+          // rollback by clearing draft and letting serverControls take over on next render
+          clearDraftForActiveTab();
+          return;
+        }
 
-        mutateTask();
+        clearDraftForActiveTab();
+        await mutateTask();
       } catch {
         toast.error('Something went wrong');
+        clearDraftForActiveTab();
       } finally {
         setIsSaving(false);
       }
     },
-    [slug, task, activeTab, mutateTask]
+    [
+      slug,
+      task.taskNumber,
+      activeTab,
+      mutateTask,
+      setControlsForActiveTab,
+      clearDraftForActiveTab,
+    ]
   );
 
   const deleteControlHandler = useCallback(
     async (control: string) => {
+      // optimistic local remove
+      setControlsForActiveTab((prev) => prev.filter((c) => c !== control));
+
       setIsDeleting(true);
       try {
-        const res = await fetch(
-          `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
-          {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              controls: [control],
-              operation: 'remove',
-              ISO: activeTab,
-            }),
-          }
-        );
+        const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/csc`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            controls: [control],
+            operation: 'remove',
+            ISO: activeTab,
+          }),
+        });
 
         const { error } = await res.json();
-        if (!res.ok || error)
-          return toast.error(error?.message || 'Request failed');
+        if (!res.ok || error) {
+          toast.error(error?.message || 'Request failed');
+          clearDraftForActiveTab();
+          return;
+        }
 
-        mutateTask();
+        clearDraftForActiveTab();
+        await mutateTask();
       } catch {
         toast.error('Something went wrong');
+        clearDraftForActiveTab();
       } finally {
         setIsDeleting(false);
       }
     },
-    [slug, task, activeTab, mutateTask]
+    [
+      slug,
+      task.taskNumber,
+      activeTab,
+      mutateTask,
+      setControlsForActiveTab,
+      clearDraftForActiveTab,
+    ]
   );
 
   const statusHandler = useCallback(
@@ -148,25 +206,20 @@ const CscPanel2 = ({
       try {
         const response = await fetch(`/api/teams/${slug}/csc`, {
           method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ control, value, framework: activeTab }),
         });
 
         const { error } = await response.json();
-
-        if (error) {
-          return toast.error(error.message);
-        }
+        if (error) return toast.error(error.message);
 
         toast.success('Status changed!');
         mutateStatuses();
-      } catch (err) {
+      } catch {
         toast.error('Something went wrong');
       }
     },
-    [slug, activeTab]
+    [slug, activeTab, mutateStatuses]
   );
 
   return (
@@ -174,7 +227,7 @@ const CscPanel2 = ({
       <h2 className="text-1xl font-bold">{t('csc-controls')}</h2>
 
       <CscTabs
-        iso={cscFrameworks}
+        frameworks={cscFrameworks}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
@@ -183,7 +236,7 @@ const CscPanel2 = ({
         <>
           {controls.map((control, index) => (
             <ControlBlock
-              key={index}
+              key={`${control}-${index}`}
               ISO={activeTab}
               status={statuses[control]}
               control={control}
@@ -195,6 +248,7 @@ const CscPanel2 = ({
               isDeleting={isDeleting}
             />
           ))}
+
           <div className="mt-[15px] flex justify-end">
             <div className="mx-[5px] my-0">
               <Button
@@ -203,12 +257,11 @@ const CscPanel2 = ({
                 onClick={addControl}
                 disabled={isDeleting || isSaving}
               >
-                {(isDeleting || isSaving) && (
-                  <Loader2 className="animate-spin" />
-                )}
+                {(isDeleting || isSaving) && <Loader2 className="animate-spin" />}
                 {t('add-control')}
               </Button>
             </div>
+
             <div className="mx-[5px] my-0">
               <Button
                 variant="destructive"
@@ -225,7 +278,7 @@ const CscPanel2 = ({
         <>
           {controls.map((control, index) => (
             <ControlBlockViewOnly
-              key={index}
+              key={`${control}-${index}`}
               ISO={activeTab}
               status={statuses[control]}
               control={control}
@@ -248,12 +301,10 @@ const WithISO = ({
 }) => {
   const { ISO } = useISO(team);
 
-  if (!ISO) {
-    return <Loading />;
-  }
+  if (!ISO) return <Loading />;
 
   return (
-    <CscPanel2
+    <CscPanel
       task={task}
       team={team}
       cscFrameworks={ISO}
@@ -263,3 +314,4 @@ const WithISO = ({
 };
 
 export default WithISO;
+

@@ -19,14 +19,14 @@ export const subscriptions: SubscriptionPermissions = {
     maxUsers: 10,
     maxAdmins: 1,
     maxFrameworks: 1,
-    avaliableISO: ['default'],
+    avaliableISO: ['mvps'],
   },
   PREMIUM: {
     maxUsers: 150,
     maxAdmins: 5,
     maxFrameworks: 3,
     avaliableISO: [
-      'default',
+      'mvps',
       '2013',
       '2022',
       'eunis2',
@@ -40,7 +40,7 @@ export const subscriptions: SubscriptionPermissions = {
     maxAdmins: 1000000,
     maxFrameworks: 100,
     avaliableISO: [
-      'default',
+      'mvps',
       '2013',
       '2022',
       'nistcsfv2',
