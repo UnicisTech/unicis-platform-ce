@@ -19,7 +19,11 @@ export const sendVerificationEmail = async ({
     verificationToken.token
   )}`;
 
+  console.log('[sendVerificationEmail] verificationLink created');
+
   const html = await render(VerificationEmail({ subject, verificationLink }));
+
+  console.log('[sendVerificationEmail] html rendered');
 
   await sendEmail({
     to: user.email,

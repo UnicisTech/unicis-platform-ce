@@ -3,7 +3,6 @@ import { AdminPage } from '@/components/interfaces/IAP';
 import { useRouter } from 'next/router';
 import { Error, Loading } from '@/components/shared';
 import { TeamTab } from '@/components/team';
-import env from '@/lib/env';
 import useIap from 'hooks/useIAP';
 import useTeam from 'hooks/useTeam';
 import useTeamMembers from 'hooks/useTeamMembers';
@@ -13,6 +12,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Role } from '@prisma/client';
 import useCanAccess from 'hooks/useCanAccess';
+import { getTeamFeatures } from '@/lib/subscriptions';
 
 const IAP = ({ teamFeatures }) => {
   const { canAccess } = useCanAccess();
@@ -87,13 +87,15 @@ const IAP = ({ teamFeatures }) => {
   );
 };
 
-export async function getServerSideProps({
-  locale,
-}: GetServerSidePropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { locale, req, res, query } = context;
+
+  const teamFeatures = await getTeamFeatures(req, res, query);
+
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      teamFeatures: env.teamFeatures,
+      teamFeatures: teamFeatures,
     },
   };
 }

@@ -5,7 +5,7 @@ import useTeam from 'hooks/useTeam';
 import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import env from '@/lib/env';
+import { getTeamFeatures } from '@/lib/subscriptions';
 
 const WebhookList = ({ teamFeatures }) => {
   const { t } = useTranslation('common');
@@ -31,10 +31,12 @@ const WebhookList = ({ teamFeatures }) => {
   );
 };
 
-export async function getServerSideProps({
-  locale,
-}: GetServerSidePropsContext) {
-  if (!env.teamFeatures.webhook) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { locale, req, res, query } = context;
+
+  const teamFeatures = await getTeamFeatures(req, res, query);
+
+  if (!teamFeatures.webhook) {
     return {
       notFound: true,
     };
@@ -43,7 +45,7 @@ export async function getServerSideProps({
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      teamFeatures: env.teamFeatures,
+      teamFeatures: teamFeatures,
     },
   };
 }

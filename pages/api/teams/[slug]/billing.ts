@@ -9,7 +9,6 @@ import {
   changeSubscription,
   isTeamHasSubscription,
 } from 'models/subscription';
-import env from '@/lib/env';
 
 export default async function handler(
   req: NextApiRequest,
@@ -54,7 +53,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     email,
     subscription,
   });
-  if (response?.accepted.includes(env.billingEmail as string)) {
+  if (response?.data?.id) {
     const teamSubscription = await isTeamHasSubscription(team.id);
     if (teamSubscription) {
       const createdSubscription = await changeSubscription(

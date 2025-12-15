@@ -106,9 +106,9 @@ export type AUTH_PROVIDER =
 export interface TeamFeature {
   sso: boolean;
   dsync: boolean;
-  auditLog: boolean;
-  webhook: boolean;
-  apiKey: boolean;
+  auditLog?: boolean;
+  webhook?: boolean;
+  apiKey?: boolean;
 }
 
 export type Option = {

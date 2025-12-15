@@ -11,7 +11,7 @@ const CopyrightItem = () => {
         <p className="text-xs text-center font-semibold">
           {t('copyright', { year: new Date().getFullYear() })}{' '}
           <a
-            href="https://www.unicis.tech/?mtm_campaign=platform&mtm_source=platform_beta"
+            href="https://www.unicis.tech/?mtm_campaign=platform&mtm_source=platform"
             target="_blank"
           >
             {BRAND}

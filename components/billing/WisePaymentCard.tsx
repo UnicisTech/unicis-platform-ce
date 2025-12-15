@@ -1,11 +1,20 @@
 import Link from 'next/link';
-import { Card } from '@/components/shared';
+import Image from 'next/image';
+import * as React from 'react';
 import { useTranslation } from 'next-i18next';
-import React from 'react';
+import { Plan } from '@prisma/client';
 import type { TeamWithSubscription, SubscriptionWithPayments } from 'types';
 import useTeamMembers from 'hooks/useTeamMembers';
 import { getTotalPrice, planPrice } from '@/lib/subscriptions';
 import { format, addMonths } from 'date-fns';
+
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from '@/components/shadcn/ui/card';
 
 interface WisePaymentCardProps {
   team: TeamWithSubscription;
@@ -16,15 +25,15 @@ const formatEUR = (n: number) =>
     n ?? 0
   );
 
-const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
+export default function WisePaymentCard({ team }: WisePaymentCardProps) {
   const { t } = useTranslation('common');
-  const subscription = team.subscription as
-    | SubscriptionWithPayments
-    | undefined;
+  const subscription = team.subscription as SubscriptionWithPayments | null;
   const { members, isError, isLoading } = useTeamMembers(team.slug);
 
   if (isLoading || isError || !members || !subscription) return null;
   if (!subscription.payments?.length) return null;
+
+  // Find newest payment safely
 
   const totalPrice = getTotalPrice(subscription.plan, members.length);
   const paymentUrl = `https://wise.com/pay/business/unicistechou?currency=EUR&amount=${totalPrice}`;
@@ -38,66 +47,64 @@ const WisePaymentCard = ({ team }: WisePaymentCardProps) => {
   const nextInvoiceDate = addMonths(newestDate, 1);
 
   return (
-    <Card>
-      <Card.Body>
-        <Card.Header>
-          <Card.Title>{t('wise-payment')}</Card.Title>
-          <Card.Description>{t('wise-payment-details')}</Card.Description>
-        </Card.Header>
+    <Card className="w-full">
+      <CardHeader className="gap-1">
+        <CardTitle>{t('wise-payment')}</CardTitle>
+        <CardDescription>{t('wise-payment-details')}</CardDescription>
+      </CardHeader>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div className="flex-1 space-y-1">
-            <p>
-              <b>{t('team')}: </b>
+      <CardContent>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="space-y-2">
+            <p className="text-sm">
+              <b className="font-semibold">{t('team')}: </b>
               <span>{team.name}</span>
             </p>
-            <p>
-              <b>{t('number-of-members')}: </b>
+            <p className="text-sm">
+              <b className="font-semibold">{t('number-of-members')}: </b>
               <span>{members.length}</span>
             </p>
-            <p>
-              <b>{t('price-per-user')}: </b>
+            <p className="text-sm">
+              <b className="font-semibold">{t('price-per-user')}: </b>
               <span>{formatEUR(planPrice[subscription.plan])}</span>
             </p>
-            <p>
-              <b>{t('total')}: </b>
+            <p className="text-sm">
+              <b className="font-semibold">{t('total')}: </b>
               <span>{formatEUR(totalPrice)}</span>
             </p>
-            <p>
-              <b>{t('invoice-date')}: </b>
+            <p className="text-sm">
+              <b className="font-semibold">{t('invoice-date')}: </b>
               <span>{format(newestDate, 'MMMM d, yyyy')}</span>
             </p>
-            <p>
-              <b>{t('next-invoice-date')}: </b>
+            <p className="text-sm">
+              <b className="font-semibold">{t('next-invoice-date')}: </b>
               <span>{format(nextInvoiceDate, 'MMMM d, yyyy')}</span>
             </p>
+
+            <Link href={paymentUrl} target="_blank" rel="noopener noreferrer">
+              <Image
+                src="/pww-button.svg"
+                alt="Pay with WISE"
+                width={170}
+                height={44}
+                className="h-auto w-auto"
+                priority
+              />
+            </Link>
           </div>
 
-          <div className="flex-2 flex justify-end items-center">
-            <img
+          <div className="flex items-center justify-end">
+            <Image
               src="/wise-quick-pay-qr-code-2.png"
-              alt={t('wise-qr-alt')}
-              className="max-w-full h-auto"
-              data-tip={t('scan-qr-tip')}
+              alt={t('pay-with-wise')}
+              width={260}
+              height={260}
+              className="h-auto max-w-full"
+              priority
             />
           </div>
         </div>
-      </Card.Body>
-
-      <Card.Footer>
-        <div className="flex justify-end">
-          <Link
-            rel="noopener noreferrer"
-            target="_blank"
-            href={paymentUrl}
-            aria-label={t('pay-with-wise')}
-          >
-            <img src="/pww-button.svg" alt={t('pay-with-wise')} />
-          </Link>
-        </div>
-      </Card.Footer>
+      </CardContent>
     </Card>
-  );
-};
-
-export default WisePaymentCard;
+  )
+}

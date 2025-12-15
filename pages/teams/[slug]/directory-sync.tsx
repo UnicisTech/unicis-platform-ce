@@ -12,7 +12,6 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import type { ApiResponse, NextPageWithLayout } from 'types';
-import env from '@/lib/env';
 import { getSession } from '@/lib/session';
 import { getTeamMember } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
@@ -24,6 +23,7 @@ import {
   CardTitle,
 } from '@/components/shadcn/ui/card';
 import { Button } from '@/components/shadcn/ui/button';
+import { getTeamFeatures } from '@/lib/subscriptions';
 
 const DirectorySync: NextPageWithLayout<
   inferSSRProps<typeof getServerSideProps>
@@ -123,7 +123,10 @@ const DirectorySync: NextPageWithLayout<
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { locale, req, res, query } = context;
 
-  if (!env.teamFeatures.dsync) {
+  // TODO: dublicated logic of getSession and getTeamMember in getTeamFeatures
+  const teamFeatures = await getTeamFeatures(req, res, query);
+
+  if (!teamFeatures.dsync) {
     return {
       notFound: true,
     };
@@ -142,7 +145,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       props: {
         ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
         error: null,
-        teamFeatures: env.teamFeatures,
+        teamFeatures: teamFeatures,
       },
     };
   } catch (error: unknown) {
@@ -154,7 +157,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         error: {
           message,
         },
-        teamFeatures: env.teamFeatures,
+        teamFeatures: teamFeatures,
       },
     };
   }

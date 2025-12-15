@@ -7,7 +7,7 @@ import {
 import RmAnalysis from '@/components/interfaces/TeamDashboard/RmAnalysis';
 import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/TeamProcessingActivities';
 import { Error, Loading } from '@/components/shared';
-import env from '@/lib/env';
+import { getTeamFeatures } from '@/lib/subscriptions';
 import useTeam from 'hooks/useTeam';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
@@ -89,13 +89,15 @@ const TeamDashboard = ({
 };
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { locale, query }: GetServerSidePropsContext = context;
+  const { locale, query, req, res }: GetServerSidePropsContext = context;
   const slug = query.slug as string;
+
+  const teamFeatures = await getTeamFeatures(req, res, query);
 
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      teamFeatures: env.teamFeatures,
+      teamFeatures: teamFeatures,
       slug: slug,
     },
   };
