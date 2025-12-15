@@ -1,0 +1,142 @@
+{
+  "sections": {
+    "risk-mgmt": {
+      "label": "Cybersecurity risk-management measures"
+    },
+    "proportionate-measures": {
+      "label": "Appropriate and proportionate measures"
+    },
+    "state-of-the-art": {
+      "label": "State-of-the-art security measures"
+    },
+    "all-hazards": {
+      "label": "All-hazards approach"
+    },
+    "risk-analysis-security": {
+      "label": "Risk analysis and system security"
+    },
+    "incident-handling": {
+      "label": "Incident handling"
+    },
+    "business-continuity": {
+      "label": "Business continuity"
+    },
+    "supply-chain-security": {
+      "label": "Supply chain security"
+    },
+    "system-acquisition-maintenance": {
+      "label": "System acquisition and maintenance"
+    },
+    "effectiveness-assessment": {
+      "label": "Effectiveness assessment"
+    },
+    "cyber-hygiene-training": {
+      "label": "Cyber hygiene training"
+    },
+    "crypto-policies": {
+      "label": "Cryptography policies"
+    },
+    "access-asset-mgmt": {
+      "label": "Access control and asset management"
+    },
+    "auth-secure-comms": {
+      "label": "Authentication and secure communications"
+    },
+    "supply-chain-vulns": {
+      "label": "Supply chain vulnerabilities"
+    },
+    "corrective-measures": {
+      "label": "Corrective measures"
+    },
+    "implementing-acts": {
+      "label": "Implementing acts"
+    }
+  },
+  "controls": {
+    "eu-nis2-21": {
+      "code": "21",
+      "control": "Article 21",
+      "requirements": "Cybersecurity risk-management measures"
+    },
+    "eu-nis2-21-1": {
+      "code": "21.1",
+      "control": "Article 21.1",
+      "requirements": "Member States shall ensure that essential and important entities take appropriate and proportionate technical, operational and organisational measures to manage the risks posed to the security of network and information systems which those entities use for their operations or for the provision of their services, and to prevent or minimise the impact of incidents on recipients of their services and on other services."
+    },
+    "eu-nis2-21-1-sp2": {
+      "code": "21.1.sp2",
+      "control": "Article 21.1.sp2",
+      "requirements": "Taking into account the state-of-the-art and, where applicable, relevant European and international standards, as well as the cost of implementation, the measures referred to in the first subparagraph shall ensure a level of security of network and information systems appropriate to the risks posed."
+    },
+    "eu-nis2-21-2": {
+      "code": "21.2",
+      "control": "Article 21.2",
+      "requirements": "The measures referred to in paragraph 1 shall be based on an all-hazards approach that aims to protect network and information systems and the physical environment of those systems from incidents, and shall include at least the following:"
+    },
+    "eu-nis2-21-2-a": {
+      "code": "21.2.a",
+      "control": "Article 21.2.a",
+      "requirements": "Policies on risk analysis and information system security;"
+    },
+    "eu-nis2-21-2-b": {
+      "code": "21.2.b",
+      "control": "Article 21.2.b",
+      "requirements": "Incident handling;"
+    },
+    "eu-nis2-21-2-c": {
+      "code": "21.2.c",
+      "control": "Article 21.2.c",
+      "requirements": "Business continuity, such as backup management and disaster recovery, and crisis management;"
+    },
+    "eu-nis2-21-2-d": {
+      "code": "21.2.d",
+      "control": "Article 21.2.d",
+      "requirements": "Supply chain security, including security-related aspects concerning the relationships between each entity and its direct suppliers or service providers;"
+    },
+    "eu-nis2-21-2-e": {
+      "code": "21.2.e",
+      "control": "Article 21.2.e",
+      "requirements": "Security in network and information systems acquisition, development and maintenance, including vulnerability handling and disclosure;"
+    },
+    "eu-nis2-21-2-f": {
+      "code": "21.2.f",
+      "control": "Article 21.2.f",
+      "requirements": "Policies and procedures to assess the effectiveness of cybersecurity risk-management measures;"
+    },
+    "eu-nis2-21-2-g": {
+      "code": "21.2.g",
+      "control": "Article 21.2.g",
+      "requirements": "Basic cyber hygiene practices and cybersecurity training;"
+    },
+    "eu-nis2-21-2-h": {
+      "code": "21.2.h",
+      "control": "Article 21.2.h",
+      "requirements": "Policies and procedures regarding the use of cryptography and, where appropriate, encryption;"
+    },
+    "eu-nis2-21-2-i": {
+      "code": "21.2.i",
+      "control": "Article 21.2.i",
+      "requirements": "Human resources security, access control policies and asset management;"
+    },
+    "eu-nis2-21-2-j": {
+      "code": "21.2.j",
+      "control": "Article 21.2.j",
+      "requirements": "The use of multi-factor authentication or continuous authentication solutions, secured voice, video and text communications and secured emergency communication systems within the entity, where appropriate."
+    },
+    "eu-nis2-21-3": {
+      "code": "21.3",
+      "control": "Article 21.3",
+      "requirements": "Member States shall ensure that, when considering which measures referred to in paragraph 2, point (d), of this Article are appropriate, entities take into account the vulnerabilities specific to each direct supplier and service provider and the overall quality of products and cybersecurity practices of their suppliers and service providers, including their secure development procedures. Member States shall also ensure that, when considering which measures referred to in that point are appropriate, entities are required to take into account the results of the coordinated security risk assessments of critical supply chains carried out in accordance with Article 22(1)."
+    },
+    "eu-nis2-21-4": {
+      "code": "21.4",
+      "control": "Article 21.4",
+      "requirements": "Member States shall ensure that an entity that finds that it does not comply with the measures provided for in paragraph 2 takes, without undue delay, all necessary, appropriate and proportionate corrective measures."
+    },
+    "eu-nis2-21-5": {
+      "code": "21.5",
+      "control": "Article 21.5",
+      "requirements": "By 17 October 2024, the Commission shall adopt implementing acts laying down the technical and the methodological requirements of the measures referred to in paragraph 2 with regard to DNS service providers, TLD name registries, cloud computing service providers, data centre service providers, content delivery network providers, managed service providers, managed security service providers, providers of online market places, of online search engines and of social networking services platforms, and trust service providers. The Commission may adopt implementing acts laying down the technical and the methodological requirements, as well as sectoral requirements, as necessary, of the measures referred to in paragraph 2 with regard to essential and important entities other than those referred to in the first subparagraph of this paragraph. When preparing the implementing acts referred to in the first and second subparagraphs of this paragraph, the Commission shall, to the extent possible, follow European and international standards, as well as relevant technical specifications. The Commission shall exchange advice and cooperate with the Cooperation Group and ENISA on the draft implementing acts in accordance with Article 14(4), point (e). Those implementing acts shall be adopted in accordance with the examination procedure referred to in Article 39(2)."
+    }
+  }
+}

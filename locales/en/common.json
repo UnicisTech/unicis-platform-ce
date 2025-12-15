@@ -1,4 +1,7 @@
 {
+  "test": {
+    "ab": "A and B test"
+  },
   "get-started": "Get Started",
   "login": "Login using an existing account",
   "email-login-error": "Something went wrong while sending the email. Please try again later.",
@@ -554,6 +557,7 @@
   "comments": "Comments",
   "rpa-audit-logs": "Record of Processing Activities Audit Logs",
   "tia-audit-logs": "Transfer Impact Assessment Audit Logs",
+  "select-a-control": "Select a control",
   "csc-controls": "Cybersecurity Controls",
   "csc-audit-logs": "Cybersecurity Controls Audit Logs",
   "pia-audit-logs": "Privacy Impact Assessment Audit Logs",
@@ -610,5 +614,40 @@
   "next-invoice-date": "Next invoice date",
   "pay-with-wise": "Pay with Wise",
   "wise-qr-alt": "Wise Quick Pay QR code",
-  "scan-qr-tip": "Scan this QR code to make a quick payment with Wise"
+  "scan-qr-tip": "Scan this QR code to make a quick payment with Wise",
+
+  "statuses": {
+    "unknown": {
+      "label": "Unknown",
+      "description": "Has not even been checked yet"
+    },
+    "not-applicable": {
+      "label": "Not Applicable",
+      "description": "Management can ignore them"
+    },
+    "not-performed": {
+      "label": "Not Performed",
+      "description": "Complete lack of recognizable policy, procedure, control etc."
+    },
+    "performed-informally": {
+      "label": "Performed Informally",
+      "description": "Development has barely started and will require significant work to fulfill the requirements"
+    },
+    "planned": {
+      "label": "Planned",
+      "description": "Progressing nicely but not yet complete"
+    },
+    "well-defined": {
+      "label": "Well Defined",
+      "description": "Development is more or less complete, although detail is lacking and/or it is not yet implemented, enforced and actively supported by top management"
+    },
+    "quantitatively-controlled": {
+      "label": "Quantitatively Controlled",
+      "description": "Development is complete, the process/control has been implemented and recently started operating"
+    },
+    "continuously-improving": {
+      "label": "Continuously Improving",
+      "description": "The requirement is fully satisfied, is operating fully as expected, is being actively monitored and improved, and there is substantial evidence to prove all that to the auditors"
+    }
+  }
 }
