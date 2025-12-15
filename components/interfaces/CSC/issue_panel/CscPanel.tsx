@@ -61,8 +61,8 @@ const CscPanel = ({
 
   const clearDraftForActiveTab = useCallback(() => {
     setDraftByIso((prev) => {
-      if (!(activeTab in prev)) return prev;
-      const { [activeTab]: _removed, ...rest } = prev;
+      const { ...rest } = prev;
+      delete rest[activeTab];
       return rest;
     });
   }, [activeTab]);

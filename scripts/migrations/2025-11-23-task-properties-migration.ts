@@ -7,8 +7,9 @@ async function main() {
   const batchSize = 100;
   let cursorId: number | null = null;
   let updated = 0;
+  let hasMore = true;
 
-  while (true) {
+  while (hasMore) {
     const tasks = await prisma.task.findMany({
       take: batchSize,
       ...(cursorId !== null
@@ -22,7 +23,10 @@ async function main() {
 
     console.log('tasks length:', tasks.length);
 
-    if (tasks.length === 0) break;
+    if (tasks.length === 0) {
+      hasMore = false;
+      continue;
+    }
 
     const tx: Prisma.PrismaPromise<any>[] = [];
 

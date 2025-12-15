@@ -6,12 +6,22 @@ const params: SubscriptionPermissions = {
     maxUsers: 10,
     maxAdmins: 1,
     maxFrameworks: 1,
+    teamFeatures: {
+      sso: true,
+      dsync: true,
+    },
     avaliableISO: ['mvps'],
   },
   PREMIUM: {
     maxUsers: 150,
     maxAdmins: 5,
     maxFrameworks: 3,
+    teamFeatures: {
+      sso: true,
+      dsync: true,
+      apiKey: true,
+      webhook: true,
+    },
     avaliableISO: [
       'mvps',
       '2013',
@@ -26,6 +36,13 @@ const params: SubscriptionPermissions = {
     maxUsers: 10000000,
     maxAdmins: 1000000,
     maxFrameworks: 100,
+    teamFeatures: {
+      sso: true,
+      dsync: true,
+      apiKey: true,
+      webhook: true,
+      auditLog: true,
+    },
     avaliableISO: [
       'mvps',
       '2013',

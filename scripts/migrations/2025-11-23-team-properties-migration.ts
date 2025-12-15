@@ -7,15 +7,19 @@ async function main() {
   const batchSize = 50;
   let cursor: string | null = null;
   let updated = 0;
+  let hasMore = true;
 
-  while (true) {
+  while (hasMore) {
     const teams = await prisma.team.findMany({
       take: batchSize,
       ...(cursor ? { skip: 1, cursor: { id: cursor } } : {}),
       orderBy: { id: 'asc' },
     });
 
-    if (teams.length === 0) break;
+    if (teams.length === 0) {
+      hasMore = false;
+      continue;
+    }
 
     const tx: Prisma.PrismaPromise<any>[] = [];
 

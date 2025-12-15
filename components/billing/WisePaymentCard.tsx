@@ -2,10 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import * as React from 'react';
 import { useTranslation } from 'next-i18next';
-import { Plan } from '@prisma/client';
 import type { TeamWithSubscription, SubscriptionWithPayments } from 'types';
 import useTeamMembers from 'hooks/useTeamMembers';
-import { getTotalPrice, planPrice } from '@/lib/subscriptions';
 import { format, addMonths } from 'date-fns';
 
 import {
@@ -15,6 +13,7 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/shadcn/ui/card';
+import { Plan } from '@prisma/client';
 
 interface WisePaymentCardProps {
   team: TeamWithSubscription;
@@ -24,6 +23,17 @@ const formatEUR = (n: number) =>
   new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR' }).format(
     n ?? 0
   );
+
+const planPrice = {
+  [Plan.COMMUNITY]: 0,
+  [Plan.PREMIUM]: 49,
+  [Plan.ULTIMATE]: 89,
+};
+
+const getTotalPrice = (plan: Plan, amount: number) => {
+  const total: number = planPrice[plan] * amount;
+  return total;
+};
 
 export default function WisePaymentCard({ team }: WisePaymentCardProps) {
   const { t } = useTranslation('common');
