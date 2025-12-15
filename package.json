@@ -16,7 +16,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage --env=jsdom",
-    "build-ci": "next build"
+    "build-ci": "next build",
+    "migrate:teams": "tsx scripts/migrations/2025-11-23-team-properties-migration.ts",
+    "migrate:tasks": "tsx scripts/migrations/2025-11-23-task-properties-migration"
   },
   "dependencies": {
     "@boxyhq/metrics": "^0.2.10",
@@ -120,6 +122,8 @@
     "prettier-plugin-tailwindcss": "^0.6.12",
     "prisma": "^6.6.0",
     "tailwindcss": "^4.1.10",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
     "typescript": "5.4.5"
   }
 }
