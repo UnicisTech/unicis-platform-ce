@@ -44,15 +44,19 @@ const ControlBlock = ({
   const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   const availableControls = useMemo(() => {
-    return frameworks[ISO].controls.filter(control => !controls.includes(control.id))
-  }, [controls, ISO])
+    return frameworks[ISO].controls.filter(
+      (control) => !controls.includes(control.id)
+    );
+  }, [controls, ISO]);
 
-  const codeLabel = t(`csc/${ISO}:controls.${control}.code`)
-  const controlLabel = t(`csc/${ISO}:controls.${control}.control`)
-  const requirementsLabel = t(`csc/${ISO}:controls.${control}.requirements`)
+  const codeLabel = t(`csc/${ISO}:controls.${control}.code`);
+  const controlLabel = t(`csc/${ISO}:controls.${control}.control`);
+  const requirementsLabel = t(`csc/${ISO}:controls.${control}.requirements`);
 
-  const sectionId = frameworks[ISO].controls.find(({id}) => id === control)?.sectionId
-  const sectionLabel = t(`csc/${ISO}:sections.${sectionId}.label`)
+  const sectionId = frameworks[ISO].controls.find(
+    ({ id }) => id === control
+  )?.sectionId;
+  const sectionLabel = t(`csc/${ISO}:sections.${sectionId}.label`);
 
   return (
     <div className="space-y-4">
@@ -73,11 +77,17 @@ const ControlBlock = ({
               className="w-(--radix-select-trigger-width) max-w-full"
               align="start"
             >
-              {availableControls.map(control => {
-                const codeLabel = t(`csc/${ISO}:controls.${control.id}.code`)
-                const controlLabel = t(`csc/${ISO}:controls.${control.id}.control`)
-                const requirementsLabel = t(`csc/${ISO}:controls.${control.id}.requirements`)
-                const sectionLabel = t(`csc/${ISO}:sections.${control.sectionId}.label`)
+              {availableControls.map((control) => {
+                const codeLabel = t(`csc/${ISO}:controls.${control.id}.code`);
+                const controlLabel = t(
+                  `csc/${ISO}:controls.${control.id}.control`
+                );
+                const requirementsLabel = t(
+                  `csc/${ISO}:controls.${control.id}.requirements`
+                );
+                const sectionLabel = t(
+                  `csc/${ISO}:sections.${control.sectionId}.label`
+                );
 
                 return (
                   <SelectItem
@@ -89,11 +99,10 @@ const ControlBlock = ({
                       {codeLabel}: {sectionLabel}
                     </div>
                     <div className="text-xs text-muted-foreground leading-snug">
-                      {controlLabel} –{' '}
-                      {requirementsLabel}
+                      {controlLabel} – {requirementsLabel}
                     </div>
                   </SelectItem>
-                )
+                );
               })}
             </SelectContent>
           </Select>
@@ -117,36 +126,35 @@ const ControlBlock = ({
         </div>
       </div>
 
-      {control === ""
-        ? null
-        : <>
-            <div className="space-y-1">
-              <Label>{t('code')}</Label>
-              <Input value={codeLabel} readOnly />
-            </div>
-            <div className="space-y-1">
-              <Label>{t('section')}</Label>
-              <Input value={sectionLabel} readOnly />
-            </div>
-            <div className="space-y-1">
-              <Label>{t('status')}</Label>
-              <StatusSelector
-                statusValue={status}
-                control={control}
-                handler={onStatusChange}
-                isDisabled={false}
-              />
-            </div>
-            <div className="space-y-1">
-              <Label>{t('requirements')}</Label>
-              <Textarea
-                value={requirementsLabel}
-                readOnly
-                className="resize-y max-h-[20vh]"
-              />
-            </div>
-          </>
-      }
+      {control === '' ? null : (
+        <>
+          <div className="space-y-1">
+            <Label>{t('code')}</Label>
+            <Input value={codeLabel} readOnly />
+          </div>
+          <div className="space-y-1">
+            <Label>{t('section')}</Label>
+            <Input value={sectionLabel} readOnly />
+          </div>
+          <div className="space-y-1">
+            <Label>{t('status')}</Label>
+            <StatusSelector
+              statusValue={status}
+              control={control}
+              handler={onStatusChange}
+              isDisabled={false}
+            />
+          </div>
+          <div className="space-y-1">
+            <Label>{t('requirements')}</Label>
+            <Textarea
+              value={requirementsLabel}
+              readOnly
+              className="resize-y max-h-[20vh]"
+            />
+          </div>
+        </>
+      )}
       <div className="h-px w-full bg-muted my-6" />
     </div>
   );

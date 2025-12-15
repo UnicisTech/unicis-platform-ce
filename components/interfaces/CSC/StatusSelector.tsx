@@ -22,7 +22,7 @@ const StatusSelector = ({
   handler: (control: string, value: string) => Promise<string | undefined>;
 }) => {
   const [value, setValue] = useState<string>(statusValue);
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   useEffect(() => {
     setValue(statusValue);
@@ -40,20 +40,19 @@ const StatusSelector = ({
   };
 
   return (
-    <Select
-      value={value}
-      onValueChange={handleChange}
-      disabled={isDisabled}
-    >
+    <Select value={value} onValueChange={handleChange} disabled={isDisabled}>
       <SelectTrigger className="w-full h-10">
         <SelectValue placeholder={t('status')} />
       </SelectTrigger>
       <SelectContent>
-        {CSC_STATUSES.map(status => (
+        {CSC_STATUSES.map((status) => (
           <SelectItem
             key={status}
             value={status}
-            className={cn('cursor-pointer font-bold', CSC_STATUS_TO_CSS[status])}
+            className={cn(
+              'cursor-pointer font-bold',
+              CSC_STATUS_TO_CSS[status]
+            )}
           >
             {t(`statuses.${status}.label`)}
           </SelectItem>

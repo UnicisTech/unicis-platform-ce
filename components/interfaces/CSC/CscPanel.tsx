@@ -118,13 +118,8 @@ export default function CscPanel({
 
       <div className="flex flex-row justify-end">
         <SectionFilter ISO={iso} setSectionFilter={setSectionFilter} />
-        <StatusFilter
-          setStatusFilter={setStatusFilter}
-        />
-        <PerPageSelector
-          perPage={perPage}
-          setPerPage={setPerPage}
-        />
+        <StatusFilter setStatusFilter={setStatusFilter} />
+        <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
       </div>
 
       <StatusesTable

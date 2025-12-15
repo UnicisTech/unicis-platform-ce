@@ -1,5 +1,9 @@
 import { Prisma } from '@prisma/client';
-import { error, mapCscControlToId, mapCscStatusValueLabelToId } from './helpers';
+import {
+  error,
+  mapCscControlToId,
+  mapCscStatusValueLabelToId,
+} from './helpers';
 import { ISO } from 'types';
 import { getCscStatusesProp } from '@/lib/csc';
 
@@ -36,7 +40,7 @@ export function replaceDefaultInCscIso(props: JsonWritable): JsonWritable {
   if (!obj) return props;
 
   const arr = obj.csc_iso;
-  if (!Array.isArray(arr)) return props;       // якщо не масив — нічого не робимо
+  if (!Array.isArray(arr)) return props; // якщо не масив — нічого не робимо
 
   // якщо немає "default" — нічого не робимо
   if (!arr.includes('default')) return props;
@@ -50,12 +54,15 @@ export function replaceDefaultInCscIso(props: JsonWritable): JsonWritable {
   return cloned;
 }
 
-export function normalizeCscStatuses(props: JsonWritable, framework: ISO): JsonWritable {
-  console.log('normalizeCscStatuses exec', framework)
+export function normalizeCscStatuses(
+  props: JsonWritable,
+  framework: ISO
+): JsonWritable {
+  console.log('normalizeCscStatuses exec', framework);
   const obj = asObject(props);
   if (!obj) return props;
 
-  const propName = getCscStatusesProp(framework)
+  const propName = getCscStatusesProp(framework);
   const raw = obj[propName];
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
     return props;
@@ -90,39 +97,41 @@ export function normalizeCscStatuses(props: JsonWritable, framework: ISO): JsonW
 }
 
 export function normalizeCscStatusesMvps(props: JsonWritable): JsonWritable {
-    return normalizeCscStatuses(props, 'mvps')
+  return normalizeCscStatuses(props, 'mvps');
 }
 
 export function normalizeCscStatuses2013(props: JsonWritable): JsonWritable {
-    return normalizeCscStatuses(props, '2013')
+  return normalizeCscStatuses(props, '2013');
 }
 
 export function normalizeCscStatuses2022(props: JsonWritable): JsonWritable {
-    return normalizeCscStatuses(props, '2022')
+  return normalizeCscStatuses(props, '2022');
 }
 
-export function normalizeCscStatusesNistCsfV2(props: JsonWritable): JsonWritable {
-    return normalizeCscStatuses(props, 'nistcsfv2')
+export function normalizeCscStatusesNistCsfV2(
+  props: JsonWritable
+): JsonWritable {
+  return normalizeCscStatuses(props, 'nistcsfv2');
 }
 
 export function normalizeCscStatusesEuNis2(props: JsonWritable): JsonWritable {
-    return normalizeCscStatuses(props, 'eunis2')
+  return normalizeCscStatuses(props, 'eunis2');
 }
 
 export function normalizeCscStatusesGdpr(props: JsonWritable): JsonWritable {
-    return normalizeCscStatuses(props, 'gdpr')
+  return normalizeCscStatuses(props, 'gdpr');
 }
 
 export function normalizeCscStatusesCisV81(props: JsonWritable): JsonWritable {
-    return normalizeCscStatuses(props, 'cisv81')
+  return normalizeCscStatuses(props, 'cisv81');
 }
 
 export function normalizeCscStatusesSoc2V2(props: JsonWritable): JsonWritable {
-    return normalizeCscStatuses(props, 'soc2v2')
+  return normalizeCscStatuses(props, 'soc2v2');
 }
 
 export function normalizeCscStatusesC52020(props: JsonWritable): JsonWritable {
-    return normalizeCscStatuses(props, 'c5_2020')
+  return normalizeCscStatuses(props, 'c5_2020');
 }
 
 // Список усіх трансформацій у потрібному порядку

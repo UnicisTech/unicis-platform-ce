@@ -46,22 +46,26 @@ const StatusesTable = ({
   const cscControlsProp = getCscControlsProp(ISO);
 
   const filteredControls = useMemo(() => {
-    let controls = frameworks[ISO].controls
+    let controls = frameworks[ISO].controls;
     const noSection = !sectionFilter?.length;
     const noStatus = !statusFilter?.length;
 
     if (noSection && noStatus) return controls;
 
     if (sectionFilter?.length) {
-      controls = controls.filter(control => sectionFilter.includes(control.sectionId));
+      controls = controls.filter((control) =>
+        sectionFilter.includes(control.sectionId)
+      );
     }
 
     if (statusFilter?.length) {
-      controls = controls.filter(control => statusFilter.includes(statuses[control.id]))
+      controls = controls.filter((control) =>
+        statusFilter.includes(statuses[control.id])
+      );
     }
 
-    return controls
-  }, [frameworks, sectionFilter, statusFilter])
+    return controls;
+  }, [frameworks, sectionFilter, statusFilter]);
 
   const {
     currentPage,
@@ -101,9 +105,15 @@ const StatusesTable = ({
           <tbody className="divide-y divide-border">
             {pageData.map((control) => (
               <tr key={control.id}>
-                <td className="px-6 py-3">{t(`csc/${ISO}:controls.${control.id}.code`)}</td>
-                <td className="px-6 py-3">{t(`csc/${ISO}:sections.${control.sectionId}.label`)}</td>
-                <td className="px-6 py-3">{t(`csc/${ISO}:controls.${control.id}.control`)}</td>
+                <td className="px-6 py-3">
+                  {t(`csc/${ISO}:controls.${control.id}.code`)}
+                </td>
+                <td className="px-6 py-3">
+                  {t(`csc/${ISO}:sections.${control.sectionId}.label`)}
+                </td>
+                <td className="px-6 py-3">
+                  {t(`csc/${ISO}:controls.${control.id}.control`)}
+                </td>
                 <td className="px-6 py-3">
                   <span className="whitespace-pre-line">
                     {t(`csc/${ISO}:controls.${control.id}.requirements`)}
@@ -162,4 +172,3 @@ const StatusesTable = ({
 };
 
 export default StatusesTable;
-

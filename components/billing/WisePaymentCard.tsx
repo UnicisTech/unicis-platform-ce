@@ -106,5 +106,5 @@ export default function WisePaymentCard({ team }: WisePaymentCardProps) {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

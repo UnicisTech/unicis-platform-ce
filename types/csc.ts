@@ -85,7 +85,6 @@ export type CscStatusesProp = CscStatusesPropMap[ISO];
 
 export type CscStatusesMap = Record<string, CscStatus>;
 
-
 // TODO: use getControlPropsName function with config and ISO type to generate type
 type CscControlsPropMap = {
   mvps: 'csc_controls_mvps';

@@ -20,12 +20,13 @@ const Table = () => {
       </thead>
       <tbody>
         {CSC_STATUSES.map((status) => (
-          <tr
-            key={status}
-            className={`${CSC_STATUS_TO_CSS[status]}`}
-          >
-            <td className="py-2 px-3 font-medium">{t(`statuses.${status}.label`)}</td>
-            <td className="py-2 px-3 leading-snug">{t(`statuses.${status}.description`)}</td>
+          <tr key={status} className={`${CSC_STATUS_TO_CSS[status]}`}>
+            <td className="py-2 px-3 font-medium">
+              {t(`statuses.${status}.label`)}
+            </td>
+            <td className="py-2 px-3 leading-snug">
+              {t(`statuses.${status}.description`)}
+            </td>
           </tr>
         ))}
       </tbody>

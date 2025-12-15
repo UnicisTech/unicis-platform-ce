@@ -72,39 +72,41 @@ export function normalizeCscControls(
 }
 
 export function normalizeCscControlsMvps(props: JsonWritable): JsonWritable {
-    return normalizeCscControls(props, 'mvps')
+  return normalizeCscControls(props, 'mvps');
 }
 
 export function normalizeCscControls2013(props: JsonWritable): JsonWritable {
-    return normalizeCscControls(props, '2013')
+  return normalizeCscControls(props, '2013');
 }
 
 export function normalizeCscControls2022(props: JsonWritable): JsonWritable {
-    return normalizeCscControls(props, '2022')
+  return normalizeCscControls(props, '2022');
 }
 
-export function normalizeCscControlsNistCsfV2(props: JsonWritable): JsonWritable {
-    return normalizeCscControls(props, 'nistcsfv2')
+export function normalizeCscControlsNistCsfV2(
+  props: JsonWritable
+): JsonWritable {
+  return normalizeCscControls(props, 'nistcsfv2');
 }
 
 export function normalizeCscControlsEuNis2(props: JsonWritable): JsonWritable {
-    return normalizeCscControls(props, 'eunis2')
+  return normalizeCscControls(props, 'eunis2');
 }
 
 export function normalizeCscControlsGdpr(props: JsonWritable): JsonWritable {
-    return normalizeCscControls(props, 'gdpr')
+  return normalizeCscControls(props, 'gdpr');
 }
 
 export function normalizeCscControlsCisV81(props: JsonWritable): JsonWritable {
-    return normalizeCscControls(props, 'cisv81')
+  return normalizeCscControls(props, 'cisv81');
 }
 
 export function normalizeCscControlSoc2V2(props: JsonWritable): JsonWritable {
-    return normalizeCscControls(props, 'soc2v2')
+  return normalizeCscControls(props, 'soc2v2');
 }
 
 export function normalizeCscControlC5_2020(props: JsonWritable): JsonWritable {
-    return normalizeCscControls(props, 'c5_2020')
+  return normalizeCscControls(props, 'c5_2020');
 }
 
 export function normalizeCscAuditLogs(props: JsonWritable): JsonWritable {
@@ -172,7 +174,6 @@ export function normalizeCscAuditLogs(props: JsonWritable): JsonWritable {
 
   return clonedProps;
 }
-
 
 const transforms = [
   renameCscControlsToMvps,

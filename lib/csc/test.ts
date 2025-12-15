@@ -20,7 +20,7 @@ type DiffResult = {
   extraInTarget: string[];
   fieldMismatches: Array<{
     code: string;
-    field: "section" | "control" | "label" | "requirements";
+    field: 'section' | 'control' | 'label' | 'requirements';
     sourceValue: string;
     targetValue: string;
   }>;
@@ -43,7 +43,7 @@ export function compareIsoArrays(
 
   const missingInTarget: string[] = [];
   const extraInTarget: string[] = [];
-  const fieldMismatches: DiffResult["fieldMismatches"] = [];
+  const fieldMismatches: DiffResult['fieldMismatches'] = [];
 
   Object.keys(sourceByCode).forEach((code) => {
     const src = sourceByCode[code];
@@ -57,7 +57,7 @@ export function compareIsoArrays(
     if (src.Section !== tgt.section) {
       fieldMismatches.push({
         code,
-        field: "section",
+        field: 'section',
         sourceValue: src.Section,
         targetValue: tgt.section,
       });
@@ -66,7 +66,7 @@ export function compareIsoArrays(
     if (src.Control !== tgt.control) {
       fieldMismatches.push({
         code,
-        field: "control",
+        field: 'control',
         sourceValue: src.Control,
         targetValue: tgt.control,
       });
@@ -75,7 +75,7 @@ export function compareIsoArrays(
     if (src.Control !== tgt.control) {
       fieldMismatches.push({
         code,
-        field: "label",
+        field: 'label',
         sourceValue: src.Control,
         targetValue: tgt.label,
       });
@@ -84,7 +84,7 @@ export function compareIsoArrays(
     if (src.Requirements !== tgt.requirements) {
       fieldMismatches.push({
         code,
-        field: "requirements",
+        field: 'requirements',
         sourceValue: src.Requirements,
         targetValue: tgt.requirements,
       });

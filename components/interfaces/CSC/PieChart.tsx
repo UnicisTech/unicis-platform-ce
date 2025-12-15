@@ -21,7 +21,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const countStatuses = (statuses: CscStatusesMap): number[] => {
   const counters: Record<CscStatus, number> = Object.fromEntries(
-    CSC_STATUSES.map(s => [s, 0]),
+    CSC_STATUSES.map((s) => [s, 0])
   ) as Record<CscStatus, number>;
 
   for (const status of Object.values(statuses)) {
@@ -30,12 +30,12 @@ const countStatuses = (statuses: CscStatusesMap): number[] => {
     }
   }
 
-  return CSC_STATUSES.map(s => counters[s]);
+  return CSC_STATUSES.map((s) => counters[s]);
 };
 
 const PieChart = ({ statuses }: { statuses: CscStatusesMap }) => {
-  const { t } = useTranslation()
-  const labels = CSC_STATUSES.map(status => t(`statuses.${status}.label`))
+  const { t } = useTranslation();
+  const labels = CSC_STATUSES.map((status) => t(`statuses.${status}.label`));
   const data = {
     labels: labels,
     datasets: [

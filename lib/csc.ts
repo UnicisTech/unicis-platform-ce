@@ -8,9 +8,11 @@ import type {
 } from 'types';
 
 // TODO: move to csc/helpers.js
-export const getCscControlsProp = (ISO: ISO): CscControlsProp => `csc_controls_${ISO}`;
+export const getCscControlsProp = (ISO: ISO): CscControlsProp =>
+  `csc_controls_${ISO}`;
 
-export const getCscStatusesProp = (ISO: ISO): CscStatusesProp => `csc_statuses_${ISO}`;
+export const getCscStatusesProp = (ISO: ISO): CscStatusesProp =>
+  `csc_statuses_${ISO}`;
 
 // TODO: move to models? or to csc folder
 export const addControlsToIssue = async (params: {

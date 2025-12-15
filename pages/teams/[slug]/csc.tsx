@@ -38,11 +38,17 @@ export async function getServerSideProps({
     'csc/cisv81',
     'csc/soc2v2',
     'csc/c5_2020',
-  ]
+  ];
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common', 'test', ...cscTranslations]) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, [
+            'common',
+            'test',
+            ...cscTranslations,
+          ])
+        : {}),
     },
   };
 }

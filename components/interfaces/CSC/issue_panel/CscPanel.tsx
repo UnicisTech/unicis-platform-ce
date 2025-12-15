@@ -74,15 +74,18 @@ const CscPanel = ({
   const deleteControls = useCallback(async () => {
     setIsDeleting(true);
     try {
-      const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/csc`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          controls,
-          operation: 'remove',
-          ISO: activeTab,
-        }),
-      });
+      const res = await fetch(
+        `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
+        {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            controls,
+            operation: 'remove',
+            ISO: activeTab,
+          }),
+        }
+      );
 
       const { error } = await res.json();
       if (!res.ok || error)
@@ -95,7 +98,14 @@ const CscPanel = ({
     } finally {
       setIsDeleting(false);
     }
-  }, [slug, task.taskNumber, controls, activeTab, mutateTask, clearDraftForActiveTab]);
+  }, [
+    slug,
+    task.taskNumber,
+    controls,
+    activeTab,
+    mutateTask,
+    clearDraftForActiveTab,
+  ]);
 
   const controlHanlder = useCallback(
     async (oldControl: string, newControl: string) => {
@@ -123,13 +133,20 @@ const CscPanel = ({
         const body =
           oldControl === ''
             ? { controls: [newControl], operation: 'add', ISO: activeTab }
-            : { controls: [oldControl, newControl], operation: 'change', ISO: activeTab };
+            : {
+                controls: [oldControl, newControl],
+                operation: 'change',
+                ISO: activeTab,
+              };
 
-        const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/csc`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        });
+        const res = await fetch(
+          `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
+          {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          }
+        );
 
         const { error } = await res.json();
         if (!res.ok || error) {
@@ -165,15 +182,18 @@ const CscPanel = ({
 
       setIsDeleting(true);
       try {
-        const res = await fetch(`/api/teams/${slug}/tasks/${task.taskNumber}/csc`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            controls: [control],
-            operation: 'remove',
-            ISO: activeTab,
-          }),
-        });
+        const res = await fetch(
+          `/api/teams/${slug}/tasks/${task.taskNumber}/csc`,
+          {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              controls: [control],
+              operation: 'remove',
+              ISO: activeTab,
+            }),
+          }
+        );
 
         const { error } = await res.json();
         if (!res.ok || error) {
@@ -257,7 +277,9 @@ const CscPanel = ({
                 onClick={addControl}
                 disabled={isDeleting || isSaving}
               >
-                {(isDeleting || isSaving) && <Loader2 className="animate-spin" />}
+                {(isDeleting || isSaving) && (
+                  <Loader2 className="animate-spin" />
+                )}
                 {t('add-control')}
               </Button>
             </div>
@@ -314,4 +336,3 @@ const WithISO = ({
 };
 
 export default WithISO;
-

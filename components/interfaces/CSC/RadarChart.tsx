@@ -66,15 +66,12 @@ const mergePoints = (d) => {
   return rounded;
 };
 
-const getMaturityLevels = (
-  statuses: Record<string, string>,
-  iso: ISO
-) => {
+const getMaturityLevels = (statuses: Record<string, string>, iso: ISO) => {
   const { sections, controls } = frameworks[iso];
 
-  const rawLevels = sections.map(section => {
+  const rawLevels = sections.map((section) => {
     const sectionControls = controls.filter(
-      control => control.sectionId === section.id
+      (control) => control.sectionId === section.id
     );
 
     if (sectionControls.length === 0) return 0;
@@ -99,15 +96,15 @@ const RadarChart = ({
   statuses: { [key: string]: string };
   ISO: ISO;
 }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const { theme } = useTheme();
   const labels = getRadarChartLabels(
-    ISO, 
+    ISO,
     frameworks[ISO].sections
-      .map(sections => sections.id)
-      .map(sectionId => t(`csc/${ISO}:sections.${sectionId}.label`))
-  )
-  const pointsData = getMaturityLevels(statuses, ISO)
+      .map((sections) => sections.id)
+      .map((sectionId) => t(`csc/${ISO}:sections.${sectionId}.label`))
+  );
+  const pointsData = getMaturityLevels(statuses, ISO);
 
   // TODO: move to css variables?
   const isDark = theme === 'dark';

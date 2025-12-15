@@ -11,12 +11,12 @@ const SectionFilter = ({
   ISO: ISO;
   setSectionFilter: Dispatch<SetStateAction<string[] | null>>;
 }) => {
-  const { t } = useTranslation()
-  const options = frameworks[ISO].sections.map(section => ({
+  const { t } = useTranslation();
+  const options = frameworks[ISO].sections.map((section) => ({
     label: t(`csc/${ISO}:sections.${section.id}.label`),
-    value: section.id
-  }))
-  
+    value: section.id,
+  }));
+
   return (
     <div className="w-full max-w-xs mx-1">
       <MultiSelect

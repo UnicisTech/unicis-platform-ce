@@ -23,7 +23,11 @@ const Dashboard = ({ team, iso }: { team: Team; iso: ISO[] }) => {
         {'Cybersecurity Controls Dashboard: '}
         {team.name}
       </h2>
-      <CscTabs frameworks={iso} activeTab={activeTab} setActiveTab={setActiveTab} />
+      <CscTabs
+        frameworks={iso}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
       <CscPanel
         key={activeTab}
         slug={team.slug}

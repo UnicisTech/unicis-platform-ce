@@ -81,7 +81,7 @@ const TaskById = () => {
   if (!task || !team || isError || teamError)
     return <Error message={(isError || teamError)?.message || ''} />;
 
-  console.log('task', task)
+  console.log('task', task);
 
   return (
     <>
@@ -318,11 +318,13 @@ export async function getServerSideProps({
     'csc/cisv81',
     'csc/soc2v2',
     'csc/c5_2020',
-  ]
+  ];
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common', ...cscTranslations]) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, ['common', ...cscTranslations])
+        : {}),
     },
   };
 }

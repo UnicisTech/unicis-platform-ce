@@ -18,22 +18,21 @@ const ControlBlockViewOnly = ({
 }) => {
   const { t } = useTranslation('common');
 
-  const codeLabel = t(`csc/${ISO}:controls.${control}.code`)
-  const controlLabel = t(`csc/${ISO}:controls.${control}.control`)
-  const requirementsLabel = t(`csc/${ISO}:controls.${control}.requirements`)
+  const codeLabel = t(`csc/${ISO}:controls.${control}.code`);
+  const controlLabel = t(`csc/${ISO}:controls.${control}.control`);
+  const requirementsLabel = t(`csc/${ISO}:controls.${control}.requirements`);
 
-  const sectionId = frameworks[ISO].controls.find(({id}) => id === control)?.sectionId
-  const sectionLabel = t(`csc/${ISO}:sections.${sectionId}.label`)
-  const statusLabel = t(`statuses.${status}.label`)
+  const sectionId = frameworks[ISO].controls.find(
+    ({ id }) => id === control
+  )?.sectionId;
+  const sectionLabel = t(`csc/${ISO}:sections.${sectionId}.label`);
+  const statusLabel = t(`statuses.${status}.label`);
 
   return (
     <div className="space-y-4">
       <div>
         <Label>{t('select-a-control')}</Label>
-        <Input
-          value={controlLabel}
-          readOnly
-        />
+        <Input value={controlLabel} readOnly />
       </div>
 
       <div>

@@ -1,4 +1,4 @@
-import { ISO } from "types";
+import { ISO } from 'types';
 
 export const isoOptions: {
   label: string;
