@@ -1,7 +1,4 @@
 {
-  "test": {
-    "ab": "A and B test"
-  },
   "get-started": "Get Started",
   "login": "Login using an existing account",
   "email-login-error": "Something went wrong while sending the email. Please try again later.",
@@ -236,6 +233,7 @@
   "rpa": "Register of Procedures",
   "rpa-dashboard": "Register of Procedures Dashboard",
   "rpa-activities": "Record of Processing Activities",
+  "rpa-records-activities": "Records of Processing Activities",
   "rpa-dpo": "Data Protection Officer (DPO)",
   "rpa-review": "Review of the process",
   "rpa-data-tranfer": "Data transfer",
@@ -594,6 +592,7 @@
   "no-tasks-available": "No tasks available.",
   "status-summary": "Status Summary",
   "number-of-records": "Number of records",
+  "no-records": "No records",
   "enabled-data-transfer": "Enabled data transfer",
   "processes-per-country": "Processes per Country",
   "no-country": "No country",
