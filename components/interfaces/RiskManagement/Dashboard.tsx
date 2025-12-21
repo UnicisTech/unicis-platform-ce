@@ -82,7 +82,7 @@ const Dashboard = () => {
       )}
       {tasksWithRisks.length === 0 ? (
         //TODO: change title
-        <EmptyState title={t('rpa-dashboard')} description="No records" />
+        <EmptyState title={t('rpa-dashboard')} description={t('no-records')} />
       ) : (
         <>
           <div className="mb-2">

@@ -34,7 +34,7 @@ const IapDashboard = ({ categories, teamCourses }: IapDashboardProps) => {
         </div>
       ) : (
         <div className="p-6">
-          <EmptyState title={t('iap-dashboard')} description="No records" />
+          <EmptyState title={t('iap-dashboard')} description={t('no-records')} />
         </div>
       )}
     </>

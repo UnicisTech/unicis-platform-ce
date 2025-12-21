@@ -109,7 +109,7 @@ const TiaDashboard: NextPageWithLayout<
         )}
       </>
       {tasksWithProcedures.length === 0 ? (
-        <EmptyState title={t('tia-dashboard')} description="No records" />
+        <EmptyState title={t('tia-dashboard')} description={t('no-records')} />
       ) : (
         <>
           <div className="m-2">

@@ -86,7 +86,7 @@ const Dashboard = () => {
         selectedTask={taskToEdit || rpaState.selectedTask}
       />
       {tasksWithProcedures.length === 0 ? (
-        <EmptyState title={t('rpa-dashboard')} description="No records" />
+        <EmptyState title={t('rpa-dashboard')} description={t('no-records')} />
       ) : (
         <>
           <div className="m-2">
