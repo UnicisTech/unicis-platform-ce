@@ -17,7 +17,7 @@ import {
 } from '@/components/shadcn/ui/dialog';
 import { Team } from '@prisma/client';
 import { Button } from '@/components/shadcn/ui/button';
-import statusesData from '@/components/defaultLanding/data/statuses.json';
+import { statuses } from '@/lib/tasks';
 import { getCurrentStringDate } from '@/components/services/taskService';
 import useTasks from 'hooks/useTasks';
 import { Input } from '@/components/shadcn/ui/input';
@@ -44,7 +44,6 @@ import {
 } from '@/components/shadcn/ui/form';
 import QuillEditor from '@/components/shared/QuillEditor';
 
-const statuses = statusesData;
 const DEFAULT_STATUS_VALUE = 'todo';
 
 const schema = Yup.object().shape({
@@ -138,8 +137,8 @@ const CreateTask = ({
                       </SelectTrigger>
                       <SelectContent>
                         {statuses.map((status) => (
-                          <SelectItem key={status.value} value={status.value}>
-                            {status.label}
+                          <SelectItem key={status} value={status}>
+                            {t(`task-statuses.${status}`)}
                           </SelectItem>
                         ))}
                       </SelectContent>

@@ -12,7 +12,6 @@ import {
 import useTasks from 'hooks/useTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import usePagination from 'hooks/usePagination';
-import statuses from '@/components/defaultLanding/data/statuses.json';
 import type { Task, Team } from '@prisma/client';
 import { CreateTask } from '@/components/interfaces/Task';
 import ModuleBadge from '@/components/shared/ModuleBadge';
@@ -157,10 +156,7 @@ const Tasks = ({ team }: { team: Team }) => {
                     <td className="px-4 py-2">
                       <StatusBadge
                         value={task.status}
-                        label={
-                          statuses.find(({ value }) => value === task.status)
-                            ?.label || task.status
-                        }
+                        label={t(`task-statuses.${status}`)}
                       />
                     </td>
                     <td className="px-4 py-2">

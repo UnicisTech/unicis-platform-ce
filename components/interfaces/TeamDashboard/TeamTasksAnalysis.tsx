@@ -9,9 +9,6 @@ import {
 } from '@/components/shadcn/ui/card';
 import TasksPieChart from './TasksPieChart';
 
-//TODO: move to lib?
-const labels = ['To Do', 'In Progress', 'In Review', 'Feedback', 'Done'];
-
 const TasksAnalysis = ({ slug }: { slug: string }) => {
   const { t } = useTranslation('common');
   const { tasks } = useTeamTasks(slug as string);
@@ -26,15 +23,12 @@ const TasksAnalysis = ({ slug }: { slug: string }) => {
     );
   }
 
-  const statuses: { [key: string]: string } = tasks.reduce(
-    (acc: { [key: string]: string }, task) => {
-      if (task.status && !acc[task.status.toLowerCase()]) {
-        acc[task.id] = getStatusName(task.status);
-      }
-      return acc;
-    },
-    {}
-  );
+  const statuses = tasks.reduce<Record<string, string>>((acc, task) => {
+    if (task.status) {
+      acc[task.id] = task.status;
+    }
+    return acc;
+  }, {});
 
   const statusCounts: { [key: string]: number } = tasks.reduce(
     (acc: { [key: string]: number }, task) => {
@@ -52,7 +46,7 @@ const TasksAnalysis = ({ slug }: { slug: string }) => {
       <div className="flex flex-col lg:flex-row gap-4">
         <Card className="w-full lg:w-1/2 shadow-sm">
           <CardContent className="flex items-center justify-center h-[300px]">
-            <TasksPieChart statuses={statuses} labels={labels} />
+            <TasksPieChart statuses={statuses} />
           </CardContent>
         </Card>
         <Card className="w-full lg:w-1/2 shadow-sm">
@@ -69,21 +63,3 @@ const TasksAnalysis = ({ slug }: { slug: string }) => {
 };
 
 export default TasksAnalysis;
-
-// TODO: move to lib?
-function getStatusName(statusId: string): string {
-  switch (statusId.toLowerCase()) {
-    case 'todo':
-      return 'To Do';
-    case 'inprogress':
-      return 'In Progress';
-    case 'inreview':
-      return 'In Review';
-    case 'feedback':
-      return 'Feedback';
-    case 'done':
-      return 'Done';
-    default:
-      return statusId;
-  }
-}

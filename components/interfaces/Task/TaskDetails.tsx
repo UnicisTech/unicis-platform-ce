@@ -30,7 +30,7 @@ import {
   FormControl,
   FormMessage,
 } from '@/components/shadcn/ui/form';
-import statuses from '@/components/defaultLanding/data/statuses.json';
+import { statuses } from '@/lib/tasks';
 import useTask from 'hooks/useTask';
 import useCanAccess from 'hooks/useCanAccess';
 
@@ -141,8 +141,8 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                       </SelectTrigger>
                       <SelectContent>
                         {statuses.map((status) => (
-                          <SelectItem key={status.value} value={status.value}>
-                            {status.label}
+                          <SelectItem key={status} value={status}>
+                            {t(`task-statuses.${status}`)}
                           </SelectItem>
                         ))}
                       </SelectContent>
