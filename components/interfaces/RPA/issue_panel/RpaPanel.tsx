@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { headers } from '@/lib/rpa';
+import { steps } from '@/lib/rpa';
 import { Field } from '@/components/shared/atlaskit';
 import type { Task } from '@prisma/client';
 import { RpaProcedureInterface } from 'types';
@@ -150,14 +150,14 @@ const RpaPanel: React.FC<{ task: Task, slug: string }> = ({ task, slug }) => {
       {hasProcedure ? (
         <>
           <div role="tablist" className="tabs tabs-bordered">
-            {headers.slice(0, -1).map((header, index) => (
+            {steps.slice(0, -1).map((step, index) => (
               <button
                 key={index}
                 role="tab"
                 className={`tab ${activeTab === index ? 'tab-active' : ''}`}
                 onClick={() => setActiveTab(index)}
               >
-                {header}
+                {t(`rpa:steps.${step}`)}
               </button>
             ))}
           </div>

@@ -75,13 +75,13 @@ export const config = {
     ],
 }
 
-export const headers = [
-  'Description / Stakeholders',
-  'Purpose and Categories',
-  'Recipients',
-  'Transfer',
-  'Security Measures/TOMs',
-  'Data Protection Impact Assessment',
+export const steps = [
+  'descriptionStakeholders',
+  'purposeAndCategories',
+  'recipients',
+  'transfer',
+  'securityMeasuresTOMs',
+  'dataProtectionImpactAssessment'
 ];
 
 export const fields = [

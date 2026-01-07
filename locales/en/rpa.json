@@ -102,5 +102,13 @@
         "transferredOutside": "10. Is data transferred outside the EU?",
         "rightsRestricted": "11. Are subjects' rights restricted?",
         "piaNeeded": "12. Is a data protection impact assessment needed?"
+    },
+    "steps": {
+        "descriptionStakeholders": "Description / Stakeholders",
+        "purposeAndCategories": "Purpose and Categories",
+        "recipients": "Recipients",
+        "transfer": "Transfer",
+        "securityMeasuresTOMs": "Security Measures/TOMs",
+        "dataProtectionImpactAssessment": "Data Protection Impact Assessment"
     }
 }
