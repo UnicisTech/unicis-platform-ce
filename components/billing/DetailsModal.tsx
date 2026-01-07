@@ -3,8 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import { defaultHeaders } from '@/lib/common';
-import countries from '../defaultLanding/data/configs/countries';
+import { defaultHeaders, countries } from '@/lib/common';
 import type { Team, Invitation } from '@prisma/client';
 import type { ApiResponse } from 'types';
 import useInvitations from 'hooks/useInvitations';
@@ -48,7 +47,7 @@ const DetailsModal: React.FC<DetailsModalProps> = ({
       companyName: '',
       address: '',
       zipCode: '',
-      country: countries[0].label,
+      country: t(`country.${countries[0]}`),
       vatId: '',
       email: '',
     },
@@ -154,9 +153,9 @@ const DetailsModal: React.FC<DetailsModalProps> = ({
                   <SelectValue placeholder={t('select-country')} />
                 </SelectTrigger>
                 <SelectContent>
-                  {countries.map((c) => (
-                    <SelectItem key={c.value} value={c.label}>
-                      {c.label}
+                  {countries.map(country => (
+                    <SelectItem key={country} value={country}>
+                      {t(`country.${country}`)}
                     </SelectItem>
                   ))}
                 </SelectContent>
