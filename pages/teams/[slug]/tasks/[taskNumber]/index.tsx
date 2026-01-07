@@ -14,7 +14,7 @@ import {
 import { CscAuditLogs, CscPanel } from '@/components/interfaces/CSC';
 import {
   RpaPanel,
-  RpaAuditLog,
+  RpaAuditLogs,
   CreateProcedureTest,
 } from '@/components/interfaces/RPA';
 import {
@@ -131,7 +131,7 @@ const TaskById = () => {
             </div>
           </CardHeader>
           <CardContent>
-            <RpaPanel task={task} />
+            <RpaPanel task={task} slug={slug}/>
           </CardContent>
         </Card>
       )}
@@ -264,7 +264,7 @@ const TaskById = () => {
               <CardTitle>{t('rpa-audit-logs')}</CardTitle>
             </CardHeader>
             <CardContent>
-              <RpaAuditLog task={task} />
+              <RpaAuditLogs task={task} slug={slug} />
             </CardContent>
           </Card>
           <Card className="mt-4">
@@ -323,7 +323,7 @@ export async function getServerSideProps({
   return {
     props: {
       ...(locale
-        ? await serverSideTranslations(locale, ['common', ...cscTranslations])
+        ? await serverSideTranslations(locale, ['common', 'rpa', ...cscTranslations])
         : {}),
     },
   };

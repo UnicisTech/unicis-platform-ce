@@ -9,11 +9,7 @@ import {
   FormDescription,
 } from '@/components/shadcn/ui/form';
 import { MultiSelect } from '@/components/shadcn/ui/multi-select';
-import {
-  config,
-  fieldPropsMapping,
-} from '@/components/defaultLanding/data/configs/rpa';
-import type { Option } from 'types';
+import { config } from '@/lib/rpa';
 import type { SecurityMeasuresStepValues } from '../types';
 import { Message } from '@/components/shared';
 import { useTranslation } from 'next-i18next';
@@ -25,8 +21,7 @@ export interface SecurityMeasuresStepProps {
 export function SecurityMeasuresStep({ control }: SecurityMeasuresStepProps) {
   const { t } = useTranslation('common');
 
-  const mapOptions = (opts: Option[], vals: string[]): Option[] =>
-    opts.filter((o) => vals.includes(o.value));
+  const tomsOptions = React.useMemo(() => config.toms.map(i => ({value: i, label: t(`rpa:toms.${i}`)})), [t])
 
   return (
     <>
@@ -46,20 +41,21 @@ export function SecurityMeasuresStep({ control }: SecurityMeasuresStepProps) {
         control={control}
         name="toms"
         rules={{
-          validate: (v: Option[]) =>
+          validate: (v: string[]) =>
             v && v.length > 0 ? undefined : t('please-select-at-least-one'),
           required: t('please-select-at-least-one'),
         }}
         render={({ field, formState }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.toms}</FormLabel>
+            <FormLabel>{t(`rpa:fields.toms`)}</FormLabel>
             <FormControl>
               <MultiSelect
-                options={config.toms}
-                defaultValue={field.value.map((o) => o.value)}
-                onValueChange={(vals) =>
-                  field.onChange(mapOptions(config.toms, vals))
-                }
+                options={tomsOptions}
+                defaultValue={field.value}
+                // onValueChange={(vals) =>
+                //   field.onChange(mapOptions(config.toms, vals))
+                // }
+                onValueChange={field.onChange}
                 modalPopover={true}
               />
             </FormControl>

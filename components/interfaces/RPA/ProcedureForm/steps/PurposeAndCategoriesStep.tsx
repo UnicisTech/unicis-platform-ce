@@ -8,13 +8,16 @@ import {
   FormMessage,
   FormDescription,
 } from '@/components/shadcn/ui/form';
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from '@/components/shadcn/ui/select';
 import { Textarea } from '@/components/shadcn/ui/textarea';
 import { MultiSelect } from '@/components/shadcn/ui/multi-select';
-import {
-  config,
-  fieldPropsMapping,
-} from '@/components/defaultLanding/data/configs/rpa';
-import type { Option } from 'types';
+import { config } from '@/lib/rpa';
 import type { PurposeAndCategoriesStepValues } from '../types';
 import { Message } from '@/components/shared';
 import { useTranslation } from 'next-i18next';
@@ -28,9 +31,24 @@ export default function PurposeAndCategoriesStep({
 }: PurposeAndCategoriesStepProps) {
   const { t } = useTranslation('common');
 
-  // helper to map selected string values back to full objects
-  const mapOptions = (allOpts: Option[], vals: string[]): Option[] =>
-    allOpts.filter((o) => vals.includes(o.value));
+  const {
+    categoryOptions,
+    specialCategoryOptions,
+    dataSubjectOptions,
+    retentionPeriodOptions,
+  } = React.useMemo(() => {
+    const categoryOptions = config.category.map(i => ({value: i, label: t(`rpa:category.${i}`)}))
+    const specialCategoryOptions = config.specialCategory.map(i => ({value: i, label: t(`rpa:special-category.${i}`)}))
+    const dataSubjectOptions = config.dataSubject.map(i => ({value: i, label: t(`rpa:data-subject.${i}`)}))
+    const retentionPeriodOptions = config.retentionPeriod.map(i => ({value: i, label: t(`rpa:retention-period.${i}`)}))
+  
+    return {
+      categoryOptions,
+      specialCategoryOptions,
+      dataSubjectOptions,
+      retentionPeriodOptions,
+    }
+  }, [t])
 
   return (
     <>
@@ -50,7 +68,7 @@ export default function PurposeAndCategoriesStep({
         name="purpose"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.purpose}</FormLabel>
+            <FormLabel>{t(`rpa:fields.purpose`)}</FormLabel>
             <FormControl>
               <Textarea
                 {...field}
@@ -66,20 +84,18 @@ export default function PurposeAndCategoriesStep({
         control={control}
         name="category"
         rules={{
-          validate: (v: Option[]) =>
+          validate: (v: string[]) =>
             v && v.length > 0 ? undefined : t('please-select-a-categories'),
           required: t('please-select-a-categories'),
         }}
         render={({ field, formState }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.category}</FormLabel>
+            <FormLabel>{t(`rpa:fields.category`)}</FormLabel>
             <FormControl>
               <MultiSelect
-                options={config.category}
-                defaultValue={field.value.map((o) => o.value)}
-                onValueChange={(vals) =>
-                  field.onChange(mapOptions(config.category, vals))
-                }
+                options={categoryOptions}
+                defaultValue={field.value}
+                onValueChange={field.onChange}
                 modalPopover={true}
               />
             </FormControl>
@@ -100,20 +116,18 @@ export default function PurposeAndCategoriesStep({
         control={control}
         name="specialcategory"
         rules={{
-          validate: (v: Option[]) =>
+          validate: (v: string[]) =>
             v && v.length > 0 ? undefined : t('please-select-a-categories'),
           required: t('please-select-a-categories'),
         }}
         render={({ field, formState }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.specialcategory}</FormLabel>
+            <FormLabel>{t(`rpa:fields.specialcategory`)}</FormLabel>
             <FormControl>
               <MultiSelect
-                options={config.specialcategory}
-                defaultValue={field.value.map((o) => o.value)}
-                onValueChange={(vals) =>
-                  field.onChange(mapOptions(config.specialcategory, vals))
-                }
+                options={specialCategoryOptions}
+                defaultValue={field.value}
+                onValueChange={field.onChange}
                 modalPopover={true}
               />
             </FormControl>
@@ -134,20 +148,18 @@ export default function PurposeAndCategoriesStep({
         control={control}
         name="datasubject"
         rules={{
-          validate: (v: Option[]) =>
+          validate: (v: string[]) =>
             v && v.length > 0 ? undefined : t('please-select-a-categories'),
           required: t('please-select-a-categories'),
         }}
         render={({ field, formState }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.datasubject}</FormLabel>
+            <FormLabel>{t(`rpa:fields.datasubject`)}</FormLabel>
             <FormControl>
               <MultiSelect
-                options={config.datasubject}
-                defaultValue={field.value.map((o) => o.value)}
-                onValueChange={(vals) =>
-                  field.onChange(mapOptions(config.datasubject, vals))
-                }
+                options={dataSubjectOptions}
+                defaultValue={field.value}
+                onValueChange={field.onChange}
                 modalPopover={true}
               />
             </FormControl>
@@ -165,29 +177,32 @@ export default function PurposeAndCategoriesStep({
           </FormItem>
         )}
       />
-
+      
       <FormField
         control={control}
         name="retentionperiod"
         rules={{ required: t('please-select-a-period') }}
         render={({ field, formState }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.retentionperiod}</FormLabel>
+            <FormLabel>{t('rpa:fields.retentionperiod')}</FormLabel>
             <FormControl>
-              <MultiSelect
-                options={config.retentionperiod}
-                defaultValue={
-                  field.value?.value ? [field.value?.value] : undefined
-                }
-                onValueChange={(vals) => {
-                  const sel = config.retentionperiod.find(
-                    (c) => c.value === vals[0]
-                  )!;
-                  field.onChange(sel);
-                }}
-                modalPopover={true}
-              />
+              <Select
+                value={field.value ?? ''}
+                onValueChange={(val) => field.onChange(val || null)}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder={t('please-select-a-period')} />
+                </SelectTrigger>
+                <SelectContent>
+                  {retentionPeriodOptions.map((opt) => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </FormControl>
+
             {!formState.errors.retentionperiod ? (
               <FormDescription>
                 {t('please-specify-the-data-retention-period')}
@@ -206,7 +221,7 @@ export default function PurposeAndCategoriesStep({
         name="commentsretention"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.commentsretention}</FormLabel>
+            <FormLabel>{t(`rpa:fields.commentsretention`)}</FormLabel>
             <FormControl>
               <Textarea
                 {...field}

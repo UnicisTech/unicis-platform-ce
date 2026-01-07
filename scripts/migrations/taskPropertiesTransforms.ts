@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { mapCscControlToId, mapCscControlToIdAny } from './helpers';
+import { mapCscControlToId, mapCscControlToIdAny, optionArrayToStringArray, optionToString, error, preview, mapValueByFieldConfig, rpaFieldToId } from './helpers';
 import { getCscControlsProp } from '@/lib/csc';
 import { ISO } from 'types';
 
@@ -175,6 +175,142 @@ export function normalizeCscAuditLogs(props: JsonWritable): JsonWritable {
   return clonedProps;
 }
 
+// ------ RPA ------
+
+function normalizeRpaProcedure(props: JsonWritable): JsonWritable {
+  const obj = asObject(props);
+  if (!obj) return props;
+
+  const raw = obj.rpa_procedure;
+  if (!Array.isArray(raw)) return props;
+
+  let changed = false;
+
+  const next = raw.map((block, blockIndex) => {
+    if (!block || typeof block !== 'object' || Array.isArray(block)) return block;
+
+    const src = block as Record<string, unknown>;
+    const cloned: Record<string, unknown> = { ...src };
+
+    for (const [key, value] of Object.entries(src)) {
+      const ctx = `rpa_procedure[${blockIndex}].${key}`;
+
+      // Option[]
+      const arrResult = optionArrayToStringArray(value, ctx);
+      if (arrResult !== value) {
+        cloned[key] = arrResult as any;
+        changed = true;
+        continue;
+      }
+
+      // Option
+      const singleResult = optionToString(value, ctx);
+      if (singleResult !== value) {
+        cloned[key] = singleResult as any;
+        changed = true;
+      }
+    }
+
+    return cloned;
+  });
+
+  if (!changed) return props;
+
+  return {
+    ...obj,
+    rpa_procedure: next,
+  };
+}
+
+export function normalizeRpaAuditLogs(props: JsonWritable): JsonWritable {
+  const obj = asObject(props);
+  if (!obj) return props;
+
+  const raw = obj.rpa_audit_logs;
+  if (!Array.isArray(raw)) return props;
+
+  let changed = false;
+  const nextLogs: Prisma.InputJsonValue[] = [];
+
+  for (let i = 0; i < raw.length; i++) {
+    const log = raw[i];
+
+    if (!log || typeof log !== 'object' || Array.isArray(log)) {
+      nextLogs.push(log);
+      continue;
+    }
+
+    const event = String((log as any).event ?? '');
+
+    if (event !== 'updated') {
+      nextLogs.push(log);
+      continue;
+    }
+
+    const diff = (log as any).diff;
+    if (!diff || typeof diff !== 'object' || Array.isArray(diff)) {
+      error(
+        `[RPA_AUDIT] Updated log without valid diff`,
+        `logIndex=${i}`,
+        `event=${event}`,
+        `diff=${preview(diff)}`
+      );
+      nextLogs.push(log);
+      continue;
+    }
+
+    const fieldRaw = (diff as any).field;
+    const fieldStr = typeof fieldRaw === 'string' ? fieldRaw : String(fieldRaw ?? '');
+    const fieldId = rpaFieldToId(fieldStr);
+
+    if (!fieldId) {
+      error(
+        `[RPA_AUDIT] Unknown field`,
+        `logIndex=${i}`,
+        `event=${event}`,
+        `field=${preview(fieldRaw)}`
+      );
+      nextLogs.push(log);
+      continue;
+    }
+
+    const prevRaw = (diff as any).prevValue;
+    const nextRaw = (diff as any).nextValue;
+
+    const prevRes = mapValueByFieldConfig(fieldId, prevRaw, { idx: i, which: 'prevValue' });
+    const nextRes = mapValueByFieldConfig(fieldId, nextRaw, { idx: i, which: 'nextValue' });
+
+    const fieldChanged = fieldId !== fieldRaw;
+    const thisChanged = fieldChanged || prevRes.changed || nextRes.changed;
+
+    if (!thisChanged) {
+      nextLogs.push(log);
+      continue;
+    }
+
+    changed = true;
+
+    nextLogs.push({
+      ...(log as any),
+      diff: {
+        ...(diff as any),
+        field: fieldId,
+        prevValue: prevRes.value,
+        nextValue: nextRes.value,
+      },
+    });
+  }
+
+  if (!changed) return props;
+
+  return {
+    ...obj,
+    rpa_audit_logs: nextLogs,
+  };
+}
+
+// ------ RPA ------
+
 const transforms = [
   renameCscControlsToMvps,
   normalizeCscControlsMvps,
@@ -187,6 +323,8 @@ const transforms = [
   normalizeCscControlSoc2V2,
   normalizeCscControlC5_2020,
   normalizeCscAuditLogs,
+  normalizeRpaProcedure,
+  normalizeRpaAuditLogs,
 ] as const;
 
 export function transformTaskProperties(

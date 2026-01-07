@@ -102,10 +102,9 @@ export default function DescriptionAndStakeholdersStep({
             <FormLabel>{t('data-protection-officer')}</FormLabel>
             <FormControl>
               <Select
-                value={field.value?.value}
+                value={field.value}
                 onValueChange={(val) => {
-                  const sel = dpoOptions.find((o) => o.value === val)!;
-                  field.onChange(sel);
+                  field.onChange(val);
                 }}
               >
                 <SelectTrigger className="w-full">

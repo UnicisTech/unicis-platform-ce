@@ -16,10 +16,7 @@ import {
   SelectContent,
   SelectItem,
 } from '@/components/shadcn/ui/select';
-import {
-  config,
-  fieldPropsMapping,
-} from '@/components/defaultLanding/data/configs/rpa';
+import { config } from '@/lib/rpa';
 import type { RecipientsStepValues } from '../types';
 import { Message } from '@/components/shared';
 import { useTranslation } from 'next-i18next';
@@ -50,24 +47,19 @@ export default function RecipientsStep({ control }: RecipientsStepProps) {
         rules={{ required: t('please-select-a-type') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.recipientType}</FormLabel>
+            <FormLabel>{t(`rpa:fields.recipientType`)}</FormLabel>
             <FormControl>
               <Select
-                value={field.value.value}
-                onValueChange={(val) => {
-                  const sel = config.recipientType.find(
-                    (o) => o.value === val
-                  )!;
-                  field.onChange(sel);
-                }}
+                value={field.value}
+                onValueChange={(val) => field.onChange(val || null)}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder={t('select-recipient-type')} />
                 </SelectTrigger>
                 <SelectContent>
-                  {config.recipientType.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value}>
-                      {opt.label}
+                  {config.recipientType.map(value => (
+                    <SelectItem key={value} value={value}>
+                      {t(`rpa:recipient-type.${value}`)}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -88,7 +80,7 @@ export default function RecipientsStep({ control }: RecipientsStepProps) {
         name="recipientdetails"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.recipientdetails}</FormLabel>
+            <FormLabel>{t(`rpa:fields.recipientdetails`)}</FormLabel>
             <FormControl>
               <Textarea
                 {...field}

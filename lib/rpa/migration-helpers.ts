@@ -1,4 +1,4 @@
-import { RpaConfig, Option } from 'types';
+import { RpaConfig, Option } from "types";
 
 type Options = {
   [key: string]: Option[];
@@ -413,45 +413,3 @@ export const config: RpaConfig = {
   rightsRestricted: options.RadioButton_Yes_No,
   piaNeeded: options.RadioButton_Yes_No,
 };
-
-export const fieldPropsMapping = {
-  reviewDate: 'Review of the process',
-  controller: 'Controller/Representative',
-  dpo: 'Data Protection Officer (DPO)',
-  purpose: 'Purpose of the Data Processing',
-  category: 'Category of Personal Data',
-  specialcategory: 'Special Category of Personal Data',
-  datasubject: 'Category of Data Subjects',
-  retentionperiod: 'Data retention period',
-  commentsretention: 'Comments on data retention period and further details',
-  recipientType: 'Type of Recipient',
-  recipientdetails: 'Recipient details',
-  datatransfer: 'Data Transfer',
-  recipient: 'Recipient',
-  country: 'Country',
-  guarantee: 'Type of guarantees',
-  toms: 'Type of security measures',
-  involveProfiling: '1. Does it involve profiling?',
-  useAutomated: '2. Does it use automated decision-making?',
-  involveSurveillance: '3. Does it involve surveillance, GPS, or monitoring?',
-  processedSpecialCategories:
-    '4. Are special categories like criminal records processed?',
-  isBigData: '5. Is a large amount of data processed (Big Data)?',
-  dataSetsCombined: '6. Are data sets combined?',
-  multipleControllers: '7. Are there multiple controllers?',
-  imbalanceInRelationship:
-    '8. Is there an imbalance in the controller-subject relationship?',
-  innovativeTechnologyUsed: '9. Is an innovative technology used?',
-  transferredOutside: '10. Is data transferred outside the EU?',
-  rightsRestricted: `11. Are subjects' rights restricted?`,
-  piaNeeded: '12. Is a data protection impact assessment needed?',
-};
-
-export const headers = [
-  'Description / Stakeholders',
-  'Purpose and Categories',
-  'Recipients',
-  'Transfer',
-  'Security Measures/TOMs',
-  'Data Protection Impact Assessment',
-];

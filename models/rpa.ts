@@ -1,11 +1,8 @@
-import {
-  config,
-  fieldPropsMapping,
-} from '@/components/defaultLanding/data/configs/rpa';
+import { fields } from '@/lib/rpa';
 import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
-import { Option, RpaProcedureInterface } from 'types';
-import { RpaAuditLog, RpaConfig, Diff, TaskProperties } from 'types';
+import { RpaProcedureInterface } from 'types';
+import { RpaAuditLog, Diff, TaskProperties } from 'types';
 
 export const deleteProcedure = async (params: {
   user: Session['user'];
@@ -211,42 +208,59 @@ export const getDiff = (o1, o2) => {
   const prev = o1.reduce(reduceMultipleObj, {});
   const next = o2.reduce(reduceMultipleObj, {});
   const diff: Diff[] = [];
-  for (const [key, value] of Object.entries(fieldPropsMapping)) {
-    if (JSON.stringify(prev[key]) !== JSON.stringify(next[key])) {
-      let prevValue, nextValue;
-      if (config[key as keyof RpaConfig] != null) {
-        if (Array.isArray(prev[key]) || Array.isArray(next[key])) {
-          prevValue = prev[key].map(
-            ({ value }: Option) =>
-              config[key as keyof RpaConfig]?.find(
-                (option) => option.value === value
-              )?.label
-          );
-          nextValue = next[key].map(
-            ({ value }: Option) =>
-              config[key as keyof RpaConfig]?.find(
-                (option) => option.value === value
-              )?.label
-          );
-        } else {
-          prevValue = config[key as keyof RpaConfig]?.find(
-            (option) => option.value === prev[key]?.value
-          )?.label;
-          nextValue = config[key as keyof RpaConfig]?.find(
-            (option) => option.value === next[key]?.value
-          )?.label;
-        }
-      } else {
-        prevValue = prev[key];
-        nextValue = next[key];
-      }
+  for (const key of fields) {
+    if (JSON.stringify(prev[key]) !== JSON.stringify(next[key])) {      
       diff.push({
-        field: value,
-        prevValue: prevValue,
-        nextValue: nextValue,
+        field: key,
+        prevValue: prev[key],
+        nextValue: next[key],
       });
     }
   }
 
   return diff;
 };
+
+// export const getDiff = (o1, o2) => {
+//   const prev = o1.reduce(reduceMultipleObj, {});
+//   const next = o2.reduce(reduceMultipleObj, {});
+//   const diff: Diff[] = [];
+//   for (const [key, value] of Object.entries(fieldPropsMapping)) {
+//     if (JSON.stringify(prev[key]) !== JSON.stringify(next[key])) {
+//       let prevValue, nextValue;
+//       if (config[key as keyof RpaConfig] != null) {
+//         if (Array.isArray(prev[key]) || Array.isArray(next[key])) {
+//           prevValue = prev[key].map(
+//             ({ value }: Option) =>
+//               config[key as keyof RpaConfig]?.find(
+//                 (option) => option.value === value
+//               )?.label
+//           );
+//           nextValue = next[key].map(
+//             ({ value }: Option) =>
+//               config[key as keyof RpaConfig]?.find(
+//                 (option) => option.value === value
+//               )?.label
+//           );
+//         } else {
+//           prevValue = config[key as keyof RpaConfig]?.find(
+//             (option) => option.value === (prev[key]?.value || prev[key])
+//           )?.label;
+//           nextValue = config[key as keyof RpaConfig]?.find(
+//             (option) => option.value === (next[key]?.value || next[key])
+//           )?.label;
+//         }
+//       } else {
+//         prevValue = prev[key];
+//         nextValue = next[key];
+//       }
+//       diff.push({
+//         field: value,
+//         prevValue: prevValue,
+//         nextValue: nextValue,
+//       });
+//     }
+//   }
+
+//   return diff;
+// };

@@ -39,7 +39,7 @@ import { SecurityMeasuresStep } from './steps/SecurityMeasuresStep';
 import { usePiaStepForm } from './hooks/usePiaStepForm';
 import { PiaStep } from './steps/PiaStep';
 import { StageTracker } from '@/components/shared/atlaskit';
-import { headers } from '@/components/defaultLanding/data/configs/rpa';
+import { headers } from '@/lib/rpa';
 
 const createProceduresQueue = (procedure: any): ProcedureQueueItem[] => {
   const result: ProcedureQueueItem[] = [];
@@ -257,14 +257,14 @@ export default function RpaProcedureDialog({
           <DialogClose asChild>
             <Button variant="outline">{t('close')}</Button>
           </DialogClose>
-          {currentStep > 0 && (
+          {(currentStep > (prevProcedure ? 1 : 0)) && (
             <Button variant="outline" onClick={back}>
               {t('back')}
             </Button>
           )}
           <Button onClick={next} disabled={isSaving}>
             {isSaving && <Loader2 className="animate-spin" />}
-            {currentStep < 5 ? t('next') : t('save')}
+            {currentStep < 6 ? t('next') : t('save')}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -1,85 +1,106 @@
 import React, { useState, useMemo } from 'react';
-import {
-  headers,
-  fieldPropsMapping,
-} from '@/components/defaultLanding/data/configs/rpa';
+import { headers } from '@/lib/rpa';
 import { Field } from '@/components/shared/atlaskit';
 import type { Task } from '@prisma/client';
 import { RpaProcedureInterface } from 'types';
 import { useTranslation } from 'next-i18next';
+import useTeamMembers from 'hooks/useTeamMembers';
+import { Error, Loading } from '@/components/shared';
 
 const DescriptionAndStakeholdersTab: React.FC<{
   step: RpaProcedureInterface[0];
-}> = ({ step }) => (
-  <div className="space-y-2">
-    <Field label={fieldPropsMapping.reviewDate} value={step.reviewDate} />
-    <Field label={fieldPropsMapping.controller} value={step.controller} />
-    <Field label={fieldPropsMapping.dpo} value={step.dpo.label} />
-  </div>
-);
+  slug: string;
+}> = ({ step, slug }) => {
+  const { t } = useTranslation('common');
+  const { isLoading, isError, members } = useTeamMembers(slug)
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError || !members) {
+    return <Error message={isError?.message} />;
+  }
+
+  const dpoName = members.find(member => member.userId === step.dpo)?.user.name || t('not-found')
+
+  return (
+    <div className="space-y-2">
+      <Field label={t(`rpa:fields.reviewDate`)} value={step.reviewDate} />
+      <Field label={t(`rpa:fields.controller`)} value={step.controller} />
+      <Field label={t(`rpa:fields.dpo`)} value={dpoName} />
+    </div>
+  )
+};
 
 const PurposeAndCategoriesTab: React.FC<{ step: RpaProcedureInterface[1] }> = ({
   step,
-}) => (
-  <div className="space-y-2">
-    {step.purpose && (
-      <Field label={fieldPropsMapping.purpose} value={step.purpose} />
-    )}
-    <Field
-      label={fieldPropsMapping.category}
-      value={step.category.map(({ label }) => label).join(', ')}
-    />
-    <Field
-      label={fieldPropsMapping.specialcategory}
-      value={step.specialcategory.map(({ label }) => label).join(', ')}
-    />
-    <Field
-      label={fieldPropsMapping.datasubject}
-      value={step.datasubject.map(({ label }) => label).join(', ')}
-    />
-    <Field
-      label={fieldPropsMapping.retentionperiod}
-      value={step.retentionperiod.label}
-    />
-    {step.commentsretention && (
+}) => {
+  const { t } = useTranslation('common');
+  return (
+    <div className="space-y-2">
+      {step.purpose && (
+        <Field label={t(`rpa:fields.purpose`)} value={step.purpose} />
+      )}
       <Field
-        label={fieldPropsMapping.commentsretention}
-        value={step.commentsretention}
+        label={t(`rpa:fields.category`)}
+        value={step.category.map(item => t(`rpa:category.${item}`)).join(', ')}
       />
-    )}
-  </div>
-);
+      <Field
+        label={t(`rpa:fields.specialcategory`)}
+        value={step.specialcategory.map(item => t(`rpa:special-category.${item}`)).join(', ')}
+      />
+      <Field
+        label={t(`rpa:fields.datasubject`)}
+        value={step.datasubject.map(item => t(`rpa:data-subject.${item}`)).join(', ')}
+      />
+      <Field
+        label={t(`rpa:fields.retentionperiod`)}
+        value={t(`rpa:retention-period.${step.retentionperiod}`)}
+      />
+      {step.commentsretention && (
+        <Field
+          label={t(`rpa:fields.commentsretention`)}
+          value={step.commentsretention}
+        />
+      )}
+    </div>
+  )
+};
 
 const RecipientsTab: React.FC<{ step: RpaProcedureInterface[2] }> = ({
   step,
-}) => (
-  <div className="space-y-2">
-    <Field
-      label={fieldPropsMapping.recipientType}
-      value={step.recipientType.label}
-    />
-    {step.recipientdetails && (
+}) => {
+  const { t } = useTranslation('common');
+  return (
+    <div className="space-y-2">
       <Field
-        label={fieldPropsMapping.recipientdetails}
-        value={step.recipientdetails}
+        label={t(`rpa:fields.recipientType`)}
+        value={t(`rpa:recipient-type.${step.recipientType}`)}
       />
-    )}
-  </div>
-);
+      {step.recipientdetails && (
+        <Field
+          label={t(`rpa:fields.recipientdetails`)}
+          value={step.recipientdetails}
+        />
+      )}
+    </div>
+  )
+};
 
 const TiaTab: React.FC<{ step: RpaProcedureInterface[3] }> = ({ step }) => {
   const { t } = useTranslation('common');
   return (
     <div className="space-y-2">
       <Field
-        label={fieldPropsMapping.datatransfer}
+        label={t(`rpa:fields.datatransfer`)}
         value={step.datatransfer ? t('enabled') : t('disabled')}
       />
-      <Field label={fieldPropsMapping.recipient} value={step.recipient} />
-      <Field label={fieldPropsMapping.country} value={step.country.label} />
+      <Field label={t(`rpa:fields.recipient`)} value={step.recipient} />
+      <Field label={t(`rpa:fields.country`)} value={t(`country.${step.country}`)} />
       <Field
-        label={fieldPropsMapping.guarantee}
-        value={step.guarantee.map(({ label }) => label).join(', ')}
+        label={t(`rpa:fields.guarantee`)}
+        value={step.guarantee.map(item => t(`rpa:guarantee.${item}`)).join(', ')}
       />
     </div>
   );
@@ -87,16 +108,19 @@ const TiaTab: React.FC<{ step: RpaProcedureInterface[3] }> = ({ step }) => {
 
 const SecurityMeasuresTab: React.FC<{ step: RpaProcedureInterface[4] }> = ({
   step,
-}) => (
-  <div className="space-y-2">
-    <Field
-      label={fieldPropsMapping.toms}
-      value={step.toms.map(({ label }) => label).join(', ')}
-    />
-  </div>
-);
+}) => {
+  const { t } = useTranslation('common');
+  return (
+    <div className="space-y-2">
+      <Field
+        label={t(`rpa:fields.toms`)}
+        value={step.toms.map(item => t(`rpa:toms.${item}`)).join(', ')}
+      />
+    </div>   
+  )
+};
 
-const RpaPanel: React.FC<{ task: Task }> = ({ task }) => {
+const RpaPanel: React.FC<{ task: Task, slug: string }> = ({ task, slug }) => {
   const { t } = useTranslation('common');
   const properties = task.properties as any;
   const procedure = properties.rpa_procedure as RpaProcedureInterface;
@@ -106,7 +130,7 @@ const RpaPanel: React.FC<{ task: Task }> = ({ task }) => {
     () =>
       procedure
         ? [
-            <DescriptionAndStakeholdersTab key={0} step={procedure[0]} />,
+            <DescriptionAndStakeholdersTab key={0} step={procedure[0]} slug={slug} />,
             <PurposeAndCategoriesTab key={1} step={procedure[1]} />,
             <RecipientsTab key={2} step={procedure[2]} />,
             <TiaTab key={3} step={procedure[3]} />,

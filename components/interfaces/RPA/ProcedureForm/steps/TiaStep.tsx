@@ -18,14 +18,11 @@ import {
   SelectItem,
 } from '@/components/shadcn/ui/select';
 import { MultiSelect } from '@/components/shadcn/ui/multi-select';
-import {
-  config,
-  fieldPropsMapping,
-} from '@/components/defaultLanding/data/configs/rpa';
-import type { Option } from 'types';
+import { config } from '@/lib/rpa';
 import type { TransferStepValues } from '../types';
 import { Message } from '@/components/shared';
 import { useTranslation } from 'next-i18next';
+import { countries } from '@/lib/common';
 
 export interface TransferStepProps {
   control: Control<TransferStepValues>;
@@ -34,9 +31,7 @@ export interface TransferStepProps {
 export default function TransferStep({ control }: TransferStepProps) {
   const { t } = useTranslation('common');
 
-  // helper to map strings back to objects
-  const mapOptions = (opts: Option[], vals: string[]): Option[] =>
-    opts.filter((o) => vals.includes(o.value));
+  const guaranteeOptions = React.useMemo(() => config.guarantee.map(i => ({value: i, label: t(`rpa:guarantee.${i}`)})), [t])
 
   return (
     <>
@@ -65,7 +60,7 @@ export default function TransferStep({ control }: TransferStepProps) {
               />
             </FormControl>
             <FormLabel htmlFor="datatransfer">
-              {fieldPropsMapping.datatransfer}
+              {t(`rpa:fields.datatransfer`)}
             </FormLabel>
           </FormItem>
         )}
@@ -77,7 +72,7 @@ export default function TransferStep({ control }: TransferStepProps) {
         rules={{ required: t('please-enter-a-recipient') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.recipient}</FormLabel>
+            <FormLabel>{t(`rpa:fields.recipient`)}</FormLabel>
             <FormControl>
               <Input {...field} autoComplete="off" />
             </FormControl>
@@ -93,22 +88,19 @@ export default function TransferStep({ control }: TransferStepProps) {
         rules={{ required: t('please-select-a-country') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.country}</FormLabel>
+            <FormLabel>{t(`rpa:fields.country`)}</FormLabel>
             <FormControl>
               <Select
-                value={field.value.value}
-                onValueChange={(val) => {
-                  const sel = config.country.find((c) => c.value === val)!;
-                  field.onChange(sel);
-                }}
+                value={field.value}
+                onValueChange={(val) => field.onChange(val || null)}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder={t('select-a-country')} />
                 </SelectTrigger>
                 <SelectContent>
-                  {config.country.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value}>
-                      {opt.label}
+                  {countries.map(country => (
+                    <SelectItem key={country} value={country}>
+                      {t(`country.${country}`)}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -126,20 +118,18 @@ export default function TransferStep({ control }: TransferStepProps) {
         control={control}
         name="guarantee"
         rules={{
-          validate: (v: Option[]) =>
+          validate: (v: string[]) =>
             v && v.length > 0 ? undefined : t('please-select-at-least-one'),
           required: t('please-select-at-least-one'),
         }}
         render={({ field, formState }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.guarantee}</FormLabel>
+            <FormLabel>{t(`rpa:fields.guarantee`)}</FormLabel>
             <FormControl>
               <MultiSelect
-                options={config.guarantee}
-                defaultValue={field.value.map((o) => o.value)}
-                onValueChange={(vals) =>
-                  field.onChange(mapOptions(config.guarantee, vals))
-                }
+                options={guaranteeOptions}
+                defaultValue={field.value}
+                onValueChange={field.onChange}
                 modalPopover={true}
               />
             </FormControl>

@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import statuses from '@/components/defaultLanding/data/statuses.json';
 import type { TaskWithPiaRisk } from 'types';
 import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
@@ -135,10 +134,7 @@ const RisksTable = ({
                   </td>
                   <td className="px-1.5 py-1.5">
                     <StatusBadge
-                      label={
-                        statuses.find(({ value }) => value === task.status)
-                          ?.label as string
-                      }
+                      label={t(`task-statuses.${task.status}`)}
                       value={task.status}
                     />
                   </td>

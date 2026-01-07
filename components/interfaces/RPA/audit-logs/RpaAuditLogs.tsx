@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'next-i18next';
+import { TFunction, useTranslation } from 'next-i18next';
 import type { Task } from '@prisma/client';
 import type { RpaAuditLog } from 'types';
 import {
@@ -11,10 +11,27 @@ import {
   TableRow,
 } from '@/components/shadcn/ui/table';
 import Pagination from '@/components/shadcn/ui/audit-pagination';
+import { Error, Loading, MemberName } from '@/components/shared';
+import useTeamMembersMap from 'hooks/useTeamMembersMap';
+import { auditLogHelper } from './auditLogHelper';
 
 const LOGS_PER_PAGE = 20;
 
-const RpaAuditLogs = ({ task }: { task: Task }) => {
+// const auditLogHelper = (field: string | undefined, value: string | string[], t: TFunction) => {
+//   switch (field) {
+//     case 'reviewDate':
+//     case 'controller':
+//     case 'purpose':
+//       return <span>{value}</span>;
+//     case 'category':
+//       if (Array.isArray(value)) {
+//         return value.map(v => t(`rpa:category.${v}`)).join(', ')
+//       }
+    
+//   }
+// }
+
+const RpaAuditLogs = ({ task, slug }: { task: Task, slug: string }) => {
   const { t } = useTranslation('common');
 
   const taskProperties = task?.properties as any;
@@ -26,6 +43,16 @@ const RpaAuditLogs = ({ task }: { task: Task }) => {
   const paginatedLogs = [...auditLogs]
     .reverse()
     .slice(start, start + LOGS_PER_PAGE);
+
+  const { isLoading, isError, membersById } = useTeamMembersMap(slug);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error message={isError?.message} />;
+  }
 
   return (
     <div className="space-y-4">
@@ -44,16 +71,24 @@ const RpaAuditLogs = ({ task }: { task: Task }) => {
             <TableBody>
               {paginatedLogs.map((log, index) => (
                 <TableRow key={index}>
-                  <TableCell>{log.actor?.name || '—'}</TableCell>
-                  <TableCell>{log.event}</TableCell>
+                  {/* <TableCell>{log.actor?.name || '—'}</TableCell> */}
+                  <TableCell><MemberName membersById={membersById} userId={log.actor?.id} fallback='—'/></TableCell>
+                  {/* <TableCell>{log.event}</TableCell> */}
+                  <TableCell>{t(`${log.event}`)}</TableCell>
                   <TableCell>
                     {new Date(log.date).toLocaleDateString()}
                   </TableCell>
-                  <TableCell className="text-muted-foreground">
+                  {/* <TableCell className="text-muted-foreground">
                     {log.diff?.prevValue?.toString() || '—'}
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell className="text-muted-foreground">
+                    {auditLogHelper(log.diff?.field, log.diff?.prevValue, t, membersById)}
+                  </TableCell>
+                  {/* <TableCell className="text-muted-foreground">
                     {log.diff?.nextValue?.toString() || '—'}
+                  </TableCell> */}
+                  <TableCell className="text-muted-foreground">
+                    {auditLogHelper(log.diff?.field, log.diff?.nextValue, t, membersById)}
                   </TableCell>
                 </TableRow>
               ))}

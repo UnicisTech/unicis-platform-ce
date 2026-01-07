@@ -1,14 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
-import statuses from '@/components/defaultLanding/data/statuses.json';
 import type { TaskWithRpaProcedure } from 'types';
 import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import useCanAccess from 'hooks/useCanAccess';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Badge } from '@/components/shadcn/ui/badge';
-import { StatusBadge } from '@/components/shared';
+import { Error, Loading, MemberName, StatusBadge } from '@/components/shared';
 import { Button } from '@/components/shadcn/ui/button';
+import useTeamMembersMap from 'hooks/useTeamMembersMap';
 
 const RpaTable = ({
   slug,
@@ -33,9 +33,17 @@ const RpaTable = ({
     prevButtonDisabled,
     nextButtonDisabled,
   } = usePagination<TaskWithRpaProcedure>(tasks, perPage);
+  const { isLoading, isError, membersById } = useTeamMembersMap(slug);
 
-  // const getStatusLabel = (value: string) =>
-  //   statuses.find((s) => s.value === value)?.label || value;
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error message={isError?.message} />;
+  }
+  
+  // console.log('rpa tasks', tasks.sort((a,b) => a.properties.rpa_audit_logs?.length - b.properties.rpa_audit_logs?.length))
 
   return (
     <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
@@ -66,15 +74,16 @@ const RpaTable = ({
                 </td>
                 <td className="px-1.5 py-1.5">
                   <StatusBadge
-                    label={
-                      statuses.find(({ value }) => value === task.status)
-                        ?.label as string
-                    }
+                    label={t(`task-statuses.${task.status}`)}
                     value={task.status}
                   />
                 </td>
                 <td className="px-1.5 py-1.5">
-                  <span>{task.properties.rpa_procedure[0].dpo.label}</span>
+                  <MemberName
+                    userId={task.properties.rpa_procedure?.[0]?.dpo}
+                    membersById={membersById}
+                    fallback={t('not-found')}
+                  />
                 </td>
                 <td className="px-1.5 py-1.5">
                   <Badge variant="outline">
@@ -90,8 +99,8 @@ const RpaTable = ({
                     }
                   >
                     {task.properties.rpa_procedure[3].datatransfer
-                      ? 'Enabled'
-                      : 'Disabled'}
+                      ? t('enabled')
+                      : t('disabled')}
                   </Badge>
                 </td>
                 <td className="px-1.5 py-1.5">
@@ -99,7 +108,7 @@ const RpaTable = ({
                     {task.properties.rpa_procedure[1].specialcategory.map(
                       (cat, i) => (
                         <Badge key={i} variant="secondary">
-                          {cat.label}
+                          {t(`rpa:special-category.${cat}`)}
                         </Badge>
                       )
                     )}
