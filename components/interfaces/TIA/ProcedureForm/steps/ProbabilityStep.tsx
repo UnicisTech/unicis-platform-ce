@@ -10,18 +10,13 @@ import {
 } from '@/components/shadcn/ui/form';
 import { Textarea } from '@/components/shadcn/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/shadcn/ui/radio-group';
-
-import {
-  config,
-  fieldPropsMapping,
-  questions,
-} from '@/components/defaultLanding/data/configs/tia';
 import type { ProbabilityStepValues } from '../types';
 import { Message } from '@/components/shared';
 import { Input } from '@/components/shadcn/ui/input';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 import { TiaProcedureInterface } from 'types';
 import { useTranslation } from 'next-i18next';
+import { config, questions } from '@/lib/tia';
 
 interface ProbabilityStepProps {
   problematicLawfulAccessValues: TiaProcedureInterface[1];
@@ -43,7 +38,7 @@ export default function ProbabilityStep({
         text={t('if-problematic-lawful-access-derogations-description')}
       />
 
-      <p>{questions['DataTransferImporter']}</p>
+      <p>{t(`tia:questions.${questions[0]}`)}</p>
 
       <FormField
         control={control}
@@ -51,7 +46,7 @@ export default function ProbabilityStep({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.RelevantDataTransferImporter}
+              {t(`tia:fields.RelevantDataTransferImporter`)}
             </FormLabel>
             <FormControl>
               <Input
@@ -71,7 +66,7 @@ export default function ProbabilityStep({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.ProbabilityDataTransferImporter}
+              {t(`tia:fields.ProbabilityDataTransferImporter`)}
             </FormLabel>
             <FormControl>
               <Input
@@ -91,7 +86,7 @@ export default function ProbabilityStep({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.ReasonDataTransferImporter}
+              {t(`tia:fields.ReasonDataTransferImporter`)}
             </FormLabel>
             <FormControl>
               <Textarea
@@ -107,7 +102,7 @@ export default function ProbabilityStep({
         )}
       />
 
-      <p>{questions['TransferToImporter']}</p>
+      <p>{t(`tia:questions.${questions[1]}`)}</p>
 
       <FormField
         control={control}
@@ -115,7 +110,7 @@ export default function ProbabilityStep({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.RelevantTransferToImporter}
+              {t(`tia:fields.RelevantTransferToImporter`)}
             </FormLabel>
             <FormControl>
               <Input {...field} autoComplete="off" />
@@ -131,7 +126,7 @@ export default function ProbabilityStep({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.ProbabilityTransferToImporter}
+              {t(`tia:fields.ProbabilityTransferToImporter`)}
             </FormLabel>
             <FormControl>
               <Input {...field} autoComplete="off" />
@@ -146,7 +141,7 @@ export default function ProbabilityStep({
         name="ReasonTransferToImporter"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.ReasonTransferToImporter}</FormLabel>
+            <FormLabel>{t(`tia:fields.ReasonTransferToImporter`)}</FormLabel>
             <FormControl>
               <Textarea {...field} autoComplete="off" />
             </FormControl>
@@ -155,7 +150,7 @@ export default function ProbabilityStep({
         )}
       />
 
-      <p>{questions['TransferToImporterForPerformance']}</p>
+      <p>{t(`tia:questions.${questions[2]}`)}</p>
 
       <FormField
         control={control}
@@ -163,7 +158,7 @@ export default function ProbabilityStep({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.RelevantTransferToImporterForPerformance}
+              {t(`tia:fields.RelevantTransferToImporterForPerformance`)}
             </FormLabel>
             <FormControl>
               <Input {...field} autoComplete="off" />
@@ -179,7 +174,7 @@ export default function ProbabilityStep({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.ProbabilityTransferToImporterPerformance}
+              {t(`tia:fields.ProbabilityTransferToImporterPerformance`)}
             </FormLabel>
             <FormControl>
               <Input {...field} autoComplete="off" />
@@ -195,7 +190,7 @@ export default function ProbabilityStep({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.ReasonTransferToImporterPerformance}
+              {t(`tia:fields.ReasonTransferToImporterPerformance`)}
             </FormLabel>
             <FormControl>
               <Textarea {...field} autoComplete="off" />
@@ -205,14 +200,14 @@ export default function ProbabilityStep({
         )}
       />
 
-      <p>{questions['LegalGround']}</p>
+      <p>{t(`tia:questions.${questions[3]}`)}</p>
 
       <FormField
         control={control}
         name="RelevantLegalGround"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.RelevantLegalGround}</FormLabel>
+            <FormLabel>{t(`tia:fields.RelevantLegalGround`)}</FormLabel>
             <FormControl>
               <Input
                 {...field}
@@ -230,7 +225,7 @@ export default function ProbabilityStep({
         name="ProbabilityLegalGround"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.ProbabilityLegalGround}</FormLabel>
+            <FormLabel>{t(`tia:fields.ProbabilityLegalGround`)}</FormLabel>
             <FormControl>
               <Input
                 {...field}
@@ -248,7 +243,7 @@ export default function ProbabilityStep({
         name="ReasonLegalGround"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.ReasonLegalGround}</FormLabel>
+            <FormLabel>{t(`tia:fields.ReasonLegalGround`)}</FormLabel>
             <FormControl>
               <Textarea
                 {...field}
@@ -311,7 +306,7 @@ export default function ProbabilityStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ConnectionTargetedAccess}
+                  {t(`tia:fields.ConnectionTargetedAccess`)}
                 </FormLabel>
                 <FormDescription>
                   {t('targeted-access-eg-investigations')}
@@ -327,7 +322,7 @@ export default function ProbabilityStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -344,7 +339,7 @@ export default function ProbabilityStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonConnectionTargetedAccess}
+                  {t(`tia:fields.ReasonConnectionTargetedAccess`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -370,7 +365,7 @@ export default function ProbabilityStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ConnectionSurveillanceTele}
+                  {t(`tia:fields.ConnectionSurveillanceTele`)}
                 </FormLabel>
                 <FormDescription>
                   {t('eg-by-intelligence-agencies')}
@@ -386,7 +381,7 @@ export default function ProbabilityStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -403,7 +398,7 @@ export default function ProbabilityStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonConnectionSurveillanceTele}
+                  {t(`tia:fields.ReasonConnectionSurveillanceTele`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -427,7 +422,7 @@ export default function ProbabilityStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ConnectionSelfreportingObligations}
+                  {t(`tia:fields.ConnectionSelfreportingObligations`)}
                 </FormLabel>
                 <FormDescription>
                   {t('eg-by-intelligence-agencies')}
@@ -443,7 +438,7 @@ export default function ProbabilityStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -460,7 +455,7 @@ export default function ProbabilityStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonConnectionSelfreportingObligations}
+                  {t(`tia:fields.ReasonConnectionSelfreportingObligations`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea

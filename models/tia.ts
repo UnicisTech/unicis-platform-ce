@@ -1,17 +1,17 @@
-import { fields } from '@/lib/rpa';
+import { fields } from '@/lib/tia';
 import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
-import { RpaProcedureInterface } from 'types';
-import { RpaAuditLog, Diff, TaskProperties } from 'types';
+import { TiaProcedureInterface, TaskProperties } from 'types';
+import { TiaAuditLog, Diff } from 'types';
 
 export const deleteProcedure = async (params: {
   user: Session['user'];
   taskNumber: number;
   slug: string;
-  prevProcedure: RpaProcedureInterface | [];
-  nextProcedure: RpaProcedureInterface | [];
+  prevProcedure: TiaProcedureInterface | [];
+  nextProcedure: TiaProcedureInterface | [];
 }) => {
-  const { taskNumber, slug, user, prevProcedure, nextProcedure } = params;
+  const { user, taskNumber, slug, prevProcedure, nextProcedure } = params;
   const task = await prisma.task.findFirst({
     where: {
       taskNumber,
@@ -27,7 +27,7 @@ export const deleteProcedure = async (params: {
 
   const taskId = task.id;
   const taskProperties = task?.properties as TaskProperties;
-  delete taskProperties.rpa_procedure;
+  delete taskProperties.tia_procedure;
 
   const updatedTask = await prisma.task.update({
     where: {
@@ -55,8 +55,8 @@ export const saveProcedure = async (params: {
   user: Session['user'];
   taskNumber: number;
   slug: string;
-  prevProcedure: RpaProcedureInterface | [];
-  nextProcedure: RpaProcedureInterface | [];
+  prevProcedure: TiaProcedureInterface | [];
+  nextProcedure: TiaProcedureInterface | [];
 }) => {
   const { user, taskNumber, slug, prevProcedure, nextProcedure } = params;
   const task = await prisma.task.findFirst({
@@ -74,7 +74,7 @@ export const saveProcedure = async (params: {
 
   const taskId = task.id;
   const taskProperties = task?.properties as TaskProperties;
-  taskProperties.rpa_procedure = nextProcedure;
+  taskProperties.tia_procedure = nextProcedure;
 
   const updatedTask = await prisma.task.update({
     where: {
@@ -102,11 +102,11 @@ export const addAuditLogs = async (params: {
   taskId: number;
   taskProperties: TaskProperties;
   user: Session['user'];
-  prevProcedure: RpaProcedureInterface | [];
-  nextProcedure: RpaProcedureInterface | [];
+  prevProcedure: TiaProcedureInterface | [];
+  nextProcedure: TiaProcedureInterface | [];
 }) => {
   const { taskId, taskProperties, user, prevProcedure, nextProcedure } = params;
-  const newAuditItems: RpaAuditLog[] = [];
+  const newAuditItems: TiaAuditLog[] = [];
 
   if (prevProcedure.length === 0 && nextProcedure.length !== 0) {
     newAuditItems.push(generateChangeLog(user, 'created', null));
@@ -122,57 +122,15 @@ export const addAuditLogs = async (params: {
     );
   }
 
-  let rpa_audit_logs = taskProperties?.rpa_audit_logs;
+  let tia_audit_logs = taskProperties?.tia_audit_logs;
 
-  if (typeof rpa_audit_logs === 'undefined') {
-    rpa_audit_logs = [...newAuditItems];
+  if (typeof tia_audit_logs === 'undefined') {
+    tia_audit_logs = [...newAuditItems];
   } else {
-    rpa_audit_logs = [...rpa_audit_logs, ...newAuditItems];
+    tia_audit_logs = [...tia_audit_logs, ...newAuditItems];
   }
 
-  taskProperties.rpa_audit_logs = rpa_audit_logs;
-
-  await prisma.task.update({
-    where: {
-      id: taskId,
-    },
-    data: {
-      properties: {
-        ...taskProperties,
-      },
-    },
-  });
-};
-
-export const addAuditLog = async (params: {
-  taskId: number;
-  user: Session['user'];
-  event: string;
-  prevValue: string | null;
-  nextValue: string;
-  taskProperties: TaskProperties;
-}) => {
-  const { taskId, user, event, prevValue, nextValue, taskProperties } = params;
-
-  const auditLog = {
-    actor: user,
-    date: new Date().getTime(),
-    event: event,
-    diff: {
-      prevValue: prevValue,
-      nextValue: nextValue,
-    },
-  };
-
-  let csc_audit_logs = taskProperties?.csc_audit_logs;
-
-  if (typeof csc_audit_logs === 'undefined') {
-    csc_audit_logs = [auditLog];
-  } else {
-    csc_audit_logs = [...csc_audit_logs, auditLog];
-  }
-
-  taskProperties.csc_audit_logs = csc_audit_logs;
+  taskProperties.tia_audit_logs = tia_audit_logs;
 
   await prisma.task.update({
     where: {
@@ -190,7 +148,7 @@ const generateChangeLog = (
   user: Session['user'],
   event: string,
   diffLog: Diff
-): RpaAuditLog => {
+): TiaAuditLog => {
   return {
     actor: user,
     date: new Date().getTime(),

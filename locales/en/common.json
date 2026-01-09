@@ -358,6 +358,7 @@
   "select-yes-or-no": "Select yes or no.",
   "yes": "Yes",
   "no": "No",
+  "na": "Not applicable",
   "enter-a-reason": "Enter a reason.",
   "encryption-in-transit-description": "Is the personal data at issue protected with adequate encryption in-transit (i.e. when transmitted)?",
   "transfer-mechanism-description": "Is the personal data at issue protected by a transfer mechanism approved by applicable data protection law (e.g., the EU Standard Contractual Clauses in case of the GDPR, approved BCR, or - in the case of an onward transfer - a back-to-back-contract in line with the EU SCC), and compliance with it and its judicial enforcement be expected, insofar permitted under the importer's law?",

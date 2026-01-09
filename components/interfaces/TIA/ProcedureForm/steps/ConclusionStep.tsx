@@ -1,7 +1,7 @@
 import { Message } from '@/components/shared';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
-import { isTranferPermitted } from '@/lib/tia';
 import { useTranslation } from 'next-i18next';
+import { isTranferPermitted } from '@/lib/tia/helpers';
 
 interface ConclusionStepProps {
   procedure: any;

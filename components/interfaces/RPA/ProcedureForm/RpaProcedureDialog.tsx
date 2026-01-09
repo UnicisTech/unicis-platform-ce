@@ -16,7 +16,6 @@ import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 import { Task } from '@prisma/client';
 import {
-  defaultProcedure,
   ProcedureQueueItem,
   RpaProcedureInterface,
 } from 'types';
@@ -40,6 +39,7 @@ import { usePiaStepForm } from './hooks/usePiaStepForm';
 import { PiaStep } from './steps/PiaStep';
 import { StageTracker } from '@/components/shared/atlaskit';
 import { steps } from '@/lib/rpa';
+import { defaultProcedure } from '@/lib/tia/helpers';
 
 const createProceduresQueue = (procedure: any): ProcedureQueueItem[] => {
   const result: ProcedureQueueItem[] = [];

@@ -10,17 +10,13 @@ import {
 } from '@/components/shadcn/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/shadcn/ui/radio-group';
 import { Textarea } from '@/components/shadcn/ui/textarea';
-
-import {
-  config,
-  fieldPropsMapping,
-} from '@/components/defaultLanding/data/configs/tia';
 import type { TiaProcedureInterface } from 'types';
 import type { ProblematicLawfulAccessValues } from '../types';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
-import { getTransferIsValue } from '@/lib/tia';
 import { Message } from '@/components/shared';
 import { useTranslation } from 'next-i18next';
+import { config } from '@/lib/tia';
+import { getTransferIsValue } from '@/lib/tia/helpers';
 
 export function TransferIs() {
   const { t } = useTranslation('common');
@@ -29,13 +25,13 @@ export function TransferIs() {
 
   const status = getTransferIsValue(values);
 
-  const variant = status === 'NOT PERMITTED' ? 'error' : 'success';
+  const variant = status === 'not-permitted' ? 'error' : 'success';
 
   return (
     <div className="flex items-center space-x-2">
       <span className="font-bold">
         {t('based-on-the-answers-transfer-is')}{' '}
-        <DaisyBadge color={variant}>{status}</DaisyBadge>
+        <DaisyBadge color={variant}>{t(`tia:transfer-is.${status}`)}</DaisyBadge>
       </span>
     </div>
   );
@@ -62,7 +58,7 @@ export default function ProblematicLawfulAccessStep({
         rules={{ required: t('select-yes-or-no') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.EncryptionInTransit}</FormLabel>
+            <FormLabel>{t(`tia:fields.EncryptionInTransit`)}</FormLabel>
             <FormDescription>
               {t('encryption-in-transit-description')}
             </FormDescription>
@@ -71,7 +67,7 @@ export default function ProblematicLawfulAccessStep({
                 {config.EncryptionInTransit.map((opt) => (
                   <div key={opt.value} className="flex items-center space-x-2">
                     <RadioGroupItem value={opt.value} id={opt.value} />
-                    <label htmlFor={opt.value}>{opt.label}</label>
+                    <label htmlFor={opt.value}>{t(opt.key)}</label>
                   </div>
                 ))}
               </RadioGroup>
@@ -88,7 +84,7 @@ export default function ProblematicLawfulAccessStep({
         rules={{ required: t('enter-a-reason') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.ReasonEncryptionInTransit}</FormLabel>
+            <FormLabel>{t(`tia:fields.ReasonEncryptionInTransit`)}</FormLabel>
             <FormControl>
               <Textarea {...field} placeholder={t('provide-details')} />
             </FormControl>
@@ -104,7 +100,7 @@ export default function ProblematicLawfulAccessStep({
         rules={{ required: t('select-yes-or-no') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.TransferMechanism}</FormLabel>
+            <FormLabel>{t(`tia:fields.TransferMechanism`)}</FormLabel>
             <FormDescription>
               {t('transfer-mechanism-description')}
             </FormDescription>
@@ -113,7 +109,7 @@ export default function ProblematicLawfulAccessStep({
                 {config.TransferMechanism.map((opt) => (
                   <div key={opt.value} className="flex items-center space-x-2">
                     <RadioGroupItem value={opt.value} id={opt.value} />
-                    <label htmlFor={opt.value}>{opt.label}</label>
+                    <label htmlFor={opt.value}>{t(opt.key)}</label>
                   </div>
                 ))}
               </RadioGroup>
@@ -130,7 +126,7 @@ export default function ProblematicLawfulAccessStep({
         rules={{ required: t('enter-a-reason') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.ReasonTransferMechanism}</FormLabel>
+            <FormLabel>{t(`tia:fields.ReasonTransferMechanism`)}</FormLabel>
             <FormControl>
               <Textarea {...field} placeholder={t('provide-details')} />
             </FormControl>
@@ -157,7 +153,7 @@ export default function ProblematicLawfulAccessStep({
         rules={{ required: t('select-yes-or-no') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.LawfulAccess}</FormLabel>
+            <FormLabel>{t(`tia:fields.LawfulAccess`)}</FormLabel>
             <FormDescription>
               {t('lawful-access-targeted-description')}
             </FormDescription>
@@ -166,7 +162,7 @@ export default function ProblematicLawfulAccessStep({
                 {config.LawfulAccess.map((opt) => (
                   <div key={opt.value} className="flex items-center space-x-2">
                     <RadioGroupItem value={opt.value} id={opt.value} />
-                    <label htmlFor={opt.value}>{opt.label}</label>
+                    <label htmlFor={opt.value}>{t(opt.key)}</label>
                   </div>
                 ))}
               </RadioGroup>
@@ -183,7 +179,7 @@ export default function ProblematicLawfulAccessStep({
         rules={{ required: t('enter-a-reason') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.ReasonLawfulAccess}</FormLabel>
+            <FormLabel>{t(`tia:fields.ReasonLawfulAccess`)}</FormLabel>
             <FormControl>
               <Textarea {...field} placeholder={t('provide-details')} />
             </FormControl>
@@ -200,7 +196,7 @@ export default function ProblematicLawfulAccessStep({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.MassSurveillanceTelecommunications}
+              {t(`tia:fields.MassSurveillanceTelecommunications`)}
             </FormLabel>
             <FormDescription>
               {t('mass-surveillance-telecommunications-description')}
@@ -210,7 +206,7 @@ export default function ProblematicLawfulAccessStep({
                 {config.MassSurveillanceTelecommunications.map((opt) => (
                   <div key={opt.value} className="flex items-center space-x-2">
                     <RadioGroupItem value={opt.value} id={opt.value} />
-                    <label htmlFor={opt.value}>{opt.label}</label>
+                    <label htmlFor={opt.value}>{t(opt.key)}</label>
                   </div>
                 ))}
               </RadioGroup>
@@ -228,7 +224,7 @@ export default function ProblematicLawfulAccessStep({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.ReasonMassSurveillanceTelecommunications}
+              {t(`tia:fields.ReasonMassSurveillanceTelecommunications`)}
             </FormLabel>
             <FormControl>
               <Textarea {...field} placeholder={t('provide-details')} />
@@ -245,7 +241,7 @@ export default function ProblematicLawfulAccessStep({
         rules={{ required: t('select-yes-or-no') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.SelfReportingObligations}</FormLabel>
+            <FormLabel>{t(`tia:fields.SelfReportingObligations`)}</FormLabel>
             <FormDescription>
               {t('self-reporting-obligations-description')}
             </FormDescription>
@@ -254,7 +250,7 @@ export default function ProblematicLawfulAccessStep({
                 {config.SelfReportingObligations.map((opt) => (
                   <div key={opt.value} className="flex items-center space-x-2">
                     <RadioGroupItem value={opt.value} id={opt.value} />
-                    <label htmlFor={opt.value}>{opt.label}</label>
+                    <label htmlFor={opt.value}>{t(opt.key)}</label>
                   </div>
                 ))}
               </RadioGroup>
@@ -272,7 +268,7 @@ export default function ProblematicLawfulAccessStep({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.ReasonSelfReportingObligations}
+              {t(`tia:fields.ReasonSelfReportingObligations`)}
             </FormLabel>
             <FormControl>
               <Textarea {...field} placeholder={t('provide-details')} />

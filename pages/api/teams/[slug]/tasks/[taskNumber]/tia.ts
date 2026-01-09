@@ -1,4 +1,4 @@
-import { deleteProcedure, saveProcedure } from '@/lib/tia';
+import { deleteProcedure, saveProcedure } from 'models/tia';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';

@@ -1,142 +1,191 @@
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'next-i18next';
-import {
-  config,
-  headers,
-  fieldPropsMapping,
-  questions,
-} from '@/components/defaultLanding/data/configs/tia';
+import { steps, questions } from '@/lib/tia';
 import { Field } from '@/components/shared/atlaskit';
 import type { Task } from '@prisma/client';
 import { TiaProcedureInterface } from 'types';
 import RiskLevel from '../RiskLevel';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
-import { getTiaRisks, isTranferPermitted } from '@/lib/tia';
-
-const NOT_APPLICABLE = 'Not Applicable';
+import { getTranslationKey, isTranferPermitted, getTiaRisks } from '@/lib/tia/helpers';
 
 const TransferScenarioTab: React.FC<{ step: TiaProcedureInterface[0] }> = ({
   step,
-}) => (
-  <div>
-    <Field label={fieldPropsMapping.DataExporter} value={step.DataExporter} />
-    <Field
-      label={fieldPropsMapping.CountryDataExporter}
-      value={step.CountryDataExporter.label}
-    />
-    <Field label={fieldPropsMapping.DataImporter} value={step.DataImporter} />
-    <Field
-      label={fieldPropsMapping.CountryDataImporter}
-      value={step.CountryDataImporter.label}
-    />
-    <Field
-      label={fieldPropsMapping.TransferScenario}
-      value={step.TransferScenario}
-    />
-    <Field label={fieldPropsMapping.DataAtIssue} value={step.DataAtIssue} />
-    <Field
-      label={fieldPropsMapping.HowDataTransfer}
-      value={step.HowDataTransfer}
-    />
-    <Field
-      label={fieldPropsMapping.StartDateAssessment}
-      value={<DaisyBadge color="tag">{step.StartDateAssessment}</DaisyBadge>}
-    />
-    <Field
-      label={fieldPropsMapping.AssessmentYears}
-      value={step.AssessmentYears}
-    />
-    <Field
-      label={fieldPropsMapping.LawImporterCountry}
-      value={step.LawImporterCountry.label}
-    />
-  </div>
-);
+}) => {
+  const { t } = useTranslation('common');
+  
+  return (
+    <div>
+      <Field label={t(`tia:fields.DataExporter`)} value={step.DataExporter} />
+      <Field
+        label={t(`tia:fields.CountryDataExporter`)}
+        value={step.CountryDataExporter}
+      />
+      <Field label={t(`tia:fields.DataImporter`)} value={step.DataImporter} />
+      <Field
+        label={t(`tia:fields.CountryDataImporter`)}
+        value={step.CountryDataImporter}
+      />
+      <Field
+        label={t(`tia:fields.TransferScenario`)}
+        value={step.TransferScenario}
+      />
+      <Field label={t(`tia:fields.DataAtIssue`)} value={step.DataAtIssue} />
+      <Field
+        label={t(`tia:fields.HowDataTransfer`)}
+        value={step.HowDataTransfer}
+      />
+      <Field
+        label={t(`tia:fields.StartDateAssessment`)}
+        value={<DaisyBadge color="tag">{step.StartDateAssessment}</DaisyBadge>}
+      />
+      <Field
+        label={t(`tia:fields.AssessmentYears`)}
+        value={step.AssessmentYears}
+      />
+      <Field
+        label={t(`tia:fields.LawImporterCountry`)}
+        value={step.LawImporterCountry}
+      />
+    </div>
+  )
+};
 
 const ProblematicLawfulAccessTab: React.FC<{
   step: TiaProcedureInterface[1];
-}> = ({ step }) => (
-  <div>
-    {(
-      [
-        'EncryptionInTransit',
-        'TransferMechanism',
-        'LawfulAccess',
-        'MassSurveillanceTelecommunications',
-        'SelfReportingObligations',
-      ] as const
-    ).map((key) => {
-      const option = config[key].find((o) => o.value === (step as any)[key]);
-      return (
+}> = ({ step }) => {
+  const { t } = useTranslation('common');
+
+  return (
+    <div>
+      {(
+        [
+          'EncryptionInTransit',
+          'TransferMechanism',
+          'LawfulAccess',
+          'MassSurveillanceTelecommunications',
+          'SelfReportingObligations',
+        ] as const
+      ).map((key) => (
+          <Field
+            key={key}
+            label={t(`tia:fields.${key}`)}
+            value={t(`${step[key]}`) || ''}
+          />
+      ))}
+      {(
+        [
+          'ReasonEncryptionInTransit',
+          'ReasonTransferMechanism',
+          'ReasonLawfulAccess',
+          'ReasonMassSurveillanceTelecommunications',
+          'ReasonSelfReportingObligations',
+        ] as const
+      ).map((key) => (
         <Field
           key={key}
-          label={fieldPropsMapping[key]}
-          value={option?.label || ''}
+          label={t(`tia:fields.${key}`)}
+          value={(step as any)[key] || ''}
         />
-      );
-    })}
-    {(
-      [
-        'ReasonEncryptionInTransit',
-        'ReasonTransferMechanism',
-        'ReasonLawfulAccess',
-        'ReasonMassSurveillanceTelecommunications',
-        'ReasonSelfReportingObligations',
-      ] as const
-    ).map((key) => (
-      <Field
-        key={key}
-        label={fieldPropsMapping[key]}
-        value={(step as any)[key] || ''}
-      />
-    ))}
-  </div>
-);
+      ))}
+    </div>
+  )
+};
 
 const RiskTab: React.FC<{
   step: TiaProcedureInterface[2];
   targetedRisk: number;
   nonTargetedRisk: number;
   selfReportingRisk: number;
-}> = ({ step, targetedRisk, nonTargetedRisk, selfReportingRisk }) => (
-  <div>
-    {Object.entries(step).map(([key, val]) => {
-      if (key.startsWith('Reason')) return null;
-      const label = fieldPropsMapping[key as keyof typeof fieldPropsMapping];
-      const display =
-        config[key]?.find((o) => o.value === val)?.label ||
-        val ||
-        NOT_APPLICABLE;
-      return <Field key={key} label={label} value={display} />;
-    })}
+}> = ({ step, targetedRisk, nonTargetedRisk, selfReportingRisk }) => {
+  const { t } = useTranslation('common');
 
-    <RiskLevel value={targetedRisk} />
-    <RiskLevel value={nonTargetedRisk} />
-    <RiskLevel value={selfReportingRisk} />
-  </div>
-);
+  return (
+    <div>
+      {Object.entries(step).map(([key, val]) => {
+        if (key.startsWith('Reason')) return null;
+        const label = t(`tia:fields.${key}`)
+        const display = t(`${getTranslationKey(val) || 'na'}`)
+        return <Field key={key} label={label} value={display} />;
+      })}
+
+      <RiskLevel value={targetedRisk} />
+      <RiskLevel value={nonTargetedRisk} />
+      <RiskLevel value={selfReportingRisk} />
+    </div>
+  )
+};
 
 // Tab 3: Detailed questions
 const ProbabilityTab: React.FC<{ step: TiaProcedureInterface[3] }> = ({
   step,
-}) => (
-  <div>
-    {Object.entries(questions).map(([qKey, qLabel]) => {
-      const propKey = Object.keys(fieldPropsMapping).find(
-        (k) => fieldPropsMapping[k] === qLabel
-      ) as keyof typeof fieldPropsMapping;
-      return (
-        <React.Fragment key={qKey}>
-          <Field label={qLabel} />
-          <Field
-            label={fieldPropsMapping[propKey]}
-            value={(step as any)[propKey] || NOT_APPLICABLE}
-          />
-        </React.Fragment>
-      );
-    })}
-  </div>
-);
+}) => {
+  const { t } = useTranslation('common');
+
+  return (
+    <>
+      <div>
+        <Field label={t(`tia:questions.${questions[0]}`)} />
+        <Field
+          label={t(`tia:fields.RelevantDataTransferImporter`)}
+          value={(step as any)['RelevantDataTransferImporter'] || t('na')}
+        />
+        <Field
+          label={t(`tia:fields.ProbabilityDataTransferImporter`)}
+          value={(step as any)['ProbabilityDataTransferImporter'] || t('na')}
+        />
+        <Field
+          label={t(`tia:fields.ReasonDataTransferImporter`)}
+          value={(step as any)['ReasonDataTransferImporter'] || t('na')}
+        />
+      </div>
+      <div>
+        <Field label={t(`tia:questions.${questions[1]}`)} />
+        <Field
+          label={t(`tia:fields.RelevantTransferToImporter`)}
+          value={(step as any)['RelevantTransferToImporter'] || t('na')}
+        />
+        <Field
+          label={t(`tia:fields.ProbabilityTransferToImporter`)}
+          value={(step as any)['ProbabilityTransferToImporter'] || t('na')}
+        />
+        <Field
+          label={t(`tia:fields.ReasonTransferToImporter`)}
+          value={(step as any)['ReasonTransferToImporter'] || t('na')}
+        />
+      </div>
+      <div>
+        <Field label={t(`tia:questions.${questions[2]}`)} />
+        <Field
+          label={t(`tia:fields.RelevantTransferToImporterForPerformance`)}
+          value={(step as any)['RelevantTransferToImporterForPerformance'] || t('na')}
+        />
+        <Field
+          label={t(`tia:fields.ProbabilityTransferToImporterPerformance`)}
+          value={(step as any)['ProbabilityTransferToImporterPerformance'] || t('na')}
+        />
+        <Field
+          label={t(`tia:fields.ReasonTransferToImporterPerformance`)}
+          value={(step as any)['ReasonTransferToImporterPerformance'] || t('na')}
+        />
+      </div>
+      <div>
+        <Field label={t(`tia:questions.${questions[3]}`)} />
+        <Field
+          label={t(`tia:fields.RelevantLegalGround`)}
+          value={(step as any)['RelevantLegalGround'] || t('na')}
+        />
+        <Field
+          label={t(`tia:fields.ProbabilityLegalGround`)}
+          value={(step as any)['ProbabilityLegalGround'] || t('na')}
+        />
+        <Field
+          label={t(`tia:fields.ReasonLegalGround`)}
+          value={(step as any)['ReasonLegalGround'] || t('na')}
+        />
+      </div>
+    </>
+  )
+};
 
 // Tab 4: Final decision
 const ConclusionTab: React.FC<{ permitted: boolean }> = ({ permitted }) => {
@@ -194,14 +243,14 @@ const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({
       {procedure ? (
         <>
           <div role="tablist" className="tabs tabs-bordered">
-            {headers.map((hdr, idx) => (
+            {steps.map((step, idx) => (
               <button
                 key={idx}
                 role="tab"
                 className={`tab ${selectedTab === idx ? 'tab-active' : ''}`}
                 onClick={() => setSelectedTab(idx)}
               >
-                {hdr}
+                {t(`tia:steps.${step}`)}
               </button>
             ))}
           </div>

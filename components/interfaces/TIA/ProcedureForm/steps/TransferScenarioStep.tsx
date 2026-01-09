@@ -18,14 +18,10 @@ import {
   SelectItem,
 } from '@/components/shadcn/ui/select';
 import { Slider } from '@/components/shadcn/ui/slider';
-
-import {
-  config,
-  fieldPropsMapping,
-} from '@/components/defaultLanding/data/configs/tia';
 import type { TransferScenarioStepValues } from '../types';
 import { DatePickerInput } from '@/components/shadcn/ui/date-picker';
 import { Message } from '@/components/shared';
+import { countries } from '@/lib/common';
 
 interface TransferScenarioStepProps {
   control: Control<TransferScenarioStepValues>;
@@ -47,7 +43,7 @@ export default function TransferScenarioStep({
         rules={{ required: t('please-specify-the-data-exporter') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.DataExporter}</FormLabel>
+            <FormLabel>{t(`tia:fields.DataExporter`)}</FormLabel>
             <FormControl>
               <Textarea
                 {...field}
@@ -67,24 +63,19 @@ export default function TransferScenarioStep({
         rules={{ required: t('please-select-a-country') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.CountryDataExporter}</FormLabel>
+            <FormLabel>{t(`tia:fields.CountryDataExporter`)}</FormLabel>
             <FormControl>
               <Select
-                onValueChange={(val) => {
-                  const selected = config.countries.find(
-                    (c) => c.value === val
-                  );
-                  field.onChange(selected!);
-                }}
-                value={field.value?.value}
+                onValueChange={field.onChange}
+                value={field.value}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder={t('select-a-country')} />
                 </SelectTrigger>
                 <SelectContent>
-                  {config.countries.map((c) => (
-                    <SelectItem key={c.value} value={c.value}>
-                      {c.label}
+                  {countries.map(country => (
+                    <SelectItem key={country} value={country}>
+                      {t(`country.${country}`)}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -105,7 +96,7 @@ export default function TransferScenarioStep({
         rules={{ required: t('please-specify-the-data-importer') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.DataImporter}</FormLabel>
+            <FormLabel>{t(`tia:fields.DataImporter`)}</FormLabel>
             <FormControl>
               <Textarea
                 {...field}
@@ -125,24 +116,19 @@ export default function TransferScenarioStep({
         rules={{ required: t('please-select-a-country') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.CountryDataImporter}</FormLabel>
+            <FormLabel>{t(`tia:fields.CountryDataImporter`)}</FormLabel>
             <FormControl>
               <Select
-                onValueChange={(val) => {
-                  const selected = config.countries.find(
-                    (c) => c.value === val
-                  );
-                  field.onChange(selected!);
-                }}
-                value={field.value?.value}
+                onValueChange={field.onChange}
+                value={field.value}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder={t('select-a-country')} />
                 </SelectTrigger>
                 <SelectContent>
-                  {config.countries.map((c) => (
-                    <SelectItem key={c.value} value={c.value}>
-                      {c.label}
+                  {countries.map(country => (
+                    <SelectItem key={country} value={country}>
+                      {t(`country.${country}`)}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -163,7 +149,7 @@ export default function TransferScenarioStep({
         rules={{ required: t('please-describe-the-transfer-scenario') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.TransferScenario}</FormLabel>
+            <FormLabel>{t(`tia:fields.TransferScenario`)}</FormLabel>
             <FormControl>
               <Textarea
                 {...field}
@@ -183,7 +169,7 @@ export default function TransferScenarioStep({
         rules={{ required: t('please-describe-the-data-at-issue') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.DataAtIssue}</FormLabel>
+            <FormLabel>{t(`tia:fields.DataAtIssue`)}</FormLabel>
             <FormControl>
               <Textarea
                 {...field}
@@ -203,7 +189,7 @@ export default function TransferScenarioStep({
         rules={{ required: t('please-describe-how-data-is-transferred') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.HowDataTransfer}</FormLabel>
+            <FormLabel>{t(`tia:fields.HowDataTransfer`)}</FormLabel>
             <FormControl>
               <Textarea
                 {...field}
@@ -224,7 +210,7 @@ export default function TransferScenarioStep({
         // defaultValue={initial?.StartDateAssessment?.slice(0, 10) ?? new Date().toISOString().slice(0, 10)}
         render={({ field, formState }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.StartDateAssessment}</FormLabel>
+            <FormLabel>{t(`tia:fields.StartDateAssessment`)}</FormLabel>
             <FormControl>
               <DatePickerInput
                 value={field.value}
@@ -246,7 +232,7 @@ export default function TransferScenarioStep({
         name="AssessmentYears"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.AssessmentYears}</FormLabel>
+            <FormLabel>{t(`tia:fields.AssessmentYears`)}</FormLabel>
             <FormControl>
               <Slider
                 value={[field.value]}
@@ -270,24 +256,19 @@ export default function TransferScenarioStep({
         rules={{ required: t('please-select-a-country') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.LawImporterCountry}</FormLabel>
+            <FormLabel>{t(`tia:fields.LawImporterCountry`)}</FormLabel>
             <FormControl>
               <Select
-                onValueChange={(val) => {
-                  const selected = config.countries.find(
-                    (c) => c.value === val
-                  );
-                  field.onChange(selected!);
-                }}
-                value={field.value?.value}
+                onValueChange={field.onChange}
+                value={field.value}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder={t('select-a-country')} />
                 </SelectTrigger>
                 <SelectContent>
-                  {config.countries.map((c) => (
-                    <SelectItem key={c.value} value={c.value}>
-                      {c.label}
+                  {countries.map(country => (
+                    <SelectItem key={country} value={country}>
+                      {t(`country.${country}`)}
                     </SelectItem>
                   ))}
                 </SelectContent>

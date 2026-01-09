@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { mapCscControlToId, mapCscControlToIdAny, optionArrayToStringArray, optionToString, error, preview, mapValueByFieldConfig, rpaFieldToId } from './helpers';
+import { mapCscControlToId, mapCscControlToIdAny, optionArrayToStringArray, optionToString, error, preview, mapValueByFieldConfig, rpaFieldToId, countryToValue, tiaFieldToId } from './helpers';
 import { getCscControlsProp } from '@/lib/csc';
 import { ISO } from 'types';
 
@@ -222,7 +222,7 @@ function normalizeRpaProcedure(props: JsonWritable): JsonWritable {
   };
 }
 
-export function normalizeRpaAuditLogs(props: JsonWritable): JsonWritable {
+function normalizeRpaAuditLogs(props: JsonWritable): JsonWritable {
   const obj = asObject(props);
   if (!obj) return props;
 
@@ -277,8 +277,8 @@ export function normalizeRpaAuditLogs(props: JsonWritable): JsonWritable {
     const prevRaw = (diff as any).prevValue;
     const nextRaw = (diff as any).nextValue;
 
-    const prevRes = mapValueByFieldConfig(fieldId, prevRaw, { idx: i, which: 'prevValue' });
-    const nextRes = mapValueByFieldConfig(fieldId, nextRaw, { idx: i, which: 'nextValue' });
+    const prevRes = mapValueByFieldConfig(fieldId, prevRaw, { idx: i, which: 'prevValue' }, 'RPA');
+    const nextRes = mapValueByFieldConfig(fieldId, nextRaw, { idx: i, which: 'nextValue' }, 'RPA');
 
     const fieldChanged = fieldId !== fieldRaw;
     const thisChanged = fieldChanged || prevRes.changed || nextRes.changed;
@@ -311,6 +311,133 @@ export function normalizeRpaAuditLogs(props: JsonWritable): JsonWritable {
 
 // ------ RPA ------
 
+// ------ TIA ------
+
+function normalizeTiaProcedure(props: JsonWritable): JsonWritable {
+  const obj = asObject(props);
+  if (!obj) return props;
+
+  const raw = obj.tia_procedure;
+  if (!Array.isArray(raw)) return props;
+
+  let changed = false;
+
+  const next = raw.map((block, blockIndex) => {
+    if (!block || typeof block !== 'object' || Array.isArray(block)) return block;
+
+    const src = block as Record<string, unknown>;
+    const cloned: Record<string, unknown> = { ...src };
+
+    for (const [key, value] of Object.entries(src)) {
+      const ctx = `tia_procedure[${blockIndex}].${key}`;
+
+      const mapped = countryToValue(value, ctx);
+      if (mapped !== value) {
+        cloned[key] = mapped as any;
+        changed = true;
+      }
+    }
+
+    return cloned;
+  });
+
+  if (!changed) return props;
+
+  return {
+    ...obj,
+    tia_procedure: next as Prisma.InputJsonValue[],
+  } as Prisma.InputJsonValue;
+}
+
+function normalizeTiaAuditLogs(props: JsonWritable): JsonWritable {
+  const obj = asObject(props);
+  if (!obj) return props;
+
+  const raw = obj.tia_audit_logs;
+  if (!Array.isArray(raw)) return props;
+
+  let changed = false;
+  const nextLogs: Prisma.InputJsonValue[] = [];
+
+  for (let i = 0; i < raw.length; i++) {
+    const log = raw[i];
+
+    if (!log || typeof log !== 'object' || Array.isArray(log)) {
+      nextLogs.push(log);
+      continue;
+    }
+
+    const event = String((log as any).event ?? '');
+
+    if (event !== 'updated') {
+      nextLogs.push(log);
+      continue;
+    }
+
+    const diff = (log as any).diff;
+    if (!diff || typeof diff !== 'object' || Array.isArray(diff)) {
+      error(
+        `[TIA_AUDIT] Updated log without valid diff`,
+        `logIndex=${i}`,
+        `event=${event}`,
+        `diff=${preview(diff)}`
+      );
+      nextLogs.push(log);
+      continue;
+    }
+
+    const fieldRaw = (diff as any).field;
+    const fieldStr = typeof fieldRaw === 'string' ? fieldRaw : String(fieldRaw ?? '');
+    const fieldId = tiaFieldToId(fieldStr);
+
+    if (!fieldId) {
+      error(
+        `[TIA_AUDIT] Unknown field`,
+        `logIndex=${i}`,
+        `event=${event}`,
+        `field=${preview(fieldRaw)}`
+      );
+      nextLogs.push(log);
+      continue;
+    }
+
+    const prevRaw = (diff as any).prevValue;
+    const nextRaw = (diff as any).nextValue;
+
+    const prevRes = mapValueByFieldConfig(fieldId, prevRaw, { idx: i, which: 'prevValue' }, 'TIA');
+    const nextRes = mapValueByFieldConfig(fieldId, nextRaw, { idx: i, which: 'nextValue' }, 'TIA');
+
+    const fieldChanged = fieldId !== fieldRaw;
+    const thisChanged = fieldChanged || prevRes.changed || nextRes.changed;
+
+    if (!thisChanged) {
+      nextLogs.push(log);
+      continue;
+    }
+
+    changed = true;
+
+    nextLogs.push({
+      ...(log as any),
+      diff: {
+        ...(diff as any),
+        field: fieldId,
+        prevValue: prevRes.value,
+        nextValue: nextRes.value,
+      },
+    });
+  }
+
+  if (!changed) return props;
+
+  return {
+    ...obj,
+    tia_audit_logs: nextLogs,
+  };
+}
+
+// ------ TIA ------
+
 const transforms = [
   renameCscControlsToMvps,
   normalizeCscControlsMvps,
@@ -325,6 +452,8 @@ const transforms = [
   normalizeCscAuditLogs,
   normalizeRpaProcedure,
   normalizeRpaAuditLogs,
+  normalizeTiaProcedure,
+  normalizeTiaAuditLogs,
 ] as const;
 
 export function transformTaskProperties(

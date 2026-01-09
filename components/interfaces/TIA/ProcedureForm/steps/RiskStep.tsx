@@ -12,16 +12,13 @@ import { RadioGroup, RadioGroupItem } from '@/components/shadcn/ui/radio-group';
 import { Textarea } from '@/components/shadcn/ui/textarea';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 
-import { getTiaRisks, getProblematicLawfulAccesses } from '@/lib/tia';
-import {
-  config,
-  fieldPropsMapping,
-} from '@/components/defaultLanding/data/configs/tia';
+import { getTiaRisks, getProblematicLawfulAccesses } from '@/lib/tia/helpers';
 import type { TiaProcedureInterface } from 'types';
 import type { RiskStepValues } from '../types';
 import RiskLevel from '../../RiskLevel';
 import { Message } from '@/components/shared';
 import { useTranslation } from 'next-i18next';
+import { config } from '@/lib/tia';
 
 interface RiskStepProps {
   problematicLawfulAccessValues: TiaProcedureInterface[1];
@@ -58,7 +55,7 @@ export default function RiskStep({
             rules={{ required: t('please-select-an-option') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.WarrantsSubpoenas}</FormLabel>
+                <FormLabel>{t(`tia:fields.WarrantsSubpoenas`)}</FormLabel>
                 <FormDescription>
                   {t('warrants-subpoenas-description')}
                 </FormDescription>
@@ -73,7 +70,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -89,7 +86,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonWarrantsSubpoenas}
+                  {t(`tia:fields.ReasonWarrantsSubpoenas`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -109,7 +106,7 @@ export default function RiskStep({
             rules={{ required: t('please-select-an-option') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ViolationLocalLaw}</FormLabel>
+                <FormLabel>{t(`tia:fields.ViolationLocalLaw`)}</FormLabel>
                 <FormDescription>
                   {t('violation-local-law-description')}
                 </FormDescription>
@@ -124,7 +121,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -140,7 +137,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonViolationLocalLaw}
+                  {t(`tia:fields.ReasonViolationLocalLaw`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -160,7 +157,7 @@ export default function RiskStep({
             rules={{ required: t('please-select-an-option') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.HighViolationLocalLaw}</FormLabel>
+                <FormLabel>{t(`tia:fields.HighViolationLocalLaw`)}</FormLabel>
                 <FormDescription>
                   {t('high-violation-local-law-description')}
                 </FormDescription>
@@ -175,7 +172,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -191,7 +188,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonHighViolationLocalLaw}
+                  {t(`tia:fields.ReasonHighViolationLocalLaw`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -212,7 +209,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.HighViolationDataIssue}
+                  {t(`tia:fields.HighViolationDataIssue`)}
                 </FormLabel>
                 <FormDescription>
                   {t('high-violation-data-issue-description')}
@@ -228,7 +225,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -244,7 +241,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonHighViolationDataIssue}
+                  {t(`tia:fields.ReasonHighViolationDataIssue`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -264,7 +261,7 @@ export default function RiskStep({
             rules={{ required: t('please-select-an-option') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.InvestigatingImporter}</FormLabel>
+                <FormLabel>{t(`tia:fields.InvestigatingImporter`)}</FormLabel>
                 <FormDescription>
                   {t('investigating-importer-description')}
                 </FormDescription>
@@ -279,7 +276,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -295,7 +292,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonInvestigatingImporter}
+                  {t(`tia:fields.ReasonInvestigatingImporter`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -315,7 +312,7 @@ export default function RiskStep({
             rules={{ required: t('please-select-an-option') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.PastWarrantSubpoena}</FormLabel>
+                <FormLabel>{t(`tia:fields.PastWarrantSubpoena`)}</FormLabel>
                 <FormDescription>
                   {t('past-warrant-subpoena-description')}
                 </FormDescription>
@@ -330,7 +327,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -346,7 +343,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonPastWarrantSubpoena}
+                  {t(`tia:fields.ReasonPastWarrantSubpoena`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -369,7 +366,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.DataIssueInvestigation}
+                  {t(`tia:fields.DataIssueInvestigation`)}
                 </FormLabel>
                 <FormDescription>
                   {t('data-issue-investigation-description')}
@@ -385,7 +382,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -402,7 +399,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonDataIssueInvestigation}
+                  {t(`tia:fields.ReasonDataIssueInvestigation`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -440,7 +437,7 @@ export default function RiskStep({
             rules={{ required: t('please-select-an-option') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.LocalIssueWarrants}</FormLabel>
+                <FormLabel>{t(`tia:fields.LocalIssueWarrants`)}</FormLabel>
                 <FormDescription>
                   {t('local-issue-warrants-description')}
                 </FormDescription>
@@ -455,7 +452,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -472,7 +469,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonLocalIssueWarrants}
+                  {t(`tia:fields.ReasonLocalIssueWarrants`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea {...field} placeholder={t('provide-details')} />
@@ -488,7 +485,7 @@ export default function RiskStep({
             rules={{ required: t('please-select-an-option') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.LocalMassSurveillance}</FormLabel>
+                <FormLabel>{t(`tia:fields.LocalMassSurveillance`)}</FormLabel>
                 <FormDescription>
                   {t('local-mass-surveillance-description')}
                 </FormDescription>
@@ -503,7 +500,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -520,7 +517,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonLocalMassSurveillance}
+                  {t(`tia:fields.ReasonLocalMassSurveillance`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea {...field} placeholder={t('provide-details')} />
@@ -537,7 +534,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.LocalAccessMassSurveillance}
+                  {t(`tia:fields.LocalAccessMassSurveillance`)}
                 </FormLabel>
                 <FormDescription>
                   {t('local-access-mass-surveillance-description')}
@@ -553,7 +550,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -570,7 +567,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonLocalAccessMassSurveillance}
+                  {t(`tia:fields.ReasonLocalAccessMassSurveillance`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -590,7 +587,7 @@ export default function RiskStep({
             rules={{ required: t('please-select-an-option') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.LocalRoutinelyMonitor}</FormLabel>
+                <FormLabel>{t(`tia:fields.LocalRoutinelyMonitor`)}</FormLabel>
                 <FormDescription>
                   {t('local-routinely-monitor-description')}
                 </FormDescription>
@@ -605,7 +602,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -622,7 +619,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonLocalRoutinelyMonitor}
+                  {t(`tia:fields.ReasonLocalRoutinelyMonitor`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -642,7 +639,7 @@ export default function RiskStep({
             rules={{ required: t('please-select-an-option') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.PassMassSurveillance}</FormLabel>
+                <FormLabel>{t(`tia:fields.PassMassSurveillance`)}</FormLabel>
                 <FormDescription>
                   {t('pass-mass-surveillance-description')}
                 </FormDescription>
@@ -657,7 +654,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -674,7 +671,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonPassMassSurveillance}
+                  {t(`tia:fields.ReasonPassMassSurveillance`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -697,7 +694,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.PassMassSurveillanceConnection}
+                  {t(`tia:fields.PassMassSurveillanceConnection`)}
                 </FormLabel>
                 <FormDescription>
                   {t('pass-mass-surveillance-connection-description')}
@@ -713,7 +710,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -730,7 +727,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonPassMassSurveillanceConnection}
+                  {t(`tia:fields.ReasonPassMassSurveillanceConnection`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -767,7 +764,7 @@ export default function RiskStep({
             rules={{ required: t('please-select-an-option') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.ImporterObligation}</FormLabel>
+                <FormLabel>{t(`tia:fields.ImporterObligation`)}</FormLabel>
                 <FormDescription>
                   {t('importer-obligation-description')}
                 </FormDescription>
@@ -782,7 +779,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -799,7 +796,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonImporterObligation}
+                  {t(`tia:fields.ReasonImporterObligation`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -819,7 +816,7 @@ export default function RiskStep({
             rules={{ required: t('please-select-an-option') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.LocalSelfReporting}</FormLabel>
+                <FormLabel>{t(`tia:fields.LocalSelfReporting`)}</FormLabel>
                 <FormDescription>
                   {t('local-self-reporting-description')}
                 </FormDescription>
@@ -834,7 +831,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -851,7 +848,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonLocalSelfReporting}
+                  {t(`tia:fields.ReasonLocalSelfReporting`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -871,7 +868,7 @@ export default function RiskStep({
             rules={{ required: t('please-select-an-option') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldPropsMapping.PastSelfReporting}</FormLabel>
+                <FormLabel>{t(`tia:fields.PastSelfReporting`)}</FormLabel>
                 <FormDescription>
                   {t('past-self-reporting-description')}
                 </FormDescription>
@@ -886,7 +883,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -903,7 +900,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonPastSelfReporting}
+                  {t(`tia:fields.ReasonPastSelfReporting`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
@@ -926,7 +923,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.AssessmentProduceReport}
+                  {t(`tia:fields.AssessmentProduceReport`)}
                 </FormLabel>
                 <FormDescription>
                   {t('assessment-produce-report-description')}
@@ -942,7 +939,7 @@ export default function RiskStep({
                         className="flex items-center space-x-2"
                       >
                         <RadioGroupItem value={opt.value} id={opt.value} />
-                        <label htmlFor={opt.value}>{opt.label}</label>
+                        <label htmlFor={opt.value}>{t(opt.key)}</label>
                       </div>
                     ))}
                   </RadioGroup>
@@ -959,7 +956,7 @@ export default function RiskStep({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {fieldPropsMapping.ReasonAssessmentProduceReport}
+                  {t(`tia:fields.ReasonAssessmentProduceReport`)}
                 </FormLabel>
                 <FormControl>
                   <Textarea

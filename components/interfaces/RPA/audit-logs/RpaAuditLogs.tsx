@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TFunction, useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next';
 import type { Task } from '@prisma/client';
 import type { RpaAuditLog } from 'types';
 import {
@@ -16,20 +16,6 @@ import useTeamMembersMap from 'hooks/useTeamMembersMap';
 import { auditLogHelper } from './auditLogHelper';
 
 const LOGS_PER_PAGE = 20;
-
-// const auditLogHelper = (field: string | undefined, value: string | string[], t: TFunction) => {
-//   switch (field) {
-//     case 'reviewDate':
-//     case 'controller':
-//     case 'purpose':
-//       return <span>{value}</span>;
-//     case 'category':
-//       if (Array.isArray(value)) {
-//         return value.map(v => t(`rpa:category.${v}`)).join(', ')
-//       }
-    
-//   }
-// }
 
 const RpaAuditLogs = ({ task, slug }: { task: Task, slug: string }) => {
   const { t } = useTranslation('common');
@@ -71,22 +57,14 @@ const RpaAuditLogs = ({ task, slug }: { task: Task, slug: string }) => {
             <TableBody>
               {paginatedLogs.map((log, index) => (
                 <TableRow key={index}>
-                  {/* <TableCell>{log.actor?.name || '—'}</TableCell> */}
                   <TableCell><MemberName membersById={membersById} userId={log.actor?.id} fallback='—'/></TableCell>
-                  {/* <TableCell>{log.event}</TableCell> */}
                   <TableCell>{t(`${log.event}`)}</TableCell>
                   <TableCell>
                     {new Date(log.date).toLocaleDateString()}
                   </TableCell>
-                  {/* <TableCell className="text-muted-foreground">
-                    {log.diff?.prevValue?.toString() || '—'}
-                  </TableCell> */}
                   <TableCell className="text-muted-foreground">
                     {auditLogHelper(log.diff?.field, log.diff?.prevValue, t, membersById)}
                   </TableCell>
-                  {/* <TableCell className="text-muted-foreground">
-                    {log.diff?.nextValue?.toString() || '—'}
-                  </TableCell> */}
                   <TableCell className="text-muted-foreground">
                     {auditLogHelper(log.diff?.field, log.diff?.nextValue, t, membersById)}
                   </TableCell>

@@ -15,7 +15,7 @@ import {
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 import { Task } from '@prisma/client';
-import { defaultProcedure, TiaProcedureInterface } from 'types';
+import { TiaProcedureInterface } from 'types';
 import {
   TransferScenarioStep,
   ProblematicLawfulAccessStep,
@@ -30,10 +30,10 @@ import {
   useProbabilityStepForm,
 } from './hooks';
 import TaskPicker from '@/components/shared/shadcn/TaskPicker';
-import { shouldSkipTwoSteps } from '@/lib/tia';
 import { Message } from '@/components/shared';
 import { StageTracker } from '@/components/shared/atlaskit';
-import { headers } from '@/components/defaultLanding/data/configs/tia';
+import { steps } from '@/lib/tia';
+import { shouldSkipTwoSteps, isTranferPermitted, defaultProcedure } from '@/lib/tia/helpers';
 
 interface TiaProcedureDialogProps {
   prevProcedure?: TiaProcedureInterface;
@@ -112,10 +112,16 @@ export default function TiaProcedureDialog({
         setCurrentStep(5);
       })();
     } else if (currentStep === 5) {
-      handleSubmit(procedureData);
+      handleSubmit(procedureData, prevProcedure);
     }
   };
-  const back = () => setCurrentStep((s) => Math.max(s - 1, 0));
+  const back = () => {
+    if (currentStep === 5 && !isTranferPermitted(procedureData)) {
+      setCurrentStep(2)
+    } else {
+      setCurrentStep((s) => Math.max(s - 1, 0))
+    }
+  };
 
   const handleSubmit = async (procedure: any, prevProcedure?: any) => {
     try {
@@ -157,7 +163,7 @@ export default function TiaProcedureDialog({
         <DialogHeader>
           <DialogTitle>{t('tia')}</DialogTitle>
           {currentStep > 0 && (
-            <StageTracker headers={headers} currentStage={currentStep - 1} />
+            <StageTracker headers={steps.map(step => t(`tia:steps.${step}`))} currentStage={currentStep - 1} />
           )}
         </DialogHeader>
 
