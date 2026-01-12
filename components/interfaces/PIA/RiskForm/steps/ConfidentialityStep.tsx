@@ -9,13 +9,10 @@ import {
 } from '@/components/shadcn/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/shadcn/ui/radio-group';
 import { Textarea } from '@/components/shadcn/ui/textarea';
-import {
-  fieldPropsMapping,
-  config,
-} from '@/components/defaultLanding/data/configs/pia';
 import type { PiaRisk } from 'types';
 import { ConfidentialityStepValues } from '../types';
 import { useTranslation } from 'next-i18next';
+import { config } from '@/lib/pia';
 
 const ConfidentialityStep = ({
   initial,
@@ -39,14 +36,14 @@ const ConfidentialityStep = ({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.confidentialityRiskProbability}
+              {t(`pia:fields.confidentialityRiskProbability`)}
             </FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.confidentialityRiskProbability.map((opt) => (
-                  <div key={opt.value} className="flex items-center space-x-2">
-                    <RadioGroupItem value={opt.value} id={opt.value} />
-                    <label htmlFor={opt.value}>{opt.label}</label>
+                {config.confidentialityRiskProbability.map(item => (
+                  <div key={item} className="flex items-center space-x-2">
+                    <RadioGroupItem value={item} id={item} />
+                    <label htmlFor={item}>{t(`pia:risk-probability.${item}`)}</label>
                   </div>
                 ))}
               </RadioGroup>
@@ -64,14 +61,14 @@ const ConfidentialityStep = ({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.confidentialityRiskSecurity}
+              {t(`pia:fields.confidentialityRiskSecurity`)}
             </FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.confidentialityRiskSecurity.map((opt) => (
-                  <div key={opt.value} className="flex items-center space-x-2">
-                    <RadioGroupItem value={opt.value} id={opt.value} />
-                    <label htmlFor={opt.value}>{opt.label}</label>
+                {config.confidentialityRiskSecurity.map(item => (
+                  <div key={item} className="flex items-center space-x-2">
+                    <RadioGroupItem value={item} id={item} />
+                    <label htmlFor={item}>{t(`pia:confidentialityRiskSecurity.${item}`)}</label>
                   </div>
                 ))}
               </RadioGroup>
@@ -87,7 +84,7 @@ const ConfidentialityStep = ({
         defaultValue={initial?.confidentialityAssessment ?? ''}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.confidentialityAssessment}</FormLabel>
+            <FormLabel>{t(`pia:fields.confidentialityAssessment`)}</FormLabel>
             <FormControl>
               <Textarea {...field} />
             </FormControl>

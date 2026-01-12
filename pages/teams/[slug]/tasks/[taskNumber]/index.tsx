@@ -323,7 +323,7 @@ export async function getServerSideProps({
   return {
     props: {
       ...(locale
-        ? await serverSideTranslations(locale, ['common', 'rpa', 'tia', ...cscTranslations])
+        ? await serverSideTranslations(locale, ['common', 'rpa', 'tia', 'pia', ...cscTranslations])
         : {}),
     },
   };

@@ -4,10 +4,7 @@ import type { TaskWithPiaRisk } from 'types';
 import { useTranslation } from 'next-i18next';
 import usePagination from 'hooks/usePagination';
 import { StatusBadge } from '@/components/shared';
-import {
-  riskProbabilityPoints,
-  riskSecurityPoints,
-} from '@/components/defaultLanding/data/configs/pia';
+import { riskProbabilityPoints, riskSecurityPoints } from '@/lib/pia';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Button } from '@/components/shadcn/ui/button';
 import useCanAccess from 'hooks/useCanAccess';

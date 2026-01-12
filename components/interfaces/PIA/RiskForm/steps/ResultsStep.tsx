@@ -1,8 +1,5 @@
 import * as React from 'react';
-import {
-  riskSecurityPoints,
-  riskProbabilityPoints,
-} from '@/components/defaultLanding/data/configs/pia';
+import { riskSecurityPoints, riskProbabilityPoints } from '@/lib/pia';
 import RiskMatrixBubbleChart from '../../RiskMatrixBubbleChart';
 import type { PiaRisk } from 'types';
 import { useTranslation } from 'next-i18next';

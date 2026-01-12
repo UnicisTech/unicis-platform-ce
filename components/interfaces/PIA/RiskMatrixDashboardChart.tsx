@@ -9,6 +9,8 @@ import {
   Title,
   Tooltip,
 } from 'chart.js';
+import { useTranslation } from 'next-i18next';
+import { impactLabelKeys, probabilityLabelKeys } from '@/lib/pia';
 
 ChartJS.register(
   CategoryScale,
@@ -19,14 +21,6 @@ ChartJS.register(
   Tooltip
 );
 
-const impactLabels = ['Insignificant', 'Minor', 'Moderate', 'Major', 'Extreme'];
-const probabilityLabels = [
-  'Rare',
-  'Unlikely',
-  'Possible',
-  'Probable',
-  '(Almost) certain',
-];
 const MATRIX_SIZE = 5;
 
 const riskColors = {
@@ -41,6 +35,7 @@ const RiskMatrixDashboardChart = ({
   counterMap,
   cellSize = 55,
 }: any) => {
+  const { t } = useTranslation('common');
   const chartRef = useRef<any>(null);
   const [points, setPoints] = useState<any[]>([]);
   const chartWidth = cellSize * MATRIX_SIZE * 1.5;
@@ -59,7 +54,7 @@ const RiskMatrixDashboardChart = ({
           callback: (value) => {
             const labelIndex = Math.round(value * 2) - 1;
             return labelIndex % 2 === 0
-              ? impactLabels[Math.floor(labelIndex / 2)]
+              ? t(impactLabelKeys[Math.floor(labelIndex / 2)])
               : '';
           },
         },
@@ -73,7 +68,7 @@ const RiskMatrixDashboardChart = ({
           callback: (value) => {
             const labelIndex = Math.round(value * 2) - 1;
             return labelIndex % 2 === 0
-              ? probabilityLabels[Math.floor(labelIndex / 2)]
+              ? t(probabilityLabelKeys[Math.floor(labelIndex / 2)])
               : '';
           },
         },

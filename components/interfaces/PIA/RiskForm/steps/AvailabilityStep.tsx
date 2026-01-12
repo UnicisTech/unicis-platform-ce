@@ -9,13 +9,10 @@ import {
 } from '@/components/shadcn/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/shadcn/ui/radio-group';
 import { Textarea } from '@/components/shadcn/ui/textarea';
-import {
-  fieldPropsMapping,
-  config,
-} from '@/components/defaultLanding/data/configs/pia';
 import type { PiaRisk } from 'types';
 import { AvailabilityStepValues } from '../types';
 import { useTranslation } from 'next-i18next';
+import { config } from '@/lib/pia';
 
 const AvailabilityStep = ({
   initial,
@@ -40,14 +37,14 @@ const AvailabilityStep = ({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.availabilityRiskProbability}
+              {t(`pia:fields.availabilityRiskProbability`)}
             </FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.availabilityRiskProbability.map((opt) => (
-                  <div key={opt.value} className="flex items-center space-x-2">
-                    <RadioGroupItem value={opt.value} id={opt.value} />
-                    <label htmlFor={opt.value}>{opt.label}</label>
+                {config.availabilityRiskProbability.map(item => (
+                  <div key={item} className="flex items-center space-x-2">
+                    <RadioGroupItem value={item} id={item} />
+                    <label htmlFor={item}>{t(`pia:risk-probability.${item}`)}</label>
                   </div>
                 ))}
               </RadioGroup>
@@ -65,13 +62,13 @@ const AvailabilityStep = ({
         defaultValue={initial?.availabilityRiskSecurity ?? ''}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.availabilityRiskSecurity}</FormLabel>
+            <FormLabel>{t(`pia:fields.availabilityRiskSecurity`)}</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.availabilityRiskSecurity.map((opt) => (
-                  <div key={opt.value} className="flex items-center space-x-2">
-                    <RadioGroupItem value={opt.value} id={opt.value} />
-                    <label htmlFor={opt.value}>{opt.label}</label>
+                {config.availabilityRiskSecurity.map(item => (
+                  <div key={item} className="flex items-center space-x-2">
+                    <RadioGroupItem value={item} id={item} />
+                    <label htmlFor={item}>{t(`pia:availabilityRiskSecurity.${item}`)}</label>
                   </div>
                 ))}
               </RadioGroup>
@@ -88,7 +85,7 @@ const AvailabilityStep = ({
         defaultValue={initial?.availabilityAssessment ?? ''}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.availabilityAssessment}</FormLabel>
+            <FormLabel>{t(`pia:fields.availabilityAssessment`)}</FormLabel>
             <FormControl>
               <Textarea {...field} />
             </FormControl>

@@ -9,6 +9,8 @@ import {
   Title,
   Tooltip,
 } from 'chart.js';
+import { useTranslation } from 'next-i18next';
+import { impactLabelKeys, probabilityLabelKeys } from '@/lib/pia';
 
 const riskColors = {
   low: 'rgba(0, 255, 0, 0.3)',
@@ -26,17 +28,9 @@ ChartJS.register(
   Tooltip
 );
 
-const impactLabels = ['Insignificant', 'Minor', 'Moderate', 'Major', 'Extreme'];
-
-const probabilityLabels = [
-  'Rare',
-  'Unlikely',
-  'Possible',
-  'Probable',
-  '(Almost) certain',
-];
-
 const RiskMatrixBubbleChart = ({ datasets }: any) => {
+  const { t } = useTranslation('common');
+  
   const adjustedDatasets = datasets.map((dataset: any) => ({
     ...dataset,
     data: dataset.data.map((point: any) => ({
@@ -56,7 +50,7 @@ const RiskMatrixBubbleChart = ({ datasets }: any) => {
       x: {
         title: {
           display: true,
-          text: 'Risk impact',
+          text: t('risk-impact'),
         },
         min: 0,
         max: 5,
@@ -66,7 +60,7 @@ const RiskMatrixBubbleChart = ({ datasets }: any) => {
           callback: (value) => {
             const labelIndex = Math.round(value * 2) - 1;
             if (labelIndex % 2 === 0) {
-              return impactLabels[Math.floor(labelIndex / 2)];
+              return t(impactLabelKeys[Math.floor(labelIndex / 2)]);
             } else {
               return '';
             }
@@ -77,7 +71,7 @@ const RiskMatrixBubbleChart = ({ datasets }: any) => {
       y: {
         title: {
           display: true,
-          text: 'Risk probability',
+          text: t('risk-probability'),
         },
         min: 0,
         max: 5,
@@ -87,7 +81,7 @@ const RiskMatrixBubbleChart = ({ datasets }: any) => {
           callback: (value) => {
             const labelIndex = Math.round(value * 2) - 1;
             if (labelIndex % 2 === 0) {
-              return probabilityLabels[Math.floor(labelIndex / 2)];
+              return t(probabilityLabelKeys[Math.floor(labelIndex / 2)]);
             } else {
               return '';
             }

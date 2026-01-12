@@ -31,14 +31,11 @@ import {
   ResultsStep,
   CorrectiveMeasuresStep,
 } from './steps';
-import {
-  headers,
-  riskProbabilityPoints,
-  riskSecurityPoints,
-} from '@/components/defaultLanding/data/configs/pia';
+import { riskProbabilityPoints, riskSecurityPoints } from '@/lib/pia';
 import type { PiaRisk } from 'types';
 import type { Task } from '@prisma/client';
 import { StageTracker } from '@/components/shared/atlaskit';
+import { steps } from '@/lib/pia';
 
 interface RiskAssessmentDialogProps {
   prevRisk?: PiaRisk | [];
@@ -189,7 +186,7 @@ export default function RiskAssessmentDialog({
         <DialogHeader>
           <DialogTitle>{t('pia')}</DialogTitle>
           {currentStep > 0 && (
-            <StageTracker headers={headers} currentStage={currentStep - 1} />
+            <StageTracker headers={steps.map(step => t(`pia:steps.${step}`))} currentStage={currentStep - 1} />
           )}
         </DialogHeader>
 

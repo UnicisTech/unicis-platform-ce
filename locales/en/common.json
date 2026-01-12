@@ -538,6 +538,8 @@
   "risk-level-moderate": "Moderate",
   "risk-level-major": "Major",
   "risk-level-extreme": "Extreme",
+  "risk-probability": "Risk probability",
+  "risk-impact": "Risk impact",
   "what-are-the-risks-to-privacy": "What are the risks to the privacy and rights of the people whose data is being processed?",
   "transparency-anonymization-and-data-minimization": "3. Transparency, anonymization and data minimization",
   "a-confidentiality-and-integrity": "a) Confidentiality and Integrity",

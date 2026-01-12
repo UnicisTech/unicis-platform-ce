@@ -9,13 +9,10 @@ import {
 } from '@/components/shadcn/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/shadcn/ui/radio-group';
 import { Textarea } from '@/components/shadcn/ui/textarea';
-import {
-  fieldPropsMapping,
-  config,
-} from '@/components/defaultLanding/data/configs/pia';
 import type { PiaRisk } from 'types';
 import { CorrectiveMeasuresStepValues } from '../types';
 import { useTranslation } from 'next-i18next';
+import { config } from '@/lib/pia';
 
 const CorrectiveMeasuresStep = ({
   initial,
@@ -37,7 +34,7 @@ const CorrectiveMeasuresStep = ({
         defaultValue={initial?.guarantees ?? ''}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.guarantees}</FormLabel>
+            <FormLabel>{t(`pia:fields.guarantees`)}</FormLabel>
             <FormControl>
               <Textarea {...field} />
             </FormControl>
@@ -53,7 +50,7 @@ const CorrectiveMeasuresStep = ({
         defaultValue={initial?.securityMeasures ?? ''}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.securityMeasures}</FormLabel>
+            <FormLabel>{t(`pia:fields.securityMeasures`)}</FormLabel>
             <FormControl>
               <Textarea {...field} />
             </FormControl>
@@ -69,7 +66,7 @@ const CorrectiveMeasuresStep = ({
         defaultValue={initial?.securityCompliance ?? ''}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.securityCompliance}</FormLabel>
+            <FormLabel>{t(`pia:fields.securityCompliance`)}</FormLabel>
             <FormControl>
               <Textarea {...field} />
             </FormControl>
@@ -86,13 +83,13 @@ const CorrectiveMeasuresStep = ({
         defaultValue={initial?.dealingWithResidualRisk ?? ''}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.dealingWithResidualRisk}</FormLabel>
+            <FormLabel>{t(`pia:fields.dealingWithResidualRisk`)}</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.dealingWithResidualRisk.map((opt) => (
-                  <div key={opt.value} className="flex items-center space-x-2">
-                    <RadioGroupItem value={opt.value} id={opt.value} />
-                    <label htmlFor={opt.value}>{opt.label}</label>
+                {config.dealingWithResidualRisk.map(item => (
+                  <div key={item} className="flex items-center space-x-2">
+                    <RadioGroupItem value={item} id={item} />
+                    <label htmlFor={item}>{t(`pia:dealingWithResidualRisk.${item}`)}</label>
                   </div>
                 ))}
               </RadioGroup>
@@ -110,7 +107,7 @@ const CorrectiveMeasuresStep = ({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.dealingWithResidualRiskAssessment}
+              {t(`pia:fields.dealingWithResidualRiskAssessment`)}
             </FormLabel>
             <FormControl>
               <Textarea {...field} />
@@ -129,14 +126,14 @@ const CorrectiveMeasuresStep = ({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.supervisoryAuthorityInvolvement}
+              {t(`pia:fields.supervisoryAuthorityInvolvement`)}
             </FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.supervisoryAuthorityInvolvement.map((opt) => (
-                  <div key={opt.value} className="flex items-center space-x-2">
-                    <RadioGroupItem value={opt.value} id={opt.value} />
-                    <label htmlFor={opt.value}>{opt.label}</label>
+                {config.supervisoryAuthorityInvolvement.map(item => (
+                  <div key={item} className="flex items-center space-x-2">
+                    <RadioGroupItem value={item} id={item} />
+                    <label htmlFor={item}>{t(item)}</label>
                   </div>
                 ))}
               </RadioGroup>

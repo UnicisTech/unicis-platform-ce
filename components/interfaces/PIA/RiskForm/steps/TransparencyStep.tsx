@@ -9,13 +9,10 @@ import {
 } from '@/components/shadcn/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/shadcn/ui/radio-group';
 import { Textarea } from '@/components/shadcn/ui/textarea';
-import {
-  fieldPropsMapping,
-  config,
-} from '@/components/defaultLanding/data/configs/pia';
 import type { PiaRisk } from 'types';
 import { TransparencyStepValues } from '../types';
 import { useTranslation } from 'next-i18next';
+import { config } from '@/lib/pia';
 
 const TransparencyStep = ({
   initial,
@@ -40,14 +37,14 @@ const TransparencyStep = ({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.transparencyRiskProbability}
+              {t(`pia:fields.isDataProcessingNecessary`)}
             </FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.transparencyRiskProbability.map((opt) => (
-                  <div key={opt.value} className="flex items-center space-x-2">
-                    <RadioGroupItem value={opt.value} id={opt.value} />
-                    <label htmlFor={opt.value}>{opt.label}</label>
+                {config.transparencyRiskProbability.map(item => (
+                  <div key={item} className="flex items-center space-x-2">
+                    <RadioGroupItem value={item} id={item} />
+                    <label htmlFor={item}>{t(`pia:risk-probability.${item}`)}</label>
                   </div>
                 ))}
               </RadioGroup>
@@ -65,13 +62,13 @@ const TransparencyStep = ({
         defaultValue={initial?.transparencyRiskSecurity ?? ''}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.transparencyRiskSecurity}</FormLabel>
+            <FormLabel>{t(`pia:fields.transparencyRiskSecurity`)}</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.transparencyRiskSecurity.map((opt) => (
-                  <div key={opt.value} className="flex items-center space-x-2">
-                    <RadioGroupItem value={opt.value} id={opt.value} />
-                    <label htmlFor={opt.value}>{opt.label}</label>
+                {config.transparencyRiskSecurity.map(item => (
+                  <div key={item} className="flex items-center space-x-2">
+                    <RadioGroupItem value={item} id={item} />
+                    <label htmlFor={item}>{t(`pia:transparencyRiskSecurity.${item}`)}</label>
                   </div>
                 ))}
               </RadioGroup>
@@ -88,7 +85,7 @@ const TransparencyStep = ({
         defaultValue={initial?.transparencyAssessment ?? ''}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.transparencyAssessment}</FormLabel>
+            <FormLabel>{t(`pia:fields.transparencyAssessment`)}</FormLabel>
             <FormControl>
               <Textarea {...field} />
             </FormControl>

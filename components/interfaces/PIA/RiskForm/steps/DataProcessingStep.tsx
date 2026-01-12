@@ -9,13 +9,10 @@ import {
 } from '@/components/shadcn/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/shadcn/ui/radio-group';
 import { Textarea } from '@/components/shadcn/ui/textarea';
-import {
-  fieldPropsMapping,
-  config,
-} from '@/components/defaultLanding/data/configs/pia';
 import type { PiaRisk } from 'types';
 import { DataProcessingStepValues } from '../types';
 import { useTranslation } from 'next-i18next';
+import { config } from '@/lib/pia';
 
 const DataProcessingStep = ({
   initial,
@@ -37,13 +34,13 @@ const DataProcessingStep = ({
         defaultValue={initial?.isDataProcessingNecessary ?? ''}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.isDataProcessingNecessary}</FormLabel>
+            <FormLabel>{t(`pia:fields.isDataProcessingNecessary`)}</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.isDataProcessingNecessary.map((opt) => (
-                  <div key={opt.value} className="flex items-center space-x-2">
-                    <RadioGroupItem value={opt.value} id={opt.value} />
-                    <label htmlFor={opt.value}>{opt.label}</label>
+                {config.isDataProcessingNecessary.map(item => (
+                  <div key={item} className="flex items-center space-x-2">
+                    <RadioGroupItem value={item} id={item} />
+                    <label htmlFor={item}>{t(`pia:isDataProcessingNecessary.${item}`)}</label>
                   </div>
                 ))}
               </RadioGroup>
@@ -60,7 +57,7 @@ const DataProcessingStep = ({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.isDataProcessingNecessaryAssessment}
+              {t(`pia:fields.isDataProcessingNecessaryAssessment`)}
             </FormLabel>
             <FormControl>
               <Textarea {...field} />
@@ -77,13 +74,13 @@ const DataProcessingStep = ({
         defaultValue={initial?.isProportionalToPurpose ?? ''}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{fieldPropsMapping.isProportionalToPurpose}</FormLabel>
+            <FormLabel>{t(`pia:fields.isProportionalToPurpose`)}</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.isProportionalToPurpose.map((opt) => (
-                  <div key={opt.value} className="flex items-center space-x-2">
-                    <RadioGroupItem value={opt.value} id={opt.value} />
-                    <label htmlFor={opt.value}>{opt.label}</label>
+                {config.isProportionalToPurpose.map(item => (
+                  <div key={item} className="flex items-center space-x-2">
+                    <RadioGroupItem value={item} id={item} />
+                    <label htmlFor={item}>{t(`pia:isProportionalToPurpose.${item}`)}</label>
                   </div>
                 ))}
               </RadioGroup>
@@ -100,7 +97,7 @@ const DataProcessingStep = ({
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {fieldPropsMapping.isProportionalToPurposeAssessment}
+              {t(`pia:fields.isProportionalToPurposeAssessment`)}
             </FormLabel>
             <FormControl>
               <Textarea {...field} />

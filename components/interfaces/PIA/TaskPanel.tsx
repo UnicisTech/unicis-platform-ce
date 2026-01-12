@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
-import {
-  headers,
-  fieldPropsMapping,
-} from '@/components/defaultLanding/data/configs/pia';
 import { Field } from '@/components/shared/atlaskit';
 import RiskMatrixBubbleChart from './RiskMatrixBubbleChart';
-import {
-  riskSecurityPoints,
-  riskProbabilityPoints,
-} from '@/components/defaultLanding/data/configs/pia';
+import { riskSecurityPoints, riskProbabilityPoints } from '@/lib/pia';
 import type { Task } from '@prisma/client';
 import { PiaRisk, TaskProperties } from 'types';
 import { useTranslation } from 'next-i18next';
+import { steps } from '@/lib/pia';
 
 const tabFieldKeys: Record<number, Array<any>> = {
   0: [
@@ -45,17 +39,21 @@ const tabFieldKeys: Record<number, Array<any>> = {
   ],
 };
 
-const FieldTab: React.FC<{ idx: number; risk: PiaRisk }> = ({ idx, risk }) => (
-  <>
-    {tabFieldKeys[idx].map((key) => (
-      <Field
-        key={key as string}
-        label={fieldPropsMapping[key]}
-        value={(risk[idx] as any)[key]}
-      />
-    ))}
-  </>
-);
+const FieldTab: React.FC<{ idx: number; risk: PiaRisk }> = ({ idx, risk }) => {
+  const { t } = useTranslation('common');
+
+  return (
+    <>
+      {tabFieldKeys[idx].map((key) => (
+        <Field
+          key={key as string}
+          label={t(`pia:fields.${key}`)}
+          value={(risk[idx] as any)[key]}
+        />
+      ))}
+    </>
+  )
+};
 
 const BubbleChartTab: React.FC<{ risk: PiaRisk }> = ({ risk }) => {
   const { t } = useTranslation('common');
@@ -107,6 +105,54 @@ const BubbleChartTab: React.FC<{ risk: PiaRisk }> = ({ risk }) => {
   );
 };
 
+// const DataProcessingTab: React.FC<{ step: PiaRisk[0] }> = ({
+//   step,
+// }) => {
+//   const { t } = useTranslation('common');
+//   return (
+//       <div className="space-y-2">
+//         <Field
+//           label={t(`pia:fields.isDataProcessingNecessary`)}
+//           value={t(`pia:isDataProcessingNecessary.${step.isDataProcessingNecessary}`)}
+//         />
+//         <Field
+//           label={t(`pia:fields.isDataProcessingNecessaryAssessment`)}
+//           value={step.isDataProcessingNecessaryAssessment}
+//         />
+//         <Field
+//           label={t(`pia:fields.isProportionalToPurpose`)}
+//           value={t(`pia:isProportionalToPurpose.${step.isProportionalToPurpose}`)}
+//         />
+//         <Field
+//           label={t(`pia:fields.isProportionalToPurposeAssessment`)}
+//           value={step.isProportionalToPurposeAssessment}
+//         />
+//       </div>   
+//     )
+// }
+
+// const ConfidentialityTab: React.FC<{ step: PiaRisk[1] }> = ({
+//   step,
+// }) => {
+//   const { t } = useTranslation('common');
+//   return (
+//       <div className="space-y-2">
+//         <Field
+//           label={t(`pia:fields.confidentialityRiskProbability`)}
+//           value={t(`pia:risk-probability.${step.confidentialityRiskProbability}`)}
+//         />
+//         <Field
+//           label={t(`pia:fields.confidentialityRiskSecurity`)}
+//           value={t(`pia:confidentialityRiskSecurity.${step.confidentialityRiskSecurity}`)}
+//         />
+//         <Field
+//           label={t(`pia:fields.confidentialityAssessment`)}
+//           value={step.confidentialityAssessment}
+//         />
+//       </div>   
+//     )
+// }
+
 const PiaPanel: React.FC<{ task: Task }> = ({ task }) => {
   const { t } = useTranslation('common');
   const [activeTab, setActiveTab] = useState(0);
@@ -116,6 +162,8 @@ const PiaPanel: React.FC<{ task: Task }> = ({ task }) => {
   const tabs = risk
     ? [
         <FieldTab key="0" idx={0} risk={risk} />,
+        // <DataProcessingTab step={risk[0]}/>,
+        // <ConfidentialityTab step={risk[1]}/>,
         <FieldTab key="1" idx={1} risk={risk} />,
         <FieldTab key="2" idx={2} risk={risk} />,
         <FieldTab key="3" idx={3} risk={risk} />,
@@ -135,7 +183,7 @@ const PiaPanel: React.FC<{ task: Task }> = ({ task }) => {
       {hasRisk ? (
         <div className="w-full">
           <div role="tablist" className="tabs tabs-bordered">
-            {headers.map((header, i) => {
+            {steps.map((step, i) => {
               if (i === 5 && !risk[4]) return null;
               return (
                 <button
@@ -144,7 +192,7 @@ const PiaPanel: React.FC<{ task: Task }> = ({ task }) => {
                   className={`tab ${activeTab === i ? 'tab-active' : ''}`}
                   onClick={() => setActiveTab(i)}
                 >
-                  {header}
+                  {t(`pia:steps.${step}`)}
                 </button>
               );
             })}

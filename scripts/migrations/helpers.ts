@@ -1,8 +1,9 @@
 import frameworks from '@/lib/csc/frameworks-migration';
-import { ISO } from 'types';
+import { Diff, ISO } from 'types';
 import { CscStatus } from '@/lib/csc/csc-statuses';
 import { config as rpaConfig } from '@/lib/rpa/migration-helpers';
 import { config as tiaConfig } from '@/lib/tia/migration-helpers';
+import { config as piaConfig } from '@/lib/pia/migration-helpers';
 
 type OptionLike = { value?: unknown };
 
@@ -57,11 +58,15 @@ export function mapCscStatusValueLabelToId(label: string): string | null {
 export const error = (...args: any[]) =>
   console.error('\x1b[31m%s\x1b[0m', args.join(' '));
 
-type AppContext = 'TIA' | 'RPA'
+export const warn = (...args: any[]) =>
+  console.warn('\x1b[33m%s\x1b[0m', args.join(' '));
+
+type AppContext = 'TIA' | 'RPA' | 'PIA'
 
 const configs = {
   'RPA': rpaConfig,
   'TIA': tiaConfig,
+  'PIA': piaConfig,
 }
 // ----- RPA ------
 
@@ -290,9 +295,10 @@ export function mapValueByFieldConfig(
       );
       return { out: v, ch: false };
     }
-
+    // console.log('map', {map, v})
     const mapped = map.get(v);
     if (!mapped) {
+      // console.log('map', {map, v})
       error(
         `[${appContext}_AUDIT] Unknown option label for fieldId="${fieldId}"`,
         `logIndex=${context.idx}`,
@@ -478,3 +484,171 @@ export function tiaFieldToId(input: string): TiaFieldId | null {
   error(`[TIA_FIELD] UNKNOWN field label/id: "${input}"`);
   return null;
 }
+
+// ------ PIA ------
+
+type PiaFieldId = keyof typeof piaFieldPropsMapping;
+
+export const piaFieldPropsMapping = {
+  isDataProcessingNecessary: 'Is the data processing necessary',
+  isDataProcessingNecessaryAssessment: 'Assessment',
+
+  isProportionalToPurpose: 'Is it proportional to the purpose',
+  isProportionalToPurposeAssessment: 'Assessment',
+
+  confidentialityRiskProbability: 'Probability of the risk',
+  confidentialityRiskSecurity: 'Impact of the risk',
+  confidentialityAssessment: 'Assessment',
+
+  availabilityRiskProbability: 'Probability of the risk',
+  availabilityRiskSecurity: 'Impact of the risk',
+  availabilityAssessment: 'Assessment',
+
+  transparencyRiskProbability: 'Probability of the risk',
+  transparencyRiskSecurity: 'Impact of the risk',
+  transparencyAssessment: 'Assessment',
+
+  guarantees: 'Guarantees',
+  securityMeasures: 'Security measures',
+  securityCompliance:
+    'Compliance with security notices issued by supervisory authorities',
+  dealingWithResidualRisk: 'Dealing with existing residual risk',
+  dealingWithResidualRiskAssessment: 'Assessment',
+  supervisoryAuthorityInvolvement:
+    'Involvement of the supervisory authority if the risk is unacceptable',
+} as const;
+
+const PIA_FIELD_LABEL_TO_ID: Record<string, PiaFieldId> = (() => {
+  const out: Record<string, PiaFieldId> = {};
+  for (const [id, label] of Object.entries(piaFieldPropsMapping) as Array<
+    [PiaFieldId, string]
+  >) {
+    out[normalizeText(label)] = id;
+  }
+  return out;
+})();
+
+export function piaFieldToId(input: string): PiaFieldId | null {
+  if (!input) return null;
+
+  const raw = input.trim();
+
+  // 1) If its already ID
+  if (raw in piaFieldPropsMapping) {
+    return raw as PiaFieldId;
+  }
+
+  // 2) If its label (case-insensitive)
+  const byLabel = PIA_FIELD_LABEL_TO_ID[normalizeText(raw)];
+  if (byLabel) return byLabel;
+
+  error(`[PIA_FIELD] UNKNOWN field label/id: "${input}"`);
+  return null;
+}
+
+export function stripOuterQuotes<T>(value: T): T {
+  if (
+    typeof value === 'string' &&
+    value.length >= 2 &&
+    value.startsWith('"') &&
+    value.endsWith('"')
+  ) {
+    return value.slice(1, -1) as T;
+  }
+
+  return value;
+}
+
+const SPECIAL_FIELDS = {
+  probability: 'Probability of the risk',
+  impact: 'Impact of the risk',
+  assessment: 'Assessment',
+} as const;
+
+const PROBABILITY_KEYS = [
+  'confidentialityRiskProbability',
+  'availabilityRiskProbability',
+  'transparencyRiskProbability',
+] as const;
+
+const IMPACT_KEYS = [
+  'confidentialityRiskSecurity',
+  'availabilityRiskSecurity',
+  'transparencyRiskSecurity',
+] as const;
+
+function findMatchingConfigKeys(
+  keys: readonly string[],
+  prevValue: string,
+  nextValue: string
+): string[] {
+  const prev = normalizeText(stripOuterQuotes(prevValue));
+  const next = normalizeText(stripOuterQuotes(nextValue));
+
+  const matches: string[] = [];
+
+  for (const key of keys) {
+    const items = configs['PIA'][key] ?? [];
+    for (const it of items) {
+      const lbl = normalizeText(it.label);
+      if (lbl === prev || lbl === next) {
+        matches.push(key);
+        break;
+      }
+    }
+  }
+
+  return matches;
+}
+
+export function resolvePiaAuditFieldId(args: {
+  diff: Diff;
+  // i: number;
+  event: string;
+}): PiaFieldId | string | null {
+  const { diff, event } = args;
+  if (!diff) return null;
+
+  const rawField = diff.field?.trim?.() ?? '';
+  if (!rawField) return rawField;
+
+  // 0) Special cases FIRST (бо лейбли неунікальні)
+  if (rawField === SPECIAL_FIELDS.assessment) {
+    warn(
+      `[PIA_AUDIT] Field id not recognized`,
+      // `logIndex=${i}`,
+      `event=${event}`,
+      `diff=${preview(diff)}`
+    );
+    return rawField;
+  }
+
+  const isProbability = rawField === SPECIAL_FIELDS.probability;
+  const isImpact = rawField === SPECIAL_FIELDS.impact;
+
+  if (isProbability || isImpact) {
+    const keys = isProbability ? PROBABILITY_KEYS : IMPACT_KEYS;
+    const matchedKeys = findMatchingConfigKeys(keys, diff.prevValue as string, diff.nextValue as string);
+
+    if (matchedKeys.length === 1) {
+      return matchedKeys[0] as PiaFieldId;
+    }
+
+    warn(
+      `[PIA_AUDIT] Field id not recognized`,
+      // `logIndex=${i}`,
+      `event=${event}`,
+      `diff=${preview(diff)}`,
+      `matchedKeys=${preview(matchedKeys)}`
+    );
+    return rawField;
+  }
+
+  // 1) Default path AFTER specials
+  const direct = piaFieldToId(rawField);
+  if (direct) return direct;
+
+  return rawField;
+}
+
+
