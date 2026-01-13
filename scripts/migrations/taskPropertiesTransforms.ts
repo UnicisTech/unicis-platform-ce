@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { mapCscControlToId, mapCscControlToIdAny, optionArrayToStringArray, optionToString, error, preview, mapValueByFieldConfig, rpaFieldToId, countryToValue, tiaFieldToId, piaFieldToId, stripOuterQuotes, resolvePiaAuditFieldId } from './helpers';
+import { mapCscControlToId, mapCscControlToIdAny, optionArrayToStringArray, optionToString, error, preview, mapValueByFieldConfig, rpaFieldToId, countryToValue, tiaFieldToId, piaFieldToId, stripOuterQuotes, resolvePiaAuditFieldId, tryExtractValueFromStringifiedJson, rmFieldToId } from './helpers';
 import { getCscControlsProp } from '@/lib/csc';
 import { Diff, ISO } from 'types';
 
@@ -530,6 +530,143 @@ function normalizePiaAuditLogs(props: JsonWritable): JsonWritable {
 
 // ------ PIA ------
 
+// ------ RM ------
+
+function normalizeRmRisk(props: JsonWritable): JsonWritable {
+  const obj = asObject(props);
+  if (!obj) return props;
+
+  let raw = obj.rm_risk;
+  if (!Array.isArray(raw)) return props;
+
+  // let changed = false;
+
+  if (!raw[0].AssetOwner?.value) {
+    error(
+        `[RM_RISK] No AssetOwner value`,
+        `logIndex=${0}`,
+        `event=${'none'}`,
+        `field=${'none'}`
+      );
+    return props;
+  }
+
+  raw[0].AssetOwner = raw[0].AssetOwner.value
+
+  return {
+    ...obj,
+    rm_risk: raw as Prisma.InputJsonValue[],
+  } as Prisma.InputJsonValue;
+}
+
+function normalizeRmAuditLogs(props: JsonWritable): JsonWritable {
+  const obj = asObject(props);
+  if (!obj) return props;
+
+  const raw = (obj as any).rm_audit_logs;
+  if (!Array.isArray(raw)) return props;
+
+  let changed = false;
+  const nextLogs: Prisma.InputJsonValue[] = [];
+
+  for (let i = 0; i < raw.length; i++) {
+    const log = raw[i];
+
+    if (!log || typeof log !== 'object' || Array.isArray(log)) {
+      nextLogs.push(log as Prisma.InputJsonValue);
+      continue;
+    }
+
+    const event = String((log as any).event ?? '');
+    if (event !== 'updated') {
+      nextLogs.push(log as Prisma.InputJsonValue);
+      continue;
+    }
+
+    const diff = (log as any).diff;
+    if (!diff || typeof diff !== 'object' || Array.isArray(diff)) {
+      error(`[RM_AUDIT] Updated log without valid diff`, `logIndex=${i}`);
+      nextLogs.push(log as Prisma.InputJsonValue);
+      continue;
+    }
+
+    const prevRaw = (diff as any).prevValue;
+    const nextRaw = (diff as any).nextValue;
+
+    const prevStripped = stripOuterQuotes(prevRaw);
+    const nextStripped = stripOuterQuotes(nextRaw);
+
+    let prevOut: any = prevStripped;
+    let nextOut: any = nextStripped;
+
+    let prevChanged = prevOut !== prevRaw;
+    let nextChanged = nextOut !== nextRaw;
+
+    const fieldRaw = (diff as any).field;
+    const fieldStr = typeof fieldRaw === 'string' ? fieldRaw : String(fieldRaw ?? '');
+    const fieldId = rmFieldToId(fieldStr);
+
+    if (!fieldId) {
+      error(`[RM_AUDIT] Unknown field`, `logIndex=${i}`, `field=${fieldStr}`);
+
+      if (!prevChanged && !nextChanged) {
+        nextLogs.push(log as Prisma.InputJsonValue);
+        continue;
+      }
+
+      changed = true;
+      nextLogs.push({
+        ...(log as any),
+        diff: {
+          ...(diff as any),
+          prevValue: prevOut,
+          nextValue: nextOut,
+        },
+      } as Prisma.InputJsonValue);
+      continue;
+    }
+
+    if (fieldId === 'AssetOwner') {
+      const p = tryExtractValueFromStringifiedJson(prevOut, `logIndex=${i} prevValue`);
+      const n = tryExtractValueFromStringifiedJson(nextOut, `logIndex=${i} nextValue`);
+
+      prevOut = p.out;
+      nextOut = n.out;
+
+      prevChanged = prevChanged || p.changed;
+      nextChanged = nextChanged || n.changed;
+    }
+
+    const fieldChanged = fieldId !== fieldRaw;
+
+    if (!fieldChanged && !prevChanged && !nextChanged) {
+      nextLogs.push(log as Prisma.InputJsonValue);
+      continue;
+    }
+
+    changed = true;
+
+    nextLogs.push({
+      ...(log as any),
+      diff: {
+        ...(diff as any),
+        field: fieldId,
+        prevValue: prevOut,
+        nextValue: nextOut,
+      },
+    } as Prisma.InputJsonValue);
+  }
+
+  if (!changed) return props;
+
+  return {
+    ...(obj as any),
+    rm_audit_logs: nextLogs,
+  } as Prisma.InputJsonValue;
+}
+
+// ------ RM ------
+
 const transforms = [
   renameCscControlsToMvps,
   normalizeCscControlsMvps,
@@ -546,7 +683,9 @@ const transforms = [
   normalizeRpaAuditLogs,
   normalizeTiaProcedure,
   normalizeTiaAuditLogs,
-  normalizePiaAuditLogs,
+  // normalizePiaAuditLogs,
+  normalizeRmRisk,
+  normalizeRmAuditLogs,
 ] as const;
 
 export function transformTaskProperties(

@@ -25,7 +25,7 @@ export const getServerSideProps = async (
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+      ...(locale ? await serverSideTranslations(locale, ['common', 'rm']) : {}),
       team: JSON.parse(JSON.stringify(team)),
     },
   };

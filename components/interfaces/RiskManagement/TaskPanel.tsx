@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
-import {
-  headers,
-  fieldPropsMapping,
-} from '@/components/defaultLanding/data/configs/rm';
 import { Field } from '@/components/shared/atlaskit';
 import type { Task } from '@prisma/client';
 import { RMProcedureInterface, TaskProperties } from 'types';
-import { riskValueToLabel } from '@/lib/rm';
 import { useTranslation } from 'next-i18next';
+import { steps } from '@/lib/rm';
+import useTeamMembersMap from 'hooks/useTeamMembersMap';
+import { Error, Loading, MemberName } from '@/components/shared';
+import { riskValueToLabelKey } from '@/lib/common';
 
-const RmTaskPanel = ({ task }: { task: Task }) => {
+const RmTaskPanel = ({ task, slug }: { task: Task, slug: string }) => {
   const { t } = useTranslation('common');
   const properties = task?.properties as TaskProperties;
   const risk = properties?.rm_risk as RMProcedureInterface | undefined;
   const [activeTab, setActiveTab] = useState(0);
+
+  const { isLoading, isError, membersById } = useTeamMembersMap(slug);
+  
+  if (isLoading) {
+    return <Loading />;
+  }
+  
+  if (isError) {
+    return <Error message={isError?.message} />;
+  }
 
   return (
     <div className="p-5">
@@ -26,14 +35,14 @@ const RmTaskPanel = ({ task }: { task: Task }) => {
               className={`tab ${activeTab === 0 ? 'tab-active' : ''}`}
               onClick={() => setActiveTab(0)}
             >
-              {headers[0]}
+              {t(`rm:steps.${steps[0]}`)}
             </button>
             <button
               role="tab"
               className={`tab ${activeTab === 1 ? 'tab-active' : ''}`}
               onClick={() => setActiveTab(1)}
             >
-              {headers[1]}
+              {t(`rm:steps.${steps[1]}`)}
             </button>
           </div>
 
@@ -41,48 +50,53 @@ const RmTaskPanel = ({ task }: { task: Task }) => {
             {activeTab === 0 && (
               <div>
                 <Field
-                  label={fieldPropsMapping['Risk']}
+                  label={t(`rm:fields.Risk`)}
                   value={risk[0]?.Risk}
                 />
                 <Field
-                  label={fieldPropsMapping['AssetOwner']}
-                  value={risk[0]?.AssetOwner?.label}
+                  label={t(`rm:fields.AssetOwner`)}
+                  value={
+                  <MemberName
+                    userId={risk[0]?.AssetOwner}
+                    membersById={membersById}
+                    fallback={t('not-found')}
+                  />}
                 />
                 <Field
-                  label={fieldPropsMapping['Impact']}
+                  label={t(`rm:fields.Impact`)}
                   value={risk[0]?.Impact}
                 />
                 <Field
-                  label={fieldPropsMapping['RawProbability']}
-                  value={`${riskValueToLabel(risk[0]?.RawProbability)} (${risk[0]?.RawProbability}%)`}
+                  label={t(`rm:fields.RawProbability`)}
+                  value={`${t(riskValueToLabelKey(risk[0]?.RawProbability))} (${risk[0]?.RawProbability}%)`}
                 />
                 <Field
-                  label={fieldPropsMapping['RawImpact']}
-                  value={`${riskValueToLabel(risk[0]?.RawImpact)} (${risk[0]?.RawImpact}%)`}
+                  label={t(`rm:fields.RawImpact`)}
+                  value={`${t(riskValueToLabelKey(risk[0]?.RawImpact))} (${risk[0]?.RawImpact}%)`}
                 />
               </div>
             )}
             {activeTab === 1 && (
               <div>
                 <Field
-                  label={fieldPropsMapping['RiskTreatment']}
+                  label={t(`rm:fields.RiskTreatment`)}
                   value={risk[1]?.RiskTreatment}
                 />
                 <Field
-                  label={fieldPropsMapping['TreatmentCost']}
+                  label={t(`rm:fields.TreatmentCost`)}
                   value={risk[1]?.TreatmentCost}
                 />
                 <Field
-                  label={fieldPropsMapping['TreatmentStatus']}
-                  value={`${riskValueToLabel(risk[1]?.TreatmentStatus)} (${risk[1]?.TreatmentStatus}%)`}
+                  label={t(`rm:fields.TreatmentStatus`)}
+                  value={`${t(riskValueToLabelKey(risk[1]?.TreatmentStatus))} (${risk[1]?.TreatmentStatus}%)`}
                 />
                 <Field
-                  label={fieldPropsMapping['TreatedProbability']}
-                  value={`${riskValueToLabel(risk[1]?.TreatedProbability)} (${risk[1]?.TreatedProbability}%)`}
+                  label={t(`rm:fields.TreatedProbability`)}
+                  value={`${t(riskValueToLabelKey(risk[1]?.TreatedProbability))} (${risk[1]?.TreatedProbability}%)`}
                 />
                 <Field
-                  label={fieldPropsMapping['TreatedImpact']}
-                  value={`${riskValueToLabel(risk[1]?.TreatedImpact)} (${risk[1]?.TreatedImpact}%)`}
+                  label={t(`rm:fields.TreatedImpact`)}
+                  value={`${t(riskValueToLabelKey(risk[1]?.TreatedImpact))} (${risk[1]?.TreatedImpact}%)`}
                 />
               </div>
             )}

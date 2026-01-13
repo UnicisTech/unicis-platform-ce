@@ -1,0 +1,30 @@
+{
+    "fields": {
+        "Risk": "Risk",
+        "AssetOwner": "Asset owner",
+        "Impact": "Impact",
+        "RawProbability": "Raw probability",
+        "RawImpact": "Raw impact",
+        "RiskTreatment": "Risk treatment",
+        "TreatmentCost": "Treatment cost",
+        "TreatmentStatus": "Treatment status",
+        "TreatedProbability": "Treated probability",
+        "TreatedImpact": "Treated impact"
+    },
+    "headers": {
+        "raw-risk-rating": "Raw risk rating",
+        "treatment": "Treatment",
+        "target-risk-rating": "Target risk rating",
+        "current-risk-rating": "Current risk rating",
+        "risk-id": "Risk id"
+    },
+    "steps": {
+        "riskAndImpact": "Risk and Impact",
+        "riskTreatment": "Risk Treatment"
+    },
+    "form-labels": {
+        "TreatmentStatus": "Treatment Status (%)",
+        "TreatedProbability": "Treated Probability (%)",
+        "RawProbability": "Raw Probability (%)"
+    }
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 import { Pie } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -8,6 +9,7 @@ import {
   ChartOptions,
 } from 'chart.js';
 import useTheme from 'hooks/useTheme';
+import { impactLabelKeys } from '@/lib/common';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -31,6 +33,7 @@ const lightText = '#1f2937';
 const darkText = '#f3f4f6';
 
 const DashboardChart = ({ datasets }: { datasets: number[] }) => {
+  const { t } = useTranslation('common');
   const { theme } = useTheme();
 
   const isDark = theme === 'dark';
@@ -38,10 +41,10 @@ const DashboardChart = ({ datasets }: { datasets: number[] }) => {
   const textColor = isDark ? darkText : lightText;
 
   const data = {
-    labels: ['Insignificant', 'Minor', 'Moderate', 'Major', 'Extreme'],
+    labels: impactLabelKeys.map(k => t(k)),
     datasets: [
       {
-        label: 'Risk count',
+        label: t('risk-count'),
         data: datasets,
         backgroundColor: colors,
         borderColor: isDark ? '#1f2937' : '#ffffff',
@@ -60,7 +63,7 @@ const DashboardChart = ({ datasets }: { datasets: number[] }) => {
       },
       title: {
         display: true,
-        text: 'Controls',
+        text: t('controls'),
         color: textColor,
         font: {
           size: 16,

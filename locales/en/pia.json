@@ -35,13 +35,6 @@
         "probable": "Probable",
         "severe": "Severe"
     },
-    "chart-risk-probability": {
-        "rare": "Rare",
-        "unlikely": "Unlikely",
-        "possible": "Possible",
-        "probable": "Probable",
-        "almost-certian": "(Almost) certain"
-    },
     "availabilityRiskSecurity": {
         "insignificant": "Insignificant: The loss of availability of personal data, where processing has minimal operational impact and negligible costs, and does not notably affect the data subject's business or finances.",
         "minor": "Minor: The loss of availability of personal data, where processing has a noticeable but limited operational impact, some costs, and may lead to minor financial inconvenience for the data subject, but without substantial impact on their rights.",

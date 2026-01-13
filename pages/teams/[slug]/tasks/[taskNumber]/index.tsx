@@ -206,7 +206,7 @@ const TaskById = () => {
             </div>
           </CardHeader>
           <CardContent>
-            <RiskManagementTaskPanel task={task} />
+            <RiskManagementTaskPanel task={task} slug={slug} />
           </CardContent>
         </Card>
       )}
@@ -296,7 +296,7 @@ const TaskById = () => {
               <CardTitle>{t('rm-audit-logs')}</CardTitle>
             </CardHeader>
             <CardContent>
-              <RmAuditLogs task={task} />
+              <RmAuditLogs task={task} slug={slug}/>
             </CardContent>
           </Card>
         </>
@@ -323,7 +323,7 @@ export async function getServerSideProps({
   return {
     props: {
       ...(locale
-        ? await serverSideTranslations(locale, ['common', 'rpa', 'tia', 'pia', ...cscTranslations])
+        ? await serverSideTranslations(locale, ['common', 'rpa', 'tia', 'pia', 'rm', ...cscTranslations])
         : {}),
     },
   };

@@ -108,12 +108,3 @@ export const riskSecurityPoints: Record<RiskSecurity, number> = {
   major: 3,
   extreme: 4,
 };
-
-export const impactLabelKeys = ['risk-level-insignificant', 'risk-level-minor', 'risk-level-moderate', 'risk-level-major', 'risk-level-extreme']
-export const probabilityLabelKeys = [
-  'pia:chart-risk-probability.rare',
-  'pia:chart-risk-probability.unlikely',
-  'pia:chart-risk-probability.possible',
-  'pia:chart-risk-probability.probable',
-  'pia:chart-risk-probability.almost-certian',
-];

@@ -7,12 +7,15 @@ import {
   calculateCurrentRiskRating,
   calculateRiskRating,
   getInitials,
-  riskValueToLabel,
-} from '@/lib/rm';
+} from '@/lib/rm/helpers';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import type { TaskWithRmRisk } from 'types';
 import useTheme from 'hooks/useTheme';
 import { Button } from '@/components/shadcn/ui/button';
+import useTeamMembersMap from 'hooks/useTeamMembersMap';
+import { Error, Loading } from '@/components/shared';
+import { tableHeaderKeys } from '@/lib/rm';
+import { riskValueToLabelKey } from '@/lib/common';
 
 const getRiskColor = (value: number, theme: string | null): string => {
   const suffix = theme === 'dark' ? '-dark' : '';
@@ -22,6 +25,12 @@ const getRiskColor = (value: number, theme: string | null): string => {
   if (value <= 80) return `bg-risk-high${suffix}`;
   return `bg-risk-extreme${suffix}`;
 };
+
+const VerticalHeader = ({ label }: { label: string}) => (
+    <div className="px-2 py-1 text-center whitespace-nowrap rotate-180 [writing-mode:vertical-rl]">
+      {label}
+    </div>
+  );
 
 const RisksTable = ({
   slug,
@@ -49,11 +58,15 @@ const RisksTable = ({
     nextButtonDisabled,
   } = usePagination(tasks, perPage);
 
-  const verticalHeader = (label: string) => (
-    <div className="px-2 py-1 text-center whitespace-nowrap rotate-180 [writing-mode:vertical-rl]">
-      {label}
-    </div>
-  );
+  const { isLoading, isError, membersById } = useTeamMembersMap(slug);
+    
+  if (isLoading) {
+    return <Loading />;
+  }
+  
+  if (isError) {
+    return <Error message={isError?.message} />;
+  }
 
   return (
     <div className="space-y-4">
@@ -61,26 +74,11 @@ const RisksTable = ({
         <table className="min-w-full text-sm">
           <thead className="bg-muted">
             <tr>
-              <th>{t('risk-id')}</th>
-              {[
-                'Risk',
-                'Asset Owner',
-                'Impact',
-                'Raw probability',
-                'Raw impact',
-                'Raw risk rating',
-                'Treatment',
-                'Treatment cost',
-                'Treatment status',
-                'Treated probability',
-                'Treated impact',
-                'Target risk rating',
-                'Current risk rating',
-              ].map((label) => (
-                <th key={label}>{verticalHeader(label)}</th>
+              {tableHeaderKeys.map((key) => (
+                <th key={key}>{<VerticalHeader label={t(key)}/>}</th>
               ))}
               {canAccess('task', ['update']) && (
-                <th>{verticalHeader(t('actions'))}</th>
+                <th>{<VerticalHeader label={t('actions')}/>}</th>
               )}
             </tr>
           </thead>
@@ -113,34 +111,34 @@ const RisksTable = ({
                   </td>
                   <td className="px-2 py-1">{risk[0].Risk}</td>
                   <td className="px-2 py-1">
-                    {getInitials(risk[0].AssetOwner.label)}
+                    {membersById[risk[0].AssetOwner] ? getInitials(membersById[risk[0].AssetOwner]?.name) : t('not-found')}
                   </td>
                   <td className="px-2 py-1">{risk[0].Impact}</td>
                   <td className="px-2 py-1">
-                    {riskValueToLabel(risk[0].RawProbability)}
+                    {t(riskValueToLabelKey(risk[0].RawProbability))}
                   </td>
                   <td className="px-2 py-1">
-                    {riskValueToLabel(risk[0].RawImpact)}
+                    {t(riskValueToLabelKey(risk[0].RawImpact))}
                   </td>
                   <td className={`px-2 py-1 ${getRiskColor(raw, theme)}`}>
-                    {riskValueToLabel(raw)}
+                    {t(riskValueToLabelKey(raw))}
                   </td>
                   <td className="px-2 py-1">{risk[1].RiskTreatment}</td>
                   <td className="px-2 py-1">{risk[1].TreatmentCost}</td>
                   <td className="px-2 py-1">
-                    {riskValueToLabel(risk[1].TreatmentStatus)}
+                    {t(riskValueToLabelKey(risk[1].TreatmentStatus))}
                   </td>
                   <td className="px-2 py-1">
-                    {riskValueToLabel(risk[1].TreatedProbability)}
+                    {t(riskValueToLabelKey(risk[1].TreatedProbability))}
                   </td>
                   <td className="px-2 py-1">
-                    {riskValueToLabel(risk[1].TreatedImpact)}
+                    {t(riskValueToLabelKey(risk[1].TreatedImpact))}
                   </td>
                   <td className={`px-2 py-1 ${getRiskColor(target, theme)}`}>
-                    {riskValueToLabel(target)}
+                    {t(riskValueToLabelKey(target))}
                   </td>
                   <td className={`px-2 py-1 ${getRiskColor(current, theme)}`}>
-                    {riskValueToLabel(current)}
+                    {t(riskValueToLabelKey(current))}
                   </td>
                   {canAccess('task', ['update']) && (
                     <td className="px-2 py-1">

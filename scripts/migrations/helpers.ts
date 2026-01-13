@@ -651,4 +651,77 @@ export function resolvePiaAuditFieldId(args: {
   return rawField;
 }
 
+// ------ RM ------
+
+type RmFieldId = keyof typeof rmFieldPropsMapping;
+
+export const rmFieldPropsMapping = {
+  Risk: 'Risk',
+  AssetOwner: 'Asset owner',
+  Impact: 'Impact',
+  RawProbability: 'Raw probability',
+  RawImpact: 'Raw impact',
+  RiskTreatment: 'Risk treatment',
+  TreatmentCost: 'Treatment cost',
+  TreatmentStatus: 'Treatment status',
+  TreatedProbability: 'Treated probability',
+  TreatedImpact: 'Treated impact',
+} as const;
+
+const RM_FIELD_LABEL_TO_ID: Record<string, RmFieldId> = (() => {
+  const out: Record<string, RmFieldId> = {};
+  for (const [id, label] of Object.entries(rmFieldPropsMapping) as Array<
+    [RmFieldId, string]
+  >) {
+    out[normalizeText(label)] = id;
+  }
+  return out;
+})();
+
+export function tryExtractValueFromStringifiedJson(
+  input: unknown,
+  context: string
+): { out: unknown; changed: boolean } {
+  if (typeof input !== 'string') return { out: input, changed: false };
+
+  const s = input.trim();
+  // швидка відсічка
+  if (!(s.startsWith('{') && s.endsWith('}')) && !(s.startsWith('[') && s.endsWith(']'))) {
+    return { out: input, changed: false };
+  }
+
+  try {
+    const parsed = JSON.parse(s);
+
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed) && 'value' in parsed) {
+      const v = (parsed as any).value;
+      // повертаємо value як є, але найчастіше це string
+      return { out: v, changed: v !== input };
+    }
+
+    error(`[RM_AUDIT] AssetOwner JSON parsed but has no "value"`, context, `json=${s}`);
+    return { out: input, changed: false };
+  } catch {
+    return { out: input, changed: false };
+  }
+}
+
+export function rmFieldToId(input: string): RmFieldId | null {
+  if (!input) return null;
+
+  const raw = input.trim();
+
+  // 1) If its already ID
+  if (raw in rmFieldPropsMapping) {
+    return raw as RmFieldId;
+  }
+
+  // 2) If its label (case-insensitive)
+  const byLabel = RM_FIELD_LABEL_TO_ID[normalizeText(raw)];
+  if (byLabel) return byLabel;
+
+  error(`[RM_FIELD] UNKNOWN field label/id: "${input}"`);
+  return null;
+}
+
 

@@ -51,7 +51,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
         rules={{ required: t('please-describe-the-risk') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('risk')}</FormLabel>
+            <FormLabel>{t(`rm:fields.Risk`)}</FormLabel>
             <FormDescription>{t('risk-description')}</FormDescription>
             <FormControl>
               <Textarea {...field} placeholder={t('enter-risk-description')} />
@@ -67,14 +67,11 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
         rules={{ required: t('please-select-an-asset-owner') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('asset-owner')}</FormLabel>
+            <FormLabel>{t(`rm:fields.AssetOwner`)}</FormLabel>
             <FormControl>
               <Select
-                value={field.value.value}
-                onValueChange={(val) => {
-                  const sel = ownerOptions.find((o) => o.value === val)!;
-                  field.onChange(sel);
-                }}
+                value={field.value}
+                onValueChange={field.onChange}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder={t('select-an-owner')} />
@@ -100,7 +97,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
         rules={{ required: t('please-describe-the-impact') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('impact')}</FormLabel>
+            <FormLabel>{t(`rm:fields.Impact`)}</FormLabel>
             <FormDescription>{t('impact-description')}</FormDescription>
             <FormControl>
               <Textarea
@@ -118,7 +115,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
         name="RawProbability"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('raw-probability-percent')}</FormLabel>
+            <FormLabel>{t(`rm:form-labels.RawProbability`)}</FormLabel>
             <FormDescription>
               {t('raw-probability-description')}
             </FormDescription>
@@ -141,7 +138,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
         name="RawImpact"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('raw-impact')}</FormLabel>
+            <FormLabel>{t(`rm:fields.RawImpact`)}</FormLabel>
             <FormDescription>{t('raw-impact-description')}</FormDescription>
             <FormControl>
               <Slider

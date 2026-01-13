@@ -1,7 +1,7 @@
 import useTeamTasks from 'hooks/useTeamTasks';
 import { useTranslation } from 'next-i18next';
 import { Error, Loading } from '@/components/shared';
-import { computeRiskMap, calculateRiskDistribution } from '@/lib/rm';
+import { computeRiskMap, calculateRiskDistribution } from '@/lib/rm/helpers';
 import { DashboardMatrixChart, DashboardPieChart } from '../RiskManagement';
 import {
   Card,

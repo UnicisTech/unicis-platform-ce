@@ -1,10 +1,10 @@
 import { Task } from '@prisma/client';
-import type { AuditLog, Option } from './base';
+import type { AuditLog } from './base';
 
 export type RMProcedureInterface = [
   {
     Risk: string;
-    AssetOwner: Option;
+    AssetOwner: string;
     Impact: string;
     RawProbability: number;
     RawImpact: number;

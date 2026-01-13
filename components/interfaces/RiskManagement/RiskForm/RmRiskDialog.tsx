@@ -21,7 +21,8 @@ import type { Task } from '@prisma/client';
 import { useRiskAndImpactStepForm, useRiskTreatmentStepForm } from './hooks';
 import { RiskAndImpactStep, RiskTreatmentStep } from './steps';
 import { StageTracker } from '@/components/shared/atlaskit';
-import { headers } from '@/components/defaultLanding/data/configs/rm';
+//import { headers } from '@/components/defaultLanding/data/configs/rm';
+import { steps } from '@/lib/rm';
 
 interface RmRiskDialogProps {
   prevRisk?: RMProcedureInterface;
@@ -119,7 +120,7 @@ export default function RmRiskDialog({
         <DialogHeader>
           <DialogTitle>{t('rm')}</DialogTitle>
           {currentStep > 0 && (
-            <StageTracker headers={headers} currentStage={currentStep - 1} />
+            <StageTracker headers={steps.map(step => t(`rm:steps.${step}`))} currentStage={currentStep - 1} />
           )}
         </DialogHeader>
 

@@ -28,7 +28,7 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
         rules={{ required: t('describe-how-the-risk-is-to-be-treated') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('risk-treatment')}</FormLabel>
+            <FormLabel>{t(`rm:fields.RiskTreatment`)}</FormLabel>
             <FormDescription>
               {t('describe-how-the-risk-is-to-be-treated-description')}
             </FormDescription>
@@ -49,7 +49,7 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
         rules={{ required: t('estimate-total-cost-of-mitigating-risk') }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('treatment-cost')}</FormLabel>
+            <FormLabel>{t(`rm:fields.TreatmentCost`)}</FormLabel>
             <FormDescription>
               {t('estimate-total-cost-of-mitigating-risk')}
             </FormDescription>
@@ -66,7 +66,7 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
         name="TreatmentStatus"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('treatment-status-percent')}</FormLabel>
+            <FormLabel>{t('rm:form-labels.TreatmentStatus')}</FormLabel>
             <FormControl>
               <Slider
                 value={[field.value]}
@@ -89,7 +89,7 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
         name="TreatedProbability"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('treated-probability-percent')}</FormLabel>
+            <FormLabel>{t('rm:form-labels.TreatedProbability')}</FormLabel>
             <FormControl>
               <Slider
                 value={[field.value]}

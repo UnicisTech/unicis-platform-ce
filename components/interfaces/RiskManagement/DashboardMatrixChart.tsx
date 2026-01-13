@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useTranslation } from 'next-i18next';
 import { Bubble } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -9,15 +10,7 @@ import {
   Title,
   Tooltip,
 } from 'chart.js';
-
-const impactLabels = ['Insignificant', 'Minor', 'Moderate', 'Major', 'Extreme'];
-const probabilityLabels = [
-  'Rare',
-  'Unlikely',
-  'Possible',
-  'Probable',
-  '(Almost) certain',
-];
+import { impactLabelKeys, probabilityLabelKeys } from '@/lib/common';
 
 ChartJS.register(
   CategoryScale,
@@ -39,6 +32,7 @@ const riskColors = {
 };
 
 const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
+  const { t } = useTranslation('common');
   const chartRef = useRef<any>(null);
   const [points, setPoints] = useState<any[]>([]);
   const chartWidth = CELL_SIZE * MATRIX_SIZE * 1.5;
@@ -49,7 +43,7 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
     maintainAspectRatio: false,
     scales: {
       x: {
-        title: { display: true, text: 'Treated impact' },
+        title: { display: true, text: t('chart-risk-axis.treated-impact') },
         min: 0,
         max: MATRIX_SIZE,
         ticks: {
@@ -57,13 +51,13 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
           callback: (value) => {
             const labelIndex = Math.round(value * 2) - 1;
             return labelIndex % 2 === 0
-              ? impactLabels[Math.floor(labelIndex / 2)]
+              ? t(impactLabelKeys[Math.floor(labelIndex / 2)])
               : '';
           },
         },
       },
       y: {
-        title: { display: true, text: 'Treated probability' },
+        title: { display: true, text: t('chart-risk-axis.treated-probability') },
         min: 0,
         max: MATRIX_SIZE,
         ticks: {
@@ -71,7 +65,7 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
           callback: (value) => {
             const labelIndex = Math.round(value * 2) - 1;
             return labelIndex % 2 === 0
-              ? probabilityLabels[Math.floor(labelIndex / 2)]
+              ? t(probabilityLabelKeys[Math.floor(labelIndex / 2)])
               : '';
           },
         },

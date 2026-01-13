@@ -379,3 +379,31 @@ export const countries = [
     "zimbabwe",
     "other"
 ]
+
+export const impactLabelKeys = ['chart-risk-impact.insignificant', 'chart-risk-impact.minor', 'chart-risk-impact.moderate', 'chart-risk-impact.major', 'chart-risk-impact.extreme']
+
+export const probabilityLabelKeys = [
+  'chart-risk-probability.rare',
+  'chart-risk-probability.unlikely',
+  'chart-risk-probability.possible',
+  'chart-risk-probability.probable',
+  'chart-risk-probability.almost-certian',
+];
+
+export const riskValueToLabelKey = (value: number): string => {
+  const riskLevels = [
+    { max: 20, label: 'chart-risk-impact.insignificant' },
+    { max: 40, label: 'chart-risk-impact.minor' },
+    { max: 60, label: 'chart-risk-impact.moderate' },
+    { max: 80, label: 'chart-risk-impact.major' },
+    { max: 100, label: 'chart-risk-impact.extreme' },
+  ];
+
+  for (const { max, label: riskLabel } of riskLevels) {
+    if (value <= max) {
+      return riskLabel;
+    }
+  }
+
+  return '';
+};

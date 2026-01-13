@@ -22,6 +22,7 @@ const DescriptionAndStakeholdersTab: React.FC<{
     return <Error message={isError?.message} />;
   }
 
+  // TODO: use <MemberName/> component
   const dpoName = members.find(member => member.userId === step.dpo)?.user.name || t('not-found')
 
   return (
