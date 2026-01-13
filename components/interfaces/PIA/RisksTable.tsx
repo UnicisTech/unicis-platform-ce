@@ -8,6 +8,7 @@ import { riskProbabilityPoints, riskSecurityPoints } from '@/lib/pia';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Button } from '@/components/shadcn/ui/button';
 import useCanAccess from 'hooks/useCanAccess';
+import { riskValueToLabelKey } from '@/lib/common';
 
 const calculatePercentage = (input: number): number => {
   return (input / 16) * 100;
@@ -50,20 +51,6 @@ const RisksTable = ({
     prevButtonDisabled,
     nextButtonDisabled,
   } = usePagination<TaskWithPiaRisk>(tasks, perPage);
-
-  const riskValueToLabel = (value: number): string => {
-    const riskLevels = [
-      { max: 20, label: t('risk-level-insignificant') },
-      { max: 40, label: t('risk-level-minor') },
-      { max: 60, label: t('risk-level-moderate') },
-      { max: 80, label: t('risk-level-major') },
-      { max: 100, label: t('risk-level-extreme') },
-    ];
-    for (const { max, label } of riskLevels) {
-      if (value <= max) return label;
-    }
-    return '';
-  };
 
   return (
     <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal! mt-2">
@@ -138,17 +125,17 @@ const RisksTable = ({
                   <td
                     className={`px-1.5 py-1.5 ${getBgColorClass(confidentialityValue)}`}
                   >
-                    {riskValueToLabel(confidentialityValue)}
+                    {t(riskValueToLabelKey(confidentialityValue))}
                   </td>
                   <td
                     className={`px-1.5 py-1.5 ${getBgColorClass(availabilityValue)}`}
                   >
-                    {riskValueToLabel(availabilityValue)}
+                    {t(riskValueToLabelKey(availabilityValue))}
                   </td>
                   <td
                     className={`px-1.5 py-1.5 ${getBgColorClass(transparencyValue)}`}
                   >
-                    {riskValueToLabel(transparencyValue)}
+                    {t(riskValueToLabelKey(transparencyValue))}
                   </td>
                   {canAccess('task', ['update']) && (
                     <td className="px-4 py-2 text-right">

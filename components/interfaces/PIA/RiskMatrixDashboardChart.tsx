@@ -10,7 +10,7 @@ import {
   Tooltip,
 } from 'chart.js';
 import { useTranslation } from 'next-i18next';
-import { impactLabelKeys, probabilityLabelKeys } from '@/lib/pia';
+import { impactLabelKeys, probabilityLabelKeys } from '@/lib/common';
 
 ChartJS.register(
   CategoryScale,
