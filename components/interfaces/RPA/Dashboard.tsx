@@ -9,7 +9,7 @@ import {
   RpaTable,
   DeleteProcedure,
   CreateProcedureTest,
-} from '@/components/interfaces/RPA';
+} from '@/components/interfaces/rpa';
 import { PerPageSelector } from '@/components/shared';
 import useRpaCreation from 'hooks/useRpaCreation';
 import { Button } from '@/components/shadcn/ui/button';

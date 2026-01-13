@@ -5,8 +5,8 @@ import { Loading } from '@/components/shared';
 import { Team } from '@prisma/client';
 import type { ISO } from 'types';
 import useCscStatuses from 'hooks/useCscStatuses';
-import CscTabs from '../CSC/CscTabs';
-import CscChartsLayout from '../CSC/CscChartsLayout';
+import CscTabs from '../csc/CscTabs';
+import CscChartsLayout from '../csc/CscChartsLayout';
 
 const TeamCscAnalysis = ({
   slug,

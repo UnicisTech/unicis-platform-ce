@@ -14,12 +14,12 @@ import {
   TiaTable,
   DeleteProcedure,
   CreateProcedure,
-} from '@/components/interfaces/TIA';
+} from '@/components/interfaces/tia';
 import { PerPageSelector } from '@/components/shared';
 import { Button } from '@/components/shadcn/ui/button';
 import { TeamAssessmentAnalysis } from '@/components/interfaces/TeamDashboard';
 
-// TODO: move to components/interfaces/TIA
+// TODO: move to components/interfaces/tia
 const TiaDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = () => {

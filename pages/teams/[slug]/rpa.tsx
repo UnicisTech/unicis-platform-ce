@@ -2,7 +2,7 @@ import type { NextPageWithLayout } from 'types';
 import type { InferGetServerSidePropsType } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSidePropsContext } from 'next';
-import Dashboard from '@/components/interfaces/RPA/Dashboard';
+import Dashboard from '@/components/interfaces/rpa/Dashboard';
 
 const Rpa: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>

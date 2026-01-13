@@ -1,5 +1,5 @@
-// import AdminPage from '@/components/interfaces/IAP/admin/AdminPage';
-import { AdminPage } from '@/components/interfaces/IAP';
+// import AdminPage from '@/components/interfaces/iap/admin/AdminPage';
+import { AdminPage } from '@/components/interfaces/iap';
 import { useRouter } from 'next/router';
 import { Error, Loading } from '@/components/shared';
 import { TeamTab } from '@/components/team';

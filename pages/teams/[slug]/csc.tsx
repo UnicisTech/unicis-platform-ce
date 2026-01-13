@@ -3,7 +3,7 @@ import useTeam from 'hooks/useTeam';
 import type { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { CscDashboard } from '@/components/interfaces/CSC';
+import { CscDashboard } from '@/components/interfaces/csc';
 
 const Settings = () => {
   const { t } = useTranslation('common');

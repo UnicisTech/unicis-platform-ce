@@ -1,6 +1,6 @@
-import RpaProcedureDialog from './ProcedureForm/RpaProcedureDialog';
-import { CreatePiaRisk } from '@/components/interfaces/PIA';
-import { CreateProcedure as CreateTiaProcedure } from '@/components/interfaces/TIA';
+import RpaProcedureDialog from './procedure-form/RpaProcedureDialog';
+import { CreatePiaRisk } from '@/components/interfaces/pia';
+import { CreateProcedure as CreateTiaProcedure } from '@/components/interfaces/tia';
 import { Task } from '@prisma/client';
 import {
   PiaRisk,

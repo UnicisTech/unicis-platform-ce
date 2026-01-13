@@ -10,7 +10,7 @@ import {
   CoursesTable,
   CreateCourse,
   CreateCategory,
-} from '@/components/interfaces/IAP';
+} from '@/components/interfaces/iap';
 import StatusResults from './StatusResults';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import { Button } from '@/components/shadcn/ui/button';

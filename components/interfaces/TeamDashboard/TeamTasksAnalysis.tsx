@@ -1,4 +1,4 @@
-import { TaskStatusesDetail } from '@/components/interfaces/CSC';
+import { TaskStatusesDetail } from '@/components/interfaces/csc';
 import { useTranslation } from 'next-i18next';
 import useTeamTasks from 'hooks/useTeamTasks';
 import {
