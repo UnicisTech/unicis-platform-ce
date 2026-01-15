@@ -34,7 +34,7 @@ export default function TransferScenarioStep({
 
   return (
     <>
-      <Message text={t('to-be-completed-by-the-exporter')} />
+      <Message text={t('tia:descriptions.toBeCompletedByExporter')} />
 
       {/* Data Exporter */}
       <FormField
@@ -47,7 +47,7 @@ export default function TransferScenarioStep({
             <FormControl>
               <Textarea
                 {...field}
-                placeholder={t('specify-the-data-exporters-or-the-sender')}
+                placeholder={t('tia:placeholders.dataExportersOrSender')}
                 autoComplete="off"
               />
             </FormControl>
@@ -100,7 +100,7 @@ export default function TransferScenarioStep({
             <FormControl>
               <Textarea
                 {...field}
-                placeholder={t('specify-the-data-importers-or-the-receiver')}
+                placeholder={t('tia:placeholders.dataImportersOrReceiver')}
                 autoComplete="off"
               />
             </FormControl>
@@ -153,7 +153,7 @@ export default function TransferScenarioStep({
             <FormControl>
               <Textarea
                 {...field}
-                placeholder={t('description-of-the-transfer-scenario')}
+                placeholder={t('tia:placeholders.transferScenario')}
                 autoComplete="off"
               />
             </FormControl>
@@ -173,7 +173,7 @@ export default function TransferScenarioStep({
             <FormControl>
               <Textarea
                 {...field}
-                placeholder={t('description-of-the-data-at-issue')}
+                placeholder={t('tia:placeholders.dataAtIssue')}
                 autoComplete="off"
               />
             </FormControl>
@@ -193,7 +193,7 @@ export default function TransferScenarioStep({
             <FormControl>
               <Textarea
                 {...field}
-                placeholder={t('description-how-the-data-is-transferred')}
+                placeholder={t('tia:placeholders.dataTransferHow')}
                 autoComplete="off"
               />
             </FormControl>
@@ -215,13 +215,13 @@ export default function TransferScenarioStep({
               <DatePickerInput
                 value={field.value}
                 onChange={field.onChange}
-                placeholder={t('select-a-date')}
+                placeholder={t('tia:placeholders.selectDate')}
                 error={formState.errors.StartDateAssessment?.message}
                 isModal
               />
             </FormControl>
             <FormMessage />
-            <FormDescription>{t('select-the-start-date')}</FormDescription>
+            <FormDescription>{t('tia:descriptions.selectStartDate')}</FormDescription>
           </FormItem>
         )}
       />
@@ -276,9 +276,7 @@ export default function TransferScenarioStep({
             </FormControl>
             <FormMessage />
             <FormDescription>
-              {t(
-                'legal-analysis-on-the-lawful-access-laws-of-importers-country'
-              )}
+              {t('tia:descriptions.legalAnalysisLawfulAccessLaws')}
             </FormDescription>
           </FormItem>
         )}

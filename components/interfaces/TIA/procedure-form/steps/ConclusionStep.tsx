@@ -12,7 +12,7 @@ export default function ConclusionStep({ procedure }: ConclusionStepProps) {
 
   return (
     <>
-      <Message text={t('to-be-completed-by-the-exporter')} />
+      <Message text={t('tia:descriptions.toBeCompletedByExporter')} />
 
       <p>
         <span className="font-bold">

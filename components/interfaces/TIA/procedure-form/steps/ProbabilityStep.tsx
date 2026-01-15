@@ -33,9 +33,9 @@ export default function ProbabilityStep({
 
   return (
     <>
-      <Message text={t('to-be-completed-by-the-exporter')} />
+      <Message text={t('tia:descriptions.toBeCompletedByExporter')} />
       <Message
-        text={t('if-problematic-lawful-access-derogations-description')}
+        text={t('tia:descriptions.problematicLawfulAccessDerogations')}
       />
 
       <p>{t(`tia:questions.${questions[0]}`)}</p>
@@ -52,7 +52,7 @@ export default function ProbabilityStep({
               <Input
                 {...field}
                 autoComplete="off"
-                placeholder={t('enter-relevant-data-transfer-details')}
+                placeholder={t('tia:placeholders.relevantDataTransferDetails')}
               />
             </FormControl>
             <FormMessage />
@@ -72,7 +72,7 @@ export default function ProbabilityStep({
               <Input
                 {...field}
                 autoComplete="off"
-                placeholder={t('enter-probability-eg-high-low')}
+                placeholder={t('tia:placeholders.probabilityHighLow')}
               />
             </FormControl>
             <FormMessage />
@@ -93,7 +93,7 @@ export default function ProbabilityStep({
                 {...field}
                 autoComplete="off"
                 placeholder={t(
-                  'provide-reasoning-for-data-transfer-probability'
+                  'tia:placeholders.reasoningDataTransferProbability'
                 )}
               />
             </FormControl>
@@ -212,7 +212,7 @@ export default function ProbabilityStep({
               <Input
                 {...field}
                 autoComplete="off"
-                placeholder={t('describe-the-relevant-legal-ground')}
+                placeholder={t('tia:placeholders.legalGround')}
               />
             </FormControl>
             <FormMessage />
@@ -230,7 +230,7 @@ export default function ProbabilityStep({
               <Input
                 {...field}
                 autoComplete="off"
-                placeholder={t('enter-probability-eg-high-low')}
+                placeholder={t('tia:placeholders.probabilityHighLow')}
               />
             </FormControl>
             <FormMessage />
@@ -248,7 +248,7 @@ export default function ProbabilityStep({
               <Textarea
                 {...field}
                 autoComplete="off"
-                placeholder={t('provide-reasoning-for-legal-ground')}
+                placeholder={t('tia:placeholders.reasoningLegalGround')}
               />
             </FormControl>
             <FormMessage />
@@ -256,11 +256,11 @@ export default function ProbabilityStep({
         )}
       />
 
-      <p className="font-bold">{t('importer-has-reason-to-expect')}</p>
+      <p className="font-bold">{t('tia:descriptions.importerHasReasonToExpect')}</p>
 
       <p>
         <span>
-          {t('a-problematic-targeted-lawful-access-question')}
+          {t('tia:descriptions.problematicTargetedLawfulAccessQuestion')}
           {riskValues.DataIssueInvestigation === '2' ? (
             <DaisyBadge appearance="added">{t('yes')}</DaisyBadge>
           ) : (
@@ -271,7 +271,7 @@ export default function ProbabilityStep({
 
       <p>
         <span>
-          {t('a-problematic-mass-surveillance-question')}
+          {t('tia:descriptions.problematicMassSurveillanceQuestion')}
           {riskValues.PassMassSurveillanceConnection === '4' ? (
             <DaisyBadge appearance="added">{t('yes')}</DaisyBadge>
           ) : (
@@ -282,7 +282,7 @@ export default function ProbabilityStep({
 
       <p>
         <span>
-          {t('a-problematic-self-reporting-obligation-question')}
+          {t('tia:descriptions.problematicSelfReportingQuestion')}
           {riskValues.AssessmentProduceReport === '4' ? (
             <DaisyBadge appearance="added">{t('yes')}</DaisyBadge>
           ) : (
@@ -292,9 +292,7 @@ export default function ProbabilityStep({
       </p>
 
       <Message
-        text={t(
-          'based-on-responses-does-exporter-believe-produce-data-and-no-derogations'
-        )}
+        text={t('tia:descriptions.exporterBeliefNoDerogations')}
       />
 
       {problematicLawfulAccessValues.LawfulAccess === 'no' && (
@@ -309,7 +307,7 @@ export default function ProbabilityStep({
                   {t(`tia:fields.ConnectionTargetedAccess`)}
                 </FormLabel>
                 <FormDescription>
-                  {t('targeted-access-eg-investigations')}
+                  {t('tia:descriptions.targetedAccessInvestigations')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -345,7 +343,7 @@ export default function ProbabilityStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -368,7 +366,7 @@ export default function ProbabilityStep({
                   {t(`tia:fields.ConnectionSurveillanceTele`)}
                 </FormLabel>
                 <FormDescription>
-                  {t('eg-by-intelligence-agencies')}
+                  {t('tia:descriptions.intelligenceAgenciesExample')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -404,7 +402,7 @@ export default function ProbabilityStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -425,7 +423,7 @@ export default function ProbabilityStep({
                   {t(`tia:fields.ConnectionSelfreportingObligations`)}
                 </FormLabel>
                 <FormDescription>
-                  {t('eg-by-intelligence-agencies')}
+                  {t('tia:descriptions.intelligenceAgenciesExample')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -461,7 +459,7 @@ export default function ProbabilityStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />

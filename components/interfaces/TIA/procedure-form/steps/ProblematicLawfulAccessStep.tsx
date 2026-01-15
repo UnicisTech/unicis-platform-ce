@@ -30,7 +30,7 @@ export function TransferIs() {
   return (
     <div className="flex items-center space-x-2">
       <span className="font-bold">
-        {t('based-on-the-answers-transfer-is')}{' '}
+        {t('tia:descriptions.transferIsLabel')}{' '}
         <DaisyBadge color={variant}>{t(`tia:transfer-is.${status}`)}</DaisyBadge>
       </span>
     </div>
@@ -49,7 +49,7 @@ export default function ProblematicLawfulAccessStep({
 
   return (
     <>
-      <Message text={t('to-be-completed-by-the-exporter')} />
+      <Message text={t('tia:descriptions.toBeCompletedByExporter')} />
 
       {/* Encryption in Transit */}
       <FormField
@@ -60,7 +60,7 @@ export default function ProblematicLawfulAccessStep({
           <FormItem>
             <FormLabel>{t(`tia:fields.EncryptionInTransit`)}</FormLabel>
             <FormDescription>
-              {t('encryption-in-transit-description')}
+              {t('tia:descriptions.encryptionInTransit')}
             </FormDescription>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
@@ -86,7 +86,7 @@ export default function ProblematicLawfulAccessStep({
           <FormItem>
             <FormLabel>{t(`tia:fields.ReasonEncryptionInTransit`)}</FormLabel>
             <FormControl>
-              <Textarea {...field} placeholder={t('provide-details')} />
+              <Textarea {...field} placeholder={t('tia:placeholders.provideDetails')} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -102,7 +102,7 @@ export default function ProblematicLawfulAccessStep({
           <FormItem>
             <FormLabel>{t(`tia:fields.TransferMechanism`)}</FormLabel>
             <FormDescription>
-              {t('transfer-mechanism-description')}
+              {t('tia:descriptions.transferMechanism')}
             </FormDescription>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
@@ -128,7 +128,7 @@ export default function ProblematicLawfulAccessStep({
           <FormItem>
             <FormLabel>{t(`tia:fields.ReasonTransferMechanism`)}</FormLabel>
             <FormControl>
-              <Textarea {...field} placeholder={t('provide-details')} />
+              <Textarea {...field} placeholder={t('tia:placeholders.provideDetails')} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -137,13 +137,11 @@ export default function ProblematicLawfulAccessStep({
 
       <Message
         appearance="warning"
-        text={t(
-          'if-answer-is-no-enter-details-into-eu-scc-or-similar-safeguard'
-        )}
+        text={t('tia:descriptions.ifAnswerNoEnterSafeguardDetails')}
       />
 
       <p className="font-bold">
-        {t('based-on-legal-analysis-lawful-access-laws-compatible')}
+        {t('tia:descriptions.lawfulAccessCompatible')}
       </p>
 
       {/* Lawful Access */}
@@ -155,7 +153,7 @@ export default function ProblematicLawfulAccessStep({
           <FormItem>
             <FormLabel>{t(`tia:fields.LawfulAccess`)}</FormLabel>
             <FormDescription>
-              {t('lawful-access-targeted-description')}
+              {t('tia:descriptions.lawfulAccessTargeted')}
             </FormDescription>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
@@ -181,7 +179,7 @@ export default function ProblematicLawfulAccessStep({
           <FormItem>
             <FormLabel>{t(`tia:fields.ReasonLawfulAccess`)}</FormLabel>
             <FormControl>
-              <Textarea {...field} placeholder={t('provide-details')} />
+              <Textarea {...field} placeholder={t('tia:placeholders.provideDetails')} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -199,7 +197,7 @@ export default function ProblematicLawfulAccessStep({
               {t(`tia:fields.MassSurveillanceTelecommunications`)}
             </FormLabel>
             <FormDescription>
-              {t('mass-surveillance-telecommunications-description')}
+              {t('tia:descriptions.massSurveillanceTelecommunications')}
             </FormDescription>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
@@ -227,7 +225,7 @@ export default function ProblematicLawfulAccessStep({
               {t(`tia:fields.ReasonMassSurveillanceTelecommunications`)}
             </FormLabel>
             <FormControl>
-              <Textarea {...field} placeholder={t('provide-details')} />
+              <Textarea {...field} placeholder={t('tia:placeholders.provideDetails')} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -243,7 +241,7 @@ export default function ProblematicLawfulAccessStep({
           <FormItem>
             <FormLabel>{t(`tia:fields.SelfReportingObligations`)}</FormLabel>
             <FormDescription>
-              {t('self-reporting-obligations-description')}
+              {t('tia:descriptions.selfReportingObligations')}
             </FormDescription>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
@@ -271,7 +269,7 @@ export default function ProblematicLawfulAccessStep({
               {t(`tia:fields.ReasonSelfReportingObligations`)}
             </FormLabel>
             <FormControl>
-              <Textarea {...field} placeholder={t('provide-details')} />
+              <Textarea {...field} placeholder={t('tia:placeholders.provideDetails')} />
             </FormControl>
             <FormMessage />
           </FormItem>

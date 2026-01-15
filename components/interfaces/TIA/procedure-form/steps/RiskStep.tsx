@@ -43,11 +43,11 @@ export default function RiskStep({
   } = getProblematicLawfulAccesses(values);
   return (
     <>
-      <Message text={t('to-be-completed-by-the-importer')} />
+      <Message text={t('tia:descriptions.toBeCompletedByImporter')} />
 
       {problematicLawfulAccessValues.LawfulAccess === 'no' && (
         <>
-          <Message text={t('targeted-lawful-access-description')} />
+          <Message text={t('tia:descriptions.targetedLawfulAccess')} />
 
           <FormField
             control={control}
@@ -57,7 +57,7 @@ export default function RiskStep({
               <FormItem>
                 <FormLabel>{t(`tia:fields.WarrantsSubpoenas`)}</FormLabel>
                 <FormDescription>
-                  {t('warrants-subpoenas-description')}
+                  {t('tia:descriptions.warrantsSubpoenas')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -92,7 +92,7 @@ export default function RiskStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-your-reasoning-here')}
+                    placeholder={t('tia:placeholders.reasoningHere')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -108,7 +108,7 @@ export default function RiskStep({
               <FormItem>
                 <FormLabel>{t(`tia:fields.ViolationLocalLaw`)}</FormLabel>
                 <FormDescription>
-                  {t('violation-local-law-description')}
+                  {t('tia:descriptions.violationLocalLaw')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -143,7 +143,7 @@ export default function RiskStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -159,7 +159,7 @@ export default function RiskStep({
               <FormItem>
                 <FormLabel>{t(`tia:fields.HighViolationLocalLaw`)}</FormLabel>
                 <FormDescription>
-                  {t('high-violation-local-law-description')}
+                  {t('tia:descriptions.highViolationLocalLaw')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -194,7 +194,7 @@ export default function RiskStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -212,7 +212,7 @@ export default function RiskStep({
                   {t(`tia:fields.HighViolationDataIssue`)}
                 </FormLabel>
                 <FormDescription>
-                  {t('high-violation-data-issue-description')}
+                  {t('tia:descriptions.highViolationDataIssue')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -247,7 +247,7 @@ export default function RiskStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -263,7 +263,7 @@ export default function RiskStep({
               <FormItem>
                 <FormLabel>{t(`tia:fields.InvestigatingImporter`)}</FormLabel>
                 <FormDescription>
-                  {t('investigating-importer-description')}
+                  {t('tia:descriptions.investigatingImporter')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -298,7 +298,7 @@ export default function RiskStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -314,7 +314,7 @@ export default function RiskStep({
               <FormItem>
                 <FormLabel>{t(`tia:fields.PastWarrantSubpoena`)}</FormLabel>
                 <FormDescription>
-                  {t('past-warrant-subpoena-description')}
+                  {t('tia:descriptions.pastWarrantSubpoena')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -349,7 +349,7 @@ export default function RiskStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -369,7 +369,7 @@ export default function RiskStep({
                   {t(`tia:fields.DataIssueInvestigation`)}
                 </FormLabel>
                 <FormDescription>
-                  {t('data-issue-investigation-description')}
+                  {t('tia:descriptions.dataIssueInvestigation')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -405,7 +405,7 @@ export default function RiskStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -416,7 +416,7 @@ export default function RiskStep({
           {isDataIssueInvestigationProblematic && (
             <p>
               <DaisyBadge appearance="removed">
-                {t('problematic-lawful-access-expected')}
+                {t('tia:descriptions.problematicLawfulAccessExpected')}
               </DaisyBadge>
             </p>
           )}
@@ -428,7 +428,7 @@ export default function RiskStep({
         <>
           <Message
             isBold={true}
-            text={t('non-targeted-lawful-access-description')}
+            text={t('tia:descriptions.nonTargetedLawfulAccess')}
           />
 
           <FormField
@@ -439,7 +439,7 @@ export default function RiskStep({
               <FormItem>
                 <FormLabel>{t(`tia:fields.LocalIssueWarrants`)}</FormLabel>
                 <FormDescription>
-                  {t('local-issue-warrants-description')}
+                  {t('tia:descriptions.localIssueWarrants')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -472,7 +472,7 @@ export default function RiskStep({
                   {t(`tia:fields.ReasonLocalIssueWarrants`)}
                 </FormLabel>
                 <FormControl>
-                  <Textarea {...field} placeholder={t('provide-details')} />
+                  <Textarea {...field} placeholder={t('tia:placeholders.provideDetails')} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -487,7 +487,7 @@ export default function RiskStep({
               <FormItem>
                 <FormLabel>{t(`tia:fields.LocalMassSurveillance`)}</FormLabel>
                 <FormDescription>
-                  {t('local-mass-surveillance-description')}
+                  {t('tia:descriptions.localMassSurveillance')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -520,7 +520,7 @@ export default function RiskStep({
                   {t(`tia:fields.ReasonLocalMassSurveillance`)}
                 </FormLabel>
                 <FormControl>
-                  <Textarea {...field} placeholder={t('provide-details')} />
+                  <Textarea {...field} placeholder={t('tia:placeholders.provideDetails')} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -537,7 +537,7 @@ export default function RiskStep({
                   {t(`tia:fields.LocalAccessMassSurveillance`)}
                 </FormLabel>
                 <FormDescription>
-                  {t('local-access-mass-surveillance-description')}
+                  {t('tia:descriptions.localAccessMassSurveillance')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -573,7 +573,7 @@ export default function RiskStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -589,7 +589,7 @@ export default function RiskStep({
               <FormItem>
                 <FormLabel>{t(`tia:fields.LocalRoutinelyMonitor`)}</FormLabel>
                 <FormDescription>
-                  {t('local-routinely-monitor-description')}
+                  {t('tia:descriptions.localRoutinelyMonitor')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -625,7 +625,7 @@ export default function RiskStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -641,7 +641,7 @@ export default function RiskStep({
               <FormItem>
                 <FormLabel>{t(`tia:fields.PassMassSurveillance`)}</FormLabel>
                 <FormDescription>
-                  {t('pass-mass-surveillance-description')}
+                  {t('tia:descriptions.passMassSurveillance')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -677,7 +677,7 @@ export default function RiskStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -697,7 +697,7 @@ export default function RiskStep({
                   {t(`tia:fields.PassMassSurveillanceConnection`)}
                 </FormLabel>
                 <FormDescription>
-                  {t('pass-mass-surveillance-connection-description')}
+                  {t('tia:descriptions.passMassSurveillanceConnection')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -733,7 +733,7 @@ export default function RiskStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -744,7 +744,7 @@ export default function RiskStep({
           {isPassMassSurveillanceConnectionProblematic && (
             <p>
               <DaisyBadge appearance="removed">
-                {t('problematic-lawful-access-expected')}
+                {t('tia:descriptions.problematicLawfulAccessExpected')}
               </DaisyBadge>
             </p>
           )}
@@ -755,7 +755,7 @@ export default function RiskStep({
         <>
           <Message
             isBold={true}
-            text={t('self-reporting-to-authorities-description')}
+            text={t('tia:descriptions.selfReportingToAuthorities')}
           />
 
           <FormField
@@ -766,7 +766,7 @@ export default function RiskStep({
               <FormItem>
                 <FormLabel>{t(`tia:fields.ImporterObligation`)}</FormLabel>
                 <FormDescription>
-                  {t('importer-obligation-description')}
+                  {t('tia:descriptions.importerObligation')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -802,7 +802,7 @@ export default function RiskStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -818,7 +818,7 @@ export default function RiskStep({
               <FormItem>
                 <FormLabel>{t(`tia:fields.LocalSelfReporting`)}</FormLabel>
                 <FormDescription>
-                  {t('local-self-reporting-description')}
+                  {t('tia:descriptions.localSelfReporting')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -854,7 +854,7 @@ export default function RiskStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -870,7 +870,7 @@ export default function RiskStep({
               <FormItem>
                 <FormLabel>{t(`tia:fields.PastSelfReporting`)}</FormLabel>
                 <FormDescription>
-                  {t('past-self-reporting-description')}
+                  {t('tia:descriptions.pastSelfReporting')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -906,7 +906,7 @@ export default function RiskStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -926,7 +926,7 @@ export default function RiskStep({
                   {t(`tia:fields.AssessmentProduceReport`)}
                 </FormLabel>
                 <FormDescription>
-                  {t('assessment-produce-report-description')}
+                  {t('tia:descriptions.assessmentProduceReport')}
                 </FormDescription>
                 <FormControl>
                   <RadioGroup
@@ -962,7 +962,7 @@ export default function RiskStep({
                   <Textarea
                     {...field}
                     autoComplete="off"
-                    placeholder={t('provide-details')}
+                    placeholder={t('tia:placeholders.provideDetails')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -973,7 +973,7 @@ export default function RiskStep({
           {isAssessmentProduceReportProblematic && (
             <p>
               <DaisyBadge appearance="removed">
-                {t('problematic-lawful-access-expected')}
+                {t('tia:descriptions.problematicLawfulAccessExpected')}
               </DaisyBadge>
             </p>
           )}
