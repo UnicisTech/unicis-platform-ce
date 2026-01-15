@@ -54,7 +54,10 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
             <FormLabel>{t(`rm:fields.Risk`)}</FormLabel>
             <FormDescription>{t('rm:descriptions.risk')}</FormDescription>
             <FormControl>
-              <Textarea {...field} placeholder={t('enter-risk-description')} />
+              <Textarea
+                {...field}
+                placeholder={t('rm:placeholders.riskDescription')}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -74,7 +77,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
                 onValueChange={field.onChange}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder={t('select-an-owner')} />
+                  <SelectValue placeholder={t('rm:placeholders.assetOwner')} />
                 </SelectTrigger>
                 <SelectContent>
                   {ownerOptions.map((opt) => (
@@ -102,7 +105,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
             <FormControl>
               <Textarea
                 {...field}
-                placeholder={t('enter-impact-description')}
+                placeholder={t('rm:placeholders.impactDescription')}
               />
             </FormControl>
             <FormMessage />

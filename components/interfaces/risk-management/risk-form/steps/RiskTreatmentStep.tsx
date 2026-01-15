@@ -35,7 +35,7 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
             <FormControl>
               <Textarea
                 {...field}
-                placeholder={t('describe-treatment-approach')}
+                placeholder={t('rm:placeholders.treatmentApproach')}
               />
             </FormControl>
             <FormMessage />
@@ -54,7 +54,10 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
               {t('estimate-total-cost-of-mitigating-risk')}
             </FormDescription>
             <FormControl>
-              <Textarea {...field} placeholder={t('enter-cost-estimate')} />
+              <Textarea
+                {...field}
+                placeholder={t('rm:placeholders.costEstimate')}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>

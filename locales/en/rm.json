@@ -33,6 +33,13 @@
         "treatedProbability": "Enter the probability that the risk will occur after mitigation.",
         "treatedImpact": "Enter the likely impact after mitigation. Incidents due to control failures may have higher impacts. Bold treated values if they differ from raw values."
     },
+    "placeholders": {
+        "riskDescription": "Enter risk description",
+        "assetOwner": "Select an owner",
+        "impactDescription": "Enter impact description",
+        "treatmentApproach": "Describe treatment approach",
+        "costEstimate": "Enter cost estimate"
+    },
     "form-labels": {
         "TreatmentStatus": "Treatment Status (%)",
         "TreatedProbability": "Treated Probability (%)",
