@@ -9,7 +9,7 @@ const Results = ({ risk }: { risk: PiaRisk }) => {
 
   return (
     <>
-      <p>{t('a-confidentiality-and-integrity')}</p>
+      <p>{t('pia:descriptions.resultsConfidentiality')}</p>
       <RiskMatrixBubbleChart
         datasets={[
           {
@@ -29,7 +29,7 @@ const Results = ({ risk }: { risk: PiaRisk }) => {
         ]}
       />
 
-      <p>{t('b-availability')}</p>
+      <p>{t('pia:descriptions.resultsAvailability')}</p>
       <RiskMatrixBubbleChart
         datasets={[
           {
@@ -47,7 +47,7 @@ const Results = ({ risk }: { risk: PiaRisk }) => {
         ]}
       />
 
-      <p>{t('c-transparency-purpose-limitation-and-data-minimization')}</p>
+      <p>{t('pia:descriptions.resultsTransparency')}</p>
       <RiskMatrixBubbleChart
         datasets={[
           {

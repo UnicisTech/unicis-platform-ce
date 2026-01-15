@@ -25,7 +25,7 @@ const DataProcessingStep = ({
 
   return (
     <>
-      <p>{t('is-data-processing-necessary-and-proportional-question')}</p>
+      <p>{t('pia:descriptions.dataProcessingQuestion')}</p>
 
       <FormField
         control={control}

@@ -25,8 +25,8 @@ const ConfidentialityStep = ({
 
   return (
     <>
-      <p>{t('what-are-the-risks-to-privacy')}</p>
-      <p>{t('one-confidentiality-and-integrity')}</p>
+      <p>{t('pia:descriptions.riskQuestion')}</p>
+      <p>{t('pia:descriptions.confidentialityStep')}</p>
 
       <FormField
         control={control}

@@ -25,7 +25,7 @@ const CorrectiveMeasuresStep = ({
 
   return (
     <>
-      <p>{t('corrective-measures')}</p>
+      <p>{t('pia:descriptions.correctiveMeasures')}</p>
 
       {/* Guarantees textarea */}
       <FormField

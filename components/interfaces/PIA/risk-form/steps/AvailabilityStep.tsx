@@ -25,8 +25,8 @@ const AvailabilityStep = ({
 
   return (
     <>
-      <p>{t('what-are-the-risks-to-privacy')}</p>
-      <p>{t('two-availability')}</p>
+      <p>{t('pia:descriptions.riskQuestion')}</p>
+      <p>{t('pia:descriptions.availabilityStep')}</p>
 
       {/* Probability of availability risk */}
       <FormField

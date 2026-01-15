@@ -25,8 +25,8 @@ const TransparencyStep = ({
 
   return (
     <>
-      <p>{t('what-are-the-risks-to-privacy')}</p>
-      <p>{t('transparency-anonymization-and-data-minimization')}</p>
+      <p>{t('pia:descriptions.riskQuestion')}</p>
+      <p>{t('pia:descriptions.transparencyStep')}</p>
 
       {/* Probability */}
       <FormField
