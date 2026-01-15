@@ -52,7 +52,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`rm:fields.Risk`)}</FormLabel>
-            <FormDescription>{t('risk-description')}</FormDescription>
+            <FormDescription>{t('rm:descriptions.risk')}</FormDescription>
             <FormControl>
               <Textarea {...field} placeholder={t('enter-risk-description')} />
             </FormControl>
@@ -86,7 +86,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
               </Select>
             </FormControl>
             <FormMessage />
-            <FormDescription>{t('asset-owner-description')}</FormDescription>
+            <FormDescription>{t('rm:descriptions.assetOwner')}</FormDescription>
           </FormItem>
         )}
       />
@@ -98,7 +98,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`rm:fields.Impact`)}</FormLabel>
-            <FormDescription>{t('impact-description')}</FormDescription>
+            <FormDescription>{t('rm:descriptions.impact')}</FormDescription>
             <FormControl>
               <Textarea
                 {...field}
@@ -117,7 +117,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
           <FormItem>
             <FormLabel>{t(`rm:form-labels.RawProbability`)}</FormLabel>
             <FormDescription>
-              {t('raw-probability-description')}
+              {t('rm:descriptions.rawProbability')}
             </FormDescription>
             <FormControl>
               <Slider
@@ -139,7 +139,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`rm:fields.RawImpact`)}</FormLabel>
-            <FormDescription>{t('raw-impact-description')}</FormDescription>
+            <FormDescription>{t('rm:descriptions.rawImpact')}</FormDescription>
             <FormControl>
               <Slider
                 value={[field.value]}

@@ -30,7 +30,7 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
           <FormItem>
             <FormLabel>{t(`rm:fields.RiskTreatment`)}</FormLabel>
             <FormDescription>
-              {t('describe-how-the-risk-is-to-be-treated-description')}
+              {t('rm:descriptions.riskTreatment')}
             </FormDescription>
             <FormControl>
               <Textarea
@@ -77,7 +77,7 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
               />
             </FormControl>
             <FormDescription>
-              {t('treatment-status-description')}
+              {t('rm:descriptions.treatmentStatus')}
             </FormDescription>
             <FormDescription>{`${field.value} ${t('percent-max-100')}`}</FormDescription>
           </FormItem>
@@ -100,7 +100,7 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
               />
             </FormControl>
             <FormDescription>
-              {t('treated-probability-description')}
+              {t('rm:descriptions.treatedProbability')}
             </FormDescription>
             <FormDescription>{`${field.value} ${t('percent-max-100')}`}</FormDescription>
           </FormItem>
@@ -122,7 +122,7 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
                 step={1}
               />
             </FormControl>
-            <FormDescription>{t('treated-impact-description')}</FormDescription>
+            <FormDescription>{t('rm:descriptions.treatedImpact')}</FormDescription>
             <FormDescription>{`${field.value} ${t('percent-max-100')}`}</FormDescription>
           </FormItem>
         )}
