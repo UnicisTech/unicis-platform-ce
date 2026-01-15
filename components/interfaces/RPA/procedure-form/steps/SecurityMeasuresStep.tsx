@@ -61,9 +61,7 @@ export function SecurityMeasuresStep({ control }: SecurityMeasuresStepProps) {
             </FormControl>
             {!formState.errors.toms ? (
               <FormDescription>
-                {t(
-                  'multiple-selection-possible-and-if-others-please-specify-on-the-ticket'
-                )}
+                {t('rpa:descriptions.multipleSelectionOther')}
               </FormDescription>
             ) : (
               <FormMessage>

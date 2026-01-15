@@ -72,7 +72,7 @@ export default function PurposeAndCategoriesStep({
             <FormControl>
               <Textarea
                 {...field}
-                placeholder={t('describe-principles-to-processing')}
+                placeholder={t('rpa:placeholders.processingPrinciples')}
               />
             </FormControl>
             <FormMessage />
@@ -101,7 +101,7 @@ export default function PurposeAndCategoriesStep({
             </FormControl>
             {!formState.errors.category ? (
               <FormDescription>
-                {t('multiple-selection-possible-for-personal-data')}
+                {t('rpa:descriptions.multipleSelectionPersonalData')}
               </FormDescription>
             ) : (
               <FormMessage>
@@ -133,7 +133,7 @@ export default function PurposeAndCategoriesStep({
             </FormControl>
             {!formState.errors.specialcategory ? (
               <FormDescription>
-                {t('multiple-selection-possible')}
+                {t('rpa:descriptions.multipleSelection')}
               </FormDescription>
             ) : (
               <FormMessage>
@@ -166,7 +166,7 @@ export default function PurposeAndCategoriesStep({
             {!formState.errors.datasubject ? (
               <FormDescription>
                 {t(
-                  'multiple-selection-possible-and-if-others-please-specify-on-the-ticket'
+                  'rpa:descriptions.multipleSelectionOther'
                 )}
               </FormDescription>
             ) : (
@@ -181,7 +181,7 @@ export default function PurposeAndCategoriesStep({
       <FormField
         control={control}
         name="retentionperiod"
-        rules={{ required: t('please-select-a-period') }}
+        rules={{ required: t('rpa:placeholders.retentionPeriod') }}
         render={({ field, formState }) => (
           <FormItem>
             <FormLabel>{t('rpa:fields.retentionperiod')}</FormLabel>
@@ -191,7 +191,7 @@ export default function PurposeAndCategoriesStep({
                 onValueChange={(val) => field.onChange(val || null)}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder={t('please-select-a-period')} />
+                  <SelectValue placeholder={t('rpa:placeholders.retentionPeriod')} />
                 </SelectTrigger>
                 <SelectContent>
                   {retentionPeriodOptions.map((opt) => (
@@ -205,7 +205,7 @@ export default function PurposeAndCategoriesStep({
 
             {!formState.errors.retentionperiod ? (
               <FormDescription>
-                {t('please-specify-the-data-retention-period')}
+                {t('rpa:descriptions.retentionPeriod')}
               </FormDescription>
             ) : (
               <FormMessage>
@@ -225,7 +225,7 @@ export default function PurposeAndCategoriesStep({
             <FormControl>
               <Textarea
                 {...field}
-                placeholder={t('retention-comments-placeholder')}
+                placeholder={t('rpa:placeholders.retentionComments')}
               />
             </FormControl>
             <FormMessage />

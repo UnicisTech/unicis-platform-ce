@@ -77,7 +77,7 @@ export default function TransferStep({ control }: TransferStepProps) {
               <Input {...field} autoComplete="off" />
             </FormControl>
             <FormMessage />
-            <FormDescription>{t('recipient-description')}</FormDescription>
+            <FormDescription>{t('rpa:descriptions.recipient')}</FormDescription>
           </FormItem>
         )}
       />
@@ -135,9 +135,7 @@ export default function TransferStep({ control }: TransferStepProps) {
             </FormControl>
             {!formState.errors.guarantee ? (
               <FormDescription>
-                {t(
-                  'multiple-selection-possible-and-if-none-please-specify-on-the-ticket'
-                )}
+                {t('rpa:descriptions.multipleSelectionNone')}
               </FormDescription>
             ) : (
               <FormMessage>

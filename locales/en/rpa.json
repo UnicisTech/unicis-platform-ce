@@ -103,6 +103,26 @@
         "rightsRestricted": "11. Are subjects' rights restricted?",
         "piaNeeded": "12. Is a data protection impact assessment needed?"
     },
+    "descriptions": {
+        "reviewDate": "Specify a future date for reviewing the record",
+        "recipientTypeDetails": "Please specify the type of recipient; if it is not on the list, add it in details.",
+        "multipleSelectionPersonalData": "Multiple selection possible for Personal Data",
+        "multipleSelection": "Multiple selection possible",
+        "multipleSelectionOther": "Multiple selection possible, and if others please specify on the ticket",
+        "multipleSelectionNone": "Multiple selection possible, and if None please specify on the ticket",
+        "retentionPeriod": "Please specify the data retention period",
+        "recipient": "Recipient is a natural or legal person, public authority, agency or another body to which the personal data are disclosed."
+    },
+    "placeholders": {
+        "reviewDate": "Select date",
+        "controller": "Enter controller name",
+        "dpo": "Select a DPO",
+        "recipientType": "Select recipient type",
+        "recipientDetails": "Write details if you selected \"Others\" or if there is no suitable recipient type above.",
+        "processingPrinciples": "Describe the principles to processing of personal data if any.",
+        "retentionPeriod": "Please select a period",
+        "retentionComments": "In some cases (payroll management), it is necessary to retain certain data for a longer period of time, depending on your legal obligations or if the data are of administrative interest (litigation)."
+    },
     "steps": {
         "descriptionStakeholders": "Description / Stakeholders",
         "purposeAndCategories": "Purpose and Categories",

@@ -54,7 +54,7 @@ export default function RecipientsStep({ control }: RecipientsStepProps) {
                 onValueChange={(val) => field.onChange(val || null)}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder={t('select-recipient-type')} />
+                  <SelectValue placeholder={t('rpa:placeholders.recipientType')} />
                 </SelectTrigger>
                 <SelectContent>
                   {config.recipientType.map(value => (
@@ -67,9 +67,7 @@ export default function RecipientsStep({ control }: RecipientsStepProps) {
             </FormControl>
             <FormMessage />
             <FormDescription>
-              {t(
-                'please-specify-type-of-recipient-if-not-on-list-specify-on-details'
-              )}
+              {t('rpa:descriptions.recipientTypeDetails')}
             </FormDescription>
           </FormItem>
         )}
@@ -84,9 +82,7 @@ export default function RecipientsStep({ control }: RecipientsStepProps) {
             <FormControl>
               <Textarea
                 {...field}
-                placeholder={t(
-                  'write-details-if-you-select-others-or-no-recipient-type-above'
-                )}
+                placeholder={t('rpa:placeholders.recipientDetails')}
               />
             </FormControl>
             <FormMessage />

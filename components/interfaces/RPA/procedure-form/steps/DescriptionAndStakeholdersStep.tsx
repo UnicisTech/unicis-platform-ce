@@ -64,11 +64,11 @@ export default function DescriptionAndStakeholdersStep({
               <DatePickerInput
                 value={field.value}
                 onChange={field.onChange}
-                placeholder={t('select-date')}
+                placeholder={t('rpa:placeholders.reviewDate')}
                 isModal
               />
             </FormControl>
-            <FormDescription>{t('specify-future-review-date')}</FormDescription>
+            <FormDescription>{t('rpa:descriptions.reviewDate')}</FormDescription>
             <FormMessage />
           </FormItem>
         )}
@@ -85,7 +85,7 @@ export default function DescriptionAndStakeholdersStep({
               <Input
                 {...field}
                 autoComplete="off"
-                placeholder={t('enter-controller-name')}
+                placeholder={t('rpa:placeholders.controller')}
               />
             </FormControl>
             <FormMessage />
@@ -108,7 +108,7 @@ export default function DescriptionAndStakeholdersStep({
                 }}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder={t('select-a-dpo')} />
+                  <SelectValue placeholder={t('rpa:placeholders.dpo')} />
                 </SelectTrigger>
                 <SelectContent>
                   {dpoOptions.map((opt) => (
