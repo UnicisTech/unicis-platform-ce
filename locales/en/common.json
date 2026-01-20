@@ -1,5 +1,6 @@
 {
   "get-started": "Get Started",
+  "languages": "Languages",
   "login": "Login using an existing account",
   "errors": {
     "emailLogin": "Something went wrong while sending the email. Please try again later.",
@@ -70,6 +71,7 @@
   "save-changes": "Save Changes",
   "successfully-updated": "Changes saved successfully.",
   "all-teams": "All Teams",
+  "team-dashboard": "Team dashboard",
   "team-invite": "is inviting you to join their team.",
   "successfully-joined": "You have successfully created your account.",
   "invitation-sent": "Invitation sent!",

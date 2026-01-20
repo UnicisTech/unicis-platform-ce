@@ -41,7 +41,7 @@ const TeamDashboard = ({
     <>
       <div className="flex flex-col pb-6">
         <h2 className="text-xl font-semibold mb-2">
-          {t('Team dashboard')} ({team?.name})
+          {t('team-dashboard')} ({team?.name})
         </h2>
       </div>
       <div className="space-y-6">
