@@ -96,12 +96,12 @@ const AdminPage = ({
 
       const { error } = await res.json();
       if (!res.ok || error)
-        return toast.error(error?.message || 'Request failed');
+        return toast.error(error?.message || t('errors.requestFailed'));
 
       toast.success(t('iap-course-deleted'));
       mutateIap();
     } catch {
-      toast.error('Something went wrong');
+      toast.error(t('errors.somethingWentWrong'));
     }
   }, [slug, courseToDelete, mutateIap, t]);
 

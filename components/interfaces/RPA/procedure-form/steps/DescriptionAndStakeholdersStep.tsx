@@ -56,7 +56,7 @@ export default function DescriptionAndStakeholdersStep({
       <FormField
         control={control}
         name="reviewDate"
-        rules={{ required: t('please-select-a-due-date') }}
+        rules={{ required: t('errors.pleaseSelectDueDate') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t('review-date')}</FormLabel>
@@ -77,7 +77,7 @@ export default function DescriptionAndStakeholdersStep({
       <FormField
         control={control}
         name="controller"
-        rules={{ required: t('please-enter-the-controller') }}
+        rules={{ required: t('errors.pleaseEnterController') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t('controller')}</FormLabel>
@@ -96,7 +96,7 @@ export default function DescriptionAndStakeholdersStep({
       <FormField
         control={control}
         name="dpo"
-        rules={{ required: t('please-select-a-dpo') }}
+        rules={{ required: t('errors.pleaseSelectDpo') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t('data-protection-officer')}</FormLabel>

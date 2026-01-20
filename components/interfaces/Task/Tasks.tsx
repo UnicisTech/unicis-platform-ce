@@ -74,7 +74,7 @@ const Tasks = ({ team }: { team: Team }) => {
 
     const { error } = await res.json();
     if (!res.ok || error) {
-      toast.error(error?.message || 'Request failed');
+      toast.error(error?.message || t('errors.requestFailed'));
       return;
     }
 

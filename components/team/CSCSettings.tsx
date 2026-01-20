@@ -67,12 +67,12 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
 
         if (!res.ok) {
           const { error } = await res.json().catch(() => ({}));
-          throw new Error(error?.message || 'Request failed');
+          throw new Error(error?.message || t('errors.requestFailed'));
         }
 
         toast.success(t('successfully-updated'));
       } catch (err: any) {
-        toast.error(err?.message || 'Unexpected error');
+        toast.error(err?.message || t('errors.unexpectedError'));
       }
     },
   });

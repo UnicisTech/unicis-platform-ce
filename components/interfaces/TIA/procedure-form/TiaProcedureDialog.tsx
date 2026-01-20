@@ -142,7 +142,7 @@ export default function TiaProcedureDialog({
 
       const { error } = await res.json();
       if (!res.ok || error) {
-        toast.error(error?.message || 'Request failed');
+        toast.error(error?.message || t('errors.requestFailed'));
         return;
       }
 
@@ -151,7 +151,7 @@ export default function TiaProcedureDialog({
       mutateTasks();
       onOpenChange(false);
     } catch {
-      toast.error('Unexpected error');
+      toast.error(t('errors.unexpectedError'));
     } finally {
       setIsSaving(false);
     }

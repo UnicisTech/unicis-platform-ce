@@ -27,6 +27,7 @@ import { Alert, AlertDescription } from '@/components/shadcn/ui/alert';
 import { Separator } from '@/components/shadcn/ui/separator';
 import { Loader2 } from 'lucide-react';
 import { authProviderEnabled } from '@/lib/auth';
+import { getAuthErrorKey } from '@/lib/common';
 
 interface Message {
   text: string | null;
@@ -45,7 +46,6 @@ const Login: NextPageWithLayout<
   const [isResendButtonVisible, setIsResendButtonVisible] =
     useState<boolean>(false);
   const recaptchaRef = useRef<any>(null);
-
   const { error, success, token } = router.query as {
     error?: string;
     success?: string;
@@ -53,7 +53,7 @@ const Login: NextPageWithLayout<
   };
 
   useEffect(() => {
-    if (error) setMessage({ text: error, status: 'error' });
+    if (error) setMessage({ text: getAuthErrorKey(error), status: 'error' });
     else if (success) setMessage({ text: success, status: 'success' });
   }, [error, success]);
 
@@ -78,7 +78,8 @@ const Login: NextPageWithLayout<
       formik.resetForm();
       recaptchaRef.current?.reset();
       if (!resp?.ok) {
-        toast.error(t(resp?.error ?? 'error'));
+        const errorKey = getAuthErrorKey(resp?.error);
+        toast.error(t(errorKey));
         if (resp?.error === 'confirm-your-email') {
           setIsResendButtonVisible(true);
         }

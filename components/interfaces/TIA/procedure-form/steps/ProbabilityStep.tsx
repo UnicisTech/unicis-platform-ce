@@ -300,7 +300,7 @@ export default function ProbabilityStep({
           <FormField
             control={control}
             name="ConnectionTargetedAccess"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -333,7 +333,7 @@ export default function ProbabilityStep({
           <FormField
             control={control}
             name="ReasonConnectionTargetedAccess"
-            rules={{ required: t('please-provide-a-reason') }}
+            rules={{ required: t('errors.pleaseProvideAReason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -359,7 +359,7 @@ export default function ProbabilityStep({
           <FormField
             control={control}
             name="ConnectionSurveillanceTele"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -392,7 +392,7 @@ export default function ProbabilityStep({
           <FormField
             control={control}
             name="ReasonConnectionSurveillanceTele"
-            rules={{ required: t('please-provide-a-reason') }}
+            rules={{ required: t('errors.pleaseProvideAReason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -416,7 +416,7 @@ export default function ProbabilityStep({
           <FormField
             control={control}
             name="ConnectionSelfreportingObligations"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -449,7 +449,7 @@ export default function ProbabilityStep({
           <FormField
             control={control}
             name="ReasonConnectionSelfreportingObligations"
-            rules={{ required: t('please-provide-a-reason') }}
+            rules={{ required: t('errors.pleaseProvideAReason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>

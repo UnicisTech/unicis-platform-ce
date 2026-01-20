@@ -44,7 +44,7 @@ export default function RecipientsStep({ control }: RecipientsStepProps) {
       <FormField
         control={control}
         name="recipientType"
-        rules={{ required: t('please-select-a-type') }}
+        rules={{ required: t('errors.pleaseSelectType') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`rpa:fields.recipientType`)}</FormLabel>

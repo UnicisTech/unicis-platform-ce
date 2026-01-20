@@ -25,7 +25,7 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
       <FormField
         control={control}
         name="RiskTreatment"
-        rules={{ required: t('describe-how-the-risk-is-to-be-treated') }}
+        rules={{ required: t('errors.describeRiskTreatment') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`rm:fields.RiskTreatment`)}</FormLabel>

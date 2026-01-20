@@ -48,7 +48,7 @@ export default function DeleteRisk({
 
       const { error } = await res.json();
       if (!res.ok || error) {
-        toast.error(error?.message || 'Request failed');
+        toast.error(error?.message || t('errors.requestFailed'));
         return;
       }
 
@@ -56,7 +56,7 @@ export default function DeleteRisk({
       await mutate();
       setVisible(false);
     } catch (err: any) {
-      toast.error(err?.message || 'Unexpected error');
+      toast.error(err?.message || t('errors.unexpectedError'));
     } finally {
       setIsDeleting(false);
     }

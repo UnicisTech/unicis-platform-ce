@@ -49,7 +49,7 @@ export default function DeleteProcedure({
 
       const { error } = await res.json();
       if (!res.ok || error) {
-        toast.error(error?.message || 'Request failed');
+        toast.error(error?.message || t('errors.requestFailed'));
         return;
       }
 
@@ -57,7 +57,7 @@ export default function DeleteProcedure({
       await mutate();
       setVisible(false);
     } catch {
-      toast.error('Unexpected error');
+      toast.error(t('errors.unexpectedError'));
     } finally {
       setIsDeleting(false);
     }

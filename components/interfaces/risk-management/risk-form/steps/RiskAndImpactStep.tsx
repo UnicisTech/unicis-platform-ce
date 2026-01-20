@@ -48,7 +48,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
       <FormField
         control={control}
         name="Risk"
-        rules={{ required: t('please-describe-the-risk') }}
+        rules={{ required: t('errors.pleaseDescribeRisk') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`rm:fields.Risk`)}</FormLabel>
@@ -67,7 +67,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
       <FormField
         control={control}
         name="AssetOwner"
-        rules={{ required: t('please-select-an-asset-owner') }}
+        rules={{ required: t('errors.pleaseSelectAssetOwner') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`rm:fields.AssetOwner`)}</FormLabel>
@@ -97,7 +97,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
       <FormField
         control={control}
         name="Impact"
-        rules={{ required: t('please-describe-the-impact') }}
+        rules={{ required: t('errors.pleaseDescribeImpact') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`rm:fields.Impact`)}</FormLabel>

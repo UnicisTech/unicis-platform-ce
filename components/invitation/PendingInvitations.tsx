@@ -65,7 +65,7 @@ const PendingInvitations = ({ team }: { team: Team }) => {
       toast.success(t('copied-to-clipboard'));
     } catch (err) {
       console.error('Failed to copy: ', err);
-      toast.error('Failed to copy link to clipboard!');
+      toast.error(t('errors.failedToCopyLink'));
     }
   };
 

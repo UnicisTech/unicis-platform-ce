@@ -1,6 +1,6 @@
 import { AuthLayout } from '@/components/layouts';
 import { Alert } from '@/components/shared';
-import { defaultHeaders } from '@/lib/common';
+import { defaultHeaders, getAuthErrorKey } from '@/lib/common';
 import { useFormik } from 'formik';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -28,12 +28,11 @@ const VerifyAccount: NextPageWithLayout<
     text: null,
     status: null,
   });
-
   const { error } = router.query as { error: string };
 
   useEffect(() => {
     if (error) {
-      setMessage({ text: error, status: 'error' });
+      setMessage({ text: getAuthErrorKey(error), status: 'error' });
     }
   }, [router, router.query, error]);
 

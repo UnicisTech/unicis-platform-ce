@@ -57,16 +57,16 @@ const IAP = ({ teamFeatures }) => {
   }
 
   if (!team || !teams) {
-    return <Error message={t('team-not-found')} />;
+    return <Error message={t('errors.teamNotFound')} />;
   }
 
   if (!teamCourses || !categories || !members) {
     //TODO: return message
-    return <Error message={t('team-not-found')} />;
+    return <Error message={t('errors.teamNotFound')} />;
   }
 
   if (!isLoading && !canAccess('iap_reports', ['read'])) {
-    return <Error message={t('forbidden-resource')} />;
+    return <Error message={t('errors.forbiddenResource')} />;
   }
 
   return (

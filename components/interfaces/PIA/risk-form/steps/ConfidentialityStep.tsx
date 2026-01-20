@@ -31,7 +31,7 @@ const ConfidentialityStep = ({
       <FormField
         control={control}
         name="confidentialityRiskProbability"
-        rules={{ required: t('please-select-an-option') }}
+        rules={{ required: t('errors.pleaseSelectAnOption') }}
         defaultValue={initial?.confidentialityRiskProbability ?? ''}
         render={({ field }) => (
           <FormItem>
@@ -56,7 +56,7 @@ const ConfidentialityStep = ({
       <FormField
         control={control}
         name="confidentialityRiskSecurity"
-        rules={{ required: t('please-select-an-option') }}
+        rules={{ required: t('errors.pleaseSelectAnOption') }}
         defaultValue={initial?.confidentialityRiskSecurity ?? ''}
         render={({ field }) => (
           <FormItem>

@@ -50,14 +50,14 @@ export default function Comments({
 
         const { error } = await res.json();
         if (!res.ok || error) {
-          toast.error(error?.message || 'Request failed');
+          toast.error(error?.message || t('errors.requestFailed'));
           return;
         }
 
         reset({ text: '' });
         mutateTask();
       } catch {
-        toast.error('Unexpected error');
+        toast.error(t('errors.unexpectedError'));
       }
     },
     [slug, taskNumber, mutateTask]
@@ -77,14 +77,14 @@ export default function Comments({
 
         const { error } = await res.json();
         if (!res.ok || error) {
-          toast.error(error?.message || 'Request failed');
+          toast.error(error?.message || t('errors.requestFailed'));
           return;
         }
 
         mutateTask();
         setCommentToEdit(null);
       } catch {
-        toast.error('Unexpected error');
+        toast.error(t('errors.unexpectedError'));
       }
     },
     [slug, taskNumber, mutateTask]
@@ -106,13 +106,13 @@ export default function Comments({
 
         const { error } = await res.json();
         if (!res.ok || error) {
-          toast.error(error?.message || 'Request failed');
+          toast.error(error?.message || t('errors.requestFailed'));
           return;
         }
 
         mutateTask();
       } catch {
-        toast.error('Unexpected error');
+        toast.error(t('errors.unexpectedError'));
       }
     },
     [slug, taskNumber, mutateTask]

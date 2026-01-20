@@ -61,7 +61,7 @@ const SSO: NextPageWithLayout<
       if (data.useSlug) {
         formik.resetForm();
         setUseEmail(false);
-        toast.error(t('multiple-sso-teams'));
+        toast.error(t('errors.multipleSsoTeams'));
         return;
       }
       await signIn('boxyhq-saml', undefined, {

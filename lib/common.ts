@@ -97,6 +97,18 @@ export const defaultHeaders = {
   'Content-Type': 'application/json',
 };
 
+export const authErrorKeyMap: Record<string, string> = {
+  'invalid-credentials': 'errors.invalidCredentials',
+  'token-not-found': 'errors.tokenInvalid',
+  'confirm-your-email': 'errors.confirmYourEmail',
+  'email-login-error': 'errors.emailLogin',
+  'invitation-error-accepting': 'errors.invitationAccepting',
+  'access-denied': 'errors.accessDenied',
+};
+
+export const getAuthErrorKey = (key?: string | null) =>
+  key ? authErrorKeyMap[key] ?? key : 'errors.unknown';
+
 // List of events used to create webhook endpoint
 export const eventTypes = [
   'member.created',

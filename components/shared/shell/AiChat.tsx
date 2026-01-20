@@ -63,7 +63,7 @@ const AiChat: React.FC = () => {
         setMessages((prev) => [...prev, json.data.response]);
       }
     } catch {
-      toast.error(t('something-went-wrong'));
+      toast.error(t('errors.somethingWentWrong'));
     } finally {
       setIsTyping(false);
     }

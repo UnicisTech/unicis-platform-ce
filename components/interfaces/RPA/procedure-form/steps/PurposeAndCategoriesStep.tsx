@@ -85,8 +85,8 @@ export default function PurposeAndCategoriesStep({
         name="category"
         rules={{
           validate: (v: string[]) =>
-            v && v.length > 0 ? undefined : t('please-select-a-categories'),
-          required: t('please-select-a-categories'),
+            v && v.length > 0 ? undefined : t('errors.pleaseSelectCategories'),
+          required: t('errors.pleaseSelectCategories'),
         }}
         render={({ field, formState }) => (
           <FormItem>
@@ -117,8 +117,8 @@ export default function PurposeAndCategoriesStep({
         name="specialcategory"
         rules={{
           validate: (v: string[]) =>
-            v && v.length > 0 ? undefined : t('please-select-a-categories'),
-          required: t('please-select-a-categories'),
+            v && v.length > 0 ? undefined : t('errors.pleaseSelectCategories'),
+          required: t('errors.pleaseSelectCategories'),
         }}
         render={({ field, formState }) => (
           <FormItem>
@@ -149,8 +149,8 @@ export default function PurposeAndCategoriesStep({
         name="datasubject"
         rules={{
           validate: (v: string[]) =>
-            v && v.length > 0 ? undefined : t('please-select-a-categories'),
-          required: t('please-select-a-categories'),
+            v && v.length > 0 ? undefined : t('errors.pleaseSelectCategories'),
+          required: t('errors.pleaseSelectCategories'),
         }}
         render={({ field, formState }) => (
           <FormItem>

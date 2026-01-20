@@ -30,11 +30,11 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
 
   const uploadFile = (file: File) => {
     if (file.size > MAX) {
-      toast.error(t('file-too-big'));
+      toast.error(t('errors.fileTooBig'));
       return;
     }
     if (!['image/png', 'image/jpeg'].includes(file.type)) {
-      toast.error(t('file-type-not-supported'));
+      toast.error(t('errors.fileTypeNotSupported'));
       return;
     }
     const reader = new FileReader();

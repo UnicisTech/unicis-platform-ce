@@ -69,7 +69,7 @@ export default function TransferStep({ control }: TransferStepProps) {
       <FormField
         control={control}
         name="recipient"
-        rules={{ required: t('please-enter-a-recipient') }}
+        rules={{ required: t('errors.pleaseEnterRecipient') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`rpa:fields.recipient`)}</FormLabel>
@@ -85,7 +85,7 @@ export default function TransferStep({ control }: TransferStepProps) {
       <FormField
         control={control}
         name="country"
-        rules={{ required: t('please-select-a-country') }}
+        rules={{ required: t('errors.pleaseSelectCountry') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`rpa:fields.country`)}</FormLabel>
@@ -119,8 +119,8 @@ export default function TransferStep({ control }: TransferStepProps) {
         name="guarantee"
         rules={{
           validate: (v: string[]) =>
-            v && v.length > 0 ? undefined : t('please-select-at-least-one'),
-          required: t('please-select-at-least-one'),
+            v && v.length > 0 ? undefined : t('errors.pleaseSelectAtLeastOne'),
+          required: t('errors.pleaseSelectAtLeastOne'),
         }}
         render={({ field, formState }) => (
           <FormItem>

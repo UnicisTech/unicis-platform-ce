@@ -72,7 +72,7 @@ const TiaDashboard: NextPageWithLayout<
   }
 
   if (!isLoading && !canAccess('tia', ['read'])) {
-    return <Error message={t('forbidden-resource')} />;
+    return <Error message={t('errors.forbiddenResource')} />;
   }
 
   return (

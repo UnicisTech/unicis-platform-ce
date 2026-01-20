@@ -55,7 +55,7 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="EncryptionInTransit"
-        rules={{ required: t('select-yes-or-no') }}
+        rules={{ required: t('errors.selectYesOrNo') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`tia:fields.EncryptionInTransit`)}</FormLabel>
@@ -81,7 +81,7 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="ReasonEncryptionInTransit"
-        rules={{ required: t('enter-a-reason') }}
+        rules={{ required: t('errors.enterAReason') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`tia:fields.ReasonEncryptionInTransit`)}</FormLabel>
@@ -97,7 +97,7 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="TransferMechanism"
-        rules={{ required: t('select-yes-or-no') }}
+        rules={{ required: t('errors.selectYesOrNo') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`tia:fields.TransferMechanism`)}</FormLabel>
@@ -123,7 +123,7 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="ReasonTransferMechanism"
-        rules={{ required: t('enter-a-reason') }}
+        rules={{ required: t('errors.enterAReason') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`tia:fields.ReasonTransferMechanism`)}</FormLabel>
@@ -148,7 +148,7 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="LawfulAccess"
-        rules={{ required: t('select-yes-or-no') }}
+        rules={{ required: t('errors.selectYesOrNo') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`tia:fields.LawfulAccess`)}</FormLabel>
@@ -174,7 +174,7 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="ReasonLawfulAccess"
-        rules={{ required: t('enter-a-reason') }}
+        rules={{ required: t('errors.enterAReason') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`tia:fields.ReasonLawfulAccess`)}</FormLabel>
@@ -190,7 +190,7 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="MassSurveillanceTelecommunications"
-        rules={{ required: t('select-yes-or-no') }}
+        rules={{ required: t('errors.selectYesOrNo') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>
@@ -218,7 +218,7 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="ReasonMassSurveillanceTelecommunications"
-        rules={{ required: t('enter-a-reason') }}
+        rules={{ required: t('errors.enterAReason') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>
@@ -236,7 +236,7 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="SelfReportingObligations"
-        rules={{ required: t('select-yes-or-no') }}
+        rules={{ required: t('errors.selectYesOrNo') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`tia:fields.SelfReportingObligations`)}</FormLabel>
@@ -262,7 +262,7 @@ export default function ProblematicLawfulAccessStep({
       <FormField
         control={control}
         name="ReasonSelfReportingObligations"
-        rules={{ required: t('enter-a-reason') }}
+        rules={{ required: t('errors.enterAReason') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>

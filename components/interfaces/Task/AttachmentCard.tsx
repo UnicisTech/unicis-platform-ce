@@ -37,7 +37,7 @@ const AttachmentsCard = ({
         );
 
         if (!res.ok) {
-          toast.error('Failed to download file');
+          toast.error(t('errors.failedToDownloadFile'));
           return;
         }
 
@@ -45,7 +45,7 @@ const AttachmentsCard = ({
         const contentType = res.headers.get('content-type') || '';
         if (contentType.includes('application/json')) {
           const { error } = await res.json();
-          toast.error(error?.message || 'Request failed');
+          toast.error(error?.message || t('errors.requestFailed'));
           return;
         }
 
@@ -59,7 +59,7 @@ const AttachmentsCard = ({
 
         window.URL.revokeObjectURL(url);
       } catch (error) {
-        toast.error('Failed to download file');
+        toast.error(t('errors.failedToDownloadFile'));
         console.error(error);
       }
     },
@@ -75,14 +75,14 @@ const AttachmentsCard = ({
 
       const { error } = await res.json();
       if (!res.ok || error) {
-        toast.error(error?.message || 'Request failed');
+        toast.error(error?.message || t('errors.requestFailed'));
         return;
       }
 
       toast.success('Attachment deleted');
       mutateTask();
     } catch {
-      toast.error('Unexpected error');
+      toast.error(t('errors.unexpectedError'));
     }
   }, [teamSlug, taskNumber, attachment.id, mutateTask]);
 

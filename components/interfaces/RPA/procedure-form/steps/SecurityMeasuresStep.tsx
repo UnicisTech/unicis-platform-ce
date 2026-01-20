@@ -42,8 +42,8 @@ export function SecurityMeasuresStep({ control }: SecurityMeasuresStepProps) {
         name="toms"
         rules={{
           validate: (v: string[]) =>
-            v && v.length > 0 ? undefined : t('please-select-at-least-one'),
-          required: t('please-select-at-least-one'),
+            v && v.length > 0 ? undefined : t('errors.pleaseSelectAtLeastOne'),
+          required: t('errors.pleaseSelectAtLeastOne'),
         }}
         render={({ field, formState }) => (
           <FormItem>

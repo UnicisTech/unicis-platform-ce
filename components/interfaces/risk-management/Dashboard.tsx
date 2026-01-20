@@ -48,7 +48,7 @@ const Dashboard = () => {
   }, []);
 
   if (!canAccess('rm', ['read'])) {
-    return <Error message={t('forbidden-resource')} />;
+    return <Error message={t('errors.forbiddenResource')} />;
   }
 
   return (

@@ -32,7 +32,7 @@ const AvailabilityStep = ({
       <FormField
         control={control}
         name="availabilityRiskProbability"
-        rules={{ required: t('please-select-an-option') }}
+        rules={{ required: t('errors.pleaseSelectAnOption') }}
         defaultValue={initial?.availabilityRiskProbability ?? ''}
         render={({ field }) => (
           <FormItem>
@@ -58,7 +58,7 @@ const AvailabilityStep = ({
       <FormField
         control={control}
         name="availabilityRiskSecurity"
-        rules={{ required: t('please-select-an-option') }}
+        rules={{ required: t('errors.pleaseSelectAnOption') }}
         defaultValue={initial?.availabilityRiskSecurity ?? ''}
         render={({ field }) => (
           <FormItem>

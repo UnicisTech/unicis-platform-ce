@@ -12,7 +12,7 @@ const Error = (props: ErrorProps) => {
 
   return (
     <Alert status="error" className="my-2">
-      <p>{message || t('unknown-error')}</p>
+      <p>{message || t('errors.unknown')}</p>
     </Alert>
   );
 };

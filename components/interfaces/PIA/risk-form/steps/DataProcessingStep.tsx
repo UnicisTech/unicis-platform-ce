@@ -30,7 +30,7 @@ const DataProcessingStep = ({
       <FormField
         control={control}
         name="isDataProcessingNecessary"
-        rules={{ required: t('please-select-an-option') }}
+        rules={{ required: t('errors.pleaseSelectAnOption') }}
         defaultValue={initial?.isDataProcessingNecessary ?? ''}
         render={({ field }) => (
           <FormItem>
@@ -70,7 +70,7 @@ const DataProcessingStep = ({
       <FormField
         control={control}
         name="isProportionalToPurpose"
-        rules={{ required: t('please-select-an-option') }}
+        rules={{ required: t('errors.pleaseSelectAnOption') }}
         defaultValue={initial?.isProportionalToPurpose ?? ''}
         render={({ field }) => (
           <FormItem>

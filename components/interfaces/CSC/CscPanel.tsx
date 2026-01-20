@@ -8,6 +8,7 @@ import useCscStatuses from 'hooks/useCscStatuses';
 import { Task } from '@prisma/client';
 import CscChartsLayout from './CscChartsLayout';
 import { CscStatus } from '@/lib/csc/csc-statuses';
+import { useTranslation } from 'next-i18next';
 
 export async function updateCscStatus(params: {
   slug: string;
@@ -27,7 +28,7 @@ export async function updateCscStatus(params: {
   const json = await res.json();
   return {
     data: json.data,
-    error: json.error || (!res.ok ? { message: 'Request failed' } : null),
+    error: json.error || (!res.ok ? { message: null } : null),
   };
 }
 
@@ -53,7 +54,7 @@ export async function updateTaskCsc(params: {
   const json = await res.json();
   return {
     data: json.data,
-    error: json.error || (!res.ok ? { message: 'Request failed' } : null),
+    error: json.error || (!res.ok ? { message: null } : null),
   };
 }
 
@@ -70,6 +71,7 @@ export default function CscPanel({
   tasks,
   mutateTasks,
 }: CscPanelProps) {
+  const { t } = useTranslation('common');
   const { statuses, mutateStatuses } = useCscStatuses(slug, iso);
   const [sectionFilter, setSectionFilter] = useState<string[] | null>(null);
   const [statusFilter, setStatusFilter] = useState<CscStatus[] | null>(null);
@@ -83,10 +85,10 @@ export default function CscPanel({
         value,
         framework: iso,
       });
-      if (error) return toast.error(error.message || 'Request failed');
+      if (error) return toast.error(error.message || t('errors.requestFailed'));
       mutateStatuses();
     },
-    [slug, iso]
+    [slug, iso, t]
   );
 
   const taskSelectorHandler = useCallback(
@@ -105,11 +107,11 @@ export default function CscPanel({
           operation,
           iso,
         });
-        if (error) return toast.error(error.message || 'Request failed');
+        if (error) return toast.error(error.message || t('errors.requestFailed'));
         await mutateTasks();
       }
     },
-    [slug, iso, mutateTasks]
+    [slug, iso, mutateTasks, t]
   );
 
   return (

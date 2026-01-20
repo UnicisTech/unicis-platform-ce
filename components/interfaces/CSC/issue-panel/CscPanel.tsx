@@ -89,12 +89,12 @@ const CscPanel = ({
 
       const { error } = await res.json();
       if (!res.ok || error)
-        return toast.error(error?.message || 'Request failed');
+        return toast.error(error?.message || t('errors.requestFailed'));
 
       clearDraftForActiveTab();
       await mutateTask();
     } catch {
-      toast.error('Something went wrong');
+      toast.error(t('errors.somethingWentWrong'));
     } finally {
       setIsDeleting(false);
     }
@@ -150,7 +150,7 @@ const CscPanel = ({
 
         const { error } = await res.json();
         if (!res.ok || error) {
-          toast.error(error?.message || 'Request failed');
+          toast.error(error?.message || t('errors.requestFailed'));
           // rollback by clearing draft and letting serverControls take over on next render
           clearDraftForActiveTab();
           return;
@@ -159,7 +159,7 @@ const CscPanel = ({
         clearDraftForActiveTab();
         await mutateTask();
       } catch {
-        toast.error('Something went wrong');
+        toast.error(t('errors.somethingWentWrong'));
         clearDraftForActiveTab();
       } finally {
         setIsSaving(false);
@@ -197,7 +197,7 @@ const CscPanel = ({
 
         const { error } = await res.json();
         if (!res.ok || error) {
-          toast.error(error?.message || 'Request failed');
+          toast.error(error?.message || t('errors.requestFailed'));
           clearDraftForActiveTab();
           return;
         }
@@ -205,7 +205,7 @@ const CscPanel = ({
         clearDraftForActiveTab();
         await mutateTask();
       } catch {
-        toast.error('Something went wrong');
+        toast.error(t('errors.somethingWentWrong'));
         clearDraftForActiveTab();
       } finally {
         setIsDeleting(false);
@@ -236,7 +236,7 @@ const CscPanel = ({
         toast.success('Status changed!');
         mutateStatuses();
       } catch {
-        toast.error('Something went wrong');
+        toast.error(t('errors.somethingWentWrong'));
       }
     },
     [slug, activeTab, mutateStatuses]

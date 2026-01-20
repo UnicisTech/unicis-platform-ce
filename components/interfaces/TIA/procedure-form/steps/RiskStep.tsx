@@ -52,7 +52,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="WarrantsSubpoenas"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t(`tia:fields.WarrantsSubpoenas`)}</FormLabel>
@@ -103,7 +103,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="ViolationLocalLaw"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t(`tia:fields.ViolationLocalLaw`)}</FormLabel>
@@ -154,7 +154,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="HighViolationLocalLaw"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t(`tia:fields.HighViolationLocalLaw`)}</FormLabel>
@@ -205,7 +205,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="HighViolationDataIssue"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -258,7 +258,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="InvestigatingImporter"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t(`tia:fields.InvestigatingImporter`)}</FormLabel>
@@ -309,7 +309,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="PastWarrantSubpoena"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t(`tia:fields.PastWarrantSubpoena`)}</FormLabel>
@@ -362,7 +362,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="DataIssueInvestigation"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -395,7 +395,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="ReasonDataIssueInvestigation"
-            rules={{ required: t('please-provide-a-reason') }}
+            rules={{ required: t('errors.pleaseProvideAReason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -434,7 +434,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="LocalIssueWarrants"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t(`tia:fields.LocalIssueWarrants`)}</FormLabel>
@@ -465,7 +465,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="ReasonLocalIssueWarrants"
-            rules={{ required: t('please-provide-a-reason') }}
+            rules={{ required: t('errors.pleaseProvideAReason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -482,7 +482,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="LocalMassSurveillance"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t(`tia:fields.LocalMassSurveillance`)}</FormLabel>
@@ -513,7 +513,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="ReasonLocalMassSurveillance"
-            rules={{ required: t('please-provide-a-reason') }}
+            rules={{ required: t('errors.pleaseProvideAReason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -530,7 +530,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="LocalAccessMassSurveillance"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -563,7 +563,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="ReasonLocalAccessMassSurveillance"
-            rules={{ required: t('please-provide-a-reason') }}
+            rules={{ required: t('errors.pleaseProvideAReason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -584,7 +584,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="LocalRoutinelyMonitor"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t(`tia:fields.LocalRoutinelyMonitor`)}</FormLabel>
@@ -615,7 +615,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="ReasonLocalRoutinelyMonitor"
-            rules={{ required: t('please-provide-a-reason') }}
+            rules={{ required: t('errors.pleaseProvideAReason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -636,7 +636,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="PassMassSurveillance"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t(`tia:fields.PassMassSurveillance`)}</FormLabel>
@@ -667,7 +667,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="ReasonPassMassSurveillance"
-            rules={{ required: t('please-provide-a-reason') }}
+            rules={{ required: t('errors.pleaseProvideAReason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -690,7 +690,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="PassMassSurveillanceConnection"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -723,7 +723,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="ReasonPassMassSurveillanceConnection"
-            rules={{ required: t('please-provide-a-reason') }}
+            rules={{ required: t('errors.pleaseProvideAReason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -761,7 +761,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="ImporterObligation"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t(`tia:fields.ImporterObligation`)}</FormLabel>
@@ -792,7 +792,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="ReasonImporterObligation"
-            rules={{ required: t('please-provide-a-reason') }}
+            rules={{ required: t('errors.pleaseProvideAReason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -813,7 +813,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="LocalSelfReporting"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t(`tia:fields.LocalSelfReporting`)}</FormLabel>
@@ -844,7 +844,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="ReasonLocalSelfReporting"
-            rules={{ required: t('please-provide-a-reason') }}
+            rules={{ required: t('errors.pleaseProvideAReason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -865,7 +865,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="PastSelfReporting"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t(`tia:fields.PastSelfReporting`)}</FormLabel>
@@ -896,7 +896,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="ReasonPastSelfReporting"
-            rules={{ required: t('please-provide-a-reason') }}
+            rules={{ required: t('errors.pleaseProvideAReason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -919,7 +919,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="AssessmentProduceReport"
-            rules={{ required: t('please-select-an-option') }}
+            rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -952,7 +952,7 @@ export default function RiskStep({
           <FormField
             control={control}
             name="ReasonAssessmentProduceReport"
-            rules={{ required: t('please-provide-a-reason') }}
+            rules={{ required: t('errors.pleaseProvideAReason') }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>

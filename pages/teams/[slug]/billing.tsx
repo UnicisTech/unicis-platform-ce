@@ -80,7 +80,7 @@ const Billing: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({
   }
 
   if (!team) {
-    return <Error message={t('team-not-found')} />;
+    return <Error message={t('errors.teamNotFound')} />;
   }
 
   return (

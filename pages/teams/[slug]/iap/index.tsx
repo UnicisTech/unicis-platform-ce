@@ -30,7 +30,7 @@ const IAP = () => {
   }
 
   if (!isLoading && !canAccess('iap_course', ['update'])) {
-    return <Error message={t('forbidden-resource')} />;
+    return <Error message={t('errors.forbiddenResource')} />;
   }
 
   if (isError || isIapError || isTeamsError) {
@@ -44,11 +44,11 @@ const IAP = () => {
   }
 
   if (!team || !teams) {
-    return <Error message={t('team-not-found')} />;
+    return <Error message={t('errors.teamNotFound')} />;
   }
 
   if (!teamCourses || !categories) {
-    return <Error message={t('iap-no-data')} />;
+    return <Error message={t('errors.iapNoData')} />;
   }
 
   return (

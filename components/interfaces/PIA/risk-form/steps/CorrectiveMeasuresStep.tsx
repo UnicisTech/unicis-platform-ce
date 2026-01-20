@@ -79,7 +79,7 @@ const CorrectiveMeasuresStep = ({
       <FormField
         control={control}
         name="dealingWithResidualRisk"
-        rules={{ required: t('please-select-an-option') }}
+        rules={{ required: t('errors.pleaseSelectAnOption') }}
         defaultValue={initial?.dealingWithResidualRisk ?? ''}
         render={({ field }) => (
           <FormItem>
@@ -121,7 +121,7 @@ const CorrectiveMeasuresStep = ({
       <FormField
         control={control}
         name="supervisoryAuthorityInvolvement"
-        rules={{ required: t('please-select-an-option') }}
+        rules={{ required: t('errors.pleaseSelectAnOption') }}
         defaultValue={initial?.supervisoryAuthorityInvolvement ?? ''}
         render={({ field }) => (
           <FormItem>

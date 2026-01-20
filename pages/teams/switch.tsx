@@ -27,7 +27,7 @@ const Organizations: NextPageWithLayout<
 
   useEffect(() => {
     if (teams === null) {
-      toast.error(t('no-active-team'));
+      toast.error(t('errors.noActiveTeam'));
       return;
     }
 

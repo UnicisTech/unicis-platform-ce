@@ -40,7 +40,7 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="DataExporter"
-        rules={{ required: t('please-specify-the-data-exporter') }}
+        rules={{ required: t('errors.pleaseSpecifyDataExporter') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`tia:fields.DataExporter`)}</FormLabel>
@@ -60,7 +60,7 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="CountryDataExporter"
-        rules={{ required: t('please-select-a-country') }}
+        rules={{ required: t('errors.pleaseSelectCountry') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`tia:fields.CountryDataExporter`)}</FormLabel>
@@ -93,7 +93,7 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="DataImporter"
-        rules={{ required: t('please-specify-the-data-importer') }}
+        rules={{ required: t('errors.pleaseSpecifyDataImporter') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`tia:fields.DataImporter`)}</FormLabel>
@@ -113,7 +113,7 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="CountryDataImporter"
-        rules={{ required: t('please-select-a-country') }}
+        rules={{ required: t('errors.pleaseSelectCountry') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`tia:fields.CountryDataImporter`)}</FormLabel>
@@ -146,7 +146,7 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="TransferScenario"
-        rules={{ required: t('please-describe-the-transfer-scenario') }}
+        rules={{ required: t('errors.pleaseDescribeTransferScenario') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`tia:fields.TransferScenario`)}</FormLabel>
@@ -166,7 +166,7 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="DataAtIssue"
-        rules={{ required: t('please-describe-the-data-at-issue') }}
+        rules={{ required: t('errors.pleaseDescribeDataAtIssue') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`tia:fields.DataAtIssue`)}</FormLabel>
@@ -186,7 +186,7 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="HowDataTransfer"
-        rules={{ required: t('please-describe-how-data-is-transferred') }}
+        rules={{ required: t('errors.pleaseDescribeDataTransfer') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`tia:fields.HowDataTransfer`)}</FormLabel>
@@ -206,7 +206,7 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="StartDateAssessment"
-        rules={{ required: t('please-select-a-date') }}
+        rules={{ required: t('errors.pleaseSelectDate') }}
         // defaultValue={initial?.StartDateAssessment?.slice(0, 10) ?? new Date().toISOString().slice(0, 10)}
         render={({ field, formState }) => (
           <FormItem>
@@ -253,7 +253,7 @@ export default function TransferScenarioStep({
       <FormField
         control={control}
         name="LawImporterCountry"
-        rules={{ required: t('please-select-a-country') }}
+        rules={{ required: t('errors.pleaseSelectCountry') }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t(`tia:fields.LawImporterCountry`)}</FormLabel>

@@ -34,7 +34,7 @@ export default function AppShell({ children }) {
   }
 
   if (status === 'unauthenticated') {
-    return <p>{t('access-denied')}</p>;
+    return <p>{t('errors.accessDenied')}</p>;
   }
 
   return (

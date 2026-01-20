@@ -32,7 +32,7 @@ const TransparencyStep = ({
       <FormField
         control={control}
         name="transparencyRiskProbability"
-        rules={{ required: t('please-select-an-option') }}
+        rules={{ required: t('errors.pleaseSelectAnOption') }}
         defaultValue={initial?.transparencyRiskProbability ?? ''}
         render={({ field }) => (
           <FormItem>
@@ -58,7 +58,7 @@ const TransparencyStep = ({
       <FormField
         control={control}
         name="transparencyRiskSecurity"
-        rules={{ required: t('please-select-an-option') }}
+        rules={{ required: t('errors.pleaseSelectAnOption') }}
         defaultValue={initial?.transparencyRiskSecurity ?? ''}
         render={({ field }) => (
           <FormItem>

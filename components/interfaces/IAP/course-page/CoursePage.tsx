@@ -74,7 +74,7 @@ const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
       toast.success(t('iap-course-saved'));
       mutateProgress();
     } catch (e) {
-      toast.error('Something went wrong.');
+      toast.error(t('errors.somethingWentWrong'));
     }
   };
 

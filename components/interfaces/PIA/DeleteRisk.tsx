@@ -49,7 +49,7 @@ export default function DeleteRisk({
 
       const { error } = await res.json();
       if (!res.ok || error) {
-        toast.error(error?.message || 'Request failed');
+        toast.error(error?.message || t('errors.requestFailed'));
         return;
       }
 
@@ -57,7 +57,7 @@ export default function DeleteRisk({
       await mutate();
       setVisible(false);
     } catch {
-      toast.error('Something went wrong');
+      toast.error(t('errors.somethingWentWrong'));
     } finally {
       setIsDeleting(false);
     }
