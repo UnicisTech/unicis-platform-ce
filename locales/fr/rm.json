@@ -1,0 +1,48 @@
+{
+  "fields": {
+    "Risk": "Risque",
+    "AssetOwner": "Propriétaire de l’actif",
+    "Impact": "Impact",
+    "RawProbability": "Probabilité brute",
+    "RawImpact": "Impact brut",
+    "RiskTreatment": "Traitement du risque",
+    "TreatmentCost": "Coût du traitement",
+    "TreatmentStatus": "Statut du traitement",
+    "TreatedProbability": "Probabilité après traitement",
+    "TreatedImpact": "Impact après traitement"
+  },
+  "headers": {
+    "raw-risk-rating": "Évaluation du risque brut",
+    "treatment": "Traitement",
+    "target-risk-rating": "Évaluation cible du risque",
+    "current-risk-rating": "Évaluation actuelle du risque",
+    "risk-id": "ID du risque"
+  },
+  "steps": {
+    "riskAndImpact": "Risque et impact",
+    "riskTreatment": "Traitement du risque"
+  },
+  "descriptions": {
+    "risk": "Décrivez brièvement le risque de sécurité de l’information afin que chacun comprenne quel risque est évalué.",
+    "assetOwner": "Qui est le propriétaire de l’actif informationnel, la personne responsable si les mesures de traitement sont insuffisantes, si des incidents surviennent et si l’organisation est affectée ? Cette personne doit évaluer et traiter les risques de manière adéquate.",
+    "impact": "Décrivez les impacts potentiels en termes métier si le risque se réalise. Décidez d’utiliser de manière cohérente les impacts « pires cas » ou « attendus ».",
+    "rawProbability": "Saisissez la probabilité que le risque se produise sans traitement, en pourcentage.",
+    "rawImpact": "Saisissez l’impact métier potentiel si le risque se produisait sans aucun traitement, en pourcentage.",
+    "riskTreatment": "Décrivez comment le risque doit être traité (par ex. contrôlé, évité, transféré ou accepté).",
+    "treatmentStatus": "Dans quelle mesure le traitement prévu est-il en place ? 0 % signifie qu’un plan existe seulement ; 100 % signifie que le traitement est pleinement opérationnel.",
+    "treatedProbability": "Saisissez la probabilité que le risque se produise après atténuation.",
+    "treatedImpact": "Saisissez l’impact probable après atténuation. Les incidents dus à des défaillances de contrôle peuvent avoir des impacts plus élevés. Mettez en gras les valeurs traitées si elles diffèrent des valeurs brutes."
+  },
+  "placeholders": {
+    "riskDescription": "Saisissez la description du risque",
+    "assetOwner": "Sélectionnez un propriétaire",
+    "impactDescription": "Saisissez la description de l’impact",
+    "treatmentApproach": "Décrivez l’approche de traitement",
+    "costEstimate": "Saisissez l’estimation des coûts"
+  },
+  "form-labels": {
+    "TreatmentStatus": "Statut du traitement (%)",
+    "TreatedProbability": "Probabilité après traitement (%)",
+    "RawProbability": "Probabilité brute (%)"
+  }
+}

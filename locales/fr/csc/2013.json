@@ -1,0 +1,681 @@
+{
+  "sections": {
+    "info-sec-policies": {
+      "label": "Politiques de sécurité de l’information - Orientation de la direction en matière de sécurité de l’information"
+    },
+    "org-sec-internal": {
+      "label": "Organisation de la sécurité de l’information - Organisation interne"
+    },
+    "org-sec-mobile": {
+      "label": "Organisation de la sécurité de l’information - Appareils mobiles et télétravail"
+    },
+    "hr-pre-employment": {
+      "label": "Sécurité des ressources humaines - Avant l’embauche"
+    },
+    "hr-during-employment": {
+      "label": "Sécurité des ressources humaines - Pendant l’emploi"
+    },
+    "hr-termination-change": {
+      "label": "Sécurité des ressources humaines - Fin et changement d’emploi"
+    },
+    "asset-responsibility": {
+      "label": "Gestion des actifs - Responsabilité des actifs"
+    },
+    "asset-classification": {
+      "label": "Gestion des actifs - Classification de l’information"
+    },
+    "asset-media": {
+      "label": "Gestion des actifs - Gestion des supports"
+    },
+    "access-business-req": {
+      "label": "Contrôle d’accès - Exigences métiers du contrôle d’accès"
+    },
+    "access-user-mgmt": {
+      "label": "Contrôle d’accès - Gestion des accès utilisateurs"
+    },
+    "access-user-resp": {
+      "label": "Contrôle d’accès - Responsabilités des utilisateurs"
+    },
+    "access-sys-app": {
+      "label": "Contrôle d’accès - Contrôle d’accès aux systèmes et aux applications"
+    },
+    "crypto-controls": {
+      "label": "Cryptographie - Contrôles cryptographiques"
+    },
+    "physical-secure-areas": {
+      "label": "Sécurité physique et environnementale - Zones sécurisées"
+    },
+    "physical-equipment": {
+      "label": "Sécurité physique et environnementale - Équipements"
+    },
+    "ops-procedures": {
+      "label": "Sécurité des opérations - Procédures opérationnelles et responsabilités"
+    },
+    "ops-malware": {
+      "label": "Sécurité des opérations - Protection contre les malwares"
+    },
+    "ops-backup": {
+      "label": "Sécurité des opérations - Sauvegarde"
+    },
+    "ops-logging": {
+      "label": "Sécurité des opérations - Journalisation et supervision"
+    },
+    "ops-software-control": {
+      "label": "Sécurité des opérations - Contrôle des logiciels opérationnels"
+    },
+    "ops-vuln-mgmt": {
+      "label": "Sécurité des opérations - Gestion des vulnérabilités techniques"
+    },
+    "ops-audit-controls": {
+      "label": "Sécurité des opérations - Contrôles d’audit des systèmes d’information"
+    },
+    "comm-network": {
+      "label": "Sécurité des communications - Gestion de la sécurité des réseaux"
+    },
+    "comm-transfer": {
+      "label": "Sécurité des communications - Transfert d’informations"
+    },
+    "sys-acq-requirements": {
+      "label": "Acquisition, développement et maintenance des systèmes - Exigences de sécurité des systèmes d’information"
+    },
+    "sys-acq-dev-support": {
+      "label": "Acquisition, développement et maintenance des systèmes - Sécurité dans les processus de développement et de support"
+    },
+    "sys-acq-test-data": {
+      "label": "Acquisition, développement et maintenance des systèmes - Données de test"
+    },
+    "supplier-rel": {
+      "label": "Relations fournisseurs - Relations avec les fournisseurs"
+    },
+    "supplier-delivery": {
+      "label": "Relations fournisseurs - Gestion de la prestation de services des fournisseurs"
+    },
+    "incident-mgmt": {
+      "label": "Gestion des incidents de sécurité de l’information - Gestion des incidents de sécurité de l’information et améliorations"
+    },
+    "bcm-continuity": {
+      "label": "Aspects de sécurité de l’information de la gestion de la continuité d’activité - Continuité de la sécurité de l’information"
+    },
+    "bcm-redundancies": {
+      "label": "Aspects de sécurité de l’information de la gestion de la continuité d’activité - Redondances"
+    },
+    "compliance-legal": {
+      "label": "Conformité - Conformité aux exigences légales et contractuelles"
+    },
+    "compliance-reviews": {
+      "label": "Conformité - Revues de sécurité de l’information"
+    }
+  },
+  "controls": {
+    "iso-2013-a-5-1-1": {
+      "code": "A.5.1.1",
+      "control": "Politiques de sécurité de l’information",
+      "requirements": "Un ensemble de politiques relatives à la sécurité de l’information et à la cybersécurité doit être défini, approuvé par la direction (C-level), publié et communiqué aux employés et aux parties externes pertinentes."
+    },
+    "iso-2013-a-5-1-2": {
+      "code": "A.5.1.2",
+      "control": "Revue des politiques de sécurité de l’information",
+      "requirements": "Les politiques de sécurité de l’information et de cybersécurité doivent être revues à des intervalles planifiés ou en cas de changements significatifs, afin de garantir leur adéquation, leur pertinence, leur communication et leur efficacité continues."
+    },
+    "iso-2013-a-6-1-1": {
+      "code": "A.6.1.1",
+      "control": "Rôles et responsabilités en matière de sécurité de l’information",
+      "requirements": "Tous les rôles et responsabilités en matière de sécurité de l’information et de cybersécurité doivent être définis et attribués."
+    },
+    "iso-2013-a-6-1-2": {
+      "code": "A.6.1.2",
+      "control": "Séparation des tâches",
+      "requirements": "Les tâches incompatibles et les domaines de responsabilité doivent être séparés afin de réduire les possibilités de modification ou de mauvais usage des actifs de l’organisation sans autorisation, ou de manière involontaire."
+    },
+    "iso-2013-a-6-1-3": {
+      "code": "A.6.1.3",
+      "control": "Contact avec les autorités",
+      "requirements": "Il est nécessaire de maintenir des communications appropriées avec les autorités compétentes."
+    },
+    "iso-2013-a-6-1-4": {
+      "code": "A.6.1.4",
+      "control": "Contact avec des groupes d’intérêt particuliers",
+      "requirements": "Des relations appropriées doivent être établies avec des organisations d’intérêt particulier ou d’autres forums de sécurité professionnels, ainsi qu’avec des associations professionnelles."
+    },
+    "iso-2013-a-6-1-5": {
+      "code": "A.6.1.5",
+      "control": "Sécurité de l’information dans la gestion de projet",
+      "requirements": "Tout au long de la gestion de projet, la confidentialité de l’information doit être abordée, quel que soit le type de projet."
+    },
+    "iso-2013-a-6-2-1": {
+      "code": "A.6.2.1",
+      "control": "Politique relative aux appareils mobiles",
+      "requirements": "Pour gérer les risques introduits par l’utilisation d’appareils mobiles, une politique et des mesures de sécurité de soutien doivent être adoptées."
+    },
+    "iso-2013-a-6-2-2": {
+      "code": "A.6.2.2",
+      "control": "Télétravail",
+      "requirements": "Afin de protéger les informations accessibles, traitées ou stockées sur les sites de télétravail, une politique et des mesures de sécurité de soutien doivent être mises en œuvre."
+    },
+    "iso-2013-a-7-1-1": {
+      "code": "A.7.1.1",
+      "control": "Vérification des antécédents",
+      "requirements": "Des vérifications d’antécédents pour tous les candidats seront effectuées conformément aux règles, à la législation et à l’éthique applicables, et doivent être proportionnées aux critères métier, à la classification des informations à obtenir et aux risques potentiels."
+    },
+    "iso-2013-a-7-1-2": {
+      "code": "A.7.1.2",
+      "control": "Conditions d’emploi",
+      "requirements": "Les accords contractuels avec les employés et les sous-traitants doivent définir leurs responsabilités en matière de sécurité de l’information, et donc la responsabilité de l’entreprise."
+    },
+    "iso-2013-a-7-2-1": {
+      "code": "A.7.2.1",
+      "control": "Responsabilités de la direction",
+      "requirements": "La direction doit exiger que tous les employés et sous-traitants appliquent la sécurité de l’information conformément aux politiques et procédures établies par l’organisation."
+    },
+    "iso-2013-a-7-2-2": {
+      "code": "A.7.2.2",
+      "control": "Sensibilisation, éducation et formation à la sécurité de l’information",
+      "requirements": "Tous les employés et, si nécessaire, les sous-traitants doivent recevoir une sensibilisation, une éducation et une formation adéquates, ainsi que des mises à jour régulières sur les politiques et procédures de l’organisation, selon leur fonction."
+    },
+    "iso-2013-a-7-2-3": {
+      "code": "A.7.2.3",
+      "control": "Processus disciplinaire",
+      "requirements": "Un processus administratif formel et informé doit être en place pour prendre des mesures à l’encontre des employés ayant commis une violation de la sécurité de l’information."
+    },
+    "iso-2013-a-7-3-1": {
+      "code": "A.7.3.1",
+      "control": "Responsabilités lors de la fin ou du changement d’emploi",
+      "requirements": "Les responsabilités et exigences de sécurité de l’information/cybersécurité qui restent valables après la fin ou le changement d’emploi doivent être définies, communiquées et mises en œuvre par l’employé ou le sous-traitant."
+    },
+    "iso-2013-a-8-1-1": {
+      "code": "A.8.1.1",
+      "control": "Inventaire des actifs",
+      "requirements": "Les actifs liés à l’information et aux installations de traitement de l’information d’une organisation doivent être identifiés et recensés, et un inventaire de ces actifs doit être tenu à jour."
+    },
+    "iso-2013-a-8-1-2": {
+      "code": "A.8.1.2",
+      "control": "Propriété des actifs",
+      "requirements": "Les actifs figurant dans l’inventaire doivent avoir des propriétaires (propriétaire d’actif)."
+    },
+    "iso-2013-a-8-1-3": {
+      "code": "A.8.1.3",
+      "control": "Utilisation acceptable des actifs",
+      "requirements": "Des règles doivent être définies, documentées et mises en œuvre pour l’utilisation acceptable des informations et des actifs liés aux informations et aux installations de traitement de l’information."
+    },
+    "iso-2013-a-8-1-4": {
+      "code": "A.8.1.4",
+      "control": "Restitution des actifs",
+      "requirements": "Les employés et les parties externes doivent restituer tous les actifs de l’organisation en leur possession à la fin de leur emploi, contrat ou accord."
+    },
+    "iso-2013-a-8-2-1": {
+      "code": "A.8.2.1",
+      "control": "Classification de l’information",
+      "requirements": "L’information doit être classée sur la base des dispositions légales, de sa criticité et de sa vulnérabilité à une divulgation ou une altération non souhaitée."
+    },
+    "iso-2013-a-8-2-2": {
+      "code": "A.8.2.2",
+      "control": "Étiquetage de l’information",
+      "requirements": "Conformément au schéma de classification adopté par l’organisation, un ensemble adéquat de méthodes d’étiquetage de l’information doit être défini et mis en œuvre."
+    },
+    "iso-2013-a-8-2-3": {
+      "code": "A.8.2.3",
+      "control": "Traitement des actifs",
+      "requirements": "Le traitement des actifs conformément au schéma de classification de l’information de l’organisation doit être défini et mis en œuvre."
+    },
+    "iso-2013-a-8-3-1": {
+      "code": "A.8.3.1",
+      "control": "Gestion des supports amovibles",
+      "requirements": "Des procédures doivent être mises en œuvre pour la gestion des supports amovibles conformément au schéma de classification adopté par l’organisation."
+    },
+    "iso-2013-a-8-3-2": {
+      "code": "A.8.3.2",
+      "control": "Élimination des supports",
+      "requirements": "Lorsqu’ils ne sont pas requis par des protocoles spécifiques, les supports doivent être éliminés de manière sécurisée."
+    },
+    "iso-2013-a-8-3-3": {
+      "code": "A.8.3.3",
+      "control": "Transfert de supports physiques",
+      "requirements": "Les supports d’information doivent être protégés contre l’accès non autorisé, l’usage abusif ou la corruption pendant le transport."
+    },
+    "iso-2013-a-9-1-1": {
+      "code": "A.9.1.1",
+      "control": "Politique de contrôle d’accès",
+      "requirements": "Une politique de contrôle d’accès, accompagnée d’exigences métiers et de sécurité de l’information, doit être définie, documentée et revue."
+    },
+    "iso-2013-a-9-1-2": {
+      "code": "A.9.1.2",
+      "control": "Accès aux réseaux et aux services réseau",
+      "requirements": "Seuls les réseaux et les installations réseau expressément approuvés pour l’utilisation doivent être mis à la disposition des utilisateurs."
+    },
+    "iso-2013-a-9-2-1": {
+      "code": "A.9.2.1",
+      "control": "Enregistrement et désenregistrement des utilisateurs",
+      "requirements": "Seuls les réseaux et les installations réseau expressément approuvés pour l’utilisation doivent être mis à la disposition des utilisateurs."
+    },
+    "iso-2013-a-9-2-2": {
+      "code": "A.9.2.2",
+      "control": "Attribution des accès utilisateurs",
+      "requirements": "Un processus formel d’attribution des accès doit être mis en place pour accorder ou retirer les privilèges d’accès à toutes les catégories d’utilisateurs pour tous les systèmes et services."
+    },
+    "iso-2013-a-9-2-3": {
+      "code": "A.9.2.3",
+      "control": "Gestion des droits d’accès privilégiés",
+      "requirements": "Une procédure d’autorisation structurée, conforme aux politiques de gestion des accès, doit encadrer l’attribution et l’usage des privilèges d’accès délégués."
+    },
+    "iso-2013-a-9-2-4": {
+      "code": "A.9.2.4",
+      "control": "Gestion des informations d’authentification secrètes des utilisateurs",
+      "requirements": "Un processus de gestion structuré doit contrôler l’attribution des informations d’authentification secrètes."
+    },
+    "iso-2013-a-9-2-5": {
+      "code": "A.9.2.5",
+      "control": "Revue des droits d’accès des utilisateurs",
+      "requirements": "Les droits d’accès des utilisateurs doivent être revus régulièrement par les propriétaires d’actifs."
+    },
+    "iso-2013-a-9-2-6": {
+      "code": "A.9.2.6",
+      "control": "Suppression ou ajustement des droits d’accès",
+      "requirements": "Les droits d’accès de tous les employés et utilisateurs externes aux informations et aux installations de traitement de l’information doivent être supprimés à la fin d’un emploi, contrat ou accord, ou modifiés en cas d’ajustement."
+    },
+    "iso-2013-a-9-3-1": {
+      "code": "A.9.3.1",
+      "control": "Utilisation des informations d’authentification secrètes des utilisateurs",
+      "requirements": "L’utilisation des informations d’authentification secrètes doit être autorisée pour permettre aux utilisateurs de suivre les pratiques de l’organisation."
+    },
+    "iso-2013-a-9-4-1": {
+      "code": "A.9.4.1",
+      "control": "Restriction d’accès à l’information",
+      "requirements": "Les contrôles d’accès doivent être basés sur les exigences individuelles des applications métier et conformes à une politique de contrôle d’accès spécifiée."
+    },
+    "iso-2013-a-9-4-2": {
+      "code": "A.9.4.2",
+      "control": "Procédures de connexion sécurisée",
+      "requirements": "L’accès aux systèmes et aux applications doit être contrôlé par une procédure de connexion sécurisée lorsqu’elle est requise par la politique de contrôle d’accès."
+    },
+    "iso-2013-a-9-4-3": {
+      "code": "A.9.4.3",
+      "control": "Système de gestion des mots de passe",
+      "requirements": "Les systèmes de gestion des mots de passe doivent contribuer à garantir la qualité des mots de passe."
+    },
+    "iso-2013-a-9-4-4": {
+      "code": "A.9.4.4",
+      "control": "Utilisation de programmes utilitaires privilégiés",
+      "requirements": "L’utilisation de programmes utilitaires pouvant contourner les contrôles des systèmes et des applications doit être limitée et strictement contrôlée."
+    },
+    "iso-2013-a-9-4-5": {
+      "code": "A.9.4.5",
+      "control": "Contrôle d’accès au code source des programmes",
+      "requirements": "L’accès au code source du programme doit être limité."
+    },
+    "iso-2013-a-10-1-1": {
+      "code": "A.10.1.1",
+      "control": "Politique d’utilisation des contrôles cryptographiques",
+      "requirements": "Une politique d’utilisation des contrôles cryptographiques pour la protection de l’information doit être élaborée et mise en œuvre."
+    },
+    "iso-2013-a-10-1-2": {
+      "code": "A.10.1.2",
+      "control": "Gestion des clés",
+      "requirements": "Une politique relative à l’utilisation, la sécurité et la durée de vie des clés cryptographiques doit être définie et appliquée sur l’ensemble de leur cycle de vie."
+    },
+    "iso-2013-a-11-1-1": {
+      "code": "A.11.1.1",
+      "control": "Périmètre de sécurité physique",
+      "requirements": "Des périmètres de sécurité doivent être établis afin de sécuriser les zones contenant des informations sensibles ou confidentielles, ainsi que des installations de traitement de l’information."
+    },
+    "iso-2013-a-11-1-2": {
+      "code": "A.11.1.2",
+      "control": "Contrôles d’entrée physiques",
+      "requirements": "Des contrôles d’accès appropriés doivent protéger les lieux afin de garantir que seuls les employés autorisés puissent y accéder."
+    },
+    "iso-2013-a-11-1-3": {
+      "code": "A.11.1.3",
+      "control": "Sécurisation des bureaux, locaux et installations",
+      "requirements": "La sécurité physique doit être conçue et mise en œuvre pour les bureaux, les locaux et les installations."
+    },
+    "iso-2013-a-11-1-4": {
+      "code": "A.11.1.4",
+      "control": "Protection contre les menaces externes et environnementales",
+      "requirements": "Une protection physique doit être conçue et appliquée contre les catastrophes naturelles, les attaques malveillantes ou les accidents."
+    },
+    "iso-2013-a-11-1-5": {
+      "code": "A.11.1.5",
+      "control": "Travail dans des zones sécurisées",
+      "requirements": "Des procédures doivent être conçues et mises en œuvre pour travailler dans des zones sécurisées."
+    },
+    "iso-2013-a-11-1-6": {
+      "code": "A.11.1.6",
+      "control": "Zones de livraison et de chargement",
+      "requirements": "Il est important de surveiller et, lorsque possible, de différencier les points d’accès tels que les zones de livraison et de chargement et d’autres emplacements, afin d’éviter l’accès non autorisé de personnes non autorisées aux locaux."
+    },
+    "iso-2013-a-11-2-1": {
+      "code": "A.11.2.1",
+      "control": "Implantation et protection des équipements",
+      "requirements": "Pour réduire le risque lié aux dangers environnementaux, aux risques et à l’accès non autorisé, les équipements doivent être correctement implantés et sécurisés."
+    },
+    "iso-2013-a-11-2-2": {
+      "code": "A.11.2.2",
+      "control": "Services de support",
+      "requirements": "Les équipements doivent être protégés contre les pannes d’alimentation et autres perturbations dues à des défaillances des infrastructures de support."
+    },
+    "iso-2013-a-11-2-3": {
+      "code": "A.11.2.3",
+      "control": "Sécurité du câblage",
+      "requirements": "Les câbles d’alimentation et de télécommunications qui transportent des données ou supportent des services doivent être protégés contre l’interception, les interférences ou les dommages."
+    },
+    "iso-2013-a-11-2-4": {
+      "code": "A.11.2.4",
+      "control": "Maintenance des équipements",
+      "requirements": "Afin d’assurer sa disponibilité et son intégrité, l’équipement doit être correctement entretenu."
+    },
+    "iso-2013-a-11-2-5": {
+      "code": "A.11.2.5",
+      "control": "Retrait des actifs",
+      "requirements": "Sans autorisation préalable, les équipements, les informations ou les logiciels ne doivent pas être emportés hors site."
+    },
+    "iso-2013-a-11-2-6": {
+      "code": "A.11.2.6",
+      "control": "Sécurité des équipements et actifs hors site",
+      "requirements": "La sécurité des actifs hors site doit être appliquée en tenant compte des différents risques liés au travail en dehors des locaux de l’organisation."
+    },
+    "iso-2013-a-11-2-7": {
+      "code": "A.11.2.7",
+      "control": "Élimination ou réutilisation sécurisée des équipements",
+      "requirements": "Afin d’éviter la récupération ou l’écrasement insuffisant de données sensibles et de logiciels lors de l’élimination ou de la réutilisation d’un équipement contenant un support de stockage, tous les équipements doivent être examinés."
+    },
+    "iso-2013-a-11-2-8": {
+      "code": "A.11.2.8",
+      "control": "Équipements utilisateur laissés sans surveillance",
+      "requirements": "Les équipements laissés sans surveillance doivent être correctement protégés par les utilisateurs."
+    },
+    "iso-2013-a-11-2-9": {
+      "code": "A.11.2.9",
+      "control": "Politique de bureau rangé et d’écran verrouillé",
+      "requirements": "Une politique de bureau rangé doit être adoptée pour les documents papier et les supports amovibles, et une politique d’écran verrouillé doit être appliquée aux installations de traitement de l’information."
+    },
+    "iso-2013-a-12-1-1": {
+      "code": "A.12.1.1",
+      "control": "Procédures d’exploitation documentées",
+      "requirements": "Les procédures d’exploitation doivent être documentées et accessibles à tous les utilisateurs qui en ont besoin."
+    },
+    "iso-2013-a-12-1-2": {
+      "code": "A.12.1.2",
+      "control": "Gestion des changements",
+      "requirements": "Les changements au sein de l’organisation, des procédures organisationnelles, des installations de traitement de l’information et des systèmes de sécurité de l’information doivent être contrôlés."
+    },
+    "iso-2013-a-12-1-3": {
+      "code": "A.12.1.3",
+      "control": "Gestion de la capacité",
+      "requirements": "Afin d’assurer les performances nécessaires du système, l’utilisation des ressources doit être surveillée, ajustée et projetée en fonction des besoins futurs de capacité."
+    },
+    "iso-2013-a-12-1-4": {
+      "code": "A.12.1.4",
+      "control": "Séparation des environnements de développement, de test et d’exploitation",
+      "requirements": "Il est important de définir et d’appliquer un niveau de séparation adéquat entre les environnements de développement, de test et d’exploitation afin d’éviter des problèmes opérationnels."
+    },
+    "iso-2013-a-12-2-1": {
+      "code": "A.12.2.1",
+      "control": "Contrôles contre les malwares",
+      "requirements": "En combinaison avec une sensibilisation appropriée des utilisateurs, des contrôles de détection, de prévention et de reprise pour se protéger contre les malwares doivent être mis en œuvre."
+    },
+    "iso-2013-a-12-3-1": {
+      "code": "A.12.3.1",
+      "control": "Sauvegarde de l’information",
+      "requirements": "Conformément à la politique de sauvegarde convenue, des copies des enregistrements, programmes et images des équipements doivent être réalisées et testées régulièrement."
+    },
+    "iso-2013-a-12-4-1": {
+      "code": "A.12.4.1",
+      "control": "Journalisation des événements",
+      "requirements": "Des journaux d’événements doivent être produits, conservés et revus régulièrement afin d’enregistrer les activités des utilisateurs, les exceptions, les anomalies et les événements de sécurité de l’information."
+    },
+    "iso-2013-a-12-4-2": {
+      "code": "A.12.4.2",
+      "control": "Protection des informations de journalisation",
+      "requirements": "La journalisation et les informations de journalisation doivent être protégées contre l’intrusion et l’accès non autorisé."
+    },
+    "iso-2013-a-12-4-3": {
+      "code": "A.12.4.3",
+      "control": "Journaux des administrateurs et des opérateurs",
+      "requirements": "Les activités de l’administrateur système et de l’opérateur système doivent être journalisées, et les journaux doivent être conservés en sécurité et surveillés de près."
+    },
+    "iso-2013-a-12-4-4": {
+      "code": "A.12.4.4",
+      "control": "Synchronisation des horloges",
+      "requirements": "Les horloges de tous les systèmes de gestion de l’information concernés doivent être synchronisées avec une source de temps de référence unique pour l’organisation ou le domaine de sécurité."
+    },
+    "iso-2013-a-12-5-1": {
+      "code": "A.12.5.1",
+      "control": "Installation de logiciels sur les systèmes opérationnels",
+      "requirements": "Des procédures doivent être mises en œuvre pour contrôler l’installation de logiciels sur les systèmes opérationnels."
+    },
+    "iso-2013-a-12-6-1": {
+      "code": "A.12.6.1",
+      "control": "Gestion des vulnérabilités techniques",
+      "requirements": "Les informations sur les vulnérabilités technologiques des systèmes d’information utilisés doivent être obtenues en temps utile, l’exposition de l’organisation à ces vulnérabilités doit être évaluée et des mesures appropriées doivent être prises pour traiter le risque associé."
+    },
+    "iso-2013-a-12-6-2": {
+      "code": "A.12.6.2",
+      "control": "Restrictions sur l’installation de logiciels",
+      "requirements": "Les utilisateurs doivent définir et appliquer des règles régissant l’installation de logiciels."
+    },
+    "iso-2013-a-12-7-1": {
+      "code": "A.12.7.1",
+      "control": "Contrôles d’audit des systèmes d’information",
+      "requirements": "Les critères d’audit et les activités liées à la vérification des systèmes d’exploitation doivent être soigneusement préparés et décidés afin de réduire les perturbations des processus métier."
+    },
+    "iso-2013-a-13-1-1": {
+      "code": "A.13.1.1",
+      "control": "Contrôles réseau",
+      "requirements": "Pour protéger l’information dans les systèmes et les applications, les réseaux doivent être gérés et surveillés."
+    },
+    "iso-2013-a-13-1-2": {
+      "code": "A.13.1.2",
+      "control": "Sécurité des services réseau",
+      "requirements": "Les protocoles de sécurité, la qualité de service et les critères de gestion pour tous les services réseau, qu’ils soient internes ou externalisés, doivent être définis et inclus dans les accords de services réseau."
+    },
+    "iso-2013-a-13-1-3": {
+      "code": "A.13.1.3",
+      "control": "Segmentation des réseaux",
+      "requirements": "Une segmentation des réseaux doit être mise en place pour les services d’information, les utilisateurs et les systèmes d’information."
+    },
+    "iso-2013-a-13-2-1": {
+      "code": "A.13.2.1",
+      "control": "Politiques et procédures de transfert d’informations",
+      "requirements": "Afin de protéger les destinataires lors de l’utilisation de tous types de moyens de communication, des politiques, procédures et contrôles officiels de transfert doivent être élaborés."
+    },
+    "iso-2013-a-13-2-2": {
+      "code": "A.13.2.2",
+      "control": "Accords sur le transfert d’informations",
+      "requirements": "Des accords doivent couvrir les transferts sécurisés d’informations métier entre l’organisation et des parties externes."
+    },
+    "iso-2013-a-13-2-3": {
+      "code": "A.13.2.3",
+      "control": "Messagerie électronique",
+      "requirements": "Les informations de messagerie électronique doivent être correctement protégées."
+    },
+    "iso-2013-a-13-2-4": {
+      "code": "A.13.2.4",
+      "control": "Accords de confidentialité ou de non-divulgation",
+      "requirements": "Les exigences de protection de l’information de l’organisation pour les accords de confidentialité ou de non-divulgation doivent être identifiées, revues régulièrement et documentées."
+    },
+    "iso-2013-a-14-1-1": {
+      "code": "A.14.1.1",
+      "control": "Exigences de sécurité des systèmes d’information",
+      "requirements": "Les exigences de sécurité de l’information pour les nouveaux systèmes d’information ou les améliorations des systèmes existants doivent être incluses."
+    },
+    "iso-2013-a-14-1-2": {
+      "code": "A.14.1.2",
+      "control": "Sécurisation des services applicatifs sur les réseaux publics",
+      "requirements": "Les services applicatifs transitant par des réseaux publics doivent être protégés contre les activités frauduleuses, les litiges contractuels, la divulgation non autorisée et la modification."
+    },
+    "iso-2013-a-14-1-3": {
+      "code": "A.14.1.3",
+      "control": "Protection des transactions des services applicatifs",
+      "requirements": "Afin d’éviter les transmissions incomplètes, les erreurs d’acheminement, les modifications non autorisées, la diffusion non autorisée, la réplication non autorisée ou la relecture, les informations relatives aux transactions des services applicatifs doivent être protégées."
+    },
+    "iso-2013-a-14-2-1": {
+      "code": "A.14.2.1",
+      "control": "Politique de développement sécurisé",
+      "requirements": "Des règles relatives au développement de logiciels et de systèmes doivent être établies et appliquées aux développements de l’organisation."
+    },
+    "iso-2013-a-14-2-2": {
+      "code": "A.14.2.2",
+      "control": "Procédures de contrôle des changements système",
+      "requirements": "Les changements de processus peuvent être gérés par la mise en œuvre de procédures structurées de contrôle des changements tout au long du cycle de vie logiciel."
+    },
+    "iso-2013-a-14-2-3": {
+      "code": "A.14.2.3",
+      "control": "Revue technique des applications après des changements de plateforme d’exploitation",
+      "requirements": "Lors de changements de plateformes d’exploitation, les applications métier critiques doivent être revues et testées afin de s’assurer qu’il n’y a pas d’impact négatif sur le métier ou la sécurité."
+    },
+    "iso-2013-a-14-2-4": {
+      "code": "A.14.2.4",
+      "control": "Restrictions sur les changements apportés aux progiciels",
+      "requirements": "Les modifications des progiciels doivent être découragées, limitées aux modifications nécessaires, et toutes les modifications doivent être strictement contrôlées."
+    },
+    "iso-2013-a-14-2-5": {
+      "code": "A.14.2.5",
+      "control": "Principes d’ingénierie des systèmes sécurisés",
+      "requirements": "Pour tout projet de mise en œuvre d’un système d’information, des standards d’ingénierie de systèmes sécurisés doivent être établis, documentés, maintenus et appliqués."
+    },
+    "iso-2013-a-14-2-6": {
+      "code": "A.14.2.6",
+      "control": "Environnement de développement sécurisé",
+      "requirements": "Les organisations doivent créer des environnements de développement sécurisés et des efforts d’intégration sur l’ensemble du cycle de vie du développement des systèmes, et ils doivent être suffisamment protégés."
+    },
+    "iso-2013-a-14-2-7": {
+      "code": "A.14.2.7",
+      "control": "Développement externalisé",
+      "requirements": "L’organisation doit surveiller les activités liées au développement du système externalisé."
+    },
+    "iso-2013-a-14-2-8": {
+      "code": "A.14.2.8",
+      "control": "Tests de sécurité du système",
+      "requirements": "Pendant le développement, des tests de la fonctionnalité de sécurité doivent être réalisés."
+    },
+    "iso-2013-a-14-2-9": {
+      "code": "A.14.2.9",
+      "control": "Tests d’acceptation du système",
+      "requirements": "Les nouveaux systèmes d’information, les améliorations et les versions mises à jour doivent être soumis à des tests d’acceptation et aux exigences associées."
+    },
+    "iso-2013-a-14-3-1": {
+      "code": "A.14.3.1",
+      "control": "Protection des données de test",
+      "requirements": "La collecte, la protection et la revue des données de test doivent être réalisées avec soin."
+    },
+    "iso-2013-a-15-1-1": {
+      "code": "A.15.1.1",
+      "control": "Politique de sécurité de l’information pour les relations fournisseurs",
+      "requirements": "Les exigences de sécurité de l’information liées à l’atténuation des risques d’accès des fournisseurs aux actifs de l’organisation doivent être convenues et documentées."
+    },
+    "iso-2013-a-15-1-2": {
+      "code": "A.15.1.2",
+      "control": "Prise en compte de la sécurité dans les accords avec les fournisseurs",
+      "requirements": "Tout fournisseur qui consulte, traite, stocke, communique des informations ou fournit des composants d’infrastructure informatique pour l’organisation doit être défini, et toutes les exigences applicables de sécurité de l’information doivent être convenues."
+    },
+    "iso-2013-a-15-1-3": {
+      "code": "A.15.1.3",
+      "control": "Chaîne d’approvisionnement des technologies de l’information et de la communication",
+      "requirements": "Les accords fournisseurs doivent contenir des dispositions visant à atténuer les risques de sécurité de l’information liés aux services informatiques et à la chaîne d’approvisionnement des produits."
+    },
+    "iso-2013-a-15-2-1": {
+      "code": "A.15.2.1",
+      "control": "Surveillance et revue des services fournisseurs",
+      "requirements": "Les organisations doivent surveiller, revoir et auditer la prestation de service des fournisseurs sur une base régulière."
+    },
+    "iso-2013-a-15-2-2": {
+      "code": "A.15.2.2",
+      "control": "Gestion des changements des services fournisseurs",
+      "requirements": "Les changements dans la prestation de services par les fournisseurs doivent être gérés en tenant compte de la criticité des informations, systèmes et processus de l’entreprise, avec une réévaluation des risques, et doivent inclure le maintien et l’amélioration des politiques, procédures et contrôles existants de sécurité de l’information."
+    },
+    "iso-2013-a-16-1-1": {
+      "code": "A.16.1.1",
+      "control": "Responsabilités et procédures",
+      "requirements": "Afin d’assurer une réponse rapide, efficace et organisée, les rôles et procédures de gestion des incidents de sécurité de l’information (ISO 27001 Annexe A.16) doivent être définis."
+    },
+    "iso-2013-a-16-1-2": {
+      "code": "A.16.1.2",
+      "control": "Signalement des événements de sécurité de l’information",
+      "requirements": "Les incidents de sécurité de l’information doivent être signalés aussi rapidement que possible via des canaux de gestion appropriés."
+    },
+    "iso-2013-a-16-1-3": {
+      "code": "A.16.1.3",
+      "control": "Signalement des faiblesses de sécurité de l’information",
+      "requirements": "Toute vulnérabilité de sécurité de l’information détectée ou suspectée dans des systèmes ou services utilisés par les employés et sous-traitants doit être enregistrée et documentée."
+    },
+    "iso-2013-a-16-1-4": {
+      "code": "A.16.1.4",
+      "control": "Évaluation et décision concernant les événements de sécurité de l’information",
+      "requirements": "Les événements de sécurité de l’information doivent être analysés afin de déterminer s’ils doivent être classés comme incidents de sécurité de l’information."
+    },
+    "iso-2013-a-16-1-5": {
+      "code": "A.16.1.5",
+      "control": "Réponse aux incidents de sécurité de l’information",
+      "requirements": "Dans le cadre des procédures documentées, les incidents de sécurité de l’information doivent être traités."
+    },
+    "iso-2013-a-16-1-6": {
+      "code": "A.16.1.6",
+      "control": "Retour d’expérience des incidents de sécurité de l’information",
+      "requirements": "Afin de minimiser le risque ou l’impact d’incidents potentiels, l’expérience tirée de l’analyse et du traitement des incidents de sécurité de l’information doit être utilisée."
+    },
+    "iso-2013-a-16-1-7": {
+      "code": "A.16.1.7 ",
+      "control": "Collecte de preuves",
+      "requirements": "L’organisation doit définir des procédures pour obtenir, collecter et conserver des informations à titre de preuves et de documentation, et les mettre en œuvre."
+    },
+    "iso-2013-a-17-1-1": {
+      "code": "A.17.1.1",
+      "control": "Planification de la continuité de la sécurité de l’information",
+      "requirements": "En cas de circonstances défavorables, par exemple pendant une crise ou une catastrophe, l’entreprise doit définir les exigences et la cohérence de la gestion de la sécurité de l’information."
+    },
+    "iso-2013-a-17-1-2": {
+      "code": "A.17.1.2",
+      "control": "Mise en œuvre de la continuité de la sécurité de l’information",
+      "requirements": "Afin d’assurer le niveau nécessaire de continuité de la sécurité de l’information en circonstances défavorables, l’entreprise doit définir, documenter, exécuter et maintenir des processus, procédures et contrôles."
+    },
+    "iso-2013-a-17-1-3": {
+      "code": "A.17.1.3",
+      "control": "Vérifier, revoir et évaluer la continuité de la sécurité de l’information",
+      "requirements": "Afin d’assurer une réponse adéquate et efficace en circonstances défavorables, l’entreprise doit revoir les contrôles de sécurité de l’information définis et appliqués à des intervalles réguliers."
+    },
+    "iso-2013-a-17-2-1": {
+      "code": "A.17.2.1",
+      "control": "Disponibilité des installations de traitement de l’information",
+      "requirements": "Les installations de traitement de l’information doivent être mises en œuvre avec une redondance suffisante pour répondre aux exigences de disponibilité. La redondance consiste généralement à mettre en place du matériel en double afin de garantir la disponibilité des systèmes de traitement de l’information."
+    },
+    "iso-2013-a-18-1-1": {
+      "code": "A.18.1.1",
+      "control": "Identification de la législation applicable et des exigences contractuelles",
+      "requirements": "Chaque système d’information et l’organisation doivent identifier, documenter et mettre à jour toutes les exigences légales, réglementaires et contractuelles pertinentes, ainsi que l’approche de l’organisation vis-à-vis de leur conformité."
+    },
+    "iso-2013-a-18-1-2": {
+      "code": "A.18.1.2",
+      "control": "Droits de propriété intellectuelle",
+      "requirements": "Des procédures appropriées doivent être suivies afin de garantir le respect des dispositions légales, réglementaires et contractuelles relatives à la propriété intellectuelle et à l’utilisation de logiciels propriétaires."
+    },
+    "iso-2013-a-18-1-3": {
+      "code": "A.18.1.3",
+      "control": "Protection des enregistrements",
+      "requirements": "Conformément aux exigences légales, réglementaires, contractuelles et métier, les enregistrements doivent être protégés contre la perte, la destruction, la falsification, ainsi que l’accès et la divulgation non autorisés."
+    },
+    "iso-2013-a-18-1-4": {
+      "code": "A.18.1.4",
+      "control": "Protection de la vie privée et des informations personnellement identifiables",
+      "requirements": "La protection de la vie privée et des données personnelles doit être assurée, conformément aux lois et réglementations applicables."
+    },
+    "iso-2013-a-18-1-5": {
+      "code": "A.18.1.5",
+      "control": "Réglementation des contrôles cryptographiques",
+      "requirements": "Conformément à tous les accords, lois et réglementations pertinents, des contrôles cryptographiques doivent être utilisés."
+    },
+    "iso-2013-a-18-2-1": {
+      "code": "A.18.2.1",
+      "control": "Revue indépendante de la sécurité de l’information",
+      "requirements": "Chaque système d’information et l’organisation doivent identifier, documenter et mettre à jour toutes les exigences légales, réglementaires et contractuelles pertinentes, ainsi que l’approche de l’organisation vis-à-vis de leur conformité."
+    },
+    "iso-2013-a-18-2-2": {
+      "code": "A.18.2.2",
+      "control": "Conformité aux politiques et standards de sécurité",
+      "requirements": "Des procédures appropriées doivent être suivies afin de garantir le respect des dispositions légales, réglementaires et contractuelles relatives à la propriété intellectuelle et à l’utilisation de logiciels propriétaires."
+    },
+    "iso-2013-a-18-2-3": {
+      "code": "A.18.2.3",
+      "control": "Revue de conformité technique",
+      "requirements": "Les systèmes d’information doivent être revus périodiquement afin de vérifier leur conformité aux politiques et pratiques de sécurité de l’information de l’organisation."
+    }
+  }
+}
