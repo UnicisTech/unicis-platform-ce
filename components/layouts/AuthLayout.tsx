@@ -1,6 +1,7 @@
 import app from '@/lib/app';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
+import LocaleDropdown from '@/components/shared/LocaleDropdown';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -16,7 +17,10 @@ export default function AuthLayout({
   const { t } = useTranslation('common');
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-20 lg:px-8">
+    <div className="relative flex min-h-full flex-1 flex-col justify-center px-6 py-20 lg:px-8">
+      <div className="absolute right-4 top-4 sm:right-6 sm:top-6">
+        <LocaleDropdown />
+      </div>
       <div className="sm:mx-auto sm:w-full sm:max-w-sm text-center">
         <Image
           src="/unicis-platform-logo-ver-cropped.svg"
