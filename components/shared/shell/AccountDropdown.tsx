@@ -26,11 +26,7 @@ import {
   GlobeAltIcon,
   LanguageIcon,
 } from '@heroicons/react/24/outline';
-
-const localeLabels: Record<string, string> = {
-  en: 'English',
-  fr: 'Français',
-};
+import localeLabels from '@/lib/i18n/localeLabels';
 
 const AccountDropdown: React.FC = () => {
   const { data } = useSession();

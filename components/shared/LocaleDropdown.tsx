@@ -8,11 +8,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/shadcn/ui/dropdown-menu';
 import { Button } from '@/components/shadcn/ui/button';
-
-const localeLabels: Record<string, string> = {
-  en: 'English',
-  fr: 'Français',
-};
+import localeLabels from '@/lib/i18n/localeLabels';
 
 const LocaleDropdown: React.FC = () => {
   const router = useRouter();
