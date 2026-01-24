@@ -1,0 +1,308 @@
+{
+    "sections": {
+        "notice-consent": {
+            "label": "Information et consentement"
+        },
+        "data-mgmt": {
+            "label": "Gestion des données"
+        },
+        "data-subject-rights": {
+            "label": "Droits des personnes concernées"
+        },
+        "accountability": {
+            "label": "Responsabilité et redevabilité"
+        },
+        "security": {
+            "label": "Sécurité"
+        },
+        "disclosure": {
+            "label": "Divulgation"
+        },
+        "dpo": {
+            "label": "DPD"
+        },
+        "privacy-sdlc": {
+            "label": "Protection des données dans le cycle de développement (SDLC)"
+        },
+        "intl-transfers": {
+            "label": "Transferts internationaux"
+        }
+    },
+    "controls": {
+        "gdpr-art-12-13": {
+            "code": "Art. 12, 13",
+            "control": "Notice d’information",
+            "requirements": "L’organisation définit et documente un processus visant à informer les utilisateurs au moyen d’une notice d’information lors de la collecte et du traitement de leurs données à caractère personnel."
+        },
+        "gdpr-art-13-14": {
+            "code": "Art. 13, 14",
+            "control": "Notice d’information mise à jour",
+            "requirements": "L’organisation informe les utilisateurs en temps utile de toute modification du traitement des données à caractère personnel."
+        },
+        "gdpr-art-7-12": {
+            "code": "Art. 7, 12",
+            "control": "Politique de cookies",
+            "requirements": "L’organisation affiche une bannière de consentement aux cookies permettant aux utilisateurs d’accepter ou de refuser la politique de cookies."
+        },
+        "gdpr-art-7-banner": {
+            "code": "Art. 7",
+            "control": "Cookies — Bannière",
+            "requirements": "L’organisation obtient le consentement des personnes concernées pour les activités de traitement lorsque le consentement constitue la base juridique."
+        },
+        "gdpr-art-7-consent-obtain": {
+            "code": "Art. 7",
+            "control": "Consentement — Obtention",
+            "requirements": "L’organisation conserve des enregistrements des consentements donnés par les personnes concernées."
+        },
+        "gdpr-art-7-consent-record": {
+            "code": "Art. 7",
+            "control": "Consentement — Enregistrement",
+            "requirements": "L’organisation permet aux personnes concernées de retirer leur consentement."
+        },
+        "gdpr-art-8-consent-obtain-withdrawal": {
+            "code": "Art. 8",
+            "control": "Consentement — Obtention et retrait",
+            "requirements": "L’organisation collecte les données des utilisateurs après avoir obtenu leur consentement."
+        },
+        "gdpr-art-8-parental-consent": {
+            "code": "Art. 8",
+            "control": "Consentement parental",
+            "requirements": "L’organisation collecte des données après avoir obtenu un consentement parental vérifiable pour le traitement des données à caractère personnel d’enfants en dessous de l’âge légal."
+        },
+        "gdpr-art-30-personal-data-inventory": {
+            "code": "Art. 30",
+            "control": "Inventaire des données à caractère personnel",
+            "requirements": "L’organisation a élaboré et maintient des inventaires des données à caractère personnel pour toutes les activités de traitement."
+        },
+        "gdpr-art-5-purpose-limitation": {
+            "code": "Art. 5",
+            "control": "Limitation des finalités",
+            "requirements": "Les attributs de données à caractère personnel traités par l’organisation sont limités au strict nécessaire pour atteindre la finalité déclarée."
+        },
+        "gdpr-art-5-17-18-21-data-minimization": {
+            "code": "Art. 5, 17, 18, 21",
+            "control": "Minimisation des données",
+            "requirements": "L’organisation a mis en œuvre un processus d’attribution et de retrait des accès des utilisateurs aux données à caractère personnel."
+        },
+        "gdpr-art-5-retention-timelines": {
+            "code": "Art. 5",
+            "control": "Délais de conservation",
+            "requirements": "L’organisation identifie et définit des durées de conservation des données à caractère personnel conformément aux exigences légales et contractuelles."
+        },
+        "gdpr-art-32-insights-data-aggregation": {
+            "code": "Art. 32",
+            "control": "Insights — Agrégation des données",
+            "requirements": "L’organisation veille à ce que les informations (insights) générées à partir de données à caractère personnel au moyen de moteurs d’analytique tiers soient agrégées."
+        },
+        "gdpr-art-15-anonymization": {
+            "code": "Art. 15",
+            "control": "Anonymisation",
+            "requirements": "L’organisation anonymise et désidentifie, dans la mesure du possible, les attributs de données à caractère personnel."
+        },
+        "gdpr-art-15-access": {
+            "code": "Art. 15",
+            "control": "Accès",
+            "requirements": "L’organisation met en place des mécanismes permettant aux personnes concernées d’accéder à leurs données."
+        },
+        "gdpr-art-5-16-19-accuracy-update": {
+            "code": "Art. 5, 16, 19",
+            "control": "Exactitude / Mise à jour",
+            "requirements": "L’organisation permet aux personnes concernées de mettre à jour leurs données afin d’en garantir l’exactitude."
+        },
+        "gdpr-art-17-deletion-restriction-etc": {
+            "code": "Art. 17",
+            "control": "Suppression, limitation, notification, portabilité, opposition, prise de décision automatisée",
+            "requirements": "L’organisation permet aux personnes concernées de supprimer leurs données ou de limiter le traitement, garantit la portabilité et le droit d’opposition, et limite les traitements automatisés."
+        },
+        "gdpr-art-24-responsibility-accountability": {
+            "code": "Art. 24",
+            "control": "Responsabilité et redevabilité",
+            "requirements": "L’organisation documente les responsabilités des rôles liés à la protection des données et à la sécurité."
+        },
+        "gdpr-art-24-data-protection-policy": {
+            "code": "Art. 24",
+            "control": "Politique de protection des données",
+            "requirements": "L’organisation maintient une politique de protection des données afin d’assurer la conformité aux lois sur la protection des données."
+        },
+        "gdpr-art-24-training-awareness": {
+            "code": "Art. 24",
+            "control": "Formation et sensibilisation",
+            "requirements": "L’organisation dispense périodiquement des formations et actions de sensibilisation aux employés sur les exigences de protection des données et de la vie privée."
+        },
+        "gdpr-art-24-monitoring-review": {
+            "code": "Art. 24",
+            "control": "Suivi et réexamen",
+            "requirements": "L’organisation réalise un suivi et des revues réguliers de ses mesures et politiques de protection des données afin d’assurer une conformité et une efficacité continues."
+        },
+        "gdpr-art-25-data-protection-by-design": {
+            "code": "Art. 25",
+            "control": "Protection des données dès la conception",
+            "requirements": "L’organisation met en œuvre les principes de protection des données dans la conception et l’exploitation de ses systèmes et processus."
+        },
+        "gdpr-art-25-data-protection-by-default": {
+            "code": "Art. 25",
+            "control": "Protection des données par défaut",
+            "requirements": "L’organisation veille à ce que, par défaut, seules les données à caractère personnel nécessaires à chaque finalité spécifique du traitement soient traitées."
+        },
+        "gdpr-art-27-representative": {
+            "code": "Art. 27",
+            "control": "Représentant",
+            "requirements": "L’organisation désigne un représentant dans l’UE afin de se conformer aux exigences du RGPD lorsqu’elle n’est pas établie dans l’UE."
+        },
+        "gdpr-art-28-processor-contracts": {
+            "code": "Art. 28",
+            "control": "Contrats avec les sous-traitants",
+            "requirements": "L’organisation veille à ce que les contrats conclus avec les sous-traitants contiennent des clauses exigeant le respect de la réglementation sur la protection des données."
+        },
+        "gdpr-art-28-data-processing-agreement": {
+            "code": "Art. 28",
+            "control": "Accord de traitement des données",
+            "requirements": "L’organisation conclut des accords de traitement des données (DPA) avec tous les tiers susceptibles d’avoir accès aux données à caractère personnel traitées par l’application."
+        },
+        "gdpr-art-28-third-party-integration": {
+            "code": "Art. 28",
+            "control": "Intégration de tiers",
+            "requirements": "L’organisation intègre des prestataires tiers de manière à n’exposer à ces tiers que les attributs de données à caractère personnel strictement nécessaires."
+        },
+        "gdpr-art-29-37-appointment-of-dpo": {
+            "code": "Art. 29, Art. 37",
+            "control": "Désignation d’un DPD",
+            "requirements": "L’organisation désigne un délégué à la protection des données (DPD) chargé de superviser la conformité au RGPD."
+        },
+        "gdpr-art-29-position-role-of-dpo": {
+            "code": "Art. 29",
+            "control": "Position et rôle du DPD",
+            "requirements": "L’organisation veille à ce que la position et le rôle du DPD soient correctement définis et communiqués."
+        },
+        "gdpr-art-29-38-independence-of-dpo": {
+            "code": "Art. 29, Art. 38",
+            "control": "Indépendance du DPD",
+            "requirements": "L’organisation veille à ce que le DPD agisse de manière indépendante et rende compte directement au plus haut niveau de la direction."
+        },
+        "gdpr-art-29-resources-support-for-dpo": {
+            "code": "Art. 29",
+            "control": "Ressources et soutien du DPD",
+            "requirements": "L’organisation fournit au DPD des ressources, une formation et un soutien adéquats pour qu’il puisse accomplir efficacement ses missions."
+        },
+        "gdpr-art-29-expertise-of-dpo": {
+            "code": "Art. 29",
+            "control": "Compétence du DPD",
+            "requirements": "L’organisation veille à ce que le DPD dispose de l’expertise / compétence professionnelle nécessaire en matière de droit et de pratiques de protection des données."
+        },
+        "gdpr-art-30-records-of-processing-activities": {
+            "code": "Art. 30",
+            "control": "Registre des activités de traitement",
+            "requirements": "L’organisation tient un registre des activités de traitement (ROPA), incluant les finalités du traitement, les catégories de personnes concernées et de données à caractère personnel, ainsi que les destinataires des données à caractère personnel."
+        },
+        "gdpr-art-31-cooperation-with-authorities": {
+            "code": "Art. 31",
+            "control": "Coopération avec les autorités",
+            "requirements": "L’organisation coopère avec les autorités de protection des données dans l’exercice de leurs missions, en fournissant les informations nécessaires et l’accès aux activités de traitement."
+        },
+        "gdpr-art-32-access-restriction": {
+            "code": "Art. 32",
+            "control": "Restriction d’accès",
+            "requirements": "L’organisation limite l’accès aux données à caractère personnel traitées aux seules personnes autorisées."
+        },
+        "gdpr-art-32-product-version": {
+            "code": "Art. 32",
+            "control": "Produit — Version",
+            "requirements": "L’organisation publie des mises à jour de sécurité en temps utile lors de l’identification de vulnérabilités, de bogues ou d’améliorations de sécurité."
+        },
+        "gdpr-art-32-backup": {
+            "code": "Art. 32",
+            "control": "Sauvegarde",
+            "requirements": "L’organisation sauvegarde les données critiques de manière périodique."
+        },
+        "gdpr-art-32-audit-logging": {
+            "code": "Art. 32",
+            "control": "Journalisation d’audit",
+            "requirements": "L’organisation active la journalisation d’audit sur tous les systèmes et veille à ce que celle-ci puisse être extraite pour tous les produits."
+        },
+        "gdpr-art-32-web-application-firewall": {
+            "code": "Art. 32",
+            "control": "Pare-feu applicatif Web",
+            "requirements": "L’organisation a mis en place un pare-feu applicatif Web (WAF) afin de protéger le produit contre les attaques malveillantes."
+        },
+        "gdpr-art-32-encryption-at-rest": {
+            "code": "Art. 32",
+            "control": "Chiffrement au repos",
+            "requirements": "L’organisation protège les données à caractère personnel stockées au moyen d’un niveau de chiffrement approprié."
+        },
+        "gdpr-art-32-encryption-in-transit": {
+            "code": "Art. 32",
+            "control": "Chiffrement en transit",
+            "requirements": "L’organisation protège toutes les communications client-serveur au moyen d’un niveau de chiffrement approprié."
+        },
+        "gdpr-art-32-vulnerability-assessment": {
+            "code": "Art. 32",
+            "control": "Évaluation des vulnérabilités",
+            "requirements": "L’organisation soumet les systèmes à des évaluations périodiques des vulnérabilités et corrige les vulnérabilités critiques sans retard injustifié."
+        },
+        "gdpr-art-32-backend-integration": {
+            "code": "Art. 32",
+            "control": "Intégration backend",
+            "requirements": "L’organisation protège les intégrations backend au moyen d’API / services Web sécurisés."
+        },
+        "gdpr-art-33-breach-notification-to-customer": {
+            "code": "Art. 33",
+            "control": "Notification de violation au client",
+            "requirements": "L’organisation notifie les clients d’une violation de données à caractère personnel dans un délai de 48 heures, sauf si la violation est peu susceptible d’entraîner un risque pour les droits et libertés."
+        },
+        "gdpr-art-34-breach-notification-to-data-subjects": {
+            "code": "Art. 34",
+            "control": "Notification de violation aux personnes concernées",
+            "requirements": "L’organisation communique une violation aux personnes concernées sans retard injustifié lorsqu’elle est susceptible d’entraîner un risque élevé pour leurs droits et libertés."
+        },
+        "gdpr-art-35-change-management": {
+            "code": "Art. 35",
+            "control": "Gestion des changements",
+            "requirements": "L’organisation veille à ce que les changements affectant le traitement des données à caractère personnel soient soumis à une approbation préalable avant le développement."
+        },
+        "gdpr-art-35-risk-mitigation": {
+            "code": "Art. 35",
+            "control": "Atténuation des risques",
+            "requirements": "L’organisation traite et atténue en temps utile les risques identifiés dans les évaluations de confidentialité."
+        },
+        "gdpr-art-35-segregation-of-environment": {
+            "code": "Art. 35",
+            "control": "Séparation des environnements",
+            "requirements": "L’organisation veille à ce que les environnements de développement, de test et de production soient séparés et que l’accès à la production soit restreint."
+        },
+        "gdpr-art-35-testing": {
+            "code": "Art. 35",
+            "control": "Tests",
+            "requirements": "L’organisation ne teste que dans des environnements de test et n’utilise pas de données de production à des fins de test."
+        },
+        "gdpr-art-35-data-protection-impact-assessment": {
+            "code": "Art. 35",
+            "control": "Analyse d’impact relative à la protection des données",
+            "requirements": "L’organisation réalise des AIPD (DPIA) périodiquement et traite en temps utile les risques moyens et élevés."
+        },
+        "gdpr-art-36-prior-consultation": {
+            "code": "Art. 36",
+            "control": "Consultation préalable",
+            "requirements": "L’organisation consulte l’autorité de contrôle avant le traitement si l’AIPD indique un risque élevé sans mesures d’atténuation."
+        },
+        "gdpr-art-37-dpo-accessibility": {
+            "code": "Art. 37",
+            "control": "Accessibilité du DPD",
+            "requirements": "L’organisation rend le DPD facilement accessible aux personnes concernées et aux autorités."
+        },
+        "gdpr-art-44-46-data-transfers-outside-eu": {
+            "code": "Art. 44, Art. 46",
+            "control": "Transferts de données hors UE",
+            "requirements": "L’organisation veille à ce que les données transférées hors de l’UE soient protégées par des garanties appropriées."
+        },
+        "gdpr-art-45-adequacy-decisions": {
+            "code": "Art. 45",
+            "control": "Décisions d’adéquation",
+            "requirements": "L’organisation ne transfère des données à caractère personnel que vers des juridictions assurant un niveau de protection adéquat."
+        },
+        "gdpr-art-40-42-codes-of-conduct-and-certifications": {
+            "code": "Art. 40, Art. 42",
+            "control": "Codes de conduite et certifications",
+            "requirements": "L’organisation adhère à des codes de conduite approuvés et à des certifications afin de démontrer la conformité au RGPD lors des transferts de données."
+        }
+    }
+}

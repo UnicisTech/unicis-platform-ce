@@ -1,0 +1,483 @@
+{
+    "sections": {
+        "organizational": {
+            "label": "Controles organizativos"
+        },
+        "people": {
+            "label": "Controles de personal"
+        },
+        "physical": {
+            "label": "Controles físicos"
+        },
+        "technological": {
+            "label": "Controles tecnológicos"
+        }
+    },
+    "controls": {
+        "iso-2022-a-5-1": {
+            "code": "A.5.1",
+            "control": "Políticas de seguridad de la información",
+            "requirements": "Se deberá definir un conjunto de políticas para la información y la ciberseguridad, aprobadas por la alta dirección, publicadas y comunicadas a los empleados y a las partes externas pertinentes."
+        },
+        "iso-2022-a-5-2": {
+            "code": "A.5.2",
+            "control": "Funciones y responsabilidades de seguridad de la información",
+            "requirements": "Todas las funciones y responsabilidades de información y ciberseguridad deberán estar definidas y asignadas."
+        },
+        "iso-2022-a-5-3": {
+            "code": "A.5.3",
+            "control": "Segregación de funciones",
+            "requirements": "Las tareas y áreas de responsabilidad en conflicto deberían separarse para reducir las oportunidades de modificar o hacer un uso indebido de los activos de la organización sin permiso o de forma no intencionada."
+        },
+        "iso-2022-a-5-4": {
+            "code": "A.5.4",
+            "control": "Responsabilidades de la dirección",
+            "requirements": "La dirección debería exigir a todos los empleados y contratistas que ejerzan la seguridad de la información de acuerdo con las políticas y procedimientos establecidos por la organización."
+        },
+        "iso-2022-a-5-5": {
+            "code": "A.5.5",
+            "control": "Contacto con las autoridades",
+            "requirements": "Es necesario mantener comunicaciones adecuadas con las autoridades pertinentes."
+        },
+        "iso-2022-a-5-6": {
+            "code": "A.5.6",
+            "control": "Contacto con grupos de interés especial",
+            "requirements": "Deberían establecerse conexiones adecuadas con organizaciones de interés especial u otros foros de seguridad profesional y asociaciones profesionales."
+        },
+        "iso-2022-a-5-7": {
+            "code": "A.5.7",
+            "control": "Inteligencia de amenazas",
+            "requirements": "Recopilar y analizar información relacionada con las amenazas a la seguridad de la información y utilizar dicha información para tomar acciones de mitigación."
+        },
+        "iso-2022-a-5-8": {
+            "code": "A.5.8",
+            "control": "Seguridad de la información en la gestión de proyectos",
+            "requirements": "A lo largo de la gestión de proyectos, la confidencialidad de la información debería discutirse independientemente del tipo de proyecto."
+        },
+        "iso-2022-a-5-9": {
+            "code": "A.5.9",
+            "control": "Inventario de la información y otros activos asociados",
+            "requirements": "Los activos relacionados con la información y las instalaciones de información de una organización deberían identificarse y listarse, y también debería mantenerse un inventario de estos activos. Y los activos del inventario deberían tener sus propietarios (propietario del activo)."
+        },
+        "iso-2022-a-5-10": {
+            "code": "A.5.10",
+            "control": "Uso aceptable de la información y otros activos asociados",
+            "requirements": "Deberían identificarse, documentarse e implementarse reglas para el uso aceptable de la información y de los activos vinculados a la información y a las instalaciones de procesamiento de información. El manejo de los activos de acuerdo con el esquema de clasificación de la información de la organización debería desarrollarse e implementarse."
+        },
+        "iso-2022-a-5-11": {
+            "code": "A.5.11",
+            "control": "Devolución de activos",
+            "requirements": "Tanto los trabajadores como las partes externas deben devolver todos los activos de la organización en su posesión al finalizar su empleo, contrato o acuerdo."
+        },
+        "iso-2022-a-5-12": {
+            "code": "A.5.12",
+            "control": "Clasificación de la información",
+            "requirements": "La información debería clasificarse sobre la base de sus disposiciones legales, criticidad y vulnerabilidad a la divulgación o alteración no deseadas."
+        },
+        "iso-2022-a-5-13": {
+            "code": "A.5.13",
+            "control": "Etiquetado de la información",
+            "requirements": "De acuerdo con el esquema de clasificación de la información adoptado por la organización, debería establecerse e implementarse un conjunto adecuado de métodos para el etiquetado de la información."
+        },
+        "iso-2022-a-5-14": {
+            "code": "A.5.14",
+            "control": "Transferencia de información",
+            "requirements": "Con el fin de proteger a los destinatarios mediante el uso de todo tipo de medios de comunicación, deberían desarrollarse políticas, procedimientos y controles oficiales de transferencia. Los acuerdos deberían abordar las transferencias seguras entre la organización y las partes externas de la información empresarial. La información de mensajería electrónica debería protegerse adecuadamente."
+        },
+        "iso-2022-a-5-15": {
+            "code": "A.5.15",
+            "control": "Control de acceso",
+            "requirements": "Debería establecerse, documentarse y revisarse una política de control de acceso con requisitos de negocio y de seguridad de la información de apoyo. Solo se pondrán a disposición de los usuarios las redes y las instalaciones de red que hayan sido expresamente aprobadas para su uso."
+        },
+        "iso-2022-a-5-16": {
+            "code": "A.5.16",
+            "control": "Gestión de identidades",
+            "requirements": "Solo se pondrán a disposición de los usuarios las redes y las instalaciones de red que hayan sido expresamente aprobadas para su uso."
+        },
+        "iso-2022-a-5-17": {
+            "code": "A.5.17",
+            "control": "Información de autenticación",
+            "requirements": "Un proceso de gestión estructurado debería controlar la asignación de información secreta de autenticación. El uso de información secreta de autenticación debería permitirse a los usuarios siguiendo las prácticas de la organización. Los sistemas de gestión de contraseñas deberían ser cooperativos para garantizar la calidad de las contraseñas."
+        },
+        "iso-2022-a-5-18": {
+            "code": "A.5.18",
+            "control": "Derechos de acceso",
+            "requirements": "Debería establecerse un proceso formal para conceder acceso a los usuarios, a fin de otorgar o retirar privilegios de acceso para todas las categorías de usuarios a todos los sistemas y servicios. Los derechos de acceso de los usuarios deberían revisarse periódicamente por los propietarios de los activos. Los derechos de acceso de todos los empleados y usuarios externos a la información y a las instalaciones de procesamiento de información deberían revocarse al finalizar el empleo, contrato o acuerdo, o modificarse tras un ajuste."
+        },
+        "iso-2022-a-5-19": {
+            "code": "A.5.19",
+            "control": "Seguridad de la información en las relaciones con los proveedores",
+            "requirements": "Deberán acordarse y documentarse con el proveedor los requisitos de seguridad de la información relacionados con la mitigación del riesgo del acceso de los proveedores a los activos de la organización."
+        },
+        "iso-2022-a-5-20": {
+            "code": "A.5.20",
+            "control": "Abordar la seguridad de la información dentro de los acuerdos con proveedores",
+            "requirements": "Cualquier proveedor que vea, procese, almacene, comunique o proporcione información de componentes de infraestructura de TI para la organización deberá definirse y acordarse con todos los requisitos de seguridad de la información aplicables."
+        },
+        "iso-2022-a-5-21": {
+            "code": "A.5.21",
+            "control": "Gestión de la seguridad de la información en la cadena de suministro de las tecnologías de la información \ny la comunicación (TIC)",
+            "requirements": "Los acuerdos con proveedores contendrán disposiciones para mitigar los riesgos de seguridad de la información asociados con los servicios de TI y la cadena de suministro de productos."
+        },
+        "iso-2022-a-5-22": {
+            "code": "A.5.22",
+            "control": "Supervisión, revisión y gestión de cambios de los servicios de los proveedores",
+            "requirements": "Las organizaciones deberán supervisar, revisar y auditar la prestación de servicios de los proveedores de forma regular. Los cambios en la prestación de servicios por parte de los proveedores deberían gestionarse con un enfoque en la criticidad de la información, los sistemas y los procesos de la empresa, y la reevaluación de los riesgos, y deberían incluir el mantenimiento y la mejora de las políticas, procedimientos y controles de seguridad de la información existentes."
+        },
+        "iso-2022-a-5-23": {
+            "code": "A.5.23",
+            "control": "Seguridad de la información para el uso de servicios en la nube",
+            "requirements": "Establecer requisitos de seguridad para los servicios en la nube con el fin de lograr una mejor protección de su información en la nube. Esto incluye la adquisición, el uso, la gestión y la finalización del uso de los servicios en la nube."
+        },
+        "iso-2022-a-5-24": {
+            "code": "A.5.24",
+            "control": "Planificación y preparación de la gestión de incidentes de seguridad de la información",
+            "requirements": "Con el fin de garantizar una respuesta rápida, eficiente y organizada a los incidentes de seguridad de la información, deberán definirse las funciones y los procedimientos de gestión de incidentes de seguridad de la información."
+        },
+        "iso-2022-a-5-25": {
+            "code": "A.5.25",
+            "control": "Evaluación y decisión sobre eventos de seguridad de la información",
+            "requirements": "Los eventos de seguridad de la información deberían analizarse y determinarse si deben ser clasificados como incidentes relacionados con la seguridad de la información."
+        },
+        "iso-2022-a-5-26": {
+            "code": "A.5.26",
+            "control": "Respuesta a incidentes de seguridad de la información",
+            "requirements": "En el contexto de los procedimientos documentados, se debería responder a los incidentes de seguridad de la información."
+        },
+        "iso-2022-a-5-27": {
+            "code": "A.5.27",
+            "control": "Aprendizaje a partir de incidentes de seguridad de la información",
+            "requirements": "Para minimizar el riesgo o el efecto de posibles accidentes, debería utilizarse la experiencia obtenida del estudio y la mitigación de accidentes de seguridad de la información."
+        },
+        "iso-2022-a-5-28": {
+            "code": "A.5.28",
+            "control": "Recopilación de pruebas",
+            "requirements": "La organización definirá, obtendrá, recopilará y conservará la información como documentación e implementará procedimientos."
+        },
+        "iso-2022-a-5-29": {
+            "code": "A.5.29",
+            "control": "Seguridad de la información durante interrupciones",
+            "requirements": "En circunstancias adversas, por ejemplo durante una crisis o una catástrofe, la empresa determinará las normas y la coherencia de la gestión de la seguridad de la información. Con el fin de garantizar el grado necesario de coherencia de la seguridad de la información frente a circunstancias adversas, la empresa debería definir, documentar, ejecutar y mantener procesos, procedimientos y controles. Para garantizar una respuesta adecuada y productiva frente a circunstancias adversas, la empresa debe revisar los controles vigentes sobre la seguridad de la información definidos y aplicados a intervalos regulares."
+        },
+        "iso-2022-a-5-30": {
+            "code": "A.5.30",
+            "control": "Preparación de las TIC para la continuidad del negocio",
+            "requirements": "La tecnología de la información y la comunicación debe estar preparada para posibles interrupciones de modo que la información y los activos requeridos estén disponibles cuando se necesiten. Esto incluye la planificación de la preparación, la implementación, el mantenimiento y las pruebas."
+        },
+        "iso-2022-a-5-31": {
+            "code": "A.5.31",
+            "control": "Requisitos legales, estatutarios, reglamentarios y contractuales",
+            "requirements": "Cada uno de los sistemas de información y las organizaciones debería identificar, documentar y actualizar específicamente todos los requisitos estatutarios, reglamentarios y contractuales pertinentes, y el enfoque de la organización hacia el cumplimiento de estos requisitos. De acuerdo con todos los acuerdos, leyes y reglamentos pertinentes, deben utilizarse controles criptográficos."
+        },
+        "iso-2022-a-5-32": {
+            "code": "A.5.32",
+            "control": "Derechos de propiedad intelectual",
+            "requirements": "Se seguirán procedimientos adecuados para garantizar que se cumplan las disposiciones legales, reglamentarias y contractuales relativas a la propiedad de la propiedad intelectual y al uso de productos de software propietarios."
+        },
+        "iso-2022-a-5-33": {
+            "code": "A.5.33",
+            "control": "Protección de registros",
+            "requirements": "De acuerdo con las disposiciones legales, reglamentarias, contractuales y los requisitos empresariales, para proteger contra la pérdida, destrucción, falsificación y el acceso no autorizado y la divulgación no autorizada."
+        },
+        "iso-2022-a-5-34": {
+            "code": "A.5.34",
+            "control": "Privacidad y protección de la información de identificación personal (PII)",
+            "requirements": "La privacidad y la protección de los datos personales deberían garantizarse, según lo exijan las leyes y reglamentos aplicables."
+        },
+        "iso-2022-a-5-35": {
+            "code": "A.5.35",
+            "control": "Revisión independiente de la seguridad de la información",
+            "requirements": "Cada uno de estos sistemas de información y las organizaciones debería identificar, documentar y actualizar específicamente todos los requisitos estatutarios, reglamentarios y contractuales pertinentes, y el enfoque de la organización hacia el cumplimiento de estos requisitos."
+        },
+        "iso-2022-a-5-36": {
+            "code": "A.5.36",
+            "control": "Cumplimiento de políticas, reglas y normas de seguridad de la información",
+            "requirements": "Se seguirán procedimientos adecuados para garantizar que se cumplan las disposiciones legales, reglamentarias y contractuales relativas a la propiedad de la propiedad intelectual y al uso de productos de software propietarios. Los sistemas de información para el cumplimiento de las políticas y prácticas de seguridad de la información de una organización deberían revisarse periódicamente."
+        },
+        "iso-2022-a-5-37": {
+            "code": "A.5.37",
+            "control": "Procedimientos operativos documentados",
+            "requirements": "Los procedimientos operativos deberían documentarse y estar accesibles para todos los usuarios que los necesiten."
+        },
+        "iso-2022-a-6-1": {
+            "code": "A.6.1",
+            "control": "Selección",
+            "requirements": "Se realizarán verificaciones de antecedentes de todos los solicitantes de empleo de conformidad con las normas, la legislación y la ética aplicables, y deberían ser proporcionales a los criterios empresariales, la clasificación de la información que se obtendrá y los riesgos potenciales."
+        },
+        "iso-2022-a-6-2": {
+            "code": "A.6.2",
+            "control": "Términos y condiciones del empleo",
+            "requirements": "Los acuerdos contractuales con empleados y contratistas establecerán su responsabilidad en materia de seguridad de la información y, por lo tanto, la responsabilidad de la empresa."
+        },
+        "iso-2022-a-6-3": {
+            "code": "A.6.3",
+            "control": "Concienciación, educación y formación en seguridad de la información",
+            "requirements": "Todos los trabajadores de la empresa y, cuando sea necesario, los contratistas recibirán una concienciación, educación y formación adecuadas, así como actualizaciones diarias sobre las políticas y procedimientos de la organización, según corresponda a su función laboral."
+        },
+        "iso-2022-a-6-4": {
+            "code": "A.6.4",
+            "control": "Proceso disciplinario",
+            "requirements": "Se establecerá un proceso administrativo formal e informado para tomar medidas contra los empleados que hayan cometido una violación de la seguridad de la información."
+        },
+        "iso-2022-a-6-5": {
+            "code": "A.6.5",
+            "control": "Responsabilidades después de la terminación o cambio de empleo",
+            "requirements": "Las responsabilidades y los requisitos de seguridad de la información/ciberseguridad que continúan siendo válidos tras la terminación o el cambio de empleo deben definirse, comunicarse e implementarse por parte del empleado o contratista."
+        },
+        "iso-2022-a-6-6": {
+            "code": "A.6.6",
+            "control": "Acuerdos de confidencialidad o de no divulgación",
+            "requirements": "Los requisitos de protección de la información de la organización para los acuerdos de confidencialidad o no divulgación deberían identificarse, revisarse periódicamente y documentarse."
+        },
+        "iso-2022-a-6-7": {
+            "code": "A.6.7",
+            "control": "Trabajo remoto",
+            "requirements": "Para proteger la información a la que se accede, se procesa o se almacena en sitios remotos, debería implementarse una política y medidas de seguridad de apoyo."
+        },
+        "iso-2022-a-6-8": {
+            "code": "A.6.8",
+            "control": "Notificación de eventos de seguridad de la información",
+            "requirements": "Los incidentes de seguridad de la información deberían notificarse lo antes posible a través de los canales de gestión apropiados. Cualquier vulnerabilidad de seguridad de la información encontrada o sospechada en sistemas o servicios en los que los empleados y contratistas utilicen los sistemas y servicios de información de la organización debería registrarse y documentarse."
+        },
+        "iso-2022-a-7-1": {
+            "code": "A.7.1",
+            "control": "Perímetros de seguridad física",
+            "requirements": "Deberían establecerse perímetros de seguridad para asegurar las áreas que contienen información sensible o confidencial y las instalaciones de procesamiento de información."
+        },
+        "iso-2022-a-7-2": {
+            "code": "A.7.2",
+            "control": "Entrada física",
+            "requirements": "Controles de acceso adecuados deberían proteger los lugares para garantizar que solo los empleados autorizados tengan acceso. Es importante rastrear y, cuando sea posible, diferenciar entre puntos de acceso como las áreas de distribución y carga y otras ubicaciones, con el fin de evitar el acceso no autorizado de personas no autorizadas a las instalaciones."
+        },
+        "iso-2022-a-7-3": {
+            "code": "A.7.3",
+            "control": "Asegurar oficinas, salas e instalaciones",
+            "requirements": "La seguridad física debería diseñarse e implementarse para las oficinas, salas e instalaciones."
+        },
+        "iso-2022-a-7-4": {
+            "code": "A.7.4",
+            "control": "Supervisión de la seguridad física",
+            "requirements": "Supervisar las áreas sensibles para permitir que solo las personas autorizadas accedan a ellas. Esto puede incluir oficinas, instalaciones de producción, almacenes y otras dependencias."
+        },
+        "iso-2022-a-7-5": {
+            "code": "A.7.5",
+            "control": "Protección contra amenazas físicas y ambientales",
+            "requirements": "La protección física debería diseñarse y aplicarse contra desastres naturales, ataques maliciosos o accidentes."
+        },
+        "iso-2022-a-7-6": {
+            "code": "A.7.6",
+            "control": "Trabajo en áreas seguras",
+            "requirements": "Deberían diseñarse e implementarse procedimientos para trabajar en áreas seguras."
+        },
+        "iso-2022-a-7-7": {
+            "code": "A.7.7",
+            "control": "Escritorio limpio y pantalla limpia",
+            "requirements": "Debería adoptarse una política de escritorio limpio para documentos y medios de almacenamiento extraíbles, y debería aplicarse una política de pantalla limpia a las instalaciones de procesamiento de información."
+        },
+        "iso-2022-a-7-8": {
+            "code": "A.7.8",
+            "control": "Ubicación y protección del equipo",
+            "requirements": "Para mitigar el riesgo de peligros ambientales, riesgos y acceso no autorizado, el equipo debería ubicarse y asegurarse adecuadamente."
+        },
+        "iso-2022-a-7-9": {
+            "code": "A.7.9",
+            "control": "Seguridad de los activos fuera de las instalaciones",
+            "requirements": "La seguridad de los activos fuera del sitio debería aplicarse teniendo en cuenta los diversos riesgos de trabajar fuera de las instalaciones de la organización."
+        },
+        "iso-2022-a-7-10": {
+            "code": "A.7.10",
+            "control": "Medios de almacenamiento",
+            "requirements": "Deberán implementarse procedimientos para la gestión de medios extraíbles de acuerdo con el esquema de clasificación adoptado por la organización. Cuando no sea requerido por protocolos específicos, los medios deberán eliminarse de forma segura. Los medios de información deberán protegerse contra el acceso no autorizado, el uso indebido o la corrupción durante el transporte. Sin autorización previa, no se deberán sacar del sitio equipos, información o software."
+        },
+        "iso-2022-a-7-11": {
+            "code": "A.7.11",
+            "control": "Servicios de soporte",
+            "requirements": "El equipo debería asegurarse contra fallos de energía y otras interrupciones causadas por fallos en la infraestructura de soporte."
+        },
+        "iso-2022-a-7-12": {
+            "code": "A.7.12",
+            "control": "Seguridad del cableado",
+            "requirements": "Los cables de energía y telecomunicaciones que transportan datos o soportan servicios deberían protegerse contra la interceptación, la interferencia o los daños."
+        },
+        "iso-2022-a-7-13": {
+            "code": "A.7.13",
+            "control": "Mantenimiento del equipo",
+            "requirements": "Para garantizar su disponibilidad e integridad continuas, el equipo debería mantenerse correctamente."
+        },
+        "iso-2022-a-7-14": {
+            "code": "A.7.14",
+            "control": "Eliminación segura o reutilización del equipo",
+            "requirements": "Para evitar la eliminación o sobrescritura de datos y software sensibles mediante la eliminación o reutilización de cualquier dispositivo que contenga medios de almacenamiento, todos los dispositivos deben ser revisados."
+        },
+        "iso-2022-a-8-1": {
+            "code": "A.8.1",
+            "control": "Dispositivos de punto final del usuario",
+            "requirements": "Para gestionar los riesgos introducidos por el uso de dispositivos móviles, debería adoptarse una política y medidas de seguridad de apoyo. Los equipos desatendidos deberían ser protegidos adecuadamente por los usuarios."
+        },
+        "iso-2022-a-8-2": {
+            "code": "A.8.2",
+            "control": "Derechos de acceso privilegiado",
+            "requirements": "Un procedimiento de autorización estructurado de acuerdo con las políticas de gestión de accesos apropiadas debería supervisar la asignación y el uso de privilegios de acceso delegados."
+        },
+        "iso-2022-a-8-3": {
+            "code": "A.8.3",
+            "control": "Restricción de acceso a la información",
+            "requirements": "Los controles de acceso deberían basarse en los requisitos individuales de las aplicaciones empresariales y en cumplimiento con una política de control de acceso especificada."
+        },
+        "iso-2022-a-8-4": {
+            "code": "A.8.4",
+            "control": "Acceso al código fuente",
+            "requirements": "El acceso debería limitarse al código fuente del programa."
+        },
+        "iso-2022-a-8-5": {
+            "code": "A.8.5",
+            "control": "Autenticación segura",
+            "requirements": "El acceso a sistemas y aplicaciones debería controlarse mediante un procedimiento de inicio de sesión seguro cuando así lo requiera la Política de Control de Acceso."
+        },
+        "iso-2022-a-8-6": {
+            "code": "A.8.6",
+            "control": "Gestión de la capacidad",
+            "requirements": "Para garantizar el rendimiento necesario del sistema, el uso de recursos debería supervisarse, ajustarse y proyectarse en función de los requisitos futuros de capacidad."
+        },
+        "iso-2022-a-8-7": {
+            "code": "A.8.7",
+            "control": "Protección contra malware",
+            "requirements": "En combinación con una concienciación adecuada de los usuarios, deberían implementarse controles de detección, prevención y recuperación para proteger contra el malware."
+        },
+        "iso-2022-a-8-8": {
+            "code": "A.8.8",
+            "control": "Gestión de vulnerabilidades técnicas",
+            "requirements": "La información sobre vulnerabilidades tecnológicas de los sistemas de información utilizados debería obtenerse de manera oportuna, debería evaluarse la exposición de la organización a dichas vulnerabilidades y tomarse medidas apropiadas para abordar el riesgo involucrado. Los sistemas de información para el cumplimiento de las políticas y prácticas de seguridad de la información de una organización deberían revisarse periódicamente."
+        },
+        "iso-2022-a-8-9": {
+            "code": "A.8.9",
+            "control": "Gestión de la configuración",
+            "requirements": "Gestionar todo el ciclo de la configuración de seguridad de la tecnología para garantizar un nivel adecuado de seguridad y evitar cambios no autorizados. Esto incluye la definición, implementación, supervisión y revisión de la configuración."
+        },
+        "iso-2022-a-8-10": {
+            "code": "A.8.10",
+            "control": "Eliminación de información",
+            "requirements": "Eliminar los datos cuando ya no sean necesarios, con el fin de evitar la filtración de información sensible y permitir el cumplimiento de los requisitos de privacidad y otros. Esto puede incluir la eliminación en los sistemas de TI, medios extraíbles o servicios en la nube."
+        },
+        "iso-2022-a-8-11": {
+            "code": "A.8.11",
+            "control": "Enmascaramiento de datos",
+            "requirements": "Utilizar el enmascaramiento de datos junto con el control de acceso para limitar la exposición de información sensible. Esto se refiere principalmente a los datos personales, ya que están fuertemente regulados por las normativas de privacidad, pero también puede incluir otras categorías de datos sensibles."
+        },
+        "iso-2022-a-8-12": {
+            "code": "A.8.12",
+            "control": "Prevención de fuga de datos",
+            "requirements": "Aplicar diversas medidas de prevención de fuga de datos para evitar la divulgación no autorizada de información sensible y, si tales incidentes ocurren, detectarlos de manera oportuna. Esto incluye la información en sistemas de TI, redes o cualquier dispositivo."
+        },
+        "iso-2022-a-8-13": {
+            "code": "A.8.13",
+            "control": "Copia de seguridad de la información",
+            "requirements": "De acuerdo con la política de respaldo acordada, se recopilarán copias de registros, programas e imágenes de dispositivos y se probarán regularmente."
+        },
+        "iso-2022-a-8-14": {
+            "code": "A.8.14",
+            "control": "Redundancia de las instalaciones de procesamiento de información",
+            "requirements": "Cómo se implementan las instalaciones de procesamiento de información con suficiencia de redundancia para cumplir los requisitos de disponibilidad. La redundancia se refiere, por lo general, a la implementación de hardware duplicado para garantizar la disponibilidad de los sistemas de procesamiento de información."
+        },
+        "iso-2022-a-8-15": {
+            "code": "A.8.15",
+            "control": "Registro de eventos",
+            "requirements": "Los registros de eventos deberían producirse, conservarse y revisarse regularmente para registrar las actividades de los usuarios, excepciones, defectos y eventos de seguridad de la información. El registro y la información de los registros deberían estar protegidos contra intrusiones y accesos no autorizados. La actividad del Administrador del Sistema y del Operador del Sistema debe registrarse, y los registros deben mantenerse seguros y ser supervisados de cerca."
+        },
+        "iso-2022-a-8-16": {
+            "code": "A.8.16",
+            "control": "Supervisión de actividades",
+            "requirements": "Supervisar los sistemas para reconocer actividades inusuales y, si es necesario, activar la respuesta adecuada a incidentes. Esto incluye la supervisión de los sistemas de TI, redes y aplicaciones."
+        },
+        "iso-2022-a-8-17": {
+            "code": "A.8.17",
+            "control": "Sincronización de relojes",
+            "requirements": "Los relojes en todos los sistemas de gestión de la información relacionados deberían integrarse en una única fuente de tiempo de referencia para una organización o dominio de seguridad."
+        },
+        "iso-2022-a-8-18": {
+            "code": "A.8.18",
+            "control": "Uso de programas utilitarios privilegiados",
+            "requirements": "El uso de programas utilitarios que podrían eludir los controles del sistema y de las aplicaciones debería limitarse y controlarse estrictamente."
+        },
+        "iso-2022-a-8-19": {
+            "code": "A.8.19",
+            "control": "Instalación de software en sistemas operativos",
+            "requirements": "Para controlar la instalación de software en sistemas operativos, deberían implementarse procedimientos. Los usuarios deberían establecer e implementar reglas que rijan la instalación de software."
+        },
+        "iso-2022-a-8-20": {
+            "code": "A.8.20",
+            "control": "Seguridad de redes",
+            "requirements": "Para proteger la información en sistemas y aplicaciones, las redes deberían gestionarse y supervisarse."
+        },
+        "iso-2022-a-8-21": {
+            "code": "A.8.21",
+            "control": "Seguridad de los servicios de red",
+            "requirements": "Los protocolos de seguridad, la calidad del servicio y los criterios de gestión para todos los servicios de red, ya sean internos o externalizados, deberían definirse e incluirse en los acuerdos de servicios de red."
+        },
+        "iso-2022-a-8-22": {
+            "code": "A.8.22",
+            "control": "Segmentación de redes",
+            "requirements": "Debería establecerse la segmentación de redes para los servicios de información, los usuarios y los sistemas de información."
+        },
+        "iso-2022-a-8-23": {
+            "code": "A.8.23",
+            "control": "Filtrado web",
+            "requirements": "Gestionar a qué sitios web acceden los usuarios para proteger los sistemas de TI. De este modo, se puede evitar que los sistemas se vean comprometidos por código malicioso y también evitar que los usuarios utilicen materiales ilegales de Internet."
+        },
+        "iso-2022-a-8-24": {
+            "code": "A.8.24",
+            "control": "Uso de criptografía",
+            "requirements": "Deberá desarrollarse e implementarse una política sobre el uso de controles criptográficos para la protección de la información. Debería crearse y aplicarse una política sobre el uso, la seguridad y la vida útil de las claves criptográficas a lo largo de todo su ciclo de vida."
+        },
+        "iso-2022-a-8-25": {
+            "code": "A.8.25",
+            "control": "Ciclo de vida de desarrollo seguro",
+            "requirements": "Los cambios en los procesos pueden gestionarse mediante la implementación de procedimientos estructurados de control de cambios dentro del ciclo de vida del software."
+        },
+        "iso-2022-a-8-26": {
+            "code": "A.8.26",
+            "control": "Requisitos de seguridad de las aplicaciones",
+            "requirements": "Los servicios de aplicaciones que transitan por redes públicas deberían protegerse contra actividades fraudulentas, disputas contractuales, divulgación no autorizada y modificación. Para evitar transmisiones incompletas, enrutamiento incorrecto, modificación no autorizada de mensajes, difusión no autorizada, replicación no autorizada de mensajes o repetición, debería cubrirse la información relativa a las transacciones de los servicios de aplicaciones."
+        },
+        "iso-2022-a-8-27": {
+            "code": "A.8.27",
+            "control": "Arquitectura segura del sistema y principios de ingeniería",
+            "requirements": "En la implementación de cualquier proyecto de implementación de sistemas de información, deben establecerse, documentarse, mantenerse e implementarse normas para la ingeniería de sistemas seguros."
+        },
+        "iso-2022-a-8-28": {
+            "code": "A.8.28",
+            "control": "Codificación segura",
+            "requirements": "Establecer principios de codificación segura y aplicarlos al desarrollo de software para reducir las vulnerabilidades de seguridad en el software. Esto puede incluir actividades antes, durante y después de la codificación."
+        },
+        "iso-2022-a-8-29": {
+            "code": "A.8.29",
+            "control": "Pruebas de seguridad en desarrollo y aceptación",
+            "requirements": "Durante el desarrollo, deberían realizarse pruebas de funcionalidad de seguridad. Los nuevos sistemas de información, las mejoras y las versiones actualizadas deberían estar equipados con servicios de pruebas de aceptación y requisitos relacionados."
+        },
+        "iso-2022-a-8-30": {
+            "code": "A.8.30",
+            "control": "Desarrollo externalizado",
+            "requirements": "La organización debe supervisar la actividad para el desarrollo del sistema externalizado."
+        },
+        "iso-2022-a-8-31": {
+            "code": "A.8.31",
+            "control": "Separación de entornos de desarrollo, prueba y producción",
+            "requirements": "Es importante definir y hacer cumplir el grado de separación entre los entornos organizativos, de prueba y de desarrollo necesarios para evitar problemas operativos. Las organizaciones deberían crear entornos de desarrollo seguros y esfuerzos de integración para todo el ciclo de vida del desarrollo del sistema, y deberían estar adecuadamente protegidos."
+        },
+        "iso-2022-a-8-32": {
+            "code": "A.8.32",
+            "control": "Gestión de cambios",
+            "requirements": "Los cambios en la organización, los procedimientos organizativos, las instalaciones de gestión de la información y los sistemas de seguridad de la información deberían controlarse. Los cambios en los procesos pueden gestionarse mediante la implementación de procedimientos estructurados de control de cambios dentro del ciclo de vida del software. Al cambiar las plataformas operativas, las aplicaciones críticas del negocio deberían revisarse y probarse para garantizar que no haya impactos adversos en el negocio o en la seguridad. Las modificaciones de paquetes de software deberían desalentarse, limitarse a las modificaciones necesarias y todos los cambios controlarse estrictamente."
+        },
+        "iso-2022-a-8-33": {
+            "code": "A.8.33",
+            "control": "Información de prueba",
+            "requirements": "Debería realizarse una recopilación, protección y revisión cuidadosas de los datos de prueba."
+        },
+        "iso-2022-a-8-34": {
+            "code": "A.8.34",
+            "control": "Protección de los sistemas de información durante las pruebas de auditoría",
+            "requirements": "Los criterios y las actividades de auditoría relacionados con la verificación de los sistemas operativos deberían prepararse y decidirse cuidadosamente para reducir la perturbación de los procesos empresariales."
+        }
+    }
+}

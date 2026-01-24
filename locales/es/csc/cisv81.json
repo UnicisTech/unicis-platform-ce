@@ -1,0 +1,789 @@
+{
+    "sections": {
+        "identify": {
+            "label": "Identifier"
+        },
+        "respond": {
+            "label": "Répondre"
+        },
+        "detect": {
+            "label": "Détecter"
+        },
+        "protect": {
+            "label": "Protéger"
+        },
+        "govern": {
+            "label": "Gouverner"
+        },
+        "recover": {
+            "label": "Récupérer"
+        }
+    },
+    "controls": {
+        "cisv81-1-1": {
+            "code": "1,1",
+            "control": "Establecer y mantener un inventario detallado de activos empresariales",
+            "requirements": "Establecer y mantener un inventario preciso, detallado y actualizado de todos los activos empresariales con potencial para almacenar o procesar datos, incluidos: dispositivos de usuario final (incluidos portátiles y móviles), dispositivos de red, dispositivos no informáticos/IoT y servidores. Asegurar que el inventario registre la dirección de red (si es estática), la dirección de hardware, el nombre del equipo, el propietario del activo empresarial, el departamento de cada activo y si el activo ha sido aprobado para conectarse a la red. Para dispositivos móviles de usuario final, las herramientas de tipo MDM pueden respaldar este proceso, cuando corresponda. Este inventario incluye activos conectados a la infraestructura de forma física, virtual, remota y aquellos dentro de entornos en la nube. Además, incluye activos que se conectan regularmente a la infraestructura de red de la empresa, incluso si no están bajo el control de la empresa. Revisar y actualizar el inventario de todos los activos empresariales dos veces al año, o con mayor frecuencia."
+        },
+        "cisv81-1-2": {
+            "code": "1,2",
+            "control": "Abordar activos no autorizados",
+            "requirements": "Asegurar que exista un proceso para abordar activos no autorizados de forma semanal. La empresa puede optar por retirar el activo de la red, denegar al activo la conexión remota a la red o poner el activo en cuarentena."
+        },
+        "cisv81-1-3": {
+            "code": "1,3",
+            "control": "Utilizar una herramienta de descubrimiento activo",
+            "requirements": "Utilizar una herramienta de descubrimiento activo para identificar los activos conectados a la red de la empresa. Configurar la herramienta de descubrimiento activo para que se ejecute diariamente, o con mayor frecuencia."
+        },
+        "cisv81-1-4": {
+            "code": "1,4",
+            "control": "Usar registros de DHCP para actualizar el inventario de activos empresariales",
+            "requirements": "Usar el registro de DHCP en todos los servidores DHCP o herramientas de gestión de direcciones de Protocolo de Internet (IP) para actualizar el inventario de activos de la empresa. Revisar y usar los registros para actualizar el inventario de activos de la empresa semanalmente, o con mayor frecuencia."
+        },
+        "cisv81-1-5": {
+            "code": "1,5",
+            "control": "Usar una herramienta de descubrimiento pasivo de activos",
+            "requirements": "Usar una herramienta de descubrimiento pasivo para identificar activos conectados a la red de la empresa. Revisar y usar los escaneos para actualizar el inventario de activos de la empresa al menos semanalmente, o con mayor frecuencia."
+        },
+        "cisv81-2-1": {
+            "code": "2,1",
+            "control": "Establecer y mantener un inventario de software",
+            "requirements": "Establecer y mantener un inventario detallado de todo el software con licencia instalado en los activos empresariales. El inventario de software debe documentar el título, el editor, la fecha inicial de instalación/uso y el propósito comercial de cada entrada; cuando corresponda, incluir la URL, las tiendas de aplicaciones, la(s) versión(es), el mecanismo de despliegue, la fecha de retirada y el número de licencias. Revisar y actualizar el inventario de software dos veces al año, o con mayor frecuencia."
+        },
+        "cisv81-2-2": {
+            "code": "2,2",
+            "control": "Asegurar que el software autorizado esté actualmente soportado",
+            "requirements": "Asegurar que solo el software actualmente soportado esté designado como autorizado en el inventario de software para los activos empresariales. Si el software no está soportado pero es necesario para el cumplimiento de la misión de la empresa, documentar una excepción que detalle los controles de mitigación y la aceptación del riesgo residual. Para cualquier software no soportado sin documentación de excepción, designarlo como no autorizado. Revisar la lista de software para verificar el soporte al menos mensualmente, o con mayor frecuencia."
+        },
+        "cisv81-2-3": {
+            "code": "2,3",
+            "control": "Abordar software no autorizado",
+            "requirements": "Asegurar que el software no autorizado sea eliminado de los activos empresariales o reciba una excepción documentada. Revisar mensualmente, o con mayor frecuencia."
+        },
+        "cisv81-2-4": {
+            "code": "2,4",
+            "control": "Utilizar herramientas automatizadas de inventario de software",
+            "requirements": "Utilizar herramientas de inventario de software, cuando sea posible, en toda la empresa para automatizar el descubrimiento y la documentación del software instalado."
+        },
+        "cisv81-2-5": {
+            "code": "2,5",
+            "control": "Permitir solo software autorizado (allowlist)",
+            "requirements": "Usar controles técnicos, como listas blancas de aplicaciones, para asegurar que solo el software autorizado pueda ejecutarse o ser accedido. Reevaluar dos veces al año, o con mayor frecuencia."
+        },
+        "cisv81-2-6": {
+            "code": "2,6",
+            "control": "Permitir solo bibliotecas autorizadas (allowlist)",
+            "requirements": "Usar controles técnicos para asegurar que solo bibliotecas de software autorizadas, como archivos .dll, .ocx y .so específicos, puedan cargarse en un proceso del sistema. Bloquear la carga de bibliotecas no autorizadas en procesos del sistema. Reevaluar dos veces al año, o con mayor frecuencia."
+        },
+        "cisv81-2-7": {
+            "code": "2,7",
+            "control": "Permitir solo scripts autorizados (allowlist)",
+            "requirements": "Usar controles técnicos, como firmas digitales y control de versiones, para asegurar que solo scripts autorizados, como archivos .ps1 y .py específicos, puedan ejecutarse. Bloquear la ejecución de scripts no autorizados. Reevaluar dos veces al año, o con mayor frecuencia."
+        },
+        "cisv81-3-1": {
+            "code": "3,1",
+            "control": "Establecer y mantener un proceso de gestión de datos",
+            "requirements": "Establecer y mantener un proceso documentado de gestión de datos. En el proceso, abordar la sensibilidad de los datos, el propietario de los datos, el manejo de los datos, los límites de retención y los requisitos de eliminación, basados en la sensibilidad y los estándares de retención de la empresa. Revisar y actualizar la documentación anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-3-2": {
+            "code": "3,2",
+            "control": "Establecer y mantener un inventario de datos",
+            "requirements": "Establecer y mantener un inventario de datos basado en el proceso de gestión de datos de la empresa. Inventariar como mínimo los datos sensibles. Revisar y actualizar el inventario anualmente, como mínimo, con prioridad en los datos sensibles."
+        },
+        "cisv81-3-3": {
+            "code": "3,3",
+            "control": "Configurar listas de control de acceso a datos",
+            "requirements": "Configurar listas de control de acceso a datos basadas en la necesidad de conocer del usuario. Aplicar listas de control de acceso a datos, también conocidas como permisos de acceso, a sistemas de archivos locales y remotos, bases de datos y aplicaciones."
+        },
+        "cisv81-3-4": {
+            "code": "3,4",
+            "control": "Aplicar la retención de datos",
+            "requirements": "Retener los datos de acuerdo con el proceso documentado de gestión de datos de la empresa. La retención de datos debe incluir plazos mínimos y máximos."
+        },
+        "cisv81-3-5": {
+            "code": "3,5",
+            "control": "Eliminar datos de forma segura",
+            "requirements": "Eliminar los datos de forma segura según lo establecido en el proceso documentado de gestión de datos de la empresa. Asegurar que el proceso y el método de eliminación sean acordes con la sensibilidad de los datos."
+        },
+        "cisv81-3-6": {
+            "code": "3,6",
+            "control": "Cifrar datos en dispositivos de usuario final",
+            "requirements": "Cifrar los datos en dispositivos de usuario final que contengan datos sensibles. Ejemplos de implementación pueden incluir: Windows BitLocker®, Apple FileVault®, Linux® dm-crypt."
+        },
+        "cisv81-3-7": {
+            "code": "3,7",
+            "control": "Establecer y mantener un esquema de clasificación de datos",
+            "requirements": "Establecer y mantener un esquema general de clasificación de datos para la empresa. Las empresas pueden usar etiquetas como “Sensible”, “Confidencial” y “Público”, y clasificar sus datos de acuerdo con dichas etiquetas. Revisar y actualizar el esquema de clasificación anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-3-8": {
+            "code": "3,8",
+            "control": "Documentar los flujos de datos",
+            "requirements": "Documentar los flujos de datos. La documentación de flujos de datos incluye los flujos de datos de proveedores de servicios y debe basarse en el proceso de gestión de datos de la empresa. Revisar y actualizar la documentación anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-3-9": {
+            "code": "3,9",
+            "control": "Cifrar datos en medios extraíbles",
+            "requirements": "Cifrar los datos en medios extraíbles."
+        },
+        "cisv81-3-10": {
+            "code": "3,10",
+            "control": "Cifrar datos sensibles en tránsito",
+            "requirements": "Cifrar los datos sensibles en tránsito. Ejemplos de implementación pueden incluir: Transport Layer Security (TLS) y Open Secure Shell (OpenSSH)."
+        },
+        "cisv81-3-11": {
+            "code": "3,11",
+            "control": "Cifrar datos sensibles en reposo",
+            "requirements": "Cifrar los datos sensibles en reposo en servidores, aplicaciones y bases de datos. El cifrado a nivel de almacenamiento, también conocido como cifrado del lado del servidor, cumple con el requisito mínimo de esta Salvaguarda. Métodos adicionales de cifrado pueden incluir cifrado a nivel de aplicación, también conocido como cifrado del lado del cliente, donde el acceso a los dispositivos de almacenamiento de datos no permite el acceso a los datos en texto plano."
+        },
+        "cisv81-3-12": {
+            "code": "3,12",
+            "control": "Segmentar el procesamiento y almacenamiento de datos según la sensibilidad",
+            "requirements": "Segmentar el procesamiento y el almacenamiento de datos según la sensibilidad de los datos. No procesar datos sensibles en activos empresariales destinados a datos de menor sensibilidad."
+        },
+        "cisv81-3-13": {
+            "code": "3,13",
+            "control": "Implementar una solución de prevención de pérdida de datos",
+            "requirements": "Implementar una herramienta automatizada, como una herramienta de Prevención de Pérdida de Datos (DLP) basada en host, para identificar todos los datos sensibles almacenados, procesados o transmitidos a través de activos empresariales, incluidos los ubicados en las instalaciones o en un proveedor de servicios remoto, y actualizar el inventario de datos de la empresa."
+        },
+        "cisv81-3-14": {
+            "code": "3,14",
+            "control": "Registrar el acceso a datos sensibles",
+            "requirements": "Registrar el acceso a datos sensibles, incluida la modificación y la eliminación."
+        },
+        "cisv81-4-1": {
+            "code": "4,1",
+            "control": "Establecer y mantener un proceso de configuración segura",
+            "requirements": "Establecer y mantener un proceso documentado de configuración segura para los activos empresariales (dispositivos de usuario final, incluidos portátiles y móviles, dispositivos no informáticos/IoT y servidores) y el software (sistemas operativos y aplicaciones). Revisar y actualizar la documentación anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-4-2": {
+            "code": "4,2",
+            "control": "Establecer y mantener un proceso de configuración segura para la infraestructura de red",
+            "requirements": "Establecer y mantener un proceso documentado de configuración segura para los dispositivos de red. Revisar y actualizar la documentación anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-4-3": {
+            "code": "4,3",
+            "control": "Configurar el bloqueo automático de sesión en los activos empresariales",
+            "requirements": "Configurar el bloqueo automático de sesión en los activos empresariales después de un período definido de inactividad. Para sistemas operativos de propósito general, el período no debe exceder los 15 minutos. Para dispositivos móviles de usuario final, el período no debe exceder los 2 minutos."
+        },
+        "cisv81-4-4": {
+            "code": "4,4",
+            "control": "Implementar y gestionar un cortafuegos en servidores",
+            "requirements": "Implementar y gestionar un cortafuegos en los servidores, cuando sea compatible. Ejemplos de implementación incluyen un cortafuegos virtual, el cortafuegos del sistema operativo o un agente de cortafuegos de terceros."
+        },
+        "cisv81-4-5": {
+            "code": "4,5",
+            "control": "Implementar y gestionar un cortafuegos en dispositivos de usuario final",
+            "requirements": "Implementar y gestionar un cortafuegos basado en host o una herramienta de filtrado de puertos en los dispositivos de usuario final, con una regla de denegación por defecto que descarte todo el tráfico excepto los servicios y puertos que estén explícitamente permitidos."
+        },
+        "cisv81-4-6": {
+            "code": "4,6",
+            "control": "Gestionar de forma segura los activos empresariales y el software",
+            "requirements": "Gestionar de forma segura los activos empresariales y el software. Ejemplos de implementación incluyen la gestión de la configuración mediante Infraestructura como Código (IaC) con control de versiones y el acceso a interfaces administrativas a través de protocolos de red seguros, como Secure Shell (SSH) y Hypertext Transfer Protocol Secure (HTTPS). No utilizar protocolos de gestión inseguros, como Telnet (Teletype Network) y HTTP, salvo que sea operativamente esencial."
+        },
+        "cisv81-4-7": {
+            "code": "4,7",
+            "control": "Gestionar las cuentas predeterminadas en los activos empresariales y el software",
+            "requirements": "Gestionar las cuentas predeterminadas en los activos empresariales y el software, como root, administrador y otras cuentas preconfiguradas por el proveedor. Ejemplos de implementación pueden incluir: deshabilitar las cuentas predeterminadas o hacerlas inutilizables."
+        },
+        "cisv81-4-8": {
+            "code": "4,8",
+            "control": "Desinstalar o deshabilitar servicios innecesarios en los activos empresariales y el software",
+            "requirements": "Desinstalar o deshabilitar servicios innecesarios en los activos empresariales y el software, como un servicio de compartición de archivos no utilizado, un módulo de aplicación web o una función de servicio."
+        },
+        "cisv81-4-9": {
+            "code": "4,9",
+            "control": "Configurar servidores DNS de confianza en los activos empresariales",
+            "requirements": "Configurar servidores DNS de confianza en la infraestructura de red. Ejemplos de implementación incluyen configurar los dispositivos de red para usar servidores DNS controlados por la empresa y/o servidores DNS externos de buena reputación."
+        },
+        "cisv81-4-10": {
+            "code": "4,10",
+            "control": "Forzar el bloqueo automático del dispositivo en dispositivos portátiles de usuario final",
+            "requirements": "Forzar el bloqueo automático del dispositivo tras un umbral predeterminado de intentos fallidos de autenticación local en dispositivos portátiles de usuario final, cuando sea compatible. Para portátiles, no permitir más de 20 intentos fallidos de autenticación; para tabletas y teléfonos inteligentes, no más de 10 intentos fallidos de autenticación. Ejemplos de implementación incluyen Microsoft® InTune Device Lock y Apple® Configuration Profile maxFailedAttempts."
+        },
+        "cisv81-4-11": {
+            "code": "4,11",
+            "control": "Forzar la capacidad de borrado remoto en dispositivos portátiles de usuario final",
+            "requirements": "Borrar de forma remota los datos empresariales de los dispositivos portátiles de usuario final propiedad de la empresa cuando se considere apropiado, como en el caso de dispositivos perdidos o robados, o cuando una persona ya no preste servicios a la empresa."
+        },
+        "cisv81-4-12": {
+            "code": "4,12",
+            "control": "Separar los espacios de trabajo empresariales en dispositivos móviles de usuario final",
+            "requirements": "Asegurar que se utilicen espacios de trabajo empresariales separados en los dispositivos móviles de usuario final, cuando sea compatible. Ejemplos de implementación incluyen el uso de Apple® Configuration Profile o Android™ Work Profile para separar las aplicaciones y los datos empresariales de las aplicaciones y los datos personales."
+        },
+        "cisv81-5-1": {
+            "code": "5,1",
+            "control": "Establecer y mantener un inventario de cuentas",
+            "requirements": "Establecer y mantener un inventario de todas las cuentas gestionadas en la empresa. El inventario debe incluir como mínimo cuentas de usuario, de administrador y de servicio. El inventario, como mínimo, debe contener el nombre de la persona, el nombre de usuario, las fechas de inicio/fin y el departamento. Validar que todas las cuentas activas estén autorizadas, de forma periódica como mínimo trimestral, o con mayor frecuencia."
+        },
+        "cisv81-5-2": {
+            "code": "5,2",
+            "control": "Usar contraseñas únicas",
+            "requirements": "Usar contraseñas únicas para todos los activos empresariales. Las mejores prácticas incluyen, como mínimo, una contraseña de 8 caracteres para cuentas que usan Autenticación Multifactor (MFA) y una contraseña de 14 caracteres para cuentas que no usan MFA."
+        },
+        "cisv81-5-3": {
+            "code": "5,3",
+            "control": "Deshabilitar cuentas inactivas",
+            "requirements": "Eliminar o deshabilitar cualquier cuenta inactiva después de un período de 45 días de inactividad, cuando sea compatible."
+        },
+        "cisv81-5-4": {
+            "code": "5,4",
+            "control": "Restringir los privilegios de administrador a cuentas de administrador dedicadas",
+            "requirements": "Restringir los privilegios de administrador a cuentas de administrador dedicadas en los activos empresariales. Realizar actividades informáticas generales, como navegación por internet, correo electrónico y uso de suites de productividad, desde la cuenta principal del usuario, no privilegiada."
+        },
+        "cisv81-5-5": {
+            "code": "5,5",
+            "control": "Establecer y mantener un inventario de cuentas de servicio",
+            "requirements": "Establecer y mantener un inventario de cuentas de servicio. El inventario debe contener, como mínimo, el departamento propietario, la fecha de revisión y el propósito. Realizar revisiones de las cuentas de servicio para validar que todas las cuentas activas estén autorizadas, de forma periódica como mínimo trimestral, o con mayor frecuencia."
+        },
+        "cisv81-5-6": {
+            "code": "5,6",
+            "control": "Centralizar la gestión de cuentas",
+            "requirements": "Centralizar la gestión de cuentas mediante un directorio o un servicio de identidad."
+        },
+        "cisv81-6-1": {
+            "code": "6,1",
+            "control": "Establecer un proceso de concesión de acceso",
+            "requirements": "Establecer y seguir un proceso documentado, preferiblemente automatizado, para conceder acceso a los activos empresariales cuando se produzca una nueva contratación o un cambio de rol de un usuario."
+        },
+        "cisv81-6-2": {
+            "code": "6,2",
+            "control": "Establecer un proceso de revocación de acceso",
+            "requirements": "Establecer y seguir un proceso, preferiblemente automatizado, para revocar el acceso a los activos empresariales, mediante la deshabilitación inmediata de cuentas tras la terminación, la revocación de derechos o el cambio de rol de un usuario. Deshabilitar cuentas, en lugar de eliminarlas, puede ser necesario para preservar los registros de auditoría."
+        },
+        "cisv81-6-3": {
+            "code": "6,3",
+            "control": "Exigir MFA para aplicaciones expuestas externamente",
+            "requirements": "Exigir que todas las aplicaciones empresariales o de terceros expuestas externamente apliquen MFA, cuando sea compatible. Hacer cumplir MFA a través de un servicio de directorio o un proveedor de SSO es una implementación satisfactoria de esta Salvaguarda."
+        },
+        "cisv81-6-4": {
+            "code": "6,4",
+            "control": "Exigir MFA para acceso remoto a la red",
+            "requirements": "Exigir MFA para el acceso remoto a la red."
+        },
+        "cisv81-6-5": {
+            "code": "6,5",
+            "control": "Exigir MFA para acceso administrativo",
+            "requirements": "Exigir MFA para todas las cuentas de acceso administrativo, cuando sea compatible, en todos los activos empresariales, ya sea que se gestionen en las instalaciones o a través de un proveedor de servicios."
+        },
+        "cisv81-6-6": {
+            "code": "6,6",
+            "control": "Establecer y mantener un inventario de sistemas de autenticación y autorización",
+            "requirements": "Establecer y mantener un inventario de los sistemas de autenticación y autorización de la empresa, incluidos los alojados en las instalaciones o en un proveedor de servicios remoto. Revisar y actualizar el inventario, como mínimo, anualmente, o con mayor frecuencia."
+        },
+        "cisv81-6-7": {
+            "code": "6,7",
+            "control": "Centralizar el control de acceso",
+            "requirements": "Centralizar el control de acceso para todos los activos empresariales mediante un servicio de directorio o un proveedor de SSO, cuando sea compatible."
+        },
+        "cisv81-6-8": {
+            "code": "6,8",
+            "control": "Definir y mantener el control de acceso basado en roles",
+            "requirements": "Definir y mantener el control de acceso basado en roles, determinando y documentando los derechos de acceso necesarios para cada rol dentro de la empresa para llevar a cabo con éxito sus funciones asignadas. Realizar revisiones de control de acceso de los activos empresariales para validar que todos los privilegios estén autorizados, de forma periódica como mínimo anual, o con mayor frecuencia."
+        },
+        "cisv81-7-1": {
+            "code": "7,1",
+            "control": "Establecer y mantener un proceso de gestión de vulnerabilidades",
+            "requirements": "Establecer y mantener un proceso documentado de gestión de vulnerabilidades para los activos empresariales. Revisar y actualizar la documentación anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-7-2": {
+            "code": "7,2",
+            "control": "Establecer y mantener un proceso de remediación",
+            "requirements": "Establecer y mantener una estrategia de remediación basada en riesgos documentada en un proceso de remediación, con revisiones mensuales o más frecuentes."
+        },
+        "cisv81-7-3": {
+            "code": "7,3",
+            "control": "Realizar gestión automatizada de parches del sistema operativo",
+            "requirements": "Realizar actualizaciones del sistema operativo en los activos empresariales mediante gestión automatizada de parches de forma mensual, o con mayor frecuencia."
+        },
+        "cisv81-7-4": {
+            "code": "7,4",
+            "control": "Realizar gestión automatizada de parches de aplicaciones",
+            "requirements": "Realizar actualizaciones de aplicaciones en los activos empresariales mediante gestión automatizada de parches de forma mensual, o con mayor frecuencia."
+        },
+        "cisv81-7-5": {
+            "code": "7,5",
+            "control": "Realizar escaneos automatizados de vulnerabilidades de activos empresariales internos",
+            "requirements": "Realizar escaneos automatizados de vulnerabilidades de los activos empresariales internos de forma trimestral, o con mayor frecuencia. Realizar tanto escaneos autenticados como no autenticados."
+        },
+        "cisv81-7-6": {
+            "code": "7,6",
+            "control": "Realizar escaneos automatizados de vulnerabilidades de activos empresariales expuestos externamente",
+            "requirements": "Realizar escaneos automatizados de vulnerabilidades de los activos empresariales expuestos externamente. Realizar escaneos de forma mensual, o con mayor frecuencia."
+        },
+        "cisv81-7-7": {
+            "code": "7,7",
+            "control": "Remediar las vulnerabilidades detectadas",
+            "requirements": "Remediar las vulnerabilidades detectadas en el software mediante procesos y herramientas de forma mensual, o con mayor frecuencia, en función del proceso de remediación."
+        },
+        "cisv81-8-1": {
+            "code": "8,1",
+            "control": "Establecer y mantener un proceso de gestión de registros de auditoría",
+            "requirements": "Establecer y mantener un proceso documentado de gestión de registros de auditoría que defina los requisitos de registro de la empresa. Como mínimo, abordar la recopilación, revisión y retención de los registros de auditoría de los activos empresariales. Revisar y actualizar la documentación anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-8-2": {
+            "code": "8,2",
+            "control": "Recopilar registros de auditoría",
+            "requirements": "Recopilar registros de auditoría. Asegurar que el registro, según el proceso de gestión de registros de auditoría de la empresa, esté habilitado en todos los activos empresariales."
+        },
+        "cisv81-8-3": {
+            "code": "8,3",
+            "control": "Garantizar un almacenamiento adecuado de registros de auditoría",
+            "requirements": "Asegurar que los destinos de registro mantengan un almacenamiento adecuado para cumplir con el proceso de gestión de registros de auditoría de la empresa."
+        },
+        "cisv81-8-4": {
+            "code": "8,4",
+            "control": "Estandarizar la sincronización del tiempo",
+            "requirements": "Estandarizar la sincronización del tiempo. Configurar al menos dos fuentes de tiempo sincronizadas en los activos empresariales, cuando sea compatible."
+        },
+        "cisv81-8-5": {
+            "code": "8,5",
+            "control": "Recopilar registros de auditoría detallados",
+            "requirements": "Configurar el registro de auditoría detallado para los activos empresariales que contienen datos sensibles. Incluir el origen del evento, la fecha, el nombre de usuario, la marca de tiempo, las direcciones de origen, las direcciones de destino y otros elementos útiles que puedan ayudar en una investigación forense."
+        },
+        "cisv81-8-6": {
+            "code": "8,6",
+            "control": "Recopilar registros de auditoría de consultas DNS",
+            "requirements": "Recopilar registros de auditoría de consultas DNS en los activos empresariales, cuando sea apropiado y compatible."
+        },
+        "cisv81-8-7": {
+            "code": "8,7",
+            "control": "Recopilar registros de auditoría de solicitudes URL",
+            "requirements": "Recopilar registros de auditoría de solicitudes URL en los activos empresariales, cuando sea apropiado y compatible."
+        },
+        "cisv81-8-8": {
+            "code": "8,8",
+            "control": "Recopilar registros de auditoría de línea de comandos",
+            "requirements": "Recopilar registros de auditoría de línea de comandos. Ejemplos de implementación incluyen recopilar registros de auditoría de PowerShell®, BASH™ y terminales administrativas remotas."
+        },
+        "cisv81-8-9": {
+            "code": "8,9",
+            "control": "Centralizar los registros de auditoría",
+            "requirements": "Centralizar, en la medida de lo posible, la recopilación y retención de registros de auditoría en todos los activos empresariales de acuerdo con el proceso documentado de gestión de registros de auditoría. Ejemplos de implementación incluyen principalmente aprovechar una herramienta SIEM para centralizar múltiples fuentes de registros."
+        },
+        "cisv81-8-10": {
+            "code": "8,10",
+            "control": "Conservar los registros de auditoría",
+            "requirements": "Conservar los registros de auditoría en los activos empresariales durante un mínimo de 90 días."
+        },
+        "cisv81-8-11": {
+            "code": "8,11",
+            "control": "Realizar revisiones de los registros de auditoría",
+            "requirements": "Realizar revisiones de los registros de auditoría para detectar anomalías o eventos anormales que puedan indicar una amenaza potencial. Realizar revisiones de forma semanal, o con mayor frecuencia."
+        },
+        "cisv81-8-12": {
+            "code": "8,12",
+            "control": "Recopilar registros de proveedores de servicios",
+            "requirements": "Recopilar registros de proveedores de servicios, cuando sea compatible. Ejemplos de implementación incluyen recopilar eventos de autenticación y autorización, eventos de creación y eliminación de datos y eventos de gestión de usuarios."
+        },
+        "cisv81-9-1": {
+            "code": "9,1",
+            "control": "Garantizar el uso exclusivo de navegadores y clientes de correo electrónico totalmente compatibles",
+            "requirements": "Asegurar que solo se permita ejecutar en la empresa navegadores y clientes de correo electrónico totalmente compatibles, utilizando únicamente la versión más reciente proporcionada por el proveedor."
+        },
+        "cisv81-9-2": {
+            "code": "9,2",
+            "control": "Usar servicios de filtrado DNS",
+            "requirements": "Usar servicios de filtrado DNS en todos los dispositivos de usuario final, incluidos los activos remotos y en las instalaciones, para bloquear el acceso a dominios maliciosos conocidos."
+        },
+        "cisv81-9-3": {
+            "code": "9,3",
+            "control": "Mantener y hacer cumplir filtros de URL basados en red",
+            "requirements": "Hacer cumplir y actualizar filtros de URL basados en red para limitar que un activo empresarial se conecte a sitios web potencialmente maliciosos o no aprobados. Ejemplos de implementación incluyen filtrado basado en categorías, filtrado basado en reputación o mediante el uso de listas de bloqueo. Hacer cumplir los filtros para todos los activos empresariales."
+        },
+        "cisv81-9-4": {
+            "code": "9,4",
+            "control": "Restringir extensiones innecesarias o no autorizadas de navegadores y clientes de correo electrónico",
+            "requirements": "Restringir, ya sea desinstalando o deshabilitando, cualquier plugin, extensión o aplicación complementaria de navegador o cliente de correo electrónico no autorizada o innecesaria."
+        },
+        "cisv81-9-5": {
+            "code": "9,5",
+            "control": "Implementar DMARC",
+            "requirements": "Para reducir la probabilidad de correos electrónicos falsificados o modificados provenientes de dominios válidos, implementar una política y verificación DMARC, comenzando por implementar los estándares Sender Policy Framework (SPF) y DomainKeys Identified Mail (DKIM)."
+        },
+        "cisv81-9-6": {
+            "code": "9,6",
+            "control": "Bloquear tipos de archivos innecesarios",
+            "requirements": "Bloquear los tipos de archivos innecesarios que intenten entrar en la puerta de enlace de correo electrónico de la empresa."
+        },
+        "cisv81-9-7": {
+            "code": "9,7",
+            "control": "Desplegar y mantener protecciones antimalware en el servidor de correo electrónico",
+            "requirements": "Desplegar y mantener protecciones antimalware en el servidor de correo electrónico, como el escaneo de adjuntos y/o el sandboxing."
+        },
+        "cisv81-10-1": {
+            "code": "10,1",
+            "control": "Desplegar y mantener software antimalware",
+            "requirements": "Desplegar y mantener software antimalware en todos los activos empresariales."
+        },
+        "cisv81-10-2": {
+            "code": "10,2",
+            "control": "Configurar actualizaciones automáticas de firmas antimalware",
+            "requirements": "Configurar actualizaciones automáticas de los archivos de firmas antimalware en todos los activos empresariales."
+        },
+        "cisv81-10-3": {
+            "code": "10,3",
+            "control": "Deshabilitar Autorun y Autoplay para medios extraíbles",
+            "requirements": "Deshabilitar la funcionalidad de autoejecución (autorun) y reproducción automática (autoplay) para medios extraíbles."
+        },
+        "cisv81-10-4": {
+            "code": "10,4",
+            "control": "Configurar el escaneo antimalware automático de medios extraíbles",
+            "requirements": "Configurar el software antimalware para escanear automáticamente los medios extraíbles."
+        },
+        "cisv81-10-5": {
+            "code": "10,5",
+            "control": "Habilitar funciones anti-explotación",
+            "requirements": "Habilitar funciones anti-explotación en los activos empresariales y el software, cuando sea posible, como Microsoft® Data Execution Prevention (DEP), Windows® Defender Exploit Guard (WDEG) o Apple® System Integrity Protection (SIP) y Gatekeeper™."
+        },
+        "cisv81-10-6": {
+            "code": "10,6",
+            "control": "Gestionar centralmente el software antimalware",
+            "requirements": "Gestionar centralmente el software antimalware."
+        },
+        "cisv81-10-7": {
+            "code": "10,7",
+            "control": "Usar software antimalware basado en comportamiento",
+            "requirements": "Usar software antimalware basado en comportamiento."
+        },
+        "cisv81-11-1": {
+            "code": "11,1",
+            "control": "Establecer y mantener un proceso de recuperación de datos",
+            "requirements": "Establecer y mantener un proceso documentado de recuperación de datos que incluya procedimientos detallados de copia de seguridad. En el proceso, abordar el alcance de las actividades de recuperación de datos, la priorización de la recuperación y la seguridad de los datos de respaldo. Revisar y actualizar la documentación anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-11-2": {
+            "code": "11,2",
+            "control": "Realizar copias de seguridad automatizadas",
+            "requirements": "Realizar copias de seguridad automatizadas de los activos empresariales dentro del alcance. Ejecutar las copias de seguridad semanalmente, o con mayor frecuencia, según la sensibilidad de los datos."
+        },
+        "cisv81-11-3": {
+            "code": "11,3",
+            "control": "Proteger los datos de recuperación",
+            "requirements": "Proteger los datos de recuperación con controles equivalentes a los de los datos originales. Hacer referencia al cifrado o a la separación de datos, según los requisitos."
+        },
+        "cisv81-11-4": {
+            "code": "11,4",
+            "control": "Establecer y mantener una instancia aislada de los datos de recuperación",
+            "requirements": "Establecer y mantener una instancia aislada de los datos de recuperación. Ejemplos de implementación incluyen controlar por versiones los destinos de respaldo mediante sistemas o servicios offline, en la nube o fuera del sitio."
+        },
+        "cisv81-11-5": {
+            "code": "11,5",
+            "control": "Probar la recuperación de datos",
+            "requirements": "Probar la recuperación de copias de seguridad trimestralmente, o con mayor frecuencia, para una muestra de los activos empresariales dentro del alcance."
+        },
+        "cisv81-12-1": {
+            "code": "12,1",
+            "control": "Asegurar que la infraestructura de red esté actualizada",
+            "requirements": "Asegurar que la infraestructura de red se mantenga actualizada. Ejemplos de implementación incluyen ejecutar la última versión estable del software y/o utilizar ofertas de red como servicio (NaaS) actualmente compatibles. Revisar las versiones del software mensualmente, o con mayor frecuencia, para verificar el soporte del software."
+        },
+        "cisv81-12-2": {
+            "code": "12,2",
+            "control": "Establecer y mantener una arquitectura de red segura",
+            "requirements": "Diseñar y mantener una arquitectura de red segura. Una arquitectura de red segura debe abordar, como mínimo, la segmentación, el mínimo privilegio y la disponibilidad. Ejemplos de implementación pueden incluir documentación, políticas y componentes de diseño."
+        },
+        "cisv81-12-3": {
+            "code": "12,3",
+            "control": "Gestionar de forma segura la infraestructura de red",
+            "requirements": "Gestionar de forma segura la infraestructura de red. Ejemplos de implementación incluyen Infraestructura como Código (IaC) con control de versiones y el uso de protocolos de red seguros, como SSH y HTTPS."
+        },
+        "cisv81-12-4": {
+            "code": "12,4",
+            "control": "Establecer y mantener diagrama(s) de arquitectura",
+            "requirements": "Establecer y mantener diagrama(s) de arquitectura y/o otra documentación del sistema de red. Revisar y actualizar la documentación anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-12-5": {
+            "code": "12,5",
+            "control": "Centralizar la autenticación, autorización y auditoría (AAA) de red",
+            "requirements": "Centralizar AAA de red."
+        },
+        "cisv81-12-6": {
+            "code": "12,6",
+            "control": "Uso de protocolos seguros de gestión de red y comunicación",
+            "requirements": "Adoptar protocolos seguros de gestión de red (p. ej., 802.1X) y protocolos seguros de comunicación (p. ej., Wi-Fi Protected Access 2 (WPA2) Enterprise o alternativas más seguras)."
+        },
+        "cisv81-12-7": {
+            "code": "12,7",
+            "control": "Asegurar que los dispositivos remotos usen una VPN y se conecten a la infraestructura AAA de la empresa",
+            "requirements": "Exigir que los usuarios se autentiquen en servicios de VPN y de autenticación gestionados por la empresa antes de acceder a recursos empresariales en dispositivos de usuario final."
+        },
+        "cisv81-12-8": {
+            "code": "12,8",
+            "control": "Establecer y mantener recursos informáticos dedicados para todo trabajo administrativo",
+            "requirements": "Establecer y mantener recursos informáticos dedicados, ya sea físicamente o lógicamente separados, para todas las tareas administrativas o tareas que requieran acceso administrativo. Los recursos informáticos deben estar segmentados de la red principal de la empresa y no se les debe permitir acceso a internet."
+        },
+        "cisv81-13-1": {
+            "code": "13,1",
+            "control": "Centralizar las alertas de eventos de seguridad",
+            "requirements": "Centralizar las alertas de eventos de seguridad en los activos empresariales para la correlación y el análisis de registros. La implementación de mejores prácticas requiere el uso de un SIEM, que incluya alertas de correlación de eventos definidas por el proveedor. Una plataforma de analítica de registros configurada con alertas de correlación relevantes para seguridad también cumple con esta Salvaguarda."
+        },
+        "cisv81-13-2": {
+            "code": "13,2",
+            "control": "Desplegar una solución de detección de intrusiones basada en host",
+            "requirements": "Desplegar una solución de detección de intrusiones basada en host en los activos empresariales, cuando sea apropiado y/o compatible."
+        },
+        "cisv81-13-3": {
+            "code": "13,3",
+            "control": "Desplegar una solución de detección de intrusiones en red",
+            "requirements": "Desplegar una solución de detección de intrusiones en red en los activos empresariales, cuando sea apropiado. Ejemplos de implementación incluyen el uso de un Sistema de Detección de Intrusiones en Red (NIDS) o un servicio equivalente del proveedor de servicios en la nube (CSP)."
+        },
+        "cisv81-13-4": {
+            "code": "13,4",
+            "control": "Realizar filtrado de tráfico entre segmentos de red",
+            "requirements": "Realizar filtrado de tráfico entre segmentos de red, cuando sea apropiado."
+        },
+        "cisv81-13-5": {
+            "code": "13,5",
+            "control": "Gestionar el control de acceso para activos remotos",
+            "requirements": "Gestionar el control de acceso para los activos que se conectan remotamente a recursos empresariales. Determinar la cantidad de acceso a los recursos empresariales en función de: software antimalware instalado y actualizado, cumplimiento de configuración con el proceso de configuración segura de la empresa, y asegurar que el sistema operativo y las aplicaciones estén actualizados."
+        },
+        "cisv81-13-6": {
+            "code": "13,6",
+            "control": "Recopilar registros de flujo de tráfico de red",
+            "requirements": "Recopilar registros de flujo de tráfico de red y/o tráfico de red para revisar y generar alertas desde dispositivos de red."
+        },
+        "cisv81-13-7": {
+            "code": "13,7",
+            "control": "Desplegar una solución de prevención de intrusiones basada en host",
+            "requirements": "Desplegar una solución de prevención de intrusiones basada en host en los activos empresariales, cuando sea apropiado y/o compatible. Ejemplos de implementación incluyen el uso de un cliente de Detección y Respuesta en el Endpoint (EDR) o un agente IPS basado en host."
+        },
+        "cisv81-13-8": {
+            "code": "13,8",
+            "control": "Desplegar una solución de prevención de intrusiones en red",
+            "requirements": "Desplegar una solución de prevención de intrusiones en red, cuando sea apropiado. Ejemplos de implementación incluyen el uso de un Sistema de Prevención de Intrusiones en Red (NIPS) o un servicio equivalente del CSP."
+        },
+        "cisv81-13-9": {
+            "code": "13,9",
+            "control": "Desplegar control de acceso a nivel de puerto",
+            "requirements": "Desplegar control de acceso a nivel de puerto. El control de acceso a nivel de puerto utiliza 802.1x o protocolos similares de control de acceso a la red, como certificados, y puede incorporar autenticación de usuario y/o dispositivo."
+        },
+        "cisv81-13-10": {
+            "code": "13,10",
+            "control": "Realizar filtrado de capa de aplicación",
+            "requirements": "Realizar filtrado de capa de aplicación. Ejemplos de implementación incluyen un proxy de filtrado, un firewall de capa de aplicación o una puerta de enlace."
+        },
+        "cisv81-13-11": {
+            "code": "13,11",
+            "control": "Ajustar los umbrales de alertas de eventos de seguridad",
+            "requirements": "Ajustar los umbrales de alertas de eventos de seguridad mensualmente, o con mayor frecuencia."
+        },
+        "cisv81-14-1": {
+            "code": "14,1",
+            "control": "Establecer y mantener un programa de concienciación sobre seguridad",
+            "requirements": "Establecer y mantener un programa de concienciación sobre seguridad. El propósito de un programa de concienciación sobre seguridad es educar a la fuerza laboral de la empresa sobre cómo interactuar con los activos y los datos de la empresa de manera segura. Impartir formación al momento de la contratación y, como mínimo, anualmente. Revisar y actualizar el contenido anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-14-2": {
+            "code": "14,2",
+            "control": "Capacitar a los miembros de la fuerza laboral para reconocer ataques de ingeniería social",
+            "requirements": "Capacitar a los miembros de la fuerza laboral para reconocer ataques de ingeniería social, como phishing, compromiso de correo electrónico empresarial (BEC), pretexting y tailgating."
+        },
+        "cisv81-14-3": {
+            "code": "14,3",
+            "control": "Capacitar a los miembros de la fuerza laboral sobre mejores prácticas de autenticación",
+            "requirements": "Capacitar a los miembros de la fuerza laboral sobre mejores prácticas de autenticación. Ejemplos de temas incluyen MFA, composición de contraseñas y gestión de credenciales."
+        },
+        "cisv81-14-4": {
+            "code": "14,4",
+            "control": "Capacitar a la fuerza laboral sobre mejores prácticas de manejo de datos",
+            "requirements": "Capacitar a los miembros de la fuerza laboral sobre cómo identificar y almacenar, transferir, archivar y destruir adecuadamente los datos sensibles. Esto también incluye capacitación sobre mejores prácticas de pantalla y escritorio limpios, como bloquear la pantalla cuando se alejan de su activo empresarial, borrar pizarras físicas y virtuales al final de las reuniones y almacenar datos y activos de forma segura."
+        },
+        "cisv81-14-5": {
+            "code": "14,5",
+            "control": "Capacitar a los miembros de la fuerza laboral sobre las causas de exposición involuntaria de datos",
+            "requirements": "Capacitar a los miembros de la fuerza laboral para que sean conscientes de las causas de exposición involuntaria de datos. Ejemplos de temas incluyen entrega errónea de datos sensibles, perder un dispositivo portátil de usuario final o publicar datos a audiencias no previstas."
+        },
+        "cisv81-14-6": {
+            "code": "14,6",
+            "control": "Capacitar a los miembros de la fuerza laboral para reconocer y reportar incidentes de seguridad",
+            "requirements": "Capacitar a los miembros de la fuerza laboral para que puedan reconocer un incidente potencial y puedan reportarlo."
+        },
+        "cisv81-14-7": {
+            "code": "14,7",
+            "control": "Capacitar a la fuerza laboral sobre cómo identificar y reportar si a sus activos empresariales les faltan actualizaciones de seguridad",
+            "requirements": "Capacitar a la fuerza laboral para que entienda cómo verificar y reportar parches de software desactualizados o cualquier fallo en procesos y herramientas automatizadas. Parte de esta formación debe incluir notificar al personal de TI sobre cualquier fallo en procesos y herramientas automatizadas."
+        },
+        "cisv81-14-8": {
+            "code": "14,8",
+            "control": "Capacitar a la fuerza laboral sobre los peligros de conectarse y transmitir datos empresariales a través de redes inseguras",
+            "requirements": "Capacitar a los miembros de la fuerza laboral sobre los peligros de conectarse a, y transmitir datos a través de, redes inseguras para actividades empresariales. Si la empresa tiene trabajadores remotos, la formación debe incluir orientación para asegurar que todos los usuarios configuren de forma segura la infraestructura de red de su hogar."
+        },
+        "cisv81-14-9": {
+            "code": "14,9",
+            "control": "Realizar formación de concienciación y habilidades de seguridad específica por rol",
+            "requirements": "Realizar formación de concienciación y habilidades de seguridad específica por rol. Ejemplos de implementación incluyen cursos de administración segura de sistemas para profesionales de TI, formación de concienciación y prevención de vulnerabilidades OWASP® Top 10 para desarrolladores de aplicaciones web y formación avanzada de concienciación sobre ingeniería social para roles de alto perfil."
+        },
+        "cisv81-15-1": {
+            "code": "15,1",
+            "control": "Establecer y mantener un inventario de proveedores de servicios",
+            "requirements": "Establecer y mantener un inventario de proveedores de servicios. El inventario debe listar todos los proveedores de servicios conocidos, incluir clasificación(es) y designar un contacto de la empresa para cada proveedor de servicios. Revisar y actualizar el inventario anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-15-2": {
+            "code": "15,2",
+            "control": "Establecer y mantener una política de gestión de proveedores de servicios",
+            "requirements": "Establecer y mantener una política de gestión de proveedores de servicios. Asegurar que la política aborde la clasificación, el inventario, la evaluación, el monitoreo y la retirada de servicio de los proveedores de servicios. Revisar y actualizar la política anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-15-3": {
+            "code": "15,3",
+            "control": "Clasificar a los proveedores de servicios",
+            "requirements": "Clasificar a los proveedores de servicios. La consideración de la clasificación puede incluir una o más características, como sensibilidad de datos, volumen de datos, requisitos de disponibilidad, regulaciones aplicables, riesgo inherente y riesgo mitigado. Actualizar y revisar las clasificaciones anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-15-4": {
+            "code": "15,4",
+            "control": "Asegurar que los contratos con proveedores de servicios incluyan requisitos de seguridad",
+            "requirements": "Asegurar que los contratos con proveedores de servicios incluyan requisitos de seguridad. Ejemplos de requisitos pueden incluir requisitos mínimos del programa de seguridad, notificación y respuesta a incidentes de seguridad y/o brechas de datos, requisitos de cifrado de datos y compromisos de eliminación de datos. Estos requisitos de seguridad deben ser consistentes con la política de gestión de proveedores de servicios de la empresa. Revisar los contratos de proveedores de servicios anualmente para asegurar que los contratos no carezcan de requisitos de seguridad."
+        },
+        "cisv81-15-5": {
+            "code": "15,5",
+            "control": "Evaluar a los proveedores de servicios",
+            "requirements": "Evaluar a los proveedores de servicios de forma consistente con la política de gestión de proveedores de servicios de la empresa. El alcance de la evaluación puede variar según la(s) clasificación(es) y puede incluir la revisión de informes de evaluación estandarizados, como Service Organization Control 2 (SOC 2) y Payment Card Industry (PCI) Attestation of Compliance (AoC), cuestionarios personalizados u otros procesos adecuadamente rigurosos. Reevaluar a los proveedores de servicios anualmente, como mínimo, o con contratos nuevos y renovados."
+        },
+        "cisv81-15-6": {
+            "code": "15,6",
+            "control": "Monitorear a los proveedores de servicios",
+            "requirements": "Monitorear a los proveedores de servicios de manera consistente con la política de gestión de proveedores de servicios de la empresa. El monitoreo puede incluir la reevaluación periódica del cumplimiento del proveedor, el seguimiento de las notas de versión del proveedor y el monitoreo de la dark web."
+        },
+        "cisv81-15-7": {
+            "code": "15,7",
+            "control": "Dar de baja de forma segura a los proveedores de servicios",
+            "requirements": "Dar de baja de forma segura a los proveedores de servicios. Ejemplos de consideraciones incluyen la desactivación de cuentas de usuario y de servicio, la finalización de los flujos de datos y la eliminación segura de los datos empresariales dentro de los sistemas del proveedor de servicios."
+        },
+        "cisv81-16-1": {
+            "code": "16,1",
+            "control": "Establecer y mantener un proceso seguro de desarrollo de aplicaciones",
+            "requirements": "Establecer y mantener un proceso seguro de desarrollo de aplicaciones. En el proceso, abordar elementos tales como: estándares de diseño seguro de aplicaciones, prácticas de codificación segura, capacitación de desarrolladores, gestión de vulnerabilidades, seguridad del código de terceros y procedimientos de pruebas de seguridad de aplicaciones. Revisar y actualizar la documentación anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-16-2": {
+            "code": "16,2",
+            "control": "Establecer y mantener un proceso para aceptar y abordar vulnerabilidades de software",
+            "requirements": "Establecer y mantener un proceso para aceptar y abordar reportes de vulnerabilidades de software, incluyendo proporcionar un medio para que entidades externas reporten. El proceso debe incluir elementos como: una política de manejo de vulnerabilidades que identifique el proceso de reporte, la parte responsable de gestionar los reportes y un proceso de recepción, asignación, remediación y pruebas de remediación. Como parte del proceso, usar un sistema de seguimiento de vulnerabilidades que incluya calificaciones de severidad y métricas para medir los tiempos de identificación, análisis y remediación de vulnerabilidades. Revisar y actualizar la documentación anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda.\n\nLos desarrolladores de aplicaciones de terceros necesitan considerar esto como una política orientada al exterior que ayuda a establecer expectativas para partes interesadas externas."
+        },
+        "cisv81-16-3": {
+            "code": "16,3",
+            "control": "Realizar análisis de causa raíz sobre vulnerabilidades de seguridad",
+            "requirements": "Realizar análisis de causa raíz sobre vulnerabilidades de seguridad. Al revisar vulnerabilidades, el análisis de causa raíz es la tarea de evaluar los problemas subyacentes que crean vulnerabilidades en el código y permite a los equipos de desarrollo ir más allá de solo corregir vulnerabilidades individuales a medida que surgen."
+        },
+        "cisv81-16-4": {
+            "code": "16,4",
+            "control": "Establecer y gestionar un inventario de componentes de software de terceros",
+            "requirements": "Establecer y gestionar un inventario actualizado de componentes de terceros usados en el desarrollo, a menudo denominado un “bill of materials”, así como componentes previstos para uso futuro. Este inventario debe incluir los riesgos que cada componente de terceros podría presentar. Evaluar la lista al menos mensualmente para identificar cambios o actualizaciones en estos componentes y validar que el componente siga siendo compatible."
+        },
+        "cisv81-16-5": {
+            "code": "16,5",
+            "control": "Usar componentes de software de terceros confiables y actualizados",
+            "requirements": "Usar componentes de software de terceros confiables y actualizados. Cuando sea posible, elegir frameworks y bibliotecas establecidos y probados que proporcionen seguridad adecuada. Adquirir estos componentes de fuentes confiables o evaluar el software en busca de vulnerabilidades antes de usarlo."
+        },
+        "cisv81-16-6": {
+            "code": "16,6",
+            "control": "Establecer y mantener un sistema de calificación de severidad y un proceso para vulnerabilidades de aplicaciones",
+            "requirements": "Establecer y mantener un sistema de calificación de severidad y un proceso para vulnerabilidades de aplicaciones que facilite priorizar el orden en que se corrigen las vulnerabilidades descubiertas. Este proceso incluye establecer un nivel mínimo de aceptabilidad de seguridad para liberar código o aplicaciones. Las calificaciones de severidad aportan una forma sistemática de clasificar vulnerabilidades que mejora la gestión del riesgo y ayuda a asegurar que los fallos más graves se corrijan primero. Revisar y actualizar el sistema y el proceso anualmente."
+        },
+        "cisv81-16-7": {
+            "code": "16,7",
+            "control": "Usar plantillas estándar de configuración de endurecimiento para la infraestructura de aplicaciones",
+            "requirements": "Usar plantillas estándar de configuración de endurecimiento recomendadas por la industria para componentes de infraestructura de aplicaciones. Esto incluye servidores subyacentes, bases de datos y servidores web, y aplica a contenedores en la nube, componentes de Plataforma como Servicio (PaaS) y componentes SaaS. No permitir que el software desarrollado internamente debilite el endurecimiento de la configuración."
+        },
+        "cisv81-16-8": {
+            "code": "16,8",
+            "control": "Separar sistemas de producción y no producción",
+            "requirements": "Mantener entornos separados para sistemas de producción y no producción."
+        },
+        "cisv81-16-9": {
+            "code": "16,9",
+            "control": "Capacitar a desarrolladores en conceptos de seguridad de aplicaciones y codificación segura",
+            "requirements": "Asegurar que todo el personal de desarrollo de software reciba capacitación en escritura de código seguro para su entorno de desarrollo específico y sus responsabilidades. La capacitación puede incluir principios generales de seguridad y prácticas estándar de seguridad de aplicaciones. Realizar la capacitación al menos anualmente y diseñarla de manera que promueva la seguridad dentro del equipo de desarrollo y construya una cultura de seguridad entre los desarrolladores."
+        },
+        "cisv81-16-10": {
+            "code": "16,10",
+            "control": "Aplicar principios de diseño seguro en arquitecturas de aplicaciones",
+            "requirements": "Aplicar principios de diseño seguro en arquitecturas de aplicaciones. Los principios de diseño seguro incluyen el concepto de mínimo privilegio y la mediación forzada para validar cada operación que realiza el usuario, promoviendo el concepto de “nunca confiar en la entrada del usuario”. Ejemplos incluyen asegurar que se realice y documente una verificación explícita de errores para todas las entradas, incluyendo tamaño, tipo de dato y rangos o formatos aceptables. El diseño seguro también significa minimizar la superficie de ataque de la infraestructura de la aplicación, como desactivar puertos y servicios no protegidos, eliminar programas y archivos innecesarios y renombrar o eliminar cuentas predeterminadas."
+        },
+        "cisv81-16-11": {
+            "code": "16,11",
+            "control": "Aprovechar módulos o servicios verificados para componentes de seguridad de aplicaciones",
+            "requirements": "Aprovechar módulos o servicios verificados para componentes de seguridad de aplicaciones, como gestión de identidades, cifrado, auditoría y registro. Usar características de la plataforma en funciones críticas de seguridad reducirá la carga de trabajo de los desarrolladores y minimizará la probabilidad de errores de diseño o implementación. Los sistemas operativos modernos proporcionan mecanismos efectivos de identificación, autenticación y autorización y ponen esos mecanismos a disposición de las aplicaciones. Usar solo algoritmos de cifrado estandarizados, actualmente aceptados y ampliamente revisados. Los sistemas operativos también proporcionan mecanismos para crear y mantener registros de auditoría seguros."
+        },
+        "cisv81-16-12": {
+            "code": "16,12",
+            "control": "Implementar controles de seguridad a nivel de código",
+            "requirements": "Aplicar herramientas de análisis estático y dinámico dentro del ciclo de vida de la aplicación para verificar que se estén siguiendo prácticas de codificación segura."
+        },
+        "cisv81-16-13": {
+            "code": "16,13",
+            "control": "Realizar pruebas de penetración de aplicaciones",
+            "requirements": "Realizar pruebas de penetración de aplicaciones. Para aplicaciones críticas, las pruebas de penetración autenticadas son más adecuadas para encontrar vulnerabilidades de lógica de negocio que el escaneo de código y las pruebas de seguridad automatizadas. Las pruebas de penetración dependen de la habilidad del evaluador para manipular manualmente una aplicación como usuario autenticado y no autenticado."
+        },
+        "cisv81-16-14": {
+            "code": "16,14",
+            "control": "Realizar modelado de amenazas",
+            "requirements": "Realizar modelado de amenazas. El modelado de amenazas es el proceso de identificar y abordar fallas de diseño de seguridad de aplicaciones dentro de un diseño, antes de que se cree el código. Se realiza por individuos especialmente capacitados que evalúan el diseño de la aplicación y estiman riesgos de seguridad para cada punto de entrada y nivel de acceso. El objetivo es mapear la aplicación, la arquitectura y la infraestructura de manera estructurada para comprender sus debilidades."
+        },
+        "cisv81-17-1": {
+            "code": "17,1",
+            "control": "Designar personal para gestionar el manejo de incidentes",
+            "requirements": "Designar a una persona clave y, al menos, un suplente que gestionará el proceso de manejo de incidentes de la empresa. El personal de gestión es responsable de la coordinación y documentación de los esfuerzos de respuesta y recuperación ante incidentes y puede consistir en empleados internos de la empresa, proveedores de servicios o un enfoque híbrido. Si se utiliza un proveedor de servicios, designar al menos a una persona interna de la empresa para supervisar cualquier trabajo de terceros. Revisar anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-17-2": {
+            "code": "17,2",
+            "control": "Establecer y mantener información de contacto para reportar incidentes de seguridad",
+            "requirements": "Establecer y mantener información de contacto para las partes que deben ser informadas sobre incidentes de seguridad. Los contactos pueden incluir personal interno, proveedores de servicios, fuerzas del orden, proveedores de ciberseguro, agencias gubernamentales relevantes, socios de Centros de Intercambio y Análisis de Información (ISAC) u otras partes interesadas. Verificar los contactos anualmente para asegurar que la información esté actualizada."
+        },
+        "cisv81-17-3": {
+            "code": "17,3",
+            "control": "Establecer y mantener un proceso empresarial para reportar incidentes",
+            "requirements": "Establecer y mantener un proceso empresarial documentado para que la fuerza laboral reporte incidentes de seguridad. El proceso incluye el plazo de reporte, a quién reportar, el mecanismo de reporte y la información mínima que debe reportarse. Asegurar que el proceso esté públicamente disponible para toda la fuerza laboral. Revisar anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-17-4": {
+            "code": "17,4",
+            "control": "Establecer y mantener un proceso de respuesta a incidentes",
+            "requirements": "Establecer y mantener un proceso documentado de respuesta a incidentes que aborde roles y responsabilidades, requisitos de cumplimiento y un plan de comunicación. Revisar anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-17-5": {
+            "code": "17,5",
+            "control": "Asignar roles y responsabilidades clave",
+            "requirements": "Asignar roles y responsabilidades clave para la respuesta a incidentes, incluyendo personal de legal, TI, seguridad de la información, instalaciones, relaciones públicas, recursos humanos, respondedores a incidentes, analistas y terceros relevantes. Revisar anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-17-6": {
+            "code": "17,6",
+            "control": "Definir mecanismos de comunicación durante la respuesta a incidentes",
+            "requirements": "Determinar cuáles mecanismos primarios y secundarios se utilizarán para comunicarse y reportar durante un incidente de seguridad. Los mecanismos pueden incluir llamadas telefónicas, correos electrónicos, chat seguro o cartas de notificación. Tener en cuenta que ciertos mecanismos, como el correo electrónico, pueden verse afectados durante un incidente de seguridad. Revisar anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-17-7": {
+            "code": "17,7",
+            "control": "Realizar ejercicios rutinarios de respuesta a incidentes",
+            "requirements": "Planificar y realizar ejercicios rutinarios y escenarios de respuesta a incidentes para el personal clave involucrado en el proceso de respuesta a incidentes, para prepararse para responder a incidentes reales. Los ejercicios deben probar canales de comunicación, toma de decisiones y flujos de trabajo. Realizar pruebas al menos anualmente."
+        },
+        "cisv81-17-8": {
+            "code": "17,8",
+            "control": "Realizar revisiones posteriores al incidente",
+            "requirements": "Realizar revisiones posteriores al incidente. Las revisiones posteriores al incidente ayudan a prevenir la recurrencia del incidente identificando lecciones aprendidas y acciones de seguimiento."
+        },
+        "cisv81-17-9": {
+            "code": "17,9",
+            "control": "Establecer y mantener umbrales de incidentes de seguridad",
+            "requirements": "Establecer y mantener umbrales de incidentes de seguridad, incluyendo, como mínimo, diferenciar entre un incidente y un evento. Ejemplos pueden incluir: actividad anormal, vulnerabilidad de seguridad, debilidad de seguridad, brecha de datos, incidente de privacidad, etc. Revisar anualmente, o cuando ocurran cambios significativos en la empresa que puedan afectar esta Salvaguarda."
+        },
+        "cisv81-18-1": {
+            "code": "18,1",
+            "control": "Establecer y mantener un programa de pruebas de penetración",
+            "requirements": "Establecer y mantener un programa de pruebas de penetración apropiado al tamaño, complejidad, industria y madurez de la empresa. Las características del programa de pruebas de penetración incluyen el alcance, como red, aplicación web, Interfaz de Programación de Aplicaciones (API), servicios alojados y controles físicos de las instalaciones; la frecuencia; las limitaciones, como horas aceptables y tipos de ataque excluidos; la información de contacto del punto de contacto; la remediación, como cómo se canalizarán internamente los hallazgos; y requisitos retrospectivos."
+        },
+        "cisv81-18-2": {
+            "code": "18,2",
+            "control": "Realizar pruebas de penetración externas periódicas",
+            "requirements": "Realizar pruebas de penetración externas periódicas según los requisitos del programa, no menos de una vez al año. Las pruebas de penetración externas deben incluir reconocimiento empresarial y ambiental para detectar información explotable. Las pruebas de penetración requieren habilidades y experiencia especializadas y deben ser realizadas por una parte calificada. Las pruebas pueden ser de caja clara o de caja opaca."
+        },
+        "cisv81-18-3": {
+            "code": "18,3",
+            "control": "Remediar hallazgos de pruebas de penetración",
+            "requirements": "Remediar los hallazgos de pruebas de penetración según el proceso documentado de remediación de vulnerabilidades de la empresa. Esto debe incluir determinar un cronograma y nivel de esfuerzo basado en el impacto y la priorización de cada hallazgo identificado."
+        },
+        "cisv81-18-4": {
+            "code": "18,4",
+            "control": "Validar las medidas de seguridad",
+            "requirements": "Validar las medidas de seguridad después de cada prueba de penetración. Si se considera necesario, modificar los conjuntos de reglas y capacidades para detectar las técnicas utilizadas durante las pruebas."
+        },
+        "cisv81-18-5": {
+            "code": "18,5",
+            "control": "Realizar pruebas de penetración internas periódicas",
+            "requirements": "Realizar pruebas de penetración internas periódicas según los requisitos del programa, no menos de una vez al año. Las pruebas pueden ser de caja clara o de caja opaca."
+        }
+    }
+}

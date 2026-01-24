@@ -1,0 +1,143 @@
+{
+    "sections": {
+        "business": {
+            "label": "Contrôles métier"
+        },
+        "app-design": {
+            "label": "Contrôles de conception applicative"
+        },
+        "app-implementation": {
+            "label": "Contrôles d’implémentation applicative"
+        },
+        "operational": {
+            "label": "Contrôles opérationnels"
+        }
+    },
+    "controls": {
+        "mvsp-1-1": {
+            "code": "MVSP-1.1",
+            "control": "Signalement des vulnérabilités",
+            "requirements": "Publier sur votre site web le point de contact pour les signalements de sécurité\nRépondre aux signalements de sécurité dans un délai raisonnable"
+        },
+        "mvsp-1-2": {
+            "code": "MVSP-1.2",
+            "control": "Tests par les clients",
+            "requirements": "Sur demande, permettre à vos clients ou à leurs délégués de tester la sécurité de votre application\nTester dans un environnement hors production s’il ressemble étroitement à l’environnement de production en termes de fonctionnalités\nVeiller à ce que les environnements hors production ne contiennent pas de données de production"
+        },
+        "mvsp-1-3": {
+            "code": "MVSP-1.3",
+            "control": "Auto-évaluation",
+            "requirements": "Réaliser au minimum une auto-évaluation de sécurité annuelle à l’aide de ce document"
+        },
+        "mvsp-1-4": {
+            "code": "MVSP-1.4",
+            "control": "Tests externes",
+            "requirements": "Mandater un prestataire de sécurité pour réaliser des tests d’intrusion annuels et complets sur vos systèmes"
+        },
+        "mvsp-1-5": {
+            "code": "MVSP-1.5",
+            "control": "Formation",
+            "requirements": "Mettre en œuvre une formation de sécurité spécifique aux rôles de votre personnel, pertinente pour sa fonction métier"
+        },
+        "mvsp-1-6": {
+            "code": "MVSP-1.6",
+            "control": "Conformité",
+            "requirements": "Se conformer à toutes les normes de sécurité sectorielles pertinentes pour votre activité, telles que PCI DSS, HITRUST, ISO27001 et SSAE 18\nSe conformer aux lois et réglementations locales dans les juridictions applicables à votre entreprise et à vos clients, telles que le RGPD, les Binding Corporate Rules et les clauses contractuelles types\nVeiller à ce que les exigences de localisation des données soient mises en œuvre conformément aux réglementations locales et aux obligations contractuelles"
+        },
+        "mvsp-1-7": {
+            "code": "MVSP-1.7",
+            "control": "Gestion des incidents",
+            "requirements": "Notifier vos clients d’une violation sans retard injustifié, au plus tard dans les 72 heures suivant sa découverte\nInclure les informations suivantes dans la notification :\n- Point de contact pertinent\n- Analyse technique préliminaire de la violation\n- Plan de remédiation avec des délais raisonnables"
+        },
+        "mvsp-1-8": {
+            "code": "MVSP-1.8",
+            "control": "Gestion des données",
+            "requirements": "Veiller à ce que des processus d’assainissement des supports basés sur le NIST SP 800-88 ou un équivalent soient mis en œuvre"
+        },
+        "mvsp-2-1": {
+            "code": "MVSP-2.1",
+            "control": "Authentification unique (SSO)",
+            "requirements": "Mettre en œuvre l’authentification unique (SSO) à l’aide de protocoles modernes et conformes aux standards de l’industrie"
+        },
+        "mvsp-2-2": {
+            "code": "MVSP-2.2",
+            "control": "HTTPS uniquement",
+            "requirements": "Rediriger le trafic du protocole HTTP (port 80) vers HTTPS (port 443)\nRemarque : cela ne s’applique pas aux protocoles sécurisés conçus pour fonctionner au-dessus de connexions non chiffrées, tels que l’OCSP\nAnalyser et traiter les problèmes à l’aide d’outils modernes gratuits d’analyse TLS\nInclure l’en-tête Strict-Transport-Security sur toutes les pages avec la directive includeSubdomains"
+        },
+        "mvsp-2-3": {
+            "code": "MVSP-2.3",
+            "control": "En-têtes de sécurité",
+            "requirements": "Appliquer des en-têtes de sécurité appropriés pour réduire la surface d’attaque de l’application et limiter les impacts après exploitation :\n- Définir une Content Security Policy (CSP) la moins permissive possible\n- Limiter la possibilité d’iframe du contenu applicatif sensible lorsque cela est approprié"
+        },
+        "mvsp-2-4": {
+            "code": "MVSP-2.4",
+            "control": "Politique de mots de passe",
+            "requirements": "Si l’authentification par mot de passe est utilisée en plus du SSO :\n- Ne pas limiter les caractères autorisés\n- Ne pas limiter la longueur du mot de passe en dessous de 64 caractères\n- Ne pas utiliser de questions secrètes comme seule exigence de réinitialisation du mot de passe\n- Exiger une vérification par e-mail d’une demande de changement de mot de passe\n- Exiger le mot de passe actuel en plus du nouveau mot de passe lors du changement\n- Stocker les mots de passe sous forme hachée et salée à l’aide d’une fonction de hachage à sens unique résistante à la mémoire ou au CPU\n- Mettre en œuvre un verrouillage de compte approprié et une protection contre les attaques par force brute sur l’accès au compte"
+        },
+        "mvsp-2-5": {
+            "code": "MVSP-2.5",
+            "control": "Bibliothèques de sécurité",
+            "requirements": "Utiliser des frameworks, langages de modèles ou bibliothèques qui traitent systématiquement les faiblesses d’implémentation en échappant les sorties et en assainissant les entrées\nExemple : ORM pour l’accès à la base de données, framework UI pour le rendu du DOM"
+        },
+        "mvsp-2-6": {
+            "code": "MVSP-2.6",
+            "control": "Correctifs des dépendances",
+            "requirements": "Appliquer les correctifs de sécurité avec un score de gravité « moyen » ou supérieur, ou veiller à ce que des atténuations équivalentes soient disponibles pour tous les composants de la pile applicative dans le mois suivant la publication du correctif"
+        },
+        "mvsp-2-7": {
+            "code": "MVSP-2.7",
+            "control": "Journalisation",
+            "requirements": "Conserver des journaux pour :\n- Connexion et déconnexion des utilisateurs\n- Opérations de lecture, écriture, suppression sur l’application et le système\n- Modifications des paramètres de sécurité (y compris la désactivation de la journalisation)\n- Accès du propriétaire de l’application aux données des clients (transparence d’accès)\n\nLes journaux doivent inclure l’identifiant utilisateur, l’adresse IP, un horodatage valide, le type d’action effectuée et l’objet de cette action. Les journaux doivent être conservés au moins 30 jours et ne doivent pas contenir de données sensibles ni de charges utiles. Utilisateurs\n et objets"
+        },
+        "mvsp-2-8": {
+            "code": "MVSP-2.8",
+            "control": "Chiffrement",
+            "requirements": "Utiliser les moyens de chiffrement disponibles pour protéger les données sensibles en transit entre les systèmes et au repos dans les stockages en ligne et les sauvegardes"
+        },
+        "mvsp-3-1": {
+            "code": "MVSP-3.1",
+            "control": "Liste des données",
+            "requirements": "Maintenir une liste des types de données sensibles que l’application est censée traiter"
+        },
+        "mvsp-3-2": {
+            "code": "MVSP-3.2",
+            "control": "Schéma des flux de données",
+            "requirements": "Maintenir un schéma à jour indiquant comment les données sensibles atteignent vos systèmes et où elles finissent par être stockées"
+        },
+        "mvsp-3-3": {
+            "code": "MVSP-3.3",
+            "control": "Prévention des vulnérabilités",
+            "requirements": "Former vos développeurs et mettre en place des directives de développement afin de prévenir au moins les vulnérabilités suivantes :\n- Contournement d’autorisation. Exemple : accéder aux données d’autres clients ou à des fonctionnalités d’administration depuis un compte standard\n- Identifiant de session non sécurisé. Exemples : jeton devinable ; jeton stocké dans un emplacement non sécurisé (p. ex. cookie sans les attributs secure et httpOnly)\n- Injections. Exemples : injection SQL, injection NoSQL, XXE, injection de commandes OS\n- Cross-site scripting. Exemples : appeler des fonctions JavaScript non sécurisées, effectuer des manipulations DOM non sécurisées, réinjecter une entrée utilisateur dans du HTML sans échappement\n- Cross-site request forgery. Exemple : accepter des requêtes avec un en-tête Origin provenant d’un autre domaine\n- Utilisation de bibliothèques vulnérables. Exemple : utiliser des frameworks côté serveur ou des bibliothèques JavaScript présentant des vulnérabilités connues"
+        },
+        "mvsp-3-4": {
+            "code": "MVSP-3.4",
+            "control": "Délai de correction des vulnérabilités",
+            "requirements": "Produire et déployer des correctifs pour traiter les vulnérabilités applicatives ayant un impact matériel sur la sécurité dans les 90 jours suivant leur découverte"
+        },
+        "mvsp-3-5": {
+            "code": "MVSP-3.5",
+            "control": "Processus de build",
+            "requirements": "Les processus de build doivent être entièrement scriptés / automatisés et générer une provenance (SLSA niveau 1)"
+        },
+        "mvsp-4-1": {
+            "code": "MVSP-4.1",
+            "control": "Accès physique",
+            "requirements": "Valider la sécurité physique des installations pertinentes en veillant à ce que les contrôles suivants soient en place :\n- Contrôles périmétriques en couches et barrières internes\n- Gestion de l’accès aux clés\n- Journaux d’entrée et de sortie\n- Plan de réponse approprié aux alertes d’intrusion"
+        },
+        "mvsp-4-2": {
+            "code": "MVSP-4.2",
+            "control": "Accès logique",
+            "requirements": "- Limiter l’accès aux données sensibles exclusivement aux utilisateurs ayant un besoin légitime. Le propriétaire des données doit autoriser un tel accès\n- Désactiver en temps utile les comptes redondants et les autorisations d’accès expirées\n- Réaliser des revues régulières des accès afin de valider le besoin d’en connaître\n- Veiller à ce que l’accès à distance aux données clients ou aux systèmes de production exige l’utilisation d’une authentification multi-facteurs"
+        },
+        "mvsp-4-3": {
+            "code": "MVSP-4.3",
+            "control": "Sous-traitants",
+            "requirements": "- Publier sur votre site web une liste des sociétés tierces ayant accès aux données des clients\n- Évaluer annuellement les sociétés tierces par rapport à cette base de référence"
+        },
+        "mvsp-4-4": {
+            "code": "MVSP-4.4",
+            "control": "Sauvegarde et reprise après sinistre",
+            "requirements": "- Sauvegarder de manière sécurisée toutes les données vers un emplacement différent de celui où l’application s’exécute\n- Maintenir et tester périodiquement les plans de reprise après sinistre\n- Tester périodiquement la restauration des sauvegardes"
+        }
+    }
+}
