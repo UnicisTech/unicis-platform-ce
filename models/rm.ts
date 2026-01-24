@@ -1,5 +1,4 @@
 import { prisma } from '@/lib/prisma';
-import type { Task } from '@prisma/client';
 import type { Session } from 'next-auth';
 import type {
   RMProcedureInterface,

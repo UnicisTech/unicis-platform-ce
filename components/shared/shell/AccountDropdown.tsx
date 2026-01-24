@@ -23,7 +23,6 @@ import {
   ArrowRightOnRectangleIcon,
   SunIcon,
   UserCircleIcon,
-  GlobeAltIcon,
   LanguageIcon,
 } from '@heroicons/react/24/outline';
 import localeLabels from '@/lib/i18n/localeLabels';

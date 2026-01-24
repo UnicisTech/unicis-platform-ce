@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client';
-import { mapCscControlToId, mapCscControlToIdAny, optionArrayToStringArray, optionToString, error, preview, mapValueByFieldConfig, rpaFieldToId, countryToValue, tiaFieldToId, piaFieldToId, stripOuterQuotes, resolvePiaAuditFieldId, tryExtractValueFromStringifiedJson, rmFieldToId } from './helpers';
+import { mapCscControlToId, mapCscControlToIdAny, optionArrayToStringArray, optionToString, error, preview, mapValueByFieldConfig, rpaFieldToId, countryToValue, tiaFieldToId, stripOuterQuotes, tryExtractValueFromStringifiedJson, rmFieldToId } from './helpers';
 import { getCscControlsProp } from '@/lib/csc';
-import { Diff, ISO } from 'types';
+import { ISO } from 'types';
 
 export type JsonWritable = Prisma.InputJsonValue;
 
@@ -441,92 +441,92 @@ function normalizeTiaAuditLogs(props: JsonWritable): JsonWritable {
 
 // ------ PIA ------
 
-function normalizePiaAuditLogs(props: JsonWritable): JsonWritable {
-  const obj = asObject(props);
-  if (!obj) return props;
+// function normalizePiaAuditLogs(props: JsonWritable): JsonWritable {
+//   const obj = asObject(props);
+//   if (!obj) return props;
 
-  const raw = obj.pia_audit_logs;
-  if (!Array.isArray(raw)) return props;
+//   const raw = obj.pia_audit_logs;
+//   if (!Array.isArray(raw)) return props;
 
-  let changed = false;
-  const nextLogs: Prisma.InputJsonValue[] = [];
+//   let changed = false;
+//   const nextLogs: Prisma.InputJsonValue[] = [];
 
-  for (let i = 0; i < raw.length; i++) {
-    const log = raw[i];
+//   for (let i = 0; i < raw.length; i++) {
+//     const log = raw[i];
 
-    if (!log || typeof log !== 'object' || Array.isArray(log)) {
-      nextLogs.push(log);
-      continue;
-    }
+//     if (!log || typeof log !== 'object' || Array.isArray(log)) {
+//       nextLogs.push(log);
+//       continue;
+//     }
 
-    const event = String((log as any).event ?? '');
+//     const event = String((log as any).event ?? '');
 
-    if (event !== 'updated') {
-      nextLogs.push(log);
-      continue;
-    }
+//     if (event !== 'updated') {
+//       nextLogs.push(log);
+//       continue;
+//     }
 
-    const diff = (log as any).diff;
-    if (!diff || typeof diff !== 'object' || Array.isArray(diff)) {
-      error(
-        `[PIA_AUDIT] Updated log without valid diff`,
-        `logIndex=${i}`,
-        `event=${event}`,
-        `diff=${preview(diff)}`
-      );
-      nextLogs.push(log);
-      continue;
-    }
+//     const diff = (log as any).diff;
+//     if (!diff || typeof diff !== 'object' || Array.isArray(diff)) {
+//       error(
+//         `[PIA_AUDIT] Updated log without valid diff`,
+//         `logIndex=${i}`,
+//         `event=${event}`,
+//         `diff=${preview(diff)}`
+//       );
+//       nextLogs.push(log);
+//       continue;
+//     }
 
-    const fieldRaw = (diff as any).field;
-    const fieldStr = typeof fieldRaw === 'string' ? fieldRaw : String(fieldRaw ?? '');
-    const fieldId = resolvePiaAuditFieldId({diff: diff as Diff, event: diff.event});
+//     const fieldRaw = (diff as any).field;
+//     const fieldStr = typeof fieldRaw === 'string' ? fieldRaw : String(fieldRaw ?? '');
+//     const fieldId = resolvePiaAuditFieldId({diff: diff as Diff, event: diff.event});
 
-    if (!fieldId) {
-      error(
-        `[PIA_AUDIT] Unknown field`,
-        `logIndex=${i}`,
-        `event=${event}`,
-        `field=${preview(fieldRaw)}`
-      );
-      nextLogs.push(log);
-      continue;
-    }
+//     if (!fieldId) {
+//       error(
+//         `[PIA_AUDIT] Unknown field`,
+//         `logIndex=${i}`,
+//         `event=${event}`,
+//         `field=${preview(fieldRaw)}`
+//       );
+//       nextLogs.push(log);
+//       continue;
+//     }
 
-    const prevRaw = stripOuterQuotes((diff as any).prevValue);
-    const nextRaw = stripOuterQuotes((diff as any).nextValue);
+//     const prevRaw = stripOuterQuotes((diff as any).prevValue);
+//     const nextRaw = stripOuterQuotes((diff as any).nextValue);
 
-    const prevRes = mapValueByFieldConfig(fieldId, prevRaw, { idx: i, which: 'prevValue' }, 'PIA');
-    const nextRes = mapValueByFieldConfig(fieldId, nextRaw, { idx: i, which: 'nextValue' }, 'PIA');
+//     const prevRes = mapValueByFieldConfig(fieldId, prevRaw, { idx: i, which: 'prevValue' }, 'PIA');
+//     const nextRes = mapValueByFieldConfig(fieldId, nextRaw, { idx: i, which: 'nextValue' }, 'PIA');
 
-    const fieldChanged = fieldId !== fieldRaw;
-    const thisChanged = fieldChanged || prevRes.changed || nextRes.changed;
+//     const fieldChanged = fieldId !== fieldRaw;
+//     const thisChanged = fieldChanged || prevRes.changed || nextRes.changed;
 
-    if (!thisChanged) {
-      nextLogs.push(log);
-      continue;
-    }
+//     if (!thisChanged) {
+//       nextLogs.push(log);
+//       continue;
+//     }
 
-    changed = true;
+//     changed = true;
 
-    nextLogs.push({
-      ...(log as any),
-      diff: {
-        ...(diff as any),
-        field: fieldId,
-        prevValue: prevRes.value,
-        nextValue: nextRes.value,
-      },
-    });
-  }
+//     nextLogs.push({
+//       ...(log as any),
+//       diff: {
+//         ...(diff as any),
+//         field: fieldId,
+//         prevValue: prevRes.value,
+//         nextValue: nextRes.value,
+//       },
+//     });
+//   }
 
-  if (!changed) return props;
+//   if (!changed) return props;
 
-  return {
-    ...obj,
-    pia_audit_logs: nextLogs,
-  };
-}
+//   return {
+//     ...obj,
+//     pia_audit_logs: nextLogs,
+//   };
+// }
 
 // ------ PIA ------
 
@@ -536,7 +536,7 @@ function normalizeRmRisk(props: JsonWritable): JsonWritable {
   const obj = asObject(props);
   if (!obj) return props;
 
-  let raw = obj.rm_risk;
+  const raw = obj.rm_risk;
   if (!Array.isArray(raw)) return props;
 
   // let changed = false;
