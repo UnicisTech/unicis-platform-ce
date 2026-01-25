@@ -1,5 +1,3 @@
-import { Role, TeamMember } from '@prisma/client';
-import type { User } from 'next-auth';
 import {
   GetServerSidePropsContext,
   NextApiRequest,
@@ -9,18 +7,6 @@ import { getSession } from './session';
 import { getTeamMember } from 'models/team';
 import { getCurrentPlan, subscriptions } from './subscriptions';
 import { TeamProperties } from 'types';
-
-// TODO: move to models/
-// TODO: remove
-export const isTeamAdmin = (user: User, members: TeamMember[]) => {
-  return (
-    members.filter(
-      (member) =>
-        member.userId === user.id &&
-        (member.role === Role.ADMIN || member.role === Role.OWNER)
-    ).length > 0
-  );
-};
 
 export async function getTeamAccess(
   req: NextApiRequest | GetServerSidePropsContext['req'],

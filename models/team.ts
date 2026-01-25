@@ -150,18 +150,6 @@ export async function getTeamRoles(userId: string) {
   return teamRoles;
 }
 
-// Check if the user is an admin or owner of the team
-export async function isTeamAdmin(userId: string, teamId: string) {
-  const teamMember = await prisma.teamMember.findFirstOrThrow({
-    where: {
-      userId,
-      teamId,
-    },
-  });
-
-  return teamMember.role === Role.ADMIN || teamMember.role === Role.OWNER;
-}
-
 export const getTeamMembers = async (slug: string) => {
   return await prisma.teamMember.findMany({
     where: {
