@@ -1,8 +1,8 @@
 import { getSession } from '@/lib/session';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { isPrismaError } from '@/lib/errors';
-import { throwIfNoTeamAccess } from 'models/team';
 import { openai } from '@/lib/chatbot';
+import { getTeamAccess } from '@/lib/teams';
 
 export default async function handler(
   req: NextApiRequest,
@@ -39,7 +39,16 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  await throwIfNoTeamAccess(req, res);
+  const access = await getTeamAccess(req, res, req.query);
+  if (!access) {
+    return res.status(401).json({ error: { message: 'Unauthorized' } });
+  }
+
+  if (access.plan === 'COMMUNITY') {
+    return res.status(403).json({
+      error: { message: 'AI Chatbot is not available on the Community plan.' },
+    });
+  }
 
   const messages = req.body;
 

@@ -23,13 +23,21 @@ import {
   CardFooter,
 } from '@/components/shadcn/ui/card';
 import { Input } from '@/components/shadcn/ui/input';
+import useTeam from 'hooks/useTeam';
 
 const AiChat: React.FC = () => {
   const [visible, setVisible] = useState(false);
   const [messages, setMessages] = useState<ChatbotResponse[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const { t } = useTranslation('common');
+  const { isLoading: isTeamLoading, team } = useTeam();
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  const plan =
+    team?.subscription?.status === 'ACTIVE'
+      ? team.subscription.plan
+      : 'COMMUNITY';
+  const isAiChatEnabled = !!team && plan !== 'COMMUNITY';
 
   const togglePopup = () => {
     setVisible((v) => !v);
@@ -37,6 +45,10 @@ const AiChat: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!team) {
+      return
+    }
     const form = e.currentTarget;
     const input = form.elements.namedItem('prompt') as HTMLInputElement;
     const userText = input.value.trim();
@@ -51,7 +63,8 @@ const AiChat: React.FC = () => {
     setIsTyping(true);
 
     try {
-      const res = await fetch('/api/chatbot', {
+      const params = new URLSearchParams({ slug: team.slug });
+      const res = await fetch(`/api/chatbot?${params.toString()}`, {
         method: 'POST',
         headers: defaultHeaders,
         body: JSON.stringify(newMessages),
@@ -72,6 +85,10 @@ const AiChat: React.FC = () => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  if (isTeamLoading || !isAiChatEnabled) {
+    return null;
+  }
 
   return (
     <>
