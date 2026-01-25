@@ -1,34 +1,41 @@
 import type { NextPageWithLayout } from 'types';
 import type { InferGetServerSidePropsType } from 'next';
+import { useTranslation } from 'next-i18next';
+import useTeam from 'hooks/useTeam';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSidePropsContext } from 'next';
 import { Tasks } from '@/components/interfaces/Task';
-import { getTeam } from 'models/team';
+import { Error, Loading } from '@/components/shared';
 
 const AllTasks: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ team }) => {
-  return (
-    <>
-      <Tasks team={team} />
-    </>
-  );
+> = () => {
+  const { t } = useTranslation('common');
+  const { isLoading, isError, team } = useTeam();
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error message={isError.message} />;
+  }
+
+  if (!team) {
+    return <Error message={t('errors.teamNotFound')} />;
+  }
+  
+  return <Tasks team={team} />;
 };
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const { locale, query }: GetServerSidePropsContext = context;
-
-  const slug = query.slug as string;
-
-  // TODO: replace with useTeam hook on client side
-  const team = await getTeam({ slug });
+  const { locale }: GetServerSidePropsContext = context;
 
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      team: JSON.parse(JSON.stringify(team)),
     },
   };
 };

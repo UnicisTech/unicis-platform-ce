@@ -7,11 +7,7 @@ import Dashboard from '@/components/interfaces/rpa/Dashboard';
 const Rpa: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = () => {
-  return (
-    <>
-      <Dashboard />
-    </>
-  );
+  return <Dashboard />;
 };
 
 export const getServerSideProps = async (
