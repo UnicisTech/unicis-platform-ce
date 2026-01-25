@@ -7,12 +7,14 @@ import {
 import RmAnalysis from '@/components/interfaces/TeamDashboard/RmAnalysis';
 import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/TeamProcessingActivities';
 import { Error, Loading } from '@/components/shared';
-import { getTeamFeatures } from '@/lib/subscriptions';
+import { getTeamAccess } from '@/lib/teams';
+import { getTranslationNamespaces } from '@/lib/i18n/getCscTranslationNamespaces';
 import useTeam from 'hooks/useTeam';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import type { ISO } from 'types';
 
 const TeamDashboard = ({
   slug,
@@ -24,6 +26,7 @@ const TeamDashboard = ({
     isLoading: tasksLoading,
     isError: tasksError,
   } = useTeamTasks(slug);
+  console.log('team', team)
 
   if (teamLoading || tasksLoading) {
     return <Loading />;
@@ -92,12 +95,30 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { locale, query, req, res }: GetServerSidePropsContext = context;
   const slug = query.slug as string;
 
-  const teamFeatures = await getTeamFeatures(req, res, query);
+  const access = await getTeamAccess(req, res, query);
+
+  if (!access) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const frameworks = (access.teamProperties?.csc_iso ?? []) as ISO[];
+  const cscTranslations = getTranslationNamespaces(frameworks);
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      teamFeatures: teamFeatures,
+      ...(locale
+        ? await serverSideTranslations(locale, [
+            'common',
+            'rpa',
+            'tia',
+            'pia',
+            'rm',
+            ...cscTranslations,
+          ])
+        : {}),
+      teamFeatures: access.teamFeatures,
       slug: slug,
     },
   };

@@ -6,6 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSidePropsContext } from 'next';
 import { Tasks } from '@/components/interfaces/Task';
 import { Error, Loading } from '@/components/shared';
+import { getTeamAccess } from '@/lib/teams';
 
 const AllTasks: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -31,7 +32,15 @@ const AllTasks: NextPageWithLayout<
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const { locale }: GetServerSidePropsContext = context;
+  const { locale, req, res, query }: GetServerSidePropsContext = context;
+
+  const access = await getTeamAccess(req, res, query);
+
+  if (!access) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {

@@ -7,12 +7,10 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { DetailsModal, Pricing, WisePaymentCard } from '@/components/billing';
 import { Plan } from '@prisma/client';
-import { throwIfNotAllowed } from 'models/user';
-import { getSession } from '@/lib/session';
-import { getTeamMember } from 'models/team';
+import { isAllowed } from 'models/user';
 import { NextPageWithLayout } from 'types';
 import { inferSSRProps } from '@/lib/inferSSRProps';
-import { getTeamFeatures } from '@/lib/subscriptions';
+import { getTeamAccess } from '@/lib/teams';
 
 const plans = [
   {
@@ -108,37 +106,37 @@ const Billing: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { locale, req, res, query } = context;
 
-  // TODO: dublicated logic of getSession and getTeamMember in getTeamFeatures
-  const teamFeatures = await getTeamFeatures(req, res, query);
+  const access = await getTeamAccess(req, res, query);
 
-  const session = await getSession(req, res);
-  const teamMember = await getTeamMember(
-    session?.user.id as string,
-    query.slug as string
-  );
-
-  try {
-    throwIfNotAllowed(teamMember, 'team_audit_log', 'read');
-
+  if (!access) {
     return {
-      props: {
-        ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-        error: null,
-        teamFeatures: teamFeatures,
-      },
+      notFound: true,
     };
-  } catch (error: unknown) {
-    const { message } = error as { message: string };
+  }
+
+  const { teamMember, teamFeatures } = access;
+  const baseProps = {
+    ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+    teamFeatures,
+  };
+
+  if (!isAllowed(teamMember.role, 'team_audit_log', 'read')) {
     return {
       props: {
-        ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+        ...baseProps,
         error: {
-          message,
+          message: 'You are not allowed to perform read on team_audit_log',
         },
-        teamFeatures: teamFeatures,
       },
     };
   }
+
+  return {
+    props: {
+      ...baseProps,
+      error: null,
+    },
+  };
 }
 
 export default Billing;

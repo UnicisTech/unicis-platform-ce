@@ -1,7 +1,7 @@
 import APIKeysContainer from '@/components/apiKey/APIKeysContainer';
 import { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { getTeamFeatures } from '@/lib/subscriptions';
+import { getTeamAccess } from '@/lib/teams';
 
 const APIKeys = ({ teamFeatures }) => {
   return <APIKeysContainer teamFeatures={teamFeatures} />;
@@ -10,9 +10,15 @@ const APIKeys = ({ teamFeatures }) => {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { locale, req, res, query } = context;
 
-  const teamFeatures = await getTeamFeatures(req, res, query);
+  const access = await getTeamAccess(req, res, query);
 
-  if (!teamFeatures.apiKey) {
+  if (!access) {
+    return {
+      notFound: true,
+    };
+  }
+
+  if (!access.teamFeatures.apiKey) {
     return {
       notFound: true,
     };
@@ -21,7 +27,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      teamFeatures: teamFeatures,
+      teamFeatures: access.teamFeatures,
     },
   };
 }

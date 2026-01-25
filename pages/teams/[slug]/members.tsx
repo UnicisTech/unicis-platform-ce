@@ -1,7 +1,7 @@
 import { PendingInvitations } from '@/components/invitation';
 import { Error, Loading } from '@/components/shared';
 import { Members, TeamTab } from '@/components/team';
-import { getTeamFeatures } from '@/lib/subscriptions';
+import { getTeamAccess } from '@/lib/teams';
 import useTeam from 'hooks/useTeam';
 import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
@@ -37,11 +37,18 @@ const TeamMembers = ({ teamFeatures }) => {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { locale, req, res, query } = context;
 
-  const teamFeatures = await getTeamFeatures(req, res, query);
+  const access = await getTeamAccess(req, res, query);
+
+  if (!access) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      teamFeatures: teamFeatures,
+      teamFeatures: access.teamFeatures,
     },
   };
 }

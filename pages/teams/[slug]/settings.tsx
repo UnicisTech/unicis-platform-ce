@@ -10,7 +10,7 @@ import useTeam from 'hooks/useTeam';
 import type { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { getTeamFeatures } from '@/lib/subscriptions';
+import { getTeamAccess } from '@/lib/teams';
 
 const Settings = ({ teamFeatures }) => {
   const { t } = useTranslation('common');
@@ -45,12 +45,18 @@ const Settings = ({ teamFeatures }) => {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { locale, req, res, query } = context;
 
-  const teamFeatures = await getTeamFeatures(req, res, query);
+  const access = await getTeamAccess(req, res, query);
+
+  if (!access) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      teamFeatures: teamFeatures,
+      teamFeatures: access.teamFeatures,
     },
   };
 }

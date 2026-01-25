@@ -83,19 +83,3 @@ export const getCurrentPlan = (subscription: Subscription | null) => {
     ? subscription.plan
     : Plan.COMMUNITY;
 };
-
-export const getTeamFeatures = async (
-  req: NextApiRequest | GetServerSidePropsContext['req'],
-  res: NextApiResponse | GetServerSidePropsContext['res'],
-  query: any
-) => {
-  const session = await getSession(req, res);
-  const teamMember = await getTeamMember(
-    session?.user.id as string,
-    query.slug as string
-  );
-
-  const currentPlan = getCurrentPlan(teamMember.team.subscription);
-
-  return subscriptions[currentPlan].teamFeatures;
-};

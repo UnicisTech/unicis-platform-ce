@@ -12,9 +12,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import type { ApiResponse, NextPageWithLayout } from 'types';
-import { getSession } from '@/lib/session';
-import { getTeamMember } from 'models/team';
-import { throwIfNotAllowed } from 'models/user';
+import { isAllowed } from 'models/user';
 import { inferSSRProps } from '@/lib/inferSSRProps';
 import {
   Card,
@@ -23,7 +21,7 @@ import {
   CardTitle,
 } from '@/components/shadcn/ui/card';
 import { Button } from '@/components/shadcn/ui/button';
-import { getTeamFeatures } from '@/lib/subscriptions';
+import { getTeamAccess } from '@/lib/teams';
 
 const DirectorySync: NextPageWithLayout<
   inferSSRProps<typeof getServerSideProps>
@@ -123,44 +121,37 @@ const DirectorySync: NextPageWithLayout<
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { locale, req, res, query } = context;
 
-  // TODO: dublicated logic of getSession and getTeamMember in getTeamFeatures
-  const teamFeatures = await getTeamFeatures(req, res, query);
+  const access = await getTeamAccess(req, res, query);
 
-  if (!teamFeatures.dsync) {
+  if (!access || !access.teamFeatures.dsync) {
     return {
       notFound: true,
     };
   }
 
-  const session = await getSession(req, res);
-  const teamMember = await getTeamMember(
-    session?.user.id as string,
-    query.slug as string
-  );
+  const { teamMember, teamFeatures } = access;
+  const baseProps = {
+    ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+    teamFeatures,
+  };
 
-  try {
-    throwIfNotAllowed(teamMember, 'team_dsync', 'read');
-
+  if (!isAllowed(teamMember.role, 'team_dsync', 'read')) {
     return {
       props: {
-        ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-        error: null,
-        teamFeatures: teamFeatures,
-      },
-    };
-  } catch (error: unknown) {
-    const { message } = error as { message: string };
-
-    return {
-      props: {
-        ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+        ...baseProps,
         error: {
-          message,
+          message: 'You are not allowed to perform read on team_dsync',
         },
-        teamFeatures: teamFeatures,
       },
     };
   }
+
+  return {
+    props: {
+      ...baseProps,
+      error: null,
+    },
+  };
 }
 
 export default DirectorySync;

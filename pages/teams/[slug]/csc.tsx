@@ -4,6 +4,9 @@ import type { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { CscDashboard } from '@/components/interfaces/csc';
+import { getTeamAccess } from '@/lib/teams';
+import { getTranslationNamespaces } from '@/lib/i18n/getCscTranslationNamespaces';
+import type { ISO } from 'types';
 
 const Settings = () => {
   const { t } = useTranslation('common');
@@ -24,30 +27,26 @@ const Settings = () => {
   return <CscDashboard team={team} />;
 };
 
-export async function getServerSideProps({
-  locale,
-}: GetServerSidePropsContext) {
-  // TODO: define which translations should be added based on csc_iso team prop
-  const cscTranslations = [
-    'csc/2013',
-    'csc/2022',
-    'csc/mvps',
-    'csc/nistcsfv2',
-    'csc/eunis2',
-    'csc/gdpr',
-    'csc/cisv81',
-    'csc/soc2v2',
-    'csc/c5_2020',
-  ];
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { locale, req, res, query } = context;
+
+  const access = await getTeamAccess(req, res, query);
+
+  if (!access) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const frameworks = (access.teamProperties?.csc_iso ?? []) as ISO[];
+  const cscTranslations = getTranslationNamespaces(frameworks);
+
+  console.log('cscTranslations', cscTranslations)
 
   return {
     props: {
       ...(locale
-        ? await serverSideTranslations(locale, [
-            'common',
-            'test',
-            ...cscTranslations,
-          ])
+        ? await serverSideTranslations(locale, ['common', ...cscTranslations])
         : {}),
     },
   };

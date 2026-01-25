@@ -18,6 +18,7 @@ import {
 import { PerPageSelector } from '@/components/shared';
 import { Button } from '@/components/shadcn/ui/button';
 import { TeamAssessmentAnalysis } from '@/components/interfaces/TeamDashboard';
+import { getTeamAccess } from '@/lib/teams';
 
 // TODO: move to components/interfaces/tia
 const TiaDashboard: NextPageWithLayout<
@@ -150,7 +151,15 @@ const TiaDashboard: NextPageWithLayout<
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const { locale }: GetServerSidePropsContext = context;
+  const { locale, req, res, query }: GetServerSidePropsContext = context;
+
+  const access = await getTeamAccess(req, res, query);
+
+  if (!access) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
