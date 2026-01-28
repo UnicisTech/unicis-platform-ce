@@ -46,7 +46,7 @@ const RiskMatrixDashboardChart = ({
     maintainAspectRatio: false,
     scales: {
       x: {
-        title: { display: true, text: 'Risk impact' },
+        title: { display: true, text: t('risk-impact') },
         min: 0,
         max: MATRIX_SIZE,
         ticks: {
@@ -60,7 +60,7 @@ const RiskMatrixDashboardChart = ({
         },
       },
       y: {
-        title: { display: true, text: 'Risk probability' },
+        title: { display: true, text: t('risk-probability') },
         min: 0,
         max: MATRIX_SIZE,
         ticks: {
