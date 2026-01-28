@@ -267,6 +267,9 @@
   "expires-at": "Läuft ab am",
   "interface-theme": "Oberflächendesign",
   "all-tasks": "Alle Aufgaben",
+  "task-overview": "Aufgabenübersicht",
+  "data-privacy-overview": "Datenschutzübersicht",
+  "cybersecurity-controls-overview": "Übersicht der Cybersicherheitskontrollen",
   "create": "Erstellen",
   "csc": "Cybersecurity Management System",
   "csc-choose-iso": "Framework-Kontrollen",
@@ -1110,7 +1113,4 @@
 "search-tags": "Tags suchen...",
 "selected-count": "{{count}} ausgewählt"
 }
-
-
-
 

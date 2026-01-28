@@ -53,14 +53,15 @@ const TeamDashboard = ({
         <div className="space-y-6">
           <div className="mb-4 mx-4 flex items-center justify-between">
             <h2 className="text-2xl font-semibold tracking-tight">
-              {t(`${slug?.toString().toUpperCase()} Task Overview`)}
+              {`${slug?.toString().toUpperCase()} ${t('task-overview')}`}
+              {/* {t(`${slug?.toString().toUpperCase()} Task Overview`)} */}
             </h2>
           </div>
           <TeamTaskAnalysis slug={slug} />
         </div>
         <div className="mb-4 mx-4 flex items-center justify-between">
           <h2 className="text-2xl font-semibold tracking-tight">
-            {t(`Data Privacy Overview`)}
+            {t("data-privacy-overview")}
           </h2>
         </div>
         <div className="w-full max-w-7xl mx-auto">
