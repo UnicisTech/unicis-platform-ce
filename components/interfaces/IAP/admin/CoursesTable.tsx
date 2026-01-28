@@ -14,12 +14,6 @@ import { getCourseStatus } from '../services/helpers';
 import { StatusBadge } from '@/components/shared';
 import { useTranslation } from 'next-i18next';
 
-const statusBadges = {
-  todo: <StatusBadge label="To do" value="todo" />,
-  inprogress: <StatusBadge label="In progress" value="inprogress" />,
-  done: <StatusBadge label="Completed" value="done" />,
-};
-
 interface CoursesTableProps {
   teamCourses: TeamCourseWithProgress[];
   members: TeamMemberWithUser[];
@@ -64,7 +58,12 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
               <TableRow key={`${teamCourse.course.name}-${idx}`}>
                 <TableCell>{teamCourse.course.name}</TableCell>
                 <TableCell>{categoryName}</TableCell>
-                <TableCell>{statusBadges[status]}</TableCell>
+                <TableCell>
+                  <StatusBadge
+                    value={status}
+                    label={t(`task-statuses.${status}`)}
+                  />
+                </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2 flex-wrap">
                     {canAccess('iap_course', ['create']) && (

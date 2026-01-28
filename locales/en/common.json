@@ -429,6 +429,7 @@
   "program-contents": "Program contents:",
   "download-certificate": "Download certificate",
   "course-status-results": "Course Status Results - {{name}}",
+  "course-completion-results": "Course Completion Results - {{name}}",
   "right": "Right",
   "wrong": "Wrong",
   "passed": "Passed",
@@ -450,6 +451,11 @@
     "inreview": "In Review",
     "feedback": "Feedback",
     "done": "Done"
+  },
+  "progress": {
+    "done": "Passed",
+    "inprogress": "In progress",
+    "todo": "To do"
   },
   "title": "Title",
   "status": "Status",

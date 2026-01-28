@@ -51,8 +51,9 @@ export default function CompletionResults({
       <DialogContent className="w-[90vw] max-w-5xl max-h-[90vh] overflow-y-auto p-6">
         <DialogHeader>
           <DialogTitle>
-            {t('course-completion-results', 'Course Completion Results')} -{' '}
-            {teamCourse.course.name}
+            {t('course-completion-results', {
+              name: teamCourse.course.name,
+            })}
           </DialogTitle>
         </DialogHeader>
 
