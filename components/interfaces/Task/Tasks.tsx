@@ -156,7 +156,7 @@ const Tasks = ({ team }: { team: Team }) => {
                     <td className="px-4 py-2">
                       <StatusBadge
                         value={task.status}
-                        label={t(`task-statuses.${status}`)}
+                        label={t(`task-statuses.${task.status}`)}
                       />
                     </td>
                     <td className="px-4 py-2">
