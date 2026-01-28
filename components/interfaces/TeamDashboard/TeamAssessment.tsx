@@ -46,7 +46,7 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
     <Card className="w-full shadow-sm">
       <CardHeader>
         <CardTitle className="text-center text-lg font-semibold">
-          {t('Transfer Impact Assessment')}
+          {t('tia')}
         </CardTitle>
       </CardHeader>
 
