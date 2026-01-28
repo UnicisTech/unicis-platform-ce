@@ -82,6 +82,59 @@
   "invite-new-member": "Inviter un nouveau membre",
   "invite-member-message": "Invitez un nouveau membre par e-mail à rejoindre votre organisation.",
   "choose-subscription-message": "Choisissez votre formule d’abonnement.",
+  "billing": {
+    "plans": {
+      "community": {
+        "name": "Communauté",
+        "users": "1 - 10",
+        "price": "Gratuit",
+        "subprice": "illimité",
+        "applications": {
+          "0": "Registre des activités de traitement",
+          "1": "Évaluation d’impact des transferts",
+          "2": "Contrôles de cybersécurité : MVSP"
+        },
+        "features": {
+          "0": "SSO & SAML",
+          "1": "Support communautaire"
+        }
+      },
+      "premium": {
+        "name": "Premium",
+        "users": "11 - 150",
+        "price": "€49/mois",
+        "subprice": "par tenant et jusqu’à 5 administrateurs",
+        "applications": {
+          "0": "Programme interactif de sensibilisation",
+          "1": "Évaluation d’impact sur la vie privée",
+          "2": "Contrôles de cybersécurité : MVSP + ISO27001",
+          "3": "Gestion des risques de cybersécurité"
+        },
+        "featuresLabel": "À partir de Communauté",
+        "features": {
+          "0": "Webhooks et API"
+        }
+      },
+      "ultimate": {
+        "name": "Ultimate",
+        "users": "150 -",
+        "price": "€89/mois",
+        "subprice": "par tenant et > 6 administrateurs",
+        "applications": {
+          "0": "Liste de vérification du questionnaire du sous-traitant",
+          "1": "Contrôles de cybersécurité + norme NIST CSF2.0",
+          "2": "Gestion de l’inventaire des actifs",
+          "3": "Rapport de benchmark",
+          "4": "Liste de vérification d’évaluation des fournisseurs",
+          "5": "Rapport fournisseurs"
+        },
+        "featuresLabel": "À partir de Premium",
+        "features": {
+          "0": "Journaux d’audit"
+        }
+      }
+    }
+  },
   "accept-invitation": "Accepter l’invitation",
   "accept-invitation-instruction": "Pour accepter cette invitation, vous devez vous déconnecter puis vous reconnecter ou créer un nouveau compte en utilisant la même adresse e-mail que celle de l’invitation.",
   "create-team": "Créer une équipe",

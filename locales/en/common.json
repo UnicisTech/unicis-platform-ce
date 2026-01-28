@@ -82,6 +82,59 @@
   "invite-new-member": "Invite New Member",
   "invite-member-message": "Invite new member by email to join your organization.",
   "choose-subscription-message": "Choose your subscription plan.",
+  "billing": {
+    "plans": {
+      "community": {
+        "name": "Community",
+        "users": "1 - 10",
+        "price": "Free",
+        "subprice": "unlimited",
+        "applications": {
+          "0": "Record of Processing Activities",
+          "1": "Transfer Impact Assessment",
+          "2": "Cybersecurity Controls: MVSP"
+        },
+        "features": {
+          "0": "SSO & SAML",
+          "1": "Community Support"
+        }
+      },
+      "premium": {
+        "name": "Premium",
+        "users": "11 - 150",
+        "price": "€49/mo",
+        "subprice": "per tenant and up to 5 admins",
+        "applications": {
+          "0": "Interactive Awareness Program",
+          "1": "Privacy Impact Assessment",
+          "2": "Cybersecurity Controls: MVSP + ISO27001",
+          "3": "Cybersecurity Risk Management"
+        },
+        "featuresLabel": "From Community",
+        "features": {
+          "0": "Webhooks & API"
+        }
+      },
+      "ultimate": {
+        "name": "Ultimate",
+        "users": "150 -",
+        "price": "€89/mo",
+        "subprice": "per tenant and > 6 admins",
+        "applications": {
+          "0": "Processor Questionnaire Checklist",
+          "1": "Cybersecurity Controls + NIST CSF2.0 standard",
+          "2": "Asset Inventory Management",
+          "3": "Benchmark Report",
+          "4": "Vendor Assessment Checklist",
+          "5": "Vendor Report"
+        },
+        "featuresLabel": "From Premium",
+        "features": {
+          "0": "Audit Logs"
+        }
+      }
+    }
+  },
   "accept-invitation": "Accept invitation",
   "accept-invitation-instruction": "To accept this invitation, you will need to sign out and then sign in or create a new account using the same email address used in the invitation.",
   "create-team": "Create Team",

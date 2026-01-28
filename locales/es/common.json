@@ -82,6 +82,59 @@
   "invite-new-member": "Invitar a nuevo miembro",
   "invite-member-message": "Invite a un nuevo miembro por correo electrónico para unirse a su organización.",
   "choose-subscription-message": "Elija su plan de suscripción.",
+  "billing": {
+    "plans": {
+      "community": {
+        "name": "Comunidad",
+        "users": "1 - 10",
+        "price": "Gratis",
+        "subprice": "ilimitado",
+        "applications": {
+          "0": "Registro de actividades de tratamiento",
+          "1": "Evaluación de impacto de transferencias",
+          "2": "Controles de ciberseguridad: MVSP"
+        },
+        "features": {
+          "0": "SSO & SAML",
+          "1": "Soporte de la comunidad"
+        }
+      },
+      "premium": {
+        "name": "Premium",
+        "users": "11 - 150",
+        "price": "€49/mes",
+        "subprice": "por tenant y hasta 5 administradores",
+        "applications": {
+          "0": "Programa interactivo de concienciación",
+          "1": "Evaluación de impacto de privacidad",
+          "2": "Controles de ciberseguridad: MVSP + ISO27001",
+          "3": "Gestión de riesgos de ciberseguridad"
+        },
+        "featuresLabel": "Desde Comunidad",
+        "features": {
+          "0": "Webhooks y API"
+        }
+      },
+      "ultimate": {
+        "name": "Ultimate",
+        "users": "150 -",
+        "price": "€89/mes",
+        "subprice": "por tenant y > 6 administradores",
+        "applications": {
+          "0": "Lista de verificación del cuestionario del encargado",
+          "1": "Controles de ciberseguridad + estándar NIST CSF2.0",
+          "2": "Gestión del inventario de activos",
+          "3": "Informe de benchmarking",
+          "4": "Lista de verificación de evaluación de proveedores",
+          "5": "Informe de proveedores"
+        },
+        "featuresLabel": "Desde Premium",
+        "features": {
+          "0": "Registros de auditoría"
+        }
+      }
+    }
+  },
   "accept-invitation": "Aceptar invitación",
   "accept-invitation-instruction": "Para aceptar esta invitación, deberá cerrar sesión y luego iniciar sesión o crear una nueva cuenta usando la misma dirección de correo electrónico utilizada en la invitación.",
   "create-team": "Crear equipo",

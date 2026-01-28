@@ -82,6 +82,59 @@
   "invite-new-member": "Neues Mitglied einladen",
   "invite-member-message": "Laden Sie ein neues Mitglied per E-Mail ein, Ihrer Organisation beizutreten.",
   "choose-subscription-message": "Wählen Sie Ihren Abonnementplan.",
+  "billing": {
+    "plans": {
+      "community": {
+        "name": "Community",
+        "users": "1 - 10",
+        "price": "Kostenlos",
+        "subprice": "unbegrenzt",
+        "applications": {
+          "0": "Verzeichnis von Verarbeitungstätigkeiten",
+          "1": "Transfer-Folgenabschätzung",
+          "2": "Cybersicherheitskontrollen: MVSP"
+        },
+        "features": {
+          "0": "SSO & SAML",
+          "1": "Community-Support"
+        }
+      },
+      "premium": {
+        "name": "Premium",
+        "users": "11 - 150",
+        "price": "€49/Monat",
+        "subprice": "pro Mandant und bis zu 5 Admins",
+        "applications": {
+          "0": "Interaktives Awareness-Programm",
+          "1": "Datenschutz-Folgenabschätzung",
+          "2": "Cybersicherheitskontrollen: MVSP + ISO27001",
+          "3": "Cybersicherheits-Risikomanagement"
+        },
+        "featuresLabel": "Aus Community",
+        "features": {
+          "0": "Webhooks & API"
+        }
+      },
+      "ultimate": {
+        "name": "Ultimate",
+        "users": "150 -",
+        "price": "€89/Monat",
+        "subprice": "pro Mandant und > 6 Admins",
+        "applications": {
+          "0": "Checkliste für den Auftragsverarbeiter-Fragebogen",
+          "1": "Cybersicherheitskontrollen + NIST CSF2.0 Standard",
+          "2": "Asset-Inventarverwaltung",
+          "3": "Benchmark-Bericht",
+          "4": "Checkliste zur Lieferantenbewertung",
+          "5": "Lieferantenbericht"
+        },
+        "featuresLabel": "Aus Premium",
+        "features": {
+          "0": "Audit-Logs"
+        }
+      }
+    }
+  },
   "accept-invitation": "Einladung annehmen",
   "accept-invitation-instruction": "Um diese Einladung anzunehmen, müssen Sie sich abmelden und sich dann erneut anmelden oder ein neues Konto mit derselben E-Mail-Adresse erstellen, die in der Einladung verwendet wurde.",
   "create-team": "Team erstellen",
@@ -1113,4 +1166,3 @@
 "search-tags": "Tags suchen...",
 "selected-count": "{{count}} ausgewählt"
 }
-
