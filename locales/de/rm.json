@@ -15,8 +15,7 @@
         "raw-risk-rating": "Roh-Risikobewertung",
         "treatment": "Behandlung",
         "target-risk-rating": "Ziel-Risikobewertung",
-        "current-risk-rating": "Aktuelle Risikobewertung",
-        "risk-id": "Risiko-ID"
+        "current-risk-rating": "Aktuelle Risikobewertung"
     },
     "steps": {
         "riskAndImpact": "Risiko und Auswirkung",

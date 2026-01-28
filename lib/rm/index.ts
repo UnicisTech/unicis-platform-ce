@@ -17,7 +17,7 @@ export const fields = [
 ];
 
 export const tableHeaderKeys = [
-    'rm:headers.risk-id',
+    'task-id',
     'rm:fields.Risk',
     'rm:fields.AssetOwner',
     'rm:fields.Impact',

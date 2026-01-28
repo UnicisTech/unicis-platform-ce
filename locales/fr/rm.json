@@ -15,8 +15,7 @@
     "raw-risk-rating": "Évaluation du risque brut",
     "treatment": "Traitement",
     "target-risk-rating": "Évaluation cible du risque",
-    "current-risk-rating": "Évaluation actuelle du risque",
-    "risk-id": "ID du risque"
+    "current-risk-rating": "Évaluation actuelle du risque"
   },
   "steps": {
     "riskAndImpact": "Risque et impact",

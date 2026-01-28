@@ -18,12 +18,10 @@ export async function getTeamAccess(
   const slug = query.slug as string | undefined;
 
   if (!userId || !slug || !session) {
-    // для team-сторінок це зазвичай redirect на login або notFound
     return null;
   }
 
   const teamMember = await getTeamMember(userId, slug);
-  // ВАЖЛИВО: getTeamMember має include/select team.subscription + team.properties
   const team = teamMember.team;
 
   const plan = getCurrentPlan(team.subscription);

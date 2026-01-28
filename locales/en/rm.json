@@ -15,8 +15,7 @@
         "raw-risk-rating": "Raw risk rating",
         "treatment": "Treatment",
         "target-risk-rating": "Target risk rating",
-        "current-risk-rating": "Current risk rating",
-        "risk-id": "Risk id"
+        "current-risk-rating": "Current risk rating"
     },
     "steps": {
         "riskAndImpact": "Risk and Impact",
