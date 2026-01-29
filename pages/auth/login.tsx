@@ -179,7 +179,7 @@ const Login: NextPageWithLayout<
                     </Link>
                   </Button>
                 )}
-                <Button asChild variant="link" className="w-full p-0 h-auto">
+                <Button asChild variant="link" className="w-full p-0 h-auto text-blue-600 dark:text-blue-400">
                   <Link href={`/auth/forgot-password${params}`}>
                     {t('forgot-password')}
                   </Link>
@@ -215,7 +215,7 @@ const Login: NextPageWithLayout<
         {t('dont-have-an-account')}
         <Link
           href={`/auth/join${params}`}
-          className="font-medium text-primary hover:text-primary-focus ml-1"
+          className="font-medium text-blue-600 dark:text-blue-400 hover:text-primary-focus ml-1"
         >
           {t('create-a-free-account')}
         </Link>
