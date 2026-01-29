@@ -69,14 +69,14 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ menu, className }) => {
       {menu.icon && (
         <menu.icon
           className={classNames({
-            'h-5 w-5 shrink-0': true,
+            'h-5 w-5 min-h-5 min-w-5 flex-none shrink-0': true,
             'text-primary': menu.active,
             [className as string]: true,
           })}
           aria-hidden="true"
         />
       )}
-      {menu.name}
+      <span className="min-w-0 flex-1">{menu.name}</span>
     </Link>
   );
 };
