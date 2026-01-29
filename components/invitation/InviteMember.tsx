@@ -127,14 +127,18 @@ const InviteMember: React.FC<InviteMemberProps> = ({
             </div>
           </div>
 
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setVisible(false)}>
+          <DialogFooter className="flex flex-col gap-2 sm:flex-row sm:justify-end">
+            <Button
+              variant="outline"
+              onClick={() => setVisible(false)}
+              className="w-full sm:w-auto"
+            >
               {t('close')}
             </Button>
             <Button
               type="submit"
               disabled={formik.isSubmitting}
-              className="ml-2"
+              className="w-full sm:w-auto"
             >
               {formik.isSubmitting && <Loader2 className="animate-spin" />}
               {t('send-invite')}
