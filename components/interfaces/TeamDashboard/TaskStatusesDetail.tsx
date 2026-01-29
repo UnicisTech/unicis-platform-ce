@@ -1,4 +1,5 @@
 import type { Task } from '@prisma/client';
+import { useTranslation } from 'next-i18next';
 
 const TaskStatusesDetail = ({
   tasks,
@@ -7,13 +8,14 @@ const TaskStatusesDetail = ({
   tasks: Array<Task> | any;
   statusCounts: { [key: string]: number };
 }) => {
+  const { t } = useTranslation('common');
   const stats = [
-    { label: 'Total Tasks', value: tasks?.length || 0 },
-    { label: 'To Do', value: statusCounts?.todo || 0 },
-    { label: 'In Progress', value: statusCounts?.inprogress || 0 },
-    { label: 'In Review', value: statusCounts?.inreview || 0 },
-    { label: 'Feedback', value: statusCounts?.feedback || 0 },
-    { label: 'Done', value: statusCounts?.done || 0 },
+    { label: t('total-tasks'), value: tasks?.length || 0 },
+    { label: t('task-statuses.todo'), value: statusCounts?.todo || 0 },
+    { label: t('task-statuses.inprogress'), value: statusCounts?.inprogress || 0 },
+    { label: t('task-statuses.inreview'), value: statusCounts?.inreview || 0 },
+    { label: t('task-statuses.feedback'), value: statusCounts?.feedback || 0 },
+    { label: t('task-statuses.done'), value: statusCounts?.done || 0 },
   ];
 
   return (

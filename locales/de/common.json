@@ -450,8 +450,12 @@
     "inprogress": "In Bearbeitung",
     "inreview": "In Überprüfung",
     "feedback": "Feedback",
-    "done": "Erledigt"
+    "done": "Erledigt",
+    "failed": "Nicht bestanden"
   },
+  "filter-by-status": "Nach Status filtern",
+  "filter-by-module": "Nach Modul filtern",
+  "total-tasks": "Gesamtaufgaben",
   "progress": {
     "done": "Bestanden",
     "inprogress": "In Bearbeitung",

@@ -450,8 +450,12 @@
     "inprogress": "In Progress",
     "inreview": "In Review",
     "feedback": "Feedback",
-    "done": "Done"
+    "done": "Done",
+    "failed": "Failed"
   },
+  "filter-by-status": "Filter by status",
+  "filter-by-module": "Filter by module",
+  "total-tasks": "Total Tasks",
   "progress": {
     "done": "Passed",
     "inprogress": "In progress",
