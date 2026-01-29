@@ -36,7 +36,16 @@ export default function Comments({
   const handleCreateComment = useCallback(
     async (
       text: string,
-      reset: (initialValues?: Partial<FormData> | undefined) => void
+      reset: (
+        initialValues?: Partial<FormData> | undefined,
+        options?: {
+          keepErrors?: boolean;
+          keepTouched?: boolean;
+          keepDirty?: boolean;
+          keepIsSubmitted?: boolean;
+          keepSubmitCount?: boolean;
+        }
+      ) => void
     ) => {
       try {
         const res = await fetch(
@@ -54,7 +63,16 @@ export default function Comments({
           return;
         }
 
-        reset({ text: '' });
+        reset(
+          { text: '' },
+          {
+            keepErrors: false,
+            keepTouched: false,
+            keepDirty: false,
+            keepIsSubmitted: false,
+            keepSubmitCount: false,
+          }
+        );
         mutateTask();
       } catch {
         toast.error(t('errors.unexpectedError'));

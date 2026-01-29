@@ -18,7 +18,16 @@ interface FormData {
 interface CreateCommentFormProps {
   handleCreate: (
     text: string,
-    reset: (values?: Partial<FormData>) => void
+    reset: (
+      values?: Partial<FormData>,
+      options?: {
+        keepErrors?: boolean;
+        keepTouched?: boolean;
+        keepDirty?: boolean;
+        keepIsSubmitted?: boolean;
+        keepSubmitCount?: boolean;
+      }
+    ) => void
   ) => Promise<void>;
 }
 
@@ -35,6 +44,7 @@ export default function CreateCommentForm({
   const form = useForm<FormData>({
     defaultValues: { text: '' },
     mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
   });
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
@@ -57,7 +67,7 @@ export default function CreateCommentForm({
             <FormItem>
               <FormControl>
                 <QuillEditor
-                  defaultValue={field.value || ''}
+                  value={field.value || ''}
                   onChange={(value) => field.onChange(value)}
                 />
               </FormControl>
