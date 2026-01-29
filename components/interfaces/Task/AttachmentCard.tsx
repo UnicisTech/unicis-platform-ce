@@ -104,22 +104,27 @@ const AttachmentsCard = ({
       <div
         className={`rounded-md shadow-md w-40 m-1 border ${borderColor} ${cardBg} ${textColor}`}
       >
-        <div className="flex justify-between px-1 py-1">
-          <Button size={'sm'} className="mr-1" onClick={downloadHandler}>
+        <div className="px-2 py-1 border-t border-gray-300 dark:border-gray-600">
+          <p className="text-sm truncate">{attachment.filename}</p>
+        </div>
+        <div className="flex flex-col gap-1 px-1 py-1">
+          <Button
+            size={'sm'}
+            className="w-full whitespace-normal"
+            onClick={downloadHandler}
+          >
             {t('download')}
           </Button>
           {canAccess('task', ['update']) && (
             <Button
               variant={'destructive'}
               size={'sm'}
+              className="w-full whitespace-normal"
               onClick={openDeleteModal}
             >
               {t('delete')}
             </Button>
           )}
-        </div>
-        <div className="px-2 py-1 border-t border-gray-300 dark:border-gray-600">
-          <p className="text-sm truncate">{attachment.filename}</p>
         </div>
       </div>
 
