@@ -10,7 +10,7 @@ const getSelectedOptions = (
   tasks: Array<Task>
 ): CscOption[] => {
   const cscStatusesProp = getCscControlsProp(ISO);
-  const initialSelected = tasks
+  return tasks
     .filter((task: any) =>
       task.properties?.[cscStatusesProp]?.includes(control)
     )
@@ -18,8 +18,6 @@ const getSelectedOptions = (
       label: task.title,
       value: task.taskNumber,
     }));
-
-  return initialSelected;
 };
 
 const TaskSelector = ({
@@ -39,21 +37,31 @@ const TaskSelector = ({
   ) => Promise<string | undefined>;
   ISO: ISO;
 }) => {
-  const options: CscOption[] = tasks.map((task) => ({
+  const orderedTasks = React.useMemo(
+    () => [...tasks].sort((a, b) => b.taskNumber - a.taskNumber),
+    [tasks]
+  );
+  const options: CscOption[] = orderedTasks.map((task) => ({
     label: task.title,
     value: task.taskNumber,
   }));
-  const selected: CscOption[] = getSelectedOptions(ISO, control, tasks);
+  const selected: CscOption[] = getSelectedOptions(
+    ISO,
+    control,
+    orderedTasks
+  );
   //TODO: review if prevSelectedRef is still needed
   const prevSelectedRef = useRef<Array<{ value: number }>>(selected);
 
   const handleValueChange = async (newValues: string[]) => {
-    const all = options;
+    const optionsByValue = new Map(
+      options.map((opt) => [opt.value.toString(), opt])
+    );
     const prev = prevSelectedRef.current;
 
-    const newSelected = all.filter((opt) =>
-      newValues.includes(opt.value.toString())
-    );
+    const newSelected = newValues
+      .map((value) => optionsByValue.get(value))
+      .filter((opt): opt is CscOption => Boolean(opt));
 
     const added = newSelected.filter(
       (newOpt) => !prev.some((oldOpt) => oldOpt.value === newOpt.value)
