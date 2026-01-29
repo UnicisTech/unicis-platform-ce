@@ -120,7 +120,10 @@ export default function RmRiskDialog({
         <DialogHeader>
           <DialogTitle>{t('rm')}</DialogTitle>
           {currentStep > 0 && (
-            <StageTracker headers={steps.map(step => t(`rm:steps.${step}`))} currentStage={currentStep - 1} />
+            <StageTracker
+              headers={steps.map((step) => t(`rm:steps.${step}`))}
+              currentStage={currentStep - 1}
+            />
           )}
         </DialogHeader>
 

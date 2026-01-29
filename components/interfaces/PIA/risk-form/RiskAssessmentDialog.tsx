@@ -186,7 +186,10 @@ export default function RiskAssessmentDialog({
         <DialogHeader>
           <DialogTitle>{t('pia')}</DialogTitle>
           {currentStep > 0 && (
-            <StageTracker headers={steps.map(step => t(`pia:steps.${step}`))} currentStage={currentStep - 1} />
+            <StageTracker
+              headers={steps.map((step) => t(`pia:steps.${step}`))}
+              currentStage={currentStep - 1}
+            />
           )}
         </DialogHeader>
 

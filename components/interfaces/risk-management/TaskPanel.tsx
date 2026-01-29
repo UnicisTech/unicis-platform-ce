@@ -8,18 +8,18 @@ import useTeamMembersMap from 'hooks/useTeamMembersMap';
 import { Error, Loading, MemberName } from '@/components/shared';
 import { riskValueToLabelKey } from '@/lib/common';
 
-const RmTaskPanel = ({ task, slug }: { task: Task, slug: string }) => {
+const RmTaskPanel = ({ task, slug }: { task: Task; slug: string }) => {
   const { t } = useTranslation('common');
   const properties = task?.properties as TaskProperties;
   const risk = properties?.rm_risk as RMProcedureInterface | undefined;
   const [activeTab, setActiveTab] = useState(0);
 
   const { isLoading, isError, membersById } = useTeamMembersMap(slug);
-  
+
   if (isLoading) {
     return <Loading />;
   }
-  
+
   if (isError) {
     return <Error message={isError?.message} />;
   }
@@ -49,23 +49,18 @@ const RmTaskPanel = ({ task, slug }: { task: Task, slug: string }) => {
           <div className="mt-4">
             {activeTab === 0 && (
               <div>
-                <Field
-                  label={t(`rm:fields.Risk`)}
-                  value={risk[0]?.Risk}
-                />
+                <Field label={t(`rm:fields.Risk`)} value={risk[0]?.Risk} />
                 <Field
                   label={t(`rm:fields.AssetOwner`)}
                   value={
-                  <MemberName
-                    userId={risk[0]?.AssetOwner}
-                    membersById={membersById}
-                    fallback={t('not-found')}
-                  />}
+                    <MemberName
+                      userId={risk[0]?.AssetOwner}
+                      membersById={membersById}
+                      fallback={t('not-found')}
+                    />
+                  }
                 />
-                <Field
-                  label={t(`rm:fields.Impact`)}
-                  value={risk[0]?.Impact}
-                />
+                <Field label={t(`rm:fields.Impact`)} value={risk[0]?.Impact} />
                 <Field
                   label={t(`rm:fields.RawProbability`)}
                   value={`${t(riskValueToLabelKey(risk[0]?.RawProbability))} (${risk[0]?.RawProbability}%)`}

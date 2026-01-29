@@ -85,9 +85,7 @@ export default function ProbabilityStep({
         name="ReasonDataTransferImporter"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>
-              {t(`tia:fields.ReasonDataTransferImporter`)}
-            </FormLabel>
+            <FormLabel>{t(`tia:fields.ReasonDataTransferImporter`)}</FormLabel>
             <FormControl>
               <Textarea
                 {...field}
@@ -109,9 +107,7 @@ export default function ProbabilityStep({
         name="RelevantTransferToImporter"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>
-              {t(`tia:fields.RelevantTransferToImporter`)}
-            </FormLabel>
+            <FormLabel>{t(`tia:fields.RelevantTransferToImporter`)}</FormLabel>
             <FormControl>
               <Input {...field} autoComplete="off" />
             </FormControl>
@@ -256,7 +252,9 @@ export default function ProbabilityStep({
         )}
       />
 
-      <p className="font-bold">{t('tia:descriptions.importerHasReasonToExpect')}</p>
+      <p className="font-bold">
+        {t('tia:descriptions.importerHasReasonToExpect')}
+      </p>
 
       <p>
         <span>
@@ -291,9 +289,7 @@ export default function ProbabilityStep({
         </span>
       </p>
 
-      <Message
-        text={t('tia:descriptions.exporterBeliefNoDerogations')}
-      />
+      <Message text={t('tia:descriptions.exporterBeliefNoDerogations')} />
 
       {problematicLawfulAccessValues.LawfulAccess === 'no' && (
         <>

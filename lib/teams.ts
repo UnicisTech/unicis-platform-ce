@@ -27,6 +27,12 @@ export async function getTeamAccess(
   const plan = getCurrentPlan(team.subscription);
   const teamFeatures = subscriptions[plan].teamFeatures;
 
-  return { session, teamMember, team, plan, teamFeatures, teamProperties: team.properties as TeamProperties };
+  return {
+    session,
+    teamMember,
+    team,
+    plan,
+    teamFeatures,
+    teamProperties: team.properties as TeamProperties,
+  };
 }
-

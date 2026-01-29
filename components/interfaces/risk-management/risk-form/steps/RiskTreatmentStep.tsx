@@ -125,7 +125,9 @@ export default function RiskTreatmentStep({ control }: RiskTreatmentStepProps) {
                 step={1}
               />
             </FormControl>
-            <FormDescription>{t('rm:descriptions.treatedImpact')}</FormDescription>
+            <FormDescription>
+              {t('rm:descriptions.treatedImpact')}
+            </FormDescription>
             <FormDescription>{`${field.value} ${t('percent-max-100')}`}</FormDescription>
           </FormItem>
         )}

@@ -52,7 +52,7 @@ const FieldTab: React.FC<{ idx: number; risk: PiaRisk }> = ({ idx, risk }) => {
         />
       ))}
     </>
-  )
+  );
 };
 
 const BubbleChartTab: React.FC<{ risk: PiaRisk }> = ({ risk }) => {
@@ -127,7 +127,7 @@ const BubbleChartTab: React.FC<{ risk: PiaRisk }> = ({ risk }) => {
 //           label={t(`pia:fields.isProportionalToPurposeAssessment`)}
 //           value={step.isProportionalToPurposeAssessment}
 //         />
-//       </div>   
+//       </div>
 //     )
 // }
 
@@ -149,7 +149,7 @@ const BubbleChartTab: React.FC<{ risk: PiaRisk }> = ({ risk }) => {
 //           label={t(`pia:fields.confidentialityAssessment`)}
 //           value={step.confidentialityAssessment}
 //         />
-//       </div>   
+//       </div>
 //     )
 // }
 

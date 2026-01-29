@@ -36,15 +36,15 @@ const TransparencyStep = ({
         defaultValue={initial?.transparencyRiskProbability ?? ''}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>
-              {t(`pia:fields.isDataProcessingNecessary`)}
-            </FormLabel>
+            <FormLabel>{t(`pia:fields.isDataProcessingNecessary`)}</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.transparencyRiskProbability.map(item => (
+                {config.transparencyRiskProbability.map((item) => (
                   <div key={item} className="flex items-center space-x-2">
                     <RadioGroupItem value={item} id={item} />
-                    <label htmlFor={item}>{t(`pia:risk-probability.${item}`)}</label>
+                    <label htmlFor={item}>
+                      {t(`pia:risk-probability.${item}`)}
+                    </label>
                   </div>
                 ))}
               </RadioGroup>
@@ -65,10 +65,12 @@ const TransparencyStep = ({
             <FormLabel>{t(`pia:fields.transparencyRiskSecurity`)}</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.transparencyRiskSecurity.map(item => (
+                {config.transparencyRiskSecurity.map((item) => (
                   <div key={item} className="flex items-center space-x-2">
                     <RadioGroupItem value={item} id={item} />
-                    <label htmlFor={item}>{t(`pia:transparencyRiskSecurity.${item}`)}</label>
+                    <label htmlFor={item}>
+                      {t(`pia:transparencyRiskSecurity.${item}`)}
+                    </label>
                   </div>
                 ))}
               </RadioGroup>

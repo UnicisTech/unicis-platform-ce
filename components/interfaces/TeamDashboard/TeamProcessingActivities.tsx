@@ -3,20 +3,32 @@ import { useTranslation } from 'next-i18next';
 import useTeamTasks from 'hooks/useTeamTasks';
 import type { TaskProperties } from 'types';
 import { capitalizeCountryName } from '@/lib/utils';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/shadcn/ui/card';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from '@/components/shadcn/ui/card';
 import { Badge } from '@/components/shadcn/ui/badge';
 
 const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
   const { t } = useTranslation('common');
   const { tasks } = useTeamTasks(slug);
 
-  const { totalTasksWithRpaProcedure, totalEnabledDataTransfers, countriesList } = useMemo(() => {
+  const {
+    totalTasksWithRpaProcedure,
+    totalEnabledDataTransfers,
+    countriesList,
+  } = useMemo(() => {
     let withProcedure = 0;
     let enabledTransfers = 0;
     const countries = new Set<string>();
 
     for (const task of tasks ?? []) {
-      const props = task.properties as unknown as TaskProperties | null | undefined;
+      const props = task.properties as unknown as
+        | TaskProperties
+        | null
+        | undefined;
       const proc = props?.rpa_procedure;
 
       if (!Array.isArray(proc)) continue;
@@ -25,7 +37,8 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
 
       const transferSection = proc[3];
       if (transferSection && typeof transferSection === 'object') {
-        if ((transferSection as any).datatransfer === true) enabledTransfers += 1;
+        if ((transferSection as any).datatransfer === true)
+          enabledTransfers += 1;
 
         const countryValue = (transferSection as any).country?.value;
         if (typeof countryValue === 'string' && countryValue.trim()) {
@@ -54,7 +67,9 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
       <CardContent className="grid gap-4">
         <div className="flex flex-col items-center gap-1 rounded-md border p-3">
           <p className="text-sm font-medium">{t('number-of-records')}</p>
-          <span className="text-lg font-bold">{totalTasksWithRpaProcedure}</span>
+          <span className="text-lg font-bold">
+            {totalTasksWithRpaProcedure}
+          </span>
         </div>
 
         <div className="flex flex-col items-center gap-1 rounded-md border p-3">
@@ -72,7 +87,9 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
                 </Badge>
               ))
             ) : (
-              <span className="text-xs text-muted-foreground">{t('no-country')}</span>
+              <span className="text-xs text-muted-foreground">
+                {t('no-country')}
+              </span>
             )}
           </div>
         </div>

@@ -1,8 +1,5 @@
 import type { Task } from '@prisma/client';
-import type {
-  RMProcedureInterface,
-  TaskProperties,
-} from 'types';
+import type { RMProcedureInterface, TaskProperties } from 'types';
 
 const transformToRange = (value: number): number => {
   return Math.floor(value / 20);
@@ -12,7 +9,6 @@ export const calculateRiskRating = (probability: number, impact: number) => {
   const result = (probability / 100) * (impact / 100);
   return Math.floor(result * 100);
 };
-
 
 export const calculateCurrentRiskRating = (
   rawRiskRating: number,

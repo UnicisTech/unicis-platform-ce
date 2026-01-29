@@ -54,10 +54,12 @@ export default function RecipientsStep({ control }: RecipientsStepProps) {
                 onValueChange={(val) => field.onChange(val || null)}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder={t('rpa:placeholders.recipientType')} />
+                  <SelectValue
+                    placeholder={t('rpa:placeholders.recipientType')}
+                  />
                 </SelectTrigger>
                 <SelectContent>
-                  {config.recipientType.map(value => (
+                  {config.recipientType.map((value) => (
                     <SelectItem key={value} value={value}>
                       {t(`rpa:recipient-type.${value}`)}
                     </SelectItem>

@@ -1,4 +1,4 @@
-import { RpaConfig, Option } from "types";
+import { RpaConfig, Option } from 'types';
 
 type Options = {
   [key: string]: Option[];

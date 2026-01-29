@@ -21,7 +21,10 @@ export interface SecurityMeasuresStepProps {
 export function SecurityMeasuresStep({ control }: SecurityMeasuresStepProps) {
   const { t } = useTranslation('common');
 
-  const tomsOptions = React.useMemo(() => config.toms.map(i => ({value: i, label: t(`rpa:toms.${i}`)})), [t])
+  const tomsOptions = React.useMemo(
+    () => config.toms.map((i) => ({ value: i, label: t(`rpa:toms.${i}`) })),
+    [t]
+  );
 
   return (
     <>

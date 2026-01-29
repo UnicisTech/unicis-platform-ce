@@ -31,7 +31,7 @@ const piaDashboardConfig = [
 
 const PiaAnalysis = ({ tasks }: PiaAnalysisProps) => {
   const { t } = useTranslation('common');
-  
+
   if (!tasks) {
     return null;
   }

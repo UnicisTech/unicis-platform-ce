@@ -15,10 +15,7 @@ import {
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 import { Task } from '@prisma/client';
-import {
-  ProcedureQueueItem,
-  RpaProcedureInterface,
-} from 'types';
+import { ProcedureQueueItem, RpaProcedureInterface } from 'types';
 import TaskPicker from '@/components/shared/shadcn/TaskPicker';
 import { Message } from '@/components/shared';
 import {
@@ -186,7 +183,10 @@ export default function RpaProcedureDialog({
         <DialogHeader>
           <DialogTitle>{t('rpa-activities')}</DialogTitle>
           {currentStep > 0 && (
-            <StageTracker headers={steps.map(step => t(`rpa:steps.${step}`))} currentStage={currentStep - 1} />
+            <StageTracker
+              headers={steps.map((step) => t(`rpa:steps.${step}`))}
+              currentStage={currentStep - 1}
+            />
           )}
         </DialogHeader>
         <div className="max-w-md">
@@ -257,7 +257,7 @@ export default function RpaProcedureDialog({
           <DialogClose asChild>
             <Button variant="outline">{t('close')}</Button>
           </DialogClose>
-          {(currentStep > (prevProcedure ? 1 : 0)) && (
+          {currentStep > (prevProcedure ? 1 : 0) && (
             <Button variant="outline" onClick={back}>
               {t('back')}
             </Button>

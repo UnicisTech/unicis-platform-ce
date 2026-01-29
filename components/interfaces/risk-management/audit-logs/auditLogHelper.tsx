@@ -1,17 +1,23 @@
 import { TFunction } from 'next-i18next';
-import { MemberName } from "@/components/shared";
+import { MemberName } from '@/components/shared';
 
 export const auditLogHelper = (
   field: string | undefined,
   value: string | string[] | undefined,
   t: TFunction,
-  membersById: Map<string, string>,
+  membersById: Map<string, string>
 ) => {
   if (value == null) return <span>—</span>;
 
   switch (field) {
     case 'AssetOwner':
-        return <MemberName userId={value as string} membersById={membersById} fallback={t('not-found')}/>
+      return (
+        <MemberName
+          userId={value as string}
+          membersById={membersById}
+          fallback={t('not-found')}
+        />
+      );
     // plain text / scalar
     case 'Risk':
     case 'Impact':
@@ -24,7 +30,7 @@ export const auditLogHelper = (
     case 'TreatedImpact':
     case 'TreatedProbability':
     case 'TreatmentStatus':
-      return <span>{value}%</span>
+      return <span>{value}%</span>;
     default:
       return <span>{value}</span>;
   }

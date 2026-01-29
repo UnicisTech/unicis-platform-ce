@@ -15,7 +15,7 @@ const trOne = (t: TFunction, key: string, v: string) => t(`${key}.${v}`);
 const trMany = (t: TFunction, key: string, v: string | string[]) => {
   if (Array.isArray(v)) {
     if (!v.length) return '—';
-    return v.map(x => trOne(t, key, String(x))).join(', ');
+    return v.map((x) => trOne(t, key, String(x))).join(', ');
   }
   return trOne(t, key, String(v));
 };
@@ -24,13 +24,19 @@ export const auditLogHelper = (
   field: string | undefined,
   value: AuditValue,
   t: TFunction,
-  membersById: Map<string, string>,
+  membersById: Map<string, string>
 ) => {
   if (value == null) return <span>—</span>;
 
   switch (field) {
     case 'dpo':
-        return <MemberName userId={value as string} membersById={membersById} fallback={t('not-found')}/>
+      return (
+        <MemberName
+          userId={value as string}
+          membersById={membersById}
+          fallback={t('not-found')}
+        />
+      );
     // plain text / scalar
     case 'reviewDate':
     case 'controller':
@@ -56,7 +62,6 @@ export const auditLogHelper = (
     case 'piaNeeded':
       // return <span>{trMany(t, `${field}`, value as any)}</span>;
       return <span>{t(value)}</span>;
-
 
     // multi-select selectors
     case 'category':

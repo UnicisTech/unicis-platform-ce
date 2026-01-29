@@ -1,5 +1,19 @@
 import { Prisma } from '@prisma/client';
-import { mapCscControlToId, mapCscControlToIdAny, optionArrayToStringArray, optionToString, error, preview, mapValueByFieldConfig, rpaFieldToId, countryToValue, tiaFieldToId, stripOuterQuotes, tryExtractValueFromStringifiedJson, rmFieldToId } from './helpers';
+import {
+  mapCscControlToId,
+  mapCscControlToIdAny,
+  optionArrayToStringArray,
+  optionToString,
+  error,
+  preview,
+  mapValueByFieldConfig,
+  rpaFieldToId,
+  countryToValue,
+  tiaFieldToId,
+  stripOuterQuotes,
+  tryExtractValueFromStringifiedJson,
+  rmFieldToId,
+} from './helpers';
 import { getCscControlsProp } from '@/lib/csc';
 import { ISO } from 'types';
 
@@ -187,7 +201,8 @@ function normalizeRpaProcedure(props: JsonWritable): JsonWritable {
   let changed = false;
 
   const next = raw.map((block, blockIndex) => {
-    if (!block || typeof block !== 'object' || Array.isArray(block)) return block;
+    if (!block || typeof block !== 'object' || Array.isArray(block))
+      return block;
 
     const src = block as Record<string, unknown>;
     const cloned: Record<string, unknown> = { ...src };
@@ -260,7 +275,8 @@ function normalizeRpaAuditLogs(props: JsonWritable): JsonWritable {
     }
 
     const fieldRaw = (diff as any).field;
-    const fieldStr = typeof fieldRaw === 'string' ? fieldRaw : String(fieldRaw ?? '');
+    const fieldStr =
+      typeof fieldRaw === 'string' ? fieldRaw : String(fieldRaw ?? '');
     const fieldId = rpaFieldToId(fieldStr);
 
     if (!fieldId) {
@@ -277,8 +293,18 @@ function normalizeRpaAuditLogs(props: JsonWritable): JsonWritable {
     const prevRaw = (diff as any).prevValue;
     const nextRaw = (diff as any).nextValue;
 
-    const prevRes = mapValueByFieldConfig(fieldId, prevRaw, { idx: i, which: 'prevValue' }, 'RPA');
-    const nextRes = mapValueByFieldConfig(fieldId, nextRaw, { idx: i, which: 'nextValue' }, 'RPA');
+    const prevRes = mapValueByFieldConfig(
+      fieldId,
+      prevRaw,
+      { idx: i, which: 'prevValue' },
+      'RPA'
+    );
+    const nextRes = mapValueByFieldConfig(
+      fieldId,
+      nextRaw,
+      { idx: i, which: 'nextValue' },
+      'RPA'
+    );
 
     const fieldChanged = fieldId !== fieldRaw;
     const thisChanged = fieldChanged || prevRes.changed || nextRes.changed;
@@ -323,7 +349,8 @@ function normalizeTiaProcedure(props: JsonWritable): JsonWritable {
   let changed = false;
 
   const next = raw.map((block, blockIndex) => {
-    if (!block || typeof block !== 'object' || Array.isArray(block)) return block;
+    if (!block || typeof block !== 'object' || Array.isArray(block))
+      return block;
 
     const src = block as Record<string, unknown>;
     const cloned: Record<string, unknown> = { ...src };
@@ -387,7 +414,8 @@ function normalizeTiaAuditLogs(props: JsonWritable): JsonWritable {
     }
 
     const fieldRaw = (diff as any).field;
-    const fieldStr = typeof fieldRaw === 'string' ? fieldRaw : String(fieldRaw ?? '');
+    const fieldStr =
+      typeof fieldRaw === 'string' ? fieldRaw : String(fieldRaw ?? '');
     const fieldId = tiaFieldToId(fieldStr);
 
     if (!fieldId) {
@@ -404,8 +432,18 @@ function normalizeTiaAuditLogs(props: JsonWritable): JsonWritable {
     const prevRaw = (diff as any).prevValue;
     const nextRaw = (diff as any).nextValue;
 
-    const prevRes = mapValueByFieldConfig(fieldId, prevRaw, { idx: i, which: 'prevValue' }, 'TIA');
-    const nextRes = mapValueByFieldConfig(fieldId, nextRaw, { idx: i, which: 'nextValue' }, 'TIA');
+    const prevRes = mapValueByFieldConfig(
+      fieldId,
+      prevRaw,
+      { idx: i, which: 'prevValue' },
+      'TIA'
+    );
+    const nextRes = mapValueByFieldConfig(
+      fieldId,
+      nextRaw,
+      { idx: i, which: 'nextValue' },
+      'TIA'
+    );
 
     const fieldChanged = fieldId !== fieldRaw;
     const thisChanged = fieldChanged || prevRes.changed || nextRes.changed;
@@ -437,7 +475,6 @@ function normalizeTiaAuditLogs(props: JsonWritable): JsonWritable {
 }
 
 // ------ TIA ------
-
 
 // ------ PIA ------
 
@@ -543,15 +580,15 @@ function normalizeRmRisk(props: JsonWritable): JsonWritable {
 
   if (!raw[0].AssetOwner?.value) {
     error(
-        `[RM_RISK] No AssetOwner value`,
-        `logIndex=${0}`,
-        `event=${'none'}`,
-        `field=${'none'}`
-      );
+      `[RM_RISK] No AssetOwner value`,
+      `logIndex=${0}`,
+      `event=${'none'}`,
+      `field=${'none'}`
+    );
     return props;
   }
 
-  raw[0].AssetOwner = raw[0].AssetOwner.value
+  raw[0].AssetOwner = raw[0].AssetOwner.value;
 
   return {
     ...obj,
@@ -603,7 +640,8 @@ function normalizeRmAuditLogs(props: JsonWritable): JsonWritable {
     let nextChanged = nextOut !== nextRaw;
 
     const fieldRaw = (diff as any).field;
-    const fieldStr = typeof fieldRaw === 'string' ? fieldRaw : String(fieldRaw ?? '');
+    const fieldStr =
+      typeof fieldRaw === 'string' ? fieldRaw : String(fieldRaw ?? '');
     const fieldId = rmFieldToId(fieldStr);
 
     if (!fieldId) {
@@ -627,8 +665,14 @@ function normalizeRmAuditLogs(props: JsonWritable): JsonWritable {
     }
 
     if (fieldId === 'AssetOwner') {
-      const p = tryExtractValueFromStringifiedJson(prevOut, `logIndex=${i} prevValue`);
-      const n = tryExtractValueFromStringifiedJson(nextOut, `logIndex=${i} nextValue`);
+      const p = tryExtractValueFromStringifiedJson(
+        prevOut,
+        `logIndex=${i} prevValue`
+      );
+      const n = tryExtractValueFromStringifiedJson(
+        nextOut,
+        `logIndex=${i} nextValue`
+      );
 
       prevOut = p.out;
       nextOut = n.out;

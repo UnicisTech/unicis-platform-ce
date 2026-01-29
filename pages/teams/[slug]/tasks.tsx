@@ -25,7 +25,7 @@ const AllTasks: NextPageWithLayout<
   if (!team) {
     return <Error message={t('errors.teamNotFound')} />;
   }
-  
+
   return <Tasks team={team} />;
 };
 

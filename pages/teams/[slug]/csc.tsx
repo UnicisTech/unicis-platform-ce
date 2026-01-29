@@ -41,7 +41,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const frameworks = (access.teamProperties?.csc_iso ?? []) as ISO[];
   const cscTranslations = getTranslationNamespaces(frameworks);
 
-  console.log('cscTranslations', cscTranslations)
+  console.log('cscTranslations', cscTranslations);
 
   return {
     props: {

@@ -17,7 +17,7 @@ import { auditLogHelper } from './auditLogHelper';
 
 const LOGS_PER_PAGE = 20;
 
-const RpaAuditLogs = ({ task, slug }: { task: Task, slug: string }) => {
+const RpaAuditLogs = ({ task, slug }: { task: Task; slug: string }) => {
   const { t } = useTranslation('common');
 
   const taskProperties = task?.properties as any;
@@ -57,16 +57,32 @@ const RpaAuditLogs = ({ task, slug }: { task: Task, slug: string }) => {
             <TableBody>
               {paginatedLogs.map((log, index) => (
                 <TableRow key={index}>
-                  <TableCell><MemberName membersById={membersById} userId={log.actor?.id} fallback='—'/></TableCell>
+                  <TableCell>
+                    <MemberName
+                      membersById={membersById}
+                      userId={log.actor?.id}
+                      fallback="—"
+                    />
+                  </TableCell>
                   <TableCell>{t(`${log.event}`)}</TableCell>
                   <TableCell>
                     {new Date(log.date).toLocaleDateString()}
                   </TableCell>
                   <TableCell className="text-muted-foreground">
-                    {auditLogHelper(log.diff?.field, log.diff?.prevValue, t, membersById)}
+                    {auditLogHelper(
+                      log.diff?.field,
+                      log.diff?.prevValue,
+                      t,
+                      membersById
+                    )}
                   </TableCell>
                   <TableCell className="text-muted-foreground">
-                    {auditLogHelper(log.diff?.field, log.diff?.nextValue, t, membersById)}
+                    {auditLogHelper(
+                      log.diff?.field,
+                      log.diff?.nextValue,
+                      t,
+                      membersById
+                    )}
                   </TableCell>
                 </TableRow>
               ))}

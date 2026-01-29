@@ -1,47 +1,47 @@
 {
-    "fields": {
-        "Risk": "Riesgo",
-        "AssetOwner": "Propietario del activo",
-        "Impact": "Impacto",
-        "RawProbability": "Probabilidad bruta",
-        "RawImpact": "Impacto bruto",
-        "RiskTreatment": "Tratamiento del riesgo",
-        "TreatmentCost": "Costo del tratamiento",
-        "TreatmentStatus": "Estado del tratamiento",
-        "TreatedProbability": "Probabilidad tratada",
-        "TreatedImpact": "Impacto tratado"
-    },
-    "headers": {
-        "raw-risk-rating": "Calificación de riesgo bruto",
-        "treatment": "Tratamiento",
-        "target-risk-rating": "Calificación de riesgo objetivo",
-        "current-risk-rating": "Calificación de riesgo actual"
-    },
-    "steps": {
-        "riskAndImpact": "Riesgo e impacto",
-        "riskTreatment": "Tratamiento del riesgo"
-    },
-    "descriptions": {
-        "risk": "Describa brevemente el riesgo de seguridad de la información para que las personas comprendan qué riesgo está evaluando.",
-        "assetOwner": "¿Quién es el Propietario del Activo de Información, la persona responsable si los tratamientos de riesgo son inadecuados, ocurren incidentes y la organización se ve afectada negativamente? Esta persona debe evaluar y tratar los riesgos adecuadamente.",
-        "impact": "Describa los impactos potenciales en términos empresariales si ocurre el riesgo. Decida si utilizar impactos de \"peor caso\" o \"anticipados\" de forma coherente.",
-        "rawProbability": "Introduzca la probabilidad de que el riesgo ocurra sin tratamiento, como un valor porcentual.",
-        "rawImpact": "Introduzca el impacto empresarial potencial si el riesgo ocurriera sin ningún tratamiento, como un valor porcentual.",
-        "riskTreatment": "Describa cómo debe tratarse el riesgo (p. ej., controlado, evitado, transferido o aceptado).",
-        "treatmentStatus": "¿En qué medida está implementado el tratamiento planificado? 0% significa que solo existe un plan; 100% significa que el tratamiento está totalmente operativo.",
-        "treatedProbability": "Introduzca la probabilidad de que el riesgo ocurra después de la mitigación.",
-        "treatedImpact": "Introduzca el impacto probable después de la mitigación. Los incidentes debidos a fallos de control pueden tener impactos mayores. Resalte en negrita los valores tratados si difieren de los valores brutos."
-    },
-    "placeholders": {
-        "riskDescription": "Introduzca la descripción del riesgo",
-        "assetOwner": "Seleccione un propietario",
-        "impactDescription": "Introduzca la descripción del impacto",
-        "treatmentApproach": "Describa el enfoque de tratamiento",
-        "costEstimate": "Introduzca la estimación de costos"
-    },
-    "form-labels": {
-        "TreatmentStatus": "Estado del tratamiento (%)",
-        "TreatedProbability": "Probabilidad tratada (%)",
-        "RawProbability": "Probabilidad bruta (%)"
-    }
+  "fields": {
+    "Risk": "Riesgo",
+    "AssetOwner": "Propietario del activo",
+    "Impact": "Impacto",
+    "RawProbability": "Probabilidad bruta",
+    "RawImpact": "Impacto bruto",
+    "RiskTreatment": "Tratamiento del riesgo",
+    "TreatmentCost": "Costo del tratamiento",
+    "TreatmentStatus": "Estado del tratamiento",
+    "TreatedProbability": "Probabilidad tratada",
+    "TreatedImpact": "Impacto tratado"
+  },
+  "headers": {
+    "raw-risk-rating": "Calificación de riesgo bruto",
+    "treatment": "Tratamiento",
+    "target-risk-rating": "Calificación de riesgo objetivo",
+    "current-risk-rating": "Calificación de riesgo actual"
+  },
+  "steps": {
+    "riskAndImpact": "Riesgo e impacto",
+    "riskTreatment": "Tratamiento del riesgo"
+  },
+  "descriptions": {
+    "risk": "Describa brevemente el riesgo de seguridad de la información para que las personas comprendan qué riesgo está evaluando.",
+    "assetOwner": "¿Quién es el Propietario del Activo de Información, la persona responsable si los tratamientos de riesgo son inadecuados, ocurren incidentes y la organización se ve afectada negativamente? Esta persona debe evaluar y tratar los riesgos adecuadamente.",
+    "impact": "Describa los impactos potenciales en términos empresariales si ocurre el riesgo. Decida si utilizar impactos de \"peor caso\" o \"anticipados\" de forma coherente.",
+    "rawProbability": "Introduzca la probabilidad de que el riesgo ocurra sin tratamiento, como un valor porcentual.",
+    "rawImpact": "Introduzca el impacto empresarial potencial si el riesgo ocurriera sin ningún tratamiento, como un valor porcentual.",
+    "riskTreatment": "Describa cómo debe tratarse el riesgo (p. ej., controlado, evitado, transferido o aceptado).",
+    "treatmentStatus": "¿En qué medida está implementado el tratamiento planificado? 0% significa que solo existe un plan; 100% significa que el tratamiento está totalmente operativo.",
+    "treatedProbability": "Introduzca la probabilidad de que el riesgo ocurra después de la mitigación.",
+    "treatedImpact": "Introduzca el impacto probable después de la mitigación. Los incidentes debidos a fallos de control pueden tener impactos mayores. Resalte en negrita los valores tratados si difieren de los valores brutos."
+  },
+  "placeholders": {
+    "riskDescription": "Introduzca la descripción del riesgo",
+    "assetOwner": "Seleccione un propietario",
+    "impactDescription": "Introduzca la descripción del impacto",
+    "treatmentApproach": "Describa el enfoque de tratamiento",
+    "costEstimate": "Introduzca la estimación de costos"
+  },
+  "form-labels": {
+    "TreatmentStatus": "Estado del tratamiento (%)",
+    "TreatedProbability": "Probabilidad tratada (%)",
+    "RawProbability": "Probabilidad bruta (%)"
+  }
 }

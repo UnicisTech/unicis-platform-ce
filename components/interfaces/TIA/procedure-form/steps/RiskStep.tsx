@@ -85,9 +85,7 @@ export default function RiskStep({
             name="ReasonWarrantsSubpoenas"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>
-                  {t(`tia:fields.ReasonWarrantsSubpoenas`)}
-                </FormLabel>
+                <FormLabel>{t(`tia:fields.ReasonWarrantsSubpoenas`)}</FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -136,9 +134,7 @@ export default function RiskStep({
             name="ReasonViolationLocalLaw"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>
-                  {t(`tia:fields.ReasonViolationLocalLaw`)}
-                </FormLabel>
+                <FormLabel>{t(`tia:fields.ReasonViolationLocalLaw`)}</FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -208,9 +204,7 @@ export default function RiskStep({
             rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>
-                  {t(`tia:fields.HighViolationDataIssue`)}
-                </FormLabel>
+                <FormLabel>{t(`tia:fields.HighViolationDataIssue`)}</FormLabel>
                 <FormDescription>
                   {t('tia:descriptions.highViolationDataIssue')}
                 </FormDescription>
@@ -365,9 +359,7 @@ export default function RiskStep({
             rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>
-                  {t(`tia:fields.DataIssueInvestigation`)}
-                </FormLabel>
+                <FormLabel>{t(`tia:fields.DataIssueInvestigation`)}</FormLabel>
                 <FormDescription>
                   {t('tia:descriptions.dataIssueInvestigation')}
                 </FormDescription>
@@ -472,7 +464,10 @@ export default function RiskStep({
                   {t(`tia:fields.ReasonLocalIssueWarrants`)}
                 </FormLabel>
                 <FormControl>
-                  <Textarea {...field} placeholder={t('tia:placeholders.provideDetails')} />
+                  <Textarea
+                    {...field}
+                    placeholder={t('tia:placeholders.provideDetails')}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -520,7 +515,10 @@ export default function RiskStep({
                   {t(`tia:fields.ReasonLocalMassSurveillance`)}
                 </FormLabel>
                 <FormControl>
-                  <Textarea {...field} placeholder={t('tia:placeholders.provideDetails')} />
+                  <Textarea
+                    {...field}
+                    placeholder={t('tia:placeholders.provideDetails')}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -899,9 +897,7 @@ export default function RiskStep({
             rules={{ required: t('errors.pleaseProvideAReason') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>
-                  {t(`tia:fields.ReasonPastSelfReporting`)}
-                </FormLabel>
+                <FormLabel>{t(`tia:fields.ReasonPastSelfReporting`)}</FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -922,9 +918,7 @@ export default function RiskStep({
             rules={{ required: t('errors.pleaseSelectAnOption') }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>
-                  {t(`tia:fields.AssessmentProduceReport`)}
-                </FormLabel>
+                <FormLabel>{t(`tia:fields.AssessmentProduceReport`)}</FormLabel>
                 <FormDescription>
                   {t('tia:descriptions.assessmentProduceReport')}
                 </FormDescription>

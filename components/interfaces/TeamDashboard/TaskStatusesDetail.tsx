@@ -12,7 +12,10 @@ const TaskStatusesDetail = ({
   const stats = [
     { label: t('total-tasks'), value: tasks?.length || 0 },
     { label: t('task-statuses.todo'), value: statusCounts?.todo || 0 },
-    { label: t('task-statuses.inprogress'), value: statusCounts?.inprogress || 0 },
+    {
+      label: t('task-statuses.inprogress'),
+      value: statusCounts?.inprogress || 0,
+    },
     { label: t('task-statuses.inreview'), value: statusCounts?.inreview || 0 },
     { label: t('task-statuses.feedback'), value: statusCounts?.feedback || 0 },
     { label: t('task-statuses.done'), value: statusCounts?.done || 0 },

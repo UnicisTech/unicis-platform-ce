@@ -47,7 +47,7 @@ const AiChat: React.FC = () => {
     e.preventDefault();
 
     if (!team) {
-      return
+      return;
     }
     const form = e.currentTarget;
     const input = form.elements.namedItem('prompt') as HTMLInputElement;

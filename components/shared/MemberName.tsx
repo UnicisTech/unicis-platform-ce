@@ -13,6 +13,6 @@ const MemberName = ({
   if (!userId) return <span>{fallback}</span>;
   const name = membersById.get(userId);
   return <span>{name || fallback}</span>;
-}
+};
 
 export default MemberName;

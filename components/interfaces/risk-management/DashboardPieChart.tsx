@@ -41,7 +41,7 @@ const DashboardChart = ({ datasets }: { datasets: number[] }) => {
   const textColor = isDark ? darkText : lightText;
 
   const data = {
-    labels: impactLabelKeys.map(k => t(k)),
+    labels: impactLabelKeys.map((k) => t(k)),
     datasets: [
       {
         label: t('risk-count'),

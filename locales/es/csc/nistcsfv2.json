@@ -1,554 +1,554 @@
 {
-    "sections": {
-        "govern": {
-            "label": "GOUVERNER"
-        },
-        "identify": {
-            "label": "IDENTIFIER"
-        },
-        "protect": {
-            "label": "PROTÉGER"
-        },
-        "detect": {
-            "label": "DÉTECTER"
-        },
-        "respond": {
-            "label": "RÉPONDRE"
-        },
-        "recover": {
-            "label": "RÉTABLIR"
-        }
+  "sections": {
+    "govern": {
+      "label": "GOUVERNER"
     },
-    "controls": {
-        "nist-csf-v2-gv-oc-01": {
-            "code": "GV.OC-01",
-            "control": "Contexto organizacional",
-            "requirements": "La misión de la organización se comprende e informa la gestión de riesgos de ciberseguridad"
-        },
-        "nist-csf-v2-gv-oc-02": {
-            "code": "GV.OC-02",
-            "control": "Contexto organizacional",
-            "requirements": "Las partes interesadas internas y externas se comprenden, y sus necesidades y expectativas en materia de gestión de riesgos de ciberseguridad se comprenden y se tienen en cuenta"
-        },
-        "nist-csf-v2-gv-oc-03": {
-            "code": "GV.OC-03",
-            "control": "Contexto organizacional",
-            "requirements": "Los requisitos legales, reglamentarios y contractuales en materia de ciberseguridad —incluidas las obligaciones relativas a la privacidad y las libertades civiles— se comprenden y se gestionan"
-        },
-        "nist-csf-v2-gv-oc-04": {
-            "code": "GV.OC-04",
-            "control": "Contexto organizacional",
-            "requirements": "Los objetivos, capacidades y servicios críticos de los que dependen las partes interesadas o que esperan de la organización se comprenden y se comunican"
-        },
-        "nist-csf-v2-gv-oc-05": {
-            "code": "GV.OC-05",
-            "control": "Contexto organizacional",
-            "requirements": "Los resultados, capacidades y servicios de los que depende la organización se comprenden y se comunican"
-        },
-        "nist-csf-v2-gv-rm-01": {
-            "code": "GV.RM-01",
-            "control": "Estrategia de gestión de riesgos",
-            "requirements": "Los objetivos de la gestión de riesgos se establecen y se acuerdan con las partes interesadas de la organización"
-        },
-        "nist-csf-v2-gv-rm-02": {
-            "code": "GV.RM-02",
-            "control": "Estrategia de gestión de riesgos",
-            "requirements": "Las declaraciones de apetito de riesgo y tolerancia al riesgo se establecen, se comunican y se mantienen"
-        },
-        "nist-csf-v2-gv-rm-03": {
-            "code": "GV.RM-03",
-            "control": "Estrategia de gestión de riesgos",
-            "requirements": "Las actividades y los resultados de la gestión de riesgos de ciberseguridad se incluyen en los procesos de gestión de riesgos empresariales"
-        },
-        "nist-csf-v2-gv-rm-04": {
-            "code": "GV.RM-04",
-            "control": "Estrategia de gestión de riesgos",
-            "requirements": "Se establece y se comunica una dirección estratégica que describe las opciones adecuadas de respuesta al riesgo"
-        },
-        "nist-csf-v2-gv-rm-05": {
-            "code": "GV.RM-05",
-            "control": "Estrategia de gestión de riesgos",
-            "requirements": "Se establecen líneas de comunicación en toda la organización para los riesgos de ciberseguridad, incluidos los riesgos de proveedores y otros terceros"
-        },
-        "nist-csf-v2-gv-rm-06": {
-            "code": "GV.RM-06",
-            "control": "Estrategia de gestión de riesgos",
-            "requirements": "Se establece y se comunica un método estandarizado para calcular, documentar, categorizar y priorizar los riesgos de ciberseguridad"
-        },
-        "nist-csf-v2-gv-rm-07": {
-            "code": "GV.RM-07",
-            "control": "Estrategia de gestión de riesgos",
-            "requirements": "Las oportunidades estratégicas (es decir, riesgos positivos) se caracterizan y se incluyen en las discusiones organizacionales sobre riesgos de ciberseguridad"
-        },
-        "nist-csf-v2-gv-rr-01": {
-            "code": "GV.RR-01",
-            "control": "Funciones, responsabilidades y autoridades",
-            "requirements": "El liderazgo organizacional es responsable y rinde cuentas por el riesgo de ciberseguridad y fomenta una cultura consciente del riesgo, ética y de mejora continua"
-        },
-        "nist-csf-v2-gv-rr-02": {
-            "code": "GV.RR-02",
-            "control": "Funciones, responsabilidades y autoridades",
-            "requirements": "Las funciones, responsabilidades y autoridades relacionadas con la gestión de riesgos de ciberseguridad se establecen, comunican, comprenden y hacen cumplir"
-        },
-        "nist-csf-v2-gv-rr-03": {
-            "code": "GV.RR-03",
-            "control": "Funciones, responsabilidades y autoridades",
-            "requirements": "Se asignan recursos adecuados de forma proporcional a la estrategia de riesgo de ciberseguridad, las funciones, las responsabilidades y las políticas"
-        },
-        "nist-csf-v2-gv-rr-04": {
-            "code": "GV.RR-04",
-            "control": "Funciones, responsabilidades y autoridades",
-            "requirements": "La ciberseguridad se incluye en las prácticas de recursos humanos"
-        },
-        "nist-csf-v2-gv-po-01": {
-            "code": "GV.PO-01",
-            "control": "Política",
-            "requirements": "La política para gestionar los riesgos de ciberseguridad se establece en función del contexto organizacional, la estrategia de ciberseguridad y las prioridades, y se comunica y se hace cumplir"
-        },
-        "nist-csf-v2-gv-po-02": {
-            "code": "GV.PO-02",
-            "control": "Política",
-            "requirements": "La política para gestionar los riesgos de ciberseguridad se revisa, actualiza, comunica y hace cumplir para reflejar cambios en los requisitos, las amenazas, la tecnología y la misión organizacional"
-        },
-        "nist-csf-v2-gv-ov-01": {
-            "code": "GV.OV-01",
-            "control": "Supervisión",
-            "requirements": "Los resultados de la estrategia de gestión de riesgos de ciberseguridad se revisan para informar y ajustar la estrategia y la dirección"
-        },
-        "nist-csf-v2-gv-ov-02": {
-            "code": "GV.OV-02",
-            "control": "Supervisión",
-            "requirements": "La estrategia de gestión de riesgos de ciberseguridad se revisa y ajusta para garantizar la cobertura de los requisitos y riesgos organizacionales"
-        },
-        "nist-csf-v2-gv-ov-03": {
-            "code": "GV.OV-03",
-            "control": "Supervisión",
-            "requirements": "El desempeño organizacional en la gestión de riesgos de ciberseguridad se evalúa y revisa para los ajustes necesarios"
-        },
-        "nist-csf-v2-gv-sc-01": {
-            "code": "GV.SC-01",
-            "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
-            "requirements": "Se establece y se acuerda con las partes interesadas de la organización un programa, estrategia, objetivos, políticas y procesos de gestión de riesgos de la cadena de suministro de ciberseguridad"
-        },
-        "nist-csf-v2-gv-sc-02": {
-            "code": "GV.SC-02",
-            "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
-            "requirements": "Las funciones y responsabilidades de ciberseguridad para proveedores, clientes y socios se establecen, comunican y coordinan interna y externamente"
-        },
-        "nist-csf-v2-gv-sc-03": {
-            "code": "GV.SC-03",
-            "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
-            "requirements": "La gestión de riesgos de la cadena de suministro de ciberseguridad se integra en la ciberseguridad y en la gestión de riesgos empresariales, la evaluación de riesgos y los procesos de mejora"
-        },
-        "nist-csf-v2-gv-sc-04": {
-            "code": "GV.SC-04",
-            "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
-            "requirements": "Los proveedores son conocidos y se priorizan según su criticidad"
-        },
-        "nist-csf-v2-gv-sc-05": {
-            "code": "GV.SC-05",
-            "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
-            "requirements": "Los requisitos para abordar los riesgos de ciberseguridad en las cadenas de suministro se establecen, priorizan e integran en los contratos y otros tipos de acuerdos con proveedores y otros terceros relevantes"
-        },
-        "nist-csf-v2-gv-sc-06": {
-            "code": "GV.SC-06",
-            "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
-            "requirements": "Se realizan la planificación y la diligencia debida para reducir los riesgos antes de establecer relaciones formales con proveedores u otros terceros"
-        },
-        "nist-csf-v2-gv-sc-07": {
-            "code": "GV.SC-07",
-            "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
-            "requirements": "Los riesgos que plantea un proveedor, sus productos y servicios, y otros terceros se comprenden, registran, priorizan, evalúan, se responde a ellos y se supervisan durante toda la relación"
-        },
-        "nist-csf-v2-gv-sc-08": {
-            "code": "GV.SC-08",
-            "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
-            "requirements": "Los proveedores relevantes y otros terceros se incluyen en las actividades de planificación, respuesta y recuperación de incidentes"
-        },
-        "nist-csf-v2-gv-sc-09": {
-            "code": "GV.SC-09",
-            "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
-            "requirements": "Las prácticas de seguridad de la cadena de suministro se integran en los programas de ciberseguridad y gestión de riesgos empresariales, y su desempeño se supervisa a lo largo del ciclo de vida del producto y del servicio tecnológico"
-        },
-        "nist-csf-v2-gv-sc-10": {
-            "code": "GV.SC-10",
-            "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
-            "requirements": "Los planes de gestión de riesgos de la cadena de suministro de ciberseguridad incluyen disposiciones para actividades que ocurren después de la finalización de una asociación o un acuerdo de servicio"
-        },
-        "nist-csf-v2-id-am-01": {
-            "code": "ID.AM-01",
-            "control": "Gestión de activos",
-            "requirements": "Se mantienen inventarios del hardware gestionado por la organización"
-        },
-        "nist-csf-v2-id-am-02": {
-            "code": "ID.AM-02",
-            "control": "Gestión de activos",
-            "requirements": "Se mantienen inventarios del software, los servicios y los sistemas gestionados por la organización"
-        },
-        "nist-csf-v2-id-am-03": {
-            "code": "ID.AM-03",
-            "control": "Gestión de activos",
-            "requirements": "Se mantienen representaciones de las comunicaciones de red autorizadas de la organización y de los flujos de datos de red internos y externos"
-        },
-        "nist-csf-v2-id-am-04": {
-            "code": "ID.AM-04",
-            "control": "Gestión de activos",
-            "requirements": "Se mantienen inventarios de los servicios proporcionados por los proveedores"
-        },
-        "nist-csf-v2-id-am-05": {
-            "code": "ID.AM-05",
-            "control": "Gestión de activos",
-            "requirements": "Los activos se priorizan en función de su clasificación, criticidad, recursos e impacto en la misión"
-        },
-        "nist-csf-v2-id-am-07": {
-            "code": "ID.AM-07",
-            "control": "Gestión de activos",
-            "requirements": "Se mantienen inventarios de datos y los metadatos correspondientes para los tipos de datos designados"
-        },
-        "nist-csf-v2-id-am-08": {
-            "code": "ID.AM-08",
-            "control": "Gestión de activos",
-            "requirements": "Los sistemas, el hardware, el software, los servicios y los datos se gestionan a lo largo de sus ciclos de vida"
-        },
-        "nist-csf-v2-id-ra-01": {
-            "code": "ID.RA-01",
-            "control": "Evaluación de riesgos",
-            "requirements": "Las vulnerabilidades en los activos se identifican, validan y registran"
-        },
-        "nist-csf-v2-id-ra-02": {
-            "code": "ID.RA-02",
-            "control": "Evaluación de riesgos",
-            "requirements": "La inteligencia de amenazas cibernéticas se recibe de foros y fuentes de intercambio de información"
-        },
-        "nist-csf-v2-id-ra-03": {
-            "code": "ID.RA-03",
-            "control": "Evaluación de riesgos",
-            "requirements": "Las amenazas internas y externas a la organización se identifican y registran"
-        },
-        "nist-csf-v2-id-ra-04": {
-            "code": "ID.RA-04",
-            "control": "Evaluación de riesgos",
-            "requirements": "Se identifican y registran los impactos potenciales y las probabilidades de que las amenazas exploten las vulnerabilidades"
-        },
-        "nist-csf-v2-id-ra-05": {
-            "code": "ID.RA-05",
-            "control": "Evaluación de riesgos",
-            "requirements": "Las amenazas, las vulnerabilidades, las probabilidades y los impactos se utilizan para comprender el riesgo inherente e informar la priorización de la respuesta al riesgo"
-        },
-        "nist-csf-v2-id-ra-06": {
-            "code": "ID.RA-06",
-            "control": "Evaluación de riesgos",
-            "requirements": "Las respuestas al riesgo se eligen, priorizan, planifican, rastrean y comunican"
-        },
-        "nist-csf-v2-id-ra-07": {
-            "code": "ID.RA-07",
-            "control": "Evaluación de riesgos",
-            "requirements": "Los cambios y las excepciones se gestionan, se evalúan por su impacto en el riesgo, se registran y se rastrean"
-        },
-        "nist-csf-v2-id-ra-08": {
-            "code": "ID.RA-08",
-            "control": "Evaluación de riesgos",
-            "requirements": "Se establecen procesos para recibir, analizar y responder a las divulgaciones de vulnerabilidades"
-        },
-        "nist-csf-v2-id-ra-09": {
-            "code": "ID.RA-09",
-            "control": "Evaluación de riesgos",
-            "requirements": "La autenticidad y la integridad del hardware y el software se evalúan antes de su adquisición y uso"
-        },
-        "nist-csf-v2-id-ra-10": {
-            "code": "ID.RA-10",
-            "control": "Evaluación de riesgos",
-            "requirements": "Los proveedores críticos se evalúan antes de la adquisición"
-        },
-        "nist-csf-v2-id-im-01": {
-            "code": "ID.IM-01",
-            "control": "Mejora",
-            "requirements": "Las mejoras se identifican a partir de las evaluaciones"
-        },
-        "nist-csf-v2-id-im-02": {
-            "code": "ID.IM-02",
-            "control": "Mejora",
-            "requirements": "Las mejoras se identifican a partir de pruebas y ejercicios de seguridad, incluidos los realizados en coordinación con proveedores y terceros relevantes"
-        },
-        "nist-csf-v2-id-im-03": {
-            "code": "ID.IM-03",
-            "control": "Mejora",
-            "requirements": "Las mejoras se identifican a partir de la ejecución de procesos, procedimientos y actividades operativas"
-        },
-        "nist-csf-v2-id-im-04": {
-            "code": "ID.IM-04",
-            "control": "Mejora",
-            "requirements": "Los planes de respuesta a incidentes y otros planes de ciberseguridad que afectan a las operaciones se establecen, comunican, mantienen y mejoran"
-        },
-        "nist-csf-v2-pr-aa-01": {
-            "code": "PR.AA-01",
-            "control": "Gestión de identidades, autenticación y requisitos de acceso",
-            "requirements": "Las identidades y credenciales de usuarios, servicios y hardware autorizados son gestionadas por la organización"
-        },
-        "nist-csf-v2-pr-aa-02": {
-            "code": "PR.AA-02",
-            "control": "Gestión de identidades, autenticación y requisitos de acceso",
-            "requirements": "Las identidades se verifican y se vinculan a credenciales según el contexto de las interacciones"
-        },
-        "nist-csf-v2-pr-aa-03": {
-            "code": "PR.AA-03",
-            "control": "Gestión de identidades, autenticación y requisitos de acceso",
-            "requirements": "Los usuarios, servicios y hardware se autentican"
-        },
-        "nist-csf-v2-pr-aa-04": {
-            "code": "PR.AA-04",
-            "control": "Gestión de identidades, autenticación y requisitos de acceso",
-            "requirements": "Las aserciones de identidad se protegen, se transmiten y se verifican"
-        },
-        "nist-csf-v2-pr-aa-05": {
-            "code": "PR.AA-05",
-            "control": "Gestión de identidades, autenticación y requisitos de acceso",
-            "requirements": "Los permisos de acceso, derechos y autorizaciones se definen en una política, se gestionan, se aplican y se revisan, e incorporan los principios de mínimo privilegio y separación de funciones"
-        },
-        "nist-csf-v2-pr-aa-06": {
-            "code": "PR.AA-06",
-            "control": "Gestión de identidades, autenticación y requisitos de acceso",
-            "requirements": "El acceso físico a los activos se gestiona, supervisa y aplica de forma proporcional al riesgo"
-        },
-        "nist-csf-v2-pr-at-01": {
-            "code": "PR.AT-01",
-            "control": "Concienciación y formación",
-            "requirements": "El personal recibe concienciación y formación para que posea los conocimientos y habilidades necesarios para realizar tareas generales teniendo en cuenta los riesgos de ciberseguridad"
-        },
-        "nist-csf-v2-pr-at-02": {
-            "code": "PR.AT-02",
-            "control": "Concienciación y formación",
-            "requirements": "Las personas en funciones especializadas reciben concienciación y formación para que posean los conocimientos y habilidades necesarios para realizar tareas relevantes teniendo en cuenta los riesgos de ciberseguridad"
-        },
-        "nist-csf-v2-pr-ds-01": {
-            "code": "PR.DS-01",
-            "control": "Seguridad de los datos",
-            "requirements": "Se protege la confidencialidad, integridad y disponibilidad de los datos en reposo"
-        },
-        "nist-csf-v2-pr-ds-02": {
-            "code": "PR.DS-02",
-            "control": "Seguridad de los datos",
-            "requirements": "Se protege la confidencialidad, integridad y disponibilidad de los datos en tránsito"
-        },
-        "nist-csf-v2-pr-ds-10": {
-            "code": "PR.DS-10",
-            "control": "Seguridad de los datos",
-            "requirements": "Se protege la confidencialidad, integridad y disponibilidad de los datos en uso"
-        },
-        "nist-csf-v2-pr-ds-11": {
-            "code": "PR.DS-11",
-            "control": "Seguridad de los datos",
-            "requirements": "Las copias de seguridad de los datos se crean, protegen, mantienen y prueban"
-        },
-        "nist-csf-v2-pr-ps-01": {
-            "code": "PR.PS-01",
-            "control": "Seguridad de la plataforma",
-            "requirements": "Se establecen y aplican prácticas de gestión de configuraciones"
-        },
-        "nist-csf-v2-pr-ps-02": {
-            "code": "PR.PS-02",
-            "control": "Seguridad de la plataforma",
-            "requirements": "El software se mantiene, reemplaza y retira de forma proporcional al riesgo"
-        },
-        "nist-csf-v2-pr-ps-03": {
-            "code": "PR.PS-03",
-            "control": "Seguridad de la plataforma",
-            "requirements": "El hardware se mantiene, reemplaza y retira de forma proporcional al riesgo"
-        },
-        "nist-csf-v2-pr-ps-04": {
-            "code": "PR.PS-04",
-            "control": "Seguridad de la plataforma",
-            "requirements": "Se generan registros de eventos y se ponen a disposición para la supervisión continua"
-        },
-        "nist-csf-v2-pr-ps-05": {
-            "code": "PR.PS-05",
-            "control": "Seguridad de la plataforma",
-            "requirements": "Se evita la instalación y ejecución de software no autorizado"
-        },
-        "nist-csf-v2-pr-ps-06": {
-            "code": "PR.PS-06",
-            "control": "Seguridad de la plataforma",
-            "requirements": "Las prácticas seguras de desarrollo de software se integran y su desempeño se supervisa a lo largo del ciclo de vida del desarrollo de software"
-        },
-        "nist-csf-v2-pr-ir-01": {
-            "code": "PR.IR-01",
-            "control": "Resiliencia de la infraestructura tecnológica",
-            "requirements": "Las redes y los entornos se protegen contra el acceso lógico y el uso no autorizados"
-        },
-        "nist-csf-v2-pr-ir-02": {
-            "code": "PR.IR-02",
-            "control": "Resiliencia de la infraestructura tecnológica",
-            "requirements": "Los activos tecnológicos de la organización se protegen contra amenazas ambientales"
-        },
-        "nist-csf-v2-pr-ir-03": {
-            "code": "PR.IR-03",
-            "control": "Resiliencia de la infraestructura tecnológica",
-            "requirements": "Se implementan mecanismos para cumplir los requisitos de resiliencia en situaciones normales y adversas"
-        },
-        "nist-csf-v2-pr-ir-04": {
-            "code": "PR.IR-04",
-            "control": "Resiliencia de la infraestructura tecnológica",
-            "requirements": "Se mantiene una capacidad adecuada de recursos para garantizar la disponibilidad"
-        },
-        "nist-csf-v2-de-cm-01": {
-            "code": "DE.CM-01",
-            "control": "Supervisión continua",
-            "requirements": "Las redes y los servicios de red se supervisan para detectar eventos potencialmente adversos"
-        },
-        "nist-csf-v2-de-cm-02": {
-            "code": "DE.CM-02",
-            "control": "Supervisión continua",
-            "requirements": "El entorno físico se supervisa para detectar eventos potencialmente adversos"
-        },
-        "nist-csf-v2-de-cm-03": {
-            "code": "DE.CM-03",
-            "control": "Supervisión continua",
-            "requirements": "La actividad del personal y el uso de la tecnología se supervisan para detectar eventos potencialmente adversos"
-        },
-        "nist-csf-v2-de-cm-06": {
-            "code": "DE.CM-06",
-            "control": "Supervisión continua",
-            "requirements": "Las actividades y servicios de proveedores externos se supervisan para detectar eventos potencialmente adversos"
-        },
-        "nist-csf-v2-de-cm-09": {
-            "code": "DE.CM-09",
-            "control": "Supervisión continua",
-            "requirements": "El hardware y el software informáticos, los entornos de ejecución y sus datos se supervisan para detectar eventos potencialmente adversos"
-        },
-        "nist-csf-v2-de-ae-02": {
-            "code": "DE.AE-02",
-            "control": "Análisis de eventos adversos",
-            "requirements": "Los eventos potencialmente adversos se analizan para comprender mejor las actividades asociadas"
-        },
-        "nist-csf-v2-de-ae-03": {
-            "code": "DE.AE-03",
-            "control": "Análisis de eventos adversos",
-            "requirements": "La información se correlaciona a partir de múltiples fuentes"
-        },
-        "nist-csf-v2-de-ae-04": {
-            "code": "DE.AE-04",
-            "control": "Análisis de eventos adversos",
-            "requirements": "Se comprenden el impacto y el alcance estimados de los eventos adversos"
-        },
-        "nist-csf-v2-de-ae-06": {
-            "code": "DE.AE-06",
-            "control": "Análisis de eventos adversos",
-            "requirements": "La información sobre eventos adversos se proporciona al personal y a las herramientas autorizadas"
-        },
-        "nist-csf-v2-de-ae-07": {
-            "code": "DE.AE-07",
-            "control": "Análisis de eventos adversos",
-            "requirements": "La inteligencia de amenazas cibernéticas y otra información contextual se integran en el análisis"
-        },
-        "nist-csf-v2-de-ae-08": {
-            "code": "DE.AE-08",
-            "control": "Análisis de eventos adversos",
-            "requirements": "Los incidentes se declaran cuando los eventos adversos cumplen los criterios de incidente definidos"
-        },
-        "nist-csf-v2-rs-ma-01": {
-            "code": "RS.MA-01",
-            "control": "Gestión de incidentes",
-            "requirements": "El plan de respuesta a incidentes se ejecuta en coordinación con terceros relevantes una vez que se declara un incidente"
-        },
-        "nist-csf-v2-rs-ma-02": {
-            "code": "RS.MA-02",
-            "control": "Gestión de incidentes",
-            "requirements": "Los informes de incidentes se clasifican y se validan"
-        },
-        "nist-csf-v2-rs-ma-03": {
-            "code": "RS.MA-03",
-            "control": "Gestión de incidentes",
-            "requirements": "Los incidentes se categorizan y se priorizan"
-        },
-        "nist-csf-v2-rs-ma-04": {
-            "code": "RS.MA-04",
-            "control": "Gestión de incidentes",
-            "requirements": "Los incidentes se escalan o se elevan según sea necesario"
-        },
-        "nist-csf-v2-rs-ma-05": {
-            "code": "RS.MA-05",
-            "control": "Gestión de incidentes",
-            "requirements": "Se aplican los criterios para iniciar la recuperación de incidentes"
-        },
-        "nist-csf-v2-rs-an-03": {
-            "code": "RS.AN-03",
-            "control": "Análisis de incidentes",
-            "requirements": "Se realiza un análisis para determinar qué ha ocurrido durante un incidente y la causa raíz del incidente"
-        },
-        "nist-csf-v2-rs-an-06": {
-            "code": "RS.AN-06",
-            "control": "Análisis de incidentes",
-            "requirements": "Las acciones realizadas durante una investigación se registran, y se preservan la integridad y la procedencia de los registros"
-        },
-        "nist-csf-v2-rs-an-07": {
-            "code": "RS.AN-07",
-            "control": "Análisis de incidentes",
-            "requirements": "Se recopilan los datos y metadatos del incidente, y se preservan su integridad y su procedencia"
-        },
-        "nist-csf-v2-rs-an-08": {
-            "code": "RS.AN-08",
-            "control": "Análisis de incidentes",
-            "requirements": "Se estima y valida la magnitud de un incidente"
-        },
-        "nist-csf-v2-rs-co-02": {
-            "code": "RS.CO-02",
-            "control": "Notificación y comunicación de la respuesta a incidentes",
-            "requirements": "Se notifica a las partes interesadas internas y externas sobre los incidentes"
-        },
-        "nist-csf-v2-rs-co-03": {
-            "code": "RS.CO-03",
-            "control": "Notificación y comunicación de la respuesta a incidentes",
-            "requirements": "La información se comparte con las partes interesadas internas y externas designadas"
-        },
-        "nist-csf-v2-rs-mi-01": {
-            "code": "RS.MI-01",
-            "control": "Mitigación de incidentes",
-            "requirements": "Los incidentes se contienen"
-        },
-        "nist-csf-v2-rs-mi-02": {
-            "code": "RS.MI-02",
-            "control": "Mitigación de incidentes",
-            "requirements": "Los incidentes se erradican"
-        },
-        "nist-csf-v2-rc-rp-01": {
-            "code": "RC.RP-01",
-            "control": "Ejecución del plan de recuperación de incidentes",
-            "requirements": "La parte de recuperación del plan de respuesta a incidentes se ejecuta una vez iniciada desde el proceso de respuesta a incidentes"
-        },
-        "nist-csf-v2-rc-rp-02": {
-            "code": "RC.RP-02",
-            "control": "Ejecución del plan de recuperación de incidentes",
-            "requirements": "Las acciones de recuperación se seleccionan, se delimitan, se priorizan y se realizan"
-        },
-        "nist-csf-v2-rc-rp-03": {
-            "code": "RC.RP-03",
-            "control": "Ejecución del plan de recuperación de incidentes",
-            "requirements": "La integridad de las copias de seguridad y otros activos de restauración se verifica antes de utilizarlos para la restauración"
-        },
-        "nist-csf-v2-rc-rp-04": {
-            "code": "RC.RP-04",
-            "control": "Ejecución del plan de recuperación de incidentes",
-            "requirements": "Se consideran las secciones críticas de la misión y la gestión del riesgo de ciberseguridad para establecer las normas operativas posteriores al incidente"
-        },
-        "nist-csf-v2-rc-rp-05": {
-            "code": "RC.RP-05",
-            "control": "Ejecución del plan de recuperación de incidentes",
-            "requirements": "Se verifica la integridad de los activos restaurados, se restauran los sistemas y servicios, y se confirma el estado operativo normal"
-        },
-        "nist-csf-v2-rc-rp-06": {
-            "code": "RC.RP-06",
-            "control": "Ejecución del plan de recuperación de incidentes",
-            "requirements": "El fin de la recuperación del incidente se declara según criterios, y se completa la documentación relacionada con el incidente"
-        },
-        "nist-csf-v2-rc-co-03": {
-            "code": "RC.CO-03",
-            "control": "Comunicación de la recuperación de incidentes",
-            "requirements": "Las actividades de recuperación y el progreso en la restauración de las capacidades operativas se comunican a las partes interesadas internas y externas designadas"
-        },
-        "nist-csf-v2-rc-co-04": {
-            "code": "RC.CO-04",
-            "control": "Comunicación de la recuperación de incidentes",
-            "requirements": "Las actualizaciones públicas sobre la recuperación del incidente se comparten utilizando métodos y mensajes aprobados"
-        }
+    "identify": {
+      "label": "IDENTIFIER"
+    },
+    "protect": {
+      "label": "PROTÉGER"
+    },
+    "detect": {
+      "label": "DÉTECTER"
+    },
+    "respond": {
+      "label": "RÉPONDRE"
+    },
+    "recover": {
+      "label": "RÉTABLIR"
     }
+  },
+  "controls": {
+    "nist-csf-v2-gv-oc-01": {
+      "code": "GV.OC-01",
+      "control": "Contexto organizacional",
+      "requirements": "La misión de la organización se comprende e informa la gestión de riesgos de ciberseguridad"
+    },
+    "nist-csf-v2-gv-oc-02": {
+      "code": "GV.OC-02",
+      "control": "Contexto organizacional",
+      "requirements": "Las partes interesadas internas y externas se comprenden, y sus necesidades y expectativas en materia de gestión de riesgos de ciberseguridad se comprenden y se tienen en cuenta"
+    },
+    "nist-csf-v2-gv-oc-03": {
+      "code": "GV.OC-03",
+      "control": "Contexto organizacional",
+      "requirements": "Los requisitos legales, reglamentarios y contractuales en materia de ciberseguridad —incluidas las obligaciones relativas a la privacidad y las libertades civiles— se comprenden y se gestionan"
+    },
+    "nist-csf-v2-gv-oc-04": {
+      "code": "GV.OC-04",
+      "control": "Contexto organizacional",
+      "requirements": "Los objetivos, capacidades y servicios críticos de los que dependen las partes interesadas o que esperan de la organización se comprenden y se comunican"
+    },
+    "nist-csf-v2-gv-oc-05": {
+      "code": "GV.OC-05",
+      "control": "Contexto organizacional",
+      "requirements": "Los resultados, capacidades y servicios de los que depende la organización se comprenden y se comunican"
+    },
+    "nist-csf-v2-gv-rm-01": {
+      "code": "GV.RM-01",
+      "control": "Estrategia de gestión de riesgos",
+      "requirements": "Los objetivos de la gestión de riesgos se establecen y se acuerdan con las partes interesadas de la organización"
+    },
+    "nist-csf-v2-gv-rm-02": {
+      "code": "GV.RM-02",
+      "control": "Estrategia de gestión de riesgos",
+      "requirements": "Las declaraciones de apetito de riesgo y tolerancia al riesgo se establecen, se comunican y se mantienen"
+    },
+    "nist-csf-v2-gv-rm-03": {
+      "code": "GV.RM-03",
+      "control": "Estrategia de gestión de riesgos",
+      "requirements": "Las actividades y los resultados de la gestión de riesgos de ciberseguridad se incluyen en los procesos de gestión de riesgos empresariales"
+    },
+    "nist-csf-v2-gv-rm-04": {
+      "code": "GV.RM-04",
+      "control": "Estrategia de gestión de riesgos",
+      "requirements": "Se establece y se comunica una dirección estratégica que describe las opciones adecuadas de respuesta al riesgo"
+    },
+    "nist-csf-v2-gv-rm-05": {
+      "code": "GV.RM-05",
+      "control": "Estrategia de gestión de riesgos",
+      "requirements": "Se establecen líneas de comunicación en toda la organización para los riesgos de ciberseguridad, incluidos los riesgos de proveedores y otros terceros"
+    },
+    "nist-csf-v2-gv-rm-06": {
+      "code": "GV.RM-06",
+      "control": "Estrategia de gestión de riesgos",
+      "requirements": "Se establece y se comunica un método estandarizado para calcular, documentar, categorizar y priorizar los riesgos de ciberseguridad"
+    },
+    "nist-csf-v2-gv-rm-07": {
+      "code": "GV.RM-07",
+      "control": "Estrategia de gestión de riesgos",
+      "requirements": "Las oportunidades estratégicas (es decir, riesgos positivos) se caracterizan y se incluyen en las discusiones organizacionales sobre riesgos de ciberseguridad"
+    },
+    "nist-csf-v2-gv-rr-01": {
+      "code": "GV.RR-01",
+      "control": "Funciones, responsabilidades y autoridades",
+      "requirements": "El liderazgo organizacional es responsable y rinde cuentas por el riesgo de ciberseguridad y fomenta una cultura consciente del riesgo, ética y de mejora continua"
+    },
+    "nist-csf-v2-gv-rr-02": {
+      "code": "GV.RR-02",
+      "control": "Funciones, responsabilidades y autoridades",
+      "requirements": "Las funciones, responsabilidades y autoridades relacionadas con la gestión de riesgos de ciberseguridad se establecen, comunican, comprenden y hacen cumplir"
+    },
+    "nist-csf-v2-gv-rr-03": {
+      "code": "GV.RR-03",
+      "control": "Funciones, responsabilidades y autoridades",
+      "requirements": "Se asignan recursos adecuados de forma proporcional a la estrategia de riesgo de ciberseguridad, las funciones, las responsabilidades y las políticas"
+    },
+    "nist-csf-v2-gv-rr-04": {
+      "code": "GV.RR-04",
+      "control": "Funciones, responsabilidades y autoridades",
+      "requirements": "La ciberseguridad se incluye en las prácticas de recursos humanos"
+    },
+    "nist-csf-v2-gv-po-01": {
+      "code": "GV.PO-01",
+      "control": "Política",
+      "requirements": "La política para gestionar los riesgos de ciberseguridad se establece en función del contexto organizacional, la estrategia de ciberseguridad y las prioridades, y se comunica y se hace cumplir"
+    },
+    "nist-csf-v2-gv-po-02": {
+      "code": "GV.PO-02",
+      "control": "Política",
+      "requirements": "La política para gestionar los riesgos de ciberseguridad se revisa, actualiza, comunica y hace cumplir para reflejar cambios en los requisitos, las amenazas, la tecnología y la misión organizacional"
+    },
+    "nist-csf-v2-gv-ov-01": {
+      "code": "GV.OV-01",
+      "control": "Supervisión",
+      "requirements": "Los resultados de la estrategia de gestión de riesgos de ciberseguridad se revisan para informar y ajustar la estrategia y la dirección"
+    },
+    "nist-csf-v2-gv-ov-02": {
+      "code": "GV.OV-02",
+      "control": "Supervisión",
+      "requirements": "La estrategia de gestión de riesgos de ciberseguridad se revisa y ajusta para garantizar la cobertura de los requisitos y riesgos organizacionales"
+    },
+    "nist-csf-v2-gv-ov-03": {
+      "code": "GV.OV-03",
+      "control": "Supervisión",
+      "requirements": "El desempeño organizacional en la gestión de riesgos de ciberseguridad se evalúa y revisa para los ajustes necesarios"
+    },
+    "nist-csf-v2-gv-sc-01": {
+      "code": "GV.SC-01",
+      "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
+      "requirements": "Se establece y se acuerda con las partes interesadas de la organización un programa, estrategia, objetivos, políticas y procesos de gestión de riesgos de la cadena de suministro de ciberseguridad"
+    },
+    "nist-csf-v2-gv-sc-02": {
+      "code": "GV.SC-02",
+      "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
+      "requirements": "Las funciones y responsabilidades de ciberseguridad para proveedores, clientes y socios se establecen, comunican y coordinan interna y externamente"
+    },
+    "nist-csf-v2-gv-sc-03": {
+      "code": "GV.SC-03",
+      "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
+      "requirements": "La gestión de riesgos de la cadena de suministro de ciberseguridad se integra en la ciberseguridad y en la gestión de riesgos empresariales, la evaluación de riesgos y los procesos de mejora"
+    },
+    "nist-csf-v2-gv-sc-04": {
+      "code": "GV.SC-04",
+      "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
+      "requirements": "Los proveedores son conocidos y se priorizan según su criticidad"
+    },
+    "nist-csf-v2-gv-sc-05": {
+      "code": "GV.SC-05",
+      "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
+      "requirements": "Los requisitos para abordar los riesgos de ciberseguridad en las cadenas de suministro se establecen, priorizan e integran en los contratos y otros tipos de acuerdos con proveedores y otros terceros relevantes"
+    },
+    "nist-csf-v2-gv-sc-06": {
+      "code": "GV.SC-06",
+      "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
+      "requirements": "Se realizan la planificación y la diligencia debida para reducir los riesgos antes de establecer relaciones formales con proveedores u otros terceros"
+    },
+    "nist-csf-v2-gv-sc-07": {
+      "code": "GV.SC-07",
+      "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
+      "requirements": "Los riesgos que plantea un proveedor, sus productos y servicios, y otros terceros se comprenden, registran, priorizan, evalúan, se responde a ellos y se supervisan durante toda la relación"
+    },
+    "nist-csf-v2-gv-sc-08": {
+      "code": "GV.SC-08",
+      "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
+      "requirements": "Los proveedores relevantes y otros terceros se incluyen en las actividades de planificación, respuesta y recuperación de incidentes"
+    },
+    "nist-csf-v2-gv-sc-09": {
+      "code": "GV.SC-09",
+      "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
+      "requirements": "Las prácticas de seguridad de la cadena de suministro se integran en los programas de ciberseguridad y gestión de riesgos empresariales, y su desempeño se supervisa a lo largo del ciclo de vida del producto y del servicio tecnológico"
+    },
+    "nist-csf-v2-gv-sc-10": {
+      "code": "GV.SC-10",
+      "control": "Gestión de riesgos de la cadena de suministro de ciberseguridad",
+      "requirements": "Los planes de gestión de riesgos de la cadena de suministro de ciberseguridad incluyen disposiciones para actividades que ocurren después de la finalización de una asociación o un acuerdo de servicio"
+    },
+    "nist-csf-v2-id-am-01": {
+      "code": "ID.AM-01",
+      "control": "Gestión de activos",
+      "requirements": "Se mantienen inventarios del hardware gestionado por la organización"
+    },
+    "nist-csf-v2-id-am-02": {
+      "code": "ID.AM-02",
+      "control": "Gestión de activos",
+      "requirements": "Se mantienen inventarios del software, los servicios y los sistemas gestionados por la organización"
+    },
+    "nist-csf-v2-id-am-03": {
+      "code": "ID.AM-03",
+      "control": "Gestión de activos",
+      "requirements": "Se mantienen representaciones de las comunicaciones de red autorizadas de la organización y de los flujos de datos de red internos y externos"
+    },
+    "nist-csf-v2-id-am-04": {
+      "code": "ID.AM-04",
+      "control": "Gestión de activos",
+      "requirements": "Se mantienen inventarios de los servicios proporcionados por los proveedores"
+    },
+    "nist-csf-v2-id-am-05": {
+      "code": "ID.AM-05",
+      "control": "Gestión de activos",
+      "requirements": "Los activos se priorizan en función de su clasificación, criticidad, recursos e impacto en la misión"
+    },
+    "nist-csf-v2-id-am-07": {
+      "code": "ID.AM-07",
+      "control": "Gestión de activos",
+      "requirements": "Se mantienen inventarios de datos y los metadatos correspondientes para los tipos de datos designados"
+    },
+    "nist-csf-v2-id-am-08": {
+      "code": "ID.AM-08",
+      "control": "Gestión de activos",
+      "requirements": "Los sistemas, el hardware, el software, los servicios y los datos se gestionan a lo largo de sus ciclos de vida"
+    },
+    "nist-csf-v2-id-ra-01": {
+      "code": "ID.RA-01",
+      "control": "Evaluación de riesgos",
+      "requirements": "Las vulnerabilidades en los activos se identifican, validan y registran"
+    },
+    "nist-csf-v2-id-ra-02": {
+      "code": "ID.RA-02",
+      "control": "Evaluación de riesgos",
+      "requirements": "La inteligencia de amenazas cibernéticas se recibe de foros y fuentes de intercambio de información"
+    },
+    "nist-csf-v2-id-ra-03": {
+      "code": "ID.RA-03",
+      "control": "Evaluación de riesgos",
+      "requirements": "Las amenazas internas y externas a la organización se identifican y registran"
+    },
+    "nist-csf-v2-id-ra-04": {
+      "code": "ID.RA-04",
+      "control": "Evaluación de riesgos",
+      "requirements": "Se identifican y registran los impactos potenciales y las probabilidades de que las amenazas exploten las vulnerabilidades"
+    },
+    "nist-csf-v2-id-ra-05": {
+      "code": "ID.RA-05",
+      "control": "Evaluación de riesgos",
+      "requirements": "Las amenazas, las vulnerabilidades, las probabilidades y los impactos se utilizan para comprender el riesgo inherente e informar la priorización de la respuesta al riesgo"
+    },
+    "nist-csf-v2-id-ra-06": {
+      "code": "ID.RA-06",
+      "control": "Evaluación de riesgos",
+      "requirements": "Las respuestas al riesgo se eligen, priorizan, planifican, rastrean y comunican"
+    },
+    "nist-csf-v2-id-ra-07": {
+      "code": "ID.RA-07",
+      "control": "Evaluación de riesgos",
+      "requirements": "Los cambios y las excepciones se gestionan, se evalúan por su impacto en el riesgo, se registran y se rastrean"
+    },
+    "nist-csf-v2-id-ra-08": {
+      "code": "ID.RA-08",
+      "control": "Evaluación de riesgos",
+      "requirements": "Se establecen procesos para recibir, analizar y responder a las divulgaciones de vulnerabilidades"
+    },
+    "nist-csf-v2-id-ra-09": {
+      "code": "ID.RA-09",
+      "control": "Evaluación de riesgos",
+      "requirements": "La autenticidad y la integridad del hardware y el software se evalúan antes de su adquisición y uso"
+    },
+    "nist-csf-v2-id-ra-10": {
+      "code": "ID.RA-10",
+      "control": "Evaluación de riesgos",
+      "requirements": "Los proveedores críticos se evalúan antes de la adquisición"
+    },
+    "nist-csf-v2-id-im-01": {
+      "code": "ID.IM-01",
+      "control": "Mejora",
+      "requirements": "Las mejoras se identifican a partir de las evaluaciones"
+    },
+    "nist-csf-v2-id-im-02": {
+      "code": "ID.IM-02",
+      "control": "Mejora",
+      "requirements": "Las mejoras se identifican a partir de pruebas y ejercicios de seguridad, incluidos los realizados en coordinación con proveedores y terceros relevantes"
+    },
+    "nist-csf-v2-id-im-03": {
+      "code": "ID.IM-03",
+      "control": "Mejora",
+      "requirements": "Las mejoras se identifican a partir de la ejecución de procesos, procedimientos y actividades operativas"
+    },
+    "nist-csf-v2-id-im-04": {
+      "code": "ID.IM-04",
+      "control": "Mejora",
+      "requirements": "Los planes de respuesta a incidentes y otros planes de ciberseguridad que afectan a las operaciones se establecen, comunican, mantienen y mejoran"
+    },
+    "nist-csf-v2-pr-aa-01": {
+      "code": "PR.AA-01",
+      "control": "Gestión de identidades, autenticación y requisitos de acceso",
+      "requirements": "Las identidades y credenciales de usuarios, servicios y hardware autorizados son gestionadas por la organización"
+    },
+    "nist-csf-v2-pr-aa-02": {
+      "code": "PR.AA-02",
+      "control": "Gestión de identidades, autenticación y requisitos de acceso",
+      "requirements": "Las identidades se verifican y se vinculan a credenciales según el contexto de las interacciones"
+    },
+    "nist-csf-v2-pr-aa-03": {
+      "code": "PR.AA-03",
+      "control": "Gestión de identidades, autenticación y requisitos de acceso",
+      "requirements": "Los usuarios, servicios y hardware se autentican"
+    },
+    "nist-csf-v2-pr-aa-04": {
+      "code": "PR.AA-04",
+      "control": "Gestión de identidades, autenticación y requisitos de acceso",
+      "requirements": "Las aserciones de identidad se protegen, se transmiten y se verifican"
+    },
+    "nist-csf-v2-pr-aa-05": {
+      "code": "PR.AA-05",
+      "control": "Gestión de identidades, autenticación y requisitos de acceso",
+      "requirements": "Los permisos de acceso, derechos y autorizaciones se definen en una política, se gestionan, se aplican y se revisan, e incorporan los principios de mínimo privilegio y separación de funciones"
+    },
+    "nist-csf-v2-pr-aa-06": {
+      "code": "PR.AA-06",
+      "control": "Gestión de identidades, autenticación y requisitos de acceso",
+      "requirements": "El acceso físico a los activos se gestiona, supervisa y aplica de forma proporcional al riesgo"
+    },
+    "nist-csf-v2-pr-at-01": {
+      "code": "PR.AT-01",
+      "control": "Concienciación y formación",
+      "requirements": "El personal recibe concienciación y formación para que posea los conocimientos y habilidades necesarios para realizar tareas generales teniendo en cuenta los riesgos de ciberseguridad"
+    },
+    "nist-csf-v2-pr-at-02": {
+      "code": "PR.AT-02",
+      "control": "Concienciación y formación",
+      "requirements": "Las personas en funciones especializadas reciben concienciación y formación para que posean los conocimientos y habilidades necesarios para realizar tareas relevantes teniendo en cuenta los riesgos de ciberseguridad"
+    },
+    "nist-csf-v2-pr-ds-01": {
+      "code": "PR.DS-01",
+      "control": "Seguridad de los datos",
+      "requirements": "Se protege la confidencialidad, integridad y disponibilidad de los datos en reposo"
+    },
+    "nist-csf-v2-pr-ds-02": {
+      "code": "PR.DS-02",
+      "control": "Seguridad de los datos",
+      "requirements": "Se protege la confidencialidad, integridad y disponibilidad de los datos en tránsito"
+    },
+    "nist-csf-v2-pr-ds-10": {
+      "code": "PR.DS-10",
+      "control": "Seguridad de los datos",
+      "requirements": "Se protege la confidencialidad, integridad y disponibilidad de los datos en uso"
+    },
+    "nist-csf-v2-pr-ds-11": {
+      "code": "PR.DS-11",
+      "control": "Seguridad de los datos",
+      "requirements": "Las copias de seguridad de los datos se crean, protegen, mantienen y prueban"
+    },
+    "nist-csf-v2-pr-ps-01": {
+      "code": "PR.PS-01",
+      "control": "Seguridad de la plataforma",
+      "requirements": "Se establecen y aplican prácticas de gestión de configuraciones"
+    },
+    "nist-csf-v2-pr-ps-02": {
+      "code": "PR.PS-02",
+      "control": "Seguridad de la plataforma",
+      "requirements": "El software se mantiene, reemplaza y retira de forma proporcional al riesgo"
+    },
+    "nist-csf-v2-pr-ps-03": {
+      "code": "PR.PS-03",
+      "control": "Seguridad de la plataforma",
+      "requirements": "El hardware se mantiene, reemplaza y retira de forma proporcional al riesgo"
+    },
+    "nist-csf-v2-pr-ps-04": {
+      "code": "PR.PS-04",
+      "control": "Seguridad de la plataforma",
+      "requirements": "Se generan registros de eventos y se ponen a disposición para la supervisión continua"
+    },
+    "nist-csf-v2-pr-ps-05": {
+      "code": "PR.PS-05",
+      "control": "Seguridad de la plataforma",
+      "requirements": "Se evita la instalación y ejecución de software no autorizado"
+    },
+    "nist-csf-v2-pr-ps-06": {
+      "code": "PR.PS-06",
+      "control": "Seguridad de la plataforma",
+      "requirements": "Las prácticas seguras de desarrollo de software se integran y su desempeño se supervisa a lo largo del ciclo de vida del desarrollo de software"
+    },
+    "nist-csf-v2-pr-ir-01": {
+      "code": "PR.IR-01",
+      "control": "Resiliencia de la infraestructura tecnológica",
+      "requirements": "Las redes y los entornos se protegen contra el acceso lógico y el uso no autorizados"
+    },
+    "nist-csf-v2-pr-ir-02": {
+      "code": "PR.IR-02",
+      "control": "Resiliencia de la infraestructura tecnológica",
+      "requirements": "Los activos tecnológicos de la organización se protegen contra amenazas ambientales"
+    },
+    "nist-csf-v2-pr-ir-03": {
+      "code": "PR.IR-03",
+      "control": "Resiliencia de la infraestructura tecnológica",
+      "requirements": "Se implementan mecanismos para cumplir los requisitos de resiliencia en situaciones normales y adversas"
+    },
+    "nist-csf-v2-pr-ir-04": {
+      "code": "PR.IR-04",
+      "control": "Resiliencia de la infraestructura tecnológica",
+      "requirements": "Se mantiene una capacidad adecuada de recursos para garantizar la disponibilidad"
+    },
+    "nist-csf-v2-de-cm-01": {
+      "code": "DE.CM-01",
+      "control": "Supervisión continua",
+      "requirements": "Las redes y los servicios de red se supervisan para detectar eventos potencialmente adversos"
+    },
+    "nist-csf-v2-de-cm-02": {
+      "code": "DE.CM-02",
+      "control": "Supervisión continua",
+      "requirements": "El entorno físico se supervisa para detectar eventos potencialmente adversos"
+    },
+    "nist-csf-v2-de-cm-03": {
+      "code": "DE.CM-03",
+      "control": "Supervisión continua",
+      "requirements": "La actividad del personal y el uso de la tecnología se supervisan para detectar eventos potencialmente adversos"
+    },
+    "nist-csf-v2-de-cm-06": {
+      "code": "DE.CM-06",
+      "control": "Supervisión continua",
+      "requirements": "Las actividades y servicios de proveedores externos se supervisan para detectar eventos potencialmente adversos"
+    },
+    "nist-csf-v2-de-cm-09": {
+      "code": "DE.CM-09",
+      "control": "Supervisión continua",
+      "requirements": "El hardware y el software informáticos, los entornos de ejecución y sus datos se supervisan para detectar eventos potencialmente adversos"
+    },
+    "nist-csf-v2-de-ae-02": {
+      "code": "DE.AE-02",
+      "control": "Análisis de eventos adversos",
+      "requirements": "Los eventos potencialmente adversos se analizan para comprender mejor las actividades asociadas"
+    },
+    "nist-csf-v2-de-ae-03": {
+      "code": "DE.AE-03",
+      "control": "Análisis de eventos adversos",
+      "requirements": "La información se correlaciona a partir de múltiples fuentes"
+    },
+    "nist-csf-v2-de-ae-04": {
+      "code": "DE.AE-04",
+      "control": "Análisis de eventos adversos",
+      "requirements": "Se comprenden el impacto y el alcance estimados de los eventos adversos"
+    },
+    "nist-csf-v2-de-ae-06": {
+      "code": "DE.AE-06",
+      "control": "Análisis de eventos adversos",
+      "requirements": "La información sobre eventos adversos se proporciona al personal y a las herramientas autorizadas"
+    },
+    "nist-csf-v2-de-ae-07": {
+      "code": "DE.AE-07",
+      "control": "Análisis de eventos adversos",
+      "requirements": "La inteligencia de amenazas cibernéticas y otra información contextual se integran en el análisis"
+    },
+    "nist-csf-v2-de-ae-08": {
+      "code": "DE.AE-08",
+      "control": "Análisis de eventos adversos",
+      "requirements": "Los incidentes se declaran cuando los eventos adversos cumplen los criterios de incidente definidos"
+    },
+    "nist-csf-v2-rs-ma-01": {
+      "code": "RS.MA-01",
+      "control": "Gestión de incidentes",
+      "requirements": "El plan de respuesta a incidentes se ejecuta en coordinación con terceros relevantes una vez que se declara un incidente"
+    },
+    "nist-csf-v2-rs-ma-02": {
+      "code": "RS.MA-02",
+      "control": "Gestión de incidentes",
+      "requirements": "Los informes de incidentes se clasifican y se validan"
+    },
+    "nist-csf-v2-rs-ma-03": {
+      "code": "RS.MA-03",
+      "control": "Gestión de incidentes",
+      "requirements": "Los incidentes se categorizan y se priorizan"
+    },
+    "nist-csf-v2-rs-ma-04": {
+      "code": "RS.MA-04",
+      "control": "Gestión de incidentes",
+      "requirements": "Los incidentes se escalan o se elevan según sea necesario"
+    },
+    "nist-csf-v2-rs-ma-05": {
+      "code": "RS.MA-05",
+      "control": "Gestión de incidentes",
+      "requirements": "Se aplican los criterios para iniciar la recuperación de incidentes"
+    },
+    "nist-csf-v2-rs-an-03": {
+      "code": "RS.AN-03",
+      "control": "Análisis de incidentes",
+      "requirements": "Se realiza un análisis para determinar qué ha ocurrido durante un incidente y la causa raíz del incidente"
+    },
+    "nist-csf-v2-rs-an-06": {
+      "code": "RS.AN-06",
+      "control": "Análisis de incidentes",
+      "requirements": "Las acciones realizadas durante una investigación se registran, y se preservan la integridad y la procedencia de los registros"
+    },
+    "nist-csf-v2-rs-an-07": {
+      "code": "RS.AN-07",
+      "control": "Análisis de incidentes",
+      "requirements": "Se recopilan los datos y metadatos del incidente, y se preservan su integridad y su procedencia"
+    },
+    "nist-csf-v2-rs-an-08": {
+      "code": "RS.AN-08",
+      "control": "Análisis de incidentes",
+      "requirements": "Se estima y valida la magnitud de un incidente"
+    },
+    "nist-csf-v2-rs-co-02": {
+      "code": "RS.CO-02",
+      "control": "Notificación y comunicación de la respuesta a incidentes",
+      "requirements": "Se notifica a las partes interesadas internas y externas sobre los incidentes"
+    },
+    "nist-csf-v2-rs-co-03": {
+      "code": "RS.CO-03",
+      "control": "Notificación y comunicación de la respuesta a incidentes",
+      "requirements": "La información se comparte con las partes interesadas internas y externas designadas"
+    },
+    "nist-csf-v2-rs-mi-01": {
+      "code": "RS.MI-01",
+      "control": "Mitigación de incidentes",
+      "requirements": "Los incidentes se contienen"
+    },
+    "nist-csf-v2-rs-mi-02": {
+      "code": "RS.MI-02",
+      "control": "Mitigación de incidentes",
+      "requirements": "Los incidentes se erradican"
+    },
+    "nist-csf-v2-rc-rp-01": {
+      "code": "RC.RP-01",
+      "control": "Ejecución del plan de recuperación de incidentes",
+      "requirements": "La parte de recuperación del plan de respuesta a incidentes se ejecuta una vez iniciada desde el proceso de respuesta a incidentes"
+    },
+    "nist-csf-v2-rc-rp-02": {
+      "code": "RC.RP-02",
+      "control": "Ejecución del plan de recuperación de incidentes",
+      "requirements": "Las acciones de recuperación se seleccionan, se delimitan, se priorizan y se realizan"
+    },
+    "nist-csf-v2-rc-rp-03": {
+      "code": "RC.RP-03",
+      "control": "Ejecución del plan de recuperación de incidentes",
+      "requirements": "La integridad de las copias de seguridad y otros activos de restauración se verifica antes de utilizarlos para la restauración"
+    },
+    "nist-csf-v2-rc-rp-04": {
+      "code": "RC.RP-04",
+      "control": "Ejecución del plan de recuperación de incidentes",
+      "requirements": "Se consideran las secciones críticas de la misión y la gestión del riesgo de ciberseguridad para establecer las normas operativas posteriores al incidente"
+    },
+    "nist-csf-v2-rc-rp-05": {
+      "code": "RC.RP-05",
+      "control": "Ejecución del plan de recuperación de incidentes",
+      "requirements": "Se verifica la integridad de los activos restaurados, se restauran los sistemas y servicios, y se confirma el estado operativo normal"
+    },
+    "nist-csf-v2-rc-rp-06": {
+      "code": "RC.RP-06",
+      "control": "Ejecución del plan de recuperación de incidentes",
+      "requirements": "El fin de la recuperación del incidente se declara según criterios, y se completa la documentación relacionada con el incidente"
+    },
+    "nist-csf-v2-rc-co-03": {
+      "code": "RC.CO-03",
+      "control": "Comunicación de la recuperación de incidentes",
+      "requirements": "Las actividades de recuperación y el progreso en la restauración de las capacidades operativas se comunican a las partes interesadas internas y externas designadas"
+    },
+    "nist-csf-v2-rc-co-04": {
+      "code": "RC.CO-04",
+      "control": "Comunicación de la recuperación de incidentes",
+      "requirements": "Las actualizaciones públicas sobre la recuperación del incidente se comparten utilizando métodos y mensajes aprobados"
+    }
+  }
 }

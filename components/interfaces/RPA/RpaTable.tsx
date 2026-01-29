@@ -42,7 +42,7 @@ const RpaTable = ({
   if (isError) {
     return <Error message={isError?.message} />;
   }
-  
+
   // console.log('rpa tasks', tasks.sort((a,b) => a.properties.rpa_audit_logs?.length - b.properties.rpa_audit_logs?.length))
 
   return (

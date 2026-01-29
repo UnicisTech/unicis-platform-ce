@@ -17,7 +17,7 @@ import { auditLogHelper } from './auditLogHelper';
 
 const ITEMS_PER_PAGE = 20;
 
-const TiaAuditLogs = ({ task, slug }: { task: Task, slug: string }) => {
+const TiaAuditLogs = ({ task, slug }: { task: Task; slug: string }) => {
   const { t } = useTranslation('common');
 
   const allLogs = ((task?.properties as TaskProperties)?.tia_audit_logs ||
@@ -32,7 +32,7 @@ const TiaAuditLogs = ({ task, slug }: { task: Task, slug: string }) => {
   );
 
   const { isLoading, isError, membersById } = useTeamMembersMap(slug);
-  
+
   if (isLoading) {
     return <Loading />;
   }
@@ -58,7 +58,13 @@ const TiaAuditLogs = ({ task, slug }: { task: Task, slug: string }) => {
             <TableBody>
               {paginatedLogs.map((log, index) => (
                 <TableRow key={index}>
-                  <TableCell><MemberName membersById={membersById} userId={log.actor?.id} fallback='—'/></TableCell>
+                  <TableCell>
+                    <MemberName
+                      membersById={membersById}
+                      userId={log.actor?.id}
+                      fallback="—"
+                    />
+                  </TableCell>
                   <TableCell>{t(`${log.event}`)}</TableCell>
                   <TableCell>
                     {new Date(log.date).toLocaleDateString('en-GB')}

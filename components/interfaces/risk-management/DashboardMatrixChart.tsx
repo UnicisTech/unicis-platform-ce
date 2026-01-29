@@ -57,7 +57,10 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
         },
       },
       y: {
-        title: { display: true, text: t('chart-risk-axis.treated-probability') },
+        title: {
+          display: true,
+          text: t('chart-risk-axis.treated-probability'),
+        },
         min: 0,
         max: MATRIX_SIZE,
         ticks: {

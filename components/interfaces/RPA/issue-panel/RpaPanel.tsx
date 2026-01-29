@@ -12,7 +12,7 @@ const DescriptionAndStakeholdersTab: React.FC<{
   slug: string;
 }> = ({ step, slug }) => {
   const { t } = useTranslation('common');
-  const { isLoading, isError, members } = useTeamMembers(slug)
+  const { isLoading, isError, members } = useTeamMembers(slug);
 
   if (isLoading) {
     return <Loading />;
@@ -23,7 +23,9 @@ const DescriptionAndStakeholdersTab: React.FC<{
   }
 
   // TODO: use <MemberName/> component
-  const dpoName = members.find(member => member.userId === step.dpo)?.user.name || t('not-found')
+  const dpoName =
+    members.find((member) => member.userId === step.dpo)?.user.name ||
+    t('not-found');
 
   return (
     <div className="space-y-2">
@@ -31,7 +33,7 @@ const DescriptionAndStakeholdersTab: React.FC<{
       <Field label={t(`rpa:fields.controller`)} value={step.controller} />
       <Field label={t(`rpa:fields.dpo`)} value={dpoName} />
     </div>
-  )
+  );
 };
 
 const PurposeAndCategoriesTab: React.FC<{ step: RpaProcedureInterface[1] }> = ({
@@ -45,15 +47,21 @@ const PurposeAndCategoriesTab: React.FC<{ step: RpaProcedureInterface[1] }> = ({
       )}
       <Field
         label={t(`rpa:fields.category`)}
-        value={step.category.map(item => t(`rpa:category.${item}`)).join(', ')}
+        value={step.category
+          .map((item) => t(`rpa:category.${item}`))
+          .join(', ')}
       />
       <Field
         label={t(`rpa:fields.specialcategory`)}
-        value={step.specialcategory.map(item => t(`rpa:special-category.${item}`)).join(', ')}
+        value={step.specialcategory
+          .map((item) => t(`rpa:special-category.${item}`))
+          .join(', ')}
       />
       <Field
         label={t(`rpa:fields.datasubject`)}
-        value={step.datasubject.map(item => t(`rpa:data-subject.${item}`)).join(', ')}
+        value={step.datasubject
+          .map((item) => t(`rpa:data-subject.${item}`))
+          .join(', ')}
       />
       <Field
         label={t(`rpa:fields.retentionperiod`)}
@@ -66,7 +74,7 @@ const PurposeAndCategoriesTab: React.FC<{ step: RpaProcedureInterface[1] }> = ({
         />
       )}
     </div>
-  )
+  );
 };
 
 const RecipientsTab: React.FC<{ step: RpaProcedureInterface[2] }> = ({
@@ -86,7 +94,7 @@ const RecipientsTab: React.FC<{ step: RpaProcedureInterface[2] }> = ({
         />
       )}
     </div>
-  )
+  );
 };
 
 const TiaTab: React.FC<{ step: RpaProcedureInterface[3] }> = ({ step }) => {
@@ -98,10 +106,15 @@ const TiaTab: React.FC<{ step: RpaProcedureInterface[3] }> = ({ step }) => {
         value={step.datatransfer ? t('enabled') : t('disabled')}
       />
       <Field label={t(`rpa:fields.recipient`)} value={step.recipient} />
-      <Field label={t(`rpa:fields.country`)} value={t(`country.${step.country}`)} />
+      <Field
+        label={t(`rpa:fields.country`)}
+        value={t(`country.${step.country}`)}
+      />
       <Field
         label={t(`rpa:fields.guarantee`)}
-        value={step.guarantee.map(item => t(`rpa:guarantee.${item}`)).join(', ')}
+        value={step.guarantee
+          .map((item) => t(`rpa:guarantee.${item}`))
+          .join(', ')}
       />
     </div>
   );
@@ -115,13 +128,13 @@ const SecurityMeasuresTab: React.FC<{ step: RpaProcedureInterface[4] }> = ({
     <div className="space-y-2">
       <Field
         label={t(`rpa:fields.toms`)}
-        value={step.toms.map(item => t(`rpa:toms.${item}`)).join(', ')}
+        value={step.toms.map((item) => t(`rpa:toms.${item}`)).join(', ')}
       />
-    </div>   
-  )
+    </div>
+  );
 };
 
-const RpaPanel: React.FC<{ task: Task, slug: string }> = ({ task, slug }) => {
+const RpaPanel: React.FC<{ task: Task; slug: string }> = ({ task, slug }) => {
   const { t } = useTranslation('common');
   const properties = task.properties as any;
   const procedure = properties.rpa_procedure as RpaProcedureInterface;
@@ -131,7 +144,11 @@ const RpaPanel: React.FC<{ task: Task, slug: string }> = ({ task, slug }) => {
     () =>
       procedure
         ? [
-            <DescriptionAndStakeholdersTab key={0} step={procedure[0]} slug={slug} />,
+            <DescriptionAndStakeholdersTab
+              key={0}
+              step={procedure[0]}
+              slug={slug}
+            />,
             <PurposeAndCategoriesTab key={1} step={procedure[1]} />,
             <RecipientsTab key={2} step={procedure[2]} />,
             <TiaTab key={3} step={procedure[3]} />,

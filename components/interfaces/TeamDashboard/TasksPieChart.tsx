@@ -16,11 +16,10 @@ const barColors = [
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const countStatuses = (statuses: { [key: string]: string }) =>
-  taskStatuses
-    .map(
-      (name) =>
-        Object.entries(statuses).filter(([_, status]) => status === name).length
-    );
+  taskStatuses.map(
+    (name) =>
+      Object.entries(statuses).filter(([_, status]) => status === name).length
+  );
 
 const TasksPieChart = ({
   statuses,
@@ -29,7 +28,7 @@ const TasksPieChart = ({
 }) => {
   const { t } = useTranslation('common');
   const data = {
-    labels: taskStatuses.map(status => t(`task-statuses.${status}`)),
+    labels: taskStatuses.map((status) => t(`task-statuses.${status}`)),
     datasets: [
       {
         label: '# of Controls',

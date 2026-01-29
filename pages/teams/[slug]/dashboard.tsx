@@ -26,7 +26,7 @@ const TeamDashboard = ({
     isLoading: tasksLoading,
     isError: tasksError,
   } = useTeamTasks(slug);
-  console.log('team', team)
+  console.log('team', team);
 
   if (teamLoading || tasksLoading) {
     return <Loading />;
@@ -61,7 +61,7 @@ const TeamDashboard = ({
         </div>
         <div className="mb-4 mx-4 flex items-center justify-between">
           <h2 className="text-2xl font-semibold tracking-tight">
-            {t("data-privacy-overview")}
+            {t('data-privacy-overview')}
           </h2>
         </div>
         <div className="w-full max-w-7xl mx-auto">

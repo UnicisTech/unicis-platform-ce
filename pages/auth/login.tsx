@@ -179,7 +179,11 @@ const Login: NextPageWithLayout<
                     </Link>
                   </Button>
                 )}
-                <Button asChild variant="link" className="w-full p-0 h-auto text-blue-600 dark:text-blue-400">
+                <Button
+                  asChild
+                  variant="link"
+                  className="w-full p-0 h-auto text-blue-600 dark:text-blue-400"
+                >
                   <Link href={`/auth/forgot-password${params}`}>
                     {t('forgot-password')}
                   </Link>

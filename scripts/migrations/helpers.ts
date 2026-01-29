@@ -61,13 +61,13 @@ export const error = (...args: any[]) =>
 export const warn = (...args: any[]) =>
   console.warn('\x1b[33m%s\x1b[0m', args.join(' '));
 
-type AppContext = 'TIA' | 'RPA' | 'PIA'
+type AppContext = 'TIA' | 'RPA' | 'PIA';
 
 const configs = {
-  'RPA': rpaConfig,
-  'TIA': tiaConfig,
-  'PIA': piaConfig,
-}
+  RPA: rpaConfig,
+  TIA: tiaConfig,
+  PIA: piaConfig,
+};
 // ----- RPA ------
 
 type RpaFieldId = keyof typeof rpaFieldPropsMapping;
@@ -201,7 +201,6 @@ export function preview(v: unknown, max = 120): string {
 
 type LabelValue = { label: string; value: string };
 
-
 function buildLabelToValueMap(options: LabelValue[]): Map<string, string> {
   const m = new Map<string, string>();
   for (const opt of options) {
@@ -219,7 +218,7 @@ function unwrapOptionLike(
   ctx: string,
   idx: number,
   fieldId: string,
-  appContext: AppContext,
+  appContext: AppContext
 ): { out: unknown; ch: boolean } {
   if (v && typeof v === 'object' && !Array.isArray(v) && 'value' in v) {
     const val = (v as OptionLike).value;
@@ -286,7 +285,10 @@ export function mapValueByFieldConfig(
 
   const map = buildLabelToValueMap(options);
 
-  const mapOne = (v: unknown, itemCtx: string): { out: unknown; ch: boolean } => {
+  const mapOne = (
+    v: unknown,
+    itemCtx: string
+  ): { out: unknown; ch: boolean } => {
     if (typeof v !== 'string') {
       error(
         `[${appContext}_AUDIT] Expected string for selector fieldId="${fieldId}"`,
@@ -324,7 +326,6 @@ export function mapValueByFieldConfig(
   return { value: r.out, changed: unwrapChanged || r.ch };
 }
 
-
 // ----- TIA -----
 
 type CountryLike = { label?: unknown; value?: unknown };
@@ -334,7 +335,12 @@ export function countryToValue(input: unknown, context: string): unknown {
   if (typeof input === 'string') return input;
 
   // looks like Country
-  if (input && typeof input === 'object' && !Array.isArray(input) && 'value' in input) {
+  if (
+    input &&
+    typeof input === 'object' &&
+    !Array.isArray(input) &&
+    'value' in input
+  ) {
     const v = (input as CountryLike).value;
     if (typeof v === 'string') return v;
 
@@ -628,7 +634,11 @@ export function resolvePiaAuditFieldId(args: {
 
   if (isProbability || isImpact) {
     const keys = isProbability ? PROBABILITY_KEYS : IMPACT_KEYS;
-    const matchedKeys = findMatchingConfigKeys(keys, diff.prevValue as string, diff.nextValue as string);
+    const matchedKeys = findMatchingConfigKeys(
+      keys,
+      diff.prevValue as string,
+      diff.nextValue as string
+    );
 
     if (matchedKeys.length === 1) {
       return matchedKeys[0] as PiaFieldId;
@@ -686,20 +696,32 @@ export function tryExtractValueFromStringifiedJson(
 
   const s = input.trim();
   // швидка відсічка
-  if (!(s.startsWith('{') && s.endsWith('}')) && !(s.startsWith('[') && s.endsWith(']'))) {
+  if (
+    !(s.startsWith('{') && s.endsWith('}')) &&
+    !(s.startsWith('[') && s.endsWith(']'))
+  ) {
     return { out: input, changed: false };
   }
 
   try {
     const parsed = JSON.parse(s);
 
-    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed) && 'value' in parsed) {
+    if (
+      parsed &&
+      typeof parsed === 'object' &&
+      !Array.isArray(parsed) &&
+      'value' in parsed
+    ) {
       const v = (parsed as any).value;
       // повертаємо value як є, але найчастіше це string
       return { out: v, changed: v !== input };
     }
 
-    error(`[RM_AUDIT] AssetOwner JSON parsed but has no "value"`, context, `json=${s}`);
+    error(
+      `[RM_AUDIT] AssetOwner JSON parsed but has no "value"`,
+      context,
+      `json=${s}`
+    );
     return { out: input, changed: false };
   } catch {
     return { out: input, changed: false };
@@ -723,5 +745,3 @@ export function rmFieldToId(input: string): RmFieldId | null {
   error(`[RM_FIELD] UNKNOWN field label/id: "${input}"`);
   return null;
 }
-
-

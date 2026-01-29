@@ -26,11 +26,11 @@ const getRiskColor = (value: number, theme: string | null): string => {
   return `bg-risk-extreme${suffix}`;
 };
 
-const VerticalHeader = ({ label }: { label: string}) => (
-    <div className="px-2 py-1 text-center whitespace-nowrap rotate-180 [writing-mode:vertical-rl]">
-      {label}
-    </div>
-  );
+const VerticalHeader = ({ label }: { label: string }) => (
+  <div className="px-2 py-1 text-center whitespace-nowrap rotate-180 [writing-mode:vertical-rl]">
+    {label}
+  </div>
+);
 
 const RisksTable = ({
   slug,
@@ -59,11 +59,11 @@ const RisksTable = ({
   } = usePagination(tasks, perPage);
 
   const { isLoading, isError, membersById } = useTeamMembersMap(slug);
-    
+
   if (isLoading) {
     return <Loading />;
   }
-  
+
   if (isError) {
     return <Error message={isError?.message} />;
   }
@@ -75,10 +75,10 @@ const RisksTable = ({
           <thead className="bg-muted">
             <tr>
               {tableHeaderKeys.map((key) => (
-                <th key={key}>{<VerticalHeader label={t(key)}/>}</th>
+                <th key={key}>{<VerticalHeader label={t(key)} />}</th>
               ))}
               {canAccess('task', ['update']) && (
-                <th>{<VerticalHeader label={t('actions')}/>}</th>
+                <th>{<VerticalHeader label={t('actions')} />}</th>
               )}
             </tr>
           </thead>
@@ -111,7 +111,9 @@ const RisksTable = ({
                   </td>
                   <td className="px-2 py-1">{risk[0].Risk}</td>
                   <td className="px-2 py-1">
-                    {membersById[risk[0].AssetOwner] ? getInitials(membersById[risk[0].AssetOwner]?.name) : t('not-found')}
+                    {membersById[risk[0].AssetOwner]
+                      ? getInitials(membersById[risk[0].AssetOwner]?.name)
+                      : t('not-found')}
                   </td>
                   <td className="px-2 py-1">{risk[0].Impact}</td>
                   <td className="px-2 py-1">

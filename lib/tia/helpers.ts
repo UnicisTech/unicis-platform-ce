@@ -1,7 +1,6 @@
 export function getTranslationKey(
   value: string | number | null | undefined
 ): string | number | null | undefined {
-
   if (value === null || value === undefined) return value;
 
   const v = String(value).toLowerCase();

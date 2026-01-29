@@ -6,13 +6,17 @@ import type { Task } from '@prisma/client';
 import { TiaProcedureInterface } from 'types';
 import RiskLevel from '../RiskLevel';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
-import { getTranslationKey, isTranferPermitted, getTiaRisks } from '@/lib/tia/helpers';
+import {
+  getTranslationKey,
+  isTranferPermitted,
+  getTiaRisks,
+} from '@/lib/tia/helpers';
 
 const TransferScenarioTab: React.FC<{ step: TiaProcedureInterface[0] }> = ({
   step,
 }) => {
   const { t } = useTranslation('common');
-  
+
   return (
     <div>
       <Field label={t(`tia:fields.DataExporter`)} value={step.DataExporter} />
@@ -47,7 +51,7 @@ const TransferScenarioTab: React.FC<{ step: TiaProcedureInterface[0] }> = ({
         value={step.LawImporterCountry}
       />
     </div>
-  )
+  );
 };
 
 const ProblematicLawfulAccessTab: React.FC<{
@@ -66,11 +70,11 @@ const ProblematicLawfulAccessTab: React.FC<{
           'SelfReportingObligations',
         ] as const
       ).map((key) => (
-          <Field
-            key={key}
-            label={t(`tia:fields.${key}`)}
-            value={t(`${step[key]}`) || ''}
-          />
+        <Field
+          key={key}
+          label={t(`tia:fields.${key}`)}
+          value={t(`${step[key]}`) || ''}
+        />
       ))}
       {(
         [
@@ -88,7 +92,7 @@ const ProblematicLawfulAccessTab: React.FC<{
         />
       ))}
     </div>
-  )
+  );
 };
 
 const RiskTab: React.FC<{
@@ -103,8 +107,8 @@ const RiskTab: React.FC<{
     <div>
       {Object.entries(step).map(([key, val]) => {
         if (key.startsWith('Reason')) return null;
-        const label = t(`tia:fields.${key}`)
-        const display = t(`${getTranslationKey(val) || 'na'}`)
+        const label = t(`tia:fields.${key}`);
+        const display = t(`${getTranslationKey(val) || 'na'}`);
         return <Field key={key} label={label} value={display} />;
       })}
 
@@ -112,7 +116,7 @@ const RiskTab: React.FC<{
       <RiskLevel value={nonTargetedRisk} />
       <RiskLevel value={selfReportingRisk} />
     </div>
-  )
+  );
 };
 
 // Tab 3: Detailed questions
@@ -157,15 +161,21 @@ const ProbabilityTab: React.FC<{ step: TiaProcedureInterface[3] }> = ({
         <Field label={t(`tia:questions.${questions[2]}`)} />
         <Field
           label={t(`tia:fields.RelevantTransferToImporterForPerformance`)}
-          value={(step as any)['RelevantTransferToImporterForPerformance'] || t('na')}
+          value={
+            (step as any)['RelevantTransferToImporterForPerformance'] || t('na')
+          }
         />
         <Field
           label={t(`tia:fields.ProbabilityTransferToImporterPerformance`)}
-          value={(step as any)['ProbabilityTransferToImporterPerformance'] || t('na')}
+          value={
+            (step as any)['ProbabilityTransferToImporterPerformance'] || t('na')
+          }
         />
         <Field
           label={t(`tia:fields.ReasonTransferToImporterPerformance`)}
-          value={(step as any)['ReasonTransferToImporterPerformance'] || t('na')}
+          value={
+            (step as any)['ReasonTransferToImporterPerformance'] || t('na')
+          }
         />
       </div>
       <div>
@@ -184,7 +194,7 @@ const ProbabilityTab: React.FC<{ step: TiaProcedureInterface[3] }> = ({
         />
       </div>
     </>
-  )
+  );
 };
 
 // Tab 4: Final decision

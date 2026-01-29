@@ -86,10 +86,12 @@ const CorrectiveMeasuresStep = ({
             <FormLabel>{t(`pia:fields.dealingWithResidualRisk`)}</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.dealingWithResidualRisk.map(item => (
+                {config.dealingWithResidualRisk.map((item) => (
                   <div key={item} className="flex items-center space-x-2">
                     <RadioGroupItem value={item} id={item} />
-                    <label htmlFor={item}>{t(`pia:dealingWithResidualRisk.${item}`)}</label>
+                    <label htmlFor={item}>
+                      {t(`pia:dealingWithResidualRisk.${item}`)}
+                    </label>
                   </div>
                 ))}
               </RadioGroup>
@@ -130,7 +132,7 @@ const CorrectiveMeasuresStep = ({
             </FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.supervisoryAuthorityInvolvement.map(item => (
+                {config.supervisoryAuthorityInvolvement.map((item) => (
                   <div key={item} className="flex items-center space-x-2">
                     <RadioGroupItem value={item} id={item} />
                     <label htmlFor={item}>{t(item)}</label>

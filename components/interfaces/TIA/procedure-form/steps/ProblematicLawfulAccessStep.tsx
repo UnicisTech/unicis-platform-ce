@@ -31,7 +31,9 @@ export function TransferIs() {
     <div className="flex items-center space-x-2">
       <span className="font-bold">
         {t('tia:descriptions.transferIsLabel')}{' '}
-        <DaisyBadge color={variant}>{t(`tia:transfer-is.${status}`)}</DaisyBadge>
+        <DaisyBadge color={variant}>
+          {t(`tia:transfer-is.${status}`)}
+        </DaisyBadge>
       </span>
     </div>
   );
@@ -86,7 +88,10 @@ export default function ProblematicLawfulAccessStep({
           <FormItem>
             <FormLabel>{t(`tia:fields.ReasonEncryptionInTransit`)}</FormLabel>
             <FormControl>
-              <Textarea {...field} placeholder={t('tia:placeholders.provideDetails')} />
+              <Textarea
+                {...field}
+                placeholder={t('tia:placeholders.provideDetails')}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -128,7 +133,10 @@ export default function ProblematicLawfulAccessStep({
           <FormItem>
             <FormLabel>{t(`tia:fields.ReasonTransferMechanism`)}</FormLabel>
             <FormControl>
-              <Textarea {...field} placeholder={t('tia:placeholders.provideDetails')} />
+              <Textarea
+                {...field}
+                placeholder={t('tia:placeholders.provideDetails')}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -179,7 +187,10 @@ export default function ProblematicLawfulAccessStep({
           <FormItem>
             <FormLabel>{t(`tia:fields.ReasonLawfulAccess`)}</FormLabel>
             <FormControl>
-              <Textarea {...field} placeholder={t('tia:placeholders.provideDetails')} />
+              <Textarea
+                {...field}
+                placeholder={t('tia:placeholders.provideDetails')}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -225,7 +236,10 @@ export default function ProblematicLawfulAccessStep({
               {t(`tia:fields.ReasonMassSurveillanceTelecommunications`)}
             </FormLabel>
             <FormControl>
-              <Textarea {...field} placeholder={t('tia:placeholders.provideDetails')} />
+              <Textarea
+                {...field}
+                placeholder={t('tia:placeholders.provideDetails')}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -269,7 +283,10 @@ export default function ProblematicLawfulAccessStep({
               {t(`tia:fields.ReasonSelfReportingObligations`)}
             </FormLabel>
             <FormControl>
-              <Textarea {...field} placeholder={t('tia:placeholders.provideDetails')} />
+              <Textarea
+                {...field}
+                placeholder={t('tia:placeholders.provideDetails')}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>

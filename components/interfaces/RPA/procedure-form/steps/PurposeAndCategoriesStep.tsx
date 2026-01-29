@@ -37,18 +37,30 @@ export default function PurposeAndCategoriesStep({
     dataSubjectOptions,
     retentionPeriodOptions,
   } = React.useMemo(() => {
-    const categoryOptions = config.category.map(i => ({value: i, label: t(`rpa:category.${i}`)}))
-    const specialCategoryOptions = config.specialCategory.map(i => ({value: i, label: t(`rpa:special-category.${i}`)}))
-    const dataSubjectOptions = config.dataSubject.map(i => ({value: i, label: t(`rpa:data-subject.${i}`)}))
-    const retentionPeriodOptions = config.retentionPeriod.map(i => ({value: i, label: t(`rpa:retention-period.${i}`)}))
-  
+    const categoryOptions = config.category.map((i) => ({
+      value: i,
+      label: t(`rpa:category.${i}`),
+    }));
+    const specialCategoryOptions = config.specialCategory.map((i) => ({
+      value: i,
+      label: t(`rpa:special-category.${i}`),
+    }));
+    const dataSubjectOptions = config.dataSubject.map((i) => ({
+      value: i,
+      label: t(`rpa:data-subject.${i}`),
+    }));
+    const retentionPeriodOptions = config.retentionPeriod.map((i) => ({
+      value: i,
+      label: t(`rpa:retention-period.${i}`),
+    }));
+
     return {
       categoryOptions,
       specialCategoryOptions,
       dataSubjectOptions,
       retentionPeriodOptions,
-    }
-  }, [t])
+    };
+  }, [t]);
 
   return (
     <>
@@ -165,9 +177,7 @@ export default function PurposeAndCategoriesStep({
             </FormControl>
             {!formState.errors.datasubject ? (
               <FormDescription>
-                {t(
-                  'rpa:descriptions.multipleSelectionOther'
-                )}
+                {t('rpa:descriptions.multipleSelectionOther')}
               </FormDescription>
             ) : (
               <FormMessage>
@@ -177,7 +187,7 @@ export default function PurposeAndCategoriesStep({
           </FormItem>
         )}
       />
-      
+
       <FormField
         control={control}
         name="retentionperiod"
@@ -191,7 +201,9 @@ export default function PurposeAndCategoriesStep({
                 onValueChange={(val) => field.onChange(val || null)}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder={t('rpa:placeholders.retentionPeriod')} />
+                  <SelectValue
+                    placeholder={t('rpa:placeholders.retentionPeriod')}
+                  />
                 </SelectTrigger>
                 <SelectContent>
                   {retentionPeriodOptions.map((opt) => (

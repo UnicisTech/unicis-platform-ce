@@ -4,11 +4,10 @@ import { getTranslationKey } from '@/lib/tia/helpers';
 
 type AuditValue = string | string[] | null | undefined;
 
-
 export const auditLogHelper = (
   field: string | undefined,
   value: AuditValue,
-  t: TFunction,
+  t: TFunction
 ) => {
   if (value == null) return <span>—</span>;
 
@@ -58,11 +57,11 @@ export const auditLogHelper = (
     case 'ReasonConnectionTargetedAccess':
     case 'ReasonConnectionSurveillanceTele':
     case 'ReasonConnectionSelfreportingObligations':
-        return <span>{value}</span>
+      return <span>{value}</span>;
     case 'CountryDataExporter':
     case 'CountryDataImporter':
     case 'LawImporterCountry':
-        return <span>{t(`country.${value}`)}</span>
+      return <span>{t(`country.${value}`)}</span>;
     case 'EncryptionInTransit':
     case 'TransferMechanism':
     case 'LawfulAccess':
@@ -71,7 +70,7 @@ export const auditLogHelper = (
     case 'ConnectionTargetedAccess':
     case 'ConnectionSurveillanceTele':
     case 'ConnectionSelfreportingObligations':
-        return <span>{t(value)}</span>
+      return <span>{t(value)}</span>;
     case 'WarrantsSubpoenas':
     case 'ViolationLocalLaw':
     case 'HighViolationLocalLaw':
@@ -89,7 +88,7 @@ export const auditLogHelper = (
     case 'LocalSelfReporting':
     case 'PastSelfReporting':
     case 'AssessmentProduceReport':
-        return <span>{t(getTranslationKey(String(value)))}</span>
+      return <span>{t(getTranslationKey(String(value)))}</span>;
     default:
       return <span>{value ?? '—'}</span>;
   }

@@ -153,7 +153,7 @@ const DetailsModal: React.FC<DetailsModalProps> = ({
                   <SelectValue placeholder={t('select-country')} />
                 </SelectTrigger>
                 <SelectContent>
-                  {countries.map(country => (
+                  {countries.map((country) => (
                     <SelectItem key={country} value={country}>
                       {t(`country.${country}`)}
                     </SelectItem>

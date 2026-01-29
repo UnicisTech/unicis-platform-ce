@@ -68,7 +68,9 @@ export default function DescriptionAndStakeholdersStep({
                 isModal
               />
             </FormControl>
-            <FormDescription>{t('rpa:descriptions.reviewDate')}</FormDescription>
+            <FormDescription>
+              {t('rpa:descriptions.reviewDate')}
+            </FormDescription>
             <FormMessage />
           </FormItem>
         )}

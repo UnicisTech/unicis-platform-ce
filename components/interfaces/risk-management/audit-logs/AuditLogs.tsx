@@ -17,7 +17,7 @@ import { auditLogHelper } from './auditLogHelper';
 
 const ITEMS_PER_PAGE = 20;
 
-const AuditLogs = ({ task, slug }: { task: Task, slug: string }) => {
+const AuditLogs = ({ task, slug }: { task: Task; slug: string }) => {
   const { t } = useTranslation('common');
 
   const taskProperties = task?.properties as any;
@@ -29,7 +29,7 @@ const AuditLogs = ({ task, slug }: { task: Task, slug: string }) => {
     .sort((a, b) => b.date - a.date)
     .slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
 
-    const { isLoading, isError, membersById } = useTeamMembersMap(slug);
+  const { isLoading, isError, membersById } = useTeamMembersMap(slug);
 
   if (isLoading) {
     return <Loading />;
@@ -38,7 +38,7 @@ const AuditLogs = ({ task, slug }: { task: Task, slug: string }) => {
   if (isError) {
     return <Error message={isError?.message} />;
   }
-  
+
   return (
     <div>
       {auditLogs.length > 0 ? (
@@ -56,16 +56,32 @@ const AuditLogs = ({ task, slug }: { task: Task, slug: string }) => {
             <TableBody>
               {currentLogs.map((log, index) => (
                 <TableRow key={index}>
-                  <TableCell><MemberName membersById={membersById} userId={log.actor?.id} fallback='—'/></TableCell>
+                  <TableCell>
+                    <MemberName
+                      membersById={membersById}
+                      userId={log.actor?.id}
+                      fallback="—"
+                    />
+                  </TableCell>
                   <TableCell>{log.event}</TableCell>
                   <TableCell>
                     {new Date(log.date).toLocaleDateString()}
                   </TableCell>
                   <TableCell className="text-muted-foreground">
-                    {auditLogHelper(log.diff?.field, log.diff?.prevValue, t, membersById)}
+                    {auditLogHelper(
+                      log.diff?.field,
+                      log.diff?.prevValue,
+                      t,
+                      membersById
+                    )}
                   </TableCell>
                   <TableCell className="text-muted-foreground">
-                    {auditLogHelper(log.diff?.field, log.diff?.nextValue, t, membersById)}
+                    {auditLogHelper(
+                      log.diff?.field,
+                      log.diff?.nextValue,
+                      t,
+                      membersById
+                    )}
                   </TableCell>
                 </TableRow>
               ))}

@@ -33,7 +33,7 @@ const fieldOrder: (keyof PiaStepValues)[] = [
 
 export function PiaStep({ control }: PiaStepProps) {
   const { t } = useTranslation('common');
-  
+
   return (
     <>
       {fieldOrder.map((fieldName) => (
@@ -46,27 +46,13 @@ export function PiaStep({ control }: PiaStepProps) {
               <FormLabel>{t(`rpa:fields.${fieldName}`)}</FormLabel>
               <FormControl>
                 <RadioGroup onValueChange={field.onChange} value={field.value}>
-                  <div
-                    className="flex items-center space-x-2"
-                  >
-                    <RadioGroupItem
-                      value="yes"
-                      id={`${fieldName}-yes`}
-                    />
-                    <Label htmlFor={`${fieldName}-yes`}>
-                      {t('yes')}
-                    </Label>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="yes" id={`${fieldName}-yes`} />
+                    <Label htmlFor={`${fieldName}-yes`}>{t('yes')}</Label>
                   </div>
-                  <div
-                    className="flex items-center space-x-2"
-                  >
-                    <RadioGroupItem
-                      value="no"
-                      id={`${fieldName}-no`}
-                    />
-                    <Label htmlFor={`${fieldName}-no`}>
-                      {t('no')}
-                    </Label>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="no" id={`${fieldName}-no`} />
+                    <Label htmlFor={`${fieldName}-no`}>{t('no')}</Label>
                   </div>
                 </RadioGroup>
               </FormControl>

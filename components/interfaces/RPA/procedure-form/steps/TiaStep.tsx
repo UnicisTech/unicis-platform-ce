@@ -31,7 +31,14 @@ export interface TransferStepProps {
 export default function TransferStep({ control }: TransferStepProps) {
   const { t } = useTranslation('common');
 
-  const guaranteeOptions = React.useMemo(() => config.guarantee.map(i => ({value: i, label: t(`rpa:guarantee.${i}`)})), [t])
+  const guaranteeOptions = React.useMemo(
+    () =>
+      config.guarantee.map((i) => ({
+        value: i,
+        label: t(`rpa:guarantee.${i}`),
+      })),
+    [t]
+  );
 
   return (
     <>
@@ -98,7 +105,7 @@ export default function TransferStep({ control }: TransferStepProps) {
                   <SelectValue placeholder={t('select-a-country')} />
                 </SelectTrigger>
                 <SelectContent>
-                  {countries.map(country => (
+                  {countries.map((country) => (
                     <SelectItem key={country} value={country}>
                       {t(`country.${country}`)}
                     </SelectItem>

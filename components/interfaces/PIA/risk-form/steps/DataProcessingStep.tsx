@@ -37,10 +37,12 @@ const DataProcessingStep = ({
             <FormLabel>{t(`pia:fields.isDataProcessingNecessary`)}</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.isDataProcessingNecessary.map(item => (
+                {config.isDataProcessingNecessary.map((item) => (
                   <div key={item} className="flex items-center space-x-2">
                     <RadioGroupItem value={item} id={item} />
-                    <label htmlFor={item}>{t(`pia:isDataProcessingNecessary.${item}`)}</label>
+                    <label htmlFor={item}>
+                      {t(`pia:isDataProcessingNecessary.${item}`)}
+                    </label>
                   </div>
                 ))}
               </RadioGroup>
@@ -77,10 +79,12 @@ const DataProcessingStep = ({
             <FormLabel>{t(`pia:fields.isProportionalToPurpose`)}</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.isProportionalToPurpose.map(item => (
+                {config.isProportionalToPurpose.map((item) => (
                   <div key={item} className="flex items-center space-x-2">
                     <RadioGroupItem value={item} id={item} />
-                    <label htmlFor={item}>{t(`pia:isProportionalToPurpose.${item}`)}</label>
+                    <label htmlFor={item}>
+                      {t(`pia:isProportionalToPurpose.${item}`)}
+                    </label>
                   </div>
                 ))}
               </RadioGroup>

@@ -36,15 +36,15 @@ const AvailabilityStep = ({
         defaultValue={initial?.availabilityRiskProbability ?? ''}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>
-              {t(`pia:fields.availabilityRiskProbability`)}
-            </FormLabel>
+            <FormLabel>{t(`pia:fields.availabilityRiskProbability`)}</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.availabilityRiskProbability.map(item => (
+                {config.availabilityRiskProbability.map((item) => (
                   <div key={item} className="flex items-center space-x-2">
                     <RadioGroupItem value={item} id={item} />
-                    <label htmlFor={item}>{t(`pia:risk-probability.${item}`)}</label>
+                    <label htmlFor={item}>
+                      {t(`pia:risk-probability.${item}`)}
+                    </label>
                   </div>
                 ))}
               </RadioGroup>
@@ -65,10 +65,12 @@ const AvailabilityStep = ({
             <FormLabel>{t(`pia:fields.availabilityRiskSecurity`)}</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.availabilityRiskSecurity.map(item => (
+                {config.availabilityRiskSecurity.map((item) => (
                   <div key={item} className="flex items-center space-x-2">
                     <RadioGroupItem value={item} id={item} />
-                    <label htmlFor={item}>{t(`pia:availabilityRiskSecurity.${item}`)}</label>
+                    <label htmlFor={item}>
+                      {t(`pia:availabilityRiskSecurity.${item}`)}
+                    </label>
                   </div>
                 ))}
               </RadioGroup>

@@ -45,11 +45,7 @@ const TaskSelector = ({
     label: task.title,
     value: task.taskNumber,
   }));
-  const selected: CscOption[] = getSelectedOptions(
-    ISO,
-    control,
-    orderedTasks
-  );
+  const selected: CscOption[] = getSelectedOptions(ISO, control, orderedTasks);
   //TODO: review if prevSelectedRef is still needed
   const prevSelectedRef = useRef<Array<{ value: number }>>(selected);
 

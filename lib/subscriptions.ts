@@ -1,12 +1,5 @@
 import { Plan, Subscription, SubscriptionStatus } from '@prisma/client';
-import {
-  GetServerSidePropsContext,
-  NextApiRequest,
-  NextApiResponse,
-} from 'next';
 import type { ISO, TeamFeature } from 'types';
-import { getSession } from './session';
-import { getTeamMember } from 'models/team';
 
 // export type SubscriptionType = (typeof Subscription)[keyof typeof Subscription];
 type SubscriptionType = 'COMMUNITY' | 'PREMIUM' | 'ULTIMATE';

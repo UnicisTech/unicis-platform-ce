@@ -7,13 +7,7 @@ const dateOptions = {
   hour12: true,
 };
 
-export const statuses = [
-  'todo',
-  'inprogress',
-  'inreview',
-  'feedback',
-  'done',
-]
+export const statuses = ['todo', 'inprogress', 'inreview', 'feedback', 'done'];
 
 export const taskNavigations = (activeTab: string) => {
   return [

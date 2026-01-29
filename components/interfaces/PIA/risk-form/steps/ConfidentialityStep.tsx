@@ -40,10 +40,12 @@ const ConfidentialityStep = ({
             </FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.confidentialityRiskProbability.map(item => (
+                {config.confidentialityRiskProbability.map((item) => (
                   <div key={item} className="flex items-center space-x-2">
                     <RadioGroupItem value={item} id={item} />
-                    <label htmlFor={item}>{t(`pia:risk-probability.${item}`)}</label>
+                    <label htmlFor={item}>
+                      {t(`pia:risk-probability.${item}`)}
+                    </label>
                   </div>
                 ))}
               </RadioGroup>
@@ -60,15 +62,15 @@ const ConfidentialityStep = ({
         defaultValue={initial?.confidentialityRiskSecurity ?? ''}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>
-              {t(`pia:fields.confidentialityRiskSecurity`)}
-            </FormLabel>
+            <FormLabel>{t(`pia:fields.confidentialityRiskSecurity`)}</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value}>
-                {config.confidentialityRiskSecurity.map(item => (
+                {config.confidentialityRiskSecurity.map((item) => (
                   <div key={item} className="flex items-center space-x-2">
                     <RadioGroupItem value={item} id={item} />
-                    <label htmlFor={item}>{t(`pia:confidentialityRiskSecurity.${item}`)}</label>
+                    <label htmlFor={item}>
+                      {t(`pia:confidentialityRiskSecurity.${item}`)}
+                    </label>
                   </div>
                 ))}
               </RadioGroup>

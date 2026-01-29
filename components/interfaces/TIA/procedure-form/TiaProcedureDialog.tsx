@@ -33,7 +33,11 @@ import TaskPicker from '@/components/shared/shadcn/TaskPicker';
 import { Message } from '@/components/shared';
 import { StageTracker } from '@/components/shared/atlaskit';
 import { steps } from '@/lib/tia';
-import { shouldSkipTwoSteps, isTranferPermitted, defaultProcedure } from '@/lib/tia/helpers';
+import {
+  shouldSkipTwoSteps,
+  isTranferPermitted,
+  defaultProcedure,
+} from '@/lib/tia/helpers';
 
 interface TiaProcedureDialogProps {
   prevProcedure?: TiaProcedureInterface;
@@ -117,9 +121,9 @@ export default function TiaProcedureDialog({
   };
   const back = () => {
     if (currentStep === 5 && !isTranferPermitted(procedureData)) {
-      setCurrentStep(2)
+      setCurrentStep(2);
     } else {
-      setCurrentStep((s) => Math.max(s - 1, 0))
+      setCurrentStep((s) => Math.max(s - 1, 0));
     }
   };
 
@@ -163,7 +167,10 @@ export default function TiaProcedureDialog({
         <DialogHeader>
           <DialogTitle>{t('tia')}</DialogTitle>
           {currentStep > 0 && (
-            <StageTracker headers={steps.map(step => t(`tia:steps.${step}`))} currentStage={currentStep - 1} />
+            <StageTracker
+              headers={steps.map((step) => t(`tia:steps.${step}`))}
+              currentStage={currentStep - 1}
+            />
           )}
         </DialogHeader>
 

@@ -72,10 +72,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
           <FormItem>
             <FormLabel>{t(`rm:fields.AssetOwner`)}</FormLabel>
             <FormControl>
-              <Select
-                value={field.value}
-                onValueChange={field.onChange}
-              >
+              <Select value={field.value} onValueChange={field.onChange}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder={t('rm:placeholders.assetOwner')} />
                 </SelectTrigger>

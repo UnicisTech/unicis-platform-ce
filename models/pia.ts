@@ -196,7 +196,6 @@ const reduceMultipleObj = (acc, x) => {
   return acc;
 };
 
-
 export const fieldPropsMapping = {
   isDataProcessingNecessary: 'Is the data processing necessary',
   isDataProcessingNecessaryAssessment: 'Assessment',

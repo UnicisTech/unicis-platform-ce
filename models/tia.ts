@@ -167,7 +167,7 @@ export const getDiff = (o1, o2) => {
   const next = o2.reduce(reduceMultipleObj, {});
   const diff: Diff[] = [];
   for (const key of fields) {
-    if (JSON.stringify(prev[key]) !== JSON.stringify(next[key])) {      
+    if (JSON.stringify(prev[key]) !== JSON.stringify(next[key])) {
       diff.push({
         field: key,
         prevValue: prev[key],

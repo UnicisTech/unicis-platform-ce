@@ -65,15 +65,12 @@ export default function TransferScenarioStep({
           <FormItem>
             <FormLabel>{t(`tia:fields.CountryDataExporter`)}</FormLabel>
             <FormControl>
-              <Select
-                onValueChange={field.onChange}
-                value={field.value}
-              >
+              <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder={t('select-a-country')} />
                 </SelectTrigger>
                 <SelectContent>
-                  {countries.map(country => (
+                  {countries.map((country) => (
                     <SelectItem key={country} value={country}>
                       {t(`country.${country}`)}
                     </SelectItem>
@@ -118,15 +115,12 @@ export default function TransferScenarioStep({
           <FormItem>
             <FormLabel>{t(`tia:fields.CountryDataImporter`)}</FormLabel>
             <FormControl>
-              <Select
-                onValueChange={field.onChange}
-                value={field.value}
-              >
+              <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder={t('select-a-country')} />
                 </SelectTrigger>
                 <SelectContent>
-                  {countries.map(country => (
+                  {countries.map((country) => (
                     <SelectItem key={country} value={country}>
                       {t(`country.${country}`)}
                     </SelectItem>
@@ -221,7 +215,9 @@ export default function TransferScenarioStep({
               />
             </FormControl>
             <FormMessage />
-            <FormDescription>{t('tia:descriptions.selectStartDate')}</FormDescription>
+            <FormDescription>
+              {t('tia:descriptions.selectStartDate')}
+            </FormDescription>
           </FormItem>
         )}
       />
@@ -258,15 +254,12 @@ export default function TransferScenarioStep({
           <FormItem>
             <FormLabel>{t(`tia:fields.LawImporterCountry`)}</FormLabel>
             <FormControl>
-              <Select
-                onValueChange={field.onChange}
-                value={field.value}
-              >
+              <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder={t('select-a-country')} />
                 </SelectTrigger>
                 <SelectContent>
-                  {countries.map(country => (
+                  {countries.map((country) => (
                     <SelectItem key={country} value={country}>
                       {t(`country.${country}`)}
                     </SelectItem>

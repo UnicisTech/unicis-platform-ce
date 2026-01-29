@@ -107,7 +107,8 @@ export default function CscPanel({
           operation,
           iso,
         });
-        if (error) return toast.error(error.message || t('errors.requestFailed'));
+        if (error)
+          return toast.error(error.message || t('errors.requestFailed'));
         await mutateTasks();
       }
     },

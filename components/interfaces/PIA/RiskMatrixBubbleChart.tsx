@@ -30,7 +30,7 @@ ChartJS.register(
 
 const RiskMatrixBubbleChart = ({ datasets }: any) => {
   const { t } = useTranslation('common');
-  
+
   const adjustedDatasets = datasets.map((dataset: any) => ({
     ...dataset,
     data: dataset.data.map((point: any) => ({

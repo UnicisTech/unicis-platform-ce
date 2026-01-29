@@ -1,66 +1,57 @@
 import { RiskProbability, RiskSecurity } from 'types/pia';
 
 export const config = {
-    isDataProcessingNecessary: [
-        'necessary',
-        'unnecessary',
-    ],
-    isProportionalToPurpose: [
-        'proportional',
-        'not_proportional',
-    ],
-    confidentialityRiskProbability: [
-        'rare',
-        'unlikely',
-        'possible',
-        'probable',
-        'severe',
-    ],
-    confidentialityRiskSecurity: [
-        'insignificant',
-        'minor',
-        'moderate',
-        'major',
-        'extreme',
-    ],
-    availabilityRiskProbability: [
-        'rare',
-        'unlikely',
-        'possible',
-        'probable',
-        'severe',
-    ],
-    availabilityRiskSecurity: [
-        'insignificant',
-        'minor',
-        'moderate',
-        'major',
-        'extreme',
-    ],
-    transparencyRiskProbability: [
-        'rare',
-        'unlikely',
-        'possible',
-        'probable',
-        'severe',
-    ],
-    transparencyRiskSecurity: [
-        'insignificant',
-        'minor',
-        'moderate',
-        'major',
-        'extreme',
-    ],
-    dealingWithResidualRisk: [
-        'acceptable',
-        'acceptable_with_conditions',
-        'not_acceptable',
-    ],
-    supervisoryAuthorityInvolvement: [
-        'yes',
-        'no',
-    ]
-}
+  isDataProcessingNecessary: ['necessary', 'unnecessary'],
+  isProportionalToPurpose: ['proportional', 'not_proportional'],
+  confidentialityRiskProbability: [
+    'rare',
+    'unlikely',
+    'possible',
+    'probable',
+    'severe',
+  ],
+  confidentialityRiskSecurity: [
+    'insignificant',
+    'minor',
+    'moderate',
+    'major',
+    'extreme',
+  ],
+  availabilityRiskProbability: [
+    'rare',
+    'unlikely',
+    'possible',
+    'probable',
+    'severe',
+  ],
+  availabilityRiskSecurity: [
+    'insignificant',
+    'minor',
+    'moderate',
+    'major',
+    'extreme',
+  ],
+  transparencyRiskProbability: [
+    'rare',
+    'unlikely',
+    'possible',
+    'probable',
+    'severe',
+  ],
+  transparencyRiskSecurity: [
+    'insignificant',
+    'minor',
+    'moderate',
+    'major',
+    'extreme',
+  ],
+  dealingWithResidualRisk: [
+    'acceptable',
+    'acceptable_with_conditions',
+    'not_acceptable',
+  ],
+  supervisoryAuthorityInvolvement: ['yes', 'no'],
+};
 
 export const steps = [
   'dataProcessing',
@@ -68,29 +59,29 @@ export const steps = [
   'availability',
   'transparencyAndDataMinimization',
   'results',
-  'correctiveMeasures'
+  'correctiveMeasures',
 ];
 
 export const fields = [
-    "isDataProcessingNecessary",
-    "isDataProcessingNecessaryAssessment",
-    "isProportionalToPurpose",
-    "isProportionalToPurposeAssessment",
-    "confidentialityRiskProbability",
-    "confidentialityRiskSecurity",
-    "confidentialityAssessment",
-    "availabilityRiskProbability",
-    "availabilityRiskSecurity",
-    "availabilityAssessment",
-    "transparencyRiskProbability",
-    "transparencyRiskSecurity",
-    "transparencyAssessment",
-    "guarantees",
-    "securityMeasures",
-    "securityCompliance",
-    "dealingWithResidualRisk",
-    "dealingWithResidualRiskAssessment",
-    "supervisoryAuthorityInvolvement"
+  'isDataProcessingNecessary',
+  'isDataProcessingNecessaryAssessment',
+  'isProportionalToPurpose',
+  'isProportionalToPurposeAssessment',
+  'confidentialityRiskProbability',
+  'confidentialityRiskSecurity',
+  'confidentialityAssessment',
+  'availabilityRiskProbability',
+  'availabilityRiskSecurity',
+  'availabilityAssessment',
+  'transparencyRiskProbability',
+  'transparencyRiskSecurity',
+  'transparencyAssessment',
+  'guarantees',
+  'securityMeasures',
+  'securityCompliance',
+  'dealingWithResidualRisk',
+  'dealingWithResidualRiskAssessment',
+  'supervisoryAuthorityInvolvement',
 ];
 
 export const riskProbabilityPoints: Record<RiskProbability, number> = {
