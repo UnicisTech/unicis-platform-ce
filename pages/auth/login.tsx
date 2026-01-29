@@ -46,6 +46,7 @@ const Login: NextPageWithLayout<
   const [isResendButtonVisible, setIsResendButtonVisible] =
     useState<boolean>(false);
   const recaptchaRef = useRef<any>(null);
+  const providers = authProviders || {};
   const { error, success, token } = router.query as {
     error?: string;
     success?: string;
@@ -105,7 +106,7 @@ const Login: NextPageWithLayout<
 
       <Card className="border border-border pt-6">
         <CardContent>
-          {authProviders.credentials && (
+          {providers.credentials && (
             <form onSubmit={formik.handleSubmit}>
               <input type="hidden" name="csrfToken" value={csrfToken} />
 
@@ -189,19 +190,19 @@ const Login: NextPageWithLayout<
             </form>
           )}
 
-          {(authProviders.email || authProviders.saml) && (
+          {(providers.email || providers.saml) && (
             <Separator className="my-6" />
           )}
 
           <div className="space-y-3">
-            {authProviders.email && (
+            {providers.email && (
               <Button asChild variant="outline" className="w-full">
                 <Link href={`/auth/magic-link${params}`}>
                   {t('sign-in-with-email')}
                 </Link>
               </Button>
             )}
-            {authProviders.saml && (
+            {providers.saml && (
               <Button asChild variant="outline" className="w-full">
                 <Link href="/auth/sso">{t('continue-with-saml-sso')}</Link>
               </Button>
