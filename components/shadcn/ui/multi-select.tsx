@@ -174,12 +174,17 @@ export const MultiSelect = React.forwardRef<
     };
 
     const toggleAll = () => {
-      if (selectedValues.length === options.length) {
+      const enabledOptions = options.filter((option) => !option.isDisabled);
+      const enabledValues = enabledOptions.map((option) => option.value);
+      const allEnabledSelected = enabledValues.every((value) =>
+        selectedValues.includes(value)
+      );
+
+      if (allEnabledSelected) {
         handleClear();
       } else {
-        const allValues = options.map((option) => option.value);
-        setSelectedValues(allValues);
-        onValueChange(allValues);
+        setSelectedValues(enabledValues);
+        onValueChange(enabledValues);
       }
     };
 
