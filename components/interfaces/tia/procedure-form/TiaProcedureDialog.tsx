@@ -236,7 +236,7 @@ export default function TiaProcedureDialog({
           <DialogClose asChild>
             <Button variant="outline">{t('close')}</Button>
           </DialogClose>
-          {currentStep > 0 && (
+          {currentStep > (selectedTask ? 1 : 0) && (
             <Button variant="outline" onClick={back}>
               {t('back')}
             </Button>

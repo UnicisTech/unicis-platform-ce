@@ -180,6 +180,8 @@ export default function RiskAssessmentDialog({
     }
   };
 
+  console.log('currentStep > (prevRisk ? 1 : 0)', {test: currentStep > (prevRisk ? 1 : 0), currentStep, prevRisk})
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto p-6">
@@ -260,7 +262,7 @@ export default function RiskAssessmentDialog({
           <DialogClose asChild>
             <Button variant="outline">{t('close')}</Button>
           </DialogClose>
-          {currentStep > 0 && (
+          {currentStep > (selectedTask ? 1 : 0) && (
             <Button variant="outline" onClick={back}>
               {t('back')}
             </Button>

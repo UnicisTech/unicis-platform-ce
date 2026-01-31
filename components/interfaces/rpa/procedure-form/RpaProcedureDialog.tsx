@@ -257,7 +257,7 @@ export default function RpaProcedureDialog({
           <DialogClose asChild>
             <Button variant="outline">{t('close')}</Button>
           </DialogClose>
-          {currentStep > (prevProcedure ? 1 : 0) && (
+          {currentStep > (selectedTask ? 1 : 0) && (
             <Button variant="outline" onClick={back}>
               {t('back')}
             </Button>
