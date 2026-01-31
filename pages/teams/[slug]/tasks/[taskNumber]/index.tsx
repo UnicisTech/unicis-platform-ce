@@ -117,12 +117,13 @@ const TaskById = () => {
       {activeTab === 'Processing Activities' && (
         <Card className="mt-4">
           <CardHeader>
-            <div className="flex items-center justify-between px-4 pt-6">
+            <div className="flex flex-wrap items-center justify-between gap-2 px-4 pt-6">
               <CardTitle>{t('processing-activities-panel')}</CardTitle>
               {canAccess('task', ['update']) && (
                 <Button
                   variant="outline"
                   size="sm"
+                  className="whitespace-normal text-center leading-snug"
                   onClick={() => rpaState.setIsRpaOpen(!rpaState.isRpaOpen)}
                 >
                   {t('create-rpa')}
@@ -138,12 +139,13 @@ const TaskById = () => {
       {activeTab === 'Transfer Impact Assessment' && (
         <Card className="mt-4">
           <CardHeader>
-            <div className="flex items-center justify-between px-4 pt-6">
+            <div className="flex flex-wrap items-center justify-between gap-2 px-4 pt-6">
               <CardTitle>{t('transfer-impact-assessment-panel')}</CardTitle>
               {canAccess('task', ['update']) && (
                 <Button
                   variant="outline"
                   size="sm"
+                  className="whitespace-normal text-center leading-snug"
                   onClick={() => setTiaVisible(!tiaVisible)}
                 >
                   {t('create-tia')}
@@ -159,7 +161,7 @@ const TaskById = () => {
       {activeTab === 'Cybersecurity Controls' && (
         <Card className="mt-4">
           <CardHeader>
-            <div className="flex items-center justify-between px-4 pt-6">
+            <div className="flex flex-wrap items-center justify-between gap-2 px-4 pt-6">
               <CardTitle>{t('cybersecurity-controls-panel')}</CardTitle>
             </div>
           </CardHeader>
@@ -171,12 +173,13 @@ const TaskById = () => {
       {activeTab === 'Privacy Impact Assessment' && (
         <Card className="mt-4">
           <CardHeader>
-            <div className="flex items-center justify-between px-4 pt-6">
+            <div className="flex flex-wrap items-center justify-between gap-2 px-4 pt-6">
               <CardTitle>{t('privacy-impact-assessment-panel')}</CardTitle>
               {canAccess('task', ['update']) && (
                 <Button
                   variant="outline"
                   size="sm"
+                  className="whitespace-normal text-center leading-snug"
                   onClick={() => setPiaVisible(!piaVisible)}
                 >
                   {t('create-pia')}
@@ -192,13 +195,14 @@ const TaskById = () => {
       {activeTab === 'Risk Management' && (
         <Card className="mt-4">
           <CardHeader>
-            <div className="flex items-center justify-between px-4 pt-6">
+            <div className="flex flex-wrap items-center justify-between gap-2 px-4 pt-6">
               <CardTitle>{t('risk-management-panel')}</CardTitle>
               {canAccess('task', ['update']) && (
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setRmVisible(!rmVisible)}
+                  className="whitespace-normal text-center leading-snug"
                 >
                   {t('rm-register-risk-record')}
                 </Button>
