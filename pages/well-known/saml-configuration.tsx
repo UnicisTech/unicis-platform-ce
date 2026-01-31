@@ -1,7 +1,8 @@
 import type { InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 import React, { ReactElement, useEffect } from 'react';
-import { useTranslation, Trans } from 'next-i18next';
+import { useTranslation } from 'next-i18next';
+import { Trans } from '@/components/i18n/Trans';
 import jackson from '@/lib/jackson';
 import InputWithCopyButton from '@/components/shared/InputWithCopyButton';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
