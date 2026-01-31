@@ -89,37 +89,39 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
                 {options.map((option) => {
                   const searchText =
                     option.searchValue ??
-                    [option.label, option.description].filter(Boolean).join(' ');
+                    [option.label, option.description]
+                      .filter(Boolean)
+                      .join(' ');
 
                   return (
-                  <CommandItem
-                    key={option.value}
-                    value={searchText}
-                    disabled={option.disabled}
-                    onSelect={() => {
-                      const nextValue =
-                        option.value === value ? null : option.value;
-                      onValueChange(nextValue);
-                      setOpen(false);
-                    }}
-                  >
-                    <Check
-                      className={cn(
-                        'mr-2 h-4 w-4',
-                        value === option.value ? 'opacity-100' : 'opacity-0'
-                      )}
-                    />
-                    <div className="flex flex-col text-left">
-                      <span className="text-sm leading-snug">
-                        {option.label}
-                      </span>
-                      {option.description ? (
-                        <span className="text-xs text-muted-foreground leading-snug">
-                          {option.description}
+                    <CommandItem
+                      key={option.value}
+                      value={searchText}
+                      disabled={option.disabled}
+                      onSelect={() => {
+                        const nextValue =
+                          option.value === value ? null : option.value;
+                        onValueChange(nextValue);
+                        setOpen(false);
+                      }}
+                    >
+                      <Check
+                        className={cn(
+                          'mr-2 h-4 w-4',
+                          value === option.value ? 'opacity-100' : 'opacity-0'
+                        )}
+                      />
+                      <div className="flex flex-col text-left">
+                        <span className="text-sm leading-snug">
+                          {option.label}
                         </span>
-                      ) : null}
-                    </div>
-                  </CommandItem>
+                        {option.description ? (
+                          <span className="text-xs text-muted-foreground leading-snug">
+                            {option.description}
+                          </span>
+                        ) : null}
+                      </div>
+                    </CommandItem>
                   );
                 })}
               </CommandGroup>

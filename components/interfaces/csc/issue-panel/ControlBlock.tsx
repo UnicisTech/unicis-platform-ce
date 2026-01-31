@@ -104,9 +104,7 @@ const ControlBlock = ({
           <Combobox
             options={controlOptions}
             value={control || null}
-            onValueChange={(newVal) =>
-              onControlChange(control, newVal ?? '')
-            }
+            onValueChange={(newVal) => onControlChange(control, newVal ?? '')}
             placeholder={t('choose-a-control')}
             searchPlaceholder={t('search')}
             disabled={isSaving || isDeleting}

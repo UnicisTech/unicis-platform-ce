@@ -180,7 +180,11 @@ export default function RiskAssessmentDialog({
     }
   };
 
-  console.log('currentStep > (prevRisk ? 1 : 0)', {test: currentStep > (prevRisk ? 1 : 0), currentStep, prevRisk})
+  console.log('currentStep > (prevRisk ? 1 : 0)', {
+    test: currentStep > (prevRisk ? 1 : 0),
+    currentStep,
+    prevRisk,
+  });
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
