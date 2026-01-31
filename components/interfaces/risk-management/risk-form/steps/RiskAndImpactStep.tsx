@@ -123,7 +123,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
               <Slider
                 value={[field.value]}
                 onValueChange={([v]) => field.onChange(v)}
-                min={1}
+                min={0}
                 max={100}
                 step={1}
               />
@@ -144,7 +144,7 @@ export default function RiskAndImpactStep({ control }: RiskAndImpactStepProps) {
               <Slider
                 value={[field.value]}
                 onValueChange={([v]) => field.onChange(v)}
-                min={1}
+                min={0}
                 max={100}
                 step={1}
               />
