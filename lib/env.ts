@@ -119,6 +119,7 @@ const env = {
   billingEmail: process.env.BILLING_EMAIL,
 
   ai: {
+    url: process.env.AI_URL,
     llamaToken: process.env.LLAMA_TOKEN,
   },
 
