@@ -356,6 +356,7 @@
   "meaning": "Meaning",
   "control": "Control",
   "controls": "Controls",
+  "controls-count": "# of Controls",
   "risk-count": "Risk count",
   "maturity-level-0-6": "Maturity level (0-6)",
 

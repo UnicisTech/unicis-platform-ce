@@ -34,13 +34,13 @@ const countStatuses = (statuses: CscStatusesMap): number[] => {
 };
 
 const PieChart = ({ statuses }: { statuses: CscStatusesMap }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
   const labels = CSC_STATUSES.map((status) => t(`statuses.${status}.label`));
   const data = {
     labels: labels,
     datasets: [
       {
-        label: '# of Controls',
+        label: t('controls-count'),
         data: countStatuses(statuses),
         backgroundColor: barColors,
         borderColor: barColors,
@@ -54,7 +54,7 @@ const PieChart = ({ statuses }: { statuses: CscStatusesMap }) => {
       legend: { position: 'top' },
       title: {
         display: true,
-        text: 'Controls',
+        text: t('controls'),
       },
     },
     maintainAspectRatio: false,

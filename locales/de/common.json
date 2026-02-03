@@ -356,6 +356,7 @@
   "meaning": "Bedeutung",
   "control": "Kontrolle",
   "controls": "Kontrollen",
+  "controls-count": "Anzahl der Kontrollen",
   "risk-count": "Anzahl der Risiken",
   "maturity-level-0-6": "Reifegrad (0-6)",
 
