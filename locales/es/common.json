@@ -256,6 +256,17 @@
   "revoke-api-key-confirm": "¿Está seguro de que desea revocar esta clave de API? Esta acción no se puede deshacer.",
   "delete": "Eliminar",
   "api-keys": "Claves de API",
+  "settings-tabs": {
+    "settings": "Configuración",
+    "billing": "Facturación",
+    "members": "Miembros",
+    "training": "Formación",
+    "single-sign-on": "Inicio de sesión único",
+    "directory-sync": "Sincronización de directorio",
+    "audit-logs": "Registros de auditoría",
+    "webhooks": "Webhooks",
+    "api-keys": "Claves de API"
+  },
   "api-keys-description": "Las claves de API le permiten autenticarse con la API.",
   "export": "Exportar",
   "task": "Tarea",

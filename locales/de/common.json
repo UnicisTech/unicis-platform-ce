@@ -256,6 +256,17 @@
   "revoke-api-key-confirm": "Sind Sie sicher, dass Sie diesen API-Schlüssel widerrufen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
   "delete": "Löschen",
   "api-keys": "API-Schlüssel",
+  "settings-tabs": {
+    "settings": "Einstellungen",
+    "billing": "Abrechnung",
+    "members": "Mitglieder",
+    "training": "Schulungen",
+    "single-sign-on": "Single Sign-On",
+    "directory-sync": "Verzeichnissynchronisierung",
+    "audit-logs": "Audit-Logs",
+    "webhooks": "Webhooks",
+    "api-keys": "API-Schlüssel"
+  },
   "api-keys-description": "API-Schlüssel ermöglichen die Authentifizierung bei der API.",
   "export": "Exportieren",
   "task": "Aufgabe",

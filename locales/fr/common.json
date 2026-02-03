@@ -256,6 +256,17 @@
   "revoke-api-key-confirm": "Êtes-vous sûr de vouloir révoquer cette clé API ? Cette action est irréversible.",
   "delete": "Supprimer",
   "api-keys": "Clés API",
+  "settings-tabs": {
+    "settings": "Paramètres",
+    "billing": "Facturation",
+    "members": "Membres",
+    "training": "Formation",
+    "single-sign-on": "Authentification unique",
+    "directory-sync": "Synchronisation d’annuaire",
+    "audit-logs": "Journaux d’audit",
+    "webhooks": "Webhooks",
+    "api-keys": "Clés API"
+  },
   "api-keys-description": "Les clés API vous permettent de vous authentifier auprès de l’API.",
   "export": "Exporter",
   "task": "Tâche",
