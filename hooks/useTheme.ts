@@ -3,21 +3,29 @@ import {
   MoonIcon,
   SunIcon,
 } from '@heroicons/react/24/outline';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 
-import { ThemesProps, applyTheme } from '@/lib/theme';
+import { Theme, ThemesProps, applyTheme } from '@/lib/theme';
+
+const parseTheme = (value: string | null): Theme | null => {
+  if (value === 'dark' || value === 'light' || value === 'system') {
+    return value;
+  }
+  return null;
+};
 
 const useTheme = () => {
-  const [theme, setTheme] = useState<string | null>(null);
+  const [theme, setTheme] = useState<Theme | null>(null);
+  const [systemPrefersDark, setSystemPrefersDark] = useState(false);
   const { t } = useTranslation('common');
 
   useEffect(() => {
-    const current = localStorage.getItem('theme');
+    const current = parseTheme(localStorage.getItem('theme'));
     setTheme(current);
 
     const handleStorageChange = () => {
-      const updated = localStorage.getItem('theme');
+      const updated = parseTheme(localStorage.getItem('theme'));
       setTheme(updated);
     };
 
@@ -25,6 +33,28 @@ const useTheme = () => {
 
     return () => {
       window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const updateSystemPreference = () => {
+      setSystemPrefersDark(media.matches);
+    };
+
+    updateSystemPreference();
+    if (typeof media.addEventListener === 'function') {
+      media.addEventListener('change', updateSystemPreference);
+    } else {
+      media.addListener(updateSystemPreference);
+    }
+
+    return () => {
+      if (typeof media.removeEventListener === 'function') {
+        media.removeEventListener('change', updateSystemPreference);
+      } else {
+        media.removeListener(updateSystemPreference);
+      }
     };
   }, []);
 
@@ -47,6 +77,11 @@ const useTheme = () => {
   ];
 
   const selectedTheme = themes.find((t) => t.id === theme) || themes[0];
+  const resolvedTheme = useMemo<Exclude<Theme, 'system'>>(() => {
+    if (theme === 'dark' || theme === 'light') return theme;
+    return systemPrefersDark ? 'dark' : 'light';
+  }, [theme, systemPrefersDark]);
+  const isDark = resolvedTheme === 'dark';
 
   const toggleTheme = () => {
     const newTheme =
@@ -63,7 +98,16 @@ const useTheme = () => {
     window.dispatchEvent(new StorageEvent('storage', { key: 'theme' }));
   };
 
-  return { theme, setTheme, selectedTheme, toggleTheme, themes, applyTheme };
+  return {
+    theme,
+    setTheme,
+    selectedTheme,
+    toggleTheme,
+    themes,
+    applyTheme,
+    resolvedTheme,
+    isDark,
+  };
 };
 
 export default useTheme;

@@ -11,6 +11,7 @@ import {
   Tooltip,
 } from 'chart.js';
 import { impactLabelKeys, probabilityLabelKeys } from '@/lib/common';
+import useTheme from 'hooks/useTheme';
 
 ChartJS.register(
   CategoryScale,
@@ -33,6 +34,7 @@ const riskColors = {
 
 const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
   const { t } = useTranslation('common');
+  const { isDark } = useTheme();
   const chartRef = useRef<any>(null);
   const [points, setPoints] = useState<any[]>([]);
   const chartWidth = CELL_SIZE * MATRIX_SIZE * 1.5;
@@ -153,12 +155,18 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
       {points.map((point, index) => (
         <div
           key={index}
-          className="absolute flex items-center justify-center rounded-md text-sm font-semibold text-black dark:text-white bg-white/80 dark:bg-black/70 shadow -translate-x-1/2 -translate-y-1/2"
+          className="absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-md text-sm font-semibold text-black shadow"
           style={{
             left: `${point.x}px`,
             top: `${point.y}px`,
             width: `${CELL_SIZE * 0.7}px`,
             height: `${CELL_SIZE * 0.6}px`,
+            backgroundColor: isDark
+              ? 'rgba(255, 255, 255, 0.9)'
+              : 'rgba(255, 255, 255, 0.85)',
+            border: isDark
+              ? '1px solid rgba(0, 0, 0, 0.15)'
+              : '1px solid rgba(0, 0, 0, 0.1)',
           }}
         >
           {point.value}
