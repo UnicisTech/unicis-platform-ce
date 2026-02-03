@@ -115,7 +115,7 @@ const RadarChart = ({
     labels: labels,
     datasets: [
       {
-        label: 'Maturity level (0-6)',
+        label: t('maturity-level-0-6'),
         data: pointsData,
         backgroundColor: `${lineColor}33`,
         borderColor: lineColor,
