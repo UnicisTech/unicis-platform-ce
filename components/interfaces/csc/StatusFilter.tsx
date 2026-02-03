@@ -8,7 +8,7 @@ interface StatusCscFilterProps {
 }
 
 const StatusFilter = ({ setStatusFilter }: StatusCscFilterProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
   const options = CSC_STATUSES.map((status) => ({
     label: t(`statuses.${status}.label`),
     value: status,
@@ -28,7 +28,7 @@ const StatusFilter = ({ setStatusFilter }: StatusCscFilterProps) => {
           value: String(opt.value),
         }))}
         onValueChange={handleValueChange}
-        placeholder="Choose a status"
+        placeholder={t('choose-a-status')}
         animation={0.2}
         maxCount={3}
       />

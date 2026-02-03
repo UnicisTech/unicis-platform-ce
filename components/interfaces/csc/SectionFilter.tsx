@@ -11,7 +11,7 @@ const SectionFilter = ({
   ISO: ISO;
   setSectionFilter: Dispatch<SetStateAction<string[] | null>>;
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
   const options = frameworks[ISO].sections.map((section) => ({
     label: t(`csc/${ISO}:sections.${section.id}.label`),
     value: section.id,
@@ -22,7 +22,7 @@ const SectionFilter = ({
       <MultiSelect
         options={options}
         onValueChange={setSectionFilter}
-        placeholder="Choose a section"
+        placeholder={t('choose-a-section')}
         animation={0.2}
         maxCount={3}
       />
