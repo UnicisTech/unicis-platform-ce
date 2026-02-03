@@ -1,6 +1,11 @@
-import { useState, useEffect, useRef, FormEvent } from 'react';
+import {
+  useState,
+  useEffect,
+  useRef,
+  FormEvent,
+  type ComponentProps,
+} from 'react';
 import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import {
   XMarkIcon,
   PaperAirplaneIcon,
@@ -29,6 +34,9 @@ const AiChat: React.FC = () => {
   const [visible, setVisible] = useState(false);
   const [messages, setMessages] = useState<ChatbotResponse[]>([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [remarkPlugins, setRemarkPlugins] = useState<
+    NonNullable<ComponentProps<typeof ReactMarkdown>['remarkPlugins']>
+  >([]);
   const { t } = useTranslation('common');
   const { isLoading: isTeamLoading, team } = useTeam();
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -85,6 +93,36 @@ const AiChat: React.FC = () => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  useEffect(() => {
+    // `remark-gfm` relies on regex lookbehind in one of its parsing paths.
+    // Older Safari versions do not support lookbehind and can crash on load,
+    // so we only enable the plugin when the runtime supports it.
+    const supportsLookbehind = (() => {
+      try {
+        new RegExp('(?<=x)y');
+        return true;
+      } catch {
+        return false;
+      }
+    })();
+
+    if (!supportsLookbehind) {
+      return;
+    }
+
+    let mounted = true;
+
+    void import('remark-gfm').then((mod) => {
+      if (mounted) {
+        setRemarkPlugins([mod.default]);
+      }
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   if (isTeamLoading || !isAiChatEnabled) {
     return null;
@@ -150,7 +188,7 @@ const AiChat: React.FC = () => {
                 </div>
                 <div className="chat-bubble bg-muted text-muted-foreground">
                   <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
+                    remarkPlugins={remarkPlugins}
                     components={{
                       ol: ({ children }) => (
                         <ol className="list-decimal py-2 pl-6">{children}</ol>
