@@ -179,7 +179,7 @@ export default function RpaProcedureDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto p-6">
+      <DialogContent className="max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto p-6">
         <DialogHeader>
           <DialogTitle>{t('rpa-activities')}</DialogTitle>
           {currentStep > 0 && (
@@ -189,7 +189,7 @@ export default function RpaProcedureDialog({
             />
           )}
         </DialogHeader>
-        <div className="max-w-md">
+        <div className="w-full">
           {currentStep === 0 && tasks && (
             <Form {...taskForm}>
               <form className="space-y-4">

@@ -11,7 +11,7 @@ const StageTracker = ({
   const { theme } = useTheme();
 
   return (
-    <div className={theme === 'dark' ? 'text-white' : ''}>
+    <div className={`w-full min-w-0 ${theme === 'dark' ? 'text-white' : ''}`}>
       <Stepper
         steps={headers}
         currentStep={currentStage}
