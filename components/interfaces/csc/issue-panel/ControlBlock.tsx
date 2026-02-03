@@ -100,7 +100,7 @@ const ControlBlock = ({
     <div className="space-y-4">
       <div className="space-y-1">
         <Label>{t('select-a-control')}</Label>
-        <div className="grid grid-cols-[1fr_auto] gap-2 items-center">
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
           <Combobox
             options={controlOptions}
             value={control || null}
@@ -108,11 +108,13 @@ const ControlBlock = ({
             placeholder={t('choose-a-control')}
             searchPlaceholder={t('search')}
             disabled={isSaving || isDeleting}
+            className="min-w-0"
           />
 
           <Button
             variant="destructive"
             size="icon"
+            className="shrink-0"
             disabled={isSaving}
             onClick={async () => {
               setIsButtonLoading(true);
