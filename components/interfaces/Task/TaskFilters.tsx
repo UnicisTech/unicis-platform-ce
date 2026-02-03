@@ -1,13 +1,14 @@
 import { MultiSelect } from '@/components/shadcn/ui/multi-select';
 import { useTranslation } from 'next-i18next';
+import { taskModuleKeys } from '@/lib/tasks';
 
-const moduleOptions = [
-  { label: 'RPA', value: 'rpa_procedure' },
-  { label: 'TIA', value: 'tia_procedure' },
-  { label: 'PIA', value: 'pia_risk' },
-  { label: 'RM', value: 'rm_risk' },
-  { label: 'CSC', value: 'csc_controls' },
-];
+const moduleLabels: Record<(typeof taskModuleKeys)[number], string> = {
+  rpa_procedure: 'RPA',
+  tia_procedure: 'TIA',
+  pia_risk: 'PIA',
+  rm_risk: 'RM',
+  csc_controls: 'CSC',
+};
 
 type Props = {
   selectedStatuses: string[];
@@ -23,6 +24,10 @@ const TaskFilters = ({
   setSelectedModules,
 }: Props) => {
   const { t } = useTranslation('common');
+  const moduleOptions = taskModuleKeys.map((value) => ({
+    label: moduleLabels[value],
+    value,
+  }));
   const statusOptions = [
     { label: t('task-statuses.todo'), value: 'todo' },
     { label: t('task-statuses.inprogress'), value: 'inprogress' },

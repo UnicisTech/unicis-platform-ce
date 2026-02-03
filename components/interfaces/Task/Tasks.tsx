@@ -22,6 +22,7 @@ import { TeamTaskAnalysis } from '../TeamDashboard';
 import { Badge } from '@/components/shadcn/ui/badge';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import toast from 'react-hot-toast';
+import { getTaskModules, hasTaskModule, isTaskModuleKey } from '@/lib/tasks';
 
 const Tasks = ({ team }: { team: Team }) => {
   const router = useRouter();
@@ -43,9 +44,10 @@ const Tasks = ({ team }: { team: Team }) => {
       !selectedModules.length ||
       selectedModules.some(
         (mod) =>
+          isTaskModuleKey(mod) &&
           typeof task.properties === 'object' &&
           task.properties &&
-          mod in task.properties
+          hasTaskModule(task.properties as Record<string, unknown>, mod)
       );
     return statusMatch && moduleMatch;
   });
@@ -137,20 +139,13 @@ const Tasks = ({ team }: { team: Team }) => {
                             {task.title}
                           </span>
                         </Link>
-                        {[
-                          'rpa_procedure',
-                          'tia_procedure',
-                          'pia_risk',
-                          'rm_risk',
-                          'csc_controls',
-                        ].map((key) =>
-                          typeof task.properties === 'object' &&
+                        {typeof task.properties === 'object' &&
                           task.properties &&
-                          key in task.properties &&
-                          (task.properties as any)[key] ? (
+                          getTaskModules(
+                            task.properties as Record<string, unknown>
+                          ).map((key) => (
                             <ModuleBadge key={key} propName={key} />
-                          ) : null
-                        )}
+                          ))}
                       </div>
                     </td>
                     <td className="px-4 py-2">
