@@ -31,7 +31,7 @@ const TasksPieChart = ({
     labels: taskStatuses.map((status) => t(`task-statuses.${status}`)),
     datasets: [
       {
-        label: '# of Controls',
+        label: t('tasks-count'),
         data: countStatuses(statuses),
         backgroundColor: barColors,
         borderColor: barColors,
@@ -47,7 +47,7 @@ const TasksPieChart = ({
       },
       title: {
         display: true,
-        text: 'Controls',
+        text: t('statuses-title'),
       },
     },
     maintainAspectRatio: false,

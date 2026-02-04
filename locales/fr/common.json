@@ -357,6 +357,8 @@
   "control": "Contrôle",
   "controls": "Contrôles",
   "controls-count": "Nombre de contrôles",
+  "statuses-title": "Statuts",
+  "tasks-count": "# de tâches",
   "risk-count": "Nombre de risques",
   "maturity-level-0-6": "Niveau de maturité (0-6)",
 
