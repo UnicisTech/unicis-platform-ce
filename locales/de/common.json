@@ -38,6 +38,7 @@
     "pleaseDescribeImpact": "Bitte beschreiben Sie die Auswirkung.",
     "describeRiskTreatment": "Beschreiben Sie, wie das Risiko behandelt werden soll.",
     "confirmYourEmail": "Bitte bestätigen Sie Ihre E-Mail-Adresse, bevor Sie fortfahren.",
+    "aiChatbotNotAvailableOnCommunityPlan": "Der KI-Chatbot ist im Community-Plan nicht verfügbar.",
     "requestFailed": "Anfrage fehlgeschlagen",
     "unexpectedError": "Unerwarteter Fehler",
     "somethingWentWrong": "Etwas ist schiefgelaufen",

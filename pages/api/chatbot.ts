@@ -47,7 +47,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (access.plan === 'COMMUNITY') {
     return res.status(403).json({
-      error: { message: 'AI Chatbot is not available on the Community plan.' },
+      error: { message: 'errors.aiChatbotNotAvailableOnCommunityPlan' },
     });
   }
 

@@ -38,6 +38,7 @@
     "pleaseDescribeImpact": "Please describe the impact.",
     "describeRiskTreatment": "Describe how the risk is to be treated.",
     "confirmYourEmail": "Please confirm your email address before you can continue.",
+    "aiChatbotNotAvailableOnCommunityPlan": "AI Chatbot is not available on the Community plan.",
     "requestFailed": "Request failed",
     "unexpectedError": "Unexpected error",
     "somethingWentWrong": "Something went wrong",

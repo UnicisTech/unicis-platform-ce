@@ -38,6 +38,7 @@
     "pleaseDescribeImpact": "Por favor, describa el impacto.",
     "describeRiskTreatment": "Describa cómo se tratará el riesgo.",
     "confirmYourEmail": "Por favor, confirme su dirección de correo electrónico antes de continuar.",
+    "aiChatbotNotAvailableOnCommunityPlan": "El chatbot de IA no está disponible en el plan Community.",
     "requestFailed": "La solicitud falló",
     "unexpectedError": "Error inesperado",
     "somethingWentWrong": "Algo salió mal",

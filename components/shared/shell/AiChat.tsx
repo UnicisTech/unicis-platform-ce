@@ -79,7 +79,8 @@ const AiChat: React.FC = () => {
       });
       const json = (await res.json()) as ApiResponse<ChatbotResponseReturned>;
       if (!res.ok) {
-        toast.error(json.error.message);
+        const message = json.error?.message || t('errors.somethingWentWrong');
+        toast.error(t(message, message));
       } else {
         setMessages((prev) => [...prev, json.data.response]);
       }
