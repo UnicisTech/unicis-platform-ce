@@ -42,7 +42,18 @@ const handleAuthorize = async (req: NextApiRequest, res: NextApiResponse) => {
   if (redirect_url) {
     res.redirect(302, redirect_url);
   } else {
+    // Defensive sanitization for upstream HTML response.
+    const sanitizedForm = String(authorize_form)
+      .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
+      .replace(/\son\w+="[^"]*"/gi, '')
+      .replace(/\son\w+='[^']*'/gi, '')
+      .replace(/javascript:/gi, '');
+
+    res.setHeader(
+      'Content-Security-Policy',
+      "script-src 'none'; object-src 'none'; base-uri 'none'; frame-ancestors 'none';"
+    );
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.send(authorize_form);
+    res.send(sanitizedForm);
   }
 };
