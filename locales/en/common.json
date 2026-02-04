@@ -107,7 +107,7 @@
       "premium": {
         "name": "Premium",
         "users": "11 - 150",
-        "price": "€49/mo",
+        "price": "€19/mo",
         "subprice": "per tenant and up to 5 admins",
         "applications": {
           "0": "Interactive Awareness Program",
@@ -123,7 +123,7 @@
       "ultimate": {
         "name": "Ultimate",
         "users": "150 -",
-        "price": "€89/mo",
+        "price": "€49/mo",
         "subprice": "per tenant and > 6 admins",
         "applications": {
           "0": "Processor Questionnaire Checklist",

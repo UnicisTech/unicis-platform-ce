@@ -107,7 +107,7 @@
       "premium": {
         "name": "Premium",
         "users": "11 - 150",
-        "price": "€49/mois",
+        "price": "€19/mois",
         "subprice": "par tenant et jusqu’à 5 administrateurs",
         "applications": {
           "0": "Programme interactif de sensibilisation",
@@ -123,7 +123,7 @@
       "ultimate": {
         "name": "Ultimate",
         "users": "150 -",
-        "price": "€89/mois",
+        "price": "€49/mois",
         "subprice": "par tenant et > 6 administrateurs",
         "applications": {
           "0": "Liste de vérification du questionnaire du sous-traitant",

@@ -107,7 +107,7 @@
       "premium": {
         "name": "Premium",
         "users": "11 - 150",
-        "price": "€49/mes",
+        "price": "€19/mes",
         "subprice": "por tenant y hasta 5 administradores",
         "applications": {
           "0": "Programa interactivo de concienciación",
@@ -123,7 +123,7 @@
       "ultimate": {
         "name": "Ultimate",
         "users": "150 -",
-        "price": "€89/mes",
+        "price": "€49/mes",
         "subprice": "por tenant y > 6 administradores",
         "applications": {
           "0": "Lista de verificación del cuestionario del encargado",
