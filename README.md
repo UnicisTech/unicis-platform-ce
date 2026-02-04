@@ -61,6 +61,7 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 
 - [Unicis Platform getting started documentation](https://www.unicis.tech/docs/unicis_platform)
 
+
 ## 🛠️ Built With
 
 - [SaaS-Starter-Kit](https://github.com/boxyhq/saas-starter-kit/)
@@ -84,6 +85,10 @@ We are working on one-click deployment solution with popular platforms. For adva
 ## ✨ Getting Started
 
 Please follow these simple steps to get a local copy up and running.
+
+> [!TIP]
+> The fastest and easiest way to get started with Unicis Platform is through the [free trial of cloud instance available here](https://platform.unicis.tech).
+
 
 ### Prerequisites
 
@@ -206,10 +211,20 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - Manage team members
 - Update team settings
 - Webhooks & Events
-- Internationalization
+- Internationalization (see supporting languages below)
 - Audit logs
 - Roles and Permissions
 - Dark mode
+
+## Supported languages 🌐
+
+1. EN: English
+2. FR: French
+3. ES: Spanish
+4. DE: German
+
+> [!NOTE]
+> Help with translating it to other languages via our [Weblate translation platform](https://locales.unicis.tech/weblate/projects/unicis-platform/). 
 
 ## ✨ Contributing
 
