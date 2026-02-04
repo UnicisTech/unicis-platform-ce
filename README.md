@@ -59,7 +59,7 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 
 ## 📖 Additional Resources
 
-- [Unicis Platform getting started documentation](https://www.unicis.tech/docs/unicis_platform)
+- [Unicis Platform getting started documentation](https://www.unicis.tech/docs/unicis_platform?mtm_campaign=GitHub)
 
 
 ## 🛠️ Built With
@@ -87,7 +87,7 @@ We are working on one-click deployment solution with popular platforms. For adva
 Please follow these simple steps to get a local copy up and running.
 
 > [!TIP]
-> The fastest and easiest way to get started with Unicis Platform is through the [free trial of cloud instance available here](https://platform.unicis.tech).
+> The fastest and easiest way to get started with Unicis Platform is through the [free trial of cloud instance available here](https://platform.unicis.tech/?mtm_campaign=GitHub).
 
 
 ### Prerequisites
@@ -189,12 +189,12 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 
 ## Modules
 
-- [Record of Processing Activities](https://www.unicis.tech/docs/platform/using/record-processing-actitivities)
-- [Transfer Impact Assessment](https://www.unicis.tech/docs/platform/using/transfer-impact-assessment)
-- [Privacy Impact Assessment](https://www.unicis.tech/docs/platform/using/privacy-impact-assessment)
-- [Cybersecurity Controls: MVSP](https://www.unicis.tech/docs/platform/using/cybersecurity-management-system)
-- [Interactive Awareness Program](https://www.unicis.tech/docs/platform/using/awareness-program)
-- [Cybersecurity Risk Management](https://www.unicis.tech/docs/platform/using/risk-management)
+- [Record of Processing Activities](https://www.unicis.tech/docs/platform/using/record-processing-actitivities?mtm_campaign=GitHub)
+- [Transfer Impact Assessment](https://www.unicis.tech/docs/platform/using/transfer-impact-assessment?mtm_campaign=GitHub)
+- [Privacy Impact Assessment](https://www.unicis.tech/docs/platform/using/privacy-impact-assessment?mtm_campaign=GitHub)
+- [Cybersecurity Controls: MVSP](https://www.unicis.tech/docs/platform/using/cybersecurity-management-system?mtm_campaign=GitHub)
+- [Interactive Awareness Program](https://www.unicis.tech/docs/platform/using/awareness-program?mtm_campaign=GitHub)
+- [Cybersecurity Risk Management](https://www.unicis.tech/docs/platform/using/risk-management?mtm_campaign=GitHub)
 
 ## 🥇 Features
 
@@ -215,6 +215,7 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - Audit logs
 - Roles and Permissions
 - Dark mode
+- Custom AI chatbot
 
 ## Supported languages 🌐
 
@@ -242,7 +243,7 @@ Please try to create bug reports that are:
 ## 🤩 Community
 
 Let's develop an open-source competitor to Drata, Vanta, Auditboard, Strike Graph, and Secureframe, and more.
-Help us build a future GRC by [supporting us](https://www.unicis.tech/community).
+Help us build a future GRC by [supporting us](https://www.unicis.tech/community?mtm_campaign=GitHub).
 
 - [Discord](https://discord.com/invite/8TwyeD97HD) (For live discussion with the Open-Source Community and Unicis team)
 - [X](https://twitter.com/UnicisTech) / [LinkedIn](https://www.linkedin.com/company/unicis-tech-oü/) / [Mastodon](https://mastodon.xyz/@unicis_tech) (Follow us)
@@ -251,7 +252,7 @@ Help us build a future GRC by [supporting us](https://www.unicis.tech/community)
 
 ## 📘 Knowledge Hub
 
-On [this page](https://www.unicis.tech/kb) you will find everything you may need to know in order to install, configure, maintain and customize an Unicis Platform. Use the links below to navigate.
+On [this page](https://www.unicis.tech/kb?mtm_campaign=GitHub) you will find everything you may need to know in order to install, configure, maintain and customize an Unicis Platform. Use the links below to navigate.
 
 ## Star History
 
