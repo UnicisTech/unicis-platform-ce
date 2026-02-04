@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { isPrismaError } from '@/lib/errors';
 import { openai } from '@/lib/chatbot';
 import { getTeamAccess } from '@/lib/teams';
-import env from './env';
+import env from '@/lib/env';
 
 
 export default async function handler(
