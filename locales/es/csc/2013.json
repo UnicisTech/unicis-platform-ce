@@ -1,0 +1,681 @@
+{
+  "sections": {
+    "info-sec-policies": {
+      "label": "Políticas de seguridad de la información - Dirección de la dirección para la seguridad de la información"
+    },
+    "org-sec-internal": {
+      "label": "Organización de la seguridad de la información - Organización interna"
+    },
+    "org-sec-mobile": {
+      "label": "Organización de la seguridad de la información - Dispositivos móviles y teletrabajo"
+    },
+    "hr-pre-employment": {
+      "label": "Seguridad de recursos humanos - Antes del empleo"
+    },
+    "hr-during-employment": {
+      "label": "Seguridad de recursos humanos - Durante el empleo"
+    },
+    "hr-termination-change": {
+      "label": "Seguridad de recursos humanos - Terminación y cambio del empleo"
+    },
+    "asset-responsibility": {
+      "label": "Gestión de activos - Responsabilidad por los activos"
+    },
+    "asset-classification": {
+      "label": "Gestión de activos - Clasificación de la información"
+    },
+    "asset-media": {
+      "label": "Gestión de activos - Gestión de soportes"
+    },
+    "access-business-req": {
+      "label": "Control de acceso - Requisitos empresariales del control de acceso"
+    },
+    "access-user-mgmt": {
+      "label": "Control de acceso - Gestión de acceso de usuarios"
+    },
+    "access-user-resp": {
+      "label": "Control de acceso - Responsabilidades de los usuarios"
+    },
+    "access-sys-app": {
+      "label": "Control de acceso - Control de acceso a sistemas y aplicaciones"
+    },
+    "crypto-controls": {
+      "label": "Criptografía - Controles criptográficos"
+    },
+    "physical-secure-areas": {
+      "label": "Seguridad física y ambiental - Áreas seguras"
+    },
+    "physical-equipment": {
+      "label": "Seguridad física y ambiental - Equipos"
+    },
+    "ops-procedures": {
+      "label": "Seguridad de las operaciones - Procedimientos operativos y responsabilidades"
+    },
+    "ops-malware": {
+      "label": "Seguridad de las operaciones - Protección contra malware"
+    },
+    "ops-backup": {
+      "label": "Seguridad de las operaciones - Copias de seguridad"
+    },
+    "ops-logging": {
+      "label": "Seguridad de las operaciones - Registro y monitorización"
+    },
+    "ops-software-control": {
+      "label": "Seguridad de las operaciones - Control del software operativo"
+    },
+    "ops-vuln-mgmt": {
+      "label": "Seguridad de las operaciones - Gestión de vulnerabilidades técnicas"
+    },
+    "ops-audit-controls": {
+      "label": "Seguridad de las operaciones - Controles de auditoría de sistemas de información"
+    },
+    "comm-network": {
+      "label": "Seguridad de las comunicaciones - Gestión de la seguridad de la red"
+    },
+    "comm-transfer": {
+      "label": "Seguridad de las comunicaciones - Transferencia de información"
+    },
+    "sys-acq-requirements": {
+      "label": "Adquisición, desarrollo y mantenimiento de sistemas - Requisitos de seguridad de los sistemas de información"
+    },
+    "sys-acq-dev-support": {
+      "label": "Adquisición, desarrollo y mantenimiento de sistemas - Seguridad en los procesos de desarrollo y soporte"
+    },
+    "sys-acq-test-data": {
+      "label": "Adquisición, desarrollo y mantenimiento de sistemas - Datos de prueba"
+    },
+    "supplier-rel": {
+      "label": "Relaciones con proveedores - Relaciones con proveedores"
+    },
+    "supplier-delivery": {
+      "label": "Relaciones con proveedores - Gestión de la prestación de servicios del proveedor"
+    },
+    "incident-mgmt": {
+      "label": "Gestión de incidentes de seguridad de la información - Gestión de incidentes de seguridad de la información y mejoras"
+    },
+    "bcm-continuity": {
+      "label": "Aspectos de seguridad de la información de la gestión de continuidad del negocio - Continuidad de la seguridad de la información"
+    },
+    "bcm-redundancies": {
+      "label": "Aspectos de seguridad de la información de la gestión de continuidad del negocio - Redundancias"
+    },
+    "compliance-legal": {
+      "label": "Cumplimiento - Cumplimiento de requisitos legales y contractuales"
+    },
+    "compliance-reviews": {
+      "label": "Cumplimiento - Revisiones de seguridad de la información"
+    }
+  },
+  "controls": {
+    "iso-2013-a-5-1-1": {
+      "code": "A.5.1.1",
+      "control": "Políticas de seguridad de la información",
+      "requirements": "Se definirá un conjunto de políticas de información y ciberseguridad, aprobado por la alta dirección (C-level), publicado y comunicado a los empleados y a las partes externas pertinentes."
+    },
+    "iso-2013-a-5-1-2": {
+      "code": "A.5.1.2",
+      "control": "Revisión de las políticas de seguridad de la información",
+      "requirements": "Las políticas de información y ciberseguridad se revisarán a intervalos planificados o cuando se produzcan cambios significativos para garantizar su idoneidad, adecuación, comunicación y eficacia continuas."
+    },
+    "iso-2013-a-6-1-1": {
+      "code": "A.6.1.1",
+      "control": "Roles y responsabilidades de seguridad de la información",
+      "requirements": "Todos los roles y responsabilidades de seguridad de la información y ciberseguridad se definirán y asignarán."
+    },
+    "iso-2013-a-6-1-2": {
+      "code": "A.6.1.2",
+      "control": "Segregación de funciones",
+      "requirements": "Las tareas en conflicto y las áreas de responsabilidad deben separarse para reducir las oportunidades de cambiar o utilizar indebidamente los activos de la organización sin permiso o de forma no intencionada."
+    },
+    "iso-2013-a-6-1-3": {
+      "code": "A.6.1.3",
+      "control": "Contacto con las autoridades",
+      "requirements": "Es necesario mantener comunicaciones adecuadas con las autoridades pertinentes."
+    },
+    "iso-2013-a-6-1-4": {
+      "code": "A.6.1.4",
+      "control": "Contacto con grupos de interés especial",
+      "requirements": "Deben establecerse conexiones adecuadas con organizaciones de interés especial u otros foros de seguridad profesional y asociaciones profesionales."
+    },
+    "iso-2013-a-6-1-5": {
+      "code": "A.6.1.5",
+      "control": "Seguridad de la información en la gestión de proyectos",
+      "requirements": "A lo largo de la gestión de proyectos, debe abordarse la confidencialidad de la información independientemente del tipo de proyecto."
+    },
+    "iso-2013-a-6-2-1": {
+      "code": "A.6.2.1",
+      "control": "Política de dispositivos móviles",
+      "requirements": "Para gestionar los riesgos introducidos por el uso de dispositivos móviles, debe adoptarse una política y medidas de seguridad de apoyo."
+    },
+    "iso-2013-a-6-2-2": {
+      "code": "A.6.2.2",
+      "control": "Teletrabajo",
+      "requirements": "Para proteger la información a la que se accede, se procesa o se almacena en los lugares de teletrabajo, debe implementarse una política y medidas de seguridad de apoyo."
+    },
+    "iso-2013-a-7-1-1": {
+      "code": "A.7.1.1",
+      "control": "Verificación de antecedentes",
+      "requirements": "Se realizarán verificaciones de antecedentes de todos los solicitantes de empleo en cumplimiento de las normas, la legislación y la ética aplicables, y deben ser proporcionales a los criterios del negocio, la clasificación de la información a la que se accederá y los riesgos potenciales."
+    },
+    "iso-2013-a-7-1-2": {
+      "code": "A.7.1.2",
+      "control": "Términos y condiciones del empleo",
+      "requirements": "Los acuerdos contractuales con empleados y contratistas establecerán su responsabilidad en materia de seguridad de la información y, por tanto, la responsabilidad de la empresa."
+    },
+    "iso-2013-a-7-2-1": {
+      "code": "A.7.2.1",
+      "control": "Responsabilidades de la dirección",
+      "requirements": "La dirección debe exigir a todos los empleados y contratistas que ejerzan la seguridad de la información de acuerdo con las políticas y procedimientos establecidos por la organización."
+    },
+    "iso-2013-a-7-2-2": {
+      "code": "A.7.2.2",
+      "control": "Concienciación, educación y formación en seguridad de la información",
+      "requirements": "Todos los trabajadores de la empresa y, cuando sea necesario, los contratistas recibirán una formación y concienciación adecuadas, así como actualizaciones periódicas sobre las políticas y procedimientos de la organización, según corresponda a su función."
+    },
+    "iso-2013-a-7-2-3": {
+      "code": "A.7.2.3",
+      "control": "Proceso disciplinario",
+      "requirements": "Existirá un proceso administrativo formal e informado para tomar medidas contra los empleados que hayan cometido una infracción de seguridad de la información."
+    },
+    "iso-2013-a-7-3-1": {
+      "code": "A.7.3.1",
+      "control": "Responsabilidades al terminar o cambiar el empleo",
+      "requirements": "Las responsabilidades y los requisitos de seguridad de la información/ciberseguridad que sigan siendo válidos tras la terminación o el cambio del empleo deben definirse, comunicarse e implementarse por el empleado o contratista."
+    },
+    "iso-2013-a-8-1-1": {
+      "code": "A.8.1.1",
+      "control": "Inventario de activos",
+      "requirements": "Los activos relacionados con la información y las instalaciones de información de una organización deben identificarse y registrarse, y debe mantenerse un inventario de dichos activos."
+    },
+    "iso-2013-a-8-1-2": {
+      "code": "A.8.1.2",
+      "control": "Propiedad de los activos",
+      "requirements": "Los activos del inventario deben tener sus propietarios (propietario del activo)."
+    },
+    "iso-2013-a-8-1-3": {
+      "code": "A.8.1.3",
+      "control": "Uso aceptable de los activos",
+      "requirements": "Deben identificarse, documentarse e implementarse reglas para el uso aceptable de la información y de los activos asociados a la información y a las instalaciones de procesamiento de información."
+    },
+    "iso-2013-a-8-1-4": {
+      "code": "A.8.1.4",
+      "control": "Devolución de activos",
+      "requirements": "Tanto los trabajadores como las partes externas deben devolver todos los activos de la organización en su posesión al finalizar su empleo, contrato o acuerdo."
+    },
+    "iso-2013-a-8-2-1": {
+      "code": "A.8.2.1",
+      "control": "Clasificación de la información",
+      "requirements": "La información debe clasificarse en función de sus disposiciones legales, criticidad y vulnerabilidad frente a divulgación o alteración no deseadas."
+    },
+    "iso-2013-a-8-2-2": {
+      "code": "A.8.2.2",
+      "control": "Etiquetado de la información",
+      "requirements": "De acuerdo con el esquema de clasificación de la información adoptado por la organización, debe establecerse e implementarse un conjunto adecuado de métodos para etiquetar la información."
+    },
+    "iso-2013-a-8-2-3": {
+      "code": "A.8.2.3",
+      "control": "Manejo de activos",
+      "requirements": "El manejo de los activos, conforme al esquema de clasificación de la información de la organización, debe desarrollarse e implementarse."
+    },
+    "iso-2013-a-8-3-1": {
+      "code": "A.8.3.1",
+      "control": "Gestión de medios extraíbles",
+      "requirements": "Se implementarán procedimientos para la gestión de medios extraíbles de acuerdo con el esquema de clasificación adoptado por la organización."
+    },
+    "iso-2013-a-8-3-2": {
+      "code": "A.8.3.2",
+      "control": "Eliminación de medios",
+      "requirements": "Cuando no se requiera por protocolos específicos, los medios deben eliminarse de forma segura."
+    },
+    "iso-2013-a-8-3-3": {
+      "code": "A.8.3.3",
+      "control": "Transferencia de medios físicos",
+      "requirements": "Los soportes de información deben protegerse contra el acceso no autorizado, el uso indebido o la corrupción durante el transporte."
+    },
+    "iso-2013-a-9-1-1": {
+      "code": "A.9.1.1",
+      "control": "Política de control de acceso",
+      "requirements": "Debe establecerse, documentarse y revisarse una política de control de acceso con requisitos empresariales y de seguridad de la información de apoyo."
+    },
+    "iso-2013-a-9-1-2": {
+      "code": "A.9.1.2",
+      "control": "Acceso a redes y servicios de red",
+      "requirements": "Solo se pondrán a disposición de los usuarios las redes y los servicios de red que hayan sido expresamente aprobados para su uso."
+    },
+    "iso-2013-a-9-2-1": {
+      "code": "A.9.2.1",
+      "control": "Registro y baja de usuarios",
+      "requirements": "Solo se pondrán a disposición de los usuarios las redes y los servicios de red que hayan sido expresamente aprobados para su uso."
+    },
+    "iso-2013-a-9-2-2": {
+      "code": "A.9.2.2",
+      "control": "Aprovisionamiento de acceso de usuarios",
+      "requirements": "Debe existir un proceso formal para conceder acceso a los usuarios, con el fin de otorgar o retirar privilegios de acceso para todas las categorías de usuarios a todos los sistemas y servicios."
+    },
+    "iso-2013-a-9-2-3": {
+      "code": "A.9.2.3",
+      "control": "Gestión de derechos de acceso privilegiados",
+      "requirements": "Un procedimiento de autorización estructurado, de acuerdo con las políticas de gestión de acceso apropiadas, debe supervisar la asignación y el uso de privilegios de acceso delegados."
+    },
+    "iso-2013-a-9-2-4": {
+      "code": "A.9.2.4",
+      "control": "Gestión de la información secreta de autenticación de los usuarios",
+      "requirements": "Un proceso de gestión estructurado debe controlar la asignación de la información secreta de autenticación."
+    },
+    "iso-2013-a-9-2-5": {
+      "code": "A.9.2.5",
+      "control": "Revisión de los derechos de acceso de los usuarios",
+      "requirements": "Los derechos de acceso de los usuarios deben revisarse regularmente por los propietarios de los activos."
+    },
+    "iso-2013-a-9-2-6": {
+      "code": "A.9.2.6",
+      "control": "Eliminación o ajuste de derechos de acceso",
+      "requirements": "Los derechos de acceso de todos los empleados y usuarios externos a la información y a las instalaciones de procesamiento de información deben revocarse al terminar el empleo, contrato o acuerdo, o modificarse al ajustarse."
+    },
+    "iso-2013-a-9-3-1": {
+      "code": "A.9.3.1",
+      "control": "Uso de información secreta de autenticación de los usuarios",
+      "requirements": "Debe permitirse el uso de la información secreta de autenticación para que los usuarios sigan las prácticas de la organización."
+    },
+    "iso-2013-a-9-4-1": {
+      "code": "A.9.4.1",
+      "control": "Restricción de acceso a la información",
+      "requirements": "Los controles de acceso deben basarse en requisitos individuales para aplicaciones de negocio y en cumplimiento de una política de control de acceso especificada."
+    },
+    "iso-2013-a-9-4-2": {
+      "code": "A.9.4.2",
+      "control": "Procedimientos de inicio de sesión seguros",
+      "requirements": "El acceso a sistemas y aplicaciones debe controlarse mediante un procedimiento de inicio de sesión seguro cuando lo requiera la Política de Control de Acceso."
+    },
+    "iso-2013-a-9-4-3": {
+      "code": "A.9.4.3",
+      "control": "Sistema de gestión de contraseñas",
+      "requirements": "Los sistemas de gestión de contraseñas deben ser compatibles para garantizar la calidad de las contraseñas."
+    },
+    "iso-2013-a-9-4-4": {
+      "code": "A.9.4.4",
+      "control": "Uso de programas de utilidades privilegiadas",
+      "requirements": "El uso de programas de utilidad que puedan eludir los controles del sistema y de las aplicaciones debe limitarse y controlarse estrictamente."
+    },
+    "iso-2013-a-9-4-5": {
+      "code": "A.9.4.5",
+      "control": "Control de acceso al código fuente del programa",
+      "requirements": "El acceso al código fuente del programa debe limitarse."
+    },
+    "iso-2013-a-10-1-1": {
+      "code": "A.10.1.1",
+      "control": "Política sobre el uso de controles criptográficos",
+      "requirements": "Se desarrollará e implementará una política sobre el uso de controles criptográficos para la protección de la información."
+    },
+    "iso-2013-a-10-1-2": {
+      "code": "A.10.1.2",
+      "control": "Gestión de claves",
+      "requirements": "Debe crearse y aplicarse una política sobre el uso, la seguridad y la vida útil de las claves criptográficas durante todo su ciclo de vida."
+    },
+    "iso-2013-a-11-1-1": {
+      "code": "A.11.1.1",
+      "control": "Perímetro de seguridad física",
+      "requirements": "Deben establecerse perímetros de seguridad para asegurar áreas que contengan información sensible o confidencial y las instalaciones de procesamiento de información."
+    },
+    "iso-2013-a-11-1-2": {
+      "code": "A.11.1.2",
+      "control": "Controles de entrada física",
+      "requirements": "Los controles de acceso apropiados deben proteger los lugares para garantizar que solo el personal autorizado tenga acceso."
+    },
+    "iso-2013-a-11-1-3": {
+      "code": "A.11.1.3",
+      "control": "Asegurar oficinas, salas e instalaciones",
+      "requirements": "La seguridad física debe diseñarse e implementarse para las oficinas, salas e instalaciones."
+    },
+    "iso-2013-a-11-1-4": {
+      "code": "A.11.1.4",
+      "control": "Protección contra amenazas externas y ambientales",
+      "requirements": "La protección física debe diseñarse y aplicarse contra desastres naturales, ataques maliciosos o accidentes."
+    },
+    "iso-2013-a-11-1-5": {
+      "code": "A.11.1.5",
+      "control": "Trabajo en áreas seguras",
+      "requirements": "Deben diseñarse e implementarse procedimientos para trabajar en áreas seguras."
+    },
+    "iso-2013-a-11-1-6": {
+      "code": "A.11.1.6",
+      "control": "Áreas de entrega y carga",
+      "requirements": "Es importante rastrear y, cuando sea posible, diferenciar entre puntos de acceso como las áreas de distribución y carga y otras ubicaciones para evitar el acceso no autorizado de personas no autorizadas a las instalaciones."
+    },
+    "iso-2013-a-11-2-1": {
+      "code": "A.11.2.1",
+      "control": "Ubicación y protección de equipos",
+      "requirements": "Para mitigar el riesgo de peligros ambientales, riesgos y acceso no autorizado, los equipos deben ubicarse y asegurarse."
+    },
+    "iso-2013-a-11-2-2": {
+      "code": "A.11.2.2",
+      "control": "Servicios de apoyo",
+      "requirements": "Los equipos deben protegerse contra fallos de energía y otras interrupciones causadas por fallos de la infraestructura de soporte."
+    },
+    "iso-2013-a-11-2-3": {
+      "code": "A.11.2.3",
+      "control": "Seguridad del cableado",
+      "requirements": "Los cables de energía y telecomunicaciones que transportan datos o prestan servicios deben protegerse contra la interceptación, la interferencia o los daños."
+    },
+    "iso-2013-a-11-2-4": {
+      "code": "A.11.2.4",
+      "control": "Mantenimiento de equipos",
+      "requirements": "Para garantizar su disponibilidad e integridad continuas, los equipos deben mantenerse correctamente."
+    },
+    "iso-2013-a-11-2-5": {
+      "code": "A.11.2.5",
+      "control": "Retirada de activos",
+      "requirements": "Sin autorización previa, no deben sacarse del sitio equipos, información o software."
+    },
+    "iso-2013-a-11-2-6": {
+      "code": "A.11.2.6",
+      "control": "Seguridad de equipos y activos fuera de las instalaciones",
+      "requirements": "La seguridad de los activos fuera de las instalaciones debe aplicarse teniendo en cuenta los diversos riesgos de trabajar fuera de las instalaciones de la organización."
+    },
+    "iso-2013-a-11-2-7": {
+      "code": "A.11.2.7",
+      "control": "Eliminación segura o reutilización de equipos",
+      "requirements": "Para evitar la eliminación o la sobrescritura de datos y software sensibles mediante la eliminación o reutilización de cualquier dispositivo que contenga un medio de almacenamiento, todos los dispositivos deben revisarse."
+    },
+    "iso-2013-a-11-2-8": {
+      "code": "A.11.2.8",
+      "control": "Equipo de usuario desatendido",
+      "requirements": "Los equipos desatendidos deben estar adecuadamente protegidos por los usuarios."
+    },
+    "iso-2013-a-11-2-9": {
+      "code": "A.11.2.9",
+      "control": "Política de escritorio limpio y pantalla limpia",
+      "requirements": "Debe adoptarse una política de escritorio limpio para papeles y medios de almacenamiento extraíbles, y debe aplicarse una política de pantalla limpia a las instalaciones de procesamiento de información."
+    },
+    "iso-2013-a-12-1-1": {
+      "code": "A.12.1.1",
+      "control": "Procedimientos operativos documentados",
+      "requirements": "Los procedimientos operativos deben documentarse y estar accesibles para todos los usuarios que los necesiten."
+    },
+    "iso-2013-a-12-1-2": {
+      "code": "A.12.1.2",
+      "control": "Gestión de cambios",
+      "requirements": "Los cambios en la organización, los procedimientos organizativos, las instalaciones de gestión de información y los sistemas de seguridad de la información deben controlarse."
+    },
+    "iso-2013-a-12-1-3": {
+      "code": "A.12.1.3",
+      "control": "Gestión de capacidad",
+      "requirements": "Para garantizar el rendimiento necesario del sistema, el uso de recursos debe supervisarse, ajustarse y proyectarse en función de los requisitos futuros de capacidad."
+    },
+    "iso-2013-a-12-1-4": {
+      "code": "A.12.1.4",
+      "control": "Separación de entornos de desarrollo, pruebas y operación",
+      "requirements": "Es importante definir y hacer cumplir el grado de separación entre entornos operativos, de pruebas y de desarrollo necesario para evitar problemas operativos."
+    },
+    "iso-2013-a-12-2-1": {
+      "code": "A.12.2.1",
+      "control": "Controles contra malware",
+      "requirements": "En combinación con una concienciación adecuada de los usuarios, deben implementarse controles de detección, prevención y recuperación para proteger contra malware."
+    },
+    "iso-2013-a-12-3-1": {
+      "code": "A.12.3.1",
+      "control": "Copia de seguridad de la información",
+      "requirements": "De acuerdo con la política de copias de seguridad acordada, se recopilarán copias de registros, programas e imágenes de dispositivos, y se probarán regularmente."
+    },
+    "iso-2013-a-12-4-1": {
+      "code": "A.12.4.1",
+      "control": "Registro de eventos",
+      "requirements": "Se deben generar, conservar y revisar regularmente los registros de eventos para registrar actividades de los usuarios, excepciones, defectos y eventos de seguridad de la información."
+    },
+    "iso-2013-a-12-4-2": {
+      "code": "A.12.4.2",
+      "control": "Protección de la información de registro",
+      "requirements": "El registro y la información de registro deben estar protegidos contra intrusiones y acceso no autorizado."
+    },
+    "iso-2013-a-12-4-3": {
+      "code": "A.12.4.3",
+      "control": "Registros de administradores y operadores",
+      "requirements": "La actividad del administrador del sistema y del operador del sistema debe registrarse, y los registros mantenerse seguros y supervisarse de cerca."
+    },
+    "iso-2013-a-12-4-4": {
+      "code": "A.12.4.4",
+      "control": "Sincronización del reloj",
+      "requirements": "Los relojes en todos los sistemas relacionados de gestión de información deben integrarse en una única fuente de referencia temporal para la organización o el dominio de seguridad."
+    },
+    "iso-2013-a-12-5-1": {
+      "code": "A.12.5.1",
+      "control": "Instalación de software en sistemas operativos",
+      "requirements": "Para controlar la instalación de software en sistemas operativos, deben implementarse procedimientos."
+    },
+    "iso-2013-a-12-6-1": {
+      "code": "A.12.6.1",
+      "control": "Gestión de vulnerabilidades técnicas",
+      "requirements": "La información sobre vulnerabilidades tecnológicas de los sistemas de información utilizados debe obtenerse oportunamente, debe evaluarse la exposición de la organización a dichas vulnerabilidades y deben tomarse medidas apropiadas para abordar el riesgo implicado."
+    },
+    "iso-2013-a-12-6-2": {
+      "code": "A.12.6.2",
+      "control": "Restricciones en la instalación de software",
+      "requirements": "Los usuarios deben establecer e implementar reglas que rijan la instalación de software."
+    },
+    "iso-2013-a-12-7-1": {
+      "code": "A.12.7.1",
+      "control": "Controles de auditoría del sistema de información",
+      "requirements": "Los criterios y actividades de auditoría relacionados con la verificación del sistema operativo deben prepararse y decidirse cuidadosamente para reducir la perturbación de los procesos de negocio."
+    },
+    "iso-2013-a-13-1-1": {
+      "code": "A.13.1.1",
+      "control": "Controles de red",
+      "requirements": "Para proteger la información en sistemas y aplicaciones, las redes deben gestionarse y supervisarse."
+    },
+    "iso-2013-a-13-1-2": {
+      "code": "A.13.1.2",
+      "control": "Seguridad de los servicios de red",
+      "requirements": "Los protocolos de seguridad, la calidad del servicio y los criterios de gestión para todos los servicios de red, ya sean internos o subcontratados, deben definirse e incluirse en los acuerdos de servicios de red."
+    },
+    "iso-2013-a-13-1-3": {
+      "code": "A.13.1.3",
+      "control": "Segregación en redes",
+      "requirements": "Debe establecerse la segregación de redes para servicios de información, usuarios y sistemas de información."
+    },
+    "iso-2013-a-13-2-1": {
+      "code": "A.13.2.1",
+      "control": "Políticas y procedimientos de transferencia de información",
+      "requirements": "Para proteger a los destinatarios mediante todo tipo de instalaciones de comunicación, deben desarrollarse políticas, procedimientos y controles oficiales de transferencia."
+    },
+    "iso-2013-a-13-2-2": {
+      "code": "A.13.2.2",
+      "control": "Acuerdos sobre transferencia de información",
+      "requirements": "Los acuerdos deben abordar transferencias seguras entre la organización y partes externas de información empresarial."
+    },
+    "iso-2013-a-13-2-3": {
+      "code": "A.13.2.3",
+      "control": "Mensajería electrónica",
+      "requirements": "La información de mensajería electrónica debe protegerse adecuadamente."
+    },
+    "iso-2013-a-13-2-4": {
+      "code": "A.13.2.4",
+      "control": "Acuerdos de confidencialidad o no divulgación",
+      "requirements": "Los requisitos de protección de la información de la organización para acuerdos de confidencialidad o no divulgación deben identificarse, revisarse regularmente y documentarse."
+    },
+    "iso-2013-a-14-1-1": {
+      "code": "A.14.1.1",
+      "control": "Requisitos de seguridad de los sistemas de información",
+      "requirements": "Los requisitos de seguridad de la información para nuevos sistemas de información o mejoras de sistemas existentes deben incluirse."
+    },
+    "iso-2013-a-14-1-2": {
+      "code": "A.14.1.2",
+      "control": "Asegurar servicios de aplicaciones en redes públicas",
+      "requirements": "Los servicios de aplicaciones que pasen por redes públicas deben protegerse contra actividades fraudulentas, disputas contractuales, divulgación no autorizada y modificación."
+    },
+    "iso-2013-a-14-1-3": {
+      "code": "A.14.1.3",
+      "control": "Protección de transacciones de servicios de aplicaciones",
+      "requirements": "Para evitar transmisión incompleta, enrutamiento incorrecto, modificación no autorizada de mensajes, difusión no autorizada, replicación no autorizada de mensajes o reenvío, debe cubrirse la información relativa a transacciones de servicios de aplicaciones."
+    },
+    "iso-2013-a-14-2-1": {
+      "code": "A.14.2.1",
+      "control": "Política de desarrollo seguro",
+      "requirements": "Deben establecerse y aplicarse reglas para el desarrollo de software y sistemas en los desarrollos de la organización."
+    },
+    "iso-2013-a-14-2-2": {
+      "code": "A.14.2.2",
+      "control": "Procedimientos de control de cambios del sistema",
+      "requirements": "Los cambios en los procesos pueden gestionarse mediante la implementación de procedimientos estructurados de control de cambios dentro del ciclo de vida del software."
+    },
+    "iso-2013-a-14-2-3": {
+      "code": "A.14.2.3",
+      "control": "Revisión técnica de aplicaciones tras cambios en la plataforma operativa",
+      "requirements": "Al cambiar plataformas operativas, las aplicaciones críticas del negocio deben revisarse y probarse para asegurar que no haya impactos adversos en el negocio o en la seguridad."
+    },
+    "iso-2013-a-14-2-4": {
+      "code": "A.14.2.4",
+      "control": "Restricciones a cambios en paquetes de software",
+      "requirements": "Las modificaciones a paquetes de software deben desalentarse, limitarse a las modificaciones necesarias y controlarse estrictamente."
+    },
+    "iso-2013-a-14-2-5": {
+      "code": "A.14.2.5",
+      "control": "Principios de ingeniería de sistemas seguros",
+      "requirements": "En la implementación de cualquier proyecto de implementación de sistemas de información, deben establecerse, documentarse, mantenerse e implementarse estándares para ingeniería de sistemas seguros."
+    },
+    "iso-2013-a-14-2-6": {
+      "code": "A.14.2.6",
+      "control": "Entorno de desarrollo seguro",
+      "requirements": "Las organizaciones deben crear entornos de desarrollo seguros y esfuerzos de integración para todo el ciclo de vida del desarrollo del sistema, y deben estar adecuadamente protegidos."
+    },
+    "iso-2013-a-14-2-7": {
+      "code": "A.14.2.7",
+      "control": "Desarrollo subcontratado",
+      "requirements": "La organización debe supervisar la actividad del desarrollo del sistema subcontratado."
+    },
+    "iso-2013-a-14-2-8": {
+      "code": "A.14.2.8",
+      "control": "Pruebas de seguridad del sistema",
+      "requirements": "Durante el desarrollo, debe realizarse una prueba de la funcionalidad de seguridad."
+    },
+    "iso-2013-a-14-2-9": {
+      "code": "A.14.2.9",
+      "control": "Pruebas de aceptación del sistema",
+      "requirements": "Los nuevos sistemas de información, las mejoras y las versiones actualizadas deben contar con servicios de pruebas de aceptación y requisitos relacionados."
+    },
+    "iso-2013-a-14-3-1": {
+      "code": "A.14.3.1",
+      "control": "Protección de datos de prueba",
+      "requirements": "Debe realizarse una recopilación, seguridad y revisión cuidadosas de los datos de prueba."
+    },
+    "iso-2013-a-15-1-1": {
+      "code": "A.15.1.1",
+      "control": "Política de seguridad de la información para relaciones con proveedores",
+      "requirements": "Deben acordarse y documentarse con el proveedor los requisitos de seguridad de la información relacionados con la mitigación del riesgo de acceso de los proveedores a los activos de la organización."
+    },
+    "iso-2013-a-15-1-2": {
+      "code": "A.15.1.2",
+      "control": "Abordar la seguridad dentro de los acuerdos con proveedores",
+      "requirements": "Cualquier proveedor que vea, procese, almacene, comunique o proporcione información de componentes de infraestructura de TI para la organización debe definirse y acordarse con todos los requisitos de seguridad de la información aplicables."
+    },
+    "iso-2013-a-15-1-3": {
+      "code": "A.15.1.3",
+      "control": "Cadena de suministro de tecnologías de la información y comunicación",
+      "requirements": "Los acuerdos con proveedores contendrán disposiciones para mitigar los riesgos de seguridad de la información asociados con servicios de TI y la cadena de suministro de productos."
+    },
+    "iso-2013-a-15-2-1": {
+      "code": "A.15.2.1",
+      "control": "Supervisión y revisión de servicios del proveedor",
+      "requirements": "Las organizaciones supervisarán, revisarán y auditarán la prestación de servicios por parte de los proveedores de forma regular."
+    },
+    "iso-2013-a-15-2-2": {
+      "code": "A.15.2.2",
+      "control": "Gestión de cambios en servicios del proveedor",
+      "requirements": "El cambio en la prestación de servicios por parte de los proveedores debe gestionarse con foco en la criticidad de la información, sistemas y procesos de la empresa, y la reevaluación de riesgos, e incluir el mantenimiento y la mejora de políticas, procedimientos y controles de seguridad de la información existentes."
+    },
+    "iso-2013-a-16-1-1": {
+      "code": "A.16.1.1",
+      "control": "Responsabilidades y procedimientos",
+      "requirements": "Para garantizar una respuesta rápida, eficiente y organizada, deben definirse roles y procedimientos de gestión de incidentes de seguridad de la información (ISO 27001 Anexo A.16)."
+    },
+    "iso-2013-a-16-1-2": {
+      "code": "A.16.1.2",
+      "control": "Notificación de eventos de seguridad de la información",
+      "requirements": "Los incidentes de seguridad de la información deben reportarse lo antes posible a través de los canales de gestión apropiados."
+    },
+    "iso-2013-a-16-1-3": {
+      "code": "A.16.1.3",
+      "control": "Notificación de debilidades de seguridad de la información",
+      "requirements": "Cualquier vulnerabilidad de seguridad de la información encontrada o sospechada en sistemas o servicios que usen empleados y contratistas debe registrarse y documentarse."
+    },
+    "iso-2013-a-16-1-4": {
+      "code": "A.16.1.4",
+      "control": "Evaluación y decisión sobre eventos de seguridad de la información",
+      "requirements": "Los eventos de seguridad de la información deben analizarse y determinarse si deben registrarse como incidentes relacionados con la seguridad de la información."
+    },
+    "iso-2013-a-16-1-5": {
+      "code": "A.16.1.5",
+      "control": "Respuesta a incidentes de seguridad de la información",
+      "requirements": "En el contexto de los procedimientos documentados, los incidentes de seguridad de la información deben ser atendidos."
+    },
+    "iso-2013-a-16-1-6": {
+      "code": "A.16.1.6",
+      "control": "Aprendizaje de los incidentes de seguridad de la información",
+      "requirements": "Para minimizar el riesgo o el efecto de posibles incidentes, debe utilizarse la experiencia obtenida del análisis y la mitigación de incidentes de seguridad de la información."
+    },
+    "iso-2013-a-16-1-7": {
+      "code": "A.16.1.7 ",
+      "control": "Recopilación de evidencias",
+      "requirements": "La organización definirá, obtendrá, recopilará y conservará información como documentación e implementará procedimientos."
+    },
+    "iso-2013-a-17-1-1": {
+      "code": "A.17.1.1",
+      "control": "Planificación de la continuidad de la seguridad de la información",
+      "requirements": "En circunstancias adversas, por ejemplo durante una crisis o una catástrofe, la empresa determinará los estándares de seguridad de la información y la consistencia de la gestión de la seguridad de la información."
+    },
+    "iso-2013-a-17-1-2": {
+      "code": "A.17.1.2",
+      "control": "Implementación de la continuidad de la seguridad de la información",
+      "requirements": "Para garantizar el grado necesario de continuidad de la seguridad de la información ante circunstancias adversas, la empresa debe definir, documentar, ejecutar y mantener procesos, procedimientos y controles."
+    },
+    "iso-2013-a-17-1-3": {
+      "code": "A.17.1.3",
+      "control": "Verificar, revisar y evaluar la continuidad de la seguridad de la información",
+      "requirements": "Para garantizar una respuesta adecuada y productiva ante circunstancias adversas, la empresa debe revisar los controles continuos de seguridad de la información definidos y aplicados a intervalos regulares."
+    },
+    "iso-2013-a-17-2-1": {
+      "code": "A.17.2.1",
+      "control": "Disponibilidad de las instalaciones de procesamiento de información",
+      "requirements": "Cómo se implementan las instalaciones de procesamiento de información con redundancia suficiente para cumplir los requisitos de disponibilidad. La redundancia se refiere a implementar, normalmente, hardware duplicado para asegurar la disponibilidad de los sistemas de procesamiento de información."
+    },
+    "iso-2013-a-18-1-1": {
+      "code": "A.18.1.1",
+      "control": "Identificación de la legislación aplicable y requisitos contractuales",
+      "requirements": "Cada sistema de información y organización debe identificar, documentar y actualizar específicamente todos los requisitos estatutarios, regulatorios y contractuales relevantes, y el enfoque de la organización hacia el cumplimiento de estos requisitos."
+    },
+    "iso-2013-a-18-1-2": {
+      "code": "A.18.1.2",
+      "control": "Derechos de propiedad intelectual",
+      "requirements": "Se seguirán procedimientos adecuados para asegurar el cumplimiento de las disposiciones legales, regulatorias y contractuales relativas a la propiedad intelectual y al uso de productos de software propietario."
+    },
+    "iso-2013-a-18-1-3": {
+      "code": "A.18.1.3",
+      "control": "Protección de registros",
+      "requirements": "De acuerdo con las disposiciones legales, regulatorias, contractuales y los requisitos del negocio, se protegerá contra la pérdida, destrucción, falsificación, acceso no autorizado y divulgación no autorizada."
+    },
+    "iso-2013-a-18-1-4": {
+      "code": "A.18.1.4",
+      "control": "Privacidad y protección de la información de identificación personal",
+      "requirements": "La privacidad y la protección de los datos personales deben garantizarse, según lo requieran las leyes y regulaciones aplicables."
+    },
+    "iso-2013-a-18-1-5": {
+      "code": "A.18.1.5",
+      "control": "Regulación de controles criptográficos",
+      "requirements": "De acuerdo con todos los acuerdos, legislaciones y regulaciones relevantes, deben utilizarse controles criptográficos."
+    },
+    "iso-2013-a-18-2-1": {
+      "code": "A.18.2.1",
+      "control": "Revisión independiente de la seguridad de la información",
+      "requirements": "Cada sistema de información y organización debe identificar, documentar y actualizar específicamente todos los requisitos estatutarios, regulatorios y contractuales relevantes, y el enfoque de la organización hacia el cumplimiento de estos requisitos."
+    },
+    "iso-2013-a-18-2-2": {
+      "code": "A.18.2.2",
+      "control": "Cumplimiento de políticas y estándares de seguridad",
+      "requirements": "Se seguirán procedimientos adecuados para asegurar el cumplimiento de las disposiciones legales, regulatorias y contractuales relativas a la propiedad intelectual y al uso de productos de software propietario."
+    },
+    "iso-2013-a-18-2-3": {
+      "code": "A.18.2.3",
+      "control": "Revisión de cumplimiento técnico",
+      "requirements": "Los sistemas de información para el cumplimiento con las Políticas de Seguridad de la Información y las prácticas de la organización deben revisarse periódicamente."
+    }
+  }
+}

@@ -1,5 +1,4 @@
 export { default as Alert } from './Alert';
-export { default as Table } from './Table';
 export { default as Card } from './Card';
 export { default as LetterAvatar } from './LetterAvatar';
 export { default as EmptyState } from './EmptyState';
@@ -12,5 +11,5 @@ export { default as InputWithCopyButton } from './InputWithCopyButton';
 export { default as CopyToClipboardButton } from './CopyToClipboardButton';
 export { default as StatusBadge } from './StatusBadge';
 export { default as PerPageSelector } from './PerPageSelector';
-export { default as StatusFilter } from './StatusFilter';
 export { default as Message } from './Message';
+export { default as MemberName } from './MemberName';

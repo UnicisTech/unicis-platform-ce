@@ -8,10 +8,17 @@ import type { EndpointOut } from 'svix';
 import { defaultHeaders } from '@/lib/common';
 import type { ApiResponse } from 'types';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
-
 import CreateWebhook from './CreateWebhook';
 import EditWebhook from './EditWebhook';
 import { Button } from '@/components/shadcn/ui/button';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/shadcn/ui/table';
 
 const Webhooks = ({ team }: { team: Team }) => {
   const { t } = useTranslation('common');
@@ -58,10 +65,10 @@ const Webhooks = ({ team }: { team: Team }) => {
         <div className="flex justify-between items-center">
           <div className="space-y-3">
             <h2 className="text-xl font-medium leading-none tracking-tight">
-              Webhooks
+              {t('webhooks')}
             </h2>
             <p className="text-sm text-muted-foreground">
-              Webhooks are used to send notifications to your external apps.
+              {t('webhooks-description')}
             </p>
           </div>
           <Button
@@ -76,23 +83,28 @@ const Webhooks = ({ team }: { team: Team }) => {
           <EmptyState title={t('no-webhook-title')} />
         ) : (
           <div className="overflow-x-auto">
-            <table className="text-sm table w-full border-b dark:border-border">
-              <thead className="bg-muted">
-                <tr>
-                  <th>{t('name')}</th>
-                  <th>{t('url')}</th>
-                  <th>{t('created-at')}</th>
-                  <th>{t('action')}</th>
-                </tr>
-              </thead>
-              <tbody>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>{t('name')}</TableHead>
+                  <TableHead>{t('url')}</TableHead>
+                  <TableHead>{t('created-at')}</TableHead>
+                  {/* TODO: permission check for actions? */}
+                  <TableHead className="text-right">{t('actions')}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {webhooks?.map((webhook) => (
-                  <tr key={webhook.id}>
-                    <td>{webhook.description}</td>
-                    <td>{webhook.url}</td>
-                    <td>{new Date(webhook.createdAt).toLocaleString()}</td>
-                    <td>
-                      <div className="flex gap-2">
+                  <TableRow key={webhook.id}>
+                    <TableCell>{webhook.description}</TableCell>
+                    <TableCell className="font-mono break-all">
+                      {webhook.url}
+                    </TableCell>
+                    <TableCell>
+                      {new Date(webhook.createdAt).toLocaleString()}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex justify-end gap-2">
                         <Button
                           variant="outline"
                           size="sm"
@@ -114,11 +126,11 @@ const Webhooks = ({ team }: { team: Team }) => {
                           {t('remove')}
                         </Button>
                       </div>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         )}
 

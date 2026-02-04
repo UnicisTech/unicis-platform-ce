@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'next-i18next';
 import { Loading } from '@/components/shared';
 import { useSession } from 'next-auth/react';
 import Header from './Header';
@@ -7,6 +8,7 @@ import Drawer from './Drawer';
 import AiChat from './AiChat';
 
 export default function AppShell({ children }) {
+  const { t } = useTranslation('common');
   const { data, status } = useSession();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -32,7 +34,7 @@ export default function AppShell({ children }) {
   }
 
   if (status === 'unauthenticated') {
-    return <p>Access Denied</p>;
+    return <p>{t('errors.accessDenied')}</p>;
   }
 
   return (

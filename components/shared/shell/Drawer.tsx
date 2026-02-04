@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 import TeamDropdown from '../TeamDropdown';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import Brand from './Brand';
@@ -10,6 +11,8 @@ interface DrawerProps {
 }
 
 const Drawer = ({ sidebarOpen, setSidebarOpen }: DrawerProps) => {
+  const { t } = useTranslation('common');
+
   return (
     <>
       {sidebarOpen && (
@@ -23,7 +26,7 @@ const Drawer = ({ sidebarOpen, setSidebarOpen }: DrawerProps) => {
                   className="-m-2.5 p-2.5"
                   onClick={() => setSidebarOpen(false)}
                 >
-                  <span className="sr-only">Close sidebar</span>
+                  <span className="sr-only">{t('close-sidebar')}</span>
                   <XMarkIcon
                     className="h-6 w-6 text-white"
                     aria-hidden="true"
@@ -41,7 +44,7 @@ const Drawer = ({ sidebarOpen, setSidebarOpen }: DrawerProps) => {
       )}
 
       <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col">
-        <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 px-6 dark:border-gray-600">
+        <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r px-6">
           <Brand />
           <TeamDropdown />
           <Navigation />

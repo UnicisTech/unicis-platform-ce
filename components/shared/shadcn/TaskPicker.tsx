@@ -13,6 +13,7 @@ import {
   SelectItem,
 } from '@/components/shadcn/ui/select';
 import { Control } from 'react-hook-form';
+import { useTranslation } from 'next-i18next';
 import type { Task } from '@prisma/client';
 
 interface Props {
@@ -22,6 +23,8 @@ interface Props {
 }
 
 export default function TaskPicker({ control, name, tasks }: Props) {
+  const { t } = useTranslation('common');
+
   return (
     <FormField
       control={control}
@@ -29,7 +32,7 @@ export default function TaskPicker({ control, name, tasks }: Props) {
       rules={{ required: 'Please select a task.' }}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Task</FormLabel>
+          <FormLabel>{t('task')}</FormLabel>
           <FormControl>
             <Select
               onValueChange={(taskId) => {

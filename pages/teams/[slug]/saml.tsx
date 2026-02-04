@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import env from '@/lib/env';
 import { BOXYHQ_UI_CSS } from '@/components/styles';
-import { getTeamFeatures } from '@/lib/subscriptions';
+import { getTeamAccess } from '@/lib/teams';
 
 const TeamSSO = ({ teamFeatures, SPConfigURL }) => {
   const { t } = useTranslation('common');
@@ -24,7 +24,7 @@ const TeamSSO = ({ teamFeatures, SPConfigURL }) => {
   }
 
   if (!team) {
-    return <Error message={t('team-not-found')} />;
+    return <Error message={t('errors.teamNotFound')} />;
   }
 
   return (
@@ -75,9 +75,9 @@ const TeamSSO = ({ teamFeatures, SPConfigURL }) => {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { locale, req, res, query } = context;
 
-  const teamFeatures = await getTeamFeatures(req, res, query);
+  const access = await getTeamAccess(req, res, query);
 
-  if (!teamFeatures.sso) {
+  if (!access || !access.teamFeatures.sso) {
     return {
       notFound: true,
     };
@@ -90,7 +90,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
-      teamFeatures: teamFeatures,
+      teamFeatures: access.teamFeatures,
       SPConfigURL,
     },
   };

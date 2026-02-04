@@ -1,4 +1,3 @@
-import { Card } from '@/components/shared';
 import { Team } from '@prisma/client';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -8,7 +7,15 @@ import toast from 'react-hot-toast';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
 import { defaultHeaders } from '@/lib/common';
 import type { ApiResponse } from 'types';
-import DaisyButton from '../shared/daisyUI/DaisyButton';
+import { Button } from '../shadcn/ui/button';
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '../shadcn/ui/card';
+import { Loader2 } from 'lucide-react';
 
 const RemoveTeam = ({ team }: { team: Team }) => {
   const router = useRouter();
@@ -40,23 +47,19 @@ const RemoveTeam = ({ team }: { team: Team }) => {
   return (
     <>
       <Card>
-        <Card.Body>
-          <Card.Header>
-            <Card.Title>{t('remove-team')}</Card.Title>
-            <Card.Description>{t('remove-team-warning')}</Card.Description>
-          </Card.Header>
-        </Card.Body>
-        <Card.Footer>
-          <DaisyButton
-            color="error"
+        <CardHeader>
+          <CardTitle>{t('remove-team')}</CardTitle>
+          <CardDescription>{t('remove-team-warning')}</CardDescription>
+        </CardHeader>
+        <CardFooter className="flex justify-end">
+          <Button
+            variant="destructive"
             onClick={() => setAskConfirmation(true)}
-            loading={loading}
-            variant="outline"
-            size="md"
           >
+            {loading && <Loader2 className="animate-spin" />}
             {t('remove-team')}
-          </DaisyButton>
-        </Card.Footer>
+          </Button>
+        </CardFooter>
       </Card>
       <ConfirmationDialog
         visible={askConfirmation}

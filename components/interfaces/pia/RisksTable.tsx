@@ -1,0 +1,183 @@
+import React from 'react';
+import Link from 'next/link';
+import type { TaskWithPiaRisk } from 'types';
+import { useTranslation } from 'next-i18next';
+import usePagination from 'hooks/usePagination';
+import { StatusBadge } from '@/components/shared';
+import { riskProbabilityPoints, riskSecurityPoints } from '@/lib/pia';
+import PaginationControls from '@/components/shadcn/ui/audit-pagination';
+import { Button } from '@/components/shadcn/ui/button';
+import useCanAccess from 'hooks/useCanAccess';
+import { riskValueToLabelKey } from '@/lib/common';
+
+const calculatePercentage = (input: number): number => {
+  return (input / 16) * 100;
+};
+
+const getBgColorClass = (riskLevel: number): string => {
+  const riskLevels = [
+    { max: 1, class: 'risk-extreme-low' },
+    { max: 40, class: 'risk-low' },
+    { max: 60, class: 'risk-medium' },
+    { max: 80, class: 'risk-high' },
+    { max: 100, class: 'risk-extreme' },
+  ];
+  for (const { max, class: riskClass } of riskLevels) {
+    if (riskLevel <= max) return 'bg-' + riskClass;
+  }
+  return '';
+};
+
+const RisksTable = ({
+  slug,
+  tasks,
+  perPage,
+  editHandler,
+  deleteHandler,
+}: {
+  slug: string;
+  tasks: Array<TaskWithPiaRisk>;
+  perPage: number;
+  editHandler: (task: TaskWithPiaRisk) => void;
+  deleteHandler: (task: TaskWithPiaRisk) => void;
+}) => {
+  const { canAccess } = useCanAccess();
+  const { t } = useTranslation('common');
+  const {
+    currentPage,
+    totalPages,
+    pageData,
+    goToPage,
+    prevButtonDisabled,
+    nextButtonDisabled,
+  } = usePagination<TaskWithPiaRisk>(tasks, perPage);
+
+  return (
+    <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal! mt-2">
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-full divide-y divide-border text-sm">
+          <thead className="bg-muted">
+            <tr>
+              <th scope="col" className="px-1.5 py-1.5 text-left">
+                {t('rpa')}
+              </th>
+              <th scope="col" className="px-1.5 py-1.5 text-left">
+                {t('status')}
+              </th>
+              <th scope="col" className="px-1.5 py-1.5 text-left">
+                {t('confidentiality-and-integrity')}
+              </th>
+              <th scope="col" className="px-1.5 py-1.5 text-left">
+                {t('availability')}
+              </th>
+              <th scope="col" className="px-1.5 py-1.5 text-left">
+                {t('transparency-and-data-minimization')}
+              </th>
+              {canAccess('task', ['update']) && (
+                <th scope="col" className="px-1.5 py-1.5 text-left">
+                  {t('actions')}
+                </th>
+              )}
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border">
+            {pageData.map((task) => {
+              const confidentialityValue = calculatePercentage(
+                riskProbabilityPoints[
+                  task.properties.pia_risk[1].confidentialityRiskProbability
+                ] *
+                  riskSecurityPoints[
+                    task.properties.pia_risk[1].confidentialityRiskSecurity
+                  ]
+              );
+              const availabilityValue = calculatePercentage(
+                riskProbabilityPoints[
+                  task.properties.pia_risk[2].availabilityRiskProbability
+                ] *
+                  riskSecurityPoints[
+                    task.properties.pia_risk[2].availabilityRiskSecurity
+                  ]
+              );
+              const transparencyValue = calculatePercentage(
+                riskProbabilityPoints[
+                  task.properties.pia_risk[3].transparencyRiskProbability
+                ] *
+                  riskSecurityPoints[
+                    task.properties.pia_risk[3].transparencyRiskSecurity
+                  ]
+              );
+
+              return (
+                <tr key={task.id}>
+                  <td className="px-1.5 py-1.5">
+                    <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
+                      <div className="flex items-center justify-start space-x-2">
+                        <span className="underline">{task.title}</span>
+                      </div>
+                    </Link>
+                  </td>
+                  <td className="px-1.5 py-1.5">
+                    <StatusBadge
+                      label={t(`task-statuses.${task.status}`)}
+                      value={task.status}
+                    />
+                  </td>
+                  <td
+                    className={`px-1.5 py-1.5 ${getBgColorClass(confidentialityValue)}`}
+                  >
+                    {t(riskValueToLabelKey(confidentialityValue))}
+                  </td>
+                  <td
+                    className={`px-1.5 py-1.5 ${getBgColorClass(availabilityValue)}`}
+                  >
+                    {t(riskValueToLabelKey(availabilityValue))}
+                  </td>
+                  <td
+                    className={`px-1.5 py-1.5 ${getBgColorClass(transparencyValue)}`}
+                  >
+                    {t(riskValueToLabelKey(transparencyValue))}
+                  </td>
+                  {canAccess('task', ['update']) && (
+                    <td className="px-4 py-2 text-right">
+                      <div className="inline-flex gap-2 justify-end">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => {
+                            editHandler(task);
+                          }}
+                        >
+                          {t('edit-task')}
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          onClick={() => {
+                            deleteHandler(task);
+                          }}
+                        >
+                          {t('delete')}
+                        </Button>
+                      </div>
+                    </td>
+                  )}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      {pageData.length > 0 && (
+        <PaginationControls
+          page={currentPage}
+          totalPages={totalPages}
+          onChange={goToPage}
+          prevButtonDisabled={prevButtonDisabled}
+          nextButtonDisabled={nextButtonDisabled}
+        />
+      )}
+    </div>
+  );
+};
+
+export default RisksTable;

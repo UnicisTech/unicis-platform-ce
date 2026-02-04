@@ -1,5 +1,3 @@
-'use client';
-
 import { defaultHeaders } from '@/lib/common';
 import { availableRoles } from '@/lib/permissions';
 import { Team, TeamMember } from '@prisma/client';

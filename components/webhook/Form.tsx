@@ -63,7 +63,7 @@ const Form = ({
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div>
-              <Label htmlFor="name">Description</Label>
+              <Label htmlFor="name">{t('description')}</Label>
               <Input
                 id="name"
                 name="name"
@@ -82,7 +82,7 @@ const Form = ({
               )}
             </div>
             <div>
-              <Label htmlFor="url">Endpoint</Label>
+              <Label htmlFor="url">{t('endpoint')}</Label>
               <Input
                 id="url"
                 name="url"
@@ -96,7 +96,7 @@ const Form = ({
                 )}
               />
               <p className="text-sm text-muted-foreground mt-1">
-                The endpoint URL must be HTTPS
+                {t('endpoint-must-be-https')}
               </p>
               {formik.errors.url && (
                 <p className="text-xs text-destructive mt-1">

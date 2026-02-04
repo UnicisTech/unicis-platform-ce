@@ -1,0 +1,47 @@
+{
+  "fields": {
+    "Risk": "Risiko",
+    "AssetOwner": "Eigentümer des Assets",
+    "Impact": "Auswirkung",
+    "RawProbability": "Rohwahrscheinlichkeit",
+    "RawImpact": "Rohauswirkung",
+    "RiskTreatment": "Risikobehandlung",
+    "TreatmentCost": "Kosten der Behandlung",
+    "TreatmentStatus": "Status der Behandlung",
+    "TreatedProbability": "Behandelte Wahrscheinlichkeit",
+    "TreatedImpact": "Behandelte Auswirkung"
+  },
+  "headers": {
+    "raw-risk-rating": "Roh-Risikobewertung",
+    "treatment": "Behandlung",
+    "target-risk-rating": "Ziel-Risikobewertung",
+    "current-risk-rating": "Aktuelle Risikobewertung"
+  },
+  "steps": {
+    "riskAndImpact": "Risiko und Auswirkung",
+    "riskTreatment": "Risikobehandlung"
+  },
+  "descriptions": {
+    "risk": "Beschreiben Sie das Informationssicherheitsrisiko kurz, damit andere verstehen, welches Risiko Sie bewerten.",
+    "assetOwner": "Wer ist der Eigentümer des Informationsassets, also die Person, die verantwortlich ist, falls die Risikobehandlungen unzureichend sind, Vorfälle auftreten und die Organisation beeinträchtigt wird? Diese Person muss Risiken angemessen bewerten und behandeln.",
+    "impact": "Beschreiben Sie die potenziellen Auswirkungen in geschäftlichen Begriffen, falls das Risiko eintritt. Entscheiden Sie, ob Sie konsistent die 'Worst-Case'- oder die 'erwarteten' Auswirkungen verwenden.",
+    "rawProbability": "Geben Sie die Wahrscheinlichkeit an, dass das Risiko unbehandelt eintritt, als Prozentwert.",
+    "rawImpact": "Geben Sie die potenzielle geschäftliche Auswirkung an, falls das Risiko unbehandelt eintritt, als Prozentwert.",
+    "riskTreatment": "Beschreiben Sie, wie das Risiko behandelt werden soll (z. B. kontrolliert, vermieden, übertragen oder akzeptiert).",
+    "treatmentStatus": "In welchem Maße ist die geplante Behandlung umgesetzt? 0 % bedeutet, dass nur ein Plan existiert; 100 % bedeutet, dass die Behandlung vollständig operational ist.",
+    "treatedProbability": "Geben Sie die Wahrscheinlichkeit an, dass das Risiko nach der Minderung eintritt.",
+    "treatedImpact": "Geben Sie die wahrscheinliche Auswirkung nach der Minderung an. Vorfälle aufgrund von Kontrollversagen können höhere Auswirkungen haben. Markieren Sie behandelte Werte fett, wenn sie sich von den Rohwerten unterscheiden."
+  },
+  "placeholders": {
+    "riskDescription": "Risiko beschreiben",
+    "assetOwner": "Eigentümer auswählen",
+    "impactDescription": "Auswirkung beschreiben",
+    "treatmentApproach": "Behandlungsansatz beschreiben",
+    "costEstimate": "Kosten schätzen"
+  },
+  "form-labels": {
+    "TreatmentStatus": "Status der Behandlung (%)",
+    "TreatedProbability": "Behandelte Wahrscheinlichkeit (%)",
+    "RawProbability": "Rohwahrscheinlichkeit (%)"
+  }
+}

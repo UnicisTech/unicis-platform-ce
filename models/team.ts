@@ -3,10 +3,10 @@ import { getCscStatusesProp } from '@/lib/csc';
 import { getSession } from '@/lib/session';
 import { findOrCreateApp } from '@/lib/svix';
 import { Role } from '@prisma/client';
-import { controls } from '@/components/defaultLanding/data/configs/csc';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { ISO, TeamProperties } from 'types';
 import { addSubscription } from './subscription';
+import frameworks from '@/lib/csc/frameworks';
 
 export const createTeam = async (param: {
   userEmail: string;
@@ -150,18 +150,6 @@ export async function getTeamRoles(userId: string) {
   return teamRoles;
 }
 
-// Check if the user is an admin or owner of the team
-export async function isTeamAdmin(userId: string, teamId: string) {
-  const teamMember = await prisma.teamMember.findFirstOrThrow({
-    where: {
-      userId,
-      teamId,
-    },
-  });
-
-  return teamMember.role === Role.ADMIN || teamMember.role === Role.OWNER;
-}
-
 export const getTeamMembers = async (slug: string) => {
   return await prisma.teamMember.findMany({
     where: {
@@ -291,8 +279,8 @@ export const getCscStatusesBySlugAndIso = async (slug: string, iso: ISO) => {
 
   // not found → initialize with "Unknown"
   const initial: Record<string, string> = {};
-  controls[iso].forEach((control) => {
-    initial[control.Control] = 'Unknown';
+  frameworks[iso].controls.forEach((control) => {
+    initial[control.id] = 'unknown';
   });
 
   await prisma.team.update({
@@ -365,7 +353,7 @@ export const getCscIso = async ({ slug }: { slug: string }): Promise<ISO[]> => {
   }
 
   // TODO: create enum form ISO type
-  const initial = ['default'] as ISO[];
+  const initial = ['mvps'] as ISO[];
 
   const updatedProperties = {
     ...teamProperties,

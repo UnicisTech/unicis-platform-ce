@@ -14,11 +14,6 @@ type R_3_0 = '3' | '0';
 
 type R_4_0 = '4' | '0';
 
-type Country = {
-  label: string;
-  value: string;
-};
-
 //TODO: get rid of this type
 export type TiaOption = {
   label: string;
@@ -33,103 +28,18 @@ export type TiaAuditLog = {
   diff: Diff;
 };
 
-export const defaultProcedure = [
-  {
-    DataExporter: '',
-    CountryDataExporter: null,
-    DataImporter: '',
-    CountryDataImporter: null,
-    TransferScenario: '',
-    DataAtIssue: '',
-    HowDataTransfer: '',
-    StartDateAssessment: '',
-    AssessmentYears: 1,
-    LawImporterCountry: null,
-  },
-  {
-    EncryptionInTransit: 'yes',
-    ReasonEncryptionInTransit: '',
-    TransferMechanism: 'yes',
-    ReasonTransferMechanism: '',
-    LawfulAccess: 'yes',
-    ReasonLawfulAccess: '',
-    MassSurveillanceTelecommunications: 'yes',
-    ReasonMassSurveillanceTelecommunications: '',
-    SelfReportingObligations: 'yes',
-    ReasonSelfReportingObligations: '',
-  },
-  {
-    WarrantsSubpoenas: '1',
-    ReasonWarrantsSubpoenas: '',
-    ViolationLocalLaw: '1',
-    ReasonViolationLocalLaw: '',
-    HighViolationLocalLaw: '2',
-    ReasonHighViolationLocalLaw: '',
-    HighViolationDataIssue: '2',
-    ReasonHighViolationDataIssue: '',
-    InvestigatingImporter: '2',
-    ReasonInvestigatingImporter: '',
-    PastWarrantSubpoena: '3',
-    ReasonPastWarrantSubpoena: '',
-    DataIssueInvestigation: '0',
-    ReasonDataIssueInvestigation: '',
-
-    LocalIssueWarrants: '2',
-    ReasonLocalIssueWarrants: '',
-    LocalMassSurveillance: '3',
-    ReasonLocalMassSurveillance: '',
-    LocalAccessMassSurveillance: '1',
-    ReasonLocalAccessMassSurveillance: '',
-    LocalRoutinelyMonitor: '2',
-    ReasonLocalRoutinelyMonitor: '',
-    PassMassSurveillance: '4',
-    ReasonPassMassSurveillance: '',
-    PassMassSurveillanceConnection: '0',
-    ReasonPassMassSurveillanceConnection: '',
-    ImporterObligation: '2',
-    ReasonImporterObligation: '',
-    LocalSelfReporting: '2',
-    ReasonLocalSelfReporting: '',
-    PastSelfReporting: '4',
-    ReasonPastSelfReporting: '',
-    AssessmentProduceReport: '0',
-    ReasonAssessmentProduceReport: '',
-  },
-  {
-    RelevantDataTransferImporter: '',
-    ProbabilityDataTransferImporter: '',
-    ReasonDataTransferImporter: '',
-    RelevantTransferToImporter: '',
-    ProbabilityTransferToImporter: '',
-    ReasonTransferToImporter: '',
-    RelevantTransferToImporterForPerformance: '',
-    ProbabilityTransferToImporterPerformance: '',
-    ReasonTransferToImporterPerformance: '',
-    RelevantLegalGround: '',
-    ProbabilityLegalGround: '',
-    ReasonLegalGround: '',
-
-    ConnectionTargetedAccess: 'yes',
-    ReasonConnectionTargetedAccess: '',
-    ConnectionSurveillanceTele: 'yes',
-    ReasonConnectionSurveillanceTele: '',
-    ConnectionSelfreportingObligations: 'yes',
-    ReasonConnectionSelfreportingObligations: '',
-  },
-];
-
 export type TiaProcedureInterface = [
   {
     DataExporter: string;
-    CountryDataExporter: Country;
+    CountryDataExporter: string;
     DataImporter: string;
-    CountryDataImporter: Country;
+    CountryDataImporter: string;
     TransferScenario: string;
     DataAtIssue: string;
     HowDataTransfer: string;
     StartDateAssessment: string;
     AssessmentYears: number;
-    LawImporterCountry: Country;
+    LawImporterCountry: string;
   },
   {
     EncryptionInTransit: R_Yes_No_Na;
@@ -212,9 +122,3 @@ export type TaskTiaProperties = {
   tia_procedure?: TiaProcedureInterface | [];
   tia_audit_logs: TiaAuditLog[];
 };
-
-// export type Diff = {
-//   field: string;
-//   prevValue: string | string[] | undefined;
-//   nextValue: string | string[];
-// } | null;

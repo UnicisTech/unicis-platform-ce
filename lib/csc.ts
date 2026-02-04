@@ -7,20 +7,14 @@ import type {
   TaskProperties,
 } from 'types';
 
-export const getCscControlsProp = (ISO: ISO): CscControlsProp => {
-  const cscStatusesProp = `csc_controls${
-    ISO !== 'default' ? `_${ISO}` : ''
-  }` as CscControlsProp;
-  return cscStatusesProp;
-};
+// TODO: move to csc/helpers.js
+export const getCscControlsProp = (ISO: ISO): CscControlsProp =>
+  `csc_controls_${ISO}`;
 
-export const getCscStatusesProp = (ISO: ISO): CscStatusesProp => {
-  const cscStatusesProp = `csc_statuses${
-    ISO !== 'default' ? `_${ISO}` : ''
-  }` as CscStatusesProp;
-  return cscStatusesProp;
-};
+export const getCscStatusesProp = (ISO: ISO): CscStatusesProp =>
+  `csc_statuses_${ISO}`;
 
+// TODO: move to models? or to csc folder
 export const addControlsToIssue = async (params: {
   user: Session['user'];
   taskNumber: number;

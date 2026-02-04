@@ -1,3 +1,5 @@
+/* eslint-disable i18next/no-literal-string */
+
 import app from '@/lib/app';
 import {
   Button,

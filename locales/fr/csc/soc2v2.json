@@ -1,0 +1,1835 @@
+{
+  "sections": {
+    "control-environment": {
+      "label": "Environnement de contrôle"
+    },
+    "communication-information": {
+      "label": "Communication et information"
+    },
+    "risk-assessment": {
+      "label": "Évaluation des risques"
+    },
+    "monitoring-activities": {
+      "label": "Activités de surveillance"
+    },
+    "control-activities": {
+      "label": "Activités de contrôle"
+    },
+    "logical-physical-access": {
+      "label": "Contrôles d’accès logique et physique"
+    },
+    "system-operations": {
+      "label": "Opérations du système"
+    },
+    "change-management": {
+      "label": "Gestion des changements"
+    },
+    "risk-mitigation": {
+      "label": "Atténuation des risques"
+    },
+    "availability": {
+      "label": "Critères supplémentaires relatifs à la disponibilité"
+    },
+    "confidentiality": {
+      "label": "Critères supplémentaires relatifs à la confidentialité"
+    },
+    "processing-integrity": {
+      "label": "Critères supplémentaires relatifs à l’intégrité du traitement"
+    },
+    "privacy": {
+      "label": "Critères supplémentaires relatifs à la vie privée"
+    }
+  },
+  "controls": {
+    "soc2-v2-cc1-1": {
+      "code": "CC1.1",
+      "control": "Principe COSO 1",
+      "requirements": "L’entité démontre un engagement en faveur de l’intégrité et des valeurs éthiques."
+    },
+    "soc2-v2-cc1-1-1": {
+      "code": "CC1.1.1",
+      "control": "Principe COSO 1",
+      "requirements": "Donne le ton au sommet — Le conseil d’administration et la direction, à tous les niveaux, démontrent, par leurs directives, leurs actions et leur comportement, l’importance de l’intégrité et des valeurs éthiques afin de soutenir le fonctionnement du système de contrôle interne."
+    },
+    "soc2-v2-cc1-1-2": {
+      "code": "CC1.1.2",
+      "control": "Principe COSO 1",
+      "requirements": "Établit des normes de conduite — Les attentes du conseil d’administration et de la haute direction concernant l’intégrité et les valeurs éthiques sont définies dans les normes de conduite de l’entité et sont comprises à tous les niveaux de l’entité ainsi que par les prestataires de services externalisés et les partenaires commerciaux."
+    },
+    "soc2-v2-cc1-1-3": {
+      "code": "CC1.1.3",
+      "control": "Principe COSO 1",
+      "requirements": "Évalue le respect des normes de conduite — Des processus sont en place pour évaluer la performance des individus et des équipes au regard des normes de conduite attendues de l’entité."
+    },
+    "soc2-v2-cc1-1-4": {
+      "code": "CC1.1.4",
+      "control": "Principe COSO 1",
+      "requirements": "Traite les écarts en temps opportun — Les écarts par rapport aux normes de conduite attendues de l’entité sont identifiés et corrigés en temps opportun et de manière cohérente."
+    },
+    "soc2-v2-cc1-1-5": {
+      "code": "CC1.1.5",
+      "control": "Principe COSO 1",
+      "requirements": "Prend en compte les contractants et les employés des fournisseurs dans la démonstration de son engagement — La direction et le conseil d’administration prennent en compte le recours à des contractants et à des employés des fournisseurs dans ses processus visant à établir des normes de conduite, à évaluer le respect de ces normes et à traiter les écarts en temps opportun."
+    },
+    "soc2-v2-cc1-2": {
+      "code": "CC1.2",
+      "control": "Principe COSO 2",
+      "requirements": "Le conseil d’administration démontre son indépendance vis-à-vis de la direction et exerce une supervision de l’élaboration et de la performance du contrôle interne."
+    },
+    "soc2-v2-cc1-2-1": {
+      "code": "CC1.2.1",
+      "control": "Principe COSO 2",
+      "requirements": "Établit des responsabilités de supervision — Le conseil d’administration identifie et accepte ses responsabilités de supervision au regard des exigences et des attentes établies."
+    },
+    "soc2-v2-cc1-2-2": {
+      "code": "CC1.2.2",
+      "control": "Principe COSO 2",
+      "requirements": "Applique une expertise pertinente — Le conseil d’administration définit, maintient et évalue périodiquement les compétences et l’expertise nécessaires parmi ses membres afin de leur permettre de poser des questions approfondies à la haute direction et de prendre des mesures proportionnées."
+    },
+    "soc2-v2-cc1-2-3": {
+      "code": "CC1.2.3",
+      "control": "Principe COSO 2",
+      "requirements": "Fonctionne de manière indépendante — Le conseil d’administration compte un nombre suffisant de membres indépendants de la direction et objectifs dans les évaluations et la prise de décision."
+    },
+    "soc2-v2-cc1-2-4": {
+      "code": "CC1.2.4",
+      "control": "Principe COSO 2",
+      "requirements": "Complète l’expertise du conseil — Le conseil d’administration complète, au besoin, son expertise relative à la sécurité, à la disponibilité, à l’intégrité du traitement, à la confidentialité et à la vie privée, par le recours à un sous-comité ou à des consultants."
+    },
+    "soc2-v2-cc1-3": {
+      "code": "CC1.3",
+      "control": "Principe COSO 3",
+      "requirements": "La direction établit, sous la supervision du conseil, des structures, des lignes de reporting et des autorités et responsabilités appropriées dans la poursuite des objectifs."
+    },
+    "soc2-v2-cc1-3-1": {
+      "code": "CC1.3.1",
+      "control": "Principe COSO 3",
+      "requirements": "Prend en compte toutes les structures de l’entité — La direction et le conseil d’administration prennent en compte les multiples structures utilisées (y compris les unités opérationnelles, les entités juridiques, la répartition géographique et les prestataires de services externalisés) pour soutenir l’atteinte des objectifs."
+    },
+    "soc2-v2-cc1-3-2": {
+      "code": "CC1.3.2",
+      "control": "Principe COSO 3",
+      "requirements": "Établit des lignes de reporting — La direction conçoit et évalue des lignes de reporting pour chaque structure de l’entité afin de permettre l’exécution des autorités et des responsabilités ainsi que la circulation des informations pour gérer les activités de l’entité."
+    },
+    "soc2-v2-cc1-3-3": {
+      "code": "CC1.3.3",
+      "control": "Principe COSO 3",
+      "requirements": "Définit, attribue et limite les autorités et les responsabilités — La direction et le conseil d’administration délèguent l’autorité, définissent les responsabilités et utilisent des processus et des technologies appropriés pour attribuer les responsabilités et séparer les tâches, selon les besoins, aux différents niveaux de l’organisation."
+    },
+    "soc2-v2-cc1-3-4": {
+      "code": "CC1.3.4",
+      "control": "Principe COSO 3",
+      "requirements": "Traite des exigences spécifiques lors de la définition des autorités et des responsabilités — La direction et le conseil d’administration prennent en compte les exigences relatives à la sécurité, à la disponibilité, à l’intégrité du traitement, à la confidentialité et à la vie privée lors de la définition des autorités et des responsabilités."
+    },
+    "soc2-v2-cc1-3-5": {
+      "code": "CC1.3.5",
+      "control": "Principe COSO 3",
+      "requirements": "Prend en compte les interactions avec des parties externes lors de l’établissement des structures, des lignes de reporting, des autorités et des responsabilités — La direction et le conseil d’administration prennent en compte la nécessité pour l’entité d’interagir avec des parties externes et de surveiller leurs activités lors de l’établissement des structures, des lignes de reporting, des autorités et des responsabilités."
+    },
+    "soc2-v2-cc1-4": {
+      "code": "CC1.4",
+      "control": "Principe COSO 4",
+      "requirements": "L’entité démontre un engagement à attirer, développer et retenir des individus compétents en alignement avec les objectifs."
+    },
+    "soc2-v2-cc1-4-1": {
+      "code": "CC1.4.1",
+      "control": "Principe COSO 4",
+      "requirements": "Établit des politiques et des pratiques — Les politiques et les pratiques reflètent les attentes en matière de compétence nécessaires pour soutenir l’atteinte des objectifs."
+    },
+    "soc2-v2-cc1-4-2": {
+      "code": "CC1.4.2",
+      "control": "Principe COSO 4",
+      "requirements": "Évalue la compétence et traite les insuffisances — Le conseil d’administration et la direction évaluent la compétence au sein de l’entité et chez les prestataires de services externalisés au regard des politiques et des pratiques établies et agissent, au besoin, pour traiter les insuffisances."
+    },
+    "soc2-v2-cc1-4-3": {
+      "code": "CC1.4.3",
+      "control": "Principe COSO 4",
+      "requirements": "Attire, développe et retient des individus — L’entité fournit le mentorat et la formation nécessaires pour attirer, développer et retenir un personnel et des prestataires de services externalisés suffisants et compétents afin de soutenir l’atteinte des objectifs."
+    },
+    "soc2-v2-cc1-4-4": {
+      "code": "CC1.4.4",
+      "control": "Principe COSO 4",
+      "requirements": "Planifie et prépare la succession — La haute direction et le conseil d’administration élaborent des plans de contingence pour l’attribution de responsabilités importantes pour le contrôle interne."
+    },
+    "soc2-v2-cc1-4-5": {
+      "code": "CC1.4.5",
+      "control": "Principe COSO 4",
+      "requirements": "Prend en compte les antécédents des individus — L’entité prend en compte les antécédents du personnel potentiel et existant, des contractants et des employés des fournisseurs lorsqu’elle détermine s’il convient d’employer et de retenir ces individus."
+    },
+    "soc2-v2-cc1-4-6": {
+      "code": "CC1.4.6",
+      "control": "Principe COSO 4",
+      "requirements": "Prend en compte la compétence technique des individus — L’entité prend en compte la compétence technique du personnel potentiel et existant, des contractants et des employés des fournisseurs lorsqu’elle détermine s’il convient d’employer et de retenir ces individus."
+    },
+    "soc2-v2-cc1-4-7": {
+      "code": "CC1.4.7",
+      "control": "Principe COSO 4",
+      "requirements": "Fournit des formations pour maintenir les compétences techniques — L’entité fournit des programmes de formation, y compris la formation continue et l’éducation continue, afin de garantir que les ensembles de compétences et la compétence technique du personnel existant, des contractants et des employés des fournisseurs sont développés et maintenus."
+    },
+    "soc2-v2-cc1-5": {
+      "code": "CC1.5",
+      "control": "Principe COSO 5",
+      "requirements": "L’entité tient les individus responsables de leurs responsabilités en matière de contrôle interne dans la poursuite des objectifs."
+    },
+    "soc2-v2-cc1-5-1": {
+      "code": "CC1.5.1",
+      "control": "Principe COSO 5",
+      "requirements": "Fait respecter la responsabilité au moyen de structures, d’autorités et de responsabilités — La direction et le conseil d’administration établissent les mécanismes permettant de communiquer et de tenir les individus responsables de la performance des responsabilités de contrôle interne dans l’ensemble de l’entité et mettent en œuvre des actions correctives au besoin."
+    },
+    "soc2-v2-cc1-5-2": {
+      "code": "CC1.5.2",
+      "control": "Principe COSO 5",
+      "requirements": "Établit des mesures de performance, des incitations et des récompenses — La direction et le conseil d’administration établissent des mesures de performance, des incitations et d’autres récompenses appropriées aux responsabilités à tous les niveaux de l’entité, reflétant des dimensions appropriées de la performance et les normes de conduite attendues, et prenant en compte l’atteinte des objectifs à court terme et à plus long terme."
+    },
+    "soc2-v2-cc1-5-3": {
+      "code": "CC1.5.3",
+      "control": "Principe COSO 5",
+      "requirements": "Évalue la pertinence continue des mesures de performance, des incitations et des récompenses — La direction et le conseil d’administration alignent les incitations et les récompenses avec l’accomplissement des responsabilités de contrôle interne dans l’atteinte des objectifs."
+    },
+    "soc2-v2-cc1-5-4": {
+      "code": "CC1.5.4",
+      "control": "Principe COSO 5",
+      "requirements": "Prend en compte les pressions excessives — La direction et le conseil d’administration évaluent et ajustent les pressions associées à l’atteinte des objectifs lorsqu’ils attribuent des responsabilités, élaborent des mesures de performance et évaluent la performance."
+    },
+    "soc2-v2-cc1-5-5": {
+      "code": "CC1.5.5",
+      "control": "Principe COSO 5",
+      "requirements": "Évalue la performance et récompense ou sanctionne les individus — La direction et le conseil d’administration évaluent la performance des responsabilités de contrôle interne, y compris le respect des normes de conduite et des niveaux de compétence attendus, et accordent des récompenses ou exercent des mesures disciplinaires, selon le cas."
+    },
+    "soc2-v2-cc2-1": {
+      "code": "CC2.1",
+      "control": "Principe COSO 13",
+      "requirements": "L’entité obtient ou génère et utilise des informations pertinentes et de qualité pour soutenir le fonctionnement du contrôle interne."
+    },
+    "soc2-v2-cc2-1-1": {
+      "code": "CC2.1.1",
+      "control": "Principe COSO 13",
+      "requirements": "Identifie les besoins en information — Un processus est en place pour identifier les informations requises et attendues afin de soutenir le fonctionnement des autres composantes du contrôle interne et l’atteinte des objectifs de l’entité."
+    },
+    "soc2-v2-cc2-1-2": {
+      "code": "CC2.1.2",
+      "control": "Principe COSO 13",
+      "requirements": "Capte des sources internes et externes de données — Les systèmes d’information captent des sources internes et externes de données."
+    },
+    "soc2-v2-cc2-1-3": {
+      "code": "CC2.1.3",
+      "control": "Principe COSO 13",
+      "requirements": "Traite les données pertinentes en informations — Les systèmes d’information traitent et transforment les données pertinentes en informations."
+    },
+    "soc2-v2-cc2-1-4": {
+      "code": "CC2.1.4",
+      "control": "Principe COSO 13",
+      "requirements": "Maintient la qualité tout au long du traitement — Les systèmes d’information produisent des informations en temps utile, actuelles, exactes, complètes, accessibles, protégées, vérifiables et conservées. Les informations sont examinées afin d’évaluer leur pertinence pour soutenir les composantes du contrôle interne."
+    },
+    "soc2-v2-cc2-2": {
+      "code": "CC2.2",
+      "control": "Principe COSO 14",
+      "requirements": "L’entité communique en interne des informations, y compris les objectifs et les responsabilités en matière de contrôle interne, nécessaires pour soutenir le fonctionnement du contrôle interne."
+    },
+    "soc2-v2-cc2-2-1": {
+      "code": "CC2.2.1",
+      "control": "Principe COSO 14",
+      "requirements": "Communique des informations sur le contrôle interne — Un processus est en place pour communiquer les informations requises afin de permettre à tout le personnel de comprendre et d’exécuter ses responsabilités en matière de contrôle interne."
+    },
+    "soc2-v2-cc2-2-2": {
+      "code": "CC2.2.2",
+      "control": "Principe COSO 14",
+      "requirements": "Communique avec le conseil d’administration — Une communication existe entre la direction et le conseil d’administration afin que tous deux disposent des informations nécessaires pour remplir leurs rôles au regard des objectifs de l’entité."
+    },
+    "soc2-v2-cc2-2-3": {
+      "code": "CC2.2.3",
+      "control": "Principe COSO 14",
+      "requirements": "Fournit des lignes de communication distinctes — Des canaux de communication distincts, tels que des lignes d’alerte (« whistle-blower »), sont en place et servent de mécanismes de secours permettant une communication anonyme ou confidentielle lorsque les canaux normaux sont inopérants ou inefficaces."
+    },
+    "soc2-v2-cc2-2-4": {
+      "code": "CC2.2.4",
+      "control": "Principe COSO 14",
+      "requirements": "Sélectionne une méthode de communication pertinente — La méthode de communication tient compte du calendrier, du public et de la nature de l’information."
+    },
+    "soc2-v2-cc2-2-5": {
+      "code": "CC2.2.5",
+      "control": "Principe COSO 14",
+      "requirements": "Communique les responsabilités — Le personnel de l’entité responsable de la conception, du développement, de la mise en œuvre, de l’exploitation, de la maintenance ou de la surveillance des contrôles du système reçoit des communications sur ses responsabilités, y compris les changements de ses responsabilités, et dispose des informations nécessaires pour les exécuter."
+    },
+    "soc2-v2-cc2-2-6": {
+      "code": "CC2.2.6",
+      "control": "Principe COSO 14",
+      "requirements": "Communique des informations sur la déclaration des défaillances, incidents, préoccupations et autres sujets — Le personnel de l’entité reçoit des informations sur la manière de signaler des défaillances du système, des incidents, des préoccupations et d’autres plaintes au personnel compétent."
+    },
+    "soc2-v2-cc2-2-7": {
+      "code": "CC2.2.7",
+      "control": "Principe COSO 14",
+      "requirements": "Communique les objectifs et les changements d’objectifs — L’entité communique ses objectifs et les changements apportés à ces objectifs au personnel en temps opportun."
+    },
+    "soc2-v2-cc2-2-8": {
+      "code": "CC2.2.8",
+      "control": "Principe COSO 14",
+      "requirements": "Communique des informations pour améliorer la connaissance et la sensibilisation à la sécurité — L’entité communique des informations pour améliorer la connaissance et la sensibilisation à la sécurité et pour modéliser des comportements de sécurité appropriés auprès du personnel au moyen d’un programme de sensibilisation à la sécurité."
+    },
+    "soc2-v2-cc2-2-9": {
+      "code": "CC2.2.9",
+      "control": "Principe COSO 14",
+      "requirements": "Communique des informations sur le fonctionnement et les limites du système — L’entité prépare et communique des informations sur la conception et le fonctionnement du système et ses limites au personnel autorisé afin de lui permettre de comprendre son rôle dans le système et les résultats du fonctionnement du système."
+    },
+    "soc2-v2-cc2-2-10": {
+      "code": "CC2.2.10",
+      "control": "Principe COSO 14",
+      "requirements": "Communique les objectifs du système — L’entité communique ses objectifs au personnel afin de lui permettre d’exécuter ses responsabilités."
+    },
+    "soc2-v2-cc2-2-11": {
+      "code": "CC2.2.11",
+      "control": "Principe COSO 14",
+      "requirements": "Communique les changements du système — Les changements du système qui affectent les responsabilités ou l’atteinte des objectifs de l’entité sont communiqués en temps opportun."
+    },
+    "soc2-v2-cc2-3": {
+      "code": "CC2.3",
+      "control": "Principe COSO 15",
+      "requirements": "L’entité communique avec des parties externes concernant des sujets affectant le fonctionnement du contrôle interne."
+    },
+    "soc2-v2-cc2-3-1": {
+      "code": "CC2.3.1",
+      "control": "Principe COSO 15",
+      "requirements": "Communique aux parties externes — Des processus sont en place pour communiquer des informations pertinentes et en temps utile aux parties externes, y compris les actionnaires, les partenaires, les propriétaires, les régulateurs, les clients, les analystes financiers et d’autres parties externes."
+    },
+    "soc2-v2-cc2-3-2": {
+      "code": "CC2.3.2",
+      "control": "Principe COSO 15",
+      "requirements": "Permet les communications entrantes — Des canaux de communication ouverts permettent des retours de la part des clients, des consommateurs, des fournisseurs, des auditeurs externes, des régulateurs, des analystes financiers et d’autres, fournissant à la direction et au conseil d’administration des informations pertinentes."
+    },
+    "soc2-v2-cc2-3-3": {
+      "code": "CC2.3.3",
+      "control": "Principe COSO 15",
+      "requirements": "Communique avec le conseil d’administration — Les informations pertinentes résultant d’évaluations menées par des parties externes sont communiquées au conseil d’administration."
+    },
+    "soc2-v2-cc2-3-4": {
+      "code": "CC2.3.4",
+      "control": "Principe COSO 15",
+      "requirements": "Fournit des lignes de communication distinctes — Des canaux de communication distincts, tels que des lignes d’alerte (« whistle-blower »), sont en place et servent de mécanismes de secours permettant une communication anonyme ou confidentielle lorsque les canaux normaux sont inopérants ou inefficaces."
+    },
+    "soc2-v2-cc2-3-5": {
+      "code": "CC2.3.5",
+      "control": "Principe COSO 15",
+      "requirements": "Sélectionne une méthode de communication pertinente — La méthode de communication tient compte du calendrier, du public et de la nature de la communication ainsi que des exigences et attentes juridiques, réglementaires et fiduciaires."
+    },
+    "soc2-v2-cc2-3-6": {
+      "code": "CC2.3.6",
+      "control": "Principe COSO 15",
+      "requirements": "Communique des objectifs relatifs à la confidentialité et les changements d’objectifs — L’entité communique, aux utilisateurs externes, aux fournisseurs, aux partenaires commerciaux et à d’autres dont les produits et services font partie du système, les objectifs et les changements d’objectifs relatifs à la confidentialité."
+    },
+    "soc2-v2-cc2-3-7": {
+      "code": "CC2.3.7",
+      "control": "Principe COSO 15",
+      "requirements": "Communique des objectifs relatifs à la vie privée et les changements d’objectifs — L’entité communique, aux utilisateurs externes, aux fournisseurs, aux partenaires commerciaux et à d’autres dont les produits et services font partie du système, les objectifs relatifs à la vie privée et les changements apportés à ces objectifs."
+    },
+    "soc2-v2-cc2-3-8": {
+      "code": "CC2.3.8",
+      "control": "Principe COSO 15",
+      "requirements": "Communique des informations sur le fonctionnement et les limites du système — L’entité prépare et communique des informations sur la conception et le fonctionnement du système et ses limites aux utilisateurs externes autorisés afin de permettre aux utilisateurs de comprendre leur rôle dans le système et les résultats du fonctionnement du système."
+    },
+    "soc2-v2-cc2-3-9": {
+      "code": "CC2.3.9",
+      "control": "Principe COSO 15",
+      "requirements": "Communique les objectifs du système — L’entité communique ses objectifs de système aux utilisateurs externes appropriés."
+    },
+    "soc2-v2-cc2-3-10": {
+      "code": "CC2.3.10",
+      "control": "Principe COSO 15",
+      "requirements": "Communique les responsabilités du système — Les utilisateurs externes responsables de la conception, du développement, de la mise en œuvre, de l’exploitation, de la maintenance et de la surveillance des contrôles du système reçoivent des communications sur leurs responsabilités et disposent des informations nécessaires pour les exécuter."
+    },
+    "soc2-v2-cc2-3-11": {
+      "code": "CC2.3.11",
+      "control": "Principe COSO 15",
+      "requirements": "Communique des informations sur la déclaration des défaillances, incidents, préoccupations et autres sujets du système — Les utilisateurs externes reçoivent des informations sur la manière de signaler des défaillances du système, des incidents, des préoccupations et d’autres plaintes au personnel compétent."
+    },
+    "soc2-v2-cc3-1": {
+      "code": "CC3.1",
+      "control": "Principe COSO 6",
+      "requirements": "L’entité précise des objectifs avec une clarté suffisante pour permettre l’identification et l’évaluation des risques liés aux objectifs."
+    },
+    "soc2-v2-cc3-1-1": {
+      "code": "CC3.1.1",
+      "control": "Principe COSO 6",
+      "requirements": "Objectifs opérationnels — Reflète les choix de la direction — Les objectifs opérationnels reflètent les choix de la direction concernant la structure, les considérations sectorielles et la performance de l’entité."
+    },
+    "soc2-v2-cc3-1-2": {
+      "code": "CC3.1.2",
+      "control": "Principe COSO 6",
+      "requirements": "Prend en compte les tolérances au risque — La direction prend en compte les niveaux acceptables de variation au regard de l’atteinte des objectifs opérationnels."
+    },
+    "soc2-v2-cc3-1-3": {
+      "code": "CC3.1.3",
+      "control": "Principe COSO 6",
+      "requirements": "Inclut des objectifs opérationnels et de performance financière — L’organisation reflète le niveau souhaité de performance opérationnelle et financière de l’entité dans les objectifs opérationnels."
+    },
+    "soc2-v2-cc3-1-4": {
+      "code": "CC3.1.4",
+      "control": "Principe COSO 6",
+      "requirements": "Constitue une base pour l’engagement des ressources — La direction utilise les objectifs opérationnels comme base pour allouer les ressources nécessaires afin d’atteindre la performance opérationnelle et financière souhaitée."
+    },
+    "soc2-v2-cc3-1-5": {
+      "code": "CC3.1.5",
+      "control": "Principe COSO 6",
+      "requirements": "Objectifs de reporting financier externe — Se conforme aux normes comptables applicables — Les objectifs de reporting financier sont cohérents avec des principes comptables appropriés et disponibles pour cette entité. Les principes comptables sélectionnés sont appropriés aux circonstances."
+    },
+    "soc2-v2-cc3-1-6": {
+      "code": "CC3.1.6",
+      "control": "Principe COSO 6",
+      "requirements": "Prend en compte le caractère significatif — La direction prend en compte le caractère significatif dans la présentation des états financiers."
+    },
+    "soc2-v2-cc3-1-7": {
+      "code": "CC3.1.7",
+      "control": "Principe COSO 6",
+      "requirements": "Reflète les activités de l’entité — Le reporting externe reflète les transactions et événements sous-jacents afin de présenter des caractéristiques qualitatives et des assertions."
+    },
+    "soc2-v2-cc3-1-8": {
+      "code": "CC3.1.8",
+      "control": "Principe COSO 6",
+      "requirements": "Objectifs de reporting externe non financier — Se conforme à des cadres établis en externe — La direction établit des objectifs cohérents avec des lois et règlements ou des normes et cadres d’organisations externes reconnues."
+    },
+    "soc2-v2-cc3-1-9": {
+      "code": "CC3.1.9",
+      "control": "Principe COSO 6",
+      "requirements": "Prend en compte le niveau de précision requis — La direction reflète le niveau de précision et d’exactitude requis, adapté aux besoins des utilisateurs et fondé sur des critères établis par des tiers dans le reporting non financier."
+    },
+    "soc2-v2-cc3-1-10": {
+      "code": "CC3.1.10",
+      "control": "Principe COSO 6",
+      "requirements": "Reflète les activités de l’entité — Le reporting externe reflète les transactions et événements sous-jacents dans une plage de limites acceptables."
+    },
+    "soc2-v2-cc3-1-11": {
+      "code": "CC3.1.11",
+      "control": "Principe COSO 6",
+      "requirements": "Objectifs de reporting interne — Reflète les choix de la direction — Le reporting interne fournit à la direction des informations exactes et complètes concernant ses choix et les informations nécessaires à la gestion de l’entité."
+    },
+    "soc2-v2-cc3-1-12": {
+      "code": "CC3.1.12",
+      "control": "Principe COSO 6",
+      "requirements": "Prend en compte le niveau de précision requis — La direction reflète le niveau de précision et d’exactitude requis, adapté aux besoins des utilisateurs, dans les objectifs de reporting non financier et la matérialité dans les objectifs de reporting financier."
+    },
+    "soc2-v2-cc3-1-13": {
+      "code": "CC3.1.13",
+      "control": "Principe COSO 6",
+      "requirements": "Reflète les activités de l’entité — Le reporting interne reflète les transactions et événements sous-jacents dans une plage de limites acceptables."
+    },
+    "soc2-v2-cc3-1-14": {
+      "code": "CC3.1.14",
+      "control": "Principe COSO 6",
+      "requirements": "Objectifs de conformité — Reflète les lois et réglementations externes — Les lois et réglementations établissent des normes minimales de conduite, que l’entité intègre dans ses objectifs de conformité."
+    },
+    "soc2-v2-cc3-1-15": {
+      "code": "CC3.1.15",
+      "control": "Principe COSO 6",
+      "requirements": "Prend en compte les tolérances au risque — La direction prend en compte les niveaux acceptables de variation au regard de l’atteinte des objectifs opérationnels."
+    },
+    "soc2-v2-cc3-1-16": {
+      "code": "CC3.1.16",
+      "control": "Principe COSO 6",
+      "requirements": "Établit des sous-objectifs pour soutenir les objectifs — La direction identifie des sous-objectifs liés à la sécurité, à la disponibilité, à l’intégrité du traitement, à la confidentialité et à la vie privée afin de soutenir l’atteinte des objectifs de l’entité relatifs au reporting, aux opérations et à la conformité."
+    },
+    "soc2-v2-cc3-2": {
+      "code": "CC3.2",
+      "control": "Principe COSO 7",
+      "requirements": "L’entité identifie les risques susceptibles d’affecter l’atteinte de ses objectifs à l’échelle de l’entité et analyse ces risques comme base pour déterminer comment ils doivent être gérés."
+    },
+    "soc2-v2-cc3-2-1": {
+      "code": "CC3.2.1",
+      "control": "Principe COSO 7",
+      "requirements": "Inclut les niveaux entité, filiale, division, unité opérationnelle et fonction — L’entité identifie et évalue les risques aux niveaux entité, filiale, division, unité opérationnelle et fonction, pertinents pour l’atteinte des objectifs."
+    },
+    "soc2-v2-cc3-2-2": {
+      "code": "CC3.2.2",
+      "control": "Principe COSO 7",
+      "requirements": "Analyse les facteurs internes et externes — L’identification des risques prend en compte à la fois les facteurs internes et externes et leur impact sur l’atteinte des objectifs."
+    },
+    "soc2-v2-cc3-2-3": {
+      "code": "CC3.2.3",
+      "control": "Principe COSO 7",
+      "requirements": "Implique des niveaux appropriés de management — L’entité met en place des mécanismes efficaces d’évaluation des risques impliquant des niveaux de management appropriés."
+    },
+    "soc2-v2-cc3-2-4": {
+      "code": "CC3.2.4",
+      "control": "Principe COSO 7",
+      "requirements": "Estime l’importance des risques identifiés — Les risques identifiés sont analysés au moyen d’un processus incluant l’estimation de l’importance potentielle du risque."
+    },
+    "soc2-v2-cc3-2-5": {
+      "code": "CC3.2.5",
+      "control": "Principe COSO 7",
+      "requirements": "Détermine comment répondre aux risques — L’évaluation des risques inclut l’examen de la manière dont le risque doit être géré et s’il convient d’accepter, d’éviter, de réduire ou de partager le risque."
+    },
+    "soc2-v2-cc3-2-6": {
+      "code": "CC3.2.6",
+      "control": "Principe COSO 7",
+      "requirements": "Identifie et évalue la criticité des actifs informationnels et identifie les menaces et vulnérabilités — Le processus d’identification et d’évaluation des risques de l’entité comprend (1) l’identification des actifs informationnels, y compris les dispositifs et systèmes physiques, les dispositifs virtuels, les logiciels, les données et flux de données, les systèmes d’information externes et les rôles organisationnels; (2) l’évaluation de la criticité de ces actifs; (3) l’identification des menaces pesant sur les actifs, provenant d’actes intentionnels (y compris malveillants) et non intentionnels, ainsi que d’événements environnementaux; et (4) l’identification des vulnérabilités des actifs identifiés."
+    },
+    "soc2-v2-cc3-2-7": {
+      "code": "CC3.2.7",
+      "control": "Principe COSO 7",
+      "requirements": "Analyse les menaces et vulnérabilités provenant des fournisseurs, partenaires commerciaux et autres parties — Le processus d’évaluation des risques de l’entité inclut l’analyse des menaces et vulnérabilités potentielles découlant des fournisseurs de biens et services, ainsi que des partenaires commerciaux, clients et autres ayant accès aux systèmes d’information de l’entité."
+    },
+    "soc2-v2-cc3-2-8": {
+      "code": "CC3.2.8",
+      "control": "Principe COSO 7",
+      "requirements": "Prend en compte l’importance du risque — La prise en compte de l’importance potentielle des risques identifiés par l’entité comprend (1) la détermination de la criticité des actifs identifiés pour l’atteinte des objectifs; (2) l’évaluation de l’impact des menaces et vulnérabilités identifiées sur l’atteinte des objectifs; (3) l’évaluation de la probabilité des menaces identifiées; et (4) la détermination du risque associé aux actifs sur la base de la criticité des actifs, de l’impact des menaces et de la probabilité."
+    },
+    "soc2-v2-cc3-3": {
+      "code": "CC3.3",
+      "control": "Principe COSO 8",
+      "requirements": "L’entité prend en compte le potentiel de fraude lors de l’évaluation des risques susceptibles d’affecter l’atteinte des objectifs."
+    },
+    "soc2-v2-cc3-3-1": {
+      "code": "CC3.3.1",
+      "control": "Principe COSO 8",
+      "requirements": "Prend en compte divers types de fraude — L’évaluation de la fraude prend en compte les rapports frauduleux, la perte potentielle d’actifs et la corruption résultant des différentes façons dont la fraude et les comportements fautifs peuvent se produire."
+    },
+    "soc2-v2-cc3-3-2": {
+      "code": "CC3.3.2",
+      "control": "Principe COSO 8",
+      "requirements": "Évalue les incitations et les pressions — L’évaluation des risques de fraude prend en compte les incitations et les pressions."
+    },
+    "soc2-v2-cc3-3-3": {
+      "code": "CC3.3.3",
+      "control": "Principe COSO 8",
+      "requirements": "Évalue les opportunités — L’évaluation du risque de fraude prend en compte les opportunités d’acquisition, d’utilisation ou de cession non autorisées d’actifs, de modification des enregistrements de reporting de l’entité, ou de commission d’autres actes inappropriés."
+    },
+    "soc2-v2-cc3-3-4": {
+      "code": "CC3.3.4",
+      "control": "Principe COSO 8",
+      "requirements": "Évalue les attitudes et les rationalisations — L’évaluation du risque de fraude prend en compte la manière dont la direction et d’autres membres du personnel pourraient s’engager dans des actions inappropriées ou les justifier."
+    },
+    "soc2-v2-cc3-3-5": {
+      "code": "CC3.3.5",
+      "control": "Principe COSO 8",
+      "requirements": "Prend en compte les risques liés à l’utilisation de l’IT et à l’accès à l’information — L’évaluation des risques de fraude inclut la prise en compte des menaces et vulnérabilités qui découlent spécifiquement de l’utilisation des technologies de l’information et de l’accès à l’information."
+    },
+    "soc2-v2-cc3-4": {
+      "code": "CC3.4",
+      "control": "Principe COSO 9",
+      "requirements": "L’entité identifie et évalue les changements susceptibles d’avoir un impact significatif sur le système de contrôle interne."
+    },
+    "soc2-v2-cc3-4-1": {
+      "code": "CC3.4.1",
+      "control": "Principe COSO 9",
+      "requirements": "Évalue les changements de l’environnement externe — Le processus d’identification des risques prend en compte les changements de l’environnement réglementaire, économique et physique dans lequel l’entité opère."
+    },
+    "soc2-v2-cc3-4-2": {
+      "code": "CC3.4.2",
+      "control": "Principe COSO 9",
+      "requirements": "Évalue les changements du modèle économique — L’entité prend en compte les impacts potentiels de nouvelles lignes d’activité, de compositions fortement modifiées des lignes d’activité existantes, d’opérations acquises ou cédées, d’une croissance rapide, d’une dépendance changeante à des zones géographiques étrangères et de nouvelles technologies sur le système de contrôle interne."
+    },
+    "soc2-v2-cc3-4-3": {
+      "code": "CC3.4.3",
+      "control": "Principe COSO 9",
+      "requirements": "Évalue les changements de leadership — L’entité prend en compte les changements de management ainsi que les attitudes et philosophies correspondantes concernant le système de contrôle interne."
+    },
+    "soc2-v2-cc3-4-4": {
+      "code": "CC3.4.4",
+      "control": "Principe COSO 9",
+      "requirements": "Évalue les changements des systèmes et de la technologie — Le processus d’identification des risques prend en compte les changements résultant de modifications des systèmes de l’entité et de l’environnement technologique."
+    },
+    "soc2-v2-cc3-4-5": {
+      "code": "CC3.4.5",
+      "control": "Principe COSO 9",
+      "requirements": "Évalue les changements des relations avec les fournisseurs et partenaires commerciaux — Le processus d’identification des risques prend en compte les changements dans les relations avec les fournisseurs et les partenaires commerciaux."
+    },
+    "soc2-v2-cc4-1": {
+      "code": "CC4.1",
+      "control": "Principe COSO 16",
+      "requirements": "L’entité sélectionne, développe et réalise des évaluations continues et/ou distinctes afin de déterminer si les composantes du contrôle interne sont présentes et fonctionnent."
+    },
+    "soc2-v2-cc4-1-1": {
+      "code": "CC4.1.1",
+      "control": "Principe COSO 16",
+      "requirements": "Prend en compte un mix d’évaluations continues et distinctes — La direction inclut un équilibre entre des évaluations continues et des évaluations distinctes."
+    },
+    "soc2-v2-cc4-1-2": {
+      "code": "CC4.1.2",
+      "control": "Principe COSO 16",
+      "requirements": "Prend en compte le rythme du changement — La direction prend en compte le rythme du changement dans l’entreprise et les processus métiers lors de la sélection et du développement des évaluations continues et distinctes."
+    },
+    "soc2-v2-cc4-1-3": {
+      "code": "CC4.1.3",
+      "control": "Principe COSO 16",
+      "requirements": "Établit une compréhension de référence — La conception et l’état actuel d’un système de contrôle interne sont utilisés pour établir une base de référence pour les évaluations continues et distinctes."
+    },
+    "soc2-v2-cc4-1-4": {
+      "code": "CC4.1.4",
+      "control": "Principe COSO 16",
+      "requirements": "Recourt à du personnel compétent — Les évaluateurs réalisant des évaluations continues et distinctes disposent de connaissances suffisantes pour comprendre ce qui est évalué."
+    },
+    "soc2-v2-cc4-1-5": {
+      "code": "CC4.1.5",
+      "control": "Principe COSO 16",
+      "requirements": "S’intègre aux processus métiers — Les évaluations continues sont intégrées aux processus métiers et s’ajustent aux conditions changeantes."
+    },
+    "soc2-v2-cc4-1-6": {
+      "code": "CC4.1.6",
+      "control": "Principe COSO 16",
+      "requirements": "Ajuste le périmètre et la fréquence — La direction fait varier le périmètre et la fréquence des évaluations distinctes en fonction du risque."
+    },
+    "soc2-v2-cc4-1-7": {
+      "code": "CC4.1.7",
+      "control": "Principe COSO 16",
+      "requirements": "Évalue objectivement — Des évaluations distinctes sont réalisées périodiquement afin de fournir un retour objectif."
+    },
+    "soc2-v2-cc4-1-8": {
+      "code": "CC4.1.8",
+      "control": "Principe COSO 16",
+      "requirements": "Prend en compte différents types d’évaluations continues et distinctes — La direction utilise une variété d’évaluations continues et distinctes, notamment des tests d’intrusion, des certifications indépendantes réalisées selon des spécifications établies (par exemple, des certifications ISO) et des évaluations d’audit interne."
+    },
+    "soc2-v2-cc4-2": {
+      "code": "CC4.2",
+      "control": "Principe COSO 17",
+      "requirements": "L’entité évalue et communique en temps opportun les déficiences du contrôle interne aux parties responsables de la mise en œuvre d’actions correctives, y compris, le cas échéant, la haute direction et le conseil d’administration."
+    },
+    "soc2-v2-cc4-2-1": {
+      "code": "CC4.2.1",
+      "control": "Principe COSO 17",
+      "requirements": "Évalue les résultats — La direction et, le cas échéant, le conseil d’administration évaluent les résultats des évaluations continues et distinctes."
+    },
+    "soc2-v2-cc4-2-2": {
+      "code": "CC4.2.2",
+      "control": "Principe COSO 17",
+      "requirements": "Communique les déficiences — Les déficiences sont communiquées aux parties responsables de la mise en œuvre d’actions correctives ainsi qu’à la haute direction et, le cas échéant, au conseil d’administration."
+    },
+    "soc2-v2-cc4-2-3": {
+      "code": "CC4.2.3",
+      "control": "Principe COSO 17",
+      "requirements": "Suit les actions correctives — La direction suit si les déficiences sont corrigées en temps opportun."
+    },
+    "soc2-v2-cc5-1": {
+      "code": "CC5.1",
+      "control": "Principe COSO 10",
+      "requirements": "L’entité sélectionne et développe des activités de contrôle qui contribuent à atténuer les risques pesant sur l’atteinte des objectifs à des niveaux acceptables."
+    },
+    "soc2-v2-cc5-1-1": {
+      "code": "CC5.1.1",
+      "control": "Principe COSO 10",
+      "requirements": "S’intègre à l’évaluation des risques — Les activités de contrôle aident à garantir que les réponses aux risques qui traitent et atténuent les risques sont mises en œuvre."
+    },
+    "soc2-v2-cc5-1-2": {
+      "code": "CC5.1.2",
+      "control": "Principe COSO 10",
+      "requirements": "Prend en compte des facteurs propres à l’entité — La direction prend en compte comment l’environnement, la complexité, la nature et le périmètre de ses opérations, ainsi que les caractéristiques spécifiques de son organisation, influencent la sélection et le développement des activités de contrôle."
+    },
+    "soc2-v2-cc5-1-3": {
+      "code": "CC5.1.3",
+      "control": "Principe COSO 10",
+      "requirements": "Détermine les processus métiers pertinents — La direction détermine quels processus métiers pertinents nécessitent des activités de contrôle."
+    },
+    "soc2-v2-cc5-1-4": {
+      "code": "CC5.1.4",
+      "control": "Principe COSO 10",
+      "requirements": "Évalue un mix de types d’activités de contrôle — Les activités de contrôle incluent un éventail et une variété de contrôles et peuvent inclure un équilibre d’approches pour atténuer les risques, en tenant compte des contrôles manuels et automatisés, ainsi que des contrôles préventifs et détectifs."
+    },
+    "soc2-v2-cc5-1-5": {
+      "code": "CC5.1.5",
+      "control": "Principe COSO 10",
+      "requirements": "Prend en compte le niveau d’application des activités — La direction prend en compte des activités de contrôle à différents niveaux de l’entité."
+    },
+    "soc2-v2-cc5-1-6": {
+      "code": "CC5.1.6",
+      "control": "Principe COSO 10",
+      "requirements": "Traite la séparation des tâches — La direction sépare les tâches incompatibles et, lorsque cette séparation n’est pas réalisable, sélectionne et développe des activités de contrôle alternatives."
+    },
+    "soc2-v2-cc5-2": {
+      "code": "CC5.2",
+      "control": "Principe COSO 11",
+      "requirements": "L’entité sélectionne et développe également des activités de contrôle générales sur la technologie afin de soutenir l’atteinte des objectifs."
+    },
+    "soc2-v2-cc5-2-1": {
+      "code": "CC5.2.1",
+      "control": "Principe COSO 11",
+      "requirements": "Détermine la dépendance entre l’utilisation de la technologie dans les processus métiers et les contrôles généraux de la technologie — La direction comprend et détermine la dépendance et le lien entre les processus métiers, les activités de contrôle automatisées et les contrôles généraux de la technologie."
+    },
+    "soc2-v2-cc5-2-2": {
+      "code": "CC5.2.2",
+      "control": "Principe COSO 11",
+      "requirements": "Établit des activités de contrôle pertinentes sur l’infrastructure technologique — La direction sélectionne et développe des activités de contrôle sur l’infrastructure technologique, conçues et mises en œuvre pour aider à assurer l’exhaustivité, l’exactitude et la disponibilité du traitement technologique."
+    },
+    "soc2-v2-cc5-2-3": {
+      "code": "CC5.2.3",
+      "control": "Principe COSO 11",
+      "requirements": "Établit des activités de contrôle pertinentes du processus de gestion de la sécurité — La direction sélectionne et développe des activités de contrôle conçues et mises en œuvre pour restreindre les droits d’accès à la technologie aux utilisateurs autorisés, proportionnellement à leurs responsabilités professionnelles, et pour protéger les actifs de l’entité contre les menaces externes."
+    },
+    "soc2-v2-cc5-2-4": {
+      "code": "CC5.2.4",
+      "control": "Principe COSO 11",
+      "requirements": "Établit des activités de contrôle pertinentes du processus d’acquisition, de développement et de maintenance technologiques — La direction sélectionne et développe des activités de contrôle relatives à l’acquisition, au développement et à la maintenance de la technologie et de son infrastructure afin d’atteindre les objectifs de la direction."
+    },
+    "soc2-v2-cc5-3": {
+      "code": "CC5.3",
+      "control": "Principe COSO 12",
+      "requirements": "L’entité déploie les activités de contrôle au moyen de politiques qui établissent ce qui est attendu et de procédures qui mettent les politiques en action."
+    },
+    "soc2-v2-cc5-3-1": {
+      "code": "CC5.3.1",
+      "control": "Principe COSO 12",
+      "requirements": "Établit des politiques et procédures pour soutenir le déploiement des directives de la direction — La direction établit des activités de contrôle intégrées aux processus métiers et aux activités quotidiennes des employés au moyen de politiques définissant ce qui est attendu et de procédures pertinentes précisant les actions."
+    },
+    "soc2-v2-cc5-3-2": {
+      "code": "CC5.3.2",
+      "control": "Principe COSO 12",
+      "requirements": "Établit la responsabilité et l’obligation de rendre compte pour l’exécution des politiques et procédures — La direction établit la responsabilité et l’obligation de rendre compte des activités de contrôle avec la direction (ou d’autres personnes désignées) de l’unité métier ou de la fonction où résident les risques pertinents."
+    },
+    "soc2-v2-cc5-3-3": {
+      "code": "CC5.3.3",
+      "control": "Principe COSO 12",
+      "requirements": "Réalise en temps opportun — Le personnel responsable exécute les activités de contrôle en temps opportun tel que défini par les politiques et procédures."
+    },
+    "soc2-v2-cc5-3-4": {
+      "code": "CC5.3.4",
+      "control": "Principe COSO 12",
+      "requirements": "Prend des mesures correctives — Le personnel responsable enquête et agit sur les sujets identifiés à la suite de l’exécution des activités de contrôle."
+    },
+    "soc2-v2-cc5-3-5": {
+      "code": "CC5.3.5",
+      "control": "Principe COSO 12",
+      "requirements": "Exécute avec du personnel compétent — Du personnel compétent disposant d’une autorité suffisante exécute les activités de contrôle avec diligence et une attention continue."
+    },
+    "soc2-v2-cc5-3-6": {
+      "code": "CC5.3.6",
+      "control": "Principe COSO 12",
+      "requirements": "Réévalue les politiques et procédures — La direction revoit périodiquement les activités de contrôle afin de déterminer leur pertinence continue et les actualise lorsque nécessaire."
+    },
+    "soc2-v2-cc6-1": {
+      "code": "CC6.1",
+      "control": "CC6.1",
+      "requirements": "L’entité met en œuvre des logiciels, une infrastructure et des architectures de sécurité des accès logiques sur les actifs informationnels protégés afin de les protéger contre des événements de sécurité, pour atteindre les objectifs de l’entité."
+    },
+    "soc2-v2-cc6-1-1": {
+      "code": "CC6.1.1",
+      "control": "CC6.1.1",
+      "requirements": "Identifie et gère l’inventaire des actifs informationnels — L’entité identifie, inventorie, classe et gère les actifs informationnels."
+    },
+    "soc2-v2-cc6-1-2": {
+      "code": "CC6.1.2",
+      "control": "CC6.1.2",
+      "requirements": "Restreint l’accès logique — L’accès logique aux actifs informationnels, notamment le matériel, les données (au repos, en cours de traitement ou en transmission), les logiciels, les autorités administratives, les appareils mobiles, les sorties et les composants système hors ligne, est restreint au moyen de logiciels de contrôle d’accès et d’ensembles de règles."
+    },
+    "soc2-v2-cc6-1-3": {
+      "code": "CC6.1.3",
+      "control": "CC6.1.3",
+      "requirements": "Identifie et authentifie les utilisateurs — Les personnes, l’infrastructure et les logiciels sont identifiés et authentifiés avant d’accéder aux actifs informationnels, localement ou à distance."
+    },
+    "soc2-v2-cc6-1-4": {
+      "code": "CC6.1.4",
+      "control": "CC6.1.4",
+      "requirements": "Prend en compte la segmentation réseau — La segmentation réseau permet d’isoler les portions non liées du système d’information de l’entité les unes des autres."
+    },
+    "soc2-v2-cc6-1-5": {
+      "code": "CC6.1.5",
+      "control": "CC6.1.5",
+      "requirements": "Gère les points d’accès — Les points d’accès des entités externes et les types de données qui transitent par ces points d’accès sont identifiés, inventoriés et gérés. Les types de personnes et de systèmes utilisant chaque point d’accès sont identifiés, documentés et gérés."
+    },
+    "soc2-v2-cc6-1-6": {
+      "code": "CC6.1.6",
+      "control": "CC6.1.6",
+      "requirements": "Restreint l’accès aux actifs informationnels — Des combinaisons de classification des données, de structures de données séparées, de restrictions de ports, de restrictions de protocoles d’accès, d’identification des utilisateurs et de certificats numériques sont utilisées pour établir des règles de contrôle d’accès pour les actifs informationnels."
+    },
+    "soc2-v2-cc6-1-7": {
+      "code": "CC6.1.7",
+      "control": "CC6.1.7",
+      "requirements": "Gère l’identification et l’authentification — Les exigences d’identification et d’authentification sont établies, documentées et gérées pour les individus et les systèmes accédant aux informations, à l’infrastructure et aux logiciels de l’entité."
+    },
+    "soc2-v2-cc6-1-8": {
+      "code": "CC6.1.8",
+      "control": "CC6.1.8",
+      "requirements": "Gère les identifiants pour l’infrastructure et les logiciels — Les nouvelles infrastructures et logiciels internes et externes sont enregistrés, autorisés et documentés avant de se voir attribuer des identifiants d’accès et d’être mis en œuvre sur le réseau ou un point d’accès. Les identifiants sont supprimés et l’accès est désactivé lorsque l’accès n’est plus requis ou que l’infrastructure et les logiciels ne sont plus utilisés."
+    },
+    "soc2-v2-cc6-1-9": {
+      "code": "CC6.1.9",
+      "control": "CC6.1.9",
+      "requirements": "Utilise le chiffrement pour protéger les données — L’entité utilise le chiffrement pour compléter d’autres mesures de protection des données au repos, lorsque ces protections sont jugées appropriées sur la base du risque évalué."
+    },
+    "soc2-v2-cc6-1-10": {
+      "code": "CC6.1.10",
+      "control": "CC6.1.10",
+      "requirements": "Protège les clés de chiffrement — Des processus sont en place pour protéger les clés de chiffrement lors de leur génération, stockage, utilisation et destruction."
+    },
+    "soc2-v2-cc6-2": {
+      "code": "CC6.2",
+      "control": "CC6.2",
+      "requirements": "Avant d’émettre des identifiants système et d’accorder l’accès au système, l’entité enregistre et autorise les nouveaux utilisateurs internes et externes dont l’accès est administré par l’entité. Pour les utilisateurs dont l’accès est administré par l’entité, les identifiants système sont supprimés lorsque l’accès de l’utilisateur n’est plus autorisé."
+    },
+    "soc2-v2-cc6-2-1": {
+      "code": "CC6.2.1",
+      "control": "CC6.2.1",
+      "requirements": "Contrôle les identifiants d’accès aux actifs protégés — Les identifiants d’accès aux actifs informationnels sont créés sur la base d’une autorisation du propriétaire de l’actif du système ou du dépositaire autorisé."
+    },
+    "soc2-v2-cc6-2-2": {
+      "code": "CC6.2.2",
+      "control": "CC6.2.2",
+      "requirements": "Supprime l’accès aux actifs protégés lorsque approprié — Des processus sont en place pour supprimer l’accès par identifiant lorsqu’un individu n’a plus besoin de cet accès."
+    },
+    "soc2-v2-cc6-2-3": {
+      "code": "CC6.2.3",
+      "control": "CC6.2.3",
+      "requirements": "Examine l’adéquation des identifiants d’accès — L’adéquation des identifiants d’accès est examinée périodiquement afin d’identifier les individus ayant des identifiants inutiles ou inappropriés."
+    },
+    "soc2-v2-cc6-3": {
+      "code": "CC6.3",
+      "control": "CC6.3",
+      "requirements": "L’entité autorise, modifie ou supprime l’accès aux données, logiciels, fonctions et autres actifs informationnels protégés en fonction des rôles, responsabilités ou de la conception du système et des changements, en tenant compte des principes du moindre privilège et de la séparation des tâches, afin d’atteindre les objectifs de l’entité."
+    },
+    "soc2-v2-cc6-3-1": {
+      "code": "CC6.3.1",
+      "control": "CC6.3.1",
+      "requirements": "Crée ou modifie l’accès aux actifs informationnels protégés — Des processus sont en place pour créer ou modifier l’accès aux actifs informationnels protégés sur la base d’une autorisation du propriétaire de l’actif."
+    },
+    "soc2-v2-cc6-3-2": {
+      "code": "CC6.3.2",
+      "control": "CC6.3.2",
+      "requirements": "Supprime l’accès aux actifs informationnels protégés — Des processus sont en place pour supprimer l’accès aux actifs informationnels protégés lorsqu’un individu n’a plus besoin d’accès."
+    },
+    "soc2-v2-cc6-3-3": {
+      "code": "CC6.3.3",
+      "control": "CC6.3.3",
+      "requirements": "Utilise des contrôles d’accès basés sur les rôles — Le contrôle d’accès basé sur les rôles est utilisé pour soutenir la séparation des fonctions incompatibles."
+    },
+    "soc2-v2-cc6-4": {
+      "code": "CC6.4",
+      "control": "CC6.4",
+      "requirements": "L’entité restreint l’accès physique aux installations et aux actifs informationnels protégés (par exemple, les centres de données, le stockage des supports de sauvegarde et d’autres lieux sensibles) au personnel autorisé afin d’atteindre les objectifs de l’entité."
+    },
+    "soc2-v2-cc6-4-1": {
+      "code": "CC6.4.1",
+      "control": "CC6.4.1",
+      "requirements": "Crée ou modifie l’accès physique — Des processus sont en place pour créer ou modifier l’accès physique à des installations telles que des centres de données, des espaces de bureaux et des zones de travail, sur la base d’une autorisation du propriétaire de l’actif du système."
+    },
+    "soc2-v2-cc6-4-2": {
+      "code": "CC6.4.2",
+      "control": "CC6.4.2",
+      "requirements": "Supprime l’accès physique — Des processus sont en place pour supprimer l’accès aux ressources physiques lorsqu’un individu n’en a plus besoin."
+    },
+    "soc2-v2-cc6-4-3": {
+      "code": "CC6.4.3",
+      "control": "CC6.4.3",
+      "requirements": "Réexamine l’accès physique — Des processus sont en place pour réexaminer périodiquement l’accès physique afin d’assurer la cohérence avec les responsabilités professionnelles."
+    },
+    "soc2-v2-cc6-5": {
+      "code": "CC6.5",
+      "control": "CC6.5",
+      "requirements": "L’entité met fin aux protections logiques et physiques des actifs matériels uniquement après que la capacité de lire ou de récupérer les données et logiciels de ces actifs a été réduite et n’est plus requise pour atteindre les objectifs de l’entité."
+    },
+    "soc2-v2-cc6-5-1": {
+      "code": "CC6.5.1",
+      "control": "CC6.5.1",
+      "requirements": "Identifie les données et logiciels destinés à l’élimination — Des procédures sont en place pour identifier les données et logiciels stockés sur les équipements destinés à être éliminés et pour rendre ces données et logiciels illisibles."
+    },
+    "soc2-v2-cc6-5-2": {
+      "code": "CC6.5.2",
+      "control": "CC6.5.2",
+      "requirements": "Retire les données et logiciels du contrôle de l’entité — Des procédures sont en place pour retirer les données et logiciels stockés sur des équipements retirés du contrôle physique de l’entité et pour rendre ces données et logiciels illisibles."
+    },
+    "soc2-v2-cc6-6": {
+      "code": "CC6.6",
+      "control": "CC6.6",
+      "requirements": "L’entité met en œuvre des mesures de sécurité d’accès logique pour se protéger contre les menaces provenant de sources extérieures aux limites de son système."
+    },
+    "soc2-v2-cc6-6-1": {
+      "code": "CC6.6.1",
+      "control": "CC6.6.1",
+      "requirements": "Restreint l’accès — Les types d’activités pouvant se produire via un canal de communication (par exemple, un site FTP, un port de routeur) sont restreints."
+    },
+    "soc2-v2-cc6-6-2": {
+      "code": "CC6.6.2",
+      "control": "CC6.6.2",
+      "requirements": "Protège les identifiants d’identification et d’authentification — Les identifiants d’identification et d’authentification sont protégés lors de la transmission en dehors des limites du système."
+    },
+    "soc2-v2-cc6-6-3": {
+      "code": "CC6.6.3",
+      "control": "CC6.6.3",
+      "requirements": "Exige une authentification ou des identifiants supplémentaires — Des informations d’authentification supplémentaires ou des identifiants supplémentaires sont requis lors de l’accès au système depuis l’extérieur de ses limites."
+    },
+    "soc2-v2-cc6-6-4": {
+      "code": "CC6.6.4",
+      "control": "CC6.6.4",
+      "requirements": "Met en œuvre des systèmes de protection périmétrique — Des systèmes de protection périmétrique (par exemple, des pare-feu, des zones démilitarisées et des systèmes de détection d’intrusion) sont mis en œuvre pour protéger les points d’accès externes contre les tentatives et accès non autorisés, et sont surveillés pour détecter de telles tentatives."
+    },
+    "soc2-v2-cc6-7": {
+      "code": "CC6.7",
+      "control": "CC6.7",
+      "requirements": "L’entité restreint la transmission, le déplacement et le retrait des informations aux utilisateurs et processus internes et externes autorisés, et les protège pendant la transmission, le déplacement ou le retrait afin d’atteindre les objectifs de l’entité."
+    },
+    "soc2-v2-cc6-7-1": {
+      "code": "CC6.7.1",
+      "control": "CC6.7.1",
+      "requirements": "Restreint la capacité d’effectuer des transmissions — Des processus et technologies de prévention des pertes de données sont utilisés pour restreindre la capacité d’autoriser et d’exécuter la transmission, le déplacement et le retrait des informations."
+    },
+    "soc2-v2-cc6-7-2": {
+      "code": "CC6.7.2",
+      "control": "CC6.7.2",
+      "requirements": "Utilise des technologies de chiffrement ou des canaux de communication sécurisés pour protéger les données — Des technologies de chiffrement ou des canaux de communication sécurisés sont utilisés pour protéger la transmission des données et autres communications au-delà des points d’accès de connectivité."
+    },
+    "soc2-v2-cc6-7-3": {
+      "code": "CC6.7.3",
+      "control": "CC6.7.3",
+      "requirements": "Protège les supports amovibles — Des technologies de chiffrement et des protections des actifs physiques sont utilisées pour les supports amovibles (tels que clés USB et bandes de sauvegarde), selon le cas."
+    },
+    "soc2-v2-cc6-7-4": {
+      "code": "CC6.7.4",
+      "control": "CC6.7.4",
+      "requirements": "Protège les appareils mobiles — Des processus sont en place pour protéger les appareils mobiles (tels que ordinateurs portables, smartphones et tablettes) servant d’actifs informationnels."
+    },
+    "soc2-v2-cc6-8": {
+      "code": "CC6.8",
+      "control": "CC6.8",
+      "requirements": "L’entité met en œuvre des contrôles pour empêcher ou détecter et traiter l’introduction de logiciels non autorisés ou malveillants afin d’atteindre les objectifs de l’entité."
+    },
+    "soc2-v2-cc6-8-1": {
+      "code": "CC6.8.1",
+      "control": "CC6.8.1",
+      "requirements": "Restreint l’installation d’applications et de logiciels — La capacité d’installer des applications et des logiciels est limitée aux personnes autorisées."
+    },
+    "soc2-v2-cc6-8-2": {
+      "code": "CC6.8.2",
+      "control": "CC6.8.2",
+      "requirements": "Détecte les modifications non autorisées des logiciels et des paramètres de configuration — Des processus sont en place pour détecter les modifications des logiciels et des paramètres de configuration pouvant indiquer la présence de logiciels non autorisés ou malveillants."
+    },
+    "soc2-v2-cc6-8-3": {
+      "code": "CC6.8.3",
+      "control": "CC6.8.3",
+      "requirements": "Utilise un processus formalisé de contrôle des changements — Un processus de contrôle des changements défini par la direction est utilisé pour la mise en œuvre des logiciels."
+    },
+    "soc2-v2-cc6-8-4": {
+      "code": "CC6.8.4",
+      "control": "CC6.8.4",
+      "requirements": "Utilise des logiciels antivirus et antimalware — Des logiciels antivirus et antimalware sont mis en œuvre et maintenus afin d’assurer l’interception ou la détection et la remédiation des malwares."
+    },
+    "soc2-v2-cc6-8-5": {
+      "code": "CC6.8.5",
+      "control": "CC6.8.5",
+      "requirements": "Analyse les actifs informationnels provenant de l’extérieur de l’entité pour détecter les malwares et autres logiciels non autorisés — Des procédures sont en place pour analyser les actifs informationnels transférés ou retournés sous la garde de l’entité afin de détecter les malwares et autres logiciels non autorisés, et pour supprimer tout élément détecté avant leur mise en œuvre sur le réseau."
+    },
+    "soc2-v2-cc7-1": {
+      "code": "CC7.1",
+      "control": "CC7.1",
+      "requirements": "Pour atteindre ses objectifs, l’entité utilise des procédures de détection et de surveillance afin d’identifier (1) les changements de configuration entraînant l’introduction de nouvelles vulnérabilités, et (2) les susceptibilités aux vulnérabilités récemment découvertes."
+    },
+    "soc2-v2-cc7-1-1": {
+      "code": "CC7.1.1",
+      "control": "CC7.1.1",
+      "requirements": "Utilise des normes de configuration définies — La direction a défini des normes de configuration."
+    },
+    "soc2-v2-cc7-1-2": {
+      "code": "CC7.1.2",
+      "control": "CC7.1.2",
+      "requirements": "Surveille l’infrastructure et les logiciels — L’entité surveille l’infrastructure et les logiciels afin de détecter toute non-conformité aux normes pouvant menacer l’atteinte des objectifs de l’entité."
+    },
+    "soc2-v2-cc7-1-3": {
+      "code": "CC7.1.3",
+      "control": "CC7.1.3",
+      "requirements": "Met en œuvre des mécanismes de détection des changements — Le système informatique comprend un mécanisme de détection des changements (par exemple, des outils de surveillance de l’intégrité des fichiers) pour alerter le personnel en cas de modifications non autorisées de fichiers système critiques, de fichiers de configuration ou de fichiers de contenu."
+    },
+    "soc2-v2-cc7-1-4": {
+      "code": "CC7.1.4",
+      "control": "CC7.1.4",
+      "requirements": "Détecte les composants inconnus ou non autorisés — Des procédures sont en place pour détecter l’introduction de composants inconnus ou non autorisés."
+    },
+    "soc2-v2-cc7-1-5": {
+      "code": "CC7.1.5",
+      "control": "CC7.1.5",
+      "requirements": "Effectue des scans de vulnérabilités — L’entité effectue des scans de vulnérabilités destinés à identifier des vulnérabilités potentielles ou des erreurs de configuration de manière périodique et après tout changement significatif de l’environnement, et prend des mesures pour remédier aux déficiences identifiées en temps opportun."
+    },
+    "soc2-v2-cc7-2": {
+      "code": "CC7.2",
+      "control": "CC7.2",
+      "requirements": "L’entité surveille les composants du système et leur fonctionnement afin de détecter des anomalies indiquant des actes malveillants, des catastrophes naturelles et des erreurs affectant la capacité de l’entité à atteindre ses objectifs; les anomalies sont analysées pour déterminer si elles constituent des événements de sécurité."
+    },
+    "soc2-v2-cc7-2-1": {
+      "code": "CC7.2.1",
+      "control": "CC7.2.1",
+      "requirements": "Met en œuvre des politiques, procédures et outils de détection — Des politiques et procédures de détection sont définies et mises en œuvre, et des outils de détection sont déployés sur l’infrastructure et les logiciels afin d’identifier des anomalies de fonctionnement ou des activités inhabituelles. Les procédures peuvent inclure (1) un processus de gouvernance défini pour la détection et la gestion des événements de sécurité incluant la mise à disposition de ressources; (2) l’utilisation de sources de renseignement pour identifier de nouvelles menaces et vulnérabilités; et (3) la journalisation des activités système inhabituelles."
+    },
+    "soc2-v2-cc7-2-2": {
+      "code": "CC7.2.2",
+      "control": "CC7.2.2",
+      "requirements": "Conçoit des mesures de détection — Les mesures de détection sont conçues pour identifier des anomalies pouvant résulter (1) de la compromission de barrières physiques; (2) d’actions non autorisées de personnel autorisé; (3) de l’utilisation d’identifiants d’authentification compromis; (4) d’un accès non autorisé depuis l’extérieur des limites du système; (5) de la compromission de parties externes autorisées; et (6) de l’implémentation ou du raccordement de matériels et logiciels non autorisés."
+    },
+    "soc2-v2-cc7-2-3": {
+      "code": "CC7.2.3",
+      "control": "CC7.2.3",
+      "requirements": "Met en œuvre des filtres pour analyser les anomalies — La direction a mis en œuvre des procédures pour filtrer, résumer et analyser les anomalies afin d’identifier les événements de sécurité."
+    },
+    "soc2-v2-cc7-2-4": {
+      "code": "CC7.2.4",
+      "control": "CC7.2.4",
+      "requirements": "Surveille l’efficacité des outils de détection — La direction a mis en œuvre des processus pour surveiller l’efficacité des outils de détection."
+    },
+    "soc2-v2-cc7-3": {
+      "code": "CC7.3",
+      "control": "CC7.3",
+      "requirements": "L’entité évalue les événements de sécurité afin de déterminer s’ils pourraient avoir entraîné ou ont entraîné une défaillance dans l’atteinte des objectifs de l’entité (incidents de sécurité) et, le cas échéant, prend des mesures pour prévenir ou traiter ces défaillances."
+    },
+    "soc2-v2-cc7-3-1": {
+      "code": "CC7.3.1",
+      "control": "CC7.3.1",
+      "requirements": "Réagit aux incidents de sécurité — Des procédures sont en place pour répondre aux incidents de sécurité et pour évaluer périodiquement l’efficacité de ces politiques et procédures."
+    },
+    "soc2-v2-cc7-3-2": {
+      "code": "CC7.3.2",
+      "control": "CC7.3.2",
+      "requirements": "Communique et examine les événements de sécurité détectés — Les événements de sécurité détectés sont communiqués et examinés par les personnes responsables de la gestion du programme de sécurité, et des actions sont entreprises si nécessaire."
+    },
+    "soc2-v2-cc7-3-3": {
+      "code": "CC7.3.3",
+      "control": "CC7.3.3",
+      "requirements": "Élabore et met en œuvre des procédures pour analyser les incidents de sécurité — Des procédures sont en place pour analyser les incidents de sécurité et déterminer l’impact sur le système."
+    },
+    "soc2-v2-cc7-3-4": {
+      "code": "CC7.3.4",
+      "control": "CC7.3.4",
+      "requirements": "Évalue l’impact sur les données personnelles — Les événements de sécurité détectés sont évalués afin de déterminer s’ils pourraient avoir entraîné ou ont entraîné la divulgation ou l’utilisation non autorisée de données personnelles et s’il y a eu non-conformité aux lois ou réglementations applicables."
+    },
+    "soc2-v2-cc7-3-5": {
+      "code": "CC7.3.5",
+      "control": "CC7.3.5",
+      "requirements": "Détermine les données personnelles utilisées ou divulguées — Lorsqu’une utilisation ou divulgation non autorisée de données personnelles a eu lieu, les informations concernées sont identifiées."
+    },
+    "soc2-v2-cc7-4": {
+      "code": "CC7.4",
+      "control": "CC7.4",
+      "requirements": "L’entité répond aux incidents de sécurité identifiés en exécutant un programme de réponse aux incidents défini afin de comprendre, contenir, corriger et communiquer les incidents de sécurité, le cas échéant."
+    },
+    "soc2-v2-cc7-4-1": {
+      "code": "CC7.4.1",
+      "control": "CC7.4.1",
+      "requirements": "Attribue les rôles et responsabilités — Les rôles et responsabilités pour la conception, la mise en œuvre, la maintenance et l’exécution du programme de réponse aux incidents sont attribués, y compris le recours à des ressources externes lorsque nécessaire."
+    },
+    "soc2-v2-cc7-4-2": {
+      "code": "CC7.4.2",
+      "control": "CC7.4.2",
+      "requirements": "Contient les incidents de sécurité — Des procédures sont en place pour contenir les incidents de sécurité qui menacent activement les objectifs de l’entité."
+    },
+    "soc2-v2-cc7-4-3": {
+      "code": "CC7.4.3",
+      "control": "CC7.4.3",
+      "requirements": "Atténue les incidents de sécurité en cours — Des procédures sont en place pour atténuer les effets des incidents de sécurité en cours."
+    },
+    "soc2-v2-cc7-4-4": {
+      "code": "CC7.4.4",
+      "control": "CC7.4.4",
+      "requirements": "Met fin aux menaces posées par les incidents de sécurité — Des procédures sont en place pour mettre fin aux menaces posées par les incidents de sécurité par la correction des vulnérabilités, la suppression des accès non autorisés et d’autres actions de remédiation."
+    },
+    "soc2-v2-cc7-4-5": {
+      "code": "CC7.4.5",
+      "control": "CC7.4.5",
+      "requirements": "Restaure les opérations — Des procédures sont en place pour restaurer les données et les opérations métiers à un état intermédiaire permettant l’atteinte des objectifs de l’entité."
+    },
+    "soc2-v2-cc7-4-6": {
+      "code": "CC7.4.6",
+      "control": "CC7.4.6",
+      "requirements": "Élabore et met en œuvre des protocoles de communication pour les incidents de sécurité — Des protocoles pour communiquer les incidents de sécurité et les actions entreprises aux parties affectées sont élaborés et mis en œuvre afin d’atteindre les objectifs de l’entité."
+    },
+    "soc2-v2-cc7-4-7": {
+      "code": "CC7.4.7",
+      "control": "CC7.4.7",
+      "requirements": "Comprend la nature de l’incident et détermine la stratégie de confinement — Une compréhension de la nature (par exemple, la méthode par laquelle l’incident s’est produit et les ressources système affectées) et de la gravité de l’incident de sécurité est obtenue afin de déterminer la stratégie de confinement appropriée, y compris (1) la détermination du délai de réponse approprié et (2) la détermination et l’exécution de l’approche de confinement."
+    },
+    "soc2-v2-cc7-4-8": {
+      "code": "CC7.4.8",
+      "control": "CC7.4.8",
+      "requirements": "Corrige les vulnérabilités identifiées — Les vulnérabilités identifiées sont corrigées par le développement et l’exécution d’activités de remédiation."
+    },
+    "soc2-v2-cc7-4-9": {
+      "code": "CC7.4.9",
+      "control": "CC7.4.9",
+      "requirements": "Communique les activités de remédiation — Les activités de remédiation sont documentées et communiquées conformément au programme de réponse aux incidents."
+    },
+    "soc2-v2-cc7-4-10": {
+      "code": "CC7.4.10",
+      "control": "CC7.4.10",
+      "requirements": "Évalue l’efficacité de la réponse aux incidents — La conception des activités de réponse aux incidents est évaluée périodiquement afin d’en vérifier l’efficacité."
+    },
+    "soc2-v2-cc7-4-11": {
+      "code": "CC7.4.11",
+      "control": "CC7.4.11",
+      "requirements": "Évalue périodiquement les incidents — Périodiquement, la direction examine les incidents liés à la sécurité, à la disponibilité, à l’intégrité du traitement, à la confidentialité et à la vie privée et identifie la nécessité de changements du système sur la base des schémas d’incidents et des causes profondes."
+    },
+    "soc2-v2-cc7-4-12": {
+      "code": "CC7.4.12",
+      "control": "CC7.4.12",
+      "requirements": "Communique l’utilisation et la divulgation non autorisées — Les événements ayant entraîné une utilisation ou une divulgation non autorisée de données personnelles sont communiqués aux personnes concernées, aux autorités légales et réglementaires et à d’autres parties, comme requis."
+    },
+    "soc2-v2-cc7-4-13": {
+      "code": "CC7.4.13",
+      "control": "CC7.4.13",
+      "requirements": "Application de sanctions — Le comportement des individus et organisations opérant sous l’autorité de l’entité et impliqués dans l’utilisation ou la divulgation non autorisée de données personnelles est évalué et, le cas échéant, sanctionné conformément aux politiques de l’entité et aux exigences légales et réglementaires."
+    },
+    "soc2-v2-cc7-5": {
+      "code": "CC7.5",
+      "control": "CC7.5",
+      "requirements": "L’entité identifie, développe et met en œuvre des activités pour se rétablir après des incidents de sécurité identifiés."
+    },
+    "soc2-v2-cc7-5-1": {
+      "code": "CC7.5.1",
+      "control": "CC7.5.1",
+      "requirements": "Restaure l’environnement affecté — Les activités restaurent l’environnement affecté à un fonctionnement opérationnel en reconstruisant les systèmes, en mettant à jour les logiciels, en installant des correctifs et en modifiant les configurations, selon les besoins."
+    },
+    "soc2-v2-cc7-5-2": {
+      "code": "CC7.5.2",
+      "control": "CC7.5.2",
+      "requirements": "Communique des informations sur l’événement — Les communications concernant la nature de l’incident, les actions de rétablissement entreprises et les activités requises pour prévenir de futurs événements de sécurité sont adressées à la direction et à d’autres parties appropriées (internes et externes)."
+    },
+    "soc2-v2-cc7-5-3": {
+      "code": "CC7.5.3",
+      "control": "CC7.5.3",
+      "requirements": "Détermine la cause profonde de l’événement — La cause profonde de l’événement est déterminée."
+    },
+    "soc2-v2-cc7-5-4": {
+      "code": "CC7.5.4",
+      "control": "CC7.5.4",
+      "requirements": "Met en œuvre des changements pour prévenir et détecter les récurrences — Une architecture supplémentaire ou des modifications des contrôles préventifs et détectifs, ou les deux, sont mises en œuvre pour prévenir et détecter les récurrences en temps opportun."
+    },
+    "soc2-v2-cc7-5-5": {
+      "code": "CC7.5.5",
+      "control": "CC7.5.5",
+      "requirements": "Améliore les procédures de réponse et de rétablissement — Les enseignements tirés sont analysés, et le plan de réponse aux incidents ainsi que les procédures de rétablissement sont améliorés."
+    },
+    "soc2-v2-cc7-5-6": {
+      "code": "CC7.5.6",
+      "control": "CC7.5.6",
+      "requirements": "Met en œuvre des tests du plan de rétablissement après incident — Des tests du plan de rétablissement après incident sont réalisés périodiquement. Les tests comprennent (1) l’élaboration de scénarios de test basés sur la probabilité et l’ampleur des menaces; (2) la prise en compte de composants système pertinents à l’échelle de l’entité pouvant affecter la disponibilité; (3) des scénarios prenant en compte l’indisponibilité potentielle de personnel clé; et (4) la révision des plans de continuité et des systèmes sur la base des résultats des tests."
+    },
+    "soc2-v2-cc8-1": {
+      "code": "CC8.1",
+      "control": "CC8.1",
+      "requirements": "L’entité autorise, conçoit, développe ou acquiert, configure, documente, teste, approuve et met en œuvre des changements relatifs à l’infrastructure, aux données, aux logiciels et aux procédures afin d’atteindre ses objectifs."
+    },
+    "soc2-v2-cc8-1-1": {
+      "code": "CC8.1.1",
+      "control": "CC8.1.1",
+      "requirements": "Gère les changements tout au long du cycle de vie du système — Un processus de gestion des changements du système tout au long de son cycle de vie et de celui de ses composants (infrastructure, données, logiciels et procédures) est utilisé pour soutenir la disponibilité du système et l’intégrité du traitement."
+    },
+    "soc2-v2-cc8-1-2": {
+      "code": "CC8.1.2",
+      "control": "CC8.1.2",
+      "requirements": "Autorise les changements — Un processus est en place pour autoriser les changements du système avant le développement."
+    },
+    "soc2-v2-cc8-1-3": {
+      "code": "CC8.1.3",
+      "control": "CC8.1.3",
+      "requirements": "Conçoit et développe les changements — Un processus est en place pour concevoir et développer les changements du système."
+    },
+    "soc2-v2-cc8-1-4": {
+      "code": "CC8.1.4",
+      "control": "CC8.1.4",
+      "requirements": "Documente les changements — Un processus est en place pour documenter les changements du système afin de soutenir la maintenance continue du système et d’aider les utilisateurs du système à exercer leurs responsabilités."
+    },
+    "soc2-v2-cc8-1-5": {
+      "code": "CC8.1.5",
+      "control": "CC8.1.5",
+      "requirements": "Suit les changements du système — Un processus est en place pour suivre les changements du système avant leur mise en œuvre."
+    },
+    "soc2-v2-cc8-1-6": {
+      "code": "CC8.1.6",
+      "control": "CC8.1.6",
+      "requirements": "Configure les logiciels — Un processus est en place pour sélectionner et mettre en œuvre les paramètres de configuration utilisés pour contrôler la fonctionnalité des logiciels."
+    },
+    "soc2-v2-cc8-1-7": {
+      "code": "CC8.1.7",
+      "control": "CC8.1.7",
+      "requirements": "Teste les changements du système — Un processus est en place pour tester les changements du système avant leur mise en œuvre."
+    },
+    "soc2-v2-cc8-1-8": {
+      "code": "CC8.1.8",
+      "control": "CC8.1.8",
+      "requirements": "Approuve les changements du système — Un processus est en place pour approuver les changements du système avant leur mise en œuvre."
+    },
+    "soc2-v2-cc8-1-9": {
+      "code": "CC8.1.9",
+      "control": "CC8.1.9",
+      "requirements": "Déploie les changements du système — Un processus est en place pour mettre en œuvre les changements du système."
+    },
+    "soc2-v2-cc8-1-10": {
+      "code": "CC8.1.10",
+      "control": "CC8.1.10",
+      "requirements": "Identifie et évalue les changements du système — Les objectifs affectés par les changements du système sont identifiés, et la capacité du système modifié à atteindre ces objectifs est évaluée tout au long du cycle de vie du développement du système."
+    },
+    "soc2-v2-cc8-1-11": {
+      "code": "CC8.1.11",
+      "control": "CC8.1.11",
+      "requirements": "Identifie les changements d’infrastructure, de données, de logiciels et de procédures nécessaires pour remédier aux incidents — Les changements requis pour continuer à atteindre les objectifs sont identifiés, et le processus de changement est initié dès leur identification."
+    },
+    "soc2-v2-cc8-1-12": {
+      "code": "CC8.1.12",
+      "control": "CC8.1.12",
+      "requirements": "Crée une configuration de référence des technologies IT — Une configuration de référence des technologies IT et des systèmes de contrôle est créée et maintenue."
+    },
+    "soc2-v2-cc8-1-13": {
+      "code": "CC8.1.13",
+      "control": "CC8.1.13",
+      "requirements": "Prévoit les changements nécessaires en situation d’urgence — Un processus est en place pour autoriser, concevoir, tester, approuver et mettre en œuvre les changements nécessaires en situation d’urgence (c’est-à-dire les changements devant être mis en œuvre dans des délais urgents)."
+    },
+    "soc2-v2-cc8-1-14": {
+      "code": "CC8.1.14",
+      "control": "CC8.1.14",
+      "requirements": "Protège les informations confidentielles — L’entité protège les informations confidentielles lors de la conception, du développement, des tests, de la mise en œuvre et des processus de changement du système afin d’atteindre ses objectifs relatifs à la confidentialité."
+    },
+    "soc2-v2-cc8-1-15": {
+      "code": "CC8.1.15",
+      "control": "CC8.1.15",
+      "requirements": "Protège les données personnelles — L’entité protège les données personnelles lors de la conception, du développement, des tests, de la mise en œuvre et des processus de changement du système afin d’atteindre ses objectifs relatifs à la vie privée."
+    },
+    "soc2-v2-cc9-1": {
+      "code": "CC9.1",
+      "control": "CC9.1",
+      "requirements": "L’entité identifie, sélectionne et développe des activités d’atténuation des risques liés à des perturbations potentielles de l’activité."
+    },
+    "soc2-v2-cc9-1-1": {
+      "code": "CC9.1.1",
+      "control": "CC9.1.1",
+      "requirements": "Prend en compte l’atténuation des risques de perturbation de l’activité — Les activités d’atténuation incluent l’élaboration de politiques, procédures, communications et solutions de traitement alternatives planifiées afin de répondre aux événements de sécurité qui perturbent les opérations, d’en atténuer les effets et de s’en rétablir. Ces politiques et procédures incluent des processus de surveillance, ainsi que des informations et communications, afin d’atteindre les objectifs de l’entité pendant les efforts de réponse, d’atténuation et de rétablissement."
+    },
+    "soc2-v2-cc9-1-2": {
+      "code": "CC9.1.2",
+      "control": "CC9.1.2",
+      "requirements": "Prend en compte l’utilisation d’une assurance pour atténuer les risques d’impact financier — Les activités de gestion des risques tiennent compte du recours à l’assurance afin de compenser l’impact financier d’événements de perte qui, autrement, compromettraient la capacité de l’entité à atteindre ses objectifs."
+    },
+    "soc2-v2-cc9-2": {
+      "code": "CC9.2",
+      "control": "CC9.2",
+      "requirements": "L’entité évalue et gère les risques associés aux fournisseurs et partenaires commerciaux."
+    },
+    "soc2-v2-cc9-2-1": {
+      "code": "CC9.2.1",
+      "control": "CC9.2.1",
+      "requirements": "Établit des exigences pour les relations avec les fournisseurs et partenaires — L’entité définit des exigences spécifiques pour la relation avec un fournisseur ou un partenaire commercial, incluant (1) le périmètre des services et les spécifications produit, (2) les rôles et responsabilités, (3) les exigences de conformité et (4) les niveaux de service."
+    },
+    "soc2-v2-cc9-2-2": {
+      "code": "CC9.2.2",
+      "control": "CC9.2.2",
+      "requirements": "Évalue les risques liés aux fournisseurs et partenaires — L’entité évalue périodiquement les risques que les fournisseurs et partenaires commerciaux (ainsi que les fournisseurs et partenaires de ces entités) font peser sur l’atteinte des objectifs de l’entité."
+    },
+    "soc2-v2-cc9-2-3": {
+      "code": "CC9.2.3",
+      "control": "CC9.2.3",
+      "requirements": "Assigne la responsabilité et la redevabilité pour la gestion des fournisseurs et partenaires — L’entité assigne la responsabilité et la redevabilité pour la gestion des risques associés aux fournisseurs et partenaires commerciaux."
+    },
+    "soc2-v2-cc9-2-4": {
+      "code": "CC9.2.4",
+      "control": "CC9.2.4",
+      "requirements": "Établit des protocoles de communication pour les fournisseurs et partenaires — L’entité établit des protocoles de communication et de résolution des problèmes de service ou de produit liés aux fournisseurs et partenaires commerciaux."
+    },
+    "soc2-v2-cc9-2-5": {
+      "code": "CC9.2.5",
+      "control": "CC9.2.5",
+      "requirements": "Établit des procédures de gestion des exceptions pour les fournisseurs et partenaires — L’entité établit des procédures de gestion des exceptions pour les problèmes de service ou de produit liés aux fournisseurs et partenaires commerciaux."
+    },
+    "soc2-v2-cc9-2-6": {
+      "code": "CC9.2.6",
+      "control": "CC9.2.6",
+      "requirements": "Évalue la performance des fournisseurs et partenaires — L’entité évalue périodiquement la performance des fournisseurs et partenaires commerciaux."
+    },
+    "soc2-v2-cc9-2-7": {
+      "code": "CC9.2.7",
+      "control": "CC9.2.7",
+      "requirements": "Met en œuvre des procédures pour traiter les problèmes identifiés lors des évaluations — L’entité met en œuvre des procédures pour traiter les problèmes identifiés dans les relations avec les fournisseurs et partenaires commerciaux."
+    },
+    "soc2-v2-cc9-2-8": {
+      "code": "CC9.2.8",
+      "control": "CC9.2.8",
+      "requirements": "Met en œuvre des procédures de fin de relation — L’entité met en œuvre des procédures pour mettre fin aux relations avec les fournisseurs et partenaires commerciaux."
+    },
+    "soc2-v2-cc9-2-9": {
+      "code": "CC9.2.9",
+      "control": "CC9.2.9",
+      "requirements": "Obtient des engagements de confidentialité de la part des fournisseurs et partenaires — L’entité obtient, de la part des fournisseurs et partenaires commerciaux ayant accès à des informations confidentielles, des engagements de confidentialité cohérents avec les engagements et exigences de confidentialité de l’entité."
+    },
+    "soc2-v2-cc9-2-10": {
+      "code": "CC9.2.10",
+      "control": "CC9.2.10",
+      "requirements": "Évalue le respect des engagements de confidentialité des fournisseurs et partenaires — Périodiquement et selon les besoins, l’entité évalue la conformité des fournisseurs et partenaires commerciaux aux engagements et exigences de confidentialité de l’entité."
+    },
+    "soc2-v2-cc9-2-11": {
+      "code": "CC9.2.11",
+      "control": "CC9.2.11",
+      "requirements": "Obtient des engagements de protection de la vie privée de la part des fournisseurs et partenaires — L’entité obtient, de la part des fournisseurs et partenaires commerciaux ayant accès à des informations personnelles, des engagements de protection de la vie privée cohérents avec les engagements et exigences de l’entité en matière de vie privée."
+    },
+    "soc2-v2-cc9-2-12": {
+      "code": "CC9.2.12",
+      "control": "CC9.2.12",
+      "requirements": "Évalue la conformité aux engagements de vie privée des fournisseurs et partenaires — Périodiquement et selon les besoins, l’entité évalue la conformité des fournisseurs et partenaires commerciaux aux engagements et exigences de l’entité en matière de vie privée et prend des mesures correctives si nécessaire."
+    },
+    "soc2-v2-a1-1": {
+      "code": "A1.1",
+      "control": "A1.1",
+      "requirements": "L’entité maintient, surveille et évalue la capacité de traitement actuelle et l’utilisation des composants du système (infrastructure, données et logiciels) afin de gérer la demande de capacité et de permettre la mise en œuvre d’une capacité supplémentaire pour aider à atteindre ses objectifs."
+    },
+    "soc2-v2-a1-1-1": {
+      "code": "A1.1.1",
+      "control": "A1.1.1",
+      "requirements": "Mesure l’utilisation actuelle — L’utilisation des composants du système est mesurée afin d’établir une base de référence pour la gestion de capacité et de l’utiliser lors de l’évaluation du risque d’indisponibilité due à des contraintes de capacité."
+    },
+    "soc2-v2-a1-1-2": {
+      "code": "A1.1.2",
+      "control": "A1.1.2",
+      "requirements": "Prévoit la capacité — L’utilisation moyenne attendue et les pics d’utilisation des composants du système sont prévus et comparés à la capacité du système et aux tolérances associées. La prévision tient compte de la capacité en cas de défaillance de composants du système qui limitent la capacité."
+    },
+    "soc2-v2-a1-1-3": {
+      "code": "A1.1.3",
+      "control": "A1.1.3",
+      "requirements": "Apporte des changements sur la base des prévisions — Le processus de gestion des changements du système est déclenché lorsque l’utilisation prévue dépasse les tolérances de capacité."
+    },
+    "soc2-v2-a1-2": {
+      "code": "A1.2",
+      "control": "A1.2",
+      "requirements": "L’entité autorise, conçoit, développe ou acquiert, met en œuvre, exploite, approuve, maintient et surveille des protections environnementales, des logiciels, des processus de sauvegarde des données et une infrastructure de reprise afin d’atteindre ses objectifs."
+    },
+    "soc2-v2-a1-2-1": {
+      "code": "A1.2.1",
+      "control": "A1.2.1",
+      "requirements": "Identifie les menaces environnementales — Dans le cadre du processus d’évaluation des risques, la direction identifie les menaces environnementales susceptibles de nuire à la disponibilité du système, y compris celles résultant de conditions météorologiques défavorables, de la défaillance de systèmes de contrôle environnemental, de décharges électriques, d’incendies et d’eau."
+    },
+    "soc2-v2-a1-2-2": {
+      "code": "A1.2.2",
+      "control": "A1.2.2",
+      "requirements": "Conçoit des mesures de détection — Des mesures de détection sont mises en œuvre pour identifier des anomalies pouvant résulter d’événements de menace environnementale."
+    },
+    "soc2-v2-a1-2-3": {
+      "code": "A1.2.3",
+      "control": "A1.2.3",
+      "requirements": "Met en œuvre et maintient des mécanismes de protection environnementale — La direction met en œuvre et maintient des mécanismes de protection environnementale afin de prévenir et d’atténuer les événements environnementaux."
+    },
+    "soc2-v2-a1-2-4": {
+      "code": "A1.2.4",
+      "control": "A1.2.4",
+      "requirements": "Met en œuvre des alertes pour analyser les anomalies — La direction met en œuvre des alertes communiquées au personnel pour analyse afin d’identifier des événements de menace environnementale."
+    },
+    "soc2-v2-a1-2-5": {
+      "code": "A1.2.5",
+      "control": "A1.2.5",
+      "requirements": "Répond aux événements de menace environnementale — Des procédures sont en place pour répondre aux événements de menace environnementale et pour évaluer périodiquement l’efficacité de ces politiques et procédures. Cela inclut des systèmes d’atténuation automatiques (par exemple, un système d’alimentation sans interruption et un sous-système de secours par générateur)."
+    },
+    "soc2-v2-a1-2-6": {
+      "code": "A1.2.6",
+      "control": "A1.2.6",
+      "requirements": "Communique et examine les événements de menace environnementale détectés — Les événements de menace environnementale détectés sont communiqués et examinés par les personnes responsables de la gestion du système, et des actions sont entreprises si nécessaire."
+    },
+    "soc2-v2-a1-2-7": {
+      "code": "A1.2.7",
+      "control": "A1.2.7",
+      "requirements": "Détermine les données nécessitant une sauvegarde — Les données sont évaluées afin de déterminer si une sauvegarde est requise."
+    },
+    "soc2-v2-a1-2-8": {
+      "code": "A1.2.8",
+      "control": "A1.2.8",
+      "requirements": "Effectue la sauvegarde des données — Des procédures sont en place pour sauvegarder les données, surveiller afin de détecter les échecs de sauvegarde et initier des actions correctives lorsque de tels échecs se produisent."
+    },
+    "soc2-v2-a1-2-9": {
+      "code": "A1.2.9",
+      "control": "A1.2.9",
+      "requirements": "Traite le stockage hors site — Les données de sauvegarde sont stockées dans un lieu suffisamment éloigné de leur emplacement principal de stockage afin de réduire, à un niveau approprié, la probabilité qu’un événement de sécurité ou une menace environnementale affecte les deux ensembles de données."
+    },
+    "soc2-v2-a1-2-10": {
+      "code": "A1.2.10",
+      "control": "A1.2.10",
+      "requirements": "Met en œuvre une infrastructure de traitement alternative — Des mesures sont mises en œuvre pour migrer le traitement vers une infrastructure alternative au cas où l’infrastructure normale de traitement deviendrait indisponible."
+    },
+    "soc2-v2-a1-3": {
+      "code": "A1.3",
+      "control": "A1.3",
+      "requirements": "L’entité teste les procédures du plan de reprise soutenant la restauration du système afin d’atteindre ses objectifs."
+    },
+    "soc2-v2-a1-3-1": {
+      "code": "A1.3.1",
+      "control": "A1.3.1",
+      "requirements": "Met en œuvre des tests du plan de continuité d’activité — Les tests du plan de continuité d’activité sont réalisés périodiquement. Les tests comprennent (1) l’élaboration de scénarios de test basés sur la probabilité et l’ampleur des menaces; (2) la prise en compte de composants du système, à l’échelle de l’entité, pouvant affecter la disponibilité; (3) des scénarios prenant en compte l’indisponibilité potentielle de personnel clé; et (4) la révision des plans de continuité et des systèmes sur la base des résultats des tests."
+    },
+    "soc2-v2-a1-3-2": {
+      "code": "A1.3.2",
+      "control": "A1.3.2",
+      "requirements": "Teste l’intégrité et l’exhaustivité des données de sauvegarde — L’intégrité et l’exhaustivité des informations de sauvegarde sont testées sur une base périodique."
+    },
+    "soc2-v2-c1-1": {
+      "code": "C1.1",
+      "control": "C1.1",
+      "requirements": "L’entité identifie et maintient les informations confidentielles afin d’atteindre ses objectifs relatifs à la confidentialité."
+    },
+    "soc2-v2-c1-1-1": {
+      "code": "C1.1.1",
+      "control": "C1.1.1",
+      "requirements": "Identifie les informations confidentielles — Des procédures sont en place pour identifier et désigner les informations confidentielles lorsqu’elles sont reçues ou créées, et pour déterminer la durée pendant laquelle elles doivent être conservées."
+    },
+    "soc2-v2-c1-1-2": {
+      "code": "C1.1.2",
+      "control": "C1.1.2",
+      "requirements": "Protège les informations confidentielles contre la destruction — Des procédures sont en place pour protéger les informations confidentielles contre l’effacement ou la destruction pendant la période de conservation spécifiée."
+    },
+    "soc2-v2-c1-2": {
+      "code": "C1.2",
+      "control": "C1.2",
+      "requirements": "L’entité élimine les informations confidentielles afin d’atteindre ses objectifs relatifs à la confidentialité."
+    },
+    "soc2-v2-c1-2-1": {
+      "code": "C1.2.1",
+      "control": "C1.2.1",
+      "requirements": "Identifie les informations confidentielles à détruire — Des procédures sont en place pour identifier les informations confidentielles nécessitant d’être détruites lorsque la période de conservation arrive à son terme."
+    },
+    "soc2-v2-c1-2-2": {
+      "code": "C1.2.2",
+      "control": "C1.2.2",
+      "requirements": "Détruit les informations confidentielles — Des procédures sont en place pour effacer ou autrement détruire les informations confidentielles identifiées pour destruction."
+    },
+    "soc2-v2-pi1-1": {
+      "code": "PI1.1",
+      "control": "PI1.1",
+      "requirements": "L’entité obtient ou génère, utilise et communique des informations pertinentes et de qualité concernant les objectifs liés au traitement, y compris les définitions des données traitées et les spécifications des produits et services, afin de soutenir l’utilisation des produits et services."
+    },
+    "soc2-v2-pi1-1-1": {
+      "code": "PI1.1.1",
+      "control": "PI1.1.1",
+      "requirements": "Identifie les spécifications d’information — L’entité identifie les spécifications d’information requises pour soutenir l’utilisation des produits et services."
+    },
+    "soc2-v2-pi1-1-2": {
+      "code": "PI1.1.2",
+      "control": "PI1.1.2",
+      "requirements": "Définit les données nécessaires pour soutenir un produit ou un service — Lorsque des données sont fournies dans le cadre d’un service ou d’un produit, ou dans le cadre d’une obligation de reporting liée à un produit ou un service : — 1. La définition des données est disponible pour les utilisateurs des données — 2. La définition des données inclut les informations suivantes : — a. La population d’événements ou d’instances incluse dans les données — b. La nature de chaque élément (par exemple, champ) des données (c’est-à-dire l’événement ou l’instance auquel l’élément de données se rapporte, par exemple, le prix de transaction d’une vente d’actions de XYZ Corporation pour la dernière transaction de ce titre un jour donné) — c. La ou les sources des données — d. La ou les unités de mesure des éléments de données (par exemple, champs) — e. La précision / exactitude de la mesure — f. L’incertitude ou l’intervalle de confiance inhérent à chaque élément de données et à la population de ces éléments — g. La date d’observation des données ou la période pendant laquelle les événements pertinents se sont produits — h. Les facteurs, en plus de la date et de la période, utilisés pour déterminer l’inclusion et l’exclusion d’éléments dans les éléments de données et la population — 3. La définition est complète et exacte — 4. La description des données identifie toute information nécessaire pour comprendre chaque élément de données et la population, de manière cohérente avec sa définition et son objectif (métadonnées), qui n’a pas été incluse dans les données."
+    },
+    "soc2-v2-pi1-2": {
+      "code": "PI1.2",
+      "control": "PI1.2",
+      "requirements": "L’entité met en œuvre des politiques et procédures relatives aux entrées du système, y compris des contrôles d’exhaustivité et d’exactitude, afin d’aboutir à des produits, services et rapports conformes à ses objectifs."
+    },
+    "soc2-v2-pi1-2-1": {
+      "code": "PI1.2.1",
+      "control": "PI1.2.1",
+      "requirements": "Définit les caractéristiques des entrées de traitement — Les caractéristiques des entrées de traitement nécessaires pour satisfaire aux exigences sont définies."
+    },
+    "soc2-v2-pi1-2-2": {
+      "code": "PI1.2.2",
+      "control": "PI1.2.2",
+      "requirements": "Évalue les entrées de traitement — Les entrées de traitement sont évaluées afin de vérifier leur conformité aux exigences d’entrée définies."
+    },
+    "soc2-v2-pi1-2-3": {
+      "code": "PI1.2.3",
+      "control": "PI1.2.3",
+      "requirements": "Crée et maintient des enregistrements des entrées du système — Des enregistrements des activités d’entrée du système sont créés et conservés de manière complète et exacte, en temps opportun."
+    },
+    "soc2-v2-pi1-3": {
+      "code": "PI1.3",
+      "control": "PI1.3",
+      "requirements": "L’entité met en œuvre des politiques et procédures relatives au traitement du système afin d’aboutir à des produits, services et rapports conformes à ses objectifs."
+    },
+    "soc2-v2-pi1-3-1": {
+      "code": "PI1.3.1",
+      "control": "PI1.3.1",
+      "requirements": "Définit les spécifications de traitement — Les spécifications de traitement nécessaires pour satisfaire aux exigences du produit ou du service sont définies."
+    },
+    "soc2-v2-pi1-3-2": {
+      "code": "PI1.3.2",
+      "control": "PI1.3.2",
+      "requirements": "Définit les activités de traitement — Les activités de traitement sont définies afin de produire des produits ou services conformes aux spécifications."
+    },
+    "soc2-v2-pi1-3-3": {
+      "code": "PI1.3.3",
+      "control": "PI1.3.3",
+      "requirements": "Détecte et corrige les erreurs de production — Les erreurs du processus de production sont détectées et corrigées en temps opportun."
+    },
+    "soc2-v2-pi1-3-4": {
+      "code": "PI1.3.4",
+      "control": "PI1.3.4",
+      "requirements": "Enregistre les activités de traitement du système — Les activités de traitement du système sont enregistrées de manière complète et exacte, en temps opportun."
+    },
+    "soc2-v2-pi1-3-5": {
+      "code": "PI1.3.5",
+      "control": "PI1.3.5",
+      "requirements": "Traite les entrées — Les entrées sont traitées de manière complète, exacte et en temps opportun, comme autorisé, conformément aux activités de traitement définies."
+    },
+    "soc2-v2-pi1-4": {
+      "code": "PI1.4",
+      "control": "PI1.4",
+      "requirements": "L’entité met en œuvre des politiques et procédures afin de rendre disponible ou de livrer la sortie de manière complète, exacte et en temps opportun, conformément aux spécifications, afin d’atteindre ses objectifs."
+    },
+    "soc2-v2-pi1-4-1": {
+      "code": "PI1.4.1",
+      "control": "PI1.4.1",
+      "requirements": "Protège la sortie — La sortie est protégée lorsqu’elle est stockée ou livrée, ou les deux, afin d’empêcher le vol, la destruction, la corruption ou la détérioration qui empêcheraient la sortie de satisfaire aux spécifications."
+    },
+    "soc2-v2-pi1-4-2": {
+      "code": "PI1.4.2",
+      "control": "PI1.4.2",
+      "requirements": "Distribue la sortie uniquement aux parties prévues — La sortie est distribuée ou rendue disponible uniquement aux parties prévues."
+    },
+    "soc2-v2-pi1-4-3": {
+      "code": "PI1.4.3",
+      "control": "PI1.4.3",
+      "requirements": "Distribue la sortie de manière complète et exacte — Des procédures sont en place pour garantir l’exhaustivité, l’exactitude et la ponctualité de la sortie distribuée."
+    },
+    "soc2-v2-pi1-4-4": {
+      "code": "PI1.4.4",
+      "control": "PI1.4.4",
+      "requirements": "Crée et maintient des enregistrements des activités de sortie du système — Des enregistrements des activités de sortie du système sont créés et conservés de manière complète et exacte, en temps opportun."
+    },
+    "soc2-v2-pi1-5": {
+      "code": "PI1.5",
+      "control": "PI1.5",
+      "requirements": "L’entité met en œuvre des politiques et procédures afin de stocker les entrées, les éléments en cours de traitement et les sorties de manière complète, exacte et en temps opportun, conformément aux spécifications du système, afin d’atteindre ses objectifs."
+    },
+    "soc2-v2-pi1-5-1": {
+      "code": "PI1.5.1",
+      "control": "PI1.5.1",
+      "requirements": "Protège les éléments stockés — Les éléments stockés sont protégés afin d’empêcher le vol, la corruption, la destruction ou la détérioration qui empêcheraient la sortie de satisfaire aux spécifications."
+    },
+    "soc2-v2-pi1-5-2": {
+      "code": "PI1.5.2",
+      "control": "PI1.5.2",
+      "requirements": "Archive et protège les enregistrements du système — Les enregistrements du système sont archivés, et les archives sont protégées contre le vol, la corruption, la destruction ou la détérioration qui empêcheraient leur utilisation."
+    },
+    "soc2-v2-pi1-5-3": {
+      "code": "PI1.5.3",
+      "control": "PI1.5.3",
+      "requirements": "Stocke les données de manière complète et exacte — Des procédures sont en place pour garantir le stockage complet, exact et en temps opportun des données."
+    },
+    "soc2-v2-pi1-5-4": {
+      "code": "PI1.5.4",
+      "control": "PI1.5.4",
+      "requirements": "Crée et maintient des enregistrements des activités de stockage du système — Des enregistrements des activités de stockage du système sont créés et conservés de manière complète et exacte, en temps opportun."
+    },
+    "soc2-v2-p1-1": {
+      "code": "P1.1",
+      "control": "P1.1",
+      "requirements": "L’entité informe les personnes concernées de ses pratiques en matière de confidentialité afin d’atteindre ses objectifs relatifs à la vie privée. L’avis est mis à jour et communiqué aux personnes concernées en temps opportun en cas de changements des pratiques de l’entité en matière de confidentialité, y compris des changements dans l’utilisation des informations personnelles, afin d’atteindre ses objectifs relatifs à la vie privée."
+    },
+    "soc2-v2-p1-1-1": {
+      "code": "P1.1.1",
+      "control": "P1.1.1",
+      "requirements": "Communique aux personnes concernées — Un avis est fourni aux personnes concernées concernant les éléments suivants : — — Finalité de la collecte des informations personnelles — — Choix et consentement — — Types d’informations personnelles collectées — — Méthodes de collecte (par exemple, utilisation de cookies ou d’autres techniques de suivi) — — Utilisation, conservation et élimination — — Accès — — Divulgation à des tiers — — Sécurité pour la vie privée — — Qualité, y compris les responsabilités des personnes concernées en matière de qualité — — Surveillance et application — Si des informations personnelles sont collectées auprès de sources autres que l’individu, ces sources sont décrites dans l’avis de confidentialité."
+    },
+    "soc2-v2-p1-1-2": {
+      "code": "P1.1.2",
+      "control": "P1.1.2",
+      "requirements": "Fournit un avis aux personnes concernées — Un avis est fourni aux personnes concernées (1) au moment ou avant la collecte des informations personnelles, ou dès que raisonnablement possible par la suite, (2) au moment ou avant que l’entité ne modifie son avis de confidentialité, ou dès que raisonnablement possible par la suite, ou (3) avant que les informations personnelles ne soient utilisées à de nouvelles fins non précédemment identifiées."
+    },
+    "soc2-v2-p1-1-3": {
+      "code": "P1.1.3",
+      "control": "P1.1.3",
+      "requirements": "Couvre les entités et activités dans l’avis — Une description objective des entités et des activités couvertes est incluse dans l’avis de confidentialité de l’entité."
+    },
+    "soc2-v2-p1-1-4": {
+      "code": "P1.1.4",
+      "control": "P1.1.4",
+      "requirements": "Utilise un langage clair et visible — L’avis de confidentialité de l’entité est visible et utilise un langage clair."
+    },
+    "soc2-v2-p2-1": {
+      "code": "P2.1",
+      "control": "P2.1",
+      "requirements": "L’entité communique aux personnes concernées les choix disponibles concernant la collecte, l’utilisation, la conservation, la divulgation et l’élimination des informations personnelles, ainsi que les conséquences, le cas échéant, de chaque choix. Le consentement explicite pour la collecte, l’utilisation, la conservation, la divulgation et l’élimination des informations personnelles est obtenu des personnes concernées ou d’autres personnes autorisées, si requis. Ce consentement n’est obtenu que pour la finalité prévue des informations afin d’atteindre les objectifs de l’entité relatifs à la vie privée. Le fondement retenu par l’entité pour déterminer le consentement implicite à la collecte, l’utilisation, la conservation, la divulgation et l’élimination des informations personnelles est documenté."
+    },
+    "soc2-v2-p2-1-1": {
+      "code": "P2.1.1",
+      "control": "P2.1.1",
+      "requirements": "Communique aux personnes concernées — Les personnes concernées sont informées (a) des choix qui s’offrent à elles concernant la collecte, l’utilisation et la divulgation des informations personnelles et (b) du fait qu’un consentement implicite ou explicite est requis pour collecter, utiliser et divulguer des informations personnelles, sauf si une loi ou un règlement l’exige ou l’autorise spécifiquement."
+    },
+    "soc2-v2-p2-1-2": {
+      "code": "P2.1.2",
+      "control": "P2.1.2",
+      "requirements": "Communique les conséquences d’un refus ou d’un retrait du consentement — Lors de la collecte d’informations personnelles, les personnes concernées sont informées des conséquences du refus de fournir des informations personnelles ou du refus ou du retrait du consentement à l’utilisation des informations personnelles aux fins identifiées dans l’avis."
+    },
+    "soc2-v2-p2-1-3": {
+      "code": "P2.1.3",
+      "control": "P2.1.3",
+      "requirements": "Obtient un consentement implicite ou explicite — Un consentement implicite ou explicite est obtenu des personnes concernées au moment ou avant la collecte des informations personnelles, ou peu après. Les préférences de l’individu exprimées dans son consentement sont confirmées et mises en œuvre."
+    },
+    "soc2-v2-p2-1-4": {
+      "code": "P2.1.4",
+      "control": "P2.1.4",
+      "requirements": "Documente et obtient le consentement pour de nouvelles finalités et utilisations — Si des informations précédemment collectées doivent être utilisées à des fins non identifiées auparavant dans l’avis de confidentialité, la nouvelle finalité est documentée, la personne concernée est avisée et un consentement implicite ou explicite est obtenu avant cette nouvelle utilisation ou finalité."
+    },
+    "soc2-v2-p2-1-5": {
+      "code": "P2.1.5",
+      "control": "P2.1.5",
+      "requirements": "Obtient un consentement explicite pour les informations sensibles — Un consentement explicite est obtenu directement auprès de la personne concernée lorsque des informations personnelles sensibles sont collectées, utilisées ou divulguées, sauf si une loi ou un règlement l’exige spécifiquement."
+    },
+    "soc2-v2-p2-1-6": {
+      "code": "P2.1.6",
+      "control": "P2.1.6",
+      "requirements": "Obtient le consentement pour les transferts de données — Le consentement est obtenu avant que des informations personnelles ne soient transférées vers ou depuis l’ordinateur d’un individu ou tout autre dispositif similaire."
+    },
+    "soc2-v2-p3-1": {
+      "code": "P3.1",
+      "control": "P3.1",
+      "requirements": "Les informations personnelles sont collectées de manière cohérente avec les objectifs de l’entité relatifs à la vie privée."
+    },
+    "soc2-v2-p3-1-1": {
+      "code": "P3.1.1",
+      "control": "P3.1.1",
+      "requirements": "Limite la collecte des informations personnelles — La collecte des informations personnelles est limitée à ce qui est nécessaire pour atteindre les objectifs de l’entité."
+    },
+    "soc2-v2-p3-1-2": {
+      "code": "P3.1.2",
+      "control": "P3.1.2",
+      "requirements": "Collecte les informations par des moyens équitables et licites — Les méthodes de collecte d’informations personnelles sont examinées par la direction avant leur mise en œuvre afin de confirmer que les informations personnelles sont obtenues (a) de manière équitable, sans intimidation ni tromperie, et (b) de manière licite, en respectant toutes les règles de droit pertinentes, qu’elles proviennent de la législation ou de la common law, relatives à la collecte d’informations personnelles."
+    },
+    "soc2-v2-p3-1-3": {
+      "code": "P3.1.3",
+      "control": "P3.1.3",
+      "requirements": "Collecte les informations auprès de sources fiables — La direction confirme que les tiers auprès desquels des informations personnelles sont collectées (c’est-à-dire des sources autres que l’individu) sont des sources fiables qui collectent les informations de manière équitable et licite."
+    },
+    "soc2-v2-p3-1-4": {
+      "code": "P3.1.4",
+      "control": "P3.1.4",
+      "requirements": "Informe les personnes concernées lorsque des informations supplémentaires sont acquises — Les personnes concernées sont informées si l’entité développe ou acquiert des informations supplémentaires à leur sujet pour son usage."
+    },
+    "soc2-v2-p3-2": {
+      "code": "P3.2",
+      "control": "P3.2",
+      "requirements": "Pour les informations nécessitant un consentement explicite, l’entité communique la nécessité d’un tel consentement, ainsi que les conséquences d’un défaut de consentement à la demande d’informations personnelles, et obtient le consentement avant la collecte des informations afin d’atteindre les objectifs de l’entité relatifs à la vie privée."
+    },
+    "soc2-v2-p3-2-1": {
+      "code": "P3.2.1",
+      "control": "P3.2.1",
+      "requirements": "Obtient un consentement explicite pour les informations sensibles — Un consentement explicite est obtenu directement auprès de la personne concernée lorsque des informations personnelles sensibles sont collectées, utilisées ou divulguées, sauf si une loi ou un règlement l’exige spécifiquement."
+    },
+    "soc2-v2-p3-2-2": {
+      "code": "P3.2.2",
+      "control": "P3.2.2",
+      "requirements": "Documente le consentement explicite pour conserver les informations — La documentation du consentement explicite pour la collecte, l’utilisation ou la divulgation d’informations personnelles sensibles est conservée conformément aux objectifs relatifs à la vie privée."
+    },
+    "soc2-v2-p4-1": {
+      "code": "P4.1",
+      "control": "P4.1",
+      "requirements": "L’entité limite l’utilisation des informations personnelles aux finalités identifiées dans les objectifs de l’entité relatifs à la vie privée."
+    },
+    "soc2-v2-p4-1-1": {
+      "code": "P4.1.1",
+      "control": "P4.1.1",
+      "requirements": "Utilise les informations personnelles aux fins prévues — Les informations personnelles ne sont utilisées qu’aux fins prévues pour lesquelles elles ont été collectées et uniquement lorsqu’un consentement implicite ou explicite a été obtenu, sauf si une loi ou un règlement l’exige spécifiquement."
+    },
+    "soc2-v2-p4-2": {
+      "code": "P4.2",
+      "control": "P4.2",
+      "requirements": "L’entité conserve les informations personnelles de manière cohérente avec les objectifs de l’entité relatifs à la vie privée."
+    },
+    "soc2-v2-p4-2-1": {
+      "code": "P4.2.1",
+      "control": "P4.2.1",
+      "requirements": "Conserve les informations personnelles — Les informations personnelles ne sont conservées que pendant la durée nécessaire à la réalisation des finalités déclarées, sauf si une loi ou un règlement l’exige spécifiquement."
+    },
+    "soc2-v2-p4-2-2": {
+      "code": "P4.2.2",
+      "control": "P4.2.2",
+      "requirements": "Protège les informations personnelles — Des politiques et procédures ont été mises en œuvre pour protéger les informations personnelles contre l’effacement ou la destruction pendant la période de conservation spécifiée."
+    },
+    "soc2-v2-p4-3": {
+      "code": "P4.3",
+      "control": "P4.3",
+      "requirements": "L’entité élimine de manière sécurisée les informations personnelles afin d’atteindre ses objectifs relatifs à la vie privée."
+    },
+    "soc2-v2-p4-3-1": {
+      "code": "P4.3.1",
+      "control": "P4.3.1",
+      "requirements": "Capte, identifie et signale les demandes de suppression — Les demandes de suppression d’informations personnelles sont captées, et les informations liées à ces demandes sont identifiées et signalées pour destruction afin d’atteindre les objectifs de l’entité relatifs à la vie privée."
+    },
+    "soc2-v2-p4-3-2": {
+      "code": "P4.3.2",
+      "control": "P4.3.2",
+      "requirements": "Élimine, détruit et expurge les informations personnelles — Les informations personnelles qui ne sont plus conservées sont anonymisées, éliminées ou détruites d’une manière qui empêche la perte, le vol, l’usage abusif ou l’accès non autorisé."
+    },
+    "soc2-v2-p4-3-3": {
+      "code": "P4.3.3",
+      "control": "P4.3.3",
+      "requirements": "Détruit les informations personnelles — Des politiques et procédures sont mises en œuvre pour effacer ou autrement détruire les informations personnelles identifiées pour destruction."
+    },
+    "soc2-v2-p5-1": {
+      "code": "P5.1",
+      "control": "P5.1",
+      "requirements": "L’entité accorde aux personnes concernées identifiées et authentifiées la capacité d’accéder à leurs informations personnelles stockées pour examen et, sur demande, fournit des copies physiques ou électroniques de ces informations aux personnes concernées afin d’atteindre ses objectifs relatifs à la vie privée. Si l’accès est refusé, les personnes concernées sont informées du refus et de sa raison, comme requis, afin d’atteindre les objectifs de l’entité relatifs à la vie privée."
+    },
+    "soc2-v2-p5-1-1": {
+      "code": "P5.1.1",
+      "control": "P5.1.1",
+      "requirements": "Authentifie l’identité des personnes concernées — L’identité des personnes concernées qui demandent l’accès à leurs informations personnelles est authentifiée avant qu’elles ne reçoivent l’accès à ces informations."
+    },
+    "soc2-v2-p5-1-2": {
+      "code": "P5.1.2",
+      "control": "P5.1.2",
+      "requirements": "Permet aux personnes concernées d’accéder à leurs informations personnelles — Les personnes concernées peuvent déterminer si l’entité détient des informations personnelles à leur sujet et, sur demande, peuvent obtenir l’accès à leurs informations personnelles."
+    },
+    "soc2-v2-p5-1-3": {
+      "code": "P5.1.3",
+      "control": "P5.1.3",
+      "requirements": "Fournit des informations personnelles compréhensibles dans un délai raisonnable — Les informations personnelles sont fournies aux personnes concernées sous une forme compréhensible, dans un délai raisonnable et à un coût raisonnable, le cas échéant."
+    },
+    "soc2-v2-p5-1-4": {
+      "code": "P5.1.4",
+      "control": "P5.1.4",
+      "requirements": "Informe les personnes concernées si l’accès est refusé — Lorsque l’accès aux informations personnelles est refusé aux personnes concernées, l’entité les informe du refus et de la raison du refus en temps opportun, sauf si la loi ou un règlement l’interdit."
+    },
+    "soc2-v2-p5-2": {
+      "code": "P5.2",
+      "control": "P5.2",
+      "requirements": "L’entité corrige, modifie ou complète les informations personnelles sur la base des informations fournies par les personnes concernées et communique ces informations à des tiers, selon ses engagements ou les exigences applicables, afin d’atteindre ses objectifs relatifs à la vie privée. Si une demande de correction est refusée, les personnes concernées sont informées du refus et de sa raison afin d’atteindre les objectifs de l’entité relatifs à la vie privée."
+    },
+    "soc2-v2-p5-2-1": {
+      "code": "P5.2.1",
+      "control": "P5.2.1",
+      "requirements": "Communique le refus des demandes d’accès — Les personnes concernées sont informées, par écrit, de la raison pour laquelle une demande d’accès à leurs informations personnelles a été refusée, de la source du droit légal de l’entité de refuser cet accès, le cas échéant, et du droit de l’individu, le cas échéant, de contester ce refus, comme spécifiquement autorisé ou requis par la loi ou un règlement."
+    },
+    "soc2-v2-p5-2-2": {
+      "code": "P5.2.2",
+      "control": "P5.2.2",
+      "requirements": "Permet aux personnes concernées de mettre à jour ou corriger leurs informations personnelles — Les personnes concernées peuvent mettre à jour ou corriger les informations personnelles détenues par l’entité. L’entité fournit ces informations mises à jour ou corrigées aux tiers auxquels les informations personnelles de la personne concernée ont été précédemment communiquées, conformément à l’objectif de l’entité relatif à la vie privée."
+    },
+    "soc2-v2-p5-2-3": {
+      "code": "P5.2.3",
+      "control": "P5.2.3",
+      "requirements": "Communique le refus des demandes de correction — Les personnes concernées sont informées, par écrit, de la raison pour laquelle une demande de correction d’informations personnelles a été refusée et de la manière dont elles peuvent faire appel."
+    },
+    "soc2-v2-p6-1": {
+      "code": "P6.1",
+      "control": "P6.1",
+      "requirements": "L’entité divulgue des informations personnelles à des tiers avec le consentement explicite des personnes concernées, et ce consentement est obtenu avant la divulgation afin d’atteindre les objectifs de l’entité relatifs à la vie privée."
+    },
+    "soc2-v2-p6-1-1": {
+      "code": "P6.1.1",
+      "control": "P6.1.1",
+      "requirements": "Communique les politiques de confidentialité aux tiers — Les politiques de confidentialité ou d’autres instructions ou exigences spécifiques pour le traitement des informations personnelles sont communiquées aux tiers auxquels des informations personnelles sont divulguées."
+    },
+    "soc2-v2-p6-1-2": {
+      "code": "P6.1.2",
+      "control": "P6.1.2",
+      "requirements": "Ne divulgue des informations personnelles que lorsque c’est approprié — Les informations personnelles ne sont divulguées à des tiers que pour les finalités pour lesquelles elles ont été collectées ou créées et uniquement lorsqu’un consentement implicite ou explicite a été obtenu de la personne concernée, sauf si une loi ou un règlement l’exige spécifiquement."
+    },
+    "soc2-v2-p6-1-3": {
+      "code": "P6.1.3",
+      "control": "P6.1.3",
+      "requirements": "Ne divulgue des informations personnelles qu’à des tiers appropriés — Les informations personnelles ne sont divulguées qu’à des tiers ayant des accords avec l’entité pour protéger les informations personnelles d’une manière cohérente avec les aspects pertinents de l’avis de confidentialité de l’entité ou d’autres instructions ou exigences spécifiques. L’entité a des procédures en place pour évaluer que ces tiers disposent de contrôles efficaces afin de respecter les termes de l’accord, les instructions ou les exigences."
+    },
+    "soc2-v2-p6-1-4": {
+      "code": "P6.1.4",
+      "control": "P6.1.4",
+      "requirements": "Divulgue des informations à des tiers pour de nouvelles finalités et utilisations — Les informations personnelles ne sont divulguées à des tiers pour de nouvelles finalités ou utilisations qu’avec le consentement implicite ou explicite préalable des personnes concernées."
+    },
+    "soc2-v2-p6-2": {
+      "code": "P6.2",
+      "control": "P6.2",
+      "requirements": "L’entité crée et conserve un registre complet, exact et tenu en temps opportun des divulgations autorisées d’informations personnelles afin d’atteindre ses objectifs relatifs à la vie privée."
+    },
+    "soc2-v2-p6-2-1": {
+      "code": "P6.2.1",
+      "control": "P6.2.1",
+      "requirements": "Crée et conserve un registre des divulgations autorisées — L’entité crée et maintient un registre des divulgations autorisées d’informations personnelles, complet, exact et tenu en temps opportun."
+    },
+    "soc2-v2-p6-3": {
+      "code": "P6.3",
+      "control": "P6.3",
+      "requirements": "L’entité crée et conserve un registre complet, exact et tenu en temps opportun des divulgations non autorisées détectées ou signalées (y compris les violations) d’informations personnelles afin d’atteindre ses objectifs relatifs à la vie privée."
+    },
+    "soc2-v2-p6-3-1": {
+      "code": "P6.3.1",
+      "control": "P6.3.1",
+      "requirements": "Crée et conserve un registre des divulgations non autorisées détectées ou signalées — L’entité crée et maintient un registre des divulgations non autorisées détectées ou signalées d’informations personnelles, complet, exact et tenu en temps opportun."
+    },
+    "soc2-v2-p6-4": {
+      "code": "P6.4",
+      "control": "P6.4",
+      "requirements": "L’entité obtient des engagements en matière de protection de la vie privée de la part des fournisseurs et autres tiers ayant accès à des informations personnelles afin d’atteindre ses objectifs relatifs à la vie privée. L’entité évalue la conformité de ces parties périodiquement et selon les besoins, et prend des mesures correctives si nécessaire."
+    },
+    "soc2-v2-p6-4-1": {
+      "code": "P6.4.1",
+      "control": "P6.4.1",
+      "requirements": "Ne divulgue des informations personnelles qu’à des tiers appropriés — Les informations personnelles ne sont divulguées qu’à des tiers ayant des accords avec l’entité pour protéger les informations personnelles d’une manière cohérente avec les aspects pertinents de l’avis de confidentialité de l’entité ou d’autres instructions ou exigences spécifiques. L’entité a des procédures en place pour évaluer que ces tiers disposent de contrôles efficaces afin de respecter les termes de l’accord, les instructions ou les exigences."
+    },
+    "soc2-v2-p6-4-2": {
+      "code": "P6.4.2",
+      "control": "P6.4.2",
+      "requirements": "Remédie à l’usage abusif d’informations personnelles par un tiers — L’entité prend des mesures correctives en réponse à l’usage abusif d’informations personnelles par un tiers auquel l’entité a transféré ces informations."
+    },
+    "soc2-v2-p6-5": {
+      "code": "P6.5",
+      "control": "P6.5",
+      "requirements": "L’entité obtient des engagements de la part des fournisseurs et autres tiers ayant accès à des informations personnelles pour notifier l’entité en cas de divulgations non autorisées, avérées ou suspectées, d’informations personnelles. Ces notifications sont signalées au personnel approprié et traitées conformément aux procédures de réponse aux incidents établies afin d’atteindre les objectifs de l’entité relatifs à la vie privée."
+    },
+    "soc2-v2-p6-5-1": {
+      "code": "P6.5.1",
+      "control": "P6.5.1",
+      "requirements": "Remédie à l’usage abusif d’informations personnelles par un tiers — L’entité prend des mesures correctives en réponse à l’usage abusif d’informations personnelles par un tiers auquel l’entité a transféré ces informations."
+    },
+    "soc2-v2-p6-5-2": {
+      "code": "P6.5.2",
+      "control": "P6.5.2",
+      "requirements": "Signale des divulgations non autorisées avérées ou suspectées — Un processus existe pour obtenir des engagements de la part des fournisseurs et autres tiers afin de signaler à l’entité des divulgations non autorisées avérées ou suspectées d’informations personnelles."
+    },
+    "soc2-v2-p6-6": {
+      "code": "P6.6",
+      "control": "P6.6",
+      "requirements": "L’entité notifie les violations et incidents aux personnes concernées, aux autorités de régulation et à d’autres parties afin d’atteindre ses objectifs relatifs à la vie privée."
+    },
+    "soc2-v2-p6-6-1": {
+      "code": "P6.6.1",
+      "control": "P6.6.1",
+      "requirements": "Remédie à l’usage abusif d’informations personnelles par un tiers — L’entité prend des mesures correctives en réponse à l’usage abusif d’informations personnelles par un tiers auquel l’entité a transféré ces informations."
+    },
+    "soc2-v2-p6-6-2": {
+      "code": "P6.6.2",
+      "control": "P6.6.2",
+      "requirements": "Fournit un avis de violations et d’incidents — L’entité dispose d’un processus pour fournir un avis de violations et d’incidents aux personnes concernées, aux autorités de régulation et à d’autres parties afin d’atteindre ses objectifs relatifs à la vie privée."
+    },
+    "soc2-v2-p6-7": {
+      "code": "P6.7",
+      "control": "P6.7",
+      "requirements": "L’entité fournit aux personnes concernées un relevé des informations personnelles détenues et des divulgations de leurs informations personnelles, sur demande des personnes concernées, afin d’atteindre ses objectifs relatifs à la vie privée."
+    },
+    "soc2-v2-p6-7-1": {
+      "code": "P6.7.1",
+      "control": "P6.7.1",
+      "requirements": "Identifie les types d’informations personnelles et le processus de traitement — Les types d’informations personnelles et d’informations personnelles sensibles, ainsi que les processus, systèmes et tiers impliqués dans le traitement de ces informations, sont identifiés."
+    },
+    "soc2-v2-p6-7-2": {
+      "code": "P6.7.2",
+      "control": "P6.7.2",
+      "requirements": "Capte, identifie et communique les demandes d’information — Les demandes de relevé des informations personnelles détenues et des divulgations des informations personnelles des personnes concernées sont captées, et les informations liées à ces demandes sont identifiées et communiquées aux personnes concernées afin d’atteindre les objectifs de l’entité relatifs à la vie privée."
+    },
+    "soc2-v2-p7-1": {
+      "code": "P7.1",
+      "control": "P7.1",
+      "requirements": "L’entité collecte et maintient des informations personnelles exactes, à jour, complètes et pertinentes afin d’atteindre ses objectifs relatifs à la vie privée."
+    },
+    "soc2-v2-p7-1-1": {
+      "code": "P7.1.1",
+      "control": "P7.1.1",
+      "requirements": "Assure l’exactitude et l’exhaustivité des informations personnelles — Les informations personnelles sont exactes et complètes aux fins pour lesquelles elles doivent être utilisées."
+    },
+    "soc2-v2-p7-1-2": {
+      "code": "P7.1.2",
+      "control": "P7.1.2",
+      "requirements": "Assure la pertinence des informations personnelles — Les informations personnelles sont pertinentes au regard des finalités pour lesquelles elles doivent être utilisées."
+    },
+    "soc2-v2-p8-1": {
+      "code": "P8.1",
+      "control": "P8.1",
+      "requirements": "L’entité met en œuvre un processus de réception, de traitement, de résolution et de communication de la résolution des demandes, plaintes et litiges des personnes concernées et d’autres parties, et surveille périodiquement la conformité afin d’atteindre ses objectifs relatifs à la vie privée. Des corrections et autres actions nécessaires liées aux déficiences identifiées sont effectuées ou prises en temps opportun."
+    },
+    "soc2-v2-p8-1-1": {
+      "code": "P8.1.1",
+      "control": "P8.1.1",
+      "requirements": "Communique aux personnes concernées — Les personnes concernées sont informées de la manière de contacter l’entité pour des demandes, plaintes et litiges."
+    },
+    "soc2-v2-p8-1-2": {
+      "code": "P8.1.2",
+      "control": "P8.1.2",
+      "requirements": "Traite les demandes, plaintes et litiges — Un processus est en place pour traiter les demandes, plaintes et litiges."
+    },
+    "soc2-v2-p8-1-3": {
+      "code": "P8.1.3",
+      "control": "P8.1.3",
+      "requirements": "Documente et communique la résolution des litiges et les voies de recours — Chaque plainte est traitée, la résolution est documentée et communiquée à l’individu."
+    },
+    "soc2-v2-p8-1-4": {
+      "code": "P8.1.4",
+      "control": "P8.1.4",
+      "requirements": "Documente et rapporte les résultats des revues de conformité — La conformité aux objectifs relatifs à la vie privée est examinée et documentée, et les résultats de ces revues sont rapportés à la direction. Si des problèmes sont identifiés, des plans de remédiation sont élaborés et mis en œuvre."
+    },
+    "soc2-v2-p8-1-5": {
+      "code": "P8.1.5",
+      "control": "P8.1.5",
+      "requirements": "Documente et rapporte les cas de non-conformité — Les cas de non-conformité aux objectifs relatifs à la vie privée sont documentés et rapportés et, si nécessaire, des mesures correctives et disciplinaires sont prises en temps opportun."
+    },
+    "soc2-v2-p8-1-6": {
+      "code": "P8.1.6",
+      "control": "P8.1.6",
+      "requirements": "Effectue une surveillance continue — Des procédures continues sont réalisées pour surveiller l’efficacité des contrôles sur les informations personnelles et prendre des mesures correctives en temps opportun lorsque nécessaire."
+    }
+  }
+}

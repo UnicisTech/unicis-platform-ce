@@ -36,7 +36,16 @@ export default function Comments({
   const handleCreateComment = useCallback(
     async (
       text: string,
-      reset: (initialValues?: Partial<FormData> | undefined) => void
+      reset: (
+        initialValues?: Partial<FormData> | undefined,
+        options?: {
+          keepErrors?: boolean;
+          keepTouched?: boolean;
+          keepDirty?: boolean;
+          keepIsSubmitted?: boolean;
+          keepSubmitCount?: boolean;
+        }
+      ) => void
     ) => {
       try {
         const res = await fetch(
@@ -50,14 +59,23 @@ export default function Comments({
 
         const { error } = await res.json();
         if (!res.ok || error) {
-          toast.error(error?.message || 'Request failed');
+          toast.error(error?.message || t('errors.requestFailed'));
           return;
         }
 
-        reset({ text: '' });
+        reset(
+          { text: '' },
+          {
+            keepErrors: false,
+            keepTouched: false,
+            keepDirty: false,
+            keepIsSubmitted: false,
+            keepSubmitCount: false,
+          }
+        );
         mutateTask();
       } catch {
-        toast.error('Unexpected error');
+        toast.error(t('errors.unexpectedError'));
       }
     },
     [slug, taskNumber, mutateTask]
@@ -77,14 +95,14 @@ export default function Comments({
 
         const { error } = await res.json();
         if (!res.ok || error) {
-          toast.error(error?.message || 'Request failed');
+          toast.error(error?.message || t('errors.requestFailed'));
           return;
         }
 
         mutateTask();
         setCommentToEdit(null);
       } catch {
-        toast.error('Unexpected error');
+        toast.error(t('errors.unexpectedError'));
       }
     },
     [slug, taskNumber, mutateTask]
@@ -106,13 +124,13 @@ export default function Comments({
 
         const { error } = await res.json();
         if (!res.ok || error) {
-          toast.error(error?.message || 'Request failed');
+          toast.error(error?.message || t('errors.requestFailed'));
           return;
         }
 
         mutateTask();
       } catch {
-        toast.error('Unexpected error');
+        toast.error(t('errors.unexpectedError'));
       }
     },
     [slug, taskNumber, mutateTask]
@@ -120,7 +138,7 @@ export default function Comments({
 
   return (
     <div className="p-5">
-      <div style={{ marginTop: '30px' }}>
+      <div className="mt-[30px]">
         {task.comments
           .sort(
             (a, b) =>

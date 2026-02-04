@@ -1,5 +1,21 @@
+import { CscStatus } from '@/lib/csc/csc-statuses';
 import type { Session } from 'next-auth';
 
+export interface FrameworkSection {
+  id: string;
+}
+
+export interface FrameworkControl {
+  id: string;
+  sectionId: string;
+}
+
+export interface FrameworkData {
+  sections: FrameworkSection[];
+  controls: FrameworkControl[];
+}
+
+// TODO: replace this type
 export type CscOption = {
   label: string;
   value: number;
@@ -42,7 +58,7 @@ export type Section = {
 };
 
 export type ISO =
-  | 'default'
+  | 'mvps'
   | '2013'
   | '2022'
   | 'nistcsfv2'
@@ -52,8 +68,9 @@ export type ISO =
   | 'soc2v2'
   | 'c5_2020';
 
+// TODO: use getControlPropsName function with config and ISO type to generate type
 type CscStatusesPropMap = {
-  default: 'csc_statuses';
+  mvps: 'csc_statuses_mvps';
   2013: 'csc_statuses_2013';
   2022: 'csc_statuses_2022';
   nistcsfv2: 'csc_statuses_nistcsfv2';
@@ -66,8 +83,11 @@ type CscStatusesPropMap = {
 
 export type CscStatusesProp = CscStatusesPropMap[ISO];
 
+export type CscStatusesMap = Record<string, CscStatus>;
+
+// TODO: use getControlPropsName function with config and ISO type to generate type
 type CscControlsPropMap = {
-  default: 'csc_controls';
+  mvps: 'csc_controls_mvps';
   2013: 'csc_controls_2013';
   2022: 'csc_controls_2022';
   nistcsfv2: 'csc_controls_nistcsfv2';

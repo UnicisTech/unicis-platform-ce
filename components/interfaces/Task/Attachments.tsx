@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState, useRef } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
@@ -50,7 +48,7 @@ const Attachments = ({
     if (isAvailable) {
       uploadFile(file);
     } else {
-      toast.error('Not supported type of file');
+      toast.error(t('errors.unsupportedFileType'));
     }
   };
 
@@ -64,7 +62,7 @@ const Attachments = ({
         if (isAvailable) {
           uploadFile(file);
         } else {
-          toast.error('Not supported type of file');
+          toast.error(t('errors.unsupportedFileType'));
         }
       };
       reader.readAsDataURL(file);
@@ -95,14 +93,14 @@ const Attachments = ({
 
         const { error } = await res.json();
         if (!res.ok || error) {
-          toast.error(error?.message || 'Request failed');
+          toast.error(error?.message || t('errors.requestFailed'));
           return;
         }
 
         toast.success('Attachment uploaded');
         mutateTask();
       } catch (error: any) {
-        toast.error(error?.message || 'Unexpected error');
+        toast.error(error?.message || t('errors.unexpectedError'));
         console.error(error);
       }
     }
@@ -137,7 +135,7 @@ const Attachments = ({
         <span className="font-medium text-gray-600 dark:text-muted-foreground">
           {isDragOver ? 'Release to attach files' : 'Drop files to attach, or '}
           <span className="text-blue-600 dark:text-blue-400 underline">
-            browse
+            {t('attachment-browse')}
           </span>
         </span>
       </span>

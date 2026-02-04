@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
 import type { Comment } from '@prisma/client';
-import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 import QuillEditor from '@/components/shared/QuillEditor';
+import { Button } from '@/components/shadcn/ui/button';
 
 interface CommentEditProps {
   comment: Comment;
@@ -29,7 +29,13 @@ const CommentEdit = ({
       </div>
 
       <div className="flex gap-1.5 mt-1.5">
-        <DaisyButton
+        <Button size="sm" onClick={() => updateHandler(newContent, comment.id)}>
+          {t('save')}
+        </Button>
+        <Button variant="secondary" size="sm" onClick={cancelHandler}>
+          {t('cancel')}
+        </Button>
+        {/* <DaisyButton
           size="sm"
           color="primary"
           variant="outline"
@@ -44,7 +50,7 @@ const CommentEdit = ({
           onClick={cancelHandler}
         >
           {t('cancel')}
-        </DaisyButton>
+        </DaisyButton> */}
       </div>
     </>
   );

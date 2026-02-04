@@ -27,6 +27,7 @@ import { Alert, AlertDescription } from '@/components/shadcn/ui/alert';
 import { Separator } from '@/components/shadcn/ui/separator';
 import { Loader2 } from 'lucide-react';
 import { authProviderEnabled } from '@/lib/auth';
+import { getAuthErrorKey } from '@/lib/common';
 
 interface Message {
   text: string | null;
@@ -45,7 +46,7 @@ const Login: NextPageWithLayout<
   const [isResendButtonVisible, setIsResendButtonVisible] =
     useState<boolean>(false);
   const recaptchaRef = useRef<any>(null);
-
+  const providers = authProviders || {};
   const { error, success, token } = router.query as {
     error?: string;
     success?: string;
@@ -53,7 +54,7 @@ const Login: NextPageWithLayout<
   };
 
   useEffect(() => {
-    if (error) setMessage({ text: error, status: 'error' });
+    if (error) setMessage({ text: getAuthErrorKey(error), status: 'error' });
     else if (success) setMessage({ text: success, status: 'success' });
   }, [error, success]);
 
@@ -78,7 +79,8 @@ const Login: NextPageWithLayout<
       formik.resetForm();
       recaptchaRef.current?.reset();
       if (!resp?.ok) {
-        toast.error(t(resp?.error ?? 'error'));
+        const errorKey = getAuthErrorKey(resp?.error);
+        toast.error(t(errorKey));
         if (resp?.error === 'confirm-your-email') {
           setIsResendButtonVisible(true);
         }
@@ -104,7 +106,7 @@ const Login: NextPageWithLayout<
 
       <Card className="border border-border pt-6">
         <CardContent>
-          {authProviders.credentials && (
+          {providers.credentials && (
             <form onSubmit={formik.handleSubmit}>
               <input type="hidden" name="csrfToken" value={csrfToken} />
 
@@ -177,7 +179,11 @@ const Login: NextPageWithLayout<
                     </Link>
                   </Button>
                 )}
-                <Button asChild variant="link" className="w-full p-0 h-auto">
+                <Button
+                  asChild
+                  variant="link"
+                  className="w-full p-0 h-auto text-blue-600 dark:text-blue-400"
+                >
                   <Link href={`/auth/forgot-password${params}`}>
                     {t('forgot-password')}
                   </Link>
@@ -188,19 +194,19 @@ const Login: NextPageWithLayout<
             </form>
           )}
 
-          {(authProviders.email || authProviders.saml) && (
+          {(providers.email || providers.saml) && (
             <Separator className="my-6" />
           )}
 
           <div className="space-y-3">
-            {authProviders.email && (
+            {providers.email && (
               <Button asChild variant="outline" className="w-full">
                 <Link href={`/auth/magic-link${params}`}>
                   {t('sign-in-with-email')}
                 </Link>
               </Button>
             )}
-            {authProviders.saml && (
+            {providers.saml && (
               <Button asChild variant="outline" className="w-full">
                 <Link href="/auth/sso">{t('continue-with-saml-sso')}</Link>
               </Button>
@@ -213,7 +219,7 @@ const Login: NextPageWithLayout<
         {t('dont-have-an-account')}
         <Link
           href={`/auth/join${params}`}
-          className="font-medium text-primary hover:text-primary-focus ml-1"
+          className="font-medium text-blue-600 dark:text-blue-400 hover:text-primary-focus ml-1"
         >
           {t('create-a-free-account')}
         </Link>

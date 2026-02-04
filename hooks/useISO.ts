@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import type { ISO, TeamProperties } from 'types';
+import { useTranslation } from 'next-i18next';
 
 //TODO: rewrite to SWR
 const useISO = (team: any) => {
   const [ISO, setISO] = useState<ISO[] | null>(null);
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     const asyncEffect = async () => {
@@ -17,7 +19,7 @@ const useISO = (team: any) => {
         try {
           const res = await fetch(`/api/teams/${team.slug}/csc/iso`);
           if (!res.ok) {
-            throw new Error('Request failed');
+            throw new Error(t('errors.requestFailed'));
           }
 
           const { data } = await res.json();
@@ -25,13 +27,13 @@ const useISO = (team: any) => {
             setISO(data.iso);
           }
         } catch (error: any) {
-          toast.error(error?.message || 'Unexpected error');
+          toast.error(error?.message || t('errors.unexpectedError'));
         }
       }
     };
 
     asyncEffect();
-  }, [team]);
+  }, [team, t]);
 
   return {
     ISO,

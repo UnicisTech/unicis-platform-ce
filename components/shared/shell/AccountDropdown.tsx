@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import useTheme from 'hooks/useTheme';
 import env from '@/lib/env';
 import { signOut } from 'next-auth/react';
@@ -10,6 +11,11 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
 } from '@/components/shadcn/ui/dropdown-menu';
 import { Button } from '@/components/shadcn/ui/button';
 import {
@@ -17,14 +23,19 @@ import {
   ArrowRightOnRectangleIcon,
   SunIcon,
   UserCircleIcon,
+  LanguageIcon,
 } from '@heroicons/react/24/outline';
+import localeLabels from '@/lib/i18n/localeLabels';
 
 const AccountDropdown: React.FC = () => {
   const { data } = useSession();
   const { t } = useTranslation('common');
+  const router = useRouter();
   const { toggleTheme } = useTheme();
 
   const username = data?.user?.name || '';
+  const currentLocale = router.locale ?? router.defaultLocale ?? 'en';
+  const locales = router.locales ?? ['en'];
 
   return (
     <DropdownMenu>
@@ -46,6 +57,31 @@ const AccountDropdown: React.FC = () => {
             </div>
           </Link>
         </DropdownMenuItem>
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger className="cursor-pointer">
+            <div className="flex items-center">
+              <LanguageIcon className="w-5 h-5 mr-1" /> {t('languages')}
+            </div>
+          </DropdownMenuSubTrigger>
+          <DropdownMenuSubContent>
+            <DropdownMenuRadioGroup
+              value={currentLocale}
+              onValueChange={(locale) => {
+                router.push(
+                  { pathname: router.pathname, query: router.query },
+                  router.asPath,
+                  { locale }
+                );
+              }}
+            >
+              {locales.map((locale) => (
+                <DropdownMenuRadioItem key={locale} value={locale}>
+                  {localeLabels[locale] ?? locale.toUpperCase()}
+                </DropdownMenuRadioItem>
+              ))}
+            </DropdownMenuRadioGroup>
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
         {env.darkModeEnabled && (
           <DropdownMenuItem
             onClick={(event) => {

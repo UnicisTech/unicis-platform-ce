@@ -1,5 +1,3 @@
-'use client';
-
 import * as React from 'react';
 import { cn } from '@/components/shadcn/lib/utils';
 
@@ -11,14 +9,14 @@ interface StepperProps {
 
 export function Stepper({ steps, currentStep }: StepperProps) {
   return (
-    <div className="flex w-full justify-between items-start gap-1 sm:gap-3">
+    <div className="flex w-full min-w-0 items-start justify-between gap-x-1 sm:gap-x-3">
       {steps.map((step, index) => {
         const isActive = index === currentStep;
 
         return (
           <div
             key={index}
-            className="flex flex-col items-center text-center flex-1"
+            className="flex min-w-0 flex-1 flex-col items-center text-center"
           >
             {/* Dot or active indicator */}
             <div
@@ -31,7 +29,7 @@ export function Stepper({ steps, currentStep }: StepperProps) {
             {/* Title below */}
             <div
               className={cn(
-                'text-xs leading-tight break-words',
+                'w-full text-xs leading-tight break-words whitespace-normal [overflow-wrap:anywhere]',
                 isActive
                   ? 'text-blue-600 font-semibold'
                   : 'text-muted-foreground'

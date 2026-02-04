@@ -13,7 +13,7 @@ const StatusBadge = ({ label, value }: { label: string; value: string }) => {
   const className = statusColorMap[normalized] || 'bg-muted text-white';
 
   return (
-    <Badge variant="outline" className={className}>
+    <Badge variant="outline" className={`${className} whitespace-nowrap`}>
       {label}
     </Badge>
   );

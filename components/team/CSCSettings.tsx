@@ -6,8 +6,6 @@ import { useTranslation } from 'next-i18next';
 import type { TeamProperties, TeamWithSubscription } from 'types';
 import { Subscription } from '@prisma/client';
 import useSubscription, { subscriptionParams } from 'hooks/useSubscription';
-import { isoOptions } from '../defaultLanding/data/configs/csc';
-
 import {
   Card,
   CardHeader,
@@ -18,6 +16,7 @@ import { Label } from '@/components/shadcn/ui/label';
 import { MultiSelect } from '@/components/shadcn/ui/multi-select';
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
+import { isoOptions } from '@/lib/csc/csc-frameworks';
 
 interface CSCSettingsProps {
   team: TeamWithSubscription;
@@ -42,7 +41,7 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
     return {
       ...option,
       ...(isDisabled
-        ? { isDisabled: isDisabled, label: option.label + message }
+        ? { isDisabled: false, label: option.label + message }
         : {}),
     };
   });
@@ -68,12 +67,12 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
 
         if (!res.ok) {
           const { error } = await res.json().catch(() => ({}));
-          throw new Error(error?.message || 'Request failed');
+          throw new Error(error?.message || t('errors.requestFailed'));
         }
 
         toast.success(t('successfully-updated'));
       } catch (err: any) {
-        toast.error(err?.message || 'Unexpected error');
+        toast.error(err?.message || t('errors.unexpectedError'));
       }
     },
   });

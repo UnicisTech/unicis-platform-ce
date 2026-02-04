@@ -71,10 +71,10 @@ const Members = ({ team }: { team: Team }) => {
       <div className="flex justify-between items-center">
         <div className="space-y-3">
           <h2 className="text-xl font-medium leading-none tracking-tight">
-            Members
+            {t('members')}
           </h2>
           <p className="text-sm text-muted-foreground">
-            Team members and their roles.
+            {t('members-description')}
           </p>
         </div>
         <Button onClick={() => setVisible(!visible)}>{t('add-member')}</Button>
@@ -87,7 +87,7 @@ const Members = ({ team }: { team: Team }) => {
             <TableHead>{t('email')}</TableHead>
             <TableHead>{t('role')}</TableHead>
             {canAccess('team_member', ['delete']) && (
-              <TableHead>{t('action')}</TableHead>
+              <TableHead className="text-right">{t('actions')}</TableHead>
             )}
           </TableRow>
         </TableHeader>

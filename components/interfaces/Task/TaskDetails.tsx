@@ -30,7 +30,7 @@ import {
   FormControl,
   FormMessage,
 } from '@/components/shadcn/ui/form';
-import statuses from '@/components/defaultLanding/data/statuses.json';
+import { statuses } from '@/lib/tasks';
 import useTask from 'hooks/useTask';
 import useCanAccess from 'hooks/useCanAccess';
 
@@ -94,7 +94,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
 
     const { error } = await res.json();
     if (!res.ok || error) {
-      toast.error(error?.message || 'Request failed');
+      toast.error(error?.message || t('errors.requestFailed'));
       return;
     }
 
@@ -113,7 +113,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title</FormLabel>
+                  <FormLabel>{t('title')}</FormLabel>
                   <FormControl>
                     <Input {...field} onInput={checkFormChanges} />
                   </FormControl>
@@ -127,7 +127,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
               name="status"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Status</FormLabel>
+                  <FormLabel>{t('status')}</FormLabel>
                   <FormControl>
                     <Select
                       value={field.value}
@@ -141,8 +141,8 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                       </SelectTrigger>
                       <SelectContent>
                         {statuses.map((status) => (
-                          <SelectItem key={status.value} value={status.value}>
-                            {status.label}
+                          <SelectItem key={status} value={status}>
+                            {t(`task-statuses.${status}`)}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -158,7 +158,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
               name="duedate"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Due Date</FormLabel>
+                  <FormLabel>{t('due-date')}</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -198,7 +198,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>{t('description')}</FormLabel>
                   <FormControl>
                     <QuillEditor
                       theme="snow"

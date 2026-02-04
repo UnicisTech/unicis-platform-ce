@@ -1,0 +1,83 @@
+{
+  "fields": {
+    "isDataProcessingNecessary": "Ist die Datenverarbeitung notwendig",
+    "isDataProcessingNecessaryAssessment": "Bewertung",
+    "isProportionalToPurpose": "Ist sie zweckmäßig bzw. verhältnismäßig",
+    "isProportionalToPurposeAssessment": "Bewertung",
+    "confidentialityRiskProbability": "Wahrscheinlichkeit des Risikos",
+    "confidentialityRiskSecurity": "Auswirkung des Risikos",
+    "confidentialityAssessment": "Bewertung",
+    "availabilityRiskProbability": "Wahrscheinlichkeit des Risikos",
+    "availabilityRiskSecurity": "Auswirkung des Risikos",
+    "availabilityAssessment": "Bewertung",
+    "transparencyRiskProbability": "Wahrscheinlichkeit des Risikos",
+    "transparencyRiskSecurity": "Auswirkung des Risikos",
+    "transparencyAssessment": "Bewertung",
+    "guarantees": "Garantie",
+    "securityMeasures": "Sicherheitsmaßnahmen",
+    "securityCompliance": "Einhaltung der von Aufsichtsbehörden herausgegebenen Sicherheitshinweise",
+    "dealingWithResidualRisk": "Umgang mit bestehendem Restrisiko",
+    "dealingWithResidualRiskAssessment": "Bewertung",
+    "supervisoryAuthorityInvolvement": "Einbeziehung der Aufsichtsbehörde, wenn das Risiko inakzeptabel ist"
+  },
+  "steps": {
+    "dataProcessing": "Datenverarbeitung",
+    "confidentialityAndIntegrity": "Vertraulichkeit und Integrität",
+    "availability": "Verfügbarkeit",
+    "transparencyAndDataMinimization": "Transparenz und Datenminimierung",
+    "results": "Ergebnisse",
+    "correctiveMeasures": "Korrekturmaßnahmen"
+  },
+  "descriptions": {
+    "riskQuestion": "Welche Risiken bestehen für die Privatsphäre und Rechte der Personen, deren Daten verarbeitet werden?",
+    "dataProcessingQuestion": "Ist die Datenverarbeitung notwendig und verhältnismäßig zum Zweck?",
+    "confidentialityStep": "1. Vertraulichkeit und Integrität",
+    "availabilityStep": "2. Verfügbarkeit",
+    "transparencyStep": "3. Transparenz, Anonymisierung und Datenminimierung",
+    "correctiveMeasures": "Korrekturmaßnahmen",
+    "resultsConfidentiality": "a) Vertraulichkeit und Integrität",
+    "resultsAvailability": "b) Verfügbarkeit",
+    "resultsTransparency": "c) Transparenz, Zweckbindung und Datenminimierung"
+  },
+  "risk-probability": {
+    "rare": "Selten",
+    "unlikely": "Unwahrscheinlich",
+    "possible": "Möglich",
+    "probable": "Wahrscheinlich",
+    "severe": "Erheblich"
+  },
+  "availabilityRiskSecurity": {
+    "insignificant": "Unbedeutend: Verlust der Verfügbarkeit personenbezogener Daten, bei minimalem Einfluss auf den Betrieb, vernachlässigbaren Kosten und ohne nennenswerte Auswirkungen auf die Geschäfte oder Finanzen der betroffenen Person.",
+    "minor": "Gering: Verlust der Verfügbarkeit personenbezogener Daten, mit spürbarem, aber begrenztem betrieblichen Einfluss, einigen Kosten und geringfügigen finanziellen Unannehmlichkeiten für die betroffene Person, jedoch ohne wesentliche Auswirkungen auf ihre Rechte.",
+    "moderate": "Mittel: Verlust der Verfügbarkeit personenbezogener Daten, mit erheblichem betrieblichen Einfluss, hohen Kosten und potenziell erheblichen geschäftlichen oder finanziellen Nachteilen für die betroffene Person, ohne dass sensible Kategorien betroffen sind, die ein hohes Risiko für deren Rechte darstellen.",
+    "major": "Gravierend: Verlust der Verfügbarkeit personenbezogener Daten, mit schwerwiegenden betrieblichen Störungen, hohen Schäden und extremen Kosten; könnte sensible Kategorien betreffen (z. B. Strafregister oder besonders schützenswerte Daten), was zu erheblichen Risiken für die Rechte und Freiheiten der betroffenen Person führen kann.",
+    "extreme": "Extrem: Verlust der Verfügbarkeit personenbezogener Daten, mit vollständigem betrieblichen Ausfall, potenziell lebensbedrohlichen Konsequenzen oder schwerwiegenden Auswirkungen auf persönliche Freiheiten und Rechte der betroffenen Personen."
+  },
+  "confidentialityRiskSecurity": {
+    "insignificant": "Unbedeutend: Verlust von Vertraulichkeit und Integrität personenbezogener Daten, mit minimalem Einfluss auf den Betrieb, vernachlässigbaren Kosten und ohne nennenswerte Auswirkungen auf die Geschäfte oder Finanzen der betroffenen Person.",
+    "minor": "Gering: Verlust von Vertraulichkeit und Integrität personenbezogener Daten, mit spürbarem, aber begrenztem betrieblichen Einfluss, einigen Kosten und geringfügigen finanziellen Auswirkungen für die betroffene Person, jedoch wahrscheinlich ohne wesentliche Beeinträchtigung ihrer Rechte.",
+    "moderate": "Mittel: Verlust von Vertraulichkeit und Integrität personenbezogener Daten, mit erheblichem betrieblichen Einfluss, hohen Kosten und potenziell erheblichen geschäftlichen oder finanziellen Nachteilen für die betroffene Person, ohne dass besondere Kategorien oder sensible Daten mit hohem Rechteauswirkungsrisiko betroffen sind.",
+    "major": "Gravierend: Verlust von Vertraulichkeit und Integrität personenbezogener Daten, mit schwerwiegenden betrieblichen Störungen, stark schädlich und extrem kostspielig für Organisation und betroffene Personen. Könnte sensible Kategorien (z. B. Strafregister oder sensible Daten) betreffen, mit erheblichen Risiken für die Rechte und Freiheiten der betroffenen Personen.",
+    "extreme": "Extrem: Verlust von Vertraulichkeit und Integrität personenbezogener Daten, mit vollständigem betrieblichen Ausfall und unüberwindbaren Folgen, potenziell lebensbedrohlich oder mit schwerwiegenden Auswirkungen auf persönliche Freiheiten und Rechte der betroffenen Personen."
+  },
+  "dealingWithResidualRisk": {
+    "acceptable": "Akzeptabel",
+    "acceptable_with_conditions": "Unter bestimmten Bedingungen akzeptabel",
+    "not_acceptable": "Nicht akzeptabel"
+  },
+  "isDataProcessingNecessary": {
+    "necessary": "Notwendig",
+    "unnecessary": "Nicht notwendig"
+  },
+  "isProportionalToPurpose": {
+    "proportional": "Verhältnismäßig",
+    "not_proportional": "Nicht verhältnismäßig"
+  },
+  "transparencyRiskSecurity": {
+    "insignificant": "Unbedeutend: Verlust von Transparenz, Zweckmäßigkeit und Datenminimierung bei der Verarbeitung personenbezogener Daten, mit minimalem betrieblichen Einfluss, vernachlässigbaren Kosten und ohne nennenswerte Auswirkungen auf die Geschäfte oder Finanzen der betroffenen Person.",
+    "minor": "Gering: Verlust von Transparenz, Zweckmäßigkeit und Datenminimierung bei der Verarbeitung personenbezogener Daten, mit spürbarem, aber begrenztem Einfluss, einigen Kosten und geringfügigen finanziellen Auswirkungen für die betroffene Person, ohne wesentliche Auswirkungen auf ihre Rechte.",
+    "moderate": "Mittel: Verlust von Transparenz, Zweckmäßigkeit und Datenminimierung bei der Verarbeitung personenbezogener Daten, mit erheblichem betrieblichen Einfluss, hohen Kosten und potenziell erheblichen geschäftlichen oder finanziellen Nachteilen für die betroffene Person, ohne dass besondere Kategorien betroffen sind, die ein hohes Risiko für ihre Rechte darstellen.",
+    "major": "Gravierend: Verlust von Transparenz, Zweckmäßigkeit und Datenminimierung bei der Verarbeitung personenbezogener Daten, mit schwerwiegenden betrieblichen Störungen, stark schädlich und extrem kostspielig. Könnte sensible Kategorien (z. B. sensible Daten oder Strafregister) betreffen und erhebliche Risiken für die Rechte und Freiheiten der betroffenen Personen verursachen.",
+    "extreme": "Extrem: Verlust von Transparenz, Zweckmäßigkeit und Datenminimierung bei der Verarbeitung personenbezogener Daten, mit vollständigem betrieblichen Ausfall, potenziell lebensbedrohlich oder mit schwerwiegenden Auswirkungen auf die persönlichen Freiheiten und Rechte der betroffenen Personen."
+  }
+}

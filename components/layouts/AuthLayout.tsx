@@ -1,6 +1,10 @@
 import app from '@/lib/app';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
+import LocaleDropdown from '@/components/shared/LocaleDropdown';
+import { Button } from '@/components/shadcn/ui/button';
+import useTheme from 'hooks/useTheme';
+import env from '@/lib/env';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -14,9 +18,27 @@ export default function AuthLayout({
   description,
 }: AuthLayoutProps) {
   const { t } = useTranslation('common');
+  const { toggleTheme, selectedTheme } = useTheme();
+  const ThemeIcon = selectedTheme.icon;
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-20 lg:px-8">
+    <div className="relative flex min-h-full flex-1 flex-col justify-center px-6 py-20 lg:px-8">
+      <div className="absolute right-4 top-4 sm:right-6 sm:top-6 flex items-center gap-2">
+        {env.darkModeEnabled && ThemeIcon && (
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            className="px-2"
+            onClick={toggleTheme}
+            aria-label={t('change-theme-header')}
+            title={t('change-theme-header')}
+          >
+            <ThemeIcon className="h-4 w-4" />
+          </Button>
+        )}
+        <LocaleDropdown />
+      </div>
       <div className="sm:mx-auto sm:w-full sm:max-w-sm text-center">
         <Image
           src="/unicis-platform-logo-ver-cropped.svg"

@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
-import { deleteRisk, saveRisk } from '@/lib/rm';
+import { deleteRisk, saveRisk } from 'models/rm';
 
 export default async function handler(
   req: NextApiRequest,

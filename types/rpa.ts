@@ -7,28 +7,28 @@ export type RpaProcedureInterface = [
   {
     reviewDate: string;
     controller: string;
-    dpo: Option;
+    dpo: string;
   },
   {
     purpose?: string;
-    category: Option[];
-    datasubject: Option[];
-    retentionperiod: Option;
-    specialcategory: Option[];
+    category: string[];
+    datasubject: string[];
+    retentionperiod: string;
+    specialcategory: string[];
     commentsretention?: string;
   },
   {
-    recipientType: Option;
+    recipientType: string;
     recipientdetails?: string;
   },
   {
     datatransfer: boolean;
     recipient: string;
-    country: Option;
-    guarantee: Option[];
+    country: string;
+    guarantee: string[];
   },
   {
-    toms: Option[];
+    toms: string[];
   },
   {
     involveProfiling: string;

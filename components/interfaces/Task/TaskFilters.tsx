@@ -1,21 +1,14 @@
 import { MultiSelect } from '@/components/shadcn/ui/multi-select';
+import { useTranslation } from 'next-i18next';
+import { taskModuleKeys } from '@/lib/tasks';
 
-const moduleOptions = [
-  { label: 'RPA', value: 'rpa_procedure' },
-  { label: 'TIA', value: 'tia_procedure' },
-  { label: 'PIA', value: 'pia_risk' },
-  { label: 'RM', value: 'rm_risk' },
-  { label: 'CSC', value: 'csc_controls' },
-];
-
-const statusOptions = [
-  { label: 'To Do', value: 'todo' },
-  { label: 'In Progress', value: 'inprogress' },
-  { label: 'In Review', value: 'inreview' },
-  { label: 'Feedback', value: 'feedback' },
-  { label: 'Done', value: 'done' },
-  { label: 'Failed', value: 'failed' },
-];
+const moduleLabels: Record<(typeof taskModuleKeys)[number], string> = {
+  rpa_procedure: 'RPA',
+  tia_procedure: 'TIA',
+  pia_risk: 'PIA',
+  rm_risk: 'RM',
+  csc_controls: 'CSC',
+};
 
 type Props = {
   selectedStatuses: string[];
@@ -30,6 +23,20 @@ const TaskFilters = ({
   selectedModules,
   setSelectedModules,
 }: Props) => {
+  const { t } = useTranslation('common');
+  const moduleOptions = taskModuleKeys.map((value) => ({
+    label: moduleLabels[value],
+    value,
+  }));
+  const statusOptions = [
+    { label: t('task-statuses.todo'), value: 'todo' },
+    { label: t('task-statuses.inprogress'), value: 'inprogress' },
+    { label: t('task-statuses.inreview'), value: 'inreview' },
+    { label: t('task-statuses.feedback'), value: 'feedback' },
+    { label: t('task-statuses.done'), value: 'done' },
+    { label: t('task-statuses.failed'), value: 'failed' },
+  ];
+
   return (
     <div className="flex flex-wrap gap-4 my-2">
       <div>
@@ -37,7 +44,7 @@ const TaskFilters = ({
           options={statusOptions}
           defaultValue={selectedStatuses}
           onValueChange={setSelectedStatuses}
-          placeholder="Filter by status"
+          placeholder={t('filter-by-status')}
           maxCount={3}
         />
       </div>
@@ -47,7 +54,7 @@ const TaskFilters = ({
           options={moduleOptions}
           defaultValue={selectedModules}
           onValueChange={setSelectedModules}
-          placeholder="Filter by module"
+          placeholder={t('filter-by-module')}
           maxCount={3}
         />
       </div>

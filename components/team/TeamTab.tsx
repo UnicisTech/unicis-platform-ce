@@ -10,6 +10,7 @@ import type { Team } from '@prisma/client';
 import classNames from 'classnames';
 import useCanAccess from 'hooks/useCanAccess';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 import { TeamFeature } from 'types';
 
 interface TeamTabProps {
@@ -21,10 +22,11 @@ interface TeamTabProps {
 
 const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   const { canAccess } = useCanAccess();
+  const { t } = useTranslation('common');
 
   const navigations = [
     {
-      name: 'Settings',
+      name: t('settings-tabs.settings'),
       href: `/teams/${team.slug}/settings`,
       active: activeTab === 'settings',
       icon: Cog6ToothIcon,
@@ -33,7 +35,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
 
   if (canAccess('team_billing', ['read', 'update'])) {
     navigations.push({
-      name: 'Billing',
+      name: t('settings-tabs.billing'),
       href: `/teams/${team.slug}/billing`,
       active: activeTab === 'billing',
       icon: Cog6ToothIcon,
@@ -42,7 +44,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
 
   if (canAccess('team_member', ['create', 'update', 'read', 'delete'])) {
     navigations.push({
-      name: 'Members',
+      name: t('settings-tabs.members'),
       href: `/teams/${team.slug}/members`,
       active: activeTab === 'members',
       icon: UserPlusIcon,
@@ -51,7 +53,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
 
   if (canAccess('iap_course', ['read']) && canAccess('iap_reports', ['read'])) {
     navigations.push({
-      name: 'Training',
+      name: t('settings-tabs.training'),
       href: `/teams/${team.slug}/iap/admin`,
       active: activeTab === 'iap/admin',
       icon: UserPlusIcon,
@@ -63,7 +65,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
     canAccess('team_sso', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({
-      name: 'Single Sign-On',
+      name: t('settings-tabs.single-sign-on'),
       href: `/teams/${team.slug}/saml`,
       active: activeTab === 'saml',
       icon: ShieldExclamationIcon,
@@ -75,7 +77,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
     canAccess('team_dsync', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({
-      name: 'Directory Sync',
+      name: t('settings-tabs.directory-sync'),
       href: `/teams/${team.slug}/directory-sync`,
       active: activeTab === 'directory-sync',
       icon: UserPlusIcon,
@@ -87,7 +89,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
     canAccess('team_audit_log', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({
-      name: 'Audit Logs',
+      name: t('settings-tabs.audit-logs'),
       href: `/teams/${team.slug}/audit-logs`,
       active: activeTab === 'audit-logs',
       icon: DocumentMagnifyingGlassIcon,
@@ -99,7 +101,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
     canAccess('team_webhook', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({
-      name: 'Webhooks',
+      name: t('settings-tabs.webhooks'),
       href: `/teams/${team.slug}/webhooks`,
       active: activeTab === 'webhooks',
       icon: PaperAirplaneIcon,
@@ -111,7 +113,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
     canAccess('team_api_key', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({
-      name: 'API Keys',
+      name: t('settings-tabs.api-keys'),
       href: `/teams/${team.slug}/api-keys`,
       active: activeTab === 'api-keys',
       icon: KeyIcon,

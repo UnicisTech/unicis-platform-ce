@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import classNames from 'classnames';
 import { Separator } from '@/components/shadcn/ui/separator';
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 
 export interface MenuItem {
   name: string;
@@ -58,6 +59,7 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ menu, className }) => {
     <Link
       href={menu.href}
       target={isExternal ? '_blank' : undefined}
+      rel={isExternal ? 'noopener noreferrer' : undefined}
       className={classNames(
         'flex items-center rounded-md text-sm px-2 p-2 gap-2',
         menu.active
@@ -69,14 +71,20 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ menu, className }) => {
       {menu.icon && (
         <menu.icon
           className={classNames({
-            'h-5 w-5 shrink-0': true,
+            'h-5 w-5 min-h-5 min-w-5 flex-none shrink-0': true,
             'text-primary': menu.active,
             [className as string]: true,
           })}
           aria-hidden="true"
         />
       )}
-      {menu.name}
+      <span className="min-w-0 flex-1">{menu.name}</span>
+      {isExternal && (
+        <ArrowTopRightOnSquareIcon
+          className="h-4 w-4 shrink-0 text-muted-foreground"
+          aria-hidden="true"
+        />
+      )}
     </Link>
   );
 };

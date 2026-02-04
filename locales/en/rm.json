@@ -1,0 +1,47 @@
+{
+  "fields": {
+    "Risk": "Risk",
+    "AssetOwner": "Asset owner",
+    "Impact": "Impact",
+    "RawProbability": "Raw probability",
+    "RawImpact": "Raw impact",
+    "RiskTreatment": "Risk treatment",
+    "TreatmentCost": "Treatment cost",
+    "TreatmentStatus": "Treatment status",
+    "TreatedProbability": "Treated probability",
+    "TreatedImpact": "Treated impact"
+  },
+  "headers": {
+    "raw-risk-rating": "Raw risk rating",
+    "treatment": "Treatment",
+    "target-risk-rating": "Target risk rating",
+    "current-risk-rating": "Current risk rating"
+  },
+  "steps": {
+    "riskAndImpact": "Risk and Impact",
+    "riskTreatment": "Risk Treatment"
+  },
+  "descriptions": {
+    "risk": "Describe the information security risk briefly so that people will understand what risk you are assessing.",
+    "assetOwner": "Who is the Information Asset Owner, the person accountable if the risk treatments are inadequate, incidents occur, and the organization is adversely impacted? This person must assess and treat risks adequately.",
+    "impact": "Describe the potential impacts in business terms if the risk occurs. Decide whether to use \"worst case\" or \"anticipated\" impacts consistently.",
+    "rawProbability": "Enter the likelihood that the risk would occur untreated, as a percentage value.",
+    "rawImpact": "Enter the potential business impact if the risk occurred without any treatment, as a percentage value.",
+    "riskTreatment": "Describe how the risk is to be treated (e.g., controlled, avoided, transferred, or accepted).",
+    "treatmentStatus": "To what extent is the planned treatment in place? 0% means only a plan exists; 100% means the treatment is fully operational.",
+    "treatedProbability": "Enter the probability that the risk will occur after mitigation.",
+    "treatedImpact": "Enter the likely impact after mitigation. Incidents due to control failures may have higher impacts. Bold treated values if they differ from raw values."
+  },
+  "placeholders": {
+    "riskDescription": "Enter risk description",
+    "assetOwner": "Select an owner",
+    "impactDescription": "Enter impact description",
+    "treatmentApproach": "Describe treatment approach",
+    "costEstimate": "Enter cost estimate"
+  },
+  "form-labels": {
+    "TreatmentStatus": "Treatment Status (%)",
+    "TreatedProbability": "Treated Probability (%)",
+    "RawProbability": "Raw Probability (%)"
+  }
+}

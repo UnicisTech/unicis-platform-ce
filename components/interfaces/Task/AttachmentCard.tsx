@@ -37,7 +37,7 @@ const AttachmentsCard = ({
         );
 
         if (!res.ok) {
-          toast.error('Failed to download file');
+          toast.error(t('errors.failedToDownloadFile'));
           return;
         }
 
@@ -45,7 +45,7 @@ const AttachmentsCard = ({
         const contentType = res.headers.get('content-type') || '';
         if (contentType.includes('application/json')) {
           const { error } = await res.json();
-          toast.error(error?.message || 'Request failed');
+          toast.error(error?.message || t('errors.requestFailed'));
           return;
         }
 
@@ -59,7 +59,7 @@ const AttachmentsCard = ({
 
         window.URL.revokeObjectURL(url);
       } catch (error) {
-        toast.error('Failed to download file');
+        toast.error(t('errors.failedToDownloadFile'));
         console.error(error);
       }
     },
@@ -75,14 +75,14 @@ const AttachmentsCard = ({
 
       const { error } = await res.json();
       if (!res.ok || error) {
-        toast.error(error?.message || 'Request failed');
+        toast.error(error?.message || t('errors.requestFailed'));
         return;
       }
 
       toast.success('Attachment deleted');
       mutateTask();
     } catch {
-      toast.error('Unexpected error');
+      toast.error(t('errors.unexpectedError'));
     }
   }, [teamSlug, taskNumber, attachment.id, mutateTask]);
 
@@ -104,22 +104,27 @@ const AttachmentsCard = ({
       <div
         className={`rounded-md shadow-md w-40 m-1 border ${borderColor} ${cardBg} ${textColor}`}
       >
-        <div className="flex justify-between px-1 py-1">
-          <Button size={'sm'} className="mr-1" onClick={downloadHandler}>
-            Download
+        <div className="px-2 py-1 border-t border-gray-300 dark:border-gray-600">
+          <p className="text-sm truncate">{attachment.filename}</p>
+        </div>
+        <div className="flex flex-col gap-1 px-1 py-1">
+          <Button
+            size={'sm'}
+            className="w-full whitespace-normal"
+            onClick={downloadHandler}
+          >
+            {t('download')}
           </Button>
           {canAccess('task', ['update']) && (
             <Button
               variant={'destructive'}
               size={'sm'}
+              className="w-full whitespace-normal"
               onClick={openDeleteModal}
             >
-              Delete
+              {t('delete')}
             </Button>
           )}
-        </div>
-        <div className="px-2 py-1 border-t border-gray-300 dark:border-gray-600">
-          <p className="text-sm truncate">{attachment.filename}</p>
         </div>
       </div>
 

@@ -1,4 +1,4 @@
-import { deleteProcedure, saveProcedure } from '@/lib/rpa';
+import { deleteProcedure, saveProcedure } from 'models/rpa';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';

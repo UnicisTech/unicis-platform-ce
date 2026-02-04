@@ -2,11 +2,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import * as React from 'react';
 import { useTranslation } from 'next-i18next';
-import { Plan } from '@prisma/client';
-import { addDays } from 'date-fns';
-import { format } from 'date-fns/format';
 import type { TeamWithSubscription, SubscriptionWithPayments } from 'types';
 import useTeamMembers from 'hooks/useTeamMembers';
+import { format, addMonths } from 'date-fns';
 
 import {
   Card,
@@ -15,25 +13,27 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/shadcn/ui/card';
+import { Plan } from '@prisma/client';
 
 interface WisePaymentCardProps {
   team: TeamWithSubscription;
 }
 
-// NOTE: duplicates subscriptions.ts as a hotfix (as in original)
-const planPrice: Record<Plan, number> = {
+const formatEUR = (n: number) =>
+  new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR' }).format(
+    n ?? 0
+  );
+
+const planPrice = {
   [Plan.COMMUNITY]: 0,
   [Plan.PREMIUM]: 49,
   [Plan.ULTIMATE]: 89,
 };
 
-const eur = new Intl.NumberFormat('en-IE', {
-  style: 'currency',
-  currency: 'EUR',
-  maximumFractionDigits: 0,
-});
-
-const getTotalPrice = (plan: Plan, amount: number) => planPrice[plan] * amount;
+const getTotalPrice = (plan: Plan, amount: number) => {
+  const total: number = planPrice[plan] * amount;
+  return total;
+};
 
 export default function WisePaymentCard({ team }: WisePaymentCardProps) {
   const { t } = useTranslation('common');
@@ -44,15 +44,17 @@ export default function WisePaymentCard({ team }: WisePaymentCardProps) {
   if (!subscription.payments?.length) return null;
 
   // Find newest payment safely
-  const newestPayment = subscription.payments.reduce((latest, payment) =>
-    payment.date > latest.date ? payment : latest
-  );
 
   const totalPrice = getTotalPrice(subscription.plan, members.length);
   const paymentUrl = `https://wise.com/pay/business/unicistechou?currency=EUR&amount=${totalPrice}`;
 
-  const invoiceDate = new Date(newestPayment.date);
-  const nextInvoiceDate = addDays(invoiceDate, 30);
+  const newestPayment =
+    subscription.payments.reduce((latest, payment) =>
+      new Date(payment.date) > new Date(latest.date) ? payment : latest
+    ) ?? subscription.payments[0];
+
+  const newestDate = new Date(newestPayment.date);
+  const nextInvoiceDate = addMonths(newestDate, 1);
 
   return (
     <Card className="w-full">
@@ -65,27 +67,27 @@ export default function WisePaymentCard({ team }: WisePaymentCardProps) {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div className="space-y-2">
             <p className="text-sm">
-              <b className="font-semibold">Team: </b>
+              <b className="font-semibold">{t('team')}: </b>
               <span>{team.name}</span>
             </p>
             <p className="text-sm">
-              <b className="font-semibold">Number of Members: </b>
+              <b className="font-semibold">{t('number-of-members')}: </b>
               <span>{members.length}</span>
             </p>
             <p className="text-sm">
-              <b className="font-semibold">Price per user: </b>
-              <span>{eur.format(planPrice[subscription.plan])}</span>
+              <b className="font-semibold">{t('price-per-user')}: </b>
+              <span>{formatEUR(planPrice[subscription.plan])}</span>
             </p>
             <p className="text-sm">
-              <b className="font-semibold">Total: </b>
-              <span>{eur.format(totalPrice)}</span>
+              <b className="font-semibold">{t('total')}: </b>
+              <span>{formatEUR(totalPrice)}</span>
             </p>
             <p className="text-sm">
-              <b className="font-semibold">Invoice Date: </b>
-              <span>{format(invoiceDate, 'MMMM d, yyyy')}</span>
+              <b className="font-semibold">{t('invoice-date')}: </b>
+              <span>{format(newestDate, 'MMMM d, yyyy')}</span>
             </p>
             <p className="text-sm">
-              <b className="font-semibold">Next invoice Date: </b>
+              <b className="font-semibold">{t('next-invoice-date')}: </b>
               <span>{format(nextInvoiceDate, 'MMMM d, yyyy')}</span>
             </p>
 
@@ -104,7 +106,7 @@ export default function WisePaymentCard({ team }: WisePaymentCardProps) {
           <div className="flex items-center justify-end">
             <Image
               src="/wise-quick-pay-qr-code-2.png"
-              alt="Wise Quick Pay QR Code"
+              alt={t('pay-with-wise')}
               width={260}
               height={260}
               className="h-auto max-w-full"

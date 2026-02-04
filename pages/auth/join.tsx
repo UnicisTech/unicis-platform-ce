@@ -10,6 +10,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Join from '@/components/auth/Join';
 import type { NextPageWithLayout } from 'types';
 import { authProviderEnabled } from '@/lib/auth';
+import { getAuthErrorKey } from '@/lib/common';
 import { AuthLayout } from '@/components/layouts';
 // import GithubButton from '@/components/auth/GithubButton';
 // import GoogleButton from '@/components/auth/GoogleButton';
@@ -29,10 +30,9 @@ const Signup: NextPageWithLayout<
     error: string;
     token: string;
   };
-
   useEffect(() => {
     if (error) {
-      toast.error(t(error));
+      toast.error(t(getAuthErrorKey(error)));
     }
   }, [error, t]);
 

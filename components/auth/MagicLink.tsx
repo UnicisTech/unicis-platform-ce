@@ -45,7 +45,7 @@ const MagicLink = ({ csrfToken }: MagicLinkProps) => {
       formik.resetForm();
 
       if (response?.error) {
-        toast.error(t('email-login-error'));
+        toast.error(t('errors.emailLogin'));
         return;
       }
 

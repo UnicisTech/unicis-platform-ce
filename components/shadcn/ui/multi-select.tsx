@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { CheckIcon, XCircle, ChevronDown, XIcon } from 'lucide-react';
+import { useTranslation } from 'next-i18next';
 
 import { cn } from '../lib/utils';
 import { Separator } from './separator';
@@ -130,6 +131,7 @@ export const MultiSelect = React.forwardRef<
     },
     ref
   ) => {
+    const { t } = useTranslation('common');
     const [selectedValues, setSelectedValues] =
       React.useState<string[]>(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
@@ -172,12 +174,17 @@ export const MultiSelect = React.forwardRef<
     };
 
     const toggleAll = () => {
-      if (selectedValues.length === options.length) {
+      const enabledOptions = options.filter((option) => !option.isDisabled);
+      const enabledValues = enabledOptions.map((option) => option.value);
+      const allEnabledSelected = enabledValues.every((value) =>
+        selectedValues.includes(value)
+      );
+
+      if (allEnabledSelected) {
         handleClear();
       } else {
-        const allValues = options.map((option) => option.value);
-        setSelectedValues(allValues);
-        onValueChange(allValues);
+        setSelectedValues(enabledValues);
+        onValueChange(enabledValues);
       }
     };
 
@@ -288,7 +295,7 @@ export const MultiSelect = React.forwardRef<
               onKeyDown={handleInputKeyDown}
             />
             <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandEmpty>{t('multiselect-no-results-found')}</CommandEmpty>
               <CommandGroup>
                 <CommandItem
                   key="all"
@@ -305,7 +312,7 @@ export const MultiSelect = React.forwardRef<
                   >
                     <CheckIcon className="h-4 w-4" />
                   </div>
-                  <span>(Select All)</span>
+                  <span>{t('multiselect-select-all')}</span>
                 </CommandItem>
                 {options.map((option) => {
                   const isSelected = selectedValues.includes(option.value);
@@ -352,7 +359,7 @@ export const MultiSelect = React.forwardRef<
                         onSelect={handleClear}
                         className="flex-1 justify-center cursor-pointer"
                       >
-                        Clear
+                        {t('multiselect-clear')}
                       </CommandItem>
                       <Separator
                         orientation="vertical"
@@ -364,7 +371,7 @@ export const MultiSelect = React.forwardRef<
                     onSelect={() => setIsPopoverOpen(false)}
                     className="flex-1 justify-center cursor-pointer max-w-full"
                   >
-                    Close
+                    {t('multiselect-close')}
                   </CommandItem>
                 </div>
               </CommandGroup>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -11,17 +11,17 @@ import {
   TaskDetails,
   TaskTab,
 } from '@/components/interfaces/Task';
-import { CscAuditLogs, CscPanel } from '@/components/interfaces/CSC';
+import { CscAuditLogs, CscPanel } from '@/components/interfaces/csc';
 import {
   RpaPanel,
-  RpaAuditLog,
+  RpaAuditLogs,
   CreateProcedureTest,
-} from '@/components/interfaces/RPA';
+} from '@/components/interfaces/rpa';
 import {
   CreateRiskManagementRisk,
   RiskManagementTaskPanel,
   RmAuditLogs,
-} from '@/components/interfaces/RiskManagement';
+} from '@/components/interfaces/risk-management';
 import useTask from 'hooks/useTask';
 import useTeam from 'hooks/useTeam';
 import useCanAccess from 'hooks/useCanAccess';
@@ -31,12 +31,12 @@ import {
   TiaAuditLogs,
   TiaPanel,
   CreateProcedure as CreateTiaProcedure,
-} from '@/components/interfaces/TIA';
+} from '@/components/interfaces/tia';
 import {
   CreatePiaRisk,
   PiaPanel,
   PiaAuditLogs,
-} from '@/components/interfaces/PIA';
+} from '@/components/interfaces/pia';
 import Breadcrumb from '../../Breadcrumb';
 import useRpaCreation from 'hooks/useRpaCreation';
 import {
@@ -52,6 +52,20 @@ import type {
   TaskProperties,
   TiaProcedureInterface,
 } from 'types';
+
+const CardTitleWrapper = ({
+  children,
+  className = '',
+}: {
+  children: ReactNode;
+  className?: string;
+}) => (
+  <div
+    className={`flex min-h-8 flex-wrap items-center justify-between gap-2 px-4 ${className}`.trim()}
+  >
+    {children}
+  </div>
+);
 
 const TaskById = () => {
   const [tiaVisible, setTiaVisible] = useState(false);
@@ -81,6 +95,8 @@ const TaskById = () => {
   if (!task || !team || isError || teamError)
     return <Error message={(isError || teamError)?.message || ''} />;
 
+  console.log('task', task);
+
   return (
     <>
       <Breadcrumb
@@ -95,7 +111,9 @@ const TaskById = () => {
         <>
           <Card>
             <CardHeader>
-              <CardTitle>{t('details')}</CardTitle>
+              <CardTitleWrapper>
+                <CardTitle>{t('details')}</CardTitle>
+              </CardTitleWrapper>
             </CardHeader>
             <CardContent>
               <TaskDetails task={task} team={team as Team} />
@@ -104,7 +122,9 @@ const TaskById = () => {
 
           <Card className="mt-4">
             <CardHeader>
-              <CardTitle>{t('attachments')}</CardTitle>
+              <CardTitleWrapper>
+                <CardTitle>{t('attachments')}</CardTitle>
+              </CardTitleWrapper>
             </CardHeader>
             <CardContent>
               <Attachments task={task} mutateTask={mutateTask} />
@@ -115,39 +135,41 @@ const TaskById = () => {
       {activeTab === 'Processing Activities' && (
         <Card className="mt-4">
           <CardHeader>
-            <div className="flex items-center justify-between px-4 pt-6">
+            <CardTitleWrapper>
               <CardTitle>{t('processing-activities-panel')}</CardTitle>
               {canAccess('task', ['update']) && (
                 <Button
                   variant="outline"
                   size="sm"
+                  className="whitespace-normal text-center leading-snug"
                   onClick={() => rpaState.setIsRpaOpen(!rpaState.isRpaOpen)}
                 >
                   {t('create-rpa')}
                 </Button>
               )}
-            </div>
+            </CardTitleWrapper>
           </CardHeader>
           <CardContent>
-            <RpaPanel task={task} />
+            <RpaPanel task={task} slug={slug} />
           </CardContent>
         </Card>
       )}
       {activeTab === 'Transfer Impact Assessment' && (
         <Card className="mt-4">
           <CardHeader>
-            <div className="flex items-center justify-between px-4 pt-6">
+            <CardTitleWrapper>
               <CardTitle>{t('transfer-impact-assessment-panel')}</CardTitle>
               {canAccess('task', ['update']) && (
                 <Button
                   variant="outline"
                   size="sm"
+                  className="whitespace-normal text-center leading-snug"
                   onClick={() => setTiaVisible(!tiaVisible)}
                 >
                   {t('create-tia')}
                 </Button>
               )}
-            </div>
+            </CardTitleWrapper>
           </CardHeader>
           <CardContent>
             <TiaPanel task={task} />
@@ -157,9 +179,9 @@ const TaskById = () => {
       {activeTab === 'Cybersecurity Controls' && (
         <Card className="mt-4">
           <CardHeader>
-            <div className="flex items-center justify-between px-4 pt-6">
+            <CardTitleWrapper>
               <CardTitle>{t('cybersecurity-controls-panel')}</CardTitle>
-            </div>
+            </CardTitleWrapper>
           </CardHeader>
           <CardContent>
             <CscPanel task={task} team={team} mutateTask={mutateTask} />
@@ -169,18 +191,19 @@ const TaskById = () => {
       {activeTab === 'Privacy Impact Assessment' && (
         <Card className="mt-4">
           <CardHeader>
-            <div className="flex items-center justify-between px-4 pt-6">
+            <CardTitleWrapper>
               <CardTitle>{t('privacy-impact-assessment-panel')}</CardTitle>
               {canAccess('task', ['update']) && (
                 <Button
                   variant="outline"
                   size="sm"
+                  className="whitespace-normal text-center leading-snug"
                   onClick={() => setPiaVisible(!piaVisible)}
                 >
                   {t('create-pia')}
                 </Button>
               )}
-            </div>
+            </CardTitleWrapper>
           </CardHeader>
           <CardContent>
             <PiaPanel task={task} />
@@ -190,21 +213,22 @@ const TaskById = () => {
       {activeTab === 'Risk Management' && (
         <Card className="mt-4">
           <CardHeader>
-            <div className="flex items-center justify-between px-4 pt-6">
+            <CardTitleWrapper>
               <CardTitle>{t('risk-management-panel')}</CardTitle>
               {canAccess('task', ['update']) && (
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setRmVisible(!rmVisible)}
+                  className="whitespace-normal text-center leading-snug"
                 >
                   {t('rm-register-risk-record')}
                 </Button>
               )}
-            </div>
+            </CardTitleWrapper>
           </CardHeader>
           <CardContent>
-            <RiskManagementTaskPanel task={task} />
+            <RiskManagementTaskPanel task={task} slug={slug} />
           </CardContent>
         </Card>
       )}
@@ -249,7 +273,9 @@ const TaskById = () => {
       {activeCommentTab === 'Comments' ? (
         <Card className="mt-4">
           <CardHeader>
-            <CardTitle>{t('comments')}</CardTitle>
+            <CardTitleWrapper>
+              <CardTitle>{t('comments')}</CardTitle>
+            </CardTitleWrapper>
           </CardHeader>
           <CardContent>
             <Comments task={task} mutateTask={mutateTask} />
@@ -259,23 +285,29 @@ const TaskById = () => {
         <>
           <Card className="mt-4">
             <CardHeader>
-              <CardTitle>{t('rpa-audit-logs')}</CardTitle>
+              <CardTitleWrapper>
+                <CardTitle>{t('rpa-audit-logs')}</CardTitle>
+              </CardTitleWrapper>
             </CardHeader>
             <CardContent>
-              <RpaAuditLog task={task} />
+              <RpaAuditLogs task={task} slug={slug} />
             </CardContent>
           </Card>
           <Card className="mt-4">
             <CardHeader>
-              <CardTitle>{t('tia-audit-logs')}</CardTitle>
+              <CardTitleWrapper>
+                <CardTitle>{t('tia-audit-logs')}</CardTitle>
+              </CardTitleWrapper>
             </CardHeader>
             <CardContent>
-              <TiaAuditLogs task={task} />
+              <TiaAuditLogs task={task} slug={slug} />
             </CardContent>
           </Card>
           <Card className="mt-4">
             <CardHeader>
-              <CardTitle>{t('csc-audit-logs')}</CardTitle>
+              <CardTitleWrapper>
+                <CardTitle>{t('csc-audit-logs')}</CardTitle>
+              </CardTitleWrapper>
             </CardHeader>
             <CardContent>
               <CscAuditLogs task={task} />
@@ -283,7 +315,9 @@ const TaskById = () => {
           </Card>
           <Card className="mt-4">
             <CardHeader>
-              <CardTitle>{t('pia-audit-logs')}</CardTitle>
+              <CardTitleWrapper>
+                <CardTitle>{t('pia-audit-logs')}</CardTitle>
+              </CardTitleWrapper>
             </CardHeader>
             <CardContent>
               <PiaAuditLogs task={task} />
@@ -291,10 +325,12 @@ const TaskById = () => {
           </Card>
           <Card className="mt-4">
             <CardHeader>
-              <CardTitle>{t('rm-audit-logs')}</CardTitle>
+              <CardTitleWrapper>
+                <CardTitle>{t('rm-audit-logs')}</CardTitle>
+              </CardTitleWrapper>
             </CardHeader>
             <CardContent>
-              <RmAuditLogs task={task} />
+              <RmAuditLogs task={task} slug={slug} />
             </CardContent>
           </Card>
         </>
@@ -306,9 +342,30 @@ const TaskById = () => {
 export async function getServerSideProps({
   locale,
 }: GetServerSidePropsContext) {
+  const cscTranslations = [
+    'csc/2013',
+    'csc/2022',
+    'csc/mvps',
+    'csc/nistcsfv2',
+    'csc/eunis2',
+    'csc/gdpr',
+    'csc/cisv81',
+    'csc/soc2v2',
+    'csc/c5_2020',
+  ];
+
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, [
+            'common',
+            'rpa',
+            'tia',
+            'pia',
+            'rm',
+            ...cscTranslations,
+          ])
+        : {}),
     },
   };
 }

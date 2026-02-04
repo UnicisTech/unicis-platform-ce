@@ -1,0 +1,52 @@
+import type { Team } from '@prisma/client';
+import CscTabs from './CscTabs';
+import { useState } from 'react';
+import { ISO } from 'types';
+import useISO from 'hooks/useISO';
+import { Loading } from '@/components/shared';
+import CscPanel from './CscPanel';
+import useTeamTasks from 'hooks/useTeamTasks';
+import { useTranslation } from 'next-i18next';
+
+const Dashboard = ({ team, iso }: { team: Team; iso: ISO[] }) => {
+  const [activeTab, setActiveTab] = useState<ISO>(iso[0]);
+  const { tasks, mutateTasks } = useTeamTasks(team.slug);
+  const { t } = useTranslation(['common', 'test', 'csc/2013']);
+
+  if (!tasks) {
+    return <Loading />;
+  }
+
+  return (
+    <>
+      <h2 className="text-xl font-medium leading-none tracking-tight">
+        {`${t('csc-dashboard')}: ${team.name}`}
+      </h2>
+      <CscTabs
+        frameworks={iso}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
+      <CscPanel
+        key={activeTab}
+        slug={team.slug}
+        iso={activeTab}
+        tasks={tasks}
+        mutateTasks={mutateTasks}
+      />
+    </>
+  );
+};
+
+//TODO: remake
+const WithISO = ({ team }: { team: Team }) => {
+  const { ISO } = useISO(team);
+
+  if (!ISO) {
+    return <Loading />;
+  }
+
+  return <Dashboard team={team} iso={ISO} />;
+};
+
+export default WithISO;

@@ -1,7 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import { taskStatusOptions } from '@/components/defaultLanding/data/configs/csc';
+import { statuses as taskStatuses } from '@/lib/tasks';
 
 // TODO: move to config + use css variables
 const barColors = [
@@ -15,25 +16,22 @@ const barColors = [
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const countStatuses = (statuses: { [key: string]: string }) =>
-  taskStatusOptions
-    .map(({ label }) => label)
-    .map(
-      (name) =>
-        Object.entries(statuses).filter(([_, status]) => status === name).length
-    );
+  taskStatuses.map(
+    (name) =>
+      Object.entries(statuses).filter(([_, status]) => status === name).length
+  );
 
 const TasksPieChart = ({
   statuses,
-  labels,
 }: {
   statuses: { [key: string]: string };
-  labels: any[];
 }) => {
+  const { t } = useTranslation('common');
   const data = {
-    labels: labels,
+    labels: taskStatuses.map((status) => t(`task-statuses.${status}`)),
     datasets: [
       {
-        label: '# of Controls',
+        label: t('tasks-count'),
         data: countStatuses(statuses),
         backgroundColor: barColors,
         borderColor: barColors,
@@ -49,7 +47,7 @@ const TasksPieChart = ({
       },
       title: {
         display: true,
-        text: 'Controls',
+        text: t('statuses-title'),
       },
     },
     maintainAspectRatio: false,

@@ -1,0 +1,142 @@
+{
+  "sections": {
+    "risk-mgmt": {
+      "label": "Mesures de gestion des risques en cybersécurité"
+    },
+    "proportionate-measures": {
+      "label": "Mesures appropriées et proportionnées"
+    },
+    "state-of-the-art": {
+      "label": "Mesures de sécurité à l’état de l’art"
+    },
+    "all-hazards": {
+      "label": "Approche tous risques"
+    },
+    "risk-analysis-security": {
+      "label": "Analyse des risques et sécurité des systèmes d’information"
+    },
+    "incident-handling": {
+      "label": "Gestion des incidents"
+    },
+    "business-continuity": {
+      "label": "Continuité d’activité"
+    },
+    "supply-chain-security": {
+      "label": "Sécurité de la chaîne d’approvisionnement"
+    },
+    "system-acquisition-maintenance": {
+      "label": "Acquisition et maintenance des systèmes"
+    },
+    "effectiveness-assessment": {
+      "label": "Évaluation de l’efficacité"
+    },
+    "cyber-hygiene-training": {
+      "label": "Hygiène cyber et formation"
+    },
+    "crypto-policies": {
+      "label": "Politiques de cryptographie"
+    },
+    "access-asset-mgmt": {
+      "label": "Contrôle d’accès et gestion des actifs"
+    },
+    "auth-secure-comms": {
+      "label": "Authentification et communications sécurisées"
+    },
+    "supply-chain-vulns": {
+      "label": "Vulnérabilités de la chaîne d’approvisionnement"
+    },
+    "corrective-measures": {
+      "label": "Mesures correctives"
+    },
+    "implementing-acts": {
+      "label": "Actes d’exécution"
+    }
+  },
+  "controls": {
+    "eu-nis2-21": {
+      "code": "21",
+      "control": "Article 21",
+      "requirements": "Mesures de gestion des risques en cybersécurité"
+    },
+    "eu-nis2-21-1": {
+      "code": "21.1",
+      "control": "Article 21.1",
+      "requirements": "Les États membres veillent à ce que les entités essentielles et importantes prennent des mesures techniques, opérationnelles et organisationnelles appropriées et proportionnées pour gérer les risques pesant sur la sécurité des réseaux et des systèmes d’information que ces entités utilisent pour leurs opérations ou pour la fourniture de leurs services, et pour prévenir ou minimiser l’impact des incidents sur les bénéficiaires de leurs services et sur d’autres services."
+    },
+    "eu-nis2-21-1-sp2": {
+      "code": "21.1.sp2",
+      "control": "Article 21.1.sp2",
+      "requirements": "En tenant compte de l’état de l’art et, le cas échéant, des normes européennes et internationales pertinentes, ainsi que du coût de mise en œuvre, les mesures visées au premier alinéa assurent un niveau de sécurité des réseaux et des systèmes d’information adapté aux risques encourus."
+    },
+    "eu-nis2-21-2": {
+      "code": "21.2",
+      "control": "Article 21.2",
+      "requirements": "Les mesures visées au paragraphe 1 sont fondées sur une approche tous risques visant à protéger les réseaux et les systèmes d’information ainsi que l’environnement physique de ces systèmes contre les incidents, et comprennent au moins ce qui suit :"
+    },
+    "eu-nis2-21-2-a": {
+      "code": "21.2.a",
+      "control": "Article 21.2.a",
+      "requirements": "Des politiques relatives à l’analyse des risques et à la sécurité des systèmes d’information ;"
+    },
+    "eu-nis2-21-2-b": {
+      "code": "21.2.b",
+      "control": "Article 21.2.b",
+      "requirements": "La gestion des incidents ;"
+    },
+    "eu-nis2-21-2-c": {
+      "code": "21.2.c",
+      "control": "Article 21.2.c",
+      "requirements": "La continuité d’activité, telle que la gestion des sauvegardes et la reprise après sinistre, ainsi que la gestion de crise ;"
+    },
+    "eu-nis2-21-2-d": {
+      "code": "21.2.d",
+      "control": "Article 21.2.d",
+      "requirements": "La sécurité de la chaîne d’approvisionnement, y compris les aspects liés à la sécurité concernant les relations entre chaque entité et ses fournisseurs directs ou prestataires de services ;"
+    },
+    "eu-nis2-21-2-e": {
+      "code": "21.2.e",
+      "control": "Article 21.2.e",
+      "requirements": "La sécurité dans l’acquisition, le développement et la maintenance des réseaux et des systèmes d’information, y compris la gestion des vulnérabilités et leur divulgation ;"
+    },
+    "eu-nis2-21-2-f": {
+      "code": "21.2.f",
+      "control": "Article 21.2.f",
+      "requirements": "Des politiques et procédures visant à évaluer l’efficacité des mesures de gestion des risques en cybersécurité ;"
+    },
+    "eu-nis2-21-2-g": {
+      "code": "21.2.g",
+      "control": "Article 21.2.g",
+      "requirements": "Des pratiques de base d’hygiène cyber et une formation en cybersécurité ;"
+    },
+    "eu-nis2-21-2-h": {
+      "code": "21.2.h",
+      "control": "Article 21.2.h",
+      "requirements": "Des politiques et procédures concernant l’usage de la cryptographie et, le cas échéant, du chiffrement ;"
+    },
+    "eu-nis2-21-2-i": {
+      "code": "21.2.i",
+      "control": "Article 21.2.i",
+      "requirements": "La sécurité des ressources humaines, les politiques de contrôle d’accès et la gestion des actifs ;"
+    },
+    "eu-nis2-21-2-j": {
+      "code": "21.2.j",
+      "control": "Article 21.2.j",
+      "requirements": "Le recours à l’authentification multifacteur ou à des solutions d’authentification continue, à des communications vocales, vidéo et textuelles sécurisées ainsi qu’à des systèmes de communication d’urgence sécurisés au sein de l’entité, le cas échéant."
+    },
+    "eu-nis2-21-3": {
+      "code": "21.3",
+      "control": "Article 21.3",
+      "requirements": "Les États membres veillent à ce que, lorsqu’elles déterminent quelles mesures visées au paragraphe 2, point d), du présent article sont appropriées, les entités tiennent compte des vulnérabilités propres à chaque fournisseur direct et prestataire de services, ainsi que de la qualité globale des produits et des pratiques de cybersécurité de leurs fournisseurs et prestataires, y compris de leurs procédures de développement sécurisé. Les États membres veillent également à ce que, lorsqu’elles déterminent quelles mesures visées à ce point sont appropriées, les entités soient tenues de prendre en compte les résultats des évaluations coordonnées des risques de sécurité des chaînes d’approvisionnement critiques réalisées conformément à l’article 22, paragraphe 1."
+    },
+    "eu-nis2-21-4": {
+      "code": "21.4",
+      "control": "Article 21.4",
+      "requirements": "Les États membres veillent à ce qu’une entité qui constate qu’elle ne respecte pas les mesures prévues au paragraphe 2 prenne, sans retard injustifié, toutes les mesures correctives nécessaires, appropriées et proportionnées."
+    },
+    "eu-nis2-21-5": {
+      "code": "21.5",
+      "control": "Article 21.5",
+      "requirements": "Au plus tard le 17 octobre 2024, la Commission adopte des actes d’exécution établissant les exigences techniques et méthodologiques des mesures visées au paragraphe 2 en ce qui concerne les fournisseurs de services DNS, les registres de noms de domaine de premier niveau (TLD), les fournisseurs de services d’informatique en nuage, les fournisseurs de services de centres de données, les fournisseurs de réseaux de diffusion de contenu, les prestataires de services gérés, les prestataires de services de sécurité gérés, les fournisseurs de places de marché en ligne, de moteurs de recherche en ligne et de plateformes de services de réseaux sociaux, ainsi que les prestataires de services de confiance. La Commission peut adopter des actes d’exécution établissant les exigences techniques et méthodologiques, ainsi que des exigences sectorielles, lorsque cela est nécessaire, des mesures visées au paragraphe 2 à l’égard des entités essentielles et importantes autres que celles visées au premier alinéa du présent paragraphe. Lors de la préparation des actes d’exécution visés aux premier et deuxième alinéas du présent paragraphe, la Commission suit, dans la mesure du possible, les normes européennes et internationales ainsi que les spécifications techniques pertinentes. La Commission échange des avis et coopère avec le groupe de coopération et l’ENISA sur les projets d’actes d’exécution conformément à l’article 14, paragraphe 4, point e). Ces actes d’exécution sont adoptés conformément à la procédure d’examen visée à l’article 39, paragraphe 2."
+    }
+  }
+}

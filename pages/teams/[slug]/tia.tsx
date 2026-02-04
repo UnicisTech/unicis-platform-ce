@@ -14,11 +14,13 @@ import {
   TiaTable,
   DeleteProcedure,
   CreateProcedure,
-} from '@/components/interfaces/TIA';
+} from '@/components/interfaces/tia';
 import { PerPageSelector } from '@/components/shared';
 import { Button } from '@/components/shadcn/ui/button';
 import { TeamAssessmentAnalysis } from '@/components/interfaces/TeamDashboard';
+import { getTeamAccess } from '@/lib/teams';
 
+// TODO: move to components/interfaces/tia
 const TiaDashboard: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = () => {
@@ -71,7 +73,7 @@ const TiaDashboard: NextPageWithLayout<
   }
 
   if (!isLoading && !canAccess('tia', ['read'])) {
-    return <Error message={t('forbidden-resource')} />;
+    return <Error message={t('errors.forbiddenResource')} />;
   }
 
   return (
@@ -109,7 +111,7 @@ const TiaDashboard: NextPageWithLayout<
         )}
       </>
       {tasksWithProcedures.length === 0 ? (
-        <EmptyState title={t('tia-dashboard')} description="No records" />
+        <EmptyState title={t('tia-dashboard')} description={t('no-records')} />
       ) : (
         <>
           <div className="m-2">
@@ -149,11 +151,21 @@ const TiaDashboard: NextPageWithLayout<
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const { locale }: GetServerSidePropsContext = context;
+  const { locale, req, res, query }: GetServerSidePropsContext = context;
+
+  const access = await getTeamAccess(req, res, query);
+
+  if (!access) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, ['common', 'tia'])
+        : {}),
     },
   };
 };

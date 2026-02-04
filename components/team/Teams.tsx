@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
 import { WithLoadingAndError } from '@/components/shared';
 import CreateTeam from './CreateTeam';
-import DaisyButton from '../shared/daisyUI/DaisyButton';
+import { Button } from '../shadcn/ui/button';
 
 const Teams = () => {
   const router = useRouter();
@@ -63,14 +63,9 @@ const Teams = () => {
               </p>
             </div>
             {canAccess('team', ['create']) && (
-              <DaisyButton
-                color="primary"
-                variant="outline"
-                size="md"
-                onClick={() => setCreateTeamVisible(!createTeamVisible)}
-              >
+              <Button onClick={() => setCreateTeamVisible(!createTeamVisible)}>
                 {t('create-team')}
-              </DaisyButton>
+              </Button>
             )}
           </div>
           <table className="w-full min-w-full divide-y divide-border text-sm">
@@ -102,17 +97,15 @@ const Teams = () => {
                         {new Date(team.createdAt).toDateString()}
                       </td>
                       <td className="px-4 py-2">
-                        <DaisyButton
-                          variant="outline"
-                          size="xs"
-                          color="error"
+                        <Button
+                          variant="destructive"
                           onClick={() => {
                             setTeam(team);
                             setAskConfirmation(true);
                           }}
                         >
                           {t('leave-team')}
-                        </DaisyButton>
+                        </Button>
                       </td>
                     </tr>
                   );
@@ -138,81 +131,6 @@ const Teams = () => {
           />
         </div>
       </WithLoadingAndError>
-      {/* {TODO: SHOULD DELETE IT} */}
-      {/* <>
-      <Card heading={t('all-teams')}>
-        <Card.Body>
-          <table className="w-full table-fixed text-left text-sm text-gray-500 dark:text-gray-400">
-            <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  {t('name')}
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  {t('members')}
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  {t('created-at')}
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  {t('actions')}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {teams &&
-                teams.map((team) => {
-                  return (
-                    <tr
-                      key={team.id}
-                      className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
-                    >
-                      <td className="px-6 py-3">
-                        <Link href={`/teams/${team.slug}/tasks`}>
-                          <div className="flex items-center justify-start space-x-2">
-                            <LetterAvatar name={team.name} />
-                            <span className="underline">{team.name}</span>
-                          </div>
-                        </Link>
-                      </td>
-                      <td className="px-6 py-3">{team._count.members}</td>
-                      <td className="px-6 py-3">
-                        {new Date(team.createdAt).toDateString()}
-                      </td>
-                      <td className="px-6 py-3">
-                        <DaisyButton
-                          variant="outline"
-                          size="xs"
-                          color="error"
-                          onClick={() => {
-                            setTeam(team);
-                            setAskConfirmation(true);
-                          }}
-                        >
-                          {t('leave-team')}
-                        </DaisyButton>
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
-        </Card.Body>
-      </Card>
-      <ConfirmationDialog
-        visible={askConfirmation}
-        title={`${t('leave-team')} ${team?.name}`}
-        onCancel={() => setAskConfirmation(false)}
-        onConfirm={() => {
-          if (team) {
-            leaveTeam(team);
-          }
-        }}
-        confirmText={t('leave-team')}
-      >
-        {t('leave-team-confirmation')}
-      </ConfirmationDialog>
-    </> */}
     </>
   );
 };

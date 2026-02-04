@@ -19,7 +19,7 @@ const APIKeysContainer = ({ teamFeatures }: { teamFeatures: TeamFeature }) => {
   }
 
   if (!team) {
-    return <Error message={t('team-not-found')} />;
+    return <Error message={t('errors.teamNotFound')} />;
   }
 
   return (

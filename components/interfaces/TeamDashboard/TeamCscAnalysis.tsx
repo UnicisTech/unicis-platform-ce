@@ -5,8 +5,8 @@ import { Loading } from '@/components/shared';
 import { Team } from '@prisma/client';
 import type { ISO } from 'types';
 import useCscStatuses from 'hooks/useCscStatuses';
-import CscTabs from '../CSC/CscTabs';
-import CscChartsLayout from '../CSC/CscChartsLayout';
+import CscTabs from '../csc/CscTabs';
+import CscChartsLayout from '../csc/CscChartsLayout';
 
 const TeamCscAnalysis = ({
   slug,
@@ -15,7 +15,7 @@ const TeamCscAnalysis = ({
   slug: string;
   cscFrameworks: ISO[];
 }) => {
-  const { t } = useTranslation('translation');
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<ISO>(cscFrameworks[0]);
   const { statuses } = useCscStatuses(slug, activeTab);
 
@@ -26,11 +26,11 @@ const TeamCscAnalysis = ({
     <div className="mx-auto mt-4 w-full max-w-7xl rounded-md">
       <div className="mb-4 mx-4 flex items-center justify-between">
         <h2 className="text-2xl font-semibold tracking-tight">
-          {t(`Cybersecurity Controls Overview`)}
+          {t('cybersecurity-controls-overview')}
         </h2>
       </div>
       <CscTabs
-        iso={cscFrameworks}
+        frameworks={cscFrameworks}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />

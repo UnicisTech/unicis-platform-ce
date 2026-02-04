@@ -20,7 +20,7 @@ const PerPageSelector = ({ perPage, setPerPage }: PerPageSelectorProps) => {
         value={perPage.toString()}
         onValueChange={(val) => setPerPage(Number(val))}
       >
-        <SelectTrigger className="h-9 px-2 text-sm">
+        <SelectTrigger className="h-full px-2 text-sm">
           <SelectValue placeholder="Per page" />
         </SelectTrigger>
         <SelectContent>

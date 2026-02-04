@@ -4,12 +4,10 @@ import { TeamTab } from '@/components/team';
 import env from '@/lib/env';
 import { inferSSRProps } from '@/lib/inferSSRProps';
 import { getViewerToken } from '@/lib/retraced';
-import { getSession } from '@/lib/session';
-import { getTeamFeatures } from '@/lib/subscriptions';
+import { getTeamAccess } from '@/lib/teams';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeam from 'hooks/useTeam';
-import { getTeamMember } from 'models/team';
-import { throwIfNotAllowed } from 'models/user';
+import { isAllowed } from 'models/user';
 import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -48,7 +46,7 @@ const Events: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({
   }
 
   if (!team) {
-    return <Error message={t('team-not-found')} />;
+    return <Error message={t('errors.teamNotFound')} />;
   }
 
   return (
@@ -72,49 +70,57 @@ const Events: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { locale, req, res, query } = context;
 
-  // TODO: dublicated logic of getSession and getTeamMember in getTeamFeatures
-  const teamFeatures = await getTeamFeatures(req, res, query);
+  const access = await getTeamAccess(req, res, query);
 
-  if (!teamFeatures.auditLog) {
+  if (!access || !access.teamFeatures.auditLog) {
     return {
       notFound: true,
     };
   }
 
-  const session = await getSession(req, res);
-  const teamMember = await getTeamMember(
-    session?.user.id as string,
-    query.slug as string
-  );
+  const { session, teamMember, teamFeatures } = access;
+  const baseProps = {
+    ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+    teamFeatures,
+  };
+
+  if (!isAllowed(teamMember.role, 'team_audit_log', 'read')) {
+    return {
+      props: {
+        ...baseProps,
+        error: {
+          message: 'You are not allowed to perform read on team_audit_log',
+        },
+        auditLogToken: null,
+        retracedHost: null,
+      },
+    };
+  }
 
   try {
-    throwIfNotAllowed(teamMember, 'team_audit_log', 'read');
-
     const auditLogToken = await getViewerToken(
       teamMember.team.id,
-      session?.user.id as string
+      session.user.id as string
     );
 
     return {
       props: {
-        ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+        ...baseProps,
         error: null,
         auditLogToken: auditLogToken ?? '',
         retracedHost: env.retraced.url ?? '',
-        teamFeatures: teamFeatures,
       },
     };
   } catch (error: unknown) {
     const { message } = error as { message: string };
     return {
       props: {
-        ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+        ...baseProps,
         error: {
           message,
         },
         auditLogToken: null,
         retracedHost: null,
-        teamFeatures: teamFeatures,
       },
     };
   }

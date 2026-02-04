@@ -1,14 +1,29 @@
+import { SubscriptionPermissions } from '@/lib/subscriptions';
 import { Subscription, SubscriptionStatus, Plan } from '@prisma/client';
 
-const params = {
+const params: SubscriptionPermissions = {
   COMMUNITY: {
     maxUsers: 10,
-    avaliableISO: ['default'],
+    maxAdmins: 1,
+    maxFrameworks: 1,
+    teamFeatures: {
+      sso: true,
+      dsync: true,
+    },
+    avaliableISO: ['mvps'],
   },
   PREMIUM: {
     maxUsers: 150,
+    maxAdmins: 5,
+    maxFrameworks: 3,
+    teamFeatures: {
+      sso: true,
+      dsync: true,
+      apiKey: true,
+      webhook: true,
+    },
     avaliableISO: [
-      'default',
+      'mvps',
       '2013',
       '2022',
       'eunis2',
@@ -19,8 +34,17 @@ const params = {
   },
   ULTIMATE: {
     maxUsers: 10000000,
+    maxAdmins: 1000000,
+    maxFrameworks: 100,
+    teamFeatures: {
+      sso: true,
+      dsync: true,
+      apiKey: true,
+      webhook: true,
+      auditLog: true,
+    },
     avaliableISO: [
-      'default',
+      'mvps',
       '2013',
       '2022',
       'nistcsfv2',

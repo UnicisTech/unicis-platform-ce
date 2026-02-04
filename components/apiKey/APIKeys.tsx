@@ -58,6 +58,16 @@ const APIKeys = ({ team }: APIKeysProps) => {
     }
   };
 
+  const copyApiKey = async (apiKey: ApiKey) => {
+    try {
+      await navigator.clipboard.writeText(apiKey.hashedKey);
+      toast.success(t('copied-to-clipboard'));
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      toast.error(t('errors.failedToCopyLink'));
+    }
+  };
+
   const apiKeys = data?.data ?? [];
 
   return (
@@ -66,10 +76,10 @@ const APIKeys = ({ team }: APIKeysProps) => {
         <div className="flex justify-between items-center">
           <div className="space-y-3">
             <h2 className="text-xl font-medium leading-none tracking-tight">
-              API Keys
+              {t('api-keys')}
             </h2>
             <p className="text-sm text-muted-foreground">
-              API keys allow you to authenticate with the API.
+              {t('api-keys-description')}
             </p>
           </div>
           <Button onClick={() => setCreateModalVisible(true)}>
@@ -104,16 +114,28 @@ const APIKeys = ({ team }: APIKeysProps) => {
                       {new Date(apiKey.createdAt).toLocaleDateString()}
                     </TableCell>
                     <TableCell className="text-right">
-                      <Button
-                        size="sm"
-                        variant="destructive"
-                        onClick={() => {
-                          setSelectedApiKey(apiKey);
-                          setConfirmationDialogVisible(true);
-                        }}
-                      >
-                        {t('revoke')}
-                      </Button>
+                      <div className="inline-flex gap-2 justify-end">
+                        <Button
+                          variant="outline"
+                          aria-label="Copy"
+                          size="sm"
+                          onClick={() => {
+                            copyApiKey(apiKey);
+                          }}
+                        >
+                          {t('copy-to-clipboard')}
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          onClick={() => {
+                            setSelectedApiKey(apiKey);
+                            setConfirmationDialogVisible(true);
+                          }}
+                        >
+                          {t('revoke')}
+                        </Button>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}

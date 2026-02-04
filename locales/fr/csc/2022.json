@@ -1,0 +1,483 @@
+{
+  "sections": {
+    "organizational": {
+      "label": "Contrôles organisationnels"
+    },
+    "people": {
+      "label": "Contrôles liés aux personnes"
+    },
+    "physical": {
+      "label": "Contrôles physiques"
+    },
+    "technological": {
+      "label": "Contrôles technologiques"
+    }
+  },
+  "controls": {
+    "iso-2022-a-5-1": {
+      "code": "A.5.1",
+      "control": "Politiques de sécurité de l’information",
+      "requirements": "Un ensemble de politiques de sécurité de l’information et de cybersécurité doit être défini, approuvé par la direction (C-level), publié et communiqué aux employés et aux parties externes concernées."
+    },
+    "iso-2022-a-5-2": {
+      "code": "A.5.2",
+      "control": "Rôles et responsabilités en matière de sécurité de l’information",
+      "requirements": "Tous les rôles et responsabilités en matière de sécurité de l’information et de cybersécurité doivent être définis et attribués."
+    },
+    "iso-2022-a-5-3": {
+      "code": "A.5.3",
+      "control": "Séparation des tâches",
+      "requirements": "Les tâches et responsabilités incompatibles doivent être séparées afin de réduire les possibilités de modification ou d’utilisation abusive des actifs de l’organisation, intentionnelle ou non."
+    },
+    "iso-2022-a-5-4": {
+      "code": "A.5.4",
+      "control": "Responsabilités de la direction",
+      "requirements": "La direction doit imposer à tous les employés et sous-traitants de respecter la sécurité de l’information conformément aux politiques et procédures établies par l’organisation."
+    },
+    "iso-2022-a-5-5": {
+      "code": "A.5.5",
+      "control": "Contact avec les autorités",
+      "requirements": "Des communications appropriées doivent être maintenues avec les autorités compétentes."
+    },
+    "iso-2022-a-5-6": {
+      "code": "A.5.6",
+      "control": "Contact avec des groupes d’intérêt",
+      "requirements": "Des liens appropriés doivent être établis avec des organisations spécialisées, des forums professionnels en sécurité ou des associations professionnelles."
+    },
+    "iso-2022-a-5-7": {
+      "code": "A.5.7",
+      "control": "Renseignement sur les menaces",
+      "requirements": "Collecter et analyser des informations relatives aux menaces de sécurité de l’information et utiliser ces informations pour prendre des mesures d’atténuation."
+    },
+    "iso-2022-a-5-8": {
+      "code": "A.5.8",
+      "control": "Sécurité de l’information dans la gestion de projet",
+      "requirements": "Tout au long de la gestion de projet, la confidentialité de l’information doit être prise en compte, quel que soit le type de projet."
+    },
+    "iso-2022-a-5-9": {
+      "code": "A.5.9",
+      "control": "Inventaire des informations et autres actifs associés",
+      "requirements": "Les actifs liés à l’information et aux moyens de traitement de l’information doivent être identifiés, inventoriés et chaque actif doit avoir un propriétaire."
+    },
+    "iso-2022-a-5-10": {
+      "code": "A.5.10",
+      "control": "Utilisation acceptable des informations et autres actifs associés",
+      "requirements": "Des règles d’utilisation acceptable des informations et des actifs doivent être définies, documentées et appliquées. La manipulation des actifs conformément au schéma de classification doit être mise en œuvre."
+    },
+    "iso-2022-a-5-11": {
+      "code": "A.5.11",
+      "control": "Restitution des actifs",
+      "requirements": "Les employés et parties externes doivent restituer tous les actifs de l’organisation en leur possession à la fin du contrat ou de la mission."
+    },
+    "iso-2022-a-5-12": {
+      "code": "A.5.12",
+      "control": "Classification de l’information",
+      "requirements": "L’information doit être classifiée selon les exigences légales, la criticité et la vulnérabilité face à une divulgation ou modification non autorisée."
+    },
+    "iso-2022-a-5-13": {
+      "code": "A.5.13",
+      "control": "Étiquetage de l’information",
+      "requirements": "Des méthodes adéquates d’étiquetage de l’information doivent être établies et mises en œuvre conformément au schéma de classification."
+    },
+    "iso-2022-a-5-14": {
+      "code": "A.5.14",
+      "control": "Transfert d’information",
+      "requirements": "Des politiques, procédures et contrôles de transfert doivent être définis pour protéger l’information lors de tout type de communication, y compris la messagerie électronique et les accords avec des tiers."
+    },
+    "iso-2022-a-5-15": {
+      "code": "A.5.15",
+      "control": "Contrôle d’accès",
+      "requirements": "Une politique de contrôle d’accès doit être établie, documentée et revue. Seuls les réseaux et services réseau approuvés doivent être accessibles aux utilisateurs."
+    },
+    "iso-2022-a-5-16": {
+      "code": "A.5.16",
+      "control": "Gestion des identités",
+      "requirements": "L’accès aux systèmes et services doit être accordé uniquement aux identités approuvées et gérées conformément aux politiques de l’organisation."
+    },
+    "iso-2022-a-5-17": {
+      "code": "A.5.17",
+      "control": "Informations d’authentification",
+      "requirements": "Un processus structuré doit gérer l’attribution et l’utilisation des informations d’authentification. Les systèmes de gestion des mots de passe doivent garantir leur qualité."
+    },
+    "iso-2022-a-5-18": {
+      "code": "A.5.18",
+      "control": "Droits d’accès",
+      "requirements": "Un processus formel doit gérer l’octroi, la revue et la suppression des droits d’accès pour tous les utilisateurs et systèmes."
+    },
+    "iso-2022-a-5-19": {
+      "code": "A.5.19",
+      "control": "Sécurité de l’information dans les relations fournisseurs",
+      "requirements": "Les exigences de sécurité de l’information liées à l’accès des fournisseurs aux actifs de l’organisation doivent être définies et documentées."
+    },
+    "iso-2022-a-5-20": {
+      "code": "A.5.20",
+      "control": "Sécurité de l’information dans les accords avec les fournisseurs",
+      "requirements": "Tous les fournisseurs traitant ou accédant à l’information doivent respecter des exigences de sécurité définies et contractuelles."
+    },
+    "iso-2022-a-5-21": {
+      "code": "A.5.21",
+      "control": "Sécurité de la chaîne d’approvisionnement TIC",
+      "requirements": "Les accords fournisseurs doivent inclure des dispositions pour réduire les risques liés à la chaîne d’approvisionnement TIC."
+    },
+    "iso-2022-a-5-22": {
+      "code": "A.5.22",
+      "control": "Suivi, revue et gestion des changements des services fournisseurs",
+      "requirements": "Les services des fournisseurs doivent être surveillés, revus et audités régulièrement, et les changements doivent être gérés en fonction des risques."
+    },
+    "iso-2022-a-5-23": {
+      "code": "A.5.23",
+      "control": "Sécurité de l’information pour l’utilisation des services cloud",
+      "requirements": "Des exigences de sécurité doivent être définies pour l’achat, l’utilisation, la gestion et la résiliation des services cloud."
+    },
+    "iso-2022-a-5-24": {
+      "code": "A.5.24",
+      "control": "Planification et préparation à la gestion des incidents",
+      "requirements": "Les rôles et procédures de gestion des incidents de sécurité de l’information doivent être définis pour garantir une réponse rapide et efficace."
+    },
+    "iso-2022-a-5-25": {
+      "code": "A.5.25",
+      "control": "Évaluation et décision concernant les événements de sécurité",
+      "requirements": "Les événements de sécurité doivent être analysés afin de déterminer s’ils constituent des incidents."
+    },
+    "iso-2022-a-5-26": {
+      "code": "A.5.26",
+      "control": "Réponse aux incidents de sécurité",
+      "requirements": "Les incidents de sécurité doivent être traités conformément aux procédures documentées."
+    },
+    "iso-2022-a-5-27": {
+      "code": "A.5.27",
+      "control": "Retour d’expérience après incident",
+      "requirements": "Les enseignements tirés des incidents doivent être utilisés pour réduire les risques futurs."
+    },
+    "iso-2022-a-5-28": {
+      "code": "A.5.28",
+      "control": "Collecte de preuves",
+      "requirements": "Des procédures doivent être définies pour collecter et conserver les preuves liées aux incidents."
+    },
+    "iso-2022-a-5-29": {
+      "code": "A.5.29",
+      "control": "Sécurité de l’information en situation de perturbation",
+      "requirements": "Des processus doivent être définis, mis en œuvre et revus pour maintenir la sécurité de l’information en cas de crise ou de catastrophe."
+    },
+    "iso-2022-a-5-30": {
+      "code": "A.5.30",
+      "control": "Préparation TIC pour la continuité d’activité",
+      "requirements": "Les TIC doivent être prêtes à faire face aux perturbations afin d’assurer la disponibilité des informations et des actifs critiques."
+    },
+    "iso-2022-a-5-31": {
+      "code": "A.5.31",
+      "control": "Exigences légales, réglementaires et contractuelles",
+      "requirements": "Toutes les exigences applicables doivent être identifiées, documentées et respectées, y compris celles liées à l’utilisation de la cryptographie."
+    },
+    "iso-2022-a-5-32": {
+      "code": "A.5.32",
+      "control": "Droits de propriété intellectuelle",
+      "requirements": "Des procédures doivent garantir le respect des droits de propriété intellectuelle et des licences logicielles."
+    },
+    "iso-2022-a-5-33": {
+      "code": "A.5.33",
+      "control": "Protection des enregistrements",
+      "requirements": "Les enregistrements doivent être protégés contre la perte, la destruction, la falsification et l’accès non autorisé."
+    },
+    "iso-2022-a-5-34": {
+      "code": "A.5.34",
+      "control": "Protection des données personnelles (PII)",
+      "requirements": "La confidentialité et la protection des données personnelles doivent être garanties conformément aux lois applicables."
+    },
+    "iso-2022-a-5-35": {
+      "code": "A.5.35",
+      "control": "Revue indépendante de la sécurité de l’information",
+      "requirements": "La sécurité de l’information doit être évaluée de manière indépendante à intervalles planifiés."
+    },
+    "iso-2022-a-5-36": {
+      "code": "A.5.36",
+      "control": "Conformité aux politiques et normes de sécurité",
+      "requirements": "La conformité aux politiques, règles et normes de sécurité doit être régulièrement vérifiée."
+    },
+    "iso-2022-a-5-37": {
+      "code": "A.5.37",
+      "control": "Procédures opérationnelles documentées",
+      "requirements": "Les procédures opérationnelles doivent être documentées et accessibles aux utilisateurs concernés."
+    },
+    "iso-2022-a-6-1": {
+      "code": "A.6.1",
+      "control": "Vérification préalable (screening)",
+      "requirements": "Des vérifications des antécédents doivent être réalisées conformément aux lois et de manière proportionnée aux risques."
+    },
+    "iso-2022-a-6-2": {
+      "code": "A.6.2",
+      "control": "Conditions d’emploi",
+      "requirements": "Les contrats doivent définir les responsabilités en matière de sécurité de l’information."
+    },
+    "iso-2022-a-6-3": {
+      "code": "A.6.3",
+      "control": "Sensibilisation, formation et éducation",
+      "requirements": "Les employés et sous-traitants doivent recevoir une formation adéquate en sécurité de l’information."
+    },
+    "iso-2022-a-6-4": {
+      "code": "A.6.4",
+      "control": "Procédure disciplinaire",
+      "requirements": "Un processus disciplinaire formel doit exister en cas de violation de la sécurité."
+    },
+    "iso-2022-a-6-5": {
+      "code": "A.6.5",
+      "control": "Responsabilités après fin ou changement de contrat",
+      "requirements": "Les responsabilités de sécurité doivent rester valides après la fin ou le changement d’emploi."
+    },
+    "iso-2022-a-6-6": {
+      "code": "A.6.6",
+      "control": "Accords de confidentialité",
+      "requirements": "Les exigences de confidentialité doivent être définies, documentées et régulièrement revues."
+    },
+    "iso-2022-a-6-7": {
+      "code": "A.6.7",
+      "control": "Télétravail",
+      "requirements": "Des politiques et mesures de sécurité doivent protéger l’information traitée à distance."
+    },
+    "iso-2022-a-6-8": {
+      "code": "A.6.8",
+      "control": "Signalement des événements de sécurité",
+      "requirements": "Les incidents et vulnérabilités doivent être signalés rapidement par des canaux appropriés."
+    },
+    "iso-2022-a-7-1": {
+      "code": "A.7.1",
+      "control": "Périmètres de sécurité physique",
+      "requirements": "Des périmètres de sécurité doivent protéger les zones sensibles."
+    },
+    "iso-2022-a-7-2": {
+      "code": "A.7.2",
+      "control": "Accès physique",
+      "requirements": "Des contrôles d’accès doivent limiter l’entrée aux personnes autorisées."
+    },
+    "iso-2022-a-7-3": {
+      "code": "A.7.3",
+      "control": "Sécurisation des bureaux, locaux et installations",
+      "requirements": "La sécurité physique doit être conçue et appliquée dans tous les locaux."
+    },
+    "iso-2022-a-7-4": {
+      "code": "A.7.4",
+      "control": "Surveillance de la sécurité physique",
+      "requirements": "Les zones sensibles doivent être surveillées pour détecter les accès non autorisés."
+    },
+    "iso-2022-a-7-5": {
+      "code": "A.7.5",
+      "control": "Protection contre les menaces physiques et environnementales",
+      "requirements": "Des mesures doivent protéger contre les catastrophes naturelles, attaques et accidents."
+    },
+    "iso-2022-a-7-6": {
+      "code": "A.7.6",
+      "control": "Travail en zones sécurisées",
+      "requirements": "Des procédures doivent régir le travail dans les zones sécurisées."
+    },
+    "iso-2022-a-7-7": {
+      "code": "A.7.7",
+      "control": "Bureau propre et écran verrouillé",
+      "requirements": "Des politiques de bureau propre et d’écran verrouillé doivent être appliquées."
+    },
+    "iso-2022-a-7-8": {
+      "code": "A.7.8",
+      "control": "Implantation et protection des équipements",
+      "requirements": "Les équipements doivent être placés et protégés contre les risques environnementaux et les accès non autorisés."
+    },
+    "iso-2022-a-7-9": {
+      "code": "A.7.9",
+      "control": "Sécurité des actifs hors site",
+      "requirements": "Les actifs utilisés hors site doivent être protégés contre les risques spécifiques."
+    },
+    "iso-2022-a-7-10": {
+      "code": "A.7.10",
+      "control": "Supports de stockage",
+      "requirements": "Les supports amovibles doivent être gérés, transportés et éliminés de manière sécurisée."
+    },
+    "iso-2022-a-7-11": {
+      "code": "A.7.11",
+      "control": "Services de soutien",
+      "requirements": "Les équipements doivent être protégés contre les coupures d’énergie et autres défaillances."
+    },
+    "iso-2022-a-7-12": {
+      "code": "A.7.12",
+      "control": "Sécurité du câblage",
+      "requirements": "Les câbles de données et d’alimentation doivent être protégés contre les dommages et interceptions."
+    },
+    "iso-2022-a-7-13": {
+      "code": "A.7.13",
+      "control": "Maintenance des équipements",
+      "requirements": "Les équipements doivent être entretenus correctement pour garantir leur disponibilité et intégrité."
+    },
+    "iso-2022-a-7-14": {
+      "code": "A.7.14",
+      "control": "Élimination ou réutilisation sécurisée des équipements",
+      "requirements": "Les dispositifs doivent être vérifiés avant élimination ou réutilisation pour éviter toute fuite de données."
+    },
+    "iso-2022-a-8-1": {
+      "code": "A.8.1",
+      "control": "Postes de travail des utilisateurs",
+      "requirements": "Des politiques et mesures doivent protéger les appareils utilisateurs, y compris contre l’abandon sans surveillance."
+    },
+    "iso-2022-a-8-2": {
+      "code": "A.8.2",
+      "control": "Droits d’accès privilégiés",
+      "requirements": "L’attribution et l’utilisation des accès privilégiés doivent être strictement contrôlées."
+    },
+    "iso-2022-a-8-3": {
+      "code": "A.8.3",
+      "control": "Restriction d’accès à l’information",
+      "requirements": "Les contrôles d’accès doivent correspondre aux besoins métiers et à la politique d’accès."
+    },
+    "iso-2022-a-8-4": {
+      "code": "A.8.4",
+      "control": "Accès au code source",
+      "requirements": "L’accès au code source doit être strictement limité."
+    },
+    "iso-2022-a-8-5": {
+      "code": "A.8.5",
+      "control": "Authentification sécurisée",
+      "requirements": "L’accès aux systèmes doit être protégé par des procédures d’authentification sécurisées."
+    },
+    "iso-2022-a-8-6": {
+      "code": "A.8.6",
+      "control": "Gestion de la capacité",
+      "requirements": "L’utilisation des ressources doit être surveillée et planifiée pour répondre aux besoins futurs."
+    },
+    "iso-2022-a-8-7": {
+      "code": "A.8.7",
+      "control": "Protection contre les logiciels malveillants",
+      "requirements": "Des contrôles de détection, prévention et récupération contre les malwares doivent être mis en place."
+    },
+    "iso-2022-a-8-8": {
+      "code": "A.8.8",
+      "control": "Gestion des vulnérabilités techniques",
+      "requirements": "Les vulnérabilités doivent être identifiées, évaluées et traitées en temps utile."
+    },
+    "iso-2022-a-8-9": {
+      "code": "A.8.9",
+      "control": "Gestion de la configuration",
+      "requirements": "Les configurations de sécurité doivent être définies, mises en œuvre, surveillées et revues."
+    },
+    "iso-2022-a-8-10": {
+      "code": "A.8.10",
+      "control": "Suppression de l’information",
+      "requirements": "Les données doivent être supprimées lorsqu’elles ne sont plus nécessaires."
+    },
+    "iso-2022-a-8-11": {
+      "code": "A.8.11",
+      "control": "Masquage des données",
+      "requirements": "Le masquage des données doit limiter l’exposition des informations sensibles."
+    },
+    "iso-2022-a-8-12": {
+      "code": "A.8.12",
+      "control": "Prévention des fuites de données",
+      "requirements": "Des mesures doivent empêcher et détecter les divulgations non autorisées."
+    },
+    "iso-2022-a-8-13": {
+      "code": "A.8.13",
+      "control": "Sauvegarde de l’information",
+      "requirements": "Les sauvegardes doivent être réalisées et testées régulièrement selon la politique définie."
+    },
+    "iso-2022-a-8-14": {
+      "code": "A.8.14",
+      "control": "Redondance des moyens de traitement",
+      "requirements": "La redondance doit assurer la disponibilité des systèmes d’information."
+    },
+    "iso-2022-a-8-15": {
+      "code": "A.8.15",
+      "control": "Journalisation",
+      "requirements": "Les événements doivent être consignés, protégés et régulièrement analysés."
+    },
+    "iso-2022-a-8-16": {
+      "code": "A.8.16",
+      "control": "Activités de surveillance",
+      "requirements": "Les systèmes doivent être surveillés pour détecter toute activité anormale."
+    },
+    "iso-2022-a-8-17": {
+      "code": "A.8.17",
+      "control": "Synchronisation des horloges",
+      "requirements": "Tous les systèmes doivent utiliser une source de temps de référence commune."
+    },
+    "iso-2022-a-8-18": {
+      "code": "A.8.18",
+      "control": "Utilisation des utilitaires privilégiés",
+      "requirements": "L’utilisation des programmes pouvant contourner les contrôles doit être strictement limitée."
+    },
+    "iso-2022-a-8-19": {
+      "code": "A.8.19",
+      "control": "Installation de logiciels sur les systèmes opérationnels",
+      "requirements": "L’installation de logiciels doit être contrôlée par des procédures définies."
+    },
+    "iso-2022-a-8-20": {
+      "code": "A.8.20",
+      "control": "Sécurité des réseaux",
+      "requirements": "Les réseaux doivent être gérés et surveillés pour protéger l’information."
+    },
+    "iso-2022-a-8-21": {
+      "code": "A.8.21",
+      "control": "Sécurité des services réseau",
+      "requirements": "Les exigences de sécurité doivent être définies pour tous les services réseau."
+    },
+    "iso-2022-a-8-22": {
+      "code": "A.8.22",
+      "control": "Segmentation des réseaux",
+      "requirements": "La segmentation doit séparer services, utilisateurs et systèmes."
+    },
+    "iso-2022-a-8-23": {
+      "code": "A.8.23",
+      "control": "Filtrage Web",
+      "requirements": "L’accès aux sites Web doit être contrôlé pour réduire les risques de sécurité."
+    },
+    "iso-2022-a-8-24": {
+      "code": "A.8.24",
+      "control": "Utilisation de la cryptographie",
+      "requirements": "Des politiques doivent régir l’utilisation et la gestion des clés cryptographiques."
+    },
+    "iso-2022-a-8-25": {
+      "code": "A.8.25",
+      "control": "Cycle de développement sécurisé",
+      "requirements": "Les changements doivent être gérés par des procédures formelles tout au long du cycle de vie logiciel."
+    },
+    "iso-2022-a-8-26": {
+      "code": "A.8.26",
+      "control": "Exigences de sécurité applicative",
+      "requirements": "Les transactions applicatives doivent être protégées contre toute manipulation ou divulgation."
+    },
+    "iso-2022-a-8-27": {
+      "code": "A.8.27",
+      "control": "Architecture et ingénierie sécurisées",
+      "requirements": "Des principes d’ingénierie sécurisée doivent être définis et appliqués."
+    },
+    "iso-2022-a-8-28": {
+      "code": "A.8.28",
+      "control": "Codage sécurisé",
+      "requirements": "Des principes de codage sécurisé doivent être appliqués pour réduire les vulnérabilités."
+    },
+    "iso-2022-a-8-29": {
+      "code": "A.8.29",
+      "control": "Tests de sécurité en développement et en réception",
+      "requirements": "Des tests de sécurité doivent être effectués pendant le développement et avant la mise en production."
+    },
+    "iso-2022-a-8-30": {
+      "code": "A.8.30",
+      "control": "Développement externalisé",
+      "requirements": "Les activités de développement externalisées doivent être surveillées."
+    },
+    "iso-2022-a-8-31": {
+      "code": "A.8.31",
+      "control": "Séparation des environnements",
+      "requirements": "Les environnements de développement, test et production doivent être séparés et sécurisés."
+    },
+    "iso-2022-a-8-32": {
+      "code": "A.8.32",
+      "control": "Gestion des changements",
+      "requirements": "Tous les changements doivent être contrôlés et testés afin d’éviter les impacts négatifs."
+    },
+    "iso-2022-a-8-33": {
+      "code": "A.8.33",
+      "control": "Données de test",
+      "requirements": "Les données de test doivent être collectées et protégées avec soin."
+    },
+    "iso-2022-a-8-34": {
+      "code": "A.8.34",
+      "control": "Protection des systèmes lors des audits",
+      "requirements": "Les activités d’audit doivent être planifiées pour limiter les perturbations des processus métiers."
+    }
+  }
+}
