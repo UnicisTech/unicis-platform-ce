@@ -8,7 +8,7 @@ import mixpanel from 'mixpanel-browser';
 
 import { init } from '@socialgouv/matomo-next';
 
-import '@boxyhq/react-ui/dist/style.css';
+import '@boxyhq/react-ui/dist/react-ui.css';
 import '../styles/globals.css';
 import 'quill/dist/quill.snow.css';
 import { useEffect } from 'react';
