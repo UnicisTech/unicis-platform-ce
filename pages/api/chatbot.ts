@@ -5,7 +5,6 @@ import { openai } from '@/lib/chatbot';
 import { getTeamAccess } from '@/lib/teams';
 import env from '@/lib/env';
 
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -53,13 +52,20 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const messages = req.body;
+  const model = env.ai.model;
+
+  if (!model) {
+    return res.status(500).json({
+      error: { message: 'AI model is not configured. Please set AI_MODEL.' },
+    });
+  }
 
   // TODO: maybe it make sence to create separete file in models/ folder,
   // and preconfigured functions like createCompletions(message)
   const completion = await openai.chat.completions.create({
     max_tokens: 512,
     messages: messages,
-    model: env.ai.model,
+    model,
     temperature: 0,
   });
 

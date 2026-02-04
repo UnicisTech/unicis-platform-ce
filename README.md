@@ -61,7 +61,6 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 
 - [Unicis Platform getting started documentation](https://www.unicis.tech/docs/unicis_platform?mtm_campaign=GitHub)
 
-
 ## 🛠️ Built With
 
 - [SaaS-Starter-Kit](https://github.com/boxyhq/saas-starter-kit/)
@@ -88,7 +87,6 @@ Please follow these simple steps to get a local copy up and running.
 
 > [!TIP]
 > The fastest and easiest way to get started with Unicis Platform is through the [free trial of cloud instance available here](https://platform.unicis.tech/?mtm_campaign=GitHub).
-
 
 ### Prerequisites
 
@@ -225,7 +223,7 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 4. DE: German
 
 > [!NOTE]
-> Help with translating it to other languages via our [Weblate translation platform](https://locales.unicis.tech/weblate/projects/unicis-platform/). 
+> Help with translating it to other languages via our [Weblate translation platform](https://locales.unicis.tech/weblate/projects/unicis-platform/).
 
 ## ✨ Contributing
 
