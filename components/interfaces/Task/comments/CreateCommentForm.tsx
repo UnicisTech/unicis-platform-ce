@@ -32,9 +32,12 @@ interface CreateCommentFormProps {
 }
 
 const stripHtml = (html: string) => {
-  const tmp = document.createElement('DIV');
-  tmp.innerHTML = html;
-  return tmp.textContent || tmp.innerText || '';
+  return html
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&#160;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 };
 
 export default function CreateCommentForm({
