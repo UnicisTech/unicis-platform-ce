@@ -4,6 +4,49 @@ import { isPrismaError } from '@/lib/errors';
 import { openai } from '@/lib/chatbot';
 import { getTeamAccess } from '@/lib/teams';
 import env from '@/lib/env';
+import type { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
+
+const toText = (content: unknown) => {
+  if (typeof content === 'string') return content;
+  if (Array.isArray(content)) {
+    return content
+      .map((part) =>
+        part && typeof part === 'object' && 'text' in part
+          ? String((part as { text?: unknown }).text || '')
+          : ''
+      )
+      .join('');
+  }
+  return '';
+};
+
+const toOpenAIMessage = (message: unknown): ChatCompletionMessageParam => {
+  const role =
+    message &&
+    typeof message === 'object' &&
+    'role' in message &&
+    (message as { role?: unknown }).role === 'assistant'
+      ? 'assistant'
+      : message &&
+          typeof message === 'object' &&
+          'role' in message &&
+          (message as { role?: unknown }).role === 'system'
+        ? 'system'
+        : 'user';
+
+  const content =
+    message && typeof message === 'object'
+      ? toText((message as { content?: unknown }).content)
+      : '';
+
+  if (role === 'assistant') {
+    return { role: 'assistant', content };
+  }
+  if (role === 'system') {
+    return { role: 'system', content };
+  }
+  return { role: 'user', content };
+};
 
 export default async function handler(
   req: NextApiRequest,
@@ -51,7 +94,15 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const messages = req.body;
+  const messages: ChatCompletionMessageParam[] = Array.isArray(req.body)
+    ? req.body
+        .map(toOpenAIMessage)
+        .filter(
+          (message) =>
+            typeof message.content === 'string' &&
+            message.content.trim().length > 0
+        )
+    : [];
   const model = env.ai.model;
 
   if (!model) {
@@ -60,20 +111,30 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
+  if (messages.length === 0) {
+    return res.status(400).json({
+      error: { message: 'No valid messages provided.' },
+    });
+  }
+
   // TODO: maybe it make sence to create separete file in models/ folder,
   // and preconfigured functions like createCompletions(message)
   const completion = await openai.chat.completions.create({
     max_tokens: 512,
-    messages: messages,
+    messages,
     model,
     temperature: 0,
   });
 
   const chatbotResponse = completion.choices[0].message;
+  const response = {
+    role: 'assistant',
+    content: toText(chatbotResponse.content),
+  };
 
   res.status(200).json({
     data: {
-      response: chatbotResponse,
+      response,
     },
   });
 };
