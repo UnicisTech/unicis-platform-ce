@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 const CopyrightItem = () => {
   const { t } = useTranslation('common');
   const BRAND = 'Unicis.Tech OÜ';
-  const DATE = '2025-08-18';
+  const DATE = '2026-02-05';
 
   return (
     <ul role="list" className="flex flex-1 flex-col justify-end gap-1 mb-1.5">
