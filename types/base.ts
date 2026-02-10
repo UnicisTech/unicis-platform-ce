@@ -161,6 +161,7 @@ export type ChatbotResponse = {
   content: string;
   role: string;
 };
+
 export type ChatbotResponseReturned = {
   response: ChatbotResponse;
 };
