@@ -83,12 +83,17 @@ export function downloadSoaPdf(payload: SoaPayload): void {
     // Colour the Status cell per maturity level
     didParseCell(data) {
       if (data.section === 'body' && data.column.index === 4) {
-        const status = data.cell.raw as string;
-        const bg     = STATUS_BG[status] ?? STATUS_BG['unknown'];
-        const fg     = statusFg(status);
+        // Use the row index to lookup the original status code/label
+        const rowIndex = data.row.index;
+        const statusCode = rows[rowIndex]?.status ?? 'unknown';
+        const statusLabel = rows[rowIndex]?.statusLabel ?? String(data.cell.raw);
+        const bg     = STATUS_BG[statusCode] ?? STATUS_BG['unknown'];
+        const fg     = statusFg(statusCode);
         data.cell.styles.fillColor    = bg;
         data.cell.styles.textColor    = fg;
         data.cell.styles.fontStyle    = 'bold';
+        // Replace the displayed text with the localized label
+        data.cell.text = String(statusLabel);
       }
     },
     // Summary row below the table
@@ -112,7 +117,7 @@ export function downloadSoaPdf(payload: SoaPayload): void {
   doc.setTextColor(80, 80, 100);
   doc.setFont('helvetica', 'italic');
   const counts = CSC_STATUSES
-    .map((s) => `${s}: ${rows.filter((r) => r.status === s).length}`)
+    .map((s) => `${meta.statusLabelMap?.[s] ?? s}: ${rows.filter((r) => r.status === s).length}`)
     .join('  ·  ');
   doc.text(`Total: ${rows.length}  ·  ${counts}`, margin, finalY);
 
@@ -128,11 +133,13 @@ export function downloadSoaPdf(payload: SoaPayload): void {
   CSC_STATUSES.forEach((s) => {
     const bg = STATUS_BG[s] ?? ([200, 200, 200] as RGB);
     const fg = statusFg(s);
+    const label = meta.statusLabelMap?.[s] ?? s;
+    const meaning = meta.statusMeaningMap?.[s] ?? '';
     doc.setFillColor(...bg);
     doc.rect(lx, legendY + 4, bw, 14, 'F');
     doc.setTextColor(...fg);
     doc.setFontSize(5.5);
-    doc.text(`${CSC_STATUS_TO_VALUE[s]} · ${s}`, lx + bw / 2, legendY + 13, { align: 'center' });
+    doc.text(`${CSC_STATUS_TO_VALUE[s]} · ${label}`, lx + bw / 2, legendY + 13, { align: 'center' });
     lx += bw + 2;
   });
 

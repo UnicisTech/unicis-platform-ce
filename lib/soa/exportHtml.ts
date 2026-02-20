@@ -31,15 +31,17 @@ export function downloadSoaHtml(payload: SoaPayload): void {
   const summaryBars = CSC_STATUSES.map((s) => {
     const c   = STATUS_COLORS[s] ?? { bg: '#eee', fg: '#333' };
     const cnt = rows.filter((r) => r.status === s).length;
+    const label = meta.statusLabelMap?.[s] ?? s;
     return `<div class="bar-item" style="background:${c.bg};color:${c.fg};flex:${Math.max(cnt, 0.3)}">
-      <strong>${cnt}</strong><br/><span>${esc(s)}</span></div>`;
+      <strong>${cnt}</strong><br/><span>${esc(label)}</span></div>`;
   }).join('');
 
   const legendItems = CSC_STATUSES.map((s) => {
     const c = STATUS_COLORS[s] ?? { bg: '#eee', fg: '#333' };
+    const label = meta.statusLabelMap?.[s] ?? s;
     return `<div class="leg-item" style="background:${c.bg};color:${c.fg}">
       <span class="leg-lv">Level ${CSC_STATUS_TO_VALUE[s]}</span>
-      <strong>${esc(s)}</strong>
+      <strong>${esc(label)}</strong>
     </div>`;
   }).join('');
 
@@ -50,7 +52,7 @@ export function downloadSoaHtml(payload: SoaPayload): void {
       <td>${esc(row.section)}</td>
       <td>${esc(row.control)}</td>
       <td class="req">${esc(row.requirements)}</td>
-      <td><span class="badge" style="background:${c.bg};color:${c.fg}">${esc(row.status)}</span></td>
+      <td><span class="badge" style="background:${c.bg};color:${c.fg}">${esc(row.statusLabel)}</span></td>
     </tr>`;
   }).join('');
 

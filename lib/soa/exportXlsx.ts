@@ -28,6 +28,7 @@ function triggerDownload(blob: Blob, filename: string) {
   URL.revokeObjectURL(url);
 }
 
+// Default fallbacks (in case localized meanings are not provided in payload.meta)
 const MEANINGS: Record<string, string> = {
   'unknown':                   'Has not even been checked yet',
   'not-applicable':            'Management can ignore this control',
@@ -94,7 +95,8 @@ export async function downloadSoaXlsx(payload: SoaPayload): Promise<void> {
     const style = STATUS_STYLE[row.status] ?? STATUS_STYLE['unknown'];
     const alt   = idx % 2 === 1;
 
-    [row.code, row.section, row.control, row.requirements, row.status].forEach((v, ci) => {
+    // Render status label but use status code for colouring
+    [row.code, row.section, row.control, row.requirements, row.statusLabel].forEach((v, ci) => {
       const cell     = ws.getCell(r, ci + 1);
       cell.value     = v;
       cell.alignment = { wrapText: true, vertical: 'top' };
@@ -118,7 +120,7 @@ export async function downloadSoaXlsx(payload: SoaPayload): Promise<void> {
   const sumR = rows.length + 6;
   ws.mergeCells(`A${sumR}:E${sumR}`);
   const counts = CSC_STATUSES
-    .map((s) => `${s}: ${rows.filter((r) => r.status === s).length}`)
+    .map((s) => `${meta.statusLabelMap?.[s] ?? s}: ${rows.filter((r) => r.status === s).length}`)
     .join('   |   ');
   ws.getCell(`A${sumR}`).value  = `Total: ${rows.length}   |   ${counts}`;
   ws.getCell(`A${sumR}`).font   = { italic: true, size: 8 };
@@ -146,11 +148,12 @@ export async function downloadSoaXlsx(payload: SoaPayload): Promise<void> {
     c.fill      = fill('2C6E9B');
     c.alignment = { horizontal: 'center', vertical: 'middle' };
   });
-
   CSC_STATUSES.forEach((s, i) => {
     const style = STATUS_STYLE[s] ?? { bg: 'FFFFFF', fg: '000000' };
     const r     = i + 3;
-    [CSC_STATUS_TO_VALUE[s], s, MEANINGS[s] ?? ''].forEach((v, ci) => {
+    const label = meta.statusLabelMap?.[s] ?? s;
+    const meaning = meta.statusMeaningMap?.[s] ?? MEANINGS[s] ?? '';
+    [CSC_STATUS_TO_VALUE[s], label, meaning].forEach((v, ci) => {
       const c     = leg.getCell(r, ci + 1);
       c.value     = v;
       c.fill      = fill(style.bg);

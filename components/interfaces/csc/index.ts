@@ -3,6 +3,7 @@ export { default as PieChart } from './PieChart';
 export { default as RadarChart } from './RadarChart';
 export { default as SectionFilter } from './SectionFilter';
 export { default as CscPanel } from './issue-panel/CscPanel';
+export { default as SoaExportModal } from './SoaExportModal';
 export { default as CscAuditLogs } from './CscAuditLogs';
 export { default as TaskStatusesDetail } from '../TeamDashboard/TaskStatusesDetail';
 export { default as CscDashboard } from './Dashboards';

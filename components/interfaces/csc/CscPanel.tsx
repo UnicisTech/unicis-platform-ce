@@ -120,13 +120,26 @@ export default function CscPanel({
   const buildPayload = useCallback((): SoaPayload => {
     const allControls = frameworks[iso]?.controls ?? [];
 
-    const rows: SoaRow[] = allControls.map((control) => ({
-      code:         t(`csc/${iso}:controls.${control.id}.code`),
-      section:      t(`csc/${iso}:sections.${control.sectionId}.label`),
-      control:      t(`csc/${iso}:controls.${control.id}.control`),
-      requirements: t(`csc/${iso}:controls.${control.id}.requirements`),
-      status:       (statuses[control.id] as CscStatus) ?? 'unknown',
-    }));
+    const rows: SoaRow[] = allControls.map((control) => {
+      const code = (statuses[control.id] as CscStatus) ?? 'unknown';
+      return {
+        code:         t(`csc/${iso}:controls.${control.id}.code`),
+        section:      t(`csc/${iso}:sections.${control.sectionId}.label`),
+        control:      t(`csc/${iso}:controls.${control.id}.control`),
+        requirements: t(`csc/${iso}:controls.${control.id}.requirements`),
+        status:       code,
+        statusLabel:  t(`statuses.${code}.label`),
+        meaning:      t(`statuses.${code}.description`),
+      } as SoaRow;
+    });
+
+    // Build maps for labels/meanings so exporters can localize legends and summaries
+    const statusLabelMap: Record<string, string> = {};
+    const statusMeaningMap: Record<string, string> = {};
+    CSC_STATUSES.forEach((s) => {
+      statusLabelMap[s] = t(`statuses.${s}.label`);
+      statusMeaningMap[s] = t(`statuses.${s}.description`);
+    });
 
     return {
       meta: {
@@ -134,6 +147,8 @@ export default function CscPanel({
         framework:    isoValueToLabel(iso) ?? iso,
         iso,
         dateOfExport: new Date(),
+        statusLabelMap,
+        statusMeaningMap,
       },
       rows,
     };
