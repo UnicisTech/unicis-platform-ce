@@ -30,6 +30,7 @@ const Dashboard = ({ team, iso }: { team: Team; iso: ISO[] }) => {
       <CscPanel
         key={activeTab}
         slug={team.slug}
+        teamName={team.name}        
         iso={activeTab}
         tasks={tasks}
         mutateTasks={mutateTasks}
@@ -38,14 +39,9 @@ const Dashboard = ({ team, iso }: { team: Team; iso: ISO[] }) => {
   );
 };
 
-//TODO: remake
 const WithISO = ({ team }: { team: Team }) => {
   const { ISO } = useISO(team);
-
-  if (!ISO) {
-    return <Loading />;
-  }
-
+  if (!ISO) return <Loading />;
   return <Dashboard team={team} iso={ISO} />;
 };
 
