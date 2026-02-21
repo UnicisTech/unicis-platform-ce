@@ -1202,5 +1202,20 @@
   "tag-value": "Etiqueta",
   "select-tags": "Seleccionar etiqueta(s)",
   "search-tags": "Buscar etiquetas...",
-  "selected-count": "{{count}} seleccionados"
+  "selected-count": "{{count}} seleccionados",
+  "soa-export": {
+    "button": "Exportar SoA",
+    "button-title": "Exportar SoA para {{framework}}",
+    "modal-title": "Exportar declaración de aplicabilidad",
+    "modal-framework": "Marco:",
+    "format-xlsx-label": "Excel (.xlsx)",
+    "format-xlsx-description": "Hoja de cálculo con estados codificados por colores, filtro automático y hoja de leyenda",
+    "format-pdf-label": "PDF",
+    "format-pdf-description": "Documento A4 horizontal imprimible con leyenda de estados",
+    "format-html-label": "HTML",
+    "format-html-description": "Página web autónoma — abrir en cualquier navegador o imprimir como PDF",
+    "cancel": "Cancelar",
+    "download": "Descargar",
+    "exporting": "Exportando…"
+  }
 }
