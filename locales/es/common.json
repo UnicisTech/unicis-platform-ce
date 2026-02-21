@@ -1216,6 +1216,22 @@
     "format-html-description": "Página web autónoma — abrir en cualquier navegador o imprimir como PDF",
     "cancel": "Cancelar",
     "download": "Descargar",
-    "exporting": "Exportando…"
+    "exporting": "Exportando…",
+    "doc-title": "Declaración de aplicabilidad",
+    "organisation": "Organización",
+    "date-of-export": "Fecha de exportación",
+    "framework-label": "Marco",
+    "status-legend": "Leyenda de estados",
+    "col-code": "Código",
+    "col-section": "Sección",
+    "col-control": "Control",
+    "col-requirements": "Requisitos",
+    "col-status": "Estado",
+    "col-level": "Nivel",
+    "col-meaning": "Significado",
+    "total": "Total",
+    "generated-by": "Generado por Unicis Platform",
+    "controls": "controles",
+    "legend-sheet-title": "Escala de madurez de estados de control de Unicis"
   }
 }

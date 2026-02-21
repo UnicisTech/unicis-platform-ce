@@ -1216,6 +1216,22 @@
     "format-html-description": "Page web autonome — ouvrir dans n'importe quel navigateur ou imprimer en PDF",
     "cancel": "Annuler",
     "download": "Télécharger",
-    "exporting": "Exportation…"
+    "exporting": "Exportation…",
+    "doc-title": "Déclaration d'applicabilité",
+    "organisation": "Organisation",
+    "date-of-export": "Date d'export",
+    "framework-label": "Référentiel",
+    "status-legend": "Légende des statuts",
+    "col-code": "Code",
+    "col-section": "Section",
+    "col-control": "Contrôle",
+    "col-requirements": "Exigences",
+    "col-status": "Statut",
+    "col-level": "Niveau",
+    "col-meaning": "Signification",
+    "total": "Total",
+    "generated-by": "Généré par Unicis Platform",
+    "controls": "contrôles",
+    "legend-sheet-title": "Échelle de maturité des statuts Unicis"
   }
 }
