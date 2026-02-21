@@ -1213,6 +1213,22 @@
     "format-html-description": "In sich geschlossene Webseite – in jedem Browser öffnen oder als PDF drucken",
     "cancel": "Abbrechen",
     "download": "Herunterladen",
-    "exporting": "Exportiere…"
+    "exporting": "Exportiere…",
+    "doc-title": "Anwendbarkeitserklärung",
+    "organisation": "Organisation",
+    "date-of-export": "Exportdatum",
+    "framework-label": "Framework",
+    "status-legend": "Status-Legende",
+    "col-code": "Code",
+    "col-section": "Abschnitt",
+    "col-control": "Maßnahme",
+    "col-requirements": "Anforderungen",
+    "col-status": "Status",
+    "col-level": "Stufe",
+    "col-meaning": "Bedeutung",
+    "total": "Gesamt",
+    "generated-by": "Erstellt von Unicis Platform",
+    "controls": "Maßnahmen",
+    "legend-sheet-title": "Unicis Reifegradskala für Kontrollstatus"
   }
 }
