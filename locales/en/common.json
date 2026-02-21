@@ -1202,5 +1202,20 @@
   "tag-value": "Tag",
   "select-tags": "Select Tag(s)",
   "search-tags": "Search tags...",
-  "selected-count": "{{count}} selected"
+  "selected-count": "{{count}} selected",
+  "soa-export": {
+    "button": "Export SoA",
+    "button-title": "Export SoA for {{framework}}",
+    "modal-title": "Export Statement of Applicability",
+    "modal-framework": "Framework:",
+    "format-xlsx-label": "Excel (.xlsx)",
+    "format-xlsx-description": "Spreadsheet with colour-coded statuses, auto-filter & legend sheet",
+    "format-pdf-label": "PDF",
+    "format-pdf-description": "Printable landscape A4 document with status legend",
+    "format-html-label": "HTML",
+    "format-html-description": "Self-contained web page — open in any browser or print to PDF",
+    "cancel": "Cancel",
+    "download": "Download",
+    "exporting": "Exporting…"
+  }
 }

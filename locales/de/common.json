@@ -1199,5 +1199,20 @@
   "tag-value": "Tag",
   "select-tags": "Tag(s) auswählen",
   "search-tags": "Tags suchen...",
-  "selected-count": "{{count}} ausgewählt"
+  "selected-count": "{{count}} ausgewählt",
+  "soa-export": {
+    "button": "SoA exportieren",
+    "button-title": "SoA für {{framework}} exportieren",
+    "modal-title": "Anwendbarkeitserklärung exportieren",
+    "modal-framework": "Framework:",
+    "format-xlsx-label": "Excel (.xlsx)",
+    "format-xlsx-description": "Tabelle mit farbkodierten Status, Autofilter & Legende",
+    "format-pdf-label": "PDF",
+    "format-pdf-description": "Druckbares Querformat-A4-Dokument mit Statuslegende",
+    "format-html-label": "HTML",
+    "format-html-description": "In sich geschlossene Webseite – in jedem Browser öffnen oder als PDF drucken",
+    "cancel": "Abbrechen",
+    "download": "Herunterladen",
+    "exporting": "Exportiere…"
+  }
 }

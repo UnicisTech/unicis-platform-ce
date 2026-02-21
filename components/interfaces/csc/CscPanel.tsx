@@ -179,7 +179,7 @@ export default function CscPanel({
         <button
           className="flex items-center justify-between overflow-hidden truncate rounded-md border border-input bg-transparent py-2 shadow-xs ring-offset-background data-placeholder:text-muted-foreground focus:outline-hidden focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:truncate h-full px-2 text-sm hover:bg-accent hover:text-accent-foreground"
           onClick={() => setSoaModalOpen(true)}
-          title={`Export SoA for ${frameworkLabel}`}
+          title={t('soa-export.button-title', { framework: frameworkLabel })}
         >
           <svg
             className="w-4 h-4"
@@ -195,7 +195,7 @@ export default function CscPanel({
               d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
             />
           </svg>
-          Export SoA
+          {t('soa-export.button')}
         </button>
       </div>
 

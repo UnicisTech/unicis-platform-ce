@@ -1202,5 +1202,20 @@
   "tag-value": "Tag",
   "select-tags": "Sélectionner des tags",
   "search-tags": "Rechercher des tags...",
-  "selected-count": "{{count}} sélectionné(s)"
+  "selected-count": "{{count}} sélectionné(s)",
+  "soa-export": {
+    "button": "Exporter SoA",
+    "button-title": "Exporter SoA pour {{framework}}",
+    "modal-title": "Exporter la déclaration d'applicabilité",
+    "modal-framework": "Référentiel :",
+    "format-xlsx-label": "Excel (.xlsx)",
+    "format-xlsx-description": "Feuille de calcul avec statuts codés par couleur, filtre automatique & feuille de légende",
+    "format-pdf-label": "PDF",
+    "format-pdf-description": "Document A4 paysage imprimable avec légende des statuts",
+    "format-html-label": "HTML",
+    "format-html-description": "Page web autonome — ouvrir dans n'importe quel navigateur ou imprimer en PDF",
+    "cancel": "Annuler",
+    "download": "Télécharger",
+    "exporting": "Exportation…"
+  }
 }
