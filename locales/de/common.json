@@ -709,6 +709,7 @@
   "select-a-control": "Kontrolle auswählen",
   "csc-dashboard": "Cybersicherheitskontrollen-Dashboard",
   "csc-controls": "Cybersicherheitskontrollen",
+  "csc-controls-label": "Cybersicherheitskontrollen:",
   "csc-audit-logs": "Audit-Logs der Cybersicherheitskontrollen",
   "pia-audit-logs": "Audit-Logs der Datenschutz-Folgenabschätzung",
   "rm-audit-logs": "Audit-Logs des Risikomanagements",

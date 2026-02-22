@@ -710,6 +710,7 @@
   "select-a-control": "Seleccionar un control",
   "csc-dashboard": "Panel de controles de ciberseguridad",
   "csc-controls": "Controles de ciberseguridad",
+  "csc-controls-label": "Controles de ciberseguridad:",
   "csc-audit-logs": "Registros de auditoría de controles de ciberseguridad",
   "pia-audit-logs": "Registros de auditoría de Evaluación de Impacto en la Privacidad",
   "rm-audit-logs": "Registros de auditoría de Gestión de Riesgos",
