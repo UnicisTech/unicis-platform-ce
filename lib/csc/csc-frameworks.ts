@@ -13,6 +13,7 @@ export const isoOptions: {
   { label: 'CIS CSC v8.1', value: 'cisv81' },
   { label: 'SOC2 v2', value: 'soc2v2' },
   { label: 'C5 2020', value: 'c5_2020' },
+  { label: 'OWASP ASVS v5', value: 'owasp_asvs_v5'}
 ];
 
 export const isoValueToLabel = (value: ISO) =>

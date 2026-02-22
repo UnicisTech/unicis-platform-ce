@@ -1,0 +1,1782 @@
+{
+    "sections": {
+        "V1": {
+            "label": "Encodage et assainissement"
+        },
+        "V2": {
+            "label": "Validation et logique métier"
+        },
+        "V3": {
+            "label": "Sécurité du frontend web"
+        },
+        "V4": {
+            "label": "API et services web"
+        },
+        "V5": {
+            "label": "Gestion des fichiers"
+        },
+        "V6": {
+            "label": "Authentification"
+        },
+        "V7": {
+            "label": "Gestion des sessions"
+        },
+        "V8": {
+            "label": "Autorisation"
+        },
+        "V9": {
+            "label": "Jetons autonomes"
+        },
+        "V10": {
+            "label": "OAuth et OIDC"
+        },
+        "V11": {
+            "label": "Cryptographie"
+        },
+        "V12": {
+            "label": "Communication sécurisée"
+        },
+        "V13": {
+            "label": "Configuration"
+        },
+        "V14": {
+            "label": "Protection des données"
+        },
+        "V15": {
+            "label": "Codage sécurisé et architecture"
+        },
+        "V16": {
+            "label": "Journalisation de sécurité et gestion des erreurs"
+        },
+        "V17": {
+            "label": "WebRTC"
+        }
+    },
+    "controls": {
+        "asvs-1-1-1": {
+            "code": "ASVS-1.1.1",
+            "control": "Architecture d'encodage et d'assainissement",
+            "requirements": "Vérifier que l'entrée est décodée ou déséchappée vers une forme canonique une seule fois, qu'elle n'est décodée que lorsque des données encodées sous cette forme sont attendues, et que cela est effectué avant tout traitement ultérieur de l'entrée, par exemple que ce n'est pas effectué après la validation ou l'assainissement de l'entrée."
+        },
+        "asvs-1-1-2": {
+            "code": "ASVS-1.1.2",
+            "control": "Architecture d'encodage et d'assainissement",
+            "requirements": "Vérifier que l'application effectue l'encodage et l'échappement de sortie soit comme étape finale avant d'être utilisé par l'interpréteur auquel il est destiné, soit par l'interpréteur lui-même."
+        },
+        "asvs-1-2-1": {
+            "code": "ASVS-1.2.1",
+            "control": "Prévention des injections",
+            "requirements": "Vérifier que l'encodage de sortie pour une réponse HTTP, un document HTML ou XML est pertinent pour le contexte requis, par exemple en encodant les caractères appropriés pour les éléments HTML, les attributs HTML, les commentaires HTML, le CSS ou les champs d'en-tête HTTP, afin d'éviter de modifier la structure du message ou du document."
+        },
+        "asvs-1-2-2": {
+            "code": "ASVS-1.2.2",
+            "control": "Prévention des injections",
+            "requirements": "Vérifier que lors de la construction dynamique d'URL, les données non fiables sont encodées selon leur contexte (par exemple encodage URL ou base64url pour les paramètres de requête ou de chemin). S'assurer que seuls des protocoles URL sûrs sont autorisés (par exemple interdire javascript: ou data:)."
+        },
+        "asvs-1-2-3": {
+            "code": "ASVS-1.2.3",
+            "control": "Prévention des injections",
+            "requirements": "Vérifier que l'encodage ou l'échappement de sortie est utilisé lors de la construction dynamique de contenu JavaScript (y compris JSON), afin d'éviter de modifier la structure du message ou du document (pour éviter les injections JavaScript et JSON)."
+        },
+        "asvs-1-2-4": {
+            "code": "ASVS-1.2.4",
+            "control": "Prévention des injections",
+            "requirements": "Vérifier que la sélection de données ou les requêtes de base de données (par exemple SQL, HQL, NoSQL, Cypher) utilisent des requêtes paramétrées, des ORM, des frameworks d'entités ou sont autrement protégées contre les injections SQL et autres attaques d'injection de base de données. Ceci est également pertinent lors de l'écriture de procédures stockées."
+        },
+        "asvs-1-2-5": {
+            "code": "ASVS-1.2.5",
+            "control": "Prévention des injections",
+            "requirements": "Vérifier que l'application est protégée contre l'injection de commandes du système d'exploitation et que les appels au système utilisent des requêtes OS paramétrées ou un encodage contextuel de sortie en ligne de commande."
+        },
+        "asvs-1-2-6": {
+            "code": "ASVS-1.2.6",
+            "control": "Prévention des injections",
+            "requirements": "Vérifier que l'application est protégée contre les vulnérabilités d'injection LDAP, ou que des contrôles de sécurité spécifiques pour prévenir l'injection LDAP ont été mis en œuvre."
+        },
+        "asvs-1-2-7": {
+            "code": "ASVS-1.2.7",
+            "control": "Prévention des injections",
+            "requirements": "Vérifier que l'application est protégée contre les attaques d'injection XPath en utilisant la paramétrisation des requêtes ou des requêtes précompilées."
+        },
+        "asvs-1-2-8": {
+            "code": "ASVS-1.2.8",
+            "control": "Prévention des injections",
+            "requirements": "Vérifier que les processeurs LaTeX sont configurés de manière sécurisée (par exemple sans utiliser l'option \"--shell-escape\") et qu'une liste blanche de commandes est utilisée pour prévenir les attaques d'injection LaTeX."
+        },
+        "asvs-1-2-9": {
+            "code": "ASVS-1.2.9",
+            "control": "Prévention des injections",
+            "requirements": "Vérifier que l'application échappe les caractères spéciaux dans les expressions régulières (généralement à l'aide d'une barre oblique inverse) afin d'éviter qu'ils soient interprétés comme des métacaractères."
+        },
+        "asvs-1-2-10": {
+            "code": "ASVS-1.2.10",
+            "control": "Prévention des injections",
+            "requirements": "Vérifier que l'application est protégée contre l'injection CSV et Formula. L'application doit suivre les règles d'échappement définies dans la RFC 4180 sections 2.6 et 2.7 lors de l'exportation de contenu CSV. De plus, lors de l'exportation vers CSV ou d'autres formats de feuille de calcul (tels que XLS, XLSX ou ODF), les caractères spéciaux (y compris '=', '+', '-', '@', '\\t' (tabulation) et '\\0' (caractère nul)) doivent être échappés par une apostrophe s'ils apparaissent comme premier caractère d'une valeur de champ."
+        },
+        "asvs-1-3-1": {
+            "code": "ASVS-1.3.1",
+            "control": "Assainissement",
+            "requirements": "Vérifier que tout contenu HTML non fiable provenant d’éditeurs WYSIWYG ou similaires est assaini à l’aide d’une bibliothèque ou d’une fonctionnalité de framework d’assainissement HTML reconnue et sécurisée."
+        },
+        "asvs-1-3-2": {
+            "code": "ASVS-1.3.2",
+            "control": "Assainissement",
+            "requirements": "Vérifier que l’application évite l’utilisation de eval() ou d’autres mécanismes d’exécution dynamique de code tels que Spring Expression Language (SpEL). Lorsqu’il n’existe aucune alternative, toute entrée utilisateur incluse doit être assainie avant exécution."
+        },
+        "asvs-1-3-3": {
+            "code": "ASVS-1.3.3",
+            "control": "Assainissement",
+            "requirements": "Vérifier que les données transmises à un contexte potentiellement dangereux sont assainies au préalable afin d’appliquer des mesures de sécurité, par exemple en n’autorisant que les caractères sûrs pour ce contexte et en tronquant les entrées trop longues."
+        },
+        "asvs-1-3-4": {
+            "code": "ASVS-1.3.4",
+            "control": "Assainissement",
+            "requirements": "Vérifier que le contenu SVG (Scalable Vector Graphics) scriptable fourni par l’utilisateur est validé ou assaini pour ne contenir que des balises et attributs sûrs pour l’application (par exemple graphiques de dessin) et qu’il ne contient pas de scripts ni de foreignObject."
+        },
+        "asvs-1-3-5": {
+            "code": "ASVS-1.3.5",
+            "control": "Assainissement",
+            "requirements": "Vérifier que l’application assainit ou désactive le contenu scriptable ou de langage de templates fourni par l’utilisateur, tel que Markdown, CSS ou feuilles de style XSL, BBCode ou similaires."
+        },
+        "asvs-1-3-6": {
+            "code": "ASVS-1.3.6",
+            "control": "Assainissement",
+            "requirements": "Vérifier que l’application est protégée contre les attaques SSRF (Server-side Request Forgery) en validant les données non fiables par rapport à une liste d’autorisation de protocoles, domaines, chemins et ports, et en assainissant les caractères potentiellement dangereux avant d’utiliser les données pour appeler un autre service."
+        },
+        "asvs-1-3-7": {
+            "code": "ASVS-1.3.7",
+            "control": "Assainissement",
+            "requirements": "Vérifier que l’application est protégée contre les attaques d’injection de templates en n’autorisant pas la construction de templates à partir d’entrées non fiables. Lorsqu’il n’existe aucune alternative, toute entrée non fiable incluse dynamiquement lors de la création du template doit être assainie ou strictement validée."
+        },
+        "asvs-1-3-8": {
+            "code": "ASVS-1.3.8",
+            "control": "Assainissement",
+            "requirements": "Vérifier que l’application assainit correctement les entrées non fiables avant utilisation dans des requêtes JNDI (Java Naming and Directory Interface) et que JNDI est configuré de manière sécurisée pour prévenir les attaques d’injection JNDI."
+        },
+        "asvs-1-3-9": {
+            "code": "ASVS-1.3.9",
+            "control": "Assainissement",
+            "requirements": "Vérifier que l’application assainit le contenu avant son envoi à memcache afin de prévenir les attaques par injection."
+        },
+        "asvs-1-3-10": {
+            "code": "ASVS-1.3.10",
+            "control": "Assainissement",
+            "requirements": "Vérifier que les chaînes de format susceptibles de se résoudre de manière inattendue ou malveillante sont assainies avant traitement."
+        },
+        "asvs-1-3-11": {
+            "code": "ASVS-1.3.11",
+            "control": "Assainissement",
+            "requirements": "Vérifier que l’application assainit les entrées utilisateur avant de les transmettre aux systèmes de messagerie afin de se protéger contre les injections SMTP ou IMAP."
+        },
+        "asvs-1-3-12": {
+            "code": "ASVS-1.3.12",
+            "control": "Assainissement",
+            "requirements": "Vérifier que les expressions régulières ne contiennent pas d’éléments provoquant un backtracking exponentiel et s’assurer que les entrées non fiables sont assainies afin d’atténuer les attaques ReDoS (Runaway Regex)."
+        },
+        "asvs-1-4-1": {
+            "code": "ASVS-1.4.1",
+            "control": "Mémoire, chaînes et code non managé",
+            "requirements": "Vérifier que l’application utilise des chaînes sûres en mémoire, des copies mémoire plus sûres et une arithmétique de pointeurs sécurisée pour détecter ou prévenir les dépassements de pile, de tampon ou de tas."
+        },
+        "asvs-1-4-2": {
+            "code": "ASVS-1.4.2",
+            "control": "Mémoire, chaînes et code non managé",
+            "requirements": "Vérifier que des techniques de validation de signe, de plage et d’entrée sont utilisées pour prévenir les dépassements d’entiers."
+        },
+        "asvs-1-4-3": {
+            "code": "ASVS-1.4.3",
+            "control": "Mémoire, chaînes et code non managé",
+            "requirements": "Vérifier que la mémoire et les ressources allouées dynamiquement sont libérées et que les références ou pointeurs vers la mémoire libérée sont supprimés ou définis à null afin de prévenir les pointeurs pendants et les vulnérabilités use-after-free."
+        },
+        "asvs-1-5-1": {
+            "code": "ASVS-1.5.1",
+            "control": "Désérialisation sécurisée",
+            "requirements": "Vérifier que l’application configure les parseurs XML avec une configuration restrictive et que les fonctionnalités dangereuses telles que la résolution d’entités externes sont désactivées afin de prévenir les attaques XXE (XML eXternal Entity)."
+        },
+        "asvs-1-5-2": {
+            "code": "ASVS-1.5.2",
+            "control": "Désérialisation sécurisée",
+            "requirements": "Vérifier que la désérialisation de données non fiables applique une gestion sûre des entrées, par exemple en utilisant une liste d’autorisation des types d’objets ou en restreignant les types définis par le client, afin de prévenir les attaques de désérialisation. Les mécanismes de désérialisation explicitement définis comme non sûrs ne doivent pas être utilisés avec des entrées non fiables."
+        },
+        "asvs-1-5-3": {
+            "code": "ASVS-1.5.3",
+            "control": "Désérialisation sécurisée",
+            "requirements": "Vérifier que les différents parseurs utilisés dans l’application pour un même type de données (par exemple JSON, XML, URL) effectuent l’analyse de manière cohérente et utilisent le même mécanisme d’encodage de caractères afin d’éviter des problèmes tels que les vulnérabilités d’interopérabilité JSON ou des différences de parsing URI/fichier exploitées dans des attaques RFI ou SSRF."
+        },
+        "asvs-2-1-1": {
+            "code": "ASVS-2.1.1",
+            "control": "Documentation de la validation et de la logique métier",
+            "requirements": "Vérifier que la documentation de l’application définit les règles de validation des entrées pour vérifier la validité des éléments de données par rapport à une structure attendue. Cela peut concerner des formats de données courants tels que les numéros de carte de crédit, adresses e-mail, numéros de téléphone, ou un format de données interne."
+        },
+        "asvs-2-1-2": {
+            "code": "ASVS-2.1.2",
+            "control": "Documentation de la validation et de la logique métier",
+            "requirements": "Vérifier que la documentation de l’application définit comment valider la cohérence logique et contextuelle des éléments de données combinés, par exemple vérifier que la banlieue et le code postal correspondent."
+        },
+        "asvs-2-1-3": {
+            "code": "ASVS-2.1.3",
+            "control": "Documentation de la validation et de la logique métier",
+            "requirements": "Vérifier que les attentes concernant les limites et validations de la logique métier sont documentées, à la fois par utilisateur et globalement dans l’application."
+        },
+        "asvs-2-2-1": {
+            "code": "ASVS-2.2.1",
+            "control": "Validation des entrées",
+            "requirements": "Vérifier que les entrées sont validées afin de respecter les attentes métier ou fonctionnelles associées. Cela doit soit utiliser une validation positive par rapport à une liste d’autorisation de valeurs, motifs et plages, soit se baser sur la comparaison de l’entrée avec une structure attendue et des limites logiques selon des règles prédéfinies. Pour L1, cela peut se concentrer sur les entrées utilisées pour des décisions métier ou de sécurité spécifiques. Pour L2 et plus, cela doit s’appliquer à toutes les entrées."
+        },
+        "asvs-2-2-2": {
+            "code": "ASVS-2.2.2",
+            "control": "Validation des entrées",
+            "requirements": "Vérifier que l’application est conçue pour appliquer la validation des entrées dans une couche de service de confiance. Bien que la validation côté client améliore l’utilisabilité et doive être encouragée, elle ne doit pas être considérée comme un contrôle de sécurité."
+        },
+        "asvs-2-2-3": {
+            "code": "ASVS-2.2.3",
+            "control": "Validation des entrées",
+            "requirements": "Vérifier que l’application garantit que les combinaisons d’éléments de données liés sont raisonnables conformément aux règles prédéfinies."
+        },
+        "asvs-2-3-1": {
+            "code": "ASVS-2.3.1",
+            "control": "Sécurité de la logique métier",
+            "requirements": "Vérifier que l’application ne traite les flux de logique métier pour un même utilisateur que dans l’ordre séquentiel attendu et sans saut d’étapes."
+        },
+        "asvs-2-3-2": {
+            "code": "ASVS-2.3.2",
+            "control": "Sécurité de la logique métier",
+            "requirements": "Vérifier que les limites de la logique métier sont implémentées conformément à la documentation de l’application afin d’éviter l’exploitation de failles de logique métier."
+        },
+        "asvs-2-3-3": {
+            "code": "ASVS-2.3.3",
+            "control": "Sécurité de la logique métier",
+            "requirements": "Vérifier que des transactions sont utilisées au niveau de la logique métier afin qu’une opération métier réussisse entièrement ou soit annulée pour revenir à l’état correct précédent."
+        },
+        "asvs-2-3-4": {
+            "code": "ASVS-2.3.4",
+            "control": "Sécurité de la logique métier",
+            "requirements": "Vérifier que des mécanismes de verrouillage au niveau de la logique métier sont utilisés pour garantir que des ressources en quantité limitée (comme des sièges de théâtre ou des créneaux de livraison) ne puissent pas être réservées en double par manipulation de la logique de l’application."
+        },
+        "asvs-2-3-5": {
+            "code": "ASVS-2.3.5",
+            "control": "Sécurité de la logique métier",
+            "requirements": "Vérifier que les flux de logique métier à forte valeur nécessitent une approbation multi-utilisateurs afin de prévenir les actions non autorisées ou accidentelles. Cela peut inclure, sans s’y limiter, les transferts monétaires importants, les approbations de contrats, l’accès à des informations classifiées ou les dérogations de sécurité en production."
+        },
+        "asvs-2-4-1": {
+            "code": "ASVS-2.4.1",
+            "control": "Anti-automatisation",
+            "requirements": "Vérifier que des contrôles anti-automatisation sont en place pour se protéger contre des appels excessifs aux fonctions de l’application pouvant entraîner une exfiltration de données, la création de données parasites, l’épuisement des quotas, le dépassement des limites de taux, un déni de service ou une surconsommation de ressources coûteuses."
+        },
+        "asvs-2-4-2": {
+            "code": "ASVS-2.4.2",
+            "control": "Anti-automatisation",
+            "requirements": "Vérifier que les flux de logique métier imposent un timing humain réaliste afin d’empêcher des soumissions de transactions excessivement rapides."
+        },
+        "asvs-3-1-1": {
+            "code": "ASVS-3.1.1",
+            "control": "Documentation de la sécurité du frontend web",
+            "requirements": "Vérifier que la documentation de l’application indique les fonctionnalités de sécurité attendues que les navigateurs utilisant l’application doivent prendre en charge (telles que HTTPS, HTTP Strict Transport Security (HSTS), Content Security Policy (CSP) et autres mécanismes HTTP de sécurité pertinents). Elle doit également définir le comportement de l’application lorsque certaines de ces fonctionnalités ne sont pas disponibles (par exemple avertir l’utilisateur ou bloquer l’accès)."
+        },
+        "asvs-3-2-1": {
+            "code": "ASVS-3.2.1",
+            "control": "Interprétation non intentionnelle du contenu",
+            "requirements": "Vérifier que des contrôles de sécurité sont en place pour empêcher les navigateurs de rendre du contenu ou des fonctionnalités des réponses HTTP dans un contexte incorrect (par exemple lorsqu’une API, un fichier téléversé par l’utilisateur ou une autre ressource est demandée directement). Les contrôles possibles incluent : ne pas servir le contenu sauf si les en-têtes de requête HTTP (tels que Sec-Fetch-*) indiquent le bon contexte, utiliser la directive sandbox de l’en-tête Content-Security-Policy ou utiliser le type de disposition attachment dans l’en-tête Content-Disposition."
+        },
+        "asvs-3-2-2": {
+            "code": "ASVS-3.2.2",
+            "control": "Interprétation non intentionnelle du contenu",
+            "requirements": "Vérifier que le contenu destiné à être affiché comme texte, plutôt que rendu en HTML, est traité à l’aide de fonctions de rendu sûres (telles que createTextNode ou textContent) afin d’éviter l’exécution involontaire de contenu comme HTML ou JavaScript."
+        },
+        "asvs-3-2-3": {
+            "code": "ASVS-3.2.3",
+            "control": "Interprétation non intentionnelle du contenu",
+            "requirements": "Vérifier que l’application évite le DOM clobbering lors de l’utilisation de JavaScript côté client en employant des déclarations explicites de variables, une vérification stricte des types, en évitant de stocker des variables globales sur l’objet document et en mettant en œuvre une isolation des espaces de noms."
+        },
+        "asvs-3-3-1": {
+            "code": "ASVS-3.3.1",
+            "control": "Configuration des cookies",
+            "requirements": "Vérifier que les cookies ont l’attribut 'Secure' défini et, si le préfixe '\\__Host-' n’est pas utilisé pour le nom du cookie, le préfixe '__Secure-' doit être utilisé pour le nom du cookie."
+        },
+        "asvs-3-3-2": {
+            "code": "ASVS-3.3.2",
+            "control": "Configuration des cookies",
+            "requirements": "Vérifier que la valeur de l’attribut 'SameSite' de chaque cookie est définie conformément à l’objectif du cookie afin de limiter l’exposition aux attaques de redressement d’interface utilisateur et aux attaques de falsification de requêtes basées sur le navigateur (CSRF)."
+        },
+        "asvs-3-3-3": {
+            "code": "ASVS-3.3.3",
+            "control": "Configuration des cookies",
+            "requirements": "Vérifier que les cookies utilisent le préfixe '__Host-' pour leur nom, sauf s’ils sont explicitement conçus pour être partagés avec d’autres hôtes."
+        },
+        "asvs-3-3-4": {
+            "code": "ASVS-3.3.4",
+            "control": "Configuration des cookies",
+            "requirements": "Vérifier que si la valeur d’un cookie n’est pas destinée à être accessible aux scripts côté client (par exemple un jeton de session), le cookie doit avoir l’attribut 'HttpOnly' défini et que cette valeur ne doit être transmise au client que via l’en-tête 'Set-Cookie'."
+        },
+        "asvs-3-3-5": {
+            "code": "ASVS-3.3.5",
+            "control": "Configuration des cookies",
+            "requirements": "Vérifier que lorsque l’application écrit un cookie, la longueur combinée du nom et de la valeur du cookie ne dépasse pas 4096 octets. Des cookies trop volumineux ne seront pas stockés par le navigateur et ne seront donc pas envoyés avec les requêtes, empêchant l’utilisateur d’utiliser les fonctionnalités dépendantes de ce cookie."
+        },
+        "asvs-3-4-1": {
+            "code": "ASVS-3.4.1",
+            "control": "En-têtes de mécanismes de sécurité du navigateur",
+            "requirements": "Vérifier qu’un en-tête Strict-Transport-Security est inclus dans toutes les réponses afin d’appliquer une politique HSTS. Une durée maximale d’au moins 1 an doit être définie et, pour L2 et plus, la politique doit également s’appliquer à tous les sous-domaines."
+        },
+        "asvs-3-4-2": {
+            "code": "ASVS-3.4.2",
+            "control": "En-têtes de mécanismes de sécurité du navigateur",
+            "requirements": "Vérifier que l’en-tête CORS Access-Control-Allow-Origin est une valeur fixe définie par l’application ou, si la valeur de l’en-tête Origin de la requête HTTP est utilisée, qu’elle est validée par rapport à une liste d’origines de confiance. Lorsque 'Access-Control-Allow-Origin: *' est utilisé, vérifier que la réponse ne contient aucune information sensible."
+        },
+        "asvs-3-4-3": {
+            "code": "ASVS-3.4.3",
+            "control": "En-têtes de mécanismes de sécurité du navigateur",
+            "requirements": "Vérifier que les réponses HTTP incluent un en-tête Content-Security-Policy définissant des directives garantissant que le navigateur ne charge et n’exécute que du contenu ou des ressources de confiance afin de limiter l’exécution de JavaScript malveillant. Au minimum, une politique globale doit inclure object-src 'none' et base-uri 'none' et définir soit une liste d’autorisation soit utiliser des nonces ou des hashes. Pour une application L3, une politique par réponse avec nonces ou hashes doit être définie."
+        },
+        "asvs-3-4-4": {
+            "code": "ASVS-3.4.4",
+            "control": "En-têtes de mécanismes de sécurité du navigateur",
+            "requirements": "Vérifier que toutes les réponses HTTP contiennent l’en-tête 'X-Content-Type-Options: nosniff'. Cela indique aux navigateurs de ne pas utiliser le content sniffing ni la détection MIME pour cette réponse et d’exiger que la valeur de Content-Type corresponde à la ressource cible. Cela active également la fonctionnalité CORB du navigateur."
+        },
+        "asvs-3-4-5": {
+            "code": "ASVS-3.4.5",
+            "control": "En-têtes de mécanismes de sécurité du navigateur",
+            "requirements": "Vérifier que l’application définit une politique de referrer afin d’éviter la fuite de données techniquement sensibles vers des services tiers via l’en-tête 'Referer'. Cela peut être fait via l’en-tête Referrer-Policy ou des attributs HTML."
+        },
+        "asvs-3-4-6": {
+            "code": "ASVS-3.4.6",
+            "control": "En-têtes de mécanismes de sécurité du navigateur",
+            "requirements": "Vérifier que l’application web utilise la directive frame-ancestors de l’en-tête Content-Security-Policy pour chaque réponse HTTP afin d’empêcher l’intégration par défaut et de n’autoriser l’intégration de ressources spécifiques que lorsque nécessaire. L’en-tête X-Frame-Options est obsolète et ne doit pas être utilisé comme mécanisme principal."
+        },
+        "asvs-3-4-7": {
+            "code": "ASVS-3.4.7",
+            "control": "En-têtes de mécanismes de sécurité du navigateur",
+            "requirements": "Vérifier que l’en-tête Content-Security-Policy spécifie un emplacement de rapport des violations."
+        },
+        "asvs-3-4-8": {
+            "code": "ASVS-3.4.8",
+            "control": "En-têtes de mécanismes de sécurité du navigateur",
+            "requirements": "Vérifier que toutes les réponses HTTP initiant le rendu d’un document (par exemple Content-Type text/html) incluent l’en-tête Cross-Origin-Opener-Policy avec la directive same-origin ou same-origin-allow-popups selon le besoin afin de prévenir les attaques exploitant l’accès partagé aux objets Window."
+        },
+        "asvs-3-5-1": {
+            "code": "ASVS-3.5.1",
+            "control": "Séparation de l’origine du navigateur",
+            "requirements": "Vérifier que, si l’application ne s’appuie pas sur le mécanisme de prévol CORS pour empêcher des requêtes cross-origin non autorisées d’utiliser des fonctionnalités sensibles, ces requêtes sont validées afin de s’assurer qu’elles proviennent de l’application elle-même. Cela peut être fait en utilisant et en validant des jetons anti-falsification (anti-forgery) ou en exigeant des champs d’en-tête HTTP supplémentaires qui ne figurent pas dans la liste CORS-safelisted des en-têtes de requête. Ceci vise à se défendre contre les attaques de falsification de requêtes via le navigateur, communément appelées cross-site request forgery (CSRF)."
+        },
+        "asvs-3-5-2": {
+            "code": "ASVS-3.5.2",
+            "control": "Séparation de l’origine du navigateur",
+            "requirements": "Vérifier que, si l’application s’appuie sur le mécanisme de prévol CORS pour empêcher l’utilisation cross-origin non autorisée de fonctionnalités sensibles, il n’est pas possible d’appeler la fonctionnalité avec une requête qui ne déclenche pas une requête de prévol CORS. Cela peut nécessiter de vérifier les valeurs des en-têtes de requête 'Origin' et 'Content-Type' ou d’utiliser un champ d’en-tête supplémentaire qui n’est pas un en-tête CORS-safelisted."
+        },
+        "asvs-3-5-3": {
+            "code": "ASVS-3.5.3",
+            "control": "Séparation de l’origine du navigateur",
+            "requirements": "Vérifier que les requêtes HTTP vers des fonctionnalités sensibles utilisent des méthodes HTTP appropriées telles que POST, PUT, PATCH ou DELETE, et non des méthodes définies par la spécification HTTP comme « sûres » telles que HEAD, OPTIONS ou GET. Alternativement, une validation stricte des champs d’en-tête de requête Sec-Fetch-* peut être utilisée pour s’assurer que la requête ne provient pas d’un appel cross-origin inapproprié, d’une requête de navigation ou d’un chargement de ressource (comme la source d’une image) lorsque cela n’est pas attendu."
+        },
+        "asvs-3-5-4": {
+            "code": "ASVS-3.5.4",
+            "control": "Séparation de l’origine du navigateur",
+            "requirements": "Vérifier que des applications séparées sont hébergées sur des noms d’hôte différents afin de tirer parti des restrictions de la politique de même origine, y compris la manière dont des documents ou scripts chargés depuis une origine peuvent interagir avec des ressources d’une autre origine et les restrictions sur les cookies basées sur le nom d’hôte."
+        },
+        "asvs-3-5-5": {
+            "code": "ASVS-3.5.5",
+            "control": "Séparation de l’origine du navigateur",
+            "requirements": "Vérifier que les messages reçus via l’interface postMessage sont rejetés si l’origine du message n’est pas de confiance ou si la syntaxe du message est invalide."
+        },
+        "asvs-3-5-6": {
+            "code": "ASVS-3.5.6",
+            "control": "Séparation de l’origine du navigateur",
+            "requirements": "Vérifier que la fonctionnalité JSONP n’est activée nulle part dans l’application afin d’éviter les attaques XSSI (Cross-Site Script Inclusion)."
+        },
+        "asvs-3-5-7": {
+            "code": "ASVS-3.5.7",
+            "control": "Séparation de l’origine du navigateur",
+            "requirements": "Vérifier que les données nécessitant une autorisation ne sont pas incluses dans les réponses de ressources de type script, comme des fichiers JavaScript, afin d’éviter les attaques XSSI (Cross-Site Script Inclusion)."
+        },
+        "asvs-3-5-8": {
+            "code": "ASVS-3.5.8",
+            "control": "Séparation de l’origine du navigateur",
+            "requirements": "Vérifier que des ressources authentifiées (telles que images, vidéos, scripts et autres documents) ne peuvent être chargées ou intégrées au nom de l’utilisateur que lorsque cela est prévu. Cela peut être réalisé par une validation stricte des champs d’en-tête HTTP Sec-Fetch-* afin de s’assurer que la requête ne provient pas d’un appel cross-origin inapproprié, ou en définissant un en-tête de réponse HTTP Cross-Origin-Resource-Policy restrictif pour demander au navigateur de bloquer le contenu renvoyé."
+        },
+        "asvs-3-6-1": {
+            "code": "ASVS-3.6.1",
+            "control": "Intégrité des ressources externes",
+            "requirements": "Vérifier que les ressources côté client, telles que bibliothèques JavaScript, CSS ou polices web, ne sont hébergées en externe (par exemple sur un CDN) que si la ressource est statique et versionnée et que Subresource Integrity (SRI) est utilisé pour valider l’intégrité de la ressource. Si cela n’est pas possible, une décision de sécurité documentée doit justifier cela pour chaque ressource."
+        },
+        "asvs-3-7-1": {
+            "code": "ASVS-3.7.1",
+            "control": "Autres considérations de sécurité du navigateur",
+            "requirements": "Vérifier que l’application n’utilise que des technologies côté client encore supportées et considérées comme sûres. Exemples de technologies ne répondant pas à cette exigence : plugins NSAPI, Flash, Shockwave, ActiveX, Silverlight, NaCl ou applets Java côté client."
+        },
+        "asvs-3-7-2": {
+            "code": "ASVS-3.7.2",
+            "control": "Autres considérations de sécurité du navigateur",
+            "requirements": "Vérifier que l’application ne redirige automatiquement l’utilisateur vers un autre nom d’hôte ou domaine (non contrôlé par l’application) que si la destination figure sur une liste d’autorisation."
+        },
+        "asvs-3-7-3": {
+            "code": "ASVS-3.7.3",
+            "control": "Autres considérations de sécurité du navigateur",
+            "requirements": "Vérifier que l’application affiche une notification lorsque l’utilisateur est redirigé vers une URL en dehors du contrôle de l’application, avec une option pour annuler la navigation."
+        },
+        "asvs-3-7-4": {
+            "code": "ASVS-3.7.4",
+            "control": "Autres considérations de sécurité du navigateur",
+            "requirements": "Vérifier que le domaine de premier niveau de l’application (par ex. site.tld) est ajouté à la liste publique de préchargement HSTS. Cela garantit que l’utilisation de TLS pour l’application est intégrée directement dans les principaux navigateurs, plutôt que de dépendre uniquement de l’en-tête de réponse Strict-Transport-Security."
+        },
+        "asvs-3-7-5": {
+            "code": "ASVS-3.7.5",
+            "control": "Autres considérations de sécurité du navigateur",
+            "requirements": "Vérifier que l’application se comporte comme documenté (par exemple avertir l’utilisateur ou bloquer l’accès) si le navigateur utilisé pour accéder à l’application ne prend pas en charge les fonctionnalités de sécurité attendues."
+        },
+        "asvs-4-1-1": {
+            "code": "ASVS-4.1.1",
+            "control": "Sécurité générique des services web",
+            "requirements": "Vérifier que chaque réponse HTTP avec un corps de message contient un en-tête Content-Type correspondant au contenu réel de la réponse, incluant le paramètre charset pour spécifier un encodage de caractères sûr (par ex. UTF-8, ISO-8859-1) selon les types de médias IANA, tels que \"text/\", \"/+xml\" et \"/xml\"."
+        },
+        "asvs-4-1-2": {
+            "code": "ASVS-4.1.2",
+            "control": "Sécurité générique des services web",
+            "requirements": "Vérifier que seuls les endpoints destinés aux utilisateurs (accès manuel via navigateur) redirigent automatiquement de HTTP vers HTTPS, tandis que les autres services ou endpoints n’implémentent pas de redirections transparentes. Cela évite la situation où un client envoie par erreur des requêtes HTTP non chiffrées, mais la fuite de données sensibles passe inaperçue car les requêtes sont automatiquement redirigées vers HTTPS."
+        },
+        "asvs-4-1-3": {
+            "code": "ASVS-4.1.3",
+            "control": "Sécurité générique des services web",
+            "requirements": "Vérifier qu’aucun en-tête HTTP utilisé par l’application et défini par une couche intermédiaire (par ex. load balancer, proxy web, service backend-for-frontend) ne peut être surchargé par l’utilisateur final. Exemples : X-Real-IP, X-Forwarded-*, X-User-ID."
+        },
+        "asvs-4-1-4": {
+            "code": "ASVS-4.1.4",
+            "control": "Sécurité générique des services web",
+            "requirements": "Vérifier que seules les méthodes HTTP explicitement prises en charge par l’application ou son API (y compris OPTIONS lors des requêtes de prévol) peuvent être utilisées et que les méthodes non utilisées sont bloquées."
+        },
+        "asvs-4-1-5": {
+            "code": "ASVS-4.1.5",
+            "control": "Sécurité générique des services web",
+            "requirements": "Vérifier que des signatures numériques par message sont utilisées pour fournir une assurance supplémentaire au-delà des protections de transport pour des requêtes ou transactions très sensibles ou traversant plusieurs systèmes."
+        },
+        "asvs-4-2-1": {
+            "code": "ASVS-4.2.1",
+            "control": "Validation de la structure des messages HTTP",
+            "requirements": "Vérifier que tous les composants de l’application (y compris load balancers, pare-feux et serveurs d’application) déterminent les limites des messages HTTP entrants en utilisant le mécanisme approprié à la version HTTP afin d’empêcher le request smuggling. En HTTP/1.x, si un en-tête Transfer-Encoding est présent, l’en-tête Content-Length doit être ignoré conformément à la RFC 2616. En HTTP/2 ou HTTP/3, si un en-tête Content-Length est présent, le récepteur doit s’assurer qu’il est cohérent avec la longueur des trames DATA."
+        },
+        "asvs-4-2-2": {
+            "code": "ASVS-4.2.2",
+            "control": "Validation de la structure des messages HTTP",
+            "requirements": "Vérifier que lors de la génération de messages HTTP, l’en-tête Content-Length n’entre pas en conflit avec la longueur du contenu telle que déterminée par le framing du protocole HTTP, afin d’empêcher les attaques de request smuggling."
+        },
+        "asvs-4-2-3": {
+            "code": "ASVS-4.2.3",
+            "control": "Validation de la structure des messages HTTP",
+            "requirements": "Vérifier que l’application n’envoie ni n’accepte de messages HTTP/2 ou HTTP/3 avec des en-têtes spécifiques à la connexion tels que Transfer-Encoding, afin d’empêcher les attaques de response splitting et d’injection d’en-têtes."
+        },
+        "asvs-4-2-4": {
+            "code": "ASVS-4.2.4",
+            "control": "Validation de la structure des messages HTTP",
+            "requirements": "Vérifier que l’application n’accepte que des requêtes HTTP/2 et HTTP/3 dont les champs d’en-tête et les valeurs ne contiennent aucune séquence CR (\\r), LF (\\n) ou CRLF (\\r\\n), afin d’empêcher les attaques d’injection d’en-têtes."
+        },
+        "asvs-4-2-5": {
+            "code": "ASVS-4.2.5",
+            "control": "Validation de la structure des messages HTTP",
+            "requirements": "Vérifier que, si l’application (backend ou frontend) construit et envoie des requêtes, elle utilise la validation, l’assainissement ou d’autres mécanismes pour éviter de créer des URI (par exemple pour des appels API) ou des champs d’en-tête de requête HTTP (tels que Authorization ou Cookie) trop longs pour être acceptés par le composant récepteur. Cela pourrait provoquer un déni de service, par exemple en envoyant une requête trop longue (par exemple un en-tête Cookie très long) entraînant une réponse d’erreur systématique du serveur."
+        },
+        "asvs-4-3-1": {
+            "code": "ASVS-4.3.1",
+            "control": "GraphQL",
+            "requirements": "Vérifier qu’une liste d’autorisation de requêtes, une limitation de profondeur, une limitation de volume ou une analyse du coût des requêtes est utilisée pour prévenir un déni de service (DoS) GraphQL ou au niveau de la couche de données dû à des requêtes coûteuses et imbriquées."
+        },
+        "asvs-4-3-2": {
+            "code": "ASVS-4.3.2",
+            "control": "GraphQL",
+            "requirements": "Vérifier que les requêtes d’introspection GraphQL sont désactivées en environnement de production, sauf si l’API GraphQL est destinée à être utilisée par d’autres parties."
+        },
+        "asvs-4-4-1": {
+            "code": "ASVS-4.4.1",
+            "control": "WebSocket",
+            "requirements": "Vérifier que WebSocket sur TLS (WSS) est utilisé pour toutes les connexions WebSocket."
+        },
+        "asvs-4-4-2": {
+            "code": "ASVS-4.4.2",
+            "control": "WebSocket",
+            "requirements": "Vérifier que, lors du handshake HTTP WebSocket initial, l’en-tête Origin est vérifié par rapport à une liste d’origines autorisées pour l’application."
+        },
+        "asvs-4-4-3": {
+            "code": "ASVS-4.4.3",
+            "control": "WebSocket",
+            "requirements": "Vérifier que, si la gestion de session standard de l’application ne peut pas être utilisée, des jetons dédiés sont utilisés à cet effet et qu’ils respectent les exigences de sécurité pertinentes en matière de gestion de session."
+        },
+        "asvs-4-4-4": {
+            "code": "ASVS-4.4.4",
+            "control": "WebSocket",
+            "requirements": "Vérifier que des jetons dédiés de gestion de session WebSocket sont initialement obtenus ou validés via la session HTTPS préalablement authentifiée lors de la transition d’une session HTTPS existante vers un canal WebSocket."
+        },
+        "asvs-5-1-1": {
+            "code": "ASVS-5.1.1",
+            "control": "Documentation de la gestion des fichiers",
+            "requirements": "Vérifier que la documentation définit les types de fichiers autorisés, les extensions attendues et la taille maximale (y compris la taille décompressée) pour chaque fonctionnalité de téléversement. En outre, s’assurer que la documentation précise comment les fichiers sont rendus sûrs pour que les utilisateurs finaux puissent les télécharger et les traiter, par exemple le comportement de l’application lorsqu’un fichier malveillant est détecté."
+        },
+        "asvs-5-2-1": {
+            "code": "ASVS-5.2.1",
+            "control": "Téléversement de fichiers et contenu",
+            "requirements": "Vérifier que l’application n’accepte que des fichiers d’une taille qu’elle peut traiter sans provoquer de perte de performance ni permettre une attaque par déni de service."
+        },
+        "asvs-5-2-2": {
+            "code": "ASVS-5.2.2",
+            "control": "Téléversement de fichiers et contenu",
+            "requirements": "Vérifier que lorsque l’application accepte un fichier, seul ou au sein d’une archive (comme un zip), elle vérifie que l’extension correspond à une extension attendue et valide que le contenu correspond au type représenté par l’extension. Cela inclut, sans s’y limiter, la vérification des « magic bytes » initiaux, la réécriture d’images et l’utilisation de bibliothèques spécialisées pour la validation du contenu des fichiers. Pour L1, cela peut se limiter aux fichiers utilisés pour des décisions métier ou de sécurité spécifiques. Pour L2 et plus, cela doit s’appliquer à tous les fichiers acceptés."
+        },
+        "asvs-5-2-3": {
+            "code": "ASVS-5.2.3",
+            "control": "Téléversement de fichiers et contenu",
+            "requirements": "Vérifier que l’application contrôle les fichiers compressés (par ex. zip, gz, docx, odt) par rapport à la taille maximale autorisée une fois décompressés et au nombre maximal de fichiers avant de décompresser le fichier."
+        },
+        "asvs-5-2-4": {
+            "code": "ASVS-5.2.4",
+            "control": "Téléversement de fichiers et contenu",
+            "requirements": "Vérifier qu’un quota de taille de fichiers et un nombre maximal de fichiers par utilisateur sont appliqués afin qu’un utilisateur unique ne puisse pas saturer le stockage avec trop de fichiers ou des fichiers excessivement volumineux."
+        },
+        "asvs-5-2-5": {
+            "code": "ASVS-5.2.5",
+            "control": "Téléversement de fichiers et contenu",
+            "requirements": "Vérifier que l’application n’autorise pas le téléversement de fichiers compressés contenant des liens symboliques, sauf si cela est spécifiquement requis (auquel cas il faut imposer une liste d’autorisation des fichiers vers lesquels un lien symbolique est permis)."
+        },
+        "asvs-5-2-6": {
+            "code": "ASVS-5.2.6",
+            "control": "Téléversement de fichiers et contenu",
+            "requirements": "Vérifier que l’application rejette les images téléversées dont les dimensions en pixels dépassent le maximum autorisé afin de prévenir les attaques de type pixel flood."
+        },
+        "asvs-5-3-1": {
+            "code": "ASVS-5.3.1",
+            "control": "Stockage des fichiers",
+            "requirements": "Vérifier que les fichiers téléversés ou générés à partir d’entrées non fiables et stockés dans un dossier public ne sont pas exécutés comme code côté serveur lorsqu’ils sont accédés directement via une requête HTTP."
+        },
+        "asvs-5-3-2": {
+            "code": "ASVS-5.3.2",
+            "control": "Stockage des fichiers",
+            "requirements": "Vérifier que lorsque l’application crée des chemins de fichier pour des opérations sur fichiers, elle utilise des données générées en interne ou de confiance au lieu de noms de fichiers fournis par l’utilisateur. Si des noms de fichiers fournis par l’utilisateur ou des métadonnées de fichiers doivent être utilisés, une validation stricte et un assainissement doivent être appliqués. Ceci protège contre la traversée de répertoires, l’inclusion de fichiers locale ou distante (LFI, RFI) et les attaques SSRF (Server-side Request Forgery)."
+        },
+        "asvs-5-3-3": {
+            "code": "ASVS-5.3.3",
+            "control": "Stockage des fichiers",
+            "requirements": "Vérifier que le traitement de fichiers côté serveur, tel que la décompression, ignore les informations de chemin fournies par l’utilisateur afin de prévenir des vulnérabilités telles que zip slip."
+        },
+        "asvs-5-4-1": {
+            "code": "ASVS-5.4.1",
+            "control": "Téléchargement de fichiers",
+            "requirements": "Vérifier que l’application valide ou ignore les noms de fichiers fournis par l’utilisateur, y compris dans un paramètre JSON, JSONP ou d’URL, et spécifie un nom de fichier dans l’en-tête Content-Disposition de la réponse."
+        },
+        "asvs-5-4-2": {
+            "code": "ASVS-5.4.2",
+            "control": "Téléchargement de fichiers",
+            "requirements": "Vérifier que les noms de fichiers servis (par ex. dans les en-têtes de réponse HTTP ou les pièces jointes e-mail) sont encodés ou assainis (par ex. conformément à la RFC 6266) afin de préserver la structure du document et de prévenir les attaques par injection."
+        },
+        "asvs-5-4-3": {
+            "code": "ASVS-5.4.3",
+            "control": "Téléchargement de fichiers",
+            "requirements": "Vérifier que les fichiers obtenus depuis des sources non fiables sont analysés par des antivirus afin d’éviter de servir du contenu malveillant connu."
+        },
+        "asvs-6-1-1": {
+            "code": "ASVS-6.1.1",
+            "control": "Documentation sur l’authentification",
+            "requirements": "Vérifier que la documentation de l’application définit comment des contrôles tels que la limitation de débit, l’anti-automatisation et la réponse adaptative sont utilisés pour se défendre contre des attaques comme le credential stuffing et la force brute sur les mots de passe. La documentation doit indiquer clairement comment ces contrôles sont configurés et comment ils empêchent le verrouillage malveillant des comptes."
+        },
+        "asvs-6-1-2": {
+            "code": "ASVS-6.1.2",
+            "control": "Documentation sur l’authentification",
+            "requirements": "Vérifier qu’une liste de mots spécifiques au contexte est documentée afin d’empêcher leur utilisation dans les mots de passe. La liste peut inclure des permutations de noms d’organisations, noms de produits, identifiants système, noms de code de projets, noms de départements ou de rôles, et similaires."
+        },
+        "asvs-6-1-3": {
+            "code": "ASVS-6.1.3",
+            "control": "Documentation sur l’authentification",
+            "requirements": "Vérifier que, si l’application inclut plusieurs voies d’authentification, elles sont toutes documentées avec les contrôles de sécurité et le niveau de robustesse d’authentification qui doivent être appliqués de manière cohérente à travers elles."
+        },
+        "asvs-6-2-1": {
+            "code": "ASVS-6.2.1",
+            "control": "Sécurité des mots de passe",
+            "requirements": "Vérifier que les mots de passe définis par l’utilisateur comportent au moins 8 caractères, bien qu’un minimum de 15 caractères soit fortement recommandé."
+        },
+        "asvs-6-2-2": {
+            "code": "ASVS-6.2.2",
+            "control": "Sécurité des mots de passe",
+            "requirements": "Vérifier que les utilisateurs peuvent modifier leur mot de passe."
+        },
+        "asvs-6-2-3": {
+            "code": "ASVS-6.2.3",
+            "control": "Sécurité des mots de passe",
+            "requirements": "Vérifier que la fonctionnalité de changement de mot de passe exige le mot de passe actuel et le nouveau mot de passe de l’utilisateur."
+        },
+        "asvs-6-2-4": {
+            "code": "ASVS-6.2.4",
+            "control": "Sécurité des mots de passe",
+            "requirements": "Vérifier que les mots de passe soumis lors de l’inscription ou d’un changement de mot de passe sont comparés à un ensemble disponible d’au moins les 3000 mots de passe les plus courants correspondant à la politique de mots de passe de l’application (par ex. longueur minimale)."
+        },
+        "asvs-6-2-5": {
+            "code": "ASVS-6.2.5",
+            "control": "Sécurité des mots de passe",
+            "requirements": "Vérifier que des mots de passe de toute composition peuvent être utilisés, sans règles limitant les types de caractères autorisés. Il ne doit pas y avoir d’exigence de nombre minimal de majuscules/minuscules, chiffres ou caractères spéciaux."
+        },
+        "asvs-6-2-6": {
+            "code": "ASVS-6.2.6",
+            "control": "Sécurité des mots de passe",
+            "requirements": "Vérifier que les champs de saisie de mot de passe utilisent type=password pour masquer la saisie. Les applications peuvent permettre à l’utilisateur de voir temporairement le mot de passe masqué en entier ou le dernier caractère saisi."
+        },
+        "asvs-6-2-7": {
+            "code": "ASVS-6.2.7",
+            "control": "Sécurité des mots de passe",
+            "requirements": "Vérifier que la fonctionnalité « coller », les aides de mot de passe du navigateur et les gestionnaires de mots de passe externes sont autorisés."
+        },
+        "asvs-6-2-8": {
+            "code": "ASVS-6.2.8",
+            "control": "Sécurité des mots de passe",
+            "requirements": "Vérifier que l’application vérifie le mot de passe de l’utilisateur exactement tel que reçu, sans aucune modification telle que la troncature ou la transformation de casse."
+        },
+        "asvs-6-2-9": {
+            "code": "ASVS-6.2.9",
+            "control": "Sécurité des mots de passe",
+            "requirements": "Vérifier que des mots de passe d’au moins 64 caractères sont autorisés."
+        },
+        "asvs-6-2-10": {
+            "code": "ASVS-6.2.10",
+            "control": "Sécurité des mots de passe",
+            "requirements": "Vérifier que le mot de passe d’un utilisateur reste valide jusqu’à ce qu’il soit découvert comme compromis ou que l’utilisateur le renouvelle. L’application ne doit pas exiger une rotation périodique des identifiants."
+        },
+        "asvs-6-2-11": {
+            "code": "ASVS-6.2.11",
+            "control": "Sécurité des mots de passe",
+            "requirements": "Vérifier que la liste documentée de mots spécifiques au contexte est utilisée pour empêcher la création de mots de passe faciles à deviner."
+        },
+        "asvs-6-2-12": {
+            "code": "ASVS-6.2.12",
+            "control": "Sécurité des mots de passe",
+            "requirements": "Vérifier que les mots de passe soumis lors de l’inscription ou des changements de mot de passe sont comparés à un ensemble de mots de passe compromis (breached)."
+        },
+        "asvs-6-3-1": {
+            "code": "ASVS-6.3.1",
+            "control": "Sécurité générale de l’authentification",
+            "requirements": "Vérifier que des contrôles visant à prévenir des attaques telles que le credential stuffing et la force brute sur les mots de passe sont mis en œuvre conformément à la documentation de sécurité de l’application."
+        },
+        "asvs-6-3-2": {
+            "code": "ASVS-6.3.2",
+            "control": "Sécurité générale de l’authentification",
+            "requirements": "Vérifier que les comptes utilisateurs par défaut (par ex. \"root\", \"admin\" ou \"sa\") ne sont pas présents dans l’application ou sont désactivés."
+        },
+        "asvs-6-3-3": {
+            "code": "ASVS-6.3.3",
+            "control": "Sécurité générale de l’authentification",
+            "requirements": "Vérifier qu’un mécanisme d’authentification multifacteur ou une combinaison de mécanismes d’authentification à facteur unique est utilisé(e) pour accéder à l’application. Pour L3, l’un des facteurs doit être un mécanisme matériel offrant une résistance au compromis et à l’usurpation face au phishing, tout en vérifiant l’intention d’authentification via une action initiée par l’utilisateur (par exemple pression sur un bouton d’une clé matérielle FIDO ou d’un téléphone mobile). Tout assouplissement de ces considérations nécessite une justification entièrement documentée et un ensemble complet de contrôles compensatoires."
+        },
+        "asvs-6-3-4": {
+            "code": "ASVS-6.3.4",
+            "control": "Sécurité générale de l’authentification",
+            "requirements": "Vérifier que, si l’application inclut plusieurs voies d’authentification, il n’existe pas de voies non documentées et que les contrôles de sécurité et la robustesse d’authentification sont appliqués de manière cohérente."
+        },
+        "asvs-6-3-5": {
+            "code": "ASVS-6.3.5",
+            "control": "Sécurité générale de l’authentification",
+            "requirements": "Vérifier que les utilisateurs sont informés des tentatives d’authentification suspectes (réussies ou échouées). Cela peut inclure des tentatives depuis un emplacement ou un client inhabituel, une authentification partiellement réussie (un seul facteur sur plusieurs), une tentative après une longue période d’inactivité ou une authentification réussie après plusieurs tentatives infructueuses."
+        },
+        "asvs-6-3-6": {
+            "code": "ASVS-6.3.6",
+            "control": "Sécurité générale de l’authentification",
+            "requirements": "Vérifier que l’e-mail n’est pas utilisé comme mécanisme d’authentification à un facteur ni à plusieurs facteurs."
+        },
+        "asvs-6-3-7": {
+            "code": "ASVS-6.3.7",
+            "control": "Sécurité générale de l’authentification",
+            "requirements": "Vérifier que les utilisateurs sont informés après des mises à jour des informations d’authentification, telles que des réinitialisations d’identifiants ou la modification du nom d’utilisateur ou de l’adresse e-mail."
+        },
+        "asvs-6-3-8": {
+            "code": "ASVS-6.3.8",
+            "control": "Sécurité générale de l’authentification",
+            "requirements": "Vérifier qu’il n’est pas possible de déduire les utilisateurs valides à partir d’échecs de défis d’authentification, par exemple via les messages d’erreur, les codes de réponse HTTP ou des temps de réponse différents. Les fonctionnalités d’inscription et de « mot de passe oublié » doivent également offrir cette protection."
+        },
+        "asvs-6-4-1": {
+            "code": "ASVS-6.4.1",
+            "control": "Cycle de vie et récupération des facteurs d’authentification",
+            "requirements": "Vérifier que les mots de passe initiaux ou codes d’activation générés par le système sont générés de manière aléatoire et sécurisée, respectent la politique de mot de passe existante et expirent après une courte période ou après leur première utilisation. Ces secrets initiaux ne doivent pas être autorisés à devenir le mot de passe à long terme."
+        },
+        "asvs-6-4-2": {
+            "code": "ASVS-6.4.2",
+            "control": "Cycle de vie et récupération des facteurs d’authentification",
+            "requirements": "Vérifier qu’il n’existe pas d’indices de mot de passe ni d’authentification basée sur la connaissance (les « questions secrètes »)."
+        },
+        "asvs-6-4-3": {
+            "code": "ASVS-6.4.3",
+            "control": "Cycle de vie et récupération des facteurs d’authentification",
+            "requirements": "Vérifier qu’un processus sécurisé de réinitialisation d’un mot de passe oublié est mis en œuvre et qu’il ne contourne aucun mécanisme d’authentification multifacteur activé."
+        },
+        "asvs-6-4-4": {
+            "code": "ASVS-6.4.4",
+            "control": "Cycle de vie et récupération des facteurs d’authentification",
+            "requirements": "Vérifier que si un facteur d’authentification multifacteur est perdu, une preuve d’identité (identity proofing) est réalisée au même niveau que lors de l’enrôlement."
+        },
+        "asvs-6-4-5": {
+            "code": "ASVS-6.4.5",
+            "control": "Cycle de vie et récupération des facteurs d’authentification",
+            "requirements": "Vérifier que des instructions de renouvellement pour les mécanismes d’authentification qui expirent sont envoyées suffisamment tôt pour être suivies avant l’expiration de l’ancien mécanisme, en configurant des rappels automatisés si nécessaire."
+        },
+        "asvs-6-4-6": {
+            "code": "ASVS-6.4.6",
+            "control": "Cycle de vie et récupération des facteurs d’authentification",
+            "requirements": "Vérifier que les utilisateurs administrateurs peuvent initier le processus de réinitialisation du mot de passe pour l’utilisateur, mais que cela ne leur permet pas de modifier ni de choisir le mot de passe de l’utilisateur. Cela évite une situation où ils connaîtraient le mot de passe de l’utilisateur."
+        },
+        "asvs-6-5-1": {
+            "code": "ASVS-6.5.1",
+            "control": "Exigences générales d’authentification multifacteur",
+            "requirements": "Vérifier que les secrets de secours (lookup secrets), les demandes/codes d’authentification hors bande, et les mots de passe à usage unique basés sur le temps (TOTP) ne sont utilisables avec succès qu’une seule fois."
+        },
+        "asvs-6-5-2": {
+            "code": "ASVS-6.5.2",
+            "control": "Exigences générales d’authentification multifacteur",
+            "requirements": "Vérifier que, lorsqu’ils sont stockés dans le backend de l’application, les secrets de secours ayant moins de 112 bits d’entropie (19 caractères alphanumériques aléatoires ou 34 chiffres aléatoires) sont hachés avec un algorithme de hachage approuvé pour le stockage de mots de passe, incorporant un sel aléatoire de 32 bits. Une fonction de hachage standard peut être utilisée si le secret a 112 bits d’entropie ou plus."
+        },
+        "asvs-6-5-3": {
+            "code": "ASVS-6.5.3",
+            "control": "Exigences générales d’authentification multifacteur",
+            "requirements": "Vérifier que les secrets de secours, les codes d’authentification hors bande et les graines de mots de passe à usage unique basés sur le temps (TOTP) sont générés à l’aide d’un générateur pseudo-aléatoire cryptographiquement sûr (CSPRNG) afin d’éviter des valeurs prévisibles."
+        },
+        "asvs-6-5-4": {
+            "code": "ASVS-6.5.4",
+            "control": "Exigences générales d’authentification multifacteur",
+            "requirements": "Vérifier que les secrets de secours et les codes d’authentification hors bande ont un minimum de 20 bits d’entropie (en général 4 caractères alphanumériques aléatoires ou 6 chiffres aléatoires suffisent)."
+        },
+        "asvs-6-5-5": {
+            "code": "ASVS-6.5.5",
+            "control": "Exigences générales d’authentification multifacteur",
+            "requirements": "Vérifier que les demandes/codes/jetons d’authentification hors bande, ainsi que les mots de passe à usage unique basés sur le temps (TOTP), ont une durée de vie définie. Les demandes hors bande doivent avoir une durée de vie maximale de 10 minutes et, pour les TOTP, une durée de vie maximale de 30 secondes."
+        },
+        "asvs-6-5-6": {
+            "code": "ASVS-6.5.6",
+            "control": "Exigences générales d’authentification multifacteur",
+            "requirements": "Vérifier que tout facteur d’authentification (y compris les dispositifs physiques) peut être révoqué en cas de vol ou de perte."
+        },
+        "asvs-6-5-7": {
+            "code": "ASVS-6.5.7",
+            "control": "Exigences générales d’authentification multifacteur",
+            "requirements": "Vérifier que les mécanismes d’authentification biométrique ne sont utilisés que comme facteurs secondaires, conjointement avec soit quelque chose que vous possédez, soit quelque chose que vous savez."
+        },
+        "asvs-6-5-8": {
+            "code": "ASVS-6.5.8",
+            "control": "Exigences générales d’authentification multifacteur",
+            "requirements": "Vérifier que les mots de passe à usage unique basés sur le temps (TOTP) sont vérifiés à partir d’une source de temps issue d’un service de confiance et non à partir d’un temps non fiable ou fourni par le client."
+        },
+        "asvs-6-6-1": {
+            "code": "ASVS-6.6.1",
+            "control": "Mécanismes d’authentification hors bande",
+            "requirements": "Vérifier que les mécanismes d’authentification utilisant le réseau téléphonique commuté public (PSTN) pour délivrer des OTP via appel ou SMS ne sont proposés que lorsque le numéro de téléphone a été préalablement validé, que des méthodes alternatives plus robustes (comme les TOTP) sont aussi proposées, et que le service informe les utilisateurs de leurs risques de sécurité. Pour les applications L3, le téléphone et le SMS ne doivent pas être disponibles."
+        },
+        "asvs-6-6-2": {
+            "code": "ASVS-6.6.2",
+            "control": "Mécanismes d’authentification hors bande",
+            "requirements": "Vérifier que les demandes/codes/jetons d’authentification hors bande sont liés à la demande d’authentification d’origine pour laquelle ils ont été générés et ne sont pas utilisables pour une demande antérieure ou ultérieure."
+        },
+        "asvs-6-6-3": {
+            "code": "ASVS-6.6.3",
+            "control": "Mécanismes d’authentification hors bande",
+            "requirements": "Vérifier qu’un mécanisme d’authentification hors bande basé sur un code est protégé contre les attaques par force brute via une limitation de débit. Envisager également d’utiliser un code ayant au moins 64 bits d’entropie."
+        },
+        "asvs-6-6-4": {
+            "code": "ASVS-6.6.4",
+            "control": "Mécanismes d’authentification hors bande",
+            "requirements": "Vérifier que, lorsque des notifications push sont utilisées pour l’authentification multifacteur, une limitation de débit est utilisée pour prévenir les attaques de type push bombing. Le « number matching » peut aussi atténuer ce risque."
+        },
+        "asvs-6-7-1": {
+            "code": "ASVS-6.7.1",
+            "control": "Mécanisme d’authentification cryptographique",
+            "requirements": "Vérifier que les certificats utilisés pour vérifier des assertions d’authentification cryptographique sont stockés de manière à les protéger contre toute modification."
+        },
+        "asvs-6-7-2": {
+            "code": "ASVS-6.7.2",
+            "control": "Mécanisme d’authentification cryptographique",
+            "requirements": "Vérifier que le nonce de challenge a une longueur d’au moins 64 bits et qu’il est statistiquement unique ou unique sur la durée de vie du dispositif cryptographique."
+        },
+        "asvs-6-8-1": {
+            "code": "ASVS-6.8.1",
+            "control": "Authentification via un fournisseur d’identité",
+            "requirements": "Vérifier que, si l’application prend en charge plusieurs fournisseurs d’identité (IdP), l’identité de l’utilisateur ne peut pas être usurpée via un autre IdP pris en charge (par exemple en utilisant le même identifiant utilisateur). La mitigation standard consiste à enregistrer et identifier l’utilisateur en utilisant une combinaison de l’ID de l’IdP (servant d’espace de noms) et de l’ID de l’utilisateur dans l’IdP."
+        },
+        "asvs-6-8-2": {
+            "code": "ASVS-6.8.2",
+            "control": "Authentification via un fournisseur d’identité",
+            "requirements": "Vérifier que la présence et l’intégrité des signatures numériques sur les assertions d’authentification (par exemple sur des JWT ou des assertions SAML) sont toujours validées, en rejetant toute assertion non signée ou avec une signature invalide."
+        },
+        "asvs-6-8-3": {
+            "code": "ASVS-6.8.3",
+            "control": "Authentification via un fournisseur d’identité",
+            "requirements": "Vérifier que les assertions SAML sont traitées de manière unique et utilisées une seule fois durant leur période de validité afin de prévenir les attaques par rejeu."
+        },
+        "asvs-6-8-4": {
+            "code": "ASVS-6.8.4",
+            "control": "Authentification via un fournisseur d’identité",
+            "requirements": "Vérifier que, si une application utilise un fournisseur d’identité (IdP) séparé et attend une robustesse d’authentification, des méthodes ou une récence spécifiques pour certaines fonctions, l’application le vérifie à l’aide des informations renvoyées par l’IdP. Par exemple, si OIDC est utilisé, cela peut se faire en validant des claims de l’ID Token tels que 'acr', 'amr' et 'auth_time' (si présents). Si l’IdP ne fournit pas ces informations, l’application doit disposer d’une approche de repli documentée qui suppose que le mécanisme d’authentification minimal a été utilisé (par exemple authentification à un facteur via identifiant et mot de passe)."
+        },
+        "asvs-7-1-1": {
+            "code": "ASVS-7.1.1",
+            "control": "Documentation de la gestion des sessions",
+            "requirements": "Vérifier que les délais d’inactivité de session et la durée de vie maximale absolue de session sont documentés, appropriés en combinaison avec d’autres contrôles, et que la documentation inclut une justification pour toute déviation des exigences de ré-authentification de la NIST SP 800-63B."
+        },
+        "asvs-7-1-2": {
+            "code": "ASVS-7.1.2",
+            "control": "Documentation de la gestion des sessions",
+            "requirements": "Vérifier que la documentation définit le nombre de sessions simultanées (parallèles) autorisées pour un compte ainsi que les comportements et actions attendus lorsque le nombre maximal de sessions actives est atteint."
+        },
+        "asvs-7-1-3": {
+            "code": "ASVS-7.1.3",
+            "control": "Documentation de la gestion des sessions",
+            "requirements": "Vérifier que tous les systèmes qui créent et gèrent des sessions utilisateur dans le cadre d’un écosystème de gestion d’identité fédérée (comme des systèmes SSO) sont documentés, ainsi que les contrôles permettant de coordonner les durées de vie de session, la terminaison et toute autre condition nécessitant une ré-authentification."
+        },
+        "asvs-7-2-1": {
+            "code": "ASVS-7.2.1",
+            "control": "Sécurité fondamentale de la gestion des sessions",
+            "requirements": "Vérifier que l’application effectue toute vérification des jetons de session à l’aide d’un service backend de confiance."
+        },
+        "asvs-7-2-2": {
+            "code": "ASVS-7.2.2",
+            "control": "Sécurité fondamentale de la gestion des sessions",
+            "requirements": "Vérifier que l’application utilise, pour la gestion de session, des jetons autoportés (self-contained) ou des jetons de référence générés dynamiquement, c.-à-d. sans utiliser de secrets ou clés API statiques."
+        },
+        "asvs-7-2-3": {
+            "code": "ASVS-7.2.3",
+            "control": "Sécurité fondamentale de la gestion des sessions",
+            "requirements": "Vérifier que si des jetons de référence sont utilisés pour représenter les sessions utilisateur, ils sont uniques, générés à l’aide d’un générateur pseudo-aléatoire cryptographiquement sûr (CSPRNG) et possèdent au moins 128 bits d’entropie."
+        },
+        "asvs-7-2-4": {
+            "code": "ASVS-7.2.4",
+            "control": "Sécurité fondamentale de la gestion des sessions",
+            "requirements": "Vérifier que l’application génère un nouveau jeton de session lors de l’authentification de l’utilisateur, y compris la ré-authentification, et termine le jeton de session courant."
+        },
+        "asvs-7-3-1": {
+            "code": "ASVS-7.3.1",
+            "control": "Expiration de session",
+            "requirements": "Vérifier qu’il existe un délai d’inactivité imposant une ré-authentification selon l’analyse de risque et les décisions de sécurité documentées."
+        },
+        "asvs-7-3-2": {
+            "code": "ASVS-7.3.2",
+            "control": "Expiration de session",
+            "requirements": "Vérifier qu’il existe une durée de vie maximale absolue de session imposant une ré-authentification selon l’analyse de risque et les décisions de sécurité documentées."
+        },
+        "asvs-7-4-1": {
+            "code": "ASVS-7.4.1",
+            "control": "Fin de session",
+            "requirements": "Vérifier que lorsque la fin de session est déclenchée (par exemple déconnexion ou expiration), l’application interdit toute utilisation ultérieure de la session. Pour des jetons de référence ou des sessions avec état, cela signifie invalider les données de session côté backend. Les applications utilisant des jetons autoportés doivent disposer d’une solution telle que maintenir une liste de jetons terminés, refuser les jetons émis avant une date/heure par utilisateur, ou faire tourner une clé de signature par utilisateur."
+        },
+        "asvs-7-4-2": {
+            "code": "ASVS-7.4.2",
+            "control": "Fin de session",
+            "requirements": "Vérifier que l’application termine toutes les sessions actives lorsqu’un compte utilisateur est désactivé ou supprimé (par exemple départ d’un employé)."
+        },
+        "asvs-7-4-3": {
+            "code": "ASVS-7.4.3",
+            "control": "Fin de session",
+            "requirements": "Vérifier que l’application offre l’option de terminer toutes les autres sessions actives après un changement ou une suppression réussi(e) de tout facteur d’authentification (y compris changement de mot de passe via réinitialisation/récupération et, le cas échéant, mise à jour des paramètres MFA)."
+        },
+        "asvs-7-4-4": {
+            "code": "ASVS-7.4.4",
+            "control": "Fin de session",
+            "requirements": "Vérifier que toutes les pages nécessitant une authentification disposent d’un accès facile et visible à la fonctionnalité de déconnexion."
+        },
+        "asvs-7-4-5": {
+            "code": "ASVS-7.4.5",
+            "control": "Fin de session",
+            "requirements": "Vérifier que les administrateurs applicatifs peuvent terminer les sessions actives pour un utilisateur individuel ou pour tous les utilisateurs."
+        },
+        "asvs-7-5-1": {
+            "code": "ASVS-7.5.1",
+            "control": "Défenses contre l’abus de session",
+            "requirements": "Vérifier que l’application exige une ré-authentification complète avant d’autoriser la modification d’attributs de compte sensibles pouvant affecter l’authentification, tels que l’adresse e-mail, le numéro de téléphone, la configuration MFA ou d’autres informations utilisées pour la récupération de compte."
+        },
+        "asvs-7-5-2": {
+            "code": "ASVS-7.5.2",
+            "control": "Défenses contre l’abus de session",
+            "requirements": "Vérifier que les utilisateurs peuvent voir et (après s’être ré-authentifiés avec au moins un facteur) terminer une partie ou la totalité des sessions actuellement actives."
+        },
+        "asvs-7-5-3": {
+            "code": "ASVS-7.5.3",
+            "control": "Défenses contre l’abus de session",
+            "requirements": "Vérifier que l’application exige une authentification supplémentaire avec au moins un facteur ou une vérification secondaire avant d’effectuer des transactions ou opérations hautement sensibles."
+        },
+        "asvs-7-6-1": {
+            "code": "ASVS-7.6.1",
+            "control": "Ré-authentification fédérée",
+            "requirements": "Vérifier que la durée de vie de session et la terminaison entre les parties s’appuyant (RPs) et les fournisseurs d’identité (IdPs) se comportent comme documenté, en imposant une ré-authentification si nécessaire, par exemple lorsque le délai maximal entre les événements d’authentification de l’IdP est atteint."
+        },
+        "asvs-7-6-2": {
+            "code": "ASVS-7.6.2",
+            "control": "Ré-authentification fédérée",
+            "requirements": "Vérifier que la création d’une session nécessite soit le consentement de l’utilisateur, soit une action explicite, empêchant la création de nouvelles sessions applicatives sans interaction de l’utilisateur."
+        },
+        "asvs-8-1-1": {
+            "code": "ASVS-8.1.1",
+            "control": "Documentation sur l’autorisation",
+            "requirements": "Vérifier que la documentation sur l’autorisation définit des règles pour restreindre l’accès au niveau des fonctions et l’accès spécifique aux données en fonction des permissions du consommateur et des attributs de la ressource."
+        },
+        "asvs-8-1-2": {
+            "code": "ASVS-8.1.2",
+            "control": "Documentation sur l’autorisation",
+            "requirements": "Vérifier que la documentation sur l’autorisation définit des règles de restriction d’accès au niveau des champs (lecture et écriture) en fonction des permissions du consommateur et des attributs de la ressource. Note : ces règles peuvent dépendre d’autres valeurs d’attribut de l’objet de données concerné, comme son état ou son statut."
+        },
+        "asvs-8-1-3": {
+            "code": "ASVS-8.1.3",
+            "control": "Documentation sur l’autorisation",
+            "requirements": "Vérifier que la documentation de l’application définit les attributs environnementaux et contextuels (y compris, sans s’y limiter, l’heure de la journée, la localisation de l’utilisateur, l’adresse IP ou l’appareil) utilisés par l’application pour prendre des décisions de sécurité, y compris celles relatives à l’authentification et à l’autorisation."
+        },
+        "asvs-8-1-4": {
+            "code": "ASVS-8.1.4",
+            "control": "Documentation sur l’autorisation",
+            "requirements": "Vérifier que la documentation sur l’authentification et l’autorisation définit comment les facteurs environnementaux et contextuels sont utilisés dans la prise de décision, en plus de l’autorisation au niveau des fonctions, des données et des champs. Cela doit inclure les attributs évalués, les seuils de risque et les actions prises (par ex. autoriser, challenger, refuser, step-up authentication)."
+        },
+        "asvs-8-2-1": {
+            "code": "ASVS-8.2.1",
+            "control": "Conception générale de l’autorisation",
+            "requirements": "Vérifier que l’application garantit que l’accès au niveau des fonctions est restreint aux consommateurs disposant de permissions explicites."
+        },
+        "asvs-8-2-2": {
+            "code": "ASVS-8.2.2",
+            "control": "Conception générale de l’autorisation",
+            "requirements": "Vérifier que l’application garantit que l’accès spécifique aux données est restreint aux consommateurs disposant de permissions explicites sur des éléments de données précis, afin d’atténuer les risques d’IDOR (Insecure Direct Object Reference) et de BOLA (Broken Object Level Authorization)."
+        },
+        "asvs-8-2-3": {
+            "code": "ASVS-8.2.3",
+            "control": "Conception générale de l’autorisation",
+            "requirements": "Vérifier que l’application garantit que l’accès au niveau des champs est restreint aux consommateurs disposant de permissions explicites sur des champs spécifiques, afin d’atténuer le BOPLA (Broken Object Property Level Authorization)."
+        },
+        "asvs-8-2-4": {
+            "code": "ASVS-8.2.4",
+            "control": "Conception générale de l’autorisation",
+            "requirements": "Vérifier que des contrôles de sécurité adaptatifs basés sur les attributs environnementaux et contextuels du consommateur (tels que l’heure, la localisation, l’adresse IP ou l’appareil) sont mis en œuvre pour les décisions d’authentification et d’autorisation, conformément à la documentation de l’application. Ces contrôles doivent s’appliquer lorsque le consommateur tente de démarrer une nouvelle session et aussi durant une session existante."
+        },
+        "asvs-8-3-1": {
+            "code": "ASVS-8.3.1",
+            "control": "Autorisation au niveau des opérations",
+            "requirements": "Vérifier que l’application applique les règles d’autorisation dans une couche de service de confiance et ne s’appuie pas sur des contrôles qu’un consommateur non fiable pourrait manipuler, comme du JavaScript côté client."
+        },
+        "asvs-8-3-2": {
+            "code": "ASVS-8.3.2",
+            "control": "Autorisation au niveau des opérations",
+            "requirements": "Vérifier que les changements de valeurs sur lesquelles reposent les décisions d’autorisation sont appliqués immédiatement. Lorsque ce n’est pas possible (par ex. en s’appuyant sur des données dans des jetons autoportés), des contrôles compensatoires doivent alerter lorsqu’un consommateur effectue une action alors qu’il n’est plus autorisé et annuler le changement. Note : cette alternative ne mitige pas les fuites d’information."
+        },
+        "asvs-8-3-3": {
+            "code": "ASVS-8.3.3",
+            "control": "Autorisation au niveau des opérations",
+            "requirements": "Vérifier que l’accès à un objet est basé sur les permissions du sujet d’origine (par ex. le consommateur) et non sur celles d’un intermédiaire ou d’un service agissant en son nom. Par exemple, si un consommateur appelle un service web en utilisant un jeton autoporté pour l’authentification, puis que ce service demande des données à un autre service, le second service utilise le jeton du consommateur plutôt qu’un jeton machine-à-machine du premier service pour prendre les décisions de permission."
+        },
+        "asvs-8-4-1": {
+            "code": "ASVS-8.4.1",
+            "control": "Autres considérations d’autorisation",
+            "requirements": "Vérifier que les applications multi-tenant utilisent des contrôles inter-tenant garantissant que les opérations d’un consommateur n’affecteront jamais des tenants avec lesquels il n’a pas de permissions d’interaction."
+        },
+        "asvs-8-4-2": {
+            "code": "ASVS-8.4.2",
+            "control": "Autres considérations d’autorisation",
+            "requirements": "Vérifier que l’accès aux interfaces d’administration intègre plusieurs couches de sécurité, incluant une vérification continue de l’identité du consommateur, une évaluation de la posture de sécurité de l’appareil et une analyse de risque contextuelle, afin que la localisation réseau ou des endpoints de confiance ne soient pas les seuls facteurs d’autorisation, même s’ils peuvent réduire la probabilité d’un accès non autorisé."
+        },
+        "asvs-9-1-1": {
+            "code": "ASVS-9.1.1",
+            "control": "Source et intégrité du jeton",
+            "requirements": "Vérifier que les jetons autoportés sont validés à l’aide de leur signature numérique ou d’un MAC afin de se protéger contre toute altération avant d’accepter le contenu du jeton."
+        },
+        "asvs-9-1-2": {
+            "code": "ASVS-9.1.2",
+            "control": "Source et intégrité du jeton",
+            "requirements": "Vérifier que seuls des algorithmes figurant sur une liste d’autorisation peuvent être utilisés pour créer et vérifier des jetons autoportés dans un contexte donné. La liste doit inclure les algorithmes permis, idéalement uniquement des algorithmes symétriques ou uniquement asymétriques, et ne doit pas inclure l’algorithme 'None'. Si des algorithmes symétriques et asymétriques doivent être pris en charge, des contrôles supplémentaires sont nécessaires pour prévenir la confusion de clés."
+        },
+        "asvs-9-1-3": {
+            "code": "ASVS-9.1.3",
+            "control": "Source et intégrité du jeton",
+            "requirements": "Vérifier que le matériel de clé utilisé pour valider des jetons autoportés provient de sources préconfigurées de confiance pour l’émetteur de jetons, afin d’empêcher des attaquants de spécifier des sources et clés non fiables. Pour les JWT et autres structures JWS, des en-têtes tels que 'jku', 'x5u' et 'jwk' doivent être validés par rapport à une liste d’autorisation de sources de confiance."
+        },
+        "asvs-9-2-1": {
+            "code": "ASVS-9.2.1",
+            "control": "Contenu du jeton",
+            "requirements": "Vérifier que, si une période de validité est présente dans les données du jeton, le jeton et son contenu ne sont acceptés que si le moment de vérification se situe dans cette période. Par exemple, pour les JWT, les claims 'nbf' et 'exp' doivent être vérifiés."
+        },
+        "asvs-9-2-2": {
+            "code": "ASVS-9.2.2",
+            "control": "Contenu du jeton",
+            "requirements": "Vérifier que le service recevant un jeton valide que le jeton est du bon type et destiné à l’usage prévu avant d’accepter son contenu. Par exemple, seuls des access tokens peuvent être acceptés pour les décisions d’autorisation et seuls des ID Tokens peuvent être utilisés pour prouver l’authentification de l’utilisateur."
+        },
+        "asvs-9-2-3": {
+            "code": "ASVS-9.2.3",
+            "control": "Contenu du jeton",
+            "requirements": "Vérifier que le service n’accepte que des jetons destinés à être utilisés avec ce service (audience). Pour les JWT, cela peut être réalisé en validant le claim 'aud' par rapport à une liste d’autorisation définie dans le service."
+        },
+        "asvs-9-2-4": {
+            "code": "ASVS-9.2.4",
+            "control": "Contenu du jeton",
+            "requirements": "Vérifier que, si un émetteur de jetons utilise la même clé privée pour émettre des jetons vers différentes audiences, les jetons émis contiennent une restriction d’audience identifiant de façon unique les audiences visées. Cela empêche la réutilisation d’un jeton avec une audience non prévue. Si l’identifiant d’audience est provisionné dynamiquement, l’émetteur doit valider ces audiences afin de s’assurer qu’elles ne conduisent pas à une usurpation d’audience."
+        },
+        "asvs-10-1-1": {
+            "code": "ASVS-10.1.1",
+            "control": "Sécurité OAuth et OIDC générique",
+            "requirements": "Vérifier que les jetons ne sont envoyés qu’aux composants qui en ont strictement besoin. Par exemple, avec un pattern backend-for-frontend pour des applications JavaScript côté navigateur, les access tokens et refresh tokens ne doivent être accessibles qu’au backend."
+        },
+        "asvs-10-1-2": {
+            "code": "ASVS-10.1.2",
+            "control": "Sécurité OAuth et OIDC générique",
+            "requirements": "Vérifier que le client n’accepte des valeurs provenant du serveur d’autorisation (telles que le code d’autorisation ou l’ID Token) que si ces valeurs résultent d’un flux d’autorisation initié par la même session d’agent utilisateur et la même transaction. Cela exige que des secrets générés côté client, tels que le 'code_verifier' PKCE, le 'state' ou le 'nonce' OIDC, ne soient pas devinables, soient spécifiques à la transaction et soient liés de manière sécurisée à la fois au client et à la session d’agent utilisateur dans laquelle la transaction a été démarrée."
+        },
+        "asvs-10-2-1": {
+            "code": "ASVS-10.2.1",
+            "control": "Client OAuth",
+            "requirements": "Vérifier que, si le flux code est utilisé, le client OAuth dispose d’une protection contre les attaques de falsification de requêtes via le navigateur (CSRF) qui déclenchent des requêtes de jetons, soit en utilisant PKCE, soit en vérifiant le paramètre 'state' envoyé dans la requête d’autorisation."
+        },
+        "asvs-10-2-2": {
+            "code": "ASVS-10.2.2",
+            "control": "Client OAuth",
+            "requirements": "Vérifier que, si le client OAuth peut interagir avec plus d’un serveur d’autorisation, il dispose d’une défense contre les attaques de type mix-up. Par exemple, il peut exiger que le serveur d’autorisation renvoie la valeur du paramètre 'iss' et la valider dans la réponse d’autorisation et la réponse de jetons."
+        },
+        "asvs-10-2-3": {
+            "code": "ASVS-10.2.3",
+            "control": "Client OAuth",
+            "requirements": "Vérifier que le client OAuth ne demande que les scopes requis (ou autres paramètres d’autorisation) dans les requêtes au serveur d’autorisation."
+        },
+        "asvs-10-3-1": {
+            "code": "ASVS-10.3.1",
+            "control": "Serveur de ressources OAuth",
+            "requirements": "Vérifier que le serveur de ressources n’accepte que des access tokens destinés à être utilisés avec ce service (audience). L’audience peut être incluse dans un access token structuré (par ex. le claim 'aud' d’un JWT) ou être vérifiée via l’endpoint d’introspection de jetons."
+        },
+        "asvs-10-3-2": {
+            "code": "ASVS-10.3.2",
+            "control": "Serveur de ressources OAuth",
+            "requirements": "Vérifier que le serveur de ressources applique les décisions d’autorisation sur la base de claims de l’access token définissant l’autorisation déléguée. Si des claims tels que 'sub', 'scope' et 'authorization_details' sont présents, ils doivent faire partie de la décision."
+        },
+        "asvs-10-3-3": {
+            "code": "ASVS-10.3.3",
+            "control": "Serveur de ressources OAuth",
+            "requirements": "Vérifier que si une décision de contrôle d’accès nécessite d’identifier un utilisateur unique à partir d’un access token (JWT ou réponse d’introspection associée), le serveur de ressources identifie l’utilisateur via des claims qui ne peuvent pas être réattribués à d’autres utilisateurs. Typiquement, cela implique d’utiliser une combinaison des claims 'iss' et 'sub'."
+        },
+        "asvs-10-3-4": {
+            "code": "ASVS-10.3.4",
+            "control": "Serveur de ressources OAuth",
+            "requirements": "Vérifier que, si le serveur de ressources exige une robustesse d’authentification, des méthodes ou une récence spécifiques, il vérifie que l’access token présenté satisfait ces contraintes. Par exemple, si présents, en utilisant les claims OIDC 'acr', 'amr' et 'auth_time'."
+        },
+        "asvs-10-3-5": {
+            "code": "ASVS-10.3.5",
+            "control": "Serveur de ressources OAuth",
+            "requirements": "Vérifier que le serveur de ressources empêche l’utilisation de jetons d’accès volés ou la relecture de jetons d’accès (par des parties non autorisées) en exigeant des access tokens liés à l’émetteur (sender-constrained), soit via Mutual TLS pour OAuth 2, soit via OAuth 2 Demonstration of Proof of Possession (DPoP)."
+        },
+        "asvs-10-4-1": {
+            "code": "ASVS-10.4.1",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que le serveur d’autorisation valide les URI de redirection via une liste d’autorisation spécifique au client d’URI préenregistrées, en utilisant une comparaison de chaînes exacte."
+        },
+        "asvs-10-4-2": {
+            "code": "ASVS-10.4.2",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que, si le serveur d’autorisation renvoie le code d’autorisation dans la réponse d’autorisation, il ne peut être utilisé qu’une seule fois pour une requête de jeton. Pour une seconde requête valide avec un code d’autorisation déjà utilisé pour émettre un access token, le serveur d’autorisation doit rejeter la requête de jeton et révoquer tout jeton émis lié à ce code d’autorisation."
+        },
+        "asvs-10-4-3": {
+            "code": "ASVS-10.4.3",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que le code d’autorisation a une durée de vie courte. La durée maximale peut aller jusqu’à 10 minutes pour les applications L1 et L2, et jusqu’à 1 minute pour les applications L3."
+        },
+        "asvs-10-4-4": {
+            "code": "ASVS-10.4.4",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que, pour un client donné, le serveur d’autorisation n’autorise l’usage que des grants nécessaires à ce client. Note : les grants 'token' (Implicit flow) et 'password' (Resource Owner Password Credentials flow) ne doivent plus être utilisés."
+        },
+        "asvs-10-4-5": {
+            "code": "ASVS-10.4.5",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que le serveur d’autorisation atténue les attaques de rejeu de refresh tokens pour les clients publics, de préférence en utilisant des refresh tokens liés à l’émetteur (sender-constrained), c.-à-d. DPoP ou des Certificate-Bound Access Tokens via mutual TLS (mTLS). Pour les applications L1 et L2, une rotation des refresh tokens peut être utilisée. Si la rotation est utilisée, le serveur d’autorisation doit invalider le refresh token après usage et révoquer tous les refresh tokens de cette autorisation si un refresh token déjà utilisé et invalidé est présenté."
+        },
+        "asvs-10-4-6": {
+            "code": "ASVS-10.4.6",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que, si le code grant est utilisé, le serveur d’autorisation atténue les attaques d’interception du code d’autorisation en exigeant PKCE. Pour les requêtes d’autorisation, le serveur d’autorisation doit exiger une valeur 'code_challenge' valide et ne doit pas accepter une valeur 'code_challenge_method' égale à 'plain'. Pour une requête de jeton, il doit exiger la validation du paramètre 'code_verifier'."
+        },
+        "asvs-10-4-7": {
+            "code": "ASVS-10.4.7",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que si le serveur d’autorisation prend en charge l’enregistrement dynamique de clients non authentifiés, il atténue le risque d’applications clientes malveillantes. Il doit valider les métadonnées du client telles que les URI enregistrées, s’assurer du consentement de l’utilisateur et avertir l’utilisateur avant de traiter une requête d’autorisation avec un client non fiable."
+        },
+        "asvs-10-4-8": {
+            "code": "ASVS-10.4.8",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que les refresh tokens ont une expiration absolue, y compris si une expiration glissante (sliding) est appliquée."
+        },
+        "asvs-10-4-9": {
+            "code": "ASVS-10.4.9",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que les refresh tokens et les reference access tokens peuvent être révoqués par un utilisateur autorisé via l’interface utilisateur du serveur d’autorisation, afin d’atténuer le risque de clients malveillants ou de jetons volés."
+        },
+        "asvs-10-4-10": {
+            "code": "ASVS-10.4.10",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que le client confidentiel est authentifié pour les requêtes backchannel entre client et serveur d’autorisation, telles que les requêtes de jeton, les Pushed Authorization Requests (PAR) et les requêtes de révocation de jetons."
+        },
+        "asvs-10-4-11": {
+            "code": "ASVS-10.4.11",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que la configuration du serveur d’autorisation n’assigne au client OAuth que les scopes requis."
+        },
+        "asvs-10-4-12": {
+            "code": "ASVS-10.4.12",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que, pour un client donné, le serveur d’autorisation n’autorise que la valeur de 'response_mode' dont ce client a besoin. Par exemple, en validant cette valeur par rapport aux valeurs attendues, ou en utilisant des Pushed Authorization Requests (PAR) ou une Authorization Request sécurisée par JWT (JAR)."
+        },
+        "asvs-10-4-13": {
+            "code": "ASVS-10.4.13",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que le grant type 'code' est toujours utilisé conjointement avec des Pushed Authorization Requests (PAR)."
+        },
+        "asvs-10-4-14": {
+            "code": "ASVS-10.4.14",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que le serveur d’autorisation n’émet que des access tokens liés au détenteur (Proof-of-Possession), soit via des jetons liés à un certificat utilisant mutual TLS (mTLS), soit via des jetons liés à DPoP (Demonstration of Proof of Possession)."
+        },
+        "asvs-10-4-15": {
+            "code": "ASVS-10.4.15",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que, pour un client côté serveur (qui ne s’exécute pas sur l’appareil de l’utilisateur final), le serveur d’autorisation s’assure que la valeur du paramètre 'authorization_details' provient du backend du client et que l’utilisateur ne l’a pas altérée. Par exemple, en exigeant l’utilisation de PAR ou de JAR."
+        },
+        "asvs-10-4-16": {
+            "code": "ASVS-10.4.16",
+            "control": "Serveur d’autorisation OAuth",
+            "requirements": "Vérifier que le client est confidentiel et que le serveur d’autorisation exige l’utilisation de méthodes fortes d’authentification du client (basées sur la cryptographie à clé publique et résistantes aux attaques par rejeu), telles que mutual TLS ('tls_client_auth', 'self_signed_tls_client_auth') ou un JWT de clé privée ('private_key_jwt')."
+        },
+        "asvs-10-5-1": {
+            "code": "ASVS-10.5.1",
+            "control": "Client OIDC",
+            "requirements": "Vérifier que le client (en tant que relying party) atténue les attaques de rejeu d’ID Token. Par exemple, en s’assurant que le claim 'nonce' de l’ID Token correspond à la valeur 'nonce' envoyée dans la requête d’authentification au fournisseur OpenID (en OAuth2, cela correspond à la requête d’autorisation envoyée au serveur d’autorisation)."
+        },
+        "asvs-10-5-2": {
+            "code": "ASVS-10.5.2",
+            "control": "Client OIDC",
+            "requirements": "Vérifier que le client identifie de manière unique l’utilisateur à partir des claims de l’ID Token, généralement le claim 'sub', qui ne peut pas être réattribué à d’autres utilisateurs (dans le périmètre d’un fournisseur d’identité)."
+        },
+        "asvs-10-5-3": {
+            "code": "ASVS-10.5.3",
+            "control": "Client OIDC",
+            "requirements": "Vérifier que le client rejette les tentatives d’un serveur d’autorisation malveillant d’usurper un autre serveur d’autorisation via les métadonnées. Le client doit rejeter les métadonnées si l’URL d’émetteur (issuer) dans les métadonnées ne correspond pas exactement à l’URL d’émetteur préconfigurée attendue par le client."
+        },
+        "asvs-10-5-4": {
+            "code": "ASVS-10.5.4",
+            "control": "Client OIDC",
+            "requirements": "Vérifier que le client valide que l’ID Token est destiné à être utilisé par ce client (audience) en vérifiant que le claim 'aud' du jeton est égal à la valeur 'client_id' du client."
+        },
+        "asvs-10-5-5": {
+            "code": "ASVS-10.5.5",
+            "control": "Client OIDC",
+            "requirements": "Vérifier que, lors de l’utilisation du back-channel logout OIDC, la relying party atténue le déni de service par déconnexion forcée et la confusion inter-JWT dans le flux de logout. Le client doit vérifier que le logout token est correctement typé avec la valeur 'logout+jwt', contient le claim 'event' avec le nom de membre correct, et ne contient pas de claim 'nonce'. Note : il est également recommandé d’avoir une expiration courte (par ex. 2 minutes)."
+        },
+        "asvs-10-6-1": {
+            "code": "ASVS-10.6.1",
+            "control": "Fournisseur OpenID",
+            "requirements": "Vérifier que le fournisseur OpenID n’autorise que les valeurs 'code', 'ciba', 'id_token' ou 'id_token code' pour le response mode. Note : 'code' est préférable à 'id_token code' (flux hybride OIDC), et 'token' (tout flux Implicit) ne doit pas être utilisé."
+        },
+        "asvs-10-6-2": {
+            "code": "ASVS-10.6.2",
+            "control": "Fournisseur OpenID",
+            "requirements": "Vérifier que le fournisseur OpenID atténue le déni de service par déconnexion forcée, en obtenant une confirmation explicite de l’utilisateur final ou, le cas échéant, en validant les paramètres de la requête de logout (initiée par la relying party), tels que 'id_token_hint'."
+        },
+        "asvs-10-7-1": {
+            "code": "ASVS-10.7.1",
+            "control": "Gestion du consentement",
+            "requirements": "Vérifier que le serveur d’autorisation s’assure que l’utilisateur consent à chaque requête d’autorisation. Si l’identité du client ne peut pas être assurée, le serveur d’autorisation doit toujours demander explicitement le consentement de l’utilisateur."
+        },
+        "asvs-10-7-2": {
+            "code": "ASVS-10.7.2",
+            "control": "Gestion du consentement",
+            "requirements": "Vérifier que, lorsque le serveur d’autorisation demande le consentement de l’utilisateur, il présente des informations suffisantes et claires sur ce à quoi l’utilisateur consent. Le cas échéant, cela doit inclure la nature des autorisations demandées (souvent basée sur les scopes, le resource server, et les Rich Authorization Requests (RAR) / authorization details), l’identité de l’application autorisée et la durée de vie de ces autorisations."
+        },
+        "asvs-10-7-3": {
+            "code": "ASVS-10.7.3",
+            "control": "Gestion du consentement",
+            "requirements": "Vérifier que l’utilisateur peut consulter, modifier et révoquer les consentements qu’il a accordés via le serveur d’autorisation."
+        },
+        "asvs-11-1-1": {
+            "code": "ASVS-11.1.1",
+            "control": "Inventaire cryptographique et documentation",
+            "requirements": "Vérifier qu’il existe une politique documentée de gestion des clés cryptographiques et un cycle de vie des clés conforme à une norme de gestion des clés telle que la NIST SP 800-57. Cela doit inclure le fait que les clés ne soient pas trop partagées (par exemple, pas avec plus de deux entités pour les secrets partagés et pas avec plus d’une entité pour les clés privées)."
+        },
+        "asvs-11-1-2": {
+            "code": "ASVS-11.1.2",
+            "control": "Inventaire cryptographique et documentation",
+            "requirements": "Vérifier qu’un inventaire cryptographique est réalisé, maintenu, mis à jour régulièrement, et inclut toutes les clés, algorithmes et certificats cryptographiques utilisés par l’application. Il doit aussi documenter où les clés peuvent et ne peuvent pas être utilisées dans le système, ainsi que les types de données qui peuvent et ne peuvent pas être protégés par ces clés."
+        },
+        "asvs-11-1-3": {
+            "code": "ASVS-11.1.3",
+            "control": "Inventaire cryptographique et documentation",
+            "requirements": "Vérifier que des mécanismes de découverte cryptographique sont employés pour identifier toutes les occurrences de cryptographie dans le système, y compris les opérations de chiffrement, de hachage et de signature."
+        },
+        "asvs-11-1-4": {
+            "code": "ASVS-11.1.4",
+            "control": "Inventaire cryptographique et documentation",
+            "requirements": "Vérifier qu’un inventaire cryptographique est maintenu. Il doit inclure un plan documenté décrivant le chemin de migration vers de nouveaux standards cryptographiques, tels que la cryptographie post-quantique, afin de réagir aux menaces futures."
+        },
+        "asvs-11-2-1": {
+            "code": "ASVS-11.2.1",
+            "control": "Mise en œuvre cryptographique sécurisée",
+            "requirements": "Vérifier que des implémentations validées par l’industrie (y compris des bibliothèques et des implémentations accélérées matériellement) sont utilisées pour les opérations cryptographiques."
+        },
+        "asvs-11-2-2": {
+            "code": "ASVS-11.2.2",
+            "control": "Mise en œuvre cryptographique sécurisée",
+            "requirements": "Vérifier que l’application est conçue avec une agilité cryptographique, de sorte que les algorithmes de génération aléatoire, chiffrement authentifié, MAC ou hachage, les longueurs de clé, les rounds, les chiffrements et modes puissent être reconfigurés, mis à niveau ou remplacés à tout moment pour se protéger contre des ruptures cryptographiques. De même, il doit être possible de remplacer les clés et mots de passe et de rechiffrer les données. Cela permettra des mises à niveau transparentes vers la cryptographie post-quantique (PQC) une fois que des implémentations de haute assurance de schémas/standards PQC approuvés seront largement disponibles."
+        },
+        "asvs-11-2-3": {
+            "code": "ASVS-11.2.3",
+            "control": "Mise en œuvre cryptographique sécurisée",
+            "requirements": "Vérifier que toutes les primitives cryptographiques fournissent un minimum de 128 bits de sécurité selon l’algorithme, la taille de clé et la configuration. Par exemple, une clé ECC de 256 bits fournit environ 128 bits de sécurité, alors que RSA nécessite une clé de 3072 bits pour atteindre 128 bits de sécurité."
+        },
+        "asvs-11-2-4": {
+            "code": "ASVS-11.2.4",
+            "control": "Mise en œuvre cryptographique sécurisée",
+            "requirements": "Vérifier que toutes les opérations cryptographiques sont en temps constant, sans opérations de « court-circuit » dans les comparaisons, calculs ou retours, afin d’éviter des fuites d’information."
+        },
+        "asvs-11-2-5": {
+            "code": "ASVS-11.2.5",
+            "control": "Mise en œuvre cryptographique sécurisée",
+            "requirements": "Vérifier que tous les modules cryptographiques échouent de manière sûre et que les erreurs sont gérées d’une façon qui n’introduit pas de vulnérabilités, telles que les attaques Padding Oracle."
+        },
+        "asvs-11-3-1": {
+            "code": "ASVS-11.3.1",
+            "control": "Algorithmes de chiffrement",
+            "requirements": "Vérifier que des modes de bloc non sûrs (par ex. ECB) et des schémas de padding faibles (par ex. PKCS#1 v1.5) ne sont pas utilisés."
+        },
+        "asvs-11-3-2": {
+            "code": "ASVS-11.3.2",
+            "control": "Algorithmes de chiffrement",
+            "requirements": "Vérifier que seuls des chiffrements et modes approuvés, tels qu’AES en mode GCM, sont utilisés."
+        },
+        "asvs-11-3-3": {
+            "code": "ASVS-11.3.3",
+            "control": "Algorithmes de chiffrement",
+            "requirements": "Vérifier que les données chiffrées sont protégées contre toute modification non autorisée, de préférence via une méthode approuvée de chiffrement authentifié, ou en combinant une méthode de chiffrement approuvée avec un algorithme MAC approuvé."
+        },
+        "asvs-11-3-4": {
+            "code": "ASVS-11.3.4",
+            "control": "Algorithmes de chiffrement",
+            "requirements": "Vérifier que les nonces, vecteurs d’initialisation et autres nombres à usage unique ne sont pas utilisés pour plus d’une paire clé de chiffrement / élément de données. La méthode de génération doit être adaptée à l’algorithme utilisé."
+        },
+        "asvs-11-3-5": {
+            "code": "ASVS-11.3.5",
+            "control": "Algorithmes de chiffrement",
+            "requirements": "Vérifier que toute combinaison d’un algorithme de chiffrement et d’un algorithme MAC fonctionne en mode encrypt-then-MAC."
+        },
+        "asvs-11-4-1": {
+            "code": "ASVS-11.4.1",
+            "control": "Hachage et fonctions basées sur le hachage",
+            "requirements": "Vérifier que seules des fonctions de hachage approuvées sont utilisées pour des cas d’usage cryptographiques généraux, y compris signatures numériques, HMAC, KDF et génération de bits aléatoires. Les fonctions de hachage interdites, telles que MD5, ne doivent pas être utilisées à des fins cryptographiques."
+        },
+        "asvs-11-4-2": {
+            "code": "ASVS-11.4.2",
+            "control": "Hachage et fonctions basées sur le hachage",
+            "requirements": "Vérifier que les mots de passe sont stockés à l’aide d’une fonction de dérivation de clé approuvée et coûteuse en calcul (aussi appelée « fonction de hachage de mot de passe »), avec des paramètres configurés selon les recommandations actuelles. Les paramètres doivent équilibrer sécurité et performance afin de rendre les attaques par force brute suffisamment difficiles pour le niveau de sécurité requis."
+        },
+        "asvs-11-4-3": {
+            "code": "ASVS-11.4.3",
+            "control": "Hachage et fonctions basées sur le hachage",
+            "requirements": "Vérifier que les fonctions de hachage utilisées dans les signatures numériques, l’authentification des données ou l’intégrité des données sont résistantes aux collisions et disposent d’une longueur de sortie appropriée. Si la résistance aux collisions est requise, la longueur de sortie doit être d’au moins 256 bits. Si seule la résistance aux attaques de second préimage est requise, la longueur de sortie doit être d’au moins 128 bits."
+        },
+        "asvs-11-4-4": {
+            "code": "ASVS-11.4.4",
+            "control": "Hachage et fonctions basées sur le hachage",
+            "requirements": "Vérifier que l’application utilise des fonctions de dérivation de clé approuvées avec des paramètres d’étirement (key stretching) lors de la dérivation de clés secrètes à partir de mots de passe. Les paramètres utilisés doivent équilibrer sécurité et performance pour empêcher des attaques par force brute de compromettre la clé cryptographique résultante."
+        },
+        "asvs-11-5-1": {
+            "code": "ASVS-11.5.1",
+            "control": "Valeurs aléatoires",
+            "requirements": "Vérifier que tous les nombres et chaînes aléatoires destinés à être impossibles à deviner sont générés à l’aide d’un générateur pseudo-aléatoire cryptographiquement sûr (CSPRNG) et possèdent au moins 128 bits d’entropie. Note : les UUID ne respectent pas cette condition."
+        },
+        "asvs-11-5-2": {
+            "code": "ASVS-11.5.2",
+            "control": "Valeurs aléatoires",
+            "requirements": "Vérifier que le mécanisme de génération de nombres aléatoires utilisé est conçu pour fonctionner de manière sûre, même sous forte charge."
+        },
+        "asvs-11-6-1": {
+            "code": "ASVS-11.6.1",
+            "control": "Cryptographie à clé publique",
+            "requirements": "Vérifier que seuls des algorithmes et modes de fonctionnement cryptographiques approuvés sont utilisés pour la génération et l’amorçage des clés, ainsi que pour la génération et la vérification de signatures numériques. Les algorithmes de génération de clés ne doivent pas générer de clés non sûres vulnérables à des attaques connues, par exemple des clés RSA vulnérables à la factorisation de Fermat."
+        },
+        "asvs-11-6-2": {
+            "code": "ASVS-11.6.2",
+            "control": "Cryptographie à clé publique",
+            "requirements": "Vérifier que des algorithmes cryptographiques approuvés sont utilisés pour l’échange de clés (comme Diffie-Hellman), en veillant à ce que les mécanismes d’échange utilisent des paramètres sûrs. Cela empêchera des attaques sur l’établissement de clés pouvant mener à des attaques adversary-in-the-middle ou à des ruptures cryptographiques."
+        },
+        "asvs-11-7-1": {
+            "code": "ASVS-11.7.1",
+            "control": "Cryptographie des données en cours d’utilisation",
+            "requirements": "Vérifier qu’un chiffrement complet de la mémoire est en place, protégeant les données sensibles pendant leur utilisation et empêchant l’accès par des utilisateurs ou processus non autorisés."
+        },
+        "asvs-11-7-2": {
+            "code": "ASVS-11.7.2",
+            "control": "Cryptographie des données en cours d’utilisation",
+            "requirements": "Vérifier que la minimisation des données garantit qu’une quantité minimale de données est exposée pendant le traitement, et s’assurer que les données sont chiffrées immédiatement après usage ou dès que possible."
+        },
+        "asvs-12-1-1": {
+            "code": "ASVS-12.1.1",
+            "control": "Recommandations générales de sécurité TLS",
+            "requirements": "Vérifier que seules les versions les plus récentes recommandées du protocole TLS sont activées, telles que TLS 1.2 et TLS 1.3. La version la plus récente de TLS doit être l’option privilégiée."
+        },
+        "asvs-12-1-2": {
+            "code": "ASVS-12.1.2",
+            "control": "Recommandations générales de sécurité TLS",
+            "requirements": "Vérifier que seules des suites de chiffrement recommandées sont activées, avec les suites les plus robustes définies comme préférées. Les applications L3 ne doivent prendre en charge que des suites de chiffrement fournissant la confidentialité persistante (forward secrecy)."
+        },
+        "asvs-12-1-3": {
+            "code": "ASVS-12.1.3",
+            "control": "Recommandations générales de sécurité TLS",
+            "requirements": "Vérifier que l’application valide que les certificats clients mTLS sont de confiance avant d’utiliser l’identité du certificat pour l’authentification ou l’autorisation."
+        },
+        "asvs-12-1-4": {
+            "code": "ASVS-12.1.4",
+            "control": "Recommandations générales de sécurité TLS",
+            "requirements": "Vérifier qu’une révocation appropriée des certificats, telle que l’OCSP Stapling (Online Certificate Status Protocol), est activée et configurée."
+        },
+        "asvs-12-1-5": {
+            "code": "ASVS-12.1.5",
+            "control": "Recommandations générales de sécurité TLS",
+            "requirements": "Vérifier que l’Encrypted Client Hello (ECH) est activé dans les paramètres TLS de l’application afin d’éviter l’exposition de métadonnées sensibles, telles que l’indication du nom de serveur (SNI), durant les échanges (handshake) TLS."
+        },
+        "asvs-12-2-1": {
+            "code": "ASVS-12.2.1",
+            "control": "Communication HTTPS avec des services exposés à l’extérieur",
+            "requirements": "Vérifier que TLS est utilisé pour toute connectivité entre un client et des services HTTP exposés à l’extérieur, et qu’il n’y a aucun repli vers des communications non sûres ou non chiffrées."
+        },
+        "asvs-12-2-2": {
+            "code": "ASVS-12.2.2",
+            "control": "Communication HTTPS avec des services exposés à l’extérieur",
+            "requirements": "Vérifier que les services exposés à l’extérieur utilisent des certificats TLS publiquement reconnus (publicly trusted)."
+        },
+        "asvs-12-3-1": {
+            "code": "ASVS-12.3.1",
+            "control": "Sécurité générale des communications service à service",
+            "requirements": "Vérifier qu’un protocole chiffré tel que TLS est utilisé pour toutes les connexions entrantes et sortantes vers et depuis l’application, y compris les systèmes de supervision, outils d’administration, accès distant et SSH, middleware, bases de données, mainframes, systèmes partenaires ou API externes. Le serveur ne doit pas basculer vers des protocoles non sûrs ou non chiffrés."
+        },
+        "asvs-12-3-2": {
+            "code": "ASVS-12.3.2",
+            "control": "Sécurité générale des communications service à service",
+            "requirements": "Vérifier que les clients TLS valident les certificats reçus avant de communiquer avec un serveur TLS."
+        },
+        "asvs-12-3-3": {
+            "code": "ASVS-12.3.3",
+            "control": "Sécurité générale des communications service à service",
+            "requirements": "Vérifier que TLS, ou un autre mécanisme approprié de chiffrement du transport, est utilisé pour toute connectivité entre les services HTTP internes de l’application, et qu’il n’y a aucun repli vers des communications non sûres ou non chiffrées."
+        },
+        "asvs-12-3-4": {
+            "code": "ASVS-12.3.4",
+            "control": "Sécurité générale des communications service à service",
+            "requirements": "Vérifier que les connexions TLS entre services internes utilisent des certificats de confiance. Lorsque des certificats générés en interne ou auto-signés sont utilisés, le service consommateur doit être configuré pour ne faire confiance qu’à des AC internes spécifiques et à des certificats auto-signés spécifiques."
+        },
+        "asvs-12-3-5": {
+            "code": "ASVS-12.3.5",
+            "control": "Sécurité générale des communications service à service",
+            "requirements": "Vérifier que les services communiquant en interne au sein d’un système (communications intra-service) utilisent une authentification forte afin que chaque endpoint soit vérifié. Des méthodes fortes, telles que l’authentification client TLS, doivent être employées pour garantir l’identité, en s’appuyant sur une infrastructure à clé publique et des mécanismes résistants aux attaques par rejeu. Pour les architectures microservices, envisager l’utilisation d’un service mesh afin de simplifier la gestion des certificats et d’améliorer la sécurité."
+        },
+        "asvs-13-1-1": {
+            "code": "ASVS-13.1.1",
+            "control": "Documentation de configuration",
+            "requirements": "Vérifier que tous les besoins de communication de l’application sont documentés. Cela doit inclure les services externes dont dépend l’application ainsi que les cas où un utilisateur final peut fournir une localisation externe à laquelle l’application se connectera ensuite."
+        },
+        "asvs-13-1-2": {
+            "code": "ASVS-13.1.2",
+            "control": "Documentation de configuration",
+            "requirements": "Vérifier que, pour chaque service utilisé par l’application, la documentation définit le nombre maximal de connexions simultanées (par ex. limites de pool de connexions) et le comportement de l’application lorsque cette limite est atteinte, y compris les mécanismes de repli ou de reprise, afin de prévenir les conditions de déni de service."
+        },
+        "asvs-13-1-3": {
+            "code": "ASVS-13.1.3",
+            "control": "Documentation de configuration",
+            "requirements": "Vérifier que la documentation de l’application définit des stratégies de gestion des ressources pour chaque système ou service externe qu’elle utilise (par ex. bases de données, descripteurs de fichiers, threads, connexions HTTP). Cela doit inclure les procédures de libération des ressources, les paramètres de timeout, la gestion des échecs et, lorsque de la logique de retry est implémentée, préciser les limites de retry, les délais et les algorithmes de back-off. Pour les opérations HTTP synchrones requête–réponse, elle doit imposer des timeouts courts et soit désactiver les retries, soit les limiter strictement, afin d’éviter les délais en cascade et l’épuisement des ressources."
+        },
+        "asvs-13-1-4": {
+            "code": "ASVS-13.1.4",
+            "control": "Documentation de configuration",
+            "requirements": "Vérifier que la documentation de l’application définit les secrets critiques pour la sécurité de l’application et un calendrier de rotation, basé sur le modèle de menace de l’organisation et les exigences métier."
+        },
+        "asvs-13-2-1": {
+            "code": "ASVS-13.2.1",
+            "control": "Configuration des communications backend",
+            "requirements": "Vérifier que les communications entre composants backend qui ne prennent pas en charge le mécanisme standard de session utilisateur de l’application, y compris les API, middleware et couches de données, sont authentifiées. L’authentification doit utiliser des comptes de service individuels, des jetons de courte durée ou une authentification basée sur certificats, et non des identifiants immuables tels que mots de passe, clés API, ou comptes partagés avec accès privilégié."
+        },
+        "asvs-13-2-2": {
+            "code": "ASVS-13.2.2",
+            "control": "Configuration des communications backend",
+            "requirements": "Vérifier que les communications entre composants backend, y compris services locaux ou du système d’exploitation, API, middleware et couches de données, s’effectuent avec des comptes auxquels sont attribués les privilèges strictement nécessaires (moindre privilège)."
+        },
+        "asvs-13-2-3": {
+            "code": "ASVS-13.2.3",
+            "control": "Configuration des communications backend",
+            "requirements": "Vérifier que, si un identifiant doit être utilisé pour l’authentification d’un service, l’identifiant utilisé par le consommateur n’est pas un identifiant par défaut (par ex. root/root ou admin/admin)."
+        },
+        "asvs-13-2-4": {
+            "code": "ASVS-13.2.4",
+            "control": "Configuration des communications backend",
+            "requirements": "Vérifier qu’une liste d’autorisation (allowlist) est utilisée pour définir les ressources ou systèmes externes avec lesquels l’application est autorisée à communiquer (par ex. requêtes sortantes, chargements de données, accès fichiers). Cette allowlist peut être implémentée au niveau applicatif, serveur web, pare-feu, ou via une combinaison de plusieurs couches."
+        },
+        "asvs-13-2-5": {
+            "code": "ASVS-13.2.5",
+            "control": "Configuration des communications backend",
+            "requirements": "Vérifier que le serveur web ou applicatif est configuré avec une allowlist des ressources ou systèmes vers lesquels il peut envoyer des requêtes ou depuis lesquels il peut charger des données ou des fichiers."
+        },
+        "asvs-13-2-6": {
+            "code": "ASVS-13.2.6",
+            "control": "Configuration des communications backend",
+            "requirements": "Vérifier que, lorsque l’application se connecte à des services distincts, elle suit la configuration documentée pour chaque connexion, telle que le nombre maximal de connexions parallèles, le comportement lorsque le maximum est atteint, les timeouts de connexion et les stratégies de retry."
+        },
+        "asvs-13-3-1": {
+            "code": "ASVS-13.3.1",
+            "control": "Gestion des secrets",
+            "requirements": "Vérifier qu’une solution de gestion des secrets, telle qu’un coffre de clés (key vault), est utilisée pour créer, stocker, contrôler l’accès et détruire de manière sécurisée les secrets backend. Cela peut inclure mots de passe, matériel de clés, intégrations avec bases de données et systèmes tiers, clés et seeds pour jetons temporels, autres secrets internes et clés API. Les secrets ne doivent pas être inclus dans le code source de l’application ni dans les artefacts de build. Pour une application L3, cela doit impliquer une solution adossée au matériel telle qu’un HSM."
+        },
+        "asvs-13-3-2": {
+            "code": "ASVS-13.3.2",
+            "control": "Gestion des secrets",
+            "requirements": "Vérifier que l’accès aux actifs de secrets respecte le principe du moindre privilège."
+        },
+        "asvs-13-3-3": {
+            "code": "ASVS-13.3.3",
+            "control": "Gestion des secrets",
+            "requirements": "Vérifier que toutes les opérations cryptographiques sont réalisées au moyen d’un module de sécurité isolé (tel qu’un coffre/vault ou un module matériel de sécurité) afin de gérer et protéger le matériel de clé et d’éviter son exposition en dehors du module de sécurité."
+        },
+        "asvs-13-3-4": {
+            "code": "ASVS-13.3.4",
+            "control": "Gestion des secrets",
+            "requirements": "Vérifier que les secrets sont configurés pour expirer et être rotatés conformément à la documentation de l’application."
+        },
+        "asvs-13-4-1": {
+            "code": "ASVS-13.4.1",
+            "control": "Fuite d’informations involontaire",
+            "requirements": "Vérifier que l’application est déployée sans métadonnées de contrôle de version, y compris les dossiers .git ou .svn, ou de manière à rendre ces dossiers inaccessibles à la fois de l’extérieur et pour l’application elle-même."
+        },
+        "asvs-13-4-2": {
+            "code": "ASVS-13.4.2",
+            "control": "Fuite d’informations involontaire",
+            "requirements": "Vérifier que les modes debug sont désactivés pour tous les composants en environnement de production afin d’éviter l’exposition de fonctionnalités de débogage et des fuites d’information."
+        },
+        "asvs-13-4-3": {
+            "code": "ASVS-13.4.3",
+            "control": "Fuite d’informations involontaire",
+            "requirements": "Vérifier que les serveurs web n’exposent pas les listings de répertoires aux clients, sauf intention explicite."
+        },
+        "asvs-13-4-4": {
+            "code": "ASVS-13.4.4",
+            "control": "Fuite d’informations involontaire",
+            "requirements": "Vérifier que l’utilisation de la méthode HTTP TRACE n’est pas prise en charge en production, afin d’éviter des fuites d’information potentielles."
+        },
+        "asvs-13-4-5": {
+            "code": "ASVS-13.4.5",
+            "control": "Fuite d’informations involontaire",
+            "requirements": "Vérifier que la documentation (par ex. pour des API internes) et les endpoints de monitoring ne sont pas exposés, sauf intention explicite."
+        },
+        "asvs-13-4-6": {
+            "code": "ASVS-13.4.6",
+            "control": "Fuite d’informations involontaire",
+            "requirements": "Vérifier que l’application n’expose pas d’informations détaillées de version des composants backend."
+        },
+        "asvs-13-4-7": {
+            "code": "ASVS-13.4.7",
+            "control": "Fuite d’informations involontaire",
+            "requirements": "Vérifier que la couche web est configurée pour ne servir que des fichiers avec des extensions spécifiques afin d’éviter les fuites involontaires d’informations, de configuration et de code source."
+        },
+        "asvs-14-1-1": {
+            "code": "ASVS-14.1.1",
+            "control": "Documentation sur la protection des données",
+            "requirements": "Vérifier que toutes les données sensibles créées et traitées par l’application ont été identifiées et classées en niveaux de protection. Cela inclut les données uniquement encodées et donc facilement décodables, telles que des chaînes Base64 ou la charge utile en clair à l’intérieur d’un JWT. Les niveaux de protection doivent prendre en compte toute réglementation et tout standard de protection des données et de confidentialité auxquels l’application doit se conformer."
+        },
+        "asvs-14-1-2": {
+            "code": "ASVS-14.1.2",
+            "control": "Documentation sur la protection des données",
+            "requirements": "Vérifier que tous les niveaux de protection des données sensibles disposent d’un ensemble documenté d’exigences de protection. Cela doit inclure (sans s’y limiter) des exigences relatives au chiffrement général, à la vérification d’intégrité, à la rétention, à la journalisation des données, aux contrôles d’accès autour des données sensibles dans les logs, au chiffrement au niveau base de données, aux technologies de confidentialité et d’amélioration de la confidentialité, ainsi qu’à d’autres exigences de confidentialité."
+        },
+        "asvs-14-2-1": {
+            "code": "ASVS-14.2.1",
+            "control": "Protection générale des données",
+            "requirements": "Vérifier que les données sensibles ne sont envoyées au serveur que dans le corps du message HTTP ou dans des en-têtes, et que l’URL et la chaîne de requête ne contiennent pas d’informations sensibles, telles qu’une clé API ou un jeton de session."
+        },
+        "asvs-14-2-2": {
+            "code": "ASVS-14.2.2",
+            "control": "Protection générale des données",
+            "requirements": "Vérifier que l’application empêche la mise en cache de données sensibles dans des composants serveur, tels que load balancers et caches applicatifs, ou garantit que les données sont purgées de manière sûre après usage."
+        },
+        "asvs-14-2-3": {
+            "code": "ASVS-14.2.3",
+            "control": "Protection générale des données",
+            "requirements": "Vérifier que les données sensibles définies ne sont pas envoyées à des tiers non fiables (par ex. trackers utilisateurs) afin d’éviter une collecte indésirable en dehors du contrôle de l’application."
+        },
+        "asvs-14-2-4": {
+            "code": "ASVS-14.2.4",
+            "control": "Protection générale des données",
+            "requirements": "Vérifier que les contrôles autour des données sensibles liés au chiffrement, à la vérification d’intégrité, à la rétention, à la façon dont les données sont journalisées, aux contrôles d’accès aux données sensibles dans les logs, et aux technologies de confidentialité et d’amélioration de la confidentialité, sont implémentés comme défini dans la documentation du niveau de protection de ces données."
+        },
+        "asvs-14-2-5": {
+            "code": "ASVS-14.2.5",
+            "control": "Protection générale des données",
+            "requirements": "Vérifier que les mécanismes de cache sont configurés pour ne mettre en cache que des réponses ayant le type de contenu attendu pour cette ressource et ne contenant pas de contenu sensible et dynamique. Le serveur web devrait renvoyer une réponse 404 ou 302 lorsqu’un fichier inexistant est accédé, plutôt que de renvoyer un autre fichier valide. Cela doit prévenir les attaques de type Web Cache Deception."
+        },
+        "asvs-14-2-6": {
+            "code": "ASVS-14.2.6",
+            "control": "Protection générale des données",
+            "requirements": "Vérifier que l’application ne renvoie que le minimum de données sensibles nécessaire au fonctionnement. Par exemple, ne renvoyer que certains chiffres d’un numéro de carte bancaire et pas le numéro complet. Si les données complètes sont nécessaires, elles doivent être masquées dans l’interface utilisateur sauf si l’utilisateur les affiche explicitement."
+        },
+        "asvs-14-2-7": {
+            "code": "ASVS-14.2.7",
+            "control": "Protection générale des données",
+            "requirements": "Vérifier que les informations sensibles sont soumises à une classification de rétention des données, garantissant que les données obsolètes ou inutiles sont supprimées automatiquement, selon un calendrier défini, ou selon les besoins de la situation."
+        },
+        "asvs-14-2-8": {
+            "code": "ASVS-14.2.8",
+            "control": "Protection générale des données",
+            "requirements": "Vérifier que les informations sensibles sont supprimées des métadonnées des fichiers fournis par l’utilisateur, sauf si l’utilisateur consent à leur stockage."
+        },
+        "asvs-14-3-1": {
+            "code": "ASVS-14.3.1",
+            "control": "Protection des données côté client",
+            "requirements": "Vérifier que les données authentifiées sont effacées du stockage côté client, tel que le DOM du navigateur, après la fin du client ou de la session. L’en-tête de réponse HTTP « Clear-Site-Data » peut aider, mais le côté client doit aussi pouvoir nettoyer si la connexion au serveur n’est pas disponible au moment de la fin de la session."
+        },
+        "asvs-14-3-2": {
+            "code": "ASVS-14.3.2",
+            "control": "Protection des données côté client",
+            "requirements": "Vérifier que l’application définit des en-têtes de réponse HTTP anti-cache suffisants (c.-à-d. Cache-Control: no-store) afin que les données sensibles ne soient pas mises en cache dans les navigateurs."
+        },
+        "asvs-14-3-3": {
+            "code": "ASVS-14.3.3",
+            "control": "Protection des données côté client",
+            "requirements": "Vérifier que les données stockées dans le stockage du navigateur (tel que localStorage, sessionStorage, IndexedDB ou les cookies) ne contiennent pas de données sensibles, à l’exception des jetons de session."
+        },
+        "asvs-15-1-1": {
+            "code": "ASVS-15.1.1",
+            "control": "Documentation sur le code sécurisé et l’architecture",
+            "requirements": "Vérifier que la documentation de l’application définit des délais de correction basés sur le risque pour les versions de composants tiers présentant des vulnérabilités, ainsi que pour la mise à jour des bibliothèques en général, afin de minimiser le risque lié à ces composants."
+        },
+        "asvs-15-1-2": {
+            "code": "ASVS-15.1.2",
+            "control": "Documentation sur le code sécurisé et l’architecture",
+            "requirements": "Vérifier qu’un catalogue d’inventaire, tel qu’une nomenclature logicielle (SBOM), est maintenu pour toutes les bibliothèques tierces utilisées, y compris en vérifiant que les composants proviennent de dépôts pré-définis, de confiance et maintenus en continu."
+        },
+        "asvs-15-1-3": {
+            "code": "ASVS-15.1.3",
+            "control": "Documentation sur le code sécurisé et l’architecture",
+            "requirements": "Vérifier que la documentation de l’application identifie les fonctionnalités gourmandes en temps ou en ressources. Cela doit inclure comment prévenir une perte de disponibilité due à la surutilisation de ces fonctionnalités et comment éviter une situation où la construction d’une réponse dure plus longtemps que le délai d’expiration (timeout) du consommateur. Les défenses possibles incluent le traitement asynchrone, l’utilisation de files (queues) et la limitation des processus parallèles par utilisateur et par application."
+        },
+        "asvs-15-1-4": {
+            "code": "ASVS-15.1.4",
+            "control": "Documentation sur le code sécurisé et l’architecture",
+            "requirements": "Vérifier que la documentation de l’application met en évidence les bibliothèques tierces considérées comme des « composants à risque »."
+        },
+        "asvs-15-1-5": {
+            "code": "ASVS-15.1.5",
+            "control": "Documentation sur le code sécurisé et l’architecture",
+            "requirements": "Vérifier que la documentation de l’application met en évidence les parties de l’application où des « fonctionnalités dangereuses » sont utilisées."
+        },
+        "asvs-15-2-1": {
+            "code": "ASVS-15.2.1",
+            "control": "Architecture de sécurité et dépendances",
+            "requirements": "Vérifier que l’application ne contient que des composants qui n’ont pas dépassé les délais documentés de mise à jour et de correction."
+        },
+        "asvs-15-2-2": {
+            "code": "ASVS-15.2.2",
+            "control": "Architecture de sécurité et dépendances",
+            "requirements": "Vérifier que l’application a mis en place des défenses contre la perte de disponibilité due à des fonctionnalités gourmandes en temps ou en ressources, conformément aux décisions de sécurité documentées et aux stratégies définies à cet effet."
+        },
+        "asvs-15-2-3": {
+            "code": "ASVS-15.2.3",
+            "control": "Architecture de sécurité et dépendances",
+            "requirements": "Vérifier que l’environnement de production n’inclut que les fonctionnalités nécessaires au fonctionnement de l’application et n’expose pas de fonctionnalités superflues telles que du code de test, des extraits d’exemple et des fonctionnalités de développement."
+        },
+        "asvs-15-2-4": {
+            "code": "ASVS-15.2.4",
+            "control": "Architecture de sécurité et dépendances",
+            "requirements": "Vérifier que les composants tiers et toutes leurs dépendances transitives proviennent du dépôt attendu, qu’il soit interne ou externe, et qu’il n’existe aucun risque d’attaque de confusion de dépendances (dependency confusion)."
+        },
+        "asvs-15-2-5": {
+            "code": "ASVS-15.2.5",
+            "control": "Architecture de sécurité et dépendances",
+            "requirements": "Vérifier que l’application met en œuvre des protections supplémentaires autour des parties de l’application documentées comme contenant des « fonctionnalités dangereuses » ou utilisant des bibliothèques tierces considérées comme des « composants à risque ». Cela peut inclure des techniques telles que le sandboxing, l’encapsulation, la conteneurisation ou l’isolation au niveau réseau afin de retarder et dissuader les attaquants qui compromettent une partie d’une application de pivoter ailleurs dans l’application."
+        },
+        "asvs-15-3-1": {
+            "code": "ASVS-15.3.1",
+            "control": "Codage défensif",
+            "requirements": "Vérifier que l’application ne renvoie que le sous-ensemble de champs requis d’un objet de données. Par exemple, elle ne doit pas renvoyer l’objet de données entier, car certains champs individuels ne doivent pas être accessibles aux utilisateurs."
+        },
+        "asvs-15-3-2": {
+            "code": "ASVS-15.3.2",
+            "control": "Codage défensif",
+            "requirements": "Vérifier que, lorsque le backend de l’application effectue des appels vers des URL externes, il est configuré pour ne pas suivre les redirections, sauf si cela correspond à une fonctionnalité attendue."
+        },
+        "asvs-15-3-3": {
+            "code": "ASVS-15.3.3",
+            "control": "Codage défensif",
+            "requirements": "Vérifier que l’application dispose de contre-mesures contre les attaques d’affectation de masse (mass assignment) en limitant les champs autorisés par contrôleur et par action ; par exemple, il ne doit pas être possible d’insérer ou de mettre à jour la valeur d’un champ lorsqu’il n’était pas prévu qu’il fasse partie de cette action."
+        },
+        "asvs-15-3-4": {
+            "code": "ASVS-15.3.4",
+            "control": "Codage défensif",
+            "requirements": "Vérifier que tous les composants de proxy et de middleware transmettent correctement l’adresse IP d’origine de l’utilisateur en utilisant des champs de données de confiance qui ne peuvent pas être manipulés par l’utilisateur final, et que l’application et le serveur web utilisent cette valeur correcte pour la journalisation et les décisions de sécurité telles que la limitation de débit, en tenant compte du fait que même l’adresse IP d’origine peut être peu fiable en raison d’IP dynamiques, de VPN ou de pare-feux d’entreprise."
+        },
+        "asvs-15-3-5": {
+            "code": "ASVS-15.3.5",
+            "control": "Codage défensif",
+            "requirements": "Vérifier que l’application s’assure explicitement que les variables sont du type correct et effectue des opérations de comparaison et d’égalité strictes. Ceci afin d’éviter des vulnérabilités de conversion implicite de type (type juggling) ou de confusion de type causées par une supposition du code applicatif sur le type d’une variable."
+        },
+        "asvs-15-3-6": {
+            "code": "ASVS-15.3.6",
+            "control": "Codage défensif",
+            "requirements": "Vérifier que le code JavaScript est écrit de manière à prévenir la pollution de prototype (prototype pollution), par exemple en utilisant Set() ou Map() au lieu de littéraux d’objet."
+        },
+        "asvs-15-3-7": {
+            "code": "ASVS-15.3.7",
+            "control": "Codage défensif",
+            "requirements": "Vérifier que l’application dispose de défenses contre les attaques de pollution des paramètres HTTP, en particulier si le framework applicatif ne fait aucune distinction quant à la source des paramètres de requête (chaîne de requête, paramètres du corps, cookies ou en-têtes)."
+        },
+        "asvs-15-4-1": {
+            "code": "ASVS-15.4.1",
+            "control": "Concurrence sûre",
+            "requirements": "Vérifier que les objets partagés dans le code multithread (tels que caches, fichiers ou objets en mémoire accédés par plusieurs threads) sont accédés de manière sûre en utilisant des types thread-safe et des mécanismes de synchronisation comme des verrous (locks) ou des sémaphores afin d’éviter les conditions de course et la corruption des données."
+        },
+        "asvs-15-4-2": {
+            "code": "ASVS-15.4.2",
+            "control": "Concurrence sûre",
+            "requirements": "Vérifier que les vérifications de l’état d’une ressource, telles que son existence ou ses permissions, et les actions qui en dépendent, sont effectuées comme une seule opération atomique afin d’éviter des conditions de course de type TOCTOU (time-of-check to time-of-use). Par exemple, vérifier si un fichier existe avant de l’ouvrir, ou vérifier l’accès d’un utilisateur avant de l’accorder."
+        },
+        "asvs-15-4-3": {
+            "code": "ASVS-15.4.3",
+            "control": "Concurrence sûre",
+            "requirements": "Vérifier que les verrous sont utilisés de manière cohérente afin d’éviter que les threads restent bloqués, soit en s’attendant mutuellement, soit en réessayant indéfiniment, et que la logique de verrouillage reste dans le code responsable de la gestion de la ressource afin que les verrous ne puissent pas être modifiés involontairement ou de manière malveillante par des classes ou du code externes."
+        },
+        "asvs-15-4-4": {
+            "code": "ASVS-15.4.4",
+            "control": "Concurrence sûre",
+            "requirements": "Vérifier que les politiques d’allocation de ressources empêchent la famine de threads (thread starvation) en assurant un accès équitable aux ressources, par exemple en s’appuyant sur des pools de threads et en permettant aux threads de plus faible priorité de progresser dans un délai raisonnable."
+        },
+        "asvs-16-1-1": {
+            "code": "ASVS-16.1.1",
+            "control": "Documentation sur la journalisation de sécurité",
+            "requirements": "Vérifier qu’un inventaire existe, documentant la journalisation effectuée à chaque couche de la pile technologique de l’application, quels événements sont journalisés, les formats de logs, où ces logs sont stockés, comment ils sont utilisés, comment l’accès est contrôlé et pendant combien de temps les logs sont conservés."
+        },
+        "asvs-16-2-1": {
+            "code": "ASVS-16.2.1",
+            "control": "Journalisation générale",
+            "requirements": "Vérifier que chaque entrée de log inclut les métadonnées nécessaires (telles que quand, où, qui, quoi) permettant une enquête détaillée sur la chronologie lorsqu’un événement se produit."
+        },
+        "asvs-16-2-2": {
+            "code": "ASVS-16.2.2",
+            "control": "Journalisation générale",
+            "requirements": "Vérifier que les sources de temps de tous les composants de journalisation sont synchronisées, et que les horodatages des métadonnées d’événements de sécurité utilisent l’UTC ou incluent un décalage de fuseau horaire explicite. L’UTC est recommandé afin d’assurer la cohérence dans les systèmes distribués et d’éviter toute confusion lors des changements d’heure saisonniers."
+        },
+        "asvs-16-2-3": {
+            "code": "ASVS-16.2.3",
+            "control": "Journalisation générale",
+            "requirements": "Vérifier que l’application ne stocke ni ne diffuse des logs que vers les fichiers et services documentés dans l’inventaire des logs."
+        },
+        "asvs-16-2-4": {
+            "code": "ASVS-16.2.4",
+            "control": "Journalisation générale",
+            "requirements": "Vérifier que les logs peuvent être lus et corrélés par le processeur de logs utilisé, de préférence en adoptant un format de journalisation commun."
+        },
+        "asvs-16-2-5": {
+            "code": "ASVS-16.2.5",
+            "control": "Journalisation générale",
+            "requirements": "Vérifier que, lors de la journalisation de données sensibles, l’application applique des règles de journalisation en fonction du niveau de protection de ces données. Par exemple, certaines données, telles que des identifiants ou des détails de paiement, peuvent être interdites de journalisation. D’autres données, telles que des jetons de session, ne peuvent être journalisées qu’en étant hachées ou masquées, totalement ou partiellement."
+        },
+        "asvs-16-3-1": {
+            "code": "ASVS-16.3.1",
+            "control": "Événements de sécurité",
+            "requirements": "Vérifier que toutes les opérations d’authentification sont journalisées, y compris les tentatives réussies et échouées. Des métadonnées supplémentaires, telles que le type d’authentification ou les facteurs utilisés, devraient également être collectées."
+        },
+        "asvs-16-3-2": {
+            "code": "ASVS-16.3.2",
+            "control": "Événements de sécurité",
+            "requirements": "Vérifier que les tentatives d’autorisation échouées sont journalisées. Pour L3, cela doit inclure la journalisation de toutes les décisions d’autorisation, y compris lorsque des données sensibles sont consultées (sans journaliser les données sensibles elles-mêmes)."
+        },
+        "asvs-16-3-3": {
+            "code": "ASVS-16.3.3",
+            "control": "Événements de sécurité",
+            "requirements": "Vérifier que l’application journalise les événements de sécurité définis dans la documentation et journalise également les tentatives de contournement des contrôles de sécurité, tels que la validation d’entrée, la logique métier et l’anti-automatisation."
+        },
+        "asvs-16-3-4": {
+            "code": "ASVS-16.3.4",
+            "control": "Événements de sécurité",
+            "requirements": "Vérifier que l’application journalise les erreurs inattendues et les défaillances des contrôles de sécurité, telles que des défaillances TLS côté backend."
+        },
+        "asvs-16-4-1": {
+            "code": "ASVS-16.4.1",
+            "control": "Protection des logs",
+            "requirements": "Vérifier que tous les composants de journalisation encodent correctement les données afin de prévenir l’injection dans les logs."
+        },
+        "asvs-16-4-2": {
+            "code": "ASVS-16.4.2",
+            "control": "Protection des logs",
+            "requirements": "Vérifier que les logs sont protégés contre l’accès non autorisé et qu’ils ne peuvent pas être modifiés."
+        },
+        "asvs-16-4-3": {
+            "code": "ASVS-16.4.3",
+            "control": "Protection des logs",
+            "requirements": "Vérifier que les logs sont transmis de manière sécurisée vers un système logiquement séparé pour l’analyse, la détection, l’alerte et l’escalade. L’objectif est de s’assurer que, si l’application est compromise, les logs ne le soient pas."
+        },
+        "asvs-16-5-1": {
+            "code": "ASVS-16.5.1",
+            "control": "Gestion des erreurs",
+            "requirements": "Vérifier qu’un message générique est renvoyé au consommateur lorsqu’une erreur inattendue ou sensible du point de vue de la sécurité se produit, en veillant à ne pas exposer de données internes sensibles du système telles que les traces de pile, les requêtes, les clés secrètes et les jetons."
+        },
+        "asvs-16-5-2": {
+            "code": "ASVS-16.5.2",
+            "control": "Gestion des erreurs",
+            "requirements": "Vérifier que l’application continue de fonctionner de manière sécurisée lorsque l’accès à des ressources externes échoue, par exemple en utilisant des schémas tels que des disjoncteurs (circuit breakers) ou une dégradation progressive (graceful degradation)."
+        },
+        "asvs-16-5-3": {
+            "code": "ASVS-16.5.3",
+            "control": "Gestion des erreurs",
+            "requirements": "Vérifier que l’application échoue de manière élégante et sécurisée, y compris lorsqu’une exception se produit, en empêchant des conditions de type « fail-open » telles que le traitement d’une transaction malgré des erreurs provenant de la logique de validation."
+        },
+        "asvs-16-5-4": {
+            "code": "ASVS-16.5.4",
+            "control": "Gestion des erreurs",
+            "requirements": "Vérifier qu’un gestionnaire d’erreurs « en dernier recours » est défini et intercepte toutes les exceptions non gérées. Cela permet à la fois d’éviter de perdre des détails d’erreurs qui doivent aller dans les fichiers de logs et de s’assurer qu’une erreur ne fasse pas tomber l’ensemble du processus de l’application, entraînant une perte de disponibilité."
+        },
+        "asvs-17-1-1": {
+            "code": "ASVS-17.1.1",
+            "control": "Serveur TURN",
+            "requirements": "Vérifier que le service Traversal Using Relays around NAT (TURN) n’autorise l’accès qu’à des adresses IP qui ne sont pas réservées à des usages particuliers (p. ex. réseaux internes, broadcast, loopback). Noter que cela s’applique aux adresses IPv4 et IPv6."
+        },
+        "asvs-17-1-2": {
+            "code": "ASVS-17.1.2",
+            "control": "Serveur TURN",
+            "requirements": "Vérifier que le service Traversal Using Relays around NAT (TURN) n’est pas vulnérable à l’épuisement des ressources lorsque des utilisateurs légitimes tentent d’ouvrir un grand nombre de ports sur le serveur TURN."
+        },
+        "asvs-17-2-1": {
+            "code": "ASVS-17.2.1",
+            "control": "Médias",
+            "requirements": "Vérifier que la clé du certificat Datagram Transport Layer Security (DTLS) est gérée et protégée conformément à la politique documentée de gestion des clés cryptographiques."
+        },
+        "asvs-17-2-2": {
+            "code": "ASVS-17.2.2",
+            "control": "Médias",
+            "requirements": "Vérifier que le serveur média est configuré pour utiliser et prendre en charge des suites cryptographiques DTLS approuvées ainsi qu’un profil de protection sécurisé pour l’extension DTLS destinée à établir des clés pour le Secure Real-time Transport Protocol (DTLS-SRTP)."
+        },
+        "asvs-17-2-3": {
+            "code": "ASVS-17.2.3",
+            "control": "Médias",
+            "requirements": "Vérifier que l’authentification Secure Real-time Transport Protocol (SRTP) est vérifiée sur le serveur média afin d’empêcher que des attaques d’injection Real-time Transport Protocol (RTP) n’entraînent soit un déni de service, soit l’insertion de médias audio/vidéo dans les flux."
+        },
+        "asvs-17-2-4": {
+            "code": "ASVS-17.2.4",
+            "control": "Médias",
+            "requirements": "Vérifier que le serveur média peut continuer à traiter le trafic média entrant lorsqu’il rencontre des paquets Secure Real-time Transport Protocol (SRTP) malformés."
+        },
+        "asvs-17-2-5": {
+            "code": "ASVS-17.2.5",
+            "control": "Médias",
+            "requirements": "Vérifier que le serveur média peut continuer à traiter le trafic média entrant lors d’une inondation de paquets Secure Real-time Transport Protocol (SRTP) provenant d’utilisateurs légitimes."
+        },
+        "asvs-17-2-6": {
+            "code": "ASVS-17.2.6",
+            "control": "Médias",
+            "requirements": "Vérifier que le serveur média n’est pas vulnérable à la vulnérabilité « ClientHello » Race Condition dans Datagram Transport Layer Security (DTLS), en vérifiant si le serveur média est publiquement connu comme vulnérable ou en réalisant le test de condition de course."
+        },
+        "asvs-17-2-7": {
+            "code": "ASVS-17.2.7",
+            "control": "Médias",
+            "requirements": "Vérifier que tout mécanisme d’enregistrement audio ou vidéo associé au serveur média peut continuer à traiter le trafic média entrant lors d’une inondation de paquets Secure Real-time Transport Protocol (SRTP) provenant d’utilisateurs légitimes."
+        },
+        "asvs-17-2-8": {
+            "code": "ASVS-17.2.8",
+            "control": "Médias",
+            "requirements": "Vérifier que le certificat Datagram Transport Layer Security (DTLS) est vérifié par rapport à l’attribut d’empreinte (fingerprint) du Session Description Protocol (SDP), en interrompant le flux média si la vérification échoue, afin d’assurer l’authenticité du flux média."
+        },
+        "asvs-17-3-1": {
+            "code": "ASVS-17.3.1",
+            "control": "Signalisation",
+            "requirements": "Vérifier que le serveur de signalisation peut continuer à traiter les messages de signalisation légitimes entrants pendant une attaque par inondation. Cela doit être réalisé en mettant en œuvre une limitation de débit (rate limiting) au niveau de la signalisation."
+        },
+        "asvs-17-3-2": {
+            "code": "ASVS-17.3.2",
+            "control": "Signalisation",
+            "requirements": "Vérifier que le serveur de signalisation peut continuer à traiter des messages de signalisation légitimes lorsqu’il rencontre un message de signalisation malformé pouvant provoquer un déni de service. Cela peut inclure la mise en œuvre de la validation des entrées, la gestion sûre des dépassements d’entier, la prévention des débordements de tampon et l’emploi d’autres techniques robustes de gestion des erreurs."
+        }
+    }
+}
