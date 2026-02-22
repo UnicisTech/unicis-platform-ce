@@ -18,6 +18,7 @@ const nextConfig = {
   reactStrictMode: false,
   images: {
     domains: ['platform.unicis.tech'],
+    unoptimized: true,
   },
   i18n, // Localization settings
   async redirects() {
