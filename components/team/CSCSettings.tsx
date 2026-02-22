@@ -41,7 +41,7 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
     return {
       ...option,
       ...(isDisabled
-        ? { isDisabled: false, label: option.label + message }
+        ? { isDisabled: true, label: option.label + message }
         : {}),
     };
   });
