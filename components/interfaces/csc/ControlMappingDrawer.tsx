@@ -7,6 +7,7 @@ import {
   getFrameworkMappings,
   getMappingCount,
 } from '@/lib/csc/framework-mapping-utils';
+import '@/lib/csc/framework-mappings';
 import { getCscControlsProp } from '@/lib/csc';
 
 interface ControlMappingDrawerProps {
