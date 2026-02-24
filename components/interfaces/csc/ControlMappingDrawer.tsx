@@ -112,7 +112,7 @@ export default function ControlMappingDrawer({
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/40 z-40"
+        className="fixed inset-0 bg-black/40 z-50"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -294,7 +294,7 @@ export default function ControlMappingDrawer({
                                   {controlName && (
                                     <p className="text-xs font-semibold text-base-content leading-snug">
                                       {code !== mappedId
-                                        ? `${code}: ${controlName}`
+                                        ? `${controlName}`
                                         : controlName}
                                     </p>
                                   )}
