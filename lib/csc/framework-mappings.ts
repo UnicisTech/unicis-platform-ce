@@ -7467,6 +7467,564 @@ const frameworkMappings: FrameworkMappings = {
       },
     },
 
+
+  // ─── GDPR controls (manually mapped) ─────────────────────────────
+
+  // Notice & Consent
+  'gdpr-art-12-13': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-31', 'iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-gv-po-01', 'nist-csf-v2-gv-po-02', 'nist-csf-v2-gv-oc-03'],
+        soc2v2: ['soc2-v2-c1-1-1', 'soc2-v2-c1-1-2'],
+      },
+    },
+  'gdpr-art-13-14': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-31', 'iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-gv-po-01', 'nist-csf-v2-gv-po-02', 'nist-csf-v2-gv-oc-03'],
+        soc2v2: ['soc2-v2-c1-1-1', 'soc2-v2-c1-1-2'],
+      },
+    },
+  'gdpr-art-7-12': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-31', 'iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-gv-po-01', 'nist-csf-v2-gv-po-02'],
+      },
+    },
+  'gdpr-art-7-banner': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-gv-po-02'],
+      },
+    },
+  'gdpr-art-7-consent-obtain': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-gv-po-02'],
+      },
+    },
+  'gdpr-art-7-consent-record': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-33', 'iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-18-1-3', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-gv-po-02', 'nist-csf-v2-id-am-08'],
+      },
+    },
+  'gdpr-art-8-consent-obtain-withdrawal': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-gv-po-02'],
+      },
+    },
+  'gdpr-art-8-parental-consent': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-gv-po-02'],
+      },
+    },
+
+  // Data Management
+  'gdpr-art-30-personal-data-inventory': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-9', 'iso-2022-a-5-31', 'iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-8-1-1', 'iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-id-am-01', 'nist-csf-v2-id-am-02', 'nist-csf-v2-id-am-05', 'nist-csf-v2-id-am-08'],
+        cisv81: ['cisv81-1-1', 'cisv81-3-1'],
+        soc2v2: ['soc2-v2-c1-1-1', 'soc2-v2-c1-1-2'],
+        'c5_2020': ['c5-2020-am-01', 'c5-2020-am-05', 'c5-2020-pi-01', 'c5-2020-pi-02'],
+      },
+    },
+  'gdpr-art-5-purpose-limitation': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-31', 'iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-gv-po-02', 'nist-csf-v2-pr-ds-01'],
+        cisv81: ['cisv81-3-1'],
+        'c5_2020': ['c5-2020-pi-01', 'c5-2020-pi-02'],
+      },
+    },
+  'gdpr-art-5-17-18-21-data-minimization': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-31', 'iso-2022-a-5-34', 'iso-2022-a-8-11'],
+        '2013': ['iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-pr-ds-01', 'nist-csf-v2-pr-ds-10'],
+        cisv81: ['cisv81-3-1', 'cisv81-3-3'],
+        'c5_2020': ['c5-2020-pi-01', 'c5-2020-pi-02', 'c5-2020-pi-03'],
+      },
+    },
+  'gdpr-art-5-retention-timelines': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-31', 'iso-2022-a-5-33', 'iso-2022-a-8-10'],
+        '2013': ['iso-2013-a-18-1-1', 'iso-2013-a-18-1-3', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-pr-ds-01', 'nist-csf-v2-pr-ds-10'],
+        cisv81: ['cisv81-3-3', 'cisv81-4-11'],
+        soc2v2: ['soc2-v2-c1-2-1', 'soc2-v2-c1-2-2'],
+        'c5_2020': ['c5-2020-pi-02', 'c5-2020-pi-03'],
+      },
+    },
+  'gdpr-art-32-insights-data-aggregation': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-34', 'iso-2022-a-8-11'],
+        '2013': ['iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-pr-ds-01'],
+        cisv81: ['cisv81-3-1', 'cisv81-3-3'],
+        'c5_2020': ['c5-2020-pi-01', 'c5-2020-pi-02'],
+      },
+    },
+  'gdpr-art-15-anonymization': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-34', 'iso-2022-a-8-11'],
+        '2013': ['iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-pr-ds-01', 'nist-csf-v2-pr-ds-10'],
+        cisv81: ['cisv81-3-3', 'cisv81-3-11'],
+        'c5_2020': ['c5-2020-pi-01', 'c5-2020-pi-02', 'c5-2020-pi-03'],
+      },
+    },
+  'gdpr-art-5-16-19-accuracy-update': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-31', 'iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-pr-ds-01'],
+      },
+    },
+
+  // Data Subject Rights
+  'gdpr-art-15-access': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-31', 'iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-pr-aa-01', 'nist-csf-v2-gv-po-02'],
+      },
+    },
+  'gdpr-art-17-deletion-restriction-etc': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-31', 'iso-2022-a-5-34', 'iso-2022-a-8-10'],
+        '2013': ['iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-pr-ds-01', 'nist-csf-v2-pr-ds-10'],
+        cisv81: ['cisv81-3-3', 'cisv81-4-11'],
+        soc2v2: ['soc2-v2-c1-2-1', 'soc2-v2-c1-2-2'],
+        'c5_2020': ['c5-2020-pi-02', 'c5-2020-pi-03'],
+      },
+    },
+
+  // Accountability
+  'gdpr-art-24-responsibility-accountability': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-2', 'iso-2022-a-5-4', 'iso-2022-a-5-31'],
+        '2013': ['iso-2013-a-6-1-1', 'iso-2013-a-7-2-1', 'iso-2013-a-18-1-1'],
+        nistcsfv2: ['nist-csf-v2-gv-rm-01', 'nist-csf-v2-gv-rm-02', 'nist-csf-v2-gv-rr-01'],
+        cisv81: ['cisv81-17-1'],
+        soc2v2: ['soc2-v2-cc1-1-1', 'soc2-v2-cc1-2-1', 'soc2-v2-cc1-3-1'],
+      },
+    },
+  'gdpr-art-24-data-protection-policy': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-1', 'iso-2022-a-5-31', 'iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-5-1-1', 'iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-gv-po-01', 'nist-csf-v2-gv-po-02'],
+        cisv81: ['cisv81-17-1'],
+        soc2v2: ['soc2-v2-cc1-1-1', 'soc2-v2-cc1-2-1'],
+        'c5_2020': ['c5-2020-pi-01', 'c5-2020-pi-02'],
+      },
+    },
+  'gdpr-art-24-training-awareness': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-6-3'],
+        '2013': ['iso-2013-a-7-2-2'],
+        nistcsfv2: ['nist-csf-v2-pr-at-01', 'nist-csf-v2-pr-at-02'],
+        cisv81: ['cisv81-14-1', 'cisv81-14-2', 'cisv81-14-3'],
+        soc2v2: ['soc2-v2-cc1-4-1', 'soc2-v2-cc1-4-2'],
+        'c5_2020': ['c5-2020-hr-03'],
+      },
+    },
+  'gdpr-art-24-monitoring-review': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-35', 'iso-2022-a-5-36'],
+        '2013': ['iso-2013-a-18-2-1', 'iso-2013-a-18-2-2'],
+        nistcsfv2: ['nist-csf-v2-id-im-01', 'nist-csf-v2-id-im-02', 'nist-csf-v2-gv-rm-01'],
+        cisv81: ['cisv81-18-1', 'cisv81-18-2'],
+        soc2v2: ['soc2-v2-cc4-1-1', 'soc2-v2-cc4-2-1'],
+      },
+    },
+  'gdpr-art-30-records-of-processing-activities': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-9', 'iso-2022-a-5-31', 'iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-8-1-1', 'iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-id-am-01', 'nist-csf-v2-id-am-02', 'nist-csf-v2-id-am-08'],
+        cisv81: ['cisv81-1-1', 'cisv81-3-1'],
+        soc2v2: ['soc2-v2-c1-1-1', 'soc2-v2-c1-1-2'],
+        'c5_2020': ['c5-2020-am-01', 'c5-2020-pi-01'],
+      },
+    },
+  'gdpr-art-35-data-protection-impact-assessment': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-8', 'iso-2022-a-5-31', 'iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-8-2-1', 'iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-id-ra-03', 'nist-csf-v2-gv-rm-01', 'nist-csf-v2-gv-rm-02'],
+        cisv81: ['cisv81-18-1'],
+        soc2v2: ['soc2-v2-cc3-1-1', 'soc2-v2-cc3-2-1'],
+        'c5_2020': ['c5-2020-pi-01', 'c5-2020-pi-02'],
+      },
+    },
+  'gdpr-art-36-prior-consultation': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-5', 'iso-2022-a-5-31'],
+        '2013': ['iso-2013-a-6-1-3', 'iso-2013-a-18-1-1'],
+        nistcsfv2: ['nist-csf-v2-gv-oc-01', 'nist-csf-v2-gv-rm-01'],
+      },
+    },
+  'gdpr-art-37-dpo-accessibility': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-2', 'iso-2022-a-5-31'],
+        '2013': ['iso-2013-a-6-1-1', 'iso-2013-a-18-1-1'],
+        nistcsfv2: ['nist-csf-v2-gv-rr-01'],
+      },
+    },
+
+  // Security
+  'gdpr-art-25-data-protection-by-design': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-8', 'iso-2022-a-5-34', 'iso-2022-a-8-25', 'iso-2022-a-8-27'],
+        '2013': ['iso-2013-a-14-1-1', 'iso-2013-a-14-2-1', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-pr-ps-06', 'nist-csf-v2-id-ra-03'],
+        cisv81: ['cisv81-16-1', 'cisv81-16-14'],
+        soc2v2: ['soc2-v2-cc8-1-1', 'soc2-v2-cc8-1-4'],
+        'c5_2020': ['c5-2020-dev-01', 'c5-2020-dev-02', 'c5-2020-pi-01'],
+      },
+    },
+  'gdpr-art-25-data-protection-by-default': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-15', 'iso-2022-a-5-18', 'iso-2022-a-5-34'],
+        '2013': ['iso-2013-a-9-2-6', 'iso-2013-a-18-1-4'],
+        nistcsfv2: ['nist-csf-v2-pr-aa-05', 'nist-csf-v2-pr-ds-01'],
+        cisv81: ['cisv81-3-1', 'cisv81-5-4'],
+        'c5_2020': ['c5-2020-idm-01', 'c5-2020-pi-01', 'c5-2020-pi-02'],
+      },
+    },
+  'gdpr-art-27-representative': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-2', 'iso-2022-a-5-31'],
+        '2013': ['iso-2013-a-6-1-1', 'iso-2013-a-18-1-1'],
+        nistcsfv2: ['nist-csf-v2-gv-rr-01'],
+      },
+    },
+  'gdpr-art-28-processor-contracts': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-19', 'iso-2022-a-5-20', 'iso-2022-a-5-31'],
+        '2013': ['iso-2013-a-13-2-4', 'iso-2013-a-15-1-1', 'iso-2013-a-15-1-2', 'iso-2013-a-18-1-1'],
+        nistcsfv2: ['nist-csf-v2-gv-sc-01', 'nist-csf-v2-gv-sc-06'],
+        cisv81: ['cisv81-15-1', 'cisv81-15-2'],
+        soc2v2: ['soc2-v2-cc9-2'],
+        'c5_2020': ['c5-2020-sp-01', 'c5-2020-sso-01'],
+      },
+    },
+  'gdpr-art-31-cooperation-with-authorities': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-5', 'iso-2022-a-5-31'],
+        '2013': ['iso-2013-a-6-1-3', 'iso-2013-a-18-1-1'],
+        nistcsfv2: ['nist-csf-v2-gv-oc-01', 'nist-csf-v2-rs-co-03'],
+      },
+    },
+  'gdpr-art-32-access-restriction': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-15', 'iso-2022-a-5-18', 'iso-2022-a-8-2', 'iso-2022-a-8-3'],
+        '2013': ['iso-2013-a-9-1-1', 'iso-2013-a-9-2-3', 'iso-2013-a-9-4-1'],
+        nistcsfv2: ['nist-csf-v2-pr-aa-01', 'nist-csf-v2-pr-aa-02', 'nist-csf-v2-pr-aa-05'],
+        cisv81: ['cisv81-5-1', 'cisv81-5-3', 'cisv81-6-1'],
+        soc2v2: ['soc2-v2-cc6-1-1', 'soc2-v2-cc6-1-2', 'soc2-v2-cc6-3-1', 'soc2-v2-cc6-3-2'],
+        'c5_2020': ['c5-2020-idm-01', 'c5-2020-idm-02', 'c5-2020-idm-03'],
+      },
+    },
+  'gdpr-art-32-product-version': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-8-8', 'iso-2022-a-8-19'],
+        '2013': ['iso-2013-a-12-5-1', 'iso-2013-a-12-6-1'],
+        nistcsfv2: ['nist-csf-v2-id-ra-01', 'nist-csf-v2-pr-ps-02', 'nist-csf-v2-pr-ps-05'],
+        cisv81: ['cisv81-2-5', 'cisv81-7-1', 'cisv81-7-2', 'cisv81-7-3'],
+        soc2v2: ['soc2-v2-cc7-1-1', 'soc2-v2-cc7-1-2'],
+        'c5_2020': ['c5-2020-ops-08'],
+      },
+    },
+  'gdpr-art-32-backup': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-8-13'],
+        '2013': ['iso-2013-a-12-3-1'],
+        nistcsfv2: ['nist-csf-v2-pr-ds-11', 'nist-csf-v2-rc-rp-03', 'nist-csf-v2-rc-rp-06'],
+        cisv81: ['cisv81-11-1', 'cisv81-11-2', 'cisv81-11-4'],
+        soc2v2: ['soc2-v2-a1-2-1', 'soc2-v2-a1-2-2', 'soc2-v2-a1-3-1'],
+        'c5_2020': ['c5-2020-bcm-03', 'c5-2020-ops-06', 'c5-2020-ops-07'],
+      },
+    },
+  'gdpr-art-32-audit-logging': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-8-15', 'iso-2022-a-8-16'],
+        '2013': ['iso-2013-a-12-4-1', 'iso-2013-a-12-4-2', 'iso-2013-a-12-4-3'],
+        nistcsfv2: ['nist-csf-v2-de-ae-03', 'nist-csf-v2-pr-ps-04'],
+        cisv81: ['cisv81-8-1', 'cisv81-8-2', 'cisv81-8-5'],
+        soc2v2: ['soc2-v2-cc7-1-1', 'soc2-v2-cc7-2-1', 'soc2-v2-cc7-3-1'],
+        'c5_2020': ['c5-2020-ops-04', 'c5-2020-ops-05', 'c5-2020-sim-01'],
+      },
+    },
+  'gdpr-art-32-web-application-firewall': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-8-20', 'iso-2022-a-8-21', 'iso-2022-a-8-22'],
+        '2013': ['iso-2013-a-13-1-1', 'iso-2013-a-13-1-3'],
+        nistcsfv2: ['nist-csf-v2-de-ae-01', 'nist-csf-v2-pr-ir-01'],
+        cisv81: ['cisv81-12-1', 'cisv81-13-1', 'cisv81-13-2'],
+        soc2v2: ['soc2-v2-cc6-6-1', 'soc2-v2-cc6-6-2'],
+        'c5_2020': ['c5-2020-nw-01', 'c5-2020-nw-02'],
+      },
+    },
+  'gdpr-art-32-encryption-at-rest': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-8-24'],
+        '2013': ['iso-2013-a-10-1-1', 'iso-2013-a-10-1-2'],
+        nistcsfv2: ['nist-csf-v2-pr-ds-01', 'nist-csf-v2-pr-ds-02'],
+        cisv81: ['cisv81-3-11'],
+        soc2v2: ['soc2-v2-cc6-1-7', 'soc2-v2-cc6-1-8'],
+        'c5_2020': ['c5-2020-cry-01', 'c5-2020-cry-02'],
+      },
+    },
+  'gdpr-art-32-encryption-in-transit': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-8-24'],
+        '2013': ['iso-2013-a-10-1-1', 'iso-2013-a-14-1-2', 'iso-2013-a-14-1-3'],
+        nistcsfv2: ['nist-csf-v2-pr-ds-02'],
+        cisv81: ['cisv81-3-10'],
+        soc2v2: ['soc2-v2-cc6-1-7'],
+        'c5_2020': ['c5-2020-cry-01', 'c5-2020-cry-03'],
+      },
+    },
+  'gdpr-art-32-vulnerability-assessment': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-8-8'],
+        '2013': ['iso-2013-a-12-6-1'],
+        nistcsfv2: ['nist-csf-v2-id-ra-01', 'nist-csf-v2-de-ae-01'],
+        cisv81: ['cisv81-7-1', 'cisv81-7-2', 'cisv81-7-5', 'cisv81-7-6'],
+        soc2v2: ['soc2-v2-cc7-1-1', 'soc2-v2-cc7-4-1'],
+        'c5_2020': ['c5-2020-sim-01', 'c5-2020-sim-02'],
+      },
+    },
+  'gdpr-art-32-backend-integration': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-19', 'iso-2022-a-5-20', 'iso-2022-a-8-26'],
+        '2013': ['iso-2013-a-14-1-2', 'iso-2013-a-14-1-3', 'iso-2013-a-15-1-1'],
+        nistcsfv2: ['nist-csf-v2-gv-sc-01', 'nist-csf-v2-gv-sc-06'],
+        cisv81: ['cisv81-15-1', 'cisv81-16-12'],
+        soc2v2: ['soc2-v2-cc9-2'],
+        'c5_2020': ['c5-2020-sp-01', 'c5-2020-sso-01'],
+      },
+    },
+  'gdpr-art-33-breach-notification-to-customer': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-24', 'iso-2022-a-5-25', 'iso-2022-a-5-26'],
+        '2013': ['iso-2013-a-16-1-1', 'iso-2013-a-16-1-2', 'iso-2013-a-16-1-5'],
+        nistcsfv2: ['nist-csf-v2-rs-co-02', 'nist-csf-v2-rs-co-03'],
+        cisv81: ['cisv81-17-4'],
+        soc2v2: ['soc2-v2-cc7-3-1', 'soc2-v2-cc7-4-1', 'soc2-v2-cc7-5-1'],
+        'c5_2020': ['c5-2020-sim-04', 'c5-2020-sim-05'],
+      },
+    },
+  'gdpr-art-34-breach-notification-to-data-subjects': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-24', 'iso-2022-a-5-26'],
+        '2013': ['iso-2013-a-16-1-1', 'iso-2013-a-16-1-5'],
+        nistcsfv2: ['nist-csf-v2-rs-co-02'],
+        cisv81: ['cisv81-17-4'],
+        soc2v2: ['soc2-v2-cc7-5-1'],
+        'c5_2020': ['c5-2020-sim-04', 'c5-2020-sim-05'],
+      },
+    },
+
+  // Disclosure
+  'gdpr-art-28-data-processing-agreement': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-19', 'iso-2022-a-5-20', 'iso-2022-a-5-31'],
+        '2013': ['iso-2013-a-13-2-4', 'iso-2013-a-15-1-1', 'iso-2013-a-15-1-2', 'iso-2013-a-18-1-1'],
+        nistcsfv2: ['nist-csf-v2-gv-sc-01', 'nist-csf-v2-gv-sc-06'],
+        cisv81: ['cisv81-15-1'],
+        soc2v2: ['soc2-v2-cc9-2'],
+        'c5_2020': ['c5-2020-sp-01', 'c5-2020-sso-01'],
+      },
+    },
+  'gdpr-art-28-third-party-integration': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-19', 'iso-2022-a-5-21', 'iso-2022-a-5-22'],
+        '2013': ['iso-2013-a-15-1-1', 'iso-2013-a-15-1-3', 'iso-2013-a-15-2-1'],
+        nistcsfv2: ['nist-csf-v2-gv-sc-02', 'nist-csf-v2-gv-sc-05'],
+        cisv81: ['cisv81-15-1', 'cisv81-15-2', 'cisv81-15-3'],
+        soc2v2: ['soc2-v2-cc9-2'],
+        'c5_2020': ['c5-2020-sso-02', 'c5-2020-sso-03'],
+      },
+    },
+
+  // DPO
+  'gdpr-art-29-37-appointment-of-dpo': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-2', 'iso-2022-a-5-31'],
+        '2013': ['iso-2013-a-6-1-1', 'iso-2013-a-18-1-1'],
+        nistcsfv2: ['nist-csf-v2-gv-rr-01'],
+      },
+    },
+  'gdpr-art-29-position-role-of-dpo': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-2', 'iso-2022-a-5-31'],
+        '2013': ['iso-2013-a-6-1-1', 'iso-2013-a-18-1-1'],
+        nistcsfv2: ['nist-csf-v2-gv-rr-01'],
+      },
+    },
+  'gdpr-art-29-38-independence-of-dpo': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-2', 'iso-2022-a-5-3'],
+        '2013': ['iso-2013-a-6-1-1', 'iso-2013-a-6-1-2'],
+        nistcsfv2: ['nist-csf-v2-gv-rr-01'],
+      },
+    },
+  'gdpr-art-29-resources-support-for-dpo': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-2', 'iso-2022-a-5-4'],
+        '2013': ['iso-2013-a-6-1-1', 'iso-2013-a-7-2-1'],
+        nistcsfv2: ['nist-csf-v2-gv-rr-01'],
+      },
+    },
+  'gdpr-art-29-expertise-of-dpo': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-6-3'],
+        '2013': ['iso-2013-a-7-2-2'],
+        nistcsfv2: ['nist-csf-v2-pr-at-01', 'nist-csf-v2-pr-at-02'],
+      },
+    },
+
+  // Privacy SDLC
+  'gdpr-art-35-change-management': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-8-32'],
+        '2013': ['iso-2013-a-12-1-2', 'iso-2013-a-14-2-2'],
+        nistcsfv2: ['nist-csf-v2-id-ra-07'],
+        cisv81: ['cisv81-16-1'],
+        soc2v2: ['soc2-v2-cc8-1-1', 'soc2-v2-cc8-1-2'],
+        'c5_2020': ['c5-2020-csc-01', 'c5-2020-csc-02'],
+      },
+    },
+  'gdpr-art-35-risk-mitigation': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-8', 'iso-2022-a-5-31'],
+        '2013': ['iso-2013-a-8-2-1', 'iso-2013-a-18-1-1'],
+        nistcsfv2: ['nist-csf-v2-id-ra-03', 'nist-csf-v2-gv-rm-01', 'nist-csf-v2-gv-rm-02'],
+        cisv81: ['cisv81-18-1', 'cisv81-18-2'],
+        soc2v2: ['soc2-v2-cc3-1-1', 'soc2-v2-cc3-2-1'],
+      },
+    },
+  'gdpr-art-35-segregation-of-environment': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-8-31'],
+        '2013': ['iso-2013-a-12-1-4', 'iso-2013-a-14-2-6'],
+        nistcsfv2: ['nist-csf-v2-pr-ps-04'],
+        cisv81: ['cisv81-12-1', 'cisv81-13-4'],
+        soc2v2: ['soc2-v2-cc6-1-1', 'soc2-v2-cc6-1-2'],
+        'c5_2020': ['c5-2020-dev-03'],
+      },
+    },
+  'gdpr-art-35-testing': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-8-29'],
+        '2013': ['iso-2013-a-14-2-8', 'iso-2013-a-14-2-9'],
+        nistcsfv2: ['nist-csf-v2-id-ra-01', 'nist-csf-v2-pr-ps-04'],
+        cisv81: ['cisv81-16-12', 'cisv81-16-13', 'cisv81-16-14'],
+        soc2v2: ['soc2-v2-cc7-1-1'],
+        'c5_2020': ['c5-2020-dev-05'],
+      },
+    },
+
+  // International Transfers
+  'gdpr-art-44-46-data-transfers-outside-eu': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-19', 'iso-2022-a-5-20', 'iso-2022-a-5-31'],
+        '2013': ['iso-2013-a-15-1-1', 'iso-2013-a-15-1-2', 'iso-2013-a-18-1-1'],
+        nistcsfv2: ['nist-csf-v2-gv-sc-01', 'nist-csf-v2-gv-sc-06', 'nist-csf-v2-gv-oc-03'],
+        cisv81: ['cisv81-15-1'],
+        soc2v2: ['soc2-v2-cc9-2'],
+        'c5_2020': ['c5-2020-sp-01'],
+      },
+    },
+  'gdpr-art-45-adequacy-decisions': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-31'],
+        '2013': ['iso-2013-a-18-1-1'],
+        nistcsfv2: ['nist-csf-v2-gv-oc-03', 'nist-csf-v2-gv-oc-04'],
+      },
+    },
+  'gdpr-art-40-42-codes-of-conduct-and-certifications': {
+      relationship: 'related',
+      mappings: {
+        '2022': ['iso-2022-a-5-31', 'iso-2022-a-5-36'],
+        '2013': ['iso-2013-a-18-1-1', 'iso-2013-a-18-2-2'],
+        nistcsfv2: ['nist-csf-v2-gv-oc-03', 'nist-csf-v2-id-im-01'],
+        soc2v2: ['soc2-v2-cc1-3-1', 'soc2-v2-cc1-3-2'],
+      },
+    },
+
 };
 
 // Register mappings with the lazy-load registry
