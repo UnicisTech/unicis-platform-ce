@@ -13,6 +13,7 @@ const redirects = [
   },
 ];
 
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
@@ -21,6 +22,17 @@ const nextConfig = {
     unoptimized: true,
   },
   i18n, // Localization settings
+  webpack: (config, { isServer }) => {   // ← ADD HERE
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        stream: false,
+        crypto: false,
+      };
+    }
+    return config;
+  },
   async redirects() {
     return redirects;
   },
