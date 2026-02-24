@@ -142,7 +142,18 @@ export default function ControlMappingDrawer({
             <h2 className="text-sm font-semibold text-base-content leading-snug line-clamp-2">
               {controlTitle}
             </h2>
-            <p className="text-xs text-base-content/50 mt-0.5">
+            {(() => {
+              const req = t(
+                `csc/${currentFramework}:controls.${controlId}.requirements`,
+                ''
+              );
+              return req ? (
+                <p className="text-xs text-base-content/60 mt-1 leading-snug">
+                  {req}
+                </p>
+              ) : null;
+            })()}
+            <p className="text-xs text-base-content/50 mt-1">
               {isoValueToLabel(currentFramework)} ·{' '}
               {t('csc-mapping.drawer.subtitle', 'Cross-Framework Mappings')}
             </p>
