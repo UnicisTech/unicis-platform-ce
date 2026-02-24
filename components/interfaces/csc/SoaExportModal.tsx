@@ -1,30 +1,37 @@
 import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import type { ExportFormat } from '@/lib/soa/types';
+import { Button } from '@/components/shadcn/ui/button';
 
 interface Props {
-  isOpen:        boolean;
-  onClose:       () => void;
-  onExport:      (format: ExportFormat) => Promise<void>;
+  isOpen: boolean;
+  onClose: () => void;
+  onExport: (format: ExportFormat) => Promise<void>;
   frameworkName: string;
 }
 
 const FORMAT_VALUES: { value: ExportFormat; icon: string }[] = [
   { value: 'xlsx', icon: '📊' },
-  { value: 'pdf',  icon: '📄' },
+  { value: 'pdf', icon: '📄' },
   { value: 'html', icon: '🌐' },
 ];
 
-export default function SoaExportModal({ isOpen, onClose, onExport, frameworkName }: Props) {
+// TODO: remake on shadcn components
+export default function SoaExportModal({
+  isOpen,
+  onClose,
+  onExport,
+  frameworkName,
+}: Props) {
   const { t } = useTranslation('common');
   const [selected, setSelected] = useState<ExportFormat>('xlsx');
-  const [loading,  setLoading]  = useState(false);
+  const [loading, setLoading] = useState(false);
 
   if (!isOpen) return null;
 
   const formats = FORMAT_VALUES.map((f) => ({
     ...f,
-    label:       t(`soa-export.format-${f.value}-label`),
+    label: t(`soa-export.format-${f.value}-label`),
     description: t(`soa-export.format-${f.value}-description`),
   }));
 
@@ -41,15 +48,32 @@ export default function SoaExportModal({ isOpen, onClose, onExport, frameworkNam
   return (
     <dialog className="modal modal-open">
       <div className="modal-box max-w-md">
-        <button
-          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute right-2 top-2"
           onClick={onClose}
           disabled={loading}
+          aria-label={t('close')}
         >
-          ✕
-        </button>
+          <svg
+            className="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </Button>
 
-        <h3 className="font-bold text-lg mb-1">{t('soa-export.modal-title')}</h3>
+        <h3 className="font-bold text-lg mb-1">
+          {t('soa-export.modal-title')}
+        </h3>
         <p className="text-sm text-base-content/60 mb-5">
           {t('soa-export.modal-framework')} <strong>{frameworkName}</strong>
         </p>
@@ -74,38 +98,57 @@ export default function SoaExportModal({ isOpen, onClose, onExport, frameworkNam
                 disabled={loading}
               />
               <div>
-                <div className="font-medium text-sm">{f.icon}&nbsp;{f.label}</div>
-                <div className="text-xs text-base-content/50 mt-0.5">{f.description}</div>
+                <div className="font-medium text-sm">
+                  {f.icon}&nbsp;{f.label}
+                </div>
+                <div className="text-xs text-base-content/50 mt-0.5">
+                  {f.description}
+                </div>
               </div>
             </label>
           ))}
         </div>
 
         <div className="modal-action mt-0">
-          <button className="btn btn-ghost btn-sm" onClick={onClose} disabled={loading}>
-            {t('soa-export.cancel')}
-          </button>
-          <button
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 h-9 px-4 py-2"
-            onClick={handleDownload}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onClose}
             disabled={loading}
           >
+            {t('soa-export.cancel')}
+          </Button>
+          <Button onClick={handleDownload} disabled={loading}>
             {loading ? (
-              <><span className="loading loading-spinner loading-xs" />{t('soa-export.exporting')}</>
+              <>
+                <span className="loading loading-spinner loading-xs" />
+                {t('soa-export.exporting')}
+              </>
             ) : (
               <>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                  />
                 </svg>
                 {t('soa-export.download')}
               </>
             )}
-          </button>
+          </Button>
         </div>
       </div>
       <form method="dialog" className="modal-backdrop">
-        <button onClick={onClose} disabled={loading}>close</button>
+        <Button variant="ghost" onClick={onClose} disabled={loading}>
+          {t('close')}
+        </Button>
       </form>
     </dialog>
   );
