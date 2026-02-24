@@ -17,7 +17,6 @@ import { downloadSoaHtml } from '@/lib/soa/exportHtml';
 import { downloadSoaPdf } from '@/lib/soa/exportPdf';
 import type { ExportFormat, SoaPayload, SoaRow } from '@/lib/soa/types';
 
-
 export async function updateCscStatus(params: {
   slug: string;
   control: string;
@@ -67,11 +66,11 @@ export async function updateTaskCsc(params: {
 }
 
 interface CscPanelProps {
-  slug:              string;
-  teamName:          string;
-  iso:               ISO;
-  tasks:             Task[];
-  mutateTasks:       () => Promise<any>;
+  slug: string;
+  teamName: string;
+  iso: ISO;
+  tasks: Task[];
+  mutateTasks: () => Promise<any>;
   /** All frameworks currently enabled for this team — forwarded to the mapping drawer */
   enabledFrameworks: ISO[];
 }
@@ -87,13 +86,18 @@ export default function CscPanel({
   const { t } = useTranslation(['common', `csc/${iso}`]);
   const { statuses, mutateStatuses } = useCscStatuses(slug, iso);
   const [sectionFilter, setSectionFilter] = useState<string[] | null>(null);
-  const [statusFilter,  setStatusFilter]  = useState<CscStatus[] | null>(null);
-  const [perPage,       setPerPage]       = useState<number>(10);
-  const [soaModalOpen,  setSoaModalOpen]  = useState(false);
+  const [statusFilter, setStatusFilter] = useState<CscStatus[] | null>(null);
+  const [perPage, setPerPage] = useState<number>(10);
+  const [soaModalOpen, setSoaModalOpen] = useState(false);
 
   const statusHandler = useCallback(
     async (control: string, value: string) => {
-      const { error } = await updateCscStatus({ slug, control, value, framework: iso });
+      const { error } = await updateCscStatus({
+        slug,
+        control,
+        value,
+        framework: iso,
+      });
       if (error) return toast.error(error.message || t('errors.requestFailed'));
       mutateStatuses();
     },
@@ -108,8 +112,15 @@ export default function CscPanel({
     ) => {
       const operation = action === 'select-option' ? 'add' : 'remove';
       for (const { value: taskNumber } of dataToChange) {
-        const { error } = await updateTaskCsc({ slug, taskNumber, controls: [control], operation, iso });
-        if (error) return toast.error(error.message || t('errors.requestFailed'));
+        const { error } = await updateTaskCsc({
+          slug,
+          taskNumber,
+          controls: [control],
+          operation,
+          iso,
+        });
+        if (error)
+          return toast.error(error.message || t('errors.requestFailed'));
         await mutateTasks();
       }
     },
@@ -132,7 +143,9 @@ export default function CscPanel({
       if (error) {
         toast.error(error.message || t('errors.requestFailed'));
       } else {
-        toast.success(t('csc-mapping.drawer.link-success', 'Task linked successfully'));
+        toast.success(
+          t('csc-mapping.drawer.link-success', 'Task linked successfully')
+        );
         await mutateTasks();
       }
     },
@@ -145,47 +158,47 @@ export default function CscPanel({
     const rows: SoaRow[] = allControls.map((control) => {
       const code = (statuses[control.id] as CscStatus) ?? 'unknown';
       return {
-        code:         t(`csc/${iso}:controls.${control.id}.code`),
-        section:      t(`csc/${iso}:sections.${control.sectionId}.label`),
-        control:      t(`csc/${iso}:controls.${control.id}.control`),
+        code: t(`csc/${iso}:controls.${control.id}.code`),
+        section: t(`csc/${iso}:sections.${control.sectionId}.label`),
+        control: t(`csc/${iso}:controls.${control.id}.control`),
         requirements: t(`csc/${iso}:controls.${control.id}.requirements`),
-        status:       code,
-        statusLabel:  t(`statuses.${code}.label`),
-        meaning:      t(`statuses.${code}.description`),
+        status: code,
+        statusLabel: t(`statuses.${code}.label`),
+        meaning: t(`statuses.${code}.description`),
       } as SoaRow;
     });
 
     const statusLabelMap: Record<string, string> = {};
     const statusMeaningMap: Record<string, string> = {};
     CSC_STATUSES.forEach((s) => {
-      statusLabelMap[s]   = t(`statuses.${s}.label`);
+      statusLabelMap[s] = t(`statuses.${s}.label`);
       statusMeaningMap[s] = t(`statuses.${s}.description`);
     });
 
     return {
       meta: {
         teamName,
-        framework:    isoValueToLabel(iso) ?? iso,
+        framework: isoValueToLabel(iso) ?? iso,
         iso,
         dateOfExport: new Date(),
         statusLabelMap,
         statusMeaningMap,
         strings: {
-          docTitle:         t('soa-export.doc-title'),
-          organisation:     t('soa-export.organisation'),
-          dateOfExport:     t('soa-export.date-of-export'),
-          frameworkLabel:   t('soa-export.framework-label'),
-          statusLegend:     t('soa-export.status-legend'),
-          colCode:          t('soa-export.col-code'),
-          colSection:       t('soa-export.col-section'),
-          colControl:       t('soa-export.col-control'),
-          colRequirements:  t('soa-export.col-requirements'),
-          colStatus:        t('soa-export.col-status'),
-          colLevel:         t('soa-export.col-level'),
-          colMeaning:       t('soa-export.col-meaning'),
-          total:            t('soa-export.total'),
-          generatedBy:      t('soa-export.generated-by'),
-          controls:         t('soa-export.controls'),
+          docTitle: t('soa-export.doc-title'),
+          organisation: t('soa-export.organisation'),
+          dateOfExport: t('soa-export.date-of-export'),
+          frameworkLabel: t('soa-export.framework-label'),
+          statusLegend: t('soa-export.status-legend'),
+          colCode: t('soa-export.col-code'),
+          colSection: t('soa-export.col-section'),
+          colControl: t('soa-export.col-control'),
+          colRequirements: t('soa-export.col-requirements'),
+          colStatus: t('soa-export.col-status'),
+          colLevel: t('soa-export.col-level'),
+          colMeaning: t('soa-export.col-meaning'),
+          total: t('soa-export.total'),
+          generatedBy: t('soa-export.generated-by'),
+          controls: t('soa-export.controls'),
           legendSheetTitle: t('soa-export.legend-sheet-title'),
         },
       },
@@ -196,9 +209,18 @@ export default function CscPanel({
   const handleSoaExport = useCallback(
     async (fmt: ExportFormat) => {
       const payload = buildPayload();
-      if (fmt === 'xlsx') { await downloadSoaXlsx(payload); return; }
-      if (fmt === 'html') { downloadSoaHtml(payload); return; }
-      if (fmt === 'pdf')  { downloadSoaPdf(payload);  return; }
+      if (fmt === 'xlsx') {
+        await downloadSoaXlsx(payload);
+        return;
+      }
+      if (fmt === 'html') {
+        downloadSoaHtml(payload);
+        return;
+      }
+      if (fmt === 'pdf') {
+        downloadSoaPdf(payload);
+        return;
+      }
     },
     [buildPayload]
   );

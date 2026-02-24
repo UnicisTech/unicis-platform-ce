@@ -46,7 +46,11 @@ const StatusesTable = ({
   /** All frameworks currently enabled in Cybersecurity Settings */
   enabledFrameworks: ISO[];
   /** Called when user links a task to a control via the mapping drawer */
-  onLinkTask: (taskNumber: number, controlId: string, iso: ISO) => Promise<void>;
+  onLinkTask: (
+    taskNumber: number,
+    controlId: string,
+    iso: ISO
+  ) => Promise<void>;
 }) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();

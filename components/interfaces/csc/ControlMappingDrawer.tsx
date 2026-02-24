@@ -3,10 +3,7 @@ import { useTranslation } from 'next-i18next';
 import type { Task } from '@prisma/client';
 import type { ISO } from 'types';
 import { isoValueToLabel } from '@/lib/csc/csc-frameworks';
-import {
-  getFrameworkMappings,
-  getMappingCount,
-} from '@/lib/csc/framework-mapping-utils';
+import { getFrameworkMappings } from '@/lib/csc/framework-mapping-utils';
 import '@/lib/csc/framework-mappings';
 import { getCscControlsProp } from '@/lib/csc';
 import frameworks from '@/lib/csc/frameworks';
@@ -181,7 +178,6 @@ export default function ControlMappingDrawer({
 
         {/* ── Scrollable body ────────────────────────────────── */}
         <div className="flex-1 overflow-y-auto divide-y divide-base-200">
-
           {/* SECTION 1 — Framework mappings */}
           <section className="p-4">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-base-content/50 mb-3">
@@ -252,10 +248,7 @@ export default function ControlMappingDrawer({
                         </span>
                         <span className="text-xs text-base-content/50">
                           {mapped.length}{' '}
-                          {t(
-                            'csc-mapping.drawer.controls-count',
-                            'control(s)'
-                          )}
+                          {t('csc-mapping.drawer.controls-count', 'control(s)')}
                         </span>
                       </div>
                       <div className="divide-y divide-base-200">

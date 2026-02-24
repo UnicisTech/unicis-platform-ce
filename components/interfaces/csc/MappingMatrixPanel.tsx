@@ -100,7 +100,6 @@ export default function MappingMatrixPanel({
 
   return (
     <div className="space-y-8 py-4">
-
       {/* ── Coverage Analysis Cards ─────────────────────── */}
       <section>
         <h3 className="text-sm font-semibold text-base-content mb-3">
@@ -140,7 +139,10 @@ export default function MappingMatrixPanel({
                   />
                 </div>
                 <p className="text-[10px] text-base-content/40 mt-1.5">
-                  {t('csc-mapping.coverage.avg-to-others', 'avg. to other frameworks')}
+                  {t(
+                    'csc-mapping.coverage.avg-to-others',
+                    'avg. to other frameworks'
+                  )}
                 </p>
                 <p className="text-[10px] text-base-content/40">
                   {frameworkControls[fw]?.length ?? 0}{' '}
@@ -154,12 +156,27 @@ export default function MappingMatrixPanel({
         {/* Legend */}
         <div className="flex flex-wrap gap-3 mt-3">
           {[
-            { label: t('csc-mapping.coverage.high', 'High (≥75%)'), cls: 'bg-success' },
-            { label: t('csc-mapping.coverage.medium', 'Medium (50–74%)'), cls: 'bg-warning' },
-            { label: t('csc-mapping.coverage.low', 'Low (25–49%)'), cls: 'bg-error/70' },
-            { label: t('csc-mapping.coverage.minimal', 'Minimal (<25%)'), cls: 'bg-base-300' },
+            {
+              label: t('csc-mapping.coverage.high', 'High (≥75%)'),
+              cls: 'bg-success',
+            },
+            {
+              label: t('csc-mapping.coverage.medium', 'Medium (50–74%)'),
+              cls: 'bg-warning',
+            },
+            {
+              label: t('csc-mapping.coverage.low', 'Low (25–49%)'),
+              cls: 'bg-error/70',
+            },
+            {
+              label: t('csc-mapping.coverage.minimal', 'Minimal (<25%)'),
+              cls: 'bg-base-300',
+            },
           ].map(({ label, cls }) => (
-            <div key={label} className="flex items-center gap-1.5 text-xs text-base-content/60">
+            <div
+              key={label}
+              className="flex items-center gap-1.5 text-xs text-base-content/60"
+            >
               <span className={`inline-block w-3 h-3 rounded-sm ${cls}`} />
               {label}
             </div>
@@ -219,7 +236,10 @@ export default function MappingMatrixPanel({
             </thead>
             <tbody className="divide-y divide-base-200">
               {enabledFrameworks.map((src) => (
-                <tr key={src} className="hover:bg-base-200/20 transition-colors">
+                <tr
+                  key={src}
+                  className="hover:bg-base-200/20 transition-colors"
+                >
                   <td className="px-3 py-2 font-medium text-base-content whitespace-nowrap border-r border-base-200">
                     {isoValueToLabel(src)}
                     <span className="ml-1 text-base-content/40 font-normal">

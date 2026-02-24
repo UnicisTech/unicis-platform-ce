@@ -1,6 +1,11 @@
 import type { ISO } from 'types';
 
-export type RelationshipType = 'equivalent' | 'implements' | 'subset' | 'superset' | 'related';
+export type RelationshipType =
+  | 'equivalent'
+  | 'implements'
+  | 'subset'
+  | 'superset'
+  | 'related';
 
 export interface ControlMappingEntry {
   relationship: RelationshipType;
@@ -16,7 +21,9 @@ export function setMappings(m: FrameworkMappings) {
   _mappings = m;
 }
 
-export function getFrameworkMappings(controlId: string): ControlMappingEntry | null {
+export function getFrameworkMappings(
+  controlId: string
+): ControlMappingEntry | null {
   return _mappings?.[controlId] ?? null;
 }
 
@@ -28,7 +35,7 @@ export function getMappingCount(
   const entry = getFrameworkMappings(controlId);
   if (!entry) return 0;
   return enabledFrameworks
-    .filter(f => f !== currentFramework)
+    .filter((f) => f !== currentFramework)
     .reduce((n, fw) => n + (entry.mappings[fw]?.length ?? 0), 0);
 }
 
@@ -59,9 +66,10 @@ export function computeCoverageMatrix(
         targetFramework: tgt,
         mappedCount,
         totalControls: srcControls.length,
-        coveragePercent: srcControls.length > 0
-          ? Math.round((mappedCount / srcControls.length) * 100)
-          : 0,
+        coveragePercent:
+          srcControls.length > 0
+            ? Math.round((mappedCount / srcControls.length) * 100)
+            : 0,
       });
     }
   }

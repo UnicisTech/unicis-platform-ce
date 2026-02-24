@@ -6,11 +6,19 @@ interface ControlCodeLinkProps {
   onClick: () => void;
 }
 
-export default function ControlCodeLink({ code, mappingCount = 0, onClick }: ControlCodeLinkProps) {
+export default function ControlCodeLink({
+  code,
+  mappingCount = 0,
+  onClick,
+}: ControlCodeLinkProps) {
   return (
     <button
       onClick={onClick}
-      title={mappingCount > 0 ? `View ${mappingCount} mapping(s)` : 'View framework mappings'}
+      title={
+        mappingCount > 0
+          ? `View ${mappingCount} mapping(s)`
+          : 'View framework mappings'
+      }
       aria-label={`View framework mappings for ${code}`}
       className="relative inline-flex items-center gap-1 font-mono text-xs font-semibold px-2 py-0.5 rounded bg-base-200 hover:bg-primary hover:text-primary-content border border-base-300 hover:border-primary transition-all duration-150 cursor-pointer group"
     >
