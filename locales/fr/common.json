@@ -1203,5 +1203,80 @@
   "tag-value": "Tag",
   "select-tags": "Sélectionner des tags",
   "search-tags": "Rechercher des tags...",
-  "selected-count": "{{count}} sélectionné(s)"
+  "selected-count": "{{count}} sélectionné(s)",
+  "soa-export": {
+    "button": "Exporter SoA",
+    "button-title": "Exporter SoA pour {{framework}}",
+    "modal-title": "Exporter la déclaration d'applicabilité",
+    "modal-framework": "Référentiel :",
+    "format-xlsx-label": "Excel (.xlsx)",
+    "format-xlsx-description": "Feuille de calcul avec statuts codés par couleur, filtre automatique & feuille de légende",
+    "format-pdf-label": "PDF",
+    "format-pdf-description": "Document A4 paysage imprimable avec légende des statuts",
+    "format-html-label": "HTML",
+    "format-html-description": "Page web autonome — ouvrir dans n'importe quel navigateur ou imprimer en PDF",
+    "cancel": "Annuler",
+    "download": "Télécharger",
+    "exporting": "Exportation…",
+    "doc-title": "Déclaration d'applicabilité",
+    "organisation": "Organisation",
+    "date-of-export": "Date d'export",
+    "framework-label": "Référentiel",
+    "status-legend": "Légende des statuts",
+    "col-code": "Code",
+    "col-section": "Section",
+    "col-control": "Contrôle",
+    "col-requirements": "Exigences",
+    "col-status": "Statut",
+    "col-level": "Niveau",
+    "col-meaning": "Signification",
+    "total": "Total",
+    "generated-by": "Généré par Unicis Platform",
+    "controls": "contrôles",
+    "legend-sheet-title": "Échelle de maturité des statuts Unicis"
+  },
+  "csc-mapping": {
+    "tabs": {
+      "matrix": "Matrice de correspondance"
+    },
+    "relationship": {
+      "equivalent": "Équivalent",
+      "implements": "Implémente",
+      "subset": "Sous-ensemble",
+      "superset": "Sur-ensemble",
+      "related": "Lié"
+    },
+    "drawer": {
+      "aria-label": "Correspondance de référentiel",
+      "subtitle": "Correspondances inter-référentiels",
+      "mappings-title": "Contrôles correspondants",
+      "no-mappings": "Aucune correspondance disponible",
+      "no-mappings-hint": "Activez d'autres référentiels dans Paramètres → Paramètres de cybersécurité",
+      "no-mapping-for-framework": "Aucune correspondance",
+      "controls-count": "contrôle(s)",
+      "linked-tasks": "Tâches liées",
+      "no-linked-tasks": "Aucune tâche liée à ce contrôle pour l'instant.",
+      "link-task-label": "Lier une tâche existante à ce contrôle :",
+      "link-btn": "Lier",
+      "link-success": "Tâche liée avec succès",
+      "footer-hint": "Les correspondances sont basées sur les référentiels activés dans les paramètres de cybersécurité."
+    },
+    "matrix": {
+      "title": "Matrice de correspondance",
+      "description": "Lignes = référentiel source. Colonnes = référentiel cible. Cellule = % des contrôles source ayant au moins une correspondance dans la cible.",
+      "source": "Source ↓ / Cible →",
+      "avg": "Moy",
+      "need-two-frameworks": "Activez au moins 2 référentiels pour afficher la matrice de correspondance.",
+      "go-to-settings": "Aller dans Paramètres → Paramètres de cybersécurité"
+    },
+    "coverage": {
+      "title": "Analyse de couverture",
+      "avg-to-others": "moy. vers les autres référentiels",
+      "total-controls": "contrôles",
+      "high": "Élevée (≥75%)",
+      "medium": "Moyenne (50–74%)",
+      "low": "Faible (25–49%)",
+      "minimal": "Minimale (<25%)"
+    }
+  }
 }

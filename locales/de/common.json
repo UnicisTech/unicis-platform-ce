@@ -1200,5 +1200,80 @@
   "tag-value": "Tag",
   "select-tags": "Tag(s) auswählen",
   "search-tags": "Tags suchen...",
-  "selected-count": "{{count}} ausgewählt"
+  "selected-count": "{{count}} ausgewählt",
+  "soa-export": {
+    "button": "SoA exportieren",
+    "button-title": "SoA für {{framework}} exportieren",
+    "modal-title": "Anwendbarkeitserklärung exportieren",
+    "modal-framework": "Framework:",
+    "format-xlsx-label": "Excel (.xlsx)",
+    "format-xlsx-description": "Tabelle mit farbkodierten Status, Autofilter & Legende",
+    "format-pdf-label": "PDF",
+    "format-pdf-description": "Druckbares Querformat-A4-Dokument mit Statuslegende",
+    "format-html-label": "HTML",
+    "format-html-description": "In sich geschlossene Webseite – in jedem Browser öffnen oder als PDF drucken",
+    "cancel": "Abbrechen",
+    "download": "Herunterladen",
+    "exporting": "Exportiere…",
+    "doc-title": "Anwendbarkeitserklärung",
+    "organisation": "Organisation",
+    "date-of-export": "Exportdatum",
+    "framework-label": "Framework",
+    "status-legend": "Status-Legende",
+    "col-code": "Code",
+    "col-section": "Abschnitt",
+    "col-control": "Maßnahme",
+    "col-requirements": "Anforderungen",
+    "col-status": "Status",
+    "col-level": "Stufe",
+    "col-meaning": "Bedeutung",
+    "total": "Gesamt",
+    "generated-by": "Erstellt von Unicis Platform",
+    "controls": "Maßnahmen",
+    "legend-sheet-title": "Unicis Reifegradskala für Kontrollstatus"
+  },
+  "csc-mapping": {
+    "tabs": {
+      "matrix": "Mapping-Matrix"
+    },
+    "relationship": {
+      "equivalent": "Äquivalent",
+      "implements": "Implementiert",
+      "subset": "Teilmenge",
+      "superset": "Obermenge",
+      "related": "Verwandt"
+    },
+    "drawer": {
+      "aria-label": "Framework-Zuordnung",
+      "subtitle": "Framework-übergreifende Zuordnungen",
+      "mappings-title": "Zugeordnete Maßnahmen",
+      "no-mappings": "Keine Zuordnungen verfügbar",
+      "no-mappings-hint": "Aktivieren Sie weitere Frameworks unter Einstellungen → Cybersicherheitseinstellungen",
+      "no-mapping-for-framework": "Keine Zuordnung",
+      "controls-count": "Maßnahme(n)",
+      "linked-tasks": "Verknüpfte Aufgaben",
+      "no-linked-tasks": "Noch keine Aufgaben mit dieser Maßnahme verknüpft.",
+      "link-task-label": "Eine vorhandene Aufgabe mit dieser Maßnahme verknüpfen:",
+      "link-btn": "Verknüpfen",
+      "link-success": "Aufgabe erfolgreich verknüpft",
+      "footer-hint": "Zuordnungen basieren auf aktivierten Frameworks in den Cybersicherheitseinstellungen."
+    },
+    "matrix": {
+      "title": "Mapping-Matrix",
+      "description": "Zeilen = Quell-Framework. Spalten = Ziel-Framework. Zelle = % der Quellmaßnahmen mit mindestens einer Zuordnung im Ziel.",
+      "source": "Quelle ↓ / Ziel →",
+      "avg": "Ø",
+      "need-two-frameworks": "Aktivieren Sie mindestens 2 Frameworks, um die Mapping-Matrix anzuzeigen.",
+      "go-to-settings": "Zu Einstellungen → Cybersicherheitseinstellungen"
+    },
+    "coverage": {
+      "title": "Abdeckungsanalyse",
+      "avg-to-others": "Ø zu anderen Frameworks",
+      "total-controls": "Maßnahmen",
+      "high": "Hoch (≥75%)",
+      "medium": "Mittel (50–74%)",
+      "low": "Niedrig (25–49%)",
+      "minimal": "Minimal (<25%)"
+    }
+  }
 }

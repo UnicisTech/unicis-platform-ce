@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'next-i18next';
 import type { ExportFormat } from '@/lib/soa/types';
 
 interface Props {
@@ -8,37 +9,24 @@ interface Props {
   frameworkName: string;
 }
 
-const FORMATS: {
-  value:       ExportFormat;
-  label:       string;
-  icon:        string;
-  description: string;
-}[] = [
-  {
-    value:       'xlsx',
-    label:       'Excel (.xlsx)',
-    icon:        '📊',
-    description: 'Spreadsheet with colour-coded statuses, auto-filter & legend sheet',
-  },
-  {
-    value:       'pdf',
-    label:       'PDF',
-    icon:        '📄',
-    description: 'Printable landscape A4 document with status legend',
-  },
-  {
-    value:       'html',
-    label:       'HTML',
-    icon:        '🌐',
-    description: 'Self-contained web page — open in any browser or print to PDF',
-  },
+const FORMAT_VALUES: { value: ExportFormat; icon: string }[] = [
+  { value: 'xlsx', icon: '📊' },
+  { value: 'pdf',  icon: '📄' },
+  { value: 'html', icon: '🌐' },
 ];
 
 export default function SoaExportModal({ isOpen, onClose, onExport, frameworkName }: Props) {
+  const { t } = useTranslation('common');
   const [selected, setSelected] = useState<ExportFormat>('xlsx');
   const [loading,  setLoading]  = useState(false);
 
   if (!isOpen) return null;
+
+  const formats = FORMAT_VALUES.map((f) => ({
+    ...f,
+    label:       t(`soa-export.format-${f.value}-label`),
+    description: t(`soa-export.format-${f.value}-description`),
+  }));
 
   async function handleDownload() {
     setLoading(true);
@@ -61,13 +49,13 @@ export default function SoaExportModal({ isOpen, onClose, onExport, frameworkNam
           ✕
         </button>
 
-        <h3 className="font-bold text-lg mb-1">Export Statement of Applicability</h3>
+        <h3 className="font-bold text-lg mb-1">{t('soa-export.modal-title')}</h3>
         <p className="text-sm text-base-content/60 mb-5">
-          Framework: <strong>{frameworkName}</strong>
+          {t('soa-export.modal-framework')} <strong>{frameworkName}</strong>
         </p>
 
         <div className="flex flex-col gap-2 mb-6">
-          {FORMATS.map((f) => (
+          {formats.map((f) => (
             <label
               key={f.value}
               className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
@@ -95,7 +83,7 @@ export default function SoaExportModal({ isOpen, onClose, onExport, frameworkNam
 
         <div className="modal-action mt-0">
           <button className="btn btn-ghost btn-sm" onClick={onClose} disabled={loading}>
-            Cancel
+            {t('soa-export.cancel')}
           </button>
           <button
             className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 h-9 px-4 py-2"
@@ -103,14 +91,14 @@ export default function SoaExportModal({ isOpen, onClose, onExport, frameworkNam
             disabled={loading}
           >
             {loading ? (
-              <><span className="loading loading-spinner loading-xs" />Exporting…</>
+              <><span className="loading loading-spinner loading-xs" />{t('soa-export.exporting')}</>
             ) : (
               <>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                     d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
-                Download
+                {t('soa-export.download')}
               </>
             )}
           </button>

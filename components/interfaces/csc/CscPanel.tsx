@@ -67,11 +67,13 @@ export async function updateTaskCsc(params: {
 }
 
 interface CscPanelProps {
-  slug:      string;
-  teamName:  string;   // ← NEW
-  iso:       ISO;
-  tasks:     Task[];
-  mutateTasks: () => Promise<any>;
+  slug:              string;
+  teamName:          string;
+  iso:               ISO;
+  tasks:             Task[];
+  mutateTasks:       () => Promise<any>;
+  /** All frameworks currently enabled for this team — forwarded to the mapping drawer */
+  enabledFrameworks: ISO[];
 }
 
 export default function CscPanel({
@@ -80,6 +82,7 @@ export default function CscPanel({
   iso,
   tasks,
   mutateTasks,
+  enabledFrameworks,
 }: CscPanelProps) {
   const { t } = useTranslation(['common', `csc/${iso}`]);
   const { statuses, mutateStatuses } = useCscStatuses(slug, iso);
@@ -114,9 +117,28 @@ export default function CscPanel({
   );
 
   /**
-   * Build SoaPayload using the same i18n keys StatusesTable uses.
-   * Always uses ALL controls for the framework — ignores active filters.
+   * Called from the mapping drawer when the user links an existing task to a control.
+   * Uses the same updateTaskCsc API with operation 'add'.
    */
+  const onLinkTask = useCallback(
+    async (taskNumber: number, controlId: string, framework: ISO) => {
+      const { error } = await updateTaskCsc({
+        slug,
+        taskNumber,
+        controls: [controlId],
+        operation: 'add',
+        iso: framework,
+      });
+      if (error) {
+        toast.error(error.message || t('errors.requestFailed'));
+      } else {
+        toast.success(t('csc-mapping.drawer.link-success', 'Task linked successfully'));
+        await mutateTasks();
+      }
+    },
+    [slug, mutateTasks, t]
+  );
+
   const buildPayload = useCallback((): SoaPayload => {
     const allControls = frameworks[iso]?.controls ?? [];
 
@@ -133,22 +155,39 @@ export default function CscPanel({
       } as SoaRow;
     });
 
-    // Build maps for labels/meanings so exporters can localize legends and summaries
     const statusLabelMap: Record<string, string> = {};
     const statusMeaningMap: Record<string, string> = {};
     CSC_STATUSES.forEach((s) => {
-      statusLabelMap[s] = t(`statuses.${s}.label`);
+      statusLabelMap[s]   = t(`statuses.${s}.label`);
       statusMeaningMap[s] = t(`statuses.${s}.description`);
     });
 
     return {
       meta: {
-        teamName:     teamName,
+        teamName,
         framework:    isoValueToLabel(iso) ?? iso,
         iso,
         dateOfExport: new Date(),
         statusLabelMap,
         statusMeaningMap,
+        strings: {
+          docTitle:         t('soa-export.doc-title'),
+          organisation:     t('soa-export.organisation'),
+          dateOfExport:     t('soa-export.date-of-export'),
+          frameworkLabel:   t('soa-export.framework-label'),
+          statusLegend:     t('soa-export.status-legend'),
+          colCode:          t('soa-export.col-code'),
+          colSection:       t('soa-export.col-section'),
+          colControl:       t('soa-export.col-control'),
+          colRequirements:  t('soa-export.col-requirements'),
+          colStatus:        t('soa-export.col-status'),
+          colLevel:         t('soa-export.col-level'),
+          colMeaning:       t('soa-export.col-meaning'),
+          total:            t('soa-export.total'),
+          generatedBy:      t('soa-export.generated-by'),
+          controls:         t('soa-export.controls'),
+          legendSheetTitle: t('soa-export.legend-sheet-title'),
+        },
       },
       rows,
     };
@@ -175,11 +214,10 @@ export default function CscPanel({
         <StatusFilter setStatusFilter={setStatusFilter} />
         <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
 
-        {/* Export SoA button */}
         <button
           className="flex items-center justify-between overflow-hidden truncate rounded-md border border-input bg-transparent py-2 shadow-xs ring-offset-background data-placeholder:text-muted-foreground focus:outline-hidden focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:truncate h-full px-2 text-sm hover:bg-accent hover:text-accent-foreground"
           onClick={() => setSoaModalOpen(true)}
-          title={`Export SoA for ${frameworkLabel}`}
+          title={t('soa-export.button-title', { framework: frameworkLabel })}
         >
           <svg
             className="w-4 h-4"
@@ -195,7 +233,7 @@ export default function CscPanel({
               d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
             />
           </svg>
-          Export SoA
+          {t('soa-export.button')}
         </button>
       </div>
 
@@ -208,6 +246,8 @@ export default function CscPanel({
         perPage={perPage}
         statusHandler={statusHandler}
         taskSelectorHandler={taskSelectorHandler}
+        enabledFrameworks={enabledFrameworks}
+        onLinkTask={onLinkTask}
       />
 
       <SoaExportModal
