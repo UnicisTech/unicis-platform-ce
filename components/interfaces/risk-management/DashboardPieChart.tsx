@@ -62,7 +62,7 @@ const DashboardChart = ({ datasets }: { datasets: number[] }) => {
       },
       title: {
         display: true,
-        text: t('controls'),
+        text: t('risk-levels'),
         color: textColor,
         font: {
           size: 16,

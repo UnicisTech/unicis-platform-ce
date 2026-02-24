@@ -361,6 +361,7 @@
   "statuses-title": "Status",
   "tasks-count": "# of tasks",
   "risk-count": "Risk count",
+  "risk-levels": "Risk levels",
   "maturity-level-0-6": "Maturity level (0-6)",
 
   "rpa": "Register of Procedures",
@@ -709,6 +710,7 @@
   "select-a-control": "Select a control",
   "csc-dashboard": "Cybersecurity Controls Dashboard",
   "csc-controls": "Cybersecurity Controls",
+  "csc-controls-label": "Cybersecurity Controls:",
   "csc-audit-logs": "Cybersecurity Controls Audit Logs",
   "pia-audit-logs": "Privacy Impact Assessment Audit Logs",
   "rm-audit-logs": "Risk Management Audit Logs",

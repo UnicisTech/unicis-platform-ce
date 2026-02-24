@@ -4,5 +4,6 @@
     "cSpell.words": [
         "socialgouv"
     ],
-    "postman.settings.dotenv-detection-notification-visibility": false
+    "postman.settings.dotenv-detection-notification-visibility": false,
+    "snyk.advanced.autoSelectOrganization": true
 }

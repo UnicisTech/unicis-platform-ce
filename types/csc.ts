@@ -66,7 +66,8 @@ export type ISO =
   | 'gdpr'
   | 'cisv81'
   | 'soc2v2'
-  | 'c5_2020';
+  | 'c5_2020'
+  | 'owasp_asvs_v5';
 
 // TODO: use getControlPropsName function with config and ISO type to generate type
 type CscStatusesPropMap = {
@@ -79,6 +80,7 @@ type CscStatusesPropMap = {
   cisv81: 'csc_statuses_cisv81';
   soc2v2: 'csc_statuses_soc2v2';
   c5_2020: 'csc_statuses_c5_2020';
+  owasp_asvs_v5: 'csc_statuses_owasp_asvs_v5';
 };
 
 export type CscStatusesProp = CscStatusesPropMap[ISO];
@@ -96,6 +98,7 @@ type CscControlsPropMap = {
   cisv81: 'csc_controls_cisv81';
   soc2v2: 'csc_controls_soc2v2';
   c5_2020: 'csc_controls_c5_2020';
+  owasp_asvs_v5: 'csc_controls_owasp_asvs_v5';
 };
 
 export type CscControlsProp = CscControlsPropMap[ISO];

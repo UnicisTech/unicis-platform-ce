@@ -361,6 +361,7 @@
   "statuses-title": "Statut",
   "tasks-count": "# de tâches",
   "risk-count": "Nombre de risques",
+  "risk-levels": "Niveaux de risque",
   "maturity-level-0-6": "Niveau de maturité (0-6)",
 
   "rpa": "Registre des procédures",
@@ -709,6 +710,7 @@
   "select-a-control": "Sélectionner un contrôle",
   "csc-dashboard": "Tableau de bord des contrôles de cybersécurité",
   "csc-controls": "Contrôles de cybersécurité",
+  "csc-controls-label": "Contrôles de cybersécurité :",
   "csc-audit-logs": "Journaux d’audit des contrôles de cybersécurité",
   "pia-audit-logs": "Journaux d’audit de l’analyse d’impact",
   "rm-audit-logs": "Journaux d’audit de la gestion des risques",

@@ -26,8 +26,8 @@ const formatEUR = (n: number) =>
 
 const planPrice = {
   [Plan.COMMUNITY]: 0,
-  [Plan.PREMIUM]: 49,
-  [Plan.ULTIMATE]: 89,
+  [Plan.PREMIUM]: 19,
+  [Plan.ULTIMATE]: 49,
 };
 
 const getTotalPrice = (plan: Plan, amount: number) => {
