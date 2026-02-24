@@ -115,7 +115,7 @@ export function downloadSoaPdf(payload: SoaPayload): void {
         data.cell.styles.textColor    = fg;
         data.cell.styles.fontStyle    = 'bold';
         // Replace the displayed text with the localized label
-        data.cell.text = String(statusLabel);
+        data.cell.text = [String(statusLabel)];
       }
     },
     didDrawPage() {
