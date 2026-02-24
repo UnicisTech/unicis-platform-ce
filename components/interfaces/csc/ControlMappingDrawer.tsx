@@ -9,6 +9,7 @@ import {
 } from '@/lib/csc/framework-mapping-utils';
 import '@/lib/csc/framework-mappings';
 import { getCscControlsProp } from '@/lib/csc';
+import frameworks from '@/lib/csc/frameworks';
 
 interface ControlMappingDrawerProps {
   isOpen: boolean;
@@ -247,18 +248,66 @@ export default function ControlMappingDrawer({
                         </span>
                       </div>
                       <div className="divide-y divide-base-200">
-                        {mapped.map((mappedId) => (
-                          <div
-                            key={mappedId}
-                            className="px-3 py-2 flex items-center gap-2 hover:bg-base-200/20 transition-colors"
-                          >
-                            <span
-                              className={`badge badge-xs font-mono ${FRAMEWORK_BADGE[fw] ?? 'badge-neutral'}`}
+                        {mapped.map((mappedId) => {
+                          const fwControls = frameworks[fw]?.controls ?? [];
+                          const controlMeta = fwControls.find(
+                            (c) => c.id === mappedId
+                          );
+                          const sectionId = controlMeta?.sectionId;
+
+                          const code = t(
+                            `csc/${fw}:controls.${mappedId}.code`,
+                            mappedId
+                          );
+                          const controlName = t(
+                            `csc/${fw}:controls.${mappedId}.control`,
+                            ''
+                          );
+                          const requirements = t(
+                            `csc/${fw}:controls.${mappedId}.requirements`,
+                            ''
+                          );
+                          const sectionLabel = sectionId
+                            ? t(
+                                `csc/${fw}:sections.${sectionId}.label`,
+                                sectionId
+                              )
+                            : '';
+
+                          return (
+                            <div
+                              key={mappedId}
+                              className="px-3 py-2.5 hover:bg-base-200/20 transition-colors"
                             >
-                              {mappedId}
-                            </span>
-                          </div>
-                        ))}
+                              <div className="flex items-start gap-2">
+                                <span
+                                  className={`badge badge-xs font-mono flex-shrink-0 mt-0.5 ${FRAMEWORK_BADGE[fw] ?? 'badge-neutral'}`}
+                                >
+                                  {code}
+                                </span>
+                                <div className="min-w-0 flex-1">
+                                  {sectionLabel && (
+                                    <p className="text-[10px] uppercase tracking-wider text-base-content/40 font-semibold leading-none mb-0.5">
+                                      {sectionLabel}
+                                    </p>
+                                  )}
+                                  {controlName && (
+                                    <p className="text-xs font-semibold text-base-content leading-snug">
+                                      {code !== mappedId
+                                        ? `${code}: ${controlName}`
+                                        : controlName}
+                                    </p>
+                                  )}
+                                  {requirements && (
+                                    <p className="text-xs text-base-content/60 mt-0.5 leading-snug">
+                                      {requirements}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   );
