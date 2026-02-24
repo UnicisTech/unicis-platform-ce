@@ -3,19 +3,23 @@ import { useTranslation } from 'next-i18next';
 import { ISO } from 'types';
 import { cscNavigations } from '@/lib/csc';
 import { isoValueToLabel } from '@/lib/csc/csc-frameworks';
+import { Dispatch, SetStateAction } from 'react';
 
 /** Sentinel value used to identify the Mapping Matrix tab */
 export const MAPPING_MATRIX_TAB = '__mapping_matrix__' as const;
 export type ActiveCscTab = ISO | typeof MAPPING_MATRIX_TAB;
 
+// TODO: remove MAPPING_MATRIX into separated logic?
 const CscTabs = ({
   frameworks,
   activeTab,
   setActiveTab,
+  showMatrixMapping = true,
 }: {
   frameworks: ISO[];
   activeTab: ActiveCscTab;
-  setActiveTab: (name: ActiveCscTab) => void;
+  setActiveTab: Dispatch<SetStateAction<any>>;
+  showMatrixMapping?: boolean;
 }) => {
   const { t } = useTranslation('common');
 
@@ -48,7 +52,7 @@ const CscTabs = ({
         ))}
 
         {/* Mapping Matrix tab — only shown when 2+ frameworks are enabled */}
-        {frameworks.length >= 2 && (
+        {showMatrixMapping && frameworks.length >= 2 && (
           <a
             className={classNames(
               'inline-flex items-center gap-1.5 border-b-2 py-4 text-sm font-medium cursor-pointer whitespace-nowrap',

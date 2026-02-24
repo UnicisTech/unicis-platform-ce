@@ -33,6 +33,7 @@ const TeamCscAnalysis = ({
         frameworks={cscFrameworks}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
+        showMatrixMapping={false}
       />
       <CscChartsLayout statuses={statuses} iso={activeTab} />
     </div>
