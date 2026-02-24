@@ -1233,5 +1233,49 @@
     "generated-by": "Generado por Unicis Platform",
     "controls": "controles",
     "legend-sheet-title": "Escala de madurez de estados de control de Unicis"
+  },
+  "csc-mapping": {
+    "tabs": {
+      "matrix": "Matriz de correspondencia"
+    },
+    "relationship": {
+      "equivalent": "Equivalente",
+      "implements": "Implementa",
+      "subset": "Subconjunto",
+      "superset": "Superconjunto",
+      "related": "Relacionado"
+    },
+    "drawer": {
+      "aria-label": "Correspondencia de marcos",
+      "subtitle": "Correspondencias entre marcos",
+      "mappings-title": "Controles correspondientes",
+      "no-mappings": "No hay correspondencias disponibles",
+      "no-mappings-hint": "Active más marcos en Configuración → Configuración de ciberseguridad",
+      "no-mapping-for-framework": "Sin correspondencia",
+      "controls-count": "control(es)",
+      "linked-tasks": "Tareas vinculadas",
+      "no-linked-tasks": "Aún no hay tareas vinculadas a este control.",
+      "link-task-label": "Vincular una tarea existente a este control:",
+      "link-btn": "Vincular",
+      "link-success": "Tarea vinculada correctamente",
+      "footer-hint": "Las correspondencias se basan en los marcos habilitados en la configuración de ciberseguridad."
+    },
+    "matrix": {
+      "title": "Matriz de correspondencia",
+      "description": "Filas = marco fuente. Columnas = marco destino. Celda = % de controles fuente con al menos una correspondencia en el destino.",
+      "source": "Fuente ↓ / Destino →",
+      "avg": "Prom",
+      "need-two-frameworks": "Active al menos 2 marcos para ver la matriz de correspondencia.",
+      "go-to-settings": "Ir a Configuración → Configuración de ciberseguridad"
+    },
+    "coverage": {
+      "title": "Análisis de cobertura",
+      "avg-to-others": "prom. hacia otros marcos",
+      "total-controls": "controles",
+      "high": "Alta (≥75%)",
+      "medium": "Media (50–74%)",
+      "low": "Baja (25–49%)",
+      "minimal": "Mínima (<25%)"
+    }
   }
 }

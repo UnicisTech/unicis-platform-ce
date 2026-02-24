@@ -1233,5 +1233,49 @@
     "generated-by": "Généré par Unicis Platform",
     "controls": "contrôles",
     "legend-sheet-title": "Échelle de maturité des statuts Unicis"
+  },
+  "csc-mapping": {
+    "tabs": {
+      "matrix": "Matrice de correspondance"
+    },
+    "relationship": {
+      "equivalent": "Équivalent",
+      "implements": "Implémente",
+      "subset": "Sous-ensemble",
+      "superset": "Sur-ensemble",
+      "related": "Lié"
+    },
+    "drawer": {
+      "aria-label": "Correspondance de référentiel",
+      "subtitle": "Correspondances inter-référentiels",
+      "mappings-title": "Contrôles correspondants",
+      "no-mappings": "Aucune correspondance disponible",
+      "no-mappings-hint": "Activez d'autres référentiels dans Paramètres → Paramètres de cybersécurité",
+      "no-mapping-for-framework": "Aucune correspondance",
+      "controls-count": "contrôle(s)",
+      "linked-tasks": "Tâches liées",
+      "no-linked-tasks": "Aucune tâche liée à ce contrôle pour l'instant.",
+      "link-task-label": "Lier une tâche existante à ce contrôle :",
+      "link-btn": "Lier",
+      "link-success": "Tâche liée avec succès",
+      "footer-hint": "Les correspondances sont basées sur les référentiels activés dans les paramètres de cybersécurité."
+    },
+    "matrix": {
+      "title": "Matrice de correspondance",
+      "description": "Lignes = référentiel source. Colonnes = référentiel cible. Cellule = % des contrôles source ayant au moins une correspondance dans la cible.",
+      "source": "Source ↓ / Cible →",
+      "avg": "Moy",
+      "need-two-frameworks": "Activez au moins 2 référentiels pour afficher la matrice de correspondance.",
+      "go-to-settings": "Aller dans Paramètres → Paramètres de cybersécurité"
+    },
+    "coverage": {
+      "title": "Analyse de couverture",
+      "avg-to-others": "moy. vers les autres référentiels",
+      "total-controls": "contrôles",
+      "high": "Élevée (≥75%)",
+      "medium": "Moyenne (50–74%)",
+      "low": "Faible (25–49%)",
+      "minimal": "Minimale (<25%)"
+    }
   }
 }
