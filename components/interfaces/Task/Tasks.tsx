@@ -23,12 +23,27 @@ import { Badge } from '@/components/shadcn/ui/badge';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import toast from 'react-hot-toast';
 import { getTaskModules, hasTaskModule, isTaskModuleKey } from '@/lib/tasks';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from '@/components/shadcn/ui/dropdown-menu';
+import { ChevronDownIcon } from 'lucide-react';
+import TaskImportModal from './TaskImportModal';
+import {
+  exportTasksXlsx,
+  exportTasksCsv,
+  exportTasksHtml,
+  exportTasksPdf,
+} from '@/lib/tasks/exportTasks';
 
 const Tasks = ({ team }: { team: Team }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const { isLoading, isError, tasks, mutateTasks } = useTasks(slug as string);
   const [visible, setVisible] = useState(false);
+  const [importVisible, setImportVisible] = useState(false);
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState<null | number>(null);
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
@@ -85,6 +100,19 @@ const Tasks = ({ team }: { team: Team }) => {
     setVisible(false);
   };
 
+  const handleExport = async (format: 'xlsx' | 'csv' | 'html' | 'pdf') => {
+    if (!tasks || tasks.length === 0) return;
+    const teamName = team.name;
+    try {
+      if (format === 'xlsx') await exportTasksXlsx(tasks, teamName);
+      else if (format === 'csv') exportTasksCsv(tasks, teamName);
+      else if (format === 'html') exportTasksHtml(tasks, teamName);
+      else if (format === 'pdf') exportTasksPdf(tasks, teamName);
+    } catch {
+      toast.error(t('errors.requestFailed'));
+    }
+  };
+
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
       <div className="space-y-3">
@@ -98,9 +126,38 @@ const Tasks = ({ team }: { team: Team }) => {
             selectedModules={selectedModules}
             setSelectedModules={setSelectedModules}
           />
-          <div className="flex justify-end items-center my-1">
+          <div className="flex justify-end items-center gap-2 my-1 flex-wrap">
             {tasks && tasks.length > 0 && (
               <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
+            )}
+            {tasks && tasks.length > 0 && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    {t('export-tasks')}
+                    <ChevronDownIcon className="ml-1 h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => handleExport('xlsx')}>
+                    {t('export-excel')}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleExport('csv')}>
+                    {t('export-csv')}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleExport('html')}>
+                    {t('export-html')}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleExport('pdf')}>
+                    {t('export-pdf')}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+            {canAccess('task', ['create']) && (
+              <Button variant="outline" onClick={() => setImportVisible(true)}>
+                {t('import-tasks')}
+              </Button>
             )}
             {canAccess('task', ['create']) && (
               <Button color="primary" onClick={() => setVisible(!visible)}>
@@ -203,6 +260,11 @@ const Tasks = ({ team }: { team: Team }) => {
           />
         )}
         <CreateTask visible={visible} setVisible={setVisible} team={team} />
+        <TaskImportModal
+          visible={importVisible}
+          setVisible={setImportVisible}
+          team={team}
+        />
         <ConfirmationDialog
           title="Delete task"
           visible={deleteVisible}
