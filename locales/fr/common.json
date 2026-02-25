@@ -1258,6 +1258,10 @@
     "controls": "contrôles",
     "legend-sheet-title": "Échelle de maturité des statuts Unicis"
   },
+  "coverage-analysis": "Analyse de couverture",
+  "csc-need-two-frameworks": "Activez au moins 2 référentiels pour afficher la matrice de correspondance.",
+  "csc-go-to-settings": "Aller dans Paramètres → Paramètres de cybersécurité",
+  "csc-avg-to-others": "moy. vers les autres référentiels",
   "csc-mapping": {
     "tabs": {
       "matrix": "Matrice de correspondance"

@@ -1258,6 +1258,10 @@
     "controls": "controls",
     "legend-sheet-title": "Unicis Control Status Maturity Scale"
   },
+  "coverage-analysis": "Coverage Analysis",
+  "csc-need-two-frameworks": "Enable at least 2 frameworks to see the mapping matrix.",
+  "csc-go-to-settings": "Go to Settings → Cybersecurity Settings",
+  "csc-avg-to-others": "avg. to other frameworks",
   "csc-mapping": {
     "tabs": {
       "matrix": "Mapping Matrix"
