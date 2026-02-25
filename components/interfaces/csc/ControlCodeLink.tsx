@@ -1,4 +1,6 @@
 import React from 'react';
+import { Badge } from '@/components/shadcn/ui/badge';
+import { Button } from '@/components/shadcn/ui/button';
 
 interface ControlCodeLinkProps {
   code: string;
@@ -12,7 +14,9 @@ export default function ControlCodeLink({
   onClick,
 }: ControlCodeLinkProps) {
   return (
-    <button
+    <Button
+      type="button"
+      variant="ghost"
       onClick={onClick}
       title={
         mappingCount > 0
@@ -20,14 +24,14 @@ export default function ControlCodeLink({
           : 'View framework mappings'
       }
       aria-label={`View framework mappings for ${code}`}
-      className="relative inline-flex items-center gap-1 font-mono text-xs font-semibold px-2 py-0.5 rounded bg-base-200 hover:bg-primary hover:text-primary-content border border-base-300 hover:border-primary transition-all duration-150 cursor-pointer group"
+      className="relative inline-flex h-auto items-center gap-1 px-2 py-0.5 font-mono text-xs font-semibold"
     >
       <span>{code}</span>
       {mappingCount > 0 && (
-        <span className="inline-flex items-center justify-center w-4 h-4 text-[9px] font-bold rounded-full bg-primary text-primary-content group-hover:bg-primary-content group-hover:text-primary transition-colors">
+        <Badge className="h-4 w-4 justify-center rounded-full p-0 text-[9px] font-bold">
           {mappingCount > 9 ? '9+' : mappingCount}
-        </span>
+        </Badge>
       )}
-    </button>
+    </Button>
   );
 }
