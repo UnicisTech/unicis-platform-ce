@@ -1258,10 +1258,6 @@
     "controls": "controles",
     "legend-sheet-title": "Escala de madurez de estados de control de Unicis"
   },
-  "coverage-analysis": "Análisis de cobertura",
-  "csc-need-two-frameworks": "Active al menos 2 marcos para ver la matriz de correspondencia.",
-  "csc-go-to-settings": "Ir a Configuración → Configuración de ciberseguridad",
-  "csc-avg-to-others": "prom. hacia otros marcos",
   "csc-mapping": {
     "tabs": {
       "matrix": "Matriz de correspondencia"

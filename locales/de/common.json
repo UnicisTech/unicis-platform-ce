@@ -1255,10 +1255,6 @@
     "controls": "Maßnahmen",
     "legend-sheet-title": "Unicis Reifegradskala für Kontrollstatus"
   },
-  "coverage-analysis": "Abdeckungsanalyse",
-  "csc-need-two-frameworks": "Aktivieren Sie mindestens 2 Frameworks, um die Mapping-Matrix anzuzeigen.",
-  "csc-go-to-settings": "Zu Einstellungen → Cybersicherheitseinstellungen",
-  "csc-avg-to-others": "Ø zu anderen Frameworks",
   "csc-mapping": {
     "tabs": {
       "matrix": "Mapping-Matrix"

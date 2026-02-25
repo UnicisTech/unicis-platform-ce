@@ -86,10 +86,16 @@ export default function MappingMatrixPanel({
           />
         </svg>
         <p className="text-sm font-medium">
-          {t('csc-need-two-frameworks')}
+          {t(
+            'csc-mapping.matrix.need-two-frameworks',
+            'Enable at least 2 frameworks to see the mapping matrix.'
+          )}
         </p>
         <p className="text-xs mt-1">
-          {t('csc-go-to-settings')}
+          {t(
+            'csc-mapping.matrix.go-to-settings',
+            'Go to Settings → Cybersecurity Settings'
+          )}
         </p>
       </div>
     );
@@ -100,7 +106,7 @@ export default function MappingMatrixPanel({
       {/* ── Coverage Analysis Cards ─────────────────────── */}
       <section>
         <h3 className="text-sm font-semibold text-base-content mb-3">
-          {t('coverage-analysis')}
+          {t('csc-mapping.coverage.title', 'Coverage Analysis')}
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {enabledFrameworks.map((fw) => {
@@ -136,11 +142,14 @@ export default function MappingMatrixPanel({
                   />
                 </div>
                 <p className="text-[10px] text-base-content/40 mt-1.5">
-                  {t('csc-avg-to-others')}
+                  {t(
+                    'csc-mapping.coverage.avg-to-others',
+                    'avg. to other frameworks'
+                  )}
                 </p>
                 <p className="text-[10px] text-base-content/40">
                   {frameworkControls[fw]?.length ?? 0}{' '}
-                  {t('controls')}
+                  {t('csc-mapping.coverage.total-controls', 'controls')}
                 </p>
               </div>
             );
