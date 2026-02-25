@@ -1,6 +1,16 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'next-i18next';
 import type { ISO } from 'types';
+import { Badge } from '@/components/shadcn/ui/badge';
+import { Card, CardContent } from '@/components/shadcn/ui/card';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/shadcn/ui/table';
 import {
   CSC_FRAMEWORK_TO_SHORTNAME,
   isoValueToLabel,
@@ -15,19 +25,13 @@ interface MappingMatrixPanelProps {
   enabledFrameworks: ISO[];
 }
 
-/** Color band for a coverage percentage */
-function coverageColor(pct: number): string {
-  if (pct >= 75) return 'bg-success text-success-content';
-  if (pct >= 50) return 'bg-warning text-warning-content';
-  if (pct >= 25) return 'bg-error/70 text-error-content';
-  return 'bg-base-300 text-base-content/50';
-}
-
-function coverageBadge(pct: number): string {
-  if (pct >= 75) return 'badge-success';
-  if (pct >= 50) return 'badge-warning';
-  if (pct >= 25) return 'badge-error';
-  return 'badge-ghost';
+function coverageBadge(
+  pct: number
+): 'default' | 'secondary' | 'destructive' | 'outline' {
+  if (pct >= 75) return 'default';
+  if (pct >= 50) return 'secondary';
+  if (pct >= 25) return 'destructive';
+  return 'outline';
 }
 
 export default function MappingMatrixPanel({
@@ -105,53 +109,53 @@ export default function MappingMatrixPanel({
     <div className="space-y-8 py-4">
       {/* ── Coverage Analysis Cards ─────────────────────── */}
       <section>
-        <h3 className="text-sm font-semibold text-base-content mb-3">
+        <h3 className="text-sm font-semibold mb-3">
           {t('csc-mapping.coverage.title', 'Coverage Analysis')}
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {enabledFrameworks.map((fw) => {
             const avg = averageCoverage[fw] ?? 0;
             return (
-              <div
-                key={fw}
-                className="rounded-xl border border-base-200 p-3 bg-base-100 shadow-xs"
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-semibold text-base-content/70 truncate pr-1">
-                    {isoValueToLabel(fw)}
-                  </span>
-                  <span
-                    className={`badge badge-sm flex-shrink-0 ${coverageBadge(avg)}`}
-                  >
-                    {avg}%
-                  </span>
-                </div>
-                {/* Mini progress bar */}
-                <div className="w-full h-1.5 rounded-full bg-base-200 overflow-hidden">
-                  <div
-                    className={`h-full rounded-full transition-all duration-500 ${
-                      avg >= 75
-                        ? 'bg-success'
-                        : avg >= 50
-                          ? 'bg-warning'
-                          : avg >= 25
-                            ? 'bg-error'
-                            : 'bg-base-300'
-                    }`}
-                    style={{ width: `${avg}%` }}
-                  />
-                </div>
-                <p className="text-[10px] text-base-content/40 mt-1.5">
-                  {t(
-                    'csc-mapping.coverage.avg-to-others',
-                    'avg. to other frameworks'
-                  )}
-                </p>
-                <p className="text-[10px] text-base-content/40">
-                  {frameworkControls[fw]?.length ?? 0}{' '}
-                  {t('csc-mapping.coverage.total-controls', 'controls')}
-                </p>
-              </div>
+              <Card key={fw} className="shadow-xs">
+                <CardContent className="p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-semibold truncate pr-1">
+                      {isoValueToLabel(fw)}
+                    </span>
+                    <Badge
+                      variant={coverageBadge(avg)}
+                      className="flex-shrink-0"
+                    >
+                      {avg}%
+                    </Badge>
+                  </div>
+                  {/* Mini progress bar */}
+                  <div className="w-full h-1.5 rounded-full bg-base-200 overflow-hidden">
+                    <div
+                      className={`h-full rounded-full transition-all duration-500 ${
+                        avg >= 75
+                          ? 'bg-success'
+                          : avg >= 50
+                            ? 'bg-warning'
+                            : avg >= 25
+                              ? 'bg-error'
+                              : 'bg-base-300'
+                      }`}
+                      style={{ width: `${avg}%` }}
+                    />
+                  </div>
+                  <p className="text-[10px] mt-1.5">
+                    {t(
+                      'csc-mapping.coverage.avg-to-others',
+                      'avg. to other frameworks'
+                    )}
+                  </p>
+                  <p className="text-[10px]">
+                    {frameworkControls[fw]?.length ?? 0}{' '}
+                    {t('csc-mapping.coverage.total-controls', 'controls')}
+                  </p>
+                </CardContent>
+              </Card>
             );
           })}
         </div>
@@ -176,10 +180,7 @@ export default function MappingMatrixPanel({
               cls: 'bg-base-300',
             },
           ].map(({ label, cls }) => (
-            <div
-              key={label}
-              className="flex items-center gap-1.5 text-xs text-base-content/60"
-            >
+            <div key={label} className="flex items-center gap-1.5 text-xs">
               <span className={`inline-block w-3 h-3 rounded-sm ${cls}`} />
               {label}
             </div>
@@ -189,85 +190,84 @@ export default function MappingMatrixPanel({
 
       {/* ── Mapping Matrix Table ────────────────────────── */}
       <section>
-        <h3 className="text-sm font-semibold text-base-content mb-3">
+        <h3 className="text-sm font-semibold mb-3">
           {t('csc-mapping.matrix.title', 'Mapping Matrix')}
         </h3>
-        <p className="text-xs text-base-content/50 mb-3">
+        <p className="text-xs mb-3">
           {t(
             'csc-mapping.matrix.description',
             'Rows = source framework. Columns = target framework. Cell = % of source controls that have at least one mapping in the target.'
           )}
         </p>
 
-        <div className="overflow-x-auto rounded-xl border border-base-200">
-          <table className="w-full text-xs">
-            <thead>
-              <tr className="bg-base-200/60">
-                <th className="px-3 py-2 text-left font-semibold text-base-content/60 whitespace-nowrap border-r border-base-200">
+        <div className="overflow-x-auto rounded-xl border border-border">
+          <Table className="text-xs">
+            <TableHeader>
+              <TableRow className="bg-muted/50 hover:bg-muted/50">
+                <TableHead className="px-3 py-2 text-left font-semibold text-muted-foreground whitespace-nowrap border-r border-border">
                   {t('csc-mapping.matrix.source', 'Source ↓ / Target →')}
-                </th>
+                </TableHead>
                 {enabledFrameworks.map((tgt) => (
-                  <th
+                  <TableHead
                     key={tgt}
-                    className="px-2 py-2 text-center font-semibold text-base-content/60 whitespace-nowrap min-w-[80px]"
+                    className="px-2 py-2 text-center font-semibold text-muted-foreground whitespace-nowrap min-w-[80px]"
                     title={isoValueToLabel(tgt)}
                   >
                     {/* Short label */}
                     {CSC_FRAMEWORK_TO_SHORTNAME[tgt]}
-                  </th>
+                  </TableHead>
                 ))}
-                <th className="px-2 py-2 text-center font-semibold text-base-content/60 whitespace-nowrap border-l border-base-200">
+                <TableHead className="px-2 py-2 text-center font-semibold text-muted-foreground whitespace-nowrap border-l border-border">
                   {t('csc-mapping.matrix.avg', 'Avg')}
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-base-200">
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="divide-y divide-border">
               {enabledFrameworks.map((src) => (
-                <tr
-                  key={src}
-                  className="hover:bg-base-200/20 transition-colors"
-                >
-                  <td className="px-3 py-2 font-medium text-base-content whitespace-nowrap border-r border-base-200">
+                <TableRow key={src} className="hover:bg-muted/50">
+                  <TableCell className="px-3 py-2 font-medium whitespace-nowrap border-r border-border">
                     {isoValueToLabel(src)}
-                    <span className="ml-1 text-base-content/40 font-normal">
+                    <span className="ml-1 text-muted-foreground font-normal">
                       ({frameworkControls[src]?.length ?? 0})
                     </span>
-                  </td>
+                  </TableCell>
                   {enabledFrameworks.map((tgt) => {
                     if (src === tgt) {
                       return (
-                        <td
+                        <TableCell
                           key={tgt}
-                          className="px-2 py-2 text-center bg-base-200/40 text-base-content/30"
+                          className="px-2 py-2 text-center bg-muted/40 text-muted-foreground"
                         >
                           —
-                        </td>
+                        </TableCell>
                       );
                     }
                     const stats = cell(src, tgt);
                     const pct = stats?.coveragePercent ?? 0;
                     return (
-                      <td key={tgt} className="px-2 py-2 text-center">
-                        <span
-                          className={`inline-block px-1.5 py-0.5 rounded font-semibold text-[11px] ${coverageColor(pct)}`}
+                      <TableCell key={tgt} className="px-2 py-2 text-center">
+                        <Badge
+                          variant={coverageBadge(pct)}
+                          className="px-1.5 py-0.5 text-[11px] font-semibold"
                           title={`${stats?.mappedCount ?? 0} / ${stats?.totalControls ?? 0} controls mapped`}
                         >
                           {pct}%
-                        </span>
-                      </td>
+                        </Badge>
+                      </TableCell>
                     );
                   })}
-                  <td className="px-2 py-2 text-center border-l border-base-200">
-                    <span
-                      className={`badge badge-sm font-semibold ${coverageBadge(averageCoverage[src] ?? 0)}`}
+                  <TableCell className="px-2 py-2 text-center border-l border-border">
+                    <Badge
+                      variant={coverageBadge(averageCoverage[src] ?? 0)}
+                      className="font-semibold"
                     >
                       {averageCoverage[src] ?? 0}%
-                    </span>
-                  </td>
-                </tr>
+                    </Badge>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       </section>
     </div>
