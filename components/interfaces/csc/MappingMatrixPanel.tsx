@@ -1,7 +1,10 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'next-i18next';
 import type { ISO } from 'types';
-import { isoValueToLabel } from '@/lib/csc/csc-frameworks';
+import {
+  CSC_FRAMEWORK_TO_SHORTNAME,
+  isoValueToLabel,
+} from '@/lib/csc/csc-frameworks';
 import frameworks from '@/lib/csc/frameworks';
 import {
   computeCoverageMatrix,
@@ -201,23 +204,7 @@ export default function MappingMatrixPanel({
                     title={isoValueToLabel(tgt)}
                   >
                     {/* Short label */}
-                    {tgt === '2013'
-                      ? 'ISO 2013'
-                      : tgt === '2022'
-                        ? 'ISO 2022'
-                        : tgt === 'mvps'
-                          ? 'MVSP'
-                          : tgt === 'nistcsfv2'
-                            ? 'NIST'
-                            : tgt === 'eunis2'
-                              ? 'NIS2'
-                              : tgt === 'gdpr'
-                                ? 'GDPR'
-                                : tgt === 'cisv81'
-                                  ? 'CIS'
-                                  : tgt === 'soc2v2'
-                                    ? 'SOC2'
-                                    : 'C5'}
+                    {CSC_FRAMEWORK_TO_SHORTNAME[tgt]}
                   </th>
                 ))}
                 <th className="px-2 py-2 text-center font-semibold text-base-content/60 whitespace-nowrap border-l border-base-200">

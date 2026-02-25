@@ -1,20 +1,38 @@
 import { ISO } from 'types';
 
+export const CSC_FRAMEWORK_TO_NAME: Record<ISO, string> = {
+  '2013': 'ISO/IEC 27001:2013',
+  '2022': 'ISO/IEC 27001:2022',
+  mvps: 'MVSP v1.0-20211007',
+  nistcsfv2: 'NIST CSF v2',
+  eunis2: 'EU NIS2',
+  gdpr: 'GDPR',
+  cisv81: 'CIS CSC v8.1',
+  soc2v2: 'SOC2 v2',
+  c5_2020: 'C5 2020',
+  owasp_asvs_v5: 'OWASP ASVS v5',
+};
+
 export const isoOptions: {
   label: string;
   value: ISO;
-}[] = [
-  { label: 'ISO/IEC 27001:2013', value: '2013' },
-  { label: 'ISO/IEC 27001:2022', value: '2022' },
-  { label: 'MVSP v1.0-20211007', value: 'mvps' },
-  { label: 'NIST CSF v2', value: 'nistcsfv2' },
-  { label: 'EU NIS2', value: 'eunis2' },
-  { label: 'GDPR', value: 'gdpr' },
-  { label: 'CIS CSC v8.1', value: 'cisv81' },
-  { label: 'SOC2 v2', value: 'soc2v2' },
-  { label: 'C5 2020', value: 'c5_2020' },
-  { label: 'OWASP ASVS v5', value: 'owasp_asvs_v5' },
-];
+}[] = Object.entries(CSC_FRAMEWORK_TO_NAME).map(([value, label]) => ({
+  label,
+  value: value as ISO,
+}));
+
+export const CSC_FRAMEWORK_TO_SHORTNAME: Record<ISO, string> = {
+  mvps: 'MVSP',
+  '2013': 'ISO 2013',
+  '2022': 'ISO 2022',
+  nistcsfv2: 'NIST',
+  eunis2: 'NIS2',
+  gdpr: 'GDPR',
+  cisv81: 'CIS',
+  soc2v2: 'SOC2',
+  c5_2020: 'C5',
+  owasp_asvs_v5: 'ASVS',
+};
 
 export const isoValueToLabel = (value: ISO) =>
-  isoOptions.find((option) => option.value === value)?.label;
+  CSC_FRAMEWORK_TO_NAME[value];
