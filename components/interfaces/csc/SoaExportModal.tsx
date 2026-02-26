@@ -84,7 +84,7 @@ export default function SoaExportModal({
                 loading ? 'cursor-not-allowed opacity-70' : 'cursor-pointer',
                 selected === f.value
                   ? 'border-primary bg-primary/5'
-                  : 'border-border hover:border-muted-foreground/40'
+                  : 'border-border hover:border-foreground/30 hover:bg-muted/60'
               )}
             >
               <RadioGroupItem
