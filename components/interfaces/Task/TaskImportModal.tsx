@@ -28,7 +28,11 @@ interface TaskImportModalProps {
   team: Team;
 }
 
-const TaskImportModal = ({ visible, setVisible, team }: TaskImportModalProps) => {
+const TaskImportModal = ({
+  visible,
+  setVisible,
+  team,
+}: TaskImportModalProps) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const { mutateTasks } = useTasks(slug);
@@ -53,7 +57,8 @@ const TaskImportModal = ({ visible, setVisible, team }: TaskImportModalProps) =>
       const rows = await parseImportFile(file);
       setParsedRows(rows);
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : t('task-import-error');
+      const message =
+        err instanceof Error ? err.message : t('task-import-error');
       toast.error(message);
     } finally {
       setParsing(false);
@@ -102,7 +107,9 @@ const TaskImportModal = ({ visible, setVisible, team }: TaskImportModalProps) =>
       <DialogContent className="sm:max-w-[680px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{t('import-tasks-title')}</DialogTitle>
-          <DialogDescription>{t('import-template-description')}</DialogDescription>
+          <DialogDescription>
+            {t('import-template-description')}
+          </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-5 py-2">
@@ -152,12 +159,16 @@ const TaskImportModal = ({ visible, setVisible, team }: TaskImportModalProps) =>
               </svg>
               <p className="text-sm text-muted-foreground">
                 {fileName ? (
-                  <span className="font-medium text-foreground">{fileName}</span>
+                  <span className="font-medium text-foreground">
+                    {fileName}
+                  </span>
                 ) : (
                   t('select-file-to-import')
                 )}
               </p>
-              <p className="mt-1 text-xs text-muted-foreground">{t('import-file-types')}</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {t('import-file-types')}
+              </p>
             </div>
             <input
               ref={fileInputRef}
@@ -180,12 +191,18 @@ const TaskImportModal = ({ visible, setVisible, team }: TaskImportModalProps) =>
                   {t('task-import-preview', { count: parsedRows.length })}
                 </p>
                 {validRows.length > 0 && (
-                  <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                  <Badge
+                    variant="outline"
+                    className="bg-green-50 text-green-700 border-green-200"
+                  >
                     {validRows.length} {t('import-valid-rows')}
                   </Badge>
                 )}
                 {errorRows.length > 0 && (
-                  <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200">
+                  <Badge
+                    variant="outline"
+                    className="bg-red-50 text-red-700 border-red-200"
+                  >
                     {errorRows.length} {t('import-error-rows')}
                   </Badge>
                 )}
@@ -206,12 +223,18 @@ const TaskImportModal = ({ visible, setVisible, team }: TaskImportModalProps) =>
                     {parsedRows.map((row, i) => (
                       <tr
                         key={i}
-                        className={row.error ? 'bg-red-50 dark:bg-red-950/20' : ''}
+                        className={
+                          row.error ? 'bg-red-50 dark:bg-red-950/20' : ''
+                        }
                       >
-                        <td className="px-3 py-1.5 text-muted-foreground">{i + 1}</td>
+                        <td className="px-3 py-1.5 text-muted-foreground">
+                          {i + 1}
+                        </td>
                         <td className="px-3 py-1.5 max-w-[200px] truncate">
                           {row.title || (
-                            <span className="text-red-500 italic">{t('import-field-missing')}</span>
+                            <span className="text-red-500 italic">
+                              {t('import-field-missing')}
+                            </span>
                           )}
                         </td>
                         <td className="px-3 py-1.5">

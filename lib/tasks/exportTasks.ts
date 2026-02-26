@@ -42,7 +42,14 @@ const DEFAULT_FG_HEX = 'FFFFFF';
 const DEFAULT_FG_RGB: RGB = [255, 255, 255];
 
 // Valid statuses for import validation
-export const VALID_STATUSES = ['todo', 'inprogress', 'inreview', 'feedback', 'done', 'failed'];
+export const VALID_STATUSES = [
+  'todo',
+  'inprogress',
+  'inreview',
+  'feedback',
+  'done',
+  'failed',
+];
 
 // Import row shape
 export interface TaskImportRow {
@@ -52,19 +59,32 @@ export interface TaskImportRow {
   error?: string;
 }
 
-function getBgHex(status: string) { return STATUS_BG_HEX[status] ?? 'E2E8F0'; }
-function getFgHex(status: string) { return STATUS_FG_HEX[status] ?? DEFAULT_FG_HEX; }
-function getBgRgb(status: string): RGB { return STATUS_BG_RGB[status] ?? [226, 232, 240]; }
-function getFgRgb(status: string): RGB { return STATUS_FG_RGB[status] ?? DEFAULT_FG_RGB; }
+function getBgHex(status: string) {
+  return STATUS_BG_HEX[status] ?? 'E2E8F0';
+}
+function getFgHex(status: string) {
+  return STATUS_FG_HEX[status] ?? DEFAULT_FG_HEX;
+}
+function getBgRgb(status: string): RGB {
+  return STATUS_BG_RGB[status] ?? [226, 232, 240];
+}
+function getFgRgb(status: string): RGB {
+  return STATUS_FG_RGB[status] ?? DEFAULT_FG_RGB;
+}
 
-function argb(hex: string) { return `FF${hex.toUpperCase()}`; }
+function argb(hex: string) {
+  return `FF${hex.toUpperCase()}`;
+}
 function fill(hex: string): ExcelJS.Fill {
   return { type: 'pattern', pattern: 'solid', fgColor: { argb: argb(hex) } };
 }
 
 function triggerDownload(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob);
-  const a = Object.assign(document.createElement('a'), { href: url, download: filename });
+  const a = Object.assign(document.createElement('a'), {
+    href: url,
+    download: filename,
+  });
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -89,7 +109,10 @@ function formatDueDate(duedate: string | null | undefined): string {
 
 // ── XLSX Export ────────────────────────────────────────────────────────────────
 
-export async function exportTasksXlsx(tasks: Task[], teamName: string): Promise<void> {
+export async function exportTasksXlsx(
+  tasks: Task[],
+  teamName: string
+): Promise<void> {
   const wb = new ExcelJS.Workbook();
   wb.creator = 'Unicis Platform';
 
@@ -98,7 +121,9 @@ export async function exportTasksXlsx(tasks: Task[], teamName: string): Promise<
   });
 
   // Column widths: Task ID, Title, Modules, Status, Due Date
-  [10, 50, 25, 20, 18].forEach((w, i) => { ws.getColumn(i + 1).width = w; });
+  [10, 50, 25, 20, 18].forEach((w, i) => {
+    ws.getColumn(i + 1).width = w;
+  });
 
   // Title row
   ws.mergeCells('A1:E1');
@@ -115,7 +140,8 @@ export async function exportTasksXlsx(tasks: Task[], teamName: string): Promise<
   ws.getCell('A2').fill = fill('EBF2FA');
   ws.getCell('A2').font = { bold: true, size: 10 };
   ws.mergeCells('D2:E2');
-  ws.getCell('D2').value = `Date of Export: ${format(new Date(), 'dd MMM yyyy HH:mm')}`;
+  ws.getCell('D2').value =
+    `Date of Export: ${format(new Date(), 'dd MMM yyyy HH:mm')}`;
   ws.getCell('D2').fill = fill('EBF2FA');
   ws.getCell('D2').font = { size: 9, italic: true };
   ws.getCell('D2').alignment = { horizontal: 'right' };
@@ -127,7 +153,11 @@ export async function exportTasksXlsx(tasks: Task[], teamName: string): Promise<
     cell.value = label;
     cell.font = { bold: true, color: { argb: 'FFFFFFFF' }, size: 10 };
     cell.fill = fill('00398F');
-    cell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+    cell.alignment = {
+      vertical: 'middle',
+      horizontal: 'center',
+      wrapText: true,
+    };
     cell.border = { bottom: { style: 'medium', color: { argb: 'FF1A3C5E' } } };
   });
   ws.getRow(4).height = 24;
@@ -140,7 +170,13 @@ export async function exportTasksXlsx(tasks: Task[], teamName: string): Promise<
     const modules = getModulesLabel(task.properties);
     const dueDate = formatDueDate(task.duedate);
 
-    [String(task.taskNumber), task.title, modules, task.status, dueDate].forEach((v, ci) => {
+    [
+      String(task.taskNumber),
+      task.title,
+      modules,
+      task.status,
+      dueDate,
+    ].forEach((v, ci) => {
       const cell = ws.getCell(r, ci + 1);
       cell.value = v;
       cell.alignment = { wrapText: true, vertical: 'top' };
@@ -150,8 +186,16 @@ export async function exportTasksXlsx(tasks: Task[], teamName: string): Promise<
       };
       if (ci === 3) {
         cell.fill = fill(getBgHex(status));
-        cell.font = { bold: true, color: { argb: argb(getFgHex(status)) }, size: 9 };
-        cell.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+        cell.font = {
+          bold: true,
+          color: { argb: argb(getFgHex(status)) },
+          size: 9,
+        };
+        cell.alignment = {
+          horizontal: 'center',
+          vertical: 'middle',
+          wrapText: true,
+        };
       } else {
         cell.fill = fill(alt ? 'F5F8FA' : 'FFFFFF');
         cell.font = { size: 9 };
@@ -163,7 +207,8 @@ export async function exportTasksXlsx(tasks: Task[], teamName: string): Promise<
   // Summary row
   const sumR = tasks.length + 5;
   ws.mergeCells(`A${sumR}:E${sumR}`);
-  ws.getCell(`A${sumR}`).value = `Total: ${tasks.length} task(s)  |  Generated by Unicis Platform  |  ${format(new Date(), 'dd MMM yyyy HH:mm')}`;
+  ws.getCell(`A${sumR}`).value =
+    `Total: ${tasks.length} task(s)  |  Generated by Unicis Platform  |  ${format(new Date(), 'dd MMM yyyy HH:mm')}`;
   ws.getCell(`A${sumR}`).font = { italic: true, size: 8 };
   ws.getCell(`A${sumR}`).fill = fill('E8EFF5');
   ws.getRow(sumR).height = 16;
@@ -175,7 +220,10 @@ export async function exportTasksXlsx(tasks: Task[], teamName: string): Promise<
   const blob = new Blob([buf], {
     type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
   });
-  triggerDownload(blob, `Tasks_${teamName}_${format(new Date(), 'yyyy-MM-dd')}.xlsx`);
+  triggerDownload(
+    blob,
+    `Tasks_${teamName}_${format(new Date(), 'yyyy-MM-dd')}.xlsx`
+  );
 }
 
 // ── CSV Export ─────────────────────────────────────────────────────────────────
@@ -183,17 +231,22 @@ export async function exportTasksXlsx(tasks: Task[], teamName: string): Promise<
 export function exportTasksCsv(tasks: Task[], teamName: string): void {
   const csvEsc = (v: string) => `"${String(v).replace(/"/g, '""')}"`;
   const headers = ['Task ID', 'Title', 'Modules', 'Status', 'Due Date'];
-  const rows = tasks.map((task) => [
-    task.taskNumber,
-    csvEsc(task.title),
-    csvEsc(getModulesLabel(task.properties)),
-    task.status,
-    csvEsc(formatDueDate(task.duedate)),
-  ].join(','));
+  const rows = tasks.map((task) =>
+    [
+      task.taskNumber,
+      csvEsc(task.title),
+      csvEsc(getModulesLabel(task.properties)),
+      task.status,
+      csvEsc(formatDueDate(task.duedate)),
+    ].join(',')
+  );
 
   const csv = [headers.join(','), ...rows].join('\r\n');
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
-  triggerDownload(blob, `Tasks_${teamName}_${format(new Date(), 'yyyy-MM-dd')}.csv`);
+  triggerDownload(
+    blob,
+    `Tasks_${teamName}_${format(new Date(), 'yyyy-MM-dd')}.csv`
+  );
 }
 
 // ── HTML Export ────────────────────────────────────────────────────────────────
@@ -207,20 +260,22 @@ export function exportTasksHtml(tasks: Task[], teamName: string): void {
       .replace(/"/g, '&quot;');
   }
 
-  const tableRows = tasks.map((task, i) => {
-    const status = task.status.toLowerCase();
-    const bgHex = `#${getBgHex(status)}`;
-    const fgHex = `#${getFgHex(status)}`;
-    const modules = getModulesLabel(task.properties);
-    const dueDate = formatDueDate(task.duedate) || '—';
-    return `<tr class="${i % 2 ? 'alt' : ''}">
+  const tableRows = tasks
+    .map((task, i) => {
+      const status = task.status.toLowerCase();
+      const bgHex = `#${getBgHex(status)}`;
+      const fgHex = `#${getFgHex(status)}`;
+      const modules = getModulesLabel(task.properties);
+      const dueDate = formatDueDate(task.duedate) || '—';
+      return `<tr class="${i % 2 ? 'alt' : ''}">
       <td class="mono">${esc(String(task.taskNumber))}</td>
       <td>${esc(task.title)}</td>
       <td>${esc(modules)}</td>
       <td><span class="badge" style="background:${esc(bgHex)};color:${esc(fgHex)}">${esc(task.status)}</span></td>
       <td>${esc(dueDate)}</td>
     </tr>`;
-  }).join('');
+    })
+    .join('');
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -280,7 +335,10 @@ export function exportTasksHtml(tasks: Task[], teamName: string): void {
 </html>`;
 
   const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-  triggerDownload(blob, `Tasks_${teamName}_${format(new Date(), 'yyyy-MM-dd')}.html`);
+  triggerDownload(
+    blob,
+    `Tasks_${teamName}_${format(new Date(), 'yyyy-MM-dd')}.html`
+  );
 }
 
 // ── PDF Export ─────────────────────────────────────────────────────────────────
@@ -325,8 +383,18 @@ export function exportTasksPdf(tasks: Task[], teamName: string): void {
       task.status,
       formatDueDate(task.duedate) || '—',
     ]),
-    styles: { fontSize: 7, cellPadding: 4, valign: 'top', overflow: 'linebreak' },
-    headStyles: { fillColor: [17, 47, 117], textColor: 255, fontStyle: 'bold', fontSize: 8 },
+    styles: {
+      fontSize: 7,
+      cellPadding: 4,
+      valign: 'top',
+      overflow: 'linebreak',
+    },
+    headStyles: {
+      fillColor: [17, 47, 117],
+      textColor: 255,
+      fontStyle: 'bold',
+      fontSize: 8,
+    },
     columnStyles: {
       0: { cellWidth: 45 },
       1: { cellWidth: 'auto' },
@@ -364,7 +432,10 @@ export function exportTasksPdf(tasks: Task[], teamName: string): void {
   doc.text(`Total: ${tasks.length} task(s)`, margin, finalY);
 
   const blob = doc.output('blob');
-  triggerDownload(blob, `Tasks_${teamName}_${format(new Date(), 'yyyy-MM-dd')}.pdf`);
+  triggerDownload(
+    blob,
+    `Tasks_${teamName}_${format(new Date(), 'yyyy-MM-dd')}.pdf`
+  );
 }
 
 // ── Import Templates ───────────────────────────────────────────────────────────
@@ -374,7 +445,9 @@ export async function downloadTaskTemplateXlsx(): Promise<void> {
   wb.creator = 'Unicis Platform';
 
   const ws = wb.addWorksheet('Tasks Template');
-  [50, 20, 20].forEach((w, i) => { ws.getColumn(i + 1).width = w; });
+  [50, 20, 20].forEach((w, i) => {
+    ws.getColumn(i + 1).width = w;
+  });
 
   // Header row
   ['Title', 'Status', 'Due Date'].forEach((label, i) => {
@@ -435,7 +508,9 @@ export async function parseImportFile(file: File): Promise<TaskImportRow[]> {
 
 async function parseCsvImport(file: File): Promise<TaskImportRow[]> {
   const text = await file.text();
-  const lines = text.split(/\r?\n/).filter((l) => l.trim() && !l.startsWith('#'));
+  const lines = text
+    .split(/\r?\n/)
+    .filter((l) => l.trim() && !l.startsWith('#'));
 
   if (lines.length < 2) return [];
 
@@ -462,7 +537,9 @@ async function parseXlsxImport(file: File): Promise<TaskImportRow[]> {
   ws.eachRow((row, rowNumber) => {
     if (rowNumber === 1) return; // skip header
     const title = String(row.getCell(1).value ?? '').trim();
-    const status = String(row.getCell(2).value ?? '').trim().toLowerCase();
+    const status = String(row.getCell(2).value ?? '')
+      .trim()
+      .toLowerCase();
     const rawDate = row.getCell(3).value;
     let duedate = '';
     if (rawDate instanceof Date) {
@@ -477,11 +554,17 @@ async function parseXlsxImport(file: File): Promise<TaskImportRow[]> {
   return rows;
 }
 
-function validateImportRow(row: { title: string; status: string; duedate: string }): TaskImportRow {
+function validateImportRow(row: {
+  title: string;
+  status: string;
+  duedate: string;
+}): TaskImportRow {
   const errors: string[] = [];
   if (!row.title) errors.push('Title is required');
   if (!VALID_STATUSES.includes(row.status)) {
-    errors.push(`Invalid status "${row.status}". Must be one of: ${VALID_STATUSES.join(', ')}`);
+    errors.push(
+      `Invalid status "${row.status}". Must be one of: ${VALID_STATUSES.join(', ')}`
+    );
   }
   if (row.duedate && isNaN(Date.parse(row.duedate))) {
     errors.push(`Invalid date "${row.duedate}"`);
