@@ -1,6 +1,6 @@
 {
   "name": "unicis-platform",
-  "version": "0.2.1",
+  "version": "2026-02-27",
   "private": true,
   "scripts": {
     "dev": "next dev --port 4002",
