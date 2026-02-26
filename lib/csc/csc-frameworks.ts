@@ -34,5 +34,4 @@ export const CSC_FRAMEWORK_TO_SHORTNAME: Record<ISO, string> = {
   owasp_asvs_v5: 'ASVS',
 };
 
-export const isoValueToLabel = (value: ISO) =>
-  CSC_FRAMEWORK_TO_NAME[value];
+export const isoValueToLabel = (value: ISO) => CSC_FRAMEWORK_TO_NAME[value];

@@ -1,7 +1,19 @@
 import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
+import { Download, Loader2 } from 'lucide-react';
 import type { ExportFormat } from '@/lib/soa/types';
+import { cn } from '@/components/shadcn/lib/utils';
 import { Button } from '@/components/shadcn/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/shadcn/ui/dialog';
+import { Label } from '@/components/shadcn/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/shadcn/ui/radio-group';
 
 interface Props {
   isOpen: boolean;
@@ -16,7 +28,6 @@ const FORMAT_VALUES: { value: ExportFormat; icon: string }[] = [
   { value: 'html', icon: '🌐' },
 ];
 
-// TODO: remake on shadcn components
 export default function SoaExportModal({
   isOpen,
   onClose,
@@ -26,8 +37,6 @@ export default function SoaExportModal({
   const { t } = useTranslation('common');
   const [selected, setSelected] = useState<ExportFormat>('xlsx');
   const [loading, setLoading] = useState(false);
-
-  if (!isOpen) return null;
 
   const formats = FORMAT_VALUES.map((f) => ({
     ...f,
@@ -46,70 +55,57 @@ export default function SoaExportModal({
   }
 
   return (
-    <dialog className="modal modal-open">
-      <div className="modal-box max-w-md">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute right-2 top-2"
-          onClick={onClose}
-          disabled={loading}
-          aria-label={t('close')}
+    <Dialog
+      open={isOpen}
+      onOpenChange={(open) => {
+        if (loading) return;
+        if (!open) onClose();
+      }}
+    >
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>{t('soa-export.modal-title')}</DialogTitle>
+          <DialogDescription>
+            {t('soa-export.modal-framework')} <strong>{frameworkName}</strong>
+          </DialogDescription>
+        </DialogHeader>
+
+        <RadioGroup
+          value={selected}
+          onValueChange={(value) => setSelected(value as ExportFormat)}
+          className="gap-3"
         >
-          <svg
-            className="h-4 w-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </svg>
-        </Button>
-
-        <h3 className="font-bold text-lg mb-1">
-          {t('soa-export.modal-title')}
-        </h3>
-        <p className="text-sm text-base-content/60 mb-5">
-          {t('soa-export.modal-framework')} <strong>{frameworkName}</strong>
-        </p>
-
-        <div className="flex flex-col gap-2 mb-6">
           {formats.map((f) => (
-            <label
+            <Label
               key={f.value}
-              className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
+              htmlFor={`soa-format-${f.value}`}
+              className={cn(
+                'flex items-start gap-3 rounded-lg border p-3 transition-colors',
+                loading ? 'cursor-not-allowed opacity-70' : 'cursor-pointer',
                 selected === f.value
                   ? 'border-primary bg-primary/5'
-                  : 'border-base-300 hover:border-base-400'
-              }`}
+                  : 'border-border hover:border-muted-foreground/40'
+              )}
             >
-              <input
-                type="radio"
-                name="soa-format"
-                className="radio radio-primary mt-0.5 shrink-0"
+              <RadioGroupItem
+                id={`soa-format-${f.value}`}
                 value={f.value}
-                checked={selected === f.value}
-                onChange={() => setSelected(f.value)}
+                className="mt-0.5 shrink-0"
                 disabled={loading}
               />
               <div>
-                <div className="font-medium text-sm">
+                <div className="text-sm font-medium">
                   {f.icon}&nbsp;{f.label}
                 </div>
-                <div className="text-xs text-base-content/50 mt-0.5">
+                <div className="mt-0.5 text-xs text-muted-foreground">
                   {f.description}
                 </div>
               </div>
-            </label>
+            </Label>
           ))}
-        </div>
+        </RadioGroup>
 
-        <div className="modal-action mt-0">
+        <DialogFooter className="gap-2 sm:gap-2">
           <Button
             variant="ghost"
             size="sm"
@@ -118,38 +114,21 @@ export default function SoaExportModal({
           >
             {t('soa-export.cancel')}
           </Button>
-          <Button onClick={handleDownload} disabled={loading}>
+          <Button onClick={handleDownload} disabled={loading} className="gap-2">
             {loading ? (
               <>
-                <span className="loading loading-spinner loading-xs" />
+                <Loader2 className="h-4 w-4 animate-spin" />
                 {t('soa-export.exporting')}
               </>
             ) : (
               <>
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                  />
-                </svg>
+                <Download className="h-4 w-4" />
                 {t('soa-export.download')}
               </>
             )}
           </Button>
-        </div>
-      </div>
-      <form method="dialog" className="modal-backdrop">
-        <Button variant="ghost" onClick={onClose} disabled={loading}>
-          {t('close')}
-        </Button>
-      </form>
-    </dialog>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
