@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM node:18.18.2
+FROM node:20-bookworm
 
 # Set the working directory in the container
 WORKDIR /app
@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies (use lockfile if present)
+RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
 # Set up database schema
 # RUN npx prisma db push
