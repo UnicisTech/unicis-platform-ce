@@ -11,6 +11,7 @@ const barColors = [
   'rgb(77, 110, 255)', // in review
   'rgb(0, 181, 255)', // feedback
   'rgb(0, 169, 110)', // done
+  'rgb(239, 68, 68)', // failed
 ];
 
 ChartJS.register(ArcElement, Tooltip, Legend);

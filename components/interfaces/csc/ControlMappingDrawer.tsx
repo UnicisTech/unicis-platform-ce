@@ -49,6 +49,7 @@ const TASK_STATUS_BADGE: Record<string, 'default' | 'secondary' | 'outline'> = {
   inProgress: 'secondary',
   backlog: 'outline',
   todo: 'outline',
+  failed: 'outline',
 };
 
 export default function ControlMappingDrawer({

@@ -25,6 +25,7 @@ module.exports = {
           inreview: 'rgb(77, 110, 255)',
           feedback: 'rgb(0, 181, 255)',
           done: 'rgb(0, 169, 110)',
+          failed: 'rgb(239, 68, 68)',
         },
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

@@ -6,6 +6,7 @@ const statusColorMap: Record<string, string> = {
   inreview: 'bg-task-inreview text-white',
   feedback: 'bg-task-feedback text-white',
   done: 'bg-task-done text-white',
+  failed: 'bg-task-failed text-white',
 };
 
 const StatusBadge = ({ label, value }: { label: string; value: string }) => {
