@@ -1,4 +1,4 @@
-import type { Category } from '@prisma/client';
+import type { Category } from '@/generated/browser';
 import fetcher from '@/lib/fetcher';
 import { useRouter } from 'next/router';
 import useSWR, { mutate } from 'swr';

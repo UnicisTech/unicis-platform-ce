@@ -5,7 +5,7 @@ import {
   Team,
   Subscription,
   PaymentStatus,
-} from '@prisma/client';
+} from '@/generated/client';
 import { getTeamMembers } from './team';
 
 export const isTeamHasSubscription = async (teamId: string) => {

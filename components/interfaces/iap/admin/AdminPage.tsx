@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import useCanAccess from 'hooks/useCanAccess';
-import { Category, Team } from '@prisma/client';
+import { Category, Team } from '@/generated/browser';
 import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
 import {
   CompletionResults,

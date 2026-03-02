@@ -1,4 +1,4 @@
-import { CourseContentType } from '@prisma/client';
+import { CourseContentType } from '@/generated/browser';
 
 // 1. Helper functions
 export function allPropsUndefined(obj) {

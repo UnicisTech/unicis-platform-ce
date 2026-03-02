@@ -1,5 +1,5 @@
 import { Error, Loading } from '@/components/shared';
-import type { Team } from '@prisma/client';
+import type { Team } from '@/generated/browser';
 import type { FormikHelpers } from 'formik';
 import useWebhook from 'hooks/useWebhook';
 import useWebhooks from 'hooks/useWebhooks';

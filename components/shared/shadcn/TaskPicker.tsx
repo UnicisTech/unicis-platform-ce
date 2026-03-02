@@ -14,7 +14,7 @@ import {
 } from '@/components/shadcn/ui/select';
 import { Control } from 'react-hook-form';
 import { useTranslation } from 'next-i18next';
-import type { Task } from '@prisma/client';
+import type { Task } from '@/generated/browser';
 
 interface Props {
   control: Control<{ task: Task }>;

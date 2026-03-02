@@ -3,7 +3,7 @@ import { isBusinessEmail } from '@/lib/email/utils';
 import env from '@/lib/env';
 import { prisma } from '@/lib/prisma';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { Role } from '@prisma/client';
+import { Role } from '@/generated/browser';
 import { getAccount } from 'models/account';
 import { addTeamMember, getTeam } from 'models/team';
 import { createUser, getUser } from 'models/user';
@@ -14,7 +14,6 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import { isAuthProviderEnabled } from '@/lib/auth';
-import type { Provider } from 'next-auth/providers';
 import { validateRecaptcha } from '@/lib/recaptcha';
 import rateLimit from '@/lib/rate-limit';
 import { getIpAddress } from '@/lib/utils';
@@ -22,7 +21,7 @@ import { getIpAddress } from '@/lib/utils';
 
 const adapter = PrismaAdapter(prisma);
 
-const providers: Provider[] = [];
+const providers: NextAuthOptions['providers'] = [];
 
 const limiter = rateLimit({
   interval: 60 * 1000, // 60 seconds

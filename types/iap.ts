@@ -1,5 +1,9 @@
-import { CourseContentType, CourseProgress, TeamCourse } from '@prisma/client';
-import { Course } from '@prisma/client';
+import {
+  CourseContentType,
+  CourseProgress,
+  TeamCourse,
+} from '@/generated/browser';
+import { Course } from '@/generated/browser';
 
 export type TeamIapProperties = {
   iap_categories?: string[];

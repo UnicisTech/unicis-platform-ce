@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { steps } from '@/lib/rpa';
 import { Field } from '@/components/shared/atlaskit';
-import type { Task } from '@prisma/client';
+import type { Task } from '@/generated/browser';
 import { RpaProcedureInterface } from 'types';
 import { useTranslation } from 'next-i18next';
 import useTeamMembers from 'hooks/useTeamMembers';

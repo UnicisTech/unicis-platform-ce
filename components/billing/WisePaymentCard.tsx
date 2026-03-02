@@ -13,7 +13,7 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/shadcn/ui/card';
-import { Plan } from '@prisma/client';
+import { Plan } from '@/generated/browser';
 
 interface WisePaymentCardProps {
   team: TeamWithSubscription;

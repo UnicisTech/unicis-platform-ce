@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { WithLoadingAndError, EmptyState } from '@/components/shared';
-import { Team } from '@prisma/client';
+import { Team } from '@/generated/browser';
 import useWebhooks from 'hooks/useWebhooks';
 import toast from 'react-hot-toast';
 import type { EndpointOut } from 'svix';

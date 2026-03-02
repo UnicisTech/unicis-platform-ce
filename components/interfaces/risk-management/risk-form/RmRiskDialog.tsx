@@ -17,7 +17,7 @@ import TaskPicker from '@/components/shared/shadcn/TaskPicker';
 import { Loader2 } from 'lucide-react';
 
 import type { RMProcedureInterface } from 'types';
-import type { Task } from '@prisma/client';
+import type { Task } from '@/generated/browser';
 import { useRiskAndImpactStepForm, useRiskTreatmentStepForm } from './hooks';
 import { RiskAndImpactStep, RiskTreatmentStep } from './steps';
 import { StageTracker } from '@/components/shared/atlaskit';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 import { AccessControl } from '@/components/shared/AccessControl';
-import type { Comment } from '@prisma/client';
+import type { Comment } from '@/generated/browser';
 import QuillEditor from '@/components/shared/QuillEditor';
 import { Button } from '@/components/shadcn/ui/button';
 

@@ -15,7 +15,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/shadcn/ui/dialog';
-import { Team } from '@prisma/client';
+import { Team } from '@/generated/browser';
 import { Button } from '@/components/shadcn/ui/button';
 import { statuses } from '@/lib/tasks';
 import { getCurrentStringDate } from '@/components/services/taskService';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
-import { SubscriptionStatus, Plan } from '@prisma/client';
+import { SubscriptionStatus, Plan } from '@/generated/browser';
 import type { TeamWithSubscription } from 'types';
 import { Button } from '@/components/shadcn/ui/button';
 import { Check } from 'lucide-react';

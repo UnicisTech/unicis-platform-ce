@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { generateToken } from '@/lib/server-common';
-import { VerificationToken } from '@prisma/client';
+import { VerificationToken } from '@/generated/client';
 
 export const createVerificationToken = async ({
   identifier,

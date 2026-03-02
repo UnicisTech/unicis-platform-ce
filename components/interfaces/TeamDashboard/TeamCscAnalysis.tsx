@@ -2,7 +2,7 @@ import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import useISO from 'hooks/useISO';
 import { Loading } from '@/components/shared';
-import { Team } from '@prisma/client';
+import { Team } from '@/generated/browser';
 import type { ISO } from 'types';
 import useCscStatuses from 'hooks/useCscStatuses';
 import CscTabs from '../csc/CscTabs';

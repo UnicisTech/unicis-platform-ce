@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { Card, Error, LetterAvatar, Loading } from '@/components/shared';
 import useTeams from 'hooks/useTeams';
-import { Team } from '@prisma/client';
+import { Team } from '@/generated/browser';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
 
 const Teams = () => {

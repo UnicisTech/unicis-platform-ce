@@ -26,7 +26,7 @@ import useTask from 'hooks/useTask';
 import useTeam from 'hooks/useTeam';
 import useCanAccess from 'hooks/useCanAccess';
 import useISO from 'hooks/useISO';
-import { Team } from '@prisma/client';
+import { Team } from '@/generated/browser';
 import {
   TiaAuditLogs,
   TiaPanel,

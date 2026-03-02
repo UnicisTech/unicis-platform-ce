@@ -33,7 +33,7 @@ import {
 } from './steps';
 import { riskProbabilityPoints, riskSecurityPoints } from '@/lib/pia';
 import type { PiaRisk } from 'types';
-import type { Task } from '@prisma/client';
+import type { Task } from '@/generated/browser';
 import { StageTracker } from '@/components/shared/atlaskit';
 import { steps } from '@/lib/pia';
 

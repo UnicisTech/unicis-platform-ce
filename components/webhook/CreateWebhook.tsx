@@ -1,4 +1,4 @@
-import type { Team } from '@prisma/client';
+import type { Team } from '@/generated/browser';
 import type { FormikHelpers } from 'formik';
 import useWebhooks from 'hooks/useWebhooks';
 import { useTranslation } from 'next-i18next';

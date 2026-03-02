@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { ArrowUpCircleIcon } from '@heroicons/react/24/outline';
-import type { User } from '@prisma/client';
+import type { User } from '@/generated/browser';
 import type { ApiResponse, UserReturned } from 'types';
 import { defaultHeaders } from '@/lib/common';
 

@@ -2,7 +2,7 @@ import { maxLengthPolicies } from '@/lib/common';
 import { ApiError } from '@/lib/errors';
 import { Action, Resource, permissions } from '@/lib/permissions';
 import { prisma } from '@/lib/prisma';
-import { Role, TeamMember } from '@prisma/client';
+import { Role, TeamMember } from '@/generated/client';
 import type { Session } from 'next-auth';
 
 export const normalizeUser = (user) => {

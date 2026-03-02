@@ -1,6 +1,5 @@
-import { CourseContentType, PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import type { CourseContentType } from '@/generated/browser';
+import { prisma } from '@/lib/prisma';
 
 export const getTeamCourses = async (
   teamId: string,

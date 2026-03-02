@@ -34,7 +34,7 @@ import { statuses } from '@/lib/tasks';
 import useTask from 'hooks/useTask';
 import useCanAccess from 'hooks/useCanAccess';
 
-import type { Task, Team } from '@prisma/client';
+import type { Task, Team } from '@/generated/browser';
 import QuillEditor from '@/components/shared/QuillEditor';
 
 const formSchema = z.object({

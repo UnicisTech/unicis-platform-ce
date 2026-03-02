@@ -1,5 +1,5 @@
-import type { Team } from '@prisma/client';
-import { Plan } from '@prisma/client';
+import type { Team } from '@/generated/browser';
+import { Plan } from '@/generated/browser';
 import { Client } from '@retracedhq/retraced';
 import type { CRUD, Event } from '@retracedhq/retraced';
 import type { User } from 'next-auth';

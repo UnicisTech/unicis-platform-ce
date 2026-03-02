@@ -1,4 +1,4 @@
-import { Plan, Subscription, SubscriptionStatus } from '@prisma/client';
+import { Plan, Subscription, SubscriptionStatus } from '@/generated/browser';
 import type { ISO, TeamFeature } from 'types';
 
 // export type SubscriptionType = (typeof Subscription)[keyof typeof Subscription];

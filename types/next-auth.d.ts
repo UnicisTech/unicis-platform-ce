@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-use-before-define
-import type { Role } from '@prisma/client';
+import type { Role } from '@/generated/browser';
 import type { DefaultSession } from 'next-auth';
 
 declare module 'next-auth' {

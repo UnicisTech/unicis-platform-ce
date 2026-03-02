@@ -1,7 +1,7 @@
 import YouTube from 'react-youtube';
 import { extractYouTubeVideoId } from '../services/passCourseService';
 import { MarkdownPreview } from '@/components/shared/uiw/Markdown';
-import { CourseContentType } from '@prisma/client';
+import { CourseContentType } from '@/generated/browser';
 import { IapCourse } from 'types';
 import { Card, CardContent } from '@/components/shadcn/ui/card';
 import { useTranslation } from 'next-i18next';

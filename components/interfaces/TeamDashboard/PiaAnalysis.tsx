@@ -1,7 +1,7 @@
 import RiskMatrixDashboardChart from '../pia/RiskMatrixDashboardChart';
-import { computeRiskMap } from 'models/pia';
+import { computeRiskMap } from '@/lib/pia';
 import { useTranslation } from 'next-i18next';
-import { Task } from '@prisma/client';
+import type { Task } from '@/generated/browser';
 import { Card } from '@/components/shadcn/ui/card';
 
 interface PiaAnalysisProps {

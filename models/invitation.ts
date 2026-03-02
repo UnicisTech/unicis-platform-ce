@@ -1,6 +1,6 @@
 import { ApiError } from '@/lib/errors';
 import { prisma } from '@/lib/prisma';
-import { Invitation, Role } from '@prisma/client';
+import { Invitation, Role } from '@/generated/client';
 import { v4 as uuidv4 } from 'uuid';
 
 export const getInvitations = async (teamId: string) => {

@@ -10,7 +10,7 @@ import useTeams from 'hooks/useTeams';
 import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Role } from '@prisma/client';
+import { Role } from '@/generated/browser';
 import useCanAccess from 'hooks/useCanAccess';
 import { getTeamAccess } from '@/lib/teams';
 

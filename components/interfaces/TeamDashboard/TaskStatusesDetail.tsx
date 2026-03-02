@@ -1,4 +1,4 @@
-import type { Task } from '@prisma/client';
+import type { Task } from '@/generated/browser';
 import { useTranslation } from 'next-i18next';
 
 const TaskStatusesDetail = ({

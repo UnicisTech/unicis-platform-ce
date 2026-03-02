@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import type { TeamProperties, TeamWithSubscription } from 'types';
-import { Subscription } from '@prisma/client';
+import { Subscription } from '@/generated/browser';
 import useSubscription, { subscriptionParams } from 'hooks/useSubscription';
 import {
   Card,

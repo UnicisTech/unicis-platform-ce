@@ -1,4 +1,4 @@
-import { CourseProgress, Role } from '@prisma/client';
+import { CourseProgress, Role } from '@/generated/browser';
 import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
 
 export const getCourseStatus = (

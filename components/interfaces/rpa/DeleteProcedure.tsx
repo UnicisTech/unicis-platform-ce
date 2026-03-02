@@ -15,7 +15,7 @@ import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 
 import type { TaskWithRpaProcedure } from 'types';
-import type { Task } from '@prisma/client';
+import type { Task } from '@/generated/browser';
 
 interface DeleteProcedureProps {
   visible: boolean;

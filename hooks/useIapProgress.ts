@@ -1,4 +1,4 @@
-import type { CourseProgress } from '@prisma/client';
+import type { CourseProgress } from '@/generated/browser';
 import fetcher from '@/lib/fetcher';
 import { useRouter } from 'next/router';
 import useSWR, { mutate } from 'swr';

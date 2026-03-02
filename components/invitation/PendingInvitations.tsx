@@ -10,7 +10,7 @@ import { Button } from '@/components/shadcn/ui/button';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
 import { Error, LetterAvatar, Loading } from '@/components/shared';
 import { defaultHeaders } from '@/lib/common';
-import { Invitation, Team } from '@prisma/client';
+import { Invitation, Team } from '@/generated/browser';
 import useInvitations from 'hooks/useInvitations';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';

@@ -6,7 +6,7 @@ import type { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { DetailsModal, Pricing, WisePaymentCard } from '@/components/billing';
-import { Plan } from '@prisma/client';
+import { Plan } from '@/generated/browser';
 import { isAllowed } from 'models/user';
 import { NextPageWithLayout } from 'types';
 import { inferSSRProps } from '@/lib/inferSSRProps';

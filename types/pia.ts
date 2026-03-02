@@ -1,4 +1,4 @@
-import { Task } from '@prisma/client';
+import { Task } from '@/generated/browser';
 import { AuditLog } from './base';
 
 export type RiskProbability =

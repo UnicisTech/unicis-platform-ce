@@ -1,5 +1,5 @@
 import fetcher from '@/lib/fetcher';
-import { Invitation } from '@prisma/client';
+import { Invitation } from '@/generated/browser';
 import useSWR, { mutate } from 'swr';
 import type { ApiResponse } from 'types';
 

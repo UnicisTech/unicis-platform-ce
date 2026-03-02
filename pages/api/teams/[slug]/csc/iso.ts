@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import { subscriptions } from '@/lib/subscriptions';
-import { Plan } from '@prisma/client';
+import { Plan } from '@/generated/browser';
 import { ISO } from 'types';
 
 export default async function handler(

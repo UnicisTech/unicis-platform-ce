@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Prisma } from '@/generated/client';
 import { mapCscControlToId, mapCscStatusValueLabelToId } from './helpers';
 import { ISO } from 'types';
 import { getCscStatusesProp } from '@/lib/csc';

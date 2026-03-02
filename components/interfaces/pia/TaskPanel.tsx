@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Field } from '@/components/shared/atlaskit';
 import RiskMatrixBubbleChart from './RiskMatrixBubbleChart';
 import { riskSecurityPoints, riskProbabilityPoints } from '@/lib/pia';
-import type { Task } from '@prisma/client';
+import type { Task } from '@/generated/browser';
 import { PiaRisk, TaskProperties } from 'types';
 import { useTranslation } from 'next-i18next';
 import { steps } from '@/lib/pia';

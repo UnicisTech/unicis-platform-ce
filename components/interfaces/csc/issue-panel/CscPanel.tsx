@@ -2,7 +2,7 @@ import React, { useState, useCallback, useMemo } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import ControlBlock from './ControlBlock';
-import type { Task, Team } from '@prisma/client';
+import type { Task, Team } from '@/generated/browser';
 import useCanAccess from 'hooks/useCanAccess';
 import ControlBlockViewOnly from './ControlBlockViewOnly';
 import { getCscControlsProp } from '@/lib/csc';

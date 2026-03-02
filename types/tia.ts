@@ -1,4 +1,4 @@
-import type { Task } from '@prisma/client';
+import type { Task } from '@/generated/browser';
 import type { Session } from 'next-auth';
 import type { Diff } from './base';
 

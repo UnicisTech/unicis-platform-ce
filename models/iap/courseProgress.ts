@@ -1,7 +1,5 @@
 import { countCourseProgress } from '@/lib/iap';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prisma } from '@/lib/prisma';
 
 //TODO: should include teamCourse an teamMember?
 export const getUserCourseProgress = async (

@@ -1,7 +1,7 @@
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Plan, SubscriptionStatus } from '@prisma/client';
+import { Plan, SubscriptionStatus } from '@/generated/browser';
 import { sendSubscriptionRequest } from '@/lib/email/sendSubscriptionRequest';
 import {
   addInitialPayment,

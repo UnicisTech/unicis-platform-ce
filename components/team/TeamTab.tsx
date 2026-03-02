@@ -6,7 +6,7 @@ import {
   ShieldExclamationIcon,
   UserPlusIcon,
 } from '@heroicons/react/24/outline';
-import type { Team } from '@prisma/client';
+import type { Team } from '@/generated/browser';
 import classNames from 'classnames';
 import useCanAccess from 'hooks/useCanAccess';
 import Link from 'next/link';

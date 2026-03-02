@@ -1,7 +1,7 @@
 import env from '@/lib/env';
 import { ssoManager } from '@/lib/jackson/sso';
 import { ssoVerifySchema, validateWithSchema } from '@/lib/zod';
-import { Team } from '@prisma/client';
+import { Team } from '@/generated/browser';
 import { getTeam, getTeams } from 'models/team';
 import { getUser } from 'models/user';
 import { NextApiRequest, NextApiResponse } from 'next';

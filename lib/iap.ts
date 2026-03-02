@@ -1,5 +1,5 @@
 import { Question, QuestionType, TextQuestion } from 'types';
-import { CourseContentType } from '@prisma/client';
+import { CourseContentType } from '@/generated/browser';
 
 export const defaultCategories = ['IT Security', 'Data Privacy', 'Compliance'];
 

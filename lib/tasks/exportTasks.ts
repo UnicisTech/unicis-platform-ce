@@ -2,7 +2,7 @@ import ExcelJS from 'exceljs';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { format } from 'date-fns';
-import type { Task } from '@prisma/client';
+import type { Task } from '@/generated/browser';
 import { getTaskModules } from '@/lib/tasks';
 
 // Module label map (matches ModuleBadge labelMap)

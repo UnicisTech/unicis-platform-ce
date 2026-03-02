@@ -5,7 +5,7 @@ import StatusFilter from './StatusFilter';
 import { PerPageSelector } from '@/components/shared';
 import { ISO } from 'types';
 import useCscStatuses from 'hooks/useCscStatuses';
-import { Task } from '@prisma/client';
+import { Task } from '@/generated/browser';
 import CscChartsLayout from './CscChartsLayout';
 import { CscStatus, CSC_STATUSES } from '@/lib/csc/csc-statuses';
 import { useTranslation } from 'next-i18next';

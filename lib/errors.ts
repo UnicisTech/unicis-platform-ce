@@ -1,18 +1,12 @@
-import {
-  PrismaClientKnownRequestError,
-  PrismaClientUnknownRequestError,
-  PrismaClientRustPanicError,
-  PrismaClientInitializationError,
-  PrismaClientValidationError,
-} from '@prisma/client/runtime/library';
+import { Prisma } from '@/generated/client';
 
 export const isPrismaError = (error: any): boolean => {
   return (
-    error instanceof PrismaClientKnownRequestError ||
-    error instanceof PrismaClientUnknownRequestError ||
-    error instanceof PrismaClientRustPanicError ||
-    error instanceof PrismaClientInitializationError ||
-    error instanceof PrismaClientValidationError
+    error instanceof Prisma.PrismaClientKnownRequestError ||
+    error instanceof Prisma.PrismaClientUnknownRequestError ||
+    error instanceof Prisma.PrismaClientRustPanicError ||
+    error instanceof Prisma.PrismaClientInitializationError ||
+    error instanceof Prisma.PrismaClientValidationError
   );
 };
 

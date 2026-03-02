@@ -3,7 +3,7 @@ import { render } from '@react-email/render';
 import { ResetPasswordEmail } from '@/components/emailTemplates';
 import app from '../app';
 import env from '../env';
-import { User } from '@prisma/client';
+import { User } from '@/generated/browser';
 
 export const sendPasswordResetEmail = async (user: User, token: string) => {
   const subject = `Reset your ${app.name} password`;

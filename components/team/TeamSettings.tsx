@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 //TODO: insolate updateTeamSchema logic
 //import { updateTeamSchema } from '@/lib/zod';
 import { defaultHeaders, domainRegex } from '@/lib/common';
-import type { Team } from '@prisma/client';
+import type { Team } from '@/generated/browser';
 import type { ApiResponse } from 'types';
 import { AccessControl } from '@/components/shared/AccessControl';
 import {

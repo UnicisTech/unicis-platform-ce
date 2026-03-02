@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { MultiSelect } from '@/components/shadcn/ui/multi-select';
 import { getCscControlsProp } from '@/lib/csc';
-import type { Task } from '@prisma/client';
+import type { Task } from '@/generated/browser';
 import type { CscOption, ISO } from 'types';
 
 const getSelectedOptions = (

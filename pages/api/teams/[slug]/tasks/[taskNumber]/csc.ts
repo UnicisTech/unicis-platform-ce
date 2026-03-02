@@ -2,7 +2,7 @@ import {
   addControlsToIssue,
   changeControlInIssue,
   removeControlsFromIssue,
-} from '@/lib/csc';
+} from 'models/csc';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { ISO } from 'types';
 import { throwIfNoTeamAccess } from 'models/team';

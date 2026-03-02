@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import CommentEdit from './CommentEdit';
 import CommentView from './CommentView';
 import CommentHeader from './CommentHeader';
-import type { Comment } from '@prisma/client';
+import type { Comment } from '@/generated/browser';
 import type { ExtendedComment } from 'types';
 import CommentAvatar from './CommentAvatar';
 

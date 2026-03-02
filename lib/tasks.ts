@@ -7,7 +7,14 @@ const dateOptions = {
   hour12: true,
 };
 
-export const statuses = ['todo', 'inprogress', 'inreview', 'feedback', 'done', 'failed'];
+export const statuses = [
+  'todo',
+  'inprogress',
+  'inreview',
+  'feedback',
+  'done',
+  'failed',
+];
 export const taskModuleKeys = [
   'rpa_procedure',
   'tia_procedure',

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'next-i18next';
-import type { Task } from '@prisma/client';
+import type { Task } from '@/generated/browser';
 import type { AuditLog } from 'types';
 import {
   Table,

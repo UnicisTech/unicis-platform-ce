@@ -2,7 +2,7 @@
 
 import { Head, Html, Preview, Text } from '@react-email/components';
 import EmailLayout from './EmailLayout';
-import { Team } from '@prisma/client';
+import { Team } from '@/generated/browser';
 
 interface SubscriptionRequestProps {
   companyName: string;

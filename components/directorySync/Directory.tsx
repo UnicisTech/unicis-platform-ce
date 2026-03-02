@@ -1,5 +1,5 @@
 import { Error, Loading } from '@/components/shared';
-import { Team } from '@prisma/client';
+import { Team } from '@/generated/browser';
 import useDirectory from 'hooks/useDirectory';
 import { useTranslation } from 'next-i18next';
 

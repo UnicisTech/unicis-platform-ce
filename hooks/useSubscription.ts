@@ -1,5 +1,5 @@
 import { SubscriptionPermissions } from '@/lib/subscriptions';
-import { Subscription, SubscriptionStatus, Plan } from '@prisma/client';
+import { Subscription, SubscriptionStatus, Plan } from '@/generated/browser';
 
 const params: SubscriptionPermissions = {
   COMMUNITY: {

@@ -1,4 +1,4 @@
-import { Team } from '@prisma/client';
+import { Team } from '@/generated/browser';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';

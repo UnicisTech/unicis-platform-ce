@@ -1,4 +1,4 @@
-import { Task } from '@prisma/client';
+import { Task } from '@/generated/browser';
 import { useEffect, useState } from 'react';
 import type { ProcedureQueueItem, UseRpaCreationState } from 'types';
 

@@ -12,7 +12,7 @@ import {
 import useTasks from 'hooks/useTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import usePagination from 'hooks/usePagination';
-import type { Task, Team } from '@prisma/client';
+import type { Task, Team } from '@/generated/browser';
 import { CreateTask } from '@/components/interfaces/Task';
 import ModuleBadge from '@/components/shared/ModuleBadge';
 import TaskFilters from '@/components/interfaces/Task/TaskFilters';

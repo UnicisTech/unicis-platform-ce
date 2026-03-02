@@ -2,7 +2,7 @@ import { prisma } from '@/lib/prisma';
 import { getCscStatusesProp } from '@/lib/csc';
 import { getSession } from '@/lib/session';
 import { findOrCreateApp } from '@/lib/svix';
-import { Role } from '@prisma/client';
+import { Role } from '@/generated/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { ISO, TeamProperties } from 'types';
 import { addSubscription } from './subscription';

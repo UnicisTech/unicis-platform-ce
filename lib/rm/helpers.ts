@@ -1,4 +1,4 @@
-import type { Task } from '@prisma/client';
+import type { Task } from '@/generated/browser';
 import type { RMProcedureInterface, TaskProperties } from 'types';
 
 const transformToRange = (value: number): number => {

@@ -7,7 +7,7 @@ import {
   TableRow,
 } from '@/components/shadcn/ui/table';
 import { Error, LetterAvatar, Loading } from '@/components/shared';
-import { Team, TeamMember } from '@prisma/client';
+import { Team, TeamMember } from '@/generated/browser';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeamMembers from 'hooks/useTeamMembers';
 import { useSession } from 'next-auth/react';

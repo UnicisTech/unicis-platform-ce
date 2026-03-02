@@ -44,8 +44,8 @@ import {
   //   Category,
   ApiResponse,
 } from 'types';
-import type { Team, Category } from '@prisma/client';
-import { CourseContentType } from '@prisma/client';
+import type { Team, Category } from '@/generated/browser';
+import { CourseContentType } from '@/generated/browser';
 import { courseTypes, questionTypes } from '@/lib/iap';
 import {
   validateNumberField,

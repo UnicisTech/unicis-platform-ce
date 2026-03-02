@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import { Prisma } from '@prisma/client';
+import { Prisma } from '@/generated/browser';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { capitalizeCountryName } from '@/lib/utils';
 import {

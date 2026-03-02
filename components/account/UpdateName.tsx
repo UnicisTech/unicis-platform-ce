@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { useSession } from 'next-auth/react';
 import type { ApiResponse, UserReturned } from 'types';
-import type { User } from '@prisma/client';
+import type { User } from '@/generated/browser';
 import { defaultHeaders } from '@/lib/common';
 
 import {

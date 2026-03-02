@@ -1,4 +1,4 @@
-import { Team } from '@prisma/client';
+import { Team } from '@/generated/browser';
 import { sendEmail } from './sendEmail';
 import { SubscriptionRequest } from '@/components/emailTemplates';
 import { render } from '@react-email/render';

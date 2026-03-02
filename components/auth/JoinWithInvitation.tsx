@@ -8,7 +8,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { defaultHeaders, validatePassword } from '@/lib/common';
 import useInvitation from 'hooks/useInvitation';
 import type { ApiResponse } from 'types';
-import type { User } from '@prisma/client';
+import type { User } from '@/generated/browser';
 
 import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
