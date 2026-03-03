@@ -3,7 +3,7 @@ const Field = ({
   value,
 }: {
   label: string;
-  value?: string | number | JSX.Element;
+  value?: string | number | React.ReactNode;
 }) => {
   return (
     <div className="mt-3">
