@@ -1,7 +1,7 @@
-import createDOMPurify from 'dompurify';
+import createDOMPurify, { type WindowLike } from 'dompurify';
 import { JSDOM } from 'jsdom';
 
-const window = new JSDOM('').window as unknown as Window;
+const window = new JSDOM('').window as unknown as WindowLike;
 const DOMPurify = createDOMPurify(window);
 
 const ALLOWED_TAGS = [
@@ -22,18 +22,7 @@ const ALLOWED_TAGS = [
   'div',
 ];
 
-const ALLOWED_ATTR: Record<string, string[]> = {
-  a: ['href', 'target', 'rel'],
-  p: ['class'],
-  span: ['class'],
-  div: ['class'],
-  pre: ['class'],
-  code: ['class'],
-  ol: ['class'],
-  ul: ['class'],
-  li: ['class'],
-  blockquote: ['class'],
-};
+const ALLOWED_ATTR = ['href', 'target', 'rel', 'class'];
 
 export const sanitizeRichText = (html: string) => {
   if (!html) return '';
