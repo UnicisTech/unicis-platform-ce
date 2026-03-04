@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import { sendEvent } from '@/lib/svix';
+import { sanitizeRichText } from '@/lib/sanitizeRichText';
 
 export default async function handler(
   req: NextApiRequest,
@@ -43,10 +44,11 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const { text } = req.body;
+  const sanitizedText = sanitizeRichText(typeof text === 'string' ? text : '');
   const userId = teamMember.user.id;
 
   const comment = await createComment({
-    text,
+    text: sanitizedText,
     taskNumber: taskNumberAsNumber,
     slug: slug as string,
     userId,
@@ -71,8 +73,9 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   throwIfNotAllowed(teamMember, 'task', 'update');
 
   const { text, id } = req.body;
+  const sanitizedText = sanitizeRichText(typeof text === 'string' ? text : '');
 
-  const comment = await updateComment(id, text);
+  const comment = await updateComment(id, sanitizedText);
 
   if (!comment) {
     return res.status(503).json({

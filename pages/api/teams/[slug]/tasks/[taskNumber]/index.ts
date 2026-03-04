@@ -3,6 +3,7 @@ import { getTaskBySlugAndNumber, updateTask, deleteTask } from 'models/task';
 import { throwIfNoTeamAccess } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNotAllowed } from 'models/user';
+import { sanitizeRichText } from '@/lib/sanitizeRichText';
 
 export default async function handler(
   req: NextApiRequest,
@@ -72,7 +73,17 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const { data } = req.body;
-  const task = await updateTask(taskNumberAsNumber, slug as string, data);
+  const sanitizedData = { ...data };
+
+  if (typeof sanitizedData.description === 'string') {
+    sanitizedData.description = sanitizeRichText(sanitizedData.description);
+  }
+
+  const task = await updateTask(
+    taskNumberAsNumber,
+    slug as string,
+    sanitizedData
+  );
 
   if (!task) {
     return res.status(404).json({

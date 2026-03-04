@@ -82,5 +82,8 @@ ENV RESEND_FROM=${RESEND_FROM}
 # Build the Next.js app
 RUN npm run build
 
+# Remove dev dependencies for runtime
+RUN npm prune --omit=dev
+
 # Start the Next.js app
 CMD ["npm", "start"]

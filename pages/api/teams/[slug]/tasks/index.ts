@@ -3,6 +3,7 @@ import { createTask, getTeamTasks } from 'models/task';
 import { throwIfNoTeamAccess } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNotAllowed } from 'models/user';
+import { sanitizeRichText } from '@/lib/sanitizeRichText';
 
 export default async function handler(
   req: NextApiRequest,
@@ -40,6 +41,9 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   throwIfNotAllowed(teamMember, 'task', 'create');
 
   const { title, status, duedate, description } = req.body;
+  const sanitizedDescription = sanitizeRichText(
+    typeof description === 'string' ? description : ''
+  );
   const {
     user: { id: authorId },
     teamId,
@@ -51,7 +55,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     title,
     status,
     duedate,
-    description,
+    description: sanitizedDescription,
   });
 
   await sendEvent(teamMember.teamId, 'task.created', task);
