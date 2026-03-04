@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface PaginationResult<T> {
   currentPage: number;
@@ -15,40 +15,36 @@ const usePagination = <T>(data: T[], perPage: number): PaginationResult<T> => {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(data.length / perPage);
 
-  const startIndex = (currentPage - 1) * perPage;
+  const safeTotalPages = Math.max(totalPages, 1);
+  const safeCurrentPage = Math.min(currentPage, safeTotalPages);
+
+  const startIndex = (safeCurrentPage - 1) * perPage;
   const endIndex = startIndex + perPage;
   const pageData = data.slice(startIndex, endIndex);
 
   const goToPreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+    if (safeCurrentPage > 1) {
+      setCurrentPage(safeCurrentPage - 1);
     }
   };
 
   const goToNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
+    if (safeCurrentPage < safeTotalPages) {
+      setCurrentPage(safeCurrentPage + 1);
     }
   };
 
   const goToPage = (page: number) => {
-    if (page >= 1 && page <= totalPages) {
+    if (page >= 1 && page <= safeTotalPages) {
       setCurrentPage(page);
     }
   };
 
-  const prevButtonDisabled = currentPage === 1;
-  const nextButtonDisabled = currentPage === totalPages;
-
-  useEffect(() => {
-    if (currentPage >= totalPages) {
-      //If totalPages is non zero positive number - set currentPage as totalPages, else set currentPage as 1
-      setCurrentPage(totalPages || 1);
-    }
-  }, [currentPage, totalPages]);
+  const prevButtonDisabled = safeCurrentPage === 1;
+  const nextButtonDisabled = safeCurrentPage === safeTotalPages;
 
   return {
-    currentPage,
+    currentPage: safeCurrentPage,
     totalPages,
     pageData,
     goToPage,

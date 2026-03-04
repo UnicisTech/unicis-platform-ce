@@ -8,7 +8,7 @@ import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import React, { ReactElement, useEffect, useState, useRef } from 'react';
+import React, { ReactElement, useMemo, useState, useRef } from 'react';
 import { getCsrfToken, signIn, useSession } from 'next-auth/react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
@@ -41,7 +41,6 @@ const Login: NextPageWithLayout<
   const { status } = useSession();
   const { t } = useTranslation('common');
   const [recaptchaToken, setRecaptchaToken] = useState('');
-  const [message, setMessage] = useState<Message>({ text: null, status: null });
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isResendButtonVisible, setIsResendButtonVisible] =
     useState<boolean>(false);
@@ -53,9 +52,10 @@ const Login: NextPageWithLayout<
     token?: string;
   };
 
-  useEffect(() => {
-    if (error) setMessage({ text: getAuthErrorKey(error), status: 'error' });
-    else if (success) setMessage({ text: success, status: 'success' });
+  const noticeMessage = useMemo<Message | null>(() => {
+    if (error) return { text: getAuthErrorKey(error), status: 'error' };
+    if (success) return { text: success, status: 'success' };
+    return null;
   }, [error, success]);
 
   const redirectUrl = token
@@ -95,12 +95,12 @@ const Login: NextPageWithLayout<
 
   return (
     <>
-      {message.text && message.status && (
+      {noticeMessage?.text && noticeMessage.status && (
         <Alert
-          variant={message.status === 'error' ? 'destructive' : 'default'}
+          variant={noticeMessage.status === 'error' ? 'destructive' : 'default'}
           className="mb-4"
         >
-          <AlertDescription>{t(message.text)}</AlertDescription>
+          <AlertDescription>{t(noticeMessage.text)}</AlertDescription>
         </Alert>
       )}
 

@@ -32,11 +32,15 @@ const Dashboard = () => {
   );
 
   const rpaState = useRpaCreation();
+  const { setIsRpaOpen } = rpaState;
 
-  const onEditClickHandler = useCallback((task: TaskWithRpaProcedure) => {
-    setTaskToEdit(task);
-    rpaState.setIsRpaOpen(true);
-  }, []);
+  const onEditClickHandler = useCallback(
+    (task: TaskWithRpaProcedure) => {
+      setTaskToEdit(task);
+      setIsRpaOpen(true);
+    },
+    [setIsRpaOpen]
+  );
 
   const onDeleteClickHandler = useCallback((task: TaskWithRpaProcedure) => {
     setTaskToDelete(task);
@@ -71,7 +75,7 @@ const Dashboard = () => {
               color="primary"
               onClick={() => {
                 setTaskToEdit(null);
-                rpaState.setIsRpaOpen(true);
+                setIsRpaOpen(true);
               }}
             >
               {t('create')}

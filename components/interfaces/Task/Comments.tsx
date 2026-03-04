@@ -78,7 +78,7 @@ export default function Comments({
         toast.error(t('errors.unexpectedError'));
       }
     },
-    [slug, taskNumber, mutateTask]
+    [slug, taskNumber, mutateTask, t]
   );
 
   const handleUpdateComment = useCallback(
@@ -105,7 +105,7 @@ export default function Comments({
         toast.error(t('errors.unexpectedError'));
       }
     },
-    [slug, taskNumber, mutateTask]
+    [slug, taskNumber, mutateTask, t]
   );
 
   const handleDeleteComment = useCallback(
@@ -133,7 +133,7 @@ export default function Comments({
         toast.error(t('errors.unexpectedError'));
       }
     },
-    [slug, taskNumber, mutateTask]
+    [slug, taskNumber, mutateTask, t]
   );
 
   return (

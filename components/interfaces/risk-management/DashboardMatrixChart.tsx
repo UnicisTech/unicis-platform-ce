@@ -36,7 +36,6 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
   const { t } = useTranslation('common');
   const { isDark } = useTheme();
   const chartRef = useRef<any>(null);
-  const [points, setPoints] = useState<any[]>([]);
   const chartWidth = CELL_SIZE * MATRIX_SIZE * 1.5;
   const chartHeight = CELL_SIZE * MATRIX_SIZE;
 
@@ -126,20 +125,24 @@ const RiskMatrixDashboardChart = ({ datasets, counterMap }: any) => {
     },
   };
 
+  const [points, setPoints] = useState<any[]>([]);
+
   useEffect(() => {
     const chartInstance = chartRef.current?.chartInstance || chartRef.current;
-    if (chartInstance) {
-      const scales = chartInstance.scales;
-      const newPoints = Array.from({ length: 5 }, (_, x) =>
-        Array.from({ length: 5 }, (_, y) => ({
-          x: scales.x.getPixelForValue(x + 0.5),
-          y: scales.y.getPixelForValue(y + 0.5),
-          value: counterMap.get(`${x},${y}`) || 0,
-        }))
-      ).flat();
-      setPoints(newPoints);
-    }
-  }, [datasets]);
+    if (!chartInstance) return;
+
+    const scales = chartInstance.scales;
+    const newPoints = Array.from({ length: 5 }, (_, x) =>
+      Array.from({ length: 5 }, (_, y) => ({
+        x: scales.x.getPixelForValue(x + 0.5),
+        y: scales.y.getPixelForValue(y + 0.5),
+        value: counterMap.get(`${x},${y}`) || 0,
+      }))
+    ).flat();
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setPoints(newPoints);
+  }, [counterMap, datasets]);
 
   return (
     <div

@@ -50,7 +50,7 @@ const AcceptTeamInvitation: NextPageWithLayout = () => {
       }
 
       router.push(`/teams`);
-    } catch (error) {
+    } catch {
       toast.error(t('errors.invitationAccepting'));
     } finally {
       setIsAccepting(false);

@@ -155,7 +155,7 @@ const RpaPanel: React.FC<{ task: Task; slug: string }> = ({ task, slug }) => {
             <SecurityMeasuresTab key={4} step={procedure[4]} />,
           ]
         : [],
-    [procedure]
+    [procedure, slug]
   );
 
   const hasProcedure = tabs.length > 0;

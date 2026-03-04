@@ -57,8 +57,6 @@ export default async function handler(
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
 
-  teamMember.team.subscription?.plan;
-
   throwIfNotAllowed(teamMember, 'team_sso', 'read');
 
   if ('clientID' in req.query) {

@@ -36,7 +36,11 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
         (proc) => proc.TransferMechanism === 'yes'
       );
 
-      isAuthorized ? perAuthorization++ : notPermitAuthorization++;
+      if (isAuthorized) {
+        perAuthorization++;
+      } else {
+        notPermitAuthorization++;
+      }
     }
   });
 

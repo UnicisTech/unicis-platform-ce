@@ -101,7 +101,7 @@ export default function CscPanel({
       if (error) return toast.error(error.message || t('errors.requestFailed'));
       mutateStatuses();
     },
-    [slug, iso, t]
+    [slug, iso, t, mutateStatuses]
   );
 
   const taskSelectorHandler = useCallback(

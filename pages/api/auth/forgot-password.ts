@@ -37,7 +37,7 @@ export default async function handler(
       const status = error.status || 500;
       res.status(status).json({ error: { message } });
     }
-  } catch (error: any) {
+  } catch {
     res.status(429).json({ error: { message: 'Rate limit exceeded' } });
   }
 }

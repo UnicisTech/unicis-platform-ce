@@ -73,7 +73,7 @@ const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
 
       toast.success(t('iap-course-saved'));
       mutateProgress();
-    } catch (e) {
+    } catch {
       toast.error(t('errors.somethingWentWrong'));
     }
   };
@@ -85,12 +85,18 @@ const CoursePage = ({ teamCourse }: { teamCourse: TeamCourseWithProgress }) => {
       progress: number;
       answers: any;
     };
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setStarted(true);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setAnswers(answers);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFinished(progress === 100);
 
     const nextIndex = answers.findIndex((item) => !item);
-    if (nextIndex !== -1) setCurrentQuestionIndex(nextIndex);
+    if (nextIndex !== -1) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setCurrentQuestionIndex(nextIndex);
+    }
   }, [userProgress]);
 
   if (isLoading) return <Loading />;

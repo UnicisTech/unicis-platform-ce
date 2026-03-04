@@ -34,7 +34,7 @@ const StatusSelector = ({
 
     try {
       await handler(control, val);
-    } catch (e) {
+    } catch {
       setValue(prev);
     }
   };

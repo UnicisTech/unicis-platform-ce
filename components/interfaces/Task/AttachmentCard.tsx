@@ -63,7 +63,7 @@ const AttachmentsCard = ({
         console.error(error);
       }
     },
-    [attachment.id, attachment.filename, taskNumber, teamSlug]
+    [attachment.id, attachment.filename, taskNumber, teamSlug, t]
   );
 
   const deleteHandler = useCallback(async () => {
@@ -84,7 +84,7 @@ const AttachmentsCard = ({
     } catch {
       toast.error(t('errors.unexpectedError'));
     }
-  }, [teamSlug, taskNumber, attachment.id, mutateTask]);
+  }, [teamSlug, taskNumber, attachment.id, mutateTask, t]);
 
   const openDeleteModal = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {

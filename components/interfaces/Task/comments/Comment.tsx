@@ -21,13 +21,16 @@ const Comment = ({
   updateComment,
   deleteComment,
 }: CommentProps) => {
-  const handleActivateEditMode = useCallback((id: number) => {
-    setCommentToEdit(id);
-  }, []);
+  const handleActivateEditMode = useCallback(
+    (id: number) => {
+      setCommentToEdit(id);
+    },
+    [setCommentToEdit]
+  );
 
   const handleCancelClick = useCallback(() => {
     setCommentToEdit(null);
-  }, []);
+  }, [setCommentToEdit]);
 
   return (
     <div className="flex gap-2">

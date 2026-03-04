@@ -53,10 +53,13 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
     if (file) uploadFile(file);
   };
 
-  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) uploadFile(file);
-  }, []);
+  const onChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) uploadFile(file);
+    },
+    [uploadFile]
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

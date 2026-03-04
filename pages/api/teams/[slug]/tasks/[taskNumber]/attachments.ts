@@ -116,7 +116,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
         .status(200)
         .json({ error: { message: 'Not supported type of file.' } });
     }
-  } catch (e) {
+  } catch {
     res.status(200).json({
       error: { message: 'File is too large. Maximum size of file is 10mb.' },
     });

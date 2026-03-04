@@ -18,13 +18,15 @@ export default function AppShell({ children }) {
       const { email, name } = data.user;
       if (email && name) {
         const [firstName, lastName] = name.split(' ') as string[];
-        (window as any).mt &&
-          (window as any).mt('send', 'pageview', {
+        const matomo = (window as any).mt;
+        if (typeof matomo === 'function') {
+          matomo('send', 'pageview', {
             email: email,
             firstname: firstName,
             lastname: lastName,
             tags: 'BE',
           });
+        }
       }
     }
   }, [status]);

@@ -6,35 +6,28 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useState, type ReactElement, useEffect } from 'react';
+import { useMemo, type ReactElement } from 'react';
 import { toast } from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import { ApiResponse, ComponentStatus, NextPageWithLayout } from 'types';
+import { ApiResponse, NextPageWithLayout } from 'types';
 import * as Yup from 'yup';
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
 
+// TODO: change Alert to toast?
 const VerifyAccount: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = () => {
   const router = useRouter();
   const { t } = useTranslation('common');
-  const [message, setMessage] = useState<{
-    text: string | null;
-    status: ComponentStatus | null;
-  }>({
-    text: null,
-    status: null,
-  });
   const { error } = router.query as { error: string };
 
-  useEffect(() => {
-    if (error) {
-      setMessage({ text: getAuthErrorKey(error), status: 'error' });
-    }
-  }, [router, router.query, error]);
+  const errorMessage = useMemo(() => {
+    if (!error) return null;
+    return { text: getAuthErrorKey(error), status: 'error' } as const;
+  }, [error]);
 
   const formik = useFormik({
     initialValues: {
@@ -68,8 +61,8 @@ const VerifyAccount: NextPageWithLayout<
       <Head>
         <title>{t('resend-token-title')}</title>
       </Head>
-      {message.text && message.status && (
-        <Alert status={message.status}>{t(message.text)}</Alert>
+      {errorMessage && (
+        <Alert status={errorMessage.status}>{t(errorMessage.text)}</Alert>
       )}
       <div className="rounded p-6 border">
         <form onSubmit={formik.handleSubmit}>

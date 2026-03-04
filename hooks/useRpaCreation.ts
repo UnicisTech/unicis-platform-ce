@@ -1,5 +1,5 @@
 import { Task } from '@/generated/browser';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { ProcedureQueueItem, UseRpaCreationState } from 'types';
 
 const useRpaCreation = (task?: Task): UseRpaCreationState => {
@@ -7,7 +7,9 @@ const useRpaCreation = (task?: Task): UseRpaCreationState => {
   const [isPiaOpen, setIsPiaOpen] = useState<boolean>(false);
   const [isTiaOpen, setIsTiaOpen] = useState<boolean>(false);
 
-  const [selectedTask, setSelectedTask] = useState<Task | undefined>(task);
+  const [internalSelectedTask, setInternalSelectedTask] = useState<
+    Task | undefined
+  >(task);
   const [procedureQueue, setProcedureQueue] = useState<ProcedureQueueItem[]>(
     []
   );
@@ -17,7 +19,7 @@ const useRpaCreation = (task?: Task): UseRpaCreationState => {
     selectedTask: Task
   ) => {
     setProcedureQueue(procedureQueue);
-    setSelectedTask(selectedTask);
+    setInternalSelectedTask(selectedTask);
   };
 
   const onProcedureCompletedCallback = (procedure: ProcedureQueueItem) => {
@@ -39,11 +41,10 @@ const useRpaCreation = (task?: Task): UseRpaCreationState => {
     }
   }, [procedureQueue]);
 
-  useEffect(() => {
-    if (task) {
-      setSelectedTask(task);
-    }
-  }, [task]);
+  const selectedTask = useMemo(
+    () => task ?? internalSelectedTask,
+    [task, internalSelectedTask]
+  );
 
   return {
     selectedTask,

@@ -137,9 +137,10 @@ const RiskMatrixDashboardChart = ({
           value: counterMap.get(`${x},${y}`) || 0,
         }))
       ).flat();
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPoints(newPoints);
     }
-  }, [datasets]);
+  }, [counterMap, datasets]);
 
   return (
     <div

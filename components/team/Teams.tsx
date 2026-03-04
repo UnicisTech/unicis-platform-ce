@@ -5,7 +5,7 @@ import useTeams from 'hooks/useTeams';
 import { useTranslation } from 'next-i18next';
 import useCanAccess from 'hooks/useCanAccess';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import { useRouter } from 'next/router';
@@ -26,11 +26,10 @@ const Teams = () => {
 
   const { newTeam } = router.query as { newTeam: string };
 
-  useEffect(() => {
-    if (newTeam) {
-      setCreateTeamVisible(true);
-    }
-  }, [newTeam]);
+  const isCreateTeamVisible = useMemo(
+    () => Boolean(newTeam) || createTeamVisible,
+    [newTeam, createTeamVisible]
+  );
 
   const leaveTeam = async (team: Team) => {
     const response = await fetch(`/api/teams/${team.slug}/members`, {
@@ -63,7 +62,7 @@ const Teams = () => {
               </p>
             </div>
             {canAccess('team', ['create']) && (
-              <Button onClick={() => setCreateTeamVisible(!createTeamVisible)}>
+              <Button onClick={() => setCreateTeamVisible((value) => !value)}>
                 {t('create-team')}
               </Button>
             )}
@@ -126,7 +125,7 @@ const Teams = () => {
             {t('leave-team-confirmation')}
           </ConfirmationDialog>
           <CreateTeam
-            visible={createTeamVisible}
+            visible={isCreateTeamVisible}
             setVisible={setCreateTeamVisible}
           />
         </div>

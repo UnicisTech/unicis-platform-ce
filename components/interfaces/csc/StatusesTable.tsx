@@ -92,7 +92,7 @@ const StatusesTable = ({
     }
 
     return controls;
-  }, [frameworks, sectionFilter, statusFilter]);
+  }, [ISO, frameworks, sectionFilter, statusFilter, statuses]);
 
   const {
     currentPage,

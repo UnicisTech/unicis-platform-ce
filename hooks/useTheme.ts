@@ -16,14 +16,14 @@ const parseTheme = (value: string | null): Theme | null => {
 };
 
 const useTheme = () => {
-  const [theme, setTheme] = useState<Theme | null>(null);
+  const [theme, setTheme] = useState<Theme | null>(() => {
+    if (typeof window === 'undefined') return null;
+    return parseTheme(localStorage.getItem('theme'));
+  });
   const [systemPrefersDark, setSystemPrefersDark] = useState(false);
   const { t } = useTranslation('common');
 
   useEffect(() => {
-    const current = parseTheme(localStorage.getItem('theme'));
-    setTheme(current);
-
     const handleStorageChange = () => {
       const updated = parseTheme(localStorage.getItem('theme'));
       setTheme(updated);

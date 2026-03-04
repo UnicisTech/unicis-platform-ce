@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useMemo, useState, useEffect, ChangeEvent } from 'react';
 import { Checkbox } from '@/components/shadcn/ui/checkbox';
 import { Input } from '@/components/shadcn/ui/input';
 import {
@@ -104,16 +104,13 @@ const OrderQuestion = ({
   const [selectedAnswer, setSelectedAnswer] = useState<
     { first: string; second: string | null }[]
   >(question.answers.map((answer) => ({ ...answer, second: null })));
-  const [shuffledOptions, setShuffledOptions] = useState<
-    { label: string; value: string }[]
-  >([]);
-
-  useEffect(() => {
-    const shuffled = shuffleArray(
-      question.answers.map(({ second }) => ({ label: second, value: second }))
-    );
-    setShuffledOptions(shuffled);
-  }, [question.answers]);
+  const shuffledOptions = useMemo(
+    () =>
+      shuffleArray(
+        question.answers.map(({ second }) => ({ label: second, value: second }))
+      ),
+    [question.answers]
+  );
 
   useEffect(() => {
     onAnswerUpdate(selectedAnswer);

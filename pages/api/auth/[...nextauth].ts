@@ -40,7 +40,7 @@ if (isAuthProviderEnabled('credentials')) {
       async authorize(credentials, req) {
         try {
           await limiter.check(5, getIpAddress(req as any)); // 5 requests per minute for IP address
-        } catch (e) {
+        } catch {
           throw new Error('auth-limited');
         }
 

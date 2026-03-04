@@ -50,26 +50,40 @@ export const countCourseAnswers = (answers: any[], questions: Question[]) => {
         const correctAnswer = question.answers.find(
           (item) => item.isCorrect
         )?.answer;
-        correctAnswer === answer ? right++ : wrong++;
+        if (correctAnswer === answer) {
+          right++;
+        } else {
+          wrong++;
+        }
         break;
       }
       case QuestionType.MULTIPLE_CHOICE: {
         const correctAnswers = question.answers
           .filter((item) => item.isCorrect)
           .map(({ answer }) => answer);
-        haveSameElements(correctAnswers, answer) ? right++ : wrong++;
+        if (haveSameElements(correctAnswers, answer)) {
+          right++;
+        } else {
+          wrong++;
+        }
         break;
       }
       case QuestionType.ORDER: {
         const correctSequence = question.answers.map(({ second }) => second);
         const userSequence = answer.map(({ second }) => second);
-        haveSameElementsInOrder(correctSequence, userSequence)
-          ? right++
-          : wrong++;
+        if (haveSameElementsInOrder(correctSequence, userSequence)) {
+          right++;
+        } else {
+          wrong++;
+        }
         break;
       }
       case QuestionType.TEXT: {
-        (question as TextQuestion).answer === answer ? right++ : wrong++;
+        if ((question as TextQuestion).answer === answer) {
+          right++;
+        } else {
+          wrong++;
+        }
         break;
       }
     }
