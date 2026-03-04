@@ -5,5 +5,6 @@
         "socialgouv"
     ],
     "postman.settings.dotenv-detection-notification-visibility": false,
-    "snyk.advanced.autoSelectOrganization": true
+    "snyk.advanced.autoSelectOrganization": true,
+    "snyk.advanced.organization": "a0501538-5fa5-40e6-933e-56df03fdf926"
 }
