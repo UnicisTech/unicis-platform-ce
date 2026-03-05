@@ -25,13 +25,18 @@ interface MappingMatrixPanelProps {
   enabledFrameworks: ISO[];
 }
 
-function coverageBadge(
-  pct: number
-): 'default' | 'secondary' | 'destructive' | 'outline' {
-  if (pct >= 75) return 'default';
-  if (pct >= 50) return 'secondary';
-  if (pct >= 25) return 'destructive';
-  return 'outline';
+/**
+ * Returns Tailwind classes for a coverage badge that match the progress-bar
+ * colours in the Coverage Analysis cards (success / warning / error / base-300).
+ */
+function coverageBadgeClass(pct: number): string {
+  if (pct >= 75)
+    return 'border-transparent bg-success text-success-content shadow-sm';
+  if (pct >= 50)
+    return 'border-transparent bg-warning text-warning-content shadow-sm';
+  if (pct >= 25)
+    return 'border-transparent bg-error/70 text-error-content shadow-sm';
+  return 'border-transparent bg-base-300 text-base-content';
 }
 
 export default function MappingMatrixPanel({
@@ -123,8 +128,7 @@ export default function MappingMatrixPanel({
                       {isoValueToLabel(fw)}
                     </span>
                     <Badge
-                      variant={coverageBadge(avg)}
-                      className="flex-shrink-0"
+                      className={`flex-shrink-0 ${coverageBadgeClass(avg)}`}
                     >
                       {avg}%
                     </Badge>
@@ -247,8 +251,7 @@ export default function MappingMatrixPanel({
                     return (
                       <TableCell key={tgt} className="px-2 py-2 text-center">
                         <Badge
-                          variant={coverageBadge(pct)}
-                          className="px-1.5 py-0.5 text-[11px] font-semibold"
+                          className={`px-1.5 py-0.5 text-[11px] font-semibold ${coverageBadgeClass(pct)}`}
                           title={`${stats?.mappedCount ?? 0} / ${stats?.totalControls ?? 0} controls mapped`}
                         >
                           {pct}%
@@ -258,8 +261,7 @@ export default function MappingMatrixPanel({
                   })}
                   <TableCell className="px-2 py-2 text-center border-l border-border">
                     <Badge
-                      variant={coverageBadge(averageCoverage[src] ?? 0)}
-                      className="font-semibold"
+                      className={`font-semibold ${coverageBadgeClass(averageCoverage[src] ?? 0)}`}
                     >
                       {averageCoverage[src] ?? 0}%
                     </Badge>
