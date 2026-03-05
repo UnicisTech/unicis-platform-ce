@@ -62961,7 +62961,10 @@ const frameworkMappings: FrameworkMappings = {
       c5_2020: ['c5-2020-ops-07', 'c5-2020-sim-01'],
       cisv81: ['cisv81-17-1', 'cisv81-7-7'],
       eunis2: ['eu-nis2-21-2-b'],
-      gdpr: ['gdpr-art-32-vulnerability-assessment', 'gdpr-art-25-data-protection-by-design'],
+      gdpr: [
+        'gdpr-art-32-vulnerability-assessment',
+        'gdpr-art-25-data-protection-by-design',
+      ],
       nistcsfv2: [
         'nist-csf-v2-id-ra-01',
         'nist-csf-v2-id-ra-08',
@@ -62978,7 +62981,10 @@ const frameworkMappings: FrameworkMappings = {
       c5_2020: ['c5-2020-idm-01', 'c5-2020-idm-05'],
       cisv81: ['cisv81-5-1', 'cisv81-6-3'],
       eunis2: ['eu-nis2-21-2-i'],
-      gdpr: ['gdpr-art-32-vulnerability-assessment', 'gdpr-art-25-data-protection-by-design'],
+      gdpr: [
+        'gdpr-art-32-vulnerability-assessment',
+        'gdpr-art-25-data-protection-by-design',
+      ],
       nistcsfv2: [
         'nist-csf-v2-id-ra-01',
         'nist-csf-v2-id-ra-08',
@@ -63032,7 +63038,10 @@ const frameworkMappings: FrameworkMappings = {
       c5_2020: ['c5-2020-sim-02', 'c5-2020-sim-03'],
       cisv81: ['cisv81-17-2', 'cisv81-17-3'],
       eunis2: ['eu-nis2-21-2-b'],
-      gdpr: ['gdpr-art-33-breach-notification-to-customer', 'gdpr-art-34-breach-notification-to-data-subjects'],
+      gdpr: [
+        'gdpr-art-33-breach-notification-to-customer',
+        'gdpr-art-34-breach-notification-to-data-subjects',
+      ],
       nistcsfv2: ['nist-csf-v2-gv-oc-03'],
       soc2v2: ['soc2-v2-cc7-3'],
     },
@@ -63083,7 +63092,10 @@ const frameworkMappings: FrameworkMappings = {
       c5_2020: ['c5-2020-idm-02', 'c5-2020-idm-03'],
       cisv81: ['cisv81-5-2', 'cisv81-6-3'],
       eunis2: ['eu-nis2-21-2-i'],
-      gdpr: ['gdpr-art-32-access-restriction', 'gdpr-art-25-data-protection-by-design'],
+      gdpr: [
+        'gdpr-art-32-access-restriction',
+        'gdpr-art-25-data-protection-by-design',
+      ],
       nistcsfv2: [
         'nist-csf-v2-pr-aa-03',
         'nist-csf-v2-pr-aa-04',
@@ -63129,7 +63141,10 @@ const frameworkMappings: FrameworkMappings = {
       c5_2020: ['c5-2020-idm-04', 'c5-2020-idm-05'],
       cisv81: ['cisv81-5-2', 'cisv81-6-3', 'cisv81-6-5'],
       eunis2: ['eu-nis2-21-2-i', 'eu-nis2-21-2-j'],
-      gdpr: ['gdpr-art-32-access-restriction', 'gdpr-art-25-data-protection-by-default'],
+      gdpr: [
+        'gdpr-art-32-access-restriction',
+        'gdpr-art-25-data-protection-by-default',
+      ],
       nistcsfv2: ['nist-csf-v2-pr-aa-01', 'nist-csf-v2-pr-ps-06'],
       soc2v2: ['soc2-v2-cc6-1'],
     },
@@ -63155,7 +63170,10 @@ const frameworkMappings: FrameworkMappings = {
       c5_2020: ['c5-2020-dev-07', 'c5-2020-ops-07'],
       cisv81: ['cisv81-16-1', 'cisv81-7-1'],
       eunis2: ['eu-nis2-21-2-e'],
-      gdpr: ['gdpr-art-32-product-version', 'gdpr-art-25-data-protection-by-design'],
+      gdpr: [
+        'gdpr-art-32-product-version',
+        'gdpr-art-25-data-protection-by-design',
+      ],
       nistcsfv2: [
         'nist-csf-v2-pr-ps-02',
         'nist-csf-v2-pr-ps-06',
@@ -63184,7 +63202,10 @@ const frameworkMappings: FrameworkMappings = {
       '2022': ['iso-2022-a-8-24'],
       c5_2020: ['c5-2020-dev-05', 'c5-2020-dev-06'],
       cisv81: ['cisv81-16-12', 'cisv81-16-7'],
-      gdpr: ['gdpr-art-25-data-protection-by-design', 'gdpr-art-35-change-management'],
+      gdpr: [
+        'gdpr-art-25-data-protection-by-design',
+        'gdpr-art-35-change-management',
+      ],
       nistcsfv2: [
         'nist-csf-v2-pr-ps-06',
         'nist-csf-v2-pr-ds-01',
@@ -63331,7 +63352,11 @@ const frameworkMappings: FrameworkMappings = {
       c5_2020: ['c5-2020-sso-02', 'c5-2020-sso-03'],
       cisv81: ['cisv81-15-2', 'cisv81-15-3'],
       eunis2: ['eu-nis2-21-2-d', 'eu-nis2-21-3'],
-      gdpr: ['gdpr-art-28-processor-contracts', 'gdpr-art-28-third-party-integration', 'gdpr-art-44-46-data-transfers-outside-eu'],
+      gdpr: [
+        'gdpr-art-28-processor-contracts',
+        'gdpr-art-28-third-party-integration',
+        'gdpr-art-44-46-data-transfers-outside-eu',
+      ],
       nistcsfv2: [
         'nist-csf-v2-gv-sc-01',
         'nist-csf-v2-gv-sc-02',
@@ -63361,7 +63386,10 @@ const frameworkMappings: FrameworkMappings = {
       c5_2020: ['c5-2020-bcm-03', 'c5-2020-ops-13'],
       cisv81: ['cisv81-11-2', 'cisv81-11-4'],
       eunis2: ['eu-nis2-21-2-c'],
-      gdpr: ['gdpr-art-32-backup', 'gdpr-art-33-breach-notification-to-customer'],
+      gdpr: [
+        'gdpr-art-32-backup',
+        'gdpr-art-33-breach-notification-to-customer',
+      ],
       nistcsfv2: [
         'nist-csf-v2-pr-ds-11',
         'nist-csf-v2-pr-ps-06',
@@ -63678,13 +63706,7 @@ const frameworkMappings: FrameworkMappings = {
       ],
       '2013': ['iso-2013-a-14-1-1', 'iso-2013-a-14-2-1', 'iso-2013-a-18-1-4'],
       eunis2: ['eu-nis2-21-2-e'],
-      mvps: [
-        'mvsp-1-1',
-        'mvsp-1-2',
-        'mvsp-2-1',
-        'mvsp-2-6',
-        'mvsp-2-8',
-      ],
+      mvps: ['mvsp-1-1', 'mvsp-1-2', 'mvsp-2-1', 'mvsp-2-6', 'mvsp-2-8'],
       nistcsfv2: ['nist-csf-v2-pr-ps-06', 'nist-csf-v2-id-ra-03'],
       cisv81: ['cisv81-16-1', 'cisv81-16-14'],
       soc2v2: ['soc2-v2-cc8-1-1', 'soc2-v2-cc8-1-4'],
@@ -63748,13 +63770,7 @@ const frameworkMappings: FrameworkMappings = {
       ],
       '2013': ['iso-2013-a-9-1-1', 'iso-2013-a-9-2-3', 'iso-2013-a-9-4-1'],
       eunis2: ['eu-nis2-21-2-i', 'eu-nis2-21-2-j'],
-      mvps: [
-        'mvsp-2-1',
-        'mvsp-2-3',
-        'mvsp-2-4',
-        'mvsp-3-3',
-        'mvsp-4-1',
-      ],
+      mvps: ['mvsp-2-1', 'mvsp-2-3', 'mvsp-2-4', 'mvsp-3-3', 'mvsp-4-1'],
       nistcsfv2: [
         'nist-csf-v2-pr-aa-01',
         'nist-csf-v2-pr-aa-02',
@@ -63860,13 +63876,7 @@ const frameworkMappings: FrameworkMappings = {
       '2022': ['iso-2022-a-8-8'],
       '2013': ['iso-2013-a-12-6-1'],
       eunis2: ['eu-nis2-21-2-e'],
-      mvps: [
-        'mvsp-1-1',
-        'mvsp-1-2',
-        'mvsp-1-3',
-        'mvsp-1-4',
-        'mvsp-3-4',
-      ],
+      mvps: ['mvsp-1-1', 'mvsp-1-2', 'mvsp-1-3', 'mvsp-1-4', 'mvsp-3-4'],
       nistcsfv2: ['nist-csf-v2-id-ra-01', 'nist-csf-v2-de-ae-01'],
       cisv81: ['cisv81-7-1', 'cisv81-7-2', 'cisv81-7-5', 'cisv81-7-6'],
       soc2v2: ['soc2-v2-cc7-1-1', 'soc2-v2-cc7-4-1'],
@@ -64081,11 +64091,7 @@ const frameworkMappings: FrameworkMappings = {
   'eu-nis2-21-2-a': {
     relationship: 'related',
     mappings: {
-      '2022': [
-        'iso-2022-a-5-1',
-        'iso-2022-a-5-2',
-        'iso-2022-a-5-4',
-      ],
+      '2022': ['iso-2022-a-5-1', 'iso-2022-a-5-2', 'iso-2022-a-5-4'],
       gdpr: [
         'gdpr-art-24-responsibility-accountability',
         'gdpr-art-24-data-protection-policy',
@@ -64235,7 +64241,10 @@ const frameworkMappings: FrameworkMappings = {
     relationship: 'related',
     mappings: {
       '2022': ['iso-2022-a-5-35', 'iso-2022-a-5-36'],
-      gdpr: ['gdpr-art-24-monitoring-review', 'gdpr-art-40-42-codes-of-conduct-and-certifications'],
+      gdpr: [
+        'gdpr-art-24-monitoring-review',
+        'gdpr-art-40-42-codes-of-conduct-and-certifications',
+      ],
       nistcsfv2: [
         'nist-csf-v2-gv-ov-01',
         'nist-csf-v2-gv-ov-02',
@@ -64264,7 +64273,10 @@ const frameworkMappings: FrameworkMappings = {
     relationship: 'related',
     mappings: {
       '2022': ['iso-2022-a-8-24'],
-      gdpr: ['gdpr-art-32-encryption-at-rest', 'gdpr-art-32-encryption-in-transit'],
+      gdpr: [
+        'gdpr-art-32-encryption-at-rest',
+        'gdpr-art-32-encryption-in-transit',
+      ],
       nistcsfv2: [
         'nist-csf-v2-pr-ds-01',
         'nist-csf-v2-pr-ds-02',
@@ -64329,7 +64341,10 @@ const frameworkMappings: FrameworkMappings = {
         'iso-2022-a-5-22',
         'iso-2022-a-5-23',
       ],
-      gdpr: ['gdpr-art-28-processor-contracts', 'gdpr-art-28-third-party-integration'],
+      gdpr: [
+        'gdpr-art-28-processor-contracts',
+        'gdpr-art-28-third-party-integration',
+      ],
       nistcsfv2: [
         'nist-csf-v2-gv-sc-01',
         'nist-csf-v2-gv-sc-05',
@@ -64340,7 +64355,6 @@ const frameworkMappings: FrameworkMappings = {
       ],
     },
   },
-
 };
 
 // Register mappings with the lazy-load registry

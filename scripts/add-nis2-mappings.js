@@ -23,7 +23,8 @@ let content = fs.readFileSync(filePath, 'utf8');
 
 const nis2Controls = {
   'eu-nis2-21-2-a': {
-    comment: 'Art. 21(2)(a) - Policies on risk analysis and information system security',
+    comment:
+      'Art. 21(2)(a) - Policies on risk analysis and information system security',
     relationship: 'related',
     mappings: {
       nistcsfv2: [
@@ -37,11 +38,7 @@ const nis2Controls = {
         'nist-csf-v2-id-ra-05',
         'nist-csf-v2-id-ra-06',
       ],
-      '2022': [
-        'iso-2022-a-5-1',
-        'iso-2022-a-5-2',
-        'iso-2022-a-5-4',
-      ],
+      2022: ['iso-2022-a-5-1', 'iso-2022-a-5-2', 'iso-2022-a-5-4'],
       gdpr: [
         'gdpr-art-24-responsibility-accountability',
         'gdpr-art-24-data-protection-policy',
@@ -70,7 +67,7 @@ const nis2Controls = {
         'nist-csf-v2-rs-co-02',
         'nist-csf-v2-rs-co-03',
       ],
-      '2022': [
+      2022: [
         'iso-2022-a-5-24',
         'iso-2022-a-5-25',
         'iso-2022-a-5-26',
@@ -86,7 +83,8 @@ const nis2Controls = {
     },
   },
   'eu-nis2-21-2-c': {
-    comment: 'Art. 21(2)(c) - Business continuity, backups, disaster recovery, crisis management',
+    comment:
+      'Art. 21(2)(c) - Business continuity, backups, disaster recovery, crisis management',
     relationship: 'related',
     mappings: {
       nistcsfv2: [
@@ -101,15 +99,13 @@ const nis2Controls = {
         'nist-csf-v2-rc-co-03',
         'nist-csf-v2-rc-co-04',
       ],
-      '2022': [
+      2022: [
         'iso-2022-a-5-29',
         'iso-2022-a-5-30',
         'iso-2022-a-8-13',
         'iso-2022-a-8-14',
       ],
-      gdpr: [
-        'gdpr-art-32-backup',
-      ],
+      gdpr: ['gdpr-art-32-backup'],
     },
   },
   'eu-nis2-21-2-d': {
@@ -130,7 +126,7 @@ const nis2Controls = {
         'nist-csf-v2-id-ra-09',
         'nist-csf-v2-id-ra-10',
       ],
-      '2022': [
+      2022: [
         'iso-2022-a-5-19',
         'iso-2022-a-5-20',
         'iso-2022-a-5-21',
@@ -146,7 +142,8 @@ const nis2Controls = {
     },
   },
   'eu-nis2-21-2-e': {
-    comment: 'Art. 21(2)(e) - Security in network/information systems acquisition, development, maintenance',
+    comment:
+      'Art. 21(2)(e) - Security in network/information systems acquisition, development, maintenance',
     relationship: 'related',
     mappings: {
       nistcsfv2: [
@@ -161,7 +158,7 @@ const nis2Controls = {
         'nist-csf-v2-id-im-03',
         'nist-csf-v2-id-im-04',
       ],
-      '2022': [
+      2022: [
         'iso-2022-a-8-8',
         'iso-2022-a-8-9',
         'iso-2022-a-8-25',
@@ -178,7 +175,8 @@ const nis2Controls = {
     },
   },
   'eu-nis2-21-2-f': {
-    comment: 'Art. 21(2)(f) - Policies/procedures to assess effectiveness of cybersecurity risk management',
+    comment:
+      'Art. 21(2)(f) - Policies/procedures to assess effectiveness of cybersecurity risk management',
     relationship: 'related',
     mappings: {
       nistcsfv2: [
@@ -188,10 +186,7 @@ const nis2Controls = {
         'nist-csf-v2-id-im-02',
         'nist-csf-v2-id-im-03',
       ],
-      '2022': [
-        'iso-2022-a-5-35',
-        'iso-2022-a-5-36',
-      ],
+      2022: ['iso-2022-a-5-35', 'iso-2022-a-5-36'],
       gdpr: [
         'gdpr-art-24-monitoring-review',
         'gdpr-art-40-42-codes-of-conduct-and-certifications',
@@ -199,7 +194,8 @@ const nis2Controls = {
     },
   },
   'eu-nis2-21-2-g': {
-    comment: 'Art. 21(2)(g) - Basic cyber hygiene practices and cybersecurity training',
+    comment:
+      'Art. 21(2)(g) - Basic cyber hygiene practices and cybersecurity training',
     relationship: 'related',
     mappings: {
       nistcsfv2: [
@@ -208,16 +204,13 @@ const nis2Controls = {
         'nist-csf-v2-gv-rr-02',
         'nist-csf-v2-gv-rr-04',
       ],
-      '2022': [
-        'iso-2022-a-6-3',
-      ],
-      gdpr: [
-        'gdpr-art-24-training-awareness',
-      ],
+      2022: ['iso-2022-a-6-3'],
+      gdpr: ['gdpr-art-24-training-awareness'],
     },
   },
   'eu-nis2-21-2-h': {
-    comment: 'Art. 21(2)(h) - Policies and procedures regarding cryptography and encryption',
+    comment:
+      'Art. 21(2)(h) - Policies and procedures regarding cryptography and encryption',
     relationship: 'related',
     mappings: {
       nistcsfv2: [
@@ -225,9 +218,7 @@ const nis2Controls = {
         'nist-csf-v2-pr-ds-02',
         'nist-csf-v2-pr-ds-10',
       ],
-      '2022': [
-        'iso-2022-a-8-24',
-      ],
+      2022: ['iso-2022-a-8-24'],
       gdpr: [
         'gdpr-art-32-encryption-at-rest',
         'gdpr-art-32-encryption-in-transit',
@@ -235,7 +226,8 @@ const nis2Controls = {
     },
   },
   'eu-nis2-21-2-i': {
-    comment: 'Art. 21(2)(i) - Human resources security, access control policies, and asset management',
+    comment:
+      'Art. 21(2)(i) - Human resources security, access control policies, and asset management',
     relationship: 'related',
     mappings: {
       nistcsfv2: [
@@ -253,7 +245,7 @@ const nis2Controls = {
         'nist-csf-v2-id-am-07',
         'nist-csf-v2-id-am-08',
       ],
-      '2022': [
+      2022: [
         'iso-2022-a-5-9',
         'iso-2022-a-5-10',
         'iso-2022-a-5-15',
@@ -272,23 +264,18 @@ const nis2Controls = {
     },
   },
   'eu-nis2-21-2-j': {
-    comment: 'Art. 21(2)(j) - Use of multi-factor authentication or continuous authentication',
+    comment:
+      'Art. 21(2)(j) - Use of multi-factor authentication or continuous authentication',
     relationship: 'related',
     mappings: {
-      nistcsfv2: [
-        'nist-csf-v2-pr-aa-03',
-        'nist-csf-v2-pr-aa-05',
-      ],
-      '2022': [
-        'iso-2022-a-8-5',
-      ],
-      gdpr: [
-        'gdpr-art-32-access-restriction',
-      ],
+      nistcsfv2: ['nist-csf-v2-pr-aa-03', 'nist-csf-v2-pr-aa-05'],
+      2022: ['iso-2022-a-8-5'],
+      gdpr: ['gdpr-art-32-access-restriction'],
     },
   },
   'eu-nis2-21-3': {
-    comment: 'Art. 21(3) - Supply chain vulnerabilities and overall supply chain quality',
+    comment:
+      'Art. 21(3) - Supply chain vulnerabilities and overall supply chain quality',
     relationship: 'related',
     mappings: {
       nistcsfv2: [
@@ -299,7 +286,7 @@ const nis2Controls = {
         'nist-csf-v2-id-ra-09',
         'nist-csf-v2-id-ra-10',
       ],
-      '2022': [
+      2022: [
         'iso-2022-a-5-19',
         'iso-2022-a-5-20',
         'iso-2022-a-5-21',
@@ -320,16 +307,18 @@ const nis2Controls = {
 
 function formatArray(arr, indent) {
   if (arr.length <= 2) {
-    return `[${arr.map(v => `'${v}'`).join(', ')}]`;
+    return `[${arr.map((v) => `'${v}'`).join(', ')}]`;
   }
-  const lines = arr.map(v => `${indent}  '${v}',`);
+  const lines = arr.map((v) => `${indent}  '${v}',`);
   return `[\n${lines.join('\n')}\n${indent}]`;
 }
 
 function generateNis2Entries() {
   const lines = [];
   lines.push('');
-  lines.push('  // ─── EU NIS2 controls (manually mapped) ──────────────────────────');
+  lines.push(
+    '  // ─── EU NIS2 controls (manually mapped) ──────────────────────────'
+  );
   lines.push('');
 
   for (const [controlId, def] of Object.entries(nis2Controls)) {
@@ -340,7 +329,17 @@ function generateNis2Entries() {
 
     // Output mappings in alphabetical key order
     const orderedKeys = Object.keys(def.mappings).sort((a, b) => {
-      const order = ["'2013'", "'2022'", 'c5_2020', 'cisv81', 'eunis2', 'gdpr', 'mvps', 'nistcsfv2', 'soc2v2'];
+      const order = [
+        "'2013'",
+        "'2022'",
+        'c5_2020',
+        'cisv81',
+        'eunis2',
+        'gdpr',
+        'mvps',
+        'nistcsfv2',
+        'soc2v2',
+      ];
       // Handle quoted keys
       const aKey = a === '2022' ? "'2022'" : a;
       const bKey = b === '2022' ? "'2022'" : b;
@@ -371,8 +370,14 @@ if (closingIndex === -1) {
 }
 
 const nis2Block = generateNis2Entries();
-content = content.substring(0, closingIndex) + nis2Block + '\n' + content.substring(closingIndex);
-console.log(`Part 1: Inserted ${Object.keys(nis2Controls).length} NIS2 top-level control entries`);
+content =
+  content.substring(0, closingIndex) +
+  nis2Block +
+  '\n' +
+  content.substring(closingIndex);
+console.log(
+  `Part 1: Inserted ${Object.keys(nis2Controls).length} NIS2 top-level control entries`
+);
 
 // ============================================================================
 // Part 2-4: Add `eunis2` reverse entries to NIST CSF 2.0, GDPR, ISO 2022 controls
@@ -380,26 +385,29 @@ console.log(`Part 1: Inserted ${Object.keys(nis2Controls).length} NIS2 top-level
 
 // Build reverse maps from NIS2 controls
 const nistcsfv2Reverse = {}; // nist control -> [nis2 controls]
-const gdprReverse = {};       // gdpr control -> [nis2 controls]
-const iso2022Reverse = {};    // iso 2022 control -> [nis2 controls]
+const gdprReverse = {}; // gdpr control -> [nis2 controls]
+const iso2022Reverse = {}; // iso 2022 control -> [nis2 controls]
 
 for (const [nis2Id, def] of Object.entries(nis2Controls)) {
   if (def.mappings.nistcsfv2) {
     for (const nistId of def.mappings.nistcsfv2) {
       if (!nistcsfv2Reverse[nistId]) nistcsfv2Reverse[nistId] = [];
-      if (!nistcsfv2Reverse[nistId].includes(nis2Id)) nistcsfv2Reverse[nistId].push(nis2Id);
+      if (!nistcsfv2Reverse[nistId].includes(nis2Id))
+        nistcsfv2Reverse[nistId].push(nis2Id);
     }
   }
   if (def.mappings.gdpr) {
     for (const gdprId of def.mappings.gdpr) {
       if (!gdprReverse[gdprId]) gdprReverse[gdprId] = [];
-      if (!gdprReverse[gdprId].includes(nis2Id)) gdprReverse[gdprId].push(nis2Id);
+      if (!gdprReverse[gdprId].includes(nis2Id))
+        gdprReverse[gdprId].push(nis2Id);
     }
   }
   if (def.mappings['2022']) {
     for (const isoId of def.mappings['2022']) {
       if (!iso2022Reverse[isoId]) iso2022Reverse[isoId] = [];
-      if (!iso2022Reverse[isoId].includes(nis2Id)) iso2022Reverse[isoId].push(nis2Id);
+      if (!iso2022Reverse[isoId].includes(nis2Id))
+        iso2022Reverse[isoId].push(nis2Id);
     }
   }
 }
@@ -437,11 +445,29 @@ function addKeyToControl(content, controlId, key, values) {
 
   if (mappingsBlock.includes(`${key}:`)) {
     // Key already exists - need to merge values
-    return mergeValues(content, controlId, key, values, mappingsIndex, mappingsCloseBrace, mappingsBlock);
+    return mergeValues(
+      content,
+      controlId,
+      key,
+      values,
+      mappingsIndex,
+      mappingsCloseBrace,
+      mappingsBlock
+    );
   }
 
   // Insert new key in alphabetical order
-  const keyOrder = ["'2013'", "'2022'", 'c5_2020', 'cisv81', 'eunis2', 'gdpr', 'mvps', 'nistcsfv2', 'soc2v2'];
+  const keyOrder = [
+    "'2013'",
+    "'2022'",
+    'c5_2020',
+    'cisv81',
+    'eunis2',
+    'gdpr',
+    'mvps',
+    'nistcsfv2',
+    'soc2v2',
+  ];
   const keyIndex = keyOrder.indexOf(key);
   const keysAfter = keyOrder.slice(keyIndex + 1);
 
@@ -466,14 +492,25 @@ function addKeyToControl(content, controlId, key, values) {
   const formattedValue = formatArray(values, indent);
   const newLine = `${indent}${key}: ${formattedValue},\n`;
 
-  content = content.substring(0, insertBeforePos) + newLine + content.substring(insertBeforePos);
+  content =
+    content.substring(0, insertBeforePos) +
+    newLine +
+    content.substring(insertBeforePos);
   return content;
 }
 
 /**
  * Merge new values into an existing key's array.
  */
-function mergeValues(content, controlId, key, newValues, mappingsIndex, mappingsCloseBrace, mappingsBlock) {
+function mergeValues(
+  content,
+  controlId,
+  key,
+  newValues,
+  mappingsIndex,
+  mappingsCloseBrace,
+  mappingsBlock
+) {
   // Find the key line
   const keyPattern = `${key}:`;
   const keyRelPos = mappingsBlock.indexOf(keyPattern);
@@ -483,7 +520,8 @@ function mergeValues(content, controlId, key, newValues, mappingsIndex, mappings
 
   // Find the array - look for [ ... ]
   const arrayStart = content.indexOf('[', keyAbsPos);
-  if (arrayStart === -1 || arrayStart > mappingsCloseBrace + 200) return content;
+  if (arrayStart === -1 || arrayStart > mappingsCloseBrace + 200)
+    return content;
 
   // Find matching ]
   let bracketDepth = 1;
@@ -522,7 +560,10 @@ function mergeValues(content, controlId, key, newValues, mappingsIndex, mappings
   // Replace the array
   const indent = '      ';
   const newArrayStr = formatArray(merged, indent);
-  content = content.substring(0, arrayStart) + newArrayStr + content.substring(arrayEnd);
+  content =
+    content.substring(0, arrayStart) +
+    newArrayStr +
+    content.substring(arrayEnd);
 
   return content;
 }
@@ -544,9 +585,21 @@ function applyReverseMappings(label, reverseMap, key) {
   console.log(`  Applied ${count} changes`);
 }
 
-applyReverseMappings('Part 2: Adding eunis2 entries to NIST CSF 2.0 controls...', nistcsfv2Reverse, 'eunis2');
-applyReverseMappings('Part 3: Adding eunis2 entries to GDPR controls...', gdprReverse, 'eunis2');
-applyReverseMappings('Part 4: Adding eunis2 entries to ISO 2022 controls...', iso2022Reverse, 'eunis2');
+applyReverseMappings(
+  'Part 2: Adding eunis2 entries to NIST CSF 2.0 controls...',
+  nistcsfv2Reverse,
+  'eunis2'
+);
+applyReverseMappings(
+  'Part 3: Adding eunis2 entries to GDPR controls...',
+  gdprReverse,
+  'eunis2'
+);
+applyReverseMappings(
+  'Part 4: Adding eunis2 entries to ISO 2022 controls...',
+  iso2022Reverse,
+  'eunis2'
+);
 
 fs.writeFileSync(filePath, content);
 console.log(`\nDone! Total reverse-mapping changes: ${changeCount}`);
