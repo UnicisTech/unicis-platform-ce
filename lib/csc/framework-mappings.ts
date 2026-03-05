@@ -47,6 +47,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sp-02',
       ],
       cisv81: ['cisv81-15-2'],
+      eunis2: ['eu-nis2-21-2-a'],
       nistcsfv2: [
         'nist-csf-v2-gv-ov-01',
         'nist-csf-v2-gv-ov-02',
@@ -96,6 +97,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-3-3',
         'cisv81-3-5',
       ],
+      eunis2: ['eu-nis2-21-2-i'],
       mvps: ['mvsp-1-8'],
       nistcsfv2: [
         'nist-csf-v2-pr-ds-01',
@@ -290,6 +292,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-6-3',
         'cisv81-6-8',
       ],
+      eunis2: ['eu-nis2-21-2-i'],
       mvps: ['mvsp-2-4', 'mvsp-4-1', 'mvsp-4-2'],
       nistcsfv2: [
         'nist-csf-v2-pr-aa-01',
@@ -473,6 +476,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-6',
         'cisv81-15-7',
       ],
+      eunis2: ['eu-nis2-21-2-d', 'eu-nis2-21-3'],
       mvps: ['mvsp-4-3'],
       nistcsfv2: [
         'nist-csf-v2-gv-ov-01',
@@ -521,6 +525,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sp-03',
       ],
       cisv81: ['cisv81-17-5'],
+      eunis2: ['eu-nis2-21-2-a'],
       nistcsfv2: ['nist-csf-v2-gv-sc-02', 'nist-csf-v2-pr-at-02'],
       soc2v2: [
         'soc2-v2-c1-1-1',
@@ -579,6 +584,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-7',
         'cisv81-17-2',
       ],
+      eunis2: ['eu-nis2-21-2-d', 'eu-nis2-21-3'],
       mvps: ['mvsp-4-3'],
       nistcsfv2: [
         'nist-csf-v2-gv-oc-03',
@@ -617,6 +623,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-05',
       ],
       cisv81: ['cisv81-15-4', 'cisv81-15-6'],
+      eunis2: ['eu-nis2-21-2-d', 'eu-nis2-21-3'],
       mvps: ['mvsp-4-3'],
       nistcsfv2: [
         'nist-csf-v2-gv-sc-01',
@@ -654,6 +661,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-05',
       ],
       cisv81: ['cisv81-15-5', 'cisv81-15-6'],
+      eunis2: ['eu-nis2-21-2-d', 'eu-nis2-21-3'],
       mvps: ['mvsp-4-3'],
       nistcsfv2: [
         'nist-csf-v2-de-cm-06',
@@ -735,6 +743,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-05',
       ],
       cisv81: ['cisv81-15-2', 'cisv81-15-4', 'cisv81-15-5'],
+      eunis2: ['eu-nis2-21-2-d', 'eu-nis2-21-3'],
       mvps: ['mvsp-4-3'],
       soc2v2: [
         'soc2-v2-c1-1-1',
@@ -793,6 +802,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-17-8',
         'cisv81-17-9',
       ],
+      eunis2: ['eu-nis2-21-2-b'],
       nistcsfv2: [
         'nist-csf-v2-de-ae-02',
         'nist-csf-v2-id-im-04',
@@ -855,6 +865,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-9', 'cisv81-8-11'],
+      eunis2: ['eu-nis2-21-2-b'],
       nistcsfv2: [
         'nist-csf-v2-de-ae-02',
         'nist-csf-v2-de-ae-04',
@@ -916,6 +927,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-4'],
+      eunis2: ['eu-nis2-21-2-b'],
       mvps: ['mvsp-1-7'],
       nistcsfv2: [
         'nist-csf-v2-de-ae-06',
@@ -977,6 +989,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-8'],
+      eunis2: ['eu-nis2-21-2-b'],
       nistcsfv2: [
         'nist-csf-v2-id-im-03',
         'nist-csf-v2-id-im-04',
@@ -1032,6 +1045,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sim-05',
       ],
       cisv81: ['cisv81-8-1', 'cisv81-8-5'],
+      eunis2: ['eu-nis2-21-2-b'],
       nistcsfv2: [
         'nist-csf-v2-rc-co-03',
         'nist-csf-v2-rs-an-06',
@@ -1099,6 +1113,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sp-03',
         'c5-2020-sso-02',
       ],
+      eunis2: ['eu-nis2-21-2-c'],
       nistcsfv2: ['nist-csf-v2-pr-ir-03'],
       soc2v2: [
         'soc2-v2-cc2-1-1',
@@ -1191,6 +1206,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-7'],
+      eunis2: ['eu-nis2-21-2-c'],
       mvps: ['mvsp-4-4'],
     },
   },
@@ -1367,6 +1383,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
         'c5-2020-sso-04',
       ],
+      eunis2: ['eu-nis2-21-2-f'],
       mvps: ['mvsp-1-4'],
       nistcsfv2: ['nist-csf-v2-id-im-01', 'nist-csf-v2-id-im-02'],
       soc2v2: [
@@ -1416,6 +1433,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
         'c5-2020-sso-04',
       ],
+      eunis2: ['eu-nis2-21-2-f'],
       mvps: ['mvsp-1-3'],
     },
   },
@@ -1465,6 +1483,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-04',
         'c5-2020-sso-05',
       ],
+      eunis2: ['eu-nis2-21-2-a'],
       nistcsfv2: ['nist-csf-v2-gv-rr-01', 'nist-csf-v2-gv-sc-02'],
       soc2v2: [
         'soc2-v2-cc1-3-1',
@@ -1681,6 +1700,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-3-2',
         'cisv81-3-7',
       ],
+      eunis2: ['eu-nis2-21-2-i'],
       mvps: ['mvsp-3-1', 'mvsp-3-3'],
       nistcsfv2: [
         'nist-csf-v2-id-am-01',
@@ -1706,6 +1726,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2013': ['iso-2013-a-7-1-1'],
       c5_2020: ['c5-2020-hr-01'],
+      eunis2: ['eu-nis2-21-2-i'],
       nistcsfv2: [
         'nist-csf-v2-gv-rr-04',
         'nist-csf-v2-pr-ds-01',
@@ -1739,6 +1760,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-01',
         'c5-2020-sso-02',
       ],
+      eunis2: ['eu-nis2-21-2-i'],
       nistcsfv2: [
         'nist-csf-v2-gv-rr-04',
         'nist-csf-v2-pr-ds-01',
@@ -1778,6 +1800,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-14-8',
         'cisv81-14-9',
       ],
+      eunis2: ['eu-nis2-21-2-g'],
       mvps: ['mvsp-1-5'],
       nistcsfv2: [
         'nist-csf-v2-gv-rr-04',
@@ -1796,6 +1819,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-hr-04',
         'c5-2020-ois-02',
       ],
+      eunis2: ['eu-nis2-21-2-i'],
       nistcsfv2: ['nist-csf-v2-gv-rr-04'],
       soc2v2: [
         'soc2-v2-cc1-5-1',
@@ -1820,6 +1844,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-ps-03',
       ],
       cisv81: ['cisv81-6-2'],
+      eunis2: ['eu-nis2-21-2-i'],
       nistcsfv2: [
         'nist-csf-v2-gv-rr-04',
         'nist-csf-v2-pr-ds-01',
@@ -1938,6 +1963,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sp-01',
       ],
       cisv81: ['cisv81-14-6', 'cisv81-17-3'],
+      eunis2: ['eu-nis2-21-2-b'],
       mvps: ['mvsp-1-7'],
       nistcsfv2: ['nist-csf-v2-gv-rr-04', 'nist-csf-v2-rs-ma-02'],
       soc2v2: [
@@ -2390,6 +2416,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-11-4',
         'cisv81-11-5',
       ],
+      eunis2: ['eu-nis2-21-2-c'],
       mvps: ['mvsp-4-4'],
       nistcsfv2: [
         'nist-csf-v2-pr-ds-11',
@@ -2444,6 +2471,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-ps-02',
         'c5-2020-ps-06',
       ],
+      eunis2: ['eu-nis2-21-2-c'],
       mvps: ['mvsp-4-4'],
       nistcsfv2: ['nist-csf-v2-pr-ir-03'],
       soc2v2: [
@@ -2677,6 +2705,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-6-5',
         'cisv81-6-8',
       ],
+      eunis2: ['eu-nis2-21-2-i'],
       nistcsfv2: [
         'nist-csf-v2-pr-aa-01',
         'nist-csf-v2-pr-aa-02',
@@ -2889,6 +2918,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sim-04',
         'c5-2020-sim-05',
       ],
+      eunis2: ['eu-nis2-21-2-h'],
       mvps: ['mvsp-2-8'],
       soc2v2: [
         'soc2-v2-cc6-1-1',
@@ -2934,6 +2964,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-pss-09',
       ],
       cisv81: ['cisv81-16-1', 'cisv81-16-11', 'cisv81-16-12'],
+      eunis2: ['eu-nis2-21-2-e'],
       mvps: ['mvsp-3-5'],
       nistcsfv2: ['nist-csf-v2-pr-ps-06'],
       soc2v2: [
@@ -3017,6 +3048,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-16-11', 'cisv81-16-4', 'cisv81-16-5'],
+      eunis2: ['eu-nis2-21-2-e'],
       mvps: ['mvsp-2-2', 'mvsp-2-3', 'mvsp-2-5'],
       nistcsfv2: [
         'nist-csf-v2-pr-ds-01',
@@ -3081,6 +3113,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-pss-09',
       ],
       cisv81: ['cisv81-12-2', 'cisv81-16-1'],
+      eunis2: ['eu-nis2-21-2-e'],
       mvps: ['mvsp-2-2', 'mvsp-2-3', 'mvsp-2-5'],
       soc2v2: [
         'soc2-v2-cc8-1-1',
@@ -3117,6 +3150,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sim-05',
       ],
       cisv81: ['cisv81-16-1', 'cisv81-16-12', 'cisv81-16-9'],
+      eunis2: ['eu-nis2-21-2-e'],
       nistcsfv2: ['nist-csf-v2-pr-ps-06'],
       soc2v2: [
         'soc2-v2-cc8-1-1',
@@ -3189,6 +3223,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-pss-09',
       ],
       cisv81: ['cisv81-13-5', 'cisv81-3-3', 'cisv81-6-8'],
+      eunis2: ['eu-nis2-21-2-i'],
       nistcsfv2: [
         'nist-csf-v2-pr-aa-02',
         'nist-csf-v2-pr-aa-05',
@@ -3416,6 +3451,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-pss-09',
       ],
       cisv81: ['cisv81-4-1', 'cisv81-4-3', 'cisv81-6-6'],
+      eunis2: ['eu-nis2-21-2-j'],
       mvps: ['mvsp-2-1', 'mvsp-2-4'],
       nistcsfv2: [
         'nist-csf-v2-pr-aa-01',
@@ -3607,6 +3643,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-7-6',
         'cisv81-7-7',
       ],
+      eunis2: ['eu-nis2-21-2-e'],
       mvps: ['mvsp-1-1', 'mvsp-3-4'],
       nistcsfv2: ['nist-csf-v2-id-ra-01', 'nist-csf-v2-pr-ds-01'],
       soc2v2: [
@@ -3660,6 +3697,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-4-7',
         'cisv81-4-8',
       ],
+      eunis2: ['eu-nis2-21-2-e'],
       mvps: ['mvsp-2-5', 'mvsp-2-6'],
       nistcsfv2: ['nist-csf-v2-pr-ps-01'],
       soc2v2: [
@@ -8071,6 +8109,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-17-9',
         'cisv81-8-11',
       ],
+      eunis2: ['eu-nis2-21-2-b'],
       soc2v2: [
         'soc2-v2-cc7-4-1',
         'soc2-v2-cc7-4-10',
@@ -8147,6 +8186,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-8-5',
         'cisv81-8-8',
       ],
+      eunis2: ['eu-nis2-21-2-b'],
       soc2v2: [
         'soc2-v2-cc6-8-1',
         'soc2-v2-cc6-8-2',
@@ -8205,6 +8245,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-9', 'cisv81-8-11'],
+      eunis2: ['eu-nis2-21-2-b'],
       soc2v2: [
         'soc2-v2-cc7-4-1',
         'soc2-v2-cc7-4-10',
@@ -8258,6 +8299,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-4'],
+      eunis2: ['eu-nis2-21-2-b'],
       soc2v2: [
         'soc2-v2-cc7-4-1',
         'soc2-v2-cc7-4-10',
@@ -8300,6 +8342,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sim-04',
         'c5-2020-sim-05',
       ],
+      eunis2: ['eu-nis2-21-2-b'],
     },
   },
   'nist-csf-v2-de-ae-08': {
@@ -8338,6 +8381,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-4', 'cisv81-17-9', 'cisv81-8-11'],
+      eunis2: ['eu-nis2-21-2-b'],
       soc2v2: [
         'soc2-v2-cc7-4-1',
         'soc2-v2-cc7-4-10',
@@ -8736,6 +8780,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-04',
         'c5-2020-sso-05',
       ],
+      eunis2: ['eu-nis2-21-2-a'],
       soc2v2: [
         'soc2-v2-cc1-3-1',
         'soc2-v2-cc1-3-2',
@@ -9122,6 +9167,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-6',
         'cisv81-15-7',
       ],
+      eunis2: ['eu-nis2-21-2-f'],
       soc2v2: [
         'soc2-v2-cc2-1-1',
         'soc2-v2-cc2-1-2',
@@ -9227,6 +9273,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-6',
         'cisv81-15-7',
       ],
+      eunis2: ['eu-nis2-21-2-f'],
       soc2v2: [
         'soc2-v2-cc2-1-1',
         'soc2-v2-cc2-1-2',
@@ -9347,6 +9394,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-7',
         'cisv81-17-2',
       ],
+      eunis2: ['eu-nis2-21-2-f'],
       soc2v2: [
         'soc2-v2-cc2-1-1',
         'soc2-v2-cc2-1-2',
@@ -9572,6 +9620,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-05',
       ],
       cisv81: ['cisv81-15-2'],
+      eunis2: ['eu-nis2-21-2-a'],
     },
   },
   'nist-csf-v2-gv-rm-02': {
@@ -9629,6 +9678,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-05',
       ],
       cisv81: ['cisv81-15-2'],
+      eunis2: ['eu-nis2-21-2-a'],
     },
   },
   'nist-csf-v2-gv-rm-03': {
@@ -10026,6 +10076,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sim-04',
         'c5-2020-sim-05',
       ],
+      eunis2: ['eu-nis2-21-2-g'],
       soc2v2: [
         'soc2-v2-cc1-3-1',
         'soc2-v2-cc1-3-2',
@@ -10188,6 +10239,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-6-2',
         'cisv81-6-4',
       ],
+      eunis2: ['eu-nis2-21-2-g'],
       soc2v2: [
         'soc2-v2-c1-1-1',
         'soc2-v2-c1-1-2',
@@ -10369,6 +10421,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-7',
         'cisv81-17-2',
       ],
+      eunis2: ['eu-nis2-21-2-d', 'eu-nis2-21-3'],
       soc2v2: [
         'soc2-v2-c1-1-1',
         'soc2-v2-c1-1-2',
@@ -10482,6 +10535,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-05',
       ],
       cisv81: ['cisv81-17-5'],
+      eunis2: ['eu-nis2-21-2-d'],
       soc2v2: [
         'soc2-v2-c1-1-1',
         'soc2-v2-c1-1-2',
@@ -10598,6 +10652,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-7',
         'cisv81-17-2',
       ],
+      eunis2: ['eu-nis2-21-2-d'],
       soc2v2: [
         'soc2-v2-c1-1-1',
         'soc2-v2-c1-1-2',
@@ -10706,6 +10761,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-6',
         'cisv81-15-7',
       ],
+      eunis2: ['eu-nis2-21-2-d'],
       soc2v2: [
         'soc2-v2-cc3-2-1',
         'soc2-v2-cc3-2-2',
@@ -10824,6 +10880,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-7',
         'cisv81-17-2',
       ],
+      eunis2: ['eu-nis2-21-2-d', 'eu-nis2-21-3'],
       soc2v2: [
         'soc2-v2-cc1-2-1',
         'soc2-v2-cc1-2-2',
@@ -10908,6 +10965,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-7',
         'cisv81-17-2',
       ],
+      eunis2: ['eu-nis2-21-2-d'],
       soc2v2: [
         'soc2-v2-cc1-2-1',
         'soc2-v2-cc1-2-2',
@@ -11001,6 +11059,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-7',
         'cisv81-17-2',
       ],
+      eunis2: ['eu-nis2-21-2-d'],
       soc2v2: [
         'soc2-v2-cc1-2-1',
         'soc2-v2-cc1-2-2',
@@ -11065,6 +11124,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-4'],
+      eunis2: ['eu-nis2-21-2-d'],
       soc2v2: [
         'soc2-v2-cc7-4-1',
         'soc2-v2-cc7-4-10',
@@ -11161,6 +11221,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-7',
         'cisv81-17-2',
       ],
+      eunis2: ['eu-nis2-21-2-d', 'eu-nis2-21-3'],
       soc2v2: [
         'soc2-v2-c1-1-1',
         'soc2-v2-c1-1-2',
@@ -11287,6 +11348,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-7',
         'cisv81-17-2',
       ],
+      eunis2: ['eu-nis2-21-2-d', 'eu-nis2-21-3'],
       soc2v2: [
         'soc2-v2-c1-1-1',
         'soc2-v2-c1-1-2',
@@ -11372,6 +11434,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-3-2',
         'cisv81-3-7',
       ],
+      eunis2: ['eu-nis2-21-2-i'],
       soc2v2: [
         'soc2-v2-cc6-2-1',
         'soc2-v2-cc6-2-2',
@@ -11413,6 +11476,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-3-2',
         'cisv81-3-7',
       ],
+      eunis2: ['eu-nis2-21-2-i'],
       soc2v2: [
         'soc2-v2-cc6-2-1',
         'soc2-v2-cc6-2-2',
@@ -11518,6 +11582,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-3-9',
         'cisv81-8-2',
       ],
+      eunis2: ['eu-nis2-21-2-i'],
       soc2v2: [
         'soc2-v2-cc6-1-1',
         'soc2-v2-cc6-1-10',
@@ -11552,6 +11617,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-05',
       ],
       cisv81: ['cisv81-15-5', 'cisv81-15-6'],
+      eunis2: ['eu-nis2-21-2-i'],
       soc2v2: [
         'soc2-v2-cc3-2-1',
         'soc2-v2-cc3-2-2',
@@ -11626,6 +11692,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-3-2',
         'cisv81-3-7',
       ],
+      eunis2: ['eu-nis2-21-2-i'],
       soc2v2: [
         'soc2-v2-c1-1-1',
         'soc2-v2-c1-1-2',
@@ -11687,6 +11754,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-3-2',
         'cisv81-3-7',
       ],
+      eunis2: ['eu-nis2-21-2-i'],
       soc2v2: [
         'soc2-v2-cc6-2-1',
         'soc2-v2-cc6-2-2',
@@ -11824,6 +11892,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-3-2',
         'cisv81-3-7',
       ],
+      eunis2: ['eu-nis2-21-2-i'],
       soc2v2: [
         'soc2-v2-a1-2-1',
         'soc2-v2-a1-2-10',
@@ -11939,6 +12008,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
         'c5-2020-sso-04',
       ],
+      eunis2: ['eu-nis2-21-2-e'],
       soc2v2: [
         'soc2-v2-cc1-3-1',
         'soc2-v2-cc1-3-2',
@@ -12055,6 +12125,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-6',
         'cisv81-15-7',
       ],
+      eunis2: ['eu-nis2-21-2-e', 'eu-nis2-21-2-f'],
       soc2v2: [
         'soc2-v2-cc1-3-1',
         'soc2-v2-cc1-3-2',
@@ -12161,6 +12232,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-04',
       ],
       cisv81: ['cisv81-17-8'],
+      eunis2: ['eu-nis2-21-2-e', 'eu-nis2-21-2-f'],
       soc2v2: [
         'soc2-v2-cc2-1-1',
         'soc2-v2-cc2-1-2',
@@ -12285,6 +12357,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-17-8',
         'cisv81-17-9',
       ],
+      eunis2: ['eu-nis2-21-2-e'],
       soc2v2: [
         'soc2-v2-cc2-1-1',
         'soc2-v2-cc2-1-2',
@@ -12402,6 +12475,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-7-6',
         'cisv81-7-7',
       ],
+      eunis2: ['eu-nis2-21-2-a'],
       soc2v2: [
         'soc2-v2-cc3-2-1',
         'soc2-v2-cc3-2-2',
@@ -12469,6 +12543,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-5',
         'cisv81-15-6',
       ],
+      eunis2: ['eu-nis2-21-2-a'],
       soc2v2: [
         'soc2-v2-cc3-2-1',
         'soc2-v2-cc3-2-2',
@@ -12581,6 +12656,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-5',
         'cisv81-15-6',
       ],
+      eunis2: ['eu-nis2-21-2-a'],
       soc2v2: [
         'soc2-v2-cc3-2-1',
         'soc2-v2-cc3-2-2',
@@ -12689,6 +12765,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-04',
         'c5-2020-sso-05',
       ],
+      eunis2: ['eu-nis2-21-2-a'],
       soc2v2: [
         'soc2-v2-cc3-2-1',
         'soc2-v2-cc3-2-2',
@@ -12766,6 +12843,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-04',
         'c5-2020-sso-05',
       ],
+      eunis2: ['eu-nis2-21-2-a'],
       soc2v2: [
         'soc2-v2-cc3-2-1',
         'soc2-v2-cc3-2-2',
@@ -12842,6 +12920,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-04',
         'c5-2020-sso-05',
       ],
+      eunis2: ['eu-nis2-21-2-a'],
       soc2v2: [
         'soc2-v2-cc3-2-1',
         'soc2-v2-cc3-2-2',
@@ -13056,6 +13135,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-7',
         'cisv81-17-2',
       ],
+      eunis2: ['eu-nis2-21-2-d', 'eu-nis2-21-3'],
       soc2v2: [
         'soc2-v2-cc3-2-1',
         'soc2-v2-cc3-2-2',
@@ -13150,6 +13230,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-15-7',
         'cisv81-17-2',
       ],
+      eunis2: ['eu-nis2-21-2-d', 'eu-nis2-21-3'],
       soc2v2: [
         'soc2-v2-cc3-2-1',
         'soc2-v2-cc3-2-2',
@@ -13260,6 +13341,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-6-7',
         'cisv81-6-8',
       ],
+      eunis2: ['eu-nis2-21-2-i'],
       soc2v2: [
         'soc2-v2-cc6-1-1',
         'soc2-v2-cc6-1-10',
@@ -13324,6 +13406,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-6-6',
         'cisv81-6-8',
       ],
+      eunis2: ['eu-nis2-21-2-i'],
       soc2v2: [
         'soc2-v2-cc6-1-1',
         'soc2-v2-cc6-1-10',
@@ -13435,6 +13518,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-6-7',
         'cisv81-6-8',
       ],
+      eunis2: ['eu-nis2-21-2-i', 'eu-nis2-21-2-j'],
       soc2v2: [
         'soc2-v2-cc6-1-1',
         'soc2-v2-cc6-1-10',
@@ -13473,6 +13557,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-ps-03',
       ],
       cisv81: ['cisv81-5-1', 'cisv81-6-1', 'cisv81-6-2'],
+      eunis2: ['eu-nis2-21-2-i'],
       soc2v2: [
         'soc2-v2-cc6-1-1',
         'soc2-v2-cc6-1-10',
@@ -13612,6 +13697,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-6-7',
         'cisv81-6-8',
       ],
+      eunis2: ['eu-nis2-21-2-i', 'eu-nis2-21-2-j'],
       soc2v2: [
         'soc2-v2-a1-3-1',
         'soc2-v2-a1-3-2',
@@ -13705,6 +13791,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-ps-07',
         'c5-2020-sp-01',
       ],
+      eunis2: ['eu-nis2-21-2-i'],
       soc2v2: [
         'soc2-v2-cc6-4-1',
         'soc2-v2-cc6-4-2',
@@ -13739,6 +13826,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-14-8',
         'cisv81-14-9',
       ],
+      eunis2: ['eu-nis2-21-2-g'],
       soc2v2: [
         'soc2-v2-c1-1-1',
         'soc2-v2-c1-1-2',
@@ -13812,6 +13900,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-14-9',
         'cisv81-17-5',
       ],
+      eunis2: ['eu-nis2-21-2-g'],
       soc2v2: [
         'soc2-v2-c1-1-1',
         'soc2-v2-c1-1-2',
@@ -14069,6 +14158,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-9-3',
         'cisv81-9-7',
       ],
+      eunis2: ['eu-nis2-21-2-h'],
       soc2v2: [
         'soc2-v2-a1-3-1',
         'soc2-v2-a1-3-2',
@@ -14349,6 +14439,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-8-2',
         'cisv81-8-4',
       ],
+      eunis2: ['eu-nis2-21-2-h'],
       soc2v2: [
         'soc2-v2-a1-3-1',
         'soc2-v2-a1-3-2',
@@ -14607,6 +14698,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-6-8',
         'cisv81-8-4',
       ],
+      eunis2: ['eu-nis2-21-2-h'],
       soc2v2: [
         'soc2-v2-a1-3-1',
         'soc2-v2-a1-3-2',
@@ -15072,6 +15164,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-4-7',
         'cisv81-4-8',
       ],
+      eunis2: ['eu-nis2-21-2-e'],
       soc2v2: [
         'soc2-v2-cc1-3-1',
         'soc2-v2-cc1-3-2',
@@ -15152,6 +15245,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-3-2',
         'cisv81-3-7',
       ],
+      eunis2: ['eu-nis2-21-2-e'],
       soc2v2: [
         'soc2-v2-cc6-2-1',
         'soc2-v2-cc6-2-2',
@@ -15193,6 +15287,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-3-2',
         'cisv81-3-7',
       ],
+      eunis2: ['eu-nis2-21-2-e'],
       soc2v2: [
         'soc2-v2-cc6-2-1',
         'soc2-v2-cc6-2-2',
@@ -15247,6 +15342,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-8-5',
         'cisv81-8-8',
       ],
+      eunis2: ['eu-nis2-21-2-e'],
       soc2v2: [
         'soc2-v2-cc7-1-1',
         'soc2-v2-cc7-1-2',
@@ -15273,6 +15369,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-pss-02',
       ],
       cisv81: ['cisv81-2-5', 'cisv81-2-6'],
+      eunis2: ['eu-nis2-21-2-e'],
     },
   },
   'nist-csf-v2-pr-ps-06': {
@@ -15310,6 +15407,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sim-05',
       ],
       cisv81: ['cisv81-16-1', 'cisv81-16-11', 'cisv81-16-12', 'cisv81-16-9'],
+      eunis2: ['eu-nis2-21-2-e'],
       soc2v2: [
         'soc2-v2-cc8-1-1',
         'soc2-v2-cc8-1-10',
@@ -15372,6 +15470,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-05',
       ],
       cisv81: ['cisv81-8-1', 'cisv81-8-5'],
+      eunis2: ['eu-nis2-21-2-c'],
       soc2v2: [
         'soc2-v2-cc1-3-1',
         'soc2-v2-cc1-3-2',
@@ -15437,6 +15536,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-04',
         'c5-2020-sso-05',
       ],
+      eunis2: ['eu-nis2-21-2-c'],
       soc2v2: [
         'soc2-v2-cc1-3-1',
         'soc2-v2-cc1-3-2',
@@ -15482,6 +15582,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-4'],
+      eunis2: ['eu-nis2-21-2-c'],
       soc2v2: [
         'soc2-v2-cc7-4-1',
         'soc2-v2-cc7-4-10',
@@ -15535,6 +15636,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-4'],
+      eunis2: ['eu-nis2-21-2-c'],
       soc2v2: [
         'soc2-v2-cc7-4-1',
         'soc2-v2-cc7-4-10',
@@ -15577,6 +15679,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-11-4',
         'cisv81-11-5',
       ],
+      eunis2: ['eu-nis2-21-2-c'],
       soc2v2: [
         'soc2-v2-a1-2-1',
         'soc2-v2-a1-2-10',
@@ -15655,6 +15758,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-04',
         'c5-2020-sso-05',
       ],
+      eunis2: ['eu-nis2-21-2-c'],
       soc2v2: [
         'soc2-v2-cc1-3-1',
         'soc2-v2-cc1-3-2',
@@ -15736,6 +15840,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-4'],
+      eunis2: ['eu-nis2-21-2-c'],
       soc2v2: [
         'soc2-v2-cc7-4-1',
         'soc2-v2-cc7-4-10',
@@ -15799,6 +15904,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-11-5',
         'cisv81-17-8',
       ],
+      eunis2: ['eu-nis2-21-2-c'],
       soc2v2: [
         'soc2-v2-a1-2-1',
         'soc2-v2-a1-2-10',
@@ -16088,6 +16194,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-05',
       ],
       cisv81: ['cisv81-17-4'],
+      eunis2: ['eu-nis2-21-2-b'],
       soc2v2: [
         'soc2-v2-cc1-3-1',
         'soc2-v2-cc1-3-2',
@@ -16153,6 +16260,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-05',
       ],
       cisv81: ['cisv81-17-4'],
+      eunis2: ['eu-nis2-21-2-b'],
       soc2v2: [
         'soc2-v2-cc1-3-1',
         'soc2-v2-cc1-3-2',
@@ -16215,6 +16323,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-4', 'cisv81-17-8', 'cisv81-8-1', 'cisv81-8-5'],
+      eunis2: ['eu-nis2-21-2-b'],
       soc2v2: [
         'soc2-v2-cc7-4-1',
         'soc2-v2-cc7-4-10',
@@ -16316,6 +16425,7 @@ const frameworkMappings: FrameworkMappings = {
         'cisv81-8-1',
         'cisv81-8-5',
       ],
+      eunis2: ['eu-nis2-21-2-b'],
       soc2v2: [
         'soc2-v2-cc2-3-1',
         'soc2-v2-cc2-3-10',
@@ -16385,6 +16495,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-9', 'cisv81-8-11'],
+      eunis2: ['eu-nis2-21-2-b'],
       soc2v2: [
         'soc2-v2-cc7-4-1',
         'soc2-v2-cc7-4-10',
@@ -16438,6 +16549,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-4'],
+      eunis2: ['eu-nis2-21-2-b'],
       soc2v2: [
         'soc2-v2-cc7-4-1',
         'soc2-v2-cc7-4-10',
@@ -16490,6 +16602,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-9', 'cisv81-8-11'],
+      eunis2: ['eu-nis2-21-2-b'],
       soc2v2: [
         'soc2-v2-cc7-4-1',
         'soc2-v2-cc7-4-10',
@@ -16543,6 +16656,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-4'],
+      eunis2: ['eu-nis2-21-2-c'],
       soc2v2: [
         'soc2-v2-cc7-4-1',
         'soc2-v2-cc7-4-10',
@@ -16596,6 +16710,7 @@ const frameworkMappings: FrameworkMappings = {
         'c5-2020-sso-02',
       ],
       cisv81: ['cisv81-17-4'],
+      eunis2: ['eu-nis2-21-2-c'],
       soc2v2: [
         'soc2-v2-cc7-4-1',
         'soc2-v2-cc7-4-10',
@@ -63346,6 +63461,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-5-9', 'iso-2022-a-5-31', 'iso-2022-a-5-34'],
       '2013': ['iso-2013-a-8-1-1', 'iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+      eunis2: ['eu-nis2-21-2-i'],
       mvps: ['mvsp-3-1'],
       nistcsfv2: [
         'nist-csf-v2-id-am-01',
@@ -63451,6 +63567,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-5-2', 'iso-2022-a-5-4', 'iso-2022-a-5-31'],
       '2013': ['iso-2013-a-6-1-1', 'iso-2013-a-7-2-1', 'iso-2013-a-18-1-1'],
+      eunis2: ['eu-nis2-21-2-a'],
       nistcsfv2: [
         'nist-csf-v2-gv-rm-01',
         'nist-csf-v2-gv-rm-02',
@@ -63465,6 +63582,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-5-1', 'iso-2022-a-5-31', 'iso-2022-a-5-34'],
       '2013': ['iso-2013-a-5-1-1', 'iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+      eunis2: ['eu-nis2-21-2-a'],
       nistcsfv2: ['nist-csf-v2-gv-po-01', 'nist-csf-v2-gv-po-02'],
       cisv81: ['cisv81-17-1'],
       soc2v2: ['soc2-v2-cc1-1-1', 'soc2-v2-cc1-2-1'],
@@ -63476,6 +63594,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-6-3'],
       '2013': ['iso-2013-a-7-2-2'],
+      eunis2: ['eu-nis2-21-2-g'],
       mvps: ['mvsp-1-5'],
       nistcsfv2: ['nist-csf-v2-pr-at-01', 'nist-csf-v2-pr-at-02'],
       cisv81: ['cisv81-14-1', 'cisv81-14-2', 'cisv81-14-3'],
@@ -63488,6 +63607,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-5-35', 'iso-2022-a-5-36'],
       '2013': ['iso-2013-a-18-2-1', 'iso-2013-a-18-2-2'],
+      eunis2: ['eu-nis2-21-2-f'],
       mvps: ['mvsp-2-7'],
       nistcsfv2: [
         'nist-csf-v2-id-im-01',
@@ -63518,6 +63638,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-5-8', 'iso-2022-a-5-31', 'iso-2022-a-5-34'],
       '2013': ['iso-2013-a-8-2-1', 'iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+      eunis2: ['eu-nis2-21-2-a'],
       nistcsfv2: [
         'nist-csf-v2-id-ra-03',
         'nist-csf-v2-gv-rm-01',
@@ -63556,6 +63677,7 @@ const frameworkMappings: FrameworkMappings = {
         'iso-2022-a-8-27',
       ],
       '2013': ['iso-2013-a-14-1-1', 'iso-2013-a-14-2-1', 'iso-2013-a-18-1-4'],
+      eunis2: ['eu-nis2-21-2-e'],
       mvps: [
         'mvsp-1-1',
         'mvsp-1-2',
@@ -63574,6 +63696,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-5-15', 'iso-2022-a-5-18', 'iso-2022-a-5-34'],
       '2013': ['iso-2013-a-9-2-6', 'iso-2013-a-18-1-4'],
+      eunis2: ['eu-nis2-21-2-i'],
       mvps: ['mvsp-2-4'],
       nistcsfv2: ['nist-csf-v2-pr-aa-05', 'nist-csf-v2-pr-ds-01'],
       cisv81: ['cisv81-3-1', 'cisv81-5-4'],
@@ -63598,6 +63721,7 @@ const frameworkMappings: FrameworkMappings = {
         'iso-2013-a-15-1-2',
         'iso-2013-a-18-1-1',
       ],
+      eunis2: ['eu-nis2-21-2-d', 'eu-nis2-21-3'],
       mvps: ['mvsp-3-5', 'mvsp-4-3'],
       nistcsfv2: ['nist-csf-v2-gv-sc-01', 'nist-csf-v2-gv-sc-06'],
       cisv81: ['cisv81-15-1', 'cisv81-15-2'],
@@ -63623,6 +63747,7 @@ const frameworkMappings: FrameworkMappings = {
         'iso-2022-a-8-3',
       ],
       '2013': ['iso-2013-a-9-1-1', 'iso-2013-a-9-2-3', 'iso-2013-a-9-4-1'],
+      eunis2: ['eu-nis2-21-2-i', 'eu-nis2-21-2-j'],
       mvps: [
         'mvsp-2-1',
         'mvsp-2-3',
@@ -63650,6 +63775,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-8-8', 'iso-2022-a-8-19'],
       '2013': ['iso-2013-a-12-5-1', 'iso-2013-a-12-6-1'],
+      eunis2: ['eu-nis2-21-2-e'],
       mvps: ['mvsp-2-6'],
       nistcsfv2: [
         'nist-csf-v2-id-ra-01',
@@ -63666,6 +63792,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-8-13'],
       '2013': ['iso-2013-a-12-3-1'],
+      eunis2: ['eu-nis2-21-2-c'],
       mvps: ['mvsp-4-4'],
       nistcsfv2: [
         'nist-csf-v2-pr-ds-11',
@@ -63682,6 +63809,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-8-15', 'iso-2022-a-8-16'],
       '2013': ['iso-2013-a-12-4-1', 'iso-2013-a-12-4-2', 'iso-2013-a-12-4-3'],
+      eunis2: ['eu-nis2-21-2-b'],
       mvps: ['mvsp-1-7', 'mvsp-2-7'],
       nistcsfv2: ['nist-csf-v2-de-ae-03', 'nist-csf-v2-pr-ps-04'],
       cisv81: ['cisv81-8-1', 'cisv81-8-2', 'cisv81-8-5'],
@@ -63705,6 +63833,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-8-24'],
       '2013': ['iso-2013-a-10-1-1', 'iso-2013-a-10-1-2'],
+      eunis2: ['eu-nis2-21-2-h'],
       mvps: ['mvsp-2-5'],
       nistcsfv2: ['nist-csf-v2-pr-ds-01', 'nist-csf-v2-pr-ds-02'],
       cisv81: ['cisv81-3-11'],
@@ -63717,6 +63846,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-8-24'],
       '2013': ['iso-2013-a-10-1-1', 'iso-2013-a-14-1-2', 'iso-2013-a-14-1-3'],
+      eunis2: ['eu-nis2-21-2-h'],
       mvps: ['mvsp-2-2'],
       nistcsfv2: ['nist-csf-v2-pr-ds-02'],
       cisv81: ['cisv81-3-10'],
@@ -63729,6 +63859,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-8-8'],
       '2013': ['iso-2013-a-12-6-1'],
+      eunis2: ['eu-nis2-21-2-e'],
       mvps: [
         'mvsp-1-1',
         'mvsp-1-2',
@@ -63758,6 +63889,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-5-24', 'iso-2022-a-5-25', 'iso-2022-a-5-26'],
       '2013': ['iso-2013-a-16-1-1', 'iso-2013-a-16-1-2', 'iso-2013-a-16-1-5'],
+      eunis2: ['eu-nis2-21-2-b'],
       mvps: ['mvsp-1-6', 'mvsp-4-4'],
       nistcsfv2: ['nist-csf-v2-rs-co-02', 'nist-csf-v2-rs-co-03'],
       cisv81: ['cisv81-17-4'],
@@ -63770,6 +63902,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-5-24', 'iso-2022-a-5-26'],
       '2013': ['iso-2013-a-16-1-1', 'iso-2013-a-16-1-5'],
+      eunis2: ['eu-nis2-21-2-b'],
       mvps: ['mvsp-1-6'],
       nistcsfv2: ['nist-csf-v2-rs-co-02'],
       cisv81: ['cisv81-17-4'],
@@ -63789,6 +63922,7 @@ const frameworkMappings: FrameworkMappings = {
         'iso-2013-a-15-1-2',
         'iso-2013-a-18-1-1',
       ],
+      eunis2: ['eu-nis2-21-2-d'],
       mvps: ['mvsp-1-8'],
       nistcsfv2: ['nist-csf-v2-gv-sc-01', 'nist-csf-v2-gv-sc-06'],
       cisv81: ['cisv81-15-1'],
@@ -63801,6 +63935,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-5-19', 'iso-2022-a-5-21', 'iso-2022-a-5-22'],
       '2013': ['iso-2013-a-15-1-1', 'iso-2013-a-15-1-3', 'iso-2013-a-15-2-1'],
+      eunis2: ['eu-nis2-21-2-d', 'eu-nis2-21-3'],
       mvps: ['mvsp-4-3'],
       nistcsfv2: ['nist-csf-v2-gv-sc-02', 'nist-csf-v2-gv-sc-05'],
       cisv81: ['cisv81-15-1', 'cisv81-15-2', 'cisv81-15-3'],
@@ -63857,6 +63992,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-8-32'],
       '2013': ['iso-2013-a-12-1-2', 'iso-2013-a-14-2-2'],
+      eunis2: ['eu-nis2-21-2-e'],
       mvps: ['mvsp-2-8'],
       nistcsfv2: ['nist-csf-v2-id-ra-07'],
       cisv81: ['cisv81-16-1'],
@@ -63869,6 +64005,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-5-8', 'iso-2022-a-5-31'],
       '2013': ['iso-2013-a-8-2-1', 'iso-2013-a-18-1-1'],
+      eunis2: ['eu-nis2-21-2-a'],
       nistcsfv2: [
         'nist-csf-v2-id-ra-03',
         'nist-csf-v2-gv-rm-01',
@@ -63908,6 +64045,7 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-5-19', 'iso-2022-a-5-20', 'iso-2022-a-5-31'],
       '2013': ['iso-2013-a-15-1-1', 'iso-2013-a-15-1-2', 'iso-2013-a-18-1-1'],
+      eunis2: ['eu-nis2-21-2-d'],
       mvps: ['mvsp-4-3'],
       nistcsfv2: [
         'nist-csf-v2-gv-sc-01',
@@ -63932,10 +64070,277 @@ const frameworkMappings: FrameworkMappings = {
     mappings: {
       '2022': ['iso-2022-a-5-31', 'iso-2022-a-5-36'],
       '2013': ['iso-2013-a-18-1-1', 'iso-2013-a-18-2-2'],
+      eunis2: ['eu-nis2-21-2-f'],
       nistcsfv2: ['nist-csf-v2-gv-oc-03', 'nist-csf-v2-id-im-01'],
       soc2v2: ['soc2-v2-cc1-3-1', 'soc2-v2-cc1-3-2'],
     },
   },
+  // ─── EU NIS2 controls (manually mapped) ──────────────────────────
+
+  // Art. 21(2)(a) - Policies on risk analysis and information system security
+  'eu-nis2-21-2-a': {
+    relationship: 'related',
+    mappings: {
+      '2022': [
+        'iso-2022-a-5-1',
+        'iso-2022-a-5-2',
+        'iso-2022-a-5-4',
+      ],
+      gdpr: [
+        'gdpr-art-24-responsibility-accountability',
+        'gdpr-art-24-data-protection-policy',
+        'gdpr-art-35-data-protection-impact-assessment',
+        'gdpr-art-35-risk-mitigation',
+      ],
+      nistcsfv2: [
+        'nist-csf-v2-gv-oc-01',
+        'nist-csf-v2-gv-rm-01',
+        'nist-csf-v2-gv-rm-02',
+        'nist-csf-v2-id-ra-01',
+        'nist-csf-v2-id-ra-02',
+        'nist-csf-v2-id-ra-03',
+        'nist-csf-v2-id-ra-04',
+        'nist-csf-v2-id-ra-05',
+        'nist-csf-v2-id-ra-06',
+      ],
+    },
+  },
+  // Art. 21(2)(b) - Incident handling
+  'eu-nis2-21-2-b': {
+    relationship: 'related',
+    mappings: {
+      '2022': [
+        'iso-2022-a-5-24',
+        'iso-2022-a-5-25',
+        'iso-2022-a-5-26',
+        'iso-2022-a-5-27',
+        'iso-2022-a-5-28',
+        'iso-2022-a-6-8',
+      ],
+      gdpr: [
+        'gdpr-art-33-breach-notification-to-customer',
+        'gdpr-art-34-breach-notification-to-data-subjects',
+        'gdpr-art-32-audit-logging',
+      ],
+      nistcsfv2: [
+        'nist-csf-v2-de-ae-01',
+        'nist-csf-v2-de-ae-02',
+        'nist-csf-v2-de-ae-03',
+        'nist-csf-v2-de-ae-04',
+        'nist-csf-v2-de-ae-06',
+        'nist-csf-v2-de-ae-07',
+        'nist-csf-v2-de-ae-08',
+        'nist-csf-v2-rs-ma-01',
+        'nist-csf-v2-rs-ma-02',
+        'nist-csf-v2-rs-ma-03',
+        'nist-csf-v2-rs-ma-04',
+        'nist-csf-v2-rs-ma-05',
+        'nist-csf-v2-rs-co-02',
+        'nist-csf-v2-rs-co-03',
+      ],
+    },
+  },
+  // Art. 21(2)(c) - Business continuity, backups, disaster recovery, crisis management
+  'eu-nis2-21-2-c': {
+    relationship: 'related',
+    mappings: {
+      '2022': [
+        'iso-2022-a-5-29',
+        'iso-2022-a-5-30',
+        'iso-2022-a-8-13',
+        'iso-2022-a-8-14',
+      ],
+      gdpr: ['gdpr-art-32-backup'],
+      nistcsfv2: [
+        'nist-csf-v2-rs-mi-01',
+        'nist-csf-v2-rs-mi-02',
+        'nist-csf-v2-rc-rp-01',
+        'nist-csf-v2-rc-rp-02',
+        'nist-csf-v2-rc-rp-03',
+        'nist-csf-v2-rc-rp-04',
+        'nist-csf-v2-rc-rp-05',
+        'nist-csf-v2-rc-rp-06',
+        'nist-csf-v2-rc-co-03',
+        'nist-csf-v2-rc-co-04',
+      ],
+    },
+  },
+  // Art. 21(2)(d) - Supply chain security
+  'eu-nis2-21-2-d': {
+    relationship: 'related',
+    mappings: {
+      '2022': [
+        'iso-2022-a-5-19',
+        'iso-2022-a-5-20',
+        'iso-2022-a-5-21',
+        'iso-2022-a-5-22',
+        'iso-2022-a-5-23',
+      ],
+      gdpr: [
+        'gdpr-art-28-processor-contracts',
+        'gdpr-art-28-data-processing-agreement',
+        'gdpr-art-28-third-party-integration',
+        'gdpr-art-44-46-data-transfers-outside-eu',
+      ],
+      nistcsfv2: [
+        'nist-csf-v2-gv-sc-01',
+        'nist-csf-v2-gv-sc-02',
+        'nist-csf-v2-gv-sc-03',
+        'nist-csf-v2-gv-sc-04',
+        'nist-csf-v2-gv-sc-05',
+        'nist-csf-v2-gv-sc-06',
+        'nist-csf-v2-gv-sc-07',
+        'nist-csf-v2-gv-sc-08',
+        'nist-csf-v2-gv-sc-09',
+        'nist-csf-v2-gv-sc-10',
+        'nist-csf-v2-id-ra-09',
+        'nist-csf-v2-id-ra-10',
+      ],
+    },
+  },
+  // Art. 21(2)(e) - Security in network/information systems acquisition, development, maintenance
+  'eu-nis2-21-2-e': {
+    relationship: 'related',
+    mappings: {
+      '2022': [
+        'iso-2022-a-8-8',
+        'iso-2022-a-8-9',
+        'iso-2022-a-8-25',
+        'iso-2022-a-8-26',
+        'iso-2022-a-8-27',
+        'iso-2022-a-8-28',
+      ],
+      gdpr: [
+        'gdpr-art-25-data-protection-by-design',
+        'gdpr-art-32-vulnerability-assessment',
+        'gdpr-art-32-product-version',
+        'gdpr-art-35-change-management',
+      ],
+      nistcsfv2: [
+        'nist-csf-v2-pr-ps-01',
+        'nist-csf-v2-pr-ps-02',
+        'nist-csf-v2-pr-ps-03',
+        'nist-csf-v2-pr-ps-04',
+        'nist-csf-v2-pr-ps-05',
+        'nist-csf-v2-pr-ps-06',
+        'nist-csf-v2-id-im-01',
+        'nist-csf-v2-id-im-02',
+        'nist-csf-v2-id-im-03',
+        'nist-csf-v2-id-im-04',
+      ],
+    },
+  },
+  // Art. 21(2)(f) - Policies/procedures to assess effectiveness of cybersecurity risk management
+  'eu-nis2-21-2-f': {
+    relationship: 'related',
+    mappings: {
+      '2022': ['iso-2022-a-5-35', 'iso-2022-a-5-36'],
+      gdpr: ['gdpr-art-24-monitoring-review', 'gdpr-art-40-42-codes-of-conduct-and-certifications'],
+      nistcsfv2: [
+        'nist-csf-v2-gv-ov-01',
+        'nist-csf-v2-gv-ov-02',
+        'nist-csf-v2-gv-ov-03',
+        'nist-csf-v2-id-im-02',
+        'nist-csf-v2-id-im-03',
+      ],
+    },
+  },
+  // Art. 21(2)(g) - Basic cyber hygiene practices and cybersecurity training
+  'eu-nis2-21-2-g': {
+    relationship: 'related',
+    mappings: {
+      '2022': ['iso-2022-a-6-3'],
+      gdpr: ['gdpr-art-24-training-awareness'],
+      nistcsfv2: [
+        'nist-csf-v2-pr-at-01',
+        'nist-csf-v2-pr-at-02',
+        'nist-csf-v2-gv-rr-02',
+        'nist-csf-v2-gv-rr-04',
+      ],
+    },
+  },
+  // Art. 21(2)(h) - Policies and procedures regarding cryptography and encryption
+  'eu-nis2-21-2-h': {
+    relationship: 'related',
+    mappings: {
+      '2022': ['iso-2022-a-8-24'],
+      gdpr: ['gdpr-art-32-encryption-at-rest', 'gdpr-art-32-encryption-in-transit'],
+      nistcsfv2: [
+        'nist-csf-v2-pr-ds-01',
+        'nist-csf-v2-pr-ds-02',
+        'nist-csf-v2-pr-ds-10',
+      ],
+    },
+  },
+  // Art. 21(2)(i) - Human resources security, access control policies, and asset management
+  'eu-nis2-21-2-i': {
+    relationship: 'related',
+    mappings: {
+      '2022': [
+        'iso-2022-a-5-9',
+        'iso-2022-a-5-10',
+        'iso-2022-a-5-15',
+        'iso-2022-a-6-1',
+        'iso-2022-a-6-2',
+        'iso-2022-a-6-4',
+        'iso-2022-a-6-5',
+        'iso-2022-a-8-2',
+        'iso-2022-a-8-3',
+      ],
+      gdpr: [
+        'gdpr-art-32-access-restriction',
+        'gdpr-art-25-data-protection-by-default',
+        'gdpr-art-30-personal-data-inventory',
+      ],
+      nistcsfv2: [
+        'nist-csf-v2-pr-aa-01',
+        'nist-csf-v2-pr-aa-02',
+        'nist-csf-v2-pr-aa-03',
+        'nist-csf-v2-pr-aa-04',
+        'nist-csf-v2-pr-aa-05',
+        'nist-csf-v2-pr-aa-06',
+        'nist-csf-v2-id-am-01',
+        'nist-csf-v2-id-am-02',
+        'nist-csf-v2-id-am-03',
+        'nist-csf-v2-id-am-04',
+        'nist-csf-v2-id-am-05',
+        'nist-csf-v2-id-am-07',
+        'nist-csf-v2-id-am-08',
+      ],
+    },
+  },
+  // Art. 21(2)(j) - Use of multi-factor authentication or continuous authentication
+  'eu-nis2-21-2-j': {
+    relationship: 'related',
+    mappings: {
+      '2022': ['iso-2022-a-8-5'],
+      gdpr: ['gdpr-art-32-access-restriction'],
+      nistcsfv2: ['nist-csf-v2-pr-aa-03', 'nist-csf-v2-pr-aa-05'],
+    },
+  },
+  // Art. 21(3) - Supply chain vulnerabilities and overall supply chain quality
+  'eu-nis2-21-3': {
+    relationship: 'related',
+    mappings: {
+      '2022': [
+        'iso-2022-a-5-19',
+        'iso-2022-a-5-20',
+        'iso-2022-a-5-21',
+        'iso-2022-a-5-22',
+        'iso-2022-a-5-23',
+      ],
+      gdpr: ['gdpr-art-28-processor-contracts', 'gdpr-art-28-third-party-integration'],
+      nistcsfv2: [
+        'nist-csf-v2-gv-sc-01',
+        'nist-csf-v2-gv-sc-05',
+        'nist-csf-v2-gv-sc-09',
+        'nist-csf-v2-gv-sc-10',
+        'nist-csf-v2-id-ra-09',
+        'nist-csf-v2-id-ra-10',
+      ],
+    },
+  },
+
 };
 
 // Register mappings with the lazy-load registry
