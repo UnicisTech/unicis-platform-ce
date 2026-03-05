@@ -33,12 +33,11 @@ const FALLBACK: SoaExportStrings = {
   legendSheetTitle: 'Unicis Control Status Maturity Scale',
 };
 
-function esc(s: string) {
-  return s
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+/** Escape a string for safe embedding in HTML using the browser's native encoder. */
+function esc(s: string): string {
+  const el = document.createElement('span');
+  el.textContent = s;
+  return el.innerHTML;
 }
 function triggerDownload(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob);

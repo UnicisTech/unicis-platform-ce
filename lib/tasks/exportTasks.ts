@@ -252,12 +252,11 @@ export function exportTasksCsv(tasks: Task[], teamName: string): void {
 // ── HTML Export ────────────────────────────────────────────────────────────────
 
 export function exportTasksHtml(tasks: Task[], teamName: string): void {
-  function esc(s: string) {
-    return String(s)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+  /** Escape a string for safe embedding in HTML using the browser's native encoder. */
+  function esc(s: string): string {
+    const el = document.createElement('span');
+    el.textContent = String(s);
+    return el.innerHTML;
   }
 
   const tableRows = tasks
