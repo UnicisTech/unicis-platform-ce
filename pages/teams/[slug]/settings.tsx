@@ -34,7 +34,7 @@ const Settings = ({ teamFeatures }) => {
       <div className="space-y-6">
         <TeamSettings team={team} />
         <CSCSettings team={team} />
-        <AccessControl resource="team" actions={['delete']}>
+        <AccessControl resource="team" actions={['delete']} slug={team.slug}>
           <RemoveTeam team={team} />
         </AccessControl>
       </div>

@@ -260,6 +260,7 @@ export default function CscPanel({
       </div>
 
       <StatusesTable
+        slug={slug}
         ISO={iso}
         tasks={tasks}
         statuses={statuses}

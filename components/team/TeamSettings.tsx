@@ -110,7 +110,7 @@ const TeamSettings: React.FC<TeamSettingsProps> = ({ team }) => {
           </div>
         </CardContent>
 
-        <AccessControl resource="team" actions={['update']}>
+        <AccessControl resource="team" actions={['update']} slug={team.slug}>
           <CardFooter className="flex justify-end">
             <Button
               type="submit"

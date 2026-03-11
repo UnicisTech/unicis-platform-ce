@@ -50,7 +50,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
   const router = useRouter();
   const { slug, taskNumber } = router.query;
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(team.slug);
   const { mutateTask } = useTask(slug as string, taskNumber as string);
 
   const [isFormChanged, setIsFormChanged] = useState(false);

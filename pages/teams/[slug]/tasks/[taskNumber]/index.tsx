@@ -77,11 +77,11 @@ const TaskById = () => {
 
   const router = useRouter();
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
   const { taskNumber, slug } = router.query as {
     slug: string;
     taskNumber: string;
   };
+  const { canAccess } = useCanAccess(slug);
 
   const { team, isLoading: teamLoading, isError: teamError } = useTeam(slug);
   const { task, isLoading, isError, mutateTask } = useTask(
@@ -94,8 +94,6 @@ const TaskById = () => {
   if (isLoading || teamLoading || !ISO) return <Loading />;
   if (!task || !team || isError || teamError)
     return <Error message={(isError || teamError)?.message || ''} />;
-
-  console.log('task', task);
 
   return (
     <>

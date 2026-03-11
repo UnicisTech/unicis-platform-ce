@@ -20,7 +20,7 @@ const AttachmentsCard = ({
 }) => {
   const { t } = useTranslation('common');
   const [isDeleteVisible, setIsDeleteVisible] = useState(false);
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(teamSlug);
 
   const { theme } = useTheme();
 

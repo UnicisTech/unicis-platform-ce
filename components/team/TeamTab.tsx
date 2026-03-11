@@ -21,7 +21,7 @@ interface TeamTabProps {
 }
 
 const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(team.slug);
   const { t } = useTranslation('common');
 
   const navigations = [

@@ -26,8 +26,8 @@ const TiaDashboard: NextPageWithLayout<
 > = () => {
   const router = useRouter();
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
-  const { slug } = router.query;
+  const { slug } = router.query as { slug: string };
+  const { canAccess } = useCanAccess(slug);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   const [isEditOpen, setIsEditOpen] = useState(false);

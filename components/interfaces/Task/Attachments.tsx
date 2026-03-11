@@ -19,8 +19,9 @@ const Attachments = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
-  const { slug, taskNumber } = router.query;
+  const { slug: slugQuery, taskNumber } = router.query;
+  const slug = Array.isArray(slugQuery) ? slugQuery[0] : slugQuery;
+  const { canAccess } = useCanAccess(slug);
   const [isDragOver, setIsDragOver] = useState(false);
 
   const { theme } = useTheme();

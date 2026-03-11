@@ -15,9 +15,9 @@ import useCanAccess from 'hooks/useCanAccess';
 import { getTeamAccess } from '@/lib/teams';
 
 const IAP = ({ teamFeatures }) => {
-  const { canAccess } = useCanAccess();
   const router = useRouter();
-  const { slug } = router.query;
+  const { slug } = router.query as { slug: string };
+  const { canAccess } = useCanAccess(slug);
 
   const { t } = useTranslation('common');
   const { isLoading: isTeamLoading, isError: isTeamError, team } = useTeam();

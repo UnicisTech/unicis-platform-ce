@@ -7,11 +7,13 @@ import { Button } from '@/components/shadcn/ui/button';
 
 interface CommentViewProps {
   comment: Comment;
+  slug?: string;
   activateEditForComment: (id: number) => void;
   deleteComment: (id: number) => void;
 }
 const CommentView = ({
   comment,
+  slug,
   activateEditForComment,
   deleteComment,
 }: CommentViewProps) => {
@@ -31,7 +33,7 @@ const CommentView = ({
         />
       </div>
       <div>
-        <AccessControl resource="task" actions={['update']}>
+        <AccessControl resource="task" actions={['update']} slug={slug}>
           <Button
             variant="subtle"
             size="sm"

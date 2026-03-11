@@ -15,6 +15,7 @@ import { StatusBadge } from '@/components/shared';
 import { useTranslation } from 'next-i18next';
 
 interface CoursesTableProps {
+  slug: string;
   teamCourses: TeamCourseWithProgress[];
   members: TeamMemberWithUser[];
   categories: { id: string; name: string }[];
@@ -25,6 +26,7 @@ interface CoursesTableProps {
 }
 
 const CoursesTable: React.FC<CoursesTableProps> = ({
+  slug,
   teamCourses,
   members,
   categories,
@@ -33,7 +35,7 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
   completionHandler,
   statusHandler,
 }) => {
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
   const { t } = useTranslation();
 
   return (

@@ -16,10 +16,10 @@ import { Button } from '@/components/shadcn/ui/button';
 import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/TeamProcessingActivities';
 
 const Dashboard = () => {
-  const { canAccess } = useCanAccess();
   const { t } = useTranslation('common');
   const router = useRouter();
   const { slug } = router.query;
+  const { canAccess } = useCanAccess(slug as string);
   const { tasks, mutateTasks } = useTeamTasks(slug as string);
 
   const [perPage, setPerPage] = useState<number>(10);

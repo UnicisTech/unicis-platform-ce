@@ -45,7 +45,7 @@ const RisksTable = ({
   editHandler: (task: TaskWithRmRisk) => void;
   deleteHandler: (task: TaskWithRmRisk) => void;
 }) => {
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
   const { t } = useTranslation('common');
   const { theme } = useTheme();
 

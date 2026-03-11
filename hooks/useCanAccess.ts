@@ -2,8 +2,8 @@ import type { Action, Resource } from '@/lib/permissions';
 
 import usePermissions from './usePermissions';
 
-const useCanAccess = () => {
-  const { permissions, isError, isLoading } = usePermissions();
+const useCanAccess = (slug?: string) => {
+  const { permissions, isError, isLoading } = usePermissions(slug);
 
   const canAccess = (resource: Resource, actions: Action[]) => {
     return (permissions || []).some(

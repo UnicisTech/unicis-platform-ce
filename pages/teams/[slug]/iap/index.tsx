@@ -23,7 +23,7 @@ const IAP = () => {
     isError: isTeamsError,
   } = useTeams();
 
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(team?.slug);
 
   if (isLoading || isIapDataLoading || isTeamsLoading) {
     return <Loading />;

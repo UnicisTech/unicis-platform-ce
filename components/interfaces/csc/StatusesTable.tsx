@@ -17,6 +17,7 @@ import ControlMappingDrawer from './ControlMappingDrawer';
 import { getMappingCount } from '@/lib/csc/framework-mapping-utils';
 
 const StatusesTable = ({
+  slug,
   ISO,
   tasks,
   statuses,
@@ -28,6 +29,7 @@ const StatusesTable = ({
   enabledFrameworks,
   onLinkTask,
 }: {
+  slug: string;
   ISO: ISO;
   tasks: Array<Task>;
   statuses: any;
@@ -53,7 +55,7 @@ const StatusesTable = ({
   ) => Promise<void>;
 }) => {
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
   const cscControlsProp = getCscControlsProp(ISO);
 
   // ── Mapping drawer state ───────────────────────────────────
