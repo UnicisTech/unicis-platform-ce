@@ -1,0 +1,237 @@
+---
+title: Unicis Platform Changelog / Release notes
+description: Unicis Platform release details and changelog.
+sidebar_label: Changelog
+id: changelog
+tags:
+  - changelog
+  - release
+  - bug fix
+  - fix
+  - security
+---
+
+# Changelog / Release notes
+ 
+The information about Unicis Platform releases and changes is listed in order below.
+
+## [Controls Mapping] 2026-03-07
+
+*Release date: 2026-03-07*
+
+- New Features
+  - Tasks
+    - Added export functionality for Tasks in HTML, PDF, Excel, and CSV formats.
+    - Added bulk import capability and task template support via Excel or CSV files.
+  - Cybersecurity Management System
+    - Added export functionality for the Statement of Applicability (SoA) in HTML, PDF, and Excel formats.
+    - Introduced Controls Mapping across multiple frameworks and standards, including:
+      - Visibility of the number of mapped controls
+      - Detailed view of relationships between mapped controls
+      - Display of Tasks linked to mapped controls
+    - Added Controls Mapping Matrix to visualize the mapping status between different frameworks and standards.
+
+- Security
+  - Updated Prisma and Next.js to their latest stable versions.
+
+- Fixes
+  - Fixed issues affecting Cybersecurity controls selection.
+  - Updated platform pricing display.
+  - Fixed issues in the Risk Management dashboard.
+
+
+## [Internationalization] 2026-02-05
+
+*Release date: 2026-02-05*
+
+- New Features 
+  - Added localization support: The platform is now available in French, German, and Spanish alongside the default English. Check the status on the [translation platform](https://locales.unicis.tech/weblate/projects/unicis-platform/).
+  - Added theme toggle on login page
+  - Added copy action for API keys
+  - Added ENV variable for AI custom integration with different models and providers
+- Enhancements 
+  - Improved chart labels and readability in localized views
+  - Improved responsiveness across key pages and forms
+  - Refreshed UI consistency in navigation, cards, and tables
+  - The minimum Risk value can be set to 0%
+  - Better behavior of multiselector
+  - Improved 404 page
+  - Updated features plan: AI Chatbot now available for Premium and Ultimate
+- Fixes 
+  - Fixed visual issues in dark theme and legacy browser cases
+  - Fixed navigation and layout issues on mobile
+  - Fixed issues in selectors and filtering behavior
+  - Fixed description editor in Interactive Awareness Training module
+  - Fixed task comments behavior
+  - Vulnerability fixed: 
+      - HIGH: Unsanitized user input in HTTP response (XSS) [CWE-79](https://docs.bearer.com/reference/rules/javascript_express_cross_site_scripting)
+      - Unsanitized user input in dynamic HTML insertion (XSS) [CWE-79](https://docs.bearer.com/reference/rules/javascript_lang_dangerous_insert_html)
+  - Library updates `npm audit fix`
+
+## [Feature] 2025-10-24
+
+*Release date: 2025-10-24*
+
+- New Features 
+  - Added [SOC 2 compliance](/frameworks/soc) framework
+  - Added [C5:2020 compliance](/frameworks/c5) framework
+  - Introduced [multiple framework support](/docs/platform/using/settings#multi-framework-selection) for improved flexibility
+- Enhancements 
+  - Improved permission schema for better access control management
+  - Added [Markdown](https://daringfireball.net/projects/markdown/syntax) shortcuts for task comments and descriptions
+  - Introduced "[Resend](https://resend.com/) verification email" button for easier user onboarding
+  - Added "Copy" [button for invitation links](/docs/platform/using/settings#members)
+  - Enhanced chart readability
+  - Improved mobile view layouts for better responsiveness
+  - Docker hub repository for [Unicis Platform](https://hub.docker.com/r/stepcellwolf/unicis-platform-ce)
+- Access & Security 
+  - [Audit logs](/docs/platform/using/settings#audit-logs) are now available exclusively for Ultimate plan users
+  - Improve security with introducing CI/CD pipeline by adding [Bearer](https://github.com/Bearer/bearer) code security scanning tool (SAST) to discover, filter and prioritize security and privacy risk in Unicis Platform
+- Fixes/Bugs
+  - Email service reliability improvements with introducing [Resend](https://resend.com/) intergation for email delivery
+
+
+## [Maintenance] 2025-08-18
+
+*Release date: 2025-08-18*
+
+- Bug Fixes & Enhancements
+  - Dark theme display issues
+  - Improved chart color schemes
+  - Applied multiple UI style adjustments
+  - Layout and interaction issues in Dashboard views
+  - Functionality bugs in Interactive Awareness Training module
+  - Issues with task attachments handling and display
+- Security & Vulnerability Updates
+  - Upgraded several key dependencies to their latest major versions, including: 
+    - [react-email](https://www.npmjs.com/package/react-email)
+    - [next](https://www.npmjs.com/package/next)
+    - [next-auth](https://www.npmjs.com/package/next-auth)
+- Authentication Improvements
+  - Fixed and enhanced [SSO SAML](/docs/platform/using/settings#single-sign-on) authentication flow
+
+## [Refactoring] 2025-07-01
+
+*Release date: 2025-07-01*
+
+- Security vulnerability fix: Improper Session Management - Lack of Request Validation
+- Dependency libraries:
+  - [Tailwind CSS](https://tailwindcss.com) upgrade from v3 to v4
+  - [daisyUI](https://daisyui.com) ugrade from v4 to v5
+  - [react-daisyui](https://github.com/daisyui/react-daisyui) removed
+  - [Atlaskit](https://atlaskit.atlassian.com) library removed
+  - [Shadcn](https://ui.shadcn.com) library introduced
+- New features and improvements:
+  - New controls added: [EU NIS2](/frameworks/eu-nis2); [GDPR](/frameworks/gdpr); [CIS](/frameworks/cis)
+  - Badges and filters introduced to the task list
+  - Logs list redesign
+  - Pagination redesign
+  - General dashboard graphical enhancements
+  - Dark theme improvement
+
+## [Early Access Enhancements] 2025-04-02
+
+*Release date: 2025-04-02*
+
+- Record of Processing Activities creation new behavior - Depending on specific input, an automatic triggering of Transfer Impact Assessment and Privacy Impact Assessment creation
+- Add titles to modal view
+- Security vulnerability fix: [Next.js middleware authorization bypass fix](https://github.com/vercel/next.js/security/advisories/GHSA-f82v-jwr5-mffw)
+- Bug fixes:
+  - Strong password improvement
+  - Firefox styles fixes
+  - Permissions scheme improvements
+  - Emails logo image fix
+
+## [Early Access] 2025-02-02
+
+*Release date: 2025-02-02*
+
+- Easy payment with [Wise](/docs/platform/using/settings#payment-options-with-wise) and Credit Card
+- Generate SBOM - regulatory requirements
+- [AI Assistance](/docs/platform/using/ai-chatbot) module
+- [Privacy Impact Assessment](/docs/platform/using/privacy-impact-assessment) module
+- [Risk Management](/docs/platform/using/risk-management) module
+- [Interactive Awareness Program](/docs/platform/using/awareness-program) module
+- Added steps on modal
+- Bug fixes:
+    - Responsive dashboard
+    - Dark mode
+    - Library updates `npm audit fix`
+    - Permission fix
+    - [Prisma](https://www.prisma.io/) latest
+
+
+## [Security] 2024-25-08
+
+*Release date: 2024-25-08*
+
+Security fixed and patched vulnerabilities from [pentest report](/blog/unicis-platform-2024-pentest-security-update) per severity:
+
+- High: API accessible without authentication
+- Medium: No rate limit on forgot password request
+- Medium: No account lockout implementation
+- Low: When an unexpected input was supplied to the API
+- Low: Cookie lacks HTTP-Secure attribute
+- Low: Excessive info disclosure
+- Low: Clickjacking on login page
+- Low: HSTS header missing from response
+- Low: Check for excessive information disclosure in API response (OWASP A01-Broken Access Control) 
+
+
+## [Beta2] 2024-07-01
+
+*Release date: 2024-07-01*
+
+- Tasks, Breadcrumbs
+- Dashboard
+  - Tasks
+    - Total number of tasks
+    - Pie chart per status
+  - Record of processing activities:
+    - Total number of records
+    - Total number of enabled data transfer
+    - Total number per Country
+  - Transfer Impact Assessment
+    - Total number of assessment
+    - Total number of assessments per country (only the listed countries)
+    - Number per authorizations: PERMITTED and NOT PERMITTED
+  - Cybersecurity Controls (only for selected control)
+    - Total number of controls
+    - Pie chart
+    - Spider chart
+- Billing
+- Bug fix
+- `npm audit fix`
+
+## [Beta] 2023-10-29
+
+*Release date: 2023-10-29*
+
+- Task Management
+  - Comments 
+  - Audit
+  - Attachment
+- Record of Processing Activities
+  - Bug fix and UI fix
+- Transfer Impact Assessment
+  - - Bug fix and UI fix
+- Cybersecurity Controls: 
+  - ISO 27001:2013 and 27001:2022
+  - NIST CSF 2.0
+- Bug fix
+- Documentation link
+- Feedback link
+- Dark mode
+
+
+## [Alfa] 2023-10-01
+
+*Release date: 2023-10-01*
+
+- Task Management
+  - Create, Delete, Update 
+- Record of Processing Activities
+- Transfer Impact Assessment
+- Cybersecurity Controls
+  - MVSP
+- API
