@@ -3,6 +3,7 @@
   "version": "0.2.2",
   "private": true,
   "scripts": {
+    "predev": "tsx scripts/generate-openapi.ts",
     "dev": "next dev --port 4002 --webpack",
     "build": "prisma generate && prisma db push --accept-data-loss && tsx scripts/generate-openapi.ts && next build --webpack",
     "generate:openapi": "tsx scripts/generate-openapi.ts",
