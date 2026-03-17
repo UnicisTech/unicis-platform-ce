@@ -194,31 +194,38 @@ export const throwIfNoTeamAccess = async (
   const bearerToken = extractBearerToken(req);
 
   if (bearerToken) {
-    const slug = req.query.slug as string;
-    const { apiKey, owner } = await verifyApiKey(bearerToken, slug);
+    try {
+      const slug = req.query.slug as string;
+      const { apiKey, owner } = await verifyApiKey(bearerToken, slug);
 
-    // Load team with subscription to match the shape returned by getTeamMember
-    const teamWithSub = await prisma.team.findUniqueOrThrow({
-      where: { id: apiKey.teamId },
-      include: { subscription: true },
-    });
+      // Load team with subscription to match the shape returned by getTeamMember
+      const teamWithSub = await prisma.team.findUniqueOrThrow({
+        where: { id: apiKey.teamId },
+        include: { subscription: true },
+      });
 
-    return {
-      // Satisfy the TeamMember type shape used by throwIfNotAllowed
-      id: owner.id,
-      teamId: apiKey.teamId,
-      userId: owner.userId,
-      role: Role.ADMIN,
-      createdAt: owner.createdAt,
-      updatedAt: owner.updatedAt,
-      team: teamWithSub,
-      user: {
-        id: owner.user.id,
-        name: owner.user.name || 'API Key',
-        email: owner.user.email || '',
-        roles: [{ teamId: apiKey.teamId, role: Role.ADMIN }],
-      },
-    };
+      return {
+        // Satisfy the TeamMember type shape used by throwIfNotAllowed
+        id: owner.id,
+        teamId: apiKey.teamId,
+        userId: owner.userId,
+        role: Role.ADMIN,
+        createdAt: owner.createdAt,
+        updatedAt: owner.updatedAt,
+        team: teamWithSub,
+        user: {
+          id: owner.user.id,
+          name: owner.user.name || 'API Key',
+          email: owner.user.email || '',
+          roles: [{ teamId: apiKey.teamId, role: Role.ADMIN }],
+        },
+      };
+    } catch (error: any) {
+      const status = error.status || 401;
+      const message = error.message || 'Invalid API key';
+      res.status(status).json({ error: { message } });
+      throw error;
+    }
   }
 
   // Fall back to session-based auth

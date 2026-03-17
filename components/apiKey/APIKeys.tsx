@@ -58,16 +58,6 @@ const APIKeys = ({ team }: APIKeysProps) => {
     }
   };
 
-  const copyApiKey = async (apiKey: ApiKey) => {
-    try {
-      await navigator.clipboard.writeText(apiKey.hashedKey);
-      toast.success(t('copied-to-clipboard'));
-    } catch (err) {
-      console.error('Failed to copy: ', err);
-      toast.error(t('errors.failedToCopyLink'));
-    }
-  };
-
   const apiKeys = data?.data ?? [];
 
   return (
@@ -114,28 +104,16 @@ const APIKeys = ({ team }: APIKeysProps) => {
                       {new Date(apiKey.createdAt).toLocaleDateString()}
                     </TableCell>
                     <TableCell className="text-right">
-                      <div className="inline-flex gap-2 justify-end">
-                        <Button
-                          variant="outline"
-                          aria-label="Copy"
-                          size="sm"
-                          onClick={() => {
-                            copyApiKey(apiKey);
-                          }}
-                        >
-                          {t('copy-to-clipboard')}
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="destructive"
-                          onClick={() => {
-                            setSelectedApiKey(apiKey);
-                            setConfirmationDialogVisible(true);
-                          }}
-                        >
-                          {t('revoke')}
-                        </Button>
-                      </div>
+                      <Button
+                        size="sm"
+                        variant="destructive"
+                        onClick={() => {
+                          setSelectedApiKey(apiKey);
+                          setConfirmationDialogVisible(true);
+                        }}
+                      >
+                        {t('revoke')}
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
