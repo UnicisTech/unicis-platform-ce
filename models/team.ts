@@ -182,10 +182,46 @@ export const isTeamExists = async (condition: any) => {
 
 // Check if the current user has access to the team
 // Should be used in API routes to check if the user has access to the team
+// Supports both session-based auth and Bearer token (API key) auth
 export const throwIfNoTeamAccess = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
+  // Try Bearer token auth first
+  const { extractBearerToken, verifyApiKey } = await import(
+    '@/lib/api-key-auth'
+  );
+  const bearerToken = extractBearerToken(req);
+
+  if (bearerToken) {
+    const slug = req.query.slug as string;
+    const { apiKey, owner } = await verifyApiKey(bearerToken, slug);
+
+    // Load team with subscription to match the shape returned by getTeamMember
+    const teamWithSub = await prisma.team.findUniqueOrThrow({
+      where: { id: apiKey.teamId },
+      include: { subscription: true },
+    });
+
+    return {
+      // Satisfy the TeamMember type shape used by throwIfNotAllowed
+      id: owner.id,
+      teamId: apiKey.teamId,
+      userId: owner.userId,
+      role: Role.ADMIN,
+      createdAt: owner.createdAt,
+      updatedAt: owner.updatedAt,
+      team: teamWithSub,
+      user: {
+        id: owner.user.id,
+        name: owner.user.name || 'API Key',
+        email: owner.user.email || '',
+        roles: [{ teamId: apiKey.teamId, role: Role.ADMIN }],
+      },
+    };
+  }
+
+  // Fall back to session-based auth
   const session = await getSession(req, res);
 
   if (!session) {

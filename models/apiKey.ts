@@ -40,6 +40,13 @@ export const fetchApiKeys = async (teamId: string) => {
   });
 };
 
+export const findApiKeyByHash = async (hashedKey: string) => {
+  return prisma.apiKey.findUnique({
+    where: { hashedKey },
+    include: { team: true },
+  });
+};
+
 export const deleteApiKey = async (id: string) => {
   return prisma.apiKey.delete({
     where: {
