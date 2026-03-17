@@ -46,24 +46,24 @@ export const verifyApiKey = async (token: string, slug: string) => {
     data: { lastUsedAt: new Date() },
   });
 
-  // Look up team owner to use as the author for write operations
-  const teamOwner = await prisma.teamMember.findFirst({
+  // Look up an ADMIN member to use as the user context for write operations
+  const teamAdmin = await prisma.teamMember.findFirst({
     where: {
       teamId: apiKey.teamId,
-      role: 'OWNER',
+      role: 'ADMIN',
     },
     include: {
       user: true,
     },
   });
 
-  if (!teamOwner) {
-    throw new ApiError(500, 'Team has no owner');
+  if (!teamAdmin) {
+    throw new ApiError(500, 'Team has no admin');
   }
 
   return {
     apiKey,
     team: apiKey.team,
-    owner: teamOwner,
+    admin: teamAdmin,
   };
 };

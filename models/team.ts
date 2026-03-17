@@ -196,7 +196,7 @@ export const throwIfNoTeamAccess = async (
   if (bearerToken) {
     try {
       const slug = req.query.slug as string;
-      const { apiKey, owner } = await verifyApiKey(bearerToken, slug);
+      const { apiKey, admin } = await verifyApiKey(bearerToken, slug);
 
       // Load team with subscription to match the shape returned by getTeamMember
       const teamWithSub = await prisma.team.findUniqueOrThrow({
@@ -206,17 +206,17 @@ export const throwIfNoTeamAccess = async (
 
       return {
         // Satisfy the TeamMember type shape used by throwIfNotAllowed
-        id: owner.id,
+        id: admin.id,
         teamId: apiKey.teamId,
-        userId: owner.userId,
+        userId: admin.userId,
         role: Role.ADMIN,
-        createdAt: owner.createdAt,
-        updatedAt: owner.updatedAt,
+        createdAt: admin.createdAt,
+        updatedAt: admin.updatedAt,
         team: teamWithSub,
         user: {
-          id: owner.user.id,
-          name: owner.user.name || 'API Key',
-          email: owner.user.email || '',
+          id: admin.user.id,
+          name: admin.user.name || 'API Key',
+          email: admin.user.email || '',
           roles: [{ teamId: apiKey.teamId, role: Role.ADMIN }],
         },
       };
