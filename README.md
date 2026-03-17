@@ -200,8 +200,10 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - Processor Questionnaire Checklist
 - Asset Inventory Management
 - Vendor Assessment Checklist
-- Benchmark Report
+- Benchmark Report - Trust Center as a public compliance page
 - Vendor Report
+- Incident Management
+- Document Management / Policy Lifecycle
 
 ## 🥇 Features
 
@@ -225,6 +227,15 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - Custom AI chatbot
 - Standards and Frameworks mapping
 - Mapping Matrix
+
+### Coming soon
+
+- Custom Framework Support (JSON/YAML DSL)
+- Jira Integration (bidirectional)
+- MCP Server Exposure
+- AI Questionnaire Automation
+- Continuous Control Monitoring
+- Executive Dashboards & Reporting
 
 ## Supported languages 🌐
 
