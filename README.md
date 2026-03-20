@@ -45,16 +45,19 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 - [CIS Critical Security Controls Version 8.1](https://www.unicis.tech/frameworks/cis?mtm_campaign=GitHub%20readme)
 - [Criteria Catalogue C5:2020](https://www.unicis.tech/frameworks/c5?mtm_campaign=GitHub%20readme)
 - [SOC2 Type II - System and Organization Controls](https://www.unicis.tech/frameworks/soc?mtm_campaign=GitHub%20readme)
+- [OWASP Application Security Verification Standard (ASVS)](https://www.unicis.tech/frameworks/owasp-asvs?mtm_campaign=GitHub%20readme)
+- Payment Card Industry Data Security Standard (PCI-DSS)
+- ISO/IEC 42001:2023 - AI management systems
+
 
 ### Coming Next
 
 - EU Cyber Resilience Act (CRA)
 - EU Digital Operational Resilience Act (DORA)
-- Payment Card Industry Data Security Standard (PCI-DSS)
 - Cloud Controls Matrix and CAIQ v4 (CSA CCM v4)
-- ISO/IEC 42001:2023 - AI management systems
 - Trusted Information Security Assessment Exchange (TISAX)
 - EU AI Act
+- Health Insurance Portability and Accountability Act (HIPAA)
 - Custom ...
 
 ## 📖 Additional Resources
@@ -227,6 +230,7 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - Custom AI chatbot
 - Standards and Frameworks mapping
 - Mapping Matrix
+- REST API Documentation
 
 ### Coming soon
 
