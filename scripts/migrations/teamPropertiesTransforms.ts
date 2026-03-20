@@ -130,6 +130,24 @@ export function normalizeCscStatusesC52020(props: JsonWritable): JsonWritable {
   return normalizeCscStatuses(props, 'c5_2020');
 }
 
+export function normalizeCscStatusesOwaspAsvsV5(
+  props: JsonWritable
+): JsonWritable {
+  return normalizeCscStatuses(props, 'owasp_asvs_v5');
+}
+
+export function normalizeCscStatusesPciDssV401(
+  props: JsonWritable
+): JsonWritable {
+  return normalizeCscStatuses(props, 'pcidss_v401');
+}
+
+export function normalizeCscStatusesIso42001(
+  props: JsonWritable
+): JsonWritable {
+  return normalizeCscStatuses(props, 'iso42001');
+}
+
 // Список усіх трансформацій у потрібному порядку
 const transforms = [
   renameCscStatusesToMvps,
@@ -143,6 +161,9 @@ const transforms = [
   normalizeCscStatusesCisV81,
   normalizeCscStatusesSoc2V2,
   normalizeCscStatusesC52020,
+  normalizeCscStatusesOwaspAsvsV5,
+  normalizeCscStatusesPciDssV401,
+  normalizeCscStatusesIso42001,
 ] as const;
 
 /**

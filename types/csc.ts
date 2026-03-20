@@ -67,7 +67,9 @@ export type ISO =
   | 'cisv81'
   | 'soc2v2'
   | 'c5_2020'
-  | 'owasp_asvs_v5';
+  | 'owasp_asvs_v5'
+  | 'pcidss_v401'
+  | 'iso42001';
 
 // TODO: use getControlPropsName function with config and ISO type to generate type
 type CscStatusesPropMap = {
@@ -81,6 +83,8 @@ type CscStatusesPropMap = {
   soc2v2: 'csc_statuses_soc2v2';
   c5_2020: 'csc_statuses_c5_2020';
   owasp_asvs_v5: 'csc_statuses_owasp_asvs_v5';
+  pcidss_v401: 'csc_statuses_pcidss_v401';
+  iso42001: 'csc_statuses_iso42001';
 };
 
 export type CscStatusesProp = CscStatusesPropMap[ISO];
@@ -99,6 +103,8 @@ type CscControlsPropMap = {
   soc2v2: 'csc_controls_soc2v2';
   c5_2020: 'csc_controls_c5_2020';
   owasp_asvs_v5: 'csc_controls_owasp_asvs_v5';
+  pcidss_v401: 'csc_controls_pcidss_v401';
+  iso42001: 'csc_controls_iso42001';
 };
 
 export type CscControlsProp = CscControlsPropMap[ISO];

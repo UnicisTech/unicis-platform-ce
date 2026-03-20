@@ -123,6 +123,24 @@ export function normalizeCscControlC5_2020(props: JsonWritable): JsonWritable {
   return normalizeCscControls(props, 'c5_2020');
 }
 
+export function normalizeCscControlsOwaspAsvsV5(
+  props: JsonWritable
+): JsonWritable {
+  return normalizeCscControls(props, 'owasp_asvs_v5');
+}
+
+export function normalizeCscControlsPciDssV401(
+  props: JsonWritable
+): JsonWritable {
+  return normalizeCscControls(props, 'pcidss_v401');
+}
+
+export function normalizeCscControlsIso42001(
+  props: JsonWritable
+): JsonWritable {
+  return normalizeCscControls(props, 'iso42001');
+}
+
 export function normalizeCscAuditLogs(props: JsonWritable): JsonWritable {
   const obj = asObject(props);
   if (!obj) return props;
@@ -722,6 +740,9 @@ const transforms = [
   normalizeCscControlsCisV81,
   normalizeCscControlSoc2V2,
   normalizeCscControlC5_2020,
+  normalizeCscControlsOwaspAsvsV5,
+  normalizeCscControlsPciDssV401,
+  normalizeCscControlsIso42001,
   normalizeCscAuditLogs,
   normalizeRpaProcedure,
   normalizeRpaAuditLogs,

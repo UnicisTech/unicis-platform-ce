@@ -97,7 +97,7 @@
         "applications": {
           "0": "Record of Processing Activities",
           "1": "Transfer Impact Assessment",
-          "2": "Cybersecurity Controls: MVSP"
+          "2": "Cybersecurity Controls: MVSP + GDPR"
         },
         "features": {
           "0": "SSO & SAML",
@@ -112,7 +112,7 @@
         "applications": {
           "0": "Interactive Awareness Program",
           "1": "Privacy Impact Assessment",
-          "2": "Cybersecurity Controls: MVSP + ISO27001",
+          "2": "Cybersecurity Controls: ISO 27001 + EU NIS2 + CIS v8.1 + C5 + OWASP ASVS v5 + ISO 42001",
           "3": "Cybersecurity Risk Management"
         },
         "featuresLabel": "From Community",
@@ -127,7 +127,7 @@
         "subprice": "per tenant and > 6 admins",
         "applications": {
           "0": "Processor Questionnaire Checklist",
-          "1": "Cybersecurity Controls + NIST CSF2.0 standard",
+          "1": "Cybersecurity Controls: NIST CSF v2 + PCI DSS v4.0.1 + SOC2",
           "2": "Asset Inventory Management",
           "3": "Benchmark Report",
           "4": "Vendor Assessment Checklist",
@@ -826,6 +826,8 @@
       "description": "The requirement is fully satisfied, is operating fully as expected, is being actively monitored and improved, and there is substantial evidence to prove all that to the auditors"
     }
   },
+  "country-label": "Country",
+  "select-country": "Select a country",
   "country": {
     "andorra": "Andorra",
     "united arab emirates": "United Arab Emirates",
