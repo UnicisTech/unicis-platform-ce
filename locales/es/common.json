@@ -825,6 +825,8 @@
       "description": "El requisito se satisface completamente, opera plenamente como se espera, se supervisa y mejora activamente, y hay evidencia sustancial para probar todo ello a los auditores"
     }
   },
+  "country-label": "País",
+  "select-country": "Seleccionar un país",
   "country": {
     "andorra": "Andorra",
     "united arab emirates": "Emiratos Árabes Unidos",
