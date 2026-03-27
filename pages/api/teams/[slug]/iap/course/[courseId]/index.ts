@@ -4,6 +4,7 @@ import { throwIfNotAllowed } from 'models/user';
 import { CourseFormData } from 'types';
 import { isPrismaError } from '@/lib/errors';
 import { deleteCourse, editCourse, getCourse } from 'models/iap/course';
+import { serializeForApi } from '@/lib/serialize';
 
 export default async function handler(
   req: NextApiRequest,
@@ -51,7 +52,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const course = await getCourse(courseId, teamMember.id);
 
-  return res.status(200).json({ data: course, error: null });
+  return res.status(200).json({ data: serializeForApi(course), error: null });
 };
 
 // Update course by id
@@ -90,7 +91,10 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     questions,
   });
 
-  return res.status(200).json({ data: { createdCourse }, error: null });
+  return res.status(200).json({
+    data: { createdCourse: serializeForApi(createdCourse) },
+    error: null,
+  });
 };
 
 // Delete course by id

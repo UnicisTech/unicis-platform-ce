@@ -23,6 +23,8 @@ export const subscriptions: SubscriptionPermissions = {
     teamFeatures: {
       sso: true,
       dsync: true,
+            webhook: true,
+
     },
     avaliableISO: ['mvps'],
   },

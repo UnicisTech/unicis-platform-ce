@@ -110,13 +110,15 @@ model Task {
   authorId    String
   title       String
   status      String
-  duedate     String
+  duedate     DateTime? @db.Timestamptz
   description String
   properties  Json
   attachments Attachment[]
   comments    Comment[]
   author      User         @relation(fields: [authorId], references: [id])
   team        Team         @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@index([duedate])
 }
 
 model Comment {

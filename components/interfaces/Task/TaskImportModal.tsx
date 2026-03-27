@@ -12,7 +12,7 @@ import {
 } from '@/components/shadcn/ui/dialog';
 import { Button } from '@/components/shadcn/ui/button';
 import { Badge } from '@/components/shadcn/ui/badge';
-import type { Team } from '@/generated/browser';
+import type { Team } from 'types';
 import useTasks from 'hooks/useTasks';
 import {
   downloadTaskTemplateXlsx,

@@ -14,8 +14,7 @@ import {
 } from '@/components/shadcn/ui/dialog';
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
-import { Task } from '@/generated/browser';
-import { TiaProcedureInterface } from 'types';
+import type { Task, TiaProcedureInterface } from 'types';
 import {
   TransferScenarioStep,
   ProblematicLawfulAccessStep,

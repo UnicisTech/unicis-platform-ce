@@ -21,6 +21,7 @@ import { throwIfNotAllowed } from 'models/user';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
 import { Role } from '@/generated/browser';
+import { serializeForApi } from '@/lib/serialize';
 
 export default async function handler(
   req: NextApiRequest,
@@ -162,7 +163,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   recordMetric('invitation.created');
 
-  res.status(200).json({ data: invitation });
+  res.status(200).json({ data: serializeForApi(invitation) });
 };
 
 // Get all invitations for a team
@@ -174,7 +175,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
   recordMetric('invitation.fetched');
 
-  res.status(200).json({ data: invitations });
+  res.status(200).json({ data: serializeForApi(invitations) });
 };
 
 // Delete an invitation

@@ -44,7 +44,7 @@ import {
   //   Category,
   ApiResponse,
 } from 'types';
-import type { Team, Category } from '@/generated/browser';
+import type { Team, Category } from 'types';
 import { CourseContentType } from '@/generated/browser';
 import { courseTypes, questionTypes } from '@/lib/iap';
 import {

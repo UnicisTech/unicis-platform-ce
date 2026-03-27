@@ -4,6 +4,8 @@ import { throwIfNoTeamAccess } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNotAllowed } from 'models/user';
 import { sanitizeRichText } from '@/lib/sanitizeRichText';
+import { parseDueDateInput } from '@/lib/tasks/dueDate';
+import { serializeForApi } from '@/lib/serialize';
 
 export default async function handler(
   req: NextApiRequest,
@@ -32,7 +34,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const tasks = await getTeamTasks(teamMember.team.slug as string);
 
-  return res.status(200).json({ data: tasks, error: null });
+  return res.status(200).json({ data: serializeForApi(tasks), error: null });
 };
 
 // Create a task
@@ -41,6 +43,13 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   throwIfNotAllowed(teamMember, 'task', 'create');
 
   const { title, status, duedate, description } = req.body;
+  const { value: dueAt, valid } = parseDueDateInput(duedate);
+
+  if (!valid) {
+    return res.status(400).json({
+      error: { message: 'Invalid due date' },
+    });
+  }
   const sanitizedDescription = sanitizeRichText(
     typeof description === 'string' ? description : ''
   );
@@ -54,7 +63,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     teamId,
     title,
     status,
-    duedate,
+    duedate: dueAt,
     description: sanitizedDescription,
   });
 

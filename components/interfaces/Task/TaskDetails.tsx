@@ -5,8 +5,7 @@ import { useRouter } from 'next/router';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { format, parseISO } from 'date-fns';
-
+import { format } from 'date-fns';
 import { Calendar } from '@/components/shadcn/ui/calendar';
 import {
   Popover,
@@ -34,7 +33,7 @@ import { statuses } from '@/lib/tasks';
 import useTask from 'hooks/useTask';
 import useCanAccess from 'hooks/useCanAccess';
 
-import type { Task, Team } from '@/generated/browser';
+import type { Task, Team } from 'types';
 import QuillEditor from '@/components/shared/QuillEditor';
 
 const formSchema = z.object({
@@ -45,6 +44,11 @@ const formSchema = z.object({
 });
 
 type FormData = z.infer<typeof formSchema>;
+
+const parseDateOnly = (value: string) => {
+  const [year, month, day] = value.split('-').map(Number);
+  return new Date(year, month - 1, day);
+};
 
 const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
   const router = useRouter();
@@ -60,7 +64,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
     defaultValues: {
       title: task.title || '',
       status: task.status || '',
-      duedate: task.duedate || '',
+      duedate: task.duedate ? task.duedate.split('T')[0] : '',
       description: task.description || '',
     },
   });
@@ -167,7 +171,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                           className="w-full justify-start text-left font-normal"
                         >
                           {field.value
-                            ? format(parseISO(field.value), 'PPP')
+                            ? format(parseDateOnly(field.value), 'PPP')
                             : 'Pick a date'}
                         </Button>
                       </FormControl>
@@ -176,12 +180,12 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                       <Calendar
                         mode="single"
                         selected={
-                          field.value ? parseISO(field.value) : undefined
+                          field.value ? parseDateOnly(field.value) : undefined
                         }
                         onSelect={(date) => {
                           if (date) {
                             checkFormChanges();
-                            field.onChange(date.toISOString());
+                            field.onChange(format(date, 'yyyy-MM-dd'));
                           }
                         }}
                         initialFocus

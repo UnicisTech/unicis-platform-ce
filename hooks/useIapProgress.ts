@@ -1,4 +1,4 @@
-import type { CourseProgress } from '@/generated/browser';
+import type { CourseProgress } from 'types';
 import fetcher from '@/lib/fetcher';
 import { useRouter } from 'next/router';
 import useSWR, { mutate } from 'swr';

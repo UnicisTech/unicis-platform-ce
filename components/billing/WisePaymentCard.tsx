@@ -2,7 +2,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import * as React from 'react';
 import { useTranslation } from 'next-i18next';
-import type { TeamWithSubscription, SubscriptionWithPayments } from 'types';
+import type {
+  SubscriptionWithPaymentsDto,
+  TeamWithSubscriptionDto,
+} from 'types';
 import useTeamMembers from 'hooks/useTeamMembers';
 import { format, addMonths } from 'date-fns';
 
@@ -16,7 +19,7 @@ import {
 import { Plan } from '@/generated/browser';
 
 interface WisePaymentCardProps {
-  team: TeamWithSubscription;
+  team: TeamWithSubscriptionDto;
 }
 
 const formatEUR = (n: number) =>
@@ -37,7 +40,7 @@ const getTotalPrice = (plan: Plan, amount: number) => {
 
 export default function WisePaymentCard({ team }: WisePaymentCardProps) {
   const { t } = useTranslation('common');
-  const subscription = team.subscription as SubscriptionWithPayments | null;
+  const subscription = team.subscription as SubscriptionWithPaymentsDto | null;
   const { members, isError, isLoading } = useTeamMembers(team.slug);
 
   if (isLoading || isError || !members || !subscription) return null;

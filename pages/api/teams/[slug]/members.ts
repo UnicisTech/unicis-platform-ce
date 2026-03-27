@@ -11,6 +11,7 @@ import {
 import { throwIfNotAllowed } from 'models/user';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
+import { serializeForApi } from '@/lib/serialize';
 
 export default async function handler(
   req: NextApiRequest,
@@ -55,7 +56,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
   recordMetric('member.fetched');
 
-  res.status(200).json({ data: members });
+  res.status(200).json({ data: serializeForApi(members) });
 };
 
 // Delete the member from the team
@@ -135,5 +136,5 @@ const handlePATCH = async (req: NextApiRequest, res: NextApiResponse) => {
 
   recordMetric('member.role.updated');
 
-  res.status(200).json({ data: memberUpdated });
+  res.status(200).json({ data: serializeForApi(memberUpdated) });
 };

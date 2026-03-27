@@ -9,14 +9,14 @@ import {
 import { Button } from '@/components/shadcn/ui/button';
 import { Edit2, Trash2, BarChart2, Table as TableIcon } from 'lucide-react';
 import useCanAccess from 'hooks/useCanAccess';
-import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
+import type { TeamCourseWithProgress, TeamMemberWithUserDto } from 'types';
 import { getCourseStatus } from '../services/helpers';
 import { StatusBadge } from '@/components/shared';
 import { useTranslation } from 'next-i18next';
 
 interface CoursesTableProps {
   teamCourses: TeamCourseWithProgress[];
-  members: TeamMemberWithUser[];
+  members: TeamMemberWithUserDto[];
   categories: { id: string; name: string }[];
   editHandler: (course: TeamCourseWithProgress) => void;
   deleteHandler: (course: TeamCourseWithProgress) => void;

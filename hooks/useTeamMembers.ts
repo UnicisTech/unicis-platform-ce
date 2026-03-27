@@ -1,14 +1,13 @@
 import fetcher from '@/lib/fetcher';
 import useSWR, { mutate } from 'swr';
-import type { ApiResponse, TeamMemberWithUser } from 'types';
+import type { ApiResponse, TeamMemberWithUserDto } from 'types';
 
 const useTeamMembers = (slug: string) => {
   const url = `/api/teams/${slug}/members`;
 
-  const { data, error, isLoading } = useSWR<ApiResponse<TeamMemberWithUser[]>>(
-    url,
-    fetcher
-  );
+  const { data, error, isLoading } = useSWR<
+    ApiResponse<TeamMemberWithUserDto[]>
+  >(url, fetcher);
 
   const mutateTeamMembers = async () => {
     mutate(url);

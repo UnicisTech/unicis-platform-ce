@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --port 4002 --webpack",
-    "build": "prisma generate && prisma db push --accept-data-loss && next build --webpack",
+    "build": "prisma generate && prisma migrate deploy && next build --webpack",
     "start": "next start --port 4002",
     "check-types": "tsc --pretty --noEmit",
     "check-format": "prettier --check .",
@@ -134,7 +134,6 @@
     "prisma": "^7.4.2",
     "tailwindcss": "^4.1.10",
     "ts-node": "^10.9.2",
-    "tsx": "^4.20.6",
     "typescript": "5.4.5"
   },
   "overrides": {

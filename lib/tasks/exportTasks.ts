@@ -2,7 +2,7 @@ import ExcelJS from 'exceljs';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { format } from 'date-fns';
-import type { Task } from '@/generated/browser';
+import type { Task } from 'types';
 import { getTaskModules } from '@/lib/tasks';
 
 // Module label map (matches ModuleBadge labelMap)
@@ -98,12 +98,22 @@ function getModulesLabel(properties: unknown): string {
     .join(', ');
 }
 
-function formatDueDate(duedate: string | null | undefined): string {
+function formatDueDate(duedate: string | Date | null | undefined): string {
   if (!duedate) return '';
   try {
-    return new Date(duedate).toLocaleDateString();
+    const raw = duedate instanceof Date ? duedate.toISOString() : String(duedate);
+    const datePart = raw.split('T')[0];
+    if (/^\d{4}-\d{2}-\d{2}$/.test(datePart)) {
+      const [year, month, day] = datePart.split('-').map(Number);
+      return new Date(year, month - 1, day).toLocaleDateString();
+    }
+    const parsed = new Date(raw);
+    if (isNaN(parsed.getTime())) {
+      return String(duedate);
+    }
+    return parsed.toLocaleDateString();
   } catch {
-    return duedate;
+    return String(duedate);
   }
 }
 

@@ -7,7 +7,7 @@ import {
   TableRow,
 } from '@/components/shadcn/ui/table';
 import { Error, LetterAvatar, Loading } from '@/components/shared';
-import { Team, TeamMember } from '@/generated/browser';
+import type { Team, TeamMemberWithUserDto } from 'types';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeamMembers from 'hooks/useTeamMembers';
 import { useSession } from 'next-auth/react';
@@ -26,7 +26,8 @@ const Members = ({ team }: { team: Team }) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
   const [visible, setVisible] = useState(false);
-  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+  const [selectedMember, setSelectedMember] =
+    useState<TeamMemberWithUserDto | null>(null);
   const [confirmationDialogVisible, setConfirmationDialogVisible] =
     useState(false);
 
@@ -38,7 +39,7 @@ const Members = ({ team }: { team: Team }) => {
   if (isError) return <Error message={isError.message} />;
   if (!members) return null;
 
-  const removeTeamMember = async (member: TeamMember | null) => {
+  const removeTeamMember = async (member: TeamMemberWithUserDto | null) => {
     if (!member) return;
     const sp = new URLSearchParams({ memberId: member.userId });
 
@@ -61,9 +62,9 @@ const Members = ({ team }: { team: Team }) => {
     toast.success(t('member-deleted'));
   };
 
-  const canUpdateRole = (member: TeamMember) =>
+  const canUpdateRole = (member: TeamMemberWithUserDto) =>
     session?.user.id !== member.userId && canAccess('team_member', ['update']);
-  const canRemoveMember = (member: TeamMember) =>
+  const canRemoveMember = (member: TeamMemberWithUserDto) =>
     session?.user.id !== member.userId && canAccess('team_member', ['delete']);
 
   return (

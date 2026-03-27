@@ -11,7 +11,7 @@ import { Button } from '@/components/shadcn/ui/button';
 import { EmptyState, WithLoadingAndError } from '@/components/shared';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import fetcher from '@/lib/fetcher';
-import type { ApiKey, Team } from '@/generated/browser';
+import type { ApiKey, Team } from 'types';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';

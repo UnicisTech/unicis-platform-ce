@@ -4,6 +4,8 @@ import { throwIfNoTeamAccess } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNotAllowed } from 'models/user';
 import { sanitizeRichText } from '@/lib/sanitizeRichText';
+import { parseDueDateInput } from '@/lib/tasks/dueDate';
+import { serializeForApi } from '@/lib/serialize';
 
 export default async function handler(
   req: NextApiRequest,
@@ -53,7 +55,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  return res.status(200).json({ data: task, error: null });
+  return res.status(200).json({ data: serializeForApi(task), error: null });
 };
 
 // Edit a task
@@ -79,6 +81,18 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     sanitizedData.description = sanitizeRichText(sanitizedData.description);
   }
 
+  if (Object.prototype.hasOwnProperty.call(sanitizedData, 'duedate')) {
+    const { value: dueAt, valid } = parseDueDateInput(sanitizedData.duedate);
+    if (!valid) {
+      return res.status(400).json({
+        error: {
+          message: 'Invalid due date',
+        },
+      });
+    }
+    sanitizedData.duedate = dueAt;
+  }
+
   const task = await updateTask(
     taskNumberAsNumber,
     slug as string,
@@ -95,7 +109,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
 
   await sendEvent(teamMember.teamId, 'task.updated', task);
 
-  return res.status(200).json({ data: task, error: null });
+  return res.status(200).json({ data: serializeForApi(task), error: null });
 };
 
 // Delete the task

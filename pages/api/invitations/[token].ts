@@ -2,6 +2,7 @@ import { getInvitation, isInvitationExpired } from 'models/invitation';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
 import { ApiError } from '@/lib/errors';
+import { serializeForApi } from '@/lib/serialize';
 
 export default async function handler(
   req: NextApiRequest,
@@ -39,5 +40,5 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
   recordMetric('invitation.fetched');
 
-  res.status(200).json({ data: invitation });
+  res.status(200).json({ data: serializeForApi(invitation) });
 };

@@ -1,14 +1,16 @@
 import fetcher from '@/lib/fetcher';
 import { useRouter } from 'next/router';
 import useSWR, { mutate } from 'swr';
-import type { ApiResponse, TeamWithSubscription } from 'types';
+import type { ApiResponse, TeamWithSubscriptionDto } from 'types';
 
 const useTeam = (slug?: string) => {
   const { query, isReady } = useRouter();
 
   const teamSlug = slug || (isReady ? query.slug : null);
 
-  const { data, error, isLoading } = useSWR<ApiResponse<TeamWithSubscription>>(
+  const { data, error, isLoading } = useSWR<
+    ApiResponse<TeamWithSubscriptionDto>
+  >(
     teamSlug ? `/api/teams/${teamSlug}` : null,
     fetcher
   );

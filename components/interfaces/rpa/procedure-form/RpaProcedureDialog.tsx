@@ -14,8 +14,7 @@ import {
 } from '@/components/shadcn/ui/dialog';
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
-import { Task } from '@/generated/browser';
-import { ProcedureQueueItem, RpaProcedureInterface } from 'types';
+import type { ProcedureQueueItem, RpaProcedureInterface, Task } from 'types';
 import TaskPicker from '@/components/shared/shadcn/TaskPicker';
 import { Message } from '@/components/shared';
 import {

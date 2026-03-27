@@ -1,4 +1,4 @@
-import { Task } from '@/generated/browser';
+import type { Task } from './dto';
 import { AuditLog } from './base';
 
 export type RiskProbability =

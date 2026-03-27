@@ -8,7 +8,7 @@ import fetcher from '@/lib/fetcher';
 import { defaultHeaders } from '@/lib/common';
 import useDirectory from 'hooks/useDirectory';
 import type { Directory } from '@boxyhq/saml-jackson';
-import type { Team } from '@/generated/browser';
+import type { Team } from 'types';
 import type { ApiResponse } from 'types';
 
 import { Loading } from '@/components/shared';

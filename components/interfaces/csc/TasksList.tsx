@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import type { Task } from '@/generated/browser';
+import type { Task } from 'types';
 
 const TasksList = ({
   tasks,

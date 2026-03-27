@@ -6,7 +6,7 @@ import {
   ShieldExclamationIcon,
   UserPlusIcon,
 } from '@heroicons/react/24/outline';
-import type { Team } from '@/generated/browser';
+import type { Team } from 'types';
 import classNames from 'classnames';
 import useCanAccess from 'hooks/useCanAccess';
 import Link from 'next/link';
@@ -99,6 +99,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   if (
     teamFeatures.webhook &&
     canAccess('team_webhook', ['create', 'update', 'read', 'delete'])
+    // true
   ) {
     navigations.push({
       name: t('settings-tabs.webhooks'),

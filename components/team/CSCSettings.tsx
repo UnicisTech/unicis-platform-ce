@@ -3,8 +3,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import type { TeamProperties, TeamWithSubscription } from 'types';
-import { Subscription } from '@/generated/browser';
+import type {
+  Subscription,
+  TeamProperties,
+  TeamWithSubscriptionDto,
+} from 'types';
 import useSubscription, { subscriptionParams } from 'hooks/useSubscription';
 import {
   Card,
@@ -19,7 +22,7 @@ import { Loader2 } from 'lucide-react';
 import { isoOptions } from '@/lib/csc/csc-frameworks';
 
 interface CSCSettingsProps {
-  team: TeamWithSubscription;
+  team: TeamWithSubscriptionDto;
 }
 
 const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {

@@ -16,8 +16,7 @@ import { Button } from '@/components/shadcn/ui/button';
 import TaskPicker from '@/components/shared/shadcn/TaskPicker';
 import { Loader2 } from 'lucide-react';
 
-import type { RMProcedureInterface } from 'types';
-import type { Task } from '@/generated/browser';
+import type { RMProcedureInterface, Task } from 'types';
 import { useRiskAndImpactStepForm, useRiskTreatmentStepForm } from './hooks';
 import { RiskAndImpactStep, RiskTreatmentStep } from './steps';
 import { StageTracker } from '@/components/shared/atlaskit';

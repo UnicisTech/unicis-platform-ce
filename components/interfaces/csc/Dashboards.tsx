@@ -1,4 +1,4 @@
-import type { Team } from '@/generated/browser';
+import type { Team } from 'types';
 import CscTabs, { MAPPING_MATRIX_TAB, type ActiveCscTab } from './CscTabs';
 import { useState } from 'react';
 import { ISO } from 'types';

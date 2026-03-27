@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 import { AccessControl } from '@/components/shared/AccessControl';
-import type { Comment } from '@/generated/browser';
+import type { ExtendedCommentDto } from 'types';
 import QuillEditor from '@/components/shared/QuillEditor';
 import { Button } from '@/components/shadcn/ui/button';
 
 interface CommentViewProps {
-  comment: Comment;
+  comment: ExtendedCommentDto;
   activateEditForComment: (id: number) => void;
   deleteComment: (id: number) => void;
 }

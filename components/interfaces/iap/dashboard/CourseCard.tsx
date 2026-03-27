@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/shadcn/ui/card';
-import { Category } from '@/generated/browser';
+import type { Category } from 'types';
 import { TeamCourseWithProgress } from 'types';
 import ProgressBadge from '../shared/ProgressBadge';
 import { cn } from '@/components/shadcn/lib/utils';

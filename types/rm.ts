@@ -1,4 +1,4 @@
-import { Task } from '@/generated/browser';
+import type { Task } from './dto';
 import type { AuditLog } from './base';
 
 export type RMProcedureInterface = [

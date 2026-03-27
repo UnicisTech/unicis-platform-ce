@@ -14,8 +14,7 @@ import {
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 
-import type { TaskWithRpaProcedure } from 'types';
-import type { Task } from '@/generated/browser';
+import type { Task, TaskWithRpaProcedure } from 'types';
 
 interface DeleteRiskProps {
   visible: boolean;

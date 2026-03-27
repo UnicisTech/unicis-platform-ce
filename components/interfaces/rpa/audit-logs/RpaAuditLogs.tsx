@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'next-i18next';
-import type { Task } from '@/generated/browser';
+import type { Task } from 'types';
 import type { RpaAuditLog } from 'types';
 import {
   Table,
