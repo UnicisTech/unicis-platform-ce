@@ -7,6 +7,15 @@ datasource db {
   provider = "postgresql"
 }
 
+enum NotificationType {
+  TASK_DUE
+  TASK_CREATED
+  TASK_UPDATED
+  TASK_COMMENTED
+  TASK_DELETED
+  FILE_UPLOADED
+}
+
 model Account {
   id                String  @id @default(uuid())
   userId            String
@@ -58,6 +67,9 @@ model User {
   sessions       Session[]
   Subscription   Subscription[]
   Task           Task[]
+  notifications  Notification[]
+  notificationPreference NotificationPreference?
+  pushSubscriptions PushSubscription[]
   teamMembers    TeamMember[]
 }
 
@@ -76,6 +88,7 @@ model Team {
   subscription Subscription?
   tasks        Task[]
   members      TeamMember[]
+  notifications Notification[]
   TeamCourse   TeamCourse[]
   Category     Category[]
 }
@@ -139,6 +152,52 @@ model Attachment {
   fileData Bytes
   url      String
   task     Task   @relation(fields: [taskId], references: [id])
+}
+
+model Notification {
+  id          String           @id @default(uuid())
+  type        NotificationType
+  title       String
+  body        String
+  link        String?
+  isRead      Boolean          @default(false)
+  readAt      DateTime?
+  metadata    Json?
+  dedupeKey   String?          @unique
+
+  recipientId String
+  recipient   User             @relation(fields: [recipientId], references: [id], onDelete: Cascade)
+  teamId      String?
+  team        Team?            @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@index([recipientId, isRead])
+  @@index([recipientId, createdAt])
+  @@index([teamId])
+}
+
+model NotificationPreference {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  preferences Json     @default("{}")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PushSubscription {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  endpoint  String   @unique
+  p256dhKey String
+  authKey   String
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
 }
 
 model TeamMember {
