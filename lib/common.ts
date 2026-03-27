@@ -119,6 +119,7 @@ export const eventTypes = [
   'task.updated',
   'task.commented',
   'task.deleted',
+  'task.due',
 ];
 
 export const maxLengthPolicies = {
