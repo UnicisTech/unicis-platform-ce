@@ -16,6 +16,9 @@ run({
   taskList,
   crontab,
   concurrency: Number.isFinite(concurrency) ? concurrency : 5,
+  pgSettings: {
+    timezone: 'UTC',
+  },
 }).catch((error) => {
   console.error('[worker] Fatal error:', error);
   process.exit(1);

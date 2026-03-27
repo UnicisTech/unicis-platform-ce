@@ -1,3 +1,7 @@
 import type { TaskList } from 'graphile-worker';
 
-export const taskList: TaskList = {};
+import { taskDueCheck } from './task-due';
+
+export const taskList: TaskList = {
+  'task.due.check': taskDueCheck,
+};

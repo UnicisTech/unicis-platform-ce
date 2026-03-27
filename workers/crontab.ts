@@ -1,4 +1,4 @@
 export const crontab = `
-# Graphile Worker crontab
-# (cron entries will be added in later steps)
+# Graphile Worker crontab (UTC)
+0 0 * * * task.due.check
 `;
