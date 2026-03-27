@@ -1298,5 +1298,34 @@
       "low": "Niedrig (25–49%)",
       "minimal": "Minimal (<25%)"
     }
-  }
+  },
+  "notifications": {
+    "title": "Benachrichtigungen",
+    "mark-all-read": "Alle als gelesen markieren",
+    "view-all": "Alle Benachrichtigungen ansehen",
+    "none": "Noch keine Benachrichtigungen.",
+    "browser-push": "Browser-Push",
+    "browser-push-description": "Push-Benachrichtigungen für diesen Browser aktivieren.",
+    "settings": "Benachrichtigungseinstellungen",
+    "preferences-title": "Benachrichtigungspräferenzen",
+    "preferences-description": "Wähle, wo du Benachrichtigungen erhalten möchtest.",
+    "type": "Typ",
+    "channels": {
+      "in-app": "In-App",
+      "email": "E-Mail",
+      "push": "Push"
+    },
+    "types": {
+      "task-due": "Aufgabe fällig",
+      "task-created": "Aufgabe erstellt",
+      "task-updated": "Aufgabe aktualisiert",
+      "task-commented": "Aufgabe kommentiert",
+      "task-deleted": "Aufgabe gelöscht",
+      "file-uploaded": "Datei hochgeladen"
+    },
+    "saved": "Benachrichtigungseinstellungen gespeichert"
+  },
+  "enable": "Aktivieren",
+  "disable": "Deaktivieren",
+  "not-supported": "Nicht unterstützt"
 }

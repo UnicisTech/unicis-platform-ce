@@ -12,6 +12,10 @@ import path from 'path';
 import { promisify } from 'util';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
+import { notificationService } from '@/lib/notifications/notification-service';
+import { getTeamRecipientsBySlug } from '@/lib/notifications/recipients';
+import { NotificationType } from '@/generated/enums';
+import { prisma } from '@/lib/prisma';
 
 export const config = {
   api: {
@@ -104,6 +108,46 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     if (isAllowed) {
       try {
         const url = await saveFileAsAttachment(Number(taskId), file[0]);
+        const task = await prisma.task.findUnique({
+          where: { id: Number(taskId) },
+          select: {
+            id: true,
+            title: true,
+            taskNumber: true,
+            teamId: true,
+            team: { select: { slug: true } },
+          },
+        });
+
+        if (task) {
+          const teamSlug = task.team?.slug ?? (req.query.slug as string);
+          const recipients = await getTeamRecipientsBySlug(teamSlug);
+          const filename =
+            file[0]?.originalFilename ??
+            file[0]?.newFilename ??
+            'file';
+
+          await notificationService.sendBulk(
+            recipients.map((user) => ({
+              type: NotificationType.FILE_UPLOADED,
+              title: `File uploaded: \"${task.title}\"`,
+              body: `${teamMember.user.name ?? 'Someone'} uploaded ${filename}.`,
+              link: `/teams/${teamSlug}/tasks/${task.taskNumber}`,
+              recipientId: user.id,
+              recipientEmail: user.email,
+              teamId: task.teamId,
+              metadata: {
+                source: {
+                  taskId: task.id,
+                  taskNumber: task.taskNumber,
+                  event: 'file.uploaded',
+                  filename,
+                },
+              },
+            }))
+          );
+        }
+
         res.status(200).json({ url });
       } catch (error) {
         console.error('Failed to save file as attachment:', error);

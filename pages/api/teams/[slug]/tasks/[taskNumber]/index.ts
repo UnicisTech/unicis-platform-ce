@@ -6,6 +6,9 @@ import { throwIfNotAllowed } from 'models/user';
 import { sanitizeRichText } from '@/lib/sanitizeRichText';
 import { parseDueDateInput } from '@/lib/tasks/dueDate';
 import { serializeForApi } from '@/lib/serialize';
+import { notificationService } from '@/lib/notifications/notification-service';
+import { getTeamRecipientsBySlug } from '@/lib/notifications/recipients';
+import { NotificationType } from '@/generated/enums';
 
 export default async function handler(
   req: NextApiRequest,
@@ -109,6 +112,26 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
 
   await sendEvent(teamMember.teamId, 'task.updated', task);
 
+  const recipients = await getTeamRecipientsBySlug(slug as string);
+  await notificationService.sendBulk(
+    recipients.map((user) => ({
+      type: NotificationType.TASK_UPDATED,
+      title: `Task updated: \"${task.title}\"`,
+      body: `${teamMember.user.name ?? 'Someone'} updated a task.`,
+      link: `/teams/${teamMember.team.slug}/tasks/${task.taskNumber}`,
+      recipientId: user.id,
+      recipientEmail: user.email,
+      teamId: teamMember.teamId,
+      metadata: {
+        source: {
+          taskId: task.id,
+          taskNumber: task.taskNumber,
+          event: 'task.updated',
+        },
+      },
+    }))
+  );
+
   return res.status(200).json({ data: serializeForApi(task), error: null });
 };
 
@@ -140,6 +163,26 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   await sendEvent(teamMember.teamId, 'task.deleted', task);
+
+  const recipients = await getTeamRecipientsBySlug(slug as string);
+  await notificationService.sendBulk(
+    recipients.map((user) => ({
+      type: NotificationType.TASK_DELETED,
+      title: `Task deleted: \"${task.title}\"`,
+      body: `${teamMember.user.name ?? 'Someone'} deleted a task.`,
+      link: `/teams/${teamMember.team.slug}/tasks`,
+      recipientId: user.id,
+      recipientEmail: user.email,
+      teamId: teamMember.teamId,
+      metadata: {
+        source: {
+          taskId: task.id,
+          taskNumber: task.taskNumber,
+          event: 'task.deleted',
+        },
+      },
+    }))
+  );
 
   return res.status(200).json({ data: {}, error: null });
 };

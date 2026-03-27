@@ -1301,5 +1301,34 @@
       "low": "Baja (25–49%)",
       "minimal": "Mínima (<25%)"
     }
-  }
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "mark-all-read": "Marcar todo como leído",
+    "view-all": "Ver todas las notificaciones",
+    "none": "Aún no hay notificaciones.",
+    "browser-push": "Push del navegador",
+    "browser-push-description": "Activar notificaciones push para este navegador.",
+    "settings": "Configuración de notificaciones",
+    "preferences-title": "Preferencias de notificaciones",
+    "preferences-description": "Elige dónde quieres recibir las notificaciones.",
+    "type": "Tipo",
+    "channels": {
+      "in-app": "En la app",
+      "email": "Correo",
+      "push": "Push"
+    },
+    "types": {
+      "task-due": "Tarea vencida",
+      "task-created": "Tarea creada",
+      "task-updated": "Tarea actualizada",
+      "task-commented": "Tarea comentada",
+      "task-deleted": "Tarea eliminada",
+      "file-uploaded": "Archivo subido"
+    },
+    "saved": "Preferencias de notificaciones guardadas"
+  },
+  "enable": "Activar",
+  "disable": "Desactivar",
+  "not-supported": "No compatible"
 }

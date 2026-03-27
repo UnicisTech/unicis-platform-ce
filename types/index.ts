@@ -7,3 +7,4 @@ export * from './tia';
 export * from './iap';
 export * from './pia';
 export * from './rm';
+export * from './notifications';

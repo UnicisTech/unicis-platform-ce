@@ -1,10 +1,4 @@
-import type { NotificationType } from '@/generated/client';
-
-export type ChannelPrefs = {
-  inApp: boolean;
-  email: boolean;
-  push: boolean;
-};
+import type { NotificationType } from '@/generated/enums';
 
 export type CreateNotificationPayload = {
   type: NotificationType;

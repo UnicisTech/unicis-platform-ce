@@ -6,6 +6,9 @@ import { throwIfNotAllowed } from 'models/user';
 import { sanitizeRichText } from '@/lib/sanitizeRichText';
 import { parseDueDateInput } from '@/lib/tasks/dueDate';
 import { serializeForApi } from '@/lib/serialize';
+import { notificationService } from '@/lib/notifications/notification-service';
+import { getTeamRecipientsBySlug } from '@/lib/notifications/recipients';
+import { NotificationType } from '@/generated/enums';
 
 export default async function handler(
   req: NextApiRequest,
@@ -68,6 +71,26 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   await sendEvent(teamMember.teamId, 'task.created', task);
+
+  const recipients = await getTeamRecipientsBySlug(teamMember.team.slug);
+  await notificationService.sendBulk(
+    recipients.map((user) => ({
+      type: NotificationType.TASK_CREATED,
+      title: `Task created: \"${task.title}\"`,
+      body: `${teamMember.user.name ?? 'Someone'} created a task.`,
+      link: `/teams/${teamMember.team.slug}/tasks/${task.taskNumber}`,
+      recipientId: user.id,
+      recipientEmail: user.email,
+      teamId: teamMember.teamId,
+      metadata: {
+        source: {
+          taskId: task.id,
+          taskNumber: task.taskNumber,
+          event: 'task.created',
+        },
+      },
+    }))
+  );
 
   return res.status(200).json({ data: {}, error: null });
 };

@@ -1,24 +1,17 @@
-import { NotificationType, Prisma } from '@/generated/client';
+import { NotificationType } from '@/generated/enums';
+import { Prisma } from '@/generated/client';
 
 import { prisma } from '@/lib/prisma';
 
 import { buildNotificationEmail, emailService } from './email-service';
 import { pushService } from './push-service';
+import { DEFAULT_NOTIFICATION_PREFERENCES } from './preferences';
+import type { ChannelPrefs } from './preferences';
 import type {
-  ChannelPrefs,
   CreateNotificationPayload,
   DeliveryAttempt,
   NotificationDeliveryLog,
 } from './types';
-
-const DEFAULT_PREFERENCES: Record<NotificationType, ChannelPrefs> = {
-  TASK_DUE: { inApp: true, email: true, push: true },
-  TASK_CREATED: { inApp: true, email: true, push: true },
-  TASK_UPDATED: { inApp: true, email: true, push: true },
-  TASK_COMMENTED: { inApp: true, email: true, push: true },
-  TASK_DELETED: { inApp: true, email: true, push: true },
-  FILE_UPLOADED: { inApp: true, email: true, push: true },
-};
 
 const nowIso = () => new Date().toISOString();
 
@@ -59,7 +52,7 @@ export const notificationService = {
     const override = rawPreferences?.[type];
 
     return {
-      ...DEFAULT_PREFERENCES[type],
+      ...DEFAULT_NOTIFICATION_PREFERENCES[type],
       ...(override ?? {}),
     };
   },
@@ -76,7 +69,7 @@ export const notificationService = {
     const metadata = {
       ...baseMetadata,
       delivery,
-      ...(prefs.inApp ? {} : { hidden: true }),
+      hidden: !prefs.inApp,
     } as Prisma.InputJsonValue;
 
     let notification;
