@@ -128,6 +128,12 @@ const env = {
     apiKey: process.env.RESEND_API_KEY!,
     from: process.env.RESEND_FROM!,
   },
+
+  vapid: {
+    publicKey: process.env.VAPID_PUBLIC_KEY,
+    privateKey: process.env.VAPID_PRIVATE_KEY,
+    subject: process.env.VAPID_SUBJECT,
+  },
 };
 
 export default env;
