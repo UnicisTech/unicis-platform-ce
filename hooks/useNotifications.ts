@@ -20,16 +20,21 @@ const getUnreadOnlyFromKey = (key: string) => {
 const isNotificationsKey = (cacheKey: unknown) =>
   typeof cacheKey === 'string' && cacheKey.startsWith('/api/notifications');
 
-const useNotifications = (options?: { limit?: number; unreadOnly?: boolean }) => {
+const useNotifications = (options?: {
+  limit?: number;
+  page?: number;
+  unreadOnly?: boolean;
+}) => {
   const limit = options?.limit ?? 10;
+  const page = options?.page ?? 1;
   const unreadOnly = options?.unreadOnly ?? false;
 
-  const query = buildQuery({ limit, unreadOnly });
+  const query = buildQuery({ limit, unreadOnly, page });
   const key = `/api/notifications?${query}`;
 
   const { data, error, isLoading, mutate } = useSWR<
     ApiResponse<NotificationListResponse>
-  >(key, fetcher);
+  >(key, fetcher, { keepPreviousData: true });
 
   const revalidateAll = () => globalMutate(isNotificationsKey);
 

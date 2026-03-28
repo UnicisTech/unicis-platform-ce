@@ -7,6 +7,8 @@ import Link from 'next/link';
 
 import NotificationItem from '@/components/notifications/NotificationItem';
 import { Button } from '@/components/shadcn/ui/button';
+import { PerPageSelector } from '@/components/shared';
+import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import useNotifications from 'hooks/useNotifications';
 import {
   getPushSubscription,
@@ -17,19 +19,34 @@ import {
 
 const NotificationsPage = () => {
   const { t } = useTranslation('common');
+  const [perPage, setPerPage] = useState(10);
+  const [page, setPage] = useState(1);
   const {
     notifications,
     unreadCount,
     markAsRead,
     markAllRead,
     isLoading,
-  } = useNotifications({ limit: 50 });
+    total,
+  } = useNotifications({ limit: perPage, page });
 
   const [pushStatus, setPushStatus] = useState<
     'unknown' | 'enabled' | 'disabled' | 'unsupported'
   >('unknown');
   const [pushError, setPushError] = useState<string | null>(null);
   const [pushLoading, setPushLoading] = useState(false);
+
+  useEffect(() => {
+    setPage(1);
+  }, [perPage]);
+
+  const totalPages = Math.max(1, Math.ceil(total / perPage));
+  const hasLoaded = total > 0 || notifications.length > 0;
+
+  useEffect(() => {
+    if (!hasLoaded) return;
+    if (page > totalPages) setPage(totalPages);
+  }, [page, totalPages, hasLoaded]);
 
   useEffect(() => {
     let mounted = true;
@@ -81,9 +98,10 @@ const NotificationsPage = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <h1 className="text-2xl font-semibold">{t('notifications.title')}</h1>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap justify-end">
+          <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
           <Button variant="outline" asChild>
             <Link href="/notifications/settings">
               {t('notifications.settings')}
@@ -147,6 +165,14 @@ const NotificationsPage = () => {
           />
         ))}
       </section>
+
+      {totalPages > 1 && (
+        <PaginationControls
+          page={page}
+          totalPages={totalPages}
+          onChange={setPage}
+        />
+      )}
     </div>
   );
 };
