@@ -10,7 +10,7 @@ const params: SubscriptionPermissions = {
       sso: true,
       dsync: true,
     },
-    avaliableISO: ['mvps'],
+    avaliableISO: ['mvps', 'gdpr'],
   },
   PREMIUM: {
     maxUsers: 150,
@@ -30,6 +30,8 @@ const params: SubscriptionPermissions = {
       'gdpr',
       'cisv81',
       'c5_2020',
+      'owasp_asvs_v5',
+      'iso42001',
     ],
   },
   ULTIMATE: {
@@ -53,6 +55,9 @@ const params: SubscriptionPermissions = {
       'cisv81',
       'soc2v2',
       'c5_2020',
+      'owasp_asvs_v5',
+      'pcidss_v401',
+      'iso42001',
     ],
   },
 };

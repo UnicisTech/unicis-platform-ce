@@ -11,6 +11,8 @@ export const CSC_FRAMEWORK_TO_NAME: Record<ISO, string> = {
   soc2v2: 'SOC2 v2',
   c5_2020: 'C5 2020',
   owasp_asvs_v5: 'OWASP ASVS v5',
+  pcidss_v401: 'PCI DSS v4.0.1',
+  iso42001: 'ISO/IEC 42001:2023',
 };
 
 export const isoOptions: {
@@ -32,6 +34,8 @@ export const CSC_FRAMEWORK_TO_SHORTNAME: Record<ISO, string> = {
   soc2v2: 'SOC2',
   c5_2020: 'C5',
   owasp_asvs_v5: 'ASVS',
+  pcidss_v401: 'PCI DSS',
+  iso42001: 'AIMS',
 };
 
 export const isoValueToLabel = (value: ISO) => CSC_FRAMEWORK_TO_NAME[value];

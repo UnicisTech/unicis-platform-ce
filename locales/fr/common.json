@@ -825,6 +825,8 @@
       "description": "L’exigence est pleinement satisfaite, fonctionne comme prévu, fait l’objet d’un suivi actif et d’améliorations, et il existe des preuves substantielles à présenter aux auditeurs"
     }
   },
+  "country-label": "Pays",
+  "select-country": "Sélectionner un pays",
   "country": {
     "andorra": "Andorre",
     "united arab emirates": "Émirats arabes unis",

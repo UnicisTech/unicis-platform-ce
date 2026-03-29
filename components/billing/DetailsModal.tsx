@@ -143,7 +143,7 @@ const DetailsModal: React.FC<DetailsModalProps> = ({
 
             {/* Country */}
             <div className="grid gap-1">
-              <Label htmlFor="country">{t('country')}</Label>
+              <Label htmlFor="country">{t('country-label')}</Label>
               <Select
                 name="country"
                 value={formik.values.country}

@@ -99,6 +99,8 @@ components:
           - soc2v2
           - c5_2020
           - owasp_asvs_v5
+          - pcidss_v401
+          - iso42001
         example: '2022'
 
   schemas:
@@ -323,6 +325,8 @@ components:
             - soc2v2
             - c5_2020
             - owasp_asvs_v5
+            - pcidss_v401
+            - iso42001
           description: Framework identifier
       required:
         - operation

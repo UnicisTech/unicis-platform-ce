@@ -822,6 +822,8 @@
       "description": "Anforderung ist vollständig erfüllt, funktioniert wie erwartet, wird aktiv überwacht und verbessert, und es gibt ausreichende Beweise für die Auditoren"
     }
   },
+  "country-label": "Land",
+  "select-country": "Land auswählen",
   "country": {
     "andorra": "Andorra",
     "united arab emirates": "Vereinigte Arabische Emirate",
