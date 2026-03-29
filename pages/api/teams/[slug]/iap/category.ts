@@ -63,7 +63,5 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     teamId: teamMember.team.id,
   });
 
-  return res
-    .status(200)
-    .json({ data: serializeForApi(category), error: null });
+  return res.status(200).json({ data: serializeForApi(category), error: null });
 };

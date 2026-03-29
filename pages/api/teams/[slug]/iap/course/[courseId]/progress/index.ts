@@ -50,9 +50,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const progress = await getUserCourseProgress(teamMember.id, courseId);
 
-  return res
-    .status(200)
-    .json({ data: serializeForApi(progress), error: null });
+  return res.status(200).json({ data: serializeForApi(progress), error: null });
 };
 
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {

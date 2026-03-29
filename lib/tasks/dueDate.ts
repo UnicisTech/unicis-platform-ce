@@ -10,9 +10,7 @@ export type DueDateParseResult = {
   valid: boolean;
 };
 
-export const parseDueDateInput = (
-  input: unknown
-): DueDateParseResult => {
+export const parseDueDateInput = (input: unknown): DueDateParseResult => {
   if (input === null || input === undefined) {
     return { value: null, valid: true };
   }

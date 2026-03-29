@@ -69,6 +69,7 @@ npx prisma migrate dev --name add_notifications
 ```
 
 Notes:
+
 - Keep `type` as a string enum later (PR to convert to Prisma enum when stable).
 - `preferences` JSON shape example:
 
@@ -103,6 +104,7 @@ Example handler responsibilities:
 - Use Prisma from `lib/prisma.ts` to query and mutate.
 
 Notes for implementer:
+
 - Keep logic minimal; complex delivery and retry logic belongs to worker/queue.
 
 ---
@@ -121,6 +123,7 @@ Behavior & integration:
 - For performance, fetch only 20 items per page and lazy-load more.
 
 Accessibility:
+
 - Ensure notifications are keyboard-navigable and that `aria` attributes are present for the bell and list.
 
 UI components (daisyUI)
@@ -130,19 +133,26 @@ UI components (daisyUI)
   - Bell button: use a rounded icon button with badge
 
 ```tsx
-<button className="btn btn-ghost btn-circle relative" aria-label="Notifications">
+<button
+  className="btn btn-ghost btn-circle relative"
+  aria-label="Notifications"
+>
   <Bell className="w-5 h-5" />
-  <span className="badge badge-sm badge-primary absolute -top-1 -right-1">3</span>
+  <span className="badge badge-sm badge-primary absolute -top-1 -right-1">
+    3
+  </span>
 </button>
 ```
 
-  - Notification item: `card` or `list` style with title, snippet, timestamp, and quick action buttons
+- Notification item: `card` or `list` style with title, snippet, timestamp, and quick action buttons
 
 ```tsx
 <div className="card bg-base-100 shadow-sm">
   <div className="card-body p-3">
     <h4 className="text-sm font-medium">Task assigned</h4>
-    <p className="text-xs text-muted">You were assigned to the task "Quarterly audit"</p>
+    <p className="text-xs text-muted">
+      You were assigned to the task "Quarterly audit"
+    </p>
     <div className="card-actions justify-end">
       <button className="btn btn-primary btn-xs">Open</button>
       <button className="btn btn-ghost btn-xs">Mark read</button>
@@ -173,12 +183,11 @@ Localization & i18n
 ```tsx
 import { useTranslation } from 'next-i18next';
 const { t } = useTranslation('notifications');
-<h4>{t('title_task_assigned', { task: task.title })}</h4>
+<h4>{t('title_task_assigned', { task: task.title })}</h4>;
 ```
 
 - For formatting dates/times, use `date-fns` + localized format strings or `Intl.DateTimeFormat` with the user's locale.
 - Add translations for all UI strings used in `NotificationBell`, `NotificationCenter`, and email templates (later phase).
-
 
 ---
 
@@ -193,6 +202,7 @@ const { t } = useTranslation('notifications');
   - Scenario: create comment or create notification via service → user sees notification in UI.
 
 Test data approach:
+
 - Use an ephemeral test DB for Jest integration tests (set `DATABASE_URL` to SQLite or a test Postgres instance).
 
 ---

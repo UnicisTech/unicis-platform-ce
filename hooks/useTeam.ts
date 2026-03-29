@@ -10,10 +10,7 @@ const useTeam = (slug?: string) => {
 
   const { data, error, isLoading } = useSWR<
     ApiResponse<TeamWithSubscriptionDto>
-  >(
-    teamSlug ? `/api/teams/${teamSlug}` : null,
-    fetcher
-  );
+  >(teamSlug ? `/api/teams/${teamSlug}` : null, fetcher);
 
   const mutateTeam = async () => {
     mutate(`/api/teams/${teamSlug}`);

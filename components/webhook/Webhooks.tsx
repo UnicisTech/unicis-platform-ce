@@ -35,7 +35,7 @@ const Webhooks = ({ team }: { team: Team }) => {
     team.slug
   );
 
-  console.log('webhooks', webhooks)
+  console.log('webhooks', webhooks);
 
   const deleteWebhook = async (webhook: EndpointOut | null) => {
     if (!webhook) return;

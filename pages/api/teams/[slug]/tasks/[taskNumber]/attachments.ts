@@ -123,9 +123,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
           const teamSlug = task.team?.slug ?? (req.query.slug as string);
           const recipients = await getTeamRecipientsBySlug(teamSlug);
           const filename =
-            file[0]?.originalFilename ??
-            file[0]?.newFilename ??
-            'file';
+            file[0]?.originalFilename ?? file[0]?.newFilename ?? 'file';
 
           await notificationService.sendBulk(
             recipients.map((user) => ({

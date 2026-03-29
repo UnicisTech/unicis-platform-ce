@@ -50,7 +50,7 @@ const NotificationItem = ({
       return;
     }
 
-    hoverTimeoutRef.current = window.setTimeout(() => {
+    hoverTimeoutRef.current = setTimeout(() => {
       hoverTimeoutRef.current = null;
       if (!notification.isRead) {
         onRead(notification.id);

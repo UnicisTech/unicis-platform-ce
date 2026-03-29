@@ -55,603 +55,469 @@
       "section": "clause-4",
       "control": "Context of the organization",
       "requirements": "Identify internal and external factors relevant to AI system development and use.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-4-2": {
       "code": "ISO42001-4.2",
       "section": "clause-4",
       "control": "Context of the organization",
       "requirements": "Determine stakeholder requirements and expectations for AI systems.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-4-3": {
       "code": "ISO42001-4.3",
       "section": "clause-4",
       "control": "Context of the organization",
       "requirements": "Define boundaries and applicability of the AI management system.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-4-4": {
       "code": "ISO42001-4.4",
       "section": "clause-4",
       "control": "Context of the organization",
       "requirements": "Establish, implement, maintain and improve the AI management system.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-5-1": {
       "code": "ISO42001-5.1",
       "section": "clause-5",
       "control": "Leadership",
       "requirements": "Demonstrate commitment to AI governance through active leadership involvement.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-5-2": {
       "code": "ISO42001-5.2",
       "section": "clause-5",
       "control": "Leadership",
       "requirements": "Establish an AI policy appropriate to organizational purpose and objectives.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-5-3": {
       "code": "ISO42001-5.3",
       "section": "clause-5",
       "control": "Leadership",
       "requirements": "Assign and communicate AI-related roles, responsibilities and authorities.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-6-1": {
       "code": "ISO42001-6.1",
       "section": "clause-6",
       "control": "Planning",
       "requirements": "Identify and address AI-related risks and opportunities.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-6-2": {
       "code": "ISO42001-6.2",
       "section": "clause-6",
       "control": "Planning",
       "requirements": "Establish measurable AI objectives and plans to achieve them.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-6-3": {
       "code": "ISO42001-6.3",
       "section": "clause-6",
       "control": "Planning",
       "requirements": "Plan and manage changes to the AI management system.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-7-1": {
       "code": "ISO42001-7.1",
       "section": "clause-7",
       "control": "Support",
       "requirements": "Determine and provide resources needed for AI management.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-7-2": {
       "code": "ISO42001-7.2",
       "section": "clause-7",
       "control": "Support",
       "requirements": "Ensure personnel have necessary competence for AI-related activities.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-7-3": {
       "code": "ISO42001-7.3",
       "section": "clause-7",
       "control": "Support",
       "requirements": "Ensure awareness of AI policy, roles and system implications.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-7-4": {
       "code": "ISO42001-7.4",
       "section": "clause-7",
       "control": "Support",
       "requirements": "Determine internal and external communication requirements for AI.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-7-5-1": {
       "code": "ISO42001-7.5.1",
       "section": "clause-7",
       "control": "Documented information",
       "requirements": "Include required documented information in the AI management system.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-7-5-2": {
       "code": "ISO42001-7.5.2",
       "section": "clause-7",
       "control": "Documented information",
       "requirements": "Ensure proper identification, format and review of documentation.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-7-5-3": {
       "code": "ISO42001-7.5.3",
       "section": "clause-7",
       "control": "Documented information",
       "requirements": "Control availability, distribution and protection of documentation.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-8-1": {
       "code": "ISO42001-8.1",
       "section": "clause-8",
       "control": "Operation",
       "requirements": "Plan, implement and control processes for AI system operations.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-8-2": {
       "code": "ISO42001-8.2",
       "section": "clause-8",
       "control": "Operation",
       "requirements": "Conduct risk assessments for AI systems considering impacts and likelihood.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-8-3": {
       "code": "ISO42001-8.3",
       "section": "clause-8",
       "control": "Operation",
       "requirements": "Select and implement appropriate AI risk treatment options.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-8-4": {
       "code": "ISO42001-8.4",
       "section": "clause-8",
       "control": "Operation",
       "requirements": "Assess potential impacts of AI systems on individuals and society.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-9-1": {
       "code": "ISO42001-9.1",
       "section": "clause-9",
       "control": "Performance evaluation",
       "requirements": "Monitor, measure, analyze and evaluate AI system performance.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-9-2-1": {
       "code": "ISO42001-9.2.1",
       "section": "clause-9",
       "control": "Internal audit",
       "requirements": "Conduct internal audits at planned intervals.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-9-2-2": {
       "code": "ISO42001-9.2.2",
       "section": "clause-9",
       "control": "Internal audit",
       "requirements": "Plan, establish and maintain an internal audit programme.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-9-3-1": {
       "code": "ISO42001-9.3.1",
       "section": "clause-9",
       "control": "Management review",
       "requirements": "Review the AI management system at planned intervals.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-9-3-2": {
       "code": "ISO42001-9.3.2",
       "section": "clause-9",
       "control": "Management review",
       "requirements": "Include specified inputs in management reviews.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-9-3-3": {
       "code": "ISO42001-9.3.3",
       "section": "clause-9",
       "control": "Management review",
       "requirements": "Document decisions and actions from management reviews.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-10-1": {
       "code": "ISO42001-10.1",
       "section": "clause-10",
       "control": "Improvement",
       "requirements": "Continually improve suitability, adequacy and effectiveness of AI management.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-10-2": {
       "code": "ISO42001-10.2",
       "section": "clause-10",
       "control": "Improvement",
       "requirements": "React to nonconformities and take corrective action.",
-      "implementation_groups": [
-        "clauses"
-      ]
+      "implementation_groups": ["clauses"]
     },
     "iso42001-a-2-2": {
       "code": "ISO42001-A.2.2",
       "section": "annex-a-2",
       "control": "Policies related to AI",
       "requirements": "Define and communicate the organization's AI policy.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-2-3": {
       "code": "ISO42001-A.2.3",
       "section": "annex-a-2",
       "control": "Policies related to AI",
       "requirements": "Ensure AI policy aligns with other organizational policies.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-2-4": {
       "code": "ISO42001-A.2.4",
       "section": "annex-a-2",
       "control": "Policies related to AI",
       "requirements": "Review AI policy at defined intervals or upon significant changes.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-3-2": {
       "code": "ISO42001-A.3.2",
       "section": "annex-a-3",
       "control": "Internal organization",
       "requirements": "Define roles and responsibilities for AI system activities.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-3-3": {
       "code": "ISO42001-A.3.3",
       "section": "annex-a-3",
       "control": "Internal organization",
       "requirements": "Establish processes for reporting AI-related concerns.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-4-2": {
       "code": "ISO42001-A.4.2",
       "section": "annex-a-4",
       "control": "Resources for AI systems",
       "requirements": "Document resources required for AI system development and operation.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-4-3": {
       "code": "ISO42001-A.4.3",
       "section": "annex-a-4",
       "control": "Resources for AI systems",
       "requirements": "Manage data resources used in AI systems.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-4-4": {
       "code": "ISO42001-A.4.4",
       "section": "annex-a-4",
       "control": "Resources for AI systems",
       "requirements": "Manage tools used for AI system development and operation.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-4-5": {
       "code": "ISO42001-A.4.5",
       "section": "annex-a-4",
       "control": "Resources for AI systems",
       "requirements": "Manage computing infrastructure for AI systems.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-4-6": {
       "code": "ISO42001-A.4.6",
       "section": "annex-a-4",
       "control": "Resources for AI systems",
       "requirements": "Manage human resources involved in AI activities.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-5-2": {
       "code": "ISO42001-A.5.2",
       "section": "annex-a-5",
       "control": "Assessing impacts of AI systems",
       "requirements": "Establish processes for assessing AI system impacts.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-5-3": {
       "code": "ISO42001-A.5.3",
       "section": "annex-a-5",
       "control": "Assessing impacts of AI systems",
       "requirements": "Document AI system impact assessments.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-5-4": {
       "code": "ISO42001-A.5.4",
       "section": "annex-a-5",
       "control": "Assessing impacts of AI systems",
       "requirements": "Assess impacts on individuals or groups affected by AI systems.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-5-5": {
       "code": "ISO42001-A.5.5",
       "section": "annex-a-5",
       "control": "Assessing impacts of AI systems",
       "requirements": "Assess broader societal impacts of AI systems.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-6-1-2": {
       "code": "ISO42001-A.6.1.2",
       "section": "annex-a-6",
       "control": "Management guidance for AI system development",
       "requirements": "Define objectives for responsible AI system development.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-6-1-3": {
       "code": "ISO42001-A.6.1.3",
       "section": "annex-a-6",
       "control": "Management guidance for AI system development",
       "requirements": "Establish processes for responsible AI design and development.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-6-2-2": {
       "code": "ISO42001-A.6.2.2",
       "section": "annex-a-6",
       "control": "AI system life cycle",
       "requirements": "Define and document AI system requirements and specifications.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-6-2-3": {
       "code": "ISO42001-A.6.2.3",
       "section": "annex-a-6",
       "control": "AI system life cycle",
       "requirements": "Document AI system design and development activities.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-6-2-4": {
       "code": "ISO42001-A.6.2.4",
       "section": "annex-a-6",
       "control": "AI system life cycle",
       "requirements": "Verify and validate AI systems against requirements.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-6-2-5": {
       "code": "ISO42001-A.6.2.5",
       "section": "annex-a-6",
       "control": "AI system life cycle",
       "requirements": "Control deployment of AI systems into production.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-6-2-6": {
       "code": "ISO42001-A.6.2.6",
       "section": "annex-a-6",
       "control": "AI system life cycle",
       "requirements": "Monitor AI system operation and performance.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-6-2-7": {
       "code": "ISO42001-A.6.2.7",
       "section": "annex-a-6",
       "control": "AI system life cycle",
       "requirements": "Maintain technical documentation for AI systems.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-6-2-8": {
       "code": "ISO42001-A.6.2.8",
       "section": "annex-a-6",
       "control": "AI system life cycle",
       "requirements": "Record event logs for AI system activities.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-7-2": {
       "code": "ISO42001-A.7.2",
       "section": "annex-a-7",
       "control": "Data for AI systems",
       "requirements": "Manage data used for AI system development and enhancement.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-7-3": {
       "code": "ISO42001-A.7.3",
       "section": "annex-a-7",
       "control": "Data for AI systems",
       "requirements": "Control acquisition of data for AI systems.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-7-4": {
       "code": "ISO42001-A.7.4",
       "section": "annex-a-7",
       "control": "Data for AI systems",
       "requirements": "Ensure data quality meets AI system requirements.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-7-5": {
       "code": "ISO42001-A.7.5",
       "section": "annex-a-7",
       "control": "Data for AI systems",
       "requirements": "Track and document data origin and lineage.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-7-6": {
       "code": "ISO42001-A.7.6",
       "section": "annex-a-7",
       "control": "Data for AI systems",
       "requirements": "Control data preparation processes for AI systems.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-8-2": {
       "code": "ISO42001-A.8.2",
       "section": "annex-a-8",
       "control": "Information for interested parties of AI systems",
       "requirements": "Provide system documentation and user information.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-8-3": {
       "code": "ISO42001-A.8.3",
       "section": "annex-a-8",
       "control": "Information for interested parties of AI systems",
       "requirements": "Report externally on AI system activities as required.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-8-4": {
       "code": "ISO42001-A.8.4",
       "section": "annex-a-8",
       "control": "Information for interested parties of AI systems",
       "requirements": "Communicate AI-related incidents to relevant parties.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-8-5": {
       "code": "ISO42001-A.8.5",
       "section": "annex-a-8",
       "control": "Information for interested parties of AI systems",
       "requirements": "Provide information to interested parties about AI systems.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-9-2": {
       "code": "ISO42001-A.9.2",
       "section": "annex-a-9",
       "control": "Use of AI systems",
       "requirements": "Establish processes for responsible AI system use.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-9-3": {
       "code": "ISO42001-A.9.3",
       "section": "annex-a-9",
       "control": "Use of AI systems",
       "requirements": "Define objectives for responsible use of AI systems.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-9-4": {
       "code": "ISO42001-A.9.4",
       "section": "annex-a-9",
       "control": "Use of AI systems",
       "requirements": "Document and communicate intended use of AI systems.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-10-2": {
       "code": "ISO42001-A.10.2",
       "section": "annex-a-10",
       "control": "Third-party and customer relationships",
       "requirements": "Allocate AI-related responsibilities between parties.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-10-3": {
       "code": "ISO42001-A.10.3",
       "section": "annex-a-10",
       "control": "Third-party and customer relationships",
       "requirements": "Manage suppliers involved in AI system activities.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     },
     "iso42001-a-10-4": {
       "code": "ISO42001-A.10.4",
       "section": "annex-a-10",
       "control": "Third-party and customer relationships",
       "requirements": "Manage customer relationships for AI systems.",
-      "implementation_groups": [
-        "controls"
-      ]
+      "implementation_groups": ["controls"]
     }
   }
 }

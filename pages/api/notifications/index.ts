@@ -53,7 +53,8 @@ export default async function handler(
   const pageNumber = Number(page);
   const limitNumber = Number(limit);
 
-  const safePage = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
+  const safePage =
+    Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
   const safeLimit =
     Number.isFinite(limitNumber) && limitNumber > 0 && limitNumber <= 100
       ? limitNumber

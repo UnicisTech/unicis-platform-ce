@@ -143,9 +143,7 @@ const NotificationsPage = () => {
             </Button>
           )}
         </div>
-        {pushError && (
-          <p className="mt-2 text-xs text-red-600">{pushError}</p>
-        )}
+        {pushError && <p className="mt-2 text-xs text-red-600">{pushError}</p>}
       </section>
 
       <section className="space-y-3">

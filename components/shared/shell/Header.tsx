@@ -33,13 +33,13 @@ const Header = ({ setSidebarOpen }: HeaderProps) => {
         <span className="sr-only">{t('open-sidebar')}</span>
         <Bars3Icon className="h-6 w-6" aria-hidden="true" />
       </button>
-        <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-          <div className="relative flex flex-1"></div>
-          <div className="flex items-center gap-x-4 lg:gap-x-6">
-            <NotificationBell />
-            <AccountDropdown />
-          </div>
+      <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+        <div className="relative flex flex-1"></div>
+        <div className="flex items-center gap-x-4 lg:gap-x-6">
+          <NotificationBell />
+          <AccountDropdown />
         </div>
+      </div>
     </div>
   );
 };

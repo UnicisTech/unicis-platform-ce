@@ -89,7 +89,7 @@ const TaskById = () => {
     taskNumber as string
   );
 
-  console.log('task', task)
+  console.log('task', task);
   const { ISO } = useISO(team);
   const rpaState = useRpaCreation(task);
 

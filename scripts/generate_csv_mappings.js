@@ -124,12 +124,14 @@ function parseCSVLine(line) {
 }
 
 const csvContent = fs.readFileSync(CSV_PATH, 'utf8');
-const csvLines = csvContent.split('\n').filter(l => l.trim());
+const csvLines = csvContent.split('\n').filter((l) => l.trim());
 const headers = parseCSVLine(csvLines[0]);
-const rows = csvLines.slice(1).map(l => {
+const rows = csvLines.slice(1).map((l) => {
   const fields = parseCSVLine(l);
   const obj = {};
-  headers.forEach((h, i) => { obj[h] = fields[i] || ''; });
+  headers.forEach((h, i) => {
+    obj[h] = fields[i] || '';
+  });
   return obj;
 });
 
@@ -137,7 +139,9 @@ const rows = csvLines.slice(1).map(l => {
 
 function nistToControlId(code) {
   // GV.OC-01 → nist-csf-v2-gv-oc-01
-  return 'nist-csf-v2-' + code.toLowerCase().replace(/\./g, '-').replace(/-/g, '-');
+  return (
+    'nist-csf-v2-' + code.toLowerCase().replace(/\./g, '-').replace(/-/g, '-')
+  );
 }
 
 function extractPciReq(text) {
@@ -159,7 +163,9 @@ function extractPciReq(text) {
 function resolvepcidss(reqNum) {
   // reqNum like "12.1" → find all pcidss controls starting with "pcidss-12-1-"
   const prefix = 'pcidss-' + reqNum.replace(/\./g, '-');
-  return pcidssControls.filter(id => id === prefix || id.startsWith(prefix + '-'));
+  return pcidssControls.filter(
+    (id) => id === prefix || id.startsWith(prefix + '-')
+  );
 }
 
 function extractIso2022(text) {
@@ -181,7 +187,7 @@ function resolveIso2022(refNum) {
   const id = 'iso-2022-a-' + refNum.replace(/\./g, '-');
   if (iso2022Controls.includes(id)) return [id];
   // Try prefix match
-  return iso2022Controls.filter(c => c === id || c.startsWith(id + '-'));
+  return iso2022Controls.filter((c) => c === id || c.startsWith(id + '-'));
 }
 
 function extractCis(text) {
@@ -196,7 +202,7 @@ function extractCis(text) {
   // "CIS Safeguard X.X (priority)" → specific safeguard
 
   // Split by comma to handle multiple
-  const parts = text.split(',').map(p => p.trim());
+  const parts = text.split(',').map((p) => p.trim());
 
   for (const part of parts) {
     // "CIS Safeguard X.Y" pattern
@@ -228,7 +234,7 @@ function resolveCis(ref) {
   if (ref.type === 'broad') {
     // Control X → all cisv81-X-*
     const prefix = 'cisv81-' + ref.num + '-';
-    return cisv81Controls.filter(id => id.startsWith(prefix));
+    return cisv81Controls.filter((id) => id.startsWith(prefix));
   } else {
     // CIS Control X.Y.Z or CIS Safeguard X.Y
     // X.Y.Z → cisv81-X-Y (the first two parts)
@@ -253,7 +259,7 @@ function resolveCis(ref) {
     }
     if (cisv81Controls.includes(id)) return [id];
     // Fallback: try prefix
-    return cisv81Controls.filter(c => c.startsWith(id));
+    return cisv81Controls.filter((c) => c.startsWith(id));
   }
 }
 
@@ -396,11 +402,29 @@ const iso42001Mappings = [
     iso2022: ['iso-2022-a-5-1'],
   },
   {
-    iso42001: ['iso42001-a-7-2', 'iso42001-a-7-3', 'iso42001-a-7-4', 'iso42001-a-7-5', 'iso42001-a-7-6'],
-    iso2022: ['iso-2022-a-5-12', 'iso-2022-a-5-13', 'iso-2022-a-8-10', 'iso-2022-a-8-11', 'iso-2022-a-8-12'],
+    iso42001: [
+      'iso42001-a-7-2',
+      'iso42001-a-7-3',
+      'iso42001-a-7-4',
+      'iso42001-a-7-5',
+      'iso42001-a-7-6',
+    ],
+    iso2022: [
+      'iso-2022-a-5-12',
+      'iso-2022-a-5-13',
+      'iso-2022-a-8-10',
+      'iso-2022-a-8-11',
+      'iso-2022-a-8-12',
+    ],
   },
   {
-    iso42001: ['iso42001-a-5-2', 'iso42001-a-5-3', 'iso42001-a-5-4', 'iso42001-a-5-5', 'iso42001-8-4'],
+    iso42001: [
+      'iso42001-a-5-2',
+      'iso42001-a-5-3',
+      'iso42001-a-5-4',
+      'iso42001-a-5-5',
+      'iso42001-8-4',
+    ],
     iso2022: ['iso-2022-a-5-29', 'iso-2022-a-5-30'],
   },
   {
@@ -409,7 +433,12 @@ const iso42001Mappings = [
   },
   {
     iso42001: ['iso42001-a-10-2', 'iso42001-a-10-3', 'iso42001-a-10-4'],
-    iso2022: ['iso-2022-a-5-19', 'iso-2022-a-5-20', 'iso-2022-a-5-21', 'iso-2022-a-5-22'],
+    iso2022: [
+      'iso-2022-a-5-19',
+      'iso-2022-a-5-20',
+      'iso-2022-a-5-21',
+      'iso-2022-a-5-22',
+    ],
   },
   {
     iso42001: ['iso42001-9-3-1', 'iso42001-9-3-2', 'iso42001-9-3-3'],
@@ -453,7 +482,7 @@ for (const controlId of allNewIds) {
 
     for (const [fwKey, idSet] of Object.entries(fwMappings)) {
       const existingIds = new Set(existingFw[fwKey] || []);
-      const brandNewIds = [...idSet].filter(id => !existingIds.has(id));
+      const brandNewIds = [...idSet].filter((id) => !existingIds.has(id));
 
       if (!existingFw[fwKey]) {
         // Entirely new framework key for this control
@@ -481,19 +510,24 @@ for (const controlId of allNewIds) {
 let ts = '';
 
 ts += '// ──────────────────────────────────────────────────────────────────\n';
-ts += '// NEW MAPPINGS generated from NIST CSF 2.0 ↔ PCI DSS 4.0.1 ↔ ISO 27001:2022 ↔ CIS Controls v8.1 CSV\n';
+ts +=
+  '// NEW MAPPINGS generated from NIST CSF 2.0 ↔ PCI DSS 4.0.1 ↔ ISO 27001:2022 ↔ CIS Controls v8.1 CSV\n';
 ts += '// and ISO 27001:2022 ↔ ISO 42001:2023 hardcoded mappings\n';
 ts += '//\n';
 ts += '// Instructions:\n';
-ts += '//   - MERGE entries: These controls already exist in framework-mappings.ts.\n';
-ts += '//     Add the listed framework keys/values to their existing mappings object.\n';
-ts += '//   - NEW entries: These are brand new controls to add to the frameworkMappings object.\n';
-ts += '// ──────────────────────────────────────────────────────────────────\n\n';
+ts +=
+  '//   - MERGE entries: These controls already exist in framework-mappings.ts.\n';
+ts +=
+  '//     Add the listed framework keys/values to their existing mappings object.\n';
+ts +=
+  '//   - NEW entries: These are brand new controls to add to the frameworkMappings object.\n';
+ts +=
+  '// ──────────────────────────────────────────────────────────────────\n\n';
 
 function formatMappingValue(key, values) {
   const quotedKey = /^\d/.test(key) || key.includes('-') ? `'${key}'` : key;
   if (values.length <= 2) {
-    return `      ${quotedKey}: [${values.map(v => `'${v}'`).join(', ')}],`;
+    return `      ${quotedKey}: [${values.map((v) => `'${v}'`).join(', ')}],`;
   }
   let s = `      ${quotedKey}: [\n`;
   for (const v of values) {
@@ -504,7 +538,8 @@ function formatMappingValue(key, values) {
 }
 
 if (mergeEntries.length > 0) {
-  ts += '// ═══ MERGE these into existing entries ═══════════════════════════\n';
+  ts +=
+    '// ═══ MERGE these into existing entries ═══════════════════════════\n';
   ts += `// (${mergeEntries.length} existing controls need additional framework mappings)\n\n`;
 
   for (const entry of mergeEntries) {
@@ -517,7 +552,8 @@ if (mergeEntries.length > 0) {
 }
 
 if (brandNewEntries.length > 0) {
-  ts += '\n// ═══ NEW entries to add to frameworkMappings ═════════════════════\n';
+  ts +=
+    '\n// ═══ NEW entries to add to frameworkMappings ═════════════════════\n';
   ts += `// (${brandNewEntries.length} new controls)\n\n`;
 
   for (const entry of brandNewEntries) {

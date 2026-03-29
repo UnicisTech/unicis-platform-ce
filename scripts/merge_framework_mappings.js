@@ -13,7 +13,13 @@
 const fs = require('fs');
 const path = require('path');
 
-const EXISTING_PATH = path.join(__dirname, '..', 'lib', 'csc', 'framework-mappings.ts');
+const EXISTING_PATH = path.join(
+  __dirname,
+  '..',
+  'lib',
+  'csc',
+  'framework-mappings.ts'
+);
 const NEW_MAPPINGS_PATH = path.join(__dirname, 'new_mappings_output.ts');
 const OUTPUT_PATH = EXISTING_PATH; // overwrite in-place
 
@@ -23,8 +29,11 @@ function parseExistingMappings(filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
 
   // Extract the object literal between `const frameworkMappings: FrameworkMappings = {` and the matching `};`
-  const startMatch = content.match(/const\s+frameworkMappings\s*:\s*FrameworkMappings\s*=\s*\{/);
-  if (!startMatch) throw new Error('Could not find frameworkMappings declaration');
+  const startMatch = content.match(
+    /const\s+frameworkMappings\s*:\s*FrameworkMappings\s*=\s*\{/
+  );
+  if (!startMatch)
+    throw new Error('Could not find frameworkMappings declaration');
 
   const startIdx = startMatch.index + startMatch[0].length - 1; // points to the `{`
 
@@ -41,7 +50,8 @@ function parseExistingMappings(filePath) {
       }
     }
   }
-  if (endIdx === -1) throw new Error('Could not find closing brace of frameworkMappings');
+  if (endIdx === -1)
+    throw new Error('Could not find closing brace of frameworkMappings');
 
   const objectStr = content.substring(startIdx, endIdx + 1);
 
@@ -70,7 +80,9 @@ function parseNewMappings(filePath) {
   }
 
   // Parse MERGE section: extract everything between MERGE markers and eval each block
-  const mergeSection = lines.slice(0, newSectionStart !== -1 ? newSectionStart : lines.length).join('\n');
+  const mergeSection = lines
+    .slice(0, newSectionStart !== -1 ? newSectionStart : lines.length)
+    .join('\n');
   const mergeRegex = /\/\/\s*MERGE INTO '([^']+)'/g;
   let match;
   const mergePositions = [];
@@ -80,7 +92,10 @@ function parseNewMappings(filePath) {
 
   for (let i = 0; i < mergePositions.length; i++) {
     const startPos = mergePositions[i].index;
-    const endPos = i + 1 < mergePositions.length ? mergePositions[i + 1].index : mergeSection.length;
+    const endPos =
+      i + 1 < mergePositions.length
+        ? mergePositions[i + 1].index
+        : mergeSection.length;
     const block = mergeSection.substring(startPos, endPos);
 
     // Extract the key-value lines after the comment
@@ -91,7 +106,10 @@ function parseNewMappings(filePath) {
       const obj = eval(objStr);
       merges[mergePositions[i].id] = obj;
     } catch (e) {
-      console.error(`Warning: Could not parse MERGE block for '${mergePositions[i].id}':`, e.message);
+      console.error(
+        `Warning: Could not parse MERGE block for '${mergePositions[i].id}':`,
+        e.message
+      );
     }
   }
 
@@ -99,7 +117,11 @@ function parseNewMappings(filePath) {
   if (newSectionStart !== -1) {
     // Find the actual entries (skip comment lines after the NEW header)
     let entryStart = newSectionStart + 1;
-    while (entryStart < lines.length && (lines[entryStart].trim().startsWith('//') || lines[entryStart].trim() === '')) {
+    while (
+      entryStart < lines.length &&
+      (lines[entryStart].trim().startsWith('//') ||
+        lines[entryStart].trim() === '')
+    ) {
       entryStart++;
     }
 
@@ -134,7 +156,9 @@ function applyMerges(existing, merges, newEntries) {
   let mergeKeyCount = 0;
   for (const [controlId, frameworkKeys] of Object.entries(merges)) {
     if (!existing[controlId]) {
-      console.warn(`MERGE target '${controlId}' not found in existing mappings — adding as new entry`);
+      console.warn(
+        `MERGE target '${controlId}' not found in existing mappings — adding as new entry`
+      );
       existing[controlId] = { relationship: 'related', mappings: {} };
     }
     for (const [fwKey, values] of Object.entries(frameworkKeys)) {
@@ -150,7 +174,9 @@ function applyMerges(existing, merges, newEntries) {
     }
     mergeCount++;
   }
-  console.log(`Applied ${mergeCount} MERGE entries (${mergeKeyCount} framework keys added/updated)`);
+  console.log(
+    `Applied ${mergeCount} MERGE entries (${mergeKeyCount} framework keys added/updated)`
+  );
 
   // Apply NEW entries
   let newCount = 0;
@@ -184,7 +210,10 @@ function serializeToTS(mappings) {
   // Sort all control IDs for consistent output
   const sortedIds = Object.keys(mappings).sort((a, b) => {
     // Custom sort: group by prefix, then numerically
-    return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+    return a.localeCompare(b, undefined, {
+      numeric: true,
+      sensitivity: 'base',
+    });
   });
 
   // Group by prefix for section comments
@@ -193,13 +222,13 @@ function serializeToTS(mappings) {
     'iso-2022': 'ISO 27001:2022 controls',
     'iso-2013': 'ISO 27001:2013 controls',
     'nist-csf-v2': 'NIST CSF v2.0 controls',
-    'cisv81': 'CIS Controls v8.1',
-    'soc2v2': 'SOC 2 v2 controls',
+    cisv81: 'CIS Controls v8.1',
+    soc2v2: 'SOC 2 v2 controls',
     'c5-2020': 'C5:2020 controls',
     'eu-nis2': 'EU NIS2 controls',
-    'gdpr': 'GDPR controls',
-    'mvsp': 'MVSP controls',
-    'pcidss': 'PCI DSS v4.0.1 controls',
+    gdpr: 'GDPR controls',
+    mvsp: 'MVSP controls',
+    pcidss: 'PCI DSS v4.0.1 controls',
     'iso-42001': 'ISO 42001:2023 controls',
   };
 
@@ -210,7 +239,9 @@ function serializeToTS(mappings) {
     if (prefix !== lastPrefix) {
       if (lastPrefix !== null) lines.push('');
       const label = prefixLabels[prefix] || `${prefix} controls`;
-      lines.push(`  // ─── ${label} ${'─'.repeat(Math.max(0, 50 - label.length))}──`);
+      lines.push(
+        `  // ─── ${label} ${'─'.repeat(Math.max(0, 50 - label.length))}──`
+      );
       lastPrefix = prefix;
     }
 
@@ -220,7 +251,10 @@ function serializeToTS(mappings) {
 
     // Sort framework keys
     const fwKeys = Object.keys(entry.mappings).sort((a, b) => {
-      return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+      return a.localeCompare(b, undefined, {
+        numeric: true,
+        sensitivity: 'base',
+      });
     });
 
     for (const fwKey of fwKeys) {
@@ -333,7 +367,9 @@ function main() {
   console.log('Applying merges and additions...');
   const merged = applyMerges(existing, merges, newEntries);
   const finalCount = Object.keys(merged).length;
-  console.log(`  Final count: ${finalCount} control entries (was ${existingCount})`);
+  console.log(
+    `  Final count: ${finalCount} control entries (was ${existingCount})`
+  );
 
   console.log('Serializing to TypeScript...');
   const tsContent = serializeToTS(merged);

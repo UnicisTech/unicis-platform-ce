@@ -141,9 +141,7 @@ export default function Comments({
     <div className="p-5">
       <div className="mt-[30px]">
         {task.comments
-          .sort(
-            (a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt)
-          )
+          .sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt))
           .map((comment) => (
             <Comment
               key={comment.id}

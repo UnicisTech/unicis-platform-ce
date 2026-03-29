@@ -14,13 +14,8 @@ import NotificationItem from './NotificationItem';
 
 const NotificationBell = () => {
   const { t } = useTranslation('common');
-  const {
-    notifications,
-    unreadCount,
-    markAsRead,
-    markAllRead,
-    isLoading,
-  } = useNotifications({ limit: 5 });
+  const { notifications, unreadCount, markAsRead, markAllRead, isLoading } =
+    useNotifications({ limit: 5 });
 
   const badgeLabel = unreadCount > 9 ? '9+' : String(unreadCount);
 

@@ -37,12 +37,12 @@ Provide a **public form** for data subjects (clients of our customers/teams) to 
 
 ## 3. Roles & Permissions
 
-| Role | Capabilities |
-|---|---|
-| **Requester** (public, unauthenticated) | Submit form; view read-only details via magic link; post public comments |
-| **Team OWNER / ADMIN** | View & edit erasure request; change status; reply to requester; add internal notes |
-| **Team MEMBER** | View & edit erasure request (same as task permissions) |
-| **Team AUDITOR** | Read-only access to erasure requests |
+| Role                                    | Capabilities                                                                       |
+| --------------------------------------- | ---------------------------------------------------------------------------------- |
+| **Requester** (public, unauthenticated) | Submit form; view read-only details via magic link; post public comments           |
+| **Team OWNER / ADMIN**                  | View & edit erasure request; change status; reply to requester; add internal notes |
+| **Team MEMBER**                         | View & edit erasure request (same as task permissions)                             |
+| **Team AUDITOR**                        | Read-only access to erasure requests                                               |
 
 Reuses existing `task` resource permissions from `lib/permissions.ts`. New resource `erasure_request` added with same role mapping.
 
@@ -52,23 +52,23 @@ Reuses existing `task` resource permissions from `lib/permissions.ts`. New resou
 
 ### Public (unauthenticated)
 
-| Method | Path | Description |
-|---|---|---|
-| `GET` | `/teams/:slug/gdpr` | Public erasure request form |
-| `POST` | `/api/teams/:slug/erasure-requests` | Submit a new request |
-| `GET` | `/teams/:slug/gdpr/:token` | Public status page (magic link) |
-| `POST` | `/api/erasure-requests/:token/comments` | Requester posts a comment |
+| Method | Path                                    | Description                     |
+| ------ | --------------------------------------- | ------------------------------- |
+| `GET`  | `/teams/:slug/gdpr`                     | Public erasure request form     |
+| `POST` | `/api/teams/:slug/erasure-requests`     | Submit a new request            |
+| `GET`  | `/teams/:slug/gdpr/:token`              | Public status page (magic link) |
+| `POST` | `/api/erasure-requests/:token/comments` | Requester posts a comment       |
 
 ### Internal (authenticated)
 
-| Method | Path | Description |
-|---|---|---|
-| `GET` | `/teams/:slug/privacy-requests` | Index page listing all erasure requests |
-| Task detail page | Tab: "Right to Erase" | Inline tab in existing task detail view |
-| `GET` | `/api/teams/:slug/erasure-requests` | List all team erasure requests |
-| `GET` | `/api/teams/:slug/erasure-requests/:id` | Get single request with comments |
-| `PUT` | `/api/teams/:slug/erasure-requests/:id` | Update status |
-| `POST` | `/api/teams/:slug/erasure-requests/:id/comments` | Internal comment/reply |
+| Method           | Path                                             | Description                             |
+| ---------------- | ------------------------------------------------ | --------------------------------------- |
+| `GET`            | `/teams/:slug/privacy-requests`                  | Index page listing all erasure requests |
+| Task detail page | Tab: "Right to Erase"                            | Inline tab in existing task detail view |
+| `GET`            | `/api/teams/:slug/erasure-requests`              | List all team erasure requests          |
+| `GET`            | `/api/teams/:slug/erasure-requests/:id`          | Get single request with comments        |
+| `PUT`            | `/api/teams/:slug/erasure-requests/:id`          | Update status                           |
+| `POST`           | `/api/teams/:slug/erasure-requests/:id/comments` | Internal comment/reply                  |
 
 ---
 
@@ -182,15 +182,15 @@ model Task {
 
 ### Form Fields
 
-| Field | Type | Required | Validation |
-|---|---|---|---|
-| Requester full name | `text` | Yes | min 2 chars, max 200 |
-| Requester email | `email` | Yes | Valid email format |
-| Are you the data subject or authorized agent? | `select` | Yes | `DATA_SUBJECT` or `AUTHORIZED_AGENT` |
-| Identifier type | `select` | Yes | `EMAIL`, `PHONE`, `ACCOUNT_ID`, `OTHER` |
-| Identifier value | `text` | Yes | min 1 char, max 500 |
-| Additional context | `textarea` | No | max 2000 chars |
-| Consent checkbox | `checkbox` | Yes | Must be checked |
+| Field                                         | Type       | Required | Validation                              |
+| --------------------------------------------- | ---------- | -------- | --------------------------------------- |
+| Requester full name                           | `text`     | Yes      | min 2 chars, max 200                    |
+| Requester email                               | `email`    | Yes      | Valid email format                      |
+| Are you the data subject or authorized agent? | `select`   | Yes      | `DATA_SUBJECT` or `AUTHORIZED_AGENT`    |
+| Identifier type                               | `select`   | Yes      | `EMAIL`, `PHONE`, `ACCOUNT_ID`, `OTHER` |
+| Identifier value                              | `text`     | Yes      | min 1 char, max 500                     |
+| Additional context                            | `textarea` | No       | max 2000 chars                          |
+| Consent checkbox                              | `checkbox` | Yes      | Must be checked                         |
 
 ### Zod Validation Schema
 
@@ -204,24 +204,19 @@ export const erasureRequestSchema = z.object({
     .string()
     .min(2, 'Name must be at least 2 characters')
     .max(200),
-  requesterEmail: z
-    .string()
-    .email('Please enter a valid email address'),
+  requesterEmail: z.string().email('Please enter a valid email address'),
   requesterType: z.enum(['DATA_SUBJECT', 'AUTHORIZED_AGENT']),
   subjectIdentifierType: z.enum(['EMAIL', 'PHONE', 'ACCOUNT_ID', 'OTHER']),
   subjectIdentifierValue: z
     .string()
     .min(1, 'Identifier value is required')
     .max(500),
-  justification: z
-    .string()
-    .max(2000)
-    .optional()
-    .or(z.literal('')),
-  consent: z
-    .literal(true, {
-      errorMap: () => ({ message: 'You must confirm the information is accurate' }),
+  justification: z.string().max(2000).optional().or(z.literal('')),
+  consent: z.literal(true, {
+    errorMap: () => ({
+      message: 'You must confirm the information is accurate',
     }),
+  }),
 });
 
 export type ErasureRequestFormData = z.infer<typeof erasureRequestSchema>;
@@ -244,13 +239,13 @@ NEW → IN_REVIEW → ACTION_REQUIRED ↔ IN_REVIEW → COMPLETED
 
 ### Transition Rules
 
-| From | To | Trigger |
-|---|---|---|
-| `NEW` | `IN_REVIEW` | Team member opens/reviews request |
-| `IN_REVIEW` | `ACTION_REQUIRED` | Team needs more info from requester |
-| `ACTION_REQUIRED` | `IN_REVIEW` | Requester posts a comment |
-| `IN_REVIEW` | `COMPLETED` | Team marks as completed with resolution note |
-| `IN_REVIEW` | `REJECTED` | Team rejects with reason |
+| From              | To                | Trigger                                      |
+| ----------------- | ----------------- | -------------------------------------------- |
+| `NEW`             | `IN_REVIEW`       | Team member opens/reviews request            |
+| `IN_REVIEW`       | `ACTION_REQUIRED` | Team needs more info from requester          |
+| `ACTION_REQUIRED` | `IN_REVIEW`       | Requester posts a comment                    |
+| `IN_REVIEW`       | `COMPLETED`       | Team marks as completed with resolution note |
+| `IN_REVIEW`       | `REJECTED`        | Team rejects with reason                     |
 
 ### Validation
 
@@ -387,11 +382,21 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
 import { createTask } from '@/models/task';
 import { erasureRequestSchema } from '@/lib/erasure-request/schema';
-import { generateToken, hashToken, generateShortId } from '@/lib/erasure-request/utils';
-import { sendErasureConfirmationEmail, sendErasureTeamAlertEmail } from '@/lib/email/sendErasureEmails';
+import {
+  generateToken,
+  hashToken,
+  generateShortId,
+} from '@/lib/erasure-request/utils';
+import {
+  sendErasureConfirmationEmail,
+  sendErasureTeamAlertEmail,
+} from '@/lib/email/sendErasureEmails';
 import env from '@/lib/env';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { slug } = req.query as { slug: string };
 
   const team = await prisma.team.findUnique({
@@ -427,7 +432,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const parsed = erasureRequestSchema.safeParse(req.body);
       if (!parsed.success) {
         return res.status(422).json({
-          error: { message: 'Validation failed', values: parsed.error.flatten() },
+          error: {
+            message: 'Validation failed',
+            values: parsed.error.flatten(),
+          },
         });
       }
 
@@ -441,7 +449,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         (m) => m.role === 'OWNER' || m.role === 'ADMIN'
       );
       if (!adminMember) {
-        return res.status(500).json({ error: { message: 'No team admin found' } });
+        return res
+          .status(500)
+          .json({ error: { message: 'No team admin found' } });
       }
 
       // Create Task
@@ -529,7 +539,10 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
 import { hashToken } from '@/lib/erasure-request/utils';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { token } = req.query as { token: string };
   const tokenHash = hashToken(token);
 
@@ -580,7 +593,10 @@ const commentSchema = z.object({
   body: z.string().min(1).max(5000),
 });
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).end();
@@ -641,7 +657,10 @@ import { prisma } from '@/lib/prisma';
 import { canTransition } from '@/lib/erasure-request/stateMachine';
 import { sendErasureStatusUpdateEmail } from '@/lib/email/sendErasureEmails';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== 'PUT') {
     res.setHeader('Allow', 'PUT');
     return res.status(405).end();
@@ -663,7 +682,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (!canTransition(erasureRequest.status, status)) {
     return res.status(400).json({
-      error: { message: `Cannot transition from ${erasureRequest.status} to ${status}` },
+      error: {
+        message: `Cannot transition from ${erasureRequest.status} to ${status}`,
+      },
     });
   }
 
@@ -732,7 +753,10 @@ const commentSchema = z.object({
   visibility: z.enum(['PUBLIC', 'INTERNAL']).default('INTERNAL'),
 });
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).end();
@@ -834,7 +858,9 @@ interface ConfirmationEmailParams {
   teamName: string;
 }
 
-export const sendErasureConfirmationEmail = async (params: ConfirmationEmailParams) => {
+export const sendErasureConfirmationEmail = async (
+  params: ConfirmationEmailParams
+) => {
   const { to, requesterName, shortId, magicLink, teamName } = params;
 
   await sendEmail({
@@ -853,18 +879,26 @@ export const sendErasureConfirmationEmail = async (params: ConfirmationEmailPara
 };
 
 interface TeamAlertEmailParams {
-  team: { id: string; name: string; members: Array<{ user: { email: string }; role: string }> };
+  team: {
+    id: string;
+    name: string;
+    members: Array<{ user: { email: string }; role: string }>;
+  };
   shortId: string;
   requesterName: string;
   identifierValue: string;
   taskNumber: number;
 }
 
-export const sendErasureTeamAlertEmail = async (params: TeamAlertEmailParams) => {
+export const sendErasureTeamAlertEmail = async (
+  params: TeamAlertEmailParams
+) => {
   const { team, shortId, requesterName, identifierValue, taskNumber } = params;
 
   // Notify OWNER and ADMIN members
-  const admins = team.members.filter((m) => m.role === 'OWNER' || m.role === 'ADMIN');
+  const admins = team.members.filter(
+    (m) => m.role === 'OWNER' || m.role === 'ADMIN'
+  );
 
   for (const admin of admins) {
     await sendEmail({
@@ -891,7 +925,9 @@ interface StatusUpdateEmailParams {
   message?: string;
 }
 
-export const sendErasureStatusUpdateEmail = async (params: StatusUpdateEmailParams) => {
+export const sendErasureStatusUpdateEmail = async (
+  params: StatusUpdateEmailParams
+) => {
   const { to, requesterName, shortId, newStatus, message } = params;
 
   const statusLabels: Record<string, string> = {
@@ -981,6 +1017,7 @@ pages/teams/[slug]/privacy-requests.tsx
 New component: `components/interfaces/erasure/ErasurePanel.tsx`
 
 Sections:
+
 1. **Request Summary**: Requester info, identifier, timestamps, status badge
 2. **Status Actions**: Buttons to transition status (Set In Review, Request More Info, Mark Completed, Reject)
 3. **Conversation**: Two views toggled - "Public Thread" and "Internal Notes"
@@ -1078,27 +1115,27 @@ Add to `types/base.ts` `AppEvent` type:
 
 ## 15. Security
 
-| Concern | Implementation |
-|---|---|
-| Token storage | Store SHA-256 hash only (`tokenHash`); raw token returned once |
-| Rate limiting | Limit public `POST` endpoints (e.g., 5 requests/min per IP) |
-| reCAPTCHA | Integrate existing `env.recaptcha` config on public form |
-| PII minimization | Public status page shows only requester name + identifier; hides team internals |
-| Input sanitization | Zod validation + DOMPurify for comment bodies (as used elsewhere in platform) |
-| CORS | Public API endpoints restricted to same-origin |
-| Token expiry | Magic links are valid while request is not closed (COMPLETED/REJECTED) + max 90 days |
+| Concern            | Implementation                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------ |
+| Token storage      | Store SHA-256 hash only (`tokenHash`); raw token returned once                       |
+| Rate limiting      | Limit public `POST` endpoints (e.g., 5 requests/min per IP)                          |
+| reCAPTCHA          | Integrate existing `env.recaptcha` config on public form                             |
+| PII minimization   | Public status page shows only requester name + identifier; hides team internals      |
+| Input sanitization | Zod validation + DOMPurify for comment bodies (as used elsewhere in platform)        |
+| CORS               | Public API endpoints restricted to same-origin                                       |
+| Token expiry       | Magic links are valid while request is not closed (COMPLETED/REJECTED) + max 90 days |
 
 ---
 
 ## 16. Notifications (MVP)
 
-| # | Trigger | Recipient | Content |
-|---|---|---|---|
-| 1 | Request submitted | Requester | Confirmation + magic link |
-| 2 | Request submitted | Team OWNER/ADMIN | Alert with link to Task |
-| 3 | Status changed | Requester | New status + optional message |
-| 4 | Public comment by team | Requester | Comment content |
-| 5 | Comment by requester | Team OWNER/ADMIN | Notification with comment |
+| #   | Trigger                | Recipient        | Content                       |
+| --- | ---------------------- | ---------------- | ----------------------------- |
+| 1   | Request submitted      | Requester        | Confirmation + magic link     |
+| 2   | Request submitted      | Team OWNER/ADMIN | Alert with link to Task       |
+| 3   | Status changed         | Requester        | New status + optional message |
+| 4   | Public comment by team | Requester        | Comment content               |
+| 5   | Comment by requester   | Team OWNER/ADMIN | Notification with comment     |
 
 ---
 
@@ -1116,73 +1153,73 @@ This creates the `ErasureRequest`, `ErasureRequestComment` tables and all necess
 
 ### Phase 1: Data Layer (Backend Foundation)
 
-| Step | Files | Description |
-|---|---|---|
-| 1.1 | `prisma/schema.prisma` | Add `ErasureRequest`, `ErasureRequestComment` models + enums + relations to Team & Task |
-| 1.2 | Run migration | `npx prisma migrate dev --name add_erasure_requests` |
-| 1.3 | `types/erasure.ts` | Add TypeScript interfaces |
-| 1.4 | `types/index.ts` | Re-export erasure types |
-| 1.5 | `lib/erasure-request/schema.ts` | Zod validation schema |
-| 1.6 | `lib/erasure-request/utils.ts` | Token generation, hashing, shortId |
-| 1.7 | `lib/erasure-request/stateMachine.ts` | Status transition validation |
-| 1.8 | `models/erasureRequest.ts` | Data access functions (CRUD queries) |
+| Step | Files                                 | Description                                                                             |
+| ---- | ------------------------------------- | --------------------------------------------------------------------------------------- |
+| 1.1  | `prisma/schema.prisma`                | Add `ErasureRequest`, `ErasureRequestComment` models + enums + relations to Team & Task |
+| 1.2  | Run migration                         | `npx prisma migrate dev --name add_erasure_requests`                                    |
+| 1.3  | `types/erasure.ts`                    | Add TypeScript interfaces                                                               |
+| 1.4  | `types/index.ts`                      | Re-export erasure types                                                                 |
+| 1.5  | `lib/erasure-request/schema.ts`       | Zod validation schema                                                                   |
+| 1.6  | `lib/erasure-request/utils.ts`        | Token generation, hashing, shortId                                                      |
+| 1.7  | `lib/erasure-request/stateMachine.ts` | Status transition validation                                                            |
+| 1.8  | `models/erasureRequest.ts`            | Data access functions (CRUD queries)                                                    |
 
 ### Phase 2: API Routes
 
-| Step | Files | Description |
-|---|---|---|
-| 2.1 | `pages/api/teams/[slug]/erasure-requests/index.ts` | POST (public submit) + GET (list, authenticated) |
-| 2.2 | `pages/api/teams/[slug]/erasure-requests/[id]/index.ts` | GET (detail) + PUT (update) |
-| 2.3 | `pages/api/teams/[slug]/erasure-requests/[id]/status.ts` | PUT (status transition) |
-| 2.4 | `pages/api/teams/[slug]/erasure-requests/[id]/comments.ts` | POST (internal comment) |
-| 2.5 | `pages/api/erasure-requests/[token]/index.ts` | GET (public status) |
-| 2.6 | `pages/api/erasure-requests/[token]/comments.ts` | POST (requester comment) |
+| Step | Files                                                      | Description                                      |
+| ---- | ---------------------------------------------------------- | ------------------------------------------------ |
+| 2.1  | `pages/api/teams/[slug]/erasure-requests/index.ts`         | POST (public submit) + GET (list, authenticated) |
+| 2.2  | `pages/api/teams/[slug]/erasure-requests/[id]/index.ts`    | GET (detail) + PUT (update)                      |
+| 2.3  | `pages/api/teams/[slug]/erasure-requests/[id]/status.ts`   | PUT (status transition)                          |
+| 2.4  | `pages/api/teams/[slug]/erasure-requests/[id]/comments.ts` | POST (internal comment)                          |
+| 2.5  | `pages/api/erasure-requests/[token]/index.ts`              | GET (public status)                              |
+| 2.6  | `pages/api/erasure-requests/[token]/comments.ts`           | POST (requester comment)                         |
 
 ### Phase 3: Emails
 
-| Step | Files | Description |
-|---|---|---|
-| 3.1 | `lib/email/sendErasureEmails.ts` | All 4 email functions |
+| Step | Files                            | Description           |
+| ---- | -------------------------------- | --------------------- |
+| 3.1  | `lib/email/sendErasureEmails.ts` | All 4 email functions |
 
 ### Phase 4: Frontend - Public Pages
 
-| Step | Files | Description |
-|---|---|---|
-| 4.1 | `components/interfaces/erasure/ErasurePublicForm.tsx` | Form component |
-| 4.2 | `pages/teams/[slug]/gdpr/index.tsx` | Public form page |
-| 4.3 | `components/interfaces/erasure/ErasurePublicStatus.tsx` | Status view component |
-| 4.4 | `pages/teams/[slug]/gdpr/[token].tsx` | Public status page |
+| Step | Files                                                   | Description           |
+| ---- | ------------------------------------------------------- | --------------------- |
+| 4.1  | `components/interfaces/erasure/ErasurePublicForm.tsx`   | Form component        |
+| 4.2  | `pages/teams/[slug]/gdpr/index.tsx`                     | Public form page      |
+| 4.3  | `components/interfaces/erasure/ErasurePublicStatus.tsx` | Status view component |
+| 4.4  | `pages/teams/[slug]/gdpr/[token].tsx`                   | Public status page    |
 
 ### Phase 5: Frontend - Internal UI
 
-| Step | Files | Description |
-|---|---|---|
-| 5.1 | `components/interfaces/erasure/ErasureRequestSummary.tsx` | Request detail card |
-| 5.2 | `components/interfaces/erasure/ErasureStatusActions.tsx` | Status action buttons |
-| 5.3 | `components/interfaces/erasure/ErasureConversation.tsx` | Comments thread |
-| 5.4 | `components/interfaces/erasure/ErasurePanel.tsx` | Main tab panel |
-| 5.5 | `components/interfaces/erasure/ErasureRequestsTable.tsx` | Index table |
-| 5.6 | `pages/teams/[slug]/privacy-requests.tsx` | Index page |
+| Step | Files                                                     | Description           |
+| ---- | --------------------------------------------------------- | --------------------- |
+| 5.1  | `components/interfaces/erasure/ErasureRequestSummary.tsx` | Request detail card   |
+| 5.2  | `components/interfaces/erasure/ErasureStatusActions.tsx`  | Status action buttons |
+| 5.3  | `components/interfaces/erasure/ErasureConversation.tsx`   | Comments thread       |
+| 5.4  | `components/interfaces/erasure/ErasurePanel.tsx`          | Main tab panel        |
+| 5.5  | `components/interfaces/erasure/ErasureRequestsTable.tsx`  | Index table           |
+| 5.6  | `pages/teams/[slug]/privacy-requests.tsx`                 | Index page            |
 
 ### Phase 6: Integration
 
-| Step | Files | Description |
-|---|---|---|
-| 6.1 | `lib/tasks.ts` | Add "Right to Erase" tab + `erasure_request_id` module key |
-| 6.2 | `pages/teams/[slug]/tasks/[taskNumber]/index.tsx` | Render `ErasurePanel` in new tab |
-| 6.3 | `components/shared/shell/TeamNavigation.tsx` | Add "Privacy Requests" sidebar item |
-| 6.4 | `lib/permissions.ts` | Add `erasure_request` resource |
-| 6.5 | `types/base.ts` | Add erasure AppEvent types |
-| 6.6 | `hooks/useErasureRequest.ts` | SWR hook for fetching erasure data |
+| Step | Files                                             | Description                                                |
+| ---- | ------------------------------------------------- | ---------------------------------------------------------- |
+| 6.1  | `lib/tasks.ts`                                    | Add "Right to Erase" tab + `erasure_request_id` module key |
+| 6.2  | `pages/teams/[slug]/tasks/[taskNumber]/index.tsx` | Render `ErasurePanel` in new tab                           |
+| 6.3  | `components/shared/shell/TeamNavigation.tsx`      | Add "Privacy Requests" sidebar item                        |
+| 6.4  | `lib/permissions.ts`                              | Add `erasure_request` resource                             |
+| 6.5  | `types/base.ts`                                   | Add erasure AppEvent types                                 |
+| 6.6  | `hooks/useErasureRequest.ts`                      | SWR hook for fetching erasure data                         |
 
 ### Phase 7: Polish & Security
 
-| Step | Files | Description |
-|---|---|---|
-| 7.1 | Add rate limiting middleware to public endpoints | |
-| 7.2 | Integrate reCAPTCHA on public form | |
-| 7.3 | Add i18n keys to `locales/en/common.json` | |
-| 7.4 | Write tests for API routes and state machine | |
+| Step | Files                                            | Description |
+| ---- | ------------------------------------------------ | ----------- |
+| 7.1  | Add rate limiting middleware to public endpoints |             |
+| 7.2  | Integrate reCAPTCHA on public form               |             |
+| 7.3  | Add i18n keys to `locales/en/common.json`        |             |
+| 7.4  | Write tests for API routes and state machine     |             |
 
 ---
 

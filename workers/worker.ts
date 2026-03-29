@@ -1,4 +1,5 @@
 import { run } from 'graphile-worker';
+import { Pool } from 'pg';
 
 import { crontab } from './crontab';
 import { taskList } from './tasks';
@@ -10,15 +11,17 @@ if (!connectionString) {
 }
 
 const concurrency = Number(process.env.WORKER_CONCURRENCY ?? '5');
+const pgPool = new Pool({
+  connectionString,
+  // Ensure consistent timestamps regardless of DB/server timezone.
+  options: '-c timezone=UTC',
+});
 
 run({
-  connectionString,
+  pgPool,
   taskList,
   crontab,
   concurrency: Number.isFinite(concurrency) ? concurrency : 5,
-  pgSettings: {
-    timezone: 'UTC',
-  },
 }).catch((error) => {
   console.error('[worker] Fatal error:', error);
   process.exit(1);

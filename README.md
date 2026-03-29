@@ -49,7 +49,6 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 - Payment Card Industry Data Security Standard (PCI-DSS)
 - ISO/IEC 42001:2023 - AI management systems
 
-
 ### Coming Next
 
 - EU Cyber Resilience Act (CRA)

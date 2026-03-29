@@ -24,7 +24,9 @@ const channelLabelKey: Record<keyof ChannelPrefs, string> = {
   push: 'notifications.channels.push',
 };
 
-const buildMergedPreferences = (raw: Partial<Record<NotificationType, ChannelPrefs>>) => {
+const buildMergedPreferences = (
+  raw: Partial<Record<NotificationType, ChannelPrefs>>
+) => {
   const merged = {} as Record<NotificationType, ChannelPrefs>;
 
   for (const { type } of NOTIFICATION_TYPES) {
@@ -47,9 +49,8 @@ const NotificationSettingsPage = () => {
     [preferences]
   );
 
-  const [draft, setDraft] = useState<Record<NotificationType, ChannelPrefs>>(
-    mergedPreferences
-  );
+  const [draft, setDraft] =
+    useState<Record<NotificationType, ChannelPrefs>>(mergedPreferences);
   const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
 
