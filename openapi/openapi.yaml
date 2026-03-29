@@ -1,0 +1,947 @@
+openapi: 3.0.3
+info:
+  title: Unicis Platform API
+  description: |
+    REST API for the Unicis GRC (Governance, Risk & Compliance) platform.
+
+    ## Authentication
+    All endpoints require authentication via one of:
+    - **Bearer token** — API key from team settings (`Authorization: Bearer <key>`)
+    - **Session cookie** — browser session via NextAuth
+
+    ## Response format
+    Every response uses a consistent envelope:
+    ```json
+    { "data": <payload>, "error": null }       // success
+    { "error": { "message": "..." } }          // error
+    ```
+
+    ## Roles & Permissions
+    API keys authenticate with **ADMIN** role permissions.
+    Available roles: `OWNER`, `ADMIN`, `MEMBER`, `AUDITOR`.
+  version: 0.2.2
+  contact:
+    name: Unicis Tech
+    url: https://unicis.tech
+
+servers:
+  - url: '{baseUrl}'
+    variables:
+      baseUrl:
+        default: 'http://localhost:4002'
+        description: Base URL of the Unicis Platform instance
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Tasks
+    description: Task management (issues/tickets)
+  - name: Compliance Controls (CSC)
+    description: Control assignments and framework statuses
+  - name: Risk Management (RM)
+    description: Risk assessment attachments on tasks
+  - name: Privacy Impact (PIA)
+    description: Privacy impact assessment attachments on tasks
+  - name: Record of Processing (RPA)
+    description: Record of processing activities attachments on tasks
+  - name: Transfer Impact (TIA)
+    description: Transfer impact assessment attachments on tasks
+  - name: API Keys
+    description: Manage API keys for external access
+  - name: Chatbot
+    description: AI assistant
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from team settings
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: next-auth.session-token
+      description: NextAuth session cookie (browser-based)
+
+  parameters:
+    slug:
+      name: slug
+      in: path
+      required: true
+      description: Team slug identifier
+      schema:
+        type: string
+        example: my-team
+    taskNumber:
+      name: taskNumber
+      in: path
+      required: true
+      description: Task number within the team
+      schema:
+        type: integer
+        example: 1
+    iso:
+      name: iso
+      in: path
+      required: true
+      description: ISO/framework identifier
+      schema:
+        type: string
+        enum:
+          - mvps
+          - '2013'
+          - '2022'
+          - nistcsfv2
+          - eunis2
+          - gdpr
+          - cisv81
+          - soc2v2
+          - c5_2020
+          - owasp_asvs_v5
+        example: '2022'
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+
+    EmptyDataResponse:
+      type: object
+      properties:
+        data:
+          type: object
+        error:
+          nullable: true
+
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+        taskNumber:
+          type: integer
+        teamId:
+          type: string
+        authorId:
+          type: string
+        title:
+          type: string
+        status:
+          type: string
+        duedate:
+          type: string
+        description:
+          type: string
+        properties:
+          type: object
+          description: Flexible JSON properties (controls, risk, assessments, etc.)
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+        text:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        taskId:
+          type: integer
+        createdById:
+          type: string
+        createdBy:
+          type: object
+          properties:
+            name:
+              type: string
+              nullable: true
+            email:
+              type: string
+
+    Attachment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        taskId:
+          type: integer
+        filename:
+          type: string
+        url:
+          type: string
+
+    ApiKey:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        teamId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
+        lastUsedAt:
+          type: string
+          format: date-time
+          nullable: true
+
+    CscStatus:
+      type: object
+      description: Control status for a framework control
+      properties:
+        controlId:
+          type: string
+        status:
+          type: string
+      additionalProperties: true
+
+    ChatMessage:
+      type: object
+      properties:
+        role:
+          type: string
+          enum:
+            - user
+            - assistant
+            - system
+        content:
+          type: string
+      required:
+        - role
+        - content
+
+    ChatbotResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            response:
+              type: object
+              properties:
+                role:
+                  type: string
+                  example: assistant
+                content:
+                  type: string
+
+    CreateTaskRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Task title
+        status:
+          type: string
+          description: Task status
+        duedate:
+          type: string
+          description: Due date
+        description:
+          type: string
+          description: Rich text description (HTML sanitized)
+      required:
+        - title
+        - status
+        - duedate
+
+    UpdateTaskRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          description: Fields to update
+          properties:
+            title:
+              type: string
+            status:
+              type: string
+            duedate:
+              type: string
+            description:
+              type: string
+          additionalProperties: true
+      required:
+        - data
+
+    CscOperationRequest:
+      type: object
+      properties:
+        operation:
+          type: string
+          enum:
+            - add
+            - remove
+            - change
+          description: Operation to perform on controls
+        controls:
+          type: array
+          items:
+            type: object
+          description: Array of control objects
+        ISO:
+          type: string
+          enum:
+            - mvps
+            - '2013'
+            - '2022'
+            - nistcsfv2
+            - eunis2
+            - gdpr
+            - cisv81
+            - soc2v2
+            - c5_2020
+            - owasp_asvs_v5
+          description: Framework identifier
+      required:
+        - operation
+        - controls
+        - ISO
+
+    RiskInput:
+      type: object
+      properties:
+        prevRisk:
+          type: array
+          items:
+            type: object
+          description: Previous risk assessment data
+        nextRisk:
+          type: array
+          items:
+            type: object
+          description: New risk assessment data
+      required:
+        - prevRisk
+        - nextRisk
+
+    ProcedureInput:
+      type: object
+      properties:
+        prevProcedure:
+          type: array
+          items:
+            type: object
+          description: Previous procedure data
+        nextProcedure:
+          type: array
+          items:
+            type: object
+          description: New procedure data
+      required:
+        - prevProcedure
+        - nextProcedure
+
+    CreateApiKeyRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Display name for the API key
+      required:
+        - name
+
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              message: Unauthorized
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              message: You are not allowed to perform this action
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              message: Not found
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    MethodNotAllowed:
+      description: HTTP method not allowed
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                nullable: true
+              error:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+paths:
+  # ─── Tasks ────────────────────────────────────────────────
+  /api/teams/{slug}/tasks:
+    parameters:
+      - $ref: '#/components/parameters/slug'
+
+    get:
+      operationId: listTasks
+      tags: [Tasks]
+      summary: List all tasks for a team
+      description: Returns all tasks belonging to the specified team. Requires `task:read` permission.
+      responses:
+        '200':
+          description: List of tasks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+                  error:
+                    nullable: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    post:
+      operationId: createTask
+      tags: [Tasks]
+      summary: Create a new task
+      description: Creates a new task in the team. Requires `task:create` permission. The description field is sanitized for XSS.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaskRequest'
+      responses:
+        '200':
+          description: Task created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /api/teams/{slug}/tasks/{taskNumber}:
+    parameters:
+      - $ref: '#/components/parameters/slug'
+      - $ref: '#/components/parameters/taskNumber'
+
+    get:
+      operationId: getTask
+      tags: [Tasks]
+      summary: Get a single task
+      description: Returns a task by its number within the team. Requires `task:read` permission.
+      responses:
+        '200':
+          description: Task details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Task'
+                  error:
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      operationId: updateTask
+      tags: [Tasks]
+      summary: Update a task
+      description: Updates task fields. Requires `task:update` permission. Description is sanitized for XSS.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskRequest'
+      responses:
+        '200':
+          description: Updated task
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Task'
+                  error:
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      operationId: deleteTask
+      tags: [Tasks]
+      summary: Delete a task
+      description: Permanently deletes a task. Requires `task:delete` permission.
+      responses:
+        '200':
+          description: Task deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # ─── CSC Controls on Tasks ────────────────────────────────
+  /api/teams/{slug}/tasks/{taskNumber}/csc:
+    parameters:
+      - $ref: '#/components/parameters/slug'
+      - $ref: '#/components/parameters/taskNumber'
+
+    put:
+      operationId: updateTaskControls
+      tags: [Compliance Controls (CSC)]
+      summary: Add, remove, or change controls on a task
+      description: |
+        Manages compliance control assignments for a task. Requires `task:update` permission.
+        - `add` — assign new controls
+        - `remove` — unassign controls
+        - `change` — modify an existing control assignment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CscOperationRequest'
+      responses:
+        '200':
+          description: Controls updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  # ─── CSC Framework Statuses ───────────────────────────────
+  /api/teams/{slug}/csc/{iso}:
+    parameters:
+      - $ref: '#/components/parameters/slug'
+      - $ref: '#/components/parameters/iso'
+
+    get:
+      operationId: getCscStatuses
+      tags: [Compliance Controls (CSC)]
+      summary: Get control statuses by framework
+      description: Returns all control statuses for the given ISO/framework. Requires `team:read` permission.
+      responses:
+        '200':
+          description: Control statuses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      statuses:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CscStatus'
+                  error:
+                    nullable: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  # ─── Risk Management (RM) ────────────────────────────────
+  /api/teams/{slug}/tasks/{taskNumber}/rm:
+    parameters:
+      - $ref: '#/components/parameters/slug'
+      - $ref: '#/components/parameters/taskNumber'
+
+    post:
+      operationId: saveRiskManagement
+      tags: [Risk Management (RM)]
+      summary: Save risk assessment for a task
+      description: Creates or updates the risk management assessment. Requires `task:update` permission.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RiskInput'
+      responses:
+        '200':
+          description: Risk saved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      task:
+                        $ref: '#/components/schemas/Task'
+                  error:
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    delete:
+      operationId: deleteRiskManagement
+      tags: [Risk Management (RM)]
+      summary: Delete risk assessment from a task
+      description: Removes the risk management assessment. Requires `task:update` permission.
+      responses:
+        '200':
+          description: Risk deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  # ─── Privacy Impact Assessment (PIA) ─────────────────────
+  /api/teams/{slug}/tasks/{taskNumber}/pia:
+    parameters:
+      - $ref: '#/components/parameters/slug'
+      - $ref: '#/components/parameters/taskNumber'
+
+    post:
+      operationId: savePrivacyImpact
+      tags: [Privacy Impact (PIA)]
+      summary: Save privacy impact assessment for a task
+      description: Creates or updates the privacy impact assessment. Requires `task:update` permission.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RiskInput'
+      responses:
+        '200':
+          description: PIA saved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      task:
+                        $ref: '#/components/schemas/Task'
+                  error:
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    delete:
+      operationId: deletePrivacyImpact
+      tags: [Privacy Impact (PIA)]
+      summary: Delete privacy impact assessment from a task
+      description: Removes the privacy impact assessment. Requires `task:update` permission.
+      responses:
+        '200':
+          description: PIA deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  # ─── Record of Processing Activities (RPA) ───────────────
+  /api/teams/{slug}/tasks/{taskNumber}/rpa:
+    parameters:
+      - $ref: '#/components/parameters/slug'
+      - $ref: '#/components/parameters/taskNumber'
+
+    post:
+      operationId: saveRecordOfProcessing
+      tags: [Record of Processing (RPA)]
+      summary: Save record of processing for a task
+      description: Creates or updates the record of processing activities. Requires `task:update` permission.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcedureInput'
+      responses:
+        '200':
+          description: RPA saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    delete:
+      operationId: deleteRecordOfProcessing
+      tags: [Record of Processing (RPA)]
+      summary: Delete record of processing from a task
+      description: Removes the record of processing activities. Requires `task:update` permission.
+      responses:
+        '200':
+          description: RPA deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  # ─── Transfer Impact Assessment (TIA) ────────────────────
+  /api/teams/{slug}/tasks/{taskNumber}/tia:
+    parameters:
+      - $ref: '#/components/parameters/slug'
+      - $ref: '#/components/parameters/taskNumber'
+
+    post:
+      operationId: saveTransferImpact
+      tags: [Transfer Impact (TIA)]
+      summary: Save transfer impact assessment for a task
+      description: Creates or updates the transfer impact assessment. Requires `task:update` permission.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcedureInput'
+      responses:
+        '200':
+          description: TIA saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    delete:
+      operationId: deleteTransferImpact
+      tags: [Transfer Impact (TIA)]
+      summary: Delete transfer impact assessment from a task
+      description: Removes the transfer impact assessment. Requires `task:update` permission.
+      responses:
+        '200':
+          description: TIA deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  # ─── API Keys ─────────────────────────────────────────────
+  /api/teams/{slug}/api-keys:
+    parameters:
+      - $ref: '#/components/parameters/slug'
+
+    get:
+      operationId: listApiKeys
+      tags: [API Keys]
+      summary: List API keys for a team
+      description: Returns all API keys (without the secret). Requires `team_api_key:read` permission. Only available when the API key feature is enabled.
+      responses:
+        '200':
+          description: List of API keys
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ApiKey'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    post:
+      operationId: createApiKey
+      tags: [API Keys]
+      summary: Create a new API key
+      description: Generates a new API key for the team. The raw key is returned only once in the response. Requires `team_api_key:create` permission.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApiKeyRequest'
+      responses:
+        '201':
+          description: API key created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      apiKey:
+                        type: string
+                        description: The raw API key (shown only once)
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # ─── Chatbot ──────────────────────────────────────────────
+  /api/chatbot:
+    post:
+      operationId: chatWithAssistant
+      tags: [Chatbot]
+      summary: Send messages to the AI assistant
+      description: |
+        Sends a conversation to the AI assistant and returns a response.
+        Requires an active session and a non-COMMUNITY subscription plan.
+        Currently only available via session auth (not Bearer token).
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ChatMessage'
+              minItems: 1
+      responses:
+        '200':
+          description: AI response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatbotResponse'
+        '400':
+          description: No valid messages provided
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          description: AI not available on COMMUNITY plan
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'

@@ -37,6 +37,22 @@ export const fetchApiKeys = async (teamId: string) => {
     where: {
       teamId,
     },
+    select: {
+      id: true,
+      name: true,
+      teamId: true,
+      createdAt: true,
+      updatedAt: true,
+      expiresAt: true,
+      lastUsedAt: true,
+    },
+  });
+};
+
+export const findApiKeyByHash = async (hashedKey: string) => {
+  return prisma.apiKey.findUnique({
+    where: { hashedKey },
+    include: { team: true },
   });
 };
 

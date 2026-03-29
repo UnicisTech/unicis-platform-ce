@@ -17,6 +17,9 @@
 generated
 /prisma/generated
 
+# generated API docs
+/public/openapi.json
+
 # misc
 .DS_Store
 *.pem

@@ -33,6 +33,7 @@ const NewAPIKey = ({
 
   const [name, setName] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [createdKey, setCreatedKey] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,57 +57,99 @@ const NewAPIKey = ({
 
     if (data.apiKey) {
       mutate(`/api/teams/${team.slug}/api-keys`);
-      toast.success(t('api-key-created'));
-      setCreateModalVisible(false);
+      setCreatedKey(data.apiKey);
       setName('');
     }
   };
 
+  const handleClose = () => {
+    setCreateModalVisible(false);
+    setCreatedKey(null);
+    setName('');
+  };
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast.success(t('copied-to-clipboard'));
+    } catch {
+      toast.error(t('errors.failedToCopyLink'));
+    }
+  };
+
   return (
-    <Dialog open={createModalVisible} onOpenChange={setCreateModalVisible}>
+    <Dialog open={createModalVisible} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-md">
-        <form onSubmit={handleSubmit} method="POST">
-          <DialogHeader>
-            <DialogTitle>{t('new-api-key')}</DialogTitle>
-            <DialogDescription>
-              {t('new-api-key-description')}
-            </DialogDescription>
-          </DialogHeader>
+        {createdKey ? (
+          <>
+            <DialogHeader>
+              <DialogTitle>{t('api-key-created')}</DialogTitle>
+              <DialogDescription>{t('new-api-warning')}</DialogDescription>
+            </DialogHeader>
 
-          <div className="grid gap-4 py-4">
-            <div className="grid gap-1">
-              <Label htmlFor="name">{t('name')}</Label>
-              <Input
-                id="name"
-                name="name"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="My API Key"
-                className="text-sm"
-              />
+            <div className="py-4">
+              <div className="flex items-center gap-2">
+                <code className="flex-1 text-xs bg-muted rounded p-2 break-all select-all">
+                  {createdKey}
+                </code>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => copyToClipboard(createdKey)}
+                >
+                  {t('copy-to-clipboard')}
+                </Button>
+              </div>
             </div>
-          </div>
 
-          <DialogFooter>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setCreateModalVisible(false)}
-            >
-              {t('close')}
-            </Button>
+            <DialogFooter>
+              <Button type="button" onClick={handleClose}>
+                {t('close')}
+              </Button>
+            </DialogFooter>
+          </>
+        ) : (
+          <form onSubmit={handleSubmit} method="POST">
+            <DialogHeader>
+              <DialogTitle>{t('new-api-key')}</DialogTitle>
+              <DialogDescription>
+                {t('new-api-key-description')}
+              </DialogDescription>
+            </DialogHeader>
 
-            <Button
-              type="submit"
-              disabled={submitting || !name}
-              className="ml-2"
-            >
-              {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {t('create-api-key')}
-            </Button>
-          </DialogFooter>
-        </form>
+            <div className="grid gap-4 py-4">
+              <div className="grid gap-1">
+                <Label htmlFor="name">{t('name')}</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="My API Key"
+                  className="text-sm"
+                />
+              </div>
+            </div>
+
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={handleClose}>
+                {t('close')}
+              </Button>
+
+              <Button
+                type="submit"
+                disabled={submitting || !name}
+                className="ml-2"
+              >
+                {submitting && (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                {t('create-api-key')}
+              </Button>
+            </DialogFooter>
+          </form>
+        )}
       </DialogContent>
     </Dialog>
   );

@@ -10,6 +10,7 @@ export interface MenuItem {
   active?: boolean;
   items?: Omit<MenuItem, 'icon' | 'items'>[];
   className?: string;
+  openInNewTab?: boolean;
 }
 
 export interface NavigationProps {
@@ -54,12 +55,13 @@ export const NavigationItems: React.FC<NavigationItemsProps> = ({ menus }) => (
 
 const NavigationItem: React.FC<NavigationItemProps> = ({ menu, className }) => {
   const isExternal = menu.href.startsWith('http');
+  const newTab = isExternal || menu.openInNewTab;
 
   return (
     <Link
       href={menu.href}
-      target={isExternal ? '_blank' : undefined}
-      rel={isExternal ? 'noopener noreferrer' : undefined}
+      target={newTab ? '_blank' : undefined}
+      rel={newTab ? 'noopener noreferrer' : undefined}
       className={classNames(
         'flex items-center rounded-md text-sm px-2 p-2 gap-2',
         menu.active
@@ -79,7 +81,7 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ menu, className }) => {
         />
       )}
       <span className="min-w-0 flex-1">{menu.name}</span>
-      {isExternal && (
+      {newTab && (
         <ArrowTopRightOnSquareIcon
           className="h-4 w-4 shrink-0 text-muted-foreground"
           aria-hidden="true"

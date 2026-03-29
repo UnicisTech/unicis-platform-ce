@@ -190,9 +190,20 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - [Record of Processing Activities](https://www.unicis.tech/docs/platform/using/record-processing-actitivities?mtm_campaign=GitHub)
 - [Transfer Impact Assessment](https://www.unicis.tech/docs/platform/using/transfer-impact-assessment?mtm_campaign=GitHub)
 - [Privacy Impact Assessment](https://www.unicis.tech/docs/platform/using/privacy-impact-assessment?mtm_campaign=GitHub)
-- [Cybersecurity Controls: MVSP](https://www.unicis.tech/docs/platform/using/cybersecurity-management-system?mtm_campaign=GitHub)
-- [Interactive Awareness Program](https://www.unicis.tech/docs/platform/using/awareness-program?mtm_campaign=GitHub)
+- [Cybersecurity Controls](https://www.unicis.tech/docs/platform/using/cybersecurity-management-system?mtm_campaign=GitHub)
 - [Cybersecurity Risk Management](https://www.unicis.tech/docs/platform/using/risk-management?mtm_campaign=GitHub)
+- [Interactive Awareness Program](https://www.unicis.tech/docs/platform/using/awareness-program?mtm_campaign=GitHub)
+
+### Coming Next
+
+- Right to Erasure Request Form
+- Processor Questionnaire Checklist
+- Asset Inventory Management
+- Vendor Assessment Checklist
+- Benchmark Report - Trust Center as a public compliance page
+- Vendor Report
+- Incident Management
+- Document Management / Policy Lifecycle
 
 ## 🥇 Features
 
@@ -214,6 +225,17 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - Roles and Permissions
 - Dark mode
 - Custom AI chatbot
+- Standards and Frameworks mapping
+- Mapping Matrix
+
+### Coming soon
+
+- Custom Framework Support (JSON/YAML DSL)
+- Jira Integration (bidirectional)
+- MCP Server Exposure
+- AI Questionnaire Automation
+- Continuous Control Monitoring
+- Executive Dashboards & Reporting
 
 ## Supported languages 🌐
 
