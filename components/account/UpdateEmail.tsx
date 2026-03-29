@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { defaultHeaders } from '@/lib/common';
 import type { ApiResponse, UserReturned } from 'types';
-import type { User } from '@/generated/browser';
+import type { User } from 'types';
 
 import {
   Card,

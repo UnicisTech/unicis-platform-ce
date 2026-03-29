@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Field } from '@/components/shared/atlaskit';
-import type { Task } from '@/generated/browser';
+import type { Task } from 'types';
 import { RMProcedureInterface, TaskProperties } from 'types';
 import { useTranslation } from 'next-i18next';
 import { steps } from '@/lib/rm';

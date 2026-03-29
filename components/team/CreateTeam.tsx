@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import type { Team } from '@/generated/browser';
+import type { Team } from 'types';
 import type { ApiResponse } from 'types';
 import { defaultHeaders } from '@/lib/common';
 import useTeams from 'hooks/useTeams';

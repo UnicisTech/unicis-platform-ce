@@ -1304,5 +1304,34 @@
       "low": "Low (25–49%)",
       "minimal": "Minimal (<25%)"
     }
-  }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "mark-all-read": "Mark all read",
+    "view-all": "View all notifications",
+    "none": "No notifications yet.",
+    "browser-push": "Browser push",
+    "browser-push-description": "Enable push notifications for this browser.",
+    "settings": "Notification settings",
+    "preferences-title": "Notification preferences",
+    "preferences-description": "Choose where you want to receive notifications.",
+    "type": "Type",
+    "channels": {
+      "in-app": "In-app",
+      "email": "Email",
+      "push": "Push"
+    },
+    "types": {
+      "task-due": "Task due",
+      "task-created": "Task created",
+      "task-updated": "Task updated",
+      "task-commented": "Task commented",
+      "task-deleted": "Task deleted",
+      "file-uploaded": "File uploaded"
+    },
+    "saved": "Notification preferences saved"
+  },
+  "enable": "Enable",
+  "disable": "Disable",
+  "not-supported": "Not supported"
 }

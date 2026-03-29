@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
-import { Category } from '@/generated/browser';
+import type { Category } from 'types';
 import { TeamCourseWithProgress } from 'types';
 import CourseCard from './CourseCard';
 import EmptyState from '@/components/shared/EmptyState';

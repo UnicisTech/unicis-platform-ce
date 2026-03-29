@@ -3,6 +3,7 @@ import { throwIfNoTeamAccess } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNotAllowed } from 'models/user';
 import { statuses } from '@/lib/tasks';
+import { parseDueDateInput } from '@/lib/tasks/dueDate';
 
 interface ImportTaskRow {
   title: string;
@@ -72,12 +73,13 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   let count = 0;
   for (const row of tasks) {
+    const { value: dueAt } = parseDueDateInput(row.duedate ?? '');
     await createTask({
       authorId,
       teamId,
       title: row.title.trim(),
       status: row.status,
-      duedate: row.duedate ?? '',
+      duedate: dueAt,
       description: '',
     });
     count++;

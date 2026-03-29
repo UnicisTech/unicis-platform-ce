@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'next-i18next';
 import { steps, questions } from '@/lib/tia';
 import { Field } from '@/components/shared/atlaskit';
-import type { Task } from '@/generated/browser';
+import type { Task } from 'types';
 import { TiaProcedureInterface } from 'types';
 import RiskLevel from '../RiskLevel';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';

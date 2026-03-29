@@ -1,5 +1,5 @@
 import fetcher from '@/lib/fetcher';
-import { Invitation } from '@/generated/browser';
+import type { Invitation } from 'types';
 import useSWR, { mutate } from 'swr';
 import type { ApiResponse } from 'types';
 

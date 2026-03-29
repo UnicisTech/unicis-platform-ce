@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import type { User } from '@/generated/browser';
+import type { User } from 'types';
 import type { ApiResponse } from 'types';
 import { InputWithLabel, Loading, Error } from '@/components/shared';
 import useInvitation from 'hooks/useInvitation';

@@ -4,6 +4,7 @@ import { getSession } from '@/lib/session';
 import { createTeam, getTeams, isTeamExists } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
+import { serializeForApi } from '@/lib/serialize';
 
 export default async function handler(
   req: NextApiRequest,
@@ -44,7 +45,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
   recordMetric('team.fetched');
 
-  res.status(200).json({ data: teams });
+  res.status(200).json({ data: serializeForApi(teams) });
 };
 
 // Create a team
@@ -70,5 +71,5 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   recordMetric('team.created');
 
-  res.status(200).json({ data: team });
+  res.status(200).json({ data: serializeForApi(team) });
 };

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import { TaskExtended } from 'types';
+import type { TaskExtendedDto } from 'types';
 import AttachmentsCard from './AttachmentCard';
 import { checkExtensionAndMIMEType } from '@/components/services/taskService';
 import useCanAccess from 'hooks/useCanAccess';
@@ -13,7 +13,7 @@ const Attachments = ({
   task,
   mutateTask,
 }: {
-  task: TaskExtended;
+  task: TaskExtendedDto;
   mutateTask: () => Promise<void>;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);

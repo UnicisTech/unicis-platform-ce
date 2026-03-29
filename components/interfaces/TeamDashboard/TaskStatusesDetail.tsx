@@ -1,4 +1,4 @@
-import type { Task } from '@/generated/browser';
+import type { Task } from 'types';
 import { useTranslation } from 'next-i18next';
 
 const TaskStatusesDetail = ({

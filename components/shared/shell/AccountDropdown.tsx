@@ -24,6 +24,9 @@ import {
   SunIcon,
   UserCircleIcon,
   LanguageIcon,
+  BellIcon,
+  Cog6ToothIcon,
+  RectangleStackIcon,
 } from '@heroicons/react/24/outline';
 import localeLabels from '@/lib/i18n/localeLabels';
 
@@ -57,6 +60,31 @@ const AccountDropdown: React.FC = () => {
             </div>
           </Link>
         </DropdownMenuItem>
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger className="cursor-pointer">
+            <div className="flex items-center">
+              <BellIcon className="w-5 h-5 mr-1" /> {t('notifications.title')}
+            </div>
+          </DropdownMenuSubTrigger>
+          <DropdownMenuSubContent>
+            <DropdownMenuItem asChild className="cursor-pointer">
+              <Link href="/notifications">
+                <span className="flex items-center gap-2">
+                  <RectangleStackIcon className="w-4 h-4" />
+                  {t('notifications.view-all')}
+                </span>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild className="cursor-pointer">
+              <Link href="/notifications/settings">
+                <span className="flex items-center gap-2">
+                  <Cog6ToothIcon className="w-4 h-4" />
+                  {t('notifications.settings')}
+                </span>
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
         <DropdownMenuSub>
           <DropdownMenuSubTrigger className="cursor-pointer">
             <div className="flex items-center">

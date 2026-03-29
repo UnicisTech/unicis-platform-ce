@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import toast from 'react-hot-toast';
-import type { TaskExtended } from 'types';
+import type { TaskExtendedDto } from 'types';
 import Comment from './comments/Comment';
 import CreateCommentForm from './comments/CreateCommentForm';
 import { AccessControl } from '@/components/shared/AccessControl';
@@ -16,7 +16,7 @@ export default function Comments({
   task,
   mutateTask,
 }: {
-  task: TaskExtended;
+  task: TaskExtendedDto;
   mutateTask: () => Promise<void>;
 }) {
   const { t } = useTranslation('common');
@@ -142,8 +142,7 @@ export default function Comments({
       <div className="mt-[30px]">
         {task.comments
           .sort(
-            (a, b) =>
-              Date.parse(a.createdAt as any) - Date.parse(b.createdAt as any)
+            (a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt)
           )
           .map((comment) => (
             <Comment

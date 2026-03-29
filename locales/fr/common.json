@@ -1303,5 +1303,34 @@
       "low": "Faible (25–49%)",
       "minimal": "Minimale (<25%)"
     }
-  }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "mark-all-read": "Tout marquer comme lu",
+    "view-all": "Voir toutes les notifications",
+    "none": "Aucune notification pour le moment.",
+    "browser-push": "Push navigateur",
+    "browser-push-description": "Activer les notifications push pour ce navigateur.",
+    "settings": "Paramètres des notifications",
+    "preferences-title": "Préférences de notifications",
+    "preferences-description": "Choisissez où vous souhaitez recevoir les notifications.",
+    "type": "Type",
+    "channels": {
+      "in-app": "Dans l'application",
+      "email": "E-mail",
+      "push": "Push"
+    },
+    "types": {
+      "task-due": "Tâche à échéance",
+      "task-created": "Tâche créée",
+      "task-updated": "Tâche mise à jour",
+      "task-commented": "Tâche commentée",
+      "task-deleted": "Tâche supprimée",
+      "file-uploaded": "Fichier téléversé"
+    },
+    "saved": "Préférences de notifications enregistrées"
+  },
+  "enable": "Activer",
+  "disable": "Désactiver",
+  "not-supported": "Non pris en charge"
 }

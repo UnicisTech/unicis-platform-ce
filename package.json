@@ -5,9 +5,10 @@
   "scripts": {
     "predev": "tsx scripts/generate-openapi.ts",
     "dev": "next dev --port 4002 --webpack",
-    "build": "prisma generate && prisma db push --accept-data-loss && tsx scripts/generate-openapi.ts && next build --webpack",
+    "build": "prisma generate && prisma migrate deploy && tsx scripts/generate-openapi.ts && next build --webpack",
     "generate:openapi": "tsx scripts/generate-openapi.ts",
     "start": "next start --port 4002",
+    "worker": "tsx workers/worker.ts",
     "check-types": "tsc --pretty --noEmit",
     "check-format": "prettier --check .",
     "check-lint": "eslint . --ext ts --ext tsx --ext js --quiet",
@@ -62,6 +63,7 @@
     "dotenv": "^16.4.5",
     "exceljs": "^4.4.0",
     "formidable": "^3.5.4",
+    "graphile-worker": "^0.16.6",
     "formik": "2.4.6",
     "i18next": "^23.16.8",
     "jsdom": "20.0.3",
@@ -90,6 +92,8 @@
     "react-youtube": "^10.1.0",
     "remark-gfm": "^4.0.0",
     "resend": "^6.2.0",
+    "web-push": "^3.6.7",
+    "pg": "^8.13.1",
     "svix": "^1.76.1",
     "swagger-ui-react": "^5.32.0",
     "swr": "^2.3.6",
@@ -140,7 +144,6 @@
     "prisma": "^7.4.2",
     "tailwindcss": "^4.1.10",
     "ts-node": "^10.9.2",
-    "tsx": "^4.20.6",
     "typescript": "5.4.5"
   },
   "overrides": {

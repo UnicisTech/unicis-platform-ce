@@ -6,6 +6,7 @@ import {
   getUserCourseProgress,
   saveUserCourseProgress,
 } from 'models/iap/courseProgress';
+import { serializeForApi } from '@/lib/serialize';
 
 export default async function handler(
   req: NextApiRequest,
@@ -49,7 +50,9 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const progress = await getUserCourseProgress(teamMember.id, courseId);
 
-  return res.status(200).json({ data: progress, error: null });
+  return res
+    .status(200)
+    .json({ data: serializeForApi(progress), error: null });
 };
 
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -64,5 +67,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const data = await saveUserCourseProgress(teamMember.id, courseId, answers);
 
-  return res.status(200).json({ data: { data }, error: null });
+  return res
+    .status(200)
+    .json({ data: { data: serializeForApi(data) }, error: null });
 };

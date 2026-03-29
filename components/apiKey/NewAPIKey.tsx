@@ -1,4 +1,4 @@
-import type { Team } from '@/generated/browser';
+import type { Team } from 'types';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';

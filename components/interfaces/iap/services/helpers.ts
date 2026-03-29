@@ -1,9 +1,13 @@
-import { CourseProgress, Role } from '@/generated/browser';
-import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
+import { Role } from '@/generated/browser';
+import type {
+  CourseProgress,
+  TeamCourseWithProgress,
+  TeamMemberWithUserDto,
+} from 'types';
 
 export const getCourseStatus = (
   teamCourse: TeamCourseWithProgress,
-  members: TeamMemberWithUser[]
+  members: TeamMemberWithUserDto[]
 ): 'todo' | 'inprogress' | 'done' => {
   const membersToPassCourse = members.filter(
     ({ role }) => role !== Role.AUDITOR

@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next';
 import toast from 'react-hot-toast';
 import { defaultHeaders } from '@/lib/common';
 import { availableRoles } from '@/lib/permissions';
-import type { Team, Invitation } from '@/generated/browser';
+import type { Invitation, Team } from 'types';
 import useInvitations from 'hooks/useInvitations';
 import type { ApiResponse } from 'types';
 

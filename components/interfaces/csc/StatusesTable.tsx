@@ -4,7 +4,7 @@ import StatusHeader from './StatusHeader';
 import TaskSelector from './TaskSelector';
 import { getCscControlsProp } from '@/lib/csc';
 import StatusSelector from './StatusSelector';
-import type { Task } from '@/generated/browser';
+import type { Task } from 'types';
 import usePagination from 'hooks/usePagination';
 import useCanAccess from 'hooks/useCanAccess';
 import { ISO } from 'types';

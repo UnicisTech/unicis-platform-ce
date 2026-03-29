@@ -1,4 +1,4 @@
-import { Task } from '@/generated/browser';
+import type { Task } from 'types';
 import { useEffect, useMemo, useState } from 'react';
 import type { ProcedureQueueItem, UseRpaCreationState } from 'types';
 

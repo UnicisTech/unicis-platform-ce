@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { defaultHeaders, countries } from '@/lib/common';
-import type { Team, Invitation } from '@/generated/browser';
+import type { Invitation, Team } from 'types';
 import type { ApiResponse } from 'types';
 import useInvitations from 'hooks/useInvitations';
 import {

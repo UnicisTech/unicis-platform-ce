@@ -12,7 +12,7 @@ import {
 import useTasks from 'hooks/useTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import usePagination from 'hooks/usePagination';
-import type { Task, Team } from '@/generated/browser';
+import type { Task, Team } from 'types';
 import { CreateTask } from '@/components/interfaces/Task';
 import ModuleBadge from '@/components/shared/ModuleBadge';
 import TaskFilters from '@/components/interfaces/Task/TaskFilters';
@@ -111,6 +111,12 @@ const Tasks = ({ team }: { team: Team }) => {
     } catch {
       toast.error(t('errors.requestFailed'));
     }
+  };
+
+  const formatDueDate = (value?: string | null) => {
+    if (!value) return t('no-due-date');
+    const [year, month, day] = value.split('T')[0].split('-').map(Number);
+    return new Date(year, month - 1, day).toLocaleDateString();
   };
 
   return (
@@ -213,9 +219,7 @@ const Tasks = ({ team }: { team: Team }) => {
                     </td>
                     <td className="px-4 py-2">
                       <Badge variant="outline">
-                        {task.duedate
-                          ? new Date(task.duedate).toLocaleDateString()
-                          : t('no-due-date')}
+                        {formatDueDate(task.duedate)}
                       </Badge>
                     </td>
                     <td className="px-4 py-2 text-right">

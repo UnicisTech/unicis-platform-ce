@@ -2,13 +2,12 @@ import React, { useCallback } from 'react';
 import CommentEdit from './CommentEdit';
 import CommentView from './CommentView';
 import CommentHeader from './CommentHeader';
-import type { Comment } from '@/generated/browser';
-import type { ExtendedComment } from 'types';
+import type { ExtendedCommentDto } from 'types';
 import CommentAvatar from './CommentAvatar';
 
 interface CommentProps {
-  comment: ExtendedComment;
   slug?: string;
+  comment: ExtendedCommentDto;
   commentToEdit: number | null;
   setCommentToEdit: React.Dispatch<React.SetStateAction<number | null>>;
   updateComment: (text: string, id: number) => Promise<void>;

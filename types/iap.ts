@@ -1,9 +1,5 @@
-import {
-  CourseContentType,
-  CourseProgress,
-  TeamCourse,
-} from '@/generated/browser';
-import { Course } from '@/generated/browser';
+import { CourseContentType } from '@/generated/browser';
+import type { Course, CourseProgress, TeamCourse } from './dto';
 
 export type TeamIapProperties = {
   iap_categories?: string[];

@@ -8,7 +8,7 @@ import {
   DialogFooter,
 } from '@/components/shadcn/ui/dialog';
 import { Button } from '@/components/shadcn/ui/button';
-import type { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
+import type { TeamCourseWithProgress, TeamMemberWithUserDto } from 'types';
 import { countCourseAnswers } from '@/lib/iap';
 import { StatusBadge } from '@/components/shared';
 import StatusResultsChart from './StatusResultsChart';
@@ -16,7 +16,7 @@ import { findMemberProgressInTeamCourse } from '../services/helpers';
 
 interface StatusResultsProps {
   teamCourse: TeamCourseWithProgress;
-  members: TeamMemberWithUser[];
+  members: TeamMemberWithUserDto[];
   visible: boolean;
   setVisible: (visible: boolean) => void;
 }

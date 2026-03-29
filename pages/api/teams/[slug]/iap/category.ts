@@ -6,6 +6,7 @@ import {
   createCategory,
   getAvailableCategoriesForTeam,
 } from 'models/iap/category';
+import { serializeForApi } from '@/lib/serialize';
 
 export default async function handler(
   req: NextApiRequest,
@@ -47,7 +48,9 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const categories = await getAvailableCategoriesForTeam(team.id);
 
-  return res.status(200).json({ data: categories, error: null });
+  return res
+    .status(200)
+    .json({ data: serializeForApi(categories), error: null });
 };
 
 // Create new category
@@ -60,5 +63,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     teamId: teamMember.team.id,
   });
 
-  return res.status(200).json({ data: category, error: null });
+  return res
+    .status(200)
+    .json({ data: serializeForApi(category), error: null });
 };

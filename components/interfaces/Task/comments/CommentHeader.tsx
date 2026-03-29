@@ -3,7 +3,7 @@ import { formatDate } from '@/lib/tasks';
 
 interface CommentHeaderProps {
   createdByName: string;
-  createdAt: Date;
+  createdAt: string;
 }
 
 const CommentHeader = ({ createdByName, createdAt }: CommentHeaderProps) => (

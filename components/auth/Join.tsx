@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { defaultHeaders, validatePassword } from '@/lib/common';
 import type { ApiResponse } from 'types';
-import type { User } from '@/generated/browser';
+import type { User } from 'types';
 
 import { Label } from '@/components/shadcn/ui/label';
 import { Input } from '@/components/shadcn/ui/input';

@@ -9,7 +9,7 @@ import {
   Image,
 } from '@react-pdf/renderer';
 import { Button } from '@/components/shadcn/ui/button';
-import { Course } from '@/generated/browser';
+import type { Course } from 'types';
 import { useTranslation } from 'next-i18next';
 
 interface CertificateProps {

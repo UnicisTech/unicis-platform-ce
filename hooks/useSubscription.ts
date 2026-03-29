@@ -1,5 +1,6 @@
 import { SubscriptionPermissions } from '@/lib/subscriptions';
-import { Subscription, SubscriptionStatus, Plan } from '@/generated/browser';
+import { SubscriptionStatus, Plan } from '@/generated/browser';
+import type { Subscription } from 'types';
 
 const params: SubscriptionPermissions = {
   COMMUNITY: {

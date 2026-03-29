@@ -1,4 +1,4 @@
-import type { Task } from '@/generated/browser';
+import type { Task } from './dto';
 import type { Session } from 'next-auth';
 import type { Diff } from './base';
 

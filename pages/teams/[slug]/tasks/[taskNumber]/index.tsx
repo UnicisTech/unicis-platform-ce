@@ -26,7 +26,7 @@ import useTask from 'hooks/useTask';
 import useTeam from 'hooks/useTeam';
 import useCanAccess from 'hooks/useCanAccess';
 import useISO from 'hooks/useISO';
-import { Team } from '@/generated/browser';
+import type { Team } from 'types';
 import {
   TiaAuditLogs,
   TiaPanel,
@@ -88,6 +88,8 @@ const TaskById = () => {
     slug as string,
     taskNumber as string
   );
+
+  console.log('task', task)
   const { ISO } = useISO(team);
   const rpaState = useRpaCreation(task);
 

@@ -1,4 +1,4 @@
-import type { User } from '@/generated/browser';
+import type { User } from 'types';
 import UploadAvatar from './UploadAvatar';
 import UpdateName from './UpdateName';
 import UpdateEmail from './UpdateEmail';

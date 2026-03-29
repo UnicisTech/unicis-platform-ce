@@ -5,6 +5,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
 import env from '@/lib/env';
 import { ApiError } from '@/lib/errors';
+import { serializeForApi } from '@/lib/serialize';
 
 export default async function handler(
   req: NextApiRequest,
@@ -47,7 +48,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
   recordMetric('apikey.fetched');
 
-  res.json({ data: apiKeys });
+  res.json({ data: serializeForApi(apiKeys) });
 };
 
 // Create an API key

@@ -1,8 +1,7 @@
 import React from 'react';
 import { X } from 'lucide-react';
 import { useTranslation } from 'next-i18next';
-import type { Task } from '@/generated/browser';
-import type { ISO } from 'types';
+import type { ISO, Task } from 'types';
 import { isoValueToLabel } from '@/lib/csc/csc-frameworks';
 import { getFrameworkMappings } from '@/lib/csc/framework-mapping-utils';
 import '@/lib/csc/framework-mappings';

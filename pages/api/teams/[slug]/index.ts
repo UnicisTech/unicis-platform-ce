@@ -10,6 +10,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
 import { validateDomain } from '@/lib/common';
 import { ApiError } from '@/lib/errors';
+import { serializeForApi } from '@/lib/serialize';
 
 export default async function handler(
   req: NextApiRequest,
@@ -51,7 +52,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
   recordMetric('team.fetched');
 
-  res.status(200).json({ data: team });
+  res.status(200).json({ data: serializeForApi(team) });
 };
 
 // Update a team
@@ -81,7 +82,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
 
   recordMetric('team.updated');
 
-  res.status(200).json({ data: updatedTeam });
+  res.status(200).json({ data: serializeForApi(updatedTeam) });
 };
 
 // Delete a team

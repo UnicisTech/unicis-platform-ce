@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { WithLoadingAndError, EmptyState } from '@/components/shared';
-import { Team } from '@/generated/browser';
+import type { Team } from 'types';
 import useWebhooks from 'hooks/useWebhooks';
 import toast from 'react-hot-toast';
 import type { EndpointOut } from 'svix';
@@ -34,6 +34,8 @@ const Webhooks = ({ team }: { team: Team }) => {
   const { isLoading, isError, webhooks, mutateWebhooks } = useWebhooks(
     team.slug
   );
+
+  console.log('webhooks', webhooks)
 
   const deleteWebhook = async (webhook: EndpointOut | null) => {
     if (!webhook) return;

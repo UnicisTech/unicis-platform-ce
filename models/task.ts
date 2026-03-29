@@ -6,7 +6,7 @@ export const createTask = async (param: {
   teamId: string;
   title: string;
   status: string;
-  duedate: string;
+  duedate: Date | null;
   description: string;
 }) => {
   const { authorId, teamId, title, status, duedate, description } = param;

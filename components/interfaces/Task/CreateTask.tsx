@@ -15,7 +15,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/shadcn/ui/dialog';
-import { Team } from '@/generated/browser';
+import type { Team } from 'types';
 import { Button } from '@/components/shadcn/ui/button';
 import { statuses } from '@/lib/tasks';
 import { getCurrentStringDate } from '@/components/services/taskService';
@@ -83,7 +83,7 @@ const CreateTask = ({
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         ...values,
-        duedate: values.duedate.toISOString().split('T')[0],
+        duedate: format(values.duedate, 'yyyy-MM-dd'),
       }),
     });
 

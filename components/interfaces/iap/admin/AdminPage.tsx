@@ -2,8 +2,12 @@ import React, { useCallback, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import useCanAccess from 'hooks/useCanAccess';
-import { Category, Team } from '@/generated/browser';
-import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
+import type {
+  Category,
+  Team,
+  TeamCourseWithProgress,
+  TeamMemberWithUserDto,
+} from 'types';
 import {
   CompletionResults,
   CoursesTable,
@@ -19,7 +23,7 @@ interface IapDashboardProps {
   teamCourses: TeamCourseWithProgress[];
   team: Team;
   teams: Team[];
-  members: TeamMemberWithUser[];
+  members: TeamMemberWithUserDto[];
   mutateIap: () => Promise<void>;
 }
 

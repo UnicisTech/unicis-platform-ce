@@ -4,6 +4,7 @@ import { throwIfNotAllowed } from 'models/user';
 import { CourseFormData } from 'types';
 import { isPrismaError } from '@/lib/errors';
 import { createCourse, getTeamCourses } from 'models/iap/course';
+import { serializeForApi } from '@/lib/serialize';
 
 export default async function handler(
   req: NextApiRequest,
@@ -54,7 +55,9 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
     isAdminAccess
   );
 
-  return res.status(200).json({ data: teamCourses, error: null });
+  return res
+    .status(200)
+    .json({ data: serializeForApi(teamCourses), error: null });
 };
 
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -89,5 +92,8 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     questions,
   });
 
-  return res.status(200).json({ data: { createdCourse }, error: null });
+  return res.status(200).json({
+    data: { createdCourse: serializeForApi(createdCourse) },
+    error: null,
+  });
 };

@@ -94,7 +94,8 @@ export type AppEvent =
   | 'task.created'
   | 'task.updated'
   | 'task.commented'
-  | 'task.deleted';
+  | 'task.deleted'
+  | 'task.due';
 
 export type AUTH_PROVIDER =
   | 'github'

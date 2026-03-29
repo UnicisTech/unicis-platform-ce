@@ -1,4 +1,4 @@
-import type { Category } from '@/generated/browser';
+import type { Category } from 'types';
 import fetcher from '@/lib/fetcher';
 import { useRouter } from 'next/router';
 import useSWR, { mutate } from 'swr';
