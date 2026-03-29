@@ -8,6 +8,7 @@ import CommentAvatar from './CommentAvatar';
 
 interface CommentProps {
   comment: ExtendedComment;
+  slug?: string;
   commentToEdit: number | null;
   setCommentToEdit: React.Dispatch<React.SetStateAction<number | null>>;
   updateComment: (text: string, id: number) => Promise<void>;
@@ -16,6 +17,7 @@ interface CommentProps {
 
 const Comment = ({
   comment,
+  slug,
   commentToEdit,
   setCommentToEdit,
   updateComment,
@@ -53,6 +55,7 @@ const Comment = ({
           ) : (
             <CommentView
               comment={comment}
+              slug={slug}
               activateEditForComment={handleActivateEditMode}
               deleteComment={deleteComment}
             />

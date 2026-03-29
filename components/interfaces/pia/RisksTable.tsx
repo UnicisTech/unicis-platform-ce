@@ -41,7 +41,7 @@ const RisksTable = ({
   editHandler: (task: TaskWithPiaRisk) => void;
   deleteHandler: (task: TaskWithPiaRisk) => void;
 }) => {
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
   const { t } = useTranslation('common');
   const {
     currentPage,

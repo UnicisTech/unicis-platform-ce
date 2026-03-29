@@ -12,10 +12,10 @@ import { Button } from '@/components/shadcn/ui/button';
 import RmAnalysis from '../TeamDashboard/RmAnalysis';
 
 const Dashboard = () => {
-  const { canAccess } = useCanAccess();
   const { t } = useTranslation('common');
   const router = useRouter();
   const { slug } = router.query;
+  const { canAccess } = useCanAccess(slug as string);
   const { tasks, mutateTasks } = useTeamTasks(slug as string);
   //TODO: setPerPage
   const [perPage] = useState<number>(10);

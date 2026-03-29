@@ -34,8 +34,8 @@ const Events: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({
   teamFeatures,
 }) => {
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
   const { isLoading, isError, team } = useTeam();
+  const { canAccess } = useCanAccess(team?.slug);
 
   if (isLoading) {
     return <Loading />;

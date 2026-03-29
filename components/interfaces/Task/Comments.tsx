@@ -21,7 +21,8 @@ export default function Comments({
 }) {
   const { t } = useTranslation('common');
   const router = useRouter();
-  const { slug, taskNumber } = router.query;
+  const { slug: slugQuery, taskNumber } = router.query;
+  const slug = Array.isArray(slugQuery) ? slugQuery[0] : slugQuery;
   const [commentToEdit, setCommentToEdit] = useState<number | null>(null);
   const [commentToDelete, setCommentToDelete] = useState<number | null>(null);
   const [confirmationDialogVisible, setConfirmationDialogVisible] =
@@ -148,6 +149,7 @@ export default function Comments({
             <Comment
               key={comment.id}
               comment={comment}
+              slug={slug}
               commentToEdit={commentToEdit}
               setCommentToEdit={setCommentToEdit}
               updateComment={handleUpdateComment}
@@ -155,7 +157,7 @@ export default function Comments({
             />
           ))}
       </div>
-      <AccessControl resource="task" actions={['update']}>
+      <AccessControl resource="task" actions={['update']} slug={slug}>
         <div className="mt-4">
           <CreateCommentForm handleCreate={handleCreateComment} />
         </div>

@@ -12,10 +12,10 @@ import { Button } from '@/components/shadcn/ui/button';
 import { PiaAnalysis } from '../TeamDashboard';
 
 const Dashboard = () => {
-  const { canAccess, isLoading } = useCanAccess();
   const { t } = useTranslation('common');
   const router = useRouter();
   const { slug } = router.query;
+  const { canAccess, isLoading } = useCanAccess(slug as string);
   const { tasks, mutateTasks } = useTeamTasks(slug as string);
   //TODO: setPerPage
   const [perPage, setPerPage] = useState<number>(10);

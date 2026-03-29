@@ -34,7 +34,7 @@ const TiaTable = ({
   deleteHandler: (task: TaskWithTiaProcedure) => void;
 }) => {
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
   const {
     currentPage,
     totalPages,

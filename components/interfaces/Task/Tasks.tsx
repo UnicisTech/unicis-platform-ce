@@ -50,7 +50,7 @@ const Tasks = ({ team }: { team: Team }) => {
   const [selectedModules, setSelectedModules] = useState<string[]>([]);
   const [perPage, setPerPage] = useState<number>(10);
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(team.slug);
 
   const filteredTasks = tasks?.filter((task) => {
     const statusMatch =

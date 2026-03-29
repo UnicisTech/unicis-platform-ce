@@ -24,7 +24,7 @@ import { Button } from '../shadcn/ui/button';
 const Members = ({ team }: { team: Team }) => {
   const { data: session } = useSession();
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(team.slug);
   const [visible, setVisible] = useState(false);
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [confirmationDialogVisible, setConfirmationDialogVisible] =

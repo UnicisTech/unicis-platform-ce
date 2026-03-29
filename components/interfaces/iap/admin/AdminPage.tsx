@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import useCanAccess from 'hooks/useCanAccess';
 import { Category, Team } from '@/generated/browser';
 import { TeamCourseWithProgress, TeamMemberWithUser } from 'types';
@@ -33,9 +32,7 @@ const AdminPage = ({
   mutateIap,
 }: IapDashboardProps) => {
   const { t } = useTranslation('common');
-  const router = useRouter();
-  const { slug } = router.query;
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(team.slug);
   const [isCreateCategoryOpen, setIsCreateCategoryOpen] = useState(false);
   const [isCreateCourseOpen, setIsCreateCourseOpen] = useState(false);
   const [isDeleteCourseOpen, setIsDeleteCourseOpen] = useState(false);
@@ -88,7 +85,7 @@ const AdminPage = ({
 
     try {
       const res = await fetch(
-        `/api/teams/${slug}/iap/course/${courseToDelete.id}`,
+        `/api/teams/${team.slug}/iap/course/${courseToDelete.id}`,
         {
           method: 'DELETE',
         }
@@ -103,7 +100,7 @@ const AdminPage = ({
     } catch {
       toast.error(t('errors.somethingWentWrong'));
     }
-  }, [slug, courseToDelete, mutateIap, t]);
+  }, [team.slug, courseToDelete, mutateIap, t]);
 
   return (
     <>
@@ -144,6 +141,7 @@ const AdminPage = ({
         </div>
       </div>
       <CoursesTable
+        slug={team.slug}
         teamCourses={teamCourses}
         members={members}
         categories={categories}

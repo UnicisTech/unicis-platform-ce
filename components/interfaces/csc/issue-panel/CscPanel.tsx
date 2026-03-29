@@ -28,7 +28,7 @@ const CscPanel = ({
 }) => {
   const slug = team.slug;
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
 
   const [activeTab, setActiveTab] = useState<ISO>(cscFrameworks[0]);
   const { statuses, mutateStatuses } = useCscStatuses(slug, activeTab);

@@ -18,7 +18,7 @@ interface NavigationItemsProps extends NavigationProps {
 
 const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
   const relativePath = activePathname?.slice(`/teams/${slug}`.length) || '';
   const menus: (MenuItem | null)[] = [
     {

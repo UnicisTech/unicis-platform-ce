@@ -3,7 +3,6 @@ import { defaultHeaders } from '@/lib/common';
 import { Team } from '@/generated/browser';
 import useTeams from 'hooks/useTeams';
 import { useTranslation } from 'next-i18next';
-import useCanAccess from 'hooks/useCanAccess';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -17,7 +16,6 @@ import { Button } from '../shadcn/ui/button';
 const Teams = () => {
   const router = useRouter();
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
 
   const [team, setTeam] = useState<Team | null>(null);
   const { isLoading, isError, teams, mutateTeams } = useTeams();
@@ -30,6 +28,20 @@ const Teams = () => {
     () => Boolean(newTeam) || createTeamVisible,
     [newTeam, createTeamVisible]
   );
+  const setCreateTeamOpen = (open: boolean) => {
+    setCreateTeamVisible(open);
+    if (!open && newTeam) {
+      const nextQuery = { ...router.query };
+      delete nextQuery.newTeam;
+      router.replace(
+        { pathname: router.pathname, query: nextQuery },
+        undefined,
+        {
+          shallow: true,
+        }
+      );
+    }
+  };
 
   const leaveTeam = async (team: Team) => {
     const response = await fetch(`/api/teams/${team.slug}/members`, {
@@ -61,11 +73,9 @@ const Teams = () => {
                 {t('team-listed')}
               </p>
             </div>
-            {canAccess('team', ['create']) && (
-              <Button onClick={() => setCreateTeamVisible((value) => !value)}>
-                {t('create-team')}
-              </Button>
-            )}
+            <Button onClick={() => setCreateTeamOpen(!isCreateTeamVisible)}>
+              {t('create-team')}
+            </Button>
           </div>
           <table className="w-full min-w-full divide-y divide-border text-sm">
             <thead className="bg-muted">
@@ -126,7 +136,7 @@ const Teams = () => {
           </ConfirmationDialog>
           <CreateTeam
             visible={isCreateTeamVisible}
-            setVisible={setCreateTeamVisible}
+            setVisible={setCreateTeamOpen}
           />
         </div>
       </WithLoadingAndError>

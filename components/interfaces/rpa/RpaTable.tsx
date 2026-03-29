@@ -23,7 +23,7 @@ const RpaTable = ({
   editHandler: (task: TaskWithRpaProcedure) => void;
   deleteHandler: (task: TaskWithRpaProcedure) => void;
 }) => {
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
   const { t } = useTranslation('common');
   const {
     currentPage,
@@ -42,8 +42,6 @@ const RpaTable = ({
   if (isError) {
     return <Error message={isError?.message} />;
   }
-
-  // console.log('rpa tasks', tasks.sort((a,b) => a.properties.rpa_audit_logs?.length - b.properties.rpa_audit_logs?.length))
 
   return (
     <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
