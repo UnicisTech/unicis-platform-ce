@@ -1,5 +1,6 @@
 import env from '@/lib/env';
 import { sendEmail } from '@/lib/email/sendEmail';
+import { JSDOM } from 'jsdom';
 
 export type EmailPayload = {
   to: string;
@@ -8,13 +9,13 @@ export type EmailPayload = {
   text?: string;
 };
 
-const escapeHtml = (value: string) =>
-  value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+const escapeHtml = (value: string) => {
+  const dom = new JSDOM('');
+  const textNode = dom.window.document.createTextNode(value);
+  const container = dom.window.document.createElement('div');
+  container.appendChild(textNode);
+  return container.innerHTML;
+};
 
 export const buildNotificationEmail = (payload: {
   title: string;
