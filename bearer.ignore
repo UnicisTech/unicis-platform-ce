@@ -1,0 +1,14 @@
+{
+  "6ee20877a689ae825aef5ee0aed34d39_0": {
+    "author": "Predrag Tasevski",
+    "comment": "This is an env example no password",
+    "false_positive": true,
+    "ignored_at": "2026-03-30T15:16:58Z"
+  },
+  "bd7dd0a2fb627479e0e72646ff3890fe_0": {
+    "author": "Predrag Tasevski",
+    "comment": "this is an docker composer env example no password visible",
+    "false_positive": true,
+    "ignored_at": "2026-03-30T15:17:36Z"
+  }
+}
