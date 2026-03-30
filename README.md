@@ -35,6 +35,9 @@ Please star ⭐ the repo if you want us to continue developing and improving the
   <img src="https://www.unicis.tech/img/frameworks/unicis-cis.svg" alt="Unicis CIS" height="60" style="margin-left: 10px;">
   <img src="https://www.unicis.tech/img/frameworks/unicis-c5.svg" alt="Unicis C5" height="60" style="margin-left: 10px;">
   <img src="https://www.unicis.tech/img/frameworks/unicis-soc2.svg" alt="Unicis SOC2 Type II" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/img/frameworks/unicis-owasp-asvs.svg" alt="OWASP ASVS" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/img/frameworks/unicis-pci-dss.svg" alt="PCI DSS" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/img/frameworks/unicis-iso42k.svg" alt="ISO/IEC 42001" height="60" style="margin-left: 10px;">
 </p>
 
 - [General Data Protection Regulation - GDPR](https://www.unicis.tech/frameworks/gdpr?mtm_campaign=GitHub%20readme)
@@ -45,9 +48,9 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 - [CIS Critical Security Controls Version 8.1](https://www.unicis.tech/frameworks/cis?mtm_campaign=GitHub%20readme)
 - [Criteria Catalogue C5:2020](https://www.unicis.tech/frameworks/c5?mtm_campaign=GitHub%20readme)
 - [SOC2 Type II - System and Organization Controls](https://www.unicis.tech/frameworks/soc?mtm_campaign=GitHub%20readme)
-- [OWASP Application Security Verification Standard (ASVS)](https://www.unicis.tech/frameworks/owasp-asvs?mtm_campaign=GitHub%20readme)
-- Payment Card Industry Data Security Standard (PCI-DSS)
-- ISO/IEC 42001:2023 - AI management systems
+- [OWASP Application Security Verification Standard (ASVS) v5](https://www.unicis.tech/frameworks/owasp-asvs?mtm_campaign=GitHub%20readme)
+- [Payment Card Industry Data Security Standard (PCI DSS v4.0.1)](https://www.unicis.tech/frameworks/pci-dss?mtm_campaign=GitHub%20readme)
+- [ISO/IEC 42001:2023 — AI Management System](https://www.unicis.tech/frameworks/iso42001?mtm_campaign=GitHub%20readme)
 
 ### Coming Next
 
@@ -67,7 +70,8 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 
 - [SaaS-Starter-Kit](https://github.com/boxyhq/saas-starter-kit/)
 - [Next.js](https://nextjs.org)
-- [Tailwind CSS](https://tailwindcss.com) and [Atlaskit](https://atlaskit.atlassian.com/)
+- [Tailwind CSS v4](https://tailwindcss.com) and [daisyUI v5](https://daisyui.com)
+- [Shadcn](https://ui.shadcn.com)
 - [Postgres](https://www.postgresql.org)
 - [React](https://reactjs.org)
 - [Prisma](https://www.prisma.io)
@@ -77,6 +81,8 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 - [Retraced](https://github.com/retracedhq/retraced) (Provides Audit Logs Service)
 - Endpoints collection (Provided by [Osquery](https://osquery.io/))
 - [Resend](https://resend.com/) (Email delivery)
+- [graphile-worker](https://worker.graphile.org/) (Background job queue for notification delivery)
+- [OpenAPI 3.0 / Swagger UI](https://swagger.io/) (REST API documentation at `/api-docs`)
 - [Bearer](https://github.com/Bearer/bearer) (Code security scanning tool (SAST))
 
 ## 🚀 Deployment
@@ -92,10 +98,13 @@ Please follow these simple steps to get a local copy up and running.
 
 ### Prerequisites
 
-- Node.js (Version: >=18.x)
+- Node.js (Version: >=20.x)
 - PostgreSQL
 - NPM
 - Docker compose
+
+> [!NOTE]
+> To enable web push notifications, set the `NEXT_PUBLIC_VAPID_PUBLIC_KEY` and `VAPID_PRIVATE_KEY` environment variables in your `.env` file. Generate a key pair with `npx web-push generate-vapid-keys`.
 
 ### Development
 
@@ -192,9 +201,11 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - [Record of Processing Activities](https://www.unicis.tech/docs/platform/using/record-processing-actitivities?mtm_campaign=GitHub)
 - [Transfer Impact Assessment](https://www.unicis.tech/docs/platform/using/transfer-impact-assessment?mtm_campaign=GitHub)
 - [Privacy Impact Assessment](https://www.unicis.tech/docs/platform/using/privacy-impact-assessment?mtm_campaign=GitHub)
-- [Cybersecurity Controls](https://www.unicis.tech/docs/platform/using/cybersecurity-management-system?mtm_campaign=GitHub)
+- [Cybersecurity Controls](https://www.unicis.tech/docs/platform/using/cybersecurity-management-system?mtm_campaign=GitHub) — including export/import of Statement of Applicability (SoA) in HTML, PDF, and Excel
 - [Cybersecurity Risk Management](https://www.unicis.tech/docs/platform/using/risk-management?mtm_campaign=GitHub)
 - [Interactive Awareness Program](https://www.unicis.tech/docs/platform/using/awareness-program?mtm_campaign=GitHub)
+- [REST API](https://www.unicis.tech/docs/platform?mtm_campaign=GitHub) — OpenAPI 3.0 spec with Swagger UI at `/api-docs`
+- [Notifications](https://www.unicis.tech/docs/platform/using/settings?mtm_campaign=GitHub#notifications) — In-app, email, and web push
 
 ### Coming Next
 
@@ -221,7 +232,8 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - Invite users to the team
 - Manage team members
 - Update team settings
-- Webhooks & Events
+- Webhooks & Events (task.created, task.commented, task.updated, task.deleted, task.due_date, file.uploaded)
+- Notifications — in-app bell, email, and web push; per-user channel preferences
 - Internationalization (see supporting languages below)
 - Audit logs
 - Roles and Permissions
@@ -229,7 +241,9 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - Custom AI chatbot
 - Standards and Frameworks mapping
 - Mapping Matrix
-- REST API Documentation
+- Export / import Statement of Applicability (SoA) — HTML, PDF, Excel
+- REST API — OpenAPI 3.0 spec, Swagger UI at `/api-docs`
+- API Key Bearer Token authentication
 
 ### Coming soon
 
