@@ -19,7 +19,30 @@ The information about Unicis Platform releases and changes is listed in order be
 
 *Release date: 2026-03-31*
 
-TBD
+- Notifications:
+  - In-app notification bell with real-time unread count
+  - Email and web push notification channels
+  - Per-user notification preferences
+- REST API:
+  - OpenAPI 3.0 specification (Swagger UI available at /api-docs)
+  - API Key Bearer Token authentication — generate keys in Team Settings
+  - Consistent JSON response envelope: { "data": ..., "error": null }
+  - Endpoints covering Tasks, Cybersecurity Controls (CSC), Risk Management, PIA, RPA, TIA, API Keys, and AI Chatbot
+- New Frameworks:
+  - Added OWASP ASVS v5 — Application Security Verification Standard
+  - Added PCI DSS v4.0.1 — Payment Card Industry Data Security Standard
+  - Added ISO/IEC 42001 — AI Management System Standard
+- Tasks:
+  - Added task.due_date webhook event — triggers when a due date is set or changed on a task
+  - Notifications now cover: Task due, Task created, Task updated, Task commented, Task deleted, and File uploaded — each configurable per channel (in-app, email, push)
+- Security:
+  - Bearer token verification: expiration checks and team-scoped access
+  - SBOM (Software Bill of Materials) generated and published
+  - Bearer SAST scan — vulnerabilities reviewed and resolved
+  - npm audit fix applied
+- Fixes:
+  - Fixed Team Create button missing
+  - Fixed Billing modal: country (en) key returning object instead of string
 
 ## [Controls Mapping] 2026-03-07
 
