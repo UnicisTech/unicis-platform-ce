@@ -51,6 +51,8 @@ tags:
     description: Manage API keys for external access
   - name: Chatbot
     description: AI assistant
+  - name: Notifications
+    description: In-app notifications, read state, preferences, and push subscriptions
 
 components:
   securitySchemes:
@@ -104,6 +106,74 @@ components:
         example: '2022'
 
   schemas:
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          description: Notification type identifier
+        title:
+          type: string
+        body:
+          type: string
+        link:
+          type: string
+          nullable: true
+        isRead:
+          type: boolean
+        readAt:
+          type: string
+          format: date-time
+          nullable: true
+        metadata:
+          type: object
+          nullable: true
+        dedupeKey:
+          type: string
+          nullable: true
+        recipientId:
+          type: string
+        teamId:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    NotificationListResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            notifications:
+              type: array
+              items:
+                $ref: '#/components/schemas/Notification'
+            total:
+              type: integer
+              description: Total matching notifications (for pagination)
+            unreadCount:
+              type: integer
+              description: Total unread notifications for the user
+            page:
+              type: integer
+        error:
+          nullable: true
+
+    NotificationPreferences:
+      type: object
+      description: Key/value map of per-channel notification preferences
+      additionalProperties: true
+      example:
+        email: true
+        push: false
+
     ErrorResponse:
       type: object
       properties:
@@ -949,3 +1019,251 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+
+  /api/notifications:
+    get:
+      tags:
+        - Notifications
+      summary: List notifications
+      description: Returns paginated notifications for the authenticated user. Hidden notifications (metadata.hidden=true) are excluded.
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: page
+          in: query
+          description: Page number (1-based)
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+        - name: limit
+          in: query
+          description: Items per page (max 100)
+          schema:
+            type: integer
+            default: 20
+            minimum: 1
+            maximum: 100
+        - name: unreadOnly
+          in: query
+          description: When `true`, only returns unread notifications
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Paginated notification list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /api/notifications/{id}/read:
+    patch:
+      tags:
+        - Notifications
+      summary: Mark notification as read
+      description: Marks a single notification as read. The notification must belong to the authenticated user.
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Notification ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Notification marked as read
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Notification not found or does not belong to the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/notifications/mark-all-read:
+    post:
+      tags:
+        - Notifications
+      summary: Mark all notifications as read
+      description: Marks every unread notification for the authenticated user as read.
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: All notifications marked as read
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /api/notifications/preferences:
+    get:
+      tags:
+        - Notifications
+      summary: Get notification preferences
+      description: Returns the notification channel preferences for the authenticated user.
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: User notification preferences
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      preferences:
+                        $ref: '#/components/schemas/NotificationPreferences'
+                  error:
+                    nullable: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    patch:
+      tags:
+        - Notifications
+      summary: Update notification preferences
+      description: Creates or replaces the notification channel preferences for the authenticated user.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - preferences
+              properties:
+                preferences:
+                  $ref: '#/components/schemas/NotificationPreferences'
+      responses:
+        '200':
+          description: Updated preferences
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      preferences:
+                        $ref: '#/components/schemas/NotificationPreferences'
+                  error:
+                    nullable: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /api/notifications/push-subscription:
+    post:
+      tags:
+        - Notifications
+      summary: Register push subscription
+      description: Registers or updates a Web Push API subscription for the authenticated user.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - endpoint
+                - keys
+              properties:
+                endpoint:
+                  type: string
+                  description: Push service endpoint URL
+                keys:
+                  type: object
+                  required:
+                    - p256dh
+                    - auth
+                  properties:
+                    p256dh:
+                      type: string
+                      description: ECDH public key
+                    auth:
+                      type: string
+                      description: Authentication secret
+                userAgent:
+                  type: string
+                  description: Browser/client user-agent string
+      responses:
+        '200':
+          description: Subscription registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        '400':
+          description: Invalid subscription payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      tags:
+        - Notifications
+      summary: Unregister push subscription
+      description: Removes a Web Push API subscription for the authenticated user.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - endpoint
+                - keys
+              properties:
+                endpoint:
+                  type: string
+                keys:
+                  type: object
+                  required:
+                    - p256dh
+                    - auth
+                  properties:
+                    p256dh:
+                      type: string
+                    auth:
+                      type: string
+                userAgent:
+                  type: string
+      responses:
+        '200':
+          description: Subscription removed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        '400':
+          description: Invalid subscription payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
