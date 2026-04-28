@@ -25,6 +25,8 @@ import {
   name,
   image,
   eventTypes,
+  firstName,
+  lastName,
 } from './primitives';
 
 export const createApiKeySchema = z.object({
@@ -171,3 +173,13 @@ export const ssoVerifySchema = z
   .refine((data) => data.email || data.slug, {
     message: 'At least one of email or slug is required',
   });
+
+export const joinRegistrationSchema = z.object({
+  firstName,
+  lastName,
+  email: email.optional(),
+  password,
+  team: teamName.optional(),
+  inviteToken: inviteToken.optional(),
+  recaptchaToken: recaptchaToken.optional(),
+});

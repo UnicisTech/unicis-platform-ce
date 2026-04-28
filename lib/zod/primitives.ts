@@ -262,3 +262,24 @@ export const memberId = z
     maxLengthPolicies.memberId,
     `Member id should be at most ${maxLengthPolicies.memberId} characters`
   );
+
+const FAKE_NAMES = ['test', 'admin', 'user', 'asdf', 'qwerty', 'foo', 'bar'];
+const SUSPICIOUS_PATTERN = /(.)\1{3,}/;
+
+const nameField = (label: string) =>
+  z
+    .string({
+      required_error: `${label} is required`,
+      invalid_type_error: `${label} must be a string`,
+    })
+    .min(2, `${label} too short`)
+    .max(50, `${label} too long`)
+    .regex(/^[a-zA-ZÀ-ÿ' -]+$/, `Invalid characters in ${label.toLowerCase()}`)
+    .refine((val) => !SUSPICIOUS_PATTERN.test(val), `Invalid ${label.toLowerCase()}`)
+    .refine(
+      (val) => !FAKE_NAMES.includes(val.toLowerCase()),
+      'Please enter a real name'
+    );
+
+export const firstName = nameField('First name');
+export const lastName = nameField('Last name');

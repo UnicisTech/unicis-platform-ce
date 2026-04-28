@@ -1332,5 +1332,15 @@
   },
   "enable": "Activer",
   "disable": "Désactiver",
-  "not-supported": "Non pris en charge"
+  "not-supported": "Non pris en charge",
+  "first-name-too-short": "Prénom trop court",
+  "first-name-too-long": "Prénom trop long",
+  "first-name-invalid-chars": "Caractères invalides dans le prénom",
+  "first-name-invalid": "Prénom invalide",
+  "last-name-too-short": "Nom de famille trop court",
+  "last-name-too-long": "Nom de famille trop long",
+  "last-name-invalid-chars": "Caractères invalides dans le nom de famille",
+  "last-name-invalid": "Nom de famille invalide",
+  "enter-real-name": "Veuillez entrer un vrai nom",
+  "email-domain-invalid": "Le domaine de l'e-mail ne semble pas être un domaine de messagerie valide. Veuillez utiliser une adresse e-mail réelle."
 }

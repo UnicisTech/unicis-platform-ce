@@ -1333,5 +1333,15 @@
   },
   "enable": "Enable",
   "disable": "Disable",
-  "not-supported": "Not supported"
+  "not-supported": "Not supported",
+  "first-name-too-short": "First name too short",
+  "first-name-too-long": "First name too long",
+  "first-name-invalid-chars": "Invalid characters in first name",
+  "first-name-invalid": "Invalid first name",
+  "last-name-too-short": "Last name too short",
+  "last-name-too-long": "Last name too long",
+  "last-name-invalid-chars": "Invalid characters in last name",
+  "last-name-invalid": "Invalid last name",
+  "enter-real-name": "Please enter a real name",
+  "email-domain-invalid": "The email domain does not appear to be a valid mail domain. Please use a real email address."
 }

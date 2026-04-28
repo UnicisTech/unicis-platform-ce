@@ -2,7 +2,7 @@ import { hashPassword, validatePasswordPolicy } from '@/lib/auth';
 import { generateToken, slugify } from '@/lib/common';
 import { sendVerificationEmail } from '@/lib/email/sendVerificationEmail';
 import { prisma } from '@/lib/prisma';
-import { isBusinessEmail } from '@/lib/email/utils';
+import { isBusinessEmail, validateEmailDomain } from '@/lib/email/utils';
 import env from '@/lib/env';
 import { ApiError } from '@/lib/errors';
 import { createTeam, isTeamExists } from 'models/team';
@@ -11,6 +11,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
 import { getInvitation, isInvitationExpired } from 'models/invitation';
 import { validateRecaptcha } from '@/lib/recaptcha';
+import { joinRegistrationSchema } from '@/lib/zod/schema';
+import { validateWithSchema } from '@/lib/zod';
 
 export default async function handler(
   req: NextApiRequest,
@@ -47,7 +49,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     team,
     inviteToken,
     recaptchaToken,
-  } = req.body;
+  } = validateWithSchema(joinRegistrationSchema, req.body);
   const name = `${firstName} ${lastName}`;
   await validateRecaptcha(recaptchaToken);
   console.log('[api/auth/join] recaptcha validated');
@@ -64,6 +66,14 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   // If invitation is present, use the email from the invitation instead of the email in the request body
   const emailToUse = invitation ? invitation.email : email;
+
+  if (!emailToUse) {
+    throw new ApiError(400, 'Email is required.');
+  }
+
+  await validateEmailDomain(emailToUse).catch((err) => {
+    throw new ApiError(400, err.message);
+  });
 
   if (env.disableNonBusinessEmailSignup && !isBusinessEmail(emailToUse)) {
     throw new ApiError(
@@ -110,12 +120,12 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   // Create team if user is not invited
   // So we can create the team with the user as the owner
   if (!invitation) {
-    const slug = slugify(team);
+    const slug = slugify(team!);
 
     await createTeam({
       userEmail: emailToUse,
       userId: user.id,
-      name: team,
+      name: team!,
       slug,
     });
   }

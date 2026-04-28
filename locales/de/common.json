@@ -1329,5 +1329,15 @@
   },
   "enable": "Aktivieren",
   "disable": "Deaktivieren",
-  "not-supported": "Nicht unterstützt"
+  "not-supported": "Nicht unterstützt",
+  "first-name-too-short": "Vorname zu kurz",
+  "first-name-too-long": "Vorname zu lang",
+  "first-name-invalid-chars": "Ungültige Zeichen im Vornamen",
+  "first-name-invalid": "Ungültiger Vorname",
+  "last-name-too-short": "Nachname zu kurz",
+  "last-name-too-long": "Nachname zu lang",
+  "last-name-invalid-chars": "Ungültige Zeichen im Nachnamen",
+  "last-name-invalid": "Ungültiger Nachname",
+  "enter-real-name": "Bitte geben Sie einen echten Namen ein",
+  "email-domain-invalid": "Die E-Mail-Domain scheint keine gültige Mail-Domain zu sein. Bitte verwenden Sie eine echte E-Mail-Adresse."
 }

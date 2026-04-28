@@ -51,8 +51,20 @@ const JoinWithInvitation: React.FC<JoinWithInvitationProps> = ({
       password: '',
     },
     validationSchema: Yup.object({
-      firstName: Yup.string().required(t('required')),
-      lastName: Yup.string().required(t('required')),
+      firstName: Yup.string()
+        .required(t('required'))
+        .min(2, t('first-name-too-short'))
+        .max(50, t('first-name-too-long'))
+        .matches(/^[a-zA-ZÀ-ÿ' -]+$/, t('first-name-invalid-chars'))
+        .test('no-suspicious', t('first-name-invalid'), (val) => !val || !/(.)\1{3,}/.test(val))
+        .test('no-fake', t('enter-real-name'), (val) => !val || !['test', 'admin', 'user', 'asdf', 'qwerty', 'foo', 'bar'].includes(val.toLowerCase())),
+      lastName: Yup.string()
+        .required(t('required'))
+        .min(2, t('last-name-too-short'))
+        .max(50, t('last-name-too-long'))
+        .matches(/^[a-zA-ZÀ-ÿ' -]+$/, t('last-name-invalid-chars'))
+        .test('no-suspicious', t('last-name-invalid'), (val) => !val || !/(.)\1{3,}/.test(val))
+        .test('no-fake', t('enter-real-name'), (val) => !val || !['test', 'admin', 'user', 'asdf', 'qwerty', 'foo', 'bar'].includes(val.toLowerCase())),
       password: Yup.string()
         .required(t('required'))
         .test('strong', t('password-criteria'), validatePassword),
@@ -72,7 +84,7 @@ const JoinWithInvitation: React.FC<JoinWithInvitationProps> = ({
       recaptchaRef.current?.reset();
 
       if (!res.ok) {
-        toast.error(json.error.message);
+        toast.error(t(json.error.message));
       } else {
         formik.resetForm();
         toast.success(t('successfully-joined'));
