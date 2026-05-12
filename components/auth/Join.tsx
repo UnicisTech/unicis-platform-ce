@@ -42,15 +42,39 @@ const Join: React.FC<JoinProps> = ({ recaptchaSiteKey }) => {
         .min(2, t('first-name-too-short'))
         .max(50, t('first-name-too-long'))
         .matches(/^[a-zA-ZÀ-ÿ' -]+$/, t('first-name-invalid-chars'))
-        .test('no-suspicious', t('first-name-invalid'), (val) => !val || !/(.)\1{3,}/.test(val))
-        .test('no-fake', t('enter-real-name'), (val) => !val || !['test', 'admin', 'user', 'asdf', 'qwerty', 'foo', 'bar'].includes(val.toLowerCase())),
+        .test(
+          'no-suspicious',
+          t('first-name-invalid'),
+          (val) => !val || !/(.)\1{3,}/.test(val)
+        )
+        .test(
+          'no-fake',
+          t('enter-real-name'),
+          (val) =>
+            !val ||
+            !['test', 'admin', 'user', 'asdf', 'qwerty', 'foo', 'bar'].includes(
+              val.toLowerCase()
+            )
+        ),
       lastName: Yup.string()
         .required(t('required'))
         .min(2, t('last-name-too-short'))
         .max(50, t('last-name-too-long'))
         .matches(/^[a-zA-ZÀ-ÿ' -]+$/, t('last-name-invalid-chars'))
-        .test('no-suspicious', t('last-name-invalid'), (val) => !val || !/(.)\1{3,}/.test(val))
-        .test('no-fake', t('enter-real-name'), (val) => !val || !['test', 'admin', 'user', 'asdf', 'qwerty', 'foo', 'bar'].includes(val.toLowerCase())),
+        .test(
+          'no-suspicious',
+          t('last-name-invalid'),
+          (val) => !val || !/(.)\1{3,}/.test(val)
+        )
+        .test(
+          'no-fake',
+          t('enter-real-name'),
+          (val) =>
+            !val ||
+            !['test', 'admin', 'user', 'asdf', 'qwerty', 'foo', 'bar'].includes(
+              val.toLowerCase()
+            )
+        ),
       team: Yup.string().required(t('required')).min(3, t('min-3-chars')),
       email: Yup.string().required(t('required')).email(t('invalid-email')),
       password: Yup.string()

@@ -275,7 +275,10 @@ const nameField = (label: string) =>
     .min(2, `${label} too short`)
     .max(50, `${label} too long`)
     .regex(/^[a-zA-ZÀ-ÿ' -]+$/, `Invalid characters in ${label.toLowerCase()}`)
-    .refine((val) => !SUSPICIOUS_PATTERN.test(val), `Invalid ${label.toLowerCase()}`)
+    .refine(
+      (val) => !SUSPICIOUS_PATTERN.test(val),
+      `Invalid ${label.toLowerCase()}`
+    )
     .refine(
       (val) => !FAKE_NAMES.includes(val.toLowerCase()),
       'Please enter a real name'
