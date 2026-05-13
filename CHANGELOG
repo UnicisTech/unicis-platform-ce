@@ -15,6 +15,27 @@ tags:
  
 The information about Unicis Platform releases and changes is listed in order below.
 
+## [Validation, Permissions & Audit Log Fixes] 2026-05-12
+
+*Release date: 2026-05-12*
+
+- Improvements
+  - User Registration
+    - Added Zod validation for user registration forms
+    - Improved input validation and error handling consistency
+- Fixes
+  - SAML
+    - Fixed React version compatibility issue on the SAML page
+  - Settings & Permissions
+    - Fixed OWNER role having incorrectly restricted permissions in Settings
+  - Training
+    - Fixed Training start button label capitalization
+  - API Documentation
+    - Fixed Notification API documentation specification inconsistencies
+  - Audit Logs
+    - Fixed Audit Log service
+    - Improved Audit Log service reliability and stability
+
 ## [Notification + REST API Docs] 2026-03-31
 
 *Release date: 2026-03-31*
