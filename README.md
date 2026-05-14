@@ -27,17 +27,17 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 ## 🗄️ Available Frameworks and Standards
 
 <p align="center">
-  <img src="https://www.unicis.tech/img/frameworks/unicis-gdpr.svg" alt="Unicis GDPR" height="60">
-  <img src="https://www.unicis.tech/img/frameworks/unicis-mvsp.svg" alt="MVSP" height="60" style="margin-left: 10px;">
-  <img src="https://www.unicis.tech/img/frameworks/unicis-iso27k.svg" alt="Unicis ISO 27001" height="60" style="margin-left: 10px;">
-  <img src="https://www.unicis.tech/img/frameworks/unicis-nist2.svg" alt="Unicis NIST 2" height="60" style="margin-left: 10px;">
-  <img src="https://www.unicis.tech/img/frameworks/unicis-nis2.svg" alt="Unicis EU NIS 2" height="60" style="margin-left: 10px;">
-  <img src="https://www.unicis.tech/img/frameworks/unicis-cis.svg" alt="Unicis CIS" height="60" style="margin-left: 10px;">
-  <img src="https://www.unicis.tech/img/frameworks/unicis-c5.svg" alt="Unicis C5" height="60" style="margin-left: 10px;">
-  <img src="https://www.unicis.tech/img/frameworks/unicis-soc2.svg" alt="Unicis SOC2 Type II" height="60" style="margin-left: 10px;">
-  <img src="https://www.unicis.tech/img/frameworks/unicis-owasp-asvs.svg" alt="OWASP ASVS" height="60" style="margin-left: 10px;">
-  <img src="https://www.unicis.tech/img/frameworks/unicis-pci-dss.svg" alt="PCI DSS" height="60" style="margin-left: 10px;">
-  <img src="https://www.unicis.tech/img/frameworks/unicis-iso42k.svg" alt="ISO/IEC 42001" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/images/frameworks/unicis-gdpr.svg" alt="Unicis GDPR" height="60">
+  <img src="https://www.unicis.tech/images/frameworks/unicis-mvsp.svg" alt="MVSP" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/images/frameworks/unicis-iso27k.svg" alt="Unicis ISO 27001" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/images/frameworks/unicis-nist2.svg" alt="Unicis NIST 2" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/images/frameworks/unicis-nis2.svg" alt="Unicis EU NIS 2" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/images/frameworks/unicis-cis.svg" alt="Unicis CIS" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/images/frameworks/unicis-c5.svg" alt="Unicis C5" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/images/frameworks/unicis-soc2.svg" alt="Unicis SOC2 Type II" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/images/frameworks/unicis-owasp-asvs.svg" alt="OWASP ASVS" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/images/frameworks/unicis-pci-dss.svg" alt="PCI DSS" height="60" style="margin-left: 10px;">
+  <img src="https://www.unicis.tech/images/frameworks/unicis-iso42k.svg" alt="ISO/IEC 42001" height="60" style="margin-left: 10px;">
 </p>
 
 - [General Data Protection Regulation - GDPR](https://www.unicis.tech/frameworks/gdpr?mtm_campaign=GitHub%20readme)
@@ -47,7 +47,7 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 - [Directive (EU) 2022/2555 NIS 2](https://www.unicis.tech/frameworks/eu-nis2?mtm_campaign=GitHub%20readme)
 - [CIS Critical Security Controls Version 8.1](https://www.unicis.tech/frameworks/cis?mtm_campaign=GitHub%20readme)
 - [Criteria Catalogue C5:2020](https://www.unicis.tech/frameworks/c5?mtm_campaign=GitHub%20readme)
-- [SOC2 Type II - System and Organization Controls](https://www.unicis.tech/frameworks/soc?mtm_campaign=GitHub%20readme)
+- [SOC2 Type II - System and Organization Controls](https://www.unicis.tech/frameworks/soc2?mtm_campaign=GitHub%20readme)
 - [OWASP Application Security Verification Standard (ASVS) v5](https://www.unicis.tech/frameworks/owasp-asvs?mtm_campaign=GitHub%20readme)
 - [Payment Card Industry Data Security Standard (PCI DSS v4.0.1)](https://www.unicis.tech/frameworks/pci-dss?mtm_campaign=GitHub%20readme)
 - [ISO/IEC 42001:2023 — AI Management System](https://www.unicis.tech/frameworks/iso42001?mtm_campaign=GitHub%20readme)
@@ -64,7 +64,7 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 
 ## 📖 Additional Resources
 
-- [Unicis Platform getting started documentation](https://www.unicis.tech/docs/unicis_platform?mtm_campaign=GitHub)
+- [Unicis Platform getting started documentation](https://www.unicis.tech/docs/platform/introduction?mtm_campaign=GitHub)
 
 ## 🛠️ Built With
 
@@ -198,14 +198,14 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 
 ## Modules
 
-- [Record of Processing Activities](https://www.unicis.tech/docs/platform/using/record-processing-actitivities?mtm_campaign=GitHub)
-- [Transfer Impact Assessment](https://www.unicis.tech/docs/platform/using/transfer-impact-assessment?mtm_campaign=GitHub)
-- [Privacy Impact Assessment](https://www.unicis.tech/docs/platform/using/privacy-impact-assessment?mtm_campaign=GitHub)
-- [Cybersecurity Controls](https://www.unicis.tech/docs/platform/using/cybersecurity-management-system?mtm_campaign=GitHub) — including export/import of Statement of Applicability (SoA) in HTML, PDF, and Excel
-- [Cybersecurity Risk Management](https://www.unicis.tech/docs/platform/using/risk-management?mtm_campaign=GitHub)
-- [Interactive Awareness Program](https://www.unicis.tech/docs/platform/using/awareness-program?mtm_campaign=GitHub)
-- [REST API](https://www.unicis.tech/docs/platform?mtm_campaign=GitHub) — OpenAPI 3.0 spec with Swagger UI at `/api-docs`
-- [Notifications](https://www.unicis.tech/docs/platform/using/settings?mtm_campaign=GitHub#notifications) — In-app, email, and web push
+- [Record of Processing Activities](https://www.unicis.tech/solutions/privacy/ropa?mtm_campaign=GitHub)
+- [Transfer Impact Assessment](https://www.unicis.tech/solutions/privacy/tia?mtm_campaign=GitHub)
+- [Privacy Impact Assessment](https://www.unicis.tech/solutions/privacy/pia?mtm_campaign=GitHub)
+- [Cybersecurity Controls](https://www.unicis.tech/solutions/cybersecurity/controls?mtm_campaign=GitHub) — including export/import of Statement of Applicability (SoA) in HTML, PDF, and Excel
+- [Cybersecurity Risk Management](https://www.unicis.tech/solutions/cybersecurity/risk-management?mtm_campaign=GitHub)
+- [Interactive Awareness Program](https://www.unicis.tech/solutions/compliance/awareness?mtm_campaign=GitHub)
+- [REST API](https://www.unicis.tech/docs/platform/introduction?mtm_campaign=GitHub) — OpenAPI 3.0 spec with Swagger UI at `/api-docs`
+- [Notifications](https://www.unicis.tech/docs/platform/settings/?mtm_campaign=GitHub#notifications) — In-app, email, and web push
 
 ### Coming Next
 
@@ -262,7 +262,7 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 4. DE: German
 
 > [!NOTE]
-> Help with translating it to other languages via our [Weblate translation platform](https://locales.unicis.tech/weblate/projects/unicis-platform/).
+> Help with translating it to other languages via our [Contact](https://www.unicis.tech/contact/) form.
 
 ## ✨ Contributing
 
@@ -287,9 +287,14 @@ Help us build a future GRC by [supporting us](https://www.unicis.tech/community?
 - [Vimeo](https://vimeo.com/user183384852) (Watch community events and tutorials)
 - [GitHub Issues](https://github.com/UnicisTech/unicis-platform-ce/issues) (Contributions, report issues, and product ideas)
 
+
 ## 📘 Knowledge Hub
 
-On [this page](https://www.unicis.tech/kb?mtm_campaign=GitHub) you will find everything you may need to know in order to install, configure, maintain and customize an Unicis Platform. Use the links below to navigate.
+On [this page](https://www.unicis.tech/community?mtm_campaign=GitHub) you will find everything you may need to know in order to install, configure, maintain and customize an Unicis Platform. Use the links below to navigate.
+
+## 🤝 Partners
+
+For a growing ecosystem of consultants, MSSPs, resellers, and technology companies, we offer a [Partners program](https://www.unicis.tech/partners/).
 
 ## Star History
 
