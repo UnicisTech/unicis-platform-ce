@@ -4,8 +4,8 @@
 export const PLATFORMS = [
     { value: 'windows', label: 'Windows' },
     { value: 'linux', label: 'Linux' },
-    { value: 'apple', label: 'Apple' },
+    { value: 'macos', label: 'macOS' },
 ];
 
 
-export const defaultLabels = ['Windows', 'Linux', 'Apple'];
+export const defaultLabels = ['Windows', 'Linux', 'macOS'];

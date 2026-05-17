@@ -9,6 +9,8 @@ import useCanAccess from 'hooks/useCanAccess';
 import QueryTab from '@/components/interfaces/AssetManagement/Query/QueryTab';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import QueryDetails from '@/components/interfaces/AssetManagement/Query/QueryDetails';
+import QueryResults from '@/components/interfaces/AssetManagement/Query/QueryResults';
+import { useGetQueryId } from '@/hooks/fleets/queries/useGetQueryId';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
@@ -22,8 +24,10 @@ const QueryById = ({teamFeatures, user}) => {
     isLoading: isTeamLoading,
     isError: isTeamError,
   } = useTeam(slug as string);
-  
-  if (isTeamLoading) {
+
+  const { query, isLoading: isQueryLoading } = useGetQueryId(team?.id!, queryId as string);
+
+  if (isTeamLoading || isQueryLoading) {
     return <Loading />;
   }
 
@@ -41,11 +45,18 @@ const QueryById = ({teamFeatures, user}) => {
       />
       <h3 className="text-2xl font-bold">{'Queries'}</h3>
       <QueryTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <Card heading="Details">
-        <Card.Body>
-          <QueryDetails user={user} fleetTeamId={team?.id!} queryID={queryId as string} />
-        </Card.Body>
-      </Card>
+
+      {activeTab === 'Overview' && (
+        <Card heading="Details">
+          <Card.Body>
+            <QueryDetails user={user} fleetTeamId={team?.id!} queryID={queryId as string} />
+          </Card.Body>
+        </Card>
+      )}
+
+      {activeTab === 'Results' && query && (
+        <QueryResults teamId={team?.id!} queryName={query.name} />
+      )}
     </>
   );
 };

@@ -7,18 +7,23 @@ import FleetContainer from '@/components/interfaces/AssetManagement/Fleet/FleetC
 import { getTeam } from '@/models/team';
 import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import { TeamTab } from '@/components/team';
+import FleetConnectRequired from '@/components/interfaces/AssetManagement/FleetConnectRequired';
 
 
 const AssetManagement = ({ teamFeatures, team, user }) => {
 
   return (
-    <>
-      <TeamTab activeTab="asset-management" team={team} teamFeatures={teamFeatures} />
-      <AssetTab activeTab="fleet" team={team} teamFeatures={teamFeatures} />
-      <div className="space-y-6">
-        <FleetContainer user={user} team={team} />
-      </div>
-    </>
+    // <FleetConnectRequired user={user}>
+    // {() => (
+      <>
+        <TeamTab activeTab="asset-management" team={team} teamFeatures={teamFeatures} />
+        <AssetTab activeTab="fleet" team={team} teamFeatures={teamFeatures} />
+        <div className="space-y-6">
+          <FleetContainer user={user} team={team} />
+        </div>
+      </>
+    // )}
+    // </FleetConnectRequired>
   );
 };
 

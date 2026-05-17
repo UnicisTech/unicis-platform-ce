@@ -42,7 +42,10 @@ const EditQuery = ({
   team: Team;
 }) => {
   const [selectedPacks, setSelectedPacks] = useState<string[]>(query.packs?.map((p) => p.id) || []);
-  const [selectedTags, setSelectedTags] = useState<string[]>(query.tags?.map((t) => t.id) || []);
+  const [selectedTags, setSelectedTags] = useState<string[]>(query.tags?.map((t) => t.value) || []);
+  const [selectedPlatform, setSelectedPlatform] = useState<string>(
+    PLATFORMS.find(({ value }) => value === query.platform)?.value || "all"
+  );
   const [removed, setRemoved] = useState<boolean>(query.removed);
   const { t } = useTranslation("common");
   const updateQuery = useUpdateQuery();
@@ -55,7 +58,7 @@ const EditQuery = ({
     const queryData = {
       name: formData.get("name") as string,
       sql: formData.get("sql") as string,
-      platform: formData.get("platform") as string,
+      platform: selectedPlatform,
       version: formData.get("version") as string,
       shard: Number(formData.get("shard")),
       interval: Number(formData.get("interval")),
@@ -97,10 +100,8 @@ const EditQuery = ({
           <div>
             <Label htmlFor="platform">{t("platform")}</Label>
             <Select
-              name="platform"
-              defaultValue={
-                PLATFORMS.find(({ value }) => value === query.platform)?.value || "all"
-              }
+              value={selectedPlatform}
+              onValueChange={setSelectedPlatform}
             >
               <SelectTrigger>
                 <SelectValue placeholder={t("select-platform")} />

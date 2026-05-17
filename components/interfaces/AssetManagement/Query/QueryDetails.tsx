@@ -48,6 +48,7 @@ const QueryDetails = ({
 
   const [visible, setVisible] = useState(true);
   const [removed, setRemoved] = useState(false);
+  const [selectedPlatform, setSelectedPlatform] = useState("all");
   const [selectedPacks, setSelectedPacks] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [deleteVisible, setDeleteVisible] = useState(false);
@@ -56,8 +57,11 @@ const QueryDetails = ({
   useEffect(() => {
     if (query) {
       setRemoved(query.removed);
+      setSelectedPlatform(
+        PLATFORMS.find((p) => p.value === query.platform)?.value || "all"
+      );
       setSelectedPacks(query.packs?.map((p) => p.id) || []);
-      setSelectedTags(query.tags?.map((t) => t.id) || []);
+      setSelectedTags(query.tags?.map((t) => t.value) || []);
     }
   }, [query]);
 
@@ -70,7 +74,7 @@ const QueryDetails = ({
     const queryData = {
       name: formData.get("name") as string,
       sql: formData.get("sql") as string,
-      platform: formData.get("platform") as string,
+      platform: selectedPlatform,
       version: formData.get("version") as string,
       shard: Number(formData.get("shard")),
       interval: Number(formData.get("interval")),
@@ -116,10 +120,8 @@ const QueryDetails = ({
             <div>
               <Label htmlFor="platform">{t("platform")}</Label>
               <Select
-                name="platform"
-                defaultValue={
-                  PLATFORMS.find((p) => p.value === query?.platform)?.value || "all"
-                }
+                value={selectedPlatform}
+                onValueChange={setSelectedPlatform}
               >
                 <SelectTrigger>
                   <SelectValue placeholder={t("select-platform")} />

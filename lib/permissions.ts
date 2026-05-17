@@ -273,6 +273,14 @@ export const permissions: RolePermissions = {
       actions: ['read'],
     },
     {
+      resource: 'asset_dashboard',
+      actions: ['read'],
+    },
+    {
+      resource: 'team_fleet_node',
+      actions: ['read'],
+    },
+    {
       resource: 'task',
       actions: '*',
     },
@@ -292,6 +300,14 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'team_member',
+      actions: ['read'],
+    },
+    {
+      resource: 'asset_dashboard',
+      actions: ['read'],
+    },
+    {
+      resource: 'asset_settings',
       actions: ['read'],
     },
     {

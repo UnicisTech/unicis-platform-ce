@@ -108,7 +108,7 @@ const PackDetails = ({
   }
 
   return (
-    <FleetConnectRequired user={user}>
+    <FleetConnectRequired user={user} teamId={fleetTeamId}>
       {() => (
         <div className="space-y-4">
           <form

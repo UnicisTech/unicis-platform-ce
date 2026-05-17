@@ -15,10 +15,15 @@ import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 import TogglePasswordVisibility from '@/components/shared/TogglePasswordVisibility';
 
-const ResetPassword = () => {
+interface ResetPasswordProps {
+  resetType?: 'platform' | 'fleet';
+}
+
+const ResetPassword = ({ resetType: initialResetType }: ResetPasswordProps) => {
   const [submitting, setSubmitting] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [resetType, setResetType] = useState<'platform' | 'fleet' | null>(initialResetType || null);
 
   const router = useRouter();
   const { t } = useTranslation('common');
@@ -52,7 +57,7 @@ const ResetPassword = () => {
         body: JSON.stringify({ ...values, token }),
       });
 
-      const json = (await response.json()) as ApiResponse;
+      const json = (await response.json()) as ApiResponse<{ type?: 'platform' | 'fleet' }>;
 
       setSubmitting(false);
 
@@ -61,8 +66,17 @@ const ResetPassword = () => {
         return;
       }
 
+      const type = json.data?.type || 'platform';
+      setResetType(type);
+
       resetForm();
-      toast.success(t('password-updated'));
+
+      if (type === 'fleet') {
+        toast.success(t('fleet-password-updated'));
+      } else {
+        toast.success(t('password-updated'));
+      }
+
       router.push('/auth/login');
     },
   });

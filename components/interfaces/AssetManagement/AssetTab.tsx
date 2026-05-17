@@ -3,6 +3,7 @@ import {
   Cog6ToothIcon,
   TagIcon,
   CodeBracketSquareIcon,
+  DocumentCheckIcon,
 } from '@heroicons/react/24/outline';
 import type { Team } from '@prisma/client';
 import classNames from 'classnames';
@@ -21,6 +22,8 @@ interface AssetTabProps {
 const AssetTab = ({ activeTab, team, heading, teamFeatures }: AssetTabProps) => {
   const { canAccess } = useCanAccess();
 
+  console.log("teamFeatures", teamFeatures)
+
   const navigations = [
     {
       name: 'Asset',
@@ -31,7 +34,6 @@ const AssetTab = ({ activeTab, team, heading, teamFeatures }: AssetTabProps) => 
   ];
 
   if (
-    teamFeatures.fleetTag &&
     canAccess('team_fleet_tag', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({
@@ -43,7 +45,6 @@ const AssetTab = ({ activeTab, team, heading, teamFeatures }: AssetTabProps) => 
   }
 
   if (
-    teamFeatures.fleetQuery &&
     canAccess('team_fleet_query', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({
@@ -55,7 +56,6 @@ const AssetTab = ({ activeTab, team, heading, teamFeatures }: AssetTabProps) => 
   }
 
   if (
-    teamFeatures.fleetPack &&
     canAccess('team_fleet_pack', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({
@@ -67,7 +67,6 @@ const AssetTab = ({ activeTab, team, heading, teamFeatures }: AssetTabProps) => 
   }
 
   if (
-    teamFeatures.fleetQuery &&
     canAccess('team_fleet_query', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({
@@ -77,7 +76,7 @@ const AssetTab = ({ activeTab, team, heading, teamFeatures }: AssetTabProps) => 
       icon: CodeBracketSquareIcon,
     });
   }
-  
+
   return (
     <div className="flex flex-col pb-6">
       <nav

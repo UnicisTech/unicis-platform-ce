@@ -211,8 +211,25 @@ export interface StatusLogResponse {
 
 export interface ResultLogResponse {
   node: Node;
-  recent: any;
-  queries: Query[];
+  recent: any[];
+  queries: AssetActivityQueryTask[];
+}
+
+export interface AssetActivityQueryTask {
+  guid: string;
+  status: number;
+  timestamp?: string;
+  distributed_query?: {
+    id?: string;
+    sql?: string;
+    description?: string;
+    not_before?: string;
+  };
+  results?: Array<{
+    id?: string;
+    timestamp?: string;
+    columns?: Record<string, any>;
+  }>;
 }
 
 export interface NodeDistributedQueryResult {
@@ -335,4 +352,3 @@ interface NodeInfo {
   platform_info: PlatformInfo;
   system_info: SystemInfo;
 }
-

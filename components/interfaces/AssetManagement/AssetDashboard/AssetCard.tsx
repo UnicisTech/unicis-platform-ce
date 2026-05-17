@@ -12,14 +12,24 @@ export interface AssetProps {
 export const platformBGs = {
   linux: 'bg-gray-300',
   windows: 'bg-blue-300',
-  apple: 'bg-green-300',
+  macos: 'bg-green-300',
+};
+
+// Map platform keys to display names with proper casing
+const getPlatformDisplayName = (platform: string): string => {
+  const displayNames: { [key: string]: string } = {
+    'windows': 'Windows',
+    'linux': 'Linux',
+    'macos': 'macOS',
+  };
+  return displayNames[platform.toLowerCase()] || platform.charAt(0).toUpperCase() + platform.slice(1);
 };
 
 const AssetCard = ({ host, total } : AssetProps) => {
   const iconString = platformIcons[host];
   const bgColor = platformBGs[host];
 
-  const formattedHost = host.charAt(0).toUpperCase() + host.slice(1);
+  const formattedHost = getPlatformDisplayName(host);
 
   return (
     <div className="grid grid-cols-2 w-full rounded-sm p-4 ring-1 ring-gray-300 items-center justify-between">

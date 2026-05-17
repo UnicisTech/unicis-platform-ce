@@ -17,7 +17,7 @@ import {
 } from './command';
 
 const multiSelectVariants = cva(
-  'm-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300',
+  'm-1 transition-colors',
   {
     variants: {
       variant: {
@@ -77,6 +77,10 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
     const [selectedValues, setSelectedValues] = React.useState<string[]>(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
 
+    React.useEffect(() => {
+      setSelectedValues(defaultValue);
+    }, [defaultValue]);
+
     const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === 'Enter') {
         setIsPopoverOpen(true);
@@ -134,8 +138,8 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
             )}
           >
             {selectedValues.length > 0 ? (
-              <div className="flex justify-between items-center w-full">
-                <div className="flex flex-wrap items-center gap-1 max-w-[calc(100%-80px)] overflow-hidden">
+              <div className="flex justify-between items-center w-full min-w-0 gap-2">
+                <div className="flex flex-wrap items-center gap-1 flex-1 min-w-0 overflow-hidden">
                   {selectedValues.slice(0, maxCount).map((value) => {
                     const option = options.find((o) => o.value === value);
                     const IconComponent = option?.icon;
@@ -144,7 +148,7 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
                         key={value}
                         className={cn(
                           multiSelectVariants({ variant }),
-                          'max-w-full overflow-hidden text-ellipsis whitespace-nowrap inline-flex items-center px-2 py-1'
+                          'min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap inline-flex items-center px-2 py-1'
                         )}
                         style={{ animationDuration: `${animation}s` }}
                         title={option?.label}
@@ -182,7 +186,7 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
                     </Badge>
                   )}
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between shrink-0">
                   <XIcon
                     className="h-4 mx-2 cursor-pointer text-muted-foreground"
                     onClick={(event) => {
@@ -203,7 +207,7 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-[var(--radix-popover-trigger-width)] p-0"
+          className="w-[min(var(--radix-popover-trigger-width),calc(100vw-2rem))] p-0"
           align="start"
           onEscapeKeyDown={() => setIsPopoverOpen(false)}
         >
@@ -256,7 +260,7 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
                           )}
                         />
                       )}
-                      <span>{option.label}</span>
+                      <span className="truncate">{option.label}</span>
                     </CommandItem>
                   );
                 })}

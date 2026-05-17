@@ -9,19 +9,36 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/shadcn/ui/card'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from '@/components/shadcn/ui/dialog'
+import { Input } from '@/components/shadcn/ui/input'
+import { Label } from '@/components/shadcn/ui/label'
 import { Team, User } from '@prisma/client'
 import FleetStatus from './FleetStatus'
 import RenewFleetSecret from './RenewFleetSecret'
 import useCanAccess from '@/hooks/useCanAccess'
-import { useCreateFleetAccount, useAccessFleetAccount, useCreateFleetTeam } from '@/hooks/fleets'
-import { useOrderFleetSecret } from '@/hooks/fleets/connect/useOrderFleetSecret'
+import { useBootstrapFleet } from '@/hooks/fleets'
 import { useGetFleetSecret } from '@/hooks/fleets/connect/useGetFleetSecret'
 import { useDeleteFleetSecret } from '@/hooks/fleets/connect/useDeleteFleetSecret'
-import { getSession } from 'next-auth/react'
 import { Loader2 } from 'lucide-react'
 import Cookies from 'js-cookie'
 import { CodeBlock } from '@/components/shared/CodeBlock'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
+import { passwordPolicies } from '@/lib/common'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+
+const passwordSchema = Yup.object({
+  password: Yup.string()
+    .required('Password is required')
+    .min(passwordPolicies.fleetMinLength, `Password must be at least ${passwordPolicies.fleetMinLength} characters`),
+})
 
 const FleetSecret = ({
   user,
@@ -34,51 +51,43 @@ const FleetSecret = ({
   const userId = user.id
   const teamId = team.id
   const [safe, setSafe] = useState(true)
+  const [passwordDialogVisible, setPasswordDialogVisible] = useState(false)
 
-  const createFleetAccount = useCreateFleetAccount()
-  const accessFleetAccount = useAccessFleetAccount()
-  const createFleetTeam = useCreateFleetTeam()
-  const orderFleetSecret = useOrderFleetSecret()
+  const bootstrapFleet = useBootstrapFleet()
   const deleteFleetSecret = useDeleteFleetSecret()
   const [renewVisible, setRenewVisible] = useState(false)
-  const { canAccess } = useCanAccess()
 
   const { secret, isLoading, isError, mutateFleetSecret } = useGetFleetSecret(team.id)
 
-  const handleOrderSecret = async () => {
-    const session = await getSession()
-    console.log(session)
-    try {
-      await createFleetAccount(
-        'c2690d45-ab9f-4bbb-bd0e-fc75f3c56b8d',
-        'vnezdd@gmail.com',
-        'Vitalii',
-        'Nezdvetskyi',
-        'Ocean@25Navigator'
-      ).then(async () => {
-        const { fleet_access } = await accessFleetAccount('vnezdd@gmail.com', 'Ocean@25Navigator')
-        console.log('fleet_access', fleet_access)
+  const formik = useFormik({
+    initialValues: { password: '' },
+    validationSchema: passwordSchema,
+    onSubmit: async ({ password }) => {
+      try {
+        console.log('[FleetSecret] Bootstrapping Fleet...')
+        const response = await bootstrapFleet(teamId, password)
+
+        console.log('[FleetSecret] Bootstrap successful:', response)
+
+        // Store Fleet token in cookie for future requests
         Cookies.set(
           'ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA',
-          fleet_access.secret_key
+          response.fleetToken
         )
-      })
-    } catch (error) {
-      console.log('createFleetAccount error', error)
-    }
-  
-    try {
-      if (!userId) throw new Error('User ID is not defined')
-      if (secret?.id === undefined) {
-        await createFleetTeam(team.name, team.id)
-        await orderFleetSecret(team.id)
+
+        setPasswordDialogVisible(false)
+        formik.resetForm()
         mutateFleetSecret()
         toast.success(t('fleet-enrollment-secret-ordered'))
+      } catch (error: any) {
+        console.error('[FleetSecret] Error:', error)
+        toast.error(error?.message || t('error-ordering-fleet-secret'))
       }
-    } catch (error: any) {
-      console.log('error', error)
-      toast.error(isError?.message)
-    }
+    },
+  })
+
+  const handleOrderSecret = () => {
+    setPasswordDialogVisible(true)
   }
   
   const handleDelete = async () => {
@@ -164,6 +173,51 @@ const FleetSecret = ({
       </CardContent>
 
       <RenewFleetSecret teamId={teamId} setVisible={setRenewVisible} visible={renewVisible} />
+
+      <Dialog open={passwordDialogVisible} onOpenChange={setPasswordDialogVisible}>
+        <DialogContent className="sm:max-w-md">
+          <form onSubmit={formik.handleSubmit}>
+            <DialogHeader>
+              <DialogTitle>{t('fleet-enter-password')}</DialogTitle>
+              <DialogDescription>
+                {t('fleet-password-description')}
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="mt-4 space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="password">{t('fleet-user-password')}</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  name="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  autoComplete="current-password"
+                />
+                {formik.touched.password && formik.errors.password && (
+                  <p className="text-sm text-red-500">{formik.errors.password}</p>
+                )}
+              </div>
+            </div>
+
+            <DialogFooter className="mt-6">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setPasswordDialogVisible(false)}
+              >
+                {t('cancel')}
+              </Button>
+              <Button type="submit" disabled={formik.isSubmitting}>
+                {formik.isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                {t('continue')}
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     </Card>
   )
 }

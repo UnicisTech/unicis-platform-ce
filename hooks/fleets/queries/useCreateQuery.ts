@@ -12,13 +12,15 @@ export const useCreateQuery = () => {
       });
 
       if (!response.ok) {
-        const data = await response.json();
+        const errorData = await response.json();
+        console.error('Error creating query:', errorData);
+        throw new Error(errorData.message || 'Failed to create query');
       }
 
       return response.json();
     } catch (error) {
-      // Optional: Handle or log the error more specifically here if needed
       console.error('Error creating query:', error);
+      throw error;
     }
   };
 

@@ -26,7 +26,7 @@ const TeamAssetDashboard = ({
         </h2>
       </div>
       <div className="space-y-6">
-        <Assets user={user} team={team} teamSubscription={teamSubscription} />
+        <Assets user={user} team={team} />
       </div>
     </>
   );
@@ -39,12 +39,26 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const user = await getUserBySession(session);
   const team = await getTeam({ slug });
   const teamSubscription = await isTeamHasSubscription(team.id);
-  
+
   if (!user) {
     return {
       notFound: true,
     };
   }
+
+  // Get user's role in this team
+  const { prisma } = await import('@/lib/prisma');
+  const member = await prisma.teamMember.findUnique({
+    where: {
+      teamId_userId: {
+        teamId: team.id,
+        userId: user.id,
+      },
+    },
+    select: {
+      role: true,
+    },
+  });
 
   return {
     props: {
@@ -60,6 +74,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         firstName: user.firstName,
         lastName: user.lastName,
         image: user.image,
+        role: member?.role,
       },
     },
   };

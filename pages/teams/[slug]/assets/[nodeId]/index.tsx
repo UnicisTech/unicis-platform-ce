@@ -14,6 +14,7 @@ import NodeTab from '@/components/interfaces/AssetManagement/AssetDashboard/Asse
 import AssetLogs from '@/components/interfaces/AssetManagement/AssetDashboard/Asset/AssetLogs';
 import ResultLogs from '@/components/interfaces/AssetManagement/AssetDashboard/Asset/ResultLogs';
 import AssetConfig from '@/components/interfaces/AssetManagement/AssetDashboard/Asset/AssetConfig';
+import { useGetNodeId } from '@/hooks/fleets/Nodes/useGetNodeId';
 
 
 const NodeById = ({ teamFeatures, user }) => {
@@ -21,12 +22,24 @@ const NodeById = ({ teamFeatures, user }) => {
   const router = useRouter();
   const { t } = useTranslation('common');
   const { nodeId, slug } = router.query;
+  const nodeIdStr = Array.isArray(nodeId) ? nodeId[0] : nodeId || '';
 
   const {
     team,
     isLoading: isTeamLoading,
     isError: isTeamError,
   } = useTeam(slug as string);
+  const { node } = useGetNodeId(team?.id || '', nodeIdStr);
+
+  const shortNodeId =
+    nodeIdStr.length > 16
+      ? `${nodeIdStr.slice(0, 8)}...${nodeIdStr.slice(-4)}`
+      : nodeIdStr;
+  const assetBreadcrumbLabel =
+    node?.node_key ||
+    node?.node_info?.system_info?.computer_name ||
+    node?.host_identifier ||
+    shortNodeId;
 
   if (isTeamLoading) {
     return <Loading />;
@@ -41,34 +54,35 @@ const NodeById = ({ teamFeatures, user }) => {
       <Breadcrumb
         taskTitle={'Assets'}
         backTo={`/teams/${slug}/asset`}
-        teamName={slug as string}
-        path={nodeId as string}
+        teamName={team?.name || (slug as string)}
+        teamSlug={slug as string}
+        path={assetBreadcrumbLabel}
       />
       <h3 className="text-2xl font-bold">{'Asset Details'}</h3>
       <NodeTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'Overview' &&
-            <NodeDetails user={user} fleetTeamId={team?.id!} nodeID={nodeId as string} />
+            <NodeDetails user={user} fleetTeamId={team?.id!} nodeID={nodeIdStr} />
         // <Card heading={activeTab}>
         //   <Card.Body>
         //   </Card.Body>
         // </Card>
       }
       {activeTab === 'Status Logs' &&
-            <AssetLogs user={user} fleetTeamId={team?.id!} nodeID={nodeId as string} />
+            <AssetLogs user={user} fleetTeamId={team?.id!} nodeID={nodeIdStr} />
         // <Card heading={activeTab}>
         //   <Card.Body>
         //   </Card.Body>
         // </Card>
       }
       {activeTab === 'Result Logs' &&
-            <ResultLogs user={user} fleetTeamId={team?.id!} nodeID={nodeId as string} />
+            <ResultLogs user={user} fleetTeamId={team?.id!} nodeID={nodeIdStr} />
         // <Card heading={activeTab}>
         //   <Card.Body>
         //   </Card.Body>
         // </Card>
       }
       {activeTab === 'Asset Configurations' &&
-            <AssetConfig user={user} fleetTeamId={team?.id!} nodeID={nodeId as string} />
+            <AssetConfig user={user} fleetTeamId={team?.id!} nodeID={nodeIdStr} />
         // <Card heading={activeTab}>
         //   <Card.Body>
         //   </Card.Body>

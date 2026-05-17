@@ -45,7 +45,7 @@ const DistributorById = ({ teamFeatures, user }) => {
         <DistributorsDetails user={user} fleetTeamId={team?.id!} distributorId={distributorId as string} />
       }
       {activeTab === 'Results' &&
-        <DistributorsResults user={user} fleetTeamId={team?.id!} distributorId={distributorId as string} />
+        <DistributorsResults fleetTeamId={team?.id!} distributorId={distributorId as string} />
       }
     </>
   );

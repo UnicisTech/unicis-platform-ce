@@ -4,7 +4,15 @@ import useSWR, { mutate } from "swr";
 
 export const useGetFleetSecret = (teamId: string) => {
   const url = `/fleet/teams/${teamId}/secret`
-  const { data, error, isLoading } = useSWR<FleetSecret>(url, fleetFetcher);
+  const { data, error, isLoading } = useSWR<FleetSecret>(url, fleetFetcher, {
+    shouldRetryOnError: false,
+    // 404 is expected when secret doesn't exist yet
+    onError: (err) => {
+      if (err?.status !== 404) {
+        console.error('[useGetFleetSecret] Error fetching secret:', err);
+      }
+    }
+  });
 
   const mutateFleetSecret = async () => {
     mutate(url);
@@ -12,7 +20,7 @@ export const useGetFleetSecret = (teamId: string) => {
 
   return {
     isLoading: isLoading,
-    isError: error,
+    isError: error && error?.status !== 404, // Don't treat 404 as error
     secret: data,
     mutateFleetSecret
   };

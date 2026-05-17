@@ -19,7 +19,10 @@ export const fleetAuthAPIHeaders = async () => {
   const token = Cookies.get('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA');
   // const { ufa } = await useUFA();
   // console.log('UFA: ', ufa);
- 
+
+  console.log("[fleetAuthAPIHeaders] token from cookie:", token)
+  console.log("[fleetAuthAPIHeaders] token length:", token?.length)
+
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
     'Unicis-Fleet-API-Authorization': `UnicisBearer ${token}`,
@@ -29,8 +32,6 @@ export const fleetAuthAPIHeaders = async () => {
   return headers;
 };
 
-
-// Create token
 export function generateToken(length = 64) {
   const tokenBytes = lib.WordArray.random(length);
 

@@ -24,6 +24,7 @@ export const useVerifyFleetAsses = () => {
         }
 
         const data: FleetAccess = await response.json();
+        console.log("data", data)
         setAccess(data);
       } catch (err) {
         setError('An unexpecte derror occurred.');

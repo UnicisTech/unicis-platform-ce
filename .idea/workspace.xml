@@ -4,42 +4,135 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="19572125-9d28-466e-acda-1ffff07af7a8" name="Changes" comment="" />
+    <list default="true" id="19572125-9d28-466e-acda-1ffff07af7a8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/pages/api/fleet/forgot-password.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/auth/ResetPassword.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/auth/ResetPassword.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/emailTemplates/FleetEnrollEmail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/emailTemplates/FleetEnrollEmail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/emailTemplates/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/emailTemplates/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Asset/Nodes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Asset/Nodes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/AssetAnalysis.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/AssetAnalysis.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/AssetCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/AssetCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/AssetTaskAnalysis.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/AssetTaskAnalysis.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Assets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Assets.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetTab.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Distributor/CreateDistributor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Distributor/CreateDistributor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Distributor/DistributorResults.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Distributor/DistributorResults.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Distributor/Distributors.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Distributor/Distributors.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetSecret.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetSecret.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/FleetConnectRequired.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/FleetConnectRequired.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/PackDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/PackDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/EditQuery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/EditQuery.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/Queries.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/Queries.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/QueryDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/QueryDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/StatusValue.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/StatusValue.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/shadcn/ui/multi-select.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/shadcn/ui/multi-select.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/shared/Breadcrumb.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/shared/Breadcrumb.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/team/Members.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/team/Members.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/team/TeamTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/team/TeamTab.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/fleets/Nodes/useNodes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/fleets/Nodes/useNodes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/fleets/connect/useAccessFleetAccount.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/fleets/connect/useAccessFleetAccount.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/fleets/connect/useGetFleetSecret.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/fleets/connect/useGetFleetSecret.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/fleets/distributors/useAnalysis.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/fleets/distributors/useAnalysis.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/fleets/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/fleets/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/fleets/queries/useCreateQuery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/fleets/queries/useCreateQuery.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/fleets/queries/useUpdateQuery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/fleets/queries/useUpdateQuery.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/fleets/useVerifyFleetAsses.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/fleets/useVerifyFleetAsses.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/useHasPlan.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useHasPlan.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/email/sendFleetEnrollEmail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/email/sendFleetEnrollEmail.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/env.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/env.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/fleet/apiBase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/fleet/apiBase.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/fleet/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/fleet/constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/fleet/packs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/fleet/packs.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/permissions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/permissions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/en/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/en/common.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/team.ts" beforeDir="false" afterPath="$PROJECT_DIR$/models/team.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/auth/join.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/auth/join.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/auth/reset-password.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/auth/reset-password.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/fleet/enroll.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/fleet/enroll.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/teams/[slug]/invitations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/teams/[slug]/invitations.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/teams/[slug]/members.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/teams/[slug]/members.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth/reset-password/[token].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/reset-password/[token].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/distributors/[distributorId]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/distributors/[distributorId]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/packs/[packId]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/packs/[packId]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/queries/[queryId]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/queries/[queryId]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/asset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/migrations/20240816103152_add_fleet_account/migration.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/migrations/20240816105120_add_fleet_account/migration.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/migrations/20240816114143_add_fleet_account/migration.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/migrations/20240816115730_add_fleet_account/migration.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/migrations/20240816121044_add_fleet_account/migration.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/base.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/base.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="768" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2uS205ql8sxu3OTmFNFpGJV8C5e" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "asset-mgmt",
-    "last_opened_file_path": "/Users/vnezd/Desktop/projects/test/unicis-platform",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/Users/vnezd/Desktop/projects/test/unicis-platform/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;fleet-enrollment&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/vnezd/Desktop/projects/test/unicis-platform&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/vnezd/Desktop/projects/test/unicis-platform/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager" selected="npm.Next.js: server-side">
+    <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:4002/">
+      <method v="2" />
+    </configuration>
+    <configuration name="Next.js: server-side" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-WS-243.21565.180" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.31033.133" />
       </set>
     </attachedChunks>
   </component>
@@ -52,6 +145,43 @@
       <option name="presentableId" value="Default" />
       <updated>1742227428410</updated>
       <workItem from="1742227429590" duration="2594000" />
+      <workItem from="1771772361895" duration="5790000" />
+      <workItem from="1771787442761" duration="8942000" />
+      <workItem from="1771933256913" duration="327000" />
+      <workItem from="1771933888520" duration="97000" />
+      <workItem from="1771936914119" duration="597000" />
+      <workItem from="1772030111199" duration="11299000" />
+      <workItem from="1772120258468" duration="1808000" />
+      <workItem from="1772187994684" duration="605000" />
+      <workItem from="1772300983737" duration="5539000" />
+      <workItem from="1772444767232" duration="2034000" />
+      <workItem from="1772557888740" duration="5812000" />
+      <workItem from="1772634000463" duration="4144000" />
+      <workItem from="1773575094899" duration="2556000" />
+      <workItem from="1773681563861" duration="3072000" />
+      <workItem from="1773754855576" duration="4867000" />
+      <workItem from="1773941663725" duration="3837000" />
+      <workItem from="1773945626202" duration="5567000" />
+      <workItem from="1774020448319" duration="3690000" />
+      <workItem from="1774273511953" duration="4091000" />
+      <workItem from="1774366968503" duration="2506000" />
+      <workItem from="1774441167479" duration="7356000" />
+      <workItem from="1775461208452" duration="5450000" />
+      <workItem from="1775672476382" duration="13488000" />
+      <workItem from="1776255881643" duration="98000" />
+      <workItem from="1776355046446" duration="21000" />
+      <workItem from="1776668501503" duration="21000" />
+      <workItem from="1776668527700" duration="13235000" />
+      <workItem from="1777214382777" duration="4097000" />
+      <workItem from="1777229337236" duration="1982000" />
+      <workItem from="1777281431552" duration="16784000" />
+      <workItem from="1777560463263" duration="2890000" />
+      <workItem from="1777636909083" duration="297000" />
+      <workItem from="1777645506677" duration="3437000" />
+      <workItem from="1777878493883" duration="403000" />
+      <workItem from="1777892971067" duration="1821000" />
+      <workItem from="1777976560264" duration="1506000" />
+      <workItem from="1778171780403" duration="943000" />
     </task>
     <servers />
   </component>

@@ -12,6 +12,7 @@ import AddAsset from './AddAsset';
 import { Node } from 'types';
 import { Input } from '@/components/shadcn/ui/input';
 import { Button } from '@/components/shadcn/ui/button';
+import { ChevronRight } from 'lucide-react';
 
 const Nodes = ({
   team,
@@ -52,10 +53,16 @@ const Nodes = ({
     setExportVisible(true);
   };
 
-  const filteredNodes = nodes?.filter((node) =>
-    node.team.user.name.toLowerCase().includes(searchTerm) ||
-    node.node_key.toLowerCase().includes(searchTerm)
-  );
+  const filteredNodes = nodes?.filter((node) => {
+    try {
+      return (
+        node.team?.user?.name?.toLowerCase().includes(searchTerm) ||
+        node.node_key?.toLowerCase().includes(searchTerm)
+      );
+    } catch (e) {
+      return false;
+    }
+  }) || [];
 
   return (
     <>
@@ -103,91 +110,104 @@ const Nodes = ({
             </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="text-sm w-full border-b">
-              <thead className="bg-muted">
-                <tr>
-                  <th className="px-3 py-3 text-left">{t('owner')}</th>
-                  <th className="px-3 py-3 text-left">{t('status')}</th>
-                  <th className="px-3 py-3 text-left">{t('agent-info')}</th>
-                  <th className="px-3 py-3 text-left">{t('system-info')}</th>
-                  <th className="px-3 py-3 text-left">{t('enrolled-on')}</th>
-                  <th className="px-3 py-3 text-left">{t('actions')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredNodes?.map((node) => (
-                  <tr key={node.id}>
-                    <td className="py-3 align-top">
-                      <Link href={`/teams/${slug}/assets/${node.id}`}>
-                        <div>
-                          <div>
-                            {node.owner.user?.firstname}{' '}
-                            {node.owner.user?.lastname[0].toUpperCase()}
-                          </div>
-                          <div className="text-xs text-muted-foreground">
-                            {node.owner.user?.email}
-                          </div>
-                        </div>
-                      </Link>
-                    </td>
-                    <td className="py-3 align-top">
-                      <span className="text-xs font-semibold">
-                        {node.is_active ? '🟢 Active' : '🔴 Inactive'}
-                      </span>
-                    </td>
-                    <td className="py-3 align-top text-xs">
-                      <div>
-                        PID: {node.node_info?.osquery_info?.pid}
-                      </div>
-                      <div>
-                        v: {node.node_info?.osquery_info?.version}
-                      </div>
-                      <div>
-                        {node.node_info?.osquery_info?.instance_id || 'N/A'}
-                      </div>
-                    </td>
-                    <td className="py-3 align-top text-xs">
-                      <div>
-                        {node.node_info?.system_info?.computer_name}
-                      </div>
-                      <div>
-                        {node.node_info?.system_info?.hardware_model}
-                      </div>
-                      <div>
-                        SN: {node.node_info?.system_info.hardware_serial}
-                      </div>
-                    </td>
-                    <td className="py-3 align-top text-xs">
-                      <FormattedDate style={'text-[10px]'} dateString={node.enrolled_on} />
-                    </td>
-                    <td className="py-3 align-top">
-                      <div className="flex gap-2">
-                        {canAccess('team_fleet_node', ['delete']) && (
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => openDeleteModal(node.id)}
-                          >
-                            {t('delete')}
-                          </Button>
-                        )}
-                        {canAccess('team_fleet_node', ['delete']) && (
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => openExportModal(node.id)}
-                          >
-                            {t('export')}
-                          </Button>
-                        )}
-                      </div>
-                    </td>
+          {filteredNodes && filteredNodes.length > 0 ? (
+            <div className="overflow-x-auto">
+              <table className="text-sm w-full border-b">
+                <thead className="bg-muted">
+                  <tr>
+                    <th className="px-3 py-3 text-left">{t('owner')}</th>
+                    <th className="px-3 py-3 text-left">{t('status')}</th>
+                    <th className="px-3 py-3 text-left">{t('agent-info')}</th>
+                    <th className="px-3 py-3 text-left">{t('system-info')}</th>
+                    <th className="px-3 py-3 text-left">{t('enrolled-on')}</th>
+                    <th className="px-3 py-3 text-left">{t('actions')}</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {filteredNodes?.map((node) => (
+                    <tr key={node.id}>
+                      <td className="py-3 align-top">
+                        <Link
+                          href={`/teams/${slug}/assets/${node.id}`}
+                          title={t('open-asset-details')}
+                          className="group inline-flex items-start gap-1.5 rounded-sm px-1 py-0.5 -mx-1 -my-0.5 text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        >
+                          <div className="min-w-0">
+                            <div className="font-medium underline-offset-4 group-hover:underline">
+                              {node.owner.user?.firstname}{' '}
+                              {node.owner.user?.lastname[0].toUpperCase()}
+                            </div>
+                            <div className="text-xs text-muted-foreground">
+                              {node.owner.user?.email}
+                            </div>
+                          </div>
+                          <ChevronRight className="h-3.5 w-3.5 mt-0.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
+                        </Link>
+                      </td>
+                      <td className="py-3 align-top">
+                        <span className="text-xs font-semibold">
+                          {node.is_active ? '🟢 Active' : '🔴 Inactive'}
+                        </span>
+                      </td>
+                      <td className="py-3 align-top text-xs">
+                        <div>
+                          PID: {node.node_info?.osquery_info?.pid}
+                        </div>
+                        <div>
+                          v: {node.node_info?.osquery_info?.version}
+                        </div>
+                        <div>
+                          {node.node_info?.osquery_info?.instance_id || 'N/A'}
+                        </div>
+                      </td>
+                      <td className="py-3 align-top text-xs">
+                        <div>
+                          {node.node_info?.system_info?.computer_name}
+                        </div>
+                        <div>
+                          {node.node_info?.system_info?.hardware_model}
+                        </div>
+                        <div>
+                          SN: {node.node_info?.system_info.hardware_serial}
+                        </div>
+                      </td>
+                      <td className="py-3 align-top text-xs">
+                        <FormattedDate style={'text-[10px]'} dateString={node.enrolled_on} />
+                      </td>
+                      <td className="py-3 align-top">
+                        <div className="flex gap-2">
+                          {canAccess('team_fleet_node', ['delete']) && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => openDeleteModal(node.id)}
+                            >
+                              {t('delete')}
+                            </Button>
+                          )}
+                          {/* {canAccess('team_fleet_node', ['delete']) && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => openExportModal(node.id)}
+                            >
+                              {t('export')}
+                            </Button>
+                          )} */}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-12 border rounded-lg bg-muted/30">
+              <p className="text-sm text-muted-foreground">
+                {t('no-assets-found')}
+              </p>
+            </div>
+          )}
 
           <DeleteNode
             visible={deleteVisible}
@@ -201,12 +221,14 @@ const Nodes = ({
             nodeId={nodeToExport!}
             fleetTeamId={team.id}
           />
-          <AddAsset
-            visible={addVisible}
-            user={user}
-            team={team}
-            setVisible={setAddVisible}
-          />
+          {addVisible && (
+            <AddAsset
+              visible={addVisible}
+              user={user}
+              team={team}
+              setVisible={setAddVisible}
+            />
+          )}
         </div>
       ) : (
         <FleetStatus status="disconnected" />

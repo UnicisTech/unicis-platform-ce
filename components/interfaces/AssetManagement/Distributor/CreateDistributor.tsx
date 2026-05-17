@@ -83,12 +83,12 @@ const CreateDistributors = ({
 
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-w-2xl w-[min(95vw,56rem)] max-h-[90vh] overflow-x-hidden overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{t('create-script')}</DialogTitle>
         </DialogHeader>
   
-        <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+        <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 min-w-0">
           <div className="space-y-2">
             <Label htmlFor="sql">{t('sql-code')}</Label>
             <Input
@@ -113,14 +113,14 @@ const CreateDistributors = ({
             <ReactQuill theme="snow" id="description" />
           </div>
   
-          <div className="space-y-2">
+          <div className="space-y-2 flex flex-col">
             <Label>{t('not-before')}</Label>
             <Popover>
               <PopoverTrigger asChild>
                 <Button
                   type="button"
                   variant="outline"
-                  className="w-[280px] justify-start text-left font-normal"
+                  className="w-full max-w-[280px] justify-start text-left font-normal"
                 >
                   <CalendarIcon className="mr-2 h-4 w-4" />
                   {notBeforeDate

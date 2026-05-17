@@ -113,7 +113,7 @@ const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
                         <div className="grid grid-cols-1 gap-1">
                           <div>
                             <p className="text-[10px] text-muted-foreground">Status</p>
-                            {StatusValue(task.status)}
+                            <StatusValue status={task.status} />
                           </div>
                           <div>
                             <p className="text-[10px] text-muted-foreground">Timestamp</p>

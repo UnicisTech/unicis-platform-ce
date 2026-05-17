@@ -40,7 +40,7 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
   const headers = Array.from(
     new Set(
       data.flatMap((item) =>
-        Object.keys(item).filter((key) => key !== "result_id")
+        Object.keys(item).filter((key) => key !== "result_id" && key !== "deletable")
       )
     )
   );
@@ -76,12 +76,12 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
   const showActions = Boolean(onDelete || onEdit || onView);
 
   return (
-    <div className="w-full overflow-x-auto rounded-md border">
-      <Table>
+    <div className="w-full max-w-full overflow-x-hidden rounded-md border">
+      <Table className="w-full table-fixed">
         <TableHeader>
           <TableRow>
             {headers.map((header) => (
-              <TableHead key={header} className="whitespace-nowrap">
+              <TableHead key={header} className="break-words [overflow-wrap:anywhere]">
                 {header.charAt(0).toUpperCase() + header.slice(1)}
               </TableHead>
             ))}
@@ -94,7 +94,12 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
             return (
               <TableRow key={rowId}>
                 {headers.map((header) => (
-                  <TableCell key={header}>{renderCell(row[header])}</TableCell>
+                  <TableCell
+                    key={header}
+                    className="max-w-0 align-top break-words [overflow-wrap:anywhere]"
+                  >
+                    {renderCell(row[header])}
+                  </TableCell>
                 ))}
                 {showActions && (
                   <TableCell className="w-0 whitespace-nowrap text-right">
@@ -120,15 +125,17 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
                         </Button>
                       )}
                       {onDelete && (
-                        <Button
-                          size="sm"
-                          variant="destructive"
-                          type="button"
-                          disabled={deleting === rowId || loading}
-                          onClick={() => handleDelete(rowId)}
-                        >
-                          {deleting === rowId ? t('deleting') : t('delete')}
-                        </Button>
+                        row?.deletable !== false && (
+                          <Button
+                            size="sm"
+                            variant="destructive"
+                            type="button"
+                            disabled={deleting === rowId || loading}
+                            onClick={() => handleDelete(rowId)}
+                          >
+                            {deleting === rowId ? t('deleting') : t('delete')}
+                          </Button>
+                        )
                       )}
                     </div>
                   </TableCell>

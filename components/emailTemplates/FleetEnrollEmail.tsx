@@ -10,15 +10,17 @@ import EmailLayout from './EmailLayout';
 import app from '@/lib/app';
 
 interface FleetEnrollEmailProps {
-  teamName: string;
-  enrollmentLink: string;
   subject: string;
+  teamName: string;
+  enrollLink: string;
+  tempPassword: string;
 }
 
-export const FleetEnrollEmail = ({
-  teamName,
-  enrollmentLink,
+const FleetEnrollEmail = ({
   subject,
+  teamName,
+  enrollLink,
+  tempPassword,
 }: FleetEnrollEmailProps) => {
   return (
     <Html>
@@ -26,21 +28,37 @@ export const FleetEnrollEmail = ({
       <Preview>{subject}</Preview>
       <EmailLayout>
         <Text>
-          You have been requested to enroll your device into Fleet for the{' '}
-          {teamName} team on {app.name}.
+          You&apos;ve been invited to enroll Fleet access for team{' '}
+          <b>{teamName}</b> on {app.name}.
         </Text>
 
         <Text>
-          Fleet helps your team securely manage and monitor enrolled devices.
-          Click the button below to start the enrollment process.
+          A temporary Fleet password has been generated for you:
         </Text>
 
         <Container className="text-center">
-          <Button href={enrollmentLink}>Enroll device</Button>
+          <Text
+            style={{
+              fontSize: '16px',
+              fontWeight: 'bold',
+              letterSpacing: '0.5px',
+            }}
+          >
+            {tempPassword}
+          </Text>
         </Container>
 
         <Text>
-          If you didn’t expect this request, you can safely ignore this email.
+          Use this password to complete enrollment. After your first login,
+          you will be asked to set a new password.
+        </Text>
+
+        <Container className="text-center">
+          <Button href={enrollLink}>Open Asset module</Button>
+        </Container>
+
+        <Text>
+          If you didn&apos;t expect this email, you can ignore it.
         </Text>
       </EmailLayout>
     </Html>

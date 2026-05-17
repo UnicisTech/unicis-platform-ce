@@ -18,39 +18,54 @@ export default async function handler(
     return res.status(422).json({ error: 'Invalid email address' });
   }
 
-  // Check if user has Fleet enrollment
+  // Check if user exists in Platform
   const user = await prisma.user.findUnique({
     where: { email },
-    include: {
-      fleetEnrollments: {
-        where: {
-          status: 'COMPLETED',
-        },
-      },
-    },
   });
 
   if (!user) {
     return res.status(404).json({ error: 'User not found' });
   }
 
-  if (!user.fleetEnrollments || user.fleetEnrollments.length === 0) {
-    return res.status(404).json({ error: 'No Fleet enrollment found for this user' });
+  // Check if Fleet account exists
+  const fleetBase = process.env.FLEET_API_URL;
+  const fleetServiceToken = process.env.FLEET_SERVICE_TOKEN;
+
+  if (!fleetBase || !fleetServiceToken) {
+    return res.status(500).json({ error: 'Fleet configuration missing' });
+  }
+
+  try {
+    const fleetAccountRes = await fetch(`${fleetBase}/api/v1/account/users/${user.id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${fleetServiceToken}`,
+      },
+    });
+
+    if (!fleetAccountRes.ok) {
+      console.log('[FleetForgotPassword] No Fleet account found for user:', email);
+      return res.status(404).json({ error: 'No Fleet account found for this user' });
+    }
+
+    console.log('[FleetForgotPassword] Fleet account exists for user:', email);
+  } catch (error) {
+    console.error('[FleetForgotPassword] Error checking Fleet account:', error);
+    return res.status(500).json({ error: 'Failed to verify Fleet account' });
   }
 
   // Generate reset token
   const resetToken = generateToken();
 
-  // Create Fleet password reset record
   await prisma.fleetPasswordReset.create({
     data: {
       email,
       token: resetToken,
-      expiresAt: new Date(Date.now() + 60 * 60 * 1000), // Expires in 1 hour
+      expiresAt: new Date(Date.now() + 60 * 60 * 1000),
     },
   });
 
-  // Send email with reset link
   await sendFleetPasswordResetEmail(user, encodeURIComponent(resetToken));
 
   return res.status(200).json({ success: true });

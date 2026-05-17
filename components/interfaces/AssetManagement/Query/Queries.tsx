@@ -22,7 +22,6 @@ import CreateQuery from "./CreateQuery";
 import { useQueries } from "@/hooks/fleets/queries/useQueries";
 import DeleteQuery from "./DeleteQuery";
 import EditQuery from "./EditQuery";
-import FleetConnectRequired from "../FleetConnectRequired";
 import { CodeBlock } from "@/components/shared/CodeBlock";
 
 const Querys = ({ team, user }: { team: Team; user: Partial<User> }) => {

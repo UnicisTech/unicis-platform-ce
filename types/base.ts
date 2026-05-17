@@ -112,14 +112,9 @@ export type AUTH_PROVIDER =
 export interface TeamFeature {
   sso: boolean;
   dsync: boolean;
-  auditLog: boolean;
-  webhook: boolean;
-  apiKey: boolean;
-  fleetApiKey: boolean;
-  fleetConnect: boolean;
-  fleetQuery: boolean;
-  fleetPack: boolean;
-  fleetTag: boolean;
+  auditLog?: boolean;
+  webhook?: boolean;
+  apiKey?: boolean;
 }
 
 export type Option = {

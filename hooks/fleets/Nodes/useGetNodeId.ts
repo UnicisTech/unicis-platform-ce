@@ -9,6 +9,11 @@ export const useGetNodeId = (teamId: string, nodeId: string) => {
   const [isError, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!teamId || !nodeId) {
+      setLoading(false);
+      return;
+    }
+
     const fetchNode = async () => {
       setLoading(true);
       setError(null);

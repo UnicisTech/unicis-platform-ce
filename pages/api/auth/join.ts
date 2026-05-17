@@ -108,8 +108,6 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   console.log('[api/auth/join] user created');
 
-  // Create team if user is not invited
-  // So we can create the team with the user as the owner
   if (!invitation) {
     const slug = slugify(team);
 

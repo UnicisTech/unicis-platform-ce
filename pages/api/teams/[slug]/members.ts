@@ -82,7 +82,6 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
   res.status(200).json({ data: {} });
 };
 
-// Leave a team
 const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
   throwIfNotAllowed(teamMember, 'team', 'leave');
@@ -106,7 +105,6 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   res.status(200).json({ data: {} });
 };
 
-// Update the role of a member
 const handlePATCH = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
   throwIfNotAllowed(teamMember, 'team_member', 'update');
@@ -124,6 +122,28 @@ const handlePATCH = async (req: NextApiRequest, res: NextApiResponse) => {
       role,
     },
   });
+
+  // Sync role to Fleet
+  const fleetServiceToken = process.env.FLEET_SERVICE_TOKEN;
+  if (fleetServiceToken) {
+    try {
+      await fetch(`${req.headers.origin}/api/fleet/sync-member`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Cookie: req.headers.cookie || '',
+        },
+        body: JSON.stringify({
+          teamId: teamMember.teamId,
+          userId: memberId,
+        }),
+      });
+      console.log(`[Members] Synced role to Fleet for user ${memberId}`);
+    } catch (error) {
+      console.error('[Members] Failed to sync role to Fleet:', error);
+      // Don't fail the request if Fleet sync fails
+    }
+  }
 
   sendAudit({
     action: 'member.update',

@@ -28,6 +28,8 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   const { canAccess } = useCanAccess();
   const { hasPlan, checkedHasPlan } = useHasPlan();
 
+  console.log("teamFeatures", teamFeatures)
+
   useEffect(() => {
     const checkPlan = async () => {
       const result = await hasPlan(team.slug);

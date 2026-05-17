@@ -21,27 +21,52 @@ import ConfirmationDialog from '../shared/ConfirmationDialog';
 import { useState } from 'react';
 import { Button } from '../shadcn/ui/button';
 
+type FleetEnrollmentLite = {
+  status: 'PENDING' | 'COMPLETED' | 'EXPIRED';
+  expiresAt: string | Date;
+  sentAt: string | Date;
+};
+
+type MemberWithFleet = TeamMember & {
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    fleetEnrollments?: FleetEnrollmentLite[];
+  };
+};
+
+const formatUntil = (value: string | Date) => {
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return '';
+  return d.toLocaleString();
+};
+
 const Members = ({ team }: { team: Team }) => {
   const { data: session } = useSession();
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
+
   const [visible, setVisible] = useState(false);
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [confirmationDialogVisible, setConfirmationDialogVisible] =
     useState(false);
+  const [enrollLoadingByUserId, setEnrollLoadingByUserId] =
+    useState<Record<string, boolean>>({});
 
-  const { isLoading, isError, members, mutateTeamMembers } = useTeamMembers(
-    team.slug
-  );
+  const { isLoading, isError, members, mutateTeamMembers } =
+    useTeamMembers(team.slug);
+
+  const typedMembers = members as unknown as MemberWithFleet[] | null;
 
   if (isLoading) return <Loading />;
   if (isError) return <Error message={isError.message} />;
-  if (!members) return null;
+  if (!typedMembers) return null;
 
   const removeTeamMember = async (member: TeamMember | null) => {
     if (!member) return;
-    const sp = new URLSearchParams({ memberId: member.userId });
 
+    const sp = new URLSearchParams({ memberId: member.userId });
     const response = await fetch(
       `/api/teams/${team.slug}/members?${sp.toString()}`,
       {
@@ -62,29 +87,140 @@ const Members = ({ team }: { team: Team }) => {
   };
 
   const canUpdateRole = (member: TeamMember) =>
-    session?.user.id !== member.userId && canAccess('team_member', ['update']);
+    session?.user.id !== member.userId &&
+    canAccess('team_member', ['update']);
+
   const canRemoveMember = (member: TeamMember) =>
-    session?.user.id !== member.userId && canAccess('team_member', ['delete']);
-  const fleetEnrollAvailable = (member: TeamMember) =>
-    session?.user.id !== member.userId && canAccess('team_member', ['delete']);
+    session?.user.id !== member.userId &&
+    canAccess('team_member', ['delete']);
 
+  const getEnrollmentView = (member: MemberWithFleet) => {
+    const enrollment = member.user.fleetEnrollments?.[0];
 
-  const handleEnrollFleet = async (member: any) => {
+    if (!enrollment) {
+      return {
+        disabled: false,
+        label: t('fleet-enroll'),
+      };
+    }
+
+    const nowMs = Date.now();
+    const expiresAtMs = new Date(enrollment.expiresAt).getTime();
+    const isExpired = expiresAtMs <= nowMs;
+
+    if (enrollment.status === 'COMPLETED') {
+      return {
+        disabled: false,
+        label: t('fleet-revoke-access'),
+        isRevoke: true,
+      };
+    }
+
+    if (enrollment.status === 'PENDING' && !isExpired) {
+      return {
+        disabled: true,
+        label: t('fleet-invite-sent-label'),
+      };
+    }
+
+    // PENDING but expired, or other status
+    return {
+      disabled: false,
+      label: t('fleet-resend-invite'),
+    };
+  };
+
+  const handleRevokeFleetAccess = async (member: MemberWithFleet) => {
     try {
-      const res = await fetch("/api/fleet/enroll", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      setEnrollLoadingByUserId((p) => ({
+        ...p,
+        [member.userId]: true,
+      }));
+
+      const res = await fetch('/api/fleet/revoke', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email: member.user.email,
-          teamName: team.name,
+          userId: member.userId,
+          teamId: team.id,
         }),
       });
 
-      if (!res.ok) throw new globalThis.Error();
+      if (!res.ok) {
+        toast.error(t('fleet-revoke-failed'));
+        return;
+      }
 
-      toast.success(`Enrollment email sent to ${member.user.email}`);
-    } catch (err) {
-      toast.error("Failed to send enrollment email");
+      toast.success(t('fleet-access-revoked', { email: member.user.email }));
+      mutateTeamMembers();
+    } catch {
+      toast.error(t('fleet-revoke-failed'));
+    } finally {
+      setEnrollLoadingByUserId((p) => ({
+        ...p,
+        [member.userId]: false,
+      }));
+    }
+  };
+
+  const handleEnrollFleet = async (member: MemberWithFleet) => {
+    try {
+      setEnrollLoadingByUserId((p) => ({
+        ...p,
+        [member.userId]: true,
+      }));
+
+      const res = await fetch('/api/fleet/enroll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: member.user.email,
+          teamId: team.id,
+        }),
+      });
+
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok) {
+        const code = data?.error;
+
+        if (code === 'ALREADY_SENT') {
+          const until = data?.expiresAt
+            ? formatUntil(data.expiresAt)
+            : '';
+
+          toast.error(
+            until
+              ? t('fleet-invite-valid-until', { date: until })
+              : t('fleet-invite-already-sent')
+          );
+
+          mutateTeamMembers();
+          return;
+        }
+
+        if (code === 'ALREADY_ENROLLED') {
+          toast.error(t('fleet-already-enrolled'));
+          mutateTeamMembers();
+          return;
+        }
+
+        toast.error(t('fleet-invite-failed'));
+        return;
+      }
+
+      toast.success(
+        t('fleet-invite-sent', { email: member.user.email })
+      );
+
+      mutateTeamMembers();
+    } catch {
+      toast.error(t('fleet-invite-failed'));
+    } finally {
+      setEnrollLoadingByUserId((p) => ({
+        ...p,
+        [member.userId]: false,
+      }));
     }
   };
 
@@ -99,7 +235,9 @@ const Members = ({ team }: { team: Team }) => {
             {t('team-members')}
           </p>
         </div>
-        <Button onClick={() => setVisible(!visible)}>{t('add-member')}</Button>
+        <Button onClick={() => setVisible(!visible)}>
+          {t('add-member')}
+        </Button>
       </div>
 
       <Table>
@@ -108,53 +246,72 @@ const Members = ({ team }: { team: Team }) => {
             <TableHead>{t('name')}</TableHead>
             <TableHead>{t('email')}</TableHead>
             <TableHead>{t('role')}</TableHead>
-            <TableHead className="w-[120px]">{t('action')}</TableHead>
+            <TableHead className="w-[240px]">
+              {t('action')}
+            </TableHead>
           </TableRow>
         </TableHeader>
 
         <TableBody>
-          {members.map((member) => (
-            <TableRow key={member.id}>
-              <TableCell>
-                <div className="flex items-center space-x-2">
-                  <LetterAvatar name={member.user.name} />
-                  <span>{member.user.name}</span>
-                </div>
-              </TableCell>
+          {typedMembers.map((member) => {
+            const enrollView = getEnrollmentView(member);
+            const isEnrollLoading =
+              !!enrollLoadingByUserId[member.userId];
 
-              <TableCell>{member.user.email}</TableCell>
+            return (
+              <TableRow key={member.id}>
+                <TableCell>
+                  <div className="flex items-center space-x-2">
+                    <LetterAvatar name={member.user.name} />
+                    <span>{member.user.name}</span>
+                  </div>
+                </TableCell>
 
-              <TableCell>
-                {canUpdateRole(member) ? (
-                  <UpdateMemberRole team={team} member={member} />
-                ) : (
-                  <span>{member.role}</span>
-                )}
-              </TableCell>
-              <TableCell className="w-[120px]">
-                <div className="flex justify-end gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleEnrollFleet(member)}
-                  >
-                    {t('enroll-fleet')}
-                  </Button>
-                  <Button
-                    variant="destructive"
-                    size="sm"
-                    disabled={!canRemoveMember(member)}
-                    onClick={() => {
-                      setSelectedMember(member);
-                      setConfirmationDialogVisible(true);
-                    }}
+                <TableCell>{member.user.email}</TableCell>
+
+                <TableCell>
+                  {canUpdateRole(member) ? (
+                    <UpdateMemberRole team={team} member={member} />
+                  ) : (
+                    <span>{member.role}</span>
+                  )}
+                </TableCell>
+
+                <TableCell className="w-[240px]">
+                  <div className="flex justify-end gap-2">
+                    <Button
+                      variant={enrollView.isRevoke ? "destructive" : "outline"}
+                      size="sm"
+                      disabled={
+                        enrollView.disabled || isEnrollLoading
+                      }
+                      onClick={() =>
+                        enrollView.isRevoke
+                          ? handleRevokeFleetAccess(member)
+                          : handleEnrollFleet(member)
+                      }
                     >
-                    {t('remove')}
-                  </Button>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
+                      {isEnrollLoading
+                        ? t('fleet-sending')
+                        : enrollView.label}
+                    </Button>
+
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      disabled={!canRemoveMember(member)}
+                      onClick={() => {
+                        setSelectedMember(member);
+                        setConfirmationDialogVisible(true);
+                      }}
+                    >
+                      {t('remove')}
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
 
@@ -167,7 +324,11 @@ const Members = ({ team }: { team: Team }) => {
         {t('delete-member-warning')}
       </ConfirmationDialog>
 
-      <InviteMember visible={visible} setVisible={setVisible} team={team} />
+      <InviteMember
+        visible={visible}
+        setVisible={setVisible}
+        team={team}
+      />
     </div>
   );
 };

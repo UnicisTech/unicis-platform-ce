@@ -3,11 +3,13 @@ import { useTranslation } from 'next-i18next';
 
 const Breadcrumb = ({
   teamName,
+  teamSlug,
   taskTitle,
   path,
   backTo
 }: {
   teamName: string;
+  teamSlug?: string;
   taskTitle: string;
   path: string;
   backTo?: string;
@@ -17,13 +19,18 @@ const Breadcrumb = ({
   return (
     <div className="text-sm breadcrumbs">
       <ul>
-        <li>{<Link href={`/teams/${teamName}/dashboard`}>{teamName}</Link> || t('Home')}</li>
+        <li>
+          {<Link href={`/teams/${teamSlug || teamName}/dashboard`}>{teamName}</Link> ||
+            t('Home')}
+        </li>
         <li>
           <a href={backTo || '/'} className="link link-hover">
-            {t('Tasks')}
+            {taskTitle || t('Tasks')}
           </a>
         </li>
-        <li>{`${path}`}</li>
+        <li className="max-w-[50vw] truncate" title={path}>
+          {`${path}`}
+        </li>
       </ul>
     </div>
   );

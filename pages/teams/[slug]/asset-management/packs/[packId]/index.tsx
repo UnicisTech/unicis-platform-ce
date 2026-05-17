@@ -8,6 +8,7 @@ import useTeam from 'hooks/useTeam';
 import useCanAccess from 'hooks/useCanAccess';
 import PackTab from '@/components/interfaces/AssetManagement/Pack/PackTab';
 import PackDetails from '@/components/interfaces/AssetManagement/Pack/PackDetails';
+import PackResults from '@/components/interfaces/AssetManagement/Pack/PackResults';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
@@ -45,11 +46,22 @@ const PackById = ({teamFeatures, user}) => {
       />
       <h3 className="text-2xl font-bold">{'Pack Details'}</h3>
       <PackTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <Card heading="Details">
-        <Card.Body>
-          <PackDetails user={user} fleetTeamId={team?.id!} packID={packId as string} />
-        </Card.Body>
-      </Card>
+      
+      {activeTab === 'Overview' && (
+        <Card heading="Details">
+          <Card.Body>
+            <PackDetails user={user} fleetTeamId={team?.id!} packID={packId as string} />
+          </Card.Body>
+        </Card>
+      )}
+
+      {activeTab === 'Results' && (
+        <Card heading="Pack Query Results">
+          <Card.Body>
+            <PackResults teamId={team?.id!} packId={packId as string} />
+          </Card.Body>
+        </Card>
+      )}
     </>
   );
 };
