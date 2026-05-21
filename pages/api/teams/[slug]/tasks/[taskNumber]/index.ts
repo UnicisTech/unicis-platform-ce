@@ -1,5 +1,10 @@
 import { sendEvent } from '@/lib/svix';
-import { getTaskBySlugAndNumber, updateTask, deleteTask } from 'models/task';
+import {
+  getTaskBySlugAndNumber,
+  updateTask,
+  deleteTask,
+  addTaskAuditLogs,
+} from 'models/task';
 import { throwIfNoTeamAccess } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNotAllowed } from 'models/user';
@@ -9,6 +14,7 @@ import { serializeForApi } from '@/lib/serialize';
 import { notificationService } from '@/lib/notifications/notification-service';
 import { getTeamRecipientsBySlug } from '@/lib/notifications/recipients';
 import { NotificationType } from '@/generated/enums';
+import type { TaskProperties } from 'types';
 
 export default async function handler(
   req: NextApiRequest,
@@ -77,6 +83,17 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
+  const prevTask = await getTaskBySlugAndNumber(
+    taskNumberAsNumber,
+    slug as string
+  );
+
+  if (!prevTask) {
+    return res.status(404).json({
+      error: { message: 'Task not found' },
+    });
+  }
+
   const { data } = req.body;
   const sanitizedData = { ...data };
 
@@ -109,6 +126,24 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
   }
+
+  await addTaskAuditLogs({
+    taskId: task.id,
+    user: teamMember.user,
+    prevTask: {
+      title: prevTask.title,
+      status: prevTask.status,
+      duedate: prevTask.duedate,
+      description: prevTask.description,
+    },
+    nextTask: {
+      title: task.title,
+      status: task.status,
+      duedate: task.duedate,
+      description: task.description,
+    },
+    taskProperties: (task.properties || {}) as TaskProperties,
+  });
 
   await sendEvent(teamMember.teamId, 'task.updated', task);
 

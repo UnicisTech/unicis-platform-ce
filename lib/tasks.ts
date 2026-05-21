@@ -81,8 +81,8 @@ export const taskCommentsNavigations = (activeTab: string) => {
       active: activeTab === 'Comments',
     },
     {
-      name: 'Audit logs',
-      active: activeTab === 'Audit logs',
+      name: 'Activity',
+      active: activeTab === 'Activity',
     },
   ];
 };

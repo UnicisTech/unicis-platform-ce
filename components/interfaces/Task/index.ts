@@ -4,5 +4,6 @@ export { default as Comments } from './Comments';
 export { default as TaskTab } from './TaskTab';
 export { default as CommentsTab } from './CommentsTab';
 export { default as TaskDetails } from './TaskDetails';
+export { default as TaskAuditLogs } from './TaskAuditLogs';
 export { default as Attachments } from './Attachments';
 export { default as TaskImportModal } from './TaskImportModal';

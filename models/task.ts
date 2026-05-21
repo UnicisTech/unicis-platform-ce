@@ -1,5 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { getTeam, incrementTaskIndex } from './team';
+import type { Session } from 'next-auth';
+import type { AuditLog, TaskProperties } from 'types';
 
 export const createTask = async (param: {
   authorId: string;
@@ -129,6 +131,50 @@ export const getTaskBySlugAndNumber = async (
     },
   });
   return task;
+};
+
+const taskAuditFields = ['title', 'status', 'duedate', 'description'] as const;
+
+export const addTaskAuditLogs = async (params: {
+  taskId: number;
+  user: Session['user'];
+  prevTask: { title: string; status: string; duedate: any; description: string | null };
+  nextTask: { title: string; status: string; duedate: any; description: string | null };
+  taskProperties: TaskProperties;
+}) => {
+  const { taskId, user, prevTask, nextTask, taskProperties } = params;
+
+  const newLogs: AuditLog[] = [];
+
+  for (const field of taskAuditFields) {
+    const prevVal = prevTask[field]?.toString() ?? '';
+    const nextVal = nextTask[field]?.toString() ?? '';
+
+    if (prevVal !== nextVal) {
+      newLogs.push({
+        actor: user,
+        date: new Date().getTime(),
+        event: 'updated',
+        diff: {
+          field,
+          prevValue: prevVal || '—',
+          nextValue: nextVal || '—',
+        },
+      });
+    }
+  }
+
+  if (newLogs.length === 0) return;
+
+  const existing = taskProperties?.task_audit_logs || [];
+  taskProperties.task_audit_logs = [...existing, ...newLogs];
+
+  await prisma.task.update({
+    where: { id: taskId },
+    data: {
+      properties: { ...taskProperties },
+    },
+  });
 };
 
 export const getTeamTasks = async (slug: string) => {

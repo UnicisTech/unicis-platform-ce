@@ -134,11 +134,16 @@ export type TeamMemberWithUser = TeamMember & { user: User };
 
 export type TeamProperties = TeamCscProperties & TeamIapProperties;
 
+export type TaskAuditLogProperties = {
+  task_audit_logs: AuditLog[] | [];
+};
+
 export type TaskProperties = TaskTiaProperties &
   TaskCscProperties &
   TaskRpaProperties &
   TaskPiaProperties &
-  TaskRmProperties;
+  TaskRmProperties &
+  TaskAuditLogProperties;
 
 export type ExtendedComment = Comment & {
   createdBy: User;

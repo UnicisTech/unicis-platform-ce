@@ -2,13 +2,14 @@ import { useState, type ReactNode } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { GetServerSidePropsContext } from 'next';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { Loading, Error } from '@/components/shared';
 import {
   Attachments,
   Comments,
   CommentsTab,
   TaskDetails,
+  TaskAuditLogs,
   TaskTab,
 } from '@/components/interfaces/Task';
 import { CscAuditLogs, CscPanel } from '@/components/interfaces/csc';
@@ -61,13 +62,13 @@ const CardTitleWrapper = ({
   className?: string;
 }) => (
   <div
-    className={`flex min-h-8 flex-wrap items-center justify-between gap-2 px-4 ${className}`.trim()}
+    className={`flex min-h-8 flex-wrap items-center justify-between gap-2 px-4 uppercase ${className}`.trim()}
   >
     {children}
   </div>
 );
 
-const TaskById = () => {
+const TaskById = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [tiaVisible, setTiaVisible] = useState(false);
   const [piaVisible, setPiaVisible] = useState(false);
   const [rmVisible, setRmVisible] = useState(false);
@@ -283,6 +284,16 @@ const TaskById = () => {
         </Card>
       ) : (
         <>
+          <Card className="mt-4">
+            <CardHeader>
+              <CardTitleWrapper>
+                <CardTitle>{t('task-activity')}</CardTitle>
+              </CardTitleWrapper>
+            </CardHeader>
+            <CardContent>
+              <TaskAuditLogs task={task} />
+            </CardContent>
+          </Card>
           <Card className="mt-4">
             <CardHeader>
               <CardTitleWrapper>
