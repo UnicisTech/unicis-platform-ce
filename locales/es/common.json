@@ -159,6 +159,7 @@
   "last-name": "Apellido",
   "email": "Correo electrónico",
   "members": "Miembros",
+  "plan": "Plan",
   "members-description": "Miembros del equipo y sus roles.",
   "delete-member-warning": "Eliminar un miembro eliminará todas las actividades relacionadas con ese miembro. Esta acción no se puede deshacer.",
   "confirm-delete-member": "Confirmar eliminación del miembro",

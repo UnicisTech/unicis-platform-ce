@@ -80,8 +80,9 @@ const Teams = () => {
           <table className="w-full min-w-full divide-y divide-border text-sm">
             <thead className="bg-muted">
               <tr>
-                <th className="w-4/10 px-4 py-2 text-left">{t('name')}</th>
-                <th className="w-2/10 px-4 py-2 text-left">{t('members')}</th>
+                <th className="w-3/10 px-4 py-2 text-left">{t('name')}</th>
+                <th className="w-1/10 px-4 py-2 text-left">{t('members')}</th>
+                <th className="w-2/10 px-4 py-2 text-left">{t('plan')}</th>
                 <th className="w-2/10 px-4 py-2 text-left">
                   {t('created-at')}
                 </th>
@@ -102,6 +103,9 @@ const Teams = () => {
                         </Link>
                       </td>
                       <td className="px-4 py-2">{team._count.members}</td>
+                      <td className="px-4 py-2 capitalize">
+                        {team.subscription?.plan?.toLowerCase() || 'Community'}
+                      </td>
                       <td className="px-4 py-2">
                         {new Date(team.createdAt).toDateString()}
                       </td>

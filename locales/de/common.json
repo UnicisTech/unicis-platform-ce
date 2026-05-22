@@ -159,6 +159,7 @@
   "last-name": "Nachname",
   "email": "E-Mail",
   "members": "Mitglieder",
+  "plan": "Plan",
   "members-description": "Teammitglieder und deren Rollen.",
   "delete-member-warning": "Das Löschen eines Mitglieds entfernt alle Aktivitäten, die mit diesem Mitglied verbunden sind. Dieser Vorgang kann nicht rückgängig gemacht werden.",
   "confirm-delete-member": "Löschen des Mitglieds bestätigen",

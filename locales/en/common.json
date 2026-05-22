@@ -159,6 +159,7 @@
   "last-name": "Last Name",
   "email": "Email",
   "members": "Members",
+  "plan": "Plan",
   "members-description": "Team members and their roles.",
   "delete-member-warning": "Deleting a member will delete all activites related to that member. This action cannot be undone.",
   "confirm-delete-member": "Confirm delete member",

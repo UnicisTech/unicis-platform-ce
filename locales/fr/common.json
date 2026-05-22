@@ -159,6 +159,7 @@
   "last-name": "Nom",
   "email": "E-mail",
   "members": "Membres",
+  "plan": "Plan",
   "members-description": "Membres de l’équipe et leurs rôles.",
   "delete-member-warning": "La suppression d’un membre supprimera toutes les activités liées à ce membre. Cette action est irréversible.",
   "confirm-delete-member": "Confirmer la suppression du membre",

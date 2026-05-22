@@ -38,6 +38,7 @@ export type TeamWithMemberCount = Prisma.TeamGetPayload<{
     _count: {
       select: { members: true };
     };
+    subscription: true;
   };
 }>;
 
