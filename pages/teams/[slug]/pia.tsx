@@ -3,7 +3,7 @@ import type { InferGetServerSidePropsType } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSidePropsContext } from 'next';
 import { getTeam } from 'models/team';
-import Dashboard from '@/components/interfaces/PIA/Dashboard';
+import Dashboard from '@/components/interfaces/pia/Dashboard';
 
 const RiskManagement: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>

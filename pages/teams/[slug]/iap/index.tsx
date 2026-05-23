@@ -1,4 +1,4 @@
-import { IapDashboard } from '@/components/interfaces/IAP';
+import { IapDashboard } from '@/components/interfaces/iap';
 import { Error, Loading } from '@/components/shared';
 import useIap from 'hooks/useIAP';
 import useTeam from 'hooks/useTeam';

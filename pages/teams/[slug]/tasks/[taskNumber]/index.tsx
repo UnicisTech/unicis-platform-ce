@@ -11,12 +11,12 @@ import {
   TaskDetails,
   TaskTab,
 } from '@/components/interfaces/Task';
-import { CscAuditLogs, CscPanel } from '@/components/interfaces/CSC';
+import { CscAuditLogs, CscPanel } from '@/components/interfaces/csc';
 import {
   RpaPanel,
   RpaAuditLog,
   CreateProcedureTest,
-} from '@/components/interfaces/RPA';
+} from '@/components/interfaces/rpa';
 import {
   CreateRiskManagementRisk,
   RiskManagementTaskPanel,
@@ -31,12 +31,12 @@ import {
   TiaAuditLogs,
   TiaPanel,
   CreateProcedure as CreateTiaProcedure,
-} from '@/components/interfaces/TIA';
+} from '@/components/interfaces/tia';
 import {
   CreatePiaRisk,
   PiaPanel,
   PiaAuditLogs,
-} from '@/components/interfaces/PIA';
+} from '@/components/interfaces/pia';
 import useRpaCreation from 'hooks/useRpaCreation';
 import {
   Card,

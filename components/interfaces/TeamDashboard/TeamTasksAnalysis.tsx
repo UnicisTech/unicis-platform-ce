@@ -1,4 +1,4 @@
-import { TaskStatusesDetail } from '@/components/interfaces/CSC';
+import { TaskStatusesDetail } from '@/components/interfaces/csc';
 import useTeamTasks from 'hooks/useTeamTasks';
 import {
   Card,

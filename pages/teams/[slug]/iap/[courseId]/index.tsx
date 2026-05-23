@@ -3,7 +3,7 @@ import { Loading, Error } from '@/components/shared';
 import useIapCourse from 'hooks/useIapCourse';
 import { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { CoursePage } from '@/components/interfaces/IAP';
+import { CoursePage } from '@/components/interfaces/iap';
 import useTeam from 'hooks/useTeam';
 
 const IapCourse = () => {
