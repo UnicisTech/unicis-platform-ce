@@ -7,7 +7,7 @@ import { EmptyState, Error, PerPageSelector } from '@/components/shared';
 import { TaskProperties, TaskWithPiaRisk } from 'types';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
-import CreateRisk from './RiskForm/RiskAssessmentDialog';
+import CreateRisk from './risk-form/RiskAssessmentDialog';
 import { Button } from '@/components/shadcn/ui/button';
 import { PiaAnalysis } from '../TeamDashboard';
 

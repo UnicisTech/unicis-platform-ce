@@ -7,7 +7,7 @@ import { TaskProperties, TaskWithRmRisk } from 'types';
 import { EmptyState, Error } from '@/components/shared';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
-import CreateRisk from './RiskForm/RmRiskDialog';
+import CreateRisk from './risk-form/RmRiskDialog';
 import { Button } from '@/components/shadcn/ui/button';
 import RmAnalysis from '../TeamDashboard/RmAnalysis';
 
