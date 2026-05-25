@@ -103,8 +103,30 @@ const Teams = () => {
                         </Link>
                       </td>
                       <td className="px-4 py-2">{team._count.members}</td>
-                      <td className="px-4 py-2 capitalize">
-                        {team.subscription?.plan?.toLowerCase() || 'Community'}
+                      <td className="px-4 py-2">
+                        {(() => {
+                          const plan = team.subscription?.plan || 'Community';
+                          const planLower = plan.toLowerCase();
+                          const planColor =
+                            planLower === 'community'
+                              ? 'oklch(50.8% .118 165.612)'
+                              : planLower === 'premium'
+                                ? 'oklch(48.8% .243 264.376)'
+                                : planLower === 'ultimate'
+                                  ? 'oklch(49.6% .265 301.924)'
+                                  : undefined;
+                          const customStyle = planColor
+                            ? { borderColor: planColor, color: planColor }
+                            : undefined;
+                          return (
+                            <span
+                              className={`badge badge-outline uppercase`}
+                              style={customStyle}
+                            >
+                              {plan}
+                            </span>
+                          );
+                        })()}
                       </td>
                       <td className="px-4 py-2">
                         {new Date(team.createdAt).toDateString()}
