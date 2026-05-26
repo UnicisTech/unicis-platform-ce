@@ -6,3 +6,6 @@ export { default as CommentsTab } from './CommentsTab';
 export { default as TaskDetails } from './TaskDetails';
 export { default as Attachments } from './Attachments';
 export { default as TaskImportModal } from './TaskImportModal';
+export { default as TaskKanbanBoard } from './TaskKanbanBoard';
+export { default as TaskListView } from './TaskListView';
+export { default as TaskViewTabs } from './TaskViewTabs';

@@ -123,6 +123,7 @@ model Task {
   authorId    String
   title       String
   status      String
+  kanbanOrder Int       @default(0)
   duedate     DateTime? @db.Timestamptz
   description String
   properties  Json
@@ -132,6 +133,7 @@ model Task {
   team        Team         @relation(fields: [teamId], references: [id], onDelete: Cascade)
 
   @@index([duedate])
+  @@index([teamId, status, kanbanOrder])
 }
 
 model Comment {

@@ -1,5 +1,17 @@
+import type { Prisma } from '@/generated/client';
 import { prisma } from '@/lib/prisma';
-import { getTeam, incrementTaskIndex } from './team';
+
+export type TaskReorderInput = {
+  taskNumber: number;
+  status: string;
+  kanbanOrder: number;
+};
+
+const getTeamTasksOrderBy = (): Prisma.TaskOrderByWithRelationInput[] => [
+  { status: 'asc' },
+  { kanbanOrder: 'asc' },
+  { taskNumber: 'asc' },
+];
 
 export const createTask = async (param: {
   authorId: string;
@@ -10,25 +22,39 @@ export const createTask = async (param: {
   description: string;
 }) => {
   const { authorId, teamId, title, status, duedate, description } = param;
-  const team = await getTeam({ id: teamId });
-  const index = team.taskIndex;
 
-  const task = await prisma.task.create({
-    data: {
-      authorId,
-      taskNumber: index,
-      teamId,
-      title,
-      status,
-      duedate,
-      description,
-      properties: {},
-    },
+  return await prisma.$transaction(async (tx) => {
+    const team = await tx.team.update({
+      where: { id: teamId },
+      data: { taskIndex: { increment: 1 } },
+      select: { taskIndex: true },
+    });
+
+    const lastTaskInStatus = await tx.task.findFirst({
+      where: {
+        teamId,
+        status,
+      },
+      orderBy: [{ kanbanOrder: 'desc' }, { taskNumber: 'desc' }],
+      select: {
+        kanbanOrder: true,
+      },
+    });
+
+    return await tx.task.create({
+      data: {
+        authorId,
+        taskNumber: team.taskIndex - 1,
+        teamId,
+        title,
+        status,
+        kanbanOrder: (lastTaskInStatus?.kanbanOrder ?? -1) + 1,
+        duedate,
+        description,
+        properties: {},
+      },
+    });
   });
-
-  await incrementTaskIndex(teamId);
-
-  return task;
 };
 
 export const updateTask = async (
@@ -36,25 +62,51 @@ export const updateTask = async (
   slug: string,
   data: any
 ) => {
-  const taskToEdit = await prisma.task.findFirst({
-    where: {
-      taskNumber,
-      team: {
-        slug,
+  return await prisma.$transaction(async (tx) => {
+    const taskToEdit = await tx.task.findFirst({
+      where: {
+        taskNumber,
+        team: {
+          slug,
+        },
       },
-    },
-  });
-  if (taskToEdit) {
-    const editedTask = await prisma.task.update({
+    });
+
+    if (!taskToEdit) {
+      return null;
+    }
+
+    const dataToUpdate = { ...data };
+    const shouldMoveToEndOfStatus =
+      typeof dataToUpdate.status === 'string' &&
+      dataToUpdate.status !== taskToEdit.status &&
+      !Object.prototype.hasOwnProperty.call(dataToUpdate, 'kanbanOrder');
+
+    if (shouldMoveToEndOfStatus) {
+      const lastTaskInStatus = await tx.task.findFirst({
+        where: {
+          teamId: taskToEdit.teamId,
+          status: dataToUpdate.status,
+          NOT: {
+            id: taskToEdit.id,
+          },
+        },
+        orderBy: [{ kanbanOrder: 'desc' }, { taskNumber: 'desc' }],
+        select: {
+          kanbanOrder: true,
+        },
+      });
+
+      dataToUpdate.kanbanOrder = (lastTaskInStatus?.kanbanOrder ?? -1) + 1;
+    }
+
+    return await tx.task.update({
       where: {
         id: taskToEdit.id,
       },
-      data: data,
+      data: dataToUpdate,
     });
-    return editedTask;
-  } else {
-    return null;
-  }
+  });
 };
 
 export const deleteTask = async (taskNumber: number, slug: string) => {
@@ -138,6 +190,53 @@ export const getTeamTasks = async (slug: string) => {
         slug,
       },
     },
+    orderBy: getTeamTasksOrderBy(),
   });
   return tasks;
+};
+
+export const reorderTeamTasks = async (
+  teamId: string,
+  tasks: TaskReorderInput[]
+) => {
+  const taskNumbers = tasks.map((task) => task.taskNumber);
+  const uniqueTaskNumbers = new Set(taskNumbers);
+
+  return await prisma.$transaction(async (tx) => {
+    const existingTasks = await tx.task.findMany({
+      where: {
+        teamId,
+        taskNumber: {
+          in: taskNumbers,
+        },
+      },
+      select: {
+        taskNumber: true,
+      },
+    });
+
+    if (existingTasks.length !== uniqueTaskNumbers.size) {
+      return null;
+    }
+
+    for (const task of tasks) {
+      await tx.task.updateMany({
+        where: {
+          teamId,
+          taskNumber: task.taskNumber,
+        },
+        data: {
+          status: task.status,
+          kanbanOrder: task.kanbanOrder,
+        },
+      });
+    }
+
+    return await tx.task.findMany({
+      where: {
+        teamId,
+      },
+      orderBy: getTeamTasksOrderBy(),
+    });
+  });
 };
