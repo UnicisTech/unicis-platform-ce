@@ -9,6 +9,7 @@ interface ImportTaskRow {
   title: string;
   status: string;
   duedate?: string;
+  description?: string;
 }
 
 export default async function handler(
@@ -80,7 +81,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       title: row.title.trim(),
       status: row.status,
       duedate: dueAt,
-      description: '',
+      description: row.description?.trim() || '',
     });
     count++;
   }

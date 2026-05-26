@@ -494,6 +494,11 @@
   "import-field-missing": "fehlt",
   "import-row-error-label": "Fehler",
   "import-rows-skipped": "{{count}} Zeile(n) mit Fehlern werden übersprungen.",
+  "framework-templates": "Vorlagen",
+  "import-templates-description": "Wählen Sie eine Framework-Vorlage, um Aufgaben aus deren Kontrollen zu erstellen.",
+  "no-frameworks-enabled": "Keine Frameworks aktiviert",
+  "no-frameworks-enabled-hint": "Aktivieren Sie Frameworks in den Teameinstellungen, um Vorlagen zu verwenden.",
+  "template-control-count": "{{count}} Kontrolle(n)",
   "modules": "Module",
   "task-statuses": {
     "todo": "Zu erledigen",

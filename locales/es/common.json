@@ -494,6 +494,11 @@
   "import-field-missing": "falta",
   "import-row-error-label": "error",
   "import-rows-skipped": "{{count}} fila(s) con errores serán omitidas.",
+  "framework-templates": "Plantillas",
+  "import-templates-description": "Seleccione una plantilla de framework para crear tareas a partir de sus controles.",
+  "no-frameworks-enabled": "Sin frameworks habilitados",
+  "no-frameworks-enabled-hint": "Habilite frameworks en la configuración del equipo para usar plantillas.",
+  "template-control-count": "{{count}} control(es)",
   "modules": "Módulos",
   "task-statuses": {
     "todo": "Por hacer",

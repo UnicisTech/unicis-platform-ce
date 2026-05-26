@@ -495,6 +495,11 @@
   "import-field-missing": "missing",
   "import-row-error-label": "error",
   "import-rows-skipped": "{{count}} row(s) with errors will be skipped.",
+  "framework-templates": "Templates",
+  "import-templates-description": "Select a framework template to create tasks from its controls.",
+  "no-frameworks-enabled": "No frameworks enabled",
+  "no-frameworks-enabled-hint": "Enable frameworks in team settings to use templates.",
+  "template-control-count": "{{count}} control(s)",
   "modules": "Modules",
   "task-statuses": {
     "todo": "To Do",

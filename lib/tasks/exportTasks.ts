@@ -56,6 +56,7 @@ export interface TaskImportRow {
   title: string;
   status: string;
   duedate: string;
+  description?: string;
   error?: string;
 }
 

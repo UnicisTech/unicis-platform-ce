@@ -494,6 +494,11 @@
   "import-field-missing": "manquant",
   "import-row-error-label": "erreur",
   "import-rows-skipped": "{{count}} ligne(s) avec des erreurs seront ignorées.",
+  "framework-templates": "Modèles",
+  "import-templates-description": "Sélectionnez un modèle de framework pour créer des tâches à partir de ses contrôles.",
+  "no-frameworks-enabled": "Aucun framework activé",
+  "no-frameworks-enabled-hint": "Activez des frameworks dans les paramètres de l'équipe pour utiliser les modèles.",
+  "template-control-count": "{{count}} contrôle(s)",
   "modules": "Modules",
   "task-statuses": {
     "todo": "À faire",
