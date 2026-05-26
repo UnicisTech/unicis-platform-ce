@@ -19,6 +19,7 @@ import {
   downloadTaskTemplateCsv,
   parseImportFile,
   type TaskImportRow,
+  VALID_PRIORITIES,
   VALID_STATUSES,
 } from '@/lib/tasks/exportTasks';
 
@@ -76,6 +77,7 @@ const TaskImportModal = ({
           tasks: validRows.map((r) => ({
             title: r.title,
             status: r.status,
+            priority: r.priority,
             duedate: r.duedate || undefined,
           })),
         }),
@@ -215,6 +217,7 @@ const TaskImportModal = ({
                       <th className="px-3 py-2 text-left">#</th>
                       <th className="px-3 py-2 text-left">{t('title')}</th>
                       <th className="px-3 py-2 text-left">{t('status')}</th>
+                      <th className="px-3 py-2 text-left">{t('priority')}</th>
                       <th className="px-3 py-2 text-left">{t('due-date')}</th>
                       <th className="px-3 py-2 text-left"></th>
                     </tr>
@@ -243,6 +246,17 @@ const TaskImportModal = ({
                           ) : (
                             <span className="text-red-500">
                               {row.status || t('import-field-missing')}
+                            </span>
+                          )}
+                        </td>
+                        <td className="px-3 py-1.5">
+                          {VALID_PRIORITIES.includes(
+                            row.priority as (typeof VALID_PRIORITIES)[number]
+                          ) ? (
+                            t(`task-priorities.${row.priority}`)
+                          ) : (
+                            <span className="text-red-500">
+                              {row.priority || t('import-field-missing')}
                             </span>
                           )}
                         </td>

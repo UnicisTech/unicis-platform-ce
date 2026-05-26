@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import type { Task } from 'types';
-import { StatusBadge } from '@/components/shared';
+import { PriorityBadge, StatusBadge } from '@/components/shared';
 import ModuleBadge from '@/components/shared/ModuleBadge';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Badge } from '@/components/shadcn/ui/badge';
@@ -51,6 +51,7 @@ const TaskListView = ({
                 <th className="w-1/10 px-4 py-2 text-left">{t('task-id')}</th>
                 <th className="w-2/5 px-4 py-2 text-left">{t('title')}</th>
                 <th className="w-1/10 px-4 py-2 text-left">{t('status')}</th>
+                <th className="w-1/10 px-4 py-2 text-left">{t('priority')}</th>
                 <th className="w-1/10 px-4 py-2 text-left">{t('due-date')}</th>
                 <th className="w-1/5 px-4 py-2 text-left">{t('actions')}</th>
               </tr>
@@ -83,6 +84,12 @@ const TaskListView = ({
                     <StatusBadge
                       value={task.status}
                       label={t(`task-statuses.${task.status}`)}
+                    />
+                  </td>
+                  <td className="px-4 py-2">
+                    <PriorityBadge
+                      value={task.priority}
+                      label={t(`task-priorities.${task.priority}`)}
                     />
                   </td>
                   <td className="px-4 py-2">

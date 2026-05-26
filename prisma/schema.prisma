@@ -123,6 +123,7 @@ model Task {
   authorId    String
   title       String
   status      String
+  priority    TaskPriority @default(medium)
   kanbanOrder Int       @default(0)
   duedate     DateTime? @db.Timestamptz
   description String
@@ -338,4 +339,10 @@ enum CourseContentType {
   EMBEDDED_VIDEO
   PRESENTATION_PDF
   OPEN_TEXT
+}
+
+enum TaskPriority {
+  low
+  medium
+  high
 }

@@ -9,6 +9,7 @@ import { serializeForApi } from '@/lib/serialize';
 import { notificationService } from '@/lib/notifications/notification-service';
 import { getTeamRecipientsBySlug } from '@/lib/notifications/recipients';
 import { NotificationType } from '@/generated/enums';
+import { DEFAULT_TASK_PRIORITY, isTaskPriority } from '@/lib/tasks';
 
 export default async function handler(
   req: NextApiRequest,
@@ -46,6 +47,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   throwIfNotAllowed(teamMember, 'task', 'create');
 
   const { title, status, duedate, description } = req.body;
+  const priority = req.body.priority ?? DEFAULT_TASK_PRIORITY;
   const { value: dueAt, valid } = parseDueDateInput(duedate);
 
   if (!valid) {
@@ -53,6 +55,13 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       error: { message: 'Invalid due date' },
     });
   }
+
+  if (typeof priority !== 'string' || !isTaskPriority(priority)) {
+    return res.status(400).json({
+      error: { message: 'Invalid priority' },
+    });
+  }
+
   const sanitizedDescription = sanitizeRichText(
     typeof description === 'string' ? description : ''
   );
@@ -66,6 +75,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     teamId,
     title,
     status,
+    priority,
     duedate: dueAt,
     description: sanitizedDescription,
   });

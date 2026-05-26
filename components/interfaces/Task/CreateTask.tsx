@@ -17,7 +17,7 @@ import {
 } from '@/components/shadcn/ui/dialog';
 import type { Team } from 'types';
 import { Button } from '@/components/shadcn/ui/button';
-import { statuses } from '@/lib/tasks';
+import { DEFAULT_TASK_PRIORITY, statuses, taskPriorities } from '@/lib/tasks';
 import { getCurrentStringDate } from '@/components/services/taskService';
 import useTasks from 'hooks/useTasks';
 import { Input } from '@/components/shadcn/ui/input';
@@ -49,6 +49,9 @@ const DEFAULT_STATUS_VALUE = 'todo';
 const schema = Yup.object().shape({
   title: Yup.string().required('Title is required'),
   status: Yup.string().required('Status is required'),
+  priority: Yup.string()
+    .oneOf([...taskPriorities])
+    .required('Priority is required'),
   duedate: Yup.date().required('Due date is required'),
   description: Yup.string().nullable(),
 });
@@ -72,6 +75,7 @@ const CreateTask = ({
     defaultValues: {
       title: '',
       status: DEFAULT_STATUS_VALUE,
+      priority: DEFAULT_TASK_PRIORITY,
       duedate: new Date(getCurrentStringDate()),
       description: '',
     },
@@ -139,6 +143,31 @@ const CreateTask = ({
                         {statuses.map((status) => (
                           <SelectItem key={status} value={status}>
                             {t(`task-statuses.${status}`)}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="priority"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('priority')}</FormLabel>
+                  <FormControl>
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {taskPriorities.map((priority) => (
+                          <SelectItem key={priority} value={priority}>
+                            {t(`task-priorities.${priority}`)}
                           </SelectItem>
                         ))}
                       </SelectContent>

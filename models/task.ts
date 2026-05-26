@@ -1,5 +1,6 @@
 import type { Prisma } from '@/generated/client';
 import { prisma } from '@/lib/prisma';
+import { DEFAULT_TASK_PRIORITY, type TaskPriority } from '@/lib/tasks';
 
 export type TaskReorderInput = {
   taskNumber: number;
@@ -18,10 +19,19 @@ export const createTask = async (param: {
   teamId: string;
   title: string;
   status: string;
+  priority?: TaskPriority;
   duedate: Date | null;
   description: string;
 }) => {
-  const { authorId, teamId, title, status, duedate, description } = param;
+  const {
+    authorId,
+    teamId,
+    title,
+    status,
+    priority = DEFAULT_TASK_PRIORITY,
+    duedate,
+    description,
+  } = param;
 
   return await prisma.$transaction(async (tx) => {
     const team = await tx.team.update({
@@ -48,6 +58,7 @@ export const createTask = async (param: {
         teamId,
         title,
         status,
+        priority,
         kanbanOrder: (lastTaskInStatus?.kanbanOrder ?? -1) + 1,
         duedate,
         description,

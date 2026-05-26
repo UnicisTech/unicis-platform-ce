@@ -501,7 +501,13 @@
     "done": "Terminé",
     "failed": "Échoué"
   },
+  "task-priorities": {
+    "low": "Faible",
+    "medium": "Moyenne",
+    "high": "Élevée"
+  },
   "filter-by-status": "Filtrer par statut",
+  "filter-by-priority": "Filtrer par priorité",
   "filter-by-module": "Filtrer par module",
   "total-tasks": "Total des tâches",
   "progress": {
@@ -511,6 +517,7 @@
   },
   "title": "Titre",
   "status": "Statut",
+  "priority": "Priorité",
   "registered-modules": "Modules enregistrés",
   "save": "Enregistrer",
   "next": "Suivant",

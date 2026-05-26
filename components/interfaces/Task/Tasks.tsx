@@ -17,7 +17,11 @@ import { Button } from '@/components/shadcn/ui/button';
 import { TeamTaskAnalysis } from '../TeamDashboard';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import toast from 'react-hot-toast';
-import { hasTaskModule, isTaskModuleKey } from '@/lib/tasks';
+import {
+  DEFAULT_TASK_PRIORITY,
+  hasTaskModule,
+  isTaskModuleKey,
+} from '@/lib/tasks';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -45,6 +49,7 @@ const Tasks = ({ team }: { team: Team }) => {
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState<null | number>(null);
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
+  const [selectedPriorities, setSelectedPriorities] = useState<string[]>([]);
   const [selectedModules, setSelectedModules] = useState<string[]>([]);
   const [activeView, setActiveView] = useState<ActiveTaskView>('list');
   const [perPage, setPerPage] = useState<number>(10);
@@ -54,12 +59,17 @@ const Tasks = ({ team }: { team: Team }) => {
   const canUpdateTask = canAccess('task', ['update']);
   const canDeleteTask = canAccess('task', ['delete']);
   const hasActiveFilters =
-    selectedStatuses.length > 0 || selectedModules.length > 0;
+    selectedStatuses.length > 0 ||
+    selectedPriorities.length > 0 ||
+    selectedModules.length > 0;
   const canReorderTasks = canUpdateTask && !hasActiveFilters;
 
   const filteredTasks = tasks?.filter((task) => {
     const statusMatch =
       !selectedStatuses.length || selectedStatuses.includes(task.status);
+    const priorityMatch =
+      !selectedPriorities.length ||
+      selectedPriorities.includes(task.priority ?? DEFAULT_TASK_PRIORITY);
     const moduleMatch =
       !selectedModules.length ||
       selectedModules.some(
@@ -69,7 +79,7 @@ const Tasks = ({ team }: { team: Team }) => {
           task.properties &&
           hasTaskModule(task.properties as Record<string, unknown>, mod)
       );
-    return statusMatch && moduleMatch;
+    return statusMatch && priorityMatch && moduleMatch;
   });
 
   const {
@@ -187,6 +197,8 @@ const Tasks = ({ team }: { team: Team }) => {
           <TaskFilters
             selectedStatuses={selectedStatuses}
             setSelectedStatuses={setSelectedStatuses}
+            selectedPriorities={selectedPriorities}
+            setSelectedPriorities={setSelectedPriorities}
             selectedModules={selectedModules}
             setSelectedModules={setSelectedModules}
           />
