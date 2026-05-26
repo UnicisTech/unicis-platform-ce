@@ -13,6 +13,7 @@ import { isoValueToLabel } from '@/lib/csc/csc-frameworks';
 import frameworks from '@/lib/csc/frameworks';
 import SoaExportModal from './SoaExportModal';
 import { downloadSoaXlsx } from '@/lib/soa/exportXlsx';
+import { downloadSoaOds } from '@/lib/soa/exportOds';
 import { downloadSoaHtml } from '@/lib/soa/exportHtml';
 import { downloadSoaPdf } from '@/lib/soa/exportPdf';
 import type { ExportFormat, SoaPayload, SoaRow } from '@/lib/soa/types';
@@ -211,6 +212,10 @@ export default function CscPanel({
       const payload = buildPayload();
       if (fmt === 'xlsx') {
         await downloadSoaXlsx(payload);
+        return;
+      }
+      if (fmt === 'ods') {
+        downloadSoaOds(payload);
         return;
       }
       if (fmt === 'html') {

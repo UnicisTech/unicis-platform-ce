@@ -36,6 +36,7 @@ import {
   exportTasksCsv,
   exportTasksHtml,
   exportTasksPdf,
+  exportTasksOds,
 } from '@/lib/tasks/exportTasks';
 
 const Tasks = ({ team }: { team: Team }) => {
@@ -100,7 +101,9 @@ const Tasks = ({ team }: { team: Team }) => {
     setVisible(false);
   };
 
-  const handleExport = async (format: 'xlsx' | 'csv' | 'html' | 'pdf') => {
+  const handleExport = async (
+    format: 'xlsx' | 'csv' | 'html' | 'pdf' | 'ods'
+  ) => {
     if (!tasks || tasks.length === 0) return;
     const teamName = team.name;
     try {
@@ -108,6 +111,7 @@ const Tasks = ({ team }: { team: Team }) => {
       else if (format === 'csv') exportTasksCsv(tasks, teamName);
       else if (format === 'html') exportTasksHtml(tasks, teamName);
       else if (format === 'pdf') exportTasksPdf(tasks, teamName);
+      else if (format === 'ods') exportTasksOds(tasks, teamName);
     } catch {
       toast.error(t('errors.requestFailed'));
     }
@@ -147,6 +151,9 @@ const Tasks = ({ team }: { team: Team }) => {
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem onClick={() => handleExport('xlsx')}>
                     {t('export-excel')}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleExport('ods')}>
+                    {t('export-ods')}
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => handleExport('csv')}>
                     {t('export-csv')}

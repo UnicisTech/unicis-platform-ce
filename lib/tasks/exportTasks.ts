@@ -1,6 +1,7 @@
 import ExcelJS from 'exceljs';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import * as XLSX from 'xlsx';
 import { format } from 'date-fns';
 import type { Task } from 'types';
 import { getTaskModules } from '@/lib/tasks';
@@ -449,6 +450,43 @@ export function exportTasksPdf(tasks: Task[], teamName: string): void {
   );
 }
 
+// ── ODS Export ───────────────────────────────────────────────────────────────
+
+export function exportTasksOds(tasks: Task[], teamName: string): void {
+  const headers = ['Task ID', 'Title', 'Modules', 'Status', 'Due Date'];
+  const rows = tasks.map((task) => [
+    task.taskNumber,
+    task.title,
+    getModulesLabel(task.properties),
+    task.status,
+    formatDueDate(task.duedate) || '',
+  ]);
+
+  const wsData = [headers, ...rows];
+  const ws = XLSX.utils.aoa_to_sheet(wsData);
+
+  // Set column widths
+  ws['!cols'] = [
+    { wch: 10 },
+    { wch: 50 },
+    { wch: 25 },
+    { wch: 20 },
+    { wch: 18 },
+  ];
+
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Tasks');
+
+  const buf = XLSX.write(wb, { bookType: 'ods', type: 'array' });
+  const blob = new Blob([buf], {
+    type: 'application/vnd.oasis.opendocument.spreadsheet',
+  });
+  triggerDownload(
+    blob,
+    `Tasks_${teamName}_${format(new Date(), 'yyyy-MM-dd')}.ods`
+  );
+}
+
 // ── Import Templates ───────────────────────────────────────────────────────────
 
 export async function downloadTaskTemplateXlsx(): Promise<void> {
@@ -504,6 +542,31 @@ export function downloadTaskTemplateCsv(): void {
   triggerDownload(blob, 'Tasks_Import_Template.csv');
 }
 
+export function downloadTaskTemplateOds(): void {
+  const wsData = [
+    ['Title', 'Status', 'Due Date'],
+    ['Example Task Title', 'todo', format(new Date(), 'yyyy-MM-dd')],
+  ];
+
+  const ws = XLSX.utils.aoa_to_sheet(wsData);
+  ws['!cols'] = [{ wch: 50 }, { wch: 20 }, { wch: 20 }];
+
+  // Add a comment about valid statuses in the status cell
+  if (!ws.B2) ws.B2 = { v: 'todo', t: 's' };
+  ws.B2.c = [
+    { a: 'Unicis', t: `Valid values:\n${VALID_STATUSES.join('\n')}` },
+  ];
+
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Tasks Template');
+
+  const buf = XLSX.write(wb, { bookType: 'ods', type: 'array' });
+  const blob = new Blob([buf], {
+    type: 'application/vnd.oasis.opendocument.spreadsheet',
+  });
+  triggerDownload(blob, 'Tasks_Import_Template.ods');
+}
+
 // ── Parse Import File (client-side) ───────────────────────────────────────────
 
 export async function parseImportFile(file: File): Promise<TaskImportRow[]> {
@@ -513,8 +576,15 @@ export async function parseImportFile(file: File): Promise<TaskImportRow[]> {
     return parseCsvImport(file);
   } else if (ext === 'xlsx' || file.type.includes('spreadsheetml')) {
     return parseXlsxImport(file);
+  } else if (
+    ext === 'ods' ||
+    file.type === 'application/vnd.oasis.opendocument.spreadsheet'
+  ) {
+    return parseOdsImport(file);
   }
-  throw new Error('Unsupported file type. Please upload a .xlsx or .csv file.');
+  throw new Error(
+    'Unsupported file type. Please upload a .xlsx, .ods, or .csv file.'
+  );
 }
 
 async function parseCsvImport(file: File): Promise<TaskImportRow[]> {
@@ -563,6 +633,29 @@ async function parseXlsxImport(file: File): Promise<TaskImportRow[]> {
   });
 
   return rows;
+}
+
+async function parseOdsImport(file: File): Promise<TaskImportRow[]> {
+  const buf = await file.arrayBuffer();
+  const wb = XLSX.read(buf, { type: 'array' });
+  const ws = wb.Sheets[wb.SheetNames[0]];
+  if (!ws) return [];
+
+  const data = XLSX.utils.sheet_to_json<string[]>(ws, { header: 1 });
+  if (data.length < 2) return [];
+
+  // Skip header row
+  return data.slice(1).reduce<TaskImportRow[]>((acc, row) => {
+    const title = String(row[0] ?? '').trim();
+    const status = String(row[1] ?? '')
+      .trim()
+      .toLowerCase();
+    const rawDate = row[2];
+    const duedate = rawDate ? String(rawDate).trim() : '';
+    if (!title && !status) return acc; // skip empty rows
+    acc.push(validateImportRow({ title, status, duedate }));
+    return acc;
+  }, []);
 }
 
 function validateImportRow(row: {

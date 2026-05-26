@@ -17,6 +17,7 @@ import useTasks from 'hooks/useTasks';
 import {
   downloadTaskTemplateXlsx,
   downloadTaskTemplateCsv,
+  downloadTaskTemplateOds,
   parseImportFile,
   type TaskImportRow,
   VALID_STATUSES,
@@ -258,6 +259,13 @@ const TaskImportModal = ({
                   >
                     {t('download-csv-template')}
                   </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => downloadTaskTemplateOds()}
+                  >
+                    {t('download-ods-template')}
+                  </Button>
                 </div>
               </div>
 
@@ -296,7 +304,7 @@ const TaskImportModal = ({
                 <input
                   ref={fileInputRef}
                   type="file"
-                  accept=".xlsx,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv"
+                  accept=".xlsx,.csv,.ods,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv,application/vnd.oasis.opendocument.spreadsheet"
                   className="hidden"
                   onChange={handleFileChange}
                 />
