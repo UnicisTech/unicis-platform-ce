@@ -6,9 +6,11 @@ import { Card } from '@/components/shadcn/ui/card';
 
 interface PiaAnalysisProps {
   tasks: Task[] | undefined;
+  slug?: string;
+  onCellClick?: (category: number, x: number, y: number) => void;
 }
 
-const piaDashboardConfig = [
+export const piaDashboardConfig = [
   {
     id: 1,
     titleKey: 'confidentiality-and-integrity',
@@ -29,7 +31,7 @@ const piaDashboardConfig = [
   },
 ];
 
-const PiaAnalysis = ({ tasks }: PiaAnalysisProps) => {
+const PiaAnalysis = ({ tasks, slug, onCellClick }: PiaAnalysisProps) => {
   const { t } = useTranslation('common');
 
   if (!tasks) {
@@ -55,8 +57,15 @@ const PiaAnalysis = ({ tasks }: PiaAnalysisProps) => {
                   {t(titleKey)}
                 </div>
                 <div className="flex-1">
-                  {/* // TODO: remove datasets prop? */}
-                  <RiskMatrixDashboardChart datasets={[]} counterMap={map} />
+                  <RiskMatrixDashboardChart
+                    datasets={[]}
+                    counterMap={map}
+                    onCellClick={
+                      onCellClick
+                        ? (x, y) => onCellClick(id, x, y)
+                        : undefined
+                    }
+                  />
                 </div>
               </div>
             ))}
@@ -68,7 +77,15 @@ const PiaAnalysis = ({ tasks }: PiaAnalysisProps) => {
                   {t(titleKey)}
                 </div>
                 <div className="flex-1">
-                  <RiskMatrixDashboardChart datasets={[]} counterMap={map} />
+                  <RiskMatrixDashboardChart
+                    datasets={[]}
+                    counterMap={map}
+                    onCellClick={
+                      onCellClick
+                        ? (x, y) => onCellClick(id, x, y)
+                        : undefined
+                    }
+                  />
                 </div>
               </div>
             ))}

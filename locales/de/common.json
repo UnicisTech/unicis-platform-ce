@@ -1427,5 +1427,7 @@
   "last-name-invalid-chars": "Ungültige Zeichen im Nachnamen",
   "last-name-invalid": "Ungültiger Nachname",
   "enter-real-name": "Bitte geben Sie einen echten Namen ein",
-  "email-domain-invalid": "Die E-Mail-Domain scheint keine gültige Mail-Domain zu sein. Bitte verwenden Sie eine echte E-Mail-Adresse."
+  "email-domain-invalid": "Die E-Mail-Domain scheint keine gültige Mail-Domain zu sein. Bitte verwenden Sie eine echte E-Mail-Adresse.",
+  "filtered-by": "Gefiltert nach",
+  "clear-filter": "Filter löschen"
 }

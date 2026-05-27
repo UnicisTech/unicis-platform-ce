@@ -1430,5 +1430,7 @@
   "last-name-invalid-chars": "Caractères invalides dans le nom de famille",
   "last-name-invalid": "Nom de famille invalide",
   "enter-real-name": "Veuillez entrer un vrai nom",
-  "email-domain-invalid": "Le domaine de l'e-mail ne semble pas être un domaine de messagerie valide. Veuillez utiliser une adresse e-mail réelle."
+  "email-domain-invalid": "Le domaine de l'e-mail ne semble pas être un domaine de messagerie valide. Veuillez utiliser une adresse e-mail réelle.",
+  "filtered-by": "Filtré par",
+  "clear-filter": "Effacer le filtre"
 }

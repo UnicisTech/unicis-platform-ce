@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+import { useRouter } from 'next/router';
 import {
   TeamAssessmentAnalysis,
   TeamCscAnalysis,
@@ -20,13 +22,29 @@ const TeamDashboard = ({
   slug,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { t } = useTranslation('common');
+  const router = useRouter();
   const { isLoading: teamLoading, isError: teamError, team } = useTeam();
   const {
     tasks,
     isLoading: tasksLoading,
     isError: tasksError,
   } = useTeamTasks(slug);
-  console.log('team', team);
+
+  const handlePiaCellClick = useCallback(
+    (category: number, x: number, y: number) => {
+      router.push(
+        `/teams/${slug}/pia?category=${category}&ix=${x}&iy=${y}`
+      );
+    },
+    [router, slug]
+  );
+
+  const handleRmCellClick = useCallback(
+    (x: number, y: number) => {
+      router.push(`/teams/${slug}/risk-management?ix=${x}&iy=${y}`);
+    },
+    [router, slug]
+  );
 
   if (teamLoading || tasksLoading) {
     return <Loading />;
@@ -76,7 +94,7 @@ const TeamDashboard = ({
               {t(`pia-overview`)}
             </h2>
           </div>
-          <PiaAnalysis tasks={tasks} />
+          <PiaAnalysis tasks={tasks} onCellClick={handlePiaCellClick} />
         </div>
         <TeamCscAnalysis team={team} />
         <div className="space-y-6">
@@ -85,7 +103,7 @@ const TeamDashboard = ({
               {t('rm-overview')}
             </h2>
           </div>
-          <RmAnalysis slug={slug} />
+          <RmAnalysis slug={slug} onCellClick={handleRmCellClick} />
         </div>
       </div>
     </>

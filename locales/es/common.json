@@ -1430,5 +1430,7 @@
   "last-name-invalid-chars": "Caracteres inválidos en el apellido",
   "last-name-invalid": "Apellido inválido",
   "enter-real-name": "Por favor, introduce un nombre real",
-  "email-domain-invalid": "El dominio del correo electrónico no parece ser un dominio de correo válido. Por favor, usa una dirección de correo electrónico real."
+  "email-domain-invalid": "El dominio del correo electrónico no parece ser un dominio de correo válido. Por favor, usa una dirección de correo electrónico real.",
+  "filtered-by": "Filtrado por",
+  "clear-filter": "Borrar filtro"
 }

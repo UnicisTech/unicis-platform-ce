@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import useCanAccess from 'hooks/useCanAccess';
@@ -10,6 +10,15 @@ import DeleteRisk from './DeleteRisk';
 import CreateRisk from './risk-form/RiskAssessmentDialog';
 import { Button } from '@/components/shadcn/ui/button';
 import { PiaAnalysis } from '../TeamDashboard';
+import { riskSecurityPoints, riskProbabilityPoints } from '@/lib/pia';
+import { piaDashboardConfig } from '../TeamDashboard/PiaAnalysis';
+import { impactLabelKeys, probabilityLabelKeys } from '@/lib/common';
+
+interface PiaMatrixFilter {
+  category: number;
+  x: number;
+  y: number;
+}
 
 const Dashboard = () => {
   const { t } = useTranslation('common');
@@ -29,6 +38,21 @@ const Dashboard = () => {
     null
   );
 
+  const [matrixFilter, setMatrixFilter] = useState<PiaMatrixFilter | null>(
+    null
+  );
+
+  useEffect(() => {
+    const { category, ix, iy } = router.query;
+    if (category && ix && iy) {
+      setMatrixFilter({
+        category: Number(category),
+        x: Number(ix),
+        y: Number(iy),
+      });
+    }
+  }, [router.query]);
+
   const tasksWithRisks = useMemo(() => {
     if (!tasks) {
       return [];
@@ -39,6 +63,38 @@ const Dashboard = () => {
       return procedure;
     }) as TaskWithPiaRisk[];
   }, [tasks]);
+
+  const filteredTasks = useMemo(() => {
+    if (!matrixFilter) return tasksWithRisks;
+
+    const config = piaDashboardConfig.find(
+      (c) => c.id === matrixFilter.category
+    );
+    if (!config) return tasksWithRisks;
+
+    return tasksWithRisks.filter((task) => {
+      const risk = task.properties.pia_risk;
+      const securityValue = risk?.[matrixFilter.category]?.[config.security];
+      const probabilityValue =
+        risk?.[matrixFilter.category]?.[config.probability];
+      if (!securityValue || !probabilityValue) return false;
+      return (
+        riskSecurityPoints[securityValue] === matrixFilter.x &&
+        riskProbabilityPoints[probabilityValue] === matrixFilter.y
+      );
+    });
+  }, [tasksWithRisks, matrixFilter]);
+
+  const handleMatrixCellClick = useCallback(
+    (category: number, x: number, y: number) => {
+      setMatrixFilter((prev) =>
+        prev?.category === category && prev?.x === x && prev?.y === y
+          ? null
+          : { category, x, y }
+      );
+    },
+    []
+  );
 
   const onEditClickHandler = useCallback((task: TaskWithPiaRisk) => {
     setTaskToEdit(task);
@@ -94,10 +150,33 @@ const Dashboard = () => {
         <EmptyState title={t('rpa-dashboard')} description={t('no-records')} />
       ) : (
         <>
-          <PiaAnalysis tasks={tasks} />
+          <PiaAnalysis
+            tasks={tasks}
+            onCellClick={handleMatrixCellClick}
+          />
+          {matrixFilter && (
+            <div className="flex items-center gap-2 mt-2">
+              <span className="text-sm text-muted-foreground">
+                {t('filtered-by')}:{' '}
+                {t(
+                  piaDashboardConfig.find((c) => c.id === matrixFilter.category)
+                    ?.titleKey || ''
+                )}{' '}
+                — {t(impactLabelKeys[matrixFilter.x])},{' '}
+                {t(probabilityLabelKeys[matrixFilter.y])}
+              </span>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setMatrixFilter(null)}
+              >
+                {t('clear-filter')}
+              </Button>
+            </div>
+          )}
           <RisksTable
             slug={slug as string}
-            tasks={tasksWithRisks}
+            tasks={filteredTasks}
             perPage={perPage}
             editHandler={onEditClickHandler}
             deleteHandler={onDeleteClickHandler}

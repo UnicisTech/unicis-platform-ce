@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeamTasks from 'hooks/useTeamTasks';
@@ -10,6 +10,16 @@ import DeleteRisk from './DeleteRisk';
 import CreateRisk from './risk-form/RmRiskDialog';
 import { Button } from '@/components/shadcn/ui/button';
 import RmAnalysis from '../TeamDashboard/RmAnalysis';
+import { impactLabelKeys, probabilityLabelKeys } from '@/lib/common';
+
+interface RmMatrixFilter {
+  x: number;
+  y: number;
+}
+
+const transformToRange = (value: number): number => {
+  return Math.floor(value / 20);
+};
 
 const Dashboard = () => {
   const { t } = useTranslation('common');
@@ -26,6 +36,15 @@ const Dashboard = () => {
   const [taskToEdit, setTaskToEdit] = useState<TaskWithRmRisk | null>(null);
   const [taskToDelete, setTaskToDelete] = useState<TaskWithRmRisk | null>(null);
 
+  const [matrixFilter, setMatrixFilter] = useState<RmMatrixFilter | null>(null);
+
+  useEffect(() => {
+    const { ix, iy } = router.query;
+    if (ix && iy) {
+      setMatrixFilter({ x: Number(ix), y: Number(iy) });
+    }
+  }, [router.query]);
+
   const tasksWithRisks = useMemo(() => {
     if (!tasks) {
       return [];
@@ -36,6 +55,28 @@ const Dashboard = () => {
       return procedure;
     }) as TaskWithRmRisk[];
   }, [tasks]);
+
+  const filteredTasks = useMemo(() => {
+    if (!matrixFilter) return tasksWithRisks;
+
+    return tasksWithRisks.filter((task) => {
+      const risk = task.properties.rm_risk;
+      const treatedImpact = risk?.[1]?.TreatedImpact as number;
+      const treatedProbability = risk?.[1]?.TreatedProbability as number;
+      if (!treatedImpact && treatedImpact !== 0) return false;
+      if (!treatedProbability && treatedProbability !== 0) return false;
+      return (
+        transformToRange(treatedImpact) === matrixFilter.x &&
+        transformToRange(treatedProbability) === matrixFilter.y
+      );
+    });
+  }, [tasksWithRisks, matrixFilter]);
+
+  const handleMatrixCellClick = useCallback((x: number, y: number) => {
+    setMatrixFilter((prev) =>
+      prev?.x === x && prev?.y === y ? null : { x, y }
+    );
+  }, []);
 
   const onEditClickHandler = useCallback((task: TaskWithRmRisk) => {
     setTaskToEdit(task);
@@ -86,11 +127,30 @@ const Dashboard = () => {
       ) : (
         <>
           <div className="mb-2">
-            <RmAnalysis slug={slug as string} />
+            <RmAnalysis
+              slug={slug as string}
+              onCellClick={handleMatrixCellClick}
+            />
           </div>
+          {matrixFilter && (
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-sm text-muted-foreground">
+                {t('filtered-by')}:{' '}
+                {t(impactLabelKeys[matrixFilter.x])},{' '}
+                {t(probabilityLabelKeys[matrixFilter.y])}
+              </span>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setMatrixFilter(null)}
+              >
+                {t('clear-filter')}
+              </Button>
+            </div>
+          )}
           <RisksTable
             slug={slug as string}
-            tasks={tasksWithRisks}
+            tasks={filteredTasks}
             perPage={perPage}
             editHandler={onEditClickHandler}
             deleteHandler={onDeleteClickHandler}

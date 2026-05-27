@@ -35,7 +35,13 @@ const RiskMatrixDashboardChart = ({
   datasets,
   counterMap,
   cellSize = 55,
-}: any) => {
+  onCellClick,
+}: {
+  datasets: any[];
+  counterMap: Map<string, number> | null;
+  cellSize?: number;
+  onCellClick?: (x: number, y: number) => void;
+}) => {
   const { t } = useTranslation('common');
   const { isDark } = useTheme();
   const chartRef = useRef<any>(null);
@@ -134,7 +140,7 @@ const RiskMatrixDashboardChart = ({
         Array.from({ length: 5 }, (_, y) => ({
           x: scales.x.getPixelForValue(x + 0.5),
           y: scales.y.getPixelForValue(y + 0.5),
-          value: counterMap.get(`${x},${y}`) || 0,
+          value: counterMap?.get(`${x},${y}`) || 0,
         }))
       ).flat();
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -156,26 +162,32 @@ const RiskMatrixDashboardChart = ({
         options={options}
         plugins={[backgroundPlugin]}
       />
-      {points.map((point, index) => (
-        <div
-          key={index}
-          className="absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-md text-sm font-semibold text-black shadow"
-          style={{
-            left: `${point.x}px`,
-            top: `${point.y}px`,
-            width: `${cellSize * 0.8}px`,
-            height: `${cellSize * 0.6}px`,
-            backgroundColor: isDark
-              ? 'rgba(255, 255, 255, 0.9)'
-              : 'rgba(255, 255, 255, 0.85)',
-            border: isDark
-              ? '1px solid rgba(0, 0, 0, 0.15)'
-              : '1px solid rgba(0, 0, 0, 0.1)',
-          }}
-        >
-          {point.value}
-        </div>
-      ))}
+      {points.map((point, index) => {
+        const cellX = Math.floor(index / 5);
+        const cellY = index % 5;
+        const isClickable = point.value > 0 && onCellClick;
+        return (
+          <div
+            key={index}
+            className={`absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-md text-sm font-semibold text-black shadow ${isClickable ? 'cursor-pointer hover:ring-2 hover:ring-primary' : ''}`}
+            style={{
+              left: `${point.x}px`,
+              top: `${point.y}px`,
+              width: `${cellSize * 0.8}px`,
+              height: `${cellSize * 0.6}px`,
+              backgroundColor: isDark
+                ? 'rgba(255, 255, 255, 0.9)'
+                : 'rgba(255, 255, 255, 0.85)',
+              border: isDark
+                ? '1px solid rgba(0, 0, 0, 0.15)'
+                : '1px solid rgba(0, 0, 0, 0.1)',
+            }}
+            onClick={isClickable ? () => onCellClick(cellX, cellY) : undefined}
+          >
+            {point.value}
+          </div>
+        );
+      })}
     </div>
   );
 };

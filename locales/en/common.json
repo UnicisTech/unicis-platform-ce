@@ -1431,5 +1431,7 @@
   "last-name-invalid-chars": "Invalid characters in last name",
   "last-name-invalid": "Invalid last name",
   "enter-real-name": "Please enter a real name",
-  "email-domain-invalid": "The email domain does not appear to be a valid mail domain. Please use a real email address."
+  "email-domain-invalid": "The email domain does not appear to be a valid mail domain. Please use a real email address.",
+  "filtered-by": "Filtered by",
+  "clear-filter": "Clear filter"
 }
