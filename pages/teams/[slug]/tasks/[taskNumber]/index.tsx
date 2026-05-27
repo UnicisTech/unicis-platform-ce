@@ -121,16 +121,6 @@ const TaskById = (props: InferGetServerSidePropsType<typeof getServerSideProps>)
             </CardContent>
           </Card>
 
-          <Card className="mt-4">
-            <CardHeader>
-              <CardTitleWrapper>
-                <CardTitle>{t('attachments')}</CardTitle>
-              </CardTitleWrapper>
-            </CardHeader>
-            <CardContent>
-              <Attachments task={task} mutateTask={mutateTask} />
-            </CardContent>
-          </Card>
         </>
       )}
       {activeTab === 'Processing Activities' && (
@@ -267,6 +257,16 @@ const TaskById = (props: InferGetServerSidePropsType<typeof getServerSideProps>)
           mutateTasks={mutateTask}
         />
       )}
+      <Card className="mt-4">
+        <CardHeader>
+          <CardTitleWrapper>
+            <CardTitle>{t('attachments')}</CardTitle>
+          </CardTitleWrapper>
+        </CardHeader>
+        <CardContent>
+          <Attachments task={task} mutateTask={mutateTask} />
+        </CardContent>
+      </Card>
       <CommentsTab
         activeTab={activeCommentTab}
         setActiveTab={setActiveCommentTab}
