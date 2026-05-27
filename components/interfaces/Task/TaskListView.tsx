@@ -2,7 +2,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import type { Task } from 'types';
-import { PriorityBadge, StatusBadge } from '@/components/shared';
+import {
+  PriorityBadge,
+  StatusBadge,
+  TaskRecurrenceBadge,
+} from '@/components/shared';
 import ModuleBadge from '@/components/shared/ModuleBadge';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Badge } from '@/components/shadcn/ui/badge';
@@ -71,6 +75,7 @@ const TaskListView = ({
                           {task.title}
                         </span>
                       </Link>
+                      {task.recurrenceScheduleId && <TaskRecurrenceBadge />}
                       {typeof task.properties === 'object' &&
                         task.properties &&
                         getTaskModules(

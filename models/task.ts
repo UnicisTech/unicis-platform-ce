@@ -8,13 +8,7 @@ export type TaskReorderInput = {
   kanbanOrder: number;
 };
 
-const getTeamTasksOrderBy = (): Prisma.TaskOrderByWithRelationInput[] => [
-  { status: 'asc' },
-  { kanbanOrder: 'asc' },
-  { taskNumber: 'asc' },
-];
-
-export const createTask = async (param: {
+export type CreateTaskInput = {
   authorId: string;
   teamId: string;
   title: string;
@@ -22,7 +16,47 @@ export const createTask = async (param: {
   priority?: TaskPriority;
   duedate: Date | null;
   description: string;
-}) => {
+  properties?: Prisma.InputJsonValue;
+  recurrenceScheduleId?: string | null;
+  recurrenceOccurrenceDate?: Date | null;
+};
+
+const getTeamTasksOrderBy = (): Prisma.TaskOrderByWithRelationInput[] => [
+  { status: 'asc' },
+  { kanbanOrder: 'asc' },
+  { taskNumber: 'asc' },
+];
+
+const validateCreateTaskRecurrenceInput = ({
+  recurrenceScheduleId,
+  recurrenceOccurrenceDate,
+}: Pick<
+  CreateTaskInput,
+  'recurrenceScheduleId' | 'recurrenceOccurrenceDate'
+>) => {
+  if (recurrenceScheduleId !== undefined && recurrenceScheduleId !== null) {
+    if (!recurrenceScheduleId.trim()) {
+      throw new Error('recurrenceScheduleId must not be empty');
+    }
+
+    if (!recurrenceOccurrenceDate) {
+      throw new Error(
+        'recurrenceOccurrenceDate is required when recurrenceScheduleId is provided'
+      );
+    }
+  }
+
+  if (!recurrenceScheduleId && recurrenceOccurrenceDate) {
+    throw new Error(
+      'recurrenceScheduleId is required when recurrenceOccurrenceDate is provided'
+    );
+  }
+};
+
+export const createTaskInTransaction = async (
+  tx: Prisma.TransactionClient,
+  param: CreateTaskInput
+) => {
   const {
     authorId,
     teamId,
@@ -31,42 +65,53 @@ export const createTask = async (param: {
     priority = DEFAULT_TASK_PRIORITY,
     duedate,
     description,
+    properties = {},
+    recurrenceScheduleId = null,
+    recurrenceOccurrenceDate = null,
   } = param;
 
-  return await prisma.$transaction(async (tx) => {
-    const team = await tx.team.update({
-      where: { id: teamId },
-      data: { taskIndex: { increment: 1 } },
-      select: { taskIndex: true },
-    });
+  validateCreateTaskRecurrenceInput({
+    recurrenceScheduleId,
+    recurrenceOccurrenceDate,
+  });
 
-    const lastTaskInStatus = await tx.task.findFirst({
-      where: {
-        teamId,
-        status,
-      },
-      orderBy: [{ kanbanOrder: 'desc' }, { taskNumber: 'desc' }],
-      select: {
-        kanbanOrder: true,
-      },
-    });
+  const team = await tx.team.update({
+    where: { id: teamId },
+    data: { taskIndex: { increment: 1 } },
+    select: { taskIndex: true },
+  });
 
-    return await tx.task.create({
-      data: {
-        authorId,
-        taskNumber: team.taskIndex - 1,
-        teamId,
-        title,
-        status,
-        priority,
-        kanbanOrder: (lastTaskInStatus?.kanbanOrder ?? -1) + 1,
-        duedate,
-        description,
-        properties: {},
-      },
-    });
+  const lastTaskInStatus = await tx.task.findFirst({
+    where: {
+      teamId,
+      status,
+    },
+    orderBy: [{ kanbanOrder: 'desc' }, { taskNumber: 'desc' }],
+    select: {
+      kanbanOrder: true,
+    },
+  });
+
+  return await tx.task.create({
+    data: {
+      authorId,
+      taskNumber: team.taskIndex - 1,
+      teamId,
+      title,
+      status,
+      priority,
+      kanbanOrder: (lastTaskInStatus?.kanbanOrder ?? -1) + 1,
+      duedate,
+      description,
+      properties,
+      recurrenceScheduleId,
+      recurrenceOccurrenceDate,
+    },
   });
 };
+
+export const createTask = async (param: CreateTaskInput) =>
+  await prisma.$transaction(async (tx) => createTaskInTransaction(tx, param));
 
 export const updateTask = async (
   taskNumber: number,

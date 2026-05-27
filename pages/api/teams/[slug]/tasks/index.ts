@@ -1,14 +1,11 @@
-import { sendEvent } from '@/lib/svix';
 import { createTask, getTeamTasks } from 'models/task';
 import { throwIfNoTeamAccess } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNotAllowed } from 'models/user';
 import { sanitizeRichText } from '@/lib/sanitizeRichText';
 import { parseDueDateInput } from '@/lib/tasks/dueDate';
+import { publishTaskCreated } from '@/lib/tasks/task-events';
 import { serializeForApi } from '@/lib/serialize';
-import { notificationService } from '@/lib/notifications/notification-service';
-import { getTeamRecipientsBySlug } from '@/lib/notifications/recipients';
-import { NotificationType } from '@/generated/enums';
 import { DEFAULT_TASK_PRIORITY, isTaskPriority } from '@/lib/tasks';
 
 export default async function handler(
@@ -80,27 +77,12 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     description: sanitizedDescription,
   });
 
-  await sendEvent(teamMember.teamId, 'task.created', task);
-
-  const recipients = await getTeamRecipientsBySlug(teamMember.team.slug);
-  await notificationService.sendBulk(
-    recipients.map((user) => ({
-      type: NotificationType.TASK_CREATED,
-      title: `Task created: \"${task.title}\"`,
-      body: `${teamMember.user.name ?? 'Someone'} created a task.`,
-      link: `/teams/${teamMember.team.slug}/tasks/${task.taskNumber}`,
-      recipientId: user.id,
-      recipientEmail: user.email,
-      teamId: teamMember.teamId,
-      metadata: {
-        source: {
-          taskId: task.id,
-          taskNumber: task.taskNumber,
-          event: 'task.created',
-        },
-      },
-    }))
-  );
+  await publishTaskCreated({
+    actorName: teamMember.user.name,
+    task,
+    teamId: teamMember.teamId,
+    teamSlug: teamMember.team.slug,
+  });
 
   return res.status(200).json({ data: {}, error: null });
 };

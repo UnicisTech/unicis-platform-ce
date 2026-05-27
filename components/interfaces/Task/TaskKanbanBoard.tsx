@@ -30,7 +30,12 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { CalendarDays, MoreHorizontal, Pencil, Trash2 } from 'lucide-react';
 import type { Task } from 'types';
-import { EmptyState, PriorityBadge, StatusBadge } from '@/components/shared';
+import {
+  EmptyState,
+  PriorityBadge,
+  StatusBadge,
+  TaskRecurrenceBadge,
+} from '@/components/shared';
 import ModuleBadge from '@/components/shared/ModuleBadge';
 import { cn } from '@/components/shadcn/lib/utils';
 import { Badge } from '@/components/shadcn/ui/badge';
@@ -319,6 +324,7 @@ const TaskCard = ({
             value={task.priority}
             label={t(`task-priorities.${task.priority}`)}
           />
+          {task.recurrenceScheduleId && <TaskRecurrenceBadge />}
           {typeof task.properties === 'object' &&
             task.properties &&
             getTaskModules(task.properties as Record<string, unknown>).map(
