@@ -126,6 +126,22 @@ export default function TiaProcedureDialog({
     }
   };
 
+  const handleStepClick = (stepperIndex: number) => {
+    const dialogStep = stepperIndex + 1;
+    if (dialogStep >= currentStep) return;
+
+    // If steps 3-4 were skipped, don't allow navigating to them
+    if (
+      (dialogStep === 3 || dialogStep === 4) &&
+      procedureData[1] &&
+      shouldSkipTwoSteps(procedureData[1])
+    ) {
+      return;
+    }
+
+    setCurrentStep(dialogStep);
+  };
+
   const handleSubmit = async (procedure: any, prevProcedure?: any) => {
     try {
       setIsSaving(true);
@@ -169,6 +185,7 @@ export default function TiaProcedureDialog({
             <StageTracker
               headers={steps.map((step) => t(`tia:steps.${step}`))}
               currentStage={currentStep - 1}
+              onStepChange={handleStepClick}
             />
           )}
         </DialogHeader>
