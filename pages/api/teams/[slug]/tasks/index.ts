@@ -76,7 +76,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   await notificationService.sendBulk(
     recipients.map((user) => ({
       type: NotificationType.TASK_CREATED,
-      title: `Task created: \"${task.title}\"`,
+      title: `Team: ${teamMember.team.name}\nTask created: #${task.taskNumber} - ${task.title}`,
       body: `${teamMember.user.name ?? 'Someone'} created a task.`,
       link: `/teams/${teamMember.team.slug}/tasks/${task.taskNumber}`,
       recipientId: user.id,

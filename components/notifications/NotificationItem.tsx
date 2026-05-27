@@ -81,13 +81,17 @@ const NotificationItem = ({
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <p className="truncate font-medium">{notification.title}</p>
+          <div className="font-medium">
+              {notification.title?.split('\n').map((line, i) => (
+                <p key={i} className="truncate">{line}</p>
+              ))}
+            </div>
           <p className="mt-0.5 text-xs text-muted-foreground truncate">
             {notification.body}
           </p>
         </div>
         {!notification.isRead && (
-          <span className="mt-1 h-2 w-2 rounded-full bg-blue-500" />
+          <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-blue-500" />
         )}
       </div>
       {timeLabel && (

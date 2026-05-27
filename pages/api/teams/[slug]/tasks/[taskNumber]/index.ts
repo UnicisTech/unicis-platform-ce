@@ -151,7 +151,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   await notificationService.sendBulk(
     recipients.map((user) => ({
       type: NotificationType.TASK_UPDATED,
-      title: `Task updated: \"${task.title}\"`,
+      title: `Team: ${teamMember.team.name}\nTask updated: #${task.taskNumber} - ${task.title}`,
       body: `${teamMember.user.name ?? 'Someone'} updated a task.`,
       link: `/teams/${teamMember.team.slug}/tasks/${task.taskNumber}`,
       recipientId: user.id,
@@ -203,7 +203,7 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
   await notificationService.sendBulk(
     recipients.map((user) => ({
       type: NotificationType.TASK_DELETED,
-      title: `Task deleted: \"${task.title}\"`,
+      title: `Team: ${teamMember.team.name}\nTask deleted: #${task.taskNumber} - ${task.title}`,
       body: `${teamMember.user.name ?? 'Someone'} deleted a task.`,
       link: `/teams/${teamMember.team.slug}/tasks`,
       recipientId: user.id,
