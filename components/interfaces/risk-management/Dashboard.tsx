@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'next-i18next';
+import toast from 'react-hot-toast';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeamTasks from 'hooks/useTeamTasks';
+import useTeam from 'hooks/useTeam';
 import { useRouter } from 'next/router';
 import { TaskProperties, TaskWithRmRisk } from 'types';
 import { EmptyState, Error } from '@/components/shared';
@@ -9,8 +11,30 @@ import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
 import CreateRisk from './risk-form/RmRiskDialog';
 import { Button } from '@/components/shadcn/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from '@/components/shadcn/ui/dropdown-menu';
+import { ChevronDownIcon } from 'lucide-react';
 import RmAnalysis from '../TeamDashboard/RmAnalysis';
 import { impactLabelKeys, probabilityLabelKeys } from '@/lib/common';
+import {
+  exportRmXlsx,
+  exportRmCsv,
+  exportRmHtml,
+  exportRmPdf,
+  exportRmOds,
+} from '@/lib/rm/export';
+import ModuleImportModal from '@/components/shared/ModuleImportModal';
+import type { RmImportRow } from '@/lib/rm/import';
+import {
+  parseRmImportFile,
+  downloadRmTemplateXlsx,
+  downloadRmTemplateCsv,
+  downloadRmTemplateOds,
+} from '@/lib/rm/import';
 
 interface RmMatrixFilter {
   x: number;
@@ -27,10 +51,12 @@ const Dashboard = () => {
   const { slug } = router.query;
   const { canAccess } = useCanAccess(slug as string);
   const { tasks, mutateTasks } = useTeamTasks(slug as string);
+  const { team } = useTeam(slug as string);
   //TODO: setPerPage
   const [perPage] = useState<number>(10);
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [importVisible, setImportVisible] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskWithRmRisk | null>(null);
@@ -78,6 +104,51 @@ const Dashboard = () => {
     );
   }, []);
 
+  const handleExport = async (
+    format: 'xlsx' | 'csv' | 'html' | 'pdf' | 'ods'
+  ) => {
+    if (!tasksWithRisks || tasksWithRisks.length === 0) return;
+    const teamName = team?.name || 'Team';
+    try {
+      if (format === 'xlsx') await exportRmXlsx(tasksWithRisks, teamName, t);
+      else if (format === 'csv') exportRmCsv(tasksWithRisks, teamName, t);
+      else if (format === 'html') exportRmHtml(tasksWithRisks, teamName, t);
+      else if (format === 'pdf') exportRmPdf(tasksWithRisks, teamName, t);
+      else if (format === 'ods') exportRmOds(tasksWithRisks, teamName, t);
+    } catch {
+      toast.error(t('errors.requestFailed'));
+    }
+  };
+
+  const importConfig = useMemo(
+    () => ({
+      moduleKey: 'rm',
+      previewHeaders: [t('title'), t('rm:fields.Risk'), t('rm:fields.Impact'), t('rm:fields.RawProbability')],
+      previewCells: (row: RmImportRow) => [row.title, row.risk, row.impact, row.rawProbability],
+      parseFile: parseRmImportFile,
+      downloadXlsx: () => downloadRmTemplateXlsx(t),
+      downloadCsv: () => downloadRmTemplateCsv(t),
+      downloadOds: () => downloadRmTemplateOds(t),
+      buildPayload: (rows: RmImportRow[]) => ({
+        rows: rows.map((r) => ({
+          title: r.title,
+          risk: r.risk,
+          assetOwner: r.assetOwner,
+          impact: r.impact,
+          rawProbability: r.rawProbability,
+          rawImpact: r.rawImpact,
+          riskTreatment: r.riskTreatment,
+          treatmentCost: r.treatmentCost,
+          treatmentStatus: r.treatmentStatus,
+          treatedProbability: r.treatedProbability,
+          treatedImpact: r.treatedImpact,
+        })),
+      }),
+      apiEndpoint: `/api/teams/${slug}/rm/import`,
+    }),
+    [slug, t]
+  );
+
   const onEditClickHandler = useCallback((task: TaskWithRmRisk) => {
     setTaskToEdit(task);
     setIsEditOpen(true);
@@ -100,7 +171,39 @@ const Dashboard = () => {
             {t('rm-dashboard')}
           </h2>
         </div>
-        <div className="flex justify-end items-center my-1">
+        <div className="flex justify-end items-center gap-2 my-1 flex-wrap">
+          {tasksWithRisks.length > 0 && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline">
+                  {t('export-rm')}
+                  <ChevronDownIcon className="ml-1 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => handleExport('xlsx')}>
+                  {t('export-excel')}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExport('ods')}>
+                  {t('export-ods')}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExport('csv')}>
+                  {t('export-csv')}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExport('html')}>
+                  {t('export-html')}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExport('pdf')}>
+                  {t('export-pdf')}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+          {canAccess('task', ['create']) && (
+            <Button variant="outline" onClick={() => setImportVisible(true)}>
+              {t('import-rm')}
+            </Button>
+          )}
           {canAccess('task', ['update']) && (
             <Button
               color="primary"
@@ -175,6 +278,12 @@ const Dashboard = () => {
           )}
         </>
       )}
+      <ModuleImportModal<RmImportRow>
+        visible={importVisible}
+        setVisible={setImportVisible}
+        config={importConfig}
+        onSuccess={mutateTasks}
+      />
     </>
   );
 };
