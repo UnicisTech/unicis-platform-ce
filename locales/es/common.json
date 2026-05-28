@@ -1344,6 +1344,12 @@
       "minimal": "Mínima (<25%)"
     }
   },
+  "csc-status-prompt": {
+    "title": "Establecer estado del control",
+    "description": "Se ha vinculado una tarea a este control. ¿Desea establecer su estado?",
+    "skip": "Omitir",
+    "confirm": "Establecer estado"
+  },
   "notifications": {
     "title": "Notificaciones",
     "mark-all-read": "Marcar todo como leído",

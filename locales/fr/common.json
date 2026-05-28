@@ -1344,6 +1344,12 @@
       "minimal": "Minimale (<25%)"
     }
   },
+  "csc-status-prompt": {
+    "title": "Définir le statut du contrôle",
+    "description": "Une tâche a été liée à ce contrôle. Souhaitez-vous définir son statut ?",
+    "skip": "Ignorer",
+    "confirm": "Définir le statut"
+  },
   "notifications": {
     "title": "Notifications",
     "mark-all-read": "Tout marquer comme lu",

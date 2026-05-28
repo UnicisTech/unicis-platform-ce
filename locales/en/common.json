@@ -1345,6 +1345,12 @@
       "minimal": "Minimal (<25%)"
     }
   },
+  "csc-status-prompt": {
+    "title": "Set Control Status",
+    "description": "A task has been linked to this control. Would you like to set its status?",
+    "skip": "Skip",
+    "confirm": "Set Status"
+  },
   "notifications": {
     "title": "Notifications",
     "mark-all-read": "Mark all read",

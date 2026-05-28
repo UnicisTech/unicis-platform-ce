@@ -1341,6 +1341,12 @@
       "minimal": "Minimal (<25%)"
     }
   },
+  "csc-status-prompt": {
+    "title": "Kontrollstatus festlegen",
+    "description": "Eine Aufgabe wurde mit diesem Kontrollziel verknüpft. Möchten Sie den Status festlegen?",
+    "skip": "Überspringen",
+    "confirm": "Status festlegen"
+  },
   "notifications": {
     "title": "Benachrichtigungen",
     "mark-all-read": "Alle als gelesen markieren",
