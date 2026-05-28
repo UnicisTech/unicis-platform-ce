@@ -1325,6 +1325,12 @@
       "link-task-label": "Link an existing task to this control:",
       "link-btn": "Link",
       "link-success": "Task linked successfully",
+      "link-mapped-success": "Tasks linked to mapped controls successfully",
+      "link-all-mapped": "Link All Mapped",
+      "link-task": "Link Task",
+      "link-tasks": "Link Tasks",
+      "all-tasks-linked": "All tasks linked",
+      "tasks-linked-count": "{{linked}}/{{total}} tasks linked",
       "footer-hint": "Mappings are based on enabled frameworks in Cybersecurity Settings."
     },
     "matrix": {

@@ -28,6 +28,7 @@ const StatusesTable = ({
   taskSelectorHandler,
   enabledFrameworks,
   onLinkTask,
+  onBulkLinkMapped,
 }: {
   slug: string;
   ISO: ISO;
@@ -52,6 +53,12 @@ const StatusesTable = ({
     taskNumber: number,
     controlId: string,
     iso: ISO
+  ) => Promise<void>;
+  /** Bulk-link tasks to mapped controls across frameworks, propagating source status */
+  onBulkLinkMapped: (
+    taskNumbers: number[],
+    mappedControls: Array<{ controlId: string; framework: ISO }>,
+    sourceControlId?: string
   ) => Promise<void>;
 }) => {
   const { t } = useTranslation('common');
@@ -223,6 +230,7 @@ const StatusesTable = ({
           enabledFrameworks={enabledFrameworks}
           tasks={tasks}
           onLinkTask={onLinkTask}
+          onBulkLinkMapped={onBulkLinkMapped}
         />
       )}
     </>

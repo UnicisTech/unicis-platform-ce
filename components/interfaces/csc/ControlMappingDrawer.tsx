@@ -1,5 +1,5 @@
-import React from 'react';
-import { X } from 'lucide-react';
+import React, { useMemo, useState, useCallback } from 'react';
+import { X, Link2, Check, Loader2 } from 'lucide-react';
 import { useTranslation } from 'next-i18next';
 import type { ISO, Task } from 'types';
 import { isoValueToLabel } from '@/lib/csc/csc-frameworks';
@@ -32,6 +32,12 @@ interface ControlMappingDrawerProps {
     controlId: string,
     iso: ISO
   ) => Promise<void>;
+  /** Bulk-link tasks to mapped controls across frameworks, propagating source status */
+  onBulkLinkMapped: (
+    taskNumbers: number[],
+    mappedControls: Array<{ controlId: string; framework: ISO }>,
+    sourceControlId?: string
+  ) => Promise<void>;
 }
 
 const RELATIONSHIP_BADGE: Record<string, 'default' | 'secondary' | 'outline'> =
@@ -61,8 +67,12 @@ export default function ControlMappingDrawer({
   enabledFrameworks,
   tasks,
   onLinkTask,
+  onBulkLinkMapped,
 }: ControlMappingDrawerProps) {
   const { t } = useTranslation('common');
+  const [bulkLoading, setBulkLoading] = useState(false);
+  const [perControlLoading, setPerControlLoading] = useState<string | null>(null);
+
   const getStatusLabel = (status?: string) => {
     if (!status) return t('status-unknown', 'Unknown');
     const key = status.toLowerCase();
@@ -89,6 +99,127 @@ export default function ControlMappingDrawer({
 
   const relationship = mappingEntry?.relationship;
   const relBadge = relationship ? RELATIONSHIP_BADGE[relationship] : null;
+
+  // ── Cross-framework linking helpers ────────────────────────
+
+  /** Check if a task is already linked to a specific control in a given framework */
+  const isTaskLinkedTo = useCallback(
+    (task: Task, mappedControlId: string, fw: ISO) => {
+      const prop = getCscControlsProp(fw);
+      return (
+        (task.properties?.[prop] as string[] | undefined)?.includes(
+          mappedControlId
+        ) ?? false
+      );
+    },
+    []
+  );
+
+  /** For each mapped control, compute which linked tasks are NOT yet linked to it */
+  const mappedControlLinkStatus = useMemo(() => {
+    if (!mappingEntry || linkedTasks.length === 0) return new Map<string, Task[]>();
+    const result = new Map<string, Task[]>();
+    for (const fw of otherFrameworks) {
+      const mapped = mappingEntry.mappings[fw];
+      if (!mapped) continue;
+      for (const mappedId of mapped) {
+        const unlinked = linkedTasks.filter(
+          (task) => !isTaskLinkedTo(task, mappedId, fw)
+        );
+        result.set(`${fw}:${mappedId}`, unlinked);
+      }
+    }
+    return result;
+  }, [mappingEntry, linkedTasks, otherFrameworks, isTaskLinkedTo]);
+
+  /** Total count of unlinked (task, mapped-control) pairs across all frameworks */
+  const totalUnlinkedPairs = useMemo(() => {
+    let count = 0;
+    for (const unlinked of mappedControlLinkStatus.values()) {
+      count += unlinked.length;
+    }
+    return count;
+  }, [mappedControlLinkStatus]);
+
+  /** Collect all unlinked mapped controls for "Link All Mapped" */
+  const getAllUnlinkedMapped = useCallback(() => {
+    const taskSet = new Map<number, Set<string>>();
+    // group by (taskNumber, framework) → controlIds
+    for (const [key, unlinkedTasks] of mappedControlLinkStatus) {
+      if (unlinkedTasks.length === 0) continue;
+      const [fw, mappedId] = key.split(':') as [ISO, string];
+      for (const task of unlinkedTasks) {
+        if (!taskSet.has(task.taskNumber)) taskSet.set(task.taskNumber, new Set());
+        taskSet.get(task.taskNumber)!.add(`${fw}:${mappedId}`);
+      }
+    }
+
+    const controls: Array<{ controlId: string; framework: ISO }> = [];
+    const seen = new Set<string>();
+    for (const pairs of taskSet.values()) {
+      for (const pair of pairs) {
+        if (seen.has(pair)) continue;
+        seen.add(pair);
+        const [fw, cid] = pair.split(':') as [ISO, string];
+        controls.push({ controlId: cid, framework: fw });
+      }
+    }
+
+    const taskNumbers = [...taskSet.keys()];
+    return { taskNumbers, controls };
+  }, [mappedControlLinkStatus]);
+
+  /** Link all linked tasks to ALL unlinked mapped controls */
+  const handleLinkAllMapped = useCallback(async () => {
+    const { taskNumbers, controls } = getAllUnlinkedMapped();
+    if (taskNumbers.length === 0 || controls.length === 0) return;
+    setBulkLoading(true);
+    try {
+      await onBulkLinkMapped(taskNumbers, controls, controlId);
+    } finally {
+      setBulkLoading(false);
+    }
+  }, [getAllUnlinkedMapped, onBulkLinkMapped, controlId]);
+
+  /** Link all unlinked tasks to a specific mapped control */
+  const handleLinkAllToControl = useCallback(
+    async (mappedControlId: string, fw: ISO) => {
+      const key = `${fw}:${mappedControlId}`;
+      const unlinked = mappedControlLinkStatus.get(key) ?? [];
+      if (unlinked.length === 0) return;
+      setPerControlLoading(key);
+      try {
+        await onBulkLinkMapped(
+          unlinked.map((t) => t.taskNumber),
+          [{ controlId: mappedControlId, framework: fw }],
+          controlId
+        );
+      } finally {
+        setPerControlLoading(null);
+      }
+    },
+    [mappedControlLinkStatus, onBulkLinkMapped, controlId]
+  );
+
+  /** Link a single task to a single mapped control */
+  const handleLinkOneTask = useCallback(
+    async (taskNumber: number, mappedControlId: string, fw: ISO) => {
+      const key = `${fw}:${mappedControlId}`;
+      setPerControlLoading(key);
+      try {
+        await onBulkLinkMapped(
+          [taskNumber],
+          [{ controlId: mappedControlId, framework: fw }],
+          controlId
+        );
+      } finally {
+        setPerControlLoading(null);
+      }
+    },
+    [onBulkLinkMapped, controlId]
+  );
+
+  const isAnyLoading = bulkLoading || perControlLoading !== null;
 
   return (
     <Drawer open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -140,9 +271,27 @@ export default function ControlMappingDrawer({
 
         <div className="flex-1 overflow-y-auto divide-y">
           <section className="p-4">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
-              {t('csc-mapping.drawer.mappings-title', 'Mapped Controls')}
-            </h3>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                {t('csc-mapping.drawer.mappings-title', 'Mapped Controls')}
+              </h3>
+              {linkedTasks.length > 0 && totalUnlinkedPairs > 0 && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-7 text-xs gap-1.5"
+                  disabled={isAnyLoading}
+                  onClick={handleLinkAllMapped}
+                >
+                  {bulkLoading ? (
+                    <Loader2 className="h-3 w-3 animate-spin" />
+                  ) : (
+                    <Link2 className="h-3 w-3" />
+                  )}
+                  {t('csc-mapping.drawer.link-all-mapped')}
+                </Button>
+              )}
+            </div>
 
             {!mappingEntry || otherFrameworks.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground/70">
@@ -227,6 +376,17 @@ export default function ControlMappingDrawer({
                               )
                             : '';
 
+                          // Cross-framework linking info for this mapped control
+                          const linkKey = `${fw}:${mappedId}`;
+                          const unlinkedForControl =
+                            mappedControlLinkStatus.get(linkKey) ?? [];
+                          const linkedCount =
+                            linkedTasks.length - unlinkedForControl.length;
+                          const allLinked =
+                            linkedTasks.length > 0 &&
+                            unlinkedForControl.length === 0;
+                          const isThisLoading = perControlLoading === linkKey;
+
                           return (
                             <div
                               key={mappedId}
@@ -256,6 +416,86 @@ export default function ControlMappingDrawer({
                                     <p className="text-xs text-muted-foreground mt-0.5 leading-snug">
                                       {requirements}
                                     </p>
+                                  )}
+
+                                  {/* Cross-framework task-linking row */}
+                                  {linkedTasks.length > 0 && (
+                                    <div className="flex items-center gap-2 mt-1.5">
+                                      {allLinked ? (
+                                        <span className="inline-flex items-center gap-1 text-[11px] text-green-600 dark:text-green-400 font-medium">
+                                          <Check className="h-3 w-3" />
+                                          {t(
+                                            'csc-mapping.drawer.all-tasks-linked'
+                                          )}
+                                        </span>
+                                      ) : (
+                                        <>
+                                          <span className="text-[11px] text-muted-foreground">
+                                            {t(
+                                              'csc-mapping.drawer.tasks-linked-count',
+                                              {
+                                                linked: linkedCount,
+                                                total: linkedTasks.length,
+                                              }
+                                            )}
+                                          </span>
+                                          <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="h-5 px-1.5 text-[11px] gap-1"
+                                            disabled={isAnyLoading}
+                                            onClick={() =>
+                                              handleLinkAllToControl(
+                                                mappedId,
+                                                fw
+                                              )
+                                            }
+                                          >
+                                            {isThisLoading ? (
+                                              <Loader2 className="h-3 w-3 animate-spin" />
+                                            ) : (
+                                              <Link2 className="h-3 w-3" />
+                                            )}
+                                            {unlinkedForControl.length === 1
+                                              ? t(
+                                                  'csc-mapping.drawer.link-task'
+                                                )
+                                              : t(
+                                                  'csc-mapping.drawer.link-tasks'
+                                                )}{' '}
+                                            →
+                                          </Button>
+                                        </>
+                                      )}
+                                    </div>
+                                  )}
+
+                                  {/* Individual task links (expandable when multiple) */}
+                                  {unlinkedForControl.length > 1 && (
+                                    <div className="mt-1 space-y-0.5">
+                                      {unlinkedForControl.map((task) => (
+                                        <button
+                                          key={task.id}
+                                          disabled={isAnyLoading}
+                                          onClick={() =>
+                                            handleLinkOneTask(
+                                              task.taskNumber,
+                                              mappedId,
+                                              fw
+                                            )
+                                          }
+                                          className="flex items-center gap-1.5 text-[10px] text-muted-foreground hover:text-foreground transition-colors disabled:opacity-50"
+                                        >
+                                          <Link2 className="h-2.5 w-2.5 shrink-0" />
+                                          <span className="font-mono">
+                                            #{task.taskNumber}
+                                          </span>
+                                          <span className="truncate max-w-[160px]">
+                                            {task.title}
+                                          </span>
+                                        </button>
+                                      ))}
+                                    </div>
                                   )}
                                 </div>
                               </div>

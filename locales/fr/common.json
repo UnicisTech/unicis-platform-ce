@@ -1324,6 +1324,12 @@
       "link-task-label": "Lier une tâche existante à ce contrôle :",
       "link-btn": "Lier",
       "link-success": "Tâche liée avec succès",
+      "link-mapped-success": "Tâches liées aux contrôles correspondants avec succès",
+      "link-all-mapped": "Lier tous les mappés",
+      "link-task": "Lier la tâche",
+      "link-tasks": "Lier les tâches",
+      "all-tasks-linked": "Toutes les tâches liées",
+      "tasks-linked-count": "{{linked}}/{{total}} tâches liées",
       "footer-hint": "Les correspondances sont basées sur les référentiels activés dans les paramètres de cybersécurité."
     },
     "matrix": {

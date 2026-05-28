@@ -1321,6 +1321,12 @@
       "link-task-label": "Eine vorhandene Aufgabe mit dieser Maßnahme verknüpfen:",
       "link-btn": "Verknüpfen",
       "link-success": "Aufgabe erfolgreich verknüpft",
+      "link-mapped-success": "Aufgaben erfolgreich mit zugeordneten Kontrollen verknüpft",
+      "link-all-mapped": "Alle zuordnen",
+      "link-task": "Aufgabe verknüpfen",
+      "link-tasks": "Aufgaben verknüpfen",
+      "all-tasks-linked": "Alle Aufgaben verknüpft",
+      "tasks-linked-count": "{{linked}}/{{total}} Aufgaben verknüpft",
       "footer-hint": "Zuordnungen basieren auf aktivierten Frameworks in den Cybersicherheitseinstellungen."
     },
     "matrix": {

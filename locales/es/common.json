@@ -1324,6 +1324,12 @@
       "link-task-label": "Vincular una tarea existente a este control:",
       "link-btn": "Vincular",
       "link-success": "Tarea vinculada correctamente",
+      "link-mapped-success": "Tareas vinculadas a los controles correspondientes correctamente",
+      "link-all-mapped": "Vincular todos los mapeados",
+      "link-task": "Vincular tarea",
+      "link-tasks": "Vincular tareas",
+      "all-tasks-linked": "Todas las tareas vinculadas",
+      "tasks-linked-count": "{{linked}}/{{total}} tareas vinculadas",
       "footer-hint": "Las correspondencias se basan en los marcos habilitados en la configuración de ciberseguridad."
     },
     "matrix": {

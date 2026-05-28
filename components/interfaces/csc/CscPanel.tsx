@@ -208,6 +208,71 @@ export default function CscPanel({
     [slug, mutateTasks, t, maybePromptStatus]
   );
 
+  /**
+   * Bulk-link tasks to mapped controls across frameworks.
+   * Groups controls by framework for efficient batched API calls.
+   * When sourceControlId is provided, propagates the source control's
+   * status to every mapped control that gets linked.
+   */
+  const onBulkLinkMapped = useCallback(
+    async (
+      taskNumbers: number[],
+      mappedControls: Array<{ controlId: string; framework: ISO }>,
+      sourceControlId?: string
+    ) => {
+      if (taskNumbers.length === 0 || mappedControls.length === 0) return;
+
+      // Resolve the source control's current status so we can propagate it
+      const sourceStatus = sourceControlId
+        ? (statuses[sourceControlId] as string | undefined)
+        : undefined;
+
+      // Group controls by framework so we make one API call per (task, framework)
+      const byFramework = new Map<string, string[]>();
+      for (const { controlId: cid, framework } of mappedControls) {
+        if (!byFramework.has(framework)) byFramework.set(framework, []);
+        byFramework.get(framework)!.push(cid);
+      }
+
+      let errorOccurred = false;
+      for (const taskNumber of taskNumbers) {
+        if (errorOccurred) break;
+        for (const [fw, controls] of byFramework) {
+          const { error } = await updateTaskCsc({
+            slug,
+            taskNumber,
+            controls,
+            operation: 'add',
+            iso: fw,
+          });
+          if (error) {
+            toast.error(error.message || t('errors.requestFailed'));
+            errorOccurred = true;
+            break;
+          }
+        }
+      }
+
+      // Propagate status from the source control to each mapped control
+      if (!errorOccurred && sourceStatus && sourceStatus !== 'unknown') {
+        for (const { controlId: cid, framework } of mappedControls) {
+          await updateCscStatus({
+            slug,
+            control: cid,
+            value: sourceStatus,
+            framework,
+          });
+        }
+      }
+
+      if (!errorOccurred) {
+        toast.success(t('csc-mapping.drawer.link-mapped-success'));
+      }
+      await mutateTasks();
+    },
+    [slug, mutateTasks, t, statuses]
+  );
+
   const buildPayload = useCallback((): SoaPayload => {
     const allControls = frameworks[iso]?.controls ?? [];
 
@@ -331,6 +396,7 @@ export default function CscPanel({
         taskSelectorHandler={taskSelectorHandler}
         enabledFrameworks={enabledFrameworks}
         onLinkTask={onLinkTask}
+        onBulkLinkMapped={onBulkLinkMapped}
       />
 
       <SoaExportModal
