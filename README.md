@@ -159,7 +159,18 @@ In a development environment:
 npm run dev
 ```
 
-#### 8. Start the Prisma Studio
+#### 8. Start the notification worker
+
+The notification system (in-app, email, and web push) relies on a background job queue powered by [graphile-worker](https://worker.graphile.org/). Run the worker process alongside the dev server in a separate terminal:
+
+```bash
+npm run worker
+```
+
+> [!NOTE]
+> The worker requires the same `DATABASE_URL` used by the main application. It processes scheduled notifications such as task due-date reminders and digest emails. Without it, scheduled notifications will not be delivered.
+
+#### 9. Start the Prisma Studio
 
 Prisma Studio is a visual editor for the data in your database.
 
@@ -167,7 +178,7 @@ Prisma Studio is a visual editor for the data in your database.
 npx prisma studio
 ```
 
-#### 9. Testing
+#### 10. Testing
 
 We are using [Playwright](https://playwright.dev/) to execute E2E tests. Add all tests inside the `/tests` folder.
 
@@ -187,7 +198,7 @@ npm run test:e2e
 
 _Note: HTML test report is generated inside the `report` folder. Currently supported browsers for test execution `chromium` and `firefox`_
 
-#### 10. Generate SBOM
+#### 11. Generate SBOM
 
 We use [syft](https://github.com/anchore/syft) tool for generating SBOM
 
