@@ -3,7 +3,10 @@ import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 import type { TaskWithRmRisk } from 'types';
-import { calculateRiskRating, calculateCurrentRiskRating } from '@/lib/rm/helpers';
+import {
+  calculateRiskRating,
+  calculateCurrentRiskRating,
+} from '@/lib/rm/helpers';
 import { riskValueToLabelKey } from '@/lib/common';
 import {
   triggerDownload,
@@ -12,7 +15,6 @@ import {
   escHtml,
   csvEsc,
   fill,
-  argb,
   buildXlsxHeader,
   buildXlsxFooter,
   type RGB,
@@ -46,9 +48,19 @@ function getRiskLevel(value: number): string {
 
 function rmRow(task: TaskWithRmRisk, t: TFunc) {
   const risk = task.properties.rm_risk;
-  const rawRating = calculateRiskRating(risk[0].RawProbability, risk[0].RawImpact);
-  const targetRating = calculateRiskRating(risk[1].TreatedProbability, risk[1].TreatedImpact);
-  const currentRating = calculateCurrentRiskRating(rawRating, targetRating, risk[1].TreatmentStatus);
+  const rawRating = calculateRiskRating(
+    risk[0].RawProbability,
+    risk[0].RawImpact
+  );
+  const targetRating = calculateRiskRating(
+    risk[1].TreatedProbability,
+    risk[1].TreatedImpact
+  );
+  const currentRating = calculateCurrentRiskRating(
+    rawRating,
+    targetRating,
+    risk[1].TreatmentStatus
+  );
   return {
     id: String(task.taskNumber),
     risk: risk[0].Risk,
@@ -105,23 +117,48 @@ export async function exportRmXlsx(
     pageSetup: { paperSize: 9, orientation: 'landscape', fitToPage: true },
   });
   const headers = HEADERS(t);
-  buildXlsxHeader(ws, `${t('rm-dashboard')} — ${teamName}`, headers, COL_WIDTHS);
+  buildXlsxHeader(
+    ws,
+    `${t('rm-dashboard')} — ${teamName}`,
+    headers,
+    COL_WIDTHS
+  );
 
   tasks.forEach((task, idx) => {
     const r = idx + 5;
     const d = rmRow(task, t);
     const alt = idx % 2 === 1;
     const vals = [
-      d.id, d.risk, d.assetOwner, d.impact,
-      d.rawProbability, d.rawImpact, d.rawRating,
-      d.treatment, d.treatmentCost, d.treatmentStatus,
-      d.treatedProbability, d.treatedImpact, d.targetRating, d.currentRating,
+      d.id,
+      d.risk,
+      d.assetOwner,
+      d.impact,
+      d.rawProbability,
+      d.rawImpact,
+      d.rawRating,
+      d.treatment,
+      d.treatmentCost,
+      d.treatmentStatus,
+      d.treatedProbability,
+      d.treatedImpact,
+      d.targetRating,
+      d.currentRating,
     ];
     const levels = [
-      null, null, null, null,
-      null, null, d.rawRatingLevel,
-      null, null, null,
-      null, null, d.targetRatingLevel, d.currentRatingLevel,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      d.rawRatingLevel,
+      null,
+      null,
+      null,
+      null,
+      null,
+      d.targetRatingLevel,
+      d.currentRatingLevel,
     ];
     vals.forEach((v, ci) => {
       const cell = ws.getCell(r, ci + 1);
@@ -134,7 +171,11 @@ export async function exportRmXlsx(
       if (RISK_COL_INDICES.includes(ci) && levels[ci]) {
         cell.fill = fill(RISK_BG_HEX[levels[ci]!] ?? 'FFFFFF');
         cell.font = { bold: true, size: 9 };
-        cell.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+        cell.alignment = {
+          horizontal: 'center',
+          vertical: 'middle',
+          wrapText: true,
+        };
       } else {
         cell.fill = fill(alt ? 'F5F8FA' : 'FFFFFF');
         cell.font = { size: 9 };
@@ -147,35 +188,68 @@ export async function exportRmXlsx(
 
   const buf = await wb.xlsx.writeBuffer();
   triggerDownload(
-    new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
+    new Blob([buf], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    }),
     `RM_${teamName}_${datestamp()}.xlsx`
   );
 }
 
 // ── CSV ──────────────────────────────────────────────────────────────────────
 
-export function exportRmCsv(tasks: TaskWithRmRisk[], teamName: string, t: TFunc) {
+export function exportRmCsv(
+  tasks: TaskWithRmRisk[],
+  teamName: string,
+  t: TFunc
+) {
   const headers = HEADERS(t);
   const rows = tasks.map((task) => {
     const d = rmRow(task, t);
     return [
-      d.id, csvEsc(d.risk), csvEsc(d.assetOwner), csvEsc(d.impact),
-      csvEsc(d.rawProbability), csvEsc(d.rawImpact), csvEsc(d.rawRating),
-      csvEsc(d.treatment), csvEsc(d.treatmentCost), csvEsc(d.treatmentStatus),
-      csvEsc(d.treatedProbability), csvEsc(d.treatedImpact), csvEsc(d.targetRating), csvEsc(d.currentRating),
+      d.id,
+      csvEsc(d.risk),
+      csvEsc(d.assetOwner),
+      csvEsc(d.impact),
+      csvEsc(d.rawProbability),
+      csvEsc(d.rawImpact),
+      csvEsc(d.rawRating),
+      csvEsc(d.treatment),
+      csvEsc(d.treatmentCost),
+      csvEsc(d.treatmentStatus),
+      csvEsc(d.treatedProbability),
+      csvEsc(d.treatedImpact),
+      csvEsc(d.targetRating),
+      csvEsc(d.currentRating),
     ].join(',');
   });
   const csv = [headers.join(','), ...rows].join('\r\n');
-  triggerDownload(new Blob([csv], { type: 'text/csv;charset=utf-8' }), `RM_${teamName}_${datestamp()}.csv`);
+  triggerDownload(
+    new Blob([csv], { type: 'text/csv;charset=utf-8' }),
+    `RM_${teamName}_${datestamp()}.csv`
+  );
 }
 
 // ── HTML ─────────────────────────────────────────────────────────────────────
 
-export function exportRmHtml(tasks: TaskWithRmRisk[], teamName: string, t: TFunc) {
+export function exportRmHtml(
+  tasks: TaskWithRmRisk[],
+  teamName: string,
+  t: TFunc
+) {
   const headers = HEADERS(t);
   const riskStyle = (level: string) => {
-    const colors: Record<string, string> = { low: '#90EE90', medium: '#FFFF64', high: '#FFA500', extreme: '#EF4444' };
-    const fg: Record<string, string> = { low: '#1a1a1a', medium: '#1a1a1a', high: '#fff', extreme: '#fff' };
+    const colors: Record<string, string> = {
+      low: '#90EE90',
+      medium: '#FFFF64',
+      high: '#FFA500',
+      extreme: '#EF4444',
+    };
+    const fg: Record<string, string> = {
+      low: '#1a1a1a',
+      medium: '#1a1a1a',
+      high: '#fff',
+      extreme: '#fff',
+    };
     return `background:${colors[level] ?? '#e2e8f0'};color:${fg[level] ?? '#1a1a1a'}`;
   };
 
@@ -222,12 +296,19 @@ td{padding:8px 10px;border-bottom:1px solid var(--bdr);vertical-align:top}tr.alt
 <div class="footer">Generated by Unicis Platform &nbsp;•&nbsp; ${timestamp()} &nbsp;•&nbsp; ${tasks.length} record(s)</div>
 </body></html>`;
 
-  triggerDownload(new Blob([html], { type: 'text/html;charset=utf-8' }), `RM_${teamName}_${datestamp()}.html`);
+  triggerDownload(
+    new Blob([html], { type: 'text/html;charset=utf-8' }),
+    `RM_${teamName}_${datestamp()}.html`
+  );
 }
 
 // ── PDF ──────────────────────────────────────────────────────────────────────
 
-export function exportRmPdf(tasks: TaskWithRmRisk[], teamName: string, t: TFunc) {
+export function exportRmPdf(
+  tasks: TaskWithRmRisk[],
+  teamName: string,
+  t: TFunc
+) {
   const doc = new jsPDF({ orientation: 'landscape', unit: 'pt', format: 'a4' });
   const pageW = doc.internal.pageSize.getWidth();
   const margin = 30;
@@ -245,7 +326,9 @@ export function exportRmPdf(tasks: TaskWithRmRisk[], teamName: string, t: TFunc)
   doc.setFontSize(8.5);
   doc.setTextColor(30, 30, 50);
   doc.text(teamName, margin, y);
-  doc.text(`Date of Export: ${timestamp()}`, pageW - margin, y, { align: 'right' });
+  doc.text(`Date of Export: ${timestamp()}`, pageW - margin, y, {
+    align: 'right',
+  });
   y += 14;
 
   const headers = HEADERS(t);
@@ -256,14 +339,34 @@ export function exportRmPdf(tasks: TaskWithRmRisk[], teamName: string, t: TFunc)
     body: tasks.map((task) => {
       const d = rmRow(task, t);
       return [
-        d.id, d.risk, d.assetOwner, d.impact,
-        d.rawProbability, d.rawImpact, d.rawRating,
-        d.treatment, d.treatmentCost, d.treatmentStatus,
-        d.treatedProbability, d.treatedImpact, d.targetRating, d.currentRating,
+        d.id,
+        d.risk,
+        d.assetOwner,
+        d.impact,
+        d.rawProbability,
+        d.rawImpact,
+        d.rawRating,
+        d.treatment,
+        d.treatmentCost,
+        d.treatmentStatus,
+        d.treatedProbability,
+        d.treatedImpact,
+        d.targetRating,
+        d.currentRating,
       ];
     }),
-    styles: { fontSize: 6, cellPadding: 3, valign: 'top', overflow: 'linebreak' },
-    headStyles: { fillColor: [17, 47, 117], textColor: 255, fontStyle: 'bold', fontSize: 6.5 },
+    styles: {
+      fontSize: 6,
+      cellPadding: 3,
+      valign: 'top',
+      overflow: 'linebreak',
+    },
+    headStyles: {
+      fillColor: [17, 47, 117],
+      textColor: 255,
+      fontStyle: 'bold',
+      fontSize: 6.5,
+    },
     columnStyles: {
       0: { cellWidth: 30 },
       6: { halign: 'center' },
@@ -272,7 +375,10 @@ export function exportRmPdf(tasks: TaskWithRmRisk[], teamName: string, t: TFunc)
     },
     alternateRowStyles: { fillColor: [245, 248, 250] },
     didParseCell(data) {
-      if (data.section === 'body' && RISK_COL_INDICES.includes(data.column.index)) {
+      if (
+        data.section === 'body' &&
+        RISK_COL_INDICES.includes(data.column.index)
+      ) {
         const row = tasks[data.row.index];
         if (row) {
           const d = rmRow(row, t);
@@ -293,7 +399,12 @@ export function exportRmPdf(tasks: TaskWithRmRisk[], teamName: string, t: TFunc)
       doc.setFontSize(6.5);
       doc.setTextColor(150, 150, 150);
       doc.setFont('helvetica', 'normal');
-      doc.text(`Generated by Unicis Platform  •  ${timestamp()}`, pageW / 2, doc.internal.pageSize.getHeight() - 15, { align: 'center' });
+      doc.text(
+        `Generated by Unicis Platform  •  ${timestamp()}`,
+        pageW / 2,
+        doc.internal.pageSize.getHeight() - 15,
+        { align: 'center' }
+      );
     },
   });
 
@@ -308,15 +419,29 @@ export function exportRmPdf(tasks: TaskWithRmRisk[], teamName: string, t: TFunc)
 
 // ── ODS ──────────────────────────────────────────────────────────────────────
 
-export function exportRmOds(tasks: TaskWithRmRisk[], teamName: string, t: TFunc) {
+export function exportRmOds(
+  tasks: TaskWithRmRisk[],
+  teamName: string,
+  t: TFunc
+) {
   const headers = HEADERS(t);
   const rows = tasks.map((task) => {
     const d = rmRow(task, t);
     return [
-      d.id, d.risk, d.assetOwner, d.impact,
-      d.rawProbability, d.rawImpact, d.rawRating,
-      d.treatment, d.treatmentCost, d.treatmentStatus,
-      d.treatedProbability, d.treatedImpact, d.targetRating, d.currentRating,
+      d.id,
+      d.risk,
+      d.assetOwner,
+      d.impact,
+      d.rawProbability,
+      d.rawImpact,
+      d.rawRating,
+      d.treatment,
+      d.treatmentCost,
+      d.treatmentStatus,
+      d.treatedProbability,
+      d.treatedImpact,
+      d.targetRating,
+      d.currentRating,
     ];
   });
   const wsData = [headers, ...rows];

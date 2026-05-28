@@ -73,15 +73,28 @@ const Dashboard = () => {
     setIsDeleteOpen(true);
   }, []);
 
+  const tasksWithProcedures = useMemo<Array<TaskWithRpaProcedure>>(() => {
+    if (!tasks) {
+      return [];
+    }
+
+    return tasks.filter((task): task is TaskWithRpaProcedure => {
+      const taskProperties = task.properties as TaskProperties;
+      return Boolean(taskProperties.rpa_procedure);
+    });
+  }, [tasks]);
+
   const handleExport = async (
     format: 'xlsx' | 'csv' | 'html' | 'pdf' | 'ods'
   ) => {
     if (!tasksWithProcedures || tasksWithProcedures.length === 0) return;
     const teamName = team?.name || 'Team';
     try {
-      if (format === 'xlsx') await exportRpaXlsx(tasksWithProcedures, teamName, t);
+      if (format === 'xlsx')
+        await exportRpaXlsx(tasksWithProcedures, teamName, t);
       else if (format === 'csv') exportRpaCsv(tasksWithProcedures, teamName, t);
-      else if (format === 'html') exportRpaHtml(tasksWithProcedures, teamName, t);
+      else if (format === 'html')
+        exportRpaHtml(tasksWithProcedures, teamName, t);
       else if (format === 'pdf') exportRpaPdf(tasksWithProcedures, teamName, t);
       else if (format === 'ods') exportRpaOds(tasksWithProcedures, teamName, t);
     } catch {
@@ -92,8 +105,18 @@ const Dashboard = () => {
   const importConfig = useMemo(
     () => ({
       moduleKey: 'rpa',
-      previewHeaders: [t('title'), t('controller'), t('rpa-review'), t('rpa-data-tranfer')],
-      previewCells: (row: RpaImportRow) => [row.title, row.controller, row.reviewDate, row.dataTransfer],
+      previewHeaders: [
+        t('title'),
+        t('controller'),
+        t('rpa-review'),
+        t('rpa-data-tranfer'),
+      ],
+      previewCells: (row: RpaImportRow) => [
+        row.title,
+        row.controller,
+        row.reviewDate,
+        row.dataTransfer,
+      ],
       parseFile: parseRpaImportFile,
       downloadXlsx: () => downloadRpaTemplateXlsx(t),
       downloadCsv: () => downloadRpaTemplateCsv(t),
@@ -111,17 +134,6 @@ const Dashboard = () => {
     }),
     [slug, t]
   );
-
-  const tasksWithProcedures = useMemo(() => {
-    if (!tasks) {
-      return [];
-    }
-    return tasks.filter((tasks) => {
-      const taskProperties = tasks.properties as TaskProperties;
-      const procedure = taskProperties.rpa_procedure;
-      return procedure;
-    }) as TaskWithRpaProcedure[];
-  }, [tasks]);
 
   return (
     <>

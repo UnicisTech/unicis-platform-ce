@@ -20,6 +20,7 @@ import {
   downloadTaskTemplateOds,
   parseImportFile,
   type TaskImportRow,
+  VALID_PRIORITIES,
   VALID_STATUSES,
 } from '@/lib/tasks/exportTasks';
 import {
@@ -121,6 +122,7 @@ const TaskImportModal = ({
           tasks: validRows.map((r) => ({
             title: r.title,
             status: r.status,
+            priority: r.priority,
             duedate: r.duedate || undefined,
             description: r.description || undefined,
           })),
@@ -350,6 +352,9 @@ const TaskImportModal = ({
                       <th className="w-20 px-3 py-2 text-left">
                         {t('status')}
                       </th>
+                      <th className="w-20 px-3 py-2 text-left">
+                        {t('priority')}
+                      </th>
                       {activeTab === 'upload' && (
                         <th className="w-24 px-3 py-2 text-left">
                           {t('due-date')}
@@ -371,10 +376,7 @@ const TaskImportModal = ({
                         <td className="px-3 py-1.5 text-muted-foreground">
                           {i + 1}
                         </td>
-                        <td
-                          className="px-3 py-1.5 truncate"
-                          title={row.title}
-                        >
+                        <td className="px-3 py-1.5 truncate" title={row.title}>
                           {row.title || (
                             <span className="text-red-500 italic">
                               {t('import-field-missing')}
@@ -387,6 +389,17 @@ const TaskImportModal = ({
                           ) : (
                             <span className="text-red-500">
                               {row.status || t('import-field-missing')}
+                            </span>
+                          )}
+                        </td>
+                        <td className="px-3 py-1.5">
+                          {VALID_PRIORITIES.includes(
+                            row.priority as (typeof VALID_PRIORITIES)[number]
+                          ) ? (
+                            t(`task-priorities.${row.priority}`)
+                          ) : (
+                            <span className="text-red-500">
+                              {row.priority || t('import-field-missing')}
                             </span>
                           )}
                         </td>

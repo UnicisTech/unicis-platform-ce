@@ -86,9 +86,16 @@ export async function parseOdsRows(file: File): Promise<string[][]> {
 export async function parseRows(file: File): Promise<string[][]> {
   const ext = file.name.split('.').pop()?.toLowerCase();
   if (ext === 'csv' || file.type === 'text/csv') return parseCsvRows(file);
-  if (ext === 'xlsx' || file.type.includes('spreadsheetml')) return parseXlsxRows(file);
-  if (ext === 'ods' || file.type === 'application/vnd.oasis.opendocument.spreadsheet') return parseOdsRows(file);
-  throw new Error('Unsupported file type. Please upload a .xlsx, .ods, or .csv file.');
+  if (ext === 'xlsx' || file.type.includes('spreadsheetml'))
+    return parseXlsxRows(file);
+  if (
+    ext === 'ods' ||
+    file.type === 'application/vnd.oasis.opendocument.spreadsheet'
+  )
+    return parseOdsRows(file);
+  throw new Error(
+    'Unsupported file type. Please upload a .xlsx, .ods, or .csv file.'
+  );
 }
 
 // ── Template builders ───────────────────────────────────────────────────────
@@ -129,7 +136,9 @@ export async function downloadTemplateXlsx(
 
   const buf = await wb.xlsx.writeBuffer();
   triggerDownload(
-    new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
+    new Blob([buf], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    }),
     filename
   );
 }
@@ -141,7 +150,10 @@ export function downloadTemplateCsv(
   filename: string
 ): void {
   const csv = `${headers.join(',')}\r\n# ${noteText}\r\n${examples.map((e) => `"${e}"`).join(',')}`;
-  triggerDownload(new Blob([csv], { type: 'text/csv;charset=utf-8' }), filename);
+  triggerDownload(
+    new Blob([csv], { type: 'text/csv;charset=utf-8' }),
+    filename
+  );
 }
 
 export function downloadTemplateOds(

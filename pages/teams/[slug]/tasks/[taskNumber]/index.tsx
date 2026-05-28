@@ -2,7 +2,7 @@ import { useState, type ReactNode } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import { Loading, Error } from '@/components/shared';
 import {
   Attachments,
@@ -68,7 +68,7 @@ const CardTitleWrapper = ({
   </div>
 );
 
-const TaskById = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const TaskById = () => {
   const [tiaVisible, setTiaVisible] = useState(false);
   const [piaVisible, setPiaVisible] = useState(false);
   const [rmVisible, setRmVisible] = useState(false);
@@ -120,7 +120,6 @@ const TaskById = (props: InferGetServerSidePropsType<typeof getServerSideProps>)
               <TaskDetails task={task} team={team as Team} />
             </CardContent>
           </Card>
-
         </>
       )}
       {activeTab === 'Processing Activities' && (
@@ -382,4 +381,3 @@ export async function getServerSideProps({
 }
 
 export default TaskById;
- 

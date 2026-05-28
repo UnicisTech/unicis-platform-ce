@@ -10,6 +10,8 @@ export { default as WithLoadingAndError } from './WithLoadingAndError';
 export { default as InputWithCopyButton } from './InputWithCopyButton';
 export { default as CopyToClipboardButton } from './CopyToClipboardButton';
 export { default as StatusBadge } from './StatusBadge';
+export { default as PriorityBadge } from './PriorityBadge';
+export { default as TaskRecurrenceBadge } from './TaskRecurrenceBadge';
 export { default as PerPageSelector } from './PerPageSelector';
 export { default as Message } from './Message';
 export { default as MemberName } from './MemberName';

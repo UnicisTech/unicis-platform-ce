@@ -71,6 +71,7 @@ model User {
   notificationPreference NotificationPreference?
   pushSubscriptions PushSubscription[]
   teamMembers    TeamMember[]
+  taskRecurrences TaskRecurrence[]
 }
 
 model Team {
@@ -91,6 +92,7 @@ model Team {
   notifications Notification[]
   TeamCourse   TeamCourse[]
   Category     Category[]
+  taskRecurrences TaskRecurrence[]
 }
 
 model Subscription {
@@ -117,21 +119,54 @@ model Payment {
 }
 
 model Task {
-  id          Int          @id @default(autoincrement())
-  taskNumber  Int
-  teamId      String
-  authorId    String
-  title       String
-  status      String
-  duedate     DateTime? @db.Timestamptz
-  description String
-  properties  Json
-  attachments Attachment[]
-  comments    Comment[]
-  author      User         @relation(fields: [authorId], references: [id])
-  team        Team         @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  id                       Int             @id @default(autoincrement())
+  taskNumber               Int
+  teamId                   String
+  authorId                 String
+  title                    String
+  status                   String
+  priority                 TaskPriority    @default(medium)
+  kanbanOrder              Int             @default(0)
+  duedate                  DateTime?       @db.Timestamptz
+  description              String
+  properties               Json
+  recurrenceScheduleId     String?
+  recurrenceOccurrenceDate DateTime?       @db.Timestamptz
+  attachments              Attachment[]
+  comments                 Comment[]
+  author                   User            @relation(fields: [authorId], references: [id])
+  team                     Team            @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  recurrenceSchedule       TaskRecurrence? @relation(fields: [recurrenceScheduleId], references: [id], onDelete: SetNull)
 
+  @@unique([recurrenceScheduleId, recurrenceOccurrenceDate])
   @@index([duedate])
+  @@index([teamId, status, kanbanOrder])
+  @@index([recurrenceScheduleId])
+}
+
+model TaskRecurrence {
+  id                String               @id @default(uuid())
+  teamId            String
+  authorId          String
+  title             String
+  description       String
+  taskStatus        String               @default("todo")
+  priority          TaskPriority         @default(medium)
+  unit              TaskRecurrenceUnit
+  interval          Int                  @default(1)
+  startAt           DateTime             @db.Timestamptz
+  nextRunAt         DateTime             @db.Timestamptz
+  timezone          String               @default("UTC")
+  dueDateOffsetDays Int?
+  status            TaskRecurrenceStatus @default(ACTIVE)
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+  author            User                 @relation(fields: [authorId], references: [id])
+  team              Team                 @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  tasks             Task[]
+
+  @@index([teamId, status])
+  @@index([status, nextRunAt])
 }
 
 model Comment {
@@ -336,4 +371,23 @@ enum CourseContentType {
   EMBEDDED_VIDEO
   PRESENTATION_PDF
   OPEN_TEXT
+}
+
+enum TaskPriority {
+  low
+  medium
+  high
+}
+
+enum TaskRecurrenceUnit {
+  DAY
+  WEEK
+  MONTH
+  YEAR
+}
+
+enum TaskRecurrenceStatus {
+  ACTIVE
+  PAUSED
+  ARCHIVED
 }

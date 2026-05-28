@@ -15,6 +15,14 @@ export const statuses = [
   'done',
   'failed',
 ];
+
+export const taskPriorities = ['low', 'medium', 'high'] as const;
+export const DEFAULT_TASK_PRIORITY: TaskPriority = 'medium';
+
+export type TaskPriority = (typeof taskPriorities)[number];
+export const isTaskPriority = (value: string): value is TaskPriority =>
+  taskPriorities.includes(value as TaskPriority);
+
 export const taskModuleKeys = [
   'rpa_procedure',
   'tia_procedure',

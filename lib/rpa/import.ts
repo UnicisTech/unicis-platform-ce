@@ -35,7 +35,13 @@ const COL_WIDTHS = [40, 25, 16, 16, 35];
 export async function downloadRpaTemplateXlsx(t: TFunc) {
   await downloadTemplateXlsx(
     HEADERS(t),
-    ['Example Processing Activity', 'John Doe', '2025-01-15', 'true', 'health, biometric'],
+    [
+      'Example Processing Activity',
+      'John Doe',
+      '2025-01-15',
+      'true',
+      'health, biometric',
+    ],
     { 3: 'true or false', 4: 'Comma-separated list' },
     COL_WIDTHS,
     'RPA_Import_Template.xlsx'
@@ -45,7 +51,13 @@ export async function downloadRpaTemplateXlsx(t: TFunc) {
 export function downloadRpaTemplateCsv(t: TFunc) {
   downloadTemplateCsv(
     HEADERS(t),
-    ['Example Processing Activity', 'John Doe', '2025-01-15', 'true', 'health, biometric'],
+    [
+      'Example Processing Activity',
+      'John Doe',
+      '2025-01-15',
+      'true',
+      'health, biometric',
+    ],
     'Data Transfer: true/false | Special Categories: comma-separated',
     'RPA_Import_Template.csv'
   );
@@ -54,7 +66,13 @@ export function downloadRpaTemplateCsv(t: TFunc) {
 export function downloadRpaTemplateOds(t: TFunc) {
   downloadTemplateOds(
     HEADERS(t),
-    ['Example Processing Activity', 'John Doe', '2025-01-15', 'true', 'health, biometric'],
+    [
+      'Example Processing Activity',
+      'John Doe',
+      '2025-01-15',
+      'true',
+      'health, biometric',
+    ],
     COL_WIDTHS,
     'RPA_Import_Template.ods'
   );
@@ -71,7 +89,8 @@ function validateRow(cols: string[]): RpaImportRow {
 
   const errors: string[] = [];
   if (!title) errors.push('Title is required');
-  if (reviewDate && isNaN(Date.parse(reviewDate))) errors.push(`Invalid date "${reviewDate}"`);
+  if (reviewDate && isNaN(Date.parse(reviewDate)))
+    errors.push(`Invalid date "${reviewDate}"`);
   if (dataTransfer && !['true', 'false', ''].includes(dataTransfer))
     errors.push(`Data transfer must be "true" or "false"`);
 

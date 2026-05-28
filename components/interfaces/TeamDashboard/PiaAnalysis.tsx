@@ -31,7 +31,7 @@ export const piaDashboardConfig = [
   },
 ];
 
-const PiaAnalysis = ({ tasks, slug, onCellClick }: PiaAnalysisProps) => {
+const PiaAnalysis = ({ tasks, onCellClick }: PiaAnalysisProps) => {
   const { t } = useTranslation('common');
 
   if (!tasks) {
@@ -61,9 +61,7 @@ const PiaAnalysis = ({ tasks, slug, onCellClick }: PiaAnalysisProps) => {
                     datasets={[]}
                     counterMap={map}
                     onCellClick={
-                      onCellClick
-                        ? (x, y) => onCellClick(id, x, y)
-                        : undefined
+                      onCellClick ? (x, y) => onCellClick(id, x, y) : undefined
                     }
                   />
                 </div>
@@ -81,9 +79,7 @@ const PiaAnalysis = ({ tasks, slug, onCellClick }: PiaAnalysisProps) => {
                     datasets={[]}
                     counterMap={map}
                     onCellClick={
-                      onCellClick
-                        ? (x, y) => onCellClick(id, x, y)
-                        : undefined
+                      onCellClick ? (x, y) => onCellClick(id, x, y) : undefined
                     }
                   />
                 </div>

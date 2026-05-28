@@ -167,7 +167,9 @@ function ModuleImportModal<T extends ImportRow>({
               </svg>
               <p className="text-sm text-muted-foreground">
                 {fileName ? (
-                  <span className="font-medium text-foreground">{fileName}</span>
+                  <span className="font-medium text-foreground">
+                    {fileName}
+                  </span>
                 ) : (
                   t('select-file-to-import')
                 )}
@@ -231,7 +233,9 @@ function ModuleImportModal<T extends ImportRow>({
                     {parsedRows.map((row, i) => (
                       <tr
                         key={i}
-                        className={row.error ? 'bg-red-50 dark:bg-red-950/20' : ''}
+                        className={
+                          row.error ? 'bg-red-50 dark:bg-red-950/20' : ''
+                        }
                       >
                         <td className="px-3 py-1.5 text-muted-foreground">
                           {i + 1}

@@ -75,7 +75,10 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     const categories = row.specialCategories
-      ? row.specialCategories.split(',').map((c) => c.trim()).filter(Boolean)
+      ? row.specialCategories
+          .split(',')
+          .map((c) => c.trim())
+          .filter(Boolean)
       : [];
 
     const procedure: RpaProcedureInterface = [

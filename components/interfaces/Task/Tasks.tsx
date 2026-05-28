@@ -1,28 +1,27 @@
 import { useState } from 'react';
-import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import {
   Error,
   Loading,
   PerPageSelector,
-  StatusBadge,
   WithLoadingAndError,
 } from '@/components/shared';
 import useTasks from 'hooks/useTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import usePagination from 'hooks/usePagination';
-import type { Task, Team } from 'types';
+import type { ApiResponse, Task, Team } from 'types';
 import { CreateTask } from '@/components/interfaces/Task';
-import ModuleBadge from '@/components/shared/ModuleBadge';
 import TaskFilters from '@/components/interfaces/Task/TaskFilters';
-import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Button } from '@/components/shadcn/ui/button';
 import { TeamTaskAnalysis } from '../TeamDashboard';
-import { Badge } from '@/components/shadcn/ui/badge';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import toast from 'react-hot-toast';
-import { getTaskModules, hasTaskModule, isTaskModuleKey } from '@/lib/tasks';
+import {
+  DEFAULT_TASK_PRIORITY,
+  hasTaskModule,
+  isTaskModuleKey,
+} from '@/lib/tasks';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -38,6 +37,9 @@ import {
   exportTasksPdf,
   exportTasksOds,
 } from '@/lib/tasks/exportTasks';
+import TaskKanbanBoard from './TaskKanbanBoard';
+import TaskListView from './TaskListView';
+import TaskViewTabs, { type ActiveTaskView } from './TaskViewTabs';
 
 const Tasks = ({ team }: { team: Team }) => {
   const router = useRouter();
@@ -48,14 +50,27 @@ const Tasks = ({ team }: { team: Team }) => {
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState<null | number>(null);
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
+  const [selectedPriorities, setSelectedPriorities] = useState<string[]>([]);
   const [selectedModules, setSelectedModules] = useState<string[]>([]);
+  const [activeView, setActiveView] = useState<ActiveTaskView>('list');
   const [perPage, setPerPage] = useState<number>(10);
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess(team.slug);
+  const canCreateTask = canAccess('task', ['create']);
+  const canUpdateTask = canAccess('task', ['update']);
+  const canDeleteTask = canAccess('task', ['delete']);
+  const hasActiveFilters =
+    selectedStatuses.length > 0 ||
+    selectedPriorities.length > 0 ||
+    selectedModules.length > 0;
+  const canReorderTasks = canUpdateTask && !hasActiveFilters;
 
   const filteredTasks = tasks?.filter((task) => {
     const statusMatch =
       !selectedStatuses.length || selectedStatuses.includes(task.status);
+    const priorityMatch =
+      !selectedPriorities.length ||
+      selectedPriorities.includes(task.priority ?? DEFAULT_TASK_PRIORITY);
     const moduleMatch =
       !selectedModules.length ||
       selectedModules.some(
@@ -65,7 +80,7 @@ const Tasks = ({ team }: { team: Team }) => {
           task.properties &&
           hasTaskModule(task.properties as Record<string, unknown>, mod)
       );
-    return statusMatch && moduleMatch;
+    return statusMatch && priorityMatch && moduleMatch;
   });
 
   const {
@@ -98,7 +113,7 @@ const Tasks = ({ team }: { team: Team }) => {
 
     toast.success(t('task-deleted'));
     mutateTasks();
-    setVisible(false);
+    setDeleteVisible(false);
   };
 
   const handleExport = async (
@@ -117,10 +132,63 @@ const Tasks = ({ team }: { team: Team }) => {
     }
   };
 
-  const formatDueDate = (value?: string | null) => {
-    if (!value) return t('no-due-date');
-    const [year, month, day] = value.split('T')[0].split('-').map(Number);
-    return new Date(year, month - 1, day).toLocaleDateString();
+  const handleKanbanReorder = async (reorderedTasks: Task[]) => {
+    const previousTasks = tasks || [];
+
+    await mutateTasks(
+      {
+        data: reorderedTasks,
+        error: null,
+      } as ApiResponse<Task[]>,
+      {
+        revalidate: false,
+      }
+    );
+
+    try {
+      const res = await fetch(`/api/teams/${slug}/tasks/reorder`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tasks: reorderedTasks.map((task) => ({
+            taskNumber: task.taskNumber,
+            status: task.status,
+            kanbanOrder: task.kanbanOrder,
+          })),
+        }),
+      });
+
+      const result = (await res.json()) as ApiResponse<Task[]>;
+
+      if (!res.ok || result.error) {
+        await mutateTasks(
+          {
+            data: previousTasks,
+            error: null,
+          } as ApiResponse<Task[]>,
+          {
+            revalidate: false,
+          }
+        );
+        toast.error(result.error?.message || t('errors.requestFailed'));
+        return;
+      }
+
+      await mutateTasks(result, {
+        revalidate: false,
+      });
+    } catch {
+      await mutateTasks(
+        {
+          data: previousTasks,
+          error: null,
+        } as ApiResponse<Task[]>,
+        {
+          revalidate: false,
+        }
+      );
+      toast.error(t('errors.requestFailed'));
+    }
   };
 
   return (
@@ -133,11 +201,13 @@ const Tasks = ({ team }: { team: Team }) => {
           <TaskFilters
             selectedStatuses={selectedStatuses}
             setSelectedStatuses={setSelectedStatuses}
+            selectedPriorities={selectedPriorities}
+            setSelectedPriorities={setSelectedPriorities}
             selectedModules={selectedModules}
             setSelectedModules={setSelectedModules}
           />
           <div className="flex justify-end items-center gap-2 my-1 flex-wrap">
-            {tasks && tasks.length > 0 && (
+            {activeView === 'list' && tasks && tasks.length > 0 && (
               <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
             )}
             {tasks && tasks.length > 0 && (
@@ -167,12 +237,12 @@ const Tasks = ({ team }: { team: Team }) => {
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
-            {canAccess('task', ['create']) && (
+            {canCreateTask && (
               <Button variant="outline" onClick={() => setImportVisible(true)}>
                 {t('import-tasks')}
               </Button>
             )}
-            {canAccess('task', ['create']) && (
+            {canCreateTask && (
               <Button color="primary" onClick={() => setVisible(!visible)}>
                 {t('create')}
               </Button>
@@ -180,94 +250,29 @@ const Tasks = ({ team }: { team: Team }) => {
           </div>
         </div>
         <TeamTaskAnalysis slug={slug} />
-        <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
-          <div className="overflow-x-auto mt-2">
-            <table className="w-full min-w-full divide-y divide-border text-sm">
-              <thead className="bg-muted">
-                <tr>
-                  <th className="w-1/10 px-4 py-2 text-left">{t('task-id')}</th>
-                  <th className="w-2/5 px-4 py-2 text-left">{t('title')}</th>
-                  <th className="w-1/10 px-4 py-2 text-left">{t('status')}</th>
-                  <th className="w-1/10 px-4 py-2 text-left">
-                    {t('due-date')}
-                  </th>
-                  <th className="w-1/5 px-4 py-2 text-left">{t('actions')}</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {pageData.map((task) => (
-                  <tr key={task.id}>
-                    <td className="px-4 py-2">
-                      <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
-                        <span className="underline">{task.taskNumber}</span>
-                      </Link>
-                    </td>
-                    <td className="px-4 py-2">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <Link href={`/teams/${slug}/tasks/${task.taskNumber}`}>
-                          <span className="underline font-medium">
-                            {task.title}
-                          </span>
-                        </Link>
-                        {typeof task.properties === 'object' &&
-                          task.properties &&
-                          getTaskModules(
-                            task.properties as Record<string, unknown>
-                          ).map((key) => (
-                            <ModuleBadge key={key} propName={key} />
-                          ))}
-                      </div>
-                    </td>
-                    <td className="px-4 py-2">
-                      <StatusBadge
-                        value={task.status}
-                        label={t(`task-statuses.${task.status}`)}
-                      />
-                    </td>
-                    <td className="px-4 py-2">
-                      <Badge variant="outline">
-                        {formatDueDate(task.duedate)}
-                      </Badge>
-                    </td>
-                    <td className="px-4 py-2 text-right">
-                      <div className="inline-flex gap-2 justify-end">
-                        {canAccess('task', ['update']) && (
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() =>
-                              router.push(
-                                `/teams/${slug}/tasks/${task.taskNumber}`
-                              )
-                            }
-                          >
-                            {t('edit-task')}
-                          </Button>
-                        )}
-                        {canAccess('task', ['delete']) && (
-                          <Button
-                            variant="destructive"
-                            size="sm"
-                            onClick={() => openDeleteModal(task.taskNumber)}
-                          >
-                            {t('delete')}
-                          </Button>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        {pageData.length > 0 && (
-          <PaginationControls
-            page={currentPage}
+        <TaskViewTabs activeView={activeView} setActiveView={setActiveView} />
+        {activeView === 'list' ? (
+          <TaskListView
+            slug={slug}
+            pageData={pageData}
+            currentPage={currentPage}
             totalPages={totalPages}
-            onChange={goToPage}
+            goToPage={goToPage}
             prevButtonDisabled={prevButtonDisabled}
             nextButtonDisabled={nextButtonDisabled}
+            canUpdate={canUpdateTask}
+            canDelete={canDeleteTask}
+            onDeleteTask={openDeleteModal}
+          />
+        ) : (
+          <TaskKanbanBoard
+            slug={slug}
+            tasks={filteredTasks || []}
+            canUpdate={canUpdateTask}
+            canDelete={canDeleteTask}
+            canReorder={canReorderTasks}
+            onDeleteTask={openDeleteModal}
+            onReorder={handleKanbanReorder}
           />
         )}
         <CreateTask visible={visible} setVisible={setVisible} team={team} />

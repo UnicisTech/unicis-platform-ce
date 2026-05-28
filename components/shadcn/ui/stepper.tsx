@@ -31,7 +31,8 @@ export function Stepper({ steps, currentStep, onStepChange }: StepperProps) {
                 isActive && 'bg-blue-600',
                 isCompleted && 'bg-blue-600/70',
                 !isActive && !isCompleted && 'bg-muted-foreground',
-                isClickable && 'group-hover:bg-blue-500 group-hover:ring-2 group-hover:ring-blue-300'
+                isClickable &&
+                  'group-hover:bg-blue-500 group-hover:ring-2 group-hover:ring-blue-300'
               )}
             />
 
@@ -42,7 +43,8 @@ export function Stepper({ steps, currentStep, onStepChange }: StepperProps) {
                 isActive && 'text-blue-600 font-semibold',
                 isCompleted && 'text-blue-600/70 font-medium',
                 !isActive && !isCompleted && 'text-muted-foreground',
-                isClickable && 'group-hover:text-blue-500 underline decoration-dotted underline-offset-2'
+                isClickable &&
+                  'group-hover:text-blue-500 underline decoration-dotted underline-offset-2'
               )}
             >
               {step}

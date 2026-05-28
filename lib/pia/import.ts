@@ -10,8 +10,20 @@ type TFunc = (key: string, opts?: any) => string;
 
 // ── Types ───────────────────────────────────────────────────────────────────
 
-export const VALID_PROBABILITIES = ['rare', 'unlikely', 'possible', 'probable', 'severe'] as const;
-export const VALID_SECURITIES = ['insignificant', 'minor', 'moderate', 'major', 'extreme'] as const;
+export const VALID_PROBABILITIES = [
+  'rare',
+  'unlikely',
+  'possible',
+  'probable',
+  'severe',
+] as const;
+export const VALID_SECURITIES = [
+  'insignificant',
+  'minor',
+  'moderate',
+  'major',
+  'extreme',
+] as const;
 
 export interface PiaImportRow extends ImportRow {
   title: string;
@@ -45,8 +57,23 @@ const SEC_NOTE = `Valid values: ${VALID_SECURITIES.join(', ')}`;
 export async function downloadPiaTemplateXlsx(t: TFunc) {
   await downloadTemplateXlsx(
     HEADERS(t),
-    ['Example Risk Assessment', 'possible', 'moderate', 'unlikely', 'minor', 'rare', 'insignificant'],
-    { 1: PROB_NOTE, 2: SEC_NOTE, 3: PROB_NOTE, 4: SEC_NOTE, 5: PROB_NOTE, 6: SEC_NOTE },
+    [
+      'Example Risk Assessment',
+      'possible',
+      'moderate',
+      'unlikely',
+      'minor',
+      'rare',
+      'insignificant',
+    ],
+    {
+      1: PROB_NOTE,
+      2: SEC_NOTE,
+      3: PROB_NOTE,
+      4: SEC_NOTE,
+      5: PROB_NOTE,
+      6: SEC_NOTE,
+    },
     COL_WIDTHS,
     'PIA_Import_Template.xlsx'
   );
@@ -55,7 +82,15 @@ export async function downloadPiaTemplateXlsx(t: TFunc) {
 export function downloadPiaTemplateCsv(t: TFunc) {
   downloadTemplateCsv(
     HEADERS(t),
-    ['Example Risk Assessment', 'possible', 'moderate', 'unlikely', 'minor', 'rare', 'insignificant'],
+    [
+      'Example Risk Assessment',
+      'possible',
+      'moderate',
+      'unlikely',
+      'minor',
+      'rare',
+      'insignificant',
+    ],
     `Probability: ${VALID_PROBABILITIES.join('/')} | Security: ${VALID_SECURITIES.join('/')}`,
     'PIA_Import_Template.csv'
   );
@@ -64,7 +99,15 @@ export function downloadPiaTemplateCsv(t: TFunc) {
 export function downloadPiaTemplateOds(t: TFunc) {
   downloadTemplateOds(
     HEADERS(t),
-    ['Example Risk Assessment', 'possible', 'moderate', 'unlikely', 'minor', 'rare', 'insignificant'],
+    [
+      'Example Risk Assessment',
+      'possible',
+      'moderate',
+      'unlikely',
+      'minor',
+      'rare',
+      'insignificant',
+    ],
     COL_WIDTHS,
     'PIA_Import_Template.ods'
   );
@@ -101,7 +144,14 @@ function validateRow(cols: string[]): PiaImportRow {
   checkSec(transSecurity, 'transparency');
 
   // At least one risk dimension should be provided
-  if (!confProbability && !confSecurity && !availProbability && !availSecurity && !transProbability && !transSecurity) {
+  if (
+    !confProbability &&
+    !confSecurity &&
+    !availProbability &&
+    !availSecurity &&
+    !transProbability &&
+    !transSecurity
+  ) {
     errors.push('At least one risk dimension is required');
   }
 

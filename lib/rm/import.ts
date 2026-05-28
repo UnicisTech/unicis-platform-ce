@@ -49,7 +49,19 @@ const PCT_NOTE = 'Number 0-100 (percentage)';
 export async function downloadRmTemplateXlsx(t: TFunc) {
   await downloadTemplateXlsx(
     HEADERS(t),
-    ['Example Risk', 'Data breach', 'John Doe', 'Financial loss', '60', '80', 'Encrypt data', 'Medium', '50', '40', '40'],
+    [
+      'Example Risk',
+      'Data breach',
+      'John Doe',
+      'Financial loss',
+      '60',
+      '80',
+      'Encrypt data',
+      'Medium',
+      '50',
+      '40',
+      '40',
+    ],
     { 4: PCT_NOTE, 5: PCT_NOTE, 8: PCT_NOTE, 9: PCT_NOTE, 10: PCT_NOTE },
     COL_WIDTHS,
     'RM_Import_Template.xlsx'
@@ -59,7 +71,19 @@ export async function downloadRmTemplateXlsx(t: TFunc) {
 export function downloadRmTemplateCsv(t: TFunc) {
   downloadTemplateCsv(
     HEADERS(t),
-    ['Example Risk', 'Data breach', 'John Doe', 'Financial loss', '60', '80', 'Encrypt data', 'Medium', '50', '40', '40'],
+    [
+      'Example Risk',
+      'Data breach',
+      'John Doe',
+      'Financial loss',
+      '60',
+      '80',
+      'Encrypt data',
+      'Medium',
+      '50',
+      '40',
+      '40',
+    ],
     'Probability/Impact/Status values: 0-100 (percentage)',
     'RM_Import_Template.csv'
   );
@@ -68,7 +92,19 @@ export function downloadRmTemplateCsv(t: TFunc) {
 export function downloadRmTemplateOds(t: TFunc) {
   downloadTemplateOds(
     HEADERS(t),
-    ['Example Risk', 'Data breach', 'John Doe', 'Financial loss', '60', '80', 'Encrypt data', 'Medium', '50', '40', '40'],
+    [
+      'Example Risk',
+      'Data breach',
+      'John Doe',
+      'Financial loss',
+      '60',
+      '80',
+      'Encrypt data',
+      'Medium',
+      '50',
+      '40',
+      '40',
+    ],
     COL_WIDTHS,
     'RM_Import_Template.ods'
   );
@@ -107,7 +143,9 @@ function validateRow(cols: string[]): RmImportRow {
     validatePct(treatedProbability, 'Treated Probability'),
     validatePct(treatedImpact, 'Treated Impact'),
   ];
-  pctChecks.forEach((e) => { if (e) errors.push(e); });
+  pctChecks.forEach((e) => {
+    if (e) errors.push(e);
+  });
 
   return {
     title,

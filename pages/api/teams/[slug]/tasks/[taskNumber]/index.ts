@@ -15,6 +15,7 @@ import { notificationService } from '@/lib/notifications/notification-service';
 import { getTeamRecipientsBySlug } from '@/lib/notifications/recipients';
 import { NotificationType } from '@/generated/enums';
 import type { TaskProperties } from 'types';
+import { isTaskPriority } from '@/lib/tasks';
 
 export default async function handler(
   req: NextApiRequest,
@@ -111,6 +112,19 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       });
     }
     sanitizedData.duedate = dueAt;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(sanitizedData, 'priority')) {
+    if (
+      typeof sanitizedData.priority !== 'string' ||
+      !isTaskPriority(sanitizedData.priority)
+    ) {
+      return res.status(400).json({
+        error: {
+          message: 'Invalid priority',
+        },
+      });
+    }
   }
 
   const task = await updateTask(

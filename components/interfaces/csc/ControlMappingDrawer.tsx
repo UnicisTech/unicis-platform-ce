@@ -71,7 +71,9 @@ export default function ControlMappingDrawer({
 }: ControlMappingDrawerProps) {
   const { t } = useTranslation('common');
   const [bulkLoading, setBulkLoading] = useState(false);
-  const [perControlLoading, setPerControlLoading] = useState<string | null>(null);
+  const [perControlLoading, setPerControlLoading] = useState<string | null>(
+    null
+  );
 
   const getStatusLabel = (status?: string) => {
     if (!status) return t('status-unknown', 'Unknown');
@@ -117,7 +119,8 @@ export default function ControlMappingDrawer({
 
   /** For each mapped control, compute which linked tasks are NOT yet linked to it */
   const mappedControlLinkStatus = useMemo(() => {
-    if (!mappingEntry || linkedTasks.length === 0) return new Map<string, Task[]>();
+    if (!mappingEntry || linkedTasks.length === 0)
+      return new Map<string, Task[]>();
     const result = new Map<string, Task[]>();
     for (const fw of otherFrameworks) {
       const mapped = mappingEntry.mappings[fw];
@@ -149,7 +152,8 @@ export default function ControlMappingDrawer({
       if (unlinkedTasks.length === 0) continue;
       const [fw, mappedId] = key.split(':') as [ISO, string];
       for (const task of unlinkedTasks) {
-        if (!taskSet.has(task.taskNumber)) taskSet.set(task.taskNumber, new Set());
+        if (!taskSet.has(task.taskNumber))
+          taskSet.set(task.taskNumber, new Set());
         taskSet.get(task.taskNumber)!.add(`${fw}:${mappedId}`);
       }
     }

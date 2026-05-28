@@ -2,6 +2,7 @@ import type { ISO } from 'types';
 import type { TFunction } from 'next-i18next';
 import frameworks from '@/lib/csc/frameworks';
 import { CSC_FRAMEWORK_TO_NAME } from '@/lib/csc/csc-frameworks';
+import { DEFAULT_TASK_PRIORITY } from '@/lib/tasks';
 import type { TaskImportRow } from './exportTasks';
 
 export interface TemplateInfo {
@@ -13,7 +14,9 @@ export interface TemplateInfo {
 /**
  * Build the list of available templates for the team's enabled frameworks.
  */
-export function getAvailableTemplates(enabledFrameworks: ISO[]): TemplateInfo[] {
+export function getAvailableTemplates(
+  enabledFrameworks: ISO[]
+): TemplateInfo[] {
   return enabledFrameworks
     .filter((iso) => iso in frameworks)
     .map((iso) => {
@@ -59,10 +62,7 @@ function buildTaskTitle(
  *   - description: requirements text (markdown)
  *   - status: "todo"
  */
-export function generateTemplateRows(
-  iso: ISO,
-  t: TFunction
-): TaskImportRow[] {
+export function generateTemplateRows(iso: ISO, t: TFunction): TaskImportRow[] {
   const fw = frameworks[iso];
   if (!fw) return [];
 
@@ -77,6 +77,7 @@ export function generateTemplateRows(
     return {
       title,
       status: 'todo',
+      priority: DEFAULT_TASK_PRIORITY,
       duedate: '',
       description,
     };

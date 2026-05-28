@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
@@ -44,6 +44,34 @@ interface PiaMatrixFilter {
   y: number;
 }
 
+const getQueryNumber = (
+  value: string | string[] | undefined
+): number | null => {
+  const queryValue = Array.isArray(value) ? value[0] : value;
+  if (queryValue === undefined) {
+    return null;
+  }
+
+  const numericValue = Number(queryValue);
+  return Number.isFinite(numericValue) ? numericValue : null;
+};
+
+const getMatrixFilterFromQuery = (
+  category: string | string[] | undefined,
+  ix: string | string[] | undefined,
+  iy: string | string[] | undefined
+): PiaMatrixFilter | null => {
+  const categoryValue = getQueryNumber(category);
+  const x = getQueryNumber(ix);
+  const y = getQueryNumber(iy);
+
+  if (categoryValue === null || x === null || y === null) {
+    return null;
+  }
+
+  return { category: categoryValue, x, y };
+};
+
 const Dashboard = () => {
   const { t } = useTranslation('common');
   const router = useRouter();
@@ -64,20 +92,22 @@ const Dashboard = () => {
     null
   );
 
-  const [matrixFilter, setMatrixFilter] = useState<PiaMatrixFilter | null>(
-    null
+  const queryMatrixFilter = useMemo(
+    () =>
+      getMatrixFilterFromQuery(
+        router.query.category,
+        router.query.ix,
+        router.query.iy
+      ),
+    [router.query.category, router.query.ix, router.query.iy]
   );
-
-  useEffect(() => {
-    const { category, ix, iy } = router.query;
-    if (category && ix && iy) {
-      setMatrixFilter({
-        category: Number(category),
-        x: Number(ix),
-        y: Number(iy),
-      });
-    }
-  }, [router.query]);
+  const [matrixFilterOverride, setMatrixFilterOverride] = useState<
+    PiaMatrixFilter | null | undefined
+  >();
+  const matrixFilter =
+    matrixFilterOverride === undefined
+      ? queryMatrixFilter
+      : matrixFilterOverride;
 
   const tasksWithRisks = useMemo(() => {
     if (!tasks) {
@@ -113,13 +143,16 @@ const Dashboard = () => {
 
   const handleMatrixCellClick = useCallback(
     (category: number, x: number, y: number) => {
-      setMatrixFilter((prev) =>
-        prev?.category === category && prev?.x === x && prev?.y === y
+      setMatrixFilterOverride((prev) => {
+        const currentFilter = prev === undefined ? queryMatrixFilter : prev;
+        return currentFilter?.category === category &&
+          currentFilter?.x === x &&
+          currentFilter?.y === y
           ? null
-          : { category, x, y }
-      );
+          : { category, x, y };
+      });
     },
-    []
+    [queryMatrixFilter]
   );
 
   const handleExport = async (
@@ -141,8 +174,18 @@ const Dashboard = () => {
   const importConfig = useMemo(
     () => ({
       moduleKey: 'pia',
-      previewHeaders: [t('title'), t('pia-conf-probability'), t('pia-conf-security'), t('pia-avail-probability')],
-      previewCells: (row: PiaImportRow) => [row.title, row.confProbability, row.confSecurity, row.availProbability],
+      previewHeaders: [
+        t('title'),
+        t('pia-conf-probability'),
+        t('pia-conf-security'),
+        t('pia-avail-probability'),
+      ],
+      previewCells: (row: PiaImportRow) => [
+        row.title,
+        row.confProbability,
+        row.confSecurity,
+        row.availProbability,
+      ],
       parseFile: parsePiaImportFile,
       downloadXlsx: () => downloadPiaTemplateXlsx(t),
       downloadCsv: () => downloadPiaTemplateCsv(t),
@@ -249,10 +292,7 @@ const Dashboard = () => {
         <EmptyState title={t('rpa-dashboard')} description={t('no-records')} />
       ) : (
         <>
-          <PiaAnalysis
-            tasks={tasks}
-            onCellClick={handleMatrixCellClick}
-          />
+          <PiaAnalysis tasks={tasks} onCellClick={handleMatrixCellClick} />
           {matrixFilter && (
             <div className="flex items-center gap-2 mt-2">
               <span className="text-sm text-muted-foreground">
@@ -267,7 +307,7 @@ const Dashboard = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => setMatrixFilter(null)}
+                onClick={() => setMatrixFilterOverride(null)}
               >
                 {t('clear-filter')}
               </Button>

@@ -298,7 +298,6 @@ Help us build a future GRC by [supporting us](https://www.unicis.tech/community?
 - [Vimeo](https://vimeo.com/user183384852) (Watch community events and tutorials)
 - [GitHub Issues](https://github.com/UnicisTech/unicis-platform-ce/issues) (Contributions, report issues, and product ideas)
 
-
 ## 📘 Knowledge Hub
 
 On [this page](https://www.unicis.tech/community?mtm_campaign=GitHub) you will find everything you may need to know in order to install, configure, maintain and customize an Unicis Platform. Use the links below to navigate.

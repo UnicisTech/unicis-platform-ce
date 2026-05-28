@@ -3,10 +3,27 @@ import { throwIfNoTeamAccess } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNotAllowed } from 'models/user';
 import { prisma } from '@/lib/prisma';
-import type { TaskProperties, PiaRisk, RiskProbability, RiskSecurity } from 'types';
+import type {
+  TaskProperties,
+  PiaRisk,
+  RiskProbability,
+  RiskSecurity,
+} from 'types';
 
-const VALID_PROBABILITIES = ['rare', 'unlikely', 'possible', 'probable', 'severe'];
-const VALID_SECURITIES = ['insignificant', 'minor', 'moderate', 'major', 'extreme'];
+const VALID_PROBABILITIES = [
+  'rare',
+  'unlikely',
+  'possible',
+  'probable',
+  'severe',
+];
+const VALID_SECURITIES = [
+  'insignificant',
+  'minor',
+  'moderate',
+  'major',
+  'extreme',
+];
 
 interface ImportPiaRow {
   title: string;
@@ -58,15 +75,24 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   for (let i = 0; i < rows.length; i++) {
     const row = rows[i];
     if (!row.title?.trim()) errors.push(`Row ${i + 1}: title is required`);
-    if (row.confProbability && !VALID_PROBABILITIES.includes(row.confProbability))
+    if (
+      row.confProbability &&
+      !VALID_PROBABILITIES.includes(row.confProbability)
+    )
       errors.push(`Row ${i + 1}: invalid confidentiality probability`);
     if (row.confSecurity && !VALID_SECURITIES.includes(row.confSecurity))
       errors.push(`Row ${i + 1}: invalid confidentiality security`);
-    if (row.availProbability && !VALID_PROBABILITIES.includes(row.availProbability))
+    if (
+      row.availProbability &&
+      !VALID_PROBABILITIES.includes(row.availProbability)
+    )
       errors.push(`Row ${i + 1}: invalid availability probability`);
     if (row.availSecurity && !VALID_SECURITIES.includes(row.availSecurity))
       errors.push(`Row ${i + 1}: invalid availability security`);
-    if (row.transProbability && !VALID_PROBABILITIES.includes(row.transProbability))
+    if (
+      row.transProbability &&
+      !VALID_PROBABILITIES.includes(row.transProbability)
+    )
       errors.push(`Row ${i + 1}: invalid transparency probability`);
     if (row.transSecurity && !VALID_SECURITIES.includes(row.transSecurity))
       errors.push(`Row ${i + 1}: invalid transparency security`);
@@ -98,18 +124,24 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
         isProportionalToPurposeAssessment: '',
       },
       {
-        confidentialityRiskProbability: (row.confProbability || 'rare') as RiskProbability,
-        confidentialityRiskSecurity: (row.confSecurity || 'insignificant') as RiskSecurity,
+        confidentialityRiskProbability: (row.confProbability ||
+          'rare') as RiskProbability,
+        confidentialityRiskSecurity: (row.confSecurity ||
+          'insignificant') as RiskSecurity,
         confidentialityAssessment: '',
       },
       {
-        availabilityRiskProbability: (row.availProbability || 'rare') as RiskProbability,
-        availabilityRiskSecurity: (row.availSecurity || 'insignificant') as RiskSecurity,
+        availabilityRiskProbability: (row.availProbability ||
+          'rare') as RiskProbability,
+        availabilityRiskSecurity: (row.availSecurity ||
+          'insignificant') as RiskSecurity,
         availabilityAssessment: '',
       },
       {
-        transparencyRiskProbability: (row.transProbability || 'rare') as RiskProbability,
-        transparencyRiskSecurity: (row.transSecurity || 'insignificant') as RiskSecurity,
+        transparencyRiskProbability: (row.transProbability ||
+          'rare') as RiskProbability,
+        transparencyRiskSecurity: (row.transSecurity ||
+          'insignificant') as RiskSecurity,
         transparencyAssessment: '',
       },
       null,

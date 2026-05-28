@@ -21,7 +21,11 @@ const fieldI18nKeys: Record<string, string> = {
 };
 
 const stripHtml = (html: string): string => {
-  return html.replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+  return html
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 };
 
 const TaskAuditLogs = ({ task }: { task: Task }) => {
@@ -36,7 +40,10 @@ const TaskAuditLogs = ({ task }: { task: Task }) => {
     .sort((a, b) => b.date - a.date)
     .slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
 
-  const formatValue = (field: string | undefined, value: string | string[] | undefined) => {
+  const formatValue = (
+    field: string | undefined,
+    value: string | string[] | undefined
+  ) => {
     if (!value || value === '—') return '—';
     const str = Array.isArray(value) ? value.join(', ') : value;
     return field === 'description' ? stripHtml(str) : str;

@@ -32,9 +32,7 @@ const TeamDashboard = ({
 
   const handlePiaCellClick = useCallback(
     (category: number, x: number, y: number) => {
-      router.push(
-        `/teams/${slug}/pia?category=${category}&ix=${x}&iy=${y}`
-      );
+      router.push(`/teams/${slug}/pia?category=${category}&ix=${x}&iy=${y}`);
     },
     [router, slug]
   );

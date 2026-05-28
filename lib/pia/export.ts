@@ -56,15 +56,15 @@ function piaRow(task: TaskWithPiaRisk, t: TFunc) {
   const risk = task.properties.pia_risk;
   const confVal = calculatePercentage(
     riskProbabilityPoints[risk[1].confidentialityRiskProbability] *
-    riskSecurityPoints[risk[1].confidentialityRiskSecurity]
+      riskSecurityPoints[risk[1].confidentialityRiskSecurity]
   );
   const availVal = calculatePercentage(
     riskProbabilityPoints[risk[2].availabilityRiskProbability] *
-    riskSecurityPoints[risk[2].availabilityRiskSecurity]
+      riskSecurityPoints[risk[2].availabilityRiskSecurity]
   );
   const transVal = calculatePercentage(
     riskProbabilityPoints[risk[3].transparencyRiskProbability] *
-    riskSecurityPoints[risk[3].transparencyRiskSecurity]
+      riskSecurityPoints[risk[3].transparencyRiskSecurity]
   );
   return {
     id: String(task.taskNumber),
@@ -103,15 +103,34 @@ export async function exportPiaXlsx(
     pageSetup: { paperSize: 9, orientation: 'landscape', fitToPage: true },
   });
   const headers = HEADERS(t);
-  buildXlsxHeader(ws, `${t('pia-dashboard')} — ${teamName}`, headers, COL_WIDTHS);
+  buildXlsxHeader(
+    ws,
+    `${t('pia-dashboard')} — ${teamName}`,
+    headers,
+    COL_WIDTHS
+  );
 
   tasks.forEach((task, idx) => {
     const r = idx + 5;
     const d = piaRow(task, t);
     const alt = idx % 2 === 1;
     const status = task.status.toLowerCase();
-    const vals = [d.id, d.title, d.status, d.confidentiality, d.availability, d.transparency];
-    const levels = [null, null, null, d.confidentialityLevel, d.availabilityLevel, d.transparencyLevel];
+    const vals = [
+      d.id,
+      d.title,
+      d.status,
+      d.confidentiality,
+      d.availability,
+      d.transparency,
+    ];
+    const levels = [
+      null,
+      null,
+      null,
+      d.confidentialityLevel,
+      d.availabilityLevel,
+      d.transparencyLevel,
+    ];
     vals.forEach((v, ci) => {
       const cell = ws.getCell(r, ci + 1);
       cell.value = v;
@@ -122,12 +141,24 @@ export async function exportPiaXlsx(
       };
       if (ci === 2) {
         cell.fill = fill(getBgHex(status));
-        cell.font = { bold: true, color: { argb: argb(getFgHex(status)) }, size: 9 };
-        cell.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+        cell.font = {
+          bold: true,
+          color: { argb: argb(getFgHex(status)) },
+          size: 9,
+        };
+        cell.alignment = {
+          horizontal: 'center',
+          vertical: 'middle',
+          wrapText: true,
+        };
       } else if (ci >= 3 && levels[ci]) {
         cell.fill = fill(RISK_BG_HEX[levels[ci]!] ?? 'FFFFFF');
         cell.font = { bold: true, size: 9 };
-        cell.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+        cell.alignment = {
+          horizontal: 'center',
+          vertical: 'middle',
+          wrapText: true,
+        };
       } else {
         cell.fill = fill(alt ? 'F5F8FA' : 'FFFFFF');
         cell.font = { size: 9 };
@@ -140,30 +171,60 @@ export async function exportPiaXlsx(
 
   const buf = await wb.xlsx.writeBuffer();
   triggerDownload(
-    new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
+    new Blob([buf], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    }),
     `PIA_${teamName}_${datestamp()}.xlsx`
   );
 }
 
 // ── CSV ──────────────────────────────────────────────────────────────────────
 
-export function exportPiaCsv(tasks: TaskWithPiaRisk[], teamName: string, t: TFunc) {
+export function exportPiaCsv(
+  tasks: TaskWithPiaRisk[],
+  teamName: string,
+  t: TFunc
+) {
   const headers = HEADERS(t);
   const rows = tasks.map((task) => {
     const d = piaRow(task, t);
-    return [d.id, csvEsc(d.title), d.status, csvEsc(d.confidentiality), csvEsc(d.availability), csvEsc(d.transparency)].join(',');
+    return [
+      d.id,
+      csvEsc(d.title),
+      d.status,
+      csvEsc(d.confidentiality),
+      csvEsc(d.availability),
+      csvEsc(d.transparency),
+    ].join(',');
   });
   const csv = [headers.join(','), ...rows].join('\r\n');
-  triggerDownload(new Blob([csv], { type: 'text/csv;charset=utf-8' }), `PIA_${teamName}_${datestamp()}.csv`);
+  triggerDownload(
+    new Blob([csv], { type: 'text/csv;charset=utf-8' }),
+    `PIA_${teamName}_${datestamp()}.csv`
+  );
 }
 
 // ── HTML ─────────────────────────────────────────────────────────────────────
 
-export function exportPiaHtml(tasks: TaskWithPiaRisk[], teamName: string, t: TFunc) {
+export function exportPiaHtml(
+  tasks: TaskWithPiaRisk[],
+  teamName: string,
+  t: TFunc
+) {
   const headers = HEADERS(t);
   const riskStyle = (level: string) => {
-    const colors: Record<string, string> = { low: '#90EE90', medium: '#FFFF64', high: '#FFA500', extreme: '#EF4444' };
-    const fg: Record<string, string> = { low: '#1a1a1a', medium: '#1a1a1a', high: '#fff', extreme: '#fff' };
+    const colors: Record<string, string> = {
+      low: '#90EE90',
+      medium: '#FFFF64',
+      high: '#FFA500',
+      extreme: '#EF4444',
+    };
+    const fg: Record<string, string> = {
+      low: '#1a1a1a',
+      medium: '#1a1a1a',
+      high: '#fff',
+      extreme: '#fff',
+    };
     return `background:${colors[level] ?? '#e2e8f0'};color:${fg[level] ?? '#1a1a1a'}`;
   };
 
@@ -204,12 +265,19 @@ td{padding:8px 10px;border-bottom:1px solid var(--bdr);vertical-align:top}tr.alt
 <div class="footer">Generated by Unicis Platform &nbsp;•&nbsp; ${timestamp()} &nbsp;•&nbsp; ${tasks.length} record(s)</div>
 </body></html>`;
 
-  triggerDownload(new Blob([html], { type: 'text/html;charset=utf-8' }), `PIA_${teamName}_${datestamp()}.html`);
+  triggerDownload(
+    new Blob([html], { type: 'text/html;charset=utf-8' }),
+    `PIA_${teamName}_${datestamp()}.html`
+  );
 }
 
 // ── PDF ──────────────────────────────────────────────────────────────────────
 
-export function exportPiaPdf(tasks: TaskWithPiaRisk[], teamName: string, t: TFunc) {
+export function exportPiaPdf(
+  tasks: TaskWithPiaRisk[],
+  teamName: string,
+  t: TFunc
+) {
   const doc = new jsPDF({ orientation: 'landscape', unit: 'pt', format: 'a4' });
   const pageW = doc.internal.pageSize.getWidth();
   const margin = 30;
@@ -227,7 +295,9 @@ export function exportPiaPdf(tasks: TaskWithPiaRisk[], teamName: string, t: TFun
   doc.setFontSize(8.5);
   doc.setTextColor(30, 30, 50);
   doc.text(teamName, margin, y);
-  doc.text(`Date of Export: ${timestamp()}`, pageW - margin, y, { align: 'right' });
+  doc.text(`Date of Export: ${timestamp()}`, pageW - margin, y, {
+    align: 'right',
+  });
   y += 14;
 
   const headers = HEADERS(t);
@@ -237,10 +307,27 @@ export function exportPiaPdf(tasks: TaskWithPiaRisk[], teamName: string, t: TFun
     head: [headers],
     body: tasks.map((task) => {
       const d = piaRow(task, t);
-      return [d.id, d.title, d.status, d.confidentiality, d.availability, d.transparency];
+      return [
+        d.id,
+        d.title,
+        d.status,
+        d.confidentiality,
+        d.availability,
+        d.transparency,
+      ];
     }),
-    styles: { fontSize: 7, cellPadding: 4, valign: 'top', overflow: 'linebreak' },
-    headStyles: { fillColor: [17, 47, 117], textColor: 255, fontStyle: 'bold', fontSize: 8 },
+    styles: {
+      fontSize: 7,
+      cellPadding: 4,
+      valign: 'top',
+      overflow: 'linebreak',
+    },
+    headStyles: {
+      fillColor: [17, 47, 117],
+      textColor: 255,
+      fontStyle: 'bold',
+      fontSize: 8,
+    },
     columnStyles: {
       0: { cellWidth: 40 },
       2: { cellWidth: 60, halign: 'center' },
@@ -260,7 +347,11 @@ export function exportPiaPdf(tasks: TaskWithPiaRisk[], teamName: string, t: TFun
         const row = tasks[data.row.index];
         if (row) {
           const d = piaRow(row, t);
-          const levels = [d.confidentialityLevel, d.availabilityLevel, d.transparencyLevel];
+          const levels = [
+            d.confidentialityLevel,
+            d.availabilityLevel,
+            d.transparencyLevel,
+          ];
           const level = levels[data.column.index - 3];
           if (level) {
             data.cell.styles.fillColor = RISK_BG_RGB[level] ?? [226, 232, 240];
@@ -273,7 +364,12 @@ export function exportPiaPdf(tasks: TaskWithPiaRisk[], teamName: string, t: TFun
       doc.setFontSize(6.5);
       doc.setTextColor(150, 150, 150);
       doc.setFont('helvetica', 'normal');
-      doc.text(`Generated by Unicis Platform  •  ${timestamp()}`, pageW / 2, doc.internal.pageSize.getHeight() - 15, { align: 'center' });
+      doc.text(
+        `Generated by Unicis Platform  •  ${timestamp()}`,
+        pageW / 2,
+        doc.internal.pageSize.getHeight() - 15,
+        { align: 'center' }
+      );
     },
   });
 
@@ -288,11 +384,22 @@ export function exportPiaPdf(tasks: TaskWithPiaRisk[], teamName: string, t: TFun
 
 // ── ODS ──────────────────────────────────────────────────────────────────────
 
-export function exportPiaOds(tasks: TaskWithPiaRisk[], teamName: string, t: TFunc) {
+export function exportPiaOds(
+  tasks: TaskWithPiaRisk[],
+  teamName: string,
+  t: TFunc
+) {
   const headers = HEADERS(t);
   const rows = tasks.map((task) => {
     const d = piaRow(task, t);
-    return [d.id, d.title, d.status, d.confidentiality, d.availability, d.transparency];
+    return [
+      d.id,
+      d.title,
+      d.status,
+      d.confidentiality,
+      d.availability,
+      d.transparency,
+    ];
   });
   const wsData = [headers, ...rows];
   const ws = XLSX.utils.aoa_to_sheet(wsData);

@@ -84,9 +84,11 @@ const TiaDashboard: NextPageWithLayout<
     if (!tasksWithProcedures || tasksWithProcedures.length === 0) return;
     const teamName = team?.name || 'Team';
     try {
-      if (format === 'xlsx') await exportTiaXlsx(tasksWithProcedures, teamName, t);
+      if (format === 'xlsx')
+        await exportTiaXlsx(tasksWithProcedures, teamName, t);
       else if (format === 'csv') exportTiaCsv(tasksWithProcedures, teamName, t);
-      else if (format === 'html') exportTiaHtml(tasksWithProcedures, teamName, t);
+      else if (format === 'html')
+        exportTiaHtml(tasksWithProcedures, teamName, t);
       else if (format === 'pdf') exportTiaPdf(tasksWithProcedures, teamName, t);
       else if (format === 'ods') exportTiaOds(tasksWithProcedures, teamName, t);
     } catch {
@@ -97,8 +99,18 @@ const TiaDashboard: NextPageWithLayout<
   const importConfig = useMemo(
     () => ({
       moduleKey: 'tia',
-      previewHeaders: [t('title'), t('tia-data-exporter'), t('tia-data-importer'), t('tia-assessment-date')],
-      previewCells: (row: TiaImportRow) => [row.title, row.dataExporter, row.dataImporter, row.assessmentDate],
+      previewHeaders: [
+        t('title'),
+        t('tia-data-exporter'),
+        t('tia-data-importer'),
+        t('tia-assessment-date'),
+      ],
+      previewCells: (row: TiaImportRow) => [
+        row.title,
+        row.dataExporter,
+        row.dataImporter,
+        row.assessmentDate,
+      ],
       parseFile: parseTiaImportFile,
       downloadXlsx: () => downloadTiaTemplateXlsx(t),
       downloadCsv: () => downloadTiaTemplateCsv(t),

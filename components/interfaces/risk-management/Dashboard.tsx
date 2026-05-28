@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import toast from 'react-hot-toast';
 import useCanAccess from 'hooks/useCanAccess';
@@ -41,6 +41,32 @@ interface RmMatrixFilter {
   y: number;
 }
 
+const getQueryNumber = (
+  value: string | string[] | undefined
+): number | null => {
+  const queryValue = Array.isArray(value) ? value[0] : value;
+  if (queryValue === undefined) {
+    return null;
+  }
+
+  const numericValue = Number(queryValue);
+  return Number.isFinite(numericValue) ? numericValue : null;
+};
+
+const getMatrixFilterFromQuery = (
+  ix: string | string[] | undefined,
+  iy: string | string[] | undefined
+): RmMatrixFilter | null => {
+  const x = getQueryNumber(ix);
+  const y = getQueryNumber(iy);
+
+  if (x === null || y === null) {
+    return null;
+  }
+
+  return { x, y };
+};
+
 const transformToRange = (value: number): number => {
   return Math.floor(value / 20);
 };
@@ -62,14 +88,17 @@ const Dashboard = () => {
   const [taskToEdit, setTaskToEdit] = useState<TaskWithRmRisk | null>(null);
   const [taskToDelete, setTaskToDelete] = useState<TaskWithRmRisk | null>(null);
 
-  const [matrixFilter, setMatrixFilter] = useState<RmMatrixFilter | null>(null);
-
-  useEffect(() => {
-    const { ix, iy } = router.query;
-    if (ix && iy) {
-      setMatrixFilter({ x: Number(ix), y: Number(iy) });
-    }
-  }, [router.query]);
+  const queryMatrixFilter = useMemo(
+    () => getMatrixFilterFromQuery(router.query.ix, router.query.iy),
+    [router.query.ix, router.query.iy]
+  );
+  const [matrixFilterOverride, setMatrixFilterOverride] = useState<
+    RmMatrixFilter | null | undefined
+  >();
+  const matrixFilter =
+    matrixFilterOverride === undefined
+      ? queryMatrixFilter
+      : matrixFilterOverride;
 
   const tasksWithRisks = useMemo(() => {
     if (!tasks) {
@@ -98,11 +127,17 @@ const Dashboard = () => {
     });
   }, [tasksWithRisks, matrixFilter]);
 
-  const handleMatrixCellClick = useCallback((x: number, y: number) => {
-    setMatrixFilter((prev) =>
-      prev?.x === x && prev?.y === y ? null : { x, y }
-    );
-  }, []);
+  const handleMatrixCellClick = useCallback(
+    (x: number, y: number) => {
+      setMatrixFilterOverride((prev) => {
+        const currentFilter = prev === undefined ? queryMatrixFilter : prev;
+        return currentFilter?.x === x && currentFilter?.y === y
+          ? null
+          : { x, y };
+      });
+    },
+    [queryMatrixFilter]
+  );
 
   const handleExport = async (
     format: 'xlsx' | 'csv' | 'html' | 'pdf' | 'ods'
@@ -123,8 +158,18 @@ const Dashboard = () => {
   const importConfig = useMemo(
     () => ({
       moduleKey: 'rm',
-      previewHeaders: [t('title'), t('rm:fields.Risk'), t('rm:fields.Impact'), t('rm:fields.RawProbability')],
-      previewCells: (row: RmImportRow) => [row.title, row.risk, row.impact, row.rawProbability],
+      previewHeaders: [
+        t('title'),
+        t('rm:fields.Risk'),
+        t('rm:fields.Impact'),
+        t('rm:fields.RawProbability'),
+      ],
+      previewCells: (row: RmImportRow) => [
+        row.title,
+        row.risk,
+        row.impact,
+        row.rawProbability,
+      ],
       parseFile: parseRmImportFile,
       downloadXlsx: () => downloadRmTemplateXlsx(t),
       downloadCsv: () => downloadRmTemplateCsv(t),
@@ -238,14 +283,13 @@ const Dashboard = () => {
           {matrixFilter && (
             <div className="flex items-center gap-2 mb-2">
               <span className="text-sm text-muted-foreground">
-                {t('filtered-by')}:{' '}
-                {t(impactLabelKeys[matrixFilter.x])},{' '}
+                {t('filtered-by')}: {t(impactLabelKeys[matrixFilter.x])},{' '}
                 {t(probabilityLabelKeys[matrixFilter.y])}
               </span>
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => setMatrixFilter(null)}
+                onClick={() => setMatrixFilterOverride(null)}
               >
                 {t('clear-filter')}
               </Button>

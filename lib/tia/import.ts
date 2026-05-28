@@ -39,7 +39,15 @@ const COL_WIDTHS = [40, 25, 20, 25, 20, 16, 14];
 export async function downloadTiaTemplateXlsx(t: TFunc) {
   await downloadTemplateXlsx(
     HEADERS(t),
-    ['Example Data Transfer', 'Acme Corp', 'germany', 'Cloud Inc', 'united states', '2025-01-15', '3'],
+    [
+      'Example Data Transfer',
+      'Acme Corp',
+      'germany',
+      'Cloud Inc',
+      'united states',
+      '2025-01-15',
+      '3',
+    ],
     { 5: 'Format: YYYY-MM-DD', 6: 'Number of years (1-5)' },
     COL_WIDTHS,
     'TIA_Import_Template.xlsx'
@@ -49,7 +57,15 @@ export async function downloadTiaTemplateXlsx(t: TFunc) {
 export function downloadTiaTemplateCsv(t: TFunc) {
   downloadTemplateCsv(
     HEADERS(t),
-    ['Example Data Transfer', 'Acme Corp', 'germany', 'Cloud Inc', 'united states', '2025-01-15', '3'],
+    [
+      'Example Data Transfer',
+      'Acme Corp',
+      'germany',
+      'Cloud Inc',
+      'united states',
+      '2025-01-15',
+      '3',
+    ],
     'Assessment Date: YYYY-MM-DD | Assessment Years: number (1-5)',
     'TIA_Import_Template.csv'
   );
@@ -58,7 +74,15 @@ export function downloadTiaTemplateCsv(t: TFunc) {
 export function downloadTiaTemplateOds(t: TFunc) {
   downloadTemplateOds(
     HEADERS(t),
-    ['Example Data Transfer', 'Acme Corp', 'germany', 'Cloud Inc', 'united states', '2025-01-15', '3'],
+    [
+      'Example Data Transfer',
+      'Acme Corp',
+      'germany',
+      'Cloud Inc',
+      'united states',
+      '2025-01-15',
+      '3',
+    ],
     COL_WIDTHS,
     'TIA_Import_Template.ods'
   );
