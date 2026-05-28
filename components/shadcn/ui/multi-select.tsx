@@ -200,7 +200,7 @@ export const MultiSelect = React.forwardRef<
             {...props}
             onClick={handleTogglePopover}
             className={cn(
-              'flex w-full p-1 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit [&_svg]:pointer-events-auto',
+              'flex w-full min-w-44 max-w-full p-1 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit [&_svg]:pointer-events-auto',
               className
             )}
           >
@@ -214,7 +214,7 @@ export const MultiSelect = React.forwardRef<
                       <Badge
                         key={value}
                         className={cn(
-                          'overflow-hidden text-ellipsis whitespace-nowrap',
+                          'min-w-0 max-w-full shrink overflow-hidden text-ellipsis whitespace-nowrap',
                           multiSelectVariants({ variant })
                         )}
                         style={{
@@ -226,7 +226,10 @@ export const MultiSelect = React.forwardRef<
                           <IconComponent className="h-4 w-4 mr-2" />
                         )}
                         {/* <span className="truncate">{label}</span> */}
-                        <span className="truncate" title={option?.label}>
+                        <span
+                          className="min-w-0 truncate"
+                          title={option?.label}
+                        >
                           {option?.label}
                         </span>
                         <XCircle
