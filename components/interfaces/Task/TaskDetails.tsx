@@ -134,107 +134,109 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
               )}
             />
 
-            <FormField
-              control={control}
-              name="status"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('status')}</FormLabel>
-                  <FormControl>
-                    <Select
-                      value={field.value}
-                      onValueChange={(val) => {
-                        checkFormChanges();
-                        field.onChange(val);
-                      }}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select status" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {statuses.map((status) => (
-                          <SelectItem key={status} value={status}>
-                            {t(`task-statuses.${status}`)}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={control}
-              name="priority"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('priority')}</FormLabel>
-                  <FormControl>
-                    <Select
-                      value={field.value}
-                      onValueChange={(val) => {
-                        checkFormChanges();
-                        field.onChange(val);
-                      }}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder={t('priority')} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {taskPriorities.map((priority) => (
-                          <SelectItem key={priority} value={priority}>
-                            {t(`task-priorities.${priority}`)}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={control}
-              name="duedate"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('due-date')}</FormLabel>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant="outline"
-                          className="w-full justify-start text-left font-normal"
-                        >
-                          {field.value
-                            ? format(parseDateOnly(field.value), 'PPP')
-                            : 'Pick a date'}
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={
-                          field.value ? parseDateOnly(field.value) : undefined
-                        }
-                        onSelect={(date) => {
-                          if (date) {
-                            checkFormChanges();
-                            field.onChange(format(date, 'yyyy-MM-dd'));
-                          }
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              <FormField
+                control={control}
+                name="status"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('status')}</FormLabel>
+                    <FormControl>
+                      <Select
+                        value={field.value}
+                        onValueChange={(val) => {
+                          checkFormChanges();
+                          field.onChange(val);
                         }}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {statuses.map((status) => (
+                            <SelectItem key={status} value={status}>
+                              {t(`task-statuses.${status}`)}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={control}
+                name="priority"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('priority')}</FormLabel>
+                    <FormControl>
+                      <Select
+                        value={field.value}
+                        onValueChange={(val) => {
+                          checkFormChanges();
+                          field.onChange(val);
+                        }}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder={t('priority')} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {taskPriorities.map((priority) => (
+                            <SelectItem key={priority} value={priority}>
+                              {t(`task-priorities.${priority}`)}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={control}
+                name="duedate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('due-date')}</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant="outline"
+                            className="w-full justify-start text-left font-normal"
+                          >
+                            {field.value
+                              ? format(parseDateOnly(field.value), 'PPP')
+                              : 'Pick a date'}
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={
+                            field.value ? parseDateOnly(field.value) : undefined
+                          }
+                          onSelect={(date) => {
+                            if (date) {
+                              checkFormChanges();
+                              field.onChange(format(date, 'yyyy-MM-dd'));
+                            }
+                          }}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <FormField
               control={control}
