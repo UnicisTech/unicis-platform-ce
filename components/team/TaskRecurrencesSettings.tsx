@@ -1,15 +1,7 @@
 import { useMemo, useState, type FormEvent } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import {
-  Archive,
-  CalendarIcon,
-  Loader2,
-  Pause,
-  Pencil,
-  Play,
-  Plus,
-} from 'lucide-react';
+import { Archive, Loader2, Pause, Pencil, Play, Plus } from 'lucide-react';
 import { defaultHeaders } from '@/lib/common';
 import { DEFAULT_TASK_PRIORITY, statuses, taskPriorities } from '@/lib/tasks';
 import type { TaskPriority } from '@/lib/tasks';
@@ -38,7 +30,7 @@ import {
 } from '@/components/shadcn/ui/card';
 import { Badge } from '@/components/shadcn/ui/badge';
 import { Button } from '@/components/shadcn/ui/button';
-import { Calendar } from '@/components/shadcn/ui/calendar';
+import { DateTimePickerInput } from '@/components/shadcn/ui/date-time-picker';
 import {
   Dialog,
   DialogContent,
@@ -49,11 +41,6 @@ import {
 } from '@/components/shadcn/ui/dialog';
 import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/shadcn/ui/popover';
 import {
   Select,
   SelectContent,
@@ -109,24 +96,6 @@ const toDateTimeInputValue = (value: string | Date) => {
   );
 };
 
-const parseLocalDateTimeInputValue = (value: string) => {
-  if (!value) {
-    return null;
-  }
-
-  const date = new Date(value);
-  return Number.isNaN(date.getTime()) ? null : date;
-};
-
-const setDatePart = (value: string, date: Date) => {
-  const currentDate = parseLocalDateTimeInputValue(value) ?? new Date();
-  const nextDate = new Date(currentDate);
-
-  nextDate.setFullYear(date.getFullYear(), date.getMonth(), date.getDate());
-
-  return toDateTimeInputValue(nextDate);
-};
-
 const formatDateTime = (value: string) => {
   const date = new Date(value);
 
@@ -137,18 +106,6 @@ const formatDateTime = (value: string) => {
   return new Intl.DateTimeFormat(undefined, {
     dateStyle: 'medium',
     timeStyle: 'short',
-  }).format(date);
-};
-
-const formatDate = (value: string) => {
-  const date = parseLocalDateTimeInputValue(value);
-
-  if (!date) {
-    return '';
-  }
-
-  return new Intl.DateTimeFormat(undefined, {
-    dateStyle: 'medium',
   }).format(date);
 };
 
@@ -726,45 +683,15 @@ const TaskRecurrencesSettings = ({ team }: { team: Team }) => {
                 </div>
 
                 <div className="grid gap-2">
-                  <Label>{t('starts-at')}</Label>
-                  <Popover modal={false}>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        type="button"
-                        className="w-full justify-start text-left font-normal"
-                      >
-                        {formValues.startAt ? (
-                          formatDate(formValues.startAt)
-                        ) : (
-                          <span>{t('pick-a-date')}</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent
-                      forceMount
-                      className="pointer-events-auto z-60 w-auto p-0"
-                      align="start"
-                    >
-                      <Calendar
-                        mode="single"
-                        selected={
-                          parseLocalDateTimeInputValue(formValues.startAt) ??
-                          undefined
-                        }
-                        onSelect={(date) => {
-                          if (date) {
-                            setFormValue(
-                              'startAt',
-                              setDatePart(formValues.startAt, date)
-                            );
-                          }
-                        }}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
+                  <Label htmlFor="recurrence-start-at">{t('starts-at')}</Label>
+                  <DateTimePickerInput
+                    id="recurrence-start-at"
+                    value={formValues.startAt}
+                    onChange={(value) => setFormValue('startAt', value)}
+                    placeholder={t('pick-a-date-time')}
+                    timeLabel={t('time')}
+                    popoverClassName="pointer-events-auto z-60"
+                  />
                 </div>
               </div>
 
