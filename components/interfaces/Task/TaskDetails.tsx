@@ -35,7 +35,6 @@ import useCanAccess from 'hooks/useCanAccess';
 
 import type { Task, Team } from 'types';
 import QuillEditor from '@/components/shared/QuillEditor';
-import { TaskRecurrenceBadge } from '@/components/shared';
 
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -112,11 +111,6 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
 
   return (
     <div className="p-5">
-      {task.recurrenceScheduleId && (
-        <div className="mb-4">
-          <TaskRecurrenceBadge />
-        </div>
-      )}
       <FormProvider {...methods}>
         <Form {...methods}>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
