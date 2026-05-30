@@ -226,6 +226,16 @@ export const getTaskBySlugAndNumber = async (
               image: true,
             },
           },
+          reactions: {
+            include: {
+              user: {
+                select: {
+                  id: true,
+                  name: true,
+                },
+              },
+            },
+          },
         },
       },
       attachments: {

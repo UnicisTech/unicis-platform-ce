@@ -1446,7 +1446,8 @@
       "task-updated": "Tarea actualizada",
       "task-commented": "Tarea comentada",
       "task-deleted": "Tarea eliminada",
-      "file-uploaded": "Archivo subido"
+      "file-uploaded": "Archivo subido",
+      "comment-reacted": "Reacción a comentario"
     },
     "saved": "Preferencias de notificaciones guardadas"
   },

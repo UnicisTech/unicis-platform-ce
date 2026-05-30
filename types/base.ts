@@ -1,4 +1,4 @@
-import type { Prisma, TeamMember, User, Comment } from '@/generated/browser';
+import type { Prisma, TeamMember, User, Comment, CommentReaction } from '@/generated/browser';
 import type { TaskCscProperties, TeamCscProperties } from './csc';
 import type { TaskTiaProperties } from './tia';
 import type { TaskRpaProperties } from './rpa';
@@ -47,6 +47,11 @@ export type TaskExtended = Prisma.TaskGetPayload<{
     comments: {
       include: {
         createdBy: true;
+        reactions: {
+          include: {
+            user: true;
+          };
+        };
       };
     };
     attachments: true;
@@ -148,6 +153,7 @@ export type TaskProperties = TaskTiaProperties &
 
 export type ExtendedComment = Comment & {
   createdBy: User;
+  reactions: (CommentReaction & { user: User })[];
 };
 
 export type TeamWithSubscription = Prisma.TeamGetPayload<{

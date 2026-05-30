@@ -109,6 +109,32 @@ export default function Comments({
     [slug, taskNumber, mutateTask, t]
   );
 
+  const handleReact = useCallback(
+    async (commentId: number, emoji: string) => {
+      try {
+        const res = await fetch(
+          `/api/teams/${slug}/tasks/${taskNumber}/reactions`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ commentId, emoji }),
+          }
+        );
+
+        const { error } = await res.json();
+        if (!res.ok || error) {
+          toast.error(error?.message || t('errors.requestFailed'));
+          return;
+        }
+
+        mutateTask();
+      } catch {
+        toast.error(t('errors.unexpectedError'));
+      }
+    },
+    [slug, taskNumber, mutateTask, t]
+  );
+
   const handleDeleteComment = useCallback(
     async (id: number | null) => {
       if (!id) return;
@@ -151,6 +177,7 @@ export default function Comments({
               setCommentToEdit={setCommentToEdit}
               updateComment={handleUpdateComment}
               deleteComment={onDeleteClick}
+              onReact={handleReact}
             />
           ))}
       </div>

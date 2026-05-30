@@ -1446,7 +1446,8 @@
       "task-updated": "Tâche mise à jour",
       "task-commented": "Tâche commentée",
       "task-deleted": "Tâche supprimée",
-      "file-uploaded": "Fichier téléversé"
+      "file-uploaded": "Fichier téléversé",
+      "comment-reacted": "Réaction au commentaire"
     },
     "saved": "Préférences de notifications enregistrées"
   },

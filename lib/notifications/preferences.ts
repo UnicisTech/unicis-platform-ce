@@ -16,6 +16,7 @@ export const DEFAULT_NOTIFICATION_PREFERENCES: Record<
   TASK_COMMENTED: { inApp: true, email: false, push: false },
   TASK_DELETED: { inApp: true, email: false, push: false },
   FILE_UPLOADED: { inApp: true, email: false, push: false },
+  COMMENT_REACTED: { inApp: true, email: false, push: false },
 };
 
 export const NOTIFICATION_TYPES = [
@@ -39,5 +40,9 @@ export const NOTIFICATION_TYPES = [
   {
     type: NotificationType.FILE_UPLOADED,
     labelKey: 'notifications.types.file-uploaded',
+  },
+  {
+    type: NotificationType.COMMENT_REACTED,
+    labelKey: 'notifications.types.comment-reacted',
   },
 ] as const;

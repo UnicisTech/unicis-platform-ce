@@ -1447,7 +1447,8 @@
       "task-updated": "Task updated",
       "task-commented": "Task commented",
       "task-deleted": "Task deleted",
-      "file-uploaded": "File uploaded"
+      "file-uploaded": "File uploaded",
+      "comment-reacted": "Comment reaction"
     },
     "saved": "Notification preferences saved"
   },

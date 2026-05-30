@@ -1443,7 +1443,8 @@
       "task-updated": "Aufgabe aktualisiert",
       "task-commented": "Aufgabe kommentiert",
       "task-deleted": "Aufgabe gelöscht",
-      "file-uploaded": "Datei hochgeladen"
+      "file-uploaded": "Datei hochgeladen",
+      "comment-reacted": "Kommentarreaktion"
     },
     "saved": "Benachrichtigungseinstellungen gespeichert"
   },
