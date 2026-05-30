@@ -1,9 +1,18 @@
 import { statuses } from '@/lib/tasks';
 import { serializeForApi } from '@/lib/serialize';
-import { reorderTeamTasks, type TaskReorderInput } from 'models/task';
+import {
+  addTaskAuditLogs,
+  reorderTeamTasks,
+  type TaskReorderInput,
+} from 'models/task';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
+import { notificationService } from '@/lib/notifications/notification-service';
+import { getTeamRecipientsBySlug } from '@/lib/notifications/recipients';
+import { NotificationType } from '@/generated/enums';
+import { prisma } from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import type { TaskProperties } from 'types';
 
 const validStatuses = new Set<string>(statuses);
 
@@ -101,6 +110,9 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
   throwIfNotAllowed(teamMember, 'task', 'update');
 
+  const { slug } = req.query;
+  const slugValue = slug as string;
+
   const { tasks, errors } = parseReorderTasks(req.body?.tasks);
 
   if (errors.length > 0) {
@@ -110,6 +122,28 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
+  // Fetch current task data before reordering to detect status changes
+  const taskNumbers = tasks.map((t) => t.taskNumber);
+  const previousTasks = await prisma.task.findMany({
+    where: {
+      teamId: teamMember.teamId,
+      taskNumber: { in: taskNumbers },
+    },
+    select: {
+      id: true,
+      taskNumber: true,
+      title: true,
+      status: true,
+      duedate: true,
+      description: true,
+      properties: true,
+    },
+  });
+
+  const previousStatusMap = new Map(
+    previousTasks.map((t) => [t.taskNumber, t])
+  );
+
   const updatedTasks = await reorderTeamTasks(teamMember.teamId, tasks);
 
   if (!updatedTasks) {
@@ -117,6 +151,70 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       data: null,
       error: { message: 'One or more tasks were not found.' },
     });
+  }
+
+  // Find tasks whose status changed and send notifications
+  const statusChangedTasks = tasks.filter((t) => {
+    const prev = previousStatusMap.get(t.taskNumber);
+    return prev && prev.status !== t.status;
+  });
+
+  if (statusChangedTasks.length > 0) {
+    // Log audit entries for each status-changed task
+    for (const t of statusChangedTasks) {
+      const prev = previousStatusMap.get(t.taskNumber);
+      if (!prev) continue;
+
+      await addTaskAuditLogs({
+        taskId: prev.id,
+        user: teamMember.user,
+        prevTask: {
+          title: prev.title,
+          status: prev.status,
+          duedate: prev.duedate,
+          description: prev.description,
+        },
+        nextTask: {
+          title: prev.title,
+          status: t.status,
+          duedate: prev.duedate,
+          description: prev.description,
+        },
+        taskProperties: ((prev.properties as TaskProperties) ||
+          {}) as TaskProperties,
+      });
+    }
+
+    // Send notifications
+    const recipients = await getTeamRecipientsBySlug(slugValue);
+
+    const notifications = statusChangedTasks.flatMap((t) => {
+      const prev = previousStatusMap.get(t.taskNumber);
+      if (!prev) return [];
+
+      return recipients.map((user) => ({
+        type: NotificationType.TASK_UPDATED,
+        title: `Team: ${teamMember.team.name}\nTask status changed: #${t.taskNumber} - ${prev.title}`,
+        body: `${teamMember.user.name ?? 'Someone'} moved task from ${prev.status} to ${t.status}.`,
+        link: `/teams/${teamMember.team.slug}/tasks/${t.taskNumber}`,
+        recipientId: user.id,
+        recipientEmail: user.email,
+        teamId: teamMember.teamId,
+        metadata: {
+          source: {
+            taskId: prev.id,
+            taskNumber: t.taskNumber,
+            event: 'task.status_changed',
+            previousStatus: prev.status,
+            newStatus: t.status,
+          },
+        },
+      }));
+    });
+
+    if (notifications.length > 0) {
+      await notificationService.sendBulk(notifications);
+    }
   }
 
   return res.status(200).json({
