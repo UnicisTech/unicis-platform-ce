@@ -16,8 +16,14 @@ const ITEMS_PER_PAGE = 20;
 const fieldI18nKeys: Record<string, string> = {
   title: 'title',
   status: 'status',
+  priority: 'priority',
   duedate: 'due-date',
   description: 'description',
+};
+
+const valueI18nPrefixes: Record<string, string> = {
+  status: 'task-statuses',
+  priority: 'task-priorities',
 };
 
 const stripHtml = (html: string): string => {
@@ -46,7 +52,14 @@ const TaskAuditLogs = ({ task }: { task: Task }) => {
   ) => {
     if (!value || value === '—') return '—';
     const str = Array.isArray(value) ? value.join(', ') : value;
-    return field === 'description' ? stripHtml(str) : str;
+    if (field === 'description') return stripHtml(str);
+    const i18nPrefix = field ? valueI18nPrefixes[field] : undefined;
+    if (i18nPrefix) {
+      const key = `${i18nPrefix}.${str}`;
+      const translated = t(key);
+      return translated !== key ? translated : str;
+    }
+    return str;
   };
 
   return (

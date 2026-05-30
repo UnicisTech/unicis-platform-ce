@@ -251,7 +251,13 @@ export const getTaskBySlugAndNumber = async (
   return task;
 };
 
-const taskAuditFields = ['title', 'status', 'duedate', 'description'] as const;
+const taskAuditFields = [
+  'title',
+  'status',
+  'priority',
+  'duedate',
+  'description',
+] as const;
 
 export const addTaskAuditLogs = async (params: {
   taskId: number;
@@ -259,12 +265,14 @@ export const addTaskAuditLogs = async (params: {
   prevTask: {
     title: string;
     status: string;
+    priority: string;
     duedate: any;
     description: string | null;
   };
   nextTask: {
     title: string;
     status: string;
+    priority: string;
     duedate: any;
     description: string | null;
   };

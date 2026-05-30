@@ -16,6 +16,21 @@ export const statuses = [
   'failed',
 ];
 
+export const statusLabels: Record<string, string> = {
+  todo: 'To Do',
+  inprogress: 'In Progress',
+  inreview: 'In Review',
+  feedback: 'Feedback',
+  done: 'Done',
+  failed: 'Failed',
+};
+
+export const priorityLabels: Record<string, string> = {
+  low: 'Low',
+  medium: 'Medium',
+  high: 'High',
+};
+
 export const taskPriorities = ['low', 'medium', 'high'] as const;
 export const DEFAULT_TASK_PRIORITY: TaskPriority = 'medium';
 

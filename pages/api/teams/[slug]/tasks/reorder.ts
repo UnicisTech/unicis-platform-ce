@@ -1,4 +1,4 @@
-import { statuses } from '@/lib/tasks';
+import { statuses, statusLabels } from '@/lib/tasks';
 import { serializeForApi } from '@/lib/serialize';
 import {
   addTaskAuditLogs,
@@ -134,6 +134,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       taskNumber: true,
       title: true,
       status: true,
+      priority: true,
       duedate: true,
       description: true,
       properties: true,
@@ -171,12 +172,14 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
         prevTask: {
           title: prev.title,
           status: prev.status,
+          priority: prev.priority,
           duedate: prev.duedate,
           description: prev.description,
         },
         nextTask: {
           title: prev.title,
           status: t.status,
+          priority: prev.priority,
           duedate: prev.duedate,
           description: prev.description,
         },
@@ -195,7 +198,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       return recipients.map((user) => ({
         type: NotificationType.TASK_UPDATED,
         title: `Team: ${teamMember.team.name}\nTask status changed: #${t.taskNumber} - ${prev.title}`,
-        body: `${teamMember.user.name ?? 'Someone'} moved task from ${prev.status} to ${t.status}.`,
+        body: `${teamMember.user.name ?? 'Someone'} moved task from ${statusLabels[prev.status] ?? prev.status} to ${statusLabels[t.status] ?? t.status}.`,
         link: `/teams/${teamMember.team.slug}/tasks/${t.taskNumber}`,
         recipientId: user.id,
         recipientEmail: user.email,

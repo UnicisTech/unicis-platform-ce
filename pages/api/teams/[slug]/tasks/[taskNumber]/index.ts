@@ -15,7 +15,11 @@ import { notificationService } from '@/lib/notifications/notification-service';
 import { getTeamRecipientsBySlug } from '@/lib/notifications/recipients';
 import { NotificationType } from '@/generated/enums';
 import type { TaskProperties } from 'types';
-import { isTaskPriority } from '@/lib/tasks';
+import {
+  isTaskPriority,
+  statusLabels,
+  priorityLabels,
+} from '@/lib/tasks';
 
 export default async function handler(
   req: NextApiRequest,
@@ -147,12 +151,14 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     prevTask: {
       title: prevTask.title,
       status: prevTask.status,
+      priority: prevTask.priority,
       duedate: prevTask.duedate,
       description: prevTask.description,
     },
     nextTask: {
       title: task.title,
       status: task.status,
+      priority: task.priority,
       duedate: task.duedate,
       description: task.description,
     },
@@ -161,12 +167,34 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
 
   await sendEvent(teamMember.teamId, 'task.updated', task);
 
+  const changeDetails: string[] = [];
+  if (prevTask.status !== task.status) {
+    changeDetails.push(
+      `status from ${statusLabels[prevTask.status] ?? prevTask.status} to ${statusLabels[task.status] ?? task.status}`
+    );
+  }
+  if (prevTask.priority !== task.priority) {
+    changeDetails.push(
+      `priority from ${priorityLabels[prevTask.priority] ?? prevTask.priority} to ${priorityLabels[task.priority] ?? task.priority}`
+    );
+  }
+  if (prevTask.title !== task.title) changeDetails.push('title');
+  if (prevTask.duedate?.toString() !== task.duedate?.toString())
+    changeDetails.push('due date');
+  if (prevTask.description !== task.description)
+    changeDetails.push('description');
+
+  const changesSummary =
+    changeDetails.length > 0
+      ? `Changed ${changeDetails.join(', ')}.`
+      : 'Updated a task.';
+
   const recipients = await getTeamRecipientsBySlug(slug as string);
   await notificationService.sendBulk(
     recipients.map((user) => ({
       type: NotificationType.TASK_UPDATED,
       title: `Team: ${teamMember.team.name}\nTask updated: #${task.taskNumber} - ${task.title}`,
-      body: `${teamMember.user.name ?? 'Someone'} updated a task.`,
+      body: `${teamMember.user.name ?? 'Someone'} ${changesSummary}`,
       link: `/teams/${teamMember.team.slug}/tasks/${task.taskNumber}`,
       recipientId: user.id,
       recipientEmail: user.email,
