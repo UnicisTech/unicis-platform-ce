@@ -21,9 +21,11 @@
       "@/lib/*": ["lib/*"],
       "@/components/*": ["components/*"],
       "@/generated/*": ["prisma/generated/*"],
-      "react": ["./node_modules/@types/react"]
+      "react": ["./node_modules/@types/react"],
+      "@/fleet/*": ["fleet/*"],
+      "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next-auth.d.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next-auth.d.ts", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

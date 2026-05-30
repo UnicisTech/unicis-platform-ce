@@ -150,17 +150,51 @@ export async function getTeamRoles(userId: string) {
   return teamRoles;
 }
 
-export const getTeamMembers = async (slug: string) => {
-  return await prisma.teamMember.findMany({
+// Check if the user is an admin or owner of the team
+export async function isTeamAdmin(userId: string, teamId: string) {
+  const teamMember = await prisma.teamMember.findFirstOrThrow({
     where: {
-      team: {
-        slug,
-      },
-    },
-    include: {
-      user: true,
+      userId,
+      teamId,
     },
   });
+
+  return teamMember.role === Role.ADMIN || teamMember.role === Role.OWNER;
+}
+
+export const getTeamMembers = async (teamSlug: string) => {
+  const team = await prisma.team.findUnique({
+    where: { slug: teamSlug },
+    select: { id: true },
+  });
+
+  if (!team) return [];
+
+  const members = await prisma.teamMember.findMany({
+    where: { teamId: team.id },
+    orderBy: { createdAt: 'asc' },
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          fleetEnrollments: {
+            where: { teamId: team.id },
+            orderBy: { sentAt: 'desc' },
+            take: 1,
+            select: {
+              status: true,
+              sentAt: true,
+              expiresAt: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  return members;
 };
 
 export const updateTeam = async (slug: string, data: any) => {

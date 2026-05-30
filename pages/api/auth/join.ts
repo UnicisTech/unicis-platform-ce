@@ -51,6 +51,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     recaptchaToken,
   } = validateWithSchema(joinRegistrationSchema, req.body);
   const name = `${firstName} ${lastName}`;
+  let teamData;
   await validateRecaptcha(recaptchaToken);
   console.log('[api/auth/join] recaptcha validated');
 
@@ -117,17 +118,16 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   console.log('[api/auth/join] user created');
 
-  // Create team if user is not invited
-  // So we can create the team with the user as the owner
   if (!invitation) {
     const slug = slugify(team!);
 
-    await createTeam({
+    teamData = await createTeam({
       userEmail: emailToUse,
       userId: user.id,
       name: team!,
       slug,
     });
+
   }
 
   console.log('[api/auth/join] team created');
@@ -152,6 +152,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     data: {
       user,
       confirmEmail: env.confirmEmail && !user.emailVerified,
+      team: teamData,
     },
   });
 };

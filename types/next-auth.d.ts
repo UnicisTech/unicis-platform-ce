@@ -7,10 +7,18 @@ declare module 'next-auth' {
    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
    */
   interface Session {
+    token?: accessToken;
     user: DefaultSession['user'] & {
       id: string;
       roles: { teamId: string; role: Role }[];
     };
+  }
+
+  interface JWT {
+    sub: string;
+    name?: string | null;
+    email?: string | null;
+    jwt?: string;
   }
 
   interface Profile {

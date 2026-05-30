@@ -21,6 +21,7 @@ import { Label } from '@/components/shadcn/ui/label';
 import { Input } from '@/components/shadcn/ui/input';
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
+import { useCreateFleetTeam } from 'hooks/fleets';
 
 interface CreateTeamProps {
   visible: boolean;
@@ -34,6 +35,8 @@ const schema = Yup.object({
 const CreateTeam: React.FC<CreateTeamProps> = ({ visible, setVisible }) => {
   const { t } = useTranslation('common');
   const { mutateTeams } = useTeams();
+  const createFleetTeam = useCreateFleetTeam();
+
   const router = useRouter();
 
   const formik = useFormik({
@@ -52,6 +55,11 @@ const CreateTeam: React.FC<CreateTeamProps> = ({ visible, setVisible }) => {
         toast.error(json.error.message);
         return;
       }
+
+      await createFleetTeam(json.data.name, json.data.id)
+        .then(team => { }).catch(async (err) => {
+          // await deleteTeam({ id: json.data.id })
+        })
 
       formik.resetForm();
       mutateTeams();

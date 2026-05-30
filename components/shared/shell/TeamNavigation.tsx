@@ -10,7 +10,7 @@ import { QueueListIcon, ChartBarIcon } from '@heroicons/react/24/solid';
 import { useTranslation } from 'next-i18next';
 import useCanAccess from 'hooks/useCanAccess';
 import NavigationItems from './NavigationItems';
-import { NavigationProps, MenuItem } from './NavigationItems';
+import type { NavigationProps, MenuItem } from './NavigationItems';
 import Icon from '../Icon';
 
 interface NavigationItemsProps extends NavigationProps {
@@ -18,15 +18,16 @@ interface NavigationItemsProps extends NavigationProps {
 }
 
 const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'fleet']);
   const { canAccess } = useCanAccess(slug);
   const relativePath = activePathname?.slice(`/teams/${slug}`.length) || '';
+
   const menus: (MenuItem | null)[] = [
     {
       name: t('Dashboard'),
       href: `/teams/${slug}/dashboard`,
       icon: ChartBarIcon,
-      className: 'fill-blue-600 stroke-blue-600',
+      className: 'fill-blue-600 stroke-blue-600', // ← без h-5 w-5
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('dashboard'),
@@ -40,6 +41,16 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('tasks'),
     },
+    canAccess('asset_dashboard', ['create', 'update', 'read', 'delete']) 
+      ? {
+        name: t('fleet:asset-management', { defaultValue: 'Asset Management' }),
+        href: `/teams/${slug}/asset`,
+        icon: () => <Icon src="/asset-dashboard.png" />,
+        className: 'fill-blue-600 stroke-blue-600',
+        active: activePathname === `/teams/${slug}/asset`,
+      }
+      :
+      null,
     canAccess('rpa', ['read'])
       ? {
           name: t('rpa-activities'),
@@ -101,10 +112,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
             relativePath.includes('risk-management'),
         }
       : null,
-    {
-      name: 'line-break',
-      href: '',
-    },
+    { name: 'line-break', href: '' },
     {
       name: t('rest-api-docs'),
       href: '/api-docs',

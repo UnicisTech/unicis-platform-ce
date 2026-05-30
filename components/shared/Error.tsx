@@ -6,7 +6,7 @@ interface ErrorProps {
   message?: string;
 }
 
-const Error = (props: ErrorProps) => {
+const ErrorMessage = (props: ErrorProps) => {
   const { message } = props;
   const { t } = useTranslation('common');
 
@@ -17,4 +17,4 @@ const Error = (props: ErrorProps) => {
   );
 };
 
-export default Error;
+export default ErrorMessage;

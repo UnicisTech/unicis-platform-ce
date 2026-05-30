@@ -1,20 +1,22 @@
-import Link from 'next/link';
-import classNames from 'classnames';
-import { Separator } from '@/components/shadcn/ui/separator';
+
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import Link from "next/link";
+import classNames from "classnames";
+import { Separator } from "@/components/shadcn/ui/separator";
+import React from "react";
 
 export interface MenuItem {
   name: string;
   href: string;
-  icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  active?: boolean;
-  items?: Omit<MenuItem, 'icon' | 'items'>[];
+  icon?: React.ElementType<{ className?: string }>;
   className?: string;
   openInNewTab?: boolean;
+  active?: boolean;
+  items?: Omit<MenuItem, "icon" | "items">[];
 }
 
 export interface NavigationProps {
-  activePathname: string | null;
+  activePathname?: string | null;
 }
 
 interface NavigationItemsProps {
@@ -31,13 +33,13 @@ export const NavigationItems: React.FC<NavigationItemsProps> = ({ menus }) => (
     {menus.map((menu) =>
       menu ? (
         <li key={menu.name}>
-          {menu.name === 'line-break' ? (
+          {menu.name === "line-break" ? (
             <Separator className="my-1" />
           ) : (
             <>
               <NavigationItem menu={menu} className={menu.className} />
-              {menu.items && (
-                <ul className="flex flex-col gap-1 mt-1">
+              {menu.items && menu.items.length > 0 && (
+                <ul className="mt-1 flex flex-col gap-1">
                   {menu.items.map((sub) => (
                     <li key={sub.name}>
                       <NavigationItem menu={sub} className="pl-9" />
@@ -63,10 +65,10 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ menu, className }) => {
       target={newTab ? '_blank' : undefined}
       rel={newTab ? 'noopener noreferrer' : undefined}
       className={classNames(
-        'flex items-center rounded-md text-sm px-2 p-2 gap-2',
+        "flex items-center gap-2 rounded-md p-2 text-sm",
         menu.active
-          ? 'bg-muted font-semibold text-foreground'
-          : 'text-foreground hover:bg-muted hover:text-foreground',
+          ? "bg-muted font-semibold text-foreground"
+          : "text-foreground hover:bg-muted hover:text-foreground",
         className
       )}
     >

@@ -57,7 +57,6 @@ export default async function handler(
   }
 }
 
-// Invite a user to a team
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
   throwIfNotAllowed(teamMember, 'team_invitation', 'create');
@@ -166,7 +165,6 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   res.status(200).json({ data: serializeForApi(invitation) });
 };
 
-// Get all invitations for a team
 const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
   throwIfNotAllowed(teamMember, 'team_invitation', 'read');

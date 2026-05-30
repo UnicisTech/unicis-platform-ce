@@ -24,7 +24,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'warn',
     // '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-    // 'react-hooks/exhaustive-deps': 'off',
+    'react-hooks/exhaustive-deps': 'on',
     // '@next/next/no-img-element': 'off',
     // 'react/jsx-key': 'off',
     // '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',

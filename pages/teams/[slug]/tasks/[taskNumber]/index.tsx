@@ -37,7 +37,6 @@ import {
   PiaPanel,
   PiaAuditLogs,
 } from '@/components/interfaces/pia';
-import Breadcrumb from '../../Breadcrumb';
 import useRpaCreation from 'hooks/useRpaCreation';
 import {
   Card,
@@ -52,6 +51,7 @@ import type {
   TaskProperties,
   TiaProcedureInterface,
 } from 'types';
+import Breadcrumb from '@/components/shared/Breadcrumb';
 
 const CardTitleWrapper = ({
   children,
@@ -103,7 +103,7 @@ const TaskById = () => {
         taskTitle={task.title}
         backTo={`/teams/${slug}/tasks`}
         teamName={slug}
-        taskNumber={taskNumber}
+        path={taskNumber}
       />
       <h3 className="text-2xl font-bold mb-4">{task.title}</h3>
       <TaskTab activeTab={activeTab} setActiveTab={setActiveTab} />
