@@ -1,4 +1,10 @@
-import type { Prisma, TeamMember, User, Comment, CommentReaction } from '@/generated/browser';
+import type {
+  Prisma,
+  TeamMember,
+  User,
+  Comment,
+  CommentReaction,
+} from '@/generated/browser';
 import type { TaskCscProperties, TeamCscProperties } from './csc';
 import type { TaskTiaProperties } from './tia';
 import type { TaskRpaProperties } from './rpa';

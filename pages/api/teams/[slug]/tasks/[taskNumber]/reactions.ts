@@ -110,10 +110,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   // Send notification only when a reaction is added (not removed)
   // and only to the comment author (not to the person who reacted)
-  if (
-    result.action === 'added' &&
-    comment.createdById !== teamMember.user.id
-  ) {
+  if (result.action === 'added' && comment.createdById !== teamMember.user.id) {
     const { task } = comment;
 
     await notificationService.sendBulk([

@@ -15,11 +15,7 @@ import { notificationService } from '@/lib/notifications/notification-service';
 import { getTeamRecipientsBySlug } from '@/lib/notifications/recipients';
 import { NotificationType } from '@/generated/enums';
 import type { TaskProperties } from 'types';
-import {
-  isTaskPriority,
-  statusLabels,
-  priorityLabels,
-} from '@/lib/tasks';
+import { isTaskPriority, statusLabels, priorityLabels } from '@/lib/tasks';
 
 export default async function handler(
   req: NextApiRequest,
