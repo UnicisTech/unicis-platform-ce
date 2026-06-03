@@ -33,7 +33,7 @@ const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
   const [distributorToDelete, setDistributorToDelete] = useState<null | string>(null);
 
   const { t } = useTranslation(['common', 'fleet']);
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
 
   const { tasks, isLoading, isError, mutateDistributorsTasks } = useDistributors(team?.id);
 

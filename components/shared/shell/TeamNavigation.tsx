@@ -1,7 +1,6 @@
 import {
   Cog6ToothIcon,
   CodeBracketIcon,
-  DocumentTextIcon,
   ChatBubbleBottomCenterTextIcon,
   QuestionMarkCircleIcon,
   LifebuoyIcon,
@@ -20,6 +19,7 @@ interface NavigationItemsProps extends NavigationProps {
 const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   const { t } = useTranslation(['common', 'fleet']);
   const { canAccess } = useCanAccess(slug);
+
   const relativePath = activePathname?.slice(`/teams/${slug}`.length) || '';
 
   const menus: (MenuItem | null)[] = [
@@ -113,13 +113,6 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         }
       : null,
     { name: 'line-break', href: '' },
-    {
-      name: t('rest-api-docs'),
-      href: '/api-docs',
-      icon: DocumentTextIcon,
-      className: 'stroke-blue-600',
-      openInNewTab: true,
-    },
     {
       name: t('documentation'),
       href: 'https://www.unicis.tech/docs',

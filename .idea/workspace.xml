@@ -5,283 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19572125-9d28-466e-acda-1ffff07af7a8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/unicis-platform.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/account/AccountTab.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/account/FleetAccountManager.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/account/FleetAccountTab.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/emailTemplates/FleetEnrollEmail.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/emailTemplates/FleetPasswordReset.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Asset/AddAsset.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Asset/AssetConfig.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Asset/AssetLogs.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Asset/AssetSort.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Asset/DeleteNode.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Asset/ExportNode.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Asset/NodeDetails.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Asset/NodeTab.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Asset/Nodes.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Asset/ResultLogs.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Asset/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/AssetAnalysis.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/AssetCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/AssetPieChart.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/AssetTaskAnalysis.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Assets.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/PlatformTab.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetTab.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetsSelector.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Distributor/CreateDistributor.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Distributor/DeleteDistributorResult.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Distributor/DistributorDetails.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Distributor/DistributorResults.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Distributor/Distributors.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetContainer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetHelper.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetSecret.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetSettings.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetStatus.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetTools.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/RenewFleetSecret.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/FleetConnectRequired.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/CreatePack.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/DeletePack.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/EditPack.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/PackDetails.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/PackResults.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/PackTab.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/PackTags.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/Packs.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/PacksSelector.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/CreateQuery.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/DeleteQuery.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/EditQuery.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/Queries.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/QueryDetails.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/QueryResults.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/QueryTab.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/QueryTags.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/README" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/StatusValue.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/TableBuilder.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Tag/CreateTag.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Tag/DeleteTag.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Tag/EditTag.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Tag/TagDetails.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Tag/Tags.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Tag/TagsTab.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Tag/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/TagsSelector.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/shared/CodeBlock.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/shared/DataInfo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/shared/Date.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/shared/NumberFormatter.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/shared/PlatformBadge.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/Nodes/AssetConfig.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/Nodes/AssetLogs.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/Nodes/ResultLogs.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/Nodes/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/Nodes/useDeleteAssetLog.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/Nodes/useDeleteNode.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/Nodes/useDeleteResult.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/Nodes/useGetNodeId.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/Nodes/useNodes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/Tags/useCreateTag.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/Tags/useDeleteTag.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/Tags/useGetTagId.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/Tags/useTags.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/Tags/useUpdateTag.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/connect/useAccessFleetAccount.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/connect/useCreateFleetAccount.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/connect/useDeleteFleetSecret.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/connect/useGetFleetSecret.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/connect/useOrderFleetSecret.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/connect/useRenewFleetSecret.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/distributors/useAnalysis.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/distributors/useAuditorStats.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/distributors/useCreateDistributor.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/distributors/useDeleteDistributor.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/distributors/useDeleteDistributorIdResult.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/distributors/useDeleteDistributorResult.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/distributors/useDistributors.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/distributors/useGetDistributorIdResult.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/packs/useCreatePack.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/packs/useDeletePack.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/packs/useGetPackId.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/packs/usePacks.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/packs/useUpdatePack.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/queries/useCreateQuery.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/queries/useDeleteQuery.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/queries/useGetQueryId.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/queries/useQueries.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/queries/useUpdateQuery.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/results/useResults.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/team/useCreateFleetTeam.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/team/useGetTeam.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/unicis-fleet-routes.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/useBootstrapFleet.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/useCheckFleetAccount.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/fleets/useVerifyFleetAsses.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/useHasPlan.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/useUFA.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/email/sendFleetEnrollEmail.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/email/sendFleetPasswordResetEmail.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/fleet/account.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/fleet/apiBase.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/fleet/assets.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/fleet/constants.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/fleet/distributed.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/fleet/fleetFetcher.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/fleet/packs.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/fleet/querys.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/fleet/tags.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/fleet/tools.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/check-plan.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/fleet/bootstrap.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/fleet/change-password.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/fleet/check-account.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/fleet/connect.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/fleet/debug-enrollments.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/fleet/enroll.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/fleet/enroll/complete.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/fleet/enroll/verify.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/fleet/ensure-secret.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/fleet/forgot-password.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/fleet/revoke.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/fleet/secret.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/fleet/sync-member.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/has-plan.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/ufa-sync.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/settings/fleet.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/distributors.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/distributors/[distributorId]/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/packs.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/packs/[packId]/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/queries.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/queries/[queryId]/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/tags.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/tags/[tagId]/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/teams/[slug]/assets/[nodeId]/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prisma/migrations/20251207121449_fleet_models/migration.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prisma/migrations/20260105132025_add_fleet_enrollment/migration.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset-dashboard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset-dashboard.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/apple.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/freebsd-outlined.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/freebsd.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/google.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/linux-debian.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/linux-mint.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/linux-ubuntu.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/linux.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/os-apple.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/os-ios.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/pc.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/server.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/windows-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/windows-7.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/windows.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/fleet.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/account/UpdateAccount.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/account/UpdateAccount.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/account/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/account/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/auth/Join.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/auth/Join.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/auth/ResetPassword.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/auth/ResetPassword.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/emailTemplates/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/emailTemplates/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/RPA/RpaAuditLogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/RPA/RpaAuditLogs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/TIA/TiaAuditLogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/TIA/TiaAuditLogs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/TeamDashboard/TeamTasksAnalysis.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/TeamDashboard/TeamTasksAnalysis.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/csc/CscPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/csc/CscPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/csc/CscTabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/csc/CscTabs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/csc/Dashboards.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/csc/Dashboards.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/csc/PieChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/csc/PieChart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/csc/RadarChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/csc/RadarChart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/csc/SectionFilter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/csc/SectionFilter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/csc/StatusHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/csc/StatusHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/csc/StatusSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/csc/StatusSelector.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/csc/StatusesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/csc/StatusesTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/csc/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/csc/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/csc/issue-panel/ControlBlock.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/csc/issue-panel/ControlBlock.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/csc/issue-panel/ControlBlockViewOnly.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/csc/issue-panel/ControlBlockViewOnly.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/iap/course-page/Certificate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/iap/course-page/Certificate.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/iap/shared/ProgressBadge.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/iap/shared/ProgressBadge.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/pia/TaskPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/pia/TaskPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/pia/risk-form/steps/AvailabilityStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/pia/risk-form/steps/AvailabilityStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/pia/risk-form/steps/CorrectiveMeasuresStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/pia/risk-form/steps/CorrectiveMeasuresStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/pia/risk-form/steps/DataProcessingStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/pia/risk-form/steps/DataProcessingStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/pia/risk-form/steps/ResultsStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/pia/risk-form/steps/ResultsStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/pia/risk-form/steps/TransparencyStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/pia/risk-form/steps/TransparencyStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/rpa/CreateProcedureTest.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/rpa/CreateProcedureTest.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/rpa/audit-logs/RpaAuditLogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/rpa/audit-logs/RpaAuditLogs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/rpa/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/rpa/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/rpa/issue-panel/RpaPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/rpa/issue-panel/RpaPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/rpa/procedure-form/steps/PurposeAndCategoriesStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/rpa/procedure-form/steps/PurposeAndCategoriesStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/rpa/procedure-form/steps/SecurityMeasuresStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/rpa/procedure-form/steps/SecurityMeasuresStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/tia/RiskLevel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/tia/RiskLevel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/tia/audit-logs/TiaAuditLogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/tia/audit-logs/TiaAuditLogs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/tia/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/tia/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/tia/issue-panel/TiaPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/tia/issue-panel/TiaPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/interfaces/tia/procedure-form/steps/ConclusionStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/tia/procedure-form/steps/ConclusionStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/shadcn/ui/multi-select.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/shadcn/ui/multi-select.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/shared/CopyToClipboardButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/shared/CopyToClipboardButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/shared/Error.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/shared/Error.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/shared/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/shared/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/shared/shell/AppShell.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/shared/shell/AppShell.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/shared/shell/Drawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/shared/shell/Drawer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/shared/shell/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/shared/shell/Navigation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/shared/shell/NavigationItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/shared/shell/NavigationItems.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/account/AccountTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/account/AccountTab.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Asset/Nodes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/Asset/Nodes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/PlatformTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetDashboard/PlatformTab.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/AssetTab.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Distributor/DistributorDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Distributor/DistributorDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Distributor/Distributors.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Distributor/Distributors.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetHelper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetHelper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetSecret.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetSecret.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetSettings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetStatus.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetStatus.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetTools.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/FleetTools.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/RenewFleetSecret.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Fleet/RenewFleetSecret.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/FleetConnectRequired.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/FleetConnectRequired.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/PackDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/PackDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/PackTags.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/PackTags.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/Packs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Pack/Packs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/Queries.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/Queries.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/QueryTags.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Query/QueryTags.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Tag/TagDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Tag/TagDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/interfaces/AssetManagement/Tag/Tags.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/interfaces/AssetManagement/Tag/Tags.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/shared/shell/TeamNavigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/shared/shell/TeamNavigation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/shared/shell/UserNavigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/shared/shell/UserNavigation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/team/CreateTeam.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/team/CreateTeam.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/team/Members.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/team/Members.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/team/TeamTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/team/TeamTab.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/fleets/connect/useGetFleetSecret.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/fleets/connect/useGetFleetSecret.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/fleets/team/useGetTeam.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/fleets/team/useGetTeam.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/useTeamMembers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useTeamMembers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/email/sendFleetPasswordResetEmail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/email/sendFleetPasswordResetEmail.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/env.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/env.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/permissions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/permissions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/en/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/en/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/account.ts" beforeDir="false" afterPath="$PROJECT_DIR$/models/account.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/fleet/apiBase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/fleet/apiBase.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/team.ts" beforeDir="false" afterPath="$PROJECT_DIR$/models/team.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next-env.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/auth/[...nextauth].ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/auth/[...nextauth].ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/auth/join.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/auth/join.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/auth/reset-password.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/auth/reset-password.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/teams/[slug]/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/teams/[slug]/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/teams/[slug]/invitations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/teams/[slug]/invitations.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/api/teams/[slug]/members.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/teams/[slug]/members.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/teams/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/teams/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/reset-password/[token].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/reset-password/[token].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/settings/account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/settings/account.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/Breadcrumb.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/shared/Breadcrumb.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/csc.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/csc.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/pia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/pia.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/rpa.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/rpa.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/tasks/[taskNumber]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/tasks/[taskNumber]/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/base.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/base.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/next-auth.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/next-auth.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/settings/fleet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/settings/fleet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/distributors.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/distributors.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/distributors/[distributorId]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/distributors/[distributorId]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/packs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/packs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/packs/[packId]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/packs/[packId]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/queries.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/queries.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/queries/[queryId]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/queries/[queryId]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/tags.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/tags.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/tags/[tagId]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/asset-management/tags/[tagId]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/[slug]/members.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teams/[slug]/members.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -310,27 +75,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Merging main&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
-    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/vnezd/Desktop/projects/test/unicis-platform&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/vnezd/Desktop/projects/test/unicis-platform/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "fleet-enrollment-merge-recovery",
+    "javascript.preferred.runtime.type.id": "node",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "last_opened_file_path": "/Users/vnezd/Desktop/projects/test/unicis-platform",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Users/vnezd/Desktop/projects/test/unicis-platform/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="npm.Next.js: server-side">
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:4002/">
       <method v="2" />

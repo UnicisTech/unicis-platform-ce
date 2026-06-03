@@ -2,6 +2,7 @@
 
 import { Fragment, useCallback, useState } from "react";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 import { Error, Loading } from "@/components/shared";
 import useCanAccess from "hooks/useCanAccess";
 import type { User } from "@/generated/client";
@@ -52,8 +53,10 @@ const PackDetails = ({
   user: Partial<User>;
   packID: string;
 }) => {
+  const router = useRouter();
   const { t } = useTranslation("common");
-  const { canAccess } = useCanAccess();
+  const { slug } = router.query as { slug?: string };
+  const { canAccess } = useCanAccess(slug);
   const [isFormChanged, setIsFormChanged] = useState(false);
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [packToDelete, setPackToDelete] = useState<null | string>(null);

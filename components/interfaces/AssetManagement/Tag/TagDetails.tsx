@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 import { Card, Error, Loading } from "@/components/shared";
 import useCanAccess from "hooks/useCanAccess";
 import type { User } from "@/generated/client";
@@ -21,8 +22,10 @@ const TagDetails = ({
   user: Partial<User>;
   tagID: string;
 }) => {
+  const router = useRouter();
+  const { slug } = router.query as { slug?: string };
   const { t } = useTranslation("common");
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
   const [isFormChanged, setIsFormChanged] = useState(false);
   const updateTag = useUpdateTag();
 

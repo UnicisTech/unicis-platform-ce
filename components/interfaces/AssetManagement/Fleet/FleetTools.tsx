@@ -7,7 +7,7 @@ import { copyToClipboard } from '@/lib/common';
 import { CodeBlock } from '@/components/shared/CodeBlock';
 
 const FleetTools = ({ fleetTeam }: { fleetTeam?: FleetTeam}) => {
-    const { t } = useTranslation(['common', 'fleet']);
+    const { t } = useTranslation('common');
 
     const endOfThisYear = new Date(new Date().getFullYear(), 11, 31).toLocaleDateString();
     
@@ -15,8 +15,8 @@ const FleetTools = ({ fleetTeam }: { fleetTeam?: FleetTeam}) => {
         <Card>
             <Card.Body>
                 <Card.Header>
-                    <Card.Title>{t('fleet:fleet-tool')}</Card.Title>
-                    <Card.Description>{t('fleet:fleet-tool-description')}</Card.Description>
+                    <Card.Title>{t('fleet-tool')}</Card.Title>
+                    <Card.Description>{t('fleet-tool-description')}</Card.Description>
                 </Card.Header>
                 <div className=''>
                     <h1>Team TLS Certificate Private Key {`Valid till ${endOfThisYear}`} <CopyToClipboardButton value={fleetTeam?.ca_private_key} /></h1>

@@ -26,7 +26,7 @@ const PackTags = ({
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const { t } = useTranslation("common");
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
 
   const { pack, isLoading, isError } = useGetPackId(fleetTeamId!, packID);
   const [deleteVisible, setDeleteVisible] = useState(false);

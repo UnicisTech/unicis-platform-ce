@@ -34,7 +34,7 @@ const Querys = ({ team, user }: { team: Team; user: Partial<User> }) => {
   const [queryToDelete, setQueryToDelete] = useState<null | string>(null);
 
   const { t } = useTranslation(['common', 'fleet']);
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
   const { queries, isLoading, isError } = useQueries(team?.id);
 
   if (isLoading) return <Loading />;

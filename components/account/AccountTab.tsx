@@ -3,7 +3,6 @@ import {
 } from '@heroicons/react/24/outline';
 import type { User } from '@/generated/client';
 import classNames from 'classnames';
-import useCanAccess from 'hooks/useCanAccess';
 import Link from 'next/link';
 
 interface AccountTabProps {
@@ -13,8 +12,6 @@ interface AccountTabProps {
 }
 
 const AccountTab = ({ activeTab, heading, user }: AccountTabProps) => {
-  const { canAccess } = useCanAccess();
-
   const navigations = [
     {
       name: 'Platform Account',

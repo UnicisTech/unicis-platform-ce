@@ -16,7 +16,7 @@ import { useTranslation } from 'next-i18next';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Cookies from 'js-cookie';
-import { User } from '@/generated/client';
+import type { User } from '@/generated/client';
 import { useVerifyFleetAsses } from '@/hooks/fleets/useVerifyFleetAsses';
 import toast from 'react-hot-toast';
 import { useAccessFleetAccount } from '@/hooks/fleets';

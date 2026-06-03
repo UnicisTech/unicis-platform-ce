@@ -32,7 +32,7 @@ const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
   const [packToDelete, setPackToDelete] = useState<null | string>(null);
 
   const { t } = useTranslation(['common', 'fleet']);
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
   const { packs, isLoading, isError } = usePacks(team?.id);
 
   if (isLoading) return <Loading />;

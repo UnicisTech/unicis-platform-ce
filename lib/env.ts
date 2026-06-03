@@ -2,10 +2,10 @@ const env = {
   databaseUrl: `${process.env.DATABASE_URL}`,
   appUrl: `${process.env.APP_URL}`,
 
-  fleetAPI: `${process.env.NEXT_PUBLIC_FLEET_API_HOST || process.env.FLEET_API_HOST || ''}`,
-  fleetAPIUrl: `${process.env.NEXT_PUBLIC_FLEET_API_URL || process.env.FLEET_API_URL || ''}`,
+  fleetAPI: `${process.env.NEXT_PUBLIC_FLEET_API_HOST}`,
+  fleetAPIUrl: `${process.env.NEXT_PUBLIC_FLEET_API_URL}`,
   agentVersion: `${process.env.OSQUERY_AGENT_VERSION || '5.16.0'}`,
-  assetRequiredPlan: `${process.env.NEXT_PUBLIC_ASSET_REQUIRED_PLAN || 'ULTIMATE'}`,
+  assetRequiredPlan: process.env.NEXT_PUBLIC_ASSET_REQUIRED_PLAN || 'ULTIMATE',
 
   product: 'unicis-platform',
   // redirectAfterSignIn: '/teams',
@@ -124,20 +124,12 @@ const env = {
   billingEmail: process.env.BILLING_EMAIL,
 
   ai: {
-    url: process.env.AI_URL,
     llamaToken: process.env.LLAMA_TOKEN,
-    model: process.env.AI_MODEL,
   },
 
   resend: {
     apiKey: process.env.RESEND_API_KEY!,
     from: process.env.RESEND_FROM!,
-  },
-
-  vapid: {
-    publicKey: process.env.VAPID_PUBLIC_KEY,
-    privateKey: process.env.VAPID_PRIVATE_KEY,
-    subject: process.env.VAPID_SUBJECT,
   },
 };
 

@@ -9,20 +9,26 @@ import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import { TeamTab } from '@/components/team';
 import FleetConnectRequired from '@/components/interfaces/AssetManagement/FleetConnectRequired';
 
-
 const AssetManagement = ({ teamFeatures, team, user, enrollmentToken }) => {
-
   return (
-    <FleetConnectRequired user={user} teamId={team.id} enrollmentToken={enrollmentToken}>
-    {() => (
-      <>
-        <TeamTab activeTab="asset-management" team={team} teamFeatures={teamFeatures} />
-        <AssetTab activeTab="fleet" team={team} teamFeatures={teamFeatures} />
-        <div className="space-y-6">
-          <FleetContainer user={user} team={team} />
-        </div>
-      </>
-    )}
+    <FleetConnectRequired
+      user={user}
+      teamId={team.id}
+      enrollmentToken={enrollmentToken}
+    >
+      {() => (
+        <>
+          <TeamTab
+            activeTab="asset-management"
+            team={team}
+            teamFeatures={teamFeatures}
+          />
+          <AssetTab activeTab="fleet" team={team} teamFeatures={teamFeatures} />
+          <div className="space-y-6">
+            <FleetContainer user={user} team={team} />
+          </div>
+        </>
+      )}
     </FleetConnectRequired>
   );
 };
@@ -48,7 +54,9 @@ export const getServerSideProps = async (
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common', 'fleet']) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, ['common', 'fleet'])
+        : {}),
       team: JSON.parse(JSON.stringify(team)),
       teamFeatures: env.teamFeatures,
       enrollmentToken,

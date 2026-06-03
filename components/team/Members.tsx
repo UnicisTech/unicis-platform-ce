@@ -7,13 +7,13 @@ import {
   TableRow,
 } from '@/components/shadcn/ui/table';
 import { Error, LetterAvatar, Loading } from '@/components/shared';
-import type { Team, TeamMember, TeamMemberWithUserDto } from 'types';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeamMembers from 'hooks/useTeamMembers';
 import { useSession } from 'next-auth/react';
 import { useTranslation } from 'next-i18next';
 import toast from 'react-hot-toast';
 import { InviteMember } from '@/components/invitation';
+import type { Team, TeamMemberWithUserDto } from 'types';
 import UpdateMemberRole from './UpdateMemberRole';
 import { defaultHeaders } from '@/lib/common';
 import type { ApiResponse } from 'types';
@@ -27,11 +27,8 @@ type FleetEnrollmentLite = {
   sentAt: string | Date;
 };
 
-type MemberWithFleet = TeamMember & {
-  user: {
-    id: string;
-    name: string;
-    email: string;
+type MemberWithFleet = TeamMemberWithUserDto & {
+  user: TeamMemberWithUserDto['user'] & {
     fleetEnrollments?: FleetEnrollmentLite[];
   };
 };
@@ -46,6 +43,7 @@ const Members = ({ team }: { team: Team }) => {
   const { data: session } = useSession();
   const { t } = useTranslation(['common', 'fleet']);
   const { canAccess } = useCanAccess(team.slug);
+
   const [visible, setVisible] = useState(false);
   const [selectedMember, setSelectedMember] =
     useState<TeamMemberWithUserDto | null>(null);
@@ -87,9 +85,12 @@ const Members = ({ team }: { team: Team }) => {
   };
 
   const canUpdateRole = (member: TeamMemberWithUserDto) =>
-    session?.user.id !== member.userId && canAccess('team_member', ['update']);
+    session?.user.id !== member.userId &&
+    canAccess('team_member', ['update']);
+
   const canRemoveMember = (member: TeamMemberWithUserDto) =>
-    session?.user.id !== member.userId && canAccess('team_member', ['delete']);
+    session?.user.id !== member.userId &&
+    canAccess('team_member', ['delete']);
 
   const getEnrollmentView = (member: MemberWithFleet) => {
     const enrollment = member.user.fleetEnrollments?.[0];
@@ -148,7 +149,9 @@ const Members = ({ team }: { team: Team }) => {
         return;
       }
 
-      toast.success(t('fleet:fleet-access-revoked', { email: member.user.email }));
+      toast.success(
+        t('fleet:fleet-access-revoked', { email: member.user.email })
+      );
       mutateTeamMembers();
     } catch {
       toast.error(t('fleet:fleet-revoke-failed'));
@@ -229,7 +232,7 @@ const Members = ({ team }: { team: Team }) => {
             {t('members')}
           </h2>
           <p className="text-sm text-muted-foreground">
-            {t('members-description')}
+            {t('team-members')}
           </p>
         </div>
         <Button onClick={() => setVisible(!visible)}>
@@ -243,9 +246,9 @@ const Members = ({ team }: { team: Team }) => {
             <TableHead>{t('name')}</TableHead>
             <TableHead>{t('email')}</TableHead>
             <TableHead>{t('role')}</TableHead>
-            {canAccess('team_member', ['delete']) && (
-              <TableHead className="text-right">{t('actions')}</TableHead>
-            )}
+            <TableHead className="w-[240px]">
+              {t('action')}
+            </TableHead>
           </TableRow>
         </TableHeader>
 

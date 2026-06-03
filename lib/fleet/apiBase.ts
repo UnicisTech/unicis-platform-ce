@@ -23,11 +23,8 @@ export const fleetV1 = async (endpoint: string, options?: RequestInit): Promise<
   });
 
   if (!response.ok) {
-    const error = new Error(`HTTP error! status: ${response.status}`) as Error & {
-      status?: number;
-    };
-    error.status = response.status;
-    throw error;
+    // Handle HTTP errors here
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
 
   return response;
@@ -40,11 +37,8 @@ export const fleetV2 = async (endpoint: string, options?: RequestInit): Promise<
   });
 
   if (!response.ok) {
-    const error = new Error(`HTTP error! status: ${response.status}`) as Error & {
-      status?: number;
-    };
-    error.status = response.status;
-    throw error;
+    // Handle HTTP errors here
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
 
   return response;

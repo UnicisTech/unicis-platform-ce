@@ -37,7 +37,7 @@ export const getServerSideProps = async (
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common', 'fleet']) : {}),
+      ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
       user: {
         id: user.id,
         email: user.email,

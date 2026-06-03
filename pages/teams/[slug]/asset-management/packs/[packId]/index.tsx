@@ -19,8 +19,8 @@ const PackById = ({teamFeatures, user}) => {
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
   const { packId, slug } = router.query;
+  const { canAccess } = useCanAccess(slug as string);
 
   const {
     team,

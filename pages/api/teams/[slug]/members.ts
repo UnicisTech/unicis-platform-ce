@@ -2,7 +2,7 @@ import { ApiError } from '@/lib/errors';
 import { prisma } from '@/lib/prisma';
 import { sendAudit } from '@/lib/retraced';
 import { sendEvent } from '@/lib/svix';
-import { Role } from '@/generated/browser';
+import { Role } from '@/generated/client';
 import {
   getTeamMembers,
   removeTeamMember,
@@ -11,7 +11,6 @@ import {
 import { throwIfNotAllowed } from 'models/user';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
-import { serializeForApi } from '@/lib/serialize';
 
 export default async function handler(
   req: NextApiRequest,
@@ -56,7 +55,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
   recordMetric('member.fetched');
 
-  res.status(200).json({ data: serializeForApi(members) });
+  res.status(200).json({ data: members });
 };
 
 // Delete the member from the team
@@ -156,5 +155,5 @@ const handlePATCH = async (req: NextApiRequest, res: NextApiResponse) => {
 
   recordMetric('member.role.updated');
 
-  res.status(200).json({ data: serializeForApi(memberUpdated) });
+  res.status(200).json({ data: memberUpdated });
 };

@@ -33,7 +33,7 @@ const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
   const [tagToDelete, setTagToDelete] = useState<null | string>(null);
 
   const { t } = useTranslation(['common', 'fleet']);
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
   const { tags, isLoading, isError } = useTags(team.id);
 
   if (isLoading) return <Loading />;

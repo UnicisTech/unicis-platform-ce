@@ -23,7 +23,7 @@ const PackTags = ({
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const { t } = useTranslation("common");
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
 
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [packToDelete, setPackToDelete] = useState<null | string>(null);

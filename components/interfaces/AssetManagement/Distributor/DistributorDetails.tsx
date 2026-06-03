@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { Error, Loading } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
 import type { User } from '@/generated/client';
@@ -11,8 +12,10 @@ import { CodeBlock } from '@/components/shared/CodeBlock';
 
 
 const DistributorsDetails = ({ user, distributorId, fleetTeamId }: { user: Partial<User>, distributorId: string, fleetTeamId: string }) => {
+  const router = useRouter();
+  const { slug } = router.query as { slug?: string };
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
   const [status, setStatus] = useState<'new' | 'pending' | 'complete' | 'failed'>('new');
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [queryToDelete, setQueryToDelete] = useState<null | string>(null);

@@ -17,7 +17,6 @@ import { useTranslation } from 'next-i18next';
 import { useEffect } from 'react';
 import { TeamFeature } from 'types';
 
-
 interface TeamTabProps {
   activeTab: string;
   team: Team;
@@ -27,7 +26,7 @@ interface TeamTabProps {
 
 const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   const { canAccess } = useCanAccess(team.slug);
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'fleet']);
   const { hasPlan, checkedHasPlan } = useHasPlan();
 
   useEffect(() => {
@@ -109,7 +108,6 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   if (
     teamFeatures.webhook &&
     canAccess('team_webhook', ['create', 'update', 'read', 'delete'])
-    // true
   ) {
     navigations.push({
       name: t('settings-tabs.webhooks'),
@@ -136,7 +134,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
     checkedHasPlan
   ) {
     navigations.push({
-      name: 'Asset Management',
+      name: t('fleet:asset-management', { defaultValue: 'Asset Management' }),
       href: `/teams/${team.slug}/asset-management`,
       active: activeTab === 'asset-management',
       icon: TagIcon,

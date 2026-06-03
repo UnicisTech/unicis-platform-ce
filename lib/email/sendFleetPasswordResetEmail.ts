@@ -3,7 +3,7 @@ import { render } from '@react-email/render';
 import { FleetPasswordResetEmail } from '@/components/emailTemplates';
 import app from '../app';
 import env from '../env';
-import { User } from '@/generated/client';
+import type { User } from '@/generated/client';
 
 export const sendFleetPasswordResetEmail = async (user: User, token: string) => {
   const subject = `Reset your ${app.name} Fleet password`;

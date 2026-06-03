@@ -19,7 +19,7 @@ import {
 } from '@/components/shadcn/ui/dialog'
 import { Input } from '@/components/shadcn/ui/input'
 import { Label } from '@/components/shadcn/ui/label'
-import { Team, User } from '@/generated/client'
+import type { Team, User } from '@/generated/client'
 import FleetStatus from './FleetStatus'
 import RenewFleetSecret from './RenewFleetSecret'
 import useCanAccess from '@/hooks/useCanAccess'

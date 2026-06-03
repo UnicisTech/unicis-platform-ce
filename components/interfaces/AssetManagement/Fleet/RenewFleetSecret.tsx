@@ -23,7 +23,7 @@ const RenewFleetSecret = ({
   setVisible: (visible: boolean) => void;
   teamId: string;
 }) => {
-  const { t } = useTranslation(['common', 'fleet']);
+  const { t } = useTranslation('common');
   const renewFleetSecret = useRenewFleetSecret();
   const { mutateFleetSecret } = useGetFleetSecret(teamId);
 
@@ -42,7 +42,7 @@ const RenewFleetSecret = ({
       await renewFleetSecret(teamId);
       mutateFleetSecret();
       setVisible(false);
-      toast.success(t('fleet:fleet-secret-renewed'));
+      toast.success(t('fleet-secret-renewed'));
     } catch {
       toast.error(t('error-renewing-fleet-secret'));
     } finally {
@@ -57,7 +57,7 @@ const RenewFleetSecret = ({
           <DialogHeader>
             <DialogTitle>{t('confirm-fleet-secret-renew')}</DialogTitle>
             <DialogDescription>
-              {t('fleet:fleet-renew-node-description')}
+              {t('fleet-renew-node-description')}
             </DialogDescription>
           </DialogHeader>
 

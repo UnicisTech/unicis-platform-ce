@@ -37,7 +37,7 @@ const Nodes = ({
   const [searchTerm, setSearchTerm] = useState('');
 
   const { t } = useTranslation(['common', 'fleet']);
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(slug);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value.toLowerCase());

@@ -20,7 +20,7 @@ interface AssetTabProps {
 }
 
 const AssetTab = ({ activeTab, team, heading, teamFeatures }: AssetTabProps) => {
-  const { canAccess } = useCanAccess();
+  const { canAccess } = useCanAccess(team.slug);
 
   console.log("teamFeatures", teamFeatures)
 
