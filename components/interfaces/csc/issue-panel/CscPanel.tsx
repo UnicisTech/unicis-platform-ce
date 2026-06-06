@@ -249,6 +249,7 @@ const CscPanel = ({
         frameworks={cscFrameworks}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
+        showMatrixMapping={false}
       />
 
       {canAccess('task', ['update']) ? (

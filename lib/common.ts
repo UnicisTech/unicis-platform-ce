@@ -1,6 +1,10 @@
 import { enc, lib } from 'crypto-js';
 import Cookies from 'js-cookie';
 import type { NextApiRequest } from 'next';
+import {
+  fleetAccessTokenCookieName,
+  legacyFleetAccessTokenCookieName,
+} from '@/lib/fleet/cookies';
 
 export const createRandomString = (length = 6) => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -16,7 +20,9 @@ export const createRandomString = (length = 6) => {
 };
 
 export const fleetAuthAPIHeaders = async () => {
-  const token = Cookies.get('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA');
+  const token =
+    Cookies.get(fleetAccessTokenCookieName) ||
+    Cookies.get(legacyFleetAccessTokenCookieName);
   // const { ufa } = await useUFA();
   // console.log('UFA: ', ufa);
 

@@ -1,16 +1,16 @@
 import fetcher from '@/lib/fetcher';
 import type { Task } from 'types';
-import useSWR, { mutate } from 'swr';
+import useSWR from 'swr';
 import type { ApiResponse } from 'types';
 
 const useTasks = (slug: string) => {
   const url = `/api/teams/${slug}/tasks`;
 
-  const { data, error } = useSWR<ApiResponse<Task[]>>(url, fetcher);
-
-  const mutateTasks = async () => {
-    mutate(url);
-  };
+  const {
+    data,
+    error,
+    mutate: mutateTasks,
+  } = useSWR<ApiResponse<Task[]>>(url, fetcher);
 
   return {
     isLoading: !error && !data,

@@ -7,6 +7,7 @@ import type {
   Payment as PrismaPayment,
   Subscription as PrismaSubscription,
   Task as PrismaTask,
+  TaskRecurrence as PrismaTaskRecurrence,
   Team as PrismaTeam,
   TeamCourse as PrismaTeamCourse,
   TeamMember as PrismaTeamMember,
@@ -31,6 +32,7 @@ export type Serialized<T> = T extends Date
 
 // Client-facing DTOs (JSON-serialized)
 export type Task = Serialized<PrismaTask>;
+export type TaskRecurrence = Serialized<PrismaTaskRecurrence>;
 export type TaskExtendedDto = Serialized<TaskExtended>;
 export type ExtendedCommentDto = Serialized<ExtendedComment>;
 export type Team = Serialized<PrismaTeam>;

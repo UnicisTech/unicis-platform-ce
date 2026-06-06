@@ -4,9 +4,11 @@ import { Stepper } from '@/components/shadcn/ui/stepper';
 const StageTracker = ({
   currentStage,
   headers,
+  onStepChange,
 }: {
   currentStage: number;
   headers: string[];
+  onStepChange?: (step: number) => void;
 }) => {
   const { theme } = useTheme();
 
@@ -15,7 +17,7 @@ const StageTracker = ({
       <Stepper
         steps={headers}
         currentStep={currentStage}
-        onStepChange={() => {}}
+        onStepChange={onStepChange}
       />
     </div>
   );

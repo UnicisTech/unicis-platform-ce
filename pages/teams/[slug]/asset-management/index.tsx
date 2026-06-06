@@ -9,12 +9,13 @@ import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import { TeamTab } from '@/components/team';
 import FleetConnectRequired from '@/components/interfaces/AssetManagement/FleetConnectRequired';
 
-const AssetManagement = ({ teamFeatures, team, user, enrollmentToken }) => {
+const AssetManagement = ({ teamFeatures, team, user, enrollmentToken, isTeamAdmin }) => {
   return (
     <FleetConnectRequired
       user={user}
       teamId={team.id}
       enrollmentToken={enrollmentToken}
+      isTeamAdmin={isTeamAdmin}
     >
       {() => (
         <>
@@ -52,6 +53,18 @@ export const getServerSideProps = async (
     };
   }
 
+  // Get team member role
+  const { prisma } = await import('@/lib/prisma');
+  const teamMember = await prisma.teamMember.findFirst({
+    where: {
+      teamId: team.id,
+      userId: user.id,
+    },
+    select: {
+      role: true,
+    },
+  });
+
   return {
     props: {
       ...(locale
@@ -68,6 +81,7 @@ export const getServerSideProps = async (
         lastName: user.lastName,
         image: user.image,
       },
+      isTeamAdmin: teamMember?.role === 'ADMIN' || teamMember?.role === 'OWNER',
     },
   };
 };

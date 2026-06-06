@@ -45,6 +45,7 @@ export const taskDueCheck: Task = async () => {
       team: {
         select: {
           slug: true,
+          name: true,
           members: {
             select: {
               user: {
@@ -92,7 +93,7 @@ export const taskDueCheck: Task = async () => {
     await notificationService.sendBulk(
       Array.from(recipients.values()).map((user) => ({
         type: NotificationType.TASK_DUE,
-        title: `Task due today: "${task.title}"`,
+        title: `Team: ${team.name}\nTask due today: #${task.taskNumber} - ${task.title}`,
         body: `Due date is ${dueDateKey} (UTC).`,
         link,
         recipientId: user.id,

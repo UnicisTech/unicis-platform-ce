@@ -15,6 +15,29 @@ tags:
  
 The information about Unicis Platform releases and changes is listed in order below.
 
+## [Tasks] 2026-05-31
+
+Release date: 2025-05-31
+
+- New Features
+  - Added task import templates that generate tasks from enabled CSC framework controls
+  - Added a dialog to set a CSC control status after linking a task to an unknown-status control
+  - Kanban tasks board
+  - Recurring tasks
+  - Import/Export for RoPA/TIA/PIA/RM
+- Enhancements
+  - Added bulk and per-control linking of tasks to mapped CSC controls across enabled frameworks, including status propagation from the source control
+  - Emojis for comments
+  - Prioritizations for tasks
+  - Import/Export supports OpenDocument standard
+  - Audit logs for tasks changes
+  - Notification team identifier
+  - PIA/RM links for dashboard matrix
+  - Links added for RoPA/TIA/PIA/RM steps
+- Fixes
+  - Task attachments visible only on overview tab
+  - Hid the CSC matrix mapping view from the task-level CSC issue panel
+
 ## [Validation, Permissions & Audit Log Fixes] 2026-05-12
 
 *Release date: 2026-05-12*

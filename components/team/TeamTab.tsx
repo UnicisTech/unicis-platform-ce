@@ -70,7 +70,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   }
 
   if (
-    teamFeatures.sso &&
+    teamFeatures?.sso &&
     canAccess('team_sso', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({
@@ -82,7 +82,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   }
 
   if (
-    teamFeatures.dsync &&
+    teamFeatures?.dsync &&
     canAccess('team_dsync', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({
@@ -94,7 +94,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   }
 
   if (
-    teamFeatures.auditLog &&
+    teamFeatures?.auditLog &&
     canAccess('team_audit_log', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({
@@ -106,7 +106,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   }
 
   if (
-    teamFeatures.webhook &&
+    teamFeatures?.webhook &&
     canAccess('team_webhook', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({
@@ -118,7 +118,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
   }
 
   if (
-    teamFeatures.apiKey &&
+    teamFeatures?.apiKey &&
     canAccess('team_api_key', ['create', 'update', 'read', 'delete'])
   ) {
     navigations.push({

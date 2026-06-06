@@ -12,7 +12,9 @@ import { useTranslation } from 'next-i18next';
 import { isoValueToLabel } from '@/lib/csc/csc-frameworks';
 import frameworks from '@/lib/csc/frameworks';
 import SoaExportModal from './SoaExportModal';
+import StatusPromptDialog from './StatusPromptDialog';
 import { downloadSoaXlsx } from '@/lib/soa/exportXlsx';
+import { downloadSoaOds } from '@/lib/soa/exportOds';
 import { downloadSoaHtml } from '@/lib/soa/exportHtml';
 import { downloadSoaPdf } from '@/lib/soa/exportPdf';
 import type { ExportFormat, SoaPayload, SoaRow } from '@/lib/soa/types';
@@ -90,6 +92,39 @@ export default function CscPanel({
   const [perPage, setPerPage] = useState<number>(10);
   const [soaModalOpen, setSoaModalOpen] = useState(false);
 
+  // ── Status prompt state (shown after linking a task when status is 'unknown') ──
+  const [statusPromptOpen, setStatusPromptOpen] = useState(false);
+  const [statusPromptControl, setStatusPromptControl] = useState<{
+    id: string;
+    code: string;
+    title: string;
+  } | null>(null);
+
+  /** Resolve the control code/title from the framework definition */
+  const resolveControlMeta = useCallback(
+    (controlId: string) => {
+      const code = t(`csc/${iso}:controls.${controlId}.code`, controlId);
+      const title = t(`csc/${iso}:controls.${controlId}.control`, '');
+      return { code, title };
+    },
+    [iso, t]
+  );
+
+  /**
+   * Open the status prompt dialog for a control whose status is currently 'unknown'.
+   * Called after successfully linking the first task to a control.
+   */
+  const maybePromptStatus = useCallback(
+    (controlId: string) => {
+      const currentStatus = statuses[controlId] as CscStatus | undefined;
+      if (currentStatus && currentStatus !== 'unknown') return;
+      const { code, title } = resolveControlMeta(controlId);
+      setStatusPromptControl({ id: controlId, code, title });
+      setStatusPromptOpen(true);
+    },
+    [statuses, resolveControlMeta]
+  );
+
   const statusHandler = useCallback(
     async (control: string, value: string) => {
       const { error } = await updateCscStatus({
@@ -103,6 +138,21 @@ export default function CscPanel({
     },
     [slug, iso, t, mutateStatuses]
   );
+
+  const onStatusPromptConfirm = useCallback(
+    async (status: CscStatus) => {
+      if (!statusPromptControl) return;
+      await statusHandler(statusPromptControl.id, status);
+      setStatusPromptOpen(false);
+      setStatusPromptControl(null);
+    },
+    [statusPromptControl, statusHandler]
+  );
+
+  const onStatusPromptSkip = useCallback(() => {
+    setStatusPromptOpen(false);
+    setStatusPromptControl(null);
+  }, []);
 
   const taskSelectorHandler = useCallback(
     async (
@@ -123,8 +173,12 @@ export default function CscPanel({
           return toast.error(error.message || t('errors.requestFailed'));
         await mutateTasks();
       }
+      // After successfully adding task(s), prompt for status if still 'unknown'
+      if (operation === 'add') {
+        maybePromptStatus(control);
+      }
     },
-    [slug, iso, mutateTasks, t]
+    [slug, iso, mutateTasks, t, maybePromptStatus]
   );
 
   /**
@@ -147,9 +201,76 @@ export default function CscPanel({
           t('csc-mapping.drawer.link-success', 'Task linked successfully')
         );
         await mutateTasks();
+        // Prompt for status if still 'unknown'
+        maybePromptStatus(controlId);
       }
     },
-    [slug, mutateTasks, t]
+    [slug, mutateTasks, t, maybePromptStatus]
+  );
+
+  /**
+   * Bulk-link tasks to mapped controls across frameworks.
+   * Groups controls by framework for efficient batched API calls.
+   * When sourceControlId is provided, propagates the source control's
+   * status to every mapped control that gets linked.
+   */
+  const onBulkLinkMapped = useCallback(
+    async (
+      taskNumbers: number[],
+      mappedControls: Array<{ controlId: string; framework: ISO }>,
+      sourceControlId?: string
+    ) => {
+      if (taskNumbers.length === 0 || mappedControls.length === 0) return;
+
+      // Resolve the source control's current status so we can propagate it
+      const sourceStatus = sourceControlId
+        ? (statuses[sourceControlId] as string | undefined)
+        : undefined;
+
+      // Group controls by framework so we make one API call per (task, framework)
+      const byFramework = new Map<string, string[]>();
+      for (const { controlId: cid, framework } of mappedControls) {
+        if (!byFramework.has(framework)) byFramework.set(framework, []);
+        byFramework.get(framework)!.push(cid);
+      }
+
+      let errorOccurred = false;
+      for (const taskNumber of taskNumbers) {
+        if (errorOccurred) break;
+        for (const [fw, controls] of byFramework) {
+          const { error } = await updateTaskCsc({
+            slug,
+            taskNumber,
+            controls,
+            operation: 'add',
+            iso: fw,
+          });
+          if (error) {
+            toast.error(error.message || t('errors.requestFailed'));
+            errorOccurred = true;
+            break;
+          }
+        }
+      }
+
+      // Propagate status from the source control to each mapped control
+      if (!errorOccurred && sourceStatus && sourceStatus !== 'unknown') {
+        for (const { controlId: cid, framework } of mappedControls) {
+          await updateCscStatus({
+            slug,
+            control: cid,
+            value: sourceStatus,
+            framework,
+          });
+        }
+      }
+
+      if (!errorOccurred) {
+        toast.success(t('csc-mapping.drawer.link-mapped-success'));
+      }
+      await mutateTasks();
+    },
+    [slug, mutateTasks, t, statuses]
   );
 
   const buildPayload = useCallback((): SoaPayload => {
@@ -213,6 +334,10 @@ export default function CscPanel({
         await downloadSoaXlsx(payload);
         return;
       }
+      if (fmt === 'ods') {
+        downloadSoaOds(payload);
+        return;
+      }
       if (fmt === 'html') {
         downloadSoaHtml(payload);
         return;
@@ -271,6 +396,7 @@ export default function CscPanel({
         taskSelectorHandler={taskSelectorHandler}
         enabledFrameworks={enabledFrameworks}
         onLinkTask={onLinkTask}
+        onBulkLinkMapped={onBulkLinkMapped}
       />
 
       <SoaExportModal
@@ -279,6 +405,16 @@ export default function CscPanel({
         onExport={handleSoaExport}
         frameworkName={frameworkLabel}
       />
+
+      {statusPromptControl && (
+        <StatusPromptDialog
+          isOpen={statusPromptOpen}
+          controlCode={statusPromptControl.code}
+          controlTitle={statusPromptControl.title}
+          onConfirm={onStatusPromptConfirm}
+          onSkip={onStatusPromptSkip}
+        />
+      )}
     </>
   );
 }

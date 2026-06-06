@@ -3,12 +3,13 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSidePropsContext } from 'next';
-import { Loading, Error } from '@/components/shared';
+import { Loading, Error, TaskRecurrenceBadge } from '@/components/shared';
 import {
   Attachments,
   Comments,
   CommentsTab,
   TaskDetails,
+  TaskAuditLogs,
   TaskTab,
 } from '@/components/interfaces/Task';
 import { CscAuditLogs, CscPanel } from '@/components/interfaces/csc';
@@ -61,7 +62,7 @@ const CardTitleWrapper = ({
   className?: string;
 }) => (
   <div
-    className={`flex min-h-8 flex-wrap items-center justify-between gap-2 px-4 ${className}`.trim()}
+    className={`flex min-h-8 flex-wrap items-center justify-between gap-2 px-4 uppercase ${className}`.trim()}
   >
     {children}
   </div>
@@ -105,7 +106,10 @@ const TaskById = () => {
         teamName={slug}
         path={taskNumber}
       />
-      <h3 className="text-2xl font-bold mb-4">{task.title}</h3>
+      <div className="flex items-center gap-2 mb-4">
+        <h3 className="text-2xl font-bold">{task.title}</h3>
+        {task.recurrenceScheduleId && <TaskRecurrenceBadge />}
+      </div>
       <TaskTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'Overview' && (
         <>
@@ -117,17 +121,6 @@ const TaskById = () => {
             </CardHeader>
             <CardContent>
               <TaskDetails task={task} team={team as Team} />
-            </CardContent>
-          </Card>
-
-          <Card className="mt-4">
-            <CardHeader>
-              <CardTitleWrapper>
-                <CardTitle>{t('attachments')}</CardTitle>
-              </CardTitleWrapper>
-            </CardHeader>
-            <CardContent>
-              <Attachments task={task} mutateTask={mutateTask} />
             </CardContent>
           </Card>
         </>
@@ -266,6 +259,16 @@ const TaskById = () => {
           mutateTasks={mutateTask}
         />
       )}
+      <Card className="mt-4">
+        <CardHeader>
+          <CardTitleWrapper>
+            <CardTitle>{t('attachments')}</CardTitle>
+          </CardTitleWrapper>
+        </CardHeader>
+        <CardContent>
+          <Attachments task={task} mutateTask={mutateTask} />
+        </CardContent>
+      </Card>
       <CommentsTab
         activeTab={activeCommentTab}
         setActiveTab={setActiveCommentTab}
@@ -283,6 +286,16 @@ const TaskById = () => {
         </Card>
       ) : (
         <>
+          <Card className="mt-4">
+            <CardHeader>
+              <CardTitleWrapper>
+                <CardTitle>{t('task-activity')}</CardTitle>
+              </CardTitleWrapper>
+            </CardHeader>
+            <CardContent>
+              <TaskAuditLogs task={task} />
+            </CardContent>
+          </Card>
           <Card className="mt-4">
             <CardHeader>
               <CardTitleWrapper>

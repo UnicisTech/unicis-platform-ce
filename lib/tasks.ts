@@ -15,6 +15,29 @@ export const statuses = [
   'done',
   'failed',
 ];
+
+export const statusLabels: Record<string, string> = {
+  todo: 'To Do',
+  inprogress: 'In Progress',
+  inreview: 'In Review',
+  feedback: 'Feedback',
+  done: 'Done',
+  failed: 'Failed',
+};
+
+export const priorityLabels: Record<string, string> = {
+  low: 'Low',
+  medium: 'Medium',
+  high: 'High',
+};
+
+export const taskPriorities = ['low', 'medium', 'high'] as const;
+export const DEFAULT_TASK_PRIORITY: TaskPriority = 'medium';
+
+export type TaskPriority = (typeof taskPriorities)[number];
+export const isTaskPriority = (value: string): value is TaskPriority =>
+  taskPriorities.includes(value as TaskPriority);
+
 export const taskModuleKeys = [
   'rpa_procedure',
   'tia_procedure',
@@ -81,8 +104,8 @@ export const taskCommentsNavigations = (activeTab: string) => {
       active: activeTab === 'Comments',
     },
     {
-      name: 'Audit logs',
-      active: activeTab === 'Audit logs',
+      name: 'Activity',
+      active: activeTab === 'Activity',
     },
   ];
 };

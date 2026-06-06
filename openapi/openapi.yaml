@@ -208,6 +208,8 @@ components:
           type: string
         status:
           type: string
+        priority:
+          $ref: '#/components/schemas/TaskPriority'
         duedate:
           type: string
         description:
@@ -223,6 +225,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Attachment'
+
+    TaskPriority:
+      type: string
+      enum:
+        - low
+        - medium
+        - high
 
     Comment:
       type: object
@@ -337,6 +346,10 @@ components:
         status:
           type: string
           description: Task status
+        priority:
+          allOf:
+            - $ref: '#/components/schemas/TaskPriority'
+          description: Task priority. Defaults to medium when omitted.
         duedate:
           type: string
           description: Due date
@@ -359,6 +372,8 @@ components:
               type: string
             status:
               type: string
+            priority:
+              $ref: '#/components/schemas/TaskPriority'
             duedate:
               type: string
             description:

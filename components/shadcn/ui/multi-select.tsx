@@ -2,7 +2,6 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { CheckIcon, XCircle, ChevronDown, XIcon } from 'lucide-react';
 import { useTranslation } from 'next-i18next';
-
 import { cn } from '../lib/utils';
 import { Separator } from './separator';
 import { Button } from './button';
@@ -81,10 +80,6 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
       React.useState<string[]>(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
 
-    React.useEffect(() => {
-      setSelectedValues(defaultValue);
-    }, [defaultValue]);
-
     const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === 'Enter') {
         setIsPopoverOpen(true);
@@ -142,7 +137,7 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
             {...props}
             onClick={handleTogglePopover}
             className={cn(
-              'flex w-full p-1 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit overflow-hidden',
+              'flex w-full min-w-44 max-w-full p-1 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit [&_svg]:pointer-events-auto',
               className
             )}
           >
@@ -156,16 +151,22 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
                       <Badge
                         key={value}
                         className={cn(
-                          multiSelectVariants({ variant }),
-                          'min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap inline-flex items-center px-2 py-1'
+                          'min-w-0 max-w-full shrink overflow-hidden text-ellipsis whitespace-nowrap',
+                          multiSelectVariants({ variant })
                         )}
                         style={{ animationDuration: `${animation}s` }}
                         title={option?.label}
                       >
-                        <div className="truncate flex items-center gap-2 max-w-[calc(100%-1.5rem)]">
-                          {IconComponent && <IconComponent className="h-4 w-4 shrink-0" />}
-                          <span className="truncate">{option?.label}</span>
-                        </div>
+                        {IconComponent && (
+                          <IconComponent className="h-4 w-4 mr-2" />
+                        )}
+                        {/* <span className="truncate">{label}</span> */}
+                        <span
+                          className="min-w-0 truncate"
+                          title={option?.label}
+                        >
+                          {option?.label}
+                        </span>
                         <XCircle
                           className="ml-2 h-4 w-4 shrink-0 cursor-pointer"
                           onClick={(event) => {

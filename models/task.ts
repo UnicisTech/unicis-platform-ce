@@ -1,60 +1,170 @@
+import type { Prisma } from '@/generated/client';
 import { prisma } from '@/lib/prisma';
-import { getTeam, incrementTaskIndex } from './team';
+import type { Session } from 'next-auth';
+import type { AuditLog, TaskProperties } from 'types';
+import { DEFAULT_TASK_PRIORITY, type TaskPriority } from '@/lib/tasks';
 
-export const createTask = async (param: {
+export type TaskReorderInput = {
+  taskNumber: number;
+  status: string;
+  kanbanOrder: number;
+};
+
+export type CreateTaskInput = {
   authorId: string;
   teamId: string;
   title: string;
   status: string;
+  priority?: TaskPriority;
   duedate: Date | null;
   description: string;
-}) => {
-  const { authorId, teamId, title, status, duedate, description } = param;
-  const team = await getTeam({ id: teamId });
-  const index = team.taskIndex;
+  properties?: Prisma.InputJsonValue;
+  recurrenceScheduleId?: string | null;
+  recurrenceOccurrenceDate?: Date | null;
+};
 
-  const task = await prisma.task.create({
-    data: {
-      authorId,
-      taskNumber: index,
+const getTeamTasksOrderBy = (): Prisma.TaskOrderByWithRelationInput[] => [
+  { status: 'asc' },
+  { kanbanOrder: 'asc' },
+  { taskNumber: 'asc' },
+];
+
+const validateCreateTaskRecurrenceInput = ({
+  recurrenceScheduleId,
+  recurrenceOccurrenceDate,
+}: Pick<
+  CreateTaskInput,
+  'recurrenceScheduleId' | 'recurrenceOccurrenceDate'
+>) => {
+  if (recurrenceScheduleId !== undefined && recurrenceScheduleId !== null) {
+    if (!recurrenceScheduleId.trim()) {
+      throw new Error('recurrenceScheduleId must not be empty');
+    }
+
+    if (!recurrenceOccurrenceDate) {
+      throw new Error(
+        'recurrenceOccurrenceDate is required when recurrenceScheduleId is provided'
+      );
+    }
+  }
+
+  if (!recurrenceScheduleId && recurrenceOccurrenceDate) {
+    throw new Error(
+      'recurrenceScheduleId is required when recurrenceOccurrenceDate is provided'
+    );
+  }
+};
+
+export const createTaskInTransaction = async (
+  tx: Prisma.TransactionClient,
+  param: CreateTaskInput
+) => {
+  const {
+    authorId,
+    teamId,
+    title,
+    status,
+    priority = DEFAULT_TASK_PRIORITY,
+    duedate,
+    description,
+    properties = {},
+    recurrenceScheduleId = null,
+    recurrenceOccurrenceDate = null,
+  } = param;
+
+  validateCreateTaskRecurrenceInput({
+    recurrenceScheduleId,
+    recurrenceOccurrenceDate,
+  });
+
+  const team = await tx.team.update({
+    where: { id: teamId },
+    data: { taskIndex: { increment: 1 } },
+    select: { taskIndex: true },
+  });
+
+  const lastTaskInStatus = await tx.task.findFirst({
+    where: {
       teamId,
-      title,
       status,
-      duedate,
-      description,
-      properties: {},
+    },
+    orderBy: [{ kanbanOrder: 'desc' }, { taskNumber: 'desc' }],
+    select: {
+      kanbanOrder: true,
     },
   });
 
-  await incrementTaskIndex(teamId);
-
-  return task;
+  return await tx.task.create({
+    data: {
+      authorId,
+      taskNumber: team.taskIndex - 1,
+      teamId,
+      title,
+      status,
+      priority,
+      kanbanOrder: (lastTaskInStatus?.kanbanOrder ?? -1) + 1,
+      duedate,
+      description,
+      properties,
+      recurrenceScheduleId,
+      recurrenceOccurrenceDate,
+    },
+  });
 };
+
+export const createTask = async (param: CreateTaskInput) =>
+  await prisma.$transaction(async (tx) => createTaskInTransaction(tx, param));
 
 export const updateTask = async (
   taskNumber: number,
   slug: string,
   data: any
 ) => {
-  const taskToEdit = await prisma.task.findFirst({
-    where: {
-      taskNumber,
-      team: {
-        slug,
+  return await prisma.$transaction(async (tx) => {
+    const taskToEdit = await tx.task.findFirst({
+      where: {
+        taskNumber,
+        team: {
+          slug,
+        },
       },
-    },
-  });
-  if (taskToEdit) {
-    const editedTask = await prisma.task.update({
+    });
+
+    if (!taskToEdit) {
+      return null;
+    }
+
+    const dataToUpdate = { ...data };
+    const shouldMoveToEndOfStatus =
+      typeof dataToUpdate.status === 'string' &&
+      dataToUpdate.status !== taskToEdit.status &&
+      !Object.prototype.hasOwnProperty.call(dataToUpdate, 'kanbanOrder');
+
+    if (shouldMoveToEndOfStatus) {
+      const lastTaskInStatus = await tx.task.findFirst({
+        where: {
+          teamId: taskToEdit.teamId,
+          status: dataToUpdate.status,
+          NOT: {
+            id: taskToEdit.id,
+          },
+        },
+        orderBy: [{ kanbanOrder: 'desc' }, { taskNumber: 'desc' }],
+        select: {
+          kanbanOrder: true,
+        },
+      });
+
+      dataToUpdate.kanbanOrder = (lastTaskInStatus?.kanbanOrder ?? -1) + 1;
+    }
+
+    return await tx.task.update({
       where: {
         id: taskToEdit.id,
       },
-      data: data,
+      data: dataToUpdate,
     });
-    return editedTask;
-  } else {
-    return null;
-  }
+  });
 };
 
 export const deleteTask = async (taskNumber: number, slug: string) => {
@@ -116,6 +226,16 @@ export const getTaskBySlugAndNumber = async (
               image: true,
             },
           },
+          reactions: {
+            include: {
+              user: {
+                select: {
+                  id: true,
+                  name: true,
+                },
+              },
+            },
+          },
         },
       },
       attachments: {
@@ -131,6 +251,68 @@ export const getTaskBySlugAndNumber = async (
   return task;
 };
 
+const taskAuditFields = [
+  'title',
+  'status',
+  'priority',
+  'duedate',
+  'description',
+] as const;
+
+export const addTaskAuditLogs = async (params: {
+  taskId: number;
+  user: Session['user'];
+  prevTask: {
+    title: string;
+    status: string;
+    priority: string;
+    duedate: any;
+    description: string | null;
+  };
+  nextTask: {
+    title: string;
+    status: string;
+    priority: string;
+    duedate: any;
+    description: string | null;
+  };
+  taskProperties: TaskProperties;
+}) => {
+  const { taskId, user, prevTask, nextTask, taskProperties } = params;
+
+  const newLogs: AuditLog[] = [];
+
+  for (const field of taskAuditFields) {
+    const prevVal = prevTask[field]?.toString() ?? '';
+    const nextVal = nextTask[field]?.toString() ?? '';
+
+    if (prevVal !== nextVal) {
+      newLogs.push({
+        actor: user,
+        date: new Date().getTime(),
+        event: 'updated',
+        diff: {
+          field,
+          prevValue: prevVal || '—',
+          nextValue: nextVal || '—',
+        },
+      });
+    }
+  }
+
+  if (newLogs.length === 0) return;
+
+  const existing = taskProperties?.task_audit_logs || [];
+  taskProperties.task_audit_logs = [...existing, ...newLogs];
+
+  await prisma.task.update({
+    where: { id: taskId },
+    data: {
+      properties: { ...taskProperties },
+    },
+  });
+};
+
 export const getTeamTasks = async (slug: string) => {
   const tasks = await prisma.task.findMany({
     where: {
@@ -138,6 +320,53 @@ export const getTeamTasks = async (slug: string) => {
         slug,
       },
     },
+    orderBy: getTeamTasksOrderBy(),
   });
   return tasks;
+};
+
+export const reorderTeamTasks = async (
+  teamId: string,
+  tasks: TaskReorderInput[]
+) => {
+  const taskNumbers = tasks.map((task) => task.taskNumber);
+  const uniqueTaskNumbers = new Set(taskNumbers);
+
+  return await prisma.$transaction(async (tx) => {
+    const existingTasks = await tx.task.findMany({
+      where: {
+        teamId,
+        taskNumber: {
+          in: taskNumbers,
+        },
+      },
+      select: {
+        taskNumber: true,
+      },
+    });
+
+    if (existingTasks.length !== uniqueTaskNumbers.size) {
+      return null;
+    }
+
+    for (const task of tasks) {
+      await tx.task.updateMany({
+        where: {
+          teamId,
+          taskNumber: task.taskNumber,
+        },
+        data: {
+          status: task.status,
+          kanbanOrder: task.kanbanOrder,
+        },
+      });
+    }
+
+    return await tx.task.findMany({
+      where: {
+        teamId,
+      },
+      orderBy: getTeamTasksOrderBy(),
+    });
+  });
 };

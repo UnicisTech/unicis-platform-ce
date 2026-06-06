@@ -30,11 +30,6 @@ export default async function handler(
 const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession(req, res);
 
-  const { fleetId, fleetAccessPhrase } = req.body as {
-    fleetId: string;
-    fleetAccessPhrase: string;
-  };
-
   const user = await prisma.user.findFirstOrThrow({
     where: { id: session?.user.id },
   });

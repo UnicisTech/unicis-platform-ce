@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -20,20 +20,22 @@ import type { User } from '@/generated/client';
 import { useVerifyFleetAsses } from '@/hooks/fleets/useVerifyFleetAsses';
 import toast from 'react-hot-toast';
 import { useAccessFleetAccount } from '@/hooks/fleets';
-import Link from 'next/link';
+import {
+  fleetAccessTokenCookieName,
+  fleetAccessTokenCookieOptions,
+  legacyFleetAccessTokenCookieName,
+} from '@/lib/fleet/cookies';
 
 interface FleetConnectRequiredProps {
   user: Partial<User>;
   teamId?: string;
   enrollmentToken?: string;
+  isTeamAdmin?: boolean;
   children: (authProps: {
     isAuthenticated: boolean;
     logout: () => void;
   }) => ReactNode;
 }
-
-const FLEET_COOKIE =
-  'ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA';
 
 const loginSchema = Yup.object({
   fleetPassword: Yup.string()
@@ -46,7 +48,16 @@ const changeSchema = Yup.object({
     .required()
     .min(passwordPolicies.fleetMinLength),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref('newPassword')], 'Passwords must match')
+    .oneOf([Yup.ref('newPassword')])
+    .required(),
+});
+
+const bootstrapSchema = Yup.object({
+  password: Yup.string()
+    .required()
+    .min(passwordPolicies.fleetMinLength),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password')])
     .required(),
 });
 
@@ -54,21 +65,41 @@ const FleetConnectRequired = ({
   user,
   teamId,
   enrollmentToken,
+  isTeamAdmin = false,
   children,
 }: FleetConnectRequiredProps) => {
   const { t } = useTranslation(['common', 'fleet']);
   const [visible, setVisible] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [enrollmentDialogDismissed, setEnrollmentDialogDismissed] = useState(false);
+  const [authOverride, setAuthOverride] = useState<boolean | null>(null);
   const [mustChangePassword, setMustChangePassword] = useState(false);
   const [tempPassword, setTempPassword] = useState('');
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState(user.email || '');
   const [sendingResetEmail, setSendingResetEmail] = useState(false);
+  const [showBootstrap, setShowBootstrap] = useState(false);
+  const [isBootstrapping, setIsBootstrapping] = useState(false);
 
   const { access, isLoading } = useVerifyFleetAsses();
   const accessFleetAccount = useAccessFleetAccount();
+  const accessAuthenticated = Boolean(access?.is_active && !access.is_expired);
+  const isAuthenticated = authOverride ?? accessAuthenticated;
+  const shouldOpenEnrollmentDialog = Boolean(
+    enrollmentToken && !isAuthenticated && !enrollmentDialogDismissed
+  );
+  const connectDialogOpen = visible || shouldOpenEnrollmentDialog;
 
-  // ---------------- LOGIN ----------------
+  const handleConnectDialogOpenChange = (open: boolean) => {
+    setVisible(open);
+
+    if (!open && shouldOpenEnrollmentDialog) {
+      setEnrollmentDialogDismissed(true);
+    }
+
+    if (open) {
+      setEnrollmentDialogDismissed(false);
+    }
+  };
 
   const loginFormik = useFormik({
     initialValues: { fleetPassword: '' },
@@ -82,7 +113,6 @@ const FleetConnectRequired = ({
         if (login?.is_temporary_password) {
           setTempPassword(fleetPassword);
 
-          // завершити enrollment одразу якщо є токен
           if (enrollmentToken) {
             await fetch('/api/fleet/enroll/complete', {
               method: 'POST',
@@ -98,7 +128,6 @@ const FleetConnectRequired = ({
           return;
         }
 
-        // якщо пароль вже постійний - завжди завершити enrollment
         if (enrollmentToken) {
           await fetch('/api/fleet/enroll/complete', {
             method: 'POST',
@@ -113,7 +142,6 @@ const FleetConnectRequired = ({
         }
 
         if (teamId && user.email) {
-          // Завжди перевіряти і завершити enrollment якщо він є
           await fetch('/api/fleet/enroll/complete', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -127,11 +155,12 @@ const FleetConnectRequired = ({
           });
         }
 
-        Cookies.set(FLEET_COOKIE, login.fleet_access.secret_key, {
-          sameSite: 'strict',
-        });
+        Cookies.set(
+          fleetAccessTokenCookieName,
+          login.fleet_access.secret_key,
+          fleetAccessTokenCookieOptions
+        );
 
-        // Sync member to Fleet team (in case team was created after enrollment)
         if (teamId) {
           await fetch('/api/fleet/sync-member', {
             method: 'POST',
@@ -141,7 +170,6 @@ const FleetConnectRequired = ({
             console.error('[FleetConnect] Failed to sync member:', err);
           });
 
-          // Ensure Fleet secret exists
           await fetch('/api/fleet/ensure-secret', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -153,14 +181,13 @@ const FleetConnectRequired = ({
 
         toast.success(t('fleet:fleet-connected'));
         setVisible(false);
-        setIsAuthenticated(true);
+        setAuthOverride(true);
       } catch {
         toast.error(t('fleet:fleet-login-failed'));
       }
     },
   });
 
-  // ---------------- CHANGE PASSWORD ----------------
 
   const changeFormik = useFormik({
     initialValues: { newPassword: '', confirmPassword: '' },
@@ -181,15 +208,13 @@ const FleetConnectRequired = ({
         if (!changeRes.ok) {
           const error = await changeRes.json();
           console.error('[FleetConnect] Password change failed:', error);
-          throw new Error(error.error || 'Password change failed');
+          throw new Error(error.error || t('fleet:fleet-password-update-failed'));
         }
 
         console.log('[FleetConnect] Password changed successfully, logging in with new password...');
-        // після зміни знов логінимося
         const login = await accessFleetAccount(user.email!, newPassword);
         console.log('[FleetConnect] Login successful after password change');
 
-        // обовʼязково завершити enrollment
         if (enrollmentToken) {
           await fetch('/api/fleet/enroll/complete', {
             method: 'POST',
@@ -204,7 +229,6 @@ const FleetConnectRequired = ({
         }
 
         if (teamId && user.email) {
-          // Завжди перевіряти і завершити enrollment якщо він є
           await fetch('/api/fleet/enroll/complete', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -218,11 +242,12 @@ const FleetConnectRequired = ({
           });
         }
 
-        Cookies.set(FLEET_COOKIE, login.fleet_access.secret_key, {
-          sameSite: 'strict',
-        });
+        Cookies.set(
+          fleetAccessTokenCookieName,
+          login.fleet_access.secret_key,
+          fleetAccessTokenCookieOptions
+        );
 
-        // Sync member to Fleet team (in case team was created after enrollment)
         if (teamId) {
           await fetch('/api/fleet/sync-member', {
             method: 'POST',
@@ -232,7 +257,6 @@ const FleetConnectRequired = ({
             console.error('[FleetConnect] Failed to sync member:', err);
           });
 
-          // Ensure Fleet secret exists
           await fetch('/api/fleet/ensure-secret', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -245,7 +269,7 @@ const FleetConnectRequired = ({
         toast.success(t('fleet:fleet-password-updated'));
         setMustChangePassword(false);
         setVisible(false);
-        setIsAuthenticated(true);
+        setAuthOverride(true);
       } catch (error) {
         console.error('[FleetConnect] Error in password change flow:', error);
         toast.error(t('fleet:fleet-password-update-failed'));
@@ -253,30 +277,62 @@ const FleetConnectRequired = ({
     },
   });
 
-  // ---------------- EFFECTS ----------------
+  const bootstrapFormik = useFormik({
+    initialValues: { password: '', confirmPassword: '' },
+    validationSchema: bootstrapSchema,
+    onSubmit: async ({ password }) => {
+      if (!teamId) {
+        toast.error(t('fleet:team-id-required'));
+        return;
+      }
 
-  useEffect(() => {
-    if (access?.is_active && !access.is_expired) {
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
-    }
-  }, [access]);
+      setIsBootstrapping(true);
+      try {
+        const response = await fetch('/api/fleet/bootstrap', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            teamId,
+            password,
+          }),
+        });
 
-  useEffect(() => {
-    if (enrollmentToken && !isAuthenticated) {
-      setVisible(true);
-    }
-  }, [enrollmentToken, isAuthenticated]);
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || t('fleet:fleet-bootstrap-failed'));
+        }
+
+        const data = await response.json();
+
+        Cookies.set(
+          fleetAccessTokenCookieName,
+          data.fleetToken,
+          fleetAccessTokenCookieOptions
+        );
+
+        toast.success(t('fleet:fleet-account-created'));
+        setShowBootstrap(false);
+        setAuthOverride(true);
+
+        window.location.reload();
+      } catch (error) {
+        console.error('[Bootstrap] Error:', error);
+        toast.error(error instanceof Error ? error.message : t('fleet:fleet-bootstrap-failed'));
+      } finally {
+        setIsBootstrapping(false);
+      }
+    },
+  });
 
   const logout = () => {
-    Cookies.remove(FLEET_COOKIE);
-    setIsAuthenticated(false);
+    Cookies.remove(fleetAccessTokenCookieName);
+    Cookies.remove(legacyFleetAccessTokenCookieName);
+    setAuthOverride(false);
   };
 
   const handleForgotPassword = async () => {
     if (!forgotPasswordEmail) {
-      toast.error(t('email-required'));
+      toast.error(t('fleet:email-required'));
       return;
     }
 
@@ -295,10 +351,11 @@ const FleetConnectRequired = ({
         return;
       }
 
-      toast.success(t('password-reset-link-sent'));
+      toast.success(t('fleet:password-reset-link-sent'));
       setShowForgotPassword(false);
       setVisible(false);
     } catch (error) {
+      console.log(error)
       toast.error(t('fleet:fleet-forgot-password-failed'));
     } finally {
       setSendingResetEmail(false);
@@ -316,27 +373,41 @@ const FleetConnectRequired = ({
             <h1 className="text-2xl font-bold">
               {t('fleet:fleet-connection-required')}
             </h1>
-            <p className="py-6">{t('fleet:fleet-connection-prompt')}</p>
-            <Button size="sm" onClick={() => setVisible(true)}>
-              {t('fleet:fleet-connect')}
-            </Button>
+            <p className="py-6">
+              {isTeamAdmin
+                ? t('fleet:fleet-bootstrap-prompt')
+                : t('fleet:fleet-connection-prompt')}
+            </p>
+            <div className="flex gap-2 justify-center">
+              {isTeamAdmin && (
+                <Button size="sm" onClick={() => setShowBootstrap(true)}>
+                  {t('fleet:fleet-order-secret')}
+                </Button>
+              )}
+              <Button size="sm" variant="outline" onClick={() => setVisible(true)}>
+                {t('fleet:fleet-connect')}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
 
-      <Dialog open={visible} onOpenChange={setVisible}>
+      <Dialog
+        open={connectDialogOpen}
+        onOpenChange={handleConnectDialogOpenChange}
+      >
         <DialogContent className="sm:max-w-md">
           {showForgotPassword ? (
             <div>
               <DialogHeader>
                 <DialogTitle>{t('fleet:fleet-forgot-password')}</DialogTitle>
                 <DialogDescription>
-                  Enter your email to receive a password reset link
+                  {t('fleet:fleet-forgot-password-description')}
                 </DialogDescription>
               </DialogHeader>
 
               <div className="mt-4 space-y-2">
-                <Label>{t('Email')}</Label>
+                <Label>{t('email')}</Label>
                 <Input
                   type="email"
                   value={forgotPasswordEmail}
@@ -357,7 +428,7 @@ const FleetConnectRequired = ({
                   onClick={handleForgotPassword}
                   disabled={sendingResetEmail}
                 >
-                  {sendingResetEmail ? t('sending') : t('send-reset-link')}
+                  {sendingResetEmail ? t('fleet:fleet-sending') : t('fleet:send-reset-link')}
                 </Button>
               </DialogFooter>
             </div>
@@ -425,11 +496,68 @@ const FleetConnectRequired = ({
 
               <DialogFooter className="mt-6">
                 <Button type="submit">
-                  {t('update-password')}
+                  {t('fleet:update-password')}
                 </Button>
               </DialogFooter>
             </form>
           )}
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showBootstrap} onOpenChange={setShowBootstrap}>
+        <DialogContent className="sm:max-w-md">
+          <form onSubmit={bootstrapFormik.handleSubmit}>
+            <DialogHeader>
+              <DialogTitle>{t('fleet:create-fleet-account')}</DialogTitle>
+              <DialogDescription>
+                {t('fleet:bootstrap-description')}
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="mt-4 space-y-4">
+              <div className="space-y-2">
+                <Label>{t('password')}</Label>
+                <Input
+                  type="password"
+                  name="password"
+                  value={bootstrapFormik.values.password}
+                  onChange={bootstrapFormik.handleChange}
+                  placeholder={t('fleet:enter-password')}
+                />
+                {bootstrapFormik.errors.password && bootstrapFormik.touched.password && (
+                  <p className="text-sm text-destructive">{bootstrapFormik.errors.password}</p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label>{t('confirm-password')}</Label>
+                <Input
+                  type="password"
+                  name="confirmPassword"
+                  value={bootstrapFormik.values.confirmPassword}
+                  onChange={bootstrapFormik.handleChange}
+                  placeholder={t('confirm-password')}
+                />
+                {bootstrapFormik.errors.confirmPassword && bootstrapFormik.touched.confirmPassword && (
+                  <p className="text-sm text-destructive">{bootstrapFormik.errors.confirmPassword}</p>
+                )}
+              </div>
+            </div>
+
+            <DialogFooter className="mt-6">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowBootstrap(false)}
+                disabled={isBootstrapping}
+              >
+                {t('cancel')}
+              </Button>
+              <Button type="submit" disabled={isBootstrapping}>
+                {isBootstrapping ? t('creating') : t('fleet:create-account')}
+              </Button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
     </>

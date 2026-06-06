@@ -70,6 +70,7 @@ export default function CreateCommentForm({
             <FormItem>
               <FormControl>
                 <QuillEditor
+                  enableEmojiPicker
                   value={field.value || ''}
                   onChange={(value) => field.onChange(value)}
                 />

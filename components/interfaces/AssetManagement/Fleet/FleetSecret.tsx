@@ -33,6 +33,10 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import { passwordPolicies } from '@/lib/common'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import {
+  fleetAccessTokenCookieName,
+  fleetAccessTokenCookieOptions,
+} from '@/lib/fleet/cookies'
 
 const passwordSchema = Yup.object({
   password: Yup.string()
@@ -71,8 +75,9 @@ const FleetSecret = ({
 
         // Store Fleet token in cookie for future requests
         Cookies.set(
-          'ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA',
-          response.fleetToken
+          fleetAccessTokenCookieName,
+          response.fleetToken,
+          fleetAccessTokenCookieOptions
         )
 
         setPasswordDialogVisible(false)

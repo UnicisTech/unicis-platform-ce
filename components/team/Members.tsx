@@ -51,6 +51,7 @@ const Members = ({ team }: { team: Team }) => {
     useState(false);
   const [enrollLoadingByUserId, setEnrollLoadingByUserId] =
     useState<Record<string, boolean>>({});
+  const [currentTimeMs] = useState(() => Date.now());
 
   const { isLoading, isError, members, mutateTeamMembers } =
     useTeamMembers(team.slug);
@@ -102,9 +103,8 @@ const Members = ({ team }: { team: Team }) => {
       };
     }
 
-    const nowMs = Date.now();
     const expiresAtMs = new Date(enrollment.expiresAt).getTime();
-    const isExpired = expiresAtMs <= nowMs;
+    const isExpired = expiresAtMs <= currentTimeMs;
 
     if (enrollment.status === 'COMPLETED') {
       return {
@@ -121,7 +121,6 @@ const Members = ({ team }: { team: Team }) => {
       };
     }
 
-    // PENDING but expired, or other status
     return {
       disabled: false,
       label: t('fleet:fleet-resend-invite'),

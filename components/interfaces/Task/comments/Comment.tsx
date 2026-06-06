@@ -12,6 +12,7 @@ interface CommentProps {
   setCommentToEdit: React.Dispatch<React.SetStateAction<number | null>>;
   updateComment: (text: string, id: number) => Promise<void>;
   deleteComment: (id: number) => void;
+  onReact: (commentId: number, emoji: string) => Promise<void>;
 }
 
 const Comment = ({
@@ -21,6 +22,7 @@ const Comment = ({
   setCommentToEdit,
   updateComment,
   deleteComment,
+  onReact,
 }: CommentProps) => {
   const handleActivateEditMode = useCallback(
     (id: number) => {
@@ -57,6 +59,7 @@ const Comment = ({
               slug={slug}
               activateEditForComment={handleActivateEditMode}
               deleteComment={deleteComment}
+              onReact={onReact}
             />
           )}
         </>

@@ -145,6 +145,13 @@ export default function RiskAssessmentDialog({
 
   const back = () => setCurrentStep((s) => Math.max(s - 1, 0));
 
+  const handleStepClick = (stepperIndex: number) => {
+    const dialogStep = stepperIndex + 1;
+    if (dialogStep < currentStep) {
+      setCurrentStep(dialogStep);
+    }
+  };
+
   const handleSubmit = async (risk: any, prevRisk?: any) => {
     try {
       setIsSaving(true);
@@ -194,6 +201,7 @@ export default function RiskAssessmentDialog({
             <StageTracker
               headers={steps.map((step) => t(`pia:steps.${step}`))}
               currentStage={currentStep - 1}
+              onStepChange={handleStepClick}
             />
           )}
         </DialogHeader>

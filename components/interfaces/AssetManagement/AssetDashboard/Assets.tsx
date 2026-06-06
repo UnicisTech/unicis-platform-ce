@@ -34,19 +34,16 @@ const Assets = ({ team, user }: AssetsProps) => {
   const shouldSkipNodes =
     isAuditor || !checkedHasPlan || isAccessLoading || !isFleetReady;
 
-  // Auditors don't need nodes data, only statistics
   const { nodes: allNodes } = useNodes(team.id, status, { skip: shouldSkipNodes });
 
   useEffect(() => {
     hasPlan(team.slug)
   }, [hasPlan, team.slug])
 
-  // Check if user has read access (members have read-only)
   if (!canAccess('asset_dashboard', ['read'])) {
     return null
   }
 
-  // Filter nodes based on user role - Fleet API already filters for members
   const nodes = allNodes || [];
 
   if (checkedHasPlan === undefined) {
@@ -62,7 +59,6 @@ const Assets = ({ team, user }: AssetsProps) => {
               <>
                 <AssetsAnalysis nodes={nodes} team={team} user={user} isAuditor={isAuditor} />
                 <AssetTaskAnalysis teamId={team.id} isAuditor={isAuditor} />
-                {/* Auditors cannot see detailed asset list */}
                 {!isAuditor && (
                   <Nodes
                     nodes={nodes}

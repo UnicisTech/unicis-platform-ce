@@ -4,18 +4,21 @@ import { AccessControl } from '@/components/shared/AccessControl';
 import type { ExtendedCommentDto } from 'types';
 import QuillEditor from '@/components/shared/QuillEditor';
 import { Button } from '@/components/shadcn/ui/button';
+import CommentReactions from './CommentReactions';
 
 interface CommentViewProps {
   slug?: string;
   comment: ExtendedCommentDto;
   activateEditForComment: (id: number) => void;
   deleteComment: (id: number) => void;
+  onReact: (commentId: number, emoji: string) => Promise<void>;
 }
 const CommentView = ({
   comment,
   slug,
   activateEditForComment,
   deleteComment,
+  onReact,
 }: CommentViewProps) => {
   const { t } = useTranslation('common');
 
@@ -32,6 +35,7 @@ const CommentView = ({
           className="quill-view-mode"
         />
       </div>
+      <CommentReactions comment={comment} onReact={onReact} />
       <div>
         <AccessControl resource="task" actions={['update']} slug={slug}>
           <Button

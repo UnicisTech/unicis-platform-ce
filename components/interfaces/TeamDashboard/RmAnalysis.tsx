@@ -12,9 +12,10 @@ import {
 
 interface RmAnalysisProps {
   slug: string;
+  onCellClick?: (x: number, y: number) => void;
 }
 
-const RmAnalysis = ({ slug }: RmAnalysisProps) => {
+const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
   const { tasks, isLoading, isError } = useTeamTasks(slug);
   const { t } = useTranslation('common');
 
@@ -44,7 +45,11 @@ const RmAnalysis = ({ slug }: RmAnalysisProps) => {
             </CardTitle>
           </CardHeader>
           <CardContent className="flex items-center justify-center h-[300px]">
-            <DashboardMatrixChart datasets={[]} counterMap={riskMap} />
+            <DashboardMatrixChart
+              datasets={[]}
+              counterMap={riskMap}
+              onCellClick={onCellClick}
+            />
           </CardContent>
         </Card>
       </div>

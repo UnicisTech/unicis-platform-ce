@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "@/lib/session";
+import { getFleetAccessTokenFromCookieStore } from "@/lib/fleet/cookies";
 
 /**
  * Ensures Fleet secret exists for the current user
@@ -28,7 +29,7 @@ export default async function handler(
     }
 
     const fleetBase = process.env.FLEET_API_URL;
-    const fleetToken = req.cookies['ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA'];
+    const fleetToken = getFleetAccessTokenFromCookieStore(req.cookies);
 
     if (!fleetBase || !fleetToken) {
       return res.status(500).json({ error: "Fleet not configured or not authenticated" });

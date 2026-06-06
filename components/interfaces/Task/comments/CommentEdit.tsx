@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
 import type { ExtendedCommentDto } from 'types';
 import QuillEditor from '@/components/shared/QuillEditor';
@@ -25,7 +25,11 @@ const CommentEdit = ({
   return (
     <>
       <div>
-        <QuillEditor defaultValue={comment.text} onChange={changeHandler} />
+        <QuillEditor
+          enableEmojiPicker
+          defaultValue={comment.text}
+          onChange={changeHandler}
+        />
       </div>
 
       <div className="flex gap-1.5 mt-1.5">
@@ -35,22 +39,6 @@ const CommentEdit = ({
         <Button variant="secondary" size="sm" onClick={cancelHandler}>
           {t('cancel')}
         </Button>
-        {/* <DaisyButton
-          size="sm"
-          color="primary"
-          variant="outline"
-          onClick={() => updateHandler(newContent, comment.id)}
-        >
-          {t('save')}
-        </DaisyButton>
-        <DaisyButton
-          size="sm"
-          color="ghost"
-          variant="outline"
-          onClick={cancelHandler}
-        >
-          {t('cancel')}
-        </DaisyButton> */}
       </div>
     </>
   );

@@ -235,8 +235,6 @@ export const authOptions: NextAuthOptions = {
         token.accessToken = account.access_token
       }
 
-      // Cookies.set('ufs-J69MRTGVH$-RD6FTTMERCJ2R4VK5ECLLQOM5CC5C26C-TSA', account?.access_token);
-
       return { ...token, ...user };
     },
 

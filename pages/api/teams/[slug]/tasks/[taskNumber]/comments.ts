@@ -79,7 +79,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       title: true,
       taskNumber: true,
       teamId: true,
-      team: { select: { slug: true } },
+      team: { select: { slug: true, name: true } },
     },
   });
 
@@ -88,7 +88,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     await notificationService.sendBulk(
       recipients.map((user) => ({
         type: NotificationType.TASK_COMMENTED,
-        title: `New comment on: \"${task.title}\"`,
+        title: `Team: ${task.team?.name ?? slugValue}\nNew comment on: #${task.taskNumber} - ${task.title}`,
         body: `${teamMember.user.name ?? 'Someone'} commented on a task.`,
         link: `/teams/${task.team?.slug ?? slugValue}/tasks/${task.taskNumber}`,
         recipientId: user.id,

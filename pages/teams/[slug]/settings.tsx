@@ -5,6 +5,7 @@ import {
   TeamSettings,
   TeamTab,
   CSCSettings,
+  TaskRecurrencesSettings,
 } from '@/components/team';
 import useTeam from 'hooks/useTeam';
 import type { GetServerSidePropsContext } from 'next';
@@ -34,6 +35,9 @@ const Settings = ({ teamFeatures }) => {
       <div className="space-y-6">
         <TeamSettings team={team} />
         <CSCSettings team={team} />
+        <AccessControl resource="task" actions={['read']} slug={team.slug}>
+          <TaskRecurrencesSettings team={team} />
+        </AccessControl>
         <AccessControl resource="team" actions={['delete']} slug={team.slug}>
           <RemoveTeam team={team} />
         </AccessControl>

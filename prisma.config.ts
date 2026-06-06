@@ -10,4 +10,14 @@ export default defineConfig({
   datasource: {
     url: env('DATABASE_URL'),
   },
+  experimental: {
+    externalTables: true,
+  },
+  tables: {
+    external: [
+      'public.jackson_store',
+      'public.jackson_index',
+      'public.jackson_ttl',
+    ],
+  },
 });

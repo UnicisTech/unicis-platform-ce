@@ -24,6 +24,7 @@ interface Props {
 
 const FORMAT_VALUES: { value: ExportFormat; icon: string }[] = [
   { value: 'xlsx', icon: '📊' },
+  { value: 'ods', icon: '📋' },
   { value: 'pdf', icon: '📄' },
   { value: 'html', icon: '🌐' },
 ];

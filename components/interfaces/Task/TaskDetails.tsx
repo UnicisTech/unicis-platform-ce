@@ -29,7 +29,7 @@ import {
   FormControl,
   FormMessage,
 } from '@/components/shadcn/ui/form';
-import { statuses } from '@/lib/tasks';
+import { DEFAULT_TASK_PRIORITY, statuses, taskPriorities } from '@/lib/tasks';
 import useTask from 'hooks/useTask';
 import useCanAccess from 'hooks/useCanAccess';
 
@@ -39,6 +39,7 @@ import QuillEditor from '@/components/shared/QuillEditor';
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   status: z.string().min(1, 'Status is required'),
+  priority: z.enum(taskPriorities),
   duedate: z.string().min(1, 'Due date is required'),
   description: z.string().optional(),
 });
@@ -64,6 +65,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
     defaultValues: {
       title: task.title || '',
       status: task.status || '',
+      priority: task.priority || DEFAULT_TASK_PRIORITY,
       duedate: task.duedate ? task.duedate.split('T')[0] : '',
       description: task.description || '',
     },
@@ -126,76 +128,109 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
               )}
             />
 
-            <FormField
-              control={control}
-              name="status"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('status')}</FormLabel>
-                  <FormControl>
-                    <Select
-                      value={field.value}
-                      onValueChange={(val) => {
-                        checkFormChanges();
-                        field.onChange(val);
-                      }}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select status" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {statuses.map((status) => (
-                          <SelectItem key={status} value={status}>
-                            {t(`task-statuses.${status}`)}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={control}
-              name="duedate"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('due-date')}</FormLabel>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant="outline"
-                          className="w-full justify-start text-left font-normal"
-                        >
-                          {field.value
-                            ? format(parseDateOnly(field.value), 'PPP')
-                            : 'Pick a date'}
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={
-                          field.value ? parseDateOnly(field.value) : undefined
-                        }
-                        onSelect={(date) => {
-                          if (date) {
-                            checkFormChanges();
-                            field.onChange(format(date, 'yyyy-MM-dd'));
-                          }
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              <FormField
+                control={control}
+                name="status"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('status')}</FormLabel>
+                    <FormControl>
+                      <Select
+                        value={field.value}
+                        onValueChange={(val) => {
+                          checkFormChanges();
+                          field.onChange(val);
                         }}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {statuses.map((status) => (
+                            <SelectItem key={status} value={status}>
+                              {t(`task-statuses.${status}`)}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={control}
+                name="priority"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('priority')}</FormLabel>
+                    <FormControl>
+                      <Select
+                        value={field.value}
+                        onValueChange={(val) => {
+                          checkFormChanges();
+                          field.onChange(val);
+                        }}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder={t('priority')} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {taskPriorities.map((priority) => (
+                            <SelectItem key={priority} value={priority}>
+                              {t(`task-priorities.${priority}`)}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={control}
+                name="duedate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('due-date')}</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant="outline"
+                            className="w-full justify-start text-left font-normal"
+                          >
+                            {field.value
+                              ? format(parseDateOnly(field.value), 'PPP')
+                              : 'Pick a date'}
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={
+                            field.value ? parseDateOnly(field.value) : undefined
+                          }
+                          onSelect={(date) => {
+                            if (date) {
+                              checkFormChanges();
+                              field.onChange(format(date, 'yyyy-MM-dd'));
+                            }
+                          }}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <FormField
               control={control}

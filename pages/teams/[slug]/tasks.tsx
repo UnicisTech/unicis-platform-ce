@@ -1,4 +1,4 @@
-import type { NextPageWithLayout } from 'types';
+import type { NextPageWithLayout, ISO } from 'types';
 import type { InferGetServerSidePropsType } from 'next';
 import { useTranslation } from 'next-i18next';
 import useTeam from 'hooks/useTeam';
@@ -7,6 +7,7 @@ import { GetServerSidePropsContext } from 'next';
 import { Tasks } from '@/components/interfaces/Task';
 import { Error, Loading } from '@/components/shared';
 import { getTeamAccess } from '@/lib/teams';
+import { getTranslationNamespaces } from '@/lib/i18n/getCscTranslationNamespaces';
 
 const AllTasks: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -42,9 +43,14 @@ export const getServerSideProps = async (
     };
   }
 
+  const frameworks = (access.teamProperties?.csc_iso ?? []) as ISO[];
+  const cscTranslations = getTranslationNamespaces(frameworks);
+
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, ['common', ...cscTranslations])
+        : {}),
     },
   };
 };

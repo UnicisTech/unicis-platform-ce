@@ -14,7 +14,7 @@ export interface SoaRow {
   meaning?: string;
 }
 
-export type ExportFormat = 'xlsx' | 'pdf' | 'html';
+export type ExportFormat = 'xlsx' | 'ods' | 'pdf' | 'html';
 
 /** Keys for all UI strings that appear in exported documents (HTML, PDF, XLSX). */
 export interface SoaExportStrings {

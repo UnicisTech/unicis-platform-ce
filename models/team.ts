@@ -98,6 +98,7 @@ export const getTeams = async (userId: string) => {
       _count: {
         select: { members: true },
       },
+      subscription: true,
     },
   });
 };
@@ -386,8 +387,7 @@ export const getCscIso = async ({ slug }: { slug: string }): Promise<ISO[]> => {
     return teamProperties?.csc_iso;
   }
 
-  // TODO: create enum form ISO type
-  const initial = ['default'] as ISO[];
+  const initial = ['mvps'] as ISO[];
 
   const updatedProperties = {
     ...teamProperties,

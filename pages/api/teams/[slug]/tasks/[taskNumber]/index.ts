@@ -1,5 +1,10 @@
 import { sendEvent } from '@/lib/svix';
-import { getTaskBySlugAndNumber, updateTask, deleteTask } from 'models/task';
+import {
+  getTaskBySlugAndNumber,
+  updateTask,
+  deleteTask,
+  addTaskAuditLogs,
+} from 'models/task';
 import { throwIfNoTeamAccess } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNotAllowed } from 'models/user';
@@ -9,6 +14,8 @@ import { serializeForApi } from '@/lib/serialize';
 import { notificationService } from '@/lib/notifications/notification-service';
 import { getTeamRecipientsBySlug } from '@/lib/notifications/recipients';
 import { NotificationType } from '@/generated/enums';
+import type { TaskProperties } from 'types';
+import { isTaskPriority, statusLabels, priorityLabels } from '@/lib/tasks';
 
 export default async function handler(
   req: NextApiRequest,
@@ -77,6 +84,17 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
+  const prevTask = await getTaskBySlugAndNumber(
+    taskNumberAsNumber,
+    slug as string
+  );
+
+  if (!prevTask) {
+    return res.status(404).json({
+      error: { message: 'Task not found' },
+    });
+  }
+
   const { data } = req.body;
   const sanitizedData = { ...data };
 
@@ -96,6 +114,19 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     sanitizedData.duedate = dueAt;
   }
 
+  if (Object.prototype.hasOwnProperty.call(sanitizedData, 'priority')) {
+    if (
+      typeof sanitizedData.priority !== 'string' ||
+      !isTaskPriority(sanitizedData.priority)
+    ) {
+      return res.status(400).json({
+        error: {
+          message: 'Invalid priority',
+        },
+      });
+    }
+  }
+
   const task = await updateTask(
     taskNumberAsNumber,
     slug as string,
@@ -110,14 +141,56 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
+  await addTaskAuditLogs({
+    taskId: task.id,
+    user: teamMember.user,
+    prevTask: {
+      title: prevTask.title,
+      status: prevTask.status,
+      priority: prevTask.priority,
+      duedate: prevTask.duedate,
+      description: prevTask.description,
+    },
+    nextTask: {
+      title: task.title,
+      status: task.status,
+      priority: task.priority,
+      duedate: task.duedate,
+      description: task.description,
+    },
+    taskProperties: (task.properties || {}) as TaskProperties,
+  });
+
   await sendEvent(teamMember.teamId, 'task.updated', task);
+
+  const changeDetails: string[] = [];
+  if (prevTask.status !== task.status) {
+    changeDetails.push(
+      `status from ${statusLabels[prevTask.status] ?? prevTask.status} to ${statusLabels[task.status] ?? task.status}`
+    );
+  }
+  if (prevTask.priority !== task.priority) {
+    changeDetails.push(
+      `priority from ${priorityLabels[prevTask.priority] ?? prevTask.priority} to ${priorityLabels[task.priority] ?? task.priority}`
+    );
+  }
+  if (prevTask.title !== task.title) changeDetails.push('title');
+  if (prevTask.duedate?.toString() !== task.duedate?.toString())
+    changeDetails.push('due date');
+  if (prevTask.description !== task.description)
+    changeDetails.push('description');
+
+  const changesSummary =
+    changeDetails.length > 0
+      ? `Changed ${changeDetails.join(', ')}.`
+      : 'Updated a task.';
 
   const recipients = await getTeamRecipientsBySlug(slug as string);
   await notificationService.sendBulk(
     recipients.map((user) => ({
       type: NotificationType.TASK_UPDATED,
-      title: `Task updated: \"${task.title}\"`,
-      body: `${teamMember.user.name ?? 'Someone'} updated a task.`,
+      title: `Team: ${teamMember.team.name}\nTask updated: #${task.taskNumber} - ${task.title}`,
+      body: `${teamMember.user.name ?? 'Someone'} ${changesSummary}`,
       link: `/teams/${teamMember.team.slug}/tasks/${task.taskNumber}`,
       recipientId: user.id,
       recipientEmail: user.email,
@@ -168,7 +241,7 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
   await notificationService.sendBulk(
     recipients.map((user) => ({
       type: NotificationType.TASK_DELETED,
-      title: `Task deleted: \"${task.title}\"`,
+      title: `Team: ${teamMember.team.name}\nTask deleted: #${task.taskNumber} - ${task.title}`,
       body: `${teamMember.user.name ?? 'Someone'} deleted a task.`,
       link: `/teams/${teamMember.team.slug}/tasks`,
       recipientId: user.id,

@@ -80,8 +80,9 @@ const Teams = () => {
           <table className="w-full min-w-full divide-y divide-border text-sm">
             <thead className="bg-muted">
               <tr>
-                <th className="w-4/10 px-4 py-2 text-left">{t('name')}</th>
-                <th className="w-2/10 px-4 py-2 text-left">{t('members')}</th>
+                <th className="w-3/10 px-4 py-2 text-left">{t('name')}</th>
+                <th className="w-1/10 px-4 py-2 text-left">{t('members')}</th>
+                <th className="w-2/10 px-4 py-2 text-left">{t('plan')}</th>
                 <th className="w-2/10 px-4 py-2 text-left">
                   {t('created-at')}
                 </th>
@@ -102,6 +103,31 @@ const Teams = () => {
                         </Link>
                       </td>
                       <td className="px-4 py-2">{team._count.members}</td>
+                      <td className="px-4 py-2">
+                        {(() => {
+                          const plan = team.subscription?.plan || 'Community';
+                          const planLower = plan.toLowerCase();
+                          const planColor =
+                            planLower === 'community'
+                              ? 'oklch(50.8% .118 165.612)'
+                              : planLower === 'premium'
+                                ? 'oklch(48.8% .243 264.376)'
+                                : planLower === 'ultimate'
+                                  ? 'oklch(49.6% .265 301.924)'
+                                  : undefined;
+                          const customStyle = planColor
+                            ? { borderColor: planColor, color: planColor }
+                            : undefined;
+                          return (
+                            <span
+                              className={`badge badge-outline uppercase`}
+                              style={customStyle}
+                            >
+                              {plan}
+                            </span>
+                          );
+                        })()}
+                      </td>
                       <td className="px-4 py-2">
                         {new Date(team.createdAt).toDateString()}
                       </td>
