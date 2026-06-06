@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useNodes } from '@/hooks/fleets/Nodes/useNodes';
 import { Node } from '@/types';
@@ -20,22 +20,24 @@ const NodesSelector: React.FC<AssetsSelectorProps> = ({
   const { t } = useTranslation('common');
   const { nodes, isLoading, isError } = useNodes(fleetTeamId!);
   const [selectedNodeKeys, setSelectedNodeKeys] = useState<string[]>([]);
+  const availableNodes = useMemo(() => nodes ?? [], [nodes]);
 
   useEffect(() => {
-    if (nodes && preSelectedNode.length > 0) {
-      const initialSelectedKeys = nodes
+    if (availableNodes.length > 0 && preSelectedNode.length > 0) {
+      const initialSelectedKeys = availableNodes
         .filter((node) =>
           preSelectedNode.some((preNode) => preNode.id === node.id)
         )
         .map((node) => node.node_key);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedNodeKeys(initialSelectedKeys);
     }
-  }, [nodes, preSelectedNode]);
+  }, [availableNodes, preSelectedNode]);
 
   if (isLoading) return <p>{t('loading')}</p>;
   if (isError) return <p>{t('error-loading-assets')}</p>;
 
-  const nodeOptions = nodes.map((node) => ({
+  const nodeOptions = availableNodes.map((node) => ({
     value: node.node_key,
     label: `${node.node_info?.system_info?.computer_name || t('unknown-host')} - ${
       node.host_identifier
@@ -52,7 +54,7 @@ const NodesSelector: React.FC<AssetsSelectorProps> = ({
 
   return (
     <div className="w-full">
-      {nodes.length === 0 ? (
+      {availableNodes.length === 0 ? (
         <p>{t('no-assets-found')}</p>
       ) : (
         <MultiSelect

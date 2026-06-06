@@ -128,7 +128,7 @@ export const permissions: RolePermissions = {
       resource: 'team_fleet_node',
       actions: '*',
     },
-    {      
+    {
       resource: 'iap_course',
       actions: '*',
     },
@@ -166,7 +166,7 @@ export const permissions: RolePermissions = {
       resource: 'team',
       actions: '*',
     },
-     {
+    {
       resource: 'asset_dashboard',
       actions: '*',
     },

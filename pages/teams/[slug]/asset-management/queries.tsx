@@ -10,13 +10,16 @@ import { Querys } from '@/components/interfaces/AssetManagement/Query';
 import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import { TeamTab } from '@/components/team';
 
-
 const AllQueries: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ team, teamFeatures, user }) => {
   return (
     <>
-      <TeamTab activeTab="asset-management" team={team} teamFeatures={teamFeatures} />
+      <TeamTab
+        activeTab="asset-management"
+        team={team}
+        teamFeatures={teamFeatures}
+      />
       <AssetTab activeTab="queries" team={team} teamFeatures={teamFeatures} />
       <Querys user={user} team={team} />
     </>
@@ -40,7 +43,9 @@ export const getServerSideProps = async (
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common', 'fleet']) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, ['common', 'fleet'])
+        : {}),
       team: JSON.parse(JSON.stringify(team)),
       teamFeatures: env.teamFeatures,
       user: {

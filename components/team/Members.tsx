@@ -49,12 +49,14 @@ const Members = ({ team }: { team: Team }) => {
     useState<TeamMemberWithUserDto | null>(null);
   const [confirmationDialogVisible, setConfirmationDialogVisible] =
     useState(false);
-  const [enrollLoadingByUserId, setEnrollLoadingByUserId] =
-    useState<Record<string, boolean>>({});
+  const [enrollLoadingByUserId, setEnrollLoadingByUserId] = useState<
+    Record<string, boolean>
+  >({});
   const [currentTimeMs] = useState(() => Date.now());
 
-  const { isLoading, isError, members, mutateTeamMembers } =
-    useTeamMembers(team.slug);
+  const { isLoading, isError, members, mutateTeamMembers } = useTeamMembers(
+    team.slug
+  );
 
   const typedMembers = members as unknown as MemberWithFleet[] | null;
 
@@ -86,12 +88,10 @@ const Members = ({ team }: { team: Team }) => {
   };
 
   const canUpdateRole = (member: TeamMemberWithUserDto) =>
-    session?.user.id !== member.userId &&
-    canAccess('team_member', ['update']);
+    session?.user.id !== member.userId && canAccess('team_member', ['update']);
 
   const canRemoveMember = (member: TeamMemberWithUserDto) =>
-    session?.user.id !== member.userId &&
-    canAccess('team_member', ['delete']);
+    session?.user.id !== member.userId && canAccess('team_member', ['delete']);
 
   const getEnrollmentView = (member: MemberWithFleet) => {
     const enrollment = member.user.fleetEnrollments?.[0];
@@ -184,9 +184,7 @@ const Members = ({ team }: { team: Team }) => {
         const code = data?.error;
 
         if (code === 'ALREADY_SENT') {
-          const until = data?.expiresAt
-            ? formatUntil(data.expiresAt)
-            : '';
+          const until = data?.expiresAt ? formatUntil(data.expiresAt) : '';
 
           toast.error(
             until
@@ -208,9 +206,7 @@ const Members = ({ team }: { team: Team }) => {
         return;
       }
 
-      toast.success(
-        t('fleet:fleet-invite-sent', { email: member.user.email })
-      );
+      toast.success(t('fleet:fleet-invite-sent', { email: member.user.email }));
 
       mutateTeamMembers();
     } catch {
@@ -230,13 +226,9 @@ const Members = ({ team }: { team: Team }) => {
           <h2 className="text-xl font-medium leading-none tracking-tight">
             {t('members')}
           </h2>
-          <p className="text-sm text-muted-foreground">
-            {t('team-members')}
-          </p>
+          <p className="text-sm text-muted-foreground">{t('team-members')}</p>
         </div>
-        <Button onClick={() => setVisible(!visible)}>
-          {t('add-member')}
-        </Button>
+        <Button onClick={() => setVisible(!visible)}>{t('add-member')}</Button>
       </div>
 
       <Table>
@@ -245,17 +237,14 @@ const Members = ({ team }: { team: Team }) => {
             <TableHead>{t('name')}</TableHead>
             <TableHead>{t('email')}</TableHead>
             <TableHead>{t('role')}</TableHead>
-            <TableHead className="w-[240px]">
-              {t('action')}
-            </TableHead>
+            <TableHead className="w-[240px]">{t('action')}</TableHead>
           </TableRow>
         </TableHeader>
 
         <TableBody>
           {typedMembers.map((member) => {
             const enrollView = getEnrollmentView(member);
-            const isEnrollLoading =
-              !!enrollLoadingByUserId[member.userId];
+            const isEnrollLoading = !!enrollLoadingByUserId[member.userId];
 
             return (
               <TableRow key={member.id}>
@@ -279,11 +268,9 @@ const Members = ({ team }: { team: Team }) => {
                 <TableCell className="w-[240px]">
                   <div className="flex justify-end gap-2">
                     <Button
-                      variant={enrollView.isRevoke ? "destructive" : "outline"}
+                      variant={enrollView.isRevoke ? 'destructive' : 'outline'}
                       size="sm"
-                      disabled={
-                        enrollView.disabled || isEnrollLoading
-                      }
+                      disabled={enrollView.disabled || isEnrollLoading}
                       onClick={() =>
                         enrollView.isRevoke
                           ? handleRevokeFleetAccess(member)
@@ -323,11 +310,7 @@ const Members = ({ team }: { team: Team }) => {
         {t('delete-member-warning')}
       </ConfirmationDialog>
 
-      <InviteMember
-        visible={visible}
-        setVisible={setVisible}
-        team={team}
-      />
+      <InviteMember visible={visible} setVisible={setVisible} team={team} />
     </div>
   );
 };

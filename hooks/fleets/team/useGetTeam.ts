@@ -1,6 +1,6 @@
-import fleetFetcher from "@/lib/fleet/fleetFetcher";
-import { FleetTeam } from "@/types/fleet";
-import useSWR, { mutate } from "swr";
+import fleetFetcher from '@/lib/fleet/fleetFetcher';
+import { FleetTeam } from '@/types/fleet';
+import useSWR, { mutate } from 'swr';
 
 export const useGetTeam = (teamId: string) => {
   const url = `/team/${teamId}`;
@@ -14,6 +14,6 @@ export const useGetTeam = (teamId: string) => {
     fleetTeam: data,
     isLoading: isLoading,
     isError: error,
-    mutateTeam
+    mutateTeam,
   };
 };

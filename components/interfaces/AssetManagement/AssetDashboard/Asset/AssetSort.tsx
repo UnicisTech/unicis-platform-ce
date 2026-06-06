@@ -9,14 +9,17 @@ import {
   DropdownMenuItem,
 } from '@/components/shadcn/ui/dropdown-menu';
 
+type CanAccess = (resource: string, actions: string[]) => boolean;
+type Translate = (key: string) => string;
+
 const AssetsSortDropdown = ({
   setStatus,
   canAccess,
   t,
 }: {
   setStatus: (status: string) => void;
-  canAccess: Function;
-  t: Function;
+  canAccess: CanAccess;
+  t: Translate;
 }) => {
   if (!canAccess('team_fleet_node', ['read'])) return null;
 
@@ -29,19 +32,13 @@ const AssetsSortDropdown = ({
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-40">
-        <DropdownMenuItem
-          onClick={() => setStatus('inactive')}
-        >
+        <DropdownMenuItem onClick={() => setStatus('inactive')}>
           {t('inactive-assets')}
         </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => setStatus('active')}
-        >
+        <DropdownMenuItem onClick={() => setStatus('active')}>
           {t('active-assets')}
         </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => setStatus('all')}
-        >
+        <DropdownMenuItem onClick={() => setStatus('all')}>
           {t('all-assets')}
         </DropdownMenuItem>
       </DropdownMenuContent>

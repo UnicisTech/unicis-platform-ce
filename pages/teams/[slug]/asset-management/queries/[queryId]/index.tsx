@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Loading, Error, Card } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
 import useTeam from 'hooks/useTeam';
-import useCanAccess from 'hooks/useCanAccess';
 import QueryTab from '@/components/interfaces/AssetManagement/Query/QueryTab';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import QueryDetails from '@/components/interfaces/AssetManagement/Query/QueryDetails';
@@ -15,7 +13,7 @@ import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
 
-const QueryById = ({teamFeatures, user}) => {
+const QueryById = ({ teamFeatures: _teamFeatures, user }) => {
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
   const { queryId, slug } = router.query;
@@ -24,8 +22,12 @@ const QueryById = ({teamFeatures, user}) => {
     isLoading: isTeamLoading,
     isError: isTeamError,
   } = useTeam(slug as string);
+  const fleetTeamId = team?.id ?? '';
 
-  const { query, isLoading: isQueryLoading } = useGetQueryId(team?.id!, queryId as string);
+  const { query, isLoading: isQueryLoading } = useGetQueryId(
+    fleetTeamId,
+    queryId as string
+  );
 
   if (isTeamLoading || isQueryLoading) {
     return <Loading />;
@@ -49,13 +51,17 @@ const QueryById = ({teamFeatures, user}) => {
       {activeTab === 'Overview' && (
         <Card heading="Details">
           <Card.Body>
-            <QueryDetails user={user} fleetTeamId={team?.id!} queryID={queryId as string} />
+            <QueryDetails
+              user={user}
+              fleetTeamId={fleetTeamId}
+              queryID={queryId as string}
+            />
           </Card.Body>
         </Card>
       )}
 
       {activeTab === 'Results' && query && (
-        <QueryResults teamId={team?.id!} queryName={query.name} />
+        <QueryResults teamId={fleetTeamId} queryName={query.name} />
       )}
     </>
   );
@@ -76,7 +82,9 @@ export const getServerSideProps = async (
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common', 'fleet']) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, ['common', 'fleet'])
+        : {}),
       teamFeatures: env.teamFeatures,
       user: {
         id: user.id,
@@ -85,7 +93,7 @@ export const getServerSideProps = async (
         firstName: user.firstName,
         lastName: user.lastName,
         image: user.image,
-      }
+      },
     },
   };
 };

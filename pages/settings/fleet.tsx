@@ -8,7 +8,6 @@ import { inferSSRProps } from '@/lib/inferSSRProps';
 import { FleetAccountManager } from '@/components/account';
 import env from '@/lib/env';
 
-
 type AccountProps = inferSSRProps<typeof getServerSideProps>;
 
 const Fleet: NextPageWithLayout<AccountProps> = ({
@@ -19,7 +18,7 @@ const Fleet: NextPageWithLayout<AccountProps> = ({
     <>
       <FleetAccountManager user={user} allowEmailChange={allowEmailChange} />
     </>
-  )
+  );
 };
 
 export const getServerSideProps = async (

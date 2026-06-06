@@ -23,7 +23,6 @@ const ResetPassword = ({ resetType: initialResetType }: ResetPasswordProps) => {
   const [submitting, setSubmitting] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [resetType, setResetType] = useState<'platform' | 'fleet' | null>(initialResetType || null);
 
   const router = useRouter();
   const { t } = useTranslation(['common', 'fleet']);
@@ -57,7 +56,9 @@ const ResetPassword = ({ resetType: initialResetType }: ResetPasswordProps) => {
         body: JSON.stringify({ ...values, token }),
       });
 
-      const json = (await response.json()) as ApiResponse<{ type?: 'platform' | 'fleet' }>;
+      const json = (await response.json()) as ApiResponse<{
+        type?: 'platform' | 'fleet';
+      }>;
 
       setSubmitting(false);
 
@@ -66,8 +67,7 @@ const ResetPassword = ({ resetType: initialResetType }: ResetPasswordProps) => {
         return;
       }
 
-      const type = json.data?.type || 'platform';
-      setResetType(type);
+      const type = json.data?.type || initialResetType || 'platform';
 
       resetForm();
 

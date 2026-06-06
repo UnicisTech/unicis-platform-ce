@@ -7,7 +7,6 @@ import type { Team, User } from '@/generated/client';
 import FleetStatus from '../../Fleet/FleetStatus';
 import FormattedDate from '@/components/shared/Date';
 import DeleteNode from './DeleteNode';
-import ExportNode from './ExportNode';
 import AddAsset from './AddAsset';
 import { Node } from 'types';
 import { Input } from '@/components/shadcn/ui/input';
@@ -31,9 +30,7 @@ const Nodes = ({
   const { slug } = router.query as { slug: string };
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [nodeToDelete, setNodeToDelete] = useState<null | string>(null);
-  const [exportVisible, setExportVisible] = useState(false);
   const [addVisible, setAddVisible] = useState(false);
-  const [nodeToExport, setNodeToExport] = useState<null | string>(null);
   const [searchTerm, setSearchTerm] = useState('');
 
   const { t } = useTranslation(['common', 'fleet']);
@@ -48,21 +45,17 @@ const Nodes = ({
     setDeleteVisible(true);
   };
 
-  const openExportModal = async (id: string) => {
-    setNodeToExport(id);
-    setExportVisible(true);
-  };
-
-  const filteredNodes = nodes?.filter((node) => {
-    try {
-      return (
-        node.team?.user?.name?.toLowerCase().includes(searchTerm) ||
-        node.node_key?.toLowerCase().includes(searchTerm)
-      );
-    } catch (e) {
-      return false;
-    }
-  }) || [];
+  const filteredNodes =
+    nodes?.filter((node) => {
+      try {
+        return (
+          node.team?.user?.name?.toLowerCase().includes(searchTerm) ||
+          node.node_key?.toLowerCase().includes(searchTerm)
+        );
+      } catch {
+        return false;
+      }
+    }) || [];
 
   return (
     <>
@@ -70,7 +63,9 @@ const Nodes = ({
         <div className="space-y-3">
           <div className="flex justify-between items-center">
             <div className="space-y-3">
-              <h2 className="text-xl font-medium">{t('fleet:fleet-all-assets')}</h2>
+              <h2 className="text-xl font-medium">
+                {t('fleet:fleet-all-assets')}
+              </h2>
               <p className="text-sm text-muted-foreground">
                 {t('fleet:fleet-asset-listed')}
               </p>
@@ -151,28 +146,29 @@ const Nodes = ({
                       </td>
                       <td className="py-3 align-top text-xs">
                         <div>
-                          PID: {node.node_info?.osquery_info?.pid}
+                          {t('pid')}: {node.node_info?.osquery_info?.pid}
                         </div>
                         <div>
-                          v: {node.node_info?.osquery_info?.version}
+                          {t('version')}:{' '}
+                          {node.node_info?.osquery_info?.version}
                         </div>
                         <div>
                           {node.node_info?.osquery_info?.instance_id || 'N/A'}
                         </div>
                       </td>
                       <td className="py-3 align-top text-xs">
+                        <div>{node.node_info?.system_info?.computer_name}</div>
+                        <div>{node.node_info?.system_info?.hardware_model}</div>
                         <div>
-                          {node.node_info?.system_info?.computer_name}
-                        </div>
-                        <div>
-                          {node.node_info?.system_info?.hardware_model}
-                        </div>
-                        <div>
-                          SN: {node.node_info?.system_info.hardware_serial}
+                          {t('hardware-serial')}:{' '}
+                          {node.node_info?.system_info.hardware_serial}
                         </div>
                       </td>
                       <td className="py-3 align-top text-xs">
-                        <FormattedDate style={'text-[10px]'} dateString={node.enrolled_on} />
+                        <FormattedDate
+                          style={'text-[10px]'}
+                          dateString={node.enrolled_on}
+                        />
                       </td>
                       <td className="py-3 align-top">
                         <div className="flex gap-2">
@@ -213,12 +209,6 @@ const Nodes = ({
             visible={deleteVisible}
             setVisible={setDeleteVisible}
             nodeId={nodeToDelete!}
-            fleetTeamId={team.id}
-          />
-          <ExportNode
-            visible={exportVisible}
-            setVisible={setExportVisible}
-            nodeId={nodeToExport!}
             fleetTeamId={team.id}
           />
           {addVisible && (

@@ -163,7 +163,11 @@ const EditPack = ({
           </div>
 
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => setVisible(false)}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setVisible(false)}
+            >
               {t('close')}
             </Button>
             <Button type="submit" disabled={formik.isSubmitting}>

@@ -9,7 +9,6 @@ import { UpdateAccount } from '@/components/account';
 import env from '@/lib/env';
 import AccountTab from '@/components/account/AccountTab';
 
-
 type AccountProps = inferSSRProps<typeof getServerSideProps>;
 
 const Account: NextPageWithLayout<AccountProps> = ({
@@ -18,10 +17,10 @@ const Account: NextPageWithLayout<AccountProps> = ({
 }) => {
   return (
     <>
-      <AccountTab activeTab="account" user={user}/>
+      <AccountTab activeTab="account" user={user} />
       <UpdateAccount user={user} allowEmailChange={allowEmailChange} />
     </>
-  )
+  );
 };
 
 export const getServerSideProps = async (

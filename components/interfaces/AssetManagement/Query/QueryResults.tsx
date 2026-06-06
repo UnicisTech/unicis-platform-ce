@@ -25,9 +25,7 @@ const QueryResults = ({ teamId, queryName }: QueryResultsProps) => {
 
   if (isError) {
     return (
-      <div className="p-4 text-destructive">
-        {t('Error loading results')}
-      </div>
+      <div className="p-4 text-destructive">{t('Error loading results')}</div>
     );
   }
 
@@ -50,8 +48,9 @@ const QueryResults = ({ teamId, queryName }: QueryResultsProps) => {
       <div className="text-sm text-muted-foreground">
         {total > 0 ? (
           <>
-            {t('Showing')} {filters.offset + 1} - {Math.min(filters.offset + filters.limit, total)}{' '}
-            {t('of')} {total} {t('results from this query')}
+            {t('Showing')} {filters.offset + 1} -{' '}
+            {Math.min(filters.offset + filters.limit, total)} {t('of')} {total}{' '}
+            {t('results from this query')}
           </>
         ) : (
           t('No results yet. Results will appear here after the query runs.')
@@ -86,15 +85,22 @@ const QueryResults = ({ teamId, queryName }: QueryResultsProps) => {
                 <div className="flex-1 flex items-center gap-4 flex-wrap">
                   <span className="text-sm text-muted-foreground min-w-[140px]">
                     {result.timestamp
-                      ? format(new Date(result.timestamp), 'yyyy-MM-dd HH:mm:ss')
+                      ? format(
+                          new Date(result.timestamp),
+                          'yyyy-MM-dd HH:mm:ss'
+                        )
                       : '-'}
                   </span>
 
                   <span className="text-sm text-muted-foreground">
-                    {result.node?.display_name || result.node?.host_identifier || '-'}
+                    {result.node?.display_name ||
+                      result.node?.host_identifier ||
+                      '-'}
                   </span>
 
-                  <span className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${getActionBadgeClass(result.action)}`}>
+                  <span
+                    className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${getActionBadgeClass(result.action)}`}
+                  >
                     {result.action || 'snapshot'}
                   </span>
                 </div>

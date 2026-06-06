@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Loading, Error, Card } from '@/components/shared';
+import { Loading, Error } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
 import useTeam from 'hooks/useTeam';
 import { getSession } from '@/lib/session';
@@ -16,11 +15,9 @@ import ResultLogs from '@/components/interfaces/AssetManagement/AssetDashboard/A
 import AssetConfig from '@/components/interfaces/AssetManagement/AssetDashboard/Asset/AssetConfig';
 import { useGetNodeId } from '@/hooks/fleets/Nodes/useGetNodeId';
 
-
-const NodeById = ({ teamFeatures, user }) => {
+const NodeById = ({ teamFeatures: _teamFeatures, user }) => {
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
-  const { t } = useTranslation('common');
   const { nodeId, slug } = router.query;
   const nodeIdStr = Array.isArray(nodeId) ? nodeId[0] : nodeId || '';
 
@@ -29,7 +26,8 @@ const NodeById = ({ teamFeatures, user }) => {
     isLoading: isTeamLoading,
     isError: isTeamError,
   } = useTeam(slug as string);
-  const { node } = useGetNodeId(team?.id || '', nodeIdStr);
+  const fleetTeamId = team?.id ?? '';
+  const { node } = useGetNodeId(fleetTeamId, nodeIdStr);
 
   const shortNodeId =
     nodeIdStr.length > 16
@@ -60,29 +58,49 @@ const NodeById = ({ teamFeatures, user }) => {
       />
       <h3 className="text-2xl font-bold">{'Asset Details'}</h3>
       <NodeTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === 'Overview' &&
-            <NodeDetails user={user} fleetTeamId={team?.id!} nodeID={nodeIdStr} />
+      {
+        activeTab === 'Overview' && (
+          <NodeDetails
+            user={user}
+            fleetTeamId={fleetTeamId}
+            nodeID={nodeIdStr}
+          />
+        )
         // <Card heading={activeTab}>
         //   <Card.Body>
         //   </Card.Body>
         // </Card>
       }
-      {activeTab === 'Status Logs' &&
-            <AssetLogs user={user} fleetTeamId={team?.id!} nodeID={nodeIdStr} />
+      {
+        activeTab === 'Status Logs' && (
+          <AssetLogs user={user} fleetTeamId={fleetTeamId} nodeID={nodeIdStr} />
+        )
         // <Card heading={activeTab}>
         //   <Card.Body>
         //   </Card.Body>
         // </Card>
       }
-      {activeTab === 'Result Logs' &&
-            <ResultLogs user={user} fleetTeamId={team?.id!} nodeID={nodeIdStr} />
+      {
+        activeTab === 'Result Logs' && (
+          <ResultLogs
+            user={user}
+            fleetTeamId={fleetTeamId}
+            nodeID={nodeIdStr}
+          />
+        )
         // <Card heading={activeTab}>
         //   <Card.Body>
         //   </Card.Body>
         // </Card>
       }
-      {activeTab === 'Asset Configurations' &&
-            <AssetConfig user={user} fleetTeamId={team?.id!} nodeID={nodeIdStr} />
+      {
+        activeTab === 'Asset Configurations' && (
+          <AssetConfig
+            user={user}
+            fleetTeamId={fleetTeamId}
+            nodeID={nodeIdStr}
+          />
+        )
         // <Card heading={activeTab}>
         //   <Card.Body>
         //   </Card.Body>
@@ -107,7 +125,9 @@ export const getServerSideProps = async (
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common', 'fleet']) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, ['common', 'fleet'])
+        : {}),
       teamFeatures: env.teamFeatures,
       user: {
         id: user.id,

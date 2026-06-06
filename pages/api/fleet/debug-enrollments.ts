@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "@/lib/prisma";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { prisma } from '@/lib/prisma';
 
 /**
  * Debug endpoint to check enrollment statuses
@@ -8,8 +8,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== "GET") {
-    return res.status(405).json({ error: "Method not allowed" });
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
@@ -40,9 +40,9 @@ export default async function handler(
       })),
     });
   } catch (err) {
-    console.error("[DebugEnrollments] Error:", err);
+    console.error('[DebugEnrollments] Error:', err);
     return res.status(500).json({
-      error: "Internal server error",
+      error: 'Internal server error',
       message: err instanceof Error ? err.message : String(err),
     });
   }

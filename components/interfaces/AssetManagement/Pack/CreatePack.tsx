@@ -14,7 +14,13 @@ import {
   DialogFooter,
 } from '@/components/shadcn/ui/dialog';
 import { Input } from '@/components/shadcn/ui/input';
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/shadcn/ui/select';
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from '@/components/shadcn/ui/select';
 import TagsSelector from '../TagsSelector';
 import { PLATFORMS } from '@/lib/fleet/constants';
 import { useCreatePack } from '@/hooks/fleets/packs/useCreatePack';
@@ -34,7 +40,7 @@ const DEFAULT_PLATFORM_VALUE = 'all';
 const CreatePack = ({
   visible,
   setVisible,
-  user,
+  user: _user,
   fleetTeamId,
 }: {
   visible: boolean;
@@ -118,7 +124,9 @@ const CreatePack = ({
               </SelectContent>
             </Select>
             {formik.touched.platform && formik.errors.platform && (
-              <span className="text-sm text-red-500">{formik.errors.platform}</span>
+              <span className="text-sm text-red-500">
+                {formik.errors.platform}
+              </span>
             )}
           </div>
 
@@ -132,7 +140,9 @@ const CreatePack = ({
                 placeholder={t('enter-version')}
               />
               {formik.touched.version && formik.errors.version && (
-                <span className="text-sm text-red-500">{formik.errors.version}</span>
+                <span className="text-sm text-red-500">
+                  {formik.errors.version}
+                </span>
               )}
             </div>
             <div className="flex flex-col gap-1">
@@ -144,7 +154,9 @@ const CreatePack = ({
                 placeholder={t('enter-shard')}
               />
               {formik.touched.shard && formik.errors.shard && (
-                <span className="text-sm text-red-500">{formik.errors.shard}</span>
+                <span className="text-sm text-red-500">
+                  {formik.errors.shard}
+                </span>
               )}
             </div>
           </div>
@@ -168,7 +180,11 @@ const CreatePack = ({
           </div>
 
           <DialogFooter className="flex justify-end gap-2">
-            <Button type="button" variant="outline" onClick={() => setVisible(false)}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setVisible(false)}
+            >
               {t('close')}
             </Button>
             <Button type="submit" disabled={formik.isSubmitting}>

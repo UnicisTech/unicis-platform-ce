@@ -3,9 +3,14 @@ import { prisma } from '@/lib/prisma';
 import { getCurrentPlan } from '@/lib/subscriptions';
 import env from '@/lib/env';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method Not Allowed', hasPlan: false });
+    return res
+      .status(405)
+      .json({ error: 'Method Not Allowed', hasPlan: false });
   }
 
   const { slug } = req.body;
@@ -28,18 +33,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     if (!subscription) {
-      return res.status(403).json({ error: 'No active subscription', hasPlan: false });
+      return res
+        .status(403)
+        .json({ error: 'No active subscription', hasPlan: false });
     }
 
     const currentPlan = getCurrentPlan(subscription);
 
     if (currentPlan !== env.assetRequiredPlan) {
-      return res.status(403).json({ error: 'Insufficient plan', hasPlan: false });
+      return res
+        .status(403)
+        .json({ error: 'Insufficient plan', hasPlan: false });
     }
 
     return res.status(200).json({ hasPlan: true });
   } catch (error) {
     console.error('Error checking plan:', error);
-    return res.status(500).json({ error: 'Internal Server Error', hasPlan: false });
+    return res
+      .status(500)
+      .json({ error: 'Internal Server Error', hasPlan: false });
   }
 }

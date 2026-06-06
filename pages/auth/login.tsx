@@ -28,7 +28,6 @@ import { Separator } from '@/components/shadcn/ui/separator';
 import { Loader2 } from 'lucide-react';
 import { authProviderEnabled } from '@/lib/auth';
 import { getAuthErrorKey } from '@/lib/common';
-import { useAccessFleetAccount } from 'hooks/fleets';
 
 interface Message {
   text: string | null;
@@ -47,8 +46,6 @@ const Login: NextPageWithLayout<
     useState<boolean>(false);
   const recaptchaRef = useRef<any>(null);
   const providers = authProviders || {};
-
-  const accessFleetAccount = useAccessFleetAccount();
 
   const { error, success, token } = router.query as {
     error?: string;
@@ -89,7 +86,6 @@ const Login: NextPageWithLayout<
           setIsResendButtonVisible(true);
         }
       }
-
     },
   });
 

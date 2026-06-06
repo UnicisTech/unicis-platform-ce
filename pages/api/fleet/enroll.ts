@@ -1,7 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "@/lib/prisma";
-import { sendFleetEnrollEmail } from "@/lib/email/sendFleetEnrollEmail";
-import crypto from "crypto";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { prisma } from '@/lib/prisma';
+import { sendFleetEnrollEmail } from '@/lib/email/sendFleetEnrollEmail';
+import crypto from 'crypto';
 
 type Body = {
   email?: string;
@@ -13,23 +13,23 @@ type Body = {
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 
 const generateTempPassword = () => {
-  return crypto.randomBytes(12).toString("base64url");
+  return crypto.randomBytes(12).toString('base64url');
 };
 
 const mapPlatformRoleToFleetRole = (
   role?: string
-): "member" | "admin" | "owner" => {
-  if (role === "owner") return "owner";
-  if (role === "admin") return "admin";
-  return "member";
+): 'member' | 'admin' | 'owner' => {
+  if (role === 'owner') return 'owner';
+  if (role === 'admin') return 'admin';
+  return 'member';
 };
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
@@ -37,19 +37,19 @@ export default async function handler(
     const fleetServiceToken = process.env.FLEET_SERVICE_TOKEN;
 
     if (!fleetBase) {
-      console.error("FLEET_API_URL not defined");
-      return res.status(500).json({ error: "FLEET_NOT_CONFIGURED" });
+      console.error('FLEET_API_URL not defined');
+      return res.status(500).json({ error: 'FLEET_NOT_CONFIGURED' });
     }
 
     if (!fleetServiceToken) {
-      console.error("FLEET_SERVICE_TOKEN not defined");
-      return res.status(500).json({ error: "FLEET_SERVICE_TOKEN_MISSING" });
+      console.error('FLEET_SERVICE_TOKEN not defined');
+      return res.status(500).json({ error: 'FLEET_SERVICE_TOKEN_MISSING' });
     }
 
     const { email, teamId, teamSlug, teamName } = (req.body ?? {}) as Body;
 
     if (!email) {
-      return res.status(400).json({ error: "email is required" });
+      return res.status(400).json({ error: 'email is required' });
     }
 
     const user = await prisma.user.findUnique({
@@ -58,22 +58,22 @@ export default async function handler(
     });
 
     if (!user) {
-      return res.status(404).json({ error: "USER_NOT_FOUND" });
+      return res.status(404).json({ error: 'USER_NOT_FOUND' });
     }
 
     const team = await prisma.team.findFirst({
       where: teamId
         ? { id: teamId }
         : teamSlug
-        ? { slug: teamSlug }
-        : teamName
-        ? { name: teamName }
-        : undefined,
+          ? { slug: teamSlug }
+          : teamName
+            ? { name: teamName }
+            : undefined,
       select: { id: true, name: true, slug: true },
     });
 
     if (!team) {
-      return res.status(404).json({ error: "TEAM_NOT_FOUND" });
+      return res.status(404).json({ error: 'TEAM_NOT_FOUND' });
     }
 
     const now = new Date();
@@ -89,13 +89,13 @@ export default async function handler(
       select: { status: true, expiresAt: true },
     });
 
-    if (existing?.status === "COMPLETED") {
-      return res.status(409).json({ error: "ALREADY_ENROLLED" });
+    if (existing?.status === 'COMPLETED') {
+      return res.status(409).json({ error: 'ALREADY_ENROLLED' });
     }
 
-    if (existing?.status === "PENDING" && existing.expiresAt > now) {
+    if (existing?.status === 'PENDING' && existing.expiresAt > now) {
       return res.status(409).json({
-        error: "ALREADY_SENT",
+        error: 'ALREADY_SENT',
         expiresAt: existing.expiresAt,
       });
     }
@@ -105,16 +105,16 @@ export default async function handler(
     const createRes = await fetch(
       `${fleetBase}/api/v1/account/create-temporary`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${fleetServiceToken}`,
         },
         body: JSON.stringify({
           id: user.id,
           email: user.email,
-          firstname: user.name?.split(" ")[0] ?? "User",
-          lastname: user.name?.split(" ")[1] ?? "",
+          firstname: user.name?.split(' ')[0] ?? 'User',
+          lastname: user.name?.split(' ')[1] ?? '',
           password: tempPassword,
         }),
       }
@@ -122,10 +122,9 @@ export default async function handler(
 
     if (!createRes.ok) {
       const text = await createRes.text();
-      console.error("Fleet create-temporary failed:", text);
-      return res.status(500).json({ error: "FLEET_CREATE_FAILED" });
+      console.error('Fleet create-temporary failed:', text);
+      return res.status(500).json({ error: 'FLEET_CREATE_FAILED' });
     }
-
 
     const membership = await prisma.teamMember.findFirst({
       where: {
@@ -140,9 +139,9 @@ export default async function handler(
     const memberRes = await fetch(
       `${fleetBase}/api/v1/team/${team.id}/service/members`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${fleetServiceToken}`,
         },
         body: JSON.stringify({
@@ -154,8 +153,8 @@ export default async function handler(
 
     if (!memberRes.ok) {
       const text = await memberRes.text();
-      console.error("Fleet add member failed:", text);
-      return res.status(500).json({ error: "FLEET_ADD_MEMBER_FAILED" });
+      console.error('Fleet add member failed:', text);
+      return res.status(500).json({ error: 'FLEET_ADD_MEMBER_FAILED' });
     }
 
     // ---------- CREATE ENROLLMENT RECORD ----------
@@ -173,7 +172,7 @@ export default async function handler(
         token,
         sentAt: now,
         expiresAt,
-        status: "PENDING",
+        status: 'PENDING',
       },
       create: {
         teamId: team.id,
@@ -181,7 +180,7 @@ export default async function handler(
         token,
         sentAt: now,
         expiresAt,
-        status: "PENDING",
+        status: 'PENDING',
       },
       select: { token: true, expiresAt: true, status: true },
     });
@@ -199,7 +198,7 @@ export default async function handler(
       expiresAt: enrollment.expiresAt,
     });
   } catch (err) {
-    console.error("Fleet enroll API error:", err);
-    return res.status(500).json({ error: "FAILED_TO_ENROLL" });
+    console.error('Fleet enroll API error:', err);
+    return res.status(500).json({ error: 'FAILED_TO_ENROLL' });
   }
 }

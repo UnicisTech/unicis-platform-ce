@@ -1,6 +1,4 @@
-import {
-  UserIcon,
-} from '@heroicons/react/24/outline';
+import { UserIcon } from '@heroicons/react/24/outline';
 import type { User } from '@/generated/client';
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -18,7 +16,7 @@ const AccountTab = ({ activeTab, heading, user }: AccountTabProps) => {
       href: `/settings/account`,
       active: activeTab === 'account',
       icon: UserIcon,
-    }
+    },
   ];
 
   return (

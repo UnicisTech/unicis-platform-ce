@@ -57,9 +57,10 @@ const CreateTeam: React.FC<CreateTeamProps> = ({ visible, setVisible }) => {
       }
 
       await createFleetTeam(json.data.name, json.data.id)
-        .then(team => { }).catch(async (err) => {
+        .then((_team) => {})
+        .catch(async (_err) => {
           // await deleteTeam({ id: json.data.id })
-        })
+        });
 
       formik.resetForm();
       mutateTeams();

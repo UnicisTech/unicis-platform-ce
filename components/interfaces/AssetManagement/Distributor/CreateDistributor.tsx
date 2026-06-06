@@ -1,40 +1,36 @@
-import React, { Fragment, useRef, useState } from "react";
-import toast from "react-hot-toast";
-import { useTranslation } from "next-i18next";
-import dynamic from "next/dynamic";
+import React, { useRef, useState } from 'react';
+import toast from 'react-hot-toast';
+import { useTranslation } from 'next-i18next';
+import dynamic from 'next/dynamic';
 import type { User } from '@/generated/client';
-import { useCreateDistributors } from "@/hooks/fleets/distributors/useCreateDistributor";
-import { useDistributors } from "@/hooks/fleets/distributors/useDistributors";
-import { Button } from "@/components/shadcn/ui/button";
-import { Input } from "@/components/shadcn/ui/input";
-import { Label } from "@/components/shadcn/ui/label";
+import { useCreateDistributors } from '@/hooks/fleets/distributors/useCreateDistributor';
+import { useDistributors } from '@/hooks/fleets/distributors/useDistributors';
+import { Button } from '@/components/shadcn/ui/button';
+import { Input } from '@/components/shadcn/ui/input';
+import { Label } from '@/components/shadcn/ui/label';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogFooter,
   DialogTitle,
-} from "@/components/shadcn/ui/dialog";
-import { Calendar } from "@/components/shadcn/ui/calendar";
-import NodesSelector from "../AssetsSelector";
-import TagsSelector from "../TagsSelector";
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/shadcn/ui/popover";
-import { CalendarIcon } from "lucide-react";
+} from '@/components/shadcn/ui/dialog';
+import { Calendar } from '@/components/shadcn/ui/calendar';
+import NodesSelector from '../AssetsSelector';
+import TagsSelector from '../TagsSelector';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from '@/components/shadcn/ui/popover';
+import { CalendarIcon } from 'lucide-react';
 
-const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
-
-interface FormData {
-  sql: string;
-  not_before: string;
-  nodes: string[];
-  tags: string[];
-  description: string;
-}
+const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
 const CreateDistributors = ({
   visible,
   setVisible,
-  user,
+  user: _user,
   fleetTeamId,
 }: {
   visible: boolean;
@@ -46,8 +42,10 @@ const CreateDistributors = ({
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
   const [selectedNodes, setSelectedNodes] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [notBeforeDate, setNotBeforeDate] = useState<Date | undefined>(new Date());
-  const { t } = useTranslation("common");
+  const [notBeforeDate, setNotBeforeDate] = useState<Date | undefined>(
+    new Date()
+  );
+  const { t } = useTranslation('common');
   const createDistributor = useCreateDistributors();
   const { mutateDistributorsTasks } = useDistributors(fleetTeamId);
 
@@ -60,8 +58,8 @@ const CreateDistributors = ({
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    const description = formData.get("description") as string;
-    const sql = formData.get("sql") as string;
+    const description = formData.get('description') as string;
+    const sql = formData.get('sql') as string;
 
     const queryData = {
       description,
@@ -73,11 +71,11 @@ const CreateDistributors = ({
 
     try {
       await createDistributor(fleetTeamId, queryData);
-      toast.success(t("success"));
+      toast.success(t('success'));
       mutateDistributorsTasks();
       setVisible(false);
     } catch {
-      toast.error(t("error"));
+      toast.error(t('error'));
     }
   };
 
@@ -87,8 +85,12 @@ const CreateDistributors = ({
         <DialogHeader>
           <DialogTitle>{t('create-script')}</DialogTitle>
         </DialogHeader>
-  
-        <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 min-w-0">
+
+        <form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          className="space-y-6 min-w-0"
+        >
           <div className="space-y-2">
             <Label htmlFor="sql">{t('sql-code')}</Label>
             <Input
@@ -98,7 +100,7 @@ const CreateDistributors = ({
               required
             />
           </div>
-  
+
           <div className="space-y-2">
             <Label>{t('assign-assets')}</Label>
             <NodesSelector
@@ -107,12 +109,12 @@ const CreateDistributors = ({
               onSelect={handleNodeSelection}
             />
           </div>
-  
+
           <div className="space-y-2">
             <Label htmlFor="description">{t('description')}</Label>
             <ReactQuill theme="snow" id="description" />
           </div>
-  
+
           <div className="space-y-2 flex flex-col">
             <Label>{t('not-before')}</Label>
             <Popover>
@@ -138,7 +140,7 @@ const CreateDistributors = ({
               </PopoverContent>
             </Popover>
           </div>
-  
+
           <div className="space-y-2">
             <Label>{t('tags')}</Label>
             <TagsSelector
@@ -147,7 +149,7 @@ const CreateDistributors = ({
               onSelect={() => {}}
             />
           </div>
-  
+
           <DialogFooter>
             <Button
               type="button"
@@ -163,7 +165,7 @@ const CreateDistributors = ({
         </form>
       </DialogContent>
     </Dialog>
-  );  
+  );
 };
 
 export default CreateDistributors;

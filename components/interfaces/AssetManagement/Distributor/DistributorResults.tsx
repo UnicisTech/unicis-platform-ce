@@ -11,9 +11,14 @@ interface DistributorResultsProps {
   fleetTeamId: string;
 }
 
-const DistributorResults = ({ distributorId, fleetTeamId }: DistributorResultsProps) => {
+const DistributorResults = ({
+  distributorId,
+  fleetTeamId,
+}: DistributorResultsProps) => {
   const { t } = useTranslation('common');
-  const [status, setStatus] = useState<'new' | 'pending' | 'complete' | 'failed'>('complete');
+  const [status] = useState<'new' | 'pending' | 'complete' | 'failed'>(
+    'complete'
+  );
   const deleteResult = useDeleteDistributedResult();
 
   const { distributorsResult, isLoading, isError, mutateDistributorResult } =
@@ -42,10 +47,13 @@ const DistributorResults = ({ distributorId, fleetTeamId }: DistributorResultsPr
       <div className="text-sm text-muted-foreground">
         {results.length > 0 ? (
           <>
-            {t('Showing')} {results.length} {t('results from distributed query')}
+            {t('Showing')} {results.length}{' '}
+            {t('results from distributed query')}
           </>
         ) : (
-          t('No results yet. Results will appear here after the distributed query executes.')
+          t(
+            'No results yet. Results will appear here after the distributed query executes.'
+          )
         )}
       </div>
 
@@ -73,7 +81,10 @@ const DistributorResults = ({ distributorId, fleetTeamId }: DistributorResultsPr
                   <div className="flex-1 flex items-center gap-4 flex-wrap">
                     <span className="text-sm text-muted-foreground min-w-[140px]">
                       {result.timestamp
-                        ? format(new Date(result.timestamp), 'yyyy-MM-dd HH:mm:ss')
+                        ? format(
+                            new Date(result.timestamp),
+                            'yyyy-MM-dd HH:mm:ss'
+                          )
                         : t('No timestamp')}
                     </span>
 
@@ -82,13 +93,15 @@ const DistributorResults = ({ distributorId, fleetTeamId }: DistributorResultsPr
                     </span>
 
                     {result.status && (
-                      <span className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
-                        result.status === 'complete'
-                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                          : result.status === 'failed'
-                          ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
-                          : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200'
-                      }`}>
+                      <span
+                        className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
+                          result.status === 'complete'
+                            ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                            : result.status === 'failed'
+                              ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                              : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200'
+                        }`}
+                      >
                         {result.status}
                       </span>
                     )}
@@ -110,7 +123,16 @@ const DistributorResults = ({ distributorId, fleetTeamId }: DistributorResultsPr
                 <div className="px-4 pb-4 pt-2 ml-7 border-t border-border">
                   <div className="space-y-2">
                     {Object.entries(result)
-                      .filter(([key]) => !['result_id', 'id', 'timestamp', 'host_identifier', 'status'].includes(key))
+                      .filter(
+                        ([key]) =>
+                          ![
+                            'result_id',
+                            'id',
+                            'timestamp',
+                            'host_identifier',
+                            'status',
+                          ].includes(key)
+                      )
                       .map(([key, value]) => (
                         <div key={key} className="flex gap-2">
                           <span className="text-sm font-medium text-muted-foreground min-w-[120px]">
@@ -120,8 +142,8 @@ const DistributorResults = ({ distributorId, fleetTeamId }: DistributorResultsPr
                             {value === null || value === undefined
                               ? '-'
                               : typeof value === 'object'
-                              ? JSON.stringify(value, null, 2)
-                              : String(value)}
+                                ? JSON.stringify(value, null, 2)
+                                : String(value)}
                           </span>
                         </div>
                       ))}

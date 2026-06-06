@@ -37,6 +37,7 @@ const NotificationsPage = () => {
   const [pushLoading, setPushLoading] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPage(1);
   }, [perPage]);
 
@@ -45,6 +46,7 @@ const NotificationsPage = () => {
 
   useEffect(() => {
     if (!hasLoaded) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (page > totalPages) setPage(totalPages);
   }, [page, totalPages, hasLoaded]);
 

@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/shadcn/ui/card';
+import { useTranslation } from 'next-i18next';
 
 const AssetConfig = ({
   fleetTeamId,
@@ -18,6 +19,7 @@ const AssetConfig = ({
   user: Partial<User>;
   nodeID: string;
 }) => {
+  const { t } = useTranslation(['common', 'fleet']);
   const { config, isLoading, isError } = useAssetConfig(fleetTeamId, nodeID);
 
   if (isLoading) {
@@ -34,44 +36,69 @@ const AssetConfig = ({
 
   const packCount = Object.keys(packs).length;
   const scheduledQueryCount = Object.keys(schedule).length;
-  const packQueryCount = Object.values(packs).reduce((count: number, pack: any) => {
-    return count + Object.keys(pack?.queries || {}).length;
-  }, 0);
+  const packQueryCount = Object.values(packs).reduce(
+    (count: number, pack: any) => {
+      return count + Object.keys(pack?.queries || {}).length;
+    },
+    0
+  );
 
   return (
     <div className="space-y-4">
       <Card>
         <CardHeader>
-          <CardTitle>Configuration Overview</CardTitle>
+          <CardTitle>{t('fleet:fleet-config-overview')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <div className="rounded-md border p-3">
-              <p className="text-xs text-muted-foreground">Host identifier</p>
-              <p className="font-medium break-words">{options.host_identifier || '-'}</p>
+              <p className="text-xs text-muted-foreground">
+                {t('fleet:fleet-host-identifier')}
+              </p>
+              <p className="font-medium break-words">
+                {options.host_identifier || '-'}
+              </p>
             </div>
             <div className="rounded-md border p-3">
-              <p className="text-xs text-muted-foreground">Logger plugin</p>
-              <p className="font-medium break-words">{options.logger_plugin || '-'}</p>
+              <p className="text-xs text-muted-foreground">
+                {t('fleet:fleet-logger-plugin')}
+              </p>
+              <p className="font-medium break-words">
+                {options.logger_plugin || '-'}
+              </p>
             </div>
             <div className="rounded-md border p-3">
-              <p className="text-xs text-muted-foreground">Logger endpoint</p>
-              <p className="font-medium break-words">{options.logger_tls_endpoint || '-'}</p>
+              <p className="text-xs text-muted-foreground">
+                {t('fleet:fleet-logger-endpoint')}
+              </p>
+              <p className="font-medium break-words">
+                {options.logger_tls_endpoint || '-'}
+              </p>
             </div>
             <div className="rounded-md border p-3">
-              <p className="text-xs text-muted-foreground">Logger TLS period</p>
-              <p className="font-medium">{String(options.logger_tls_period ?? '-')}</p>
+              <p className="text-xs text-muted-foreground">
+                {t('fleet:fleet-logger-tls-period')}
+              </p>
+              <p className="font-medium">
+                {String(options.logger_tls_period ?? '-')}
+              </p>
             </div>
             <div className="rounded-md border p-3">
-              <p className="text-xs text-muted-foreground">Packs</p>
+              <p className="text-xs text-muted-foreground">
+                {t('fleet:fleet-all-packs')}
+              </p>
               <p className="font-medium">{packCount}</p>
             </div>
             <div className="rounded-md border p-3">
-              <p className="text-xs text-muted-foreground">Pack queries</p>
+              <p className="text-xs text-muted-foreground">
+                {t('fleet:fleet-pack-queries-label')}
+              </p>
               <p className="font-medium">{packQueryCount}</p>
             </div>
             <div className="rounded-md border p-3">
-              <p className="text-xs text-muted-foreground">Scheduled queries</p>
+              <p className="text-xs text-muted-foreground">
+                {t('fleet:fleet-scheduled-queries')}
+              </p>
               <p className="font-medium">{scheduledQueryCount}</p>
             </div>
           </div>
@@ -79,7 +106,9 @@ const AssetConfig = ({
       </Card>
 
       <details className="rounded-md border bg-muted/20 p-3">
-        <summary className="cursor-pointer text-sm font-medium">Show raw config</summary>
+        <summary className="cursor-pointer text-sm font-medium">
+          {t('fleet:fleet-show-raw-config')}
+        </summary>
         <div className="mt-3">
           <CodeBlock
             language="JSON"

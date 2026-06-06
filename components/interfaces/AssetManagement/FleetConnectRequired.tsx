@@ -38,24 +38,18 @@ interface FleetConnectRequiredProps {
 }
 
 const loginSchema = Yup.object({
-  fleetPassword: Yup.string()
-    .required()
-    .min(passwordPolicies.fleetMinLength),
+  fleetPassword: Yup.string().required().min(passwordPolicies.fleetMinLength),
 });
 
 const changeSchema = Yup.object({
-  newPassword: Yup.string()
-    .required()
-    .min(passwordPolicies.fleetMinLength),
+  newPassword: Yup.string().required().min(passwordPolicies.fleetMinLength),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('newPassword')])
     .required(),
 });
 
 const bootstrapSchema = Yup.object({
-  password: Yup.string()
-    .required()
-    .min(passwordPolicies.fleetMinLength),
+  password: Yup.string().required().min(passwordPolicies.fleetMinLength),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password')])
     .required(),
@@ -70,12 +64,15 @@ const FleetConnectRequired = ({
 }: FleetConnectRequiredProps) => {
   const { t } = useTranslation(['common', 'fleet']);
   const [visible, setVisible] = useState(false);
-  const [enrollmentDialogDismissed, setEnrollmentDialogDismissed] = useState(false);
+  const [enrollmentDialogDismissed, setEnrollmentDialogDismissed] =
+    useState(false);
   const [authOverride, setAuthOverride] = useState<boolean | null>(null);
   const [mustChangePassword, setMustChangePassword] = useState(false);
   const [tempPassword, setTempPassword] = useState('');
   const [showForgotPassword, setShowForgotPassword] = useState(false);
-  const [forgotPasswordEmail, setForgotPasswordEmail] = useState(user.email || '');
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState(
+    user.email || ''
+  );
   const [sendingResetEmail, setSendingResetEmail] = useState(false);
   const [showBootstrap, setShowBootstrap] = useState(false);
   const [isBootstrapping, setIsBootstrapping] = useState(false);
@@ -137,7 +134,10 @@ const FleetConnectRequired = ({
               fleetPassword,
             }),
           }).catch((err) => {
-            console.error('[FleetConnect] Failed to complete enrollment by token:', err);
+            console.error(
+              '[FleetConnect] Failed to complete enrollment by token:',
+              err
+            );
           });
         }
 
@@ -151,7 +151,10 @@ const FleetConnectRequired = ({
               fleetPassword,
             }),
           }).catch((err) => {
-            console.error('[FleetConnect] Failed to complete enrollment by email:', err);
+            console.error(
+              '[FleetConnect] Failed to complete enrollment by email:',
+              err
+            );
           });
         }
 
@@ -188,7 +191,6 @@ const FleetConnectRequired = ({
     },
   });
 
-
   const changeFormik = useFormik({
     initialValues: { newPassword: '', confirmPassword: '' },
     validationSchema: changeSchema,
@@ -208,10 +210,14 @@ const FleetConnectRequired = ({
         if (!changeRes.ok) {
           const error = await changeRes.json();
           console.error('[FleetConnect] Password change failed:', error);
-          throw new Error(error.error || t('fleet:fleet-password-update-failed'));
+          throw new Error(
+            error.error || t('fleet:fleet-password-update-failed')
+          );
         }
 
-        console.log('[FleetConnect] Password changed successfully, logging in with new password...');
+        console.log(
+          '[FleetConnect] Password changed successfully, logging in with new password...'
+        );
         const login = await accessFleetAccount(user.email!, newPassword);
         console.log('[FleetConnect] Login successful after password change');
 
@@ -224,7 +230,10 @@ const FleetConnectRequired = ({
               fleetPassword: newPassword,
             }),
           }).catch((err) => {
-            console.error('[FleetConnect] Failed to complete enrollment by token after password change:', err);
+            console.error(
+              '[FleetConnect] Failed to complete enrollment by token after password change:',
+              err
+            );
           });
         }
 
@@ -238,7 +247,10 @@ const FleetConnectRequired = ({
               fleetPassword: newPassword,
             }),
           }).catch((err) => {
-            console.error('[FleetConnect] Failed to complete enrollment by email after password change:', err);
+            console.error(
+              '[FleetConnect] Failed to complete enrollment by email after password change:',
+              err
+            );
           });
         }
 
@@ -317,7 +329,11 @@ const FleetConnectRequired = ({
         window.location.reload();
       } catch (error) {
         console.error('[Bootstrap] Error:', error);
-        toast.error(error instanceof Error ? error.message : t('fleet:fleet-bootstrap-failed'));
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : t('fleet:fleet-bootstrap-failed')
+        );
       } finally {
         setIsBootstrapping(false);
       }
@@ -355,7 +371,7 @@ const FleetConnectRequired = ({
       setShowForgotPassword(false);
       setVisible(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error(t('fleet:fleet-forgot-password-failed'));
     } finally {
       setSendingResetEmail(false);
@@ -384,7 +400,11 @@ const FleetConnectRequired = ({
                   {t('fleet:fleet-order-secret')}
                 </Button>
               )}
-              <Button size="sm" variant="outline" onClick={() => setVisible(true)}>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => setVisible(true)}
+              >
                 {t('fleet:fleet-connect')}
               </Button>
             </div>
@@ -428,7 +448,9 @@ const FleetConnectRequired = ({
                   onClick={handleForgotPassword}
                   disabled={sendingResetEmail}
                 >
-                  {sendingResetEmail ? t('fleet:fleet-sending') : t('fleet:send-reset-link')}
+                  {sendingResetEmail
+                    ? t('fleet:fleet-sending')
+                    : t('fleet:send-reset-link')}
                 </Button>
               </DialogFooter>
             </div>
@@ -462,9 +484,7 @@ const FleetConnectRequired = ({
               </div>
 
               <DialogFooter className="mt-6">
-                <Button type="submit">
-                  {t('fleet:fleet-connect')}
-                </Button>
+                <Button type="submit">{t('fleet:fleet-connect')}</Button>
               </DialogFooter>
             </form>
           ) : (
@@ -495,9 +515,7 @@ const FleetConnectRequired = ({
               </div>
 
               <DialogFooter className="mt-6">
-                <Button type="submit">
-                  {t('fleet:update-password')}
-                </Button>
+                <Button type="submit">{t('fleet:update-password')}</Button>
               </DialogFooter>
             </form>
           )}
@@ -524,9 +542,12 @@ const FleetConnectRequired = ({
                   onChange={bootstrapFormik.handleChange}
                   placeholder={t('fleet:enter-password')}
                 />
-                {bootstrapFormik.errors.password && bootstrapFormik.touched.password && (
-                  <p className="text-sm text-destructive">{bootstrapFormik.errors.password}</p>
-                )}
+                {bootstrapFormik.errors.password &&
+                  bootstrapFormik.touched.password && (
+                    <p className="text-sm text-destructive">
+                      {bootstrapFormik.errors.password}
+                    </p>
+                  )}
               </div>
 
               <div className="space-y-2">
@@ -538,9 +559,12 @@ const FleetConnectRequired = ({
                   onChange={bootstrapFormik.handleChange}
                   placeholder={t('confirm-password')}
                 />
-                {bootstrapFormik.errors.confirmPassword && bootstrapFormik.touched.confirmPassword && (
-                  <p className="text-sm text-destructive">{bootstrapFormik.errors.confirmPassword}</p>
-                )}
+                {bootstrapFormik.errors.confirmPassword &&
+                  bootstrapFormik.touched.confirmPassword && (
+                    <p className="text-sm text-destructive">
+                      {bootstrapFormik.errors.confirmPassword}
+                    </p>
+                  )}
               </div>
             </div>
 

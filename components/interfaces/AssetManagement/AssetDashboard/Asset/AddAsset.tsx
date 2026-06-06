@@ -3,15 +3,21 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { Team, User } from '@/generated/client';
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from '@/components/shadcn/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogClose,
+} from '@/components/shadcn/ui/dialog';
 import { Button } from '@/components/shadcn/ui/button';
 import { useGetTeam } from '@/hooks/fleets/team/useGetTeam';
 import { useGetFleetSecret } from '@/hooks/fleets/connect/useGetFleetSecret';
 import { OSQUERY_ENTRY } from '@/lib/fleet/tools';
 import env from '@/lib/env';
-import { Loading, Error, CopyToClipboardButton } from '@/components/shared';
+import { Loading, Error } from '@/components/shared';
 import { CodeBlock } from '@/components/shared/CodeBlock';
 import PlatformTab from '../PlatformTab';
 
@@ -22,25 +28,39 @@ type AddAssetProps = {
   setVisible: (visible: boolean) => void;
 };
 
-const AddAsset = ({ visible, team, user, setVisible }: AddAssetProps) => {
-  const { t } = useTranslation('common');
+const AddAsset = ({
+  visible,
+  team,
+  user: _user,
+  setVisible,
+}: AddAssetProps) => {
+  const { t } = useTranslation(['common', 'fleet']);
   const [platform, setPlatformTab] = useState('windows');
-  const [isSafe, setIsPasswordVisible] = useState(false);
-  const [isCopy, setIsCopy] = useState(false);
+  const [isSafe] = useState(false);
+  const [isCopy] = useState(false);
 
   const { fleetTeam, isLoading, isError } = useGetTeam(team.id);
-  const { secret, isLoading: SecretLoading, isError: SecretError } = useGetFleetSecret(team.id);
+  const {
+    secret,
+    isLoading: SecretLoading,
+    isError: SecretError,
+  } = useGetFleetSecret(team.id);
 
   if (isLoading || SecretLoading) return <Loading />;
   if (isError || SecretError) return <Error />;
 
   const agentEndpoint = (os: string, version: string) => {
     switch (os) {
-      case 'windows': return `osquery-${version}.msi`;
-      case 'macos': return `osquery-${version}_1.macos_arm64.tar.gz`;
-      case 'linux-deb': return `osquery_${version}-1.linux_amd64.deb`;
-      case 'linux-rpm': return `osquery-${version}-1.linux.x86_64.rpm`;
-      default: return `https://github.com/osquery/osquery/archive/refs/tags/${version}.zip`;
+      case 'windows':
+        return `osquery-${version}.msi`;
+      case 'macos':
+        return `osquery-${version}_1.macos_arm64.tar.gz`;
+      case 'linux-deb':
+        return `osquery_${version}-1.linux_amd64.deb`;
+      case 'linux-rpm':
+        return `osquery-${version}-1.linux.x86_64.rpm`;
+      default:
+        return `https://github.com/osquery/osquery/archive/refs/tags/${version}.zip`;
     }
   };
 
@@ -54,13 +74,22 @@ const AddAsset = ({ visible, team, user, setVisible }: AddAssetProps) => {
     return platform === 'advanced' ? agentEndpoint(os, env.agentVersion) : url;
   };
 
-  const osqueryEntry = OSQUERY_ENTRY({ secret: secret?.secret!, teamName: team.name!, apiUrl: env.fleetAPI, safe: isSafe, isCopy: isCopy, platform: platform });
+  const osqueryEntry = OSQUERY_ENTRY({
+    secret: secret?.secret ?? '',
+    teamName: team.name!,
+    apiUrl: env.fleetAPI,
+    safe: isSafe,
+    isCopy: isCopy,
+    platform: platform,
+  });
 
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
       <DialogContent className="max-w-3xl overflow-y-auto max-h-[90vh]">
         <DialogHeader className="flex justify-between items-start gap-4">
-          <DialogTitle className="text-lg font-bold">{t('add-asset')}</DialogTitle>
+          <DialogTitle className="text-lg font-bold">
+            {t('add-asset')}
+          </DialogTitle>
           {/* <Button
             variant="ghost"
             size="icon"
@@ -88,9 +117,18 @@ const AddAsset = ({ visible, team, user, setVisible }: AddAssetProps) => {
 
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-            <h2 className="underline">
-              With the <a href={generateUrlInstaller(platform)} className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">Fleet command-line tool</a> installed:
-            </h2>
+              <h2 className="underline">
+                {t('fleet:fleet-with-the')}{' '}
+                <a
+                  href={generateUrlInstaller(platform)}
+                  className="text-blue-500 underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t('fleet:fleet-cli-tool')}
+                </a>{' '}
+                {t('fleet:fleet-installed')}
+              </h2>
               {/* <CopyToClipboardButton value={osqueryEntry} /> */}
             </div>
             <CodeBlock
@@ -104,7 +142,11 @@ const AddAsset = ({ visible, team, user, setVisible }: AddAssetProps) => {
           {platform === 'advanced' && (
             <>
               <h2>{t('team-tls-cert')}</h2>
-              <CodeBlock language="text" showLineNumbers={false} text={fleetTeam?.ca_certificate} />
+              <CodeBlock
+                language="text"
+                showLineNumbers={false}
+                text={fleetTeam?.ca_certificate}
+              />
               <p>
                 {t('save-ca-content', {
                   file: '<span class="text-green-500">./ca-cert.pem</span>',
@@ -114,7 +156,9 @@ const AddAsset = ({ visible, team, user, setVisible }: AddAssetProps) => {
             </>
           )}
 
-          <p className="text-sm text-muted-foreground">{t('generate-installer-description')}</p>
+          <p className="text-sm text-muted-foreground">
+            {t('generate-installer-description')}
+          </p>
         </div>
 
         <DialogFooter className="mt-6">

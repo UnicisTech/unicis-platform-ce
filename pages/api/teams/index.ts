@@ -68,7 +68,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     name,
     slug,
   });
-  
+
   recordMetric('team.created');
 
   res.status(200).json({ data: serializeForApi(team) });

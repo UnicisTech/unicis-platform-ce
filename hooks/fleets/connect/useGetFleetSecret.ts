@@ -1,16 +1,16 @@
-import fleetFetcher from "@/lib/fleet/fleetFetcher";
-import { FleetSecret } from "@/types/fleet";
-import useSWR, { mutate } from "swr";
-import Cookies from "js-cookie";
+import fleetFetcher from '@/lib/fleet/fleetFetcher';
+import { FleetSecret } from '@/types/fleet';
+import useSWR, { mutate } from 'swr';
+import Cookies from 'js-cookie';
 import {
   fleetAccessTokenCookieName,
   legacyFleetAccessTokenCookieName,
-} from "@/lib/fleet/cookies";
+} from '@/lib/fleet/cookies';
 
 export const useGetFleetSecret = (teamId: string) => {
   const hasFleetToken = Boolean(
     Cookies.get(fleetAccessTokenCookieName) ||
-    Cookies.get(legacyFleetAccessTokenCookieName)
+      Cookies.get(legacyFleetAccessTokenCookieName)
   );
   const url = hasFleetToken ? `/fleet/teams/${teamId}/secret` : null;
 
@@ -20,7 +20,7 @@ export const useGetFleetSecret = (teamId: string) => {
       if (err?.status !== 404 && err?.status !== 401) {
         console.error('[useGetFleetSecret] Error fetching secret:', err);
       }
-    }
+    },
   });
 
   const mutateFleetSecret = async () => {
@@ -29,8 +29,10 @@ export const useGetFleetSecret = (teamId: string) => {
 
   return {
     isLoading: hasFleetToken ? isLoading : false,
-    isError: hasFleetToken ? !!error && error?.status !== 404 && error?.status !== 401 : false,
+    isError: hasFleetToken
+      ? !!error && error?.status !== 404 && error?.status !== 401
+      : false,
     secret: data,
-    mutateFleetSecret
+    mutateFleetSecret,
   };
 };

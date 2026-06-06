@@ -5,8 +5,7 @@ const useHasPlan = () => {
 
   const hasPlan = async (slug: string): Promise<boolean> => {
     try {
-
-      const response = await fetch("/api/check-plan", {
+      const response = await fetch('/api/check-plan', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -19,19 +18,18 @@ const useHasPlan = () => {
       }
 
       const data = await response.json();
-      
+
       setCheckedHasPlan(data.hasPlan);
       return data.hasPlan;
-    } catch (error) {
+    } catch {
       return false;
     }
   };
 
   return {
     hasPlan,
-    checkedHasPlan
+    checkedHasPlan,
   };
 };
-
 
 export default useHasPlan;

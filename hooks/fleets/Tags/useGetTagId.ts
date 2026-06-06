@@ -1,7 +1,7 @@
-import { fleetAuthAPIHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
-import { TagsWithRelationships } from "@/types/fleet";
-import { useEffect, useState } from "react";
+import { fleetAuthAPIHeaders } from '@/lib/common';
+import { fleetV1 } from '@/lib/fleet/apiBase';
+import { TagsWithRelationships } from '@/types/fleet';
+import { useEffect, useState } from 'react';
 
 export const useGetTagId = (teamId: string, tagId: string) => {
   const [tag, setTag] = useState<TagsWithRelationships>();
@@ -20,12 +20,12 @@ export const useGetTagId = (teamId: string, tagId: string) => {
         });
 
         if (!response.ok) {
-          const data = await response.json();
+          await response.json();
         }
 
         const data: TagsWithRelationships = await response.json();
         setTag(data);
-      } catch (err) {
+      } catch {
         setError('An unexpected error occurred.');
       } finally {
         setLoading(false);

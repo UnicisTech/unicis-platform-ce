@@ -9,7 +9,13 @@ import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import { TeamTab } from '@/components/team';
 import FleetConnectRequired from '@/components/interfaces/AssetManagement/FleetConnectRequired';
 
-const AssetManagement = ({ teamFeatures, team, user, enrollmentToken, isTeamAdmin }) => {
+const AssetManagement = ({
+  teamFeatures,
+  team,
+  user,
+  enrollmentToken,
+  isTeamAdmin,
+}) => {
   return (
     <FleetConnectRequired
       user={user}
@@ -42,9 +48,7 @@ export const getServerSideProps = async (
   const { locale, query }: GetServerSidePropsContext = context;
   const slug = query.slug as string;
   const enrollmentToken =
-    typeof query.fleetEnrollToken === 'string'
-      ? query.fleetEnrollToken
-      : null;
+    typeof query.fleetEnrollToken === 'string' ? query.fleetEnrollToken : null;
   const team = await getTeam({ slug });
 
   if (!user) {

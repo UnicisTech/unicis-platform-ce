@@ -5,7 +5,6 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import Brand from './Brand';
 import Navigation from './Navigation';
 
-
 interface DrawerProps {
   sidebarOpen: boolean;
   setSidebarOpen: (open: boolean) => void;
@@ -54,6 +53,5 @@ const Drawer = ({ sidebarOpen, setSidebarOpen }: DrawerProps) => {
     </>
   );
 };
-
 
 export default Drawer;

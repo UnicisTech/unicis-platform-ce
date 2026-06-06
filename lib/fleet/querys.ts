@@ -1,4 +1,3 @@
-
 export const queryNavigations = (activeTab: string) => {
   return [
     {

@@ -121,15 +121,25 @@ const env = {
     secretKey: process.env.RECAPTCHA_SECRET_KEY || null,
   },
 
+  // Billing address
   billingEmail: process.env.BILLING_EMAIL,
 
   ai: {
+    url: process.env.AI_URL,
     llamaToken: process.env.LLAMA_TOKEN,
+    model: process.env.AI_MODEL,
   },
 
   resend: {
     apiKey: process.env.RESEND_API_KEY!,
     from: process.env.RESEND_FROM!,
+  },
+
+  vapid: {
+    publicKey:
+      process.env.VAPID_PUBLIC_KEY || process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY,
+    privateKey: process.env.VAPID_PRIVATE_KEY,
+    subject: process.env.VAPID_SUBJECT,
   },
 };
 

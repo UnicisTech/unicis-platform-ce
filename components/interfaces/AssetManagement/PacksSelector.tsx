@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "next-i18next";
-import { usePacks } from "@/hooks/fleets/packs/usePacks";
-import { Pack } from "@/types";
-import { MultiSelect } from "@/components/shadcn/ui/multi-select";
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'next-i18next';
+import { usePacks } from '@/hooks/fleets/packs/usePacks';
+import { Pack } from '@/types';
+import { MultiSelect } from '@/components/shadcn/ui/multi-select';
 
 interface PacksSelectorProps {
   fleetTeamId: string;
@@ -17,7 +17,7 @@ const PacksSelector: React.FC<PacksSelectorProps> = ({
   setSectionPack,
   preSelectedPack = [],
 }) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   const { packs, isLoading, isError } = usePacks(fleetTeamId!);
   const [selectedPackIds, setSelectedPackIds] = useState<string[]>([]);
 
@@ -26,16 +26,17 @@ const PacksSelector: React.FC<PacksSelectorProps> = ({
       const preselectedIds = preSelectedPack
         .map((pack) => pack.id)
         .filter((id) => packs.some((p) => p.id === id));
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedPackIds(preselectedIds);
     }
   }, [packs, preSelectedPack]);
 
-  if (isLoading) return <p>{t("loading")}</p>;
-  if (isError) return <p>{t("error-loading-packs")}</p>;
+  if (isLoading) return <p>{t('loading')}</p>;
+  if (isError) return <p>{t('error-loading-packs')}</p>;
 
   const packOptions = packs.map((pack) => ({
     value: pack.id,
-    label: `${pack.name || t("unknown-pack")} - ${pack.platform} - v${pack.version}`,
+    label: `${pack.name || t('unknown-pack')} - ${pack.platform} - v${pack.version}`,
   }));
 
   const handlePackChange = (newSelected: string[]) => {
@@ -44,18 +45,16 @@ const PacksSelector: React.FC<PacksSelectorProps> = ({
     onSelect(newSelected);
   };
 
-  return (
-    packs.length === 0 ? (
-      <p>{t("no-packs-found")}</p>
-    ) : (
-      <MultiSelect
-        options={packOptions}
-        defaultValue={selectedPackIds}
-        onValueChange={handlePackChange}
-        placeholder={t("select-packs")}
-        maxCount={3}
-      />
-    )
+  return packs.length === 0 ? (
+    <p>{t('no-packs-found')}</p>
+  ) : (
+    <MultiSelect
+      options={packOptions}
+      defaultValue={selectedPackIds}
+      onValueChange={handlePackChange}
+      placeholder={t('select-packs')}
+      maxCount={3}
+    />
   );
 };
 

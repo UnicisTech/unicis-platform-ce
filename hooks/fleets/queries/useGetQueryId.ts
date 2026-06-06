@@ -1,7 +1,7 @@
-import { fleetAuthAPIHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
-import { Query } from "@/types/fleet";
-import { useEffect, useState } from "react";
+import { fleetAuthAPIHeaders } from '@/lib/common';
+import { fleetV1 } from '@/lib/fleet/apiBase';
+import { Query } from '@/types/fleet';
+import { useEffect, useState } from 'react';
 
 export const useGetQueryId = (teamId: string, queryId: string) => {
   const [query, setQuery] = useState<Query>();
@@ -20,12 +20,12 @@ export const useGetQueryId = (teamId: string, queryId: string) => {
         });
 
         if (!response.ok) {
-          const data = await response.json();
+          await response.json();
         }
 
         const data: Query = await response.json();
         setQuery(data);
-      } catch (err) {
+      } catch {
         setError('An unexpected error occurred.');
       } finally {
         setLoading(false);

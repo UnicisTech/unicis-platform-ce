@@ -1,9 +1,8 @@
-
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
-import Link from "next/link";
-import classNames from "classnames";
-import { Separator } from "@/components/shadcn/ui/separator";
-import React from "react";
+import Link from 'next/link';
+import classNames from 'classnames';
+import { Separator } from '@/components/shadcn/ui/separator';
+import React from 'react';
 
 export interface MenuItem {
   name: string;
@@ -12,7 +11,7 @@ export interface MenuItem {
   className?: string;
   openInNewTab?: boolean;
   active?: boolean;
-  items?: Omit<MenuItem, "icon" | "items">[];
+  items?: Omit<MenuItem, 'icon' | 'items'>[];
 }
 
 export interface NavigationProps {
@@ -33,7 +32,7 @@ export const NavigationItems: React.FC<NavigationItemsProps> = ({ menus }) => (
     {menus.map((menu) =>
       menu ? (
         <li key={menu.name}>
-          {menu.name === "line-break" ? (
+          {menu.name === 'line-break' ? (
             <Separator className="my-1" />
           ) : (
             <>
@@ -65,10 +64,10 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ menu, className }) => {
       target={newTab ? '_blank' : undefined}
       rel={newTab ? 'noopener noreferrer' : undefined}
       className={classNames(
-        "flex items-center gap-2 rounded-md p-2 text-sm",
+        'flex items-center gap-2 rounded-md p-2 text-sm',
         menu.active
-          ? "bg-muted font-semibold text-foreground"
-          : "text-foreground hover:bg-muted hover:text-foreground",
+          ? 'bg-muted font-semibold text-foreground'
+          : 'text-foreground hover:bg-muted hover:text-foreground',
         className
       )}
     >

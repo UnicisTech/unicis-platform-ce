@@ -133,6 +133,7 @@ export default function ControlMappingDrawer({
       }
     }
     return result;
+    // eslint-disable-next-line react-hooks/preserve-manual-memoization
   }, [mappingEntry, linkedTasks, otherFrameworks, isTaskLinkedTo]);
 
   /** Total count of unlinked (task, mapped-control) pairs across all frameworks */

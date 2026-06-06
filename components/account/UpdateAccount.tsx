@@ -10,7 +10,7 @@ interface UpdateAccountProps {
   allowEmailChange: boolean;
 }
 
-const UpdateAccount = ({user, allowEmailChange }: UpdateAccountProps) => {
+const UpdateAccount = ({ user, allowEmailChange }: UpdateAccountProps) => {
   return (
     <div className="flex gap-6 flex-col">
       <UpdateName user={user} />

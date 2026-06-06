@@ -33,7 +33,7 @@ const ExportNode = ({
   nodeId,
   visible,
   setVisible,
-  fleetTeamId,
+  fleetTeamId: _fleetTeamId,
 }: {
   nodeId: string;
   visible: boolean;
@@ -100,9 +100,7 @@ const ExportNode = ({
 
             <div className="flex items-center space-x-2">
               <Checkbox id="relatives" {...register('relatives')} />
-              <Label htmlFor="relatives">
-                {t('include-relatives')}
-              </Label>
+              <Label htmlFor="relatives">{t('include-relatives')}</Label>
             </div>
 
             <span className="text-xs text-muted-foreground">

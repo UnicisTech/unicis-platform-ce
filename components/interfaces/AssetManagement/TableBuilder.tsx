@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Table,
   TableHeader,
@@ -6,8 +6,8 @@ import {
   TableHead,
   TableBody,
   TableCell,
-} from "@/components/shadcn/ui/table";
-import { Button } from "@/components/shadcn/ui/button";
+} from '@/components/shadcn/ui/table';
+import { Button } from '@/components/shadcn/ui/button';
 import { useTranslation } from 'next-i18next';
 
 interface TableBuilderProps {
@@ -27,12 +27,12 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
 }) => {
   const [deleting, setDeleting] = useState<string | null>(null);
 
-  const { t } = useTranslation("common")
+  const { t } = useTranslation('common');
 
   if (!data || data.length === 0) {
     return (
       <p className="rounded-md border border-muted-foreground/20 bg-muted/40 p-3 text-sm">
-        No data available
+        {t('no-data-available')}
       </p>
     );
   }
@@ -40,7 +40,9 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
   const headers = Array.from(
     new Set(
       data.flatMap((item) =>
-        Object.keys(item).filter((key) => key !== "result_id" && key !== "deletable")
+        Object.keys(item).filter(
+          (key) => key !== 'result_id' && key !== 'deletable'
+        )
       )
     )
   );
@@ -62,10 +64,14 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
   };
 
   const renderCell = (value: any) => {
-    if (value === null || value === undefined) return "-";
-    if (typeof value === "object") {
+    if (value === null || value === undefined) return '-';
+    if (typeof value === 'object') {
       try {
-        return <pre className="whitespace-pre-wrap break-words text-xs">{JSON.stringify(value, null, 2)}</pre>;
+        return (
+          <pre className="whitespace-pre-wrap break-words text-xs">
+            {JSON.stringify(value, null, 2)}
+          </pre>
+        );
       } catch {
         return String(value);
       }
@@ -81,11 +87,16 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
         <TableHeader>
           <TableRow>
             {headers.map((header) => (
-              <TableHead key={header} className="break-words [overflow-wrap:anywhere]">
+              <TableHead
+                key={header}
+                className="break-words [overflow-wrap:anywhere]"
+              >
                 {header.charAt(0).toUpperCase() + header.slice(1)}
               </TableHead>
             ))}
-            {showActions && <TableHead className="text-right">Actions</TableHead>}
+            {showActions && (
+              <TableHead className="text-right">{t('actions')}</TableHead>
+            )}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -111,7 +122,7 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
                           type="button"
                           onClick={() => onView(rowId)}
                         >
-                          View
+                          {t('view')}
                         </Button>
                       )}
                       {onEdit && (
@@ -121,21 +132,19 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
                           type="button"
                           onClick={() => onEdit(rowId)}
                         >
-                          Edit
+                          {t('edit')}
                         </Button>
                       )}
-                      {onDelete && (
-                        row?.deletable !== false && (
-                          <Button
-                            size="sm"
-                            variant="destructive"
-                            type="button"
-                            disabled={deleting === rowId || loading}
-                            onClick={() => handleDelete(rowId)}
-                          >
-                            {deleting === rowId ? t('deleting') : t('delete')}
-                          </Button>
-                        )
+                      {onDelete && row?.deletable !== false && (
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          type="button"
+                          disabled={deleting === rowId || loading}
+                          onClick={() => handleDelete(rowId)}
+                        >
+                          {deleting === rowId ? t('deleting') : t('delete')}
+                        </Button>
                       )}
                     </div>
                   </TableCell>

@@ -45,7 +45,9 @@ export default async function handler(
     if (!changeRes.ok) {
       const text = await changeRes.text();
       console.error('Fleet change password failed:', text);
-      return res.status(changeRes.status).json({ error: 'CHANGE_PASSWORD_FAILED' });
+      return res
+        .status(changeRes.status)
+        .json({ error: 'CHANGE_PASSWORD_FAILED' });
     }
 
     const data = await changeRes.json();

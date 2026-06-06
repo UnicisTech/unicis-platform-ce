@@ -3,7 +3,6 @@ import { getToken } from 'next-auth/jwt';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-
 // Add routes that don't require authentication
 const unAuthenticatedRoutes = [
   '/api/hello',
@@ -19,12 +18,14 @@ const unAuthenticatedRoutes = [
 
 const ulimitedPlanRoutes = [
   '/teams/:slug/asset/**',
-  '/teams/:slug/asset-management/**'
+  '/teams/:slug/asset-management/**',
 ];
 
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const patterns = ulimitedPlanRoutes.map((route) => route.replace(':slug', '*'));
+  const patterns = ulimitedPlanRoutes.map((route) =>
+    route.replace(':slug', '*')
+  );
 
   // Bypass routes that don't require authentication
   if (micromatch.isMatch(pathname, unAuthenticatedRoutes)) {
@@ -44,9 +45,11 @@ export default async function middleware(req: NextRequest) {
   }
 
   if (micromatch.isMatch(pathname, patterns)) {
-    const slugMatch = pathname.match(/\/teams\/([^/]+)\/(asset|asset-management)/);
+    const slugMatch = pathname.match(
+      /\/teams\/([^/]+)\/(asset|asset-management)/
+    );
     const slug = slugMatch ? slugMatch[1] : null;
-    
+
     const response = await fetch(`${req.nextUrl.origin}/api/check-plan`, {
       method: 'POST',
       headers: {

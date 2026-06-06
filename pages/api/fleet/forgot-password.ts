@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
 import { generateToken, validateEmail } from '@/lib/common';
-import { ApiError } from '@/lib/errors';
 import { sendFleetPasswordResetEmail } from '@/lib/email/sendFleetPasswordResetEmail';
 
 export default async function handler(
@@ -36,17 +35,25 @@ export default async function handler(
   }
 
   try {
-    const fleetAccountRes = await fetch(`${fleetBase}/api/v1/account/users/${user.id}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${fleetServiceToken}`,
-      },
-    });
+    const fleetAccountRes = await fetch(
+      `${fleetBase}/api/v1/account/users/${user.id}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${fleetServiceToken}`,
+        },
+      }
+    );
 
     if (!fleetAccountRes.ok) {
-      console.log('[FleetForgotPassword] No Fleet account found for user:', email);
-      return res.status(404).json({ error: 'No Fleet account found for this user' });
+      console.log(
+        '[FleetForgotPassword] No Fleet account found for user:',
+        email
+      );
+      return res
+        .status(404)
+        .json({ error: 'No Fleet account found for this user' });
     }
 
     console.log('[FleetForgotPassword] Fleet account exists for user:', email);

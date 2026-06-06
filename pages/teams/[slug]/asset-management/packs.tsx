@@ -10,13 +10,16 @@ import { getSession } from '@/lib/session';
 import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import { TeamTab } from '@/components/team';
 
-
 const AllPacks: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ user, team, teamFeatures }) => {
   return (
     <>
-      <TeamTab activeTab="asset-management" team={team} teamFeatures={teamFeatures} />
+      <TeamTab
+        activeTab="asset-management"
+        team={team}
+        teamFeatures={teamFeatures}
+      />
       <AssetTab activeTab="packs" team={team} teamFeatures={teamFeatures} />
       <Packs team={team} user={user} />
     </>
@@ -40,7 +43,9 @@ export const getServerSideProps = async (
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common', 'fleet']) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, ['common', 'fleet'])
+        : {}),
       team: JSON.parse(JSON.stringify(team)),
       teamFeatures: env.teamFeatures,
       user: {

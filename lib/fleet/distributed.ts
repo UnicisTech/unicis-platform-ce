@@ -1,4 +1,3 @@
-
 export const distributorNavigations = (activeTab: string) => {
   return [
     {
@@ -8,6 +7,6 @@ export const distributorNavigations = (activeTab: string) => {
     {
       name: 'Results',
       active: activeTab === 'Results',
-    }
+    },
   ];
 };

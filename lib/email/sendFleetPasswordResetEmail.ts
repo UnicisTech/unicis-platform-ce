@@ -5,7 +5,10 @@ import app from '../app';
 import env from '../env';
 import type { User } from '@/generated/client';
 
-export const sendFleetPasswordResetEmail = async (user: User, token: string) => {
+export const sendFleetPasswordResetEmail = async (
+  user: User,
+  token: string
+) => {
   const subject = `Reset your ${app.name} Fleet password`;
   const url = `${env.appUrl}/auth/reset-password/${token}`;
 

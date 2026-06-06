@@ -47,7 +47,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common', 'fleet']) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, ['common', 'fleet'])
+        : {}),
       teamFeatures: access.teamFeatures,
     },
   };

@@ -1,8 +1,8 @@
-// Please dont change logics here if not fully understoold 
+// Please dont change logics here if not fully understoold
 // Author: Abdulsamad A | agastronics@gmail.com
 
-interface OsqueryFlagsProps{
-    [key: string]: boolean | string | number | undefined;
+interface OsqueryFlagsProps {
+  [key: string]: boolean | string | number | undefined;
 }
 
 export const OSQUERY_ENTRY = ({
@@ -12,7 +12,7 @@ export const OSQUERY_ENTRY = ({
   safe,
   isCopy = false,
   platform,
-  flags
+  flags,
 }: {
   secret: string;
   teamName: string;
@@ -21,12 +21,12 @@ export const OSQUERY_ENTRY = ({
   isCopy?: boolean;
   platform: string;
   flags?: OsqueryFlagsProps;
-  }) => {
+}) => {
   const filePrefix = teamName.trim().replace(' ', '-').toLowerCase();
   const secretPath = `${filePrefix}_enroll_secret.txt`;
 
   const createSecretFile = `echo ${safe && !isCopy ? '*'.repeat(secret.length) : `'${secret}'`} > ${secretPath}`;
-  const agent = platform === 'windows' ? `osqueryd.exe` : `sudo osqueryd`
+  const agent = platform === 'windows' ? `osqueryd.exe` : `sudo osqueryd`;
 
   let osqueryCommand = `${createSecretFile} && ${agent} \
     --pidfile=/tmp/${filePrefix}-osquery.pid \
@@ -63,8 +63,7 @@ export const OSQUERY_ENTRY = ({
       if (value && !addedFlags.has(key)) {
         osqueryCommand += ` --${key}=${value}`;
         addedFlags.add(key);
-      }
-      else if (!value && !addedFlags.has(key)) {
+      } else if (!value && !addedFlags.has(key)) {
         osqueryCommand += ` --${key}`;
         addedFlags.add(key);
       }
@@ -74,9 +73,8 @@ export const OSQUERY_ENTRY = ({
   return osqueryCommand;
 };
 
-
 export const platformIcons = {
-  linux: "uim:linux",
-  windows: "uim:windows",
-  apple: "uim:apple",
+  linux: 'uim:linux',
+  windows: 'uim:windows',
+  apple: 'uim:apple',
 };

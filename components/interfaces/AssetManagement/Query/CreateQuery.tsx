@@ -1,33 +1,34 @@
-import React, { useRef, useState } from "react";
-import toast from "react-hot-toast";
-import dynamic from "next/dynamic";
-import { useTranslation } from "next-i18next";
-import { PLATFORMS } from "@/lib/fleet/constants";
-import { useCreateQuery } from "@/hooks/fleets/queries/useCreateQuery";
-import { useQueries } from "@/hooks/fleets/queries/useQueries";
-import PacksSelector from "../PacksSelector";
-import TagsSelector from "../TagsSelector";
+import React, { useRef, useState } from 'react';
+import toast from 'react-hot-toast';
+import dynamic from 'next/dynamic';
+import { useTranslation } from 'next-i18next';
+import { PLATFORMS } from '@/lib/fleet/constants';
+import { useCreateQuery } from '@/hooks/fleets/queries/useCreateQuery';
+import { useQueries } from '@/hooks/fleets/queries/useQueries';
+import PacksSelector from '../PacksSelector';
+import TagsSelector from '../TagsSelector';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from "@/components/shadcn/ui/dialog";
-import { Button } from "@/components/shadcn/ui/button";
-import { Input } from "@/components/shadcn/ui/input";
-import { Label } from "@/components/shadcn/ui/label";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/shadcn/ui/select";
-import { Checkbox } from "@/components/shadcn/ui/checkbox";
-import { useForm, Controller } from "react-hook-form";
-import { User } from "@/generated/client";
+} from '@/components/shadcn/ui/dialog';
+import { Button } from '@/components/shadcn/ui/button';
+import { Input } from '@/components/shadcn/ui/input';
+import { Label } from '@/components/shadcn/ui/label';
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from '@/components/shadcn/ui/select';
+import { Checkbox } from '@/components/shadcn/ui/checkbox';
+import { useForm, Controller } from 'react-hook-form';
+import { User } from '@/generated/client';
 
-const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
-
-interface Option {
-  label: string;
-  value: string;
-}
+const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
 interface FormData {
   name: string;
@@ -43,12 +44,12 @@ interface FormData {
   removed: boolean;
 }
 
-const DEFAULT_PLATFORM_VALUE = "all";
+const DEFAULT_PLATFORM_VALUE = 'all';
 
 export default function CreateQuery({
   visible,
   setVisible,
-  user,
+  user: _user,
   fleetTeamId,
 }: {
   visible: boolean;
@@ -56,7 +57,7 @@ export default function CreateQuery({
   user: Partial<User>;
   fleetTeamId: string;
 }) {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(['common', 'fleet']);
   const formRef = useRef<HTMLFormElement | null>(null);
   const [selectedPacks, setSelectedPacks] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -73,16 +74,16 @@ export default function CreateQuery({
     reset,
   } = useForm<FormData>({
     defaultValues: {
-      name: "",
-      sql: "",
+      name: '',
+      sql: '',
       interval: 0,
       platform: DEFAULT_PLATFORM_VALUE,
-      version: "",
-      value: "",
+      version: '',
+      value: '',
       packs: [],
-      tags: "",
+      tags: '',
       shard: 1,
-      description: "",
+      description: '',
       removed: false,
     },
   });
@@ -93,47 +94,49 @@ export default function CreateQuery({
         ...data,
         platform: data.platform,
         packs: selectedPacks,
-        tags: selectedTags.join(","),
+        tags: selectedTags.join(','),
         removed,
       });
-      toast.success(t("success"));
+      toast.success(t('success'));
       mutateQueries();
       setVisible(false);
       reset();
-    } catch (err) {
-      toast.error(t("error"));
+    } catch {
+      toast.error(t('error'));
     }
   };
 
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
-      <DialogContent
-        className="max-w-2xl max-h-[90vh] overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground/30"
-      >
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground/30">
         <DialogHeader>
-          <DialogTitle>Create Query</DialogTitle>
+          <DialogTitle>{t('fleet:fleet-create-query')}</DialogTitle>
         </DialogHeader>
 
-        <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form
+          ref={formRef}
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-4"
+        >
           <div>
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" {...register("name", { required: true })} />
+            <Label htmlFor="name">{t('name')}</Label>
+            <Input id="name" {...register('name', { required: true })} />
           </div>
 
           <div>
-            <Label htmlFor="sql">SQL Code</Label>
-            <Input id="sql" {...register("sql", { required: true })} />
+            <Label htmlFor="sql">{t('fleet:fleet-sql-code')}</Label>
+            <Input id="sql" {...register('sql', { required: true })} />
           </div>
 
           <div>
-            <Label>Platform</Label>
+            <Label>{t('platform')}</Label>
             <Controller
               control={control}
               name="platform"
               render={({ field }) => (
                 <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select platform" />
+                    <SelectValue placeholder={t('select-platform')} />
                   </SelectTrigger>
                   <SelectContent>
                     {PLATFORMS.map((platform) => (
@@ -149,41 +152,51 @@ export default function CreateQuery({
 
           <div className="grid grid-cols-2 gap-2">
             <div>
-              <Label htmlFor="version">Version</Label>
-              <Input id="version" {...register("version", { required: true })} />
+              <Label htmlFor="version">{t('version')}</Label>
+              <Input
+                id="version"
+                {...register('version', { required: true })}
+              />
             </div>
             <div>
-              <Label htmlFor="shard">Shard</Label>
+              <Label htmlFor="shard">{t('fleet:fleet-shard')}</Label>
               <Input
                 id="shard"
                 type="number"
-                {...register("shard", { required: true, valueAsNumber: true })}
+                {...register('shard', { required: true, valueAsNumber: true })}
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-2">
             <div>
-              <Label htmlFor="interval">Interval</Label>
+              <Label htmlFor="interval">{t('interval')}</Label>
               <Input
                 id="interval"
                 type="number"
-                {...register("interval", { required: true, valueAsNumber: true })}
+                {...register('interval', {
+                  required: true,
+                  valueAsNumber: true,
+                })}
               />
             </div>
             <div>
-              <Label htmlFor="value">Value</Label>
-              <Input id="value" {...register("value", { required: true })} />
+              <Label htmlFor="value">{t('value')}</Label>
+              <Input id="value" {...register('value', { required: true })} />
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <Checkbox id="removed" checked={removed} onCheckedChange={() => setRemoved(!removed)} />
-            <Label htmlFor="removed">Removed</Label>
+            <Checkbox
+              id="removed"
+              checked={removed}
+              onCheckedChange={() => setRemoved(!removed)}
+            />
+            <Label htmlFor="removed">{t('removed')}</Label>
           </div>
 
           <div>
-            <Label>Description</Label>
+            <Label>{t('description')}</Label>
             <Controller
               name="description"
               control={control}
@@ -192,18 +205,30 @@ export default function CreateQuery({
           </div>
 
           <div>
-            <Label>Assign Packs</Label>
-            <PacksSelector fleetTeamId={fleetTeamId} setSectionPack={setSelectedPacks} onSelect={() => {}} />
+            <Label>{t('fleet:fleet-assign-packs')}</Label>
+            <PacksSelector
+              fleetTeamId={fleetTeamId}
+              setSectionPack={setSelectedPacks}
+              onSelect={() => {}}
+            />
           </div>
 
           <div>
-            <Label>Tags</Label>
-            <TagsSelector fleetTeamId={fleetTeamId} setSectionTag={setSelectedTags} onSelect={() => {}} />
+            <Label>{t('tags')}</Label>
+            <TagsSelector
+              fleetTeamId={fleetTeamId}
+              setSectionTag={setSelectedTags}
+              onSelect={() => {}}
+            />
           </div>
 
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => setVisible(false)}>
-              {t("close")}
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setVisible(false)}
+            >
+              {t('close')}
             </Button>
             <Button type="submit" disabled={isSubmitting}>
               {isSubmitting ? t('creating') : t('create')}

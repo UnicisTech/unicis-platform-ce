@@ -3,14 +3,12 @@ import {
   Cog6ToothIcon,
   TagIcon,
   CodeBracketSquareIcon,
-  DocumentCheckIcon,
 } from '@heroicons/react/24/outline';
 import type { Team } from '@/generated/client';
 import classNames from 'classnames';
 import Link from 'next/link';
 import useCanAccess from 'hooks/useCanAccess';
 import { TeamFeature } from 'types';
-
 
 interface AssetTabProps {
   activeTab: string;
@@ -19,10 +17,15 @@ interface AssetTabProps {
   teamFeatures: TeamFeature;
 }
 
-const AssetTab = ({ activeTab, team, heading, teamFeatures }: AssetTabProps) => {
+const AssetTab = ({
+  activeTab,
+  team,
+  heading: _heading,
+  teamFeatures,
+}: AssetTabProps) => {
   const { canAccess } = useCanAccess(team.slug);
 
-  console.log("teamFeatures", teamFeatures)
+  console.log('teamFeatures', teamFeatures);
 
   const navigations = [
     {
@@ -33,9 +36,7 @@ const AssetTab = ({ activeTab, team, heading, teamFeatures }: AssetTabProps) => 
     },
   ];
 
-  if (
-    canAccess('team_fleet_tag', ['create', 'update', 'read', 'delete'])
-  ) {
+  if (canAccess('team_fleet_tag', ['create', 'update', 'read', 'delete'])) {
     navigations.push({
       name: 'Tags',
       href: `/teams/${team.slug}/asset-management/tags`,
@@ -44,9 +45,7 @@ const AssetTab = ({ activeTab, team, heading, teamFeatures }: AssetTabProps) => 
     });
   }
 
-  if (
-    canAccess('team_fleet_query', ['create', 'update', 'read', 'delete'])
-  ) {
+  if (canAccess('team_fleet_query', ['create', 'update', 'read', 'delete'])) {
     navigations.push({
       name: 'Queries',
       href: `/teams/${team.slug}/asset-management/queries`,
@@ -55,9 +54,7 @@ const AssetTab = ({ activeTab, team, heading, teamFeatures }: AssetTabProps) => 
     });
   }
 
-  if (
-    canAccess('team_fleet_pack', ['create', 'update', 'read', 'delete'])
-  ) {
+  if (canAccess('team_fleet_pack', ['create', 'update', 'read', 'delete'])) {
     navigations.push({
       name: 'Packs',
       href: `/teams/${team.slug}/asset-management/packs`,
@@ -66,9 +63,7 @@ const AssetTab = ({ activeTab, team, heading, teamFeatures }: AssetTabProps) => 
     });
   }
 
-  if (
-    canAccess('team_fleet_query', ['create', 'update', 'read', 'delete'])
-  ) {
+  if (canAccess('team_fleet_query', ['create', 'update', 'read', 'delete'])) {
     navigations.push({
       name: 'Distributors',
       href: `/teams/${team.slug}/asset-management/distributors`,

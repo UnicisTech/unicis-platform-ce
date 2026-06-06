@@ -26,14 +26,14 @@ export const fleetAuthAPIHeaders = async () => {
   // const { ufa } = await useUFA();
   // console.log('UFA: ', ufa);
 
-  console.log("[fleetAuthAPIHeaders] token from cookie:", token)
-  console.log("[fleetAuthAPIHeaders] token length:", token?.length)
+  console.log('[fleetAuthAPIHeaders] token from cookie:', token);
+  console.log('[fleetAuthAPIHeaders] token length:', token?.length);
 
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
     'Unicis-Fleet-API-Authorization': `UnicisBearer ${token}`,
     // 'Unicis-Fleet-API-UFA': `UnicisBearer ${ufa}`
-  }
+  };
 
   return headers;
 };
@@ -83,7 +83,6 @@ export const passwordPolicies = {
   minLength: 8,
   fleetMinLength: 11,
 };
-
 
 export const validatePassword = (password: string): boolean => {
   // Password should be at least 8 characters long

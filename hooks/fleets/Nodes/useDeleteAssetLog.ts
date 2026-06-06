@@ -1,16 +1,23 @@
-import { fleetAuthAPIHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
+import { fleetAuthAPIHeaders } from '@/lib/common';
+import { fleetV1 } from '@/lib/fleet/apiBase';
 
 export const useDeleteAssetLog = () => {
-  const deleteAssetLog = async (fleetTeamId: string, nodeId: string, logId: string) => {
+  const deleteAssetLog = async (
+    fleetTeamId: string,
+    nodeId: string,
+    logId: string
+  ) => {
     try {
-      const response = await fleetV1(`/manager/${fleetTeamId}/node/${nodeId}/delete/log/${logId}`, {
-        method: 'DELETE',
-        headers: await fleetAuthAPIHeaders(),
-      });
+      const response = await fleetV1(
+        `/manager/${fleetTeamId}/node/${nodeId}/delete/log/${logId}`,
+        {
+          method: 'DELETE',
+          headers: await fleetAuthAPIHeaders(),
+        }
+      );
 
       if (!response.ok) {
-        const data = await response.json();
+        await response.json();
       }
 
       return response.json();

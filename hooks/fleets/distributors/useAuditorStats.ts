@@ -1,5 +1,5 @@
-import fleetFetcher from "@/lib/fleet/fleetFetcher";
-import useSWR from "swr";
+import fleetFetcher from '@/lib/fleet/fleetFetcher';
+import useSWR from 'swr';
 
 export interface AuditorStats {
   total_nodes: number;
@@ -16,16 +16,15 @@ export interface AuditorStats {
 
 export const useAuditorStats = (teamId: string) => {
   const url = `/manager/${teamId}/analysis/auditor-stats`;
-  const { data, error, isLoading } = useSWR<AuditorStats>(
-    url,
-    fleetFetcher,
-    {
-      shouldRetryOnError: false,
-      onError: (err) => {
-        console.log('[useAuditorStats] Error fetching auditor stats:', err.message);
-      }
-    }
-  );
+  const { data, error, isLoading } = useSWR<AuditorStats>(url, fleetFetcher, {
+    shouldRetryOnError: false,
+    onError: (err) => {
+      console.log(
+        '[useAuditorStats] Error fetching auditor stats:',
+        err.message
+      );
+    },
+  });
 
   return {
     auditorStats: data,

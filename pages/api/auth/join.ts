@@ -127,7 +127,6 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       name: team!,
       slug,
     });
-
   }
 
   console.log('[api/auth/join] team created');

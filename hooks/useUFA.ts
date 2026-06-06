@@ -1,11 +1,9 @@
-
 const useUFA = () => {
   const ufa = async (): Promise<string> => {
-
     try {
-      const response = await fetch("/api/ufa-sync", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/ufa-sync', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
       });
 
       if (!response.ok) {
@@ -15,7 +13,7 @@ const useUFA = () => {
       const data = await response.json();
       console.log(data);
       return data.token;
-    } catch (error) {
+    } catch {
       return '';
     }
   };
@@ -24,6 +22,5 @@ const useUFA = () => {
     ufa,
   };
 };
-
 
 export default useUFA;

@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
-import { fleetV1 } from '@/lib/fleet/apiBase';
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,7 +16,12 @@ export default async function handler(
     fleetPassword?: string;
   };
 
-  console.log('[EnrollComplete] Request received:', { token: !!token, email, teamId, hasPassword: !!fleetPassword });
+  console.log('[EnrollComplete] Request received:', {
+    token: !!token,
+    email,
+    teamId,
+    hasPassword: !!fleetPassword,
+  });
 
   // Support both token-based (from email link) and email+teamId (from direct login)
   if (!token && (!email || !teamId)) {
@@ -48,7 +52,12 @@ export default async function handler(
       console.log('[EnrollComplete] Token not found');
       return res.status(404).json({ error: 'TOKEN_NOT_FOUND' });
     }
-    console.log('[EnrollComplete] Enrollment found by token for user:', enrollment.user.email, 'status:', enrollment.status);
+    console.log(
+      '[EnrollComplete] Enrollment found by token for user:',
+      enrollment.user.email,
+      'status:',
+      enrollment.status
+    );
   } else {
     // Find by email + teamId (direct login after password change)
     console.log('[EnrollComplete] Looking up user by email:', email);
@@ -62,7 +71,12 @@ export default async function handler(
       return res.status(404).json({ error: 'USER_NOT_FOUND' });
     }
 
-    console.log('[EnrollComplete] User found, looking up enrollment for userId:', user.id, 'teamId:', teamId);
+    console.log(
+      '[EnrollComplete] User found, looking up enrollment for userId:',
+      user.id,
+      'teamId:',
+      teamId
+    );
     enrollment = await prisma.fleetEnrollment.findUnique({
       where: {
         teamId_userId: {
@@ -83,10 +97,20 @@ export default async function handler(
     });
 
     if (!enrollment) {
-      console.log('[EnrollComplete] No enrollment found for userId:', user.id, 'teamId:', teamId);
+      console.log(
+        '[EnrollComplete] No enrollment found for userId:',
+        user.id,
+        'teamId:',
+        teamId
+      );
       return res.status(404).json({ error: 'ENROLLMENT_NOT_FOUND' });
     }
-    console.log('[EnrollComplete] Enrollment found by email+teamId for user:', enrollment.user.email, 'status:', enrollment.status);
+    console.log(
+      '[EnrollComplete] Enrollment found by email+teamId for user:',
+      enrollment.user.email,
+      'status:',
+      enrollment.status
+    );
   }
 
   if (!enrollment) {
@@ -95,21 +119,29 @@ export default async function handler(
 
   // Якщо вже COMPLETED - просто повертаємо success
   if (enrollment.status === 'COMPLETED') {
-    console.log('[EnrollComplete] Enrollment already completed for:', enrollment.user.email);
+    console.log(
+      '[EnrollComplete] Enrollment already completed for:',
+      enrollment.user.email
+    );
     return res.status(200).json({ success: true, alreadyCompleted: true });
   }
 
   // Перевірка expiration - але дозволяємо completion навіть якщо expired
   // оскільки користувач успішно авторизувався з правильним паролем
   if (enrollment.expiresAt <= new Date()) {
-    console.log('[EnrollComplete] Enrollment expired but allowing completion since user authenticated');
+    console.log(
+      '[EnrollComplete] Enrollment expired but allowing completion since user authenticated'
+    );
   }
 
   // This endpoint should not create the account - it was already created by /api/fleet/enroll
   // This endpoint is only called to complete the enrollment after user changes password
   // The account and team membership were already set up in /api/fleet/enroll
 
-  console.log('[EnrollComplete] Updating enrollment status to COMPLETED for:', enrollment.user.email);
+  console.log(
+    '[EnrollComplete] Updating enrollment status to COMPLETED for:',
+    enrollment.user.email
+  );
   await prisma.fleetEnrollment.update({
     where: { id: enrollment.id },
     data: { status: 'COMPLETED' },
@@ -138,14 +170,20 @@ export default async function handler(
 
         if (fleetToken) {
           // Order secret
-          await fetch(`${fleetBase}/api/v1/fleet/teams/${enrollment.teamId}/secret`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Unicis-Fleet-API-Authorization': `UnicisBearer ${fleetToken}`,
-            },
-          });
-          console.log('[EnrollComplete] Fleet secret ordered for user:', enrollment.user.email);
+          await fetch(
+            `${fleetBase}/api/v1/fleet/teams/${enrollment.teamId}/secret`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Unicis-Fleet-API-Authorization': `UnicisBearer ${fleetToken}`,
+              },
+            }
+          );
+          console.log(
+            '[EnrollComplete] Fleet secret ordered for user:',
+            enrollment.user.email
+          );
         }
       }
     } catch (error) {

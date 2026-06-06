@@ -1,16 +1,19 @@
-import { fleetAuthAPIHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
+import { fleetAuthAPIHeaders } from '@/lib/common';
+import { fleetV1 } from '@/lib/fleet/apiBase';
 
 export const useDeletePack = () => {
   const deletePack = async (fleetTeamId: string, packId: string) => {
     try {
-      const response = await fleetV1(`/manager/${fleetTeamId}/pack/${packId}/delete`, {
-        method: 'DELETE',
-        headers: await fleetAuthAPIHeaders(),
-      });
+      const response = await fleetV1(
+        `/manager/${fleetTeamId}/pack/${packId}/delete`,
+        {
+          method: 'DELETE',
+          headers: await fleetAuthAPIHeaders(),
+        }
+      );
 
       if (!response.ok) {
-        const data = await response.json();
+        await response.json();
       }
 
       return response.json();

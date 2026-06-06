@@ -1,5 +1,3 @@
-
-
 export const packNavigations = (activeTab: string) => {
   return [
     {
@@ -9,6 +7,6 @@ export const packNavigations = (activeTab: string) => {
     {
       name: 'Results',
       active: activeTab === 'Results',
-    }
+    },
   ];
 };

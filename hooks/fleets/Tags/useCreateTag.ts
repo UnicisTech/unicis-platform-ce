@@ -1,6 +1,5 @@
-import { fleetAuthAPIHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
-
+import { fleetAuthAPIHeaders } from '@/lib/common';
+import { fleetV1 } from '@/lib/fleet/apiBase';
 
 export const useCreateTag = () => {
   const createTag = async (fleetTeamId: string, data) => {
@@ -12,7 +11,7 @@ export const useCreateTag = () => {
       });
 
       if (!response.ok) {
-        const data = await response.json();
+        await response.json();
       }
 
       return response.json();

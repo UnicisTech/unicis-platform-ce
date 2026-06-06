@@ -8,13 +8,12 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { getTeam } from '@/models/team';
 import { isTeamHasSubscription } from '@/models/subscription';
 
-
 const TeamAssetDashboard = ({
-  slug,
+  slug: _slug,
   user,
   team,
-  teamFeatures,
-  teamSubscription
+  teamFeatures: _teamFeatures,
+  teamSubscription: _teamSubscription,
 }) => {
   const { t } = useTranslation(['common', 'fleet']);
 
@@ -62,7 +61,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common', 'fleet']) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, ['common', 'fleet'])
+        : {}),
       teamFeatures: env.teamFeatures,
       team: JSON.parse(JSON.stringify(team)),
       teamSubscription: JSON.parse(JSON.stringify(teamSubscription)),

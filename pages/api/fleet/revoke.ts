@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "@/lib/session";
-import { prisma } from "@/lib/prisma";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { getSession } from '@/lib/session';
+import { prisma } from '@/lib/prisma';
 
 /**
  * Revoke Fleet access for a user
@@ -12,8 +12,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
@@ -21,7 +21,7 @@ export default async function handler(
     const currentUserId = session?.user?.id;
 
     if (!currentUserId) {
-      return res.status(401).json({ error: "Unauthorized" });
+      return res.status(401).json({ error: 'Unauthorized' });
     }
 
     const { userId, teamId } = req.body as {
@@ -30,7 +30,7 @@ export default async function handler(
     };
 
     if (!userId || !teamId) {
-      return res.status(400).json({ error: "userId and teamId are required" });
+      return res.status(400).json({ error: 'userId and teamId are required' });
     }
 
     // Verify current user has permission to revoke access (must be admin/owner)
@@ -38,12 +38,12 @@ export default async function handler(
       where: {
         teamId,
         userId: currentUserId,
-        role: { in: ["OWNER", "ADMIN"] },
+        role: { in: ['OWNER', 'ADMIN'] },
       },
     });
 
     if (!currentUserMember) {
-      return res.status(403).json({ error: "Insufficient permissions" });
+      return res.status(403).json({ error: 'Insufficient permissions' });
     }
 
     // Get user info for Fleet calls
@@ -53,15 +53,15 @@ export default async function handler(
     });
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ error: 'User not found' });
     }
 
     const fleetBase = process.env.FLEET_API_URL;
     const fleetServiceToken = process.env.FLEET_SERVICE_TOKEN;
 
     if (!fleetBase || !fleetServiceToken) {
-      console.error("[RevokeFleet] Fleet configuration missing");
-      return res.status(500).json({ error: "FLEET_NOT_CONFIGURED" });
+      console.error('[RevokeFleet] Fleet configuration missing');
+      return res.status(500).json({ error: 'FLEET_NOT_CONFIGURED' });
     }
 
     // 1. Delete enrollment record from Platform
@@ -80,9 +80,9 @@ export default async function handler(
       const membersRes = await fetch(
         `${fleetBase}/api/v1/team/${teamId}/member`,
         {
-          method: "GET",
+          method: 'GET',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${fleetServiceToken}`,
           },
         }
@@ -94,21 +94,18 @@ export default async function handler(
 
         if (member) {
           // Delete team member
-          await fetch(
-            `${fleetBase}/api/v1/team/members/${member.id}`,
-            {
-              method: "DELETE",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${fleetServiceToken}`,
-              },
-            }
-          );
+          await fetch(`${fleetBase}/api/v1/team/members/${member.id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${fleetServiceToken}`,
+            },
+          });
           console.log(`[RevokeFleet] Removed user from Fleet team`);
         }
       }
     } catch (error) {
-      console.error("[RevokeFleet] Failed to remove from Fleet team:", error);
+      console.error('[RevokeFleet] Failed to remove from Fleet team:', error);
       // Continue even if this fails
     }
 
@@ -117,12 +114,12 @@ export default async function handler(
 
     return res.status(200).json({
       success: true,
-      message: "Fleet access revoked",
+      message: 'Fleet access revoked',
     });
   } catch (err) {
-    console.error("[RevokeFleet] Unhandled error:", err);
+    console.error('[RevokeFleet] Unhandled error:', err);
     return res.status(500).json({
-      error: "Internal server error",
+      error: 'Internal server error',
       message: err instanceof Error ? err.message : String(err),
     });
   }

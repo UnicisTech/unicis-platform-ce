@@ -228,11 +228,11 @@ export const authOptions: NextAuthOptions = {
       }
 
       if (user) {
-        token.sub = user.id; // Dont remove I used this to sync auth with fleet api 
+        token.sub = user.id; // Dont remove I used this to sync auth with fleet api
       }
 
       if (account && account.access_token) {
-        token.accessToken = account.access_token
+        token.accessToken = account.access_token;
       }
 
       return { ...token, ...user };

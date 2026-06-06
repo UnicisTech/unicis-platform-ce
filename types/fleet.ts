@@ -1,4 +1,3 @@
-
 export interface FleetBase {
   id: string;
   updated_at: string;
@@ -22,7 +21,6 @@ export interface FleetTeam {
   ca_certificate: any;
   ca_private_key: any;
 }
-
 
 export interface FleetMember {
   id: string;
@@ -103,7 +101,7 @@ export interface Tag extends FleetBase {
   nodes_count: number;
   queries_count: number;
   file_paths_count: number;
-};
+}
 
 export interface Query extends FleetBase {
   team: FleetTeam;
@@ -118,14 +116,14 @@ export interface Query extends FleetBase {
   tags?: Tag[];
   removed: boolean;
   shard: number;
-};
+}
 
 export interface PackWithRelationships extends Pack {
   queries: Query[];
-  tags: Tag[]
+  tags: Tag[];
 }
 
-export interface Node extends FleetBase{
+export interface Node extends FleetBase {
   team: FleetTeam;
   owner: FleetMember;
   node_key: string;
@@ -140,7 +138,7 @@ export interface Node extends FleetBase{
 
 export interface NodesResponse {
   nodes: Node[];
-};
+}
 
 export interface NodeWithRelationships extends Node {
   tags: Tag[];
@@ -153,7 +151,7 @@ export interface NodesWithRelationshipsResponse {
   nodes: NodeWithRelationships[];
 }
 
-export interface DistributedQuery extends FleetBase{
+export interface DistributedQuery extends FleetBase {
   team: FleetTeam;
   sql: string;
   description?: string;
@@ -264,16 +262,15 @@ export interface DistributedQueryResult {
   query: Query;
   results: Array<Record<string, any>>; /// This returns results columes only no extral References
   status: string;
-  tasks: Task[];
+  tasks: DistributedQueryResultTask[];
 }
 
-export interface Task extends FleetBase {
+export interface DistributedQueryResultTask extends FleetBase {
   distributed_query: DistributedQuery;
   guid: string;
   node: Node;
   results: Result[];
 }
-
 
 // NODE INFOMATION
 

@@ -98,6 +98,7 @@ export type AppEvent =
   | 'user.updated'
   | 'user.signup'
   | 'user.password.reset'
+  | 'user.fleet_password.reset'
   | 'team.fetched'
   | 'team.created'
   | 'team.updated'

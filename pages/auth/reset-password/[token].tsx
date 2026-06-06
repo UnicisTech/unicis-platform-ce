@@ -10,20 +10,24 @@ interface ResetPasswordPageProps {
   resetType: 'platform' | 'fleet';
 }
 
-const ResetPasswordPage: NextPageWithLayout<ResetPasswordPageProps> = ({ resetType }) => {
+const ResetPasswordPage: NextPageWithLayout<ResetPasswordPageProps> = ({
+  resetType,
+}) => {
   return <ResetPasswordForm resetType={resetType} />;
 };
 
 ResetPasswordPage.getLayout = function getLayout(page: ReactElement) {
   const resetType = (page.props as ResetPasswordPageProps).resetType;
 
-  const heading = resetType === 'fleet'
-    ? 'Reset Asset Management Password'
-    : 'Reset Password';
+  const heading =
+    resetType === 'fleet'
+      ? 'Reset Asset Management Password'
+      : 'Reset Password';
 
-  const description = resetType === 'fleet'
-    ? 'Enter your new Asset Management password'
-    : 'Enter your new password';
+  const description =
+    resetType === 'fleet'
+      ? 'Enter your new Asset Management password'
+      : 'Enter your new password';
 
   return (
     <AuthLayout heading={heading} description={description}>

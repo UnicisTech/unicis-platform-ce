@@ -1,7 +1,7 @@
-import { fleetAuthAPIHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
-import { FleetAccess } from "@/types/fleet";
-import { useEffect, useState } from "react";
+import { fleetAuthAPIHeaders } from '@/lib/common';
+import { fleetV1 } from '@/lib/fleet/apiBase';
+import { FleetAccess } from '@/types/fleet';
+import { useEffect, useState } from 'react';
 
 export const useVerifyFleetAsses = () => {
   const [access, setAccess] = useState<FleetAccess>();
@@ -20,13 +20,13 @@ export const useVerifyFleetAsses = () => {
         });
 
         if (!response.ok) {
-          const data = await response.json();
+          await response.json();
         }
 
         const data: FleetAccess = await response.json();
-        console.log("data", data)
+        console.log('data', data);
         setAccess(data);
-      } catch (err) {
+      } catch {
         setError('An unexpecte derror occurred.');
       } finally {
         setLoading(false);

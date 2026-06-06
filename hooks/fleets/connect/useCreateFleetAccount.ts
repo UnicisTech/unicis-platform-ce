@@ -1,14 +1,25 @@
-import { defaultHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
-
+import { defaultHeaders } from '@/lib/common';
+import { fleetV1 } from '@/lib/fleet/apiBase';
 
 export const useCreateFleetAccount = () => {
-  const createFleetAccount = async (id: string, email: string, firstName: string, lastName: string, password: string) => {
+  const createFleetAccount = async (
+    id: string,
+    email: string,
+    firstName: string,
+    lastName: string,
+    password: string
+  ) => {
     try {
       await fleetV1(`/account/create`, {
         method: 'POST',
         headers: defaultHeaders,
-        body: JSON.stringify({ id, email, firstname: firstName, lastname: lastName, password }),
+        body: JSON.stringify({
+          id,
+          email,
+          firstname: firstName,
+          lastname: lastName,
+          password,
+        }),
       });
     } catch (err) {
       if (err instanceof Error) {

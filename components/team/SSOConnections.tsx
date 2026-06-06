@@ -624,6 +624,7 @@ function ConnectionDialog({
   const currentConnection = connectionDetails?.[0] ?? connection;
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setConnectionKind(kind);
   }, [kind]);
 
@@ -801,6 +802,7 @@ function SAMLConnectionForm({
   const [values, setValues] = useState(initialValues);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setValues(initialValues);
   }, [initialValues]);
 
@@ -917,6 +919,7 @@ function OIDCConnectionForm({
   const [values, setValues] = useState(initialValues);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setValues(initialValues);
   }, [initialValues]);
 

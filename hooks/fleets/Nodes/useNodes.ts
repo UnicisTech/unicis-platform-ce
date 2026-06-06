@@ -1,9 +1,12 @@
-import fleetFetcher from "@/lib/fleet/fleetFetcher";
-import { NodesResponse } from "@/types/fleet";
-import useSWR, { mutate } from "swr";
+import fleetFetcher from '@/lib/fleet/fleetFetcher';
+import { NodesResponse } from '@/types/fleet';
+import useSWR, { mutate } from 'swr';
 
-export const useNodes = (teamId: string, status?: string, options?: { skip?: boolean }) => {
-
+export const useNodes = (
+  teamId: string,
+  status?: string,
+  options?: { skip?: boolean }
+) => {
   let url = `/manager/${teamId}/nodes`;
 
   if (status && status !== 'all') {
@@ -17,7 +20,7 @@ export const useNodes = (teamId: string, status?: string, options?: { skip?: boo
     {
       onError: (err) => {
         console.error('[useNodes] Error fetching nodes:', err);
-      }
+      },
     }
   );
 
@@ -29,6 +32,6 @@ export const useNodes = (teamId: string, status?: string, options?: { skip?: boo
     nodes: data?.nodes,
     isLoading: isLoading,
     isError: error,
-    mutateNodes
+    mutateNodes,
   };
 };

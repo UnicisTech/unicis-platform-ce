@@ -1,10 +1,11 @@
-
 const FormattedDate = ({ dateString, style }) => {
   const formatDate = (dateStr) => {
     // Check if the input is a Unix timestamp (number or a string of digits)
     const isUnixTimestamp = /^\d+$/.test(dateStr);
 
-    const date = isUnixTimestamp ? new Date(parseInt(dateStr) * 1000) : new Date(dateStr);
+    const date = isUnixTimestamp
+      ? new Date(parseInt(dateStr) * 1000)
+      : new Date(dateStr);
 
     const options = {
       year: 'numeric' as const,
@@ -19,9 +20,7 @@ const FormattedDate = ({ dateString, style }) => {
     return new Intl.DateTimeFormat('en-US', options).format(date);
   };
 
-  return (
-    <div className={`${style}`}>{formatDate(dateString)}</div>
-  );
+  return <div className={`${style}`}>{formatDate(dateString)}</div>;
 };
 
 export default FormattedDate;

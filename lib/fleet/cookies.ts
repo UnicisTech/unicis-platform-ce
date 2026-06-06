@@ -1,7 +1,6 @@
 export const fleetAccessTokenCookieName = 'unicis-fleet-access-token';
 
-export const legacyFleetAccessTokenCookieName =
-  'unicis-fleet-access-token';
+export const legacyFleetAccessTokenCookieName = 'unicis-fleet-access-token';
 
 export const fleetAccessTokenCookieOptions = {
   sameSite: 'strict',

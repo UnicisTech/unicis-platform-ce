@@ -1,19 +1,26 @@
-import { useDistributorAnalysis, useDistributorResultAnalysis } from "@/hooks/fleets/distributors/useAnalysis";
-import { useAuditorStats } from "@/hooks/fleets/distributors/useAuditorStats";
-import { useEffect } from "react";
+import {
+  useDistributorAnalysis,
+  useDistributorResultAnalysis,
+} from '@/hooks/fleets/distributors/useAnalysis';
+import { useAuditorStats } from '@/hooks/fleets/distributors/useAuditorStats';
+import { useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 
-const AssetTaskAnalysis = ({ teamId, isAuditor }: { teamId: string, isAuditor?: boolean }) => {
+const AssetTaskAnalysis = ({
+  teamId,
+  isAuditor,
+}: {
+  teamId: string;
+  isAuditor?: boolean;
+}) => {
   const { auditorStats } = useAuditorStats(teamId);
   const {
     distributorsAnalysis,
-    isLoading: analysisLoading,
     isError: analysisError,
     mutateDistributorAnalysis,
   } = useDistributorAnalysis(teamId);
   const {
     distributorsResultAnalysis,
-    isLoading,
     isError,
     mutateDistributorResultAnalysis,
   } = useDistributorResultAnalysis(teamId);
@@ -35,7 +42,10 @@ const AssetTaskAnalysis = ({ teamId, isAuditor }: { teamId: string, isAuditor?: 
       { label: t('completed-query-task'), value: auditorStats.completed_tasks },
       { label: t('failed-query-task'), value: auditorStats.failed_tasks },
       { label: t('total-query-task'), value: auditorStats.total_tasks },
-      { label: t('total-query-result'), value: auditorStats.total_query_results },
+      {
+        label: t('total-query-result'),
+        value: auditorStats.total_query_results,
+      },
     ];
 
     return (
@@ -73,12 +83,30 @@ const AssetTaskAnalysis = ({ teamId, isAuditor }: { teamId: string, isAuditor?: 
   }
 
   const boxes = [
-    { label: t('new-query-task'), value: distributorsAnalysis?.new_queries_task },
-    { label: t('pending-query-task'), value: distributorsAnalysis?.pending_queries_task },
-    { label: t('completed-query-task'), value: distributorsAnalysis?.completed_queries_task },
-    { label: t('failed-query-task'), value: distributorsAnalysis?.failed_queries_task },
-    { label: t('total-query-task'), value: distributorsAnalysis?.total_queries_task },
-    { label: t('total-query-result'), value: distributorsResultAnalysis?.total_queries_result },
+    {
+      label: t('new-query-task'),
+      value: distributorsAnalysis?.new_queries_task,
+    },
+    {
+      label: t('pending-query-task'),
+      value: distributorsAnalysis?.pending_queries_task,
+    },
+    {
+      label: t('completed-query-task'),
+      value: distributorsAnalysis?.completed_queries_task,
+    },
+    {
+      label: t('failed-query-task'),
+      value: distributorsAnalysis?.failed_queries_task,
+    },
+    {
+      label: t('total-query-task'),
+      value: distributorsAnalysis?.total_queries_task,
+    },
+    {
+      label: t('total-query-result'),
+      value: distributorsResultAnalysis?.total_queries_result,
+    },
   ];
 
   return (

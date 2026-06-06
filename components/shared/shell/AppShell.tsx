@@ -7,7 +7,6 @@ import Drawer from './Drawer';
 
 import AiChat from './AiChat';
 
-
 export default function AppShell({ children }) {
   const { t } = useTranslation('common');
   const { data, status } = useSession();

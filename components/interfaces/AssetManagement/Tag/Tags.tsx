@@ -1,27 +1,26 @@
-import { useState } from "react";
-import Link from "next/link";
-import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
-import { Button } from "@/components/shadcn/ui/button";
+import { useState } from 'react';
+import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import { Button } from '@/components/shadcn/ui/button';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/shadcn/ui/table";
-import { Error, Loading, WithLoadingAndError } from "@/components/shared";
-import useCanAccess from "hooks/useCanAccess";
-import type { Team, User } from "@/generated/client";
-import FleetStatus from "../Fleet/FleetStatus";
-import CreateTag from "./CreateTag";
-import DeleteTag from "./DeleteTag";
-import EditTag from "./EditTag";
-import FormattedDate from "@/components/shared/Date";
-import { useTags } from "@/hooks/fleets/Tags/useTags";
-import { Tag } from "@/types";
+} from '@/components/shadcn/ui/table';
+import { Loading, WithLoadingAndError } from '@/components/shared';
+import useCanAccess from 'hooks/useCanAccess';
+import type { Team, User } from '@/generated/client';
+import FleetStatus from '../Fleet/FleetStatus';
+import CreateTag from './CreateTag';
+import DeleteTag from './DeleteTag';
+import EditTag from './EditTag';
+import FormattedDate from '@/components/shared/Date';
+import { useTags } from '@/hooks/fleets/Tags/useTags';
+import { Tag } from '@/types';
 
 const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
   const router = useRouter();
@@ -51,16 +50,16 @@ const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
           <div className="flex justify-between items-center">
             <div>
               <h2 className="text-xl font-semibold leading-none tracking-tight">
-                {t("fleet:fleet-all-tags")}
+                {t('fleet:fleet-all-tags')}
               </h2>
               <p className="text-sm text-muted-foreground">
-                {t("fleet:fleet-tag-listed")}
+                {t('fleet:fleet-tag-listed')}
               </p>
             </div>
 
-            {canAccess("team_fleet_tag", ["create"]) && (
+            {canAccess('team_fleet_tag', ['create']) && (
               <Button size="sm" onClick={() => setVisible(true)}>
-                {t("create")}
+                {t('create')}
               </Button>
             )}
           </div>
@@ -70,10 +69,10 @@ const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>{t("tag")}</TableHead>
-                  <TableHead>{t("created-at")}</TableHead>
-                  <TableHead>{t("analysis")}</TableHead>
-                  <TableHead className="text-right">{t("actions")}</TableHead>
+                  <TableHead>{t('tag')}</TableHead>
+                  <TableHead>{t('created-at')}</TableHead>
+                  <TableHead>{t('analysis')}</TableHead>
+                  <TableHead className="text-right">{t('actions')}</TableHead>
                 </TableRow>
               </TableHeader>
 
@@ -100,19 +99,27 @@ const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
                       <TableCell>
                         <div className="grid grid-cols-4 gap-1 text-[10px] font-semibold">
                           <div>
-                            <p className="text-[10px] text-muted-foreground">assets</p>
+                            <p className="text-[10px] text-muted-foreground">
+                              {t('fleet:fleet-assets-label')}
+                            </p>
                             <span>{tag.nodes_count}</span>
                           </div>
                           <div>
-                            <p className="text-[10px] text-muted-foreground">queries</p>
+                            <p className="text-[10px] text-muted-foreground">
+                              {t('fleet:fleet-queries-label')}
+                            </p>
                             <span>{tag.queries_count}</span>
                           </div>
                           <div>
-                            <p className="text-[10px] text-muted-foreground">files</p>
+                            <p className="text-[10px] text-muted-foreground">
+                              {t('fleet:fleet-files-label')}
+                            </p>
                             <span>{tag.file_paths_count}</span>
                           </div>
                           <div>
-                            <p className="text-[10px] text-muted-foreground">packs</p>
+                            <p className="text-[10px] text-muted-foreground">
+                              {t('packs')}
+                            </p>
                             <span>{tag.packs_count}</span>
                           </div>
                         </div>
@@ -120,16 +127,16 @@ const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
 
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
-                          {canAccess("team_fleet_tag", ["delete"]) && (
+                          {canAccess('team_fleet_tag', ['delete']) && (
                             <Button
                               size="sm"
                               variant="destructive"
                               onClick={() => openDeleteModal(tag.id)}
                             >
-                              {t("delete")}
+                              {t('delete')}
                             </Button>
                           )}
-                          {canAccess("team_fleet_tag", ["update"]) && (
+                          {canAccess('team_fleet_tag', ['update']) && (
                             <Button
                               size="sm"
                               variant="outline"
@@ -138,7 +145,7 @@ const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
                                 setEditVisible(true);
                               }}
                             >
-                              {t("edit")}
+                              {t('edit')}
                             </Button>
                           )}
                         </div>
@@ -147,8 +154,11 @@ const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
                   ))
                 ) : (
                   <TableRow>
-                    <TableCell colSpan={4} className="text-center py-4 text-sm text-muted-foreground">
-                      {t("no-tags-found")}
+                    <TableCell
+                      colSpan={4}
+                      className="text-center py-4 text-sm text-muted-foreground"
+                    >
+                      {t('no-tags-found')}
                     </TableCell>
                   </TableRow>
                 )}

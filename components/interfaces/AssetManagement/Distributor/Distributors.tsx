@@ -1,41 +1,42 @@
-import { useState } from "react";
-import Link from "next/link";
-import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
-import { Button } from "@/components/shadcn/ui/button";
+import { useState } from 'react';
+import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import { Button } from '@/components/shadcn/ui/button';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/shadcn/ui/table";
-import { Error, Loading } from "@/components/shared";
-import useCanAccess from "hooks/useCanAccess";
-import { WithLoadingAndError } from "@/components/shared";
-import type { Team, User } from "@/generated/client";
-import { DistributedQuery } from "@/types/fleet";
-import FleetStatus from "../Fleet/FleetStatus";
-import CreateQuery from "./CreateDistributor";
-import { useDistributors } from "@/hooks/fleets/distributors/useDistributors";
-import DeleteDistributor from "./DeleteDistributorResult";
-import FormattedDate from "@/components/shared/Date";
-import StatusValue from "../StatusValue";
-import { CodeBlock } from "@/components/shared/CodeBlock";
+} from '@/components/shadcn/ui/table';
+import { Error, Loading } from '@/components/shared';
+import useCanAccess from 'hooks/useCanAccess';
+import { WithLoadingAndError } from '@/components/shared';
+import type { Team, User } from '@/generated/client';
+import FleetStatus from '../Fleet/FleetStatus';
+import CreateQuery from './CreateDistributor';
+import { useDistributors } from '@/hooks/fleets/distributors/useDistributors';
+import DeleteDistributor from './DeleteDistributorResult';
+import FormattedDate from '@/components/shared/Date';
+import StatusValue from '../StatusValue';
+import { CodeBlock } from '@/components/shared/CodeBlock';
 
 const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const [visible, setVisible] = useState(false);
   const [deleteVisible, setDeleteVisible] = useState(false);
-  const [distributorToDelete, setDistributorToDelete] = useState<null | string>(null);
+  const [distributorToDelete, setDistributorToDelete] = useState<null | string>(
+    null
+  );
 
   const { t } = useTranslation(['common', 'fleet']);
   const { canAccess } = useCanAccess(slug);
 
-  const { tasks, isLoading, isError, mutateDistributorsTasks } = useDistributors(team?.id);
+  const { tasks, isLoading, isError, mutateDistributorsTasks } =
+    useDistributors(team?.id);
 
   if (isLoading) return <Loading />;
   if (isError) return <Error />;
@@ -53,16 +54,16 @@ const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
           <div className="flex justify-between items-center">
             <div>
               <h2 className="text-xl font-semibold leading-none tracking-tight">
-                {t("distributors")}
+                {t('distributors')}
               </h2>
               <p className="text-sm text-muted-foreground">
-                {t("fleet:fleet-distributor-discription")}
+                {t('fleet:fleet-distributor-discription')}
               </p>
             </div>
 
-            {canAccess("team_fleet_query", ["create"]) && (
+            {canAccess('team_fleet_query', ['create']) && (
               <Button size="sm" onClick={() => setVisible(true)}>
-                {t("create")}
+                {t('create')}
               </Button>
             )}
           </div>
@@ -71,12 +72,12 @@ const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>{t("sql")}</TableHead>
-                  <TableHead>{t("asset")}</TableHead>
-                  <TableHead>{t("total-results")}</TableHead>
-                  <TableHead>{t("schedule")}</TableHead>
-                  <TableHead>{t("task")}</TableHead>
-                  <TableHead className="text-right">{t("actions")}</TableHead>
+                  <TableHead>{t('sql')}</TableHead>
+                  <TableHead>{t('asset')}</TableHead>
+                  <TableHead>{t('total-results')}</TableHead>
+                  <TableHead>{t('schedule')}</TableHead>
+                  <TableHead>{t('task')}</TableHead>
+                  <TableHead className="text-right">{t('actions')}</TableHead>
                 </TableRow>
               </TableHeader>
 
@@ -102,25 +103,38 @@ const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
                       </TableCell>
 
                       <TableCell className="align-top">
-                        <span className="text-sm">{task.distributed_query.total_results}</span>
+                        <span className="text-sm">
+                          {task.distributed_query.total_results}
+                        </span>
                       </TableCell>
 
                       <TableCell className="align-top">
-                        <span className="text-sm">{task.distributed_query.not_before}</span>
+                        <span className="text-sm">
+                          {task.distributed_query.not_before}
+                        </span>
                       </TableCell>
 
                       <TableCell className="align-top">
                         <div className="grid grid-cols-1 gap-1">
                           <div>
-                            <p className="text-[10px] text-muted-foreground">Status</p>
+                            <p className="text-[10px] text-muted-foreground">
+                              {t('status')}
+                            </p>
                             <StatusValue status={task.status} />
                           </div>
                           <div>
-                            <p className="text-[10px] text-muted-foreground">Timestamp</p>
+                            <p className="text-[10px] text-muted-foreground">
+                              {t('fleet:fleet-timestamp')}
+                            </p>
                             {task.timestamp ? (
-                              <FormattedDate style={"text-sm"} dateString={task.timestamp} />
+                              <FormattedDate
+                                style={'text-sm'}
+                                dateString={task.timestamp}
+                              />
                             ) : (
-                              <span className="text-muted-foreground">Null</span>
+                              <span className="text-muted-foreground">
+                                {t('fleet:fleet-null')}
+                              </span>
                             )}
                           </div>
                         </div>
@@ -128,7 +142,7 @@ const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
 
                       <TableCell className="align-top text-right">
                         <div className="flex justify-end gap-2">
-                          {canAccess("team_fleet_pack", ["delete"]) && (
+                          {canAccess('team_fleet_pack', ['delete']) && (
                             <Button
                               size="sm"
                               variant="destructive"
@@ -136,7 +150,7 @@ const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
                                 openDeleteModal(task.distributed_query.id)
                               }
                             >
-                              {t("delete")}
+                              {t('delete')}
                             </Button>
                           )}
                         </div>
@@ -149,7 +163,7 @@ const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
                       colSpan={6}
                       className="text-center py-4 text-sm text-muted-foreground"
                     >
-                      {t("no-distributors-found")}
+                      {t('no-distributors-found')}
                     </TableCell>
                   </TableRow>
                 )}

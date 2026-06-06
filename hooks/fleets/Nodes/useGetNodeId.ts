@@ -1,7 +1,7 @@
-import { fleetAuthAPIHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
-import { NodeWithRelationships } from "@/types/fleet";
-import { useEffect, useState } from "react";
+import { fleetAuthAPIHeaders } from '@/lib/common';
+import { fleetV1 } from '@/lib/fleet/apiBase';
+import { NodeWithRelationships } from '@/types/fleet';
+import { useEffect, useState } from 'react';
 
 export const useGetNodeId = (teamId: string, nodeId: string) => {
   const [node, setNode] = useState<NodeWithRelationships>();
@@ -10,6 +10,7 @@ export const useGetNodeId = (teamId: string, nodeId: string) => {
 
   useEffect(() => {
     if (!teamId || !nodeId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLoading(false);
       return;
     }
@@ -25,12 +26,12 @@ export const useGetNodeId = (teamId: string, nodeId: string) => {
         });
 
         if (!response.ok) {
-          const data = await response.json();
+          await response.json();
         }
 
         const data: NodeWithRelationships = await response.json();
         setNode(data);
-      } catch (err) {
+      } catch {
         setError('An unexpected error occurred.');
       } finally {
         setLoading(false);

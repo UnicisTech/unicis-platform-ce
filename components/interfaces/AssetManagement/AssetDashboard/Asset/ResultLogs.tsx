@@ -6,8 +6,15 @@ import { useTranslation } from 'next-i18next';
 import { format } from 'date-fns';
 import { ChevronRight, Trash2 } from 'lucide-react';
 
-
-const ResultLogs = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user: Partial<User>, nodeID: string }) => {
+const ResultLogs = ({
+  fleetTeamId,
+  nodeID,
+  user: _user,
+}: {
+  fleetTeamId: string;
+  user: Partial<User>;
+  nodeID: string;
+}) => {
   const { t } = useTranslation('common');
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [filters, setFilters] = useState({
@@ -17,7 +24,10 @@ const ResultLogs = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user: 
   });
   const deleteLog = useDeleteAssetResultLog();
 
-  const { results, total, isLoading, isError, mutate } = useResults(fleetTeamId, filters);
+  const { results, total, isLoading, isError, mutate } = useResults(
+    fleetTeamId,
+    filters
+  );
 
   const handleDeleteResult = async (id: string) => {
     setDeletingId(id);
@@ -48,9 +58,7 @@ const ResultLogs = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user: 
 
   if (isError) {
     return (
-      <div className="p-4 text-destructive">
-        {t('Error loading results')}
-      </div>
+      <div className="p-4 text-destructive">{t('Error loading results')}</div>
     );
   }
 
@@ -59,8 +67,9 @@ const ResultLogs = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user: 
       <div className="text-sm text-muted-foreground">
         {total > 0 ? (
           <>
-            {t('Showing')} {filters.offset + 1} - {Math.min(filters.offset + filters.limit, total)} {t('of')}{' '}
-            {total} {t('results from this asset')}
+            {t('Showing')} {filters.offset + 1} -{' '}
+            {Math.min(filters.offset + filters.limit, total)} {t('of')} {total}{' '}
+            {t('results from this asset')}
           </>
         ) : (
           t('No results yet. Results will appear here after queries run.')
@@ -91,13 +100,22 @@ const ResultLogs = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user: 
 
                 <div className="flex-1 flex items-center gap-4 flex-wrap">
                   <span className="text-sm text-muted-foreground min-w-[140px]">
-                    {result.timestamp ? format(new Date(result.timestamp), 'yyyy-MM-dd HH:mm:ss') : '-'}
+                    {result.timestamp
+                      ? format(
+                          new Date(result.timestamp),
+                          'yyyy-MM-dd HH:mm:ss'
+                        )
+                      : '-'}
                   </span>
 
-                  <span className="text-sm font-medium">{result.query_name || '-'}</span>
+                  <span className="text-sm font-medium">
+                    {result.query_name || '-'}
+                  </span>
 
                   <span className="text-sm text-muted-foreground">
-                    {result.node?.display_name || result.node?.host_identifier || '-'}
+                    {result.node?.display_name ||
+                      result.node?.host_identifier ||
+                      '-'}
                   </span>
 
                   <span
@@ -126,9 +144,13 @@ const ResultLogs = ({ fleetTeamId, nodeID, user }: { fleetTeamId: string, user: 
                   {result.columns && typeof result.columns === 'object' ? (
                     Object.entries(result.columns).map(([key, value]) => (
                       <div key={key} className="flex gap-2">
-                        <span className="text-sm font-medium text-muted-foreground min-w-[120px]">{key}:</span>
+                        <span className="text-sm font-medium text-muted-foreground min-w-[120px]">
+                          {key}:
+                        </span>
                         <span className="text-sm font-mono">
-                          {typeof value === 'object' ? JSON.stringify(value, null, 2) : String(value)}
+                          {typeof value === 'object'
+                            ? JSON.stringify(value, null, 2)
+                            : String(value)}
                         </span>
                       </div>
                     ))

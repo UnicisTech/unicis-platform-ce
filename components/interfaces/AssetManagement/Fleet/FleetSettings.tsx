@@ -1,10 +1,10 @@
-import { useFormik } from "formik"
-import { useTranslation } from "next-i18next"
-import * as Yup from "yup"
-import { passwordPolicies } from "@/lib/common"
-import type { User } from "@/generated/client"
-import FleetStatus from "./FleetStatus"
-import { Button } from "@/components/shadcn/ui/button"
+import { useFormik } from 'formik';
+import { useTranslation } from 'next-i18next';
+import * as Yup from 'yup';
+import { passwordPolicies } from '@/lib/common';
+import type { User } from '@/generated/client';
+import FleetStatus from './FleetStatus';
+import { Button } from '@/components/shadcn/ui/button';
 import {
   Card,
   CardHeader,
@@ -12,9 +12,9 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@/components/shadcn/ui/card"
-import { Input } from "@/components/shadcn/ui/input"
-import { Label } from "@/components/shadcn/ui/label"
+} from '@/components/shadcn/ui/card';
+import { Input } from '@/components/shadcn/ui/input';
+import { Label } from '@/components/shadcn/ui/label';
 
 const schema = Yup.object().shape({
   id: Yup.string().required(),
@@ -22,35 +22,35 @@ const schema = Yup.object().shape({
   firstName: Yup.string().required(),
   lastName: Yup.string().required(),
   fleetPassword: Yup.string().required().min(passwordPolicies.minLength),
-})
+});
 
 const SettingsFleet = ({ user }: { user: Partial<User> }) => {
-  const { t } = useTranslation("common")
+  const { t } = useTranslation('common');
 
   const formik = useFormik({
     initialValues: {
-      id: user.id || "",
-      email: user.email || "",
-      firstName: user.firstName || "",
-      lastName: user.lastName || "",
-      fleetPassword: "",
+      id: user.id || '',
+      email: user.email || '',
+      firstName: user.firstName || '',
+      lastName: user.lastName || '',
+      fleetPassword: '',
     },
     validationSchema: schema,
     onSubmit: async (values) => {
       try {
-        console.log("Fleet settings saved:", values)
+        console.log('Fleet settings saved:', values);
       } catch (error) {
-        console.error("Error creating or connecting fleet:", error)
+        console.error('Error creating or connecting fleet:', error);
       }
     },
-  })
+  });
 
   return (
     <form onSubmit={formik.handleSubmit}>
       <Card>
         <CardHeader>
-          <CardTitle>{t("fleet-settings")}</CardTitle>
-          <CardDescription>{t("fleet-settings-description")}</CardDescription>
+          <CardTitle>{t('fleet-settings')}</CardTitle>
+          <CardDescription>{t('fleet-settings-description')}</CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-4">
@@ -58,29 +58,31 @@ const SettingsFleet = ({ user }: { user: Partial<User> }) => {
 
           <div className="grid gap-4 md:grid-cols-2">
             <div className="flex flex-col space-y-1">
-              <Label htmlFor="firstName">{t("first-name")}</Label>
+              <Label htmlFor="firstName">{t('first-name')}</Label>
               <Input
                 id="firstName"
                 name="firstName"
                 value={formik.values.firstName}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                placeholder={t("first-name")}
+                placeholder={t('first-name')}
               />
               {formik.touched.firstName && formik.errors.firstName && (
-                <p className="text-sm text-red-500">{formik.errors.firstName}</p>
+                <p className="text-sm text-red-500">
+                  {formik.errors.firstName}
+                </p>
               )}
             </div>
 
             <div className="flex flex-col space-y-1">
-              <Label htmlFor="lastName">{t("last-name")}</Label>
+              <Label htmlFor="lastName">{t('last-name')}</Label>
               <Input
                 id="lastName"
                 name="lastName"
                 value={formik.values.lastName}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                placeholder={t("last-name")}
+                placeholder={t('last-name')}
               />
               {formik.touched.lastName && formik.errors.lastName && (
                 <p className="text-sm text-red-500">{formik.errors.lastName}</p>
@@ -89,7 +91,7 @@ const SettingsFleet = ({ user }: { user: Partial<User> }) => {
           </div>
 
           <div className="flex flex-col space-y-1">
-            <Label htmlFor="email">{t("email")}</Label>
+            <Label htmlFor="email">{t('email')}</Label>
             <Input
               id="email"
               name="email"
@@ -97,7 +99,7 @@ const SettingsFleet = ({ user }: { user: Partial<User> }) => {
               value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              placeholder={t("email")}
+              placeholder={t('email')}
             />
             {formik.touched.email && formik.errors.email && (
               <p className="text-sm text-red-500">{formik.errors.email}</p>
@@ -105,7 +107,7 @@ const SettingsFleet = ({ user }: { user: Partial<User> }) => {
           </div>
 
           <div className="flex flex-col space-y-1">
-            <Label htmlFor="fleetPassword">{t("fleet-password")}</Label>
+            <Label htmlFor="fleetPassword">{t('fleet-password')}</Label>
             <Input
               id="fleetPassword"
               name="fleetPassword"
@@ -113,12 +115,14 @@ const SettingsFleet = ({ user }: { user: Partial<User> }) => {
               value={formik.values.fleetPassword}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              placeholder={t("fleet-password")}
+              placeholder={t('fleet-password')}
               autoComplete="off"
               inputMode="none"
             />
             {formik.touched.fleetPassword && formik.errors.fleetPassword && (
-              <p className="text-sm text-red-500">{formik.errors.fleetPassword}</p>
+              <p className="text-sm text-red-500">
+                {formik.errors.fleetPassword}
+              </p>
             )}
           </div>
         </CardContent>
@@ -128,22 +132,18 @@ const SettingsFleet = ({ user }: { user: Partial<User> }) => {
             type="button"
             variant="destructive"
             size="sm"
-            onClick={() => console.log("Disconnect Fleet")}
+            onClick={() => console.log('Disconnect Fleet')}
           >
-            {t("disconnect")}
+            {t('disconnect')}
           </Button>
 
-          <Button
-            type="submit"
-            size="sm"
-            disabled={formik.isSubmitting}
-          >
-            {formik.isSubmitting ? t("saving") : t("save")}
+          <Button type="submit" size="sm" disabled={formik.isSubmitting}>
+            {formik.isSubmitting ? t('saving') : t('save')}
           </Button>
         </CardFooter>
       </Card>
     </form>
-  )
-}
+  );
+};
 
-export default SettingsFleet
+export default SettingsFleet;

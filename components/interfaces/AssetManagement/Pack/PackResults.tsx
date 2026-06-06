@@ -38,7 +38,9 @@ const PackResults = ({ teamId, packId }: PackResultsProps) => {
         const packData = await packRes.json();
 
         const packName = packData?.name || '';
-        let packQueries = (packData?.queries || []).map((q: any) => q.name).filter(Boolean);
+        let packQueries = (packData?.queries || [])
+          .map((q: any) => q.name)
+          .filter(Boolean);
 
         if (packQueries.length === 0) {
           try {
@@ -49,7 +51,9 @@ const PackResults = ({ teamId, packId }: PackResultsProps) => {
             const queriesData = await queriesRes.json();
             const queries = queriesData?.queries || [];
             packQueries = queries
-              .filter((q: any) => (q?.packs || []).some((p: any) => p?.id === packId))
+              .filter((q: any) =>
+                (q?.packs || []).some((p: any) => p?.id === packId)
+              )
               .map((q: any) => q?.name)
               .filter(Boolean);
           } catch {
@@ -63,7 +67,10 @@ const PackResults = ({ teamId, packId }: PackResultsProps) => {
                 `pack/${packName}/${qName}`,
                 `pack_${packName}_${qName}`,
               ])
-            : [packName ? `pack/${packName}/` : '', packName ? `pack_${packName}_` : ''].filter(Boolean);
+            : [
+                packName ? `pack/${packName}/` : '',
+                packName ? `pack_${packName}_` : '',
+              ].filter(Boolean);
 
         const endpointResults = await Promise.all(
           candidateQueryNames.map(async (qName: string) => {
@@ -73,10 +80,13 @@ const PackResults = ({ teamId, packId }: PackResultsProps) => {
               params.set('limit', '500');
               params.set('offset', '0');
 
-              const res = await fleetV1(`/manager/${teamId}/results?${params.toString()}`, {
-                method: 'GET',
-                headers,
-              });
+              const res = await fleetV1(
+                `/manager/${teamId}/results?${params.toString()}`,
+                {
+                  method: 'GET',
+                  headers,
+                }
+              );
               const data = await res.json();
               return data?.results || [];
             } catch {
@@ -151,11 +161,14 @@ const PackResults = ({ teamId, packId }: PackResultsProps) => {
       <div className="text-sm text-muted-foreground">
         {effectiveTotal > 0 ? (
           <>
-            {t('Showing')} {filters.offset + 1} - {Math.min(filters.offset + filters.limit, effectiveTotal)}{' '}
-            {t('of')} {effectiveTotal} {t('results from scheduled pack queries')}
+            {t('Showing')} {filters.offset + 1} -{' '}
+            {Math.min(filters.offset + filters.limit, effectiveTotal)} {t('of')}{' '}
+            {effectiveTotal} {t('results from scheduled pack queries')}
           </>
         ) : (
-          t('No results yet. Results will appear here after pack queries run on schedule.')
+          t(
+            'No results yet. Results will appear here after pack queries run on schedule.'
+          )
         )}
       </div>
 
@@ -185,7 +198,10 @@ const PackResults = ({ teamId, packId }: PackResultsProps) => {
         <div className="space-y-2">
           {paginatedResults.map((result: any, index: number) => (
             <details
-              key={result.id || `${result.name || 'result'}-${result.timestamp || index}`}
+              key={
+                result.id ||
+                `${result.name || 'result'}-${result.timestamp || index}`
+              }
               className="group rounded-lg border border-border bg-card hover:bg-muted/30 transition-colors"
             >
               <summary className="cursor-pointer px-4 py-3 flex items-center gap-3 list-none">
@@ -194,7 +210,10 @@ const PackResults = ({ teamId, packId }: PackResultsProps) => {
                 <div className="flex-1 flex items-center gap-4 flex-wrap">
                   <span className="text-sm text-muted-foreground min-w-[140px]">
                     {result.timestamp
-                      ? format(new Date(result.timestamp), 'yyyy-MM-dd HH:mm:ss')
+                      ? format(
+                          new Date(result.timestamp),
+                          'yyyy-MM-dd HH:mm:ss'
+                        )
                       : '-'}
                   </span>
 
@@ -203,10 +222,14 @@ const PackResults = ({ teamId, packId }: PackResultsProps) => {
                   </span>
 
                   <span className="text-sm text-muted-foreground">
-                    {result.node?.display_name || result.node?.host_identifier || '-'}
+                    {result.node?.display_name ||
+                      result.node?.host_identifier ||
+                      '-'}
                   </span>
 
-                  <span className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${getActionBadgeClass(result.action)}`}>
+                  <span
+                    className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${getActionBadgeClass(result.action)}`}
+                  >
                     {result.action || 'snapshot'}
                   </span>
                 </div>

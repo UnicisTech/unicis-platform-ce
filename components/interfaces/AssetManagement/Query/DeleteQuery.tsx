@@ -1,10 +1,10 @@
-import React from "react";
-import toast from "react-hot-toast";
-import { useTranslation } from "next-i18next";
-import { useFormik } from "formik";
-import { useDeleteQuery } from "@/hooks/fleets/queries/useDeleteQuery";
-import { InputWithLabel } from "@/components/shared";
-import { useQueries } from "@/hooks/fleets/queries/useQueries";
+import React from 'react';
+import toast from 'react-hot-toast';
+import { useTranslation } from 'next-i18next';
+import { useFormik } from 'formik';
+import { useDeleteQuery } from '@/hooks/fleets/queries/useDeleteQuery';
+import { InputWithLabel } from '@/components/shared';
+import { useQueries } from '@/hooks/fleets/queries/useQueries';
 import {
   Dialog,
   DialogContent,
@@ -12,8 +12,8 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/shadcn/ui/dialog";
-import { Button } from "@/components/shadcn/ui/button";
+} from '@/components/shadcn/ui/dialog';
+import { Button } from '@/components/shadcn/ui/button';
 
 const DeleteQuery = ({
   queryId,
@@ -33,18 +33,18 @@ const DeleteQuery = ({
 
   const formik = useFormik({
     initialValues: {
-      confirm: "",
+      confirm: '',
     },
     onSubmit: async (values) => {
-      if (values.confirm.toLowerCase() === "delete") {
-        toast.loading(t("deleting-query"));
+      if (values.confirm.toLowerCase() === 'delete') {
+        toast.loading(t('deleting-query'));
         await deleteQuery(fleetTeamId, queryId);
         mutateQueries();
         formik.resetForm();
         setVisible(false);
-        toast.success(t("deleted-successfully"));
+        toast.success(t('deleted-successfully'));
       } else {
-        toast.error(t("type-confirmation-text"));
+        toast.error(t('type-confirmation-text'));
       }
     },
   });
@@ -52,30 +52,36 @@ const DeleteQuery = ({
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
       <DialogContent className="max-w-md">
-        <form onSubmit={formik.handleSubmit} method="DELETE" className="space-y-4">
+        <form
+          onSubmit={formik.handleSubmit}
+          method="DELETE"
+          className="space-y-4"
+        >
           <DialogHeader>
-            <DialogTitle>{t("confirm-permanent-query-delete")}</DialogTitle>
+            <DialogTitle>{t('confirm-permanent-query-delete')}</DialogTitle>
             <DialogDescription>
               <span className="text-xs">
-                {t("query")}: <span className="text-orange-400">{queryId}</span>
+                {t('query')}: <span className="text-orange-400">{queryId}</span>
               </span>
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4">
-            <p>{t("fleet:fleet-delete-warning")}</p>
+            <p>{t('fleet:fleet-delete-warning')}</p>
 
             <InputWithLabel
               type="text"
-              label={t("confirm")}
+              label={t('confirm')}
               name="confirm"
-              placeholder={t("enter-confirmation-text")}
+              placeholder={t('enter-confirmation-text')}
               value={formik.values.confirm}
               error={formik.touched.confirm ? formik.errors.confirm : undefined}
               onChange={formik.handleChange}
             />
 
-            <span className="text-xs">{t("fleet:fleet-delete-description")}</span>
+            <span className="text-xs">
+              {t('fleet:fleet-delete-description')}
+            </span>
           </div>
 
           <DialogFooter>
@@ -84,14 +90,14 @@ const DeleteQuery = ({
               variant="destructive"
               disabled={formik.isSubmitting}
             >
-              {formik.isSubmitting ? t("deleting") : t("delete")}
+              {formik.isSubmitting ? t('deleting') : t('delete')}
             </Button>
             <Button
               type="button"
               variant="outline"
               onClick={() => setVisible(false)}
             >
-              {t("close")}
+              {t('close')}
             </Button>
           </DialogFooter>
         </form>

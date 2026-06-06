@@ -10,10 +10,7 @@ export default async function handler(
   }
 
   const serviceSecret = req.headers['x-fleet-secret'];
-  if (
-    !serviceSecret ||
-    serviceSecret !== process.env.FLEET_SERVICE_SECRET
-  ) {
+  if (!serviceSecret || serviceSecret !== process.env.FLEET_SERVICE_SECRET) {
     return res.status(401).json({ error: 'INVALID_SERVICE_SECRET' });
   }
 
@@ -58,6 +55,6 @@ export default async function handler(
         name: enrollment.team.name,
       },
       expiresAt: enrollment.expiresAt,
-    }
+    },
   });
 }

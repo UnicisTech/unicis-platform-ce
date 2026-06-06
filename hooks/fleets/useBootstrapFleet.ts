@@ -11,8 +11,14 @@ interface BootstrapFleetResponse {
 
 export const useBootstrapFleet = () => {
   const bootstrapFleet = useCallback(
-    async (teamId: string, password: string): Promise<BootstrapFleetResponse> => {
-      console.log('[useBootstrapFleet] Calling /api/fleet/bootstrap with teamId:', teamId);
+    async (
+      teamId: string,
+      password: string
+    ): Promise<BootstrapFleetResponse> => {
+      console.log(
+        '[useBootstrapFleet] Calling /api/fleet/bootstrap with teamId:',
+        teamId
+      );
 
       const response = await fetch('/api/fleet/bootstrap', {
         method: 'POST',

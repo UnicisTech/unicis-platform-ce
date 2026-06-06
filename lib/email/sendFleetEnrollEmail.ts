@@ -12,8 +12,7 @@ export const sendFleetEnrollEmail = async (
 ) => {
   if (!toEmail) return;
 
-  const baseUrl =
-    env.appUrl?.replace(/\/$/, '') || 'http://localhost:4002';
+  const baseUrl = env.appUrl?.replace(/\/$/, '') || 'http://localhost:4002';
 
   const enrollLink =
     `${baseUrl}/teams/${team.slug}/asset` +

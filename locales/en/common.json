@@ -170,6 +170,7 @@
   "role": "Role",
   "url": "URL",
   "action": "Action",
+  "view": "View",
   "field": "Field",
   "created-at": "Created At",
   "created": "Created",
@@ -179,6 +180,7 @@
   "edit": "Edit",
   "close": "Close",
   "unknown-error": "Unknown Error",
+  "no-data-available": "No data available",
   "configure": "Configure",
   "add-member": "Add Member",
   "add-webhook": "Add Webhook",
@@ -1133,7 +1135,6 @@
     "zimbabwe": "Zimbabwe",
     "other": "Other"
   },
-
 
   "with-cli-installer": "With CLI installer:",
   "team-tls-cert": "Team TLS Certificate",

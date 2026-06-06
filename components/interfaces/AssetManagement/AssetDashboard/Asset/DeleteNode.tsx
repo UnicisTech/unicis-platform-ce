@@ -1,22 +1,21 @@
-'use client'
+'use client';
 
-import React from 'react'
-import toast from 'react-hot-toast'
-import { Button } from '@/components/shadcn/ui/button'
+import React from 'react';
+import toast from 'react-hot-toast';
+import { Button } from '@/components/shadcn/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from '@/components/shadcn/ui/dialog'
-import { useTranslation } from 'next-i18next'
-import { useRouter } from 'next/router'
-import { useFormik } from 'formik'
-import { Input } from '@/components/shadcn/ui/input'
-import { Label } from '@/components/shadcn/ui/label'
-import { useDeleteNode } from '@/hooks/fleets/Nodes/useDeleteNode'
-import { useNodes } from '@/hooks/fleets/Nodes/useNodes'
+} from '@/components/shadcn/ui/dialog';
+import { useTranslation } from 'next-i18next';
+import { useFormik } from 'formik';
+import { Input } from '@/components/shadcn/ui/input';
+import { Label } from '@/components/shadcn/ui/label';
+import { useDeleteNode } from '@/hooks/fleets/Nodes/useDeleteNode';
+import { useNodes } from '@/hooks/fleets/Nodes/useNodes';
 
 const DeleteNode = ({
   nodeId,
@@ -24,16 +23,15 @@ const DeleteNode = ({
   setVisible,
   fleetTeamId,
 }: {
-  nodeId: string
-  visible: boolean
-  setVisible: (visible: boolean) => void
-  fleetTeamId: string
+  nodeId: string;
+  visible: boolean;
+  setVisible: (visible: boolean) => void;
+  fleetTeamId: string;
 }) => {
-  const router = useRouter()
-  const { t } = useTranslation(['common', 'fleet'])
+  const { t } = useTranslation(['common', 'fleet']);
 
-  const deleteNode = useDeleteNode()
-  const { mutateNodes } = useNodes(fleetTeamId, 'all')
+  const deleteNode = useDeleteNode();
+  const { mutateNodes } = useNodes(fleetTeamId, 'all');
 
   const formik = useFormik({
     initialValues: {
@@ -41,28 +39,30 @@ const DeleteNode = ({
     },
     onSubmit: async (values, { resetForm }) => {
       if (values.confirm.toLowerCase() === 'delete') {
-        const toastId = toast.loading(t('Deleting...'))
+        const toastId = toast.loading(t('Deleting...'));
         try {
-          await deleteNode(fleetTeamId, nodeId)
-          mutateNodes()
-          toast.success(t('Deleted successfully'), { id: toastId })
-          resetForm()
-          setVisible(false)
-        } catch (err) {
-          toast.error(t('Error deleting asset'), { id: toastId })
+          await deleteNode(fleetTeamId, nodeId);
+          mutateNodes();
+          toast.success(t('Deleted successfully'), { id: toastId });
+          resetForm();
+          setVisible(false);
+        } catch {
+          toast.error(t('Error deleting asset'), { id: toastId });
         }
       } else {
-        toast.error(t('Type confirmation text'))
+        toast.error(t('Type confirmation text'));
       }
     },
-  })
+  });
 
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
-      <DialogContent
-        className="max-w-md max-h-[85vh] overflow-y-auto bg-background text-foreground border-border"
-      >
-          <form onSubmit={formik.handleSubmit} method="DELETE" className="space-y-6">
+      <DialogContent className="max-w-md max-h-[85vh] overflow-y-auto bg-background text-foreground border-border">
+        <form
+          onSubmit={formik.handleSubmit}
+          method="DELETE"
+          className="space-y-6"
+        >
           <DialogHeader>
             <DialogTitle className="text-lg font-semibold text-destructive">
               {t('confirm-permanent-asset-delete')}
@@ -70,9 +70,12 @@ const DeleteNode = ({
           </DialogHeader>
           <div className="space-y-3 text-sm">
             <p>
-              {t('asset')}: <span className="text-orange-400 break-all">{nodeId}</span>
+              {t('asset')}:{' '}
+              <span className="text-orange-400 break-all">{nodeId}</span>
             </p>
-            <p className="text-muted-foreground">{t('fleet:fleet-delete-warning')}</p>
+            <p className="text-muted-foreground">
+              {t('fleet:fleet-delete-warning')}
+            </p>
           </div>
           <div className="space-y-2">
             <Label htmlFor="confirm" className="text-sm font-medium">
@@ -109,7 +112,7 @@ const DeleteNode = ({
         </form>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default DeleteNode
+export default DeleteNode;

@@ -1,25 +1,28 @@
-import { useState } from "react";
-import Link from "next/link";
-import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
-import { Button } from "@/components/shadcn/ui/button";
+import { useState } from 'react';
+import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import { Button } from '@/components/shadcn/ui/button';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/shadcn/ui/table";
-import { Error, Loading, PlatformBadge } from "@/components/shared";
-import useCanAccess from "hooks/useCanAccess";
-import type { Team, User } from "@/generated/client";
-import { CreatePack, DeletePack, EditPack } from "@/components/interfaces/AssetManagement/Pack";
-import { usePacks } from "@/hooks/fleets/packs/usePacks";
-import { Pack } from "@/types/fleet";
-import { PLATFORMS } from "@/lib/fleet/constants";
-import FleetStatus from "../Fleet/FleetStatus";
+} from '@/components/shadcn/ui/table';
+import { Error, Loading, PlatformBadge } from '@/components/shared';
+import useCanAccess from 'hooks/useCanAccess';
+import type { Team, User } from '@/generated/client';
+import {
+  CreatePack,
+  DeletePack,
+  EditPack,
+} from '@/components/interfaces/AssetManagement/Pack';
+import { usePacks } from '@/hooks/fleets/packs/usePacks';
+import { Pack } from '@/types/fleet';
+import { PLATFORMS } from '@/lib/fleet/constants';
+import FleetStatus from '../Fleet/FleetStatus';
 
 const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
   const router = useRouter();
@@ -55,16 +58,16 @@ const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
           <div className="flex justify-between items-center">
             <div>
               <h2 className="text-xl font-semibold leading-none tracking-tight">
-                {t("fleet:fleet-all-packs")}
+                {t('fleet:fleet-all-packs')}
               </h2>
               <p className="text-sm text-muted-foreground">
-                {t("fleet:fleet-pack-listed")}
+                {t('fleet:fleet-pack-listed')}
               </p>
             </div>
 
-            {canAccess("team_fleet_pack", ["create"]) && (
+            {canAccess('team_fleet_pack', ['create']) && (
               <Button size="sm" onClick={() => setVisible(true)}>
-                {t("create")}
+                {t('create')}
               </Button>
             )}
           </div>
@@ -73,11 +76,11 @@ const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>{t("name")}</TableHead>
-                  <TableHead>{t("platform")}</TableHead>
-                  <TableHead>{t("version")}</TableHead>
-                  <TableHead>{t("shard")}</TableHead>
-                  <TableHead className="text-right">{t("actions")}</TableHead>
+                  <TableHead>{t('name')}</TableHead>
+                  <TableHead>{t('platform')}</TableHead>
+                  <TableHead>{t('version')}</TableHead>
+                  <TableHead>{t('shard')}</TableHead>
+                  <TableHead className="text-right">{t('actions')}</TableHead>
                 </TableRow>
               </TableHeader>
 
@@ -98,8 +101,9 @@ const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
                         <PlatformBadge
                           value={pack.platform!}
                           label={
-                            PLATFORMS.find(({ value }) => value === pack.platform)
-                              ?.label as string
+                            PLATFORMS.find(
+                              ({ value }) => value === pack.platform
+                            )?.label as string
                           }
                         />
                       </TableCell>
@@ -118,22 +122,22 @@ const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
 
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
-                          {canAccess("team_fleet_pack", ["update"]) && (
+                          {canAccess('team_fleet_pack', ['update']) && (
                             <Button
                               size="sm"
                               variant="outline"
                               onClick={() => openEditModal(pack)}
                             >
-                              {t("edit-task")}
+                              {t('edit-task')}
                             </Button>
                           )}
-                          {canAccess("team_fleet_pack", ["delete"]) && (
+                          {canAccess('team_fleet_pack', ['delete']) && (
                             <Button
                               size="sm"
                               variant="destructive"
                               onClick={() => openDeleteModal(pack.id)}
                             >
-                              {t("delete")}
+                              {t('delete')}
                             </Button>
                           )}
                         </div>
@@ -146,7 +150,7 @@ const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
                       colSpan={5}
                       className="text-center py-4 text-sm text-muted-foreground"
                     >
-                      {t("no-packs-found")}
+                      {t('no-packs-found')}
                     </TableCell>
                   </TableRow>
                 )}

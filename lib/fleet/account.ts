@@ -1,5 +1,3 @@
-
-
 export const accountNavigations = (activeTab: string) => {
   return [
     {

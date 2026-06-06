@@ -13,7 +13,7 @@ import {
 import Pagination from '@/components/shadcn/ui/audit-pagination';
 import useTeamMembersMap from 'hooks/useTeamMembersMap';
 import { Error, Loading, MemberName } from '@/components/shared';
-import { auditLogHelper } from './auditLogHelper';
+import { auditLogHelper } from './audit-logs/auditLogHelper';
 
 const ITEMS_PER_PAGE = 20;
 

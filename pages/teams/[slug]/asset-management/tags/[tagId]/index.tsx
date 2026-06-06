@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Loading, Error, Card } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
 import useTeam from 'hooks/useTeam';
-import useCanAccess from 'hooks/useCanAccess';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
@@ -13,18 +11,17 @@ import Breadcrumb from '@/components/shared/Breadcrumb';
 import TagsTab from '@/components/interfaces/AssetManagement/Tag/TagsTab';
 import TagDetails from '@/components/interfaces/AssetManagement/Tag/TagDetails';
 
-const TagById = ({teamFeatures, user}) => {
+const TagById = ({ teamFeatures: _teamFeatures, user }) => {
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
-  const { t } = useTranslation('common');
   const { tagId, slug } = router.query;
-  const { canAccess } = useCanAccess(slug as string);
 
   const {
     team,
     isLoading: isTeamLoading,
     isError: isTeamError,
   } = useTeam(slug as string);
+  const fleetTeamId = team?.id ?? '';
 
   if (isTeamLoading) {
     return <Loading />;
@@ -46,7 +43,11 @@ const TagById = ({teamFeatures, user}) => {
       <TagsTab activeTab={activeTab} setActiveTab={setActiveTab} />
       <Card heading="Details">
         <Card.Body>
-          <TagDetails user={user} fleetTeamId={team?.id!} tagID={tagId as string} />
+          <TagDetails
+            user={user}
+            fleetTeamId={fleetTeamId}
+            tagID={tagId as string}
+          />
         </Card.Body>
       </Card>
     </>
@@ -68,7 +69,9 @@ export const getServerSideProps = async (
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common', 'fleet']) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, ['common', 'fleet'])
+        : {}),
       teamFeatures: env.teamFeatures,
       user: {
         id: user.id,

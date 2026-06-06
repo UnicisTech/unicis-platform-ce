@@ -28,9 +28,9 @@ export default async function handler(
 }
 
 const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getSession(req, res);
+  await getSession(req, res);
 
-  const { fleetTeamId, secret, teamId } = req.body as {
+  const { teamId } = req.body as {
     fleetTeamId: string;
     secret: string;
     teamId: string;
@@ -39,7 +39,6 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const team = await prisma.team.findFirstOrThrow({
     where: { id: teamId },
   });
-
 
   res.status(200).json({ data: team });
 };

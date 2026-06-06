@@ -1,7 +1,7 @@
-import { fleetAuthAPIHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
-import { PackWithRelationships } from "@/types/fleet";
-import { useEffect, useState } from "react";
+import { fleetAuthAPIHeaders } from '@/lib/common';
+import { fleetV1 } from '@/lib/fleet/apiBase';
+import { PackWithRelationships } from '@/types/fleet';
+import { useEffect, useState } from 'react';
 
 export const useGetPackId = (teamId: string, packId: string) => {
   const [pack, setPack] = useState<PackWithRelationships>();
@@ -20,12 +20,12 @@ export const useGetPackId = (teamId: string, packId: string) => {
         });
 
         if (!response.ok) {
-          const data = await response.json();
+          await response.json();
         }
 
         const data: PackWithRelationships = await response.json();
         setPack(data);
-      } catch (err) {
+      } catch {
         setError('An unexpected error occurred.');
       } finally {
         setLoading(false);

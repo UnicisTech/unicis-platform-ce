@@ -8,6 +8,7 @@ import {
 } from '@react-email/components';
 import EmailLayout from './EmailLayout';
 import app from '@/lib/app';
+import fleetMessages from '@/locales/en/fleet.json';
 
 interface FleetEnrollEmailProps {
   subject: string;
@@ -28,13 +29,11 @@ const FleetEnrollEmail = ({
       <Preview>{subject}</Preview>
       <EmailLayout>
         <Text>
-          You&apos;ve been invited to enroll Fleet access for team{' '}
-          <b>{teamName}</b> on {app.name}.
+          {fleetMessages['fleet-enroll-email-invite-prefix']} <b>{teamName}</b>{' '}
+          {fleetMessages['fleet-enroll-email-invite-suffix']} {app.name}.
         </Text>
 
-        <Text>
-          A temporary Fleet password has been generated for you:
-        </Text>
+        <Text>{fleetMessages['fleet-enroll-email-temp-password']}</Text>
 
         <Container className="text-center">
           <Text
@@ -48,18 +47,15 @@ const FleetEnrollEmail = ({
           </Text>
         </Container>
 
-        <Text>
-          Use this password to complete enrollment. After your first login,
-          you will be asked to set a new password.
-        </Text>
+        <Text>{fleetMessages['fleet-enroll-email-complete-enrollment']}</Text>
 
         <Container className="text-center">
-          <Button href={enrollLink}>Open Asset module</Button>
+          <Button href={enrollLink}>
+            {fleetMessages['fleet-open-asset-module']}
+          </Button>
         </Container>
 
-        <Text>
-          If you didn&apos;t expect this email, you can ignore it.
-        </Text>
+        <Text>{fleetMessages['fleet-enroll-email-ignore']}</Text>
       </EmailLayout>
     </Html>
   );

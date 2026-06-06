@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Loading, Error, Card } from '@/components/shared';
+import { Loading, Error } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
 import useTeam from 'hooks/useTeam';
 import QueryTab from '@/components/interfaces/AssetManagement/Query/QueryTab';
@@ -12,7 +12,7 @@ import env from '@/lib/env';
 import DistributorsDetails from '@/components/interfaces/AssetManagement/Distributor/DistributorDetails';
 import DistributorsResults from '@/components/interfaces/AssetManagement/Distributor/DistributorResults';
 
-const DistributorById = ({ teamFeatures, user }) => {
+const DistributorById = ({ teamFeatures: _teamFeatures, user }) => {
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
   const { distributorId, slug } = router.query;
@@ -21,6 +21,7 @@ const DistributorById = ({ teamFeatures, user }) => {
     isLoading: isTeamLoading,
     isError: isTeamError,
   } = useTeam(slug as string);
+  const fleetTeamId = team?.id ?? '';
 
   if (isTeamLoading) {
     return <Loading />;
@@ -41,12 +42,19 @@ const DistributorById = ({ teamFeatures, user }) => {
       <h3 className="text-2xl font-bold">{'Script'}</h3>
       <QueryTab activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      {activeTab === 'Overview' &&
-        <DistributorsDetails user={user} fleetTeamId={team?.id!} distributorId={distributorId as string} />
-      }
-      {activeTab === 'Results' &&
-        <DistributorsResults fleetTeamId={team?.id!} distributorId={distributorId as string} />
-      }
+      {activeTab === 'Overview' && (
+        <DistributorsDetails
+          user={user}
+          fleetTeamId={fleetTeamId}
+          distributorId={distributorId as string}
+        />
+      )}
+      {activeTab === 'Results' && (
+        <DistributorsResults
+          fleetTeamId={fleetTeamId}
+          distributorId={distributorId as string}
+        />
+      )}
     </>
   );
 };
@@ -66,7 +74,9 @@ export const getServerSideProps = async (
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common', 'fleet']) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, ['common', 'fleet'])
+        : {}),
       teamFeatures: env.teamFeatures,
       user: {
         id: user.id,
@@ -75,7 +85,7 @@ export const getServerSideProps = async (
         firstName: user.firstName,
         lastName: user.lastName,
         image: user.image,
-      }
+      },
     },
   };
 };

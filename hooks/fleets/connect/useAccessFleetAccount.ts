@@ -1,6 +1,6 @@
-import { defaultHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
-import { useCallback } from "react";
+import { defaultHeaders } from '@/lib/common';
+import { fleetV1 } from '@/lib/fleet/apiBase';
+import { useCallback } from 'react';
 
 export interface FleetLoginResponse {
   msg: string;
@@ -19,7 +19,7 @@ export const useAccessFleetAccount = () => {
   const accessFleetAccount = useCallback(
     async (email: string, password: string): Promise<FleetLoginResponse> => {
       const response = await fleetV1(`/account/access`, {
-        method: "POST",
+        method: 'POST',
         headers: defaultHeaders,
         body: JSON.stringify({ email, password }),
       });
@@ -27,7 +27,7 @@ export const useAccessFleetAccount = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data?.msg || "Fleet login failed");
+        throw new Error(data?.msg || 'Fleet login failed');
       }
 
       return data;

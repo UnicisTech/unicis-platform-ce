@@ -55,7 +55,9 @@ const NotificationSettingsPage = () => {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDraft(mergedPreferences);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDirty(false);
   }, [mergedPreferences]);
 

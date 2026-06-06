@@ -1,5 +1,4 @@
 import useHasPlan from '@/hooks/useHasPlan';
-import env from '@/lib/env';
 import {
   Cog6ToothIcon,
   DocumentMagnifyingGlassIcon,

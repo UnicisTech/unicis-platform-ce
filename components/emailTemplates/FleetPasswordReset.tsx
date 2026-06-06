@@ -8,6 +8,7 @@ import {
   Text,
 } from '@react-email/components';
 import EmailLayout from './EmailLayout';
+import fleetMessages from '@/locales/en/fleet.json';
 
 interface FleetPasswordResetEmailProps {
   url: string;
@@ -26,20 +27,17 @@ const FleetPasswordResetEmail = ({
       <Preview>{subject}</Preview>
       <EmailLayout>
         <Text>
-          We received a request to reset the Fleet password for the {app.name} account
-          associated with {email}.
+          {fleetMessages['fleet-password-reset-email-request-prefix']}{' '}
+          {app.name}{' '}
+          {fleetMessages['fleet-password-reset-email-request-suffix']} {email}.
         </Text>
         <Container className="text-center">
-          <Button href={url}>Reset your Fleet password</Button>
+          <Button href={url}>
+            {fleetMessages['fleet-reset-password-link']}
+          </Button>
         </Container>
-        <Text>
-          Please ignore this email if you did not request a password reset. No
-          changes have been made to your Fleet account.
-        </Text>
-        <Text>
-          This link will expire in 60 minutes. After that, you will need to
-          request another password reset.
-        </Text>
+        <Text>{fleetMessages['fleet-password-reset-email-ignore']}</Text>
+        <Text>{fleetMessages['fleet-password-reset-email-expiry']}</Text>
       </EmailLayout>
     </Html>
   );

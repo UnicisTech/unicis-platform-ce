@@ -10,14 +10,21 @@ import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import Distributors from '@/components/interfaces/AssetManagement/Distributor/Distributors';
 import { TeamTab } from '@/components/team';
 
-
 const AllDistributor: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ team, slug, teamFeatures, user }) => {
+> = ({ team, slug: _slug, teamFeatures, user }) => {
   return (
     <>
-      <TeamTab activeTab="asset-management" team={team} teamFeatures={teamFeatures} />
-      <AssetTab activeTab="distributors" team={team} teamFeatures={teamFeatures} />
+      <TeamTab
+        activeTab="asset-management"
+        team={team}
+        teamFeatures={teamFeatures}
+      />
+      <AssetTab
+        activeTab="distributors"
+        team={team}
+        teamFeatures={teamFeatures}
+      />
       <Distributors user={user} team={team} />
     </>
   );
@@ -40,7 +47,9 @@ export const getServerSideProps = async (
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common', 'fleet']) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, ['common', 'fleet'])
+        : {}),
       team: JSON.parse(JSON.stringify(team)),
       slug: slug,
       teamFeatures: env.teamFeatures,

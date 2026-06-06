@@ -76,10 +76,7 @@ const RenewFleetSecret = ({
           </div>
 
           <DialogFooter>
-            <Button
-              type="submit"
-              disabled={!confirmed || isSubmitting}
-            >
+            <Button type="submit" disabled={!confirmed || isSubmitting}>
               {isSubmitting ? t('renewing') : t('renew')}
             </Button>
             <Button

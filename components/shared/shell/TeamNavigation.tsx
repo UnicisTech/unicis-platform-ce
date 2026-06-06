@@ -41,16 +41,17 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('tasks'),
     },
-    canAccess('asset_dashboard', ['create', 'update', 'read', 'delete']) 
+    canAccess('asset_dashboard', ['create', 'update', 'read', 'delete'])
       ? {
-        name: t('fleet:asset-management', { defaultValue: 'Asset Management' }),
-        href: `/teams/${slug}/asset`,
-        icon: () => <Icon src="/asset-dashboard.png" />,
-        className: 'fill-blue-600 stroke-blue-600',
-        active: activePathname === `/teams/${slug}/asset`,
-      }
-      :
-      null,
+          name: t('fleet:asset-management', {
+            defaultValue: 'Asset Management',
+          }),
+          href: `/teams/${slug}/asset`,
+          icon: () => <Icon src="/asset-dashboard.png" />,
+          className: 'fill-blue-600 stroke-blue-600',
+          active: activePathname === `/teams/${slug}/asset`,
+        }
+      : null,
     canAccess('rpa', ['read'])
       ? {
           name: t('rpa-activities'),

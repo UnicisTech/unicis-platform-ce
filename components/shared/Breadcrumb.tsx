@@ -7,7 +7,7 @@ const Breadcrumb = ({
   teamSlug,
   taskTitle,
   path,
-  backTo
+  backTo,
 }: {
   teamName: string;
   teamSlug?: string;
@@ -21,8 +21,11 @@ const Breadcrumb = ({
     <div className="text-sm breadcrumbs">
       <ul>
         <li>
-          {<Link href={`/teams/${teamSlug || teamName}/dashboard`}>{teamName}</Link> ||
-            t('Home')}
+          {(
+            <Link href={`/teams/${teamSlug || teamName}/dashboard`}>
+              {teamName}
+            </Link>
+          ) || t('Home')}
         </li>
         <li>
           <a href={backTo || '/'} className="link link-hover">

@@ -1,6 +1,6 @@
-import fleetFetcher from "@/lib/fleet/fleetFetcher";
-import { TagsResponse } from "@/types/fleet";
-import useSWR, { mutate } from "swr";
+import fleetFetcher from '@/lib/fleet/fleetFetcher';
+import { TagsResponse } from '@/types/fleet';
+import useSWR, { mutate } from 'swr';
 
 export const useTags = (teamId: string) => {
   const url = `/manager/${teamId}/tags`;
@@ -11,9 +11,9 @@ export const useTags = (teamId: string) => {
   };
 
   return {
-    tags: data?.tags!,
+    tags: data?.tags ?? [],
     isLoading: isLoading,
     isError: error,
-    mutateTags
+    mutateTags,
   };
 };

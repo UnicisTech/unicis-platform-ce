@@ -1,5 +1,5 @@
-import { fleetAuthAPIHeaders } from "@/lib/common";
-import { fleetV1 } from "@/lib/fleet/apiBase";
+import { fleetAuthAPIHeaders } from '@/lib/common';
+import { fleetV1 } from '@/lib/fleet/apiBase';
 
 export const useOrderFleetSecret = () => {
   const orderFleetSecret = async (fleetTeamId: string) => {
@@ -9,7 +9,7 @@ export const useOrderFleetSecret = () => {
     });
 
     if (!response.ok) {
-      const data = await response.json();
+      await response.json();
     }
 
     return response.json();

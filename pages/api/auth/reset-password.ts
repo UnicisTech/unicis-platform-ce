@@ -77,20 +77,26 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     // Call Fleet API to admin reset password (no oldPassword required)
-    const response = await fetch(`${fleetBase}/api/v1/account/admin-reset-password`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${fleetServiceToken}`,
-      },
-      body: JSON.stringify({
-        email: user.email,
-        newPassword: password,
-      }),
-    });
+    const response = await fetch(
+      `${fleetBase}/api/v1/account/admin-reset-password`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${fleetServiceToken}`,
+        },
+        body: JSON.stringify({
+          email: user.email,
+          newPassword: password,
+        }),
+      }
+    );
 
     if (!response.ok) {
-      console.error('[FleetPasswordReset] Failed to reset Fleet password:', await response.text());
+      console.error(
+        '[FleetPasswordReset] Failed to reset Fleet password:',
+        await response.text()
+      );
       throw new ApiError(500, 'Failed to reset Fleet password');
     }
 
@@ -103,7 +109,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res.status(200).json({
       message: 'Fleet password reset successfully',
-      type: 'fleet'
+      type: 'fleet',
     });
   }
 
@@ -146,6 +152,6 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   res.status(200).json({
     message: 'Password reset successfully',
-    type: 'platform'
+    type: 'platform',
   });
 };

@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Loading, Error, Card } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
 import useTeam from 'hooks/useTeam';
-import useCanAccess from 'hooks/useCanAccess';
 import PackTab from '@/components/interfaces/AssetManagement/Pack/PackTab';
 import PackDetails from '@/components/interfaces/AssetManagement/Pack/PackDetails';
 import PackResults from '@/components/interfaces/AssetManagement/Pack/PackResults';
@@ -14,19 +12,17 @@ import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 
-
-const PackById = ({teamFeatures, user}) => {
+const PackById = ({ teamFeatures: _teamFeatures, user }) => {
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
-  const { t } = useTranslation('common');
   const { packId, slug } = router.query;
-  const { canAccess } = useCanAccess(slug as string);
 
   const {
     team,
     isLoading: isTeamLoading,
     isError: isTeamError,
   } = useTeam(slug as string);
+  const fleetTeamId = team?.id ?? '';
 
   if (isTeamLoading) {
     return <Loading />;
@@ -46,11 +42,15 @@ const PackById = ({teamFeatures, user}) => {
       />
       <h3 className="text-2xl font-bold">{'Pack Details'}</h3>
       <PackTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      
+
       {activeTab === 'Overview' && (
         <Card heading="Details">
           <Card.Body>
-            <PackDetails user={user} fleetTeamId={team?.id!} packID={packId as string} />
+            <PackDetails
+              user={user}
+              fleetTeamId={fleetTeamId}
+              packID={packId as string}
+            />
           </Card.Body>
         </Card>
       )}
@@ -58,7 +58,7 @@ const PackById = ({teamFeatures, user}) => {
       {activeTab === 'Results' && (
         <Card heading="Pack Query Results">
           <Card.Body>
-            <PackResults teamId={team?.id!} packId={packId as string} />
+            <PackResults teamId={fleetTeamId} packId={packId as string} />
           </Card.Body>
         </Card>
       )}
@@ -81,7 +81,9 @@ export const getServerSideProps = async (
 
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common', 'fleet']) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, ['common', 'fleet'])
+        : {}),
       teamFeatures: env.teamFeatures,
       user: {
         id: user.id,

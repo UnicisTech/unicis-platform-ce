@@ -1,14 +1,14 @@
-import { useState } from 'react'
-import toast from 'react-hot-toast'
-import { useTranslation } from 'next-i18next'
-import { Button } from '@/components/shadcn/ui/button'
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useTranslation } from 'next-i18next';
+import { Button } from '@/components/shadcn/ui/button';
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-} from '@/components/shadcn/ui/card'
+} from '@/components/shadcn/ui/card';
 import {
   Dialog,
   DialogContent,
@@ -16,103 +16,100 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from '@/components/shadcn/ui/dialog'
-import { Input } from '@/components/shadcn/ui/input'
-import { Label } from '@/components/shadcn/ui/label'
-import type { Team, User } from '@/generated/client'
-import FleetStatus from './FleetStatus'
-import RenewFleetSecret from './RenewFleetSecret'
-import useCanAccess from '@/hooks/useCanAccess'
-import { useBootstrapFleet } from '@/hooks/fleets'
-import { useGetFleetSecret } from '@/hooks/fleets/connect/useGetFleetSecret'
-import { useDeleteFleetSecret } from '@/hooks/fleets/connect/useDeleteFleetSecret'
-import { Loader2 } from 'lucide-react'
-import Cookies from 'js-cookie'
-import { CodeBlock } from '@/components/shared/CodeBlock'
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
-import { passwordPolicies } from '@/lib/common'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
+} from '@/components/shadcn/ui/dialog';
+import { Input } from '@/components/shadcn/ui/input';
+import { Label } from '@/components/shadcn/ui/label';
+import type { Team, User } from '@/generated/client';
+import FleetStatus from './FleetStatus';
+import RenewFleetSecret from './RenewFleetSecret';
+import { useBootstrapFleet } from '@/hooks/fleets';
+import { useGetFleetSecret } from '@/hooks/fleets/connect/useGetFleetSecret';
+import { useDeleteFleetSecret } from '@/hooks/fleets/connect/useDeleteFleetSecret';
+import { Loader2 } from 'lucide-react';
+import Cookies from 'js-cookie';
+import { CodeBlock } from '@/components/shared/CodeBlock';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import { passwordPolicies } from '@/lib/common';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import {
   fleetAccessTokenCookieName,
   fleetAccessTokenCookieOptions,
-} from '@/lib/fleet/cookies'
+} from '@/lib/fleet/cookies';
 
 const passwordSchema = Yup.object({
   password: Yup.string()
     .required('Password is required')
-    .min(passwordPolicies.fleetMinLength, `Password must be at least ${passwordPolicies.fleetMinLength} characters`),
-})
+    .min(
+      passwordPolicies.fleetMinLength,
+      `Password must be at least ${passwordPolicies.fleetMinLength} characters`
+    ),
+});
 
-const FleetSecret = ({
-  user,
-  team,
-}: {
-  user: Partial<User>
-  team: Team
-}) => {
-  const { t } = useTranslation(['common', 'fleet'])
-  const userId = user.id
-  const teamId = team.id
-  const [safe, setSafe] = useState(true)
-  const [passwordDialogVisible, setPasswordDialogVisible] = useState(false)
+const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
+  const { t } = useTranslation(['common', 'fleet']);
+  const teamId = team.id;
+  const [safe, setSafe] = useState(true);
+  const [passwordDialogVisible, setPasswordDialogVisible] = useState(false);
 
-  const bootstrapFleet = useBootstrapFleet()
-  const deleteFleetSecret = useDeleteFleetSecret()
-  const [renewVisible, setRenewVisible] = useState(false)
+  const bootstrapFleet = useBootstrapFleet();
+  const deleteFleetSecret = useDeleteFleetSecret();
+  const [renewVisible, setRenewVisible] = useState(false);
 
-  const { secret, isLoading, isError, mutateFleetSecret } = useGetFleetSecret(team.id)
+  const { secret, isLoading, mutateFleetSecret } = useGetFleetSecret(team.id);
 
   const formik = useFormik({
     initialValues: { password: '' },
     validationSchema: passwordSchema,
     onSubmit: async ({ password }) => {
       try {
-        console.log('[FleetSecret] Bootstrapping Fleet...')
-        const response = await bootstrapFleet(teamId, password)
+        console.log('[FleetSecret] Bootstrapping Fleet...');
+        const response = await bootstrapFleet(teamId, password);
 
-        console.log('[FleetSecret] Bootstrap successful:', response)
+        console.log('[FleetSecret] Bootstrap successful:', response);
 
         // Store Fleet token in cookie for future requests
         Cookies.set(
           fleetAccessTokenCookieName,
           response.fleetToken,
           fleetAccessTokenCookieOptions
-        )
+        );
 
-        setPasswordDialogVisible(false)
-        formik.resetForm()
-        mutateFleetSecret()
-        toast.success(t('fleet:fleet-enrollment-secret-ordered'))
+        setPasswordDialogVisible(false);
+        formik.resetForm();
+        mutateFleetSecret();
+        toast.success(t('fleet:fleet-enrollment-secret-ordered'));
       } catch (error: any) {
-        console.error('[FleetSecret] Error:', error)
-        toast.error(error?.message || t('error-ordering-fleet-secret'))
+        console.error('[FleetSecret] Error:', error);
+        toast.error(error?.message || t('error-ordering-fleet-secret'));
       }
     },
-  })
+  });
 
   const handleOrderSecret = () => {
-    setPasswordDialogVisible(true)
-  }
-  
+    setPasswordDialogVisible(true);
+  };
+
   const handleDelete = async () => {
     try {
-      await deleteFleetSecret(teamId)
-      mutateFleetSecret()
-      toast.success(t('successfully-deleted'))
+      await deleteFleetSecret(teamId);
+      mutateFleetSecret();
+      toast.success(t('successfully-deleted'));
     } catch {
-      toast.error(t('error-deleting-fleet-secret'))
+      toast.error(t('error-deleting-fleet-secret'));
     }
-  }  
+  };
 
-  const toggleSafe = () => setSafe(!safe)
+  const toggleSafe = () => setSafe(!safe);
 
   return (
     <Card>
       <CardHeader className="flex flex-row justify-between items-start">
         <div>
           <CardTitle>{t('fleet:fleet-secret')}</CardTitle>
-          <CardDescription>{t('fleet:fleet-secret-description')}</CardDescription>
+          <CardDescription>
+            {t('fleet:fleet-secret-description')}
+          </CardDescription>
         </div>
 
         <button
@@ -120,7 +117,7 @@ const FleetSecret = ({
           onClick={toggleSafe}
           className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
-          Safe Sensitives
+          {t('fleet:fleet-safe-sensitives')}
           {safe ? (
             <EyeSlashIcon className="h-5 w-5" />
           ) : (
@@ -136,7 +133,9 @@ const FleetSecret = ({
           <>
             {secret?.secret && (
               <CodeBlock
-                text={safe ? '*'.repeat(secret?.secret?.length || 0) : secret.secret}
+                text={
+                  safe ? '*'.repeat(secret?.secret?.length || 0) : secret.secret
+                }
               />
             )}
             {!secret?.secret && <FleetStatus status="no-fleet-secret" />}
@@ -177,9 +176,16 @@ const FleetSecret = ({
         </div>
       </CardContent>
 
-      <RenewFleetSecret teamId={teamId} setVisible={setRenewVisible} visible={renewVisible} />
+      <RenewFleetSecret
+        teamId={teamId}
+        setVisible={setRenewVisible}
+        visible={renewVisible}
+      />
 
-      <Dialog open={passwordDialogVisible} onOpenChange={setPasswordDialogVisible}>
+      <Dialog
+        open={passwordDialogVisible}
+        onOpenChange={setPasswordDialogVisible}
+      >
         <DialogContent className="sm:max-w-md">
           <form onSubmit={formik.handleSubmit}>
             <DialogHeader>
@@ -191,7 +197,9 @@ const FleetSecret = ({
 
             <div className="mt-4 space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="password">{t('fleet:fleet-user-password')}</Label>
+                <Label htmlFor="password">
+                  {t('fleet:fleet-user-password')}
+                </Label>
                 <Input
                   id="password"
                   type="password"
@@ -202,7 +210,9 @@ const FleetSecret = ({
                   autoComplete="current-password"
                 />
                 {formik.touched.password && formik.errors.password && (
-                  <p className="text-sm text-red-500">{formik.errors.password}</p>
+                  <p className="text-sm text-red-500">
+                    {formik.errors.password}
+                  </p>
                 )}
               </div>
             </div>
@@ -216,7 +226,9 @@ const FleetSecret = ({
                 {t('cancel')}
               </Button>
               <Button type="submit" disabled={formik.isSubmitting}>
-                {formik.isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                {formik.isSubmitting && (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                )}
                 {t('continue')}
               </Button>
             </DialogFooter>
@@ -224,7 +236,7 @@ const FleetSecret = ({
         </DialogContent>
       </Dialog>
     </Card>
-  )
-}
+  );
+};
 
-export default FleetSecret
+export default FleetSecret;
