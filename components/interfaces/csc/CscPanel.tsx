@@ -1,8 +1,9 @@
 import { useState, useCallback } from 'react';
+import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 import { SectionFilter, StatusesTable } from './';
 import StatusFilter from './StatusFilter';
-import { PerPageSelector } from '@/components/shared';
+import { PerPageSelector, FilterChipRow } from '@/components/shared';
 import { ISO } from 'types';
 import useCscStatuses from 'hooks/useCscStatuses';
 import type { Task } from 'types';
@@ -85,11 +86,61 @@ export default function CscPanel({
   mutateTasks,
   enabledFrameworks,
 }: CscPanelProps) {
+  const router = useRouter();
   const { t } = useTranslation(['common', `csc/${iso}`]);
   const { statuses, mutateStatuses } = useCscStatuses(slug, iso);
-  const [sectionFilter, setSectionFilter] = useState<string[] | null>(null);
-  const [statusFilter, setStatusFilter] = useState<CscStatus[] | null>(null);
-  const [perPage, setPerPage] = useState<number>(10);
+
+  // Read filter state from URL
+  const sectionFilterValue = (router.query.section as string) ?? '';
+  const statusFilterValue = (router.query.status as string) ?? '';
+  const perPageValue = Number(router.query.perPage ?? 10);
+
+  // Convert string values to appropriate types for internal use
+  const sectionFilter = sectionFilterValue ? [sectionFilterValue] : null;
+  const statusFilter = statusFilterValue ? ([statusFilterValue] as CscStatus[]) : null;
+  const perPage = perPageValue;
+
+  // Update URL with new filter values (replaces history to avoid back-stack pollution)
+  const updateFilter = useCallback(
+    (updates: Record<string, string | number | undefined>) => {
+      router.replace(
+        {
+          pathname: router.pathname,
+          query: {
+            ...router.query,
+            ...updates,
+            // Reset to page 1 when filter changes
+            ...(updates.section !== undefined || updates.status !== undefined ? { page: 1 } : {}),
+          },
+        },
+        undefined,
+        { shallow: true }
+      );
+    },
+    [router]
+  );
+
+  const setSectionFilter = useCallback(
+    (value: string[] | null) => {
+      updateFilter({ section: value?.[0] });
+    },
+    [updateFilter]
+  );
+
+  const setStatusFilter = useCallback(
+    (value: CscStatus[] | null) => {
+      updateFilter({ status: value?.[0] });
+    },
+    [updateFilter]
+  );
+
+  const setPerPage = useCallback(
+    (value: number) => {
+      updateFilter({ perPage: value });
+    },
+    [updateFilter]
+  );
+
   const [soaModalOpen, setSoaModalOpen] = useState(false);
 
   // ── Status prompt state (shown after linking a task when status is 'unknown') ──
@@ -352,14 +403,26 @@ export default function CscPanel({
 
   const frameworkLabel = isoValueToLabel(iso) ?? iso;
 
+  // Build filter chips for display
+  const filterChips = [
+    ...(sectionFilterValue ? [{ label: sectionFilterValue, value: sectionFilterValue, onRemove: () => setSectionFilter(null) }] : []),
+    ...(statusFilterValue ? [{ label: statusFilterValue, value: statusFilterValue, onRemove: () => setStatusFilter(null) }] : []),
+  ];
+
+  const onClearAllFilters = useCallback(() => {
+    updateFilter({ section: undefined, status: undefined });
+  }, [updateFilter]);
+
   return (
     <>
       <CscChartsLayout statuses={statuses} iso={iso} />
 
+      <FilterChipRow chips={filterChips} onClearAll={onClearAllFilters} />
+
       <div className="flex flex-row justify-end">
-        <SectionFilter ISO={iso} setSectionFilter={setSectionFilter} />
-        <StatusFilter setStatusFilter={setStatusFilter} />
-        <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
+        <SectionFilter ISO={iso} setSectionFilter={setSectionFilter as any} />
+        <StatusFilter setStatusFilter={setStatusFilter as any} />
+        <PerPageSelector perPage={perPage} setPerPage={setPerPage as any} />
 
         <button
           className="flex items-center justify-between overflow-hidden truncate rounded-md border border-input bg-transparent py-2 shadow-xs ring-offset-background data-placeholder:text-muted-foreground focus:outline-hidden focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:truncate h-full px-2 text-sm hover:bg-accent hover:text-accent-foreground"
