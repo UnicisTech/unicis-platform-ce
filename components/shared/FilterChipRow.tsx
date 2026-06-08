@@ -1,5 +1,6 @@
 import React from 'react'
 import { X, Filter } from 'lucide-react'
+import { useTranslation } from 'next-i18next'
 
 export interface FilterChip {
   label: string
@@ -20,10 +21,11 @@ const chipColour = {
 }
 
 export function FilterChipRow({ chips, onClearAll }: FilterChipRowProps) {
+  const { t } = useTranslation('common')
   if (chips.length === 0) return null
   return (
     <div className="flex items-center gap-1.5 flex-wrap py-1.5 px-4 bg-white border-b border-slate-200">
-      <span className="text-[11px] text-slate-500">Filtered by:</span>
+      <span className="text-[11px] text-slate-500">{t('filtered-by')}:</span>
       {chips.map((chip) => (
         <span
           key={chip.value}
@@ -44,7 +46,7 @@ export function FilterChipRow({ chips, onClearAll }: FilterChipRowProps) {
         onClick={onClearAll}
         className="text-[11px] text-slate-500 hover:text-slate-600 ml-1"
       >
-        Clear all
+        {t('clear-all')}
       </button>
     </div>
   )

@@ -2,6 +2,7 @@ import React from 'react'
 import { cn } from '@/components/shadcn/lib/utils'
 
 export type CscStatus =
+  | 'not_applicable'
   | 'not_performed'
   | 'performed_informally'
   | 'planned'
@@ -15,6 +16,12 @@ const STATUS_CONFIG: Record<CscStatus, {
   bg: string
   text: string
 }> = {
+  not_applicable: {
+    label: 'Not applicable',
+    dotColor: 'bg-slate-400',
+    bg: 'bg-slate-100',
+    text: 'text-slate-700',
+  },
   not_performed: {
     label: 'Not performed',
     dotColor: 'bg-ub-red',
@@ -61,6 +68,13 @@ interface CscStatusBadgeProps {
 
 export function CscStatusBadge({ status, size = 'md', className }: CscStatusBadgeProps) {
   const config = STATUS_CONFIG[status]
+
+  // Guard against undefined config
+  if (!config) {
+    console.warn(`Invalid status passed to CscStatusBadge: ${status}`)
+    return null
+  }
+
   return (
     <span
       className={cn(

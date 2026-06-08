@@ -1,5 +1,6 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useMemo, useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
+import toast from 'react-hot-toast';
 import StatusHeader from './StatusHeader';
 import TaskSelector from './TaskSelector';
 import { getCscControlsProp } from '@/lib/csc';
@@ -15,6 +16,7 @@ import frameworks from '@/lib/csc/frameworks';
 import ControlCodeLink from './ControlCodeLink';
 import ControlMappingDrawer from './ControlMappingDrawer';
 import { getMappingCount } from '@/lib/csc/framework-mapping-utils';
+import { BulkActionBar, CscStatusBadge, CSC_STATUS_TO_BADGE_KEY } from '@/components/shared';
 
 const StatusesTable = ({
   slug,
@@ -72,6 +74,8 @@ const StatusesTable = ({
     code: string;
     title: string;
   } | null>(null);
+  const [bulkTaskLinkOpen, setBulkTaskLinkOpen] = useState(false);
+  const [selectedTaskNumbers, setSelectedTaskNumbers] = useState<Set<number>>(new Set());
 
   const openDrawer = useCallback((id: string, code: string, title: string) => {
     setDrawerControl({ id, code, title });
@@ -79,6 +83,37 @@ const StatusesTable = ({
   }, []);
 
   const closeDrawer = useCallback(() => setDrawerOpen(false), []);
+
+  // ── Bulk selection state ────────────────────────────────────
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [bulkActionStep, setBulkActionStep] = useState<'link-tasks' | 'change-status'>('link-tasks');
+  const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
+  const [controlsMissingTasks, setControlsMissingTasks] = useState<Set<string>>(new Set());
+
+  const toggleSelect = useCallback((id: string) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      console.log(`[toggleSelect] Updated selectedIds: ${Array.from(next).join(', ')}`);
+      return next;
+    });
+  }, []);
+
+  const openBulkTaskLink = useCallback(() => {
+    setBulkActionStep('link-tasks');
+    setBulkTaskLinkOpen(true);
+  }, []);
+
+  const closeBulkTaskLink = useCallback(() => {
+    setBulkTaskLinkOpen(false);
+    setSelectedTaskNumbers(new Set());
+  }, []);
+
+  const completeBulkTaskLinking = useCallback(() => {
+    setBulkTaskLinkOpen(false);
+    setBulkActionStep('change-status');
+    setSelectedTaskNumbers(new Set());
+  }, []);
 
   // ── Filtering ──────────────────────────────────────────────
   const filteredControls = useMemo(() => {
@@ -112,6 +147,125 @@ const StatusesTable = ({
     nextButtonDisabled,
   } = usePagination(filteredControls, perPage);
 
+  // ── Bulk selection callbacks (defined after pageData is available) ──
+  const toggleAll = useCallback(() => {
+    setSelectedIds((prev) => {
+      const next = prev.size === pageData.length
+        ? new Set<string>()
+        : new Set<string>(pageData.map((c) => c.id));
+      console.log(`[toggleAll] Updated selectedIds: ${Array.from(next).join(', ')}`);
+      return next;
+    });
+  }, [pageData]);
+
+  // Check which selected controls are missing tasks
+  const { allSelectedHaveTasks, missingTasksSet } = useMemo(() => {
+    if (selectedIds.size === 0) return { allSelectedHaveTasks: true, missingTasksSet: new Set<string>() };
+
+    const missing = new Set<string>();
+
+    Array.from(selectedIds).forEach((controlId) => {
+      const controlTasks = tasks.filter((task: any) =>
+        task.properties?.[cscControlsProp]?.includes(controlId)
+      );
+      if (controlTasks.length === 0) {
+        missing.add(controlId);
+      }
+    });
+
+    return {
+      allSelectedHaveTasks: missing.size === 0,
+      missingTasksSet: missing,
+    };
+  }, [selectedIds, tasks, cscControlsProp]);
+
+  // Update controlsMissingTasks when selection changes
+  useEffect(() => {
+    setControlsMissingTasks(missingTasksSet);
+  }, [missingTasksSet]);
+
+  // Auto-transition to step 2 when all controls have tasks
+  useEffect(() => {
+    if (allSelectedHaveTasks && selectedIds.size > 0 && bulkActionStep === 'link-tasks') {
+      console.log('Auto-transitioning to change-status step. selectedIds:', Array.from(selectedIds));
+      setBulkActionStep('change-status');
+    }
+  }, [allSelectedHaveTasks, selectedIds, bulkActionStep]);
+
+  const handleBulkStatusChange = useCallback(
+    async (newStatus: string) => {
+      console.error('⚠️ HANDLEBUKLSTATUSCHANGE CALLED WITH:', newStatus);
+      try {
+        const controlsToUpdate = Array.from(selectedIds);
+
+        console.log('===== BULK STATUS CHANGE START =====');
+        console.log('selectedIds size:', selectedIds.size);
+        console.log('controlsToUpdate length:', controlsToUpdate.length);
+        console.log('controlsToUpdate array:', controlsToUpdate);
+        console.log('newStatus:', newStatus);
+
+        // CRITICAL: Check if selectedIds is empty
+        if (controlsToUpdate.length === 0) {
+          console.error('ERROR: selectedIds is EMPTY! No controls to update!');
+          toast.error('No controls selected!');
+          return;
+        }
+
+        // Apply status change to each selected control sequentially
+        for (let i = 0; i < controlsToUpdate.length; i++) {
+          const controlId = controlsToUpdate[i];
+          console.log(`[${i + 1}/${controlsToUpdate.length}] About to call statusHandler for: ${controlId}`);
+          const result = await statusHandler(controlId, newStatus);
+          console.log(`[${i + 1}/${controlsToUpdate.length}] statusHandler returned for: ${controlId}`);
+        }
+
+        console.log('===== BULK STATUS CHANGE COMPLETE =====');
+        toast.success(
+          t('success-message', {
+            defaultValue: `${selectedIds.size} controls updated to "${newStatus}"`,
+          })
+        );
+        // Clear selection and reset workflow
+        setSelectedIds(new Set());
+        setBulkActionStep('link-tasks');
+        setStatusDropdownOpen(false);
+      } catch (error) {
+        console.error('Bulk status change error:', error);
+        toast.error(t('errors.requestFailed'));
+      }
+    },
+    [selectedIds, statusHandler, t]
+  );
+
+  // Handle bulk task linking for selected controls
+  const handleBulkLinkTasks = useCallback(
+    async (taskNumbers: number[]) => {
+      try {
+        const controlsToUpdate = Array.from(selectedIds);
+        console.log('Starting bulk task linking:', { taskNumbers, controlsToUpdate, count: controlsToUpdate.length });
+
+        for (const taskNumber of taskNumbers) {
+          for (const controlId of controlsToUpdate) {
+            console.log(`Linking task ${taskNumber} to control ${controlId}`);
+            const result = await taskSelectorHandler('select-option', [{ value: taskNumber }], controlId);
+            console.log(`Task link result for ${controlId}:`, result);
+          }
+        }
+
+        toast.success(
+          t('success-message', {
+            defaultValue: `Tasks linked to ${selectedIds.size} controls`,
+          })
+        );
+        completeBulkTaskLinking();
+      } catch (error) {
+        console.error('Bulk task linking error:', error);
+        toast.error(t('errors.requestFailed'));
+      }
+    },
+    [selectedIds, taskSelectorHandler, t, completeBulkTaskLinking]
+  );
+
   return (
     <>
       <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
@@ -119,6 +273,15 @@ const StatusesTable = ({
           <table className="w-full min-w-full divide-y divide-border text-sm">
             <thead className="bg-muted">
               <tr>
+                <th scope="col" className="px-6 py-3 text-left w-12">
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.size === pageData.length && pageData.length > 0}
+                    onChange={toggleAll}
+                    aria-label="Select all controls on this page"
+                    className="w-4 h-4"
+                  />
+                </th>
                 <th scope="col" className="px-6 py-3 text-left">
                   {t('code')}
                 </th>
@@ -150,6 +313,16 @@ const StatusesTable = ({
                 );
                 return (
                   <tr key={control.id}>
+                    {/* Selection checkbox */}
+                    <td className="px-6 py-3 w-12">
+                      <input
+                        type="checkbox"
+                        checked={selectedIds.has(control.id)}
+                        onChange={() => toggleSelect(control.id)}
+                        aria-label={`Select ${code}`}
+                        className="w-4 h-4"
+                      />
+                    </td>
                     {/* Clickable control code — opens mapping drawer */}
                     <td className="px-6 py-3">
                       <ControlCodeLink
@@ -217,6 +390,87 @@ const StatusesTable = ({
           />
         )}
       </div>
+
+      {/* Bulk action bar — shown when rows are selected */}
+      {selectedIds.size > 0 && (
+        <BulkActionBar
+          selectedCount={selectedIds.size}
+          step={bulkActionStep}
+          onLinkTasks={openBulkTaskLink}
+          onStatusChange={handleBulkStatusChange}
+          onClear={() => {
+            console.log('[BulkActionBar.onClear] Clearing selectedIds');
+            setSelectedIds(new Set());
+            setBulkActionStep('link-tasks');
+            setStatusDropdownOpen(false);
+          }}
+          statusDropdownOpen={statusDropdownOpen}
+          onToggleStatusDropdown={() => setStatusDropdownOpen(!statusDropdownOpen)}
+          hasAllTasksAssigned={allSelectedHaveTasks}
+          showTaskLinkingStep={controlsMissingTasks.size > 0}
+        />
+      )}
+
+      {/* Bulk task linking dialog */}
+      {bulkTaskLinkOpen && (
+        <div className="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h2 className="text-lg font-medium mb-2">{t('bulk-actions.link-tasks-required')} - {selectedIds.size} {selectedIds.size === 1 ? 'control' : 'controls'}</h2>
+            <p className="text-sm text-slate-600 mb-4">
+              {t('bulk-actions.select-tasks-description')}
+            </p>
+            <div className="space-y-2 max-h-64 overflow-y-auto mb-4 border border-slate-200 rounded p-3">
+              {tasks.length === 0 ? (
+                <p className="text-sm text-slate-500 text-center py-4">No tasks available</p>
+              ) : (
+                tasks.map((task) => (
+                  <label
+                    key={task.taskNumber}
+                    className="flex items-center gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedTaskNumbers.has(task.taskNumber)}
+                      onChange={(e) => {
+                        setSelectedTaskNumbers((prev) => {
+                          const next = new Set(prev);
+                          if (e.target.checked) {
+                            next.add(task.taskNumber);
+                          } else {
+                            next.delete(task.taskNumber);
+                          }
+                          return next;
+                        });
+                      }}
+                      className="w-4 h-4"
+                    />
+                    <span className="text-sm flex-1">{task.taskNumber} - {task.title}</span>
+                  </label>
+                ))
+              )}
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={closeBulkTaskLink}
+                className="flex-1 px-3 py-2 rounded border border-slate-200 hover:bg-slate-50 text-sm font-medium"
+              >
+                {t('cancel') || 'Cancel'}
+              </button>
+              <button
+                onClick={() => {
+                  if (selectedTaskNumbers.size > 0) {
+                    handleBulkLinkTasks(Array.from(selectedTaskNumbers));
+                  }
+                }}
+                disabled={selectedTaskNumbers.size === 0}
+                className="flex-1 px-3 py-2 rounded bg-ub-blue text-white text-sm font-medium hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed"
+              >
+                {selectedTaskNumbers.size > 0 ? `${t('bulk-actions.link-selected-tasks')} (${selectedTaskNumbers.size})` : t('bulk-actions.link-selected-tasks')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Mapping drawer — portal-like overlay from right side */}
       {drawerControl && (

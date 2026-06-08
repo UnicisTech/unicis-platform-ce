@@ -1540,19 +1540,19 @@
   "last-name-invalid": "Invalid last name",
   "enter-real-name": "Please enter a real name",
   "email-domain-invalid": "The email domain does not appear to be a valid mail domain. Please use a real email address.",
-  "filtered-by": "Filtered by",
-  "clear-filter": "Clear filter",
-  "clear-all": "Clear all",
+  "filtered-by": "Filtrato per",
+  "clear-filter": "Cancella filtro",
+  "clear-all": "Cancella tutto",
   "bulk-actions": {
-    "link-tasks-required": "Link tasks (required)",
-    "change-status": "Change status",
-    "step-1-link-tasks": "Step 1: Select tasks to add to selected controls",
-    "step-2-change-status": "Step 2: Select new status for all controls",
-    "select-tasks-description": "Select the tasks you want to link to all selected controls",
-    "select-new-status": "Select new status:",
-    "link-selected-tasks": "Link selected tasks",
-    "all-controls-must-have-tasks": "All controls must have tasks assigned before changing status",
-    "success-tasks-linked": "Tasks linked to {{controlCount}} controls",
-    "success-status-updated": "{{controlCount}} controls updated to {{status}}"
+    "link-tasks-required": "Collega attività (obbligatorio)",
+    "change-status": "Cambia stato",
+    "step-1-link-tasks": "Passaggio 1: Seleziona le attività da aggiungere ai controlli selezionati",
+    "step-2-change-status": "Passaggio 2: Seleziona il nuovo stato per tutti i controlli",
+    "select-tasks-description": "Seleziona le attività che desideri collegare a tutti i controlli selezionati",
+    "select-new-status": "Seleziona nuovo stato:",
+    "link-selected-tasks": "Collega attività selezionate",
+    "all-controls-must-have-tasks": "Tutti i controlli devono avere attività assegnate prima di modificare lo stato",
+    "success-tasks-linked": "Attività collegate a {{controlCount}} controlli",
+    "success-status-updated": "{{controlCount}} controlli aggiornati a {{status}}"
   }
 }

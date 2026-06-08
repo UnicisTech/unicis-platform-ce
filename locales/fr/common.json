@@ -1540,5 +1540,18 @@
   "enter-real-name": "Veuillez entrer un vrai nom",
   "email-domain-invalid": "Le domaine de l'e-mail ne semble pas être un domaine de messagerie valide. Veuillez utiliser une adresse e-mail réelle.",
   "filtered-by": "Filtré par",
-  "clear-filter": "Effacer le filtre"
+  "clear-filter": "Effacer le filtre",
+  "clear-all": "Effacer tout",
+  "bulk-actions": {
+    "link-tasks-required": "Lier des tâches (obligatoire)",
+    "change-status": "Changer le statut",
+    "step-1-link-tasks": "Étape 1 : Sélectionnez les tâches à ajouter aux contrôles sélectionnés",
+    "step-2-change-status": "Étape 2 : Sélectionnez le nouveau statut pour tous les contrôles",
+    "select-tasks-description": "Sélectionnez les tâches que vous souhaitez lier à tous les contrôles sélectionnés",
+    "select-new-status": "Sélectionnez un nouveau statut :",
+    "link-selected-tasks": "Lier les tâches sélectionnées",
+    "all-controls-must-have-tasks": "Tous les contrôles doivent avoir des tâches assignées avant de changer le statut",
+    "success-tasks-linked": "Tâches liées à {{controlCount}} contrôles",
+    "success-status-updated": "{{controlCount}} contrôles mis à jour en {{status}}"
+  }
 }

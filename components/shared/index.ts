@@ -22,3 +22,4 @@ export { FilterChipRow, type FilterChipRowProps } from './FilterChipRow';
 export { AlertBanner, type AlertBannerProps } from './AlertBanner';
 export { UpgradeGate, type UpgradeGateProps } from './UpgradeGate';
 export { ModuleEmptyState, type ModuleEmptyStateProps } from './ModuleEmptyState';
+export { BulkActionBar, type BulkActionBarProps } from './BulkActionBar';

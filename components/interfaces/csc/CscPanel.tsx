@@ -177,15 +177,25 @@ export default function CscPanel({
   );
 
   const statusHandler = useCallback(
-    async (control: string, value: string) => {
+    async (control: string, value: string): Promise<string | undefined> => {
+      console.log(`[statusHandler] Called for control: ${control}, value: ${value}`);
       const { error } = await updateCscStatus({
         slug,
         control,
         value,
         framework: iso,
       });
-      if (error) return toast.error(error.message || t('errors.requestFailed'));
-      mutateStatuses();
+      console.log(`[statusHandler] updateCscStatus response for ${control}:`, { error });
+      if (error) {
+        console.error(`[statusHandler] Error updating ${control}:`, error);
+        toast.error(error.message || t('errors.requestFailed'));
+        return undefined;
+      }
+      // Wait for the data to revalidate before returning
+      console.log(`[statusHandler] Calling mutateStatuses for ${control}...`);
+      await mutateStatuses();
+      console.log(`[statusHandler] mutateStatuses completed for ${control}`);
+      return undefined;
     },
     [slug, iso, t, mutateStatuses]
   );

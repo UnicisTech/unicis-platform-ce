@@ -1537,5 +1537,18 @@
   "enter-real-name": "Bitte geben Sie einen echten Namen ein",
   "email-domain-invalid": "Die E-Mail-Domain scheint keine gültige Mail-Domain zu sein. Bitte verwenden Sie eine echte E-Mail-Adresse.",
   "filtered-by": "Gefiltert nach",
-  "clear-filter": "Filter löschen"
+  "clear-filter": "Filter löschen",
+  "clear-all": "Alles löschen",
+  "bulk-actions": {
+    "link-tasks-required": "Aufgaben verknüpfen (erforderlich)",
+    "change-status": "Status ändern",
+    "step-1-link-tasks": "Schritt 1: Wählen Sie Aufgaben aus, die Sie zu ausgewählten Kontrollen hinzufügen möchten",
+    "step-2-change-status": "Schritt 2: Wählen Sie einen neuen Status für alle Kontrollen",
+    "select-tasks-description": "Wählen Sie die Aufgaben aus, die Sie zu allen ausgewählten Kontrollen verknüpfen möchten",
+    "select-new-status": "Neuen Status wählen:",
+    "link-selected-tasks": "Ausgewählte Aufgaben verknüpfen",
+    "all-controls-must-have-tasks": "Alle Kontrollen müssen Aufgaben zugeordnet haben, bevor der Status geändert wird",
+    "success-tasks-linked": "Aufgaben zu {{controlCount}} Kontrollen verknüpft",
+    "success-status-updated": "{{controlCount}} Kontrollen auf {{status}} aktualisiert"
+  }
 }
