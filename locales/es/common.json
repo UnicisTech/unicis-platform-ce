@@ -1542,6 +1542,12 @@
   "filtered-by": "Filtrado por",
   "clear-filter": "Borrar filtro",
   "clear-all": "Borrar todo",
+  "kpi": {
+    "compliance-score": "Puntuación de cumplimiento",
+    "based-on-controls": "Basado en la madurez de controles",
+    "csc-gaps": "Brechas de controles de ciberseguridad",
+    "controls-not-performed": "No realizados o desconocidos"
+  },
   "bulk-actions": {
     "link-tasks-required": "Vincular tareas (requerido)",
     "change-status": "Cambiar estado",

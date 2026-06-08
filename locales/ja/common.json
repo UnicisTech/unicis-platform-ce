@@ -1543,6 +1543,12 @@
   "filtered-by": "フィルタ対象:",
   "clear-filter": "フィルタをクリア",
   "clear-all": "すべてクリア",
+  "kpi": {
+    "compliance-score": "コンプライアンススコア",
+    "based-on-controls": "管理策の成熟度に基づく",
+    "csc-gaps": "サイバーセキュリティ管理策のギャップ",
+    "controls-not-performed": "未実施または不明"
+  },
   "bulk-actions": {
     "link-tasks-required": "タスクをリンク (必須)",
     "change-status": "ステータスを変更",

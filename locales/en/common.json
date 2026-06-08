@@ -1543,6 +1543,12 @@
   "filtered-by": "Filtered by",
   "clear-filter": "Clear filter",
   "clear-all": "Clear all",
+  "kpi": {
+    "compliance-score": "Compliance score",
+    "based-on-controls": "Based on control maturity",
+    "csc-gaps": "Cybersecurity control gaps",
+    "controls-not-performed": "Not performed or unknown"
+  },
   "bulk-actions": {
     "link-tasks-required": "Link tasks (required)",
     "change-status": "Change status",
