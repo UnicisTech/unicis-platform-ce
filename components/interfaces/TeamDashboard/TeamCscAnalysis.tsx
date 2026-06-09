@@ -120,7 +120,7 @@ const TeamCscAnalysis = ({
   return (
     <div>
       {/* Framework filter chips */}
-      <div className="flex items-center gap-2 mb-3">
+      <div className="flex items-center gap-2 mb-3 flex-wrap">
         <span className="text-[11px] text-slate-500 dark:text-slate-400">
           {t('framework', { defaultValue: 'Framework' })}:
         </span>

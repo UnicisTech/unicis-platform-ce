@@ -451,7 +451,7 @@ export default function CscPanel({
 
       <FilterChipRow chips={filterChips} onClearAll={onClearAllFilters} />
 
-      <div className="flex flex-row justify-end">
+      <div className="flex flex-wrap justify-end gap-1">
         <SectionFilter ISO={iso} setSectionFilter={setSectionFilter as any} />
         <StatusFilter setStatusFilter={setStatusFilter as any} />
         <PerPageSelector perPage={perPage} setPerPage={setPerPage as any} />

@@ -43,9 +43,12 @@ const AccountDropdown: React.FC = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="justify-between">
-          <span className="truncate">{username}</span>
-          <ChevronUpDownIcon className="w-5 h-5" />
+        <Button variant="ghost" className="gap-1 px-2 sm:px-3">
+          {/* Mobile: show only user icon to save header space */}
+          <UserCircleIcon className="w-5 h-5 flex-shrink-0 sm:hidden" />
+          {/* Desktop: full name + chevron */}
+          <span className="hidden sm:block truncate max-w-[140px]">{username}</span>
+          <ChevronUpDownIcon className="hidden sm:block w-4 h-4 flex-shrink-0" />
         </Button>
       </DropdownMenuTrigger>
 

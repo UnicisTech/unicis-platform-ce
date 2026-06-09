@@ -62,29 +62,29 @@ const Header = ({ setSidebarOpen }: HeaderProps) => {
   }
 
   return (
-    <div className="sticky top-0 z-40 flex h-12 shrink-0 items-center bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-4 sm:px-6 lg:px-6 gap-x-4">
-      {/* Mobile sidebar toggle */}
-      <button
-        type="button"
-        className="-m-2.5 p-2.5 text-slate-600 dark:text-slate-300 lg:hidden"
-        onClick={() => setSidebarOpen(true)}
-      >
-        <span className="sr-only">{t('open-sidebar')}</span>
-        <Bars3Icon className="h-5 w-5" aria-hidden="true" />
-      </button>
+    <div className="sticky top-0 z-40 flex h-12 shrink-0 items-center bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-4 sm:px-6 lg:px-6 gap-x-3">
 
-      {/* Module title */}
-      {moduleTitle && (
-        <span className="text-[14px] font-medium text-slate-900 dark:text-slate-100 tracking-tight">
-          {moduleTitle}
-        </span>
-      )}
+      {/* Left: hamburger + module title — flex-1 so it fills space and title can truncate */}
+      <div className="flex items-center gap-x-2.5 flex-1 min-w-0">
+        <button
+          type="button"
+          className="-m-2.5 p-2.5 text-slate-600 dark:text-slate-300 lg:hidden flex-shrink-0"
+          onClick={() => setSidebarOpen(true)}
+        >
+          <span className="sr-only">{t('open-sidebar')}</span>
+          <Bars3Icon className="h-5 w-5" aria-hidden="true" />
+        </button>
 
-      {/* ⌘K search trigger */}
-      <GlobalSearch />
+        {moduleTitle && (
+          <span className="truncate text-[14px] font-medium text-slate-900 dark:text-slate-100 tracking-tight">
+            {moduleTitle}
+          </span>
+        )}
+      </div>
 
-      {/* Right-side actions pushed to the far right */}
-      <div className="flex items-center gap-x-3 ml-auto">
+      {/* Right: search + bell + account — flex-shrink-0 so these never compress */}
+      <div className="flex items-center gap-x-3 flex-shrink-0">
+        <GlobalSearch />
         <NotificationBell />
         <AccountDropdown />
       </div>

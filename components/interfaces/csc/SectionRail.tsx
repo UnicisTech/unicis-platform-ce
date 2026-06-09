@@ -17,7 +17,7 @@ interface SectionRailProps {
 export function SectionRail({ sections, activeSection, onSelect }: SectionRailProps) {
   return (
     <aside
-      className="w-[210px] flex-shrink-0 border-l border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex flex-col overflow-hidden"
+      className="hidden lg:flex lg:w-[210px] flex-shrink-0 border-l border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex-col overflow-hidden"
       aria-label="Filter by section"
     >
       <div className="flex items-center justify-between px-3 py-2.5 border-b border-slate-200 dark:border-slate-700">

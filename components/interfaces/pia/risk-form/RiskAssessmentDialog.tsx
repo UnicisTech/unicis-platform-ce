@@ -192,7 +192,7 @@ export default function RiskAssessmentDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto p-6">
+      <DialogContent className="max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-x-hidden overflow-y-auto p-4 sm:p-6">
         <DialogHeader>
           <DialogTitle>{t('pia')}</DialogTitle>
           {currentStep > 0 && (
@@ -267,7 +267,7 @@ export default function RiskAssessmentDialog({
           )}
         </div>
 
-        <DialogFooter className="flex justify-end space-x-2">
+        <DialogFooter className="flex flex-wrap justify-end gap-2">
           <DialogClose asChild>
             <Button variant="outline">{t('close')}</Button>
           </DialogClose>

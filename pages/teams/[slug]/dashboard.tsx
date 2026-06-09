@@ -321,7 +321,7 @@ const TeamDashboard = ({
   return (
     <>
       {/* Top bar: compact alert (only when issues) + Export CSV always on right */}
-      <div className="flex items-center justify-between gap-3 mb-3">
+      <div className="flex flex-wrap items-center gap-3 mb-3">
         <ActionRequiredBanner tasks={tasks || []} slug={slug} team={team} />
         <Button
           variant="outline"
