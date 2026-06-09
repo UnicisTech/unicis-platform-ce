@@ -75,7 +75,7 @@ const NotificationItem = ({
     <div
       className={cn(
         'rounded-md border px-3 py-2 transition-colors',
-        notification.isRead ? 'bg-background' : 'bg-accent/40',
+        notification.isRead ? 'bg-white dark:bg-slate-800' : 'bg-slate-50 dark:bg-slate-700/40',
         compact ? 'text-xs' : 'text-sm'
       )}
     >
@@ -88,7 +88,7 @@ const NotificationItem = ({
               </p>
             ))}
           </div>
-          <p className="mt-0.5 text-xs text-muted-foreground truncate">
+          <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400 truncate">
             {notification.body}
           </p>
         </div>
@@ -97,7 +97,7 @@ const NotificationItem = ({
         )}
       </div>
       {timeLabel && (
-        <p className="mt-1 text-[10px] text-muted-foreground">{timeLabel}</p>
+        <p className="mt-1 text-[10px] text-slate-500 dark:text-slate-400">{timeLabel}</p>
       )}
     </div>
   );

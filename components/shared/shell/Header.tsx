@@ -14,8 +14,19 @@ function useModuleTitle(): string {
   const slug = (query.slug as string) || '';
 
   return useMemo(() => {
-    if (!isReady || !slug) return '';
-    const relative = asPath.split('?')[0].replace(`/teams/${slug}`, '');
+    if (!isReady) return '';
+
+    // Global / account routes (no team slug)
+    const path = asPath.split('?')[0];
+    if (path === '/teams') return t('all-teams');
+    if (path === '/settings/account') return t('profile');
+    if (path === '/settings/password') return t('password');
+    if (path === '/notifications') return t('notifications.title');
+    if (path === '/notifications/settings') return t('notifications.preferences-title');
+
+    // Team-scoped routes
+    if (!slug) return '';
+    const relative = path.replace(`/teams/${slug}`, '');
     if (!relative || relative === '/') return t('team-dashboard');
     if (relative.startsWith('/dashboard')) return t('team-dashboard');
     if (relative.startsWith('/tasks')) return t('all-tasks');

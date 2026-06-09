@@ -70,27 +70,48 @@ const TasksAnalysis = ({ slug }: { slug: string }) => {
   const total = tasks.length;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-3 mb-3">
-      {/* Pie chart card */}
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 flex items-center justify-center lg:w-[280px] flex-shrink-0">
-        <TasksPieChart statuses={statuses} />
+    <div className="flex flex-col xl:flex-row gap-3 mb-3">
+      {/* Pie chart card — wider, taller */}
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 xl:w-[420px] flex-shrink-0">
+        <div className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3">
+          {t('statuses-title')}
+        </div>
+        <div className="h-[220px]">
+          <TasksPieChart statuses={statuses} />
+        </div>
       </div>
 
-      {/* Status stat grid */}
-      <div className="flex-1 grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-3 xl:grid-cols-6 gap-2 content-start">
-        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 col-span-3 sm:col-span-6 lg:col-span-3 xl:col-span-6">
-          <div className="text-[10px] text-slate-400 mb-1">{t('total-tasks')}</div>
-          <div className="text-2xl font-semibold text-slate-900 dark:text-slate-100 tabular-nums">{total}</div>
+      {/* Right column: total card + status grid */}
+      <div className="flex-1 flex flex-col gap-2">
+        {/* Total Tasks — prominent hero card */}
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/40 dark:to-blue-900/30 border border-blue-200 dark:border-blue-800/50 rounded-xl px-4 py-3 flex items-center justify-between">
+          <div>
+            <div className="text-[11px] font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide mb-0.5">
+              {t('total-tasks')}
+            </div>
+            <div className="text-3xl font-bold text-blue-700 dark:text-blue-300 tabular-nums leading-none">
+              {total}
+            </div>
+          </div>
+          <div className="w-10 h-10 rounded-full bg-blue-200/60 dark:bg-blue-800/40 flex items-center justify-center">
+            <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+          </div>
         </div>
-        {STATUS_COLS.map((col) => (
-          <StatCard
-            key={col.key}
-            label={t(col.labelKey)}
-            value={counts[col.key] ?? 0}
-            dotClass={col.dotClass}
-            total={total}
-          />
-        ))}
+
+        {/* Status mini-stat grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-3 gap-2 flex-1">
+          {STATUS_COLS.map((col) => (
+            <StatCard
+              key={col.key}
+              label={t(col.labelKey)}
+              value={counts[col.key] ?? 0}
+              dotClass={col.dotClass}
+              total={total}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

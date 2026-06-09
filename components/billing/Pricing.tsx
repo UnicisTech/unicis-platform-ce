@@ -25,22 +25,22 @@ const Pricing: React.FC<PricingProps> = ({ team, plans, onPlanSelect }) => {
         {plans.map((plan) => (
           <div
             key={plan.id}
-            className="relative rounded-md bg-background border border-border"
+            className="relative rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700"
           >
             <div className="p-8">
               <div className="flex flex-col items-center pb-8 space-y-2">
-                <h3 className="text-2xl font-bold text-foreground">
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                   {plan.name}
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-slate-500 dark:text-slate-400">
                   {t('users')}: {plan.users}
                 </p>
               </div>
               <div className="flex flex-col items-center space-y-2">
-                <h3 className="text-2xl font-bold text-foreground">
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                   {plan.price}
                 </h3>
-                <span className="text-muted-foreground">{plan.subprice}</span>
+                <span className="text-slate-500 dark:text-slate-400">{plan.subprice}</span>
               </div>
             </div>
 
@@ -73,8 +73,8 @@ const Pricing: React.FC<PricingProps> = ({ team, plans, onPlanSelect }) => {
                   key={`${plan.id}-${app}`}
                   className="flex items-center space-x-4"
                 >
-                  <Check className="h-6 w-6 flex-none text-foreground" />
-                  <p className="text-muted-foreground">{app}</p>
+                  <Check className="h-6 w-6 flex-none text-slate-900 dark:text-slate-100" />
+                  <p className="text-slate-500 dark:text-slate-400">{app}</p>
                 </li>
               ))}
             </ul>

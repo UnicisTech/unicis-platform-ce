@@ -14,7 +14,7 @@ export const applyTheme = (theme: Theme) => {
   switch (theme) {
     case 'dark':
       document.documentElement.classList.add('dark');
-      document.documentElement.setAttribute('data-theme', 'black');
+      document.documentElement.setAttribute('data-theme', 'dark');
       localStorage.setItem('theme', 'dark');
       break;
     case 'light':
@@ -26,7 +26,7 @@ export const applyTheme = (theme: Theme) => {
     default:
       if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.documentElement.classList.add('dark');
-        document.documentElement.setAttribute('data-theme', 'black');
+        document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.removeItem('theme');
       } else {
         document.documentElement.classList.remove('dark');

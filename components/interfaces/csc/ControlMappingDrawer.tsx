@@ -488,7 +488,7 @@ export default function ControlMappingDrawer({
                                               fw
                                             )
                                           }
-                                          className="flex items-center gap-1.5 text-[10px] text-slate-500 dark:text-slate-400 hover:text-foreground transition-colors disabled:opacity-50"
+                                          className="flex items-center gap-1.5 text-[10px] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors disabled:opacity-50"
                                         >
                                           <Link2 className="h-2.5 w-2.5 shrink-0" />
                                           <span className="font-mono">
@@ -580,14 +580,14 @@ export default function ControlMappingDrawer({
                       )}
                     >
                       <div className="flex items-center gap-2 min-w-0">
-                        <span className="text-xs font-mono text-slate-500 dark:text-slate-400 group-hover:text-foreground flex-shrink-0">
+                        <span className="text-xs font-mono text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:hover:text-slate-100 flex-shrink-0">
                           #{task.taskNumber}
                         </span>
-                        <span className="text-xs truncate group-hover:text-foreground">
+                        <span className="text-xs truncate group-hover:text-slate-900 dark:hover:text-slate-100">
                           {task.title}
                         </span>
                       </div>
-                      <span className="text-xs text-foreground/80 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+                      <span className="text-xs text-slate-700 dark:text-slate-200 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
                         {t('csc-mapping.drawer.link-btn', 'Link')} →
                       </span>
                     </button>

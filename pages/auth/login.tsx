@@ -219,7 +219,7 @@ const Login: NextPageWithLayout<
         {t('dont-have-an-account')}
         <Link
           href={`/auth/join${params}`}
-          className="font-medium text-blue-600 dark:text-blue-400 hover:text-primary-focus ml-1"
+          className="font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 ml-1"
         >
           {t('create-a-free-account')}
         </Link>

@@ -48,12 +48,12 @@ export default function AuthLayout({
           height={48}
         />
         {heading && (
-          <h2 className="mt-6 text-2xl font-bold leading-9 tracking-tight text-foreground">
+          <h2 className="mt-6 text-2xl font-bold leading-9 tracking-tight text-slate-900 dark:text-slate-100">
             {t(heading)}
           </h2>
         )}
         {description && (
-          <p className="mt-2 text-muted-foreground">{t(description)}</p>
+          <p className="mt-2 text-slate-500 dark:text-slate-400">{t(description)}</p>
         )}
       </div>
       <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md">{children}</div>

@@ -86,34 +86,37 @@ const NotificationSettingsPage = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-semibold">
-            {t('notifications.preferences-title')}
-          </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            {t('notifications.preferences-description')}
-          </p>
+    <div className="space-y-4">
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+        {/* Panel header */}
+        <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+          <div>
+            <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
+              {t('notifications.preferences-title')}
+            </span>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              {t('notifications.preferences-description')}
+            </p>
+          </div>
+          <Button
+            onClick={handleSave}
+            disabled={!dirty || saving || isLoading}
+            size="sm"
+            className="gap-2"
+          >
+            {saving ? (
+              <>
+                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                {t('saving')}
+              </>
+            ) : (
+              t('save')
+            )}
+          </Button>
         </div>
-        <Button
-          onClick={handleSave}
-          disabled={!dirty || saving || isLoading}
-          className="gap-2"
-        >
-          {saving ? (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin" />
-              {t('saving')}
-            </>
-          ) : (
-            t('save')
-          )}
-        </Button>
-      </div>
 
-      <div className="overflow-hidden rounded-lg border">
-        <div className="grid grid-cols-[1fr_90px_90px_90px] gap-2 border-b bg-slate-100/60 dark:bg-slate-700/60 px-4 py-2 text-xs font-semibold uppercase text-slate-500 dark:text-slate-400">
+        {/* Column headers */}
+        <div className="grid grid-cols-[1fr_90px_90px_90px] gap-2 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
           <span>{t('notifications.type')}</span>
           {channelOrder.map((channel) => (
             <span key={channel} className="text-center">
@@ -121,13 +124,15 @@ const NotificationSettingsPage = () => {
             </span>
           ))}
         </div>
-        <div className="divide-y">
+
+        {/* Rows */}
+        <div className="divide-y divide-slate-100 dark:divide-slate-700">
           {NOTIFICATION_TYPES.map(({ type, labelKey }) => (
             <div
               key={type}
               className="grid grid-cols-[1fr_90px_90px_90px] items-center gap-2 px-4 py-3"
             >
-              <span className="text-sm">{t(labelKey)}</span>
+              <span className="text-sm text-slate-700 dark:text-slate-200">{t(labelKey)}</span>
               {channelOrder.map((channel) => {
                 const checkboxId = `${type}-${channel}`;
                 const checked = draft[type]?.[channel] ?? false;

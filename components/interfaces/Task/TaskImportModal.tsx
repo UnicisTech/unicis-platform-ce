@@ -165,12 +165,12 @@ const TaskImportModal = ({
         </DialogHeader>
 
         {/* Tab switcher */}
-        <div className="flex border-b">
+        <div className="flex border-b border-slate-200 dark:border-slate-700">
           <button
             className={`px-4 py-2 text-sm font-medium transition-colors ${
               activeTab === 'upload'
-                ? 'border-b-2 border-primary text-primary'
-                : 'text-slate-500 dark:text-slate-400 hover:text-foreground'
+                ? 'border-b-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400'
+                : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
             }`}
             onClick={() => handleTabChange('upload')}
           >
@@ -179,8 +179,8 @@ const TaskImportModal = ({
           <button
             className={`px-4 py-2 text-sm font-medium transition-colors ${
               activeTab === 'templates'
-                ? 'border-b-2 border-primary text-primary'
-                : 'text-slate-500 dark:text-slate-400 hover:text-foreground'
+                ? 'border-b-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400'
+                : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
             }`}
             onClick={() => handleTabChange('templates')}
           >
@@ -208,8 +208,8 @@ const TaskImportModal = ({
                       key={template.id}
                       className={`flex items-center gap-3 rounded-md border p-3 cursor-pointer transition-colors ${
                         selectedTemplate === template.id
-                          ? 'border-primary bg-primary/5'
-                          : 'hover:border-primary/50'
+                          ? 'border-blue-500 dark:border-blue-400 bg-blue-50 dark:bg-blue-950/30'
+                          : 'border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-600'
                       }`}
                       onClick={() => handleTemplateSelect(template.id)}
                     >
@@ -274,7 +274,7 @@ const TaskImportModal = ({
               {/* File upload section */}
               <div className="space-y-2">
                 <div
-                  className="flex flex-col items-center justify-center rounded-md border-2 border-dashed p-6 cursor-pointer hover:border-primary/50 transition-colors"
+                  className="flex flex-col items-center justify-center rounded-md border-2 border-dashed border-slate-300 dark:border-slate-600 p-6 cursor-pointer hover:border-blue-400 dark:hover:border-blue-500 transition-colors"
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <svg
@@ -292,7 +292,7 @@ const TaskImportModal = ({
                   </svg>
                   <p className="text-sm text-slate-500 dark:text-slate-400">
                     {fileName ? (
-                      <span className="font-medium text-foreground">
+                      <span className="font-medium text-slate-900 dark:text-slate-100">
                         {fileName}
                       </span>
                     ) : (

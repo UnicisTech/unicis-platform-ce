@@ -69,7 +69,7 @@ const Webhooks = ({ team }: { team: Team }) => {
             <h2 className="text-xl font-medium leading-none tracking-tight">
               {t('webhooks')}
             </h2>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-slate-500 dark:text-slate-400">
               {t('webhooks-description')}
             </p>
           </div>

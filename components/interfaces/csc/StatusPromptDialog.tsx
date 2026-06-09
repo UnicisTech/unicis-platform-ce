@@ -73,7 +73,7 @@ export default function StatusPromptDialog({
             <Badge variant="secondary" className="font-mono font-bold">
               {controlCode}
             </Badge>{' '}
-            <span className="text-foreground/80">{controlTitle}</span>
+            <span className="text-slate-700 dark:text-slate-200">{controlTitle}</span>
           </DialogDescription>
         </DialogHeader>
 

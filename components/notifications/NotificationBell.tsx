@@ -38,7 +38,7 @@ const NotificationBell = () => {
             <button
               type="button"
               onClick={markAllRead}
-              className="text-xs text-muted-foreground hover:text-foreground"
+              className="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
             >
               {t('notifications.mark-all-read')}
             </button>
@@ -47,10 +47,10 @@ const NotificationBell = () => {
         <DropdownMenuSeparator />
         <div className="max-h-96 space-y-2 overflow-y-auto px-2 py-2">
           {isLoading && (
-            <p className="text-xs text-muted-foreground">{t('loading')}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">{t('loading')}</p>
           )}
           {!isLoading && notifications.length === 0 && (
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               {t('notifications.none')}
             </p>
           )}
