@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 import { SectionFilter, StatusesTable } from './';
@@ -19,6 +19,14 @@ import { downloadSoaOds } from '@/lib/soa/exportOds';
 import { downloadSoaHtml } from '@/lib/soa/exportHtml';
 import { downloadSoaPdf } from '@/lib/soa/exportPdf';
 import type { ExportFormat, SoaPayload, SoaRow } from '@/lib/soa/types';
+import { SectionRail } from './SectionRail';
+
+const STATUS_WEIGHT: Record<string, number> = {
+  'unknown': -1, 'not-applicable': -1,
+  'not-performed': 0, 'performed-informally': 25,
+  'planned': 50, 'well-defined': 75,
+  'quantitatively-controlled': 90, 'continuously-improving': 100,
+};
 
 export async function updateCscStatus(params: {
   slug: string;
@@ -178,23 +186,17 @@ export default function CscPanel({
 
   const statusHandler = useCallback(
     async (control: string, value: string): Promise<string | undefined> => {
-      console.log(`[statusHandler] Called for control: ${control}, value: ${value}`);
       const { error } = await updateCscStatus({
         slug,
         control,
         value,
         framework: iso,
       });
-      console.log(`[statusHandler] updateCscStatus response for ${control}:`, { error });
       if (error) {
-        console.error(`[statusHandler] Error updating ${control}:`, error);
         toast.error(error.message || t('errors.requestFailed'));
         return undefined;
       }
-      // Wait for the data to revalidate before returning
-      console.log(`[statusHandler] Calling mutateStatuses for ${control}...`);
       await mutateStatuses();
-      console.log(`[statusHandler] mutateStatuses completed for ${control}`);
       return undefined;
     },
     [slug, iso, t, mutateStatuses]
@@ -423,6 +425,26 @@ export default function CscPanel({
     updateFilter({ section: undefined, status: undefined });
   }, [updateFilter]);
 
+  // Compute per-section compliance percentage for SectionRail
+  const sectionData = useMemo(() => {
+    const fw = frameworks[iso];
+    if (!fw || !statuses) return [];
+    return fw.sections.map((section) => {
+      const controls = fw.controls.filter((c) => c.sectionId === section.id);
+      const scored = controls
+        .map((c) => STATUS_WEIGHT[statuses[c.id] ?? 'unknown'])
+        .filter((w) => w >= 0);
+      const percent = scored.length
+        ? Math.round(scored.reduce((a, b) => a + b, 0) / scored.length)
+        : 0;
+      return {
+        code: section.id,
+        name: t(`csc/${iso}:sections.${section.id}.label`),
+        percent,
+      };
+    });
+  }, [iso, statuses, t]);
+
   return (
     <>
       <CscChartsLayout statuses={statuses} iso={iso} />
@@ -457,20 +479,27 @@ export default function CscPanel({
         </button>
       </div>
 
-      <StatusesTable
-        slug={slug}
-        ISO={iso}
-        tasks={tasks}
-        statuses={statuses}
-        sectionFilter={sectionFilter}
-        statusFilter={statusFilter}
-        perPage={perPage}
-        statusHandler={statusHandler}
-        taskSelectorHandler={taskSelectorHandler}
-        enabledFrameworks={enabledFrameworks}
-        onLinkTask={onLinkTask}
-        onBulkLinkMapped={onBulkLinkMapped}
-      />
+      <div className="flex overflow-hidden">
+        <StatusesTable
+          slug={slug}
+          ISO={iso}
+          tasks={tasks}
+          statuses={statuses}
+          sectionFilter={sectionFilter}
+          statusFilter={statusFilter}
+          perPage={perPage}
+          statusHandler={statusHandler}
+          taskSelectorHandler={taskSelectorHandler}
+          enabledFrameworks={enabledFrameworks}
+          onLinkTask={onLinkTask}
+          onBulkLinkMapped={onBulkLinkMapped}
+        />
+        <SectionRail
+          sections={sectionData}
+          activeSection={sectionFilterValue || null}
+          onSelect={(code) => setSectionFilter(code ? [code] : null)}
+        />
+      </div>
 
       <SoaExportModal
         isOpen={soaModalOpen}

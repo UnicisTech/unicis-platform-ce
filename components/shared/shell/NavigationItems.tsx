@@ -53,7 +53,7 @@ export const NavigationItems: React.FC<NavigationItemsProps> = ({ menus }) => (
   </ul>
 );
 
-const NavigationItem: React.FC<NavigationItemProps> = ({ menu, className }) => {
+const NavigationItem: React.FC<NavigationItemProps> = ({ menu }) => {
   const isExternal = menu.href.startsWith('http');
   const newTab = isExternal || menu.openInNewTab;
 
@@ -63,27 +63,32 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ menu, className }) => {
       target={newTab ? '_blank' : undefined}
       rel={newTab ? 'noopener noreferrer' : undefined}
       className={classNames(
-        'flex items-center rounded-md text-sm px-2 p-2 gap-2',
+        'flex items-center rounded-md text-[13px] px-2 p-2 gap-2 transition-colors',
         menu.active
-          ? 'bg-muted font-semibold text-foreground'
-          : 'text-foreground hover:bg-muted hover:text-foreground',
-        className
+          ? 'bg-ub-blue-bg text-ub-blue-text font-medium'
+          : 'text-slate-600 hover:bg-slate-50 hover:text-slate-700'
       )}
     >
       {menu.icon && (
-        <menu.icon
-          className={classNames({
-            'h-5 w-5 min-h-5 min-w-5 flex-none shrink-0': true,
-            'text-primary': menu.active,
-            [className as string]: true,
-          })}
-          aria-hidden="true"
-        />
+        // Wrap in a span so CSS filter can grey out PNG image icons when inactive.
+        // Heroicon/Lucide SVG icons also receive a text-colour class (uses currentColor).
+        <span
+          className="flex-none shrink-0 flex items-center justify-center h-5 w-5"
+          style={menu.active ? undefined : { filter: 'grayscale(1)', opacity: 0.45 }}
+        >
+          <menu.icon
+            className={classNames(
+              'h-5 w-5 min-h-5 min-w-5',
+              menu.active ? 'text-ub-blue' : 'text-slate-500'
+            )}
+            aria-hidden="true"
+          />
+        </span>
       )}
       <span className="min-w-0 flex-1">{menu.name}</span>
       {newTab && (
         <ArrowTopRightOnSquareIcon
-          className="h-4 w-4 shrink-0 text-muted-foreground"
+          className="h-3 w-3 shrink-0 text-slate-300"
           aria-hidden="true"
         />
       )}

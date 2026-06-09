@@ -74,6 +74,14 @@
   "successfully-updated": "Cambios guardados correctamente.",
   "all-teams": "Todos los equipos",
   "team-dashboard": "Panel del equipo",
+  "dashboard.tab.data-protection": "Protección de datos",
+  "dashboard.tab.cybersecurity": "Ciberseguridad & cumplimiento",
+  "dashboard.tab.risk": "Gestión de riesgos",
+  "dashboard.needs-attention": "Requiere atención",
+  "dashboard.task-matrix-title": "Tareas por módulo",
+  "dashboard.open-tasks": "Tareas abiertas",
+  "dashboard.overdue-tasks": "Tareas vencidas",
+  "dashboard.no-overdue": "Sin elementos vencidos",
   "team-invite": "le está invitando a unirse a su equipo.",
   "response": "Respuesta",
   "page-not-found-title": "Página no encontrada",
@@ -365,7 +373,6 @@
   "risk-count": "Recuento de riesgos",
   "risk-levels": "Niveles de riesgo",
   "maturity-level-0-6": "Nivel de madurez (0-6)",
-
   "rpa": "Registro de Procedimientos",
   "rpa-dashboard": "Panel del Registro de Procedimientos",
   "rpa-activities": "Registro de Actividades de Tratamiento",
@@ -399,7 +406,6 @@
   "review-date": "Fecha de revisión",
   "controller": "Responsable del tratamiento",
   "data-protection-officer": "Delegado de Protección de Datos",
-
   "tia": "Evaluación de Impacto de Transferencia",
   "tia-dashboard": "Panel de Evaluación de Impacto de Transferencia",
   "tia-data-exporter": "Exportador(es) de datos",
@@ -420,12 +426,10 @@
   "risk-level": "Nivel de riesgo",
   "procedure-has-not-been-created-for-this-issue": "No se ha creado un procedimiento para este problema.",
   "select-a-country": "Seleccione un país",
-
   "yes": "Sí",
   "no": "No",
   "na": "No aplicable",
   "in-view-of-the-above-transfer-is": "En vista de lo anterior y de las leyes de protección de datos aplicables, la transferencia es:",
-
   "rm": "Gestión de Riesgos",
   "rm-dashboard": "Panel de Gestión de Riesgos",
   "rm-created": "Riesgo creado correctamente.",
@@ -442,7 +446,6 @@
   "percent-max-100": "porcentaje (máx. 100)",
   "risk": "Riesgo",
   "max-100": "(máx. 100)",
-
   "iap": "Formación de Concienciación Interactiva",
   "multiple-options": "Múltiples opciones",
   "clear-selection": "— Borrar selección —",
@@ -462,7 +465,6 @@
   "passed": "Aprobado",
   "failed": "Reprobado",
   "manage-courses-and-categories": "Gestionar cursos y categorías.",
-
   "task-id": "ID de la tarea",
   "due-date": "Fecha de vencimiento",
   "delete-task-warning": "¿Está seguro de que desea eliminar esta tarea?",
@@ -817,7 +819,6 @@
   "course-thumbnail": "Miniatura del curso",
   "estimated-minutes": "Estimado: {{time}} minutos",
   "open": "Abrir",
-
   "change-theme-header": "Cambiar tema",
   "logout": "Cerrar sesión",
   "sign-out": "Cerrar sesión",
@@ -887,7 +888,6 @@
   "attachment-browse": "explorar",
   "download": "Descargar",
   "start": "Iniciar",
-
   "number-of-members": "Número de miembros",
   "price-per-user": "Precio por usuario",
   "total": "Total",
@@ -896,7 +896,6 @@
   "pay-with-wise": "Pagar con Wise",
   "wise-qr-alt": "Código QR de Wise Quick Pay",
   "scan-qr-tip": "Escanee este código QR para realizar un pago rápido con Wise",
-
   "statuses": {
     "unknown": {
       "label": "Desconocido",

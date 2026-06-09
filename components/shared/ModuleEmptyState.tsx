@@ -1,10 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
 
-// Accepts a Lucide/Heroicon component OR a public image path (e.g. "/unicis-rpa-logo.png")
-type IconProp =
-  | React.ComponentType<{ className?: string; 'aria-hidden'?: boolean | string }>
-  | string
+// Accepts any React icon component (Lucide, Heroicons, etc.) OR a public image path
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type IconProp = React.ComponentType<any> | string
 
 export interface ModuleEmptyStateProps {
   icon: IconProp

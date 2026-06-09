@@ -2,7 +2,6 @@ import RiskMatrixDashboardChart from '../pia/RiskMatrixDashboardChart';
 import { computeRiskMap } from '@/lib/pia';
 import { useTranslation } from 'next-i18next';
 import type { Task } from 'types';
-import { Card } from '@/components/shadcn/ui/card';
 
 interface PiaAnalysisProps {
   tasks: Task[] | undefined;
@@ -34,61 +33,36 @@ export const piaDashboardConfig = [
 const PiaAnalysis = ({ tasks, onCellClick }: PiaAnalysisProps) => {
   const { t } = useTranslation('common');
 
-  if (!tasks) {
-    return null;
-  }
+  if (!tasks) return null;
 
-  const riskSections = piaDashboardConfig.map(
-    ({ id, titleKey, security, probability }) => ({
-      id,
-      titleKey,
-      map: computeRiskMap(tasks, id, { security, probability }),
-    })
-  );
+  const riskSections = piaDashboardConfig.map(({ id, titleKey, security, probability }) => ({
+    id,
+    titleKey,
+    map: computeRiskMap(tasks, id, { security, probability }),
+  }));
 
   return (
-    <>
-      <Card>
-        <div className="w-full p-4 mx-3">
-          <div className="flex flex-col md:flex-row justify-center gap-6 overflow-x-scroll">
-            {riskSections.slice(0, 2).map(({ titleKey, id, map }) => (
-              <div key={id}>
-                <div className="flex-1 text-center text-lg font-semibold">
-                  {t(titleKey)}
-                </div>
-                <div className="flex-1">
-                  <RiskMatrixDashboardChart
-                    datasets={[]}
-                    counterMap={map}
-                    onCellClick={
-                      onCellClick ? (x, y) => onCellClick(id, x, y) : undefined
-                    }
-                  />
-                </div>
-              </div>
-            ))}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      {riskSections.map(({ titleKey, id, map }) => (
+        <div key={id} className="bg-white border border-slate-200 rounded-xl p-4 overflow-hidden">
+          <div className="mb-2">
+            <span className="text-[12px] font-medium text-slate-900 block">
+              {t('pia-overview')} · {t(titleKey)}
+            </span>
+            <span className="text-[10px] text-slate-400">
+              {t('pia-matrix-axis', { defaultValue: 'Impact → / Likelihood ↑' })}
+            </span>
           </div>
-          <div className="flex flex-col md:flex-row justify-center gap-6 overflow-x-scroll">
-            {riskSections.slice(2).map(({ titleKey, id, map }) => (
-              <div key={id}>
-                <div className="flex-1 text-center text-lg font-semibold">
-                  {t(titleKey)}
-                </div>
-                <div className="flex-1">
-                  <RiskMatrixDashboardChart
-                    datasets={[]}
-                    counterMap={map}
-                    onCellClick={
-                      onCellClick ? (x, y) => onCellClick(id, x, y) : undefined
-                    }
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
+          {/* cellSize=40 → chart width 300px, fits safely inside a 3-col card at ≥1280px */}
+          <RiskMatrixDashboardChart
+            datasets={[]}
+            counterMap={map}
+            cellSize={40}
+            onCellClick={onCellClick ? (x, y) => onCellClick(id, x, y) : undefined}
+          />
         </div>
-      </Card>
-    </>
+      ))}
+    </div>
   );
 };
 

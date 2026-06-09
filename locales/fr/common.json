@@ -73,7 +73,15 @@
   "save-changes": "Enregistrer les modifications",
   "successfully-updated": "Modifications enregistrées avec succès.",
   "all-teams": "Toutes les équipes",
-  "team-dashboard": "Tableau de bord de l’équipe",
+  "team-dashboard": "Tableau de bord de l'équipe",
+  "dashboard.tab.data-protection": "Protection des données",
+  "dashboard.tab.cybersecurity": "Cybersécurité & conformité",
+  "dashboard.tab.risk": "Gestion des risques",
+  "dashboard.needs-attention": "À traiter",
+  "dashboard.task-matrix-title": "Tâches par module",
+  "dashboard.open-tasks": "Tâches ouvertes",
+  "dashboard.overdue-tasks": "Tâches en retard",
+  "dashboard.no-overdue": "Aucun élément en retard",
   "team-invite": "vous invite à rejoindre son équipe.",
   "response": "Réponse",
   "page-not-found-title": "Page introuvable",
@@ -365,7 +373,6 @@
   "risk-count": "Nombre de risques",
   "risk-levels": "Niveaux de risque",
   "maturity-level-0-6": "Niveau de maturité (0-6)",
-
   "rpa": "Registre des procédures",
   "rpa-dashboard": "Tableau de bord du registre des procédures",
   "rpa-activities": "Registre des activités de traitement",
@@ -399,7 +406,6 @@
   "review-date": "Date de révision",
   "controller": "Responsable du traitement",
   "data-protection-officer": "Délégué à la protection des données",
-
   "tia": "Évaluation d’impact sur les transferts",
   "tia-dashboard": "Tableau de bord des évaluations d’impact sur les transferts",
   "tia-data-exporter": "Exportateur(s) de données",
@@ -420,12 +426,10 @@
   "risk-level": "Niveau de risque",
   "procedure-has-not-been-created-for-this-issue": "Aucune procédure n’a été créée pour ce problème.",
   "select-a-country": "Sélectionnez un pays",
-
   "yes": "Oui",
   "no": "Non",
   "na": "Non applicable",
   "in-view-of-the-above-transfer-is": "Au vu de ce qui précède et des lois applicables en matière de protection des données, le transfert est :",
-
   "rm": "Gestion des risques",
   "rm-dashboard": "Tableau de bord de la gestion des risques",
   "rm-created": "Risque créé avec succès.",
@@ -442,7 +446,6 @@
   "percent-max-100": "pourcentage (max. 100)",
   "risk": "Risque",
   "max-100": "(max. 100)",
-
   "iap": "Programme de sensibilisation interactif",
   "multiple-options": "Options multiples",
   "clear-selection": "— Effacer la sélection —",
@@ -462,7 +465,6 @@
   "passed": "Réussi",
   "failed": "Échoué",
   "manage-courses-and-categories": "Gérer les cours et les catégories.",
-
   "task-id": "ID de la tâche",
   "due-date": "Date d’échéance",
   "delete-task-warning": "Êtes-vous sûr de vouloir supprimer cette tâche ?",
@@ -817,7 +819,6 @@
   "course-thumbnail": "Miniature du cours",
   "estimated-minutes": "Estimé : {{time}} minutes",
   "open": "Ouvrir",
-
   "change-theme-header": "Changer le thème",
   "logout": "Se déconnecter",
   "sign-out": "Se déconnecter",
@@ -887,7 +888,6 @@
   "attachment-browse": "parcourir",
   "download": "Télécharger",
   "start": "Démarrer",
-
   "number-of-members": "Nombre de membres",
   "price-per-user": "Prix par utilisateur",
   "total": "Total",
@@ -896,7 +896,6 @@
   "pay-with-wise": "Payer avec Wise",
   "wise-qr-alt": "Code QR Wise Quick Pay",
   "scan-qr-tip": "Scannez ce code QR pour effectuer un paiement rapide avec Wise",
-
   "statuses": {
     "unknown": {
       "label": "Inconnu",

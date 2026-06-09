@@ -94,7 +94,6 @@ const StatusesTable = ({
     setSelectedIds((prev) => {
       const next = new Set(prev);
       next.has(id) ? next.delete(id) : next.add(id);
-      console.log(`[toggleSelect] Updated selectedIds: ${Array.from(next).join(', ')}`);
       return next;
     });
   }, []);
@@ -153,7 +152,6 @@ const StatusesTable = ({
       const next = prev.size === pageData.length
         ? new Set<string>()
         : new Set<string>(pageData.map((c) => c.id));
-      console.log(`[toggleAll] Updated selectedIds: ${Array.from(next).join(', ')}`);
       return next;
     });
   }, [pageData]);
@@ -187,39 +185,20 @@ const StatusesTable = ({
   // Auto-transition to step 2 when all controls have tasks
   useEffect(() => {
     if (allSelectedHaveTasks && selectedIds.size > 0 && bulkActionStep === 'link-tasks') {
-      console.log('Auto-transitioning to change-status step. selectedIds:', Array.from(selectedIds));
       setBulkActionStep('change-status');
     }
   }, [allSelectedHaveTasks, selectedIds, bulkActionStep]);
 
   const handleBulkStatusChange = useCallback(
     async (newStatus: string) => {
-      console.error('⚠️ HANDLEBUKLSTATUSCHANGE CALLED WITH:', newStatus);
       try {
         const controlsToUpdate = Array.from(selectedIds);
+        if (controlsToUpdate.length === 0) return;
 
-        console.log('===== BULK STATUS CHANGE START =====');
-        console.log('selectedIds size:', selectedIds.size);
-        console.log('controlsToUpdate length:', controlsToUpdate.length);
-        console.log('controlsToUpdate array:', controlsToUpdate);
-        console.log('newStatus:', newStatus);
-
-        // CRITICAL: Check if selectedIds is empty
-        if (controlsToUpdate.length === 0) {
-          console.error('ERROR: selectedIds is EMPTY! No controls to update!');
-          toast.error('No controls selected!');
-          return;
+        for (const controlId of controlsToUpdate) {
+          await statusHandler(controlId, newStatus);
         }
 
-        // Apply status change to each selected control sequentially
-        for (let i = 0; i < controlsToUpdate.length; i++) {
-          const controlId = controlsToUpdate[i];
-          console.log(`[${i + 1}/${controlsToUpdate.length}] About to call statusHandler for: ${controlId}`);
-          const result = await statusHandler(controlId, newStatus);
-          console.log(`[${i + 1}/${controlsToUpdate.length}] statusHandler returned for: ${controlId}`);
-        }
-
-        console.log('===== BULK STATUS CHANGE COMPLETE =====');
         toast.success(
           t('success-message', {
             defaultValue: `${selectedIds.size} controls updated to "${newStatus}"`,
@@ -229,8 +208,7 @@ const StatusesTable = ({
         setSelectedIds(new Set());
         setBulkActionStep('link-tasks');
         setStatusDropdownOpen(false);
-      } catch (error) {
-        console.error('Bulk status change error:', error);
+      } catch {
         toast.error(t('errors.requestFailed'));
       }
     },
@@ -242,13 +220,10 @@ const StatusesTable = ({
     async (taskNumbers: number[]) => {
       try {
         const controlsToUpdate = Array.from(selectedIds);
-        console.log('Starting bulk task linking:', { taskNumbers, controlsToUpdate, count: controlsToUpdate.length });
 
         for (const taskNumber of taskNumbers) {
           for (const controlId of controlsToUpdate) {
-            console.log(`Linking task ${taskNumber} to control ${controlId}`);
-            const result = await taskSelectorHandler('select-option', [{ value: taskNumber }], controlId);
-            console.log(`Task link result for ${controlId}:`, result);
+            await taskSelectorHandler('select-option', [{ value: taskNumber }], controlId);
           }
         }
 
@@ -258,8 +233,7 @@ const StatusesTable = ({
           })
         );
         completeBulkTaskLinking();
-      } catch (error) {
-        console.error('Bulk task linking error:', error);
+      } catch {
         toast.error(t('errors.requestFailed'));
       }
     },
@@ -399,7 +373,6 @@ const StatusesTable = ({
           onLinkTasks={openBulkTaskLink}
           onStatusChange={handleBulkStatusChange}
           onClear={() => {
-            console.log('[BulkActionBar.onClear] Clearing selectedIds');
             setSelectedIds(new Set());
             setBulkActionStep('link-tasks');
             setStatusDropdownOpen(false);
