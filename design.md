@@ -15,34 +15,327 @@ Unicis Platform is an open-core, enterprise-ready **trust management and complia
 
 ## UX/UI Design System — Direction B
 
-This section documents the **Direction B** design language introduced in the `ux-ui` branch. All new and refactored components must follow these tokens and patterns.
+This section documents the **Direction B** design language. All new and refactored components **must** follow these tokens, patterns, and responsiveness rules. Non-compliance is a blocking review issue.
 
 ### Design Philosophy
 
-Direction B is a calm, professional visual language built for compliance and security professionals (CISO, DPO, Engineers, DevSecOps, HR, C-level). The principles are:
+Direction B is a calm, professional visual language built for compliance and security professionals (CISO, DPO, Engineers, DevSecOps, HR, C-level). The core principles are:
 
 - **Information density over decoration** — data is primary, chrome is secondary
 - **Consistent spatial rhythm** — uniform padding, border radius, and type scale across every module
 - **Dark mode as first-class** — every token has an explicit `dark:` counterpart
 - **Legibility at small scale** — table headers at `text-[11px]` uppercase; body text at `text-[12px]`–`text-[13px]`
+- **Mobile-first, always** — every new component must work on a 375 px viewport before it is considered complete
 
-### Core Tokens
+---
 
-#### Card / Panel Container
+## Responsive Design — MANDATORY
+
+> **Responsiveness is not optional.** Every component, page, and modal must be tested at 375 px (mobile), 768 px (tablet), and 1280 px (desktop) before being merged. Layouts that break, overflow, or wrap uncontrollably at any of these widths are bugs.
+
+### Breakpoints
+
+Tailwind CSS breakpoints used across the platform:
+
+| Breakpoint | Token | Min-width | Typical device |
+|------------|-------|-----------|----------------|
+| Mobile     | *(default)* | 0 px | iPhone SE, Android compact |
+| Small      | `sm:` | 640 px | Landscape phone, small tablet |
+| Medium     | `md:` | 768 px | iPad portrait |
+| Large      | `lg:` | 1024 px | iPad landscape, small laptop |
+| Extra Large | `xl:` | 1280 px | Desktop |
+
+**Design at mobile first, add breakpoints upward. Never design desktop-first and bolt on mobile later.**
+
+---
+
+### Shell & Navigation
+
+#### AppShell
+- Sidebar is **always hidden on mobile / tablet** and revealed as a drawer via `lg:hidden` hamburger
+- Main content area has `lg:pl-64` offset (sidebar width) and falls to full width below `lg:`
+- Content padding: `px-4 sm:px-6 lg:px-6`
+
+#### Header
+The header is a fixed-height `h-12` sticky bar. It is split into two zones:
+
+```tsx
+<div className="sticky top-0 z-40 flex h-12 shrink-0 items-center ... gap-x-3">
+  {/* LEFT ZONE — flex-1 min-w-0: fills available space, title truncates */}
+  <div className="flex items-center gap-x-2.5 flex-1 min-w-0">
+    <button className="... lg:hidden flex-shrink-0">  {/* hamburger */}
+    <span className="truncate text-[14px] font-medium ...">  {/* module title */}
+  </div>
+
+  {/* RIGHT ZONE — flex-shrink-0: always fully visible */}
+  <div className="flex items-center gap-x-3 flex-shrink-0">
+    <GlobalSearch />
+    <NotificationBell />
+    <AccountDropdown />   {/* mobile: icon only; sm+: name + chevron */}
+  </div>
+</div>
+```
+
+**Rules:**
+- The title MUST use `truncate` — never allow it to wrap to a second line
+- The right zone MUST use `flex-shrink-0` so controls are always reachable
+- `AccountDropdown` shows only a `UserCircleIcon` on mobile (`< sm`), full name on `sm+`
+- Module title strings are mapped per-route in `useModuleTitle()`. Long names (e.g. "Cybersecurity Management System") truncate gracefully
+
+---
+
+### Grids & Layouts
+
+#### Module dashboard main layout
+```tsx
+<div className="flex flex-col lg:flex-row gap-3">
+  <PrimaryPanel />        {/* flex-1 */}
+  <SidePanel />           {/* lg:w-[280px] flex-shrink-0 */}
+</div>
+```
+
+#### KPI row
+```tsx
+<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+```
+
+#### IAP course grid
+```tsx
+<div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+```
+
+#### Task detail panels
+```tsx
+<div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-4">
+```
+
+**Rule:** Never use a fixed column count without responsive fallback. Always start with `grid-cols-1` and add larger breakpoints.
+
+---
+
+### Module Toolbars
+
+Every module toolbar (heading + filter controls + Create button) must use:
+
+```tsx
+<div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
+  <div className="flex items-center gap-2">
+    <h1 className="text-[15px] font-semibold ...">{t('module-name')}</h1>
+    <span className="... rounded-full">{count}</span>
+  </div>
+  <div className="flex items-center gap-2 flex-wrap">
+    {/* filters, create button */}
+  </div>
+</div>
+```
+
+**Rule:** `flex-wrap` is **mandatory** on both the outer container and the controls group. Without it, buttons overflow off-screen on narrow viewports.
+
+Applied to: RPA, TIA, PIA, RM, IAP, All Tasks, IAP Admin.
+
+---
+
+### Tables
+
+All module tables require a horizontal scroll wrapper. Narrow screens must scroll the table, not reflow it:
+
+```tsx
+{/* Card wrapper */}
+<div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+  {/* Scroll container */}
+  <div className="overflow-x-auto">
+    <table className="w-full min-w-full ...">
+      ...
+    </table>
+  </div>
+</div>
+```
+
+**Rule:** `overflow-x-auto` is **mandatory** on every table wrapper. Tables must never force the page to scroll horizontally.
+
+Applied to: All Tasks (`TaskListView`), RPA (`RpaTable`), TIA (`TiaTable`), PIA (`RisksTable`), RM (`RisksTable`), CSC (`StatusesTable`), dashboard Task Matrix.
+
+---
+
+### Dialogs & Modals
+
+#### Base `DialogContent` — global defaults in `components/shadcn/ui/dialog.tsx`
+```tsx
+// Base class (all dialogs inherit this)
+className="... w-full max-w-[calc(100vw-2rem)] sm:max-w-lg ... p-4 sm:p-6 rounded-lg overflow-x-hidden"
+```
+
+Key properties:
+- `max-w-[calc(100vw-2rem)]` — leaves 1 rem margin on each side on mobile; no edge-to-edge dialogs
+- `p-4 sm:p-6` — compact padding on mobile, full padding on desktop
+- `rounded-lg` — always visible corners (no `sm:rounded-lg`)
+- `overflow-x-hidden` — internal content (e.g. stepper) cannot break dialog bounds
+
+#### Per-dialog overrides
+Multi-step dialogs (RPA, TIA, PIA, RM) extend with:
+```tsx
+className="max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-x-hidden overflow-y-auto p-4 sm:p-6"
+```
+
+#### `DialogFooter`
+```tsx
+<DialogFooter className="flex flex-wrap justify-end gap-2">
+```
+Shadcn's base `DialogFooter` stacks buttons vertically on mobile (`flex-col-reverse`) and lays them out horizontally on `sm+`. The `gap-2` replaces the legacy `space-x-2`.
+
+**Rules:**
+- Never use fixed-width dialogs without `max-w-[95vw]` or the base class
+- Never pass `p-6` without the `sm:` prefix — use `p-4 sm:p-6`
+- Never use `space-x-2` in a `DialogFooter` — use `gap-2`
+
+---
+
+### Stepper (Multi-Step Forms)
+
+The `Stepper` component (`components/shadcn/ui/stepper.tsx`) renders a two-tier responsive layout:
+
+#### Mobile `(< sm)` — compact progress bar
+```
+┌─────────────────────────────────────────┐
+│ Data processing                   2 / 5 │
+│ ████████████░░░░░░░░░░░░░░░░░░░░░░░░░░ │
+└─────────────────────────────────────────┘
+```
+- Current step name (left) + "N / M" counter (right)
+- Blue progress bar fills proportionally
+- Fits in **any** dialog width, even 300 px
+
+#### Desktop `(sm+)` — full dot stepper
+```
+● ──── ○ ──── ○ ──── ○ ──── ○
+Data  Conf. Avail. Trans. Result
+proc.  & Int.
+```
+- Dots + connector lines + labels below each dot
+- Labels use `break-words whitespace-normal [overflow-wrap:anywhere]`
+
+**Rule:** Never add a fixed-width stepper that forces a multi-column horizontal layout without the `hidden sm:flex` guard. The mobile tier is mandatory.
+
+---
+
+### CSC Section Rail
+
+`SectionRail` (`components/interfaces/csc/SectionRail.tsx`) is a 210 px sidebar showing per-section compliance progress within the CSC controls panel.
+
+**Rule:** It MUST be hidden on mobile/tablet and visible only on `lg+`:
+
+```tsx
+<aside className="hidden lg:flex lg:w-[210px] flex-shrink-0 border-l ... flex-col overflow-hidden">
+```
+
+On mobile the user accesses section filtering via the `SectionFilter` dropdown in the CSC toolbar instead.
+
+---
+
+### Filter Toolbars (CSC)
+
+The CSC filter toolbar contains 4 controls: `SectionFilter`, `StatusFilter`, `PerPageSelector`, SoA export button.
+
+**Rule:** Must use `flex-wrap` so controls drop to a second row on narrow screens:
+```tsx
+<div className="flex flex-wrap justify-end gap-1">
+  <SectionFilter ... />
+  <StatusFilter ... />
+  <PerPageSelector ... />
+  <button>SoA Export</button>
+</div>
+```
+
+---
+
+### Framework Filter Chips
+
+Any row of filter chips (CSC framework tabs on the dashboard, CscTabs) must use `flex-wrap`:
+
+```tsx
+<div className="flex items-center gap-2 mb-3 flex-wrap">
+  {frameworks.map(iso => <button key={iso}>...</button>)}
+</div>
+```
+
+**Rule:** `flex-wrap` is mandatory on any chip/badge row that can contain a variable number of items.
+
+---
+
+### Tab Bars
+
+```tsx
+// Module tab containers
+className="flex gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-[3px] mb-4 flex-wrap"
+// Tab buttons
+className="px-3 py-[6px] text-[12px] font-medium rounded-md ... whitespace-nowrap"
+```
+
+**Rule:** The container uses `flex-wrap` so tabs fall to a second row on mobile. Tab text uses `whitespace-nowrap` so individual tab labels don't break mid-word.
+
+For settings navigation tabs (many items), use `overflow-x-auto no-scrollbar` scroll pattern instead of wrapping.
+
+---
+
+### Action Banner + Utility Button Rows
+
+Any row containing a status banner alongside a utility button (e.g. dashboard top bar):
+
+```tsx
+<div className="flex flex-wrap items-center gap-3 mb-3">
+  <ActionRequiredBanner ... />
+  <Button className="flex-shrink-0 ml-auto" ...>Export CSV</Button>
+</div>
+```
+
+**Rule:** Use `flex-wrap` so the button falls below the banner on narrow screens rather than getting pushed off-screen.
+
+---
+
+### Responsive Checklist for New Components
+
+Before submitting any new component or page, verify:
+
+- [ ] **375 px mobile** — no horizontal overflow, no text wrapping in fixed-height containers
+- [ ] **768 px tablet** — two-column layouts stack correctly, no truncated buttons
+- [ ] **1280 px desktop** — full layout renders as designed
+- [ ] Tables have `overflow-x-auto` wrapper
+- [ ] Toolbars have `flex-wrap`
+- [ ] Dialogs use `max-w-[95vw]` or the base dialog class (never fixed width without mobile fallback)
+- [ ] Tab rows use `flex-wrap` or `overflow-x-auto`
+- [ ] No `h-*` (fixed height) on text containers that could receive translated strings of variable length
+- [ ] Header title uses `truncate` (enforced globally — do not override)
+- [ ] `SectionRail` or any always-on sidebar uses `hidden lg:flex` pattern
+
+---
+
+## Core Design Tokens
+
+### Card / Panel Container
+
 All module surfaces (tables, charts, stat panels) use the same card shell:
 
 ```tsx
 className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden"
 ```
 
-#### Panel Header (section titles inside a card)
+For tables that also need `overflow-x-auto`, compose them:
+```tsx
+<div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+  <div className="overflow-x-auto">
+    <table ...>
+```
+
+### Panel Header (section titles inside a card)
+
 ```tsx
 className="px-4 py-2.5 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900"
 // Label inside:
 className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide"
 ```
 
-#### Table Header Cells (`<th>`)
+### Table Header Cells (`<th>`)
+
 All module table header cells use a unified Direction B style:
 
 ```tsx
@@ -54,7 +347,8 @@ For tables with wider padding (e.g. All Tasks):
 className="px-4 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
 ```
 
-#### Table Body Rows
+### Table Body Rows
+
 ```tsx
 // tbody divider
 className="divide-y divide-slate-100 dark:divide-slate-700"
@@ -62,33 +356,38 @@ className="divide-y divide-slate-100 dark:divide-slate-700"
 className="hover:bg-slate-50 dark:hover:bg-slate-700/40 transition-colors"
 ```
 
-#### Tab Bar (pill switcher)
+### Tab Bar (pill switcher)
+
 ```tsx
-// Container
-className="flex gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-[3px]"
+// Container — flex-wrap mandatory
+className="flex gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-[3px] flex-wrap"
 // Active tab
 className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 shadow-xs"
 // Inactive tab
 className="text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 bg-transparent border border-transparent"
 ```
 
-#### Module Badge (per-module color coding)
-Self-contained, no DaisyUI dependency. Used in the All Tasks table and the dashboard Task Overview matrix:
+### Module Badge (per-module color coding)
 
-| Module | Background | Text |
-|--------|-----------|------|
-| RPA | `bg-red-600` | `text-red-100` |
-| TIA | `bg-blue-600` | `text-blue-100` |
-| PIA | `bg-yellow-500` | `text-yellow-950` |
-| RM  | `bg-green-600` | `text-green-100` |
-| CSC | `bg-slate-500` | `text-slate-100` |
+Self-contained, no DaisyUI dependency. Used in the All Tasks table and the dashboard Task Overview matrix.
+
+| Module | Background | Text | Key |
+|--------|-----------|------|-----|
+| RPA | `bg-red-600` | `text-red-100` | `rpa_procedure` |
+| TIA | `bg-blue-600` | `text-blue-100` | `tia_procedure` |
+| PIA | `bg-yellow-500` | `text-yellow-950` | `pia_risk` |
+| RM  | `bg-green-600` | `text-green-100` | `rm_risk` |
+| CSC | `bg-slate-500` | `text-slate-100` | `csc_controls` |
 
 Base badge class:
 ```tsx
 className="inline-block whitespace-nowrap rounded px-2 py-[2px] text-[11px] font-medium leading-tight align-middle"
 ```
 
-#### Module Page Heading with Record Count
+Component: `components/shared/ModuleBadge.tsx`
+
+### Module Page Heading with Record Count
+
 Every module dashboard includes a heading bar above the toolbar:
 
 ```tsx
@@ -111,16 +410,18 @@ Every module dashboard includes a heading bar above the toolbar:
 
 Applied to: RPA, TIA, PIA, RM, IAP.
 
-### Shared Components
+---
 
-#### `ModuleEmptyState`
-Location: `components/shared/ModuleEmptyState.tsx`
+## Shared Components
+
+### `ModuleEmptyState`
+**Location:** `components/shared/ModuleEmptyState.tsx`
 
 Displayed when a module has no records. Uses Shadcn `Button` (not DaisyUI):
 
 ```tsx
 <ModuleEmptyState
-  icon={ShieldIcon}               // Lucide icon or public image path
+  icon={ShieldIcon}
   title={t('empty-state.rpa.title')}
   description={t('empty-state.rpa.description')}
   regulatoryContext="GDPR Art. 30"
@@ -130,8 +431,8 @@ Displayed when a module has no records. Uses Shadcn `Button` (not DaisyUI):
 />
 ```
 
-#### `ModuleBadge`
-Location: `components/shared/ModuleBadge.tsx`
+### `ModuleBadge`
+**Location:** `components/shared/ModuleBadge.tsx`
 
 Renders a colored badge for a given module property key. No external dependencies:
 
@@ -140,65 +441,119 @@ Renders a colored badge for a given module property key. No external dependencie
 <ModuleBadge propName="csc_controls" />   // → slate "CSC"
 ```
 
-#### `AuditTimeline`
-Location: `components/interfaces/Task/AuditTimeline.tsx`
+### `AuditTimeline`
+**Location:** `components/interfaces/Task/AuditTimeline.tsx`
 
 Reusable audit log timeline used across all modules (RPA, TIA, PIA, CSC, RM). Accepts a generic `AuditLog[]` array.
 
-### Module-by-Module Design Notes
+### `StageTracker` / `Stepper`
+**Location:** `components/shared/atlaskit/StageTracker.tsx` → `components/shadcn/ui/stepper.tsx`
 
-#### All Tasks (`TaskListView`)
-- Card wrapper: Direction B standard
+Used in all multi-step dialogs. Responsive: compact bar on mobile, full dot stepper on `sm+`. See [Stepper section](#stepper-multi-step-forms) above.
+
+---
+
+## Module-by-Module Design Notes
+
+### All Tasks (`TaskListView`)
+
+**File:** `components/interfaces/Task/TaskListView.tsx`
+
+- Card wrapper: Direction B standard with `overflow-hidden` + inner `overflow-x-auto`
 - Header typography: `text-[11px] font-medium uppercase tracking-wide`
-- Module badges inline with title using `ModuleBadge`
+- Module badges (`ModuleBadge`) inline with task title in a `flex flex-wrap` container
+- Toolbar: `flex-col lg:flex-row` outer + `flex flex-wrap` controls group
 - Hover state on rows
 
-#### RPA / TIA / PIA
+### RPA (Record of Processing Activities)
+
+**File:** `components/interfaces/rpa/`
+
 - Card wrapper with `rounded-xl`
 - `<th>` uniform Direction B typography
 - Empty state via `ModuleEmptyState`
-- Create button: Shadcn `<Button variant="default">` (no DaisyUI `color="primary"`)
+- Create button: Shadcn `<Button variant="default">`
+- Dialog: `RpaProcedureDialog` — 6-step form, responsive Stepper, `max-w-[95vw] sm:max-w-2xl`
+- Table: `overflow-x-auto` wrapper
 
-#### Cybersecurity Controls (CSC)
+### TIA (Transfer Impact Assessment)
+
+**File:** `components/interfaces/tia/`
+
+- Same card + table pattern as RPA
+- **Data note:** Legal Analysis column shows `procedure[0].LawImporterCountry` (not `DataExporter`)
+- Transfer permitted/not-permitted badge: still uses `DaisyBadge` (planned migration)
+- Dialog: `TiaProcedureDialog` — 5-step, responsive Stepper
+
+### PIA (Privacy Impact Assessment)
+
+**File:** `components/interfaces/pia/`
+
+- Three risk axes: confidentiality & integrity, availability, transparency & data minimization
+- **Data note:** First column header uses `t('title')` (not `t('rpa')`)
+- Dialog: `RiskAssessmentDialog` — up to 6 steps (incl. optional Corrective Measures), responsive Stepper
+
+### Cybersecurity Controls (CSC)
+
+**File:** `components/interfaces/csc/`
+
+- `CscPanel` renders: `CscChartsLayout` → filter toolbar → `[StatusesTable + SectionRail]`
 - Card wrapper in `CscPanel` wraps both `StatusesTable` and `SectionRail` as a unified card
-- `StatusesTable` occupies `flex-1 min-w-0` within the card
-- `SectionRail` is flush to the right edge with `border-l`
-- Tab switcher uses Direction B pill pattern (dark mode bug fixed: `dark:hover:text-slate-200`)
-- Charts (Pie + Radar) each in Direction B panel cards
+- `SectionRail`: **`hidden lg:flex`** — only shown on `lg+`; hidden on mobile/tablet
+- Filter toolbar: **`flex flex-wrap justify-end gap-1`** — wraps on narrow screens
+- `CscTabs`: **`flex-wrap`** on the tab container
+- Framework chip row on dashboard: **`flex flex-wrap`**
+- Dark mode tab fix: inactive tabs use `dark:hover:text-slate-200` (not `dark:text-slate-200`)
+- Charts: each in Direction B panel cards
 - Table header cells: `px-3 py-2` with Direction B typography
+- `StatusesTable` column: `flex-1 min-w-0 [&_th]:whitespace-normal! [&_td]:whitespace-normal!`
+- Dialog: `StatusPromptDialog` (single-step, no stepper) — protected by base dialog class
 
-#### Risk Management (RM)
-- Full table rewrite: 14 columns in two-row grouped header (section labels + column labels)
+### Risk Management (RM)
+
+**File:** `components/interfaces/risk-management/`
+
+- Full table rewrite: 14 columns in two-row grouped header
 - Column groups: Task info | Raw Risk | Treatment | Target Risk | Current Risk
-- Risk color cells use a static lookup table (not dynamic Tailwind class names which break JIT):
-  ```ts
-  'risk-extreme-low' | 'risk-low' | 'risk-medium' | 'risk-high' | 'risk-extreme'
-  ```
-- Asset Owner resolved via `membersById.get(userId)` — Map lookup, not bracket access
+- Risk color cells use a static lookup table (not dynamic Tailwind class names which break JIT)
+- Asset Owner resolved via `membersById.get(userId)` — Map lookup, **not** bracket access `[userId]`
+- Dialog: `RmRiskDialog` — 2-step, responsive Stepper
 
-#### Interactive Awareness Training (IAP)
-- Completion summary banner above course grid shows:
-  - Progress bar + percentage
-  - Total / Completed / In-Progress stat chips
+### Interactive Awareness Training (IAP)
+
+**File:** `components/interfaces/iap/`
+
+- Completion summary banner: `flex flex-wrap` outer, `flex-1 min-w-[160px]` progress bar
+- Stats row: `flex items-center gap-5 flex-shrink-0` (fits on 375 px with wrap fallback from outer)
 - Course grid: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`
-- CourseCard: Direction B card with thumbnail, category chip, title, progress badge
 
-#### Dashboard (`TaskStatusMatrix`)
-- Module column uses `<ModuleBadge>` instead of dot + plain text
-- Status count cells use semantic color tokens per status
-- Row click navigates to the corresponding module page
+### Dashboard
 
-### Comments Section (Direction B)
+**File:** `pages/teams/[slug]/dashboard.tsx`
 
-Location: `components/interfaces/Task/comments/`
+- Top bar (banner + export): `flex flex-wrap items-center gap-3` — wraps on mobile
+- KPI row: `grid-cols-2 sm:grid-cols-3 lg:grid-cols-6`
+- Task matrix + Needs Attention: `flex flex-col lg:flex-row`
+- Task Status Matrix: `overflow-x-auto` table wrapper
+- Tab bar: `flex gap-0.5 ... flex-wrap` (3 tabs, always fits)
+- Module column: `<ModuleBadge>` instead of dot + plain text
 
-- **Layout**: Single-column, avatar + header in one row, content below
-- **Avatar**: `h-7 w-7 rounded-full border border-slate-200 dark:border-slate-700`
-- **Header**: `text-[13px] font-semibold text-slate-800 dark:text-slate-100` · `text-[11px] text-slate-400` date
-- **Edit/Delete actions**: Hover-only (`opacity-0 group-hover:opacity-100`) inline with header
-- **Compose area**: `rounded-lg border focus-within:border-slate-400` with QuillEditor
+---
 
-### Buttons: Shadcn Only
+## Comments Section (Direction B)
+
+**Location:** `components/interfaces/Task/comments/`
+
+- **Layout:** Single-column, avatar + header in one row, content below
+- **Avatar:** `h-7 w-7 rounded-full border border-slate-200 dark:border-slate-700`
+- **Header:** `text-[13px] font-semibold text-slate-800 dark:text-slate-100` · `text-[11px] text-slate-400` date
+- **Edit/Delete actions:** Hover-only (`opacity-0 group-hover:opacity-100`) inline with header
+- **Compose area:** `rounded-lg border focus-within:border-slate-400` with QuillEditor
+- **Mobile:** single-column layout works naturally at all breakpoints; hover actions are tap-to-reveal on touch
+
+---
+
+## Buttons: Shadcn Only
 
 All Create/Add/primary action buttons use Shadcn `<Button variant="default">`. DaisyUI `color="primary"` and `btn btn-primary` classes are removed from:
 
@@ -209,9 +564,11 @@ All Create/Add/primary action buttons use Shadcn `<Button variant="default">`. D
 - `iap/admin/AdminPage.tsx`
 - `shared/ModuleEmptyState.tsx`
 
-### Known DaisyUI Remnants
+---
 
-`DaisyBadge` is still used in `tia/TiaTable.tsx` for the transfer permitted/not-permitted badge (`success` / `error` colors). This is a planned migration item.
+## Known DaisyUI Remnants
+
+`DaisyBadge` is still used in `tia/TiaTable.tsx` for the transfer permitted/not-permitted badge (`success` / `error` colors). This is a planned migration to a Shadcn `Badge` variant.
 
 ---
 
@@ -246,7 +603,7 @@ All Create/Add/primary action buttons use Shadcn `<Button variant="default">`. D
 ### Internationalization
 - **i18next 23.16.8** — Translation management
 - **next-i18next 15.3.0** — i18next integration for Next.js
-- **Supported Languages:** English, French, Spanish, German
+- **Supported Languages:** English, French, Spanish, German, Italian, Japanese, Portuguese
 
 ### Data & Export
 - **ExcelJS 4.4.0** — Excel file generation
@@ -312,17 +669,23 @@ unicis-platform/
 │   ├── auth/                # Auth components (forms, dialogs)
 │   ├── team/                # Team workspace components
 │   ├── shared/              # Shared/common components
-│   │   ├── ModuleBadge.tsx  # Colored module identifier badge
+│   │   ├── ModuleBadge.tsx       # Colored module identifier badge
 │   │   ├── ModuleEmptyState.tsx  # Empty state with CTA
 │   │   ├── StatusBadge.tsx
 │   │   ├── MemberName.tsx
+│   │   ├── shell/
+│   │   │   ├── AppShell.tsx      # Main layout shell (sidebar + main)
+│   │   │   ├── Header.tsx        # Responsive sticky header
+│   │   │   ├── AccountDropdown.tsx
+│   │   │   └── GlobalSearch.tsx
 │   │   └── [...]
 │   ├── notifications/       # Notification UI components
 │   └── shadcn/              # Shadcn UI components
+│       └── ui/
+│           ├── dialog.tsx        # Base dialog — responsive defaults
+│           ├── stepper.tsx       # Responsive 2-tier stepper
+│           └── [...]
 ├── lib/                     # Utility functions & helpers
-│   ├── api-key-auth.ts
-│   ├── auth.ts
-│   ├── permissions.ts
 │   ├── csc/                 # CSC module logic
 │   ├── rpa/                 # RPA helpers
 │   ├── pia/                 # PIA helpers
@@ -340,7 +703,7 @@ unicis-platform/
 │   ├── rm.ts                # RMProcedureInterface (two-tuple)
 │   ├── iap.ts               # TeamCourseWithProgress
 │   └── [...]
-├── locales/                 # i18n translation files
+├── locales/                 # i18n translation files (en, fr, de, es, it, ja, pt)
 ├── styles/                  # Global CSS (quill-view-mode, etc.)
 ├── public/                  # Static assets
 └── [config files]
@@ -353,11 +716,9 @@ unicis-platform/
 ### Core Entities
 
 #### User
-- User authentication & profile management
 - Email-based identity (unique email)
 - Password (optional, for OAuth users)
 - First name, last name, profile image
-- Account associations (OAuth accounts)
 - Sessions for multi-device support
 
 #### Team (Multi-Tenancy)
@@ -443,15 +804,16 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 ### 3. Dashboard
 - KPI row (total tasks, overdue, completion rate, compliance score with sparkline)
 - Task Overview by Module matrix (clickable rows → module pages, colored `ModuleBadge`)
-- Needs Attention panel
-- Compliance charts (CSC, PIA, RM)
+- Needs Attention panel (overdue tasks)
+- Compliance charts (CSC, PIA, RM tabs)
 - Global search across tasks and module fields
+- Export CSV of all tasks
 
 ### 4. Privacy & Compliance Modules
 
 #### RPA (Record of Processing Activities)
 - GDPR Art. 30 documentation
-- Multi-step creation form
+- Multi-step creation form (6 steps)
 - Export: XLSX, ODS, CSV, HTML, PDF
 
 #### TIA (Transfer Impact Assessment)
@@ -461,20 +823,21 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 
 #### PIA (Privacy Impact Assessment)
 - Three risk axes: confidentiality & integrity, availability, transparency & data minimisation
+- Optional Corrective Measures step (triggered when any risk score > 10)
 - Risk matrix filter
 
 #### CSC (Cybersecurity Controls)
 - Multi-framework support (ISO 27001:2013/2022, NIST CSF 2.0, CIS, NIS2, GDPR, SOC 2, PCI DSS, OWASP ASVS v5, C5:2020, ISO 42001)
 - Framework mapping matrix
-- Statement of Applicability (SoA) export
-- Section rail for per-section compliance navigation
+- Statement of Applicability (SoA) export (XLSX, ODS, PDF, HTML)
+- Section rail for per-section compliance navigation (desktop only, `hidden lg:flex`)
 - Bulk control selection + status assignment
+- URL-encoded filter state (section + status + perPage)
 
 #### Risk Management (RM)
 - 14-column table with grouped section headers (Raw Risk / Treatment / Target Risk / Current Risk)
 - Risk rating calculated from `RawProbability × RawImpact`
-- Current risk derived from raw vs. treatment outcome
-- Asset Owner resolved via `useTeamMembersMap` → `membersById.get(userId)`
+- Asset Owner resolved via `useTeamMembersMap` → `membersById.get(userId)` (Map API, not bracket access)
 
 #### IAP (Interactive Awareness Program)
 - Course catalogue with thumbnail, category, estimated time
@@ -627,6 +990,7 @@ npm run build               # Prisma client → migrations → OpenAPI → Next.
 - Migrate remaining DaisyUI components to Shadcn (`DaisyBadge` in TIA table)
 - Deep-link from Needs Attention panel directly to specific task
 - Per-module URL filter persistence for CSC section / status filters
+- Responsive breakpoint testing in CI (Playwright viewport matrix)
 
 ---
 
@@ -648,6 +1012,8 @@ Apache License 2.0 — See LICENSE file for details.
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on bug reporting, feature requests, code contributions, and pull request process.
+
+**Responsive design checklist** (above) must be included in every pull request description that touches UI components.
 
 ---
 
