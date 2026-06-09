@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 import AccountDropdown from './AccountDropdown';
 import NotificationBell from '@/components/notifications/NotificationBell';
+import GlobalSearch from './GlobalSearch';
 
 // ── Route → display title mapping ────────────────────────────────────────────
 function useModuleTitle(): string {
@@ -67,6 +68,9 @@ const Header = ({ setSidebarOpen }: HeaderProps) => {
           {moduleTitle}
         </span>
       )}
+
+      {/* ⌘K search trigger */}
+      <GlobalSearch />
 
       {/* Right-side actions pushed to the far right */}
       <div className="flex items-center gap-x-3 ml-auto">

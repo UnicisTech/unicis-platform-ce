@@ -73,7 +73,7 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
 
       {countriesList.length > 0 && (
         <div className="mt-3 pt-3 border-t border-slate-50">
-          <div className="text-[11px] text-slate-400 mb-1.5">
+          <div className="text-[11px] text-slate-500 mb-1.5">
             {t('countries', { defaultValue: 'Countries' })}
           </div>
           <div className="flex flex-wrap gap-1">

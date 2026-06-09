@@ -47,10 +47,10 @@ const TaskListView = ({
 
   return (
     <>
-      <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
-        <div className="overflow-x-auto mt-2">
-          <table className="w-full min-w-full divide-y divide-border text-sm">
-            <thead className="bg-muted">
+      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden [&_th]:whitespace-normal! [&_td]:whitespace-normal!">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-full divide-y divide-slate-200 text-sm">
+            <thead className="bg-slate-50">
               <tr>
                 <th className="w-1/10 px-4 py-2 text-left">{t('task-id')}</th>
                 <th className="w-2/5 px-4 py-2 text-left">{t('title')}</th>
@@ -60,7 +60,7 @@ const TaskListView = ({
                 <th className="w-1/5 px-4 py-2 text-left">{t('actions')}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border">
+            <tbody className="divide-y divide-slate-100">
               {pageData.map((task) => (
                 <tr key={task.id}>
                   <td className="px-4 py-2">

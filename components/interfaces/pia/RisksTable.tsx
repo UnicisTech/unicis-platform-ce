@@ -53,10 +53,10 @@ const RisksTable = ({
   } = usePagination<TaskWithPiaRisk>(tasks, perPage);
 
   return (
-    <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal! mt-2">
+    <div className="bg-white border border-slate-200 rounded-xl overflow-hidden [&_th]:whitespace-normal! [&_td]:whitespace-normal! mt-2">
       <div className="overflow-x-auto">
-        <table className="w-full min-w-full divide-y divide-border text-sm">
-          <thead className="bg-muted">
+        <table className="w-full min-w-full divide-y divide-slate-200 text-sm">
+          <thead className="bg-slate-50">
             <tr>
               <th scope="col" className="px-1.5 py-1.5 text-left">
                 {t('rpa')}
@@ -80,7 +80,7 @@ const RisksTable = ({
               )}
             </tr>
           </thead>
-          <tbody className="divide-y divide-border">
+          <tbody className="divide-y divide-slate-100">
             {pageData.map((task) => {
               const confidentialityValue = calculatePercentage(
                 riskProbabilityPoints[

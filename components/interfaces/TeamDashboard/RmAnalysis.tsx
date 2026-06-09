@@ -122,7 +122,7 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
           <span className="text-[12px] font-medium text-slate-900">
             {t('current-risk-rating')}
           </span>
-          <span className="text-[11px] text-slate-400">RmAnalysis</span>
+          <span className="text-[11px] text-slate-500">RmAnalysis</span>
         </div>
 
         {/* Five severity rows: Extreme → Major → Moderate → Minor → Insignificant */}
@@ -149,7 +149,7 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
         {/* Top open risks */}
         {topRisks.length > 0 && (
           <div className="border-t border-slate-100 pt-3">
-            <div className="text-[11px] text-slate-400 font-medium mb-2">
+            <div className="text-[11px] text-slate-500 font-medium mb-2">
               {t('top-open-risks', { defaultValue: 'Top open risks' })}
             </div>
             <div className="divide-y divide-slate-50">
@@ -180,9 +180,9 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
           <span className="text-[12px] font-medium text-slate-900">
             {t('target-risk-rating')}
           </span>
-          <span className="text-[11px] text-slate-400">DashboardMatrixChart</span>
+          <span className="text-[11px] text-slate-500">DashboardMatrixChart</span>
         </div>
-        <div className="text-[10px] text-slate-400 mb-1">Impact → / Likelihood ↑</div>
+        <div className="text-[10px] text-slate-500 mb-1">Impact → / Likelihood ↑</div>
         <div className="flex items-center justify-center">
           <DashboardMatrixChart
             datasets={[]}

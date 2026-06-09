@@ -70,9 +70,9 @@ const RisksTable = ({
 
   return (
     <div className="space-y-4">
-      <div className="overflow-x-auto border rounded-md">
-        <table className="min-w-full text-sm">
-          <thead className="bg-muted">
+      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden overflow-x-auto">
+        <table className="min-w-full divide-y divide-slate-200 text-sm">
+          <thead className="bg-slate-50">
             <tr>
               {tableHeaderKeys.map((key) => (
                 <th key={key}>{<VerticalHeader label={t(key)} />}</th>

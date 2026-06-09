@@ -858,6 +858,12 @@
   "prev-value": "Previous Value",
   "next-value": "Next Value",
   "no-logs-available": "No activity to display.",
+  "task-audit": {
+    "event-created": "Criado",
+    "event-updated": "Atualizado",
+    "event-commented": "Comentado",
+    "event-deleted": "Eliminado"
+  },
   "email-invitation-mismatch": "Your email address {{email}} does not match the email address this invitation was sent to.",
   "open-sidebar": "Open sidebar",
   "close-sidebar": "Close sidebar",
@@ -1612,8 +1618,8 @@
   "dashboard.kpi.compliance-score": "Pontuação de conformidade",
   "dashboard.kpi.open-risks": "Riscos abertos",
   "dashboard.kpi.next-due": "Próximo vencimento",
-  "dashboard.kpi.iap-completion": "Conclusão IAP",
-  "dashboard.kpi.csc-gaps": "Lacunas CSC",
+  "dashboard.kpi.iap-completion": "Treinamento de Conscientização",
+  "dashboard.kpi.csc-gaps": "Lacunas de Cibersegurança",
   "dashboard.kpi.overdue": "em atraso",
   "dashboard.kpi.no-open-risks": "Sem riscos abertos",
   "dashboard.kpi.tasks-with-risk": "tarefas com risco",
@@ -1622,5 +1628,16 @@
   "dashboard.kpi.members": "membros",
   "dashboard.kpi.no-csc-data": "Sem CSC configurado",
   "dashboard.kpi.based-on-csc": "baseado em controles CSC",
-  "dashboard.kpi.not-performed-controls": "controles não realizados"
+  "dashboard.kpi.not-performed-controls": "controles não realizados",
+  "dashboard.kpi.score-excellent": "Excelente",
+  "dashboard.kpi.score-good": "Bom",
+  "dashboard.kpi.score-fair": "Regular",
+  "dashboard.kpi.score-needs-work": "Precisa melhorar",
+  "dashboard.kpi.based-on": "baseado em",
+  "search.placeholder": "Pesquisar tarefas, módulos…",
+  "search.no-results": "Sem resultados.",
+  "search.quick-nav": "Navegação rápida",
+  "search.tasks": "Tarefas",
+  "search.press-enter": "para selecionar",
+  "search.open": "Abrir"
 }

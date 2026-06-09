@@ -39,7 +39,7 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
     <div className="bg-white border border-slate-200 rounded-xl p-4">
       <div className="flex items-center justify-between mb-3">
         <span className="text-[12px] font-medium text-slate-900">{t('tia')}</span>
-        <span className="text-[11px] text-slate-400">
+        <span className="text-[11px] text-slate-500">
           {t('tia-assessments', { defaultValue: 'Assessments' })}
         </span>
       </div>
@@ -67,7 +67,7 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
 
       {countriesList.length > 0 && (
         <div className="mt-3 pt-3 border-t border-slate-50">
-          <div className="text-[11px] text-slate-400 mb-1.5">
+          <div className="text-[11px] text-slate-500 mb-1.5">
             {t('assessment-per-country')}
           </div>
           <div className="flex flex-wrap gap-1">

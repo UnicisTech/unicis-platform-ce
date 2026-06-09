@@ -858,6 +858,12 @@
   "prev-value": "Previous Value",
   "next-value": "Next Value",
   "no-logs-available": "No activity to display.",
+  "task-audit": {
+    "event-created": "作成",
+    "event-updated": "更新",
+    "event-commented": "コメント",
+    "event-deleted": "削除"
+  },
   "email-invitation-mismatch": "Your email address {{email}} does not match the email address this invitation was sent to.",
   "open-sidebar": "Open sidebar",
   "close-sidebar": "Close sidebar",
@@ -1612,8 +1618,8 @@
   "dashboard.kpi.compliance-score": "コンプライアンス スコア",
   "dashboard.kpi.open-risks": "オープンリスク",
   "dashboard.kpi.next-due": "次の期限",
-  "dashboard.kpi.iap-completion": "IAP 完了率",
-  "dashboard.kpi.csc-gaps": "CSC ギャップ",
+  "dashboard.kpi.iap-completion": "意識向上トレーニング",
+  "dashboard.kpi.csc-gaps": "サイバーセキュリティのギャップ",
   "dashboard.kpi.overdue": "期限超過",
   "dashboard.kpi.no-open-risks": "リスクなし",
   "dashboard.kpi.tasks-with-risk": "リスクあるタスク",
@@ -1622,5 +1628,16 @@
   "dashboard.kpi.members": "メンバー",
   "dashboard.kpi.no-csc-data": "CSC 未設定",
   "dashboard.kpi.based-on-csc": "CSC コントロールに基づく",
-  "dashboard.kpi.not-performed-controls": "未実施のコントロール"
+  "dashboard.kpi.not-performed-controls": "未実施のコントロール",
+  "dashboard.kpi.score-excellent": "優秀",
+  "dashboard.kpi.score-good": "良好",
+  "dashboard.kpi.score-fair": "普通",
+  "dashboard.kpi.score-needs-work": "要改善",
+  "dashboard.kpi.based-on": "基づく",
+  "search.placeholder": "タスク・モジュールを検索…",
+  "search.no-results": "結果が見つかりません。",
+  "search.quick-nav": "クイックナビ",
+  "search.tasks": "タスク",
+  "search.press-enter": "選択する",
+  "search.open": "開く"
 }

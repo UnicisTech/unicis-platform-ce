@@ -49,7 +49,7 @@ const PiaAnalysis = ({ tasks, onCellClick }: PiaAnalysisProps) => {
             <span className="text-[12px] font-medium text-slate-900 block">
               {t('pia-overview')} · {t(titleKey)}
             </span>
-            <span className="text-[10px] text-slate-400">
+            <span className="text-[10px] text-slate-500">
               {t('pia-matrix-axis', { defaultValue: 'Impact → / Likelihood ↑' })}
             </span>
           </div>

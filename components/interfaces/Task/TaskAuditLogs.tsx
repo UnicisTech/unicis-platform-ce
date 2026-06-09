@@ -21,6 +21,13 @@ const fieldI18nKeys: Record<string, string> = {
   description: 'description',
 };
 
+const eventI18nKeys: Record<string, string> = {
+  created: 'task-audit.event-created',
+  updated: 'task-audit.event-updated',
+  commented: 'task-audit.event-commented',
+  deleted: 'task-audit.event-deleted',
+};
+
 const valueI18nPrefixes: Record<string, string> = {
   status: 'task-statuses',
   priority: 'task-priorities',
@@ -86,7 +93,14 @@ const TaskAuditLogs = ({ task }: { task: Task }) => {
                       ? t(fieldI18nKeys[log.diff.field] ?? log.diff.field)
                       : '—'}
                   </TableCell>
-                  <TableCell>{log.event}</TableCell>
+                  <TableCell>
+                    {(() => {
+                      const key = eventI18nKeys[log.event];
+                      if (!key) return log.event;
+                      const translated = t(key);
+                      return translated !== key ? translated : log.event;
+                    })()}
+                  </TableCell>
                   <TableCell>
                     {new Date(log.date).toLocaleDateString()}
                   </TableCell>

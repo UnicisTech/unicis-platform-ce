@@ -121,7 +121,7 @@ const TeamCscAnalysis = ({
     <div>
       {/* Framework filter chips */}
       <div className="flex items-center gap-2 mb-3">
-        <span className="text-[11px] text-slate-400">
+        <span className="text-[11px] text-slate-500">
           {t('framework', { defaultValue: 'Framework' })}:
         </span>
         {cscFrameworks.map((iso) => (
@@ -147,7 +147,7 @@ const TeamCscAnalysis = ({
             <span className="text-[12px] font-medium text-slate-900">
               {t('section-progress', { defaultValue: 'Section progress' })}
             </span>
-            <span className="text-[11px] text-slate-400">TeamCscAnalysis</span>
+            <span className="text-[11px] text-slate-500">TeamCscAnalysis</span>
           </div>
           <div className="space-y-2.5">
             {sectionData.map(({ id, label, percent }) => (
@@ -181,7 +181,7 @@ const TeamCscAnalysis = ({
             <span className="text-[12px] font-medium text-slate-900">
               {t('status-distribution', { defaultValue: 'Status distribution' })}
             </span>
-            <span className="text-[11px] text-slate-400">CscChartsLayout</span>
+            <span className="text-[11px] text-slate-500">CscChartsLayout</span>
           </div>
           <div className="space-y-2">
             {CSC_STATUS_ROWS.map(({ key, dot, bar, badge }) => {
