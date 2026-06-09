@@ -4,18 +4,15 @@ interface CommentAvatarProps {
 }
 
 const CommentAvatar = ({ image, username }: CommentAvatarProps) => (
-  <label
-    htmlFor="image"
-    className="group relative mt-2 flex h-9 w-9 cursor-pointer flex-col items-center justify-center rounded-full border border-gray-300 bg-white dark:bg-slate-800 transition-all hover:bg-gray-50"
-  >
+  <div className="flex-shrink-0 h-7 w-7 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800">
     <img
       src={
         image || `https://api.dicebear.com/7.x/initials/svg?seed=${username}`
       }
       alt={username}
-      className="h-full w-full rounded-full object-cover"
+      className="h-full w-full object-cover"
     />
-  </label>
+  </div>
 );
 
 export default CommentAvatar;

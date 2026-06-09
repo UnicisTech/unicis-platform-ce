@@ -8,7 +8,9 @@ import {
 import RmAnalysis from '@/components/interfaces/TeamDashboard/RmAnalysis';
 import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/TeamProcessingActivities';
 import KpiRow from '@/components/interfaces/TeamDashboard/KpiRow';
+import ActionRequiredBanner from '@/components/interfaces/TeamDashboard/ActionRequiredBanner';
 import { Error, Loading } from '@/components/shared';
+import { Button } from '@/components/shadcn/ui/button';
 import { getTeamAccess } from '@/lib/teams';
 import { getTranslationNamespaces } from '@/lib/i18n/getCscTranslationNamespaces';
 import useTeam from 'hooks/useTeam';
@@ -20,7 +22,42 @@ import type { ISO, Task } from 'types';
 import { cn } from '@/components/shadcn/lib/utils';
 import { hasTaskModule, isTaskModuleKey } from '@/lib/tasks';
 import type { TaskModuleKey } from '@/lib/tasks';
-import { ShieldAlert, ArrowRight } from 'lucide-react';
+import { ShieldAlert, ArrowRight, Download } from 'lucide-react';
+
+// ── CSV export ────────────────────────────────────────────────────────────────
+function exportTasksCsv(tasks: Task[], slug: string) {
+  const now = new Date();
+  const headers = ['ID', 'Title', 'Status', 'Priority', 'Due Date', 'Overdue'];
+  const escape = (v: unknown) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+
+  const rows = tasks.map((task) => {
+    const isOverdue =
+      task.status !== 'done' &&
+      task.duedate &&
+      new Date(task.duedate as string) < now;
+    return [
+      task.taskNumber ?? task.id,
+      escape(task.title),
+      task.status ?? '',
+      task.priority ?? '',
+      task.duedate
+        ? new Date(task.duedate as string).toLocaleDateString()
+        : '',
+      isOverdue ? 'Yes' : 'No',
+    ].join(',');
+  });
+
+  const csv = [headers.join(','), ...rows].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${slug}-tasks-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 
 // ── Tab types ─────────────────────────────────────────────────────────────────
 type DashboardTab = 0 | 1 | 2;
@@ -79,8 +116,8 @@ function TaskStatusMatrix({
 
   return (
     <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden flex-1 min-w-0">
-      <div className="px-3 py-2.5 border-b border-slate-200 dark:border-slate-700">
-        <span className="text-[11px] font-medium text-slate-900 dark:text-slate-100">
+      <div className="px-4 py-2.5 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
+        <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
           {t('dashboard.task-matrix-title')}
         </span>
       </div>
@@ -88,18 +125,18 @@ function TaskStatusMatrix({
         <table className="w-full text-[11px]">
           <thead>
             <tr className="border-b border-slate-100">
-              <th className="text-left px-3 py-2 text-[10px] font-medium text-slate-500 dark:text-slate-400 w-16">
+              <th className="text-left px-3 py-2 text-[11px] font-medium text-slate-500 dark:text-slate-400 w-16">
                 Module
               </th>
               {STATUS_COLS.map((col) => (
                 <th
                   key={col.key}
-                  className="text-center px-2 py-2 text-[10px] font-medium text-slate-500 dark:text-slate-400"
+                  className="text-center px-2 py-2 text-[11px] font-medium text-slate-500 dark:text-slate-400"
                 >
                   {col.label}
                 </th>
               ))}
-              <th className="text-center px-2 py-2 text-[10px] font-medium text-slate-500 dark:text-slate-400">
+              <th className="text-center px-2 py-2 text-[11px] font-medium text-slate-500 dark:text-slate-400">
                 Total
               </th>
             </tr>
@@ -129,7 +166,7 @@ function TaskStatusMatrix({
                     {row.counts[col.key] > 0 ? (
                       <span
                         className={cn(
-                          'inline-block min-w-[20px] px-1.5 py-0.5 rounded text-[10px] font-medium',
+                          'inline-block min-w-[20px] px-1.5 py-0.5 rounded text-[11px] font-medium',
                           col.cellClass
                         )}
                       >
@@ -152,6 +189,8 @@ function TaskStatusMatrix({
   );
 }
 
+const ATTENTION_LIMIT = 4;
+
 function NeedsAttentionPanel({
   tasks,
   slug,
@@ -163,7 +202,7 @@ function NeedsAttentionPanel({
   const router = useRouter();
   const now = new Date();
 
-  const overdue = useMemo(
+  const allOverdue = useMemo(
     () =>
       tasks
         .filter(
@@ -176,49 +215,66 @@ function NeedsAttentionPanel({
           (a, b) =>
             new Date(a.duedate as string).getTime() -
             new Date(b.duedate as string).getTime()
-        )
-        .slice(0, 4),
+        ),
     [tasks]
   );
 
+  const shown = allOverdue.slice(0, ATTENTION_LIMIT);
+  const hiddenCount = allOverdue.length - shown.length;
+
   return (
     <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden w-full lg:w-[280px] flex-shrink-0">
-      <div className="px-3 py-2.5 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
+      <div className="px-4 py-2.5 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 flex items-center gap-2">
         <ShieldAlert size={12} className="text-ub-red" aria-hidden />
-        <span className="text-[11px] font-medium text-slate-900 dark:text-slate-100">
+        <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
           {t('dashboard.needs-attention')}
         </span>
       </div>
-      <div className="divide-y divide-slate-50">
-        {overdue.length === 0 ? (
+      <div className="divide-y divide-slate-100 dark:divide-slate-700">
+        {shown.length === 0 ? (
           <p className="px-3 py-4 text-[12px] text-slate-400 text-center">
             {t('dashboard.no-overdue')}
           </p>
         ) : (
-          overdue.map((task) => (
-            <button
-              key={task.id}
-              onClick={() => router.push(`/teams/${slug}/tasks`)}
-              className="w-full text-left px-3 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
-            >
-              <div className="flex items-start justify-between gap-2">
-                <p className="text-[12px] text-slate-700 dark:text-slate-200 font-medium leading-snug line-clamp-1">
-                  {task.title}
-                </p>
-                <ArrowRight
-                  size={11}
-                  className="text-slate-300 mt-0.5 flex-shrink-0"
-                />
-              </div>
-              <p className="text-[10px] text-ub-red mt-0.5">
-                Due{' '}
-                {new Date(task.duedate as string).toLocaleDateString(undefined, {
-                  month: 'short',
-                  day: 'numeric',
-                })}
-              </p>
-            </button>
-          ))
+          <>
+            {shown.map((task) => {
+              const dueLabel = new Date(task.duedate as string).toLocaleDateString(
+                undefined,
+                { month: 'short', day: 'numeric' }
+              );
+              return (
+                <button
+                  key={task.id}
+                  aria-label={`${task.title}, ${t('dashboard.overdue-tasks')} ${dueLabel}`}
+                  onClick={() => router.push(`/teams/${slug}/tasks`)}
+                  className="w-full text-left px-3 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <p className="text-[12px] text-slate-700 dark:text-slate-200 font-medium leading-snug line-clamp-1">
+                      {task.title}
+                    </p>
+                    <ArrowRight
+                      size={11}
+                      className="text-slate-300 mt-0.5 flex-shrink-0"
+                      aria-hidden
+                    />
+                  </div>
+                  <p className="text-[11px] text-ub-red mt-0.5">
+                    Due {dueLabel}
+                  </p>
+                </button>
+              );
+            })}
+            {hiddenCount > 0 && (
+              <button
+                onClick={() => router.push(`/teams/${slug}/tasks`)}
+                className="w-full px-3 py-2 text-[11px] text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 text-center transition-colors"
+                aria-label={t('dashboard.overdue-tasks')}
+              >
+                +{hiddenCount} more →
+              </button>
+            )}
+          </>
         )}
       </div>
     </div>
@@ -275,6 +331,22 @@ const TeamDashboard = ({
 
   return (
     <>
+      {/* Top bar: compact alert (only when issues) + Export CSV always on right */}
+      <div className="flex items-center justify-between gap-3 mb-3">
+        <ActionRequiredBanner tasks={tasks || []} slug={slug} team={team} />
+        <Button
+          variant="outline"
+          size="sm"
+          className="flex-shrink-0 text-slate-600 dark:text-slate-300 ml-auto"
+          onClick={() => exportTasksCsv(tasks || [], slug)}
+          disabled={!tasks || tasks.length === 0}
+          title={t('dashboard.export-csv')}
+        >
+          <Download size={13} className="mr-1.5" aria-hidden />
+          {t('dashboard.export-csv')}
+        </Button>
+      </div>
+
       {/* KPI strip — 6 summary cards */}
       <KpiRow tasks={tasks || []} slug={slug} team={team} />
 
@@ -288,12 +360,15 @@ const TeamDashboard = ({
       <div
         className="flex gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-[3px] mb-4"
         role="tablist"
+        aria-label={t('dashboard.tab.aria-label')}
       >
         {([0, 1, 2] as DashboardTab[]).map((tab) => (
           <button
             key={tab}
+            id={`dashboard-tab-${tab}`}
             role="tab"
             aria-selected={activeTab === tab}
+            aria-controls={`dashboard-tabpanel-${tab}`}
             onClick={() => setActiveTab(tab)}
             className={cn(
               'flex-1 py-[7px] text-center text-[12px] font-medium rounded-md transition-all',
@@ -308,25 +383,44 @@ const TeamDashboard = ({
       </div>
 
       {/* Tab 0: Data protection */}
-      {activeTab === 0 && (
-        <div className="space-y-3">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-            <ProcessingActivitiesAnalysis slug={slug} />
-            <TeamAssessmentAnalysis slug={slug} />
+      <div
+        id="dashboard-tabpanel-0"
+        role="tabpanel"
+        aria-labelledby="dashboard-tab-0"
+        hidden={activeTab !== 0}
+      >
+        {activeTab === 0 && (
+          <div className="space-y-3">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+              <ProcessingActivitiesAnalysis slug={slug} />
+              <TeamAssessmentAnalysis slug={slug} />
+            </div>
+            <PiaAnalysis tasks={tasks} onCellClick={handlePiaCellClick} />
           </div>
-          <PiaAnalysis tasks={tasks} onCellClick={handlePiaCellClick} />
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Tab 1: Cybersecurity & compliance */}
-      {activeTab === 1 && (
-        <TeamCscAnalysis team={team} />
-      )}
+      <div
+        id="dashboard-tabpanel-1"
+        role="tabpanel"
+        aria-labelledby="dashboard-tab-1"
+        hidden={activeTab !== 1}
+      >
+        {activeTab === 1 && <TeamCscAnalysis team={team} />}
+      </div>
 
       {/* Tab 2: Risk management */}
-      {activeTab === 2 && (
-        <RmAnalysis slug={slug} onCellClick={handleRmCellClick} />
-      )}
+      <div
+        id="dashboard-tabpanel-2"
+        role="tabpanel"
+        aria-labelledby="dashboard-tab-2"
+        hidden={activeTab !== 2}
+      >
+        {activeTab === 2 && (
+          <RmAnalysis slug={slug} onCellClick={handleRmCellClick} />
+        )}
+      </div>
     </>
   );
 };

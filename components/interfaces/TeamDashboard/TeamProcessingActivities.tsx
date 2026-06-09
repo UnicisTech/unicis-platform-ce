@@ -80,7 +80,7 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
             {countriesList.map((country) => (
               <span
                 key={country}
-                className="inline-flex items-center text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-1.5 py-0.5 rounded-[4px]"
+                className="inline-flex items-center text-[11px] bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-1.5 py-0.5 rounded-[4px]"
               >
                 {capitalizeCountryName(country)}
               </span>

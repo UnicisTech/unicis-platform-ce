@@ -78,7 +78,7 @@ export function KpiCard({
         onClick && 'cursor-pointer hover:border-ub-blue-border hover:shadow-sm transition-all'
       )}
     >
-      <div className="flex items-center gap-1 text-[10px] text-slate-400 mb-1.5">
+      <div className="flex items-center gap-1 text-[11px] text-slate-400 mb-1.5">
         <Icon size={12} aria-hidden />
         {label}
       </div>
@@ -89,7 +89,7 @@ export function KpiCard({
         </div>
       )}
       {sub && (
-        <div className={cn('text-[10px] mt-1', subColourMap[subColour] ?? 'text-slate-400')}>
+        <div className={cn('text-[11px] mt-1', subColourMap[subColour] ?? 'text-slate-400')}>
           {sub}
         </div>
       )}

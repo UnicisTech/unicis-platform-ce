@@ -166,7 +166,7 @@ export default function Comments({
   return (
     <div>
       {task.comments.length > 0 && (
-        <div className="mb-4 space-y-1">
+        <div className="mb-4 divide-y divide-slate-100 dark:divide-slate-700/60">
           {task.comments
             .sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt))
             .map((comment) => (
@@ -184,7 +184,9 @@ export default function Comments({
         </div>
       )}
       <AccessControl resource="task" actions={['update']} slug={slug}>
-        <CreateCommentForm handleCreate={handleCreateComment} />
+        <div className={task.comments.length > 0 ? 'pt-1 border-t border-slate-100 dark:border-slate-700/60' : ''}>
+          <CreateCommentForm handleCreate={handleCreateComment} />
+        </div>
       </AccessControl>
       <ConfirmationDialog
         visible={confirmationDialogVisible}

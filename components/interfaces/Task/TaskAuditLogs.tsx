@@ -128,7 +128,7 @@ const TaskAuditLogs = ({ task }: { task: Task }) => {
   return (
     <div>
       {/* Timeline */}
-      <ol className="relative pl-6 border-l border-slate-200 dark:border-slate-700 space-y-5">
+      <ol className="relative border-l border-slate-200 dark:border-slate-700 space-y-5">
         {currentLogs.map((log, idx) => {
           const fieldLabel = log.diff?.field
             ? t(fieldI18nKeys[log.diff.field] ?? log.diff.field)
@@ -141,11 +141,11 @@ const TaskAuditLogs = ({ task }: { task: Task }) => {
           })();
 
           return (
-            <li key={idx} className="relative">
-              {/* Timeline dot */}
+            <li key={idx} className="relative pl-7">
+              {/* Timeline dot — centered on the border-l line */}
               <span
                 className={cn(
-                  'absolute -left-[25px] top-0.5 flex h-[18px] w-[18px] items-center justify-center rounded-full border',
+                  'absolute -left-[9px] top-0.5 flex h-[18px] w-[18px] items-center justify-center rounded-full border',
                   eventDotCls(log.event)
                 )}
               >
@@ -153,7 +153,7 @@ const TaskAuditLogs = ({ task }: { task: Task }) => {
               </span>
 
               {/* Entry body */}
-              <div className="pl-1">
+              <div>
                 <div className="flex items-center gap-2 flex-wrap">
                   {/* Actor */}
                   <span className="text-[12px] font-semibold text-slate-800">

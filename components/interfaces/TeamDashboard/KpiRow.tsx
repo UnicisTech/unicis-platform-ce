@@ -38,7 +38,7 @@ function scoreLabel(t: (k: string) => string, score: number): { text: string; cl
 }
 
 // ── Presentational KPI card ───────────────────────────────────────────────────
-interface KpiCardProps {
+export interface KpiCardProps {
   label: string;
   value: React.ReactNode;
   sub?: React.ReactNode;
@@ -51,7 +51,7 @@ interface KpiCardProps {
   hero?: boolean;
 }
 
-function KpiCard({
+export function KpiCard({
   label,
   value,
   sub,
@@ -91,7 +91,7 @@ function KpiCard({
         className
       )}
     >
-      <div className="flex items-center gap-1.5 text-[10px] mb-1.5">
+      <div className="flex items-center gap-1.5 text-[11px] mb-1.5">
         <span className={iconCls}>{icon}</span>
         <span className="text-slate-500 dark:text-slate-400 truncate">{label}</span>
       </div>
@@ -104,7 +104,7 @@ function KpiCard({
         {value}
       </div>
       {sub && (
-        <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 leading-tight truncate">
+        <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-tight truncate">
           {sub}
         </div>
       )}
