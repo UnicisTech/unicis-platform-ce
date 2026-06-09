@@ -40,7 +40,7 @@ const MODULE_ROWS: Array<{
 ];
 
 const STATUS_COLS: Array<{ key: string; label: string; cellClass: string }> = [
-  { key: 'todo',        label: 'To do',      cellClass: 'bg-slate-100 text-slate-600' },
+  { key: 'todo',        label: 'To do',      cellClass: 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300' },
   { key: 'in-progress', label: 'In progress', cellClass: 'bg-ub-blue-bg text-ub-blue-text' },
   { key: 'in-review',   label: 'In review',  cellClass: 'bg-ub-purple-bg text-ub-purple-text' },
   { key: 'feedback',    label: 'Feedback',   cellClass: 'bg-ub-amber-bg text-ub-amber-text' },
@@ -78,9 +78,9 @@ function TaskStatusMatrix({
   );
 
   return (
-    <div className="bg-white border border-slate-200 rounded-xl overflow-hidden flex-1 min-w-0">
-      <div className="px-3 py-2.5 border-b border-slate-200">
-        <span className="text-[11px] font-medium text-slate-900">
+    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden flex-1 min-w-0">
+      <div className="px-3 py-2.5 border-b border-slate-200 dark:border-slate-700">
+        <span className="text-[11px] font-medium text-slate-900 dark:text-slate-100">
           {t('dashboard.task-matrix-title')}
         </span>
       </div>
@@ -88,18 +88,18 @@ function TaskStatusMatrix({
         <table className="w-full text-[11px]">
           <thead>
             <tr className="border-b border-slate-100">
-              <th className="text-left px-3 py-2 text-[10px] font-medium text-slate-500 w-16">
+              <th className="text-left px-3 py-2 text-[10px] font-medium text-slate-500 dark:text-slate-400 w-16">
                 Module
               </th>
               {STATUS_COLS.map((col) => (
                 <th
                   key={col.key}
-                  className="text-center px-2 py-2 text-[10px] font-medium text-slate-500"
+                  className="text-center px-2 py-2 text-[10px] font-medium text-slate-500 dark:text-slate-400"
                 >
                   {col.label}
                 </th>
               ))}
-              <th className="text-center px-2 py-2 text-[10px] font-medium text-slate-500">
+              <th className="text-center px-2 py-2 text-[10px] font-medium text-slate-500 dark:text-slate-400">
                 Total
               </th>
             </tr>
@@ -109,7 +109,7 @@ function TaskStatusMatrix({
               <tr
                 key={row.key}
                 onClick={() => router.push(`/teams/${slug}/${row.path}`)}
-                className="border-b border-slate-50 hover:bg-slate-50 cursor-pointer transition-colors"
+                className="border-b border-slate-50 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors"
               >
                 <td className="px-3 py-2">
                   <div className="flex items-center gap-1.5">
@@ -119,7 +119,7 @@ function TaskStatusMatrix({
                         row.dotColor
                       )}
                     />
-                    <span className="font-medium text-slate-700">
+                    <span className="font-medium text-slate-700 dark:text-slate-200">
                       {row.label}
                     </span>
                   </div>
@@ -140,7 +140,7 @@ function TaskStatusMatrix({
                     )}
                   </td>
                 ))}
-                <td className="px-2 py-2 text-center text-slate-500 font-medium">
+                <td className="px-2 py-2 text-center text-slate-500 dark:text-slate-400 font-medium">
                   {row.total || '—'}
                 </td>
               </tr>
@@ -182,10 +182,10 @@ function NeedsAttentionPanel({
   );
 
   return (
-    <div className="bg-white border border-slate-200 rounded-xl overflow-hidden w-full lg:w-[280px] flex-shrink-0">
-      <div className="px-3 py-2.5 border-b border-slate-200 flex items-center gap-2">
+    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden w-full lg:w-[280px] flex-shrink-0">
+      <div className="px-3 py-2.5 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
         <ShieldAlert size={12} className="text-ub-red" aria-hidden />
-        <span className="text-[11px] font-medium text-slate-900">
+        <span className="text-[11px] font-medium text-slate-900 dark:text-slate-100">
           {t('dashboard.needs-attention')}
         </span>
       </div>
@@ -199,10 +199,10 @@ function NeedsAttentionPanel({
             <button
               key={task.id}
               onClick={() => router.push(`/teams/${slug}/tasks`)}
-              className="w-full text-left px-3 py-2.5 hover:bg-slate-50 transition-colors"
+              className="w-full text-left px-3 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
             >
               <div className="flex items-start justify-between gap-2">
-                <p className="text-[12px] text-slate-700 font-medium leading-snug line-clamp-1">
+                <p className="text-[12px] text-slate-700 dark:text-slate-200 font-medium leading-snug line-clamp-1">
                   {task.title}
                 </p>
                 <ArrowRight
@@ -286,7 +286,7 @@ const TeamDashboard = ({
 
       {/* Tab bar — Direction B segmented pill control */}
       <div
-        className="flex gap-0.5 bg-slate-100 rounded-lg p-[3px] mb-4"
+        className="flex gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-[3px] mb-4"
         role="tablist"
       >
         {([0, 1, 2] as DashboardTab[]).map((tab) => (
@@ -298,8 +298,8 @@ const TeamDashboard = ({
             className={cn(
               'flex-1 py-[7px] text-center text-[12px] font-medium rounded-md transition-all',
               activeTab === tab
-                ? 'bg-white text-slate-900 border border-slate-200 shadow-xs'
-                : 'text-slate-500 hover:text-slate-700 bg-transparent border border-transparent'
+                ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 shadow-xs'
+                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:text-slate-200 bg-transparent border border-transparent'
             )}
           >
             {TAB_LABELS[tab]}

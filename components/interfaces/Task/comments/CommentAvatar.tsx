@@ -6,7 +6,7 @@ interface CommentAvatarProps {
 const CommentAvatar = ({ image, username }: CommentAvatarProps) => (
   <label
     htmlFor="image"
-    className="group relative mt-2 flex h-9 w-9 cursor-pointer flex-col items-center justify-center rounded-full border border-gray-300 bg-white transition-all hover:bg-gray-50"
+    className="group relative mt-2 flex h-9 w-9 cursor-pointer flex-col items-center justify-center rounded-full border border-gray-300 bg-white dark:bg-slate-800 transition-all hover:bg-gray-50"
   >
     <img
       src={

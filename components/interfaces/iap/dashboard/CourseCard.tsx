@@ -32,12 +32,12 @@ const CourseCard = ({
       tabIndex={0}
       onKeyDown={(e) => e.key === 'Enter' && openCourse()}
       className={cn(
-        'bg-white border border-slate-200 rounded-xl overflow-hidden cursor-pointer',
+        'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden cursor-pointer',
         'hover:border-ub-blue-border hover:shadow-sm transition-all'
       )}
     >
       {/* Thumbnail */}
-      <div className="relative w-full aspect-video bg-slate-100">
+      <div className="relative w-full aspect-video bg-slate-100 dark:bg-slate-800">
         <img
           className="absolute inset-0 w-full h-full object-cover"
           src={course?.thumbnail || '/unicis-iap-logo.png'}
@@ -55,7 +55,7 @@ const CourseCard = ({
         )}
 
         {/* Title */}
-        <h3 className="text-[13px] font-medium text-slate-900 leading-snug line-clamp-2">
+        <h3 className="text-[13px] font-medium text-slate-900 dark:text-slate-100 leading-snug line-clamp-2">
           {course.name}
         </h3>
 

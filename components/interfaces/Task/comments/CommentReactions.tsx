@@ -69,8 +69,8 @@ const CommentReactions = ({ comment, onReact }: CommentReactionsProps) => {
           title={group.users.join(', ')}
           className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs transition-colors hover:bg-gray-100 ${
             group.reactedByMe
-              ? 'border-blue-300 bg-blue-50'
-              : 'border-gray-200 bg-white'
+              ? 'border-blue-300 bg-blue-50 dark:bg-blue-950/40'
+              : 'border-gray-200 bg-white dark:bg-slate-800'
           }`}
         >
           <span>{emoji}</span>
@@ -86,7 +86,7 @@ const CommentReactions = ({ comment, onReact }: CommentReactionsProps) => {
           +
         </button>
         {pickerOpen && (
-          <div className="absolute bottom-full left-0 z-10 mb-1 flex gap-1 rounded-lg border border-gray-200 bg-white p-1.5 shadow-lg">
+          <div className="absolute bottom-full left-0 z-10 mb-1 flex gap-1 rounded-lg border border-gray-200 bg-white dark:bg-slate-800 p-1.5 shadow-lg">
             {REACTION_EMOJIS.map(({ emoji, label }) => (
               <button
                 key={emoji}

@@ -457,7 +457,7 @@ export default function CscPanel({
         <PerPageSelector perPage={perPage} setPerPage={setPerPage as any} />
 
         <button
-          className="flex items-center justify-between overflow-hidden truncate rounded-md border border-input bg-transparent py-2 shadow-xs ring-offset-background data-placeholder:text-muted-foreground focus:outline-hidden focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:truncate h-full px-2 text-sm hover:bg-accent hover:text-accent-foreground"
+          className="flex items-center justify-between overflow-hidden truncate rounded-md border border-slate-200 dark:border-slate-700 bg-transparent py-2 shadow-xs data-placeholder:text-slate-500 dark:text-slate-400 focus:outline-hidden focus:ring-1 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:truncate h-full px-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:text-slate-100"
           onClick={() => setSoaModalOpen(true)}
           title={t('soa-export.button-title', { framework: frameworkLabel })}
         >

@@ -84,8 +84,8 @@ export default function SoaExportModal({
                 'flex items-start gap-3 rounded-lg border p-3 transition-colors',
                 loading ? 'cursor-not-allowed opacity-70' : 'cursor-pointer',
                 selected === f.value
-                  ? 'border-primary bg-primary/5'
-                  : 'border-border hover:border-foreground/30 hover:bg-muted/60'
+                  ? 'border-blue-500 dark:border-blue-400 bg-blue-50 dark:bg-blue-950/40'
+                  : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50'
               )}
             >
               <RadioGroupItem
@@ -98,7 +98,7 @@ export default function SoaExportModal({
                 <div className="text-sm font-medium">
                   {f.icon}&nbsp;{f.label}
                 </div>
-                <div className="mt-0.5 text-xs text-muted-foreground">
+                <div className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
                   {f.description}
                 </div>
               </div>

@@ -59,7 +59,7 @@ const ControlBlockViewOnly = ({
         />
       </div>
 
-      <div className="h-px w-full bg-muted my-6" />
+      <div className="h-px w-full bg-slate-200 dark:bg-slate-700 my-6" />
     </div>
   );
 };

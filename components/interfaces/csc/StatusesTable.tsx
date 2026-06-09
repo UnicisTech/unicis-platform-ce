@@ -244,8 +244,8 @@ const StatusesTable = ({
     <>
       <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
         <div className="overflow-x-auto mt-2">
-          <table className="w-full min-w-full divide-y divide-border text-sm">
-            <thead className="bg-muted">
+          <table className="w-full min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-sm">
+            <thead className="bg-slate-50 dark:bg-slate-900">
               <tr>
                 <th scope="col" className="px-6 py-3 text-left w-12">
                   <input
@@ -276,7 +276,7 @@ const StatusesTable = ({
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border">
+            <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
               {pageData.map((control) => {
                 const code = t(`csc/${ISO}:controls.${control.id}.code`);
                 const title = t(`csc/${ISO}:controls.${control.id}.control`);
@@ -387,19 +387,19 @@ const StatusesTable = ({
       {/* Bulk task linking dialog */}
       {bulkTaskLinkOpen && (
         <div className="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-6 max-w-md w-full mx-4">
             <h2 className="text-lg font-medium mb-2">{t('bulk-actions.link-tasks-required')} - {selectedIds.size} {selectedIds.size === 1 ? 'control' : 'controls'}</h2>
-            <p className="text-sm text-slate-600 mb-4">
+            <p className="text-sm text-slate-600 dark:text-slate-300 mb-4">
               {t('bulk-actions.select-tasks-description')}
             </p>
-            <div className="space-y-2 max-h-64 overflow-y-auto mb-4 border border-slate-200 rounded p-3">
+            <div className="space-y-2 max-h-64 overflow-y-auto mb-4 border border-slate-200 dark:border-slate-700 rounded p-3">
               {tasks.length === 0 ? (
-                <p className="text-sm text-slate-500 text-center py-4">No tasks available</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400 text-center py-4">No tasks available</p>
               ) : (
                 tasks.map((task) => (
                   <label
                     key={task.taskNumber}
-                    className="flex items-center gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"
+                    className="flex items-center gap-2 p-2 rounded hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer"
                   >
                     <input
                       type="checkbox"
@@ -425,7 +425,7 @@ const StatusesTable = ({
             <div className="flex gap-2">
               <button
                 onClick={closeBulkTaskLink}
-                className="flex-1 px-3 py-2 rounded border border-slate-200 hover:bg-slate-50 text-sm font-medium"
+                className="flex-1 px-3 py-2 rounded border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 text-sm font-medium"
               >
                 {t('cancel') || 'Cancel'}
               </button>
@@ -436,7 +436,7 @@ const StatusesTable = ({
                   }
                 }}
                 disabled={selectedTaskNumbers.size === 0}
-                className="flex-1 px-3 py-2 rounded bg-ub-blue text-white text-sm font-medium hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed"
+                className="flex-1 px-3 py-2 rounded bg-ub-blue text-white text-sm font-medium hover:bg-blue-700 disabled:bg-slate-300 dark:disabled:bg-slate-600 disabled:cursor-not-allowed"
               >
                 {selectedTaskNumbers.size > 0 ? `${t('bulk-actions.link-selected-tasks')} (${selectedTaskNumbers.size})` : t('bulk-actions.link-selected-tasks')}
               </button>

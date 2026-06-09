@@ -8,13 +8,6 @@ import ConfirmationDialog from '../shared/ConfirmationDialog';
 import { defaultHeaders } from '@/lib/common';
 import type { ApiResponse } from 'types';
 import { Button } from '../shadcn/ui/button';
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '../shadcn/ui/card';
 import { Loader2 } from 'lucide-react';
 
 const RemoveTeam = ({ team }: { team: Team }) => {
@@ -46,12 +39,14 @@ const RemoveTeam = ({ team }: { team: Team }) => {
 
   return (
     <>
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('remove-team')}</CardTitle>
-          <CardDescription>{t('remove-team-warning')}</CardDescription>
-        </CardHeader>
-        <CardFooter className="flex justify-end">
+      <div className="bg-white dark:bg-slate-800 border border-red-200 dark:border-red-800/50 rounded-xl overflow-hidden">
+        <div className="bg-red-50 dark:bg-red-950/30 border-b border-red-200 dark:border-red-800/50 px-4 py-2.5">
+          <span className="text-[12px] font-semibold text-red-700 dark:text-red-400 uppercase tracking-wide">
+            {t('remove-team')}
+          </span>
+          <p className="text-xs text-red-500 mt-0.5">{t('remove-team-warning')}</p>
+        </div>
+        <div className="px-4 py-3 flex justify-end">
           <Button
             variant="destructive"
             onClick={() => setAskConfirmation(true)}
@@ -59,8 +54,8 @@ const RemoveTeam = ({ team }: { team: Team }) => {
             {loading && <Loader2 className="animate-spin" />}
             {t('remove-team')}
           </Button>
-        </CardFooter>
-      </Card>
+        </div>
+      </div>
       <ConfirmationDialog
         visible={askConfirmation}
         title={t('remove-team')}

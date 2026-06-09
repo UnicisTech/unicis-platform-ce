@@ -53,7 +53,7 @@ const CscTabs = ({
 
   return (
     <div
-      className="flex gap-0.5 bg-slate-100 rounded-lg p-[3px] mb-4 flex-wrap"
+      className="flex gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-[3px] mb-4 flex-wrap"
       role="tablist"
     >
       {/* ── Mapping Matrix tab — always visible (first position) ── */}
@@ -71,9 +71,9 @@ const CscTabs = ({
           className={cn(
             'flex items-center gap-1.5 px-3 py-[6px] text-[12px] font-medium rounded-md transition-all whitespace-nowrap',
             activeTab === MAPPING_MATRIX_TAB && matrixUnlocked
-              ? 'bg-white text-slate-900 border border-slate-200 shadow-xs'
+              ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 shadow-xs'
               : matrixUnlocked
-                ? 'text-slate-500 hover:text-slate-700 bg-transparent border border-transparent'
+                ? 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:text-slate-200 bg-transparent border border-transparent'
                 : 'text-slate-400 cursor-not-allowed bg-transparent border border-transparent'
           )}
         >
@@ -98,8 +98,8 @@ const CscTabs = ({
             className={cn(
               'px-3 py-[6px] text-[12px] font-medium rounded-md transition-all whitespace-nowrap',
               isActive
-                ? 'bg-white text-slate-900 border border-slate-200 shadow-xs'
-                : 'text-slate-500 hover:text-slate-700 bg-transparent border border-transparent'
+                ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 shadow-xs'
+                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:text-slate-200 bg-transparent border border-transparent'
             )}
           >
             {isoValueToLabel(menu.name as ISO)}

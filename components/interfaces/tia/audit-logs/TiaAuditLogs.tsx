@@ -69,10 +69,10 @@ const TiaAuditLogs = ({ task, slug }: { task: Task; slug: string }) => {
                   <TableCell>
                     {new Date(log.date).toLocaleDateString('en-GB')}
                   </TableCell>
-                  <TableCell className="text-muted-foreground">
+                  <TableCell className="text-slate-500 dark:text-slate-400">
                     {auditLogHelper(log.diff?.field, log.diff?.prevValue, t)}
                   </TableCell>
-                  <TableCell className="text-muted-foreground">
+                  <TableCell className="text-slate-500 dark:text-slate-400">
                     {auditLogHelper(log.diff?.field, log.diff?.nextValue, t)}
                   </TableCell>
                 </TableRow>
@@ -89,7 +89,7 @@ const TiaAuditLogs = ({ task, slug }: { task: Task; slug: string }) => {
           )}
         </>
       ) : (
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           {t('no-logs-available')}
         </p>
       )}

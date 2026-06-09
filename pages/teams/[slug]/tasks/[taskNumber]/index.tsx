@@ -40,12 +40,6 @@ import {
 } from '@/components/interfaces/pia';
 import Breadcrumb from '../../Breadcrumb';
 import useRpaCreation from 'hooks/useRpaCreation';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/shadcn/ui/card';
 import { Button } from '@/components/shadcn/ui/button';
 import type {
   PiaRisk,
@@ -54,17 +48,24 @@ import type {
   TiaProcedureInterface,
 } from 'types';
 
-const CardTitleWrapper = ({
+// ── Direction B panel card ─────────────────────────────────────────────────────
+const Panel = ({
+  title,
+  action,
   children,
-  className = '',
 }: {
+  title: string;
+  action?: ReactNode;
   children: ReactNode;
-  className?: string;
 }) => (
-  <div
-    className={`flex min-h-8 flex-wrap items-center justify-between gap-2 px-4 uppercase ${className}`.trim()}
-  >
-    {children}
+  <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden mt-4">
+    <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+      <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
+        {title}
+      </span>
+      {action}
+    </div>
+    <div className="p-0">{children}</div>
   </div>
 );
 
@@ -90,7 +91,6 @@ const TaskById = () => {
     taskNumber as string
   );
 
-  console.log('task', task);
   const { ISO } = useISO(team);
   const rpaState = useRpaCreation(task);
 
@@ -106,125 +106,125 @@ const TaskById = () => {
         teamName={slug}
         taskNumber={taskNumber}
       />
-      <div className="flex items-center gap-2 mb-4">
-        <h3 className="text-2xl font-bold">{task.title}</h3>
+
+      {/* Task title */}
+      <div className="flex items-center gap-2 mb-3">
+        <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">{task.title}</h3>
         {task.recurrenceScheduleId && <TaskRecurrenceBadge />}
       </div>
+
+      {/* Module tabs */}
       <TaskTab activeTab={activeTab} setActiveTab={setActiveTab} />
+
+      {/* ── Overview ─────────────────────────────────────────────────── */}
       {activeTab === 'Overview' && (
-        <>
-          <Card>
-            <CardHeader>
-              <CardTitleWrapper>
-                <CardTitle>{t('details')}</CardTitle>
-              </CardTitleWrapper>
-            </CardHeader>
-            <CardContent>
-              <TaskDetails task={task} team={team as Team} />
-            </CardContent>
-          </Card>
-        </>
+        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+          <TaskDetails task={task} team={team as Team} />
+        </div>
       )}
+
+      {/* ── Processing Activities ────────────────────────────────────── */}
       {activeTab === 'Processing Activities' && (
-        <Card className="mt-4">
-          <CardHeader>
-            <CardTitleWrapper>
-              <CardTitle>{t('processing-activities-panel')}</CardTitle>
-              {canAccess('task', ['update']) && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="whitespace-normal text-center leading-snug"
-                  onClick={() => rpaState.setIsRpaOpen(!rpaState.isRpaOpen)}
-                >
-                  {t('create-rpa')}
-                </Button>
-              )}
-            </CardTitleWrapper>
-          </CardHeader>
-          <CardContent>
+        <Panel
+          title={t('processing-activities-panel')}
+          action={
+            canAccess('task', ['update']) ? (
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-[12px] h-7"
+                onClick={() => rpaState.setIsRpaOpen(!rpaState.isRpaOpen)}
+              >
+                {t('create-rpa')}
+              </Button>
+            ) : undefined
+          }
+        >
+          <div className="p-4">
             <RpaPanel task={task} slug={slug} />
-          </CardContent>
-        </Card>
+          </div>
+        </Panel>
       )}
+
+      {/* ── Transfer Impact Assessment ───────────────────────────────── */}
       {activeTab === 'Transfer Impact Assessment' && (
-        <Card className="mt-4">
-          <CardHeader>
-            <CardTitleWrapper>
-              <CardTitle>{t('transfer-impact-assessment-panel')}</CardTitle>
-              {canAccess('task', ['update']) && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="whitespace-normal text-center leading-snug"
-                  onClick={() => setTiaVisible(!tiaVisible)}
-                >
-                  {t('create-tia')}
-                </Button>
-              )}
-            </CardTitleWrapper>
-          </CardHeader>
-          <CardContent>
+        <Panel
+          title={t('transfer-impact-assessment-panel')}
+          action={
+            canAccess('task', ['update']) ? (
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-[12px] h-7"
+                onClick={() => setTiaVisible(!tiaVisible)}
+              >
+                {t('create-tia')}
+              </Button>
+            ) : undefined
+          }
+        >
+          <div className="p-4">
             <TiaPanel task={task} />
-          </CardContent>
-        </Card>
+          </div>
+        </Panel>
       )}
+
+      {/* ── Cybersecurity Controls ───────────────────────────────────── */}
       {activeTab === 'Cybersecurity Controls' && (
-        <Card className="mt-4">
-          <CardHeader>
-            <CardTitleWrapper>
-              <CardTitle>{t('cybersecurity-controls-panel')}</CardTitle>
-            </CardTitleWrapper>
-          </CardHeader>
-          <CardContent>
+        <Panel title={t('cybersecurity-controls-panel')}>
+          <div className="p-4">
             <CscPanel task={task} team={team} mutateTask={mutateTask} />
-          </CardContent>
-        </Card>
+          </div>
+        </Panel>
       )}
+
+      {/* ── Privacy Impact Assessment ────────────────────────────────── */}
       {activeTab === 'Privacy Impact Assessment' && (
-        <Card className="mt-4">
-          <CardHeader>
-            <CardTitleWrapper>
-              <CardTitle>{t('privacy-impact-assessment-panel')}</CardTitle>
-              {canAccess('task', ['update']) && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="whitespace-normal text-center leading-snug"
-                  onClick={() => setPiaVisible(!piaVisible)}
-                >
-                  {t('create-pia')}
-                </Button>
-              )}
-            </CardTitleWrapper>
-          </CardHeader>
-          <CardContent>
+        <Panel
+          title={t('privacy-impact-assessment-panel')}
+          action={
+            canAccess('task', ['update']) ? (
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-[12px] h-7"
+                onClick={() => setPiaVisible(!piaVisible)}
+              >
+                {t('create-pia')}
+              </Button>
+            ) : undefined
+          }
+        >
+          <div className="p-4">
             <PiaPanel task={task} />
-          </CardContent>
-        </Card>
+          </div>
+        </Panel>
       )}
+
+      {/* ── Risk Management ─────────────────────────────────────────── */}
       {activeTab === 'Risk Management' && (
-        <Card className="mt-4">
-          <CardHeader>
-            <CardTitleWrapper>
-              <CardTitle>{t('risk-management-panel')}</CardTitle>
-              {canAccess('task', ['update']) && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setRmVisible(!rmVisible)}
-                  className="whitespace-normal text-center leading-snug"
-                >
-                  {t('rm-register-risk-record')}
-                </Button>
-              )}
-            </CardTitleWrapper>
-          </CardHeader>
-          <CardContent>
+        <Panel
+          title={t('risk-management-panel')}
+          action={
+            canAccess('task', ['update']) ? (
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-[12px] h-7"
+                onClick={() => setRmVisible(!rmVisible)}
+              >
+                {t('rm-register-risk-record')}
+              </Button>
+            ) : undefined
+          }
+        >
+          <div className="p-4">
             <RiskManagementTaskPanel task={task} slug={slug} />
-          </CardContent>
-        </Card>
+          </div>
+        </Panel>
       )}
+
+      {/* ── Dialogs ─────────────────────────────────────────────────── */}
       {tiaVisible && (
         <CreateTiaProcedure
           open={tiaVisible}
@@ -259,93 +259,60 @@ const TaskById = () => {
           mutateTasks={mutateTask}
         />
       )}
-      <Card className="mt-4">
-        <CardHeader>
-          <CardTitleWrapper>
-            <CardTitle>{t('attachments')}</CardTitle>
-          </CardTitleWrapper>
-        </CardHeader>
-        <CardContent>
+
+      {/* ── Attachments ─────────────────────────────────────────────── */}
+      <Panel title={t('attachments')}>
+        <div className="p-4">
           <Attachments task={task} mutateTask={mutateTask} />
-        </CardContent>
-      </Card>
-      <CommentsTab
-        activeTab={activeCommentTab}
-        setActiveTab={setActiveCommentTab}
-      />
+        </div>
+      </Panel>
+
+      {/* ── Comments / Activity ─────────────────────────────────────── */}
+      <div className="mt-4 mb-1">
+        <CommentsTab
+          activeTab={activeCommentTab}
+          setActiveTab={setActiveCommentTab}
+        />
+      </div>
+
       {activeCommentTab === 'Comments' ? (
-        <Card className="mt-4">
-          <CardHeader>
-            <CardTitleWrapper>
-              <CardTitle>{t('comments')}</CardTitle>
-            </CardTitleWrapper>
-          </CardHeader>
-          <CardContent>
+        <Panel title={t('comments')}>
+          <div className="p-4">
             <Comments task={task} mutateTask={mutateTask} />
-          </CardContent>
-        </Card>
+          </div>
+        </Panel>
       ) : (
         <>
-          <Card className="mt-4">
-            <CardHeader>
-              <CardTitleWrapper>
-                <CardTitle>{t('task-activity')}</CardTitle>
-              </CardTitleWrapper>
-            </CardHeader>
-            <CardContent>
+          <Panel title={t('task-activity')}>
+            <div className="p-4">
               <TaskAuditLogs task={task} />
-            </CardContent>
-          </Card>
-          <Card className="mt-4">
-            <CardHeader>
-              <CardTitleWrapper>
-                <CardTitle>{t('rpa-audit-logs')}</CardTitle>
-              </CardTitleWrapper>
-            </CardHeader>
-            <CardContent>
+            </div>
+          </Panel>
+          <Panel title={t('rpa-audit-logs')}>
+            <div className="p-4">
               <RpaAuditLogs task={task} slug={slug} />
-            </CardContent>
-          </Card>
-          <Card className="mt-4">
-            <CardHeader>
-              <CardTitleWrapper>
-                <CardTitle>{t('tia-audit-logs')}</CardTitle>
-              </CardTitleWrapper>
-            </CardHeader>
-            <CardContent>
+            </div>
+          </Panel>
+          <Panel title={t('tia-audit-logs')}>
+            <div className="p-4">
               <TiaAuditLogs task={task} slug={slug} />
-            </CardContent>
-          </Card>
-          <Card className="mt-4">
-            <CardHeader>
-              <CardTitleWrapper>
-                <CardTitle>{t('csc-audit-logs')}</CardTitle>
-              </CardTitleWrapper>
-            </CardHeader>
-            <CardContent>
+            </div>
+          </Panel>
+          <Panel title={t('csc-audit-logs')}>
+            <div className="p-4">
               <CscAuditLogs task={task} />
-            </CardContent>
-          </Card>
-          <Card className="mt-4">
-            <CardHeader>
-              <CardTitleWrapper>
-                <CardTitle>{t('pia-audit-logs')}</CardTitle>
-              </CardTitleWrapper>
-            </CardHeader>
-            <CardContent>
+            </div>
+          </Panel>
+          <Panel title={t('pia-audit-logs')}>
+            <div className="p-4">
               <PiaAuditLogs task={task} />
-            </CardContent>
-          </Card>
-          <Card className="mt-4">
-            <CardHeader>
-              <CardTitleWrapper>
-                <CardTitle>{t('rm-audit-logs')}</CardTitle>
-              </CardTitleWrapper>
-            </CardHeader>
-            <CardContent>
+            </div>
+          </Panel>
+          <Panel title={t('rm-audit-logs')}>
+            <div className="p-4">
               <RmAuditLogs task={task} slug={slug} />
-            </CardContent>
-          </Card>
+            </div>
+          </Panel>
         </>
       )}
     </>

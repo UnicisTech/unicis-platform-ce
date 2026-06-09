@@ -6,14 +6,6 @@ import { defaultHeaders } from '@/lib/common';
 import type { ApiResponse, UserReturned } from 'types';
 import type { User } from 'types';
 
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from '@/components/shadcn/ui/card';
 import { Label } from '@/components/shadcn/ui/label';
 import { Input } from '@/components/shadcn/ui/input';
 import { Button } from '@/components/shadcn/ui/button';
@@ -55,13 +47,15 @@ const UpdateEmail: React.FC<UpdateEmailProps> = ({
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('email-address')}</CardTitle>
-          <CardDescription>{t('email-address-description')}</CardDescription>
-        </CardHeader>
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+        <div className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+          <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
+            {t('email-address')}
+          </span>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{t('email-address-description')}</p>
+        </div>
 
-        <CardContent className="space-y-4">
+        <div className="p-4 space-y-4">
           <div className="grid gap-1">
             <Label htmlFor="email">{t('email-address')}</Label>
             <Input
@@ -77,15 +71,15 @@ const UpdateEmail: React.FC<UpdateEmailProps> = ({
               <p className="text-destructive text-sm">{formik.errors.email}</p>
             )}
           </div>
-        </CardContent>
+        </div>
 
-        <CardFooter className="flex justify-end">
+        <div className="border-t border-slate-200 dark:border-slate-700 px-4 py-3 flex justify-end">
           <Button type="submit" disabled={!formik.dirty || !formik.isValid}>
             {formik.isSubmitting && <Loader2 className="animate-spin" />}
             {t('save-changes')}
           </Button>
-        </CardFooter>
-      </Card>
+        </div>
+      </div>
     </form>
   );
 };

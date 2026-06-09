@@ -1,6 +1,6 @@
-import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import { taskCommentsNavigations } from '@/lib/tasks';
+import { cn } from '@/components/shadcn/lib/utils';
 
 const tabI18nKeys: Record<string, string> = {
   Comments: 'comments',
@@ -18,30 +18,26 @@ const CommentsTab = ({
   const { t } = useTranslation('common');
 
   return (
-    <div className="mb-5">
-      <nav
-        className="-mb-px flex space-x-5 border-b border-gray-300"
-        aria-label="Tabs"
-      >
-        {navigations.map((menu, index) => {
-          return (
-            <a
-              key={index}
-              className={classNames(
-                'inline-flex items-center border-b-2 py-4 text-xs font-bold uppercase cursor-pointer',
-                menu.active
-                  ? 'border-gray-900 text-gray-700 dark:text-gray-200'
-                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-              )}
-              onClick={() => {
-                setActiveTab(menu.name);
-              }}
-            >
-              {t(tabI18nKeys[menu.name] ?? menu.name)}
-            </a>
-          );
-        })}
-      </nav>
+    <div
+      className="inline-flex gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-[3px]"
+      role="tablist"
+    >
+      {navigations.map((menu) => (
+        <button
+          key={menu.name}
+          role="tab"
+          aria-selected={menu.active}
+          onClick={() => setActiveTab(menu.name)}
+          className={cn(
+            'px-3 py-[6px] text-[12px] font-medium rounded-md transition-all whitespace-nowrap',
+            menu.active
+              ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 shadow-xs'
+              : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:text-slate-200 bg-transparent border border-transparent'
+          )}
+        >
+          {t(tabI18nKeys[menu.name] ?? menu.name)}
+        </button>
+      ))}
     </div>
   );
 };

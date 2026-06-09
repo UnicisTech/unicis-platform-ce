@@ -30,14 +30,14 @@ function StatCard({
 }) {
   const pct = total > 0 ? Math.round((value / total) * 100) : 0;
   return (
-    <div className="bg-white border border-slate-200 rounded-xl p-3">
+    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3">
       <div className="flex items-center gap-1.5 text-[10px] text-slate-400 mb-1">
         {dotClass && (
           <span className={cn('w-2 h-2 rounded-full flex-shrink-0', dotClass)} />
         )}
         {label}
       </div>
-      <div className="text-xl font-semibold text-slate-900 leading-none tabular-nums">
+      <div className="text-xl font-semibold text-slate-900 dark:text-slate-100 leading-none tabular-nums">
         {value}
       </div>
       <div className="text-[10px] text-slate-400 mt-0.5">{pct}%</div>
@@ -72,15 +72,15 @@ const TasksAnalysis = ({ slug }: { slug: string }) => {
   return (
     <div className="flex flex-col lg:flex-row gap-3 mb-3">
       {/* Pie chart card */}
-      <div className="bg-white border border-slate-200 rounded-xl p-4 flex items-center justify-center lg:w-[280px] flex-shrink-0">
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 flex items-center justify-center lg:w-[280px] flex-shrink-0">
         <TasksPieChart statuses={statuses} />
       </div>
 
       {/* Status stat grid */}
       <div className="flex-1 grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-3 xl:grid-cols-6 gap-2 content-start">
-        <div className="bg-white border border-slate-200 rounded-xl p-3 col-span-3 sm:col-span-6 lg:col-span-3 xl:col-span-6">
+        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 col-span-3 sm:col-span-6 lg:col-span-3 xl:col-span-6">
           <div className="text-[10px] text-slate-400 mb-1">{t('total-tasks')}</div>
-          <div className="text-2xl font-semibold text-slate-900 tabular-nums">{total}</div>
+          <div className="text-2xl font-semibold text-slate-900 dark:text-slate-100 tabular-nums">{total}</div>
         </div>
         {STATUS_COLS.map((col) => (
           <StatCard

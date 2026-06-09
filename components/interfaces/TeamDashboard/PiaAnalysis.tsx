@@ -44,12 +44,12 @@ const PiaAnalysis = ({ tasks, onCellClick }: PiaAnalysisProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
       {riskSections.map(({ titleKey, id, map }) => (
-        <div key={id} className="bg-white border border-slate-200 rounded-xl p-4 overflow-hidden">
+        <div key={id} className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 overflow-hidden">
           <div className="mb-2">
-            <span className="text-[12px] font-medium text-slate-900 block">
+            <span className="text-[12px] font-medium text-slate-900 dark:text-slate-100 block">
               {t('pia-overview')} · {t(titleKey)}
             </span>
-            <span className="text-[10px] text-slate-500">
+            <span className="text-[10px] text-slate-500 dark:text-slate-400">
               {t('pia-matrix-axis', { defaultValue: 'Impact → / Likelihood ↑' })}
             </span>
           </div>

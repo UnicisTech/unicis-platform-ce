@@ -31,9 +31,9 @@ const RISK_LEVELS: Array<{
     labelKey: 'risk-level-extreme',
     distIdx: 4,
     dot: '#DC2626',
-    row: 'bg-red-50',
-    text: 'text-red-700',
-    badge: 'bg-red-100 text-red-700',
+    row: 'bg-red-50 dark:bg-red-950/30',
+    text: 'text-red-700 dark:text-red-400',
+    badge: 'bg-red-100 text-red-700 dark:text-red-400',
   },
   {
     key: 'major',
@@ -67,9 +67,9 @@ const RISK_LEVELS: Array<{
     labelKey: 'risk-level-insignificant',
     distIdx: 0,
     dot: '#94A3B8',
-    row: 'bg-slate-50',
-    text: 'text-slate-600',
-    badge: 'bg-slate-100 text-slate-600',
+    row: 'bg-slate-50 dark:bg-slate-900',
+    text: 'text-slate-600 dark:text-slate-300',
+    badge: 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300',
   },
 ];
 
@@ -117,12 +117,12 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
       {/* Risk distribution + top risks */}
-      <div className="bg-white border border-slate-200 rounded-xl p-4">
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-[12px] font-medium text-slate-900">
+          <span className="text-[12px] font-medium text-slate-900 dark:text-slate-100">
             {t('current-risk-rating')}
           </span>
-          <span className="text-[11px] text-slate-500">RmAnalysis</span>
+          <span className="text-[11px] text-slate-500 dark:text-slate-400">RmAnalysis</span>
         </div>
 
         {/* Five severity rows: Extreme → Major → Moderate → Minor → Insignificant */}
@@ -149,7 +149,7 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
         {/* Top open risks */}
         {topRisks.length > 0 && (
           <div className="border-t border-slate-100 pt-3">
-            <div className="text-[11px] text-slate-500 font-medium mb-2">
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mb-2">
               {t('top-open-risks', { defaultValue: 'Top open risks' })}
             </div>
             <div className="divide-y divide-slate-50">
@@ -158,7 +158,7 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
                 return (
                   <div
                     key={i}
-                    className="flex items-start gap-2 py-1.5 text-[11px] text-slate-500"
+                    className="flex items-start gap-2 py-1.5 text-[11px] text-slate-500 dark:text-slate-400"
                   >
                     <span
                       className={`flex-shrink-0 text-[10px] font-medium px-1.5 py-0.5 rounded ${level.badge}`}
@@ -175,14 +175,14 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
       </div>
 
       {/* Risk matrix */}
-      <div className="bg-white border border-slate-200 rounded-xl p-4">
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[12px] font-medium text-slate-900">
+          <span className="text-[12px] font-medium text-slate-900 dark:text-slate-100">
             {t('target-risk-rating')}
           </span>
-          <span className="text-[11px] text-slate-500">DashboardMatrixChart</span>
+          <span className="text-[11px] text-slate-500 dark:text-slate-400">DashboardMatrixChart</span>
         </div>
-        <div className="text-[10px] text-slate-500 mb-1">Impact → / Likelihood ↑</div>
+        <div className="text-[10px] text-slate-500 dark:text-slate-400 mb-1">Impact → / Likelihood ↑</div>
         <div className="flex items-center justify-center">
           <DashboardMatrixChart
             datasets={[]}

@@ -36,45 +36,45 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
   const countriesList = Array.from(countriesSet);
 
   return (
-    <div className="bg-white border border-slate-200 rounded-xl p-4">
+    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-[12px] font-medium text-slate-900">{t('tia')}</span>
-        <span className="text-[11px] text-slate-500">
+        <span className="text-[12px] font-medium text-slate-900 dark:text-slate-100">{t('tia')}</span>
+        <span className="text-[11px] text-slate-500 dark:text-slate-400">
           {t('tia-assessments', { defaultValue: 'Assessments' })}
         </span>
       </div>
 
       <div className="divide-y divide-slate-50">
         <div className="flex items-center justify-between py-1.5 text-[12px]">
-          <span className="text-slate-500">{t('number-of-assessments')}</span>
-          <span className="font-medium text-slate-900">{totalNumberOfAssessment}</span>
+          <span className="text-slate-500 dark:text-slate-400">{t('number-of-assessments')}</span>
+          <span className="font-medium text-slate-900 dark:text-slate-100">{totalNumberOfAssessment}</span>
         </div>
         <div className="flex items-center justify-between py-1.5 text-[12px]">
-          <span className="text-slate-500 flex items-center gap-1.5">
+          <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0" />
             {t('permit')}
           </span>
           <span className="font-medium text-green-600">{perAuthorization}</span>
         </div>
         <div className="flex items-center justify-between py-1.5 text-[12px]">
-          <span className="text-slate-500 flex items-center gap-1.5">
+          <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0" />
             {t('not-permit')}
           </span>
-          <span className="font-medium text-red-600">{notPermitAuthorization}</span>
+          <span className="font-medium text-red-600 dark:text-red-400">{notPermitAuthorization}</span>
         </div>
       </div>
 
       {countriesList.length > 0 && (
         <div className="mt-3 pt-3 border-t border-slate-50">
-          <div className="text-[11px] text-slate-500 mb-1.5">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mb-1.5">
             {t('assessment-per-country')}
           </div>
           <div className="flex flex-wrap gap-1">
             {countriesList.map((country, idx) => (
               <span
                 key={idx}
-                className="inline-flex items-center text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded-[4px]"
+                className="inline-flex items-center text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-1.5 py-0.5 rounded-[4px]"
               >
                 {capitalizeCountryName(country)}
               </span>
@@ -84,7 +84,7 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
       )}
 
       {notPermitAuthorization > 0 && (
-        <div className="mt-3 bg-red-50 border border-red-100 rounded-lg px-3 py-2 flex gap-2 items-start text-[11px] text-red-700">
+        <div className="mt-3 bg-red-50 dark:bg-red-950/30 border border-red-100 rounded-lg px-3 py-2 flex gap-2 items-start text-[11px] text-red-700 dark:text-red-400">
           <AlertCircle size={12} className="mt-0.5 flex-shrink-0 text-red-500" aria-hidden />
           {t('tia-non-adequate-warning', {
             defaultValue: `${notPermitAuthorization} transfer(s) to non-adequate countries require SCCs. Review pending.`,

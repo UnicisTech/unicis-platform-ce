@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import { Card, Error, LetterAvatar, Loading } from '@/components/shared';
+import { Error, LetterAvatar, Loading } from '@/components/shared';
 import useTeams from 'hooks/useTeams';
 import type { Team } from 'types';
 import DaisyButton from '@/components/shared/daisyUI/DaisyButton';
@@ -33,10 +33,15 @@ const Teams = () => {
   };
 
   return (
-    <Card heading="Your Teams">
-      <Card.Body>
-        <table className="w-full table-fixed text-left text-sm text-gray-500 dark:text-gray-400">
-          <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+      <div className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+        <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
+          {t('your-teams')}
+        </span>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full table-fixed text-left text-sm text-slate-600 dark:text-slate-300">
+          <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase border-b border-slate-200 dark:border-slate-700">
             <tr>
               <th scope="col" className="px-6 py-3">
                 {t('name')}
@@ -52,13 +57,13 @@ const Teams = () => {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
             {teams &&
               teams.map((team) => {
                 return (
                   <tr
                     key={team.id}
-                    className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
+                    className="bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
                   >
                     <td className="px-6 py-3">
                       <Link href={`/teams/${team.slug}/tasks`}>
@@ -88,8 +93,8 @@ const Teams = () => {
               })}
           </tbody>
         </table>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };
 

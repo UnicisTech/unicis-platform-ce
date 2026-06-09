@@ -164,27 +164,27 @@ export default function Comments({
   );
 
   return (
-    <div className="p-5">
-      <div className="mt-[30px]">
-        {task.comments
-          .sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt))
-          .map((comment) => (
-            <Comment
-              key={comment.id}
-              comment={comment}
-              slug={slug}
-              commentToEdit={commentToEdit}
-              setCommentToEdit={setCommentToEdit}
-              updateComment={handleUpdateComment}
-              deleteComment={onDeleteClick}
-              onReact={handleReact}
-            />
-          ))}
-      </div>
-      <AccessControl resource="task" actions={['update']} slug={slug}>
-        <div className="mt-4">
-          <CreateCommentForm handleCreate={handleCreateComment} />
+    <div>
+      {task.comments.length > 0 && (
+        <div className="mb-4 space-y-1">
+          {task.comments
+            .sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt))
+            .map((comment) => (
+              <Comment
+                key={comment.id}
+                comment={comment}
+                slug={slug}
+                commentToEdit={commentToEdit}
+                setCommentToEdit={setCommentToEdit}
+                updateComment={handleUpdateComment}
+                deleteComment={onDeleteClick}
+                onReact={handleReact}
+              />
+            ))}
         </div>
+      )}
+      <AccessControl resource="task" actions={['update']} slug={slug}>
+        <CreateCommentForm handleCreate={handleCreateComment} />
       </AccessControl>
       <ConfirmationDialog
         visible={confirmationDialogVisible}

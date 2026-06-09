@@ -46,13 +46,13 @@ const Navigation = () => {
                 'flex items-center rounded-md text-[13px] px-2 p-2 gap-2 transition-colors',
                 isSettingsActive
                   ? 'bg-ub-blue-bg text-ub-blue-text font-medium'
-                  : 'text-slate-600 hover:bg-slate-50 hover:text-slate-700'
+                  : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:text-slate-700 dark:text-slate-200'
               )}
             >
               <Cog6ToothIcon
                 className={classNames(
                   'h-5 w-5 flex-shrink-0',
-                  isSettingsActive ? 'text-ub-blue' : 'text-slate-500'
+                  isSettingsActive ? 'text-ub-blue' : 'text-slate-500 dark:text-slate-400'
                 )}
                 aria-hidden="true"
               />

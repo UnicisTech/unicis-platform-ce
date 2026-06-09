@@ -27,7 +27,7 @@ export function ProgressBar({ label, value, showPercent = true, height = 'sm', c
     <div className={cn('w-full', className)}>
       {(label || showPercent) && (
         <div className="flex justify-between items-center mb-1">
-          {label && <span className="text-[11px] text-slate-500 truncate pr-2">{label}</span>}
+          {label && <span className="text-[11px] text-slate-500 dark:text-slate-400 truncate pr-2">{label}</span>}
           {showPercent && (
             <span className={cn('text-[11px] font-medium flex-shrink-0', getTextColour(pct))}>
               {pct}%
@@ -36,7 +36,7 @@ export function ProgressBar({ label, value, showPercent = true, height = 'sm', c
         </div>
       )}
       <div
-        className={cn('w-full bg-slate-200 rounded-full overflow-hidden', height === 'sm' ? 'h-1' : 'h-1.5')}
+        className={cn('w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden', height === 'sm' ? 'h-1' : 'h-1.5')}
         role="progressbar"
         aria-valuenow={pct}
         aria-valuemin={0}

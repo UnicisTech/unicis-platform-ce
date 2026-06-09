@@ -16,7 +16,7 @@ const TaskViewTabs = ({
 
   return (
     <div
-      className="inline-flex gap-0.5 bg-slate-100 rounded-lg p-[3px] mb-3"
+      className="inline-flex gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-[3px] mb-3"
       role="tablist"
     >
       {taskViews.map((view) => (
@@ -28,8 +28,8 @@ const TaskViewTabs = ({
           className={cn(
             'px-4 py-[6px] text-[12px] font-medium rounded-md transition-all',
             activeView === view
-              ? 'bg-white text-slate-900 border border-slate-200 shadow-xs'
-              : 'text-slate-500 hover:text-slate-700 bg-transparent border border-transparent'
+              ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 shadow-xs'
+              : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:text-slate-200 bg-transparent border border-transparent'
           )}
         >
           {t(`task-view-tabs.${view}`, view === 'list' ? 'List' : 'Kanban')}

@@ -19,8 +19,8 @@ const STATUS_CONFIG: Record<CscStatus, {
   not_applicable: {
     label: 'Not applicable',
     dotColor: 'bg-slate-400',
-    bg: 'bg-slate-100',
-    text: 'text-slate-700',
+    bg: 'bg-slate-100 dark:bg-slate-800',
+    text: 'text-slate-700 dark:text-slate-200',
   },
   not_performed: {
     label: 'Not performed',

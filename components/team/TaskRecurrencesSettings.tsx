@@ -21,13 +21,6 @@ import {
 } from '@/components/shared';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import QuillEditor from '@/components/shared/QuillEditor';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/shadcn/ui/card';
 import { Badge } from '@/components/shadcn/ui/badge';
 import { Button } from '@/components/shadcn/ui/button';
 import { DateTimePickerInput } from '@/components/shadcn/ui/date-time-picker';
@@ -156,8 +149,8 @@ const getInitialFormValues = (
 
 const recurrenceStatusClassName: Record<TaskRecurrenceStatus, string> = {
   ACTIVE: 'border-emerald-200 bg-emerald-50 text-emerald-700',
-  PAUSED: 'border-slate-200 bg-slate-50 text-slate-700',
-  ARCHIVED: 'border-muted bg-muted text-muted-foreground',
+  PAUSED: 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200',
+  ARCHIVED: 'border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400',
 };
 
 const TaskRecurrencesSettings = ({ team }: { team: Team }) => {
@@ -409,13 +402,15 @@ const TaskRecurrencesSettings = ({ team }: { team: Team }) => {
 
   return (
     <>
-      <Card>
-        <CardHeader className="flex-row items-start justify-between gap-4 space-y-0">
-          <div className="space-y-1.5">
-            <CardTitle>{t('recurring-tasks')}</CardTitle>
-            <CardDescription>
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+        <div className="flex items-start justify-between gap-4 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+          <div>
+            <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
+              {t('recurring-tasks')}
+            </span>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               {t('recurring-tasks-description')}
-            </CardDescription>
+            </p>
           </div>
           {canCreate && (
             <Button type="button" onClick={openCreateDialog}>
@@ -423,12 +418,12 @@ const TaskRecurrencesSettings = ({ team }: { team: Team }) => {
               {t('create-recurring-task')}
             </Button>
           )}
-        </CardHeader>
+        </div>
 
-        <CardContent>
+        <div className="p-4">
           <WithLoadingAndError isLoading={isLoading} error={isError}>
             {sortedRecurrences.length === 0 ? (
-              <div className="rounded-md border border-dashed p-6 text-center text-sm text-muted-foreground">
+              <div className="rounded-md border border-dashed p-6 text-center text-sm text-slate-500 dark:text-slate-400">
                 {t('no-recurring-tasks')}
               </div>
             ) : (
@@ -470,7 +465,7 @@ const TaskRecurrencesSettings = ({ team }: { team: Team }) => {
                       </TableCell>
                       <TableCell className="min-w-[170px]">
                         <div>{formatDateTime(recurrence.nextRunAt)}</div>
-                        <div className="text-xs text-muted-foreground">
+                        <div className="text-xs text-slate-500 dark:text-slate-400">
                           {recurrence.timezone}
                         </div>
                       </TableCell>
@@ -575,8 +570,8 @@ const TaskRecurrencesSettings = ({ team }: { team: Team }) => {
               </Table>
             )}
           </WithLoadingAndError>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       <Dialog
         open={dialogOpen}
@@ -744,7 +739,7 @@ const TaskRecurrencesSettings = ({ team }: { team: Team }) => {
               </div>
             </div>
 
-            <DialogFooter className="border-t bg-background px-6 py-4">
+            <DialogFooter className="border-t bg-white dark:bg-slate-800 px-6 py-4">
               <Button type="button" variant="ghost" onClick={closeDialog}>
                 {t('cancel')}
               </Button>

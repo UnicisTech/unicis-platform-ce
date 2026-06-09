@@ -40,47 +40,47 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
     }, [tasks]);
 
   return (
-    <div className="bg-white border border-slate-200 rounded-xl p-4">
+    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-[12px] font-medium text-slate-900">
+        <span className="text-[12px] font-medium text-slate-900 dark:text-slate-100">
           {t('rpa-records-activities')}
         </span>
       </div>
 
       <div className="divide-y divide-slate-50">
         <div className="flex items-center justify-between py-1.5 text-[12px]">
-          <span className="text-slate-500 flex items-center gap-1.5">
+          <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
             <Database size={12} aria-hidden />
             {t('number-of-records')}
           </span>
-          <span className="font-medium text-slate-900">{totalTasksWithRpaProcedure}</span>
+          <span className="font-medium text-slate-900 dark:text-slate-100">{totalTasksWithRpaProcedure}</span>
         </div>
         <div className="flex items-center justify-between py-1.5 text-[12px]">
-          <span className="text-slate-500 flex items-center gap-1.5">
+          <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
             <ArrowRightLeft size={12} aria-hidden />
             {t('enabled-data-transfer')}
           </span>
-          <span className="font-medium text-slate-900">{totalEnabledDataTransfers}</span>
+          <span className="font-medium text-slate-900 dark:text-slate-100">{totalEnabledDataTransfers}</span>
         </div>
         <div className="flex items-center justify-between py-1.5 text-[12px]">
-          <span className="text-slate-500 flex items-center gap-1.5">
+          <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
             <Globe size={12} aria-hidden />
             {t('processes-per-country')}
           </span>
-          <span className="font-medium text-slate-900">{countriesList.length}</span>
+          <span className="font-medium text-slate-900 dark:text-slate-100">{countriesList.length}</span>
         </div>
       </div>
 
       {countriesList.length > 0 && (
         <div className="mt-3 pt-3 border-t border-slate-50">
-          <div className="text-[11px] text-slate-500 mb-1.5">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mb-1.5">
             {t('countries', { defaultValue: 'Countries' })}
           </div>
           <div className="flex flex-wrap gap-1">
             {countriesList.map((country) => (
               <span
                 key={country}
-                className="inline-flex items-center text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded-[4px]"
+                className="inline-flex items-center text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-1.5 py-0.5 rounded-[4px]"
               >
                 {capitalizeCountryName(country)}
               </span>

@@ -354,7 +354,7 @@ export default function CreateCourse2({
                     {fieldState.error && fieldState.error.message}
                   </FormMessage>
                   {!fieldState.error && (
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       {t('Please select from the list')}
                     </p>
                   )}
@@ -393,7 +393,7 @@ export default function CreateCourse2({
                     {fieldState.error && fieldState.error.message}
                   </FormMessage>
                   {!fieldState.error && (
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       {t('Please select from the list')}
                     </p>
                   )}
@@ -502,7 +502,7 @@ export default function CreateCourse2({
                     {fieldState.error && fieldState.error.message}
                   </FormMessage>
                   {!fieldState.error && (
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       {t('Please select from the list')}
                     </p>
                   )}
@@ -589,7 +589,7 @@ export default function CreateCourse2({
                     {fieldState.error && fieldState.error.message}
                   </FormMessage>
                   {!fieldState.error && (
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       {t('Please select from the list')}
                     </p>
                   )}
@@ -676,7 +676,7 @@ export default function CreateCourse2({
               {questionType === QuestionType.ORDER &&
                 range(answersAmount).map((idx) => (
                   <div key={idx} className="space-y-2">
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-sm text-slate-500 dark:text-slate-400">
                       {`${t('Pair')} #${idx + 1}`}
                     </span>
                     <FormField

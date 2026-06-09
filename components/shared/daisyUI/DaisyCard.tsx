@@ -10,7 +10,7 @@ const Base = ({
   className?: string;
 }) => (
   <div
-    className={`card shadow-lg bg-white ${
+    className={`card shadow-lg bg-white dark:bg-slate-800 ${
       bordered ? 'border border-gray-300' : ''
     } ${className}`}
   >

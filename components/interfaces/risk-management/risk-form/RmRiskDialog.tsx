@@ -84,7 +84,8 @@ export default function RmRiskDialog({
 
   const handleStepClick = (stepperIndex: number) => {
     const dialogStep = stepperIndex + 1;
-    if (dialogStep < currentStep) {
+    // In edit mode (prevRisk exists) allow jumping to any step
+    if (!!prevRisk || dialogStep < currentStep) {
       setCurrentStep(dialogStep);
     }
   };

@@ -68,7 +68,7 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ menu }) => {
         'flex items-center rounded-md text-[13px] px-2 p-2 gap-2 transition-colors',
         menu.active
           ? 'bg-ub-blue-bg text-ub-blue-text font-medium'
-          : 'text-slate-600 hover:bg-slate-50 hover:text-slate-700'
+          : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:text-slate-700 dark:text-slate-200'
       )}
     >
       {menu.icon && (
@@ -81,7 +81,7 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ menu }) => {
           <menu.icon
             className={classNames(
               'h-5 w-5 min-h-5 min-w-5',
-              menu.active ? 'text-ub-blue' : 'text-slate-500'
+              menu.active ? 'text-ub-blue' : 'text-slate-500 dark:text-slate-400'
             )}
             aria-hidden="true"
           />
@@ -93,7 +93,7 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ menu }) => {
           className={classNames(
             'ml-auto flex-shrink-0 text-[10px] font-semibold px-1.5 py-0.5 rounded-md min-w-[20px] text-center leading-none',
             menu.badge.variant === 'red'
-              ? 'bg-red-100 text-red-700'
+              ? 'bg-red-100 text-red-700 dark:text-red-400'
               : 'bg-amber-100 text-amber-700'
           )}
         >

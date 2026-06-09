@@ -386,7 +386,7 @@ export default function SSOConnections({
           <h2 className="text-xl font-medium leading-none tracking-tight">
             {t('sso.manage-title')}
           </h2>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             {t('sso.manage-description')}
           </p>
         </div>
@@ -434,11 +434,11 @@ export default function SSOConnections({
               <TableRow key={connection.clientID}>
                 <TableCell>
                   <div className="space-y-1">
-                    <div className="font-medium text-foreground">
+                    <div className="font-medium text-slate-900 dark:text-slate-100">
                       {providerName(connection, t('sso.unknown-provider'))}
                     </div>
                     {(connection.name || connection.label) && (
-                      <div className="text-xs text-muted-foreground">
+                      <div className="text-xs text-slate-500 dark:text-slate-400">
                         {connection.name || connection.label}
                       </div>
                     )}
@@ -813,7 +813,7 @@ function SAMLConnectionForm({
     <form className="space-y-5" onSubmit={handleSubmit}>
       <FormSectionTitle>{t('sso.saml-provider-metadata')}</FormSectionTitle>
       {mode === 'edit' && hasExistingMetadata && (
-        <p className="rounded-md border bg-muted/40 p-3 text-sm text-muted-foreground">
+        <p className="rounded-md border bg-slate-100/60 dark:bg-slate-700/60 p-3 text-sm text-slate-500 dark:text-slate-400">
           {t('sso.raw-idp-xml-edit-note')}
         </p>
       )}
@@ -1232,7 +1232,7 @@ function RedirectUrlsField<T extends BaseFormValues>({
           </div>
         ))}
       </div>
-      <p className="text-xs text-muted-foreground">
+      <p className="text-xs text-slate-500 dark:text-slate-400">
         {t('sso.allowed-redirect-urls-description')}
       </p>
     </div>
@@ -1290,7 +1290,7 @@ function MetadataDialog({
                 />
               </div>
             )}
-            <pre className="max-h-[55vh] overflow-auto rounded-md border bg-muted/40 p-4 text-xs text-foreground">
+            <pre className="max-h-[55vh] overflow-auto rounded-md border bg-slate-100/60 dark:bg-slate-700/60 p-4 text-xs text-slate-900 dark:text-slate-100">
               {metadataText}
             </pre>
             <DialogFooter>
@@ -1399,7 +1399,7 @@ function Field({
       </Label>
       {children}
       {description && (
-        <p className="text-xs leading-5 text-muted-foreground">{description}</p>
+        <p className="text-xs leading-5 text-slate-500 dark:text-slate-400">{description}</p>
       )}
     </div>
   );
@@ -1407,7 +1407,7 @@ function Field({
 
 function FormSectionTitle({ children }: { children: ReactNode }) {
   return (
-    <div className="border-b pb-2 text-sm font-medium text-foreground">
+    <div className="border-b pb-2 text-sm font-medium text-slate-900 dark:text-slate-100">
       {children}
     </div>
   );
@@ -1417,7 +1417,7 @@ function SeparatorWithText({ children }: { children: ReactNode }) {
   return (
     <div className="flex items-center gap-3">
       <Separator className="flex-1" />
-      <span className="text-xs font-medium uppercase text-muted-foreground">
+      <span className="text-xs font-medium uppercase text-slate-500 dark:text-slate-400">
         {children}
       </span>
       <Separator className="flex-1" />
@@ -1441,8 +1441,8 @@ function AdvancedSettings({ children }: { children: ReactNode }) {
 function MetadataValue({ label, value }: { label: string; value: string }) {
   return (
     <div className="space-y-1 rounded-md border p-3">
-      <div className="text-xs font-medium text-muted-foreground">{label}</div>
-      <div className="break-all text-sm text-foreground">{value}</div>
+      <div className="text-xs font-medium text-slate-500 dark:text-slate-400">{label}</div>
+      <div className="break-all text-sm text-slate-900 dark:text-slate-100">{value}</div>
     </div>
   );
 }

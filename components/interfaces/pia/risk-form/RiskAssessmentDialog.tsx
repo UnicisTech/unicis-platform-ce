@@ -145,9 +145,13 @@ export default function RiskAssessmentDialog({
 
   const back = () => setCurrentStep((s) => Math.max(s - 1, 0));
 
+  const isEditMode =
+    !!prevRisk && (!Array.isArray(prevRisk) || prevRisk.length > 0);
+
   const handleStepClick = (stepperIndex: number) => {
     const dialogStep = stepperIndex + 1;
-    if (dialogStep < currentStep) {
+    // In edit mode allow jumping to any step; in create mode only navigate back
+    if (isEditMode || dialogStep < currentStep) {
       setCurrentStep(dialogStep);
     }
   };
@@ -185,12 +189,6 @@ export default function RiskAssessmentDialog({
       setIsSaving(false);
     }
   };
-
-  console.log('currentStep > (prevRisk ? 1 : 0)', {
-    test: currentStep > (prevRisk ? 1 : 0),
-    currentStep,
-    prevRisk,
-  });
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

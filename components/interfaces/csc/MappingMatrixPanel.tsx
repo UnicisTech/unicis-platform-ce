@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'next-i18next';
 import type { ISO } from 'types';
 import { Badge } from '@/components/shadcn/ui/badge';
-import { Card, CardContent } from '@/components/shadcn/ui/card';
 import {
   Table,
   TableBody,
@@ -121,8 +120,7 @@ export default function MappingMatrixPanel({
           {enabledFrameworks.map((fw) => {
             const avg = averageCoverage[fw] ?? 0;
             return (
-              <Card key={fw} className="shadow-xs">
-                <CardContent className="p-3">
+              <div key={fw} className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs font-semibold truncate pr-1">
                       {isoValueToLabel(fw)}
@@ -158,8 +156,7 @@ export default function MappingMatrixPanel({
                     {frameworkControls[fw]?.length ?? 0}{' '}
                     {t('csc-mapping.coverage.total-controls', 'controls')}
                   </p>
-                </CardContent>
-              </Card>
+              </div>
             );
           })}
         </div>
@@ -204,34 +201,34 @@ export default function MappingMatrixPanel({
           )}
         </p>
 
-        <div className="overflow-x-auto rounded-xl border border-border">
+        <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
           <Table className="text-xs">
             <TableHeader>
-              <TableRow className="bg-muted/50 hover:bg-muted/50">
-                <TableHead className="px-3 py-2 text-left font-semibold text-muted-foreground whitespace-nowrap border-r border-border">
+              <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <TableHead className="px-3 py-2 text-left font-semibold text-slate-500 dark:text-slate-400 whitespace-nowrap border-r border-slate-200 dark:border-slate-700">
                   {t('csc-mapping.matrix.source', 'Source ↓ / Target →')}
                 </TableHead>
                 {enabledFrameworks.map((tgt) => (
                   <TableHead
                     key={tgt}
-                    className="px-2 py-2 text-center font-semibold text-muted-foreground whitespace-nowrap min-w-[80px]"
+                    className="px-2 py-2 text-center font-semibold text-slate-500 dark:text-slate-400 whitespace-nowrap min-w-[80px]"
                     title={isoValueToLabel(tgt)}
                   >
                     {/* Short label */}
                     {CSC_FRAMEWORK_TO_SHORTNAME[tgt]}
                   </TableHead>
                 ))}
-                <TableHead className="px-2 py-2 text-center font-semibold text-muted-foreground whitespace-nowrap border-l border-border">
+                <TableHead className="px-2 py-2 text-center font-semibold text-slate-500 dark:text-slate-400 whitespace-nowrap border-l border-slate-200 dark:border-slate-700">
                   {t('csc-mapping.matrix.avg', 'Avg')}
                 </TableHead>
               </TableRow>
             </TableHeader>
-            <TableBody className="divide-y divide-border">
+            <TableBody className="divide-y divide-slate-200 dark:divide-slate-700">
               {enabledFrameworks.map((src) => (
-                <TableRow key={src} className="hover:bg-muted/50">
-                  <TableCell className="px-3 py-2 font-medium whitespace-nowrap border-r border-border">
+                <TableRow key={src} className="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                  <TableCell className="px-3 py-2 font-medium whitespace-nowrap border-r border-slate-200 dark:border-slate-700">
                     {isoValueToLabel(src)}
-                    <span className="ml-1 text-muted-foreground font-normal">
+                    <span className="ml-1 text-slate-500 dark:text-slate-400 font-normal">
                       ({frameworkControls[src]?.length ?? 0})
                     </span>
                   </TableCell>
@@ -240,7 +237,7 @@ export default function MappingMatrixPanel({
                       return (
                         <TableCell
                           key={tgt}
-                          className="px-2 py-2 text-center bg-muted/40 text-muted-foreground"
+                          className="px-2 py-2 text-center bg-slate-100/80 text-slate-500 dark:text-slate-400"
                         >
                           —
                         </TableCell>
@@ -259,7 +256,7 @@ export default function MappingMatrixPanel({
                       </TableCell>
                     );
                   })}
-                  <TableCell className="px-2 py-2 text-center border-l border-border">
+                  <TableCell className="px-2 py-2 text-center border-l border-slate-200 dark:border-slate-700">
                     <Badge
                       className={`font-semibold ${coverageBadgeClass(averageCoverage[src] ?? 0)}`}
                     >

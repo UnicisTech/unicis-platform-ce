@@ -15,7 +15,7 @@ const TogglePasswordVisibility: React.FC<TogglePasswordVisibilityProps> = ({
       type="button"
       onClick={handlePasswordVisibility}
       aria-label={isPasswordVisible ? 'Hide password' : 'Show password'}
-      className="absolute inset-y-0 right-2 flex items-center p-1 text-muted-foreground hover:text-foreground transition-colors"
+      className="absolute inset-y-0 right-2 flex items-center p-1 text-slate-400 hover:text-slate-900 dark:text-slate-100 transition-colors"
     >
       {isPasswordVisible ? (
         <EyeSlashIcon className="h-5 w-5" />

@@ -109,8 +109,8 @@ const Attachments = ({
 
   const themeClasses =
     theme === 'dark'
-      ? 'bg-muted text-muted-foreground border-gray-600 hover:border-gray-500'
-      : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400';
+      ? 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-gray-600 hover:border-gray-500'
+      : 'bg-white dark:bg-slate-800 text-gray-700 border-gray-300 hover:border-gray-400';
 
   const wrapperClasses = `flex flex-wrap h-full w-full px-4 py-2 transition border-2 border-dashed rounded-md appearance-none cursor-pointer focus:outline-hidden ${
     task.attachments.length ? 'justify-start' : 'justify-center'
@@ -121,7 +121,7 @@ const Attachments = ({
       <span className="flex items-center space-x-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 text-gray-600 dark:text-muted-foreground"
+          className="w-6 h-6 text-gray-600 dark:text-slate-500 dark:text-slate-400"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -133,7 +133,7 @@ const Attachments = ({
             d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
           />
         </svg>
-        <span className="font-medium text-gray-600 dark:text-muted-foreground">
+        <span className="font-medium text-gray-600 dark:text-slate-500 dark:text-slate-400">
           {isDragOver ? 'Release to attach files' : 'Drop files to attach, or '}
           <span className="text-blue-600 dark:text-blue-400 underline">
             {t('attachment-browse')}

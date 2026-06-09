@@ -110,31 +110,80 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
   };
 
   return (
-    <div className="p-5">
-      <FormProvider {...methods}>
-        <Form {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('title')}</FormLabel>
-                  <FormControl>
-                    <Input {...field} onInput={checkFormChanges} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+    <FormProvider {...methods}>
+      <Form {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {/* ── Two-column layout ─────────────────────────────────────── */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-4 p-4">
 
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {/* ── Left column: title + description ──────────────────── */}
+            <div className="space-y-4">
+              <FormField
+                control={control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                      {t('title')}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        onInput={checkFormChanges}
+                        className="text-[15px] font-medium border-slate-200 dark:border-slate-700 focus:border-blue-400 focus:ring-0"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                      {t('description')}
+                    </FormLabel>
+                    <FormControl>
+                      <QuillEditor
+                        theme="snow"
+                        value={field.value}
+                        onChange={(val) => {
+                          checkFormChanges();
+                          field.onChange(val);
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {canAccess('task', ['update']) && (
+                <div className="pt-2">
+                  <Button type="submit" disabled={!isFormChanged || isSubmitting}>
+                    {isSubmitting ? 'Saving...' : t('save-changes')}
+                  </Button>
+                </div>
+              )}
+            </div>
+
+            {/* ── Right sidebar: status / priority / due date ─────────── */}
+            <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-4 space-y-4 self-start">
+              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
+                {t('details')}
+              </p>
+
               <FormField
                 control={control}
                 name="status"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('status')}</FormLabel>
+                    <FormLabel className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
+                      {t('status')}
+                    </FormLabel>
                     <FormControl>
                       <Select
                         value={field.value}
@@ -143,7 +192,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                           field.onChange(val);
                         }}
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="border-slate-200 dark:border-slate-700">
                           <SelectValue placeholder="Select status" />
                         </SelectTrigger>
                         <SelectContent>
@@ -165,7 +214,9 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                 name="priority"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('priority')}</FormLabel>
+                    <FormLabel className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
+                      {t('priority')}
+                    </FormLabel>
                     <FormControl>
                       <Select
                         value={field.value}
@@ -174,7 +225,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                           field.onChange(val);
                         }}
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="border-slate-200 dark:border-slate-700">
                           <SelectValue placeholder={t('priority')} />
                         </SelectTrigger>
                         <SelectContent>
@@ -196,13 +247,15 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                 name="duedate"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('due-date')}</FormLabel>
+                    <FormLabel className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
+                      {t('due-date')}
+                    </FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
                             variant="outline"
-                            className="w-full justify-start text-left font-normal"
+                            className="w-full justify-start text-left font-normal border-slate-200 dark:border-slate-700 text-[13px]"
                           >
                             {field.value
                               ? format(parseDateOnly(field.value), 'PPP')
@@ -232,38 +285,10 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
               />
             </div>
 
-            <FormField
-              control={control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('description')}</FormLabel>
-                  <FormControl>
-                    <QuillEditor
-                      theme="snow"
-                      value={field.value}
-                      onChange={(val) => {
-                        checkFormChanges();
-                        field.onChange(val);
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {canAccess('task', ['update']) && (
-              <div className="pt-4">
-                <Button type="submit" disabled={!isFormChanged || isSubmitting}>
-                  {isSubmitting ? 'Saving...' : t('save-changes')}
-                </Button>
-              </div>
-            )}
-          </form>
-        </Form>
-      </FormProvider>
-    </div>
+          </div>
+        </form>
+      </Form>
+    </FormProvider>
   );
 };
 

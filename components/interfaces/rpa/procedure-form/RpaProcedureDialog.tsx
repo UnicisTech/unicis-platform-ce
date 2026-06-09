@@ -144,7 +144,8 @@ export default function RpaProcedureDialog({
 
   const handleStepClick = (stepperIndex: number) => {
     const dialogStep = stepperIndex + 1;
-    if (dialogStep < currentStep) {
+    // In edit mode (prevProcedure exists) allow jumping to any step
+    if (!!prevProcedure || dialogStep < currentStep) {
       setCurrentStep(dialogStep);
     }
   };

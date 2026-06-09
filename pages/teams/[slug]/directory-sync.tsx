@@ -14,12 +14,6 @@ import { toast } from 'react-hot-toast';
 import type { ApiResponse, NextPageWithLayout } from 'types';
 import { isAllowed } from 'models/user';
 import { inferSSRProps } from '@/lib/inferSSRProps';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/shadcn/ui/card';
 import { Button } from '@/components/shadcn/ui/button';
 import { getTeamAccess } from '@/lib/teams';
 
@@ -82,13 +76,15 @@ const DirectorySync: NextPageWithLayout<
         team={team}
         teamFeatures={teamFeatures}
       />
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('directory-sync')}</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+        <div className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+          <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
+            {t('directory-sync')}
+          </span>
+        </div>
+        <div className="p-4">
           <div className="mb-3 flex items-center justify-between">
-            <p className="text-sm text-muted-foreground">{t('provision')}</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">{t('provision')}</p>
             {directory ? (
               <Button
                 variant="destructive"
@@ -103,8 +99,8 @@ const DirectorySync: NextPageWithLayout<
             )}
           </div>
           <Directory team={team} />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
       <CreateDirectory visible={visible} setVisible={setVisible} team={team} />
       <ConfirmationDialog
         visible={confirmationDialogVisible}

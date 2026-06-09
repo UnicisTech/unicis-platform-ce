@@ -93,8 +93,8 @@ export function BulkActionBar({
 
       {/* Status dropdown — shown in step 2 when open */}
       {step === 'change-status' && statusDropdownOpen && hasAllTasksAssigned && (
-        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 bg-white border border-slate-200 rounded-lg overflow-hidden shadow-lg min-w-[280px]">
-          <div className="px-3 py-2 bg-slate-50 border-b border-slate-200 text-[11px] font-medium text-slate-500">
+        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden shadow-lg min-w-[280px]">
+          <div className="px-3 py-2 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 text-[11px] font-medium text-slate-500 dark:text-slate-400">
             {isApplying ? 'Applying...' : t('bulk-actions.select-new-status')}
           </div>
           {CSC_STATUSES.filter(s => s !== 'unknown').map((statusEnum) => {
@@ -105,13 +105,13 @@ export function BulkActionBar({
                 key={statusEnum}
                 onClick={() => handleStatusSelect(statusEnum)}
                 disabled={isApplying}
-                className="w-full text-left px-3 py-2.5 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
+                className="w-full text-left px-3 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700/50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
               >
                 <CscStatusBadge
                   status={badgeStatus}
                   size="sm"
                 />
-                <span className="text-sm text-slate-700">
+                <span className="text-sm text-slate-700 dark:text-slate-200">
                   {t(`statuses.${statusEnum}.label`)}
                 </span>
               </button>

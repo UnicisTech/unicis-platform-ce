@@ -34,7 +34,7 @@ function scoreLabel(t: (k: string) => string, score: number): { text: string; cl
   if (score >= 80) return { text: t('dashboard.kpi.score-excellent'), cls: 'text-emerald-600' };
   if (score >= 65) return { text: t('dashboard.kpi.score-good'),      cls: 'text-ub-blue-text' };
   if (score >= 50) return { text: t('dashboard.kpi.score-fair'),      cls: 'text-amber-600' };
-  return           { text: t('dashboard.kpi.score-needs-work'),       cls: 'text-red-600' };
+  return           { text: t('dashboard.kpi.score-needs-work'),       cls: 'text-red-600 dark:text-red-400' };
 }
 
 // ── Presentational KPI card ───────────────────────────────────────────────────
@@ -63,12 +63,12 @@ function KpiCard({
 }: KpiCardProps) {
   const borderCls =
     variant === 'red'
-      ? 'border-red-200'
+      ? 'border-red-200 dark:border-red-800/50'
       : variant === 'amber'
         ? 'border-amber-200'
         : variant === 'green'
           ? 'border-emerald-200'
-          : 'border-slate-200';
+          : 'border-slate-200 dark:border-slate-700';
 
   const iconCls =
     variant === 'red'
@@ -85,7 +85,7 @@ function KpiCard({
     <Tag
       onClick={onClick}
       className={cn(
-        'bg-white border rounded-xl p-3 text-left w-full',
+        'bg-white dark:bg-slate-800 border rounded-xl p-3 text-left w-full',
         borderCls,
         onClick && 'hover:border-ub-blue-border transition-colors cursor-pointer',
         className
@@ -93,18 +93,18 @@ function KpiCard({
     >
       <div className="flex items-center gap-1.5 text-[10px] mb-1.5">
         <span className={iconCls}>{icon}</span>
-        <span className="text-slate-500 truncate">{label}</span>
+        <span className="text-slate-500 dark:text-slate-400 truncate">{label}</span>
       </div>
       <div
         className={cn(
-          'font-semibold leading-none text-slate-900 tabular-nums',
+          'font-semibold leading-none text-slate-900 dark:text-slate-100 tabular-nums',
           hero ? 'text-3xl' : 'text-xl'
         )}
       >
         {value}
       </div>
       {sub && (
-        <div className="text-[10px] text-slate-500 mt-1 leading-tight truncate">
+        <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 leading-tight truncate">
           {sub}
         </div>
       )}

@@ -67,7 +67,7 @@ export default function CompletionResults({
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse">
-              <thead className="bg-muted">
+              <thead className="bg-slate-50 dark:bg-slate-900">
                 <tr>
                   <th className="px-4 py-2 text-left">{t('user', 'User')}</th>
                   <th className="px-4 py-2 text-left">

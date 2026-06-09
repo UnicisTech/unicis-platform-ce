@@ -67,7 +67,7 @@ const AuditLogs = ({ task, slug }: { task: Task; slug: string }) => {
                   <TableCell>
                     {new Date(log.date).toLocaleDateString()}
                   </TableCell>
-                  <TableCell className="text-muted-foreground">
+                  <TableCell className="text-slate-500 dark:text-slate-400">
                     {auditLogHelper(
                       log.diff?.field,
                       log.diff?.prevValue,
@@ -75,7 +75,7 @@ const AuditLogs = ({ task, slug }: { task: Task; slug: string }) => {
                       membersById
                     )}
                   </TableCell>
-                  <TableCell className="text-muted-foreground">
+                  <TableCell className="text-slate-500 dark:text-slate-400">
                     {auditLogHelper(
                       log.diff?.field,
                       log.diff?.nextValue,
@@ -96,7 +96,7 @@ const AuditLogs = ({ task, slug }: { task: Task; slug: string }) => {
           )}
         </>
       ) : (
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           {t('no-logs-available')}
         </p>
       )}

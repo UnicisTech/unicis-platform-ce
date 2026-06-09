@@ -33,14 +33,11 @@ import type { Task } from 'types';
 import {
   EmptyState,
   PriorityBadge,
-  StatusBadge,
   TaskRecurrenceBadge,
 } from '@/components/shared';
 import ModuleBadge from '@/components/shared/ModuleBadge';
 import { cn } from '@/components/shadcn/lib/utils';
-import { Badge } from '@/components/shadcn/ui/badge';
 import { Button } from '@/components/shadcn/ui/button';
-import { Card, CardContent } from '@/components/shadcn/ui/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -48,6 +45,16 @@ import {
   DropdownMenuTrigger,
 } from '@/components/shadcn/ui/dropdown-menu';
 import { getTaskModules, statuses } from '@/lib/tasks';
+
+// ── Status dot colour per column ────────────────────────────────────────────
+const STATUS_DOT: Record<string, string> = {
+  'todo':        'bg-slate-400',
+  'in-progress': 'bg-blue-500',
+  'in-review':   'bg-purple-500',
+  'feedback':    'bg-amber-500',
+  'done':        'bg-emerald-500',
+  'failed':      'bg-red-500',
+};
 
 type TasksByStatus = Record<string, Task[]>;
 
@@ -210,7 +217,7 @@ const KanbanColumnBody = ({
       ref={setNodeRef}
       className={cn(
         'flex flex-1 flex-col gap-2 p-2 transition-colors',
-        isOver && 'bg-primary/5'
+        isOver && 'bg-ub-blue/5'
       )}
     >
       {children}
@@ -251,92 +258,92 @@ const TaskCard = ({
   const { t } = useTranslation('common');
 
   return (
-    <Card
+    <div
       ref={setNodeRef}
       className={cn(
-        'rounded-md border-border shadow-none transition-shadow',
+        'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 space-y-2.5 transition-all',
         canReorder && 'cursor-grab touch-none active:cursor-grabbing',
-        isDragging && 'opacity-30'
+        isDragging ? 'opacity-30' : 'hover:border-blue-300 hover:shadow-sm'
       )}
-      style={{
-        transform,
-        transition,
-      }}
+      style={{ transform, transition }}
       {...(dragAttributes || {})}
       {...(dragListeners || {})}
     >
-      <CardContent className="space-y-3 p-3">
-        <div className="flex items-start justify-between gap-2">
-          <div className="min-w-0 space-y-1">
-            <Link
-              href={`/teams/${slug}/tasks/${task.taskNumber}`}
-              className="text-xs font-medium text-muted-foreground underline-offset-4 hover:underline"
-            >
-              #{task.taskNumber}
-            </Link>
-            <Link
-              href={`/teams/${slug}/tasks/${task.taskNumber}`}
-              className="line-clamp-2 block text-sm font-medium leading-5 underline-offset-4 hover:underline"
-            >
-              {task.title}
-            </Link>
-          </div>
-          <div className="flex shrink-0 items-center gap-1">
-            {(canUpdate || canDelete) && (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    aria-label={t('actions')}
-                    size="icon"
-                    variant="ghost"
-                    className="h-7 w-7"
+      {/* Header: task id + actions menu */}
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0 space-y-0.5">
+          <Link
+            href={`/teams/${slug}/tasks/${task.taskNumber}`}
+            className="text-[10px] font-medium text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:text-blue-400 transition-colors"
+          >
+            #{task.taskNumber}
+          </Link>
+          <Link
+            href={`/teams/${slug}/tasks/${task.taskNumber}`}
+            className="line-clamp-2 block text-[13px] font-medium text-slate-900 dark:text-slate-100 leading-5 hover:text-blue-600 dark:text-blue-400 transition-colors"
+          >
+            {task.title}
+          </Link>
+        </div>
+        {(canUpdate || canDelete) && (
+          <div className="flex shrink-0 items-center">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  aria-label={t('actions')}
+                  size="icon"
+                  variant="ghost"
+                  className="h-6 w-6 text-slate-400 hover:text-slate-700 dark:text-slate-200"
+                >
+                  <MoreHorizontal className="h-3.5 w-3.5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {canUpdate && (
+                  <DropdownMenuItem
+                    onClick={() =>
+                      router.push(`/teams/${slug}/tasks/${task.taskNumber}`)
+                    }
                   >
-                    <MoreHorizontal className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  {canUpdate && (
-                    <DropdownMenuItem
-                      onClick={() =>
-                        router.push(`/teams/${slug}/tasks/${task.taskNumber}`)
-                      }
-                    >
-                      <Pencil className="h-4 w-4" />
-                      {t('edit-task')}
-                    </DropdownMenuItem>
-                  )}
-                  {canDelete && (
-                    <DropdownMenuItem
-                      variant="destructive"
-                      onClick={() => onDeleteTask(task.taskNumber)}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                      {t('delete')}
-                    </DropdownMenuItem>
-                  )}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
+                    <Pencil className="h-4 w-4" />
+                    {t('edit-task')}
+                  </DropdownMenuItem>
+                )}
+                {canDelete && (
+                  <DropdownMenuItem
+                    variant="destructive"
+                    onClick={() => onDeleteTask(task.taskNumber)}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                    {t('delete')}
+                  </DropdownMenuItem>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
-        </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <PriorityBadge
-            value={task.priority}
-            label={t(`task-priorities.${task.priority}`)}
-          />
-          {task.recurrenceScheduleId && <TaskRecurrenceBadge />}
-          {typeof task.properties === 'object' &&
-            task.properties &&
-            getTaskModules(task.properties as Record<string, unknown>).map(
-              (key) => <ModuleBadge key={key} propName={key} />
-            )}
-        </div>
-        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-          <CalendarDays className="h-3.5 w-3.5" />
-          <span>{formatDueDate(task.duedate)}</span>
-        </div>
-      </CardContent>
-    </Card>
+        )}
+      </div>
+
+      {/* Badges: priority + recurrence + modules */}
+      <div className="flex flex-wrap items-center gap-1.5">
+        <PriorityBadge
+          value={task.priority}
+          label={t(`task-priorities.${task.priority}`)}
+        />
+        {task.recurrenceScheduleId && <TaskRecurrenceBadge />}
+        {typeof task.properties === 'object' &&
+          task.properties &&
+          getTaskModules(task.properties as Record<string, unknown>).map(
+            (key) => <ModuleBadge key={key} propName={key} />
+          )}
+      </div>
+
+      {/* Due date */}
+      <div className="flex items-center gap-1 text-[11px] text-slate-500 dark:text-slate-400">
+        <CalendarDays className="h-3 w-3 flex-shrink-0" />
+        <span>{formatDueDate(task.duedate)}</span>
+      </div>
+    </div>
   );
 };
 
@@ -531,14 +538,24 @@ const TaskKanbanBoard = ({
             return (
               <section
                 key={status}
-                className="flex min-h-[28rem] w-72 shrink-0 flex-col rounded-md border bg-muted/20"
+                className="flex min-h-[28rem] w-72 shrink-0 flex-col rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50"
               >
-                <div className="flex items-center justify-between border-b px-3 py-2">
-                  <StatusBadge
-                    value={status}
-                    label={t(`task-statuses.${status}`)}
-                  />
-                  <Badge variant="outline">{statusTasks.length}</Badge>
+                {/* Column header */}
+                <div className="flex items-center justify-between bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-3 py-2 rounded-t-xl">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={cn(
+                        'w-2 h-2 rounded-full flex-shrink-0',
+                        STATUS_DOT[status] ?? 'bg-slate-300 dark:bg-slate-600'
+                      )}
+                    />
+                    <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200">
+                      {t(`task-statuses.${status}`)}
+                    </span>
+                  </div>
+                  <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 rounded-full px-2 py-0.5 leading-4">
+                    {statusTasks.length}
+                  </span>
                 </div>
                 <SortableContext
                   items={statusTasks.map((task) =>

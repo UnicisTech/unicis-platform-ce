@@ -48,10 +48,10 @@ const CscAuditLogs = ({ task }: { task: Task }) => {
                   <TableCell>
                     {new Date(log.date).toLocaleDateString()}
                   </TableCell>
-                  <TableCell className="text-muted-foreground">
+                  <TableCell className="text-slate-500 dark:text-slate-400">
                     {log.diff?.prevValue?.toString() || '—'}
                   </TableCell>
-                  <TableCell className="text-muted-foreground">
+                  <TableCell className="text-slate-500 dark:text-slate-400">
                     {log.diff?.nextValue?.toString() || '—'}
                   </TableCell>
                 </TableRow>
@@ -68,7 +68,7 @@ const CscAuditLogs = ({ task }: { task: Task }) => {
           )}
         </>
       ) : (
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           {t('no-logs-available')}
         </p>
       )}

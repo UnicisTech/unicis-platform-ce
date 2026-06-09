@@ -296,7 +296,7 @@ const Dashboard = () => {
           <PiaAnalysis tasks={tasks} onCellClick={handleMatrixCellClick} />
           {matrixFilter && (
             <div className="flex items-center gap-2 mt-2">
-              <span className="text-sm text-muted-foreground">
+              <span className="text-sm text-slate-500 dark:text-slate-400">
                 {t('filtered-by')}:{' '}
                 {t(
                   piaDashboardConfig.find((c) => c.id === matrixFilter.category)

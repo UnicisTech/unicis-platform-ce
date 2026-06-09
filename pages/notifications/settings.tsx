@@ -92,7 +92,7 @@ const NotificationSettingsPage = () => {
           <h1 className="text-2xl font-semibold">
             {t('notifications.preferences-title')}
           </h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             {t('notifications.preferences-description')}
           </p>
         </div>
@@ -113,7 +113,7 @@ const NotificationSettingsPage = () => {
       </div>
 
       <div className="overflow-hidden rounded-lg border">
-        <div className="grid grid-cols-[1fr_90px_90px_90px] gap-2 border-b bg-muted/40 px-4 py-2 text-xs font-semibold uppercase text-muted-foreground">
+        <div className="grid grid-cols-[1fr_90px_90px_90px] gap-2 border-b bg-slate-100/60 dark:bg-slate-700/60 px-4 py-2 text-xs font-semibold uppercase text-slate-500 dark:text-slate-400">
           <span>{t('notifications.type')}</span>
           {channelOrder.map((channel) => (
             <span key={channel} className="text-center">

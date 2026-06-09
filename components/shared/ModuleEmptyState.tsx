@@ -45,8 +45,8 @@ export function ModuleEmptyState({
       <div className="w-12 h-12 rounded-xl bg-ub-blue-bg border border-ub-blue-border flex items-center justify-center mb-4">
         {iconNode}
       </div>
-      <h3 className="text-[15px] font-medium text-slate-900 mb-2">{title}</h3>
-      <p className="text-[13px] text-slate-500 leading-relaxed mb-3">{description}</p>
+      <h3 className="text-[15px] font-medium text-slate-900 dark:text-slate-100 mb-2">{title}</h3>
+      <p className="text-[13px] text-slate-500 dark:text-slate-400 leading-relaxed mb-3">{description}</p>
       <span className="text-[11px] font-medium text-ub-blue-text bg-ub-blue-bg border border-ub-blue-border px-2.5 py-1 rounded-md mb-5">
         {regulatoryContext}
       </span>

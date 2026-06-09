@@ -31,7 +31,7 @@ const CSC_STATUS_ROWS: Array<{
     key: 'not-performed',
     dot: '#DC2626',
     bar: '#DC2626',
-    badge: 'bg-red-50 text-red-700',
+    badge: 'bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400',
   },
   {
     key: 'performed-informally',
@@ -49,7 +49,7 @@ const CSC_STATUS_ROWS: Array<{
     key: 'well-defined',
     dot: '#2563EB',
     bar: '#2563EB',
-    badge: 'bg-blue-50 text-blue-800',
+    badge: 'bg-blue-50 dark:bg-blue-950/40 text-blue-800',
   },
   {
     key: 'quantitatively-controlled',
@@ -121,7 +121,7 @@ const TeamCscAnalysis = ({
     <div>
       {/* Framework filter chips */}
       <div className="flex items-center gap-2 mb-3">
-        <span className="text-[11px] text-slate-500">
+        <span className="text-[11px] text-slate-500 dark:text-slate-400">
           {t('framework', { defaultValue: 'Framework' })}:
         </span>
         {cscFrameworks.map((iso) => (
@@ -132,7 +132,7 @@ const TeamCscAnalysis = ({
               'inline-flex items-center text-[11px] font-medium px-2 py-[3px] rounded border transition-colors',
               iso === activeIso
                 ? 'bg-ub-blue-bg border-ub-blue-border text-ub-blue-text'
-                : 'bg-slate-100 border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-700'
+                : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:text-slate-700 dark:text-slate-200'
             )}
           >
             {isoValueToLabel(iso)}
@@ -142,18 +142,18 @@ const TeamCscAnalysis = ({
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         {/* Section progress */}
-        <div className="bg-white border border-slate-200 rounded-xl p-4">
+        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-[12px] font-medium text-slate-900">
+            <span className="text-[12px] font-medium text-slate-900 dark:text-slate-100">
               {t('section-progress', { defaultValue: 'Section progress' })}
             </span>
-            <span className="text-[11px] text-slate-500">TeamCscAnalysis</span>
+            <span className="text-[11px] text-slate-500 dark:text-slate-400">TeamCscAnalysis</span>
           </div>
           <div className="space-y-2.5">
             {sectionData.map(({ id, label, percent }) => (
               <div key={id}>
                 <div className="flex justify-between text-[11px] mb-1">
-                  <span className="text-slate-500 truncate mr-2">{label}</span>
+                  <span className="text-slate-500 dark:text-slate-400 truncate mr-2">{label}</span>
                   <span
                     className="font-medium flex-shrink-0"
                     style={{ color: progressColor(percent) }}
@@ -161,7 +161,7 @@ const TeamCscAnalysis = ({
                     {percent}%
                   </span>
                 </div>
-                <div className="h-[5px] bg-slate-200 rounded-full overflow-hidden">
+                <div className="h-[5px] bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
                   <div
                     className="h-full rounded-full transition-all duration-300"
                     style={{
@@ -176,12 +176,12 @@ const TeamCscAnalysis = ({
         </div>
 
         {/* Status distribution */}
-        <div className="bg-white border border-slate-200 rounded-xl p-4">
+        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-[12px] font-medium text-slate-900">
+            <span className="text-[12px] font-medium text-slate-900 dark:text-slate-100">
               {t('status-distribution', { defaultValue: 'Status distribution' })}
             </span>
-            <span className="text-[11px] text-slate-500">CscChartsLayout</span>
+            <span className="text-[11px] text-slate-500 dark:text-slate-400">CscChartsLayout</span>
           </div>
           <div className="space-y-2">
             {CSC_STATUS_ROWS.map(({ key, dot, bar, badge }) => {
@@ -201,13 +201,13 @@ const TeamCscAnalysis = ({
                     />
                     {t(`statuses.${key}.label`)}
                   </span>
-                  <div className="flex-1 h-[5px] bg-slate-200 rounded-full overflow-hidden">
+                  <div className="flex-1 h-[5px] bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
                     <div
                       className="h-full rounded-full transition-all duration-300"
                       style={{ width: `${pct}%`, background: bar }}
                     />
                   </div>
-                  <span className="text-[11px] font-medium text-slate-900 min-w-[22px] text-right">
+                  <span className="text-[11px] font-medium text-slate-900 dark:text-slate-100 min-w-[22px] text-right">
                     {count}
                   </span>
                 </div>

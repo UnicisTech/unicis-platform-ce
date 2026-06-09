@@ -282,7 +282,7 @@ const Dashboard = () => {
           </div>
           {matrixFilter && (
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-sm text-muted-foreground">
+              <span className="text-sm text-slate-500 dark:text-slate-400">
                 {t('filtered-by')}: {t(impactLabelKeys[matrixFilter.x])},{' '}
                 {t(probabilityLabelKeys[matrixFilter.y])}
               </span>

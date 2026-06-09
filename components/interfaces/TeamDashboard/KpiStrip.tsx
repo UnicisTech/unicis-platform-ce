@@ -74,7 +74,7 @@ export function KpiCard({
       tabIndex={onClick ? 0 : undefined}
       onKeyDown={onClick ? (e) => { if (e.key === 'Enter' || e.key === ' ') onClick() } : undefined}
       className={cn(
-        'bg-white border border-slate-200 rounded-xl p-3 select-none',
+        'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 select-none',
         onClick && 'cursor-pointer hover:border-ub-blue-border hover:shadow-sm transition-all'
       )}
     >
@@ -82,7 +82,7 @@ export function KpiCard({
         <Icon size={12} aria-hidden />
         {label}
       </div>
-      <div className="text-xl font-medium leading-none text-slate-900">{value}</div>
+      <div className="text-xl font-medium leading-none text-slate-900 dark:text-slate-100">{value}</div>
       {sparkline && sparkline.length >= 2 && (
         <div className="mt-1.5 mb-0.5">
           <Sparkline values={sparkline} colour={sparklineColour} />

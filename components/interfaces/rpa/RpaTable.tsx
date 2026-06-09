@@ -44,10 +44,10 @@ const RpaTable = ({
   }
 
   return (
-    <div className="bg-white border border-slate-200 rounded-xl overflow-hidden [&_th]:whitespace-normal! [&_td]:whitespace-normal!">
+    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden [&_th]:whitespace-normal! [&_td]:whitespace-normal!">
       <div className="overflow-x-auto">
-        <table className="w-full min-w-full divide-y divide-slate-200 text-sm">
-          <thead className="bg-slate-50">
+        <table className="w-full min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-sm">
+          <thead className="bg-slate-50 dark:bg-slate-900">
             <tr>
               <th className="px-1.5 py-1.5 text-left">{t('rpa')}</th>
               <th className="px-1.5 py-1.5 text-left">{t('status')}</th>
@@ -62,7 +62,7 @@ const RpaTable = ({
               )}
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
             {pageData.map((task) => (
               <tr key={task.id}>
                 <td className="px-1.5 py-1.5">

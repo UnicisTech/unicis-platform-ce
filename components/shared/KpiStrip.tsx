@@ -23,11 +23,11 @@ export function KpiCard({ label, value, sub, subColour = 'muted', icon: Icon, on
     <div
       onClick={onClick}
       className={cn(
-        'bg-white border border-slate-200 rounded-xl p-3',
+        'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3',
         onClick && 'cursor-pointer hover:border-ub-blue-border transition-colors'
       )}
     >
-      <div className="flex items-center gap-1 text-[10px] text-slate-500 mb-1.5">
+      <div className="flex items-center gap-1 text-[10px] text-slate-500 dark:text-slate-400 mb-1.5">
         <Icon size={12} aria-hidden />
         {label}
       </div>

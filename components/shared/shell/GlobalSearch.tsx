@@ -88,7 +88,7 @@ const MODULE_ITEMS: {
 
 // ── Module badge colours ───────────────────────────────────────────────────────
 const MODULE_BADGE: Record<string, string> = {
-  rpa: 'bg-blue-50 text-blue-700',
+  rpa: 'bg-blue-50 dark:bg-blue-950/40 text-blue-700',
   tia: 'bg-purple-50 text-purple-700',
   pia: 'bg-rose-50 text-rose-700',
   csc: 'bg-emerald-50 text-emerald-700',
@@ -227,7 +227,7 @@ function ShortcutHint() {
     typeof navigator !== 'undefined' &&
     navigator.platform.toUpperCase().includes('MAC');
   return (
-    <kbd className="hidden sm:flex items-center gap-0.5 rounded border border-slate-200 bg-slate-50 px-1.5 py-0.5 text-[10px] text-slate-500 font-mono leading-none">
+    <kbd className="hidden sm:flex items-center gap-0.5 rounded border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 px-1.5 py-0.5 text-[10px] text-slate-500 dark:text-slate-400 font-mono leading-none">
       {isMac ? '⌘' : 'Ctrl'}<span>K</span>
     </kbd>
   );
@@ -260,11 +260,11 @@ function TaskRow({ task }: { task: Task }) {
           <span
             className={cn(
               'w-2 h-2 rounded-full flex-shrink-0',
-              STATUS_DOTS[task.status] ?? 'bg-slate-300'
+              STATUS_DOTS[task.status] ?? 'bg-slate-300 dark:bg-slate-600'
             )}
           />
           <span className="text-[13px] font-medium truncate">{task.title}</span>
-          <span className="text-[10px] text-slate-500 flex-shrink-0">#{task.taskNumber}</span>
+          <span className="text-[10px] text-slate-500 dark:text-slate-400 flex-shrink-0">#{task.taskNumber}</span>
         </div>
 
         {/* Module badges + description snippet */}
@@ -274,14 +274,14 @@ function TaskRow({ task }: { task: Task }) {
               key={key}
               className={cn(
                 'inline-flex items-center px-1.5 py-0 rounded text-[10px] font-medium leading-4',
-                MODULE_BADGE[key] ?? 'bg-slate-100 text-slate-600'
+                MODULE_BADGE[key] ?? 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
               )}
             >
               {key.toUpperCase()}
             </span>
           ))}
           {description && (
-            <span className="text-[11px] text-slate-500 truncate max-w-[300px]">
+            <span className="text-[11px] text-slate-500 dark:text-slate-400 truncate max-w-[300px]">
               {description.replace(/<[^>]+>/g, ' ').trim().slice(0, 120)}
             </span>
           )}
@@ -337,7 +337,7 @@ export default function GlobalSearch() {
       {/* Trigger button */}
       <button
         onClick={() => setOpen(true)}
-        className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 hover:bg-white hover:border-ub-blue-border px-2.5 py-1.5 text-[12px] text-slate-500 transition-colors"
+        className="flex items-center gap-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 hover:bg-white dark:hover:bg-slate-800 hover:border-ub-blue-border px-2.5 py-1.5 text-[12px] text-slate-500 dark:text-slate-400 transition-colors"
         aria-label={t('search.placeholder')}
       >
         <Search size={13} aria-hidden />

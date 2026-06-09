@@ -115,18 +115,18 @@ const NotificationsPage = () => {
         </div>
       </div>
 
-      <section className="rounded-lg border bg-background p-4">
+      <section className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-sm font-semibold">
               {t('notifications.browser-push')}
             </h2>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               {t('notifications.browser-push-description')}
             </p>
           </div>
           {pushStatus === 'unsupported' ? (
-            <span className="text-xs text-muted-foreground">
+            <span className="text-xs text-slate-500 dark:text-slate-400">
               {t('not-supported')}
             </span>
           ) : pushStatus === 'enabled' ? (
@@ -143,15 +143,15 @@ const NotificationsPage = () => {
             </Button>
           )}
         </div>
-        {pushError && <p className="mt-2 text-xs text-red-600">{pushError}</p>}
+        {pushError && <p className="mt-2 text-xs text-red-600 dark:text-red-400">{pushError}</p>}
       </section>
 
       <section className="space-y-3">
         {isLoading && (
-          <p className="text-sm text-muted-foreground">{t('loading')}</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400">{t('loading')}</p>
         )}
         {!isLoading && notifications.length === 0 && (
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             {t('notifications.none')}
           </p>
         )}
