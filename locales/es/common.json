@@ -1625,7 +1625,7 @@
   "dashboard.kpi.days-left": "días restantes",
   "dashboard.kpi.no-upcoming": "Sin próximas",
   "dashboard.kpi.members": "miembros",
-  "dashboard.kpi.no-csc-data": "Sin CSC configurado",
+  "dashboard.kpi.no-csc-data": "Sin marco de ciberseguridad configurado",
   "dashboard.kpi.based-on-csc": "basado en controles CSC",
   "dashboard.kpi.not-performed-controls": "controles no realizados",
   "dashboard.kpi.score-excellent": "Excelente",

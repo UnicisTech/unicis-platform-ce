@@ -1626,7 +1626,7 @@
   "dashboard.kpi.days-left": "日残り",
   "dashboard.kpi.no-upcoming": "予定なし",
   "dashboard.kpi.members": "メンバー",
-  "dashboard.kpi.no-csc-data": "CSC 未設定",
+  "dashboard.kpi.no-csc-data": "サイバーセキュリティフレームワークが設定されていません",
   "dashboard.kpi.based-on-csc": "CSC コントロールに基づく",
   "dashboard.kpi.not-performed-controls": "未実施のコントロール",
   "dashboard.kpi.score-excellent": "優秀",

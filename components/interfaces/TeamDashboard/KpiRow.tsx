@@ -164,7 +164,7 @@ function CscKpiPair({ slug, iso }: { slug: string; iso: ISO }) {
         sub={
           complianceScore !== null
             ? `${t('dashboard.kpi.based-on')} ${frameworkName}`
-            : t('dashboard.kpi.no-csc-data')
+            : frameworkName
         }
         icon={<ShieldCheck size={12} />}
         variant={scoreVariant}

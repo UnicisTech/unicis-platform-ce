@@ -13,7 +13,7 @@ const useISO = (team: any) => {
       if (!team) return;
 
       const iso = (team?.properties as TeamProperties)?.csc_iso;
-      if (iso) {
+      if (iso?.length) {
         setISO(iso);
       } else {
         try {

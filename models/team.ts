@@ -392,7 +392,7 @@ export const getCscIso = async ({ slug }: { slug: string }): Promise<ISO[]> => {
 
   const teamProperties = team ? (team.properties as TeamProperties) : {};
 
-  if (teamProperties?.csc_iso) {
+  if (teamProperties?.csc_iso?.length) {
     return teamProperties?.csc_iso;
   }
 
