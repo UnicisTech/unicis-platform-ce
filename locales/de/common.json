@@ -1539,6 +1539,50 @@
   "filtered-by": "Gefiltert nach",
   "clear-filter": "Filter löschen",
   "clear-all": "Alles löschen",
+  "empty-state": {
+    "rpa": {
+      "title": "Noch keine Verarbeitungsaktivitäten",
+      "description": "Dokumentieren und verwalten Sie Ihre Datenverarbeitungsaktivitäten zum Nachweis der Compliance.",
+      "context": "Erforderlich gemäß DSGVO Art. 30",
+      "cta": "Erste Aktivität hinzufügen"
+    },
+    "tia": {
+      "title": "Noch keine Transferfolgenabschätzungen",
+      "description": "Bewerten Sie die Auswirkungen grenzüberschreitender Datenübertragungen auf die Rechtmäßigkeit.",
+      "context": "Erforderlich gemäß DSGVO Art. 46",
+      "cta": "Erste Bewertung hinzufügen"
+    },
+    "pia": {
+      "title": "Noch keine Datenschutz-Folgenabschätzungen",
+      "description": "Identifizieren und reduzieren Sie Datenschutzrisiken durch Folgenabschätzungen bei riskanten Verarbeitungen.",
+      "context": "Erforderlich gemäß DSGVO Art. 35",
+      "cta": "Erste Bewertung hinzufügen"
+    },
+    "csc": {
+      "title": "Noch keine Kontrollen importiert",
+      "description": "Importieren Sie ein Compliance-Framework, um den Implementierungsstand Ihrer Cybersicherheitskontrollen zu verfolgen.",
+      "context": "ISO 27001 Annex A · 114 Kontrollen",
+      "cta": "Framework importieren"
+    },
+    "iap": {
+      "title": "Noch keine Schulungskurse",
+      "description": "Erstellen Sie Security-Awareness-Schulungen, um Ihr Team für Informationssicherheit zu sensibilisieren.",
+      "context": "ISO 27001 A.7.2.2 Bewusstsein",
+      "cta": "Ersten Kurs hinzufügen"
+    },
+    "risk": {
+      "title": "Noch keine Risiken erfasst",
+      "description": "Identifizieren, bewerten und behandeln Sie Informationssicherheitsrisiken zum Schutz Ihrer Unternehmensressourcen.",
+      "context": "ISO 27001 A.6.1.2 Risikobewertung",
+      "cta": "Erstes Risiko hinzufügen"
+    },
+    "tasks": {
+      "title": "Noch keine Aufgaben",
+      "description": "Erstellen Sie Aufgaben, um Kontrollnachweise zu verfolgen, Verantwortlichkeiten zuzuweisen und Compliance-Aktivitäten zu verwalten.",
+      "context": "Aufgaben verfolgen Kontrollnachweise",
+      "cta": "Erste Aufgabe erstellen"
+    }
+  },
   "upgrade-gate": {
     "plan-feature": "{{plan}}-Funktion · Upgrade zum Freischalten",
     "upgrade-plan": "Plan upgraden",

@@ -3,14 +3,15 @@ import { useTranslation } from 'next-i18next';
 import type { Category } from 'types';
 import { TeamCourseWithProgress } from 'types';
 import CourseCard from './CourseCard';
-import EmptyState from '@/components/shared/EmptyState';
+import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
 
 interface IapDashboardProps {
   categories: Category[];
   teamCourses: TeamCourseWithProgress[];
+  onAddCourse?: () => void;
 }
 
-const IapDashboard = ({ categories, teamCourses }: IapDashboardProps) => {
+const IapDashboard = ({ categories, teamCourses, onAddCourse }: IapDashboardProps) => {
   const { t } = useTranslation('common');
 
   return (
@@ -33,12 +34,14 @@ const IapDashboard = ({ categories, teamCourses }: IapDashboardProps) => {
           ))}
         </div>
       ) : (
-        <div className="p-6">
-          <EmptyState
-            title={t('iap-dashboard')}
-            description={t('no-records')}
-          />
-        </div>
+        <ModuleEmptyState
+          icon="/unicis-iap-logo.png"
+          title={t('empty-state.iap.title')}
+          description={t('empty-state.iap.description')}
+          regulatoryContext={t('empty-state.iap.context')}
+          ctaLabel={onAddCourse ? t('empty-state.iap.cta') : undefined}
+          onCta={onAddCourse}
+        />
       )}
     </>
   );

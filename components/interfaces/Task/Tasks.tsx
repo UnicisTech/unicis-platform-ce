@@ -29,6 +29,8 @@ import {
   DropdownMenuItem,
 } from '@/components/shadcn/ui/dropdown-menu';
 import { ChevronDownIcon } from 'lucide-react';
+import { QueueListIcon } from '@heroicons/react/24/solid';
+import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
 import TaskImportModal from './TaskImportModal';
 import {
   exportTasksXlsx,
@@ -251,7 +253,16 @@ const Tasks = ({ team }: { team: Team }) => {
         </div>
         <TeamTaskAnalysis slug={slug} />
         <TaskViewTabs activeView={activeView} setActiveView={setActiveView} />
-        {activeView === 'list' ? (
+        {tasks && tasks.length === 0 ? (
+          <ModuleEmptyState
+            icon={QueueListIcon}
+            title={t('empty-state.tasks.title')}
+            description={t('empty-state.tasks.description')}
+            regulatoryContext={t('empty-state.tasks.context')}
+            ctaLabel={canCreateTask ? t('empty-state.tasks.cta') : undefined}
+            onCta={canCreateTask ? () => setVisible(true) : undefined}
+          />
+        ) : activeView === 'list' ? (
           <TaskListView
             slug={slug}
             pageData={pageData}

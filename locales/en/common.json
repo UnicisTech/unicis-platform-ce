@@ -1543,6 +1543,50 @@
   "filtered-by": "Filtered by",
   "clear-filter": "Clear filter",
   "clear-all": "Clear all",
+  "empty-state": {
+    "rpa": {
+      "title": "No processing activities yet",
+      "description": "Document and manage your data processing activities to demonstrate compliance.",
+      "context": "Required under GDPR Art. 30",
+      "cta": "Add first activity"
+    },
+    "tia": {
+      "title": "No transfer assessments yet",
+      "description": "Assess the impact of cross-border data transfers to ensure your transfer mechanisms are lawful.",
+      "context": "Required under GDPR Art. 46",
+      "cta": "Add first assessment"
+    },
+    "pia": {
+      "title": "No privacy assessments yet",
+      "description": "Identify and reduce privacy risks by conducting impact assessments for high-risk processing activities.",
+      "context": "Required under GDPR Art. 35",
+      "cta": "Add first assessment"
+    },
+    "csc": {
+      "title": "No controls imported yet",
+      "description": "Import a compliance framework to start tracking your cybersecurity control implementation status.",
+      "context": "ISO 27001 Annex A · 114 controls",
+      "cta": "Import framework"
+    },
+    "iap": {
+      "title": "No training courses yet",
+      "description": "Create security awareness training courses to educate your team on information security practices.",
+      "context": "ISO 27001 A.7.2.2 awareness",
+      "cta": "Add first course"
+    },
+    "risk": {
+      "title": "No risks registered yet",
+      "description": "Identify, assess, and treat information security risks to protect your organisation's assets.",
+      "context": "ISO 27001 A.6.1.2 risk assessment",
+      "cta": "Add first risk"
+    },
+    "tasks": {
+      "title": "No tasks yet",
+      "description": "Create tasks to track control evidence, assign responsibilities, and manage compliance activities.",
+      "context": "Tasks track control evidence",
+      "cta": "Create first task"
+    }
+  },
   "upgrade-gate": {
     "plan-feature": "{{plan}} feature · Upgrade to unlock",
     "upgrade-plan": "Upgrade plan",

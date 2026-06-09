@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import toast from 'react-hot-toast';
 import { EmptyState } from '@/components/shared';
+import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
 import useTeamTasks from 'hooks/useTeamTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeam from 'hooks/useTeam';
@@ -199,7 +200,14 @@ const Dashboard = () => {
         selectedTask={taskToEdit || rpaState.selectedTask}
       />
       {tasksWithProcedures.length === 0 ? (
-        <EmptyState title={t('rpa-dashboard')} description={t('no-records')} />
+        <ModuleEmptyState
+          icon="/unicis-rpa-logo.png"
+          title={t('empty-state.rpa.title')}
+          description={t('empty-state.rpa.description')}
+          regulatoryContext={t('empty-state.rpa.context')}
+          ctaLabel={canAccess('task', ['update']) ? t('empty-state.rpa.cta') : undefined}
+          onCta={canAccess('task', ['update']) ? () => { setTaskToEdit(null); setIsRpaOpen(true); } : undefined}
+        />
       ) : (
         <>
           <div className="m-2">

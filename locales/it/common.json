@@ -1543,6 +1543,50 @@
   "filtered-by": "Filtrato per",
   "clear-filter": "Cancella filtro",
   "clear-all": "Cancella tutto",
+  "empty-state": {
+    "rpa": {
+      "title": "Nessuna attività di trattamento ancora",
+      "description": "Documentate e gestite le vostre attività di trattamento dei dati per dimostrare la conformità.",
+      "context": "Richiesto dal GDPR Art. 30",
+      "cta": "Aggiungi prima attività"
+    },
+    "tia": {
+      "title": "Nessuna valutazione di trasferimento ancora",
+      "description": "Valutate l'impatto dei trasferimenti transfrontalieri di dati per garantire meccanismi leciti.",
+      "context": "Richiesto dal GDPR Art. 46",
+      "cta": "Aggiungi prima valutazione"
+    },
+    "pia": {
+      "title": "Nessuna valutazione di impatto ancora",
+      "description": "Identificate e riducete i rischi per la privacy tramite valutazioni d'impatto per i trattamenti ad alto rischio.",
+      "context": "Richiesto dal GDPR Art. 35",
+      "cta": "Aggiungi prima valutazione"
+    },
+    "csc": {
+      "title": "Nessun controllo importato ancora",
+      "description": "Importate un framework di conformità per iniziare a tracciare lo stato di implementazione dei controlli.",
+      "context": "ISO 27001 Allegato A · 114 controlli",
+      "cta": "Importa framework"
+    },
+    "iap": {
+      "title": "Nessun corso di formazione ancora",
+      "description": "Create corsi di sensibilizzazione sulla sicurezza per educare il team alle buone pratiche di sicurezza.",
+      "context": "ISO 27001 A.7.2.2 consapevolezza",
+      "cta": "Aggiungi primo corso"
+    },
+    "risk": {
+      "title": "Nessun rischio registrato ancora",
+      "description": "Identificate, valutate e trattate i rischi per la sicurezza delle informazioni per proteggere i beni dell'organizzazione.",
+      "context": "ISO 27001 A.6.1.2 valutazione dei rischi",
+      "cta": "Aggiungi primo rischio"
+    },
+    "tasks": {
+      "title": "Nessuna attività ancora",
+      "description": "Create attività per tracciare le evidenze dei controlli, assegnare responsabilità e gestire le attività di conformità.",
+      "context": "Le attività tracciano le evidenze dei controlli",
+      "cta": "Crea prima attività"
+    }
+  },
   "upgrade-gate": {
     "plan-feature": "Funzionalità {{plan}} · Aggiorna per sbloccare",
     "upgrade-plan": "Aggiorna piano",

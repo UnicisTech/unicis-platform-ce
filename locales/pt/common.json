@@ -1543,6 +1543,50 @@
   "filtered-by": "Filtrado por",
   "clear-filter": "Limpar filtro",
   "clear-all": "Limpar tudo",
+  "empty-state": {
+    "rpa": {
+      "title": "Nenhuma atividade de tratamento ainda",
+      "description": "Documente e gerencie suas atividades de tratamento de dados para demonstrar conformidade.",
+      "context": "Exigido pelo RGPD Art. 30",
+      "cta": "Adicionar primeira atividade"
+    },
+    "tia": {
+      "title": "Nenhuma avaliação de transferência ainda",
+      "description": "Avalie o impacto das transferências transfronteiriças de dados para garantir mecanismos legais.",
+      "context": "Exigido pelo RGPD Art. 46",
+      "cta": "Adicionar primeira avaliação"
+    },
+    "pia": {
+      "title": "Nenhuma avaliação de privacidade ainda",
+      "description": "Identifique e reduza riscos de privacidade por meio de avaliações de impacto para tratamentos de alto risco.",
+      "context": "Exigido pelo RGPD Art. 35",
+      "cta": "Adicionar primeira avaliação"
+    },
+    "csc": {
+      "title": "Nenhum controle importado ainda",
+      "description": "Importe um framework de conformidade para começar a rastrear o status de implementação dos controles.",
+      "context": "ISO 27001 Anexo A · 114 controles",
+      "cta": "Importar framework"
+    },
+    "iap": {
+      "title": "Nenhum curso de treinamento ainda",
+      "description": "Crie cursos de conscientização em segurança para educar sua equipe sobre boas práticas de segurança.",
+      "context": "ISO 27001 A.7.2.2 conscientização",
+      "cta": "Adicionar primeiro curso"
+    },
+    "risk": {
+      "title": "Nenhum risco registrado ainda",
+      "description": "Identifique, avalie e trate riscos de segurança da informação para proteger os ativos da sua organização.",
+      "context": "ISO 27001 A.6.1.2 avaliação de riscos",
+      "cta": "Adicionar primeiro risco"
+    },
+    "tasks": {
+      "title": "Nenhuma tarefa ainda",
+      "description": "Crie tarefas para rastrear evidências de controles, atribuir responsabilidades e gerenciar atividades de conformidade.",
+      "context": "Tarefas rastreiam evidências de controles",
+      "cta": "Criar primeira tarefa"
+    }
+  },
   "upgrade-gate": {
     "plan-feature": "Funcionalidade {{plan}} · Faça upgrade para desbloquear",
     "upgrade-plan": "Fazer upgrade",

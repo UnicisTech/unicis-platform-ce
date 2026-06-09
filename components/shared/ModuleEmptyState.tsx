@@ -1,18 +1,23 @@
 import React from 'react'
-import { LucideIcon } from 'lucide-react'
+import Image from 'next/image'
+
+// Accepts a Lucide/Heroicon component OR a public image path (e.g. "/unicis-rpa-logo.png")
+type IconProp =
+  | React.ComponentType<{ className?: string; 'aria-hidden'?: boolean | string }>
+  | string
 
 export interface ModuleEmptyStateProps {
-  icon: LucideIcon
+  icon: IconProp
   title: string
   description: string
   regulatoryContext: string
-  ctaLabel: string
-  onCta: () => void
+  ctaLabel?: string
+  onCta?: () => void
   docsHref?: string
 }
 
 export function ModuleEmptyState({
-  icon: Icon,
+  icon,
   title,
   description,
   regulatoryContext,
@@ -20,22 +25,44 @@ export function ModuleEmptyState({
   onCta,
   docsHref,
 }: ModuleEmptyStateProps) {
+  const iconNode =
+    typeof icon === 'string' ? (
+      <Image
+        src={icon}
+        alt=""
+        width={22}
+        height={22}
+        style={{ width: '22px', height: 'auto' }}
+      />
+    ) : (
+      React.createElement(icon, {
+        className: 'text-ub-blue w-[22px] h-[22px]',
+        'aria-hidden': true,
+      })
+    )
+
   return (
     <div className="flex flex-col items-center justify-center py-16 px-8 text-center max-w-md mx-auto">
       <div className="w-12 h-12 rounded-xl bg-ub-blue-bg border border-ub-blue-border flex items-center justify-center mb-4">
-        <Icon size={22} className="text-ub-blue" aria-hidden />
+        {iconNode}
       </div>
       <h3 className="text-[15px] font-medium text-slate-900 mb-2">{title}</h3>
       <p className="text-[13px] text-slate-500 leading-relaxed mb-3">{description}</p>
       <span className="text-[11px] font-medium text-ub-blue-text bg-ub-blue-bg border border-ub-blue-border px-2.5 py-1 rounded-md mb-5">
         {regulatoryContext}
       </span>
-      <button onClick={onCta} className="btn btn-primary btn-sm mb-3">
-        {ctaLabel}
-      </button>
+      {onCta && ctaLabel && (
+        <button onClick={onCta} className="btn btn-primary btn-sm mb-3">
+          {ctaLabel}
+        </button>
+      )}
       {docsHref && (
-        <a href={docsHref} target="_blank" rel="noopener noreferrer"
-          className="text-[12px] text-ub-blue hover:underline">
+        <a
+          href={docsHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[12px] text-ub-blue hover:underline"
+        >
           Learn more in documentation →
         </a>
       )}

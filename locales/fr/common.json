@@ -1542,6 +1542,50 @@
   "filtered-by": "Filtré par",
   "clear-filter": "Effacer le filtre",
   "clear-all": "Effacer tout",
+  "empty-state": {
+    "rpa": {
+      "title": "Aucune activité de traitement pour l'instant",
+      "description": "Documentez et gérez vos activités de traitement des données pour démontrer votre conformité.",
+      "context": "Requis par le RGPD Art. 30",
+      "cta": "Ajouter la première activité"
+    },
+    "tia": {
+      "title": "Aucune évaluation de transfert pour l'instant",
+      "description": "Évaluez l'impact des transferts de données transfrontaliers pour garantir des mécanismes légaux.",
+      "context": "Requis par le RGPD Art. 46",
+      "cta": "Ajouter la première évaluation"
+    },
+    "pia": {
+      "title": "Aucune analyse d'impact pour l'instant",
+      "description": "Identifiez et réduisez les risques liés à la vie privée grâce aux analyses d'impact sur les traitements à risque.",
+      "context": "Requis par le RGPD Art. 35",
+      "cta": "Ajouter la première évaluation"
+    },
+    "csc": {
+      "title": "Aucun contrôle importé pour l'instant",
+      "description": "Importez un cadre de conformité pour commencer à suivre l'état de mise en œuvre de vos contrôles.",
+      "context": "ISO 27001 Annexe A · 114 contrôles",
+      "cta": "Importer un cadre"
+    },
+    "iap": {
+      "title": "Aucune formation pour l'instant",
+      "description": "Créez des formations de sensibilisation à la sécurité pour éduquer votre équipe aux bonnes pratiques.",
+      "context": "ISO 27001 A.7.2.2 sensibilisation",
+      "cta": "Ajouter la première formation"
+    },
+    "risk": {
+      "title": "Aucun risque enregistré pour l'instant",
+      "description": "Identifiez, évaluez et traitez les risques de sécurité de l'information pour protéger les actifs de votre organisation.",
+      "context": "ISO 27001 A.6.1.2 évaluation des risques",
+      "cta": "Ajouter le premier risque"
+    },
+    "tasks": {
+      "title": "Aucune tâche pour l'instant",
+      "description": "Créez des tâches pour suivre les preuves de contrôles, attribuer des responsabilités et gérer les activités de conformité.",
+      "context": "Les tâches suivent les preuves de contrôles",
+      "cta": "Créer la première tâche"
+    }
+  },
   "upgrade-gate": {
     "plan-feature": "Fonctionnalité {{plan}} · Mettre à niveau pour débloquer",
     "upgrade-plan": "Mettre à niveau",

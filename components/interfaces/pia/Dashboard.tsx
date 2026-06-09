@@ -6,6 +6,7 @@ import useCanAccess from 'hooks/useCanAccess';
 import useTeamTasks from 'hooks/useTeamTasks';
 import useTeam from 'hooks/useTeam';
 import { EmptyState, Error, PerPageSelector } from '@/components/shared';
+import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
 import { TaskProperties, TaskWithPiaRisk } from 'types';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
@@ -289,7 +290,14 @@ const Dashboard = () => {
         />
       )}
       {tasksWithRisks.length === 0 ? (
-        <EmptyState title={t('rpa-dashboard')} description={t('no-records')} />
+        <ModuleEmptyState
+          icon="/unicis-privacy-impact-logo.png"
+          title={t('empty-state.pia.title')}
+          description={t('empty-state.pia.description')}
+          regulatoryContext={t('empty-state.pia.context')}
+          ctaLabel={canAccess('task', ['update']) ? t('empty-state.pia.cta') : undefined}
+          onCta={canAccess('task', ['update']) ? () => setIsCreateOpen(true) : undefined}
+        />
       ) : (
         <>
           <PiaAnalysis tasks={tasks} onCellClick={handleMatrixCellClick} />

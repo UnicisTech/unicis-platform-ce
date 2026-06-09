@@ -7,6 +7,7 @@ import useTeam from 'hooks/useTeam';
 import { useRouter } from 'next/router';
 import { TaskProperties, TaskWithRmRisk } from 'types';
 import { EmptyState, Error } from '@/components/shared';
+import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
 import CreateRisk from './risk-form/RmRiskDialog';
@@ -270,8 +271,14 @@ const Dashboard = () => {
         />
       )}
       {tasksWithRisks.length === 0 ? (
-        //TODO: change title
-        <EmptyState title={t('rpa-dashboard')} description={t('no-records')} />
+        <ModuleEmptyState
+          icon="/unicis-risk-logo.png"
+          title={t('empty-state.risk.title')}
+          description={t('empty-state.risk.description')}
+          regulatoryContext={t('empty-state.risk.context')}
+          ctaLabel={canAccess('task', ['update']) ? t('empty-state.risk.cta') : undefined}
+          onCta={canAccess('task', ['update']) ? () => setIsCreateOpen(true) : undefined}
+        />
       ) : (
         <>
           <div className="mb-2">
