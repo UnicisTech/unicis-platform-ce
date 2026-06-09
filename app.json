@@ -33,6 +33,11 @@
       "description": "Public root URL of the Enterprise SaaS installation, replace <HEROKU_APP_NAME> with the app name.",
       "value": "https://<HEROKU_APP_NAME>.herokuapp.com"
     },
+    "NEXT_INTERNAL_APP_URL": {
+      "description": "Internal root URL used by Next.js middleware for same-container API calls.",
+      "value": "http://127.0.0.1:4002",
+      "required": false
+    },
     "SVIX_URL": {
       "description": "SVIX URL.",
       "required": false

@@ -21,6 +21,20 @@ const ulimitedPlanRoutes = [
   '/teams/:slug/asset-management/**',
 ];
 
+const getInternalAppOrigin = (req: NextRequest) => {
+  const configuredOrigin = process.env.NEXT_INTERNAL_APP_URL?.trim();
+
+  if (configuredOrigin) {
+    return configuredOrigin;
+  }
+
+  if (process.env.NODE_ENV === 'production') {
+    return `http://127.0.0.1:${process.env.PORT || '4002'}`;
+  }
+
+  return req.nextUrl.origin;
+};
+
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const patterns = ulimitedPlanRoutes.map((route) =>
@@ -50,13 +64,23 @@ export default async function middleware(req: NextRequest) {
     );
     const slug = slugMatch ? slugMatch[1] : null;
 
-    const response = await fetch(`${req.nextUrl.origin}/api/check-plan`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ slug }),
-    });
+    let response: Response;
+
+    try {
+      response = await fetch(
+        new URL('/api/check-plan', getInternalAppOrigin(req)),
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ slug }),
+        }
+      );
+    } catch (error) {
+      console.error('Plan check request failed:', error);
+      return NextResponse.redirect(new URL(`/teams/${slug}/billing`, req.url));
+    }
 
     if (!response.ok) {
       return NextResponse.redirect(new URL(`/teams/${slug}/billing`, req.url));
