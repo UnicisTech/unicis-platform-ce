@@ -108,16 +108,7 @@ const AdminPage = ({
 
   return (
     <>
-      <div className="flex justify-between items-center">
-        <div className="space-y-3">
-          <h2 className="text-xl font-medium leading-none tracking-tight">
-            {t('iap-dashboard')}
-          </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            {t('manage-courses-and-categories')}
-          </p>
-        </div>
-        <div className="flex justify-end items-center my-1">
+      <div className="flex justify-end items-center gap-2 mb-4 flex-wrap">
           {canAccess('iap_category', ['create']) && (
             <div className="mx-1.5 my-0">
               <Button
@@ -142,7 +133,6 @@ const AdminPage = ({
               </Button>
             </div>
           )}
-        </div>
       </div>
       <CoursesTable
         slug={team.slug}

@@ -1,18 +1,10 @@
 import { useRouter } from 'next/router';
-import { Badge } from '@/components/shadcn/ui/badge';
-import { Button } from '@/components/shadcn/ui/button';
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/shadcn/ui/card';
+import { useTranslation } from 'next-i18next';
 import type { Category } from 'types';
 import { TeamCourseWithProgress } from 'types';
 import ProgressBadge from '../shared/ProgressBadge';
 import { cn } from '@/components/shadcn/lib/utils';
-import { useTranslation } from 'next-i18next';
+import { Clock } from 'lucide-react';
 
 const CourseCard = ({
   teamCourse,
@@ -29,52 +21,56 @@ const CourseCard = ({
   };
 
   const course = teamCourse.course;
+  const progress = teamCourse.progress?.[0]?.progress ?? 0;
+  const categoryName =
+    categories.find(({ id }) => id === course.categoryId)?.name || '';
 
   return (
-    <Card
+    <div
       onClick={openCourse}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === 'Enter' && openCourse()}
       className={cn(
-        'w-[350px] m-4 cursor-pointer transition-all duration-200',
-        'hover:shadow-xl hover:scale-[1.02]'
+        'bg-white border border-slate-200 rounded-xl overflow-hidden cursor-pointer',
+        'hover:border-ub-blue-border hover:shadow-sm transition-all'
       )}
     >
-      <div className="relative pt-[70%]">
+      {/* Thumbnail */}
+      <div className="relative w-full aspect-video bg-slate-100">
         <img
-          className="absolute top-0 left-0 w-full h-full object-cover rounded-t-md"
+          className="absolute inset-0 w-full h-full object-cover"
           src={course?.thumbnail || '/unicis-iap-logo.png'}
           alt={t('course-thumbnail')}
         />
       </div>
 
-      <CardHeader>
-        <CardTitle className="text-lg">{course.name}</CardTitle>
-        <div className="flex justify-start mt-1">
-          <Badge variant="outline">
-            {categories.find(({ id }) => id === course.categoryId)?.name || ''}
-          </Badge>
-        </div>
-      </CardHeader>
-
-      <CardContent className="space-y-2">
-        <ProgressBadge progress={teamCourse.progress?.[0]?.progress} />
-        {course?.estimatedTime && (
-          <p className="text-sm text-muted-foreground">
-            {t('estimated-minutes', { time: course.estimatedTime })}
-          </p>
+      {/* Content */}
+      <div className="p-3 space-y-2">
+        {/* Category chip */}
+        {categoryName && (
+          <span className="inline-block text-[10px] font-medium px-2 py-0.5 rounded-full bg-ub-blue-bg text-ub-blue-text border border-ub-blue-border">
+            {categoryName}
+          </span>
         )}
-      </CardContent>
 
-      <CardFooter className="justify-end">
-        <Button
-          onClick={(e) => {
-            e.stopPropagation();
-            openCourse();
-          }}
-        >
-          {t('open')}
-        </Button>
-      </CardFooter>
-    </Card>
+        {/* Title */}
+        <h3 className="text-[13px] font-medium text-slate-900 leading-snug line-clamp-2">
+          {course.name}
+        </h3>
+
+        {/* Progress + time row */}
+        <div className="flex items-center justify-between gap-2 pt-0.5">
+          <ProgressBadge progress={progress} />
+          {course?.estimatedTime && (
+            <div className="flex items-center gap-1 text-[10px] text-slate-400">
+              <Clock size={10} aria-hidden />
+              {t('estimated-minutes', { time: course.estimatedTime })}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

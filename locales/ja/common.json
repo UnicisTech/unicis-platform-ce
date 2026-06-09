@@ -1608,5 +1608,19 @@
     "all-controls-must-have-tasks": "ステータスを変更する前に、すべてのコントロールにタスクが割り当てられている必要があります",
     "success-tasks-linked": "{{controlCount}}個のコントロールにタスクをリンクしました",
     "success-status-updated": "{{controlCount}}個のコントロールが{{status}}に更新されました"
-  }
+  },
+  "dashboard.kpi.compliance-score": "コンプライアンス スコア",
+  "dashboard.kpi.open-risks": "オープンリスク",
+  "dashboard.kpi.next-due": "次の期限",
+  "dashboard.kpi.iap-completion": "IAP 完了率",
+  "dashboard.kpi.csc-gaps": "CSC ギャップ",
+  "dashboard.kpi.overdue": "期限超過",
+  "dashboard.kpi.no-open-risks": "リスクなし",
+  "dashboard.kpi.tasks-with-risk": "リスクあるタスク",
+  "dashboard.kpi.days-left": "日残り",
+  "dashboard.kpi.no-upcoming": "予定なし",
+  "dashboard.kpi.members": "メンバー",
+  "dashboard.kpi.no-csc-data": "CSC 未設定",
+  "dashboard.kpi.based-on-csc": "CSC コントロールに基づく",
+  "dashboard.kpi.not-performed-controls": "未実施のコントロール"
 }

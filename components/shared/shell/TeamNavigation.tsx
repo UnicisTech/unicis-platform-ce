@@ -1,5 +1,4 @@
 import {
-  Cog6ToothIcon,
   CodeBracketIcon,
   DocumentTextIcon,
   ChatBubbleBottomCenterTextIcon,
@@ -8,7 +7,9 @@ import {
 } from '@heroicons/react/24/outline';
 import { QueueListIcon, ChartBarIcon } from '@heroicons/react/24/solid';
 import { useTranslation } from 'next-i18next';
+import { useMemo } from 'react';
 import useCanAccess from 'hooks/useCanAccess';
+import useTeamTasks from 'hooks/useTeamTasks';
 import NavigationItems from './NavigationItems';
 import { NavigationProps, MenuItem } from './NavigationItems';
 import Icon from '../Icon';
@@ -20,7 +21,28 @@ interface NavigationItemsProps extends NavigationProps {
 const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess(slug);
+  const { tasks } = useTeamTasks(slug);
   const relativePath = activePathname?.slice(`/teams/${slug}`.length) || '';
+
+  // ── Badge counts ────────────────────────────────────────────────────────────
+  const { overdueCount, openCscCount, openRmCount } = useMemo(() => {
+    if (!tasks) return { overdueCount: 0, openCscCount: 0, openRmCount: 0 };
+    const now = new Date();
+    let overdue = 0;
+    let csc = 0;
+    let rm = 0;
+    for (const task of tasks) {
+      const props = task.properties as Record<string, unknown> | null;
+      const isDone = task.status === 'done';
+      if (!isDone && task.duedate && new Date(task.duedate as string) < now) overdue++;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (!isDone && Array.isArray((props as any)?.csc_controls) && (props as any).csc_controls.length > 0) csc++;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (!isDone && (props as any)?.rm_risk) rm++;
+    }
+    return { overdueCount: overdue, openCscCount: csc, openRmCount: rm };
+  }, [tasks]);
+
   const menus: (MenuItem | null)[] = [
     {
       name: t('Dashboard'),
@@ -39,6 +61,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('tasks'),
+      badge: overdueCount > 0 ? { count: overdueCount, variant: 'red' } : undefined,
     },
     canAccess('rpa', ['read'])
       ? {
@@ -78,6 +101,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
           active:
             activePathname?.startsWith(`/teams/${slug}`) &&
             relativePath.includes('csc'),
+          badge: openCscCount > 0 ? { count: openCscCount, variant: 'amber' } : undefined,
         }
       : null,
     canAccess('iap_course', ['update'])
@@ -99,6 +123,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
           active:
             activePathname?.startsWith(`/teams/${slug}`) &&
             relativePath.includes('risk-management'),
+          badge: openRmCount > 0 ? { count: openRmCount, variant: 'red' } : undefined,
         }
       : null,
     {
@@ -117,45 +142,30 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       href: 'https://www.unicis.tech/docs',
       icon: CodeBracketIcon,
       className: 'stroke-blue-600',
-      active:
-        activePathname?.startsWith(`/teams/${slug}`) &&
-        relativePath.includes('documentation'),
+      openInNewTab: true,
     },
     {
       name: t('knowledge-base'),
       href: 'https://www.unicis.tech/kb',
       icon: LifebuoyIcon,
       className: 'stroke-blue-600',
-      active:
-        activePathname?.startsWith(`/teams/${slug}`) &&
-        relativePath.includes('documentation'),
+      openInNewTab: true,
     },
     {
       name: t('feedback'),
       href: 'https://feedback.unicis.tech',
       icon: ChatBubbleBottomCenterTextIcon,
       className: 'stroke-blue-600',
-      active:
-        activePathname?.startsWith(`/teams/${slug}`) &&
-        relativePath.includes('feedback'),
+      openInNewTab: true,
     },
     {
       name: t('support'),
       href: 'https://discord.com/invite/8TwyeD97HD',
       icon: QuestionMarkCircleIcon,
       className: 'stroke-blue-600',
+      openInNewTab: true,
     },
-    {
-      name: t('settings'),
-      href: `/teams/${slug}/settings`,
-      icon: Cog6ToothIcon,
-      className: 'stroke-blue-600',
-      active:
-        activePathname?.startsWith(`/teams/${slug}`) &&
-        /(settings|billing|members|saml|directory-sync|audit-logs|webhooks|api-keys|iap\/admin)/.test(
-          relativePath
-        ),
-    },
+    // Settings has been moved to the sidebar footer (Navigation.tsx)
   ];
 
   return <NavigationItems menus={menus} />;

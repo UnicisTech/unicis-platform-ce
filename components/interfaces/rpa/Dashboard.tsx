@@ -138,13 +138,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center">
-        <div className="space-y-3">
-          <h2 className="text-xl font-medium leading-none tracking-tight">
-            {t('rpa-dashboard')}
-          </h2>
-        </div>
-        <div className="flex justify-end items-center gap-2 my-1 flex-wrap">
+      <div className="flex justify-end items-center gap-2 mb-4 flex-wrap">
           {tasksWithProcedures.length > 0 && (
             <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
           )}
@@ -191,7 +185,6 @@ const Dashboard = () => {
               {t('create')}
             </Button>
           )}
-        </div>
       </div>
       <CreateProcedureTest
         tasks={tasks}
@@ -210,9 +203,7 @@ const Dashboard = () => {
         />
       ) : (
         <>
-          <div className="m-2">
-            <ProcessingActivitiesAnalysis slug={slug as string} />
-          </div>
+          <ProcessingActivitiesAnalysis slug={slug as string} />
           <RpaTable
             slug={slug as string}
             tasks={tasksWithProcedures}

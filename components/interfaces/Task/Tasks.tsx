@@ -196,9 +196,6 @@ const Tasks = ({ team }: { team: Team }) => {
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
       <div className="space-y-3">
-        <h2 className="text-xl font-medium leading-none tracking-tight">
-          {t('all-tasks')}
-        </h2>
         <div className="flex flex-col lg:flex-row justify-between items-end items-center">
           <TaskFilters
             selectedStatuses={selectedStatuses}

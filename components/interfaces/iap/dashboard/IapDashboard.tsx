@@ -16,15 +16,8 @@ const IapDashboard = ({ categories, teamCourses, onAddCourse }: IapDashboardProp
 
   return (
     <>
-      <div className="flex justify-between items-center">
-        <div className="space-y-3">
-          <h2 className="text-xl font-medium leading-none tracking-tight">
-            {t('iap-dashboard')}
-          </h2>
-        </div>
-      </div>
       {teamCourses.length > 0 ? (
-        <div className="grid gap-5 grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] p-6">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {teamCourses.map((teamCourse) => (
             <CourseCard
               teamCourse={teamCourse}

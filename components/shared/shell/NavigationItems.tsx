@@ -11,6 +11,8 @@ export interface MenuItem {
   items?: Omit<MenuItem, 'icon' | 'items'>[];
   className?: string;
   openInNewTab?: boolean;
+  /** Optional count badge shown on the nav item (only rendered when count > 0) */
+  badge?: { count: number; variant: 'red' | 'amber' };
 }
 
 export interface NavigationProps {
@@ -86,6 +88,18 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ menu }) => {
         </span>
       )}
       <span className="min-w-0 flex-1">{menu.name}</span>
+      {menu.badge && menu.badge.count > 0 && (
+        <span
+          className={classNames(
+            'ml-auto flex-shrink-0 text-[10px] font-semibold px-1.5 py-0.5 rounded-md min-w-[20px] text-center leading-none',
+            menu.badge.variant === 'red'
+              ? 'bg-red-100 text-red-700'
+              : 'bg-amber-100 text-amber-700'
+          )}
+        >
+          {menu.badge.count > 99 ? '99+' : menu.badge.count}
+        </span>
+      )}
       {newTab && (
         <ArrowTopRightOnSquareIcon
           className="h-3 w-3 shrink-0 text-slate-300"

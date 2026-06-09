@@ -7,6 +7,7 @@ import {
 } from '@/components/interfaces/TeamDashboard';
 import RmAnalysis from '@/components/interfaces/TeamDashboard/RmAnalysis';
 import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/TeamProcessingActivities';
+import KpiRow from '@/components/interfaces/TeamDashboard/KpiRow';
 import { Error, Loading } from '@/components/shared';
 import { getTeamAccess } from '@/lib/teams';
 import { getTranslationNamespaces } from '@/lib/i18n/getCscTranslationNamespaces';
@@ -19,12 +20,7 @@ import type { ISO, Task } from 'types';
 import { cn } from '@/components/shadcn/lib/utils';
 import { hasTaskModule, isTaskModuleKey } from '@/lib/tasks';
 import type { TaskModuleKey } from '@/lib/tasks';
-import {
-  CheckSquare2,
-  AlertCircle,
-  ShieldAlert,
-  ArrowRight,
-} from 'lucide-react';
+import { ShieldAlert, ArrowRight } from 'lucide-react';
 
 // ── Tab types ─────────────────────────────────────────────────────────────────
 type DashboardTab = 0 | 1 | 2;
@@ -52,62 +48,6 @@ const STATUS_COLS: Array<{ key: string; label: string; cellClass: string }> = [
 ];
 
 // ── Sub-components ────────────────────────────────────────────────────────────
-
-function SummaryStrip({ tasks, slug }: { tasks: Task[]; slug: string }) {
-  const { t } = useTranslation('common');
-  const router = useRouter();
-  const now = new Date();
-
-  const open = tasks.filter((t) => t.status !== 'done').length;
-  const overdue = tasks.filter(
-    (task) =>
-      task.status !== 'done' &&
-      task.duedate &&
-      new Date(task.duedate as string) < now
-  ).length;
-
-  return (
-    <div className="grid grid-cols-2 gap-2 mb-4">
-      <button
-        onClick={() => router.push(`/teams/${slug}/tasks`)}
-        className="bg-white border border-slate-200 rounded-xl p-3 text-left hover:border-ub-blue-border transition-colors"
-      >
-        <div className="flex items-center gap-1.5 text-[10px] text-slate-400 mb-1.5">
-          <CheckSquare2 size={12} aria-hidden />
-          {t('dashboard.open-tasks')}
-        </div>
-        <div className="text-2xl font-medium leading-none">{open}</div>
-      </button>
-      <button
-        onClick={() => router.push(`/teams/${slug}/tasks`)}
-        className={cn(
-          'bg-white border rounded-xl p-3 text-left transition-colors',
-          overdue > 0
-            ? 'border-ub-red-border hover:border-ub-red'
-            : 'border-slate-200 hover:border-ub-blue-border'
-        )}
-      >
-        <div
-          className={cn(
-            'flex items-center gap-1.5 text-[10px] mb-1.5',
-            overdue > 0 ? 'text-ub-red-text' : 'text-slate-400'
-          )}
-        >
-          <AlertCircle size={12} aria-hidden />
-          {t('dashboard.overdue-tasks')}
-        </div>
-        <div
-          className={cn(
-            'text-2xl font-medium leading-none',
-            overdue > 0 ? 'text-ub-red' : ''
-          )}
-        >
-          {overdue}
-        </div>
-      </button>
-    </div>
-  );
-}
 
 function TaskStatusMatrix({
   tasks,
@@ -335,18 +275,8 @@ const TeamDashboard = ({
 
   return (
     <>
-      {/* Page header */}
-      <div className="flex flex-col pb-4">
-        <h2 className="text-xl font-medium leading-none tracking-tight">
-          {t('team-dashboard')}
-          <span className="text-slate-400 font-normal ml-2 text-base">
-            {team.name}
-          </span>
-        </h2>
-      </div>
-
-      {/* Summary strip — open & overdue task counts */}
-      <SummaryStrip tasks={tasks || []} slug={slug} />
+      {/* KPI strip — 6 summary cards */}
+      <KpiRow tasks={tasks || []} slug={slug} team={team} />
 
       {/* Task matrix + Needs attention */}
       <div className="flex flex-col lg:flex-row gap-3 mb-4">

@@ -20,10 +20,6 @@ const Dashboard = ({ team, iso }: { team: Team; iso: ISO[] }) => {
 
   return (
     <>
-      <h2 className="text-xl font-medium leading-none tracking-tight">
-        {`${t('csc-dashboard')}: ${team.name}`}
-      </h2>
-
       <CscTabs
         frameworks={iso}
         activeTab={activeTab}

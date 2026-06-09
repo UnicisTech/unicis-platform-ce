@@ -211,13 +211,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center">
-        <div className="space-y-3">
-          <h2 className="text-xl font-medium leading-none tracking-tight">
-            {t('rm-dashboard')}
-          </h2>
-        </div>
-        <div className="flex justify-end items-center gap-2 my-1 flex-wrap">
+      <div className="flex justify-end items-center gap-2 mb-4 flex-wrap">
           {tasksWithRisks.length > 0 && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -260,7 +254,6 @@ const Dashboard = () => {
               {t('create')}
             </Button>
           )}
-        </div>
       </div>
       {isCreateOpen && (
         <CreateRisk

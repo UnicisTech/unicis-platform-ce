@@ -1608,5 +1608,19 @@
     "all-controls-must-have-tasks": "Todos os controles devem ter tarefas atribuídas antes de alterar o status",
     "success-tasks-linked": "Tarefas vinculadas a {{controlCount}} controles",
     "success-status-updated": "{{controlCount}} controles atualizados para {{status}}"
-  }
+  },
+  "dashboard.kpi.compliance-score": "Pontuação de conformidade",
+  "dashboard.kpi.open-risks": "Riscos abertos",
+  "dashboard.kpi.next-due": "Próximo vencimento",
+  "dashboard.kpi.iap-completion": "Conclusão IAP",
+  "dashboard.kpi.csc-gaps": "Lacunas CSC",
+  "dashboard.kpi.overdue": "em atraso",
+  "dashboard.kpi.no-open-risks": "Sem riscos abertos",
+  "dashboard.kpi.tasks-with-risk": "tarefas com risco",
+  "dashboard.kpi.days-left": "dias restantes",
+  "dashboard.kpi.no-upcoming": "Sem próximas",
+  "dashboard.kpi.members": "membros",
+  "dashboard.kpi.no-csc-data": "Sem CSC configurado",
+  "dashboard.kpi.based-on-csc": "baseado em controles CSC",
+  "dashboard.kpi.not-performed-controls": "controles não realizados"
 }
