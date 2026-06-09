@@ -1539,6 +1539,11 @@
   "filtered-by": "Gefiltert nach",
   "clear-filter": "Filter löschen",
   "clear-all": "Alles löschen",
+  "upgrade-gate": {
+    "plan-feature": "{{plan}}-Funktion · Upgrade zum Freischalten",
+    "upgrade-plan": "Plan upgraden",
+    "grc-assistant-description": "Stellen Sie Fragen zu Ihrer Compliance-Lage, Kontrollmängeln und dem Risikostatus in natürlicher Sprache. Verfügbar ab dem Premium-Plan."
+  },
   "kpi": {
     "compliance-score": "Compliance-Score",
     "based-on-controls": "Basierend auf Kontrollreife",

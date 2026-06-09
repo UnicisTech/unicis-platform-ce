@@ -12,6 +12,7 @@ import {
   ChatBubbleBottomCenterTextIcon,
 } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
 import { defaultHeaders } from '@/lib/common';
 import type {
   ApiResponse,
@@ -29,6 +30,7 @@ import {
 } from '@/components/shadcn/ui/card';
 import { Input } from '@/components/shadcn/ui/input';
 import useTeam from 'hooks/useTeam';
+import { UpgradeGate } from '@/components/shared/UpgradeGate';
 
 const AiChat: React.FC = () => {
   const [visible, setVisible] = useState(false);
@@ -39,13 +41,14 @@ const AiChat: React.FC = () => {
   >([]);
   const { t } = useTranslation('common');
   const { isLoading: isTeamLoading, team } = useTeam();
+  const router = useRouter();
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const plan =
     team?.subscription?.status === 'ACTIVE'
       ? team.subscription.plan
       : 'COMMUNITY';
-  const isAiChatEnabled = !!team && plan !== 'COMMUNITY';
+  const isCommunity = !isTeamLoading && plan === 'COMMUNITY';
 
   const togglePopup = () => {
     setVisible((v) => !v);
@@ -125,13 +128,14 @@ const AiChat: React.FC = () => {
     };
   }, []);
 
-  if (isTeamLoading || !isAiChatEnabled) {
+  // Hide entirely while session is loading and no team is resolved yet
+  if (isTeamLoading) {
     return null;
   }
 
   return (
     <>
-      {/* Toggle Button */}
+      {/* Toggle Button — visible for all plans */}
       <div
         className={`fixed right-4 bottom-4 z-50 transition-all duration-300 transform ${
           visible
@@ -161,6 +165,7 @@ const AiChat: React.FC = () => {
           <button
             onClick={togglePopup}
             className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+            aria-label={t('close')}
           >
             <XMarkIcon className="w-5 h-5" />
           </button>
@@ -169,61 +174,77 @@ const AiChat: React.FC = () => {
             <CardTitle>{t('ai-chatbot')}</CardTitle>
           </CardHeader>
 
-          <CardContent className="grow overflow-auto px-4 pb-4">
-            {messages.map((msg, i) => (
-              <div
-                key={i}
-                className={`chat ${msg.role === 'assistant' ? 'chat-start' : 'chat-end'}`}
-              >
-                <div className="chat-image avatar">
-                  <div className="w-10 rounded-full">
-                    <img
-                      src={
-                        msg.role === 'assistant'
-                          ? '/chatbot_assistant.png'
-                          : '/chatbot_user.png'
-                      }
-                      alt={msg.role}
-                    />
-                  </div>
-                </div>
-                <div className="chat-bubble bg-muted text-muted-foreground">
-                  <ReactMarkdown
-                    remarkPlugins={remarkPlugins}
-                    components={{
-                      ol: ({ children }) => (
-                        <ol className="list-decimal py-2 pl-6">{children}</ol>
-                      ),
-                      li: ({ children }) => (
-                        <li className="mb-2">{children}</li>
-                      ),
-                    }}
-                  >
-                    {msg.content}
-                  </ReactMarkdown>
-                </div>
-              </div>
-            ))}
-            <div ref={messagesEndRef} />
-            {isTyping && (
-              <p className="mt-2 text-sm italic text-gray-500 animate-pulse">
-                {t('ai-is-typing')}
-              </p>
-            )}
-          </CardContent>
-
-          <CardFooter className="border-t p-4">
-            <form onSubmit={handleSubmit} className="flex w-full gap-2">
-              <Input
-                name="prompt"
-                placeholder={t('ai-type-a-question')}
-                className="flex-1"
+          {/* Body — upgrade gate for Community, chat for Premium/Ultimate */}
+          {isCommunity ? (
+            <CardContent className="grow overflow-auto px-4 pb-4 flex items-start">
+              <UpgradeGate
+                featureName={t('ai-chatbot')}
+                description={t('upgrade-gate.grc-assistant-description')}
+                requiredPlan="Premium"
+                onUpgrade={() =>
+                  router.push(`/teams/${team?.slug}/billing`)
+                }
               />
-              <Button type="submit" variant="ghost" className="p-2">
-                <PaperAirplaneIcon className="w-5 h-5" />
-              </Button>
-            </form>
-          </CardFooter>
+            </CardContent>
+          ) : (
+            <>
+              <CardContent className="grow overflow-auto px-4 pb-4">
+                {messages.map((msg, i) => (
+                  <div
+                    key={i}
+                    className={`chat ${msg.role === 'assistant' ? 'chat-start' : 'chat-end'}`}
+                  >
+                    <div className="chat-image avatar">
+                      <div className="w-10 rounded-full">
+                        <img
+                          src={
+                            msg.role === 'assistant'
+                              ? '/chatbot_assistant.png'
+                              : '/chatbot_user.png'
+                          }
+                          alt={msg.role}
+                        />
+                      </div>
+                    </div>
+                    <div className="chat-bubble bg-muted text-muted-foreground">
+                      <ReactMarkdown
+                        remarkPlugins={remarkPlugins}
+                        components={{
+                          ol: ({ children }) => (
+                            <ol className="list-decimal py-2 pl-6">{children}</ol>
+                          ),
+                          li: ({ children }) => (
+                            <li className="mb-2">{children}</li>
+                          ),
+                        }}
+                      >
+                        {msg.content}
+                      </ReactMarkdown>
+                    </div>
+                  </div>
+                ))}
+                <div ref={messagesEndRef} />
+                {isTyping && (
+                  <p className="mt-2 text-sm italic text-gray-500 animate-pulse">
+                    {t('ai-is-typing')}
+                  </p>
+                )}
+              </CardContent>
+
+              <CardFooter className="border-t p-4">
+                <form onSubmit={handleSubmit} className="flex w-full gap-2">
+                  <Input
+                    name="prompt"
+                    placeholder={t('ai-type-a-question')}
+                    className="flex-1"
+                  />
+                  <Button type="submit" variant="ghost" className="p-2">
+                    <PaperAirplaneIcon className="w-5 h-5" />
+                  </Button>
+                </form>
+              </CardFooter>
+            </>
+          )}
         </Card>
       </div>
     </>

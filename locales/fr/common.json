@@ -1542,6 +1542,11 @@
   "filtered-by": "Filtré par",
   "clear-filter": "Effacer le filtre",
   "clear-all": "Effacer tout",
+  "upgrade-gate": {
+    "plan-feature": "Fonctionnalité {{plan}} · Mettre à niveau pour débloquer",
+    "upgrade-plan": "Mettre à niveau",
+    "grc-assistant-description": "Posez des questions sur votre posture de conformité, les lacunes de contrôle et le statut des risques en langage naturel. Disponible sur les plans Premium et Ultimate."
+  },
   "kpi": {
     "compliance-score": "Score de conformité",
     "based-on-controls": "Basé sur la maturité des contrôles",

@@ -1542,6 +1542,11 @@
   "filtered-by": "Filtrado por",
   "clear-filter": "Borrar filtro",
   "clear-all": "Borrar todo",
+  "upgrade-gate": {
+    "plan-feature": "Función {{plan}} · Actualiza para desbloquear",
+    "upgrade-plan": "Actualizar plan",
+    "grc-assistant-description": "Haga preguntas sobre su postura de cumplimiento, brechas de control y estado de riesgo en lenguaje natural. Disponible en los planes Premium y Ultimate."
+  },
   "kpi": {
     "compliance-score": "Puntuación de cumplimiento",
     "based-on-controls": "Basado en la madurez de controles",

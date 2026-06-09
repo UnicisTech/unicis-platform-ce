@@ -1543,6 +1543,11 @@
   "filtered-by": "Filtered by",
   "clear-filter": "Clear filter",
   "clear-all": "Clear all",
+  "upgrade-gate": {
+    "plan-feature": "{{plan}} feature · Upgrade to unlock",
+    "upgrade-plan": "Upgrade plan",
+    "grc-assistant-description": "Ask questions about your compliance posture, control gaps, and risk status in natural language. Available on Premium and Ultimate plans."
+  },
   "kpi": {
     "compliance-score": "Compliance score",
     "based-on-controls": "Based on control maturity",

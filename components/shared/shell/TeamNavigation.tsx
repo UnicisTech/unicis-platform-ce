@@ -64,7 +64,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       ? {
           name: t('pia'),
           href: `/teams/${slug}/pia`,
-          icon: () => <Icon src="/unicis-csc-logo.png" />,
+          icon: () => <Icon src="/unicis-privacy-impact-logo.png" />,
           active:
             activePathname?.startsWith(`/teams/${slug}`) &&
             relativePath.includes('pia'),
@@ -95,7 +95,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       ? {
           name: t('rm'),
           href: `/teams/${slug}/risk-management`,
-          icon: () => <Icon src="/unicis-csc-logo.png" />,
+          icon: () => <Icon src="/unicis-risk-logo.png" />,
           active:
             activePathname?.startsWith(`/teams/${slug}`) &&
             relativePath.includes('risk-management'),

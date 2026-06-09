@@ -1543,6 +1543,11 @@
   "filtered-by": "フィルタ対象:",
   "clear-filter": "フィルタをクリア",
   "clear-all": "すべてクリア",
+  "upgrade-gate": {
+    "plan-feature": "{{plan}}機能 · アンロックするにはアップグレード",
+    "upgrade-plan": "プランをアップグレード",
+    "grc-assistant-description": "コンプライアンス態勢、管理策のギャップ、リスク状況について自然言語で質問できます。PremiumおよびUltimateプランでご利用いただけます。"
+  },
   "kpi": {
     "compliance-score": "コンプライアンススコア",
     "based-on-controls": "管理策の成熟度に基づく",
