@@ -479,7 +479,7 @@ export default function CscPanel({
         </button>
       </div>
 
-      <div className="flex overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden mt-2 flex">
         <StatusesTable
           slug={slug}
           ISO={iso}

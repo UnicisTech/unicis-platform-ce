@@ -10,6 +10,7 @@ import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/
 import KpiRow from '@/components/interfaces/TeamDashboard/KpiRow';
 import ActionRequiredBanner from '@/components/interfaces/TeamDashboard/ActionRequiredBanner';
 import { Error, Loading } from '@/components/shared';
+import ModuleBadge from '@/components/shared/ModuleBadge';
 import { Button } from '@/components/shadcn/ui/button';
 import { getTeamAccess } from '@/lib/teams';
 import { getTranslationNamespaces } from '@/lib/i18n/getCscTranslationNamespaces';
@@ -65,15 +66,13 @@ type DashboardTab = 0 | 1 | 2;
 // ── Module row definition for the task matrix ────────────────────────────────
 const MODULE_ROWS: Array<{
   key: TaskModuleKey;
-  label: string;
-  dotColor: string;
   path: string;
 }> = [
-  { key: 'rpa_procedure', label: 'RPA', dotColor: 'bg-ub-purple', path: 'rpa' },
-  { key: 'tia_procedure', label: 'TIA', dotColor: 'bg-sky-400', path: 'tia' },
-  { key: 'pia_risk',      label: 'PIA', dotColor: 'bg-ub-green', path: 'pia' },
-  { key: 'csc_controls',  label: 'CSC', dotColor: 'bg-ub-blue',  path: 'csc' },
-  { key: 'rm_risk',       label: 'Risk', dotColor: 'bg-ub-red',  path: 'risk-management' },
+  { key: 'rpa_procedure', path: 'rpa' },
+  { key: 'tia_procedure', path: 'tia' },
+  { key: 'pia_risk',      path: 'pia' },
+  { key: 'csc_controls',  path: 'csc' },
+  { key: 'rm_risk',       path: 'risk-management' },
 ];
 
 const STATUS_COLS: Array<{ key: string; label: string; cellClass: string }> = [
@@ -149,17 +148,7 @@ function TaskStatusMatrix({
                 className="border-b border-slate-50 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors"
               >
                 <td className="px-3 py-2">
-                  <div className="flex items-center gap-1.5">
-                    <span
-                      className={cn(
-                        'w-2 h-2 rounded-full flex-shrink-0',
-                        row.dotColor
-                      )}
-                    />
-                    <span className="font-medium text-slate-700 dark:text-slate-200">
-                      {row.label}
-                    </span>
-                  </div>
+                  <ModuleBadge propName={row.key} />
                 </td>
                 {STATUS_COLS.map((col) => (
                   <td key={col.key} className="px-2 py-2 text-center">

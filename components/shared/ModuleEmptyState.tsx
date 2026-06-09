@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { Button } from '@/components/shadcn/ui/button'
 
 // Accepts any React icon component (Lucide, Heroicons, etc.) OR a public image path
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -51,9 +52,9 @@ export function ModuleEmptyState({
         {regulatoryContext}
       </span>
       {onCta && ctaLabel && (
-        <button onClick={onCta} className="btn btn-primary btn-sm mb-3">
+        <Button onClick={onCta} size="sm" className="mb-3">
           {ctaLabel}
-        </button>
+        </Button>
       )}
       {docsHref && (
         <a

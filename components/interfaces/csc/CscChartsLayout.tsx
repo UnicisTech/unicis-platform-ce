@@ -8,7 +8,7 @@ type Props = {
 };
 
 const Panel: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="h-full rounded-xl border shadow-sm p-4">{children}</div>
+  <div className="h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4">{children}</div>
 );
 
 const CscChartsLayout: React.FC<Props> = ({ statuses, iso }) => (

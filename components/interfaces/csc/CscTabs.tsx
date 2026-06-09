@@ -73,7 +73,7 @@ const CscTabs = ({
             activeTab === MAPPING_MATRIX_TAB && matrixUnlocked
               ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 shadow-xs'
               : matrixUnlocked
-                ? 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:text-slate-200 bg-transparent border border-transparent'
+                ? 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 bg-transparent border border-transparent'
                 : 'text-slate-400 cursor-not-allowed bg-transparent border border-transparent'
           )}
         >
@@ -99,7 +99,7 @@ const CscTabs = ({
               'px-3 py-[6px] text-[12px] font-medium rounded-md transition-all whitespace-nowrap',
               isActive
                 ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 shadow-xs'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:text-slate-200 bg-transparent border border-transparent'
+                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 bg-transparent border border-transparent'
             )}
           >
             {isoValueToLabel(menu.name as ISO)}

@@ -242,12 +242,12 @@ const StatusesTable = ({
 
   return (
     <>
-      <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
-        <div className="overflow-x-auto mt-2">
+      <div className="flex-1 min-w-0 [&_th]:whitespace-normal! [&_td]:whitespace-normal!">
+        <div className="overflow-x-auto">
           <table className="w-full min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-sm">
             <thead className="bg-slate-50 dark:bg-slate-900">
               <tr>
-                <th scope="col" className="px-6 py-3 text-left w-12">
+                <th scope="col" className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide w-12">
                   <input
                     type="checkbox"
                     checked={selectedIds.size === pageData.length && pageData.length > 0}
@@ -256,22 +256,22 @@ const StatusesTable = ({
                     className="w-4 h-4"
                   />
                 </th>
-                <th scope="col" className="px-6 py-3 text-left">
+                <th scope="col" className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
                   {t('code')}
                 </th>
-                <th scope="col" className="px-6 py-3 text-left">
+                <th scope="col" className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
                   {t('section')}
                 </th>
-                <th scope="col" className="px-6 py-3 text-left">
+                <th scope="col" className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
                   {t('control')}
                 </th>
-                <th scope="col" className="px-6 py-3 text-left">
+                <th scope="col" className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
                   {t('requirements')}
                 </th>
-                <th scope="col" className="px-6 py-3 text-left">
+                <th scope="col" className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
                   <StatusHeader />
                 </th>
-                <th scope="col" className="px-6 py-3 text-left">
+                <th scope="col" className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
                   {t('tasks')}
                 </th>
               </tr>
@@ -288,7 +288,7 @@ const StatusesTable = ({
                 return (
                   <tr key={control.id}>
                     {/* Selection checkbox */}
-                    <td className="px-6 py-3 w-12">
+                    <td className="px-3 py-2 w-12">
                       <input
                         type="checkbox"
                         checked={selectedIds.has(control.id)}
@@ -298,23 +298,23 @@ const StatusesTable = ({
                       />
                     </td>
                     {/* Clickable control code — opens mapping drawer */}
-                    <td className="px-6 py-3">
+                    <td className="px-3 py-2">
                       <ControlCodeLink
                         code={code}
                         mappingCount={mappingCount}
                         onClick={() => openDrawer(control.id, code, title)}
                       />
                     </td>
-                    <td className="px-6 py-3">
+                    <td className="px-3 py-2">
                       {t(`csc/${ISO}:sections.${control.sectionId}.label`)}
                     </td>
-                    <td className="px-6 py-3">{title}</td>
-                    <td className="px-6 py-3">
+                    <td className="px-3 py-2">{title}</td>
+                    <td className="px-3 py-2">
                       <span className="whitespace-pre-line">
                         {t(`csc/${ISO}:controls.${control.id}.requirements`)}
                       </span>
                     </td>
-                    <td className="px-6 py-3">
+                    <td className="px-3 py-2">
                       {canAccess('task', ['update']) ? (
                         <div className="w-40">
                           <StatusSelector
@@ -336,7 +336,7 @@ const StatusesTable = ({
                         </span>
                       )}
                     </td>
-                    <td className="px-6 py-3 max-w-80">
+                    <td className="px-3 py-2 max-w-80">
                       {canAccess('task', ['update']) ? (
                         <TaskSelector
                           tasks={tasks}

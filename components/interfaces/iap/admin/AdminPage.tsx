@@ -110,28 +110,24 @@ const AdminPage = ({
     <>
       <div className="flex justify-end items-center gap-2 mb-4 flex-wrap">
           {canAccess('iap_category', ['create']) && (
-            <div className="mx-1.5 my-0">
-              <Button
-                color="primary"
-                onClick={() => {
-                  setIsCreateCategoryOpen(true);
-                }}
-              >
-                {t('create-category')}
-              </Button>
-            </div>
+            <Button
+              variant="default"
+              onClick={() => {
+                setIsCreateCategoryOpen(true);
+              }}
+            >
+              {t('create-category')}
+            </Button>
           )}
           {canAccess('iap_course', ['create']) && (
-            <div className="mx-1.5 my-0">
-              <Button
-                color="primary"
-                onClick={() => {
-                  setIsCreateCourseOpen(true);
-                }}
-              >
-                {t('create-course')}
-              </Button>
-            </div>
+            <Button
+              variant="default"
+              onClick={() => {
+                setIsCreateCourseOpen(true);
+              }}
+            >
+              {t('create-course')}
+            </Button>
           )}
       </div>
       <CoursesTable
