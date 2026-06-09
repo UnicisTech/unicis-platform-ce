@@ -9,7 +9,7 @@
     "generate:openapi": "tsx scripts/generate-openapi.ts",
     "start": "next start --port 4002",
     "worker": "tsx workers/worker.ts",
-    "check-types": "tsc --pretty --noEmit",
+    "check-types": "next typegen && tsc --pretty --noEmit",
     "check-format": "prettier --check .",
     "check-lint": "eslint . --ext ts --ext tsx --ext js --quiet",
     "format": "prettier --write .",
