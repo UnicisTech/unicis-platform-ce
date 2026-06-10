@@ -39,9 +39,16 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
     <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
       <div className="flex items-center justify-between mb-3">
         <span className="text-[12px] font-medium text-slate-900 dark:text-slate-100">{t('tia')}</span>
-        <span className="text-[11px] text-slate-500 dark:text-slate-400">
-          {t('tia-assessments', { defaultValue: 'Assessments' })}
-        </span>
+        {notPermitAuthorization > 0 ? (
+          <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-red-100 dark:bg-red-950/40 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800/50 px-2 py-0.5 rounded-full">
+            <AlertCircle size={10} aria-hidden />
+            {notPermitAuthorization} {t('tia-at-risk', { defaultValue: 'at risk' })}
+          </span>
+        ) : totalNumberOfAssessment > 0 ? (
+          <span className="text-[11px] font-medium text-green-600 dark:text-green-400">
+            ✓ {t('tia-all-permitted', { defaultValue: 'All permitted' })}
+          </span>
+        ) : null}
       </div>
 
       <div className="divide-y divide-slate-50">

@@ -11,7 +11,7 @@ import ConfirmationDialog from '../shared/ConfirmationDialog';
 import CreateWebhook from './CreateWebhook';
 import EditWebhook from './EditWebhook';
 import { Button } from '@/components/shadcn/ui/button';
-import { Pencil, Trash2 } from 'lucide-react';
+import { Pencil, Trash2, CheckCircle2, XCircle, Clock } from 'lucide-react';
 import {
   Table,
   TableBody,
@@ -20,6 +20,70 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/shadcn/ui/table';
+
+// ── Last delivery badge ───────────────────────────────────────────────────────
+// MessageStatus: 0=Success, 1=Pending, 2=Fail, 3=Sending
+interface LastAttempt {
+  timestamp: string;
+  status: number;
+  responseStatusCode: number;
+}
+
+function LastDeliveryCell({ lastAttempt }: { lastAttempt?: LastAttempt | null }) {
+  const { t } = useTranslation('common');
+
+  if (!lastAttempt) {
+    return (
+      <span className="text-[11px] text-slate-400 dark:text-slate-500 italic">
+        {t('webhook-no-deliveries', { defaultValue: 'No deliveries yet' })}
+      </span>
+    );
+  }
+
+  const isSuccess = lastAttempt.status === 0;
+  const isPending = lastAttempt.status === 1 || lastAttempt.status === 3;
+  const date = new Date(lastAttempt.timestamp);
+  const dateLabel = date.toLocaleString(undefined, {
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+
+  return (
+    <div className="flex flex-col gap-0.5">
+      <div className="flex items-center gap-1.5">
+        {isSuccess ? (
+          <CheckCircle2 size={12} className="text-green-500 flex-shrink-0" aria-hidden />
+        ) : isPending ? (
+          <Clock size={12} className="text-amber-500 flex-shrink-0" aria-hidden />
+        ) : (
+          <XCircle size={12} className="text-red-500 flex-shrink-0" aria-hidden />
+        )}
+        <span
+          className={`text-[11px] font-medium ${
+            isSuccess
+              ? 'text-green-700 dark:text-green-400'
+              : isPending
+              ? 'text-amber-700 dark:text-amber-400'
+              : 'text-red-700 dark:text-red-400'
+          }`}
+        >
+          {isSuccess
+            ? t('webhook-delivery-success', { defaultValue: 'Success' })
+            : isPending
+            ? t('webhook-delivery-pending', { defaultValue: 'Pending' })
+            : `${t('webhook-delivery-failed', { defaultValue: 'Failed' })} (${lastAttempt.responseStatusCode})`}
+        </span>
+      </div>
+      <span className="text-[10px] text-slate-400 dark:text-slate-500">{dateLabel}</span>
+    </div>
+  );
+}
+
+// ── Main component ────────────────────────────────────────────────────────────
+
+type WebhookWithAttempt = EndpointOut & { lastAttempt?: LastAttempt | null };
 
 const Webhooks = ({ team }: { team: Team }) => {
   const { t } = useTranslation('common');
@@ -93,18 +157,24 @@ const Webhooks = ({ team }: { team: Team }) => {
                     <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('name')}</TableHead>
                     <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('url')}</TableHead>
                     <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('created-at')}</TableHead>
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                      {t('webhook-last-delivery', { defaultValue: 'Last delivery' })}
+                    </TableHead>
                     <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">{t('actions')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {webhooks?.map((webhook) => (
+                  {(webhooks as WebhookWithAttempt[])?.map((webhook) => (
                     <TableRow key={webhook.id} className="border-slate-100 dark:border-slate-700">
                       <TableCell className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100">{webhook.description}</TableCell>
-                      <TableCell className="px-4 py-3 font-mono text-xs text-slate-600 dark:text-slate-300 break-all max-w-[260px]">
+                      <TableCell className="px-4 py-3 font-mono text-xs text-slate-600 dark:text-slate-300 break-all max-w-[200px]">
                         {webhook.url}
                       </TableCell>
-                      <TableCell className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">
-                        {new Date(webhook.createdAt).toLocaleString()}
+                      <TableCell className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300 whitespace-nowrap">
+                        {new Date(webhook.createdAt).toLocaleDateString()}
+                      </TableCell>
+                      <TableCell className="px-4 py-3">
+                        <LastDeliveryCell lastAttempt={webhook.lastAttempt} />
                       </TableCell>
                       <TableCell className="px-4 py-3 text-right">
                         <div className="flex justify-end gap-2">

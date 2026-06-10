@@ -4,6 +4,7 @@ import {
   createWebhook,
   deleteWebhook,
   findOrCreateApp,
+  getLastWebhookAttempt,
   listWebhooks,
 } from '@/lib/svix';
 import { throwIfNoTeamAccess } from 'models/team';
@@ -100,10 +101,19 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const webhooks = await listWebhooks(app.id);
+  const endpoints = webhooks?.data || [];
+
+  // Enrich each endpoint with its most recent delivery attempt
+  const enriched = await Promise.all(
+    endpoints.map(async (ep) => {
+      const lastAttempt = await getLastWebhookAttempt(app.id, ep.id);
+      return { ...ep, lastAttempt: lastAttempt ?? null };
+    })
+  );
 
   recordMetric('webhook.fetched');
 
-  res.status(200).json({ data: webhooks?.data || [] });
+  res.status(200).json({ data: enriched });
 };
 
 // Delete a webhook

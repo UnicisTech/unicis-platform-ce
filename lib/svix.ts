@@ -57,6 +57,30 @@ export const deleteWebhook = async (appId: string, endpointId: string) => {
   return await svix.endpoint.delete(appId, endpointId);
 };
 
+export const getLastWebhookAttempt = async (
+  appId: string,
+  endpointId: string
+): Promise<{ timestamp: Date; status: number; responseStatusCode: number } | null> => {
+  if (!env.svix.apiKey) {
+    return null;
+  }
+
+  try {
+    const result = await svix.messageAttempt.listByEndpoint(appId, endpointId, {
+      limit: 1,
+    });
+    const attempt = result?.data?.[0];
+    if (!attempt) return null;
+    return {
+      timestamp: attempt.timestamp,
+      status: attempt.status as unknown as number,
+      responseStatusCode: attempt.responseStatusCode,
+    };
+  } catch {
+    return null;
+  }
+};
+
 export const sendEvent = async (
   appId: string,
   eventType: AppEvent,

@@ -221,13 +221,14 @@ function CscKpiCards({ slug, team }: { slug: string; team: Team }) {
 // ── IAP completion card ────────────────────────────────────────────────────────
 function IapKpiCard({ slug }: { slug: string }) {
   const { t } = useTranslation('common');
+  const router = useRouter();
   const { teamCourses } = useIap(false, slug);
   const { members } = useTeamMembers(slug);
 
-  const { pct, completedCount, totalMembers } = useMemo(() => {
-    if (!members) return { pct: null, completedCount: null, totalMembers: null };
+  const { pct, completedCount, nonCompliantCount, totalMembers } = useMemo(() => {
+    if (!members) return { pct: null, completedCount: null, nonCompliantCount: null, totalMembers: null };
     const total = members.length;
-    if (total === 0) return { pct: 100, completedCount: 0, totalMembers: 0 };
+    if (total === 0) return { pct: 100, completedCount: 0, nonCompliantCount: 0, totalMembers: 0 };
     const completedSet = new Set<string>();
     for (const tc of teamCourses ?? []) {
       for (const prog of tc.progress ?? []) {
@@ -237,24 +238,32 @@ function IapKpiCard({ slug }: { slug: string }) {
     return {
       pct: Math.round((completedSet.size / total) * 100),
       completedCount: completedSet.size,
+      nonCompliantCount: total - completedSet.size,
       totalMembers: total,
     };
   }, [teamCourses, members]);
 
   const variant: KpiCardProps['variant'] =
-    pct === null ? 'default' : pct >= 75 ? 'green' : pct < 50 ? 'amber' : 'default';
+    pct === null   ? 'default'
+    : nonCompliantCount && nonCompliantCount > 0
+      ? pct < 50   ? 'red'
+      : 'amber'
+    : 'green';
 
   return (
     <KpiCard
       label={t('dashboard.kpi.iap-completion')}
       value={pct !== null ? `${pct}%` : '—'}
       sub={
-        pct !== null && totalMembers !== null
-          ? `${completedCount}/${totalMembers} ${t('dashboard.kpi.members')}`
+        pct !== null && totalMembers !== null && nonCompliantCount !== null
+          ? nonCompliantCount > 0
+            ? `${nonCompliantCount} ${t('dashboard.kpi.yet-to-complete', { defaultValue: 'yet to complete' })}`
+            : `${completedCount}/${totalMembers} ${t('dashboard.kpi.members')}`
           : undefined
       }
       icon={<BookOpen size={12} />}
       variant={variant}
+      onClick={() => router.push(`/teams/${slug}/iap/admin`)}
     />
   );
 }

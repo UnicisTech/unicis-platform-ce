@@ -8,6 +8,7 @@ import {
 import RmAnalysis from '@/components/interfaces/TeamDashboard/RmAnalysis';
 import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/TeamProcessingActivities';
 import KpiRow from '@/components/interfaces/TeamDashboard/KpiRow';
+import DomainHealthRow from '@/components/interfaces/TeamDashboard/DomainHealthRow';
 import ActionRequiredBanner from '@/components/interfaces/TeamDashboard/ActionRequiredBanner';
 import { Error, Loading } from '@/components/shared';
 import ModuleBadge from '@/components/shared/ModuleBadge';
@@ -235,7 +236,7 @@ function NeedsAttentionPanel({
                 <button
                   key={task.id}
                   aria-label={`${task.title}, ${t('dashboard.overdue-tasks')} ${dueLabel}`}
-                  onClick={() => router.push(`/teams/${slug}/tasks`)}
+                  onClick={() => router.push(`/teams/${slug}/tasks/${task.taskNumber}`)}
                   className="w-full text-left px-3 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
                 >
                   <div className="flex items-start justify-between gap-2">
@@ -344,6 +345,15 @@ const TeamDashboard = ({
         <TaskStatusMatrix tasks={tasks || []} slug={slug} />
         <NeedsAttentionPanel tasks={tasks || []} slug={slug} />
       </div>
+
+      {/* Domain health row — 3 clickable cards that switch tabs */}
+      <DomainHealthRow
+        tasks={tasks || []}
+        slug={slug}
+        team={team}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+      />
 
       {/* Tab bar — Direction B segmented pill control */}
       <div
