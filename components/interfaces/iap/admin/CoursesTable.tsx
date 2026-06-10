@@ -74,8 +74,9 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
                         size="icon"
                         onClick={() => editHandler(teamCourse)}
                         disabled={teamCourse.progress.length > 0}
+                        aria-label={`${t('edit')} ${teamCourse.course.name}`}
                       >
-                        <Edit2 className="h-4 w-4" />
+                        <Edit2 className="h-4 w-4" aria-hidden="true" />
                       </Button>
                     )}
                     {canAccess('iap_course', ['delete']) && (
@@ -83,23 +84,26 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
                         variant="destructive"
                         size="icon"
                         onClick={() => deleteHandler(teamCourse)}
+                        aria-label={`${t('delete')} ${teamCourse.course.name}`}
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-4 w-4" aria-hidden="true" />
                       </Button>
                     )}
                     <Button
                       variant="outline"
                       size="icon"
                       onClick={() => completionHandler(teamCourse)}
+                      aria-label={`${t('completion-results')} – ${teamCourse.course.name}`}
                     >
-                      <BarChart2 className="h-4 w-4" />
+                      <BarChart2 className="h-4 w-4" aria-hidden="true" />
                     </Button>
                     <Button
                       variant="outline"
                       size="icon"
                       onClick={() => statusHandler(teamCourse)}
+                      aria-label={`${t('status-results')} – ${teamCourse.course.name}`}
                     >
-                      <TableIcon className="h-4 w-4" />
+                      <TableIcon className="h-4 w-4" aria-hidden="true" />
                     </Button>
                   </div>
                 </TableCell>

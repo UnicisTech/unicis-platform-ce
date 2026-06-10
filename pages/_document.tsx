@@ -6,7 +6,7 @@ import { getUserBySession } from 'models/user';
 class MyDocument extends Document {
   render() {
     return (
-      <Html data-theme="unicis">
+      <Html lang={(this.props as any).locale ?? 'en'} data-theme="unicis">
         <Head>
           {/* Your other head elements */}
           <script

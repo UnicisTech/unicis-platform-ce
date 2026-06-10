@@ -31,28 +31,29 @@ const ControlBlockViewOnly = ({
   return (
     <div className="space-y-4">
       <div>
-        <Label>{t('select-a-control')}</Label>
-        <Input value={controlLabel} readOnly />
+        <Label htmlFor="cbvo-control">{t('select-a-control')}</Label>
+        <Input id="cbvo-control" value={controlLabel} readOnly />
       </div>
 
       <div>
-        <Label>{t('code')}</Label>
-        <Input value={codeLabel} readOnly />
+        <Label htmlFor="cbvo-code">{t('code')}</Label>
+        <Input id="cbvo-code" value={codeLabel} readOnly />
       </div>
 
       <div>
-        <Label>{t('section')}</Label>
-        <Input value={sectionLabel} readOnly />
+        <Label htmlFor="cbvo-section">{t('section')}</Label>
+        <Input id="cbvo-section" value={sectionLabel} readOnly />
       </div>
 
       <div>
-        <Label>{t('status')}</Label>
-        <Input value={statusLabel} readOnly />
+        <Label htmlFor="cbvo-status">{t('status')}</Label>
+        <Input id="cbvo-status" value={statusLabel} readOnly />
       </div>
 
       <div>
-        <Label>{t('requirements')}</Label>
+        <Label htmlFor="cbvo-requirements">{t('requirements')}</Label>
         <Textarea
+          id="cbvo-requirements"
           value={requirementsLabel}
           readOnly
           className="resize-y max-h-[20vh]"

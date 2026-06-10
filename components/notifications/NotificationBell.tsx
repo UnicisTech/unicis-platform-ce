@@ -22,10 +22,18 @@ const NotificationBell = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="relative">
-          <BellIcon className="h-5 w-5" />
+        <Button
+          variant="ghost"
+          size="icon"
+          className="relative"
+          aria-label={unreadCount > 0 ? t('notifications.title-unread', { count: unreadCount, defaultValue: `Notifications (${unreadCount} unread)` }) : t('notifications.title')}
+        >
+          <BellIcon className="h-5 w-5" aria-hidden="true" />
           {unreadCount > 0 && (
-            <span className="absolute -right-1 -top-1 rounded-full bg-blue-600 px-1.5 py-0.5 text-[10px] font-semibold text-white">
+            <span
+              className="absolute -right-1 -top-1 rounded-full bg-blue-600 px-1.5 py-0.5 text-[10px] font-semibold text-white"
+              aria-hidden="true"
+            >
               {badgeLabel}
             </span>
           )}

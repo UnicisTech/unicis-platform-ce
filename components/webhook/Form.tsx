@@ -104,8 +104,10 @@ const Form = ({
                 </p>
               )}
             </div>
-            <div>
-              <Label>{t('events-to-send')}</Label>
+            <fieldset>
+              <legend className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-1">
+                {t('events-to-send')}
+              </legend>
               <p className="text-sm text-muted-foreground mb-2">
                 {t('events-description')}
               </p>
@@ -114,7 +116,7 @@ const Form = ({
                 values={formik.values.eventTypes}
                 error={formik.errors.eventTypes}
               />
-            </div>
+            </fieldset>
           </div>
 
           <DialogFooter className="flex flex-row justify-between sm:justify-end gap-2">
