@@ -196,7 +196,7 @@ const Tasks = ({ team }: { team: Team }) => {
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
       <div className="space-y-3">
-        <div className="flex flex-col lg:flex-row justify-between items-end items-center">
+        <div className="flex flex-col gap-2 lg:flex-row lg:justify-between lg:items-center">
           <TaskFilters
             selectedStatuses={selectedStatuses}
             setSelectedStatuses={setSelectedStatuses}
@@ -205,7 +205,7 @@ const Tasks = ({ team }: { team: Team }) => {
             selectedModules={selectedModules}
             setSelectedModules={setSelectedModules}
           />
-          <div className="flex justify-end items-center gap-2 my-1 flex-wrap">
+          <div className="flex items-center gap-2 flex-wrap">
             {activeView === 'list' && tasks && tasks.length > 0 && (
               <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
             )}

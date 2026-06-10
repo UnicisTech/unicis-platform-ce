@@ -194,12 +194,14 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
             defaultValue: 'Impact → / Likelihood ↑',
           })}
         </div>
-        <div className="flex items-center justify-center">
-          <DashboardMatrixChart
-            datasets={[]}
-            counterMap={riskMap}
-            onCellClick={onCellClick}
-          />
+        <div className="overflow-x-auto">
+          <div className="flex items-center justify-center">
+            <DashboardMatrixChart
+              datasets={[]}
+              counterMap={riskMap}
+              onCellClick={onCellClick}
+            />
+          </div>
         </div>
       </div>
     </div>

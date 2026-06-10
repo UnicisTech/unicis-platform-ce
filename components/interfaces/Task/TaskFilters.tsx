@@ -46,8 +46,8 @@ const TaskFilters = ({
   }));
 
   return (
-    <div className="flex flex-wrap gap-4 my-2">
-      <div>
+    <div className="flex flex-wrap gap-2">
+      <div className="flex-1 min-w-[150px]">
         <MultiSelect
           options={statusOptions}
           defaultValue={selectedStatuses}
@@ -57,7 +57,7 @@ const TaskFilters = ({
         />
       </div>
 
-      <div>
+      <div className="flex-1 min-w-[150px]">
         <MultiSelect
           options={priorityOptions}
           defaultValue={selectedPriorities}
@@ -67,7 +67,7 @@ const TaskFilters = ({
         />
       </div>
 
-      <div>
+      <div className="flex-1 min-w-[150px]">
         <MultiSelect
           options={moduleOptions}
           defaultValue={selectedModules}
