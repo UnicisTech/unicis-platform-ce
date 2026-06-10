@@ -1312,6 +1312,7 @@
   "enter-pack-name": "Enter pack name",
   "creating": "Creating...",
   "success": "Success",
+  "success-message": "Operação concluída com sucesso",
   "error": "Error",
   "edit-pack": "Edit Pack",
   "enter-name": "Enter name",
