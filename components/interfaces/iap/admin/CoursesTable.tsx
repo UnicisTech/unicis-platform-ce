@@ -42,11 +42,11 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
     <div className="overflow-x-auto">
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead className="w-1/5">{t('name')}</TableHead>
-            <TableHead className="w-2/5">{t('category')}</TableHead>
-            <TableHead className="w-[15%]">{t('status')}</TableHead>
-            <TableHead className="w-1/4">{t('actions')}</TableHead>
+          <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-900">
+            <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 w-1/5">{t('name')}</TableHead>
+            <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 w-2/5">{t('category')}</TableHead>
+            <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 w-[15%]">{t('status')}</TableHead>
+            <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 w-1/4">{t('actions')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -57,16 +57,16 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
                 ?.name || '-';
 
             return (
-              <TableRow key={`${teamCourse.course.name}-${idx}`}>
-                <TableCell>{teamCourse.course.name}</TableCell>
-                <TableCell>{categoryName}</TableCell>
-                <TableCell>
+              <TableRow key={`${teamCourse.course.name}-${idx}`} className="border-slate-100 dark:border-slate-700">
+                <TableCell className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100">{teamCourse.course.name}</TableCell>
+                <TableCell className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">{categoryName}</TableCell>
+                <TableCell className="px-4 py-3">
                   <StatusBadge
                     value={status}
                     label={t(`task-statuses.${status}`)}
                   />
                 </TableCell>
-                <TableCell>
+                <TableCell className="px-4 py-3">
                   <div className="flex items-center gap-2 flex-wrap">
                     {canAccess('iap_course', ['create']) && (
                       <Button

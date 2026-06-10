@@ -127,7 +127,7 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
         {heading ? heading : team.name}
       </h2>
       <nav
-        className="flex space-x-5 border-b border-gray-300 overflow-x-auto no-scrollbar"
+        className="flex space-x-5 border-b border-slate-200 dark:border-slate-700 overflow-x-auto no-scrollbar"
         aria-label="Tabs"
       >
         {navigations.map((menu) => (
@@ -137,8 +137,8 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
             className={classNames(
               'inline-flex items-center border-b-2 py-4 text-sm font-medium whitespace-nowrap',
               menu.active
-                ? 'border-gray-900 text-gray-700 dark:text-gray-100'
-                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:hover:text-gray-100'
+                ? 'border-slate-900 dark:border-slate-200 text-slate-900 dark:text-slate-100'
+                : 'border-transparent text-slate-500 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-600 hover:text-slate-700 dark:hover:text-slate-200'
             )}
           >
             {menu.name}

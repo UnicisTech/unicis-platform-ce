@@ -70,64 +70,70 @@ const PendingInvitations = ({ team }: { team: Team }) => {
   };
 
   return (
-    <div className="space-y-3">
-      <div className="space-y-3">
-        <h2 className="text-xl font-medium leading-none tracking-tight">
-          {t('pending-invitations')}
-        </h2>
-        <p className="text-sm text-slate-500 dark:text-slate-400">
-          {t('description-invitations')}
-        </p>
-      </div>
+    <>
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+        {/* Direction B panel header */}
+        <div className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+          <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
+            {t('pending-invitations')}
+          </span>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            {t('description-invitations')}
+          </p>
+        </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>{t('email')}</TableHead>
-            <TableHead>{t('role')}</TableHead>
-            <TableHead>{t('expires-at')}</TableHead>
-            <TableHead className="text-right">{t('action')}</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {invitations.map((invitation) => (
-            <TableRow key={invitation.token}>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <LetterAvatar name={invitation.email} />
-                  <span>{invitation.email}</span>
-                </div>
-              </TableCell>
-              <TableCell>{invitation.role}</TableCell>
-              <TableCell>
-                {new Date(invitation.expires).toLocaleDateString()}
-              </TableCell>
-              <TableCell className="text-right">
-                <div className="inline-flex gap-2 justify-end">
-                  <Button
-                    variant="outline"
-                    aria-label="Copy"
-                    onClick={() => {
-                      copyInviteLink(invitation);
-                    }}
-                  >
-                    {t('copy-to-clipboard')}
-                  </Button>
-                  <Button
-                    variant="destructive"
-                    onClick={() => {
-                      setSelectedInvitation(invitation);
-                      setConfirmationDialogVisible(true);
-                    }}
-                  >
-                    {t('remove')}
-                  </Button>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+        {/* Table */}
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-900">
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('email')}</TableHead>
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('role')}</TableHead>
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('expires-at')}</TableHead>
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">{t('action')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {invitations.map((invitation) => (
+                <TableRow key={invitation.token} className="border-slate-100 dark:border-slate-700">
+                  <TableCell className="px-4 py-3">
+                    <div className="flex items-center gap-2">
+                      <LetterAvatar name={invitation.email} />
+                      <span className="text-sm text-slate-900 dark:text-slate-100">{invitation.email}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">{invitation.role}</TableCell>
+                  <TableCell className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">
+                    {new Date(invitation.expires).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-right">
+                    <div className="inline-flex gap-2 justify-end">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        aria-label="Copy"
+                        onClick={() => copyInviteLink(invitation)}
+                      >
+                        {t('copy-to-clipboard')}
+                      </Button>
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => {
+                          setSelectedInvitation(invitation);
+                          setConfirmationDialogVisible(true);
+                        }}
+                      >
+                        {t('remove')}
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
 
       <ConfirmationDialog
         visible={confirmationDialogVisible}
@@ -137,7 +143,7 @@ const PendingInvitations = ({ team }: { team: Team }) => {
       >
         {t('delete-member-invitation-warning')}
       </ConfirmationDialog>
-    </div>
+    </>
   );
 };
 

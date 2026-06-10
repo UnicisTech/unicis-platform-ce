@@ -62,83 +62,89 @@ const APIKeys = ({ team }: APIKeysProps) => {
 
   return (
     <WithLoadingAndError isLoading={isLoading} error={error}>
-      <div className="space-y-3">
-        <div className="flex justify-between items-center">
-          <div className="space-y-3">
-            <h2 className="text-xl font-medium leading-none tracking-tight">
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+        {/* Direction B panel header */}
+        <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+          <div>
+            <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
               {t('api-keys')}
-            </h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
+            </span>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               {t('api-keys-description')}
             </p>
           </div>
-          <Button onClick={() => setCreateModalVisible(true)}>
+          <Button size="sm" onClick={() => setCreateModalVisible(true)}>
             {t('create-api-key')}
           </Button>
         </div>
 
-        {apiKeys.length === 0 ? (
-          <EmptyState
-            title={t('no-api-key-title')}
-            description={t('no-api-key-description')}
-          />
-        ) : (
-          <>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{t('name')}</TableHead>
-                  <TableHead>{t('status')}</TableHead>
-                  <TableHead>{t('created')}</TableHead>
-                  <TableHead className="text-right">{t('actions')}</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {apiKeys.map((apiKey) => (
-                  <TableRow key={apiKey.id}>
-                    <TableCell>{apiKey.name}</TableCell>
-                    <TableCell>
-                      <Badge variant="default">{t('active')}</Badge>
-                    </TableCell>
-                    <TableCell>
-                      {new Date(apiKey.createdAt).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <Button
-                        size="sm"
-                        variant="destructive"
-                        onClick={() => {
-                          setSelectedApiKey(apiKey);
-                          setConfirmationDialogVisible(true);
-                        }}
-                      >
-                        {t('revoke')}
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+        {/* Content */}
+        <div className="p-4">
+          {apiKeys.length === 0 ? (
+            <EmptyState
+              title={t('no-api-key-title')}
+              description={t('no-api-key-description')}
+            />
+          ) : (
+            <>
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-900">
+                      <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('name')}</TableHead>
+                      <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('status')}</TableHead>
+                      <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('created')}</TableHead>
+                      <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">{t('actions')}</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {apiKeys.map((apiKey) => (
+                      <TableRow key={apiKey.id} className="border-slate-100 dark:border-slate-700">
+                        <TableCell className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100">{apiKey.name}</TableCell>
+                        <TableCell className="px-4 py-3">
+                          <Badge variant="default">{t('active')}</Badge>
+                        </TableCell>
+                        <TableCell className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">
+                          {new Date(apiKey.createdAt).toLocaleDateString()}
+                        </TableCell>
+                        <TableCell className="px-4 py-3 text-right">
+                          <Button
+                            size="sm"
+                            variant="destructive"
+                            onClick={() => {
+                              setSelectedApiKey(apiKey);
+                              setConfirmationDialogVisible(true);
+                            }}
+                          >
+                            {t('revoke')}
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
 
-            <ConfirmationDialog
-              title={t('revoke-api-key')}
-              visible={confirmationDialogVisible}
-              onConfirm={() => deleteApiKey(selectedApiKey)}
-              onCancel={() => setConfirmationDialogVisible(false)}
-              cancelText={t('cancel')}
-              confirmText={t('revoke-api-key')}
-            >
-              {t('revoke-api-key-confirm')}
-            </ConfirmationDialog>
-          </>
-        )}
-
-        <NewAPIKey
-          team={team}
-          createModalVisible={createModalVisible}
-          setCreateModalVisible={setCreateModalVisible}
-        />
+              <ConfirmationDialog
+                title={t('revoke-api-key')}
+                visible={confirmationDialogVisible}
+                onConfirm={() => deleteApiKey(selectedApiKey)}
+                onCancel={() => setConfirmationDialogVisible(false)}
+                cancelText={t('cancel')}
+                confirmText={t('revoke-api-key')}
+              >
+                {t('revoke-api-key-confirm')}
+              </ConfirmationDialog>
+            </>
+          )}
+        </div>
       </div>
+
+      <NewAPIKey
+        team={team}
+        createModalVisible={createModalVisible}
+        setCreateModalVisible={setCreateModalVisible}
+      />
     </WithLoadingAndError>
   );
 };

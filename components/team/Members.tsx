@@ -68,64 +68,73 @@ const Members = ({ team }: { team: Team }) => {
     session?.user.id !== member.userId && canAccess('team_member', ['delete']);
 
   return (
-    <div className="space-y-3">
-      <div className="flex justify-between items-center">
-        <div className="space-y-3">
-          <h2 className="text-xl font-medium leading-none tracking-tight">
-            {t('members')}
-          </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            {t('members-description')}
-          </p>
+    <>
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+        {/* Direction B panel header */}
+        <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+          <div>
+            <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
+              {t('members')}
+            </span>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              {t('members-description')}
+            </p>
+          </div>
+          <Button size="sm" onClick={() => setVisible(!visible)}>
+            {t('add-member')}
+          </Button>
         </div>
-        <Button onClick={() => setVisible(!visible)}>{t('add-member')}</Button>
-      </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>{t('name')}</TableHead>
-            <TableHead>{t('email')}</TableHead>
-            <TableHead>{t('role')}</TableHead>
-            {canAccess('team_member', ['delete']) && (
-              <TableHead className="text-right">{t('actions')}</TableHead>
-            )}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {members.map((member) => (
-            <TableRow key={member.id}>
-              <TableCell>
-                <div className="flex items-center space-x-2">
-                  <LetterAvatar name={member.user.name} />
-                  <span>{member.user.name}</span>
-                </div>
-              </TableCell>
-              <TableCell>{member.user.email}</TableCell>
-              <TableCell>
-                {canUpdateRole(member) ? (
-                  <UpdateMemberRole team={team} member={member} />
-                ) : (
-                  <span>{member.role}</span>
+        {/* Table */}
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-900">
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('name')}</TableHead>
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('email')}</TableHead>
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('role')}</TableHead>
+                {canAccess('team_member', ['delete']) && (
+                  <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">{t('actions')}</TableHead>
                 )}
-              </TableCell>
-              {canRemoveMember(member) && (
-                <TableCell className="text-right">
-                  <Button
-                    variant="destructive"
-                    onClick={() => {
-                      setSelectedMember(member);
-                      setConfirmationDialogVisible(true);
-                    }}
-                  >
-                    {t('remove')}
-                  </Button>
-                </TableCell>
-              )}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {members.map((member) => (
+                <TableRow key={member.id} className="border-slate-100 dark:border-slate-700">
+                  <TableCell className="px-4 py-3">
+                    <div className="flex items-center space-x-2">
+                      <LetterAvatar name={member.user.name} />
+                      <span className="text-sm font-medium text-slate-900 dark:text-slate-100">{member.user.name}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">{member.user.email}</TableCell>
+                  <TableCell className="px-4 py-3">
+                    {canUpdateRole(member) ? (
+                      <UpdateMemberRole team={team} member={member} />
+                    ) : (
+                      <span className="text-sm text-slate-600 dark:text-slate-300">{member.role}</span>
+                    )}
+                  </TableCell>
+                  {canRemoveMember(member) && (
+                    <TableCell className="px-4 py-3 text-right">
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => {
+                          setSelectedMember(member);
+                          setConfirmationDialogVisible(true);
+                        }}
+                      >
+                        {t('remove')}
+                      </Button>
+                    </TableCell>
+                  )}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
 
       <ConfirmationDialog
         visible={confirmationDialogVisible}
@@ -137,7 +146,7 @@ const Members = ({ team }: { team: Team }) => {
       </ConfirmationDialog>
 
       <InviteMember visible={visible} setVisible={setVisible} team={team} />
-    </div>
+    </>
   );
 };
 

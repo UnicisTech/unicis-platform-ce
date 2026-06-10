@@ -381,135 +381,144 @@ export default function SSOConnections({
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <div className="space-y-2">
-          <h2 className="text-xl font-medium leading-none tracking-tight">
-            {t('sso.manage-title')}
-          </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            {t('sso.manage-description')}
-          </p>
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+        {/* Direction B panel header */}
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+          <div>
+            <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
+              {t('sso.manage-title')}
+            </span>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              {t('sso.manage-description')}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Button asChild variant="outline" size="sm">
+              <a href={spMetadataUrl} target="_blank" rel="noreferrer">
+                <ExternalLink className="h-4 w-4" />
+                {t('sso.access-sp-metadata')}
+              </a>
+            </Button>
+            <Button
+              size="sm"
+              onClick={() =>
+                setConnectionDialog({ mode: 'create', kind: 'saml' })
+              }
+            >
+              <Plus className="h-4 w-4" />
+              {t('sso.new-connection')}
+            </Button>
+          </div>
         </div>
-        <div className="flex flex-col gap-2 sm:flex-row">
-          <Button asChild variant="outline">
-            <a href={spMetadataUrl} target="_blank" rel="noreferrer">
-              <ExternalLink className="h-4 w-4" />
-              {t('sso.access-sp-metadata')}
-            </a>
-          </Button>
-          <Button
-            onClick={() =>
-              setConnectionDialog({ mode: 'create', kind: 'saml' })
-            }
-          >
-            <Plus className="h-4 w-4" />
-            {t('sso.new-connection')}
-          </Button>
+
+        {/* Content */}
+        <div className="p-4">
+          {isLoading ? (
+            <Loading />
+          ) : error ? (
+            <p className="rounded-md border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive">
+              {error.message}
+            </p>
+          ) : sortedConnections.length === 0 ? (
+            <EmptyState
+              title={t('sso.no-connections-title')}
+              description={t('sso.no-connections-description')}
+            />
+          ) : (
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-900">
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('sso.provider')}</TableHead>
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('sso.type')}</TableHead>
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('status')}</TableHead>
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">{t('actions')}</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {sortedConnections.map((connection) => (
+                    <TableRow key={connection.clientID} className="border-slate-100 dark:border-slate-700">
+                      <TableCell className="px-4 py-3">
+                        <div className="space-y-1">
+                          <div className="text-sm font-medium text-slate-900 dark:text-slate-100">
+                            {providerName(connection, t('sso.unknown-provider'))}
+                          </div>
+                          {(connection.name || connection.label) && (
+                            <div className="text-xs text-slate-500 dark:text-slate-400">
+                              {connection.name || connection.label}
+                            </div>
+                          )}
+                        </div>
+                      </TableCell>
+                      <TableCell className="px-4 py-3">
+                        <Badge variant="outline">
+                          {connectionType(connection) === 'saml'
+                            ? t('sso.saml')
+                            : t('sso.oidc')}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="px-4 py-3">
+                        <Badge
+                          variant={connection.deactivated ? 'secondary' : 'default'}
+                        >
+                          {connection.deactivated ? t('inactive') : t('active')}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="px-4 py-3 text-right">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              aria-label={t('actions')}
+                            >
+                              <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem
+                              onSelect={() =>
+                                setConnectionDialog({
+                                  mode: 'edit',
+                                  kind: connectionType(connection),
+                                  connection,
+                                })
+                              }
+                            >
+                              <Pencil className="h-4 w-4" />
+                              {t('edit')}
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onSelect={() => setMetadataConnection(connection)}
+                            >
+                              <Eye className="h-4 w-4" />
+                              {t('sso.view-metadata')}
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onSelect={() => setStatusConnection(connection)}
+                            >
+                              <Power className="h-4 w-4" />
+                              {connection.deactivated ? t('enable') : t('disable')}
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem
+                              variant="destructive"
+                              onSelect={() => setDeleteConnection(connection)}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                              {t('delete')}
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          )}
         </div>
       </div>
-
-      {isLoading ? (
-        <Loading />
-      ) : error ? (
-        <p className="rounded-md border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive">
-          {error.message}
-        </p>
-      ) : sortedConnections.length === 0 ? (
-        <EmptyState
-          title={t('sso.no-connections-title')}
-          description={t('sso.no-connections-description')}
-        />
-      ) : (
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>{t('sso.provider')}</TableHead>
-              <TableHead>{t('sso.type')}</TableHead>
-              <TableHead>{t('status')}</TableHead>
-              <TableHead className="text-right">{t('actions')}</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {sortedConnections.map((connection) => (
-              <TableRow key={connection.clientID}>
-                <TableCell>
-                  <div className="space-y-1">
-                    <div className="font-medium text-slate-900 dark:text-slate-100">
-                      {providerName(connection, t('sso.unknown-provider'))}
-                    </div>
-                    {(connection.name || connection.label) && (
-                      <div className="text-xs text-slate-500 dark:text-slate-400">
-                        {connection.name || connection.label}
-                      </div>
-                    )}
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <Badge variant="outline">
-                    {connectionType(connection) === 'saml'
-                      ? t('sso.saml')
-                      : t('sso.oidc')}
-                  </Badge>
-                </TableCell>
-                <TableCell>
-                  <Badge
-                    variant={connection.deactivated ? 'secondary' : 'default'}
-                  >
-                    {connection.deactivated ? t('inactive') : t('active')}
-                  </Badge>
-                </TableCell>
-                <TableCell className="text-right">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        aria-label={t('actions')}
-                      >
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem
-                        onSelect={() =>
-                          setConnectionDialog({
-                            mode: 'edit',
-                            kind: connectionType(connection),
-                            connection,
-                          })
-                        }
-                      >
-                        <Pencil className="h-4 w-4" />
-                        {t('edit')}
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onSelect={() => setMetadataConnection(connection)}
-                      >
-                        <Eye className="h-4 w-4" />
-                        {t('sso.view-metadata')}
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onSelect={() => setStatusConnection(connection)}
-                      >
-                        <Power className="h-4 w-4" />
-                        {connection.deactivated ? t('enable') : t('disable')}
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem
-                        variant="destructive"
-                        onSelect={() => setDeleteConnection(connection)}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                        {t('delete')}
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      )}
 
       {connectionDialog && (
         <ConnectionDialog
