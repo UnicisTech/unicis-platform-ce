@@ -99,8 +99,12 @@ const Pricing: React.FC<PricingProps> = ({ team, plans, onPlanSelect }) => {
         {plans.map((plan) => {
           const isCurrent = currentPlan === plan.id;
           const isRecommended = !!plan.recommended;
-          const displayPrice = formatMonthlyPrice(plan.basePrice, billingPeriod);
-          const showAnnualNote = plan.basePrice > 0 && billingPeriod === 'annual';
+          const displayPrice = formatMonthlyPrice(
+            plan.basePrice,
+            billingPeriod
+          );
+          const showAnnualNote =
+            plan.basePrice > 0 && billingPeriod === 'annual';
 
           return (
             <div
@@ -145,7 +149,8 @@ const Pricing: React.FC<PricingProps> = ({ team, plans, onPlanSelect }) => {
                 </div>
                 {showAnnualNote && (
                   <p className="mt-0.5 text-xs font-medium text-ub-green-text">
-                    {formatAnnualTotal(plan.basePrice)} {t('billing.billed-annually')}
+                    {formatAnnualTotal(plan.basePrice)}{' '}
+                    {t('billing.billed-annually')}
                   </p>
                 )}
                 <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">

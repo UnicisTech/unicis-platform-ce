@@ -38,7 +38,11 @@ const getPricePerUser = (plan: Plan, isAnnual: boolean): number => {
   return isAnnual ? Math.round(base * 80) / 100 : base;
 };
 
-const getTotalPrice = (plan: Plan, members: number, isAnnual: boolean): number => {
+const getTotalPrice = (
+  plan: Plan,
+  members: number,
+  isAnnual: boolean
+): number => {
   const perUser = getPricePerUser(plan, isAnnual);
   return isAnnual ? perUser * 12 * members : perUser * members;
 };
@@ -93,20 +97,17 @@ export default function WisePaymentCard({ team }: WisePaymentCardProps) {
             <p className="text-sm">
               <b className="font-semibold">{t('price-per-user')}: </b>
               <span>
-                {formatEUR(pricePerUser)}/mo
+                {`${formatEUR(pricePerUser)}/mo`}
                 {isAnnual && (
                   <span className="ml-1 text-xs text-ub-green-text font-medium">
-                    ({t('billing.save-20')})
+                    {`(${t('billing.save-20')})`}
                   </span>
                 )}
               </span>
             </p>
             <p className="text-sm">
               <b className="font-semibold">{t('total')}: </b>
-              <span>
-                {formatEUR(totalPrice)}
-                {isAnnual ? '/yr' : '/mo'}
-              </span>
+              <span>{`${formatEUR(totalPrice)}${isAnnual ? '/yr' : '/mo'}`}</span>
             </p>
             <p className="text-sm">
               <b className="font-semibold">{t('invoice-date')}: </b>

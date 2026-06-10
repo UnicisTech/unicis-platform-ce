@@ -66,7 +66,11 @@ const DetailsModal: React.FC<DetailsModalProps> = ({
       const res = await fetch(`/api/teams/${team.slug}/billing`, {
         method: 'POST',
         headers: defaultHeaders,
-        body: JSON.stringify({ ...values, subscription: selectedSubscription, billingPeriod }),
+        body: JSON.stringify({
+          ...values,
+          subscription: selectedSubscription,
+          billingPeriod,
+        }),
       });
       const json = (await res.json()) as ApiResponse<Invitation>;
       if (!res.ok) {
@@ -89,8 +93,10 @@ const DetailsModal: React.FC<DetailsModalProps> = ({
               {t('request-subscription', {
                 subscription: selectedSubscription,
               })}
-              <span className="rounded-full border px-2 py-0.5 text-xs font-medium
-                border-ub-blue-border bg-ub-blue-bg text-ub-blue-text">
+              <span
+                className="rounded-full border px-2 py-0.5 text-xs font-medium
+                border-ub-blue-border bg-ub-blue-bg text-ub-blue-text"
+              >
                 {t(`billing.${billingPeriod}`)}
               </span>
             </DialogTitle>
