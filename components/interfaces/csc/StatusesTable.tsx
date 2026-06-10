@@ -31,6 +31,7 @@ const StatusesTable = ({
   enabledFrameworks,
   onLinkTask,
   onBulkLinkMapped,
+  onBulkStatusChange,
 }: {
   slug: string;
   ISO: ISO;
@@ -61,6 +62,11 @@ const StatusesTable = ({
     taskNumbers: number[],
     mappedControls: Array<{ controlId: string; framework: ISO }>,
     sourceControlId?: string
+  ) => Promise<void>;
+  /** Bulk-update status for all selected controls in a single coordinated operation */
+  onBulkStatusChange: (
+    newStatus: string,
+    controlIds: string[]
   ) => Promise<void>;
 }) => {
   const { t } = useTranslation('common');
@@ -211,16 +217,15 @@ const StatusesTable = ({
         const controlsToUpdate = Array.from(selectedIds);
         if (controlsToUpdate.length === 0) return;
 
-        for (const controlId of controlsToUpdate) {
-          await statusHandler(controlId, newStatus);
-        }
+        await onBulkStatusChange(newStatus, controlsToUpdate);
 
         toast.success(
-          t('success-message', {
-            defaultValue: `${selectedIds.size} controls updated to "${newStatus}"`,
+          t('csc.bulk-status-updated', {
+            defaultValue: `${selectedIds.size} controls updated to "{{status}}"`,
+            count: selectedIds.size,
+            status: newStatus,
           })
         );
-        // Clear selection and reset workflow
         setSelectedIds(new Set());
         setBulkActionStep('link-tasks');
         setStatusDropdownOpen(false);
@@ -228,7 +233,7 @@ const StatusesTable = ({
         toast.error(t('errors.requestFailed'));
       }
     },
-    [selectedIds, statusHandler, t]
+    [selectedIds, onBulkStatusChange, t]
   );
 
   // Handle bulk task linking for selected controls
@@ -248,8 +253,9 @@ const StatusesTable = ({
         }
 
         toast.success(
-          t('success-message', {
-            defaultValue: `Tasks linked to ${selectedIds.size} controls`,
+          t('csc.bulk-tasks-linked', {
+            defaultValue: 'Tasks linked to {{count}} controls',
+            count: selectedIds.size,
           })
         );
         completeBulkTaskLinking();

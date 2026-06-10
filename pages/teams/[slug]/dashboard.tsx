@@ -74,34 +74,35 @@ const MODULE_ROWS: Array<{
   { key: 'rm_risk', path: 'risk-management' },
 ];
 
-const STATUS_COLS: Array<{ key: string; label: string; cellClass: string }> = [
-  {
-    key: 'todo',
-    label: 'To do',
-    cellClass:
-      'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300',
-  },
-  {
-    key: 'in-progress',
-    label: 'In progress',
-    cellClass: 'bg-ub-blue-bg text-ub-blue-text',
-  },
-  {
-    key: 'in-review',
-    label: 'In review',
-    cellClass: 'bg-ub-purple-bg text-ub-purple-text',
-  },
-  {
-    key: 'feedback',
-    label: 'Feedback',
-    cellClass: 'bg-ub-amber-bg text-ub-amber-text',
-  },
-  {
-    key: 'done',
-    label: 'Done',
-    cellClass: 'bg-ub-green-bg text-ub-green-text',
-  },
-];
+const STATUS_COLS: Array<{ key: string; labelKey: string; cellClass: string }> =
+  [
+    {
+      key: 'todo',
+      labelKey: 'task-statuses.todo',
+      cellClass:
+        'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300',
+    },
+    {
+      key: 'inprogress',
+      labelKey: 'task-statuses.inprogress',
+      cellClass: 'bg-ub-blue-bg text-ub-blue-text',
+    },
+    {
+      key: 'inreview',
+      labelKey: 'task-statuses.inreview',
+      cellClass: 'bg-ub-purple-bg text-ub-purple-text',
+    },
+    {
+      key: 'feedback',
+      labelKey: 'task-statuses.feedback',
+      cellClass: 'bg-ub-amber-bg text-ub-amber-text',
+    },
+    {
+      key: 'done',
+      labelKey: 'task-statuses.done',
+      cellClass: 'bg-ub-green-bg text-ub-green-text',
+    },
+  ];
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
@@ -146,7 +147,7 @@ function TaskStatusMatrix({ tasks, slug }: { tasks: Task[]; slug: string }) {
                   key={col.key}
                   className="text-center px-2 py-2 text-[11px] font-medium text-slate-500 dark:text-slate-400"
                 >
-                  {col.label}
+                  {t(col.labelKey)}
                 </th>
               ))}
               <th className="text-center px-2 py-2 text-[11px] font-medium text-slate-500 dark:text-slate-400">

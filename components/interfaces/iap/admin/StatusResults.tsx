@@ -69,7 +69,7 @@ const StatusResults: React.FC<StatusResultsProps> = ({
             <StatusResultsChart passed={passedCount} failed={failedCount} />
           </div>
 
-          <div>
+          <div className="overflow-x-auto">
             <table className="w-full text-sm divide-y divide-slate-200 dark:divide-slate-700">
               <thead className="bg-slate-50 dark:bg-slate-900">
                 <tr>

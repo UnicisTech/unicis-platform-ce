@@ -9,7 +9,7 @@ const useTeamTasks = (slug: string) => {
   const { data, error } = useSWR<ApiResponse<Task[]>>(url, fetcher);
 
   const mutateTasks = async () => {
-    mutate(url);
+    await mutate(url);
   };
 
   return {

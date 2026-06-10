@@ -9,12 +9,12 @@ import { QueueListIcon } from '@heroicons/react/24/solid';
 const STATUS_COLS = [
   { key: 'todo', labelKey: 'task-statuses.todo', dotClass: 'bg-slate-400' },
   {
-    key: 'in-progress',
+    key: 'inprogress',
     labelKey: 'task-statuses.inprogress',
     dotClass: 'bg-ub-blue',
   },
   {
-    key: 'in-review',
+    key: 'inreview',
     labelKey: 'task-statuses.inreview',
     dotClass: 'bg-ub-purple',
   },

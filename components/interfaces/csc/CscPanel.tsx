@@ -280,6 +280,27 @@ export default function CscPanel({
   );
 
   /**
+   * Bulk-update status across multiple selected controls.
+   * Writes all controls first, then revalidates once to avoid intermediate
+   * SWR re-fetches racing against the read-modify-write in setCscStatus.
+   */
+  const onBulkStatusChange = useCallback(
+    async (newStatus: string, controlIds: string[]) => {
+      for (const controlId of controlIds) {
+        const { error } = await updateCscStatus({
+          slug,
+          control: controlId,
+          value: newStatus,
+          framework: iso,
+        });
+        if (error) throw new Error(error.message || t('errors.requestFailed'));
+      }
+      await mutateStatuses();
+    },
+    [slug, iso, t, mutateStatuses]
+  );
+
+  /**
    * Bulk-link tasks to mapped controls across frameworks.
    * Groups controls by framework for efficient batched API calls.
    * When sourceControlId is provided, propagates the source control's
@@ -517,6 +538,7 @@ export default function CscPanel({
           enabledFrameworks={enabledFrameworks}
           onLinkTask={onLinkTask}
           onBulkLinkMapped={onBulkLinkMapped}
+          onBulkStatusChange={onBulkStatusChange}
         />
         <SectionRail
           sections={sectionData}

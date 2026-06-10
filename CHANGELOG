@@ -54,12 +54,31 @@ The information about Unicis Platform releases and changes is listed in order be
   - Annual billing stored on subscription (`isAnnual` field); next invoice date advances 12 months instead of 1
   - Payment card reflects annual discount on price-per-user and total; shows "/yr" billing cycle and "Annual" badge
   - Post-request toast now shows a friendly confirmation message in all 7 languages
+- Mobile & Responsive
+  - Teams table: added `overflow-x-auto` inner wrapper so the table scrolls horizontally on small screens instead of clipping
+  - Risk matrix chart: wrapped in `overflow-x-auto` to allow horizontal scrolling on mobile
+  - All Tasks toolbar: fixed conflicting `items-end`/`items-center` classes; toolbar now stacks vertically on mobile and aligns inline on `lg:+`
+  - Task filter dropdowns: each filter gets `flex-1 min-w-[150px]` so the three selectors share available width evenly on narrow viewports
+  - All remaining tables audited against the nested two-div overflow pattern (`overflow-hidden rounded-xl` outer / `overflow-x-auto` inner)
+- Translations
+  - Added 30+ missing i18n keys across all 7 locales (en, fr, de, es, it, ja, pt): `section-progress`, `status-distribution`, `risk-matrix-axis-label`, `pia-matrix-axis`, `top-open-risks`, `framework`, 18× `domain-health.*` keys (card titles, tab-switch aria-labels, metric strings), `chart.task-status-distribution-aria-label`, `dashboard.kpi.yet-to-complete`, `tia-at-risk`, `tia-all-permitted`, `tia-non-adequate-warning`
+  - Dashboard task matrix column headers migrated from hardcoded English strings to `task-statuses.*` i18n keys
+  - Domain health card tab-switch aria-labels (`Switch to Data Protection / Cybersecurity / Risk Management tab`) now fully translated
+  - CSC bulk-action toast messages split into distinct keys (`csc.bulk-status-updated`, `csc.bulk-tasks-linked`) with proper `{{count}}` / `{{status}}` interpolation
+- API
+  - `PUT /api/teams/{slug}/csc` (single control status update) added to OpenAPI spec — was previously undocumented; `public/openapi.json` regenerated
+- Testing
+  - 62 Jest unit and API handler tests added: status-key regression guard, CSC helper invariants, dashboard counting logic, full CRUD coverage for `/tasks` and `/tasks/[taskNumber]`, and both CSC endpoints
+  - 3 Playwright E2E test suites added: dashboard task matrix + tab switching, task list / kanban usability, CSC bulk status change and task assignment
 - Fixes
   - TIA: Legal Analysis column was rendering `DataExporter` instead of `LawImporterCountry`
   - PIA: First column header was labelled with the wrong translation key
   - CSC: Dark mode inactive tabs appeared selected due to unconditional `dark:text-slate-200`
   - RM: Asset Owner column showed "Not found" due to invalid Map bracket access; fixed to `.get()`
   - RM: Unstable row keys (`key={idx}`) changed to `key={task.id}`
+  - CSC: Bulk status change was updating only the last selected control — root cause was `mutateStatuses()` called after every individual write, causing SWR re-fetches to race with Prisma's read-modify-write on the JSON blob; fixed by writing all controls first, then mutating once
+  - CSC: Task assignment required a full page refresh to appear — `useTeamTasks.mutateTasks` called `mutate(url)` without `await` (fire-and-forget); fixed by adding `await`
+  - Dashboard: Task matrix status counters showed 0 for In Progress and In Review — `STATUS_COLS` keys used `in-progress`/`in-review` instead of the DB-stored `inprogress`/`inreview`; fixed across dashboard, `TeamTasksAnalysis`, `GlobalSearch`, and `TaskKanbanBoard`
 
 ## [Tasks] 2026-05-31
 

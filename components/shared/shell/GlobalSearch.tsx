@@ -104,8 +104,8 @@ const MODULE_BADGE: Record<string, string> = {
 // ── Status colour dot ──────────────────────────────────────────────────────────
 const STATUS_DOTS: Record<string, string> = {
   todo: 'bg-slate-400',
-  'in-progress': 'bg-ub-blue',
-  'in-review': 'bg-ub-purple',
+  inprogress: 'bg-ub-blue',
+  inreview: 'bg-ub-purple',
   feedback: 'bg-ub-amber',
   done: 'bg-ub-green',
   failed: 'bg-ub-red',
