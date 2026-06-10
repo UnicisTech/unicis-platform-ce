@@ -9,12 +9,24 @@ import type { Task } from 'types';
 
 // ── Status column config ───────────────────────────────────────────────────────
 const STATUS_COLS = [
-  { key: 'todo',        labelKey: 'task-statuses.todo',       dotClass: 'bg-slate-400' },
-  { key: 'in-progress', labelKey: 'task-statuses.inprogress', dotClass: 'bg-ub-blue' },
-  { key: 'in-review',   labelKey: 'task-statuses.inreview',   dotClass: 'bg-ub-purple' },
-  { key: 'feedback',    labelKey: 'task-statuses.feedback',   dotClass: 'bg-ub-amber' },
-  { key: 'done',        labelKey: 'task-statuses.done',       dotClass: 'bg-ub-green' },
-  { key: 'failed',      labelKey: 'task-statuses.failed',     dotClass: 'bg-ub-red' },
+  { key: 'todo', labelKey: 'task-statuses.todo', dotClass: 'bg-slate-400' },
+  {
+    key: 'in-progress',
+    labelKey: 'task-statuses.inprogress',
+    dotClass: 'bg-ub-blue',
+  },
+  {
+    key: 'in-review',
+    labelKey: 'task-statuses.inreview',
+    dotClass: 'bg-ub-purple',
+  },
+  {
+    key: 'feedback',
+    labelKey: 'task-statuses.feedback',
+    dotClass: 'bg-ub-amber',
+  },
+  { key: 'done', labelKey: 'task-statuses.done', dotClass: 'bg-ub-green' },
+  { key: 'failed', labelKey: 'task-statuses.failed', dotClass: 'bg-ub-red' },
 ];
 
 // ── Mini stat card ─────────────────────────────────────────────────────────────
@@ -34,14 +46,18 @@ function StatCard({
     <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3">
       <div className="flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400 mb-1">
         {dotClass && (
-          <span className={cn('w-2 h-2 rounded-full flex-shrink-0', dotClass)} />
+          <span
+            className={cn('w-2 h-2 rounded-full flex-shrink-0', dotClass)}
+          />
         )}
         {label}
       </div>
       <div className="text-xl font-semibold text-slate-900 dark:text-slate-100 leading-none tabular-nums">
         {value}
       </div>
-      <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{pct}%</div>
+      <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+        {pct}%
+      </div>
     </div>
   );
 }

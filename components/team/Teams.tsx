@@ -73,76 +73,76 @@ const Teams = () => {
             </Button>
           </div>
           <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-          <table className="w-full min-w-full divide-y divide-slate-100 dark:divide-slate-700 text-sm">
-            <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase border-b border-slate-200 dark:border-slate-700">
-              <tr>
-                <th className="w-3/10 px-4 py-2 text-left">{t('name')}</th>
-                <th className="w-1/10 px-4 py-2 text-left">{t('members')}</th>
-                <th className="w-2/10 px-4 py-2 text-left">{t('plan')}</th>
-                <th className="w-2/10 px-4 py-2 text-left">
-                  {t('created-at')}
-                </th>
-                <th className="w-2/10 px-4 py-2 text-left">{t('actions')}</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
-              {teams &&
-                teams.map((team) => {
-                  return (
-                    <tr key={team.id}>
-                      <td className="px-4 py-2">
-                        <Link href={`/teams/${team.slug}/dashboard`}>
-                          <div className="flex items-center justify-start space-x-2">
-                            <LetterAvatar name={team.name} />
-                            <span className="underline">{team.name}</span>
-                          </div>
-                        </Link>
-                      </td>
-                      <td className="px-4 py-2">{team._count.members}</td>
-                      <td className="px-4 py-2">
-                        {(() => {
-                          const plan = team.subscription?.plan || 'Community';
-                          const planLower = plan.toLowerCase();
-                          const planColor =
-                            planLower === 'community'
-                              ? 'oklch(50.8% .118 165.612)'
-                              : planLower === 'premium'
-                                ? 'oklch(48.8% .243 264.376)'
-                                : planLower === 'ultimate'
-                                  ? 'oklch(49.6% .265 301.924)'
-                                  : undefined;
-                          const customStyle = planColor
-                            ? { borderColor: planColor, color: planColor }
-                            : undefined;
-                          return (
-                            <span
-                              className={`badge badge-outline uppercase`}
-                              style={customStyle}
-                            >
-                              {plan}
-                            </span>
-                          );
-                        })()}
-                      </td>
-                      <td className="px-4 py-2">
-                        {new Date(team.createdAt).toDateString()}
-                      </td>
-                      <td className="px-4 py-2">
-                        <Button
-                          variant="destructive"
-                          onClick={() => {
-                            setTeam(team);
-                            setAskConfirmation(true);
-                          }}
-                        >
-                          {t('leave-team')}
-                        </Button>
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
+            <table className="w-full min-w-full divide-y divide-slate-100 dark:divide-slate-700 text-sm">
+              <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase border-b border-slate-200 dark:border-slate-700">
+                <tr>
+                  <th className="w-3/10 px-4 py-2 text-left">{t('name')}</th>
+                  <th className="w-1/10 px-4 py-2 text-left">{t('members')}</th>
+                  <th className="w-2/10 px-4 py-2 text-left">{t('plan')}</th>
+                  <th className="w-2/10 px-4 py-2 text-left">
+                    {t('created-at')}
+                  </th>
+                  <th className="w-2/10 px-4 py-2 text-left">{t('actions')}</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
+                {teams &&
+                  teams.map((team) => {
+                    return (
+                      <tr key={team.id}>
+                        <td className="px-4 py-2">
+                          <Link href={`/teams/${team.slug}/dashboard`}>
+                            <div className="flex items-center justify-start space-x-2">
+                              <LetterAvatar name={team.name} />
+                              <span className="underline">{team.name}</span>
+                            </div>
+                          </Link>
+                        </td>
+                        <td className="px-4 py-2">{team._count.members}</td>
+                        <td className="px-4 py-2">
+                          {(() => {
+                            const plan = team.subscription?.plan || 'Community';
+                            const planLower = plan.toLowerCase();
+                            const planColor =
+                              planLower === 'community'
+                                ? 'oklch(50.8% .118 165.612)'
+                                : planLower === 'premium'
+                                  ? 'oklch(48.8% .243 264.376)'
+                                  : planLower === 'ultimate'
+                                    ? 'oklch(49.6% .265 301.924)'
+                                    : undefined;
+                            const customStyle = planColor
+                              ? { borderColor: planColor, color: planColor }
+                              : undefined;
+                            return (
+                              <span
+                                className={`badge badge-outline uppercase`}
+                                style={customStyle}
+                              >
+                                {plan}
+                              </span>
+                            );
+                          })()}
+                        </td>
+                        <td className="px-4 py-2">
+                          {new Date(team.createdAt).toDateString()}
+                        </td>
+                        <td className="px-4 py-2">
+                          <Button
+                            variant="destructive"
+                            onClick={() => {
+                              setTeam(team);
+                              setAskConfirmation(true);
+                            }}
+                          >
+                            {t('leave-team')}
+                          </Button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
           </div>
           <ConfirmationDialog
             visible={askConfirmation}

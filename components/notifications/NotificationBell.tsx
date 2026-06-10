@@ -26,7 +26,14 @@ const NotificationBell = () => {
           variant="ghost"
           size="icon"
           className="relative"
-          aria-label={unreadCount > 0 ? t('notifications.title-unread', { count: unreadCount, defaultValue: `Notifications (${unreadCount} unread)` }) : t('notifications.title')}
+          aria-label={
+            unreadCount > 0
+              ? t('notifications.title-unread', {
+                  count: unreadCount,
+                  defaultValue: `Notifications (${unreadCount} unread)`,
+                })
+              : t('notifications.title')
+          }
         >
           <BellIcon className="h-5 w-5" aria-hidden="true" />
           {unreadCount > 0 && (
@@ -55,7 +62,9 @@ const NotificationBell = () => {
         <DropdownMenuSeparator />
         <div className="max-h-96 space-y-2 overflow-y-auto px-2 py-2">
           {isLoading && (
-            <p className="text-xs text-slate-500 dark:text-slate-400">{t('loading')}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              {t('loading')}
+            </p>
           )}
           {!isLoading && notifications.length === 0 && (
             <p className="text-xs text-slate-500 dark:text-slate-400">

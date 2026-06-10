@@ -37,9 +37,11 @@ Direction B is a calm, professional visual language built for compliance and sec
 ### Implemented Standards
 
 #### Language declaration
+
 `pages/_document.tsx` sets `<Html lang={locale ?? 'en'}>` using the locale from `getServerSideProps`. This satisfies WCAG 3.1.1 Language of Page.
 
 #### Icon-only buttons
+
 Every `<Button size="icon">` **must** have an `aria-label`. The icon SVG must have `aria-hidden="true"`. Use translated strings:
 
 ```tsx
@@ -58,6 +60,7 @@ aria-label={`${t('edit')} ${item.name}`}
 ```
 
 #### Form label associations
+
 Every `<Label>` must be paired with a matching `htmlFor`/`id`:
 
 ```tsx
@@ -77,6 +80,7 @@ For grouped checkboxes (e.g. event type selectors), use `<fieldset>` / `<legend>
 ```
 
 #### Form validation errors
+
 When Formik (or any form library) renders an error, link it to the input with `aria-invalid` and `aria-describedby`:
 
 ```tsx
@@ -84,15 +88,18 @@ When Formik (or any form library) renders an error, link it to the input with `a
   id="name"
   aria-invalid={!!formik.errors.name}
   aria-describedby={formik.errors.name ? 'name-error' : undefined}
-/>
-{formik.errors.name && (
-  <p id="name-error" role="alert" className="text-xs text-destructive mt-1">
-    {formik.errors.name}
-  </p>
-)}
+/>;
+{
+  formik.errors.name && (
+    <p id="name-error" role="alert" className="text-xs text-destructive mt-1">
+      {formik.errors.name}
+    </p>
+  );
+}
 ```
 
 #### Tab panels
+
 Dashboard and module tab bars must use full ARIA tab pattern:
 
 ```tsx
@@ -117,6 +124,7 @@ Dashboard and module tab bars must use full ARIA tab pattern:
 ```
 
 #### Charts
+
 Every chart must be wrapped in a container with `role="img"` and a meaningful `aria-label`. The label must describe the chart content, not just its type. Always include `className="w-full h-full"` on the wrapper to preserve responsive sizing:
 
 ```tsx
@@ -136,6 +144,7 @@ Applied to: `DashboardMatrixChart`, `DashboardPieChart`, `PieChart` (CSC), `Rada
 > **Critical**: Do not add a wrapper `<div>` to charts without `className="w-full h-full"`. Chart.js uses responsive sizing from the parent container — a zero-height wrapper collapses the chart.
 
 #### Mobile sidebar (Drawer)
+
 The mobile drawer (`components/shared/shell/Drawer.tsx`) implements a full accessible dialog pattern:
 
 ```tsx
@@ -159,18 +168,22 @@ The mobile drawer (`components/shared/shell/Drawer.tsx`) implements a full acces
 `useEffect` moves focus to the close button on open. `useEffect` listens for `Escape` to close. `onKeyDown` cycles Tab/Shift+Tab within the panel.
 
 #### External links
+
 External links (navigation items with `target="_blank"`) must announce this to screen reader users via a visually hidden span:
 
 ```tsx
-{newTab && (
-  <>
-    <ArrowTopRightOnSquareIcon aria-hidden="true" />
-    <span className="sr-only">(opens in new tab)</span>
-  </>
-)}
+{
+  newTab && (
+    <>
+      <ArrowTopRightOnSquareIcon aria-hidden="true" />
+      <span className="sr-only">(opens in new tab)</span>
+    </>
+  );
+}
 ```
 
 #### Interactive cards (domain health, KPI)
+
 Clickable card components (`<button>`) that switch context must carry an explicit `aria-label` describing the action, plus `aria-pressed` to communicate current state:
 
 ```tsx
@@ -182,19 +195,22 @@ Clickable card components (`<button>`) that switch context must carry an explici
 ```
 
 #### Color contrast
+
 Use `text-slate-500 dark:text-slate-400` for **all content text** (labels, sub-lines, data values). `text-slate-400` alone (#94a3b8) fails the 4.5:1 minimum on white backgrounds and must not be used for text that carries meaning.
 
-| Token | Ratio on white | Use |
-|---|---|---|
-| `text-slate-900` | ~19:1 | Primary body text |
-| `text-slate-700` | ~8:1 | Secondary body text |
-| `text-slate-500` | ~4.6:1 | Labels, sub-text, meta ✅ |
-| `text-slate-400` | ~2.85:1 | Decorative/placeholder only ❌ for content |
+| Token            | Ratio on white | Use                                        |
+| ---------------- | -------------- | ------------------------------------------ |
+| `text-slate-900` | ~19:1          | Primary body text                          |
+| `text-slate-700` | ~8:1           | Secondary body text                        |
+| `text-slate-500` | ~4.6:1         | Labels, sub-text, meta ✅                  |
+| `text-slate-400` | ~2.85:1        | Decorative/placeholder only ❌ for content |
 
 #### Minimum text size
+
 Do not use `text-[10px]` for text that conveys information. Minimum is `text-[11px]`. The 10px size is reserved for badge numerals inside fixed-size pills only.
 
 #### Notification bell
+
 `NotificationBell` uses a dynamic `aria-label` that includes the unread count:
 
 ```tsx
@@ -215,13 +231,13 @@ The numeric badge span carries `aria-hidden="true"` since the count is already i
 
 Tailwind CSS breakpoints used across the platform:
 
-| Breakpoint | Token | Min-width | Typical device |
-|------------|-------|-----------|----------------|
-| Mobile     | *(default)* | 0 px | iPhone SE, Android compact |
-| Small      | `sm:` | 640 px | Landscape phone, small tablet |
-| Medium     | `md:` | 768 px | iPad portrait |
-| Large      | `lg:` | 1024 px | iPad landscape, small laptop |
-| Extra Large | `xl:` | 1280 px | Desktop |
+| Breakpoint  | Token       | Min-width | Typical device                |
+| ----------- | ----------- | --------- | ----------------------------- |
+| Mobile      | _(default)_ | 0 px      | iPhone SE, Android compact    |
+| Small       | `sm:`       | 640 px    | Landscape phone, small tablet |
+| Medium      | `md:`       | 768 px    | iPad portrait                 |
+| Large       | `lg:`       | 1024 px   | iPad landscape, small laptop  |
+| Extra Large | `xl:`       | 1280 px   | Desktop                       |
 
 **Design at mobile first, add breakpoints upward. Never design desktop-first and bolt on mobile later.**
 
@@ -230,11 +246,13 @@ Tailwind CSS breakpoints used across the platform:
 ### Shell & Navigation
 
 #### AppShell
+
 - Sidebar is **always hidden on mobile / tablet** and revealed as a drawer via `lg:hidden` hamburger
 - Main content area has `lg:pl-64` offset (sidebar width) and falls to full width below `lg:`
 - Content padding: `px-4 sm:px-6 lg:px-6`
 
 #### Header
+
 The header is a fixed-height `h-12` sticky bar. It is split into two zones:
 
 ```tsx
@@ -255,6 +273,7 @@ The header is a fixed-height `h-12` sticky bar. It is split into two zones:
 ```
 
 **Rules:**
+
 - The title MUST use `truncate` — never allow it to wrap to a second line
 - The right zone MUST use `flex-shrink-0` so controls are always reachable
 - `AccountDropdown` shows only a `UserCircleIcon` on mobile (`< sm`), full name on `sm+`
@@ -265,24 +284,28 @@ The header is a fixed-height `h-12` sticky bar. It is split into two zones:
 ### Grids & Layouts
 
 #### Module dashboard main layout
+
 ```tsx
 <div className="flex flex-col lg:flex-row gap-3">
-  <PrimaryPanel />        {/* flex-1 */}
-  <SidePanel />           {/* lg:w-[280px] flex-shrink-0 */}
+  <PrimaryPanel /> {/* flex-1 */}
+  <SidePanel /> {/* lg:w-[280px] flex-shrink-0 */}
 </div>
 ```
 
 #### KPI row
+
 ```tsx
 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
 ```
 
 #### IAP course grid
+
 ```tsx
 <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 ```
 
 #### Task detail panels
+
 ```tsx
 <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-4">
 ```
@@ -318,15 +341,15 @@ Applied to: RPA, TIA, PIA, RM, IAP, All Tasks, IAP Admin.
 All module tables require a horizontal scroll wrapper. Narrow screens must scroll the table, not reflow it:
 
 ```tsx
-{/* Card wrapper */}
+{
+  /* Card wrapper */
+}
 <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
   {/* Scroll container */}
   <div className="overflow-x-auto">
-    <table className="w-full min-w-full ...">
-      ...
-    </table>
+    <table className="w-full min-w-full ...">...</table>
   </div>
-</div>
+</div>;
 ```
 
 **Rule:** `overflow-x-auto` is **mandatory** on every table wrapper. Tables must never force the page to scroll horizontally.
@@ -338,30 +361,39 @@ Applied to: All Tasks (`TaskListView`), RPA (`RpaTable`), TIA (`TiaTable`), PIA 
 ### Dialogs & Modals
 
 #### Base `DialogContent` — global defaults in `components/shadcn/ui/dialog.tsx`
+
 ```tsx
 // Base class (all dialogs inherit this)
-className="... w-full max-w-[calc(100vw-2rem)] sm:max-w-lg ... p-4 sm:p-6 rounded-lg overflow-x-hidden"
+className =
+  '... w-full max-w-[calc(100vw-2rem)] sm:max-w-lg ... p-4 sm:p-6 rounded-lg overflow-x-hidden';
 ```
 
 Key properties:
+
 - `max-w-[calc(100vw-2rem)]` — leaves 1 rem margin on each side on mobile; no edge-to-edge dialogs
 - `p-4 sm:p-6` — compact padding on mobile, full padding on desktop
 - `rounded-lg` — always visible corners (no `sm:rounded-lg`)
 - `overflow-x-hidden` — internal content (e.g. stepper) cannot break dialog bounds
 
 #### Per-dialog overrides
+
 Multi-step dialogs (RPA, TIA, PIA, RM) extend with:
+
 ```tsx
-className="max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-x-hidden overflow-y-auto p-4 sm:p-6"
+className =
+  'max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-x-hidden overflow-y-auto p-4 sm:p-6';
 ```
 
 #### `DialogFooter`
+
 ```tsx
 <DialogFooter className="flex flex-wrap justify-end gap-2">
 ```
+
 Shadcn's base `DialogFooter` stacks buttons vertically on mobile (`flex-col-reverse`) and lays them out horizontally on `sm+`. The `gap-2` replaces the legacy `space-x-2`.
 
 **Rules:**
+
 - Never use fixed-width dialogs without `max-w-[95vw]` or the base class
 - Never pass `p-6` without the `sm:` prefix — use `p-4 sm:p-6`
 - Never use `space-x-2` in a `DialogFooter` — use `gap-2`
@@ -373,22 +405,26 @@ Shadcn's base `DialogFooter` stacks buttons vertically on mobile (`flex-col-reve
 The `Stepper` component (`components/shadcn/ui/stepper.tsx`) renders a two-tier responsive layout:
 
 #### Mobile `(< sm)` — compact progress bar
+
 ```
 ┌─────────────────────────────────────────┐
 │ Data processing                   2 / 5 │
 │ ████████████░░░░░░░░░░░░░░░░░░░░░░░░░░ │
 └─────────────────────────────────────────┘
 ```
+
 - Current step name (left) + "N / M" counter (right)
 - Blue progress bar fills proportionally
 - Fits in **any** dialog width, even 300 px
 
 #### Desktop `(sm+)` — full dot stepper
+
 ```
 ● ──── ○ ──── ○ ──── ○ ──── ○
 Data  Conf. Avail. Trans. Result
 proc.  & Int.
 ```
+
 - Dots + connector lines + labels below each dot
 - Labels use `break-words whitespace-normal [overflow-wrap:anywhere]`
 
@@ -415,6 +451,7 @@ On mobile the user accesses section filtering via the `SectionFilter` dropdown i
 The CSC filter toolbar contains 4 controls: `SectionFilter`, `StatusFilter`, `PerPageSelector`, SoA export button.
 
 **Rule:** Must use `flex-wrap` so controls drop to a second row on narrow screens:
+
 ```tsx
 <div className="flex flex-wrap justify-end gap-1">
   <SectionFilter ... />
@@ -432,7 +469,9 @@ Any row of filter chips (CSC framework tabs on the dashboard, CscTabs) must use 
 
 ```tsx
 <div className="flex items-center gap-2 mb-3 flex-wrap">
-  {frameworks.map(iso => <button key={iso}>...</button>)}
+  {frameworks.map((iso) => (
+    <button key={iso}>...</button>
+  ))}
 </div>
 ```
 
@@ -444,9 +483,11 @@ Any row of filter chips (CSC framework tabs on the dashboard, CscTabs) must use 
 
 ```tsx
 // Module tab containers
-className="flex gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-[3px] mb-4 flex-wrap"
+className =
+  'flex gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-[3px] mb-4 flex-wrap';
 // Tab buttons
-className="px-3 py-[6px] text-[12px] font-medium rounded-md ... whitespace-nowrap"
+className =
+  'px-3 py-[6px] text-[12px] font-medium rounded-md ... whitespace-nowrap';
 ```
 
 **Rule:** The container uses `flex-wrap` so tabs fall to a second row on mobile. Tab text uses `whitespace-nowrap` so individual tab labels don't break mid-word.
@@ -497,10 +538,12 @@ Before submitting any new component or page, verify:
 All module surfaces (tables, charts, stat panels) use the same card shell:
 
 ```tsx
-className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden"
+className =
+  'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden';
 ```
 
 For tables that also need `overflow-x-auto`, compose them:
+
 ```tsx
 <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
   <div className="overflow-x-auto">
@@ -510,9 +553,11 @@ For tables that also need `overflow-x-auto`, compose them:
 ### Panel Header (section titles inside a card)
 
 ```tsx
-className="px-4 py-2.5 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900"
+className =
+  'px-4 py-2.5 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900';
 // Label inside:
-className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide"
+className =
+  'text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide';
 ```
 
 ### Table Header Cells (`<th>`)
@@ -520,49 +565,57 @@ className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercas
 All module table header cells use a unified Direction B style:
 
 ```tsx
-className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+className =
+  'px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide';
 ```
 
 For tables with wider padding (e.g. All Tasks):
+
 ```tsx
-className="px-4 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+className =
+  'px-4 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide';
 ```
 
 ### Table Body Rows
 
 ```tsx
 // tbody divider
-className="divide-y divide-slate-100 dark:divide-slate-700"
+className = 'divide-y divide-slate-100 dark:divide-slate-700';
 // hover state
-className="hover:bg-slate-50 dark:hover:bg-slate-700/40 transition-colors"
+className = 'hover:bg-slate-50 dark:hover:bg-slate-700/40 transition-colors';
 ```
 
 ### Tab Bar (pill switcher)
 
 ```tsx
 // Container — flex-wrap mandatory
-className="flex gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-[3px] flex-wrap"
+className =
+  'flex gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-[3px] flex-wrap';
 // Active tab
-className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 shadow-xs"
+className =
+  'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 shadow-xs';
 // Inactive tab
-className="text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 bg-transparent border border-transparent"
+className =
+  'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 bg-transparent border border-transparent';
 ```
 
 ### Module Badge (per-module color coding)
 
 Self-contained, no DaisyUI dependency. Used in the All Tasks table and the dashboard Task Overview matrix.
 
-| Module | Background | Text | Key |
-|--------|-----------|------|-----|
-| RPA | `bg-red-600` | `text-red-100` | `rpa_procedure` |
-| TIA | `bg-blue-600` | `text-blue-100` | `tia_procedure` |
-| PIA | `bg-yellow-500` | `text-yellow-950` | `pia_risk` |
-| RM  | `bg-green-600` | `text-green-100` | `rm_risk` |
-| CSC | `bg-slate-500` | `text-slate-100` | `csc_controls` |
+| Module | Background      | Text              | Key             |
+| ------ | --------------- | ----------------- | --------------- |
+| RPA    | `bg-red-600`    | `text-red-100`    | `rpa_procedure` |
+| TIA    | `bg-blue-600`   | `text-blue-100`   | `tia_procedure` |
+| PIA    | `bg-yellow-500` | `text-yellow-950` | `pia_risk`      |
+| RM     | `bg-green-600`  | `text-green-100`  | `rm_risk`       |
+| CSC    | `bg-slate-500`  | `text-slate-100`  | `csc_controls`  |
 
 Base badge class:
+
 ```tsx
-className="inline-block whitespace-nowrap rounded px-2 py-[2px] text-[11px] font-medium leading-tight align-middle"
+className =
+  'inline-block whitespace-nowrap rounded px-2 py-[2px] text-[11px] font-medium leading-tight align-middle';
 ```
 
 Component: `components/shared/ModuleBadge.tsx`
@@ -598,10 +651,20 @@ All table action columns use icon-only buttons. Text buttons ("Edit", "Delete") 
 ```tsx
 // Standard pair: edit + delete
 <div className="flex items-center gap-2">
-  <Button variant="outline" size="icon" onClick={() => editHandler(task)} aria-label={t('edit-task')}>
+  <Button
+    variant="outline"
+    size="icon"
+    onClick={() => editHandler(task)}
+    aria-label={t('edit-task')}
+  >
     <Pencil className="h-4 w-4" aria-hidden="true" />
   </Button>
-  <Button variant="destructive" size="icon" onClick={() => deleteHandler(task)} aria-label={t('delete')}>
+  <Button
+    variant="destructive"
+    size="icon"
+    onClick={() => deleteHandler(task)}
+    aria-label={t('delete')}
+  >
     <Trash2 className="h-4 w-4" aria-hidden="true" />
   </Button>
 </div>
@@ -629,6 +692,7 @@ Applied to: `TaskListView`, `RpaTable`, `TiaTable`, `RisksTable` (PIA + RM), `Me
 Six cards: Compliance score hero (col-span-2) + CSC gaps + Open tasks + Open risks + IAP completion.
 
 **IAP card behaviour:**
+
 - Shows `nonCompliantCount` ("X yet to complete") as sub-text
 - Variant: `amber` if 1–49% complete with non-compliant members, `red` if below 50%, `green` if 100%
 - Clicking navigates to `/teams/${slug}/iap/admin`
@@ -640,6 +704,7 @@ Six cards: Compliance score hero (col-span-2) + CSC gaps + Open tasks + Open ris
 **Location:** `components/interfaces/TeamDashboard/DomainHealthRow.tsx`
 
 Three equal-width side-by-side cards. Each is a `<button>` that switches the active dashboard tab. Each card shows:
+
 - Status dot (red / amber / green / slate)
 - Domain name (uppercase label)
 - Primary metric (e.g. "67%" / "Transfers OK" / "3 high risks")
@@ -656,11 +721,11 @@ Three equal-width side-by-side cards. Each is a `<button>` that switches the act
 
 **Status thresholds:**
 
-| Domain | Healthy | Warning | Critical |
-|---|---|---|---|
-| Data Protection | All TIA transfers authorized | — | Any `TransferMechanism !== 'yes'` |
-| Cybersecurity | Score ≥ 75% | 50–74% | < 50% |
-| Risk Management | No extreme/major risks | Any major (60–79) | Any extreme (≥80) |
+| Domain          | Healthy                      | Warning           | Critical                          |
+| --------------- | ---------------------------- | ----------------- | --------------------------------- |
+| Data Protection | All TIA transfers authorized | —                 | Any `TransferMechanism !== 'yes'` |
+| Cybersecurity   | Score ≥ 75%                  | 50–74%            | < 50%                             |
+| Risk Management | No extreme/major risks       | Any major (60–79) | Any extreme (≥80)                 |
 
 **ARIA:** Each card has `aria-label="Switch to [Domain] tab"` and `aria-pressed={active}`.
 
@@ -699,14 +764,14 @@ Country fields stored in the database use lowercase keys (e.g. `"united states"`
 
 ```tsx
 // In tables and panels:
-{value ? t(`country.${value}`) : '—'}
+{
+  value ? t(`country.${value}`) : '—';
+}
 
 // Examples in TiaTable.tsx and TiaPanel.tsx:
 <span>
-  {step.LawImporterCountry
-    ? t(`country.${step.LawImporterCountry}`)
-    : '—'}
-</span>
+  {step.LawImporterCountry ? t(`country.${step.LawImporterCountry}`) : '—'}
+</span>;
 ```
 
 Applies to: `CountryDataExporter`, `CountryDataImporter`, `LawImporterCountry` in TIA procedures.
@@ -722,6 +787,7 @@ Applies to: `CountryDataExporter`, `CountryDataImporter`, `LawImporterCountry` i
 The webhook table includes a "Last delivery" column showing the most recent Svix delivery attempt.
 
 **Architecture:**
+
 - `getLastWebhookAttempt(appId, endpointId)` in `lib/svix.ts` calls `svix.messageAttempt.listByEndpoint(..., { limit: 1 })`
 - `handleGET` in the webhooks API enriches each endpoint in parallel via `Promise.all`
 - `Webhooks.tsx` renders `LastDeliveryCell` with `CheckCircle2` (success) / `Clock` (pending) / `XCircle` (failed + HTTP status code)
@@ -735,16 +801,18 @@ The webhook table includes a "Last delivery" column showing the most recent Svix
 `TeamAssessmentAnalysis` (`TeamAssessment.tsx`) shows a risk badge in the card header when transfers are at risk:
 
 ```tsx
-{notPermitAuthorization > 0 ? (
-  <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-red-100 dark:bg-red-950/40 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800/50 px-2 py-0.5 rounded-full">
-    <AlertCircle size={10} aria-hidden />
-    {notPermitAuthorization} {t('tia-at-risk', { defaultValue: 'at risk' })}
-  </span>
-) : totalNumberOfAssessment > 0 ? (
-  <span className="text-[11px] font-medium text-green-600 dark:text-green-400">
-    ✓ {t('tia-all-permitted', { defaultValue: 'All permitted' })}
-  </span>
-) : null}
+{
+  notPermitAuthorization > 0 ? (
+    <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-red-100 dark:bg-red-950/40 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800/50 px-2 py-0.5 rounded-full">
+      <AlertCircle size={10} aria-hidden />
+      {notPermitAuthorization} {t('tia-at-risk', { defaultValue: 'at risk' })}
+    </span>
+  ) : totalNumberOfAssessment > 0 ? (
+    <span className="text-[11px] font-medium text-green-600 dark:text-green-400">
+      ✓ {t('tia-all-permitted', { defaultValue: 'All permitted' })}
+    </span>
+  ) : null;
+}
 ```
 
 ---
@@ -752,6 +820,7 @@ The webhook table includes a "Last delivery" column showing the most recent Svix
 ## Shared Components
 
 ### `ModuleEmptyState`
+
 **Location:** `components/shared/ModuleEmptyState.tsx`
 
 Displayed when a module has no records. Uses Shadcn `Button` (not DaisyUI):
@@ -769,6 +838,7 @@ Displayed when a module has no records. Uses Shadcn `Button` (not DaisyUI):
 ```
 
 ### `ModuleBadge`
+
 **Location:** `components/shared/ModuleBadge.tsx`
 
 Renders a colored badge for a given module property key. No external dependencies:
@@ -779,21 +849,25 @@ Renders a colored badge for a given module property key. No external dependencie
 ```
 
 ### `AuditTimeline`
+
 **Location:** `components/interfaces/Task/AuditTimeline.tsx`
 
 Reusable audit log timeline used across all modules (RPA, TIA, PIA, CSC, RM). Accepts a generic `AuditLog[]` array.
 
 ### `StageTracker` / `Stepper`
+
 **Location:** `components/shared/atlaskit/StageTracker.tsx` → `components/shadcn/ui/stepper.tsx`
 
 Used in all multi-step dialogs. Responsive: compact bar on mobile, full dot stepper on `sm+`. See [Stepper section](#stepper-multi-step-forms) above.
 
 ### `DomainHealthRow`
+
 **Location:** `components/interfaces/TeamDashboard/DomainHealthRow.tsx`
 
 Three clickable domain health cards above the dashboard tab switcher. See [Domain Health Row](#domain-health-row-domainhealthrowtsx) above.
 
 ### `KpiRow`
+
 **Location:** `components/interfaces/TeamDashboard/KpiRow.tsx`
 
 Six KPI cards. Includes internal `CscKpiCards` and `IapKpiCard` sub-components that manage their own data fetching. See [KPI Row](#kpi-row-kpirowtsx) above.
@@ -929,6 +1003,7 @@ All Create/Add/primary action buttons use Shadcn `<Button variant="default">`. D
 ## Technology Stack
 
 ### Frontend
+
 - **Next.js 16.2.6** — React framework with SSR/SSG
 - **React 18.3.1** — UI library
 - **TypeScript 5.4.5** — Type safety
@@ -942,6 +1017,7 @@ All Create/Add/primary action buttons use Shadcn `<Button variant="default">`. D
 - **React Markdown & Quill** — Rich text editing
 
 ### Backend
+
 - **Next.js API Routes** — Serverless API endpoints
 - **Prisma 7.4.2** — Database ORM with PostgreSQL adapter
 - **graphile-worker 0.16.6** — Background job queue for async tasks
@@ -955,11 +1031,13 @@ All Create/Add/primary action buttons use Shadcn `<Button variant="default">`. D
 - **bcryptjs 2.4.3** — Password hashing
 
 ### Internationalization
+
 - **i18next 23.16.8** — Translation management
 - **next-i18next 15.3.0** — i18next integration for Next.js
 - **Supported Languages:** English, French, Spanish, German, Italian, Japanese, Portuguese
 
 ### Data & Export
+
 - **ExcelJS 4.4.0** — Excel file generation
 - **XLSX 0.18.5** — Spreadsheet manipulation
 - **jsPDF 4.2.0** — PDF generation
@@ -967,6 +1045,7 @@ All Create/Add/primary action buttons use Shadcn `<Button variant="default">`. D
 - **jsdom 23.2.0** — DOM in Node.js
 
 ### Testing & Quality
+
 - **Playwright 1.56.1** — E2E testing
 - **Jest 29.7.0** — Unit testing
 - **ESLint 9.0.0** — Code linting
@@ -974,6 +1053,7 @@ All Create/Add/primary action buttons use Shadcn `<Button variant="default">`. D
 - **TypeScript Compiler** — Type checking
 
 ### Security & Monitoring
+
 - **Bearer** — SAST (Static Application Security Testing)
 - **google-recaptcha** — Bot protection
 - **dotenv** — Environment variable management
@@ -1074,12 +1154,14 @@ unicis-platform/
 ### Core Entities
 
 #### User
+
 - Email-based identity (unique email)
 - Password (optional, for OAuth users)
 - First name, last name, profile image
 - Sessions for multi-device support
 
 #### Team (Multi-Tenancy)
+
 - Workspace/organization container
 - Unique slug for URL routing
 - Optional domain for SAML SSO
@@ -1088,11 +1170,13 @@ unicis-platform/
 - Custom properties (JSON)
 
 #### Team Member
+
 - User's role within a team (ADMIN, OWNER, MEMBER, AUDITOR)
 - Association between User and Team
 - Course progress tracking
 
 #### Task & Task Recurrence
+
 - **Task**: Individual to-do items with status, priority, due dates
 - **TaskRecurrence**: Scheduled recurring tasks (daily, weekly, monthly, yearly)
 - Kanban board support via `kanbanOrder`
@@ -1108,14 +1192,28 @@ unicis-platform/
 #### Module Property Schemas
 
 **RM Risk (`RMProcedureInterface`)**
+
 ```ts
 type RMProcedureInterface = [
-  { Risk: string; AssetOwner: string; Impact: string; RawProbability: number; RawImpact: number },
-  { RiskTreatment: string; TreatmentCost: string; TreatmentStatus: number; TreatedProbability: number; TreatedImpact: number }
-]
+  {
+    Risk: string;
+    AssetOwner: string;
+    Impact: string;
+    RawProbability: number;
+    RawImpact: number;
+  },
+  {
+    RiskTreatment: string;
+    TreatmentCost: string;
+    TreatmentStatus: number;
+    TreatedProbability: number;
+    TreatedImpact: number;
+  },
+];
 ```
 
 **TIA Procedure**
+
 ```ts
 procedure[0] = TransferScenario (DataExporter, DataImporter, StartDateAssessment, LawImporterCountry, AssessmentYears)
 procedure[1] = ProblematicLawfulAccess
@@ -1124,21 +1222,25 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 ```
 
 #### Notification System
+
 - **Notification**: User messages (in-app, email, web push)
 - **NotificationPreference**: Per-user channel preferences
 - **PushSubscription**: Web push subscription endpoints
 
 #### Compliance Features
+
 - **Course**: Training/awareness program content
 - **TeamCourse**: Many-to-many association with progress tracking
 - **CourseProgress**: `{ teamCourseId, teamMemberId, progress: Int (0–100), answers: Json }`
 - **Category**: Course categorization
 
 #### API Integration
+
 - **ApiKey**: Bearer token authentication for API access
 - Team-scoped keys with optional expiry
 
 #### Payment & Subscription
+
 - **Subscription**: Team plan (COMMUNITY, PREMIUM, ULTIMATE)
 - **Payment**: Payment records
 
@@ -1147,11 +1249,13 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 ## Key Features & Modules
 
 ### 1. Authentication & Authorization
+
 - Multi-method: Email/Password, Magic link, SAML SSO, Google OAuth, GitHub OAuth, SCIM
 - RBAC: ADMIN, OWNER, MEMBER, AUDITOR
 - `useCanAccess(slug)` hook for client-side permission checks
 
 ### 2. Task Management
+
 - Kanban board + List view (Direction B table)
 - Priority, status, due date, recurrence
 - Comments (Direction B redesign: avatar + hover-reveal edit/delete)
@@ -1160,6 +1264,7 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 - Module badges inline in the list view
 
 ### 3. Dashboard
+
 - KPI row: compliance score (hero), CSC gaps, open tasks (overdue indicator), open risks, IAP completion (non-compliant count + admin link)
 - Domain Health Row: 3 clickable cards (Data Protection / Cybersecurity / Risk) that switch the active tab
 - Task Overview by Module matrix (clickable rows → module pages, colored `ModuleBadge`)
@@ -1171,21 +1276,25 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 ### 4. Privacy & Compliance Modules
 
 #### RPA (Record of Processing Activities)
+
 - GDPR Art. 30 documentation
 - Multi-step creation form (6 steps)
 - Export: XLSX, ODS, CSV, HTML, PDF
 
 #### TIA (Transfer Impact Assessment)
+
 - Cross-border data transfer analysis
 - **Legal Analysis column**: shows `LawImporterCountry` from `procedure[0]` — always displayed via `t('country.${value}')` translation
 - Transfer permitted/not-permitted badge via `isTranferPermitted()`
 
 #### PIA (Privacy Impact Assessment)
+
 - Three risk axes: confidentiality & integrity, availability, transparency & data minimisation
 - Optional Corrective Measures step (triggered when any risk score > 10)
 - Risk matrix filter
 
 #### CSC (Cybersecurity Controls)
+
 - Multi-framework support (ISO 27001:2013/2022, NIST CSF 2.0, CIS, NIS2, GDPR, SOC 2, PCI DSS, OWASP ASVS v5, C5:2020, ISO 42001)
 - Framework mapping matrix
 - Statement of Applicability (SoA) export (XLSX, ODS, PDF, HTML)
@@ -1194,31 +1303,37 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 - URL-encoded filter state (section + status + perPage)
 
 #### Risk Management (RM)
+
 - 14-column table with grouped section headers (Raw Risk / Treatment / Target Risk / Current Risk)
 - Risk rating calculated from `RawProbability × RawImpact`
 - Asset Owner resolved via `useTeamMembersMap` → `membersById.get(userId)` (Map API, not bracket access)
 
 #### IAP (Interactive Awareness Program)
+
 - Course catalogue with thumbnail, category, estimated time
 - Progress tracking per team member (`CourseProgress.progress` 0–100)
 - Completion summary banner (total / completed / in-progress / %)
 - Admin: create categories and courses; 4-icon action column per course row
 
 ### 5. Webhooks
+
 - Svix-powered webhook endpoints
 - Last delivery status column: success / pending / failed (HTTP code) with timestamp
 - Delivery data fetched server-side via `getLastWebhookAttempt()` using `messageAttempt.listByEndpoint(appId, endpointId, { limit: 1 })`
 
 ### 6. REST API
+
 - OpenAPI 3.0 — Swagger UI at `/api-docs`
 - Bearer token authentication via API keys
 - Endpoints: Tasks, CSC, RM, PIA, RPA, TIA, API Keys, AI Chatbot
 
 ### 7. Audit Logging
+
 - Per-module `AuditTimeline` component
 - Integrated with Retraced
 
 ### 8. Notifications
+
 - In-app bell, email, web push
 - Per-user preferences
 - Types: task due, created, updated, deleted, commented, file uploaded, comment reacted
@@ -1274,6 +1389,7 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 ## Deployment & Infrastructure
 
 ### Configuration (`.env`)
+
 - `DATABASE_URL` — PostgreSQL
 - `NEXTAUTH_SECRET`, `NEXTAUTH_URL`
 - `RESEND_API_KEY` — Email
@@ -1282,6 +1398,7 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 - SAML Jackson config
 
 ### Docker
+
 ```bash
 docker-compose up -d        # Postgres + Redis
 npx prisma db push
@@ -1290,6 +1407,7 @@ npm run worker
 ```
 
 ### Build
+
 ```bash
 npm run build               # Prisma client → migrations → OpenAPI → Next.js
 ```
@@ -1327,6 +1445,7 @@ npm run build               # Prisma client → migrations → OpenAPI → Next.
 ## Future Roadmap
 
 ### Coming Features
+
 - Right to Erasure Request Form
 - Processor Questionnaire Checklist
 - Asset Inventory Management
@@ -1342,6 +1461,7 @@ npm run build               # Prisma client → migrations → OpenAPI → Next.
 - Executive Dashboards & Reporting
 
 ### Compliance Frameworks (Coming)
+
 - EU Cyber Resilience Act (CRA)
 - EU Digital Operational Resilience Act (DORA)
 - Cloud Controls Matrix (CCM) v4
@@ -1351,6 +1471,7 @@ npm run build               # Prisma client → migrations → OpenAPI → Next.
 - Custom frameworks
 
 ### UX/UI (Coming)
+
 - Sparklines on KPI cards (requires backend `kpi_snapshots` table with daily compliance/risk values — frontend `KpiStrip` component already has SVG sparkline support via `sparkline?: number[]` prop)
 - Migrate remaining DaisyUI components to Shadcn (`DaisyBadge` in TIA table)
 - Per-module URL filter persistence for CSC section / status filters
@@ -1383,21 +1504,21 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on bug reporting, feature 
 
 ## Glossary
 
-| Term | Meaning |
-|------|---------|
-| RPA  | Record of Processing Activities (GDPR Art. 30) |
+| Term | Meaning                                                  |
+| ---- | -------------------------------------------------------- |
+| RPA  | Record of Processing Activities (GDPR Art. 30)           |
 | TIA  | Transfer Impact Assessment (cross-border data transfers) |
-| PIA  | Privacy Impact Assessment |
+| PIA  | Privacy Impact Assessment                                |
 | CSC  | Cybersecurity Controls (multi-framework control mapping) |
-| IAP  | Interactive Awareness Program (training courses) |
-| RM   | Risk Management |
-| SoA  | Statement of Applicability |
-| SAML | Security Assertion Markup Language (SSO) |
-| SCIM | System for Cross-domain Identity Management |
-| JWT  | JSON Web Token |
-| SAST | Static Application Security Testing |
-| SBOM | Software Bill of Materials |
-| RBAC | Role-Based Access Control |
-| DPO  | Data Protection Officer |
-| CISO | Chief Information Security Officer |
-| WCAG | Web Content Accessibility Guidelines |
+| IAP  | Interactive Awareness Program (training courses)         |
+| RM   | Risk Management                                          |
+| SoA  | Statement of Applicability                               |
+| SAML | Security Assertion Markup Language (SSO)                 |
+| SCIM | System for Cross-domain Identity Management              |
+| JWT  | JSON Web Token                                           |
+| SAST | Static Application Security Testing                      |
+| SBOM | Software Bill of Materials                               |
+| RBAC | Role-Based Access Control                                |
+| DPO  | Data Protection Officer                                  |
+| CISO | Chief Information Security Officer                       |
+| WCAG | Web Content Accessibility Guidelines                     |

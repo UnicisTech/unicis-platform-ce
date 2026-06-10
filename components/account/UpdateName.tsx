@@ -62,7 +62,9 @@ const UpdateName: React.FC<{ user: Partial<User> }> = ({ user }) => {
           <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
             {t('name')}
           </span>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{t('name-appearance')}</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            {t('name-appearance')}
+          </p>
         </div>
 
         <div className="p-4 space-y-4">

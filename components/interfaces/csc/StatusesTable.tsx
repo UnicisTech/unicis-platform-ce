@@ -16,7 +16,11 @@ import frameworks from '@/lib/csc/frameworks';
 import ControlCodeLink from './ControlCodeLink';
 import ControlMappingDrawer from './ControlMappingDrawer';
 import { getMappingCount } from '@/lib/csc/framework-mapping-utils';
-import { BulkActionBar, CscStatusBadge, CSC_STATUS_TO_BADGE_KEY } from '@/components/shared';
+import {
+  BulkActionBar,
+  CscStatusBadge,
+  CSC_STATUS_TO_BADGE_KEY,
+} from '@/components/shared';
 
 const StatusesTable = ({
   slug,
@@ -75,7 +79,9 @@ const StatusesTable = ({
     title: string;
   } | null>(null);
   const [bulkTaskLinkOpen, setBulkTaskLinkOpen] = useState(false);
-  const [selectedTaskNumbers, setSelectedTaskNumbers] = useState<Set<number>>(new Set());
+  const [selectedTaskNumbers, setSelectedTaskNumbers] = useState<Set<number>>(
+    new Set()
+  );
 
   const openDrawer = useCallback((id: string, code: string, title: string) => {
     setDrawerControl({ id, code, title });
@@ -86,9 +92,13 @@ const StatusesTable = ({
 
   // ── Bulk selection state ────────────────────────────────────
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-  const [bulkActionStep, setBulkActionStep] = useState<'link-tasks' | 'change-status'>('link-tasks');
+  const [bulkActionStep, setBulkActionStep] = useState<
+    'link-tasks' | 'change-status'
+  >('link-tasks');
   const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
-  const [controlsMissingTasks, setControlsMissingTasks] = useState<Set<string>>(new Set());
+  const [controlsMissingTasks, setControlsMissingTasks] = useState<Set<string>>(
+    new Set()
+  );
 
   const toggleSelect = useCallback((id: string) => {
     setSelectedIds((prev) => {
@@ -149,16 +159,18 @@ const StatusesTable = ({
   // ── Bulk selection callbacks (defined after pageData is available) ──
   const toggleAll = useCallback(() => {
     setSelectedIds((prev) => {
-      const next = prev.size === pageData.length
-        ? new Set<string>()
-        : new Set<string>(pageData.map((c) => c.id));
+      const next =
+        prev.size === pageData.length
+          ? new Set<string>()
+          : new Set<string>(pageData.map((c) => c.id));
       return next;
     });
   }, [pageData]);
 
   // Check which selected controls are missing tasks
   const { allSelectedHaveTasks, missingTasksSet } = useMemo(() => {
-    if (selectedIds.size === 0) return { allSelectedHaveTasks: true, missingTasksSet: new Set<string>() };
+    if (selectedIds.size === 0)
+      return { allSelectedHaveTasks: true, missingTasksSet: new Set<string>() };
 
     const missing = new Set<string>();
 
@@ -184,7 +196,11 @@ const StatusesTable = ({
 
   // Auto-transition to step 2 when all controls have tasks
   useEffect(() => {
-    if (allSelectedHaveTasks && selectedIds.size > 0 && bulkActionStep === 'link-tasks') {
+    if (
+      allSelectedHaveTasks &&
+      selectedIds.size > 0 &&
+      bulkActionStep === 'link-tasks'
+    ) {
       setBulkActionStep('change-status');
     }
   }, [allSelectedHaveTasks, selectedIds, bulkActionStep]);
@@ -223,7 +239,11 @@ const StatusesTable = ({
 
         for (const taskNumber of taskNumbers) {
           for (const controlId of controlsToUpdate) {
-            await taskSelectorHandler('select-option', [{ value: taskNumber }], controlId);
+            await taskSelectorHandler(
+              'select-option',
+              [{ value: taskNumber }],
+              controlId
+            );
           }
         }
 
@@ -247,31 +267,55 @@ const StatusesTable = ({
           <table className="w-full min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-sm">
             <thead className="bg-slate-50 dark:bg-slate-900">
               <tr>
-                <th scope="col" className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide w-12">
+                <th
+                  scope="col"
+                  className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide w-12"
+                >
                   <input
                     type="checkbox"
-                    checked={selectedIds.size === pageData.length && pageData.length > 0}
+                    checked={
+                      selectedIds.size === pageData.length &&
+                      pageData.length > 0
+                    }
                     onChange={toggleAll}
                     aria-label="Select all controls on this page"
                     className="w-4 h-4"
                   />
                 </th>
-                <th scope="col" className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                <th
+                  scope="col"
+                  className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+                >
                   {t('code')}
                 </th>
-                <th scope="col" className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                <th
+                  scope="col"
+                  className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+                >
                   {t('section')}
                 </th>
-                <th scope="col" className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                <th
+                  scope="col"
+                  className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+                >
                   {t('control')}
                 </th>
-                <th scope="col" className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                <th
+                  scope="col"
+                  className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+                >
                   {t('requirements')}
                 </th>
-                <th scope="col" className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                <th
+                  scope="col"
+                  className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+                >
                   <StatusHeader />
                 </th>
-                <th scope="col" className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                <th
+                  scope="col"
+                  className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+                >
                   {t('tasks')}
                 </th>
               </tr>
@@ -378,7 +422,9 @@ const StatusesTable = ({
             setStatusDropdownOpen(false);
           }}
           statusDropdownOpen={statusDropdownOpen}
-          onToggleStatusDropdown={() => setStatusDropdownOpen(!statusDropdownOpen)}
+          onToggleStatusDropdown={() =>
+            setStatusDropdownOpen(!statusDropdownOpen)
+          }
           hasAllTasksAssigned={allSelectedHaveTasks}
           showTaskLinkingStep={controlsMissingTasks.size > 0}
         />
@@ -388,13 +434,18 @@ const StatusesTable = ({
       {bulkTaskLinkOpen && (
         <div className="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center">
           <div className="bg-white dark:bg-slate-800 rounded-lg p-6 max-w-md w-full mx-4">
-            <h2 className="text-lg font-medium mb-2">{t('bulk-actions.link-tasks-required')} - {selectedIds.size} {selectedIds.size === 1 ? 'control' : 'controls'}</h2>
+            <h2 className="text-lg font-medium mb-2">
+              {t('bulk-actions.link-tasks-required')} - {selectedIds.size}{' '}
+              {selectedIds.size === 1 ? 'control' : 'controls'}
+            </h2>
             <p className="text-sm text-slate-600 dark:text-slate-300 mb-4">
               {t('bulk-actions.select-tasks-description')}
             </p>
             <div className="space-y-2 max-h-64 overflow-y-auto mb-4 border border-slate-200 dark:border-slate-700 rounded p-3">
               {tasks.length === 0 ? (
-                <p className="text-sm text-slate-500 dark:text-slate-400 text-center py-4">No tasks available</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400 text-center py-4">
+                  No tasks available
+                </p>
               ) : (
                 tasks.map((task) => (
                   <label
@@ -417,7 +468,9 @@ const StatusesTable = ({
                       }}
                       className="w-4 h-4"
                     />
-                    <span className="text-sm flex-1">{task.taskNumber} - {task.title}</span>
+                    <span className="text-sm flex-1">
+                      {task.taskNumber} - {task.title}
+                    </span>
                   </label>
                 ))
               )}
@@ -438,7 +491,9 @@ const StatusesTable = ({
                 disabled={selectedTaskNumbers.size === 0}
                 className="flex-1 px-3 py-2 rounded bg-ub-blue text-white text-sm font-medium hover:bg-blue-700 disabled:bg-slate-300 dark:disabled:bg-slate-600 disabled:cursor-not-allowed"
               >
-                {selectedTaskNumbers.size > 0 ? `${t('bulk-actions.link-selected-tasks')} (${selectedTaskNumbers.size})` : t('bulk-actions.link-selected-tasks')}
+                {selectedTaskNumbers.size > 0
+                  ? `${t('bulk-actions.link-selected-tasks')} (${selectedTaskNumbers.size})`
+                  : t('bulk-actions.link-selected-tasks')}
               </button>
             </div>
           </div>

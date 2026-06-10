@@ -184,7 +184,13 @@ export default function Comments({
         </div>
       )}
       <AccessControl resource="task" actions={['update']} slug={slug}>
-        <div className={task.comments.length > 0 ? 'pt-1 border-t border-slate-100 dark:border-slate-700/60' : ''}>
+        <div
+          className={
+            task.comments.length > 0
+              ? 'pt-1 border-t border-slate-100 dark:border-slate-700/60'
+              : ''
+          }
+        >
           <CreateCommentForm handleCreate={handleCreateComment} />
         </div>
       </AccessControl>

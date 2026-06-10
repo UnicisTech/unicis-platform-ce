@@ -10,7 +10,13 @@ import {
   calculateRiskRating,
   calculateCurrentRiskRating,
 } from '@/lib/rm/helpers';
-import type { ISO, Task, Team, TaskProperties, RMProcedureInterface } from 'types';
+import type {
+  ISO,
+  Task,
+  Team,
+  TaskProperties,
+  RMProcedureInterface,
+} from 'types';
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 type DashboardTab = 0 | 1 | 2;
@@ -50,7 +56,10 @@ interface DomainCardProps {
   actionLabel: string;
 }
 
-const statusStyles: Record<HealthStatus, { dot: string; card: string; metric: string }> = {
+const statusStyles: Record<
+  HealthStatus,
+  { dot: string; card: string; metric: string }
+> = {
   healthy: {
     dot: 'bg-green-500',
     card: 'border-green-200 dark:border-green-800/50 hover:border-green-300 dark:hover:border-green-700',
@@ -99,7 +108,9 @@ function DomainCard({
       {/* Header row */}
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-1.5">
-          <span className={cn('w-2 h-2 rounded-full flex-shrink-0', styles.dot)} />
+          <span
+            className={cn('w-2 h-2 rounded-full flex-shrink-0', styles.dot)}
+          />
           <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">
             {title}
           </span>
@@ -112,7 +123,12 @@ function DomainCard({
       </div>
 
       {/* Metric */}
-      <div className={cn('text-[15px] font-semibold leading-tight mb-0.5', styles.metric)}>
+      <div
+        className={cn(
+          'text-[15px] font-semibold leading-tight mb-0.5',
+          styles.metric
+        )}
+      >
         {metric}
       </div>
 
@@ -158,32 +174,38 @@ function DataProtectionCard({
   }, [tasks]);
 
   const hasData = tiaTotal > 0 || rpaTotal > 0;
-  const status: HealthStatus =
-    !hasData ? 'empty'
-    : tiaAtRisk > 0 ? 'critical'
-    : 'healthy';
+  const status: HealthStatus = !hasData
+    ? 'empty'
+    : tiaAtRisk > 0
+      ? 'critical'
+      : 'healthy';
 
-  const metric =
-    !hasData
-      ? t('domain-health.no-data', { defaultValue: 'No data yet' })
-      : tiaAtRisk > 0
+  const metric = !hasData
+    ? t('domain-health.no-data', { defaultValue: 'No data yet' })
+    : tiaAtRisk > 0
       ? `${tiaAtRisk} ${t('domain-health.transfers-at-risk', { defaultValue: 'transfer(s) at risk' })}`
       : t('domain-health.transfers-ok', { defaultValue: 'Transfers OK' });
 
   const sub = hasData
     ? `${tiaTotal} TIA · ${rpaTotal} ${t('domain-health.rpa-records', { defaultValue: 'RPA records' })}`
-    : t('domain-health.start-adding', { defaultValue: 'Start adding TIA / RPA records' });
+    : t('domain-health.start-adding', {
+        defaultValue: 'Start adding TIA / RPA records',
+      });
 
   return (
     <DomainCard
-      title={t('domain-health.data-protection', { defaultValue: 'Data Protection' })}
+      title={t('domain-health.data-protection', {
+        defaultValue: 'Data Protection',
+      })}
       metric={metric}
       sub={sub}
       status={status}
       icon={<Lock size={10} aria-hidden />}
       active={active}
       onClick={onClick}
-      actionLabel={t('domain-health.switch-tab-data-protection', { defaultValue: 'Switch to Data Protection tab' })}
+      actionLabel={t('domain-health.switch-tab-data-protection', {
+        defaultValue: 'Switch to Data Protection tab',
+      })}
     />
   );
 }
@@ -220,34 +242,42 @@ function CybersecurityCardInner({
       if (!s || s === 'not-performed' || s === 'unknown') gaps++;
     }
     return {
-      complianceScore: validCount > 0 ? Math.round(totalWeight / validCount) : null,
+      complianceScore:
+        validCount > 0 ? Math.round(totalWeight / validCount) : null,
       gapCount: gaps,
     };
   }, [statuses, iso]);
 
   const status: HealthStatus =
-    complianceScore === null ? 'empty'
-    : complianceScore >= 75  ? 'healthy'
-    : complianceScore >= 50  ? 'warning'
-    : 'critical';
+    complianceScore === null
+      ? 'empty'
+      : complianceScore >= 75
+        ? 'healthy'
+        : complianceScore >= 50
+          ? 'warning'
+          : 'critical';
 
-  const metric =
-    complianceScore !== null ? `${complianceScore}%` : '—';
+  const metric = complianceScore !== null ? `${complianceScore}%` : '—';
 
-  const sub = complianceScore !== null
-    ? `${gapCount} ${t('domain-health.gaps', { defaultValue: 'gaps' })} · ${isoValueToLabel(iso)}`
-    : isoValueToLabel(iso);
+  const sub =
+    complianceScore !== null
+      ? `${gapCount} ${t('domain-health.gaps', { defaultValue: 'gaps' })} · ${isoValueToLabel(iso)}`
+      : isoValueToLabel(iso);
 
   return (
     <DomainCard
-      title={t('domain-health.cybersecurity', { defaultValue: 'Cybersecurity' })}
+      title={t('domain-health.cybersecurity', {
+        defaultValue: 'Cybersecurity',
+      })}
       metric={metric}
       sub={sub}
       status={status}
       icon={<ShieldCheck size={10} aria-hidden />}
       active={active}
       onClick={onClick}
-      actionLabel={t('domain-health.switch-tab-cybersecurity', { defaultValue: 'Switch to Cybersecurity tab' })}
+      actionLabel={t('domain-health.switch-tab-cybersecurity', {
+        defaultValue: 'Switch to Cybersecurity tab',
+      })}
     />
   );
 }
@@ -270,14 +300,20 @@ function CybersecurityCard({
   if (!activeIso) {
     return (
       <DomainCard
-        title={t('domain-health.cybersecurity', { defaultValue: 'Cybersecurity' })}
+        title={t('domain-health.cybersecurity', {
+          defaultValue: 'Cybersecurity',
+        })}
         metric="—"
-        sub={t('domain-health.no-csc-framework', { defaultValue: 'No CSC framework configured' })}
+        sub={t('domain-health.no-csc-framework', {
+          defaultValue: 'No CSC framework configured',
+        })}
         status="empty"
         icon={<ShieldCheck size={10} aria-hidden />}
         active={active}
         onClick={onClick}
-        actionLabel={t('domain-health.switch-tab-cybersecurity', { defaultValue: 'Switch to Cybersecurity tab' })}
+        actionLabel={t('domain-health.switch-tab-cybersecurity', {
+          defaultValue: 'Switch to Cybersecurity tab',
+        })}
       />
     );
   }
@@ -315,12 +351,19 @@ function RiskCard({
       if (!risk) continue;
       tot++;
 
-      const raw = calculateRiskRating(risk[0].RawProbability, risk[0].RawImpact);
+      const raw = calculateRiskRating(
+        risk[0].RawProbability,
+        risk[0].RawImpact
+      );
       const target = calculateRiskRating(
         risk[1].TreatedProbability,
         risk[1].TreatedImpact
       );
-      const current = calculateCurrentRiskRating(raw, target, risk[1].TreatmentStatus);
+      const current = calculateCurrentRiskRating(
+        raw,
+        target,
+        risk[1].TreatmentStatus
+      );
 
       if (current >= 80) ext++;
       else if (current >= 60) maj++;
@@ -330,35 +373,44 @@ function RiskCard({
   }, [tasks]);
 
   const status: HealthStatus =
-    total === 0    ? 'empty'
-    : extreme > 0  ? 'critical'
-    : major > 0    ? 'warning'
-    : 'healthy';
+    total === 0
+      ? 'empty'
+      : extreme > 0
+        ? 'critical'
+        : major > 0
+          ? 'warning'
+          : 'healthy';
 
   const metric =
     total === 0
       ? t('domain-health.no-data', { defaultValue: 'No data yet' })
       : extreme + major > 0
-      ? `${extreme + major} ${t('domain-health.high-risks', { defaultValue: 'high risks' })}`
-      : t('domain-health.risks-managed', { defaultValue: 'Risks managed' });
+        ? `${extreme + major} ${t('domain-health.high-risks', { defaultValue: 'high risks' })}`
+        : t('domain-health.risks-managed', { defaultValue: 'Risks managed' });
 
   const sub =
     total > 0
       ? extreme > 0
         ? `${extreme} ${t('risk-level-extreme')} · ${major} ${t('risk-level-major')}`
         : `${total} ${t('domain-health.risks-total', { defaultValue: 'risks tracked' })}`
-      : t('domain-health.start-adding-risks', { defaultValue: 'Start adding risks' });
+      : t('domain-health.start-adding-risks', {
+          defaultValue: 'Start adding risks',
+        });
 
   return (
     <DomainCard
-      title={t('domain-health.risk-management', { defaultValue: 'Risk Management' })}
+      title={t('domain-health.risk-management', {
+        defaultValue: 'Risk Management',
+      })}
       metric={metric}
       sub={sub}
       status={status}
       icon={<AlertTriangle size={10} aria-hidden />}
       active={active}
       onClick={onClick}
-      actionLabel={t('domain-health.switch-tab-risk', { defaultValue: 'Switch to Risk Management tab' })}
+      actionLabel={t('domain-health.switch-tab-risk', {
+        defaultValue: 'Switch to Risk Management tab',
+      })}
     />
   );
 }

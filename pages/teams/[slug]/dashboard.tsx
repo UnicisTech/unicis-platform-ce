@@ -42,9 +42,7 @@ function exportTasksCsv(tasks: Task[], slug: string) {
       escape(task.title),
       task.status ?? '',
       task.priority ?? '',
-      task.duedate
-        ? new Date(task.duedate as string).toLocaleDateString()
-        : '',
+      task.duedate ? new Date(task.duedate as string).toLocaleDateString() : '',
       isOverdue ? 'Yes' : 'No',
     ].join(',');
   });
@@ -71,28 +69,43 @@ const MODULE_ROWS: Array<{
 }> = [
   { key: 'rpa_procedure', path: 'rpa' },
   { key: 'tia_procedure', path: 'tia' },
-  { key: 'pia_risk',      path: 'pia' },
-  { key: 'csc_controls',  path: 'csc' },
-  { key: 'rm_risk',       path: 'risk-management' },
+  { key: 'pia_risk', path: 'pia' },
+  { key: 'csc_controls', path: 'csc' },
+  { key: 'rm_risk', path: 'risk-management' },
 ];
 
 const STATUS_COLS: Array<{ key: string; label: string; cellClass: string }> = [
-  { key: 'todo',        label: 'To do',      cellClass: 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300' },
-  { key: 'in-progress', label: 'In progress', cellClass: 'bg-ub-blue-bg text-ub-blue-text' },
-  { key: 'in-review',   label: 'In review',  cellClass: 'bg-ub-purple-bg text-ub-purple-text' },
-  { key: 'feedback',    label: 'Feedback',   cellClass: 'bg-ub-amber-bg text-ub-amber-text' },
-  { key: 'done',        label: 'Done',       cellClass: 'bg-ub-green-bg text-ub-green-text' },
+  {
+    key: 'todo',
+    label: 'To do',
+    cellClass:
+      'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300',
+  },
+  {
+    key: 'in-progress',
+    label: 'In progress',
+    cellClass: 'bg-ub-blue-bg text-ub-blue-text',
+  },
+  {
+    key: 'in-review',
+    label: 'In review',
+    cellClass: 'bg-ub-purple-bg text-ub-purple-text',
+  },
+  {
+    key: 'feedback',
+    label: 'Feedback',
+    cellClass: 'bg-ub-amber-bg text-ub-amber-text',
+  },
+  {
+    key: 'done',
+    label: 'Done',
+    cellClass: 'bg-ub-green-bg text-ub-green-text',
+  },
 ];
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
-function TaskStatusMatrix({
-  tasks,
-  slug,
-}: {
-  tasks: Task[];
-  slug: string;
-}) {
+function TaskStatusMatrix({ tasks, slug }: { tasks: Task[]; slug: string }) {
   const { t } = useTranslation('common');
   const router = useRouter();
 
@@ -181,13 +194,7 @@ function TaskStatusMatrix({
 
 const ATTENTION_LIMIT = 4;
 
-function NeedsAttentionPanel({
-  tasks,
-  slug,
-}: {
-  tasks: Task[];
-  slug: string;
-}) {
+function NeedsAttentionPanel({ tasks, slug }: { tasks: Task[]; slug: string }) {
   const { t } = useTranslation('common');
   const router = useRouter();
   const now = new Date();
@@ -228,15 +235,19 @@ function NeedsAttentionPanel({
         ) : (
           <>
             {shown.map((task) => {
-              const dueLabel = new Date(task.duedate as string).toLocaleDateString(
-                undefined,
-                { month: 'short', day: 'numeric' }
-              );
+              const dueLabel = new Date(
+                task.duedate as string
+              ).toLocaleDateString(undefined, {
+                month: 'short',
+                day: 'numeric',
+              });
               return (
                 <button
                   key={task.id}
                   aria-label={`${task.title}, ${t('dashboard.overdue-tasks')} ${dueLabel}`}
-                  onClick={() => router.push(`/teams/${slug}/tasks/${task.taskNumber}`)}
+                  onClick={() =>
+                    router.push(`/teams/${slug}/tasks/${task.taskNumber}`)
+                  }
                   className="w-full text-left px-3 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
                 >
                   <div className="flex items-start justify-between gap-2">

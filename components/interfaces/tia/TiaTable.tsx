@@ -51,29 +51,53 @@ const TiaTable = ({
         <table className="w-full min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-sm">
           <thead className="bg-slate-50 dark:bg-slate-900">
             <tr>
-              <th scope="col" className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('tia')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('tia-data-exporter')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('tia-data-importer')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('tia-assessment-date')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('tia-ending-date')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('tia-egal-analysis')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('tia-transfer-is')}
               </th>
               {canAccess('task', ['update']) && (
-                <th scope="col" className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                <th
+                  scope="col"
+                  className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+                >
                   {t('actions')}
                 </th>
               )}
@@ -111,7 +135,9 @@ const TiaTable = ({
                 <td className="px-1.5 py-1.5">
                   <span>
                     {task.properties.tia_procedure[0].LawImporterCountry
-                      ? t(`country.${task.properties.tia_procedure[0].LawImporterCountry}`)
+                      ? t(
+                          `country.${task.properties.tia_procedure[0].LawImporterCountry}`
+                        )
                       : '—'}
                   </span>
                 </td>

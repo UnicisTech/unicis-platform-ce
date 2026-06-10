@@ -44,7 +44,9 @@ const RemoveTeam = ({ team }: { team: Team }) => {
           <span className="text-[12px] font-semibold text-red-700 dark:text-red-400 uppercase tracking-wide">
             {t('remove-team')}
           </span>
-          <p className="text-xs text-red-500 mt-0.5">{t('remove-team-warning')}</p>
+          <p className="text-xs text-red-500 mt-0.5">
+            {t('remove-team-warning')}
+          </p>
         </div>
         <div className="px-4 py-3 flex justify-end">
           <Button

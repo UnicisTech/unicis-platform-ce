@@ -24,7 +24,8 @@ const STATUS_WEIGHT: Record<string, number> = {
 function computeOverdue(tasks: Task[]): number {
   const now = new Date();
   return tasks.filter(
-    (t) => t.status !== 'done' && t.duedate && new Date(t.duedate as string) < now
+    (t) =>
+      t.status !== 'done' && t.duedate && new Date(t.duedate as string) < now
   ).length;
 }
 
@@ -141,13 +142,7 @@ function BannerWithCsc({
 }
 
 // ── Without CSC data — shows overdue + risks only ────────────────────────────
-function BannerNoCsc({
-  tasks,
-  slug,
-}: {
-  tasks: Task[];
-  slug: string;
-}) {
+function BannerNoCsc({ tasks, slug }: { tasks: Task[]; slug: string }) {
   const { t } = useTranslation('common');
 
   const { overdueCount, openRisksCount } = useMemo(

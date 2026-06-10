@@ -2,7 +2,10 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 import type { Task } from 'types';
 import type { CscAuditLog } from 'types';
-import { AuditTimeline, type TimelineLog } from '@/components/interfaces/Task/AuditTimeline';
+import {
+  AuditTimeline,
+  type TimelineLog,
+} from '@/components/interfaces/Task/AuditTimeline';
 
 const CscAuditLogs = ({ task }: { task: Task }) => {
   const { t } = useTranslation('common');

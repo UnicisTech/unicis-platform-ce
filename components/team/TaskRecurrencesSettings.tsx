@@ -149,8 +149,10 @@ const getInitialFormValues = (
 
 const recurrenceStatusClassName: Record<TaskRecurrenceStatus, string> = {
   ACTIVE: 'border-emerald-200 bg-emerald-50 text-emerald-700',
-  PAUSED: 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200',
-  ARCHIVED: 'border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400',
+  PAUSED:
+    'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200',
+  ARCHIVED:
+    'border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400',
 };
 
 const TaskRecurrencesSettings = ({ team }: { team: Team }) => {

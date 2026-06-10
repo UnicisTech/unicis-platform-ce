@@ -155,7 +155,10 @@ const RiskMatrixDashboardChart = ({
   return (
     <div
       role="img"
-      aria-label={t('chart.risk-matrix-aria-label', { defaultValue: 'Risk matrix showing distribution of risks by likelihood and impact level' })}
+      aria-label={t('chart.risk-matrix-aria-label', {
+        defaultValue:
+          'Risk matrix showing distribution of risks by likelihood and impact level',
+      })}
       className="relative mx-auto"
       style={{ width: `${chartWidth}px`, height: `${chartHeight}px` }}
     >

@@ -78,7 +78,11 @@ const Form = ({
                 )}
               />
               {formik.errors.name && (
-                <p id="name-error" role="alert" className="text-xs text-destructive mt-1">
+                <p
+                  id="name-error"
+                  role="alert"
+                  className="text-xs text-destructive mt-1"
+                >
                   {formik.errors.name}
                 </p>
               )}
@@ -93,9 +97,7 @@ const Form = ({
                 onChange={formik.handleChange}
                 value={formik.values.url}
                 aria-invalid={!!formik.errors.url}
-                aria-describedby={
-                  formik.errors.url ? 'url-error' : 'url-hint'
-                }
+                aria-describedby={formik.errors.url ? 'url-error' : 'url-hint'}
                 className={cn(
                   formik.errors.url &&
                     'border-destructive focus-visible:ring-destructive'
@@ -105,7 +107,11 @@ const Form = ({
                 {t('endpoint-must-be-https')}
               </p>
               {formik.errors.url && (
-                <p id="url-error" role="alert" className="text-xs text-destructive mt-1">
+                <p
+                  id="url-error"
+                  role="alert"
+                  className="text-xs text-destructive mt-1"
+                >
                   {formik.errors.url}
                 </p>
               )}

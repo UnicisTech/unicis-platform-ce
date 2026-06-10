@@ -97,12 +97,19 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
       .map((task) => {
         const risk = (task.properties as TaskProperties)
           .rm_risk as RMProcedureInterface;
-        const raw = calculateRiskRating(risk[0].RawProbability, risk[0].RawImpact);
+        const raw = calculateRiskRating(
+          risk[0].RawProbability,
+          risk[0].RawImpact
+        );
         const target = calculateRiskRating(
           risk[1].TreatedProbability,
           risk[1].TreatedImpact
         );
-        const current = calculateCurrentRiskRating(raw, target, risk[1].TreatmentStatus);
+        const current = calculateCurrentRiskRating(
+          raw,
+          target,
+          risk[1].TreatmentStatus
+        );
         return { title: task.title, current };
       })
       .sort((a, b) => b.current - a.current)
@@ -153,7 +160,9 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
             </div>
             <div className="divide-y divide-slate-50">
               {topRisks.map(({ title, current }, i) => {
-                const level = RISK_LEVELS.find((l) => l.key === severityOf(current))!;
+                const level = RISK_LEVELS.find(
+                  (l) => l.key === severityOf(current)
+                )!;
                 return (
                   <div
                     key={i}
@@ -180,7 +189,9 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
             {t('target-risk-rating')}
           </span>
         </div>
-        <div className="text-[11px] text-slate-500 dark:text-slate-400 mb-1">Impact → / Likelihood ↑</div>
+        <div className="text-[11px] text-slate-500 dark:text-slate-400 mb-1">
+          Impact → / Likelihood ↑
+        </div>
         <div className="flex items-center justify-center">
           <DashboardMatrixChart
             datasets={[]}

@@ -10,11 +10,11 @@ import { cn } from '@/components/shadcn/lib/utils';
 
 // ── Status weight for compliance % computation ────────────────────────────────
 const STATUS_WEIGHT: Record<string, number> = {
-  'unknown': -1,
+  unknown: -1,
   'not-applicable': -1,
   'not-performed': 0,
   'performed-informally': 25,
-  'planned': 50,
+  planned: 50,
   'well-defined': 75,
   'quantitatively-controlled': 90,
   'continuously-improving': 100,
@@ -152,7 +152,9 @@ const TeamCscAnalysis = ({
             {sectionData.map(({ id, label, percent }) => (
               <div key={id}>
                 <div className="flex justify-between text-[11px] mb-1">
-                  <span className="text-slate-500 dark:text-slate-400 truncate mr-2">{label}</span>
+                  <span className="text-slate-500 dark:text-slate-400 truncate mr-2">
+                    {label}
+                  </span>
                   <span
                     className="font-medium flex-shrink-0"
                     style={{ color: progressColor(percent) }}
@@ -178,7 +180,9 @@ const TeamCscAnalysis = ({
         <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
           <div className="flex items-center justify-between mb-3">
             <span className="text-[12px] font-medium text-slate-900 dark:text-slate-100">
-              {t('status-distribution', { defaultValue: 'Status distribution' })}
+              {t('status-distribution', {
+                defaultValue: 'Status distribution',
+              })}
             </span>
           </div>
           <div className="space-y-2">

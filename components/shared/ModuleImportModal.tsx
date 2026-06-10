@@ -189,7 +189,9 @@ function ModuleImportModal<T extends ImportRow>({
 
           {/* Preview section */}
           {parsing && (
-            <p className="text-sm text-slate-500 dark:text-slate-400">{t('loading')}…</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              {t('loading')}…
+            </p>
           )}
 
           {parsedRows.length > 0 && (
@@ -247,7 +249,9 @@ function ModuleImportModal<T extends ImportRow>({
                             title={cell}
                           >
                             {cell || (
-                              <span className="text-slate-500 dark:text-slate-400">—</span>
+                              <span className="text-slate-500 dark:text-slate-400">
+                                —
+                              </span>
                             )}
                           </td>
                         ))}

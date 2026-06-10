@@ -74,7 +74,9 @@ const CommentReactions = ({ comment, onReact }: CommentReactionsProps) => {
           }`}
         >
           <span>{emoji}</span>
-          <span className="text-slate-600 dark:text-slate-300">{group.count}</span>
+          <span className="text-slate-600 dark:text-slate-300">
+            {group.count}
+          </span>
         </button>
       ))}
       <div className="relative" ref={pickerRef}>

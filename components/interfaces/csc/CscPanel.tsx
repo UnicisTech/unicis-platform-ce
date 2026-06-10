@@ -22,10 +22,14 @@ import type { ExportFormat, SoaPayload, SoaRow } from '@/lib/soa/types';
 import { SectionRail } from './SectionRail';
 
 const STATUS_WEIGHT: Record<string, number> = {
-  'unknown': -1, 'not-applicable': -1,
-  'not-performed': 0, 'performed-informally': 25,
-  'planned': 50, 'well-defined': 75,
-  'quantitatively-controlled': 90, 'continuously-improving': 100,
+  unknown: -1,
+  'not-applicable': -1,
+  'not-performed': 0,
+  'performed-informally': 25,
+  planned: 50,
+  'well-defined': 75,
+  'quantitatively-controlled': 90,
+  'continuously-improving': 100,
 };
 
 export async function updateCscStatus(params: {
@@ -105,7 +109,9 @@ export default function CscPanel({
 
   // Convert string values to appropriate types for internal use
   const sectionFilter = sectionFilterValue ? [sectionFilterValue] : null;
-  const statusFilter = statusFilterValue ? ([statusFilterValue] as CscStatus[]) : null;
+  const statusFilter = statusFilterValue
+    ? ([statusFilterValue] as CscStatus[])
+    : null;
   const perPage = perPageValue;
 
   // Update URL with new filter values (replaces history to avoid back-stack pollution)
@@ -118,7 +124,9 @@ export default function CscPanel({
             ...router.query,
             ...updates,
             // Reset to page 1 when filter changes
-            ...(updates.section !== undefined || updates.status !== undefined ? { page: 1 } : {}),
+            ...(updates.section !== undefined || updates.status !== undefined
+              ? { page: 1 }
+              : {}),
           },
         },
         undefined,
@@ -417,8 +425,24 @@ export default function CscPanel({
 
   // Build filter chips for display
   const filterChips = [
-    ...(sectionFilterValue ? [{ label: sectionFilterValue, value: sectionFilterValue, onRemove: () => setSectionFilter(null) }] : []),
-    ...(statusFilterValue ? [{ label: statusFilterValue, value: statusFilterValue, onRemove: () => setStatusFilter(null) }] : []),
+    ...(sectionFilterValue
+      ? [
+          {
+            label: sectionFilterValue,
+            value: sectionFilterValue,
+            onRemove: () => setSectionFilter(null),
+          },
+        ]
+      : []),
+    ...(statusFilterValue
+      ? [
+          {
+            label: statusFilterValue,
+            value: statusFilterValue,
+            onRemove: () => setStatusFilter(null),
+          },
+        ]
+      : []),
   ];
 
   const onClearAllFilters = useCallback(() => {

@@ -73,7 +73,9 @@ export default function StatusPromptDialog({
             <Badge variant="secondary" className="font-mono font-bold">
               {controlCode}
             </Badge>{' '}
-            <span className="text-slate-700 dark:text-slate-200">{controlTitle}</span>
+            <span className="text-slate-700 dark:text-slate-200">
+              {controlTitle}
+            </span>
           </DialogDescription>
         </DialogHeader>
 
@@ -105,7 +107,8 @@ export default function StatusPromptDialog({
                   <span
                     className={cn(
                       'inline-block h-3 w-3 rounded-full shrink-0',
-                      CSC_STATUS_TO_CSS[status] || 'bg-slate-200 dark:bg-slate-700'
+                      CSC_STATUS_TO_CSS[status] ||
+                        'bg-slate-200 dark:bg-slate-700'
                     )}
                     aria-hidden="true"
                   />

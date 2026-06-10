@@ -31,12 +31,9 @@ function EventIcon({ event }: { event: string }) {
   const e = event.toLowerCase();
   if (e === 'created' || e === 'added')
     return <Plus className={cn(base, 'text-emerald-600')} />;
-  if (e === 'updated')
-    return <Pencil className={cn(base, 'text-blue-500')} />;
-  if (e === 'deleted')
-    return <Trash2 className={cn(base, 'text-red-500')} />;
-  if (e === 'removed')
-    return <Minus className={cn(base, 'text-red-500')} />;
+  if (e === 'updated') return <Pencil className={cn(base, 'text-blue-500')} />;
+  if (e === 'deleted') return <Trash2 className={cn(base, 'text-red-500')} />;
+  if (e === 'removed') return <Minus className={cn(base, 'text-red-500')} />;
   return <RefreshCw className={cn(base, 'text-slate-400')} />;
 }
 
@@ -87,9 +84,7 @@ function DefaultDiffChips({
           {prev}
         </span>
       )}
-      {prev && next && (
-        <span className="text-slate-400 text-[11px]">→</span>
-      )}
+      {prev && next && <span className="text-slate-400 text-[11px]">→</span>}
       {next && (
         <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 text-[11px] font-medium">
           {next}

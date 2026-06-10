@@ -53,9 +53,12 @@ export function Stepper({ steps, currentStep, onStepChange }: StepperProps) {
                 <div
                   className={cn(
                     'w-2.5 h-2.5 rounded-full mb-1.5 transition-all shrink-0',
-                    isActive && 'bg-blue-600 ring-2 ring-blue-200 dark:ring-blue-800/50',
+                    isActive &&
+                      'bg-blue-600 ring-2 ring-blue-200 dark:ring-blue-800/50',
                     isCompleted && 'bg-blue-500',
-                    !isActive && !isCompleted && 'bg-slate-300 dark:bg-slate-600',
+                    !isActive &&
+                      !isCompleted &&
+                      'bg-slate-300 dark:bg-slate-600',
                     isClickable &&
                       'group-hover:bg-blue-400 dark:group-hover:bg-blue-500 group-hover:ring-2 group-hover:ring-blue-200 dark:group-hover:ring-blue-800/50'
                   )}
@@ -65,7 +68,8 @@ export function Stepper({ steps, currentStep, onStepChange }: StepperProps) {
                 <div
                   className={cn(
                     'text-[10px] leading-tight break-words whitespace-normal [overflow-wrap:anywhere] transition-colors px-0.5',
-                    isActive && 'text-blue-600 dark:text-blue-400 font-semibold',
+                    isActive &&
+                      'text-blue-600 dark:text-blue-400 font-semibold',
                     isCompleted && 'text-blue-500 font-medium',
                     !isActive && !isCompleted && 'text-slate-400',
                     isClickable && 'group-hover:text-blue-500'
@@ -81,7 +85,9 @@ export function Stepper({ steps, currentStep, onStepChange }: StepperProps) {
                   <div
                     className={cn(
                       'h-[2px] w-full rounded-full transition-colors',
-                      isCompleted ? 'bg-blue-400 dark:bg-blue-500' : 'bg-slate-200 dark:bg-slate-700'
+                      isCompleted
+                        ? 'bg-blue-400 dark:bg-blue-500'
+                        : 'bg-slate-200 dark:bg-slate-700'
                     )}
                   />
                 </div>

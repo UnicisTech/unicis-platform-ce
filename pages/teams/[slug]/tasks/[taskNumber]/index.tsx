@@ -12,7 +12,10 @@ import {
   TaskAuditLogs,
   TaskTab,
 } from '@/components/interfaces/Task';
-import { toTaskPanelId, toTaskTabId } from '@/components/interfaces/Task/TaskTab';
+import {
+  toTaskPanelId,
+  toTaskTabId,
+} from '@/components/interfaces/Task/TaskTab';
 import { CscAuditLogs, CscPanel } from '@/components/interfaces/csc';
 import {
   RpaPanel,
@@ -110,7 +113,9 @@ const TaskById = () => {
 
       {/* Task title */}
       <div className="flex items-center gap-2 mb-3">
-        <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">{task.title}</h3>
+        <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
+          {task.title}
+        </h3>
         {task.recurrenceScheduleId && <TaskRecurrenceBadge />}
       </div>
 
@@ -312,7 +317,11 @@ const TaskById = () => {
       </div>
 
       {activeCommentTab === 'Comments' ? (
-        <div id="comments-panel-comments" role="tabpanel" aria-labelledby="comments-tab-comments">
+        <div
+          id="comments-panel-comments"
+          role="tabpanel"
+          aria-labelledby="comments-tab-comments"
+        >
           <Panel title={t('comments')}>
             <div className="p-4">
               <Comments task={task} mutateTask={mutateTask} />
@@ -320,7 +329,11 @@ const TaskById = () => {
           </Panel>
         </div>
       ) : (
-        <div id="comments-panel-activity" role="tabpanel" aria-labelledby="comments-tab-activity">
+        <div
+          id="comments-panel-activity"
+          role="tabpanel"
+          aria-labelledby="comments-tab-activity"
+        >
           <Panel title={t('task-activity')}>
             <div className="p-4">
               <TaskAuditLogs task={task} />

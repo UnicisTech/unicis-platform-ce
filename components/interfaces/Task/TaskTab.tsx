@@ -21,7 +21,7 @@ const TaskTab = ({
 
   // Map navigation name → i18n key (falls back to raw name if no key exists)
   const labelKey: Record<string, string> = {
-    'Overview': 'overview',
+    Overview: 'overview',
     'Processing Activities': 'rpa-activities',
     'Transfer Impact Assessment': 'tia',
     'Privacy Impact Assessment': 'pia',

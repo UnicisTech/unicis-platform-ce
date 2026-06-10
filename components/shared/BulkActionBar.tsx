@@ -1,19 +1,19 @@
-import React from 'react'
-import { CheckSquare, ChevronDown } from 'lucide-react'
-import { useTranslation } from 'next-i18next'
-import { CscStatusBadge, CSC_STATUS_TO_BADGE_KEY } from './CscStatusBadge'
-import { CSC_STATUSES } from '@/lib/csc/csc-statuses'
+import React from 'react';
+import { CheckSquare, ChevronDown } from 'lucide-react';
+import { useTranslation } from 'next-i18next';
+import { CscStatusBadge, CSC_STATUS_TO_BADGE_KEY } from './CscStatusBadge';
+import { CSC_STATUSES } from '@/lib/csc/csc-statuses';
 
 export interface BulkActionBarProps {
-  selectedCount: number
-  step: 'link-tasks' | 'change-status'
-  onLinkTasks: () => void
-  onStatusChange: (status: string) => Promise<void>
-  onClear: () => void
-  statusDropdownOpen?: boolean
-  onToggleStatusDropdown?: () => void
-  hasAllTasksAssigned?: boolean
-  showTaskLinkingStep?: boolean
+  selectedCount: number;
+  step: 'link-tasks' | 'change-status';
+  onLinkTasks: () => void;
+  onStatusChange: (status: string) => Promise<void>;
+  onClear: () => void;
+  statusDropdownOpen?: boolean;
+  onToggleStatusDropdown?: () => void;
+  hasAllTasksAssigned?: boolean;
+  showTaskLinkingStep?: boolean;
 }
 
 export function BulkActionBar({
@@ -25,27 +25,29 @@ export function BulkActionBar({
   statusDropdownOpen = false,
   onToggleStatusDropdown,
   hasAllTasksAssigned = false,
-  showTaskLinkingStep = true
+  showTaskLinkingStep = true,
 }: BulkActionBarProps) {
-  const { t } = useTranslation('common')
-  const [isApplying, setIsApplying] = React.useState(false)
+  const { t } = useTranslation('common');
+  const [isApplying, setIsApplying] = React.useState(false);
 
   const handleStatusSelect = async (status: string) => {
-    setIsApplying(true)
+    setIsApplying(true);
     try {
-      await onStatusChange(status)
+      await onStatusChange(status);
     } finally {
-      setIsApplying(false)
+      setIsApplying(false);
     }
-  }
+  };
 
-  if (selectedCount === 0) return null
+  if (selectedCount === 0) return null;
 
   return (
     <>
       <div className="fixed bottom-0 left-1/2 -translate-x-1/2 mb-4 z-50 flex items-center gap-3 bg-slate-900 text-white px-4 py-2.5 rounded-xl shadow-lg">
         <CheckSquare size={15} aria-hidden />
-        <span className="text-[13px] font-medium">{selectedCount} selected</span>
+        <span className="text-[13px] font-medium">
+          {selectedCount} selected
+        </span>
         <div className="w-px h-4 bg-slate-600" />
 
         {step === 'link-tasks' && showTaskLinkingStep && (
@@ -92,33 +94,32 @@ export function BulkActionBar({
       </div>
 
       {/* Status dropdown — shown in step 2 when open */}
-      {step === 'change-status' && statusDropdownOpen && hasAllTasksAssigned && (
-        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden shadow-lg min-w-[280px]">
-          <div className="px-3 py-2 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 text-[11px] font-medium text-slate-500 dark:text-slate-400">
-            {isApplying ? 'Applying...' : t('bulk-actions.select-new-status')}
+      {step === 'change-status' &&
+        statusDropdownOpen &&
+        hasAllTasksAssigned && (
+          <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden shadow-lg min-w-[280px]">
+            <div className="px-3 py-2 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 text-[11px] font-medium text-slate-500 dark:text-slate-400">
+              {isApplying ? 'Applying...' : t('bulk-actions.select-new-status')}
+            </div>
+            {CSC_STATUSES.filter((s) => s !== 'unknown').map((statusEnum) => {
+              // Convert hyphenated enum to underscored for CscStatusBadge (not-performed → not_performed)
+              const badgeStatus = statusEnum.replace(/-/g, '_') as any;
+              return (
+                <button
+                  key={statusEnum}
+                  onClick={() => handleStatusSelect(statusEnum)}
+                  disabled={isApplying}
+                  className="w-full text-left px-3 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700/50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
+                >
+                  <CscStatusBadge status={badgeStatus} size="sm" />
+                  <span className="text-sm text-slate-700 dark:text-slate-200">
+                    {t(`statuses.${statusEnum}.label`)}
+                  </span>
+                </button>
+              );
+            })}
           </div>
-          {CSC_STATUSES.filter(s => s !== 'unknown').map((statusEnum) => {
-            // Convert hyphenated enum to underscored for CscStatusBadge (not-performed → not_performed)
-            const badgeStatus = (statusEnum.replace(/-/g, '_') as any);
-            return (
-              <button
-                key={statusEnum}
-                onClick={() => handleStatusSelect(statusEnum)}
-                disabled={isApplying}
-                className="w-full text-left px-3 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700/50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
-              >
-                <CscStatusBadge
-                  status={badgeStatus}
-                  size="sm"
-                />
-                <span className="text-sm text-slate-700 dark:text-slate-200">
-                  {t(`statuses.${statusEnum}.label`)}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      )}
+        )}
     </>
-  )
+  );
 }

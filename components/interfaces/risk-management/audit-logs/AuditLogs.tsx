@@ -1,7 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 import type { Task, AuditLog } from 'types';
-import { AuditTimeline, type TimelineLog } from '@/components/interfaces/Task/AuditTimeline';
+import {
+  AuditTimeline,
+  type TimelineLog,
+} from '@/components/interfaces/Task/AuditTimeline';
 import { Error, Loading } from '@/components/shared';
 import useTeamMembersMap from 'hooks/useTeamMembersMap';
 import { auditLogHelper } from './auditLogHelper';
@@ -49,7 +52,12 @@ const RmAuditLogs = ({ task, slug }: { task: Task; slug: string }) => {
           <div className="flex items-center gap-1.5 mt-1 flex-wrap">
             {hasPrev && (
               <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] font-medium line-through">
-                {auditLogHelper(field, prevValue as string | string[] | undefined, t, membersById)}
+                {auditLogHelper(
+                  field,
+                  prevValue as string | string[] | undefined,
+                  t,
+                  membersById
+                )}
               </span>
             )}
             {hasPrev && hasNext && (
@@ -57,7 +65,12 @@ const RmAuditLogs = ({ task, slug }: { task: Task; slug: string }) => {
             )}
             {hasNext && (
               <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 text-[11px] font-medium">
-                {auditLogHelper(field, nextValue as string | string[] | undefined, t, membersById)}
+                {auditLogHelper(
+                  field,
+                  nextValue as string | string[] | undefined,
+                  t,
+                  membersById
+                )}
               </span>
             )}
           </div>

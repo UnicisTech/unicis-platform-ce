@@ -48,12 +48,12 @@ import { getTaskModules, statuses } from '@/lib/tasks';
 
 // ── Status dot colour per column ────────────────────────────────────────────
 const STATUS_DOT: Record<string, string> = {
-  'todo':        'bg-slate-400',
+  todo: 'bg-slate-400',
   'in-progress': 'bg-blue-500',
-  'in-review':   'bg-purple-500',
-  'feedback':    'bg-amber-500',
-  'done':        'bg-emerald-500',
-  'failed':      'bg-red-500',
+  'in-review': 'bg-purple-500',
+  feedback: 'bg-amber-500',
+  done: 'bg-emerald-500',
+  failed: 'bg-red-500',
 };
 
 type TasksByStatus = Record<string, Task[]>;

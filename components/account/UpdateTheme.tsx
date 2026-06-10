@@ -20,7 +20,9 @@ const UpdateTheme: React.FC = () => {
         <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
           {t('theme')}
         </span>
-        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{t('change-theme')}</p>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+          {t('change-theme')}
+        </p>
       </div>
 
       <div className="p-4">
@@ -29,7 +31,9 @@ const UpdateTheme: React.FC = () => {
             <Button variant="outline" className="w-60 justify-between">
               <div className="flex items-center gap-2">
                 <selectedTheme.icon className="w-5 h-5 text-slate-700 dark:text-slate-200" />
-                <span className="text-slate-700 dark:text-slate-200">{selectedTheme.name}</span>
+                <span className="text-slate-700 dark:text-slate-200">
+                  {selectedTheme.name}
+                </span>
               </div>
               <ChevronDownIcon className="w-5 h-5 text-slate-400" />
             </Button>
@@ -52,7 +56,9 @@ const UpdateTheme: React.FC = () => {
                   {theme.icon && (
                     <theme.icon className="w-5 h-5 text-slate-700 dark:text-slate-200" />
                   )}
-                  <span className="text-slate-700 dark:text-slate-200">{theme.name}</span>
+                  <span className="text-slate-700 dark:text-slate-200">
+                    {theme.name}
+                  </span>
                 </Button>
               </DropdownMenuItem>
             ))}

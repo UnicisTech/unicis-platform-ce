@@ -429,19 +429,33 @@ export default function SSOConnections({
               <Table>
                 <TableHeader>
                   <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-900">
-                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('sso.provider')}</TableHead>
-                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('sso.type')}</TableHead>
-                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('status')}</TableHead>
-                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">{t('actions')}</TableHead>
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                      {t('sso.provider')}
+                    </TableHead>
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                      {t('sso.type')}
+                    </TableHead>
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                      {t('status')}
+                    </TableHead>
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">
+                      {t('actions')}
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {sortedConnections.map((connection) => (
-                    <TableRow key={connection.clientID} className="border-slate-100 dark:border-slate-700">
+                    <TableRow
+                      key={connection.clientID}
+                      className="border-slate-100 dark:border-slate-700"
+                    >
                       <TableCell className="px-4 py-3">
                         <div className="space-y-1">
                           <div className="text-sm font-medium text-slate-900 dark:text-slate-100">
-                            {providerName(connection, t('sso.unknown-provider'))}
+                            {providerName(
+                              connection,
+                              t('sso.unknown-provider')
+                            )}
                           </div>
                           {(connection.name || connection.label) && (
                             <div className="text-xs text-slate-500 dark:text-slate-400">
@@ -459,7 +473,9 @@ export default function SSOConnections({
                       </TableCell>
                       <TableCell className="px-4 py-3">
                         <Badge
-                          variant={connection.deactivated ? 'secondary' : 'default'}
+                          variant={
+                            connection.deactivated ? 'secondary' : 'default'
+                          }
                         >
                           {connection.deactivated ? t('inactive') : t('active')}
                         </Badge>
@@ -498,7 +514,9 @@ export default function SSOConnections({
                               onSelect={() => setStatusConnection(connection)}
                             >
                               <Power className="h-4 w-4" />
-                              {connection.deactivated ? t('enable') : t('disable')}
+                              {connection.deactivated
+                                ? t('enable')
+                                : t('disable')}
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem
@@ -1408,7 +1426,9 @@ function Field({
       </Label>
       {children}
       {description && (
-        <p className="text-xs leading-5 text-slate-500 dark:text-slate-400">{description}</p>
+        <p className="text-xs leading-5 text-slate-500 dark:text-slate-400">
+          {description}
+        </p>
       )}
     </div>
   );
@@ -1450,8 +1470,12 @@ function AdvancedSettings({ children }: { children: ReactNode }) {
 function MetadataValue({ label, value }: { label: string; value: string }) {
   return (
     <div className="space-y-1 rounded-md border p-3">
-      <div className="text-xs font-medium text-slate-500 dark:text-slate-400">{label}</div>
-      <div className="break-all text-sm text-slate-900 dark:text-slate-100">{value}</div>
+      <div className="text-xs font-medium text-slate-500 dark:text-slate-400">
+        {label}
+      </div>
+      <div className="break-all text-sm text-slate-900 dark:text-slate-100">
+        {value}
+      </div>
     </div>
   );
 }

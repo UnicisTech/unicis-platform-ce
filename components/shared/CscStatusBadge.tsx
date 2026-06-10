@@ -1,5 +1,5 @@
-import React from 'react'
-import { cn } from '@/components/shadcn/lib/utils'
+import React from 'react';
+import { cn } from '@/components/shadcn/lib/utils';
 
 export type CscStatus =
   | 'not_applicable'
@@ -8,14 +8,17 @@ export type CscStatus =
   | 'planned'
   | 'well_defined'
   | 'quantitatively_controlled'
-  | 'continuously_improving'
+  | 'continuously_improving';
 
-const STATUS_CONFIG: Record<CscStatus, {
-  label: string
-  dotColor: string
-  bg: string
-  text: string
-}> = {
+const STATUS_CONFIG: Record<
+  CscStatus,
+  {
+    label: string;
+    dotColor: string;
+    bg: string;
+    text: string;
+  }
+> = {
   not_applicable: {
     label: 'Not applicable',
     dotColor: 'bg-slate-400',
@@ -58,21 +61,25 @@ const STATUS_CONFIG: Record<CscStatus, {
     bg: 'bg-ub-green-bg',
     text: 'text-ub-green-text',
   },
-}
+};
 
 interface CscStatusBadgeProps {
-  status: CscStatus
-  size?: 'sm' | 'md'
-  className?: string
+  status: CscStatus;
+  size?: 'sm' | 'md';
+  className?: string;
 }
 
-export function CscStatusBadge({ status, size = 'md', className }: CscStatusBadgeProps) {
-  const config = STATUS_CONFIG[status]
+export function CscStatusBadge({
+  status,
+  size = 'md',
+  className,
+}: CscStatusBadgeProps) {
+  const config = STATUS_CONFIG[status];
 
   // Guard against undefined config
   if (!config) {
-    console.warn(`Invalid status passed to CscStatusBadge: ${status}`)
-    return null
+    console.warn(`Invalid status passed to CscStatusBadge: ${status}`);
+    return null;
   }
 
   return (
@@ -88,21 +95,23 @@ export function CscStatusBadge({ status, size = 'md', className }: CscStatusBadg
       aria-label={config.label}
     >
       <span
-        className={cn('rounded-full flex-shrink-0', config.dotColor,
+        className={cn(
+          'rounded-full flex-shrink-0',
+          config.dotColor,
           size === 'sm' ? 'w-1.5 h-1.5' : 'w-[5px] h-[5px]'
         )}
         aria-hidden="true"
       />
       {config.label}
     </span>
-  )
+  );
 }
 
 export const CSC_STATUS_TO_BADGE_KEY: Record<string, CscStatus> = {
-  'Not Performed':               'not_performed',
-  'Performed Informally':        'performed_informally',
-  'Planned':                     'planned',
-  'Well Defined':                'well_defined',
-  'Quantitatively Controlled':   'quantitatively_controlled',
-  'Continuously Improving':      'continuously_improving',
-}
+  'Not Performed': 'not_performed',
+  'Performed Informally': 'performed_informally',
+  Planned: 'planned',
+  'Well Defined': 'well_defined',
+  'Quantitatively Controlled': 'quantitatively_controlled',
+  'Continuously Improving': 'continuously_improving',
+};

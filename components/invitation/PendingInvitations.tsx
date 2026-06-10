@@ -88,22 +88,37 @@ const PendingInvitations = ({ team }: { team: Team }) => {
           <Table>
             <TableHeader>
               <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-900">
-                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('email')}</TableHead>
-                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('role')}</TableHead>
-                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('expires-at')}</TableHead>
-                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">{t('action')}</TableHead>
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                  {t('email')}
+                </TableHead>
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                  {t('role')}
+                </TableHead>
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                  {t('expires-at')}
+                </TableHead>
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">
+                  {t('action')}
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {invitations.map((invitation) => (
-                <TableRow key={invitation.token} className="border-slate-100 dark:border-slate-700">
+                <TableRow
+                  key={invitation.token}
+                  className="border-slate-100 dark:border-slate-700"
+                >
                   <TableCell className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <LetterAvatar name={invitation.email} />
-                      <span className="text-sm text-slate-900 dark:text-slate-100">{invitation.email}</span>
+                      <span className="text-sm text-slate-900 dark:text-slate-100">
+                        {invitation.email}
+                      </span>
                     </div>
                   </TableCell>
-                  <TableCell className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">{invitation.role}</TableCell>
+                  <TableCell className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">
+                    {invitation.role}
+                  </TableCell>
                   <TableCell className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">
                     {new Date(invitation.expires).toLocaleDateString()}
                   </TableCell>

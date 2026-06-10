@@ -1,12 +1,12 @@
-import React from 'react'
-import { Lock } from 'lucide-react'
-import { useTranslation } from 'next-i18next'
+import React from 'react';
+import { Lock } from 'lucide-react';
+import { useTranslation } from 'next-i18next';
 
 export interface UpgradeGateProps {
-  featureName: string
-  description: string
-  requiredPlan?: 'Premium' | 'Ultimate'
-  onUpgrade?: () => void
+  featureName: string;
+  description: string;
+  requiredPlan?: 'Premium' | 'Ultimate';
+  onUpgrade?: () => void;
 }
 
 export function UpgradeGate({
@@ -15,7 +15,7 @@ export function UpgradeGate({
   requiredPlan = 'Premium',
   onUpgrade,
 }: UpgradeGateProps) {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('common');
 
   return (
     <div className="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
@@ -25,8 +25,12 @@ export function UpgradeGate({
       </div>
       <div className="flex items-center justify-between gap-3 px-3 py-3 bg-white dark:bg-slate-800">
         <div>
-          <p className="text-[13px] font-medium text-slate-900 dark:text-slate-100 mb-0.5">{featureName}</p>
-          <p className="text-[12px] text-slate-500 dark:text-slate-400 leading-relaxed">{description}</p>
+          <p className="text-[13px] font-medium text-slate-900 dark:text-slate-100 mb-0.5">
+            {featureName}
+          </p>
+          <p className="text-[12px] text-slate-500 dark:text-slate-400 leading-relaxed">
+            {description}
+          </p>
         </div>
         <button
           onClick={onUpgrade}
@@ -36,5 +40,5 @@ export function UpgradeGate({
         </button>
       </div>
     </div>
-  )
+  );
 }

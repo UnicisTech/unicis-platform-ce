@@ -181,9 +181,7 @@ const AiChat: React.FC = () => {
                 featureName={t('ai-chatbot')}
                 description={t('upgrade-gate.grc-assistant-description')}
                 requiredPlan="Premium"
-                onUpgrade={() =>
-                  router.push(`/teams/${team?.slug}/billing`)
-                }
+                onUpgrade={() => router.push(`/teams/${team?.slug}/billing`)}
               />
             </CardContent>
           ) : (
@@ -211,7 +209,9 @@ const AiChat: React.FC = () => {
                         remarkPlugins={remarkPlugins}
                         components={{
                           ol: ({ children }) => (
-                            <ol className="list-decimal py-2 pl-6">{children}</ol>
+                            <ol className="list-decimal py-2 pl-6">
+                              {children}
+                            </ol>
                           ),
                           li: ({ children }) => (
                             <li className="mb-2">{children}</li>

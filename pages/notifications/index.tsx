@@ -143,12 +143,18 @@ const NotificationsPage = () => {
             </Button>
           )}
         </div>
-        {pushError && <p className="mt-2 text-xs text-red-600 dark:text-red-400">{pushError}</p>}
+        {pushError && (
+          <p className="mt-2 text-xs text-red-600 dark:text-red-400">
+            {pushError}
+          </p>
+        )}
       </section>
 
       <section className="space-y-3">
         {isLoading && (
-          <p className="text-sm text-slate-500 dark:text-slate-400">{t('loading')}</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            {t('loading')}
+          </p>
         )}
         {!isLoading && notifications.length === 0 && (
           <p className="text-sm text-slate-500 dark:text-slate-400">

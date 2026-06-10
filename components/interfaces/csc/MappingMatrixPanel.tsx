@@ -120,42 +120,43 @@ export default function MappingMatrixPanel({
           {enabledFrameworks.map((fw) => {
             const avg = averageCoverage[fw] ?? 0;
             return (
-              <div key={fw} className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-semibold truncate pr-1">
-                      {isoValueToLabel(fw)}
-                    </span>
-                    <Badge
-                      className={`flex-shrink-0 ${coverageBadgeClass(avg)}`}
-                    >
-                      {avg}%
-                    </Badge>
-                  </div>
-                  {/* Mini progress bar */}
-                  <div className="w-full h-1.5 rounded-full bg-base-200 overflow-hidden">
-                    <div
-                      className={`h-full rounded-full transition-all duration-500 ${
-                        avg >= 75
-                          ? 'bg-success'
-                          : avg >= 50
-                            ? 'bg-warning'
-                            : avg >= 25
-                              ? 'bg-error'
-                              : 'bg-base-300'
-                      }`}
-                      style={{ width: `${avg}%` }}
-                    />
-                  </div>
-                  <p className="text-[10px] mt-1.5">
-                    {t(
-                      'csc-mapping.coverage.avg-to-others',
-                      'avg. to other frameworks'
-                    )}
-                  </p>
-                  <p className="text-[10px]">
-                    {frameworkControls[fw]?.length ?? 0}{' '}
-                    {t('csc-mapping.coverage.total-controls', 'controls')}
-                  </p>
+              <div
+                key={fw}
+                className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3"
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-semibold truncate pr-1">
+                    {isoValueToLabel(fw)}
+                  </span>
+                  <Badge className={`flex-shrink-0 ${coverageBadgeClass(avg)}`}>
+                    {avg}%
+                  </Badge>
+                </div>
+                {/* Mini progress bar */}
+                <div className="w-full h-1.5 rounded-full bg-base-200 overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all duration-500 ${
+                      avg >= 75
+                        ? 'bg-success'
+                        : avg >= 50
+                          ? 'bg-warning'
+                          : avg >= 25
+                            ? 'bg-error'
+                            : 'bg-base-300'
+                    }`}
+                    style={{ width: `${avg}%` }}
+                  />
+                </div>
+                <p className="text-[10px] mt-1.5">
+                  {t(
+                    'csc-mapping.coverage.avg-to-others',
+                    'avg. to other frameworks'
+                  )}
+                </p>
+                <p className="text-[10px]">
+                  {frameworkControls[fw]?.length ?? 0}{' '}
+                  {t('csc-mapping.coverage.total-controls', 'controls')}
+                </p>
               </div>
             );
           })}
@@ -225,7 +226,10 @@ export default function MappingMatrixPanel({
             </TableHeader>
             <TableBody className="divide-y divide-slate-200 dark:divide-slate-700">
               {enabledFrameworks.map((src) => (
-                <TableRow key={src} className="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <TableRow
+                  key={src}
+                  className="hover:bg-slate-50 dark:hover:bg-slate-700/50"
+                >
                   <TableCell className="px-3 py-2 font-medium whitespace-nowrap border-r border-slate-200 dark:border-slate-700">
                     {isoValueToLabel(src)}
                     <span className="ml-1 text-slate-500 dark:text-slate-400 font-normal">

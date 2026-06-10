@@ -115,7 +115,6 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* ── Two-column layout ─────────────────────────────────────── */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-4 p-4">
-
             {/* ── Left column: title + description ──────────────────── */}
             <div className="space-y-4">
               <FormField
@@ -163,7 +162,10 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
 
               {canAccess('task', ['update']) && (
                 <div className="pt-2">
-                  <Button type="submit" disabled={!isFormChanged || isSubmitting}>
+                  <Button
+                    type="submit"
+                    disabled={!isFormChanged || isSubmitting}
+                  >
                     {isSubmitting ? 'Saving...' : t('save-changes')}
                   </Button>
                 </div>
@@ -284,7 +286,6 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
                 )}
               />
             </div>
-
           </div>
         </form>
       </Form>

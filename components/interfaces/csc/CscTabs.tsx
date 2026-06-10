@@ -68,7 +68,10 @@ const CscTabs = ({
           title={
             matrixUnlocked
               ? undefined
-              : t('csc-mapping.tabs.matrix-locked', 'Enable 2+ frameworks to unlock the Mapping Matrix')
+              : t(
+                  'csc-mapping.tabs.matrix-locked',
+                  'Enable 2+ frameworks to unlock the Mapping Matrix'
+                )
           }
           className={cn(
             'flex items-center gap-1.5 px-3 py-[6px] text-[12px] font-medium rounded-md transition-all whitespace-nowrap',

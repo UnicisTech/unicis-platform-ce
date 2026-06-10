@@ -1,7 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 import type { Task, AuditLog } from 'types';
-import { AuditTimeline, type TimelineLog } from '@/components/interfaces/Task/AuditTimeline';
+import {
+  AuditTimeline,
+  type TimelineLog,
+} from '@/components/interfaces/Task/AuditTimeline';
 
 const PiaAuditLogs = ({ task }: { task: Task }) => {
   const { t } = useTranslation('common');

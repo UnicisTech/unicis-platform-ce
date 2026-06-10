@@ -42,12 +42,16 @@ const MODULE_ITEMS: {
   {
     labelKey: 'team-dashboard',
     path: '/dashboard',
-    Icon: () => <ChartBarIcon className="w-4 h-4 fill-blue-600 flex-shrink-0" />,
+    Icon: () => (
+      <ChartBarIcon className="w-4 h-4 fill-blue-600 flex-shrink-0" />
+    ),
   },
   {
     labelKey: 'all-tasks',
     path: '/tasks',
-    Icon: () => <QueueListIcon className="w-4 h-4 fill-blue-600 flex-shrink-0" />,
+    Icon: () => (
+      <QueueListIcon className="w-4 h-4 fill-blue-600 flex-shrink-0" />
+    ),
   },
   {
     labelKey: 'rpa-activities',
@@ -82,7 +86,9 @@ const MODULE_ITEMS: {
   {
     labelKey: 'settings',
     path: '/settings',
-    Icon: () => <Cog6ToothIcon className="w-4 h-4 stroke-blue-600 flex-shrink-0" />,
+    Icon: () => (
+      <Cog6ToothIcon className="w-4 h-4 stroke-blue-600 flex-shrink-0" />
+    ),
   },
 ];
 
@@ -92,28 +98,32 @@ const MODULE_BADGE: Record<string, string> = {
   tia: 'bg-purple-50 text-purple-700',
   pia: 'bg-rose-50 text-rose-700',
   csc: 'bg-emerald-50 text-emerald-700',
-  rm:  'bg-amber-50 text-amber-700',
+  rm: 'bg-amber-50 text-amber-700',
 };
 
 // ── Status colour dot ──────────────────────────────────────────────────────────
 const STATUS_DOTS: Record<string, string> = {
-  'todo':        'bg-slate-400',
+  todo: 'bg-slate-400',
   'in-progress': 'bg-ub-blue',
-  'in-review':   'bg-ub-purple',
-  'feedback':    'bg-ub-amber',
-  'done':        'bg-ub-green',
-  'failed':      'bg-ub-red',
+  'in-review': 'bg-ub-purple',
+  feedback: 'bg-ub-amber',
+  done: 'bg-ub-green',
+  failed: 'bg-ub-red',
 };
 
 // ── Collect which modules a task belongs to ────────────────────────────────────
 function getTaskModuleKeys(props: Record<string, unknown> | null): string[] {
   if (!props) return [];
   const keys: string[] = [];
-  if (props.rpa_procedure && (props.rpa_procedure as unknown[]).length > 0) keys.push('rpa');
-  if (props.tia_procedure && (props.tia_procedure as unknown[]).length > 0) keys.push('tia');
-  if (props.pia_risk       && (props.pia_risk as unknown[]).length > 0)       keys.push('pia');
-  if (props.csc_controls   && (props.csc_controls as unknown[]).length > 0)   keys.push('csc');
-  if (props.rm_risk        && (props.rm_risk as unknown[]).length > 0)        keys.push('rm');
+  if (props.rpa_procedure && (props.rpa_procedure as unknown[]).length > 0)
+    keys.push('rpa');
+  if (props.tia_procedure && (props.tia_procedure as unknown[]).length > 0)
+    keys.push('tia');
+  if (props.pia_risk && (props.pia_risk as unknown[]).length > 0)
+    keys.push('pia');
+  if (props.csc_controls && (props.csc_controls as unknown[]).length > 0)
+    keys.push('csc');
+  if (props.rm_risk && (props.rm_risk as unknown[]).length > 0) keys.push('rm');
   return keys;
 }
 
@@ -134,14 +144,12 @@ function buildSearchIndex(task: Task): string {
   // ── RPA ────────────────────────────────────────────────────────────────────
   const rpa = props.rpa_procedure as unknown[] | undefined;
   if (Array.isArray(rpa) && rpa.length > 0) {
-    const info    = rpa[0] as Record<string, unknown> | undefined;
+    const info = rpa[0] as Record<string, unknown> | undefined;
     const details = rpa[1] as Record<string, unknown> | undefined;
-    const recip   = rpa[2] as Record<string, unknown> | undefined;
-    const xfer    = rpa[3] as Record<string, unknown> | undefined;
+    const recip = rpa[2] as Record<string, unknown> | undefined;
+    const xfer = rpa[3] as Record<string, unknown> | undefined;
     if (info) {
-      parts.push(
-        str(info.controller), str(info.dpo), str(info.reviewDate),
-      );
+      parts.push(str(info.controller), str(info.dpo), str(info.reviewDate));
     }
     if (details) {
       parts.push(
@@ -150,14 +158,18 @@ function buildSearchIndex(task: Task): string {
         str(details.commentsretention),
         ...arr(details.category),
         ...arr(details.datasubject),
-        ...arr(details.specialcategory),
+        ...arr(details.specialcategory)
       );
     }
     if (recip) {
       parts.push(str(recip.recipientType), str(recip.recipientdetails));
     }
     if (xfer) {
-      parts.push(str(xfer.recipient), str(xfer.country), ...arr(xfer.guarantee));
+      parts.push(
+        str(xfer.recipient),
+        str(xfer.country),
+        ...arr(xfer.guarantee)
+      );
     }
   }
 
@@ -167,10 +179,14 @@ function buildSearchIndex(task: Task): string {
     const info = tia[0] as Record<string, unknown> | undefined;
     if (info) {
       parts.push(
-        str(info.DataExporter), str(info.CountryDataExporter),
-        str(info.DataImporter), str(info.CountryDataImporter),
-        str(info.TransferScenario), str(info.DataAtIssue),
-        str(info.HowDataTransfer), str(info.LawImporterCountry),
+        str(info.DataExporter),
+        str(info.CountryDataExporter),
+        str(info.DataImporter),
+        str(info.CountryDataImporter),
+        str(info.TransferScenario),
+        str(info.DataAtIssue),
+        str(info.HowDataTransfer),
+        str(info.LawImporterCountry)
       );
     }
     const step2 = tia[1] as Record<string, unknown> | undefined;
@@ -178,7 +194,7 @@ function buildSearchIndex(task: Task): string {
       parts.push(
         str(step2.ReasonEncryptionInTransit),
         str(step2.ReasonTransferMechanism),
-        str(step2.ReasonLawfulAccess),
+        str(step2.ReasonLawfulAccess)
       );
     }
   }
@@ -186,24 +202,34 @@ function buildSearchIndex(task: Task): string {
   // ── PIA ────────────────────────────────────────────────────────────────────
   const pia = props.pia_risk as unknown[] | undefined;
   if (Array.isArray(pia) && pia.length > 0) {
-    const nec   = pia[0] as Record<string, unknown> | undefined;
-    const conf  = pia[1] as Record<string, unknown> | undefined;
+    const nec = pia[0] as Record<string, unknown> | undefined;
+    const conf = pia[1] as Record<string, unknown> | undefined;
     const avail = pia[2] as Record<string, unknown> | undefined;
     const trans = pia[3] as Record<string, unknown> | undefined;
-    const guar  = pia[4] as Record<string, unknown> | undefined;
-    if (nec)   parts.push(str(nec.isDataProcessingNecessaryAssessment), str(nec.isProportionalToPurposeAssessment));
-    if (conf)  parts.push(str(conf.confidentialityAssessment));
+    const guar = pia[4] as Record<string, unknown> | undefined;
+    if (nec)
+      parts.push(
+        str(nec.isDataProcessingNecessaryAssessment),
+        str(nec.isProportionalToPurposeAssessment)
+      );
+    if (conf) parts.push(str(conf.confidentialityAssessment));
     if (avail) parts.push(str(avail.availabilityAssessment));
     if (trans) parts.push(str(trans.transparencyAssessment));
-    if (guar)  parts.push(str(guar.guarantees), str(guar.securityMeasures), str(guar.dealingWithResidualRiskAssessment));
+    if (guar)
+      parts.push(
+        str(guar.guarantees),
+        str(guar.securityMeasures),
+        str(guar.dealingWithResidualRiskAssessment)
+      );
   }
 
   // ── Risk Management ─────────────────────────────────────────────────────────
   const rm = props.rm_risk as unknown[] | undefined;
   if (Array.isArray(rm) && rm.length > 0) {
-    const risk  = rm[0] as Record<string, unknown> | undefined;
+    const risk = rm[0] as Record<string, unknown> | undefined;
     const treat = rm[1] as Record<string, unknown> | undefined;
-    if (risk)  parts.push(str(risk.Risk), str(risk.AssetOwner), str(risk.Impact));
+    if (risk)
+      parts.push(str(risk.Risk), str(risk.AssetOwner), str(risk.Impact));
     if (treat) parts.push(str(treat.RiskTreatment), str(treat.TreatmentCost));
   }
 
@@ -228,7 +254,8 @@ function ShortcutHint() {
     navigator.platform.toUpperCase().includes('MAC');
   return (
     <kbd className="hidden sm:flex items-center gap-0.5 rounded border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 px-1.5 py-0.5 text-[10px] text-slate-500 dark:text-slate-400 font-mono leading-none">
-      {isMac ? '⌘' : 'Ctrl'}<span>K</span>
+      {isMac ? '⌘' : 'Ctrl'}
+      <span>K</span>
     </kbd>
   );
 }
@@ -243,11 +270,21 @@ function TaskRow({ task }: { task: Task }) {
     <div className="flex items-start gap-2 min-w-0 flex-1">
       {/* Module icon: use module logo if has exactly 1 module, else QueueList */}
       <div className="flex-shrink-0 mt-0.5">
-        {moduleKeys.length === 1 && moduleKeys[0] === 'rpa' && <LogoIcon src="/unicis-rpa-logo.png" />}
-        {moduleKeys.length === 1 && moduleKeys[0] === 'tia' && <LogoIcon src="/unicis-tia-logo.png" />}
-        {moduleKeys.length === 1 && moduleKeys[0] === 'pia' && <LogoIcon src="/unicis-privacy-impact-logo.png" />}
-        {moduleKeys.length === 1 && moduleKeys[0] === 'csc' && <LogoIcon src="/unicis-csc-logo.png" />}
-        {moduleKeys.length === 1 && moduleKeys[0] === 'rm'  && <LogoIcon src="/unicis-risk-logo.png" />}
+        {moduleKeys.length === 1 && moduleKeys[0] === 'rpa' && (
+          <LogoIcon src="/unicis-rpa-logo.png" />
+        )}
+        {moduleKeys.length === 1 && moduleKeys[0] === 'tia' && (
+          <LogoIcon src="/unicis-tia-logo.png" />
+        )}
+        {moduleKeys.length === 1 && moduleKeys[0] === 'pia' && (
+          <LogoIcon src="/unicis-privacy-impact-logo.png" />
+        )}
+        {moduleKeys.length === 1 && moduleKeys[0] === 'csc' && (
+          <LogoIcon src="/unicis-csc-logo.png" />
+        )}
+        {moduleKeys.length === 1 && moduleKeys[0] === 'rm' && (
+          <LogoIcon src="/unicis-risk-logo.png" />
+        )}
         {(moduleKeys.length === 0 || moduleKeys.length > 1) && (
           <QueueListIcon className="w-4 h-4 fill-blue-600" />
         )}
@@ -264,7 +301,9 @@ function TaskRow({ task }: { task: Task }) {
             )}
           />
           <span className="text-[13px] font-medium truncate">{task.title}</span>
-          <span className="text-[10px] text-slate-500 dark:text-slate-400 flex-shrink-0">#{task.taskNumber}</span>
+          <span className="text-[10px] text-slate-500 dark:text-slate-400 flex-shrink-0">
+            #{task.taskNumber}
+          </span>
         </div>
 
         {/* Module badges + description snippet */}
@@ -274,7 +313,8 @@ function TaskRow({ task }: { task: Task }) {
               key={key}
               className={cn(
                 'inline-flex items-center px-1.5 py-0 rounded text-[10px] font-medium leading-4',
-                MODULE_BADGE[key] ?? 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
+                MODULE_BADGE[key] ??
+                  'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
               )}
             >
               {key.toUpperCase()}
@@ -282,7 +322,10 @@ function TaskRow({ task }: { task: Task }) {
           ))}
           {description && (
             <span className="text-[11px] text-slate-500 dark:text-slate-400 truncate max-w-[300px]">
-              {description.replace(/<[^>]+>/g, ' ').trim().slice(0, 120)}
+              {description
+                .replace(/<[^>]+>/g, ' ')
+                .trim()
+                .slice(0, 120)}
             </span>
           )}
         </div>
@@ -323,12 +366,12 @@ export default function GlobalSearch() {
   // Filter module items by access — mirrors TeamNavigation.tsx visibility rules
   const visibleModules = MODULE_ITEMS.filter((m) => {
     if (!slug) return false;
-    if (m.path === '/rpa')             return canAccess('rpa',        ['read']);
-    if (m.path === '/tia')             return canAccess('tia',        ['read']);
-    if (m.path === '/pia')             return canAccess('pia',        ['read']);
-    if (m.path === '/csc')             return canAccess('csc',        ['read']);
-    if (m.path === '/iap')             return canAccess('iap_course', ['update']);
-    if (m.path === '/risk-management') return canAccess('rm',         ['read']);
+    if (m.path === '/rpa') return canAccess('rpa', ['read']);
+    if (m.path === '/tia') return canAccess('tia', ['read']);
+    if (m.path === '/pia') return canAccess('pia', ['read']);
+    if (m.path === '/csc') return canAccess('csc', ['read']);
+    if (m.path === '/iap') return canAccess('iap_course', ['update']);
+    if (m.path === '/risk-management') return canAccess('rm', ['read']);
     return true; // dashboard, tasks, settings always shown
   });
 
@@ -341,7 +384,9 @@ export default function GlobalSearch() {
         aria-label={t('search.placeholder')}
       >
         <Search size={13} aria-hidden />
-        <span className="hidden sm:inline text-[12px]">{t('search.placeholder')}</span>
+        <span className="hidden sm:inline text-[12px]">
+          {t('search.placeholder')}
+        </span>
         <ShortcutHint />
       </button>
 

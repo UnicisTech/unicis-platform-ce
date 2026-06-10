@@ -34,9 +34,15 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
     for (const task of tasks) {
       const props = task.properties as Record<string, unknown> | null;
       const isDone = task.status === 'done';
-      if (!isDone && task.duedate && new Date(task.duedate as string) < now) overdue++;
+      if (!isDone && task.duedate && new Date(task.duedate as string) < now)
+        overdue++;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if (!isDone && Array.isArray((props as any)?.csc_controls) && (props as any).csc_controls.length > 0) csc++;
+      if (
+        !isDone &&
+        Array.isArray((props as any)?.csc_controls) &&
+        (props as any).csc_controls.length > 0
+      )
+        csc++;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       if (!isDone && (props as any)?.rm_risk) rm++;
     }
@@ -61,7 +67,8 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('tasks'),
-      badge: overdueCount > 0 ? { count: overdueCount, variant: 'red' } : undefined,
+      badge:
+        overdueCount > 0 ? { count: overdueCount, variant: 'red' } : undefined,
     },
     canAccess('rpa', ['read'])
       ? {
@@ -101,7 +108,10 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
           active:
             activePathname?.startsWith(`/teams/${slug}`) &&
             relativePath.includes('csc'),
-          badge: openCscCount > 0 ? { count: openCscCount, variant: 'amber' } : undefined,
+          badge:
+            openCscCount > 0
+              ? { count: openCscCount, variant: 'amber' }
+              : undefined,
         }
       : null,
     canAccess('iap_course', ['update'])
@@ -123,7 +133,10 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
           active:
             activePathname?.startsWith(`/teams/${slug}`) &&
             relativePath.includes('risk-management'),
-          badge: openRmCount > 0 ? { count: openRmCount, variant: 'red' } : undefined,
+          badge:
+            openRmCount > 0
+              ? { count: openRmCount, variant: 'red' }
+              : undefined,
         }
       : null,
     {

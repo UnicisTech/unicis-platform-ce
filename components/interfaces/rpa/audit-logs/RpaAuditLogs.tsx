@@ -2,7 +2,10 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 import type { Task } from 'types';
 import type { RpaAuditLog } from 'types';
-import { AuditTimeline, type TimelineLog } from '@/components/interfaces/Task/AuditTimeline';
+import {
+  AuditTimeline,
+  type TimelineLog,
+} from '@/components/interfaces/Task/AuditTimeline';
 import { Error, Loading } from '@/components/shared';
 import useTeamMembersMap from 'hooks/useTeamMembersMap';
 import { auditLogHelper } from './auditLogHelper';

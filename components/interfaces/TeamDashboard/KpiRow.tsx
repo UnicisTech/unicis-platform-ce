@@ -30,11 +30,23 @@ const STATUS_WEIGHT: Record<string, number> = {
 };
 
 // ── Qualitative label for compliance score ────────────────────────────────────
-function scoreLabel(t: (k: string) => string, score: number): { text: string; cls: string } {
-  if (score >= 80) return { text: t('dashboard.kpi.score-excellent'), cls: 'text-emerald-600' };
-  if (score >= 65) return { text: t('dashboard.kpi.score-good'),      cls: 'text-ub-blue-text' };
-  if (score >= 50) return { text: t('dashboard.kpi.score-fair'),      cls: 'text-amber-600' };
-  return           { text: t('dashboard.kpi.score-needs-work'),       cls: 'text-red-600 dark:text-red-400' };
+function scoreLabel(
+  t: (k: string) => string,
+  score: number
+): { text: string; cls: string } {
+  if (score >= 80)
+    return {
+      text: t('dashboard.kpi.score-excellent'),
+      cls: 'text-emerald-600',
+    };
+  if (score >= 65)
+    return { text: t('dashboard.kpi.score-good'), cls: 'text-ub-blue-text' };
+  if (score >= 50)
+    return { text: t('dashboard.kpi.score-fair'), cls: 'text-amber-600' };
+  return {
+    text: t('dashboard.kpi.score-needs-work'),
+    cls: 'text-red-600 dark:text-red-400',
+  };
 }
 
 // ── Presentational KPI card ───────────────────────────────────────────────────
@@ -87,13 +99,16 @@ export function KpiCard({
       className={cn(
         'bg-white dark:bg-slate-800 border rounded-xl p-3 text-left w-full',
         borderCls,
-        onClick && 'hover:border-ub-blue-border transition-colors cursor-pointer',
+        onClick &&
+          'hover:border-ub-blue-border transition-colors cursor-pointer',
         className
       )}
     >
       <div className="flex items-center gap-1.5 text-[11px] mb-1.5">
         <span className={iconCls}>{icon}</span>
-        <span className="text-slate-500 dark:text-slate-400 truncate">{label}</span>
+        <span className="text-slate-500 dark:text-slate-400 truncate">
+          {label}
+        </span>
       </div>
       <div
         className={cn(
@@ -118,7 +133,8 @@ function CscKpiPair({ slug, iso }: { slug: string; iso: ISO }) {
   const { statuses } = useCscStatuses(slug, iso);
 
   const { complianceScore, gapCount } = useMemo(() => {
-    if (!statuses || !frameworks[iso]) return { complianceScore: null, gapCount: null };
+    if (!statuses || !frameworks[iso])
+      return { complianceScore: null, gapCount: null };
     const controls = frameworks[iso].controls ?? [];
     let totalWeight = 0;
     let validCount = 0;
@@ -126,20 +142,27 @@ function CscKpiPair({ slug, iso }: { slug: string; iso: ISO }) {
     for (const ctrl of controls) {
       const s: string = (statuses as Record<string, string>)[ctrl.id] ?? '';
       const w = STATUS_WEIGHT[s] ?? -1;
-      if (w >= 0) { totalWeight += w; validCount++; }
+      if (w >= 0) {
+        totalWeight += w;
+        validCount++;
+      }
       if (!s || s === 'not-performed' || s === 'unknown') gaps++;
     }
     return {
-      complianceScore: validCount > 0 ? Math.round(totalWeight / validCount) : null,
+      complianceScore:
+        validCount > 0 ? Math.round(totalWeight / validCount) : null,
       gapCount: gaps,
     };
   }, [statuses, iso]);
 
   const scoreVariant: KpiCardProps['variant'] =
-    complianceScore === null ? 'default'
-    : complianceScore >= 75  ? 'green'
-    : complianceScore < 50   ? 'red'
-    : 'amber';
+    complianceScore === null
+      ? 'default'
+      : complianceScore >= 75
+        ? 'green'
+        : complianceScore < 50
+          ? 'red'
+          : 'amber';
 
   const ql = complianceScore !== null ? scoreLabel(t, complianceScore) : null;
   const frameworkName = isoValueToLabel(iso);
@@ -159,7 +182,9 @@ function CscKpiPair({ slug, iso }: { slug: string; iso: ISO }) {
                 </span>
               )}
             </span>
-          ) : '—'
+          ) : (
+            '—'
+          )
         }
         sub={
           complianceScore !== null
@@ -225,30 +250,45 @@ function IapKpiCard({ slug }: { slug: string }) {
   const { teamCourses } = useIap(false, slug);
   const { members } = useTeamMembers(slug);
 
-  const { pct, completedCount, nonCompliantCount, totalMembers } = useMemo(() => {
-    if (!members) return { pct: null, completedCount: null, nonCompliantCount: null, totalMembers: null };
-    const total = members.length;
-    if (total === 0) return { pct: 100, completedCount: 0, nonCompliantCount: 0, totalMembers: 0 };
-    const completedSet = new Set<string>();
-    for (const tc of teamCourses ?? []) {
-      for (const prog of tc.progress ?? []) {
-        if (prog.progress >= 100) completedSet.add(prog.teamMemberId);
+  const { pct, completedCount, nonCompliantCount, totalMembers } =
+    useMemo(() => {
+      if (!members)
+        return {
+          pct: null,
+          completedCount: null,
+          nonCompliantCount: null,
+          totalMembers: null,
+        };
+      const total = members.length;
+      if (total === 0)
+        return {
+          pct: 100,
+          completedCount: 0,
+          nonCompliantCount: 0,
+          totalMembers: 0,
+        };
+      const completedSet = new Set<string>();
+      for (const tc of teamCourses ?? []) {
+        for (const prog of tc.progress ?? []) {
+          if (prog.progress >= 100) completedSet.add(prog.teamMemberId);
+        }
       }
-    }
-    return {
-      pct: Math.round((completedSet.size / total) * 100),
-      completedCount: completedSet.size,
-      nonCompliantCount: total - completedSet.size,
-      totalMembers: total,
-    };
-  }, [teamCourses, members]);
+      return {
+        pct: Math.round((completedSet.size / total) * 100),
+        completedCount: completedSet.size,
+        nonCompliantCount: total - completedSet.size,
+        totalMembers: total,
+      };
+    }, [teamCourses, members]);
 
   const variant: KpiCardProps['variant'] =
-    pct === null   ? 'default'
-    : nonCompliantCount && nonCompliantCount > 0
-      ? pct < 50   ? 'red'
-      : 'amber'
-    : 'green';
+    pct === null
+      ? 'default'
+      : nonCompliantCount && nonCompliantCount > 0
+        ? pct < 50
+          ? 'red'
+          : 'amber'
+        : 'green';
 
   return (
     <KpiCard
@@ -305,7 +345,6 @@ export default function KpiRow({ tasks, slug, team }: KpiRowProps) {
   return (
     // 6-col grid: Compliance hero(2) + Open tasks(1) + Open risks(1) + CSC gaps(1) + IAP(1)
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mb-4">
-
       {/* 1+2 · Compliance score (hero, col-span-2) + Cybersecurity gaps — fetches own CSC data */}
       <CscKpiCards slug={slug} team={team} />
 

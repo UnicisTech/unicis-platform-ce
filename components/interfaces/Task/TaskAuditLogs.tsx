@@ -23,36 +23,46 @@ const valueI18nPrefixes: Record<string, string> = {
 
 // ── Strip HTML from description diffs ─────────────────────────────────────────
 const stripHtml = (html: string): string =>
-  html.replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+  html
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 
 // ── Icon + colour per event type ──────────────────────────────────────────────
 function EventIcon({ event }: { event: string }) {
   const base = 'w-3.5 h-3.5';
-  if (event === 'created')   return <Plus className={cn(base, 'text-emerald-600')} />;
-  if (event === 'updated')   return <Pencil className={cn(base, 'text-blue-500')} />;
-  if (event === 'commented') return <MessageSquare className={cn(base, 'text-purple-500')} />;
-  if (event === 'deleted')   return <Trash2 className={cn(base, 'text-red-500')} />;
+  if (event === 'created')
+    return <Plus className={cn(base, 'text-emerald-600')} />;
+  if (event === 'updated')
+    return <Pencil className={cn(base, 'text-blue-500')} />;
+  if (event === 'commented')
+    return <MessageSquare className={cn(base, 'text-purple-500')} />;
+  if (event === 'deleted')
+    return <Trash2 className={cn(base, 'text-red-500')} />;
   return <UserCircle className={cn(base, 'text-slate-400')} />;
 }
 
 function eventDotCls(event: string): string {
-  if (event === 'created')   return 'bg-emerald-50 border-emerald-200';
-  if (event === 'updated')   return 'bg-blue-50 dark:bg-blue-950/40 border-blue-200';
+  if (event === 'created') return 'bg-emerald-50 border-emerald-200';
+  if (event === 'updated')
+    return 'bg-blue-50 dark:bg-blue-950/40 border-blue-200';
   if (event === 'commented') return 'bg-purple-50 border-purple-200';
-  if (event === 'deleted')   return 'bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-800/50';
+  if (event === 'deleted')
+    return 'bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-800/50';
   return 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700';
 }
 
 // ── Relative time ─────────────────────────────────────────────────────────────
 function relativeTime(ts: number): string {
   const diff = Date.now() - ts;
-  const min  = Math.floor(diff / 60_000);
-  const hr   = Math.floor(diff / 3_600_000);
-  const day  = Math.floor(diff / 86_400_000);
-  if (min  <  1) return 'just now';
-  if (min  < 60) return `${min}m ago`;
-  if (hr   < 24) return `${hr}h ago`;
-  if (day  <  7) return `${day}d ago`;
+  const min = Math.floor(diff / 60_000);
+  const hr = Math.floor(diff / 3_600_000);
+  const day = Math.floor(diff / 86_400_000);
+  if (min < 1) return 'just now';
+  if (min < 60) return `${min}m ago`;
+  if (hr < 24) return `${hr}h ago`;
+  if (day < 7) return `${day}d ago`;
   return new Date(ts).toLocaleDateString();
 }
 
@@ -73,7 +83,8 @@ function DiffChips({
   const fmt = (v: string | string[] | undefined): string => {
     if (!v || v === '—') return '—';
     const s = Array.isArray(v) ? v.join(', ') : v;
-    if (field === 'description') return stripHtml(s).slice(0, 60) + (s.length > 60 ? '…' : '');
+    if (field === 'description')
+      return stripHtml(s).slice(0, 60) + (s.length > 60 ? '…' : '');
     const prefix = valueI18nPrefixes[field];
     if (prefix) {
       const key = `${prefix}.${s}`;
@@ -162,12 +173,22 @@ const TaskAuditLogs = ({ task }: { task: Task }) => {
 
                   {/* Action description */}
                   <span className="text-[12px] text-slate-600 dark:text-slate-300">
-                    {log.event === 'created' && t('task-audit.event-created').toLowerCase()}
+                    {log.event === 'created' &&
+                      t('task-audit.event-created').toLowerCase()}
                     {log.event === 'updated' && fieldLabel && (
-                      <>{eventLabel.toLowerCase()} <span className="font-medium text-slate-700 dark:text-slate-200">{fieldLabel}</span></>
+                      <>
+                        {eventLabel.toLowerCase()}{' '}
+                        <span className="font-medium text-slate-700 dark:text-slate-200">
+                          {fieldLabel}
+                        </span>
+                      </>
                     )}
-                    {log.event === 'updated' && !fieldLabel && eventLabel.toLowerCase()}
-                    {log.event !== 'created' && log.event !== 'updated' && eventLabel.toLowerCase()}
+                    {log.event === 'updated' &&
+                      !fieldLabel &&
+                      eventLabel.toLowerCase()}
+                    {log.event !== 'created' &&
+                      log.event !== 'updated' &&
+                      eventLabel.toLowerCase()}
                   </span>
 
                   {/* Relative time */}

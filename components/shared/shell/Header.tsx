@@ -22,7 +22,8 @@ function useModuleTitle(): string {
     if (path === '/settings/account') return t('profile');
     if (path === '/settings/password') return t('password');
     if (path === '/notifications') return t('notifications.title');
-    if (path === '/notifications/settings') return t('notifications.preferences-title');
+    if (path === '/notifications/settings')
+      return t('notifications.preferences-title');
 
     // Team-scoped routes
     if (!slug) return '';
@@ -43,7 +44,7 @@ function useModuleTitle(): string {
     )
       return t('settings');
     return '';
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isReady, asPath, slug]);
 }
 
@@ -63,7 +64,6 @@ const Header = ({ setSidebarOpen }: HeaderProps) => {
 
   return (
     <div className="sticky top-0 z-40 flex h-12 shrink-0 items-center bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-4 sm:px-6 lg:px-6 gap-x-3">
-
       {/* Left: hamburger + module title — flex-1 so it fills space and title can truncate */}
       <div className="flex items-center gap-x-2.5 flex-1 min-w-0">
         <button

@@ -15,7 +15,8 @@ const PriorityBadge = ({
 }) => {
   const normalized = value?.toLowerCase() ?? '';
   const className =
-    priorityColorMap[normalized] || 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400';
+    priorityColorMap[normalized] ||
+    'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400';
 
   return (
     <Badge variant="outline" className={`${className} whitespace-nowrap`}>

@@ -132,7 +132,9 @@ const NotificationSettingsPage = () => {
               key={type}
               className="grid grid-cols-[1fr_90px_90px_90px] items-center gap-2 px-4 py-3"
             >
-              <span className="text-sm text-slate-700 dark:text-slate-200">{t(labelKey)}</span>
+              <span className="text-sm text-slate-700 dark:text-slate-200">
+                {t(labelKey)}
+              </span>
               {channelOrder.map((channel) => {
                 const checkboxId = `${type}-${channel}`;
                 const checked = draft[type]?.[channel] ?? false;

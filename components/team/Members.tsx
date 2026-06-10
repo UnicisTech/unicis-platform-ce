@@ -91,29 +91,46 @@ const Members = ({ team }: { team: Team }) => {
           <Table>
             <TableHeader>
               <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-900">
-                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('name')}</TableHead>
-                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('email')}</TableHead>
-                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('role')}</TableHead>
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                  {t('name')}
+                </TableHead>
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                  {t('email')}
+                </TableHead>
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                  {t('role')}
+                </TableHead>
                 {canAccess('team_member', ['delete']) && (
-                  <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">{t('actions')}</TableHead>
+                  <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">
+                    {t('actions')}
+                  </TableHead>
                 )}
               </TableRow>
             </TableHeader>
             <TableBody>
               {members.map((member) => (
-                <TableRow key={member.id} className="border-slate-100 dark:border-slate-700">
+                <TableRow
+                  key={member.id}
+                  className="border-slate-100 dark:border-slate-700"
+                >
                   <TableCell className="px-4 py-3">
                     <div className="flex items-center space-x-2">
                       <LetterAvatar name={member.user.name} />
-                      <span className="text-sm font-medium text-slate-900 dark:text-slate-100">{member.user.name}</span>
+                      <span className="text-sm font-medium text-slate-900 dark:text-slate-100">
+                        {member.user.name}
+                      </span>
                     </div>
                   </TableCell>
-                  <TableCell className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">{member.user.email}</TableCell>
+                  <TableCell className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">
+                    {member.user.email}
+                  </TableCell>
                   <TableCell className="px-4 py-3">
                     {canUpdateRole(member) ? (
                       <UpdateMemberRole team={team} member={member} />
                     ) : (
-                      <span className="text-sm text-slate-600 dark:text-slate-300">{member.role}</span>
+                      <span className="text-sm text-slate-600 dark:text-slate-300">
+                        {member.role}
+                      </span>
                     )}
                   </TableCell>
                   {canRemoveMember(member) && (

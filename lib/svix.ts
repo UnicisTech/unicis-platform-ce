@@ -60,7 +60,11 @@ export const deleteWebhook = async (appId: string, endpointId: string) => {
 export const getLastWebhookAttempt = async (
   appId: string,
   endpointId: string
-): Promise<{ timestamp: Date; status: number; responseStatusCode: number } | null> => {
+): Promise<{
+  timestamp: Date;
+  status: number;
+  responseStatusCode: number;
+} | null> => {
   if (!env.svix.apiKey) {
     return null;
   }

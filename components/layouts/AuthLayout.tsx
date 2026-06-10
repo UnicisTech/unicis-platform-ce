@@ -53,7 +53,9 @@ export default function AuthLayout({
           </h2>
         )}
         {description && (
-          <p className="mt-2 text-slate-500 dark:text-slate-400">{t(description)}</p>
+          <p className="mt-2 text-slate-500 dark:text-slate-400">
+            {t(description)}
+          </p>
         )}
       </div>
       <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md">{children}</div>

@@ -28,7 +28,9 @@ const TaskStatusesDetail = ({
           key={label}
           className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 text-center"
         >
-          <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{label}</p>
+          <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
+            {label}
+          </p>
           <p className="text-2xl font-semibold">{value}</p>
         </div>
       ))}

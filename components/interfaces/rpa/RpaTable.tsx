@@ -50,16 +50,28 @@ const RpaTable = ({
         <table className="w-full min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-sm">
           <thead className="bg-slate-50 dark:bg-slate-900">
             <tr>
-              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">{t('rpa')}</th>
-              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">{t('status')}</th>
-              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">{t('rpa-dpo')}</th>
-              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">{t('rpa-review')}</th>
+              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                {t('rpa')}
+              </th>
+              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                {t('status')}
+              </th>
+              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                {t('rpa-dpo')}
+              </th>
+              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                {t('rpa-review')}
+              </th>
               <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
                 {t('rpa-data-tranfer')}
               </th>
-              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">{t('rpa-category')}</th>
+              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                {t('rpa-category')}
+              </th>
               {canAccess('task', ['update']) && (
-                <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">{t('actions')}</th>
+                <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                  {t('actions')}
+                </th>
               )}
             </tr>
           </thead>

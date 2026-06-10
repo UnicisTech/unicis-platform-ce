@@ -53,12 +53,24 @@ const TaskListView = ({
           <table className="w-full min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-sm">
             <thead className="bg-slate-50 dark:bg-slate-900">
               <tr>
-                <th className="w-1/10 px-4 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">{t('task-id')}</th>
-                <th className="w-2/5 px-4 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">{t('title')}</th>
-                <th className="w-1/10 px-4 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">{t('status')}</th>
-                <th className="w-1/10 px-4 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">{t('priority')}</th>
-                <th className="w-1/10 px-4 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">{t('due-date')}</th>
-                <th className="w-1/5 px-4 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">{t('actions')}</th>
+                <th className="w-1/10 px-4 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                  {t('task-id')}
+                </th>
+                <th className="w-2/5 px-4 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                  {t('title')}
+                </th>
+                <th className="w-1/10 px-4 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                  {t('status')}
+                </th>
+                <th className="w-1/10 px-4 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                  {t('priority')}
+                </th>
+                <th className="w-1/10 px-4 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                  {t('due-date')}
+                </th>
+                <th className="w-1/5 px-4 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                  {t('actions')}
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-700">

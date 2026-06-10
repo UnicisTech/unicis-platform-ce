@@ -228,13 +228,17 @@ const Dashboard = () => {
   return (
     <>
       <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
-          <div className="flex items-center gap-2">
-            <h1 className="text-[15px] font-semibold text-slate-900 dark:text-slate-100">{t('pia')}</h1>
-            {tasksWithRisks.length > 0 && (
-              <span className="text-[11px] text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">{tasksWithRisks.length}</span>
-            )}
-          </div>
-          <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-2">
+          <h1 className="text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+            {t('pia')}
+          </h1>
+          {tasksWithRisks.length > 0 && (
+            <span className="text-[11px] text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
+              {tasksWithRisks.length}
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-2 flex-wrap">
           {tasks && tasks.length > 0 && (
             <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
           )}
@@ -280,7 +284,8 @@ const Dashboard = () => {
               {t('create')}
             </Button>
           )}
-          </div>{/* end toolbar */}
+        </div>
+        {/* end toolbar */}
       </div>
       {isCreateOpen && (
         <CreateRisk
@@ -296,8 +301,14 @@ const Dashboard = () => {
           title={t('empty-state.pia.title')}
           description={t('empty-state.pia.description')}
           regulatoryContext={t('empty-state.pia.context')}
-          ctaLabel={canAccess('task', ['update']) ? t('empty-state.pia.cta') : undefined}
-          onCta={canAccess('task', ['update']) ? () => setIsCreateOpen(true) : undefined}
+          ctaLabel={
+            canAccess('task', ['update']) ? t('empty-state.pia.cta') : undefined
+          }
+          onCta={
+            canAccess('task', ['update'])
+              ? () => setIsCreateOpen(true)
+              : undefined
+          }
         />
       ) : (
         <>

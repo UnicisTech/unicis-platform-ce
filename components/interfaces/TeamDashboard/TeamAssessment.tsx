@@ -27,7 +27,9 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
         }
       });
 
-      const isAuthorized = procedures.some((proc) => proc.TransferMechanism === 'yes');
+      const isAuthorized = procedures.some(
+        (proc) => proc.TransferMechanism === 'yes'
+      );
       if (isAuthorized) perAuthorization++;
       else notPermitAuthorization++;
     }
@@ -38,11 +40,14 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
   return (
     <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-[12px] font-medium text-slate-900 dark:text-slate-100">{t('tia')}</span>
+        <span className="text-[12px] font-medium text-slate-900 dark:text-slate-100">
+          {t('tia')}
+        </span>
         {notPermitAuthorization > 0 ? (
           <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-red-100 dark:bg-red-950/40 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800/50 px-2 py-0.5 rounded-full">
             <AlertCircle size={10} aria-hidden />
-            {notPermitAuthorization} {t('tia-at-risk', { defaultValue: 'at risk' })}
+            {notPermitAuthorization}{' '}
+            {t('tia-at-risk', { defaultValue: 'at risk' })}
           </span>
         ) : totalNumberOfAssessment > 0 ? (
           <span className="text-[11px] font-medium text-green-600 dark:text-green-400">
@@ -53,8 +58,12 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
 
       <div className="divide-y divide-slate-50">
         <div className="flex items-center justify-between py-1.5 text-[12px]">
-          <span className="text-slate-500 dark:text-slate-400">{t('number-of-assessments')}</span>
-          <span className="font-medium text-slate-900 dark:text-slate-100">{totalNumberOfAssessment}</span>
+          <span className="text-slate-500 dark:text-slate-400">
+            {t('number-of-assessments')}
+          </span>
+          <span className="font-medium text-slate-900 dark:text-slate-100">
+            {totalNumberOfAssessment}
+          </span>
         </div>
         <div className="flex items-center justify-between py-1.5 text-[12px]">
           <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
@@ -68,7 +77,9 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
             <span className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0" />
             {t('not-permit')}
           </span>
-          <span className="font-medium text-red-600 dark:text-red-400">{notPermitAuthorization}</span>
+          <span className="font-medium text-red-600 dark:text-red-400">
+            {notPermitAuthorization}
+          </span>
         </div>
       </div>
 
@@ -92,7 +103,11 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
 
       {notPermitAuthorization > 0 && (
         <div className="mt-3 bg-red-50 dark:bg-red-950/30 border border-red-100 rounded-lg px-3 py-2 flex gap-2 items-start text-[11px] text-red-700 dark:text-red-400">
-          <AlertCircle size={12} className="mt-0.5 flex-shrink-0 text-red-500" aria-hidden />
+          <AlertCircle
+            size={12}
+            className="mt-0.5 flex-shrink-0 text-red-500"
+            aria-hidden
+          />
           {t('tia-non-adequate-warning', {
             defaultValue: `${notPermitAuthorization} transfer(s) to non-adequate countries require SCCs. Review pending.`,
             count: notPermitAuthorization,

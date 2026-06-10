@@ -316,7 +316,9 @@ const TaskImportModal = ({
 
           {/* Preview section (shared between both tabs) */}
           {parsing && (
-            <p className="text-sm text-slate-500 dark:text-slate-400">{t('loading')}…</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              {t('loading')}…
+            </p>
           )}
 
           {parsedRows.length > 0 && (

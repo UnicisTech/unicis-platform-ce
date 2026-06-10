@@ -84,7 +84,9 @@ const DirectorySync: NextPageWithLayout<
         </div>
         <div className="p-4">
           <div className="mb-3 flex items-center justify-between">
-            <p className="text-sm text-slate-500 dark:text-slate-400">{t('provision')}</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              {t('provision')}
+            </p>
             {directory ? (
               <Button
                 variant="destructive"

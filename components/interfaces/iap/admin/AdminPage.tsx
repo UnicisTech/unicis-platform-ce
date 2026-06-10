@@ -125,10 +125,7 @@ const AdminPage = ({
               </Button>
             )}
             {canAccess('iap_course', ['create']) && (
-              <Button
-                size="sm"
-                onClick={() => setIsCreateCourseOpen(true)}
-              >
+              <Button size="sm" onClick={() => setIsCreateCourseOpen(true)}>
                 {t('create-course')}
               </Button>
             )}

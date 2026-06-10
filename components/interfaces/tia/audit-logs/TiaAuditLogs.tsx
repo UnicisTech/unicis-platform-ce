@@ -1,7 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 import type { Task, TaskProperties, TiaAuditLog } from 'types';
-import { AuditTimeline, type TimelineLog } from '@/components/interfaces/Task/AuditTimeline';
+import {
+  AuditTimeline,
+  type TimelineLog,
+} from '@/components/interfaces/Task/AuditTimeline';
 import { Error, Loading } from '@/components/shared';
 import useTeamMembersMap from 'hooks/useTeamMembersMap';
 import { auditLogHelper } from './auditLogHelper';
@@ -9,7 +12,8 @@ import { auditLogHelper } from './auditLogHelper';
 const TiaAuditLogs = ({ task, slug }: { task: Task; slug: string }) => {
   const { t } = useTranslation('common');
 
-  const allLogs = ((task?.properties as TaskProperties)?.tia_audit_logs || []) as TiaAuditLog[];
+  const allLogs = ((task?.properties as TaskProperties)?.tia_audit_logs ||
+    []) as TiaAuditLog[];
 
   const { isLoading, isError, membersById } = useTeamMembersMap(slug);
 

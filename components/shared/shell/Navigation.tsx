@@ -52,7 +52,9 @@ const Navigation = () => {
               <Cog6ToothIcon
                 className={classNames(
                   'h-5 w-5 flex-shrink-0',
-                  isSettingsActive ? 'text-ub-blue' : 'text-slate-500 dark:text-slate-400'
+                  isSettingsActive
+                    ? 'text-ub-blue'
+                    : 'text-slate-500 dark:text-slate-400'
                 )}
                 aria-hidden="true"
               />

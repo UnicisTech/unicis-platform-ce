@@ -29,7 +29,11 @@ interface LastAttempt {
   responseStatusCode: number;
 }
 
-function LastDeliveryCell({ lastAttempt }: { lastAttempt?: LastAttempt | null }) {
+function LastDeliveryCell({
+  lastAttempt,
+}: {
+  lastAttempt?: LastAttempt | null;
+}) {
   const { t } = useTranslation('common');
 
   if (!lastAttempt) {
@@ -54,29 +58,43 @@ function LastDeliveryCell({ lastAttempt }: { lastAttempt?: LastAttempt | null })
     <div className="flex flex-col gap-0.5">
       <div className="flex items-center gap-1.5">
         {isSuccess ? (
-          <CheckCircle2 size={12} className="text-green-500 flex-shrink-0" aria-hidden />
+          <CheckCircle2
+            size={12}
+            className="text-green-500 flex-shrink-0"
+            aria-hidden
+          />
         ) : isPending ? (
-          <Clock size={12} className="text-amber-500 flex-shrink-0" aria-hidden />
+          <Clock
+            size={12}
+            className="text-amber-500 flex-shrink-0"
+            aria-hidden
+          />
         ) : (
-          <XCircle size={12} className="text-red-500 flex-shrink-0" aria-hidden />
+          <XCircle
+            size={12}
+            className="text-red-500 flex-shrink-0"
+            aria-hidden
+          />
         )}
         <span
           className={`text-[11px] font-medium ${
             isSuccess
               ? 'text-green-700 dark:text-green-400'
               : isPending
-              ? 'text-amber-700 dark:text-amber-400'
-              : 'text-red-700 dark:text-red-400'
+                ? 'text-amber-700 dark:text-amber-400'
+                : 'text-red-700 dark:text-red-400'
           }`}
         >
           {isSuccess
             ? t('webhook-delivery-success', { defaultValue: 'Success' })
             : isPending
-            ? t('webhook-delivery-pending', { defaultValue: 'Pending' })
-            : `${t('webhook-delivery-failed', { defaultValue: 'Failed' })} (${lastAttempt.responseStatusCode})`}
+              ? t('webhook-delivery-pending', { defaultValue: 'Pending' })
+              : `${t('webhook-delivery-failed', { defaultValue: 'Failed' })} (${lastAttempt.responseStatusCode})`}
         </span>
       </div>
-      <span className="text-[11px] text-slate-500 dark:text-slate-400">{dateLabel}</span>
+      <span className="text-[11px] text-slate-500 dark:text-slate-400">
+        {dateLabel}
+      </span>
     </div>
   );
 }
@@ -154,19 +172,34 @@ const Webhooks = ({ team }: { team: Team }) => {
               <Table>
                 <TableHeader>
                   <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-900">
-                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('name')}</TableHead>
-                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('url')}</TableHead>
-                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('created-at')}</TableHead>
                     <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
-                      {t('webhook-last-delivery', { defaultValue: 'Last delivery' })}
+                      {t('name')}
                     </TableHead>
-                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">{t('actions')}</TableHead>
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                      {t('url')}
+                    </TableHead>
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                      {t('created-at')}
+                    </TableHead>
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                      {t('webhook-last-delivery', {
+                        defaultValue: 'Last delivery',
+                      })}
+                    </TableHead>
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">
+                      {t('actions')}
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {(webhooks as WebhookWithAttempt[])?.map((webhook) => (
-                    <TableRow key={webhook.id} className="border-slate-100 dark:border-slate-700">
-                      <TableCell className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100">{webhook.description}</TableCell>
+                    <TableRow
+                      key={webhook.id}
+                      className="border-slate-100 dark:border-slate-700"
+                    >
+                      <TableCell className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100">
+                        {webhook.description}
+                      </TableCell>
                       <TableCell className="px-4 py-3 font-mono text-xs text-slate-600 dark:text-slate-300 break-all max-w-[200px]">
                         {webhook.url}
                       </TableCell>

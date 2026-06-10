@@ -40,7 +40,9 @@ const Pricing: React.FC<PricingProps> = ({ team, plans, onPlanSelect }) => {
                 <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                   {plan.price}
                 </h3>
-                <span className="text-slate-500 dark:text-slate-400">{plan.subprice}</span>
+                <span className="text-slate-500 dark:text-slate-400">
+                  {plan.subprice}
+                </span>
               </div>
             </div>
 

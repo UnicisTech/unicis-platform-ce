@@ -76,12 +76,16 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ menu }) => {
         // Heroicon/Lucide SVG icons also receive a text-colour class (uses currentColor).
         <span
           className="flex-none shrink-0 flex items-center justify-center h-5 w-5"
-          style={menu.active ? undefined : { filter: 'grayscale(1)', opacity: 0.45 }}
+          style={
+            menu.active ? undefined : { filter: 'grayscale(1)', opacity: 0.45 }
+          }
         >
           <menu.icon
             className={classNames(
               'h-5 w-5 min-h-5 min-w-5',
-              menu.active ? 'text-ub-blue' : 'text-slate-500 dark:text-slate-400'
+              menu.active
+                ? 'text-ub-blue'
+                : 'text-slate-500 dark:text-slate-400'
             )}
             aria-hidden="true"
           />

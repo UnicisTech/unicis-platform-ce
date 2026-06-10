@@ -91,16 +91,29 @@ const APIKeys = ({ team }: APIKeysProps) => {
                 <Table>
                   <TableHeader>
                     <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-900">
-                      <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('name')}</TableHead>
-                      <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('status')}</TableHead>
-                      <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">{t('created')}</TableHead>
-                      <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">{t('actions')}</TableHead>
+                      <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                        {t('name')}
+                      </TableHead>
+                      <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                        {t('status')}
+                      </TableHead>
+                      <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                        {t('created')}
+                      </TableHead>
+                      <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">
+                        {t('actions')}
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {apiKeys.map((apiKey) => (
-                      <TableRow key={apiKey.id} className="border-slate-100 dark:border-slate-700">
-                        <TableCell className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100">{apiKey.name}</TableCell>
+                      <TableRow
+                        key={apiKey.id}
+                        className="border-slate-100 dark:border-slate-700"
+                      >
+                        <TableCell className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100">
+                          {apiKey.name}
+                        </TableCell>
                         <TableCell className="px-4 py-3">
                           <Badge variant="default">{t('active')}</Badge>
                         </TableCell>
