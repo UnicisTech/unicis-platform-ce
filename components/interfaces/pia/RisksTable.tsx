@@ -7,6 +7,7 @@ import { StatusBadge } from '@/components/shared';
 import { riskProbabilityPoints, riskSecurityPoints } from '@/lib/pia';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Button } from '@/components/shadcn/ui/button';
+import { Pencil, Trash2 } from 'lucide-react';
 import useCanAccess from 'hooks/useCanAccess';
 import { riskValueToLabelKey } from '@/lib/common';
 
@@ -141,22 +142,20 @@ const RisksTable = ({
                     <td className="px-4 py-2 text-right">
                       <div className="inline-flex gap-2 justify-end">
                         <Button
-                          size="sm"
                           variant="outline"
-                          onClick={() => {
-                            editHandler(task);
-                          }}
+                          size="icon"
+                          onClick={() => editHandler(task)}
+                          aria-label={t('edit-task')}
                         >
-                          {t('edit-task')}
+                          <Pencil className="h-4 w-4" aria-hidden="true" />
                         </Button>
                         <Button
-                          size="sm"
                           variant="destructive"
-                          onClick={() => {
-                            deleteHandler(task);
-                          }}
+                          size="icon"
+                          onClick={() => deleteHandler(task)}
+                          aria-label={t('delete')}
                         >
-                          {t('delete')}
+                          <Trash2 className="h-4 w-4" aria-hidden="true" />
                         </Button>
                       </div>
                     </td>

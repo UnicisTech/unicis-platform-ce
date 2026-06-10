@@ -11,6 +11,7 @@ import ConfirmationDialog from '../shared/ConfirmationDialog';
 import CreateWebhook from './CreateWebhook';
 import EditWebhook from './EditWebhook';
 import { Button } from '@/components/shadcn/ui/button';
+import { Pencil, Trash2 } from 'lucide-react';
 import {
   Table,
   TableBody,
@@ -109,23 +110,25 @@ const Webhooks = ({ team }: { team: Team }) => {
                         <div className="flex justify-end gap-2">
                           <Button
                             variant="outline"
-                            size="sm"
+                            size="icon"
                             onClick={() => {
                               setEndpoint(webhook);
                               setUpdateWebhookVisible(true);
                             }}
+                            aria-label={t('edit')}
                           >
-                            {t('edit')}
+                            <Pencil className="h-4 w-4" aria-hidden="true" />
                           </Button>
                           <Button
                             variant="destructive"
-                            size="sm"
+                            size="icon"
                             onClick={() => {
                               setSelectedWebhook(webhook);
                               setConfirmationDialogVisible(true);
                             }}
+                            aria-label={t('remove')}
                           >
-                            {t('remove')}
+                            <Trash2 className="h-4 w-4" aria-hidden="true" />
                           </Button>
                         </div>
                       </TableCell>

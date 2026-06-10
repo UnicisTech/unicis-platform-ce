@@ -8,6 +8,7 @@ import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Badge } from '@/components/shadcn/ui/badge';
 import { Button } from '@/components/shadcn/ui/button';
+import { Pencil, Trash2 } from 'lucide-react';
 import { isTranferPermitted } from '@/lib/tia/helpers';
 
 const getEndDate = (dateStr, yearsToAdd) => {
@@ -108,7 +109,11 @@ const TiaTable = ({
                   </Badge>
                 </td>
                 <td className="px-1.5 py-1.5">
-                  <span>{task.properties.tia_procedure[0].LawImporterCountry || '—'}</span>
+                  <span>
+                    {task.properties.tia_procedure[0].LawImporterCountry
+                      ? t(`country.${task.properties.tia_procedure[0].LawImporterCountry}`)
+                      : '—'}
+                  </span>
                 </td>
                 <td className="px-1.5 py-1.5">
                   <span>
@@ -128,23 +133,20 @@ const TiaTable = ({
                   <td className="px-1.5 py-1.5">
                     <div className="flex gap-2">
                       <Button
-                        size="sm"
                         variant="outline"
-                        onClick={() => {
-                          editHandler(task);
-                        }}
+                        size="icon"
+                        onClick={() => editHandler(task)}
+                        aria-label={t('edit-task')}
                       >
-                        {t('edit-task')}
+                        <Pencil className="h-4 w-4" aria-hidden="true" />
                       </Button>
-
                       <Button
-                        size="sm"
                         variant="destructive"
-                        onClick={() => {
-                          deleteHandler(task);
-                        }}
+                        size="icon"
+                        onClick={() => deleteHandler(task)}
+                        aria-label={t('delete')}
                       >
-                        {t('delete')}
+                        <Trash2 className="h-4 w-4" aria-hidden="true" />
                       </Button>
                     </div>
                   </td>

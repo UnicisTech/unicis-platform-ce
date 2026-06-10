@@ -8,6 +8,7 @@ import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Badge } from '@/components/shadcn/ui/badge';
 import { Error, Loading, MemberName, StatusBadge } from '@/components/shared';
 import { Button } from '@/components/shadcn/ui/button';
+import { Pencil, Trash2 } from 'lucide-react';
 import useTeamMembersMap from 'hooks/useTeamMembersMap';
 
 const RpaTable = ({
@@ -117,17 +118,19 @@ const RpaTable = ({
                     <div className="flex gap-2">
                       <Button
                         variant="outline"
-                        size="sm"
+                        size="icon"
                         onClick={() => editHandler(task)}
+                        aria-label={t('edit-task')}
                       >
-                        {t('edit-task')}
+                        <Pencil className="h-4 w-4" aria-hidden="true" />
                       </Button>
                       <Button
                         variant="destructive"
-                        size="sm"
+                        size="icon"
                         onClick={() => deleteHandler(task)}
+                        aria-label={t('delete')}
                       >
-                        {t('delete')}
+                        <Trash2 className="h-4 w-4" aria-hidden="true" />
                       </Button>
                     </div>
                   </td>

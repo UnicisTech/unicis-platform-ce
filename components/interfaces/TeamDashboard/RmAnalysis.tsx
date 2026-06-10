@@ -122,7 +122,6 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
           <span className="text-[12px] font-medium text-slate-900 dark:text-slate-100">
             {t('current-risk-rating')}
           </span>
-          <span className="text-[11px] text-slate-500 dark:text-slate-400">RmAnalysis</span>
         </div>
 
         {/* Five severity rows: Extreme → Major → Moderate → Minor → Insignificant */}
@@ -180,7 +179,6 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
           <span className="text-[12px] font-medium text-slate-900 dark:text-slate-100">
             {t('target-risk-rating')}
           </span>
-          <span className="text-[11px] text-slate-500 dark:text-slate-400">DashboardMatrixChart</span>
         </div>
         <div className="text-[10px] text-slate-500 dark:text-slate-400 mb-1">Impact → / Likelihood ↑</div>
         <div className="flex items-center justify-center">

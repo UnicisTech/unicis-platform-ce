@@ -11,6 +11,7 @@ import ModuleBadge from '@/components/shared/ModuleBadge';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Badge } from '@/components/shadcn/ui/badge';
 import { Button } from '@/components/shadcn/ui/button';
+import { Pencil, Trash2 } from 'lucide-react';
 import { getTaskModules } from '@/lib/tasks';
 
 const TaskListView = ({
@@ -107,23 +108,25 @@ const TaskListView = ({
                       {canUpdate && (
                         <Button
                           variant="outline"
-                          size="sm"
+                          size="icon"
                           onClick={() =>
                             router.push(
                               `/teams/${slug}/tasks/${task.taskNumber}`
                             )
                           }
+                          aria-label={t('edit-task')}
                         >
-                          {t('edit-task')}
+                          <Pencil className="h-4 w-4" aria-hidden="true" />
                         </Button>
                       )}
                       {canDelete && (
                         <Button
                           variant="destructive"
-                          size="sm"
+                          size="icon"
                           onClick={() => onDeleteTask(task.taskNumber)}
+                          aria-label={t('delete')}
                         >
-                          {t('delete')}
+                          <Trash2 className="h-4 w-4" aria-hidden="true" />
                         </Button>
                       )}
                     </div>

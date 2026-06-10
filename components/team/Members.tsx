@@ -20,6 +20,7 @@ import type { ApiResponse } from 'types';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
 import { useState } from 'react';
 import { Button } from '../shadcn/ui/button';
+import { Trash2 } from 'lucide-react';
 
 const Members = ({ team }: { team: Team }) => {
   const { data: session } = useSession();
@@ -119,13 +120,14 @@ const Members = ({ team }: { team: Team }) => {
                     <TableCell className="px-4 py-3 text-right">
                       <Button
                         variant="destructive"
-                        size="sm"
+                        size="icon"
                         onClick={() => {
                           setSelectedMember(member);
                           setConfirmationDialogVisible(true);
                         }}
+                        aria-label={t('remove')}
                       >
-                        {t('remove')}
+                        <Trash2 className="h-4 w-4" aria-hidden="true" />
                       </Button>
                     </TableCell>
                   )}

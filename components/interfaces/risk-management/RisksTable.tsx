@@ -11,6 +11,7 @@ import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import type { TaskWithRmRisk } from 'types';
 import useTheme from 'hooks/useTheme';
 import { Button } from '@/components/shadcn/ui/button';
+import { Pencil, Trash2 } from 'lucide-react';
 import useTeamMembersMap from 'hooks/useTeamMembersMap';
 import { Error, Loading } from '@/components/shared';
 import { riskValueToLabelKey } from '@/lib/common';
@@ -193,12 +194,22 @@ const RisksTable = ({
 
                   {canAccess('task', ['update']) && (
                     <td className="px-2 py-2">
-                      <div className="flex gap-1">
-                        <Button size="sm" variant="outline" onClick={() => editHandler(task)}>
-                          {t('edit-task')}
+                      <div className="flex gap-2">
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => editHandler(task)}
+                          aria-label={t('edit-task')}
+                        >
+                          <Pencil className="h-4 w-4" aria-hidden="true" />
                         </Button>
-                        <Button size="sm" variant="destructive" onClick={() => deleteHandler(task)}>
-                          {t('delete')}
+                        <Button
+                          variant="destructive"
+                          size="icon"
+                          onClick={() => deleteHandler(task)}
+                          aria-label={t('delete')}
+                        >
+                          <Trash2 className="h-4 w-4" aria-hidden="true" />
                         </Button>
                       </div>
                     </td>

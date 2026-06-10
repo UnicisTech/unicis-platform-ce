@@ -7,6 +7,7 @@ import {
   TableRow,
 } from '@/components/shadcn/ui/table';
 import { Button } from '@/components/shadcn/ui/button';
+import { Copy, Trash2 } from 'lucide-react';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
 import { Error, LetterAvatar, Loading } from '@/components/shared';
 import { defaultHeaders } from '@/lib/common';
@@ -110,21 +111,22 @@ const PendingInvitations = ({ team }: { team: Team }) => {
                     <div className="inline-flex gap-2 justify-end">
                       <Button
                         variant="outline"
-                        size="sm"
-                        aria-label="Copy"
+                        size="icon"
+                        aria-label={t('copy-to-clipboard')}
                         onClick={() => copyInviteLink(invitation)}
                       >
-                        {t('copy-to-clipboard')}
+                        <Copy className="h-4 w-4" aria-hidden="true" />
                       </Button>
                       <Button
                         variant="destructive"
-                        size="sm"
+                        size="icon"
+                        aria-label={t('remove')}
                         onClick={() => {
                           setSelectedInvitation(invitation);
                           setConfirmationDialogVisible(true);
                         }}
                       >
-                        {t('remove')}
+                        <Trash2 className="h-4 w-4" aria-hidden="true" />
                       </Button>
                     </div>
                   </TableCell>
