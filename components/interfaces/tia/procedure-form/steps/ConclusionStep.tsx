@@ -8,7 +8,7 @@ interface ConclusionStepProps {
 }
 
 export default function ConclusionStep({ procedure }: ConclusionStepProps) {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'tia']);
 
   return (
     <>

@@ -5,13 +5,7 @@ import {
   FormControl,
   FormMessage,
 } from '@/components/shadcn/ui/form';
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@/components/shadcn/ui/select';
+import { Combobox } from '@/components/shadcn/ui/combobox';
 import { Control } from 'react-hook-form';
 import { useTranslation } from 'next-i18next';
 import type { Task } from 'types';
@@ -25,6 +19,12 @@ interface Props {
 export default function TaskPicker({ control, name, tasks }: Props) {
   const { t } = useTranslation('common');
 
+  const options = tasks.map((task) => ({
+    value: String(task.id),
+    label: `#${task.taskNumber} ${task.title}`,
+    searchValue: `${task.taskNumber} ${task.title}`,
+  }));
+
   return (
     <FormField
       control={control}
@@ -34,24 +34,18 @@ export default function TaskPicker({ control, name, tasks }: Props) {
         <FormItem>
           <FormLabel>{t('task')}</FormLabel>
           <FormControl>
-            <Select
+            <Combobox
+              options={options}
+              value={field.value?.id ? String(field.value.id) : null}
               onValueChange={(taskId) => {
-                const task = tasks.find((t) => String(t.id) === taskId);
-                return field.onChange(task);
+                if (!taskId) return;
+                const found = tasks.find((task) => String(task.id) === taskId);
+                field.onChange(found ?? null);
               }}
-              value={field.value?.id ? String(field.value.id) : undefined}
-            >
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a task" />
-              </SelectTrigger>
-              <SelectContent className="max-h-60 overflow-y-auto">
-                {tasks.map((t) => (
-                  <SelectItem key={t.id} value={String(t.id)}>
-                    {t.title}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+              placeholder={t('select-task', { defaultValue: 'Select a task' })}
+              searchPlaceholder={t('search-task', { defaultValue: 'Search tasks…' })}
+              emptyText={t('no-tasks-found', { defaultValue: 'No tasks found.' })}
+            />
           </FormControl>
           <FormMessage />
         </FormItem>

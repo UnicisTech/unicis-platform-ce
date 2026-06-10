@@ -21,7 +21,7 @@ const ConfidentialityStep = ({
   initial?: PiaRisk[1];
   control: Control<ConfidentialityStepValues>;
 }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'pia']);
 
   return (
     <>

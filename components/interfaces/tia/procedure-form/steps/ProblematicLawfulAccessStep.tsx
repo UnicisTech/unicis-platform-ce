@@ -19,7 +19,7 @@ import { config } from '@/lib/tia';
 import { getTransferIsValue } from '@/lib/tia/helpers';
 
 export function TransferIs() {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'tia']);
   const { getValues } = useFormContext();
   const values = getValues();
 
@@ -47,7 +47,7 @@ interface ProblematicLawfulAccessStepProps {
 export default function ProblematicLawfulAccessStep({
   control,
 }: ProblematicLawfulAccessStepProps) {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'tia']);
 
   return (
     <>

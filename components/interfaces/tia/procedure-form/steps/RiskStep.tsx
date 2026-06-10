@@ -29,7 +29,7 @@ export default function RiskStep({
   problematicLawfulAccessValues,
   control,
 }: RiskStepProps) {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'tia']);
 
   const { getValues } = useFormContext();
   const values = getValues();
