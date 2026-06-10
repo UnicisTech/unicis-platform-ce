@@ -190,7 +190,9 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
           </span>
         </div>
         <div className="text-[11px] text-slate-500 dark:text-slate-400 mb-1">
-          {t('risk-matrix-axis-label', { defaultValue: 'Impact → / Likelihood ↑' })}
+          {t('risk-matrix-axis-label', {
+            defaultValue: 'Impact → / Likelihood ↑',
+          })}
         </div>
         <div className="flex items-center justify-center">
           <DashboardMatrixChart

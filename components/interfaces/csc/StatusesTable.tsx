@@ -99,7 +99,11 @@ const StatusesTable = ({
   const toggleSelect = useCallback((id: string) => {
     setSelectedIds((prev) => {
       const next = new Set(prev);
-      if (next.has(id)) { next.delete(id); } else { next.add(id); }
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
       return next;
     });
   }, []);
@@ -440,7 +444,9 @@ const StatusesTable = ({
             <div className="space-y-2 max-h-64 overflow-y-auto mb-4 border border-slate-200 dark:border-slate-700 rounded p-3">
               {tasks.length === 0 ? (
                 <p className="text-sm text-slate-500 dark:text-slate-400 text-center py-4">
-                  {t('no-tasks-available', { defaultValue: 'No tasks available' })}
+                  {t('no-tasks-available', {
+                    defaultValue: 'No tasks available',
+                  })}
                 </p>
               ) : (
                 tasks.map((task) => (

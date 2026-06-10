@@ -112,7 +112,9 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ menu }) => {
             className="h-3 w-3 shrink-0 text-slate-300"
             aria-hidden="true"
           />
-          <span className="sr-only">{t('opens-in-new-tab', { defaultValue: '(opens in new tab)' })}</span>
+          <span className="sr-only">
+            {t('opens-in-new-tab', { defaultValue: '(opens in new tab)' })}
+          </span>
         </>
       )}
     </Link>

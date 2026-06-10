@@ -46,7 +46,10 @@ export function BulkActionBar({
       <div className="fixed bottom-0 left-1/2 -translate-x-1/2 mb-4 z-50 flex items-center gap-3 bg-slate-900 text-white px-4 py-2.5 rounded-xl shadow-lg">
         <CheckSquare size={15} aria-hidden />
         <span className="text-[13px] font-medium">
-          {t('bulk-actions.selected', { count: selectedCount, defaultValue: '{{count}} selected' })}
+          {t('bulk-actions.selected', {
+            count: selectedCount,
+            defaultValue: '{{count}} selected',
+          })}
         </span>
         <div className="w-px h-4 bg-slate-600" />
 

@@ -69,7 +69,9 @@ export function ModuleEmptyState({
           rel="noopener noreferrer"
           className="text-[12px] text-ub-blue hover:underline"
         >
-          {t('learn-more-docs', { defaultValue: 'Learn more in documentation →' })}
+          {t('learn-more-docs', {
+            defaultValue: 'Learn more in documentation →',
+          })}
         </a>
       )}
     </div>

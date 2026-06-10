@@ -261,7 +261,10 @@ function NeedsAttentionPanel({ tasks, slug }: { tasks: Task[]; slug: string }) {
                     />
                   </div>
                   <p className="text-[11px] text-ub-red mt-0.5">
-                    {t('dashboard.due-label', { date: dueLabel, defaultValue: 'Due {{date}}' })}
+                    {t('dashboard.due-label', {
+                      date: dueLabel,
+                      defaultValue: 'Due {{date}}',
+                    })}
                   </p>
                 </button>
               );
@@ -272,7 +275,10 @@ function NeedsAttentionPanel({ tasks, slug }: { tasks: Task[]; slug: string }) {
                 className="w-full px-3 py-2 text-[11px] text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 text-center transition-colors"
                 aria-label={t('dashboard.overdue-tasks')}
               >
-                {t('dashboard.more-items', { count: hiddenCount, defaultValue: '+{{count}} more →' })}
+                {t('dashboard.more-items', {
+                  count: hiddenCount,
+                  defaultValue: '+{{count}} more →',
+                })}
               </button>
             )}
           </>
