@@ -86,9 +86,8 @@ ARG RESEND_API_KEY=${RESEND_API_KEY}
 ENV RESEND_FROM=${RESEND_FROM}
 
 
-# Build the Next.js app. Database migrations are a deploy-time concern and
-# require a reachable database, so they must not run during image build.
-RUN npx prisma generate && npx tsx scripts/generate-openapi.ts && npx next build --webpack
+# Build the Next.js app and apply pending database migrations.
+RUN npx prisma generate && npx prisma migrate deploy && npx tsx scripts/generate-openapi.ts && npx next build --webpack
 
 # Remove dev dependencies for runtime
 RUN npm prune --omit=dev
