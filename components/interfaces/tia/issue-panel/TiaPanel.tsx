@@ -256,7 +256,10 @@ const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({
             {steps.map((step, idx) => (
               <button
                 key={idx}
+                id={`tia-tab-${idx}`}
                 role="tab"
+                aria-selected={selectedTab === idx}
+                aria-controls="tia-tab-panel"
                 className={`tab ${selectedTab === idx ? 'tab-active' : ''}`}
                 onClick={() => setSelectedTab(idx)}
               >
@@ -264,7 +267,14 @@ const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({
               </button>
             ))}
           </div>
-          <div className="mt-4">{tabs[selectedTab]}</div>
+          <div
+            id="tia-tab-panel"
+            role="tabpanel"
+            aria-labelledby={`tia-tab-${selectedTab}`}
+            className="mt-4"
+          >
+            {tabs[selectedTab]}
+          </div>
         </>
       ) : (
         <div className="mt-2">

@@ -59,8 +59,10 @@ const CscTabs = ({
       {/* ── Mapping Matrix tab — always visible (first position) ── */}
       {showMatrixMapping && (
         <button
+          id="csc-tab-matrix"
           role="tab"
           aria-selected={activeTab === MAPPING_MATRIX_TAB && matrixUnlocked}
+          aria-controls="csc-tab-panel"
           disabled={!matrixUnlocked}
           onClick={() => matrixUnlocked && setActiveTab(MAPPING_MATRIX_TAB)}
           title={
@@ -92,8 +94,10 @@ const CscTabs = ({
         return (
           <button
             key={index}
+            id={`csc-tab-${menu.name}`}
             role="tab"
             aria-selected={isActive}
+            aria-controls="csc-tab-panel"
             onClick={() => setActiveTab(menu.name as ISO)}
             className={cn(
               'px-3 py-[6px] text-[12px] font-medium rounded-md transition-all whitespace-nowrap',

@@ -41,7 +41,7 @@ const CourseCard = ({
         <img
           className="absolute inset-0 w-full h-full object-cover"
           src={course?.thumbnail || '/unicis-iap-logo.png'}
-          alt={t('course-thumbnail')}
+          alt={course.name}
         />
       </div>
 
@@ -63,7 +63,7 @@ const CourseCard = ({
         <div className="flex items-center justify-between gap-2 pt-0.5">
           <ProgressBadge progress={progress} />
           {course?.estimatedTime && (
-            <div className="flex items-center gap-1 text-[10px] text-slate-400">
+            <div className="flex items-center gap-1 text-[11px] text-slate-500 dark:text-slate-400">
               <Clock size={10} aria-hidden />
               {t('estimated-minutes', { time: course.estimatedTime })}
             </div>

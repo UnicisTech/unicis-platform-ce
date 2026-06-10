@@ -12,6 +12,7 @@ import {
   TaskAuditLogs,
   TaskTab,
 } from '@/components/interfaces/Task';
+import { toTaskPanelId, toTaskTabId } from '@/components/interfaces/Task/TaskTab';
 import { CscAuditLogs, CscPanel } from '@/components/interfaces/csc';
 import {
   RpaPanel,
@@ -118,110 +119,145 @@ const TaskById = () => {
 
       {/* ── Overview ─────────────────────────────────────────────────── */}
       {activeTab === 'Overview' && (
-        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+        <div
+          id={toTaskPanelId('Overview')}
+          role="tabpanel"
+          aria-labelledby={toTaskTabId('Overview')}
+          className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden"
+        >
           <TaskDetails task={task} team={team as Team} />
         </div>
       )}
 
       {/* ── Processing Activities ────────────────────────────────────── */}
       {activeTab === 'Processing Activities' && (
-        <Panel
-          title={t('processing-activities-panel')}
-          action={
-            canAccess('task', ['update']) ? (
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-[12px] h-7"
-                onClick={() => rpaState.setIsRpaOpen(!rpaState.isRpaOpen)}
-              >
-                {t('create-rpa')}
-              </Button>
-            ) : undefined
-          }
+        <div
+          id={toTaskPanelId('Processing Activities')}
+          role="tabpanel"
+          aria-labelledby={toTaskTabId('Processing Activities')}
         >
-          <div className="p-4">
-            <RpaPanel task={task} slug={slug} />
-          </div>
-        </Panel>
+          <Panel
+            title={t('processing-activities-panel')}
+            action={
+              canAccess('task', ['update']) ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-[12px] h-7"
+                  onClick={() => rpaState.setIsRpaOpen(!rpaState.isRpaOpen)}
+                >
+                  {t('create-rpa')}
+                </Button>
+              ) : undefined
+            }
+          >
+            <div className="p-4">
+              <RpaPanel task={task} slug={slug} />
+            </div>
+          </Panel>
+        </div>
       )}
 
       {/* ── Transfer Impact Assessment ───────────────────────────────── */}
       {activeTab === 'Transfer Impact Assessment' && (
-        <Panel
-          title={t('transfer-impact-assessment-panel')}
-          action={
-            canAccess('task', ['update']) ? (
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-[12px] h-7"
-                onClick={() => setTiaVisible(!tiaVisible)}
-              >
-                {t('create-tia')}
-              </Button>
-            ) : undefined
-          }
+        <div
+          id={toTaskPanelId('Transfer Impact Assessment')}
+          role="tabpanel"
+          aria-labelledby={toTaskTabId('Transfer Impact Assessment')}
         >
-          <div className="p-4">
-            <TiaPanel task={task} />
-          </div>
-        </Panel>
+          <Panel
+            title={t('transfer-impact-assessment-panel')}
+            action={
+              canAccess('task', ['update']) ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-[12px] h-7"
+                  onClick={() => setTiaVisible(!tiaVisible)}
+                >
+                  {t('create-tia')}
+                </Button>
+              ) : undefined
+            }
+          >
+            <div className="p-4">
+              <TiaPanel task={task} />
+            </div>
+          </Panel>
+        </div>
       )}
 
       {/* ── Cybersecurity Controls ───────────────────────────────────── */}
       {activeTab === 'Cybersecurity Controls' && (
-        <Panel title={t('cybersecurity-controls-panel')}>
-          <div className="p-4">
-            <CscPanel task={task} team={team} mutateTask={mutateTask} />
-          </div>
-        </Panel>
+        <div
+          id={toTaskPanelId('Cybersecurity Controls')}
+          role="tabpanel"
+          aria-labelledby={toTaskTabId('Cybersecurity Controls')}
+        >
+          <Panel title={t('cybersecurity-controls-panel')}>
+            <div className="p-4">
+              <CscPanel task={task} team={team} mutateTask={mutateTask} />
+            </div>
+          </Panel>
+        </div>
       )}
 
       {/* ── Privacy Impact Assessment ────────────────────────────────── */}
       {activeTab === 'Privacy Impact Assessment' && (
-        <Panel
-          title={t('privacy-impact-assessment-panel')}
-          action={
-            canAccess('task', ['update']) ? (
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-[12px] h-7"
-                onClick={() => setPiaVisible(!piaVisible)}
-              >
-                {t('create-pia')}
-              </Button>
-            ) : undefined
-          }
+        <div
+          id={toTaskPanelId('Privacy Impact Assessment')}
+          role="tabpanel"
+          aria-labelledby={toTaskTabId('Privacy Impact Assessment')}
         >
-          <div className="p-4">
-            <PiaPanel task={task} />
-          </div>
-        </Panel>
+          <Panel
+            title={t('privacy-impact-assessment-panel')}
+            action={
+              canAccess('task', ['update']) ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-[12px] h-7"
+                  onClick={() => setPiaVisible(!piaVisible)}
+                >
+                  {t('create-pia')}
+                </Button>
+              ) : undefined
+            }
+          >
+            <div className="p-4">
+              <PiaPanel task={task} />
+            </div>
+          </Panel>
+        </div>
       )}
 
       {/* ── Risk Management ─────────────────────────────────────────── */}
       {activeTab === 'Risk Management' && (
-        <Panel
-          title={t('risk-management-panel')}
-          action={
-            canAccess('task', ['update']) ? (
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-[12px] h-7"
-                onClick={() => setRmVisible(!rmVisible)}
-              >
-                {t('rm-register-risk-record')}
-              </Button>
-            ) : undefined
-          }
+        <div
+          id={toTaskPanelId('Risk Management')}
+          role="tabpanel"
+          aria-labelledby={toTaskTabId('Risk Management')}
         >
-          <div className="p-4">
-            <RiskManagementTaskPanel task={task} slug={slug} />
-          </div>
-        </Panel>
+          <Panel
+            title={t('risk-management-panel')}
+            action={
+              canAccess('task', ['update']) ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-[12px] h-7"
+                  onClick={() => setRmVisible(!rmVisible)}
+                >
+                  {t('rm-register-risk-record')}
+                </Button>
+              ) : undefined
+            }
+          >
+            <div className="p-4">
+              <RiskManagementTaskPanel task={task} slug={slug} />
+            </div>
+          </Panel>
+        </div>
       )}
 
       {/* ── Dialogs ─────────────────────────────────────────────────── */}
@@ -276,13 +312,15 @@ const TaskById = () => {
       </div>
 
       {activeCommentTab === 'Comments' ? (
-        <Panel title={t('comments')}>
-          <div className="p-4">
-            <Comments task={task} mutateTask={mutateTask} />
-          </div>
-        </Panel>
+        <div id="comments-panel-comments" role="tabpanel" aria-labelledby="comments-tab-comments">
+          <Panel title={t('comments')}>
+            <div className="p-4">
+              <Comments task={task} mutateTask={mutateTask} />
+            </div>
+          </Panel>
+        </div>
       ) : (
-        <>
+        <div id="comments-panel-activity" role="tabpanel" aria-labelledby="comments-tab-activity">
           <Panel title={t('task-activity')}>
             <div className="p-4">
               <TaskAuditLogs task={task} />
@@ -313,7 +351,7 @@ const TaskById = () => {
               <RmAuditLogs task={task} slug={slug} />
             </div>
           </Panel>
-        </>
+        </div>
       )}
     </>
   );

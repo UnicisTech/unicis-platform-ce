@@ -2,6 +2,13 @@ import { useTranslation } from 'next-i18next';
 import { taskNavigations } from '@/lib/tasks';
 import { cn } from '@/components/shadcn/lib/utils';
 
+/** Derive a stable HTML-safe ID from a tab name, e.g. "Processing Activities" → "task-tab-processing-activities" */
+export const toTaskTabId = (name: string) =>
+  `task-tab-${name.toLowerCase().replace(/\s+/g, '-')}`;
+/** Panel ID matching a tab name — used by parent to wire up role="tabpanel" */
+export const toTaskPanelId = (name: string) =>
+  `task-panel-${name.toLowerCase().replace(/\s+/g, '-')}`;
+
 const TaskTab = ({
   activeTab,
   setActiveTab,
@@ -30,8 +37,10 @@ const TaskTab = ({
       {navigations.map((menu) => (
         <button
           key={menu.name}
+          id={toTaskTabId(menu.name)}
           role="tab"
           aria-selected={menu.active}
+          aria-controls={toTaskPanelId(menu.name)}
           onClick={() => setActiveTab(menu.name)}
           className={cn(
             'px-3 py-[6px] text-[12px] font-medium rounded-md transition-all whitespace-nowrap',

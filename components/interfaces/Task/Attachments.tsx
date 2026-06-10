@@ -112,7 +112,7 @@ const Attachments = ({
       ? 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-gray-600 hover:border-gray-500'
       : 'bg-white dark:bg-slate-800 text-gray-700 border-gray-300 hover:border-gray-400';
 
-  const wrapperClasses = `flex flex-wrap h-full w-full px-4 py-2 transition border-2 border-dashed rounded-md appearance-none cursor-pointer focus:outline-hidden ${
+  const wrapperClasses = `flex flex-wrap h-full w-full px-4 py-2 transition border-2 border-dashed rounded-md appearance-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
     task.attachments.length ? 'justify-start' : 'justify-center'
   } ${isDragOver ? 'border-blue-400' : themeClasses}`;
 

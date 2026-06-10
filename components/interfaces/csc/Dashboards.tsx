@@ -26,21 +26,31 @@ const Dashboard = ({ team, iso }: { team: Team; iso: ISO[] }) => {
         setActiveTab={setActiveTab}
       />
 
-      {activeTab === MAPPING_MATRIX_TAB ? (
-        /* ── Mapping Matrix + Coverage Analysis tab ── */
-        <MappingMatrixPanel enabledFrameworks={iso} />
-      ) : (
-        /* ── Standard framework control panel ── */
-        <CscPanel
-          key={activeTab}
-          slug={team.slug}
-          teamName={team.name}
-          iso={activeTab as ISO}
-          tasks={tasks}
-          mutateTasks={mutateTasks}
-          enabledFrameworks={iso}
-        />
-      )}
+      <div
+        id="csc-tab-panel"
+        role="tabpanel"
+        aria-labelledby={
+          activeTab === MAPPING_MATRIX_TAB
+            ? 'csc-tab-matrix'
+            : `csc-tab-${activeTab}`
+        }
+      >
+        {activeTab === MAPPING_MATRIX_TAB ? (
+          /* ── Mapping Matrix + Coverage Analysis tab ── */
+          <MappingMatrixPanel enabledFrameworks={iso} />
+        ) : (
+          /* ── Standard framework control panel ── */
+          <CscPanel
+            key={activeTab}
+            slug={team.slug}
+            teamName={team.name}
+            iso={activeTab as ISO}
+            tasks={tasks}
+            mutateTasks={mutateTasks}
+            enabledFrameworks={iso}
+          />
+        )}
+      </div>
     </>
   );
 };

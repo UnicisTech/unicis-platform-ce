@@ -172,7 +172,7 @@ const TaskDetails = ({ task, team }: { task: Task; team: Team }) => {
 
             {/* ── Right sidebar: status / priority / due date ─────────── */}
             <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-4 space-y-4 self-start">
-              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
+              <p className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest">
                 {t('details')}
               </p>
 

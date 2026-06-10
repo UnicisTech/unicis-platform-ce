@@ -187,7 +187,7 @@ const TaskAuditLogs = ({ task }: { task: Task }) => {
                 )}
 
                 {/* Absolute date */}
-                <p className="text-[10px] text-slate-400 mt-0.5">
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                   {new Date(log.date).toLocaleString()}
                 </p>
               </div>

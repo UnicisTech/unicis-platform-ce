@@ -25,8 +25,10 @@ const CommentsTab = ({
       {navigations.map((menu) => (
         <button
           key={menu.name}
+          id={`comments-tab-${menu.name.toLowerCase()}`}
           role="tab"
           aria-selected={menu.active}
+          aria-controls={`comments-panel-${menu.name.toLowerCase()}`}
           onClick={() => setActiveTab(menu.name)}
           className={cn(
             'px-3 py-[6px] text-[12px] font-medium rounded-md transition-all whitespace-nowrap',

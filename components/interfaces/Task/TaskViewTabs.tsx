@@ -22,8 +22,10 @@ const TaskViewTabs = ({
       {taskViews.map((view) => (
         <button
           key={view}
+          id={`task-view-tab-${view}`}
           role="tab"
           aria-selected={activeView === view}
+          aria-controls="task-view-panel"
           onClick={() => setActiveView(view)}
           className={cn(
             'px-4 py-[6px] text-[12px] font-medium rounded-md transition-all',

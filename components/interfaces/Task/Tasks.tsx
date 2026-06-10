@@ -250,39 +250,45 @@ const Tasks = ({ team }: { team: Team }) => {
         </div>
         <TeamTaskAnalysis slug={slug} />
         <TaskViewTabs activeView={activeView} setActiveView={setActiveView} />
-        {tasks && tasks.length === 0 ? (
-          <ModuleEmptyState
-            icon={QueueListIcon}
-            title={t('empty-state.tasks.title')}
-            description={t('empty-state.tasks.description')}
-            regulatoryContext={t('empty-state.tasks.context')}
-            ctaLabel={canCreateTask ? t('empty-state.tasks.cta') : undefined}
-            onCta={canCreateTask ? () => setVisible(true) : undefined}
-          />
-        ) : activeView === 'list' ? (
-          <TaskListView
-            slug={slug}
-            pageData={pageData}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            goToPage={goToPage}
-            prevButtonDisabled={prevButtonDisabled}
-            nextButtonDisabled={nextButtonDisabled}
-            canUpdate={canUpdateTask}
-            canDelete={canDeleteTask}
-            onDeleteTask={openDeleteModal}
-          />
-        ) : (
-          <TaskKanbanBoard
-            slug={slug}
-            tasks={filteredTasks || []}
-            canUpdate={canUpdateTask}
-            canDelete={canDeleteTask}
-            canReorder={canReorderTasks}
-            onDeleteTask={openDeleteModal}
-            onReorder={handleKanbanReorder}
-          />
-        )}
+        <div
+          id="task-view-panel"
+          role="tabpanel"
+          aria-labelledby={`task-view-tab-${activeView}`}
+        >
+          {tasks && tasks.length === 0 ? (
+            <ModuleEmptyState
+              icon={QueueListIcon}
+              title={t('empty-state.tasks.title')}
+              description={t('empty-state.tasks.description')}
+              regulatoryContext={t('empty-state.tasks.context')}
+              ctaLabel={canCreateTask ? t('empty-state.tasks.cta') : undefined}
+              onCta={canCreateTask ? () => setVisible(true) : undefined}
+            />
+          ) : activeView === 'list' ? (
+            <TaskListView
+              slug={slug}
+              pageData={pageData}
+              currentPage={currentPage}
+              totalPages={totalPages}
+              goToPage={goToPage}
+              prevButtonDisabled={prevButtonDisabled}
+              nextButtonDisabled={nextButtonDisabled}
+              canUpdate={canUpdateTask}
+              canDelete={canDeleteTask}
+              onDeleteTask={openDeleteModal}
+            />
+          ) : (
+            <TaskKanbanBoard
+              slug={slug}
+              tasks={filteredTasks || []}
+              canUpdate={canUpdateTask}
+              canDelete={canDeleteTask}
+              canReorder={canReorderTasks}
+              onDeleteTask={openDeleteModal}
+              onReorder={handleKanbanReorder}
+            />
+          )}
+        </div>
         <CreateTask visible={visible} setVisible={setVisible} team={team} />
         <TaskImportModal
           visible={importVisible}

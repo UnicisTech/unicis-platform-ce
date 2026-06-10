@@ -188,7 +188,10 @@ const PiaPanel: React.FC<{ task: Task }> = ({ task }) => {
               return (
                 <button
                   key={i}
+                  id={`pia-tab-${i}`}
                   role="tab"
+                  aria-selected={activeTab === i}
+                  aria-controls="pia-tab-panel"
                   className={`tab ${activeTab === i ? 'tab-active' : ''}`}
                   onClick={() => setActiveTab(i)}
                 >
@@ -198,7 +201,14 @@ const PiaPanel: React.FC<{ task: Task }> = ({ task }) => {
             })}
           </div>
 
-          <div className="mt-4 space-y-3">{tabs[activeTab]}</div>
+          <div
+            id="pia-tab-panel"
+            role="tabpanel"
+            aria-labelledby={`pia-tab-${activeTab}`}
+            className="mt-4 space-y-3"
+          >
+            {tabs[activeTab]}
+          </div>
         </div>
       ) : (
         <div className="my-4">
