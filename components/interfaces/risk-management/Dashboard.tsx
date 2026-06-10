@@ -6,7 +6,7 @@ import useTeamTasks from 'hooks/useTeamTasks';
 import useTeam from 'hooks/useTeam';
 import { useRouter } from 'next/router';
 import { TaskProperties, TaskWithRmRisk } from 'types';
-import { EmptyState, Error } from '@/components/shared';
+import { Error } from '@/components/shared';
 import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';

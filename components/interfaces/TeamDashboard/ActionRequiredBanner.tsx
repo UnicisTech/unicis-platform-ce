@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { AlertTriangle } from 'lucide-react';
-import { Button } from '@/components/shadcn/ui/button';
 import useISO from 'hooks/useISO';
 import useCscStatuses from 'hooks/useCscStatuses';
 import frameworks from '@/lib/csc/frameworks';

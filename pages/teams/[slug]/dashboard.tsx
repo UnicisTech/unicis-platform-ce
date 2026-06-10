@@ -139,7 +139,7 @@ function TaskStatusMatrix({ tasks, slug }: { tasks: Task[]; slug: string }) {
           <thead>
             <tr className="border-b border-slate-100">
               <th className="text-left px-3 py-2 text-[11px] font-medium text-slate-500 dark:text-slate-400 w-16">
-                Module
+                {t('module')}
               </th>
               {STATUS_COLS.map((col) => (
                 <th
@@ -150,7 +150,7 @@ function TaskStatusMatrix({ tasks, slug }: { tasks: Task[]; slug: string }) {
                 </th>
               ))}
               <th className="text-center px-2 py-2 text-[11px] font-medium text-slate-500 dark:text-slate-400">
-                Total
+                {t('total')}
               </th>
             </tr>
           </thead>
@@ -261,7 +261,7 @@ function NeedsAttentionPanel({ tasks, slug }: { tasks: Task[]; slug: string }) {
                     />
                   </div>
                   <p className="text-[11px] text-ub-red mt-0.5">
-                    Due {dueLabel}
+                    {t('dashboard.due-label', { date: dueLabel, defaultValue: 'Due {{date}}' })}
                   </p>
                 </button>
               );
@@ -272,7 +272,7 @@ function NeedsAttentionPanel({ tasks, slug }: { tasks: Task[]; slug: string }) {
                 className="w-full px-3 py-2 text-[11px] text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 text-center transition-colors"
                 aria-label={t('dashboard.overdue-tasks')}
               >
-                +{hiddenCount} more →
+                {t('dashboard.more-items', { count: hiddenCount, defaultValue: '+{{count}} more →' })}
               </button>
             )}
           </>

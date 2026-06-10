@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import toast from 'react-hot-toast';
-import { Loading, Error, EmptyState } from '@/components/shared';
+import { Loading, Error } from '@/components/shared';
 import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
 import type { InferGetServerSidePropsType } from 'next';
 import useTeam from 'hooks/useTeam';

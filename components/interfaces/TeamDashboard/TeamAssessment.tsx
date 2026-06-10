@@ -51,7 +51,7 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
           </span>
         ) : totalNumberOfAssessment > 0 ? (
           <span className="text-[11px] font-medium text-green-600 dark:text-green-400">
-            ✓ {t('tia-all-permitted', { defaultValue: 'All permitted' })}
+            {t('tia-all-permitted', { defaultValue: '✓ All permitted' })}
           </span>
         ) : null}
       </div>

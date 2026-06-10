@@ -2,7 +2,6 @@ import { useState, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import toast from 'react-hot-toast';
-import { EmptyState } from '@/components/shared';
 import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
 import useTeamTasks from 'hooks/useTeamTasks';
 import useCanAccess from 'hooks/useCanAccess';

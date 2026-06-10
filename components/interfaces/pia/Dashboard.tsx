@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeamTasks from 'hooks/useTeamTasks';
 import useTeam from 'hooks/useTeam';
-import { EmptyState, Error, PerPageSelector } from '@/components/shared';
+import { Error, PerPageSelector } from '@/components/shared';
 import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
 import { TaskProperties, TaskWithPiaRisk } from 'types';
 import RisksTable from './RisksTable';

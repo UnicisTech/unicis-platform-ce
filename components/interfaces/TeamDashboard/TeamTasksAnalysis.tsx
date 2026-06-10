@@ -1,11 +1,9 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import useTeamTasks from 'hooks/useTeamTasks';
 import TasksPieChart from './TasksPieChart';
 import { cn } from '@/components/shadcn/lib/utils';
 import { QueueListIcon } from '@heroicons/react/24/solid';
-import type { Task } from 'types';
 
 // ── Status column config ───────────────────────────────────────────────────────
 const STATUS_COLS = [

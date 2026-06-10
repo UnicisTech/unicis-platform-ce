@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 import { ProgressBar } from '@/components/shared/ProgressBar';
 import { cn } from '@/components/shadcn/lib/utils';
 
@@ -19,17 +20,18 @@ export function SectionRail({
   activeSection,
   onSelect,
 }: SectionRailProps) {
+  const { t } = useTranslation('common');
   return (
     <aside
       className="hidden lg:flex lg:w-[210px] flex-shrink-0 border-l border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex-col overflow-hidden"
-      aria-label="Filter by section"
+      aria-label={t('csc.sections', { defaultValue: 'Filter by section' })}
     >
       <div className="flex items-center justify-between px-3 py-2.5 border-b border-slate-200 dark:border-slate-700">
         <span className="text-[11px] font-medium text-slate-900 dark:text-slate-100">
-          Sections
+          {t('csc.sections-label', { defaultValue: 'Sections' })}
         </span>
         <span className="text-xs text-slate-500 dark:text-slate-400">
-          Click to filter
+          {t('csc.click-to-filter', { defaultValue: 'Click to filter' })}
         </span>
       </div>
       <div className="flex-1 overflow-y-auto p-2 space-y-0.5">

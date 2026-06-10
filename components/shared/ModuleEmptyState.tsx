@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 import { Button } from '@/components/shadcn/ui/button';
 
 // Accepts any React icon component (Lucide, Heroicons, etc.) OR a public image path
@@ -25,6 +26,7 @@ export function ModuleEmptyState({
   onCta,
   docsHref,
 }: ModuleEmptyStateProps) {
+  const { t } = useTranslation('common');
   const iconNode =
     typeof icon === 'string' ? (
       <Image
@@ -67,7 +69,7 @@ export function ModuleEmptyState({
           rel="noopener noreferrer"
           className="text-[12px] text-ub-blue hover:underline"
         >
-          Learn more in documentation →
+          {t('learn-more-docs', { defaultValue: 'Learn more in documentation →' })}
         </a>
       )}
     </div>

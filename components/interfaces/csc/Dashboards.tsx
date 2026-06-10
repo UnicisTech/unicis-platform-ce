@@ -7,12 +7,10 @@ import { Loading } from '@/components/shared';
 import CscPanel from './CscPanel';
 import MappingMatrixPanel from './MappingMatrixPanel';
 import useTeamTasks from 'hooks/useTeamTasks';
-import { useTranslation } from 'next-i18next';
 
 const Dashboard = ({ team, iso }: { team: Team; iso: ISO[] }) => {
   const [activeTab, setActiveTab] = useState<ActiveCscTab>(iso[0]);
   const { tasks, mutateTasks } = useTeamTasks(team.slug);
-  const { t } = useTranslation(['common', 'test', 'csc/2013']);
 
   if (!tasks) {
     return <Loading />;
