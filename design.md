@@ -375,14 +375,37 @@ Key properties:
 - `rounded-lg` — always visible corners (no `sm:rounded-lg`)
 - `overflow-x-hidden` — internal content (e.g. stepper) cannot break dialog bounds
 
-#### Per-dialog overrides
+#### Per-dialog overrides — Sticky-footer pattern (mandatory)
 
-Multi-step dialogs (RPA, TIA, PIA, RM) extend with:
+Multi-step dialogs (RPA, TIA, PIA, RM) must use a **flex sticky-footer layout**:
 
 ```tsx
-className =
-  'max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-x-hidden overflow-y-auto p-4 sm:p-6';
+{/* DialogContent — flex column, content scrolls, footer always pinned */}
+<DialogContent className="max-w-[95vw] sm:max-w-2xl max-h-[90vh] flex flex-col overflow-hidden p-4 sm:p-6">
+  <DialogHeader>...</DialogHeader>
+
+  {/* Scrollable body — expands to fill space, overflows internally */}
+  <div className="w-full flex-1 min-h-0 overflow-y-auto">
+    {/* step content */}
+  </div>
+
+  {/* Footer — always pinned at the bottom */}
+  <DialogFooter className="flex flex-wrap justify-end gap-2">
+    <DialogClose asChild><Button variant="outline">{t('close')}</Button></DialogClose>
+    {currentStep > 0 && <Button variant="outline" onClick={back}>{t('back')}</Button>}
+    <Button onClick={next}>{currentStep < maxStep ? t('next') : t('save')}</Button>
+  </DialogFooter>
+</DialogContent>
 ```
+
+> **Critical:** Do NOT put `overflow-y-auto` directly on the `DialogContent` grid/flex container. Doing so places the `DialogFooter` inside the scroll area — it scrolls out of view as soon as the content grows. The correct pattern is `overflow-hidden` on the container and `flex-1 min-h-0 overflow-y-auto` on the inner content div only.
+
+Key properties:
+
+- `flex flex-col` — overrides the shadcn base `grid` with a vertical flex column
+- `overflow-hidden` — the container clips; children manage their own overflow
+- `flex-1 min-h-0` on the body div — expands to fill remaining space; `min-h-0` is required to allow a flex child to shrink below its natural content height
+- `overflow-y-auto` on the body div — only the step content scrolls, never the footer
 
 #### `DialogFooter`
 
@@ -397,6 +420,7 @@ Shadcn's base `DialogFooter` stacks buttons vertically on mobile (`flex-col-reve
 - Never use fixed-width dialogs without `max-w-[95vw]` or the base class
 - Never pass `p-6` without the `sm:` prefix — use `p-4 sm:p-6`
 - Never use `space-x-2` in a `DialogFooter` — use `gap-2`
+- Never put `overflow-y-auto` on `DialogContent` directly — use the sticky-footer flex pattern above
 
 ---
 
@@ -521,6 +545,8 @@ Before submitting any new component or page, verify:
 - [ ] Tables have `overflow-x-auto` wrapper
 - [ ] Toolbars have `flex-wrap`
 - [ ] Dialogs use `max-w-[95vw]` or the base dialog class (never fixed width without mobile fallback)
+- [ ] Multi-step dialogs use `flex flex-col overflow-hidden` on `DialogContent` + `flex-1 min-h-0 overflow-y-auto` on body div — **`DialogFooter` must always be visible without scrolling**
+- [ ] Task selection in dialogs uses `<TaskPicker>` (Combobox), not `<Select>`
 - [ ] Tab rows use `flex-wrap` or `overflow-x-auto`
 - [ ] No `h-*` (fixed height) on text containers that could receive translated strings of variable length
 - [ ] Header title uses `truncate` (enforced globally — do not override)
@@ -528,6 +554,14 @@ Before submitting any new component or page, verify:
 - [ ] All icon-only buttons have `aria-label`
 - [ ] Chart wrappers have `role="img"` + `aria-label` + `className="w-full h-full"`
 - [ ] Content text uses `text-slate-500 dark:text-slate-400` minimum (never `text-slate-400` alone for meaningful text)
+
+### Translation Checklist for New Components
+
+- [ ] Every `useTranslation` hook includes all namespaces the component's `t()` calls reference
+- [ ] Every page's `serverSideTranslations` includes namespaces for all dialogs it can open (including dialogs from other modules)
+- [ ] No `t('namespace:key')` call in a component that only has `useTranslation('common')`
+- [ ] All new i18n keys are added to **all 7 locale files** (`en`, `fr`, `de`, `es`, `it`, `ja`, `pt`), not just `en`
+- [ ] New keys that use `defaultValue` are still added to locale files (defaultValue is a fallback for development, not a substitute for proper translation)
 
 ---
 
@@ -758,6 +792,49 @@ Shows up to 5 overdue tasks. Each row is a `<button>` with `aria-label="{title},
 
 ## Translation Patterns
 
+### Namespace Registration in Component Hooks
+
+`useTranslation('common')` only resolves keys from `common.json`. Keys from module-specific namespaces (e.g. `tia:fields.DataExporter`) require that namespace to be registered in the hook. When a component uses the `namespace:key` prefix syntax but the hook only loads `'common'`, next-i18next silently strips the prefix and returns the bare key path as fallback text.
+
+```tsx
+// ❌ Wrong — hook only knows 'common'; prefix is stripped, raw key rendered
+const { t } = useTranslation('common');
+t('tia:fields.DataExporter')   // renders "fields.DataExporter"
+
+// ✅ Correct
+const { t } = useTranslation(['common', 'tia']);
+t('tia:fields.DataExporter')   // renders "a) Data exporter"
+```
+
+**Rule:** Any component that calls `t('namespace:key')` **must** include that namespace in its `useTranslation` call.
+
+| Component group | Required hook |
+|---|---|
+| TIA dialog + all 5 step files | `useTranslation(['common', 'tia'])` |
+| PIA dialog + all 6 step files | `useTranslation(['common', 'pia'])` |
+| RM dialog + step files | `useTranslation(['common', 'rm'])` |
+| RPA dialog + step files | `useTranslation(['common', 'rpa'])` |
+
+### Page-Level Namespace Loading (`serverSideTranslations`)
+
+When a page can open dialogs from a different module (e.g. the RPA creation flow triggers TIA and PIA dialogs), **all required namespaces must be listed** in `serverSideTranslations` — even if the page's own components don't use those namespaces directly.
+
+```tsx
+// pages/teams/[slug]/rpa.tsx — also loads tia + pia because RPA flow can launch both dialogs
+await serverSideTranslations(locale, ['common', 'rpa', 'tia', 'pia'])
+```
+
+| Page | Required namespaces |
+|---|---|
+| `rpa.tsx` | `common`, `rpa`, `tia`, `pia` |
+| `tia.tsx` | `common`, `tia` |
+| `pia.tsx` | `common`, `pia` |
+| `risk-management.tsx` | `common`, `rm` |
+| `dashboard.tsx` | `common` |
+| `tasks.tsx` | `common` |
+
+**Rule:** If a page renders a component tree that contains `t('namespace:key')` calls (even inside lazy-opened dialogs), that namespace must appear in `serverSideTranslations`. Missing it produces the same raw-key fallback as a missing hook namespace.
+
 ### Country Names
 
 Country fields stored in the database use lowercase keys (e.g. `"united states"`, `"germany"`). **Always** pass through the translation function before displaying:
@@ -854,6 +931,29 @@ Renders a colored badge for a given module property key. No external dependencie
 
 Reusable audit log timeline used across all modules (RPA, TIA, PIA, CSC, RM). Accepts a generic `AuditLog[]` array.
 
+### `TaskPicker`
+
+**Location:** `components/shared/shadcn/TaskPicker.tsx`
+
+Searchable task selector used as **step 0** in all multi-module create dialogs (RPA, TIA, PIA, RM). Built on the `Combobox` component (not `<Select>`).
+
+```tsx
+<TaskPicker
+  control={taskForm.control}
+  name="task"
+  tasks={availableTasks}   // pre-filtered by the caller (e.g. excludes tasks that already have an RPA)
+/>
+```
+
+**Behaviour:**
+- Options rendered as `#taskNumber taskTitle` so users can search by number or by name
+- Selected label uses `truncate` — long task names never overflow the dialog width
+- `PopoverContent` is a Radix portal overlay; it floats above the dialog and does **not** push the `DialogFooter` down
+
+**Rules:**
+- Never replace `TaskPicker` with a plain `<Select>` — task titles can be very long and lists can be hundreds of items deep; a non-searchable select is unusable
+- The caller must filter out tasks that already have the relevant module data (e.g. `tasks.filter(t => !t.properties?.tia_procedure)`) before passing them in
+
 ### `StageTracker` / `Stepper`
 
 **Location:** `components/shared/atlaskit/StageTracker.tsx` → `components/shadcn/ui/stepper.tsx`
@@ -895,7 +995,8 @@ Six KPI cards. Includes internal `CscKpiCards` and `IapKpiCard` sub-components t
 - `<th>` uniform Direction B typography
 - Empty state via `ModuleEmptyState`
 - Create button: Shadcn `<Button variant="default">`
-- Dialog: `RpaProcedureDialog` — 6-step form, responsive Stepper, `max-w-[95vw] sm:max-w-2xl`
+- Dialog: `RpaProcedureDialog` — 6-step form, responsive Stepper, sticky-footer flex layout (`flex flex-col overflow-hidden` / `flex-1 min-h-0 overflow-y-auto`)
+- Task selection: `<TaskPicker>` (Combobox with search) at step 0
 - Table: `overflow-x-auto` wrapper
 - Action column: icon-only Edit + Delete (`Pencil`, `Trash2`) with `aria-label`
 
@@ -906,7 +1007,9 @@ Six KPI cards. Includes internal `CscKpiCards` and `IapKpiCard` sub-components t
 - Same card + table pattern as RPA
 - **Data note:** Legal Analysis column shows `procedure[0].LawImporterCountry` wrapped in `t('country.${value}')` — raw stored keys are lowercase and must always go through translation
 - Transfer permitted/not-permitted badge: still uses `DaisyBadge` (planned migration)
-- Dialog: `TiaProcedureDialog` — 5-step, responsive Stepper
+- Dialog: `TiaProcedureDialog` — 5-step, responsive Stepper, sticky-footer flex layout
+- Task selection: `<TaskPicker>` at step 0
+- **Namespace:** All step components use `useTranslation(['common', 'tia'])` — keys live in `tia.json`, not `common.json`
 - Action column: icon-only Edit + Delete with `aria-label`
 
 ### PIA (Privacy Impact Assessment)
@@ -915,7 +1018,9 @@ Six KPI cards. Includes internal `CscKpiCards` and `IapKpiCard` sub-components t
 
 - Three risk axes: confidentiality & integrity, availability, transparency & data minimization
 - **Data note:** First column header uses `t('title')` (not `t('rpa')`)
-- Dialog: `RiskAssessmentDialog` — up to 6 steps (incl. optional Corrective Measures), responsive Stepper
+- Dialog: `RiskAssessmentDialog` — up to 6 steps (incl. optional Corrective Measures), responsive Stepper, sticky-footer flex layout
+- Task selection: `<TaskPicker>` at step 0
+- **Namespace:** All step components use `useTranslation(['common', 'pia'])` — keys live in `pia.json`
 - Action column: icon-only Edit + Delete with `aria-label`
 
 ### Cybersecurity Controls (CSC)
@@ -942,7 +1047,8 @@ Six KPI cards. Includes internal `CscKpiCards` and `IapKpiCard` sub-components t
 - Column groups: Task info | Raw Risk | Treatment | Target Risk | Current Risk
 - Risk color cells use a static lookup table (not dynamic Tailwind class names which break JIT)
 - Asset Owner resolved via `membersById.get(userId)` — Map lookup, **not** bracket access `[userId]`
-- Dialog: `RmRiskDialog` — 2-step, responsive Stepper
+- Dialog: `RmRiskDialog` — 2-step, responsive Stepper, sticky-footer flex layout
+- Task selection: `<TaskPicker>` at step 0
 - Action column: icon-only Edit + Delete with `aria-label`
 
 ### Interactive Awareness Training (IAP)
@@ -1421,6 +1527,42 @@ npm run build               # Prisma client → migrations → OpenAPI → Next.
 - **Type check:** `npm run check-types`
 - **Lint:** `npm run check-lint`
 - **All:** `npm run test-all`
+
+### Unit & API Handler Tests (`__tests__/`)
+
+| File | What it covers |
+|---|---|
+| `lib/tasks/status-keys.spec.ts` | Regression guard — task status values have no hyphens; `statusLabels`, `isTaskPriority`, `hasTaskModule`, `getTaskModules` |
+| `lib/csc/helpers.spec.ts` | `getCscStatusesProp`, `getCscControlsProp`, CSC status values and numeric ordering |
+| `lib/dashboard/task-status-matrix.spec.ts` | Status count logic — `inprogress`/`inreview` keys (not hyphenated variants) produce correct counts |
+| `pages/api/teams/tasks/index.spec.ts` | GET list, POST create (valid/invalid), 405 for unsupported methods |
+| `pages/api/teams/tasks/taskNumber.spec.ts` | GET found/404/400; PUT update/status-key/bad-priority/bad-duedate/404; DELETE success/404 |
+| `pages/api/teams/csc/update-status.spec.ts` | PUT passes correct args, returns updated map; 405 for GET/DELETE/POST |
+| `pages/api/teams/csc/get-statuses.spec.ts` | GET returns statuses, empty map; 405 for PUT/DELETE |
+
+**Jest config notes:**
+- Use bare paths in `jest.mock()` factories — `'lib/svix'` not `'@/lib/svix'`. The `@/` alias resolves via Next.js/tsconfig but not in Jest mock factories even with `moduleDirectories`.
+- `sanitizeRichText` must be mocked in API handler tests — it imports `jsdom`/`whatwg-url` which requires `TextEncoder` not available in `jest-environment-jsdom`.
+
+### E2E Tests (`tests/e2e/`)
+
+| File | What it covers |
+|---|---|
+| `dashboard/task-matrix.spec.ts` | Dashboard loads without errors; matrix headers show translated labels (no raw keys); domain health tab switching |
+| `tasks/task-management.spec.ts` | Task list loads; status cards show numeric values; filter labels use friendly names (not `inprogress`/`inreview`); kanban activation; task detail navigation |
+| `csc/bulk-actions.spec.ts` | CSC page loads; control status cells show values not raw keys; bulk selection shows action bar; bulk status change updates all selected controls without page refresh; task assignment reflects immediately |
+
+**E2E prerequisites:** Set `TEST_TEAM_SLUG` env var (defaults to `demo`). Auth state must be pre-configured in `playwright.config.ts` via `storageState`.
+
+### Test Requirements Before Production
+
+Every PR that touches module UI must verify:
+
+1. **Status key correctness** — run `lib/tasks/status-keys.spec.ts`; no hyphens in status values
+2. **Dashboard counting** — run `lib/dashboard/task-status-matrix.spec.ts`; In Progress and In Review must have non-zero counts when tasks exist
+3. **API contracts** — run the relevant `pages/api/teams/...` spec for each touched endpoint
+4. **Translation completeness** — manually verify in a non-English locale that no raw keys appear; add missing keys to all 7 locale files
+5. **Dialog footer visibility** — open every multi-step dialog at step 0 and confirm the Next/Save button is visible without scrolling, at both 375 px and 1280 px viewports
 
 ---
 

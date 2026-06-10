@@ -43,8 +43,12 @@ export default function TaskPicker({ control, name, tasks }: Props) {
                 field.onChange(found ?? null);
               }}
               placeholder={t('select-task', { defaultValue: 'Select a task' })}
-              searchPlaceholder={t('search-task', { defaultValue: 'Search tasks…' })}
-              emptyText={t('no-tasks-found', { defaultValue: 'No tasks found.' })}
+              searchPlaceholder={t('search-task', {
+                defaultValue: 'Search tasks…',
+              })}
+              emptyText={t('no-tasks-found', {
+                defaultValue: 'No tasks found.',
+              })}
             />
           </FormControl>
           <FormMessage />
