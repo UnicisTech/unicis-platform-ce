@@ -380,7 +380,9 @@ Key properties:
 Multi-step dialogs (RPA, TIA, PIA, RM) must use a **flex sticky-footer layout**:
 
 ```tsx
-{/* DialogContent — flex column, content scrolls, footer always pinned */}
+{
+  /* DialogContent — flex column, content scrolls, footer always pinned */
+}
 <DialogContent className="max-w-[95vw] sm:max-w-2xl max-h-[90vh] flex flex-col overflow-hidden p-4 sm:p-6">
   <DialogHeader>...</DialogHeader>
 
@@ -391,11 +393,19 @@ Multi-step dialogs (RPA, TIA, PIA, RM) must use a **flex sticky-footer layout**:
 
   {/* Footer — always pinned at the bottom */}
   <DialogFooter className="flex flex-wrap justify-end gap-2">
-    <DialogClose asChild><Button variant="outline">{t('close')}</Button></DialogClose>
-    {currentStep > 0 && <Button variant="outline" onClick={back}>{t('back')}</Button>}
-    <Button onClick={next}>{currentStep < maxStep ? t('next') : t('save')}</Button>
+    <DialogClose asChild>
+      <Button variant="outline">{t('close')}</Button>
+    </DialogClose>
+    {currentStep > 0 && (
+      <Button variant="outline" onClick={back}>
+        {t('back')}
+      </Button>
+    )}
+    <Button onClick={next}>
+      {currentStep < maxStep ? t('next') : t('save')}
+    </Button>
   </DialogFooter>
-</DialogContent>
+</DialogContent>;
 ```
 
 > **Critical:** Do NOT put `overflow-y-auto` directly on the `DialogContent` grid/flex container. Doing so places the `DialogFooter` inside the scroll area — it scrolls out of view as soon as the content grows. The correct pattern is `overflow-hidden` on the container and `flex-1 min-h-0 overflow-y-auto` on the inner content div only.
@@ -799,21 +809,21 @@ Shows up to 5 overdue tasks. Each row is a `<button>` with `aria-label="{title},
 ```tsx
 // ❌ Wrong — hook only knows 'common'; prefix is stripped, raw key rendered
 const { t } = useTranslation('common');
-t('tia:fields.DataExporter')   // renders "fields.DataExporter"
+t('tia:fields.DataExporter'); // renders "fields.DataExporter"
 
 // ✅ Correct
 const { t } = useTranslation(['common', 'tia']);
-t('tia:fields.DataExporter')   // renders "a) Data exporter"
+t('tia:fields.DataExporter'); // renders "a) Data exporter"
 ```
 
 **Rule:** Any component that calls `t('namespace:key')` **must** include that namespace in its `useTranslation` call.
 
-| Component group | Required hook |
-|---|---|
+| Component group               | Required hook                       |
+| ----------------------------- | ----------------------------------- |
 | TIA dialog + all 5 step files | `useTranslation(['common', 'tia'])` |
 | PIA dialog + all 6 step files | `useTranslation(['common', 'pia'])` |
-| RM dialog + step files | `useTranslation(['common', 'rm'])` |
-| RPA dialog + step files | `useTranslation(['common', 'rpa'])` |
+| RM dialog + step files        | `useTranslation(['common', 'rm'])`  |
+| RPA dialog + step files       | `useTranslation(['common', 'rpa'])` |
 
 ### Page-Level Namespace Loading (`serverSideTranslations`)
 
@@ -821,17 +831,17 @@ When a page can open dialogs from a different module (e.g. the RPA creation flow
 
 ```tsx
 // pages/teams/[slug]/rpa.tsx — also loads tia + pia because RPA flow can launch both dialogs
-await serverSideTranslations(locale, ['common', 'rpa', 'tia', 'pia'])
+await serverSideTranslations(locale, ['common', 'rpa', 'tia', 'pia']);
 ```
 
-| Page | Required namespaces |
-|---|---|
-| `rpa.tsx` | `common`, `rpa`, `tia`, `pia` |
-| `tia.tsx` | `common`, `tia` |
-| `pia.tsx` | `common`, `pia` |
-| `risk-management.tsx` | `common`, `rm` |
-| `dashboard.tsx` | `common` |
-| `tasks.tsx` | `common` |
+| Page                  | Required namespaces           |
+| --------------------- | ----------------------------- |
+| `rpa.tsx`             | `common`, `rpa`, `tia`, `pia` |
+| `tia.tsx`             | `common`, `tia`               |
+| `pia.tsx`             | `common`, `pia`               |
+| `risk-management.tsx` | `common`, `rm`                |
+| `dashboard.tsx`       | `common`                      |
+| `tasks.tsx`           | `common`                      |
 
 **Rule:** If a page renders a component tree that contains `t('namespace:key')` calls (even inside lazy-opened dialogs), that namespace must appear in `serverSideTranslations`. Missing it produces the same raw-key fallback as a missing hook namespace.
 
@@ -941,16 +951,18 @@ Searchable task selector used as **step 0** in all multi-module create dialogs (
 <TaskPicker
   control={taskForm.control}
   name="task"
-  tasks={availableTasks}   // pre-filtered by the caller (e.g. excludes tasks that already have an RPA)
+  tasks={availableTasks} // pre-filtered by the caller (e.g. excludes tasks that already have an RPA)
 />
 ```
 
 **Behaviour:**
+
 - Options rendered as `#taskNumber taskTitle` so users can search by number or by name
 - Selected label uses `truncate` — long task names never overflow the dialog width
 - `PopoverContent` is a Radix portal overlay; it floats above the dialog and does **not** push the `DialogFooter` down
 
 **Rules:**
+
 - Never replace `TaskPicker` with a plain `<Select>` — task titles can be very long and lists can be hundreds of items deep; a non-searchable select is unusable
 - The caller must filter out tasks that already have the relevant module data (e.g. `tasks.filter(t => !t.properties?.tia_procedure)`) before passing them in
 
@@ -1530,27 +1542,28 @@ npm run build               # Prisma client → migrations → OpenAPI → Next.
 
 ### Unit & API Handler Tests (`__tests__/`)
 
-| File | What it covers |
-|---|---|
-| `lib/tasks/status-keys.spec.ts` | Regression guard — task status values have no hyphens; `statusLabels`, `isTaskPriority`, `hasTaskModule`, `getTaskModules` |
-| `lib/csc/helpers.spec.ts` | `getCscStatusesProp`, `getCscControlsProp`, CSC status values and numeric ordering |
-| `lib/dashboard/task-status-matrix.spec.ts` | Status count logic — `inprogress`/`inreview` keys (not hyphenated variants) produce correct counts |
-| `pages/api/teams/tasks/index.spec.ts` | GET list, POST create (valid/invalid), 405 for unsupported methods |
-| `pages/api/teams/tasks/taskNumber.spec.ts` | GET found/404/400; PUT update/status-key/bad-priority/bad-duedate/404; DELETE success/404 |
-| `pages/api/teams/csc/update-status.spec.ts` | PUT passes correct args, returns updated map; 405 for GET/DELETE/POST |
-| `pages/api/teams/csc/get-statuses.spec.ts` | GET returns statuses, empty map; 405 for PUT/DELETE |
+| File                                        | What it covers                                                                                                             |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `lib/tasks/status-keys.spec.ts`             | Regression guard — task status values have no hyphens; `statusLabels`, `isTaskPriority`, `hasTaskModule`, `getTaskModules` |
+| `lib/csc/helpers.spec.ts`                   | `getCscStatusesProp`, `getCscControlsProp`, CSC status values and numeric ordering                                         |
+| `lib/dashboard/task-status-matrix.spec.ts`  | Status count logic — `inprogress`/`inreview` keys (not hyphenated variants) produce correct counts                         |
+| `pages/api/teams/tasks/index.spec.ts`       | GET list, POST create (valid/invalid), 405 for unsupported methods                                                         |
+| `pages/api/teams/tasks/taskNumber.spec.ts`  | GET found/404/400; PUT update/status-key/bad-priority/bad-duedate/404; DELETE success/404                                  |
+| `pages/api/teams/csc/update-status.spec.ts` | PUT passes correct args, returns updated map; 405 for GET/DELETE/POST                                                      |
+| `pages/api/teams/csc/get-statuses.spec.ts`  | GET returns statuses, empty map; 405 for PUT/DELETE                                                                        |
 
 **Jest config notes:**
+
 - Use bare paths in `jest.mock()` factories — `'lib/svix'` not `'@/lib/svix'`. The `@/` alias resolves via Next.js/tsconfig but not in Jest mock factories even with `moduleDirectories`.
 - `sanitizeRichText` must be mocked in API handler tests — it imports `jsdom`/`whatwg-url` which requires `TextEncoder` not available in `jest-environment-jsdom`.
 
 ### E2E Tests (`tests/e2e/`)
 
-| File | What it covers |
-|---|---|
-| `dashboard/task-matrix.spec.ts` | Dashboard loads without errors; matrix headers show translated labels (no raw keys); domain health tab switching |
-| `tasks/task-management.spec.ts` | Task list loads; status cards show numeric values; filter labels use friendly names (not `inprogress`/`inreview`); kanban activation; task detail navigation |
-| `csc/bulk-actions.spec.ts` | CSC page loads; control status cells show values not raw keys; bulk selection shows action bar; bulk status change updates all selected controls without page refresh; task assignment reflects immediately |
+| File                            | What it covers                                                                                                                                                                                              |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dashboard/task-matrix.spec.ts` | Dashboard loads without errors; matrix headers show translated labels (no raw keys); domain health tab switching                                                                                            |
+| `tasks/task-management.spec.ts` | Task list loads; status cards show numeric values; filter labels use friendly names (not `inprogress`/`inreview`); kanban activation; task detail navigation                                                |
+| `csc/bulk-actions.spec.ts`      | CSC page loads; control status cells show values not raw keys; bulk selection shows action bar; bulk status change updates all selected controls without page refresh; task assignment reflects immediately |
 
 **E2E prerequisites:** Set `TEST_TEAM_SLUG` env var (defaults to `demo`). Auth state must be pre-configured in `playwright.config.ts` via `storageState`.
 
