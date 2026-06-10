@@ -102,54 +102,68 @@
   "invite-member-message": "Invite new member by email to join your organization.",
   "choose-subscription-message": "Choose your subscription plan.",
   "billing": {
+    "section-title": "Escolha seu plano",
+    "section-subtitle": "Comece gratuitamente. Atualize para Premium para cobertura total de conformidade.",
+    "most-popular": "Mais popular",
+    "current-plan-badge": "Plano atual",
+    "premium-nudge": "A maioria das equipes atualiza para Premium para desbloquear cobertura completa de frameworks e acesso à API.",
+    "modules-label": "Módulos",
+    "features-label": "Recursos",
+    "monthly": "Mensal",
+    "annual": "Anual",
+    "save-20": "Economize 20%",
+    "billed-annually": "cobrado anualmente",
     "plans": {
       "community": {
         "name": "Community",
+        "description": "Perfeito para pequenas equipes explorando conformidade.",
         "users": "1 - 10",
-        "price": "Free",
-        "subprice": "unlimited",
+        "price": "Gratuito",
+        "subprice": "ilimitado",
         "applications": {
-          "0": "Record of Processing Activities",
-          "1": "Transfer Impact Assessment",
-          "2": "Cybersecurity Controls: MVSP + GDPR"
+          "0": "Registro de Atividades de Processamento",
+          "1": "Avaliação de Impacto de Transferência",
+          "2": "Controles de Cibersegurança: MVSP + GDPR"
         },
         "features": {
           "0": "SSO & SAML",
-          "1": "Community Support"
+          "1": "Suporte da comunidade"
         }
       },
       "premium": {
         "name": "Premium",
+        "description": "Suite de conformidade completa para equipes sérias sobre segurança e privacidade.",
         "users": "11 - 150",
-        "price": "€19/mo",
-        "subprice": "per tenant and up to 5 admins",
+        "price": "€19/mês",
+        "subprice": "por tenant e até 5 administradores",
         "applications": {
-          "0": "Interactive Awareness Program",
-          "1": "Privacy Impact Assessment",
-          "2": "Cybersecurity Controls: ISO 27001 + EU NIS2 + CIS v8.1 + C5 + OWASP ASVS v5 + ISO 42001",
-          "3": "Cybersecurity Risk Management"
+          "0": "Programa Interativo de Conscientização",
+          "1": "Avaliação de Impacto de Privacidade",
+          "2": "Controles de Cibersegurança: ISO 27001 + EU NIS2 + CIS v8.1 + C5 + OWASP ASVS v5 + ISO 42001",
+          "3": "Gestão de Risco de Cibersegurança"
         },
-        "featuresLabel": "From Community",
+        "featuresLabel": "Do Community",
         "features": {
           "0": "Webhooks & API"
         }
       },
       "ultimate": {
         "name": "Ultimate",
-        "users": "150 -",
-        "price": "€49/mo",
-        "subprice": "per tenant and > 6 admins",
+        "description": "Para grandes empresas com necessidades avançadas de auditoria e gestão de fornecedores.",
+        "users": "150+",
+        "price": "€49/mês",
+        "subprice": "por tenant e > 6 administradores",
         "applications": {
-          "0": "Processor Questionnaire Checklist",
-          "1": "Cybersecurity Controls: NIST CSF v2 + PCI DSS v4.0.1 + SOC2",
-          "2": "Asset Inventory Management",
-          "3": "Benchmark Report",
-          "4": "Vendor Assessment Checklist",
-          "5": "Vendor Report"
+          "0": "Checklist de Questionário do Processador",
+          "1": "Controles de Cibersegurança: NIST CSF v2 + PCI DSS v4.0.1 + SOC2",
+          "2": "Gestão de Inventário de Ativos",
+          "3": "Relatório de Benchmark",
+          "4": "Checklist de Avaliação de Fornecedores",
+          "5": "Relatório de Fornecedores"
         },
-        "featuresLabel": "From Premium",
+        "featuresLabel": "Do Premium",
         "features": {
-          "0": "Audit Logs"
+          "0": "Logs de Auditoria"
         }
       }
     }
@@ -648,7 +662,7 @@
   "shard": "Shard",
   "description": "Description",
   "current": "Current",
-  "subscription-request-sent": "Request sent!",
+  "subscription-request-sent": "Seu pedido foi enviado! Nossa equipe entrará em contato em breve.",
   "wise-payment": "Payment",
   "wise-payment-details": "Payment link will be added as soon as your request is processed.",
   "pay-now": "Pay Now",

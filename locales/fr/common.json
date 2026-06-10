@@ -102,9 +102,21 @@
   "invite-member-message": "Invitez un nouveau membre par e-mail à rejoindre votre organisation.",
   "choose-subscription-message": "Choisissez votre formule d’abonnement.",
   "billing": {
+    "section-title": "Choisissez votre plan",
+    "section-subtitle": "Commencez gratuitement. Passez à Premium pour une couverture conformité complète.",
+    "most-popular": "Le plus populaire",
+    "current-plan-badge": "Plan actuel",
+    "premium-nudge": "La plupart des équipes passent à Premium pour accéder à tous les frameworks et à l’API.",
+    "modules-label": "Modules",
+    "features-label": "Fonctionnalités",
+    "monthly": "Mensuel",
+    "annual": "Annuel",
+    "save-20": "Économisez 20%",
+    "billed-annually": "facturé annuellement",
     "plans": {
       "community": {
         "name": "Communauté",
+        "description": "Idéal pour les petites équipes qui découvrent la conformité.",
         "users": "1 - 10",
         "price": "Gratuit",
         "subprice": "illimité",
@@ -120,6 +132,7 @@
       },
       "premium": {
         "name": "Premium",
+        "description": "Suite conformité complète pour les équipes sérieuses en matière de sécurité et de confidentialité.",
         "users": "11 - 150",
         "price": "€19/mois",
         "subprice": "par tenant et jusqu’à 5 administrateurs",
@@ -136,7 +149,8 @@
       },
       "ultimate": {
         "name": "Ultimate",
-        "users": "150 -",
+        "description": "Pour les grandes entreprises avec des besoins avancés en audit et gestion des fournisseurs.",
+        "users": "150+",
         "price": "€49/mois",
         "subprice": "par tenant et > 6 administrateurs",
         "applications": {
@@ -647,7 +661,7 @@
   "shard": "Shard",
   "description": "Description",
   "current": "Actuel",
-  "subscription-request-sent": "Demande envoyée !",
+  "subscription-request-sent": "Votre demande a été envoyée ! Notre équipe vous contactera sous peu.",
   "wise-payment": "Paiement",
   "wise-payment-details": "Le lien de paiement sera ajouté dès que votre demande sera traitée.",
   "pay-now": "Payer maintenant",

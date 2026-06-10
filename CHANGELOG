@@ -48,6 +48,12 @@ The information about Unicis Platform releases and changes is listed in order be
   - All icon-only buttons and interactive cards carry `aria-label`; active domain health cards carry `aria-pressed`
   - External navigation links include `<span class="sr-only">(opens in new tab)</span>`
   - Content text colour raised from `text-slate-400` to `text-slate-500` across KPI strip, task analysis, risk analysis, and webhooks table to meet 4.5:1 contrast ratio
+- Billing
+  - Pricing page redesign — "Most Popular" badge on Premium, plan descriptions, green module checkmarks, blue feature checkmarks, bottom upgrade nudge
+  - Monthly / Annual billing toggle with 20% discount on annual plans (Premium: €15.20/mo · €182.40/yr; Ultimate: €39.20/mo · €470.40/yr)
+  - Annual billing stored on subscription (`isAnnual` field); next invoice date advances 12 months instead of 1
+  - Payment card reflects annual discount on price-per-user and total; shows "/yr" billing cycle and "Annual" badge
+  - Post-request toast now shows a friendly confirmation message in all 7 languages
 - Fixes
   - TIA: Legal Analysis column was rendering `DataExporter` instead of `LawImporterCountry`
   - PIA: First column header was labelled with the wrong translation key

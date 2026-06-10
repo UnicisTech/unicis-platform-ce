@@ -102,9 +102,21 @@
   "invite-member-message": "Laden Sie ein neues Mitglied per E-Mail ein, Ihrer Organisation beizutreten.",
   "choose-subscription-message": "Wählen Sie Ihren Abonnementplan.",
   "billing": {
+    "section-title": "Wählen Sie Ihren Plan",
+    "section-subtitle": "Starten Sie kostenlos. Upgraden Sie auf Premium für vollständige Compliance-Abdeckung.",
+    "most-popular": "Am beliebtesten",
+    "current-plan-badge": "Aktueller Plan",
+    "premium-nudge": "Die meisten Teams wechseln zu Premium für vollständige Framework-Abdeckung und API-Zugang.",
+    "modules-label": "Module",
+    "features-label": "Funktionen",
+    "monthly": "Monatlich",
+    "annual": "Jährlich",
+    "save-20": "20% sparen",
+    "billed-annually": "jährlich abgerechnet",
     "plans": {
       "community": {
         "name": "Community",
+        "description": "Ideal für kleine Teams, die Compliance erkunden.",
         "users": "1 - 10",
         "price": "Kostenlos",
         "subprice": "unbegrenzt",
@@ -120,6 +132,7 @@
       },
       "premium": {
         "name": "Premium",
+        "description": "Vollständige Compliance-Suite für Teams, die Sicherheit und Datenschutz ernst nehmen.",
         "users": "11 - 150",
         "price": "€19/Monat",
         "subprice": "pro Mandant und bis zu 5 Admins",
@@ -136,7 +149,8 @@
       },
       "ultimate": {
         "name": "Ultimate",
-        "users": "150 -",
+        "description": "Für große Unternehmen mit fortgeschrittenen Audit- und Lieferantenanforderungen.",
+        "users": "150+",
         "price": "€49/Monat",
         "subprice": "pro Mandant und > 6 Admins",
         "applications": {
@@ -647,7 +661,7 @@
   "shard": "Shard",
   "description": "Beschreibung",
   "current": "Aktuell",
-  "subscription-request-sent": "Anfrage gesendet!",
+  "subscription-request-sent": "Ihre Anfrage wurde gesendet! Unser Team wird sich in Kürze bei Ihnen melden.",
   "wise-payment": "Zahlung",
   "wise-payment-details": "Der Zahlungslink wird hinzugefügt, sobald Ihre Anfrage bearbeitet wurde.",
   "pay-now": "Jetzt bezahlen",

@@ -102,9 +102,21 @@
   "invite-member-message": "Invite new member by email to join your organization.",
   "choose-subscription-message": "Choose your subscription plan.",
   "billing": {
+    "section-title": "Choose your plan",
+    "section-subtitle": "Start free. Upgrade to Premium for full compliance coverage.",
+    "most-popular": "Most Popular",
+    "current-plan-badge": "Current Plan",
+    "premium-nudge": "Most teams upgrade to Premium to unlock full framework coverage and API access.",
+    "modules-label": "Modules",
+    "features-label": "Features",
+    "monthly": "Monthly",
+    "annual": "Annual",
+    "save-20": "Save 20%",
+    "billed-annually": "billed annually",
     "plans": {
       "community": {
         "name": "Community",
+        "description": "Perfect for small teams exploring compliance.",
         "users": "1 - 10",
         "price": "Free",
         "subprice": "unlimited",
@@ -120,6 +132,7 @@
       },
       "premium": {
         "name": "Premium",
+        "description": "Full compliance suite for teams serious about security and privacy.",
         "users": "11 - 150",
         "price": "€19/mo",
         "subprice": "per tenant and up to 5 admins",
@@ -136,7 +149,8 @@
       },
       "ultimate": {
         "name": "Ultimate",
-        "users": "150 -",
+        "description": "For large enterprises with advanced audit and vendor management needs.",
+        "users": "150+",
         "price": "€49/mo",
         "subprice": "per tenant and > 6 admins",
         "applications": {
@@ -648,7 +662,7 @@
   "shard": "Shard",
   "description": "Description",
   "current": "Current",
-  "subscription-request-sent": "Request sent!",
+  "subscription-request-sent": "Your request has been sent! Our team will be in touch shortly.",
   "wise-payment": "Payment",
   "wise-payment-details": "Payment link will be added as soon as your request is processed.",
   "pay-now": "Pay Now",

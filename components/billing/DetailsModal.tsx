@@ -7,6 +7,7 @@ import { defaultHeaders, countries } from '@/lib/common';
 import type { Invitation, Team } from 'types';
 import type { ApiResponse } from 'types';
 import useInvitations from 'hooks/useInvitations';
+import type { BillingPeriod } from '@/components/billing/Pricing';
 import {
   Dialog,
   DialogContent,
@@ -28,6 +29,7 @@ import { Loader2 } from 'lucide-react';
 
 interface DetailsModalProps {
   selectedSubscription: string;
+  billingPeriod: BillingPeriod;
   visible: boolean;
   setVisible: (visible: boolean) => void;
   team: Team;
@@ -35,6 +37,7 @@ interface DetailsModalProps {
 
 const DetailsModal: React.FC<DetailsModalProps> = ({
   selectedSubscription,
+  billingPeriod,
   visible,
   setVisible,
   team,
@@ -63,13 +66,13 @@ const DetailsModal: React.FC<DetailsModalProps> = ({
       const res = await fetch(`/api/teams/${team.slug}/billing`, {
         method: 'POST',
         headers: defaultHeaders,
-        body: JSON.stringify({ ...values, subscription: selectedSubscription }),
+        body: JSON.stringify({ ...values, subscription: selectedSubscription, billingPeriod }),
       });
       const json = (await res.json()) as ApiResponse<Invitation>;
       if (!res.ok) {
         toast.error(json.error.message);
       } else {
-        toast.success(t('request-sent'));
+        toast.success(t('subscription-request-sent'));
         mutateInvitation();
         setVisible(false);
         formik.resetForm();
@@ -82,10 +85,14 @@ const DetailsModal: React.FC<DetailsModalProps> = ({
       <DialogContent className="sm:max-w-lg">
         <form onSubmit={formik.handleSubmit}>
           <DialogHeader>
-            <DialogTitle>
+            <DialogTitle className="flex items-center gap-2">
               {t('request-subscription', {
                 subscription: selectedSubscription,
               })}
+              <span className="rounded-full border px-2 py-0.5 text-xs font-medium
+                border-ub-blue-border bg-ub-blue-bg text-ub-blue-text">
+                {t(`billing.${billingPeriod}`)}
+              </span>
             </DialogTitle>
           </DialogHeader>
 

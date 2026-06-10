@@ -27,15 +27,20 @@ const formatEUR = (n: number) =>
     n ?? 0
   );
 
-const planPrice = {
+const monthlyPlanPrice = {
   [Plan.COMMUNITY]: 0,
   [Plan.PREMIUM]: 19,
   [Plan.ULTIMATE]: 49,
 };
 
-const getTotalPrice = (plan: Plan, amount: number) => {
-  const total: number = planPrice[plan] * amount;
-  return total;
+const getPricePerUser = (plan: Plan, isAnnual: boolean): number => {
+  const base = monthlyPlanPrice[plan];
+  return isAnnual ? Math.round(base * 80) / 100 : base;
+};
+
+const getTotalPrice = (plan: Plan, members: number, isAnnual: boolean): number => {
+  const perUser = getPricePerUser(plan, isAnnual);
+  return isAnnual ? perUser * 12 * members : perUser * members;
 };
 
 export default function WisePaymentCard({ team }: WisePaymentCardProps) {
@@ -46,10 +51,7 @@ export default function WisePaymentCard({ team }: WisePaymentCardProps) {
   if (isLoading || isError || !members || !subscription) return null;
   if (!subscription.payments?.length) return null;
 
-  // Find newest payment safely
-
-  const totalPrice = getTotalPrice(subscription.plan, members.length);
-  const paymentUrl = `https://wise.com/pay/business/unicistechou?currency=EUR&amount=${totalPrice}`;
+  const isAnnual = subscription.isAnnual ?? false;
 
   const newestPayment =
     subscription.payments.reduce((latest, payment) =>
@@ -57,12 +59,23 @@ export default function WisePaymentCard({ team }: WisePaymentCardProps) {
     ) ?? subscription.payments[0];
 
   const newestDate = new Date(newestPayment.date);
-  const nextInvoiceDate = addMonths(newestDate, 1);
+  const nextInvoiceDate = addMonths(newestDate, isAnnual ? 12 : 1);
+
+  const pricePerUser = getPricePerUser(subscription.plan, isAnnual);
+  const totalPrice = getTotalPrice(subscription.plan, members.length, isAnnual);
+  const paymentUrl = `https://wise.com/pay/business/unicistechou?currency=EUR&amount=${totalPrice}`;
 
   return (
     <Card className="w-full">
       <CardHeader className="gap-1">
-        <CardTitle>{t('wise-payment')}</CardTitle>
+        <CardTitle className="flex items-center gap-2">
+          {t('wise-payment')}
+          {isAnnual && (
+            <span className="rounded-full bg-ub-green-bg border border-ub-green-border px-2 py-0.5 text-[11px] font-semibold text-ub-green-text">
+              {t('billing.annual')}
+            </span>
+          )}
+        </CardTitle>
         <CardDescription>{t('wise-payment-details')}</CardDescription>
       </CardHeader>
 
@@ -79,11 +92,21 @@ export default function WisePaymentCard({ team }: WisePaymentCardProps) {
             </p>
             <p className="text-sm">
               <b className="font-semibold">{t('price-per-user')}: </b>
-              <span>{formatEUR(planPrice[subscription.plan])}</span>
+              <span>
+                {formatEUR(pricePerUser)}/mo
+                {isAnnual && (
+                  <span className="ml-1 text-xs text-ub-green-text font-medium">
+                    ({t('billing.save-20')})
+                  </span>
+                )}
+              </span>
             </p>
             <p className="text-sm">
               <b className="font-semibold">{t('total')}: </b>
-              <span>{formatEUR(totalPrice)}</span>
+              <span>
+                {formatEUR(totalPrice)}
+                {isAnnual ? '/yr' : '/mo'}
+              </span>
             </p>
             <p className="text-sm">
               <b className="font-semibold">{t('invoice-date')}: </b>

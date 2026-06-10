@@ -102,9 +102,21 @@
   "invite-member-message": "Invite a un nuevo miembro por correo electrónico para unirse a su organización.",
   "choose-subscription-message": "Elija su plan de suscripción.",
   "billing": {
+    "section-title": "Elige tu plan",
+    "section-subtitle": "Empieza gratis. Actualiza a Premium para cobertura de cumplimiento completa.",
+    "most-popular": "Más popular",
+    "current-plan-badge": "Plan actual",
+    "premium-nudge": "La mayoría de los equipos se actualizan a Premium para acceder a todos los marcos y a la API.",
+    "modules-label": "Módulos",
+    "features-label": "Características",
+    "monthly": "Mensual",
+    "annual": "Anual",
+    "save-20": "Ahorra 20%",
+    "billed-annually": "facturado anualmente",
     "plans": {
       "community": {
         "name": "Comunidad",
+        "description": "Perfecto para equipos pequeños que exploran el cumplimiento normativo.",
         "users": "1 - 10",
         "price": "Gratis",
         "subprice": "ilimitado",
@@ -120,6 +132,7 @@
       },
       "premium": {
         "name": "Premium",
+        "description": "Suite de cumplimiento completa para equipos serios sobre seguridad y privacidad.",
         "users": "11 - 150",
         "price": "€19/mes",
         "subprice": "por tenant y hasta 5 administradores",
@@ -136,7 +149,8 @@
       },
       "ultimate": {
         "name": "Ultimate",
-        "users": "150 -",
+        "description": "Para grandes empresas con necesidades avanzadas de auditoría y gestión de proveedores.",
+        "users": "150+",
         "price": "€49/mes",
         "subprice": "por tenant y > 6 administradores",
         "applications": {
@@ -647,7 +661,7 @@
   "shard": "Shard",
   "description": "Descripción",
   "current": "Actual",
-  "subscription-request-sent": "¡Solicitud enviada!",
+  "subscription-request-sent": "¡Tu solicitud ha sido enviada! Nuestro equipo se pondrá en contacto contigo en breve.",
   "wise-payment": "Pago",
   "wise-payment-details": "El enlace de pago se añadirá en cuanto se procese su solicitud.",
   "pay-now": "Pagar ahora",

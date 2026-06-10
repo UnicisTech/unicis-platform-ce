@@ -105,6 +105,7 @@ model Subscription {
   startDate       DateTime           @default(now())
   nextInvoiceDate DateTime?
   status          SubscriptionStatus @default(ACTIVE)
+  isAnnual        Boolean            @default(false)
   payments        Payment[]
   team            Team               @relation(fields: [teamId], references: [id], onDelete: Cascade)
   user            User               @relation(fields: [userEmail], references: [email], onDelete: Cascade)
