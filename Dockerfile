@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM node:20-bookworm
+FROM node:22-bookworm
 
 # Set the working directory in the container
 WORKDIR /app
@@ -9,6 +9,13 @@ COPY package*.json ./
 
 # Install dependencies (use lockfile if present)
 RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+# Ensure native optional binaries exist in Linux Docker builds.
+RUN case "$(node -p 'process.arch')" in \
+    x64) npm install --no-save lightningcss-linux-x64-gnu@1.32.0 @tailwindcss/oxide-linux-x64-gnu@4.3.0 ;; \
+    arm64) npm install --no-save lightningcss-linux-arm64-gnu@1.32.0 @tailwindcss/oxide-linux-arm64-gnu@4.3.0 ;; \
+    *) echo "Unsupported architecture for native CSS binaries" && exit 1 ;; \
+    esac
 
 # Set up database schema
 # RUN npx prisma db push
@@ -21,7 +28,7 @@ EXPOSE 4002
 
 # Set the DATABASE_URL environment variable
 
-ARG NEXTAUTH_URL=${NEXTAUTH_URL}
+ARG NEXTAUTH_URL=http://localhost:4002
 ENV NEXTAUTH_URL=${NEXTAUTH_URL}
 ARG NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
 ENV NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
@@ -37,9 +44,9 @@ ARG SMTP_FROM=${SMTP_FROM}
 ENV SMTP_FROM=${SMTP_FROM}
 ARG BILLING_EMAIL=${BILLING_EMAIL}
 ENV BILLING_EMAIL=${BILLING_EMAIL}
-ARG DATABASE_URL=${DATABASE_URL}
+ARG DATABASE_URL=postgresql://postgres:postgres@localhost:5432/unicis_platform
 ENV DATABASE_URL=${DATABASE_URL}
-ARG APP_URL=${APP_URL}
+ARG APP_URL=http://localhost:4002
 ENV APP_URL=${APP_URL}
 ARG SVIX_URL=${SVIX_URL}
 ENV SVIX_URL=${SVIX_URL}
@@ -79,8 +86,9 @@ ARG RESEND_API_KEY=${RESEND_API_KEY}
 ENV RESEND_FROM=${RESEND_FROM}
 
 
-# Build the Next.js app
-RUN npm run build
+# Build the Next.js app. Database migrations are a deploy-time concern and
+# require a reachable database, so they must not run during image build.
+RUN npx prisma generate && npx tsx scripts/generate-openapi.ts && npx next build --webpack
 
 # Remove dev dependencies for runtime
 RUN npm prune --omit=dev
