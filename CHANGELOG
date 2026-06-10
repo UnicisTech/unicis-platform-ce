@@ -15,73 +15,45 @@ tags:
 
 The information about Unicis Platform releases and changes is listed in order below.
 
-## [UX/UI — Direction B Design System] 2026-06-09
+## [UX/UI Redesign, Dashboard & Accessibility] 2026-06-10
 
-*Release date: 2026-06-09*
+*Release date: 2026-06-10*
 
-A full UX/UI overhaul across all modules introducing the Direction B design language — a calm, consistent visual system optimised for compliance and security professionals (CISO, DPO, Engineers, DevSecOps, HR, C-level).
-
-- Design System Foundation
-  - Introduced Direction B design token set: card shell (`bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl`), panel header, table header typography, tab bar, and hover states — applied consistently across every module surface
-  - Standardised table header typography: `text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide` applied to All Tasks, RPA, TIA, PIA, CSC, and Risk Management tables
-  - All module Create buttons migrated from DaisyUI `color="primary"` to Shadcn `<Button variant="default">` (RPA, TIA, PIA, Risk Management, IAP Admin)
-  - `ModuleEmptyState` shared component CTA button migrated from DaisyUI `btn btn-primary btn-sm` to Shadcn `<Button size="sm">`
-  - `ModuleBadge` rewritten as a pure Tailwind component — removes DaisyUI dependency, preserves per-module colours (RPA red, TIA blue, PIA amber, RM green, CSC slate)
-
-- Dashboard
-  - KPI row: task counts, overdue indicator, completion rate, compliance score with sparkline trend line
-  - Task Overview by Module matrix: module column now uses coloured `ModuleBadge` badges (identical to All Tasks view) instead of dot + plain text
-  - Action Required / Needs Attention panel
-  - GRC AI Assistant upgrade gate
-  - URL-encoded filter state for bookmark/share support
-
-- All Tasks
-  - Direction B card wrapper and table header typography applied to `TaskListView`
-  - Module badges (`ModuleBadge`) rendered inline with task title showing which modules (RPA, TIA, PIA, RM, CSC) each task is associated with
-  - Global search across task title, number, status, priority, and module fields
-
-- Module Headings & Record Counts
-  - Every module dashboard now shows a `<h1>` page heading with a pill displaying the active record count: RPA, TIA, PIA, Risk Management, IAP
-
-- Comments (Direction B Redesign)
-  - Single-column layout: avatar + header on one row, content below
-  - Hover-reveal Edit/Delete actions (opacity transition, no layout shift)
-  - `CommentAvatar`: `h-7 w-7 rounded-full`, slate border tokens, fixed `<label>` → `<div>` semantic error
-  - `CommentHeader`: name `text-[13px] font-semibold`, date `text-[11px] text-slate-400` inline with `·` separator
-  - Compose area: `focus-within:border-slate-400` ring transition
-
-- RPA Module
-  - Direction B card wrapper on `RpaTable`
-  - Direction B table header typography
-
-- TIA Module
-  - **Bug fix**: Legal Analysis column was incorrectly rendering `DataExporter` (duplicate of column 2) — now correctly renders `LawImporterCountry` from `procedure[0]`
-  - Direction B table header typography
-
-- PIA Module
-  - **Bug fix**: First column header labelled `t('rpa')` — corrected to `t('title')`
-  - Direction B table header typography
-
-- Cybersecurity Controls (CSC)
-  - **Bug fix**: Dark mode tab text used `dark:text-slate-200` unconditionally — all inactive tabs appeared selected in dark mode; fixed to `dark:hover:text-slate-200`
-  - `CscChartsLayout` Panel component updated to Direction B card tokens
-  - `CscPanel` now wraps `StatusesTable` + `SectionRail` inside a single Direction B card — both surfaces share one visual container
-  - `StatusesTable` header cells reduced from `px-6 py-3` to `px-3 py-2` with Direction B typography
-  - Removed debug `console.log('cscTranslations', ...)` from `pages/teams/[slug]/csc.tsx`
-
-- Risk Management (RM)
-  - Full table rewrite: removed `VerticalHeader` (rotate-180 + `writing-mode: vertical-rl`) which forced users to tilt their head to read 14 column headers
-  - New two-row grouped header design: section group labels (Raw Risk / Treatment / Target Risk / Current Risk) above individual column labels
-  - **Bug fix**: `<tr key={idx}>` changed to `<tr key={task.id}>` for stable React reconciliation
-  - **Bug fix**: Asset Owner column showed "Not found" — `membersById[userId]` (invalid Map bracket access) replaced with `membersById.get(userId)` (correct Map API)
-  - Risk colour cells now use a static class lookup table, removing dynamic Tailwind class names that broke JIT compilation
-
-- Interactive Awareness Training (IAP)
-  - Added completion summary banner above the course grid: progress bar, completion percentage, Total / Completed / In-Progress stat chips
-  - Admin page: removed unnecessary `<div className="mx-1.5 my-0">` wrappers around Create buttons
-
-- Audit Logs
-  - `AuditTimeline` generic component introduced and wired to all modules (RPA, TIA, PIA, CSC, RM)
+- New Features
+  - Domain Health Row — three live status cards above the dashboard tab switcher (Data Protection, Cybersecurity, Risk Management); each card switches to the corresponding tab
+  - Dashboard KPI row: IAP card now shows non-compliant member count, colour-coded variant (amber/red), and links to IAP admin
+  - Needs Attention panel items deep-link directly to the individual task
+  - TIA "at risk" badge in the dashboard TeamAssessment header; shows count of non-authorised transfers or "✓ All permitted"
+  - Webhooks table: new "Last delivery" column showing most recent Svix attempt status and timestamp (success / pending / failed)
+- Enhancements
+  - Direction B design language applied across all modules — unified card shell, panel headers, table header typography, tab bar, and hover states (All Tasks, RPA, TIA, PIA, CSC, RM, IAP, Dashboard)
+  - Module Create buttons and empty-state CTAs migrated from DaisyUI to Shadcn `<Button>`
+  - `ModuleBadge` rewritten as a pure Tailwind component; rendered inline in All Tasks and the Dashboard task matrix
+  - Module page headings with record count pill added to RPA, TIA, PIA, RM, and IAP
+  - Comments redesign: single-column layout, hover-reveal edit/delete, Direction B typography
+  - IAP completion summary banner above the course grid
+  - RM table: replaced unreadable rotated `VerticalHeader` with a two-row grouped header (Raw Risk / Treatment / Target Risk / Current Risk)
+  - CSC: `StatusesTable` + `SectionRail` wrapped in a single Direction B card; `SectionRail` hidden below `lg:` breakpoint
+  - All table action columns standardised to icon-only buttons with `aria-label` (Tasks, RPA, TIA, PIA, RM, Members, Invitations, IAP admin, Webhooks)
+  - TIA country fields now display translated country names (was rendering raw lowercase stored keys)
+  - `AuditTimeline` generic component wired to all modules (RPA, TIA, PIA, CSC, RM)
+  - Removed leftover debug labels in RmAnalysis and TeamCscAnalysis
+- Accessibility (WCAG 2.1 AA)
+  - `<html lang>` attribute set from SSR locale on every page
+  - All Chart.js canvases wrapped in `role="img"` containers with descriptive `aria-label`
+  - Mobile sidebar (`Drawer`) rewritten as an accessible dialog: `role="dialog"`, `aria-modal`, focus-on-open, Escape key, Tab focus trap, `aria-hidden` backdrop
+  - Dashboard tab bar wired with full ARIA tab pattern (`tablist`, `tab`, `tabpanel`)
+  - Notification bell `aria-label` is dynamic with unread count; badge carries `aria-hidden`
+  - Webhook form: events fieldset wrapped in `<fieldset><legend>`; inputs wired with `aria-invalid`, `aria-describedby`, and `role="alert"` error messages
+  - All icon-only buttons and interactive cards carry `aria-label`; active domain health cards carry `aria-pressed`
+  - External navigation links include `<span class="sr-only">(opens in new tab)</span>`
+  - Content text colour raised from `text-slate-400` to `text-slate-500` across KPI strip, task analysis, risk analysis, and webhooks table to meet 4.5:1 contrast ratio
+- Fixes
+  - TIA: Legal Analysis column was rendering `DataExporter` instead of `LawImporterCountry`
+  - PIA: First column header was labelled with the wrong translation key
+  - CSC: Dark mode inactive tabs appeared selected due to unconditional `dark:text-slate-200`
+  - RM: Asset Owner column showed "Not found" due to invalid Map bracket access; fixed to `.get()`
+  - RM: Unstable row keys (`key={idx}`) changed to `key={task.id}`
 
 ## [Tasks] 2026-05-31
 

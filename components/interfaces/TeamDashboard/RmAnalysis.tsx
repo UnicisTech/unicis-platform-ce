@@ -180,7 +180,7 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
             {t('target-risk-rating')}
           </span>
         </div>
-        <div className="text-[10px] text-slate-500 dark:text-slate-400 mb-1">Impact → / Likelihood ↑</div>
+        <div className="text-[11px] text-slate-500 dark:text-slate-400 mb-1">Impact → / Likelihood ↑</div>
         <div className="flex items-center justify-center">
           <DashboardMatrixChart
             datasets={[]}

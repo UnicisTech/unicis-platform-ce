@@ -70,13 +70,15 @@ const Form = ({
                 placeholder="Description of what this endpoint is used for."
                 onChange={formik.handleChange}
                 value={formik.values.name}
+                aria-invalid={!!formik.errors.name}
+                aria-describedby={formik.errors.name ? 'name-error' : undefined}
                 className={cn(
                   formik.errors.name &&
                     'border-destructive focus-visible:ring-destructive'
                 )}
               />
               {formik.errors.name && (
-                <p className="text-xs text-destructive mt-1">
+                <p id="name-error" role="alert" className="text-xs text-destructive mt-1">
                   {formik.errors.name}
                 </p>
               )}
@@ -90,16 +92,20 @@ const Form = ({
                 placeholder="https://api.example.com/svix-webhooks"
                 onChange={formik.handleChange}
                 value={formik.values.url}
+                aria-invalid={!!formik.errors.url}
+                aria-describedby={
+                  formik.errors.url ? 'url-error' : 'url-hint'
+                }
                 className={cn(
                   formik.errors.url &&
                     'border-destructive focus-visible:ring-destructive'
                 )}
               />
-              <p className="text-sm text-muted-foreground mt-1">
+              <p id="url-hint" className="text-sm text-muted-foreground mt-1">
                 {t('endpoint-must-be-https')}
               </p>
               {formik.errors.url && (
-                <p className="text-xs text-destructive mt-1">
+                <p id="url-error" role="alert" className="text-xs text-destructive mt-1">
                   {formik.errors.url}
                 </p>
               )}

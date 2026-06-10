@@ -61,7 +61,11 @@ const PieChart = ({ statuses }: { statuses: CscStatusesMap }) => {
     responsive: true,
   };
 
-  return <Pie data={data} options={options} />;
+  return (
+    <div role="img" aria-label={t('chart.csc-status-distribution-aria-label', { defaultValue: 'Pie chart showing distribution of control statuses across the framework' })} className="w-full h-full">
+      <Pie data={data} options={options} />
+    </div>
+  );
 };
 
 export default PieChart;

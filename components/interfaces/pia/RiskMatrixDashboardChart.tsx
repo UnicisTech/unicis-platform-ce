@@ -150,6 +150,8 @@ const RiskMatrixDashboardChart = ({
 
   return (
     <div
+      role="img"
+      aria-label={t('chart.pia-risk-matrix-aria-label', { defaultValue: 'PIA risk matrix showing distribution of privacy risks by likelihood and impact' })}
       className="relative mx-auto"
       style={{
         width: `${chartWidth}px`,

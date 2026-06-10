@@ -74,7 +74,11 @@ const DashboardChart = ({ datasets }: { datasets: number[] }) => {
     responsive: true,
   };
 
-  return <Pie data={data} options={options} />;
+  return (
+    <div role="img" aria-label={t('chart.risk-distribution-aria-label', { defaultValue: 'Pie chart showing distribution of risks by impact level' })}>
+      <Pie data={data} options={options} />
+    </div>
+  );
 };
 
 export default DashboardChart;

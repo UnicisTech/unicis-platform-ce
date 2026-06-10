@@ -76,7 +76,7 @@ function LastDeliveryCell({ lastAttempt }: { lastAttempt?: LastAttempt | null })
             : `${t('webhook-delivery-failed', { defaultValue: 'Failed' })} (${lastAttempt.responseStatusCode})`}
         </span>
       </div>
-      <span className="text-[10px] text-slate-400 dark:text-slate-500">{dateLabel}</span>
+      <span className="text-[11px] text-slate-500 dark:text-slate-400">{dateLabel}</span>
     </div>
   );
 }

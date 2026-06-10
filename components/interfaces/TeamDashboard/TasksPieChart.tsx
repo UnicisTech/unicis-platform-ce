@@ -70,7 +70,15 @@ const TasksPieChart = ({
     responsive: true,
   };
 
-  return <div className="w-full h-full"><Pie data={data} options={options} /></div>;
+  return (
+    <div
+      role="img"
+      aria-label={t('chart.task-status-distribution-aria-label', { defaultValue: 'Pie chart showing task counts by status' })}
+      className="w-full h-full"
+    >
+      <Pie data={data} options={options} />
+    </div>
+  );
 };
 
 export default TasksPieChart;

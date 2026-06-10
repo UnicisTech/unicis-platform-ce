@@ -46,6 +46,8 @@ interface DomainCardProps {
   icon: React.ReactNode;
   active: boolean;
   onClick: () => void;
+  /** Accessible label describing the action, e.g. "Switch to Data Protection tab" */
+  actionLabel: string;
 }
 
 const statusStyles: Record<HealthStatus, { dot: string; card: string; metric: string }> = {
@@ -79,12 +81,15 @@ function DomainCard({
   icon,
   active,
   onClick,
+  actionLabel,
 }: DomainCardProps) {
   const styles = statusStyles[status];
 
   return (
     <button
       onClick={onClick}
+      aria-label={actionLabel}
+      aria-pressed={active}
       className={cn(
         'flex-1 min-w-0 bg-white dark:bg-slate-800 border rounded-xl px-4 py-3 text-left transition-all cursor-pointer group',
         styles.card,
@@ -112,7 +117,7 @@ function DomainCard({
       </div>
 
       {/* Sub */}
-      <div className="flex items-center gap-1 text-[11px] text-slate-400 dark:text-slate-500 truncate">
+      <div className="flex items-center gap-1 text-[11px] text-slate-500 dark:text-slate-400 truncate">
         <span className="flex-shrink-0">{icon}</span>
         <span className="truncate">{sub}</span>
       </div>
@@ -178,6 +183,7 @@ function DataProtectionCard({
       icon={<Lock size={10} aria-hidden />}
       active={active}
       onClick={onClick}
+      actionLabel={t('domain-health.switch-tab-data-protection', { defaultValue: 'Switch to Data Protection tab' })}
     />
   );
 }
@@ -241,6 +247,7 @@ function CybersecurityCardInner({
       icon={<ShieldCheck size={10} aria-hidden />}
       active={active}
       onClick={onClick}
+      actionLabel={t('domain-health.switch-tab-cybersecurity', { defaultValue: 'Switch to Cybersecurity tab' })}
     />
   );
 }
@@ -270,6 +277,7 @@ function CybersecurityCard({
         icon={<ShieldCheck size={10} aria-hidden />}
         active={active}
         onClick={onClick}
+        actionLabel={t('domain-health.switch-tab-cybersecurity', { defaultValue: 'Switch to Cybersecurity tab' })}
       />
     );
   }
@@ -350,6 +358,7 @@ function RiskCard({
       icon={<AlertTriangle size={10} aria-hidden />}
       active={active}
       onClick={onClick}
+      actionLabel={t('domain-health.switch-tab-risk', { defaultValue: 'Switch to Risk Management tab' })}
     />
   );
 }

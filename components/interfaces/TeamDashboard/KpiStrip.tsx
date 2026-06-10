@@ -54,7 +54,7 @@ const subColourMap: Record<string, string> = {
   green: 'text-ub-green',
   red:   'text-ub-red',
   amber: 'text-ub-amber',
-  muted: 'text-slate-400',
+  muted: 'text-slate-500',
 }
 
 export function KpiCard({
@@ -78,7 +78,7 @@ export function KpiCard({
         onClick && 'cursor-pointer hover:border-ub-blue-border hover:shadow-sm transition-all'
       )}
     >
-      <div className="flex items-center gap-1 text-[11px] text-slate-400 mb-1.5">
+      <div className="flex items-center gap-1 text-[11px] text-slate-500 dark:text-slate-400 mb-1.5">
         <Icon size={12} aria-hidden />
         {label}
       </div>
@@ -89,7 +89,7 @@ export function KpiCard({
         </div>
       )}
       {sub && (
-        <div className={cn('text-[11px] mt-1', subColourMap[subColour] ?? 'text-slate-400')}>
+        <div className={cn('text-[11px] mt-1', subColourMap[subColour] ?? 'text-slate-500')}>
           {sub}
         </div>
       )}

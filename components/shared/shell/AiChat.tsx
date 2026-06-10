@@ -202,7 +202,7 @@ const AiChat: React.FC = () => {
                               ? '/chatbot_assistant.png'
                               : '/chatbot_user.png'
                           }
-                          alt={msg.role}
+                          alt=""
                         />
                       </div>
                     </div>

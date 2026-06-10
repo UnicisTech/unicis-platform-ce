@@ -4,11 +4,11 @@
 
 Unicis Platform is an open-core, enterprise-ready **trust management and compliance platform** designed for startups and SMEs. It provides tools for managing compliance frameworks, security controls, privacy assessments, and risk management across multiple compliance standards (GDPR, ISO 27001, NIST, SOC 2, PCI DSS, etc.).
 
-**Current Version:** 0.2.2  
-**Build Tool:** Next.js 16  
-**Database:** PostgreSQL  
-**ORM:** Prisma  
-**Authentication:** NextAuth.js  
+**Current Version:** 0.2.3
+**Build Tool:** Next.js 16
+**Database:** PostgreSQL
+**ORM:** Prisma
+**Authentication:** NextAuth.js
 **License:** Apache 2.0
 
 ---
@@ -26,6 +26,184 @@ Direction B is a calm, professional visual language built for compliance and sec
 - **Dark mode as first-class** — every token has an explicit `dark:` counterpart
 - **Legibility at small scale** — table headers at `text-[11px]` uppercase; body text at `text-[12px]`–`text-[13px]`
 - **Mobile-first, always** — every new component must work on a 375 px viewport before it is considered complete
+- **Accessibility as a requirement** — WCAG 2.1 AA compliance is mandatory, not optional
+
+---
+
+## Accessibility — WCAG 2.1 AA (Mandatory)
+
+> All components must meet WCAG 2.1 AA. Accessibility failures are treated as bugs, not enhancements.
+
+### Implemented Standards
+
+#### Language declaration
+`pages/_document.tsx` sets `<Html lang={locale ?? 'en'}>` using the locale from `getServerSideProps`. This satisfies WCAG 3.1.1 Language of Page.
+
+#### Icon-only buttons
+Every `<Button size="icon">` **must** have an `aria-label`. The icon SVG must have `aria-hidden="true"`. Use translated strings:
+
+```tsx
+<Button variant="outline" size="icon" aria-label={t('edit-task')}>
+  <Pencil className="h-4 w-4" aria-hidden="true" />
+</Button>
+<Button variant="destructive" size="icon" aria-label={t('delete')}>
+  <Trash2 className="h-4 w-4" aria-hidden="true" />
+</Button>
+```
+
+For buttons that operate on a named item (courses, webhooks), include the item name for context:
+
+```tsx
+aria-label={`${t('edit')} ${item.name}`}
+```
+
+#### Form label associations
+Every `<Label>` must be paired with a matching `htmlFor`/`id`:
+
+```tsx
+<Label htmlFor="field-id">{t('label')}</Label>
+<Input id="field-id" ... />
+```
+
+For grouped checkboxes (e.g. event type selectors), use `<fieldset>` / `<legend>` — never a plain `<div>` / `<Label>`:
+
+```tsx
+<fieldset>
+  <legend className="text-sm font-medium ...">
+    {t('events-to-send')}
+  </legend>
+  <EventTypes ... />
+</fieldset>
+```
+
+#### Form validation errors
+When Formik (or any form library) renders an error, link it to the input with `aria-invalid` and `aria-describedby`:
+
+```tsx
+<Input
+  id="name"
+  aria-invalid={!!formik.errors.name}
+  aria-describedby={formik.errors.name ? 'name-error' : undefined}
+/>
+{formik.errors.name && (
+  <p id="name-error" role="alert" className="text-xs text-destructive mt-1">
+    {formik.errors.name}
+  </p>
+)}
+```
+
+#### Tab panels
+Dashboard and module tab bars must use full ARIA tab pattern:
+
+```tsx
+<div role="tablist" aria-label={t('tab-group-label')}>
+  <button
+    role="tab"
+    aria-selected={activeTab === 0}
+    aria-controls="tabpanel-0"
+    id="tab-0"
+  >
+    Tab Label
+  </button>
+</div>
+<div
+  id="tabpanel-0"
+  role="tabpanel"
+  aria-labelledby="tab-0"
+  hidden={activeTab !== 0}
+>
+  ...
+</div>
+```
+
+#### Charts
+Every chart must be wrapped in a container with `role="img"` and a meaningful `aria-label`. The label must describe the chart content, not just its type. Always include `className="w-full h-full"` on the wrapper to preserve responsive sizing:
+
+```tsx
+<div
+  role="img"
+  aria-label={t('chart.risk-matrix-aria-label', {
+    defaultValue: 'Risk matrix showing distribution of risks by likelihood and impact level'
+  })}
+  className="w-full h-full"
+>
+  <Bubble ... />
+</div>
+```
+
+Applied to: `DashboardMatrixChart`, `DashboardPieChart`, `PieChart` (CSC), `RadarChart` (CSC), `TasksPieChart`, `RiskMatrixDashboardChart` (PIA).
+
+> **Critical**: Do not add a wrapper `<div>` to charts without `className="w-full h-full"`. Chart.js uses responsive sizing from the parent container — a zero-height wrapper collapses the chart.
+
+#### Mobile sidebar (Drawer)
+The mobile drawer (`components/shared/shell/Drawer.tsx`) implements a full accessible dialog pattern:
+
+```tsx
+// Backdrop — clicks dismiss the drawer
+<div
+  className="fixed inset-0 bg-gray-600/80"
+  aria-hidden="true"
+  onClick={() => setSidebarOpen(false)}
+/>
+
+// Panel — ARIA dialog
+<div
+  ref={drawerPanelRef}
+  role="dialog"
+  aria-modal="true"
+  aria-label={t('navigation')}
+  onKeyDown={handleTabKey}  // focus trap
+>
+```
+
+`useEffect` moves focus to the close button on open. `useEffect` listens for `Escape` to close. `onKeyDown` cycles Tab/Shift+Tab within the panel.
+
+#### External links
+External links (navigation items with `target="_blank"`) must announce this to screen reader users via a visually hidden span:
+
+```tsx
+{newTab && (
+  <>
+    <ArrowTopRightOnSquareIcon aria-hidden="true" />
+    <span className="sr-only">(opens in new tab)</span>
+  </>
+)}
+```
+
+#### Interactive cards (domain health, KPI)
+Clickable card components (`<button>`) that switch context must carry an explicit `aria-label` describing the action, plus `aria-pressed` to communicate current state:
+
+```tsx
+<button
+  aria-label={t('domain-health.switch-tab-cybersecurity', { defaultValue: 'Switch to Cybersecurity tab' })}
+  aria-pressed={active}
+  onClick={onClick}
+>
+```
+
+#### Color contrast
+Use `text-slate-500 dark:text-slate-400` for **all content text** (labels, sub-lines, data values). `text-slate-400` alone (#94a3b8) fails the 4.5:1 minimum on white backgrounds and must not be used for text that carries meaning.
+
+| Token | Ratio on white | Use |
+|---|---|---|
+| `text-slate-900` | ~19:1 | Primary body text |
+| `text-slate-700` | ~8:1 | Secondary body text |
+| `text-slate-500` | ~4.6:1 | Labels, sub-text, meta ✅ |
+| `text-slate-400` | ~2.85:1 | Decorative/placeholder only ❌ for content |
+
+#### Minimum text size
+Do not use `text-[10px]` for text that conveys information. Minimum is `text-[11px]`. The 10px size is reserved for badge numerals inside fixed-size pills only.
+
+#### Notification bell
+`NotificationBell` uses a dynamic `aria-label` that includes the unread count:
+
+```tsx
+aria-label={unreadCount > 0
+  ? t('notifications.title-unread', { count: unreadCount })
+  : t('notifications.title')}
+```
+
+The numeric badge span carries `aria-hidden="true"` since the count is already in the button label.
 
 ---
 
@@ -306,6 +484,9 @@ Before submitting any new component or page, verify:
 - [ ] No `h-*` (fixed height) on text containers that could receive translated strings of variable length
 - [ ] Header title uses `truncate` (enforced globally — do not override)
 - [ ] `SectionRail` or any always-on sidebar uses `hidden lg:flex` pattern
+- [ ] All icon-only buttons have `aria-label`
+- [ ] Chart wrappers have `role="img"` + `aria-label` + `className="w-full h-full"`
+- [ ] Content text uses `text-slate-500 dark:text-slate-400` minimum (never `text-slate-400` alone for meaningful text)
 
 ---
 
@@ -397,7 +578,7 @@ Every module dashboard includes a heading bar above the toolbar:
       {t('module-name')}
     </h1>
     {count > 0 && (
-      <span className="text-[11px] text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
+      <span className="text-[11px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
         {count}
       </span>
     )}
@@ -409,6 +590,162 @@ Every module dashboard includes a heading bar above the toolbar:
 ```
 
 Applied to: RPA, TIA, PIA, RM, IAP.
+
+### Icon-Only Action Buttons (Table Actions)
+
+All table action columns use icon-only buttons. Text buttons ("Edit", "Delete") are not used — they waste column space and are inconsistent.
+
+```tsx
+// Standard pair: edit + delete
+<div className="flex items-center gap-2">
+  <Button variant="outline" size="icon" onClick={() => editHandler(task)} aria-label={t('edit-task')}>
+    <Pencil className="h-4 w-4" aria-hidden="true" />
+  </Button>
+  <Button variant="destructive" size="icon" onClick={() => deleteHandler(task)} aria-label={t('delete')}>
+    <Trash2 className="h-4 w-4" aria-hidden="true" />
+  </Button>
+</div>
+```
+
+Applied to: `TaskListView`, `RpaTable`, `TiaTable`, `RisksTable` (PIA + RM), `Members`, `PendingInvitations`, `CoursesTable`, `Webhooks`.
+
+---
+
+## Dashboard Architecture
+
+**File:** `pages/teams/[slug]/dashboard.tsx`
+
+### Layout (top → bottom)
+
+1. **Top bar** — `ActionRequiredBanner` + Export CSV button (`flex flex-wrap items-center gap-3`)
+2. **KPI strip** — `KpiRow` — 6-card grid (`grid-cols-2 sm:grid-cols-3 lg:grid-cols-6`)
+3. **Task matrix + Needs Attention** — `flex flex-col lg:flex-row gap-3`
+4. **Domain Health Row** — `DomainHealthRow` — 3 clickable cards above the tab switcher
+5. **Tab switcher** — segmented pill control (`role="tablist"`, full ARIA)
+6. **Tab panels** — Data Protection / Cybersecurity / Risk (`role="tabpanel"`, `aria-labelledby`)
+
+### KPI Row (`KpiRow.tsx`)
+
+Six cards: Compliance score hero (col-span-2) + CSC gaps + Open tasks + Open risks + IAP completion.
+
+**IAP card behaviour:**
+- Shows `nonCompliantCount` ("X yet to complete") as sub-text
+- Variant: `amber` if 1–49% complete with non-compliant members, `red` if below 50%, `green` if 100%
+- Clicking navigates to `/teams/${slug}/iap/admin`
+
+**CSC cards** are rendered by `CscKpiCards` → `CscKpiPair` sub-components that call `useISO` + `useCscStatuses` internally (safe — hooks only called when ISO is known).
+
+### Domain Health Row (`DomainHealthRow.tsx`)
+
+**Location:** `components/interfaces/TeamDashboard/DomainHealthRow.tsx`
+
+Three equal-width side-by-side cards. Each is a `<button>` that switches the active dashboard tab. Each card shows:
+- Status dot (red / amber / green / slate)
+- Domain name (uppercase label)
+- Primary metric (e.g. "67%" / "Transfers OK" / "3 high risks")
+- Sub-line with detail (e.g. "2 gaps · ISO 27001")
+- `ChevronRight` arrow on hover
+
+```
+┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐
+│ ● DATA PROTECTION│ │ ● CYBERSECURITY  │ │ ● RISK MANAGEMENT│
+│ Transfers OK     │ │ 67%              │ │ 2 high risks     │
+│ 🔒 4 TIA · 12 RPA│ │ 🛡 2 gaps·ISO 27k│ │ ⚠ 1 Extreme · 1 M│
+└──────────────────┘ └──────────────────┘ └──────────────────┘
+```
+
+**Status thresholds:**
+
+| Domain | Healthy | Warning | Critical |
+|---|---|---|---|
+| Data Protection | All TIA transfers authorized | — | Any `TransferMechanism !== 'yes'` |
+| Cybersecurity | Score ≥ 75% | 50–74% | < 50% |
+| Risk Management | No extreme/major risks | Any major (60–79) | Any extreme (≥80) |
+
+**ARIA:** Each card has `aria-label="Switch to [Domain] tab"` and `aria-pressed={active}`.
+
+### Needs Attention Panel
+
+Shows up to 5 overdue tasks. Each row is a `<button>` with `aria-label="{title}, overdue {dueDate}"` that deep-links directly to `/teams/${slug}/tasks/${task.taskNumber}` (not the task list).
+
+### Tab panels (full ARIA)
+
+```tsx
+// tablist
+<div role="tablist" aria-label={t('dashboard.tab.aria-label')}>
+  <button
+    id="dashboard-tab-0"
+    role="tab"
+    aria-selected={activeTab === 0}
+    aria-controls="dashboard-tabpanel-0"
+  >
+
+// tabpanel
+<div
+  id="dashboard-tabpanel-0"
+  role="tabpanel"
+  aria-labelledby="dashboard-tab-0"
+  hidden={activeTab !== 0}
+>
+```
+
+---
+
+## Translation Patterns
+
+### Country Names
+
+Country fields stored in the database use lowercase keys (e.g. `"united states"`, `"germany"`). **Always** pass through the translation function before displaying:
+
+```tsx
+// In tables and panels:
+{value ? t(`country.${value}`) : '—'}
+
+// Examples in TiaTable.tsx and TiaPanel.tsx:
+<span>
+  {step.LawImporterCountry
+    ? t(`country.${step.LawImporterCountry}`)
+    : '—'}
+</span>
+```
+
+Applies to: `CountryDataExporter`, `CountryDataImporter`, `LawImporterCountry` in TIA procedures.
+
+**Never** display raw stored keys. They are lowercase strings like `"united states"` — they will render uncapitalized without the translation layer.
+
+---
+
+## Webhooks — Last Delivery Status
+
+**Files:** `lib/svix.ts`, `pages/api/teams/[slug]/webhooks/index.ts`, `components/webhook/Webhooks.tsx`
+
+The webhook table includes a "Last delivery" column showing the most recent Svix delivery attempt.
+
+**Architecture:**
+- `getLastWebhookAttempt(appId, endpointId)` in `lib/svix.ts` calls `svix.messageAttempt.listByEndpoint(..., { limit: 1 })`
+- `handleGET` in the webhooks API enriches each endpoint in parallel via `Promise.all`
+- `Webhooks.tsx` renders `LastDeliveryCell` with `CheckCircle2` (success) / `Clock` (pending) / `XCircle` (failed + HTTP status code)
+
+**Status codes (Svix `MessageStatus`):** 0 = Success, 1 = Pending, 2 = Fail, 3 = Sending
+
+---
+
+## TIA Risk Badge in Dashboard
+
+`TeamAssessmentAnalysis` (`TeamAssessment.tsx`) shows a risk badge in the card header when transfers are at risk:
+
+```tsx
+{notPermitAuthorization > 0 ? (
+  <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-red-100 dark:bg-red-950/40 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800/50 px-2 py-0.5 rounded-full">
+    <AlertCircle size={10} aria-hidden />
+    {notPermitAuthorization} {t('tia-at-risk', { defaultValue: 'at risk' })}
+  </span>
+) : totalNumberOfAssessment > 0 ? (
+  <span className="text-[11px] font-medium text-green-600 dark:text-green-400">
+    ✓ {t('tia-all-permitted', { defaultValue: 'All permitted' })}
+  </span>
+) : null}
+```
 
 ---
 
@@ -451,6 +788,16 @@ Reusable audit log timeline used across all modules (RPA, TIA, PIA, CSC, RM). Ac
 
 Used in all multi-step dialogs. Responsive: compact bar on mobile, full dot stepper on `sm+`. See [Stepper section](#stepper-multi-step-forms) above.
 
+### `DomainHealthRow`
+**Location:** `components/interfaces/TeamDashboard/DomainHealthRow.tsx`
+
+Three clickable domain health cards above the dashboard tab switcher. See [Domain Health Row](#domain-health-row-domainhealthrowtsx) above.
+
+### `KpiRow`
+**Location:** `components/interfaces/TeamDashboard/KpiRow.tsx`
+
+Six KPI cards. Includes internal `CscKpiCards` and `IapKpiCard` sub-components that manage their own data fetching. See [KPI Row](#kpi-row-kpirowtsx) above.
+
 ---
 
 ## Module-by-Module Design Notes
@@ -464,6 +811,7 @@ Used in all multi-step dialogs. Responsive: compact bar on mobile, full dot step
 - Module badges (`ModuleBadge`) inline with task title in a `flex flex-wrap` container
 - Toolbar: `flex-col lg:flex-row` outer + `flex flex-wrap` controls group
 - Hover state on rows
+- Action column: icon-only Edit + Delete buttons (`Pencil`, `Trash2`) with `aria-label`
 
 ### RPA (Record of Processing Activities)
 
@@ -475,15 +823,17 @@ Used in all multi-step dialogs. Responsive: compact bar on mobile, full dot step
 - Create button: Shadcn `<Button variant="default">`
 - Dialog: `RpaProcedureDialog` — 6-step form, responsive Stepper, `max-w-[95vw] sm:max-w-2xl`
 - Table: `overflow-x-auto` wrapper
+- Action column: icon-only Edit + Delete (`Pencil`, `Trash2`) with `aria-label`
 
 ### TIA (Transfer Impact Assessment)
 
 **File:** `components/interfaces/tia/`
 
 - Same card + table pattern as RPA
-- **Data note:** Legal Analysis column shows `procedure[0].LawImporterCountry` (not `DataExporter`)
+- **Data note:** Legal Analysis column shows `procedure[0].LawImporterCountry` wrapped in `t('country.${value}')` — raw stored keys are lowercase and must always go through translation
 - Transfer permitted/not-permitted badge: still uses `DaisyBadge` (planned migration)
 - Dialog: `TiaProcedureDialog` — 5-step, responsive Stepper
+- Action column: icon-only Edit + Delete with `aria-label`
 
 ### PIA (Privacy Impact Assessment)
 
@@ -492,6 +842,7 @@ Used in all multi-step dialogs. Responsive: compact bar on mobile, full dot step
 - Three risk axes: confidentiality & integrity, availability, transparency & data minimization
 - **Data note:** First column header uses `t('title')` (not `t('rpa')`)
 - Dialog: `RiskAssessmentDialog` — up to 6 steps (incl. optional Corrective Measures), responsive Stepper
+- Action column: icon-only Edit + Delete with `aria-label`
 
 ### Cybersecurity Controls (CSC)
 
@@ -504,7 +855,7 @@ Used in all multi-step dialogs. Responsive: compact bar on mobile, full dot step
 - `CscTabs`: **`flex-wrap`** on the tab container
 - Framework chip row on dashboard: **`flex flex-wrap`**
 - Dark mode tab fix: inactive tabs use `dark:hover:text-slate-200` (not `dark:text-slate-200`)
-- Charts: each in Direction B panel cards
+- Charts: `PieChart` and `RadarChart` each wrapped in `<div role="img" aria-label="..." className="w-full h-full">` — the `w-full h-full` is mandatory to preserve responsive sizing
 - Table header cells: `px-3 py-2` with Direction B typography
 - `StatusesTable` column: `flex-1 min-w-0 [&_th]:whitespace-normal! [&_td]:whitespace-normal!`
 - Dialog: `StatusPromptDialog` (single-step, no stepper) — protected by base dialog class
@@ -518,6 +869,7 @@ Used in all multi-step dialogs. Responsive: compact bar on mobile, full dot step
 - Risk color cells use a static lookup table (not dynamic Tailwind class names which break JIT)
 - Asset Owner resolved via `membersById.get(userId)` — Map lookup, **not** bracket access `[userId]`
 - Dialog: `RmRiskDialog` — 2-step, responsive Stepper
+- Action column: icon-only Edit + Delete with `aria-label`
 
 ### Interactive Awareness Training (IAP)
 
@@ -526,6 +878,7 @@ Used in all multi-step dialogs. Responsive: compact bar on mobile, full dot step
 - Completion summary banner: `flex flex-wrap` outer, `flex-1 min-w-[160px]` progress bar
 - Stats row: `flex items-center gap-5 flex-shrink-0` (fits on 375 px with wrap fallback from outer)
 - Course grid: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`
+- Admin: `CoursesTable` — 4 icon-only buttons per row (edit, delete, completion-results, status-results) each with `aria-label` including course name for context
 
 ### Dashboard
 
@@ -535,8 +888,9 @@ Used in all multi-step dialogs. Responsive: compact bar on mobile, full dot step
 - KPI row: `grid-cols-2 sm:grid-cols-3 lg:grid-cols-6`
 - Task matrix + Needs Attention: `flex flex-col lg:flex-row`
 - Task Status Matrix: `overflow-x-auto` table wrapper
-- Tab bar: `flex gap-0.5 ... flex-wrap` (3 tabs, always fits)
-- Module column: `<ModuleBadge>` instead of dot + plain text
+- **Domain Health Row:** 3 clickable cards (`DomainHealthRow`) inserted above the tab switcher — summarises each domain with status colour + key metric
+- Tab bar: `flex gap-0.5 ... flex-wrap` (3 tabs, always fits) — full ARIA wiring (`tablist`, `tab`, `tabpanel`)
+- Needs Attention: each item deep-links to `/teams/${slug}/tasks/${task.taskNumber}`
 
 ---
 
@@ -676,6 +1030,7 @@ unicis-platform/
 │   │   ├── shell/
 │   │   │   ├── AppShell.tsx      # Main layout shell (sidebar + main)
 │   │   │   ├── Header.tsx        # Responsive sticky header
+│   │   │   ├── Drawer.tsx        # Mobile sidebar (accessible dialog pattern)
 │   │   │   ├── AccountDropdown.tsx
 │   │   │   └── GlobalSearch.tsx
 │   │   └── [...]
@@ -691,9 +1046,12 @@ unicis-platform/
 │   ├── pia/                 # PIA helpers
 │   ├── tia/                 # TIA helpers
 │   ├── rm/                  # Risk Management helpers
+│   ├── svix.ts              # Svix SDK wrapper (webhooks + last delivery attempt)
 │   └── [...]
 ├── hooks/                   # React custom hooks
 │   ├── useTeamMembersMap.ts # Map<userId, name> for member lookups
+│   ├── useISO.ts            # Active CSC framework for a team
+│   ├── useCscStatuses.ts    # Control statuses for a framework
 │   ├── useCanAccess.ts
 │   ├── usePagination.ts
 │   └── [...]
@@ -802,9 +1160,10 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 - Module badges inline in the list view
 
 ### 3. Dashboard
-- KPI row (total tasks, overdue, completion rate, compliance score with sparkline)
+- KPI row: compliance score (hero), CSC gaps, open tasks (overdue indicator), open risks, IAP completion (non-compliant count + admin link)
+- Domain Health Row: 3 clickable cards (Data Protection / Cybersecurity / Risk) that switch the active tab
 - Task Overview by Module matrix (clickable rows → module pages, colored `ModuleBadge`)
-- Needs Attention panel (overdue tasks)
+- Needs Attention panel (overdue tasks — deep-linked to individual task)
 - Compliance charts (CSC, PIA, RM tabs)
 - Global search across tasks and module fields
 - Export CSV of all tasks
@@ -818,7 +1177,7 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 
 #### TIA (Transfer Impact Assessment)
 - Cross-border data transfer analysis
-- **Legal Analysis column**: shows `LawImporterCountry` from `procedure[0]`
+- **Legal Analysis column**: shows `LawImporterCountry` from `procedure[0]` — always displayed via `t('country.${value}')` translation
 - Transfer permitted/not-permitted badge via `isTranferPermitted()`
 
 #### PIA (Privacy Impact Assessment)
@@ -843,18 +1202,23 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 - Course catalogue with thumbnail, category, estimated time
 - Progress tracking per team member (`CourseProgress.progress` 0–100)
 - Completion summary banner (total / completed / in-progress / %)
-- Admin: create categories and courses
+- Admin: create categories and courses; 4-icon action column per course row
 
-### 5. REST API
+### 5. Webhooks
+- Svix-powered webhook endpoints
+- Last delivery status column: success / pending / failed (HTTP code) with timestamp
+- Delivery data fetched server-side via `getLastWebhookAttempt()` using `messageAttempt.listByEndpoint(appId, endpointId, { limit: 1 })`
+
+### 6. REST API
 - OpenAPI 3.0 — Swagger UI at `/api-docs`
 - Bearer token authentication via API keys
 - Endpoints: Tasks, CSC, RM, PIA, RPA, TIA, API Keys, AI Chatbot
 
-### 6. Audit Logging
+### 7. Audit Logging
 - Per-module `AuditTimeline` component
 - Integrated with Retraced
 
-### 7. Notifications
+### 8. Notifications
 - In-app bell, email, web push
 - Per-user preferences
 - Types: task due, created, updated, deleted, commented, file uploaded, comment reacted
@@ -987,8 +1351,8 @@ npm run build               # Prisma client → migrations → OpenAPI → Next.
 - Custom frameworks
 
 ### UX/UI (Coming)
+- Sparklines on KPI cards (requires backend `kpi_snapshots` table with daily compliance/risk values — frontend `KpiStrip` component already has SVG sparkline support via `sparkline?: number[]` prop)
 - Migrate remaining DaisyUI components to Shadcn (`DaisyBadge` in TIA table)
-- Deep-link from Needs Attention panel directly to specific task
 - Per-module URL filter persistence for CSC section / status filters
 - Responsive breakpoint testing in CI (Playwright viewport matrix)
 
@@ -1013,7 +1377,7 @@ Apache License 2.0 — See LICENSE file for details.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on bug reporting, feature requests, code contributions, and pull request process.
 
-**Responsive design checklist** (above) must be included in every pull request description that touches UI components.
+**Accessibility checklist** and **Responsive design checklist** (above) must be included in every pull request description that touches UI components.
 
 ---
 
@@ -1036,3 +1400,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on bug reporting, feature 
 | RBAC | Role-Based Access Control |
 | DPO  | Data Protection Officer |
 | CISO | Chief Information Security Officer |
+| WCAG | Web Content Accessibility Guidelines |

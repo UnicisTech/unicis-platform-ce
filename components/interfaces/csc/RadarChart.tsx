@@ -160,7 +160,11 @@ const RadarChart = ({
     responsive: true,
   };
 
-  return <Radar data={data} options={options} />;
+  return (
+    <div role="img" aria-label={t('chart.csc-radar-aria-label', { defaultValue: 'Radar chart showing compliance score per framework section' })} className="w-full h-full">
+      <Radar data={data} options={options} />
+    </div>
+  );
 };
 
 export default RadarChart;
