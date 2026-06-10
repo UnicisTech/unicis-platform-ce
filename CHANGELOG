@@ -15,9 +15,9 @@ tags:
 
 The information about Unicis Platform releases and changes is listed in order below.
 
-## [UX/UI Redesign, Dashboard & Accessibility] 2026-06-10
+## [UX/UI Redesign, Dashboard & Accessibility] 2026-06-12
 
-*Release date: 2026-06-10*
+*Release date: 2026-06-12*
 
 - New Features
   - Domain Health Row — three live status cards above the dashboard tab switcher (Data Protection, Cybersecurity, Risk Management); each card switches to the corresponding tab

@@ -41,13 +41,24 @@ const handleAuthorize = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (redirect_url) {
     res.redirect(302, redirect_url);
+  } else if (authorize_form) {
+    // Sanitize the HTML form before sending it to the browser:
+    // remove <script> blocks, inline event handlers (on*=), and javascript: hrefs.
+    const sanitized = (authorize_form as string)
+      .replace(/<script[\s\S]*?<\/script>/gi, '')
+      .replace(/\s+on\w+\s*=\s*('[^']*'|"[^"]*"|[^\s>]*)/gi, '')
+      .replace(/href\s*=\s*(['"])\s*javascript:[^'"]*\1/gi, 'href="#"')
+      .replace(/href\s*=\s*javascript:[^\s>]*/gi, 'href="#"');
+
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader(
+      'Content-Security-Policy',
+      "default-src 'none'; script-src 'none'; style-src 'self'; form-action 'self'"
+    );
+    res.send(sanitized);
   } else {
-    void authorize_form;
     res.status(400).json({
-      error: {
-        message:
-          'Interactive OAuth authorization form responses are not supported by this endpoint.',
-      },
+      error: { message: 'Invalid OAuth authorize response.' },
     });
   }
 };

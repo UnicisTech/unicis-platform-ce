@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
 import { Button } from '@/components/shadcn/ui/button';
@@ -27,8 +26,9 @@ export function ModuleEmptyState({
   docsHref,
 }: ModuleEmptyStateProps) {
   const { t } = useTranslation('common');
-  const iconNode =
-    typeof icon === 'string' ? (
+  let iconNode: React.ReactNode;
+  if (typeof icon === 'string') {
+    iconNode = (
       <Image
         src={icon}
         alt=""
@@ -36,12 +36,13 @@ export function ModuleEmptyState({
         height={22}
         style={{ width: '22px', height: 'auto' }}
       />
-    ) : (
-      React.createElement(icon, {
-        className: 'text-ub-blue w-[22px] h-[22px]',
-        'aria-hidden': true,
-      })
     );
+  } else {
+    const IconComponent = icon;
+    iconNode = (
+      <IconComponent className="text-ub-blue w-[22px] h-[22px]" aria-hidden />
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center py-16 px-8 text-center max-w-md mx-auto">

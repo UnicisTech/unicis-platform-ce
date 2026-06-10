@@ -13,7 +13,7 @@
 ![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F?logo=LinkedIn&label=LinkedIn&link=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F)
 ![Discord](https://img.shields.io/discord/1110270854824214589)
 
-Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs.
+Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs. Built for CISOs, DPOs, DevSecOps, and compliance teams who need one place to manage privacy, cybersecurity controls, and risk.
 
 Please star ⭐ the repo if you want us to continue developing and improving the Unicis Platform! 😀
 
@@ -61,6 +61,18 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 - EU AI Act
 - Health Insurance Portability and Accountability Act (HIPAA)
 - Custom ...
+
+## ✨ What's New
+
+**Direction B Design System** — a calm, professional visual language rolled out across every module. Unified card shells, Direction B table headers, responsive tab bars, module badges, and a consistent dark mode token set throughout RPA, TIA, PIA, CSC, RM, IAP, Tasks, and Dashboard.
+
+**Live Domain Health Dashboard** — three at-a-glance status cards above the dashboard tab switcher show real-time health for Data Protection, Cybersecurity, and Risk Management. Each card switches directly to its module tab and carries full keyboard + screen-reader support.
+
+**WCAG 2.1 AA Accessibility** — comprehensive accessibility pass: semantic page language, ARIA tab/panel roles, mobile sidebar focus trap, chart `role="img"` labels, form error association, dynamic notification bell label, contextual icon-button labels, and 4.5:1 colour contrast on all content text.
+
+**Webhook Delivery Status** — the webhooks table now shows a live "Last delivery" column with success ✓, pending ⏱, or failed ✗ status and timestamp for every endpoint, powered by the Svix `messageAttempt` API.
+
+**Responsive across all modules** — every module (RPA, TIA, PIA, CSC, RM, IAP, Tasks, Comments, Dashboard) is tested and verified at 375 px, 768 px, and 1280 px. Toolbars wrap, tables scroll, and dialogs never overflow on mobile.
 
 ## 📖 Additional Resources
 
@@ -224,10 +236,11 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - Processor Questionnaire Checklist
 - Asset Inventory Management
 - Vendor Assessment Checklist
-- Benchmark Report - Trust Center as a public compliance page
+- Benchmark Report — Trust Center as a public compliance page
 - Vendor Report
 - Incident Management
 - Document Management / Policy Lifecycle
+- KPI sparklines — trend charts on compliance score and open-risk KPI cards
 
 ## 🥇 Features
 
@@ -243,7 +256,7 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - Invite users to the team
 - Manage team members
 - Update team settings
-- Webhooks & Events (task.created, task.commented, task.updated, task.deleted, task.due_date, file.uploaded)
+- Webhooks & Events (task.created, task.commented, task.updated, task.deleted, task.due_date, file.uploaded) — with live last-delivery status per endpoint
 - Notifications — in-app bell, email, and web push; per-user channel preferences
 - Internationalization (see supporting languages below)
 - Audit logs
@@ -255,6 +268,10 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - Export / import Statement of Applicability (SoA) — HTML, PDF, Excel
 - REST API — OpenAPI 3.0 spec, Swagger UI at `/api-docs`
 - API Key Bearer Token authentication
+- Direction B Design System — unified card shell, panel headers, table typography, and tab bar across all modules
+- Live Domain Health Row — real-time Data Protection, Cybersecurity, and Risk Management status on the dashboard
+- WCAG 2.1 AA Accessibility — keyboard navigation, ARIA roles, focus management, screen-reader support, 4.5:1 colour contrast
+- Fully responsive — tested at 375 px, 768 px, and 1280 px across every module and dialog
 
 ### Coming soon
 
@@ -271,6 +288,9 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 2. FR: French
 3. ES: Spanish
 4. DE: German
+5. IT: Italian (not yet available)
+6. JA: Japanese (not yet available)
+7. PT: Portuguese (not yet available)
 
 > [!NOTE]
 > Help with translating it to other languages via our [Contact](https://www.unicis.tech/contact/) form.
