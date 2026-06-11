@@ -60,8 +60,18 @@ The information about Unicis Platform releases and changes is listed in order be
   - All Tasks toolbar: fixed conflicting `items-end`/`items-center` classes; toolbar now stacks vertically on mobile and aligns inline on `lg:+`
   - Task filter dropdowns: each filter gets `flex-1 min-w-[150px]` so the three selectors share available width evenly on narrow viewports
   - All remaining tables audited against the nested two-div overflow pattern (`overflow-hidden rounded-xl` outer / `overflow-x-auto` inner)
-- Translations
-  - Added 30+ missing i18n keys across all 7 locales (en, fr, de, es, it, ja, pt): `section-progress`, `status-distribution`, `risk-matrix-axis-label`, `pia-matrix-axis`, `top-open-risks`, `framework`, 18× `domain-health.*` keys (card titles, tab-switch aria-labels, metric strings), `chart.task-status-distribution-aria-label`, `dashboard.kpi.yet-to-complete`, `tia-at-risk`, `tia-all-permitted`, `tia-non-adequate-warning`
+- Translations & Internationalisation
+  - **Italian, Japanese, and Portuguese added as fully supported locales** — 880+ keys translated per language across all modules (Tasks, RPA, TIA, PIA, CSC, RM, IAP, Dashboard, Settings, Fleet, Auth)
+  - Language switcher (`UpdateLanguage` card) added to Profile → Account settings; all 7 locales are now selectable in-app without touching the URL
+  - `next-i18next.config.js` updated to register `it`, `ja`, `pt`; `localeLabels.ts` extended with native-script names (Italiano, 日本語, Português)
+  - Missing namespace files created for IT, JA, PT: `rm.json` (risk table headers, field/form labels), `rpa.json`, `tia.json`, `pia.json` (full PIA risk-level descriptions, step labels, field names), and `iap.json` (completion-progress, total-courses, completed, in-progress)
+  - `iap.json` namespace created for all 7 locales and wired into `serverSideTranslations` on the IAP index and admin pages — dashboard labels ("Your completion", "Total", "Completed", "In progress") now translate correctly
+  - Hardcoded English labels removed from components and replaced with `t()` calls:
+    - `CscStatusBadge` — status labels now resolve via `t('statuses.{status}.label')` (uses the same nested key as the CSC pie chart)
+    - `CompletionResultsChart` — chart labels now use `t('progress.todo/inprogress/done')`
+    - `StatusResultsChart` — chart labels now use `t('passed')` / `t('failed')`
+  - All nested translation objects in `common.json` translated for IT, JA, PT: `statuses` (CSC maturity labels + descriptions), `task-statuses`, `task-priorities`, `chart-risk-impact`, `chart-risk-probability`, `chart-risk-axis`, `progress`, `errors`, `settings-tabs`, `recurrence-presets`, `recurrence-units`, `recurrence-unit-options`, `task-recurrence-statuses`, `soa-export`, `csc-mapping`, `csc-status-prompt`, `notifications`, `sso`
+  - Added 30+ missing flat keys across all 7 locales: `section-progress`, `status-distribution`, `risk-matrix-axis-label`, `pia-matrix-axis`, `top-open-risks`, `framework`, 18× `domain-health.*` keys (card titles, tab-switch aria-labels, metric strings), `chart.task-status-distribution-aria-label`, `dashboard.kpi.yet-to-complete`, `tia-at-risk`, `tia-all-permitted`, `tia-non-adequate-warning`, `success-message`, `change-language`
   - Dashboard task matrix column headers migrated from hardcoded English strings to `task-statuses.*` i18n keys
   - Domain health card tab-switch aria-labels (`Switch to Data Protection / Cybersecurity / Risk Management tab`) now fully translated
   - CSC bulk-action toast messages split into distinct keys (`csc.bulk-status-updated`, `csc.bulk-tasks-linked`) with proper `{{count}}` / `{{status}}` interpolation

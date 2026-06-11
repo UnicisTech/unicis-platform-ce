@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
@@ -13,11 +14,12 @@ const CompletionResultsChart = ({
   inprogress: number;
   completed: number;
 }) => {
+  const { t } = useTranslation('common');
   const data = {
-    labels: ['To do', 'In progress', 'Completed'],
+    labels: [t('progress.todo'), t('progress.inprogress'), t('progress.done')],
     datasets: [
       {
-        label: 'Answers',
+        label: t('controls'),
         data: [todo, inprogress, completed],
         backgroundColor: [
           'rgba(223, 225, 230, 0.7)',
@@ -41,7 +43,7 @@ const CompletionResultsChart = ({
       },
       title: {
         display: true,
-        text: 'Controls',
+        text: t('controls'),
       },
     },
     maintainAspectRatio: false,

@@ -354,6 +354,7 @@
   "name-appearance": "This is how your name will appear in the interface. Set the first and the last name.",
   "change-password-text": "You can change your password here.",
   "change-theme": "This will change the theme of the app.",
+  "change-language": "Select your preferred interface language.",
   "avatar": "Avatar",
   "custom-avatar": "Click on the avatar to upload a custom one from your files.",
   "avatar-type": "Accepted file types: .png, .jpg. Max file size: 2MB.",

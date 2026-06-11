@@ -1,0 +1,47 @@
+{
+  "fields": {
+    "Risk": "リスク",
+    "AssetOwner": "アセットオーナー",
+    "Impact": "影響",
+    "RawProbability": "処置前確率",
+    "RawImpact": "処置前影響",
+    "RiskTreatment": "リスク対応",
+    "TreatmentCost": "対応コスト",
+    "TreatmentStatus": "対応状況",
+    "TreatedProbability": "対処後の確率",
+    "TreatedImpact": "対処後の影響"
+  },
+  "headers": {
+    "raw-risk-rating": "処置前リスク評価",
+    "treatment": "対応",
+    "target-risk-rating": "目標リスク評価",
+    "current-risk-rating": "現在のリスク評価"
+  },
+  "steps": {
+    "riskAndImpact": "リスクと影響",
+    "riskTreatment": "リスク対応"
+  },
+  "descriptions": {
+    "risk": "評価しているリスクが理解できるよう、情報セキュリティリスクを簡潔に説明してください。",
+    "assetOwner": "情報資産オーナーは誰ですか？リスク対応が不十分な場合や、インシデントが発生し組織に悪影響を与えた場合に責任を負う人物です。この人物はリスクを適切に評価・対応しなければなりません。",
+    "impact": "リスクが顕在化した場合のビジネス上の潜在的影響を説明してください。「最悪ケース」または「想定される」影響のどちらを使用するかを一貫して決定してください。",
+    "rawProbability": "対処なしでリスクが発生する可能性を割合（%）で入力してください。",
+    "rawImpact": "対処なしでリスクが発生した場合のビジネス上の潜在的影響を割合（%）で入力してください。",
+    "riskTreatment": "リスクの対処方法（例：管理、回避、移転、または受容）を説明してください。",
+    "treatmentStatus": "計画された対応はどの程度実施されていますか？0%は計画のみ存在することを意味し、100%は対応が完全に稼働していることを意味します。",
+    "treatedProbability": "軽減後にリスクが発生する確率を入力してください。",
+    "treatedImpact": "軽減後の予想される影響を入力してください。管理策の失敗によるインシデントはより大きな影響を持つ場合があります。処置後の値が処置前の値と異なる場合は太字で強調してください。"
+  },
+  "placeholders": {
+    "riskDescription": "リスクの説明を入力",
+    "assetOwner": "オーナーを選択",
+    "impactDescription": "影響の説明を入力",
+    "treatmentApproach": "対応方針を説明",
+    "costEstimate": "コスト見積もりを入力"
+  },
+  "form-labels": {
+    "TreatmentStatus": "対応状況 (%)",
+    "TreatedProbability": "対処後の確率 (%)",
+    "RawProbability": "処置前確率 (%)"
+  }
+}

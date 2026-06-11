@@ -1,0 +1,47 @@
+{
+  "fields": {
+    "Risk": "Risco",
+    "AssetOwner": "Proprietário do ativo",
+    "Impact": "Impacto",
+    "RawProbability": "Probabilidade bruta",
+    "RawImpact": "Impacto bruto",
+    "RiskTreatment": "Tratamento do risco",
+    "TreatmentCost": "Custo do tratamento",
+    "TreatmentStatus": "Status do tratamento",
+    "TreatedProbability": "Probabilidade tratada",
+    "TreatedImpact": "Impacto tratado"
+  },
+  "headers": {
+    "raw-risk-rating": "Avaliação de risco bruto",
+    "treatment": "Tratamento",
+    "target-risk-rating": "Avaliação de risco alvo",
+    "current-risk-rating": "Avaliação de risco atual"
+  },
+  "steps": {
+    "riskAndImpact": "Risco e impacto",
+    "riskTreatment": "Tratamento do risco"
+  },
+  "descriptions": {
+    "risk": "Descreva brevemente o risco de segurança da informação para que as pessoas entendam qual risco você está avaliando.",
+    "assetOwner": "Quem é o Proprietário do Ativo de Informação, a pessoa responsável caso os tratamentos de risco sejam inadequados, ocorram incidentes e a organização seja impactada negativamente? Esta pessoa deve avaliar e tratar os riscos de forma adequada.",
+    "impact": "Descreva os potenciais impactos em termos de negócio caso o risco ocorra. Decida se usará impactos do \"pior caso\" ou \"esperados\" de forma consistente.",
+    "rawProbability": "Insira a probabilidade de o risco ocorrer sem tratamento, como valor percentual.",
+    "rawImpact": "Insira o potencial impacto nos negócios caso o risco ocorra sem qualquer tratamento, como valor percentual.",
+    "riskTreatment": "Descreva como o risco será tratado (ex.: controlado, evitado, transferido ou aceito).",
+    "treatmentStatus": "Em que medida o tratamento planejado está em vigor? 0% significa que apenas existe um plano; 100% significa que o tratamento está totalmente operacional.",
+    "treatedProbability": "Insira a probabilidade de o risco ocorrer após a mitigação.",
+    "treatedImpact": "Insira o provável impacto após a mitigação. Incidentes devido a falhas de controle podem ter impactos maiores. Destaque os valores tratados em negrito se diferirem dos valores brutos."
+  },
+  "placeholders": {
+    "riskDescription": "Insira a descrição do risco",
+    "assetOwner": "Selecione um proprietário",
+    "impactDescription": "Insira a descrição do impacto",
+    "treatmentApproach": "Descreva a abordagem de tratamento",
+    "costEstimate": "Insira a estimativa de custo"
+  },
+  "form-labels": {
+    "TreatmentStatus": "Status do tratamento (%)",
+    "TreatedProbability": "Probabilidade tratada (%)",
+    "RawProbability": "Probabilidade bruta (%)"
+  }
+}

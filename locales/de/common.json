@@ -353,6 +353,7 @@
   "name-appearance": "So wird Ihr Name in der Benutzeroberfläche angezeigt. Legen Sie Vor- und Nachname fest.",
   "change-password-text": "Hier können Sie Ihr Passwort ändern.",
   "change-theme": "Damit ändern Sie das Design der App.",
+  "change-language": "Wählen Sie Ihre bevorzugte Sprache der Benutzeroberfläche.",
   "avatar": "Avatar",
   "custom-avatar": "Klicken Sie auf den Avatar, um einen eigenen aus Ihren Dateien hochzuladen.",
   "avatar-type": "Akzeptierte Dateitypen: .png, .jpg. Max. Dateigröße: 2MB.",

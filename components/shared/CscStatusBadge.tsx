@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 import { cn } from '@/components/shadcn/lib/utils';
 
 export type CscStatus =
@@ -13,50 +14,42 @@ export type CscStatus =
 const STATUS_CONFIG: Record<
   CscStatus,
   {
-    label: string;
     dotColor: string;
     bg: string;
     text: string;
   }
 > = {
   not_applicable: {
-    label: 'Not applicable',
     dotColor: 'bg-slate-400',
     bg: 'bg-slate-100 dark:bg-slate-800',
     text: 'text-slate-700 dark:text-slate-200',
   },
   not_performed: {
-    label: 'Not performed',
     dotColor: 'bg-ub-red',
     bg: 'bg-ub-red-bg',
     text: 'text-ub-red-text',
   },
   performed_informally: {
-    label: 'Performed informally',
     dotColor: 'bg-ub-amber',
     bg: 'bg-ub-amber-bg',
     text: 'text-ub-amber-text',
   },
   planned: {
-    label: 'Planned',
     dotColor: 'bg-ub-yellow',
     bg: 'bg-ub-yellow-bg',
     text: 'text-ub-yellow-text',
   },
   well_defined: {
-    label: 'Well defined',
     dotColor: 'bg-ub-blue',
     bg: 'bg-ub-blue-bg',
     text: 'text-ub-blue-text',
   },
   quantitatively_controlled: {
-    label: 'Quantitatively controlled',
     dotColor: 'bg-ub-purple',
     bg: 'bg-ub-purple-bg',
     text: 'text-ub-purple-text',
   },
   continuously_improving: {
-    label: 'Continuously improving',
     dotColor: 'bg-ub-green',
     bg: 'bg-ub-green-bg',
     text: 'text-ub-green-text',
@@ -74,6 +67,7 @@ export function CscStatusBadge({
   size = 'md',
   className,
 }: CscStatusBadgeProps) {
+  const { t } = useTranslation('common');
   const config = STATUS_CONFIG[status];
 
   // Guard against undefined config
@@ -81,6 +75,8 @@ export function CscStatusBadge({
     console.warn(`Invalid status passed to CscStatusBadge: ${status}`);
     return null;
   }
+
+  const label = t(`statuses.${status.replace(/_/g, '-')}.label`);
 
   return (
     <span
@@ -92,7 +88,7 @@ export function CscStatusBadge({
         className
       )}
       role="status"
-      aria-label={config.label}
+      aria-label={label}
     >
       <span
         className={cn(
@@ -102,7 +98,7 @@ export function CscStatusBadge({
         )}
         aria-hidden="true"
       />
-      {config.label}
+      {label}
     </span>
   );
 }

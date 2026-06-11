@@ -353,6 +353,7 @@
   "name-appearance": "Así es como aparecerá su nombre en la interfaz. Establezca el nombre y el apellido.",
   "change-password-text": "Puede cambiar su contraseña aquí.",
   "change-theme": "Esto cambiará el tema de la aplicación.",
+  "change-language": "Seleccione su idioma de interfaz preferido.",
   "avatar": "Avatar",
   "custom-avatar": "Haga clic en el avatar para cargar uno personalizado desde sus archivos.",
   "avatar-type": "Tipos de archivo aceptados: .png, .jpg. Tamaño máximo del archivo: 2 MB.",

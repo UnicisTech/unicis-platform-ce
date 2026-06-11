@@ -284,16 +284,49 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 
 ## Supported languages 🌐
 
-1. EN: English
-2. FR: French
-3. ES: Spanish
-4. DE: German
-5. IT: Italian (not yet available)
-6. JA: Japanese (not yet available)
-7. PT: Portuguese (not yet available)
+| Code | Language               | Status                  |
+| ---- | ---------------------- | ----------------------- |
+| `en` | English                | ✅ Complete (reference) |
+| `fr` | French                 | ✅ Complete             |
+| `de` | German                 | ✅ Complete             |
+| `es` | Spanish                | ✅ Complete             |
+| `it` | Italian                | ✅ Complete             |
+| `ja` | Japanese               | ✅ Complete             |
+| `pt` | Portuguese (Brazilian) | ✅ Complete             |
 
-> [!NOTE]
-> Help with translating it to other languages via our [Contact](https://www.unicis.tech/contact/) form.
+Users can switch the interface language at **Profile → Account → Languages** without changing the URL.
+
+### 🌍 Contributing a Translation
+
+We welcome new languages and corrections to existing ones. You can contribute via [Weblate](https://hosted.weblate.org/projects/unicis-platform/) (no code required) or directly via a pull request.
+
+#### File structure
+
+```
+locales/
+└── {lang}/
+    ├── common.json   # All general UI strings (flat keys + nested objects)
+    ├── rm.json       # Risk Management form fields and headers
+    ├── rpa.json      # Record of Processing Activities labels
+    ├── tia.json      # Transfer Impact Assessment labels
+    ├── pia.json      # Privacy Impact Assessment fields and risk descriptions
+    └── iap.json      # Interactive Awareness Program dashboard labels
+```
+
+#### Adding a new language
+
+1. **Register the locale** — add the language code to the `locales` array in `next-i18next.config.js` and add its display name to `lib/i18n/localeLabels.ts`.
+2. **Create locale files** — copy `locales/en/` into `locales/{lang}/` and translate every value.
+3. **Verify** — run `node -e "JSON.parse(require('fs').readFileSync('locales/{lang}/common.json','utf8'))"` to check JSON validity.
+
+#### Translation rules
+
+- **Keep in English:** technical acronyms (`TIA`, `RPA`, `PIA`, `CSC`, `RM`, `IAP`, `GDPR`, `SCIM`, `SAML`, `SSO`, `API`, `UUID`, `SQL`) and brand/format names (`ISO`, `NIST`, `OWASP`, `PCI DSS`, `PDF`, `CSV`, `XLSX`, `ODS`).
+- **Preserve placeholders:** `{{count}}`, `{{name}}`, `{{status}}`, and all other `{{…}}` interpolations must appear unchanged.
+- **Preserve nested structure:** `common.json` contains both flat string keys and nested objects (e.g. `"statuses"`, `"task-statuses"`, `"errors"`, `"sso"`). Translate the values, never the keys.
+- **Module framework content** (`locales/en/csc/*.json`) contains official control names and descriptions from ISO 27001, NIST CSF, GDPR, etc. — these are intentionally kept in English as they reference authoritative standard language.
+- **Portuguese:** use Brazilian Portuguese (pt-BR) conventions.
+- **Japanese:** use natural UI-register language; avoid over-formal keigo for button labels and short UI strings.
 
 ## ✨ Contributing
 
