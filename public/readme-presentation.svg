@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   width="1440"
+   height="810"
+   viewBox="0 0 1440 810"
+   version="1.1"
+   id="unicis-readme-template">
+
+  <title>Unicis Platform — Responsive UI Showcase</title>
+  <desc>Multi-device mockup template for GitHub README. Open in Inkscape, import screenshots, position over each placeholder group, then delete the placeholder group.</desc>
+
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#0f172a"
+     borderopacity="1.0"
+     inkscape:document-units="px"
+     units="px"
+     inkscape:zoom="0.75"
+     inkscape:cx="720"
+     inkscape:cy="405"
+     inkscape:current-layer="layer-bg"/>
+
+  <defs id="defs1">
+    <pattern id="dot-grid" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="0" cy="0" r="1" fill="#1e293b" opacity="0.7"/>
+    </pattern>
+  </defs>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       LAYER 1: Background
+  ══════════════════════════════════════════════════════════════════ -->
+  <g inkscape:label="Background" inkscape:groupmode="layer" id="layer-bg">
+    <rect id="bg-main" x="0" y="0" width="1440" height="810" fill="#0f172a"/>
+    <rect id="bg-dots" x="0" y="0" width="1440" height="810" fill="url(#dot-grid)"/>
+    <rect id="top-stripe" x="0" y="0" width="1440" height="3" fill="#3b82f6"/>
+  </g>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       LAYER 2: Branding Header
+  ══════════════════════════════════════════════════════════════════ -->
+  <g inkscape:label="Branding Header" inkscape:groupmode="layer" id="layer-brand">
+
+    <!-- Shield icon -->
+    <g id="shield-icon">
+      <path d="M57 16 L73 22 L73 34 C73 42 65 49 57 52 C49 49 41 42 41 34 L41 22 Z"
+        fill="#1d4ed8"/>
+      <path d="M57 20 L69 25 L69 34 C69 40 64 46 57 48 C50 46 45 40 45 34 L45 25 Z"
+        fill="#3b82f6"/>
+      <text x="57" y="40" text-anchor="middle"
+        font-family="system-ui, Arial, sans-serif"
+        font-size="13" font-weight="700" fill="#dbeafe">U</text>
+    </g>
+
+    <!-- Platform name and tagline -->
+    <text id="brand-name" x="89" y="34"
+      font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif"
+      font-size="21" font-weight="700" fill="#f8fafc" letter-spacing="0.5">UNICIS PLATFORM</text>
+    <text id="brand-tagline" x="89" y="53"
+      font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif"
+      font-size="11.5" fill="#64748b">
+      Privacy Management · Risk Assessment · Compliance · Trust Center · Open Source
+    </text>
+
+    <!-- Version badge -->
+    <rect x="1296" y="18" width="112" height="24" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <circle cx="1313" cy="30" r="3.5" fill="#22c55e"/>
+    <text x="1322" y="34"
+      font-family="system-ui, Arial, sans-serif"
+      font-size="10.5" fill="#94a3b8">v0.2.3  stable</text>
+
+    <!-- Header divider -->
+    <line x1="40" y1="70" x2="1400" y2="70" stroke="#1e293b" stroke-width="1.5"/>
+  </g>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       LAYER 3: Desktop Browser Frame  (1280 × 768 viewport)
+       Screenshot placeholder: x=31, y=126, w=914, h=607
+  ══════════════════════════════════════════════════════════════════ -->
+  <g inkscape:label="Desktop Browser (1280px)" inkscape:groupmode="layer" id="layer-browser">
+
+    <!-- Outer shadow ring -->
+    <rect x="27" y="78" width="922" height="660" rx="12" fill="#080d16" opacity="0.7"/>
+
+    <!-- Browser frame body -->
+    <rect id="browser-frame" x="30" y="81" width="916" height="654" rx="10"
+      fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+
+    <!-- Title bar -->
+    <rect id="browser-titlebar" x="31" y="82" width="914" height="43" rx="9" fill="#0f172a"/>
+    <rect x="31" y="104" width="914" height="21" fill="#0f172a"/>
+
+    <!-- Traffic lights -->
+    <circle cx="60" cy="103" r="6" fill="#ef4444"/>
+    <circle cx="80" cy="103" r="6" fill="#f59e0b"/>
+    <circle cx="100" cy="103" r="6" fill="#22c55e"/>
+
+    <!-- Active tab -->
+    <rect x="122" y="92" width="186" height="22" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
+    <circle cx="136" cy="103" r="4.5" fill="#3b82f6" opacity="0.7"/>
+    <text x="148" y="107"
+      font-family="system-ui, Arial, sans-serif"
+      font-size="10" fill="#94a3b8">Demo Corp · Dashboard</text>
+
+    <!-- Address bar -->
+    <rect x="320" y="92" width="528" height="22" rx="11" fill="#0a0f1c" stroke="#334155" stroke-width="0.75"/>
+    <circle cx="333" cy="103" r="4" fill="none" stroke="#22c55e" stroke-width="1.2"/>
+    <line x1="333" y1="106" x2="333" y2="110" stroke="#22c55e" stroke-width="1.2"/>
+    <text x="345" y="107"
+      font-family="'Cascadia Code', 'Fira Code', Consolas, monospace"
+      font-size="9" fill="#64748b">localhost:4002 / teams / demo-corp / dashboard</text>
+
+    <!-- Content separator -->
+    <line x1="31" y1="125" x2="945" y2="125" stroke="#334155" stroke-width="0.75"/>
+
+    <!-- ╔═══════════════════════════════════════════════════════╗
+         ║  PLACEHOLDER: Desktop Screenshot                     ║
+         ║  In Inkscape:                                         ║
+         ║    1. File > Import > select screenshot PNG/JPG       ║
+         ║    2. Resize imported image to  914 × 607 px         ║
+         ║    3. Position at  x=31, y=126                        ║
+         ║    4. Right-click this group > Delete                 ║
+         ╚═══════════════════════════════════════════════════════╝ -->
+    <g id="ph-desktop" inkscape:label="[DELETE AFTER IMPORT] Desktop Screenshot Placeholder">
+      <rect x="31" y="126" width="914" height="607" fill="#f1f5f9"/>
+      <rect x="35" y="130" width="906" height="599" fill="none" stroke="#cbd5e1"
+        stroke-width="1.5" stroke-dasharray="14,7"/>
+      <!-- Crosshair -->
+      <line x1="448" y1="400" x2="528" y2="400" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+      <line x1="488" y1="360" x2="488" y2="440" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+      <rect x="455" y="367" width="66" height="66" rx="4" fill="none" stroke="#94a3b8"
+        stroke-width="1.5" stroke-dasharray="4,2"/>
+      <text x="488" y="458" text-anchor="middle"
+        font-family="system-ui, Arial, sans-serif"
+        font-size="17" font-weight="600" fill="#64748b">Dashboard Screenshot</text>
+      <text x="488" y="479" text-anchor="middle"
+        font-family="system-ui, Arial, sans-serif"
+        font-size="12" fill="#94a3b8">Replace with actual screenshot — 914 × 607 px</text>
+      <text x="488" y="497" text-anchor="middle"
+        font-family="system-ui, Arial, sans-serif"
+        font-size="11" fill="#94a3b8">Any module page: Dashboard · RPA · CSC · TIA · PIA · RM · IAP</text>
+    </g>
+
+  </g>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       LAYER 4: Tablet Frame  (768 × 1024 viewport)
+       Screenshot placeholder: x=978, y=109, w=236, h=299
+  ══════════════════════════════════════════════════════════════════ -->
+  <g inkscape:label="Tablet (768px)" inkscape:groupmode="layer" id="layer-tablet">
+
+    <!-- Outer shadow ring -->
+    <rect x="961" y="78" width="274" height="377" rx="20" fill="#080d16" opacity="0.7"/>
+
+    <!-- Frame body -->
+    <rect id="tablet-frame" x="963" y="81" width="270" height="373" rx="18"
+      fill="#1e293b" stroke="#334155" stroke-width="2"/>
+
+    <!-- Camera -->
+    <circle cx="1098" cy="97" r="5" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <circle cx="1098" cy="97" r="2.5" fill="#1e3a6e" opacity="0.8"/>
+
+    <!-- Speaker grille dots left -->
+    <circle cx="1063" cy="96" r="1.5" fill="#2d3f55"/>
+    <circle cx="1069" cy="96" r="1.5" fill="#2d3f55"/>
+    <circle cx="1075" cy="96" r="1.5" fill="#2d3f55"/>
+    <!-- Speaker grille dots right -->
+    <circle cx="1119" cy="96" r="1.5" fill="#2d3f55"/>
+    <circle cx="1125" cy="96" r="1.5" fill="#2d3f55"/>
+    <circle cx="1131" cy="96" r="1.5" fill="#2d3f55"/>
+
+    <!-- ╔═══════════════════════════════════════════════════════╗
+         ║  PLACEHOLDER: Tablet Screenshot                      ║
+         ║    Resize to  236 × 299 px,  position  x=978, y=109  ║
+         ╚═══════════════════════════════════════════════════════╝ -->
+    <g id="ph-tablet" inkscape:label="[DELETE AFTER IMPORT] Tablet Screenshot Placeholder">
+      <rect x="978" y="109" width="236" height="299" fill="#f1f5f9"/>
+      <rect x="980" y="111" width="232" height="295" fill="none" stroke="#cbd5e1"
+        stroke-width="1" stroke-dasharray="8,4"/>
+      <line x1="1078" y1="252" x2="1118" y2="252" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="1098" y1="232" x2="1098" y2="272" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
+      <rect x="1082" y="236" width="32" height="32" rx="3" fill="none" stroke="#94a3b8"
+        stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="1098" y="289" text-anchor="middle"
+        font-family="system-ui, Arial, sans-serif"
+        font-size="9.5" font-weight="600" fill="#64748b">Tablet Screenshot</text>
+      <text x="1098" y="302" text-anchor="middle"
+        font-family="system-ui, Arial, sans-serif"
+        font-size="8.5" fill="#94a3b8">236 × 299 px</text>
+    </g>
+
+    <!-- Home button -->
+    <circle cx="1098" cy="422" r="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <circle cx="1098" cy="422" r="7" fill="none" stroke="#475569" stroke-width="1"/>
+
+    <!-- Power button (right side) -->
+    <rect x="1231" y="163" width="4" height="32" rx="2" fill="#475569"/>
+    <!-- Volume buttons (right side) -->
+    <rect x="1231" y="220" width="4" height="24" rx="2" fill="#334155"/>
+    <rect x="1231" y="250" width="4" height="24" rx="2" fill="#334155"/>
+
+  </g>
+
+  <!-- Tablet/Phone gap label -->
+  <g inkscape:label="Tablet Label" inkscape:groupmode="layer" id="layer-tablet-label">
+    <rect x="1038" y="458" width="120" height="15" rx="7.5" fill="#1e293b" stroke="#334155" stroke-width="0.75"/>
+    <text x="1098" y="469" text-anchor="middle"
+      font-family="system-ui, Arial, sans-serif"
+      font-size="9.5" fill="#64748b">Tablet · 768 × 1024</text>
+  </g>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       LAYER 5: Phone Frame  (375 × 812 viewport)
+       Screenshot placeholder: x=1031, y=494, w=135, h=218
+  ══════════════════════════════════════════════════════════════════ -->
+  <g inkscape:label="Mobile Phone (375px)" inkscape:groupmode="layer" id="layer-phone">
+
+    <!-- Outer shadow ring -->
+    <rect x="1016" y="477" width="165" height="277" rx="24" fill="#080d16" opacity="0.7"/>
+
+    <!-- Frame body -->
+    <rect id="phone-frame" x="1018" y="480" width="161" height="273" rx="22"
+      fill="#1e293b" stroke="#334155" stroke-width="2"/>
+
+    <!-- Dynamic island notch -->
+    <rect x="1067" y="489" width="64" height="11" rx="5.5" fill="#0f172a"/>
+    <circle cx="1113" cy="494" r="3" fill="#1e3a6e" opacity="0.5"/>
+
+    <!-- Status bar time -->
+    <text x="1029" y="508"
+      font-family="system-ui, Arial, sans-serif"
+      font-size="7.5" fill="#94a3b8" opacity="0.7">9:41</text>
+
+    <!-- ╔═══════════════════════════════════════════════════════╗
+         ║  PLACEHOLDER: Mobile Screenshot                      ║
+         ║    Resize to  135 × 218 px,  position  x=1031, y=494 ║
+         ╚═══════════════════════════════════════════════════════╝ -->
+    <g id="ph-mobile" inkscape:label="[DELETE AFTER IMPORT] Mobile Screenshot Placeholder">
+      <rect x="1031" y="494" width="135" height="218" fill="#f1f5f9"/>
+      <rect x="1033" y="496" width="131" height="214" fill="none" stroke="#cbd5e1"
+        stroke-width="1" stroke-dasharray="6,3"/>
+      <line x1="1082" y1="595" x2="1116" y2="595" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="1099" y1="577" x2="1099" y2="613" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
+      <rect x="1084" y="581" width="30" height="28" rx="2" fill="none" stroke="#94a3b8"
+        stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="1099" y="628" text-anchor="middle"
+        font-family="system-ui, Arial, sans-serif"
+        font-size="8.5" font-weight="600" fill="#64748b">Mobile</text>
+      <text x="1099" y="641" text-anchor="middle"
+        font-family="system-ui, Arial, sans-serif"
+        font-size="7.5" fill="#94a3b8">135 × 218 px</text>
+    </g>
+
+    <!-- Home indicator pill -->
+    <rect x="1071" y="730" width="55" height="4" rx="2" fill="#475569"/>
+
+    <!-- Power button right side -->
+    <rect x="1177" y="537" width="4" height="30" rx="2" fill="#475569"/>
+    <!-- Volume buttons left side -->
+    <rect x="1016" y="527" width="4" height="20" rx="2" fill="#334155"/>
+    <rect x="1016" y="553" width="4" height="20" rx="2" fill="#334155"/>
+    <!-- Silent switch -->
+    <rect x="1016" y="508" width="4" height="13" rx="2" fill="#334155"/>
+
+  </g>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       LAYER 6: Viewport Labels Row
+  ══════════════════════════════════════════════════════════════════ -->
+  <g inkscape:label="Viewport Labels" inkscape:groupmode="layer" id="layer-labels">
+
+    <!-- Desktop label (browser bottom: y=735, label top: y=742) -->
+    <rect x="427" y="742" width="122" height="16" rx="8" fill="#1e293b" stroke="#334155" stroke-width="0.75"/>
+    <text x="488" y="754" text-anchor="middle"
+      font-family="system-ui, Arial, sans-serif"
+      font-size="10" fill="#64748b">Desktop · 1280 × 768</text>
+
+    <!-- Mobile label (phone bottom: y=753, label top: y=760) -->
+    <rect x="1036" y="760" width="126" height="16" rx="8" fill="#1e293b" stroke="#334155" stroke-width="0.75"/>
+    <text x="1099" y="772" text-anchor="middle"
+      font-family="system-ui, Arial, sans-serif"
+      font-size="10" fill="#64748b">Mobile · 375 × 812</text>
+
+  </g>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       LAYER 7: Module Badges
+  ══════════════════════════════════════════════════════════════════ -->
+  <g inkscape:label="Module Badges" inkscape:groupmode="layer" id="layer-badges">
+
+    <!-- Data Privacy (RPA) -->
+    <rect x="148" y="771" width="145" height="23" rx="11.5" fill="#172033" stroke="#1d4ed8" stroke-width="0.75"/>
+    <circle cx="163" cy="782" r="3.5" fill="#3b82f6"/>
+    <text x="175" y="786"
+      font-family="system-ui, Arial, sans-serif"
+      font-size="10.5" fill="#93c5fd">Data Privacy (RPA)</text>
+
+    <!-- Cybersecurity (CSC) -->
+    <rect x="303" y="771" width="157" height="23" rx="11.5" fill="#112310" stroke="#15803d" stroke-width="0.75"/>
+    <circle cx="318" cy="782" r="3.5" fill="#22c55e"/>
+    <text x="330" y="786"
+      font-family="system-ui, Arial, sans-serif"
+      font-size="10.5" fill="#86efac">Cybersecurity (CSC)</text>
+
+    <!-- Risk Management (RM) -->
+    <rect x="470" y="771" width="150" height="23" rx="11.5" fill="#1c1232" stroke="#7c3aed" stroke-width="0.75"/>
+    <circle cx="485" cy="782" r="3.5" fill="#8b5cf6"/>
+    <text x="497" y="786"
+      font-family="system-ui, Arial, sans-serif"
+      font-size="10.5" fill="#c4b5fd">Risk Management</text>
+
+    <!-- Transfer Impact (TIA) -->
+    <rect x="630" y="771" width="148" height="23" rx="11.5" fill="#211502" stroke="#b45309" stroke-width="0.75"/>
+    <circle cx="645" cy="782" r="3.5" fill="#f59e0b"/>
+    <text x="657" y="786"
+      font-family="system-ui, Arial, sans-serif"
+      font-size="10.5" fill="#fcd34d">Transfer Impact</text>
+
+    <!-- Privacy Impact (PIA) -->
+    <rect x="788" y="771" width="132" height="23" rx="11.5" fill="#021514" stroke="#0f766e" stroke-width="0.75"/>
+    <circle cx="803" cy="782" r="3.5" fill="#14b8a6"/>
+    <text x="815" y="786"
+      font-family="system-ui, Arial, sans-serif"
+      font-size="10.5" fill="#99f6e4">Privacy Impact</text>
+
+    <!-- Access Policy (IAP) -->
+    <rect x="930" y="771" width="132" height="23" rx="11.5" fill="#1a0808" stroke="#b91c1c" stroke-width="0.75"/>
+    <circle cx="945" cy="782" r="3.5" fill="#ef4444"/>
+    <text x="957" y="786"
+      font-family="system-ui, Arial, sans-serif"
+      font-size="10.5" fill="#fca5a5">Access Policy</text>
+
+    <!-- Tech stack line -->
+    <text x="546" y="803" text-anchor="middle"
+      font-family="system-ui, Arial, sans-serif"
+      font-size="9.5" fill="#334155" letter-spacing="0.4">
+      Next.js  ·  TypeScript  ·  Tailwind CSS  ·  BoxyHQ  ·  PostgreSQL  ·  Prisma  ·  WCAG 2.1 AA
+    </text>
+
+  </g>
+
+</svg>

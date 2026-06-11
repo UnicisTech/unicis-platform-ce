@@ -18,7 +18,7 @@ Unicis Platform Community Edition - an open core, enterprise-ready trust managem
 Please star ⭐ the repo if you want us to continue developing and improving the Unicis Platform! 😀
 
 <p align="center">
-  <img src="https://d4.alternativeto.net/XZ4y8JadDsw7PevtL5HKWDZfmnKG0q0A4uniE1oIgKE/rs:fit:2400:2400:0/g:ce:0:0/YWJzOi8vZGlzdC9zL3VuaWNpcy1wbGF0Zm9ybV84NzMyNTVfZnVsbC5zdmc.jpg" 
+  <img src="/public/readme-presentation.png" 
        alt="Unicis Platform Screenshot" 
        width="800" 
        style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin-bottom: 20px;">
