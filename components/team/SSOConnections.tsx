@@ -44,7 +44,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import { useTranslation } from 'next-i18next';
-import { FormEvent, ReactNode, useEffect, useMemo, useState } from 'react';
+import { FormEvent, ReactNode, useMemo, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import useSWR from 'swr';
 import type { Team } from 'types';
@@ -279,6 +279,17 @@ const oidcValuesFromConnection = (
     clientID: connection.clientID,
     clientSecret: connection.clientSecret,
   };
+};
+
+const formValuesKey = (values: SAMLFormValues | OIDCFormValues) => {
+  const serialized = JSON.stringify(values);
+  let hash = 0;
+
+  for (let i = 0; i < serialized.length; i++) {
+    hash = (hash * 31 + serialized.charCodeAt(i)) % 1000000007;
+  }
+
+  return `${serialized.length}:${hash}`;
 };
 
 export default function SSOConnections({
@@ -650,10 +661,6 @@ function ConnectionDialog({
   >(connectionDetailsUrl, fetcher);
   const currentConnection = connectionDetails?.[0] ?? connection;
 
-  useEffect(() => {
-    setConnectionKind(kind);
-  }, [kind]);
-
   const title = mode === 'create' ? t('sso.create-title') : t('sso.edit-title');
 
   const description =
@@ -788,6 +795,7 @@ function ConnectionDialog({
           <Loading />
         ) : connectionKind === 'saml' ? (
           <SAMLConnectionForm
+            key={formValuesKey(samlInitialValues)}
             initialValues={samlInitialValues}
             mode={mode}
             isSubmitting={isSubmitting}
@@ -797,6 +805,7 @@ function ConnectionDialog({
           />
         ) : (
           <OIDCConnectionForm
+            key={formValuesKey(oidcInitialValues)}
             initialValues={oidcInitialValues}
             mode={mode}
             isSubmitting={isSubmitting}
@@ -826,10 +835,6 @@ function SAMLConnectionForm({
 }) {
   const { t } = useTranslation('common');
   const [values, setValues] = useState(initialValues);
-
-  useEffect(() => {
-    setValues(initialValues);
-  }, [initialValues]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -942,10 +947,6 @@ function OIDCConnectionForm({
 }) {
   const { t } = useTranslation('common');
   const [values, setValues] = useState(initialValues);
-
-  useEffect(() => {
-    setValues(initialValues);
-  }, [initialValues]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

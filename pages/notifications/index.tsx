@@ -1,3 +1,4 @@
+import type { SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -36,17 +37,19 @@ const NotificationsPage = () => {
   const [pushError, setPushError] = useState<string | null>(null);
   const [pushLoading, setPushLoading] = useState(false);
 
-  useEffect(() => {
-    setPage(1);
-  }, [perPage]);
-
   const totalPages = Math.max(1, Math.ceil(total / perPage));
   const hasLoaded = total > 0 || notifications.length > 0;
 
-  useEffect(() => {
-    if (!hasLoaded) return;
-    if (page > totalPages) setPage(totalPages);
-  }, [page, totalPages, hasLoaded]);
+  const currentPage = hasLoaded ? Math.min(page, totalPages) : page;
+
+  const handlePerPageChange = (value: SetStateAction<number>) => {
+    setPerPage(value);
+    setPage(1);
+  };
+
+  const handlePageChange = (nextPage: number) => {
+    setPage(Math.min(nextPage, totalPages));
+  };
 
   useEffect(() => {
     let mounted = true;
@@ -101,7 +104,7 @@ const NotificationsPage = () => {
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h1 className="text-2xl font-semibold">{t('notifications.title')}</h1>
         <div className="flex items-center gap-2 flex-wrap justify-end">
-          <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
+          <PerPageSelector perPage={perPage} setPerPage={handlePerPageChange} />
           <Button variant="outline" asChild>
             <Link href="/notifications/settings">
               {t('notifications.settings')}
@@ -172,9 +175,9 @@ const NotificationsPage = () => {
 
       {totalPages > 1 && (
         <PaginationControls
-          page={page}
+          page={currentPage}
           totalPages={totalPages}
-          onChange={setPage}
+          onChange={handlePageChange}
         />
       )}
     </div>

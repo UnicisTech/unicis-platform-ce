@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -14,7 +14,9 @@ import {
 } from '@/lib/notifications/preferences';
 import type { NotificationType } from '@/generated/enums';
 import type { ChannelPrefs } from '@/lib/notifications/preferences';
-import useNotificationPreferences from 'hooks/useNotificationPreferences';
+import useNotificationPreferences, {
+  type NotificationPreferences,
+} from 'hooks/useNotificationPreferences';
 
 const channelOrder: Array<keyof ChannelPrefs> = ['inApp', 'email', 'push'];
 
@@ -39,8 +41,10 @@ const buildMergedPreferences = (
   return merged;
 };
 
+const preferencesKey = (preferences: Record<NotificationType, ChannelPrefs>) =>
+  JSON.stringify(preferences);
+
 const NotificationSettingsPage = () => {
-  const { t } = useTranslation('common');
   const { preferences, isLoading, updatePreferences } =
     useNotificationPreferences();
 
@@ -49,15 +53,30 @@ const NotificationSettingsPage = () => {
     [preferences]
   );
 
+  return (
+    <NotificationSettingsForm
+      key={preferencesKey(mergedPreferences)}
+      initialPreferences={mergedPreferences}
+      isLoading={isLoading}
+      updatePreferences={updatePreferences}
+    />
+  );
+};
+
+const NotificationSettingsForm = ({
+  initialPreferences,
+  isLoading,
+  updatePreferences,
+}: {
+  initialPreferences: Record<NotificationType, ChannelPrefs>;
+  isLoading: boolean;
+  updatePreferences: (updated: NotificationPreferences) => Promise<void>;
+}) => {
+  const { t } = useTranslation('common');
   const [draft, setDraft] =
-    useState<Record<NotificationType, ChannelPrefs>>(mergedPreferences);
+    useState<Record<NotificationType, ChannelPrefs>>(initialPreferences);
   const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
-
-  useEffect(() => {
-    setDraft(mergedPreferences);
-    setDirty(false);
-  }, [mergedPreferences]);
 
   const handleToggle = (
     type: NotificationType,

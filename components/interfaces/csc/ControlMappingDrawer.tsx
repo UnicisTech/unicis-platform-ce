@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { X, Link2, Check, Loader2 } from 'lucide-react';
 import { useTranslation } from 'next-i18next';
 import type { ISO, Task } from 'types';
@@ -105,20 +105,17 @@ export default function ControlMappingDrawer({
   // ── Cross-framework linking helpers ────────────────────────
 
   /** Check if a task is already linked to a specific control in a given framework */
-  const isTaskLinkedTo = useCallback(
-    (task: Task, mappedControlId: string, fw: ISO) => {
-      const prop = getCscControlsProp(fw);
-      return (
-        (task.properties?.[prop] as string[] | undefined)?.includes(
-          mappedControlId
-        ) ?? false
-      );
-    },
-    []
-  );
+  const isTaskLinkedTo = (task: Task, mappedControlId: string, fw: ISO) => {
+    const prop = getCscControlsProp(fw);
+    return (
+      (task.properties?.[prop] as string[] | undefined)?.includes(
+        mappedControlId
+      ) ?? false
+    );
+  };
 
   /** For each mapped control, compute which linked tasks are NOT yet linked to it */
-  const mappedControlLinkStatus = useMemo(() => {
+  const mappedControlLinkStatus = (() => {
     if (!mappingEntry || linkedTasks.length === 0)
       return new Map<string, Task[]>();
     const result = new Map<string, Task[]>();
@@ -133,19 +130,19 @@ export default function ControlMappingDrawer({
       }
     }
     return result;
-  }, [mappingEntry, linkedTasks, otherFrameworks, isTaskLinkedTo]);
+  })();
 
   /** Total count of unlinked (task, mapped-control) pairs across all frameworks */
-  const totalUnlinkedPairs = useMemo(() => {
+  const totalUnlinkedPairs = (() => {
     let count = 0;
     for (const unlinked of mappedControlLinkStatus.values()) {
       count += unlinked.length;
     }
     return count;
-  }, [mappedControlLinkStatus]);
+  })();
 
   /** Collect all unlinked mapped controls for "Link All Mapped" */
-  const getAllUnlinkedMapped = useCallback(() => {
+  const getAllUnlinkedMapped = () => {
     const taskSet = new Map<number, Set<string>>();
     // group by (taskNumber, framework) → controlIds
     for (const [key, unlinkedTasks] of mappedControlLinkStatus) {
@@ -171,10 +168,10 @@ export default function ControlMappingDrawer({
 
     const taskNumbers = [...taskSet.keys()];
     return { taskNumbers, controls };
-  }, [mappedControlLinkStatus]);
+  };
 
   /** Link all linked tasks to ALL unlinked mapped controls */
-  const handleLinkAllMapped = useCallback(async () => {
+  const handleLinkAllMapped = async () => {
     const { taskNumbers, controls } = getAllUnlinkedMapped();
     if (taskNumbers.length === 0 || controls.length === 0) return;
     setBulkLoading(true);
@@ -183,45 +180,43 @@ export default function ControlMappingDrawer({
     } finally {
       setBulkLoading(false);
     }
-  }, [getAllUnlinkedMapped, onBulkLinkMapped, controlId]);
+  };
 
   /** Link all unlinked tasks to a specific mapped control */
-  const handleLinkAllToControl = useCallback(
-    async (mappedControlId: string, fw: ISO) => {
-      const key = `${fw}:${mappedControlId}`;
-      const unlinked = mappedControlLinkStatus.get(key) ?? [];
-      if (unlinked.length === 0) return;
-      setPerControlLoading(key);
-      try {
-        await onBulkLinkMapped(
-          unlinked.map((t) => t.taskNumber),
-          [{ controlId: mappedControlId, framework: fw }],
-          controlId
-        );
-      } finally {
-        setPerControlLoading(null);
-      }
-    },
-    [mappedControlLinkStatus, onBulkLinkMapped, controlId]
-  );
+  const handleLinkAllToControl = async (mappedControlId: string, fw: ISO) => {
+    const key = `${fw}:${mappedControlId}`;
+    const unlinked = mappedControlLinkStatus.get(key) ?? [];
+    if (unlinked.length === 0) return;
+    setPerControlLoading(key);
+    try {
+      await onBulkLinkMapped(
+        unlinked.map((t) => t.taskNumber),
+        [{ controlId: mappedControlId, framework: fw }],
+        controlId
+      );
+    } finally {
+      setPerControlLoading(null);
+    }
+  };
 
   /** Link a single task to a single mapped control */
-  const handleLinkOneTask = useCallback(
-    async (taskNumber: number, mappedControlId: string, fw: ISO) => {
-      const key = `${fw}:${mappedControlId}`;
-      setPerControlLoading(key);
-      try {
-        await onBulkLinkMapped(
-          [taskNumber],
-          [{ controlId: mappedControlId, framework: fw }],
-          controlId
-        );
-      } finally {
-        setPerControlLoading(null);
-      }
-    },
-    [onBulkLinkMapped, controlId]
-  );
+  const handleLinkOneTask = async (
+    taskNumber: number,
+    mappedControlId: string,
+    fw: ISO
+  ) => {
+    const key = `${fw}:${mappedControlId}`;
+    setPerControlLoading(key);
+    try {
+      await onBulkLinkMapped(
+        [taskNumber],
+        [{ controlId: mappedControlId, framework: fw }],
+        controlId
+      );
+    } finally {
+      setPerControlLoading(null);
+    }
+  };
 
   const isAnyLoading = bulkLoading || perControlLoading !== null;
 

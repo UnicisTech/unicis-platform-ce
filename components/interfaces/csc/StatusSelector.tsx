@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Select,
   SelectTrigger,
@@ -23,10 +23,6 @@ const StatusSelector = ({
 }) => {
   const [value, setValue] = useState<string>(statusValue);
   const { t } = useTranslation();
-
-  useEffect(() => {
-    setValue(statusValue);
-  }, [statusValue]);
 
   const handleChange = async (val: string) => {
     const prev = value;

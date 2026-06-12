@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback, useEffect } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
 import toast from 'react-hot-toast';
 import StatusHeader from './StatusHeader';
@@ -98,10 +98,6 @@ const StatusesTable = ({
     'link-tasks' | 'change-status'
   >('link-tasks');
   const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
-  const [controlsMissingTasks, setControlsMissingTasks] = useState<Set<string>>(
-    new Set()
-  );
-
   const toggleSelect = useCallback((id: string) => {
     setSelectedIds((prev) => {
       const next = new Set(prev);
@@ -195,21 +191,10 @@ const StatusesTable = ({
     };
   }, [selectedIds, tasks, cscControlsProp]);
 
-  // Update controlsMissingTasks when selection changes
-  useEffect(() => {
-    setControlsMissingTasks(missingTasksSet);
-  }, [missingTasksSet]);
-
-  // Auto-transition to step 2 when all controls have tasks
-  useEffect(() => {
-    if (
-      allSelectedHaveTasks &&
-      selectedIds.size > 0 &&
-      bulkActionStep === 'link-tasks'
-    ) {
-      setBulkActionStep('change-status');
-    }
-  }, [allSelectedHaveTasks, selectedIds, bulkActionStep]);
+  const activeBulkActionStep =
+    allSelectedHaveTasks && selectedIds.size > 0
+      ? 'change-status'
+      : bulkActionStep;
 
   const handleBulkStatusChange = useCallback(
     async (newStatus: string) => {
@@ -368,6 +353,7 @@ const StatusesTable = ({
                       {canAccess('task', ['update']) ? (
                         <div className="w-40">
                           <StatusSelector
+                            key={`${control.id}:${statuses[control.id]}`}
                             statusValue={statuses[control.id]}
                             control={control.id}
                             handler={statusHandler}
@@ -419,7 +405,7 @@ const StatusesTable = ({
       {selectedIds.size > 0 && (
         <BulkActionBar
           selectedCount={selectedIds.size}
-          step={bulkActionStep}
+          step={activeBulkActionStep}
           onLinkTasks={openBulkTaskLink}
           onStatusChange={handleBulkStatusChange}
           onClear={() => {
@@ -432,7 +418,7 @@ const StatusesTable = ({
             setStatusDropdownOpen(!statusDropdownOpen)
           }
           hasAllTasksAssigned={allSelectedHaveTasks}
-          showTaskLinkingStep={controlsMissingTasks.size > 0}
+          showTaskLinkingStep={missingTasksSet.size > 0}
         />
       )}
 
