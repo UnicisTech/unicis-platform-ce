@@ -130,6 +130,7 @@ export function KpiCard({
 // ── CSC inner pair (safe to call hooks since iso is guaranteed) ───────────────
 function CscKpiPair({ slug, iso }: { slug: string; iso: ISO }) {
   const { t } = useTranslation('common');
+  const router = useRouter();
   const { statuses } = useCscStatuses(slug, iso);
 
   const { complianceScore, gapCount } = useMemo(() => {
@@ -195,6 +196,7 @@ function CscKpiPair({ slug, iso }: { slug: string; iso: ISO }) {
         variant={scoreVariant}
         className="lg:col-span-2"
         hero
+        onClick={() => router.push(`/teams/${slug}/csc`)}
       />
 
       {/* Cybersecurity gaps card */}
@@ -208,6 +210,7 @@ function CscKpiPair({ slug, iso }: { slug: string; iso: ISO }) {
         }
         icon={<ShieldAlert size={12} />}
         variant={gapCount !== null && gapCount > 0 ? 'red' : 'green'}
+        onClick={() => router.push(`/teams/${slug}/csc`)}
       />
     </>
   );
@@ -216,6 +219,7 @@ function CscKpiPair({ slug, iso }: { slug: string; iso: ISO }) {
 // ── CSC wrapper — handles ISO loading ─────────────────────────────────────────
 function CscKpiCards({ slug, team }: { slug: string; team: Team }) {
   const { t } = useTranslation('common');
+  const router = useRouter();
   const { ISO: isoList } = useISO(team);
   const activeIso = isoList?.[0] ?? null;
 
@@ -229,12 +233,14 @@ function CscKpiCards({ slug, team }: { slug: string; team: Team }) {
           icon={<ShieldCheck size={12} />}
           className="lg:col-span-2"
           hero
+          onClick={() => router.push(`/teams/${slug}/csc`)}
         />
         <KpiCard
           label={t('dashboard.kpi.csc-gaps')}
           value="—"
           sub={t('dashboard.kpi.no-csc-data')}
           icon={<ShieldAlert size={12} />}
+          onClick={() => router.push(`/teams/${slug}/csc`)}
         />
       </>
     );
@@ -303,7 +309,7 @@ function IapKpiCard({ slug }: { slug: string }) {
       }
       icon={<BookOpen size={12} />}
       variant={variant}
-      onClick={() => router.push(`/teams/${slug}/iap/admin`)}
+      onClick={() => router.push(`/teams/${slug}/iap`)}
     />
   );
 }
