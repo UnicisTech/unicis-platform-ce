@@ -52,16 +52,15 @@ sbom_prod:
 
 deploy_dev:
   stage: deploy
-  image: node:18.18.2
+  image: node:18-bookworm
   before_script:
     - apt-get update && apt-get install -y openssh-client openssl
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - printf '%s' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - ssh-keygen -p -m PEM -P '' -N '' -f ~/.ssh/id_rsa >/dev/null 2>&1 || true
+    - printf '%s' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_ed25519
+    - chmod 600 ~/.ssh/id_ed25519
     - eval "$(ssh-agent -s)" >/dev/null
-    - ssh-add ~/.ssh/id_rsa
+    - ssh-add ~/.ssh/id_ed25519
     - ssh-keyscan -H "$(echo "$PLATFORM_DEV_IP" | sed 's/.*@//')" >> ~/.ssh/known_hosts 2>/dev/null || true
     - git fetch origin "$CI_COMMIT_REF_NAME" || git fetch --all
     - git checkout -B "$CI_COMMIT_REF_NAME" "origin/$CI_COMMIT_REF_NAME" || true
@@ -69,9 +68,10 @@ deploy_dev:
   script:
     - echo "PLATFORM_DEV_IP=$PLATFORM_DEV_IP"
     - echo "Deploying branch $CI_COMMIT_REF_NAME"
-    - ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -i ~/.ssh/id_rsa "$PLATFORM_DEV_IP" 'cd /root/retraced && docker compose stop'
+    - export SSH_AUTH_SOCK
+    - ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -o IdentitiesOnly=yes "$PLATFORM_DEV_IP" 'cd /root/retraced && docker compose stop'
     - caprover deploy --caproverUrl "$CAPROVER_DEV_URL" --caproverPassword "$CAPROVER_DEV_PASSWORD" --caproverApp "$CAPROVER_APP_NAME" --branch "$CI_COMMIT_REF_NAME"
-    - ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -i ~/.ssh/id_rsa "$PLATFORM_DEV_IP" 'cd /root/retraced && docker compose up -d'
+    - ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -o IdentitiesOnly=yes "$PLATFORM_DEV_IP" 'cd /root/retraced && docker compose up -d'
   only:
     - merge_requests
   except:
@@ -82,7 +82,7 @@ deploy_dev:
 
 deploy_prod:
   stage: deploy
-  image: node:18.18.2
+  image: node:18-bookworm
   before_script:
     - git fetch --tags --prune || true
     - npm install -g caprover
