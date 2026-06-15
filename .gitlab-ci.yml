@@ -67,9 +67,9 @@ deploy_dev:
   script:
     - echo "Deploying branch $CI_COMMIT_REF_NAME"
     - export SSH_AUTH_SOCK
-    - ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -o IdentitiesOnly=yes deploy_user@"$PLATFORM_DEV_IP" 'cd /root/retraced && docker compose stop'
+    - ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -o IdentitiesOnly=yes root@"$PLATFORM_DEV_IP" 'cd /root/retraced && docker compose stop'
     - caprover deploy --caproverUrl "$CAPROVER_DEV_URL" --caproverPassword "$CAPROVER_DEV_PASSWORD" --caproverApp "$CAPROVER_APP_NAME" --branch "$CI_COMMIT_REF_NAME"
-    - ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -o IdentitiesOnly=yes deploy_user@"$PLATFORM_DEV_IP" 'cd /root/retraced && docker compose up -d'
+    - ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -o IdentitiesOnly=yes root@"$PLATFORM_DEV_IP" 'cd /root/retraced && docker compose up -d'
   only:
     - merge_requests
   except:
