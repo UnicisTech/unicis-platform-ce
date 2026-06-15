@@ -53,12 +53,20 @@ deploy_dev:
   stage: deploy
   image: node:18.18.2
   before_script:
+    - apt-get update && apt-get install -y openssh-client
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H "${PLATFORM_DEV_IP#*@}" >> ~/.ssh/known_hosts 2>/dev/null || true
     - git fetch origin "$CI_COMMIT_REF_NAME" || git fetch --all
     - git checkout -B "$CI_COMMIT_REF_NAME" "origin/$CI_COMMIT_REF_NAME" || true
     - npm install -g caprover
   script:
+    - echo "PLATFORM_DEV_IP: $PLATFORM_DEV_IP"
     - echo "Deploying branch $CI_COMMIT_REF_NAME "
+    - ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -i ~/.ssh/id_rsa deploy_user@$PLATFORM_DEV_IP 'cd /root/retraced && docker compose stop'
     - caprover deploy --caproverUrl "$CAPROVER_DEV_URL" --caproverPassword "$CAPROVER_DEV_PASSWORD" --caproverApp "$CAPROVER_APP_NAME" --branch "$CI_COMMIT_REF_NAME"
+    - ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -i ~/.ssh/id_rsa deploy_user@$PLATFORM_DEV_IP 'cd /root/retraced && docker compose up -d'
   only:
     - merge_requests
   except:
