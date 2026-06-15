@@ -1,0 +1,92 @@
+stages:
+  - test
+  - sbom
+  - deploy
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: "/certs"
+  CAPROVER_APP_NAME: "platform"
+  CAPROVER_DEV_URL: "https://captain.dev.unicis.tech"
+  CAPROVER_PROD_URL: "https://captain.platform.unicis.tech"
+  GIT_DEPTH: 0
+
+test:
+  stage: test
+  image: node:18.18.2
+  script:
+    - echo 'test passed'
+  only:
+    - merge_requests
+  except:
+    - tags
+
+sbom_dev:
+  stage: sbom
+  image: node:18.18.2
+  script:
+    - npm install
+    - npm install -g @cyclonedx/cyclonedx-npm
+    - cyclonedx-npm --output-file sbom-dev.json
+  artifacts:
+    paths:
+      - sbom-dev.json
+  only:
+    - merge_requests
+  except:
+    - tags
+
+sbom_prod:
+  stage: sbom
+  image: node:18.18.2
+  script:
+    - npm install
+    - npm install -g @cyclonedx/cyclonedx-npm
+    - cyclonedx-npm --output-file sbom-prod.json
+  artifacts:
+    paths:
+      - sbom-prod.json
+  only:
+    - tags
+
+deploy_dev:
+  stage: deploy
+  image: node:18-bookworm
+  before_script:
+    - apt-get update && apt-get install -y openssh-client openssl
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+    - chmod 600 ~/.ssh/id_ed25519
+    - eval "$(ssh-agent -s)" >/dev/null
+    - ssh-add ~/.ssh/id_ed25519
+    - ssh-keyscan -H "$(echo "$PLATFORM_DEV_IP" | sed 's/.*@//')" >> ~/.ssh/known_hosts 2>/dev/null || true
+    - git fetch origin "$CI_COMMIT_REF_NAME" || git fetch --all
+    - git checkout -B "$CI_COMMIT_REF_NAME" "origin/$CI_COMMIT_REF_NAME" || true
+    - npm install -g caprover
+  script:
+    - echo "Deploying branch $CI_COMMIT_REF_NAME"
+    - export SSH_AUTH_SOCK
+    - ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -o IdentitiesOnly=yes root@"$PLATFORM_DEV_IP" 'cd /root/retraced && docker compose stop'
+    - caprover deploy --caproverUrl "$CAPROVER_DEV_URL" --caproverPassword "$CAPROVER_DEV_PASSWORD" --caproverApp "$CAPROVER_APP_NAME" --branch "$CI_COMMIT_REF_NAME"
+    - ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -o IdentitiesOnly=yes root@"$PLATFORM_DEV_IP" 'cd /root/retraced && docker compose up -d'
+  only:
+    - merge_requests
+  except:
+    - tags
+  environment:
+    name: development
+  when: manual
+
+deploy_prod:
+  stage: deploy
+  image: node:18-bookworm
+  before_script:
+    - git fetch --tags --prune || true
+    - npm install -g caprover
+  script:
+    - caprover deploy --caproverUrl "$CAPROVER_PROD_URL" --caproverPassword "$CAPROVER_PROD_PASSWORD" --caproverApp "$CAPROVER_APP_NAME" --branch main
+  only:
+    - tags
+  environment:
+    name: production
