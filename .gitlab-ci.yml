@@ -10,6 +10,7 @@ variables:
   CAPROVER_DEV_URL: "https://captain.dev.unicis.tech"
   CAPROVER_PROD_URL: "https://captain.platform.unicis.tech"
   GIT_DEPTH: 0
+  PLATFORM_DEV_IP: 
 
 test:
   stage: test
@@ -55,7 +56,7 @@ deploy_dev:
   before_script:
     - apt-get update && apt-get install -y openssh-client
     - mkdir -p ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - printf '%s' "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - ssh-keyscan -H "$(echo "$PLATFORM_DEV_IP" | sed 's/.*@//')" >> ~/.ssh/known_hosts 2>/dev/null || true
     - git fetch origin "$CI_COMMIT_REF_NAME" || git fetch --all
