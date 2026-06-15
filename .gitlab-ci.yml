@@ -56,8 +56,12 @@ deploy_dev:
   before_script:
     - apt-get update && apt-get install -y openssh-client
     - mkdir -p ~/.ssh
-    - printf '%s' "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 700 ~/.ssh
+    - printf '%s' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
+    - ssh-keygen -y -f ~/.ssh/id_rsa >/dev/null
+    - eval "$(ssh-agent -s)" >/dev/null
+    - ssh-add ~/.ssh/id_rsa
     - ssh-keyscan -H "$(echo "$PLATFORM_DEV_IP" | sed 's/.*@//')" >> ~/.ssh/known_hosts 2>/dev/null || true
     - git fetch origin "$CI_COMMIT_REF_NAME" || git fetch --all
     - git checkout -B "$CI_COMMIT_REF_NAME" "origin/$CI_COMMIT_REF_NAME" || true
