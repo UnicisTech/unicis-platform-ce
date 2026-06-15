@@ -13,7 +13,7 @@ variables:
 
 test:
   stage: test
-  image: node:18.18.2
+  image: node:22.14.0
   script:
     - echo 'test passed'
   only:
@@ -23,7 +23,7 @@ test:
 
 sbom_dev:
   stage: sbom
-  image: node:18.18.2
+  image: node:22.14.0
   script:
     - npm install
     - npm install -g @cyclonedx/cyclonedx-npm
@@ -38,7 +38,7 @@ sbom_dev:
 
 sbom_prod:
   stage: sbom
-  image: node:18.18.2
+  image: node:22.14.0
   script:
     - npm install
     - npm install -g @cyclonedx/cyclonedx-npm
@@ -51,7 +51,7 @@ sbom_prod:
 
 deploy_dev:
   stage: deploy
-  image: node:18-bookworm
+  image: node:22-bookworm
   before_script:
     - apt-get update && apt-get install -y openssh-client openssl
     - mkdir -p ~/.ssh
@@ -80,7 +80,7 @@ deploy_dev:
 
 deploy_prod:
   stage: deploy
-  image: node:18-bookworm
+  image: node:22-bookworm
   before_script:
     - git fetch --tags --prune || true
     - npm install -g caprover
