@@ -8,6 +8,7 @@ import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Badge } from '@/components/shadcn/ui/badge';
 import { Error, Loading, MemberName, StatusBadge } from '@/components/shared';
 import { Button } from '@/components/shadcn/ui/button';
+import { Pencil, Trash2 } from 'lucide-react';
 import useTeamMembersMap from 'hooks/useTeamMembersMap';
 
 const RpaTable = ({
@@ -44,25 +45,37 @@ const RpaTable = ({
   }
 
   return (
-    <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
+    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden [&_th]:whitespace-normal! [&_td]:whitespace-normal!">
       <div className="overflow-x-auto">
-        <table className="w-full min-w-full divide-y divide-border text-sm">
-          <thead className="bg-muted">
+        <table className="w-full min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-sm">
+          <thead className="bg-slate-50 dark:bg-slate-900">
             <tr>
-              <th className="px-1.5 py-1.5 text-left">{t('rpa')}</th>
-              <th className="px-1.5 py-1.5 text-left">{t('status')}</th>
-              <th className="px-1.5 py-1.5 text-left">{t('rpa-dpo')}</th>
-              <th className="px-1.5 py-1.5 text-left">{t('rpa-review')}</th>
-              <th className="px-1.5 py-1.5 text-left">
+              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                {t('rpa')}
+              </th>
+              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                {t('status')}
+              </th>
+              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                {t('rpa-dpo')}
+              </th>
+              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                {t('rpa-review')}
+              </th>
+              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
                 {t('rpa-data-tranfer')}
               </th>
-              <th className="px-1.5 py-1.5 text-left">{t('rpa-category')}</th>
+              <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                {t('rpa-category')}
+              </th>
               {canAccess('task', ['update']) && (
-                <th className="px-1.5 py-1.5 text-left">{t('actions')}</th>
+                <th className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                  {t('actions')}
+                </th>
               )}
             </tr>
           </thead>
-          <tbody className="divide-y divide-border">
+          <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
             {pageData.map((task) => (
               <tr key={task.id}>
                 <td className="px-1.5 py-1.5">
@@ -117,17 +130,19 @@ const RpaTable = ({
                     <div className="flex gap-2">
                       <Button
                         variant="outline"
-                        size="sm"
+                        size="icon"
                         onClick={() => editHandler(task)}
+                        aria-label={t('edit-task')}
                       >
-                        {t('edit-task')}
+                        <Pencil className="h-4 w-4" aria-hidden="true" />
                       </Button>
                       <Button
                         variant="destructive"
-                        size="sm"
+                        size="icon"
                         onClick={() => deleteHandler(task)}
+                        aria-label={t('delete')}
                       >
-                        {t('delete')}
+                        <Trash2 className="h-4 w-4" aria-hidden="true" />
                       </Button>
                     </div>
                   </td>

@@ -3,6 +3,7 @@ import UploadAvatar from './UploadAvatar';
 import UpdateName from './UpdateName';
 import UpdateEmail from './UpdateEmail';
 import UpdateTheme from './UpdateTheme';
+import UpdateLanguage from './UpdateLanguage';
 import env from '@/lib/env';
 
 interface UpdateAccountProps {
@@ -17,6 +18,7 @@ const UpdateAccount = ({ user, allowEmailChange }: UpdateAccountProps) => {
       <UpdateEmail user={user} allowEmailChange={allowEmailChange} />
       <UploadAvatar user={user} />
       {env.darkModeEnabled && <UpdateTheme />}
+      <UpdateLanguage />
     </div>
   );
 };

@@ -1,15 +1,35 @@
-import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import { ISO } from 'types';
 import { cscNavigations } from '@/lib/csc';
 import { isoValueToLabel } from '@/lib/csc/csc-frameworks';
+import { cn } from '@/components/shadcn/lib/utils';
 import { Dispatch, SetStateAction } from 'react';
+import { Lock } from 'lucide-react';
 
 /** Sentinel value used to identify the Mapping Matrix tab */
 export const MAPPING_MATRIX_TAB = '__mapping_matrix__' as const;
 export type ActiveCscTab = ISO | typeof MAPPING_MATRIX_TAB;
 
-// TODO: remove MAPPING_MATRIX into separated logic?
+// ── Grid icon (inline SVG, keeps no extra dependency) ─────────────────────────
+function GridIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={cn('flex-shrink-0', className)}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M3 10h18M3 14h18M10 3v18M14 3v18"
+      />
+    </svg>
+  );
+}
+
 const CscTabs = ({
   frameworks,
   activeTab,
@@ -29,57 +49,70 @@ const CscTabs = ({
     frameworks
   );
 
+  const matrixUnlocked = frameworks.length >= 2;
+
   return (
-    <div className="mb-5">
-      <nav
-        className="-mb-px flex space-x-5 border-b border-gray-300 overflow-x-auto"
-        aria-label="Tabs"
-      >
-        {/* Framework tabs */}
-        {navigations.map((menu, index) => (
-          <a
+    <div
+      className="flex gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-[3px] mb-4 flex-wrap"
+      role="tablist"
+    >
+      {/* ── Mapping Matrix tab — always visible (first position) ── */}
+      {showMatrixMapping && (
+        <button
+          id="csc-tab-matrix"
+          role="tab"
+          aria-selected={activeTab === MAPPING_MATRIX_TAB && matrixUnlocked}
+          aria-controls="csc-tab-panel"
+          disabled={!matrixUnlocked}
+          onClick={() => matrixUnlocked && setActiveTab(MAPPING_MATRIX_TAB)}
+          title={
+            matrixUnlocked
+              ? undefined
+              : t(
+                  'csc-mapping.tabs.matrix-locked',
+                  'Enable 2+ frameworks to unlock the Mapping Matrix'
+                )
+          }
+          className={cn(
+            'flex items-center gap-1.5 px-3 py-[6px] text-[12px] font-medium rounded-md transition-all whitespace-nowrap',
+            activeTab === MAPPING_MATRIX_TAB && matrixUnlocked
+              ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 shadow-xs'
+              : matrixUnlocked
+                ? 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 bg-transparent border border-transparent'
+                : 'text-slate-400 cursor-not-allowed bg-transparent border border-transparent'
+          )}
+        >
+          {matrixUnlocked ? (
+            <GridIcon className="w-3.5 h-3.5" />
+          ) : (
+            <Lock size={12} aria-hidden />
+          )}
+          {t('csc-mapping.tabs.matrix', 'Mapping Matrix')}
+        </button>
+      )}
+
+      {/* ── Framework tabs ── */}
+      {navigations.map((menu, index) => {
+        const isActive = menu.active && activeTab !== MAPPING_MATRIX_TAB;
+        return (
+          <button
             key={index}
-            className={classNames(
-              'inline-flex items-center border-b-2 py-4 text-sm font-medium cursor-pointer whitespace-nowrap',
-              menu.active && activeTab !== MAPPING_MATRIX_TAB
-                ? 'border-gray-900 text-gray-700 dark:text-gray-200'
-                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-            )}
+            id={`csc-tab-${menu.name}`}
+            role="tab"
+            aria-selected={isActive}
+            aria-controls="csc-tab-panel"
             onClick={() => setActiveTab(menu.name as ISO)}
+            className={cn(
+              'px-3 py-[6px] text-[12px] font-medium rounded-md transition-all whitespace-nowrap',
+              isActive
+                ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 shadow-xs'
+                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 bg-transparent border border-transparent'
+            )}
           >
             {isoValueToLabel(menu.name as ISO)}
-          </a>
-        ))}
-
-        {/* Mapping Matrix tab — only shown when 2+ frameworks are enabled */}
-        {showMatrixMapping && frameworks.length >= 2 && (
-          <a
-            className={classNames(
-              'inline-flex items-center gap-1.5 border-b-2 py-4 text-sm font-medium cursor-pointer whitespace-nowrap',
-              activeTab === MAPPING_MATRIX_TAB
-                ? 'border-primary text-primary'
-                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-            )}
-            onClick={() => setActiveTab(MAPPING_MATRIX_TAB)}
-          >
-            <svg
-              className="w-4 h-4 flex-shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 10h18M3 14h18M10 3v18M14 3v18"
-              />
-            </svg>
-            {t('csc-mapping.tabs.matrix', 'Mapping Matrix')}
-          </a>
-        )}
-      </nav>
+          </button>
+        );
+      })}
     </div>
   );
 };

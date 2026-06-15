@@ -1,0 +1,47 @@
+{
+  "fields": {
+    "Risk": "Rischio",
+    "AssetOwner": "Proprietario dell'asset",
+    "Impact": "Impatto",
+    "RawProbability": "Probabilità grezza",
+    "RawImpact": "Impatto grezzo",
+    "RiskTreatment": "Trattamento del rischio",
+    "TreatmentCost": "Costo del trattamento",
+    "TreatmentStatus": "Stato del trattamento",
+    "TreatedProbability": "Probabilità trattata",
+    "TreatedImpact": "Impatto trattato"
+  },
+  "headers": {
+    "raw-risk-rating": "Valutazione del rischio grezzo",
+    "treatment": "Trattamento",
+    "target-risk-rating": "Valutazione del rischio target",
+    "current-risk-rating": "Valutazione del rischio attuale"
+  },
+  "steps": {
+    "riskAndImpact": "Rischio e impatto",
+    "riskTreatment": "Trattamento del rischio"
+  },
+  "descriptions": {
+    "risk": "Descrivi brevemente il rischio per la sicurezza delle informazioni in modo che le persone capiscano quale rischio stai valutando.",
+    "assetOwner": "Chi è il Proprietario dell'Asset Informativo, la persona responsabile in caso di trattamenti inadeguati, incidenti e impatti negativi sull'organizzazione? Questa persona deve valutare e trattare i rischi in modo adeguato.",
+    "impact": "Descrivi i potenziali impatti in termini aziendali se il rischio si concretizza. Decidi se usare impatti nel \"caso peggiore\" o \"previsti\" in modo coerente.",
+    "rawProbability": "Inserisci la probabilità che il rischio si verifichi senza trattamento, come valore percentuale.",
+    "rawImpact": "Inserisci il potenziale impatto aziendale se il rischio si verificasse senza alcun trattamento, come valore percentuale.",
+    "riskTreatment": "Descrivi come verrà trattato il rischio (ad es. controllato, evitato, trasferito o accettato).",
+    "treatmentStatus": "In che misura è in atto il trattamento pianificato? 0% significa che esiste solo un piano; 100% significa che il trattamento è pienamente operativo.",
+    "treatedProbability": "Inserisci la probabilità che il rischio si verifichi dopo la mitigazione.",
+    "treatedImpact": "Inserisci il probabile impatto dopo la mitigazione. Gli incidenti dovuti a guasti nei controlli possono avere impatti maggiori. Evidenzia i valori trattati in grassetto se differiscono dai valori grezzi."
+  },
+  "placeholders": {
+    "riskDescription": "Inserisci la descrizione del rischio",
+    "assetOwner": "Seleziona un proprietario",
+    "impactDescription": "Inserisci la descrizione dell'impatto",
+    "treatmentApproach": "Descrivi l'approccio al trattamento",
+    "costEstimate": "Inserisci la stima del costo"
+  },
+  "form-labels": {
+    "TreatmentStatus": "Stato del trattamento (%)",
+    "TreatedProbability": "Probabilità trattata (%)",
+    "RawProbability": "Probabilità grezza (%)"
+  }
+}

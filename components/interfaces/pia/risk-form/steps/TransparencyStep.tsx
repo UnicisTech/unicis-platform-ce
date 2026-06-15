@@ -21,7 +21,7 @@ const TransparencyStep = ({
   initial?: PiaRisk[3];
   control: Control<TransparencyStepValues>;
 }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'pia']);
 
   return (
     <>

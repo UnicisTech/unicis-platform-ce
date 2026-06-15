@@ -95,7 +95,7 @@ const AttachmentsCard = ({
     []
   );
 
-  const cardBg = isDark ? 'bg-gray-700' : 'bg-white';
+  const cardBg = isDark ? 'bg-gray-700' : 'bg-white dark:bg-slate-800';
   const borderColor = isDark ? 'border-gray-500' : 'border-gray-200';
   const textColor = isDark ? 'text-white' : 'text-black';
 

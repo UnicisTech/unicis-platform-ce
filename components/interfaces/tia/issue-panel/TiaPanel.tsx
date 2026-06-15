@@ -22,12 +22,20 @@ const TransferScenarioTab: React.FC<{ step: TiaProcedureInterface[0] }> = ({
       <Field label={t(`tia:fields.DataExporter`)} value={step.DataExporter} />
       <Field
         label={t(`tia:fields.CountryDataExporter`)}
-        value={step.CountryDataExporter}
+        value={
+          step.CountryDataExporter
+            ? t(`country.${step.CountryDataExporter}`)
+            : '—'
+        }
       />
       <Field label={t(`tia:fields.DataImporter`)} value={step.DataImporter} />
       <Field
         label={t(`tia:fields.CountryDataImporter`)}
-        value={step.CountryDataImporter}
+        value={
+          step.CountryDataImporter
+            ? t(`country.${step.CountryDataImporter}`)
+            : '—'
+        }
       />
       <Field
         label={t(`tia:fields.TransferScenario`)}
@@ -48,7 +56,11 @@ const TransferScenarioTab: React.FC<{ step: TiaProcedureInterface[0] }> = ({
       />
       <Field
         label={t(`tia:fields.LawImporterCountry`)}
-        value={step.LawImporterCountry}
+        value={
+          step.LawImporterCountry
+            ? t(`country.${step.LawImporterCountry}`)
+            : '—'
+        }
       />
     </div>
   );
@@ -256,7 +268,10 @@ const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({
             {steps.map((step, idx) => (
               <button
                 key={idx}
+                id={`tia-tab-${idx}`}
                 role="tab"
+                aria-selected={selectedTab === idx}
+                aria-controls="tia-tab-panel"
                 className={`tab ${selectedTab === idx ? 'tab-active' : ''}`}
                 onClick={() => setSelectedTab(idx)}
               >
@@ -264,7 +279,14 @@ const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({
               </button>
             ))}
           </div>
-          <div className="mt-4">{tabs[selectedTab]}</div>
+          <div
+            id="tia-tab-panel"
+            role="tabpanel"
+            aria-labelledby={`tia-tab-${selectedTab}`}
+            className="mt-4"
+          >
+            {tabs[selectedTab]}
+          </div>
         </>
       ) : (
         <div className="mt-2">

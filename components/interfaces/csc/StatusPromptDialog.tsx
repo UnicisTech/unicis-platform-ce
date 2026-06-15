@@ -73,7 +73,9 @@ export default function StatusPromptDialog({
             <Badge variant="secondary" className="font-mono font-bold">
               {controlCode}
             </Badge>{' '}
-            <span className="text-foreground/80">{controlTitle}</span>
+            <span className="text-slate-700 dark:text-slate-200">
+              {controlTitle}
+            </span>
           </DialogDescription>
         </DialogHeader>
 
@@ -90,8 +92,8 @@ export default function StatusPromptDialog({
                 'flex items-start gap-3 rounded-lg border p-2.5 transition-colors',
                 loading ? 'cursor-not-allowed opacity-70' : 'cursor-pointer',
                 selected === status
-                  ? 'border-primary bg-primary/5'
-                  : 'border-border hover:border-foreground/30 hover:bg-muted/60'
+                  ? 'border-blue-500 dark:border-blue-400 bg-blue-50 dark:bg-blue-950/40'
+                  : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50'
               )}
             >
               <RadioGroupItem
@@ -105,7 +107,8 @@ export default function StatusPromptDialog({
                   <span
                     className={cn(
                       'inline-block h-3 w-3 rounded-full shrink-0',
-                      CSC_STATUS_TO_CSS[status] || 'bg-muted'
+                      CSC_STATUS_TO_CSS[status] ||
+                        'bg-slate-200 dark:bg-slate-700'
                     )}
                     aria-hidden="true"
                   />
@@ -113,7 +116,7 @@ export default function StatusPromptDialog({
                     {t(`statuses.${status}.label`)}
                   </span>
                 </div>
-                <p className="text-xs text-muted-foreground mt-0.5 leading-snug">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
                   {t(`statuses.${status}.description`)}
                 </p>
               </div>

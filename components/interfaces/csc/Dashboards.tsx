@@ -7,12 +7,10 @@ import { Loading } from '@/components/shared';
 import CscPanel from './CscPanel';
 import MappingMatrixPanel from './MappingMatrixPanel';
 import useTeamTasks from 'hooks/useTeamTasks';
-import { useTranslation } from 'next-i18next';
 
 const Dashboard = ({ team, iso }: { team: Team; iso: ISO[] }) => {
   const [activeTab, setActiveTab] = useState<ActiveCscTab>(iso[0]);
   const { tasks, mutateTasks } = useTeamTasks(team.slug);
-  const { t } = useTranslation(['common', 'test', 'csc/2013']);
 
   if (!tasks) {
     return <Loading />;
@@ -20,31 +18,37 @@ const Dashboard = ({ team, iso }: { team: Team; iso: ISO[] }) => {
 
   return (
     <>
-      <h2 className="text-xl font-medium leading-none tracking-tight">
-        {`${t('csc-dashboard')}: ${team.name}`}
-      </h2>
-
       <CscTabs
         frameworks={iso}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
 
-      {activeTab === MAPPING_MATRIX_TAB ? (
-        /* ── Mapping Matrix + Coverage Analysis tab ── */
-        <MappingMatrixPanel enabledFrameworks={iso} />
-      ) : (
-        /* ── Standard framework control panel ── */
-        <CscPanel
-          key={activeTab}
-          slug={team.slug}
-          teamName={team.name}
-          iso={activeTab as ISO}
-          tasks={tasks}
-          mutateTasks={mutateTasks}
-          enabledFrameworks={iso}
-        />
-      )}
+      <div
+        id="csc-tab-panel"
+        role="tabpanel"
+        aria-labelledby={
+          activeTab === MAPPING_MATRIX_TAB
+            ? 'csc-tab-matrix'
+            : `csc-tab-${activeTab}`
+        }
+      >
+        {activeTab === MAPPING_MATRIX_TAB ? (
+          /* ── Mapping Matrix + Coverage Analysis tab ── */
+          <MappingMatrixPanel enabledFrameworks={iso} />
+        ) : (
+          /* ── Standard framework control panel ── */
+          <CscPanel
+            key={activeTab}
+            slug={team.slug}
+            teamName={team.name}
+            iso={activeTab as ISO}
+            tasks={tasks}
+            mutateTasks={mutateTasks}
+            enabledFrameworks={iso}
+          />
+        )}
+      </div>
     </>
   );
 };

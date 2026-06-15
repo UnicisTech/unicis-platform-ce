@@ -6,14 +6,6 @@ import type { User } from 'types';
 import type { ApiResponse, UserReturned } from 'types';
 import { defaultHeaders } from '@/lib/common';
 
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from '@/components/shadcn/ui/card';
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 
@@ -74,22 +66,23 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
     if (!res.ok) toast.error(json.error.message);
     else {
       toast.success(t('successfully-updated'));
-      setHasChanged(false); // reset after saving
+      setHasChanged(false);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('avatar')}</CardTitle>
-          <CardDescription>
-            {t('custom-avatar')}
-            <br />
-            {t('avatar-type')}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+        <div className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+          <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
+            {t('avatar')}
+          </span>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            {t('custom-avatar')} {t('avatar-type')}
+          </p>
+        </div>
+
+        <div className="p-4">
           <div className="relative inline-block">
             <div
               onDragOver={(e) => {
@@ -103,8 +96,8 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
               onDrop={onDrop}
               className={`
                 group relative flex h-24 w-24 cursor-pointer items-center justify-center
-                overflow-hidden rounded-full border border-border bg-background
-                transition hover:bg-muted`}
+                overflow-hidden rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800
+                transition hover:bg-slate-50 dark:hover:bg-slate-700/50`}
             >
               <input
                 type="file"
@@ -121,22 +114,23 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
               )}
               <div
                 className={`
-                  absolute inset-0 flex items-center justify-center bg-background/50 
-                  transition-opacity ${dragActive ? 'opacity-100' : 'opacity-0'} 
+                  absolute inset-0 flex items-center justify-center bg-white/60
+                  transition-opacity ${dragActive ? 'opacity-100' : 'opacity-0'}
                   group-hover:opacity-100`}
               >
-                <ArrowUpCircleIcon className="h-10 w-10 text-muted-foreground" />
+                <ArrowUpCircleIcon className="h-10 w-10 text-slate-400" />
               </div>
             </div>
           </div>
-        </CardContent>
-        <CardFooter className="flex justify-end">
+        </div>
+
+        <div className="border-t border-slate-200 dark:border-slate-700 px-4 py-3 flex justify-end">
           <Button type="submit" disabled={!hasChanged}>
             {loading && <Loader2 className="animate-spin" />}
             {t('save-changes')}
           </Button>
-        </CardFooter>
-      </Card>
+        </div>
+      </div>
     </form>
   );
 };

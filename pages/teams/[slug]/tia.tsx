@@ -4,7 +4,8 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import toast from 'react-hot-toast';
-import { Loading, Error, EmptyState } from '@/components/shared';
+import { Loading, Error } from '@/components/shared';
+import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
 import type { InferGetServerSidePropsType } from 'next';
 import useTeam from 'hooks/useTeam';
 import { GetServerSidePropsContext } from 'next';
@@ -155,13 +156,18 @@ const TiaDashboard: NextPageWithLayout<
 
   return (
     <>
-      <div className="flex justify-between items-center">
-        <div className="space-y-3">
-          <h2 className="text-xl font-medium leading-none tracking-tight">
-            {t('tia-dashboard')}
-          </h2>
+      <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
+        <div className="flex items-center gap-2">
+          <h1 className="text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+            {t('tia')}
+          </h1>
+          {tasksWithProcedures.length > 0 && (
+            <span className="text-[11px] text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
+              {tasksWithProcedures.length}
+            </span>
+          )}
         </div>
-        <div className="flex justify-end items-center gap-2 my-1 flex-wrap">
+        <div className="flex items-center gap-2 flex-wrap">
           {tasksWithProcedures.length > 0 && (
             <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
           )}
@@ -199,7 +205,7 @@ const TiaDashboard: NextPageWithLayout<
           )}
           {canAccess('task', ['update']) && (
             <Button
-              color="primary"
+              variant="default"
               onClick={() => {
                 setIsCreateOpen(true);
               }}
@@ -208,6 +214,7 @@ const TiaDashboard: NextPageWithLayout<
             </Button>
           )}
         </div>
+        {/* end toolbar */}
       </div>
       <>
         {isCreateOpen && (
@@ -220,12 +227,23 @@ const TiaDashboard: NextPageWithLayout<
         )}
       </>
       {tasksWithProcedures.length === 0 ? (
-        <EmptyState title={t('tia-dashboard')} description={t('no-records')} />
+        <ModuleEmptyState
+          icon="/unicis-tia-logo.png"
+          title={t('empty-state.tia.title')}
+          description={t('empty-state.tia.description')}
+          regulatoryContext={t('empty-state.tia.context')}
+          ctaLabel={
+            canAccess('task', ['update']) ? t('empty-state.tia.cta') : undefined
+          }
+          onCta={
+            canAccess('task', ['update'])
+              ? () => setIsCreateOpen(true)
+              : undefined
+          }
+        />
       ) : (
         <>
-          <div className="m-2">
-            <TeamAssessmentAnalysis slug={slug as string} />
-          </div>
+          <TeamAssessmentAnalysis slug={slug as string} />
           <TiaTable
             slug={slug as string}
             tasks={tasksWithProcedures}

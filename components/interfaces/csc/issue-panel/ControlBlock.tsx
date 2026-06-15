@@ -116,6 +116,7 @@ const ControlBlock = ({
             size="icon"
             className="shrink-0"
             disabled={isSaving}
+            aria-label={t('delete')}
             onClick={async () => {
               setIsButtonLoading(true);
               await onDeleteControl(control);
@@ -123,9 +124,9 @@ const ControlBlock = ({
             }}
           >
             {isButtonLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
+              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
             ) : (
-              <Trash2 className="h-4 w-4" />
+              <Trash2 className="h-4 w-4" aria-hidden="true" />
             )}
           </Button>
         </div>
@@ -160,7 +161,7 @@ const ControlBlock = ({
           </div>
         </>
       )}
-      <div className="h-px w-full bg-muted my-6" />
+      <div className="h-px w-full bg-slate-200 dark:bg-slate-700 my-6" />
     </div>
   );
 };

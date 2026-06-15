@@ -21,7 +21,7 @@ const AvailabilityStep = ({
   initial?: PiaRisk[2];
   control: Control<AvailabilityStepValues>;
 }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'pia']);
 
   return (
     <>

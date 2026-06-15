@@ -77,7 +77,7 @@ const Signup: NextPageWithLayout<
         {t('already-have-an-account')}
         <Link
           href={`/auth/login/${params}`}
-          className="font-medium text-primary hover:text-primary-focus"
+          className="font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:text-blue-300"
         >
           &nbsp;{t('sign-in')}
         </Link>

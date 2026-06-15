@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
@@ -11,11 +12,12 @@ const StatusResultsChart = ({
   passed: number;
   failed: number;
 }) => {
+  const { t } = useTranslation('common');
   const data = {
-    labels: ['Passed', 'Failed'],
+    labels: [t('passed'), t('failed')],
     datasets: [
       {
-        label: 'Answers',
+        label: t('controls'),
         data: [passed, failed],
         backgroundColor: ['rgba(0, 135, 90, 0.7)', 'rgba(222, 53, 11, 0.7)'],
         borderColor: ['rgba(0, 135, 90, 0.2)', 'rgba(222, 53, 11, 0.2)'],
@@ -31,7 +33,7 @@ const StatusResultsChart = ({
       },
       title: {
         display: true,
-        text: 'Controls',
+        text: t('controls'),
       },
     },
     maintainAspectRatio: false,

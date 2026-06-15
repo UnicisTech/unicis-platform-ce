@@ -44,7 +44,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import { useTranslation } from 'next-i18next';
-import { FormEvent, ReactNode, useEffect, useMemo, useState } from 'react';
+import { FormEvent, ReactNode, useMemo, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import useSWR from 'swr';
 import type { Team } from 'types';
@@ -281,6 +281,17 @@ const oidcValuesFromConnection = (
   };
 };
 
+const formValuesKey = (values: SAMLFormValues | OIDCFormValues) => {
+  const serialized = JSON.stringify(values);
+  let hash = 0;
+
+  for (let i = 0; i < serialized.length; i++) {
+    hash = (hash * 31 + serialized.charCodeAt(i)) % 1000000007;
+  }
+
+  return `${serialized.length}:${hash}`;
+};
+
 export default function SSOConnections({
   team,
   spMetadataUrl,
@@ -381,135 +392,162 @@ export default function SSOConnections({
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <div className="space-y-2">
-          <h2 className="text-xl font-medium leading-none tracking-tight">
-            {t('sso.manage-title')}
-          </h2>
-          <p className="text-sm text-muted-foreground">
-            {t('sso.manage-description')}
-          </p>
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+        {/* Direction B panel header */}
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+          <div>
+            <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
+              {t('sso.manage-title')}
+            </span>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              {t('sso.manage-description')}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Button asChild variant="outline" size="sm">
+              <a href={spMetadataUrl} target="_blank" rel="noreferrer">
+                <ExternalLink className="h-4 w-4" />
+                {t('sso.access-sp-metadata')}
+              </a>
+            </Button>
+            <Button
+              size="sm"
+              onClick={() =>
+                setConnectionDialog({ mode: 'create', kind: 'saml' })
+              }
+            >
+              <Plus className="h-4 w-4" />
+              {t('sso.new-connection')}
+            </Button>
+          </div>
         </div>
-        <div className="flex flex-col gap-2 sm:flex-row">
-          <Button asChild variant="outline">
-            <a href={spMetadataUrl} target="_blank" rel="noreferrer">
-              <ExternalLink className="h-4 w-4" />
-              {t('sso.access-sp-metadata')}
-            </a>
-          </Button>
-          <Button
-            onClick={() =>
-              setConnectionDialog({ mode: 'create', kind: 'saml' })
-            }
-          >
-            <Plus className="h-4 w-4" />
-            {t('sso.new-connection')}
-          </Button>
+
+        {/* Content */}
+        <div className="p-4">
+          {isLoading ? (
+            <Loading />
+          ) : error ? (
+            <p className="rounded-md border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive">
+              {error.message}
+            </p>
+          ) : sortedConnections.length === 0 ? (
+            <EmptyState
+              title={t('sso.no-connections-title')}
+              description={t('sso.no-connections-description')}
+            />
+          ) : (
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-900">
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                      {t('sso.provider')}
+                    </TableHead>
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                      {t('sso.type')}
+                    </TableHead>
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                      {t('status')}
+                    </TableHead>
+                    <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">
+                      {t('actions')}
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {sortedConnections.map((connection) => (
+                    <TableRow
+                      key={connection.clientID}
+                      className="border-slate-100 dark:border-slate-700"
+                    >
+                      <TableCell className="px-4 py-3">
+                        <div className="space-y-1">
+                          <div className="text-sm font-medium text-slate-900 dark:text-slate-100">
+                            {providerName(
+                              connection,
+                              t('sso.unknown-provider')
+                            )}
+                          </div>
+                          {(connection.name || connection.label) && (
+                            <div className="text-xs text-slate-500 dark:text-slate-400">
+                              {connection.name || connection.label}
+                            </div>
+                          )}
+                        </div>
+                      </TableCell>
+                      <TableCell className="px-4 py-3">
+                        <Badge variant="outline">
+                          {connectionType(connection) === 'saml'
+                            ? t('sso.saml')
+                            : t('sso.oidc')}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="px-4 py-3">
+                        <Badge
+                          variant={
+                            connection.deactivated ? 'secondary' : 'default'
+                          }
+                        >
+                          {connection.deactivated ? t('inactive') : t('active')}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="px-4 py-3 text-right">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              aria-label={t('actions')}
+                            >
+                              <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem
+                              onSelect={() =>
+                                setConnectionDialog({
+                                  mode: 'edit',
+                                  kind: connectionType(connection),
+                                  connection,
+                                })
+                              }
+                            >
+                              <Pencil className="h-4 w-4" />
+                              {t('edit')}
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onSelect={() => setMetadataConnection(connection)}
+                            >
+                              <Eye className="h-4 w-4" />
+                              {t('sso.view-metadata')}
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onSelect={() => setStatusConnection(connection)}
+                            >
+                              <Power className="h-4 w-4" />
+                              {connection.deactivated
+                                ? t('enable')
+                                : t('disable')}
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem
+                              variant="destructive"
+                              onSelect={() => setDeleteConnection(connection)}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                              {t('delete')}
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          )}
         </div>
       </div>
-
-      {isLoading ? (
-        <Loading />
-      ) : error ? (
-        <p className="rounded-md border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive">
-          {error.message}
-        </p>
-      ) : sortedConnections.length === 0 ? (
-        <EmptyState
-          title={t('sso.no-connections-title')}
-          description={t('sso.no-connections-description')}
-        />
-      ) : (
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>{t('sso.provider')}</TableHead>
-              <TableHead>{t('sso.type')}</TableHead>
-              <TableHead>{t('status')}</TableHead>
-              <TableHead className="text-right">{t('actions')}</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {sortedConnections.map((connection) => (
-              <TableRow key={connection.clientID}>
-                <TableCell>
-                  <div className="space-y-1">
-                    <div className="font-medium text-foreground">
-                      {providerName(connection, t('sso.unknown-provider'))}
-                    </div>
-                    {(connection.name || connection.label) && (
-                      <div className="text-xs text-muted-foreground">
-                        {connection.name || connection.label}
-                      </div>
-                    )}
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <Badge variant="outline">
-                    {connectionType(connection) === 'saml'
-                      ? t('sso.saml')
-                      : t('sso.oidc')}
-                  </Badge>
-                </TableCell>
-                <TableCell>
-                  <Badge
-                    variant={connection.deactivated ? 'secondary' : 'default'}
-                  >
-                    {connection.deactivated ? t('inactive') : t('active')}
-                  </Badge>
-                </TableCell>
-                <TableCell className="text-right">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        aria-label={t('actions')}
-                      >
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem
-                        onSelect={() =>
-                          setConnectionDialog({
-                            mode: 'edit',
-                            kind: connectionType(connection),
-                            connection,
-                          })
-                        }
-                      >
-                        <Pencil className="h-4 w-4" />
-                        {t('edit')}
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onSelect={() => setMetadataConnection(connection)}
-                      >
-                        <Eye className="h-4 w-4" />
-                        {t('sso.view-metadata')}
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onSelect={() => setStatusConnection(connection)}
-                      >
-                        <Power className="h-4 w-4" />
-                        {connection.deactivated ? t('enable') : t('disable')}
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem
-                        variant="destructive"
-                        onSelect={() => setDeleteConnection(connection)}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                        {t('delete')}
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      )}
 
       {connectionDialog && (
         <ConnectionDialog
@@ -627,7 +665,6 @@ function ConnectionDialog({
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setConnectionKind(kind);
   }, [kind]);
-
   const title = mode === 'create' ? t('sso.create-title') : t('sso.edit-title');
 
   const description =
@@ -762,6 +799,7 @@ function ConnectionDialog({
           <Loading />
         ) : connectionKind === 'saml' ? (
           <SAMLConnectionForm
+            key={formValuesKey(samlInitialValues)}
             initialValues={samlInitialValues}
             mode={mode}
             isSubmitting={isSubmitting}
@@ -771,6 +809,7 @@ function ConnectionDialog({
           />
         ) : (
           <OIDCConnectionForm
+            key={formValuesKey(oidcInitialValues)}
             initialValues={oidcInitialValues}
             mode={mode}
             isSubmitting={isSubmitting}
@@ -805,7 +844,6 @@ function SAMLConnectionForm({
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setValues(initialValues);
   }, [initialValues]);
-
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit(values);
@@ -815,7 +853,7 @@ function SAMLConnectionForm({
     <form className="space-y-5" onSubmit={handleSubmit}>
       <FormSectionTitle>{t('sso.saml-provider-metadata')}</FormSectionTitle>
       {mode === 'edit' && hasExistingMetadata && (
-        <p className="rounded-md border bg-muted/40 p-3 text-sm text-muted-foreground">
+        <p className="rounded-md border bg-slate-100/60 dark:bg-slate-700/60 p-3 text-sm text-slate-500 dark:text-slate-400">
           {t('sso.raw-idp-xml-edit-note')}
         </p>
       )}
@@ -922,7 +960,6 @@ function OIDCConnectionForm({
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setValues(initialValues);
   }, [initialValues]);
-
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit(values);
@@ -1235,7 +1272,7 @@ function RedirectUrlsField<T extends BaseFormValues>({
           </div>
         ))}
       </div>
-      <p className="text-xs text-muted-foreground">
+      <p className="text-xs text-slate-500 dark:text-slate-400">
         {t('sso.allowed-redirect-urls-description')}
       </p>
     </div>
@@ -1293,7 +1330,7 @@ function MetadataDialog({
                 />
               </div>
             )}
-            <pre className="max-h-[55vh] overflow-auto rounded-md border bg-muted/40 p-4 text-xs text-foreground">
+            <pre className="max-h-[55vh] overflow-auto rounded-md border bg-slate-100/60 dark:bg-slate-700/60 p-4 text-xs text-slate-900 dark:text-slate-100">
               {metadataText}
             </pre>
             <DialogFooter>
@@ -1402,7 +1439,9 @@ function Field({
       </Label>
       {children}
       {description && (
-        <p className="text-xs leading-5 text-muted-foreground">{description}</p>
+        <p className="text-xs leading-5 text-slate-500 dark:text-slate-400">
+          {description}
+        </p>
       )}
     </div>
   );
@@ -1410,7 +1449,7 @@ function Field({
 
 function FormSectionTitle({ children }: { children: ReactNode }) {
   return (
-    <div className="border-b pb-2 text-sm font-medium text-foreground">
+    <div className="border-b pb-2 text-sm font-medium text-slate-900 dark:text-slate-100">
       {children}
     </div>
   );
@@ -1420,7 +1459,7 @@ function SeparatorWithText({ children }: { children: ReactNode }) {
   return (
     <div className="flex items-center gap-3">
       <Separator className="flex-1" />
-      <span className="text-xs font-medium uppercase text-muted-foreground">
+      <span className="text-xs font-medium uppercase text-slate-500 dark:text-slate-400">
         {children}
       </span>
       <Separator className="flex-1" />
@@ -1444,8 +1483,12 @@ function AdvancedSettings({ children }: { children: ReactNode }) {
 function MetadataValue({ label, value }: { label: string; value: string }) {
   return (
     <div className="space-y-1 rounded-md border p-3">
-      <div className="text-xs font-medium text-muted-foreground">{label}</div>
-      <div className="break-all text-sm text-foreground">{value}</div>
+      <div className="text-xs font-medium text-slate-500 dark:text-slate-400">
+        {label}
+      </div>
+      <div className="break-all text-sm text-slate-900 dark:text-slate-100">
+        {value}
+      </div>
     </div>
   );
 }

@@ -3,7 +3,6 @@ import { extractYouTubeVideoId } from '../services/passCourseService';
 import { MarkdownPreview } from '@/components/shared/uiw/Markdown';
 import { CourseContentType } from '@/generated/browser';
 import { IapCourse } from 'types';
-import { Card, CardContent } from '@/components/shadcn/ui/card';
 import { useTranslation } from 'next-i18next';
 
 const ContentPreview = ({ course }: { course: IapCourse }) => {
@@ -28,14 +27,12 @@ const ContentPreview = ({ course }: { course: IapCourse }) => {
     case CourseContentType.OPEN_TEXT:
       return (
         <div className="container my-4">
-          <Card className="bg-background text-foreground shadow-sm">
-            <CardContent className="p-6">
-              <MarkdownPreview
-                source={course.description as string}
-                className="prose dark:prose-invert max-w-none"
-              />
-            </CardContent>
-          </Card>
+          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6">
+            <MarkdownPreview
+              source={course.description as string}
+              className="prose max-w-none"
+            />
+          </div>
         </div>
       );
 

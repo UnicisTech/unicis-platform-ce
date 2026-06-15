@@ -30,7 +30,7 @@ interface TransferScenarioStepProps {
 export default function TransferScenarioStep({
   control,
 }: TransferScenarioStepProps) {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'tia']);
 
   return (
     <>

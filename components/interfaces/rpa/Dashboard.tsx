@@ -2,7 +2,7 @@ import { useState, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import toast from 'react-hot-toast';
-import { EmptyState } from '@/components/shared';
+import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
 import useTeamTasks from 'hooks/useTeamTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeam from 'hooks/useTeam';
@@ -137,13 +137,18 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center">
-        <div className="space-y-3">
-          <h2 className="text-xl font-medium leading-none tracking-tight">
-            {t('rpa-dashboard')}
-          </h2>
+      <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
+        <div className="flex items-center gap-2">
+          <h1 className="text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+            {t('rpa')}
+          </h1>
+          {tasksWithProcedures.length > 0 && (
+            <span className="text-[11px] text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
+              {tasksWithProcedures.length}
+            </span>
+          )}
         </div>
-        <div className="flex justify-end items-center gap-2 my-1 flex-wrap">
+        <div className="flex items-center gap-2 flex-wrap">
           {tasksWithProcedures.length > 0 && (
             <PerPageSelector perPage={perPage} setPerPage={setPerPage} />
           )}
@@ -181,7 +186,7 @@ const Dashboard = () => {
           )}
           {canAccess('task', ['update']) && (
             <Button
-              color="primary"
+              variant="default"
               onClick={() => {
                 setTaskToEdit(null);
                 setIsRpaOpen(true);
@@ -191,6 +196,7 @@ const Dashboard = () => {
             </Button>
           )}
         </div>
+        {/* end toolbar */}
       </div>
       <CreateProcedureTest
         tasks={tasks}
@@ -199,12 +205,26 @@ const Dashboard = () => {
         selectedTask={taskToEdit || rpaState.selectedTask}
       />
       {tasksWithProcedures.length === 0 ? (
-        <EmptyState title={t('rpa-dashboard')} description={t('no-records')} />
+        <ModuleEmptyState
+          icon="/unicis-rpa-logo.png"
+          title={t('empty-state.rpa.title')}
+          description={t('empty-state.rpa.description')}
+          regulatoryContext={t('empty-state.rpa.context')}
+          ctaLabel={
+            canAccess('task', ['update']) ? t('empty-state.rpa.cta') : undefined
+          }
+          onCta={
+            canAccess('task', ['update'])
+              ? () => {
+                  setTaskToEdit(null);
+                  setIsRpaOpen(true);
+                }
+              : undefined
+          }
+        />
       ) : (
         <>
-          <div className="m-2">
-            <ProcessingActivitiesAnalysis slug={slug as string} />
-          </div>
+          <ProcessingActivitiesAnalysis slug={slug as string} />
           <RpaTable
             slug={slug as string}
             tasks={tasksWithProcedures}

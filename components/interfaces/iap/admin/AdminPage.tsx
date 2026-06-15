@@ -108,52 +108,40 @@ const AdminPage = ({
 
   return (
     <>
-      <div className="flex justify-between items-center">
-        <div className="space-y-3">
-          <h2 className="text-xl font-medium leading-none tracking-tight">
-            {t('iap-dashboard')}
-          </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            {t('manage-courses-and-categories')}
-          </p>
-        </div>
-        <div className="flex justify-end items-center my-1">
-          {canAccess('iap_category', ['create']) && (
-            <div className="mx-1.5 my-0">
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden mb-4">
+        {/* Direction B panel header */}
+        <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+          <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
+            {t('iap')}
+          </span>
+          <div className="flex items-center gap-2 flex-wrap">
+            {canAccess('iap_category', ['create']) && (
               <Button
-                color="primary"
-                onClick={() => {
-                  setIsCreateCategoryOpen(true);
-                }}
+                variant="outline"
+                size="sm"
+                onClick={() => setIsCreateCategoryOpen(true)}
               >
                 {t('create-category')}
               </Button>
-            </div>
-          )}
-          {canAccess('iap_course', ['create']) && (
-            <div className="mx-1.5 my-0">
-              <Button
-                color="primary"
-                onClick={() => {
-                  setIsCreateCourseOpen(true);
-                }}
-              >
+            )}
+            {canAccess('iap_course', ['create']) && (
+              <Button size="sm" onClick={() => setIsCreateCourseOpen(true)}>
                 {t('create-course')}
               </Button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
+        <CoursesTable
+          slug={team.slug}
+          teamCourses={teamCourses}
+          members={members}
+          categories={categories}
+          editHandler={editCourseClickHandler}
+          deleteHandler={deleteCourseClickHandler}
+          completionHandler={completionResultsClickHandler}
+          statusHandler={statusResultsClickHandler}
+        />
       </div>
-      <CoursesTable
-        slug={team.slug}
-        teamCourses={teamCourses}
-        members={members}
-        categories={categories}
-        editHandler={editCourseClickHandler}
-        deleteHandler={deleteCourseClickHandler}
-        completionHandler={completionResultsClickHandler}
-        statusHandler={statusResultsClickHandler}
-      />
 
       {isCreateCategoryOpen && (
         <CreateCategory

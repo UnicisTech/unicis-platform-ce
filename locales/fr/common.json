@@ -73,7 +73,21 @@
   "save-changes": "Enregistrer les modifications",
   "successfully-updated": "Modifications enregistrées avec succès.",
   "all-teams": "Toutes les équipes",
-  "team-dashboard": "Tableau de bord de l’équipe",
+  "team-dashboard": "Tableau de bord de l'équipe",
+  "dashboard.tab.data-protection": "Protection des données",
+  "dashboard.tab.cybersecurity": "Cybersécurité & conformité",
+  "dashboard.tab.risk": "Gestion des risques",
+  "dashboard.needs-attention": "À traiter",
+  "dashboard.task-matrix-title": "Tâches par module",
+  "dashboard.open-tasks": "Tâches ouvertes",
+  "dashboard.overdue-tasks": "Tâches en retard",
+  "dashboard.no-overdue": "Aucun élément en retard",
+  "dashboard.export-csv": "Exporter CSV",
+  "dashboard.banner.overdue-tasks": "tâches en retard",
+  "dashboard.banner.open-risks": "risques ouverts",
+  "dashboard.banner.compliance-at": "Conformité à",
+  "dashboard.banner.review": "Examiner",
+  "dashboard.tab.aria-label": "Sections du tableau de bord",
   "team-invite": "vous invite à rejoindre son équipe.",
   "response": "Réponse",
   "page-not-found-title": "Page introuvable",
@@ -88,9 +102,21 @@
   "invite-member-message": "Invitez un nouveau membre par e-mail à rejoindre votre organisation.",
   "choose-subscription-message": "Choisissez votre formule d’abonnement.",
   "billing": {
+    "section-title": "Choisissez votre plan",
+    "section-subtitle": "Commencez gratuitement. Passez à Premium pour une couverture conformité complète.",
+    "most-popular": "Le plus populaire",
+    "current-plan-badge": "Plan actuel",
+    "premium-nudge": "La plupart des équipes passent à Premium pour accéder à tous les frameworks et à l’API.",
+    "modules-label": "Modules",
+    "features-label": "Fonctionnalités",
+    "monthly": "Mensuel",
+    "annual": "Annuel",
+    "save-20": "Économisez 20%",
+    "billed-annually": "facturé annuellement",
     "plans": {
       "community": {
         "name": "Communauté",
+        "description": "Idéal pour les petites équipes qui découvrent la conformité.",
         "users": "1 - 10",
         "price": "Gratuit",
         "subprice": "illimité",
@@ -106,6 +132,7 @@
       },
       "premium": {
         "name": "Premium",
+        "description": "Suite conformité complète pour les équipes sérieuses en matière de sécurité et de confidentialité.",
         "users": "11 - 150",
         "price": "€19/mois",
         "subprice": "par tenant et jusqu’à 5 administrateurs",
@@ -122,7 +149,8 @@
       },
       "ultimate": {
         "name": "Ultimate",
-        "users": "150 -",
+        "description": "Pour les grandes entreprises avec des besoins avancés en audit et gestion des fournisseurs.",
+        "users": "150+",
         "price": "€49/mois",
         "subprice": "par tenant et > 6 administrateurs",
         "applications": {
@@ -325,6 +353,7 @@
   "name-appearance": "Voici comment votre nom apparaîtra dans l’interface. Définissez le prénom et le nom.",
   "change-password-text": "Vous pouvez changer votre mot de passe ici.",
   "change-theme": "Cela changera le thème de l’application.",
+  "change-language": "Sélectionnez votre langue d’interface préférée.",
   "avatar": "Avatar",
   "custom-avatar": "Cliquez sur l’avatar pour en télécharger un personnalisé depuis vos fichiers.",
   "avatar-type": "Types de fichiers acceptés : .png, .jpg. Taille maximale : 2 Mo.",
@@ -365,7 +394,6 @@
   "risk-count": "Nombre de risques",
   "risk-levels": "Niveaux de risque",
   "maturity-level-0-6": "Niveau de maturité (0-6)",
-
   "rpa": "Registre des procédures",
   "rpa-dashboard": "Tableau de bord du registre des procédures",
   "rpa-activities": "Registre des activités de traitement",
@@ -399,7 +427,6 @@
   "review-date": "Date de révision",
   "controller": "Responsable du traitement",
   "data-protection-officer": "Délégué à la protection des données",
-
   "tia": "Évaluation d’impact sur les transferts",
   "tia-dashboard": "Tableau de bord des évaluations d’impact sur les transferts",
   "tia-data-exporter": "Exportateur(s) de données",
@@ -420,12 +447,10 @@
   "risk-level": "Niveau de risque",
   "procedure-has-not-been-created-for-this-issue": "Aucune procédure n’a été créée pour ce problème.",
   "select-a-country": "Sélectionnez un pays",
-
   "yes": "Oui",
   "no": "Non",
   "na": "Non applicable",
   "in-view-of-the-above-transfer-is": "Au vu de ce qui précède et des lois applicables en matière de protection des données, le transfert est :",
-
   "rm": "Gestion des risques",
   "rm-dashboard": "Tableau de bord de la gestion des risques",
   "rm-created": "Risque créé avec succès.",
@@ -442,7 +467,6 @@
   "percent-max-100": "pourcentage (max. 100)",
   "risk": "Risque",
   "max-100": "(max. 100)",
-
   "iap": "Programme de sensibilisation interactif",
   "multiple-options": "Options multiples",
   "clear-selection": "— Effacer la sélection —",
@@ -462,7 +486,6 @@
   "passed": "Réussi",
   "failed": "Échoué",
   "manage-courses-and-categories": "Gérer les cours et les catégories.",
-
   "task-id": "ID de la tâche",
   "due-date": "Date d’échéance",
   "delete-task-warning": "Êtes-vous sûr de vouloir supprimer cette tâche ?",
@@ -639,7 +662,7 @@
   "shard": "Shard",
   "description": "Description",
   "current": "Actuel",
-  "subscription-request-sent": "Demande envoyée !",
+  "subscription-request-sent": "Votre demande a été envoyée ! Notre équipe vous contactera sous peu.",
   "wise-payment": "Paiement",
   "wise-payment-details": "Le lien de paiement sera ajouté dès que votre demande sera traitée.",
   "pay-now": "Payer maintenant",
@@ -817,7 +840,6 @@
   "course-thumbnail": "Miniature du cours",
   "estimated-minutes": "Estimé : {{time}} minutes",
   "open": "Ouvrir",
-
   "change-theme-header": "Changer le thème",
   "logout": "Se déconnecter",
   "sign-out": "Se déconnecter",
@@ -856,6 +878,12 @@
   "prev-value": "Valeur précédente",
   "next-value": "Valeur suivante",
   "no-logs-available": "Aucune activité à afficher.",
+  "task-audit": {
+    "event-created": "Créé",
+    "event-updated": "Mis à jour",
+    "event-commented": "Commenté",
+    "event-deleted": "Supprimé"
+  },
   "email-invitation-mismatch": "Votre adresse e-mail {{email}} ne correspond pas à l’adresse e-mail à laquelle cette invitation a été envoyée.",
   "open-sidebar": "Ouvrir la barre latérale",
   "close-sidebar": "Fermer la barre latérale",
@@ -887,7 +915,6 @@
   "attachment-browse": "parcourir",
   "download": "Télécharger",
   "start": "Démarrer",
-
   "number-of-members": "Nombre de membres",
   "price-per-user": "Prix par utilisateur",
   "total": "Total",
@@ -896,7 +923,6 @@
   "pay-with-wise": "Payer avec Wise",
   "wise-qr-alt": "Code QR Wise Quick Pay",
   "scan-qr-tip": "Scannez ce code QR pour effectuer un paiement rapide avec Wise",
-
   "statuses": {
     "unknown": {
       "label": "Inconnu",
@@ -1286,6 +1312,7 @@
   "enter-pack-name": "Saisissez le nom du pack",
   "creating": "Création...",
   "success": "Succès",
+  "success-message": "Opération effectuée avec succès",
   "error": "Erreur",
   "edit-pack": "Modifier le pack",
   "enter-name": "Saisissez le nom",
@@ -1540,5 +1567,128 @@
   "enter-real-name": "Veuillez entrer un vrai nom",
   "email-domain-invalid": "Le domaine de l'e-mail ne semble pas être un domaine de messagerie valide. Veuillez utiliser une adresse e-mail réelle.",
   "filtered-by": "Filtré par",
-  "clear-filter": "Effacer le filtre"
+  "clear-filter": "Effacer le filtre",
+  "clear-all": "Effacer tout",
+  "empty-state": {
+    "rpa": {
+      "title": "Aucune activité de traitement pour l'instant",
+      "description": "Documentez et gérez vos activités de traitement des données pour démontrer votre conformité.",
+      "context": "Requis par le RGPD Art. 30",
+      "cta": "Ajouter la première activité"
+    },
+    "tia": {
+      "title": "Aucune évaluation de transfert pour l'instant",
+      "description": "Évaluez l'impact des transferts de données transfrontaliers pour garantir des mécanismes légaux.",
+      "context": "Requis par le RGPD Art. 46",
+      "cta": "Ajouter la première évaluation"
+    },
+    "pia": {
+      "title": "Aucune analyse d'impact pour l'instant",
+      "description": "Identifiez et réduisez les risques liés à la vie privée grâce aux analyses d'impact sur les traitements à risque.",
+      "context": "Requis par le RGPD Art. 35",
+      "cta": "Ajouter la première évaluation"
+    },
+    "csc": {
+      "title": "Aucun contrôle importé pour l'instant",
+      "description": "Importez un cadre de conformité pour commencer à suivre l'état de mise en œuvre de vos contrôles.",
+      "context": "ISO 27001 Annexe A · 114 contrôles",
+      "cta": "Importer un cadre"
+    },
+    "iap": {
+      "title": "Aucune formation pour l'instant",
+      "description": "Créez des formations de sensibilisation à la sécurité pour éduquer votre équipe aux bonnes pratiques.",
+      "context": "ISO 27001 A.7.2.2 sensibilisation",
+      "cta": "Ajouter la première formation"
+    },
+    "risk": {
+      "title": "Aucun risque enregistré pour l'instant",
+      "description": "Identifiez, évaluez et traitez les risques de sécurité de l'information pour protéger les actifs de votre organisation.",
+      "context": "ISO 27001 A.6.1.2 évaluation des risques",
+      "cta": "Ajouter le premier risque"
+    },
+    "tasks": {
+      "title": "Aucune tâche pour l'instant",
+      "description": "Créez des tâches pour suivre les preuves de contrôles, attribuer des responsabilités et gérer les activités de conformité.",
+      "context": "Les tâches suivent les preuves de contrôles",
+      "cta": "Créer la première tâche"
+    }
+  },
+  "upgrade-gate": {
+    "plan-feature": "Fonctionnalité {{plan}} · Mettre à niveau pour débloquer",
+    "upgrade-plan": "Mettre à niveau",
+    "grc-assistant-description": "Posez des questions sur votre posture de conformité, les lacunes de contrôle et le statut des risques en langage naturel. Disponible sur les plans Premium et Ultimate."
+  },
+  "kpi": {
+    "compliance-score": "Score de conformité",
+    "based-on-controls": "Basé sur la maturité des contrôles",
+    "csc-gaps": "Lacunes des contrôles de cybersécurité",
+    "controls-not-performed": "Non réalisés ou inconnus"
+  },
+  "bulk-actions": {
+    "link-tasks-required": "Lier des tâches (obligatoire)",
+    "change-status": "Changer le statut",
+    "step-1-link-tasks": "Étape 1 : Sélectionnez les tâches à ajouter aux contrôles sélectionnés",
+    "step-2-change-status": "Étape 2 : Sélectionnez le nouveau statut pour tous les contrôles",
+    "select-tasks-description": "Sélectionnez les tâches que vous souhaitez lier à tous les contrôles sélectionnés",
+    "select-new-status": "Sélectionnez un nouveau statut :",
+    "link-selected-tasks": "Lier les tâches sélectionnées",
+    "all-controls-must-have-tasks": "Tous les contrôles doivent avoir des tâches assignées avant de changer le statut",
+    "success-tasks-linked": "Tâches liées à {{controlCount}} contrôles",
+    "success-status-updated": "{{controlCount}} contrôles mis à jour en {{status}}"
+  },
+  "dashboard.kpi.compliance-score": "Score de conformité",
+  "dashboard.kpi.open-risks": "Risques ouverts",
+  "dashboard.kpi.next-due": "Prochaine échéance",
+  "dashboard.kpi.iap-completion": "Formation de Sensibilisation",
+  "dashboard.kpi.csc-gaps": "Lacunes Cybersécurité",
+  "dashboard.kpi.overdue": "en retard",
+  "dashboard.kpi.no-open-risks": "Aucun risque ouvert",
+  "dashboard.kpi.tasks-with-risk": "tâches avec risque",
+  "dashboard.kpi.days-left": "jours restants",
+  "dashboard.kpi.no-upcoming": "Aucune tâche à venir",
+  "dashboard.kpi.members": "membres",
+  "dashboard.kpi.no-csc-data": "Aucun framework de cybersécurité configuré",
+  "dashboard.kpi.based-on-csc": "basé sur les contrôles CSC",
+  "dashboard.kpi.not-performed-controls": "contrôles non effectués",
+  "dashboard.kpi.score-excellent": "Excellent",
+  "dashboard.kpi.score-good": "Bon",
+  "dashboard.kpi.score-fair": "Passable",
+  "dashboard.kpi.score-needs-work": "À améliorer",
+  "dashboard.kpi.based-on": "basé sur",
+  "search.placeholder": "Rechercher tâches, modules…",
+  "search.no-results": "Aucun résultat.",
+  "search.quick-nav": "Navigation rapide",
+  "search.tasks": "Tâches",
+  "search.press-enter": "pour sélectionner",
+  "search.open": "Ouvrir",
+  "section-progress": "Progression par section",
+  "status-distribution": "Distribution des statuts",
+  "risk-matrix-axis-label": "Impact → / Probabilité ↑",
+  "pia-matrix-axis": "Impact → / Probabilité ↑",
+  "top-open-risks": "Principaux risques ouverts",
+  "framework": "Référentiel",
+  "domain-health.data-protection": "Protection des données",
+  "domain-health.cybersecurity": "Cybersécurité",
+  "domain-health.risk-management": "Gestion des risques",
+  "domain-health.switch-tab-data-protection": "Accéder à l'onglet Protection des données",
+  "domain-health.switch-tab-cybersecurity": "Accéder à l'onglet Cybersécurité",
+  "domain-health.switch-tab-risk": "Accéder à l'onglet Gestion des risques",
+  "domain-health.no-data": "Aucune donnée",
+  "domain-health.transfers-at-risk": "transfert(s) à risque",
+  "domain-health.transfers-ok": "Transferts conformes",
+  "domain-health.rpa-records": "enregistrements RPA",
+  "domain-health.start-adding": "Commencez à ajouter des enregistrements TIA / RPA",
+  "domain-health.gaps": "lacunes",
+  "domain-health.no-csc-framework": "Aucun référentiel CSC configuré",
+  "domain-health.high-risks": "risques élevés",
+  "domain-health.risks-managed": "Risques maîtrisés",
+  "domain-health.risks-total": "risques suivis",
+  "domain-health.start-adding-risks": "Commencez à ajouter des risques",
+  "chart.task-status-distribution-aria-label": "Diagramme circulaire des tâches par statut",
+  "dashboard.kpi.yet-to-complete": "à compléter",
+  "tia-at-risk": "à risque",
+  "tia-all-permitted": "✓ Tous autorisés",
+  "tia-non-adequate-warning": "{{count}} transfert(s) vers des pays non adéquats nécessitent des CCT. Révision en attente.",
+  "csc.bulk-status-updated": "{{count}} contrôles mis à jour avec le statut \"{{status}}\"",
+  "csc.bulk-tasks-linked": "Tâches liées à {{count}} contrôles"
 }

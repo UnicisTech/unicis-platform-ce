@@ -28,13 +28,15 @@ export const addSubscription = async (teamId: string, email: string) => {
 export const changeSubscription = async (
   teamId: string,
   plan: Plan,
-  status: SubscriptionStatus
+  status: SubscriptionStatus,
+  isAnnual?: boolean
 ) => {
   return await prisma.subscription.update({
     where: { teamId },
     data: {
       plan,
       status,
+      ...(isAnnual !== undefined ? { isAnnual } : {}),
     },
   });
 };

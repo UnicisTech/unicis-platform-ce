@@ -69,9 +69,9 @@ const StatusResults: React.FC<StatusResultsProps> = ({
             <StatusResultsChart passed={passedCount} failed={failedCount} />
           </div>
 
-          <div>
-            <table className="w-full text-sm divide-y divide-border">
-              <thead className="bg-muted">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm divide-y divide-slate-200 dark:divide-slate-700">
+              <thead className="bg-slate-50 dark:bg-slate-900">
                 <tr>
                   <th className="px-4 py-2 text-left">{t('user')}</th>
                   <th className="px-4 py-2 text-left">{t('right')}</th>
@@ -79,7 +79,7 @@ const StatusResults: React.FC<StatusResultsProps> = ({
                   <th className="px-4 py-2 text-left">{t('status')}</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border">
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                 {members.map((member) => {
                   const progress = findMemberProgressInTeamCourse(
                     teamCourse,

@@ -21,7 +21,7 @@ const DataProcessingStep = ({
   initial: PiaRisk[0] | null | undefined;
   control: Control<DataProcessingStepValues>;
 }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'pia']);
 
   return (
     <>

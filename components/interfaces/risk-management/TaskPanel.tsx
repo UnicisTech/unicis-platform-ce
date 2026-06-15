@@ -31,14 +31,20 @@ const RmTaskPanel = ({ task, slug }: { task: Task; slug: string }) => {
         <>
           <div role="tablist" className="tabs tabs-bordered">
             <button
+              id="rm-tab-0"
               role="tab"
+              aria-selected={activeTab === 0}
+              aria-controls="rm-tab-panel"
               className={`tab ${activeTab === 0 ? 'tab-active' : ''}`}
               onClick={() => setActiveTab(0)}
             >
               {t(`rm:steps.${steps[0]}`)}
             </button>
             <button
+              id="rm-tab-1"
               role="tab"
+              aria-selected={activeTab === 1}
+              aria-controls="rm-tab-panel"
               className={`tab ${activeTab === 1 ? 'tab-active' : ''}`}
               onClick={() => setActiveTab(1)}
             >
@@ -46,7 +52,12 @@ const RmTaskPanel = ({ task, slug }: { task: Task; slug: string }) => {
             </button>
           </div>
 
-          <div className="mt-4">
+          <div
+            id="rm-tab-panel"
+            role="tabpanel"
+            aria-labelledby={`rm-tab-${activeTab}`}
+            className="mt-4"
+          >
             {activeTab === 0 && (
               <div>
                 <Field label={t(`rm:fields.Risk`)} value={risk[0]?.Risk} />

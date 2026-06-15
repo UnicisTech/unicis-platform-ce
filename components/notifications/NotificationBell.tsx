@@ -22,10 +22,25 @@ const NotificationBell = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="relative">
-          <BellIcon className="h-5 w-5" />
+        <Button
+          variant="ghost"
+          size="icon"
+          className="relative"
+          aria-label={
+            unreadCount > 0
+              ? t('notifications.title-unread', {
+                  count: unreadCount,
+                  defaultValue: `Notifications (${unreadCount} unread)`,
+                })
+              : t('notifications.title')
+          }
+        >
+          <BellIcon className="h-5 w-5" aria-hidden="true" />
           {unreadCount > 0 && (
-            <span className="absolute -right-1 -top-1 rounded-full bg-blue-600 px-1.5 py-0.5 text-[10px] font-semibold text-white">
+            <span
+              className="absolute -right-1 -top-1 rounded-full bg-blue-600 px-1.5 py-0.5 text-[10px] font-semibold text-white"
+              aria-hidden="true"
+            >
               {badgeLabel}
             </span>
           )}
@@ -38,7 +53,7 @@ const NotificationBell = () => {
             <button
               type="button"
               onClick={markAllRead}
-              className="text-xs text-muted-foreground hover:text-foreground"
+              className="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
             >
               {t('notifications.mark-all-read')}
             </button>
@@ -47,10 +62,12 @@ const NotificationBell = () => {
         <DropdownMenuSeparator />
         <div className="max-h-96 space-y-2 overflow-y-auto px-2 py-2">
           {isLoading && (
-            <p className="text-xs text-muted-foreground">{t('loading')}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              {t('loading')}
+            </p>
           )}
           {!isLoading && notifications.length === 0 && (
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               {t('notifications.none')}
             </p>
           )}

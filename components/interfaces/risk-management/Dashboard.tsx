@@ -6,7 +6,8 @@ import useTeamTasks from 'hooks/useTeamTasks';
 import useTeam from 'hooks/useTeam';
 import { useRouter } from 'next/router';
 import { TaskProperties, TaskWithRmRisk } from 'types';
-import { EmptyState, Error } from '@/components/shared';
+import { Error } from '@/components/shared';
+import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
 import CreateRisk from './risk-form/RmRiskDialog';
@@ -210,13 +211,18 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center">
-        <div className="space-y-3">
-          <h2 className="text-xl font-medium leading-none tracking-tight">
-            {t('rm-dashboard')}
-          </h2>
+      <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
+        <div className="flex items-center gap-2">
+          <h1 className="text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+            {t('rm')}
+          </h1>
+          {tasksWithRisks.length > 0 && (
+            <span className="text-[11px] text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
+              {tasksWithRisks.length}
+            </span>
+          )}
         </div>
-        <div className="flex justify-end items-center gap-2 my-1 flex-wrap">
+        <div className="flex items-center gap-2 flex-wrap">
           {tasksWithRisks.length > 0 && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -251,7 +257,7 @@ const Dashboard = () => {
           )}
           {canAccess('task', ['update']) && (
             <Button
-              color="primary"
+              variant="default"
               onClick={() => {
                 setIsCreateOpen(true);
               }}
@@ -260,6 +266,7 @@ const Dashboard = () => {
             </Button>
           )}
         </div>
+        {/* end toolbar */}
       </div>
       {isCreateOpen && (
         <CreateRisk
@@ -270,8 +277,22 @@ const Dashboard = () => {
         />
       )}
       {tasksWithRisks.length === 0 ? (
-        //TODO: change title
-        <EmptyState title={t('rpa-dashboard')} description={t('no-records')} />
+        <ModuleEmptyState
+          icon="/unicis-risk-logo.png"
+          title={t('empty-state.risk.title')}
+          description={t('empty-state.risk.description')}
+          regulatoryContext={t('empty-state.risk.context')}
+          ctaLabel={
+            canAccess('task', ['update'])
+              ? t('empty-state.risk.cta')
+              : undefined
+          }
+          onCta={
+            canAccess('task', ['update'])
+              ? () => setIsCreateOpen(true)
+              : undefined
+          }
+        />
       ) : (
         <>
           <div className="mb-2">
@@ -282,7 +303,7 @@ const Dashboard = () => {
           </div>
           {matrixFilter && (
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-sm text-muted-foreground">
+              <span className="text-sm text-slate-500 dark:text-slate-400">
                 {t('filtered-by')}: {t(impactLabelKeys[matrixFilter.x])},{' '}
                 {t(probabilityLabelKeys[matrixFilter.y])}
               </span>

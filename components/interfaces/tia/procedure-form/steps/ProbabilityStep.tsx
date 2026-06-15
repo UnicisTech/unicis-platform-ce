@@ -29,7 +29,7 @@ export default function ProbabilityStep({
   problematicLawfulAccessValues,
   riskValues,
 }: ProbabilityStepProps) {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'tia']);
 
   return (
     <>

@@ -65,7 +65,7 @@ const ForgotPassword: NextPageWithLayout<
         <title>{t('forgot-password-title')}</title>
       </Head>
 
-      <Card className="border border-border pt-6">
+      <Card className="border border-slate-200 dark:border-slate-700 pt-6">
         <CardContent>
           <form onSubmit={formik.handleSubmit} className="space-y-4">
             <div className="grid gap-1">
@@ -111,11 +111,11 @@ const ForgotPassword: NextPageWithLayout<
         </CardContent>
       </Card>
 
-      <p className="text-center text-sm text-muted-foreground mt-3">
+      <p className="text-center text-sm text-slate-500 dark:text-slate-400 mt-3">
         {t('already-have-an-account')}
         <Link
           href="/auth/login"
-          className="font-medium text-primary hover:text-primary-focus ml-1"
+          className="font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:text-blue-300 ml-1"
         >
           {t('sign-in')}
         </Link>

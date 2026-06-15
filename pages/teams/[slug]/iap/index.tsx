@@ -7,9 +7,11 @@ import useCanAccess from 'hooks/useCanAccess';
 import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useRouter } from 'next/router';
 
 const IAP = () => {
   const { t } = useTranslation('common');
+  const router = useRouter();
   const { isLoading, isError, team } = useTeam();
   const {
     categories,
@@ -54,7 +56,15 @@ const IAP = () => {
   return (
     <>
       <div className="space-y-6">
-        <IapDashboard teamCourses={teamCourses} categories={categories} />
+        <IapDashboard
+          teamCourses={teamCourses}
+          categories={categories}
+          onAddCourse={
+            canAccess('iap_course', ['update'])
+              ? () => router.push(`/teams/${team.slug}/iap/admin`)
+              : undefined
+          }
+        />
       </div>
     </>
   );
@@ -65,7 +75,9 @@ export async function getServerSideProps({
 }: GetServerSidePropsContext) {
   return {
     props: {
-      ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
+      ...(locale
+        ? await serverSideTranslations(locale, ['common', 'iap'])
+        : {}),
     },
   };
 }

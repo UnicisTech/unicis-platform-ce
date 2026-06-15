@@ -1,0 +1,83 @@
+{
+  "fields": {
+    "isDataProcessingNecessary": "O tratamento de dados é necessário",
+    "isDataProcessingNecessaryAssessment": "Avaliação",
+    "isProportionalToPurpose": "É proporcional à finalidade",
+    "isProportionalToPurposeAssessment": "Avaliação",
+    "confidentialityRiskProbability": "Probabilidade do risco",
+    "confidentialityRiskSecurity": "Impacto do risco",
+    "confidentialityAssessment": "Avaliação",
+    "availabilityRiskProbability": "Probabilidade do risco",
+    "availabilityRiskSecurity": "Impacto do risco",
+    "availabilityAssessment": "Avaliação",
+    "transparencyRiskProbability": "Probabilidade do risco",
+    "transparencyRiskSecurity": "Impacto do risco",
+    "transparencyAssessment": "Avaliação",
+    "guarantees": "Garantias",
+    "securityMeasures": "Medidas de segurança",
+    "securityCompliance": "Conformidade com os avisos de segurança emitidos pelas autoridades supervisoras",
+    "dealingWithResidualRisk": "Tratamento do risco residual existente",
+    "dealingWithResidualRiskAssessment": "Avaliação",
+    "supervisoryAuthorityInvolvement": "Envolvimento da autoridade supervisora caso o risco seja inaceitável"
+  },
+  "steps": {
+    "dataProcessing": "Tratamento de dados",
+    "confidentialityAndIntegrity": "Confidencialidade e Integridade",
+    "availability": "Disponibilidade",
+    "transparencyAndDataMinimization": "Transparência e minimização de dados",
+    "results": "Resultados",
+    "correctiveMeasures": "Medidas corretivas"
+  },
+  "descriptions": {
+    "riskQuestion": "Quais são os riscos para a privacidade e os direitos das pessoas cujos dados estão sendo tratados?",
+    "dataProcessingQuestion": "O tratamento de dados é necessário e é proporcional à finalidade?",
+    "confidentialityStep": "1. Confidencialidade e Integridade",
+    "availabilityStep": "2. Disponibilidade",
+    "transparencyStep": "3. Transparência, anonimização e minimização de dados",
+    "correctiveMeasures": "Medidas corretivas",
+    "resultsConfidentiality": "a) Confidencialidade e Integridade",
+    "resultsAvailability": "b) Disponibilidade",
+    "resultsTransparency": "c) Transparência, limitação de finalidade e minimização de dados"
+  },
+  "risk-probability": {
+    "rare": "Raro",
+    "unlikely": "Improvável",
+    "possible": "Possível",
+    "probable": "Provável",
+    "severe": "Grave"
+  },
+  "availabilityRiskSecurity": {
+    "insignificant": "Insignificante: a perda de disponibilidade de dados pessoais, em que o tratamento tem impacto operacional mínimo e custos desprezíveis, e não afeta significativamente os negócios ou as finanças do titular dos dados.",
+    "minor": "Pequeno: a perda de disponibilidade de dados pessoais, em que o tratamento tem um impacto operacional perceptível, mas limitado, alguns custos, e pode causar pequeno inconveniente financeiro ao titular dos dados, mas sem impacto substancial em seus direitos.",
+    "moderate": "Moderado: a perda de disponibilidade de dados pessoais, em que o tratamento causa impacto operacional substancial, é muito custoso e causa danos comerciais ou financeiros significativos ao titular dos dados, mas não envolve categorias sensíveis que representem um risco elevado para seus direitos.",
+    "major": "Grave: a perda de disponibilidade de dados pessoais, em que o tratamento resulta em grave interrupção operacional, é altamente prejudicial e extremamente custoso, e pode envolver categorias especiais (ex.: histórico criminal ou dados sensíveis), podendo levar a riscos consideráveis para os direitos e liberdades do titular dos dados.",
+    "extreme": "Extremo: a perda de disponibilidade de dados pessoais, em que o tratamento causa falha operacional completa, com possíveis consequências com risco de vida ou impactos graves sobre as liberdades pessoais e os direitos dos titulares dos dados."
+  },
+  "confidentialityRiskSecurity": {
+    "insignificant": "Insignificante: a perda de confidencialidade e integridade de dados pessoais, em que o tratamento tem impacto operacional mínimo e custos desprezíveis, e não afeta significativamente os negócios ou as finanças do titular dos dados.",
+    "minor": "Pequeno: a perda de confidencialidade e integridade de dados pessoais, em que o tratamento tem impacto operacional perceptível, mas limitado, alguns custos, e pode causar um pequeno impacto financeiro ao titular dos dados, mas é improvável que afete significativamente seus direitos.",
+    "moderate": "Moderado: a perda de confidencialidade e integridade de dados pessoais, em que o tratamento tem impacto operacional substancial, é muito custoso e pode causar danos comerciais ou financeiros consideráveis ao titular dos dados, mas não envolve categorias especiais ou dados sensíveis com impacto elevado nos direitos.",
+    "major": "Grave: a perda de confidencialidade e integridade de dados pessoais, em que o tratamento causa grave interrupção operacional, é altamente prejudicial e extremamente custoso tanto para a organização quanto para os titulares dos dados. Pode envolver categorias especiais (como histórico criminal ou dados sensíveis), levando a riscos significativos para os direitos e liberdades dos titulares dos dados.",
+    "extreme": "Extremo: a perda de confidencialidade e integridade de dados pessoais, em que o tratamento resulta em falha operacional completa e irreversível, com possíveis consequências com risco de vida ou impactos graves sobre as liberdades pessoais e os direitos dos titulares dos dados."
+  },
+  "dealingWithResidualRisk": {
+    "acceptable": "Aceitável",
+    "acceptable_with_conditions": "Aceitável com limitações sob certas condições",
+    "not_acceptable": "Não aceitável"
+  },
+  "isDataProcessingNecessary": {
+    "necessary": "Necessário",
+    "unnecessary": "Desnecessário"
+  },
+  "isProportionalToPurpose": {
+    "proportional": "Proporcional",
+    "not_proportional": "Não proporcional"
+  },
+  "transparencyRiskSecurity": {
+    "insignificant": "Insignificante: a perda de transparência, adequação e minimização de dados no tratamento de dados pessoais, em que tem impacto operacional mínimo, custos desprezíveis, e não afeta significativamente os negócios ou as finanças do titular dos dados.",
+    "minor": "Pequeno: a perda de transparência, adequação e minimização de dados no tratamento de dados pessoais, em que tem impacto operacional perceptível, mas limitado, alguns custos, e pode causar consequências financeiras menores ao titular dos dados, mas sem impacto substancial em seus direitos.",
+    "moderate": "Moderado: a perda de transparência, adequação e minimização de dados no tratamento de dados pessoais, em que resulta em impacto operacional substancial, é muito custoso e pode causar danos comerciais ou financeiros significativos ao titular dos dados, sem envolver categorias especiais que representem riscos elevados para seus direitos.",
+    "major": "Grave: a perda de transparência, adequação e minimização de dados no tratamento de dados pessoais, em que causa grave interrupção operacional, é altamente prejudicial e extremamente custoso. Pode envolver categorias especiais (ex.: dados sensíveis ou histórico criminal), com potencial para riscos significativos aos direitos e liberdades do titular dos dados.",
+    "extreme": "Extremo: a perda de transparência, adequação e minimização de dados no tratamento de dados pessoais, em que leva à falha operacional completa, representando possíveis ameaças à vida ou às liberdades pessoais, com impactos graves nos direitos dos titulares dos dados."
+  }
+}

@@ -21,7 +21,7 @@ const CorrectiveMeasuresStep = ({
   initial?: PiaRisk[4];
   control: Control<CorrectiveMeasuresStepValues>;
 }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'pia']);
 
   return (
     <>

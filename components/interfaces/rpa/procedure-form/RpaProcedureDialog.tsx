@@ -144,7 +144,8 @@ export default function RpaProcedureDialog({
 
   const handleStepClick = (stepperIndex: number) => {
     const dialogStep = stepperIndex + 1;
-    if (dialogStep < currentStep) {
+    // In edit mode (prevProcedure exists) allow jumping to any step
+    if (!!prevProcedure || dialogStep < currentStep) {
       setCurrentStep(dialogStep);
     }
   };
@@ -185,7 +186,7 @@ export default function RpaProcedureDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto p-6">
+      <DialogContent className="max-w-[95vw] sm:max-w-2xl max-h-[90vh] flex flex-col overflow-hidden p-4 sm:p-6">
         <DialogHeader>
           <DialogTitle>{t('rpa-activities')}</DialogTitle>
           {currentStep > 0 && (
@@ -196,7 +197,7 @@ export default function RpaProcedureDialog({
             />
           )}
         </DialogHeader>
-        <div className="w-full">
+        <div className="w-full flex-1 min-h-0 overflow-y-auto">
           {currentStep === 0 && tasks && (
             <Form {...taskForm}>
               <form className="space-y-4">
@@ -260,7 +261,7 @@ export default function RpaProcedureDialog({
             </Form>
           )}
         </div>
-        <DialogFooter className="flex justify-end space-x-2">
+        <DialogFooter className="flex flex-wrap justify-end gap-2">
           <DialogClose asChild>
             <Button variant="outline">{t('close')}</Button>
           </DialogClose>

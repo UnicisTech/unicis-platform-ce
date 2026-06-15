@@ -56,7 +56,7 @@ export default function CreateCommentForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="text"
@@ -69,11 +69,13 @@ export default function CreateCommentForm({
           render={({ field, fieldState }) => (
             <FormItem>
               <FormControl>
-                <QuillEditor
-                  enableEmojiPicker
-                  value={field.value || ''}
-                  onChange={(value) => field.onChange(value)}
-                />
+                <div className="rounded-lg border border-slate-200 dark:border-slate-700 overflow-hidden focus-within:border-slate-400 dark:focus-within:border-slate-500 transition-colors">
+                  <QuillEditor
+                    enableEmojiPicker
+                    value={field.value || ''}
+                    onChange={(value) => field.onChange(value)}
+                  />
+                </div>
               </FormControl>
               <FormMessage>
                 {fieldState.error ? fieldState.error.message : null}
@@ -82,9 +84,11 @@ export default function CreateCommentForm({
           )}
         />
 
-        <Button type="submit" variant="outline">
-          {t('save', 'Save')}
-        </Button>
+        <div className="flex justify-end mt-2">
+          <Button type="submit" size="sm">
+            {t('save', 'Save')}
+          </Button>
+        </div>
       </form>
     </Form>
   );

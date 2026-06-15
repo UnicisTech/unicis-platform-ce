@@ -40,8 +40,17 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
   throwIfNotAllowed(teamMember, 'team_billing', 'create');
 
-  const { companyName, address, zipCode, country, vatId, email, subscription } =
-    req.body;
+  const {
+    companyName,
+    address,
+    zipCode,
+    country,
+    vatId,
+    email,
+    subscription,
+    billingPeriod,
+  } = req.body;
+  const isAnnual = billingPeriod === 'annual';
   const team = teamMember.team;
   const response = await sendSubscriptionRequest({
     team,
@@ -59,7 +68,8 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       const createdSubscription = await changeSubscription(
         team.id,
         Plan[subscription],
-        SubscriptionStatus.PENDING
+        SubscriptionStatus.PENDING,
+        isAnnual
       );
       await addInitialPayment(team, createdSubscription);
     } else {
@@ -67,7 +77,8 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       const createdSubscription = await changeSubscription(
         team.id,
         Plan[subscription],
-        SubscriptionStatus.PENDING
+        SubscriptionStatus.PENDING,
+        isAnnual
       );
       await addInitialPayment(team, createdSubscription);
     }

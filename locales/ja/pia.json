@@ -1,0 +1,83 @@
+{
+  "fields": {
+    "isDataProcessingNecessary": "データ処理は必要か",
+    "isDataProcessingNecessaryAssessment": "評価",
+    "isProportionalToPurpose": "目的に対して比例しているか",
+    "isProportionalToPurposeAssessment": "評価",
+    "confidentialityRiskProbability": "リスクの確率",
+    "confidentialityRiskSecurity": "リスクの影響",
+    "confidentialityAssessment": "評価",
+    "availabilityRiskProbability": "リスクの確率",
+    "availabilityRiskSecurity": "リスクの影響",
+    "availabilityAssessment": "評価",
+    "transparencyRiskProbability": "リスクの確率",
+    "transparencyRiskSecurity": "リスクの影響",
+    "transparencyAssessment": "評価",
+    "guarantees": "保証",
+    "securityMeasures": "セキュリティ措置",
+    "securityCompliance": "監督当局が発行したセキュリティ通知への準拠",
+    "dealingWithResidualRisk": "既存の残余リスクへの対処",
+    "dealingWithResidualRiskAssessment": "評価",
+    "supervisoryAuthorityInvolvement": "リスクが許容できない場合の監督当局の関与"
+  },
+  "steps": {
+    "dataProcessing": "データ処理",
+    "confidentialityAndIntegrity": "機密性と完全性",
+    "availability": "可用性",
+    "transparencyAndDataMinimization": "透明性とデータ最小化",
+    "results": "結果",
+    "correctiveMeasures": "是正措置"
+  },
+  "descriptions": {
+    "riskQuestion": "処理されるデータの本人のプライバシーと権利に対するリスクは何か？",
+    "dataProcessingQuestion": "データ処理は必要であり、目的に対して比例しているか？",
+    "confidentialityStep": "1. 機密性と完全性",
+    "availabilityStep": "2. 可用性",
+    "transparencyStep": "3. 透明性、匿名化、データ最小化",
+    "correctiveMeasures": "是正措置",
+    "resultsConfidentiality": "a) 機密性と完全性",
+    "resultsAvailability": "b) 可用性",
+    "resultsTransparency": "c) 透明性、目的制限、データ最小化"
+  },
+  "risk-probability": {
+    "rare": "まれ",
+    "unlikely": "低い",
+    "possible": "可能性あり",
+    "probable": "高い",
+    "severe": "深刻"
+  },
+  "availabilityRiskSecurity": {
+    "insignificant": "軽微：個人データの可用性喪失であり、処理による業務への影響は最小限で費用もわずかであり、データ主体の事業や財務に顕著な影響を与えない。",
+    "minor": "小：個人データの可用性喪失であり、処理による業務への影響は認識できるが限定的で、多少の費用を伴い、データ主体に軽微な財務的不便をもたらす可能性があるが、権利への実質的な影響はない。",
+    "moderate": "中：個人データの可用性喪失であり、処理による業務への影響は実質的で費用も大きく、データ主体に重大な事業または財務的損害をもたらすが、権利に重大なリスクをもたらす特別なカテゴリは関与しない。",
+    "major": "大：個人データの可用性喪失であり、処理により深刻な業務混乱が生じ、損害が大きく費用も極めて高く、特別なカテゴリ（例：犯罪歴や機密データ）が関与する可能性があり、データ主体の権利と自由に相当なリスクをもたらす可能性がある。",
+    "extreme": "極大：個人データの可用性喪失であり、処理により業務が完全に機能不全に陥り、命に関わる結果または個人の自由と権利に深刻な影響をもたらす可能性がある。"
+  },
+  "confidentialityRiskSecurity": {
+    "insignificant": "軽微：個人データの機密性と完全性の喪失であり、処理による業務への影響は最小限で費用もわずかであり、データ主体の事業や財務に顕著な影響を与えない。",
+    "minor": "小：個人データの機密性と完全性の喪失であり、処理による業務への影響は認識できるが限定的で、多少の費用を伴い、データ主体に軽微な財務的影響をもたらす可能性があるが、権利に顕著な影響を与える可能性は低い。",
+    "moderate": "中：個人データの機密性と完全性の喪失であり、処理による業務への影響は実質的で費用も大きく、データ主体に相当な事業または財務的損害をもたらす可能性があるが、権利に重大な影響をもたらす特別なカテゴリや機密データは関与しない。",
+    "major": "大：個人データの機密性と完全性の喪失であり、処理により深刻な業務混乱が生じ、組織とデータ主体の両方に損害が大きく費用も極めて高い。特別なカテゴリ（犯罪歴や機密データなど）が関与する可能性があり、データ主体の権利と自由に重大なリスクをもたらす。",
+    "extreme": "極大：個人データの機密性と完全性の喪失であり、処理により業務が完全に機能不全に陥り回復不能となり、命に関わる結果または個人の自由と権利に深刻な影響をもたらす可能性がある。"
+  },
+  "dealingWithResidualRisk": {
+    "acceptable": "許容可能",
+    "acceptable_with_conditions": "特定の条件下での制限付き許容",
+    "not_acceptable": "許容不可"
+  },
+  "isDataProcessingNecessary": {
+    "necessary": "必要",
+    "unnecessary": "不要"
+  },
+  "isProportionalToPurpose": {
+    "proportional": "比例している",
+    "not_proportional": "比例していない"
+  },
+  "transparencyRiskSecurity": {
+    "insignificant": "軽微：個人データ処理における透明性、適切性、データ最小化の喪失であり、業務への影響は最小限で費用もわずかであり、データ主体の事業や財務に顕著な影響を与えない。",
+    "minor": "小：個人データ処理における透明性、適切性、データ最小化の喪失であり、業務への影響は認識できるが限定的で、多少の費用を伴い、データ主体に軽微な財務的影響をもたらす可能性があるが、権利への実質的な影響はない。",
+    "moderate": "中：個人データ処理における透明性、適切性、データ最小化の喪失であり、業務への影響は実質的で費用も大きく、データ主体に重大な事業または財務的損害をもたらす可能性があるが、権利に重大なリスクをもたらす特別なカテゴリは関与しない。",
+    "major": "大：個人データ処理における透明性、適切性、データ最小化の喪失であり、深刻な業務混乱を引き起こし、損害が大きく費用も極めて高い。特別なカテゴリ（機密データや犯罪歴など）が関与する可能性があり、データ主体の権利と自由に重大なリスクをもたらす可能性がある。",
+    "extreme": "極大：個人データ処理における透明性、適切性、データ最小化の喪失であり、業務の完全な機能不全につながり、生命への脅威または個人の自由への潜在的脅威を生じさせ、データ主体の権利に深刻な影響をもたらす。"
+  }
+}

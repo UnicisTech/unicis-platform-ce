@@ -95,6 +95,16 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       priority,
       duedate: dueAt,
       description: row.description?.trim() || '',
+      properties: {
+        task_audit_logs: [
+          {
+            actor: teamMember.user,
+            date: Date.now(),
+            event: 'created',
+            diff: null,
+          },
+        ],
+      },
     });
     count++;
   }

@@ -683,6 +683,72 @@ paths:
           $ref: '#/components/responses/Forbidden'
 
   # ─── CSC Framework Statuses ───────────────────────────────
+  /api/teams/{slug}/csc:
+    parameters:
+      - $ref: '#/components/parameters/slug'
+
+    put:
+      operationId: updateCscControlStatus
+      tags: [Compliance Controls (CSC)]
+      summary: Update a single control status
+      description: |
+        Sets the compliance status for one control within a given framework.
+        The status is stored as a JSON blob in the team's `properties` field.
+        Requires `team:read` permission.
+
+        **Note:** This endpoint performs a read-modify-write on the team's
+        properties JSON. For updating multiple controls at once prefer a
+        single call per control sequentially to avoid concurrent-write races.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [control, value, framework]
+              properties:
+                control:
+                  type: string
+                  description: Control identifier (e.g. "A.5.1")
+                  example: A.5.1
+                value:
+                  type: string
+                  description: New status value
+                  enum:
+                    - not-performed
+                    - performed-informally
+                    - planned
+                    - well-defined
+                    - quantitatively-controlled
+                    - continuously-improving
+                  example: well-defined
+                framework:
+                  type: string
+                  description: ISO framework identifier
+                  example: 'ISO/IEC 27001:2022'
+      responses:
+        '200':
+          description: Status updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      statuses:
+                        type: object
+                        additionalProperties:
+                          type: string
+                        description: Full updated control-status map for the framework
+                  error:
+                    nullable: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
   /api/teams/{slug}/csc/{iso}:
     parameters:
       - $ref: '#/components/parameters/slug'

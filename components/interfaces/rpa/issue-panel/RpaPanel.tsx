@@ -171,7 +171,10 @@ const RpaPanel: React.FC<{ task: Task; slug: string }> = ({ task, slug }) => {
             {steps.slice(0, -1).map((step, index) => (
               <button
                 key={index}
+                id={`rpa-tab-${index}`}
                 role="tab"
+                aria-selected={activeTab === index}
+                aria-controls="rpa-tab-panel"
                 className={`tab ${activeTab === index ? 'tab-active' : ''}`}
                 onClick={() => setActiveTab(index)}
               >
@@ -180,7 +183,14 @@ const RpaPanel: React.FC<{ task: Task; slug: string }> = ({ task, slug }) => {
             ))}
           </div>
 
-          <div className="mt-4">{tabs[activeTab]}</div>
+          <div
+            id="rpa-tab-panel"
+            role="tabpanel"
+            aria-labelledby={`rpa-tab-${activeTab}`}
+            className="mt-4"
+          >
+            {tabs[activeTab]}
+          </div>
         </>
       ) : (
         <div className="mt-4">

@@ -75,6 +75,16 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     priority,
     duedate: dueAt,
     description: sanitizedDescription,
+    properties: {
+      task_audit_logs: [
+        {
+          actor: teamMember.user,
+          date: Date.now(),
+          event: 'created',
+          diff: null,
+        },
+      ],
+    },
   });
 
   await publishTaskCreated({

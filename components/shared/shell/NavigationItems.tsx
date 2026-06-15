@@ -1,6 +1,7 @@
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import classNames from 'classnames';
+import { useTranslation } from 'next-i18next';
 import { Separator } from '@/components/shadcn/ui/separator';
 import React from 'react';
 
@@ -12,6 +13,8 @@ export interface MenuItem {
   openInNewTab?: boolean;
   active?: boolean;
   items?: Omit<MenuItem, 'icon' | 'items'>[];
+  /** Optional count badge shown on the nav item (only rendered when count > 0) */
+  badge?: { count: number; variant: 'red' | 'amber' };
 }
 
 export interface NavigationProps {
@@ -54,7 +57,8 @@ export const NavigationItems: React.FC<NavigationItemsProps> = ({ menus }) => (
   </ul>
 );
 
-const NavigationItem: React.FC<NavigationItemProps> = ({ menu, className }) => {
+const NavigationItem: React.FC<NavigationItemProps> = ({ menu }) => {
+  const { t } = useTranslation('common');
   const isExternal = menu.href.startsWith('http');
   const newTab = isExternal || menu.openInNewTab;
 
@@ -64,29 +68,55 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ menu, className }) => {
       target={newTab ? '_blank' : undefined}
       rel={newTab ? 'noopener noreferrer' : undefined}
       className={classNames(
-        'flex items-center gap-2 rounded-md p-2 text-sm',
+        'flex items-center rounded-md text-[13px] px-2 p-2 gap-2 transition-colors',
         menu.active
-          ? 'bg-muted font-semibold text-foreground'
-          : 'text-foreground hover:bg-muted hover:text-foreground',
-        className
+          ? 'bg-ub-blue-bg text-ub-blue-text font-medium'
+          : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:text-slate-700 dark:text-slate-200'
       )}
     >
       {menu.icon && (
-        <menu.icon
-          className={classNames({
-            'h-5 w-5 min-h-5 min-w-5 flex-none shrink-0': true,
-            'text-primary': menu.active,
-            [className as string]: true,
-          })}
-          aria-hidden="true"
-        />
+        // Wrap in a span so CSS filter can grey out PNG image icons when inactive.
+        // Heroicon/Lucide SVG icons also receive a text-colour class (uses currentColor).
+        <span
+          className="flex-none shrink-0 flex items-center justify-center h-5 w-5"
+          style={
+            menu.active ? undefined : { filter: 'grayscale(1)', opacity: 0.45 }
+          }
+        >
+          <menu.icon
+            className={classNames(
+              'h-5 w-5 min-h-5 min-w-5',
+              menu.active
+                ? 'text-ub-blue'
+                : 'text-slate-500 dark:text-slate-400'
+            )}
+            aria-hidden="true"
+          />
+        </span>
       )}
       <span className="min-w-0 flex-1">{menu.name}</span>
+      {menu.badge && menu.badge.count > 0 && (
+        <span
+          className={classNames(
+            'ml-auto flex-shrink-0 text-[10px] font-semibold px-1.5 py-0.5 rounded-md min-w-[20px] text-center leading-none',
+            menu.badge.variant === 'red'
+              ? 'bg-red-100 text-red-700 dark:text-red-400'
+              : 'bg-amber-100 text-amber-700'
+          )}
+        >
+          {menu.badge.count > 99 ? '99+' : menu.badge.count}
+        </span>
+      )}
       {newTab && (
-        <ArrowTopRightOnSquareIcon
-          className="h-4 w-4 shrink-0 text-muted-foreground"
-          aria-hidden="true"
-        />
+        <>
+          <ArrowTopRightOnSquareIcon
+            className="h-3 w-3 shrink-0 text-slate-300"
+            aria-hidden="true"
+          />
+          <span className="sr-only">
+            {t('opens-in-new-tab', { defaultValue: '(opens in new tab)' })}
+          </span>
+        </>
       )}
     </Link>
   );

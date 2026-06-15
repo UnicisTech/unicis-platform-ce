@@ -8,6 +8,7 @@ import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Badge } from '@/components/shadcn/ui/badge';
 import { Button } from '@/components/shadcn/ui/button';
+import { Pencil, Trash2 } from 'lucide-react';
 import { isTranferPermitted } from '@/lib/tia/helpers';
 
 const getEndDate = (dateStr, yearsToAdd) => {
@@ -45,40 +46,64 @@ const TiaTable = ({
   } = usePagination<TaskWithTiaProcedure>(tasks, perPage);
 
   return (
-    <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
+    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden [&_th]:whitespace-normal! [&_td]:whitespace-normal!">
       <div className="overflow-x-auto">
-        <table className="w-full min-w-full divide-y divide-border text-sm">
-          <thead className="bg-muted">
+        <table className="w-full min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-sm">
+          <thead className="bg-slate-50 dark:bg-slate-900">
             <tr>
-              <th scope="col" className="px-1.5 py-1.5 text-left">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('tia')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('tia-data-exporter')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('tia-data-importer')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('tia-assessment-date')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('tia-ending-date')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('tia-egal-analysis')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('tia-transfer-is')}
               </th>
               {canAccess('task', ['update']) && (
-                <th scope="col" className="px-1.5 py-1.5 text-left">
+                <th
+                  scope="col"
+                  className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+                >
                   {t('actions')}
                 </th>
               )}
             </tr>
           </thead>
-          <tbody className="divide-y divide-border">
+          <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
             {pageData.map((task) => (
               <tr key={task.id}>
                 <td className="px-1.5 py-1.5">
@@ -108,7 +133,13 @@ const TiaTable = ({
                   </Badge>
                 </td>
                 <td className="px-1.5 py-1.5">
-                  <span>{task.properties.tia_procedure[0].DataExporter}</span>
+                  <span>
+                    {task.properties.tia_procedure[0].LawImporterCountry
+                      ? t(
+                          `country.${task.properties.tia_procedure[0].LawImporterCountry}`
+                        )
+                      : '—'}
+                  </span>
                 </td>
                 <td className="px-1.5 py-1.5">
                   <span>
@@ -128,23 +159,20 @@ const TiaTable = ({
                   <td className="px-1.5 py-1.5">
                     <div className="flex gap-2">
                       <Button
-                        size="sm"
                         variant="outline"
-                        onClick={() => {
-                          editHandler(task);
-                        }}
+                        size="icon"
+                        onClick={() => editHandler(task)}
+                        aria-label={t('edit-task')}
                       >
-                        {t('edit-task')}
+                        <Pencil className="h-4 w-4" aria-hidden="true" />
                       </Button>
-
                       <Button
-                        size="sm"
                         variant="destructive"
-                        onClick={() => {
-                          deleteHandler(task);
-                        }}
+                        size="icon"
+                        onClick={() => deleteHandler(task)}
+                        aria-label={t('delete')}
                       >
-                        {t('delete')}
+                        <Trash2 className="h-4 w-4" aria-hidden="true" />
                       </Button>
                     </div>
                   </td>

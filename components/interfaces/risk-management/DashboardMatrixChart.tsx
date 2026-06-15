@@ -154,6 +154,11 @@ const RiskMatrixDashboardChart = ({
 
   return (
     <div
+      role="img"
+      aria-label={t('chart.risk-matrix-aria-label', {
+        defaultValue:
+          'Risk matrix showing distribution of risks by likelihood and impact level',
+      })}
       className="relative mx-auto"
       style={{ width: `${chartWidth}px`, height: `${chartHeight}px` }}
     >
@@ -170,7 +175,7 @@ const RiskMatrixDashboardChart = ({
         return (
           <div
             key={index}
-            className={`absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-md text-sm font-semibold text-black shadow ${isClickable ? 'cursor-pointer hover:ring-2 hover:ring-primary' : ''}`}
+            className={`absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-md text-sm font-semibold text-black shadow ${isClickable ? 'cursor-pointer hover:ring-2 hover:ring-blue-500 dark:hover:ring-blue-400' : ''}`}
             style={{
               left: `${point.x}px`,
               top: `${point.y}px`,

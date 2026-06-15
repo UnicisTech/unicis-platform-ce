@@ -5,7 +5,7 @@ import type { PiaRisk } from 'types';
 import { useTranslation } from 'next-i18next';
 
 const Results = ({ risk }: { risk: PiaRisk }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'pia']);
 
   return (
     <>

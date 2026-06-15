@@ -23,16 +23,15 @@ const CommentEdit = ({
   }, []);
 
   return (
-    <>
-      <div>
+    <div>
+      <div className="rounded-lg border border-slate-200 dark:border-slate-700 overflow-hidden mb-2">
         <QuillEditor
           enableEmojiPicker
           defaultValue={comment.text}
           onChange={changeHandler}
         />
       </div>
-
-      <div className="flex gap-1.5 mt-1.5">
+      <div className="flex gap-1.5">
         <Button size="sm" onClick={() => updateHandler(newContent, comment.id)}>
           {t('save')}
         </Button>
@@ -40,7 +39,7 @@ const CommentEdit = ({
           {t('cancel')}
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 

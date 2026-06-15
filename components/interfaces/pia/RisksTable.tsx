@@ -7,6 +7,7 @@ import { StatusBadge } from '@/components/shared';
 import { riskProbabilityPoints, riskSecurityPoints } from '@/lib/pia';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Button } from '@/components/shadcn/ui/button';
+import { Pencil, Trash2 } from 'lucide-react';
 import useCanAccess from 'hooks/useCanAccess';
 import { riskValueToLabelKey } from '@/lib/common';
 
@@ -53,34 +54,52 @@ const RisksTable = ({
   } = usePagination<TaskWithPiaRisk>(tasks, perPage);
 
   return (
-    <div className="[&_th]:whitespace-normal! [&_td]:whitespace-normal! mt-2">
+    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden [&_th]:whitespace-normal! [&_td]:whitespace-normal! mt-2">
       <div className="overflow-x-auto">
-        <table className="w-full min-w-full divide-y divide-border text-sm">
-          <thead className="bg-muted">
+        <table className="w-full min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-sm">
+          <thead className="bg-slate-50 dark:bg-slate-900">
             <tr>
-              <th scope="col" className="px-1.5 py-1.5 text-left">
-                {t('rpa')}
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
+                {t('title')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('status')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('confidentiality-and-integrity')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('availability')}
               </th>
-              <th scope="col" className="px-1.5 py-1.5 text-left">
+              <th
+                scope="col"
+                className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+              >
                 {t('transparency-and-data-minimization')}
               </th>
               {canAccess('task', ['update']) && (
-                <th scope="col" className="px-1.5 py-1.5 text-left">
+                <th
+                  scope="col"
+                  className="px-1.5 py-1.5 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+                >
                   {t('actions')}
                 </th>
               )}
             </tr>
           </thead>
-          <tbody className="divide-y divide-border">
+          <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
             {pageData.map((task) => {
               const confidentialityValue = calculatePercentage(
                 riskProbabilityPoints[
@@ -141,22 +160,20 @@ const RisksTable = ({
                     <td className="px-4 py-2 text-right">
                       <div className="inline-flex gap-2 justify-end">
                         <Button
-                          size="sm"
                           variant="outline"
-                          onClick={() => {
-                            editHandler(task);
-                          }}
+                          size="icon"
+                          onClick={() => editHandler(task)}
+                          aria-label={t('edit-task')}
                         >
-                          {t('edit-task')}
+                          <Pencil className="h-4 w-4" aria-hidden="true" />
                         </Button>
                         <Button
-                          size="sm"
                           variant="destructive"
-                          onClick={() => {
-                            deleteHandler(task);
-                          }}
+                          size="icon"
+                          onClick={() => deleteHandler(task)}
+                          aria-label={t('delete')}
                         >
-                          {t('delete')}
+                          <Trash2 className="h-4 w-4" aria-hidden="true" />
                         </Button>
                       </div>
                     </td>

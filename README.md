@@ -13,15 +13,13 @@
 ![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F?logo=LinkedIn&label=LinkedIn&link=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F)
 ![Discord](https://img.shields.io/discord/1110270854824214589)
 
-Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs.
+Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs. Built for CISOs, DPOs, DevSecOps, and compliance teams who need one place to manage privacy, cybersecurity controls, and risk.
 
 Please star ⭐ the repo if you want us to continue developing and improving the Unicis Platform! 😀
 
 <p align="center">
-  <img src="https://d4.alternativeto.net/XZ4y8JadDsw7PevtL5HKWDZfmnKG0q0A4uniE1oIgKE/rs:fit:2400:2400:0/g:ce:0:0/YWJzOi8vZGlzdC9zL3VuaWNpcy1wbGF0Zm9ybV84NzMyNTVfZnVsbC5zdmc.jpg" 
-       alt="Unicis Platform Screenshot" 
-       width="800" 
-       style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin-bottom: 20px;">
+  <img src="public/readme-presentation.png"
+       alt="Unicis Platform Screenshot">
 </p>
 
 ## 🗄️ Available Frameworks and Standards
@@ -61,6 +59,18 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 - EU AI Act
 - Health Insurance Portability and Accountability Act (HIPAA)
 - Custom ...
+
+## ✨ What's New
+
+**Direction B Design System** — a calm, professional visual language rolled out across every module. Unified card shells, Direction B table headers, responsive tab bars, module badges, and a consistent dark mode token set throughout RPA, TIA, PIA, CSC, RM, IAP, Tasks, and Dashboard.
+
+**Live Domain Health Dashboard** — three at-a-glance status cards above the dashboard tab switcher show real-time health for Data Protection, Cybersecurity, and Risk Management. Each card switches directly to its module tab and carries full keyboard + screen-reader support.
+
+**WCAG 2.1 AA Accessibility** — comprehensive accessibility pass: semantic page language, ARIA tab/panel roles, mobile sidebar focus trap, chart `role="img"` labels, form error association, dynamic notification bell label, contextual icon-button labels, and 4.5:1 colour contrast on all content text.
+
+**Webhook Delivery Status** — the webhooks table now shows a live "Last delivery" column with success ✓, pending ⏱, or failed ✗ status and timestamp for every endpoint, powered by the Svix `messageAttempt` API.
+
+**Responsive across all modules** — every module (RPA, TIA, PIA, CSC, RM, IAP, Tasks, Comments, Dashboard) is tested and verified at 375 px, 768 px, and 1280 px. Toolbars wrap, tables scroll, and dialogs never overflow on mobile.
 
 ## 📖 Additional Resources
 
@@ -224,10 +234,11 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - Processor Questionnaire Checklist
 - Asset Inventory Management
 - Vendor Assessment Checklist
-- Benchmark Report - Trust Center as a public compliance page
+- Benchmark Report — Trust Center as a public compliance page
 - Vendor Report
 - Incident Management
 - Document Management / Policy Lifecycle
+- KPI sparklines — trend charts on compliance score and open-risk KPI cards
 
 ## 🥇 Features
 
@@ -243,7 +254,7 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - Invite users to the team
 - Manage team members
 - Update team settings
-- Webhooks & Events (task.created, task.commented, task.updated, task.deleted, task.due_date, file.uploaded)
+- Webhooks & Events (task.created, task.commented, task.updated, task.deleted, task.due_date, file.uploaded) — with live last-delivery status per endpoint
 - Notifications — in-app bell, email, and web push; per-user channel preferences
 - Internationalization (see supporting languages below)
 - Audit logs
@@ -255,6 +266,10 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - Export / import Statement of Applicability (SoA) — HTML, PDF, Excel
 - REST API — OpenAPI 3.0 spec, Swagger UI at `/api-docs`
 - API Key Bearer Token authentication
+- Direction B Design System — unified card shell, panel headers, table typography, and tab bar across all modules
+- Live Domain Health Row — real-time Data Protection, Cybersecurity, and Risk Management status on the dashboard
+- WCAG 2.1 AA Accessibility — keyboard navigation, ARIA roles, focus management, screen-reader support, 4.5:1 colour contrast
+- Fully responsive — tested at 375 px, 768 px, and 1280 px across every module and dialog
 
 ### Coming soon
 
@@ -267,13 +282,49 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 
 ## Supported languages 🌐
 
-1. EN: English
-2. FR: French
-3. ES: Spanish
-4. DE: German
+| Code | Language               | Status                  |
+| ---- | ---------------------- | ----------------------- |
+| `en` | English                | ✅ Complete (reference) |
+| `fr` | French                 | ✅ Complete             |
+| `de` | German                 | ✅ Complete             |
+| `es` | Spanish                | ✅ Complete             |
+| `it` | Italian                | ✅ Complete             |
+| `ja` | Japanese               | ✅ Complete             |
+| `pt` | Portuguese (Brazilian) | ✅ Complete             |
 
-> [!NOTE]
-> Help with translating it to other languages via our [Contact](https://www.unicis.tech/contact/) form.
+Users can switch the interface language at **Profile → Account → Languages** without changing the URL.
+
+### 🌍 Contributing a Translation
+
+We welcome new languages and corrections to existing ones. You can contribute via [Weblate](https://hosted.weblate.org/projects/unicis-platform/) (no code required) or directly via a pull request.
+
+#### File structure
+
+```
+locales/
+└── {lang}/
+    ├── common.json   # All general UI strings (flat keys + nested objects)
+    ├── rm.json       # Risk Management form fields and headers
+    ├── rpa.json      # Record of Processing Activities labels
+    ├── tia.json      # Transfer Impact Assessment labels
+    ├── pia.json      # Privacy Impact Assessment fields and risk descriptions
+    └── iap.json      # Interactive Awareness Program dashboard labels
+```
+
+#### Adding a new language
+
+1. **Register the locale** — add the language code to the `locales` array in `next-i18next.config.js` and add its display name to `lib/i18n/localeLabels.ts`.
+2. **Create locale files** — copy `locales/en/` into `locales/{lang}/` and translate every value.
+3. **Verify** — run `node -e "JSON.parse(require('fs').readFileSync('locales/{lang}/common.json','utf8'))"` to check JSON validity.
+
+#### Translation rules
+
+- **Keep in English:** technical acronyms (`TIA`, `RPA`, `PIA`, `CSC`, `RM`, `IAP`, `GDPR`, `SCIM`, `SAML`, `SSO`, `API`, `UUID`, `SQL`) and brand/format names (`ISO`, `NIST`, `OWASP`, `PCI DSS`, `PDF`, `CSV`, `XLSX`, `ODS`).
+- **Preserve placeholders:** `{{count}}`, `{{name}}`, `{{status}}`, and all other `{{…}}` interpolations must appear unchanged.
+- **Preserve nested structure:** `common.json` contains both flat string keys and nested objects (e.g. `"statuses"`, `"task-statuses"`, `"errors"`, `"sso"`). Translate the values, never the keys.
+- **Module framework content** (`locales/en/csc/*.json`) contains official control names and descriptions from ISO 27001, NIST CSF, GDPR, etc. — these are intentionally kept in English as they reference authoritative standard language.
+- **Portuguese:** use Brazilian Portuguese (pt-BR) conventions.
+- **Japanese:** use natural UI-register language; avoid over-formal keigo for button labels and short UI strings.
 
 ## ✨ Contributing
 

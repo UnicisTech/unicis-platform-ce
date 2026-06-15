@@ -42,11 +42,19 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
     <div className="overflow-x-auto">
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead className="w-1/5">{t('name')}</TableHead>
-            <TableHead className="w-2/5">{t('category')}</TableHead>
-            <TableHead className="w-[15%]">{t('status')}</TableHead>
-            <TableHead className="w-1/4">{t('actions')}</TableHead>
+          <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-900">
+            <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 w-1/5">
+              {t('name')}
+            </TableHead>
+            <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 w-2/5">
+              {t('category')}
+            </TableHead>
+            <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 w-[15%]">
+              {t('status')}
+            </TableHead>
+            <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 w-1/4">
+              {t('actions')}
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -57,16 +65,23 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
                 ?.name || '-';
 
             return (
-              <TableRow key={`${teamCourse.course.name}-${idx}`}>
-                <TableCell>{teamCourse.course.name}</TableCell>
-                <TableCell>{categoryName}</TableCell>
-                <TableCell>
+              <TableRow
+                key={`${teamCourse.course.name}-${idx}`}
+                className="border-slate-100 dark:border-slate-700"
+              >
+                <TableCell className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100">
+                  {teamCourse.course.name}
+                </TableCell>
+                <TableCell className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">
+                  {categoryName}
+                </TableCell>
+                <TableCell className="px-4 py-3">
                   <StatusBadge
                     value={status}
                     label={t(`task-statuses.${status}`)}
                   />
                 </TableCell>
-                <TableCell>
+                <TableCell className="px-4 py-3">
                   <div className="flex items-center gap-2 flex-wrap">
                     {canAccess('iap_course', ['create']) && (
                       <Button
@@ -74,8 +89,9 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
                         size="icon"
                         onClick={() => editHandler(teamCourse)}
                         disabled={teamCourse.progress.length > 0}
+                        aria-label={`${t('edit')} ${teamCourse.course.name}`}
                       >
-                        <Edit2 className="h-4 w-4" />
+                        <Edit2 className="h-4 w-4" aria-hidden="true" />
                       </Button>
                     )}
                     {canAccess('iap_course', ['delete']) && (
@@ -83,23 +99,26 @@ const CoursesTable: React.FC<CoursesTableProps> = ({
                         variant="destructive"
                         size="icon"
                         onClick={() => deleteHandler(teamCourse)}
+                        aria-label={`${t('delete')} ${teamCourse.course.name}`}
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-4 w-4" aria-hidden="true" />
                       </Button>
                     )}
                     <Button
                       variant="outline"
                       size="icon"
                       onClick={() => completionHandler(teamCourse)}
+                      aria-label={`${t('completion-results')} – ${teamCourse.course.name}`}
                     >
-                      <BarChart2 className="h-4 w-4" />
+                      <BarChart2 className="h-4 w-4" aria-hidden="true" />
                     </Button>
                     <Button
                       variant="outline"
                       size="icon"
                       onClick={() => statusHandler(teamCourse)}
+                      aria-label={`${t('status-results')} – ${teamCourse.course.name}`}
                     >
-                      <TableIcon className="h-4 w-4" />
+                      <TableIcon className="h-4 w-4" aria-hidden="true" />
                     </Button>
                   </div>
                 </TableCell>

@@ -8,7 +8,7 @@ const useCscStatuses = (slug: string, framework: ISO) => {
   const { data, error } = useSWR<ApiResponse<any>>(url, fetcher);
 
   const mutateStatuses = async () => {
-    mutate(url);
+    await mutate(url);
   };
 
   return {

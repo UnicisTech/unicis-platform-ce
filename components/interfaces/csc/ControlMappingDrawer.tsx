@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { X, Link2, Check, Loader2 } from 'lucide-react';
 import { useTranslation } from 'next-i18next';
 import type { ISO, Task } from 'types';
@@ -105,20 +105,17 @@ export default function ControlMappingDrawer({
   // ── Cross-framework linking helpers ────────────────────────
 
   /** Check if a task is already linked to a specific control in a given framework */
-  const isTaskLinkedTo = useCallback(
-    (task: Task, mappedControlId: string, fw: ISO) => {
-      const prop = getCscControlsProp(fw);
-      return (
-        (task.properties?.[prop] as string[] | undefined)?.includes(
-          mappedControlId
-        ) ?? false
-      );
-    },
-    []
-  );
+  const isTaskLinkedTo = (task: Task, mappedControlId: string, fw: ISO) => {
+    const prop = getCscControlsProp(fw);
+    return (
+      (task.properties?.[prop] as string[] | undefined)?.includes(
+        mappedControlId
+      ) ?? false
+    );
+  };
 
   /** For each mapped control, compute which linked tasks are NOT yet linked to it */
-  const mappedControlLinkStatus = useMemo(() => {
+  const mappedControlLinkStatus = (() => {
     if (!mappingEntry || linkedTasks.length === 0)
       return new Map<string, Task[]>();
     const result = new Map<string, Task[]>();
@@ -133,20 +130,19 @@ export default function ControlMappingDrawer({
       }
     }
     return result;
-    // eslint-disable-next-line react-hooks/preserve-manual-memoization
-  }, [mappingEntry, linkedTasks, otherFrameworks, isTaskLinkedTo]);
+  })();
 
   /** Total count of unlinked (task, mapped-control) pairs across all frameworks */
-  const totalUnlinkedPairs = useMemo(() => {
+  const totalUnlinkedPairs = (() => {
     let count = 0;
     for (const unlinked of mappedControlLinkStatus.values()) {
       count += unlinked.length;
     }
     return count;
-  }, [mappedControlLinkStatus]);
+  })();
 
   /** Collect all unlinked mapped controls for "Link All Mapped" */
-  const getAllUnlinkedMapped = useCallback(() => {
+  const getAllUnlinkedMapped = () => {
     const taskSet = new Map<number, Set<string>>();
     // group by (taskNumber, framework) → controlIds
     for (const [key, unlinkedTasks] of mappedControlLinkStatus) {
@@ -172,10 +168,10 @@ export default function ControlMappingDrawer({
 
     const taskNumbers = [...taskSet.keys()];
     return { taskNumbers, controls };
-  }, [mappedControlLinkStatus]);
+  };
 
   /** Link all linked tasks to ALL unlinked mapped controls */
-  const handleLinkAllMapped = useCallback(async () => {
+  const handleLinkAllMapped = async () => {
     const { taskNumbers, controls } = getAllUnlinkedMapped();
     if (taskNumbers.length === 0 || controls.length === 0) return;
     setBulkLoading(true);
@@ -184,52 +180,50 @@ export default function ControlMappingDrawer({
     } finally {
       setBulkLoading(false);
     }
-  }, [getAllUnlinkedMapped, onBulkLinkMapped, controlId]);
+  };
 
   /** Link all unlinked tasks to a specific mapped control */
-  const handleLinkAllToControl = useCallback(
-    async (mappedControlId: string, fw: ISO) => {
-      const key = `${fw}:${mappedControlId}`;
-      const unlinked = mappedControlLinkStatus.get(key) ?? [];
-      if (unlinked.length === 0) return;
-      setPerControlLoading(key);
-      try {
-        await onBulkLinkMapped(
-          unlinked.map((t) => t.taskNumber),
-          [{ controlId: mappedControlId, framework: fw }],
-          controlId
-        );
-      } finally {
-        setPerControlLoading(null);
-      }
-    },
-    [mappedControlLinkStatus, onBulkLinkMapped, controlId]
-  );
+  const handleLinkAllToControl = async (mappedControlId: string, fw: ISO) => {
+    const key = `${fw}:${mappedControlId}`;
+    const unlinked = mappedControlLinkStatus.get(key) ?? [];
+    if (unlinked.length === 0) return;
+    setPerControlLoading(key);
+    try {
+      await onBulkLinkMapped(
+        unlinked.map((t) => t.taskNumber),
+        [{ controlId: mappedControlId, framework: fw }],
+        controlId
+      );
+    } finally {
+      setPerControlLoading(null);
+    }
+  };
 
   /** Link a single task to a single mapped control */
-  const handleLinkOneTask = useCallback(
-    async (taskNumber: number, mappedControlId: string, fw: ISO) => {
-      const key = `${fw}:${mappedControlId}`;
-      setPerControlLoading(key);
-      try {
-        await onBulkLinkMapped(
-          [taskNumber],
-          [{ controlId: mappedControlId, framework: fw }],
-          controlId
-        );
-      } finally {
-        setPerControlLoading(null);
-      }
-    },
-    [onBulkLinkMapped, controlId]
-  );
+  const handleLinkOneTask = async (
+    taskNumber: number,
+    mappedControlId: string,
+    fw: ISO
+  ) => {
+    const key = `${fw}:${mappedControlId}`;
+    setPerControlLoading(key);
+    try {
+      await onBulkLinkMapped(
+        [taskNumber],
+        [{ controlId: mappedControlId, framework: fw }],
+        controlId
+      );
+    } finally {
+      setPerControlLoading(null);
+    }
+  };
 
   const isAnyLoading = bulkLoading || perControlLoading !== null;
 
   return (
     <Drawer open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DrawerContent
-        className="right-0 left-auto top-0 bottom-0 mt-0 h-full w-full max-w-lg rounded-none border-l bg-background [&>div:first-child]:hidden sm:rounded-l-lg"
+        className="right-0 left-auto top-0 bottom-0 mt-0 h-full w-full max-w-lg rounded-none border-l bg-white dark:bg-slate-800 [&>div:first-child]:hidden sm:rounded-l-lg"
         aria-label={t('csc-mapping.drawer.aria-label', 'Framework Mapping')}
       >
         <DrawerHeader className="flex flex-row items-start justify-between gap-3 border-b text-left">
@@ -258,7 +252,7 @@ export default function ControlMappingDrawer({
                 </DrawerDescription>
               ) : null;
             })()}
-            <p className="text-xs text-muted-foreground mt-1">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
               {isoValueToLabel(currentFramework)} ·{' '}
               {t('csc-mapping.drawer.subtitle', 'Cross-Framework Mappings')}
             </p>
@@ -277,7 +271,7 @@ export default function ControlMappingDrawer({
         <div className="flex-1 overflow-y-auto divide-y">
           <section className="p-4">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 {t('csc-mapping.drawer.mappings-title', 'Mapped Controls')}
               </h3>
               {linkedTasks.length > 0 && totalUnlinkedPairs > 0 && (
@@ -299,7 +293,7 @@ export default function ControlMappingDrawer({
             </div>
 
             {!mappingEntry || otherFrameworks.length === 0 ? (
-              <div className="text-center py-8 text-muted-foreground/70">
+              <div className="text-center py-8 text-slate-500/70">
                 <svg
                   className="w-10 h-10 mx-auto mb-2 opacity-30"
                   fill="none"
@@ -333,9 +327,9 @@ export default function ControlMappingDrawer({
                         key={fw}
                         className="rounded-lg border overflow-hidden opacity-60"
                       >
-                        <div className="flex items-center gap-2 px-3 py-2 bg-muted/30">
+                        <div className="flex items-center gap-2 px-3 py-2 bg-slate-100/60 dark:bg-slate-700/60">
                           <Badge variant="outline">{isoValueToLabel(fw)}</Badge>
-                          <span className="text-xs text-muted-foreground italic">
+                          <span className="text-xs text-slate-500 dark:text-slate-400 italic">
                             {t(
                               'csc-mapping.drawer.no-mapping-for-framework',
                               'No mapping'
@@ -347,9 +341,9 @@ export default function ControlMappingDrawer({
                   }
                   return (
                     <div key={fw} className="rounded-lg border overflow-hidden">
-                      <div className="flex items-center gap-2 px-3 py-2 bg-muted/40">
+                      <div className="flex items-center gap-2 px-3 py-2 bg-slate-100/80">
                         <Badge variant="secondary">{isoValueToLabel(fw)}</Badge>
-                        <span className="text-xs text-muted-foreground">
+                        <span className="text-xs text-slate-500 dark:text-slate-400">
                           {mapped.length}{' '}
                           {t('csc-mapping.drawer.controls-count', 'control(s)')}
                         </span>
@@ -395,7 +389,7 @@ export default function ControlMappingDrawer({
                           return (
                             <div
                               key={mappedId}
-                              className="px-3 py-2.5 hover:bg-muted/20 transition-colors"
+                              className="px-3 py-2.5 hover:bg-slate-100/40 dark:hover:bg-slate-700/40 transition-colors"
                             >
                               <div className="flex items-start gap-2">
                                 <Badge
@@ -406,7 +400,7 @@ export default function ControlMappingDrawer({
                                 </Badge>
                                 <div className="min-w-0 flex-1">
                                   {sectionLabel && (
-                                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold leading-none mb-0.5">
+                                    <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold leading-none mb-0.5">
                                       {sectionLabel}
                                     </p>
                                   )}
@@ -418,7 +412,7 @@ export default function ControlMappingDrawer({
                                     </p>
                                   )}
                                   {requirements && (
-                                    <p className="text-xs text-muted-foreground mt-0.5 leading-snug">
+                                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
                                       {requirements}
                                     </p>
                                   )}
@@ -435,7 +429,7 @@ export default function ControlMappingDrawer({
                                         </span>
                                       ) : (
                                         <>
-                                          <span className="text-[11px] text-muted-foreground">
+                                          <span className="text-[11px] text-slate-500 dark:text-slate-400">
                                             {t(
                                               'csc-mapping.drawer.tasks-linked-count',
                                               {
@@ -489,7 +483,7 @@ export default function ControlMappingDrawer({
                                               fw
                                             )
                                           }
-                                          className="flex items-center gap-1.5 text-[10px] text-muted-foreground hover:text-foreground transition-colors disabled:opacity-50"
+                                          className="flex items-center gap-1.5 text-[10px] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors disabled:opacity-50"
                                         >
                                           <Link2 className="h-2.5 w-2.5 shrink-0" />
                                           <span className="font-mono">
@@ -516,13 +510,13 @@ export default function ControlMappingDrawer({
           </section>
 
           <section className="p-4">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
               {t('csc-mapping.drawer.linked-tasks', 'Linked Tasks')} (
               {linkedTasks.length})
             </h3>
 
             {linkedTasks.length === 0 ? (
-              <p className="text-sm text-muted-foreground text-center py-4">
+              <p className="text-sm text-slate-500 dark:text-slate-400 text-center py-4">
                 {t(
                   'csc-mapping.drawer.no-linked-tasks',
                   'No tasks linked to this control yet.'
@@ -533,11 +527,11 @@ export default function ControlMappingDrawer({
                 {linkedTasks.map((task) => (
                   <div
                     key={task.id}
-                    className="flex items-center gap-3 p-3 rounded-lg bg-muted/30 border"
+                    className="flex items-center gap-3 p-3 rounded-lg bg-slate-100/60 dark:bg-slate-700/60 border"
                   >
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-mono text-muted-foreground">
+                        <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
                           #{task.taskNumber}
                         </span>
                         <span className="text-xs font-medium truncate">
@@ -545,7 +539,7 @@ export default function ControlMappingDrawer({
                         </span>
                       </div>
                       {task.status && (
-                        <span className="text-[10px] text-muted-foreground mt-0.5 block capitalize">
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 block capitalize">
                           {getStatusLabel(task.status)}
                         </span>
                       )}
@@ -562,7 +556,7 @@ export default function ControlMappingDrawer({
 
             {unlinkedTasks.length > 0 && (
               <div className="mt-4">
-                <p className="text-xs font-semibold text-muted-foreground mb-2">
+                <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2">
                   {t(
                     'csc-mapping.drawer.link-task-label',
                     'Link an existing task to this control:'
@@ -577,18 +571,18 @@ export default function ControlMappingDrawer({
                       }
                       className={cn(
                         'w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg border transition-colors text-left group',
-                        'hover:border-foreground/30 hover:bg-muted/60'
+                        'hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50'
                       )}
                     >
                       <div className="flex items-center gap-2 min-w-0">
-                        <span className="text-xs font-mono text-muted-foreground group-hover:text-foreground flex-shrink-0">
+                        <span className="text-xs font-mono text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:hover:text-slate-100 flex-shrink-0">
                           #{task.taskNumber}
                         </span>
-                        <span className="text-xs truncate group-hover:text-foreground">
+                        <span className="text-xs truncate group-hover:text-slate-900 dark:hover:text-slate-100">
                           {task.title}
                         </span>
                       </div>
-                      <span className="text-xs text-foreground/80 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+                      <span className="text-xs text-slate-700 dark:text-slate-200 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
                         {t('csc-mapping.drawer.link-btn', 'Link')} →
                       </span>
                     </button>
@@ -599,8 +593,8 @@ export default function ControlMappingDrawer({
           </section>
         </div>
 
-        <div className="px-4 py-3 border-t bg-muted/30">
-          <p className="text-[11px] text-muted-foreground text-center">
+        <div className="px-4 py-3 border-t bg-slate-100/60 dark:bg-slate-700/60">
+          <p className="text-[11px] text-slate-500 dark:text-slate-400 text-center">
             {t(
               'csc-mapping.drawer.footer-hint',
               'Mappings are based on enabled frameworks in Cybersecurity Settings.'

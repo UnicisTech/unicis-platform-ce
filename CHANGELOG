@@ -12,8 +12,83 @@ tags:
 ---
 
 # Changelog / Release notes
- 
+
 The information about Unicis Platform releases and changes is listed in order below.
+
+## [UX/UI Redesign, Dashboard & Accessibility] 2026-06-12
+
+*Release date: 2026-06-12*
+
+- New Features
+  - Domain Health Row — three live status cards above the dashboard tab switcher (Data Protection, Cybersecurity, Risk Management); each card switches to the corresponding tab
+  - Dashboard KPI row: IAP card now shows non-compliant member count, colour-coded variant (amber/red), and links to IAP admin
+  - Needs Attention panel items deep-link directly to the individual task
+  - TIA "at risk" badge in the dashboard TeamAssessment header; shows count of non-authorised transfers or "✓ All permitted"
+  - Webhooks table: new "Last delivery" column showing most recent Svix attempt status and timestamp (success / pending / failed)
+- Enhancements
+  - Direction B design language applied across all modules — unified card shell, panel headers, table header typography, tab bar, and hover states (All Tasks, RPA, TIA, PIA, CSC, RM, IAP, Dashboard)
+  - Module Create buttons and empty-state CTAs migrated from DaisyUI to Shadcn `<Button>`
+  - `ModuleBadge` rewritten as a pure Tailwind component; rendered inline in All Tasks and the Dashboard task matrix
+  - Module page headings with record count pill added to RPA, TIA, PIA, RM, and IAP
+  - Comments redesign: single-column layout, hover-reveal edit/delete, Direction B typography
+  - IAP completion summary banner above the course grid
+  - RM table: replaced unreadable rotated `VerticalHeader` with a two-row grouped header (Raw Risk / Treatment / Target Risk / Current Risk)
+  - CSC: `StatusesTable` + `SectionRail` wrapped in a single Direction B card; `SectionRail` hidden below `lg:` breakpoint
+  - All table action columns standardised to icon-only buttons with `aria-label` (Tasks, RPA, TIA, PIA, RM, Members, Invitations, IAP admin, Webhooks)
+  - TIA country fields now display translated country names (was rendering raw lowercase stored keys)
+  - `AuditTimeline` generic component wired to all modules (RPA, TIA, PIA, CSC, RM)
+  - Removed leftover debug labels in RmAnalysis and TeamCscAnalysis
+- Accessibility (WCAG 2.1 AA)
+  - `<html lang>` attribute set from SSR locale on every page
+  - All Chart.js canvases wrapped in `role="img"` containers with descriptive `aria-label`
+  - Mobile sidebar (`Drawer`) rewritten as an accessible dialog: `role="dialog"`, `aria-modal`, focus-on-open, Escape key, Tab focus trap, `aria-hidden` backdrop
+  - Dashboard tab bar wired with full ARIA tab pattern (`tablist`, `tab`, `tabpanel`)
+  - Notification bell `aria-label` is dynamic with unread count; badge carries `aria-hidden`
+  - Webhook form: events fieldset wrapped in `<fieldset><legend>`; inputs wired with `aria-invalid`, `aria-describedby`, and `role="alert"` error messages
+  - All icon-only buttons and interactive cards carry `aria-label`; active domain health cards carry `aria-pressed`
+  - External navigation links include `<span class="sr-only">(opens in new tab)</span>`
+  - Content text colour raised from `text-slate-400` to `text-slate-500` across KPI strip, task analysis, risk analysis, and webhooks table to meet 4.5:1 contrast ratio
+- Billing
+  - Pricing page redesign — "Most Popular" badge on Premium, plan descriptions, green module checkmarks, blue feature checkmarks, bottom upgrade nudge
+  - Monthly / Annual billing toggle with 20% discount on annual plans (Premium: €15.20/mo · €182.40/yr; Ultimate: €39.20/mo · €470.40/yr)
+  - Annual billing stored on subscription (`isAnnual` field); next invoice date advances 12 months instead of 1
+  - Payment card reflects annual discount on price-per-user and total; shows "/yr" billing cycle and "Annual" badge
+  - Post-request toast now shows a friendly confirmation message in all 7 languages
+- Mobile & Responsive
+  - Teams table: added `overflow-x-auto` inner wrapper so the table scrolls horizontally on small screens instead of clipping
+  - Risk matrix chart: wrapped in `overflow-x-auto` to allow horizontal scrolling on mobile
+  - All Tasks toolbar: fixed conflicting `items-end`/`items-center` classes; toolbar now stacks vertically on mobile and aligns inline on `lg:+`
+  - Task filter dropdowns: each filter gets `flex-1 min-w-[150px]` so the three selectors share available width evenly on narrow viewports
+  - All remaining tables audited against the nested two-div overflow pattern (`overflow-hidden rounded-xl` outer / `overflow-x-auto` inner)
+- Translations & Internationalisation
+  - **Italian, Japanese, and Portuguese added as fully supported locales** — 880+ keys translated per language across all modules (Tasks, RPA, TIA, PIA, CSC, RM, IAP, Dashboard, Settings, Fleet, Auth)
+  - Language switcher (`UpdateLanguage` card) added to Profile → Account settings; all 7 locales are now selectable in-app without touching the URL
+  - `next-i18next.config.js` updated to register `it`, `ja`, `pt`; `localeLabels.ts` extended with native-script names (Italiano, 日本語, Português)
+  - Missing namespace files created for IT, JA, PT: `rm.json` (risk table headers, field/form labels), `rpa.json`, `tia.json`, `pia.json` (full PIA risk-level descriptions, step labels, field names), and `iap.json` (completion-progress, total-courses, completed, in-progress)
+  - `iap.json` namespace created for all 7 locales and wired into `serverSideTranslations` on the IAP index and admin pages — dashboard labels ("Your completion", "Total", "Completed", "In progress") now translate correctly
+  - Hardcoded English labels removed from components and replaced with `t()` calls:
+    - `CscStatusBadge` — status labels now resolve via `t('statuses.{status}.label')` (uses the same nested key as the CSC pie chart)
+    - `CompletionResultsChart` — chart labels now use `t('progress.todo/inprogress/done')`
+    - `StatusResultsChart` — chart labels now use `t('passed')` / `t('failed')`
+  - All nested translation objects in `common.json` translated for IT, JA, PT: `statuses` (CSC maturity labels + descriptions), `task-statuses`, `task-priorities`, `chart-risk-impact`, `chart-risk-probability`, `chart-risk-axis`, `progress`, `errors`, `settings-tabs`, `recurrence-presets`, `recurrence-units`, `recurrence-unit-options`, `task-recurrence-statuses`, `soa-export`, `csc-mapping`, `csc-status-prompt`, `notifications`, `sso`
+  - Added 30+ missing flat keys across all 7 locales: `section-progress`, `status-distribution`, `risk-matrix-axis-label`, `pia-matrix-axis`, `top-open-risks`, `framework`, 18× `domain-health.*` keys (card titles, tab-switch aria-labels, metric strings), `chart.task-status-distribution-aria-label`, `dashboard.kpi.yet-to-complete`, `tia-at-risk`, `tia-all-permitted`, `tia-non-adequate-warning`, `success-message`, `change-language`
+  - Dashboard task matrix column headers migrated from hardcoded English strings to `task-statuses.*` i18n keys
+  - Domain health card tab-switch aria-labels (`Switch to Data Protection / Cybersecurity / Risk Management tab`) now fully translated
+  - CSC bulk-action toast messages split into distinct keys (`csc.bulk-status-updated`, `csc.bulk-tasks-linked`) with proper `{{count}}` / `{{status}}` interpolation
+- API
+  - `PUT /api/teams/{slug}/csc` (single control status update) added to OpenAPI spec — was previously undocumented; `public/openapi.json` regenerated
+- Testing
+  - 62 Jest unit and API handler tests added: status-key regression guard, CSC helper invariants, dashboard counting logic, full CRUD coverage for `/tasks` and `/tasks/[taskNumber]`, and both CSC endpoints
+  - 3 Playwright E2E test suites added: dashboard task matrix + tab switching, task list / kanban usability, CSC bulk status change and task assignment
+- Fixes
+  - TIA: Legal Analysis column was rendering `DataExporter` instead of `LawImporterCountry`
+  - PIA: First column header was labelled with the wrong translation key
+  - CSC: Dark mode inactive tabs appeared selected due to unconditional `dark:text-slate-200`
+  - RM: Asset Owner column showed "Not found" due to invalid Map bracket access; fixed to `.get()`
+  - RM: Unstable row keys (`key={idx}`) changed to `key={task.id}`
+  - CSC: Bulk status change was updating only the last selected control — root cause was `mutateStatuses()` called after every individual write, causing SWR re-fetches to race with Prisma's read-modify-write on the JSON blob; fixed by writing all controls first, then mutating once
+  - CSC: Task assignment required a full page refresh to appear — `useTeamTasks.mutateTasks` called `mutate(url)` without `await` (fire-and-forget); fixed by adding `await`
+  - Dashboard: Task matrix status counters showed 0 for In Progress and In Review — `STATUS_COLS` keys used `in-progress`/`in-review` instead of the DB-stored `inprogress`/`inreview`; fixed across dashboard, `TeamTasksAnalysis`, `GlobalSearch`, and `TaskKanbanBoard`
 
 ## [Tasks] 2026-05-31
 

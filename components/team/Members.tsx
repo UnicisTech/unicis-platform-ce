@@ -20,6 +20,7 @@ import type { ApiResponse } from 'types';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
 import { useState } from 'react';
 import { Button } from '../shadcn/ui/button';
+import { Trash2 } from 'lucide-react';
 
 type FleetEnrollmentLite = {
   status: 'PENDING' | 'COMPLETED' | 'EXPIRED';
@@ -220,86 +221,110 @@ const Members = ({ team }: { team: Team }) => {
   };
 
   return (
-    <div className="space-y-3">
-      <div className="flex justify-between items-center">
-        <div className="space-y-3">
-          <h2 className="text-xl font-medium leading-none tracking-tight">
-            {t('members')}
-          </h2>
-          <p className="text-sm text-muted-foreground">{t('team-members')}</p>
+    <>
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+        <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+          <div>
+            <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
+              {t('members')}
+            </span>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              {t('members-description')}
+            </p>
+          </div>
+          <Button size="sm" onClick={() => setVisible(!visible)}>
+            {t('add-member')}
+          </Button>
         </div>
-        <Button onClick={() => setVisible(!visible)}>{t('add-member')}</Button>
-      </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>{t('name')}</TableHead>
-            <TableHead>{t('email')}</TableHead>
-            <TableHead>{t('role')}</TableHead>
-            <TableHead className="w-[240px]">{t('action')}</TableHead>
-          </TableRow>
-        </TableHeader>
-
-        <TableBody>
-          {typedMembers.map((member) => {
-            const enrollView = getEnrollmentView(member);
-            const isEnrollLoading = !!enrollLoadingByUserId[member.userId];
-
-            return (
-              <TableRow key={member.id}>
-                <TableCell>
-                  <div className="flex items-center space-x-2">
-                    <LetterAvatar name={member.user.name} />
-                    <span>{member.user.name}</span>
-                  </div>
-                </TableCell>
-
-                <TableCell>{member.user.email}</TableCell>
-
-                <TableCell>
-                  {canUpdateRole(member) ? (
-                    <UpdateMemberRole team={team} member={member} />
-                  ) : (
-                    <span>{member.role}</span>
-                  )}
-                </TableCell>
-
-                <TableCell className="w-[240px]">
-                  <div className="flex justify-end gap-2">
-                    <Button
-                      variant={enrollView.isRevoke ? 'destructive' : 'outline'}
-                      size="sm"
-                      disabled={enrollView.disabled || isEnrollLoading}
-                      onClick={() =>
-                        enrollView.isRevoke
-                          ? handleRevokeFleetAccess(member)
-                          : handleEnrollFleet(member)
-                      }
-                    >
-                      {isEnrollLoading
-                        ? t('fleet:fleet-sending')
-                        : enrollView.label}
-                    </Button>
-
-                    <Button
-                      variant="destructive"
-                      size="sm"
-                      disabled={!canRemoveMember(member)}
-                      onClick={() => {
-                        setSelectedMember(member);
-                        setConfirmationDialogVisible(true);
-                      }}
-                    >
-                      {t('remove')}
-                    </Button>
-                  </div>
-                </TableCell>
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-900">
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                  {t('name')}
+                </TableHead>
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                  {t('email')}
+                </TableHead>
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4">
+                  {t('role')}
+                </TableHead>
+                <TableHead className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide px-4 text-right">
+                  {t('actions')}
+                </TableHead>
               </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+            </TableHeader>
+            <TableBody>
+              {typedMembers.map((member) => {
+                const enrollView = getEnrollmentView(member);
+                const isEnrollLoading = !!enrollLoadingByUserId[member.userId];
+
+                return (
+                  <TableRow
+                    key={member.id}
+                    className="border-slate-100 dark:border-slate-700"
+                  >
+                    <TableCell className="px-4 py-3">
+                      <div className="flex items-center space-x-2">
+                        <LetterAvatar name={member.user.name} />
+                        <span className="text-sm font-medium text-slate-900 dark:text-slate-100">
+                          {member.user.name}
+                        </span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">
+                      {member.user.email}
+                    </TableCell>
+                    <TableCell className="px-4 py-3">
+                      {canUpdateRole(member) ? (
+                        <UpdateMemberRole team={team} member={member} />
+                      ) : (
+                        <span className="text-sm text-slate-600 dark:text-slate-300">
+                          {member.role}
+                        </span>
+                      )}
+                    </TableCell>
+                    <TableCell className="px-4 py-3">
+                      <div className="flex justify-end gap-2">
+                        <Button
+                          variant={
+                            enrollView.isRevoke ? 'destructive' : 'outline'
+                          }
+                          size="sm"
+                          disabled={enrollView.disabled || isEnrollLoading}
+                          onClick={() =>
+                            enrollView.isRevoke
+                              ? handleRevokeFleetAccess(member)
+                              : handleEnrollFleet(member)
+                          }
+                        >
+                          {isEnrollLoading
+                            ? t('fleet:fleet-sending')
+                            : enrollView.label}
+                        </Button>
+                        {canRemoveMember(member) && (
+                          <Button
+                            variant="destructive"
+                            size="icon"
+                            onClick={() => {
+                              setSelectedMember(member);
+                              setConfirmationDialogVisible(true);
+                            }}
+                            aria-label={t('remove')}
+                          >
+                            <Trash2 className="h-4 w-4" aria-hidden="true" />
+                          </Button>
+                        )}
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
 
       <ConfirmationDialog
         visible={confirmationDialogVisible}
@@ -311,7 +336,7 @@ const Members = ({ team }: { team: Team }) => {
       </ConfirmationDialog>
 
       <InviteMember visible={visible} setVisible={setVisible} team={team} />
-    </div>
+    </>
   );
 };
 

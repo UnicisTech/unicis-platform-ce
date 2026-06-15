@@ -28,7 +28,6 @@ const StatusSelector = ({
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setValue(statusValue);
   }, [statusValue]);
-
   const handleChange = async (val: string) => {
     const prev = value;
     setValue(val);
