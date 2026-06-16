@@ -124,7 +124,7 @@ export const config: RpaConfig = {
     { label: 'Data encryption', value: 'dataencryption' },
     { label: 'User access control', value: 'useraccesscontrol' },
     { label: 'Control of processors', value: 'controlofprocessors' },
-    { label: 'Minimum Viable Secure Product', value: 'mvps' },
+    { label: 'Minimum Viable Secure Product', value: 'mvsp' },
     {
       label: 'Security Standards and Frameworks certification',
       value: 'securitycert',

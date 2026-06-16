@@ -374,9 +374,9 @@ export async function getServerSideProps({
   locale,
 }: GetServerSidePropsContext) {
   const cscTranslations = [
-    'csc/2013',
-    'csc/2022',
-    'csc/mvps',
+    'csc/iso-2013',
+    'csc/iso-2022',
+    'csc/mvsp',
     'csc/nistcsfv2',
     'csc/eunis2',
     'csc/gdpr',

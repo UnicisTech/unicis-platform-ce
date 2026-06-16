@@ -25,19 +25,19 @@ function asObject(value: JsonWritable): Record<string, any> | null {
 }
 
 /**
- * 1) Renaming csc_controls -> csc_controls_mvps
+ * 1) Renaming csc_controls -> csc_controls_mvsp
  */
 export function renameCscControlsToMvps(props: JsonWritable): JsonWritable {
   const obj = asObject(props);
   if (!obj) return props;
 
-  if (obj.csc_controls_mvps !== undefined || obj.csc_controls === undefined) {
+  if (obj.csc_controls_mvsp !== undefined || obj.csc_controls === undefined) {
     return props;
   }
 
   const cloned: Record<string, any> = { ...obj };
 
-  cloned.csc_controls_mvps = cloned.csc_controls;
+  cloned.csc_controls_mvsp = cloned.csc_controls;
   delete cloned.csc_controls;
 
   return cloned;
@@ -86,15 +86,15 @@ export function normalizeCscControls(
 }
 
 export function normalizeCscControlsMvps(props: JsonWritable): JsonWritable {
-  return normalizeCscControls(props, 'mvps');
+  return normalizeCscControls(props, 'mvsp');
 }
 
 export function normalizeCscControls2013(props: JsonWritable): JsonWritable {
-  return normalizeCscControls(props, '2013');
+  return normalizeCscControls(props, 'iso-2013');
 }
 
 export function normalizeCscControls2022(props: JsonWritable): JsonWritable {
-  return normalizeCscControls(props, '2022');
+  return normalizeCscControls(props, 'iso-2022');
 }
 
 export function normalizeCscControlsNistCsfV2(

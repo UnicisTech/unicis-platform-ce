@@ -1,9 +1,9 @@
 import { ISO } from 'types';
 
 export const CSC_FRAMEWORK_TO_NAME: Record<ISO, string> = {
-  '2013': 'ISO/IEC 27001:2013',
-  '2022': 'ISO/IEC 27001:2022',
-  mvps: 'MVSP v1.0-20211007',
+  'iso-2013': 'ISO/IEC 27001:2013',
+  'iso-2022': 'ISO/IEC 27001:2022',
+  mvsp: 'MVSP',
   nistcsfv2: 'NIST CSF v2',
   eunis2: 'EU NIS2',
   gdpr: 'GDPR',
@@ -24,9 +24,9 @@ export const isoOptions: {
 }));
 
 export const CSC_FRAMEWORK_TO_SHORTNAME: Record<ISO, string> = {
-  mvps: 'MVSP',
-  '2013': 'ISO 2013',
-  '2022': 'ISO 2022',
+  mvsp: 'MVSP',
+  'iso-2013': 'ISO 2013',
+  'iso-2022': 'ISO 2022',
   nistcsfv2: 'NIST',
   eunis2: 'NIS2',
   gdpr: 'GDPR',

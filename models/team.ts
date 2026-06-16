@@ -397,7 +397,7 @@ export const getCscIso = async ({ slug }: { slug: string }): Promise<ISO[]> => {
   }
 
   // TODO: create enum form ISO type
-  const initial = ['mvps'] as ISO[];
+  const initial = ['mvsp'] as ISO[];
 
   const updatedProperties = {
     ...teamProperties,

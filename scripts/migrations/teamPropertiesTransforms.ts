@@ -12,20 +12,20 @@ function asObject(value: JsonWritable): Record<string, any> | null {
 }
 
 /**
- * 1) csc_statuses -> csc_statuses_mvps
- *    Idempotent: if there is already csc_statuses_mvps or there is no csc_statuses — does nothing.
+ * 1) csc_statuses -> csc_statuses_mvsp
+ *    Idempotent: if there is already csc_statuses_mvsp or there is no csc_statuses — does nothing.
  */
 export function renameCscStatusesToMvps(props: JsonWritable): JsonWritable {
   const obj = asObject(props);
   if (!obj) return props;
 
-  if (obj.csc_statuses_mvps !== undefined || obj.csc_statuses === undefined) {
+  if (obj.csc_statuses_mvsp !== undefined || obj.csc_statuses === undefined) {
     return props;
   }
   // Avoid mutations
   const cloned: Record<string, any> = { ...obj };
 
-  cloned.csc_statuses_mvps = cloned.csc_statuses;
+  cloned.csc_statuses_mvsp = cloned.csc_statuses;
   delete cloned.csc_statuses;
 
   return cloned;
@@ -45,7 +45,7 @@ export function replaceDefaultInCscIso(props: JsonWritable): JsonWritable {
   const cloned: Record<string, any> = { ...obj };
 
   // створюємо копію масиву з заміною
-  cloned.csc_iso = arr.map((v) => (v === 'default' ? 'mvps' : v));
+  cloned.csc_iso = arr.map((v) => (v === 'default' ? 'mvsp' : v));
 
   return cloned;
 }
@@ -93,15 +93,15 @@ export function normalizeCscStatuses(
 }
 
 export function normalizeCscStatusesMvps(props: JsonWritable): JsonWritable {
-  return normalizeCscStatuses(props, 'mvps');
+  return normalizeCscStatuses(props, 'mvsp');
 }
 
 export function normalizeCscStatuses2013(props: JsonWritable): JsonWritable {
-  return normalizeCscStatuses(props, '2013');
+  return normalizeCscStatuses(props, 'iso-2013');
 }
 
 export function normalizeCscStatuses2022(props: JsonWritable): JsonWritable {
-  return normalizeCscStatuses(props, '2022');
+  return normalizeCscStatuses(props, 'iso-2022');
 }
 
 export function normalizeCscStatusesNistCsfV2(

@@ -86,7 +86,7 @@ const getMaturityLevels = (statuses: Record<string, string>, iso: ISO) => {
 
   const rounded = rawLevels.map(Math.round);
 
-  return iso === '2013' ? mergePoints(rounded) : rounded;
+  return iso === 'iso-2013' ? mergePoints(rounded) : rounded;
 };
 
 const RadarChart = ({

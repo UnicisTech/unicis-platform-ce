@@ -39,7 +39,7 @@ export interface SoaExportStrings {
 export interface SoaMeta {
   teamName: string;
   framework: string; // e.g. "MVSP v1.0-20211007"
-  iso: ISO; // e.g. "mvps"
+  iso: ISO; // e.g. "mvsp"
   dateOfExport: Date;
   // localized status labels/descriptions (resolved in the component via t())
   statusLabelMap?: Record<string, string>;

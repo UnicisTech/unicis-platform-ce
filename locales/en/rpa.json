@@ -69,7 +69,7 @@
     "dataencryption": "Data encryption",
     "useraccesscontrol": "User access control",
     "controlofprocessors": "Control of processors",
-    "mvps": "Minimum Viable Secure Product",
+    "mvsp": "Minimum Viable Secure Product",
     "securitycert": "Security Standards and Frameworks certification",
     "othermeasures": "Other measures (specify in the ticket)"
   },

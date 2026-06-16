@@ -69,7 +69,7 @@
     "dataencryption": "Datenverschlüsselung",
     "useraccesscontrol": "Benutzerzugangskontrolle",
     "controlofprocessors": "Kontrolle von Auftragsverarbeitern",
-    "mvps": "Minimum Viable Secure Product (Mindestanforderungen für sichere Produkte)",
+    "mvsp": "Minimum Viable Secure Product (Mindestanforderungen für sichere Produkte)",
     "securitycert": "Zertifizierung nach Sicherheitsstandards und Frameworks",
     "othermeasures": "Andere Maßnahmen (im Ticket angeben)"
   },
