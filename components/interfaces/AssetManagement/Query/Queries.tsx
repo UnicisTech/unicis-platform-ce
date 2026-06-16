@@ -11,11 +11,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/shadcn/ui/table';
-import {
-  Loading,
-  PlatformBadge,
-  WithLoadingAndError,
-} from '@/components/shared';
+import { Loading, WithLoadingAndError } from '@/components/shared';
+import PlatformBadge from '@/components/shared/PlatformBadge';
 import useCanAccess from 'hooks/useCanAccess';
 import type { Team, User } from '@/generated/client';
 import { Query } from '@/types/fleet';

@@ -44,7 +44,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import { useTranslation } from 'next-i18next';
-import { FormEvent, ReactNode, useMemo, useState } from 'react';
+import { FormEvent, ReactNode, useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import useSWR from 'swr';
 import type { Team } from 'types';

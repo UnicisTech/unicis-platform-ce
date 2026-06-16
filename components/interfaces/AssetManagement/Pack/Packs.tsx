@@ -11,7 +11,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/shadcn/ui/table';
-import { Error, Loading, PlatformBadge } from '@/components/shared';
+import { Error, Loading } from '@/components/shared';
+import PlatformBadge from '@/components/shared/PlatformBadge';
 import useCanAccess from 'hooks/useCanAccess';
 import type { Team, User } from '@/generated/client';
 import {
