@@ -69,6 +69,17 @@ deploy_dev:
     - export SSH_AUTH_SOCK
     - ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -o IdentitiesOnly=yes root@"$PLATFORM_DEV_IP" 'cd /root/retraced && docker compose stop'
     - caprover deploy --caproverUrl "$CAPROVER_DEV_URL" --caproverPassword "$CAPROVER_DEV_PASSWORD" --caproverApp "$CAPROVER_APP_NAME" --branch "$CI_COMMIT_REF_NAME"
+    - |
+      ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -o IdentitiesOnly=yes root@"$PLATFORM_DEV_IP" "
+        set -e
+        APP_SERVICE=\"srv-captain--${CAPROVER_APP_NAME}\"
+        APP_CONTAINER=\$(docker ps --filter \"label=com.docker.swarm.service.name=\${APP_SERVICE}\" --format '{{.ID}}' | head -n 1)
+        if [ -z \"\${APP_CONTAINER}\" ]; then
+          echo \"Could not find running container for \${APP_SERVICE}\" >&2
+          exit 1
+        fi
+        docker exec \"\${APP_CONTAINER}\" npx prisma migrate deploy
+      "
     - ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -o IdentitiesOnly=yes root@"$PLATFORM_DEV_IP" 'cd /root/retraced && docker compose up -d'
   only:
     - merge_requests
