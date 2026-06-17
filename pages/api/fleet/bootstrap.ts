@@ -47,12 +47,11 @@ export default async function handler(
         .json({ error: 'teamId and password are required' });
     }
 
-    // Verify user is owner of the team
     const teamMember = await prisma.teamMember.findFirst({
       where: {
         teamId,
         userId,
-        role: 'ADMIN',
+        role: 'OWNER',
       },
       include: {
         user: {
