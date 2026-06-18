@@ -2,8 +2,8 @@ const env = {
   databaseUrl: `${process.env.DATABASE_URL}`,
   appUrl: `${process.env.APP_URL}`,
 
-  fleetAPI: `${process.env.NEXT_PUBLIC_FLEET_API_HOST}`,
-  fleetAPIUrl: `${process.env.NEXT_PUBLIC_FLEET_API_URL}`,
+  fleetAPI: process.env.NEXT_PUBLIC_FLEET_API_HOST,
+  fleetAPIUrl: process.env.NEXT_PUBLIC_FLEET_API_URL,
   agentVersion: `${process.env.OSQUERY_AGENT_VERSION || '5.16.0'}`,
   assetRequiredPlan: process.env.NEXT_PUBLIC_ASSET_REQUIRED_PLAN || 'ULTIMATE',
 
