@@ -1,7 +1,10 @@
-import { fleetAuthAPIHeaders } from '@/lib/common';
-import { fleetV1 } from '@/lib/fleet/apiBase';
 import { FleetAccess } from '@/types/fleet';
 import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+import {
+  fleetAccessTokenCookieName,
+  legacyFleetAccessTokenCookieName,
+} from '@/lib/fleet/cookies';
 
 export const useVerifyFleetAsses = () => {
   const [access, setAccess] = useState<FleetAccess>();
@@ -14,20 +17,30 @@ export const useVerifyFleetAsses = () => {
       setError(null);
 
       try {
-        const response = await fleetV1(`/account/access/verify`, {
+        const hasFleetToken = Boolean(
+          Cookies.get(fleetAccessTokenCookieName) ||
+            Cookies.get(legacyFleetAccessTokenCookieName)
+        );
+
+        if (!hasFleetToken) {
+          setAccess(undefined);
+          return;
+        }
+
+        const response = await fetch('/api/fleet/access/verify', {
           method: 'GET',
-          headers: await fleetAuthAPIHeaders(),
+          headers: { 'Content-Type': 'application/json' },
         });
 
         if (!response.ok) {
-          await response.json();
+          const error = await response.json().catch(() => ({}));
+          throw new Error(error?.error || 'Fleet verify failed');
         }
 
         const data: FleetAccess = await response.json();
-        console.log('data', data);
         setAccess(data);
       } catch {
-        setError('An unexpecte derror occurred.');
+        setError('An unexpected error occurred.');
       } finally {
         setLoading(false);
       }

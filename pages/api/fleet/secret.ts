@@ -1,6 +1,6 @@
-import { prisma } from '@/lib/prisma';
-import { getSession } from '@/lib/session';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { getSession } from '@/lib/session';
+import { getFleetAccessTokenFromCookieStore } from '@/lib/fleet/cookies';
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,11 +10,11 @@ export default async function handler(
 
   try {
     switch (method) {
-      case 'PUT':
-        await handlePUT(req, res);
+      case 'GET':
+        await handleGET(req, res);
         break;
       default:
-        res.setHeader('Allow', 'PUT');
+        res.setHeader('Allow', 'GET');
         res.status(405).json({
           error: { message: `Method ${method} Not Allowed` },
         });
@@ -27,18 +27,50 @@ export default async function handler(
   }
 }
 
-const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
-  await getSession(req, res);
+const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await getSession(req, res);
+  const userId = session?.user?.id;
 
-  const { teamId } = req.body as {
-    fleetTeamId: string;
-    secret: string;
-    teamId: string;
-  };
+  if (!userId) {
+    return res.status(401).json({ error: { message: 'Unauthorized' } });
+  }
 
-  const team = await prisma.team.findFirstOrThrow({
-    where: { id: teamId },
+  const teamId =
+    typeof req.query.teamId === 'string' ? req.query.teamId : undefined;
+
+  if (!teamId) {
+    return res
+      .status(400)
+      .json({ error: { message: 'teamId query param is required' } });
+  }
+
+  const fleetBase = process.env.FLEET_API_URL;
+  const fleetToken = getFleetAccessTokenFromCookieStore(req.cookies);
+
+  if (!fleetBase || !fleetToken) {
+    return res.status(401).json({
+      error: { message: 'Fleet not configured or not authenticated' },
+    });
+  }
+
+  const response = await fetch(`${fleetBase}/api/v1/fleet/teams/${teamId}/secret`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Unicis-Fleet-API-Authorization': `UnicisBearer ${fleetToken}`,
+    },
   });
 
-  res.status(200).json({ data: team });
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}));
+    return res.status(response.status).json({
+      error: {
+        message:
+          error?.message || error?.msg || 'Failed to fetch Fleet secret',
+      },
+    });
+  }
+
+  const data = await response.json();
+  return res.status(200).json(data);
 };

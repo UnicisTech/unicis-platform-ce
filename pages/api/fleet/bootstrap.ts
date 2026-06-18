@@ -82,7 +82,6 @@ export default async function handler(
       return res.status(500).json({ error: 'FLEET_NOT_CONFIGURED' });
     }
 
-    // Step 1: Create account in Fleet
     console.log(
       '[Bootstrap] Creating Fleet account for user:',
       teamMember.user.email
@@ -223,18 +222,52 @@ export default async function handler(
 
     if (!orderSecretRes.ok) {
       const errorData = await orderSecretRes.json().catch(() => ({}));
+      const isAlreadyExists =
+        orderSecretRes.status === 500 &&
+        errorData?.message?.toLowerCase().includes('already exists');
+
+      if (isAlreadyExists) {
+        console.log(
+          '[Bootstrap] Fleet secret already exists, continuing with fetch flow'
+        );
+      } else {
+        console.error(
+          '[Bootstrap] Fleet secret order failed:',
+          orderSecretRes.status,
+          errorData
+        );
+        return res.status(500).json({
+          error: 'Failed to order Fleet secret',
+          details: errorData,
+        });
+      }
+    }
+
+    const secretGetRes = await fetch(
+      `${fleetBase}/api/v1/fleet/teams/${teamId}/secret`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Unicis-Fleet-API-Authorization': `UnicisBearer ${fleetToken}`,
+        },
+      }
+    );
+
+    if (!secretGetRes.ok) {
+      const errorData = await secretGetRes.json().catch(() => ({}));
       console.error(
-        '[Bootstrap] Fleet secret order failed:',
-        orderSecretRes.status,
+        '[Bootstrap] Fleet secret fetch failed:',
+        secretGetRes.status,
         errorData
       );
       return res.status(500).json({
-        error: 'Failed to order Fleet secret',
+        error: 'Failed to fetch Fleet secret',
         details: errorData,
       });
     }
 
-    const secretData = await orderSecretRes.json();
+    const secretData = await secretGetRes.json();
 
     console.log('[Bootstrap] Bootstrap completed successfully');
     return res.status(200).json({

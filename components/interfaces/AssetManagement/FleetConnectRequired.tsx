@@ -79,8 +79,13 @@ const FleetConnectRequired = ({
 
   const { access, isLoading } = useVerifyFleetAsses();
   const accessFleetAccount = useAccessFleetAccount();
+  const hasFleetToken = Boolean(
+    Cookies.get(fleetAccessTokenCookieName) ||
+      Cookies.get(legacyFleetAccessTokenCookieName)
+  );
   const accessAuthenticated = Boolean(access?.is_active && !access.is_expired);
-  const isAuthenticated = authOverride ?? accessAuthenticated;
+  const isAuthenticated =
+    authOverride ?? (accessAuthenticated || hasFleetToken);
   const shouldOpenEnrollmentDialog = Boolean(
     enrollmentToken && !isAuthenticated && !enrollmentDialogDismissed
   );
@@ -325,8 +330,6 @@ const FleetConnectRequired = ({
         toast.success(t('fleet:fleet-account-created'));
         setShowBootstrap(false);
         setAuthOverride(true);
-
-        window.location.reload();
       } catch (error) {
         console.error('[Bootstrap] Error:', error);
         toast.error(
