@@ -74,10 +74,26 @@ const AddAsset = ({
     return platform === 'advanced' ? agentEndpoint(os, env.agentVersion) : url;
   };
 
+  const fleetApiHost = (() => {
+    if (env.fleetAPI) {
+      return env.fleetAPI;
+    }
+
+    if (!env.fleetAPIUrl) {
+      return '';
+    }
+
+    try {
+      return new URL(env.fleetAPIUrl).host;
+    } catch {
+      return '';
+    }
+  })();
+
   const osqueryEntry = OSQUERY_ENTRY({
     secret: secret?.secret ?? '',
     teamName: team.name!,
-    apiUrl: env.fleetAPI,
+    apiUrl: fleetApiHost,
     safe: isSafe,
     isCopy: isCopy,
     platform: platform,
