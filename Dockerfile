@@ -96,6 +96,9 @@ ARG RESEND_API_KEY=${RESEND_API_KEY}
 ENV RESEND_FROM=${RESEND_FROM}
 
 
+ARG NODE_OPTIONS=--max-old-space-size=4096
+ENV NODE_OPTIONS=${NODE_OPTIONS}
+
 # Build the Next.js app and apply pending database migrations.
 RUN npx prisma generate && npx prisma migrate deploy && npx tsx scripts/generate-openapi.ts && npx next build --webpack
 
@@ -104,6 +107,3 @@ RUN npm prune --omit=dev
 
 # Start the Next.js app
 CMD ["npm", "start"]
-
-ARG NODE_OPTIONS=--max-old-space-size=4096
-ENV NODE_OPTIONS=${NODE_OPTIONS}
