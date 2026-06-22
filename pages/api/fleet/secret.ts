@@ -53,20 +53,22 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const response = await fetch(`${fleetBase}/api/v1/fleet/teams/${teamId}/secret`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Unicis-Fleet-API-Authorization': `UnicisBearer ${fleetToken}`,
-    },
-  });
+  const response = await fetch(
+    `${fleetBase}/api/v1/fleet/teams/${teamId}/secret`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Unicis-Fleet-API-Authorization': `UnicisBearer ${fleetToken}`,
+      },
+    }
+  );
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
     return res.status(response.status).json({
       error: {
-        message:
-          error?.message || error?.msg || 'Failed to fetch Fleet secret',
+        message: error?.message || error?.msg || 'Failed to fetch Fleet secret',
       },
     });
   }

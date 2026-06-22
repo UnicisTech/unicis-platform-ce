@@ -50,6 +50,7 @@
     "@react-pdf/renderer": "^4.0.0",
     "@retracedhq/logs-viewer": "2.10.1",
     "@retracedhq/retraced": "^0.7.23",
+    "@sentry/nextjs": "^10.59.0",
     "@socialgouv/matomo-next": "^1.9.0",
     "@tailwindcss/postcss": "^4.0.0-alpha.13",
     "@tailwindcss/typography": "0.5.13",

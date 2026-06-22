@@ -5,10 +5,10 @@ stages:
 
 variables:
   DOCKER_DRIVER: overlay2
-  DOCKER_TLS_CERTDIR: "/certs"
-  CAPROVER_APP_NAME: "platform"
-  CAPROVER_DEV_URL: "https://captain.dev.unicis.tech"
-  CAPROVER_PROD_URL: "https://captain.platform.unicis.tech"
+  DOCKER_TLS_CERTDIR: '/certs'
+  CAPROVER_APP_NAME: 'platform'
+  CAPROVER_DEV_URL: 'https://captain.dev.unicis.tech'
+  CAPROVER_PROD_URL: 'https://captain.platform.unicis.tech'
   GIT_DEPTH: 0
 
 test:

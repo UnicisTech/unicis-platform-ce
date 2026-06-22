@@ -29,7 +29,9 @@ export const useGetFleetSecret = (teamId: string) => {
       });
 
       if (!response.ok) {
-        const err = new Error('Failed to fetch Fleet secret') as FleetSecretError;
+        const err = new Error(
+          'Failed to fetch Fleet secret'
+        ) as FleetSecretError;
         err.status = response.status;
         throw err;
       }
@@ -59,9 +61,7 @@ export const useGetFleetSecret = (teamId: string) => {
   return {
     isLoading: hasFleetToken ? isLoading : false,
     isError: hasFleetToken
-      ? !!typedError &&
-        typedError.status !== 404 &&
-        typedError.status !== 401
+      ? !!typedError && typedError.status !== 404 && typedError.status !== 401
       : false,
     secret: data,
     mutateFleetSecret,
