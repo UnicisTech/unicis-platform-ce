@@ -104,3 +104,6 @@ RUN npm prune --omit=dev
 
 # Start the Next.js app
 CMD ["npm", "start"]
+
+ARG NODE_OPTIONS=--max-old-space-size=4096
+ENV NODE_OPTIONS=${NODE_OPTIONS}
