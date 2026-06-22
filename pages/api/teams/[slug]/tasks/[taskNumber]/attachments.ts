@@ -108,59 +108,71 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     if (isAllowed) {
       try {
         const url = await saveFileAsAttachment(Number(taskId), file[0]);
-        const task = await prisma.task.findUnique({
-          where: { id: Number(taskId) },
-          select: {
-            id: true,
-            title: true,
-            taskNumber: true,
-            teamId: true,
-            team: { select: { slug: true } },
-          },
-        });
 
-        if (task) {
-          const teamSlug = task.team?.slug ?? (req.query.slug as string);
-          const recipients = await getTeamRecipientsBySlug(teamSlug);
-          const filename =
-            file[0]?.originalFilename ?? file[0]?.newFilename ?? 'file';
+        try {
+          const task = await prisma.task.findUnique({
+            where: { id: Number(taskId) },
+            select: {
+              id: true,
+              title: true,
+              taskNumber: true,
+              teamId: true,
+              team: { select: { slug: true } },
+            },
+          });
 
-          await notificationService.sendBulk(
-            recipients.map((user) => ({
-              type: NotificationType.FILE_UPLOADED,
-              title: `File uploaded: \"${task.title}\"`,
-              body: `${teamMember.user.name ?? 'Someone'} uploaded ${filename}.`,
-              link: `/teams/${teamSlug}/tasks/${task.taskNumber}`,
-              recipientId: user.id,
-              recipientEmail: user.email,
-              teamId: task.teamId,
-              metadata: {
-                source: {
-                  taskId: task.id,
-                  taskNumber: task.taskNumber,
-                  event: 'file.uploaded',
-                  filename,
+          if (task) {
+            const teamSlug = task.team?.slug ?? (req.query.slug as string);
+            const recipients = await getTeamRecipientsBySlug(teamSlug);
+            const filename =
+              file[0]?.originalFilename ?? file[0]?.newFilename ?? 'file';
+
+            await notificationService.sendBulk(
+              recipients.map((user) => ({
+                type: NotificationType.FILE_UPLOADED,
+                title: `File uploaded: \"${task.title}\"`,
+                body: `${teamMember.user.name ?? 'Someone'} uploaded ${filename}.`,
+                link: `/teams/${teamSlug}/tasks/${task.taskNumber}`,
+                recipientId: user.id,
+                recipientEmail: user.email,
+                teamId: task.teamId,
+                metadata: {
+                  source: {
+                    taskId: task.id,
+                    taskNumber: task.taskNumber,
+                    event: 'file.uploaded',
+                    filename,
+                  },
                 },
-              },
-            }))
+              }))
+            );
+          }
+        } catch (notificationError) {
+          console.error(
+            'Failed to send file upload notification:',
+            notificationError
           );
         }
 
         res.status(200).json({ url });
-      } catch (error) {
+      } catch (error: any) {
         console.error('Failed to save file as attachment:', error);
-        res
-          .status(500)
-          .json({ error: { message: 'Failed to save file as attachment.' } });
+        if (error?.message === 'fileContentMismatch') {
+          res
+            .status(500)
+            .json({ error: { key: 'fileContentMismatch' } });
+        } else {
+          res
+            .status(500)
+            .json({ error: { message: 'Failed to save file as attachment.' } });
+        }
       }
     } else {
-      res
-        .status(200)
-        .json({ error: { message: 'Not supported type of file.' } });
+      res.status(200).json({ error: { key: 'unsupportedFileType' } });
     }
   } catch {
     res.status(200).json({
-      error: { message: 'File is too large. Maximum size of file is 10mb.' },
+      error: { key: 'fileTooLarge' },
     });
   }
 };

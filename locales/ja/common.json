@@ -43,6 +43,8 @@
     "unexpectedError": "予期しないエラー",
     "somethingWentWrong": "問題が発生しました",
     "unsupportedFileType": "サポートされていないファイル形式",
+    "fileContentMismatch": "ファイルの内容が拡張子と一致しません",
+    "fileTooLarge": "ファイルが大きすぎます。最大ファイルサイズは10MBです",
     "failedToDownloadFile": "ファイルのダウンロードに失敗しました",
     "failedToCopyLink": "クリップボードへのリンクのコピーに失敗しました！",
     "multipleSsoTeams": "このSSOアカウントに複数のチームが見つかりました。"

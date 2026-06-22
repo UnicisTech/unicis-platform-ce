@@ -13,6 +13,9 @@
     "txt": "text/plain",
     "ods": "application/vnd.oasis.opendocument.spreadsheet",
     "rtf": "application/rtf",
-    "odt": "application/vnd.oasis.opendocument.text"
+    "odt": "application/vnd.oasis.opendocument.text",
+    "png": "image/png",
+    "jpg": "image/jpeg",
+    "jpeg": "image/jpeg"
   }
 }

@@ -46,6 +46,22 @@ export const readFile = (
   });
 };
 
+const fileSignatures: Record<string, number[][]> = {
+  png: [[0x89, 0x50, 0x4e, 0x47]],
+  jpg: [[0xff, 0xd8, 0xff]],
+  jpeg: [[0xff, 0xd8, 0xff]],
+  pdf: [[0x25, 0x50, 0x44, 0x46]],
+};
+
+const matchesSignature = (buffer: Buffer, signature: number[]) =>
+  signature.every((byte, index) => buffer[index] === byte);
+
+export const isValidFileSignature = (fileData: Buffer, extension: string) => {
+  const signatures = fileSignatures[extension];
+  if (!signatures) return true;
+  return signatures.some((signature) => matchesSignature(fileData, signature));
+};
+
 export const saveFileAsAttachment = async (
   taskId: number,
   file: formidable.File
@@ -57,6 +73,15 @@ export const saveFileAsAttachment = async (
   } = file;
 
   const fileData = await fs.promises.readFile(tempPath);
+
+  const extension = filename
+    ? getFileExtensionFromFileName(filename)
+    : null;
+  if (extension && !isValidFileSignature(fileData, extension)) {
+    await fs.promises.unlink(tempPath);
+    throw new Error('fileContentMismatch');
+  }
+
   const attachmentId = uuidv4();
   const url = `/attachments/${attachmentId}`;
 
