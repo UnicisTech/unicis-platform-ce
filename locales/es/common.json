@@ -43,6 +43,8 @@
     "unexpectedError": "Error inesperado",
     "somethingWentWrong": "Algo salió mal",
     "unsupportedFileType": "Tipo de archivo no compatible",
+    "fileContentMismatch": "El contenido del archivo no coincide con su extensión",
+    "fileTooLarge": "El archivo es demasiado grande. El tamaño máximo es de 10 MB",
     "failedToDownloadFile": "No se pudo descargar el archivo",
     "failedToCopyLink": "No se pudo copiar el enlace al portapapeles",
     "multipleSsoTeams": "Se encontraron varios equipos para esta cuenta SSO."

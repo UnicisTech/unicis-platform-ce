@@ -94,7 +94,11 @@ const Attachments = ({
 
         const { error } = await res.json();
         if (!res.ok || error) {
-          toast.error(error?.message || t('errors.requestFailed'));
+          toast.error(
+            (error?.key && t(`errors.${error.key}`)) ||
+              error?.message ||
+              t('errors.requestFailed')
+          );
           return;
         }
 

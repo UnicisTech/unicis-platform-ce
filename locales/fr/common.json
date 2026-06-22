@@ -43,6 +43,8 @@
     "unexpectedError": "Erreur inattendue",
     "somethingWentWrong": "Une erreur s’est produite",
     "unsupportedFileType": "Type de fichier non pris en charge",
+    "fileContentMismatch": "Le contenu du fichier ne correspond pas à son extension",
+    "fileTooLarge": "Le fichier est trop volumineux. La taille maximale est de 10 Mo",
     "failedToDownloadFile": "Échec du téléchargement du fichier",
     "failedToCopyLink": "Échec de la copie du lien dans le presse-papiers",
     "multipleSsoTeams": "Plusieurs équipes trouvées pour ce compte SSO."
