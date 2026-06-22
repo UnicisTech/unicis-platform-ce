@@ -74,9 +74,7 @@ export const saveFileAsAttachment = async (
 
   const fileData = await fs.promises.readFile(tempPath);
 
-  const extension = filename
-    ? getFileExtensionFromFileName(filename)
-    : null;
+  const extension = filename ? getFileExtensionFromFileName(filename) : null;
   if (extension && !isValidFileSignature(fileData, extension)) {
     await fs.promises.unlink(tempPath);
     throw new Error('fileContentMismatch');

@@ -158,9 +158,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       } catch (error: any) {
         console.error('Failed to save file as attachment:', error);
         if (error?.message === 'fileContentMismatch') {
-          res
-            .status(500)
-            .json({ error: { key: 'fileContentMismatch' } });
+          res.status(500).json({ error: { key: 'fileContentMismatch' } });
         } else {
           res
             .status(500)
