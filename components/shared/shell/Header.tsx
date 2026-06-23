@@ -37,6 +37,8 @@ function useModuleTitle(): string {
     if (relative.startsWith('/csc')) return t('csc');
     if (relative.startsWith('/iap')) return t('iap');
     if (relative.startsWith('/risk-management')) return t('rm');
+    if (relative.startsWith('/assets/'))
+      return t('fleet:asset-details-title', { defaultValue: 'Asset Details' });
     if (relative.startsWith('/asset'))
       return t('fleet:asset-management', { defaultValue: 'Asset Management' });
     if (

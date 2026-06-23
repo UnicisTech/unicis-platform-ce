@@ -58,9 +58,6 @@ const NodeById = ({ teamFeatures: _teamFeatures, user }) => {
         teamSlug={slug as string}
         path={assetBreadcrumbLabel}
       />
-      <h1 className="text-[15px] font-semibold text-slate-900 dark:text-slate-100 mb-4">
-        {t('fleet:asset-details-title')}
-      </h1>
       <NodeTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {
         activeTab === 'Overview' && (

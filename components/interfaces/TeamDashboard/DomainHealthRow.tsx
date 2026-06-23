@@ -1,5 +1,4 @@
-import { useEffect, useMemo } from 'react';
-import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import { useTranslation } from 'next-i18next';
 import {
   ShieldCheck,
@@ -11,9 +10,7 @@ import {
 import { cn } from '@/components/shadcn/lib/utils';
 import useISO from 'hooks/useISO';
 import useCscStatuses from 'hooks/useCscStatuses';
-import useCanAccess from 'hooks/useCanAccess';
-import useHasPlan from 'hooks/useHasPlan';
-import { useVerifyFleetAsses } from '@/hooks/fleets/useVerifyFleetAsses';
+import { useAssetModuleAccess } from '@/hooks/fleets/useAssetModuleAccess';
 import { useNodes } from '@/hooks/fleets/Nodes/useNodes';
 import frameworks from '@/lib/csc/frameworks';
 import { isoValueToLabel } from '@/lib/csc/csc-frameworks';
@@ -30,7 +27,7 @@ import type {
 } from 'types';
 
 // ── Types ──────────────────────────────────────────────────────────────────────
-type DashboardTab = 0 | 1 | 2;
+type DashboardTab = 0 | 1 | 2 | 3;
 
 interface DomainHealthRowProps {
   tasks: Task[];
@@ -430,23 +427,22 @@ function RiskCard({
 // Unlike the domains above, this card has no "empty" fallback: Asset Management
 // is opt-in (Ultimate plan + a connected Fleet backend), so teams who aren't
 // eligible should never see it referenced on the dashboard at all.
-function AssetDomainCard({ slug, team }: { slug: string; team: Team }) {
+function AssetDomainCard({
+  slug,
+  team,
+  active,
+  onClick,
+}: {
+  slug: string;
+  team: Team;
+  active: boolean;
+  onClick: () => void;
+}) {
   const { t } = useTranslation('common');
-  const router = useRouter();
-  const { canAccess } = useCanAccess(slug);
-  const { hasPlan, checkedHasPlan } = useHasPlan();
-  const { access, isLoading: isAccessLoading } = useVerifyFleetAsses();
-
-  useEffect(() => {
-    hasPlan(slug);
-  }, [hasPlan, slug]);
-
-  const isFleetReady = !!access?.is_active && !access?.is_expired;
-  const canShow = canAccess('asset_dashboard', ['read']);
-  const isReady = canShow && checkedHasPlan === true && isFleetReady;
+  const { isReady, isLoading } = useAssetModuleAccess(slug);
 
   const { nodes } = useNodes(team.id, 'all', {
-    skip: !isReady || isAccessLoading,
+    skip: !isReady || isLoading,
   });
 
   if (!isReady) return null;
@@ -482,8 +478,8 @@ function AssetDomainCard({ slug, team }: { slug: string; team: Team }) {
       sub={sub}
       status={status}
       icon={<HardDrive size={10} aria-hidden />}
-      active={false}
-      onClick={() => router.push(`/teams/${slug}/asset`)}
+      active={active}
+      onClick={onClick}
       actionLabel={t('domain-health.open-asset-management', {
         defaultValue: 'Open Asset Management',
       })}
@@ -517,7 +513,12 @@ export default function DomainHealthRow({
         active={activeTab === 2}
         onClick={() => onTabChange(2)}
       />
-      <AssetDomainCard slug={slug} team={team} />
+      <AssetDomainCard
+        slug={slug}
+        team={team}
+        active={activeTab === 3}
+        onClick={() => onTabChange(3)}
+      />
     </div>
   );
 }

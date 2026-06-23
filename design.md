@@ -743,7 +743,7 @@ Applied to: `TaskListView`, `RpaTable`, `TiaTable`, `RisksTable` (PIA + RM), `Me
 3. **Task matrix + Needs Attention** — `flex flex-col lg:flex-row gap-3`
 4. **Domain Health Row** — `DomainHealthRow` — 3 clickable cards above the tab switcher (+ a conditional 4th Asset Management card, see below)
 5. **Tab switcher** — segmented pill control (`role="tablist"`, full ARIA)
-6. **Tab panels** — Data Protection / Cybersecurity / Risk (`role="tabpanel"`, `aria-labelledby`)
+6. **Tab panels** — Data Protection / Cybersecurity / Risk / Asset Management (`role="tabpanel"`, `aria-labelledby`) — the 4th tab only exists in the DOM at all when `useAssetModuleAccess(slug).isReady` is true
 
 ### KPI Row (`KpiRow.tsx`)
 
@@ -789,13 +789,15 @@ Three equal-width side-by-side cards. Each is a `<button>` that switches the act
 
 **Asset Management card (conditional 4th card).** Unlike the three cards above, this card has **no empty-state fallback** — it does not render at all unless every one of the following resolves true:
 
+All three checks live in one shared hook — `hooks/fleets/useAssetModuleAccess.ts` — used by both this card and the dashboard's 4th tab (see Tab panels below), so they can't drift out of sync:
+
 1. `canAccess('asset_dashboard', ['read'])` — permission gate
 2. `useHasPlan().hasPlan(slug) === true` — Ultimate plan only (`NEXT_PUBLIC_ASSET_REQUIRED_PLAN`)
 3. `useVerifyFleetAsses()` → `access.is_active && !access.is_expired` — an active, non-expired Fleet connection
 
 If any gate fails (including "still loading"), the component returns `null`. There is deliberately no skeleton, no "Connect Fleet" CTA, and no upsell on the dashboard — teams that aren't eligible should never see this domain referenced. This is an intentional exception to the "always show with an empty state" convention used by the other three domain cards; don't "fix" it to match them.
 
-When rendered, it behaves slightly differently from its siblings: clicking it navigates to `/teams/{slug}/asset` (a real page) instead of switching a dashboard tab, since no Asset tab exists on this page. Metric is the total enrolled asset count (`useNodes(team.id, 'all')`); status/sub-line is driven by the **inactive asset count**, not the raw total — an endpoint that stopped reporting is a visibility gap, which is the actual compliance signal for this audience (ISO 27001 / NIS2 asset inventory completeness), not the headline number.
+Once rendered, it behaves exactly like its siblings: clicking it switches the dashboard to tab 3 (Asset Management), via the same `onTabChange` callback. Metric is the total enrolled asset count (`useNodes(team.id, 'all')`); status/sub-line is driven by the **inactive asset count**, not the raw total — an endpoint that stopped reporting is a visibility gap, which is the actual compliance signal for this audience (ISO 27001 / NIS2 asset inventory completeness), not the headline number.
 
 | Status            | Condition                                      |
 | ----------------- | ---------------------------------------------- |
@@ -829,6 +831,8 @@ Shows up to 5 overdue tasks. Each row is a `<button>` with `aria-label="{title},
   hidden={activeTab !== 0}
 >
 ```
+
+**Tab 3 (Asset Management) is conditional end-to-end**, not just hidden: both the tab _button_ and its `visibleTabs` array entry are omitted unless `useAssetModuleAccess(slug).isReady` is true — the same hook used by the Domain Health Row's Asset card. Content is `AssetManagementAnalysis` (`components/interfaces/TeamDashboard/AssetManagementAnalysis.tsx`): a Total Assets card + one card per platform (Windows/Linux/macOS), reusing `AssetCard` and the shared `lib/fleet/platformCounts.ts` helpers also used by the full Asset Management dashboard page, so the two surfaces can't disagree on counts.
 
 ---
 
@@ -1116,7 +1120,11 @@ Inventory of enrolled endpoints (laptops/servers/workstations), backed by a sepa
 2. `useHasPlan().hasPlan(slug)` — Ultimate plan check (`NEXT_PUBLIC_ASSET_REQUIRED_PLAN`, default `ULTIMATE`)
 3. Fleet connection — `useVerifyFleetAsses()` (reads `fleet_access_token` cookie, verifies against `/api/fleet/access/verify`) → `access.is_active && !access.is_expired`
 
-If gate 1 or 2 fails, the feature is hidden entirely (sidebar item, dashboard card). If gates 1–2 pass but gate 3 fails, the Asset Management _page_ shows a `FleetConnectRequired` modal (password bootstrap/login flow) — but the dashboard card stays hidden either way (see Domain Health Row above); only the full Asset Management page prompts for connection.
+If gate 1 or 2 fails, the feature is hidden entirely (sidebar item, dashboard card, dashboard tab). If gates 1–2 pass but gate 3 fails, the Asset Management _page_ shows a `FleetConnectRequired` modal (password bootstrap/login flow) — but the dashboard card/tab stay hidden either way (see Domain Health Row above); only the full Asset Management page prompts for connection.
+
+The gate logic lives in one place — `hooks/fleets/useAssetModuleAccess.ts` — consumed by the dashboard's Domain Health card and its 4th tab. `Assets.tsx` (the full page) and the sidebar nav item still inline the same three checks separately, since they predate the shared hook; keep all of them in sync if the gate logic ever changes.
+
+**Page heading:** the Asset Management dashboard page (`asset.tsx`) and the Asset Details page (`assets/[nodeId]`) have **no in-page `<h1>`** — the module title comes entirely from the sticky header (`useModuleTitle()` in `Header.tsx`), which maps `/assets/{id}` → "Asset Details" and every other `/asset*` route → "Asset Management". Don't re-add a page-level heading; it would just duplicate the header.
 
 **Sub-pages** (tabs via `AssetTab.tsx`, labels translated through the `fleet` namespace):
 
@@ -1140,7 +1148,9 @@ If gate 1 or 2 fails, the feature is hidden entirely (sidebar item, dashboard ca
 
 ⚠️ `pages/api/fleet/debug-enrollments.ts` has no auth guard at all (returns enrollment emails/status for any team to any caller) — flagged as a standalone security fix, intentionally excluded from the OpenAPI docs and from this list of "real" endpoints. Do not document or rely on it.
 
-**Dashboard summary card:** see "Asset Management card" under Domain Health Row, above.
+**Asset host summary cards** (`AssetCard.tsx` + `lib/fleet/platformCounts.ts`): a "Total Assets" card always renders first, followed by one card per platform (Windows, Linux, macOS — always shown even at 0, plus any unexpected platform actually observed). Rendered as a tight `grid-cols-2` 2×2 grid next to the donut chart on the Asset Management dashboard (`AssetAnalysis.tsx`), and reused identically (without the chart) as the content of the dashboard's 4th tab (`AssetManagementAnalysis.tsx`) — both pull from the same `computePlatformCounts`/`buildPlatformsData` helpers so the numbers can't drift between the two surfaces.
+
+**Dashboard summary card + tab:** see "Asset Management card" under Domain Health Row, above, and "Tab 3" under Tab panels.
 
 ### Dashboard
 
@@ -1508,7 +1518,7 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 - **Ultimate plan only**, additionally gated on a live connection to the team's Fleet osquery server (see "Asset Management (Fleet)" under Module-by-Module Design Notes for the full 3-gate pattern)
 - Sub-modules: Asset (node) list, Tags, Queries, Packs, Distributors
 - Asset status shown via token-based `AssetStatusBadge` (not emoji), mobile stacked-card fallback, client-side pagination
-- Dashboard surfaces a 4th Domain Health card only when fully gated — no empty/upsell state for ineligible teams
+- Dashboard surfaces a 4th Domain Health card + a 4th tab (host totals per platform) only when fully gated — no empty/upsell state for ineligible teams
 
 ### 5. Webhooks
 

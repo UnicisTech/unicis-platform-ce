@@ -10,6 +10,8 @@ import ProcessingActivitiesAnalysis from '@/components/interfaces/TeamDashboard/
 import KpiRow from '@/components/interfaces/TeamDashboard/KpiRow';
 import DomainHealthRow from '@/components/interfaces/TeamDashboard/DomainHealthRow';
 import ActionRequiredBanner from '@/components/interfaces/TeamDashboard/ActionRequiredBanner';
+import AssetManagementAnalysis from '@/components/interfaces/TeamDashboard/AssetManagementAnalysis';
+import { useAssetModuleAccess } from '@/hooks/fleets/useAssetModuleAccess';
 import { Error, Loading } from '@/components/shared';
 import ModuleBadge from '@/components/shared/ModuleBadge';
 import { Button } from '@/components/shadcn/ui/button';
@@ -60,7 +62,7 @@ function exportTasksCsv(tasks: Task[], slug: string) {
 }
 
 // ── Tab types ─────────────────────────────────────────────────────────────────
-type DashboardTab = 0 | 1 | 2;
+type DashboardTab = 0 | 1 | 2 | 3;
 
 // ── Module row definition for the task matrix ────────────────────────────────
 const MODULE_ROWS: Array<{
@@ -304,6 +306,7 @@ const TeamDashboard = ({
   } = useTeamTasks(slug);
 
   const [activeTab, setActiveTab] = useState<DashboardTab>(0);
+  const { isReady: hasAssetModule } = useAssetModuleAccess(slug);
 
   const handlePiaCellClick = useCallback(
     (category: number, x: number, y: number) => {
@@ -335,7 +338,10 @@ const TeamDashboard = ({
     0: t('dashboard.tab.data-protection'),
     1: t('dashboard.tab.cybersecurity'),
     2: t('dashboard.tab.risk'),
+    3: t('fleet:asset-management', { defaultValue: 'Asset Management' }),
   };
+
+  const visibleTabs: DashboardTab[] = hasAssetModule ? [0, 1, 2, 3] : [0, 1, 2];
 
   return (
     <>
@@ -379,7 +385,7 @@ const TeamDashboard = ({
         role="tablist"
         aria-label={t('dashboard.tab.aria-label')}
       >
-        {([0, 1, 2] as DashboardTab[]).map((tab) => (
+        {visibleTabs.map((tab) => (
           <button
             key={tab}
             id={`dashboard-tab-${tab}`}
@@ -438,6 +444,18 @@ const TeamDashboard = ({
           <RmAnalysis slug={slug} onCellClick={handleRmCellClick} />
         )}
       </div>
+
+      {/* Tab 3: Asset Management — only reachable when hasAssetModule is true */}
+      {hasAssetModule && (
+        <div
+          id="dashboard-tabpanel-3"
+          role="tabpanel"
+          aria-labelledby="dashboard-tab-3"
+          hidden={activeTab !== 3}
+        >
+          {activeTab === 3 && <AssetManagementAnalysis team={team} />}
+        </div>
+      )}
     </>
   );
 };
@@ -466,6 +484,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
             'tia',
             'pia',
             'rm',
+            'fleet',
             ...cscTranslations,
           ])
         : {}),

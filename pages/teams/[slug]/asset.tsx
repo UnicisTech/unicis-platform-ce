@@ -3,7 +3,6 @@ import env from '@/lib/env';
 import { getUserBySession } from '@/models/user';
 import { GetServerSidePropsContext } from 'next';
 import { getSession } from '@/lib/session';
-import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { getTeam } from '@/models/team';
 import { isTeamHasSubscription } from '@/models/subscription';
@@ -15,21 +14,10 @@ const TeamAssetDashboard = ({
   teamFeatures: _teamFeatures,
   teamSubscription: _teamSubscription,
 }) => {
-  const { t } = useTranslation(['common', 'fleet']);
-
   return (
-    <>
-      <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
-        <div className="flex items-center gap-2">
-          <h1 className="text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-            {t('fleet:asset-management-dashboard')}
-          </h1>
-        </div>
-      </div>
-      <div className="space-y-6">
-        <Assets user={user} team={team} />
-      </div>
-    </>
+    <div className="space-y-6">
+      <Assets user={user} team={team} />
+    </div>
   );
 };
 
