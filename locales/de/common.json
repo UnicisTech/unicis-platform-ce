@@ -1333,6 +1333,7 @@
   "query-details": "Abfragedetails",
   "successfully-updated-query": "Abfrage erfolgreich aktualisiert",
   "loading": "Laden...",
+  "not-available": "N/V",
   "error-loading-assets": "Fehler beim Laden der Assets",
   "unknown-host": "Unbekannter Host",
   "active-green": "🟢 Aktiv",

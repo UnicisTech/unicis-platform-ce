@@ -41,17 +41,19 @@ const AssetCard = ({ host, total }: AssetProps) => {
   const bgColor = platformBGs[platformKey] || 'bg-gray-200';
 
   return (
-    <div className="grid grid-cols-2 w-full rounded-sm p-4 ring-1 ring-gray-300 items-center justify-between">
+    <div className="flex items-center gap-3 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3">
       <div
-        className={`w-fit flex items-center justify-center rounded-full p-3 ${bgColor}`}
+        className={`flex-shrink-0 flex items-center justify-center rounded-full p-2.5 ${bgColor}`}
       >
-        {Icon && <Icon className="h-9 w-9 text-gray-900 dark:text-gray-900" />}
+        {Icon && <Icon className="h-6 w-6 text-slate-900" aria-hidden />}
       </div>
-      <div className="flex-1 justify-between">
-        <NumberFormatter number={total} />
-        <h1 className="text-lg">
+      <div className="min-w-0">
+        <div className="text-xl font-medium leading-none text-slate-900 dark:text-slate-100">
+          <NumberFormatter number={total} />
+        </div>
+        <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 truncate">
           {t('fleet-hosts-count', { count: formattedHost })}
-        </h1>
+        </div>
       </div>
     </div>
   );

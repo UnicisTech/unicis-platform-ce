@@ -1333,6 +1333,7 @@
   "query-details": "Détails de la requête",
   "successfully-updated-query": "Requête mise à jour avec succès",
   "loading": "Chargement...",
+  "not-available": "N/D",
   "error-loading-assets": "Erreur lors du chargement des actifs",
   "unknown-host": "Hôte inconnu",
   "active-green": "🟢 Actif",

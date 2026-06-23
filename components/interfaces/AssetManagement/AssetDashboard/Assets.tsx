@@ -52,7 +52,7 @@ const Assets = ({ team, user }: AssetsProps) => {
   }
 
   return (
-    <div className="grid gap-8">
+    <div className="space-y-4">
       {checkedHasPlan && (
         <FleetConnectRequired
           user={user}

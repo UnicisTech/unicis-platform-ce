@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Loading, Error } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
@@ -16,6 +17,7 @@ import AssetConfig from '@/components/interfaces/AssetManagement/AssetDashboard/
 import { useGetNodeId } from '@/hooks/fleets/Nodes/useGetNodeId';
 
 const NodeById = ({ teamFeatures: _teamFeatures, user }) => {
+  const { t } = useTranslation(['common', 'fleet']);
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
   const { nodeId, slug } = router.query;
@@ -50,13 +52,15 @@ const NodeById = ({ teamFeatures: _teamFeatures, user }) => {
   return (
     <>
       <Breadcrumb
-        taskTitle={'Assets'}
+        taskTitle={t('fleet:asset-management')}
         backTo={`/teams/${slug}/asset`}
         teamName={team?.name || (slug as string)}
         teamSlug={slug as string}
         path={assetBreadcrumbLabel}
       />
-      <h3 className="text-2xl font-bold">{'Asset Details'}</h3>
+      <h1 className="text-[15px] font-semibold text-slate-900 dark:text-slate-100 mb-4">
+        {t('fleet:asset-details-title')}
+      </h1>
       <NodeTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {
         activeTab === 'Overview' && (

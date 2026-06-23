@@ -1334,6 +1334,7 @@
   "query-details": "Dettagli query",
   "successfully-updated-query": "Query aggiornata con successo",
   "loading": "Caricamento...",
+  "not-available": "N/D",
   "error-loading-assets": "Errore durante il caricamento degli asset",
   "unknown-host": "Host sconosciuto",
   "active-green": "🟢 Attivo",

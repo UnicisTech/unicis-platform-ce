@@ -1333,6 +1333,7 @@
   "query-details": "Detalles de la consulta",
   "successfully-updated-query": "Consulta actualizada correctamente",
   "loading": "Cargando...",
+  "not-available": "N/D",
   "error-loading-assets": "Error al cargar los activos",
   "unknown-host": "Host desconocido",
   "active-green": "🟢 Activo",

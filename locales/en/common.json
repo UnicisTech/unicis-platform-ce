@@ -1280,6 +1280,7 @@
   "query-details": "Query Details",
   "successfully-updated-query": "Successfully updated query",
   "loading": "Loading...",
+  "not-available": "N/A",
   "error-loading-assets": "Error loading assets",
   "unknown-host": "Unknown Host",
   "active-green": "🟢 Active",

@@ -19,10 +19,12 @@ const TeamAssetDashboard = ({
 
   return (
     <>
-      <div className="flex flex-col pb-6">
-        <h2 className="text-xl font-semibold mb-2">
-          {t('fleet:asset-management-dashboard')} ({team?.name})
-        </h2>
+      <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
+        <div className="flex items-center gap-2">
+          <h1 className="text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+            {t('fleet:asset-management-dashboard')}
+          </h1>
+        </div>
       </div>
       <div className="space-y-6">
         <Assets user={user} team={team} />

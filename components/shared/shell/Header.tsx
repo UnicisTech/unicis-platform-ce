@@ -9,7 +9,7 @@ import GlobalSearch from './GlobalSearch';
 
 // ── Route → display title mapping ────────────────────────────────────────────
 function useModuleTitle(): string {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'fleet']);
   const { asPath, query, isReady } = useRouter();
   const slug = (query.slug as string) || '';
 
@@ -37,6 +37,8 @@ function useModuleTitle(): string {
     if (relative.startsWith('/csc')) return t('csc');
     if (relative.startsWith('/iap')) return t('iap');
     if (relative.startsWith('/risk-management')) return t('rm');
+    if (relative.startsWith('/asset'))
+      return t('fleet:asset-management', { defaultValue: 'Asset Management' });
     if (
       /^\/(settings|billing|members|saml|directory-sync|audit-logs|webhooks|api-keys)/.test(
         relative

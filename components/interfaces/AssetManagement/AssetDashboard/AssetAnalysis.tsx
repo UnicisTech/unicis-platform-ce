@@ -1,5 +1,6 @@
 import AssetCard from '@/components/interfaces/AssetManagement/AssetDashboard/AssetCard';
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 import { Team, User } from '@/generated/client';
 import AssetPieChart from './AssetPieChart';
 import { defaultLabels } from '@/lib/fleet/constants';
@@ -41,6 +42,7 @@ const getPlatformDisplayName = (platform: string): string => {
 };
 
 const AssetsAnalysis = ({ team, user: _user, nodes, isAuditor }: Assets) => {
+  const { t } = useTranslation('common');
   const { auditorStats, isLoading } = useAuditorStats(team.id);
 
   // For auditors, use platform_counts from auditorStats instead of nodes
@@ -60,16 +62,10 @@ const AssetsAnalysis = ({ team, user: _user, nodes, isAuditor }: Assets) => {
   // Show loading state for auditors while data is being fetched
   if (isAuditor && isLoading) {
     return (
-      <div
-        style={{
-          height: '400px',
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <div>Loading statistics...</div>
+      <div className="flex items-center justify-center h-[300px] rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+        <div className="text-sm text-slate-500 dark:text-slate-400">
+          {t('loading')}
+        </div>
       </div>
     );
   }
@@ -102,35 +98,20 @@ const AssetsAnalysis = ({ team, user: _user, nodes, isAuditor }: Assets) => {
   });
 
   return (
-    <>
-      <div
-        style={{
-          height: '400px',
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'space-around',
-        }}
-      >
-        <div style={{ width: '49%' }} className="stats py-2 stat-value shadow">
-          <AssetPieChart
-            hostData={hostData}
-            barColor={barColors}
-            labels={labels}
-          />
-        </div>
-        <div style={{ width: '49%' }} className="shadow p-4 overflow-y-auto">
-          <div className="grid grid-cols-1 gap-4">
-            {platformsData.map((asset, index) => (
-              <AssetCard
-                key={index}
-                host={asset.platform}
-                total={asset.total}
-              />
-            ))}
-          </div>
-        </div>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 h-[320px] sm:h-[360px]">
+        <AssetPieChart
+          hostData={hostData}
+          barColor={barColors}
+          labels={labels}
+        />
       </div>
-    </>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 content-start">
+        {platformsData.map((asset, index) => (
+          <AssetCard key={index} host={asset.platform} total={asset.total} />
+        ))}
+      </div>
+    </div>
   );
 };
 

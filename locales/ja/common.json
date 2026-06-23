@@ -1334,6 +1334,7 @@
   "query-details": "クエリの詳細",
   "successfully-updated-query": "クエリが更新されました",
   "loading": "読み込み中...",
+  "not-available": "該当なし",
   "error-loading-assets": "アセットの読み込み中にエラーが発生しました",
   "unknown-host": "不明なホスト",
   "active-green": "🟢 アクティブ",
