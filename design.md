@@ -287,7 +287,7 @@ Top-to-bottom, each module item is conditionally rendered behind its own `canAcc
 2. All Tasks (overdue badge)
 3. Asset Management (Ultimate plan + `asset_dashboard` permission — see Asset Management module notes; **note:** this sidebar item only checks plan/permission, not live Fleet connection — the connection prompt lives on the Asset Management page itself)
 4. RPA → TIA → PIA → CSC (open-controls badge) → IAP → Risk Management (open-risks badge)
-5. *divider*
+5. _divider_
 6. REST API Docs (`/api-docs`, internal route, opens in a new tab) → Documentation → Knowledge Base → Feedback → Support (all external links)
 7. Settings (pinned to the sidebar footer, outside this list)
 
@@ -797,11 +797,11 @@ If any gate fails (including "still loading"), the component returns `null`. The
 
 When rendered, it behaves slightly differently from its siblings: clicking it navigates to `/teams/{slug}/asset` (a real page) instead of switching a dashboard tab, since no Asset tab exists on this page. Metric is the total enrolled asset count (`useNodes(team.id, 'all')`); status/sub-line is driven by the **inactive asset count**, not the raw total — an endpoint that stopped reporting is a visibility gap, which is the actual compliance signal for this audience (ISO 27001 / NIS2 asset inventory completeness), not the headline number.
 
-| Status | Condition |
-| --- | --- |
-| `empty` (slate) | 0 assets enrolled |
-| `critical` (red) | ≥1 asset not reporting (`is_active === false`) |
-| `healthy` (green) | All enrolled assets active |
+| Status            | Condition                                      |
+| ----------------- | ---------------------------------------------- |
+| `empty` (slate)   | 0 assets enrolled                              |
+| `critical` (red)  | ≥1 asset not reporting (`is_active === false`) |
+| `healthy` (green) | All enrolled assets active                     |
 
 **Container:** `DomainHealthRow`'s wrapper is `flex flex-wrap` (not a fixed 3-up row) specifically to accommodate this optional 4th card without squeezing the other three when present.
 
@@ -1116,17 +1116,17 @@ Inventory of enrolled endpoints (laptops/servers/workstations), backed by a sepa
 2. `useHasPlan().hasPlan(slug)` — Ultimate plan check (`NEXT_PUBLIC_ASSET_REQUIRED_PLAN`, default `ULTIMATE`)
 3. Fleet connection — `useVerifyFleetAsses()` (reads `fleet_access_token` cookie, verifies against `/api/fleet/access/verify`) → `access.is_active && !access.is_expired`
 
-If gate 1 or 2 fails, the feature is hidden entirely (sidebar item, dashboard card). If gates 1–2 pass but gate 3 fails, the Asset Management *page* shows a `FleetConnectRequired` modal (password bootstrap/login flow) — but the dashboard card stays hidden either way (see Domain Health Row above); only the full Asset Management page prompts for connection.
+If gate 1 or 2 fails, the feature is hidden entirely (sidebar item, dashboard card). If gates 1–2 pass but gate 3 fails, the Asset Management _page_ shows a `FleetConnectRequired` modal (password bootstrap/login flow) — but the dashboard card stays hidden either way (see Domain Health Row above); only the full Asset Management page prompts for connection.
 
 **Sub-pages** (tabs via `AssetTab.tsx`, labels translated through the `fleet` namespace):
 
-| Tab | Route | Purpose |
-| --- | --- | --- |
-| Asset | `/teams/{slug}/asset-management` | Fleet node (device) list — `Nodes.tsx` |
-| Tags | `/teams/{slug}/asset-management/tags` | Tag-based asset grouping |
-| Queries | `/teams/{slug}/asset-management/queries` | Saved osquery queries |
-| Packs | `/teams/{slug}/asset-management/packs` | Query packs |
-| Distributors | `/teams/{slug}/asset-management/distributors` | Distributed query tasks |
+| Tab          | Route                                         | Purpose                                |
+| ------------ | --------------------------------------------- | -------------------------------------- |
+| Asset        | `/teams/{slug}/asset-management`              | Fleet node (device) list — `Nodes.tsx` |
+| Tags         | `/teams/{slug}/asset-management/tags`         | Tag-based asset grouping               |
+| Queries      | `/teams/{slug}/asset-management/queries`      | Saved osquery queries                  |
+| Packs        | `/teams/{slug}/asset-management/packs`        | Query packs                            |
+| Distributors | `/teams/{slug}/asset-management/distributors` | Distributed query tasks                |
 
 **Asset list (`Nodes.tsx`) — Direction B conventions:**
 

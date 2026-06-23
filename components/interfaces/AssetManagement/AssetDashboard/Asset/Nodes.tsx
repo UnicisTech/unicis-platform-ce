@@ -68,10 +68,7 @@ const Nodes = ({
     [nodes, searchTerm]
   );
 
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredNodes.length / PAGE_SIZE)
-  );
+  const totalPages = Math.max(1, Math.ceil(filteredNodes.length / PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
   const pagedNodes = filteredNodes.slice(
     (currentPage - 1) * PAGE_SIZE,
@@ -241,8 +238,7 @@ const Nodes = ({
                             {node.node_info?.osquery_info?.version}
                           </div>
                           <div>
-                            {node.node_info?.osquery_info?.instance_id ||
-                              'N/A'}
+                            {node.node_info?.osquery_info?.instance_id || 'N/A'}
                           </div>
                         </td>
                         <td className="px-3 py-3 align-top text-xs">

@@ -45,9 +45,7 @@ const AssetCard = ({ host, total }: AssetProps) => {
       <div
         className={`w-fit flex items-center justify-center rounded-full p-3 ${bgColor}`}
       >
-        {Icon && (
-          <Icon className="h-9 w-9 text-gray-900 dark:text-gray-900" />
-        )}
+        {Icon && <Icon className="h-9 w-9 text-gray-900 dark:text-gray-900" />}
       </div>
       <div className="flex-1 justify-between">
         <NumberFormatter number={total} />
