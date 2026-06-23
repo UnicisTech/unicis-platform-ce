@@ -8,6 +8,7 @@ import type { Team } from '@/generated/client';
 import classNames from 'classnames';
 import Link from 'next/link';
 import useCanAccess from 'hooks/useCanAccess';
+import { useTranslation } from 'next-i18next';
 import { TeamFeature } from 'types';
 
 interface AssetTabProps {
@@ -21,15 +22,14 @@ const AssetTab = ({
   activeTab,
   team,
   heading: _heading,
-  teamFeatures,
+  teamFeatures: _teamFeatures,
 }: AssetTabProps) => {
   const { canAccess } = useCanAccess(team.slug);
-
-  console.log('teamFeatures', teamFeatures);
+  const { t } = useTranslation('fleet');
 
   const navigations = [
     {
-      name: 'Asset',
+      name: t('asset-tab-asset'),
       href: `/teams/${team.slug}/asset-management`,
       active: activeTab === 'fleet',
       icon: Cog6ToothIcon,
@@ -38,7 +38,7 @@ const AssetTab = ({
 
   if (canAccess('team_fleet_tag', ['create', 'update', 'read', 'delete'])) {
     navigations.push({
-      name: 'Tags',
+      name: t('asset-tab-tags'),
       href: `/teams/${team.slug}/asset-management/tags`,
       active: activeTab === 'tags',
       icon: TagIcon,
@@ -47,7 +47,7 @@ const AssetTab = ({
 
   if (canAccess('team_fleet_query', ['create', 'update', 'read', 'delete'])) {
     navigations.push({
-      name: 'Queries',
+      name: t('asset-tab-queries'),
       href: `/teams/${team.slug}/asset-management/queries`,
       active: activeTab === 'queries',
       icon: CodeBracketIcon,
@@ -56,7 +56,7 @@ const AssetTab = ({
 
   if (canAccess('team_fleet_pack', ['create', 'update', 'read', 'delete'])) {
     navigations.push({
-      name: 'Packs',
+      name: t('asset-tab-packs'),
       href: `/teams/${team.slug}/asset-management/packs`,
       active: activeTab === 'packs',
       icon: CodeBracketSquareIcon,
@@ -65,7 +65,7 @@ const AssetTab = ({
 
   if (canAccess('team_fleet_query', ['create', 'update', 'read', 'delete'])) {
     navigations.push({
-      name: 'Distributors',
+      name: t('asset-tab-distributors'),
       href: `/teams/${team.slug}/asset-management/distributors`,
       active: activeTab === 'distributors',
       icon: CodeBracketSquareIcon,

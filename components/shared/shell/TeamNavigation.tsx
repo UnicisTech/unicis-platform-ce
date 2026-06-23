@@ -1,5 +1,6 @@
 import {
   CodeBracketIcon,
+  DocumentTextIcon,
   ChatBubbleBottomCenterTextIcon,
   QuestionMarkCircleIcon,
   LifebuoyIcon,
@@ -149,6 +150,13 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         }
       : null,
     { name: 'line-break', href: '' },
+    {
+      name: t('rest-api-docs'),
+      href: '/api-docs',
+      icon: DocumentTextIcon,
+      className: 'stroke-blue-600',
+      openInNewTab: true,
+    },
     {
       name: t('documentation'),
       href: 'https://www.unicis.tech/docs',

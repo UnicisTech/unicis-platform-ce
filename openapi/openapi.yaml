@@ -53,6 +53,12 @@ tags:
     description: AI assistant
   - name: Notifications
     description: In-app notifications, read state, preferences, and push subscriptions
+  - name: Fleet (Asset Management)
+    description: |
+      Endpoints backing the Asset Management module. These wrap the team's connection
+      to the Fleet osquery server (account bootstrap/login, secrets, enrollment, team
+      membership sync) — they do not expose Fleet's own node/query/pack inventory API,
+      which the web client calls directly against the configured Fleet server.
 
 components:
   securitySchemes:
@@ -1348,3 +1354,496 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '401':
           $ref: '#/components/responses/Unauthorized'
+
+  # ─── Fleet (Asset Management) ────────────────────────────
+  /api/fleet/check-account:
+    get:
+      operationId: fleetCheckAccount
+      tags: [Fleet (Asset Management)]
+      summary: Check whether the current user has a Fleet account
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Account existence check result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  exists:
+                    type: boolean
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/BadRequest'
+
+  /api/fleet/bootstrap:
+    post:
+      operationId: fleetBootstrap
+      tags: [Fleet (Asset Management)]
+      summary: Bootstrap a Fleet account for the team owner
+      description: |
+        Creates the team's Fleet account/team (and a secret) with a password chosen by
+        the team owner, in a single step. Requires the caller to be the team's OWNER.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [teamId, password]
+              properties:
+                teamId:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Fleet account bootstrapped
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  fleetToken:
+                    type: string
+                  secret:
+                    type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/BadRequest'
+
+  /api/fleet/connect:
+    put:
+      operationId: fleetConnect
+      tags: [Fleet (Asset Management)]
+      summary: Get the current user's profile for Fleet connection
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Current user profile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+
+  /api/fleet/access/verify:
+    get:
+      operationId: fleetVerifyAccess
+      tags: [Fleet (Asset Management)]
+      summary: Verify the current user's Fleet access token
+      description: Proxies to the Fleet server to confirm the Fleet access token stored in cookies is still valid.
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Fleet access verification result (proxied from Fleet)
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/BadRequest'
+
+  /api/fleet/secret:
+    get:
+      operationId: fleetGetSecret
+      tags: [Fleet (Asset Management)]
+      summary: Get the team's Fleet enrollment secret
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: teamId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Fleet secret (proxied from Fleet)
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '500':
+          $ref: '#/components/responses/BadRequest'
+
+  /api/fleet/ensure-secret:
+    post:
+      operationId: fleetEnsureSecret
+      tags: [Fleet (Asset Management)]
+      summary: Ensure a Fleet enrollment secret exists for the team
+      description: Idempotent — returns the existing secret, or creates one if the caller has permission and none exists yet.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [teamId]
+              properties:
+                teamId:
+                  type: string
+      responses:
+        '200':
+          description: Secret already existed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  exists:
+                    type: boolean
+                  secret:
+                    type: object
+                  forbidden:
+                    type: boolean
+        '201':
+          description: Secret was created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  created:
+                    type: boolean
+                  secret:
+                    type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/BadRequest'
+
+  /api/fleet/change-password:
+    post:
+      operationId: fleetChangePassword
+      tags: [Fleet (Asset Management)]
+      summary: Change a Fleet account password
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, oldPassword, newPassword]
+              properties:
+                email:
+                  type: string
+                oldPassword:
+                  type: string
+                newPassword:
+                  type: string
+      responses:
+        '200':
+          description: Password changed (proxied from Fleet)
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/BadRequest'
+
+  /api/fleet/forgot-password:
+    post:
+      operationId: fleetForgotPassword
+      tags: [Fleet (Asset Management)]
+      summary: Request a Fleet password reset email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Reset email sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/BadRequest'
+
+  /api/fleet/revoke:
+    post:
+      operationId: fleetRevokeAccess
+      tags: [Fleet (Asset Management)]
+      summary: Revoke a team member's Fleet access
+      description: Removes the member's Fleet enrollment and Fleet team membership. Caller must be the team's OWNER or ADMIN.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [userId, teamId]
+              properties:
+                userId:
+                  type: string
+                teamId:
+                  type: string
+      responses:
+        '200':
+          description: Access revoked
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/BadRequest'
+
+  /api/fleet/sync-member:
+    post:
+      operationId: fleetSyncMember
+      tags: [Fleet (Asset Management)]
+      summary: Sync a team member into the Fleet team
+      description: Adds the member to the team's Fleet team (or updates their role) to match their Platform team role. Defaults to the current user if userId is omitted.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [teamId]
+              properties:
+                teamId:
+                  type: string
+                userId:
+                  type: string
+                  description: Defaults to the current authenticated user
+      responses:
+        '200':
+          description: Member synced
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  user:
+                    type: string
+                  role:
+                    type: string
+                  fleetMember:
+                    type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/BadRequest'
+
+  /api/fleet/enroll:
+    post:
+      operationId: fleetEnroll
+      tags: [Fleet (Asset Management)]
+      summary: Initiate a Fleet enrollment for a team member
+      description: Creates a pending Fleet enrollment and emails the user an enrollment link/token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                teamId:
+                  type: string
+                teamSlug:
+                  type: string
+                teamName:
+                  type: string
+      responses:
+        '200':
+          description: Enrollment initiated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  status:
+                    type: string
+                  expiresAt:
+                    type: string
+                    format: date-time
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Enrollment already completed or already sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/BadRequest'
+
+  /api/fleet/enroll/verify:
+    post:
+      operationId: fleetEnrollVerify
+      tags: [Fleet (Asset Management)]
+      summary: Verify a Fleet enrollment token
+      description: Service-to-service endpoint called by the Fleet server. Requires the `x-fleet-secret` header to match the configured service secret.
+      security: []
+      parameters:
+        - name: x-fleet-secret
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [token]
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Token is valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid:
+                    type: boolean
+                  enrollment:
+                    type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Invalid service secret
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Enrollment already completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '410':
+          description: Token expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/fleet/enroll/complete:
+    post:
+      operationId: fleetEnrollComplete
+      tags: [Fleet (Asset Management)]
+      summary: Complete a Fleet enrollment
+      description: Marks an enrollment as completed, either via an emailed token or an email+teamId lookup, optionally setting the Fleet password.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                email:
+                  type: string
+                teamId:
+                  type: string
+                fleetPassword:
+                  type: string
+      responses:
+        '200':
+          description: Enrollment completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  alreadyCompleted:
+                    type: boolean
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/BadRequest'
