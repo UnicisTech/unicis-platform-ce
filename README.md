@@ -23,9 +23,9 @@ Unicis Platform Community Edition - an open core, enterprise-ready trust managem
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="public/readme-presentation.png">
-    <source media="(prefers-color-scheme: light)" srcset="public/readme-presentation.png">
-    <img src="public/readme-presentation.png"
+    <source media="(prefers-color-scheme: dark)" srcset="public/readme-hero-template.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/readme-hero-template.png">
+    <img src="public/readme-hero-template.png"
          alt="Unicis Platform dashboard showing task management, cybersecurity controls, privacy modules, and compliance frameworks — all in one unified interface"
          width="100%">
   </picture>
