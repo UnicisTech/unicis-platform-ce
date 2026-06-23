@@ -279,6 +279,20 @@ The header is a fixed-height `h-12` sticky bar. It is split into two zones:
 - `AccountDropdown` shows only a `UserCircleIcon` on mobile (`< sm`), full name on `sm+`
 - Module title strings are mapped per-route in `useModuleTitle()`. Long names (e.g. "Cybersecurity Management System") truncate gracefully
 
+#### Team Sidebar Order (`TeamNavigation.tsx`)
+
+Top-to-bottom, each module item is conditionally rendered behind its own `canAccess(...)` check (so the sidebar naturally shrinks for teams without a given module/plan):
+
+1. Dashboard
+2. All Tasks (overdue badge)
+3. Asset Management (Ultimate plan + `asset_dashboard` permission — see Asset Management module notes; **note:** this sidebar item only checks plan/permission, not live Fleet connection — the connection prompt lives on the Asset Management page itself)
+4. RPA → TIA → PIA → CSC (open-controls badge) → IAP → Risk Management (open-risks badge)
+5. *divider*
+6. REST API Docs (`/api-docs`, internal route, opens in a new tab) → Documentation → Knowledge Base → Feedback → Support (all external links)
+7. Settings (pinned to the sidebar footer, outside this list)
+
+Keep new module nav items inside the numbered groups above (modules before the divider, links after) rather than appending to the end — placement communicates whether something is a first-party module or an external resource.
+
 ---
 
 ### Grids & Layouts
@@ -727,7 +741,7 @@ Applied to: `TaskListView`, `RpaTable`, `TiaTable`, `RisksTable` (PIA + RM), `Me
 1. **Top bar** — `ActionRequiredBanner` + Export CSV button (`flex flex-wrap items-center gap-3`)
 2. **KPI strip** — `KpiRow` — 6-card grid (`grid-cols-2 sm:grid-cols-3 lg:grid-cols-6`)
 3. **Task matrix + Needs Attention** — `flex flex-col lg:flex-row gap-3`
-4. **Domain Health Row** — `DomainHealthRow` — 3 clickable cards above the tab switcher
+4. **Domain Health Row** — `DomainHealthRow` — 3 clickable cards above the tab switcher (+ a conditional 4th Asset Management card, see below)
 5. **Tab switcher** — segmented pill control (`role="tablist"`, full ARIA)
 6. **Tab panels** — Data Protection / Cybersecurity / Risk (`role="tabpanel"`, `aria-labelledby`)
 
@@ -772,6 +786,24 @@ Three equal-width side-by-side cards. Each is a `<button>` that switches the act
 | Risk Management | No extreme/major risks       | Any major (60–79) | Any extreme (≥80)                 |
 
 **ARIA:** Each card has `aria-label="Switch to [Domain] tab"` and `aria-pressed={active}`.
+
+**Asset Management card (conditional 4th card).** Unlike the three cards above, this card has **no empty-state fallback** — it does not render at all unless every one of the following resolves true:
+
+1. `canAccess('asset_dashboard', ['read'])` — permission gate
+2. `useHasPlan().hasPlan(slug) === true` — Ultimate plan only (`NEXT_PUBLIC_ASSET_REQUIRED_PLAN`)
+3. `useVerifyFleetAsses()` → `access.is_active && !access.is_expired` — an active, non-expired Fleet connection
+
+If any gate fails (including "still loading"), the component returns `null`. There is deliberately no skeleton, no "Connect Fleet" CTA, and no upsell on the dashboard — teams that aren't eligible should never see this domain referenced. This is an intentional exception to the "always show with an empty state" convention used by the other three domain cards; don't "fix" it to match them.
+
+When rendered, it behaves slightly differently from its siblings: clicking it navigates to `/teams/{slug}/asset` (a real page) instead of switching a dashboard tab, since no Asset tab exists on this page. Metric is the total enrolled asset count (`useNodes(team.id, 'all')`); status/sub-line is driven by the **inactive asset count**, not the raw total — an endpoint that stopped reporting is a visibility gap, which is the actual compliance signal for this audience (ISO 27001 / NIS2 asset inventory completeness), not the headline number.
+
+| Status | Condition |
+| --- | --- |
+| `empty` (slate) | 0 assets enrolled |
+| `critical` (red) | ≥1 asset not reporting (`is_active === false`) |
+| `healthy` (green) | All enrolled assets active |
+
+**Container:** `DomainHealthRow`'s wrapper is `flex flex-wrap` (not a fixed 3-up row) specifically to accommodate this optional 4th card without squeezing the other three when present.
 
 ### Needs Attention Panel
 
@@ -1071,6 +1103,44 @@ Six KPI cards. Includes internal `CscKpiCards` and `IapKpiCard` sub-components t
 - Stats row: `flex items-center gap-5 flex-shrink-0` (fits on 375 px with wrap fallback from outer)
 - Course grid: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`
 - Admin: `CoursesTable` — 4 icon-only buttons per row (edit, delete, completion-results, status-results) each with `aria-label` including course name for context
+
+### Asset Management (Fleet)
+
+**Files:** `components/interfaces/AssetManagement/`, `pages/teams/[slug]/asset.tsx`, `pages/teams/[slug]/asset-management/`
+
+Inventory of enrolled endpoints (laptops/servers/workstations), backed by a separate Fleet osquery server per team. This module is **Ultimate plan only** and additionally requires the team to have completed its own Fleet account/connection setup — it has its own gating story distinct from every other module in this app, since most modules only check plan/permission, not a live external connection.
+
+**Three-gate access pattern** (reused verbatim across `Assets.tsx`, the dashboard's `AssetDomainCard`, and the sidebar nav item):
+
+1. `canAccess('asset_dashboard', ['read'|'create'|'update'|'delete'])` — RBAC permission
+2. `useHasPlan().hasPlan(slug)` — Ultimate plan check (`NEXT_PUBLIC_ASSET_REQUIRED_PLAN`, default `ULTIMATE`)
+3. Fleet connection — `useVerifyFleetAsses()` (reads `fleet_access_token` cookie, verifies against `/api/fleet/access/verify`) → `access.is_active && !access.is_expired`
+
+If gate 1 or 2 fails, the feature is hidden entirely (sidebar item, dashboard card). If gates 1–2 pass but gate 3 fails, the Asset Management *page* shows a `FleetConnectRequired` modal (password bootstrap/login flow) — but the dashboard card stays hidden either way (see Domain Health Row above); only the full Asset Management page prompts for connection.
+
+**Sub-pages** (tabs via `AssetTab.tsx`, labels translated through the `fleet` namespace):
+
+| Tab | Route | Purpose |
+| --- | --- | --- |
+| Asset | `/teams/{slug}/asset-management` | Fleet node (device) list — `Nodes.tsx` |
+| Tags | `/teams/{slug}/asset-management/tags` | Tag-based asset grouping |
+| Queries | `/teams/{slug}/asset-management/queries` | Saved osquery queries |
+| Packs | `/teams/{slug}/asset-management/packs` | Query packs |
+| Distributors | `/teams/{slug}/asset-management/distributors` | Distributed query tasks |
+
+**Asset list (`Nodes.tsx`) — Direction B conventions:**
+
+- Status badge: `AssetStatusBadge` (`components/shared/AssetStatusBadge.tsx`) — `ub-green`/`ub-red` dot + pill, `role="status"`, mirrors `CscStatusBadge`. **Not** raw emoji — emoji status indicators don't carry a reliable accessible name and don't adapt to dark mode.
+- Table header: `text-[11px] uppercase tracking-wide text-slate-500 dark:text-slate-400`, wrapped in a `rounded-xl border` container — same as every other module table.
+- **Mobile (`< md`):** stacked cards, not a horizontally-scrolled 6-column table — a wide table is unreadable at the mandatory 375 px baseline.
+- **Pagination:** client-side, 20 rows/page (`PAGE_SIZE` const) — the Fleet API has no native paging for this list endpoint yet.
+- Owner is shown as full first + last name (not truncated to a last initial) — compliance/audit users need unambiguous ownership.
+
+**Own REST API surface vs. external Fleet API.** The platform owns `/api/fleet/*` (account bootstrap/login, secret management, enrollment, team-membership sync) — these 13 endpoints are documented in `openapi/openapi.yaml` under the `Fleet (Asset Management)` tag and shown at `/api-docs` (linked from the sidebar as **REST API Docs**, between the Risk Management section and the external links group). The actual node/query/pack/tag inventory CRUD is **not** part of this REST API — the browser calls the external Fleet server directly (`lib/fleet/fleetFetcher.ts` / `lib/fleet/apiBase.ts`) using the team's Fleet credentials, since that's Fleet's own API surface, not ours.
+
+⚠️ `pages/api/fleet/debug-enrollments.ts` has no auth guard at all (returns enrollment emails/status for any team to any caller) — flagged as a standalone security fix, intentionally excluded from the OpenAPI docs and from this list of "real" endpoints. Do not document or rely on it.
+
+**Dashboard summary card:** see "Asset Management card" under Domain Health Row, above.
 
 ### Dashboard
 
@@ -1433,6 +1503,13 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 - Completion summary banner (total / completed / in-progress / %)
 - Admin: create categories and courses; 4-icon action column per course row
 
+#### Asset Management (Fleet)
+
+- **Ultimate plan only**, additionally gated on a live connection to the team's Fleet osquery server (see "Asset Management (Fleet)" under Module-by-Module Design Notes for the full 3-gate pattern)
+- Sub-modules: Asset (node) list, Tags, Queries, Packs, Distributors
+- Asset status shown via token-based `AssetStatusBadge` (not emoji), mobile stacked-card fallback, client-side pagination
+- Dashboard surfaces a 4th Domain Health card only when fully gated — no empty/upsell state for ineligible teams
+
 ### 5. Webhooks
 
 - Svix-powered webhook endpoints
@@ -1441,9 +1518,10 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 
 ### 6. REST API
 
-- OpenAPI 3.0 — Swagger UI at `/api-docs`
+- OpenAPI 3.0 — Swagger UI at `/api-docs`, linked from the sidebar as **REST API Docs** (positioned right after Risk Management, before the external links group — see Shell & Navigation)
 - Bearer token authentication via API keys
-- Endpoints: Tasks, CSC, RM, PIA, RPA, TIA, API Keys, AI Chatbot
+- Endpoints: Tasks, CSC, RM, PIA, RPA, TIA, API Keys, AI Chatbot, Notifications, **Fleet (Asset Management)**
+- Fleet tag covers only the platform's own `/api/fleet/*` endpoints (account bootstrap, secret, enrollment, revoke, sync-member, etc.) — Fleet's own node/query/pack inventory API is called directly by the browser and is intentionally not duplicated here
 
 ### 7. Audit Logging
 

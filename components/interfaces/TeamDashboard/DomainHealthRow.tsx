@@ -1,9 +1,20 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import { ShieldCheck, Lock, AlertTriangle, ChevronRight } from 'lucide-react';
+import {
+  ShieldCheck,
+  Lock,
+  AlertTriangle,
+  ChevronRight,
+  HardDrive,
+} from 'lucide-react';
 import { cn } from '@/components/shadcn/lib/utils';
 import useISO from 'hooks/useISO';
 import useCscStatuses from 'hooks/useCscStatuses';
+import useCanAccess from 'hooks/useCanAccess';
+import useHasPlan from 'hooks/useHasPlan';
+import { useVerifyFleetAsses } from '@/hooks/fleets/useVerifyFleetAsses';
+import { useNodes } from '@/hooks/fleets/Nodes/useNodes';
 import frameworks from '@/lib/csc/frameworks';
 import { isoValueToLabel } from '@/lib/csc/csc-frameworks';
 import {
@@ -415,6 +426,71 @@ function RiskCard({
   );
 }
 
+// ── Asset Management domain (Ultimate plan + Fleet connection required) ───────
+// Unlike the domains above, this card has no "empty" fallback: Asset Management
+// is opt-in (Ultimate plan + a connected Fleet backend), so teams who aren't
+// eligible should never see it referenced on the dashboard at all.
+function AssetDomainCard({ slug, team }: { slug: string; team: Team }) {
+  const { t } = useTranslation('common');
+  const router = useRouter();
+  const { canAccess } = useCanAccess(slug);
+  const { hasPlan, checkedHasPlan } = useHasPlan();
+  const { access, isLoading: isAccessLoading } = useVerifyFleetAsses();
+
+  useEffect(() => {
+    hasPlan(slug);
+  }, [hasPlan, slug]);
+
+  const isFleetReady = !!access?.is_active && !access?.is_expired;
+  const canShow = canAccess('asset_dashboard', ['read']);
+  const isReady = canShow && checkedHasPlan === true && isFleetReady;
+
+  const { nodes } = useNodes(team.id, 'all', {
+    skip: !isReady || isAccessLoading,
+  });
+
+  if (!isReady) return null;
+
+  const total = nodes?.length ?? 0;
+  const inactive = nodes?.filter((n) => !n.is_active).length ?? 0;
+
+  const status: HealthStatus =
+    total === 0 ? 'empty' : inactive > 0 ? 'critical' : 'healthy';
+
+  const metric =
+    total === 0
+      ? t('domain-health.no-data', { defaultValue: 'No data yet' })
+      : `${total} ${t('domain-health.assets', { defaultValue: 'assets' })}`;
+
+  const sub =
+    total === 0
+      ? t('domain-health.no-assets-enrolled', {
+          defaultValue: 'No assets enrolled yet',
+        })
+      : inactive > 0
+        ? `${inactive} ${t('domain-health.assets-inactive', { defaultValue: 'inactive — check connectivity' })}`
+        : t('domain-health.all-reporting', {
+            defaultValue: 'All reporting',
+          });
+
+  return (
+    <DomainCard
+      title={t('domain-health.asset-management', {
+        defaultValue: 'Asset Management',
+      })}
+      metric={metric}
+      sub={sub}
+      status={status}
+      icon={<HardDrive size={10} aria-hidden />}
+      active={false}
+      onClick={() => router.push(`/teams/${slug}/asset`)}
+      actionLabel={t('domain-health.open-asset-management', {
+        defaultValue: 'Open Asset Management',
+      })}
+    />
+  );
+}
+
 // ── Public export ──────────────────────────────────────────────────────────────
 export default function DomainHealthRow({
   tasks,
@@ -424,7 +500,7 @@ export default function DomainHealthRow({
   onTabChange,
 }: DomainHealthRowProps) {
   return (
-    <div className="flex flex-col sm:flex-row gap-2 mb-4">
+    <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 mb-4">
       <DataProtectionCard
         tasks={tasks}
         active={activeTab === 0}
@@ -441,6 +517,7 @@ export default function DomainHealthRow({
         active={activeTab === 2}
         onClick={() => onTabChange(2)}
       />
+      <AssetDomainCard slug={slug} team={team} />
     </div>
   );
 }
