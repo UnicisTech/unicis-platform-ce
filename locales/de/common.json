@@ -1699,5 +1699,9 @@
   "tia-all-permitted": "✓ Alle erlaubt",
   "tia-non-adequate-warning": "{{count}} Übertragung(en) in Länder ohne angemessenes Schutzniveau erfordern SCCs. Überprüfung ausstehend.",
   "csc.bulk-status-updated": "{{count}} Kontrollen auf \"{{status}}\" aktualisiert",
-  "csc.bulk-tasks-linked": "Aufgaben mit {{count}} Kontrollen verknüpft"
+  "csc.bulk-tasks-linked": "Aufgaben mit {{count}} Kontrollen verknüpft",
+  "Dashboard": "Dashboard",
+  "navigation": "Navigation",
+  "module": "Modul",
+  "opens-in-new-tab": "(wird in neuem Tab geöffnet)"
 }

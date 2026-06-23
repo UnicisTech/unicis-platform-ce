@@ -88,16 +88,16 @@ const AssetTaskAnalysis = ({
           {t('fleet:fleet-asset-task-analysis')}
         </span>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 p-3">
+      <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5 p-2.5">
         {boxes.map((b) => (
           <div
             key={b.label}
             className="rounded-lg border border-slate-200 dark:border-slate-700 text-center overflow-hidden"
           >
-            <div className="text-[11px] uppercase tracking-wide text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-900 py-1">
+            <div className="text-[10px] uppercase tracking-wide text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-900 py-0.5">
               {b.label}
             </div>
-            <div className="text-lg font-semibold text-slate-900 dark:text-slate-100 py-2">
+            <div className="text-sm font-semibold text-slate-900 dark:text-slate-100 py-1">
               {b.value ?? 0}
             </div>
           </div>

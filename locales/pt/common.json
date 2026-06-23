@@ -1700,5 +1700,9 @@
   "tia-all-permitted": "✓ Todos permitidos",
   "tia-non-adequate-warning": "{{count}} transferência(s) para países não adequados requerem SCCs. Revisão pendente.",
   "csc.bulk-status-updated": "{{count}} controles atualizados para \"{{status}}\"",
-  "csc.bulk-tasks-linked": "Tarefas vinculadas a {{count}} controles"
+  "csc.bulk-tasks-linked": "Tarefas vinculadas a {{count}} controles",
+  "Dashboard": "Painel de controle",
+  "navigation": "Navegação",
+  "module": "Módulo",
+  "opens-in-new-tab": "(abre em nova guia)"
 }

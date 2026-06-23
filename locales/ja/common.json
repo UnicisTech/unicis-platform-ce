@@ -1700,5 +1700,9 @@
   "tia-all-permitted": "✓ すべて許可済み",
   "tia-non-adequate-warning": "{{count}}件の十分性認定のない国への転送にSCCが必要です。確認中。",
   "csc.bulk-status-updated": "{{count}}件のコントロールを「{{status}}」に更新しました",
-  "csc.bulk-tasks-linked": "{{count}}件のコントロールにタスクを関連付けました"
+  "csc.bulk-tasks-linked": "{{count}}件のコントロールにタスクを関連付けました",
+  "Dashboard": "ダッシュボード",
+  "navigation": "ナビゲーション",
+  "module": "モジュール",
+  "opens-in-new-tab": "(新しいタブで開きます)"
 }

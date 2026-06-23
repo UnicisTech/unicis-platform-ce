@@ -1700,5 +1700,9 @@
   "tia-all-permitted": "✓ Tutti autorizzati",
   "tia-non-adequate-warning": "{{count}} trasferimento/i verso paesi non adeguati richiedono SCC. Revisione in sospeso.",
   "csc.bulk-status-updated": "{{count}} controlli aggiornati a \"{{status}}\"",
-  "csc.bulk-tasks-linked": "Attività collegate a {{count}} controlli"
+  "csc.bulk-tasks-linked": "Attività collegate a {{count}} controlli",
+  "Dashboard": "Dashboard",
+  "navigation": "Navigazione",
+  "module": "Modulo",
+  "opens-in-new-tab": "(si apre in una nuova scheda)"
 }

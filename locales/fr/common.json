@@ -1699,5 +1699,9 @@
   "tia-all-permitted": "✓ Tous autorisés",
   "tia-non-adequate-warning": "{{count}} transfert(s) vers des pays non adéquats nécessitent des CCT. Révision en attente.",
   "csc.bulk-status-updated": "{{count}} contrôles mis à jour avec le statut \"{{status}}\"",
-  "csc.bulk-tasks-linked": "Tâches liées à {{count}} contrôles"
+  "csc.bulk-tasks-linked": "Tâches liées à {{count}} contrôles",
+  "Dashboard": "Tableau de bord",
+  "navigation": "Navigation",
+  "module": "Module",
+  "opens-in-new-tab": "(s'ouvre dans un nouvel onglet)"
 }

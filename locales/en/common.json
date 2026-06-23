@@ -1643,5 +1643,9 @@
   "tia-all-permitted": "✓ All permitted",
   "tia-non-adequate-warning": "{{count}} transfer(s) to non-adequate countries require SCCs. Review pending.",
   "csc.bulk-status-updated": "{{count}} controls updated to \"{{status}}\"",
-  "csc.bulk-tasks-linked": "Tasks linked to {{count}} controls"
+  "csc.bulk-tasks-linked": "Tasks linked to {{count}} controls",
+  "Dashboard": "Dashboard",
+  "navigation": "Navigation",
+  "module": "Module",
+  "opens-in-new-tab": "(opens in new tab)"
 }
