@@ -22,7 +22,7 @@ const NodeTab = ({
   return (
     <div className="mb-4">
       <nav
-        className="flex gap-5 border-b border-slate-200 dark:border-slate-700"
+        className="flex gap-5 border-b border-slate-200 dark:border-slate-700 overflow-x-auto"
         aria-label="Tabs"
       >
         {navigations.map((menu) => {

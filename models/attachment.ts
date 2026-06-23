@@ -113,14 +113,14 @@ const getFileExtensionFromFileName = (fileName: string) => {
 };
 
 export const checkExtensionAndMIMEType = (file: formidable.File) => {
-  if (file.originalFilename && file.mimetype) {
+  if (file.originalFilename) {
     const extension = getFileExtensionFromFileName(file.originalFilename);
     if (extension) {
       const isAllowedExtension = availableExtensions[extension];
-      const isAllowedType = availableExtensions[extension] === file.mimetype;
-      if (isAllowedExtension && isAllowedType) {
-        return true;
-      }
+      if (!isAllowedExtension) return false;
+      if (!file.mimetype) return true;
+      const isAllowedType = isAllowedExtension === file.mimetype;
+      if (isAllowedType) return true;
     }
   }
   return false;

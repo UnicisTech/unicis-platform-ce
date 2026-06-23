@@ -62,6 +62,8 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 
 ## ✨ What's New
 
+**Fleet Server + Asset Management** — a dedicated Fleet Server backend for osquery device orchestration and the new Asset Management module for browsing, searching, and inspecting enrolled endpoints. Per-platform breakdowns (Windows, Linux, macOS), task analysis, and per-asset detail pages with status logs, result logs, and configuration viewer. Fully responsive on mobile. Fleet Server code is private and available exclusively for Ultimate plan users.
+
 **Direction B Design System** — a calm, professional visual language rolled out across every module. Unified card shells, Direction B table headers, responsive tab bars, module badges, and a consistent dark mode token set throughout RPA, TIA, PIA, CSC, RM, IAP, Tasks, and Dashboard.
 
 **Live Domain Health Dashboard** — three at-a-glance status cards above the dashboard tab switcher show real-time health for Data Protection, Cybersecurity, and Risk Management. Each card switches directly to its module tab and carries full keyboard + screen-reader support.
@@ -70,7 +72,7 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 
 **Webhook Delivery Status** — the webhooks table now shows a live "Last delivery" column with success ✓, pending ⏱, or failed ✗ status and timestamp for every endpoint, powered by the Svix `messageAttempt` API.
 
-**Responsive across all modules** — every module (RPA, TIA, PIA, CSC, RM, IAP, Tasks, Comments, Dashboard) is tested and verified at 375 px, 768 px, and 1280 px. Toolbars wrap, tables scroll, and dialogs never overflow on mobile.
+**Responsive across all modules** — every module (RPA, TIA, PIA, CSC, RM, IAP, Tasks, Comments, Dashboard, Asset Management) is tested and verified at 375 px, 768 px, and 1280 px. Toolbars wrap, tables scroll, and dialogs never overflow on mobile.
 
 ## 📖 Additional Resources
 
@@ -94,6 +96,7 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 - [graphile-worker](https://worker.graphile.org/) (Background job queue for notification delivery)
 - [OpenAPI 3.0 / Swagger UI](https://swagger.io/) (REST API documentation at `/api-docs`)
 - [Bearer](https://github.com/Bearer/bearer) (Code security scanning tool (SAST))
+- [Fleet Server](https://fleet.dev.unicis.tech/) (Private osquery orchestration backend for Ultimate plan)
 
 ## 🚀 Deployment
 
@@ -115,6 +118,8 @@ Please follow these simple steps to get a local copy up and running.
 
 > [!NOTE]
 > To enable web push notifications, set the `NEXT_PUBLIC_VAPID_PUBLIC_KEY` and `VAPID_PRIVATE_KEY` environment variables in your `.env` file. Generate a key pair with `npx web-push generate-vapid-keys`.
+>
+> **Fleet Server:** The Asset Management module requires the Fleet Server backend. Set `FLEET_API_URL`, `FLEET_API_HOST`, `FLEET_SERVICE_TOKEN`, and their `NEXT_PUBLIC_` counterparts in your `.env` file. The Fleet Server is private and available exclusively for Ultimate plan users on SaaS; for self-hosted, refer to the Fleet Server private repository.
 
 ### Development
 
@@ -227,12 +232,12 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - [Interactive Awareness Program](https://www.unicis.tech/solutions/compliance/awareness?mtm_campaign=GitHub)
 - [REST API](https://www.unicis.tech/docs/platform/introduction?mtm_campaign=GitHub) — OpenAPI 3.0 spec with Swagger UI at `/api-docs`
 - [Notifications](https://www.unicis.tech/docs/platform/settings/?mtm_campaign=GitHub#notifications) — In-app, email, and web push
+- [Asset Inventory Management](https://www.unicis.tech/) — Fleet Server backend for osquery endpoint management; browse, search, and inspect enrolled devices (Ultimate plan)
 
 ### Coming Next
 
 - Right to Erasure Request Form
 - Processor Questionnaire Checklist
-- Asset Inventory Management
 - Vendor Assessment Checklist
 - Benchmark Report — Trust Center as a public compliance page
 - Vendor Report

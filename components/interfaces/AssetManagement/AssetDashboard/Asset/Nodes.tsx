@@ -79,8 +79,8 @@ const Nodes = ({
     <>
       {user ? (
         <div className="space-y-3">
-          <div className="flex justify-between items-center">
-            <div className="space-y-3">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="space-y-1">
               <h2 className="text-xl font-medium">
                 {t('fleet:fleet-all-assets')}
               </h2>
@@ -89,13 +89,13 @@ const Nodes = ({
               </p>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
               <Input
                 type="text"
                 placeholder={t('fleet:search-asset-placeholder')}
                 value={searchTerm}
                 onChange={handleSearchChange}
-                className="h-9 w-64 md:h-8"
+                className="h-9 w-full sm:w-48 lg:w-64 md:h-8"
               />
 
               {['inactive', 'active', 'all'].map((s) =>

@@ -23,10 +23,10 @@ export const checkExtensionAndMIMEType = (file: File) => {
   const extension = getFileExtensionFromFileName(file.name);
   if (extension) {
     const isAllowedExtension = availableExtensions[extension];
-    const isAllowedType = availableExtensions[extension] === file.type;
-    if (isAllowedExtension && isAllowedType) {
-      return true;
-    }
+    if (!isAllowedExtension) return false;
+    if (!file.type) return true;
+    const isAllowedType = isAllowedExtension === file.type;
+    if (isAllowedType) return true;
   }
   return false;
 };

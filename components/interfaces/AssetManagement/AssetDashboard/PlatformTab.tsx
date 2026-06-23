@@ -45,7 +45,7 @@ const PlatformTab = ({ activeTab, setTab }: PlatformTabProps) => {
 
   return (
     <div className="flex flex-col pb-6">
-      <nav className="flex space-x-5" aria-label="Tabs">
+      <nav className="flex space-x-5 overflow-x-auto" aria-label="Tabs">
         {navigations.map((menu) => (
           <a
             onClick={() => setTab(menu.tab)}

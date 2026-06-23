@@ -15,6 +15,31 @@ tags:
 
 The information about Unicis Platform releases and changes is listed in order below.
 
+## [Fleet Server + Asset Management Module] 2026-06-30
+
+*Release date: 2026-06-30*
+
+- New Features
+  - Fleet Server — dedicated backend for device management and osquery orchestration
+    - Fleet server code kept in a private repository, shared exclusively with Ultimate plan users
+    - SaaS Ultimate users order Asset Configuration via the UI interface (no manual fleet setup required)
+  - Asset Management module — browse, search, filter, and inspect enrolled devices
+    - Assets dashboard with per-platform breakdown (Windows, Linux, macOS) and pie chart
+    - Task analysis summary (new, pending, completed, failed queries)
+    - Per-asset detail pages: Overview, Status Logs, Result Logs, Asset Configurations
+    - Add Asset workflow with platform-specific CLI installer instructions
+    - Fleet authentication / bootstrap flow (login, password change, account creation, forgot password)
+- Enhancements
+  - Asset Management made responsive across mobile, tablet, and desktop viewports
+    - Asset list header stacks vertically on small screens; controls wrap and search goes full-width
+    - Tab navigation (asset detail tabs, platform tabs) scrolls horizontally on narrow viewports
+    - Result log summary layout adjusted for better mobile fit
+  - GlitchTip error tracking enabled for SaaS deployments, hosted in the EU
+  - `.env.example` updated with production Fleet endpoints and token
+- Fixes
+  - Task attachments now correctly accept image files (PNG, JPEG) when the browser does not supply a MIME type — drag-and-drop from external sources no longer silently rejects valid images
+  - Both client-side (`taskService.ts`) and server-side (`attachment.ts`) file-type validation fall back to extension check when `file.type` / `file.mimetype` is empty, while still verifying file content via magic-byte signature
+
 ## [UX/UI Redesign, Dashboard & Accessibility] 2026-06-12
 
 *Release date: 2026-06-12*

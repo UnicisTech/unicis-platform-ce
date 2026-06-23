@@ -99,7 +99,7 @@ const ResultLogs = ({
                 <ChevronRight className="h-4 w-4 transition-transform group-open:rotate-90" />
 
                 <div className="flex-1 flex items-center gap-4 flex-wrap">
-                  <span className="text-sm text-muted-foreground min-w-[140px]">
+                  <span className="text-sm text-muted-foreground min-w-[120px] sm:min-w-[140px]">
                     {result.timestamp
                       ? format(
                           new Date(result.timestamp),
