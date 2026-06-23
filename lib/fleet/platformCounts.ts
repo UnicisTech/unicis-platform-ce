@@ -41,6 +41,13 @@ export interface PlatformDatum {
   total: number;
 }
 
+/** Direction B status-dot color per platform, for StatCard-style summaries. */
+export const platformDotClasses: Record<string, string> = {
+  windows: 'bg-ub-blue',
+  linux: 'bg-slate-400',
+  macos: 'bg-ub-green',
+};
+
 /** Always includes Windows/Linux/macOS (even at 0) plus any other observed platform. */
 export const buildPlatformsData = (
   platformCounts: Record<string, number>

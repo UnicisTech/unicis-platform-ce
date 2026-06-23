@@ -33,11 +33,29 @@ const AssetPieChart = ({
   const options: any = {
     plugins: {
       legend: {
-        position: 'top',
+        position: 'right',
+        labels: {
+          boxWidth: 12,
+          boxHeight: 12,
+          padding: 10,
+          font: { size: 11 },
+        },
       },
       title: {
-        display: true,
-        text: title,
+        display: false,
+      },
+      tooltip: {
+        callbacks: {
+          label: (context: any) => {
+            const total = context.dataset.data.reduce(
+              (a: number, b: number) => a + b,
+              0
+            );
+            const value = context.parsed;
+            const pct = total > 0 ? Math.round((value / total) * 100) : 0;
+            return ` ${context.label}: ${value} (${pct}%)`;
+          },
+        },
       },
     },
     maintainAspectRatio: false,

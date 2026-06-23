@@ -942,6 +942,15 @@ The webhook table includes a "Last delivery" column showing the most recent Svix
 
 ## Shared Components
 
+### `HeroStatCard` + `StatCard` (chart-adjacent total/breakdown pattern)
+
+The canonical "donut/pie chart + total card + per-category mini-stat grid" layout (first built for the Tasks status chart, now also used by Asset Management). When adding a new chart-backed summary, reuse these — don't rebuild the hero card or stat tiles inline in the module:
+
+- `HeroStatCard` (`components/shared/HeroStatCard.tsx`) — blue gradient "total" card: uppercase label, large bold number, icon badge on the right.
+- `StatCard` (`components/shared/StatCard.tsx`) — small card: colored dot + label, value, and value as a % of the total you pass in.
+- Pair with a chart card styled like `TasksPieChart.tsx`/`AssetPieChart.tsx`: fixed `xl:w-[420px]`, inner chart wrapper `h-[220px]`, plain uppercase label above the chart (not a Chart.js title plugin), legend `position: 'right'` with `boxWidth/boxHeight: 12` and `font.size: 11`.
+- Reference implementations: `TeamTasksAnalysis.tsx`, `AssetAnalysis.tsx`, `AssetManagementAnalysis.tsx`.
+
 ### `ModuleEmptyState`
 
 **Location:** `components/shared/ModuleEmptyState.tsx`
@@ -1148,7 +1157,7 @@ The gate logic lives in one place — `hooks/fleets/useAssetModuleAccess.ts` —
 
 ⚠️ `pages/api/fleet/debug-enrollments.ts` has no auth guard at all (returns enrollment emails/status for any team to any caller) — flagged as a standalone security fix, intentionally excluded from the OpenAPI docs and from this list of "real" endpoints. Do not document or rely on it.
 
-**Asset host summary cards** (`AssetCard.tsx` + `lib/fleet/platformCounts.ts`): a "Total Assets" card always renders first, followed by one card per platform (Windows, Linux, macOS — always shown even at 0, plus any unexpected platform actually observed). Rendered as a tight `grid-cols-2` 2×2 grid next to the donut chart on the Asset Management dashboard (`AssetAnalysis.tsx`), and reused identically (without the chart) as the content of the dashboard's 4th tab (`AssetManagementAnalysis.tsx`) — both pull from the same `computePlatformCounts`/`buildPlatformsData` helpers so the numbers can't drift between the two surfaces.
+**Asset host summary — reuses the Tasks analysis pattern verbatim**, not a bespoke layout. `AssetAnalysis.tsx` and the dashboard's `AssetManagementAnalysis.tsx` (tab 3) are both structured exactly like `TeamTasksAnalysis.tsx`: a fixed-width `xl:w-[420px]`, `h-[220px]` chart card with a plain uppercase label above it (no in-chart title, legend on the `right` with `boxWidth/boxHeight: 12`, `font.size: 11` — see `AssetPieChart.tsx` vs `TasksPieChart.tsx`), next to a right column with one `HeroStatCard` ("Total Assets", blue gradient, big number, icon) followed by a `StatCard` grid (color dot + label + value + % of total) — one card per platform (Windows/Linux/macOS, always shown even at 0). `HeroStatCard` and `StatCard` live in `components/shared/` specifically so this "chart + hero total + dot-stat grid" pattern is shared, not reinvented per module — `TeamTasksAnalysis.tsx` was refactored to consume the same two components. Platform counts come from `lib/fleet/platformCounts.ts` (`computePlatformCounts`, `buildPlatformsData`, `platformDotClasses`), used identically by both Asset Management surfaces so the numbers can't drift between them. There is no more standalone `AssetCard.tsx` — it was deleted once both call sites moved to `StatCard`/`HeroStatCard`.
 
 **Dashboard summary card + tab:** see "Asset Management card" under Domain Health Row, above, and "Tab 3" under Tab panels.
 
