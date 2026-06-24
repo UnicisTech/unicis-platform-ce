@@ -82,7 +82,7 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
   const showActions = Boolean(onDelete || onEdit || onView);
 
   return (
-    <div className="w-full max-w-full overflow-x-hidden rounded-md border">
+    <div className="w-full max-w-full overflow-x-auto rounded-md border">
       <Table className="w-full table-fixed">
         <TableHeader>
           <TableRow>
