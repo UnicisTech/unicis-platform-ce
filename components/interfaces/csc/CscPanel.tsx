@@ -20,6 +20,8 @@ import { downloadSoaHtml } from '@/lib/soa/exportHtml';
 import { downloadSoaPdf } from '@/lib/soa/exportPdf';
 import type { ExportFormat, SoaPayload, SoaRow } from '@/lib/soa/types';
 import { SectionRail } from './SectionRail';
+import { trackEvent } from '@/lib/matomo/client';
+import { MatomoEvent } from '@/lib/matomo/events';
 
 const STATUS_WEIGHT: Record<string, number> = {
   unknown: -1,
@@ -205,6 +207,7 @@ export default function CscPanel({
         return undefined;
       }
       await mutateStatuses();
+      trackEvent(MatomoEvent.CscStatusUpdate, isoValueToLabel(iso) ?? iso);
       return undefined;
     },
     [slug, iso, t, mutateStatuses]
@@ -296,6 +299,7 @@ export default function CscPanel({
         if (error) throw new Error(error.message || t('errors.requestFailed'));
       }
       await mutateStatuses();
+      trackEvent(MatomoEvent.CscStatusUpdate, isoValueToLabel(iso) ?? iso);
     },
     [slug, iso, t, mutateStatuses]
   );
@@ -424,18 +428,22 @@ export default function CscPanel({
       const payload = buildPayload();
       if (fmt === 'xlsx') {
         await downloadSoaXlsx(payload);
+        trackEvent(MatomoEvent.SoaExport, 'XLSX');
         return;
       }
       if (fmt === 'ods') {
         downloadSoaOds(payload);
+        trackEvent(MatomoEvent.SoaExport, 'ODS');
         return;
       }
       if (fmt === 'html') {
         downloadSoaHtml(payload);
+        trackEvent(MatomoEvent.SoaExport, 'HTML');
         return;
       }
       if (fmt === 'pdf') {
         downloadSoaPdf(payload);
+        trackEvent(MatomoEvent.SoaExport, 'PDF');
         return;
       }
     },

@@ -29,8 +29,12 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     }
 
     // Add Matomo
-    if (env.matomo.url && env.matomo.siteId) {
-      init({ url: env.matomo.url, siteId: env.matomo.siteId });
+    if (env.matomo.enabled && env.matomo.url && env.matomo.siteId) {
+      init({
+        url: env.matomo.url,
+        siteId: env.matomo.siteId,
+        disableCookies: true, // cookieless tracking — no consent banner needed
+      });
     }
 
     if (env.darkModeEnabled) {
