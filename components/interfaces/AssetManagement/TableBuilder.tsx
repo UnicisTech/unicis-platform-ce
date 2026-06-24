@@ -83,14 +83,11 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
 
   return (
     <div className="w-full max-w-full overflow-x-auto rounded-md border">
-      <Table className="w-full table-fixed">
+      <Table className="min-w-max">
         <TableHeader>
           <TableRow>
             {headers.map((header) => (
-              <TableHead
-                key={header}
-                className="break-words [overflow-wrap:anywhere]"
-              >
+              <TableHead key={header} className="whitespace-nowrap">
                 {header.charAt(0).toUpperCase() + header.slice(1)}
               </TableHead>
             ))}
@@ -107,7 +104,7 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
                 {headers.map((header) => (
                   <TableCell
                     key={header}
-                    className="max-w-0 align-top break-words [overflow-wrap:anywhere]"
+                    className="max-w-xs align-top break-words [overflow-wrap:anywhere]"
                   >
                     {renderCell(row[header])}
                   </TableCell>
