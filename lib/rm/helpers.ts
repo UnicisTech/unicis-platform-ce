@@ -10,6 +10,17 @@ export const calculateRiskRating = (probability: number, impact: number) => {
   return Math.floor(result * 100);
 };
 
+// Categorical bucket for a risk rating (0-100), used for analytics where the
+// raw rating itself is too granular to be a useful dimension.
+export const getRiskLevelBucket = (
+  rating: number
+): 'Low' | 'Medium' | 'High' | 'Critical' => {
+  if (rating <= 40) return 'Low';
+  if (rating <= 60) return 'Medium';
+  if (rating <= 80) return 'High';
+  return 'Critical';
+};
+
 export const calculateCurrentRiskRating = (
   rawRiskRating: number,
   targetRiskRating: number,

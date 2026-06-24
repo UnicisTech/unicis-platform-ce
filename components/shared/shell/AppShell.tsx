@@ -4,32 +4,32 @@ import { Loading } from '@/components/shared';
 import { useSession } from 'next-auth/react';
 import Header from './Header';
 import Drawer from './Drawer';
+import useTeam from 'hooks/useTeam';
+import { setCustomDimension } from '@/lib/matomo/client';
 
 import AiChat from './AiChat';
 
 export default function AppShell({ children }) {
   const { t } = useTranslation('common');
-  const { data, status } = useSession();
+  const { status } = useSession();
+  const { team } = useTeam();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  // Custom Dimensions 1 (Subscription Tier) and 2 (Frameworks Enabled) must
+  // be created in Matomo Admin > Manage Custom Dimensions before this does
+  // anything — Matomo silently ignores unset dimension slots.
   useEffect(() => {
-    if (status === 'authenticated') {
-      const { email, name } = data.user;
-      if (email && name) {
-        const [firstName, lastName] = name.split(' ') as string[];
-        const matomo = (window as any).mt;
-        if (typeof matomo === 'function') {
-          matomo('send', 'pageview', {
-            email: email,
-            firstname: firstName,
-            lastname: lastName,
-            tags: 'BE',
-          });
-        }
-      }
+    if (!team) return;
+    if (team.subscription?.plan) {
+      setCustomDimension(1, team.subscription.plan);
     }
-  }, [status]);
+    const csc_iso = (team.properties as { csc_iso?: string[] } | null)
+      ?.csc_iso;
+    if (csc_iso?.length) {
+      setCustomDimension(2, csc_iso.join(','));
+    }
+  }, [team]);
 
   if (status === 'loading') {
     return <Loading />;

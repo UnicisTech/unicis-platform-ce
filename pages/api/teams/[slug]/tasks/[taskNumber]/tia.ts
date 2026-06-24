@@ -1,4 +1,6 @@
 import { deleteProcedure, saveProcedure } from 'models/tia';
+import { trackServerEvent } from '@/lib/matomo/server';
+import { MatomoEvent } from '@/lib/matomo/events';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
@@ -56,6 +58,8 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
   }
+
+  trackServerEvent(MatomoEvent.TiaSaved);
 
   return res.status(200).json({ data: {}, error: null });
 };

@@ -7,6 +7,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import type { ISO, TeamProperties } from 'types';
 import { addSubscription } from './subscription';
 import frameworks from '@/lib/csc/frameworks';
+import { trackServerEvent } from '@/lib/matomo/server';
+import { MatomoEvent } from '@/lib/matomo/events';
 
 export const createTeam = async (param: {
   userEmail: string;
@@ -443,6 +445,12 @@ export const setCscIso = async ({
       properties: updatedProperties,
     },
   });
+
+  // Activation funnel: a team's first explicit framework selection, as
+  // opposed to the implicit 'mvps' default applied in getCscIso().
+  if (!teamProperties?.csc_iso?.length && iso.length > 0) {
+    trackServerEvent(MatomoEvent.FirstFrameworkSelected);
+  }
 
   return iso;
 };

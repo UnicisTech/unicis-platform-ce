@@ -7,6 +7,8 @@ import { parseDueDateInput } from '@/lib/tasks/dueDate';
 import { publishTaskCreated } from '@/lib/tasks/task-events';
 import { serializeForApi } from '@/lib/serialize';
 import { DEFAULT_TASK_PRIORITY, isTaskPriority } from '@/lib/tasks';
+import { trackServerEvent } from '@/lib/matomo/server';
+import { MatomoEvent } from '@/lib/matomo/events';
 
 export default async function handler(
   req: NextApiRequest,
@@ -94,6 +96,8 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     teamSlug: teamMember.team.slug,
     teamName: teamMember.team.name,
   });
+
+  trackServerEvent(MatomoEvent.TaskCreate);
 
   return res.status(200).json({ data: {}, error: null });
 };

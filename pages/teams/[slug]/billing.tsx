@@ -12,6 +12,8 @@ import { isAllowed } from 'models/user';
 import { NextPageWithLayout } from 'types';
 import { inferSSRProps } from '@/lib/inferSSRProps';
 import { getTeamAccess } from '@/lib/teams';
+import { trackEvent } from '@/lib/matomo/client';
+import { MatomoEvent } from '@/lib/matomo/events';
 
 const plans = [
   {
@@ -117,6 +119,14 @@ const Billing: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({
           setSelectedSubscription(planId);
           setBillingPeriod(period);
           setVisible(true);
+          const currentPlan =
+            team.subscription?.status === 'ACTIVE'
+              ? team.subscription.plan
+              : Plan.COMMUNITY;
+          trackEvent(
+            MatomoEvent.TierUpgradeClick,
+            `${currentPlan}-to-${planId}`
+          );
         }}
       />
       <DetailsModal

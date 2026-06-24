@@ -45,6 +45,9 @@ const env = {
   matomo: {
     url: `${process.env.NEXT_PUBLIC_MATOMO_URL}`,
     siteId: `${process.env.NEXT_PUBLIC_MATOMO_SITE_ID}`,
+    // Self-hosted deployments may opt out of reporting usage to the central
+    // Matomo instance. Defaults to enabled (matches SaaS deployments).
+    enabled: process.env.ANALYTICS_ENABLED !== 'false',
   },
 
   // NextAuth configuration

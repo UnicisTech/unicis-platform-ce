@@ -16,6 +16,8 @@ import { getTeamRecipientsBySlug } from '@/lib/notifications/recipients';
 import { NotificationType } from '@/generated/enums';
 import type { TaskProperties } from 'types';
 import { isTaskPriority, statusLabels, priorityLabels } from '@/lib/tasks';
+import { trackServerEvent } from '@/lib/matomo/server';
+import { MatomoEvent } from '@/lib/matomo/events';
 
 export default async function handler(
   req: NextApiRequest,
@@ -162,6 +164,10 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   await sendEvent(teamMember.teamId, 'task.updated', task);
+
+  if (prevTask.status !== 'done' && task.status === 'done') {
+    trackServerEvent(MatomoEvent.TaskComplete);
+  }
 
   const changeDetails: string[] = [];
   if (prevTask.status !== task.status) {

@@ -22,6 +22,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { recordMetric } from '@/lib/metrics';
 import { Role } from '@/generated/browser';
 import { serializeForApi } from '@/lib/serialize';
+import { trackServerEvent } from '@/lib/matomo/server';
+import { MatomoEvent } from '@/lib/matomo/events';
 
 export default async function handler(
   req: NextApiRequest,
@@ -162,6 +164,11 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   recordMetric('invitation.created');
+
+  // Activation funnel: only the team's very first invitation counts.
+  if (invitationsAmount === 0 && members.length === 1) {
+    trackServerEvent(MatomoEvent.FirstUserInvited);
+  }
 
   res.status(200).json({ data: serializeForApi(invitation) });
 };
