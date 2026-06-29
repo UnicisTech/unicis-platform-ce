@@ -2,8 +2,8 @@
 // Source: CISO Assistant Community mapping YAML files
 //
 // Auto-mapped frameworks (via CISO Assistant YAML):
-//   2022
-//   2013
+//   iso-2022
+//   iso-2013
 //   nistcsfv2
 //   cisv81
 //   soc2v2

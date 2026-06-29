@@ -1,3 +1,10 @@
+/**
+ * Historical helpers for the 2025-11-23 data migration transforms.
+ *
+ * These preserve legacy persisted keys used by that migration. Add a new
+ * timestamped migration instead of rewriting this code for newer key names.
+ */
+
 import frameworks, {
   type CscFremaworkControl,
 } from '@/lib/csc/frameworks-migration';

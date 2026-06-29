@@ -91,9 +91,9 @@ components:
       schema:
         type: string
         enum:
-          - mvps
-          - '2013'
-          - '2022'
+          - mvsp
+          - iso-2013
+          - iso-2022
           - nistcsfv2
           - eunis2
           - gdpr
@@ -103,7 +103,7 @@ components:
           - owasp_asvs_v5
           - pcidss_v401
           - iso42001
-        example: '2022'
+        example: iso-2022
 
   schemas:
     Notification:
@@ -400,9 +400,9 @@ components:
         ISO:
           type: string
           enum:
-            - mvps
-            - '2013'
-            - '2022'
+            - mvsp
+            - iso-2013
+            - iso-2022
             - nistcsfv2
             - eunis2
             - gdpr

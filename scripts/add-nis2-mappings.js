@@ -38,7 +38,7 @@ const nis2Controls = {
         'nist-csf-v2-id-ra-05',
         'nist-csf-v2-id-ra-06',
       ],
-      2022: ['iso-2022-a-5-1', 'iso-2022-a-5-2', 'iso-2022-a-5-4'],
+      'iso-2022': ['iso-2022-a-5-1', 'iso-2022-a-5-2', 'iso-2022-a-5-4'],
       gdpr: [
         'gdpr-art-24-responsibility-accountability',
         'gdpr-art-24-data-protection-policy',
@@ -67,7 +67,7 @@ const nis2Controls = {
         'nist-csf-v2-rs-co-02',
         'nist-csf-v2-rs-co-03',
       ],
-      2022: [
+      'iso-2022': [
         'iso-2022-a-5-24',
         'iso-2022-a-5-25',
         'iso-2022-a-5-26',
@@ -99,7 +99,7 @@ const nis2Controls = {
         'nist-csf-v2-rc-co-03',
         'nist-csf-v2-rc-co-04',
       ],
-      2022: [
+      'iso-2022': [
         'iso-2022-a-5-29',
         'iso-2022-a-5-30',
         'iso-2022-a-8-13',
@@ -126,7 +126,7 @@ const nis2Controls = {
         'nist-csf-v2-id-ra-09',
         'nist-csf-v2-id-ra-10',
       ],
-      2022: [
+      'iso-2022': [
         'iso-2022-a-5-19',
         'iso-2022-a-5-20',
         'iso-2022-a-5-21',
@@ -158,7 +158,7 @@ const nis2Controls = {
         'nist-csf-v2-id-im-03',
         'nist-csf-v2-id-im-04',
       ],
-      2022: [
+      'iso-2022': [
         'iso-2022-a-8-8',
         'iso-2022-a-8-9',
         'iso-2022-a-8-25',
@@ -186,7 +186,7 @@ const nis2Controls = {
         'nist-csf-v2-id-im-02',
         'nist-csf-v2-id-im-03',
       ],
-      2022: ['iso-2022-a-5-35', 'iso-2022-a-5-36'],
+      'iso-2022': ['iso-2022-a-5-35', 'iso-2022-a-5-36'],
       gdpr: [
         'gdpr-art-24-monitoring-review',
         'gdpr-art-40-42-codes-of-conduct-and-certifications',
@@ -204,7 +204,7 @@ const nis2Controls = {
         'nist-csf-v2-gv-rr-02',
         'nist-csf-v2-gv-rr-04',
       ],
-      2022: ['iso-2022-a-6-3'],
+      'iso-2022': ['iso-2022-a-6-3'],
       gdpr: ['gdpr-art-24-training-awareness'],
     },
   },
@@ -218,7 +218,7 @@ const nis2Controls = {
         'nist-csf-v2-pr-ds-02',
         'nist-csf-v2-pr-ds-10',
       ],
-      2022: ['iso-2022-a-8-24'],
+      'iso-2022': ['iso-2022-a-8-24'],
       gdpr: [
         'gdpr-art-32-encryption-at-rest',
         'gdpr-art-32-encryption-in-transit',
@@ -245,7 +245,7 @@ const nis2Controls = {
         'nist-csf-v2-id-am-07',
         'nist-csf-v2-id-am-08',
       ],
-      2022: [
+      'iso-2022': [
         'iso-2022-a-5-9',
         'iso-2022-a-5-10',
         'iso-2022-a-5-15',
@@ -269,7 +269,7 @@ const nis2Controls = {
     relationship: 'related',
     mappings: {
       nistcsfv2: ['nist-csf-v2-pr-aa-03', 'nist-csf-v2-pr-aa-05'],
-      2022: ['iso-2022-a-8-5'],
+      'iso-2022': ['iso-2022-a-8-5'],
       gdpr: ['gdpr-art-32-access-restriction'],
     },
   },
@@ -286,7 +286,7 @@ const nis2Controls = {
         'nist-csf-v2-id-ra-09',
         'nist-csf-v2-id-ra-10',
       ],
-      2022: [
+      'iso-2022': [
         'iso-2022-a-5-19',
         'iso-2022-a-5-20',
         'iso-2022-a-5-21',
@@ -315,6 +315,8 @@ function formatArray(arr, indent) {
 
 function generateNis2Entries() {
   const lines = [];
+  const tsKey = (key) => (key.includes('-') ? `'${key}'` : key);
+
   lines.push('');
   lines.push(
     '  // ─── EU NIS2 controls (manually mapped) ──────────────────────────'
@@ -330,25 +332,25 @@ function generateNis2Entries() {
     // Output mappings in alphabetical key order
     const orderedKeys = Object.keys(def.mappings).sort((a, b) => {
       const order = [
-        "'2013'",
-        "'2022'",
+        "'iso-2013'",
+        "'iso-2022'",
         'c5_2020',
         'cisv81',
         'eunis2',
         'gdpr',
-        'mvps',
+        'mvsp',
         'nistcsfv2',
         'soc2v2',
       ];
       // Handle quoted keys
-      const aKey = a === '2022' ? "'2022'" : a;
-      const bKey = b === '2022' ? "'2022'" : b;
+      const aKey = tsKey(a);
+      const bKey = tsKey(b);
       return order.indexOf(aKey) - order.indexOf(bKey);
     });
 
     for (const key of orderedKeys) {
       const values = def.mappings[key];
-      const displayKey = key === '2022' ? `'2022'` : key;
+      const displayKey = tsKey(key);
       const indent = '      ';
       const formatted = formatArray(values, indent);
       lines.push(`      ${displayKey}: ${formatted},`);
@@ -403,8 +405,8 @@ for (const [nis2Id, def] of Object.entries(nis2Controls)) {
         gdprReverse[gdprId].push(nis2Id);
     }
   }
-  if (def.mappings['2022']) {
-    for (const isoId of def.mappings['2022']) {
+  if (def.mappings['iso-2022']) {
+    for (const isoId of def.mappings['iso-2022']) {
       if (!iso2022Reverse[isoId]) iso2022Reverse[isoId] = [];
       if (!iso2022Reverse[isoId].includes(nis2Id))
         iso2022Reverse[isoId].push(nis2Id);
@@ -458,13 +460,13 @@ function addKeyToControl(content, controlId, key, values) {
 
   // Insert new key in alphabetical order
   const keyOrder = [
-    "'2013'",
-    "'2022'",
+    "'iso-2013'",
+    "'iso-2022'",
     'c5_2020',
     'cisv81',
     'eunis2',
     'gdpr',
-    'mvps',
+    'mvsp',
     'nistcsfv2',
     'soc2v2',
   ];

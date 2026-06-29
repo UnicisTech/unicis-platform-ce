@@ -11,9 +11,9 @@ Each control entry looks like:
     'control-id': {
         relationship: 'equivalent' | 'implements' | 'subset' | 'superset' | 'related',
         mappings: {
-            '2013':      [...],
-            '2022':      [...],
-            'mvps':      [...],
+            'iso-2013':      [...],
+            'iso-2022':      [...],
+            'mvsp':      [...],
             'nistcsfv2': [...],
             'eunis2':    [...],
             'gdpr':      [...],
@@ -54,8 +54,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-1-1": {
         "relationship": "related",
         "mappings": {
-            "2022":      ["iso-2022-a-5-24", "iso-2022-a-8-8"],
-            "2013":      ["iso-2013-a-16-1-1", "iso-2013-a-12-6-1"],
+            "iso-2022":      ["iso-2022-a-5-24", "iso-2022-a-8-8"],
+            "iso-2013":      ["iso-2013-a-16-1-1", "iso-2013-a-12-6-1"],
             "nistcsfv2": ["nist-csf-v2-id-ra-01", "nist-csf-v2-rs-ma-01"],
             "eunis2":    ["eu-nis2-21-2-b"],
             "cisv81":    ["cisv81-7-7", "cisv81-17-1"],
@@ -66,8 +66,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-1-2": {
         "relationship": "related",
         "mappings": {
-            "2022":      ["iso-2022-a-5-15", "iso-2022-a-5-18"],
-            "2013":      ["iso-2013-a-9-1-1", "iso-2013-a-9-2-3"],
+            "iso-2022":      ["iso-2022-a-5-15", "iso-2022-a-5-18"],
+            "iso-2013":      ["iso-2013-a-9-1-1", "iso-2013-a-9-2-3"],
             "nistcsfv2": ["nist-csf-v2-pr-aa-01", "nist-csf-v2-pr-aa-05"],
             "eunis2":    ["eu-nis2-21-2-i"],
             "cisv81":    ["cisv81-5-1", "cisv81-6-3"],
@@ -78,8 +78,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-1-3": {
         "relationship": "related",
         "mappings": {
-            "2022":      ["iso-2022-a-5-35", "iso-2022-a-8-8"],
-            "2013":      ["iso-2013-a-18-2-3", "iso-2013-a-12-6-1"],
+            "iso-2022":      ["iso-2022-a-5-35", "iso-2022-a-8-8"],
+            "iso-2013":      ["iso-2013-a-18-2-3", "iso-2013-a-12-6-1"],
             "nistcsfv2": ["nist-csf-v2-id-ra-01", "nist-csf-v2-id-ra-05"],
             "eunis2":    ["eu-nis2-21-2-f"],
             "cisv81":    ["cisv81-18-1", "cisv81-18-2"],
@@ -90,8 +90,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-1-4": {
         "relationship": "related",
         "mappings": {
-            "2022":      ["iso-2022-a-5-24", "iso-2022-a-8-8"],
-            "2013":      ["iso-2013-a-16-1-1", "iso-2013-a-12-6-1"],
+            "iso-2022":      ["iso-2022-a-5-24", "iso-2022-a-8-8"],
+            "iso-2013":      ["iso-2013-a-16-1-1", "iso-2013-a-12-6-1"],
             "nistcsfv2": ["nist-csf-v2-id-ra-01"],
             "cisv81":    ["cisv81-17-1"],
             "c5_2020":   ["c5-2020-sim-01"],
@@ -100,8 +100,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-1-5": {
         "relationship": "implements",
         "mappings": {
-            "2022":      ["iso-2022-a-6-3"],
-            "2013":      ["iso-2013-a-7-2-2"],
+            "iso-2022":      ["iso-2022-a-6-3"],
+            "iso-2013":      ["iso-2013-a-7-2-2"],
             "nistcsfv2": ["nist-csf-v2-pr-at-01", "nist-csf-v2-pr-at-02"],
             "eunis2":    ["eu-nis2-21-2-g"],
             "cisv81":    ["cisv81-14-1", "cisv81-14-9"],
@@ -112,8 +112,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-1-6": {
         "relationship": "implements",
         "mappings": {
-            "2022":      ["iso-2022-a-5-24", "iso-2022-a-5-26"],
-            "2013":      ["iso-2013-a-16-1-1", "iso-2013-a-16-1-5"],
+            "iso-2022":      ["iso-2022-a-5-24", "iso-2022-a-5-26"],
+            "iso-2013":      ["iso-2013-a-16-1-1", "iso-2013-a-16-1-5"],
             "nistcsfv2": ["nist-csf-v2-rs-ma-01", "nist-csf-v2-rs-ma-02"],
             "eunis2":    ["eu-nis2-21-2-b"],
             "cisv81":    ["cisv81-17-2", "cisv81-17-3"],
@@ -124,8 +124,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-1-7": {
         "relationship": "implements",
         "mappings": {
-            "2022":      ["iso-2022-a-8-15", "iso-2022-a-8-16", "iso-2022-a-8-17"],
-            "2013":      ["iso-2013-a-12-4-1", "iso-2013-a-12-4-2", "iso-2013-a-12-4-3"],
+            "iso-2022":      ["iso-2022-a-8-15", "iso-2022-a-8-16", "iso-2022-a-8-17"],
+            "iso-2013":      ["iso-2013-a-12-4-1", "iso-2013-a-12-4-2", "iso-2013-a-12-4-3"],
             "nistcsfv2": ["nist-csf-v2-de-cm-01", "nist-csf-v2-de-ae-03"],
             "eunis2":    ["eu-nis2-21-2-b"],
             "cisv81":    ["cisv81-8-2", "cisv81-8-5", "cisv81-8-11"],
@@ -137,8 +137,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-1-8": {
         "relationship": "related",
         "mappings": {
-            "2022":      ["iso-2022-a-5-29", "iso-2022-a-8-14"],
-            "2013":      ["iso-2013-a-17-1-1", "iso-2013-a-17-2-1"],
+            "iso-2022":      ["iso-2022-a-5-29", "iso-2022-a-8-14"],
+            "iso-2013":      ["iso-2013-a-17-1-1", "iso-2013-a-17-2-1"],
             "nistcsfv2": ["nist-csf-v2-rc-rp-01"],
             "cisv81":    ["cisv81-11-1"],
             "soc2v2":    ["soc2-v2-a1-1"],
@@ -148,8 +148,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-2-1": {
         "relationship": "implements",
         "mappings": {
-            "2022":      ["iso-2022-a-5-16", "iso-2022-a-5-17", "iso-2022-a-8-5"],
-            "2013":      ["iso-2013-a-9-2-1", "iso-2013-a-9-4-2"],
+            "iso-2022":      ["iso-2022-a-5-16", "iso-2022-a-5-17", "iso-2022-a-8-5"],
+            "iso-2013":      ["iso-2013-a-9-2-1", "iso-2013-a-9-4-2"],
             "nistcsfv2": ["nist-csf-v2-pr-aa-02", "nist-csf-v2-pr-aa-03"],
             "eunis2":    ["eu-nis2-21-2-i"],
             "cisv81":    ["cisv81-5-2", "cisv81-6-3"],
@@ -160,8 +160,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-2-2": {
         "relationship": "implements",
         "mappings": {
-            "2022":      ["iso-2022-a-8-24", "iso-2022-a-8-20"],
-            "2013":      ["iso-2013-a-10-1-1", "iso-2013-a-13-1-1"],
+            "iso-2022":      ["iso-2022-a-8-24", "iso-2022-a-8-20"],
+            "iso-2013":      ["iso-2013-a-10-1-1", "iso-2013-a-13-1-1"],
             "nistcsfv2": ["nist-csf-v2-pr-ds-02"],
             "eunis2":    ["eu-nis2-21-2-h", "eu-nis2-21-2-j"],
             "cisv81":    ["cisv81-3-10", "cisv81-13-9"],
@@ -173,8 +173,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-2-3": {
         "relationship": "implements",
         "mappings": {
-            "2022":      ["iso-2022-a-8-9", "iso-2022-a-8-20"],
-            "2013":      ["iso-2013-a-14-1-2", "iso-2013-a-13-1-1"],
+            "iso-2022":      ["iso-2022-a-8-9", "iso-2022-a-8-20"],
+            "iso-2013":      ["iso-2013-a-14-1-2", "iso-2013-a-13-1-1"],
             "nistcsfv2": ["nist-csf-v2-pr-ps-01"],
             "cisv81":    ["cisv81-9-1", "cisv81-13-4"],
             "soc2v2":    ["soc2-v2-cc7-1"],
@@ -184,8 +184,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-2-4": {
         "relationship": "implements",
         "mappings": {
-            "2022":      ["iso-2022-a-5-17", "iso-2022-a-8-5"],
-            "2013":      ["iso-2013-a-9-3-1", "iso-2013-a-9-4-3"],
+            "iso-2022":      ["iso-2022-a-5-17", "iso-2022-a-8-5"],
+            "iso-2013":      ["iso-2013-a-9-3-1", "iso-2013-a-9-4-3"],
             "nistcsfv2": ["nist-csf-v2-pr-aa-01", "nist-csf-v2-pr-aa-02"],
             "eunis2":    ["eu-nis2-21-2-i", "eu-nis2-21-2-j"],
             "cisv81":    ["cisv81-5-2", "cisv81-6-3", "cisv81-6-5"],
@@ -196,8 +196,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-2-5": {
         "relationship": "implements",
         "mappings": {
-            "2022":      ["iso-2022-a-8-24"],
-            "2013":      ["iso-2013-a-10-1-1"],
+            "iso-2022":      ["iso-2022-a-8-24"],
+            "iso-2013":      ["iso-2013-a-10-1-1"],
             "nistcsfv2": ["nist-csf-v2-pr-ds-01"],
             "eunis2":    ["eu-nis2-21-2-h"],
             "cisv81":    ["cisv81-3-9", "cisv81-3-11"],
@@ -209,8 +209,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-2-6": {
         "relationship": "implements",
         "mappings": {
-            "2022":      ["iso-2022-a-8-8", "iso-2022-a-8-28"],
-            "2013":      ["iso-2013-a-12-6-1", "iso-2013-a-14-2-7"],
+            "iso-2022":      ["iso-2022-a-8-8", "iso-2022-a-8-28"],
+            "iso-2013":      ["iso-2013-a-12-6-1", "iso-2013-a-14-2-7"],
             "nistcsfv2": ["nist-csf-v2-id-ra-01", "nist-csf-v2-de-cm-01"],
             "eunis2":    ["eu-nis2-21-2-e"],
             "cisv81":    ["cisv81-7-1", "cisv81-16-1"],
@@ -221,8 +221,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-2-7": {
         "relationship": "implements",
         "mappings": {
-            "2022":      ["iso-2022-a-5-17", "iso-2022-a-8-19"],
-            "2013":      ["iso-2013-a-9-2-4", "iso-2013-a-12-5-1"],
+            "iso-2022":      ["iso-2022-a-5-17", "iso-2022-a-8-19"],
+            "iso-2013":      ["iso-2013-a-9-2-4", "iso-2013-a-12-5-1"],
             "nistcsfv2": ["nist-csf-v2-pr-aa-01"],
             "cisv81":    ["cisv81-4-7", "cisv81-5-3"],
             "soc2v2":    ["soc2-v2-cc6-1"],
@@ -232,8 +232,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-2-8": {
         "relationship": "implements",
         "mappings": {
-            "2022":      ["iso-2022-a-8-28", "iso-2022-a-8-26"],
-            "2013":      ["iso-2013-a-14-1-2", "iso-2013-a-14-2-5"],
+            "iso-2022":      ["iso-2022-a-8-28", "iso-2022-a-8-26"],
+            "iso-2013":      ["iso-2013-a-14-1-2", "iso-2013-a-14-2-5"],
             "nistcsfv2": ["nist-csf-v2-pr-ps-01"],
             "cisv81":    ["cisv81-16-7", "cisv81-16-12"],
             "soc2v2":    ["soc2-v2-cc8-1"],
@@ -243,8 +243,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-3-1": {
         "relationship": "related",
         "mappings": {
-            "2022":      ["iso-2022-a-5-9", "iso-2022-a-5-12"],
-            "2013":      ["iso-2013-a-8-1-1", "iso-2013-a-8-2-1"],
+            "iso-2022":      ["iso-2022-a-5-9", "iso-2022-a-5-12"],
+            "iso-2013":      ["iso-2013-a-8-1-1", "iso-2013-a-8-2-1"],
             "nistcsfv2": ["nist-csf-v2-id-am-01", "nist-csf-v2-id-am-02"],
             "eunis2":    ["eu-nis2-21-2-i"],
             "cisv81":    ["cisv81-1-1", "cisv81-2-1"],
@@ -256,8 +256,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-3-2": {
         "relationship": "related",
         "mappings": {
-            "2022":      ["iso-2022-a-5-33"],
-            "2013":      ["iso-2013-a-18-1-3"],
+            "iso-2022":      ["iso-2022-a-5-33"],
+            "iso-2013":      ["iso-2013-a-18-1-3"],
             "eunis2":    ["eu-nis2-21-2-i"],
             "cisv81":    ["cisv81-3-12", "cisv81-3-13"],
             "soc2v2":    ["soc2-v2-p4-2"],
@@ -267,8 +267,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-3-3": {
         "relationship": "implements",
         "mappings": {
-            "2022":      ["iso-2022-a-6-1", "iso-2022-a-6-2", "iso-2022-a-6-5"],
-            "2013":      ["iso-2013-a-7-1-1", "iso-2013-a-7-1-2", "iso-2013-a-7-3-1"],
+            "iso-2022":      ["iso-2022-a-6-1", "iso-2022-a-6-2", "iso-2022-a-6-5"],
+            "iso-2013":      ["iso-2013-a-7-1-1", "iso-2013-a-7-1-2", "iso-2013-a-7-3-1"],
             "nistcsfv2": ["nist-csf-v2-gv-po-01"],
             "cisv81":    ["cisv81-6-2"],
             "soc2v2":    ["soc2-v2-cc1-4"],
@@ -278,8 +278,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-3-4": {
         "relationship": "related",
         "mappings": {
-            "2022":      ["iso-2022-a-5-35", "iso-2022-a-5-36"],
-            "2013":      ["iso-2013-a-18-2-1", "iso-2013-a-18-2-2"],
+            "iso-2022":      ["iso-2022-a-5-35", "iso-2022-a-5-36"],
+            "iso-2013":      ["iso-2013-a-18-2-1", "iso-2013-a-18-2-2"],
             "nistcsfv2": ["nist-csf-v2-gv-oc-01"],
             "eunis2":    ["eu-nis2-21-2-f"],
             "c5_2020":   ["c5-2020-com-01"],
@@ -288,8 +288,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-3-5": {
         "relationship": "related",
         "mappings": {
-            "2022":      ["iso-2022-a-5-19", "iso-2022-a-5-21"],
-            "2013":      ["iso-2013-a-15-1-1", "iso-2013-a-15-1-3"],
+            "iso-2022":      ["iso-2022-a-5-19", "iso-2022-a-5-21"],
+            "iso-2013":      ["iso-2013-a-15-1-1", "iso-2013-a-15-1-3"],
             "nistcsfv2": ["nist-csf-v2-gv-sc-01", "nist-csf-v2-gv-sc-06"],
             "eunis2":    ["eu-nis2-21-2-d", "eu-nis2-21-3"],
             "cisv81":    ["cisv81-15-1"],
@@ -301,8 +301,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-4-1": {
         "relationship": "implements",
         "mappings": {
-            "2022":      ["iso-2022-a-5-8", "iso-2022-a-8-25", "iso-2022-a-8-27"],
-            "2013":      ["iso-2013-a-14-1-1", "iso-2013-a-14-2-1", "iso-2013-a-14-2-5"],
+            "iso-2022":      ["iso-2022-a-5-8", "iso-2022-a-8-25", "iso-2022-a-8-27"],
+            "iso-2013":      ["iso-2013-a-14-1-1", "iso-2013-a-14-2-1", "iso-2013-a-14-2-5"],
             "nistcsfv2": ["nist-csf-v2-gv-rm-01", "nist-csf-v2-id-ra-03"],
             "eunis2":    ["eu-nis2-21-2-e"],
             "cisv81":    ["cisv81-16-1", "cisv81-16-14"],
@@ -313,8 +313,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-4-2": {
         "relationship": "implements",
         "mappings": {
-            "2022":      ["iso-2022-a-8-31"],
-            "2013":      ["iso-2013-a-14-2-6"],
+            "iso-2022":      ["iso-2022-a-8-31"],
+            "iso-2013":      ["iso-2013-a-14-2-6"],
             "nistcsfv2": ["nist-csf-v2-pr-ps-04"],
             "cisv81":    ["cisv81-12-1", "cisv81-13-4"],
             "soc2v2":    ["soc2-v2-cc5-3"],
@@ -325,8 +325,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-4-3": {
         "relationship": "related",
         "mappings": {
-            "2022":      ["iso-2022-a-5-20", "iso-2022-a-5-22"],
-            "2013":      ["iso-2013-a-15-1-2", "iso-2013-a-15-2-1"],
+            "iso-2022":      ["iso-2022-a-5-20", "iso-2022-a-5-22"],
+            "iso-2013":      ["iso-2013-a-15-1-2", "iso-2013-a-15-2-1"],
             "nistcsfv2": ["nist-csf-v2-gv-sc-02", "nist-csf-v2-gv-sc-05"],
             "eunis2":    ["eu-nis2-21-2-d", "eu-nis2-21-3"],
             "cisv81":    ["cisv81-15-2", "cisv81-15-3"],
@@ -337,8 +337,8 @@ MAPPINGS: dict[str, dict] = {
     "mvsp-4-4": {
         "relationship": "implements",
         "mappings": {
-            "2022":      ["iso-2022-a-8-13"],
-            "2013":      ["iso-2013-a-12-3-1"],
+            "iso-2022":      ["iso-2022-a-8-13"],
+            "iso-2013":      ["iso-2013-a-12-3-1"],
             "nistcsfv2": ["nist-csf-v2-pr-ds-11", "nist-csf-v2-rc-rp-04"],
             "eunis2":    ["eu-nis2-21-2-c"],
             "cisv81":    ["cisv81-11-2", "cisv81-11-4"],
@@ -355,8 +355,8 @@ MAPPINGS: dict[str, dict] = {
     "iso-2022-a-5-1": {
         "relationship": "related",
         "mappings": {
-            "2013":      ["iso-2013-a-5-1-1", "iso-2013-a-5-1-2"],
-            "mvps":      ["mvsp-3-4"],
+            "iso-2013":      ["iso-2013-a-5-1-1", "iso-2013-a-5-1-2"],
+            "mvsp":      ["mvsp-3-4"],
             "nistcsfv2": ["nist-csf-v2-gv-po-01", "nist-csf-v2-gv-po-02"],
             "eunis2":    ["eu-nis2-21", "eu-nis2-21-1"],
             "cisv81":    ["cisv81-3-1"],
@@ -368,7 +368,7 @@ MAPPINGS: dict[str, dict] = {
     "iso-2022-a-5-2": {
         "relationship": "related",
         "mappings": {
-            "2013":      ["iso-2013-a-6-1-1"],
+            "iso-2013":      ["iso-2013-a-6-1-1"],
             "nistcsfv2": ["nist-csf-v2-gv-oc-01", "nist-csf-v2-gv-rm-01"],
             "eunis2":    ["eu-nis2-21"],
             "cisv81":    ["cisv81-3-1"],
@@ -385,8 +385,8 @@ MAPPINGS: dict[str, dict] = {
     "iso-2013-a-5-1-1": {
         "relationship": "related",
         "mappings": {
-            "2022":      ["iso-2022-a-5-1"],
-            "mvps":      ["mvsp-3-4"],
+            "iso-2022":      ["iso-2022-a-5-1"],
+            "mvsp":      ["mvsp-3-4"],
             "nistcsfv2": ["nist-csf-v2-gv-po-01"],
             "eunis2":    ["eu-nis2-21"],
             "cisv81":    ["cisv81-3-1"],
@@ -398,7 +398,7 @@ MAPPINGS: dict[str, dict] = {
     "iso-2013-a-5-1-2": {
         "relationship": "related",
         "mappings": {
-            "2022":      ["iso-2022-a-5-1"],
+            "iso-2022":      ["iso-2022-a-5-1"],
             "nistcsfv2": ["nist-csf-v2-gv-po-02"],
             "cisv81":    ["cisv81-3-1"],
             "soc2v2":    ["soc2-v2-cc1-1"],
@@ -417,7 +417,7 @@ MAPPINGS: dict[str, dict] = {
 # CODE GENERATION — do not edit below this line
 # ---------------------------------------------------------------------------
 
-ISO_KEYS = ["2013", "2022", "mvps", "nistcsfv2", "eunis2", "gdpr", "cisv81", "soc2v2", "c5_2020"]
+ISO_KEYS = ["iso-2013", "iso-2022", "mvsp", "nistcsfv2", "eunis2", "gdpr", "cisv81", "soc2v2", "c5_2020"]
 
 HEADER = '''\
 import type { ISO } from 'types';
