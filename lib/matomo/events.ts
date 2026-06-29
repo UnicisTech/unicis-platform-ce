@@ -36,6 +36,9 @@ export const MatomoEvent = {
     category: MatomoCategory.Onboarding,
     action: 'First-User-Invited',
   },
+  // Not yet implemented — there is no tier-choice step during signup/team
+  // creation today; plan selection only happens later on the billing page
+  // (tracked separately as Billing/Tier-Upgrade-Click).
   TierSelected: {
     category: MatomoCategory.Onboarding,
     action: 'Tier-Selected',
@@ -44,6 +47,9 @@ export const MatomoEvent = {
     category: MatomoCategory.Onboarding,
     action: 'First-Framework-Selected',
   },
+  // Not yet implemented — requires a background job (e.g. a daily cron
+  // flagging teams created >24h ago with no invitations sent), not a
+  // single call site.
   OnboardingAbandoned: {
     category: MatomoCategory.Onboarding,
     action: 'Onboarding-Abandoned',
