@@ -15,11 +15,20 @@
 
 Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs. Built for CISOs, DPOs, DevSecOps, and compliance teams who need one place to manage privacy, cybersecurity controls, and risk.
 
-Please star ⭐ the repo if you want us to continue developing and improving the Unicis Platform! 😀
+<p align="center">
+  <a href="https://github.com/UnicisTech/unicis-platform-ce">
+    <img src="https://img.shields.io/github/stars/UnicisTech/unicis-platform-ce?style=for-the-badge&logo=github&label=Star%20us%20on%20GitHub&color=22272e" alt="Star us on GitHub">
+  </a>
+</p>
 
 <p align="center">
-  <img src="public/readme-presentation.png"
-       alt="Unicis Platform Screenshot">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="public/readme-hero-template.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/readme-hero-template.png">
+    <img src="public/readme-hero-template.png"
+         alt="Unicis Platform dashboard showing task management, cybersecurity controls, privacy modules, and compliance frameworks — all in one unified interface"
+         width="100%">
+  </picture>
 </p>
 
 ## 🗄️ Available Frameworks and Standards
@@ -49,6 +58,7 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 - [OWASP Application Security Verification Standard (ASVS) v5](https://www.unicis.tech/frameworks/owasp-asvs?mtm_campaign=GitHub%20readme)
 - [Payment Card Industry Data Security Standard (PCI DSS v4.0.1)](https://www.unicis.tech/frameworks/pci-dss?mtm_campaign=GitHub%20readme)
 - [ISO/IEC 42001:2023 — AI Management System](https://www.unicis.tech/frameworks/iso42001?mtm_campaign=GitHub%20readme)
+
 
 ### Coming Next
 
