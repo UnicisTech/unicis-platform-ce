@@ -9,6 +9,8 @@ import {
   changeSubscription,
   isTeamHasSubscription,
 } from 'models/subscription';
+import { trackServerEvent } from '@/lib/matomo/server';
+import { MatomoEvent } from '@/lib/matomo/events';
 
 export default async function handler(
   req: NextApiRequest,
@@ -83,5 +85,6 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       await addInitialPayment(team, createdSubscription);
     }
   }
+  trackServerEvent(MatomoEvent.TierUpgradeComplete, subscription);
   res.status(200).json({ data: response });
 };

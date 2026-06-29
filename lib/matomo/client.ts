@@ -34,3 +34,15 @@ export function setCustomDimension(index: number, value: string) {
   if (typeof window === 'undefined') return;
   push(['setCustomDimension', index, value]);
 }
+
+// In-app search (e.g. the ⌘K command palette) is client-side only and never
+// hits a URL with a query param, so Matomo's automatic Site Search detection
+// can't see it — track it explicitly instead.
+export function trackSiteSearch(
+  keyword: string,
+  category?: string,
+  resultsCount?: number
+) {
+  if (typeof window === 'undefined') return;
+  push(['trackSiteSearch', keyword, category ?? null, resultsCount]);
+}

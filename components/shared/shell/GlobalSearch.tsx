@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
@@ -18,6 +18,7 @@ import {
 import useTeamTasks from 'hooks/useTeamTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import { cn } from '@/components/shadcn/lib/utils';
+import { trackSiteSearch } from '@/lib/matomo/client';
 import type { Task } from 'types';
 
 // ── Module logo helper ─────────────────────────────────────────────────────────
@@ -342,6 +343,26 @@ export default function GlobalSearch() {
   const slug = (router.query.slug as string) || '';
   const { tasks } = useTeamTasks(slug);
   const { canAccess } = useCanAccess(slug);
+  const [query, setQuery] = useState('');
+  const searchTrackTimer = useRef<ReturnType<typeof setTimeout>>();
+
+  // Debounced Matomo site-search tracking — the palette filters in-memory,
+  // so there's no URL/query-param for Matomo's automatic detection to see.
+  useEffect(() => {
+    if (searchTrackTimer.current) clearTimeout(searchTrackTimer.current);
+    if (!query.trim()) return;
+
+    searchTrackTimer.current = setTimeout(() => {
+      const resultsCount = (tasks ?? []).filter((task) =>
+        buildSearchIndex(task).toLowerCase().includes(query.toLowerCase())
+      ).length;
+      trackSiteSearch(query.trim(), 'global-search', resultsCount);
+    }, 600);
+
+    return () => {
+      if (searchTrackTimer.current) clearTimeout(searchTrackTimer.current);
+    };
+  }, [query, tasks]);
 
   // ⌘K / Ctrl+K listener
   useEffect(() => {
@@ -391,8 +412,18 @@ export default function GlobalSearch() {
       </button>
 
       {/* Command dialog */}
-      <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder={t('search.placeholder')} />
+      <CommandDialog
+        open={open}
+        onOpenChange={(next) => {
+          setOpen(next);
+          if (!next) setQuery('');
+        }}
+      >
+        <CommandInput
+          placeholder={t('search.placeholder')}
+          value={query}
+          onValueChange={setQuery}
+        />
         <CommandList>
           <CommandEmpty>{t('search.no-results')}</CommandEmpty>
 
