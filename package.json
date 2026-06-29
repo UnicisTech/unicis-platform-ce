@@ -21,7 +21,9 @@
     "test:cov": "jest --coverage --env=jsdom",
     "build-ci": "next build",
     "migrate:teams": "tsx scripts/migrations/2025-11-23-team-properties-migration.ts",
-    "migrate:tasks": "tsx scripts/migrations/2025-11-23-task-properties-migration"
+    "migrate:tasks": "tsx scripts/migrations/2025-11-23-task-properties-migration.ts",
+    "migrate:framework-keys": "tsx scripts/migrations/2026-06-16-framework-key-rename-migration.ts",
+    "migrate:data": "npm run migrate:teams && npm run migrate:tasks && npm run migrate:framework-keys"
   },
   "dependencies": {
     "@boxyhq/metrics": "^0.2.10",
