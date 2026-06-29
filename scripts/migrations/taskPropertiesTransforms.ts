@@ -13,9 +13,9 @@ import {
   stripOuterQuotes,
   tryExtractValueFromStringifiedJson,
   rmFieldToId,
+  type MigrationCscFramework,
+  getMigrationCscControlsProp,
 } from './helpers';
-import { getCscControlsProp } from '@/lib/csc';
-import { ISO } from 'types';
 
 export type JsonWritable = Prisma.InputJsonValue;
 
@@ -25,19 +25,19 @@ function asObject(value: JsonWritable): Record<string, any> | null {
 }
 
 /**
- * 1) Renaming csc_controls -> csc_controls_mvsp
+ * 1) Renaming csc_controls -> csc_controls_mvps
  */
 export function renameCscControlsToMvps(props: JsonWritable): JsonWritable {
   const obj = asObject(props);
   if (!obj) return props;
 
-  if (obj.csc_controls_mvsp !== undefined || obj.csc_controls === undefined) {
+  if (obj.csc_controls_mvps !== undefined || obj.csc_controls === undefined) {
     return props;
   }
 
   const cloned: Record<string, any> = { ...obj };
 
-  cloned.csc_controls_mvsp = cloned.csc_controls;
+  cloned.csc_controls_mvps = cloned.csc_controls;
   delete cloned.csc_controls;
 
   return cloned;
@@ -45,12 +45,12 @@ export function renameCscControlsToMvps(props: JsonWritable): JsonWritable {
 
 export function normalizeCscControls(
   props: JsonWritable,
-  framework: ISO
+  framework: MigrationCscFramework
 ): JsonWritable {
   const obj = asObject(props);
   if (!obj) return props;
 
-  const propName = getCscControlsProp(framework);
+  const propName = getMigrationCscControlsProp(framework);
   const raw = obj[propName];
 
   if (!Array.isArray(raw)) {
@@ -86,15 +86,15 @@ export function normalizeCscControls(
 }
 
 export function normalizeCscControlsMvps(props: JsonWritable): JsonWritable {
-  return normalizeCscControls(props, 'mvsp');
+  return normalizeCscControls(props, 'mvps');
 }
 
 export function normalizeCscControls2013(props: JsonWritable): JsonWritable {
-  return normalizeCscControls(props, 'iso-2013');
+  return normalizeCscControls(props, '2013');
 }
 
 export function normalizeCscControls2022(props: JsonWritable): JsonWritable {
-  return normalizeCscControls(props, 'iso-2022');
+  return normalizeCscControls(props, '2022');
 }
 
 export function normalizeCscControlsNistCsfV2(
