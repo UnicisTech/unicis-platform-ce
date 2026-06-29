@@ -46,3 +46,41 @@ export function trackSiteSearch(
   if (typeof window === 'undefined') return;
   push(['trackSiteSearch', keyword, category ?? null, resultsCount]);
 }
+
+// Content Tracking: measures impressions vs. interactions on a named UI
+// block (e.g. a pricing card), independent of whether it was clicked.
+// name = the specific piece of content (e.g. plan id), piece = the kind of
+// block (e.g. "pricing-card"), target = where the CTA points (optional).
+export function trackContentImpression(
+  name: string,
+  piece: string,
+  target?: string
+) {
+  if (typeof window === 'undefined') return;
+  push(['trackContentImpression', name, piece, target ?? null]);
+}
+
+export function trackContentInteraction(
+  interaction: string,
+  name: string,
+  piece: string,
+  target?: string
+) {
+  if (typeof window === 'undefined') return;
+  push(['trackContentInteraction', interaction, name, piece, target ?? null]);
+}
+
+// Scans the DOM for data-track-content blocks currently in the viewport and
+// fires impressions for them. Call after content that may include such
+// blocks renders or changes.
+export function trackVisibleContentImpressions(
+  checkOnScroll = true,
+  timeIntervalInMs = 750
+) {
+  if (typeof window === 'undefined') return;
+  push([
+    'trackVisibleContentImpressions',
+    checkOnScroll ? 1 : 0,
+    timeIntervalInMs,
+  ]);
+}
