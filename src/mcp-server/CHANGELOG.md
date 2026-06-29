@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Initial Release] — v2026-06-16
 
 ### Added
+
 - `unicis_list_tasks` — list tasks with optional filters
 - `unicis_get_task` — get full task details
 - `unicis_create_task` — create a task
@@ -31,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - HTTP transport mode alongside existing stdio transport
 
 ### Fixed
+
 - `unicis_update_task` — request body now correctly wrapped as `{ data: ... }` matching the platform API
 - `unicis_update_csc_status` — corrected field names (`control`, `value`, `framework`) and added required `framework` parameter; response now reads from `resp.data.statuses[controlId]`
 - `unicis_get_csc_statuses` — response now correctly unwraps `resp.data.statuses` (was treating response as a plain array)

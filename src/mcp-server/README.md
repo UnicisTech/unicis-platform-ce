@@ -23,18 +23,18 @@ An [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) server that 
 
 Tasks are the core unit of work in Unicis. Each task can carry compliance data (cybersecurity controls, RoPA, TIA, PIA, Risk) as embedded properties.
 
-| Tool | Description |
-|------|-------------|
-| `unicis_list_tasks` | List all tasks for a team with optional status/priority filters |
-| `unicis_get_task` | Get full details of a single task including attachments and linked module data |
-| `unicis_create_task` | Create a new task with title, status, priority, due date, description, and optional compliance controls |
-| `unicis_update_task` | Update task fields: title, status, priority, due date, description |
-| `unicis_delete_task` | Permanently delete a task |
-| `unicis_update_task_controls` | Add, remove, or replace the compliance controls linked to a task |
-| `unicis_add_comment` | Post a comment on a task |
-| `unicis_list_attachments` | List all file attachments on a task |
-| `unicis_add_attachment` | Upload a file attachment to a task by local file path |
-| `unicis_remove_attachment` | Remove a file attachment from a task by attachment ID |
+| Tool                          | Description                                                                                             |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `unicis_list_tasks`           | List all tasks for a team with optional status/priority filters                                         |
+| `unicis_get_task`             | Get full details of a single task including attachments and linked module data                          |
+| `unicis_create_task`          | Create a new task with title, status, priority, due date, description, and optional compliance controls |
+| `unicis_update_task`          | Update task fields: title, status, priority, due date, description                                      |
+| `unicis_delete_task`          | Permanently delete a task                                                                               |
+| `unicis_update_task_controls` | Add, remove, or replace the compliance controls linked to a task                                        |
+| `unicis_add_comment`          | Post a comment on a task                                                                                |
+| `unicis_list_attachments`     | List all file attachments on a task                                                                     |
+| `unicis_add_attachment`       | Upload a file attachment to a task by local file path                                                   |
+| `unicis_remove_attachment`    | Remove a file attachment from a task by attachment ID                                                   |
 
 **Task status values:** `todo` · `inprogress` · `done`  
 **Task priority values:** `low` · `medium` · `high`
@@ -45,22 +45,22 @@ Tasks are the core unit of work in Unicis. Each task can carry compliance data (
 
 The RoPA module implements Article 30 GDPR record-keeping. Each task can carry one RoPA record stored as a 6-step procedure.
 
-| Tool | Description |
-|------|-------------|
-| `unicis_get_ropa` | Get the RoPA record linked to a task |
-| `unicis_set_ropa` | Create or update a RoPA record on a task |
-| `unicis_delete_ropa` | Remove the RoPA record from a task |
+| Tool                 | Description                              |
+| -------------------- | ---------------------------------------- |
+| `unicis_get_ropa`    | Get the RoPA record linked to a task     |
+| `unicis_set_ropa`    | Create or update a RoPA record on a task |
+| `unicis_delete_ropa` | Remove the RoPA record from a task       |
 
 **RoPA 6-step structure:**
 
-| Step | Contents |
-|------|----------|
-| `[0]` Stakeholders | `reviewDate`, `controller`, `dpo` |
-| `[1]` Purpose & Categories | `purpose`, `category[]`, `datasubject[]`, `retentionperiod`, `specialcategory[]`, `commentsretention` |
-| `[2]` Recipients | `recipientType`, `recipientdetails` |
-| `[3]` Transfer | `datatransfer`, `recipient`, `country`, `guarantee[]` |
-| `[4]` TOMs | `toms[]` — valid values: `traceabilitymeasures`, `softwareprotectionmeasures`, `databackup`, `dataencryption`, `useraccesscontrol`, `controlofprocessors`, `mvsp`, `securitycert`, `othermeasures` |
-| `[5]` DPIA Screening | boolean flags: `involveProfiling`, `useAutomated`, `involveSurveillance`, `processedSpecialCategories`, `isBigData`, `dataSetsCombined`, `multipleControllers`, `imbalanceInRelationship`, `innovativeTechnologyUsed`, `transferredOutside`, `rightsRestricted`, `piaNeeded` |
+| Step                       | Contents                                                                                                                                                                                                                                                                     |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `[0]` Stakeholders         | `reviewDate`, `controller`, `dpo`                                                                                                                                                                                                                                            |
+| `[1]` Purpose & Categories | `purpose`, `category[]`, `datasubject[]`, `retentionperiod`, `specialcategory[]`, `commentsretention`                                                                                                                                                                        |
+| `[2]` Recipients           | `recipientType`, `recipientdetails`                                                                                                                                                                                                                                          |
+| `[3]` Transfer             | `datatransfer`, `recipient`, `country`, `guarantee[]`                                                                                                                                                                                                                        |
+| `[4]` TOMs                 | `toms[]` — valid values: `traceabilitymeasures`, `softwareprotectionmeasures`, `databackup`, `dataencryption`, `useraccesscontrol`, `controlofprocessors`, `mvsp`, `securitycert`, `othermeasures`                                                                           |
+| `[5]` DPIA Screening       | boolean flags: `involveProfiling`, `useAutomated`, `involveSurveillance`, `processedSpecialCategories`, `isBigData`, `dataSetsCombined`, `multipleControllers`, `imbalanceInRelationship`, `innovativeTechnologyUsed`, `transferredOutside`, `rightsRestricted`, `piaNeeded` |
 
 ---
 
@@ -68,11 +68,11 @@ The RoPA module implements Article 30 GDPR record-keeping. Each task can carry o
 
 The TIA module assesses data transfer risk under GDPR Chapter V (third-country transfers). Each task can carry one TIA record.
 
-| Tool | Description |
-|------|-------------|
-| `unicis_get_tia` | Get the TIA record linked to a task |
-| `unicis_set_tia` | Create or update a TIA record on a task |
-| `unicis_delete_tia` | Remove the TIA record from a task |
+| Tool                | Description                             |
+| ------------------- | --------------------------------------- |
+| `unicis_get_tia`    | Get the TIA record linked to a task     |
+| `unicis_set_tia`    | Create or update a TIA record on a task |
+| `unicis_delete_tia` | Remove the TIA record from a task       |
 
 **Key TIA fields include:** transfer scenario, data exporter/importer details, country of import, encryption in transit, transfer mechanism, lawful access risk, surveillance laws, self-reporting obligations, and an overall transfer risk conclusion.
 
@@ -82,21 +82,21 @@ The TIA module assesses data transfer risk under GDPR Chapter V (third-country t
 
 The PIA module implements a structured DPIA under GDPR Article 35, using a 5-step Probability × Impact quantitative framework.
 
-| Tool | Description |
-|------|-------------|
-| `unicis_get_pia` | Get the PIA record linked to a task |
-| `unicis_set_pia` | Create or update a PIA record on a task |
-| `unicis_delete_pia` | Remove the PIA record from a task |
+| Tool                | Description                             |
+| ------------------- | --------------------------------------- |
+| `unicis_get_pia`    | Get the PIA record linked to a task     |
+| `unicis_set_pia`    | Create or update a PIA record on a task |
+| `unicis_delete_pia` | Remove the PIA record from a task       |
 
 **PIA 5-step structure:**
 
-| Step | Contents |
-|------|----------|
+| Step    | Contents                                                                                                                                                                 |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `step0` | Data processing necessity: `isDataProcessingNecessary` (`necessary`/`unnecessary`), `isProportionalToPurpose` (`proportional`/`not_proportional`), free-text assessments |
-| `step1` | Confidentiality & Integrity: `confidentialityRiskProbability` × `confidentialityRiskSecurity` + free-text assessment |
-| `step2` | Availability: `availabilityRiskProbability` × `availabilityRiskSecurity` + free-text assessment |
-| `step3` | Transparency: `transparencyRiskProbability` × `transparencyRiskSecurity` + free-text assessment |
-| `step4` | Corrective measures (optional): `guarantees`, `securityMeasures`, `securityCompliance`, `dealingWithResidualRisk`, `supervisoryAuthorityInvolvement` |
+| `step1` | Confidentiality & Integrity: `confidentialityRiskProbability` × `confidentialityRiskSecurity` + free-text assessment                                                     |
+| `step2` | Availability: `availabilityRiskProbability` × `availabilityRiskSecurity` + free-text assessment                                                                          |
+| `step3` | Transparency: `transparencyRiskProbability` × `transparencyRiskSecurity` + free-text assessment                                                                          |
+| `step4` | Corrective measures (optional): `guarantees`, `securityMeasures`, `securityCompliance`, `dealingWithResidualRisk`, `supervisoryAuthorityInvolvement`                     |
 
 **Probability scale:** `rare` · `unlikely` · `possible` · `probable` · `severe`  
 **Impact scale:** `insignificant` · `minor` · `moderate` · `major` · `extreme`  
@@ -108,40 +108,40 @@ The PIA module implements a structured DPIA under GDPR Article 35, using a 5-ste
 
 The CSC module maps tasks to controls across major security frameworks. Statuses follow a 0–6 maturity scale.
 
-| Tool | Description |
-|------|-------------|
-| `unicis_get_csc_statuses` | Get all control statuses for a team by framework |
-| `unicis_update_csc_status` | Update a single control's maturity status |
+| Tool                       | Description                                      |
+| -------------------------- | ------------------------------------------------ |
+| `unicis_get_csc_statuses`  | Get all control statuses for a team by framework |
+| `unicis_update_csc_status` | Update a single control's maturity status        |
 
 **Supported frameworks:**
 
-| Framework ID | Full Name |
-|---|---|
-| `iso-2022` | ISO/IEC 27001:2022 |
-| `iso-2013` | ISO/IEC 27001:2013 |
-| `mvsp` | MVSP |
-| `nistcsfv2` | NIST CSF v2 |
-| `eunis2` | EU NIS2 |
-| `gdpr` | GDPR |
-| `cisv81` | CIS CSC v8.1 |
-| `soc2v2` | SOC2 v2 |
-| `c5_2020` | C5 2020 |
-| `owasp_asvs_v5` | OWASP ASVS v5 |
-| `pcidss_v401` | PCI DSS v4.0.1 |
-| `iso42001` | ISO/IEC 42001:2023 |
+| Framework ID    | Full Name          |
+| --------------- | ------------------ |
+| `iso-2022`      | ISO/IEC 27001:2022 |
+| `iso-2013`      | ISO/IEC 27001:2013 |
+| `mvsp`          | MVSP               |
+| `nistcsfv2`     | NIST CSF v2        |
+| `eunis2`        | EU NIS2            |
+| `gdpr`          | GDPR               |
+| `cisv81`        | CIS CSC v8.1       |
+| `soc2v2`        | SOC2 v2            |
+| `c5_2020`       | C5 2020            |
+| `owasp_asvs_v5` | OWASP ASVS v5      |
+| `pcidss_v401`   | PCI DSS v4.0.1     |
+| `iso42001`      | ISO/IEC 42001:2023 |
 
 **CSC status values (maturity scale):**
 
-| Value | Maturity Level |
-|---|---|
-| `unknown` | 0 — Unknown |
-| `not-applicable` | — Not Applicable |
-| `not-performed` | 1 — Not Performed |
-| `performed-informally` | 2 — Performed Informally |
-| `planned` | 3 — Planned |
-| `well-defined` | 4 — Well Defined |
+| Value                       | Maturity Level                |
+| --------------------------- | ----------------------------- |
+| `unknown`                   | 0 — Unknown                   |
+| `not-applicable`            | — Not Applicable              |
+| `not-performed`             | 1 — Not Performed             |
+| `performed-informally`      | 2 — Performed Informally      |
+| `planned`                   | 3 — Planned                   |
+| `well-defined`              | 4 — Well Defined              |
 | `quantitatively-controlled` | 5 — Quantitatively Controlled |
-| `continuously-improving` | 6 — Continuously Improving |
+| `continuously-improving`    | 6 — Continuously Improving    |
 
 ---
 
@@ -149,12 +149,12 @@ The CSC module maps tasks to controls across major security frameworks. Statuses
 
 The Risk Management module maintains an asset-level risk register. Each task can hold one risk record with raw and treated probability × impact scores.
 
-| Tool | Description |
-|------|-------------|
-| `unicis_get_risk` | Get the risk record linked to a task |
-| `unicis_set_risk` | Create or update a risk entry on a task |
-| `unicis_delete_risk` | Remove the risk record from a task |
-| `unicis_list_risks` | List all tasks with risk records across a team, sorted by descending raw risk score |
+| Tool                 | Description                                                                         |
+| -------------------- | ----------------------------------------------------------------------------------- |
+| `unicis_get_risk`    | Get the risk record linked to a task                                                |
+| `unicis_set_risk`    | Create or update a risk entry on a task                                             |
+| `unicis_delete_risk` | Remove the risk record from a task                                                  |
+| `unicis_list_risks`  | List all tasks with risk records across a team, sorted by descending raw risk score |
 
 **Risk record fields include:** risk name, asset owner, raw probability (1–5), raw impact (1–5), risk treatment plan, treatment cost, treatment status, treated probability, treated impact.
 
@@ -162,10 +162,10 @@ The Risk Management module maintains an asset-level risk register. Each task can
 
 ### API Keys
 
-| Tool | Description |
-|------|-------------|
-| `unicis_list_api_keys` | List all API keys for a team (names and IDs — tokens are never returned after creation) |
-| `unicis_create_api_key` | Create a new named API key — the token is returned **once only**, store it immediately |
+| Tool                    | Description                                                                             |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| `unicis_list_api_keys`  | List all API keys for a team (names and IDs — tokens are never returned after creation) |
+| `unicis_create_api_key` | Create a new named API key — the token is returned **once only**, store it immediately  |
 
 ---
 
@@ -173,8 +173,8 @@ The Risk Management module maintains an asset-level risk register. Each task can
 
 The following Unicis Platform module is **not yet accessible via MCP**:
 
-| Module | Status |
-|--------|--------|
+| Module                                   | Status                                                                                                                                                                                            |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **IAP — Interactive Awareness Training** | Not yet supported. The awareness program module (course assignments, completion tracking, quiz results, learner reports) does not currently have MCP tool coverage. Planned for a future release. |
 
 ---
@@ -196,12 +196,12 @@ npm run build
 
 ### Environment Variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `API_BASE_URL` | ✅ | Your Unicis instance URL, e.g. `https://platform.unicis.tech` |
-| `API_BEARER_TOKEN` | ✅ | API key from Team Settings |
-| `TRANSPORT` | optional | `stdio` (default) or `http` |
-| `PORT` | optional | HTTP port when using `http` transport (default: `3000`) |
+| Variable           | Required | Description                                                   |
+| ------------------ | -------- | ------------------------------------------------------------- |
+| `API_BASE_URL`     | ✅       | Your Unicis instance URL, e.g. `https://platform.unicis.tech` |
+| `API_BEARER_TOKEN` | ✅       | API key from Team Settings                                    |
+| `TRANSPORT`        | optional | `stdio` (default) or `http`                                   |
+| `PORT`             | optional | HTTP port when using `http` transport (default: `3000`)       |
 
 ---
 
@@ -214,7 +214,9 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) o
   "mcpServers": {
     "unicis": {
       "command": "node",
-      "args": ["/absolute/path/to/unicis-platform/src/mcp-server/dist/index.js"],
+      "args": [
+        "/absolute/path/to/unicis-platform/src/mcp-server/dist/index.js"
+      ],
       "env": {
         "API_BEARER_TOKEN": "your-api-key",
         "API_BASE_URL": "https://platform.unicis.tech"

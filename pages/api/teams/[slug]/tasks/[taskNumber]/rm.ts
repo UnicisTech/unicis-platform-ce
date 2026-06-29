@@ -2,10 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import { deleteRisk, saveRisk } from 'models/rm';
-import {
-  calculateRiskRating,
-  getRiskLevelBucket,
-} from '@/lib/rm/helpers';
+import { calculateRiskRating, getRiskLevelBucket } from '@/lib/rm/helpers';
 import { trackServerEvent } from '@/lib/matomo/server';
 import { MatomoEvent } from '@/lib/matomo/events';
 

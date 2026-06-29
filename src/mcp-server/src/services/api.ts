@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosError } from "axios";
+import axios, { AxiosInstance, AxiosError } from 'axios';
 
 export interface ApiResponse<T> {
   data: T;
@@ -13,7 +13,7 @@ export interface Task {
   authorId: string;
   title: string;
   status: string;
-  priority: "low" | "medium" | "high";
+  priority: 'low' | 'medium' | 'high';
   kanbanOrder: number;
   duedate: string | null;
   description: string;
@@ -75,7 +75,7 @@ export interface RmRisk {
 export interface CreateTaskInput {
   title: string;
   status?: string;
-  priority?: "low" | "medium" | "high";
+  priority?: 'low' | 'medium' | 'high';
   description?: string;
   duedate?: string;
 }
@@ -83,7 +83,7 @@ export interface CreateTaskInput {
 export interface UpdateTaskInput {
   title?: string;
   status?: string;
-  priority?: "low" | "medium" | "high";
+  priority?: 'low' | 'medium' | 'high';
   description?: string;
   duedate?: string;
 }
@@ -109,14 +109,16 @@ export function getClient(): AxiosInstance {
     const baseURL = process.env.API_BASE_URL;
     const token = process.env.API_BEARER_TOKEN;
 
-    if (!baseURL) throw new Error("API_BASE_URL environment variable is required");
-    if (!token) throw new Error("API_BEARER_TOKEN environment variable is required");
+    if (!baseURL)
+      throw new Error('API_BASE_URL environment variable is required');
+    if (!token)
+      throw new Error('API_BEARER_TOKEN environment variable is required');
 
     client = axios.create({
       baseURL,
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       timeout: 15000,
     });
@@ -154,7 +156,10 @@ export async function apiPut<T>(path: string, body: unknown): Promise<T> {
   }
 }
 
-export async function apiPostMultipart<T>(path: string, formData: FormData): Promise<T> {
+export async function apiPostMultipart<T>(
+  path: string,
+  formData: FormData
+): Promise<T> {
   try {
     const res = await getClient().post<ApiResponse<T>>(path, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
@@ -179,10 +184,15 @@ export async function apiDelete<T>(path: string): Promise<T> {
 function formatError(err: unknown): Error {
   if (err instanceof AxiosError) {
     const status = err.response?.status;
-    const message = (err.response?.data as ApiResponse<unknown>)?.error?.message || err.message;
-    if (status === 401) return new Error("Unauthorized: Check your API_BEARER_TOKEN");
-    if (status === 403) return new Error("Forbidden: Insufficient permissions for this action");
-    if (status === 404) return new Error("Not found: The requested resource does not exist");
+    const message =
+      (err.response?.data as ApiResponse<unknown>)?.error?.message ||
+      err.message;
+    if (status === 401)
+      return new Error('Unauthorized: Check your API_BEARER_TOKEN');
+    if (status === 403)
+      return new Error('Forbidden: Insufficient permissions for this action');
+    if (status === 404)
+      return new Error('Not found: The requested resource does not exist');
     return new Error(`API error ${status}: ${message}`);
   }
   if (err instanceof Error) return err;
@@ -190,12 +200,17 @@ function formatError(err: unknown): Error {
 }
 
 export function stripHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").trim();
+  return html
+    .replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .trim();
 }
 
 export function formatDate(dateStr: string | null): string {
-  if (!dateStr) return "No due date";
-  return new Date(dateStr).toLocaleDateString("en-GB", {
-    day: "2-digit", month: "short", year: "numeric",
+  if (!dateStr) return 'No due date';
+  return new Date(dateStr).toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
   });
 }

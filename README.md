@@ -59,7 +59,6 @@ Unicis Platform Community Edition - an open core, enterprise-ready trust managem
 - [Payment Card Industry Data Security Standard (PCI DSS v4.0.1)](https://www.unicis.tech/frameworks/pci-dss?mtm_campaign=GitHub%20readme)
 - [ISO/IEC 42001:2023 — AI Management System](https://www.unicis.tech/frameworks/iso42001?mtm_campaign=GitHub%20readme)
 
-
 ### Coming Next
 
 - EU Cyber Resilience Act (CRA)
@@ -87,6 +86,7 @@ Unicis Platform Community Edition - an open core, enterprise-ready trust managem
 The [Unicis MCP Server](src/mcp-server) is an open-source [Model Context Protocol](https://modelcontextprotocol.io/) server, now maintained in this repository at `src/mcp-server`, that connects AI assistants directly to Unicis Platform. Once configured, you can manage your entire GRC workflow through natural language in Claude, Cursor, VS Code Copilot, or any MCP-compatible client.
 
 **Available via MCP:**
+
 - Tasks — create, update, delete, comment, attach files, link compliance controls
 - Privacy — RoPA (Article 30), Transfer Impact Assessment (TIA), Privacy Impact Assessment (PIA/DPIA)
 - Cybersecurity Controls (CSC) — read and update maturity status across all supported frameworks

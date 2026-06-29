@@ -116,9 +116,4 @@ export type TaskTypeEnum =
   | 'TIA-Task'
   | 'RoPA-Task';
 export type SoaExportFormat = 'XLSX' | 'ODS' | 'PDF' | 'HTML';
-export type FrameworkName =
-  | 'ISO27001'
-  | 'NIS2'
-  | 'GDPR'
-  | 'DORA'
-  | 'CRA';
+export type FrameworkName = 'ISO27001' | 'NIS2' | 'GDPR' | 'DORA' | 'CRA';

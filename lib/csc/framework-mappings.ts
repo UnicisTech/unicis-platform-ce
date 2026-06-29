@@ -6881,7 +6881,11 @@ const frameworkMappings: FrameworkMappings = {
   'c5-2020-hr-01': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-7-1-1', 'iso-2013-a-18-1-1', 'iso-2013-a-18-1-5'],
+      'iso-2013': [
+        'iso-2013-a-7-1-1',
+        'iso-2013-a-18-1-1',
+        'iso-2013-a-18-1-5',
+      ],
       'iso-2022': ['iso-2022-a-5-31', 'iso-2022-a-6-1'],
       nistcsfv2: [
         'nist-csf-v2-gv-oc-03',
@@ -22757,7 +22761,11 @@ const frameworkMappings: FrameworkMappings = {
   'cisv81-3-14': {
     relationship: 'subset',
     mappings: {
-      'iso-2013': ['iso-2013-a-12-4-1', 'iso-2013-a-12-4-2', 'iso-2013-a-12-4-3'],
+      'iso-2013': [
+        'iso-2013-a-12-4-1',
+        'iso-2013-a-12-4-2',
+        'iso-2013-a-12-4-3',
+      ],
       'iso-2022': ['iso-2022-a-8-11', 'iso-2022-a-8-15'],
       c5_2020: [
         'c5-2020-dev-10',
@@ -25231,7 +25239,11 @@ const frameworkMappings: FrameworkMappings = {
   'cisv81-8-8': {
     relationship: 'subset',
     mappings: {
-      'iso-2013': ['iso-2013-a-12-4-1', 'iso-2013-a-12-4-2', 'iso-2013-a-12-4-3'],
+      'iso-2013': [
+        'iso-2013-a-12-4-1',
+        'iso-2013-a-12-4-2',
+        'iso-2013-a-12-4-3',
+      ],
       'iso-2022': ['iso-2022-a-5-25', 'iso-2022-a-8-15'],
       c5_2020: [
         'c5-2020-dev-10',
@@ -25555,7 +25567,11 @@ const frameworkMappings: FrameworkMappings = {
   'cisv81-10-1': {
     relationship: 'subset',
     mappings: {
-      'iso-2013': ['iso-2013-a-6-2-1', 'iso-2013-a-11-2-8', 'iso-2013-a-12-2-1'],
+      'iso-2013': [
+        'iso-2013-a-6-2-1',
+        'iso-2013-a-11-2-8',
+        'iso-2013-a-12-2-1',
+      ],
       'iso-2022': ['iso-2022-a-8-1', 'iso-2022-a-8-7', 'iso-2022-a-8-16'],
       c5_2020: [
         'c5-2020-am-02',
@@ -25897,7 +25913,11 @@ const frameworkMappings: FrameworkMappings = {
   'cisv81-10-7': {
     relationship: 'subset',
     mappings: {
-      'iso-2013': ['iso-2013-a-6-2-1', 'iso-2013-a-11-2-8', 'iso-2013-a-12-2-1'],
+      'iso-2013': [
+        'iso-2013-a-6-2-1',
+        'iso-2013-a-11-2-8',
+        'iso-2013-a-12-2-1',
+      ],
       'iso-2022': ['iso-2022-a-8-1', 'iso-2022-a-8-7', 'iso-2022-a-8-16'],
       c5_2020: [
         'c5-2020-am-02',
@@ -26952,7 +26972,11 @@ const frameworkMappings: FrameworkMappings = {
   'cisv81-13-6': {
     relationship: 'subset',
     mappings: {
-      'iso-2013': ['iso-2013-a-12-4-1', 'iso-2013-a-12-4-2', 'iso-2013-a-12-4-3'],
+      'iso-2013': [
+        'iso-2013-a-12-4-1',
+        'iso-2013-a-12-4-2',
+        'iso-2013-a-12-4-3',
+      ],
       'iso-2022': ['iso-2022-a-8-15', 'iso-2022-a-8-16'],
       c5_2020: [
         'c5-2020-am-06',
@@ -27303,7 +27327,11 @@ const frameworkMappings: FrameworkMappings = {
   'cisv81-14-6': {
     relationship: 'subset',
     mappings: {
-      'iso-2013': ['iso-2013-a-7-2-2', 'iso-2013-a-16-1-2', 'iso-2013-a-16-1-3'],
+      'iso-2013': [
+        'iso-2013-a-7-2-2',
+        'iso-2013-a-16-1-2',
+        'iso-2013-a-16-1-3',
+      ],
       'iso-2022': ['iso-2022-a-6-3', 'iso-2022-a-6-8'],
       c5_2020: [
         'c5-2020-dev-04',
@@ -27770,7 +27798,11 @@ const frameworkMappings: FrameworkMappings = {
   'cisv81-15-5': {
     relationship: 'subset',
     mappings: {
-      'iso-2013': ['iso-2013-a-15-1-1', 'iso-2013-a-15-2-1', 'iso-2013-a-15-2-2'],
+      'iso-2013': [
+        'iso-2013-a-15-1-1',
+        'iso-2013-a-15-2-1',
+        'iso-2013-a-15-2-2',
+      ],
       'iso-2022': ['iso-2022-a-5-19', 'iso-2022-a-5-22', 'iso-2022-a-5-23'],
       c5_2020: [
         'c5-2020-am-02',
@@ -28334,7 +28366,11 @@ const frameworkMappings: FrameworkMappings = {
   'cisv81-16-4': {
     relationship: 'subset',
     mappings: {
-      'iso-2013': ['iso-2013-a-14-1-2', 'iso-2013-a-14-1-3', 'iso-2013-a-14-2-7'],
+      'iso-2013': [
+        'iso-2013-a-14-1-2',
+        'iso-2013-a-14-1-3',
+        'iso-2013-a-14-2-7',
+      ],
       'iso-2022': ['iso-2022-a-8-26', 'iso-2022-a-8-30'],
       c5_2020: [
         'c5-2020-com-01',
@@ -28777,7 +28813,11 @@ const frameworkMappings: FrameworkMappings = {
   'cisv81-16-11': {
     relationship: 'subset',
     mappings: {
-      'iso-2013': ['iso-2013-a-14-1-2', 'iso-2013-a-14-1-3', 'iso-2013-a-14-2-1'],
+      'iso-2013': [
+        'iso-2013-a-14-1-2',
+        'iso-2013-a-14-1-3',
+        'iso-2013-a-14-2-1',
+      ],
       'iso-2022': ['iso-2022-a-8-25', 'iso-2022-a-8-26'],
       c5_2020: [
         'c5-2020-com-01',
@@ -28894,7 +28934,11 @@ const frameworkMappings: FrameworkMappings = {
   'cisv81-16-12': {
     relationship: 'subset',
     mappings: {
-      'iso-2013': ['iso-2013-a-14-2-1', 'iso-2013-a-14-2-8', 'iso-2013-a-14-2-9'],
+      'iso-2013': [
+        'iso-2013-a-14-2-1',
+        'iso-2013-a-14-2-8',
+        'iso-2013-a-14-2-9',
+      ],
       'iso-2022': [
         'iso-2022-a-8-25',
         'iso-2022-a-8-26',
@@ -28960,7 +29004,11 @@ const frameworkMappings: FrameworkMappings = {
   'cisv81-16-13': {
     relationship: 'subset',
     mappings: {
-      'iso-2013': ['iso-2013-a-12-6-1', 'iso-2013-a-14-2-8', 'iso-2013-a-14-2-9'],
+      'iso-2013': [
+        'iso-2013-a-12-6-1',
+        'iso-2013-a-14-2-8',
+        'iso-2013-a-14-2-9',
+      ],
       'iso-2022': ['iso-2022-a-8-8', 'iso-2022-a-8-26', 'iso-2022-a-8-29'],
       c5_2020: [
         'c5-2020-am-06',
@@ -30594,7 +30642,11 @@ const frameworkMappings: FrameworkMappings = {
   'gdpr-art-5-retention-timelines': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-18-1-1', 'iso-2013-a-18-1-3', 'iso-2013-a-18-1-4'],
+      'iso-2013': [
+        'iso-2013-a-18-1-1',
+        'iso-2013-a-18-1-3',
+        'iso-2013-a-18-1-4',
+      ],
       'iso-2022': ['iso-2022-a-5-31', 'iso-2022-a-5-33', 'iso-2022-a-8-10'],
       c5_2020: ['c5-2020-pi-02', 'c5-2020-pi-03'],
       cisv81: ['cisv81-3-3', 'cisv81-4-11'],
@@ -30709,7 +30761,11 @@ const frameworkMappings: FrameworkMappings = {
   'gdpr-art-24-data-protection-policy': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-5-1-1', 'iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+      'iso-2013': [
+        'iso-2013-a-5-1-1',
+        'iso-2013-a-18-1-1',
+        'iso-2013-a-18-1-4',
+      ],
       'iso-2022': ['iso-2022-a-5-1', 'iso-2022-a-5-31', 'iso-2022-a-5-34'],
       c5_2020: ['c5-2020-pi-01', 'c5-2020-pi-02'],
       cisv81: ['cisv81-17-1'],
@@ -30777,7 +30833,11 @@ const frameworkMappings: FrameworkMappings = {
   'gdpr-art-25-data-protection-by-design': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-14-1-1', 'iso-2013-a-14-2-1', 'iso-2013-a-18-1-4'],
+      'iso-2013': [
+        'iso-2013-a-14-1-1',
+        'iso-2013-a-14-2-1',
+        'iso-2013-a-18-1-4',
+      ],
       'iso-2022': [
         'iso-2022-a-5-8',
         'iso-2022-a-5-34',
@@ -30839,7 +30899,11 @@ const frameworkMappings: FrameworkMappings = {
   'gdpr-art-28-third-party-integration': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-15-1-1', 'iso-2013-a-15-1-3', 'iso-2013-a-15-2-1'],
+      'iso-2013': [
+        'iso-2013-a-15-1-1',
+        'iso-2013-a-15-1-3',
+        'iso-2013-a-15-2-1',
+      ],
       'iso-2022': ['iso-2022-a-5-19', 'iso-2022-a-5-21', 'iso-2022-a-5-22'],
       c5_2020: ['c5-2020-sso-02', 'c5-2020-sso-03'],
       cisv81: ['cisv81-15-1', 'cisv81-15-2', 'cisv81-15-3'],
@@ -30892,7 +30956,11 @@ const frameworkMappings: FrameworkMappings = {
   'gdpr-art-30-personal-data-inventory': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-8-1-1', 'iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+      'iso-2013': [
+        'iso-2013-a-8-1-1',
+        'iso-2013-a-18-1-1',
+        'iso-2013-a-18-1-4',
+      ],
       'iso-2022': ['iso-2022-a-5-9', 'iso-2022-a-5-31', 'iso-2022-a-5-34'],
       c5_2020: [
         'c5-2020-am-01',
@@ -30915,7 +30983,11 @@ const frameworkMappings: FrameworkMappings = {
   'gdpr-art-30-records-of-processing-activities': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-8-1-1', 'iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+      'iso-2013': [
+        'iso-2013-a-8-1-1',
+        'iso-2013-a-18-1-1',
+        'iso-2013-a-18-1-4',
+      ],
       'iso-2022': ['iso-2022-a-5-9', 'iso-2022-a-5-31', 'iso-2022-a-5-34'],
       c5_2020: ['c5-2020-am-01', 'c5-2020-pi-01'],
       cisv81: ['cisv81-1-1', 'cisv81-3-1'],
@@ -30965,7 +31037,11 @@ const frameworkMappings: FrameworkMappings = {
   'gdpr-art-32-audit-logging': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-12-4-1', 'iso-2013-a-12-4-2', 'iso-2013-a-12-4-3'],
+      'iso-2013': [
+        'iso-2013-a-12-4-1',
+        'iso-2013-a-12-4-2',
+        'iso-2013-a-12-4-3',
+      ],
       'iso-2022': ['iso-2022-a-8-15', 'iso-2022-a-8-16'],
       c5_2020: ['c5-2020-ops-04', 'c5-2020-ops-05', 'c5-2020-sim-01'],
       cisv81: ['cisv81-8-1', 'cisv81-8-2', 'cisv81-8-5'],
@@ -30978,7 +31054,11 @@ const frameworkMappings: FrameworkMappings = {
   'gdpr-art-32-backend-integration': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-14-1-2', 'iso-2013-a-14-1-3', 'iso-2013-a-15-1-1'],
+      'iso-2013': [
+        'iso-2013-a-14-1-2',
+        'iso-2013-a-14-1-3',
+        'iso-2013-a-15-1-1',
+      ],
       'iso-2022': ['iso-2022-a-5-19', 'iso-2022-a-5-20', 'iso-2022-a-8-26'],
       c5_2020: ['c5-2020-sp-01', 'c5-2020-sso-01'],
       cisv81: ['cisv81-15-1', 'cisv81-16-12'],
@@ -31019,7 +31099,11 @@ const frameworkMappings: FrameworkMappings = {
   'gdpr-art-32-encryption-in-transit': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-10-1-1', 'iso-2013-a-14-1-2', 'iso-2013-a-14-1-3'],
+      'iso-2013': [
+        'iso-2013-a-10-1-1',
+        'iso-2013-a-14-1-2',
+        'iso-2013-a-14-1-3',
+      ],
       'iso-2022': ['iso-2022-a-8-24'],
       c5_2020: ['c5-2020-cry-01', 'c5-2020-cry-03'],
       cisv81: ['cisv81-3-10'],
@@ -31083,7 +31167,11 @@ const frameworkMappings: FrameworkMappings = {
   'gdpr-art-33-breach-notification-to-customer': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-16-1-1', 'iso-2013-a-16-1-2', 'iso-2013-a-16-1-5'],
+      'iso-2013': [
+        'iso-2013-a-16-1-1',
+        'iso-2013-a-16-1-2',
+        'iso-2013-a-16-1-5',
+      ],
       'iso-2022': ['iso-2022-a-5-24', 'iso-2022-a-5-25', 'iso-2022-a-5-26'],
       c5_2020: ['c5-2020-sim-04', 'c5-2020-sim-05'],
       cisv81: ['cisv81-17-4'],
@@ -31122,7 +31210,11 @@ const frameworkMappings: FrameworkMappings = {
   'gdpr-art-35-data-protection-impact-assessment': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-8-2-1', 'iso-2013-a-18-1-1', 'iso-2013-a-18-1-4'],
+      'iso-2013': [
+        'iso-2013-a-8-2-1',
+        'iso-2013-a-18-1-1',
+        'iso-2013-a-18-1-4',
+      ],
       'iso-2022': ['iso-2022-a-5-8', 'iso-2022-a-5-31', 'iso-2022-a-5-34'],
       c5_2020: ['c5-2020-pi-01', 'c5-2020-pi-02'],
       cisv81: ['cisv81-18-1'],
@@ -31202,7 +31294,11 @@ const frameworkMappings: FrameworkMappings = {
   'gdpr-art-44-46-data-transfers-outside-eu': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-15-1-1', 'iso-2013-a-15-1-2', 'iso-2013-a-18-1-1'],
+      'iso-2013': [
+        'iso-2013-a-15-1-1',
+        'iso-2013-a-15-1-2',
+        'iso-2013-a-18-1-1',
+      ],
       'iso-2022': ['iso-2022-a-5-19', 'iso-2022-a-5-20', 'iso-2022-a-5-31'],
       c5_2020: ['c5-2020-sp-01'],
       cisv81: ['cisv81-15-1'],
@@ -37164,7 +37260,11 @@ const frameworkMappings: FrameworkMappings = {
   'iso-2022-a-5-29': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-17-1-1', 'iso-2013-a-17-1-2', 'iso-2013-a-17-1-3'],
+      'iso-2013': [
+        'iso-2013-a-17-1-1',
+        'iso-2013-a-17-1-2',
+        'iso-2013-a-17-1-3',
+      ],
       c5_2020: [
         'c5-2020-bcm-01',
         'c5-2020-bcm-02',
@@ -38934,7 +39034,11 @@ const frameworkMappings: FrameworkMappings = {
   'iso-2022-a-8-15': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-12-4-1', 'iso-2013-a-12-4-2', 'iso-2013-a-12-4-3'],
+      'iso-2013': [
+        'iso-2013-a-12-4-1',
+        'iso-2013-a-12-4-2',
+        'iso-2013-a-12-4-3',
+      ],
       c5_2020: [
         'c5-2020-dev-10',
         'c5-2020-idm-01',
@@ -40624,7 +40728,11 @@ const frameworkMappings: FrameworkMappings = {
   'nist-csf-v2-de-ae-03': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-12-4-1', 'iso-2013-a-12-4-2', 'iso-2013-a-12-4-3'],
+      'iso-2013': [
+        'iso-2013-a-12-4-1',
+        'iso-2013-a-12-4-2',
+        'iso-2013-a-12-4-3',
+      ],
       'iso-2022': ['iso-2022-a-8-15', 'iso-2022-a-8-16'],
       c5_2020: [
         'c5-2020-am-06',
@@ -41559,7 +41667,11 @@ const frameworkMappings: FrameworkMappings = {
   'nist-csf-v2-gv-oc-03': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-15-1-2', 'iso-2013-a-18-1-1', 'iso-2013-a-18-1-5'],
+      'iso-2013': [
+        'iso-2013-a-15-1-2',
+        'iso-2013-a-18-1-1',
+        'iso-2013-a-18-1-5',
+      ],
       'iso-2022': ['iso-2022-a-5-20', 'iso-2022-a-5-31'],
       c5_2020: [
         'c5-2020-com-01',
@@ -41637,7 +41749,11 @@ const frameworkMappings: FrameworkMappings = {
   'nist-csf-v2-gv-oc-04': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-15-1-2', 'iso-2013-a-18-1-1', 'iso-2013-a-18-1-5'],
+      'iso-2013': [
+        'iso-2013-a-15-1-2',
+        'iso-2013-a-18-1-1',
+        'iso-2013-a-18-1-5',
+      ],
       'iso-2022': ['iso-2022-a-5-1', 'iso-2022-a-5-20', 'iso-2022-a-5-31'],
       c5_2020: [
         'c5-2020-com-01',
@@ -43495,7 +43611,11 @@ const frameworkMappings: FrameworkMappings = {
   'nist-csf-v2-gv-sc-04': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-15-1-1', 'iso-2013-a-15-2-1', 'iso-2013-a-15-2-2'],
+      'iso-2013': [
+        'iso-2013-a-15-1-1',
+        'iso-2013-a-15-2-1',
+        'iso-2013-a-15-2-2',
+      ],
       'iso-2022': ['iso-2022-a-5-19', 'iso-2022-a-5-20', 'iso-2022-a-5-22'],
       c5_2020: [
         'c5-2020-com-01',
@@ -44327,7 +44447,11 @@ const frameworkMappings: FrameworkMappings = {
   'nist-csf-v2-id-am-03': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-13-1-1', 'iso-2013-a-13-1-2', 'iso-2013-a-13-1-3'],
+      'iso-2013': [
+        'iso-2013-a-13-1-1',
+        'iso-2013-a-13-1-2',
+        'iso-2013-a-13-1-3',
+      ],
       'iso-2022': [
         'iso-2022-a-5-14',
         'iso-2022-a-8-20',
@@ -45158,7 +45282,11 @@ const frameworkMappings: FrameworkMappings = {
   'nist-csf-v2-id-im-04': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-16-1-1', 'iso-2013-a-16-1-5', 'iso-2013-a-16-1-6'],
+      'iso-2013': [
+        'iso-2013-a-16-1-1',
+        'iso-2013-a-16-1-5',
+        'iso-2013-a-16-1-6',
+      ],
       'iso-2022': ['iso-2022-a-5-24', 'iso-2022-a-5-26', 'iso-2022-a-5-27'],
       c5_2020: [
         'c5-2020-am-06',
@@ -47940,7 +48068,11 @@ const frameworkMappings: FrameworkMappings = {
   'nist-csf-v2-pr-ir-01': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-13-1-1', 'iso-2013-a-13-1-2', 'iso-2013-a-13-1-3'],
+      'iso-2013': [
+        'iso-2013-a-13-1-1',
+        'iso-2013-a-13-1-2',
+        'iso-2013-a-13-1-3',
+      ],
       'iso-2022': ['iso-2022-a-8-20', 'iso-2022-a-8-21', 'iso-2022-a-8-22'],
       c5_2020: [
         'c5-2020-am-06',
@@ -49586,7 +49718,11 @@ const frameworkMappings: FrameworkMappings = {
   'nist-csf-v2-rs-ma-01': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-16-1-5', 'iso-2013-a-16-1-6', 'iso-2013-a-16-1-7'],
+      'iso-2013': [
+        'iso-2013-a-16-1-5',
+        'iso-2013-a-16-1-6',
+        'iso-2013-a-16-1-7',
+      ],
       'iso-2022': [
         'iso-2022-a-5-24',
         'iso-2022-a-5-26',
@@ -54675,7 +54811,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc2-1-1': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-17-1-1', 'iso-2013-a-17-1-2', 'iso-2013-a-17-1-3'],
+      'iso-2013': [
+        'iso-2013-a-17-1-1',
+        'iso-2013-a-17-1-2',
+        'iso-2013-a-17-1-3',
+      ],
       'iso-2022': ['iso-2022-a-5-29'],
       c5_2020: [
         'c5-2020-bcm-01',
@@ -54740,7 +54880,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc2-1-2': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-17-1-1', 'iso-2013-a-17-1-2', 'iso-2013-a-17-1-3'],
+      'iso-2013': [
+        'iso-2013-a-17-1-1',
+        'iso-2013-a-17-1-2',
+        'iso-2013-a-17-1-3',
+      ],
       'iso-2022': ['iso-2022-a-5-29'],
       c5_2020: [
         'c5-2020-bcm-01',
@@ -54805,7 +54949,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc2-1-3': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-17-1-1', 'iso-2013-a-17-1-2', 'iso-2013-a-17-1-3'],
+      'iso-2013': [
+        'iso-2013-a-17-1-1',
+        'iso-2013-a-17-1-2',
+        'iso-2013-a-17-1-3',
+      ],
       'iso-2022': ['iso-2022-a-5-29'],
       c5_2020: [
         'c5-2020-bcm-01',
@@ -54870,7 +55018,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc2-1-4': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-17-1-1', 'iso-2013-a-17-1-2', 'iso-2013-a-17-1-3'],
+      'iso-2013': [
+        'iso-2013-a-17-1-1',
+        'iso-2013-a-17-1-2',
+        'iso-2013-a-17-1-3',
+      ],
       'iso-2022': ['iso-2022-a-5-29'],
       c5_2020: [
         'c5-2020-bcm-01',
@@ -60207,7 +60359,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc4-2-1': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-17-1-1', 'iso-2013-a-17-1-2', 'iso-2013-a-17-1-3'],
+      'iso-2013': [
+        'iso-2013-a-17-1-1',
+        'iso-2013-a-17-1-2',
+        'iso-2013-a-17-1-3',
+      ],
       'iso-2022': ['iso-2022-a-5-29'],
       c5_2020: [
         'c5-2020-bcm-01',
@@ -60272,7 +60428,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc4-2-2': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-17-1-1', 'iso-2013-a-17-1-2', 'iso-2013-a-17-1-3'],
+      'iso-2013': [
+        'iso-2013-a-17-1-1',
+        'iso-2013-a-17-1-2',
+        'iso-2013-a-17-1-3',
+      ],
       'iso-2022': ['iso-2022-a-5-29'],
       c5_2020: [
         'c5-2020-bcm-01',
@@ -60337,7 +60497,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc4-2-3': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-17-1-1', 'iso-2013-a-17-1-2', 'iso-2013-a-17-1-3'],
+      'iso-2013': [
+        'iso-2013-a-17-1-1',
+        'iso-2013-a-17-1-2',
+        'iso-2013-a-17-1-3',
+      ],
       'iso-2022': ['iso-2022-a-5-29'],
       c5_2020: [
         'c5-2020-bcm-01',
@@ -69100,7 +69264,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc9-2-1': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-13-2-4', 'iso-2013-a-15-2-1', 'iso-2013-a-15-2-2'],
+      'iso-2013': [
+        'iso-2013-a-13-2-4',
+        'iso-2013-a-15-2-1',
+        'iso-2013-a-15-2-2',
+      ],
       'iso-2022': ['iso-2022-a-5-22', 'iso-2022-a-6-6'],
       c5_2020: [
         'c5-2020-cos-01',
@@ -69138,7 +69306,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc9-2-2': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-13-2-4', 'iso-2013-a-15-2-1', 'iso-2013-a-15-2-2'],
+      'iso-2013': [
+        'iso-2013-a-13-2-4',
+        'iso-2013-a-15-2-1',
+        'iso-2013-a-15-2-2',
+      ],
       'iso-2022': ['iso-2022-a-5-22', 'iso-2022-a-6-6'],
       c5_2020: [
         'c5-2020-cos-01',
@@ -69176,7 +69348,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc9-2-3': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-13-2-4', 'iso-2013-a-15-2-1', 'iso-2013-a-15-2-2'],
+      'iso-2013': [
+        'iso-2013-a-13-2-4',
+        'iso-2013-a-15-2-1',
+        'iso-2013-a-15-2-2',
+      ],
       'iso-2022': ['iso-2022-a-5-22', 'iso-2022-a-6-6'],
       c5_2020: [
         'c5-2020-cos-01',
@@ -69214,7 +69390,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc9-2-4': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-13-2-4', 'iso-2013-a-15-2-1', 'iso-2013-a-15-2-2'],
+      'iso-2013': [
+        'iso-2013-a-13-2-4',
+        'iso-2013-a-15-2-1',
+        'iso-2013-a-15-2-2',
+      ],
       'iso-2022': ['iso-2022-a-5-22', 'iso-2022-a-6-6'],
       c5_2020: [
         'c5-2020-cos-01',
@@ -69252,7 +69432,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc9-2-5': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-13-2-4', 'iso-2013-a-15-2-1', 'iso-2013-a-15-2-2'],
+      'iso-2013': [
+        'iso-2013-a-13-2-4',
+        'iso-2013-a-15-2-1',
+        'iso-2013-a-15-2-2',
+      ],
       'iso-2022': ['iso-2022-a-5-22', 'iso-2022-a-6-6'],
       c5_2020: [
         'c5-2020-cos-01',
@@ -69290,7 +69474,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc9-2-6': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-13-2-4', 'iso-2013-a-15-2-1', 'iso-2013-a-15-2-2'],
+      'iso-2013': [
+        'iso-2013-a-13-2-4',
+        'iso-2013-a-15-2-1',
+        'iso-2013-a-15-2-2',
+      ],
       'iso-2022': ['iso-2022-a-5-22', 'iso-2022-a-6-6'],
       c5_2020: [
         'c5-2020-cos-01',
@@ -69328,7 +69516,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc9-2-7': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-13-2-4', 'iso-2013-a-15-2-1', 'iso-2013-a-15-2-2'],
+      'iso-2013': [
+        'iso-2013-a-13-2-4',
+        'iso-2013-a-15-2-1',
+        'iso-2013-a-15-2-2',
+      ],
       'iso-2022': ['iso-2022-a-5-22', 'iso-2022-a-6-6'],
       c5_2020: [
         'c5-2020-cos-01',
@@ -69366,7 +69558,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc9-2-8': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-13-2-4', 'iso-2013-a-15-2-1', 'iso-2013-a-15-2-2'],
+      'iso-2013': [
+        'iso-2013-a-13-2-4',
+        'iso-2013-a-15-2-1',
+        'iso-2013-a-15-2-2',
+      ],
       'iso-2022': ['iso-2022-a-5-22', 'iso-2022-a-6-6'],
       c5_2020: [
         'c5-2020-cos-01',
@@ -69404,7 +69600,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc9-2-9': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-13-2-4', 'iso-2013-a-15-2-1', 'iso-2013-a-15-2-2'],
+      'iso-2013': [
+        'iso-2013-a-13-2-4',
+        'iso-2013-a-15-2-1',
+        'iso-2013-a-15-2-2',
+      ],
       'iso-2022': ['iso-2022-a-5-22', 'iso-2022-a-6-6'],
       c5_2020: [
         'c5-2020-cos-01',
@@ -69442,7 +69642,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc9-2-10': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-13-2-4', 'iso-2013-a-15-2-1', 'iso-2013-a-15-2-2'],
+      'iso-2013': [
+        'iso-2013-a-13-2-4',
+        'iso-2013-a-15-2-1',
+        'iso-2013-a-15-2-2',
+      ],
       'iso-2022': ['iso-2022-a-5-22', 'iso-2022-a-6-6'],
       c5_2020: [
         'c5-2020-cos-01',
@@ -69480,7 +69684,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc9-2-11': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-13-2-4', 'iso-2013-a-15-2-1', 'iso-2013-a-15-2-2'],
+      'iso-2013': [
+        'iso-2013-a-13-2-4',
+        'iso-2013-a-15-2-1',
+        'iso-2013-a-15-2-2',
+      ],
       'iso-2022': ['iso-2022-a-5-22', 'iso-2022-a-6-6'],
       c5_2020: [
         'c5-2020-cos-01',
@@ -69518,7 +69726,11 @@ const frameworkMappings: FrameworkMappings = {
   'soc2-v2-cc9-2-12': {
     relationship: 'related',
     mappings: {
-      'iso-2013': ['iso-2013-a-13-2-4', 'iso-2013-a-15-2-1', 'iso-2013-a-15-2-2'],
+      'iso-2013': [
+        'iso-2013-a-13-2-4',
+        'iso-2013-a-15-2-1',
+        'iso-2013-a-15-2-2',
+      ],
       'iso-2022': ['iso-2022-a-5-22', 'iso-2022-a-6-6'],
       c5_2020: [
         'c5-2020-cos-01',
