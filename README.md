@@ -74,7 +74,7 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 
 ## 🤖 MCP Server — AI Assistant Integration
 
-The [Unicis MCP Server](https://github.com/UnicisTech/unicis-mcp-server) is an open-source [Model Context Protocol](https://modelcontextprotocol.io/) server that connects AI assistants directly to Unicis Platform. Once configured, you can manage your entire GRC workflow through natural language in Claude, Cursor, VS Code Copilot, or any MCP-compatible client.
+The [Unicis MCP Server](src/mcp-server) is an open-source [Model Context Protocol](https://modelcontextprotocol.io/) server, now maintained in this repository at `src/mcp-server`, that connects AI assistants directly to Unicis Platform. Once configured, you can manage your entire GRC workflow through natural language in Claude, Cursor, VS Code Copilot, or any MCP-compatible client.
 
 **Available via MCP:**
 - Tasks — create, update, delete, comment, attach files, link compliance controls
@@ -83,7 +83,7 @@ The [Unicis MCP Server](https://github.com/UnicisTech/unicis-mcp-server) is an o
 - Risk Management — create and manage risk records with Probability × Impact scoring
 - API Key management
 
-> **Get started:** [github.com/UnicisTech/unicis-mcp-server](https://github.com/UnicisTech/unicis-mcp-server)
+> **Get started:** [src/mcp-server](src/mcp-server)
 
 ---
 
@@ -242,7 +242,7 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - [Interactive Awareness Program](https://www.unicis.tech/solutions/compliance/awareness?mtm_campaign=GitHub)
 - [REST API](https://www.unicis.tech/docs/platform/introduction?mtm_campaign=GitHub) — OpenAPI 3.0 spec with Swagger UI at `/api-docs`
 - [Notifications](https://www.unicis.tech/docs/platform/settings/?mtm_campaign=GitHub#notifications) — In-app, email, and web push
-- [MCP Server](https://github.com/UnicisTech/unicis-mcp-server) — connect AI assistants (Claude, Cursor, VS Code Copilot) directly to the platform via the [Model Context Protocol](https://modelcontextprotocol.io/)
+- [MCP Server](src/mcp-server) — connect AI assistants (Claude, Cursor, VS Code Copilot) directly to the platform via the [Model Context Protocol](https://modelcontextprotocol.io/)
 
 ### Coming Next
 

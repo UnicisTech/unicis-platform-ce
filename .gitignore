@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+/src/mcp-server/node_modules
+/src/mcp-server/dist
 /.pnp
 .pnp.js
 
