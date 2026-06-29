@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import { SubscriptionStatus, Plan } from '@/generated/browser';
 import type { TeamWithSubscriptionDto } from 'types';
 import { Button } from '@/components/shadcn/ui/button';
 import { Check, Sparkles } from 'lucide-react';
 import { cn } from '@/components/shadcn/lib/utils';
+import {
+  trackContentInteraction,
+  trackVisibleContentImpressions,
+} from '@/lib/matomo/client';
+
+const PRICING_CARD_PIECE = 'pricing-card';
 
 export type BillingPeriod = 'monthly' | 'annual';
 
@@ -48,6 +54,12 @@ const Pricing: React.FC<PricingProps> = ({ team, plans, onPlanSelect }) => {
     currentStatus === SubscriptionStatus.ACTIVE
       ? team.subscription!.plan
       : Plan.COMMUNITY;
+
+  // Re-scan for visible pricing cards whenever the rendered set changes
+  // (e.g. switching billing period changes each card's content-target).
+  useEffect(() => {
+    trackVisibleContentImpressions();
+  }, [billingPeriod]);
 
   return (
     <section className="py-4">
@@ -109,6 +121,10 @@ const Pricing: React.FC<PricingProps> = ({ team, plans, onPlanSelect }) => {
           return (
             <div
               key={plan.id}
+              data-track-content
+              data-content-name={plan.id}
+              data-content-piece={PRICING_CARD_PIECE}
+              data-content-target={billingPeriod}
               className={cn(
                 'relative flex flex-col rounded-xl bg-white dark:bg-slate-800 transition-shadow',
                 isRecommended
@@ -170,7 +186,15 @@ const Pricing: React.FC<PricingProps> = ({ team, plans, onPlanSelect }) => {
                 ) : isRecommended ? (
                   <Button
                     className="w-full bg-ub-blue hover:bg-ub-blue-hover text-white"
-                    onClick={() => onPlanSelect(plan.id, billingPeriod)}
+                    onClick={() => {
+                      trackContentInteraction(
+                        'click',
+                        plan.id,
+                        PRICING_CARD_PIECE,
+                        billingPeriod
+                      );
+                      onPlanSelect(plan.id, billingPeriod);
+                    }}
                   >
                     {t('order')} {plan.name}
                   </Button>
@@ -178,7 +202,15 @@ const Pricing: React.FC<PricingProps> = ({ team, plans, onPlanSelect }) => {
                   <Button
                     variant="outline"
                     className="w-full"
-                    onClick={() => onPlanSelect(plan.id, billingPeriod)}
+                    onClick={() => {
+                      trackContentInteraction(
+                        'click',
+                        plan.id,
+                        PRICING_CARD_PIECE,
+                        billingPeriod
+                      );
+                      onPlanSelect(plan.id, billingPeriod);
+                    }}
                   >
                     {t('order')}
                   </Button>
