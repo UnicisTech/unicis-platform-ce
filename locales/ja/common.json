@@ -146,7 +146,8 @@
         },
         "featuresLabel": "Communityから",
         "features": {
-          "0": "Webhooks & API"
+          "0": "Webhooks & API",
+          "1": "MCPサーバー接続"
         }
       },
       "ultimate": {
@@ -165,7 +166,8 @@
         },
         "featuresLabel": "Premiumから",
         "features": {
-          "0": "監査ログ"
+          "0": "監査ログ",
+          "1": "MCPサーバー接続"
         }
       }
     }

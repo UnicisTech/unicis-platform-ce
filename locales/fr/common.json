@@ -146,7 +146,8 @@
         },
         "featuresLabel": "À partir de Communauté",
         "features": {
-          "0": "Webhooks et API"
+          "0": "Webhooks et API",
+          "1": "Connexion au serveur MCP"
         }
       },
       "ultimate": {
@@ -165,7 +166,8 @@
         },
         "featuresLabel": "À partir de Premium",
         "features": {
-          "0": "Journaux d’audit"
+          "0": "Journaux d’audit",
+          "1": "Connexion au serveur MCP"
         }
       }
     }
