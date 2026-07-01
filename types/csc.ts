@@ -58,9 +58,9 @@ export type Section = {
 };
 
 export type ISO =
-  | 'mvps'
-  | '2013'
-  | '2022'
+  | 'mvsp'
+  | 'iso-2013'
+  | 'iso-2022'
   | 'nistcsfv2'
   | 'eunis2'
   | 'gdpr'
@@ -73,9 +73,9 @@ export type ISO =
 
 // TODO: use getControlPropsName function with config and ISO type to generate type
 type CscStatusesPropMap = {
-  mvps: 'csc_statuses_mvps';
-  2013: 'csc_statuses_2013';
-  2022: 'csc_statuses_2022';
+  mvsp: 'csc_statuses_mvsp';
+  'iso-2013': 'csc_statuses_iso-2013';
+  'iso-2022': 'csc_statuses_iso-2022';
   nistcsfv2: 'csc_statuses_nistcsfv2';
   eunis2: 'csc_statuses_eunis2';
   gdpr: 'csc_statuses_gdpr';
@@ -93,9 +93,9 @@ export type CscStatusesMap = Record<string, CscStatus>;
 
 // TODO: use getControlPropsName function with config and ISO type to generate type
 type CscControlsPropMap = {
-  mvps: 'csc_controls_mvps';
-  2013: 'csc_controls_2013';
-  2022: 'csc_controls_2022';
+  mvsp: 'csc_controls_mvsp';
+  'iso-2013': 'csc_controls_iso-2013';
+  'iso-2022': 'csc_controls_iso-2022';
   nistcsfv2: 'csc_controls_nistcsfv2';
   eunis2: 'csc_controls_eunis2';
   gdpr: 'csc_controls_gdpr';

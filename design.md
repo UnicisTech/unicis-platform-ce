@@ -1265,7 +1265,8 @@ All Create/Add/primary action buttons use Shadcn `<Button variant="default">`. D
 - **google-recaptcha** — Bot protection
 - **dotenv** — Environment variable management
 - **DOMPurify** — XSS prevention
-- **Matomo Analytics** — Privacy-respecting analytics
+- **Matomo Analytics** — Privacy-respecting analytics; page views plus server/client event tracking (`lib/matomo/server.ts`, `lib/matomo/client.ts`, `lib/matomo/events.ts`) — e.g. pricing page content tracking, activation funnel events (first framework selection)
+- **GlitchTip (via `@sentry/nextjs`)** — error tracking across client, server, and edge runtimes (`sentry.client.config.ts`, `sentry.server.config.ts`, `sentry.edge.config.ts`, `instrumentation.ts`); events tagged with `NEXT_PUBLIC_APP_ENV` (local/dev/prod) instead of `NODE_ENV` since both deployed environments run in production mode
 
 ---
 
@@ -1351,6 +1352,12 @@ unicis-platform/
 ├── locales/                 # i18n translation files (en, fr, de, es, it, ja, pt)
 ├── styles/                  # Global CSS (quill-view-mode, etc.)
 ├── public/                  # Static assets
+├── src/
+│   └── mcp-server/          # Unicis MCP Server — standalone Node.js package (own package.json/tsconfig.json)
+│       └── src/
+│           ├── index.ts         # stdio + HTTP transport entry point
+│           ├── services/api.ts  # typed REST client against the platform's public API
+│           └── tools/            # MCP tool registrations (tasks, compliance, privacy, risk)
 └── [config files]
 ```
 
@@ -1542,6 +1549,13 @@ procedure[3] = Probability/Conclusion (used by isTranferPermitted())
 - Endpoints: Tasks, CSC, RM, PIA, RPA, TIA, API Keys, AI Chatbot, Notifications, **Fleet (Asset Management)**
 - Fleet tag covers only the platform's own `/api/fleet/*` endpoints (account bootstrap, secret, enrollment, revoke, sync-member, etc.) — Fleet's own node/query/pack inventory API is called directly by the browser and is intentionally not duplicated here
 
+### 6a. MCP Server
+
+- Located at `src/mcp-server` — a standalone Node.js package (own `package.json`/`tsconfig.json`, not part of the Next.js build) that exposes the platform's REST API as MCP tools
+- Connects AI assistants (Claude, Cursor, VS Code Copilot, any MCP-compatible client) to manage Tasks, RoPA, TIA, PIA, CSC statuses, Risk records, attachments, comments, and API keys through natural language
+- Supports stdio transport (Claude Desktop, local) and HTTP transport (remote/`claude.ai` web, behind a reverse proxy)
+- See [src/mcp-server/README.md](src/mcp-server/README.md) for the full tool reference and setup instructions
+
 ### 7. Audit Logging
 
 - Per-module `AuditTimeline` component
@@ -1707,7 +1721,6 @@ Every PR that touches module UI must verify:
 - Document Management / Policy Lifecycle
 - Custom Framework Support (JSON/YAML DSL)
 - Jira Integration (bidirectional)
-- MCP Server Exposure
 - AI Questionnaire Automation
 - Continuous Control Monitoring
 - Executive Dashboards & Reporting

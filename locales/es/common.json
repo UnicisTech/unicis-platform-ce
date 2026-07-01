@@ -146,7 +146,8 @@
         },
         "featuresLabel": "Desde Comunidad",
         "features": {
-          "0": "Webhooks y API"
+          "0": "Webhooks y API",
+          "1": "Conexión al servidor MCP"
         }
       },
       "ultimate": {
@@ -165,7 +166,8 @@
         },
         "featuresLabel": "Desde Premium",
         "features": {
-          "0": "Registros de auditoría"
+          "0": "Registros de auditoría",
+          "1": "Conexión al servidor MCP"
         }
       }
     }

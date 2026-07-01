@@ -69,7 +69,7 @@
     "dataencryption": "Cifrado de datos",
     "useraccesscontrol": "Control de acceso de usuarios",
     "controlofprocessors": "Control de los encargados del tratamiento",
-    "mvps": "Producto Mínimo Viable Seguro",
+    "mvsp": "Producto Mínimo Viable Seguro",
     "securitycert": "Certificación de normas y marcos de seguridad",
     "othermeasures": "Otras medidas (especifique en el ticket)"
   },

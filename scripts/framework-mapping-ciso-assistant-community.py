@@ -16,9 +16,9 @@ REPO_ROOT = Path("/Users/pece/dev/unicis/ciso-assistant-community/backend/librar
 SUPPORTED_EXTENSIONS = (".json", ".yaml", ".yml", ".ts")
 
 ISO_KEYS = [
-    "2013",
-    "2022",
-    "mvps",
+    "iso-2013",
+    "iso-2022",
+    "mvsp",
     "nistcsfv2",
     "eunis2",
     "gdpr",
@@ -28,9 +28,9 @@ ISO_KEYS = [
 ]
 
 FRAMEWORK_PREFIX_MAP = {
-    "iso-2013": "2013",
-    "iso-2022": "2022",
-    "mvsp": "mvps",
+    "iso-2013": "iso-2013",
+    "iso-2022": "iso-2022",
+    "mvsp": "mvsp",
     "nist-csf-v2": "nistcsfv2",
     "eu-nis2": "eunis2",
     "gdpr": "gdpr",

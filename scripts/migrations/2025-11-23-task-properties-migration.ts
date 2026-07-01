@@ -1,3 +1,10 @@
+/**
+ * Historical data migration.
+ *
+ * This has already been executed in deployed environments. Do not rewrite it
+ * for newer schema or key names; add a new timestamped migration instead.
+ */
+
 import 'dotenv/config';
 
 import { PrismaPg } from '@prisma/adapter-pg';

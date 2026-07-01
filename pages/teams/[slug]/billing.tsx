@@ -48,7 +48,10 @@ const plans = [
       'billing.plans.premium.applications.3',
     ],
     featuresLabelKey: 'billing.plans.premium.featuresLabel',
-    featuresKeys: ['billing.plans.premium.features.0'],
+    featuresKeys: [
+      'billing.plans.premium.features.0',
+      'billing.plans.premium.features.1',
+    ],
     recommended: true,
   },
   {
@@ -67,7 +70,10 @@ const plans = [
       'billing.plans.ultimate.applications.5',
     ],
     featuresLabelKey: 'billing.plans.ultimate.featuresLabel',
-    featuresKeys: ['billing.plans.ultimate.features.0'],
+    featuresKeys: [
+      'billing.plans.ultimate.features.0',
+      'billing.plans.ultimate.features.1',
+    ],
     recommended: false,
   },
 ];

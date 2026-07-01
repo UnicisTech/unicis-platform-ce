@@ -69,7 +69,7 @@
     "dataencryption": "Chiffrement des données",
     "useraccesscontrol": "Contrôle d’accès des utilisateurs",
     "controlofprocessors": "Contrôle des sous-traitants",
-    "mvps": "Produit sécurisé minimal viable (MVSP)",
+    "mvsp": "Produit sécurisé minimal viable (MVSP)",
     "securitycert": "Certification aux normes et cadres de sécurité",
     "othermeasures": "Autres mesures (à préciser dans le ticket)"
   },

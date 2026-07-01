@@ -24,8 +24,7 @@ export default function AppShell({ children }) {
     if (team.subscription?.plan) {
       setCustomDimension(1, team.subscription.plan);
     }
-    const csc_iso = (team.properties as { csc_iso?: string[] } | null)
-      ?.csc_iso;
+    const csc_iso = (team.properties as { csc_iso?: string[] } | null)?.csc_iso;
     if (csc_iso?.length) {
       setCustomDimension(2, csc_iso.join(','));
     }

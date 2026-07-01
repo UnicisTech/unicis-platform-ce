@@ -1,3 +1,10 @@
+/**
+ * Historical transforms for the 2025-11-23 data migration.
+ *
+ * These have already been executed in deployed environments. Do not rewrite
+ * them for newer schema or key names; add a new timestamped migration instead.
+ */
+
 import { Prisma } from '@/generated/client';
 import {
   mapCscControlToId,
@@ -13,9 +20,9 @@ import {
   stripOuterQuotes,
   tryExtractValueFromStringifiedJson,
   rmFieldToId,
+  type MigrationCscFramework,
+  getMigrationCscControlsProp,
 } from './helpers';
-import { getCscControlsProp } from '@/lib/csc';
-import { ISO } from 'types';
 
 export type JsonWritable = Prisma.InputJsonValue;
 
@@ -45,12 +52,12 @@ export function renameCscControlsToMvps(props: JsonWritable): JsonWritable {
 
 export function normalizeCscControls(
   props: JsonWritable,
-  framework: ISO
+  framework: MigrationCscFramework
 ): JsonWritable {
   const obj = asObject(props);
   if (!obj) return props;
 
-  const propName = getCscControlsProp(framework);
+  const propName = getMigrationCscControlsProp(framework);
   const raw = obj[propName];
 
   if (!Array.isArray(raw)) {

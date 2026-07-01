@@ -1,11 +1,86 @@
-import frameworks from '@/lib/csc/frameworks-migration';
-import { Diff, ISO } from 'types';
+/**
+ * Historical helpers for the 2025-11-23 data migration transforms.
+ *
+ * These preserve legacy persisted keys used by that migration. Add a new
+ * timestamped migration instead of rewriting this code for newer key names.
+ */
+
+import frameworks, {
+  type CscFremaworkControl,
+} from '@/lib/csc/frameworks-migration';
+import { Diff } from 'types';
 import { CscStatus } from '@/lib/csc/csc-statuses';
 import { config as rpaConfig } from '@/lib/rpa/migration-helpers';
 import { config as tiaConfig } from '@/lib/tia/migration-helpers';
 import { config as piaConfig } from '@/lib/pia/migration-helpers';
 
 type OptionLike = { value?: unknown };
+
+export type MigrationCscFramework =
+  | 'mvps'
+  | '2013'
+  | '2022'
+  | 'mvsp'
+  | 'iso-2013'
+  | 'iso-2022'
+  | 'nistcsfv2'
+  | 'eunis2'
+  | 'gdpr'
+  | 'cisv81'
+  | 'soc2v2'
+  | 'c5_2020'
+  | 'owasp_asvs_v5'
+  | 'pcidss_v401'
+  | 'iso42001';
+
+const CURRENT_FRAMEWORK_BY_MIGRATION_KEY: Record<
+  MigrationCscFramework,
+  string
+> = {
+  mvps: 'mvsp',
+  '2013': 'iso-2013',
+  '2022': 'iso-2022',
+  mvsp: 'mvsp',
+  'iso-2013': 'iso-2013',
+  'iso-2022': 'iso-2022',
+  nistcsfv2: 'nistcsfv2',
+  eunis2: 'eunis2',
+  gdpr: 'gdpr',
+  cisv81: 'cisv81',
+  soc2v2: 'soc2v2',
+  c5_2020: 'c5_2020',
+  owasp_asvs_v5: 'owasp_asvs_v5',
+  pcidss_v401: 'pcidss_v401',
+  iso42001: 'iso42001',
+};
+
+const frameworkLookup = frameworks as Record<
+  string,
+  CscFremaworkControl[] | undefined
+>;
+
+export const getMigrationCscControlsProp = (framework: MigrationCscFramework) =>
+  `csc_controls_${framework}`;
+
+export const getMigrationCscStatusesProp = (framework: MigrationCscFramework) =>
+  `csc_statuses_${framework}`;
+
+function getFrameworkControls(
+  framework: MigrationCscFramework
+): CscFremaworkControl[] | null {
+  const currentFramework = CURRENT_FRAMEWORK_BY_MIGRATION_KEY[framework];
+  const controls = frameworkLookup[currentFramework];
+
+  if (!controls) {
+    error(
+      `[CSC_FRAMEWORK] UNKNOWN FRAMEWORK: "${framework}"`,
+      `mappedTo="${currentFramework}"`
+    );
+    return null;
+  }
+
+  return controls;
+}
 
 const CSC_STATUS_VALUE_MAP: Record<string, CscStatus> = {
   Unknown: 'unknown',
@@ -19,8 +94,10 @@ const CSC_STATUS_VALUE_MAP: Record<string, CscStatus> = {
 };
 
 export function mapCscControlToIdAny(label: string): string | null {
-  for (const fw of Object.keys(frameworks) as ISO[]) {
-    const found = frameworks[fw].find((item) => item.control === label);
+  for (const controls of Object.values(frameworkLookup)) {
+    if (!controls) continue;
+
+    const found = controls.find((item) => item.control === label);
     if (found) {
       return found.id;
     }
@@ -32,11 +109,12 @@ export function mapCscControlToIdAny(label: string): string | null {
 
 export function mapCscControlToId(
   label: string,
-  framework: ISO
+  framework: MigrationCscFramework
 ): string | null {
-  const mapped = frameworks[framework].find(
-    (item) => item.control === label
-  )?.id;
+  const controls = getFrameworkControls(framework);
+  if (!controls) return null;
+
+  const mapped = controls.find((item) => item.control === label)?.id;
   if (!mapped) {
     error(
       `[CSC_STATUSES_${framework.toUpperCase()}] UNKNOWN KEY LABEL: "${label}"`

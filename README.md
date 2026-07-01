@@ -83,6 +83,22 @@ Unicis Platform Community Edition - an open core, enterprise-ready trust managem
 
 **Responsive across all modules** — every module (RPA, TIA, PIA, CSC, RM, IAP, Tasks, Comments, Dashboard, Asset Management) is tested and verified at 375 px, 768 px, and 1280 px. Toolbars wrap, tables scroll, and dialogs never overflow on mobile.
 
+## 🤖 MCP Server — AI Assistant Integration
+
+The [Unicis MCP Server](src/mcp-server) is an open-source [Model Context Protocol](https://modelcontextprotocol.io/) server, now maintained in this repository at `src/mcp-server`, that connects AI assistants directly to Unicis Platform. Once configured, you can manage your entire GRC workflow through natural language in Claude, Cursor, VS Code Copilot, or any MCP-compatible client.
+
+**Available via MCP:**
+
+- Tasks — create, update, delete, comment, attach files, link compliance controls
+- Privacy — RoPA (Article 30), Transfer Impact Assessment (TIA), Privacy Impact Assessment (PIA/DPIA)
+- Cybersecurity Controls (CSC) — read and update maturity status across all supported frameworks
+- Risk Management — create and manage risk records with Probability × Impact scoring
+- API Key management
+
+> **Get started:** [src/mcp-server](src/mcp-server)
+
+---
+
 ## 📖 Additional Resources
 
 - [Unicis Platform getting started documentation](https://www.unicis.tech/docs/platform/introduction?mtm_campaign=GitHub)
@@ -242,6 +258,7 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - [REST API](https://www.unicis.tech/docs/platform/introduction?mtm_campaign=GitHub) — OpenAPI 3.0 spec with Swagger UI at `/api-docs`
 - [Notifications](https://www.unicis.tech/docs/platform/settings/?mtm_campaign=GitHub#notifications) — In-app, email, and web push
 - [Asset Inventory Management](https://www.unicis.tech/) — Fleet Server backend for osquery endpoint management; browse, search, and inspect enrolled devices (Ultimate plan)
+- [MCP Server](src/mcp-server) — connect AI assistants (Claude, Cursor, VS Code Copilot) directly to the platform via the [Model Context Protocol](https://modelcontextprotocol.io/)
 
 ### Coming Next
 
@@ -289,7 +306,6 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 
 - Custom Framework Support (JSON/YAML DSL)
 - Jira Integration (bidirectional)
-- MCP Server Exposure
 - AI Questionnaire Automation
 - Continuous Control Monitoring
 - Executive Dashboards & Reporting

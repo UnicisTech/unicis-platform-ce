@@ -69,7 +69,7 @@
     "dataencryption": "データ暗号化",
     "useraccesscontrol": "ユーザーアクセス制御",
     "controlofprocessors": "処理者の管理",
-    "mvps": "最小限のセキュアな製品",
+    "mvsp": "最小限のセキュアな製品",
     "securitycert": "セキュリティ標準とフレームワークの認証",
     "othermeasures": "その他の措置（チケットに詳細を記入）"
   },

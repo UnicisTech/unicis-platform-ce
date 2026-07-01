@@ -1,7 +1,17 @@
+/**
+ * Historical transforms for the 2025-11-23 data migration.
+ *
+ * These have already been executed in deployed environments. Do not rewrite
+ * them for newer schema or key names; add a new timestamped migration instead.
+ */
+
 import { Prisma } from '@/generated/client';
-import { mapCscControlToId, mapCscStatusValueLabelToId } from './helpers';
-import { ISO } from 'types';
-import { getCscStatusesProp } from '@/lib/csc';
+import {
+  mapCscControlToId,
+  mapCscStatusValueLabelToId,
+  type MigrationCscFramework,
+  getMigrationCscStatusesProp,
+} from './helpers';
 
 export type JsonWritable = Prisma.InputJsonValue;
 
@@ -52,13 +62,13 @@ export function replaceDefaultInCscIso(props: JsonWritable): JsonWritable {
 
 export function normalizeCscStatuses(
   props: JsonWritable,
-  framework: ISO
+  framework: MigrationCscFramework
 ): JsonWritable {
   console.log('normalizeCscStatuses exec', framework);
   const obj = asObject(props);
   if (!obj) return props;
 
-  const propName = getCscStatusesProp(framework);
+  const propName = getMigrationCscStatusesProp(framework);
   const raw = obj[propName];
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
     return props;

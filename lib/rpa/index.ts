@@ -61,7 +61,7 @@ export const config = {
     'dataencryption',
     'useraccesscontrol',
     'controlofprocessors',
-    'mvps',
+    'mvsp',
     'securitycert',
     'othermeasures',
   ],

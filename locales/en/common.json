@@ -146,7 +146,8 @@
         },
         "featuresLabel": "From Community",
         "features": {
-          "0": "Webhooks & API"
+          "0": "Webhooks & API",
+          "1": "MCP Server connection"
         }
       },
       "ultimate": {
@@ -165,7 +166,8 @@
         },
         "featuresLabel": "From Premium",
         "features": {
-          "0": "Audit Logs"
+          "0": "Audit Logs",
+          "1": "MCP Server connection"
         }
       }
     }

@@ -6,15 +6,15 @@ Reads CISO Assistant Community mapping YAML files and generates
 lib/csc/framework-mappings.ts for the Unicis Platform.
 
 Frameworks auto-mapped from YAML files:
-  - ISO 27001:2022  (2022)      ← used as pivot framework
-  - ISO 27001:2013  (2013)
+  - ISO 27001:2022  (iso-2022)  ← used as pivot framework
+  - ISO 27001:2013  (iso-2013)
   - NIST CSF v2     (nistcsfv2)
   - CIS Controls v8 (cisv81)
   - SOC2 2017+2022  (soc2v2)
   - BSI C5 2020     (c5_2020)   ← via Cisco CCF as two-hop pivot
 
 Frameworks with hardcoded data (no compatible CISO mapping files):
-  - MVSP            (mvps)       ← all 27 controls hardcoded below
+  - MVSP            (mvsp)      ← all 27 controls hardcoded below
   - EU NIS2         (eunis2)     ← NIS2 directive IDs differ from CISO annex
   - GDPR            (gdpr)       ← no ISO27001 mapping in CISO library
 
@@ -62,8 +62,8 @@ C5_PIVOT_FILES = [
 # ── CISO framework URN → Unicis ISO value ──────────────────────────────────────
 
 CISO_FW_TO_UNICIS_ISO = {
-    "iso27001-2022":     "2022",
-    "iso27001-2013":     "2013",
+    "iso27001-2022":     "iso-2022",
+    "iso27001-2013":     "iso-2013",
     "nist-csf-2.0":      "nistcsfv2",
     "cis-controls-v8":   "cisv81",
     "soc2-2017-rev-2022": "soc2v2",
@@ -164,12 +164,12 @@ def unicis_id_to_ciso_urn(unicis_iso: str, unicis_id: str) -> Optional[str]:
     if not ciso_fw:
         return None
 
-    if unicis_iso == "2022":
+    if unicis_iso == "iso-2022":
         # iso-2022-a-5-1 → urn:...:iso27001-2022:a.5.1
         node = unicis_id.removeprefix("iso-2022-").replace("-", ".")
         return f"urn:intuitem:risk:req_node:iso27001-2022:{node}"
 
-    elif unicis_iso == "2013":
+    elif unicis_iso == "iso-2013":
         # iso-2013-a-5-1-1 → urn:...:iso27001-2013:a.5.1.1
         node = unicis_id.removeprefix("iso-2013-").replace("-", ".")
         return f"urn:intuitem:risk:req_node:iso27001-2013:{node}"
@@ -241,15 +241,15 @@ def load_unicis_control_ids(fw_dir: Path) -> Dict[str, Set[str]]:
     Returns: {unicis_iso_value: {control_id, ...}}
     """
     file_map = {
-        "2022":      "iso_2022.ts",
-        "2013":      "iso_2013.ts",
+        "iso-2022":      "iso_2022.ts",
+        "iso-2013":      "iso_2013.ts",
         "nistcsfv2": "nist_csf_v2.ts",
         "cisv81":    "cis_v_81.ts",
         "soc2v2":    "soc2-v2.ts",
         "c5_2020":   "c5_2020.ts",
         "eunis2":    "eu_nis2.ts",
         "gdpr":      "gdpr.ts",
-        "mvps":      "mvps.ts",
+        "mvsp":      "mvsp.ts",
     }
     result = {}
     for iso, fname in file_map.items():
@@ -411,9 +411,9 @@ def build_unicis_mappings(
         for iso2022_urn in iso2022_neighbors:
             # Add the ISO2022 control itself
             iso2022_id = ciso_urn_to_unicis_id(iso2022_urn)
-            if iso2022_id and "2022" != exclude_iso:
-                if iso2022_id in all_control_ids.get("2022", set()):
-                    fw_mappings["2022"].add(iso2022_id)
+            if iso2022_id and "iso-2022" != exclude_iso:
+                if iso2022_id in all_control_ids.get("iso-2022", set()):
+                    fw_mappings["iso-2022"].add(iso2022_id)
 
             # Now pivot: get neighbors of this ISO2022 control
             for pivot_tgt_urn, _ in merged.get(iso2022_urn, []):
@@ -467,8 +467,8 @@ MVSP_MAPPINGS = {
     "mvsp-1-1": {
         "relationship": "related",
         "mappings": {
-            "2022":     ["iso-2022-a-5-24", "iso-2022-a-8-8"],
-            "2013":     ["iso-2013-a-16-1-1", "iso-2013-a-12-6-1"],
+            "iso-2022":     ["iso-2022-a-5-24", "iso-2022-a-8-8"],
+            "iso-2013":     ["iso-2013-a-16-1-1", "iso-2013-a-12-6-1"],
             "nistcsfv2": ["nist-csf-v2-id-ra-01", "nist-csf-v2-rs-ma-01"],
             "eunis2":   ["eu-nis2-21-2-b"],
             "cisv81":   ["cisv81-7-7", "cisv81-17-1"],
@@ -480,8 +480,8 @@ MVSP_MAPPINGS = {
     "mvsp-1-2": {
         "relationship": "related",
         "mappings": {
-            "2022":     ["iso-2022-a-5-15", "iso-2022-a-5-18"],
-            "2013":     ["iso-2013-a-9-1-1", "iso-2013-a-9-2-3"],
+            "iso-2022":     ["iso-2022-a-5-15", "iso-2022-a-5-18"],
+            "iso-2013":     ["iso-2013-a-9-1-1", "iso-2013-a-9-2-3"],
             "nistcsfv2": ["nist-csf-v2-pr-aa-01", "nist-csf-v2-pr-aa-05"],
             "eunis2":   ["eu-nis2-21-2-i"],
             "cisv81":   ["cisv81-5-1", "cisv81-6-3"],
@@ -493,8 +493,8 @@ MVSP_MAPPINGS = {
     "mvsp-1-3": {
         "relationship": "related",
         "mappings": {
-            "2022":     ["iso-2022-a-5-35", "iso-2022-a-8-8"],
-            "2013":     ["iso-2013-a-18-2-3", "iso-2013-a-12-6-1"],
+            "iso-2022":     ["iso-2022-a-5-35", "iso-2022-a-8-8"],
+            "iso-2013":     ["iso-2013-a-18-2-3", "iso-2013-a-12-6-1"],
             "nistcsfv2": ["nist-csf-v2-id-ra-01", "nist-csf-v2-id-ra-05"],
             "eunis2":   ["eu-nis2-21-2-f"],
             "cisv81":   ["cisv81-18-1", "cisv81-18-2"],
@@ -506,8 +506,8 @@ MVSP_MAPPINGS = {
     "mvsp-1-4": {
         "relationship": "related",
         "mappings": {
-            "2022":     ["iso-2022-a-5-24", "iso-2022-a-8-8"],
-            "2013":     ["iso-2013-a-16-1-1", "iso-2013-a-12-6-1"],
+            "iso-2022":     ["iso-2022-a-5-24", "iso-2022-a-8-8"],
+            "iso-2013":     ["iso-2013-a-16-1-1", "iso-2013-a-12-6-1"],
             "nistcsfv2": ["nist-csf-v2-id-ra-01"],
             "cisv81":   ["cisv81-17-1"],
             "c5_2020":  ["c5-2020-sim-01"],
@@ -517,8 +517,8 @@ MVSP_MAPPINGS = {
     "mvsp-1-5": {
         "relationship": "implements",
         "mappings": {
-            "2022":     ["iso-2022-a-6-3"],
-            "2013":     ["iso-2013-a-7-2-2"],
+            "iso-2022":     ["iso-2022-a-6-3"],
+            "iso-2013":     ["iso-2013-a-7-2-2"],
             "nistcsfv2": ["nist-csf-v2-pr-at-01", "nist-csf-v2-pr-at-02"],
             "eunis2":   ["eu-nis2-21-2-g"],
             "cisv81":   ["cisv81-14-1", "cisv81-14-9"],
@@ -530,8 +530,8 @@ MVSP_MAPPINGS = {
     "mvsp-1-6": {
         "relationship": "implements",
         "mappings": {
-            "2022":     ["iso-2022-a-5-24", "iso-2022-a-5-26"],
-            "2013":     ["iso-2013-a-16-1-1", "iso-2013-a-16-1-5"],
+            "iso-2022":     ["iso-2022-a-5-24", "iso-2022-a-5-26"],
+            "iso-2013":     ["iso-2013-a-16-1-1", "iso-2013-a-16-1-5"],
             "nistcsfv2": ["nist-csf-v2-rs-ma-01", "nist-csf-v2-rs-ma-02"],
             "eunis2":   ["eu-nis2-21-2-b"],
             "cisv81":   ["cisv81-17-2", "cisv81-17-3"],
@@ -543,8 +543,8 @@ MVSP_MAPPINGS = {
     "mvsp-1-7": {
         "relationship": "implements",
         "mappings": {
-            "2022":     ["iso-2022-a-8-15", "iso-2022-a-8-16", "iso-2022-a-8-17"],
-            "2013":     ["iso-2013-a-12-4-1", "iso-2013-a-12-4-2", "iso-2013-a-12-4-3"],
+            "iso-2022":     ["iso-2022-a-8-15", "iso-2022-a-8-16", "iso-2022-a-8-17"],
+            "iso-2013":     ["iso-2013-a-12-4-1", "iso-2013-a-12-4-2", "iso-2013-a-12-4-3"],
             "nistcsfv2": ["nist-csf-v2-de-cm-01", "nist-csf-v2-de-ae-03"],
             "eunis2":   ["eu-nis2-21-2-b"],
             "cisv81":   ["cisv81-8-2", "cisv81-8-5", "cisv81-8-11"],
@@ -557,8 +557,8 @@ MVSP_MAPPINGS = {
     "mvsp-1-8": {
         "relationship": "related",
         "mappings": {
-            "2022":     ["iso-2022-a-5-29", "iso-2022-a-8-14"],
-            "2013":     ["iso-2013-a-17-1-1", "iso-2013-a-17-2-1"],
+            "iso-2022":     ["iso-2022-a-5-29", "iso-2022-a-8-14"],
+            "iso-2013":     ["iso-2013-a-17-1-1", "iso-2013-a-17-2-1"],
             "nistcsfv2": ["nist-csf-v2-rc-rp-01"],
             "cisv81":   ["cisv81-11-1"],
             "soc2v2":   ["soc2-v2-a1-1"],
@@ -569,8 +569,8 @@ MVSP_MAPPINGS = {
     "mvsp-2-1": {
         "relationship": "implements",
         "mappings": {
-            "2022":     ["iso-2022-a-5-16", "iso-2022-a-5-17", "iso-2022-a-8-5"],
-            "2013":     ["iso-2013-a-9-2-1", "iso-2013-a-9-4-2"],
+            "iso-2022":     ["iso-2022-a-5-16", "iso-2022-a-5-17", "iso-2022-a-8-5"],
+            "iso-2013":     ["iso-2013-a-9-2-1", "iso-2013-a-9-4-2"],
             "nistcsfv2": ["nist-csf-v2-pr-aa-02", "nist-csf-v2-pr-aa-03"],
             "eunis2":   ["eu-nis2-21-2-i"],
             "cisv81":   ["cisv81-5-2", "cisv81-6-3"],
@@ -582,8 +582,8 @@ MVSP_MAPPINGS = {
     "mvsp-2-2": {
         "relationship": "implements",
         "mappings": {
-            "2022":     ["iso-2022-a-8-24", "iso-2022-a-8-20"],
-            "2013":     ["iso-2013-a-10-1-1", "iso-2013-a-13-1-1"],
+            "iso-2022":     ["iso-2022-a-8-24", "iso-2022-a-8-20"],
+            "iso-2013":     ["iso-2013-a-10-1-1", "iso-2013-a-13-1-1"],
             "nistcsfv2": ["nist-csf-v2-pr-ds-02"],
             "eunis2":   ["eu-nis2-21-2-h", "eu-nis2-21-2-j"],
             "cisv81":   ["cisv81-3-10", "cisv81-13-9"],
@@ -596,8 +596,8 @@ MVSP_MAPPINGS = {
     "mvsp-2-3": {
         "relationship": "implements",
         "mappings": {
-            "2022":     ["iso-2022-a-8-9", "iso-2022-a-8-20"],
-            "2013":     ["iso-2013-a-14-1-2", "iso-2013-a-13-1-1"],
+            "iso-2022":     ["iso-2022-a-8-9", "iso-2022-a-8-20"],
+            "iso-2013":     ["iso-2013-a-14-1-2", "iso-2013-a-13-1-1"],
             "nistcsfv2": ["nist-csf-v2-pr-ps-01"],
             "cisv81":   ["cisv81-9-1", "cisv81-13-4"],
             "soc2v2":   ["soc2-v2-cc7-1"],
@@ -608,8 +608,8 @@ MVSP_MAPPINGS = {
     "mvsp-2-4": {
         "relationship": "implements",
         "mappings": {
-            "2022":     ["iso-2022-a-5-17", "iso-2022-a-8-5"],
-            "2013":     ["iso-2013-a-9-3-1", "iso-2013-a-9-4-3"],
+            "iso-2022":     ["iso-2022-a-5-17", "iso-2022-a-8-5"],
+            "iso-2013":     ["iso-2013-a-9-3-1", "iso-2013-a-9-4-3"],
             "nistcsfv2": ["nist-csf-v2-pr-aa-01", "nist-csf-v2-pr-aa-02"],
             "eunis2":   ["eu-nis2-21-2-i", "eu-nis2-21-2-j"],
             "cisv81":   ["cisv81-5-2", "cisv81-6-3", "cisv81-6-5"],
@@ -621,8 +621,8 @@ MVSP_MAPPINGS = {
     "mvsp-2-5": {
         "relationship": "implements",
         "mappings": {
-            "2022":     ["iso-2022-a-8-24"],
-            "2013":     ["iso-2013-a-10-1-1"],
+            "iso-2022":     ["iso-2022-a-8-24"],
+            "iso-2013":     ["iso-2013-a-10-1-1"],
             "nistcsfv2": ["nist-csf-v2-pr-ds-01"],
             "eunis2":   ["eu-nis2-21-2-h"],
             "cisv81":   ["cisv81-3-9", "cisv81-3-11"],
@@ -635,8 +635,8 @@ MVSP_MAPPINGS = {
     "mvsp-2-6": {
         "relationship": "implements",
         "mappings": {
-            "2022":     ["iso-2022-a-8-8", "iso-2022-a-8-28"],
-            "2013":     ["iso-2013-a-12-6-1", "iso-2013-a-14-2-7"],
+            "iso-2022":     ["iso-2022-a-8-8", "iso-2022-a-8-28"],
+            "iso-2013":     ["iso-2013-a-12-6-1", "iso-2013-a-14-2-7"],
             "nistcsfv2": ["nist-csf-v2-id-ra-01", "nist-csf-v2-de-cm-01"],
             "eunis2":   ["eu-nis2-21-2-e"],
             "cisv81":   ["cisv81-7-1", "cisv81-16-1"],
@@ -648,8 +648,8 @@ MVSP_MAPPINGS = {
     "mvsp-2-7": {
         "relationship": "implements",
         "mappings": {
-            "2022":     ["iso-2022-a-5-17", "iso-2022-a-8-19"],
-            "2013":     ["iso-2013-a-9-2-4", "iso-2013-a-12-5-1"],
+            "iso-2022":     ["iso-2022-a-5-17", "iso-2022-a-8-19"],
+            "iso-2013":     ["iso-2013-a-9-2-4", "iso-2013-a-12-5-1"],
             "nistcsfv2": ["nist-csf-v2-pr-aa-01"],
             "cisv81":   ["cisv81-4-7", "cisv81-5-3"],
             "soc2v2":   ["soc2-v2-cc6-1"],
@@ -660,8 +660,8 @@ MVSP_MAPPINGS = {
     "mvsp-2-8": {
         "relationship": "implements",
         "mappings": {
-            "2022":     ["iso-2022-a-8-28", "iso-2022-a-8-26"],
-            "2013":     ["iso-2013-a-14-1-2", "iso-2013-a-14-2-5"],
+            "iso-2022":     ["iso-2022-a-8-28", "iso-2022-a-8-26"],
+            "iso-2013":     ["iso-2013-a-14-1-2", "iso-2013-a-14-2-5"],
             "nistcsfv2": ["nist-csf-v2-pr-ps-01"],
             "cisv81":   ["cisv81-16-7", "cisv81-16-12"],
             "soc2v2":   ["soc2-v2-cc8-1"],
@@ -672,8 +672,8 @@ MVSP_MAPPINGS = {
     "mvsp-3-1": {
         "relationship": "related",
         "mappings": {
-            "2022":     ["iso-2022-a-5-9", "iso-2022-a-5-12"],
-            "2013":     ["iso-2013-a-8-1-1", "iso-2013-a-8-2-1"],
+            "iso-2022":     ["iso-2022-a-5-9", "iso-2022-a-5-12"],
+            "iso-2013":     ["iso-2013-a-8-1-1", "iso-2013-a-8-2-1"],
             "nistcsfv2": ["nist-csf-v2-id-am-01", "nist-csf-v2-id-am-02"],
             "eunis2":   ["eu-nis2-21-2-i"],
             "cisv81":   ["cisv81-1-1", "cisv81-2-1"],
@@ -686,8 +686,8 @@ MVSP_MAPPINGS = {
     "mvsp-3-2": {
         "relationship": "related",
         "mappings": {
-            "2022":     ["iso-2022-a-5-33"],
-            "2013":     ["iso-2013-a-18-1-3"],
+            "iso-2022":     ["iso-2022-a-5-33"],
+            "iso-2013":     ["iso-2013-a-18-1-3"],
             "eunis2":   ["eu-nis2-21-2-i"],
             "cisv81":   ["cisv81-3-12", "cisv81-3-13"],
             "soc2v2":   ["soc2-v2-p4-2"],
@@ -698,8 +698,8 @@ MVSP_MAPPINGS = {
     "mvsp-3-3": {
         "relationship": "implements",
         "mappings": {
-            "2022":     ["iso-2022-a-6-1", "iso-2022-a-6-2", "iso-2022-a-6-5"],
-            "2013":     ["iso-2013-a-7-1-1", "iso-2013-a-7-1-2", "iso-2013-a-7-3-1"],
+            "iso-2022":     ["iso-2022-a-6-1", "iso-2022-a-6-2", "iso-2022-a-6-5"],
+            "iso-2013":     ["iso-2013-a-7-1-1", "iso-2013-a-7-1-2", "iso-2013-a-7-3-1"],
             "nistcsfv2": ["nist-csf-v2-gv-po-01"],
             "cisv81":   ["cisv81-6-2"],
             "soc2v2":   ["soc2-v2-cc1-4"],
@@ -710,8 +710,8 @@ MVSP_MAPPINGS = {
     "mvsp-3-4": {
         "relationship": "related",
         "mappings": {
-            "2022":     ["iso-2022-a-5-35", "iso-2022-a-5-36"],
-            "2013":     ["iso-2013-a-18-2-1", "iso-2013-a-18-2-2"],
+            "iso-2022":     ["iso-2022-a-5-35", "iso-2022-a-5-36"],
+            "iso-2013":     ["iso-2013-a-18-2-1", "iso-2013-a-18-2-2"],
             "nistcsfv2": ["nist-csf-v2-gv-oc-01"],
             "eunis2":   ["eu-nis2-21-2-f"],
             "c5_2020":  ["c5-2020-com-01"],
@@ -721,8 +721,8 @@ MVSP_MAPPINGS = {
     "mvsp-3-5": {
         "relationship": "related",
         "mappings": {
-            "2022":     ["iso-2022-a-5-19", "iso-2022-a-5-21"],
-            "2013":     ["iso-2013-a-15-1-1", "iso-2013-a-15-1-3"],
+            "iso-2022":     ["iso-2022-a-5-19", "iso-2022-a-5-21"],
+            "iso-2013":     ["iso-2013-a-15-1-1", "iso-2013-a-15-1-3"],
             "nistcsfv2": ["nist-csf-v2-gv-sc-01", "nist-csf-v2-gv-sc-06"],
             "eunis2":   ["eu-nis2-21-2-d", "eu-nis2-21-3"],
             "cisv81":   ["cisv81-15-1"],
@@ -735,8 +735,8 @@ MVSP_MAPPINGS = {
     "mvsp-4-1": {
         "relationship": "implements",
         "mappings": {
-            "2022":     ["iso-2022-a-5-8", "iso-2022-a-8-25", "iso-2022-a-8-27"],
-            "2013":     ["iso-2013-a-14-1-1", "iso-2013-a-14-2-1", "iso-2013-a-14-2-5"],
+            "iso-2022":     ["iso-2022-a-5-8", "iso-2022-a-8-25", "iso-2022-a-8-27"],
+            "iso-2013":     ["iso-2013-a-14-1-1", "iso-2013-a-14-2-1", "iso-2013-a-14-2-5"],
             "nistcsfv2": ["nist-csf-v2-gv-rm-01", "nist-csf-v2-id-ra-03"],
             "eunis2":   ["eu-nis2-21-2-e"],
             "cisv81":   ["cisv81-16-1", "cisv81-16-14"],
@@ -748,8 +748,8 @@ MVSP_MAPPINGS = {
     "mvsp-4-2": {
         "relationship": "implements",
         "mappings": {
-            "2022":     ["iso-2022-a-8-31"],
-            "2013":     ["iso-2013-a-14-2-6"],
+            "iso-2022":     ["iso-2022-a-8-31"],
+            "iso-2013":     ["iso-2013-a-14-2-6"],
             "nistcsfv2": ["nist-csf-v2-pr-ps-04"],
             "cisv81":   ["cisv81-12-1", "cisv81-13-4"],
             "soc2v2":   ["soc2-v2-cc5-3"],
@@ -761,8 +761,8 @@ MVSP_MAPPINGS = {
     "mvsp-4-3": {
         "relationship": "related",
         "mappings": {
-            "2022":     ["iso-2022-a-5-20", "iso-2022-a-5-22"],
-            "2013":     ["iso-2013-a-15-1-2", "iso-2013-a-15-2-1"],
+            "iso-2022":     ["iso-2022-a-5-20", "iso-2022-a-5-22"],
+            "iso-2013":     ["iso-2013-a-15-1-2", "iso-2013-a-15-2-1"],
             "nistcsfv2": ["nist-csf-v2-gv-sc-02", "nist-csf-v2-gv-sc-05"],
             "eunis2":   ["eu-nis2-21-2-d", "eu-nis2-21-3"],
             "cisv81":   ["cisv81-15-2", "cisv81-15-3"],
@@ -774,8 +774,8 @@ MVSP_MAPPINGS = {
     "mvsp-4-4": {
         "relationship": "implements",
         "mappings": {
-            "2022":     ["iso-2022-a-8-13"],
-            "2013":     ["iso-2013-a-12-3-1"],
+            "iso-2022":     ["iso-2022-a-8-13"],
+            "iso-2013":     ["iso-2013-a-12-3-1"],
             "nistcsfv2": ["nist-csf-v2-pr-ds-11", "nist-csf-v2-rc-rp-04"],
             "eunis2":   ["eu-nis2-21-2-c"],
             "cisv81":   ["cisv81-11-2", "cisv81-11-4"],
@@ -790,8 +790,8 @@ MVSP_MAPPINGS = {
 
 def iso_key_to_ts(iso: str) -> str:
     """Format an ISO key for TypeScript object notation."""
-    # Keys that need quotes: '2022', '2013', 'c5_2020'
-    if re.match(r"^\d", iso) or "_" in iso:
+    # Keys that need quotes: 'iso-2022', 'iso-2013', 'c5_2020'
+    if re.match(r"^\d", iso) or "_" in iso or "-" in iso:
         return f"'{iso}'"
     return iso
 
@@ -819,8 +819,8 @@ def mapping_to_ts(ctrl_id: str, entry: dict, indent: int = 2) -> str:
 
 def generate_ts(mappings: Dict[str, dict]) -> str:
     """Generate the complete TypeScript file content."""
-    auto_frameworks = ["2022", "2013", "nistcsfv2", "cisv81", "soc2v2", "c5_2020"]
-    hardcoded_frameworks = ["mvps", "eunis2", "gdpr"]
+    auto_frameworks = ["iso-2022", "iso-2013", "nistcsfv2", "cisv81", "soc2v2", "c5_2020"]
+    hardcoded_frameworks = ["mvsp", "eunis2", "gdpr"]
 
     # Section ordering: define prefix → (title) in desired output order
     SECTION_ORDER = [
@@ -940,7 +940,7 @@ def main():
 
     # Add hardcoded MVSP mappings (validate IDs against Unicis frameworks)
     print("  Adding hardcoded MVSP mappings...", file=sys.stderr)
-    mvsp_ids = all_control_ids.get("mvps", set())
+    mvsp_ids = all_control_ids.get("mvsp", set())
     for ctrl_id, entry in MVSP_MAPPINGS.items():
         if ctrl_id not in mvsp_ids:
             print(f"  WARNING: MVSP control '{ctrl_id}' not found in Unicis framework", file=sys.stderr)

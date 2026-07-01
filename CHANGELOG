@@ -15,7 +15,8 @@ tags:
 
 The information about Unicis Platform releases and changes is listed in order below.
 
-## [Fleet Server + Asset Management Module] 2026-06-30
+TODO: change the release date
+## [Fleet Server + Asset Management Module] 2026-**-**
 
 *Release date: 2026-06-30*
 
@@ -39,6 +40,19 @@ The information about Unicis Platform releases and changes is listed in order be
 - Fixes
   - Task attachments now correctly accept image files (PNG, JPEG) when the browser does not supply a MIME type — drag-and-drop from external sources no longer silently rejects valid images
   - Both client-side (`taskService.ts`) and server-side (`attachment.ts`) file-type validation fall back to extension check when `file.type` / `file.mimetype` is empty, while still verifying file content via magic-byte signature
+
+## [MCP Server, Analytics & Error Tracking] 2026-06-30
+
+*Release date: 2026-06-29*
+
+- New Features
+  - **MCP Server merged into this repository** — the [Unicis MCP Server](src/mcp-server) is no longer a separate companion repo; its source now lives at `src/mcp-server` as a self-contained Node.js package (own `package.json`/`tsconfig.json`, talks to the platform over its public REST API)
+  - **GlitchTip error tracking** — client/server/edge Sentry SDK configs wired against a single GlitchTip project, tagging events with `NEXT_PUBLIC_APP_ENV` (local/dev/prod) instead of `NODE_ENV` since both deployed environments run in production mode
+  - **Matomo content & event tracking** — page/content tracking on the pricing page plus broader event instrumentation across the app (e.g. first framework selection on the activation funnel)
+  - **Image upload support for attachments** — task attachments now accept PNG/JPEG with server-side magic-byte validation
+- Fixed
+  - Attachment upload error handling — localized error messages across all 7 supported languages; notification failures no longer affect file-save success/error reporting
+  - README hero logo/banner image reference corrected
 
 ## [UX/UI Redesign, Dashboard & Accessibility] 2026-06-12
 
