@@ -99,15 +99,8 @@ ENV RESEND_FROM=${RESEND_FROM}
 ARG NODE_OPTIONS=--max-old-space-size=4096
 ENV NODE_OPTIONS=${NODE_OPTIONS}
 
-<<<<<<< HEAD
 # Build the Next.js app and apply pending database migrations.
 RUN npx prisma generate && npx prisma migrate deploy && npx tsx scripts/generate-openapi.ts && npx next build --webpack
-=======
-# Build the Next.js app. Migrations are applied at container start (see CMD)
-# since the build step has no network access to the runtime database and
-# DATABASE_URL here is only a placeholder build ARG.
-RUN npx prisma generate && npx tsx scripts/generate-openapi.ts && npx next build --webpack
->>>>>>> origin/mcp
 
 # Remove dev dependencies for runtime
 RUN npm prune --omit=dev
