@@ -716,6 +716,8 @@
   "fleet-asset-listed": "アセット一覧",
   "fleet-asset-id": "アセットID",
   "fleet-asset-info": "アセット情報",
+  "install-osquery": "Install osquery",
+  "enroll-asset": "Enroll the asset in Fleet",
   "fleet-tool": "アセットエージェント",
   "fleet-tool-description": "軽量な資産管理ソフトウェアにより、作業を効率的に行うために必要なすべてのツールを提供し、ワークフローを簡素化します。",
   "fleet-asset-info-description": "アセットの詳細説明",

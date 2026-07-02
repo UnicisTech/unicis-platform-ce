@@ -1,16 +1,22 @@
 import { Cog6ToothIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+import { type OsqueryPlatform } from '@/lib/fleet/tools';
 
 interface PlatformTabProps {
-  activeTab: string;
-  setTab: (tab: string) => void;
+  activeTab: OsqueryPlatform;
+  setTab: (tab: OsqueryPlatform) => void;
 }
 
 const PlatformTab = ({ activeTab, setTab }: PlatformTabProps) => {
   const { t } = useTranslation('common');
 
-  const navigations = [
+  const navigations: {
+    name: string;
+    tab: OsqueryPlatform;
+    active: boolean;
+    icon: typeof Cog6ToothIcon;
+  }[] = [
     {
       name: t('windows'),
       tab: 'windows',

@@ -715,6 +715,8 @@
   "fleet-asset-listed": "Liste des actifs",
   "fleet-asset-id": "ID de l’actif",
   "fleet-asset-info": "Informations sur l’actif",
+  "install-osquery": "Install osquery",
+  "enroll-asset": "Enroll the asset in Fleet",
   "fleet-tool": "Agent d’actif",
   "fleet-tool-description": "Nous simplifions votre flux de travail avec notre logiciel léger de gestion des actifs, en fournissant tous les outils nécessaires pour travailler efficacement.",
   "fleet-asset-info-description": "Ci-dessous une description complète de votre actif",

@@ -15,7 +15,11 @@ import {
 import { Button } from '@/components/shadcn/ui/button';
 import { useGetTeam } from '@/hooks/fleets/team/useGetTeam';
 import { useGetFleetSecret } from '@/hooks/fleets/connect/useGetFleetSecret';
-import { OSQUERY_ENTRY } from '@/lib/fleet/tools';
+import {
+  getOsqueryEnrollCommand,
+  getOsqueryInstallCommand,
+  type OsqueryPlatform,
+} from '@/lib/fleet/tools';
 import env from '@/lib/env';
 import { Loading, Error } from '@/components/shared';
 import { CodeBlock } from '@/components/shared/CodeBlock';
@@ -35,7 +39,7 @@ const AddAsset = ({
   setVisible,
 }: AddAssetProps) => {
   const { t } = useTranslation(['common', 'fleet']);
-  const [platform, setPlatformTab] = useState('windows');
+  const [platform, setPlatformTab] = useState<OsqueryPlatform>('windows');
   const [isSafe] = useState(false);
   const [isCopy] = useState(false);
 
@@ -48,31 +52,6 @@ const AddAsset = ({
 
   if (isLoading || SecretLoading) return <Loading />;
   if (isError || SecretError) return <Error />;
-
-  const agentEndpoint = (os: string, version: string) => {
-    switch (os) {
-      case 'windows':
-        return `osquery-${version}.msi`;
-      case 'macos':
-        return `osquery-${version}_1.macos_arm64.tar.gz`;
-      case 'linux-deb':
-        return `osquery_${version}-1.linux_amd64.deb`;
-      case 'linux-rpm':
-        return `osquery-${version}-1.linux.x86_64.rpm`;
-      default:
-        return `https://github.com/osquery/osquery/archive/refs/tags/${version}.zip`;
-    }
-  };
-
-  const generateCliInstaller = (os: string) => {
-    const url = `https://github.com/osquery/osquery/releases/download/${env.agentVersion}/${agentEndpoint(os, env.agentVersion)}`;
-    return `curl -sSL ${url} | tar -xzf -`;
-  };
-
-  const generateUrlInstaller = (os: string) => {
-    const url = `https://github.com/osquery/osquery/releases/download/${env.agentVersion}/${agentEndpoint(os, env.agentVersion)}`;
-    return platform === 'advanced' ? agentEndpoint(os, env.agentVersion) : url;
-  };
 
   const fleetApiHost = (() => {
     if (env.fleetAPI) {
@@ -90,14 +69,21 @@ const AddAsset = ({
     }
   })();
 
-  const osqueryEntry = OSQUERY_ENTRY({
+  const tlsServerCertPath =
+    platform === 'windows' ? '.\\ca-cert.pem' : './ca-cert.pem';
+  const shouldUseTlsServerCert = Boolean(fleetTeam?.ca_certificate);
+
+  const installCommand = getOsqueryInstallCommand(platform, env.agentVersion);
+  const osqueryEntry = getOsqueryEnrollCommand({
     secret: secret?.secret ?? '',
     teamName: team.name!,
     apiUrl: fleetApiHost,
     safe: isSafe,
     isCopy: isCopy,
     platform: platform,
+    tlsServerCerts: shouldUseTlsServerCert ? tlsServerCertPath : undefined,
   });
+  const commandLanguage = platform === 'windows' ? 'powershell' : 'sh';
 
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
@@ -120,42 +106,29 @@ const AddAsset = ({
 
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <h2 className="underline">{t('with-cli-installer')}</h2>
-              {/* <CopyToClipboardButton value={osqueryEntry} /> */}
+              <h2 className="underline">{t('install-osquery')}</h2>
             </div>
             <CodeBlock
-              language="sh"
+              language={commandLanguage}
               shouldWrapLongLines
               showLineNumbers={false}
-              text={generateCliInstaller(platform)}
+              text={installCommand}
             />
           </div>
 
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <h2 className="underline">
-                {t('fleet:fleet-with-the')}{' '}
-                <a
-                  href={generateUrlInstaller(platform)}
-                  className="text-blue-500 underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {t('fleet:fleet-cli-tool')}
-                </a>{' '}
-                {t('fleet:fleet-installed')}
-              </h2>
-              {/* <CopyToClipboardButton value={osqueryEntry} /> */}
+              <h2 className="underline">{t('enroll-asset')}</h2>
             </div>
             <CodeBlock
-              language="sh"
+              language={commandLanguage}
               shouldWrapLongLines
               showLineNumbers={false}
               text={osqueryEntry}
             />
           </div>
 
-          {platform === 'advanced' && (
+          {shouldUseTlsServerCert && (
             <>
               <h2>{t('team-tls-cert')}</h2>
               <CodeBlock
@@ -165,8 +138,8 @@ const AddAsset = ({
               />
               <p>
                 {t('save-ca-content', {
-                  file: '<span class="text-green-500">./ca-cert.pem</span>',
-                  ext: '<span class="text-green-500">.pem</span>',
+                  file: tlsServerCertPath,
+                  ext: '.pem',
                 })}
               </p>
             </>
