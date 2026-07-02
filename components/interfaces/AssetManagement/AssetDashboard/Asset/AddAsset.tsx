@@ -71,7 +71,8 @@ const AddAsset = ({
 
   const tlsServerCertPath =
     platform === 'windows' ? '.\\ca-cert.pem' : './ca-cert.pem';
-  const shouldUseTlsServerCert = Boolean(fleetTeam?.ca_certificate);
+  const shouldUseTlsServerCert =
+    env.fleetUseTlsServerCerts && Boolean(fleetTeam?.ca_certificate);
 
   const installCommand = getOsqueryInstallCommand(platform, env.agentVersion);
   const osqueryEntry = getOsqueryEnrollCommand({

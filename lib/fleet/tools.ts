@@ -164,15 +164,18 @@ export const getOsqueryEnrollCommand = ({
     const secretPath = `.${'\\'}${filePrefix}_enroll_secret.txt`;
     const escapedSecret =
       safe && !isCopy ? '*'.repeat(secret.length) : powershellEscape(secret);
+    const dataDir = `$env:ProgramData\\osquery\\unicis`;
     const flagsList = createCommonFlags({
       apiUrl,
-      pidfile: `$env:TEMP\\${filePrefix}-osquery.pid`,
-      databasePath: `$env:TEMP\\${filePrefix}-osquery.db`,
+      pidfile: `${dataDir}\\${filePrefix}-osquery.pid`,
+      databasePath: `${dataDir}\\${filePrefix}-osquery.db`,
       secretPath,
       tlsServerCerts,
     });
 
     let osqueryCommand = [
+      `$unicisDir = "${dataDir}"`,
+      `New-Item -ItemType Directory -Force $unicisDir | Out-Null`,
       `$secretPath = "${secretPath}"`,
       `Set-Content -Path $secretPath -Value '${escapedSecret}'`,
       `$osqueryd = "$env:ProgramFiles\\osquery\\osqueryd\\osqueryd.exe"`,
