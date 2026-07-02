@@ -58,6 +58,7 @@
   "fleet-all-queries": "Asset Queries",
   "fleet-query-id": "Query ID",
   "fleet-queries-listed": "List of all asset queries",
+  "no-queries-found": "No queries found",
   "fleet-all-tags": "Asset Tags",
   "fleet-tag-listed": "List of all tags and their associated analysis",
   "fleet-tag-caption": "Assign tags to organize your assets",

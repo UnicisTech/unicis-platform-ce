@@ -58,6 +58,7 @@
   "fleet-all-queries": "Requêtes d'actifs",
   "fleet-query-id": "ID de la requête",
   "fleet-queries-listed": "Liste de toutes les requêtes d'actifs",
+  "no-queries-found": "Aucune requête trouvée",
   "fleet-all-tags": "Étiquettes d'actifs",
   "fleet-tag-listed": "Liste de toutes les étiquettes et leurs analyses associées",
   "fleet-tag-caption": "Attribuez des étiquettes pour organiser vos actifs",

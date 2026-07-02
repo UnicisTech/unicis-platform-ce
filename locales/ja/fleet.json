@@ -58,6 +58,7 @@
   "fleet-all-queries": "アセットクエリ",
   "fleet-query-id": "クエリID",
   "fleet-queries-listed": "全アセットクエリのリスト",
+  "no-queries-found": "クエリが見つかりません",
   "fleet-all-tags": "アセットタグ",
   "fleet-tag-listed": "全タグと関連分析のリスト",
   "fleet-tag-caption": "タグを割り当ててアセットを整理",

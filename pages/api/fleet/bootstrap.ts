@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import crypto from 'crypto';
 import { getSession } from '@/lib/session';
 import { prisma } from '@/lib/prisma';
 
@@ -8,8 +9,8 @@ type Body = {
 };
 
 /**
- * Bootstrap endpoint for team owners to create their own Fleet account
- * without going through the enrollment email flow
+ * Bootstrap endpoint for team admins/owners to create their own Fleet account
+ * without going through the enrollment email flow.
  */
 export default async function handler(
   req: NextApiRequest,
@@ -51,7 +52,7 @@ export default async function handler(
       where: {
         teamId,
         userId,
-        role: 'OWNER',
+        role: { in: ['OWNER', 'ADMIN'] },
       },
       include: {
         user: {
@@ -71,7 +72,9 @@ export default async function handler(
     });
 
     if (!teamMember) {
-      return res.status(403).json({ error: 'Must be team owner to bootstrap' });
+      return res
+        .status(403)
+        .json({ error: 'Must be team admin or owner to bootstrap' });
     }
 
     const fleetBase = process.env.FLEET_API_URL;
@@ -268,6 +271,26 @@ export default async function handler(
     }
 
     const secretData = await secretGetRes.json();
+
+    await prisma.fleetEnrollment.upsert({
+      where: {
+        teamId_userId: {
+          teamId,
+          userId: teamMember.user.id,
+        },
+      },
+      update: {
+        status: 'COMPLETED',
+      },
+      create: {
+        teamId,
+        userId: teamMember.user.id,
+        token: crypto.randomUUID(),
+        status: 'COMPLETED',
+        sentAt: new Date(),
+        expiresAt: new Date(),
+      },
+    });
 
     console.log('[Bootstrap] Bootstrap completed successfully');
     return res.status(200).json({

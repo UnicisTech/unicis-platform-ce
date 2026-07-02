@@ -58,6 +58,7 @@
   "fleet-all-queries": "Asset-Abfragen",
   "fleet-query-id": "Abfrage-ID",
   "fleet-queries-listed": "Liste aller Asset-Abfragen",
+  "no-queries-found": "Keine Abfragen gefunden",
   "fleet-all-tags": "Asset-Tags",
   "fleet-tag-listed": "Liste aller Tags und zugehörigen Analysen",
   "fleet-tag-caption": "Tags zuweisen, um Ihre Assets zu organisieren",

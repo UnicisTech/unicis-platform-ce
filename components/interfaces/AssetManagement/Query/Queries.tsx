@@ -162,7 +162,7 @@ const Querys = ({ team, user }: { team: Team; user: Partial<User> }) => {
                       colSpan={6}
                       className="text-center py-4 text-sm text-muted-foreground"
                     >
-                      {t('no-queries-found')}
+                      {t('fleet:no-queries-found')}
                     </TableCell>
                   </TableRow>
                 )}

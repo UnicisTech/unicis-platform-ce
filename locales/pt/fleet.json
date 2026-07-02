@@ -58,6 +58,7 @@
   "fleet-all-queries": "Consultas de ativos",
   "fleet-query-id": "ID da consulta",
   "fleet-queries-listed": "Lista de todas as consultas de ativos",
+  "no-queries-found": "Nenhuma consulta encontrada",
   "fleet-all-tags": "Tags de ativos",
   "fleet-tag-listed": "Lista de todas as tags e suas análises associadas",
   "fleet-tag-caption": "Atribua tags para organizar seus ativos",
