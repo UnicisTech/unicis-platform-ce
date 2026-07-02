@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
-import { getCurrentPlan } from '@/lib/subscriptions';
+import { getCurrentPlan, hasRequiredPlan } from '@/lib/subscriptions';
 import env from '@/lib/env';
 
 export default async function handler(
@@ -40,7 +40,7 @@ export default async function handler(
 
     const currentPlan = getCurrentPlan(subscription);
 
-    if (currentPlan !== env.assetRequiredPlan) {
+    if (!hasRequiredPlan(currentPlan, env.assetRequiredPlan)) {
       return res
         .status(403)
         .json({ error: 'Insufficient plan', hasPlan: false });

@@ -1,4 +1,4 @@
-import { getCurrentPlan } from '@/lib/subscriptions';
+import { getCurrentPlan, hasRequiredPlan } from '@/lib/subscriptions';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
 
@@ -22,7 +22,7 @@ export default async function handler(
     }
 
     const currentPlan = getCurrentPlan(subscription);
-    const isPlanActive = currentPlan === plan;
+    const isPlanActive = hasRequiredPlan(currentPlan, plan);
 
     res.status(200).json({ hasPlan: isPlanActive, currentPlan: currentPlan });
   } catch (error) {

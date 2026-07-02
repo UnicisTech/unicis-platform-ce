@@ -7,6 +7,12 @@ export type SubscriptionPermissions = {
   [subscription in SubscriptionType]: Permission;
 };
 
+export const planOrder: Record<SubscriptionType, number> = {
+  COMMUNITY: 0,
+  PREMIUM: 1,
+  ULTIMATE: 2,
+};
+
 export type Permission = {
   maxUsers: number;
   maxAdmins: number;
@@ -81,4 +87,11 @@ export const getCurrentPlan = (subscription: Subscription | null) => {
   return subscription?.status === SubscriptionStatus.ACTIVE
     ? subscription.plan
     : Plan.COMMUNITY;
+};
+
+export const hasRequiredPlan = (
+  currentPlan: SubscriptionType,
+  requiredPlan: SubscriptionType
+) => {
+  return planOrder[currentPlan] >= planOrder[requiredPlan];
 };
