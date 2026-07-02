@@ -2,7 +2,7 @@ import { Plan, Subscription, SubscriptionStatus } from '@/generated/browser';
 import type { ISO, TeamFeature } from 'types';
 
 // export type SubscriptionType = (typeof Subscription)[keyof typeof Subscription];
-type SubscriptionType = 'COMMUNITY' | 'PREMIUM' | 'ULTIMATE';
+export type SubscriptionType = 'COMMUNITY' | 'PREMIUM' | 'ULTIMATE';
 export type SubscriptionPermissions = {
   [subscription in SubscriptionType]: Permission;
 };
@@ -94,4 +94,15 @@ export const hasRequiredPlan = (
   requiredPlan: SubscriptionType
 ) => {
   return planOrder[currentPlan] >= planOrder[requiredPlan];
+};
+
+export const normalizeSubscriptionPlan = (
+  value: string | undefined,
+  fallback: SubscriptionType = 'ULTIMATE'
+): SubscriptionType => {
+  if (value === 'COMMUNITY' || value === 'PREMIUM' || value === 'ULTIMATE') {
+    return value;
+  }
+
+  return fallback;
 };
