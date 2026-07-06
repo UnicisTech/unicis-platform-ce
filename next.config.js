@@ -62,7 +62,8 @@ const nextConfig = {
           },
           {
             key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+            value:
+              'camera=(), microphone=(), geolocation=(), interest-cohort=()',
           },
           {
             key: 'Content-Security-Policy',
@@ -70,7 +71,7 @@ const nextConfig = {
               "default-src 'self'",
               // Next.js hydration and reCAPTCHA require inline scripts;
               // dev mode also requires unsafe-eval for HMR
-              `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ""} https://www.google.com https://www.gstatic.com`,
+              `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''} https://www.google.com https://www.gstatic.com`,
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               // Matomo (self-hosted), GlitchTip (EU-hosted), AI endpoint (OVH EU), push endpoints

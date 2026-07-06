@@ -20,7 +20,15 @@ import { getIpAddress } from '@/lib/utils';
 import { sessionTokenCookieName } from '@/lib/cookie';
 // import { sendMagicLink } from '@/lib/email/sendMagicLink';
 
-const adapter = PrismaAdapter(prisma);
+// @next-auth/prisma-adapter@1.0.7 (latest — next-auth v4 is maintenance-only)
+// types its PrismaClient param against the default `@prisma/client` output
+// location. This project generates its client to a custom path
+// (see prisma/schema.prisma `output`), so it's a structurally-identical but
+// nominally distinct type; cast to the adapter's own param type rather than
+// widening to `any`.
+const adapter = PrismaAdapter(
+  prisma as unknown as Parameters<typeof PrismaAdapter>[0]
+);
 
 const providers: NextAuthOptions['providers'] = [];
 

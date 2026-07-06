@@ -53,10 +53,10 @@ Like RM/PIA/TIA/RPA/CSC, the incident record lives entirely inside `Task.propert
 
 The user requested the dialog capture "Incident Name and a unique ID number," matching OSCRAT's `name` field and its implicit per-record identity. Neither is duplicated inside `incident_report`:
 
-| Requirement                | Resolution                                                                                                                                                                                                     |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Incident Name**           | = the linked `Task.title`. No RPA/TIA/PIA/RM module duplicates `Task.title` inside its own JSON blob (RM's first field is a risk *description*, not a name) — Incident Report follows the same rule.       |
-| **Unique ID number**        | = the linked `Task.taskNumber` (already unique per team, atomically incremented — see `Team.taskIndex`). Displayed with an `INC-` prefix, e.g. `INC-42`, in the incidents table, detail panel, and exports. |
+| Requirement          | Resolution                                                                                                                                                                                                  |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Incident Name**    | = the linked `Task.title`. No RPA/TIA/PIA/RM module duplicates `Task.title` inside its own JSON blob (RM's first field is a risk _description_, not a name) — Incident Report follows the same rule.        |
+| **Unique ID number** | = the linked `Task.taskNumber` (already unique per team, atomically incremented — see `Team.taskIndex`). Displayed with an `INC-` prefix, e.g. `INC-42`, in the incidents table, detail panel, and exports. |
 
 **Rejected alternative:** a dedicated auto-incrementing incident counter (mirroring OSCRAT's UUID `id`). Rejected because it would introduce a second numbering system alongside `taskNumber` for no functional benefit — every other module already relies on `taskNumber` as the record's public identity in the "All Tasks" list, exports, and deep links.
 
@@ -64,7 +64,7 @@ The user requested the dialog capture "Incident Name and a unique ID number," ma
 
 ### 3.3 `incident_report` is a flat object, not a tuple
 
-RM stores `rm_risk` as a 2-element tuple (`[RiskAndImpact, Treatment]`) because its data naturally splits into two sequential assessment stages. TIA uses a 4-tuple for the same reason. Incident fields don't have that same two-stage shape — OSCRAT itself models `OscratIncidentDetail` as one flat object. `incident_report` is therefore a **single flat object**, not an array. The create/edit dialog still uses multiple *steps* (see §8.2) — the steps are a UI convenience over one object, not separate tuple slots.
+RM stores `rm_risk` as a 2-element tuple (`[RiskAndImpact, Treatment]`) because its data naturally splits into two sequential assessment stages. TIA uses a 4-tuple for the same reason. Incident fields don't have that same two-stage shape — OSCRAT itself models `OscratIncidentDetail` as one flat object. `incident_report` is therefore a **single flat object**, not an array. The create/edit dialog still uses multiple _steps_ (see §8.2) — the steps are a UI convenience over one object, not separate tuple slots.
 
 ### 3.4 Field naming: PascalCase keys, to match RM's precedent
 
@@ -74,12 +74,12 @@ RM's JSON keys are PascalCase (`Risk`, `AssetOwner`, `RawProbability`, `RiskTrea
 
 OSCRAT's `IncidentStatus` / `IncidentClassification` / `IncidentAttackType` / `IncidentSeverity` are real Prisma enums (because Incident is a dedicated table with dedicated columns there). Here they're just values inside a JSON blob — no module property field anywhere in Unicis uses a Prisma enum (RM's `TreatmentStatus` is a plain number; risk buckets are plain lowercase strings like `'low'`/`'medium'`/`'high'`/`'extreme'`, see `lib/rm/export.ts`). Incident enums follow that convention: lowercase, underscore-separated, defined as `as const` TS tuples — not Prisma enums, not UPPER_SNAKE.
 
-| OSCRAT enum (Prisma, UPPER_SNAKE)                                                                                    | Unicis equivalent (TS union, lowercase)                                                                          |
-| ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `PENDING, START, DECLARED, STABLE, ACTIVE, RESOLVED, COMPLETED`                                                         | `'pending' \| 'start' \| 'declared' \| 'stable' \| 'active' \| 'resolved' \| 'completed'`                            |
+| OSCRAT enum (Prisma, UPPER_SNAKE)                                                                                      | Unicis equivalent (TS union, lowercase)                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PENDING, START, DECLARED, STABLE, ACTIVE, RESOLVED, COMPLETED`                                                        | `'pending' \| 'start' \| 'declared' \| 'stable' \| 'active' \| 'resolved' \| 'completed'`                                                            |
 | `GENERAL, CONFIDENTIALITY, INTEGRITY, AVAILABILITY, ACCESS_CONTROL, VULNERABILITIES, TECHNICAL_FAILURE, THEFT_OR_LOSS` | `'general' \| 'confidentiality' \| 'integrity' \| 'availability' \| 'access_control' \| 'vulnerabilities' \| 'technical_failure' \| 'theft_or_loss'` |
-| `DENIAL_OF_SERVICE, UNAUTHORISED_ACCESS, MALWARE, ABUSE, OTHERS`                                                        | `'denial_of_service' \| 'unauthorised_access' \| 'malware' \| 'abuse' \| 'others'`                                   |
-| `LOW, MEDIUM, HIGH, CRITICAL`                                                                                            | `'low' \| 'medium' \| 'high' \| 'critical'`                                                                          |
+| `DENIAL_OF_SERVICE, UNAUTHORISED_ACCESS, MALWARE, ABUSE, OTHERS`                                                       | `'denial_of_service' \| 'unauthorised_access' \| 'malware' \| 'abuse' \| 'others'`                                                                   |
+| `LOW, MEDIUM, HIGH, CRITICAL`                                                                                          | `'low' \| 'medium' \| 'high' \| 'critical'`                                                                                                          |
 
 ### 3.6 Attachments: reuse Task-level `Attachment`, no incident-scoped linking
 
@@ -147,7 +147,12 @@ export const incidentAttackTypes = [
 ] as const;
 export type IncidentAttackType = (typeof incidentAttackTypes)[number];
 
-export const incidentSeverities = ['low', 'medium', 'high', 'critical'] as const;
+export const incidentSeverities = [
+  'low',
+  'medium',
+  'high',
+  'critical',
+] as const;
 export type IncidentSeverity = (typeof incidentSeverities)[number];
 
 /** Flat object — see design decision §3.3. Stored at Task.properties.incident_report */
@@ -401,7 +406,9 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   if (!task) {
-    return res.status(400).json({ error: { message: 'Something went wrong!' } });
+    return res
+      .status(400)
+      .json({ error: { message: 'Something went wrong!' } });
   }
 
   trackServerEvent(
@@ -429,7 +436,9 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   if (!task) {
-    return res.status(400).json({ error: { message: 'Something went wrong!' } });
+    return res
+      .status(400)
+      .json({ error: { message: 'Something went wrong!' } });
   }
 
   return res.status(200).json({ data: {}, error: null });
@@ -444,25 +453,25 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
 
 RM validates inline via React Hook Form `rules={{ required: ... }}` per field (no schema library despite `yup`/`zod` being available in `package.json`). Incident Report has more conditional logic (unlawful-act / cross-border details required only when their checkbox is checked; handling date must not precede detection date) — still expressible with inline RHF rules using `validate` functions, keeping parity with RM's approach rather than introducing a schema library precedent this codebase doesn't otherwise use for module dialogs.
 
-| Field                      | Rule                                                                                 |
-| --------------------------- | ------------------------------------------------------------------------------------- |
-| `Status`                    | required, one of `incidentStatuses`                                                  |
-| `Classification`            | required, one of `incidentClassifications`                                           |
-| `AttackType`                | required, one of `incidentAttackTypes`                                               |
-| `Severity`                  | required, one of `incidentSeverities`                                                |
-| `AssetName`                 | optional, max 200 chars                                                              |
-| `ReporterId`                | required, must be a valid team member id                                             |
-| `DateOfDetection`           | required, not in the future                                                          |
-| `HandlingDate`               | optional; if set, must be `>= DateOfDetection`                                        |
-| `Description`               | required, max 2000 chars                                                             |
-| `Scope`                     | required, max 2000 chars                                                             |
-| `RootCause`                 | optional, max 2000 chars                                                             |
-| `CorrectiveActions`         | optional, max 2000 chars                                                             |
-| `PreventiveActions`         | optional, max 2000 chars                                                             |
-| `SuspectedUnlawfulAct`      | boolean, default `false`                                                             |
-| `UnlawfulActDescription`    | required **iff** `SuspectedUnlawfulAct === true`                                     |
-| `CrossBorderImpact`         | boolean, default `false`                                                             |
-| `CrossBorderImpactDetails`  | required **iff** `CrossBorderImpact === true`                                        |
+| Field                      | Rule                                             |
+| -------------------------- | ------------------------------------------------ |
+| `Status`                   | required, one of `incidentStatuses`              |
+| `Classification`           | required, one of `incidentClassifications`       |
+| `AttackType`               | required, one of `incidentAttackTypes`           |
+| `Severity`                 | required, one of `incidentSeverities`            |
+| `AssetName`                | optional, max 200 chars                          |
+| `ReporterId`               | required, must be a valid team member id         |
+| `DateOfDetection`          | required, not in the future                      |
+| `HandlingDate`             | optional; if set, must be `>= DateOfDetection`   |
+| `Description`              | required, max 2000 chars                         |
+| `Scope`                    | required, max 2000 chars                         |
+| `RootCause`                | optional, max 2000 chars                         |
+| `CorrectiveActions`        | optional, max 2000 chars                         |
+| `PreventiveActions`        | optional, max 2000 chars                         |
+| `SuspectedUnlawfulAct`     | boolean, default `false`                         |
+| `UnlawfulActDescription`   | required **iff** `SuspectedUnlawfulAct === true` |
+| `CrossBorderImpact`        | boolean, default `false`                         |
+| `CrossBorderImpactDetails` | required **iff** `CrossBorderImpact === true`    |
 
 ---
 
@@ -515,24 +524,37 @@ locales/en/incident.json                                # new — see §12
 
 Follows the sticky-footer flex dialog pattern mandated by `design.md` (`flex flex-col overflow-hidden` on `DialogContent`, `flex-1 min-h-0 overflow-y-auto` on the body, `DialogFooter` always visible) and the Stepper component (compact bar on mobile, dot stepper on `sm+`), exactly like `RmRiskDialog.tsx`.
 
-| Step | Shown when                       | i18n step key                | Fields                                                                 |
-| ---- | --------------------------------- | ------------------------------ | ------------------------------------------------------------------------ |
-| 0    | `!selectedTask` (creating fresh)  | *(no stepper label — task picker)* | `TaskPicker`, filtered to `tasks.filter(t => !t.properties?.incident_report)` |
-| 1    | always                             | `incidentDetails`               | Status, Classification, AttackType, Severity, AssetName, ReporterId, DateOfDetection, HandlingDate |
-| 2    | always                             | `descriptionAndScope`           | Description, Scope, RootCause                                          |
-| 3    | always                             | `responseAndRemediation`        | CorrectiveActions, PreventiveActions                                    |
-| 4    | always                             | `legalAndCrossBorder`           | SuspectedUnlawfulAct (+ conditional UnlawfulActDescription), CrossBorderImpact (+ conditional CrossBorderImpactDetails) |
+| Step | Shown when                       | i18n step key                      | Fields                                                                                                                  |
+| ---- | -------------------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| 0    | `!selectedTask` (creating fresh) | _(no stepper label — task picker)_ | `TaskPicker`, filtered to `tasks.filter(t => !t.properties?.incident_report)`                                           |
+| 1    | always                           | `incidentDetails`                  | Status, Classification, AttackType, Severity, AssetName, ReporterId, DateOfDetection, HandlingDate                      |
+| 2    | always                           | `descriptionAndScope`              | Description, Scope, RootCause                                                                                           |
+| 3    | always                           | `responseAndRemediation`           | CorrectiveActions, PreventiveActions                                                                                    |
+| 4    | always                           | `legalAndCrossBorder`              | SuspectedUnlawfulAct (+ conditional UnlawfulActDescription), CrossBorderImpact (+ conditional CrossBorderImpactDetails) |
 
 Component skeleton (mirrors `RmRiskDialog.tsx` state machine — task pick → sequential steps → submit on last step):
 
 ```tsx
-const steps = ['incidentDetails', 'descriptionAndScope', 'responseAndRemediation', 'legalAndCrossBorder'];
+const steps = [
+  'incidentDetails',
+  'descriptionAndScope',
+  'responseAndRemediation',
+  'legalAndCrossBorder',
+];
 
 export default function IncidentReportDialog({
-  prevReport, selectedTask, tasks, open, onOpenChange, completeCallback, mutateTasks,
+  prevReport,
+  selectedTask,
+  tasks,
+  open,
+  onOpenChange,
+  completeCallback,
+  mutateTasks,
 }: IncidentReportDialogProps) {
   const [currentStep, setCurrentStep] = React.useState(selectedTask ? 1 : 0);
-  const [reportData, setReportData] = React.useState<Partial<IncidentReportInterface>>(prevReport || {});
+  const [reportData, setReportData] = React.useState<
+    Partial<IncidentReportInterface>
+  >(prevReport || {});
   const [task, setTask] = React.useState<Task | null>(selectedTask || null);
 
   // step 0: TaskPicker -> setTask, currentStep = 1
@@ -546,18 +568,18 @@ Fields use existing shadcn primitives already used by RM's steps: `Select` (Stat
 
 ### 8.3 `IncidentsTable.tsx` — columns
 
-| Column         | Source                                              | Notes                                                            |
-| -------------- | ---------------------------------------------------- | ------------------------------------------------------------------ |
-| ID              | `INC-${task.taskNumber}`                            | deep-links to `/teams/${slug}/tasks/${task.taskNumber}`         |
-| Incident Name   | `task.title`                                        | `truncate`, `title` attr for full text                          |
-| Status          | `IncidentStatusBadge`                               | static color lookup, not dynamic Tailwind classes (design.md rule) |
-| Classification  | `t(`incident:classification.${value}`)`             | `truncate max-w-[150px]`                                          |
-| Attack Type     | `t(`incident:attack-type.${value}`)`                | `truncate max-w-[150px]`                                          |
-| Severity        | `IncidentSeverityBadge`                             |                                                                    |
-| Asset Name      | `AssetName ?? '—'`                                  |                                                                    |
-| Reporter        | `membersById.get(ReporterId)` (Map, not bracket access — per design.md RM rule) | falls back to `t('not-found')`                    |
-| Date of Detection | formatted short date                              |                                                                    |
-| Actions          | icon-only Edit (`Pencil`) + Delete (`Trash2`)        | `aria-label` per design.md's icon-button rule                    |
+| Column            | Source                                                                          | Notes                                                              |
+| ----------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| ID                | `INC-${task.taskNumber}`                                                        | deep-links to `/teams/${slug}/tasks/${task.taskNumber}`            |
+| Incident Name     | `task.title`                                                                    | `truncate`, `title` attr for full text                             |
+| Status            | `IncidentStatusBadge`                                                           | static color lookup, not dynamic Tailwind classes (design.md rule) |
+| Classification    | `t(`incident:classification.${value}`)`                                         | `truncate max-w-[150px]`                                           |
+| Attack Type       | `t(`incident:attack-type.${value}`)`                                            | `truncate max-w-[150px]`                                           |
+| Severity          | `IncidentSeverityBadge`                                                         |                                                                    |
+| Asset Name        | `AssetName ?? '—'`                                                              |                                                                    |
+| Reporter          | `membersById.get(ReporterId)` (Map, not bracket access — per design.md RM rule) | falls back to `t('not-found')`                                     |
+| Date of Detection | formatted short date                                                            |                                                                    |
+| Actions           | icon-only Edit (`Pencil`) + Delete (`Trash2`)                                   | `aria-label` per design.md's icon-button rule                      |
 
 Wrapped in the standard Direction B card + `overflow-x-auto` shell; empty state via `ModuleEmptyState`; paginated via `usePagination`.
 
@@ -593,7 +615,8 @@ New `IncidentSeverityBadge` / `IncidentStatusBadge` (static lookup tables, follo
 ```tsx
 const SEVERITY_CLASSES: Record<IncidentSeverity, string> = {
   low: 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300',
-  medium: 'bg-amber-100 dark:bg-amber-950/40 text-amber-800 dark:text-amber-400',
+  medium:
+    'bg-amber-100 dark:bg-amber-950/40 text-amber-800 dark:text-amber-400',
   high: 'bg-orange-100 dark:bg-orange-950/40 text-orange-800 dark:text-orange-400',
   critical: 'bg-red-100 dark:bg-red-950/40 text-red-800 dark:text-red-400',
 };
@@ -601,11 +624,15 @@ const SEVERITY_CLASSES: Record<IncidentSeverity, string> = {
 const STATUS_CLASSES: Record<IncidentStatus, string> = {
   pending: 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300',
   start: 'bg-blue-100 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400',
-  declared: 'bg-amber-100 dark:bg-amber-950/40 text-amber-800 dark:text-amber-400',
+  declared:
+    'bg-amber-100 dark:bg-amber-950/40 text-amber-800 dark:text-amber-400',
   stable: 'bg-blue-100 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400',
-  active: 'bg-amber-100 dark:bg-amber-950/40 text-amber-800 dark:text-amber-400',
-  resolved: 'bg-green-100 dark:bg-green-950/40 text-green-800 dark:text-green-400',
-  completed: 'bg-green-100 dark:bg-green-950/40 text-green-800 dark:text-green-400',
+  active:
+    'bg-amber-100 dark:bg-amber-950/40 text-amber-800 dark:text-amber-400',
+  resolved:
+    'bg-green-100 dark:bg-green-950/40 text-green-800 dark:text-green-400',
+  completed:
+    'bg-green-100 dark:bg-green-950/40 text-green-800 dark:text-green-400',
 };
 ```
 
@@ -619,13 +646,13 @@ Both rendered as `rounded-full px-2 py-0.5 text-[11px] font-semibold`, matching 
 
 ## 9. Navigation & Routing
 
-| File                                                          | Change                                                                                                    |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `pages/teams/[slug]/incident-management.tsx`                    | **New.** Module page, same shape as `risk-management.tsx`.                                                |
-| `components/shared/shell/TeamNavigation.tsx`                    | Add nav entry (icon + label `t('incident-management')`) with a badge counting open incidents (status in `OPEN_INCIDENT_STATUSES`), same pattern as the existing `rm` entry (lines ~129-137). |
-| `pages/teams/[slug]/tasks/[taskNumber]/index.tsx`               | Add `IncidentReportDialog` trigger + `TaskPanel` render block, following the existing TIA/PIA/RM blocks (reads `(task.properties as TaskProperties)?.incident_report`). |
-| `components/interfaces/Task/TaskFilters.tsx`                    | Add `incident_report: 'INC'` to the All-Tasks module filter map (line ~9 area).                            |
-| `components/shared/shell/GlobalSearch.tsx`                      | Add an `incident` search key + snippet builder (mirrors the RM block at lines ~127-131 and ~227-231): match on `Description`, `Scope`, `AssetName`. |
+| File                                              | Change                                                                                                                                                                                       |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pages/teams/[slug]/incident-management.tsx`      | **New.** Module page, same shape as `risk-management.tsx`.                                                                                                                                   |
+| `components/shared/shell/TeamNavigation.tsx`      | Add nav entry (icon + label `t('incident-management')`) with a badge counting open incidents (status in `OPEN_INCIDENT_STATUSES`), same pattern as the existing `rm` entry (lines ~129-137). |
+| `pages/teams/[slug]/tasks/[taskNumber]/index.tsx` | Add `IncidentReportDialog` trigger + `TaskPanel` render block, following the existing TIA/PIA/RM blocks (reads `(task.properties as TaskProperties)?.incident_report`).                      |
+| `components/interfaces/Task/TaskFilters.tsx`      | Add `incident_report: 'INC'` to the All-Tasks module filter map (line ~9 area).                                                                                                              |
+| `components/shared/shell/GlobalSearch.tsx`        | Add an `incident` search key + snippet builder (mirrors the RM block at lines ~127-131 and ~227-231): match on `Description`, `Scope`, `AssetName`.                                          |
 
 ---
 
@@ -816,44 +843,44 @@ Applying `design.md`'s mandatory checklists to this module specifically:
 
 ## 15. Testing Plan
 
-| Test                                                                 | Mirrors                                             |
-| ---------------------------------------------------------------------- | ------------------------------------------------------ |
-| `__tests__/lib/tasks/status-keys.spec.ts` — add `incident_report` to the module-key assertions | existing `rm_risk` coverage                          |
-| `pages/api/teams/[slug]/tasks/[taskNumber]/incident.spec.ts` — POST create/update, DELETE, 404/400 cases, 405 for GET | `pages/api/teams/tasks/taskNumber.spec.ts` pattern    |
-| Playwright: incident create → appears in table → task detail panel shows it → delete removes it | `tasks/task-management.spec.ts` pattern              |
-| Manual: non-English locale check — no raw i18n keys rendered for status/severity/classification/attack-type labels | design.md's "Test Requirements Before Production" #4 |
-| Manual: dialog footer visible without scrolling at 375px and 1280px, at every step | design.md's "Test Requirements Before Production" #5 |
+| Test                                                                                                                  | Mirrors                                              |
+| --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| `__tests__/lib/tasks/status-keys.spec.ts` — add `incident_report` to the module-key assertions                        | existing `rm_risk` coverage                          |
+| `pages/api/teams/[slug]/tasks/[taskNumber]/incident.spec.ts` — POST create/update, DELETE, 404/400 cases, 405 for GET | `pages/api/teams/tasks/taskNumber.spec.ts` pattern   |
+| Playwright: incident create → appears in table → task detail panel shows it → delete removes it                       | `tasks/task-management.spec.ts` pattern              |
+| Manual: non-English locale check — no raw i18n keys rendered for status/severity/classification/attack-type labels    | design.md's "Test Requirements Before Production" #4 |
+| Manual: dialog footer visible without scrolling at 375px and 1280px, at every step                                    | design.md's "Test Requirements Before Production" #5 |
 
 ---
 
 ## 16. File Change Checklist
 
-| File                                                                                   | Action | Notes                                    |
-| ----------------------------------------------------------------------------------------- | ------ | ------------------------------------------- |
-| `types/incident.ts`                                                                       | Add    | §4.1                                       |
-| `types/base.ts`                                                                            | Modify | add `TaskIncidentProperties` to intersection |
-| `lib/tasks.ts`                                                                             | Modify | `taskModuleKeys` +1                        |
-| `lib/incident/index.ts`, `helpers.ts`                                                      | Add    | §5, §8.6                                    |
-| `models/incident.ts`                                                                       | Add    | §5                                          |
-| `pages/api/teams/[slug]/tasks/[taskNumber]/incident.ts`                                    | Add    | §6                                          |
-| `lib/matomo/events.ts`                                                                     | Modify | `IncidentCreated`/`IncidentUpdated`         |
-| `components/interfaces/incident-management/**`                                            | Add    | §8.1                                        |
-| `components/shared/ModuleBadge.tsx`                                                        | Modify | §8.6                                        |
-| `components/shared/IncidentStatusBadge.tsx`, `IncidentSeverityBadge.tsx`                   | Add    | §8.6                                        |
-| `components/shared/shell/TeamNavigation.tsx`                                               | Modify | §9                                          |
-| `components/shared/shell/GlobalSearch.tsx`                                                 | Modify | §9                                          |
-| `components/interfaces/Task/TaskFilters.tsx`                                               | Modify | §9                                          |
-| `components/interfaces/TeamDashboard/ActionRequiredBanner.tsx`                             | Modify | §10.1                                       |
-| `lib/tasks/exportTasks.ts`                                                                  | Modify | §10.1                                       |
-| `pages/teams/[slug]/incident-management.tsx`                                               | Add    | §9                                          |
-| `pages/teams/[slug]/tasks/[taskNumber]/index.tsx`                                          | Modify | §9                                          |
-| `locales/en/incident.json` (+ 6 other locales)                                             | Add    | §12                                          |
-| `locales/en/common.json` (+ 6 other locales)                                               | Modify | §12.2                                        |
-| `src/mcp-server/src/tools/incidents.ts`                                                     | Add    | §14                                          |
-| `src/mcp-server/src/services/api.ts`                                                        | Modify | §14                                          |
-| `__tests__/lib/tasks/status-keys.spec.ts`                                                   | Modify | §15                                          |
-| `pages/api/teams/[slug]/tasks/[taskNumber]/incident.spec.ts`                                | Add    | §15                                          |
-| `prisma/schema.prisma`                                                                       | **No change** | §3.1                                  |
+| File                                                                     | Action        | Notes                                        |
+| ------------------------------------------------------------------------ | ------------- | -------------------------------------------- |
+| `types/incident.ts`                                                      | Add           | §4.1                                         |
+| `types/base.ts`                                                          | Modify        | add `TaskIncidentProperties` to intersection |
+| `lib/tasks.ts`                                                           | Modify        | `taskModuleKeys` +1                          |
+| `lib/incident/index.ts`, `helpers.ts`                                    | Add           | §5, §8.6                                     |
+| `models/incident.ts`                                                     | Add           | §5                                           |
+| `pages/api/teams/[slug]/tasks/[taskNumber]/incident.ts`                  | Add           | §6                                           |
+| `lib/matomo/events.ts`                                                   | Modify        | `IncidentCreated`/`IncidentUpdated`          |
+| `components/interfaces/incident-management/**`                           | Add           | §8.1                                         |
+| `components/shared/ModuleBadge.tsx`                                      | Modify        | §8.6                                         |
+| `components/shared/IncidentStatusBadge.tsx`, `IncidentSeverityBadge.tsx` | Add           | §8.6                                         |
+| `components/shared/shell/TeamNavigation.tsx`                             | Modify        | §9                                           |
+| `components/shared/shell/GlobalSearch.tsx`                               | Modify        | §9                                           |
+| `components/interfaces/Task/TaskFilters.tsx`                             | Modify        | §9                                           |
+| `components/interfaces/TeamDashboard/ActionRequiredBanner.tsx`           | Modify        | §10.1                                        |
+| `lib/tasks/exportTasks.ts`                                               | Modify        | §10.1                                        |
+| `pages/teams/[slug]/incident-management.tsx`                             | Add           | §9                                           |
+| `pages/teams/[slug]/tasks/[taskNumber]/index.tsx`                        | Modify        | §9                                           |
+| `locales/en/incident.json` (+ 6 other locales)                           | Add           | §12                                          |
+| `locales/en/common.json` (+ 6 other locales)                             | Modify        | §12.2                                        |
+| `src/mcp-server/src/tools/incidents.ts`                                  | Add           | §14                                          |
+| `src/mcp-server/src/services/api.ts`                                     | Modify        | §14                                          |
+| `__tests__/lib/tasks/status-keys.spec.ts`                                | Modify        | §15                                          |
+| `pages/api/teams/[slug]/tasks/[taskNumber]/incident.spec.ts`             | Add           | §15                                          |
+| `prisma/schema.prisma`                                                   | **No change** | §3.1                                         |
 
 ---
 
@@ -862,6 +889,7 @@ Applying `design.md`'s mandatory checklists to this module specifically:
 **Phase 1 (MVP, this spec's primary deliverable):** §4–§9, §10.1, §12–§15. Feature is fully usable: create/edit/delete incident reports on any Task, see them in a dedicated module page and the All-Tasks list, filter/search them, MCP access.
 
 **Phase 2 (follow-up, requires separate sign-off):**
+
 - Dashboard KPI/Domain-Health placement (§10.3) — needs a layout decision
 - `IncidentSeverityChart` and any additional charts
 - Bulk import (mirrors `pages/api/teams/[slug]/rm/import.ts`)
@@ -874,28 +902,28 @@ No feature flag is needed — this is purely additive (new optional Task propert
 
 ## 18. Appendix — OSCRAT → Unicis Field Mapping
 
-| OSCRAT (`OscratIncidentDetail`) | Unicis (`IncidentReportInterface`) | Disposition                                                    |
-| ---------------------------------- | -------------------------------------- | ------------------------------------------------------------------ |
-| `id` (uuid)                        | —                                       | replaced by `Task.taskNumber` (§3.2)                              |
-| `name`                             | —                                       | replaced by `Task.title` (§3.2)                                   |
-| `status`                           | `Status`                               | kept, lowercased (§3.5)                                            |
-| `classification`                   | `Classification`                       | kept, lowercased                                                   |
-| `attackType`                       | `AttackType`                           | kept, lowercased                                                   |
-| `assetDetails`                     | *(dropped, replaced)*                  | replaced by the new, simpler `AssetName` short-text field per user request |
-| —                                   | `AssetName`                            | **new field**, user-requested, optional short text                 |
-| `severity`                         | `Severity`                             | kept, lowercased                                                   |
-| `dateOfDetection`                  | `DateOfDetection`                      | kept                                                                |
-| `handlingDate`                     | `HandlingDate`                         | kept                                                                |
-| `description`                      | `Description`                          | kept                                                                |
-| `correctiveActions`                | `CorrectiveActions`                    | kept                                                                |
-| `rootCause`                        | `RootCause`                            | kept                                                                |
-| `scope`                            | `Scope`                                | kept                                                                |
-| `preventiveActions`                | `PreventiveActions`                    | kept                                                                |
-| `suspectedUnlawfulAct`             | `SuspectedUnlawfulAct`                 | kept                                                                |
-| `unlawfulActDescription`           | `UnlawfulActDescription`               | kept                                                                |
-| `crossBorderImpact`                | `CrossBorderImpact`                    | kept                                                                |
-| `crossBorderImpactDetails`         | `CrossBorderImpactDetails`             | kept                                                                |
-| `reporter` (User relation)         | `ReporterId` (userId string)           | simplified to an id, resolved via `useTeamMembersMap` like RM's `AssetOwner` |
-| `createdByUser` / `updatedByUser`  | —                                       | redundant with the existing generic audit log's `actor` field       |
-| `attachments`                      | —                                       | reuses Task-level attachments (§3.6), no incident-scoped list       |
-| `createdAt` / `updatedAt` / `createdBy` / `updatedBy` | —                | redundant with Task's own timestamps + audit log                    |
+| OSCRAT (`OscratIncidentDetail`)                       | Unicis (`IncidentReportInterface`) | Disposition                                                                  |
+| ----------------------------------------------------- | ---------------------------------- | ---------------------------------------------------------------------------- |
+| `id` (uuid)                                           | —                                  | replaced by `Task.taskNumber` (§3.2)                                         |
+| `name`                                                | —                                  | replaced by `Task.title` (§3.2)                                              |
+| `status`                                              | `Status`                           | kept, lowercased (§3.5)                                                      |
+| `classification`                                      | `Classification`                   | kept, lowercased                                                             |
+| `attackType`                                          | `AttackType`                       | kept, lowercased                                                             |
+| `assetDetails`                                        | _(dropped, replaced)_              | replaced by the new, simpler `AssetName` short-text field per user request   |
+| —                                                     | `AssetName`                        | **new field**, user-requested, optional short text                           |
+| `severity`                                            | `Severity`                         | kept, lowercased                                                             |
+| `dateOfDetection`                                     | `DateOfDetection`                  | kept                                                                         |
+| `handlingDate`                                        | `HandlingDate`                     | kept                                                                         |
+| `description`                                         | `Description`                      | kept                                                                         |
+| `correctiveActions`                                   | `CorrectiveActions`                | kept                                                                         |
+| `rootCause`                                           | `RootCause`                        | kept                                                                         |
+| `scope`                                               | `Scope`                            | kept                                                                         |
+| `preventiveActions`                                   | `PreventiveActions`                | kept                                                                         |
+| `suspectedUnlawfulAct`                                | `SuspectedUnlawfulAct`             | kept                                                                         |
+| `unlawfulActDescription`                              | `UnlawfulActDescription`           | kept                                                                         |
+| `crossBorderImpact`                                   | `CrossBorderImpact`                | kept                                                                         |
+| `crossBorderImpactDetails`                            | `CrossBorderImpactDetails`         | kept                                                                         |
+| `reporter` (User relation)                            | `ReporterId` (userId string)       | simplified to an id, resolved via `useTeamMembersMap` like RM's `AssetOwner` |
+| `createdByUser` / `updatedByUser`                     | —                                  | redundant with the existing generic audit log's `actor` field                |
+| `attachments`                                         | —                                  | reuses Task-level attachments (§3.6), no incident-scoped list                |
+| `createdAt` / `updatedAt` / `createdBy` / `updatedBy` | —                                  | redundant with Task's own timestamps + audit log                             |

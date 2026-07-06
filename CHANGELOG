@@ -15,7 +15,7 @@ tags:
 
 The information about Unicis Platform releases and changes is listed in order below.
 
-## [Library updates and Bug fixes] 2026-07-08
+## [Library updates, Compliance hardening and  Bug fixes] 2026-07-08
 
 *Release date: 2026-07-08*
 
@@ -31,6 +31,13 @@ The information about Unicis Platform releases and changes is listed in order be
   - **[XSS-01 / CWE-601]** Added `sandbox="allow-scripts allow-same-origin allow-fullscreen"` to the IAP course content iframe, preventing sandboxed content from navigating the top frame or accessing cookies
   - **[XSS-02 / CWE-79]** `MarkdownPreview` now overrides the `a` component to rewrite any `href` that does not match `https?:`, `mailto:`, `#`, or `/` to `#`, blocking stored `javascript:` hrefs from executing in rendered markdown
   - **[Quill CVE]** Pinned `quill` to `2.0.2` (direct dependency + `overrides` entry) to block the XSS vulnerability present in `2.0.3`; the override covers transitive consumers `react-quill-new` and `quill-markdown-shortcuts`
+  - Updated regulatory compliance assessment (GDPR, SOC 2, ISO 27001:2022, NIS2) — GDPR Controller score raised 52 → 58/100 reflecting the public Right to Erasure Request Form at https://handbook.unicis.tech/pub/erasure-request-form
+  - Retraced audit log correctly identified as self-hosted (not external); ULTIMATE-plan-only scope documented as an intentional product decision pending future expansion
+  - CSP `connect-src` comment corrected — removed stale Sentry/Mixpanel references; now accurately lists Matomo (self-hosted), GlitchTip (EU-hosted), and OVH AI endpoint
+- Fixed
+  - TypeScript error in `components/shared/uiw/Markdown.tsx` — `safeComponents` now typed as `Components` from `react-markdown` instead of an inlined anonymous object type, resolving the TS compiler error at line 54
+  - TypeScript error in `pages/api/auth/[...nextauth].ts` — `PrismaAdapter` call now casts `prisma` to the adapter's own parameter type to accommodate the custom Prisma client output path; resolves the TS compiler error at line 23 without widening to `any`
+  - `next-env.d.ts` route type reference updated from `.next/dev/types/routes.d.ts` to `.next/types/routes.d.ts` (production build path)
 - Fixed
   - Duplicate module page titles on Risk Management, Privacy Impact Assessment, Transfer Impact Assessment, Record of Processing Activities, Interactive Awareness Training, and Cybersecurity Management System — the sticky header and each module's own dashboard were both rendering a title
   - Record of Processing Activities had two different names shown across the app ("Record of Processing Activities" vs "Register of Procedures"); unified on the former
