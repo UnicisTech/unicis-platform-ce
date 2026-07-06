@@ -17,6 +17,7 @@ import { isAuthProviderEnabled } from '@/lib/auth';
 import { validateRecaptcha } from '@/lib/recaptcha';
 import rateLimit from '@/lib/rate-limit';
 import { getIpAddress } from '@/lib/utils';
+import { sessionTokenCookieName } from '@/lib/cookie';
 // import { sendMagicLink } from '@/lib/email/sendMagicLink';
 
 const adapter = PrismaAdapter(prisma);
@@ -131,31 +132,7 @@ if (isAuthProviderEnabled('saml')) {
 //   );
 // }
 
-// const cookiesOptions: Partial<Pick<NextAuthOptions, 'cookies'>> =
-//   process.env.NODE_ENV === 'production'
-//     ? {
-//         cookies: {
-//           sessionToken: {
-//             name: `__Secure-next-auth.session-token`,
-//             options: {
-//               httpOnly: true,
-//               sameSite: 'lax',
-//               path: '/',
-//               secure: true,
-//             },
-//           },
-//           csrfToken: {
-//             name: `__Host-next-auth.csrf-token`,
-//             options: {
-//               httpOnly: true,
-//               sameSite: 'lax',
-//               path: '/',
-//               secure: true,
-//             },
-//           },
-//         },
-//       }
-//     : {};
+const useSecureCookie = env.appUrl.startsWith('https://');
 
 export const authOptions: NextAuthOptions = {
   adapter,
@@ -167,7 +144,17 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
-  // ...cookiesOptions,
+  cookies: {
+    sessionToken: {
+      name: sessionTokenCookieName,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: useSecureCookie,
+      },
+    },
+  },
   secret: env.nextAuth.secret,
   callbacks: {
     async signIn({ user, account, profile }) {

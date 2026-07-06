@@ -15,7 +15,10 @@ const redirects = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
+  outputFileTracingIncludes: {
+    '/api/**': ['./node_modules/openid-client/**', './node_modules/jose/**'],
+  },
   images: {
     domains: ['platform.unicis.tech'],
     unoptimized: true,
