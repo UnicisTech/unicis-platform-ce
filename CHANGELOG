@@ -35,15 +35,14 @@ The information about Unicis Platform releases and changes is listed in order be
   - Retraced audit log correctly identified as self-hosted (not external); ULTIMATE-plan-only scope documented as an intentional product decision pending future expansion
   - CSP `connect-src` comment corrected — removed stale Sentry/Mixpanel references; now accurately lists Matomo (self-hosted), GlitchTip (EU-hosted), and OVH AI endpoint
 - Fixed
-  - TypeScript error in `components/shared/uiw/Markdown.tsx` — `safeComponents` now typed as `Components` from `react-markdown` instead of an inlined anonymous object type, resolving the TS compiler error at line 54
-  - TypeScript error in `pages/api/auth/[...nextauth].ts` — `PrismaAdapter` call now casts `prisma` to the adapter's own parameter type to accommodate the custom Prisma client output path; resolves the TS compiler error at line 23 without widening to `any`
-  - `next-env.d.ts` route type reference updated from `.next/dev/types/routes.d.ts` to `.next/types/routes.d.ts` (production build path)
-- Fixed
   - Duplicate module page titles on Risk Management, Privacy Impact Assessment, Transfer Impact Assessment, Record of Processing Activities, Interactive Awareness Training, and Cybersecurity Management System — the sticky header and each module's own dashboard were both rendering a title
   - Record of Processing Activities had two different names shown across the app ("Record of Processing Activities" vs "Register of Procedures"); unified on the former
   - Cybersecurity Management System had no record-count badge on its page heading or sidebar entry
   - All Tasks sidebar and page title now show a total task count (previously only showed a badge when tasks were overdue)
   - Task detail page had its own inline breadcrumb and title, inconsistent with every other module; now shown as "All Tasks [count] › # - Task name" in the shared header, matching the same pattern
+  - TypeScript error in `components/shared/uiw/Markdown.tsx` — `safeComponents` now typed as `Components` from `react-markdown` instead of an inlined anonymous object type, resolving the TS compiler error at line 54
+  - TypeScript error in `pages/api/auth/[...nextauth].ts` — `PrismaAdapter` call now casts `prisma` to the adapter's own parameter type to accommodate the custom Prisma client output path; resolves the TS compiler error at line 23 without widening to `any`
+  - `next-env.d.ts` route type reference updated from `.next/dev/types/routes.d.ts` to `.next/types/routes.d.ts` (production build path)
 - Enhancements
   - Module title and record-count badge moved out of each module's content area and into the shared sticky header, positioned to the left of the search field, for RPA, TIA, PIA, RM, IAP, and CSC — frees a full row of vertical space on every module page
   - Settings sub-pages (Settings, Billing, Members, Training, Single Sign-On, Directory Sync, Audit Logs, Webhooks, API Keys) now show "Settings: {team name}" in the header instead of repeating the team name as an in-content heading on every tab
