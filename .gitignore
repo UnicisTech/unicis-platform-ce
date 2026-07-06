@@ -60,4 +60,5 @@ yarn-error.log*
 .eslintcache
 
 .vscode
+.security-hardening/
 certificates
