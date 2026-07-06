@@ -10,6 +10,9 @@ import { Lock } from 'lucide-react';
 export const MAPPING_MATRIX_TAB = '__mapping_matrix__' as const;
 export type ActiveCscTab = ISO | typeof MAPPING_MATRIX_TAB;
 
+/** Short, URL-friendly value used for the Mapping Matrix tab in ?framework= */
+export const MATRIX_QUERY_VALUE = 'matrix' as const;
+
 // ── Grid icon (inline SVG, keeps no extra dependency) ─────────────────────────
 function GridIcon({ className }: { className?: string }) {
   return (

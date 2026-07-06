@@ -1,6 +1,11 @@
 import type { Team } from 'types';
-import CscTabs, { MAPPING_MATRIX_TAB, type ActiveCscTab } from './CscTabs';
-import { useState } from 'react';
+import CscTabs, {
+  MAPPING_MATRIX_TAB,
+  MATRIX_QUERY_VALUE,
+  type ActiveCscTab,
+} from './CscTabs';
+import { useCallback } from 'react';
+import { useRouter } from 'next/router';
 import { ISO } from 'types';
 import useISO from 'hooks/useISO';
 import { Loading } from '@/components/shared';
@@ -9,8 +14,35 @@ import MappingMatrixPanel from './MappingMatrixPanel';
 import useTeamTasks from 'hooks/useTeamTasks';
 
 const Dashboard = ({ team, iso }: { team: Team; iso: ISO[] }) => {
-  const [activeTab, setActiveTab] = useState<ActiveCscTab>(iso[0]);
+  const router = useRouter();
   const { tasks, mutateTasks } = useTeamTasks(team.slug);
+
+  // Active framework lives in the URL (?framework=) rather than local state so
+  // the shell Header can read it too and size its record-count badge to match.
+  const frameworkQuery = router.query.framework as string | undefined;
+  const activeTab: ActiveCscTab =
+    frameworkQuery === MATRIX_QUERY_VALUE
+      ? MAPPING_MATRIX_TAB
+      : frameworkQuery && iso.includes(frameworkQuery as ISO)
+        ? (frameworkQuery as ISO)
+        : iso[0];
+
+  const setActiveTab = useCallback(
+    (tab: ActiveCscTab) => {
+      router.replace(
+        {
+          pathname: router.pathname,
+          query: {
+            ...router.query,
+            framework: tab === MAPPING_MATRIX_TAB ? MATRIX_QUERY_VALUE : tab,
+          },
+        },
+        undefined,
+        { shallow: true }
+      );
+    },
+    [router]
+  );
 
   if (!tasks) {
     return <Loading />;

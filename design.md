@@ -664,29 +664,45 @@ className =
 
 Component: `components/shared/ModuleBadge.tsx`
 
-### Module Page Heading with Record Count
+### Module Title + Record Count (sticky shell Header)
 
-Every module dashboard includes a heading bar above the toolbar:
+The module title and its record-count badge live in **one place only**: the sticky shell `Header` (`components/shared/shell/Header.tsx`), immediately left of the search button. Module dashboards do **not** render their own `<h1>` — this used to duplicate the title and cost a row of vertical space on every page; that heading bar was removed from RPA/TIA/PIA/RM/IAP/CSC so each module's content starts directly with its toolbar.
+
+`Header`'s `useModuleTitle()` hook maps the current route to a `{ title, count }` pair and fetches whatever data each module needs to size its count (team tasks, IAP courses, enabled CSC frameworks):
 
 ```tsx
-<div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
-  <div className="flex items-center gap-2">
-    <h1 className="text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-      {t('module-name')}
-    </h1>
-    {count > 0 && (
-      <span className="text-[11px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
-        {count}
+{
+  title && (
+    <span className="flex items-center gap-2 min-w-0">
+      <span className="truncate text-[14px] font-medium text-slate-900 dark:text-slate-100 tracking-tight">
+        {title}
       </span>
-    )}
-  </div>
-  <div className="flex items-center gap-2 flex-wrap">
-    {/* toolbar buttons */}
-  </div>
-</div>
+      {count > 0 && (
+        <span className="flex-shrink-0 text-[11px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
+          {count}
+        </span>
+      )}
+    </span>
+  );
+}
 ```
 
-Applied to: RPA, TIA, PIA, RM, IAP.
+Counts by route:
+
+| Route               | Count meaning                                                                                                                                |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/tasks`            | Total tasks in the team                                                                                                                      |
+| `/rpa`              | Tasks with an `rpa_procedure`                                                                                                                |
+| `/tia`              | Tasks with a `tia_procedure`                                                                                                                 |
+| `/pia`              | Tasks with a `pia_risk`                                                                                                                      |
+| `/risk-management`  | Tasks with an `rm_risk`                                                                                                                      |
+| `/iap`              | Total courses (`useIap`)                                                                                                                     |
+| `/csc`              | Controls in the currently selected framework tab only (`useCscIso` + `lib/csc/frameworks`), hidden on the cross-framework Mapping Matrix tab |
+| Dashboard, Settings | No count                                                                                                                                     |
+
+Sidebar nav badges (`NavigationItems.tsx`) use a third `neutral` variant (grey, `bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400`) for this same "total items" meaning on RPA/TIA/PIA/IAP nav items, distinct from the existing `red`/`amber` "needs attention" badges (overdue tasks, open risks, unmapped CSC controls) on Tasks/RM/CSC.
+
+The active CSC framework tab is local UI state owned by `Dashboards.tsx`, which the Header can't otherwise see, so it's synced to the URL as `?framework=<iso>` (or `MATRIX_QUERY_VALUE` for the Mapping Matrix tab) via `router.replace(..., { shallow: true })` — the same pattern `CscPanel.tsx` already uses for its section/status/perPage filters. This also makes a specific framework tab deep-linkable/bookmarkable, and the Header's count updates live as the user switches tabs.
 
 ### Icon-Only Action Buttons (Table Actions)
 
