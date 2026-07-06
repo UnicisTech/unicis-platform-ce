@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
-import { Bars3Icon } from '@heroicons/react/24/outline';
+import { Bars3Icon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import AccountDropdown from './AccountDropdown';
 import NotificationBell from '@/components/notifications/NotificationBell';
 import GlobalSearch from './GlobalSearch';
@@ -15,7 +16,16 @@ import { MATRIX_QUERY_VALUE } from '@/components/interfaces/csc/CscTabs';
 import type { ISO } from 'types';
 
 // ── Route → display title + record count ─────────────────────────────────────
-function useModuleTitle(): { title: string; count: number } {
+interface ModuleTitle {
+  title: string;
+  count: number;
+  /** Second breadcrumb segment, e.g. "3 - Task test" on a task detail page */
+  subTitle?: string;
+  /** href for the {title} segment when a subTitle is present, so it stays a link back */
+  titleHref?: string;
+}
+
+function useModuleTitle(): ModuleTitle {
   const { t } = useTranslation('common');
   const { asPath, query, isReady } = useRouter();
   const slug = (query.slug as string) || '';
@@ -81,6 +91,22 @@ function useModuleTitle(): { title: string; count: number } {
       return { title: t('team-dashboard'), count: 0 };
     if (relative.startsWith('/dashboard'))
       return { title: t('team-dashboard'), count: 0 };
+    // Task detail page: "All Tasks [count] › 3 - Task name" breadcrumb, in
+    // place of the in-content title + breadcrumb every other module dropped.
+    const taskDetailMatch = relative.match(/^\/tasks\/(\d+)/);
+    if (taskDetailMatch) {
+      const matchedTask = tasks?.find(
+        (tk) => String(tk.taskNumber) === taskDetailMatch[1]
+      );
+      return {
+        title: t('all-tasks'),
+        count: tasks?.length ?? 0,
+        subTitle: matchedTask
+          ? `${matchedTask.taskNumber} - ${matchedTask.title}`
+          : undefined,
+        titleHref: `/teams/${slug}/tasks`,
+      };
+    }
     if (relative.startsWith('/tasks'))
       return { title: t('all-tasks'), count: tasks?.length ?? 0 };
     if (relative.startsWith('/rpa'))
@@ -129,7 +155,7 @@ interface HeaderProps {
 const Header = ({ setSidebarOpen }: HeaderProps) => {
   const { t } = useTranslation('common');
   const { status } = useSession();
-  const { title, count } = useModuleTitle();
+  const { title, count, subTitle, titleHref } = useModuleTitle();
 
   if (status === 'loading') {
     return null;
@@ -149,14 +175,36 @@ const Header = ({ setSidebarOpen }: HeaderProps) => {
         </button>
 
         {title && (
-          <span className="flex items-center gap-2 min-w-0">
-            <span className="truncate text-[14px] font-medium text-slate-900 dark:text-slate-100 tracking-tight">
-              {title}
+          <span className="flex items-center gap-1.5 min-w-0">
+            <span className="flex-shrink-0 flex items-center gap-2">
+              {titleHref ? (
+                <Link
+                  href={titleHref}
+                  className="text-[14px] font-medium text-slate-900 dark:text-slate-100 tracking-tight hover:underline"
+                >
+                  {title}
+                </Link>
+              ) : (
+                <span className="text-[14px] font-medium text-slate-900 dark:text-slate-100 tracking-tight">
+                  {title}
+                </span>
+              )}
+              {count > 0 && (
+                <span className="text-[11px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
+                  {count}
+                </span>
+              )}
             </span>
-            {count > 0 && (
-              <span className="flex-shrink-0 text-[11px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
-                {count}
-              </span>
+            {subTitle && (
+              <>
+                <ChevronRightIcon
+                  className="h-3.5 w-3.5 flex-shrink-0 text-slate-300 dark:text-slate-600"
+                  aria-hidden="true"
+                />
+                <span className="truncate text-[14px] font-medium text-slate-900 dark:text-slate-100 tracking-tight">
+                  {subTitle}
+                </span>
+              </>
             )}
           </span>
         )}

@@ -12,6 +12,7 @@
 ![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/UnicisTech)
 ![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F?logo=LinkedIn&label=LinkedIn&link=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F)
 ![Discord](https://img.shields.io/discord/1110270854824214589)
+<a href="https://hosted.weblate.org/engage/unicis-platform/"><img src="https://hosted.weblate.org/widget/unicis-platform/svg-badge.svg" alt="Translation status"></a>
 
 Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs. Built for CISOs, DPOs, DevSecOps, and compliance teams who need one place to manage privacy, cybersecurity controls, and risk.
 

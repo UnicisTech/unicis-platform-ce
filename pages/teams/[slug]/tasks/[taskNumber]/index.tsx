@@ -42,7 +42,6 @@ import {
   PiaPanel,
   PiaAuditLogs,
 } from '@/components/interfaces/pia';
-import Breadcrumb from '../../Breadcrumb';
 import useRpaCreation from 'hooks/useRpaCreation';
 import { Button } from '@/components/shadcn/ui/button';
 import type {
@@ -104,20 +103,11 @@ const TaskById = () => {
 
   return (
     <>
-      <Breadcrumb
-        taskTitle={task.title}
-        backTo={`/teams/${slug}/tasks`}
-        teamName={slug}
-        taskNumber={taskNumber}
-      />
-
-      {/* Task title */}
-      <div className="flex items-center gap-2 mb-3">
-        <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
-          {task.title}
-        </h3>
-        {task.recurrenceScheduleId && <TaskRecurrenceBadge />}
-      </div>
+      {task.recurrenceScheduleId && (
+        <div className="flex items-center gap-2 mb-3">
+          <TaskRecurrenceBadge />
+        </div>
+      )}
 
       {/* Module tabs */}
       <TaskTab activeTab={activeTab} setActiveTab={setActiveTab} />

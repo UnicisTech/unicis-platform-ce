@@ -15,6 +15,28 @@ tags:
 
 The information about Unicis Platform releases and changes is listed in order below.
 
+## [Library updates and Bug fixes] 2026-07-08
+
+*Release date: 2026-07-08*
+
+- Security & Dependency Updates
+  - Patched Critical/High vulnerabilities found in a Grype scan of the SBOM: `ws`, `form-data`, `protobufjs`, `hono`, `@grpc/grpc-js`, and `i18next-fs-backend` bumped to their fixed versions
+  - `xlsx` switched from the abandoned npm registry package (0.18.5, unpatched ReDoS/prototype-pollution CVEs) to SheetJS's own CDN distribution (0.20.3), which contains the actual fixes
+  - `daisyUI` upgraded 5.5.19 → 5.6.13 — compiled-CSS diffed against the previous version to confirm no breaking changes to classes used in this app
+  - Added [`.well-known/security.txt`](https://securitytxt.org/) with our disclosure contact, policy, and OpenBugBounty program links
+- Fixed
+  - Duplicate module page titles on Risk Management, Privacy Impact Assessment, Transfer Impact Assessment, Record of Processing Activities, Interactive Awareness Training, and Cybersecurity Management System — the sticky header and each module's own dashboard were both rendering a title
+  - Record of Processing Activities had two different names shown across the app ("Record of Processing Activities" vs "Register of Procedures"); unified on the former
+  - Cybersecurity Management System had no record-count badge on its page heading or sidebar entry
+  - All Tasks sidebar and page title now show a total task count (previously only showed a badge when tasks were overdue)
+  - Task detail page had its own inline breadcrumb and title, inconsistent with every other module; now shown as "All Tasks [count] › # - Task name" in the shared header, matching the same pattern
+- Enhancements
+  - Module title and record-count badge moved out of each module's content area and into the shared sticky header, positioned to the left of the search field, for RPA, TIA, PIA, RM, IAP, and CSC — frees a full row of vertical space on every module page
+  - Settings sub-pages (Settings, Billing, Members, Training, Single Sign-On, Directory Sync, Audit Logs, Webhooks, API Keys) now show "Settings: {team name}" in the header instead of repeating the team name as an in-content heading on every tab
+  - Cybersecurity Management System's record count reflects only the currently selected framework tab; the tab selection is now synced to the URL (`?framework=`), making a specific framework tab deep-linkable and bookmarkable
+  - Sidebar navigation gained a neutral (grey) "total items" badge for Record of Processing Activities, Transfer Impact Assessment, Privacy Impact Assessment, and Interactive Awareness Training, alongside the existing red/amber "needs attention" badges on Tasks, Risk Management, and Cybersecurity Management System
+  - Added a [Weblate translation status badge](https://hosted.weblate.org/engage/unicis-platform/) to the README
+
 ## [MCP Server, Analytics & Error Tracking] 2026-06-30
 
 *Release date: 2026-06-29*
