@@ -85,7 +85,7 @@
     "openai": "^5.23.1",
     "pg": "^8.13.1",
     "prisma": "^7.4.2",
-    "quill": "^2.0.3",
+    "quill": "2.0.2",
     "quill-markdown-shortcuts": "^0.0.10",
     "react": "18.3.1",
     "react-chartjs-2": "^5.2.0",
@@ -175,6 +175,7 @@
     "@boxyhq/saml-jackson": {
       "@boxyhq/saml20": "1.15.2"
     },
-    "@hono/node-server": "1.19.14"
+    "@hono/node-server": "1.19.14",
+    "quill": "2.0.2"
   }
 }

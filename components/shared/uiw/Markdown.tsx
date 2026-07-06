@@ -36,11 +36,24 @@ export const MDEditor = (props: MDEditorProps) => {
   );
 };
 
+const SAFE_HREF = /^(https?:|mailto:|#|\/)/i;
+
+const safeComponents = {
+  a: ({ href, children, ...rest }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { children?: React.ReactNode }) => (
+    <a href={href && SAFE_HREF.test(href) ? href : '#'} {...rest}>
+      {children}
+    </a>
+  ),
+};
+
 export const MarkdownPreview = (props: MarkdownPreviewProps) => {
   const colorMode = useResolvedColorMode();
   return (
     <div data-color-mode={colorMode}>
-      <MarkdownPreviewBase {...props} />
+      <MarkdownPreviewBase
+        components={safeComponents}
+        {...props}
+      />
     </div>
   );
 };
