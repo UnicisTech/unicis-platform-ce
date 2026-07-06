@@ -72,7 +72,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
     );
 
     const writeFileAsync = promisify(fs.writeFile);
-    const tempFilePath = path.join('/tmp', filename);
+    const tempFilePath = path.join('/tmp', path.basename(filename));
 
     await writeFileAsync(tempFilePath, fileData);
 
