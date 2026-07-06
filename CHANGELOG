@@ -24,6 +24,13 @@ The information about Unicis Platform releases and changes is listed in order be
   - `xlsx` switched from the abandoned npm registry package (0.18.5, unpatched ReDoS/prototype-pollution CVEs) to SheetJS's own CDN distribution (0.20.3), which contains the actual fixes
   - `daisyUI` upgraded 5.5.19 → 5.6.13 — compiled-CSS diffed against the previous version to confirm no breaking changes to classes used in this app
   - Added [`.well-known/security.txt`](https://securitytxt.org/) with our disclosure contact, policy, and OpenBugBounty program links
+  - **[SAST-02 / CWE-22]** Fixed path traversal in attachment download — filename from the database is now passed through `path.basename()` before being joined with the upload directory, preventing any stored `../` components from escaping the intended directory
+  - **[SAST-03 / CWE-693]** Added `Content-Security-Policy`, `Referrer-Policy: strict-origin-when-cross-origin`, and `Permissions-Policy` (camera, microphone, geolocation, interest-cohort all denied) to the global `next.config.js` headers block; `unsafe-eval` is present only in development mode (required by Next.js HMR) and omitted from production builds
+  - **[SAST-04 / CWE-20]** Fixed `callbackUrl` trailing-space typo in `middleware.ts` that caused NextAuth to silently ignore the post-login redirect parameter
+  - **[XSS-01 / CWE-79]** Added server-side URL protocol validation (`https:` / `http:` allowlist) to the IAP course create and update API routes, blocking `javascript:` and `data:` scheme payloads from being stored as course URLs
+  - **[XSS-01 / CWE-601]** Added `sandbox="allow-scripts allow-same-origin allow-fullscreen"` to the IAP course content iframe, preventing sandboxed content from navigating the top frame or accessing cookies
+  - **[XSS-02 / CWE-79]** `MarkdownPreview` now overrides the `a` component to rewrite any `href` that does not match `https?:`, `mailto:`, `#`, or `/` to `#`, blocking stored `javascript:` hrefs from executing in rendered markdown
+  - **[Quill CVE]** Pinned `quill` to `2.0.2` (direct dependency + `overrides` entry) to block the XSS vulnerability present in `2.0.3`; the override covers transitive consumers `react-quill-new` and `quill-markdown-shortcuts`
 - Fixed
   - Duplicate module page titles on Risk Management, Privacy Impact Assessment, Transfer Impact Assessment, Record of Processing Activities, Interactive Awareness Training, and Cybersecurity Management System — the sticky header and each module's own dashboard were both rendering a title
   - Record of Processing Activities had two different names shown across the app ("Record of Processing Activities" vs "Register of Procedures"); unified on the former
