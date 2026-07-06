@@ -73,7 +73,7 @@ const nextConfig = {
               `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ""} https://www.google.com https://www.gstatic.com`,
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
-              // Sentry, Matomo, Mixpanel, OpenAI (via server-side API routes), push endpoints
+              // Matomo (self-hosted), GlitchTip (EU-hosted), AI endpoint (OVH EU), push endpoints
               "connect-src 'self' https:",
               // IAP course iframes are sandboxed; allow https sources
               "frame-src 'self' https:",
