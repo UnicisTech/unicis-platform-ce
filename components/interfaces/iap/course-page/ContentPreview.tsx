@@ -20,6 +20,7 @@ const ContentPreview = ({ course }: { course: IapCourse }) => {
           width="960"
           height="569"
           title={t('course-presentation')}
+          sandbox="allow-scripts allow-same-origin allow-fullscreen"
           allowFullScreen={true}
         />
       );
