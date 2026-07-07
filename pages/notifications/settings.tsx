@@ -109,14 +109,9 @@ const NotificationSettingsForm = ({
       <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
         {/* Panel header */}
         <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
-          <div>
-            <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
-              {t('notifications.preferences-title')}
-            </span>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              {t('notifications.preferences-description')}
-            </p>
-          </div>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            {t('notifications.preferences-description')}
+          </p>
           <Button
             onClick={handleSave}
             disabled={!dirty || saving || isLoading}

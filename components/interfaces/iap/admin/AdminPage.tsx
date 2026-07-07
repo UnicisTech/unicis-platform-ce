@@ -109,27 +109,21 @@ const AdminPage = ({
   return (
     <>
       <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden mb-4">
-        {/* Direction B panel header */}
-        <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
-          <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
-            {t('iap')}
-          </span>
-          <div className="flex items-center gap-2 flex-wrap">
-            {canAccess('iap_category', ['create']) && (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setIsCreateCategoryOpen(true)}
-              >
-                {t('create-category')}
-              </Button>
-            )}
-            {canAccess('iap_course', ['create']) && (
-              <Button size="sm" onClick={() => setIsCreateCourseOpen(true)}>
-                {t('create-course')}
-              </Button>
-            )}
-          </div>
+        <div className="flex items-center justify-end gap-2 flex-wrap bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+          {canAccess('iap_category', ['create']) && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsCreateCategoryOpen(true)}
+            >
+              {t('create-category')}
+            </Button>
+          )}
+          {canAccess('iap_course', ['create']) && (
+            <Button size="sm" onClick={() => setIsCreateCourseOpen(true)}>
+              {t('create-course')}
+            </Button>
+          )}
         </div>
         <CoursesTable
           slug={team.slug}
