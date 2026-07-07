@@ -43,7 +43,7 @@ The information about Unicis Platform releases and changes is listed in order be
   - TypeScript error in `components/shared/uiw/Markdown.tsx` — `safeComponents` now typed as `Components` from `react-markdown` instead of an inlined anonymous object type, resolving the TS compiler error at line 54
   - TypeScript error in `pages/api/auth/[...nextauth].ts` — `PrismaAdapter` call now casts `prisma` to the adapter's own parameter type to accommodate the custom Prisma client output path; resolves the TS compiler error at line 23 without widening to `any`
   - `next-env.d.ts` route type reference updated from `.next/dev/types/routes.d.ts` to `.next/types/routes.d.ts` (production build path)
-  - Fix due date in EU style DD/MM/YYYY.
+  - Fix due date in EU style DD/MM/YYYY
 - Enhancements
   - Module title and record-count badge moved out of each module's content area and into the shared sticky header, positioned to the left of the search field, for RPA, TIA, PIA, RM, IAP, and CSC — frees a full row of vertical space on every module page
   - Settings sub-pages (Settings, Billing, Members, Training, Single Sign-On, Directory Sync, Audit Logs, Webhooks, API Keys) now show "Settings: {team name}" in the header instead of repeating the team name as an in-content heading on every tab
