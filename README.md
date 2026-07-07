@@ -125,6 +125,21 @@ The [Unicis MCP Server](src/mcp-server) is an open-source [Model Context Protoco
 
 We are working on one-click deployment solution with popular platforms. For advance users please use the below section.
 
+## 🔄 Upgrading
+
+When you pull a new release into an existing installation, apply any pending database migrations before starting the app:
+
+```bash
+git pull
+npm install
+npx prisma migrate deploy
+```
+
+- `npx prisma migrate deploy` applies every migration in `prisma/migrations` that hasn't run yet, in order, without prompting — this is the safe command for both local upgrades and production deployments (`npm run build` also runs it automatically, so a standard `npm run build && npm run start` upgrade already covers it).
+- Check `npx prisma migrate status` first if you want to see which migrations are pending before applying them.
+- A handful of releases ship a one-off data-backfill script alongside the schema migration (see `scripts/migrations/`). Check the [CHANGELOG](CHANGELOG.md) for the release you're upgrading to — if it calls one out, run it once after `prisma migrate deploy`, e.g. `npm run migrate:data`.
+- Only use `npx prisma db push` (as in the initial setup below) for a fresh local database with no migration history to preserve — never run it against a database you want to upgrade in place, since it doesn't create or apply versioned migrations.
+
 ## ✨ Getting Started
 
 Please follow these simple steps to get a local copy up and running.
