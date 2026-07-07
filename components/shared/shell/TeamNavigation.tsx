@@ -106,7 +106,11 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('tasks'),
       badge:
-        overdueCount > 0 ? { count: overdueCount, variant: 'red' } : undefined,
+        overdueCount > 0
+          ? { count: overdueCount, variant: 'red' }
+          : tasks && tasks.length > 0
+            ? { count: tasks.length, variant: 'neutral' }
+            : undefined,
     },
     canAccess('rpa', ['read'])
       ? {
