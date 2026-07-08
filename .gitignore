@@ -58,12 +58,9 @@ yarn-error.log*
 .eslintcache
 
 .vscode
-<<<<<<< HEAD
 certificates
 
 # temp
 /.tmp*
-=======
 .security-hardening/
 certificates
->>>>>>> origin/main
