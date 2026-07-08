@@ -156,17 +156,7 @@ const TiaDashboard: NextPageWithLayout<
 
   return (
     <>
-      <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
-        <div className="flex items-center gap-2">
-          <h1 className="text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-            {t('tia')}
-          </h1>
-          {tasksWithProcedures.length > 0 && (
-            <span className="text-[11px] text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
-              {tasksWithProcedures.length}
-            </span>
-          )}
-        </div>
+      <div className="flex items-center justify-end gap-2 mb-4 flex-wrap">
         <div className="flex items-center gap-2 flex-wrap">
           {tasksWithProcedures.length > 0 && (
             <PerPageSelector perPage={perPage} setPerPage={setPerPage} />

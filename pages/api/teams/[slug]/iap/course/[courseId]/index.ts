@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import { CourseFormData } from 'types';
-import { isPrismaError } from '@/lib/errors';
+import { ApiError, isPrismaError } from '@/lib/errors';
 import { deleteCourse, editCourse, getCourse } from 'models/iap/course';
 import { serializeForApi } from '@/lib/serialize';
 
@@ -77,6 +77,15 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     description,
     questions,
   } = course;
+
+  if (url) {
+    try {
+      const parsed = new URL(url);
+      if (!['https:', 'http:'].includes(parsed.protocol)) throw new Error();
+    } catch {
+      throw new ApiError(422, 'Course URL must use https or http');
+    }
+  }
 
   const createdCourse = editCourse({
     courseId,

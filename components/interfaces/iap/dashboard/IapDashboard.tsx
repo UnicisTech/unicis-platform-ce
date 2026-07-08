@@ -30,19 +30,9 @@ const IapDashboard = ({
   const completionPct = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
-    <>
+    <div className="space-y-5">
       {teamCourses.length > 0 ? (
-        <div className="space-y-5">
-          {/* Module heading */}
-          <div className="flex items-center gap-2">
-            <h1 className="text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-              {t('iap')}
-            </h1>
-            <span className="text-[11px] text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
-              {total}
-            </span>
-          </div>
-
+        <>
           {/* Completion summary banner */}
           <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-5 py-4">
             <div className="flex flex-wrap items-center gap-6">
@@ -106,7 +96,7 @@ const IapDashboard = ({
               />
             ))}
           </div>
-        </div>
+        </>
       ) : (
         <ModuleEmptyState
           icon="/unicis-iap-logo.png"
@@ -117,7 +107,7 @@ const IapDashboard = ({
           onCta={onAddCourse}
         />
       )}
-    </>
+    </div>
   );
 };
 

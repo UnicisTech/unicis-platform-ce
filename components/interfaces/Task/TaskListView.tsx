@@ -43,7 +43,7 @@ const TaskListView = ({
   const formatDueDate = (value?: string | null) => {
     if (!value) return t('no-due-date');
     const [year, month, day] = value.split('T')[0].split('-').map(Number);
-    return new Date(year, month - 1, day).toLocaleDateString();
+    return `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}/${year}`;
   };
 
   return (

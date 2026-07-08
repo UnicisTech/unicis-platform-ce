@@ -12,6 +12,7 @@
 ![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/UnicisTech)
 ![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F?logo=LinkedIn&label=LinkedIn&link=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F)
 ![Discord](https://img.shields.io/discord/1110270854824214589)
+<a href="https://hosted.weblate.org/engage/unicis-platform/"><img src="https://hosted.weblate.org/widget/unicis-platform/svg-badge.svg" alt="Translation status"></a>
 
 Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs. Built for CISOs, DPOs, DevSecOps, and compliance teams who need one place to manage privacy, cybersecurity controls, and risk.
 
@@ -126,6 +127,21 @@ The [Unicis MCP Server](src/mcp-server) is an open-source [Model Context Protoco
 ## 🚀 Deployment
 
 We are working on one-click deployment solution with popular platforms. For advance users please use the below section.
+
+## 🔄 Upgrading
+
+When you pull a new release into an existing installation, apply any pending database migrations before starting the app:
+
+```bash
+git pull
+npm install
+npx prisma migrate deploy
+```
+
+- `npx prisma migrate deploy` applies every migration in `prisma/migrations` that hasn't run yet, in order, without prompting — this is the safe command for both local upgrades and production deployments (`npm run build` also runs it automatically, so a standard `npm run build && npm run start` upgrade already covers it).
+- Check `npx prisma migrate status` first if you want to see which migrations are pending before applying them.
+- A handful of releases ship a one-off data-backfill script alongside the schema migration (see `scripts/migrations/`). Check the [CHANGELOG](CHANGELOG.md) for the release you're upgrading to — if it calls one out, run it once after `prisma migrate deploy`, e.g. `npm run migrate:data`.
+- Only use `npx prisma db push` (as in the initial setup below) for a fresh local database with no migration history to preserve — never run it against a database you want to upgrade in place, since it doesn't create or apply versioned migrations.
 
 ## ✨ Getting Started
 

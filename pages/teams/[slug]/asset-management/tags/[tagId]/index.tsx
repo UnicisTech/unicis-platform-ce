@@ -7,7 +7,6 @@ import useTeam from 'hooks/useTeam';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
-import Breadcrumb from '@/components/shared/Breadcrumb';
 import TagsTab from '@/components/interfaces/AssetManagement/Tag/TagsTab';
 import TagDetails from '@/components/interfaces/AssetManagement/Tag/TagDetails';
 
@@ -33,13 +32,6 @@ const TagById = ({ teamFeatures: _teamFeatures, user }) => {
 
   return (
     <>
-      <Breadcrumb
-        taskTitle={'Tags'}
-        backTo={`/teams/${slug}/asset-management/tags`}
-        teamName={slug as string}
-        path={tagId as string}
-      />
-      <h3 className="text-2xl font-bold">{'Pack Details'}</h3>
       <TagsTab activeTab={activeTab} setActiveTab={setActiveTab} />
       <Card heading="Details">
         <Card.Body>

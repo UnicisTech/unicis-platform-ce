@@ -10,7 +10,6 @@ import PackResults from '@/components/interfaces/AssetManagement/Pack/PackResult
 import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
-import Breadcrumb from '@/components/shared/Breadcrumb';
 
 const PackById = ({ teamFeatures: _teamFeatures, user }) => {
   const [activeTab, setActiveTab] = useState('Overview');
@@ -34,13 +33,6 @@ const PackById = ({ teamFeatures: _teamFeatures, user }) => {
 
   return (
     <>
-      <Breadcrumb
-        taskTitle={'Packs'}
-        backTo={`/teams/${slug}/asset-management/packs`}
-        teamName={slug as string}
-        path={packId as string}
-      />
-      <h3 className="text-2xl font-bold">{'Pack Details'}</h3>
       <PackTab activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {activeTab === 'Overview' && (

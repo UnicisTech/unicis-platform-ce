@@ -5,7 +5,6 @@ import { Loading, Error } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
 import useTeam from 'hooks/useTeam';
 import QueryTab from '@/components/interfaces/AssetManagement/Query/QueryTab';
-import Breadcrumb from '@/components/shared/Breadcrumb';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
@@ -33,13 +32,6 @@ const DistributorById = ({ teamFeatures: _teamFeatures, user }) => {
 
   return (
     <>
-      <Breadcrumb
-        taskTitle={'Distributors'}
-        backTo={`/teams/${slug}/asset-management/distributors`}
-        teamName={slug as string}
-        path={distributorId as string}
-      />
-      <h3 className="text-2xl font-bold">{'Script'}</h3>
       <QueryTab activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {activeTab === 'Overview' && (

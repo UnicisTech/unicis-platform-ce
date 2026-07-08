@@ -9,6 +9,11 @@ export const useGetPackId = (teamId: string, packId: string) => {
   const [isError, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!teamId || !packId) {
+      setLoading(false);
+      return;
+    }
+
     const fetchPack = async () => {
       setLoading(true);
       setError(null);

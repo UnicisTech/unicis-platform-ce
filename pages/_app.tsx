@@ -4,8 +4,6 @@ import { appWithTranslation } from 'next-i18next';
 import Head from 'next/head';
 import { Toaster } from 'react-hot-toast';
 import type { AppPropsWithLayout } from 'types';
-import mixpanel from 'mixpanel-browser';
-
 import { init } from '@socialgouv/matomo-next';
 
 import '../styles/globals.css';
@@ -19,15 +17,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const { session, ...props } = pageProps;
 
   useEffect(() => {
-    // Add mixpanel
-    if (env.mixpanel.token) {
-      mixpanel.init(env.mixpanel.token, {
-        debug: true,
-        ignore_dnt: true,
-        track_pageview: true,
-      });
-    }
-
     // Add Matomo
     if (env.matomo.enabled && env.matomo.url && env.matomo.siteId) {
       init({

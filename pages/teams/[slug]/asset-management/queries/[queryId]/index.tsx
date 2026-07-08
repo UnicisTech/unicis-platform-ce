@@ -5,7 +5,6 @@ import { Loading, Error, Card } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
 import useTeam from 'hooks/useTeam';
 import QueryTab from '@/components/interfaces/AssetManagement/Query/QueryTab';
-import Breadcrumb from '@/components/shared/Breadcrumb';
 import QueryDetails from '@/components/interfaces/AssetManagement/Query/QueryDetails';
 import QueryResults from '@/components/interfaces/AssetManagement/Query/QueryResults';
 import { useGetQueryId } from '@/hooks/fleets/queries/useGetQueryId';
@@ -39,13 +38,6 @@ const QueryById = ({ teamFeatures: _teamFeatures, user }) => {
 
   return (
     <>
-      <Breadcrumb
-        taskTitle={'Queries'}
-        backTo={`/teams/${slug}/asset-management/queries`}
-        teamName={slug as string}
-        path={queryId as string}
-      />
-      <h3 className="text-2xl font-bold">{'Queries'}</h3>
       <QueryTab activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {activeTab === 'Overview' && (

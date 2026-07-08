@@ -14,7 +14,7 @@ export interface MenuItem {
   active?: boolean;
   items?: Omit<MenuItem, 'icon' | 'items'>[];
   /** Optional count badge shown on the nav item (only rendered when count > 0) */
-  badge?: { count: number; variant: 'red' | 'amber' };
+  badge?: { count: number; variant: 'red' | 'amber' | 'neutral' };
 }
 
 export interface NavigationProps {
@@ -101,7 +101,9 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ menu }) => {
             'ml-auto flex-shrink-0 text-[10px] font-semibold px-1.5 py-0.5 rounded-md min-w-[20px] text-center leading-none',
             menu.badge.variant === 'red'
               ? 'bg-red-100 text-red-700 dark:text-red-400'
-              : 'bg-amber-100 text-amber-700'
+              : menu.badge.variant === 'amber'
+                ? 'bg-amber-100 text-amber-700'
+                : 'bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400'
           )}
         >
           {menu.badge.count > 99 ? '99+' : menu.badge.count}

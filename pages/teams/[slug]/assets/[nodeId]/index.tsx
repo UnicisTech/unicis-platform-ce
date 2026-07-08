@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Loading, Error } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
@@ -8,7 +7,6 @@ import useTeam from 'hooks/useTeam';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
-import Breadcrumb from '@/components/shared/Breadcrumb';
 import NodeDetails from '@/components/interfaces/AssetManagement/AssetDashboard/Asset/NodeDetails';
 import NodeTab from '@/components/interfaces/AssetManagement/AssetDashboard/Asset/NodeTab';
 import AssetLogs from '@/components/interfaces/AssetManagement/AssetDashboard/Asset/AssetLogs';
@@ -17,7 +15,6 @@ import AssetConfig from '@/components/interfaces/AssetManagement/AssetDashboard/
 import { useGetNodeId } from '@/hooks/fleets/Nodes/useGetNodeId';
 
 const NodeById = ({ teamFeatures: _teamFeatures, user }) => {
-  const { t } = useTranslation(['common', 'fleet']);
   const [activeTab, setActiveTab] = useState('Overview');
   const router = useRouter();
   const { nodeId, slug } = router.query;
@@ -29,17 +26,7 @@ const NodeById = ({ teamFeatures: _teamFeatures, user }) => {
     isError: isTeamError,
   } = useTeam(slug as string);
   const fleetTeamId = team?.id ?? '';
-  const { node } = useGetNodeId(fleetTeamId, nodeIdStr);
-
-  const shortNodeId =
-    nodeIdStr.length > 16
-      ? `${nodeIdStr.slice(0, 8)}...${nodeIdStr.slice(-4)}`
-      : nodeIdStr;
-  const assetBreadcrumbLabel =
-    node?.node_key ||
-    node?.node_info?.system_info?.computer_name ||
-    node?.host_identifier ||
-    shortNodeId;
+  useGetNodeId(fleetTeamId, nodeIdStr);
 
   if (isTeamLoading) {
     return <Loading />;
@@ -51,13 +38,6 @@ const NodeById = ({ teamFeatures: _teamFeatures, user }) => {
 
   return (
     <>
-      <Breadcrumb
-        taskTitle={t('fleet:asset-management')}
-        backTo={`/teams/${slug}/asset`}
-        teamName={team?.name || (slug as string)}
-        teamSlug={slug as string}
-        path={assetBreadcrumbLabel}
-      />
       <NodeTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {
         activeTab === 'Overview' && (

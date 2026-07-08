@@ -9,6 +9,11 @@ export const useGetTagId = (teamId: string, tagId: string) => {
   const [isError, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!teamId || !tagId) {
+      setLoading(false);
+      return;
+    }
+
     const fetchTag = async () => {
       setLoading(true);
       setError(null);

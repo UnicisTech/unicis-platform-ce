@@ -19,11 +19,10 @@ import { TeamFeature } from 'types';
 interface TeamTabProps {
   activeTab: string;
   team: Team;
-  heading?: string;
   teamFeatures: TeamFeature;
 }
 
-const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
+const TeamTab = ({ activeTab, team, teamFeatures }: TeamTabProps) => {
   const { canAccess } = useCanAccess(team.slug);
   const { t } = useTranslation(['common', 'fleet']);
   const { hasPlan, checkedHasPlan } = useHasPlan();
@@ -142,9 +141,6 @@ const TeamTab = ({ activeTab, team, heading, teamFeatures }: TeamTabProps) => {
 
   return (
     <div className="flex flex-col pb-6">
-      <h2 className="text-xl font-semibold mb-2">
-        {heading ? heading : team.name}
-      </h2>
       <nav
         className="flex space-x-5 border-b border-slate-200 dark:border-slate-700 overflow-x-auto no-scrollbar"
         aria-label="Tabs"

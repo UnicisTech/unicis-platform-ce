@@ -17,9 +17,18 @@ import { isAuthProviderEnabled } from '@/lib/auth';
 import { validateRecaptcha } from '@/lib/recaptcha';
 import rateLimit from '@/lib/rate-limit';
 import { getIpAddress } from '@/lib/utils';
+import { sessionTokenCookieName } from '@/lib/cookie';
 // import { sendMagicLink } from '@/lib/email/sendMagicLink';
 
-const adapter = PrismaAdapter(prisma);
+// @next-auth/prisma-adapter@1.0.7 (latest — next-auth v4 is maintenance-only)
+// types its PrismaClient param against the default `@prisma/client` output
+// location. This project generates its client to a custom path
+// (see prisma/schema.prisma `output`), so it's a structurally-identical but
+// nominally distinct type; cast to the adapter's own param type rather than
+// widening to `any`.
+const adapter = PrismaAdapter(
+  prisma as unknown as Parameters<typeof PrismaAdapter>[0]
+);
 
 const providers: NextAuthOptions['providers'] = [];
 
@@ -131,31 +140,7 @@ if (isAuthProviderEnabled('saml')) {
 //   );
 // }
 
-// const cookiesOptions: Partial<Pick<NextAuthOptions, 'cookies'>> =
-//   process.env.NODE_ENV === 'production'
-//     ? {
-//         cookies: {
-//           sessionToken: {
-//             name: `__Secure-next-auth.session-token`,
-//             options: {
-//               httpOnly: true,
-//               sameSite: 'lax',
-//               path: '/',
-//               secure: true,
-//             },
-//           },
-//           csrfToken: {
-//             name: `__Host-next-auth.csrf-token`,
-//             options: {
-//               httpOnly: true,
-//               sameSite: 'lax',
-//               path: '/',
-//               secure: true,
-//             },
-//           },
-//         },
-//       }
-//     : {};
+const useSecureCookie = env.appUrl.startsWith('https://');
 
 export const authOptions: NextAuthOptions = {
   adapter,
@@ -167,7 +152,17 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
-  // ...cookiesOptions,
+  cookies: {
+    sessionToken: {
+      name: sessionTokenCookieName,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: useSecureCookie,
+      },
+    },
+  },
   secret: env.nextAuth.secret,
   callbacks: {
     async signIn({ user, account, profile }) {

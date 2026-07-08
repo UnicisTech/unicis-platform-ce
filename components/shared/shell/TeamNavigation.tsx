@@ -10,6 +10,7 @@ import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeamTasks from 'hooks/useTeamTasks';
+import useIap from 'hooks/useIAP';
 import NavigationItems from './NavigationItems';
 import type { NavigationProps, MenuItem } from './NavigationItems';
 import Icon from '../Icon';
@@ -22,15 +23,37 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   const { t } = useTranslation(['common', 'fleet']);
   const { canAccess } = useCanAccess(slug);
   const { tasks } = useTeamTasks(slug);
+  const { teamCourses } = useIap(false, slug);
   const relativePath = activePathname?.slice(`/teams/${slug}`.length) || '';
 
   // ── Badge counts ────────────────────────────────────────────────────────────
-  const { overdueCount, openCscCount, openRmCount } = useMemo(() => {
-    if (!tasks) return { overdueCount: 0, openCscCount: 0, openRmCount: 0 };
+  // overdue/open* are "needs attention" counts (red/amber). rpa/tia/pia/iap
+  // are plain "total items in this module" counts (neutral grey), matching
+  // the record-count badge shown on each module's own page heading.
+  const {
+    overdueCount,
+    openCscCount,
+    openRmCount,
+    rpaCount,
+    tiaCount,
+    piaCount,
+  } = useMemo(() => {
+    if (!tasks)
+      return {
+        overdueCount: 0,
+        openCscCount: 0,
+        openRmCount: 0,
+        rpaCount: 0,
+        tiaCount: 0,
+        piaCount: 0,
+      };
     const now = new Date();
     let overdue = 0;
     let csc = 0;
     let rm = 0;
+    let rpa = 0;
+    let tia = 0;
+    let pia = 0;
     for (const task of tasks) {
       const props = task.properties as Record<string, unknown> | null;
       const isDone = task.status === 'done';
@@ -45,9 +68,25 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         csc++;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       if (!isDone && (props as any)?.rm_risk) rm++;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if ((props as any)?.rpa_procedure) rpa++;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if ((props as any)?.tia_procedure) tia++;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if ((props as any)?.pia_risk) pia++;
     }
-    return { overdueCount: overdue, openCscCount: csc, openRmCount: rm };
+    return {
+      overdueCount: overdue,
+      openCscCount: csc,
+      openRmCount: rm,
+      rpaCount: rpa,
+      tiaCount: tia,
+      piaCount: pia,
+    };
   }, [tasks]);
+
+  const iapCount = teamCourses?.length ?? 0;
+
   const menus: (MenuItem | null)[] = [
     {
       name: t('Dashboard'),
@@ -67,7 +106,11 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
         activePathname?.startsWith(`/teams/${slug}`) &&
         relativePath.includes('tasks'),
       badge:
-        overdueCount > 0 ? { count: overdueCount, variant: 'red' } : undefined,
+        overdueCount > 0
+          ? { count: overdueCount, variant: 'red' }
+          : tasks && tasks.length > 0
+            ? { count: tasks.length, variant: 'neutral' }
+            : undefined,
     },
     canAccess('asset_dashboard', ['create', 'update', 'read', 'delete'])
       ? {
@@ -88,6 +131,8 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
           active:
             activePathname?.startsWith(`/teams/${slug}`) &&
             relativePath.includes('rpa'),
+          badge:
+            rpaCount > 0 ? { count: rpaCount, variant: 'neutral' } : undefined,
         }
       : null,
     canAccess('tia', ['read'])
@@ -98,6 +143,8 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
           active:
             activePathname?.startsWith(`/teams/${slug}`) &&
             relativePath.includes('tia'),
+          badge:
+            tiaCount > 0 ? { count: tiaCount, variant: 'neutral' } : undefined,
         }
       : null,
     canAccess('pia', ['read'])
@@ -108,6 +155,8 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
           active:
             activePathname?.startsWith(`/teams/${slug}`) &&
             relativePath.includes('pia'),
+          badge:
+            piaCount > 0 ? { count: piaCount, variant: 'neutral' } : undefined,
         }
       : null,
     canAccess('csc', ['read'])
@@ -133,6 +182,8 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
             activePathname?.startsWith(`/teams/${slug}`) &&
             relativePath.includes('iap') &&
             !relativePath.includes('iap/admin'),
+          badge:
+            iapCount > 0 ? { count: iapCount, variant: 'neutral' } : undefined,
         }
       : null,
     canAccess('rm', ['read'])

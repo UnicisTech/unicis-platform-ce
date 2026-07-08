@@ -9,6 +9,11 @@ export const useGetQueryId = (teamId: string, queryId: string) => {
   const [isError, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!teamId || !queryId) {
+      setLoading(false);
+      return;
+    }
+
     const fetchQuery = async () => {
       setLoading(true);
       setError(null);

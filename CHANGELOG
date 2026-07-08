@@ -40,6 +40,41 @@ TODO: change the release date
 - Fixes
   - Task attachments now correctly accept image files (PNG, JPEG) when the browser does not supply a MIME type — drag-and-drop from external sources no longer silently rejects valid images
   - Both client-side (`taskService.ts`) and server-side (`attachment.ts`) file-type validation fall back to extension check when `file.type` / `file.mimetype` is empty, while still verifying file content via magic-byte signature
+## [Library updates, Compliance hardening and  Bug fixes] 2026-07-08
+
+*Release date: 2026-07-08*
+
+- Security & Dependency Updates
+  - Patched Critical/High vulnerabilities found in a Grype scan of the SBOM: `ws`, `form-data`, `protobufjs`, `hono`, `@grpc/grpc-js`, and `i18next-fs-backend` bumped to their fixed versions
+  - `xlsx` switched from the abandoned npm registry package (0.18.5, unpatched ReDoS/prototype-pollution CVEs) to SheetJS's own CDN distribution (0.20.3), which contains the actual fixes
+  - `daisyUI` upgraded 5.5.19 → 5.6.13 — compiled-CSS diffed against the previous version to confirm no breaking changes to classes used in this app
+  - Added [`.well-known/security.txt`](https://securitytxt.org/) with our disclosure contact, policy, and OpenBugBounty program links
+  - **[SAST-02 / CWE-22]** Fixed path traversal in attachment download — filename from the database is now passed through `path.basename()` before being joined with the upload directory, preventing any stored `../` components from escaping the intended directory
+  - **[SAST-03 / CWE-693]** Added `Content-Security-Policy`, `Referrer-Policy: strict-origin-when-cross-origin`, and `Permissions-Policy` (camera, microphone, geolocation, interest-cohort all denied) to the global `next.config.js` headers block; `unsafe-eval` is present only in development mode (required by Next.js HMR) and omitted from production builds
+  - **[SAST-04 / CWE-20]** Fixed `callbackUrl` trailing-space typo in `middleware.ts` that caused NextAuth to silently ignore the post-login redirect parameter
+  - **[XSS-01 / CWE-79]** Added server-side URL protocol validation (`https:` / `http:` allowlist) to the IAP course create and update API routes, blocking `javascript:` and `data:` scheme payloads from being stored as course URLs
+  - **[XSS-01 / CWE-601]** Added `sandbox="allow-scripts allow-same-origin allow-fullscreen"` to the IAP course content iframe, preventing sandboxed content from navigating the top frame or accessing cookies
+  - **[XSS-02 / CWE-79]** `MarkdownPreview` now overrides the `a` component to rewrite any `href` that does not match `https?:`, `mailto:`, `#`, or `/` to `#`, blocking stored `javascript:` hrefs from executing in rendered markdown
+  - **[Quill CVE]** Pinned `quill` to `2.0.2` (direct dependency + `overrides` entry) to block the XSS vulnerability present in `2.0.3`; the override covers transitive consumers `react-quill-new` and `quill-markdown-shortcuts`
+  - Updated regulatory compliance assessment (GDPR, SOC 2, ISO 27001:2022, NIS2) — GDPR Controller score raised 52 → 58/100 reflecting the public Right to Erasure Request Form at https://handbook.unicis.tech/pub/erasure-request-form
+  - Retraced audit log correctly identified as self-hosted (not external); ULTIMATE-plan-only scope documented as an intentional product decision pending future expansion
+  - CSP `connect-src` comment corrected — removed stale Sentry/Mixpanel references; now accurately lists Matomo (self-hosted), GlitchTip (EU-hosted), and OVH AI endpoint
+- Fixed
+  - Duplicate module page titles on Risk Management, Privacy Impact Assessment, Transfer Impact Assessment, Record of Processing Activities, Interactive Awareness Training, and Cybersecurity Management System — the sticky header and each module's own dashboard were both rendering a title
+  - Record of Processing Activities had two different names shown across the app ("Record of Processing Activities" vs "Register of Procedures"); unified on the former
+  - Cybersecurity Management System had no record-count badge on its page heading or sidebar entry
+  - All Tasks sidebar and page title now show a total task count (previously only showed a badge when tasks were overdue)
+  - Task detail page had its own inline breadcrumb and title, inconsistent with every other module; now shown as "All Tasks [count] › # - Task name" in the shared header, matching the same pattern
+  - TypeScript error in `components/shared/uiw/Markdown.tsx` — `safeComponents` now typed as `Components` from `react-markdown` instead of an inlined anonymous object type, resolving the TS compiler error at line 54
+  - TypeScript error in `pages/api/auth/[...nextauth].ts` — `PrismaAdapter` call now casts `prisma` to the adapter's own parameter type to accommodate the custom Prisma client output path; resolves the TS compiler error at line 23 without widening to `any`
+  - `next-env.d.ts` route type reference updated from `.next/dev/types/routes.d.ts` to `.next/types/routes.d.ts` (production build path)
+  - Fix due date in EU style DD/MM/YYYY
+- Enhancements
+  - Module title and record-count badge moved out of each module's content area and into the shared sticky header, positioned to the left of the search field, for RPA, TIA, PIA, RM, IAP, and CSC — frees a full row of vertical space on every module page
+  - Settings sub-pages (Settings, Billing, Members, Training, Single Sign-On, Directory Sync, Audit Logs, Webhooks, API Keys) now show "Settings: {team name}" in the header instead of repeating the team name as an in-content heading on every tab
+  - Cybersecurity Management System's record count reflects only the currently selected framework tab; the tab selection is now synced to the URL (`?framework=`), making a specific framework tab deep-linkable and bookmarkable
+  - Sidebar navigation gained a neutral (grey) "total items" badge for Record of Processing Activities, Transfer Impact Assessment, Privacy Impact Assessment, and Interactive Awareness Training, alongside the existing red/amber "needs attention" badges on Tasks, Risk Management, and Cybersecurity Management System
+  - Added a [Weblate translation status badge](https://hosted.weblate.org/engage/unicis-platform/) to the README
 
 ## [MCP Server, Analytics & Error Tracking] 2026-06-30
 

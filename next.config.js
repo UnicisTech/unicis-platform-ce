@@ -15,7 +15,10 @@ const redirects = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
+  outputFileTracingIncludes: {
+    '/api/**': ['./node_modules/openid-client/**', './node_modules/jose/**'],
+  },
   images: {
     domains: ['platform.unicis.tech'],
     unoptimized: true,
@@ -52,6 +55,34 @@ const nextConfig = {
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value:
+              'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              // Next.js hydration and reCAPTCHA require inline scripts;
+              // dev mode also requires unsafe-eval for HMR
+              `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''} https://www.google.com https://www.gstatic.com`,
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data: https: blob:",
+              // Matomo (self-hosted), GlitchTip (EU-hosted), AI endpoint (OVH EU), push endpoints
+              "connect-src 'self' https:",
+              // IAP course iframes are sandboxed; allow https sources
+              "frame-src 'self' https:",
+              "frame-ancestors 'none'",
+              "object-src 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+            ].join('; '),
           },
         ],
       },

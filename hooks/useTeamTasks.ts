@@ -3,13 +3,13 @@ import type { Task } from 'types';
 import useSWR, { mutate } from 'swr';
 import type { ApiResponse } from 'types';
 
-const useTeamTasks = (slug: string) => {
-  const url = `/api/teams/${slug}/tasks`;
+const useTeamTasks = (slug?: string) => {
+  const url = slug ? `/api/teams/${slug}/tasks` : null;
 
   const { data, error } = useSWR<ApiResponse<Task[]>>(url, fetcher);
 
   const mutateTasks = async () => {
-    await mutate(url);
+    if (url) await mutate(url);
   };
 
   return {

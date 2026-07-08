@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import React, { useMemo } from 'react';
 import type { MDEditorProps } from '@uiw/react-md-editor';
 import type { MarkdownPreviewProps } from '@uiw/react-markdown-preview';
+import type { Components } from 'react-markdown';
 import useTheme from 'hooks/useTheme';
 
 const MDEditorBase = dynamic(
@@ -36,11 +37,21 @@ export const MDEditor = (props: MDEditorProps) => {
   );
 };
 
+const SAFE_HREF = /^(https?:|mailto:|#|\/)/i;
+
+const safeComponents: Components = {
+  a: ({ href, children, ...rest }) => (
+    <a href={href && SAFE_HREF.test(href) ? href : '#'} {...rest}>
+      {children}
+    </a>
+  ),
+};
+
 export const MarkdownPreview = (props: MarkdownPreviewProps) => {
   const colorMode = useResolvedColorMode();
   return (
     <div data-color-mode={colorMode}>
-      <MarkdownPreviewBase {...props} />
+      <MarkdownPreviewBase components={safeComponents} {...props} />
     </div>
   );
 };
