@@ -113,12 +113,12 @@ const Login: NextPageWithLayout<
 
               <div className="space-y-4">
                 <div className="grid gap-1">
-                  <Label htmlFor="email">{t('Email')}</Label>
+                  <Label htmlFor="email">{t('email')}</Label>
                   <Input
                     id="email"
                     name="email"
                     type="email"
-                    placeholder={t('Email')}
+                    placeholder={t('email')}
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     className="pr-10 text-base"
@@ -131,13 +131,13 @@ const Login: NextPageWithLayout<
                 </div>
 
                 <div className="grid gap-1 relative">
-                  <Label htmlFor="password">{t('Password')}</Label>
+                  <Label htmlFor="password">{t('password')}</Label>
                   <div className="relative w-full">
                     <Input
                       id="password"
                       name="password"
                       type={isPasswordVisible ? 'text' : 'password'}
-                      placeholder={t('Password')}
+                      placeholder={t('password')}
                       value={formik.values.password}
                       onChange={formik.handleChange}
                       className="pr-10 text-base"

@@ -87,7 +87,7 @@ const TagDetails = ({
               size="sm"
               disabled={submitting || !isFormChanged}
             >
-              {submitting ? t('saving...') : t('save-changes')}
+              {submitting ? t('saving') : t('save-changes')}
             </Button>
           )}
           {canAccess('team_fleet_tag', ['delete']) && (

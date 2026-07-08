@@ -1,21 +1,21 @@
-import { fleetAuthAPIHeaders } from '@/lib/common';
-import { fleetV1 } from '@/lib/fleet/apiBase';
-
 export const useDeleteFleetSecret = () => {
   const deleteSecret = async (teamId: string) => {
-    try {
-      const response = await fleetV1(`/fleet/teams/${teamId}/secret`, {
+    const response = await fetch(
+      `/api/fleet/secret?teamId=${encodeURIComponent(teamId)}`,
+      {
         method: 'DELETE',
-        headers: await fleetAuthAPIHeaders(),
-      });
-
-      if (!response.ok) {
-        await response.json();
+        headers: { 'Content-Type': 'application/json' },
       }
-    } catch (error) {
-      // Optional: Handle or log the error more specifically here if needed
-      console.error('Error deleting secret:', error);
+    );
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(
+        error?.error?.message || 'Failed to delete Fleet secret'
+      );
     }
+
+    return response.json().catch(() => ({}));
   };
 
   return deleteSecret;

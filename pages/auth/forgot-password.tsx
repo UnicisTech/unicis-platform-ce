@@ -69,12 +69,12 @@ const ForgotPassword: NextPageWithLayout<
         <CardContent>
           <form onSubmit={formik.handleSubmit} className="space-y-4">
             <div className="grid gap-1">
-              <Label htmlFor="email">{t('Email')}</Label>
+              <Label htmlFor="email">{t('email')}</Label>
               <Input
                 id="email"
                 name="email"
                 type="email"
-                placeholder={t('Email')}
+                placeholder={t('email')}
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}

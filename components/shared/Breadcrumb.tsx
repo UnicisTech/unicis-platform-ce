@@ -25,11 +25,11 @@ const Breadcrumb = ({
             <Link href={`/teams/${teamSlug || teamName}/dashboard`}>
               {teamName}
             </Link>
-          ) || t('Home')}
+          ) || t('home')}
         </li>
         <li>
           <a href={backTo || '/'} className="link link-hover">
-            {taskTitle || t('Tasks')}
+            {taskTitle || t('tasks')}
           </a>
         </li>
         <li className="max-w-[50vw] truncate" title={path}>

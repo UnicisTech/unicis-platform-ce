@@ -19,8 +19,8 @@ const FleetTools = ({ fleetTeam }: { fleetTeam?: FleetTeam }) => {
     <Card>
       <Card.Body>
         <Card.Header>
-          <Card.Title>{t('fleet-tool')}</Card.Title>
-          <Card.Description>{t('fleet-tool-description')}</Card.Description>
+          <Card.Title>{t('fleet:fleet-tool')}</Card.Title>
+          <Card.Description>{t('fleet:fleet-tool-description')}</Card.Description>
         </Card.Header>
         <div className="">
           <h1>

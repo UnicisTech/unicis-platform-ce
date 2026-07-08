@@ -891,8 +891,12 @@
     "event-deleted": "Eliminado"
   },
   "email-invitation-mismatch": "Su dirección de correo electrónico {{email}} no coincide con la dirección de correo electrónico a la que se envió esta invitación.",
+  "rest-api-docs": "Documentación de la API REST",
   "open-sidebar": "Abrir barra lateral",
   "close-sidebar": "Cerrar barra lateral",
+  "open-asset-details": "Abrir detalles del activo",
+  "no-data-available": "No hay datos disponibles",
+  "view": "Ver",
   "copyright": "Copyright © {{year}}",
   "version": "Versión",
   "made_with_love": "Hecho con 💙 en 🇪🇺",

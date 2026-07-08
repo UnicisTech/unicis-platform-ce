@@ -77,7 +77,7 @@ const EditTag = ({
               {t('close')}
             </Button>
             <Button type="submit" disabled={submitting}>
-              {submitting ? t('updating...') : t('update')}
+              {submitting ? t('updating') : t('update')}
             </Button>
           </DialogFooter>
         </form>

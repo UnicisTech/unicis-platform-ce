@@ -51,7 +51,7 @@ export default function DeleteRisk({
         return;
       }
 
-      toast.success(t('risk_deleted') || 'Risk deleted.');
+      toast.success(t('risk-deleted'));
       await mutate();
       setVisible(false);
     } catch (err: any) {

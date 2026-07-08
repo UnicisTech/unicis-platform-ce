@@ -39,11 +39,11 @@ const DeletePack = ({
     },
     onSubmit: async (values, { resetForm }) => {
       if (values.confirm.toLowerCase() === 'delete') {
-        const toastId = toast.loading(t('Deleting...'));
+        const toastId = toast.loading(t('deleting'));
         try {
           await deletePack(fleetTeamId, packId);
           mutatePacks();
-          toast.success(t('deleting'), { id: toastId });
+          toast.success(t('deleted-successfully'), { id: toastId });
           resetForm();
           setVisible(false);
         } catch {

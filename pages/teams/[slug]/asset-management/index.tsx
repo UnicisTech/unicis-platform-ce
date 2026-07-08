@@ -17,26 +17,26 @@ const AssetManagement = ({
   isTeamAdmin,
 }) => {
   return (
-    <FleetConnectRequired
-      user={user}
-      teamId={team.id}
-      enrollmentToken={enrollmentToken}
-      isTeamAdmin={isTeamAdmin}
-    >
-      {() => (
-        <>
-          <TeamTab
-            activeTab="asset-management"
-            team={team}
-            teamFeatures={teamFeatures}
-          />
-          <AssetTab activeTab="fleet" team={team} teamFeatures={teamFeatures} />
+    <>
+      <TeamTab
+        activeTab="asset-management"
+        team={team}
+        teamFeatures={teamFeatures}
+      />
+      <AssetTab activeTab="fleet" team={team} teamFeatures={teamFeatures} />
+      <FleetConnectRequired
+        user={user}
+        teamId={team.id}
+        enrollmentToken={enrollmentToken}
+        isTeamAdmin={isTeamAdmin}
+      >
+        {() => (
           <div className="space-y-6">
             <FleetContainer user={user} team={team} />
           </div>
-        </>
-      )}
-    </FleetConnectRequired>
+        )}
+      </FleetConnectRequired>
+    </>
   );
 };
 

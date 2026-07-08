@@ -25,7 +25,7 @@ const QueryResults = ({ teamId, queryName }: QueryResultsProps) => {
 
   if (isError) {
     return (
-      <div className="p-4 text-destructive">{t('Error loading results')}</div>
+      <div className="p-4 text-destructive">{t('error-loading-results')}</div>
     );
   }
 
@@ -48,26 +48,26 @@ const QueryResults = ({ teamId, queryName }: QueryResultsProps) => {
       <div className="text-sm text-muted-foreground">
         {total > 0 ? (
           <>
-            {t('Showing')} {filters.offset + 1} -{' '}
+            {t('showing')} {filters.offset + 1} -{' '}
             {Math.min(filters.offset + filters.limit, total)} {t('of')} {total}{' '}
-            {t('results from this query')}
+            {t('results-from-this-query')}
           </>
         ) : (
-          t('No results yet. Results will appear here after the query runs.')
+          t('no-results-yet-query-runs')
         )}
       </div>
 
       {/* Loading State */}
       {isLoading && (
         <div className="rounded-lg border border-border p-8 text-center text-muted-foreground">
-          {t('Loading...')}
+          {t('loading')}
         </div>
       )}
 
       {/* Empty State */}
       {!isLoading && results.length === 0 && (
         <div className="rounded-lg border border-border p-8 text-center text-muted-foreground">
-          {t('No results found')}
+          {t('no-results-found')}
         </div>
       )}
 
@@ -137,7 +137,7 @@ const QueryResults = ({ teamId, queryName }: QueryResultsProps) => {
       {total > filters.limit && (
         <div className="flex items-center justify-between rounded-lg border border-border px-4 py-3">
           <div className="text-sm text-muted-foreground">
-            {t('Page')} {currentPage} {t('of')} {totalPages}
+            {t('page')} {currentPage} {t('of')} {totalPages}
           </div>
           <div className="flex gap-2">
             <button
@@ -145,14 +145,14 @@ const QueryResults = ({ teamId, queryName }: QueryResultsProps) => {
               disabled={filters.offset === 0}
               className="rounded-md border border-input bg-background px-3 py-1 text-sm disabled:opacity-50 hover:bg-muted transition-colors"
             >
-              {t('Previous')}
+              {t('previous')}
             </button>
             <button
               onClick={() => handlePageChange(filters.offset + filters.limit)}
               disabled={filters.offset + filters.limit >= total}
               className="rounded-md border border-input bg-background px-3 py-1 text-sm disabled:opacity-50 hover:bg-muted transition-colors"
             >
-              {t('Next')}
+              {t('next')}
             </button>
           </div>
         </div>

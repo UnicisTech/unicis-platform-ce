@@ -13,8 +13,11 @@ export default async function handler(
       case 'GET':
         await handleGET(req, res);
         break;
+      case 'DELETE':
+        await handleDELETE(req, res);
+        break;
       default:
-        res.setHeader('Allow', 'GET');
+        res.setHeader('Allow', 'GET, DELETE');
         res.status(405).json({
           error: { message: `Method ${method} Not Allowed` },
         });
@@ -74,5 +77,56 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const data = await response.json();
+  return res.status(200).json(data);
+};
+
+const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await getSession(req, res);
+  const userId = session?.user?.id;
+
+  if (!userId) {
+    return res.status(401).json({ error: { message: 'Unauthorized' } });
+  }
+
+  const teamId =
+    typeof req.query.teamId === 'string' ? req.query.teamId : undefined;
+
+  if (!teamId) {
+    return res
+      .status(400)
+      .json({ error: { message: 'teamId query param is required' } });
+  }
+
+  const fleetBase = process.env.FLEET_API_URL;
+  const fleetToken = getFleetAccessTokenFromCookieStore(req.cookies);
+
+  if (!fleetBase || !fleetToken) {
+    return res.status(401).json({
+      error: { message: 'Fleet not configured or not authenticated' },
+    });
+  }
+
+  const response = await fetch(
+    `${fleetBase}/api/v1/fleet/teams/${teamId}/secret`,
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Unicis-Fleet-API-Authorization': `UnicisBearer ${fleetToken}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}));
+    return res.status(response.status).json({
+      error: {
+        message:
+          error?.message || error?.msg || 'Failed to delete Fleet secret',
+      },
+    });
+  }
+
+  const data = await response.json().catch(() => ({}));
   return res.status(200).json(data);
 };

@@ -58,7 +58,7 @@ const ResultLogs = ({
 
   if (isError) {
     return (
-      <div className="p-4 text-destructive">{t('Error loading results')}</div>
+      <div className="p-4 text-destructive">{t('error-loading-results')}</div>
     );
   }
 
@@ -67,24 +67,24 @@ const ResultLogs = ({
       <div className="text-sm text-muted-foreground">
         {total > 0 ? (
           <>
-            {t('Showing')} {filters.offset + 1} -{' '}
+            {t('showing')} {filters.offset + 1} -{' '}
             {Math.min(filters.offset + filters.limit, total)} {t('of')} {total}{' '}
-            {t('results from this asset')}
+            {t('results-from-this-asset')}
           </>
         ) : (
-          t('No results yet. Results will appear here after queries run.')
+          t('no-results-yet-queries-run')
         )}
       </div>
 
       {isLoading && (
         <div className="rounded-lg border border-border p-8 text-center text-muted-foreground">
-          {t('Loading...')}
+          {t('loading')}
         </div>
       )}
 
       {!isLoading && results.length === 0 && (
         <div className="rounded-lg border border-border p-8 text-center text-muted-foreground">
-          {t('No results found')}
+          {t('no-results-found')}
         </div>
       )}
 
@@ -133,7 +133,7 @@ const ResultLogs = ({
                   }}
                   disabled={deletingId === result.id}
                   className="p-2 text-destructive hover:bg-destructive/10 rounded-md transition-colors disabled:opacity-50"
-                  title={t('Delete result')}
+                  title={t('delete-result')}
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>
@@ -169,7 +169,7 @@ const ResultLogs = ({
       {total > filters.limit && (
         <div className="flex items-center justify-between rounded-lg border border-border px-4 py-3">
           <div className="text-sm text-muted-foreground">
-            {t('Page')} {currentPage} {t('of')} {totalPages}
+            {t('page')} {currentPage} {t('of')} {totalPages}
           </div>
           <div className="flex gap-2">
             <button
@@ -177,14 +177,14 @@ const ResultLogs = ({
               disabled={filters.offset === 0}
               className="rounded-md border border-input bg-background px-3 py-1 text-sm disabled:opacity-50 hover:bg-muted transition-colors"
             >
-              {t('Previous')}
+              {t('previous')}
             </button>
             <button
               onClick={() => handlePageChange(filters.offset + filters.limit)}
               disabled={filters.offset + filters.limit >= total}
               className="rounded-md border border-input bg-background px-3 py-1 text-sm disabled:opacity-50 hover:bg-muted transition-colors"
             >
-              {t('Next')}
+              {t('next')}
             </button>
           </div>
         </div>

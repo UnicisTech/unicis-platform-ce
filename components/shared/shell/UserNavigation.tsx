@@ -9,7 +9,7 @@ import NavigationItems from './NavigationItems';
 import { MenuItem, NavigationProps } from './NavigationItems';
 
 const UserNavigation = ({ activePathname }: NavigationProps) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'fleet']);
 
   const menus: MenuItem[] = [
     {
@@ -36,7 +36,7 @@ const UserNavigation = ({ activePathname }: NavigationProps) => {
       className: 'stroke-blue-600',
     },
     {
-      name: t('fleet'),
+      name: t('fleet:fleet'),
       href: '/settings/fleet',
       icon: TagIcon,
       active: activePathname === '/settings/fleet',

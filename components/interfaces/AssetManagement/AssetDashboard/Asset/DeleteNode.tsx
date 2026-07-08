@@ -39,18 +39,18 @@ const DeleteNode = ({
     },
     onSubmit: async (values, { resetForm }) => {
       if (values.confirm.toLowerCase() === 'delete') {
-        const toastId = toast.loading(t('Deleting...'));
+        const toastId = toast.loading(t('deleting'));
         try {
           await deleteNode(fleetTeamId, nodeId);
           mutateNodes();
-          toast.success(t('Deleted successfully'), { id: toastId });
+          toast.success(t('deleted-successfully'), { id: toastId });
           resetForm();
           setVisible(false);
         } catch {
-          toast.error(t('Error deleting asset'), { id: toastId });
+          toast.error(t('error-deleting-asset'), { id: toastId });
         }
       } else {
-        toast.error(t('Type confirmation text'));
+        toast.error(t('type-confirmation-text'));
       }
     },
   });
@@ -84,7 +84,7 @@ const DeleteNode = ({
             <Input
               id="confirm"
               name="confirm"
-              placeholder={t('Enter confirmation text')}
+              placeholder={t('enter-confirmation-text')}
               value={formik.values.confirm}
               onChange={formik.handleChange}
               className="bg-muted/30"

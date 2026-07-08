@@ -52,7 +52,7 @@ export default function DeleteProcedure({
         return;
       }
 
-      toast.success(t('riskDeleted', 'Risk deleted.'));
+      toast.success(t('risk-deleted'));
       await mutate();
       setVisible(false);
     } catch {

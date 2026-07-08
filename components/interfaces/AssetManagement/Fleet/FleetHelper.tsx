@@ -4,14 +4,14 @@ import type { Team } from '@/generated/client';
 import FleetStatus from './FleetStatus';
 
 const FleetHelper = ({ team }: { team: Partial<Team>; safe?: boolean }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'fleet']);
 
   return (
     <Card>
       <Card.Body>
         <Card.Header>
-          <Card.Title>{t('fleet-info')}</Card.Title>
-          <Card.Description>{t('fleet-info-description')}</Card.Description>
+          <Card.Title>{t('fleet:fleet-info')}</Card.Title>
+          <Card.Description>{t('fleet:fleet-info-description')}</Card.Description>
         </Card.Header>
         {team != null ? <div></div> : <FleetStatus />}
       </Card.Body>

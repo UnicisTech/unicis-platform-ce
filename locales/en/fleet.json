@@ -127,6 +127,7 @@
   "enter-password": "Enter password",
   "create-account": "Create Account",
   "fleet-enrollment-secret-ordered": "Fleet Enrollment Secret Ordered",
+  "error-ordering-fleet-secret": "Error ordering fleet secret",
   "error-deleting-fleet-secret": "Error deleting fleet secret",
   "fleet-secret-renewed": "Fleet Secret renewed successfully",
   "error-renewing-fleet-secret": "Error renewing fleet secret",

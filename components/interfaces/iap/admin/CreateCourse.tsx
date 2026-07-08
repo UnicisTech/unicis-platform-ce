@@ -355,7 +355,7 @@ export default function CreateCourse2({
                   </FormMessage>
                   {!fieldState.error && (
                     <p className="text-xs text-slate-500 dark:text-slate-400">
-                      {t('Please select from the list')}
+                      {t('please-select-from-the-list')}
                     </p>
                   )}
                 </FormItem>
@@ -394,7 +394,7 @@ export default function CreateCourse2({
                   </FormMessage>
                   {!fieldState.error && (
                     <p className="text-xs text-slate-500 dark:text-slate-400">
-                      {t('Please select from the list')}
+                      {t('please-select-from-the-list')}
                     </p>
                   )}
                 </FormItem>
@@ -503,7 +503,7 @@ export default function CreateCourse2({
                   </FormMessage>
                   {!fieldState.error && (
                     <p className="text-xs text-slate-500 dark:text-slate-400">
-                      {t('Please select from the list')}
+                      {t('please-select-from-the-list')}
                     </p>
                   )}
                 </FormItem>
@@ -515,10 +515,10 @@ export default function CreateCourse2({
               control={courseForm.control}
               name="estimatedTime"
               rules={{
-                validate: (v) =>
-                  !v ||
-                  validateNumberField(String(v)) ||
-                  t('Only numbers allowed'),
+                  validate: (v) =>
+                    !v ||
+                    validateNumberField(String(v)) ||
+                    t('only-numbers-allowed'),
               }}
               render={({ field, fieldState }) => (
                 <FormItem>
@@ -590,7 +590,7 @@ export default function CreateCourse2({
                   </FormMessage>
                   {!fieldState.error && (
                     <p className="text-xs text-slate-500 dark:text-slate-400">
-                      {t('Please select from the list')}
+                      {t('please-select-from-the-list')}
                     </p>
                   )}
                 </FormItem>
@@ -677,7 +677,7 @@ export default function CreateCourse2({
                 range(answersAmount).map((idx) => (
                   <div key={idx} className="space-y-2">
                     <span className="text-sm text-slate-500 dark:text-slate-400">
-                      {`${t('Pair')} #${idx + 1}`}
+                      {`${t('pair')} #${idx + 1}`}
                     </span>
                     <FormField
                       control={questionForm.control}

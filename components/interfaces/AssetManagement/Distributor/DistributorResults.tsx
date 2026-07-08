@@ -25,7 +25,7 @@ const DistributorResults = ({
     useGetDistributedIdResult(fleetTeamId, distributorId, status);
 
   const handleDeleteResult = async (id: string) => {
-    if (confirm(t('Are you sure you want to delete this result?'))) {
+    if (confirm(t('confirm-delete-result'))) {
       await deleteResult(fleetTeamId, distributorId, id);
       mutateDistributorResult();
     }
@@ -47,20 +47,18 @@ const DistributorResults = ({
       <div className="text-sm text-muted-foreground">
         {results.length > 0 ? (
           <>
-            {t('Showing')} {results.length}{' '}
-            {t('results from distributed query')}
+            {t('showing')} {results.length}{' '}
+            {t('results-from-distributed-query')}
           </>
         ) : (
-          t(
-            'No results yet. Results will appear here after the distributed query executes.'
-          )
+          t('no-results-yet-distributed-query')
         )}
       </div>
 
       {/* Empty State */}
       {results.length === 0 && (
         <div className="rounded-lg border border-border p-8 text-center text-muted-foreground">
-          {t('No results found')}
+          {t('no-results-found')}
         </div>
       )}
 
@@ -85,11 +83,11 @@ const DistributorResults = ({
                             new Date(result.timestamp),
                             'yyyy-MM-dd HH:mm:ss'
                           )
-                        : t('No timestamp')}
+                        : t('no-timestamp')}
                     </span>
 
                     <span className="text-sm font-medium">
-                      {result.host_identifier || t('Unknown host')}
+                      {result.host_identifier || t('unknown-host')}
                     </span>
 
                     {result.status && (
@@ -114,7 +112,7 @@ const DistributorResults = ({
                       handleDeleteResult(String(resultId));
                     }}
                     className="p-2 text-destructive hover:bg-destructive/10 rounded-md transition-colors"
-                    title={t('Delete result')}
+                    title={t('delete-result')}
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>

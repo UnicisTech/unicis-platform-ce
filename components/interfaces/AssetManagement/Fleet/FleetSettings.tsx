@@ -25,7 +25,7 @@ const schema = Yup.object().shape({
 });
 
 const SettingsFleet = ({ user }: { user: Partial<User> }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'fleet']);
 
   const formik = useFormik({
     initialValues: {
@@ -49,8 +49,8 @@ const SettingsFleet = ({ user }: { user: Partial<User> }) => {
     <form onSubmit={formik.handleSubmit}>
       <Card>
         <CardHeader>
-          <CardTitle>{t('fleet-settings')}</CardTitle>
-          <CardDescription>{t('fleet-settings-description')}</CardDescription>
+          <CardTitle>{t('fleet:fleet-settings')}</CardTitle>
+          <CardDescription>{t('fleet:fleet-settings-description')}</CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-4">
@@ -107,7 +107,7 @@ const SettingsFleet = ({ user }: { user: Partial<User> }) => {
           </div>
 
           <div className="flex flex-col space-y-1">
-            <Label htmlFor="fleetPassword">{t('fleet-password')}</Label>
+            <Label htmlFor="fleetPassword">{t('fleet:fleet-password')}</Label>
             <Input
               id="fleetPassword"
               name="fleetPassword"
@@ -115,7 +115,7 @@ const SettingsFleet = ({ user }: { user: Partial<User> }) => {
               value={formik.values.fleetPassword}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              placeholder={t('fleet-password')}
+              placeholder={t('fleet:fleet-password')}
               autoComplete="off"
               inputMode="none"
             />

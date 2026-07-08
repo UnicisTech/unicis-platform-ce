@@ -161,35 +161,33 @@ const PackResults = ({ teamId, packId }: PackResultsProps) => {
       <div className="text-sm text-muted-foreground">
         {effectiveTotal > 0 ? (
           <>
-            {t('Showing')} {filters.offset + 1} -{' '}
+            {t('showing')} {filters.offset + 1} -{' '}
             {Math.min(filters.offset + filters.limit, effectiveTotal)} {t('of')}{' '}
-            {effectiveTotal} {t('results from scheduled pack queries')}
+            {effectiveTotal} {t('results-from-scheduled-pack-queries')}
           </>
         ) : (
-          t(
-            'No results yet. Results will appear here after pack queries run on schedule.'
-          )
+          t('no-results-yet-pack-queries')
         )}
       </div>
 
       {/* Loading State */}
       {(isLoading || (results.length === 0 && isFallbackLoading)) && (
         <div className="rounded-lg border border-border p-8 text-center text-muted-foreground">
-          {t('Loading...')}
+          {t('loading')}
         </div>
       )}
 
       {/* Primary API Error (fallback may still render below) */}
       {isError && (
         <div className="rounded-lg border border-destructive/40 bg-destructive/5 p-4 text-destructive text-sm">
-          {t('Error loading results')}
+          {t('error-loading-results')}
         </div>
       )}
 
       {/* Empty State */}
       {!isLoading && !isFallbackLoading && paginatedResults.length === 0 && (
         <div className="rounded-lg border border-border p-8 text-center text-muted-foreground">
-          {t('No results found')}
+          {t('no-results-found')}
         </div>
       )}
 

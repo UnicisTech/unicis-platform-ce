@@ -79,7 +79,7 @@ const CreateTag = ({
               {t('close')}
             </Button>
             <Button type="submit" disabled={submitting}>
-              {submitting ? t('creating...') : t('create')}
+              {submitting ? t('creating') : t('create')}
             </Button>
           </DialogFooter>
         </form>

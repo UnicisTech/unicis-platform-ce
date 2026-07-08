@@ -81,7 +81,7 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
         toast.success(t('fleet:fleet-enrollment-secret-ordered'));
       } catch (error: any) {
         console.error('[FleetSecret] Error:', error);
-        toast.error(error?.message || t('error-ordering-fleet-secret'));
+        toast.error(error?.message || t('fleet:error-ordering-fleet-secret'));
       }
     },
   });
@@ -96,7 +96,7 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
       mutateFleetSecret();
       toast.success(t('successfully-deleted'));
     } catch {
-      toast.error(t('error-deleting-fleet-secret'));
+      toast.error(t('fleet:error-deleting-fleet-secret'));
     }
   };
 
