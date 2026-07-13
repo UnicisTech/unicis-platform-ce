@@ -1,0 +1,109 @@
+publiccodeYmlVersion: '0.4'
+
+name: Unicis Platform
+applicationSuite: Unicis
+url: 'https://github.com/UnicisTech/unicis-platform-ce.git'
+landingURL: 'https://platform.unicis.tech'
+
+softwareVersion: 0.2.2
+releaseDate: '2026-07-13'
+
+logo: 'public/unicis-platform-logo-hor.svg'
+
+platforms:
+  - web
+
+categories:
+  - it-security
+  - compliance-management
+  - regulations-and-directives
+  - project-management
+  - workflow-management
+
+developmentStatus: stable
+
+softwareType: standalone/web
+
+description:
+  en:
+    localisedName: Unicis Platform
+    shortDescription: >-
+      Open-source GRC platform for ISO 27001, GDPR, NIS2 and SOC 2 — tasks,
+      risk register, compliance controls and privacy modules in one place.
+    longDescription: |
+      Unicis Platform is an open-source Governance, Risk and Compliance (GRC)
+      solution, positioned as an alternative to proprietary tools such as
+      Vanta and Drata. It can be self-hosted or run as SaaS from the same
+      codebase, with no feature gap between the two deployment modes.
+
+      The platform ships with 11 compliance and cybersecurity frameworks
+      mapped and cross-referenced out of the box (including ISO 27001, GDPR,
+      NIS2 and SOC 2), and supports one-click Statement of Applicability
+      (SoA) export in HTML, PDF and Excel formats.
+
+      Core modules cover:
+
+      - Task and workflow management for compliance and audit activities
+      - Cybersecurity Controls (CSC) tracking across multiple frameworks,
+        with maturity status per control
+      - A Risk Management (RM) module with a risk register and treatment
+        plans
+      - Privacy modules: Record of Processing Activities (RPA), Data
+        Protection/Transfer Impact Assessments (TIA) and Privacy Impact
+        Assessments (PIA)
+      - Attachments, comments and audit logs on every task
+      - Role-based team management (Owner, Admin, Member, Auditor) with SSO
+        (SAML/OIDC), directory sync (SCIM) and API keys
+      - An MCP (Model Context Protocol) server, allowing the whole GRC
+        workflow to be driven through AI assistants such as Claude or
+        Cursor in natural language
+      - A public REST API with interactive OpenAPI/Swagger documentation
+
+      The application is built on Next.js/TypeScript with a PostgreSQL
+      database via Prisma, is available in 7 languages, and follows WCAG 2.1
+      AA accessibility guidelines.
+    documentation: 'https://www.unicis.tech/docs/platform/introduction'
+    apiDocumentation: 'https://platform.unicis.tech/api-docs'
+    features:
+      - Task and workflow management
+      - Cybersecurity Controls (CSC) tracking across 11+ frameworks
+      - Risk Management (RM) register and treatment plans
+      - Record of Processing Activities (RPA)
+      - Transfer/Data Protection Impact Assessment (TIA)
+      - Privacy Impact Assessment (PIA)
+      - Statement of Applicability (SoA) export (HTML/PDF/Excel)
+      - Role-based team management with SSO (SAML/OIDC) and SCIM
+      - REST API with OpenAPI/Swagger documentation
+      - MCP server for AI-assistant driven GRC workflows
+      - In-app, email and web-push notifications
+      - Multi-language user interface (7 languages)
+
+legal:
+  license: Apache-2.0
+  mainCopyrightOwner: Unicis.Tech OÜ
+  repoOwner: Unicis.Tech OÜ
+
+maintenance:
+  type: community
+  contacts:
+    - name: Unicis Tech
+      email: info@unicis.tech
+      affiliation: Unicis.Tech OÜ
+
+localisation:
+  localisationReady: true
+  availableLanguages:
+    - en
+    - fr
+    - de
+    - es
+    - it
+    - ja
+    - pt-BR
+
+dependsOn:
+  open:
+    - name: PostgreSQL
+      versionMin: '13'
+    - name: Node.js
+      versionMin: '20'
