@@ -133,7 +133,7 @@ Full setup guide → [Getting Started](#-getting-started)
 ## 🎬 Demo
 
 <p align="center">
-  <img src="public/readme/sunicis-demo.gif" alt="Unicis Platform walkthrough — navigating tasks, cybersecurity controls, privacy modules, and the compliance dashboard" width="100%">
+  <img src="public/readme/unicis-demo.gif" alt="Unicis Platform walkthrough — navigating tasks, cybersecurity controls, privacy modules, and the compliance dashboard" width="100%">
 </p>
 
 
