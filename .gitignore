@@ -64,3 +64,6 @@ certificates
 /.tmp*
 .security-hardening/
 certificates
+
+# demo GIF recorder raw captures
+/scripts/demo-recording/recordings/

@@ -4,23 +4,21 @@
   <img alt="Unicis Platform Community Banner" src="https://www.unicis.tech/images/unicis-platform-logo-horizonatal.svg">
 </picture>
 
-# ⭐️ Unicis Platform Community (free and open source)
+# Unicis Platform — Open-Source GRC, Without the Auditor Markup
 
-![Static Badge](https://img.shields.io/badge/Github%20stargazers%2C%20https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Fstargazers?logo=github&label=GitHub%20Star&link=https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Fstargazer)
-![Static Badge](https://img.shields.io/badge/Github%20fork%2C%20https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Ffork?logo=github&label=GitHub%20Fork&link=https%3A%2F%2Fgithub.com%2FUnicisTech%2Funicis-platform-ce%2Ffork)
+**The open-source alternative to Vanta and Drata.** Self-host it or run it as SaaS — same code, same features, no vendor lock-in. Built for CISOs, DPOs, and compliance teams shipping ISO 27001, GDPR, NIS2, SOC 2, and 8 more frameworks out of the box.
+
+### ⭐ If this is useful to you, star the repo — it's the main signal that tells us to keep building.
+
+[![GitHub stars](https://img.shields.io/github/stars/UnicisTech/unicis-platform-ce?style=social)](https://github.com/UnicisTech/unicis-platform-ce/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/UnicisTech/unicis-platform-ce?style=social)](https://github.com/UnicisTech/unicis-platform-ce/fork)
 ![Mastodon Follow](https://img.shields.io/mastodon/follow/110267135494682486?domain=mastodon.xyz)
-![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/UnicisTech)
-![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F?logo=LinkedIn&label=LinkedIn&link=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Funicis-tech-o%C3%BC%2F)
-![Discord](https://img.shields.io/discord/1110270854824214589)
+[![X Follow](https://img.shields.io/twitter/follow/UnicisTech)](https://twitter.com/UnicisTech)
+[![Discord](https://img.shields.io/discord/1110270854824214589)](https://discord.com/invite/8TwyeD97HD)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/UnicisTech/unicis-platform-ce/blob/main/LICENSE)
 <a href="https://hosted.weblate.org/engage/unicis-platform/"><img src="https://hosted.weblate.org/widget/unicis-platform/svg-badge.svg" alt="Translation status"></a>
 
-Unicis Platform Community Edition - an open core, enterprise-ready trust management platform for startups and SMEs. Built for CISOs, DPOs, DevSecOps, and compliance teams who need one place to manage privacy, cybersecurity controls, and risk.
-
-<p align="center">
-  <a href="https://github.com/UnicisTech/unicis-platform-ce">
-    <img src="https://img.shields.io/github/stars/UnicisTech/unicis-platform-ce?style=for-the-badge&logo=github&label=Star%20us%20on%20GitHub&color=22272e" alt="Star us on GitHub">
-  </a>
-</p>
+**[🚀 Try the live demo](https://platform.unicis.tech/?mtm_campaign=GitHub)** · **[📖 Docs](https://www.unicis.tech/docs/platform/introduction?mtm_campaign=GitHub)** · **[💬 Discord](https://discord.com/invite/8TwyeD97HD)**
 
 <p align="center">
   <picture>
@@ -31,6 +29,54 @@ Unicis Platform Community Edition - an open core, enterprise-ready trust managem
          width="100%">
   </picture>
 </p>
+
+## Why Unicis?
+
+- **No vendor lock-in.** Apache 2.0 licensed. Fork it, self-host it, modify it.
+- **AI-native.** Ships with an [MCP server](src/mcp-server) — manage your entire GRC workflow through Claude, Cursor, or any MCP-compatible assistant, in natural language.
+- **11 frameworks mapped**, cross-referenced, with one-click SoA export (HTML/PDF/Excel).
+- **Self-host or SaaS**, same codebase — no feature gap between the two.
+- **7-language UI** (EN, FR, DE, ES, IT, JA, PT-BR).
+
+### How we compare
+
+| | Unicis CE | GigaChad GRC | CISO Assistant | Eramba |
+|---|---|---|---|---|
+| MCP / AI-assistant integration | ✅ Live | — | — | — |
+| Self-hosted + SaaS, same codebase | ✅ | ✅ | ✅ | ✅ |
+| Frameworks out of the box | 11 | fewer | fewer | fewer |
+| Full SoA export | ✅ HTML/PDF/Excel | — | — | partial |
+
+### Quickstart
+
+```bash
+git clone https://github.com/UnicisTech/unicis-platform-ce.git
+cd unicis-platform-ce
+cp .env.example .env
+docker-compose up -d
+npm install && npx prisma db push && npm run dev
+```
+
+Full setup guide → [Getting Started](#-getting-started)
+
+## 📑 Table of Contents
+
+- [Why Unicis?](#why-unicis)
+- [Quickstart](#quickstart)
+- [Available Frameworks and Standards](#️-available-frameworks-and-standards)
+- [What's New](#-whats-new)
+- [Demo](#-demo)
+- [MCP Server — AI Assistant Integration](#-mcp-server--ai-assistant-integration)
+- [Additional Resources](#-additional-resources)
+- [Built With](#️-built-with)
+- [Upgrading](#-upgrading)
+- [Getting Started](#-getting-started)
+- [Modules](#modules)
+- [Features](#-features)
+- [Supported Languages](#supported-languages-)
+- [Contributing](#-contributing)
+- [Community](#-community)
+- [License](#️-license)
 
 ## 🗄️ Available Frameworks and Standards
 
@@ -83,6 +129,14 @@ Unicis Platform Community Edition - an open core, enterprise-ready trust managem
 **Webhook Delivery Status** — the webhooks table now shows a live "Last delivery" column with success ✓, pending ⏱, or failed ✗ status and timestamp for every endpoint, powered by the Svix `messageAttempt` API.
 
 **Responsive across all modules** — every module (RPA, TIA, PIA, CSC, RM, IAP, Tasks, Comments, Dashboard, Asset Management) is tested and verified at 375 px, 768 px, and 1280 px. Toolbars wrap, tables scroll, and dialogs never overflow on mobile.
+
+## 🎬 Demo
+
+<p align="center">
+  <img src="public/readme/sunicis-demo.gif" alt="Unicis Platform walkthrough — navigating tasks, cybersecurity controls, privacy modules, and the compliance dashboard" width="100%">
+</p>
+
+
 
 ## 🤖 MCP Server — AI Assistant Integration
 
@@ -405,7 +459,7 @@ For a growing ecosystem of consultants, MSSPs, resellers, and technology compani
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=UnicisTech/unicis-platform-ce&type=Date)](https://star-history.com/#UnicisTech/unicis-platform-ce&Date)
+![Star History Chart](public/readme/star-history-2026713.png)
 
 ## 🌍 Contributors
 
