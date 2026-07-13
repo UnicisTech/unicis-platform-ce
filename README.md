@@ -16,6 +16,8 @@
 [![X Follow](https://img.shields.io/twitter/follow/UnicisTech)](https://twitter.com/UnicisTech)
 [![Discord](https://img.shields.io/discord/1110270854824214589)](https://discord.com/invite/8TwyeD97HD)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/UnicisTech/unicis-platform-ce/blob/main/LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/UnicisTech/unicis-platform-ce)](https://github.com/UnicisTech/unicis-platform-ce/commits)
+[![Good first issues](https://img.shields.io/github/issues/UnicisTech/unicis-platform-ce/good%20first%20issue)](https://github.com/UnicisTech/unicis-platform-ce/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
 <a href="https://hosted.weblate.org/engage/unicis-platform/"><img src="https://hosted.weblate.org/widget/unicis-platform/svg-badge.svg" alt="Translation status"></a>
 
 **[🚀 Try the live demo](https://platform.unicis.tech/?mtm_campaign=GitHub)** · **[📖 Docs](https://www.unicis.tech/docs/platform/introduction?mtm_campaign=GitHub)** · **[💬 Discord](https://discord.com/invite/8TwyeD97HD)**
@@ -136,8 +138,6 @@ Full setup guide → [Getting Started](#-getting-started)
   <img src="public/readme/unicis-demo.gif" alt="Unicis Platform walkthrough — navigating tasks, cybersecurity controls, privacy modules, and the compliance dashboard" width="100%">
 </p>
 
-
-
 ## 🤖 MCP Server — AI Assistant Integration
 
 The [Unicis MCP Server](src/mcp-server) is an open-source [Model Context Protocol](https://modelcontextprotocol.io/) server, now maintained in this repository at `src/mcp-server`, that connects AI assistants directly to Unicis Platform. Once configured, you can manage your entire GRC workflow through natural language in Claude, Cursor, VS Code Copilot, or any MCP-compatible client.
@@ -180,7 +180,7 @@ The [Unicis MCP Server](src/mcp-server) is an open-source [Model Context Protoco
 
 ## 🚀 Deployment
 
-We are working on one-click deployment solution with popular platforms. For advance users please use the below section.
+Self-host with Docker Compose using the steps in [Getting Started](#-getting-started) below, or skip infrastructure entirely with the [free trial of our cloud instance](https://platform.unicis.tech/?mtm_campaign=GitHub). One-click deploy buttons for popular PaaS platforms are on the roadmap — [let us know](https://github.com/UnicisTech/unicis-platform-ce/issues) which platform you'd like to see first.
 
 ## 🔄 Upgrading
 
@@ -430,6 +430,8 @@ locales/
 
 Thanks for taking the time to contribute! Contributions make the open-source community a fantastic place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
+New to the codebase? Look for issues labeled [`good first issue`](https://github.com/UnicisTech/unicis-platform-ce/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) — small, scoped, and a good way to get oriented before tackling something bigger.
+
 Please try to create bug reports that are:
 
 - _Reproducible._ Include steps to reproduce the problem.
@@ -448,10 +450,7 @@ Help us build a future GRC by [supporting us](https://www.unicis.tech/community?
 - [X](https://twitter.com/UnicisTech) / [LinkedIn](https://www.linkedin.com/company/unicis-tech-oü/) / [Mastodon](https://mastodon.xyz/@unicis_tech) (Follow us)
 - [Vimeo](https://vimeo.com/user183384852) (Watch community events and tutorials)
 - [GitHub Issues](https://github.com/UnicisTech/unicis-platform-ce/issues) (Contributions, report issues, and product ideas)
-
-## 📘 Knowledge Hub
-
-On [this page](https://www.unicis.tech/community?mtm_campaign=GitHub) you will find everything you may need to know in order to install, configure, maintain and customize an Unicis Platform. Use the links below to navigate.
+- [Knowledge Hub](https://www.unicis.tech/community?mtm_campaign=GitHub) (Install, configure, maintain, and customize Unicis Platform)
 
 ## 🤝 Partners
 

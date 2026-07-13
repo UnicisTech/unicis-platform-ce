@@ -40,10 +40,10 @@ You'll also need `ffmpeg` installed:
    scripts/demo-recording/convert-to-gif.sh scripts/demo-recording/recordings/<the-file>.webm unicis-demo.gif
    ```
 
-4. Drop `unicis-demo.gif` into the repo at `public/unicis-demo.gif` and reference it in the README:
+4. Drop `unicis-demo.gif` into the repo at `public/readme/unicis-demo.gif` and reference it in the README:
 
    ```markdown
-   ![Unicis Platform in action](./public/unicis-demo.gif)
+   ![Unicis Platform in action](./public/readme/unicis-demo.gif)
    ```
 
 ## Tips for a good README GIF
