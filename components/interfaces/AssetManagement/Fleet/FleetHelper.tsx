@@ -11,7 +11,9 @@ const FleetHelper = ({ team }: { team: Partial<Team>; safe?: boolean }) => {
       <Card.Body>
         <Card.Header>
           <Card.Title>{t('fleet:fleet-info')}</Card.Title>
-          <Card.Description>{t('fleet:fleet-info-description')}</Card.Description>
+          <Card.Description>
+            {t('fleet:fleet-info-description')}
+          </Card.Description>
         </Card.Header>
         {team != null ? <div></div> : <FleetStatus />}
       </Card.Body>

@@ -42,12 +42,12 @@
 
 ### How we compare
 
-| | Unicis CE | GigaChad GRC | CISO Assistant | Eramba |
-|---|---|---|---|---|
-| MCP / AI-assistant integration | ✅ Live | — | — | — |
-| Self-hosted + SaaS, same codebase | ✅ | ✅ | ✅ | ✅ |
-| Frameworks out of the box | 11 | fewer | fewer | fewer |
-| Full SoA export | ✅ HTML/PDF/Excel | — | — | partial |
+|                                   | Unicis CE         | GigaChad GRC | CISO Assistant | Eramba  |
+| --------------------------------- | ----------------- | ------------ | -------------- | ------- |
+| MCP / AI-assistant integration    | ✅ Live           | —            | —              | —       |
+| Self-hosted + SaaS, same codebase | ✅                | ✅           | ✅             | ✅      |
+| Frameworks out of the box         | 11                | fewer        | fewer          | fewer   |
+| Full SoA export                   | ✅ HTML/PDF/Excel | —            | —              | partial |
 
 ### Quickstart
 

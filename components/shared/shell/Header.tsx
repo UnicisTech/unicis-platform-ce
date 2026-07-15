@@ -146,7 +146,9 @@ function useModuleTitle(): ModuleTitle {
     const assetDetailMatch = relative.match(/^\/assets\/([^/]+)/);
     if (assetDetailMatch) {
       return {
-        title: t('fleet:asset-management', { defaultValue: 'Asset Management' }),
+        title: t('fleet:asset-management', {
+          defaultValue: 'Asset Management',
+        }),
         count: 0,
         subTitle: assetSubTitle || assetDetailMatch[1],
         titleHref: `/teams/${slug}/asset`,
@@ -163,7 +165,9 @@ function useModuleTitle(): ModuleTitle {
         titleHref: `/teams/${slug}/asset-management/distributors`,
       };
     }
-    const packDetailMatch = relative.match(/^\/asset-management\/packs\/([^/]+)/);
+    const packDetailMatch = relative.match(
+      /^\/asset-management\/packs\/([^/]+)/
+    );
     if (packDetailMatch) {
       return {
         title: 'Packs',
@@ -202,7 +206,9 @@ function useModuleTitle(): ModuleTitle {
       return { title: 'Tags', count: 0 };
     if (relative.startsWith('/asset'))
       return {
-        title: t('fleet:asset-management', { defaultValue: 'Asset Management' }),
+        title: t('fleet:asset-management', {
+          defaultValue: 'Asset Management',
+        }),
         count: 0,
       };
     if (

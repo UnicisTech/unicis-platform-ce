@@ -154,9 +154,7 @@ function parseNamespaceArgument(node) {
   }
 
   if (ts.isArrayLiteralExpression(node)) {
-    const namespaces = node.elements
-      .map(getStringLiteralValue)
-      .filter(Boolean);
+    const namespaces = node.elements.map(getStringLiteralValue).filter(Boolean);
 
     if (namespaces.length > 0) {
       return namespaces;
@@ -235,9 +233,13 @@ function isUseTranslationCall(node) {
 }
 
 function getUseTranslationInfo(callExpression) {
-  const namespaces =
-    parseNamespaceArgument(callExpression.arguments[0]) || [DEFAULT_NAMESPACE];
-  const keyPrefix = getObjectStringProperty(callExpression.arguments[1], 'keyPrefix');
+  const namespaces = parseNamespaceArgument(callExpression.arguments[0]) || [
+    DEFAULT_NAMESPACE,
+  ];
+  const keyPrefix = getObjectStringProperty(
+    callExpression.arguments[1],
+    'keyPrefix'
+  );
 
   return { namespaces, keyPrefix };
 }
@@ -247,7 +249,8 @@ function getBoundTNames(bindingName) {
     return bindingName.elements
       .filter((element) => {
         const propertyName = getPropertyNameText(element.propertyName);
-        const bindingProperty = propertyName || getPropertyNameText(element.name);
+        const bindingProperty =
+          propertyName || getPropertyNameText(element.name);
 
         return bindingProperty === 't' && ts.isIdentifier(element.name);
       })
@@ -257,7 +260,11 @@ function getBoundTNames(bindingName) {
   if (ts.isArrayBindingPattern(bindingName)) {
     const firstElement = bindingName.elements[0];
 
-    if (firstElement && ts.isBindingElement(firstElement) && ts.isIdentifier(firstElement.name)) {
+    if (
+      firstElement &&
+      ts.isBindingElement(firstElement) &&
+      ts.isIdentifier(firstElement.name)
+    ) {
       return [firstElement.name.text];
     }
   }
@@ -343,8 +350,11 @@ function resolveTranslationReference(key, callExpression, tInfo) {
     };
   }
 
-  const optionNamespaces = getObjectNamespaceProperty(callExpression.arguments[1]);
-  const namespace = optionNamespaces?.[0] || tInfo.namespaces[0] || DEFAULT_NAMESPACE;
+  const optionNamespaces = getObjectNamespaceProperty(
+    callExpression.arguments[1]
+  );
+  const namespace =
+    optionNamespaces?.[0] || tInfo.namespaces[0] || DEFAULT_NAMESPACE;
   const resolvedKey = tInfo.keyPrefix ? `${tInfo.keyPrefix}.${key}` : key;
 
   return { namespace, key: resolvedKey };
@@ -405,7 +415,12 @@ function collectReferences(filePath) {
         arguments: [],
       };
 
-      addReference(node, node.initializer.text, fallbackCallExpression, bindings.fallback);
+      addReference(
+        node,
+        node.initializer.text,
+        fallbackCallExpression,
+        bindings.fallback
+      );
     }
 
     ts.forEachChild(node, visit);
@@ -601,7 +616,10 @@ function main() {
     }
   }
 
-  printIssues(`Missing keys in source locale (${SOURCE_LOCALE}):`, missingSourceKeys);
+  printIssues(
+    `Missing keys in source locale (${SOURCE_LOCALE}):`,
+    missingSourceKeys
+  );
   printIssues(
     `Likely namespace mismatch in source locale (${SOURCE_LOCALE}):`,
     namespaceMismatchKeys

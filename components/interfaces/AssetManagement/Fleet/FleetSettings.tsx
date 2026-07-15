@@ -50,7 +50,9 @@ const SettingsFleet = ({ user }: { user: Partial<User> }) => {
       <Card>
         <CardHeader>
           <CardTitle>{t('fleet:fleet-settings')}</CardTitle>
-          <CardDescription>{t('fleet:fleet-settings-description')}</CardDescription>
+          <CardDescription>
+            {t('fleet:fleet-settings-description')}
+          </CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-4">

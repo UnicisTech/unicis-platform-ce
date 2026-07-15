@@ -24,22 +24,22 @@
  * runtime, and use a dedicated demo/seed account.
  */
 
-import { chromium } from "playwright";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { chromium } from 'playwright';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const RECORDINGS_DIR = path.join(__dirname, "recordings");
+const RECORDINGS_DIR = path.join(__dirname, 'recordings');
 
 const DEMO_URL = process.env.DEMO_URL;
 const DEMO_EMAIL = process.env.DEMO_EMAIL;
 const DEMO_PASSWORD = process.env.DEMO_PASSWORD;
-const DEMO_TEAM = process.env.DEMO_TEAM || "unicis-demo";
+const DEMO_TEAM = process.env.DEMO_TEAM || 'unicis-demo';
 
 if (!DEMO_URL || !DEMO_EMAIL || !DEMO_PASSWORD) {
   console.error(
-    "Missing required env vars. Usage:\n" +
-      "  DEMO_URL=https://platform.unicis.tech DEMO_EMAIL=... DEMO_PASSWORD=... node scripts/demo-recording/record.mjs"
+    'Missing required env vars. Usage:\n' +
+      '  DEMO_URL=https://platform.unicis.tech DEMO_EMAIL=... DEMO_PASSWORD=... node scripts/demo-recording/record.mjs'
   );
   process.exit(1);
 }
@@ -60,44 +60,46 @@ async function main() {
     await page.fill('input[name="email"]', DEMO_EMAIL);
     await page.fill('input[name="password"]', DEMO_PASSWORD);
 
-    console.log("Signing in...");
+    console.log('Signing in...');
     await page.click('button[type="submit"]');
 
     // Accounts that belong to more than one team land on an "All Teams"
     // picker after login instead of going straight to a team dashboard.
     // Wait for either outcome and select the team if needed.
     const teamLink = `a[href="/teams/${DEMO_TEAM}/dashboard"]`;
-    const sidebarReady = page.waitForSelector('a[href$="/csc"]').then(() => "sidebar");
-    const teamPicker = page.waitForSelector(teamLink).then(() => "team-picker");
+    const sidebarReady = page
+      .waitForSelector('a[href$="/csc"]')
+      .then(() => 'sidebar');
+    const teamPicker = page.waitForSelector(teamLink).then(() => 'team-picker');
     sidebarReady.catch(() => {});
     teamPicker.catch(() => {});
 
     const landedOn = await Promise.race([sidebarReady, teamPicker]);
-    if (landedOn === "team-picker") {
+    if (landedOn === 'team-picker') {
       console.log(`Selecting team "${DEMO_TEAM}"...`);
       await page.click(teamLink);
       await page.waitForSelector('a[href$="/csc"]');
     }
-    console.log("Signed in.");
+    console.log('Signed in.');
 
     // --- Walkthrough: adjust these steps to match the story you want to tell ---
-    console.log("Opening Cybersecurity Management System...");
+    console.log('Opening Cybersecurity Management System...');
     await page.click('a[href$="/csc"]');
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState('networkidle');
     await page.waitForTimeout(1000);
 
-    console.log("Filtering controls by status...");
-    await page.click("text=Choose a status");
-    await page.getByRole("option", { name: "Not Performed" }).click();
-    await page.keyboard.press("Escape");
+    console.log('Filtering controls by status...');
+    await page.click('text=Choose a status');
+    await page.getByRole('option', { name: 'Not Performed' }).click();
+    await page.keyboard.press('Escape');
     await page.waitForTimeout(1500);
 
-    console.log("Back to dashboard...");
+    console.log('Back to dashboard...');
     await page.click('a[href$="/dashboard"]');
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState('networkidle');
     await page.waitForTimeout(2000);
   } catch (err) {
-    console.error("Walkthrough step failed:", err.message);
+    console.error('Walkthrough step failed:', err.message);
     throw err;
   } finally {
     // Video is only finalized once the context closes.

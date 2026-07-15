@@ -10,9 +10,7 @@ export const useDeleteFleetSecret = () => {
 
     if (!response.ok) {
       const error = await response.json().catch(() => ({}));
-      throw new Error(
-        error?.error?.message || 'Failed to delete Fleet secret'
-      );
+      throw new Error(error?.error?.message || 'Failed to delete Fleet secret');
     }
 
     return response.json().catch(() => ({}));

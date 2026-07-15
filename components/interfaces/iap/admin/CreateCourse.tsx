@@ -515,10 +515,10 @@ export default function CreateCourse2({
               control={courseForm.control}
               name="estimatedTime"
               rules={{
-                  validate: (v) =>
-                    !v ||
-                    validateNumberField(String(v)) ||
-                    t('only-numbers-allowed'),
+                validate: (v) =>
+                  !v ||
+                  validateNumberField(String(v)) ||
+                  t('only-numbers-allowed'),
               }}
               render={({ field, fieldState }) => (
                 <FormItem>
