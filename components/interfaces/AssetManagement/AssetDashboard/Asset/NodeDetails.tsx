@@ -4,6 +4,46 @@ import { useTranslation } from 'next-i18next';
 import { useGetNodeId } from '@/hooks/fleets/Nodes/useGetNodeId';
 import DataInfo from '@/components/shared/DataInfo';
 
+const formatNodeDate = (value: string | undefined | null) => {
+  if (!value) {
+    return value;
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  }).format(date);
+};
+
+const normalizeNodeValue = (value: string | number | undefined | null) => {
+  if (value === -1 || value === '-1') {
+    return null;
+  }
+
+  return value;
+};
+
+function Info({
+  header,
+  data,
+}: {
+  header: string;
+  data: string | number | undefined | null;
+}) {
+  return <DataInfo header={header} data={normalizeNodeValue(data)} />;
+}
+
 function Section({
   title,
   description,
@@ -50,100 +90,112 @@ const NodeDetails = ({
   return (
     <div className="space-y-3">
       <Section title={t('fleet:asset-overview', { defaultValue: 'Overview' })}>
-        <DataInfo header={t('fleet:asset-key')} data={node?.node_key} />
-        <DataInfo
+        <Info header={t('fleet:asset-key')} data={node?.node_key} />
+        <Info
           header={t('fleet:asset-status')}
           data={node ? t(node.is_active ? 'active' : 'inactive') : undefined}
         />
-        <DataInfo header={t('host-identifier')} data={node?.host_identifier} />
-        <DataInfo header={t('enrolled-on')} data={node?.enrolled_on} />
-        <DataInfo header={t('last-check')} data={node?.last_checkin} />
-        <DataInfo header={t('last-ip-address')} data={node?.last_ip} />
-        <DataInfo header={t('created-at')} data={node?.created_at} />
-        <DataInfo header={t('updated-at')} data={node?.updated_at} />
+        <Info header={t('host-identifier')} data={node?.host_identifier} />
+        <Info
+          header={t('enrolled-on')}
+          data={formatNodeDate(node?.enrolled_on)}
+        />
+        <Info
+          header={t('last-check')}
+          data={formatNodeDate(node?.last_checkin)}
+        />
+        <Info header={t('last-ip-address')} data={node?.last_ip} />
+        <Info
+          header={t('created-at')}
+          data={formatNodeDate(node?.created_at)}
+        />
+        <Info
+          header={t('updated-at')}
+          data={formatNodeDate(node?.updated_at)}
+        />
       </Section>
 
       <Section
         title={t('system-information')}
         description={t('system-information-desc')}
       >
-        <DataInfo
+        <Info
           header={t('board-model')}
           data={node?.node_info?.system_info?.board_model}
         />
-        <DataInfo
+        <Info
           header={t('board-serial')}
           data={node?.node_info?.system_info?.board_serial}
         />
-        <DataInfo
+        <Info
           header={t('board-vendor')}
           data={node?.node_info?.system_info?.board_vendor}
         />
-        <DataInfo
+        <Info
           header={t('board-version')}
           data={node?.node_info?.system_info?.board_version}
         />
-        <DataInfo
+        <Info
           header={t('computer-name')}
           data={node?.node_info?.system_info?.computer_name}
         />
-        <DataInfo
+        <Info
           header={t('cpu-brand')}
           data={node?.node_info?.system_info?.cpu_brand}
         />
-        <DataInfo
+        <Info
           header={t('cpu-logical')}
           data={node?.node_info?.system_info?.cpu_logical_cores}
         />
-        <DataInfo
+        <Info
           header={t('cpu-microcode')}
           data={node?.node_info?.system_info?.cpu_microcode}
         />
-        <DataInfo
+        <Info
           header={t('cpu-physical-cores')}
           data={node?.node_info?.system_info?.cpu_physical_cores}
         />
-        <DataInfo
+        <Info
           header={t('cpu-socket')}
           data={node?.node_info?.system_info?.cpu_sockets}
         />
-        <DataInfo
+        <Info
           header={t('cpu-subtype')}
           data={node?.node_info?.system_info?.cpu_subtype}
         />
-        <DataInfo
+        <Info
           header={t('cpu-type')}
           data={node?.node_info?.system_info?.cpu_type}
         />
-        <DataInfo
+        <Info
           header={t('hardware-model')}
           data={node?.node_info?.system_info?.hardware_model}
         />
-        <DataInfo
+        <Info
           header={t('hardware-serial')}
           data={node?.node_info?.system_info?.hardware_serial}
         />
-        <DataInfo
+        <Info
           header={t('hardware-vendor')}
           data={node?.node_info?.system_info?.hardware_vendor}
         />
-        <DataInfo
+        <Info
           header={t('hardware-version')}
           data={node?.node_info?.system_info?.hardware_version}
         />
-        <DataInfo
+        <Info
           header={t('hostname')}
           data={node?.node_info?.system_info?.hostname}
         />
-        <DataInfo
+        <Info
           header={t('local-hostname')}
           data={node?.node_info?.system_info?.local_hostname}
         />
-        <DataInfo
+        <Info
           header={t('physical-memory')}
           data={node?.node_info?.system_info?.physical_memory}
         />
-        <DataInfo
+        <Info
           header={t('uuid')}
           data={node?.node_info?.system_info?.uuid}
         />
@@ -153,48 +205,48 @@ const NodeDetails = ({
         title={t('agent-information')}
         description={t('agent-information-desc')}
       >
-        <DataInfo
+        <Info
           header={t('instance-id')}
           data={node?.node_info?.osquery_info?.instance_id}
         />
-        <DataInfo
+        <Info
           header={t('build-distro')}
           data={node?.node_info?.osquery_info?.build_distro}
         />
-        <DataInfo
+        <Info
           header={t('build-platform')}
           data={node?.node_info?.osquery_info?.build_platform}
         />
-        <DataInfo
+        <Info
           header={t('config-hash')}
           data={node?.node_info?.osquery_info?.config_hash}
         />
-        <DataInfo
+        <Info
           header={t('config-valid')}
           data={node?.node_info?.osquery_info?.config_valid}
         />
-        <DataInfo
+        <Info
           header={t('extensions')}
           data={node?.node_info?.osquery_info?.extensions}
         />
-        <DataInfo header={t('pid')} data={node?.node_info?.osquery_info?.pid} />
-        <DataInfo
+        <Info header={t('pid')} data={node?.node_info?.osquery_info?.pid} />
+        <Info
           header={t('platform-mask')}
           data={node?.node_info?.osquery_info?.platform_mask}
         />
-        <DataInfo
+        <Info
           header={t('start-time')}
           data={node?.node_info?.osquery_info?.start_time}
         />
-        <DataInfo
+        <Info
           header={t('uuid')}
           data={node?.node_info?.osquery_info?.uuid}
         />
-        <DataInfo
+        <Info
           header={t('version')}
           data={node?.node_info?.osquery_info?.version}
         />
-        <DataInfo
+        <Info
           header={t('watcher')}
           data={node?.node_info?.osquery_info?.watcher}
         />
@@ -204,39 +256,39 @@ const NodeDetails = ({
         title={t('platform-information')}
         description={t('platform-information-desc')}
       >
-        <DataInfo
+        <Info
           header={t('address')}
           data={node?.node_info?.platform_info?.address}
         />
-        <DataInfo
+        <Info
           header={t('data')}
           data={node?.node_info?.platform_info?.date}
         />
-        <DataInfo
+        <Info
           header={t('extra')}
           data={node?.node_info?.platform_info?.extra}
         />
-        <DataInfo
+        <Info
           header={t('firmware-type')}
           data={node?.node_info?.platform_info?.firmware_type}
         />
-        <DataInfo
+        <Info
           header={t('reversion')}
           data={node?.node_info?.platform_info?.revision}
         />
-        <DataInfo
+        <Info
           header={t('size')}
           data={node?.node_info?.platform_info?.size}
         />
-        <DataInfo
+        <Info
           header={t('vendor')}
           data={node?.node_info?.platform_info?.vendor}
         />
-        <DataInfo
+        <Info
           header={t('version')}
           data={node?.node_info?.platform_info?.version}
         />
-        <DataInfo
+        <Info
           header={t('volume-size')}
           data={node?.node_info?.platform_info?.volume_size}
         />
@@ -246,38 +298,38 @@ const NodeDetails = ({
         title={t('os-information')}
         description={t('os-information-desc')}
       >
-        <DataInfo header={t('id')} data={node?.node_info?.os_version?._id} />
-        <DataInfo header={t('arch')} data={node?.node_info?.os_version?.arch} />
-        <DataInfo
+        <Info header={t('id')} data={node?.node_info?.os_version?._id} />
+        <Info header={t('arch')} data={node?.node_info?.os_version?.arch} />
+        <Info
           header={t('codename')}
           data={node?.node_info?.os_version?.codename}
         />
-        <DataInfo
+        <Info
           header={t('major')}
           data={node?.node_info?.os_version?.major}
         />
-        <DataInfo
+        <Info
           header={t('minor')}
           data={node?.node_info?.os_version?.minor}
         />
-        <DataInfo header={t('name')} data={node?.node_info?.os_version?.name} />
-        <DataInfo
+        <Info header={t('name')} data={node?.node_info?.os_version?.name} />
+        <Info
           header={t('patch')}
           data={node?.node_info?.os_version?.patch}
         />
-        <DataInfo
+        <Info
           header={t('pid-with-namespace')}
           data={node?.node_info?.os_version?.pid_with_namespace}
         />
-        <DataInfo
+        <Info
           header={t('platform')}
           data={node?.node_info?.os_version?.platform}
         />
-        <DataInfo
+        <Info
           header={t('platform-like')}
           data={node?.node_info?.os_version?.platform_like}
         />
-        <DataInfo
+        <Info
           header={t('version')}
           data={node?.node_info?.os_version?.version}
         />

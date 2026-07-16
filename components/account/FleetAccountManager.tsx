@@ -19,7 +19,7 @@ const FleetAccountManager = ({
 
   return (
     <div>
-      <AccountTab activeTab="fleet" user={user} />
+      <AccountTab activeTab="fleet" user={user} showHeading={false} />
       <FleetAccountTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'Connect' && (
         <>

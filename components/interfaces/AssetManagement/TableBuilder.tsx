@@ -18,6 +18,36 @@ interface TableBuilderProps {
   loading?: boolean;
 }
 
+const DATE_FIELD_NAMES = new Set([
+  'created_at',
+  'updated_at',
+  'timestamp',
+  'enrolled_on',
+  'last_checkin',
+]);
+
+const formatTableDate = (value: unknown) => {
+  if (typeof value !== 'string' || !value) {
+    return null;
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return null;
+  }
+
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  }).format(date);
+};
+
 const TableBuilder: React.FC<TableBuilderProps> = ({
   data,
   onDelete,
@@ -63,8 +93,11 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
     }
   };
 
-  const renderCell = (value: any) => {
+  const renderCell = (header: string, value: any) => {
     if (value === null || value === undefined) return '-';
+    if (DATE_FIELD_NAMES.has(header)) {
+      return formatTableDate(value) || String(value);
+    }
     if (typeof value === 'object') {
       try {
         return (
@@ -106,7 +139,7 @@ const TableBuilder: React.FC<TableBuilderProps> = ({
                     key={header}
                     className="max-w-xs align-top break-words [overflow-wrap:anywhere]"
                   >
-                    {renderCell(row[header])}
+                    {renderCell(header, row[header])}
                   </TableCell>
                 ))}
                 {showActions && (

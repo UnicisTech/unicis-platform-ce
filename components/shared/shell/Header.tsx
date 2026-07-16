@@ -99,6 +99,11 @@ function useModuleTitle(): ModuleTitle {
     const path = asPath.split('?')[0];
     if (path === '/teams') return { title: t('all-teams'), count: 0 };
     if (path === '/settings/account') return { title: t('profile'), count: 0 };
+    if (path === '/settings/fleet')
+      return {
+        title: t('fleet:fleet-settings', { defaultValue: 'Fleet Settings' }),
+        count: 0,
+      };
     if (path === '/settings/password')
       return { title: t('password'), count: 0 };
     if (path === '/notifications')

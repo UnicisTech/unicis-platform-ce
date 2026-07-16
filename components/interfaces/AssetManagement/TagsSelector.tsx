@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useTags } from '@/hooks/fleets/Tags/useTags';
 import type { Tag } from '@/types';
@@ -37,6 +37,13 @@ const TagsSelector: React.FC<TagsSelectorProps> = ({
   const { tags, isLoading, isError } = useTags(fleetTeamId);
   const [open, setOpen] = useState(false);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  const onSelectRef = useRef(onSelect);
+  const setSectionTagRef = useRef(setSectionTag);
+
+  useEffect(() => {
+    onSelectRef.current = onSelect;
+    setSectionTagRef.current = setSectionTag;
+  }, [onSelect, setSectionTag]);
 
   const options = useMemo(
     () =>
@@ -55,20 +62,18 @@ const TagsSelector: React.FC<TagsSelectorProps> = ({
         .filter((v): v is string => Boolean(v));
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedValues(preset);
-      setSectionTag(preset);
-      onSelect(preset);
     }
-  }, [tags]);
+  }, [tags, preSelectedTag]);
+
+  useEffect(() => {
+    setSectionTagRef.current(selectedValues);
+    onSelectRef.current(selectedValues);
+  }, [selectedValues]);
 
   const toggleValue = (val: string) => {
-    setSelectedValues((prev) => {
-      const next = prev.includes(val)
-        ? prev.filter((v) => v !== val)
-        : [...prev, val];
-      setSectionTag(next);
-      onSelect(next);
-      return next;
-    });
+    setSelectedValues((prev) =>
+      prev.includes(val) ? prev.filter((v) => v !== val) : [...prev, val]
+    );
   };
 
   if (isLoading) return <p>{t('loading')}</p>;
@@ -108,11 +113,12 @@ const TagsSelector: React.FC<TagsSelectorProps> = ({
                   return (
                     <CommandItem
                       key={opt.value}
-                      onSelect={() => toggleValue(opt.value)}
+                      onSelect={() => {}}
                       className="flex items-center gap-2"
                     >
                       <Checkbox
                         checked={!!checked}
+                        onClick={(event) => event.stopPropagation()}
                         onCheckedChange={() => toggleValue(opt.value)}
                       />
                       <span className="text-sm">{opt.label}</span>

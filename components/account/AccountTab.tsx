@@ -7,9 +7,15 @@ interface AccountTabProps {
   activeTab: string;
   heading?: string;
   user?: Partial<User>;
+  showHeading?: boolean;
 }
 
-const AccountTab = ({ activeTab, heading, user }: AccountTabProps) => {
+const AccountTab = ({
+  activeTab,
+  heading,
+  user,
+  showHeading = true,
+}: AccountTabProps) => {
   const navigations = [
     {
       name: 'Platform Account',
@@ -21,9 +27,11 @@ const AccountTab = ({ activeTab, heading, user }: AccountTabProps) => {
 
   return (
     <div className="flex flex-col pb-6">
-      <h2 className="text-xl font-semibold mb-2">
-        {heading ? heading : user?.name}
-      </h2>
+      {showHeading && (
+        <h2 className="text-xl font-semibold mb-2">
+          {heading ? heading : user?.name}
+        </h2>
+      )}
       <nav
         className=" flex space-x-5 border-b border-gray-300"
         aria-label="Tabs"

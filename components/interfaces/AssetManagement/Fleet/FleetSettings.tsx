@@ -7,9 +7,6 @@ import FleetStatus from './FleetStatus';
 import { Button } from '@/components/shadcn/ui/button';
 import {
   Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
   CardContent,
   CardFooter,
 } from '@/components/shadcn/ui/card';
@@ -48,14 +45,11 @@ const SettingsFleet = ({ user }: { user: Partial<User> }) => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Card>
-        <CardHeader>
-          <CardTitle>{t('fleet:fleet-settings')}</CardTitle>
-          <CardDescription>
-            {t('fleet:fleet-settings-description')}
-          </CardDescription>
-        </CardHeader>
-
         <CardContent className="space-y-4">
+          <p className="pt-6 text-sm text-muted-foreground">
+            {t('fleet:fleet-settings-description')}
+          </p>
+
           <FleetStatus status="connected" />
 
           <div className="grid gap-4 md:grid-cols-2">

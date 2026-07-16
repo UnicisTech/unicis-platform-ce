@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import useCanAccess from 'hooks/useCanAccess';
@@ -18,6 +17,30 @@ const PAGE_SIZE = 20;
 
 const thClassName =
   'px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide';
+
+const getNodeDisplayName = (node: Node) =>
+  node.node_info?.system_info?.computer_name ||
+  node.node_info?.system_info?.hostname ||
+  node.node_info?.system_info?.local_hostname ||
+  node.host_identifier ||
+  node.node_key ||
+  'N/A';
+
+const getNodeSearchText = (node: Node) =>
+  [
+    getNodeDisplayName(node),
+    node.node_info?.system_info?.hostname,
+    node.node_info?.system_info?.local_hostname,
+    node.host_identifier,
+    node.node_key,
+    node.owner.user?.name,
+    node.owner.user?.firstname,
+    node.owner.user?.lastname,
+    node.owner.user?.email,
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
 
 const Nodes = ({
   team,
@@ -53,14 +76,15 @@ const Nodes = ({
     setDeleteVisible(true);
   };
 
+  const openNodeDetails = (nodeId: string) => {
+    void router.push(`/teams/${slug}/assets/${nodeId}`);
+  };
+
   const filteredNodes = useMemo(
     () =>
       nodes?.filter((node) => {
         try {
-          return (
-            node.team?.user?.name?.toLowerCase().includes(searchTerm) ||
-            node.node_key?.toLowerCase().includes(searchTerm)
-          );
+          return getNodeSearchText(node).includes(searchTerm);
         } catch {
           return false;
         }
@@ -135,24 +159,32 @@ const Nodes = ({
                   <div
                     key={node.id}
                     className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3"
+                    role="link"
+                    tabIndex={0}
+                    onClick={() => openNodeDetails(node.id)}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        openNodeDetails(node.id);
+                      }
+                    }}
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <Link
-                        href={`/teams/${slug}/assets/${node.id}`}
-                        title={t('open-asset-details')}
-                        className="group inline-flex items-start gap-1.5 min-w-0 text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
-                      >
+                      <div className="group inline-flex items-start gap-1.5 min-w-0 text-foreground">
                         <div className="min-w-0">
                           <div className="font-medium underline-offset-4 group-hover:underline truncate">
+                            {getNodeDisplayName(node)}
+                          </div>
+                          <div className="text-xs text-muted-foreground truncate">
                             {node.owner.user?.firstname}{' '}
                             {node.owner.user?.lastname}
                           </div>
                           <div className="text-xs text-muted-foreground truncate">
-                            {node.owner.user?.email}
+                            {node.owner.user?.email || node.host_identifier}
                           </div>
                         </div>
                         <ChevronRight className="h-3.5 w-3.5 mt-0.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
-                      </Link>
+                      </div>
                       <AssetStatusBadge isActive={node.is_active} />
                     </div>
 
@@ -161,8 +193,11 @@ const Nodes = ({
                         <dt className="text-[11px] uppercase tracking-wide text-slate-500 dark:text-slate-400">
                           {t('system-info')}
                         </dt>
-                        <dd>{node.node_info?.system_info?.computer_name}</dd>
                         <dd>{node.node_info?.system_info?.hardware_model}</dd>
+                        <dd>
+                          {t('hardware-serial')}:&nbsp;
+                          {node.node_info?.system_info?.hardware_serial || 'N/A'}
+                        </dd>
                       </div>
                       <div>
                         <dt className="text-[11px] uppercase tracking-wide text-slate-500 dark:text-slate-400">
@@ -182,7 +217,10 @@ const Nodes = ({
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => openDeleteModal(node.id)}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            openDeleteModal(node.id);
+                          }}
                         >
                           {t('delete')}
                         </Button>
@@ -197,6 +235,7 @@ const Nodes = ({
                 <table className="text-sm w-full">
                   <thead className="bg-slate-50 dark:bg-slate-800">
                     <tr>
+                      <th className={thClassName}>{t('computer-name')}</th>
                       <th className={thClassName}>{t('owner')}</th>
                       <th className={thClassName}>{t('status')}</th>
                       <th className={thClassName}>{t('agent-info')}</th>
@@ -207,24 +246,39 @@ const Nodes = ({
                   </thead>
                   <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                     {pagedNodes.map((node) => (
-                      <tr key={node.id}>
+                      <tr
+                        key={node.id}
+                        role="link"
+                        tabIndex={0}
+                        className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset hover:bg-slate-50/70 dark:hover:bg-slate-800/70"
+                        onClick={() => openNodeDetails(node.id)}
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            openNodeDetails(node.id);
+                          }
+                        }}
+                      >
                         <td className="px-3 py-3 align-top">
-                          <Link
-                            href={`/teams/${slug}/assets/${node.id}`}
-                            title={t('open-asset-details')}
-                            className="group inline-flex items-start gap-1.5 rounded-sm px-1 py-0.5 -mx-1 -my-0.5 text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                          >
+                          <div className="group inline-flex items-start gap-1.5 rounded-sm px-1 py-0.5 -mx-1 -my-0.5 text-foreground transition-colors hover:text-primary">
                             <div className="min-w-0">
                               <div className="font-medium underline-offset-4 group-hover:underline">
-                                {node.owner.user?.firstname}{' '}
-                                {node.owner.user?.lastname}
+                                {getNodeDisplayName(node)}
                               </div>
                               <div className="text-xs text-muted-foreground">
-                                {node.owner.user?.email}
+                                {node.host_identifier || 'N/A'}
                               </div>
                             </div>
                             <ChevronRight className="h-3.5 w-3.5 mt-0.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
-                          </Link>
+                          </div>
+                        </td>
+                        <td className="px-3 py-3 align-top text-xs">
+                          <div className="font-medium">
+                            {node.owner.user?.firstname} {node.owner.user?.lastname}
+                          </div>
+                          <div className="text-muted-foreground">
+                            {node.owner.user?.email || 'N/A'}
+                          </div>
                         </td>
                         <td className="px-3 py-3 align-top">
                           <AssetStatusBadge isActive={node.is_active} />
@@ -243,14 +297,14 @@ const Nodes = ({
                         </td>
                         <td className="px-3 py-3 align-top text-xs">
                           <div>
-                            {node.node_info?.system_info?.computer_name}
-                          </div>
-                          <div>
                             {node.node_info?.system_info?.hardware_model}
                           </div>
                           <div>
                             {t('hardware-serial')}:{' '}
-                            {node.node_info?.system_info.hardware_serial}
+                            {node.node_info?.system_info?.hardware_serial || 'N/A'}
+                          </div>
+                          <div>
+                            {t('host-identifier')}: {node.host_identifier || 'N/A'}
                           </div>
                         </td>
                         <td className="px-3 py-3 align-top text-xs">
@@ -265,7 +319,10 @@ const Nodes = ({
                               <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={() => openDeleteModal(node.id)}
+                                onClick={(event) => {
+                                  event.stopPropagation();
+                                  openDeleteModal(node.id);
+                                }}
                               >
                                 {t('delete')}
                               </Button>
