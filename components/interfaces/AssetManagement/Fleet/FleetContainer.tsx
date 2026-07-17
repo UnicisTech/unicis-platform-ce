@@ -3,6 +3,7 @@ import { Error } from '@/components/shared';
 import { useTranslation } from 'next-i18next';
 import type { Team, User } from '@/generated/client';
 import FleetSecret from './FleetSecret';
+import SettingsFleet from './FleetSettings';
 
 const FleetContainer = ({
   user,
@@ -36,6 +37,9 @@ const FleetContainer = ({
         team={team}
         // safe={isSafe}
       />
+      <div className="mt-6">
+        <SettingsFleet user={user} team={team} />
+      </div>
     </>
   );
 };

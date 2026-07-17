@@ -25,6 +25,7 @@
   "fleet-order-account": "Verbindung bestellen",
   "fleet-disconnect": "Fleet trennen",
   "fleet-disconnected": "Fleet getrennt",
+  "fleet-disconnected-retention": "Fleet ist für dieses Team getrennt. Bestehende Fleet-Daten bleiben bis {{date}} erhalten und werden danach gelöscht, sofern Fleet nicht erneut verbunden wird.",
   "fleet-not-found": "Nicht gefunden",
   "fleet-password": "Fleet-Passwort",
   "fleet-user-password": "Ihr Fleet-Passwort",

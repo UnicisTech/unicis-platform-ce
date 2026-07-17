@@ -195,10 +195,7 @@ const NodeDetails = ({
           header={t('physical-memory')}
           data={node?.node_info?.system_info?.physical_memory}
         />
-        <Info
-          header={t('uuid')}
-          data={node?.node_info?.system_info?.uuid}
-        />
+        <Info header={t('uuid')} data={node?.node_info?.system_info?.uuid} />
       </Section>
 
       <Section
@@ -238,10 +235,7 @@ const NodeDetails = ({
           header={t('start-time')}
           data={node?.node_info?.osquery_info?.start_time}
         />
-        <Info
-          header={t('uuid')}
-          data={node?.node_info?.osquery_info?.uuid}
-        />
+        <Info header={t('uuid')} data={node?.node_info?.osquery_info?.uuid} />
         <Info
           header={t('version')}
           data={node?.node_info?.osquery_info?.version}
@@ -260,10 +254,7 @@ const NodeDetails = ({
           header={t('address')}
           data={node?.node_info?.platform_info?.address}
         />
-        <Info
-          header={t('data')}
-          data={node?.node_info?.platform_info?.date}
-        />
+        <Info header={t('data')} data={node?.node_info?.platform_info?.date} />
         <Info
           header={t('extra')}
           data={node?.node_info?.platform_info?.extra}
@@ -276,10 +267,7 @@ const NodeDetails = ({
           header={t('reversion')}
           data={node?.node_info?.platform_info?.revision}
         />
-        <Info
-          header={t('size')}
-          data={node?.node_info?.platform_info?.size}
-        />
+        <Info header={t('size')} data={node?.node_info?.platform_info?.size} />
         <Info
           header={t('vendor')}
           data={node?.node_info?.platform_info?.vendor}
@@ -304,19 +292,10 @@ const NodeDetails = ({
           header={t('codename')}
           data={node?.node_info?.os_version?.codename}
         />
-        <Info
-          header={t('major')}
-          data={node?.node_info?.os_version?.major}
-        />
-        <Info
-          header={t('minor')}
-          data={node?.node_info?.os_version?.minor}
-        />
+        <Info header={t('major')} data={node?.node_info?.os_version?.major} />
+        <Info header={t('minor')} data={node?.node_info?.os_version?.minor} />
         <Info header={t('name')} data={node?.node_info?.os_version?.name} />
-        <Info
-          header={t('patch')}
-          data={node?.node_info?.os_version?.patch}
-        />
+        <Info header={t('patch')} data={node?.node_info?.os_version?.patch} />
         <Info
           header={t('pid-with-namespace')}
           data={node?.node_info?.os_version?.pid_with_namespace}

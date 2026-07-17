@@ -1,144 +1,133 @@
-import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
-import * as Yup from 'yup';
-import { passwordPolicies } from '@/lib/common';
-import type { User } from '@/generated/client';
-import FleetStatus from './FleetStatus';
+import toast from 'react-hot-toast';
+import Cookies from 'js-cookie';
+import type { Team, User } from '@/generated/client';
 import { Button } from '@/components/shadcn/ui/button';
+import { Badge } from '@/components/shadcn/ui/badge';
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
+  CardHeader,
+  CardTitle,
 } from '@/components/shadcn/ui/card';
 import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
+import { useFleetConnection } from '@/hooks/fleets/connect/useFleetConnection';
+import {
+  fleetAccessTokenCookieName,
+  legacyFleetAccessTokenCookieName,
+} from '@/lib/fleet/cookies';
 
-const schema = Yup.object().shape({
-  id: Yup.string().required(),
-  email: Yup.string().required(),
-  firstName: Yup.string().required(),
-  lastName: Yup.string().required(),
-  fleetPassword: Yup.string().required().min(passwordPolicies.minLength),
-});
-
-const SettingsFleet = ({ user }: { user: Partial<User> }) => {
+const SettingsFleet = ({
+  user,
+  team,
+}: {
+  user: Partial<User>;
+  team?: Team;
+}) => {
   const { t } = useTranslation(['common', 'fleet']);
+  const { connection, disconnect, isDisconnected } = useFleetConnection(
+    team?.id
+  );
+  const nameParts = user?.name?.split(' ') ?? [];
+  const firstName = user?.firstName || nameParts[0] || '';
+  const lastName = user?.lastName || nameParts.slice(1).join(' ') || '';
 
-  const formik = useFormik({
-    initialValues: {
-      id: user.id || '',
-      email: user.email || '',
-      firstName: user.firstName || '',
-      lastName: user.lastName || '',
-      fleetPassword: '',
-    },
-    validationSchema: schema,
-    onSubmit: async (values) => {
-      try {
-        console.log('Fleet settings saved:', values);
-      } catch (error) {
-        console.error('Error creating or connecting fleet:', error);
-      }
-    },
-  });
+  const handleDisconnect = async () => {
+    if (!team?.id) {
+      return;
+    }
+
+    try {
+      await disconnect();
+      Cookies.remove(fleetAccessTokenCookieName);
+      Cookies.remove(legacyFleetAccessTokenCookieName);
+      toast.success(t('fleet:fleet-disconnected'));
+    } catch {
+      toast.error(t('fleet:fleet-connect-failed'));
+    }
+  };
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <Card>
-        <CardContent className="space-y-4">
-          <p className="pt-6 text-sm text-muted-foreground">
+    <Card>
+      <CardHeader className="flex flex-row items-start justify-between gap-4">
+        <div>
+          <CardTitle>{t('fleet:fleet-settings')}</CardTitle>
+          <CardDescription className="mt-2">
             {t('fleet:fleet-settings-description')}
+          </CardDescription>
+        </div>
+
+        <Badge
+          variant={isDisconnected ? 'outline' : 'secondary'}
+          className={
+            isDisconnected
+              ? 'border-amber-300 bg-amber-50 text-amber-700'
+              : 'border-emerald-200 bg-emerald-50 text-emerald-700'
+          }
+        >
+          {isDisconnected
+            ? t('fleet:fleet-disconnected')
+            : t('fleet:fleet-connected')}
+        </Badge>
+      </CardHeader>
+
+      <CardContent className="space-y-6">
+        {isDisconnected && (
+          <p className="rounded border border-amber-200 bg-amber-50 p-3 text-sm text-muted-foreground">
+            {t('fleet:fleet-disconnected-retention', {
+              date: connection?.deleteAfter
+                ? new Date(connection.deleteAfter).toLocaleDateString()
+                : '-',
+            })}
           </p>
+        )}
 
-          <FleetStatus status="connected" />
-
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="flex flex-col space-y-1">
-              <Label htmlFor="firstName">{t('first-name')}</Label>
-              <Input
-                id="firstName"
-                name="firstName"
-                value={formik.values.firstName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder={t('first-name')}
-              />
-              {formik.touched.firstName && formik.errors.firstName && (
-                <p className="text-sm text-red-500">
-                  {formik.errors.firstName}
-                </p>
-              )}
-            </div>
-
-            <div className="flex flex-col space-y-1">
-              <Label htmlFor="lastName">{t('last-name')}</Label>
-              <Input
-                id="lastName"
-                name="lastName"
-                value={formik.values.lastName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder={t('last-name')}
-              />
-              {formik.touched.lastName && formik.errors.lastName && (
-                <p className="text-sm text-red-500">{formik.errors.lastName}</p>
-              )}
-            </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="space-y-2">
+            <Label htmlFor="fleet-first-name">{t('first-name')}</Label>
+            <Input id="fleet-first-name" value={firstName} readOnly />
           </div>
 
-          <div className="flex flex-col space-y-1">
-            <Label htmlFor="email">{t('email')}</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              placeholder={t('email')}
-            />
-            {formik.touched.email && formik.errors.email && (
-              <p className="text-sm text-red-500">{formik.errors.email}</p>
-            )}
+          <div className="space-y-2">
+            <Label htmlFor="fleet-last-name">{t('last-name')}</Label>
+            <Input id="fleet-last-name" value={lastName} readOnly />
           </div>
+        </div>
 
-          <div className="flex flex-col space-y-1">
-            <Label htmlFor="fleetPassword">{t('fleet:fleet-password')}</Label>
-            <Input
-              id="fleetPassword"
-              name="fleetPassword"
-              type="password"
-              value={formik.values.fleetPassword}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              placeholder={t('fleet:fleet-password')}
-              autoComplete="off"
-              inputMode="none"
-            />
-            {formik.touched.fleetPassword && formik.errors.fleetPassword && (
-              <p className="text-sm text-red-500">
-                {formik.errors.fleetPassword}
-              </p>
-            )}
-          </div>
-        </CardContent>
+        <div className="space-y-2">
+          <Label htmlFor="fleet-email">{t('email')}</Label>
+          <Input id="fleet-email" value={user?.email ?? ''} readOnly />
+        </div>
 
-        <CardFooter className="flex justify-between">
-          <Button
-            type="button"
-            variant="destructive"
-            size="sm"
-            onClick={() => console.log('Disconnect Fleet')}
-          >
-            {t('disconnect')}
-          </Button>
+        <div className="space-y-2">
+          <Label htmlFor="fleet-password">{t('fleet:fleet-password')}</Label>
+          <Input
+            id="fleet-password"
+            type="password"
+            value="************"
+            readOnly
+          />
+        </div>
+      </CardContent>
 
-          <Button type="submit" size="sm" disabled={formik.isSubmitting}>
-            {formik.isSubmitting ? t('saving') : t('save')}
-          </Button>
-        </CardFooter>
-      </Card>
-    </form>
+      <CardFooter className="flex justify-between gap-3">
+        <Button
+          type="button"
+          variant="destructive"
+          disabled={!team?.id || isDisconnected}
+          onClick={handleDisconnect}
+        >
+          {t('disconnect')}
+        </Button>
+
+        <Button type="button" disabled>
+          {t('save')}
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 

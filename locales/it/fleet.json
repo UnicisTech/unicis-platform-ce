@@ -25,6 +25,7 @@
   "fleet-order-account": "Ordina connessione",
   "fleet-disconnect": "Disconnetti Fleet",
   "fleet-disconnected": "Fleet disconnesso",
+  "fleet-disconnected-retention": "Fleet è disconnesso per questo team. I dati Fleet esistenti vengono conservati fino al {{date}} e saranno eliminati dopo tale data se Fleet non viene riconnesso.",
   "fleet-not-found": "Non trovato",
   "fleet-password": "Password Fleet",
   "fleet-user-password": "La tua password Fleet",

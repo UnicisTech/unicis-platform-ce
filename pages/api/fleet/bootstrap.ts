@@ -292,6 +292,24 @@ export default async function handler(
       },
     });
 
+    await prisma.fleetConnection.upsert({
+      where: {
+        teamId,
+      },
+      update: {
+        status: 'CONNECTED',
+        disconnectedAt: null,
+        deleteAfter: null,
+        deletedAt: null,
+        disconnectedById: null,
+        cleanupError: null,
+      },
+      create: {
+        teamId,
+        status: 'CONNECTED',
+      },
+    });
+
     console.log('[Bootstrap] Bootstrap completed successfully');
     return res.status(200).json({
       success: true,

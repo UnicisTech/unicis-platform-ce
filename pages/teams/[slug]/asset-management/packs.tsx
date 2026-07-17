@@ -9,6 +9,7 @@ import { getUserBySession } from '@/models/user';
 import { getSession } from '@/lib/session';
 import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import { TeamTab } from '@/components/team';
+import FleetConnectRequired from '@/components/interfaces/AssetManagement/FleetConnectRequired';
 
 const AllPacks: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -21,7 +22,9 @@ const AllPacks: NextPageWithLayout<
         teamFeatures={teamFeatures}
       />
       <AssetTab activeTab="packs" team={team} teamFeatures={teamFeatures} />
-      <Packs team={team} user={user} />
+      <FleetConnectRequired user={user} teamId={team.id}>
+        {() => <Packs team={team} user={user} />}
+      </FleetConnectRequired>
     </>
   );
 };

@@ -9,6 +9,7 @@ import { getSession } from '@/lib/session';
 import { Querys } from '@/components/interfaces/AssetManagement/Query';
 import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import { TeamTab } from '@/components/team';
+import FleetConnectRequired from '@/components/interfaces/AssetManagement/FleetConnectRequired';
 
 const AllQueries: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -21,7 +22,9 @@ const AllQueries: NextPageWithLayout<
         teamFeatures={teamFeatures}
       />
       <AssetTab activeTab="queries" team={team} teamFeatures={teamFeatures} />
-      <Querys user={user} team={team} />
+      <FleetConnectRequired user={user} teamId={team.id}>
+        {() => <Querys user={user} team={team} />}
+      </FleetConnectRequired>
     </>
   );
 };

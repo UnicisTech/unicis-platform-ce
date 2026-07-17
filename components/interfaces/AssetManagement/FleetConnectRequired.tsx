@@ -25,6 +25,7 @@ import {
   fleetAccessTokenCookieOptions,
   legacyFleetAccessTokenCookieName,
 } from '@/lib/fleet/cookies';
+import { useFleetConnection } from '@/hooks/fleets/connect/useFleetConnection';
 
 interface FleetConnectRequiredProps {
   user: Partial<User>;
@@ -78,6 +79,13 @@ const FleetConnectRequired = ({
   const [isBootstrapping, setIsBootstrapping] = useState(false);
 
   const { access, isLoading } = useVerifyFleetAsses();
+  const {
+    connection,
+    isDisconnected,
+    isDeleted,
+    isLoading: isConnectionLoading,
+    mutateFleetConnection,
+  } = useFleetConnection(teamId);
   const accessFleetAccount = useAccessFleetAccount();
   const hasFleetToken = Boolean(
     Cookies.get(fleetAccessTokenCookieName) ||
@@ -85,7 +93,7 @@ const FleetConnectRequired = ({
   );
   const accessAuthenticated = Boolean(access?.is_active && !access.is_expired);
   const isAuthenticated =
-    authOverride ?? (accessAuthenticated || hasFleetToken);
+    !isDeleted && (authOverride ?? (accessAuthenticated || hasFleetToken));
   const shouldOpenEnrollmentDialog = Boolean(
     enrollmentToken && !isAuthenticated && !enrollmentDialogDismissed
   );
@@ -330,6 +338,7 @@ const FleetConnectRequired = ({
         toast.success(t('fleet:fleet-account-created'));
         setShowBootstrap(false);
         setAuthOverride(true);
+        await mutateFleetConnection();
       } catch (error) {
         console.error('[Bootstrap] Error:', error);
         toast.error(
@@ -381,7 +390,99 @@ const FleetConnectRequired = ({
     }
   };
 
-  if (isLoading) return <Loading />;
+  if (isLoading || isConnectionLoading) return <Loading />;
+
+  if (isDisconnected) {
+    return (
+      <>
+        <div className="rounded border border-amber-200 bg-amber-50 p-6 text-center">
+          <h1 className="text-2xl font-bold">
+            {t('fleet:fleet-disconnected')}
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-sm text-muted-foreground">
+            {t('fleet:fleet-disconnected-retention', {
+              date: connection?.deleteAfter
+                ? new Date(connection.deleteAfter).toLocaleDateString()
+                : '-',
+            })}
+          </p>
+          {isTeamAdmin && (
+            <Button
+              className="mt-6"
+              size="sm"
+              onClick={() => setShowBootstrap(true)}
+            >
+              {t('fleet:fleet-connect')}
+            </Button>
+          )}
+        </div>
+
+        <Dialog open={showBootstrap} onOpenChange={setShowBootstrap}>
+          <DialogContent className="sm:max-w-md">
+            <form onSubmit={bootstrapFormik.handleSubmit}>
+              <DialogHeader>
+                <DialogTitle>{t('fleet:create-fleet-account')}</DialogTitle>
+                <DialogDescription>
+                  {t('fleet:bootstrap-description')}
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="mt-4 space-y-4">
+                <div className="space-y-2">
+                  <Label>{t('password')}</Label>
+                  <Input
+                    type="password"
+                    name="password"
+                    value={bootstrapFormik.values.password}
+                    onChange={bootstrapFormik.handleChange}
+                    placeholder={t('fleet:enter-password')}
+                  />
+                  {bootstrapFormik.errors.password &&
+                    bootstrapFormik.touched.password && (
+                      <p className="text-sm text-destructive">
+                        {bootstrapFormik.errors.password}
+                      </p>
+                    )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label>{t('confirm-password')}</Label>
+                  <Input
+                    type="password"
+                    name="confirmPassword"
+                    value={bootstrapFormik.values.confirmPassword}
+                    onChange={bootstrapFormik.handleChange}
+                    placeholder={t('confirm-password')}
+                  />
+                  {bootstrapFormik.errors.confirmPassword &&
+                    bootstrapFormik.touched.confirmPassword && (
+                      <p className="text-sm text-destructive">
+                        {bootstrapFormik.errors.confirmPassword}
+                      </p>
+                    )}
+                </div>
+              </div>
+
+              <DialogFooter className="mt-6">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setShowBootstrap(false)}
+                  disabled={isBootstrapping}
+                >
+                  {t('cancel')}
+                </Button>
+                <Button type="submit" disabled={isBootstrapping}>
+                  {isBootstrapping ? t('creating') : t('fleet:create-account')}
+                </Button>
+              </DialogFooter>
+            </form>
+          </DialogContent>
+        </Dialog>
+      </>
+    );
+  }
+
   if (isAuthenticated) return <>{children({ isAuthenticated, logout })}</>;
 
   return (

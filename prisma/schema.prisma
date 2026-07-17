@@ -96,6 +96,7 @@ model Team {
   TeamCourse   TeamCourse[]
   Category     Category[]
   fleetEnrollments FleetEnrollment[]
+  fleetConnection FleetConnection?
   taskRecurrences TaskRecurrence[]
 }
 
@@ -387,10 +388,35 @@ model FleetEnrollment {
   @@index([userId])
 }
 
+model FleetConnection {
+  id                   String                @id @default(uuid())
+  teamId               String                @unique
+  status               FleetConnectionStatus @default(CONNECTED)
+  disconnectedAt       DateTime?
+  deleteAfter           DateTime?
+  deletedAt             DateTime?
+  disconnectedById      String?
+  lastCleanupAttemptAt DateTime?
+  cleanupError          String?
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@index([status, deleteAfter])
+  @@index([teamId])
+}
+
 enum FleetEnrollmentStatus {
   PENDING
   COMPLETED
   EXPIRED
+}
+
+enum FleetConnectionStatus {
+  CONNECTED
+  DISCONNECTED
+  DELETED
 }
 
 enum Role {

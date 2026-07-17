@@ -9,6 +9,7 @@ import { getSession } from '@/lib/session';
 import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import Distributors from '@/components/interfaces/AssetManagement/Distributor/Distributors';
 import { TeamTab } from '@/components/team';
+import FleetConnectRequired from '@/components/interfaces/AssetManagement/FleetConnectRequired';
 
 const AllDistributor: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -25,7 +26,9 @@ const AllDistributor: NextPageWithLayout<
         team={team}
         teamFeatures={teamFeatures}
       />
-      <Distributors user={user} team={team} />
+      <FleetConnectRequired user={user} teamId={team.id}>
+        {() => <Distributors user={user} team={team} />}
+      </FleetConnectRequired>
     </>
   );
 };

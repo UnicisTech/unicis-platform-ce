@@ -196,7 +196,8 @@ const Nodes = ({
                         <dd>{node.node_info?.system_info?.hardware_model}</dd>
                         <dd>
                           {t('hardware-serial')}:&nbsp;
-                          {node.node_info?.system_info?.hardware_serial || 'N/A'}
+                          {node.node_info?.system_info?.hardware_serial ||
+                            'N/A'}
                         </dd>
                       </div>
                       <div>
@@ -274,7 +275,8 @@ const Nodes = ({
                         </td>
                         <td className="px-3 py-3 align-top text-xs">
                           <div className="font-medium">
-                            {node.owner.user?.firstname} {node.owner.user?.lastname}
+                            {node.owner.user?.firstname}{' '}
+                            {node.owner.user?.lastname}
                           </div>
                           <div className="text-muted-foreground">
                             {node.owner.user?.email || 'N/A'}
@@ -301,10 +303,12 @@ const Nodes = ({
                           </div>
                           <div>
                             {t('hardware-serial')}:{' '}
-                            {node.node_info?.system_info?.hardware_serial || 'N/A'}
+                            {node.node_info?.system_info?.hardware_serial ||
+                              'N/A'}
                           </div>
                           <div>
-                            {t('host-identifier')}: {node.host_identifier || 'N/A'}
+                            {t('host-identifier')}:{' '}
+                            {node.host_identifier || 'N/A'}
                           </div>
                         </td>
                         <td className="px-3 py-3 align-top text-xs">

@@ -25,6 +25,7 @@
   "fleet-order-account": "接続を注文",
   "fleet-disconnect": "Fleetを切断",
   "fleet-disconnected": "Fleet切断済み",
+  "fleet-disconnected-retention": "このチームではFleetが切断されています。既存のFleetデータは{{date}}まで保持され、その日以降にFleetが再接続されない場合は削除されます。",
   "fleet-not-found": "見つかりません",
   "fleet-password": "Fleetパスワード",
   "fleet-user-password": "あなたのFleetパスワード",

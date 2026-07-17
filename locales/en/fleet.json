@@ -25,6 +25,7 @@
   "fleet-order-account": "Order Connection",
   "fleet-disconnect": "Disconnect Fleet",
   "fleet-disconnected": "Disconnected Fleet",
+  "fleet-disconnected-retention": "Fleet is disconnected for this team. Existing Fleet data is kept until {{date}} and will be deleted after that date unless Fleet is connected again.",
   "fleet-not-found": "Not Found",
   "fleet-password": "Fleet Password",
   "fleet-user-password": "Your Fleet Password",
