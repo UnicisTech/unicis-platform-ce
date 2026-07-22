@@ -114,6 +114,7 @@
     "swr": "^2.3.6",
     "tailwind-merge": "^3.3.0",
     "tmp": "^0.2.7",
+    "tsx": "^4.23.1",
     "util": "0.12.5",
     "uuid": "9.0.1",
     "vaul": "^1.1.2",
@@ -163,7 +164,6 @@
     "prettier-plugin-tailwindcss": "^0.6.12",
     "tailwindcss": "^4.1.10",
     "ts-node": "^10.9.2",
-    "tsx": "^4.21.0",
     "typescript": "5.4.5"
   },
   "overrides": {

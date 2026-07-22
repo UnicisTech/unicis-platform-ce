@@ -1,6 +1,5 @@
 import type { User } from '@/generated/client';
 import SettingsFleet from '../interfaces/AssetManagement/Fleet/FleetSettings';
-import AccountTab from './AccountTab';
 import FleetAccountTab from './FleetAccountTab';
 import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
@@ -19,7 +18,6 @@ const FleetAccountManager = ({
 
   return (
     <div>
-      <AccountTab activeTab="fleet" user={user} showHeading={false} />
       <FleetAccountTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'Connect' && (
         <>
