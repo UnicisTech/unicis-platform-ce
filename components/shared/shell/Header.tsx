@@ -95,6 +95,12 @@ function useModuleTitle(): ModuleTitle {
   return useMemo(() => {
     if (!isReady) return { title: '', count: 0 };
 
+    const assetManagementTitle = t('fleet:asset-management', {
+      defaultValue: 'Asset Management',
+    });
+    const assetManagementSectionTitle = (section: string) =>
+      `${assetManagementTitle}: ${section}`;
+
     // Global / account routes (no team slug)
     const path = asPath.split('?')[0];
     if (path === '/teams') return { title: t('all-teams'), count: 0 };
@@ -151,12 +157,10 @@ function useModuleTitle(): ModuleTitle {
     const assetDetailMatch = relative.match(/^\/assets\/([^/]+)/);
     if (assetDetailMatch) {
       return {
-        title: t('fleet:asset-management', {
-          defaultValue: 'Asset Management',
-        }),
+        title: assetManagementSectionTitle(t('asset')),
         count: 0,
         subTitle: assetSubTitle || assetDetailMatch[1],
-        titleHref: `/teams/${slug}/asset`,
+        titleHref: `/teams/${slug}/asset-management`,
       };
     }
     const distributorDetailMatch = relative.match(
@@ -164,7 +168,7 @@ function useModuleTitle(): ModuleTitle {
     );
     if (distributorDetailMatch) {
       return {
-        title: 'Distributors',
+        title: assetManagementSectionTitle(t('distributors')),
         count: 0,
         subTitle: distributorId || distributorDetailMatch[1],
         titleHref: `/teams/${slug}/asset-management/distributors`,
@@ -175,7 +179,7 @@ function useModuleTitle(): ModuleTitle {
     );
     if (packDetailMatch) {
       return {
-        title: 'Packs',
+        title: assetManagementSectionTitle(t('packs')),
         count: 0,
         subTitle: pack?.name || packId || packDetailMatch[1],
         titleHref: `/teams/${slug}/asset-management/packs`,
@@ -186,7 +190,7 @@ function useModuleTitle(): ModuleTitle {
     );
     if (queryDetailMatch) {
       return {
-        title: 'Queries',
+        title: assetManagementSectionTitle(t('queries')),
         count: 0,
         subTitle: fleetQuery?.name || queryId || queryDetailMatch[1],
         titleHref: `/teams/${slug}/asset-management/queries`,
@@ -195,25 +199,26 @@ function useModuleTitle(): ModuleTitle {
     const tagDetailMatch = relative.match(/^\/asset-management\/tags\/([^/]+)/);
     if (tagDetailMatch) {
       return {
-        title: 'Tags',
+        title: assetManagementSectionTitle(t('tags')),
         count: 0,
         subTitle: tag?.value || tagId || tagDetailMatch[1],
         titleHref: `/teams/${slug}/asset-management/tags`,
       };
     }
     if (relative.startsWith('/asset-management/distributors'))
-      return { title: 'Distributors', count: 0 };
+      return {
+        title: assetManagementSectionTitle(t('distributors')),
+        count: 0,
+      };
     if (relative.startsWith('/asset-management/packs'))
-      return { title: 'Packs', count: 0 };
+      return { title: assetManagementSectionTitle(t('packs')), count: 0 };
     if (relative.startsWith('/asset-management/queries'))
-      return { title: 'Queries', count: 0 };
+      return { title: assetManagementSectionTitle(t('queries')), count: 0 };
     if (relative.startsWith('/asset-management/tags'))
-      return { title: 'Tags', count: 0 };
+      return { title: assetManagementSectionTitle(t('tags')), count: 0 };
     if (relative.startsWith('/asset'))
       return {
-        title: t('fleet:asset-management', {
-          defaultValue: 'Asset Management',
-        }),
+        title: assetManagementSectionTitle(t('asset')),
         count: 0,
       };
     if (

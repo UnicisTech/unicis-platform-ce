@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Loading, Error, Card } from '@/components/shared';
+import { Loading, Error } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
 import useTeam from 'hooks/useTeam';
 import { getSession } from '@/lib/session';
@@ -33,15 +33,11 @@ const TagById = ({ teamFeatures: _teamFeatures, user }) => {
   return (
     <>
       <TagsTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <Card heading="Details">
-        <Card.Body>
-          <TagDetails
-            user={user}
-            fleetTeamId={fleetTeamId}
-            tagID={tagId as string}
-          />
-        </Card.Body>
-      </Card>
+      <TagDetails
+        user={user}
+        fleetTeamId={fleetTeamId}
+        tagID={tagId as string}
+      />
     </>
   );
 };

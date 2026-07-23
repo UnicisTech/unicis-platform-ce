@@ -1,7 +1,8 @@
 import { useCallback, useState } from 'react';
+import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { Card, Error, Loading } from '@/components/shared';
+import { Error, Loading } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
 import type { User } from '@/generated/client';
 import toast from 'react-hot-toast';
@@ -12,6 +13,14 @@ import { useUpdateTag } from '@/hooks/fleets/Tags/useUpdateTag';
 import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
 import { Button } from '@/components/shadcn/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/shadcn/ui/card';
 
 const TagDetails = ({
   fleetTeamId,
@@ -24,7 +33,7 @@ const TagDetails = ({
 }) => {
   const router = useRouter();
   const { slug } = router.query as { slug?: string };
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'fleet']);
   const { canAccess } = useCanAccess(slug);
   const [isFormChanged, setIsFormChanged] = useState(false);
   const updateTag = useUpdateTag();
@@ -49,6 +58,9 @@ const TagDetails = ({
     setDeleteVisible(true);
   };
 
+  const packs = tag?.packs ?? [];
+  const queries = tag?.queries ?? [];
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
@@ -64,44 +76,104 @@ const TagDetails = ({
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="flex flex-col space-y-2">
-          <Label htmlFor="value">{t('tag-value')}</Label>
-          <Input
-            id="value"
-            name="value"
-            defaultValue={tag?.value}
-            onChange={(e) => {
-              setValue(e.target.value);
-              checkFormChanges();
-            }}
-            required
-          />
-        </div>
+    <div className="space-y-4">
+      <Card>
+        <form onSubmit={handleSubmit}>
+          <CardHeader className="border-b bg-slate-50/40">
+            <CardTitle>{t('details')}</CardTitle>
+            <CardDescription>{tag?.value}</CardDescription>
+          </CardHeader>
 
-        <div className="flex gap-2">
-          {canAccess('team_fleet_tag', ['update']) && (
-            <Button
-              type="submit"
-              size="sm"
-              disabled={submitting || !isFormChanged}
-            >
-              {submitting ? t('saving') : t('save-changes')}
-            </Button>
-          )}
-          {canAccess('team_fleet_tag', ['delete']) && (
-            <Button
-              type="button"
-              size="sm"
-              variant="destructive"
-              onClick={() => openDeleteModal(tag?.id ?? '')}
-            >
-              {t('delete')}
-            </Button>
-          )}
-        </div>
-      </form>
+          <CardContent className="space-y-6 pt-6">
+            <div className="space-y-2">
+              <Label htmlFor="value">{t('tag-value')}</Label>
+              <Input
+                id="value"
+                name="value"
+                defaultValue={tag?.value}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                  checkFormChanges();
+                }}
+                required
+              />
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="rounded-md border">
+                <div className="border-b px-4 py-3">
+                  <h3 className="text-sm font-semibold">{t('packs')}</h3>
+                </div>
+                <div className="divide-y">
+                  {packs.length > 0 ? (
+                    packs.map((pack) => (
+                      <Link
+                        key={pack.id}
+                        href={`/teams/${slug}/asset-management/packs/${pack.id}`}
+                        className="block px-4 py-3 text-sm font-medium hover:bg-muted"
+                      >
+                        {pack.name}
+                      </Link>
+                    ))
+                  ) : (
+                    <p className="px-4 py-6 text-center text-sm text-muted-foreground">
+                      {t('no-packs-found')}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="rounded-md border">
+                <div className="border-b px-4 py-3">
+                  <h3 className="text-sm font-semibold">{t('queries')}</h3>
+                </div>
+                <div className="divide-y">
+                  {queries.length > 0 ? (
+                    queries.map((query) => (
+                      <Link
+                        key={query.id}
+                        href={`/teams/${slug}/asset-management/queries/${query.id}`}
+                        className="block px-4 py-3 text-sm font-medium hover:bg-muted"
+                      >
+                        {query.name}
+                      </Link>
+                    ))
+                  ) : (
+                    <p className="px-4 py-6 text-center text-sm text-muted-foreground">
+                      {t('fleet:no-queries-found')}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </CardContent>
+
+          <CardFooter className="justify-between bg-slate-50/40">
+            <div>
+              {canAccess('team_fleet_tag', ['delete']) && (
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="destructive"
+                  onClick={() => openDeleteModal(tag?.id ?? '')}
+                >
+                  {t('delete')}
+                </Button>
+              )}
+            </div>
+
+            {canAccess('team_fleet_tag', ['update']) && (
+              <Button
+                type="submit"
+                size="sm"
+                disabled={submitting || !isFormChanged}
+              >
+                {submitting ? t('saving') : t('save-changes')}
+              </Button>
+            )}
+          </CardFooter>
+        </form>
+      </Card>
 
       <DeleteTag
         visible={deleteVisible}
@@ -109,22 +181,6 @@ const TagDetails = ({
         tagId={tagToDelete!}
         fleetTeamId={fleetTeamId}
       />
-
-      <Card heading="Packs">
-        {tag?.packs.map((pack) => (
-          <div key={pack.id} className="rounded mb-2">
-            <p className="text-xl">{pack.name}</p>
-          </div>
-        ))}
-      </Card>
-
-      <Card heading="Queries">
-        {tag?.queries.map((query) => (
-          <div key={query.id} className="rounded mb-2">
-            <p className="text-xl">{query.name}</p>
-          </div>
-        ))}
-      </Card>
     </div>
   );
 };
