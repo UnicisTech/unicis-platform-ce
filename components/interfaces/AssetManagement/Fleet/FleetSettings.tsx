@@ -89,14 +89,20 @@ const SettingsFleet = ({
 
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="fleet-first-name" className="text-base font-semibold">
+            <Label
+              htmlFor="fleet-first-name"
+              className="text-base font-semibold"
+            >
               {t('first-name')}
             </Label>
             <Input id="fleet-first-name" value={firstName} readOnly />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="fleet-last-name" className="text-base font-semibold">
+            <Label
+              htmlFor="fleet-last-name"
+              className="text-base font-semibold"
+            >
               {t('last-name')}
             </Label>
             <Input id="fleet-last-name" value={lastName} readOnly />
