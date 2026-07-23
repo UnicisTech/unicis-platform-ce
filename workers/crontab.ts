@@ -2,5 +2,5 @@ export const crontab = `
 # Graphile Worker crontab (UTC)
 */15 * * * * task-recurrence-generate
 0 0 * * * task-due-check
-0 1 * * * fleet-retention-cleanup
+*/15 * * * * fleet-retention-cleanup
 `;
