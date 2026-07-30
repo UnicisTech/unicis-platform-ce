@@ -25,11 +25,14 @@ interface TeamTabProps {
 const TeamTab = ({ activeTab, team, teamFeatures }: TeamTabProps) => {
   const { canAccess } = useCanAccess(team.slug);
   const { t } = useTranslation(['common', 'fleet']);
-  const { hasPlan, checkedHasPlan } = useHasPlan();
+  const { hasPlan, checkedHasPlan, checkedPlanSlug } = useHasPlan();
 
   useEffect(() => {
     hasPlan(team.slug);
   }, [hasPlan, team.slug]);
+
+  const hasCurrentTeamPlan =
+    checkedPlanSlug === team.slug && checkedHasPlan === true;
 
   const navigations = [
     {
@@ -129,7 +132,7 @@ const TeamTab = ({ activeTab, team, teamFeatures }: TeamTabProps) => {
 
   if (
     canAccess('asset_settings', ['create', 'update', 'read', 'delete']) &&
-    checkedHasPlan
+    hasCurrentTeamPlan
   ) {
     navigations.push({
       name: t('fleet:asset-management', { defaultValue: 'Asset Management' }),

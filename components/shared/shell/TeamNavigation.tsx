@@ -14,6 +14,7 @@ import useIap from 'hooks/useIAP';
 import NavigationItems from './NavigationItems';
 import type { NavigationProps, MenuItem } from './NavigationItems';
 import Icon from '../Icon';
+import { useAssetModuleAccess } from '@/hooks/fleets/useAssetModuleAccess';
 
 interface NavigationItemsProps extends NavigationProps {
   slug: string;
@@ -22,6 +23,7 @@ interface NavigationItemsProps extends NavigationProps {
 const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   const { t } = useTranslation(['common', 'fleet']);
   const { canAccess } = useCanAccess(slug);
+  const { isReady: hasAssetModuleAccess } = useAssetModuleAccess(slug);
   const { tasks } = useTeamTasks(slug);
   const { teamCourses } = useIap(false, slug);
   const relativePath = activePathname?.slice(`/teams/${slug}`.length) || '';
@@ -112,7 +114,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
             ? { count: tasks.length, variant: 'neutral' }
             : undefined,
     },
-    canAccess('asset_dashboard', ['create', 'update', 'read', 'delete'])
+    hasAssetModuleAccess
       ? {
           name: t('fleet:asset-management', {
             defaultValue: 'Asset Management',

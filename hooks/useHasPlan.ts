@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+
+type PlanCheckState = {
+  slug?: string;
+  hasPlan?: boolean;
+};
 
 const useHasPlan = () => {
-  const [checkedHasPlan, setCheckedHasPlan] = useState<boolean>();
+  const [planCheck, setPlanCheck] = useState<PlanCheckState>({});
 
-  const hasPlan = async (slug: string): Promise<boolean> => {
+  const hasPlan = useCallback(async (slug: string): Promise<boolean> => {
+    setPlanCheck({ slug });
+
     try {
       const response = await fetch('/api/check-plan', {
         method: 'POST',
@@ -14,21 +21,24 @@ const useHasPlan = () => {
       });
 
       if (!response.ok) {
+        setPlanCheck({ slug, hasPlan: false });
         return false;
       }
 
       const data = await response.json();
 
-      setCheckedHasPlan(data.hasPlan);
+      setPlanCheck({ slug, hasPlan: data.hasPlan });
       return data.hasPlan;
     } catch {
+      setPlanCheck({ slug, hasPlan: false });
       return false;
     }
-  };
+  }, []);
 
   return {
     hasPlan,
-    checkedHasPlan,
+    checkedHasPlan: planCheck.hasPlan,
+    checkedPlanSlug: planCheck.slug,
   };
 };
 

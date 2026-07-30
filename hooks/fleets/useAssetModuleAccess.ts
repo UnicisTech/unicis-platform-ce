@@ -11,7 +11,7 @@ import { useVerifyFleetAsses } from '@/hooks/fleets/useVerifyFleetAsses';
  */
 export const useAssetModuleAccess = (slug: string) => {
   const { canAccess } = useCanAccess(slug);
-  const { hasPlan, checkedHasPlan } = useHasPlan();
+  const { hasPlan, checkedHasPlan, checkedPlanSlug } = useHasPlan();
   const { access, isLoading: isAccessLoading } = useVerifyFleetAsses();
 
   useEffect(() => {
@@ -20,8 +20,11 @@ export const useAssetModuleAccess = (slug: string) => {
 
   const isFleetReady = !!access?.is_active && !access?.is_expired;
   const canShow = canAccess('asset_dashboard', ['read']);
-  const isLoading = checkedHasPlan === undefined || isAccessLoading;
-  const isReady = canShow && checkedHasPlan === true && isFleetReady;
+  const hasCurrentTeamPlan =
+    checkedPlanSlug === slug && checkedHasPlan === true;
+  const isLoading =
+    checkedPlanSlug !== slug || checkedHasPlan === undefined || isAccessLoading;
+  const isReady = canShow && hasCurrentTeamPlan && isFleetReady;
 
   return { isReady, isLoading };
 };

@@ -1,7 +1,6 @@
 import {
   LockClosedIcon,
   RectangleStackIcon,
-  TagIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import { useTranslation } from 'next-i18next';
@@ -23,9 +22,7 @@ const UserNavigation = ({ activePathname }: NavigationProps) => {
       name: t('account'),
       href: '/settings/account',
       icon: UserCircleIcon,
-      active:
-        activePathname?.startsWith(`/settings`) &&
-        /(account|fleet)/.test(activePathname),
+      active: activePathname === '/settings/account',
       className: 'stroke-blue-600',
     },
     {
@@ -33,13 +30,6 @@ const UserNavigation = ({ activePathname }: NavigationProps) => {
       href: '/settings/password',
       icon: LockClosedIcon,
       active: activePathname === '/settings/password',
-      className: 'stroke-blue-600',
-    },
-    {
-      name: t('fleet:fleet'),
-      href: '/settings/fleet',
-      icon: TagIcon,
-      active: activePathname === '/settings/fleet',
       className: 'stroke-blue-600',
     },
   ];
