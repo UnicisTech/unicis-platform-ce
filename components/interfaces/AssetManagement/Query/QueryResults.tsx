@@ -3,15 +3,20 @@ import { useResults } from '@/hooks/fleets/results/useResults';
 import { useTranslation } from 'next-i18next';
 import { format } from 'date-fns';
 import { ChevronRight } from 'lucide-react';
+import ResultNodeInfo from '../ResultNodeInfo';
+import ResultErrorMessage from '../ResultErrorMessage';
+import { getResultActionBadgeClass } from '../resultDisplay';
 
 interface QueryResultsProps {
   teamId: string;
+  queryId: string;
   queryName: string;
 }
 
-const QueryResults = ({ teamId, queryName }: QueryResultsProps) => {
+const QueryResults = ({ teamId, queryId, queryName }: QueryResultsProps) => {
   const { t } = useTranslation('common');
   const [filters, setFilters] = useState({
+    query_id: queryId,
     query_name: queryName,
     limit: 50,
     offset: 0,
@@ -31,16 +36,6 @@ const QueryResults = ({ teamId, queryName }: QueryResultsProps) => {
 
   const totalPages = Math.ceil(total / filters.limit);
   const currentPage = Math.floor(filters.offset / filters.limit) + 1;
-
-  const getActionBadgeClass = (action: string) => {
-    if (action === 'added') {
-      return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-    }
-    if (action === 'removed') {
-      return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
-    }
-    return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200';
-  };
 
   return (
     <div className="space-y-4">
@@ -79,36 +74,33 @@ const QueryResults = ({ teamId, queryName }: QueryResultsProps) => {
               key={result.id}
               className="group rounded-lg border border-border bg-card hover:bg-muted/30 transition-colors"
             >
-              <summary className="cursor-pointer px-4 py-3 flex items-center gap-3 list-none">
+              <summary className="cursor-pointer px-4 py-3 grid grid-cols-[24px_150px_minmax(120px,180px)_minmax(280px,1fr)_auto] items-center gap-4 list-none">
                 <ChevronRight className="h-4 w-4 transition-transform group-open:rotate-90" />
 
-                <div className="flex-1 flex items-center gap-4 flex-wrap">
-                  <span className="text-sm text-muted-foreground min-w-[140px]">
-                    {result.timestamp
-                      ? format(
-                          new Date(result.timestamp),
-                          'yyyy-MM-dd HH:mm:ss'
-                        )
-                      : '-'}
-                  </span>
+                <span className="text-sm text-muted-foreground">
+                  {result.timestamp
+                    ? format(new Date(result.timestamp), 'yyyy-MM-dd HH:mm:ss')
+                    : '-'}
+                </span>
 
-                  <span className="text-sm text-muted-foreground">
-                    {result.node?.display_name ||
-                      result.node?.host_identifier ||
-                      '-'}
-                  </span>
+                <span className="min-w-0 truncate text-sm font-semibold text-slate-800 dark:text-slate-100">
+                  {result.display_query_name || result.query_name || '-'}
+                </span>
 
-                  <span
-                    className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${getActionBadgeClass(result.action)}`}
-                  >
-                    {result.action || 'snapshot'}
-                  </span>
-                </div>
+                <ResultNodeInfo node={result.node} />
+
+                <span
+                  className={`inline-flex justify-center rounded-full px-3 py-1 text-xs font-semibold ${getResultActionBadgeClass(result.action)}`}
+                >
+                  {result.action || 'snapshot'}
+                </span>
               </summary>
 
               <div className="px-4 pb-4 pt-2 ml-7 border-t border-border">
                 <div className="space-y-2">
-                  {result.columns && typeof result.columns === 'object' ? (
+                  {result.action === 'failed' ? (
+                    <ResultErrorMessage error={result.columns?.error} />
+                  ) : result.columns && typeof result.columns === 'object' ? (
                     Object.entries(result.columns).map(([key, value]) => (
                       <div key={key} className="flex gap-2">
                         <span className="text-sm font-medium text-muted-foreground min-w-[120px]">

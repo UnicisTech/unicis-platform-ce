@@ -1319,6 +1319,9 @@
   "platform-required": "プラットフォームは必須です",
   "version-required": "バージョンは必須です",
   "shard-required": "シャードは必須です",
+  "interval-required": "間隔は必須です",
+  "value-required": "値は必須です",
+  "select-assets-required": "少なくとも1つのアセットを選択してください",
   "enter-pack-name": "パック名を入力",
   "creating": "作成中...",
   "success": "成功",
@@ -1711,5 +1714,7 @@
   "Dashboard": "ダッシュボード",
   "navigation": "ナビゲーション",
   "module": "モジュール",
-  "opens-in-new-tab": "(新しいタブで開きます)"
+  "opens-in-new-tab": "(新しいタブで開きます)",
+  "asset-name": "Asset Name",
+  "query-failed": "Query failed"
 }

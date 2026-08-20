@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import type { User } from '@/generated/client';
@@ -31,11 +31,20 @@ const CreateTag = ({
   const { mutateTags } = useTags(fleetTeamId);
   const { t } = useTranslation('common');
 
+  const tagInputRef = useRef<HTMLInputElement | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [tagValue, setTagValue] = useState('');
+  const [tagError, setTagError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!tagValue.trim()) {
+      setTagError(t('required'));
+      tagInputRef.current?.focus();
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -44,6 +53,7 @@ const CreateTag = ({
       mutateTags();
       setVisible(false);
       setTagValue('');
+      setTagError('');
     } catch {
       toast.error(t('error'));
     } finally {
@@ -54,7 +64,7 @@ const CreateTag = ({
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
       <DialogContent className="max-w-md">
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4" noValidate>
           <DialogHeader>
             <DialogTitle>{t('create-tag')}</DialogTitle>
           </DialogHeader>
@@ -62,12 +72,17 @@ const CreateTag = ({
           <div className="space-y-2">
             <Label htmlFor="tags">{t('tags')}</Label>
             <Input
+              ref={tagInputRef}
               id="tags"
               name="tags"
               value={tagValue}
-              onChange={(e) => setTagValue(e.target.value)}
-              required
+              aria-invalid={!!tagError}
+              onChange={(e) => {
+                setTagValue(e.target.value);
+                setTagError('');
+              }}
             />
+            {tagError && <p className="text-sm text-destructive">{tagError}</p>}
           </div>
 
           <DialogFooter>

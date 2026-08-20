@@ -8,18 +8,50 @@ import useCanAccess from '@/hooks/useCanAccess';
 import useHasPlan from '@/hooks/useHasPlan';
 import { useRouter } from 'next/router';
 import FleetConnectRequired from '../FleetConnectRequired';
-import { useVerifyFleetAsses } from '@/hooks/fleets/useVerifyFleetAsses';
 
 interface AssetsProps {
   team: Team;
   user: Partial<User>;
 }
 
-const Assets = ({ team, user }: AssetsProps) => {
+interface AssetsContentProps {
+  team: Team;
+  user: Partial<User>;
+  isAuditor: boolean;
+}
+
+const AssetsContent = ({ team, user, isAuditor }: AssetsContentProps) => {
   const [status, setStatus] = useState('all');
+  const { nodes: allNodes } = useNodes(team.id, status, {
+    skip: isAuditor,
+  });
+  const nodes = allNodes || [];
+
+  return (
+    <>
+      <AssetsAnalysis
+        nodes={nodes}
+        team={team}
+        user={user}
+        isAuditor={isAuditor}
+      />
+      <AssetTaskAnalysis teamId={team.id} isAuditor={isAuditor} />
+      {!isAuditor && (
+        <Nodes
+          nodes={nodes}
+          team={team}
+          user={user}
+          setStatus={setStatus}
+          status={status}
+        />
+      )}
+    </>
+  );
+};
+
+const Assets = ({ team, user }: AssetsProps) => {
   const { canAccess } = useCanAccess(team.slug);
   const { hasPlan, checkedHasPlan } = useHasPlan();
-  const { access, isLoading: isAccessLoading } = useVerifyFleetAsses();
 
   const router = useRouter();
   const enrollmentToken =
@@ -29,13 +61,6 @@ const Assets = ({ team, user }: AssetsProps) => {
 
   const userRole = (user as any).role;
   const isAuditor = userRole === 'AUDITOR';
-  const isFleetReady = !!access?.is_active && !access?.is_expired;
-  const shouldSkipNodes =
-    isAuditor || !checkedHasPlan || isAccessLoading || !isFleetReady;
-
-  const { nodes: allNodes } = useNodes(team.id, status, {
-    skip: shouldSkipNodes,
-  });
 
   useEffect(() => {
     hasPlan(team.slug);
@@ -44,8 +69,6 @@ const Assets = ({ team, user }: AssetsProps) => {
   if (!canAccess('asset_dashboard', ['read'])) {
     return null;
   }
-
-  const nodes = allNodes || [];
 
   if (checkedHasPlan === undefined) {
     return null;
@@ -61,24 +84,7 @@ const Assets = ({ team, user }: AssetsProps) => {
         >
           {({ isAuthenticated }) =>
             isAuthenticated && (
-              <>
-                <AssetsAnalysis
-                  nodes={nodes}
-                  team={team}
-                  user={user}
-                  isAuditor={isAuditor}
-                />
-                <AssetTaskAnalysis teamId={team.id} isAuditor={isAuditor} />
-                {!isAuditor && (
-                  <Nodes
-                    nodes={nodes}
-                    team={team}
-                    user={user}
-                    setStatus={setStatus}
-                    status={status}
-                  />
-                )}
-              </>
+              <AssetsContent team={team} user={user} isAuditor={isAuditor} />
             )
           }
         </FleetConnectRequired>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { Tag } from '@/types/fleet';
@@ -31,17 +31,27 @@ const EditTag = ({
   const { t } = useTranslation('common');
   const { mutateTags } = useTags(fleetTeamId);
 
+  const valueInputRef = useRef<HTMLInputElement | null>(null);
   const [value, setValue] = useState(tag.value || '');
+  const [valueError, setValueError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!value.trim()) {
+      setValueError(t('required'));
+      valueInputRef.current?.focus();
+      return;
+    }
+
     setSubmitting(true);
     try {
-      await updateTag(fleetTeamId, { value }, tag.id);
+      await updateTag(fleetTeamId, { value: value.trim() }, tag.id);
       toast.success(t('success'));
       mutateTags();
       setVisible(false);
+      setValueError('');
     } catch {
       toast.error(t('error'));
     } finally {
@@ -52,7 +62,7 @@ const EditTag = ({
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
       <DialogContent className="max-w-md">
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4" noValidate>
           <DialogHeader>
             <DialogTitle>{t('edit-tag')}</DialogTitle>
           </DialogHeader>
@@ -60,12 +70,19 @@ const EditTag = ({
           <div className="space-y-2">
             <Label htmlFor="value">{t('tag-value')}</Label>
             <Input
+              ref={valueInputRef}
               id="value"
               name="value"
               value={value}
-              onChange={(e) => setValue(e.target.value)}
-              required
+              aria-invalid={!!valueError}
+              onChange={(e) => {
+                setValue(e.target.value);
+                setValueError('');
+              }}
             />
+            {valueError && (
+              <p className="text-sm text-destructive">{valueError}</p>
+            )}
           </div>
 
           <DialogFooter>

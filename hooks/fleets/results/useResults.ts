@@ -1,17 +1,31 @@
 import useSWR from 'swr';
 import fleetFetcher from '@/lib/fleet/fleetFetcher';
 
+export interface ResultNode {
+  id: string;
+  node_key?: string;
+  host_identifier: string;
+  display_name: string;
+  owner?: {
+    id: string;
+    role?: string;
+    user?: {
+      id?: string;
+      firstname?: string;
+      lastname?: string;
+      email?: string;
+    } | null;
+  } | null;
+}
+
 export interface ResultData {
   id: string;
   query_name: string;
+  display_query_name?: string;
   timestamp: string;
   action: string;
   columns: Record<string, any>;
-  node: {
-    id: string;
-    host_identifier: string;
-    display_name: string;
-  } | null;
+  node: ResultNode | null;
 }
 
 export interface ResultsResponse {
@@ -23,6 +37,7 @@ export interface ResultsResponse {
 
 export interface ResultsFilters {
   pack_id?: string;
+  query_id?: string;
   query_name?: string;
   node_id?: string;
   from_date?: string;
@@ -35,6 +50,7 @@ export function useResults(teamId: string, filters?: ResultsFilters) {
   const params = new URLSearchParams();
 
   if (filters?.pack_id) params.append('pack_id', filters.pack_id);
+  if (filters?.query_id) params.append('query_id', filters.query_id);
   if (filters?.query_name) params.append('query_name', filters.query_name);
   if (filters?.node_id) params.append('node_id', filters.node_id);
   if (filters?.from_date) params.append('from_date', filters.from_date);

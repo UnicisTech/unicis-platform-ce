@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -42,7 +42,8 @@ const TagDetails = ({
   const [tagToDelete, setTagToDelete] = useState<null | string>(null);
 
   const { tag, isLoading, isError } = useGetTagId(fleetTeamId, tagID);
-  const [value, setValue] = useState('');
+  const [valueError, setValueError] = useState('');
+  const valueInputRef = useRef<HTMLInputElement | null>(null);
 
   const [submitting, setSubmitting] = useState(false);
 
@@ -61,13 +62,23 @@ const TagDetails = ({
   const packs = tag?.packs ?? [];
   const queries = tag?.queries ?? [];
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const nextValue = ((formData.get('value') as string) || '').trim();
+
+    if (!nextValue) {
+      setValueError(t('required'));
+      valueInputRef.current?.focus();
+      return;
+    }
+
     setSubmitting(true);
     try {
-      await updateTag(fleetTeamId, { value }, tagID);
+      await updateTag(fleetTeamId, { value: nextValue }, tagID);
       toast.success(t('success'));
       setIsFormChanged(false);
+      setValueError('');
     } catch {
       toast.error(t('error'));
     } finally {
@@ -78,7 +89,7 @@ const TagDetails = ({
   return (
     <div className="space-y-4">
       <Card>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate>
           <CardHeader className="border-b bg-slate-50/40">
             <CardTitle>{t('details')}</CardTitle>
             <CardDescription>{tag?.value}</CardDescription>
@@ -88,15 +99,19 @@ const TagDetails = ({
             <div className="space-y-2">
               <Label htmlFor="value">{t('tag-value')}</Label>
               <Input
+                ref={valueInputRef}
                 id="value"
                 name="value"
                 defaultValue={tag?.value}
-                onChange={(e) => {
-                  setValue(e.target.value);
+                aria-invalid={!!valueError}
+                onChange={() => {
+                  setValueError('');
                   checkFormChanges();
                 }}
-                required
               />
+              {valueError && (
+                <p className="text-sm text-destructive">{valueError}</p>
+              )}
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">

@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import type { User } from '@/generated/client';
+import { validateFleetSqlQuery } from '@/lib/fleet/sqlValidation';
 import { useCreateDistributors } from '@/hooks/fleets/distributors/useCreateDistributor';
 import { useDistributors } from '@/hooks/fleets/distributors/useDistributors';
 import { Button } from '@/components/shadcn/ui/button';
@@ -27,6 +28,8 @@ import { CalendarIcon } from 'lucide-react';
 
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
+type DistributorFormErrors = Partial<Record<'sql' | 'nodes', string>>;
+
 const CreateDistributors = ({
   visible,
   setVisible,
@@ -39,18 +42,21 @@ const CreateDistributors = ({
   fleetTeamId: string;
 }) => {
   const formRef = useRef<HTMLFormElement | null>(null);
+  const sqlInputRef = useRef<HTMLInputElement | null>(null);
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
   const [selectedNodes, setSelectedNodes] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [formErrors, setFormErrors] = useState<DistributorFormErrors>({});
   const [notBeforeDate, setNotBeforeDate] = useState<Date | undefined>(
     new Date()
   );
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'fleet']);
   const createDistributor = useCreateDistributors();
   const { mutateDistributorsTasks } = useDistributors(fleetTeamId);
 
   const handleNodeSelection = (nodeKeys: string[]) => {
     setSelectedNodes(nodeKeys);
+    setFormErrors((prev) => ({ ...prev, nodes: undefined }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -60,6 +66,28 @@ const CreateDistributors = ({
 
     const description = formData.get('description') as string;
     const sql = formData.get('sql') as string;
+    const sqlValidation = validateFleetSqlQuery(sql || '');
+    const nextErrors: DistributorFormErrors = {};
+
+    if (!sqlValidation.valid) {
+      nextErrors.sql = t(sqlValidation.messageKey);
+    }
+
+    if (selectedNodes.length === 0) {
+      nextErrors.nodes = t('select-assets-required');
+    }
+
+    if (Object.keys(nextErrors).length > 0) {
+      setFormErrors(nextErrors);
+
+      if (nextErrors.sql) {
+        sqlInputRef.current?.focus();
+      }
+
+      return;
+    }
+
+    setFormErrors({});
 
     const queryData = {
       description,
@@ -74,8 +102,8 @@ const CreateDistributors = ({
       toast.success(t('success'));
       mutateDistributorsTasks();
       setVisible(false);
-    } catch {
-      toast.error(t('error'));
+    } catch (error: any) {
+      toast.error(error?.message || t('error'));
     }
   };
 
@@ -90,15 +118,23 @@ const CreateDistributors = ({
           ref={formRef}
           onSubmit={handleSubmit}
           className="space-y-6 min-w-0"
+          noValidate
         >
           <div className="space-y-2">
             <Label htmlFor="sql">{t('sql-code')}</Label>
             <Input
+              ref={sqlInputRef}
               id="sql"
               name="sql"
               placeholder={t('enter-sql-code')}
-              required
+              aria-invalid={!!formErrors.sql}
+              onChange={() =>
+                setFormErrors((prev) => ({ ...prev, sql: undefined }))
+              }
             />
+            {formErrors.sql && (
+              <p className="text-sm text-destructive">{formErrors.sql}</p>
+            )}
           </div>
 
           <div className="space-y-2">
@@ -108,6 +144,9 @@ const CreateDistributors = ({
               setSectionNode={setSelectedNodes}
               onSelect={handleNodeSelection}
             />
+            {formErrors.nodes && (
+              <p className="text-sm text-destructive">{formErrors.nodes}</p>
+            )}
           </div>
 
           <div className="space-y-2">

@@ -25,6 +25,7 @@ import RenewFleetSecret from './RenewFleetSecret';
 import { useBootstrapFleet } from '@/hooks/fleets';
 import { useGetFleetSecret } from '@/hooks/fleets/connect/useGetFleetSecret';
 import { useDeleteFleetSecret } from '@/hooks/fleets/connect/useDeleteFleetSecret';
+import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import { Loader2 } from 'lucide-react';
 import Cookies from 'js-cookie';
 import { CodeBlock } from '@/components/shared/CodeBlock';
@@ -50,6 +51,8 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
   const { t } = useTranslation(['common', 'fleet']);
   const teamId = team.id;
   const [safe, setSafe] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const [passwordDialogVisible, setPasswordDialogVisible] = useState(false);
 
   const bootstrapFleet = useBootstrapFleet();
@@ -57,6 +60,7 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
   const [renewVisible, setRenewVisible] = useState(false);
 
   const { secret, isLoading, mutateFleetSecret } = useGetFleetSecret(team.id);
+  const hasSecret = Boolean(secret?.secret);
 
   const formik = useFormik({
     initialValues: { password: '' },
@@ -92,11 +96,15 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
 
   const handleDelete = async () => {
     try {
+      setIsDeleting(true);
       await deleteFleetSecret(teamId);
-      mutateFleetSecret();
+      await mutateFleetSecret(null);
+      setDeleteConfirmVisible(false);
       toast.success(t('successfully-deleted'));
-    } catch {
-      toast.error(t('fleet:error-deleting-fleet-secret'));
+    } catch (error: any) {
+      toast.error(error?.message || t('fleet:error-deleting-fleet-secret'));
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -112,18 +120,20 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
           </CardDescription>
         </div>
 
-        <button
-          type="button"
-          onClick={toggleSafe}
-          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          {t('fleet:fleet-safe-sensitives')}
-          {safe ? (
-            <EyeSlashIcon className="h-5 w-5" />
-          ) : (
-            <EyeIcon className="h-5 w-5" />
-          )}
-        </button>
+        {hasSecret && (
+          <button
+            type="button"
+            onClick={toggleSafe}
+            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {t('fleet:fleet-safe-sensitives')}
+            {safe ? (
+              <EyeSlashIcon className="h-5 w-5" />
+            ) : (
+              <EyeIcon className="h-5 w-5" />
+            )}
+          </button>
+        )}
       </CardHeader>
 
       <CardContent className="space-y-4">
@@ -131,22 +141,35 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
           <FleetStatus status="access-not-granted" />
         ) : (
           <>
-            {secret?.secret && (
+            {hasSecret && (
               <CodeBlock
                 text={
-                  safe ? '*'.repeat(secret?.secret?.length || 0) : secret.secret
+                  safe
+                    ? '*'.repeat(secret?.secret?.length || 0)
+                    : secret?.secret ?? ''
                 }
               />
             )}
-            {!secret?.secret && <FleetStatus status="no-fleet-secret" />}
+            {!hasSecret && (
+              <div className="rounded-md border border-dashed bg-muted/20 px-5 py-6">
+                <div className="space-y-1">
+                  <p className="text-sm font-semibold text-foreground">
+                    {t('fleet:fleet-secret-not-found')}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {t('fleet:fleet-secret-not-found-warning')}
+                  </p>
+                </div>
+              </div>
+            )}
           </>
         )}
 
         <div className="flex justify-between items-center mt-3">
-          {secret?.secret === undefined ? (
+          {!hasSecret ? (
             <Button
               type="button"
-              disabled={isLoading || secret?.id === null}
+              disabled={isLoading}
               onClick={handleOrderSecret}
             >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -155,17 +178,19 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
           ) : (
             <>
               <Button
-                disabled={isLoading || !secret?.secret}
-                onClick={handleDelete}
+                disabled={isLoading || isDeleting || !secret?.secret}
+                onClick={() => setDeleteConfirmVisible(true)}
                 variant="destructive"
               >
-                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                {isDeleting && (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                )}
                 {t('fleet:fleet-secret-reset')}
               </Button>
 
               <Button
                 type="submit"
-                disabled={isLoading || !secret?.secret}
+                disabled={isLoading || isDeleting || !secret?.secret}
                 onClick={() => setRenewVisible(true)}
               >
                 {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -181,6 +206,17 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
         setVisible={setRenewVisible}
         visible={renewVisible}
       />
+
+      <ConfirmationDialog
+        visible={deleteConfirmVisible}
+        onCancel={() => setDeleteConfirmVisible(false)}
+        onConfirm={handleDelete}
+        title={t('fleet:fleet-secret-reset')}
+        confirmText={t('delete')}
+      >
+        <p>{t('delete-warning')}</p>
+        <p>{t('fleet:fleet-delete-warning')}</p>
+      </ConfirmationDialog>
 
       <Dialog
         open={passwordDialogVisible}

@@ -20,7 +20,7 @@ export const useGetFleetSecret = (teamId: string) => {
       ? `/api/fleet/secret?teamId=${encodeURIComponent(teamId)}`
       : null;
 
-  const { data, error, isLoading } = useSWR<FleetSecret>(
+  const { data, error, isLoading } = useSWR<FleetSecret | null>(
     url,
     async (fetchUrl: string) => {
       const response = await fetch(fetchUrl, {
@@ -50,8 +50,13 @@ export const useGetFleetSecret = (teamId: string) => {
 
   const typedError = error as FleetSecretError | undefined;
 
-  const mutateFleetSecret = async () => {
+  const mutateFleetSecret = async (nextSecret?: FleetSecret | null) => {
     if (!url) {
+      return;
+    }
+
+    if (nextSecret !== undefined) {
+      await mutate(url, nextSecret, false);
       return;
     }
 

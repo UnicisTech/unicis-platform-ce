@@ -23,6 +23,7 @@ import { useQueries } from '@/hooks/fleets/queries/useQueries';
 import DeleteQuery from './DeleteQuery';
 import EditQuery from './EditQuery';
 import { CodeBlock } from '@/components/shared/CodeBlock';
+import { ChevronRight } from 'lucide-react';
 
 const Querys = ({ team, user }: { team: Team; user: Partial<User> }) => {
   const router = useRouter();
@@ -90,23 +91,22 @@ const Querys = ({ team, user }: { team: Team; user: Partial<User> }) => {
                       <TableCell>
                         <Link
                           href={`/teams/${slug}/asset-management/queries/${query.id}`}
-                          className="underline text-blue-500 hover:text-blue-400"
+                          className="group inline-flex items-center gap-1.5 rounded-sm px-1 py-0.5 -mx-1 -my-0.5 text-foreground transition-colors hover:text-primary"
                         >
-                          {query.name}
+                          <span className="font-medium underline-offset-4 group-hover:underline">
+                            {query.name}
+                          </span>
+                          <ChevronRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
                         </Link>
                       </TableCell>
 
                       <TableCell className="max-w-[500px] truncate">
-                        <Link
-                          href={`/teams/${slug}/asset-management/queries/${query.id}`}
-                        >
-                          <CodeBlock
-                            language="sql"
-                            showLineNumbers={false}
-                            shouldWrapLongLines
-                            text={query.sql}
-                          />
-                        </Link>
+                        <CodeBlock
+                          language="sql"
+                          showLineNumbers={false}
+                          shouldWrapLongLines
+                          text={query.sql}
+                        />
                       </TableCell>
 
                       <TableCell>
@@ -128,13 +128,13 @@ const Querys = ({ team, user }: { team: Team; user: Partial<User> }) => {
 
                       <TableCell>
                         <span className="text-sm text-muted-foreground">
-                          {query.shard}
+                          {query.interval}
                         </span>
                       </TableCell>
 
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
-                          {canAccess('team_fleet_pack', ['update']) && (
+                          {canAccess('team_fleet_query', ['update']) && (
                             <Button
                               size="sm"
                               variant="outline"
@@ -143,7 +143,7 @@ const Querys = ({ team, user }: { team: Team; user: Partial<User> }) => {
                               {t('edit-task')}
                             </Button>
                           )}
-                          {canAccess('team_fleet_pack', ['delete']) && (
+                          {canAccess('team_fleet_query', ['delete']) && (
                             <Button
                               size="sm"
                               variant="destructive"

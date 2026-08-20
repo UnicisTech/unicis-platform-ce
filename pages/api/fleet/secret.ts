@@ -2,6 +2,13 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from '@/lib/session';
 import { getFleetAccessTokenFromCookieStore } from '@/lib/fleet/cookies';
 
+const getFleetErrorMessage = (error: any, fallback: string) =>
+  error?.error?.message || error?.message || error?.msg || fallback;
+
+const isMissingSecretError = (status: number, message: string) =>
+  status === 404 ||
+  /secret.*not found|not found.*secret|no.*secret/i.test(message);
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -69,9 +76,11 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
+    const message = getFleetErrorMessage(error, 'Failed to fetch Fleet secret');
+
     return res.status(response.status).json({
       error: {
-        message: error?.message || error?.msg || 'Failed to fetch Fleet secret',
+        message,
       },
     });
   }
@@ -106,23 +115,54 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const response = await fetch(
-    `${fleetBase}/api/v1/fleet/teams/${teamId}/secret`,
-    {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Unicis-Fleet-API-Authorization': `UnicisBearer ${fleetToken}`,
-      },
-    }
-  );
+  const fleetSecretUrl = `${fleetBase}/api/v1/fleet/teams/${teamId}/secret`;
+  const fleetHeaders = {
+    'Content-Type': 'application/json',
+    'Unicis-Fleet-API-Authorization': `UnicisBearer ${fleetToken}`,
+  };
+
+  const response = await fetch(fleetSecretUrl, {
+    method: 'DELETE',
+    headers: fleetHeaders,
+  });
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
+    const message = getFleetErrorMessage(
+      error,
+      'Failed to delete Fleet secret'
+    );
+
+    if (isMissingSecretError(response.status, message)) {
+      return res.status(200).json({ deleted: true, alreadyDeleted: true });
+    }
+
+    const verifyResponse = await fetch(fleetSecretUrl, {
+      method: 'GET',
+      headers: fleetHeaders,
+    });
+
+    if (!verifyResponse.ok) {
+      const verifyError = await verifyResponse.json().catch(() => ({}));
+      const verifyMessage = getFleetErrorMessage(
+        verifyError,
+        'Failed to fetch Fleet secret'
+      );
+
+      if (isMissingSecretError(verifyResponse.status, verifyMessage)) {
+        return res.status(200).json({ deleted: true, alreadyDeleted: true });
+      }
+    }
+
+    console.error('[Fleet secret delete] Fleet API error:', {
+      status: response.status,
+      message,
+      error,
+    });
+
     return res.status(response.status).json({
       error: {
-        message:
-          error?.message || error?.msg || 'Failed to delete Fleet secret',
+        message,
       },
     });
   }

@@ -1319,6 +1319,9 @@
   "platform-required": "Plattform ist erforderlich",
   "version-required": "Version ist erforderlich",
   "shard-required": "Shard ist erforderlich",
+  "interval-required": "Intervall ist erforderlich",
+  "value-required": "Wert ist erforderlich",
+  "select-assets-required": "Wählen Sie mindestens ein Asset aus",
   "enter-pack-name": "Paketnamen eingeben",
   "creating": "Erstellen...",
   "success": "Erfolg",
@@ -1711,5 +1714,7 @@
   "Dashboard": "Dashboard",
   "navigation": "Navigation",
   "module": "Modul",
-  "opens-in-new-tab": "(wird in neuem Tab geöffnet)"
+  "opens-in-new-tab": "(wird in neuem Tab geöffnet)",
+  "asset-name": "Asset Name",
+  "query-failed": "Query failed"
 }

@@ -53,7 +53,11 @@ const QueryById = ({ teamFeatures: _teamFeatures, user }) => {
       )}
 
       {activeTab === 'Results' && query && (
-        <QueryResults teamId={fleetTeamId} queryName={query.name} />
+        <QueryResults
+          teamId={fleetTeamId}
+          queryId={queryId as string}
+          queryName={query.name}
+        />
       )}
     </>
   );

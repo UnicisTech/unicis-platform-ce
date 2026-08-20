@@ -88,6 +88,7 @@
     "next-auth": "^4.24.13",
     "next-i18next": "15.3.0",
     "next-remove-imports": "^1.0.12",
+    "node-sql-parser": "^5.4.0",
     "npm": "^10.8.3",
     "openai": "^5.23.1",
     "pg": "^8.13.1",

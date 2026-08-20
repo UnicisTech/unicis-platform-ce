@@ -102,7 +102,9 @@ const CreatePack = ({
               placeholder={t('enter-pack-name')}
             />
             {formik.touched.name && formik.errors.name && (
-              <span className="text-sm text-red-500">{formik.errors.name}</span>
+              <span className="text-sm text-destructive">
+                {formik.errors.name}
+              </span>
             )}
           </div>
 
@@ -124,7 +126,7 @@ const CreatePack = ({
               </SelectContent>
             </Select>
             {formik.touched.platform && formik.errors.platform && (
-              <span className="text-sm text-red-500">
+              <span className="text-sm text-destructive">
                 {formik.errors.platform}
               </span>
             )}
@@ -140,7 +142,7 @@ const CreatePack = ({
                 placeholder={t('enter-version')}
               />
               {formik.touched.version && formik.errors.version && (
-                <span className="text-sm text-red-500">
+                <span className="text-sm text-destructive">
                   {formik.errors.version}
                 </span>
               )}
@@ -154,7 +156,7 @@ const CreatePack = ({
                 placeholder={t('enter-shard')}
               />
               {formik.touched.shard && formik.errors.shard && (
-                <span className="text-sm text-red-500">
+                <span className="text-sm text-destructive">
                   {formik.errors.shard}
                 </span>
               )}

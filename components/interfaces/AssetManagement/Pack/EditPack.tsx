@@ -95,7 +95,7 @@ const EditPack = ({
               placeholder={t('enter-name')}
             />
             {formik.touched.name && formik.errors.name && (
-              <p className="text-sm text-red-500">{formik.errors.name}</p>
+              <p className="text-sm text-destructive">{formik.errors.name}</p>
             )}
           </div>
 
@@ -117,7 +117,9 @@ const EditPack = ({
               </SelectContent>
             </Select>
             {formik.touched.platform && formik.errors.platform && (
-              <p className="text-sm text-red-500">{formik.errors.platform}</p>
+              <p className="text-sm text-destructive">
+                {formik.errors.platform}
+              </p>
             )}
           </div>
 
@@ -133,7 +135,9 @@ const EditPack = ({
                 placeholder={t('enter-version')}
               />
               {formik.touched.version && formik.errors.version && (
-                <p className="text-sm text-red-500">{formik.errors.version}</p>
+                <p className="text-sm text-destructive">
+                  {formik.errors.version}
+                </p>
               )}
             </div>
 
@@ -148,7 +152,9 @@ const EditPack = ({
                 placeholder={t('enter-shard')}
               />
               {formik.touched.shard && formik.errors.shard && (
-                <p className="text-sm text-red-500">{formik.errors.shard}</p>
+                <p className="text-sm text-destructive">
+                  {formik.errors.shard}
+                </p>
               )}
             </div>
           </div>

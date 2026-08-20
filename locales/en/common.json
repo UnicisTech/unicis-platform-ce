@@ -680,7 +680,6 @@
   "pay-now": "Pay Now",
   "send-reset-link": "Send Reset Link",
   "sending": "Sending...",
-  "cancel": "Cancel",
   "index": "Index",
   "asset-model": "Asset Model",
   "osquery-info": "OSquery Info",
@@ -848,7 +847,6 @@
   "open-sidebar": "Open sidebar",
   "close-sidebar": "Close sidebar",
   "copyright": "Copyright © {{year}}",
-  "version": "Version",
   "made_with_love": "Made with 💙 in 🇪🇺",
   "per-page": "Per Page",
   "previous": "Previous",
@@ -1167,7 +1165,6 @@
     "zimbabwe": "Zimbabwe",
     "other": "Other"
   },
-
   "with-cli-installer": "With CLI installer:",
   "team-tls-cert": "Team TLS Certificate",
   "no-distributors-found": "No distributors found",
@@ -1245,7 +1242,6 @@
   "enter-sql-code": "Enter SQL code...",
   "assign-assets": "Assign Assets",
   "not-before": "Not Before",
-  "pick-a-date": "Pick a date",
   "tags": "Tags",
   "confirm-permanent-script-delete": "Confirm Permanent Script Delete?",
   "error-deleting-script": "Error deleting script",
@@ -1262,6 +1258,9 @@
   "platform-required": "Platform is required",
   "version-required": "Version is required",
   "shard-required": "Shard is required",
+  "interval-required": "Interval is required",
+  "value-required": "Value is required",
+  "select-assets-required": "Select at least one asset",
   "enter-pack-name": "Enter pack name",
   "creating": "Creating...",
   "success": "Success",
@@ -1700,5 +1699,7 @@
   "no-results-yet-query-runs": "No results yet. Results will appear here after the query runs.",
   "updating": "Updating...",
   "only-numbers-allowed": "Only numbers allowed",
-  "pair": "Pair"
+  "pair": "Pair",
+  "asset-name": "Asset Name",
+  "query-failed": "Query failed"
 }

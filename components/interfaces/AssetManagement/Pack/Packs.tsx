@@ -24,6 +24,7 @@ import { usePacks } from '@/hooks/fleets/packs/usePacks';
 import { Pack } from '@/types/fleet';
 import { PLATFORMS } from '@/lib/fleet/constants';
 import FleetStatus from '../Fleet/FleetStatus';
+import { ChevronRight } from 'lucide-react';
 
 const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
   const router = useRouter();
@@ -92,9 +93,12 @@ const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
                       <TableCell>
                         <Link
                           href={`/teams/${slug}/asset-management/packs/${pack.id}`}
-                          className="underline text-blue-500 hover:text-blue-400"
+                          className="group inline-flex items-center gap-1.5 rounded-sm px-1 py-0.5 -mx-1 -my-0.5 text-foreground transition-colors hover:text-primary"
                         >
-                          {pack.name}
+                          <span className="font-medium underline-offset-4 group-hover:underline">
+                            {pack.name}
+                          </span>
+                          <ChevronRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
                         </Link>
                       </TableCell>
 

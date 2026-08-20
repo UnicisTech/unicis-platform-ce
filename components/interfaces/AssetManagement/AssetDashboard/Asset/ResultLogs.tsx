@@ -5,6 +5,12 @@ import { useDeleteAssetResultLog } from '@/hooks/fleets/Nodes/useDeleteResult';
 import { useTranslation } from 'next-i18next';
 import { format } from 'date-fns';
 import { ChevronRight, Trash2 } from 'lucide-react';
+import ResultNodeInfo from '../../ResultNodeInfo';
+import ResultErrorMessage from '../../ResultErrorMessage';
+import {
+  getResultActionBadgeClass,
+  getResultQueryLabel,
+} from '../../resultDisplay';
 
 const ResultLogs = ({
   fleetTeamId,
@@ -46,16 +52,6 @@ const ResultLogs = ({
   const totalPages = Math.ceil(total / filters.limit);
   const currentPage = Math.floor(filters.offset / filters.limit) + 1;
 
-  const getActionBadgeClass = (action: string) => {
-    if (action === 'added') {
-      return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-    }
-    if (action === 'removed') {
-      return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
-    }
-    return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200';
-  };
-
   if (isError) {
     return (
       <div className="p-4 text-destructive">{t('error-loading-results')}</div>
@@ -90,16 +86,21 @@ const ResultLogs = ({
 
       {!isLoading && results.length > 0 && (
         <div className="space-y-2">
-          {results.map((result) => (
-            <details
-              key={result.id}
-              className="group rounded-lg border border-border bg-card hover:bg-muted/30 transition-colors"
-            >
-              <summary className="cursor-pointer px-4 py-3 flex items-center gap-3 list-none">
-                <ChevronRight className="h-4 w-4 transition-transform group-open:rotate-90" />
+          {results.map((result) => {
+            const queryLabel = getResultQueryLabel(
+              result.display_query_name,
+              result.query_name
+            );
 
-                <div className="flex-1 flex items-center gap-4 flex-wrap">
-                  <span className="text-sm text-muted-foreground min-w-[120px] sm:min-w-[140px]">
+            return (
+              <details
+                key={result.id}
+                className="group rounded-lg border border-border bg-card hover:bg-muted/30 transition-colors"
+              >
+                <summary className="cursor-pointer px-4 py-3 grid grid-cols-[24px_150px_minmax(140px,220px)_minmax(280px,1fr)_auto_40px] items-center gap-4 list-none">
+                  <ChevronRight className="h-4 w-4 transition-transform group-open:rotate-90" />
+
+                  <span className="text-sm text-muted-foreground">
                     {result.timestamp
                       ? format(
                           new Date(result.timestamp),
@@ -108,61 +109,64 @@ const ResultLogs = ({
                       : '-'}
                   </span>
 
-                  <span className="text-sm font-medium">
-                    {result.query_name || '-'}
+                  <span className="min-w-0 truncate text-sm font-semibold text-slate-800 dark:text-slate-100">
+                    {queryLabel.type && (
+                      <span className="mr-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        {queryLabel.type}:
+                      </span>
+                    )}
+                    {queryLabel.label}
                   </span>
 
-                  <span className="text-sm text-muted-foreground">
-                    {result.node?.display_name ||
-                      result.node?.host_identifier ||
-                      '-'}
-                  </span>
+                  <ResultNodeInfo node={result.node} />
 
                   <span
-                    className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${getActionBadgeClass(result.action)}`}
+                    className={`inline-flex justify-center rounded-full px-3 py-1 text-xs font-semibold ${getResultActionBadgeClass(result.action)}`}
                   >
                     {result.action || 'snapshot'}
                   </span>
-                </div>
 
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    handleDeleteResult(result.id);
-                  }}
-                  disabled={deletingId === result.id}
-                  className="p-2 text-destructive hover:bg-destructive/10 rounded-md transition-colors disabled:opacity-50"
-                  title={t('delete-result')}
-                >
-                  <Trash2 className="h-4 w-4" />
-                </button>
-              </summary>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleDeleteResult(result.id);
+                    }}
+                    disabled={deletingId === result.id}
+                    className="justify-self-end p-2 text-destructive hover:bg-destructive/10 rounded-md transition-colors disabled:opacity-50"
+                    title={t('delete-result')}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </summary>
 
-              <div className="px-4 pb-4 pt-2 ml-7 border-t border-border">
-                <div className="space-y-2">
-                  {result.columns && typeof result.columns === 'object' ? (
-                    Object.entries(result.columns).map(([key, value]) => (
-                      <div key={key} className="flex gap-2">
-                        <span className="text-sm font-medium text-muted-foreground min-w-[120px]">
-                          {key}:
-                        </span>
-                        <span className="text-sm font-mono">
-                          {typeof value === 'object'
-                            ? JSON.stringify(value, null, 2)
-                            : String(value)}
-                        </span>
-                      </div>
-                    ))
-                  ) : (
-                    <pre className="text-xs font-mono bg-muted p-2 rounded overflow-auto">
-                      {JSON.stringify(result.columns, null, 2)}
-                    </pre>
-                  )}
+                <div className="px-4 pb-4 pt-2 ml-7 border-t border-border">
+                  <div className="space-y-2">
+                    {result.action === 'failed' ? (
+                      <ResultErrorMessage error={result.columns?.error} />
+                    ) : result.columns && typeof result.columns === 'object' ? (
+                      Object.entries(result.columns).map(([key, value]) => (
+                        <div key={key} className="flex gap-2">
+                          <span className="text-sm font-medium text-muted-foreground min-w-[120px]">
+                            {key}:
+                          </span>
+                          <span className="text-sm font-mono">
+                            {typeof value === 'object'
+                              ? JSON.stringify(value, null, 2)
+                              : String(value)}
+                          </span>
+                        </div>
+                      ))
+                    ) : (
+                      <pre className="text-xs font-mono bg-muted p-2 rounded overflow-auto">
+                        {JSON.stringify(result.columns, null, 2)}
+                      </pre>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </details>
-          ))}
+              </details>
+            );
+          })}
         </div>
       )}
 

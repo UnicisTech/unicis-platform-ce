@@ -106,83 +106,102 @@ const PackDetails = ({
           <form
             onSubmit={formik.handleSubmit}
             onChange={checkFormChanges}
-            className="flex flex-col gap-6 max-w-xl"
+            className="flex w-full flex-col gap-6"
           >
-            {/* Name */}
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="name">{t('name')}</Label>
-              <Input
-                id="name"
-                name="name"
-                value={formik.values.name}
-                onChange={formik.handleChange}
-                placeholder={t('enter-name')}
-              />
-              {formik.touched.name && formik.errors.name && (
-                <p className="text-sm text-red-500">{formik.errors.name}</p>
-              )}
-            </div>
-
-            {/* Platform */}
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="platform">{t('platform')}</Label>
-              <Select
-                value={formik.values.platform}
-                onValueChange={(value) =>
-                  formik.setFieldValue('platform', value)
-                }
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder={t('select-platform')} />
-                </SelectTrigger>
-                <SelectContent>
-                  {PLATFORMS.map((p) => (
-                    <SelectItem key={p.value} value={p.value}>
-                      {p.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              {formik.touched.platform && formik.errors.platform && (
-                <p className="text-sm text-red-500">{formik.errors.platform}</p>
-              )}
-            </div>
-
-            {/* Version + Shard */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="flex max-w-xl flex-col gap-6">
+              {/* Name */}
               <div className="flex flex-col gap-2">
-                <Label htmlFor="version">{t('version')}</Label>
+                <Label htmlFor="name">{t('name')}</Label>
                 <Input
-                  id="version"
-                  name="version"
-                  value={formik.values.version}
+                  id="name"
+                  name="name"
+                  value={formik.values.name}
                   onChange={formik.handleChange}
-                  placeholder={t('enter-version')}
+                  placeholder={t('enter-name')}
                 />
-                {formik.touched.version && formik.errors.version && (
-                  <p className="text-sm text-red-500">
-                    {formik.errors.version}
+                {formik.touched.name && formik.errors.name && (
+                  <p className="text-sm text-destructive">
+                    {formik.errors.name}
                   </p>
                 )}
               </div>
 
+              {/* Platform */}
               <div className="flex flex-col gap-2">
-                <Label htmlFor="shard">{t('shard')}</Label>
-                <Input
-                  id="shard"
-                  name="shard"
-                  value={formik.values.shard}
-                  onChange={formik.handleChange}
-                  placeholder={t('enter-shard')}
-                />
-                {formik.touched.shard && formik.errors.shard && (
-                  <p className="text-sm text-red-500">{formik.errors.shard}</p>
+                <Label htmlFor="platform">{t('platform')}</Label>
+                <Select
+                  value={formik.values.platform}
+                  onValueChange={(value) =>
+                    formik.setFieldValue('platform', value)
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder={t('select-platform')} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {PLATFORMS.map((p) => (
+                      <SelectItem key={p.value} value={p.value}>
+                        {p.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {formik.touched.platform && formik.errors.platform && (
+                  <p className="text-sm text-destructive">
+                    {formik.errors.platform}
+                  </p>
                 )}
+              </div>
+
+              {/* Version + Shard */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex flex-col gap-2">
+                  <Label htmlFor="version">{t('version')}</Label>
+                  <Input
+                    id="version"
+                    name="version"
+                    value={formik.values.version}
+                    onChange={formik.handleChange}
+                    placeholder={t('enter-version')}
+                  />
+                  {formik.touched.version && formik.errors.version && (
+                    <p className="text-sm text-destructive">
+                      {formik.errors.version}
+                    </p>
+                  )}
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <Label htmlFor="shard">{t('shard')}</Label>
+                  <Input
+                    id="shard"
+                    name="shard"
+                    value={formik.values.shard}
+                    onChange={formik.handleChange}
+                    placeholder={t('enter-shard')}
+                  />
+                  {formik.touched.shard && formik.errors.shard && (
+                    <p className="text-sm text-destructive">
+                      {formik.errors.shard}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
 
             {/* Buttons */}
-            <div className="flex gap-3 mt-6">
+            <div className="mt-6 flex items-center justify-between gap-3">
+              <div>
+                {canAccess('team_fleet_pack', ['delete']) && (
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    onClick={() => openDeleteModal(pack?.id ?? '')}
+                  >
+                    {t('delete')}
+                  </Button>
+                )}
+              </div>
               {canAccess('team_fleet_pack', ['update']) && (
                 <Button
                   type="submit"
@@ -190,15 +209,6 @@ const PackDetails = ({
                   disabled={!isFormChanged || formik.isSubmitting}
                 >
                   {t('save-changes')}
-                </Button>
-              )}
-              {canAccess('team_fleet_pack', ['delete']) && (
-                <Button
-                  type="button"
-                  variant="destructive"
-                  onClick={() => openDeleteModal(pack?.id ?? '')}
-                >
-                  {t('delete')}
                 </Button>
               )}
             </div>

@@ -2,6 +2,28 @@ import env from '@/lib/env';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
+const getFleetErrorMessage = async (response: Response) => {
+  const fallback = `HTTP error! status: ${response.status}`;
+
+  try {
+    const error = await response.clone().json();
+
+    return (
+      error?.error?.message ||
+      error?.message ||
+      error?.msg ||
+      error?.info ||
+      fallback
+    );
+  } catch {
+    try {
+      return (await response.clone().text()) || fallback;
+    } catch {
+      return fallback;
+    }
+  }
+};
+
 const normalizeFleetBase = () => {
   const fleetApiUrl = env.fleetAPIUrl?.trim();
   const fleetApiHost = env.fleetAPI?.trim();
@@ -45,8 +67,7 @@ export const fleetV1 = async (
   });
 
   if (!response.ok) {
-    // Handle HTTP errors here
-    throw new Error(`HTTP error! status: ${response.status}`);
+    throw new Error(await getFleetErrorMessage(response));
   }
 
   return response;
@@ -62,8 +83,7 @@ export const fleetV2 = async (
   });
 
   if (!response.ok) {
-    // Handle HTTP errors here
-    throw new Error(`HTTP error! status: ${response.status}`);
+    throw new Error(await getFleetErrorMessage(response));
   }
 
   return response;

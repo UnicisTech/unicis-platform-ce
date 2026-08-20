@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import dynamic from 'next/dynamic';
 import { useTranslation } from 'next-i18next';
 import { PLATFORMS } from '@/lib/fleet/constants';
+import { validateFleetSqlQuery } from '@/lib/fleet/sqlValidation';
 import { useCreateQuery } from '@/hooks/fleets/queries/useCreateQuery';
 import { useQueries } from '@/hooks/fleets/queries/useQueries';
 import PacksSelector from '../PacksSelector';
@@ -70,7 +71,10 @@ export default function CreateQuery({
     handleSubmit,
     control,
     register,
-    formState: { isSubmitting },
+    setError,
+    setFocus,
+    clearErrors,
+    formState: { isSubmitting, errors },
     reset,
   } = useForm<FormData>({
     defaultValues: {
@@ -89,6 +93,19 @@ export default function CreateQuery({
   });
 
   const onSubmit = async (data: FormData) => {
+    const sqlValidation = validateFleetSqlQuery(data.sql);
+
+    if (!sqlValidation.valid) {
+      setError('sql', {
+        type: 'validate',
+        message: t(sqlValidation.messageKey),
+      });
+      setFocus('sql');
+      return;
+    }
+
+    clearErrors('sql');
+
     try {
       await createQuery(fleetTeamId, {
         ...data,
@@ -101,8 +118,8 @@ export default function CreateQuery({
       mutateQueries();
       setVisible(false);
       reset();
-    } catch {
-      toast.error(t('error'));
+    } catch (error: any) {
+      toast.error(error?.message || t('error'));
     }
   };
 
@@ -117,15 +134,36 @@ export default function CreateQuery({
           ref={formRef}
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-4"
+          noValidate
         >
           <div>
             <Label htmlFor="name">{t('name')}</Label>
-            <Input id="name" {...register('name', { required: true })} />
+            <Input
+              id="name"
+              aria-invalid={!!errors.name}
+              {...register('name', { required: t('name-required') })}
+            />
+            {errors.name?.message && (
+              <p className="text-sm text-destructive">
+                {String(errors.name.message)}
+              </p>
+            )}
           </div>
 
           <div>
             <Label htmlFor="sql">{t('fleet:fleet-sql-code')}</Label>
-            <Input id="sql" {...register('sql', { required: true })} />
+            <Input
+              id="sql"
+              aria-invalid={!!errors.sql}
+              {...register('sql', {
+                required: t('fleet:sql-query-required'),
+              })}
+            />
+            {errors.sql?.message && (
+              <p className="text-sm text-destructive">
+                {String(errors.sql.message)}
+              </p>
+            )}
           </div>
 
           <div>
@@ -155,16 +193,31 @@ export default function CreateQuery({
               <Label htmlFor="version">{t('version')}</Label>
               <Input
                 id="version"
-                {...register('version', { required: true })}
+                aria-invalid={!!errors.version}
+                {...register('version', { required: t('version-required') })}
               />
+              {errors.version?.message && (
+                <p className="text-sm text-destructive">
+                  {String(errors.version.message)}
+                </p>
+              )}
             </div>
             <div>
               <Label htmlFor="shard">{t('fleet:fleet-shard')}</Label>
               <Input
                 id="shard"
                 type="number"
-                {...register('shard', { required: true, valueAsNumber: true })}
+                aria-invalid={!!errors.shard}
+                {...register('shard', {
+                  required: t('shard-required'),
+                  valueAsNumber: true,
+                })}
               />
+              {errors.shard?.message && (
+                <p className="text-sm text-destructive">
+                  {String(errors.shard.message)}
+                </p>
+              )}
             </div>
           </div>
 
@@ -174,15 +227,30 @@ export default function CreateQuery({
               <Input
                 id="interval"
                 type="number"
+                aria-invalid={!!errors.interval}
                 {...register('interval', {
-                  required: true,
+                  required: t('interval-required'),
                   valueAsNumber: true,
                 })}
               />
+              {errors.interval?.message && (
+                <p className="text-sm text-destructive">
+                  {String(errors.interval.message)}
+                </p>
+              )}
             </div>
             <div>
               <Label htmlFor="value">{t('value')}</Label>
-              <Input id="value" {...register('value', { required: true })} />
+              <Input
+                id="value"
+                aria-invalid={!!errors.value}
+                {...register('value', { required: t('value-required') })}
+              />
+              {errors.value?.message && (
+                <p className="text-sm text-destructive">
+                  {String(errors.value.message)}
+                </p>
+              )}
             </div>
           </div>
 
