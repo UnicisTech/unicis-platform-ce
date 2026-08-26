@@ -2,7 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'next-i18next';
 import { Loading } from '@/components/shared';
 import type { User } from '@/generated/client';
-import { PLATFORMS } from '@/lib/fleet/constants';
+import {
+  DEFAULT_FLEET_CONFIG_SHARD,
+  DEFAULT_FLEET_CONFIG_VALUE,
+  DEFAULT_FLEET_CONFIG_VERSION,
+  DEFAULT_QUERY_INTERVAL,
+  getQueryIntervalOptions,
+  PLATFORMS,
+} from '@/lib/fleet/constants';
 import { validateFleetSqlQuery } from '@/lib/fleet/sqlValidation';
 import toast from 'react-hot-toast';
 import DeleteQuery from './DeleteQuery';
@@ -11,7 +18,6 @@ import { useUpdateQuery } from '@/hooks/fleets/queries/useUpdateQuery';
 import PacksSelector from '../PacksSelector';
 import TagsSelector from '../TagsSelector';
 import { Input } from '@/components/shadcn/ui/input';
-import { Checkbox } from '@/components/shadcn/ui/checkbox';
 import { Label } from '@/components/shadcn/ui/label';
 import { Button } from '@/components/shadcn/ui/button';
 import {
@@ -29,9 +35,7 @@ interface Option {
   value: string;
 }
 
-type QueryFormErrors = Partial<
-  Record<'name' | 'sql' | 'version' | 'shard' | 'interval' | 'value', string>
->;
+type QueryFormErrors = Partial<Record<'name' | 'sql' | 'interval', string>>;
 
 const QueryDetails = ({
   user: _user,
@@ -51,26 +55,25 @@ const QueryDetails = ({
   const { query, isLoading } = useGetQueryId(fleetTeamId, queryID);
 
   const nameInputRef = useRef<HTMLInputElement | null>(null);
-  const [removed, setRemoved] = useState(false);
   const [selectedPlatform, setSelectedPlatform] = useState('all');
+  const [selectedInterval, setSelectedInterval] = useState(
+    DEFAULT_QUERY_INTERVAL
+  );
   const [selectedPacks, setSelectedPacks] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [queryToDelete, setQueryToDelete] = useState<null | string>(null);
   const [formErrors, setFormErrors] = useState<QueryFormErrors>({});
-  const versionInputRef = useRef<HTMLInputElement | null>(null);
-  const shardInputRef = useRef<HTMLInputElement | null>(null);
-  const intervalInputRef = useRef<HTMLInputElement | null>(null);
-  const valueInputRef = useRef<HTMLInputElement | null>(null);
+  const intervalInputRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     if (query) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setRemoved(query.removed);
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedPlatform(
         PLATFORMS.find((p) => p.value === query.platform)?.value || 'all'
       );
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setSelectedInterval(query.interval);
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedPacks(query.packs?.map((p) => p.id) || []);
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -87,10 +90,7 @@ const QueryDetails = ({
     const values = {
       name: (formData.get('name') as string) || '',
       sql: (formData.get('sql') as string) || '',
-      version: (formData.get('version') as string) || '',
-      shard: (formData.get('shard') as string) || '',
-      interval: (formData.get('interval') as string) || '',
-      value: (formData.get('value') as string) || '',
+      interval: String(selectedInterval || ''),
       description: (formData.get('description') as string) || '',
     };
 
@@ -98,21 +98,15 @@ const QueryDetails = ({
 
     if (!values.name.trim()) nextErrors.name = t('name-required');
     if (!values.sql.trim()) nextErrors.sql = t('fleet:sql-query-required');
-    if (!values.version.trim()) nextErrors.version = t('version-required');
-    if (!values.shard.trim()) nextErrors.shard = t('shard-required');
     if (!values.interval.trim()) {
       nextErrors.interval = t('interval-required');
     }
-    if (!values.value.trim()) nextErrors.value = t('value-required');
 
     if (Object.keys(nextErrors).length > 0) {
       setFormErrors(nextErrors);
       if (nextErrors.name) nameInputRef.current?.focus();
       else if (nextErrors.sql) sqlInputRef.current?.focus();
-      else if (nextErrors.version) versionInputRef.current?.focus();
-      else if (nextErrors.shard) shardInputRef.current?.focus();
       else if (nextErrors.interval) intervalInputRef.current?.focus();
-      else if (nextErrors.value) valueInputRef.current?.focus();
       return;
     }
 
@@ -120,14 +114,14 @@ const QueryDetails = ({
       name: values.name,
       sql: values.sql,
       platform: selectedPlatform,
-      version: values.version,
-      shard: Number(values.shard),
-      interval: Number(values.interval),
-      value: values.value,
+      version: query?.version || DEFAULT_FLEET_CONFIG_VERSION,
+      shard: query?.shard || DEFAULT_FLEET_CONFIG_SHARD,
+      interval: selectedInterval,
+      value: query?.value || DEFAULT_FLEET_CONFIG_VALUE,
       description: values.description,
       packs: selectedPacks,
       tags: selectedTags.join(','),
-      removed,
+      removed: query?.removed ?? false,
     };
 
     const sqlValidation = validateFleetSqlQuery(queryData.sql);
@@ -209,87 +203,37 @@ const QueryDetails = ({
             </Select>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="version">{t('version')}</Label>
-              <Input
-                ref={versionInputRef}
-                id="version"
-                name="version"
-                defaultValue={query?.version}
-                aria-invalid={!!formErrors.version}
-                onChange={() =>
-                  setFormErrors((prev) => ({ ...prev, version: undefined }))
-                }
-              />
-              {formErrors.version && (
-                <p className="text-sm text-destructive">{formErrors.version}</p>
-              )}
-            </div>
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="shard">{t('shard')}</Label>
-              <Input
-                ref={shardInputRef}
-                id="shard"
-                type="number"
-                name="shard"
-                defaultValue={query?.shard}
-                aria-invalid={!!formErrors.shard}
-                onChange={() =>
-                  setFormErrors((prev) => ({ ...prev, shard: undefined }))
-                }
-              />
-              {formErrors.shard && (
-                <p className="text-sm text-destructive">{formErrors.shard}</p>
-              )}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="interval">{t('interval')}</Label>
-              <Input
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="interval">{t('interval')}</Label>
+            <Select
+              value={String(selectedInterval)}
+              onValueChange={(value) => {
+                setSelectedInterval(Number(value));
+                setFormErrors((prev) => ({
+                  ...prev,
+                  interval: undefined,
+                }));
+              }}
+            >
+              <SelectTrigger
                 ref={intervalInputRef}
                 id="interval"
-                type="number"
-                name="interval"
-                defaultValue={query?.interval}
                 aria-invalid={!!formErrors.interval}
-                onChange={() =>
-                  setFormErrors((prev) => ({ ...prev, interval: undefined }))
-                }
-              />
-              {formErrors.interval && (
-                <p className="text-sm text-destructive">
-                  {formErrors.interval}
-                </p>
-              )}
-            </div>
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="value">{t('value')}</Label>
-              <Input
-                ref={valueInputRef}
-                id="value"
-                name="value"
-                defaultValue={query?.value}
-                aria-invalid={!!formErrors.value}
-                onChange={() =>
-                  setFormErrors((prev) => ({ ...prev, value: undefined }))
-                }
-              />
-              {formErrors.value && (
-                <p className="text-sm text-destructive">{formErrors.value}</p>
-              )}
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="removed"
-              checked={removed}
-              onCheckedChange={(checked) => setRemoved(!!checked)}
-            />
-            <Label htmlFor="removed">{t('removed')}</Label>
+              >
+                <SelectValue placeholder={t('interval')} />
+              </SelectTrigger>
+              <SelectContent>
+                {getQueryIntervalOptions(query?.interval).map((option) => (
+                  <SelectItem key={option.value} value={String(option.value)}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <input type="hidden" name="interval" value={selectedInterval} />
+            {formErrors.interval && (
+              <p className="text-sm text-destructive">{formErrors.interval}</p>
+            )}
           </div>
 
           <div className="flex flex-col gap-2">

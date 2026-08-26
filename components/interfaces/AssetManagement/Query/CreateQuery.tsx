@@ -2,7 +2,14 @@ import React, { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import dynamic from 'next/dynamic';
 import { useTranslation } from 'next-i18next';
-import { PLATFORMS } from '@/lib/fleet/constants';
+import {
+  DEFAULT_FLEET_CONFIG_SHARD,
+  DEFAULT_FLEET_CONFIG_VALUE,
+  DEFAULT_FLEET_CONFIG_VERSION,
+  DEFAULT_QUERY_INTERVAL,
+  PLATFORMS,
+  QUERY_INTERVAL_OPTIONS,
+} from '@/lib/fleet/constants';
 import { validateFleetSqlQuery } from '@/lib/fleet/sqlValidation';
 import { useCreateQuery } from '@/hooks/fleets/queries/useCreateQuery';
 import { useQueries } from '@/hooks/fleets/queries/useQueries';
@@ -25,7 +32,6 @@ import {
   SelectContent,
   SelectItem,
 } from '@/components/shadcn/ui/select';
-import { Checkbox } from '@/components/shadcn/ui/checkbox';
 import { useForm, Controller } from 'react-hook-form';
 import { User } from '@/generated/client';
 
@@ -36,13 +42,9 @@ interface FormData {
   sql: string;
   interval: number;
   platform: string;
-  version: string;
-  value: string;
   packs: string[];
   tags: string;
-  shard: number;
   description: string;
-  removed: boolean;
 }
 
 const DEFAULT_PLATFORM_VALUE = 'all';
@@ -62,7 +64,6 @@ export default function CreateQuery({
   const formRef = useRef<HTMLFormElement | null>(null);
   const [selectedPacks, setSelectedPacks] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [removed, setRemoved] = useState<boolean>(false);
 
   const createQuery = useCreateQuery();
   const { mutateQueries } = useQueries(fleetTeamId);
@@ -80,15 +81,11 @@ export default function CreateQuery({
     defaultValues: {
       name: '',
       sql: '',
-      interval: 0,
+      interval: DEFAULT_QUERY_INTERVAL,
       platform: DEFAULT_PLATFORM_VALUE,
-      version: '',
-      value: '',
       packs: [],
       tags: '',
-      shard: 1,
       description: '',
-      removed: false,
     },
   });
 
@@ -110,9 +107,12 @@ export default function CreateQuery({
       await createQuery(fleetTeamId, {
         ...data,
         platform: data.platform,
+        version: DEFAULT_FLEET_CONFIG_VERSION,
+        shard: DEFAULT_FLEET_CONFIG_SHARD,
+        value: DEFAULT_FLEET_CONFIG_VALUE,
+        removed: false,
         packs: selectedPacks,
         tags: selectedTags.join(','),
-        removed,
       });
       toast.success(t('success'));
       mutateQueries();
@@ -188,79 +188,41 @@ export default function CreateQuery({
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-2">
-            <div>
-              <Label htmlFor="version">{t('version')}</Label>
-              <Input
-                id="version"
-                aria-invalid={!!errors.version}
-                {...register('version', { required: t('version-required') })}
-              />
-              {errors.version?.message && (
-                <p className="text-sm text-destructive">
-                  {String(errors.version.message)}
-                </p>
+          <div>
+            <Label htmlFor="interval">{t('interval')}</Label>
+            <Controller
+              control={control}
+              name="interval"
+              rules={{ required: t('interval-required') }}
+              render={({ field }) => (
+                <Select
+                  value={String(field.value)}
+                  onValueChange={(value) => {
+                    field.onChange(Number(value));
+                    clearErrors('interval');
+                  }}
+                >
+                  <SelectTrigger id="interval" aria-invalid={!!errors.interval}>
+                    <SelectValue placeholder={t('interval')} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {QUERY_INTERVAL_OPTIONS.map((option) => (
+                      <SelectItem
+                        key={option.value}
+                        value={String(option.value)}
+                      >
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               )}
-            </div>
-            <div>
-              <Label htmlFor="shard">{t('fleet:fleet-shard')}</Label>
-              <Input
-                id="shard"
-                type="number"
-                aria-invalid={!!errors.shard}
-                {...register('shard', {
-                  required: t('shard-required'),
-                  valueAsNumber: true,
-                })}
-              />
-              {errors.shard?.message && (
-                <p className="text-sm text-destructive">
-                  {String(errors.shard.message)}
-                </p>
-              )}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2">
-            <div>
-              <Label htmlFor="interval">{t('interval')}</Label>
-              <Input
-                id="interval"
-                type="number"
-                aria-invalid={!!errors.interval}
-                {...register('interval', {
-                  required: t('interval-required'),
-                  valueAsNumber: true,
-                })}
-              />
-              {errors.interval?.message && (
-                <p className="text-sm text-destructive">
-                  {String(errors.interval.message)}
-                </p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor="value">{t('value')}</Label>
-              <Input
-                id="value"
-                aria-invalid={!!errors.value}
-                {...register('value', { required: t('value-required') })}
-              />
-              {errors.value?.message && (
-                <p className="text-sm text-destructive">
-                  {String(errors.value.message)}
-                </p>
-              )}
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Checkbox
-              id="removed"
-              checked={removed}
-              onCheckedChange={() => setRemoved(!removed)}
             />
-            <Label htmlFor="removed">{t('removed')}</Label>
+            {errors.interval?.message && (
+              <p className="text-sm text-destructive">
+                {String(errors.interval.message)}
+              </p>
+            )}
           </div>
 
           <div>

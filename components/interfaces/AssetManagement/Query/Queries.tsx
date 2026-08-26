@@ -16,7 +16,7 @@ import PlatformBadge from '@/components/shared/PlatformBadge';
 import useCanAccess from 'hooks/useCanAccess';
 import type { Team, User } from '@/generated/client';
 import { Query } from '@/types/fleet';
-import { PLATFORMS } from '@/lib/fleet/constants';
+import { formatQueryInterval, PLATFORMS } from '@/lib/fleet/constants';
 import FleetStatus from '../Fleet/FleetStatus';
 import CreateQuery from './CreateQuery';
 import { useQueries } from '@/hooks/fleets/queries/useQueries';
@@ -128,7 +128,7 @@ const Querys = ({ team, user }: { team: Team; user: Partial<User> }) => {
 
                       <TableCell>
                         <span className="text-sm text-muted-foreground">
-                          {query.interval}
+                          {formatQueryInterval(query.interval)}
                         </span>
                       </TableCell>
 

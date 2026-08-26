@@ -4,7 +4,10 @@ import dynamic from 'next/dynamic';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'next-i18next';
-import { PLATFORMS } from '@/lib/fleet/constants';
+import {
+  DEFAULT_FLEET_CONFIG_SHARD,
+  DEFAULT_FLEET_CONFIG_VERSION,
+} from '@/lib/fleet/constants';
 import { Pack } from '@/types';
 import { Team } from '@/generated/client';
 import { useUpdatePack } from '@/hooks/fleets/packs/useUpdatePack';
@@ -18,13 +21,6 @@ import {
   DialogFooter,
 } from '@/components/shadcn/ui/dialog';
 import { Button } from '@/components/shadcn/ui/button';
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@/components/shadcn/ui/select';
 import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
 
@@ -49,24 +45,27 @@ const EditPack = ({
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required(t('name-required')),
-    platform: Yup.string().required(t('platform-required')),
-    version: Yup.string().required(t('version-required')),
-    shard: Yup.string().required(t('shard-required')),
     description: Yup.string().nullable(),
   });
 
   const formik = useFormik({
     initialValues: {
       name: pack.name || '',
-      platform: pack.platform || 'all',
-      version: pack.version || '',
-      shard: pack.shard || '',
       description: pack.description || '',
     },
     validationSchema,
     onSubmit: async (values) => {
       try {
-        await updatePack(fleetTeamId, values, pack.id);
+        await updatePack(
+          fleetTeamId,
+          {
+            ...values,
+            platform: pack.platform || 'all',
+            version: pack.version || DEFAULT_FLEET_CONFIG_VERSION,
+            shard: pack.shard || DEFAULT_FLEET_CONFIG_SHARD,
+          },
+          pack.id
+        );
         toast.success(t('success'));
         mutatePacks();
         setVisible(false);
@@ -97,66 +96,6 @@ const EditPack = ({
             {formik.touched.name && formik.errors.name && (
               <p className="text-sm text-destructive">{formik.errors.name}</p>
             )}
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="platform">{t('platform')}</Label>
-            <Select
-              value={formik.values.platform}
-              onValueChange={(value) => formik.setFieldValue('platform', value)}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder={t('select-platform')} />
-              </SelectTrigger>
-              <SelectContent>
-                {PLATFORMS.map((p) => (
-                  <SelectItem key={p.value} value={p.value}>
-                    {p.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            {formik.touched.platform && formik.errors.platform && (
-              <p className="text-sm text-destructive">
-                {formik.errors.platform}
-              </p>
-            )}
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="version">{t('version')}</Label>
-              <Input
-                id="version"
-                name="version"
-                value={formik.values.version}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder={t('enter-version')}
-              />
-              {formik.touched.version && formik.errors.version && (
-                <p className="text-sm text-destructive">
-                  {formik.errors.version}
-                </p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="shard">{t('shard')}</Label>
-              <Input
-                id="shard"
-                name="shard"
-                value={formik.values.shard}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder={t('enter-shard')}
-              />
-              {formik.touched.shard && formik.errors.shard && (
-                <p className="text-sm text-destructive">
-                  {formik.errors.shard}
-                </p>
-              )}
-            </div>
           </div>
 
           <div className="space-y-2">

@@ -6,7 +6,10 @@ import { useRouter } from 'next/router';
 import { Error, Loading } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
 import type { User } from '@/generated/client';
-import { PLATFORMS } from '@/lib/fleet/constants';
+import {
+  DEFAULT_FLEET_CONFIG_SHARD,
+  DEFAULT_FLEET_CONFIG_VERSION,
+} from '@/lib/fleet/constants';
 import { useGetPackId } from '@/hooks/fleets/packs/useGetPackId';
 import { useUpdatePack } from '@/hooks/fleets/packs/useUpdatePack';
 import toast from 'react-hot-toast';
@@ -17,19 +20,9 @@ import * as Yup from 'yup';
 import { Button } from '@/components/shadcn/ui/button';
 import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/shadcn/ui/select';
 
 interface FormData {
   name: string;
-  platform: string;
-  version: string;
-  shard: string;
   description?: string;
 }
 
@@ -55,9 +48,6 @@ const PackDetails = ({
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required(t('required')),
-    platform: Yup.string().required(t('required')),
-    version: Yup.string().required(t('required')),
-    shard: Yup.string().required(t('required')),
     description: Yup.string().optional(),
   });
 
@@ -65,15 +55,21 @@ const PackDetails = ({
     enableReinitialize: true,
     initialValues: {
       name: pack?.name || '',
-      platform: pack?.platform || PLATFORMS[0].value,
-      version: pack?.version || '',
-      shard: pack?.shard?.toString() || '',
       description: pack?.description || '',
     },
     validationSchema,
     onSubmit: async (values) => {
       try {
-        await updatePack(fleetTeamId, values, packID);
+        await updatePack(
+          fleetTeamId,
+          {
+            ...values,
+            platform: pack?.platform || 'all',
+            version: pack?.version || DEFAULT_FLEET_CONFIG_VERSION,
+            shard: pack?.shard || DEFAULT_FLEET_CONFIG_SHARD,
+          },
+          packID
+        );
         toast.success(t('success'));
         setIsFormChanged(false);
       } catch {
@@ -124,68 +120,6 @@ const PackDetails = ({
                     {formik.errors.name}
                   </p>
                 )}
-              </div>
-
-              {/* Platform */}
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="platform">{t('platform')}</Label>
-                <Select
-                  value={formik.values.platform}
-                  onValueChange={(value) =>
-                    formik.setFieldValue('platform', value)
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder={t('select-platform')} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {PLATFORMS.map((p) => (
-                      <SelectItem key={p.value} value={p.value}>
-                        {p.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {formik.touched.platform && formik.errors.platform && (
-                  <p className="text-sm text-destructive">
-                    {formik.errors.platform}
-                  </p>
-                )}
-              </div>
-
-              {/* Version + Shard */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="version">{t('version')}</Label>
-                  <Input
-                    id="version"
-                    name="version"
-                    value={formik.values.version}
-                    onChange={formik.handleChange}
-                    placeholder={t('enter-version')}
-                  />
-                  {formik.touched.version && formik.errors.version && (
-                    <p className="text-sm text-destructive">
-                      {formik.errors.version}
-                    </p>
-                  )}
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="shard">{t('shard')}</Label>
-                  <Input
-                    id="shard"
-                    name="shard"
-                    value={formik.values.shard}
-                    onChange={formik.handleChange}
-                    placeholder={t('enter-shard')}
-                  />
-                  {formik.touched.shard && formik.errors.shard && (
-                    <p className="text-sm text-destructive">
-                      {formik.errors.shard}
-                    </p>
-                  )}
-                </div>
               </div>
             </div>
 

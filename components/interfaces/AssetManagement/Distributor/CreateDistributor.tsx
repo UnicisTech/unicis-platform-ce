@@ -59,6 +59,11 @@ const CreateDistributors = ({
     setFormErrors((prev) => ({ ...prev, nodes: undefined }));
   };
 
+  const handleTagSelection = (tagValues: string[]) => {
+    setSelectedTags(tagValues);
+    setFormErrors((prev) => ({ ...prev, nodes: undefined }));
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -73,7 +78,7 @@ const CreateDistributors = ({
       nextErrors.sql = t(sqlValidation.messageKey);
     }
 
-    if (selectedNodes.length === 0) {
+    if (selectedNodes.length === 0 && selectedTags.length === 0) {
       nextErrors.nodes = t('select-assets-required');
     }
 
@@ -185,7 +190,7 @@ const CreateDistributors = ({
             <TagsSelector
               fleetTeamId={fleetTeamId}
               setSectionTag={setSelectedTags}
-              onSelect={() => {}}
+              onSelect={handleTagSelection}
             />
           </div>
 

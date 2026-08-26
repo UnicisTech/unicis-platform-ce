@@ -12,7 +12,6 @@ import {
   TableRow,
 } from '@/components/shadcn/ui/table';
 import { Error, Loading } from '@/components/shared';
-import PlatformBadge from '@/components/shared/PlatformBadge';
 import useCanAccess from 'hooks/useCanAccess';
 import type { Team, User } from '@/generated/client';
 import {
@@ -22,7 +21,6 @@ import {
 } from '@/components/interfaces/AssetManagement/Pack';
 import { usePacks } from '@/hooks/fleets/packs/usePacks';
 import { Pack } from '@/types/fleet';
-import { PLATFORMS } from '@/lib/fleet/constants';
 import FleetStatus from '../Fleet/FleetStatus';
 import { ChevronRight } from 'lucide-react';
 
@@ -79,9 +77,6 @@ const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
               <TableHeader>
                 <TableRow>
                   <TableHead>{t('name')}</TableHead>
-                  <TableHead>{t('platform')}</TableHead>
-                  <TableHead>{t('version')}</TableHead>
-                  <TableHead>{t('shard')}</TableHead>
                   <TableHead className="text-right">{t('actions')}</TableHead>
                 </TableRow>
               </TableHeader>
@@ -100,29 +95,6 @@ const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
                           </span>
                           <ChevronRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
                         </Link>
-                      </TableCell>
-
-                      <TableCell>
-                        <PlatformBadge
-                          value={pack.platform!}
-                          label={
-                            PLATFORMS.find(
-                              ({ value }) => value === pack.platform
-                            )?.label as string
-                          }
-                        />
-                      </TableCell>
-
-                      <TableCell>
-                        <span className="text-sm text-muted-foreground">
-                          {pack.version}
-                        </span>
-                      </TableCell>
-
-                      <TableCell>
-                        <span className="text-sm text-muted-foreground">
-                          {pack.shard}
-                        </span>
                       </TableCell>
 
                       <TableCell className="text-right">
@@ -152,7 +124,7 @@ const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
                 ) : (
                   <TableRow>
                     <TableCell
-                      colSpan={5}
+                      colSpan={2}
                       className="text-center py-4 text-sm text-muted-foreground"
                     >
                       {t('no-packs-found')}
