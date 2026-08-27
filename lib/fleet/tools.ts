@@ -103,6 +103,7 @@ export const getOsqueryReleaseUrl = (
     case 'advanced':
       return `https://github.com/osquery/osquery/releases/tag/${version}`;
     case 'macos':
+      return `https://github.com/osquery/osquery/releases/download/${version}/osquery-${version}.pkg`;
     default:
       return `https://github.com/osquery/osquery/releases/tag/${version}`;
   }
@@ -134,8 +135,13 @@ export const getOsqueryInstallCommand = (
     case 'advanced':
       return `Download the correct osquery package for your OS from ${downloadUrl}`;
     case 'macos':
+      return [
+        `curl -fsSL "${downloadUrl}" -o /tmp/osquery-${version}.pkg`,
+        `sudo installer -pkg /tmp/osquery-${version}.pkg -target /`,
+        'sudo /opt/osquery/lib/osquery.app/Contents/MacOS/osqueryd --version',
+      ].join('\n');
     default:
-      return 'brew install --cask osquery';
+      return `Download the correct osquery package for your OS from ${downloadUrl}`;
   }
 };
 
@@ -196,9 +202,14 @@ export const getOsqueryEnrollCommand = ({
     tlsServerCerts,
   });
 
+  const osqueryBinary =
+    platform === 'macos'
+      ? '/opt/osquery/lib/osquery.app/Contents/MacOS/osqueryd'
+      : 'osqueryd';
+
   let osqueryCommand = [
     `printf %s ${escapedSecret} > ${secretPath}`,
-    `sudo osqueryd \\`,
+    `sudo ${osqueryBinary} \\`,
     ...flagsList.map((flag, index) => {
       const suffix = index === flagsList.length - 1 ? '' : ' \\';
 
