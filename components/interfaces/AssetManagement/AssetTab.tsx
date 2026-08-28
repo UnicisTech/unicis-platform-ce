@@ -75,7 +75,7 @@ const AssetTab = ({
   return (
     <div className="flex flex-col pb-6">
       <nav
-        className=" flex space-x-5 border-b border-gray-300"
+        className="no-scrollbar flex space-x-5 overflow-x-auto border-b border-slate-200 dark:border-slate-700"
         aria-label="Tabs"
       >
         {navigations.map((menu) => {
@@ -84,10 +84,10 @@ const AssetTab = ({
               href={menu.href}
               key={menu.href}
               className={classNames(
-                'inline-flex items-center border-b-2 py-4 text-sm font-medium',
+                'inline-flex items-center whitespace-nowrap border-b-2 py-4 text-sm font-medium',
                 menu.active
-                  ? 'border-gray-900 text-gray-700 dark:text-gray-100'
-                  : 'border-transparent text-gray-500 hover:border-gray-300  hover:text-gray-700 hover:dark:text-gray-100'
+                  ? 'border-slate-900 text-slate-900 dark:border-slate-200 dark:text-slate-100'
+                  : 'border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700 dark:text-slate-400 dark:hover:border-slate-600 dark:hover:text-slate-200'
               )}
             >
               {menu.name}
