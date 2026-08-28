@@ -4,14 +4,6 @@ import Cookies from 'js-cookie';
 import type { Team, User } from '@/generated/client';
 import { Button } from '@/components/shadcn/ui/button';
 import { Badge } from '@/components/shadcn/ui/badge';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/shadcn/ui/card';
 import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
 import { useFleetConnection } from '@/hooks/fleets/connect/useFleetConnection';
@@ -51,34 +43,34 @@ const SettingsFleet = ({
   };
 
   return (
-    <Card className="overflow-hidden">
-      <CardHeader className="flex flex-row items-start justify-between gap-4 border-b bg-slate-50/40 px-6 py-5">
+    <div className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
+      <div className="flex items-start justify-between gap-4 border-b border-slate-200 bg-slate-50 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-900">
         <div>
-          <CardTitle className="text-sm font-bold uppercase tracking-wide text-slate-700">
+          <span className="text-[12px] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
             {t('fleet:fleet-settings')}
-          </CardTitle>
-          <CardDescription className="mt-2 text-base text-slate-500">
+          </span>
+          <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
             {t('fleet:fleet-settings-description')}
-          </CardDescription>
+          </p>
         </div>
 
         <Badge
           variant={isDisconnected ? 'outline' : 'secondary'}
           className={
             isDisconnected
-              ? 'border-amber-300 bg-amber-50 text-amber-700'
-              : 'border-emerald-200 bg-emerald-50 text-emerald-700'
+              ? 'shrink-0 border-amber-300 bg-amber-50 text-amber-700 dark:border-amber-700 dark:bg-amber-950/50 dark:text-amber-300'
+              : 'shrink-0 border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300'
           }
         >
           {isDisconnected
             ? t('fleet:fleet-disconnected')
             : t('fleet:fleet-connected')}
         </Badge>
-      </CardHeader>
+      </div>
 
-      <CardContent className="space-y-6 px-6 py-6">
+      <div className="space-y-4 p-4">
         {isDisconnected && (
-          <p className="rounded border border-amber-200 bg-amber-50 p-3 text-sm text-muted-foreground">
+          <p className="rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-700 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
             {t('fleet:fleet-disconnected-retention', {
               date: connection?.deleteAfter
                 ? new Date(connection.deleteAfter).toLocaleDateString()
@@ -88,38 +80,24 @@ const SettingsFleet = ({
         )}
 
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="space-y-2">
-            <Label
-              htmlFor="fleet-first-name"
-              className="text-base font-semibold"
-            >
-              {t('first-name')}
-            </Label>
+          <div className="grid gap-1">
+            <Label htmlFor="fleet-first-name">{t('first-name')}</Label>
             <Input id="fleet-first-name" value={firstName} readOnly />
           </div>
 
-          <div className="space-y-2">
-            <Label
-              htmlFor="fleet-last-name"
-              className="text-base font-semibold"
-            >
-              {t('last-name')}
-            </Label>
+          <div className="grid gap-1">
+            <Label htmlFor="fleet-last-name">{t('last-name')}</Label>
             <Input id="fleet-last-name" value={lastName} readOnly />
           </div>
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="fleet-email" className="text-base font-semibold">
-            {t('email')}
-          </Label>
+        <div className="grid gap-1">
+          <Label htmlFor="fleet-email">{t('email')}</Label>
           <Input id="fleet-email" value={user?.email ?? ''} readOnly />
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="fleet-password" className="text-base font-semibold">
-            {t('fleet:fleet-password')}
-          </Label>
+        <div className="grid gap-1">
+          <Label htmlFor="fleet-password">{t('fleet:fleet-password')}</Label>
           <Input
             id="fleet-password"
             type="password"
@@ -127,9 +105,9 @@ const SettingsFleet = ({
             readOnly
           />
         </div>
-      </CardContent>
+      </div>
 
-      <CardFooter className="flex justify-between gap-3 border-t px-6 py-5">
+      <div className="flex flex-col gap-2 border-t border-slate-200 px-4 py-3 dark:border-slate-700 sm:flex-row sm:items-center sm:justify-between [&>button]:w-full sm:[&>button]:w-auto">
         <Button
           type="button"
           variant="destructive"
@@ -142,8 +120,8 @@ const SettingsFleet = ({
         <Button type="button" disabled>
           {t('save')}
         </Button>
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 };
 

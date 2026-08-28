@@ -3,13 +3,6 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { Button } from '@/components/shadcn/ui/button';
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '@/components/shadcn/ui/card';
-import {
   Dialog,
   DialogContent,
   DialogHeader,
@@ -19,6 +12,7 @@ import {
 } from '@/components/shadcn/ui/dialog';
 import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
+import { CopyToClipboardButton } from '@/components/shared';
 import type { Team, User } from '@/generated/client';
 import FleetStatus from './FleetStatus';
 import RenewFleetSecret from './RenewFleetSecret';
@@ -28,7 +22,6 @@ import { useDeleteFleetSecret } from '@/hooks/fleets/connect/useDeleteFleetSecre
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import { Loader2 } from 'lucide-react';
 import Cookies from 'js-cookie';
-import { CodeBlock } from '@/components/shared/CodeBlock';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { passwordPolicies } from '@/lib/common';
 import { useFormik } from 'formik';
@@ -111,44 +104,48 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
   const toggleSafe = () => setSafe(!safe);
 
   return (
-    <Card>
-      <CardHeader className="flex flex-row justify-between items-start">
-        <div>
-          <CardTitle>{t('fleet:fleet-secret')}</CardTitle>
-          <CardDescription>
-            {t('fleet:fleet-secret-description')}
-          </CardDescription>
-        </div>
+    <div className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
+      <div className="border-b border-slate-200 bg-slate-50 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-900">
+        <span className="text-[12px] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
+          {t('fleet:fleet-secret')}
+        </span>
+        <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+          {t('fleet:fleet-secret-description')}
+        </p>
+      </div>
 
-        {hasSecret && (
-          <button
-            type="button"
-            onClick={toggleSafe}
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {t('fleet:fleet-safe-sensitives')}
-            {safe ? (
-              <EyeSlashIcon className="h-5 w-5" />
-            ) : (
-              <EyeIcon className="h-5 w-5" />
-            )}
-          </button>
-        )}
-      </CardHeader>
-
-      <CardContent className="space-y-4">
+      <div className="p-4">
         {!user ? (
           <FleetStatus status="access-not-granted" />
         ) : (
           <>
             {hasSecret && (
-              <CodeBlock
-                text={
-                  safe
-                    ? '*'.repeat(secret?.secret?.length || 0)
-                    : secret?.secret ?? ''
-                }
-              />
+              <div className="relative [&>button]:h-7 [&>button]:w-7">
+                <Input
+                  aria-label={t('fleet:fleet-secret')}
+                  className="pr-20 font-mono"
+                  type={safe ? 'password' : 'text'}
+                  value={secret?.secret ?? ''}
+                  readOnly
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  onClick={toggleSafe}
+                  aria-label={t('fleet:fleet-safe-sensitives')}
+                  aria-pressed={!safe}
+                  title={t('fleet:fleet-safe-sensitives')}
+                  className="absolute right-9 top-[5px] h-7 w-7 p-0 text-muted-foreground hover:text-foreground"
+                >
+                  {safe ? (
+                    <EyeSlashIcon className="h-5 w-5" />
+                  ) : (
+                    <EyeIcon className="h-5 w-5" />
+                  )}
+                </Button>
+                <CopyToClipboardButton value={secret?.secret ?? ''} />
+              </div>
             )}
             {!hasSecret && (
               <div className="rounded-md border border-dashed bg-muted/20 px-5 py-6">
@@ -164,42 +161,42 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
             )}
           </>
         )}
+      </div>
 
-        <div className="flex justify-between items-center mt-3">
-          {!hasSecret ? (
+      <div className="flex flex-col gap-2 border-t border-slate-200 px-4 py-3 dark:border-slate-700 sm:flex-row sm:items-center sm:justify-between [&>button]:w-full sm:[&>button]:w-auto">
+        {!hasSecret ? (
+          <Button
+            type="button"
+            disabled={isLoading}
+            onClick={handleOrderSecret}
+            className="sm:ml-auto"
+          >
+            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {t('fleet:fleet-order-secret')}
+          </Button>
+        ) : (
+          <>
             <Button
               type="button"
-              disabled={isLoading}
-              onClick={handleOrderSecret}
+              disabled={isLoading || isDeleting || !secret?.secret}
+              onClick={() => setDeleteConfirmVisible(true)}
+              variant="destructive"
+            >
+              {isDeleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {t('fleet:fleet-secret-reset')}
+            </Button>
+
+            <Button
+              type="button"
+              disabled={isLoading || isDeleting || !secret?.secret}
+              onClick={() => setRenewVisible(true)}
             >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {t('fleet:fleet-order-secret')}
+              {t('fleet:fleet-renew-secret')}
             </Button>
-          ) : (
-            <>
-              <Button
-                disabled={isLoading || isDeleting || !secret?.secret}
-                onClick={() => setDeleteConfirmVisible(true)}
-                variant="destructive"
-              >
-                {isDeleting && (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                )}
-                {t('fleet:fleet-secret-reset')}
-              </Button>
-
-              <Button
-                type="submit"
-                disabled={isLoading || isDeleting || !secret?.secret}
-                onClick={() => setRenewVisible(true)}
-              >
-                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {t('fleet:fleet-renew-secret')}
-              </Button>
-            </>
-          )}
-        </div>
-      </CardContent>
+          </>
+        )}
+      </div>
 
       <RenewFleetSecret
         teamId={teamId}
@@ -271,7 +268,7 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
           </form>
         </DialogContent>
       </Dialog>
-    </Card>
+    </div>
   );
 };
 
