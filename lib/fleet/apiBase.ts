@@ -1,6 +1,9 @@
 import env from '@/lib/env';
+import { isFleetMockEnabled } from './mock/config';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
+export type FleetApiError = Error & { status?: number };
 
 const getFleetErrorMessage = async (response: Response) => {
   const fallback = `HTTP error! status: ${response.status}`;
@@ -9,7 +12,9 @@ const getFleetErrorMessage = async (response: Response) => {
     const error = await response.clone().json();
 
     return (
-      error?.error?.message ||
+      (typeof error?.error === 'string'
+        ? error.error
+        : error?.error?.message) ||
       error?.message ||
       error?.msg ||
       error?.info ||
@@ -22,6 +27,15 @@ const getFleetErrorMessage = async (response: Response) => {
       return fallback;
     }
   }
+};
+
+const assertFleetResponse = async (response: Response) => {
+  if (response.ok) return;
+
+  throw Object.assign(new Error(await getFleetErrorMessage(response)), {
+    name: 'FleetApiError',
+    status: response.status,
+  });
 };
 
 const normalizeFleetBase = () => {
@@ -43,13 +57,22 @@ const normalizeFleetBase = () => {
   throw new Error('Fleet API base URL is not configured');
 };
 
-export const fleetV1 = async (
+const fleetRequest = async (
+  version: 'v1' | 'v2',
   endpoint: string,
   options?: RequestInit
 ): Promise<Response> => {
-  const url = `${normalizeFleetBase()}/api/v1${endpoint}`;
+  if (isFleetMockEnabled()) {
+    const { handleFleetMockRequest } = await import('./mock/handler');
+    const response = await handleFleetMockRequest(version, endpoint, options);
 
-  console.log('[fleetV1] Request:', {
+    await assertFleetResponse(response);
+    return response;
+  }
+
+  const url = `${normalizeFleetBase()}/api/${version}${endpoint}`;
+
+  console.log(`[fleet${version.toUpperCase()}] Request:`, {
     url,
     headers: options?.headers,
     method: options?.method || 'GET',
@@ -60,31 +83,43 @@ export const fleetV1 = async (
     credentials: 'include',
   });
 
-  console.log('[fleetV1] Response:', {
+  console.log(`[fleet${version.toUpperCase()}] Response:`, {
     url,
     status: response.status,
     ok: response.ok,
   });
 
-  if (!response.ok) {
-    throw new Error(await getFleetErrorMessage(response));
-  }
-
+  await assertFleetResponse(response);
   return response;
 };
+
+export const fleetV1 = async (
+  endpoint: string,
+  options?: RequestInit
+): Promise<Response> => fleetRequest('v1', endpoint, options);
 
 export const fleetV2 = async (
   endpoint: string,
   options?: RequestInit
-): Promise<Response> => {
-  const response = await fetch(`${normalizeFleetBase()}/api/v2${endpoint}`, {
-    ...options,
-    credentials: 'include',
-  });
+): Promise<Response> => fleetRequest('v2', endpoint, options);
 
-  if (!response.ok) {
-    throw new Error(await getFleetErrorMessage(response));
+export const platformFleet = async (
+  endpoint: string,
+  options?: RequestInit
+): Promise<Response> => {
+  if (!/^\/api\/fleet(?:\/|$)/.test(endpoint)) {
+    throw new Error(
+      `platformFleet only accepts /api/fleet endpoints: ${endpoint}`
+    );
   }
 
+  const response = isFleetMockEnabled()
+    ? await import('./mock/handler').then(
+        ({ handleFleetPlatformMockRequest }) =>
+          handleFleetPlatformMockRequest(endpoint, options)
+      )
+    : await fetch(endpoint, options);
+
+  await assertFleetResponse(response);
   return response;
 };

@@ -1,17 +1,14 @@
+import { platformFleet } from '@/lib/fleet/apiBase';
+
 export const useDeleteFleetSecret = () => {
   const deleteSecret = async (teamId: string) => {
-    const response = await fetch(
+    const response = await platformFleet(
       `/api/fleet/secret?teamId=${encodeURIComponent(teamId)}`,
       {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
       }
     );
-
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      throw new Error(error?.error?.message || 'Failed to delete Fleet secret');
-    }
 
     return response.json().catch(() => ({}));
   };

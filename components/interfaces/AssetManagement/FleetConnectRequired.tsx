@@ -19,13 +19,17 @@ import Cookies from 'js-cookie';
 import type { User } from '@/generated/client';
 import { useVerifyFleetAsses } from '@/hooks/fleets/useVerifyFleetAsses';
 import toast from 'react-hot-toast';
-import { useAccessFleetAccount } from '@/hooks/fleets';
+import { useAccessFleetAccount, useBootstrapFleet } from '@/hooks/fleets';
 import {
   fleetAccessTokenCookieName,
   fleetAccessTokenCookieOptions,
   legacyFleetAccessTokenCookieName,
 } from '@/lib/fleet/cookies';
 import { useFleetConnection } from '@/hooks/fleets/connect/useFleetConnection';
+import {
+  getFleetMockBadgeLabel,
+  isFleetMockEnabled,
+} from '@/lib/fleet/mock/config';
 
 interface FleetConnectRequiredProps {
   user: Partial<User>;
@@ -64,6 +68,7 @@ const FleetConnectRequired = ({
   children,
 }: FleetConnectRequiredProps) => {
   const { t } = useTranslation(['common', 'fleet']);
+  const mockEnabled = isFleetMockEnabled();
   const [visible, setVisible] = useState(false);
   const [enrollmentDialogDismissed, setEnrollmentDialogDismissed] =
     useState(false);
@@ -87,6 +92,7 @@ const FleetConnectRequired = ({
     mutateFleetConnection,
   } = useFleetConnection(teamId);
   const accessFleetAccount = useAccessFleetAccount();
+  const bootstrapFleet = useBootstrapFleet();
   const hasFleetToken = Boolean(
     Cookies.get(fleetAccessTokenCookieName) ||
       Cookies.get(legacyFleetAccessTokenCookieName)
@@ -313,21 +319,7 @@ const FleetConnectRequired = ({
 
       setIsBootstrapping(true);
       try {
-        const response = await fetch('/api/fleet/bootstrap', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            teamId,
-            password,
-          }),
-        });
-
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.error || t('fleet:fleet-bootstrap-failed'));
-        }
-
-        const data = await response.json();
+        const data = await bootstrapFleet(teamId, password);
 
         Cookies.set(
           fleetAccessTokenCookieName,
@@ -483,7 +475,17 @@ const FleetConnectRequired = ({
     );
   }
 
-  if (isAuthenticated) return <>{children({ isAuthenticated, logout })}</>;
+  if (isAuthenticated)
+    return (
+      <>
+        {children({ isAuthenticated, logout })}
+        {mockEnabled && (
+          <div className="pointer-events-none fixed right-4 bottom-4 z-[100] rounded-full border border-amber-300 bg-amber-100 px-3 py-1.5 text-xs font-semibold text-amber-950 shadow-lg dark:border-amber-500 dark:bg-amber-950 dark:text-amber-100">
+            {getFleetMockBadgeLabel()}
+          </div>
+        )}
+      </>
+    );
 
   return (
     <>

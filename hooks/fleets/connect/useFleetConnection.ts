@@ -1,69 +1,50 @@
 import useSWR, { mutate } from 'swr';
 
+import { platformFleet } from '@/lib/fleet/apiBase';
+
 export type FleetConnectionStatus = 'CONNECTED' | 'DISCONNECTED' | 'DELETED';
 
-export type FleetConnection = {
+export interface FleetConnection {
   status: FleetConnectionStatus;
   disconnectedAt: string | null;
   deleteAfter: string | null;
   deletedAt: string | null;
   cleanupError: string | null;
-};
+}
 
 const getUrl = (teamId?: string) =>
   teamId ? `/api/fleet/connection?teamId=${encodeURIComponent(teamId)}` : null;
 
 export const useFleetConnection = (teamId?: string) => {
   const url = getUrl(teamId);
-
   const { data, error, isLoading } = useSWR<FleetConnection>(
     url,
-    async (fetchUrl: string) => {
-      const response = await fetch(fetchUrl, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch Fleet connection status');
-      }
-
+    async (endpoint: string) => {
+      const response = await platformFleet(endpoint, { method: 'GET' });
       return response.json();
     },
-    {
-      shouldRetryOnError: false,
-    }
+    { shouldRetryOnError: false }
   );
 
   const disconnect = async () => {
     if (!teamId) return;
 
-    const response = await fetch('/api/fleet/connection', {
+    await platformFleet('/api/fleet/connection', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ teamId, action: 'disconnect' }),
     });
-
-    if (!response.ok) {
-      throw new Error('Failed to disconnect Fleet');
-    }
-
     await mutate(getUrl(teamId));
   };
 
   const reconnect = async () => {
     if (!teamId) return;
 
-    const response = await fetch('/api/fleet/connection', {
+    await platformFleet('/api/fleet/connection', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ teamId, action: 'reconnect' }),
     });
-
-    if (!response.ok) {
-      throw new Error('Failed to reconnect Fleet');
-    }
-
     await mutate(getUrl(teamId));
   };
 

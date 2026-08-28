@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { platformFleet } from '@/lib/fleet/apiBase';
 
 interface BootstrapFleetResponse {
   success: boolean;
@@ -15,30 +16,13 @@ export const useBootstrapFleet = () => {
       teamId: string,
       password: string
     ): Promise<BootstrapFleetResponse> => {
-      console.log(
-        '[useBootstrapFleet] Calling /api/fleet/bootstrap with teamId:',
-        teamId
-      );
-
-      const response = await fetch('/api/fleet/bootstrap', {
+      const response = await platformFleet('/api/fleet/bootstrap', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ teamId, password }),
       });
 
-      console.log('[useBootstrapFleet] Response status:', response.status);
-      console.log('[useBootstrapFleet] Response ok:', response.ok);
-
-      const data = await response.json();
-      console.log('[useBootstrapFleet] Response data:', data);
-
-      if (!response.ok) {
-        throw new Error(data?.error || 'Failed to bootstrap Fleet');
-      }
-
-      return data;
+      return response.json();
     },
     []
   );

@@ -1,53 +1,25 @@
-import { FleetAccess } from '@/types/fleet';
-import { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
-import {
-  fleetAccessTokenCookieName,
-  legacyFleetAccessTokenCookieName,
-} from '@/lib/fleet/cookies';
+import useSWR from 'swr';
+import { platformFleet, type FleetApiError } from '@/lib/fleet/apiBase';
+import type { FleetAccess } from '@/types/fleet';
 
 export const useVerifyFleetAsses = () => {
-  const [access, setAccess] = useState<FleetAccess>();
-  const [isLoading, setLoading] = useState<boolean>(true);
-  const [isError, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const verify = async () => {
-      setLoading(true);
-      setError(null);
-
+  const { data, error, isLoading } = useSWR<FleetAccess | null>(
+    '/api/fleet/access/verify',
+    async (endpoint: string) => {
       try {
-        const hasFleetToken = Boolean(
-          Cookies.get(fleetAccessTokenCookieName) ||
-            Cookies.get(legacyFleetAccessTokenCookieName)
-        );
-
-        if (!hasFleetToken) {
-          setAccess(undefined);
-          return;
-        }
-
-        const response = await fetch('/api/fleet/access/verify', {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-        });
-
-        if (!response.ok) {
-          const error = await response.json().catch(() => ({}));
-          throw new Error(error?.error || 'Fleet verify failed');
-        }
-
-        const data: FleetAccess = await response.json();
-        setAccess(data);
-      } catch {
-        setError('An unexpected error occurred.');
-      } finally {
-        setLoading(false);
+        const response = await platformFleet(endpoint, { method: 'GET' });
+        return response.json();
+      } catch (runtimeError) {
+        if ((runtimeError as FleetApiError).status === 401) return null;
+        throw runtimeError;
       }
-    };
+    },
+    { shouldRetryOnError: false }
+  );
 
-    verify();
-  }, []);
-
-  return { access, isLoading, isError };
+  return {
+    access: data ?? undefined,
+    isLoading,
+    isError: error ? 'An unexpected error occurred.' : null,
+  };
 };
