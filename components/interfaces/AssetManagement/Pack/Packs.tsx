@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/shadcn/ui/table';
-import { Error, Loading } from '@/components/shared';
+import { Loading, WithLoadingAndError } from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
 import type { Team, User } from '@/generated/client';
 import {
@@ -22,7 +22,7 @@ import {
 import { usePacks } from '@/hooks/fleets/packs/usePacks';
 import { Pack } from '@/types/fleet';
 import FleetStatus from '../Fleet/FleetStatus';
-import { ChevronRight } from 'lucide-react';
+import { Pencil, Trash2 } from 'lucide-react';
 
 const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
   const router = useRouter();
@@ -39,7 +39,6 @@ const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
   const { packs, isLoading, isError } = usePacks(team?.id);
 
   if (isLoading) return <Loading />;
-  if (isError) return <Error />;
 
   const openDeleteModal = (id: string) => {
     setPackToDelete(id);
@@ -52,87 +51,103 @@ const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
   };
 
   return (
-    <>
+    <WithLoadingAndError isLoading={isLoading} error={isError}>
       {user ? (
-        <div className="space-y-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <h2 className="text-xl font-semibold leading-none tracking-tight">
-                {t('fleet:fleet-all-packs')}
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                {t('fleet:fleet-pack-listed')}
-              </p>
+        <>
+          <div className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
+            <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-900">
+              <div>
+                <span className="text-[12px] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
+                  {t('fleet:fleet-all-packs')}
+                </span>
+                <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                  {t('fleet:fleet-pack-listed')}
+                </p>
+              </div>
+
+              {canAccess('team_fleet_pack', ['create']) && (
+                <Button size="sm" onClick={() => setVisible(true)}>
+                  {t('create-pack')}
+                </Button>
+              )}
             </div>
 
-            {canAccess('team_fleet_pack', ['create']) && (
-              <Button size="sm" onClick={() => setVisible(true)}>
-                {t('create')}
-              </Button>
-            )}
-          </div>
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-slate-50 hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-900">
+                    <TableHead className="px-4 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                      {t('name')}
+                    </TableHead>
+                    <TableHead className="px-4 text-right text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                      {t('actions')}
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
 
-          <div className="rounded-md border">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{t('name')}</TableHead>
-                  <TableHead className="text-right">{t('actions')}</TableHead>
-                </TableRow>
-              </TableHeader>
-
-              <TableBody>
-                {packs && packs.length > 0 ? (
-                  packs.map((pack) => (
-                    <TableRow key={pack.id}>
-                      <TableCell>
-                        <Link
-                          href={`/teams/${slug}/asset-management/packs/${pack.id}`}
-                          className="group inline-flex items-center gap-1.5 rounded-sm px-1 py-0.5 -mx-1 -my-0.5 text-foreground transition-colors hover:text-primary"
-                        >
-                          <span className="font-medium underline-offset-4 group-hover:underline">
+                <TableBody>
+                  {packs && packs.length > 0 ? (
+                    packs.map((pack) => (
+                      <TableRow
+                        key={pack.id}
+                        className="border-slate-100 dark:border-slate-700"
+                      >
+                        <TableCell className="px-4 py-3">
+                          <Link
+                            href={`/teams/${slug}/asset-management/packs/${pack.id}`}
+                            className="text-sm font-medium text-slate-900 underline underline-offset-2 hover:text-slate-600 dark:text-slate-100 dark:hover:text-slate-300"
+                          >
                             {pack.name}
-                          </span>
-                          <ChevronRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
-                        </Link>
-                      </TableCell>
+                          </Link>
+                        </TableCell>
 
-                      <TableCell className="text-right">
-                        <div className="flex justify-end gap-2">
-                          {canAccess('team_fleet_pack', ['update']) && (
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => openEditModal(pack)}
-                            >
-                              {t('edit-task')}
-                            </Button>
-                          )}
-                          {canAccess('team_fleet_pack', ['delete']) && (
-                            <Button
-                              size="sm"
-                              variant="destructive"
-                              onClick={() => openDeleteModal(pack.id)}
-                            >
-                              {t('delete')}
-                            </Button>
-                          )}
-                        </div>
+                        <TableCell className="px-4 py-3 text-right">
+                          <div className="flex justify-end gap-2">
+                            {canAccess('team_fleet_pack', ['update']) && (
+                              <Button
+                                size="icon"
+                                variant="outline"
+                                onClick={() => openEditModal(pack)}
+                                aria-label={t('edit')}
+                                title={t('edit')}
+                              >
+                                <Pencil
+                                  className="h-4 w-4"
+                                  aria-hidden="true"
+                                />
+                              </Button>
+                            )}
+                            {canAccess('team_fleet_pack', ['delete']) && (
+                              <Button
+                                size="icon"
+                                variant="destructive"
+                                onClick={() => openDeleteModal(pack.id)}
+                                aria-label={t('delete')}
+                                title={t('delete')}
+                              >
+                                <Trash2
+                                  className="h-4 w-4"
+                                  aria-hidden="true"
+                                />
+                              </Button>
+                            )}
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell
+                        colSpan={2}
+                        className="px-4 py-8 text-center text-sm text-slate-500 dark:text-slate-400"
+                      >
+                        {t('no-packs-found')}
                       </TableCell>
                     </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell
-                      colSpan={2}
-                      className="text-center py-4 text-sm text-muted-foreground"
-                    >
-                      {t('no-packs-found')}
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
           </div>
 
           <CreatePack
@@ -156,11 +171,11 @@ const Packs = ({ team, user }: { team: Team; user: Partial<User> }) => {
             packId={packToDelete!}
             fleetTeamId={team.id}
           />
-        </div>
+        </>
       ) : (
         <FleetStatus status="disconnected" />
       )}
-    </>
+    </WithLoadingAndError>
   );
 };
 

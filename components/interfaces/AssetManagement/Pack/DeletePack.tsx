@@ -3,18 +3,7 @@
 import React from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import { useFormik } from 'formik';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from '@/components/shadcn/ui/dialog';
-import { Button } from '@/components/shadcn/ui/button';
-import { Input } from '@/components/shadcn/ui/input';
-import { Label } from '@/components/shadcn/ui/label';
+import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import { useDeletePack } from '@/hooks/fleets/packs/useDeletePack';
 import { usePacks } from '@/hooks/fleets/packs/usePacks';
 
@@ -33,91 +22,47 @@ const DeletePack = ({
   const deletePack = useDeletePack();
   const { mutatePacks } = usePacks(fleetTeamId);
 
-  const formik = useFormik({
-    initialValues: {
-      confirm: '',
-    },
-    onSubmit: async (values, { resetForm }) => {
-      if (values.confirm.toLowerCase() === 'delete') {
-        const toastId = toast.loading(t('deleting'));
-        try {
-          await deletePack(fleetTeamId, packId);
-          mutatePacks();
-          toast.success(t('deleted-successfully'), { id: toastId });
-          resetForm();
-          setVisible(false);
-        } catch {
-          toast.error(t('error-deleting-package'), { id: toastId });
-        }
-      } else {
-        toast.error(t('type-confirmation-text'));
-      }
-    },
-  });
+  const handleDelete = async () => {
+    const toastId = toast.loading(t('deleting'));
+
+    try {
+      await deletePack(fleetTeamId, packId);
+      mutatePacks();
+      toast.success(t('deleted-successfully'), { id: toastId });
+    } catch {
+      toast.error(t('error-deleting-package'), { id: toastId });
+      return false;
+    }
+  };
 
   return (
-    <Dialog open={visible} onOpenChange={setVisible}>
-      <DialogContent className="max-w-md max-h-[85vh] overflow-y-auto bg-background text-foreground border-border">
-        <form
-          onSubmit={formik.handleSubmit}
-          method="DELETE"
-          className="space-y-6"
-        >
-          <DialogHeader>
-            <DialogTitle className="text-lg font-semibold text-destructive">
-              {t('confirm-permanent-package-delete')}
-            </DialogTitle>
-            <DialogDescription className="text-sm text-muted-foreground">
-              {t('delete-warning')}
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="space-y-3 text-sm">
-            <p>
-              {t('package')}:{' '}
-              <span className="text-orange-400 break-all">{packId}</span>
-            </p>
-            <p className="text-muted-foreground">
-              {t('fleet:fleet-delete-warning')}
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="confirm" className="text-sm font-medium">
-              {t('confirm')}
-            </Label>
-            <Input
-              id="confirm"
-              name="confirm"
-              placeholder={t('enter-confirmation-text')}
-              value={formik.values.confirm}
-              onChange={formik.handleChange}
-              className="bg-muted/30"
-            />
-            <p className="text-xs text-muted-foreground">
-              {t('fleet:fleet-delete-pack-description')}
-            </p>
-          </div>
-
-          <DialogFooter className="flex justify-end gap-2 pt-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setVisible(false)}
-            >
-              {t('close')}
-            </Button>
-            <Button
-              type="submit"
-              variant="destructive"
-              disabled={formik.isSubmitting || !formik.values.confirm}
-            >
-              {formik.isSubmitting ? t('deleting') : t('delete')}
-            </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
+    <ConfirmationDialog
+      visible={visible}
+      onCancel={() => setVisible(false)}
+      onConfirm={handleDelete}
+      title={t('confirm-permanent-package-delete')}
+      confirmation={{
+        requiredText: 'DELETE',
+        label: t('confirm'),
+        placeholder: t('enter-confirmation-text'),
+        description: t('fleet:fleet-delete-description'),
+      }}
+    >
+      <div className="space-y-3">
+        <div className="space-y-1 text-muted-foreground">
+          <p>{t('fleet:fleet-delete-warning')}</p>
+          <p>{t('fleet:fleet-delete-pack-description')}</p>
+        </div>
+        <dl className="rounded-md border bg-muted/30 px-3 py-2.5">
+          <dt className="text-xs font-medium text-muted-foreground">
+            {t('package')}
+          </dt>
+          <dd className="mt-1 break-all font-mono text-sm font-medium text-foreground">
+            {packId}
+          </dd>
+        </dl>
+      </div>
+    </ConfirmationDialog>
   );
 };
 

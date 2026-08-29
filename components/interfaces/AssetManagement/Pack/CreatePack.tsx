@@ -74,7 +74,7 @@ const CreatePack = ({
 
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground/30">
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
           <DialogHeader>
             <DialogTitle>{t('create-pack')}</DialogTitle>

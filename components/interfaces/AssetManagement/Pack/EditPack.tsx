@@ -77,7 +77,7 @@ const EditPack = ({
 
   return (
     <Dialog open={visible} onOpenChange={setVisible}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground/30">
         <form onSubmit={formik.handleSubmit} className="space-y-4">
           <DialogHeader>
             <DialogTitle>{t('edit-pack')}</DialogTitle>
@@ -89,6 +89,7 @@ const EditPack = ({
               id="name"
               name="name"
               value={formik.values.name}
+              autoFocus
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder={t('enter-name')}
