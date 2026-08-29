@@ -3,6 +3,8 @@ import { useTranslation } from 'next-i18next';
 import { format } from 'date-fns';
 import { ChevronRight, Trash2 } from 'lucide-react';
 import { Error, Loading } from '@/components/shared';
+import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
+import { Button } from '@/components/shadcn/ui/button';
 import { useGetDistributedIdResult } from '@/hooks/fleets/distributors/useGetDistributorIdResult';
 import { useDeleteDistributedResult } from '@/hooks/fleets/distributors/useDeleteDistributorResult';
 
@@ -19,16 +21,25 @@ const DistributorResults = ({
   const [status] = useState<'new' | 'pending' | 'complete' | 'failed'>(
     'complete'
   );
+  const [deleteVisible, setDeleteVisible] = useState(false);
+  const [resultToDelete, setResultToDelete] = useState<string | null>(null);
   const deleteResult = useDeleteDistributedResult();
 
   const { distributorsResult, isLoading, isError, mutateDistributorResult } =
     useGetDistributedIdResult(fleetTeamId, distributorId, status);
 
-  const handleDeleteResult = async (id: string) => {
-    if (confirm(t('confirm-delete-result'))) {
-      await deleteResult(fleetTeamId, distributorId, id);
-      mutateDistributorResult();
+  const handleDeleteResult = async () => {
+    if (!resultToDelete) {
+      return false;
     }
+
+    await deleteResult(fleetTeamId, distributorId, resultToDelete);
+    mutateDistributorResult();
+  };
+
+  const closeDeleteDialog = () => {
+    setDeleteVisible(false);
+    setResultToDelete(null);
   };
 
   if (isLoading) {
@@ -105,17 +116,21 @@ const DistributorResults = ({
                     )}
                   </div>
 
-                  <button
+                  <Button
+                    type="button"
+                    size="icon"
+                    variant="destructive"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      handleDeleteResult(String(resultId));
+                      setResultToDelete(String(resultId));
+                      setDeleteVisible(true);
                     }}
-                    className="p-2 text-destructive hover:bg-destructive/10 rounded-md transition-colors"
+                    aria-label={t('delete-result')}
                     title={t('delete-result')}
                   >
-                    <Trash2 className="h-4 w-4" />
-                  </button>
+                    <Trash2 className="h-4 w-4" aria-hidden="true" />
+                  </Button>
                 </summary>
 
                 <div className="px-4 pb-4 pt-2 ml-7 border-t border-border">
@@ -152,6 +167,25 @@ const DistributorResults = ({
           })}
         </div>
       )}
+
+      <ConfirmationDialog
+        visible={deleteVisible}
+        onCancel={closeDeleteDialog}
+        onConfirm={handleDeleteResult}
+        title={t('delete-result')}
+      >
+        <div className="space-y-3">
+          <p className="text-muted-foreground">{t('confirm-delete-result')}</p>
+          <dl className="rounded-md border bg-muted/30 px-3 py-2.5">
+            <dt className="text-xs font-medium text-muted-foreground">
+              {t('id')}
+            </dt>
+            <dd className="mt-1 break-all font-mono text-sm font-medium text-foreground">
+              {resultToDelete}
+            </dd>
+          </dl>
+        </div>
+      </ConfirmationDialog>
     </div>
   );
 };

@@ -47,6 +47,7 @@ const CreateDistributors = ({
   const [selectedNodes, setSelectedNodes] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [formErrors, setFormErrors] = useState<DistributorFormErrors>({});
+  const [submitting, setSubmitting] = useState(false);
   const [notBeforeDate, setNotBeforeDate] = useState<Date | undefined>(
     new Date()
   );
@@ -102,6 +103,8 @@ const CreateDistributors = ({
       not_before: notBeforeDate?.toISOString(),
     };
 
+    setSubmitting(true);
+
     try {
       await createDistributor(fleetTeamId, queryData);
       toast.success(t('success'));
@@ -109,6 +112,8 @@ const CreateDistributors = ({
       setVisible(false);
     } catch (error: any) {
       toast.error(error?.message || t('error'));
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -202,8 +207,8 @@ const CreateDistributors = ({
             >
               {t('close')}
             </Button>
-            <Button type="submit" ref={submitButtonRef}>
-              {t('create')}
+            <Button type="submit" ref={submitButtonRef} disabled={submitting}>
+              {submitting ? t('creating') : t('create')}
             </Button>
           </DialogFooter>
         </form>
