@@ -75,6 +75,7 @@ const EditTag = ({
               name="value"
               value={value}
               aria-invalid={!!valueError}
+              autoFocus
               onChange={(e) => {
                 setValue(e.target.value);
                 setValueError('');

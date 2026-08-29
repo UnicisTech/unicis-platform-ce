@@ -200,12 +200,14 @@ const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
             tagId={tagToDelete!}
             fleetTeamId={team.id}
           />
-          <EditTag
-            visible={editVisible}
-            setVisible={setEditVisible}
-            tag={tagToEdit}
-            fleetTeamId={team.id}
-          />
+          {editVisible && (
+            <EditTag
+              visible={editVisible}
+              setVisible={setEditVisible}
+              tag={tagToEdit}
+              fleetTeamId={team.id}
+            />
+          )}
         </>
       ) : (
         <FleetStatus status="disconnected" />
