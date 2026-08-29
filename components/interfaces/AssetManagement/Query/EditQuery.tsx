@@ -145,6 +145,7 @@ const EditQuery = ({
               name="name"
               defaultValue={query.name}
               aria-invalid={!!formErrors.name}
+              autoFocus
               onChange={() =>
                 setFormErrors((prev) => ({ ...prev, name: undefined }))
               }

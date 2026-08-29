@@ -23,7 +23,7 @@ import { useQueries } from '@/hooks/fleets/queries/useQueries';
 import DeleteQuery from './DeleteQuery';
 import EditQuery from './EditQuery';
 import { CodeBlock } from '@/components/shared/CodeBlock';
-import { ChevronRight } from 'lucide-react';
+import { Pencil, Trash2 } from 'lucide-react';
 
 const Querys = ({ team, user }: { team: Team; user: Partial<User> }) => {
   const router = useRouter();
@@ -53,121 +53,141 @@ const Querys = ({ team, user }: { team: Team; user: Partial<User> }) => {
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
       {user ? (
-        <div className="space-y-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <h2 className="text-xl font-semibold leading-none tracking-tight">
-                {t('fleet:fleet-all-queries')}
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                {t('fleet:fleet-queries-listed')}
-              </p>
+        <>
+          <div className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
+            <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-900">
+              <div>
+                <span className="text-[12px] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
+                  {t('fleet:fleet-all-queries')}
+                </span>
+                <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                  {t('fleet:fleet-queries-listed')}
+                </p>
+              </div>
+
+              {canAccess('team_fleet_query', ['create']) && (
+                <Button size="sm" onClick={() => setVisible(true)}>
+                  {t('fleet:fleet-create-query')}
+                </Button>
+              )}
             </div>
 
-            {canAccess('team_fleet_query', ['create']) && (
-              <Button size="sm" onClick={() => setVisible(true)}>
-                {t('create')}
-              </Button>
-            )}
-          </div>
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-slate-50 hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-900">
+                    <TableHead className="px-4 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                      {t('name')}
+                    </TableHead>
+                    <TableHead className="px-4 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                      {t('sql')}
+                    </TableHead>
+                    <TableHead className="px-4 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                      {t('platform')}
+                    </TableHead>
+                    <TableHead className="px-4 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                      {t('version')}
+                    </TableHead>
+                    <TableHead className="px-4 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                      {t('interval')}
+                    </TableHead>
+                    <TableHead className="px-4 text-right text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                      {t('actions')}
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
 
-          <div className="rounded-md border">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{t('name')}</TableHead>
-                  <TableHead>{t('sql')}</TableHead>
-                  <TableHead>{t('platform')}</TableHead>
-                  <TableHead>{t('version')}</TableHead>
-                  <TableHead>{t('interval')}</TableHead>
-                  <TableHead className="text-right">{t('actions')}</TableHead>
-                </TableRow>
-              </TableHeader>
-
-              <TableBody>
-                {queries && queries.length > 0 ? (
-                  queries.map((query) => (
-                    <TableRow key={query.id}>
-                      <TableCell>
-                        <Link
-                          href={`/teams/${slug}/asset-management/queries/${query.id}`}
-                          className="group inline-flex items-center gap-1.5 rounded-sm px-1 py-0.5 -mx-1 -my-0.5 text-foreground transition-colors hover:text-primary"
-                        >
-                          <span className="font-medium underline-offset-4 group-hover:underline">
+                <TableBody>
+                  {queries && queries.length > 0 ? (
+                    queries.map((query) => (
+                      <TableRow
+                        key={query.id}
+                        className="border-slate-100 dark:border-slate-700"
+                      >
+                        <TableCell className="px-4 py-3">
+                          <Link
+                            href={`/teams/${slug}/asset-management/queries/${query.id}`}
+                            className="text-sm font-medium text-slate-900 underline underline-offset-2 hover:text-slate-600 dark:text-slate-100 dark:hover:text-slate-300"
+                          >
                             {query.name}
-                          </span>
-                          <ChevronRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
-                        </Link>
-                      </TableCell>
+                          </Link>
+                        </TableCell>
 
-                      <TableCell className="max-w-[500px] truncate">
-                        <CodeBlock
-                          language="sql"
-                          showLineNumbers={false}
-                          shouldWrapLongLines
-                          text={query.sql}
-                        />
-                      </TableCell>
+                        <TableCell className="min-w-72 max-w-lg px-4 py-3">
+                          <CodeBlock
+                            language="sql"
+                            showLineNumbers={false}
+                            shouldWrapLongLines
+                            text={query.sql}
+                          />
+                        </TableCell>
 
-                      <TableCell>
-                        <PlatformBadge
-                          value={query.platform!}
-                          label={
-                            PLATFORMS.find(
-                              ({ value }) => value === query.platform
-                            )?.label as string
-                          }
-                        />
-                      </TableCell>
+                        <TableCell className="px-4 py-3">
+                          <PlatformBadge
+                            value={query.platform!}
+                            label={
+                              PLATFORMS.find(
+                                ({ value }) => value === query.platform
+                              )?.label as string
+                            }
+                          />
+                        </TableCell>
 
-                      <TableCell>
-                        <span className="text-sm text-muted-foreground">
+                        <TableCell className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">
                           {query.version}
-                        </span>
-                      </TableCell>
+                        </TableCell>
 
-                      <TableCell>
-                        <span className="text-sm text-muted-foreground">
+                        <TableCell className="whitespace-nowrap px-4 py-3 text-sm text-slate-600 dark:text-slate-300">
                           {formatQueryInterval(query.interval)}
-                        </span>
-                      </TableCell>
+                        </TableCell>
 
-                      <TableCell className="text-right">
-                        <div className="flex justify-end gap-2">
-                          {canAccess('team_fleet_query', ['update']) && (
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => openEditModal(query)}
-                            >
-                              {t('edit-task')}
-                            </Button>
-                          )}
-                          {canAccess('team_fleet_query', ['delete']) && (
-                            <Button
-                              size="sm"
-                              variant="destructive"
-                              onClick={() => openDeleteModal(query.id)}
-                            >
-                              {t('delete')}
-                            </Button>
-                          )}
-                        </div>
+                        <TableCell className="px-4 py-3 text-right">
+                          <div className="flex justify-end gap-2">
+                            {canAccess('team_fleet_query', ['update']) && (
+                              <Button
+                                size="icon"
+                                variant="outline"
+                                onClick={() => openEditModal(query)}
+                                aria-label={t('edit')}
+                                title={t('edit')}
+                              >
+                                <Pencil
+                                  className="h-4 w-4"
+                                  aria-hidden="true"
+                                />
+                              </Button>
+                            )}
+                            {canAccess('team_fleet_query', ['delete']) && (
+                              <Button
+                                size="icon"
+                                variant="destructive"
+                                onClick={() => openDeleteModal(query.id)}
+                                aria-label={t('delete')}
+                                title={t('delete')}
+                              >
+                                <Trash2
+                                  className="h-4 w-4"
+                                  aria-hidden="true"
+                                />
+                              </Button>
+                            )}
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell
+                        colSpan={6}
+                        className="px-4 py-8 text-center text-sm text-slate-500 dark:text-slate-400"
+                      >
+                        {t('fleet:no-queries-found')}
                       </TableCell>
                     </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell
-                      colSpan={6}
-                      className="text-center py-4 text-sm text-muted-foreground"
-                    >
-                      {t('fleet:no-queries-found')}
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
           </div>
 
           <CreateQuery
@@ -190,7 +210,7 @@ const Querys = ({ team, user }: { team: Team; user: Partial<User> }) => {
             queryId={queryToDelete!}
             fleetTeamId={team.id}
           />
-        </div>
+        </>
       ) : (
         <FleetStatus status="disconnected" />
       )}
