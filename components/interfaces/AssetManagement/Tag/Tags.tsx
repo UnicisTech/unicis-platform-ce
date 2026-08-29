@@ -21,6 +21,7 @@ import EditTag from './EditTag';
 import FormattedDate from '@/components/shared/Date';
 import { useTags } from '@/hooks/fleets/Tags/useTags';
 import { Tag } from '@/types';
+import { Pencil, Trash2 } from 'lucide-react';
 
 const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
   const router = useRouter();
@@ -45,132 +46,148 @@ const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
       {user ? (
-        <div className="space-y-4">
-          {/* Header */}
-          <div className="flex justify-between items-center">
-            <div>
-              <h2 className="text-xl font-semibold leading-none tracking-tight">
-                {t('fleet:fleet-all-tags')}
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                {t('fleet:fleet-tag-listed')}
-              </p>
+        <>
+          <div className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
+            <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-900">
+              <div>
+                <span className="text-[12px] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
+                  {t('fleet:fleet-all-tags')}
+                </span>
+                <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                  {t('fleet:fleet-tag-listed')}
+                </p>
+              </div>
+
+              {canAccess('team_fleet_tag', ['create']) && (
+                <Button size="sm" onClick={() => setVisible(true)}>
+                  {t('create-tag')}
+                </Button>
+              )}
             </div>
 
-            {canAccess('team_fleet_tag', ['create']) && (
-              <Button size="sm" onClick={() => setVisible(true)}>
-                {t('create')}
-              </Button>
-            )}
-          </div>
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-slate-50 hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-900">
+                    <TableHead className="px-4 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                      {t('tag')}
+                    </TableHead>
+                    <TableHead className="px-4 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                      {t('created-at')}
+                    </TableHead>
+                    <TableHead className="px-4 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                      {t('analysis')}
+                    </TableHead>
+                    <TableHead className="px-4 text-right text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                      {t('actions')}
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
 
-          {/* Table */}
-          <div className="rounded-md border">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{t('tag')}</TableHead>
-                  <TableHead>{t('created-at')}</TableHead>
-                  <TableHead>{t('analysis')}</TableHead>
-                  <TableHead className="text-right">{t('actions')}</TableHead>
-                </TableRow>
-              </TableHeader>
+                <TableBody>
+                  {tags && tags.length > 0 ? (
+                    tags.map((tag) => (
+                      <TableRow
+                        key={tag.id}
+                        className="border-slate-100 dark:border-slate-700"
+                      >
+                        <TableCell className="px-4 py-3">
+                          <Link
+                            href={`/teams/${slug}/asset-management/tags/${tag.id}`}
+                            className="text-sm font-medium text-slate-900 underline underline-offset-2 hover:text-slate-600 dark:text-slate-100 dark:hover:text-slate-300"
+                          >
+                            {tag.value}
+                          </Link>
+                        </TableCell>
 
-              <TableBody>
-                {tags && tags.length > 0 ? (
-                  tags.map((tag) => (
-                    <TableRow key={tag.id}>
-                      <TableCell>
-                        <Link
-                          href={`/teams/${slug}/asset-management/tags/${tag.id}`}
-                          className="underline text-blue-500 hover:text-blue-400"
-                        >
-                          {tag.value}
-                        </Link>
-                      </TableCell>
+                        <TableCell className="whitespace-nowrap px-4 py-3">
+                          <FormattedDate
+                            style="text-sm text-slate-600 dark:text-slate-300"
+                            dateString={tag.updated_at}
+                          />
+                        </TableCell>
 
-                      <TableCell>
-                        <FormattedDate
-                          style="text-xs text-muted-foreground"
-                          dateString={tag.updated_at}
-                        />
-                      </TableCell>
-
-                      <TableCell>
-                        <div className="grid grid-cols-4 gap-1 text-[10px] font-semibold">
-                          <div>
-                            <p className="text-[10px] text-muted-foreground">
-                              {t('fleet:fleet-assets-label')}
-                            </p>
-                            <span>{tag.nodes_count}</span>
+                        <TableCell className="px-4 py-3">
+                          <div className="grid min-w-64 grid-cols-4 gap-3 text-xs font-semibold text-slate-900 dark:text-slate-100">
+                            <div>
+                              <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400">
+                                {t('fleet:fleet-assets-label')}
+                              </p>
+                              <span>{tag.nodes_count}</span>
+                            </div>
+                            <div>
+                              <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400">
+                                {t('fleet:fleet-queries-label')}
+                              </p>
+                              <span>{tag.queries_count}</span>
+                            </div>
+                            <div>
+                              <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400">
+                                {t('fleet:fleet-files-label')}
+                              </p>
+                              <span>{tag.file_paths_count}</span>
+                            </div>
+                            <div>
+                              <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400">
+                                {t('packs')}
+                              </p>
+                              <span>{tag.packs_count}</span>
+                            </div>
                           </div>
-                          <div>
-                            <p className="text-[10px] text-muted-foreground">
-                              {t('fleet:fleet-queries-label')}
-                            </p>
-                            <span>{tag.queries_count}</span>
-                          </div>
-                          <div>
-                            <p className="text-[10px] text-muted-foreground">
-                              {t('fleet:fleet-files-label')}
-                            </p>
-                            <span>{tag.file_paths_count}</span>
-                          </div>
-                          <div>
-                            <p className="text-[10px] text-muted-foreground">
-                              {t('packs')}
-                            </p>
-                            <span>{tag.packs_count}</span>
-                          </div>
-                        </div>
-                      </TableCell>
+                        </TableCell>
 
-                      <TableCell className="text-right">
-                        <div className="flex justify-end gap-2">
-                          {canAccess('team_fleet_tag', ['delete']) && (
-                            <Button
-                              size="sm"
-                              variant="destructive"
-                              onClick={() => openDeleteModal(tag.id)}
-                            >
-                              {t('delete')}
-                            </Button>
-                          )}
-                          {canAccess('team_fleet_tag', ['update']) && (
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => {
-                                setTagToEdit(tag);
-                                setEditVisible(true);
-                              }}
-                            >
-                              {t('edit')}
-                            </Button>
-                          )}
-                        </div>
+                        <TableCell className="px-4 py-3 text-right">
+                          <div className="flex justify-end gap-2">
+                            {canAccess('team_fleet_tag', ['update']) && (
+                              <Button
+                                size="icon"
+                                variant="outline"
+                                onClick={() => {
+                                  setTagToEdit(tag);
+                                  setEditVisible(true);
+                                }}
+                                aria-label={t('edit')}
+                                title={t('edit')}
+                              >
+                                <Pencil
+                                  className="h-4 w-4"
+                                  aria-hidden="true"
+                                />
+                              </Button>
+                            )}
+                            {canAccess('team_fleet_tag', ['delete']) && (
+                              <Button
+                                size="icon"
+                                variant="destructive"
+                                onClick={() => openDeleteModal(tag.id)}
+                                aria-label={t('delete')}
+                                title={t('delete')}
+                              >
+                                <Trash2
+                                  className="h-4 w-4"
+                                  aria-hidden="true"
+                                />
+                              </Button>
+                            )}
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell
+                        colSpan={4}
+                        className="px-4 py-8 text-center text-sm text-slate-500 dark:text-slate-400"
+                      >
+                        {t('no-tags-found')}
                       </TableCell>
                     </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell
-                      colSpan={4}
-                      className="text-center py-4 text-sm text-muted-foreground"
-                    >
-                      {t('no-tags-found')}
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-
-              {/* <TableCaption className="text-xs text-muted-foreground">
-                {t("fleet:fleet-tag-caption")}
-              </TableCaption> */}
-            </Table>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
           </div>
 
-          {/* Modals */}
           <CreateTag
             user={user}
             fleetTeamId={team.id}
@@ -189,7 +206,7 @@ const Tags = ({ team, user }: { team: Team; user: Partial<User> }) => {
             tag={tagToEdit}
             fleetTeamId={team.id}
           />
-        </div>
+        </>
       ) : (
         <FleetStatus status="disconnected" />
       )}
