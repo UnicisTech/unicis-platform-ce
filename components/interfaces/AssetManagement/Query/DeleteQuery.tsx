@@ -1,19 +1,9 @@
 import React from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import { useFormik } from 'formik';
 import { useDeleteQuery } from '@/hooks/fleets/queries/useDeleteQuery';
-import { InputWithLabel } from '@/components/shared';
+import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import { useQueries } from '@/hooks/fleets/queries/useQueries';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from '@/components/shadcn/ui/dialog';
-import { Button } from '@/components/shadcn/ui/button';
 
 const DeleteQuery = ({
   queryId,
@@ -31,78 +21,46 @@ const DeleteQuery = ({
   const deleteQuery = useDeleteQuery();
   const { mutateQueries } = useQueries(fleetTeamId);
 
-  const formik = useFormik({
-    initialValues: {
-      confirm: '',
-    },
-    onSubmit: async (values) => {
-      if (values.confirm.toLowerCase() === 'delete') {
-        toast.loading(t('deleting-query'));
-        await deleteQuery(fleetTeamId, queryId);
-        mutateQueries();
-        formik.resetForm();
-        setVisible(false);
-        toast.success(t('deleted-successfully'));
-      } else {
-        toast.error(t('type-confirmation-text'));
-      }
-    },
-  });
+  const handleDelete = async () => {
+    const toastId = toast.loading(t('deleting-query'));
+
+    try {
+      await deleteQuery(fleetTeamId, queryId);
+      mutateQueries();
+      toast.success(t('deleted-successfully'), { id: toastId });
+    } catch {
+      toast.error(t('error'), { id: toastId });
+      return false;
+    }
+  };
 
   return (
-    <Dialog open={visible} onOpenChange={setVisible}>
-      <DialogContent className="max-w-md">
-        <form
-          onSubmit={formik.handleSubmit}
-          method="DELETE"
-          className="space-y-4"
-        >
-          <DialogHeader>
-            <DialogTitle>{t('confirm-permanent-query-delete')}</DialogTitle>
-            <DialogDescription>
-              <span className="text-xs">
-                {t('query')}: <span className="text-orange-400">{queryId}</span>
-              </span>
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="space-y-4">
-            <p>{t('fleet:fleet-delete-warning')}</p>
-
-            <InputWithLabel
-              type="text"
-              label={t('confirm')}
-              name="confirm"
-              placeholder={t('enter-confirmation-text')}
-              value={formik.values.confirm}
-              error={formik.touched.confirm ? formik.errors.confirm : undefined}
-              onChange={formik.handleChange}
-            />
-
-            <span className="text-xs">
-              {t('fleet:fleet-delete-description')}
-            </span>
-          </div>
-
-          <DialogFooter>
-            <Button
-              type="submit"
-              variant="destructive"
-              disabled={formik.isSubmitting}
-            >
-              {formik.isSubmitting ? t('deleting') : t('delete')}
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setVisible(false)}
-            >
-              {t('close')}
-            </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
+    <ConfirmationDialog
+      visible={visible}
+      onCancel={() => setVisible(false)}
+      onConfirm={handleDelete}
+      title={t('confirm-permanent-query-delete')}
+      confirmation={{
+        requiredText: 'DELETE',
+        label: t('confirm'),
+        placeholder: t('enter-confirmation-text'),
+        description: t('fleet:fleet-delete-description'),
+      }}
+    >
+      <div className="space-y-3">
+        <p className="text-muted-foreground">
+          {t('fleet:fleet-delete-warning')}
+        </p>
+        <dl className="rounded-md border bg-muted/30 px-3 py-2.5">
+          <dt className="text-xs font-medium text-muted-foreground">
+            {t('query')}
+          </dt>
+          <dd className="mt-1 break-all font-mono text-sm font-medium text-foreground">
+            {queryId}
+          </dd>
+        </dl>
+      </div>
+    </ConfirmationDialog>
   );
 };
 
