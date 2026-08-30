@@ -111,6 +111,9 @@ const AddAsset = ({
             aria-labelledby={`asset-platform-tab-${platform}`}
             className="space-y-6"
           >
+            <p className="text-sm text-muted-foreground">
+              {t('generate-installer-description')}
+            </p>
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <h2 className="underline">{t('install-osquery')}</h2>
@@ -151,10 +154,6 @@ const AddAsset = ({
                 </p>
               </>
             )}
-
-            <p className="text-sm text-muted-foreground">
-              {t('generate-installer-description')}
-            </p>
           </div>
         </div>
 
