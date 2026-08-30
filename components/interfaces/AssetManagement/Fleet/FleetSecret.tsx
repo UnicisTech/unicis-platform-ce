@@ -30,6 +30,7 @@ import {
   fleetAccessTokenCookieName,
   fleetAccessTokenCookieOptions,
 } from '@/lib/fleet/cookies';
+import { useVerifyFleetAsses } from '@/hooks/fleets/useVerifyFleetAsses';
 
 const passwordSchema = Yup.object({
   password: Yup.string()
@@ -53,6 +54,7 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
   const [renewVisible, setRenewVisible] = useState(false);
 
   const { secret, isLoading, mutateFleetSecret } = useGetFleetSecret(team.id);
+  const { mutateFleetAccess } = useVerifyFleetAsses();
   const hasSecret = Boolean(secret?.secret);
 
   const formik = useFormik({
@@ -72,9 +74,9 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
           fleetAccessTokenCookieOptions
         );
 
+        await Promise.all([mutateFleetSecret(), mutateFleetAccess()]);
         setPasswordDialogVisible(false);
         formik.resetForm();
-        mutateFleetSecret();
         toast.success(t('fleet:fleet-enrollment-secret-ordered'));
       } catch (error: any) {
         console.error('[FleetSecret] Error:', error);

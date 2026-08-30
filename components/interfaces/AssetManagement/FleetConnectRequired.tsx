@@ -83,7 +83,7 @@ const FleetConnectRequired = ({
   const [showBootstrap, setShowBootstrap] = useState(false);
   const [isBootstrapping, setIsBootstrapping] = useState(false);
 
-  const { access, isLoading } = useVerifyFleetAsses();
+  const { access, isLoading, mutateFleetAccess } = useVerifyFleetAsses();
   const {
     connection,
     isDisconnected,
@@ -331,10 +331,10 @@ const FleetConnectRequired = ({
           fleetAccessTokenCookieOptions
         );
 
+        await Promise.all([mutateFleetAccess(), mutateFleetConnection()]);
         toast.success(t('fleet:fleet-account-created'));
         setShowBootstrap(false);
         setAuthOverride(true);
-        await mutateFleetConnection();
       } catch (error) {
         console.error('[Bootstrap] Error:', error);
         toast.error(

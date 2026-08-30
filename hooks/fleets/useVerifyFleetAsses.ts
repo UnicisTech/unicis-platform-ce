@@ -3,7 +3,7 @@ import { platformFleet, type FleetApiError } from '@/lib/fleet/apiBase';
 import type { FleetAccess } from '@/types/fleet';
 
 export const useVerifyFleetAsses = () => {
-  const { data, error, isLoading } = useSWR<FleetAccess | null>(
+  const { data, error, isLoading, mutate } = useSWR<FleetAccess | null>(
     '/api/fleet/access/verify',
     async (endpoint: string) => {
       try {
@@ -21,5 +21,6 @@ export const useVerifyFleetAsses = () => {
     access: data ?? undefined,
     isLoading,
     isError: error ? 'An unexpected error occurred.' : null,
+    mutateFleetAccess: mutate,
   };
 };
