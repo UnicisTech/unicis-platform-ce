@@ -3,6 +3,7 @@ import { cn } from '../shadcn/lib/utils';
 
 interface CodeBlockProps {
   text: string;
+  copyText?: string;
   language?: string;
   shouldWrapLongLines?: boolean;
   className?: string;
@@ -11,6 +12,7 @@ interface CodeBlockProps {
 
 export const CodeBlock = ({
   text,
+  copyText,
   shouldWrapLongLines = true,
   className,
 }: CodeBlockProps) => {
@@ -31,7 +33,7 @@ export const CodeBlock = ({
         }}
       >
         <code>{text}</code>
-        <CopyToClipboardButton value={text} />
+        <CopyToClipboardButton value={copyText ?? text} />
       </pre>
     </div>
   );
