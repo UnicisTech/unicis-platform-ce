@@ -13,14 +13,7 @@ import { useUpdateTag } from '@/hooks/fleets/Tags/useUpdateTag';
 import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
 import { Button } from '@/components/shadcn/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/shadcn/ui/card';
+import { ChevronRight } from 'lucide-react';
 
 const TagDetails = ({
   fleetTeamId,
@@ -88,14 +81,18 @@ const TagDetails = ({
 
   return (
     <div className="space-y-4">
-      <Card>
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
         <form onSubmit={handleSubmit} noValidate>
-          <CardHeader className="border-b bg-slate-50/40">
-            <CardTitle>{t('details')}</CardTitle>
-            <CardDescription>{tag?.value}</CardDescription>
-          </CardHeader>
+          <div className="border-b border-slate-200 bg-slate-50 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-900">
+            <span className="text-[12px] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
+              {t('details')}
+            </span>
+            <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+              {tag?.value}
+            </p>
+          </div>
 
-          <CardContent className="space-y-6 pt-6">
+          <div className="space-y-6 p-4">
             <div className="space-y-2">
               <Label htmlFor="value">{t('tag-value')}</Label>
               <Input
@@ -115,61 +112,98 @@ const TagDetails = ({
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
-              <div className="rounded-md border">
-                <div className="border-b px-4 py-3">
-                  <h3 className="text-sm font-semibold">{t('packs')}</h3>
+              <section className="overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700">
+                <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-3 py-2.5 dark:border-slate-700 dark:bg-slate-900">
+                  <h3 className="text-[11px] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
+                    {t('packs')}
+                  </h3>
+                  <span className="rounded-full border border-slate-200 bg-white px-2 py-0.5 text-[11px] font-semibold text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                    {packs.length}
+                  </span>
                 </div>
-                <div className="divide-y">
+                <div className="space-y-2 p-3">
                   {packs.length > 0 ? (
                     packs.map((pack) => (
                       <Link
                         key={pack.id}
                         href={`/teams/${slug}/asset-management/packs/${pack.id}`}
-                        className="block px-4 py-3 text-sm font-medium hover:bg-muted"
+                        className="group flex items-center gap-3 rounded-md border border-slate-200 bg-white px-3 py-2.5 transition-colors hover:border-slate-300 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring dark:border-slate-700 dark:bg-slate-800 dark:hover:border-slate-600 dark:hover:bg-slate-900"
                       >
-                        {pack.name}
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate text-sm font-medium text-slate-900 dark:text-slate-100">
+                            {pack.name}
+                          </span>
+                          {pack.description && (
+                            <span className="mt-0.5 block truncate text-xs text-slate-500 dark:text-slate-400">
+                              {pack.description}
+                            </span>
+                          )}
+                        </span>
+                        <ChevronRight
+                          className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:text-slate-600 dark:group-hover:text-slate-200"
+                          aria-hidden="true"
+                        />
                       </Link>
                     ))
                   ) : (
-                    <p className="px-4 py-6 text-center text-sm text-muted-foreground">
+                    <p className="px-3 py-6 text-center text-sm text-slate-500 dark:text-slate-400">
                       {t('no-packs-found')}
                     </p>
                   )}
                 </div>
-              </div>
+              </section>
 
-              <div className="rounded-md border">
-                <div className="border-b px-4 py-3">
-                  <h3 className="text-sm font-semibold">{t('queries')}</h3>
+              <section className="overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700">
+                <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-3 py-2.5 dark:border-slate-700 dark:bg-slate-900">
+                  <h3 className="text-[11px] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
+                    {t('queries')}
+                  </h3>
+                  <span className="rounded-full border border-slate-200 bg-white px-2 py-0.5 text-[11px] font-semibold text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                    {queries.length}
+                  </span>
                 </div>
-                <div className="divide-y">
+                <div className="space-y-2 p-3">
                   {queries.length > 0 ? (
                     queries.map((query) => (
                       <Link
                         key={query.id}
                         href={`/teams/${slug}/asset-management/queries/${query.id}`}
-                        className="block px-4 py-3 text-sm font-medium hover:bg-muted"
+                        className="group flex items-center gap-3 rounded-md border border-slate-200 bg-white px-3 py-2.5 transition-colors hover:border-slate-300 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring dark:border-slate-700 dark:bg-slate-800 dark:hover:border-slate-600 dark:hover:bg-slate-900"
                       >
-                        {query.name}
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate text-sm font-medium text-slate-900 dark:text-slate-100">
+                            {query.name}
+                          </span>
+                          {(query.description || query.sql) && (
+                            <span className="mt-0.5 block truncate text-xs text-slate-500 dark:text-slate-400">
+                              {query.description || query.sql}
+                            </span>
+                          )}
+                        </span>
+                        <ChevronRight
+                          className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:text-slate-600 dark:group-hover:text-slate-200"
+                          aria-hidden="true"
+                        />
                       </Link>
                     ))
                   ) : (
-                    <p className="px-4 py-6 text-center text-sm text-muted-foreground">
+                    <p className="px-3 py-6 text-center text-sm text-slate-500 dark:text-slate-400">
                       {t('fleet:no-queries-found')}
                     </p>
                   )}
                 </div>
-              </div>
+              </section>
             </div>
-          </CardContent>
+          </div>
 
-          <CardFooter className="justify-between bg-slate-50/40">
+          <div className="flex flex-col-reverse gap-2 border-t border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-700 dark:bg-slate-900 sm:flex-row sm:items-center sm:justify-between">
             <div>
               {canAccess('team_fleet_tag', ['delete']) && (
                 <Button
                   type="button"
                   size="sm"
                   variant="destructive"
+                  className="w-full sm:w-auto"
                   onClick={() => openDeleteModal(tag?.id ?? '')}
                 >
                   {t('delete')}
@@ -181,14 +215,15 @@ const TagDetails = ({
               <Button
                 type="submit"
                 size="sm"
+                className="w-full sm:w-auto"
                 disabled={submitting || !isFormChanged}
               >
                 {submitting ? t('saving') : t('save-changes')}
               </Button>
             )}
-          </CardFooter>
+          </div>
         </form>
-      </Card>
+      </div>
 
       <DeleteTag
         visible={deleteVisible}
