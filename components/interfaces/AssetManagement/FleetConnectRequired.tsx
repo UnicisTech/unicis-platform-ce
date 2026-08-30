@@ -93,10 +93,14 @@ const FleetConnectRequired = ({
   } = useFleetConnection(teamId);
   const accessFleetAccount = useAccessFleetAccount();
   const bootstrapFleet = useBootstrapFleet();
-  const hasFleetToken = Boolean(
-    Cookies.get(fleetAccessTokenCookieName) ||
-      Cookies.get(legacyFleetAccessTokenCookieName)
-  );
+  // Mock access is session state. Ignore a token left in the browser so a
+  // reload reliably restores the initial state of the `unconfigured` scenario.
+  const hasFleetToken =
+    !mockEnabled &&
+    Boolean(
+      Cookies.get(fleetAccessTokenCookieName) ||
+        Cookies.get(legacyFleetAccessTokenCookieName)
+    );
   const accessAuthenticated = Boolean(access?.is_active && !access.is_expired);
   const isAuthenticated =
     !isDeleted && (authOverride ?? (accessAuthenticated || hasFleetToken));

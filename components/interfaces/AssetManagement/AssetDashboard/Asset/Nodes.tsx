@@ -16,7 +16,7 @@ import AssetStatusBadge from '@/components/shared/AssetStatusBadge';
 const PAGE_SIZE = 20;
 
 const thClassName =
-  'px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide';
+  'whitespace-nowrap px-3 py-2 text-left text-[11px] font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400';
 
 const getNodeDisplayName = (node: Node) =>
   node.node_info?.system_info?.computer_name ||
@@ -153,190 +153,114 @@ const Nodes = ({
 
           {filteredNodes && filteredNodes.length > 0 ? (
             <>
-              {/* Mobile/tablet: stacked cards (Direction B mobile-first — avoids an unreadable 6-column horizontal scroll below md:) */}
-              <div className="grid gap-2 md:hidden">
-                {pagedNodes.map((node) => (
-                  <div
-                    key={node.id}
-                    className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3"
-                    role="link"
-                    tabIndex={0}
-                    onClick={() => openNodeDetails(node.id)}
-                    onKeyDown={(event) => {
-                      if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        openNodeDetails(node.id);
-                      }
-                    }}
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="group inline-flex items-start gap-1.5 min-w-0 text-foreground">
-                        <div className="min-w-0">
-                          <div className="font-medium underline-offset-4 group-hover:underline truncate">
-                            {getNodeDisplayName(node)}
-                          </div>
-                          <div className="text-xs text-muted-foreground truncate">
-                            {node.owner.user?.firstname}{' '}
-                            {node.owner.user?.lastname}
-                          </div>
-                          <div className="text-xs text-muted-foreground truncate">
-                            {node.owner.user?.email || node.host_identifier}
-                          </div>
-                        </div>
-                        <ChevronRight className="h-3.5 w-3.5 mt-0.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
-                      </div>
-                      <AssetStatusBadge isActive={node.is_active} />
-                    </div>
-
-                    <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
-                      <div>
-                        <dt className="text-[11px] uppercase tracking-wide text-slate-500 dark:text-slate-400">
-                          {t('system-info')}
-                        </dt>
-                        <dd>{node.node_info?.system_info?.hardware_model}</dd>
-                        <dd>
-                          {t('hardware-serial')}:&nbsp;
-                          {node.node_info?.system_info?.hardware_serial ||
-                            'N/A'}
-                        </dd>
-                      </div>
-                      <div>
-                        <dt className="text-[11px] uppercase tracking-wide text-slate-500 dark:text-slate-400">
-                          {t('enrolled-on')}
-                        </dt>
-                        <dd>
-                          <FormattedDate
-                            style={'text-xs'}
-                            dateString={node.enrolled_on}
-                          />
-                        </dd>
-                      </div>
-                    </dl>
-
-                    {canAccess('team_fleet_node', ['delete']) && (
-                      <div className="mt-3 flex justify-end">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            openDeleteModal(node.id);
+              <div className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[1100px] text-sm">
+                    <thead className="bg-slate-50 dark:bg-slate-800">
+                      <tr>
+                        <th className={thClassName}>{t('computer-name')}</th>
+                        <th className={thClassName}>{t('owner')}</th>
+                        <th className={thClassName}>{t('status')}</th>
+                        <th className={thClassName}>{t('agent-info')}</th>
+                        <th className={thClassName}>{t('system-info')}</th>
+                        <th className={thClassName}>{t('enrolled-on')}</th>
+                        <th className={thClassName}>{t('actions')}</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
+                      {pagedNodes.map((node) => (
+                        <tr
+                          key={node.id}
+                          role="link"
+                          tabIndex={0}
+                          className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset hover:bg-slate-50/70 dark:hover:bg-slate-800/70"
+                          onClick={() => openNodeDetails(node.id)}
+                          onKeyDown={(event) => {
+                            if (event.key === 'Enter' || event.key === ' ') {
+                              event.preventDefault();
+                              openNodeDetails(node.id);
+                            }
                           }}
                         >
-                          {t('delete')}
-                        </Button>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Desktop: full table */}
-              <div className="hidden md:block overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
-                <table className="text-sm w-full">
-                  <thead className="bg-slate-50 dark:bg-slate-800">
-                    <tr>
-                      <th className={thClassName}>{t('computer-name')}</th>
-                      <th className={thClassName}>{t('owner')}</th>
-                      <th className={thClassName}>{t('status')}</th>
-                      <th className={thClassName}>{t('agent-info')}</th>
-                      <th className={thClassName}>{t('system-info')}</th>
-                      <th className={thClassName}>{t('enrolled-on')}</th>
-                      <th className={thClassName}>{t('actions')}</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
-                    {pagedNodes.map((node) => (
-                      <tr
-                        key={node.id}
-                        role="link"
-                        tabIndex={0}
-                        className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset hover:bg-slate-50/70 dark:hover:bg-slate-800/70"
-                        onClick={() => openNodeDetails(node.id)}
-                        onKeyDown={(event) => {
-                          if (event.key === 'Enter' || event.key === ' ') {
-                            event.preventDefault();
-                            openNodeDetails(node.id);
-                          }
-                        }}
-                      >
-                        <td className="px-3 py-3 align-top">
-                          <div className="group inline-flex items-start gap-1.5 rounded-sm px-1 py-0.5 -mx-1 -my-0.5 text-foreground transition-colors hover:text-primary">
-                            <div className="min-w-0">
-                              <div className="font-medium underline-offset-4 group-hover:underline">
-                                {getNodeDisplayName(node)}
+                          <td className="px-3 py-3 align-top">
+                            <div className="group inline-flex items-start gap-1.5 rounded-sm px-1 py-0.5 -mx-1 -my-0.5 text-foreground transition-colors hover:text-primary">
+                              <div className="min-w-0">
+                                <div className="font-medium underline-offset-4 group-hover:underline">
+                                  {getNodeDisplayName(node)}
+                                </div>
+                                <div className="text-xs text-muted-foreground">
+                                  {node.host_identifier || 'N/A'}
+                                </div>
                               </div>
-                              <div className="text-xs text-muted-foreground">
-                                {node.host_identifier || 'N/A'}
-                              </div>
+                              <ChevronRight className="h-3.5 w-3.5 mt-0.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
                             </div>
-                            <ChevronRight className="h-3.5 w-3.5 mt-0.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
-                          </div>
-                        </td>
-                        <td className="px-3 py-3 align-top text-xs">
-                          <div className="font-medium">
-                            {node.owner.user?.firstname}{' '}
-                            {node.owner.user?.lastname}
-                          </div>
-                          <div className="text-muted-foreground">
-                            {node.owner.user?.email || 'N/A'}
-                          </div>
-                        </td>
-                        <td className="px-3 py-3 align-top">
-                          <AssetStatusBadge isActive={node.is_active} />
-                        </td>
-                        <td className="px-3 py-3 align-top text-xs">
-                          <div>
-                            {t('pid')}: {node.node_info?.osquery_info?.pid}
-                          </div>
-                          <div>
-                            {t('version')}:{' '}
-                            {node.node_info?.osquery_info?.version}
-                          </div>
-                          <div>
-                            {node.node_info?.osquery_info?.instance_id || 'N/A'}
-                          </div>
-                        </td>
-                        <td className="px-3 py-3 align-top text-xs">
-                          <div>
-                            {node.node_info?.system_info?.hardware_model}
-                          </div>
-                          <div>
-                            {t('hardware-serial')}:{' '}
-                            {node.node_info?.system_info?.hardware_serial ||
-                              'N/A'}
-                          </div>
-                          <div>
-                            {t('host-identifier')}:{' '}
-                            {node.host_identifier || 'N/A'}
-                          </div>
-                        </td>
-                        <td className="px-3 py-3 align-top text-xs">
-                          <FormattedDate
-                            style={'text-[10px]'}
-                            dateString={node.enrolled_on}
-                          />
-                        </td>
-                        <td className="px-3 py-3 align-top">
-                          <div className="flex gap-2">
-                            {canAccess('team_fleet_node', ['delete']) && (
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={(event) => {
-                                  event.stopPropagation();
-                                  openDeleteModal(node.id);
-                                }}
-                              >
-                                {t('delete')}
-                              </Button>
-                            )}
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                          </td>
+                          <td className="px-3 py-3 align-top text-xs">
+                            <div className="font-medium">
+                              {node.owner.user?.firstname}{' '}
+                              {node.owner.user?.lastname}
+                            </div>
+                            <div className="text-muted-foreground">
+                              {node.owner.user?.email || 'N/A'}
+                            </div>
+                          </td>
+                          <td className="px-3 py-3 align-top">
+                            <AssetStatusBadge isActive={node.is_active} />
+                          </td>
+                          <td className="px-3 py-3 align-top text-xs">
+                            <div>
+                              {t('pid')}: {node.node_info?.osquery_info?.pid}
+                            </div>
+                            <div>
+                              {t('version')}:{' '}
+                              {node.node_info?.osquery_info?.version}
+                            </div>
+                            <div>
+                              {node.node_info?.osquery_info?.instance_id ||
+                                'N/A'}
+                            </div>
+                          </td>
+                          <td className="px-3 py-3 align-top text-xs">
+                            <div>
+                              {node.node_info?.system_info?.hardware_model}
+                            </div>
+                            <div>
+                              {t('hardware-serial')}:{' '}
+                              {node.node_info?.system_info?.hardware_serial ||
+                                'N/A'}
+                            </div>
+                            <div>
+                              {t('host-identifier')}:{' '}
+                              {node.host_identifier || 'N/A'}
+                            </div>
+                          </td>
+                          <td className="px-3 py-3 align-top text-xs">
+                            <FormattedDate
+                              style={'text-[10px]'}
+                              dateString={node.enrolled_on}
+                            />
+                          </td>
+                          <td className="px-3 py-3 align-top">
+                            <div className="flex gap-2">
+                              {canAccess('team_fleet_node', ['delete']) && (
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={(event) => {
+                                    event.stopPropagation();
+                                    openDeleteModal(node.id);
+                                  }}
+                                >
+                                  {t('delete')}
+                                </Button>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
 
               {totalPages > 1 && (

@@ -24,6 +24,7 @@ Consequently, setting `NEXT_PUBLIC_FLEET_MODE=mock` in a production build cannot
 
 - `default`: representative queries, packs, tags, assets, distributed tasks, results, logs, configuration, identity, secret, analysis, and auditor statistics.
 - `empty`: empty Fleet collections and zero-valued statistics; identity, team access, and the fake enrollment secret remain available.
+- `unconfigured`: representative Fleet collections with no active Fleet access or enrollment secret; a bootstrap request activates access and creates the secret for reproducing the first-time setup flow. A full browser reload restores the initial unconfigured state, even if the previous bootstrap token is still stored in a browser cookie.
 - `long-content`: intentionally long names, SQL, hostname, and tag values for responsive/mobile layout testing.
 - `many-rows`: 80 queries and 65 assets for table, search, and pagination testing.
 - `error`: every Fleet transport request returns a simulated HTTP 503 response.

@@ -72,6 +72,39 @@ describe('Fleet platform transport', () => {
     expect((await handler(endpoint)).status).toBe(200);
   });
 
+  it('models an unconfigured Fleet until bootstrap completes', async () => {
+    const handler = createFleetPlatformMockHandler('unconfigured');
+    const secretEndpoint =
+      '/api/fleet/secret?teamId=platform-unconfigured-team';
+
+    const initialAccess = await handler('/api/fleet/access/verify');
+    const initialSecret = await handler(secretEndpoint);
+    const initialAccount = await handler('/api/fleet/check-account');
+
+    expect(initialAccess.status).toBe(401);
+    expect(initialSecret.status).toBe(404);
+    await expect(initialAccount.json()).resolves.toEqual({ exists: false });
+
+    const bootstrap = await handler('/api/fleet/bootstrap', {
+      method: 'POST',
+      body: JSON.stringify({ teamId: 'platform-unconfigured-team' }),
+    });
+    const bootstrapResult = await bootstrap.json();
+
+    expect(bootstrapResult.fleetToken).toContain('NOT_REAL');
+
+    const configuredAccess = await handler('/api/fleet/access/verify');
+    const configuredSecret = await handler(secretEndpoint);
+    const configuredAccount = await handler('/api/fleet/check-account');
+
+    expect(configuredAccess.status).toBe(200);
+    await expect(configuredAccess.json()).resolves.toEqual(
+      expect.objectContaining({ is_active: true, is_expired: false })
+    );
+    expect(configuredSecret.status).toBe(200);
+    await expect(configuredAccount.json()).resolves.toEqual({ exists: true });
+  });
+
   it('fails clearly for unknown platform endpoints without fallback', async () => {
     const handler = createFleetPlatformMockHandler('default');
 

@@ -792,7 +792,12 @@ export const createFleetPlatformMockHandler = (
     const { pathname, searchParams } = url;
 
     if (method === 'GET' && pathname === '/api/fleet/access/verify') {
-      return jsonResponse(state.access);
+      return state.access.is_active
+        ? jsonResponse(state.access)
+        : jsonResponse(
+            { error: { message: 'Fleet mock access is not configured' } },
+            401
+          );
     }
 
     if (pathname === '/api/fleet/connection') {
@@ -822,23 +827,33 @@ export const createFleetPlatformMockHandler = (
       const body = parseJsonBody(options);
       const teamId =
         typeof body.teamId === 'string' ? body.teamId : state.team.id;
+      const fleetToken = 'FLEET_MOCK_BOOTSTRAP_TOKEN_NOT_REAL';
+      const updatedAt = new Date().toISOString();
+
+      state.access = {
+        ...state.access,
+        is_active: true,
+        is_expired: false,
+        secret_key: fleetToken,
+        updated_at: updatedAt,
+      };
       state.secret = {
         ...state.secret,
         id: `mock-fleet-secret-${++secretSequence}`,
         secret: `FLEET_MOCK_BOOTSTRAP_SECRET_${secretSequence}_NOT_REAL`,
         team_id: teamId,
-        updated_at: new Date().toISOString(),
+        updated_at: updatedAt,
       };
 
       return jsonResponse({
         success: true,
-        fleetToken: 'FLEET_MOCK_BOOTSTRAP_TOKEN_NOT_REAL',
+        fleetToken,
         secret: { id: state.secret.id, secret: state.secret.secret },
       });
     }
 
     if (method === 'GET' && pathname === '/api/fleet/check-account') {
-      return jsonResponse({ exists: true });
+      return jsonResponse({ exists: state.access.is_active });
     }
 
     throw new Error(

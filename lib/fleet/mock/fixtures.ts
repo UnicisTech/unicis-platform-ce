@@ -512,6 +512,7 @@ export const createFleetMockFixtures = (
   const isLongContent = scenario === 'long-content';
   const isManyRows = scenario === 'many-rows';
   const isEmpty = scenario === 'empty';
+  const isUnconfigured = scenario === 'unconfigured';
   const tagValues = isLongContent
     ? [
         `mobile-layout-tag-${'long-segment-'.repeat(12)}production-like-but-synthetic`,
@@ -634,10 +635,14 @@ export const createFleetMockFixtures = (
       ({ status }) => status === 3
     ).length,
   };
+  const access = createMockFleetAccess();
+  const secret = createMockFleetSecret(team.id);
   const state: FleetMockState = {
     team,
-    access: createMockFleetAccess(),
-    secret: createMockFleetSecret(team.id),
+    access: isUnconfigured
+      ? { ...access, is_active: false, secret_key: '' }
+      : access,
+    secret: isUnconfigured ? { ...secret, secret: '' } : secret,
     queries,
     packs,
     tags,

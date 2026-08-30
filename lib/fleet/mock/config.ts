@@ -1,6 +1,7 @@
 export const fleetMockScenarios = [
   'default',
   'empty',
+  'unconfigured',
   'long-content',
   'many-rows',
   'error',
