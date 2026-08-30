@@ -9,7 +9,14 @@ import {
 import { Button } from '@/components/shadcn/ui/button';
 import { Copy, Trash2 } from 'lucide-react';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
-import { Error, LetterAvatar, Loading } from '@/components/shared';
+import {
+  Error,
+  LetterAvatar,
+  Loading,
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardHeader,
+} from '@/components/shared';
 import { defaultHeaders } from '@/lib/common';
 import type { Invitation, Team } from 'types';
 import useInvitations from 'hooks/useInvitations';
@@ -72,19 +79,14 @@ const PendingInvitations = ({ team }: { team: Team }) => {
 
   return (
     <>
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-        {/* Direction B panel header */}
-        <div className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
-          <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
-            {t('pending-invitations')}
-          </span>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-            {t('description-invitations')}
-          </p>
-        </div>
+      <ManagementCard>
+        <ManagementCardHeader
+          title={t('pending-invitations')}
+          description={t('description-invitations')}
+        />
 
         {/* Table */}
-        <div className="overflow-x-auto">
+        <ManagementCardContent scrollable>
           <Table>
             <TableHeader>
               <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-900">
@@ -149,8 +151,8 @@ const PendingInvitations = ({ team }: { team: Team }) => {
               ))}
             </TableBody>
           </Table>
-        </div>
-      </div>
+        </ManagementCardContent>
+      </ManagementCard>
 
       <ConfirmationDialog
         visible={confirmationDialogVisible}

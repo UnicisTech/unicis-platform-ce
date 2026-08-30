@@ -11,7 +11,13 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/shadcn/ui/table';
-import { Loading, WithLoadingAndError } from '@/components/shared';
+import {
+  Loading,
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardHeader,
+  WithLoadingAndError,
+} from '@/components/shared';
 import PlatformBadge from '@/components/shared/PlatformBadge';
 import useCanAccess from 'hooks/useCanAccess';
 import type { Team, User } from '@/generated/client';
@@ -54,25 +60,20 @@ const Querys = ({ team, user }: { team: Team; user: Partial<User> }) => {
     <WithLoadingAndError isLoading={isLoading} error={isError}>
       {user ? (
         <>
-          <div className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
-            <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-900">
-              <div>
-                <span className="text-[12px] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
-                  {t('fleet:fleet-all-queries')}
-                </span>
-                <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-                  {t('fleet:fleet-queries-listed')}
-                </p>
-              </div>
+          <ManagementCard>
+            <ManagementCardHeader
+              title={t('fleet:fleet-all-queries')}
+              description={t('fleet:fleet-queries-listed')}
+              action={
+                canAccess('team_fleet_query', ['create']) && (
+                  <Button size="sm" onClick={() => setVisible(true)}>
+                    {t('fleet:fleet-create-query')}
+                  </Button>
+                )
+              }
+            />
 
-              {canAccess('team_fleet_query', ['create']) && (
-                <Button size="sm" onClick={() => setVisible(true)}>
-                  {t('fleet:fleet-create-query')}
-                </Button>
-              )}
-            </div>
-
-            <div className="overflow-x-auto">
+            <ManagementCardContent scrollable>
               <Table>
                 <TableHeader>
                   <TableRow className="bg-slate-50 hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-900">
@@ -187,8 +188,8 @@ const Querys = ({ team, user }: { team: Team; user: Partial<User> }) => {
                   )}
                 </TableBody>
               </Table>
-            </div>
-          </div>
+            </ManagementCardContent>
+          </ManagementCard>
 
           <CreateQuery
             user={user}

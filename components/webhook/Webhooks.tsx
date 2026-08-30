@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
-import { WithLoadingAndError, EmptyState } from '@/components/shared';
+import {
+  EmptyState,
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardHeader,
+  WithLoadingAndError,
+} from '@/components/shared';
 import type { Team } from 'types';
 import useWebhooks from 'hooks/useWebhooks';
 import toast from 'react-hot-toast';
@@ -144,27 +150,22 @@ const Webhooks = ({ team }: { team: Team }) => {
 
   return (
     <WithLoadingAndError isLoading={isLoading} error={isError}>
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-        {/* Direction B panel header */}
-        <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
-          <div>
-            <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
-              {t('webhooks')}
-            </span>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              {t('webhooks-description')}
-            </p>
-          </div>
-          <Button
-            size="sm"
-            onClick={() => setCreateWebhookVisible(!createWebhookVisible)}
-          >
-            {t('add-webhook')}
-          </Button>
-        </div>
+      <ManagementCard>
+        <ManagementCardHeader
+          title={t('webhooks')}
+          description={t('webhooks-description')}
+          action={
+            <Button
+              size="sm"
+              onClick={() => setCreateWebhookVisible(!createWebhookVisible)}
+            >
+              {t('add-webhook')}
+            </Button>
+          }
+        />
 
         {/* Content */}
-        <div className="p-4">
+        <ManagementCardContent className="p-4">
           {webhooks?.length === 0 ? (
             <EmptyState title={t('no-webhook-title')} />
           ) : (
@@ -241,8 +242,8 @@ const Webhooks = ({ team }: { team: Team }) => {
               </Table>
             </div>
           )}
-        </div>
-      </div>
+        </ManagementCardContent>
+      </ManagementCard>
 
       {endpoint && (
         <EditWebhook

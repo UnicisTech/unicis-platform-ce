@@ -1,4 +1,10 @@
-import { EmptyState, Loading } from '@/components/shared';
+import {
+  EmptyState,
+  Loading,
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardHeader,
+} from '@/components/shared';
 import { Badge } from '@/components/shadcn/ui/badge';
 import { Button } from '@/components/shadcn/ui/button';
 import { Checkbox } from '@/components/shadcn/ui/checkbox';
@@ -392,38 +398,33 @@ export default function SSOConnections({
 
   return (
     <div className="space-y-4">
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-        {/* Direction B panel header */}
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
-          <div>
-            <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
-              {t('sso.manage-title')}
-            </span>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              {t('sso.manage-description')}
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <Button asChild variant="outline" size="sm">
-              <a href={spMetadataUrl} target="_blank" rel="noreferrer">
-                <ExternalLink className="h-4 w-4" />
-                {t('sso.access-sp-metadata')}
-              </a>
-            </Button>
-            <Button
-              size="sm"
-              onClick={() =>
-                setConnectionDialog({ mode: 'create', kind: 'saml' })
-              }
-            >
-              <Plus className="h-4 w-4" />
-              {t('sso.new-connection')}
-            </Button>
-          </div>
-        </div>
+      <ManagementCard>
+        <ManagementCardHeader
+          title={t('sso.manage-title')}
+          description={t('sso.manage-description')}
+          action={
+            <div className="flex flex-wrap gap-2">
+              <Button asChild variant="outline" size="sm">
+                <a href={spMetadataUrl} target="_blank" rel="noreferrer">
+                  <ExternalLink className="h-4 w-4" />
+                  {t('sso.access-sp-metadata')}
+                </a>
+              </Button>
+              <Button
+                size="sm"
+                onClick={() =>
+                  setConnectionDialog({ mode: 'create', kind: 'saml' })
+                }
+              >
+                <Plus className="h-4 w-4" />
+                {t('sso.new-connection')}
+              </Button>
+            </div>
+          }
+        />
 
         {/* Content */}
-        <div className="p-4">
+        <ManagementCardContent className="p-4">
           {isLoading ? (
             <Loading />
           ) : error ? (
@@ -546,8 +547,8 @@ export default function SSOConnections({
               </Table>
             </div>
           )}
-        </div>
-      </div>
+        </ManagementCardContent>
+      </ManagementCard>
 
       {connectionDialog && (
         <ConnectionDialog

@@ -12,7 +12,13 @@ import {
 } from '@/components/shadcn/ui/dialog';
 import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
-import { CopyToClipboardButton } from '@/components/shared';
+import {
+  CopyToClipboardButton,
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardFooter,
+  ManagementCardHeader,
+} from '@/components/shared';
 import type { Team, User } from '@/generated/client';
 import FleetStatus from './FleetStatus';
 import RenewFleetSecret from './RenewFleetSecret';
@@ -106,17 +112,13 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
   const toggleSafe = () => setSafe(!safe);
 
   return (
-    <div className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
-      <div className="border-b border-slate-200 bg-slate-50 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-900">
-        <span className="text-[12px] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
-          {t('fleet:fleet-secret')}
-        </span>
-        <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-          {t('fleet:fleet-secret-description')}
-        </p>
-      </div>
+    <ManagementCard>
+      <ManagementCardHeader
+        title={t('fleet:fleet-secret')}
+        description={t('fleet:fleet-secret-description')}
+      />
 
-      <div className="p-4">
+      <ManagementCardContent className="p-4">
         {!user ? (
           <FleetStatus status="access-not-granted" />
         ) : (
@@ -163,9 +165,9 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
             )}
           </>
         )}
-      </div>
+      </ManagementCardContent>
 
-      <div className="flex flex-col gap-2 border-t border-slate-200 px-4 py-3 dark:border-slate-700 sm:flex-row sm:items-center sm:justify-between [&>button]:w-full sm:[&>button]:w-auto">
+      <ManagementCardFooter className="sm:justify-between">
         {!hasSecret ? (
           <Button
             type="button"
@@ -198,7 +200,7 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
             </Button>
           </>
         )}
-      </div>
+      </ManagementCardFooter>
 
       <RenewFleetSecret
         teamId={teamId}
@@ -270,7 +272,7 @@ const FleetSecret = ({ team, user }: { user: Partial<User>; team: Team }) => {
           </form>
         </DialogContent>
       </Dialog>
-    </div>
+    </ManagementCard>
   );
 };
 

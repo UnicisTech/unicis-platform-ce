@@ -12,7 +12,13 @@ import DomainHealthRow from '@/components/interfaces/TeamDashboard/DomainHealthR
 import ActionRequiredBanner from '@/components/interfaces/TeamDashboard/ActionRequiredBanner';
 import AssetManagementAnalysis from '@/components/interfaces/TeamDashboard/AssetManagementAnalysis';
 import { useAssetModuleAccess } from '@/hooks/fleets/useAssetModuleAccess';
-import { Error, Loading } from '@/components/shared';
+import {
+  Error,
+  Loading,
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardHeader,
+} from '@/components/shared';
 import ModuleBadge from '@/components/shared/ModuleBadge';
 import { Button } from '@/components/shadcn/ui/button';
 import { getTeamAccess } from '@/lib/teams';
@@ -131,13 +137,9 @@ function TaskStatusMatrix({ tasks, slug }: { tasks: Task[]; slug: string }) {
   );
 
   return (
-    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden flex-1 min-w-0">
-      <div className="px-4 py-2.5 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
-        <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
-          {t('dashboard.task-matrix-title')}
-        </span>
-      </div>
-      <div className="overflow-x-auto">
+    <ManagementCard className="min-w-0 flex-1">
+      <ManagementCardHeader title={t('dashboard.task-matrix-title')} />
+      <ManagementCardContent scrollable>
         <table className="w-full text-[11px]">
           <thead>
             <tr className="border-b border-slate-100">
@@ -190,8 +192,8 @@ function TaskStatusMatrix({ tasks, slug }: { tasks: Task[]; slug: string }) {
             ))}
           </tbody>
         </table>
-      </div>
-    </div>
+      </ManagementCardContent>
+    </ManagementCard>
   );
 }
 
@@ -223,14 +225,16 @@ function NeedsAttentionPanel({ tasks, slug }: { tasks: Task[]; slug: string }) {
   const hiddenCount = allOverdue.length - shown.length;
 
   return (
-    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden w-full lg:w-[280px] flex-shrink-0">
-      <div className="px-4 py-2.5 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 flex items-center gap-2">
-        <ShieldAlert size={12} className="text-ub-red" aria-hidden />
-        <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
-          {t('dashboard.needs-attention')}
-        </span>
-      </div>
-      <div className="divide-y divide-slate-100 dark:divide-slate-700">
+    <ManagementCard className="w-full shrink-0 lg:w-[280px]">
+      <ManagementCardHeader
+        title={
+          <span className="flex items-center gap-2">
+            <ShieldAlert size={12} className="text-ub-red" aria-hidden />
+            {t('dashboard.needs-attention')}
+          </span>
+        }
+      />
+      <ManagementCardContent className="divide-y divide-slate-100 dark:divide-slate-700">
         {shown.length === 0 ? (
           <p className="px-3 py-4 text-[12px] text-slate-400 text-center">
             {t('dashboard.no-overdue')}
@@ -286,8 +290,8 @@ function NeedsAttentionPanel({ tasks, slug }: { tasks: Task[]; slug: string }) {
             )}
           </>
         )}
-      </div>
-    </div>
+      </ManagementCardContent>
+    </ManagementCard>
   );
 }
 

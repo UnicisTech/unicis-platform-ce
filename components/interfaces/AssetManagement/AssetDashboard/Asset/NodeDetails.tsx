@@ -1,4 +1,10 @@
-import { Error, Loading } from '@/components/shared';
+import {
+  Error,
+  Loading,
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardHeader,
+} from '@/components/shared';
 import type { User } from '@/generated/client';
 import { useTranslation } from 'next-i18next';
 import { useGetNodeId } from '@/hooks/fleets/Nodes/useGetNodeId';
@@ -54,21 +60,16 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden">
-      <div className="px-4 py-2.5 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
-        <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
-          {title}
-        </span>
-        {description && (
-          <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-            {description}
-          </p>
-        )}
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 p-3">
+    <ManagementCard>
+      <ManagementCardHeader
+        title={title}
+        description={description}
+        descriptionClassName="text-[11px]"
+      />
+      <ManagementCardContent className="grid grid-cols-1 gap-2 p-3 sm:grid-cols-2 lg:grid-cols-4">
         {children}
-      </div>
-    </div>
+      </ManagementCardContent>
+    </ManagementCard>
   );
 }
 

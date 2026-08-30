@@ -12,6 +12,7 @@ import { Input } from '@/components/shadcn/ui/input';
 import { Button } from '@/components/shadcn/ui/button';
 import { ChevronRight } from 'lucide-react';
 import AssetStatusBadge from '@/components/shared/AssetStatusBadge';
+import { ManagementCard, ManagementCardContent } from '@/components/shared';
 
 const PAGE_SIZE = 20;
 
@@ -153,8 +154,8 @@ const Nodes = ({
 
           {filteredNodes && filteredNodes.length > 0 ? (
             <>
-              <div className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
-                <div className="overflow-x-auto">
+              <ManagementCard>
+                <ManagementCardContent scrollable>
                   <table className="w-full min-w-[1100px] text-sm">
                     <thead className="bg-slate-50 dark:bg-slate-800">
                       <tr>
@@ -260,8 +261,8 @@ const Nodes = ({
                       ))}
                     </tbody>
                   </table>
-                </div>
-              </div>
+                </ManagementCardContent>
+              </ManagementCard>
 
               {totalPages > 1 && (
                 <div className="flex items-center justify-between text-sm">

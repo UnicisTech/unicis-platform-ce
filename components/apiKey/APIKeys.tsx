@@ -8,7 +8,13 @@ import {
 } from '@/components/shadcn/ui/table';
 import { Badge } from '@/components/shadcn/ui/badge';
 import { Button } from '@/components/shadcn/ui/button';
-import { EmptyState, WithLoadingAndError } from '@/components/shared';
+import {
+  EmptyState,
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardHeader,
+  WithLoadingAndError,
+} from '@/components/shared';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import fetcher from '@/lib/fetcher';
 import type { ApiKey, Team } from 'types';
@@ -62,24 +68,19 @@ const APIKeys = ({ team }: APIKeysProps) => {
 
   return (
     <WithLoadingAndError isLoading={isLoading} error={error}>
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-        {/* Direction B panel header */}
-        <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
-          <div>
-            <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
-              {t('api-keys')}
-            </span>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              {t('api-keys-description')}
-            </p>
-          </div>
-          <Button size="sm" onClick={() => setCreateModalVisible(true)}>
-            {t('create-api-key')}
-          </Button>
-        </div>
+      <ManagementCard>
+        <ManagementCardHeader
+          title={t('api-keys')}
+          description={t('api-keys-description')}
+          action={
+            <Button size="sm" onClick={() => setCreateModalVisible(true)}>
+              {t('create-api-key')}
+            </Button>
+          }
+        />
 
         {/* Content */}
-        <div className="p-4">
+        <ManagementCardContent className="p-4">
           {apiKeys.length === 0 ? (
             <EmptyState
               title={t('no-api-key-title')}
@@ -150,8 +151,8 @@ const APIKeys = ({ team }: APIKeysProps) => {
               </ConfirmationDialog>
             </>
           )}
-        </div>
-      </div>
+        </ManagementCardContent>
+      </ManagementCard>
 
       <NewAPIKey
         team={team}

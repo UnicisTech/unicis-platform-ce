@@ -4,6 +4,8 @@ import { useTranslation } from 'next-i18next';
 import type { Task } from 'types';
 import {
   PriorityBadge,
+  ManagementCard,
+  ManagementCardContent,
   StatusBadge,
   TaskRecurrenceBadge,
 } from '@/components/shared';
@@ -48,8 +50,8 @@ const TaskListView = ({
 
   return (
     <>
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden [&_th]:whitespace-normal! [&_td]:whitespace-normal!">
-        <div className="overflow-x-auto">
+      <ManagementCard className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
+        <ManagementCardContent scrollable>
           <table className="w-full min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-sm">
             <thead className="bg-slate-50 dark:bg-slate-900">
               <tr>
@@ -147,8 +149,8 @@ const TaskListView = ({
               ))}
             </tbody>
           </table>
-        </div>
-      </div>
+        </ManagementCardContent>
+      </ManagementCard>
       {pageData.length > 0 && (
         <PaginationControls
           page={currentPage}

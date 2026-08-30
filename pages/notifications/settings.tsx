@@ -9,6 +9,11 @@ import { Button } from '@/components/shadcn/ui/button';
 import { Checkbox } from '@/components/shadcn/ui/checkbox';
 import { Label } from '@/components/shadcn/ui/label';
 import {
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardHeader,
+} from '@/components/shared';
+import {
   DEFAULT_NOTIFICATION_PREFERENCES,
   NOTIFICATION_TYPES,
 } from '@/lib/notifications/preferences';
@@ -112,75 +117,77 @@ const NotificationSettingsForm = ({
 
   return (
     <div className="space-y-4">
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-        {/* Panel header */}
-        <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            {t('notifications.preferences-description')}
-          </p>
-          <Button
-            onClick={handleSave}
-            disabled={!dirty || saving || isLoading}
-            size="sm"
-            className="gap-2"
-          >
-            {saving ? (
-              <>
-                <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                {t('saving')}
-              </>
-            ) : (
-              t('save')
-            )}
-          </Button>
-        </div>
-
-        {/* Column headers */}
-        <div className="grid grid-cols-[1fr_90px_90px_90px] gap-2 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-          <span>{t('notifications.type')}</span>
-          {channelOrder.map((channel) => (
-            <span key={channel} className="text-center">
-              {t(channelLabelKey[channel])}
-            </span>
-          ))}
-        </div>
-
-        {/* Rows */}
-        <div className="divide-y divide-slate-100 dark:divide-slate-700">
-          {NOTIFICATION_TYPES.map(({ type, labelKey }) => (
-            <div
-              key={type}
-              className="grid grid-cols-[1fr_90px_90px_90px] items-center gap-2 px-4 py-3"
+      <ManagementCard>
+        <ManagementCardHeader
+          description={t('notifications.preferences-description')}
+          descriptionClassName="mt-0"
+          action={
+            <Button
+              onClick={handleSave}
+              disabled={!dirty || saving || isLoading}
+              size="sm"
+              className="gap-2"
             >
-              <span className="text-sm text-slate-700 dark:text-slate-200">
-                {t(labelKey)}
-              </span>
-              {channelOrder.map((channel) => {
-                const checkboxId = `${type}-${channel}`;
-                const checked = draft[type]?.[channel] ?? false;
+              {saving ? (
+                <>
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                  {t('saving')}
+                </>
+              ) : (
+                t('save')
+              )}
+            </Button>
+          }
+        />
 
-                return (
-                  <div
-                    key={channel}
-                    className="flex items-center justify-center"
-                  >
-                    <Checkbox
-                      id={checkboxId}
-                      checked={checked}
-                      onCheckedChange={(value) =>
-                        handleToggle(type, channel, value === true)
-                      }
-                    />
-                    <Label htmlFor={checkboxId} className="sr-only">
-                      {t(labelKey)} {t(channelLabelKey[channel])}
-                    </Label>
-                  </div>
-                );
-              })}
-            </div>
-          ))}
-        </div>
-      </div>
+        <ManagementCardContent scrollable>
+          {/* Column headers */}
+          <div className="grid grid-cols-[1fr_90px_90px_90px] gap-2 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+            <span>{t('notifications.type')}</span>
+            {channelOrder.map((channel) => (
+              <span key={channel} className="text-center">
+                {t(channelLabelKey[channel])}
+              </span>
+            ))}
+          </div>
+
+          {/* Rows */}
+          <div className="divide-y divide-slate-100 dark:divide-slate-700">
+            {NOTIFICATION_TYPES.map(({ type, labelKey }) => (
+              <div
+                key={type}
+                className="grid grid-cols-[1fr_90px_90px_90px] items-center gap-2 px-4 py-3"
+              >
+                <span className="text-sm text-slate-700 dark:text-slate-200">
+                  {t(labelKey)}
+                </span>
+                {channelOrder.map((channel) => {
+                  const checkboxId = `${type}-${channel}`;
+                  const checked = draft[type]?.[channel] ?? false;
+
+                  return (
+                    <div
+                      key={channel}
+                      className="flex items-center justify-center"
+                    >
+                      <Checkbox
+                        id={checkboxId}
+                        checked={checked}
+                        onCheckedChange={(value) =>
+                          handleToggle(type, channel, value === true)
+                        }
+                      />
+                      <Label htmlFor={checkboxId} className="sr-only">
+                        {t(labelKey)} {t(channelLabelKey[channel])}
+                      </Label>
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </ManagementCardContent>
+      </ManagementCard>
     </div>
   );
 };

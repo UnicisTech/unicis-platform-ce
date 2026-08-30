@@ -40,4 +40,26 @@ describe('ManagementCard', () => {
       'overflow-x-auto'
     );
   });
+
+  it('supports custom header content for toolbars', () => {
+    const toolbarLabel = 'Card toolbar';
+
+    render(
+      <ManagementCard>
+        <ManagementCardHeader>
+          <div role="toolbar" aria-label={toolbarLabel} />
+        </ManagementCardHeader>
+      </ManagementCard>
+    );
+
+    expect(screen.getByRole('toolbar', { name: toolbarLabel })).toBeTruthy();
+  });
+
+  it('does not render an empty action slot for conditional actions', () => {
+    render(<ManagementCardHeader title="Tags" action={false} />);
+
+    const header = screen.getByText('Tags').parentElement?.parentElement;
+
+    expect(header?.children).toHaveLength(1);
+  });
 });

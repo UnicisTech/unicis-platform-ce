@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import FleetConnectRequired from '../FleetConnectRequired';
 import AddAsset from './Asset/AddAsset';
 import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
-import { Error, Loading } from '@/components/shared';
+import { Error, Loading, ManagementCard } from '@/components/shared';
 import { useTranslation } from 'next-i18next';
 import { useAuditorStats } from '@/hooks/fleets/distributors/useAuditorStats';
 
@@ -39,7 +39,7 @@ const AssetsEmptyState = ({
 
   return (
     <>
-      <div className="flex min-h-[420px] items-center rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
+      <ManagementCard className="flex min-h-[420px] items-center">
         <ModuleEmptyState
           icon="/asset-dashboard.png"
           title={t('fleet:fleet-empty-assets-title')}
@@ -47,7 +47,7 @@ const AssetsEmptyState = ({
           ctaLabel={canAddAsset ? t('add-asset') : undefined}
           onCta={canAddAsset ? () => setAddVisible(true) : undefined}
         />
-      </div>
+      </ManagementCard>
 
       {addVisible && (
         <AddAsset

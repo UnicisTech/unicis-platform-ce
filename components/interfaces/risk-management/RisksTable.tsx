@@ -13,7 +13,12 @@ import useTheme from 'hooks/useTheme';
 import { Button } from '@/components/shadcn/ui/button';
 import { Pencil, Trash2 } from 'lucide-react';
 import useTeamMembersMap from 'hooks/useTeamMembersMap';
-import { Error, Loading } from '@/components/shared';
+import {
+  Error,
+  Loading,
+  ManagementCard,
+  ManagementCardContent,
+} from '@/components/shared';
 import { riskValueToLabelKey } from '@/lib/common';
 
 // ── Static risk-color lookup (avoids dynamic class-name JIT issues) ───────────
@@ -80,8 +85,8 @@ const RisksTable = ({
 
   return (
     <div className="space-y-4">
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-        <div className="overflow-x-auto">
+      <ManagementCard>
+        <ManagementCardContent scrollable>
           <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-[12px]">
             <thead className="bg-slate-50 dark:bg-slate-900">
               {/* Row 1: section group labels */}
@@ -279,8 +284,8 @@ const RisksTable = ({
               })}
             </tbody>
           </table>
-        </div>
-      </div>
+        </ManagementCardContent>
+      </ManagementCard>
 
       {pageData.length > 0 && (
         <PaginationControls

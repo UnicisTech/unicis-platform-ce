@@ -7,6 +7,12 @@ import type { ApiResponse, UserReturned } from 'types';
 import { defaultHeaders } from '@/lib/common';
 
 import { Button } from '@/components/shadcn/ui/button';
+import {
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardFooter,
+  ManagementCardHeader,
+} from '@/components/shared';
 import { Loader2 } from 'lucide-react';
 
 const MAX = 1_000_000; // 1 MB
@@ -72,17 +78,13 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-        <div className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
-          <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
-            {t('avatar')}
-          </span>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-            {t('custom-avatar')} {t('avatar-type')}
-          </p>
-        </div>
+      <ManagementCard>
+        <ManagementCardHeader
+          title={t('avatar')}
+          description={`${t('custom-avatar')} ${t('avatar-type')}`}
+        />
 
-        <div className="p-4">
+        <ManagementCardContent className="p-4">
           <div className="relative inline-block">
             <div
               onDragOver={(e) => {
@@ -122,15 +124,15 @@ const UploadAvatar: React.FC<{ user: Partial<User> }> = ({ user }) => {
               </div>
             </div>
           </div>
-        </div>
+        </ManagementCardContent>
 
-        <div className="border-t border-slate-200 dark:border-slate-700 px-4 py-3 flex justify-end">
+        <ManagementCardFooter>
           <Button type="submit" disabled={!hasChanged}>
             {loading && <Loader2 className="animate-spin" />}
             {t('save-changes')}
           </Button>
-        </div>
-      </div>
+        </ManagementCardFooter>
+      </ManagementCard>
     </form>
   );
 };

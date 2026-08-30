@@ -5,6 +5,11 @@ import {
 import { useAuditorStats } from '@/hooks/fleets/distributors/useAuditorStats';
 import { useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
+import {
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardHeader,
+} from '@/components/shared';
 
 const AssetTaskAnalysis = ({
   teamId,
@@ -82,13 +87,9 @@ const AssetTaskAnalysis = ({
       ];
 
   return (
-    <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden">
-      <div className="px-4 py-2.5 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
-        <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
-          {t('fleet:fleet-asset-task-analysis')}
-        </span>
-      </div>
-      <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5 p-2.5">
+    <ManagementCard>
+      <ManagementCardHeader title={t('fleet:fleet-asset-task-analysis')} />
+      <ManagementCardContent className="grid grid-cols-3 gap-1.5 p-2.5 sm:grid-cols-6">
         {boxes.map((b) => (
           <div
             key={b.label}
@@ -102,8 +103,8 @@ const AssetTaskAnalysis = ({
             </div>
           </div>
         ))}
-      </div>
-    </div>
+      </ManagementCardContent>
+    </ManagementCard>
   );
 };
 

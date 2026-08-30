@@ -17,6 +17,9 @@ import {
 import {
   PriorityBadge,
   StatusBadge,
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardHeader,
   WithLoadingAndError,
 } from '@/components/shared';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
@@ -404,25 +407,22 @@ const TaskRecurrencesSettings = ({ team }: { team: Team }) => {
 
   return (
     <>
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-        <div className="flex items-start justify-between gap-4 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
-          <div>
-            <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
-              {t('recurring-tasks')}
-            </span>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              {t('recurring-tasks-description')}
-            </p>
-          </div>
-          {canCreate && (
-            <Button type="button" onClick={openCreateDialog}>
-              <Plus />
-              {t('create-recurring-task')}
-            </Button>
-          )}
-        </div>
+      <ManagementCard>
+        <ManagementCardHeader
+          title={t('recurring-tasks')}
+          description={t('recurring-tasks-description')}
+          className="sm:items-start"
+          action={
+            canCreate && (
+              <Button type="button" onClick={openCreateDialog}>
+                <Plus />
+                {t('create-recurring-task')}
+              </Button>
+            )
+          }
+        />
 
-        <div className="p-4">
+        <ManagementCardContent scrollable className="p-4">
           <WithLoadingAndError isLoading={isLoading} error={isError}>
             {sortedRecurrences.length === 0 ? (
               <div className="rounded-md border border-dashed p-6 text-center text-sm text-slate-500 dark:text-slate-400">
@@ -572,8 +572,8 @@ const TaskRecurrencesSettings = ({ team }: { team: Team }) => {
               </Table>
             )}
           </WithLoadingAndError>
-        </div>
-      </div>
+        </ManagementCardContent>
+      </ManagementCard>
 
       <Dialog
         open={dialogOpen}

@@ -6,7 +6,14 @@ import usePagination from 'hooks/usePagination';
 import useCanAccess from 'hooks/useCanAccess';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
 import { Badge } from '@/components/shadcn/ui/badge';
-import { Error, Loading, MemberName, StatusBadge } from '@/components/shared';
+import {
+  Error,
+  Loading,
+  ManagementCard,
+  ManagementCardContent,
+  MemberName,
+  StatusBadge,
+} from '@/components/shared';
 import { Button } from '@/components/shadcn/ui/button';
 import { Pencil, Trash2 } from 'lucide-react';
 import useTeamMembersMap from 'hooks/useTeamMembersMap';
@@ -45,8 +52,8 @@ const RpaTable = ({
   }
 
   return (
-    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden [&_th]:whitespace-normal! [&_td]:whitespace-normal!">
-      <div className="overflow-x-auto">
+    <ManagementCard className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
+      <ManagementCardContent scrollable>
         <table className="w-full min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-sm">
           <thead className="bg-slate-50 dark:bg-slate-900">
             <tr>
@@ -151,7 +158,7 @@ const RpaTable = ({
             ))}
           </tbody>
         </table>
-      </div>
+      </ManagementCardContent>
 
       {pageData.length > 0 && (
         <PaginationControls
@@ -162,7 +169,7 @@ const RpaTable = ({
           nextButtonDisabled={nextButtonDisabled}
         />
       )}
-    </div>
+    </ManagementCard>
   );
 };
 

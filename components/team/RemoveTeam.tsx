@@ -9,6 +9,11 @@ import { defaultHeaders } from '@/lib/common';
 import type { ApiResponse } from 'types';
 import { Button } from '../shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
+import {
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardHeader,
+} from '@/components/shared';
 
 const RemoveTeam = ({ team }: { team: Team }) => {
   const router = useRouter();
@@ -39,16 +44,15 @@ const RemoveTeam = ({ team }: { team: Team }) => {
 
   return (
     <>
-      <div className="bg-white dark:bg-slate-800 border border-red-200 dark:border-red-800/50 rounded-xl overflow-hidden">
-        <div className="bg-red-50 dark:bg-red-950/30 border-b border-red-200 dark:border-red-800/50 px-4 py-2.5">
-          <span className="text-[12px] font-semibold text-red-700 dark:text-red-400 uppercase tracking-wide">
-            {t('remove-team')}
-          </span>
-          <p className="text-xs text-red-500 mt-0.5">
-            {t('remove-team-warning')}
-          </p>
-        </div>
-        <div className="px-4 py-3 flex justify-end">
+      <ManagementCard className="border-red-200 dark:border-red-800/50">
+        <ManagementCardHeader
+          title={t('remove-team')}
+          description={t('remove-team-warning')}
+          className="border-red-200 bg-red-50 dark:border-red-800/50 dark:bg-red-950/30"
+          titleClassName="text-red-700 dark:text-red-400"
+          descriptionClassName="text-red-500"
+        />
+        <ManagementCardContent className="flex justify-end px-4 py-3">
           <Button
             variant="destructive"
             onClick={() => setAskConfirmation(true)}
@@ -56,8 +60,8 @@ const RemoveTeam = ({ team }: { team: Team }) => {
             {loading && <Loader2 className="animate-spin" />}
             {t('remove-team')}
           </Button>
-        </div>
-      </div>
+        </ManagementCardContent>
+      </ManagementCard>
       <ConfirmationDialog
         visible={askConfirmation}
         title={t('remove-team')}

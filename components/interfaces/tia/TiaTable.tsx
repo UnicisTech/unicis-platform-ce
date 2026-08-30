@@ -10,6 +10,7 @@ import { Badge } from '@/components/shadcn/ui/badge';
 import { Button } from '@/components/shadcn/ui/button';
 import { Pencil, Trash2 } from 'lucide-react';
 import { isTranferPermitted } from '@/lib/tia/helpers';
+import { ManagementCard, ManagementCardContent } from '@/components/shared';
 
 const getEndDate = (dateStr, yearsToAdd) => {
   const d = new Date(dateStr);
@@ -46,8 +47,8 @@ const TiaTable = ({
   } = usePagination<TaskWithTiaProcedure>(tasks, perPage);
 
   return (
-    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden [&_th]:whitespace-normal! [&_td]:whitespace-normal!">
-      <div className="overflow-x-auto">
+    <ManagementCard className="[&_th]:whitespace-normal! [&_td]:whitespace-normal!">
+      <ManagementCardContent scrollable>
         <table className="w-full min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-sm">
           <thead className="bg-slate-50 dark:bg-slate-900">
             <tr>
@@ -181,7 +182,7 @@ const TiaTable = ({
             ))}
           </tbody>
         </table>
-      </div>
+      </ManagementCardContent>
       {pageData.length > 0 && (
         <PaginationControls
           page={currentPage}
@@ -191,7 +192,7 @@ const TiaTable = ({
           nextButtonDisabled={nextButtonDisabled}
         />
       )}
-    </div>
+    </ManagementCard>
   );
 };
 

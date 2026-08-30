@@ -3,7 +3,14 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSidePropsContext } from 'next';
-import { Loading, Error, TaskRecurrenceBadge } from '@/components/shared';
+import {
+  Error,
+  Loading,
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardHeader,
+  TaskRecurrenceBadge,
+} from '@/components/shared';
 import {
   Attachments,
   Comments,
@@ -61,15 +68,10 @@ const Panel = ({
   action?: ReactNode;
   children: ReactNode;
 }) => (
-  <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden mt-4">
-    <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
-      <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
-        {title}
-      </span>
-      {action}
-    </div>
-    <div className="p-0">{children}</div>
-  </div>
+  <ManagementCard className="mt-4">
+    <ManagementCardHeader title={title} action={action} />
+    <ManagementCardContent>{children}</ManagementCardContent>
+  </ManagementCard>
 );
 
 const TaskById = () => {
@@ -114,14 +116,13 @@ const TaskById = () => {
 
       {/* ── Overview ─────────────────────────────────────────────────── */}
       {activeTab === 'Overview' && (
-        <div
+        <ManagementCard
           id={toTaskPanelId('Overview')}
           role="tabpanel"
           aria-labelledby={toTaskTabId('Overview')}
-          className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden"
         >
           <TaskDetails task={task} team={team as Team} />
-        </div>
+        </ManagementCard>
       )}
 
       {/* ── Processing Activities ────────────────────────────────────── */}

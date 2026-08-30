@@ -6,6 +6,12 @@ import { Button } from '@/components/shadcn/ui/button';
 import { Badge } from '@/components/shadcn/ui/badge';
 import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
+import {
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardFooter,
+  ManagementCardHeader,
+} from '@/components/shared';
 import { useFleetConnection } from '@/hooks/fleets/connect/useFleetConnection';
 import {
   fleetAccessTokenCookieName,
@@ -43,32 +49,28 @@ const SettingsFleet = ({
   };
 
   return (
-    <div className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
-      <div className="flex items-start justify-between gap-4 border-b border-slate-200 bg-slate-50 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-900">
-        <div>
-          <span className="text-[12px] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
-            {t('fleet:fleet-settings')}
-          </span>
-          <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-            {t('fleet:fleet-settings-description')}
-          </p>
-        </div>
+    <ManagementCard>
+      <ManagementCardHeader
+        title={t('fleet:fleet-settings')}
+        description={t('fleet:fleet-settings-description')}
+        className="sm:items-start"
+        action={
+          <Badge
+            variant={isDisconnected ? 'outline' : 'secondary'}
+            className={
+              isDisconnected
+                ? 'shrink-0 border-amber-300 bg-amber-50 text-amber-700 dark:border-amber-700 dark:bg-amber-950/50 dark:text-amber-300'
+                : 'shrink-0 border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300'
+            }
+          >
+            {isDisconnected
+              ? t('fleet:fleet-disconnected')
+              : t('fleet:fleet-connected')}
+          </Badge>
+        }
+      />
 
-        <Badge
-          variant={isDisconnected ? 'outline' : 'secondary'}
-          className={
-            isDisconnected
-              ? 'shrink-0 border-amber-300 bg-amber-50 text-amber-700 dark:border-amber-700 dark:bg-amber-950/50 dark:text-amber-300'
-              : 'shrink-0 border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300'
-          }
-        >
-          {isDisconnected
-            ? t('fleet:fleet-disconnected')
-            : t('fleet:fleet-connected')}
-        </Badge>
-      </div>
-
-      <div className="space-y-4 p-4">
+      <ManagementCardContent className="space-y-4 p-4">
         {isDisconnected && (
           <p className="rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-700 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
             {t('fleet:fleet-disconnected-retention', {
@@ -105,9 +107,9 @@ const SettingsFleet = ({
             readOnly
           />
         </div>
-      </div>
+      </ManagementCardContent>
 
-      <div className="flex flex-col gap-2 border-t border-slate-200 px-4 py-3 dark:border-slate-700 sm:flex-row sm:items-center sm:justify-between [&>button]:w-full sm:[&>button]:w-auto">
+      <ManagementCardFooter className="sm:justify-between">
         <Button
           type="button"
           variant="destructive"
@@ -120,8 +122,8 @@ const SettingsFleet = ({
         <Button type="button" disabled>
           {t('save')}
         </Button>
-      </div>
-    </div>
+      </ManagementCardFooter>
+    </ManagementCard>
   );
 };
 

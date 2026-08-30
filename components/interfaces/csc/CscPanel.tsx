@@ -3,7 +3,11 @@ import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 import { SectionFilter, StatusesTable } from './';
 import StatusFilter from './StatusFilter';
-import { PerPageSelector, FilterChipRow } from '@/components/shared';
+import {
+  FilterChipRow,
+  ManagementCard,
+  PerPageSelector,
+} from '@/components/shared';
 import { ISO } from 'types';
 import useCscStatuses from 'hooks/useCscStatuses';
 import type { Task } from 'types';
@@ -532,7 +536,7 @@ export default function CscPanel({
         </button>
       </div>
 
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden mt-2 flex">
+      <ManagementCard className="mt-2 flex">
         <StatusesTable
           slug={slug}
           ISO={iso}
@@ -553,7 +557,7 @@ export default function CscPanel({
           activeSection={sectionFilterValue || null}
           onSelect={(code) => setSectionFilter(code ? [code] : null)}
         />
-      </div>
+      </ManagementCard>
 
       <SoaExportModal
         isOpen={soaModalOpen}

@@ -1,4 +1,8 @@
-import { LetterAvatar } from '@/components/shared';
+import {
+  LetterAvatar,
+  ManagementCard,
+  ManagementCardContent,
+} from '@/components/shared';
 import { defaultHeaders } from '@/lib/common';
 import type { Team } from 'types';
 import useTeams from 'hooks/useTeams';
@@ -72,8 +76,8 @@ const Teams = () => {
               {t('create-team')}
             </Button>
           </div>
-          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-            <div className="overflow-x-auto">
+          <ManagementCard>
+            <ManagementCardContent scrollable>
               <table className="w-full min-w-[480px] divide-y divide-slate-100 dark:divide-slate-700 text-sm">
                 <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase border-b border-slate-200 dark:border-slate-700">
                   <tr>
@@ -149,8 +153,8 @@ const Teams = () => {
                     })}
                 </tbody>
               </table>
-            </div>
-          </div>
+            </ManagementCardContent>
+          </ManagementCard>
           <ConfirmationDialog
             visible={askConfirmation}
             title={`${t('leave-team')} ${team?.name}`}

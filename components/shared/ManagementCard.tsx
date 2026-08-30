@@ -29,7 +29,7 @@ ManagementCard.displayName = 'ManagementCard';
 
 export interface ManagementCardHeaderProps
   extends Omit<React.ComponentPropsWithoutRef<typeof CardHeader>, 'title'> {
-  title: React.ReactNode;
+  title?: React.ReactNode;
   description?: React.ReactNode;
   action?: React.ReactNode;
   titleClassName?: string;
@@ -45,6 +45,7 @@ export const ManagementCardHeader = React.forwardRef<
       title,
       description,
       action,
+      children,
       className,
       titleClassName,
       descriptionClassName,
@@ -60,29 +61,39 @@ export const ManagementCardHeader = React.forwardRef<
       )}
       {...props}
     >
-      <div className="min-w-0">
-        <CardTitle
-          className={cn(
-            'text-[12px] font-semibold uppercase leading-4 tracking-wide text-slate-700 dark:text-slate-200',
-            titleClassName
+      {children != null ? (
+        children
+      ) : (
+        <>
+          {(title != null || description != null) && (
+            <div className="min-w-0">
+              {title != null && (
+                <CardTitle
+                  className={cn(
+                    'text-[12px] font-semibold uppercase leading-4 tracking-wide text-slate-700 dark:text-slate-200',
+                    titleClassName
+                  )}
+                >
+                  {title}
+                </CardTitle>
+              )}
+
+              {description != null && (
+                <CardDescription
+                  className={cn(
+                    'mt-0.5 text-xs text-slate-500 dark:text-slate-400',
+                    descriptionClassName
+                  )}
+                >
+                  {description}
+                </CardDescription>
+              )}
+            </div>
           )}
-        >
-          {title}
-        </CardTitle>
 
-        {description != null && (
-          <CardDescription
-            className={cn(
-              'mt-0.5 text-xs text-slate-500 dark:text-slate-400',
-              descriptionClassName
-            )}
-          >
-            {description}
-          </CardDescription>
-        )}
-      </div>
-
-      {action != null && <div className="shrink-0">{action}</div>}
+          {action && <div className="shrink-0">{action}</div>}
+        </>
+      )}
     </CardHeader>
   )
 );

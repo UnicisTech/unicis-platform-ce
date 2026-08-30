@@ -2,7 +2,14 @@ import { useCallback, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { Error, Loading } from '@/components/shared';
+import {
+  Error,
+  Loading,
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardFooter,
+  ManagementCardHeader,
+} from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
 import type { User } from '@/generated/client';
 import toast from 'react-hot-toast';
@@ -81,18 +88,11 @@ const TagDetails = ({
 
   return (
     <div className="space-y-4">
-      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
+      <ManagementCard>
         <form onSubmit={handleSubmit} noValidate>
-          <div className="border-b border-slate-200 bg-slate-50 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-900">
-            <span className="text-[12px] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
-              {t('details')}
-            </span>
-            <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-              {tag?.value}
-            </p>
-          </div>
+          <ManagementCardHeader title={t('details')} description={tag?.value} />
 
-          <div className="space-y-6 p-4">
+          <ManagementCardContent className="space-y-6 p-4">
             <div className="space-y-2">
               <Label htmlFor="value">{t('tag-value')}</Label>
               <Input
@@ -194,9 +194,9 @@ const TagDetails = ({
                 </div>
               </section>
             </div>
-          </div>
+          </ManagementCardContent>
 
-          <div className="flex flex-col-reverse gap-2 border-t border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-700 dark:bg-slate-900 sm:flex-row sm:items-center sm:justify-between">
+          <ManagementCardFooter className="flex-col-reverse bg-slate-50 dark:bg-slate-900 sm:justify-between">
             <div>
               {canAccess('team_fleet_tag', ['delete']) && (
                 <Button
@@ -221,9 +221,9 @@ const TagDetails = ({
                 {submitting ? t('saving') : t('save-changes')}
               </Button>
             )}
-          </div>
+          </ManagementCardFooter>
         </form>
-      </div>
+      </ManagementCard>
 
       <DeleteTag
         visible={deleteVisible}

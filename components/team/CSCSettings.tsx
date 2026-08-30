@@ -12,6 +12,11 @@ import useSubscription, { subscriptionParams } from 'hooks/useSubscription';
 import { Label } from '@/components/shadcn/ui/label';
 import { MultiSelect } from '@/components/shadcn/ui/multi-select';
 import { Button } from '@/components/shadcn/ui/button';
+import {
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardHeader,
+} from '@/components/shared';
 import { Loader2 } from 'lucide-react';
 import { isoOptions } from '@/lib/csc/csc-frameworks';
 
@@ -76,13 +81,9 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-        <div className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
-          <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
-            {t('csc-settings')}
-          </span>
-        </div>
-        <div className="p-4 space-y-4">
+      <ManagementCard>
+        <ManagementCardHeader title={t('csc-settings')} />
+        <ManagementCardContent className="space-y-4 p-4">
           <p>{t('csc-choose-iso')}</p>
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="flex-1">
@@ -112,8 +113,8 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
               </Button>
             </div>
           </div>
-        </div>
-      </div>
+        </ManagementCardContent>
+      </ManagementCard>
     </form>
   );
 };

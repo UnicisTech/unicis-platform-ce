@@ -6,7 +6,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/shadcn/ui/table';
-import { Error, LetterAvatar, Loading } from '@/components/shared';
+import {
+  Error,
+  LetterAvatar,
+  Loading,
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardHeader,
+} from '@/components/shared';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeamMembers from 'hooks/useTeamMembers';
 import { useSession } from 'next-auth/react';
@@ -222,22 +229,18 @@ const Members = ({ team }: { team: Team }) => {
 
   return (
     <>
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-        <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
-          <div>
-            <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wide">
-              {t('members')}
-            </span>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              {t('members-description')}
-            </p>
-          </div>
-          <Button size="sm" onClick={() => setVisible(!visible)}>
-            {t('add-member')}
-          </Button>
-        </div>
+      <ManagementCard>
+        <ManagementCardHeader
+          title={t('members')}
+          description={t('members-description')}
+          action={
+            <Button size="sm" onClick={() => setVisible(!visible)}>
+              {t('add-member')}
+            </Button>
+          }
+        />
 
-        <div className="overflow-x-auto">
+        <ManagementCardContent scrollable>
           <Table>
             <TableHeader>
               <TableRow className="bg-slate-50 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-900">
@@ -323,8 +326,8 @@ const Members = ({ team }: { team: Team }) => {
               })}
             </TableBody>
           </Table>
-        </div>
-      </div>
+        </ManagementCardContent>
+      </ManagementCard>
 
       <ConfirmationDialog
         visible={confirmationDialogVisible}

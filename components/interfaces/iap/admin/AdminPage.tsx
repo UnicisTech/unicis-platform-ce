@@ -17,6 +17,11 @@ import {
 import StatusResults from './StatusResults';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import { Button } from '@/components/shadcn/ui/button';
+import {
+  ManagementCard,
+  ManagementCardContent,
+  ManagementCardHeader,
+} from '@/components/shared';
 
 interface IapDashboardProps {
   categories: Category[];
@@ -108,8 +113,8 @@ const AdminPage = ({
 
   return (
     <>
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden mb-4">
-        <div className="flex items-center justify-end gap-2 flex-wrap bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-2.5">
+      <ManagementCard className="mb-4">
+        <ManagementCardHeader className="flex-row flex-wrap items-center justify-end">
           {canAccess('iap_category', ['create']) && (
             <Button
               variant="outline"
@@ -124,18 +129,20 @@ const AdminPage = ({
               {t('create-course')}
             </Button>
           )}
-        </div>
-        <CoursesTable
-          slug={team.slug}
-          teamCourses={teamCourses}
-          members={members}
-          categories={categories}
-          editHandler={editCourseClickHandler}
-          deleteHandler={deleteCourseClickHandler}
-          completionHandler={completionResultsClickHandler}
-          statusHandler={statusResultsClickHandler}
-        />
-      </div>
+        </ManagementCardHeader>
+        <ManagementCardContent>
+          <CoursesTable
+            slug={team.slug}
+            teamCourses={teamCourses}
+            members={members}
+            categories={categories}
+            editHandler={editCourseClickHandler}
+            deleteHandler={deleteCourseClickHandler}
+            completionHandler={completionResultsClickHandler}
+            statusHandler={statusResultsClickHandler}
+          />
+        </ManagementCardContent>
+      </ManagementCard>
 
       {isCreateCategoryOpen && (
         <CreateCategory

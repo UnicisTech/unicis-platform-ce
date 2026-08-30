@@ -1,4 +1,9 @@
-import { Error, Loading } from '@/components/shared';
+import {
+  Error,
+  Loading,
+  ManagementCard,
+  ManagementCardContent,
+} from '@/components/shared';
 import { TeamTab } from '@/components/team';
 import env from '@/lib/env';
 import { inferSSRProps } from '@/lib/inferSSRProps';
@@ -51,8 +56,8 @@ const Events: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({
   return (
     <>
       <TeamTab activeTab="audit-logs" team={team} teamFeatures={teamFeatures} />
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-        <div className="p-4">
+      <ManagementCard>
+        <ManagementCardContent className="p-4">
           {canAccess('team_audit_log', ['read']) && auditLogToken && (
             <RetracedEventsBrowser
               host={`${retracedHost}/viewer/v1`}
@@ -60,8 +65,8 @@ const Events: NextPageWithLayout<inferSSRProps<typeof getServerSideProps>> = ({
               header={t('audit-logs')}
             />
           )}
-        </div>
-      </div>
+        </ManagementCardContent>
+      </ManagementCard>
     </>
   );
 };
