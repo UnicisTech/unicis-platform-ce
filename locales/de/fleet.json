@@ -81,6 +81,8 @@
   "fleet-delete-description": "Geben Sie LÖSCHEN in das Textfeld oben ein, um die Löschung zu bestätigen.",
   "fleet-all-assets": "Alle Assets",
   "fleet-asset-listed": "Liste der Assets",
+  "fleet-empty-assets-title": "Noch keine Assets registriert",
+  "fleet-empty-assets-description": "Registrieren Sie Ihr erstes Asset, um Status, Plattform und Abfrageaktivitäten zu überwachen.",
   "fleet-asset-id": "Asset-ID",
   "fleet-asset-info": "Asset-Info",
   "fleet-asset-info-description": "Nachfolgend eine vollständige Beschreibung Ihres Assets",

@@ -81,6 +81,8 @@
   "fleet-delete-description": "Saisissez SUPPRIMER dans la zone de texte ci-dessus pour confirmer la suppression.",
   "fleet-all-assets": "Tous les actifs",
   "fleet-asset-listed": "Liste des actifs",
+  "fleet-empty-assets-title": "Aucun actif enregistré pour le moment",
+  "fleet-empty-assets-description": "Enregistrez votre premier actif pour commencer à surveiller son état, sa plateforme et l’activité des requêtes.",
   "fleet-asset-id": "ID de l'actif",
   "fleet-asset-info": "Infos sur l'actif",
   "fleet-asset-info-description": "Ci-dessous une description complète de votre actif",

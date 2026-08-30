@@ -81,6 +81,8 @@
   "fleet-delete-description": "削除を確認するには、上のテキストボックスに「DELETE」と入力してください。",
   "fleet-all-assets": "全アセット",
   "fleet-asset-listed": "アセットのリスト",
+  "fleet-empty-assets-title": "登録済みのアセットはまだありません",
+  "fleet-empty-assets-description": "最初のアセットを登録して、ステータス、プラットフォーム、クエリアクティビティの監視を開始しましょう。",
   "fleet-asset-id": "アセットID",
   "fleet-asset-info": "アセット情報",
   "fleet-asset-info-description": "以下はアセットの完全な説明です",

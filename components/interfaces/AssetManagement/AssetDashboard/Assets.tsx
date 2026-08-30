@@ -8,6 +8,11 @@ import useCanAccess from '@/hooks/useCanAccess';
 import useHasPlan from '@/hooks/useHasPlan';
 import { useRouter } from 'next/router';
 import FleetConnectRequired from '../FleetConnectRequired';
+import AddAsset from './Asset/AddAsset';
+import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
+import { Error, Loading } from '@/components/shared';
+import { useTranslation } from 'next-i18next';
+import { useAuditorStats } from '@/hooks/fleets/distributors/useAuditorStats';
 
 interface AssetsProps {
   team: Team;
@@ -20,12 +25,83 @@ interface AssetsContentProps {
   isAuditor: boolean;
 }
 
+const AssetsEmptyState = ({
+  team,
+  user,
+  canAddAsset,
+}: {
+  team: Team;
+  user: Partial<User>;
+  canAddAsset: boolean;
+}) => {
+  const { t } = useTranslation(['common', 'fleet']);
+  const [addVisible, setAddVisible] = useState(false);
+
+  return (
+    <>
+      <div className="flex min-h-[420px] items-center rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
+        <ModuleEmptyState
+          icon="/asset-dashboard.png"
+          title={t('fleet:fleet-empty-assets-title')}
+          description={t('fleet:fleet-empty-assets-description')}
+          ctaLabel={canAddAsset ? t('add-asset') : undefined}
+          onCta={canAddAsset ? () => setAddVisible(true) : undefined}
+        />
+      </div>
+
+      {addVisible && (
+        <AddAsset
+          visible={addVisible}
+          user={user}
+          team={team}
+          setVisible={setAddVisible}
+        />
+      )}
+    </>
+  );
+};
+
 const AssetsContent = ({ team, user, isAuditor }: AssetsContentProps) => {
   const [status, setStatus] = useState('all');
-  const { nodes: allNodes } = useNodes(team.id, status, {
+  const {
+    nodes: allNodes,
+    isLoading: isNodesLoading,
+    isError: nodesError,
+  } = useNodes(team.id, status, {
     skip: isAuditor,
   });
+  const {
+    auditorStats,
+    isLoading: isAuditorStatsLoading,
+    isError: auditorStatsError,
+  } = useAuditorStats(team.id);
+  const { canAccess } = useCanAccess(team.slug);
   const nodes = allNodes || [];
+  const isAssetsLoading = isAuditor ? isAuditorStatsLoading : isNodesLoading;
+  const assetsError = isAuditor ? auditorStatsError : nodesError;
+  const totalAssets = isAuditor ? auditorStats?.total_nodes ?? 0 : nodes.length;
+
+  if (isAssetsLoading) {
+    return (
+      <div className="py-24">
+        <Loading />
+      </div>
+    );
+  }
+
+  if (assetsError) {
+    return <Error />;
+  }
+
+  if (status === 'all' && totalAssets === 0) {
+    return (
+      <AssetsEmptyState
+        team={team}
+        user={user}
+        canAddAsset={!isAuditor && canAccess('team_fleet_node', ['read'])}
+      />
+    );
+  }
 
   return (
     <>

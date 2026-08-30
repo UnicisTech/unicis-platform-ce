@@ -10,7 +10,7 @@ export interface ModuleEmptyStateProps {
   icon: IconProp;
   title: string;
   description: string;
-  regulatoryContext: string;
+  regulatoryContext?: string;
   ctaLabel?: string;
   onCta?: () => void;
   docsHref?: string;
@@ -55,9 +55,11 @@ export function ModuleEmptyState({
       <p className="text-[13px] text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
         {description}
       </p>
-      <span className="text-[11px] font-medium text-ub-blue-text bg-ub-blue-bg border border-ub-blue-border px-2.5 py-1 rounded-md mb-5">
-        {regulatoryContext}
-      </span>
+      {regulatoryContext && (
+        <span className="text-[11px] font-medium text-ub-blue-text bg-ub-blue-bg border border-ub-blue-border px-2.5 py-1 rounded-md mb-5">
+          {regulatoryContext}
+        </span>
+      )}
       {onCta && ctaLabel && (
         <Button onClick={onCta} size="sm" className="mb-3">
           {ctaLabel}

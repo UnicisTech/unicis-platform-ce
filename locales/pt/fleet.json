@@ -81,6 +81,8 @@
   "fleet-delete-description": "Digite EXCLUIR na caixa de texto acima para confirmar a exclusão.",
   "fleet-all-assets": "Todos os ativos",
   "fleet-asset-listed": "Lista de ativos",
+  "fleet-empty-assets-title": "Ainda não há ativos registados",
+  "fleet-empty-assets-description": "Registe o primeiro ativo para começar a monitorizar o seu estado, plataforma e atividade de consultas.",
   "fleet-asset-id": "ID do ativo",
   "fleet-asset-info": "Informações do ativo",
   "fleet-asset-info-description": "Abaixo, uma descrição completa do seu ativo",

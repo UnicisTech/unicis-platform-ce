@@ -81,6 +81,8 @@
   "fleet-delete-description": "Type DELETE in the text box above to confirm deletion.",
   "fleet-all-assets": "All Assets",
   "fleet-asset-listed": "List of assets",
+  "fleet-empty-assets-title": "No assets enrolled yet",
+  "fleet-empty-assets-description": "Enroll your first asset to start monitoring its status, platform, and query activity.",
   "fleet-asset-id": "Asset ID",
   "fleet-asset-info": "Asset Info",
   "fleet-asset-info-description": "Below a full description of your asset",
