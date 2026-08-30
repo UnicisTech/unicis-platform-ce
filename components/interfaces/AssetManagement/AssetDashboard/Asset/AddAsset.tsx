@@ -105,50 +105,57 @@ const AddAsset = ({
         <div className="space-y-6">
           <PlatformTab activeTab={platform} setTab={setPlatformTab} />
 
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <h2 className="underline">{t('install-osquery')}</h2>
-            </div>
-            <CodeBlock
-              language={commandLanguage}
-              shouldWrapLongLines
-              showLineNumbers={false}
-              text={installCommand}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <h2 className="underline">{t('enroll-asset')}</h2>
-            </div>
-            <CodeBlock
-              language={commandLanguage}
-              shouldWrapLongLines
-              showLineNumbers={false}
-              text={osqueryEntry}
-            />
-          </div>
-
-          {shouldUseTlsServerCert && (
-            <>
-              <h2>{t('team-tls-cert')}</h2>
+          <div
+            id="asset-platform-panel"
+            role="tabpanel"
+            aria-labelledby={`asset-platform-tab-${platform}`}
+            className="space-y-6"
+          >
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <h2 className="underline">{t('install-osquery')}</h2>
+              </div>
               <CodeBlock
-                language="text"
+                language={commandLanguage}
+                shouldWrapLongLines
                 showLineNumbers={false}
-                text={fleetTeam?.ca_certificate}
+                text={installCommand}
               />
-              <p>
-                {t('save-ca-content', {
-                  file: tlsServerCertPath,
-                  ext: '.pem',
-                })}
-              </p>
-            </>
-          )}
+            </div>
 
-          <p className="text-sm text-muted-foreground">
-            {t('generate-installer-description')}
-          </p>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <h2 className="underline">{t('enroll-asset')}</h2>
+              </div>
+              <CodeBlock
+                language={commandLanguage}
+                shouldWrapLongLines
+                showLineNumbers={false}
+                text={osqueryEntry}
+              />
+            </div>
+
+            {shouldUseTlsServerCert && (
+              <>
+                <h2>{t('team-tls-cert')}</h2>
+                <CodeBlock
+                  language="text"
+                  showLineNumbers={false}
+                  text={fleetTeam?.ca_certificate}
+                />
+                <p>
+                  {t('save-ca-content', {
+                    file: tlsServerCertPath,
+                    ext: '.pem',
+                  })}
+                </p>
+              </>
+            )}
+
+            <p className="text-sm text-muted-foreground">
+              {t('generate-installer-description')}
+            </p>
+          </div>
         </div>
 
         <DialogFooter className="mt-6">
