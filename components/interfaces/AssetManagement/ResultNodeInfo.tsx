@@ -16,7 +16,7 @@ const ResultNodeInfo = ({ node }: { node: ResultNode | null }) => {
   const ownerName = getOwnerName(node);
 
   return (
-    <div className="min-w-[280px] space-y-1 text-[13px] leading-5 text-slate-600 dark:text-slate-300">
+    <div className="min-w-0 space-y-1 break-words text-[13px] leading-5 text-slate-600 dark:text-slate-300">
       <div className="flex flex-wrap gap-x-1">
         <span className="font-semibold text-slate-500 dark:text-slate-400">
           {t('asset-name')}:{' '}
@@ -38,7 +38,9 @@ const ResultNodeInfo = ({ node }: { node: ResultNode | null }) => {
           <span className="font-semibold text-slate-500 dark:text-slate-400">
             {t('host-identifier')}:{' '}
           </span>
-          <span className="font-mono text-[12px]">{node.host_identifier}</span>
+          <span className="break-all font-mono text-[12px]">
+            {node.host_identifier}
+          </span>
         </div>
       )}
     </div>
