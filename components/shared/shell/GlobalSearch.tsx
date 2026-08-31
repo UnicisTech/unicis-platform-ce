@@ -17,6 +17,7 @@ import {
 } from '@/components/shadcn/ui/command';
 import useTeamTasks from 'hooks/useTeamTasks';
 import useCanAccess from 'hooks/useCanAccess';
+import { useAssetModuleAccess } from 'hooks/fleets/useAssetModuleAccess';
 import { cn } from '@/components/shadcn/lib/utils';
 import { trackSiteSearch } from '@/lib/matomo/client';
 import type { Task } from 'types';
@@ -53,6 +54,11 @@ const MODULE_ITEMS: {
     Icon: () => (
       <QueueListIcon className="w-4 h-4 fill-blue-600 flex-shrink-0" />
     ),
+  },
+  {
+    labelKey: 'fleet:asset-management',
+    path: '/asset',
+    Icon: () => <LogoIcon src="/asset-dashboard.png" />,
   },
   {
     labelKey: 'rpa-activities',
@@ -92,6 +98,29 @@ const MODULE_ITEMS: {
     ),
   },
 ];
+
+type CanAccess = ReturnType<typeof useCanAccess>['canAccess'];
+
+export const getVisibleSearchModules = ({
+  slug,
+  canAccess,
+  hasAssetModuleAccess,
+}: {
+  slug: string;
+  canAccess: CanAccess;
+  hasAssetModuleAccess: boolean;
+}) =>
+  MODULE_ITEMS.filter((module) => {
+    if (!slug) return false;
+    if (module.path === '/asset') return hasAssetModuleAccess;
+    if (module.path === '/rpa') return canAccess('rpa', ['read']);
+    if (module.path === '/tia') return canAccess('tia', ['read']);
+    if (module.path === '/pia') return canAccess('pia', ['read']);
+    if (module.path === '/csc') return canAccess('csc', ['read']);
+    if (module.path === '/iap') return canAccess('iap_course', ['update']);
+    if (module.path === '/risk-management') return canAccess('rm', ['read']);
+    return true;
+  });
 
 // ── Module badge colours ───────────────────────────────────────────────────────
 const MODULE_BADGE: Record<string, string> = {
@@ -338,11 +367,12 @@ function TaskRow({ task }: { task: Task }) {
 // ── Main component ─────────────────────────────────────────────────────────────
 export default function GlobalSearch() {
   const router = useRouter();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'fleet']);
   const [open, setOpen] = useState(false);
   const slug = (router.query.slug as string) || '';
   const { tasks } = useTeamTasks(slug);
   const { canAccess } = useCanAccess(slug);
+  const { isReady: hasAssetModuleAccess } = useAssetModuleAccess(slug);
   const [query, setQuery] = useState('');
   const searchTrackTimer = useRef<ReturnType<typeof setTimeout>>();
 
@@ -385,15 +415,10 @@ export default function GlobalSearch() {
   );
 
   // Filter module items by access — mirrors TeamNavigation.tsx visibility rules
-  const visibleModules = MODULE_ITEMS.filter((m) => {
-    if (!slug) return false;
-    if (m.path === '/rpa') return canAccess('rpa', ['read']);
-    if (m.path === '/tia') return canAccess('tia', ['read']);
-    if (m.path === '/pia') return canAccess('pia', ['read']);
-    if (m.path === '/csc') return canAccess('csc', ['read']);
-    if (m.path === '/iap') return canAccess('iap_course', ['update']);
-    if (m.path === '/risk-management') return canAccess('rm', ['read']);
-    return true; // dashboard, tasks, settings always shown
+  const visibleModules = getVisibleSearchModules({
+    slug,
+    canAccess,
+    hasAssetModuleAccess,
   });
 
   return (
