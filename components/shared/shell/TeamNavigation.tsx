@@ -10,7 +10,9 @@ import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeamTasks from 'hooks/useTeamTasks';
+import useTeam from 'hooks/useTeam';
 import useIap from 'hooks/useIAP';
+import { useAuditorStats } from 'hooks/fleets/distributors/useAuditorStats';
 import NavigationItems from './NavigationItems';
 import type { NavigationProps, MenuItem } from './NavigationItems';
 import Icon from '../Icon';
@@ -24,12 +26,16 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   const { t } = useTranslation(['common', 'fleet']);
   const { canAccess } = useCanAccess(slug);
   const { isReady: hasAssetModuleAccess } = useAssetModuleAccess(slug);
+  const { team } = useTeam(slug);
+  const { auditorStats } = useAuditorStats(team?.id ?? '', {
+    skip: !hasAssetModuleAccess,
+  });
   const { tasks } = useTeamTasks(slug);
   const { teamCourses } = useIap(false, slug);
   const relativePath = activePathname?.slice(`/teams/${slug}`.length) || '';
 
   // ── Badge counts ────────────────────────────────────────────────────────────
-  // overdue/open* are "needs attention" counts (red/amber). rpa/tia/pia/iap
+  // overdue/open* are "needs attention" counts (red/amber). assets/rpa/tia/pia/iap
   // are plain "total items in this module" counts (neutral grey), matching
   // the record-count badge shown on each module's own page heading.
   const {
@@ -88,6 +94,7 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
   }, [tasks]);
 
   const iapCount = teamCourses?.length ?? 0;
+  const assetCount = auditorStats?.total_nodes ?? 0;
 
   const menus: (MenuItem | null)[] = [
     {
@@ -123,6 +130,10 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
           icon: () => <Icon src="/asset-dashboard.png" />,
           className: 'fill-blue-600 stroke-blue-600',
           active: activePathname === `/teams/${slug}/asset`,
+          badge:
+            assetCount > 0
+              ? { count: assetCount, variant: 'neutral' }
+              : undefined,
         }
       : null,
     canAccess('rpa', ['read'])
