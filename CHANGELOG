@@ -15,10 +15,11 @@ tags:
 
 The information about Unicis Platform releases and changes is listed in order below.
 
-TODO: change the release date
-## [Fleet Server + Asset Management Module] 2026-**-**
+## [Fleet Server + Asset Management Module] 2026-09-01
 
-*Release date: 2026-06-30*
+*Release date: 2026-09-01*
+
+*Version: v2026-09-01*
 
 - New Features
   - Fleet Server — dedicated backend for device management and osquery orchestration
@@ -40,6 +41,10 @@ TODO: change the release date
 - Fixes
   - Task attachments now correctly accept image files (PNG, JPEG) when the browser does not supply a MIME type — drag-and-drop from external sources no longer silently rejects valid images
   - Both client-side (`taskService.ts`) and server-side (`attachment.ts`) file-type validation fall back to extension check when `file.type` / `file.mimetype` is empty, while still verifying file content via magic-byte signature
+- Security & Dependency Updates
+  - `next-auth` 4.24.13 → 4.24.15 — fixes GHSA-7rqj-j65f-68wh (Critical)
+  - `tar` override ^7.5.3 → ^7.5.19 (resolves to 7.5.22) — fixes GHSA-23hp-3jrh-7fpw (Critical, unlimited-input decompression DoS); `tar` is a build-time transitive dependency only, via `@boxyhq/saml-jackson` → `sqlite3` → `node-gyp`
+  - Known remaining `npm audit` finding: `tar@7.5.11` bundled inside the `npm` package itself. It is not reachable by `overrides` and is never executed by the application at runtime
 ## [Library updates, Compliance hardening and  Bug fixes] 2026-07-08
 
 *Release date: 2026-07-08*

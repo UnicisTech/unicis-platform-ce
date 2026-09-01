@@ -194,7 +194,7 @@ npx prisma migrate deploy
 
 - `npx prisma migrate deploy` applies every migration in `prisma/migrations` that hasn't run yet, in order, without prompting — this is the safe command for both local upgrades and production deployments (`npm run build` also runs it automatically, so a standard `npm run build && npm run start` upgrade already covers it).
 - Check `npx prisma migrate status` first if you want to see which migrations are pending before applying them.
-- A handful of releases ship a one-off data-backfill script alongside the schema migration (see `scripts/migrations/`). Check the [CHANGELOG](CHANGELOG.md) for the release you're upgrading to — if it calls one out, run it once after `prisma migrate deploy`, e.g. `npm run migrate:data`.
+- A handful of releases ship a one-off data-backfill script alongside the schema migration (see `scripts/migrations/`). Check the [CHANGELOG](CHANGELOG) for the release you're upgrading to — if it calls one out, run it once after `prisma migrate deploy`, e.g. `npm run migrate:data`.
 - Only use `npx prisma db push` (as in the initial setup below) for a fresh local database with no migration history to preserve — never run it against a database you want to upgrade in place, since it doesn't create or apply versioned migrations.
 
 ## ✨ Getting Started
@@ -327,7 +327,7 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - [Interactive Awareness Program](https://www.unicis.tech/solutions/compliance/awareness?mtm_campaign=GitHub)
 - [REST API](https://www.unicis.tech/docs/platform/introduction?mtm_campaign=GitHub) — OpenAPI 3.0 spec with Swagger UI at `/api-docs`
 - [Notifications](https://www.unicis.tech/docs/platform/settings/?mtm_campaign=GitHub#notifications) — In-app, email, and web push
-- [Asset Inventory Management](https://www.unicis.tech/) — Fleet Server backend for osquery endpoint management; browse, search, and inspect enrolled devices (Ultimate plan)
+- [Asset Inventory Management](https://www.unicis.tech/solutions/cybersecurity/asset-inventory?mtm_campaign=GitHub) — Fleet Server backend for osquery endpoint management; browse, search, and inspect enrolled devices (Ultimate plan)
 - [MCP Server](src/mcp-server) — connect AI assistants (Claude, Cursor, VS Code Copilot) directly to the platform via the [Model Context Protocol](https://modelcontextprotocol.io/)
 
 ### Coming Next
