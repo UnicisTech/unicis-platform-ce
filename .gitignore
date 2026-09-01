@@ -68,3 +68,9 @@ certificates
 
 # demo GIF recorder raw captures
 /scripts/demo-recording/recordings/
+
+# claude
+.claude
+
+#fleet
+team_enroll_secret.txt

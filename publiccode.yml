@@ -5,8 +5,8 @@ applicationSuite: Unicis
 url: 'https://github.com/UnicisTech/unicis-platform-ce.git'
 landingURL: 'https://platform.unicis.tech'
 
-softwareVersion: 0.2.2
-releaseDate: '2026-07-13'
+softwareVersion: 'v2026-09-01'
+releaseDate: '2026-09-01'
 
 logo: 'public/unicis-platform-logo-hor.svg'
 
@@ -51,6 +51,10 @@ description:
       - Privacy modules: Record of Processing Activities (RPA), Data
         Protection/Transfer Impact Assessments (TIA) and Privacy Impact
         Assessments (PIA)
+      - Asset Inventory Management: a Fleet Server backend for osquery
+        endpoint management, letting teams enrol, browse, search and inspect
+        Windows, Linux and macOS devices, with per-asset status and query
+        result logs (Ultimate plan)
       - Attachments, comments and audit logs on every task
       - Role-based team management (Owner, Admin, Member, Auditor) with SSO
         (SAML/OIDC), directory sync (SCIM) and API keys
@@ -72,6 +76,7 @@ description:
       - Transfer/Data Protection Impact Assessment (TIA)
       - Privacy Impact Assessment (PIA)
       - Statement of Applicability (SoA) export (HTML/PDF/Excel)
+      - Asset Inventory Management via Fleet Server / osquery
       - Role-based team management with SSO (SAML/OIDC) and SCIM
       - REST API with OpenAPI/Swagger documentation
       - MCP server for AI-assistant driven GRC workflows
