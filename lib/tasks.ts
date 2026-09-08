@@ -58,7 +58,9 @@ export const hasTaskModule = (
     return Object.keys(properties).some(
       (key) =>
         (key === 'csc_controls' || key.startsWith('csc_controls_')) &&
-        (Array.isArray(properties[key]) ? (properties[key] as unknown[]).length > 0 : Boolean(properties[key]))
+        (Array.isArray(properties[key])
+          ? (properties[key] as unknown[]).length > 0
+          : Boolean(properties[key]))
     );
   }
 
