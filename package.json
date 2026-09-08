@@ -187,6 +187,8 @@
       "@boxyhq/saml20": "1.15.2"
     },
     "@hono/node-server": "1.19.14",
-    "quill": "2.0.2"
+    "quill": "2.0.2",
+    "@babel/core": "^7.24.0",
+    "@azure/msal-node": "^4.0.0"
   }
 }

@@ -40,7 +40,7 @@ export default function DeleteProcedure({
       setIsDeleting(true);
 
       const res = await fetch(
-        `/api/teams/${slug}/tasks/${task.taskNumber}/pia`,
+        `/api/teams/${slug}/tasks/${task.taskNumber}/rpa`,
         {
           method: 'DELETE',
         }

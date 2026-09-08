@@ -205,7 +205,7 @@ model Attachment {
   filename String
   fileData Bytes
   url      String
-  task     Task   @relation(fields: [taskId], references: [id])
+  task     Task   @relation(fields: [taskId], references: [id], onDelete: Cascade)
 }
 
 model Notification {
