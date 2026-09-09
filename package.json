@@ -189,6 +189,6 @@
     "@hono/node-server": "1.19.14",
     "quill": "2.0.2",
     "@babel/core": "^7.24.0",
-    "@azure/msal-node": "^3.13.0"
+    "@azure/msal-node": "3.8.8"
   }
 }
