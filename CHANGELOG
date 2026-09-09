@@ -22,16 +22,16 @@ The information about Unicis Platform releases and changes is listed in order be
 *Version: v2026-09-09*
 
 - Fixes
-  - OP#528: Fixed RoPA delete using wrong API endpoint (/pia → /rpa)
-  - OP#529: Allow task deletion when attachments exist (cascade delete)
-  - OP#523: Made RPA HTML export mobile responsive with proper CSS media queries
-  - OP#527: Added missing "risk-deleted" translation keys for all languages
-  - OP#530: Fixed CSC badge still showing after all controls deleted
-  - OP#539: Fixed Asset Management link redirecting to correct dashboard URL
+  - Fixed RoPA delete using wrong API endpoint (/pia → /rpa)
+  - Allow task deletion when attachments exist (cascade delete)
+  - Made RPA HTML export mobile responsive with proper CSS media queries
+  - Added missing "risk-deleted" translation keys for all languages
+  - Fixed CSC badge still showing after all controls deleted
+  - Fixed Asset Management link redirecting to correct dashboard URL
   - Sidebar logo now clickable to navigate to team dashboard
 - Security & Dependency Updates
-  - OP#538: Added security patches for @babel/core (^7.24.0) — fixes arbitrary file read vulnerability
-  - OP#538: Added security patches for @azure/msal-node (^4.0.0) — fixes authentication vulnerability
+  - Added security patches for @babel/core (^7.24.0) — fixes arbitrary file read vulnerability
+  - Added security patches for @azure/msal-node (^4.0.0) — fixes authentication vulnerability
 
 ## [Fleet Server + Asset Management Module] 2026-09-01
 
