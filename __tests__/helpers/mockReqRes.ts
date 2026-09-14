@@ -22,6 +22,15 @@ export const createMockRes = () => {
       body = payload;
       return res;
     },
+    end: (payload?: unknown) => {
+      body = payload;
+      return res;
+    },
+    redirect: (statusOrUrl: number | string, url?: string) => {
+      statusCode = typeof statusOrUrl === 'number' ? statusOrUrl : 307;
+      headers.Location = String(url ?? statusOrUrl);
+      return res;
+    },
     _getStatusCode: () => statusCode,
     _getBody: () => body as any,
     _getHeaders: () => headers,

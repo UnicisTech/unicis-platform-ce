@@ -1,11 +1,5 @@
 import type { Team } from '@/generated/client';
-import type {
-  Prisma,
-  TeamMember,
-  User,
-  Comment,
-  CommentReaction,
-} from '@/generated/browser';
+import type { Prisma, TeamMember, User } from '@/generated/browser';
 import type { TaskCscProperties, TeamCscProperties } from './csc';
 import type { TaskTiaProperties } from './tia';
 import type { TaskRpaProperties } from './rpa';
@@ -55,21 +49,68 @@ export type TeamWithMemberCount = Prisma.TeamGetPayload<{
   };
 }>;
 
-export type TaskExtended = Prisma.TaskGetPayload<{
-  include: {
-    comments: {
-      include: {
-        createdBy: true;
-        reactions: {
-          include: {
-            user: true;
+export type TaskComment = Prisma.CommentGetPayload<{
+  select: {
+    id: true;
+    text: true;
+    createdAt: true;
+    updatedAt: true;
+    taskId: true;
+    createdById: true;
+    createdBy: {
+      select: {
+        id: true;
+        name: true;
+      };
+    };
+    reactions: {
+      select: {
+        id: true;
+        emoji: true;
+        commentId: true;
+        userId: true;
+        createdAt: true;
+        user: {
+          select: {
+            id: true;
+            name: true;
           };
         };
       };
     };
-    attachments: true;
   };
 }>;
+
+export type CommentsPage = {
+  items: TaskComment[];
+  totalCount: number;
+  pageInfo: {
+    hasMore: boolean;
+    nextCursor: number | null;
+  };
+};
+
+export type LegacyTaskComment = Omit<TaskComment, 'createdBy'> & {
+  createdBy: TaskComment['createdBy'] & { email: string };
+};
+
+export type TaskDetail = Prisma.TaskGetPayload<{
+  include: {
+    attachments: {
+      select: {
+        filename: true;
+        url: true;
+        taskId: true;
+        id: true;
+      };
+    };
+  };
+}> & {
+  comments?: LegacyTaskComment[];
+};
+
+/** @deprecated Use TaskDetail instead. */
+export type TaskExtended = TaskDetail;
 
 export type Attachment = {
   filename: string;
@@ -165,10 +206,8 @@ export type TaskProperties = TaskTiaProperties &
   TaskRmProperties &
   TaskAuditLogProperties;
 
-export type ExtendedComment = Comment & {
-  createdBy: User;
-  reactions: (CommentReaction & { user: User })[];
-};
+/** @deprecated Use TaskComment instead. */
+export type ExtendedComment = TaskComment;
 
 export type TeamWithSubscription = Prisma.TeamGetPayload<{
   include: {

@@ -1,28 +1,28 @@
 import React, { useState, useCallback } from 'react';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import toast from 'react-hot-toast';
-import type { TaskExtendedDto } from 'types';
 import Comment from './comments/Comment';
 import CreateCommentForm from './comments/CreateCommentForm';
 import { AccessControl } from '@/components/shared/AccessControl';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
+import useComments from 'hooks/useComments';
 
 interface FormData {
   text: string;
 }
 
 export default function Comments({
-  task,
-  mutateTask,
+  slug,
+  taskNumber,
 }: {
-  task: TaskExtendedDto;
-  mutateTask: () => Promise<void>;
+  slug: string;
+  taskNumber: string;
 }) {
   const { t } = useTranslation('common');
-  const router = useRouter();
-  const { slug: slugQuery, taskNumber } = router.query;
-  const slug = Array.isArray(slugQuery) ? slugQuery[0] : slugQuery;
+  const { comments, isLoading, isError, mutateComments } = useComments(
+    slug,
+    taskNumber
+  );
   const [commentToEdit, setCommentToEdit] = useState<number | null>(null);
   const [commentToDelete, setCommentToDelete] = useState<number | null>(null);
   const [confirmationDialogVisible, setConfirmationDialogVisible] =
@@ -74,12 +74,12 @@ export default function Comments({
             keepSubmitCount: false,
           }
         );
-        mutateTask();
+        await mutateComments();
       } catch {
         toast.error(t('errors.unexpectedError'));
       }
     },
-    [slug, taskNumber, mutateTask, t]
+    [slug, taskNumber, mutateComments, t]
   );
 
   const handleUpdateComment = useCallback(
@@ -100,13 +100,13 @@ export default function Comments({
           return;
         }
 
-        mutateTask();
+        await mutateComments();
         setCommentToEdit(null);
       } catch {
         toast.error(t('errors.unexpectedError'));
       }
     },
-    [slug, taskNumber, mutateTask, t]
+    [slug, taskNumber, mutateComments, t]
   );
 
   const handleReact = useCallback(
@@ -127,12 +127,12 @@ export default function Comments({
           return;
         }
 
-        mutateTask();
+        await mutateComments();
       } catch {
         toast.error(t('errors.unexpectedError'));
       }
     },
-    [slug, taskNumber, mutateTask, t]
+    [slug, taskNumber, mutateComments, t]
   );
 
   const handleDeleteComment = useCallback(
@@ -155,19 +155,35 @@ export default function Comments({
           return;
         }
 
-        mutateTask();
+        await mutateComments();
       } catch {
         toast.error(t('errors.unexpectedError'));
       }
     },
-    [slug, taskNumber, mutateTask, t]
+    [slug, taskNumber, mutateComments, t]
   );
+
+  if (isLoading) {
+    return (
+      <p className="py-2 text-sm text-slate-500 dark:text-slate-400">
+        {t('loading')}...
+      </p>
+    );
+  }
+
+  if (isError) {
+    return (
+      <p className="py-2 text-sm text-red-600 dark:text-red-400">
+        {isError.message || t('errors.requestFailed')}
+      </p>
+    );
+  }
 
   return (
     <div>
-      {task.comments.length > 0 && (
+      {comments.length > 0 && (
         <div className="mb-4 divide-y divide-slate-100 dark:divide-slate-700/60">
-          {task.comments
+          {[...comments]
             .sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt))
             .map((comment) => (
               <Comment
@@ -186,7 +202,7 @@ export default function Comments({
       <AccessControl resource="task" actions={['update']} slug={slug}>
         <div
           className={
-            task.comments.length > 0
+            comments.length > 0
               ? 'pt-1 border-t border-slate-100 dark:border-slate-700/60'
               : ''
           }

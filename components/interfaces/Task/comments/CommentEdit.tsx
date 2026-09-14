@@ -1,11 +1,11 @@
 import { useState, useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
-import type { ExtendedCommentDto } from 'types';
+import type { TaskCommentDto } from 'types';
 import QuillEditor from '@/components/shared/QuillEditor';
 import { Button } from '@/components/shadcn/ui/button';
 
 interface CommentEditProps {
-  comment: ExtendedCommentDto;
+  comment: TaskCommentDto;
   cancelHandler: () => void;
   updateHandler: (text: string, id: number) => Promise<void>;
 }

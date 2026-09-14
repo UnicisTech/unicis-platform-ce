@@ -225,6 +225,8 @@ components:
           description: Flexible JSON properties (controls, risk, assessments, etc.)
         comments:
           type: array
+          deprecated: true
+          description: Legacy embedded comments. Use the dedicated task comments endpoint instead.
           items:
             $ref: '#/components/schemas/Comment'
         attachments:
@@ -264,6 +266,77 @@ components:
               nullable: true
             email:
               type: string
+
+    TaskComment:
+      type: object
+      properties:
+        id:
+          type: integer
+        text:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        taskId:
+          type: integer
+        createdById:
+          type: string
+        createdBy:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+        reactions:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              emoji:
+                type: string
+              commentId:
+                type: integer
+              userId:
+                type: string
+              createdAt:
+                type: string
+                format: date-time
+              user:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+
+    CommentsPageResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/TaskComment'
+            totalCount:
+              type: integer
+            pageInfo:
+              type: object
+              properties:
+                hasMore:
+                  type: boolean
+                nextCursor:
+                  type: integer
+                  nullable: true
+        error:
+          nullable: true
 
     Attachment:
       type: object
@@ -578,7 +651,15 @@ paths:
       operationId: getTask
       tags: [Tasks]
       summary: Get a single task
-      description: Returns a task by its number within the team. Requires `task:read` permission.
+      description: Returns a task by its number within the team. Requires `task:read` permission. Embedded comments are kept for backwards compatibility and can be omitted.
+      parameters:
+        - name: includeComments
+          in: query
+          required: false
+          description: Set to false when comments are loaded through the dedicated comments endpoint.
+          schema:
+            type: boolean
+            default: true
       responses:
         '200':
           description: Task details
@@ -652,6 +733,164 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+
+  /api/teams/{slug}/tasks/{taskNumber}/comments:
+    parameters:
+      - $ref: '#/components/parameters/slug'
+      - $ref: '#/components/parameters/taskNumber'
+
+    get:
+      operationId: listTaskComments
+      tags: [Tasks]
+      summary: List comments on a task
+      description: Returns comments in chronological order. Without a limit, all comments are returned for the transitional frontend. Cursor pagination retrieves older comments.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: cursor
+          in: query
+          required: false
+          description: Exclusive upper comment ID returned as nextCursor by the previous page. Requires limit.
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Comment page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentsPageResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    post:
+      operationId: createTaskComment
+      tags: [Tasks]
+      summary: Add a comment to a task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [text]
+              properties:
+                text:
+                  type: string
+      responses:
+        '200':
+          description: Comment created
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    put:
+      operationId: updateTaskComment
+      tags: [Tasks]
+      summary: Update a comment scoped to the task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id, text]
+              properties:
+                id:
+                  type: integer
+                text:
+                  type: string
+      responses:
+        '200':
+          description: Comment updated
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      operationId: deleteTaskComment
+      tags: [Tasks]
+      summary: Delete a comment scoped to the task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id]
+              properties:
+                id:
+                  type: integer
+      responses:
+        '200':
+          description: Comment deleted
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/teams/{slug}/members/{userId}/avatar:
+    parameters:
+      - $ref: '#/components/parameters/slug'
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+
+    get:
+      operationId: getTeamMemberAvatar
+      tags: [Teams]
+      summary: Get a team member avatar
+      description: Returns a cached binary avatar after verifying that both users belong to the team.
+      responses:
+        '200':
+          description: Binary avatar
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+        '304':
+          description: Avatar has not changed
+        '307':
+          description: Redirect to an existing HTTPS avatar URL
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          description: Stored avatar data is invalid
 
   # ─── CSC Controls on Tasks ────────────────────────────────
   /api/teams/{slug}/tasks/{taskNumber}/csc:

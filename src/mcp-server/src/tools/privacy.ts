@@ -33,7 +33,9 @@ Returns: RoPA procedure data (multi-step object) or indication it is not set.`,
       },
     },
     async ({ slug, taskNumber }) => {
-      const task = await apiGet<Task>(`/api/teams/${slug}/tasks/${taskNumber}`);
+      const task = await apiGet<Task>(
+        `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
+      );
       const rpa = task.properties?.rpa_procedure;
       if (!rpa) {
         return {
@@ -99,7 +101,9 @@ Returns: Confirmation.`,
       },
     },
     async ({ slug, taskNumber, procedure }) => {
-      const task = await apiGet<Task>(`/api/teams/${slug}/tasks/${taskNumber}`);
+      const task = await apiGet<Task>(
+        `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
+      );
       const prevProcedure = task.properties?.rpa_procedure ?? [];
       await apiPost(`/api/teams/${slug}/tasks/${taskNumber}/rpa`, {
         prevProcedure,
@@ -174,7 +178,9 @@ Returns: TIA procedure data or indication it is not set.`,
       },
     },
     async ({ slug, taskNumber }) => {
-      const task = await apiGet<Task>(`/api/teams/${slug}/tasks/${taskNumber}`);
+      const task = await apiGet<Task>(
+        `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
+      );
       const tia = task.properties?.tia_procedure;
       if (!tia) {
         return {
@@ -236,7 +242,9 @@ Returns: Confirmation.`,
       },
     },
     async ({ slug, taskNumber, procedure }) => {
-      const task = await apiGet<Task>(`/api/teams/${slug}/tasks/${taskNumber}`);
+      const task = await apiGet<Task>(
+        `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
+      );
       const prevProcedure = task.properties?.tia_procedure ?? [];
       await apiPost(`/api/teams/${slug}/tasks/${taskNumber}/tia`, {
         prevProcedure,
@@ -311,7 +319,9 @@ Returns: PIA procedure data or indication it is not set.`,
       },
     },
     async ({ slug, taskNumber }) => {
-      const task = await apiGet<Task>(`/api/teams/${slug}/tasks/${taskNumber}`);
+      const task = await apiGet<Task>(
+        `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
+      );
       const pia = task.properties?.pia_risk;
       if (!pia) {
         return {
@@ -471,7 +481,9 @@ Returns: Confirmation.`,
       },
     },
     async ({ slug, taskNumber, step0, step1, step2, step3, step4 }) => {
-      const task = await apiGet<Task>(`/api/teams/${slug}/tasks/${taskNumber}`);
+      const task = await apiGet<Task>(
+        `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
+      );
       const prevRisk = task.properties?.pia_risk ?? [];
       const nextRisk = [step0, step1, step2, step3, step4 ?? null];
       await apiPost(`/api/teams/${slug}/tasks/${taskNumber}/pia`, {

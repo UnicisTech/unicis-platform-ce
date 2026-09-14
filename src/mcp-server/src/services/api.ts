@@ -20,7 +20,6 @@ export interface Task {
   properties: Record<string, unknown>;
   recurrenceScheduleId: string | null;
   recurrenceOccurrenceDate: string | null;
-  comments?: Comment[];
   attachments?: Attachment[];
 }
 
@@ -32,7 +31,24 @@ export interface Comment {
   updatedAt: string;
   taskId: number;
   createdById: string;
-  createdBy?: { name: string | null; email: string };
+  createdBy: { id: string; name: string | null };
+  reactions?: Array<{
+    id: number;
+    emoji: string;
+    commentId: number;
+    userId: string;
+    createdAt: string;
+    user: { id: string; name: string | null };
+  }>;
+}
+
+export interface CommentsPage {
+  items: Comment[];
+  totalCount: number;
+  pageInfo: {
+    hasMore: boolean;
+    nextCursor: number | null;
+  };
 }
 
 export interface Attachment {

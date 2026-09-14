@@ -206,8 +206,11 @@ export const getTasks = async (userId: string) => {
 
 export const getTaskBySlugAndNumber = async (
   taskNumber: number,
-  slug: string
+  slug: string,
+  options: { includeComments?: boolean } = {}
 ) => {
+  const { includeComments = true } = options;
+
   const task = await prisma.task.findFirst({
     where: {
       taskNumber: taskNumber,
@@ -216,28 +219,42 @@ export const getTaskBySlugAndNumber = async (
       },
     },
     include: {
-      comments: {
-        include: {
-          createdBy: {
-            select: {
-              id: true,
-              name: true,
-              email: true,
-              image: true,
-            },
-          },
-          reactions: {
-            include: {
-              user: {
-                select: {
-                  id: true,
-                  name: true,
+      ...(includeComments
+        ? {
+            comments: {
+              select: {
+                id: true,
+                text: true,
+                createdAt: true,
+                updatedAt: true,
+                taskId: true,
+                createdById: true,
+                createdBy: {
+                  select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                  },
+                },
+                reactions: {
+                  select: {
+                    id: true,
+                    emoji: true,
+                    commentId: true,
+                    userId: true,
+                    createdAt: true,
+                    user: {
+                      select: {
+                        id: true,
+                        name: true,
+                      },
+                    },
+                  },
                 },
               },
             },
-          },
-        },
-      },
+          }
+        : {}),
       attachments: {
         select: {
           filename: true,

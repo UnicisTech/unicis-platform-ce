@@ -14,8 +14,11 @@ import type {
   User as PrismaUser,
 } from '@/generated/browser';
 import type {
+  CommentsPage,
   ExtendedComment,
   SubscriptionWithPayments,
+  TaskComment,
+  TaskDetail,
   TaskExtended,
   TeamMemberWithUser,
   TeamWithMemberCount,
@@ -33,7 +36,12 @@ export type Serialized<T> = T extends Date
 // Client-facing DTOs (JSON-serialized)
 export type Task = Serialized<PrismaTask>;
 export type TaskRecurrence = Serialized<PrismaTaskRecurrence>;
+export type TaskDetailDto = Serialized<TaskDetail>;
+export type TaskCommentDto = Serialized<TaskComment>;
+export type CommentsPageDto = Serialized<CommentsPage>;
+/** @deprecated Use TaskDetailDto instead. */
 export type TaskExtendedDto = Serialized<TaskExtended>;
+/** @deprecated Use TaskCommentDto instead. */
 export type ExtendedCommentDto = Serialized<ExtendedComment>;
 export type Team = Serialized<PrismaTeam>;
 export type User = Serialized<PrismaUser>;

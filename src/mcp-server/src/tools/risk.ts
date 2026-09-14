@@ -34,7 +34,9 @@ Returns: Risk assessment data or indication it is not set.`,
       },
     },
     async ({ slug, taskNumber }) => {
-      const task = await apiGet<Task>(`/api/teams/${slug}/tasks/${taskNumber}`);
+      const task = await apiGet<Task>(
+        `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
+      );
       const risk = task.properties?.rm_risk as RmRisk[] | undefined;
       if (!risk?.length) {
         return {
@@ -144,7 +146,9 @@ Returns: Confirmation.`,
       },
     },
     async ({ slug, taskNumber, risk, treatment }) => {
-      const task = await apiGet<Task>(`/api/teams/${slug}/tasks/${taskNumber}`);
+      const task = await apiGet<Task>(
+        `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
+      );
       const prevRisk = (task.properties?.rm_risk as RmRisk[]) ?? [];
       const nextRisk = [risk, treatment];
       await apiPost(`/api/teams/${slug}/tasks/${taskNumber}/rm`, {

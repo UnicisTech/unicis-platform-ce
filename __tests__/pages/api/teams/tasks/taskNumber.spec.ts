@@ -72,6 +72,30 @@ describe('GET /api/teams/[slug]/tasks/[taskNumber]', () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(res._getBody().data).toEqual(baseTask);
+    expect(getTaskBySlugAndNumber).toHaveBeenCalledWith(5, 'test-team', {
+      includeComments: true,
+    });
+  });
+
+  it('can omit comments for clients that load them separately', async () => {
+    (getTaskBySlugAndNumber as jest.Mock).mockResolvedValue(baseTask);
+
+    const req = createMockReq({
+      method: 'GET',
+      query: {
+        slug: 'test-team',
+        taskNumber: '5',
+        includeComments: 'false',
+      },
+    });
+    const res = createMockRes();
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(200);
+    expect(getTaskBySlugAndNumber).toHaveBeenCalledWith(5, 'test-team', {
+      includeComments: false,
+    });
   });
 
   it('returns 404 when task does not exist', async () => {

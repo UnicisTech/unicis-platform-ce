@@ -57,7 +57,12 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const task = await getTaskBySlugAndNumber(taskNumberAsNumber, slug as string);
+  const includeComments = req.query.includeComments !== 'false';
+  const task = await getTaskBySlugAndNumber(
+    taskNumberAsNumber,
+    slug as string,
+    { includeComments }
+  );
 
   if (!task) {
     return res.status(404).json({
@@ -88,7 +93,8 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const prevTask = await getTaskBySlugAndNumber(
     taskNumberAsNumber,
-    slug as string
+    slug as string,
+    { includeComments: false }
   );
 
   if (!prevTask) {

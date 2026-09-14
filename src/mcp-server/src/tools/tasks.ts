@@ -7,6 +7,7 @@ import {
   apiDelete,
   apiPostMultipart,
   Task,
+  CommentsPage,
   CreateTaskInput,
   UpdateTaskInput,
   stripHtml,
@@ -123,12 +124,17 @@ Returns: Full task object including all properties.`,
       },
     },
     async ({ slug, taskNumber }) => {
-      const task = await apiGet<Task>(`/api/teams/${slug}/tasks/${taskNumber}`);
+      const [task, commentsPage] = await Promise.all([
+        apiGet<Task>(
+          `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
+        ),
+        apiGet<CommentsPage>(`/api/teams/${slug}/tasks/${taskNumber}/comments`),
+      ]);
       const controls = extractControls(task);
       const risk = task.properties?.rm_risk as
         | Record<string, unknown>[]
         | undefined;
-      const comments = task.comments || [];
+      const comments = commentsPage.items;
       const attachments = task.attachments || [];
 
       const lines = [
@@ -165,7 +171,7 @@ Returns: Full task object including all properties.`,
 
       return {
         content: [{ type: 'text', text: lines }],
-        structuredContent: task,
+        structuredContent: { ...task, comments },
       };
     }
   );
@@ -495,7 +501,9 @@ Returns: Array of attachment objects with id, filename, url.`,
       },
     },
     async ({ slug, taskNumber }) => {
-      const task = await apiGet<Task>(`/api/teams/${slug}/tasks/${taskNumber}`);
+      const task = await apiGet<Task>(
+        `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
+      );
       const attachments = task.attachments || [];
       if (!attachments.length) {
         return {
@@ -555,7 +563,9 @@ Returns: Confirmation with the uploaded file URL.`,
     },
     async ({ slug, taskNumber, filename, content, mimeType }) => {
       // Fetch the task to get its internal database id
-      const task = await apiGet<Task>(`/api/teams/${slug}/tasks/${taskNumber}`);
+      const task = await apiGet<Task>(
+        `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
+      );
 
       // Decode base64 and build FormData
       const buffer = Buffer.from(content, 'base64');

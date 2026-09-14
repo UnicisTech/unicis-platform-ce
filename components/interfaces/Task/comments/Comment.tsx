@@ -3,13 +3,13 @@ import { useTranslation } from 'next-i18next';
 import CommentEdit from './CommentEdit';
 import CommentView from './CommentView';
 import CommentHeader from './CommentHeader';
-import type { ExtendedCommentDto } from 'types';
+import type { TaskCommentDto } from 'types';
 import CommentAvatar from './CommentAvatar';
 import { AccessControl } from '@/components/shared/AccessControl';
 
 interface CommentProps {
-  slug?: string;
-  comment: ExtendedCommentDto;
+  slug: string;
+  comment: TaskCommentDto;
   commentToEdit: number | null;
   setCommentToEdit: React.Dispatch<React.SetStateAction<number | null>>;
   updateComment: (text: string, id: number) => Promise<void>;
@@ -46,7 +46,8 @@ const Comment = ({
       {/* Avatar */}
       <div className="flex-shrink-0 pt-0.5">
         <CommentAvatar
-          image={comment.createdBy.image}
+          slug={slug}
+          userId={comment.createdBy.id}
           username={comment.createdBy.name}
         />
       </div>

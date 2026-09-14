@@ -315,7 +315,7 @@ const TaskById = () => {
         >
           <Panel title={t('comments')}>
             <div className="p-4">
-              <Comments task={task} mutateTask={mutateTask} />
+              <Comments slug={slug} taskNumber={taskNumber} />
             </div>
           </Panel>
         </div>

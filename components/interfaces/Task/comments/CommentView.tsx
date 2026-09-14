@@ -1,10 +1,10 @@
 import React from 'react';
-import type { ExtendedCommentDto } from 'types';
+import type { TaskCommentDto } from 'types';
 import QuillEditor from '@/components/shared/QuillEditor';
 import CommentReactions from './CommentReactions';
 
 interface CommentViewProps {
-  comment: ExtendedCommentDto;
+  comment: TaskCommentDto;
   onReact: (commentId: number, emoji: string) => Promise<void>;
 }
 

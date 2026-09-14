@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import type { ExtendedCommentDto } from 'types';
+import type { TaskCommentDto } from 'types';
 
 const REACTION_EMOJIS = [
   { emoji: '\u{1F44D}', label: 'Thumbs up' },
@@ -12,7 +12,7 @@ const REACTION_EMOJIS = [
 ];
 
 interface CommentReactionsProps {
-  comment: ExtendedCommentDto;
+  comment: TaskCommentDto;
   onReact: (commentId: number, emoji: string) => Promise<void>;
 }
 
