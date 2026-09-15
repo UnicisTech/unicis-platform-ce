@@ -76,11 +76,7 @@ const Tasks = ({ team }: { team: Team }) => {
     const moduleMatch =
       !selectedModules.length ||
       selectedModules.some(
-        (mod) =>
-          isTaskModuleKey(mod) &&
-          typeof task.properties === 'object' &&
-          task.properties &&
-          hasTaskModule(task.properties as Record<string, unknown>, mod)
+        (mod) => isTaskModuleKey(mod) && hasTaskModule(task.properties, mod)
       );
     return statusMatch && priorityMatch && moduleMatch;
   });

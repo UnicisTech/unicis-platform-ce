@@ -18,13 +18,9 @@ import {
   calculateRiskRating,
   calculateCurrentRiskRating,
 } from '@/lib/rm/helpers';
-import type {
-  ISO,
-  Task,
-  Team,
-  TaskProperties,
-  RMProcedureInterface,
-} from 'types';
+import type { ISO, Task, Team } from 'types';
+import { getRmRisk, getTiaProcedure, hasRpaProcedure } from '@/lib/properties';
+import { isTranferPermitted } from '@/lib/tia/helpers';
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 type DashboardTab = 0 | 1 | 2 | 3;
@@ -167,15 +163,12 @@ function DataProtectionCard({
     let rpa = 0;
 
     for (const task of tasks) {
-      const props = task.properties as TaskProperties | null;
-      if (Array.isArray(props?.tia_procedure)) {
+      const procedure = getTiaProcedure(task.properties);
+      if (procedure) {
         tia++;
-        // Not permitted if any step has TransferMechanism !== 'yes' and no explicit override
-        const proc = props!.tia_procedure as any[];
-        const isAuthorized = proc.some((p) => p.TransferMechanism === 'yes');
-        if (!isAuthorized) atRisk++;
+        if (!isTranferPermitted(procedure)) atRisk++;
       }
-      if (Array.isArray(props?.rpa_procedure)) rpa++;
+      if (hasRpaProcedure(task.properties)) rpa++;
     }
 
     return { tiaTotal: tia, tiaAtRisk: atRisk, rpaTotal: rpa };
@@ -354,8 +347,7 @@ function RiskCard({
     let tot = 0;
 
     for (const task of tasks) {
-      const props = task.properties as TaskProperties | null;
-      const risk = props?.rm_risk as RMProcedureInterface | undefined;
+      const risk = getRmRisk(task.properties);
       if (!risk) continue;
       tot++;
 

@@ -1,16 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
-import type { Task, AuditLog } from 'types';
+import type { Task } from 'types';
 import {
   AuditTimeline,
   type TimelineLog,
 } from '@/components/interfaces/Task/AuditTimeline';
+import { getPiaAuditLogs } from '@/lib/properties';
 
 const PiaAuditLogs = ({ task }: { task: Task }) => {
   const { t } = useTranslation('common');
 
-  const taskProperties = task?.properties as any;
-  const auditLogs = (taskProperties?.pia_audit_logs || []) as AuditLog[];
+  const auditLogs = getPiaAuditLogs(task.properties);
 
   const logs: TimelineLog[] = auditLogs.map((log) => ({
     date: log.date,

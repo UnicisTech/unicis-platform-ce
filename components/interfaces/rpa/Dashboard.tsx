@@ -6,7 +6,7 @@ import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
 import useTeamTasks from 'hooks/useTeamTasks';
 import useCanAccess from 'hooks/useCanAccess';
 import useTeam from 'hooks/useTeam';
-import type { TaskWithRpaProcedure, TaskProperties } from 'types';
+import type { TaskWithRpaProcedure } from 'types';
 import {
   RpaTable,
   DeleteProcedure,
@@ -38,6 +38,7 @@ import {
   downloadRpaTemplateCsv,
   downloadRpaTemplateOds,
 } from '@/lib/rpa/import';
+import { taskHasRpaProcedure } from '@/lib/properties';
 
 const Dashboard = () => {
   const { t } = useTranslation('common');
@@ -78,10 +79,7 @@ const Dashboard = () => {
       return [];
     }
 
-    return tasks.filter((task): task is TaskWithRpaProcedure => {
-      const taskProperties = task.properties as TaskProperties;
-      return Boolean(taskProperties.rpa_procedure);
-    });
+    return tasks.filter(taskHasRpaProcedure);
   }, [tasks]);
 
   const handleExport = async (

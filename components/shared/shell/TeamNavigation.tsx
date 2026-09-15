@@ -17,6 +17,13 @@ import NavigationItems from './NavigationItems';
 import type { NavigationProps, MenuItem } from './NavigationItems';
 import Icon from '../Icon';
 import { useAssetModuleAccess } from '@/hooks/fleets/useAssetModuleAccess';
+import {
+  hasCscControls,
+  hasPiaRisk,
+  hasRmRisk,
+  hasRpaProcedure,
+  hasTiaProcedure,
+} from '@/lib/properties';
 
 interface NavigationItemsProps extends NavigationProps {
   slug: string;
@@ -63,25 +70,14 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
     let tia = 0;
     let pia = 0;
     for (const task of tasks) {
-      const props = task.properties as Record<string, unknown> | null;
       const isDone = task.status === 'done';
       if (!isDone && task.duedate && new Date(task.duedate as string) < now)
         overdue++;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if (
-        !isDone &&
-        Array.isArray((props as any)?.csc_controls) &&
-        (props as any).csc_controls.length > 0
-      )
-        csc++;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if (!isDone && (props as any)?.rm_risk) rm++;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if ((props as any)?.rpa_procedure) rpa++;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if ((props as any)?.tia_procedure) tia++;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if ((props as any)?.pia_risk) pia++;
+      if (!isDone && hasCscControls(task.properties)) csc++;
+      if (!isDone && hasRmRisk(task.properties)) rm++;
+      if (hasRpaProcedure(task.properties)) rpa++;
+      if (hasTiaProcedure(task.properties)) tia++;
+      if (hasPiaRisk(task.properties)) pia++;
     }
     return {
       overdueCount: overdue,

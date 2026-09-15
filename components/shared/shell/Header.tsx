@@ -18,6 +18,12 @@ import { useGetPackId } from '@/hooks/fleets/packs/useGetPackId';
 import { useGetQueryId } from '@/hooks/fleets/queries/useGetQueryId';
 import { useGetTagId } from '@/hooks/fleets/Tags/useGetTagId';
 import type { ISO } from 'types';
+import {
+  hasPiaRisk,
+  hasRmRisk,
+  hasRpaProcedure,
+  hasTiaProcedure,
+} from '@/lib/properties';
 
 // ── Route → display title + record count ─────────────────────────────────────
 interface ModuleTitle {
@@ -58,12 +64,10 @@ function useModuleTitle(): ModuleTitle {
     let pia = 0;
     let rm = 0;
     for (const task of tasks) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const props = task.properties as any;
-      if (props?.rpa_procedure) rpa++;
-      if (props?.tia_procedure) tia++;
-      if (props?.pia_risk) pia++;
-      if (props?.rm_risk) rm++;
+      if (hasRpaProcedure(task.properties)) rpa++;
+      if (hasTiaProcedure(task.properties)) tia++;
+      if (hasPiaRisk(task.properties)) pia++;
+      if (hasRmRisk(task.properties)) rm++;
     }
     return { rpaCount: rpa, tiaCount: tia, piaCount: pia, rmCount: rm };
   }, [tasks]);

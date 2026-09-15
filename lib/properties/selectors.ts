@@ -1,5 +1,4 @@
 import { getCscControlsProp, getCscStatusesProp } from '@/lib/csc';
-import type { TaskModuleKey } from '@/lib/tasks';
 import { ISO_VALUES } from 'types/csc';
 import type {
   AuditLog,
@@ -11,8 +10,14 @@ import type {
   RpaAuditLog,
   RpaProcedureInterface,
   StoredTiaProcedureInterface,
+  Task,
+  TaskWithPiaRisk,
+  TaskWithRmRisk,
+  TaskWithRpaProcedure,
+  TaskWithTiaProcedure,
   TiaAuditLog,
 } from 'types';
+import type { TaskModuleKey } from './module-keys';
 import { parseTaskProperties } from './task-properties';
 import { parseTeamProperties } from './team-properties';
 
@@ -70,6 +75,24 @@ export const getAllCscControls = (value: unknown): string[] =>
 export const hasCscControls = (value: unknown) =>
   getAllCscControls(value).length > 0;
 
+export const hasTaskModule = (
+  value: unknown,
+  moduleKey: TaskModuleKey
+): boolean => {
+  switch (moduleKey) {
+    case 'rpa_procedure':
+      return hasRpaProcedure(value);
+    case 'tia_procedure':
+      return hasTiaProcedure(value);
+    case 'pia_risk':
+      return hasPiaRisk(value);
+    case 'rm_risk':
+      return hasRmRisk(value);
+    case 'csc_controls':
+      return hasCscControls(value);
+  }
+};
+
 export const getTaskModules = (value: unknown): TaskModuleKey[] => {
   const properties = parseTaskProperties(value).properties;
   const modules: TaskModuleKey[] = [];
@@ -84,6 +107,18 @@ export const getTaskModules = (value: unknown): TaskModuleKey[] => {
 
   return modules;
 };
+
+export const taskHasRpaProcedure = (task: Task): task is TaskWithRpaProcedure =>
+  hasRpaProcedure(task.properties);
+
+export const taskHasTiaProcedure = (task: Task): task is TaskWithTiaProcedure =>
+  hasTiaProcedure(task.properties);
+
+export const taskHasPiaRisk = (task: Task): task is TaskWithPiaRisk =>
+  hasPiaRisk(task.properties);
+
+export const taskHasRmRisk = (task: Task): task is TaskWithRmRisk =>
+  hasRmRisk(task.properties);
 
 export const getTaskAuditLogs = (value: unknown): AuditLog[] =>
   parseTaskProperties(value).properties.task_audit_logs ?? [];

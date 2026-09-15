@@ -9,6 +9,7 @@ import {
   getTeamCscIso,
   getTeamCscStatuses,
   hasCscControls,
+  hasTaskModule,
   hasPiaRisk,
   hasRmRisk,
   hasRpaProcedure,
@@ -310,6 +311,7 @@ describe('task properties selectors', () => {
         rm_risk: [],
       })
     ).toEqual([]);
+    expect(hasTaskModule({ rpa_procedure: [] }, 'rpa_procedure')).toBe(false);
   });
 
   it('returns empty audit collections for missing or malformed values', () => {
@@ -335,6 +337,7 @@ describe('task properties selectors', () => {
       'legacy-1',
     ]);
     expect(hasCscControls(properties)).toBe(true);
+    expect(hasTaskModule(properties, 'csc_controls')).toBe(true);
     expect(getTaskModules(properties)).toEqual(['csc_controls']);
   });
 

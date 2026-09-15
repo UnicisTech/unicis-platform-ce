@@ -36,6 +36,7 @@ import { PiaStep } from './steps/PiaStep';
 import { StageTracker } from '@/components/shared/atlaskit';
 import { steps } from '@/lib/rpa';
 import { defaultProcedure } from '@/lib/tia/helpers';
+import { hasTiaProcedure } from '@/lib/properties';
 
 const createProceduresQueue = (procedure: any): ProcedureQueueItem[] => {
   const result: ProcedureQueueItem[] = [];
@@ -205,7 +206,7 @@ export default function RpaProcedureDialog({
                   control={taskForm.control}
                   name="task"
                   tasks={tasks.filter(
-                    (task) => !(task.properties as any)?.tia_procedure
+                    (task) => !hasTiaProcedure(task.properties)
                   )}
                 />
               </form>

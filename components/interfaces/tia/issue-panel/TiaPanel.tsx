@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { steps, questions } from '@/lib/tia';
 import { Field } from '@/components/shared/atlaskit';
 import type { Task } from 'types';
-import { TiaProcedureInterface } from 'types';
+import { StoredTiaProcedureInterface, TiaProcedureInterface } from 'types';
 import RiskLevel from '../RiskLevel';
 import DaisyBadge from '@/components/shared/daisyUI/DaisyBadge';
 import {
@@ -11,6 +11,7 @@ import {
   isTranferPermitted,
   getTiaRisks,
 } from '@/lib/tia/helpers';
+import { getTiaProcedure } from '@/lib/properties';
 
 const TransferScenarioTab: React.FC<{ step: TiaProcedureInterface[0] }> = ({
   step,
@@ -233,30 +234,51 @@ const ConclusionTab: React.FC<{ permitted: boolean }> = ({ permitted }) => {
   );
 };
 
-const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({
+const TiaPanel: React.FC<{ procedure: StoredTiaProcedureInterface }> = ({
   procedure,
 }) => {
   const { t } = useTranslation('common');
   const [selectedTab, setSelectedTab] = useState(0);
+  const detailedProcedure = procedure.length === 4 ? procedure : undefined;
 
   const { targetedRisk, nonTargetedRisk, selfReportingRisk } = useMemo(() => {
-    return getTiaRisks(procedure?.[2]);
-  }, [procedure]);
+    return getTiaRisks(detailedProcedure?.[2]);
+  }, [detailedProcedure]);
 
   const isPermitted = useMemo(() => isTranferPermitted(procedure), [procedure]);
 
   const tabs = [
-    <TransferScenarioTab key={0} step={procedure[0]} />,
-    <ProblematicLawfulAccessTab key={1} step={procedure[1]} />,
-    <RiskTab
-      key={2}
-      step={procedure[2]}
-      targetedRisk={targetedRisk}
-      nonTargetedRisk={nonTargetedRisk}
-      selfReportingRisk={selfReportingRisk}
-    />,
-    <ProbabilityTab key={3} step={procedure[3]} />,
-    <ConclusionTab key={4} permitted={isPermitted} />,
+    {
+      label: steps[0],
+      content: <TransferScenarioTab step={procedure[0]} />,
+    },
+    {
+      label: steps[1],
+      content: <ProblematicLawfulAccessTab step={procedure[1]} />,
+    },
+    ...(detailedProcedure
+      ? [
+          {
+            label: steps[2],
+            content: (
+              <RiskTab
+                step={detailedProcedure[2]}
+                targetedRisk={targetedRisk}
+                nonTargetedRisk={nonTargetedRisk}
+                selfReportingRisk={selfReportingRisk}
+              />
+            ),
+          },
+          {
+            label: steps[3],
+            content: <ProbabilityTab step={detailedProcedure[3]} />,
+          },
+        ]
+      : []),
+    {
+      label: steps[4],
+      content: <ConclusionTab permitted={isPermitted} />,
+    },
   ];
 
   return (
@@ -265,7 +287,7 @@ const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({
       {procedure ? (
         <>
           <div role="tablist" className="tabs tabs-bordered">
-            {steps.map((step, idx) => (
+            {tabs.map((tab, idx) => (
               <button
                 key={idx}
                 id={`tia-tab-${idx}`}
@@ -275,7 +297,7 @@ const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({
                 className={`tab ${selectedTab === idx ? 'tab-active' : ''}`}
                 onClick={() => setSelectedTab(idx)}
               >
-                {t(`tia:steps.${step}`)}
+                {t(`tia:steps.${tab.label}`)}
               </button>
             ))}
           </div>
@@ -285,7 +307,7 @@ const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({
             aria-labelledby={`tia-tab-${selectedTab}`}
             className="mt-4"
           >
-            {tabs[selectedTab]}
+            {tabs[selectedTab]?.content}
           </div>
         </>
       ) : (
@@ -299,10 +321,9 @@ const TiaPanel: React.FC<{ procedure: TiaProcedureInterface }> = ({
 
 const TiaPanelContainer: React.FC<{ task: Task }> = ({ task }) => {
   const { t } = useTranslation('common');
-  const properties = (task.properties as any) ?? {};
-  const raw = properties.tia_procedure as unknown;
+  const procedure = getTiaProcedure(task.properties);
 
-  if (!raw) {
+  if (!procedure) {
     return (
       <div className="p-5">
         <h2 className="text-1xl font-bold mb-4">{t('view-tia')}</h2>
@@ -313,7 +334,7 @@ const TiaPanelContainer: React.FC<{ task: Task }> = ({ task }) => {
     );
   }
 
-  return <TiaPanel procedure={raw as TiaProcedureInterface} />;
+  return <TiaPanel procedure={procedure} />;
 };
 
 export default TiaPanelContainer;

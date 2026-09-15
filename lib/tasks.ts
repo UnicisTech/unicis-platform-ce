@@ -38,37 +38,13 @@ export type TaskPriority = (typeof taskPriorities)[number];
 export const isTaskPriority = (value: string): value is TaskPriority =>
   taskPriorities.includes(value as TaskPriority);
 
-export const taskModuleKeys = [
-  'rpa_procedure',
-  'tia_procedure',
-  'pia_risk',
-  'rm_risk',
-  'csc_controls',
-] as const;
-
-export type TaskModuleKey = (typeof taskModuleKeys)[number];
-export const isTaskModuleKey = (value: string): value is TaskModuleKey =>
-  taskModuleKeys.includes(value as TaskModuleKey);
-
-export const hasTaskModule = (
-  properties: Record<string, unknown>,
-  moduleKey: TaskModuleKey
-) => {
-  if (moduleKey === 'csc_controls') {
-    return Object.keys(properties).some(
-      (key) =>
-        (key === 'csc_controls' || key.startsWith('csc_controls_')) &&
-        (Array.isArray(properties[key])
-          ? (properties[key] as unknown[]).length > 0
-          : Boolean(properties[key]))
-    );
-  }
-
-  return Boolean(properties[moduleKey]);
-};
-
-export const getTaskModules = (properties: Record<string, unknown>) =>
-  taskModuleKeys.filter((moduleKey) => hasTaskModule(properties, moduleKey));
+export {
+  getTaskModules,
+  hasTaskModule,
+  isTaskModuleKey,
+  taskModuleKeys,
+  type TaskModuleKey,
+} from '@/lib/properties';
 
 export const taskNavigations = (activeTab: string) => {
   return [

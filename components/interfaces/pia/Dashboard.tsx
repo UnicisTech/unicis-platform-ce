@@ -7,7 +7,7 @@ import useTeamTasks from 'hooks/useTeamTasks';
 import useTeam from 'hooks/useTeam';
 import { Error, PerPageSelector } from '@/components/shared';
 import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
-import { TaskProperties, TaskWithPiaRisk } from 'types';
+import { TaskWithPiaRisk } from 'types';
 import RisksTable from './RisksTable';
 import DeleteRisk from './DeleteRisk';
 import CreateRisk from './risk-form/RiskAssessmentDialog';
@@ -38,6 +38,7 @@ import {
   downloadPiaTemplateCsv,
   downloadPiaTemplateOds,
 } from '@/lib/pia/import';
+import { taskHasPiaRisk } from '@/lib/properties';
 
 interface PiaMatrixFilter {
   category: number;
@@ -114,11 +115,7 @@ const Dashboard = () => {
     if (!tasks) {
       return [];
     }
-    return tasks.filter((tasks) => {
-      const taskProperties = tasks.properties as TaskProperties;
-      const procedure = taskProperties.pia_risk;
-      return procedure;
-    }) as TaskWithPiaRisk[];
+    return tasks.filter(taskHasPiaRisk);
   }, [tasks]);
 
   const filteredTasks = useMemo(() => {

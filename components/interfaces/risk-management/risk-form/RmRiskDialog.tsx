@@ -22,6 +22,7 @@ import { RiskAndImpactStep, RiskTreatmentStep } from './steps';
 import { StageTracker } from '@/components/shared/atlaskit';
 //import { headers } from '@/components/defaultLanding/data/configs/rm';
 import { steps } from '@/lib/rm';
+import { hasRmRisk } from '@/lib/properties';
 
 interface RmRiskDialogProps {
   prevRisk?: RMProcedureInterface;
@@ -142,9 +143,7 @@ export default function RmRiskDialog({
                 <TaskPicker
                   control={taskForm.control}
                   name="task"
-                  tasks={tasks.filter(
-                    (task) => !(task.properties as any)?.rm_risk
-                  )}
+                  tasks={tasks.filter((task) => !hasRmRisk(task.properties))}
                 />
               </form>
             </Form>

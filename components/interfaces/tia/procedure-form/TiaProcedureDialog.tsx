@@ -37,6 +37,7 @@ import {
   isTranferPermitted,
   defaultProcedure,
 } from '@/lib/tia/helpers';
+import { hasTiaProcedure } from '@/lib/properties';
 
 interface TiaProcedureDialogProps {
   prevProcedure?: StoredTiaProcedureInterface;
@@ -200,7 +201,7 @@ export default function TiaProcedureDialog({
                   control={taskForm.control}
                   name="task"
                   tasks={tasks.filter(
-                    (task) => !(task.properties as any)?.tia_procedure
+                    (task) => !hasTiaProcedure(task.properties)
                   )}
                 />
               </form>

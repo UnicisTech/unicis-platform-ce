@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'next-i18next';
 import useTeamTasks from 'hooks/useTeamTasks';
-import type { TaskProperties } from 'types';
 import { capitalizeCountryName } from '@/lib/utils';
 import { Database, ArrowRightLeft, Globe } from 'lucide-react';
+import { getRpaProcedure } from '@/lib/properties';
 
 const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
   const { t } = useTranslation('common');
@@ -19,23 +19,13 @@ const ProcessingActivitiesAnalysis = ({ slug }: { slug: string }) => {
     const countries = new Set<string>();
 
     for (const task of tasks ?? []) {
-      const props = task.properties as unknown as
-        | TaskProperties
-        | null
-        | undefined;
-      const proc = props?.rpa_procedure;
-      if (!Array.isArray(proc)) continue;
+      const proc = getRpaProcedure(task.properties);
+      if (!proc) continue;
       withProcedure += 1;
       const transferSection = proc[3];
-      if (transferSection && typeof transferSection === 'object') {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        if ((transferSection as any).datatransfer === true)
-          enabledTransfers += 1;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const countryValue = (transferSection as any).country?.value;
-        if (typeof countryValue === 'string' && countryValue.trim()) {
-          countries.add(countryValue.trim().toLowerCase());
-        }
+      if (transferSection.datatransfer) enabledTransfers += 1;
+      if (transferSection.country.trim()) {
+        countries.add(transferSection.country.trim().toLowerCase());
       }
     }
 

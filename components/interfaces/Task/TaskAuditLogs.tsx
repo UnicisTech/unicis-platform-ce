@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { UserCircle, Plus, Pencil, MessageSquare, Trash2 } from 'lucide-react';
-import type { Task, AuditLog, TaskProperties } from 'types';
+import type { Task } from 'types';
 import Pagination from '@/components/shadcn/ui/audit-pagination';
 import { cn } from '@/components/shadcn/lib/utils';
+import { getTaskAuditLogs } from '@/lib/properties';
 
 const ITEMS_PER_PAGE = 20;
 
@@ -119,8 +120,7 @@ function DiffChips({
 // ── Main component ─────────────────────────────────────────────────────────────
 const TaskAuditLogs = ({ task }: { task: Task }) => {
   const { t } = useTranslation('common');
-  const taskProperties = task?.properties as TaskProperties;
-  const auditLogs = (taskProperties?.task_audit_logs || []) as AuditLog[];
+  const auditLogs = getTaskAuditLogs(task.properties);
 
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(auditLogs.length / ITEMS_PER_PAGE);

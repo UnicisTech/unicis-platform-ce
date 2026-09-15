@@ -3,11 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import type {
-  Subscription,
-  TeamProperties,
-  TeamWithSubscriptionDto,
-} from 'types';
+import type { Subscription, TeamWithSubscriptionDto } from 'types';
 import useSubscription, { subscriptionParams } from 'hooks/useSubscription';
 import { Label } from '@/components/shadcn/ui/label';
 import { MultiSelect } from '@/components/shadcn/ui/multi-select';
@@ -19,6 +15,7 @@ import {
 } from '@/components/shared';
 import { Loader2 } from 'lucide-react';
 import { isoOptions } from '@/lib/csc/csc-frameworks';
+import { getTeamCscIso } from '@/lib/properties';
 
 interface CSCSettingsProps {
   team: TeamWithSubscriptionDto;
@@ -27,7 +24,7 @@ interface CSCSettingsProps {
 const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
   const { t } = useTranslation('common');
   const { avaliableISO } = useSubscription(team.subscription as Subscription);
-  const teamProperties = team.properties as TeamProperties;
+  const enabledFrameworks = getTeamCscIso(team.properties);
 
   const frameworkOptions = isoOptions.map((option) => {
     const isDisabled = !avaliableISO.includes(option.value);
@@ -50,7 +47,7 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
 
   const formik = useFormik({
     initialValues: {
-      iso: teamProperties.csc_iso,
+      iso: enabledFrameworks,
     },
     validationSchema: Yup.object({
       iso: Yup.array(Yup.string().oneOf(isoOptions.map((o) => o.value)))
@@ -98,7 +95,7 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
                   formik.setFieldValue('iso', value);
                   formik.setFieldTouched('iso', true, false);
                 }}
-                defaultValue={teamProperties.csc_iso}
+                defaultValue={enabledFrameworks}
               />
             </div>
             <div className="items-center pt-0 flex justify-end">

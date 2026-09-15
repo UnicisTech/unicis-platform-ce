@@ -6,6 +6,7 @@ import useISO from 'hooks/useISO';
 import useCscStatuses from 'hooks/useCscStatuses';
 import frameworks from '@/lib/csc/frameworks';
 import type { ISO, Task, Team } from 'types';
+import { hasRmRisk } from '@/lib/properties';
 
 // ── Shared weight table (mirrors KpiRow) ──────────────────────────────────────
 const STATUS_WEIGHT: Record<string, number> = {
@@ -29,10 +30,9 @@ function computeOverdue(tasks: Task[]): number {
 }
 
 function computeOpenRisks(tasks: Task[]): number {
-  return tasks.filter((t) => {
-    const props = t.properties as Record<string, unknown> | null;
-    return t.status !== 'done' && props?.rm_risk;
-  }).length;
+  return tasks.filter(
+    (task) => task.status !== 'done' && hasRmRisk(task.properties)
+  ).length;
 }
 
 // ── Banner shell ──────────────────────────────────────────────────────────────

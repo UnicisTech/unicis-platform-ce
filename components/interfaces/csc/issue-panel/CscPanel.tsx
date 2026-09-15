@@ -5,13 +5,13 @@ import ControlBlock from './ControlBlock';
 import type { ISO, Task, Team } from 'types';
 import useCanAccess from 'hooks/useCanAccess';
 import ControlBlockViewOnly from './ControlBlockViewOnly';
-import { getCscControlsProp } from '@/lib/csc';
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
 import { Loading } from '@/components/shared';
 import useISO from 'hooks/useISO';
 import CscTabs from '../CscTabs';
 import useCscStatuses from 'hooks/useCscStatuses';
+import { getCscControls } from '@/lib/properties';
 
 // TODO: refactoring
 const CscPanel = ({
@@ -38,12 +38,11 @@ const CscPanel = ({
   // Draft controls per ISO tab (only local unsaved edits)
   const [draftByIso, setDraftByIso] = useState<Record<string, string[]>>({});
 
-  const properties = task.properties as any;
-
   // Source of truth from server for current tab
-  const serverControls = useMemo(() => {
-    return (properties?.[getCscControlsProp(activeTab)] as string[]) ?? [];
-  }, [properties, activeTab]);
+  const serverControls = useMemo(
+    () => getCscControls(task.properties, activeTab),
+    [task.properties, activeTab]
+  );
 
   // What we render right now (draft overrides server)
   const controls = draftByIso[activeTab] ?? serverControls;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 import type { Task } from 'types';
-import type { RpaAuditLog } from 'types';
 import {
   AuditTimeline,
   type TimelineLog,
@@ -9,12 +8,12 @@ import {
 import { Error, Loading } from '@/components/shared';
 import useTeamMembersMap from 'hooks/useTeamMembersMap';
 import { auditLogHelper } from './auditLogHelper';
+import { getRpaAuditLogs } from '@/lib/properties';
 
 const RpaAuditLogs = ({ task, slug }: { task: Task; slug: string }) => {
   const { t } = useTranslation('common');
 
-  const taskProperties = task?.properties as any;
-  const auditLogs = (taskProperties.rpa_audit_logs || []) as RpaAuditLog[];
+  const auditLogs = getRpaAuditLogs(task.properties);
 
   const { isLoading, isError, membersById } = useTeamMembersMap(slug);
 

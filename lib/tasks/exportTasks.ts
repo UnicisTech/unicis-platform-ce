@@ -103,8 +103,7 @@ function triggerDownload(blob: Blob, filename: string) {
 }
 
 function getModulesLabel(properties: unknown): string {
-  if (typeof properties !== 'object' || !properties) return '';
-  return getTaskModules(properties as Record<string, unknown>)
+  return getTaskModules(properties)
     .map((k) => MODULE_LABELS[k] || k.toUpperCase())
     .join(', ');
 }

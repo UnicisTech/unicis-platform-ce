@@ -6,6 +6,7 @@ import { RpaProcedureInterface } from 'types';
 import { useTranslation } from 'next-i18next';
 import useTeamMembers from 'hooks/useTeamMembers';
 import { Error, Loading } from '@/components/shared';
+import { getRpaProcedure } from '@/lib/properties';
 
 const DescriptionAndStakeholdersTab: React.FC<{
   step: RpaProcedureInterface[0];
@@ -136,8 +137,7 @@ const SecurityMeasuresTab: React.FC<{ step: RpaProcedureInterface[4] }> = ({
 
 const RpaPanel: React.FC<{ task: Task; slug: string }> = ({ task, slug }) => {
   const { t } = useTranslation('common');
-  const properties = task.properties as any;
-  const procedure = properties.rpa_procedure as RpaProcedureInterface;
+  const procedure = getRpaProcedure(task.properties);
   const [activeTab, setActiveTab] = useState(0);
 
   const tabs = useMemo(

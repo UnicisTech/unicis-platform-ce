@@ -1,17 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 import type { Task } from 'types';
-import type { CscAuditLog } from 'types';
 import {
   AuditTimeline,
   type TimelineLog,
 } from '@/components/interfaces/Task/AuditTimeline';
+import { getCscAuditLogs } from '@/lib/properties';
 
 const CscAuditLogs = ({ task }: { task: Task }) => {
   const { t } = useTranslation('common');
 
-  const taskProperties = task?.properties as any;
-  const auditLogs = (taskProperties?.csc_audit_logs || []) as CscAuditLog[];
+  const auditLogs = getCscAuditLogs(task.properties);
 
   // Normalise CscAuditLog to the shared TimelineLog shape
   const logs: TimelineLog[] = auditLogs.map((log) => ({

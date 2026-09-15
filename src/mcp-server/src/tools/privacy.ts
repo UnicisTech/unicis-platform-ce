@@ -1,6 +1,11 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { apiGet, apiPost, apiDelete, Task } from '../services/api.js';
+import {
+  getPiaRisk,
+  getRpaProcedure,
+  getTiaProcedure,
+} from '../task-properties.js';
 
 // RoPA fields match lib/rpa/index.ts field definitions
 
@@ -36,7 +41,7 @@ Returns: RoPA procedure data (multi-step object) or indication it is not set.`,
       const task = await apiGet<Task>(
         `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
       );
-      const rpa = task.properties?.rpa_procedure;
+      const rpa = getRpaProcedure(task.properties);
       if (!rpa) {
         return {
           content: [
@@ -181,7 +186,7 @@ Returns: TIA procedure data or indication it is not set.`,
       const task = await apiGet<Task>(
         `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
       );
-      const tia = task.properties?.tia_procedure;
+      const tia = getTiaProcedure(task.properties);
       if (!tia) {
         return {
           content: [
@@ -322,7 +327,7 @@ Returns: PIA procedure data or indication it is not set.`,
       const task = await apiGet<Task>(
         `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
       );
-      const pia = task.properties?.pia_risk;
+      const pia = getPiaRisk(task.properties);
       if (!pia) {
         return {
           content: [

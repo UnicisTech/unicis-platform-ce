@@ -91,13 +91,9 @@ const TaskListView = ({
                         </span>
                       </Link>
                       {task.recurrenceScheduleId && <TaskRecurrenceBadge />}
-                      {typeof task.properties === 'object' &&
-                        task.properties &&
-                        getTaskModules(
-                          task.properties as Record<string, unknown>
-                        ).map((key) => (
-                          <ModuleBadge key={key} propName={key} />
-                        ))}
+                      {getTaskModules(task.properties).map((key) => (
+                        <ModuleBadge key={key} propName={key} />
+                      ))}
                     </div>
                   </td>
                   <td className="px-4 py-2">

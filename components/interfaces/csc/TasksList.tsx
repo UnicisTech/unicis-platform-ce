@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { Task } from 'types';
+import { getAllCscControls } from '@/lib/properties';
 
 const TasksList = ({
   tasks,
@@ -11,9 +12,7 @@ const TasksList = ({
   control: string;
 }) => {
   const [selectedTasks] = useState<Array<Task>>(
-    tasks.filter((task: any) =>
-      task.properties?.csc_controls?.find((item: string) => item === control)
-    )
+    tasks.filter((task) => getAllCscControls(task.properties).includes(control))
   );
 
   const router = useRouter();

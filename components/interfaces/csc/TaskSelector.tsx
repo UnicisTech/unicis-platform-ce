@@ -1,19 +1,16 @@
 import React, { useRef } from 'react';
 import { MultiSelect } from '@/components/shadcn/ui/multi-select';
-import { getCscControlsProp } from '@/lib/csc';
 import type { Task } from 'types';
 import type { CscOption, ISO } from 'types';
+import { getCscControls } from '@/lib/properties';
 
 const getSelectedOptions = (
   ISO: ISO,
   control: string,
   tasks: Array<Task>
 ): CscOption[] => {
-  const cscStatusesProp = getCscControlsProp(ISO);
   return tasks
-    .filter((task: any) =>
-      task.properties?.[cscStatusesProp]?.includes(control)
-    )
+    .filter((task) => getCscControls(task.properties, ISO).includes(control))
     .map((task) => ({
       label: task.title,
       value: task.taskNumber,

@@ -1,13 +1,7 @@
 import type { Task } from 'types';
-import type {
-  AuditLog,
-  Diff,
-  Option,
-  PiaConfig,
-  // PiaRisk,
-  TaskProperties,
-} from 'types';
+import type { AuditLog, Diff, Option, PiaConfig } from 'types';
 import type { RiskProbability, RiskSecurity } from 'types/pia';
+import { getPiaRisk } from '@/lib/properties';
 
 export const config = {
   isDataProcessingNecessary: ['necessary', 'unnecessary'],
@@ -267,21 +261,20 @@ export const computeRiskMap = (
 
   const riskMap = new Map<string, number>();
 
-  tasks
-    .filter((task) => (task.properties as TaskProperties)?.pia_risk)
-    .map((task) => (task.properties as TaskProperties)?.pia_risk)
-    .forEach((risk) => {
-      const security = risk?.[riskKey]?.[keys.security];
-      const probability = risk?.[riskKey]?.[keys.probability];
+  tasks.forEach((task) => {
+    const risk = getPiaRisk(task.properties);
+    if (!risk) return;
+    const security = risk[riskKey]?.[keys.security];
+    const probability = risk[riskKey]?.[keys.probability];
 
-      if (!security || !probability) return;
+    if (!security || !probability) return;
 
-      const x = riskSecurityPoints[security];
-      const y = riskProbabilityPoints[probability];
-      const key = `${x},${y}`;
+    const x = riskSecurityPoints[security];
+    const y = riskProbabilityPoints[probability];
+    const key = `${x},${y}`;
 
-      riskMap.set(key, (riskMap.get(key) || 0) + 1);
-    });
+    riskMap.set(key, (riskMap.get(key) || 0) + 1);
+  });
 
   return riskMap;
 };

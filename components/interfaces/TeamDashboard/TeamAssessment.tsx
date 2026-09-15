@@ -1,8 +1,9 @@
 import { useTranslation } from 'next-i18next';
-import { Prisma } from '@/generated/browser';
 import useTeamTasks from 'hooks/useTeamTasks';
 import { capitalizeCountryName } from '@/lib/utils';
 import { AlertCircle } from 'lucide-react';
+import { getTiaProcedure } from '@/lib/properties';
+import { isTranferPermitted } from '@/lib/tia/helpers';
 
 const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
   const { t } = useTranslation('common');
@@ -14,22 +15,15 @@ const TeamAssessmentAnalysis = ({ slug }: { slug: string }) => {
   let notPermitAuthorization = 0;
 
   tasks?.forEach((task) => {
-    const properties = task.properties as Prisma.JsonObject | null;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const procedures = properties?.tia_procedure as any[];
+    const procedure = getTiaProcedure(task.properties);
 
-    if (Array.isArray(procedures)) {
+    if (procedure) {
       totalNumberOfAssessment += 1;
 
-      procedures.forEach((proc) => {
-        if (proc.CountryDataImporter?.value) {
-          countriesSet.add(proc.CountryDataImporter.value.toLowerCase());
-        }
-      });
+      const country = procedure[0].CountryDataImporter.trim();
+      if (country) countriesSet.add(country.toLowerCase());
 
-      const isAuthorized = procedures.some(
-        (proc) => proc.TransferMechanism === 'yes'
-      );
+      const isAuthorized = isTranferPermitted(procedure);
       if (isAuthorized) perAuthorization++;
       else notPermitAuthorization++;
     }

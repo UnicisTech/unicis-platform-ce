@@ -35,6 +35,7 @@ import { riskProbabilityPoints, riskSecurityPoints } from '@/lib/pia';
 import type { PiaRisk, Task } from 'types';
 import { StageTracker } from '@/components/shared/atlaskit';
 import { steps } from '@/lib/pia';
+import { hasPiaRisk } from '@/lib/properties';
 
 interface RiskAssessmentDialogProps {
   prevRisk?: PiaRisk | [];
@@ -211,9 +212,7 @@ export default function RiskAssessmentDialog({
                 <TaskPicker
                   control={taskForm.control}
                   name="task"
-                  tasks={tasks.filter(
-                    (task) => !(task.properties as any)?.pia_risk
-                  )}
+                  tasks={tasks.filter((task) => !hasPiaRisk(task.properties))}
                 />
               </form>
             </Form>

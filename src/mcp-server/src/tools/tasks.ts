@@ -13,6 +13,13 @@ import {
   stripHtml,
   formatDate,
 } from '../services/api.js';
+import {
+  getAllCscControls,
+  getRmRisk,
+  hasPiaRisk,
+  hasRpaProcedure,
+  hasTiaProcedure,
+} from '../task-properties.js';
 
 export function registerTaskTools(server: McpServer): void {
   // ── List Tasks ────────────────────────────────────────────────────────────
@@ -131,9 +138,7 @@ Returns: Full task object including all properties.`,
         apiGet<CommentsPage>(`/api/teams/${slug}/tasks/${taskNumber}/comments`),
       ]);
       const controls = extractControls(task);
-      const risk = task.properties?.rm_risk as
-        | Record<string, unknown>[]
-        | undefined;
+      const risk = getRmRisk(task.properties);
       const comments = commentsPage.items;
       const attachments = task.attachments || [];
 
@@ -156,13 +161,13 @@ Returns: Full task object including all properties.`,
         attachments.length
           ? `### Attachments (${attachments.length})\n${attachments.map((a) => `- ${a.filename} (id: ${a.id})`).join('\n')}`
           : '',
-        task.properties?.rpa_procedure
+        hasRpaProcedure(task.properties)
           ? '### RoPA: linked (use unicis_get_ropa to read)'
           : '',
-        task.properties?.tia_procedure
+        hasTiaProcedure(task.properties)
           ? '### TIA: linked (use unicis_get_tia to read)'
           : '',
-        task.properties?.pia_procedure
+        hasPiaRisk(task.properties)
           ? '### PIA: linked (use unicis_get_pia to read)'
           : '',
       ]
@@ -637,18 +642,5 @@ Returns: Confirmation.`,
 }
 
 function extractControls(task: Task): string[] {
-  return [
-    ...((task.properties?.['csc_controls_mvsp'] as string[]) || []),
-    ...((task.properties?.['csc_controls_iso-2022'] as string[]) || []),
-    ...((task.properties?.['csc_controls_iso-2013'] as string[]) || []),
-    ...((task.properties?.csc_controls_nistcsfv2 as string[]) || []),
-    ...((task.properties?.csc_controls_eunis2 as string[]) || []),
-    ...((task.properties?.csc_controls_gdpr as string[]) || []),
-    ...((task.properties?.csc_controls_cisv81 as string[]) || []),
-    ...((task.properties?.csc_controls_soc2v2 as string[]) || []),
-    ...((task.properties?.csc_controls_c5_2020 as string[]) || []),
-    ...((task.properties?.csc_controls_owasp_asvs_v5 as string[]) || []),
-    ...((task.properties?.csc_controls_pcidss_v401 as string[]) || []),
-    ...((task.properties?.csc_controls_iso42001 as string[]) || []),
-  ].filter((c) => typeof c === 'string');
+  return getAllCscControls(task.properties);
 }

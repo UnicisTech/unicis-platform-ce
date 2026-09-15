@@ -21,6 +21,15 @@ import { useAssetModuleAccess } from 'hooks/fleets/useAssetModuleAccess';
 import { cn } from '@/components/shadcn/lib/utils';
 import { trackSiteSearch } from '@/lib/matomo/client';
 import type { Task } from 'types';
+import {
+  getAllCscControls,
+  getPiaRisk,
+  getRmRisk,
+  getRpaProcedure,
+  getTaskModules,
+  getTiaProcedure,
+  type TaskModuleKey,
+} from '@/lib/properties';
 
 // ── Module logo helper ─────────────────────────────────────────────────────────
 function LogoIcon({ src }: { src: string }) {
@@ -142,19 +151,16 @@ const STATUS_DOTS: Record<string, string> = {
 };
 
 // ── Collect which modules a task belongs to ────────────────────────────────────
-function getTaskModuleKeys(props: Record<string, unknown> | null): string[] {
-  if (!props) return [];
-  const keys: string[] = [];
-  if (props.rpa_procedure && (props.rpa_procedure as unknown[]).length > 0)
-    keys.push('rpa');
-  if (props.tia_procedure && (props.tia_procedure as unknown[]).length > 0)
-    keys.push('tia');
-  if (props.pia_risk && (props.pia_risk as unknown[]).length > 0)
-    keys.push('pia');
-  if (props.csc_controls && (props.csc_controls as unknown[]).length > 0)
-    keys.push('csc');
-  if (props.rm_risk && (props.rm_risk as unknown[]).length > 0) keys.push('rm');
-  return keys;
+const TASK_MODULE_LABELS: Record<TaskModuleKey, string> = {
+  rpa_procedure: 'rpa',
+  tia_procedure: 'tia',
+  pia_risk: 'pia',
+  csc_controls: 'csc',
+  rm_risk: 'rm',
+};
+
+export function getTaskModuleKeys(properties: unknown): string[] {
+  return getTaskModules(properties).map((key) => TASK_MODULE_LABELS[key]);
 }
 
 // ── Build a flat string of ALL searchable text for a task ─────────────────────
@@ -168,16 +174,13 @@ function buildSearchIndex(task: Task): string {
     task.priority,
   ];
 
-  const props = task.properties as Record<string, unknown> | null;
-  if (!props) return parts.filter(Boolean).join(' ');
-
   // ── RPA ────────────────────────────────────────────────────────────────────
-  const rpa = props.rpa_procedure as unknown[] | undefined;
-  if (Array.isArray(rpa) && rpa.length > 0) {
-    const info = rpa[0] as Record<string, unknown> | undefined;
-    const details = rpa[1] as Record<string, unknown> | undefined;
-    const recip = rpa[2] as Record<string, unknown> | undefined;
-    const xfer = rpa[3] as Record<string, unknown> | undefined;
+  const rpa = getRpaProcedure(task.properties);
+  if (rpa) {
+    const info = rpa[0];
+    const details = rpa[1];
+    const recip = rpa[2];
+    const xfer = rpa[3];
     if (info) {
       parts.push(str(info.controller), str(info.dpo), str(info.reviewDate));
     }
@@ -186,27 +189,23 @@ function buildSearchIndex(task: Task): string {
         str(details.purpose),
         str(details.retentionperiod),
         str(details.commentsretention),
-        ...arr(details.category),
-        ...arr(details.datasubject),
-        ...arr(details.specialcategory)
+        ...details.category,
+        ...details.datasubject,
+        ...details.specialcategory
       );
     }
     if (recip) {
       parts.push(str(recip.recipientType), str(recip.recipientdetails));
     }
     if (xfer) {
-      parts.push(
-        str(xfer.recipient),
-        str(xfer.country),
-        ...arr(xfer.guarantee)
-      );
+      parts.push(str(xfer.recipient), str(xfer.country), ...xfer.guarantee);
     }
   }
 
   // ── TIA ────────────────────────────────────────────────────────────────────
-  const tia = props.tia_procedure as unknown[] | undefined;
-  if (Array.isArray(tia) && tia.length > 0) {
-    const info = tia[0] as Record<string, unknown> | undefined;
+  const tia = getTiaProcedure(task.properties);
+  if (tia) {
+    const info = tia[0];
     if (info) {
       parts.push(
         str(info.DataExporter),
@@ -219,7 +218,7 @@ function buildSearchIndex(task: Task): string {
         str(info.LawImporterCountry)
       );
     }
-    const step2 = tia[1] as Record<string, unknown> | undefined;
+    const step2 = tia[1];
     if (step2) {
       parts.push(
         str(step2.ReasonEncryptionInTransit),
@@ -230,13 +229,13 @@ function buildSearchIndex(task: Task): string {
   }
 
   // ── PIA ────────────────────────────────────────────────────────────────────
-  const pia = props.pia_risk as unknown[] | undefined;
-  if (Array.isArray(pia) && pia.length > 0) {
-    const nec = pia[0] as Record<string, unknown> | undefined;
-    const conf = pia[1] as Record<string, unknown> | undefined;
-    const avail = pia[2] as Record<string, unknown> | undefined;
-    const trans = pia[3] as Record<string, unknown> | undefined;
-    const guar = pia[4] as Record<string, unknown> | undefined;
+  const pia = getPiaRisk(task.properties);
+  if (pia) {
+    const nec = pia[0];
+    const conf = pia[1];
+    const avail = pia[2];
+    const trans = pia[3];
+    const guar = pia[4];
     if (nec)
       parts.push(
         str(nec.isDataProcessingNecessaryAssessment),
@@ -254,29 +253,23 @@ function buildSearchIndex(task: Task): string {
   }
 
   // ── Risk Management ─────────────────────────────────────────────────────────
-  const rm = props.rm_risk as unknown[] | undefined;
-  if (Array.isArray(rm) && rm.length > 0) {
-    const risk = rm[0] as Record<string, unknown> | undefined;
-    const treat = rm[1] as Record<string, unknown> | undefined;
+  const rm = getRmRisk(task.properties);
+  if (rm) {
+    const risk = rm[0];
+    const treat = rm[1];
     if (risk)
       parts.push(str(risk.Risk), str(risk.AssetOwner), str(risk.Impact));
     if (treat) parts.push(str(treat.RiskTreatment), str(treat.TreatmentCost));
   }
 
   // ── CSC control IDs ─────────────────────────────────────────────────────────
-  const csc = props.csc_controls;
-  if (Array.isArray(csc)) {
-    parts.push(...csc.map(String));
-  }
+  parts.push(...getAllCscControls(task.properties));
 
   return parts.filter(Boolean).join(' ');
 }
 
 // tiny helpers
 const str = (v: unknown): string => (typeof v === 'string' ? v : '');
-const arr = (v: unknown): string[] =>
-  Array.isArray(v) ? (v as unknown[]).map((x) => str(x)).filter(Boolean) : [];
-
 // ── Keyboard shortcut hint ─────────────────────────────────────────────────────
 function ShortcutHint() {
   const isMac =
@@ -292,8 +285,7 @@ function ShortcutHint() {
 
 // ── Task row inside the dialog ─────────────────────────────────────────────────
 function TaskRow({ task }: { task: Task }) {
-  const props = task.properties as Record<string, unknown> | null;
-  const moduleKeys = getTaskModuleKeys(props);
+  const moduleKeys = getTaskModuleKeys(task.properties);
   const description = (task as Task & { description?: string }).description;
 
   return (

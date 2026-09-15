@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { Field } from '@/components/shared/atlaskit';
 import type { Task } from 'types';
-import { RMProcedureInterface, TaskProperties } from 'types';
 import { useTranslation } from 'next-i18next';
 import { steps } from '@/lib/rm';
 import useTeamMembersMap from 'hooks/useTeamMembersMap';
 import { Error, Loading, MemberName } from '@/components/shared';
 import { riskValueToLabelKey } from '@/lib/common';
+import { getRmRisk } from '@/lib/properties';
 
 const RmTaskPanel = ({ task, slug }: { task: Task; slug: string }) => {
   const { t } = useTranslation('common');
-  const properties = task?.properties as TaskProperties;
-  const risk = properties?.rm_risk as RMProcedureInterface | undefined;
+  const risk = getRmRisk(task.properties);
   const [activeTab, setActiveTab] = useState(0);
 
   const { isLoading, isError, membersById } = useTeamMembersMap(slug);

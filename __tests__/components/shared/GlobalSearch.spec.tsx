@@ -1,4 +1,7 @@
-import { getVisibleSearchModules } from '@/components/shared/shell/GlobalSearch';
+import {
+  getTaskModuleKeys,
+  getVisibleSearchModules,
+} from '@/components/shared/shell/GlobalSearch';
 import type { Action, Resource } from '@/lib/permissions';
 
 const denyAccess = (_resource: Resource, _actions: Action[]) => false;
@@ -29,5 +32,23 @@ describe('getVisibleSearchModules', () => {
     });
 
     expect(modules.some((module) => module.path === '/asset')).toBe(false);
+  });
+});
+
+describe('getTaskModuleKeys', () => {
+  it('recognizes dynamic and legacy CSC controls', () => {
+    expect(getTaskModuleKeys({ csc_controls_mvsp: ['mvsp-1'] })).toEqual([
+      'csc',
+    ]);
+    expect(getTaskModuleKeys({ csc_controls: ['legacy-1'] })).toEqual(['csc']);
+  });
+
+  it('ignores malformed module payloads', () => {
+    expect(
+      getTaskModuleKeys({
+        rpa_procedure: [],
+        csc_controls_mvsp: 'mvsp-1',
+      })
+    ).toEqual([]);
   });
 });

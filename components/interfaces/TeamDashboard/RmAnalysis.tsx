@@ -9,7 +9,7 @@ import {
   calculateCurrentRiskRating,
 } from '@/lib/rm/helpers';
 import { DashboardMatrixChart } from '../risk-management';
-import type { TaskProperties, RMProcedureInterface } from 'types';
+import { taskHasRmRisk } from '@/lib/properties';
 
 interface RmAnalysisProps {
   slug: string;
@@ -93,10 +93,9 @@ const RmAnalysis = ({ slug, onCellClick }: RmAnalysisProps) => {
     const map = computeRiskMap(tasks);
 
     const ranked = tasks
-      .filter((task) => (task.properties as TaskProperties)?.rm_risk)
+      .filter(taskHasRmRisk)
       .map((task) => {
-        const risk = (task.properties as TaskProperties)
-          .rm_risk as RMProcedureInterface;
+        const risk = task.properties.rm_risk;
         const raw = calculateRiskRating(
           risk[0].RawProbability,
           risk[0].RawImpact

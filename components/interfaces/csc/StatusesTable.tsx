@@ -3,7 +3,6 @@ import { useTranslation } from 'next-i18next';
 import toast from 'react-hot-toast';
 import StatusHeader from './StatusHeader';
 import TaskSelector from './TaskSelector';
-import { getCscControlsProp } from '@/lib/csc';
 import StatusSelector from './StatusSelector';
 import type { Task } from 'types';
 import usePagination from 'hooks/usePagination';
@@ -17,6 +16,7 @@ import ControlCodeLink from './ControlCodeLink';
 import ControlMappingDrawer from './ControlMappingDrawer';
 import { getMappingCount } from '@/lib/csc/framework-mapping-utils';
 import { BulkActionBar } from '@/components/shared';
+import { getCscControls } from '@/lib/properties';
 
 const StatusesTable = ({
   slug,
@@ -71,7 +71,6 @@ const StatusesTable = ({
 }) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess(slug);
-  const cscControlsProp = getCscControlsProp(ISO);
 
   // ── Mapping drawer state ───────────────────────────────────
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -177,8 +176,8 @@ const StatusesTable = ({
     const missing = new Set<string>();
 
     Array.from(selectedIds).forEach((controlId) => {
-      const controlTasks = tasks.filter((task: any) =>
-        task.properties?.[cscControlsProp]?.includes(controlId)
+      const controlTasks = tasks.filter((task) =>
+        getCscControls(task.properties, ISO).includes(controlId)
       );
       if (controlTasks.length === 0) {
         missing.add(controlId);
@@ -189,7 +188,7 @@ const StatusesTable = ({
       allSelectedHaveTasks: missing.size === 0,
       missingTasksSet: missing,
     };
-  }, [selectedIds, tasks, cscControlsProp]);
+  }, [selectedIds, tasks, ISO]);
 
   const activeBulkActionStep =
     allSelectedHaveTasks && selectedIds.size > 0
@@ -358,11 +357,11 @@ const StatusesTable = ({
                             control={control.id}
                             handler={statusHandler}
                             isDisabled={
-                              !tasks.filter((task: any) =>
-                                task.properties?.[cscControlsProp]?.find(
-                                  (item: string) => item === control.id
+                              !tasks.some((task) =>
+                                getCscControls(task.properties, ISO).includes(
+                                  control.id
                                 )
-                              ).length
+                              )
                             }
                           />
                         </div>

@@ -1,6 +1,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { apiGet, apiPost, apiDelete, Task, RmRisk } from '../services/api.js';
+import { getRmRisk } from '../task-properties.js';
 
 export function registerRiskTools(server: McpServer): void {
   // ── Get Risk ──────────────────────────────────────────────────────────────
@@ -37,7 +38,7 @@ Returns: Risk assessment data or indication it is not set.`,
       const task = await apiGet<Task>(
         `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
       );
-      const risk = task.properties?.rm_risk as RmRisk[] | undefined;
+      const risk = getRmRisk(task.properties);
       if (!risk?.length) {
         return {
           content: [
@@ -237,17 +238,14 @@ Returns: Tasks with risk data, sorted by descending raw score.`,
     async ({ slug, minRawScore }) => {
       const tasks = await apiGet<Task[]>(`/api/teams/${slug}/tasks`);
       const withRisk = tasks
-        .filter(
-          (t) =>
-            Array.isArray(t.properties?.rm_risk) &&
-            (t.properties.rm_risk as unknown[]).length > 0
-        )
-        .map((t) => {
-          const risk = (t.properties!.rm_risk as RmRisk[])[0] || {};
+        .map((task) => {
+          const risk = getRmRisk(task.properties)?.[0];
+          if (!risk) return undefined;
           const rawScore =
             ((risk.RawProbability ?? 0) * (risk.RawImpact ?? 0)) / 100;
-          return { task: t, risk, rawScore };
+          return { task, risk, rawScore };
         })
+        .filter((item): item is NonNullable<typeof item> => Boolean(item))
         .filter((r) => minRawScore === undefined || r.rawScore >= minRawScore)
         .sort((a, b) => b.rawScore - a.rawScore);
 

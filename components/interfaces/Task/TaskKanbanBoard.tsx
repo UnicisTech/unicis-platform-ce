@@ -331,11 +331,9 @@ const TaskCard = ({
           label={t(`task-priorities.${task.priority}`)}
         />
         {task.recurrenceScheduleId && <TaskRecurrenceBadge />}
-        {typeof task.properties === 'object' &&
-          task.properties &&
-          getTaskModules(task.properties as Record<string, unknown>).map(
-            (key) => <ModuleBadge key={key} propName={key} />
-          )}
+        {getTaskModules(task.properties).map((key) => (
+          <ModuleBadge key={key} propName={key} />
+        ))}
       </div>
 
       {/* Due date */}

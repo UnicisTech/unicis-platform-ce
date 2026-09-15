@@ -14,6 +14,50 @@ import {
   getTaskModules,
 } from 'lib/tasks';
 
+const validRpaProcedure = [
+  { reviewDate: '', controller: '', dpo: '' },
+  {
+    category: [],
+    datasubject: [],
+    retentionperiod: '',
+    specialcategory: [],
+  },
+  { recipientType: '' },
+  { datatransfer: false, recipient: '', country: '', guarantee: [] },
+  { toms: [] },
+  {
+    involveProfiling: 'no',
+    useAutomated: 'no',
+    involveSurveillance: 'no',
+    processedSpecialCategories: 'no',
+    isBigData: 'no',
+    dataSetsCombined: 'no',
+    multipleControllers: 'no',
+    imbalanceInRelationship: 'no',
+    innovativeTechnologyUsed: 'no',
+    transferredOutside: 'no',
+    rightsRestricted: 'no',
+    piaNeeded: 'no',
+  },
+];
+
+const validRmRisk = [
+  {
+    Risk: 'Risk',
+    AssetOwner: 'owner-1',
+    Impact: 'Impact',
+    RawProbability: 40,
+    RawImpact: 60,
+  },
+  {
+    RiskTreatment: 'Mitigate',
+    TreatmentCost: '100',
+    TreatmentStatus: 50,
+    TreatedProbability: 20,
+    TreatedImpact: 40,
+  },
+];
+
 describe('task status keys — no hyphenated variants', () => {
   it('statuses array contains exactly the 6 correct no-hyphen values', () => {
     expect(statuses).toEqual([
@@ -81,17 +125,17 @@ describe('task module key helpers', () => {
   });
 
   it('hasTaskModule detects rpa_procedure', () => {
-    expect(hasTaskModule({ rpa_procedure: [{}] }, 'rpa_procedure')).toBe(true);
+    expect(
+      hasTaskModule({ rpa_procedure: validRpaProcedure }, 'rpa_procedure')
+    ).toBe(true);
     expect(hasTaskModule({}, 'rpa_procedure')).toBe(false);
     expect(hasTaskModule({ rpa_procedure: null }, 'rpa_procedure')).toBe(false);
+    expect(hasTaskModule({ rpa_procedure: [{}] }, 'rpa_procedure')).toBe(false);
   });
 
   it('hasTaskModule detects csc_controls via prefixed key', () => {
     expect(
-      hasTaskModule(
-        { 'csc_controls_ISO/IEC 27001:2022': ['A.5.1'] },
-        'csc_controls'
-      )
+      hasTaskModule({ 'csc_controls_iso-2022': ['A.5.1'] }, 'csc_controls')
     ).toBe(true);
     expect(hasTaskModule({ csc_controls: ['A.5.1'] }, 'csc_controls')).toBe(
       true
@@ -100,7 +144,10 @@ describe('task module key helpers', () => {
   });
 
   it('getTaskModules returns only modules present in properties', () => {
-    const props = { rpa_procedure: [{}], rm_risk: [{}] };
+    const props = {
+      rpa_procedure: validRpaProcedure,
+      rm_risk: validRmRisk,
+    };
     const modules = getTaskModules(props);
     expect(modules).toContain('rpa_procedure');
     expect(modules).toContain('rm_risk');

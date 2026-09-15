@@ -5,7 +5,6 @@ import type { ISO, Task } from 'types';
 import { isoValueToLabel } from '@/lib/csc/csc-frameworks';
 import { getFrameworkMappings } from '@/lib/csc/framework-mapping-utils';
 import '@/lib/csc/framework-mappings';
-import { getCscControlsProp } from '@/lib/csc';
 import frameworks from '@/lib/csc/frameworks';
 import { cn } from '@/components/shadcn/lib/utils';
 import { Badge } from '@/components/shadcn/ui/badge';
@@ -17,6 +16,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@/components/shadcn/ui/drawer';
+import { getCscControls } from '@/lib/properties';
 
 interface ControlMappingDrawerProps {
   isOpen: boolean;
@@ -86,17 +86,12 @@ export default function ControlMappingDrawer({
     (f) => f !== currentFramework
   );
 
-  const cscControlsProp = getCscControlsProp(currentFramework);
   const linkedTasks = tasks.filter((task) =>
-    (task.properties?.[cscControlsProp] as string[] | undefined)?.includes(
-      controlId
-    )
+    getCscControls(task.properties, currentFramework).includes(controlId)
   );
   const unlinkedTasks = tasks.filter(
     (task) =>
-      !(task.properties?.[cscControlsProp] as string[] | undefined)?.includes(
-        controlId
-      )
+      !getCscControls(task.properties, currentFramework).includes(controlId)
   );
 
   const relationship = mappingEntry?.relationship;
@@ -105,14 +100,8 @@ export default function ControlMappingDrawer({
   // ── Cross-framework linking helpers ────────────────────────
 
   /** Check if a task is already linked to a specific control in a given framework */
-  const isTaskLinkedTo = (task: Task, mappedControlId: string, fw: ISO) => {
-    const prop = getCscControlsProp(fw);
-    return (
-      (task.properties?.[prop] as string[] | undefined)?.includes(
-        mappedControlId
-      ) ?? false
-    );
-  };
+  const isTaskLinkedTo = (task: Task, mappedControlId: string, fw: ISO) =>
+    getCscControls(task.properties, fw).includes(mappedControlId);
 
   /** For each mapped control, compute which linked tasks are NOT yet linked to it */
   const mappedControlLinkStatus = (() => {

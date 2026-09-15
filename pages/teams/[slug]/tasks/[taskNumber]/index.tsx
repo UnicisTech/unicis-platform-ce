@@ -51,12 +51,7 @@ import {
 } from '@/components/interfaces/pia';
 import useRpaCreation from 'hooks/useRpaCreation';
 import { Button } from '@/components/shadcn/ui/button';
-import type {
-  PiaRisk,
-  RMProcedureInterface,
-  TaskProperties,
-  TiaProcedureInterface,
-} from 'types';
+import { getPiaRisk, getRmRisk, getTiaProcedure } from '@/lib/properties';
 
 // ── Direction B panel card ─────────────────────────────────────────────────────
 const Panel = ({
@@ -262,11 +257,7 @@ const TaskById = () => {
           open={tiaVisible}
           onOpenChange={setTiaVisible}
           selectedTask={task}
-          prevProcedure={
-            (task.properties as TaskProperties)?.tia_procedure as
-              | TiaProcedureInterface
-              | undefined
-          }
+          prevProcedure={getTiaProcedure(task.properties)}
           mutateTasks={mutateTask}
         />
       )}
@@ -276,7 +267,7 @@ const TaskById = () => {
           open={piaVisible}
           onOpenChange={setPiaVisible}
           selectedTask={task}
-          prevRisk={(task.properties as TaskProperties)?.pia_risk as PiaRisk}
+          prevRisk={getPiaRisk(task.properties)}
           mutateTasks={mutateTask}
         />
       )}
@@ -285,9 +276,7 @@ const TaskById = () => {
           open={rmVisible}
           onOpenChange={setRmVisible}
           selectedTask={task}
-          prevRisk={
-            (task.properties as TaskProperties)?.rm_risk as RMProcedureInterface
-          }
+          prevRisk={getRmRisk(task.properties)}
           mutateTasks={mutateTask}
         />
       )}

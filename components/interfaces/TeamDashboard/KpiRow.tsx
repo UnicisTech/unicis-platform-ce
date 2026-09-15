@@ -16,6 +16,7 @@ import useTeamMembers from 'hooks/useTeamMembers';
 import frameworks from '@/lib/csc/frameworks';
 import { isoValueToLabel } from '@/lib/csc/csc-frameworks';
 import type { ISO, Task, Team } from 'types';
+import { hasRmRisk } from '@/lib/properties';
 
 // ── STATUS_WEIGHT ──────────────────────────────────────────────────────────────
 const STATUS_WEIGHT: Record<string, number> = {
@@ -342,8 +343,7 @@ export default function KpiRow({ tasks, slug, team }: KpiRowProps) {
   const openRisksCount = useMemo(
     () =>
       tasks.filter((task) => {
-        const props = task.properties as Record<string, unknown> | null;
-        return task.status !== 'done' && props?.rm_risk;
+        return task.status !== 'done' && hasRmRisk(task.properties);
       }).length,
     [tasks]
   );

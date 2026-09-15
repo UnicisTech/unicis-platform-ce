@@ -2,13 +2,8 @@ import RpaProcedureDialog from './procedure-form/RpaProcedureDialog';
 import { CreatePiaRisk } from '@/components/interfaces/pia';
 import { CreateProcedure as CreateTiaProcedure } from '@/components/interfaces/tia';
 import type { Task } from 'types';
-import {
-  PiaRisk,
-  RpaProcedureInterface,
-  TaskProperties,
-  TiaProcedureInterface,
-  UseRpaCreationState,
-} from 'types';
+import { UseRpaCreationState } from 'types';
+import { getPiaRisk, getRpaProcedure, getTiaProcedure } from '@/lib/properties';
 
 interface CreateProcedureTestProps extends UseRpaCreationState {
   tasks?: Task[];
@@ -34,11 +29,7 @@ const CreateProcedureTest = ({
         <RpaProcedureDialog
           open={isCreateOpen}
           onOpenChange={setIsCreateOpen}
-          prevProcedure={
-            (selectedTask?.properties as TaskProperties)?.rpa_procedure as
-              | RpaProcedureInterface
-              | undefined
-          }
+          prevProcedure={getRpaProcedure(selectedTask?.properties)}
           tasks={tasks}
           selectedTask={selectedTask}
           mutateTasks={mutateTasks}
@@ -50,11 +41,7 @@ const CreateProcedureTest = ({
           key={selectedTask?.id || 'create-pia'}
           open={isPiaOpen}
           onOpenChange={setIsPiaOpen}
-          prevRisk={
-            (selectedTask?.properties as TaskProperties)?.pia_risk as
-              | PiaRisk
-              | undefined
-          }
+          prevRisk={getPiaRisk(selectedTask?.properties)}
           selectedTask={selectedTask}
           mutateTasks={mutateTasks}
           completeCallback={() => onProcedureCompletedCallback('PIA')}
@@ -65,11 +52,7 @@ const CreateProcedureTest = ({
           key={selectedTask?.id || 'create-tia'}
           open={isTiaOpen}
           onOpenChange={setIsTiaOpen}
-          prevProcedure={
-            (selectedTask?.properties as TaskProperties)?.tia_procedure as
-              | TiaProcedureInterface
-              | undefined
-          }
+          prevProcedure={getTiaProcedure(selectedTask?.properties)}
           selectedTask={selectedTask}
           mutateTasks={mutateTasks}
           completeCallback={() => onProcedureCompletedCallback('TIA')}

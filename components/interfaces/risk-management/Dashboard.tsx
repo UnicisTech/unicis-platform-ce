@@ -5,7 +5,7 @@ import useCanAccess from 'hooks/useCanAccess';
 import useTeamTasks from 'hooks/useTeamTasks';
 import useTeam from 'hooks/useTeam';
 import { useRouter } from 'next/router';
-import { TaskProperties, TaskWithRmRisk } from 'types';
+import { TaskWithRmRisk } from 'types';
 import { Error } from '@/components/shared';
 import { ModuleEmptyState } from '@/components/shared/ModuleEmptyState';
 import RisksTable from './RisksTable';
@@ -36,6 +36,7 @@ import {
   downloadRmTemplateCsv,
   downloadRmTemplateOds,
 } from '@/lib/rm/import';
+import { taskHasRmRisk } from '@/lib/properties';
 
 interface RmMatrixFilter {
   x: number;
@@ -105,11 +106,7 @@ const Dashboard = () => {
     if (!tasks) {
       return [];
     }
-    return tasks.filter((tasks) => {
-      const taskProperties = tasks.properties as TaskProperties;
-      const procedure = taskProperties.rm_risk;
-      return procedure;
-    }) as TaskWithRmRisk[];
+    return tasks.filter(taskHasRmRisk);
   }, [tasks]);
 
   const filteredTasks = useMemo(() => {

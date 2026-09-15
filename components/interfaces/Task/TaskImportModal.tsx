@@ -12,7 +12,7 @@ import {
 } from '@/components/shadcn/ui/dialog';
 import { Button } from '@/components/shadcn/ui/button';
 import { Badge } from '@/components/shadcn/ui/badge';
-import type { Team, TeamProperties, ISO } from 'types';
+import type { Team, ISO } from 'types';
 import useTasks from 'hooks/useTasks';
 import {
   downloadTaskTemplateXlsx,
@@ -27,6 +27,7 @@ import {
   getAvailableTemplates,
   generateTemplateRows,
 } from '@/lib/tasks/taskTemplates';
+import { getTeamCscIso } from '@/lib/properties';
 
 type TabType = 'templates' | 'upload';
 
@@ -45,8 +46,7 @@ const TaskImportModal = ({
   const { slug } = router.query as { slug: string };
   const { mutateTasks } = useTasks(slug);
 
-  const teamProperties = team.properties as TeamProperties;
-  const enabledFrameworks = (teamProperties?.csc_iso ?? []) as ISO[];
+  const enabledFrameworks = getTeamCscIso(team.properties);
 
   const cscNamespaces = useMemo(
     () => enabledFrameworks.map((iso) => `csc/${iso}`),

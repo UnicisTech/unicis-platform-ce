@@ -3,7 +3,8 @@ import { Field } from '@/components/shared/atlaskit';
 import RiskMatrixBubbleChart from './RiskMatrixBubbleChart';
 import { riskSecurityPoints, riskProbabilityPoints } from '@/lib/pia';
 import type { Task } from 'types';
-import { PiaRisk, TaskProperties } from 'types';
+import { PiaRisk } from 'types';
+import { getPiaRisk } from '@/lib/properties';
 import { useTranslation } from 'next-i18next';
 import { steps } from '@/lib/pia';
 
@@ -156,8 +157,7 @@ const BubbleChartTab: React.FC<{ risk: PiaRisk }> = ({ risk }) => {
 const PiaPanel: React.FC<{ task: Task }> = ({ task }) => {
   const { t } = useTranslation('common');
   const [activeTab, setActiveTab] = useState(0);
-  const properties = task.properties as TaskProperties;
-  const risk = properties.pia_risk as PiaRisk;
+  const risk = getPiaRisk(task.properties);
 
   const tabs = risk
     ? [
@@ -184,7 +184,7 @@ const PiaPanel: React.FC<{ task: Task }> = ({ task }) => {
         <div className="w-full">
           <div role="tablist" className="tabs tabs-bordered">
             {steps.map((step, i) => {
-              if (i === 5 && !risk[4]) return null;
+              if (i === 5 && !risk?.[4]) return null;
               return (
                 <button
                   key={i}

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import type { ISO, TeamProperties } from 'types';
+import type { ISO } from 'types';
 import { useTranslation } from 'next-i18next';
+import { getTeamCscIso } from '@/lib/properties';
 
 //TODO: rewrite to SWR
 const useISO = (team: any) => {
@@ -12,8 +13,8 @@ const useISO = (team: any) => {
     const asyncEffect = async () => {
       if (!team) return;
 
-      const iso = (team?.properties as TeamProperties)?.csc_iso;
-      if (iso?.length) {
+      const iso = getTeamCscIso(team.properties);
+      if (iso.length) {
         setISO(iso);
       } else {
         try {

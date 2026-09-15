@@ -122,8 +122,9 @@ function TaskStatusMatrix({ tasks, slug }: { tasks: Task[]; slug: string }) {
     () =>
       MODULE_ROWS.map((mod) => {
         const moduleTasks = tasks.filter((task) => {
-          const props = task.properties as Record<string, unknown>;
-          return isTaskModuleKey(mod.key) && hasTaskModule(props, mod.key);
+          return (
+            isTaskModuleKey(mod.key) && hasTaskModule(task.properties, mod.key)
+          );
         });
         const counts: Record<string, number> = {};
         for (const col of STATUS_COLS) {

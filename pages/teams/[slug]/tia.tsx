@@ -11,7 +11,7 @@ import useTeam from 'hooks/useTeam';
 import { GetServerSidePropsContext } from 'next';
 import useTeamTasks from 'hooks/useTeamTasks';
 import useCanAccess from 'hooks/useCanAccess';
-import type { TaskWithTiaProcedure, TaskProperties } from 'types';
+import type { TaskWithTiaProcedure } from 'types';
 import {
   TiaTable,
   DeleteProcedure,
@@ -43,6 +43,7 @@ import {
   downloadTiaTemplateCsv,
   downloadTiaTemplateOds,
 } from '@/lib/tia/import';
+import { taskHasTiaProcedure } from '@/lib/properties';
 
 // TODO: move to components/interfaces/tia
 const TiaDashboard: NextPageWithLayout<
@@ -72,11 +73,7 @@ const TiaDashboard: NextPageWithLayout<
     if (!tasks) {
       return [];
     }
-    return tasks.filter((task) => {
-      const taskProperties = task.properties as TaskProperties;
-      const procedure = taskProperties.tia_procedure;
-      return procedure;
-    }) as TaskWithTiaProcedure[];
+    return tasks.filter(taskHasTiaProcedure);
   }, [tasks]);
 
   const handleExport = async (

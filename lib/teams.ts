@@ -6,7 +6,7 @@ import {
 import { getSession } from './session';
 import { getTeamMember } from 'models/team';
 import { getCurrentPlan, subscriptions } from './subscriptions';
-import { TeamProperties } from 'types';
+import { parseTeamProperties } from '@/lib/properties';
 
 export async function getTeamAccess(
   req: NextApiRequest | GetServerSidePropsContext['req'],
@@ -33,6 +33,6 @@ export async function getTeamAccess(
     team,
     plan,
     teamFeatures,
-    teamProperties: team.properties as TeamProperties,
+    teamProperties: parseTeamProperties(team.properties).properties,
   };
 }

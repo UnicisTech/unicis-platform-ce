@@ -1,5 +1,5 @@
 import type { Task } from 'types';
-import type { RMProcedureInterface, TaskProperties } from 'types';
+import { getRmRisk } from '@/lib/properties';
 
 const transformToRange = (value: number): number => {
   return Math.floor(value / 20);
@@ -37,22 +37,21 @@ export const computeRiskMap = (tasks: Task[]): Map<string, number> | null => {
 
   const riskMap = new Map<string, number>();
 
-  tasks
-    .filter((task) => (task.properties as TaskProperties)?.rm_risk)
-    .map((task) => (task.properties as TaskProperties)?.rm_risk)
-    .forEach((risk) => {
-      const security = risk?.[1]?.['TreatedImpact'] as number;
-      const probability = risk?.[1]?.['TreatedProbability'] as number;
+  tasks.forEach((task) => {
+    const risk = getRmRisk(task.properties);
+    if (!risk) return;
+    const security = risk[1].TreatedImpact;
+    const probability = risk[1].TreatedProbability;
 
-      if (!security || !probability) return;
+    if (!security || !probability) return;
 
-      const x = transformToRange(security);
-      const y = transformToRange(probability);
+    const x = transformToRange(security);
+    const y = transformToRange(probability);
 
-      const key = `${x},${y}`;
+    const key = `${x},${y}`;
 
-      riskMap.set(key, (riskMap.get(key) || 0) + 1);
-    });
+    riskMap.set(key, (riskMap.get(key) || 0) + 1);
+  });
 
   return riskMap;
 };
@@ -61,9 +60,7 @@ export const calculateRiskDistribution = (tasks: Task[]): number[] => {
   const riskCounts = [0, 0, 0, 0, 0];
 
   tasks.forEach((task) => {
-    const risk = (task.properties as TaskProperties).rm_risk as
-      | RMProcedureInterface
-      | undefined;
+    const risk = getRmRisk(task.properties);
     if (!risk) {
       return;
     }
