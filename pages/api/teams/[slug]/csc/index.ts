@@ -2,7 +2,8 @@ import { setCscStatus } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
-import { ISO } from 'types';
+import type { CscStatus } from '@/lib/csc/csc-statuses';
+import type { ISO } from 'types';
 
 export default async function handler(
   req: NextApiRequest,
@@ -32,7 +33,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   const statuses = await setCscStatus({
     slug: slug as string,
     control: control as string,
-    value: value as string,
+    value: value as CscStatus,
     framework: framework as ISO,
   });
 

@@ -56,7 +56,7 @@ export const saveProcedure = async (params: {
   taskNumber: number;
   slug: string;
   prevProcedure: RpaProcedureInterface | [];
-  nextProcedure: RpaProcedureInterface | [];
+  nextProcedure: RpaProcedureInterface;
 }) => {
   const { user, taskNumber, slug, prevProcedure, nextProcedure } = params;
   const task = await prisma.task.findFirst({

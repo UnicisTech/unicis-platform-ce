@@ -19,12 +19,12 @@ export type RMProcedureInterface = [
 ];
 
 export type TaskRmProperties = {
-  rm_risk?: RMProcedureInterface | [];
-  rm_audit_logs: AuditLog[] | [];
+  rm_risk?: RMProcedureInterface;
+  rm_audit_logs?: AuditLog[];
 };
 
-export type TaskWithRmRisk = Task & {
-  properties: {
+export type TaskWithRmRisk = Omit<Task, 'properties'> & {
+  properties: TaskRmProperties & {
     rm_risk: RMProcedureInterface;
   };
 };

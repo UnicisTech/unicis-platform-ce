@@ -180,7 +180,7 @@ export type Option = {
 
 export type Diff = {
   field: string;
-  prevValue: string | string[] | undefined;
+  prevValue?: string | string[];
   nextValue: string | string[];
 } | null;
 
@@ -196,7 +196,7 @@ export type TeamMemberWithUser = TeamMember & { user: User };
 export type TeamProperties = TeamCscProperties & TeamIapProperties;
 
 export type TaskAuditLogProperties = {
-  task_audit_logs: AuditLog[] | [];
+  task_audit_logs?: AuditLog[];
 };
 
 export type TaskProperties = TaskTiaProperties &

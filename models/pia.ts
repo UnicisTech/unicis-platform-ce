@@ -8,7 +8,7 @@ export const saveRisk = async (params: {
   taskNumber: number;
   slug: string;
   prevRisk: PiaRisk | [];
-  nextRisk: PiaRisk | [];
+  nextRisk: PiaRisk;
 }) => {
   const { user, taskNumber, slug, prevRisk, nextRisk } = params;
   const task = await prisma.task.findFirst({

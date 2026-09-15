@@ -57,65 +57,35 @@ export type Section = {
   value: string;
 };
 
-export type ISO =
-  | 'mvsp'
-  | 'iso-2013'
-  | 'iso-2022'
-  | 'nistcsfv2'
-  | 'eunis2'
-  | 'gdpr'
-  | 'cisv81'
-  | 'soc2v2'
-  | 'c5_2020'
-  | 'owasp_asvs_v5'
-  | 'pcidss_v401'
-  | 'iso42001';
+export const ISO_VALUES = [
+  'mvsp',
+  'iso-2013',
+  'iso-2022',
+  'nistcsfv2',
+  'eunis2',
+  'gdpr',
+  'cisv81',
+  'soc2v2',
+  'c5_2020',
+  'owasp_asvs_v5',
+  'pcidss_v401',
+  'iso42001',
+] as const;
 
-// TODO: use getControlPropsName function with config and ISO type to generate type
-type CscStatusesPropMap = {
-  mvsp: 'csc_statuses_mvsp';
-  'iso-2013': 'csc_statuses_iso-2013';
-  'iso-2022': 'csc_statuses_iso-2022';
-  nistcsfv2: 'csc_statuses_nistcsfv2';
-  eunis2: 'csc_statuses_eunis2';
-  gdpr: 'csc_statuses_gdpr';
-  cisv81: 'csc_statuses_cisv81';
-  soc2v2: 'csc_statuses_soc2v2';
-  c5_2020: 'csc_statuses_c5_2020';
-  owasp_asvs_v5: 'csc_statuses_owasp_asvs_v5';
-  pcidss_v401: 'csc_statuses_pcidss_v401';
-  iso42001: 'csc_statuses_iso42001';
-};
+export type ISO = (typeof ISO_VALUES)[number];
 
-export type CscStatusesProp = CscStatusesPropMap[ISO];
+export type CscStatusesProp = `csc_statuses_${ISO}`;
 
 export type CscStatusesMap = Record<string, CscStatus>;
 
-// TODO: use getControlPropsName function with config and ISO type to generate type
-type CscControlsPropMap = {
-  mvsp: 'csc_controls_mvsp';
-  'iso-2013': 'csc_controls_iso-2013';
-  'iso-2022': 'csc_controls_iso-2022';
-  nistcsfv2: 'csc_controls_nistcsfv2';
-  eunis2: 'csc_controls_eunis2';
-  gdpr: 'csc_controls_gdpr';
-  cisv81: 'csc_controls_cisv81';
-  soc2v2: 'csc_controls_soc2v2';
-  c5_2020: 'csc_controls_c5_2020';
-  owasp_asvs_v5: 'csc_controls_owasp_asvs_v5';
-  pcidss_v401: 'csc_controls_pcidss_v401';
-  iso42001: 'csc_controls_iso42001';
-};
-
-export type CscControlsProp = CscControlsPropMap[ISO];
+export type CscControlsProp = `csc_controls_${ISO}`;
 
 export type TeamCscProperties = {
   csc_iso?: ISO[];
-} & {
-  [key in CscStatusesProp]?: { [key: string]: string };
-};
+} & Partial<Record<CscStatusesProp, CscStatusesMap>>;
 
 export type TaskCscProperties = {
+  /** @deprecated Read legacy data through the task-properties selectors. */
   csc_controls?: string[];
-  csc_audit_logs: CscAuditLog[];
-};
+  csc_audit_logs?: CscAuditLog[];
+} & Partial<Record<CscControlsProp, string[]>>;

@@ -1,5 +1,5 @@
 import type { Task } from './dto';
-import { AuditLog } from './base';
+import type { AuditLog } from './base';
 
 export type RiskProbability =
   | 'rare'
@@ -69,13 +69,13 @@ export interface PiaConfig {
   supervisoryAuthorityInvolvement: Option[];
 }
 
-export type TaskWithPiaRisk = Task & {
-  properties: {
+export type TaskWithPiaRisk = Omit<Task, 'properties'> & {
+  properties: TaskPiaProperties & {
     pia_risk: PiaRisk;
   };
 };
 
 export type TaskPiaProperties = {
-  pia_risk?: PiaRisk | [];
-  pia_audit_logs: AuditLog[] | [];
+  pia_risk?: PiaRisk;
+  pia_audit_logs?: AuditLog[];
 };

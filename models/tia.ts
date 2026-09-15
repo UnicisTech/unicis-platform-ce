@@ -1,15 +1,15 @@
 import { fields } from '@/lib/tia';
 import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
-import { TiaProcedureInterface, TaskProperties } from 'types';
+import { StoredTiaProcedureInterface, TaskProperties } from 'types';
 import { TiaAuditLog, Diff } from 'types';
 
 export const deleteProcedure = async (params: {
   user: Session['user'];
   taskNumber: number;
   slug: string;
-  prevProcedure: TiaProcedureInterface | [];
-  nextProcedure: TiaProcedureInterface | [];
+  prevProcedure: StoredTiaProcedureInterface | [];
+  nextProcedure: StoredTiaProcedureInterface | [];
 }) => {
   const { user, taskNumber, slug, prevProcedure, nextProcedure } = params;
   const task = await prisma.task.findFirst({
@@ -55,8 +55,8 @@ export const saveProcedure = async (params: {
   user: Session['user'];
   taskNumber: number;
   slug: string;
-  prevProcedure: TiaProcedureInterface | [];
-  nextProcedure: TiaProcedureInterface | [];
+  prevProcedure: StoredTiaProcedureInterface | [];
+  nextProcedure: StoredTiaProcedureInterface;
 }) => {
   const { user, taskNumber, slug, prevProcedure, nextProcedure } = params;
   const task = await prisma.task.findFirst({
@@ -102,8 +102,8 @@ export const addAuditLogs = async (params: {
   taskId: number;
   taskProperties: TaskProperties;
   user: Session['user'];
-  prevProcedure: TiaProcedureInterface | [];
-  nextProcedure: TiaProcedureInterface | [];
+  prevProcedure: StoredTiaProcedureInterface | [];
+  nextProcedure: StoredTiaProcedureInterface | [];
 }) => {
   const { taskId, taskProperties, user, prevProcedure, nextProcedure } = params;
   const newAuditItems: TiaAuditLog[] = [];

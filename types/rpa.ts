@@ -77,15 +77,15 @@ export type RpaAuditLog = {
   diff: Diff;
 };
 
-export type TaskWithRpaProcedure = Task & {
-  properties: {
+export type TaskWithRpaProcedure = Omit<Task, 'properties'> & {
+  properties: TaskRpaProperties & {
     rpa_procedure: RpaProcedureInterface;
   };
 };
 
 export type TaskRpaProperties = {
-  rpa_procedure?: RpaProcedureInterface | [];
-  rpa_audit_logs: RpaAuditLog[];
+  rpa_procedure?: RpaProcedureInterface;
+  rpa_audit_logs?: RpaAuditLog[];
 };
 
 export type ProcedureQueueItem = 'TIA' | 'PIA';

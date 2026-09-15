@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { getCscStatusesProp } from '@/lib/csc';
+import type { CscStatus } from '@/lib/csc/csc-statuses';
 import frameworks from '@/lib/csc/frameworks';
 import { getSession } from '@/lib/session';
 import { findOrCreateApp } from '@/lib/svix';
@@ -386,7 +387,7 @@ export const setCscStatus = async ({
 }: {
   slug: string;
   control: string;
-  value: string;
+  value: CscStatus;
   framework: ISO;
 }) => {
   const team = await prisma.team.findUnique({

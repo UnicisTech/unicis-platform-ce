@@ -13,7 +13,7 @@ export const saveRisk = async (params: {
   taskNumber: number;
   slug: string;
   prevRisk: RMProcedureInterface | [];
-  nextRisk: RMProcedureInterface | [];
+  nextRisk: RMProcedureInterface;
 }) => {
   const { user, taskNumber, slug, prevRisk, nextRisk } = params;
   const task = await prisma.task.findFirst({

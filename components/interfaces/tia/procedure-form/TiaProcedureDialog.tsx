@@ -14,7 +14,7 @@ import {
 } from '@/components/shadcn/ui/dialog';
 import { Button } from '@/components/shadcn/ui/button';
 import { Loader2 } from 'lucide-react';
-import type { Task, TiaProcedureInterface } from 'types';
+import type { StoredTiaProcedureInterface, Task } from 'types';
 import {
   TransferScenarioStep,
   ProblematicLawfulAccessStep,
@@ -39,7 +39,7 @@ import {
 } from '@/lib/tia/helpers';
 
 interface TiaProcedureDialogProps {
-  prevProcedure?: TiaProcedureInterface;
+  prevProcedure?: StoredTiaProcedureInterface;
   selectedTask?: Task;
   tasks?: Task[];
   open: boolean;

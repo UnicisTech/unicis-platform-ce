@@ -112,13 +112,22 @@ export type TiaProcedureInterface = [
   },
 ];
 
-export type TaskWithTiaProcedure = Task & {
-  properties: {
-    tia_procedure: TiaProcedureInterface;
+export type TiaShortProcedureInterface = [
+  TiaProcedureInterface[0],
+  TiaProcedureInterface[1],
+];
+
+export type StoredTiaProcedureInterface =
+  | TiaShortProcedureInterface
+  | TiaProcedureInterface;
+
+export type TaskWithTiaProcedure = Omit<Task, 'properties'> & {
+  properties: TaskTiaProperties & {
+    tia_procedure: StoredTiaProcedureInterface;
   };
 };
 
 export type TaskTiaProperties = {
-  tia_procedure?: TiaProcedureInterface | [];
-  tia_audit_logs: TiaAuditLog[];
+  tia_procedure?: StoredTiaProcedureInterface;
+  tia_audit_logs?: TiaAuditLog[];
 };
