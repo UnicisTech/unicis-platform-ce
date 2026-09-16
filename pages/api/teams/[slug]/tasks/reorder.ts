@@ -182,7 +182,6 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
           duedate: prev.duedate,
           description: prev.description,
         },
-        taskProperties: prev.properties,
       });
     }
 

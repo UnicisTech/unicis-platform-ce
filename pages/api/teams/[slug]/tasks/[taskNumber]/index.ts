@@ -177,7 +177,6 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       duedate: task.duedate,
       description: task.description,
     },
-    taskProperties: task.properties,
   });
 
   await sendEvent(teamMember.teamId, 'task.updated', task);

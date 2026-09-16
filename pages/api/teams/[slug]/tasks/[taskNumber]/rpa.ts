@@ -49,13 +49,12 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const { prevProcedure, nextProcedure } = body;
+  const { nextProcedure } = body;
 
   const task = await saveProcedure({
     user: teamMember.user,
     taskNumber: taskNumberAsNumber,
     slug: slug as string,
-    prevProcedure,
     nextProcedure,
   });
 
@@ -92,8 +91,6 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
     user: teamMember.user,
     taskNumber: taskNumberAsNumber,
     slug: slug as string,
-    prevProcedure: [],
-    nextProcedure: [],
   });
 
   if (!task) {

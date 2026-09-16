@@ -56,7 +56,6 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     user: teamMember.user,
     taskNumber: taskNumberAsNumber,
     slug: slug as string,
-    prevRisk,
     nextRisk,
   });
 
@@ -102,8 +101,6 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
     user: teamMember.user,
     taskNumber: taskNumberAsNumber,
     slug: slug as string,
-    prevRisk: [],
-    nextRisk: [],
   });
 
   if (!task) {

@@ -1,109 +1,64 @@
-import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
 import { generateChangeLog, getDiff } from '@/lib/pia';
 import type { AuditLog, PiaRisk } from 'types';
 import {
   appendTaskAuditLogs,
   deleteTaskProperty,
+  getPiaRisk,
   setTaskProperty,
 } from '@/lib/properties';
+import { updateTaskPropertiesBySlugAndNumber } from 'models/properties';
 
 export const saveRisk = async (params: {
   user: Session['user'];
   taskNumber: number;
   slug: string;
-  prevRisk: PiaRisk | [];
   nextRisk: PiaRisk;
 }) => {
-  const { user, taskNumber, slug, prevRisk, nextRisk } = params;
-  const task = await prisma.task.findFirst({
-    where: {
-      taskNumber,
-      team: {
-        slug,
-      },
+  const { user, taskNumber, slug, nextRisk } = params;
+
+  return updateTaskPropertiesBySlugAndNumber({
+    taskNumber,
+    slug,
+    mutate: (properties) => {
+      const prevRisk = getPiaRisk(properties) ?? [];
+      const taskProperties = setTaskProperty(properties, 'pia_risk', nextRisk);
+      return appendTaskAuditLogs(
+        taskProperties,
+        'pia_audit_logs',
+        createAuditLogs(user, prevRisk, nextRisk)
+      );
     },
   });
-
-  if (!task) {
-    return null;
-  }
-
-  const taskId = task.id;
-  const taskProperties = setTaskProperty(task.properties, 'pia_risk', nextRisk);
-
-  const updatedTask = await prisma.task.update({
-    where: {
-      id: taskId,
-    },
-    data: {
-      properties: taskProperties,
-    },
-  });
-
-  await addAuditLogs({
-    taskId,
-    taskProperties,
-    user,
-    prevRisk,
-    nextRisk,
-  });
-
-  return updatedTask;
 };
 
 export const deleteRisk = async (params: {
   user: Session['user'];
   taskNumber: number;
   slug: string;
-  prevRisk: PiaRisk | [];
-  nextRisk: PiaRisk | [];
 }) => {
-  const { taskNumber, slug, user, prevRisk, nextRisk } = params;
-  const task = await prisma.task.findFirst({
-    where: {
-      taskNumber,
-      team: {
-        slug,
-      },
+  const { taskNumber, slug, user } = params;
+
+  return updateTaskPropertiesBySlugAndNumber({
+    taskNumber,
+    slug,
+    mutate: (properties) => {
+      const prevRisk = getPiaRisk(properties) ?? [];
+      const taskProperties = deleteTaskProperty(properties, 'pia_risk');
+      return appendTaskAuditLogs(
+        taskProperties,
+        'pia_audit_logs',
+        createAuditLogs(user, prevRisk, [])
+      );
     },
   });
-
-  if (!task) {
-    return null;
-  }
-
-  const taskId = task.id;
-  const taskProperties = deleteTaskProperty(task.properties, 'pia_risk');
-
-  const updatedTask = await prisma.task.update({
-    where: {
-      id: taskId,
-    },
-    data: {
-      properties: taskProperties,
-    },
-  });
-
-  await addAuditLogs({
-    taskId,
-    taskProperties,
-    user,
-    prevRisk,
-    nextRisk,
-  });
-
-  return updatedTask;
 };
 
-export const addAuditLogs = async (params: {
-  taskId: number;
-  taskProperties: unknown;
-  user: Session['user'];
-  prevRisk: PiaRisk | [];
-  nextRisk: PiaRisk | [];
-}) => {
-  const { taskId, taskProperties, user, prevRisk, nextRisk } = params;
+const createAuditLogs = (
+  user: Session['user'],
+  prevRisk: PiaRisk | [],
+  nextRisk: PiaRisk | []
+): AuditLog[] => {
   const newAuditItems: AuditLog[] = [];
 
   if (prevRisk.length === 0 && nextRisk.length !== 0) {
@@ -119,18 +74,5 @@ export const addAuditLogs = async (params: {
     );
   }
 
-  const updatedProperties = appendTaskAuditLogs(
-    taskProperties,
-    'pia_audit_logs',
-    newAuditItems
-  );
-
-  await prisma.task.update({
-    where: {
-      id: taskId,
-    },
-    data: {
-      properties: updatedProperties,
-    },
-  });
+  return newAuditItems;
 };

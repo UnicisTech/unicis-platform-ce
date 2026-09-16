@@ -16,6 +16,7 @@ import {
   parseTeamProperties,
   setTeamProperty,
 } from '@/lib/properties';
+import { updateTeamPropertiesBySlug } from 'models/properties';
 
 export const createTeam = async (param: {
   userEmail: string;
@@ -353,34 +354,28 @@ export const getTeamPropertiesBySlug = async (slug: string) => {
 };
 
 export const getCscStatusesBySlugAndIso = async (slug: string, iso: ISO) => {
-  const team = await prisma.team.findUniqueOrThrow({
-    where: { slug },
-    select: { properties: true },
-  });
+  return updateTeamPropertiesBySlug({
+    slug,
+    mutate: (properties) => {
+      const cscStatusesProp = getCscStatusesProp(iso);
+      const teamProperties = parseTeamProperties(properties).properties;
+      const existingStatuses = teamProperties[cscStatusesProp];
 
-  const cscStatusesProp = getCscStatusesProp(iso);
-  const teamProperties = parseTeamProperties(team.properties).properties;
-  const existingStatuses = teamProperties[cscStatusesProp];
+      if (existingStatuses) {
+        return { result: existingStatuses };
+      }
 
-  if (existingStatuses) {
-    // already exists → return it
-    return existingStatuses;
-  }
+      const initial: CscStatusesMap = {};
+      frameworks[iso].controls.forEach((control) => {
+        initial[control.id] = 'unknown';
+      });
 
-  // not found → initialize with "Unknown"
-  const initial: CscStatusesMap = {};
-  frameworks[iso].controls.forEach((control) => {
-    initial[control.id] = 'unknown';
-  });
-
-  await prisma.team.update({
-    where: { slug },
-    data: {
-      properties: setTeamProperty(team.properties, cscStatusesProp, initial),
+      return {
+        properties: setTeamProperty(properties, cscStatusesProp, initial),
+        result: initial,
+      };
     },
   });
-
-  return initial;
 };
 
 export const setCscStatus = async ({
@@ -394,68 +389,40 @@ export const setCscStatus = async ({
   value: CscStatus;
   framework: ISO;
 }) => {
-  const team = await prisma.team.findUnique({
-    where: {
-      slug: slug,
-    },
-    select: {
-      properties: true,
-    },
-  });
+  return updateTeamPropertiesBySlug({
+    slug,
+    mutate: (properties) => {
+      const cscStatusesProp = getCscStatusesProp(framework);
+      const cscStatuses = {
+        ...getTeamCscStatuses(properties, framework),
+        [control]: value,
+      };
 
-  const cscStatusesProp = getCscStatusesProp(framework);
-  const cscStatuses = {
-    ...getTeamCscStatuses(team?.properties, framework),
-  };
-  cscStatuses[control] = value;
-
-  await prisma.team.update({
-    where: { slug: slug },
-    data: {
-      properties: setTeamProperty(
-        team?.properties,
-        cscStatusesProp,
-        cscStatuses
-      ),
+      return {
+        properties: setTeamProperty(properties, cscStatusesProp, cscStatuses),
+        result: cscStatuses,
+      };
     },
   });
-
-  return cscStatuses;
 };
 
 export const getCscIso = async ({ slug }: { slug: string }): Promise<ISO[]> => {
-  const team = await prisma.team.findUnique({
-    where: {
-      slug: slug,
-    },
-    select: {
-      properties: true,
-    },
-  });
+  return updateTeamPropertiesBySlug({
+    slug,
+    mutate: (properties) => {
+      const currentIso = getTeamCscIso(properties);
 
-  const currentIso = getTeamCscIso(team?.properties);
+      if (currentIso.length) {
+        return { result: currentIso };
+      }
 
-  if (currentIso.length) {
-    return currentIso;
-  }
-
-  // TODO: create enum form ISO type
-  const initial = ['mvsp'] as ISO[];
-
-  const updatedProperties = setTeamProperty(
-    team?.properties,
-    'csc_iso',
-    initial
-  );
-
-  await prisma.team.update({
-    where: { slug: slug },
-    data: {
-      properties: updatedProperties,
+      const initial: ISO[] = ['mvsp'];
+      return {
+        properties: setTeamProperty(properties, 'csc_iso', initial),
+        result: initial,
+      };
     },
   });
-
-  return initial;
 };
 
 export const setCscIso = async ({
@@ -465,28 +432,20 @@ export const setCscIso = async ({
   slug: string;
   iso: ISO[];
 }) => {
-  const team = await prisma.team.findUnique({
-    where: {
-      slug: slug,
-    },
-    select: {
-      properties: true,
-    },
-  });
-
-  const currentIso = getTeamCscIso(team?.properties);
-  const updatedProperties = setTeamProperty(team?.properties, 'csc_iso', iso);
-
-  await prisma.team.update({
-    where: { slug: slug },
-    data: {
-      properties: updatedProperties,
+  const shouldTrackFirstSelection = await updateTeamPropertiesBySlug({
+    slug,
+    mutate: (properties) => {
+      const currentIso = getTeamCscIso(properties);
+      return {
+        properties: setTeamProperty(properties, 'csc_iso', iso),
+        result: !currentIso.length && iso.length > 0,
+      };
     },
   });
 
   // Activation funnel: a team's first explicit framework selection, as
-  // opposed to the implicit 'mvps' default applied in getCscIso().
-  if (!currentIso.length && iso.length > 0) {
+  // opposed to the implicit 'mvsp' default applied in getCscIso().
+  if (shouldTrackFirstSelection) {
     trackServerEvent(MatomoEvent.FirstFrameworkSelected);
   }
 

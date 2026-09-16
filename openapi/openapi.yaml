@@ -942,9 +942,8 @@ paths:
         The status is stored as a JSON blob in the team's `properties` field.
         Requires `team:read` permission.
 
-        **Note:** This endpoint performs a read-modify-write on the team's
-        properties JSON. For updating multiple controls at once prefer a
-        single call per control sequentially to avoid concurrent-write races.
+        The team's properties JSON is updated atomically in a serializable
+        transaction. Serialization conflicts are retried by the server.
       requestBody:
         required: true
         content:

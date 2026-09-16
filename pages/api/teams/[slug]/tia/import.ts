@@ -2,7 +2,6 @@ import { createTask } from 'models/task';
 import { throwIfNoTeamAccess } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNotAllowed } from 'models/user';
-import { prisma } from '@/lib/prisma';
 import type { TiaProcedureInterface } from 'types';
 import { setTaskProperty } from '@/lib/properties';
 
@@ -68,15 +67,6 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   let count = 0;
   for (const row of rows) {
-    const task = await createTask({
-      authorId,
-      teamId,
-      title: row.title.trim(),
-      status: 'todo',
-      duedate: null,
-      description: '',
-    });
-
     const years = Number(row.assessmentYears) || 1;
     const defaultNa = 'na' as const;
     const defaultZero = '0' as const;
@@ -164,15 +154,14 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     ];
 
-    const taskProperties = setTaskProperty(
-      task.properties,
-      'tia_procedure',
-      procedure
-    );
-
-    await prisma.task.update({
-      where: { id: task.id },
-      data: { properties: taskProperties },
+    await createTask({
+      authorId,
+      teamId,
+      title: row.title.trim(),
+      status: 'todo',
+      duedate: null,
+      description: '',
+      properties: setTaskProperty({}, 'tia_procedure', procedure),
     });
 
     count++;

@@ -1,5 +1,6 @@
 jest.mock('lib/prisma', () => ({
   prisma: {
+    $transaction: jest.fn(),
     task: {
       findFirst: jest.fn(),
       update: jest.fn(),
@@ -15,6 +16,7 @@ const prismaTask = prisma.task as unknown as {
   findFirst: jest.Mock;
   update: jest.Mock;
 };
+const prismaTransaction = prisma.$transaction as jest.Mock;
 
 const user = {
   id: 'user-1',
@@ -27,6 +29,9 @@ const user = {
 describe('CSC properties writes', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    prismaTransaction.mockImplementation(async (operation) =>
+      operation(prisma)
+    );
     prismaTask.update.mockResolvedValue({ id: 1 });
   });
 
@@ -45,13 +50,11 @@ describe('CSC properties writes', () => {
       ISO: 'mvsp',
     });
 
-    expect(prismaTask.update).toHaveBeenCalledTimes(3);
-    expect(prismaTask.update.mock.calls[0][0].data.properties).toEqual({
-      custom: { preserved: true },
-      csc_controls: ['legacy-control'],
-      csc_controls_mvsp: ['mvsp-1', 'mvsp-2'],
+    expect(prismaTransaction).toHaveBeenCalledWith(expect.any(Function), {
+      isolationLevel: 'Serializable',
     });
-    expect(prismaTask.update.mock.calls[2][0].data.properties).toEqual(
+    expect(prismaTask.update).toHaveBeenCalledTimes(1);
+    expect(prismaTask.update.mock.calls[0][0].data.properties).toEqual(
       expect.objectContaining({
         custom: { preserved: true },
         csc_controls: ['legacy-control'],

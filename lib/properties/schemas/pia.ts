@@ -1,4 +1,4 @@
-import { z, type ZodType } from 'zod';
+import { z, type ZodType, type ZodTypeDef } from 'zod';
 import type { PiaRisk } from 'types/pia';
 
 const riskProbabilitySchema = z.enum([
@@ -81,7 +81,7 @@ const piaFullRiskSchema = z.tuple([
   correctiveMeasuresSchema,
 ]);
 
-export const piaRiskSchema: ZodType<PiaRisk> = z.union([
+export const piaRiskSchema: ZodType<PiaRisk, ZodTypeDef, unknown> = z.union([
   piaFullRiskSchema,
   piaCoreRiskSchema.transform((risk) => [...risk, null] as PiaRisk),
 ]);

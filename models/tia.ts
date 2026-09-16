@@ -1,114 +1,69 @@
 import { fields } from '@/lib/tia';
-import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
 import { StoredTiaProcedureInterface } from 'types';
 import { TiaAuditLog, Diff } from 'types';
 import {
   appendTaskAuditLogs,
   deleteTaskProperty,
+  getTiaProcedure,
   setTaskProperty,
 } from '@/lib/properties';
+import { updateTaskPropertiesBySlugAndNumber } from 'models/properties';
 
 export const deleteProcedure = async (params: {
   user: Session['user'];
   taskNumber: number;
   slug: string;
-  prevProcedure: StoredTiaProcedureInterface | [];
-  nextProcedure: StoredTiaProcedureInterface | [];
 }) => {
-  const { user, taskNumber, slug, prevProcedure, nextProcedure } = params;
-  const task = await prisma.task.findFirst({
-    where: {
-      taskNumber,
-      team: {
-        slug,
-      },
+  const { user, taskNumber, slug } = params;
+
+  return updateTaskPropertiesBySlugAndNumber({
+    taskNumber,
+    slug,
+    mutate: (properties) => {
+      const prevProcedure = getTiaProcedure(properties) ?? [];
+      const taskProperties = deleteTaskProperty(properties, 'tia_procedure');
+      return appendTaskAuditLogs(
+        taskProperties,
+        'tia_audit_logs',
+        createAuditLogs(user, prevProcedure, [])
+      );
     },
   });
-
-  if (!task) {
-    return null;
-  }
-
-  const taskId = task.id;
-  const taskProperties = deleteTaskProperty(task.properties, 'tia_procedure');
-
-  const updatedTask = await prisma.task.update({
-    where: {
-      id: taskId,
-    },
-    data: {
-      properties: taskProperties,
-    },
-  });
-
-  await addAuditLogs({
-    taskId,
-    taskProperties,
-    user,
-    prevProcedure,
-    nextProcedure,
-  });
-
-  return updatedTask;
 };
 
 export const saveProcedure = async (params: {
   user: Session['user'];
   taskNumber: number;
   slug: string;
-  prevProcedure: StoredTiaProcedureInterface | [];
   nextProcedure: StoredTiaProcedureInterface;
 }) => {
-  const { user, taskNumber, slug, prevProcedure, nextProcedure } = params;
-  const task = await prisma.task.findFirst({
-    where: {
-      taskNumber,
-      team: {
-        slug,
-      },
+  const { user, taskNumber, slug, nextProcedure } = params;
+
+  return updateTaskPropertiesBySlugAndNumber({
+    taskNumber,
+    slug,
+    mutate: (properties) => {
+      const prevProcedure = getTiaProcedure(properties) ?? [];
+      const taskProperties = setTaskProperty(
+        properties,
+        'tia_procedure',
+        nextProcedure
+      );
+      return appendTaskAuditLogs(
+        taskProperties,
+        'tia_audit_logs',
+        createAuditLogs(user, prevProcedure, nextProcedure)
+      );
     },
   });
-
-  if (!task) {
-    return null;
-  }
-
-  const taskId = task.id;
-  const taskProperties = setTaskProperty(
-    task.properties,
-    'tia_procedure',
-    nextProcedure
-  );
-
-  const updatedTask = await prisma.task.update({
-    where: {
-      id: taskId,
-    },
-    data: {
-      properties: taskProperties,
-    },
-  });
-
-  await addAuditLogs({
-    taskId,
-    taskProperties,
-    user,
-    prevProcedure,
-    nextProcedure,
-  });
-
-  return updatedTask;
 };
 
-export const addAuditLogs = async (params: {
-  taskId: number;
-  taskProperties: unknown;
-  user: Session['user'];
-  prevProcedure: StoredTiaProcedureInterface | [];
-  nextProcedure: StoredTiaProcedureInterface | [];
-}) => {
-  const { taskId, taskProperties, user, prevProcedure, nextProcedure } = params;
+const createAuditLogs = (
+  user: Session['user'],
+  prevProcedure: StoredTiaProcedureInterface | [],
+  nextProcedure: StoredTiaProcedureInterface | []
+): TiaAuditLog[] => {
   const newAuditItems: TiaAuditLog[] = [];
 
   if (prevProcedure.length === 0 && nextProcedure.length !== 0) {
@@ -125,20 +80,7 @@ export const addAuditLogs = async (params: {
     );
   }
 
-  const updatedProperties = appendTaskAuditLogs(
-    taskProperties,
-    'tia_audit_logs',
-    newAuditItems
-  );
-
-  await prisma.task.update({
-    where: {
-      id: taskId,
-    },
-    data: {
-      properties: updatedProperties,
-    },
-  });
+  return newAuditItems;
 };
 
 const generateChangeLog = (

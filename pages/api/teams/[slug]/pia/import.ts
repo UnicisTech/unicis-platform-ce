@@ -2,7 +2,6 @@ import { createTask } from 'models/task';
 import { throwIfNoTeamAccess } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNotAllowed } from 'models/user';
-import { prisma } from '@/lib/prisma';
 import type { PiaRisk, RiskProbability, RiskSecurity } from 'types';
 import { setTaskProperty } from '@/lib/properties';
 
@@ -103,15 +102,6 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   let count = 0;
   for (const row of rows) {
-    const task = await createTask({
-      authorId,
-      teamId,
-      title: row.title.trim(),
-      status: 'todo',
-      duedate: null,
-      description: '',
-    });
-
     const risk: PiaRisk = [
       {
         isDataProcessingNecessary: 'necessary',
@@ -143,11 +133,14 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       null,
     ];
 
-    const taskProperties = setTaskProperty(task.properties, 'pia_risk', risk);
-
-    await prisma.task.update({
-      where: { id: task.id },
-      data: { properties: taskProperties },
+    await createTask({
+      authorId,
+      teamId,
+      title: row.title.trim(),
+      status: 'todo',
+      duedate: null,
+      description: '',
+      properties: setTaskProperty({}, 'pia_risk', risk),
     });
 
     count++;
