@@ -1,0 +1,1554 @@
+{
+  "sections": {
+    "id": {
+      "label": "Identifier"
+    },
+    "pr": {
+      "label": "Protéger"
+    },
+    "de": {
+      "label": "Détecter"
+    },
+    "rs": {
+      "label": "Répondre"
+    },
+    "rc": {
+      "label": "Rétablir"
+    }
+  },
+  "controls": {
+    "ccb-cff-id-am-1-1": {
+      "code": "ID.AM-1.1",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-1: Les dispositifs et systèmes physiques utilisés dans l'organisation sont inventoriés.\nUn inventaire des actifs associés aux informations et aux installations de traitement de l'information au sein de l'organisation doit être documenté, examiné et mis à jour lorsque des changements surviennent.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-id-am-1-2": {
+      "code": "ID.AM-1.2",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-1: Les dispositifs et systèmes physiques utilisés dans l'organisation sont inventoriés.\nL'inventaire des actifs associés aux informations et aux installations de traitement de l'information doit refléter les changements intervenus dans le contexte de l'organisation et inclure toutes les informations nécessaires à une responsabilisation efficace.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-am-1-3": {
+      "code": "ID.AM-1.3",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-1: Les dispositifs et systèmes physiques utilisés dans l'organisation sont inventoriés.\nLorsque du matériel non autorisé est détecté, il est mis en quarantaine pour un éventuel traitement d'exception, retiré ou remplacé, et l'inventaire est mis à jour en conséquence.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-am-1-4": {
+      "code": "ID.AM-1.4",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-1: Les dispositifs et systèmes physiques utilisés dans l'organisation sont inventoriés.\nLes mécanismes permettant de détecter la présence de composants matériels et micrologiciels non autorisés dans le réseau de l'organisation doivent être identifiés.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-id-am-2-1": {
+      "code": "ID.AM-2.1",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-2: Les plateformes et applications logicielles utilisées au sein de l'organisation sont inventoriées.\nUn inventaire reflétant les plateformes et les applications logicielles utilisées dans l'organisation doit être documenté, révisé et mis à jour lorsque des changements surviennent.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-id-am-2-2": {
+      "code": "ID.AM-2.2",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-2: Les plateformes et applications logicielles utilisées au sein de l'organisation sont inventoriées.\nL'inventaire des plates-formes logicielles et des applications associées à l'information et au traitement de l'information doit refléter l'évolution du contexte de l'organisation et inclure toutes les informations nécessaires à une responsabilisation efficace.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-am-2-3": {
+      "code": "ID.AM-2.3",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-2: Les plateformes et applications logicielles utilisées au sein de l'organisation sont inventoriées.\nLes personnes qui sont responsables de l'administration des plates-formes et des applications logicielles au sein de l'organisation et qui doivent en rendre compte doivent être identifiées.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-am-2-4": {
+      "code": "ID.AM-2.4",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-2: Les plateformes et applications logicielles utilisées au sein de l'organisation sont inventoriées.\nLorsqu'un logiciel non autorisé est détecté, il est mis en quarantaine en vue d'un éventuel traitement d'exception, supprimé ou remplacé, et l'inventaire est mis à jour en conséquence.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-am-2-5": {
+      "code": "ID.AM-2.5",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-2: Les plateformes et applications logicielles utilisées au sein de l'organisation sont inventoriées.\nLes mécanismes permettant de détecter la présence de logiciels non autorisés dans l'environnement TIC/OT de l'organisation doivent être identifiés.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-id-am-3-1": {
+      "code": "ID.AM-3.1",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-3: La communication organisationnelle et les flux de données sont schématisés.\nLes informations que l'organisation stocke et utilise doivent être identifiées.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-id-am-3-2": {
+      "code": "ID.AM-3.2",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-3: La communication organisationnelle et les flux de données sont schématisés.\nToutes les connexions au sein de l'environnement TIC/OT de l'organisation, ainsi qu'à d'autres plateformes internes à l'organisation, doivent être schématisées, documentées, approuvées et mises à jour le cas échéant.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-am-3-3": {
+      "code": "ID.AM-3.3",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-3: La communication organisationnelle et les flux de données sont schématisés.\nLes flux d'informations/de données dans l'environnement TIC/OT de l'organisation, ainsi que vers d'autres systèmes internes à l'organisation, doivent être schématisés, documentés, autorisés et mis à jour lorsque des changements surviennent.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-id-am-4-1": {
+      "code": "ID.AM-4.1",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-4: Les systèmes d'information externes sont catalogués.\nL'organisation doit schématiser, documenter, autoriser et, lorsque des changements surviennent, mettre à jour, tous les services externes et les connexions établies avec eux.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-am-4-2": {
+      "code": "ID.AM-4.2",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-4: Les systèmes d'information externes sont catalogués.\nLe flux d'informations vers/depuis les systèmes externes doit être schématisé, documenté, autorisé et mis à jour lorsque des changements surviennent.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-id-am-5-1": {
+      "code": "ID.AM-5.1",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-5: Les ressources sont organisées par ordre de priorité en fonction de leur classification, de leur criticité et de leur valeur opérationnelle.\nLes ressources de l'organisation (matériel, dispositifs, données, temps, personnel, informations et logiciels) doivent être organisées par ordre de priorité en fonction de leur classification, de leur criticité et de leur valeur opérationnelle.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-id-am-6-1": {
+      "code": "ID.AM-6.1",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-6: Les rôles, responsabilités et pouvoirs en matière de cybersécurité pour l'ensemble du personnel et les parties prenantes tierces (par exemple, les fournisseurs, les clients, les partenaires) sont établis.\n[MESURE CLÉ] Les rôles, les responsabilités et les pouvoirs en matière de sécurité de l'information et de cybersécurité au sein de l'organisation sont documentés, examinés, autorisés et mis à jour et alignés sur les rôles internes de l'organisation et les partenaires externes.\nImportant - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["I", "E", "IK", "EK"]
+    },
+    "ccb-cff-id-am-6-2": {
+      "code": "ID.AM-6.2",
+      "section": "id",
+      "control": "Gestion d'actifs",
+      "requirements": "ID.AM-6: Les rôles, responsabilités et pouvoirs en matière de cybersécurité pour l'ensemble du personnel et les parties prenantes tierces (par exemple, les fournisseurs, les clients, les partenaires) sont établis.\nL'organisation doit nommer un responsable de la sécurité des informations.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-id-be-1-1": {
+      "code": "ID.BE-1.1",
+      "section": "id",
+      "control": "Environnement opérationnel",
+      "requirements": "ID.BE-1: Le rôle de l'organisation dans la chaîne d'approvisionnement est identifié et communiqué.\nLe rôle de l'organisation dans la chaîne d'approvisionnement doit être identifié, documenté et communiqué.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-be-1-2": {
+      "code": "ID.BE-1.2",
+      "section": "id",
+      "control": "Environnement opérationnel",
+      "requirements": "ID.BE-1: Le rôle de l'organisation dans la chaîne d'approvisionnement est identifié et communiqué.\nL'organisation doit protéger son environnement TIC/OT des menaces pesant sur la chaîne d'approvisionnement en appliquant des mesures de sécurité dans le cadre d'une stratégie de sécurité globale documentée.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-id-be-2-1": {
+      "code": "ID.BE-2.1",
+      "section": "id",
+      "control": "Environnement opérationnel",
+      "requirements": "ID.BE-2: La place de l'organisation dans les infrastructures critiques et son secteur d'activité est identifiée et communiquée.\nLa place de l'organisation dans les infrastructures critiques et dans son secteur d'activité doit être identifiée et communiquée.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-be-3-1": {
+      "code": "ID.BE-3.1",
+      "section": "id",
+      "control": "Environnement opérationnel",
+      "requirements": "ID.BE-3: Les priorités de la mission, des objectifs et des activités de l'organisation sont établies et communiquées.\nLes priorités pour les opérations, les objectifs et les activités de l'organisation doivent être établies et communiquées.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-be-4-1": {
+      "code": "ID.BE-4.1",
+      "section": "id",
+      "control": "Environnement opérationnel",
+      "requirements": "ID.BE-4: Les dépendances et les fonctions critiques pour la prestation des services critiques sont établies.\nLes dépendances et les fonctions essentielles à la fourniture de services critiques doivent être identifiées, documentées et classées par ordre de priorité en fonction de leur criticité dans le cadre du processus d'évaluation des risques.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-be-5-1": {
+      "code": "ID.BE-5.1",
+      "section": "id",
+      "control": "Environnement opérationnel",
+      "requirements": "ID.BE-5: Les exigences en matière de résilience pour soutenir la prestation de services essentiels sont établies pour tous les états de fonctionnement (par exemple, en cas de contrainte/attaque, pendant le rétablissement, les opérations normales).\nPour soutenir la cyber-résilience et sécuriser la prestation de services essentiels, les exigences nécessaires sont identifiées, documentées et leur mise en œuvre testée et approuvée.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-be-5-2": {
+      "code": "ID.BE-5.2",
+      "section": "id",
+      "control": "Environnement opérationnel",
+      "requirements": "ID.BE-5: Les exigences en matière de résilience pour soutenir la prestation de services essentiels sont établies pour tous les états de fonctionnement (par exemple, en cas de contrainte/attaque, pendant le rétablissement, les opérations normales).\nLes installations de traitement de l'information et de soutien doivent mettre en œuvre la redondance pour répondre aux exigences de disponibilité, telles que définies par l'organisation et/ou les cadres réglementaires.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-id-be-5-3": {
+      "code": "ID.BE-5.3",
+      "section": "id",
+      "control": "Environnement opérationnel",
+      "requirements": "ID.BE-5: Les exigences en matière de résilience pour soutenir la prestation de services essentiels sont établies pour tous les états de fonctionnement (par exemple, en cas de contrainte/attaque, pendant le rétablissement, les opérations normales).\nDes objectifs de temps et de points de rétablissement pour le rétablissement des processus essentiels des systèmes TIC/OT sont définis.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-id-gv-1-1": {
+      "code": "ID.GV-1.1",
+      "section": "id",
+      "control": "Gouvernance",
+      "requirements": "ID.GV-1: La politique de cybersécurité de l'organisation est établie et communiquée .\nLes politiques et procédures en matière de sécurité de l'information et de cybersécurité doivent être créées, documentées, examinées, approuvées et mises à jour lorsque des changements interviennent.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-id-gv-1-2": {
+      "code": "ID.GV-1.2",
+      "section": "id",
+      "control": "Gouvernance",
+      "requirements": "ID.GV-1: La politique de cybersécurité de l'organisation est établie et communiquée .\nUne politique de sécurité des informations et de cybersécurité à l'échelle de l'organisation doit être établie, documentée, mise à jour en cas de changement, diffusée et approuvée par la direction générale.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-gv-3-1": {
+      "code": "ID.GV-3.1",
+      "section": "id",
+      "control": "Gouvernance",
+      "requirements": "ID.GV-3: Les exigences légales et réglementaires concernant la cybersécurité, y compris les obligations en matière de vie privée et de libertés civiles, sont comprises et gérées .\nLes exigences légales et réglementaires en matière de sécurité de l'information/cybersécurité, y compris les obligations en matière de respect de la vie privée, doivent être comprises et appliquées.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-id-gv-3-2": {
+      "code": "ID.GV-3.2",
+      "section": "id",
+      "control": "Gouvernance",
+      "requirements": "ID.GV-3: Les exigences légales et réglementaires concernant la cybersécurité, y compris les obligations en matière de vie privée et de libertés civiles, sont comprises et gérées .\nLes exigences légales et réglementaires en matière de sécurité de l'information/cybersécurité, y compris les obligations en matière de respect de la vie privée, doivent être comprises, mises en œuvre et gérées.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-gv-4-1": {
+      "code": "ID.GV-4.1",
+      "section": "id",
+      "control": "Gouvernance",
+      "requirements": "ID.GV-4: Les processus de gouvernance et de gestion des risques traitent les risques de cybersécurité .\nDans le cadre de la gestion globale des risques de l'organisation, une stratégie complète de gestion des risques liés à la sécurité de l'information et à la cybersécurité doit être élaborée et mise à jour lorsque des changements surviennent.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-id-gv-4-2": {
+      "code": "ID.GV-4.2",
+      "section": "id",
+      "control": "Gouvernance",
+      "requirements": "ID.GV-4: Les processus de gouvernance et de gestion des risques traitent les risques de cybersécurité .\nLes risques liés à la sécurité de l'information et à la cybersécurité doivent être documentés, approuvés formellement et mis à jour lorsque des changements surviennent.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-ra-1-1": {
+      "code": "ID.RA-1.1",
+      "section": "id",
+      "control": "Évaluation des risques",
+      "requirements": "ID.RA-1: Les vulnérabilités des actifs sont identifiées et documentées.\nLes menaces et les vulnérabilités doivent être identifiées.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-id-ra-1-2": {
+      "code": "ID.RA-1.2",
+      "section": "id",
+      "control": "Évaluation des risques",
+      "requirements": "ID.RA-1: Les vulnérabilités des actifs sont identifiées et documentées.\nUn processus doit être établi pour surveiller, identifier et documenter en permanence les vulnérabilités des systèmes critiques de l'organisation.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-ra-1-3": {
+      "code": "ID.RA-1.3",
+      "section": "id",
+      "control": "Évaluation des risques",
+      "requirements": "ID.RA-1: Les vulnérabilités des actifs sont identifiées et documentées.\nPour s'assurer que les opérations de l'organisation ne sont pas affectées par le processus de test, les tests de performance/charge et les tests de pénétration sur les systèmes de l'organisation doivent être menés avec soin.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-id-ra-2-1": {
+      "code": "ID.RA-2.1",
+      "section": "id",
+      "control": "Évaluation des risques",
+      "requirements": "ID.RA-2: Les renseignements sur les cybermenaces sont reçus de forums de partage d'informations et de sources.\nUn programme de sensibilisation aux menaces et aux vulnérabilités, comprenant une capacité de partage d'informations entre les organisations, doit être mis en œuvre.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-ra-2-2": {
+      "code": "ID.RA-2.2",
+      "section": "id",
+      "control": "Évaluation des risques",
+      "requirements": "ID.RA-2: Les renseignements sur les cybermenaces sont reçus de forums de partage d'informations et de sources.\nIl se doit d'identifier les endroits où des mécanismes automatisés peuvent être mis en œuvre pour mettre les informations relatives aux alertes et aux avis de sécurité à la disposition des parties prenantes pertinentes de l'organisation.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-id-ra-5-1": {
+      "code": "ID.RA-5.1",
+      "section": "id",
+      "control": "Évaluation des risques",
+      "requirements": "ID.RA-5: Les menaces, les vulnérabilités, les probabilités et les impacts sont utilisés pour déterminer les risques.\nL'organisation doit effectuer des évaluations des risques dans lesquelles le risque est déterminé par les menaces, les vulnérabilités et l'impact sur les processus et les actifs de l'organisation.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-id-ra-5-2": {
+      "code": "ID.RA-5.2",
+      "section": "id",
+      "control": "Évaluation des risques",
+      "requirements": "ID.RA-5: Les menaces, les vulnérabilités, les probabilités et les impacts sont utilisés pour déterminer les risques.\nL'organisation doit effectuer et documenter des évaluations des risques dans lesquelles le risque est déterminé par les menaces, les vulnérabilités, l'impact sur les processus et les actifs de l'organisation, et la probabilité qu'ils se produisent.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-ra-5-3": {
+      "code": "ID.RA-5.3",
+      "section": "id",
+      "control": "Évaluation des risques",
+      "requirements": "ID.RA-5: Les menaces, les vulnérabilités, les probabilités et les impacts sont utilisés pour déterminer les risques.\nLes résultats de l'évaluation des risques sont diffusés aux parties prenantes concernées.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-id-ra-6-1": {
+      "code": "ID.RA-6.1",
+      "section": "id",
+      "control": "Évaluation des risques",
+      "requirements": "ID.RA-6: Les réponses aux risques sont identifiées et classées par ordre de priorité.\nUne stratégie globale doit être élaborée et mise en œuvre pour gérer les risques auxquels sont exposés les systèmes critiques de l'organisation, qui comprend l'identification et la hiérarchisation des réponses aux risques.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-rm-1-1": {
+      "code": "ID.RM-1.1",
+      "section": "id",
+      "control": "Gestion des risques",
+      "requirements": "ID.RM-1: Les processus de gestion des risques sont établis, gérés et acceptés par les parties prenantes de l’organisation.\nUn processus de gestion des cyber-risques qui identifie les principales parties prenantes internes et externes et facilite le traitement des questions et des informations liées aux risques doit être créé, documenté, examiné, approuvé et mis à jour lorsque des changements surviennent.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-rm-2-1": {
+      "code": "ID.RM-2.1",
+      "section": "id",
+      "control": "Gestion des risques",
+      "requirements": "ID.RM-2: La tolérance de l'organisation au risque est déterminée et clairement exprimée.\nL'organisation doit déterminer clairement son appétit pour le risque.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-rm-3-1": {
+      "code": "ID.RM-3.1",
+      "section": "id",
+      "control": "Gestion des risques",
+      "requirements": "ID.RM-3: La détermination de la tolérance au risque de l'organisation est éclairée par son rôle dans l'infrastructure critique et l'analyse des risques spécifiques au secteur.\nLe rôle de l'organisation dans les infrastructures critiques et son secteur déterminent l'appétit de l'organisation pour le risque.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-sc-1-1": {
+      "code": "ID.SC-1.1",
+      "section": "id",
+      "control": "Gestion des risques liés à la chaîne d'approvisionnement",
+      "requirements": "ID.SC-1: Les processus de gestion des risques liés à la chaîne d'approvisionnement sont identifiés, établis, évalués, gérés et acceptés par les parties prenantes de l'organisation.\nL'organisation doit documenter, examiner, approuver, mettre à jour lorsque des changements surviennent et mettre en œuvre un processus de gestion des risques liés à la chaîne d'approvisionnement cybernétique qui soutient l'identification, l'évaluation et l'atténuation des risques associés à la nature distribuée et interconnectée des chaînes d'approvisionnement en produits et services TIC/OT.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-id-sc-2-1": {
+      "code": "ID.SC-2.1",
+      "section": "id",
+      "control": "Gestion des risques liés à la chaîne d'approvisionnement",
+      "requirements": "ID.SC-2: Les fournisseurs et les partenaires tiers de systèmes d'information, de composants et de services sont identifiés, classés par ordre de priorité et évalués à l'aide d'un processus d'évaluation des risques de la cyberchaîne d’approvisionnement.\nL'organisation doit effectuer des évaluations des risques liés à la chaîne d'approvisionnement cybernétique au moins une fois par an ou lorsqu'un changement intervient dans les systèmes critiques, l'environnement opérationnel ou la chaîne d'approvisionnement de l'organisation ; ces évaluations doivent être documentées et les résultats diffusés aux parties prenantes concernées, y compris les responsables des systèmes TIC/OT.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-sc-2-2": {
+      "code": "ID.SC-2.2",
+      "section": "id",
+      "control": "Gestion des risques liés à la chaîne d'approvisionnement",
+      "requirements": "ID.SC-2: Les fournisseurs et les partenaires tiers de systèmes d'information, de composants et de services sont identifiés, classés par ordre de priorité et évalués à l'aide d'un processus d'évaluation des risques de la cyberchaîne d’approvisionnement.\nUne liste documentée de tous les fournisseurs, vendeurs et partenaires de l'organisation susceptibles d'être impliqués dans un incident majeur doit être établie, tenue à jour et mise à disposition en ligne et hors ligne.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-id-sc-3-1": {
+      "code": "ID.SC-3.1",
+      "section": "id",
+      "control": "Gestion des risques liés à la chaîne d'approvisionnement",
+      "requirements": "ID.SC-3: Les contrats avec les fournisseurs et les partenaires tiers sont utilisés pour mettre en œuvre des mesures appropriées conçues pour atteindre les objectifs du programme de cybersécurité et du plan de gestion des risques de la chaîne d'approvisionnement de l'organisation.\nSur la base des résultats de l'évaluation des risques liés à la cyberchaîne d'approvisionnement, un cadre contractuel est établi pour les fournisseurs et les partenaires externes afin de traiter le partage d'informations sensibles et de produits et services TIC/OT distribués et interconnectés.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-sc-3-2": {
+      "code": "ID.SC-3.2",
+      "section": "id",
+      "control": "Gestion des risques liés à la chaîne d'approvisionnement",
+      "requirements": "ID.SC-3: Les contrats avec les fournisseurs et les partenaires tiers sont utilisés pour mettre en œuvre des mesures appropriées conçues pour atteindre les objectifs du programme de cybersécurité et du plan de gestion des risques de la chaîne d'approvisionnement de l'organisation.\n[MESURE CLÉ] Des exigences contractuelles en matière de \"sécurité de l'information et de cybersécurité\" pour les fournisseurs et les partenaires tiers sont mises en œuvre pour garantir un processus vérifiable de correction des failles et pour garantir la correction des failles identifiées lors des tests et des évaluations de \"sécurité de l'information et de cybersécurité\".\nEssentiel - mesure clé",
+      "implementation_groups": ["E", "EK"]
+    },
+    "ccb-cff-id-sc-3-3": {
+      "code": "ID.SC-3.3",
+      "section": "id",
+      "control": "Gestion des risques liés à la chaîne d'approvisionnement",
+      "requirements": "ID.SC-3: Les contrats avec les fournisseurs et les partenaires tiers sont utilisés pour mettre en œuvre des mesures appropriées conçues pour atteindre les objectifs du programme de cybersécurité et du plan de gestion des risques de la chaîne d'approvisionnement de l'organisation.\n[MESURE CLÉ] L'organisation doit établir des exigences contractuelles lui permettant d'examiner les programmes de \"sécurité des informations et de cybersécurité\" mis en œuvre par les fournisseurs et les partenaires tiers.\nEssentiel - mesure clé",
+      "implementation_groups": ["E", "EK"]
+    },
+    "ccb-cff-id-sc-4-1": {
+      "code": "ID.SC-4.1",
+      "section": "id",
+      "control": "Gestion des risques liés à la chaîne d'approvisionnement",
+      "requirements": "ID.SC-4: Les fournisseurs et les partenaires tiers sont régulièrement évalués à l'aide d'audits, de résultats de tests ou d'autres formes d'évaluation pour confirmer qu'ils respectent leurs obligations contractuelles.\nL'organisation doit examiner les évaluations de la conformité des fournisseurs et des partenaires tiers aux obligations contractuelles en examinant régulièrement les audits, les résultats des tests et autres évaluations.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-sc-4-2": {
+      "code": "ID.SC-4.2",
+      "section": "id",
+      "control": "Gestion des risques liés à la chaîne d'approvisionnement",
+      "requirements": "ID.SC-4: Les fournisseurs et les partenaires tiers sont régulièrement évalués à l'aide d'audits, de résultats de tests ou d'autres formes d'évaluation pour confirmer qu'ils respectent leurs obligations contractuelles.\nL'organisation doit examiner les évaluations de la conformité des fournisseurs et des partenaires tiers aux obligations contractuelles en examinant régulièrement les audits indépendants de tiers, les résultats des tests et autres évaluations.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-id-sc-5-1": {
+      "code": "ID.SC-5.1",
+      "section": "id",
+      "control": "Gestion des risques liés à la chaîne d'approvisionnement",
+      "requirements": "ID.SC-5: La planification et les tests de réponse et de rétablissement sont effectués avec les fournisseurs et les prestataires tiers.\nL'organisation doit identifier et documenter le personnel clé des fournisseurs et des partenaires tiers afin de les inclure en tant que parties prenantes dans les activités de planification de la réponse et du rétablissement.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-id-sc-5-2": {
+      "code": "ID.SC-5.2",
+      "section": "id",
+      "control": "Gestion des risques liés à la chaîne d'approvisionnement",
+      "requirements": "ID.SC-5: La planification et les tests de réponse et de rétablissement sont effectués avec les fournisseurs et les prestataires tiers.\nL'organisation doit identifier et documenter le personnel clé des fournisseurs et des partenaires tiers afin de les inclure en tant que parties prenantes dans les tests et l'exécution des plans de réponse et de rétablissement.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ac-1-1": {
+      "code": "PR.AC-1.1",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-1: Les identités et les identifiants sont émis, gérés, vérifiés, révoqués et audités pour les dispositifs, utilisateurs et processus autorisés.\n[MESURE CLÉ] Les identités et les identifiants des dispositifs et des utilisateurs autorisés doivent être gérés.\nBasique - mesure clé · Important - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["B", "I", "E", "BK", "IK", "EK"]
+    },
+    "ccb-cff-pr-ac-1-2": {
+      "code": "PR.AC-1.2",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-1: Les identités et les identifiants sont émis, gérés, vérifiés, révoqués et audités pour les dispositifs, utilisateurs et processus autorisés.\nLes identités et les identifiants des dispositifs et des utilisateurs autorisés sont gérés, si possible par des mécanismes automatisés.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ac-1-3": {
+      "code": "PR.AC-1.3",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-1: Les identités et les identifiants sont émis, gérés, vérifiés, révoqués et audités pour les dispositifs, utilisateurs et processus autorisés.\nLes identifiants du système doivent être désactivés après une période d'inactivité déterminée, à moins que cela ne compromette le fonctionnement sûr des processus (critiques).\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ac-1-4": {
+      "code": "PR.AC-1.4",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-1: Les identités et les identifiants sont émis, gérés, vérifiés, révoqués et audités pour les dispositifs, utilisateurs et processus autorisés.\nPour les transactions au sein des systèmes critiques de l'organisation, l'organisation doit mettre en œuvre : \n• l'authentification multifactorielle de l'utilisateur final (MFA ou \"authentification forte\"). \n• authentification basée sur des certificats pour les communications système à système\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ac-1-5": {
+      "code": "PR.AC-1.5",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-1: Les identités et les identifiants sont émis, gérés, vérifiés, révoqués et audités pour les dispositifs, utilisateurs et processus autorisés.\nLes systèmes critiques de l'organisation doivent être surveillés pour détecter toute utilisation atypique des informations d'identification du système. Les identifiants associés à un risque important doivent être désactivés.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ac-2-1": {
+      "code": "PR.AC-2.1",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-2: L'accès physique aux actifs est géré et protégé.\nL'accès physique à l'installation, aux serveurs et aux composants du réseau doit être géré.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-pr-ac-2-2": {
+      "code": "PR.AC-2.2",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-2: L'accès physique aux actifs est géré et protégé.\nL'accès physique doit être géré, y compris les mesures relatives à l'accès dans les situations d'urgence.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ac-2-3": {
+      "code": "PR.AC-2.3",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-2: L'accès physique aux actifs est géré et protégé.\nL'accès physique aux zones critiques doit être contrôlé en plus de l'accès physique à l'installation.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ac-2-4": {
+      "code": "PR.AC-2.4",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-2: L'accès physique aux actifs est géré et protégé.\nLes actifs liés aux zones critiques doivent être protégés physiquement.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ac-3-1": {
+      "code": "PR.AC-3.1",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-3: L'accès à distance est géré.\nLes points d'accès sans fil de l'organisation doivent être sécurisés.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-pr-ac-3-2": {
+      "code": "PR.AC-3.2",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-3: L'accès à distance est géré.\n[MESURE CLÉ] Les réseaux de l'organisation auxquels on accède à distance doivent être sécurisés, notamment par une authentification multifactorielle (MFA).\nBasique - mesure clé · Important - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["B", "I", "E", "BK", "IK", "EK"]
+    },
+    "ccb-cff-pr-ac-3-3": {
+      "code": "PR.AC-3.3",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-3: L'accès à distance est géré.\n[MESURE CLÉ] Les restrictions d'utilisation, les exigences de connexion, les conseils de mise en œuvre et les autorisations d'accès à distance à l'environnement des systèmes critiques de l'organisation doivent être identifiés, documentés et mis en œuvre.\nImportant - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["I", "E", "IK", "EK"]
+    },
+    "ccb-cff-r-ac-3-4": {
+      "code": "R.AC-3.4",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-3: L'accès à distance est géré.\nL'accès à distance aux systèmes critiques de l'organisation doit être surveillé et des mécanismes cryptographiques doivent être mis en œuvre lorsque cela est jugé nécessaire.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-r-ac-3-5": {
+      "code": "R.AC-3.5",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-3: L'accès à distance est géré.\nLa sécurité des connexions avec les systèmes externes doit être vérifiée et encadrée par des accords documentés.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ac-4-1": {
+      "code": "PR.AC-4.1",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-4: Les permissions et autorisations d'accès sont gérées en intégrant les principes du moindre privilège et de la séparation des tâches.\n[MESURE CLÉ] Les autorisations d'accès des utilisateurs aux systèmes de l'organisation doivent être définies et gérées.\nBasique - mesure clé · Important - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["B", "I", "E", "BK", "IK", "EK"]
+    },
+    "ccb-cff-pr-ac-4-2": {
+      "code": "PR.AC-4.2",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-4: Les permissions et autorisations d'accès sont gérées en intégrant les principes du moindre privilège et de la séparation des tâches.\n[MESURE CLÉ] L'organisation doit identifier qui devrait avoir accès aux informations et aux technologies critiques de l'organisation et les moyens d'y accéder.\nBasique - mesure clé · Important - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["B", "I", "E", "BK", "IK", "EK"]
+    },
+    "ccb-cff-pr-ac-4-3": {
+      "code": "PR.AC-4.3",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-4: Les permissions et autorisations d'accès sont gérées en intégrant les principes du moindre privilège et de la séparation des tâches.\n[MESURE CLÉ] L'accès des employés aux données et aux informations doit être limité aux systèmes et aux informations spécifiques dont ils ont besoin pour faire leur travail (principe du moindre privilège).\nBasique - mesure clé · Important - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["B", "I", "E", "BK", "IK", "EK"]
+    },
+    "ccb-cff-pr-ac-4-4": {
+      "code": "PR.AC-4.4",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-4: Les permissions et autorisations d'accès sont gérées en intégrant les principes du moindre privilège et de la séparation des tâches.\n[MESURE CLÉ] Personne ne doit avoir de privilèges d'administrateur pour les tâches quotidiennes.\nBasique - mesure clé · Important - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["B", "I", "E", "BK", "IK", "EK"]
+    },
+    "ccb-cff-pr-ac-4-5": {
+      "code": "PR.AC-4.5",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-4: Les permissions et autorisations d'accès sont gérées en intégrant les principes du moindre privilège et de la séparation des tâches.\nDans la mesure du possible, des mécanismes automatisés doivent être mis en œuvre pour prendre en charge la gestion des comptes d'utilisateurs sur les systèmes critiques de l'organisation, y compris la désactivation, la surveillance, l'établissement de rapports et la suppression des comptes d'utilisateurs.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ac-4-6": {
+      "code": "PR.AC-4.6",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-4: Les permissions et autorisations d'accès sont gérées en intégrant les principes du moindre privilège et de la séparation des tâches.\nLa séparation des tâches est assurée dans la gestion des droits d'accès.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ac-4-7": {
+      "code": "PR.AC-4.7",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-4: Les permissions et autorisations d'accès sont gérées en intégrant les principes du moindre privilège et de la séparation des tâches.\nLes utilisateurs privilégiés doivent être gérés et surveillés.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ac-4-8": {
+      "code": "PR.AC-4.8",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-4: Les permissions et autorisations d'accès sont gérées en intégrant les principes du moindre privilège et de la séparation des tâches.\nLes restrictions d'utilisation des comptes pour des périodes et des lieux spécifiques doivent être prises en compte dans la politique d'accès sécurisé de l'organisation et appliquées en conséquence.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ac-4-9": {
+      "code": "PR.AC-4.9",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-4: Les permissions et autorisations d'accès sont gérées en intégrant les principes du moindre privilège et de la séparation des tâches.\nLes utilisateurs privilégiés doivent être gérés, surveillés et audités.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ac-5-1": {
+      "code": "PR.AC-5.1",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-5: L'intégrité du réseau (séparation du réseau, segmentation du réseau...) est protégée.\n[MESURE CLÉ] Des pare-feu doivent être installés et activés sur tous les réseaux de l'organisation.\nBasique - mesure clé · Important - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["B", "I", "E", "BK", "IK", "EK"]
+    },
+    "ccb-cff-pr-ac-5-2": {
+      "code": "PR.AC-5.2",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-5: L'intégrité du réseau (séparation du réseau, segmentation du réseau...) est protégée.\n[MESURE CLÉ] Le cas échéant, l'intégrité du réseau des systèmes critiques de l'organisation doit être protégée par l'intégration de la segmentation et de la ségrégation du réseau.\nBasique - mesure clé · Important - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["B", "I", "E", "BK", "IK", "EK"]
+    },
+    "ccb-cff-pr-ac-5-3": {
+      "code": "PR.AC-5.3",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-5: L'intégrité du réseau (séparation du réseau, segmentation du réseau...) est protégée.\n[MESURE CLÉ] Le cas échéant, l'intégrité du réseau des systèmes critiques de l'organisation doit être protégée par : \n(1) Identifier, documenter et contrôler les connexions entre les composants du système. \n(2) Limiter les connexions externes aux systèmes critiques de l'organisation.\nImportant - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["I", "E", "IK", "EK"]
+    },
+    "ccb-cff-pr-ac-5-4": {
+      "code": "PR.AC-5.4",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-5: L'intégrité du réseau (séparation du réseau, segmentation du réseau...) est protégée.\n[MESURE CLÉ] L'organisation doit surveiller et contrôler les connexions et les communications à la frontière externe et aux principales frontières internes des systèmes critiques de l'organisation en mettant en œuvre des dispositifs de protection des frontières, le cas échéant.\nImportant - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["I", "E", "IK", "EK"]
+    },
+    "ccb-cff-pr-ac-5-5": {
+      "code": "PR.AC-5.5",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-5: L'intégrité du réseau (séparation du réseau, segmentation du réseau...) est protégée.\nL'organisation doit mettre en œuvre, dans la mesure du possible, des serveurs proxy authentifiés pour le trafic de communication défini entre les systèmes critiques de l'organisation et les réseaux externes.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ac-5-6": {
+      "code": "PR.AC-5.6",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-5: L'intégrité du réseau (séparation du réseau, segmentation du réseau...) est protégée.\nL'organisation doit s'assurer que les systèmes critiques de l'organisation tombent en panne en toute sécurité lorsqu'un dispositif de protection des frontières tombe en panne opérationnelle.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ac-6-1": {
+      "code": "PR.AC-6.1",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-6: Les identités sont prouvées et liées aux identifiants et présentées dans les interactions.\nL'organisation doit mettre en œuvre des procédures documentées pour vérifier l'identité des personnes avant de délivrer des identifiants donnant accès aux systèmes de l'organisation.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ac-6-2": {
+      "code": "PR.AC-6.2",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-6: Les identités sont prouvées et liées aux identifiants et présentées dans les interactions.\nL'organisation doit garantir l'utilisation d'identifiants uniques liés à chaque utilisateur, dispositif et processus vérifié interagissant avec les systèmes critiques de l'organisation ; s'assurer qu'ils sont authentifiés et que les identifiants uniques sont capturés lors des interactions avec le système.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ac-7-1": {
+      "code": "PR.AC-7.1",
+      "section": "pr",
+      "control": "Gestion des identités, authentification et contrôle d'accès",
+      "requirements": "PR.AC-7: Les utilisateurs, les appareils et les autres actifs sont authentifiés (par exemple, à un seul facteur, à plusieurs facteurs) en fonction du risque de la transaction (par exemple, les risques pour la sécurité et la confidentialité des individus et d’autres risques organisationnels)\n[MESURE CLÉ] L'organisation doit effectuer une évaluation des risques documentée sur les transactions des systèmes critiques de l'organisation et authentifier les utilisateurs, les dispositifs et les autres actifs (par exemple, à un ou plusieurs facteurs) en fonction du risque de la transaction (par exemple, les risques pour la sécurité et la vie privée des individus et les autres risques pour l'organisation).\nImportant · Essentiel - mesure clé",
+      "implementation_groups": ["I", "E", "EK"]
+    },
+    "ccb-cff-pr-at-1-1": {
+      "code": "PR.AT-1.1",
+      "section": "pr",
+      "control": "Sensibilisation et formation",
+      "requirements": "PR.AT-1: Tous les utilisateurs sont informés et entrainés.\nLes employés doivent être formés de manière appropriée.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-pr-at-1-2": {
+      "code": "PR.AT-1.2",
+      "section": "pr",
+      "control": "Sensibilisation et formation",
+      "requirements": "PR.AT-1: Tous les utilisateurs sont informés et entrainés.\nL'organisation doit intégrer la reconnaissance et le signalement des menaces internes dans la formation à la sécurité.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-at-1-3": {
+      "code": "PR.AT-1.3",
+      "section": "pr",
+      "control": "Sensibilisation et formation",
+      "requirements": "PR.AT-1: Tous les utilisateurs sont informés et entrainés.\nL'organisation doit mettre en œuvre une méthode d'évaluation pour mesurer l'efficacité des formations de sensibilisation.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-at-2-1": {
+      "code": "PR.AT-2.1",
+      "section": "pr",
+      "control": "Sensibilisation et formation",
+      "requirements": "PR.AT-2: Les utilisateurs privilégiés comprennent leurs rôles et leurs responsabilités.\nLes utilisateurs privilégiés doivent être qualifiés avant que les privilèges ne leurs soient accordés, et ces utilisateurs doivent pouvoir démontrer qu'ils comprennent leurs rôles, leurs responsabilités et leurs pouvoirs.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-at-3-1": {
+      "code": "PR.AT-3.1",
+      "section": "pr",
+      "control": "Sensibilisation et formation",
+      "requirements": "PR.AT-3: Les parties prenantes tierces (par exemple, les fournisseurs, les clients, les partenaires) comprennent leurs rôles et responsabilités.\nL'organisation doit établir et appliquer des exigences de sécurité pour les fournisseurs et les utilisateurs tiers essentiels à l'organisation.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-at-3-2": {
+      "code": "PR.AT-3.2",
+      "section": "pr",
+      "control": "Sensibilisation et formation",
+      "requirements": "PR.AT-3: Les parties prenantes tierces (par exemple, les fournisseurs, les clients, les partenaires) comprennent leurs rôles et responsabilités.\nLes fournisseurs tiers sont tenus de notifier tout transfert, licenciement ou transition de personnel ayant un accès physique ou logique aux composants des systèmes critiques de l'organisation.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-at-3-3": {
+      "code": "PR.AT-3.3",
+      "section": "pr",
+      "control": "Sensibilisation et formation",
+      "requirements": "PR.AT-3: Les parties prenantes tierces (par exemple, les fournisseurs, les clients, les partenaires) comprennent leurs rôles et responsabilités.\nL'organisation doit contrôler les fournisseurs de services et les utilisateurs critiques pour l'organisation en matière de conformité à la sécurité.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-at-3-4": {
+      "code": "PR.AT-3.4",
+      "section": "pr",
+      "control": "Sensibilisation et formation",
+      "requirements": "PR.AT-3: Les parties prenantes tierces (par exemple, les fournisseurs, les clients, les partenaires) comprennent leurs rôles et responsabilités.\nL'organisation doit auditer les fournisseurs de services externes critiques pour l'organisation afin de vérifier leur conformité en matière de sécurité.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-at-4-1": {
+      "code": "PR.AT-4.1",
+      "section": "pr",
+      "control": "Sensibilisation et formation",
+      "requirements": "PR.AT-4: Les cadres supérieurs comprennent leurs rôles et responsabilités.\nLes cadres supérieurs doivent démontrer qu'ils comprennent leurs rôles, leurs responsabilités et leurs pouvoirs.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-at-5-1": {
+      "code": "PR.AT-5.1",
+      "section": "pr",
+      "control": "Sensibilisation et formation",
+      "requirements": "PR.AT-5: Le personnel de la sécurité physique et de la cybersécurité comprend ses rôles et responsabilités.\nL'organisation doit s'assurer que le personnel responsable de la protection physique et de la sécurité des systèmes et installations critiques de l'organisation est qualifié par une formation avant que des privilèges ne soient accordés, et qu'il comprend ses responsabilités.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ds-1-1": {
+      "code": "PR.DS-1.1",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-1: Les données au repos sont protégées.\nL'organisme doit protéger ses informations critiques du système déterminées comme étant critiques/sensibles lorsqu'elles sont au repos.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ds-2-1": {
+      "code": "PR.DS-2.1",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-2: Les données en transit sont protégées.\nL'organisation doit protéger les informations de ses systèmes jugées critiques lorsqu'elles sont en transit.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ds-3-1": {
+      "code": "PR.DS-3.1",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-3: Les actifs sont gérés de manière formelle tout au long de leur retrait, de leur transfert et de leur mise à disposition.\nLes actifs et les supports doivent être éliminés de manière sûre.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-pr-ds-3-2": {
+      "code": "PR.DS-3.2",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-3: Les actifs sont gérés de manière formelle tout au long de leur retrait, de leur transfert et de leur mise à disposition.\nL'organisation doit faire respecter l'obligation de rendre compte de tous ses actifs essentiels à l'organisation tout au long du cycle de vie du système, y compris lors du retrait, du transfert et de leur mise à disposition.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ds-3-3": {
+      "code": "PR.DS-3.3",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-3: Les actifs sont gérés de manière formelle tout au long de leur retrait, de leur transfert et de leur mise à disposition.\nL'organisation doit veiller à ce que les mesures nécessaires soient prises pour faire face à la perte, à l'utilisation abusive, à la détérioration ou au vol des actifs.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ds-3-4": {
+      "code": "PR.DS-3.4",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-3: Les actifs sont gérés de manière formelle tout au long de leur retrait, de leur transfert et de leur mise à disposition.\nL'organisation doit s'assurer que les actions d'élimination sont approuvées, suivies, documentées et vérifiées.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ds-4-1": {
+      "code": "PR.DS-4.1",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-4: Une capacité adéquate pour assurer la disponibilité est maintenue.\nLa planification des capacités doit garantir des ressources adéquates pour le traitement de l'information, la mise en réseau, les télécommunications et le stockage des données des systèmes critiques de l'organisation.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ds-4-2": {
+      "code": "PR.DS-4.2",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-4: Une capacité adéquate pour assurer la disponibilité est maintenue.\nLes données d'audit des systèmes critiques de l'organisation doivent être déplacées vers un système alternatif.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ds-4-3": {
+      "code": "PR.DS-4.3",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-4: Une capacité adéquate pour assurer la disponibilité est maintenue.\nLes systèmes critiques de l'organisation doivent être protégés contre les attaques par déni de service ou, du moins, l'effet de ces attaques sera limité.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ds-5-1": {
+      "code": "PR.DS-5.1",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-5: Les protections contre les fuites de données sont mises en œuvre.\n[MESURE CLÉ] L'organisation doit prendre des mesures appropriées qui se traduisent par la surveillance de ses systèmes critiques aux frontières extérieures et aux points internes critiques lorsqu'un accès et des activités non autorisés, y compris une fuite de données, sont détectés.\nImportant - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["I", "E", "IK", "EK"]
+    },
+    "ccb-cff-pr-ds-6-1": {
+      "code": "PR.DS-6.1",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-6: Des mécanismes de vérification de l'intégrité sont utilisés pour vérifier l'intégrité des logiciels, des microprogrammes et des informations.\nL'organisation doit mettre en œuvre des contrôles d'intégrité des logiciels, des microprogrammes et des informations pour détecter les modifications non autorisées apportées aux composants de ses systèmes critiques pendant le stockage, le transport, le démarrage et lorsque cela est jugé nécessaire.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ds-6-2": {
+      "code": "PR.DS-6.2",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-6: Des mécanismes de vérification de l'intégrité sont utilisés pour vérifier l'intégrité des logiciels, des microprogrammes et des informations.\nL'organisation doit mettre en œuvre des outils automatisés, dans la mesure du possible, afin de fournir une notification lors de la découverte de divergences pendant la vérification de l'intégrité.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ds-6-3": {
+      "code": "PR.DS-6.3",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-6: Des mécanismes de vérification de l'intégrité sont utilisés pour vérifier l'intégrité des logiciels, des microprogrammes et des informations.\nL'organisation doit mettre en œuvre une capacité de réponse automatique avec des garanties de sécurité prédéfinies lorsque des violations de l'intégrité sont découvertes.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ds-7-1": {
+      "code": "PR.DS-7.1",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-7: L'environnement ou les environnements de développement et de test sont séparés de l'environnement de production.\nLe ou les environnements de développement et de test doivent être isolés de l'environnement de production.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ds-8-1": {
+      "code": "PR.DS-8.1",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-8: Les mécanismes de contrôle d'intégrité sont utilisés pour vérifier l'intégrité du matériel.\nL'organisation doit mettre en œuvre des contrôles d'intégrité du matériel pour détecter les altérations non autorisées du matériel de ses systèmes critiques.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ds-8-2": {
+      "code": "PR.DS-8.2",
+      "section": "pr",
+      "control": "Sécurité des données",
+      "requirements": "PR.DS-8: Les mécanismes de contrôle d'intégrité sont utilisés pour vérifier l'intégrité du matériel.\nL'organisation doit intégrer la détection de l'altération non autorisée du matériel de ses systèmes critiques dans sa capacité de réponse aux incidents.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ip-1-1": {
+      "code": "PR.IP-1.1",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-1: Une configuration de base des systèmes de contrôle des technologies de l'information/de l'industrie est créée et maintenue en intégrant les principes de sécurité.\n[MESURE CLÉ] L'organisation doit développer, documenter et maintenir une configuration de base pour ses systèmes critiques.\nImportant - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["I", "E", "IK", "EK"]
+    },
+    "ccb-cff-pr-ip-1-2": {
+      "code": "PR.IP-1.2",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-1: Une configuration de base des systèmes de contrôle des technologies de l'information/de l'industrie est créée et maintenue en intégrant les principes de sécurité.\nL'organisation doit configurer ses systèmes critiques pour fournir uniquement les capacités essentielles. Par conséquent, la configuration de base doit être revue et les capacités inutiles doivent être désactivées.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ip-2-1": {
+      "code": "PR.IP-2.1",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-2: Un cycle de vie du développement des systèmes pour gérer les systèmes est mis en œuvre .\nLe cycle de vie du développement des systèmes et des applications doit inclure des considérations de sécurité.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ip-2-2": {
+      "code": "PR.IP-2.2",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-2: Un cycle de vie du développement des systèmes pour gérer les systèmes est mis en œuvre .\nLe processus de développement des systèmes critiques et de leurs composants doit couvrir l'ensemble du cycle de conception et fournir une description des propriétés fonctionnelles des contrôles de sécurité, ainsi que des informations sur la conception et la mise en œuvre des interfaces du système relatives à la sécurité.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ip-3-1": {
+      "code": "PR.IP-3.1",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-3: Des processus de contrôle des changements de configuration sont en place.\nLes modifications doivent être testées et validées avant d'être mises en œuvre dans les systèmes opérationnels.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ip-3-2": {
+      "code": "PR.IP-3.2",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-3: Des processus de contrôle des changements de configuration sont en place.\nPour les modifications prévues des systèmes critiques de l'organisation, une analyse d'impact sur la sécurité doit être effectuée dans un environnement de test distinct avant la mise en œuvre dans un environnement opérationnel.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ip-4-1": {
+      "code": "PR.IP-4.1",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-4: Des sauvegardes des informations sont effectuées, maintenues et testées .\n[MESURE CLÉ] Les sauvegardes des données critiques de l'organisation doivent être effectuées et stockées sur un système différent du dispositif sur lequel se trouvent les données originales.\nBasique - mesure clé · Important - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["B", "I", "E", "BK", "IK", "EK"]
+    },
+    "ccb-cff-pr-ip-4-2": {
+      "code": "PR.IP-4.2",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-4: Des sauvegardes des informations sont effectuées, maintenues et testées .\nLa fiabilité et l'intégrité des sauvegardes doivent être vérifiées et testées régulièrement.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ip-4-3": {
+      "code": "PR.IP-4.3",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-4: Des sauvegardes des informations sont effectuées, maintenues et testées .\nUn site de stockage alternatif distinct pour les sauvegardes du système doit être exploité et les mêmes mesures de sécurité que le site de stockage principal doivent être utilisées.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ip-4-4": {
+      "code": "PR.IP-4.4",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-4: Des sauvegardes des informations sont effectuées, maintenues et testées .\nLa vérification des sauvegardes doit être coordonnée avec les fonctions de l'organisation qui sont responsables des plans connexes.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ip-4-5": {
+      "code": "PR.IP-4.5",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-4: Des sauvegardes des informations sont effectuées, maintenues et testées .\nLa sauvegarde des systèmes critiques doit être séparée de la sauvegarde des informations critiques.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ip-5-1": {
+      "code": "PR.IP-5.1",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-5: La politique et les règlements concernant l'environnement physique d'exploitation des actifs de l'organisation sont respectés.\nL'organisation doit définir, mettre en œuvre et appliquer une politique et des procédures concernant les systèmes d'urgence et de sécurité, les systèmes de protection contre l'incendie et les contrôles de l'environnement pour ses systèmes critiques.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ip-5-2": {
+      "code": "PR.IP-5.2",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-5: La politique et les règlements concernant l'environnement physique d'exploitation des actifs de l'organisation sont respectés.\nL'organisation doit mettre en place des dispositifs de détection d'incendie qui se déclenchent et avertissent automatiquement le personnel clé en cas d'incendie.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ip-6-1": {
+      "code": "PR.IP-6.1",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-6: Les données sont détruites conformément à la politique.\nL'organisation doit s'assurer que les données de son système critique sont détruites conformément à la politique.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ip-6-2": {
+      "code": "PR.IP-6.2",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-6: Les données sont détruites conformément à la politique.\nLes processus d'assainissement doivent être documentés et testés.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ip-7-1": {
+      "code": "PR.IP-7.1",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-7: Les processus de protection sont améliorés\nL'organisation doit intégrer les améliorations découlant de la surveillance, des mesures, des évaluations et des enseignements tirés dans les mises à jour du processus de protection (amélioration continue).\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ip-7-2": {
+      "code": "PR.IP-7.2",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-7: Les processus de protection sont améliorés\nL'organisation doit mettre en place des équipes indépendantes pour évaluer le(s) processus de protection.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ip-7-3": {
+      "code": "PR.IP-7.3",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-7: Les processus de protection sont améliorés\nL'organisation doit s'assurer que le plan de sécurité de ses systèmes critiques facilite l'examen, le test et l'amélioration continue des processus de protection de la sécurité.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ip-8-1": {
+      "code": "PR.IP-8.1",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-8: L'efficacité des technologies de protection est partagée.\nL'organisation doit collaborer et partager avec les partenaires désignés les informations relatives aux incidents de sécurité liés à son système critique et aux mesures d'atténuation.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ip-8-2": {
+      "code": "PR.IP-8.2",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-8: L'efficacité des technologies de protection est partagée.\nLa communication de l'efficacité des technologies de protection est partagée avec les parties appropriées.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ip-8-3": {
+      "code": "PR.IP-8.3",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-8: L'efficacité des technologies de protection est partagée.\nL'organisation doit mettre en œuvre, dans la mesure du possible, des mécanismes automatisés pour faciliter la collaboration en matière d'information.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ip-9-1": {
+      "code": "PR.IP-9.1",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-9: Des plans de réponse (réponse aux incidents et continuité des activités) et des plans de rétablissement (reprise après incident et reprise après sinistre) sont en place et gérés.\nDes plans de réponse en cas d'incident (réponse aux incidents et continuité des activités) et des plans de rétablissement (rétablissement en cas d'incident et reprise après sinistre) doivent être établis, maintenus, approuvés et testés afin de déterminer l'efficacité des plans et l'état de préparation à l'exécution des plans.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ip-9-2": {
+      "code": "PR.IP-9.2",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-9: Des plans de réponse (réponse aux incidents et continuité des activités) et des plans de rétablissement (reprise après incident et reprise après sinistre) sont en place et gérés.\nL'organisation doit coordonner l'élaboration et le test des plans de réponse aux incidents et des plans de rétablissement avec les parties prenantes responsables des plans connexes.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-ip-11-1": {
+      "code": "PR.IP-11.1",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-11: La cybersécurité est incluse dans les pratiques de ressources humaines (déprovisionnement, sélection du personnel...).\nLe personnel ayant accès aux informations ou aux technologies les plus critiques de l'organisation doit être vérifié.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-pr-ip-11-2": {
+      "code": "PR.IP-11.2",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-11: La cybersécurité est incluse dans les pratiques de ressources humaines (déprovisionnement, sélection du personnel...).\nÉlaborer et maintenir un processus de sécurité de l'information/cyber des ressources humaines applicable lors du recrutement, pendant l'emploi et à la fin de l'emploi.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ip-12-1": {
+      "code": "PR.IP-12.1",
+      "section": "pr",
+      "control": "Processus et procédures de protection de l'information",
+      "requirements": "PR.IP-12: Un plan de gestion des vulnérabilités est élaboré et mis en œuvre.\nL'organisation doit établir et maintenir un processus documenté qui permet un examen continu des vulnérabilités et des stratégies pour les atténuer.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ma-1-1": {
+      "code": "PR.MA-1.1",
+      "section": "pr",
+      "control": "Maintenance",
+      "requirements": "PR.MA-1: L'entretien et la réparation des actifs de l'organisation sont effectués et consignés, avec des outils approuvés et contrôlés.\n[MESURE CLÉ] Les correctifs et les mises à jour de sécurité pour les systèmes d'exploitation et les composants critiques du système doivent être installés.\nBasique - mesure clé · Important - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["B", "I", "E", "BK", "IK", "EK"]
+    },
+    "ccb-cff-pr-ma-1-2": {
+      "code": "PR.MA-1.2",
+      "section": "pr",
+      "control": "Maintenance",
+      "requirements": "PR.MA-1: L'entretien et la réparation des actifs de l'organisation sont effectués et consignés, avec des outils approuvés et contrôlés.\nL'organisation doit planifier, réaliser et documenter la maintenance préventive et les réparations des composants critiques de son système selon des processus et des outils approuvés.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ma-1-3": {
+      "code": "PR.MA-1.3",
+      "section": "pr",
+      "control": "Maintenance",
+      "requirements": "PR.MA-1: L'entretien et la réparation des actifs de l'organisation sont effectués et consignés, avec des outils approuvés et contrôlés.\nL'organisation doit appliquer les exigences d'approbation, de contrôle et de surveillance des outils de maintenance destinés à être utilisés sur ses systèmes critiques.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ma-1-4": {
+      "code": "PR.MA-1.4",
+      "section": "pr",
+      "control": "Maintenance",
+      "requirements": "PR.MA-1: L'entretien et la réparation des actifs de l'organisation sont effectués et consignés, avec des outils approuvés et contrôlés.\nL'organisation doit vérifier les contrôles de sécurité après la maintenance ou la réparation du matériel et prendre les mesures qui s'imposent.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ma-1-5": {
+      "code": "PR.MA-1.5",
+      "section": "pr",
+      "control": "Maintenance",
+      "requirements": "PR.MA-1: L'entretien et la réparation des actifs de l'organisation sont effectués et consignés, avec des outils approuvés et contrôlés.\n[MESURE CLÉ] L'organisation doit empêcher le retrait non autorisé des équipements de maintenance contenant des informations critiques sur les systèmes de l'organisation.\nEssentiel - mesure clé",
+      "implementation_groups": ["E", "EK"]
+    },
+    "ccb-cff-pr-ma-1-6": {
+      "code": "PR.MA-1.6",
+      "section": "pr",
+      "control": "Maintenance",
+      "requirements": "PR.MA-1: L'entretien et la réparation des actifs de l'organisation sont effectués et consignés, avec des outils approuvés et contrôlés.\n[MESURE CLÉ] Les outils de maintenance et les dispositifs de stockage portables doivent être inspectés lorsqu'ils sont introduits dans l'établissement et doivent être protégés par des solutions anti-malware afin qu'ils soient analysés pour détecter les codes malveillants avant d'être utilisés sur les systèmes de l'organisation.\nEssentiel - mesure clé",
+      "implementation_groups": ["E", "EK"]
+    },
+    "ccb-cff-pr-ma-1-7": {
+      "code": "PR.MA-1.7",
+      "section": "pr",
+      "control": "Maintenance",
+      "requirements": "PR.MA-1: L'entretien et la réparation des actifs de l'organisation sont effectués et consignés, avec des outils approuvés et contrôlés.\n[MESURE CLÉ] L'organisation doit vérifier les contrôles de sécurité à la suite de la maintenance ou de la réparation/du correctif du matériel et des logiciels et prendre les mesures qui s'imposent.\nEssentiel - mesure clé",
+      "implementation_groups": ["E", "EK"]
+    },
+    "ccb-cff-pr-ma-2-1": {
+      "code": "PR.MA-2.1",
+      "section": "pr",
+      "control": "Maintenance",
+      "requirements": "PR.MA-2: La maintenance à distance des actifs de l'organisation est approuvée, consignée et effectuée de manière à empêcher tout accès non autorisé.\nLa télémaintenance ne doit avoir lieu qu'après approbation préalable, surveillance pour éviter tout accès non autorisé, et approbation du résultat des activités de maintenance telles que décrites dans les processus ou procédures approuvés.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ma-2-2": {
+      "code": "PR.MA-2.2",
+      "section": "pr",
+      "control": "Maintenance",
+      "requirements": "PR.MA-2: La maintenance à distance des actifs de l'organisation est approuvée, consignée et effectuée de manière à empêcher tout accès non autorisé.\nL'organisation doit s'assurer de la mise en œuvre d'authentificateurs forts, de la prise d'enregistrements et de la fermeture de session pour la maintenance à distance.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-ma-2-3": {
+      "code": "PR.MA-2.3",
+      "section": "pr",
+      "control": "Maintenance",
+      "requirements": "PR.MA-2: La maintenance à distance des actifs de l'organisation est approuvée, consignée et effectuée de manière à empêcher tout accès non autorisé.\nL'organisation doit exiger que les services de diagnostic relatifs à la télémaintenance soient effectués à partir d'un système qui met en œuvre une capacité de sécurité comparable à celle mise en œuvre sur le système critique de l'organisation équivalent.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-pt-1-1": {
+      "code": "PR.PT-1.1",
+      "section": "pr",
+      "control": "Technologie de protection",
+      "requirements": "PR.PT-1: Les enregistrements d'audit/logs sont déterminés, documentés, mis en œuvre et révisés conformément à la politique.\n[MESURE CLÉ] Les logs doivent être maintenus, documentés et examinés.\nBasique - mesure clé · Important - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["B", "I", "E", "BK", "IK", "EK"]
+    },
+    "ccb-cff-pr-pt-1-2": {
+      "code": "PR.PT-1.2",
+      "section": "pr",
+      "control": "Technologie de protection",
+      "requirements": "PR.PT-1: Les enregistrements d'audit/logs sont déterminés, documentés, mis en œuvre et révisés conformément à la politique.\nL'organisation doit s'assurer que les enregistrements de log comprennent une source de temps faisant autorité ou un horodateur d'horloge interne qui sont comparés et synchronisés avec une source de temps faisant autorité.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-pt-1-3": {
+      "code": "PR.PT-1.3",
+      "section": "pr",
+      "control": "Technologie de protection",
+      "requirements": "PR.PT-1: Les enregistrements d'audit/logs sont déterminés, documentés, mis en œuvre et révisés conformément à la politique.\nL'organisation doit s'assurer que les échecs de traitement des audits sur les systèmes de l'organisation génèrent des alertes et déclenchent des réponses définies.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-pt-1-4": {
+      "code": "PR.PT-1.4",
+      "section": "pr",
+      "control": "Technologie de protection",
+      "requirements": "PR.PT-1: Les enregistrements d'audit/logs sont déterminés, documentés, mis en œuvre et révisés conformément à la politique.\nL'organisation doit permettre aux personnes autorisées d'étendre les capacités d'audit lorsque les événements l'exigent.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-pt-2-1": {
+      "code": "PR.PT-2.1",
+      "section": "pr",
+      "control": "Technologie de protection",
+      "requirements": "PR.PT-2: Les supports amovibles sont protégés et leur utilisation est limitée conformément à la politique.\nLa restriction de l'utilisation des dispositifs de stockage portables doit être assurée par une politique documentée appropriée et des mesures de protection complémentaires.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-pt-2-2": {
+      "code": "PR.PT-2.2",
+      "section": "pr",
+      "control": "Technologie de protection",
+      "requirements": "PR.PT-2: Les supports amovibles sont protégés et leur utilisation est limitée conformément à la politique.\nIl convient que l'organisation interdisse techniquement la connexion de supports amovibles, sauf si cela est strictement nécessaire ; dans les autres cas, il convient de désactiver l'exécution de programmes automatiques à partir de ces support.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-pt-2-3": {
+      "code": "PR.PT-2.3",
+      "section": "pr",
+      "control": "Technologie de protection",
+      "requirements": "PR.PT-2: Les supports amovibles sont protégés et leur utilisation est limitée conformément à la politique.\n[MESURE CLÉ] Les dispositifs de stockage portables contenant des données système doivent être contrôlés et protégés pendant leur transport et leur stockage.\nEssentiel - mesure clé",
+      "implementation_groups": ["E", "EK"]
+    },
+    "ccb-cff-pr-pt-3-1": {
+      "code": "PR.PT-3.1",
+      "section": "pr",
+      "control": "Technologie de protection",
+      "requirements": "PR.PT-3: Le principe de la moindre fonctionnalité est incorporé en configurant les systèmes de manière à ne fournir que les capacités essentielles.\nL'organisation doit configurer les systèmes critiques pour l'organisation afin de ne fournir que les capacités essentielles.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-pr-pt-3-2": {
+      "code": "PR.PT-3.2",
+      "section": "pr",
+      "control": "Technologie de protection",
+      "requirements": "PR.PT-3: Le principe de la moindre fonctionnalité est incorporé en configurant les systèmes de manière à ne fournir que les capacités essentielles.\nL'organisation doit désactiver les fonctions, ports, protocoles et services définis au sein de ses systèmes critiques qu'il juge inutiles.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-pt-3-3": {
+      "code": "PR.PT-3.3",
+      "section": "pr",
+      "control": "Technologie de protection",
+      "requirements": "PR.PT-3: Le principe de la moindre fonctionnalité est incorporé en configurant les systèmes de manière à ne fournir que les capacités essentielles.\nL'organisation doit mettre en œuvre des mesures de protection techniques pour appliquer une politique de refus de tout, d'autorisation par exception, afin de n'autoriser que l'exécution des programmes logiciels autorisés.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-pt-4-1": {
+      "code": "PR.PT-4.1",
+      "section": "pr",
+      "control": "Technologie de protection",
+      "requirements": "PR.PT-4: Les réseaux de communication et de contrôle sont protégés.\nDes filtres web et e-mail doivent être installés et utilisés.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-pr-pt-4-2": {
+      "code": "PR.PT-4.2",
+      "section": "pr",
+      "control": "Technologie de protection",
+      "requirements": "PR.PT-4: Les réseaux de communication et de contrôle sont protégés.\nL'organisation doit maîtriser les flux d'informations/de données au sein de ses systèmes critiques et entre les systèmes interconnectés.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-pr-pt-4-3": {
+      "code": "PR.PT-4.3",
+      "section": "pr",
+      "control": "Technologie de protection",
+      "requirements": "PR.PT-4: Les réseaux de communication et de contrôle sont protégés.\nL'organisation doit gérer l'interface pour les services de communication externe en établissant une politique de flux de trafic, protégeant la confidentialité et l'intégrité des informations transmises ; cela inclut l'examen et la documentation de chaque exception à la politique de flux de trafic.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-de-ae-1-1": {
+      "code": "DE.AE-1.1",
+      "section": "de",
+      "control": "Anomalies et événements",
+      "requirements": "DE.AE-1: Une base de référence des opérations du réseau et des flux de données attendus pour les utilisateurs et les systèmes est établie et gérée.\n[MESURE CLÉ] L'organisation doit s'assurer qu'une base de référence des opérations du réseau et des flux de données attendus pour ses systèmes critiques est développée, documentée et maintenue pour suivre les événements.\nEssentiel - mesure clé",
+      "implementation_groups": ["E", "EK"]
+    },
+    "ccb-cff-de-ae-2-1": {
+      "code": "DE.AE-2.1",
+      "section": "de",
+      "control": "Anomalies et événements",
+      "requirements": "DE.AE-2: Les événements détectés sont analysés pour comprendre les cibles et les méthodes d’attaque.\nL'organisation doit examiner et analyser les événements détectés pour comprendre les cibles et les méthodes d'attaque.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-ae-2-2": {
+      "code": "DE.AE-2.2",
+      "section": "de",
+      "control": "Anomalies et événements",
+      "requirements": "DE.AE-2: Les événements détectés sont analysés pour comprendre les cibles et les méthodes d’attaque.\nL'organisation doit mettre en œuvre des mécanismes automatisés, lorsque cela est possible, pour examiner et analyser les événements détectés.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-de-ae-3-1": {
+      "code": "DE.AE-3.1",
+      "section": "de",
+      "control": "Anomalies et événements",
+      "requirements": "DE.AE-3: Les données d'événements sont collectées et corrélées à partir de sources et de capteurs multiples.\n[MESURE CLÉ] La fonctionnalité d'enregistrement de l'activité du matériel ou du logiciel de protection/détection (par exemple, les pare-feu, les anti-virus) doit être activée, sauvegardée et examinée.\nBasique - mesure clé · Important - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["B", "I", "E", "BK", "IK", "EK"]
+    },
+    "ccb-cff-de-ae-3-2": {
+      "code": "DE.AE-3.2",
+      "section": "de",
+      "control": "Anomalies et événements",
+      "requirements": "DE.AE-3: Les données d'événements sont collectées et corrélées à partir de sources et de capteurs multiples.\nL'organisation doit s'assurer que les données relatives aux événements sont compilées et corrélées dans l'ensemble de ses systèmes critiques en utilisant diverses sources telles que les rapports d'événements, la surveillance des audits, la surveillance du réseau, la surveillance de l'accès physique et les rapports des utilisateurs/administrateurs.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-ae-3-3": {
+      "code": "DE.AE-3.3",
+      "section": "de",
+      "control": "Anomalies et événements",
+      "requirements": "DE.AE-3: Les données d'événements sont collectées et corrélées à partir de sources et de capteurs multiples.\nL'organisation doit intégrer l'analyse des événements, lorsque cela est possible, à l'analyse des informations du scannage de vulnérabilité, aux données sur les performances, à la surveillance de ses systèmes critiques et à la surveillance des installations, afin d'améliorer encore la capacité à identifier les activités inappropriées ou inhabituelles.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-de-ae-4-1": {
+      "code": "DE.AE-4.1",
+      "section": "de",
+      "control": "Anomalies et événements",
+      "requirements": "DE.AE-4: L'impact des événements est déterminé.\nLes impacts négatifs sur les opérations, les actifs et les individus de l'organisation résultant des événements détectés doivent être déterminés et mis en corrélation avec les résultats de l'évaluation des risques.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-de-ae-5-1": {
+      "code": "DE.AE-5.1",
+      "section": "de",
+      "control": "Anomalies et événements",
+      "requirements": "DE.AE-5: Les seuils d'alerte des incidents sont établis.\nL'organisation doit mettre en œuvre des mécanismes automatisés et des alertes générées par le système pour faciliter la détection des événements et l'identification des seuils d'alerte de sécurité.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-ae-5-2": {
+      "code": "DE.AE-5.2",
+      "section": "de",
+      "control": "Anomalies et événements",
+      "requirements": "DE.AE-5: Les seuils d'alerte des incidents sont établis.\nL'organisation doit définir des seuils d'alerte d'incidents.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-cm-1-1": {
+      "code": "DE.CM-1.1",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-1: Le réseau est surveillé pour détecter les événements potentiels de cybersécurité.\nDes pare-feu doivent être installés et exploités aux limites du réseau et complétés par une protection pare-feu sur les terminaux.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-de-cm-1-2": {
+      "code": "DE.CM-1.2",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-1: Le réseau est surveillé pour détecter les événements potentiels de cybersécurité.\n[MESURE CLÉ] L'organisation doit surveiller et identifier l'utilisation non autorisée de ses systèmes critiques pour l'organisation en détectant les connexions locales, les connexions réseau et les connexions à distance non autorisées.\nImportant - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["I", "E", "IK", "EK"]
+    },
+    "ccb-cff-de-cm-1-3": {
+      "code": "DE.CM-1.3",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-1: Le réseau est surveillé pour détecter les événements potentiels de cybersécurité.\nL'organisation doit effectuer une surveillance permanente de l'état de sécurité de son réseau afin de détecter les événements définis en matière d'information/cybersécurité et les indicateurs d'événements potentiels en matière d'information/cybersécurité.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-de-cm-2-1": {
+      "code": "DE.CM-2.1",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-2: L'environnement physique est surveillé pour détecter les événements potentiels de cybersécurité.\nL'environnement physique de l'installation doit être surveillé pour détecter les événements potentiels liés à l'information et à la cybersécurité.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-cm-2-2": {
+      "code": "DE.CM-2.2",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-2: L'environnement physique est surveillé pour détecter les événements potentiels de cybersécurité.\nEn plus de la surveillance de l'accès physique à l'installation, l'accès physique aux systèmes et dispositifs critiques de l'organisation doit être renforcé par des alarmes d'intrusion physique, des équipements de surveillance et des équipes de surveillance indépendantes.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-de-cm-3-1": {
+      "code": "DE.CM-3.1",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-3: L'activité du personnel est surveillée pour détecter les événements potentiels de cybersécurité.\nDes outils de protection des terminaux et des réseaux permettant de surveiller le comportement de l'utilisateur final pour détecter toute activité dangereuse doivent être mis en œuvre.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-de-cm-3-2": {
+      "code": "DE.CM-3.2",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-3: L'activité du personnel est surveillée pour détecter les événements potentiels de cybersécurité.\nLes outils de protection des terminaux et des réseaux qui surveillent le comportement de l'utilisateur final pour détecter toute activité dangereuse doivent être gérés.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-cm-3-3": {
+      "code": "DE.CM-3.3",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-3: L'activité du personnel est surveillée pour détecter les événements potentiels de cybersécurité.\nLes restrictions d'utilisation et d'installation des logiciels sont appliquées.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-cm-4-1": {
+      "code": "DE.CM-4.1",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-4: Le code malveillant est détecté.\n[MESURE CLÉ] Les programmes anti-virus, anti-spyware et autres programmes malveillants doivent être installés et mis à jour.\nBasique - mesure clé · Important - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["B", "I", "E", "BK", "IK", "EK"]
+    },
+    "ccb-cff-de-cm-4-2": {
+      "code": "DE.CM-4.2",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-4: Le code malveillant est détecté.\nL'organisation doit mettre en place un système de détection des faux positifs lors de la détection et de l'éradication des codes malveillants.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-de-cm-5-1": {
+      "code": "DE.CM-5.1",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-5: Un code mobile non autorisé est détecté.\nL'organisation doit définir le code mobile et les technologies de code mobile acceptables et inacceptables ; et autoriser, surveiller et contrôler l'utilisation du code mobile au sein du système.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-cm-6-1": {
+      "code": "DE.CM-6.1",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-6: L'activité des prestataires de services externes est surveillée pour détecter les événements potentiels de cybersécurité.\nToutes les connexions externes des fournisseurs qui prennent en charge des applications ou des infrastructures IT/OT doivent être sécurisées et surveillées activement afin de garantir que seules des actions autorisées se produisent pendant la connexion.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-cm-6-2": {
+      "code": "DE.CM-6.2",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-6: L'activité des prestataires de services externes est surveillée pour détecter les événements potentiels de cybersécurité.\nLa conformité des prestataires de services externes aux politiques et procédures de sécurité du personnel et aux exigences de sécurité contractuelles est contrôlée par rapport aux risques de cybersécurité qu'ils présentent.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-cm-7-1": {
+      "code": "DE.CM-7.1",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-7: La surveillance du personnel, des connexions, des dispositifs et des logiciels non autorisés est effectuée.\nLes systèmes essentiels aux opérations de l'organisation doivent être surveillés pour détecter les accès, les connexions, les dispositifs, les points d'accès et les logiciels non autorisés par le personnel.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-cm-7-2": {
+      "code": "DE.CM-7.2",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-7: La surveillance du personnel, des connexions, des dispositifs et des logiciels non autorisés est effectuée.\nLes modifications non autorisées de la configuration des systèmes de l'organisation doivent être surveillées et traitées par des mesures d'atténuation appropriées.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-de-cm-8-1": {
+      "code": "DE.CM-8.1",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-8: Les analyses de vulnérabilité sont effectuées.\nL'organisation doit surveiller et analyser les vulnérabilités de ses systèmes critiques et de ses applications hébergées en veillant à ce que les fonctions du système ne soient pas affectées par le processus d'analyse.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-cm-8-2": {
+      "code": "DE.CM-8.2",
+      "section": "de",
+      "control": "Surveillance continue de la sécurité",
+      "requirements": "DE.CM-8: Les analyses de vulnérabilité sont effectuées.\nLe processus d'analyse de la vulnérabilité comprend l'analyse, la correction et le partage des informations.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-dp-2-1": {
+      "code": "DE.DP-2.1",
+      "section": "de",
+      "control": "Processus de détection",
+      "requirements": "DE.DP-2: Les activités de détection sont conformes à toutes les exigences applicables.\nL'organisation doit mener des activités de détection conformément aux lois fédérales et régionales, aux réglementations et normes industrielles, aux politiques et aux autres exigences applicables.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-dp-3-1": {
+      "code": "DE.DP-3.1",
+      "section": "de",
+      "control": "Processus de détection",
+      "requirements": "DE.DP-3: Les processus de détection sont testés.\nL'organisation doit valider que les processus de détection des événements fonctionnent comme prévu.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-dp-4-1": {
+      "code": "DE.DP-4.1",
+      "section": "de",
+      "control": "Processus de détection",
+      "requirements": "DE.DP-4: Les informations relatives à la détection des événements sont communiquées.\nL'organisation doit communiquer les informations relatives à la détection des événements aux parties prédéfinies.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-dp-5-1": {
+      "code": "DE.DP-5.1",
+      "section": "de",
+      "control": "Processus de détection",
+      "requirements": "DE.DP-5: Les processus de détection sont améliorés en permanence.\nLes améliorations découlant de la surveillance, de la mesure, de l'évaluation, des tests, de l'examen et des enseignements tirés seront incorporées dans les révisions du processus de détection.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-de-dp-5-2": {
+      "code": "DE.DP-5.2",
+      "section": "de",
+      "control": "Processus de détection",
+      "requirements": "DE.DP-5: Les processus de détection sont améliorés en permanence.\nL'organisation doit effectuer des évaluations spécialisées, notamment une surveillance approfondie, un scannage de vulnérabilité, des tests d'utilisateurs malveillants, une évaluation de la menace interne, des tests de performance/charge, ainsi que des tests de vérification et de validation sur les systèmes critiques de l'organisation.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-rs-rp-1-1": {
+      "code": "RS.RP-1.1",
+      "section": "rs",
+      "control": "Planification de la réponse",
+      "requirements": "RS.RP-1: Le plan de réponse est exécuté pendant ou après un incident.\nUn processus de réponse aux incidents, comprenant les rôles, les responsabilités et les pouvoirs, doit être exécuté pendant ou après un événement lié à l'information ou à la cybersécurité sur les systèmes critiques de l'organisation.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-rs-co-1-1": {
+      "code": "RS.CO-1.1",
+      "section": "rs",
+      "control": "Communications",
+      "requirements": "RS.CO-1: Le personnel connaît ses rôles et l'ordre des opérations lorsqu'une réponse est nécessaire.\nL'organisation doit s'assurer que le personnel comprend ses rôles, ses objectifs, les priorités de restauration, les séquences de tâches (ordre des opérations) et les responsabilités d'affectation pour la réponse aux événements.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-rs-co-2-1": {
+      "code": "RS.CO-2.1",
+      "section": "rs",
+      "control": "Communications",
+      "requirements": "RS.CO-2: Les incidents sont signalés conformément aux critères établis.\nL'organisation doit mettre en place un système de notification des incidents liés à la sécurité de l'information/cybersécurité sur ses systèmes critiques, dans un délai défini par l'organisation, à l'intention du personnel ou des rôles définis par l'organisation.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-rs-co-2-2": {
+      "code": "RS.CO-2.2",
+      "section": "rs",
+      "control": "Communications",
+      "requirements": "RS.CO-2: Les incidents sont signalés conformément aux critères établis.\nLes événements doivent être signalés conformément aux critères établis.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-rs-co-3-1": {
+      "code": "RS.CO-3.1",
+      "section": "rs",
+      "control": "Communications",
+      "requirements": "RS.CO-3: Les informations sont partagées conformément aux plans de réponse.\nLes informations relatives aux incidents de cybersécurité doivent être communiquées et partagées avec les employés de l'organisation dans un format qu'ils peuvent comprendre.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-rs-co-3-2": {
+      "code": "RS.CO-3.2",
+      "section": "rs",
+      "control": "Communications",
+      "requirements": "RS.CO-3: Les informations sont partagées conformément aux plans de réponse.\nL'organisation doit partager les informations relatives aux incidents de cybersécurité avec les parties prenantes concernées, comme prévu dans le plan de réponse aux incidents.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-rs-co-4-1": {
+      "code": "RS.CO-4.1",
+      "section": "rs",
+      "control": "Communications",
+      "requirements": "RS.CO-4: La coordination avec les parties prenantes se fait conformément aux plans de réponse.\nL'organisation doit coordonner les actions de réponse aux incidents de sécurité de l'information/cybersécurité avec toutes les parties prenantes prédéfinies.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-rs-co-5-1": {
+      "code": "RS.CO-5.1",
+      "section": "rs",
+      "control": "Communications",
+      "requirements": "RS.CO-5: Le partage volontaire d'informations se fait avec des parties prenantes externes afin d'obtenir une meilleure connaissance de la situation en matière de cybersécurité.\nL'organisation doit partager volontairement les informations sur les événements de cybersécurité, le cas échéant, avec les parties prenantes externes, les groupes de sécurité de l'industrie... afin de parvenir à une connaissance plus large de la situation en matière d'information et de cybersécurité.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-rs-an-1-1": {
+      "code": "RS.AN-1.1",
+      "section": "rs",
+      "control": "Analyse",
+      "requirements": "RS.AN-1: Les notifications des systèmes de détection sont examinées.\nL'organisation doit enquêter sur les notifications relatives à l'information/la cybersécurité générées par les systèmes de détection.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-rs-an-1-2": {
+      "code": "RS.AN-1.2",
+      "section": "rs",
+      "control": "Analyse",
+      "requirements": "RS.AN-1: Les notifications des systèmes de détection sont examinées.\nL'organisation doit mettre en œuvre des mécanismes automatisés pour faciliter l'enquête et l'analyse des notifications liées à l'information/la cybersécurité.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-rs-an-2-1": {
+      "code": "RS.AN-2.1",
+      "section": "rs",
+      "control": "Analyse",
+      "requirements": "RS.AN-2: L'impact de l'incident est compris.\nUne enquête approfondie et l'analyse des résultats doivent permettre de comprendre toutes les implications de l'incident de sécurité de l'information/cybersécurité.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-rs-an-2-2": {
+      "code": "RS.AN-2.2",
+      "section": "rs",
+      "control": "Analyse",
+      "requirements": "RS.AN-2: L'impact de l'incident est compris.\nL'organisation doit mettre en œuvre des mécanismes automatisés pour soutenir l'analyse de l'impact des incidents.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-rs-an-3-1": {
+      "code": "RS.AN-3.1",
+      "section": "rs",
+      "control": "Analyse",
+      "requirements": "RS.AN-3: L'analyse forensique est réalisée.\nL'organisation doit fournir un examen, une analyse et un rapport d'audit à la demande pour les enquêtes après coup sur les incidents liés à l'information et à la cybersécurité.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-rs-an-3-2": {
+      "code": "RS.AN-3.2",
+      "section": "rs",
+      "control": "Analyse",
+      "requirements": "RS.AN-3: L'analyse forensique est réalisée.\nL'organisation doit effectuer une analyse forensique des informations collectées/des informations sur les événements de cybersécurité afin de déterminer la cause d'origine.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-rs-an-4-1": {
+      "code": "RS.AN-4.1",
+      "section": "rs",
+      "control": "Analyse",
+      "requirements": "RS.AN-4: Les incidents sont classés par catégories conformément aux plans de réponse.\nLes incidents liés à l'information et à la cybersécurité sont classés en fonction de leur niveau de gravité et de leur impact, conformément aux critères d'évaluation inclus dans le plan de réponse aux incidents.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-rs-an-5-1": {
+      "code": "RS.AN-5.1",
+      "section": "rs",
+      "control": "Analyse",
+      "requirements": "RS.AN-5: Des processus sont établis pour recevoir, analyser et répondre aux vulnérabilités divulguées à l'organisation par des sources internes et externes (par exemple, tests internes, bulletins de sécurité ou chercheurs en sécurité).\n[MESURE CLÉ] L'organisation doit mettre en œuvre des processus et des procédures de gestion des vulnérabilités qui comprennent le traitement, l'analyse et la correction des vulnérabilités provenant de sources internes et externes.\nImportant - mesure clé · Essentiel - mesure clé",
+      "implementation_groups": ["I", "E", "IK", "EK"]
+    },
+    "ccb-cff-rs-an-5-2": {
+      "code": "RS.AN-5.2",
+      "section": "rs",
+      "control": "Analyse",
+      "requirements": "RS.AN-5: Des processus sont établis pour recevoir, analyser et répondre aux vulnérabilités divulguées à l'organisation par des sources internes et externes (par exemple, tests internes, bulletins de sécurité ou chercheurs en sécurité).\nL'organisation doit mettre en place des mécanismes automatisés pour diffuser et suivre les efforts de remédiation pour les informations de vulnérabilités, capturées à partir de sources internes et externes, auprès des principales parties prenantes.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-rs-mi-1-1": {
+      "code": "RS.MI-1.1",
+      "section": "rs",
+      "control": "Atténuation",
+      "requirements": "RS.MI-1: Les incidents sont contenus.\nL'organisation doit mettre en œuvre une capacité de traitement des incidents de sécurité de l'information/cybersécurité sur ses systèmes essentiels à l'activité, qui comprend la préparation, la détection et l'analyse, le confinement, l'éradication, le rétablissement et l'acceptation documentée des risques.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-rs-im-1-1": {
+      "code": "RS.IM-1.1",
+      "section": "rs",
+      "control": "Améliorations",
+      "requirements": "RS.IM-1: Les plans de réponse intègrent les leçons apprises.\nL'organisation doit effectuer des évaluations post-incident afin d'analyser les enseignements tirés de la réponse à l'incident et du rétablissement, et par conséquent améliorer les processus / procédures / technologies pour renforcer sa cyber-résilience.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-rs-im-1-2": {
+      "code": "RS.IM-1.2",
+      "section": "rs",
+      "control": "Améliorations",
+      "requirements": "RS.IM-1: Les plans de réponse intègrent les leçons apprises.\nLes enseignements tirés du traitement des incidents sont traduits en procédures de traitement des incidents actualisées ou nouvelles qui sont testées, approuvées et enseignées.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-rs-im-2-1": {
+      "code": "RS.IM-2.1",
+      "section": "rs",
+      "control": "Améliorations",
+      "requirements": "RS.IM-2: Les plans de réponse intègrent les leçons apprises.\nL'organisation doit mettre à jour les plans de réponse et de rétablissement pour tenir compte des changements survenus dans son contexte.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-rc-rp-1-1": {
+      "code": "RC.RP-1.1",
+      "section": "rc",
+      "control": "Planification du rétablissement",
+      "requirements": "RC.RP-1: Le plan de reprise est exécuté pendant ou après un incident de cybersécurité.\nUn processus de rétablissement en cas de catastrophes et d'incidents liés à l'information et à la cybersécurité est élaboré et exécuté selon les besoins.\nBasique · Important · Essentiel",
+      "implementation_groups": ["B", "I", "E"]
+    },
+    "ccb-cff-rc-rp-1-2": {
+      "code": "RC.RP-1.2",
+      "section": "rc",
+      "control": "Planification du rétablissement",
+      "requirements": "RC.RP-1: Le plan de reprise est exécuté pendant ou après un incident de cybersécurité.\nLes fonctions et services de l'organisation essentielle doivent être poursuivis avec peu ou pas de perte de continuité opérationnelle et la continuité doit être maintenue jusqu'à la restauration complète du système.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-rc-im-1-1": {
+      "code": "RC.IM-1.1",
+      "section": "rc",
+      "control": "Améliorations",
+      "requirements": "RC.IM-1: Les plans de rétablissement intègrent les leçons apprises.\nL'organisation doit intégrer les enseignements tirés des activités de rétablissement des incidents dans les procédures de rétablissement du système, nouvelles ou mises à jour, et, après les avoir testées, les encadrer par une formation appropriée.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-rc-co-1-1": {
+      "code": "RC.CO-1.1",
+      "section": "rc",
+      "control": "Communications",
+      "requirements": "RC.CO-1: Les relations publiques sont gérées.\nL'organisation doit centraliser et coordonner la manière dont les informations sont diffusées et gérer la manière dont l'organisation est présentée au public.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    },
+    "ccb-cff-rc-co-1-2": {
+      "code": "RC.CO-1.2",
+      "section": "rc",
+      "control": "Communications",
+      "requirements": "RC.CO-1: Les relations publiques sont gérées.\nUn responsable des relations publiques est désigné.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-rc-co-2-1": {
+      "code": "RC.CO-2.1",
+      "section": "rc",
+      "control": "Communications",
+      "requirements": "RC.CO-2: La réputation est réparée après un incident.\nL'organisation doit mettre en œuvre une stratégie de réponse aux crises afin de protéger l'organisation des conséquences négatives d'une crise et de contribuer à restaurer sa réputation.\nEssentiel",
+      "implementation_groups": ["E"]
+    },
+    "ccb-cff-rc-co-3-1": {
+      "code": "RC.CO-3.1",
+      "section": "rc",
+      "control": "Communications",
+      "requirements": "RC.CO-3: Les activités de rétablissement sont communiquées aux parties prenantes internes et externes, ainsi qu'aux équipes de direction et de gestion.\nL'organisation doit communiquer les activités de rétablissement aux parties prenantes prédéfinies, aux équipes de direction et de gestion.\nImportant · Essentiel",
+      "implementation_groups": ["I", "E"]
+    }
+  }
+}

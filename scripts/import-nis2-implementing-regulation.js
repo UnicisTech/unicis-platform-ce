@@ -31,6 +31,10 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
+const {
+  loadFrameworkIds,
+  mergeFrameworkMappings,
+} = require('./lib/merge-framework-mappings');
 
 const ISO_KEY = 'eunis2_2024_2690';
 const ID_PREFIX = 'eu-nis2-ir-';
@@ -216,46 +220,8 @@ for (const locale of ['en', ...LOCALES]) {
 
 // ── Mappings ──────────────────────────────────────────────────────────────────
 
-const mappingsPath = path.join(ROOT, 'lib/csc/framework-mappings.ts');
-const source = fs.readFileSync(mappingsPath, 'utf8');
-const START = 'const frameworkMappings: FrameworkMappings = ';
-const bodyStart = source.indexOf(START) + START.length;
-const bodyEnd = source.indexOf('\n};\n', bodyStart) + 2;
-const mappings = Function(`return ${source.slice(bodyStart, bodyEnd)}`)();
-
-const frameworkIds = (file) =>
-  new Set(
-    [
-      ...fs
-        .readFileSync(path.join(ROOT, 'lib/csc/frameworks', file), 'utf8')
-        .matchAll(/id: '([^']+)'/g),
-    ].map((m) => m[1])
-  );
-const FILE_TO_ISO = {
-  'c5_2020.ts': 'c5_2020',
-  'cis_v_81.ts': 'cisv81',
-  'eu_nis2.ts': 'eunis2',
-  'eu_nis2_2024_2690.ts': ISO_KEY,
-  'gdpr.ts': 'gdpr',
-  'iso42001.ts': 'iso42001',
-  'iso_2013.ts': 'iso-2013',
-  'iso_2022.ts': 'iso-2022',
-  'mvsp.ts': 'mvsp',
-  'nist_csf_v2.ts': 'nistcsfv2',
-  'owasp_asvs_v5.ts': 'owasp_asvs_v5',
-  'pcidss_v401.ts': 'pcidss_v401',
-  'soc2-v2.ts': 'soc2v2',
-};
-const isoKeyOfFile = (file) => {
-  if (!FILE_TO_ISO[file]) throw new Error(`Unknown framework file ${file}`);
-  return FILE_TO_ISO[file];
-};
-const known = {
-  'iso-2022': frameworkIds('iso_2022.ts'),
-  nistcsfv2: frameworkIds('nist_csf_v2.ts'),
-};
+const known = loadFrameworkIds();
 const controlIds = new Set(controls.map(controlId));
-const orderOf = new Map(controls.map((n, i) => [controlId(n), i]));
 
 const convertTarget = {
   'iso27001-2022': (node) => [
@@ -269,12 +235,7 @@ const convertTarget = {
 };
 
 const direct = new Map(); // nis2 id → { iso: Set(ids) }
-const stats = { pairs: 0, skipped: {} };
-const addTo = (map, key, iso, id) => {
-  if (!map.has(key)) map.set(key, {});
-  (map.get(key)[iso] ||= new Set()).add(id);
-};
-
+const skipped = {};
 for (const file of [arg('iso27001'), arg('nist')]) {
   const sets = load(file).objects.requirement_mapping_sets;
   for (const set of sets) {
@@ -287,139 +248,33 @@ for (const file of [arg('iso27001'), arg('nist')]) {
         [nisUrn, otherUrn] = [otherUrn, nisUrn];
       const nisNode = byUrn.get(nisUrn);
       const parts = otherUrn.split(':');
-      const conv = convertTarget[parts[4]];
-      const [iso, targetId] = conv(parts.slice(5).join(':'));
+      const [iso, targetId] = convertTarget[parts[4]](parts.slice(5).join(':'));
       if (
         !nisNode ||
         !controlIds.has(controlId(nisNode)) ||
         !known[iso].has(targetId)
       ) {
-        stats.skipped[iso] = stats.skipped[iso] || new Set();
-        stats.skipped[iso].add(parts.slice(5).join(':'));
+        (skipped[iso] ||= new Set()).add(parts.slice(5).join(':'));
         continue;
       }
-      addTo(direct, controlId(nisNode), iso, targetId);
+      const id = controlId(nisNode);
+      if (!direct.has(id)) direct.set(id, {});
+      (direct.get(id)[iso] ||= new Set()).add(targetId);
     }
   }
 }
 
-// Existing mappings are not always symmetric (e.g. GDPR entries point to
-// ISO 27001:2022 controls without a reverse entry), so pivot neighbours are
-// collected in both directions.
-const pivotNeighbours = new Map();
-const link = (a, iso, b) => {
-  if (!a.startsWith('iso-2022-')) return;
-  addTo(pivotNeighbours, a, iso, b);
-};
-const isoOf = new Map();
-for (const file of fs.readdirSync(path.join(ROOT, 'lib/csc/frameworks'))) {
-  if (file === 'index.ts') continue;
-  for (const id of frameworkIds(file)) isoOf.set(id, file);
-}
-for (const [key, entry] of Object.entries(mappings)) {
-  for (const [iso, ids] of Object.entries(entry.mappings)) {
-    if (iso === ISO_KEY) continue;
-    for (const t of ids) {
-      link(key, iso, t);
-      if (t.startsWith('iso-2022-') && isoOf.has(key)) {
-        link(t, isoKeyOfFile(isoOf.get(key)), key);
-      }
-    }
-  }
-}
+const { mapped } = mergeFrameworkMappings({
+  isoKey: ISO_KEY,
+  title: 'EU NIS2 Implementing Regulation 2024/2690',
+  controlIds: controls.map(controlId),
+  direct,
+});
 
-const combined = new Map();
-for (const [id, byIso] of direct) {
-  for (const [iso, ids] of Object.entries(byIso)) {
-    for (const t of ids) addTo(combined, id, iso, t);
-  }
-  for (const pivot of byIso['iso-2022'] || []) {
-    for (const [iso, ids] of Object.entries(pivotNeighbours.get(pivot) || {})) {
-      if (iso === ISO_KEY || iso === 'iso-2022') continue;
-      for (const t of ids) addTo(combined, id, iso, t);
-    }
-  }
-}
-
-// Stable order for target ids: keep the order they already have in the
-// pivot entries / framework files by sorting naturally.
-const natural = (a, b) => a.localeCompare(b, 'en', { numeric: true });
-
-// Remove output of a previous run so the script is idempotent.
-let text = source
-  .replace(
-    /\n {2}\/\/ ─── EU NIS2 Implementing Regulation[\s\S]*?\/\/ ─── end EU NIS2 Implementing Regulation ─+\n/,
-    '\n'
-  )
-  .replace(new RegExp(`\\n {6}${ISO_KEY}: \\[[^\\]]*\\],`, 'g'), '');
-for (const [key, entry] of Object.entries(mappings)) {
-  delete entry.mappings[ISO_KEY];
-}
-
-const quote = (ids) => `[${ids.map((i) => `'${i}'`).join(', ')}]`;
-const tsKey = (iso) => (/^[a-z][a-z0-9_]*$/i.test(iso) ? iso : `'${iso}'`);
-const entryTs = (id, byIso) =>
-  `  '${id}': {\n    relationship: 'related',\n    mappings: {\n` +
-  Object.entries(byIso)
-    .map(([iso, ids]) => `      ${tsKey(iso)}: ${quote(ids)},\n`)
-    .join('') +
-  `    },\n  },\n`;
-
-const reverse = new Map();
-let block = '';
-for (const id of [...combined.keys()].sort(
-  (a, b) => orderOf.get(a) - orderOf.get(b)
-)) {
-  const out = {};
-  for (const [iso, ids] of Object.entries(combined.get(id)).sort()) {
-    out[iso] = [...ids].sort(natural);
-    for (const t of ids) {
-      stats.pairs++;
-      addTo(reverse, t, ISO_KEY, id);
-    }
-  }
-  block += entryTs(id, out);
-}
-
-const missing = [];
-for (const [target, byIso] of reverse) {
-  const ids = [...byIso[ISO_KEY]].sort(
-    (a, b) => orderOf.get(a) - orderOf.get(b)
-  );
-  const header = `\n  '${target}': {\n`;
-  const at = text.indexOf(header);
-  if (at === -1) {
-    missing.push(entryTs(target, { [ISO_KEY]: ids }));
-    continue;
-  }
-  const mapsAt = text.indexOf('\n    mappings: {\n', at);
-  const closeAt = text.indexOf('\n    },\n', mapsAt);
-  text =
-    text.slice(0, closeAt) +
-    `\n      ${ISO_KEY}: ${quote(ids)},` +
-    text.slice(closeAt);
-}
-
-const endAt = text.lastIndexOf('\n};\n');
-const title = 'EU NIS2 Implementing Regulation 2024/2690 controls';
-text =
-  text.slice(0, endAt) +
-  `\n\n  // ─── ${title} ${'─'.repeat(20)}\n` +
-  block +
-  missing.join('') +
-  `  // ─── end EU NIS2 Implementing Regulation ${'─'.repeat(20)}\n` +
-  text.slice(endAt + 1);
-fs.writeFileSync(mappingsPath, text);
-
-console.error(`mapped controls: ${combined.size}/${controls.length}`);
-console.error(`pairs (each stored in both directions): ${stats.pairs}`);
-console.error(
-  `reverse-updated entries: ${reverse.size} (new target entries: ${missing.length})`
-);
-for (const [iso, s] of Object.entries(stats.skipped)) {
+for (const [iso, s] of Object.entries(skipped)) {
   console.error(`skipped ${iso} targets not in Unicis: ${[...s].join(', ')}`);
 }
-const unmapped = controls.filter((n) => !combined.has(controlId(n)));
+const unmapped = controls.filter((n) => !mapped.has(controlId(n)));
 console.error(
   `controls without mapping: ${unmapped.map(controlCode).join(', ')}`
 );

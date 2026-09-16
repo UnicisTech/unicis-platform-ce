@@ -2,7 +2,10 @@ import useSWR from 'swr';
 import type { ISO } from 'types';
 
 /** Frameworks that ship implementation guidance in public/csc-guidance. */
-export const FRAMEWORKS_WITH_GUIDANCE: ISO[] = ['eunis2_2024_2690'];
+export const FRAMEWORKS_WITH_GUIDANCE: ISO[] = [
+  'eunis2_2024_2690',
+  'ccb_cff_2023',
+];
 
 export interface ControlGuidance {
   code: string;

@@ -64,6 +64,7 @@ export const ISO_VALUES = [
   'nistcsfv2',
   'eunis2',
   'eunis2_2024_2690',
+  'ccb_cff_2023',
   'gdpr',
   'cisv81',
   'soc2v2',
