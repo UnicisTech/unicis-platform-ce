@@ -4,6 +4,7 @@ import iso_2022 from './iso_2022';
 import mvsp from './mvsp';
 import nist_csf_v2 from './nist_csf_v2';
 import eu_nis2 from './eu_nis2';
+import eu_nis2_2024_2690 from './eu_nis2_2024_2690';
 import gdpr from './gdpr';
 import cis_v_81 from './cis_v_81';
 import soc2V2 from './soc2-v2';
@@ -19,6 +20,7 @@ const frameworks = {
   mvsp: mvsp,
   nistcsfv2: nist_csf_v2,
   eunis2: eu_nis2,
+  eunis2_2024_2690: eu_nis2_2024_2690,
   gdpr: gdpr,
   cisv81: cis_v_81,
   soc2v2: soc2V2,

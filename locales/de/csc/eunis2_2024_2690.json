@@ -1,0 +1,2163 @@
+{
+  "sections": {
+    "section-1": {
+      "label": "Konzept für die Sicherheit von Netz- und Informationssystemen"
+    },
+    "section-2": {
+      "label": "Konzept für das Risikomanagement"
+    },
+    "section-3": {
+      "label": "Bewältigung von Sicherheitsvorfällen"
+    },
+    "section-4": {
+      "label": "Betriebskontinuitäts- und Krisenmanagement"
+    },
+    "section-5": {
+      "label": "Sicherheit der Lieferkette"
+    },
+    "section-6": {
+      "label": "Sicherheitsmaßnahmen bei Erwerb, Entwicklung und Wartung von Netz- und Informationssystemen"
+    },
+    "section-7": {
+      "label": "Konzepte und Verfahren zur Bewertung der Wirksamkeit von Risikomanagementmaßnahmen im Bereich der Cybersicherheit"
+    },
+    "section-8": {
+      "label": "Grundlegende Verfahren im Bereich der Cyberhygiene und Schulungen im Bereich der Cybersicherheit"
+    },
+    "section-9": {
+      "label": "Kryptografie"
+    },
+    "section-10": {
+      "label": "Sicherheit des Personals"
+    },
+    "section-11": {
+      "label": "Zugriffskontrolle"
+    },
+    "section-12": {
+      "label": "Anlagen- und Wertemanagement"
+    },
+    "section-13": {
+      "label": "Sicherheit des Umfelds und physische Sicherheit"
+    }
+  },
+  "controls": {
+    "eu-nis2-ir-1-1-1-a": {
+      "code": "1.1.1.a",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Konzept für die Sicherheit von Netz- und Informationssystemen\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe a der Richtlinie (EU) 2022/2555 muss das Konzept für die Sicherheit von Netz- und Informationssystemen:\nden Ansatz der betreffenden Einrichtungen für das Management der Sicherheit ihrer Netz- und Informationssysteme darlegen;"
+    },
+    "eu-nis2-ir-1-1-1-b": {
+      "code": "1.1.1.b",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Konzept für die Sicherheit von Netz- und Informationssystemen\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe a der Richtlinie (EU) 2022/2555 muss das Konzept für die Sicherheit von Netz- und Informationssystemen:\nfür die Geschäftsstrategie und die Ziele der betreffenden Einrichtungen geeignet sein und diese ergänzen;"
+    },
+    "eu-nis2-ir-1-1-1-c": {
+      "code": "1.1.1.c",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Konzept für die Sicherheit von Netz- und Informationssystemen\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe a der Richtlinie (EU) 2022/2555 muss das Konzept für die Sicherheit von Netz- und Informationssystemen:\ndie Ziele der Sicherheit von Netz- und Informationssystemen darlegen;"
+    },
+    "eu-nis2-ir-1-1-1-d": {
+      "code": "1.1.1.d",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Konzept für die Sicherheit von Netz- und Informationssystemen\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe a der Richtlinie (EU) 2022/2555 muss das Konzept für die Sicherheit von Netz- und Informationssystemen:\neine Verpflichtung zur kontinuierlichen Verbesserung der Sicherheit von Netz- und Informationssystemen enthalten;"
+    },
+    "eu-nis2-ir-1-1-1-e": {
+      "code": "1.1.1.e",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Konzept für die Sicherheit von Netz- und Informationssystemen\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe a der Richtlinie (EU) 2022/2555 muss das Konzept für die Sicherheit von Netz- und Informationssystemen:\neine Verpflichtung enthalten, die für seine Umsetzung erforderlichen angemessenen Ressourcen bereitzustellen, einschließlich des erforderlichen Personals, der erforderlichen Finanzmittel sowie der Verfahren, Instrumente und Technologien;"
+    },
+    "eu-nis2-ir-1-1-1-f": {
+      "code": "1.1.1.f",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Konzept für die Sicherheit von Netz- und Informationssystemen\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe a der Richtlinie (EU) 2022/2555 muss das Konzept für die Sicherheit von Netz- und Informationssystemen:\nden einschlägigen Mitarbeitenden und interessierten externen Beteiligten mitgeteilt und von ihnen anerkannt werden;"
+    },
+    "eu-nis2-ir-1-1-1-g": {
+      "code": "1.1.1.g",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Konzept für die Sicherheit von Netz- und Informationssystemen\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe a der Richtlinie (EU) 2022/2555 muss das Konzept für die Sicherheit von Netz- und Informationssystemen:\ndie Festlegung der Rollen und Verantwortlichkeiten gemäß Nummer 1.2 enthalten;"
+    },
+    "eu-nis2-ir-1-1-1-h": {
+      "code": "1.1.1.h",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Konzept für die Sicherheit von Netz- und Informationssystemen\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe a der Richtlinie (EU) 2022/2555 muss das Konzept für die Sicherheit von Netz- und Informationssystemen:\ndie aufzubewahrenden Unterlagen und die Dauer ihrer Aufbewahrung aufführen;"
+    },
+    "eu-nis2-ir-1-1-1-i": {
+      "code": "1.1.1.i",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Konzept für die Sicherheit von Netz- und Informationssystemen\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe a der Richtlinie (EU) 2022/2555 muss das Konzept für die Sicherheit von Netz- und Informationssystemen:\ndie themenspezifischen Konzepte aufführen;"
+    },
+    "eu-nis2-ir-1-1-1-j": {
+      "code": "1.1.1.j",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Konzept für die Sicherheit von Netz- und Informationssystemen\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe a der Richtlinie (EU) 2022/2555 muss das Konzept für die Sicherheit von Netz- und Informationssystemen:\nIndikatoren und Maßnahmen zur Überwachung seiner Umsetzung und des aktuellen Reifegrads der Netz- und Informationssicherheit in den betreffenden Einrichtungen festlegen;"
+    },
+    "eu-nis2-ir-1-1-1-k": {
+      "code": "1.1.1.k",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Konzept für die Sicherheit von Netz- und Informationssystemen\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe a der Richtlinie (EU) 2022/2555 muss das Konzept für die Sicherheit von Netz- und Informationssystemen:\ndas Datum der förmlichen Genehmigung durch die Leitungsorgane der betreffenden Einrichtungen (im Folgenden „Leitungsorgane“) enthalten."
+    },
+    "eu-nis2-ir-1-1-2": {
+      "code": "1.1.2",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Konzept für die Sicherheit von Netz- und Informationssystemen\nDas Konzept für die Sicherheit von Netz- und Informationssystemen wird von den Leitungsorganen mindestens jährlich sowie bei erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken überprüft und – soweit angemessen – aktualisiert. Das Ergebnis der Überprüfung wird dokumentiert."
+    },
+    "eu-nis2-ir-1-2-1": {
+      "code": "1.2.1",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Rollen, Verantwortlichkeiten und Weisungsbefugnisse\nIm Rahmen ihres Konzepts für die Sicherheit von Netz- und Informationssystemen gemäß Nummer 1.1 legen die betreffenden Einrichtungen Verantwortlichkeiten und Weisungsbefugnisse für die Sicherheit von Netz- und Informationssystemen fest und ordnen sie den Rollen zu, weisen sie entsprechend dem Bedarf der jeweiligen Einrichtungen zu und teilen dies den Leitungsorganen mit."
+    },
+    "eu-nis2-ir-1-2-2": {
+      "code": "1.2.2",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Rollen, Verantwortlichkeiten und Weisungsbefugnisse\nDie betreffenden Einrichtungen verlangen von allen Mitarbeitenden und Dritten, die Netz- und Informationssystemsicherheit entsprechend dem festgelegten Konzept für die Sicherheit von Netz- und Informationssystemen, den themenspezifischen Konzepten und den Verfahren der betreffenden Einrichtungen anzuwenden."
+    },
+    "eu-nis2-ir-1-2-3": {
+      "code": "1.2.3",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Rollen, Verantwortlichkeiten und Weisungsbefugnisse\nMindestens eine Person muss gegenüber den Leitungsorganen direkt für Fragen der Sicherheit von Netz- und Informationssystemen verantwortlich sein."
+    },
+    "eu-nis2-ir-1-2-4": {
+      "code": "1.2.4",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Rollen, Verantwortlichkeiten und Weisungsbefugnisse\nJe nach Größe der betreffenden Einrichtungen wird die Sicherheit von Netz- und Informationssystemen durch spezielle Rollen oder Aufgaben abgedeckt, die zusätzlich zu den bestehenden Rollen übernommen werden."
+    },
+    "eu-nis2-ir-1-2-5": {
+      "code": "1.2.5",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Rollen, Verantwortlichkeiten und Weisungsbefugnisse\nWiderstrebende Pflichten und sich widersprechende Verantwortlichkeiten werden – soweit anwendbar – getrennt."
+    },
+    "eu-nis2-ir-1-2-6": {
+      "code": "1.2.6",
+      "section": "section-1",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Rollen, Verantwortlichkeiten und Weisungsbefugnisse\nDie Rollen, Verantwortlichkeiten und Weisungsbefugnisse werden von den Leitungsorganen in geplanten Zeitabständen sowie bei erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken überprüft und – soweit angemessen – aktualisiert."
+    },
+    "eu-nis2-ir-2-1-1": {
+      "code": "2.1.1",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Risikomanagementrahmen\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe a der Richtlinie (EU) 2022/2555 führen die betreffenden Einrichtungen einen geeigneten Risikomanagementrahmen ein, um die Risiken für die Sicherheit von Netz- und Informationssystemen zu ermitteln und anzugehen, und erhalten diesen Rahmen aufrecht. Die betreffenden Einrichtungen führen Risikobewertungen durch und dokumentieren diese; auf der Grundlage der Ergebnisse erstellen sie einen Risikobehandlungsplan, setzen diesen um und überwachen ihn. Die Ergebnisse der Risikobewertung und die Restrisiken werden von den Leitungsorganen oder – soweit anwendbar – von Personen akzeptiert, die für das Risikomanagement rechenschaftspflichtig und befugt sind, sofern die betreffenden Einrichtungen für eine angemessene Berichterstattung an die Leitungsorgane sorgen."
+    },
+    "eu-nis2-ir-2-1-2": {
+      "code": "2.1.2",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Risikomanagementrahmen\nFür die Zwecke von Nummer 2.1.1 legen die betreffenden Einrichtungen Verfahren für die Ermittlung, Analyse, Bewertung und Behandlung von Risiken fest („Risikomanagementverfahren im Bereich der Cybersicherheit“). Das Risikomanagementverfahren im Bereich der Cybersicherheit ist – soweit anwendbar – fester Bestandteil des gesamten Risikomanagementverfahrens der betreffenden Einrichtungen. Als Teil des Risikomanagementverfahrens im Bereich der Cybersicherheit müssen die betreffenden Einrichtungen:"
+    },
+    "eu-nis2-ir-2-1-2-a": {
+      "code": "2.1.2.a",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Risikomanagementrahmen\nFür die Zwecke von Nummer 2.1.1 legen die betreffenden Einrichtungen Verfahren für die Ermittlung, Analyse, Bewertung und Behandlung von Risiken fest („Risikomanagementverfahren im Bereich der Cybersicherheit“). Das Risikomanagementverfahren im Bereich der Cybersicherheit ist – soweit anwendbar – fester Bestandteil des gesamten Risikomanagementverfahrens der betreffenden Einrichtungen. Als Teil des Risikomanagementverfahrens im Bereich der Cybersicherheit müssen die betreffenden Einrichtungen:\neine Risikomanagementmethodik befolgen;"
+    },
+    "eu-nis2-ir-2-1-2-b": {
+      "code": "2.1.2.b",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Risikomanagementrahmen\nFür die Zwecke von Nummer 2.1.1 legen die betreffenden Einrichtungen Verfahren für die Ermittlung, Analyse, Bewertung und Behandlung von Risiken fest („Risikomanagementverfahren im Bereich der Cybersicherheit“). Das Risikomanagementverfahren im Bereich der Cybersicherheit ist – soweit anwendbar – fester Bestandteil des gesamten Risikomanagementverfahrens der betreffenden Einrichtungen. Als Teil des Risikomanagementverfahrens im Bereich der Cybersicherheit müssen die betreffenden Einrichtungen:\neine Risikotoleranzschwelle im Einklang mit der Risikobereitschaft der betreffenden Einrichtungen festlegen;"
+    },
+    "eu-nis2-ir-2-1-2-c": {
+      "code": "2.1.2.c",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Risikomanagementrahmen\nFür die Zwecke von Nummer 2.1.1 legen die betreffenden Einrichtungen Verfahren für die Ermittlung, Analyse, Bewertung und Behandlung von Risiken fest („Risikomanagementverfahren im Bereich der Cybersicherheit“). Das Risikomanagementverfahren im Bereich der Cybersicherheit ist – soweit anwendbar – fester Bestandteil des gesamten Risikomanagementverfahrens der betreffenden Einrichtungen. Als Teil des Risikomanagementverfahrens im Bereich der Cybersicherheit müssen die betreffenden Einrichtungen:\neinschlägige Risikokriterien einführen und pflegen;"
+    },
+    "eu-nis2-ir-2-1-2-d": {
+      "code": "2.1.2.d",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Risikomanagementrahmen\nFür die Zwecke von Nummer 2.1.1 legen die betreffenden Einrichtungen Verfahren für die Ermittlung, Analyse, Bewertung und Behandlung von Risiken fest („Risikomanagementverfahren im Bereich der Cybersicherheit“). Das Risikomanagementverfahren im Bereich der Cybersicherheit ist – soweit anwendbar – fester Bestandteil des gesamten Risikomanagementverfahrens der betreffenden Einrichtungen. Als Teil des Risikomanagementverfahrens im Bereich der Cybersicherheit müssen die betreffenden Einrichtungen:\nim Einklang mit einem gefahrenübergreifenden Ansatz die bestehenden Risiken für die Sicherheit von Netz- und Informationssystemen ermitteln und dokumentieren, insbesondere in Bezug auf Dritte sowie auf Risiken, die zu Störungen der Verfügbarkeit, Integrität, Authentizität oder Vertraulichkeit der Netz- und Informationssysteme führen könnten, wobei auch punktuelle Ausfälle zu ermitteln sind;"
+    },
+    "eu-nis2-ir-2-1-2-e": {
+      "code": "2.1.2.e",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Risikomanagementrahmen\nFür die Zwecke von Nummer 2.1.1 legen die betreffenden Einrichtungen Verfahren für die Ermittlung, Analyse, Bewertung und Behandlung von Risiken fest („Risikomanagementverfahren im Bereich der Cybersicherheit“). Das Risikomanagementverfahren im Bereich der Cybersicherheit ist – soweit anwendbar – fester Bestandteil des gesamten Risikomanagementverfahrens der betreffenden Einrichtungen. Als Teil des Risikomanagementverfahrens im Bereich der Cybersicherheit müssen die betreffenden Einrichtungen:\ndie bestehenden Risiken für die Sicherheit von Netz- und Informationssystemen analysieren, einschließlich des Niveaus der Bedrohung, der Wahrscheinlichkeit, der Auswirkung und des Risikos unter Berücksichtigung der Erkenntnisse über Cyberbedrohungen und Schwachstellen;"
+    },
+    "eu-nis2-ir-2-1-2-f": {
+      "code": "2.1.2.f",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Risikomanagementrahmen\nFür die Zwecke von Nummer 2.1.1 legen die betreffenden Einrichtungen Verfahren für die Ermittlung, Analyse, Bewertung und Behandlung von Risiken fest („Risikomanagementverfahren im Bereich der Cybersicherheit“). Das Risikomanagementverfahren im Bereich der Cybersicherheit ist – soweit anwendbar – fester Bestandteil des gesamten Risikomanagementverfahrens der betreffenden Einrichtungen. Als Teil des Risikomanagementverfahrens im Bereich der Cybersicherheit müssen die betreffenden Einrichtungen:\ndie ermittelten Risiken auf der Grundlage der Risikokriterien bewerten;"
+    },
+    "eu-nis2-ir-2-1-2-g": {
+      "code": "2.1.2.g",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Risikomanagementrahmen\nFür die Zwecke von Nummer 2.1.1 legen die betreffenden Einrichtungen Verfahren für die Ermittlung, Analyse, Bewertung und Behandlung von Risiken fest („Risikomanagementverfahren im Bereich der Cybersicherheit“). Das Risikomanagementverfahren im Bereich der Cybersicherheit ist – soweit anwendbar – fester Bestandteil des gesamten Risikomanagementverfahrens der betreffenden Einrichtungen. Als Teil des Risikomanagementverfahrens im Bereich der Cybersicherheit müssen die betreffenden Einrichtungen:\ngeeignete Optionen und Maßnahmen für die Behandlung von Risiken bestimmen;"
+    },
+    "eu-nis2-ir-2-1-2-h": {
+      "code": "2.1.2.h",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Risikomanagementrahmen\nFür die Zwecke von Nummer 2.1.1 legen die betreffenden Einrichtungen Verfahren für die Ermittlung, Analyse, Bewertung und Behandlung von Risiken fest („Risikomanagementverfahren im Bereich der Cybersicherheit“). Das Risikomanagementverfahren im Bereich der Cybersicherheit ist – soweit anwendbar – fester Bestandteil des gesamten Risikomanagementverfahrens der betreffenden Einrichtungen. Als Teil des Risikomanagementverfahrens im Bereich der Cybersicherheit müssen die betreffenden Einrichtungen:\ndie Umsetzung der Maßnahmen für die Behandlung von Risiken fortlaufend überwachen;"
+    },
+    "eu-nis2-ir-2-1-2-i": {
+      "code": "2.1.2.i",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Risikomanagementrahmen\nFür die Zwecke von Nummer 2.1.1 legen die betreffenden Einrichtungen Verfahren für die Ermittlung, Analyse, Bewertung und Behandlung von Risiken fest („Risikomanagementverfahren im Bereich der Cybersicherheit“). Das Risikomanagementverfahren im Bereich der Cybersicherheit ist – soweit anwendbar – fester Bestandteil des gesamten Risikomanagementverfahrens der betreffenden Einrichtungen. Als Teil des Risikomanagementverfahrens im Bereich der Cybersicherheit müssen die betreffenden Einrichtungen:\nermitteln, wer für die Umsetzung der Maßnahmen für die Behandlung von Risiken verantwortlich ist und wann diese erfolgen sollte;"
+    },
+    "eu-nis2-ir-2-1-2-j": {
+      "code": "2.1.2.j",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Risikomanagementrahmen\nFür die Zwecke von Nummer 2.1.1 legen die betreffenden Einrichtungen Verfahren für die Ermittlung, Analyse, Bewertung und Behandlung von Risiken fest („Risikomanagementverfahren im Bereich der Cybersicherheit“). Das Risikomanagementverfahren im Bereich der Cybersicherheit ist – soweit anwendbar – fester Bestandteil des gesamten Risikomanagementverfahrens der betreffenden Einrichtungen. Als Teil des Risikomanagementverfahrens im Bereich der Cybersicherheit müssen die betreffenden Einrichtungen:\ndie gewählten Maßnahmen für die Behandlung von Risiken in einem Risikobehandlungsplan dokumentieren und die Gründe für das Eingehen der Restrisiken umfassend erläutern."
+    },
+    "eu-nis2-ir-2-1-3": {
+      "code": "2.1.3",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Risikomanagementrahmen\nBei der Ermittlung und Priorisierung geeigneter Risikomanagementoptionen und -maßnahmen berücksichtigen die betreffenden Einrichtungen die Ergebnisse der Risikobewertung, die Ergebnisse des Verfahrens zur Bewertung der Wirksamkeit von Risikomanagementmaßnahmen im Bereich der Cybersicherheit, die Umsetzungskosten im Verhältnis zum erwarteten Nutzen, die in Nummer 12.1 genannte Klassifizierung von Anlagen und Werten und die in Nummer 4.1.3 genannte Analyse der betrieblichen Auswirkungen."
+    },
+    "eu-nis2-ir-2-1-4": {
+      "code": "2.1.4",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Risikomanagementrahmen\nDie betreffenden Einrichtungen bewerten die Ergebnisse der Risikobewertung und den Risikobehandlungsplan in geplanten Zeitabständen und mindestens jährlich sowie bei wesentlichen Änderungen der Betriebsabläufe oder der Risiken oder bei erheblichen Sicherheitsvorfällen und aktualisieren sie – soweit angemessen."
+    },
+    "eu-nis2-ir-2-2-1": {
+      "code": "2.2.1",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Überwachung der Einhaltung\nDie betreffenden Einrichtungen überprüfen regelmäßig die Einhaltung ihrer Konzepte für die Sicherheit von Netz- und Informationssystemen, themenspezifischen Konzepten, Vorschriften und Normen. Die Leitungsorgane werden durch regelmäßige Berichterstattung auf der Grundlage der Überprüfungen der Einhaltung über den Stand der Netz- und Informationssicherheit unterrichtet."
+    },
+    "eu-nis2-ir-2-2-2": {
+      "code": "2.2.2",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Überwachung der Einhaltung\nDie betreffenden Einrichtungen führen ein wirksames System für die Berichterstattung über die Einhaltung der Bestimmungen ein, das ihren Strukturen, Betriebsumfeldern und Bedrohungslandschaften angemessen ist. Das System für die Berichterstattung über die Einhaltung muss den Leitungsorganen einen fundierten Überblick über den aktuellen Stand des Risikomanagements der betreffenden Einrichtungen geben können."
+    },
+    "eu-nis2-ir-2-2-3": {
+      "code": "2.2.3",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Überwachung der Einhaltung\nDie betreffenden Einrichtungen führen in geplanten Zeitabständen sowie bei erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken Maßnahmen zur Überwachung der Einhaltung durch."
+    },
+    "eu-nis2-ir-2-3-1": {
+      "code": "2.3.1",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Unabhängige Überprüfung der Netz- und Informationssicherheit\nDie betreffenden Einrichtungen überprüfen unabhängig ihren Ansatz für das Management der Sicherheit von Netz- und Informationssystemen und dessen Umsetzung, einschließlich Personen, Verfahren und Technologien."
+    },
+    "eu-nis2-ir-2-3-2": {
+      "code": "2.3.2",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Unabhängige Überprüfung der Netz- und Informationssicherheit\nDie betreffenden Einrichtungen entwickeln Verfahren zur Durchführung unabhängiger Überprüfungen durch Personen mit angemessener Prüfungskompetenz und pflegen diese Verfahren. Wird die unabhängige Überprüfung von Mitgliedern des Personals der betreffenden Einrichtung durchgeführt, so dürfen die Personen, die die Überprüfungen durchführen, nicht dem Personal des zu überprüfenden Bereichs unterstellt sein. Lässt die Größe der betreffenden Einrichtungen eine solche Trennung der Befugnisse nicht zu, so ergreifen die betreffenden Einrichtungen alternative Maßnahmen, um die Unparteilichkeit der Überprüfungen zu gewährleisten."
+    },
+    "eu-nis2-ir-2-3-3": {
+      "code": "2.3.3",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Unabhängige Überprüfung der Netz- und Informationssicherheit\nDie Ergebnisse der unabhängigen Überprüfungen, einschließlich der Ergebnisse der Überwachung der Einhaltung gemäß Nummer 2.2 und der Überwachung und Messung gemäß Nummer 7, werden den Leitungsorganen gemeldet. Gemäß den Risikoakzeptanzkriterien der betreffenden Einrichtungen sind Korrekturmaßnahmen zu ergreifen oder Restrisiken zu akzeptieren."
+    },
+    "eu-nis2-ir-2-3-4": {
+      "code": "2.3.4",
+      "section": "section-2",
+      "control": "Artikel 21 Absatz 2 Buchstabe a",
+      "requirements": "Unabhängige Überprüfung der Netz- und Informationssicherheit\nDie unabhängigen Überprüfungen finden in geplanten Zeitabständen sowie bei erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken statt."
+    },
+    "eu-nis2-ir-3-1-1": {
+      "code": "3.1.1",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Konzept für die Bewältigung von Sicherheitsvorfällen\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe b der Richtlinie (EU) 2022/2555 arbeiten die betreffenden Einrichtungen ein Konzept für die Bewältigung von Sicherheitsvorfällen aus, in dem Rollen, Verantwortlichkeiten und Verfahren für die zeitnahe Erkennung, Analyse, Eindämmung oder Reaktion, die Wiederherstellung sowie Dokumentation und Meldung in Bezug auf Sicherheitsvorfälle festgelegt werden, und setzen dieses um."
+    },
+    "eu-nis2-ir-3-1-2": {
+      "code": "3.1.2",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Konzept für die Bewältigung von Sicherheitsvorfällen\nDas in Nummer 3.1.1 genannte Konzept muss mit dem Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs gemäß Nummer 4.1 im Einklang stehen. Das Konzept umfasst:"
+    },
+    "eu-nis2-ir-3-1-2-a": {
+      "code": "3.1.2.a",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Konzept für die Bewältigung von Sicherheitsvorfällen\nDas in Nummer 3.1.1 genannte Konzept muss mit dem Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs gemäß Nummer 4.1 im Einklang stehen. Das Konzept umfasst:\nein Kategorisierungssystem für Sicherheitsvorfälle, das mit der Bewertung und Klassifizierung von Ereignissen gemäß Nummer 3.4.1 im Einklang steht;"
+    },
+    "eu-nis2-ir-3-1-2-b": {
+      "code": "3.1.2.b",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Konzept für die Bewältigung von Sicherheitsvorfällen\nDas in Nummer 3.1.1 genannte Konzept muss mit dem Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs gemäß Nummer 4.1 im Einklang stehen. Das Konzept umfasst:\nwirksame Kommunikationspläne, auch für die Eskalation und Meldung;"
+    },
+    "eu-nis2-ir-3-1-2-c": {
+      "code": "3.1.2.c",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Konzept für die Bewältigung von Sicherheitsvorfällen\nDas in Nummer 3.1.1 genannte Konzept muss mit dem Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs gemäß Nummer 4.1 im Einklang stehen. Das Konzept umfasst:\neine Zuweisung der Rollen bei der Erkennung von Sicherheitsvorfällen und der angemessenen Reaktion darauf an kompetente Mitarbeitende;"
+    },
+    "eu-nis2-ir-3-1-2-d": {
+      "code": "3.1.2.d",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Konzept für die Bewältigung von Sicherheitsvorfällen\nDas in Nummer 3.1.1 genannte Konzept muss mit dem Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs gemäß Nummer 4.1 im Einklang stehen. Das Konzept umfasst:\nDokumente, die im Laufe der Erkennung von Sicherheitsvorfällen und der Reaktion darauf zu verwenden sind, wie Anleitungen für die Reaktion bei Sicherheitsvorfällen, Eskalationsschemata, Kontaktlisten und Vorlagen."
+    },
+    "eu-nis2-ir-3-1-3": {
+      "code": "3.1.3",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Konzept für die Bewältigung von Sicherheitsvorfällen\nDie in dem Konzept festgelegten Rollen, Verantwortlichkeiten und Verfahren werden in geplanten Zeitabständen sowie bei erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken getestet, überprüft und – soweit angemessen – aktualisiert."
+    },
+    "eu-nis2-ir-3-2-1": {
+      "code": "3.2.1",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nDie betreffenden Einrichtungen legen Verfahren fest und verwenden Instrumente, um Aktivitäten in ihrem Netz- und Informationssystem zu überwachen und zu protokollieren, damit sie Ereignisse, die als Sicherheitsvorfälle betrachtet werden könnten, erkennen und zur Eindämmung der Auswirkungen entsprechend darauf reagieren können."
+    },
+    "eu-nis2-ir-3-2-2": {
+      "code": "3.2.2",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nSoweit durchführbar, erfolgt die Überwachung automatisch und wird vorbehaltlich der betrieblichen Kapazitäten entweder kontinuierlich oder in regelmäßigen Zeitabständen durchgeführt. Die betreffenden Einrichtungen führen ihre Überwachungstätigkeiten so durch, dass es zu möglichst wenigen falsch positiven und falsch negativen Ergebnissen kommt."
+    },
+    "eu-nis2-ir-3-2-3": {
+      "code": "3.2.3",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nAuf der Grundlage der in Nummer 3.2.1 genannten Verfahren führen, dokumentieren und überprüfen die betreffenden Einrichtungen Protokolle. Die betreffenden Einrichtungen erstellen auf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung eine Liste der Anlagen und Werte, die Gegenstand der Protokollierung sind. Soweit angemessen, müssen die Protokolle Folgendes enthalten:"
+    },
+    "eu-nis2-ir-3-2-3-a": {
+      "code": "3.2.3.a",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nAuf der Grundlage der in Nummer 3.2.1 genannten Verfahren führen, dokumentieren und überprüfen die betreffenden Einrichtungen Protokolle. Die betreffenden Einrichtungen erstellen auf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung eine Liste der Anlagen und Werte, die Gegenstand der Protokollierung sind. Soweit angemessen, müssen die Protokolle Folgendes enthalten:\nrelevanten ausgehenden und eingehenden Netzverkehr;"
+    },
+    "eu-nis2-ir-3-2-3-b": {
+      "code": "3.2.3.b",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nAuf der Grundlage der in Nummer 3.2.1 genannten Verfahren führen, dokumentieren und überprüfen die betreffenden Einrichtungen Protokolle. Die betreffenden Einrichtungen erstellen auf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung eine Liste der Anlagen und Werte, die Gegenstand der Protokollierung sind. Soweit angemessen, müssen die Protokolle Folgendes enthalten:\nEinrichtung, Änderung oder Löschung von Nutzern der Netz- und Informationssysteme der betreffenden Einrichtungen und Erweiterung der Berechtigungen;"
+    },
+    "eu-nis2-ir-3-2-3-c": {
+      "code": "3.2.3.c",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nAuf der Grundlage der in Nummer 3.2.1 genannten Verfahren führen, dokumentieren und überprüfen die betreffenden Einrichtungen Protokolle. Die betreffenden Einrichtungen erstellen auf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung eine Liste der Anlagen und Werte, die Gegenstand der Protokollierung sind. Soweit angemessen, müssen die Protokolle Folgendes enthalten:\nZugriffe auf Systeme und Anwendungen;"
+    },
+    "eu-nis2-ir-3-2-3-d": {
+      "code": "3.2.3.d",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nAuf der Grundlage der in Nummer 3.2.1 genannten Verfahren führen, dokumentieren und überprüfen die betreffenden Einrichtungen Protokolle. Die betreffenden Einrichtungen erstellen auf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung eine Liste der Anlagen und Werte, die Gegenstand der Protokollierung sind. Soweit angemessen, müssen die Protokolle Folgendes enthalten:\nauthentifizierungsbezogene Ereignisse;"
+    },
+    "eu-nis2-ir-3-2-3-e": {
+      "code": "3.2.3.e",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nAuf der Grundlage der in Nummer 3.2.1 genannten Verfahren führen, dokumentieren und überprüfen die betreffenden Einrichtungen Protokolle. Die betreffenden Einrichtungen erstellen auf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung eine Liste der Anlagen und Werte, die Gegenstand der Protokollierung sind. Soweit angemessen, müssen die Protokolle Folgendes enthalten:\nalle privilegierten Zugriffe auf Systeme und Anwendungen sowie Aktivitäten der Verwaltungskonten;"
+    },
+    "eu-nis2-ir-3-2-3-f": {
+      "code": "3.2.3.f",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nAuf der Grundlage der in Nummer 3.2.1 genannten Verfahren führen, dokumentieren und überprüfen die betreffenden Einrichtungen Protokolle. Die betreffenden Einrichtungen erstellen auf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung eine Liste der Anlagen und Werte, die Gegenstand der Protokollierung sind. Soweit angemessen, müssen die Protokolle Folgendes enthalten:\nZugriffe auf kritische Konfigurations- und Backup-Sicherungsdateien oder Änderungen dieser Dateien;"
+    },
+    "eu-nis2-ir-3-2-3-g": {
+      "code": "3.2.3.g",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nAuf der Grundlage der in Nummer 3.2.1 genannten Verfahren führen, dokumentieren und überprüfen die betreffenden Einrichtungen Protokolle. Die betreffenden Einrichtungen erstellen auf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung eine Liste der Anlagen und Werte, die Gegenstand der Protokollierung sind. Soweit angemessen, müssen die Protokolle Folgendes enthalten:\nEreignisprotokolle und Protokolle von Sicherheitstools wie Antivirenprogrammen, Angriffserkennungssystemen oder Firewalls;"
+    },
+    "eu-nis2-ir-3-2-3-h": {
+      "code": "3.2.3.h",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nAuf der Grundlage der in Nummer 3.2.1 genannten Verfahren führen, dokumentieren und überprüfen die betreffenden Einrichtungen Protokolle. Die betreffenden Einrichtungen erstellen auf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung eine Liste der Anlagen und Werte, die Gegenstand der Protokollierung sind. Soweit angemessen, müssen die Protokolle Folgendes enthalten:\nNutzung der Systemressourcen sowie deren Leistung;"
+    },
+    "eu-nis2-ir-3-2-3-i": {
+      "code": "3.2.3.i",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nAuf der Grundlage der in Nummer 3.2.1 genannten Verfahren führen, dokumentieren und überprüfen die betreffenden Einrichtungen Protokolle. Die betreffenden Einrichtungen erstellen auf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung eine Liste der Anlagen und Werte, die Gegenstand der Protokollierung sind. Soweit angemessen, müssen die Protokolle Folgendes enthalten:\nphysischen Zugang zu Betriebsstätten;"
+    },
+    "eu-nis2-ir-3-2-3-j": {
+      "code": "3.2.3.j",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nAuf der Grundlage der in Nummer 3.2.1 genannten Verfahren führen, dokumentieren und überprüfen die betreffenden Einrichtungen Protokolle. Die betreffenden Einrichtungen erstellen auf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung eine Liste der Anlagen und Werte, die Gegenstand der Protokollierung sind. Soweit angemessen, müssen die Protokolle Folgendes enthalten:\nZugang zu ihren Netzwerkausrüstungen und -geräten und deren Nutzung;"
+    },
+    "eu-nis2-ir-3-2-3-k": {
+      "code": "3.2.3.k",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nAuf der Grundlage der in Nummer 3.2.1 genannten Verfahren führen, dokumentieren und überprüfen die betreffenden Einrichtungen Protokolle. Die betreffenden Einrichtungen erstellen auf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung eine Liste der Anlagen und Werte, die Gegenstand der Protokollierung sind. Soweit angemessen, müssen die Protokolle Folgendes enthalten:\nAktivierung, Beendigung und Pausieren der verschiedenen Protokolle;"
+    },
+    "eu-nis2-ir-3-2-3-l": {
+      "code": "3.2.3.l",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nAuf der Grundlage der in Nummer 3.2.1 genannten Verfahren führen, dokumentieren und überprüfen die betreffenden Einrichtungen Protokolle. Die betreffenden Einrichtungen erstellen auf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung eine Liste der Anlagen und Werte, die Gegenstand der Protokollierung sind. Soweit angemessen, müssen die Protokolle Folgendes enthalten:\nEreignisse im Umfeld."
+    },
+    "eu-nis2-ir-3-2-4": {
+      "code": "3.2.4",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nDie Protokolle werden regelmäßig auf ungewöhnliche oder unerwünschte Trends überprüft. Soweit angemessen, legen die betreffenden Einrichtungen geeignete Werte für Alarmschwellen fest. Bei Überschreitung der festgelegten Alarmschwellenwerte wird – soweit angemessen – automatisch ein Alarm ausgelöst. Der betreffenden Einrichtungen stellen sicher, dass im Falle eines Alarms zeitnah eine qualifizierte und angemessene Reaktion eingeleitet wird."
+    },
+    "eu-nis2-ir-3-2-5": {
+      "code": "3.2.5",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nDie betreffenden Einrichtungen führen und sichern die Protokolle für einen vorab festgelegten Zeitraum und schützen sie vor unbefugten Zugriffen oder Änderungen."
+    },
+    "eu-nis2-ir-3-2-6": {
+      "code": "3.2.6",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nSoweit durchführbar, stellen die betreffenden Einrichtungen sicher, alle Systeme zeitlich synchronisiert sind, um Protokolle zwischen den Systemen für die Ereignisbewertung miteinander in Beziehung setzen zu können. Die betreffenden Einrichtungen erstellen und führen eine Liste aller Anlagen und Werten, die protokolliert werden, und stellen sicher, dass für die Überwachung und Protokollierung Redundanzsysteme zur Verfügung stehen. Die Verfügbarkeit der Überwachungs- und Protokollierungssysteme wird unabhängig von den von ihnen überwachten Systemen überwacht."
+    },
+    "eu-nis2-ir-3-2-7": {
+      "code": "3.2.7",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überwachung und Protokollierung\nDie Verfahren sowie die Liste der protokollierten Anlagen und Werte werden in regelmäßigen Abständen und nach erheblichen Sicherheitsvorfällen überprüft und – soweit angemessen – aktualisiert."
+    },
+    "eu-nis2-ir-3-3-1": {
+      "code": "3.3.1",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Meldung von Ereignissen\nDie betreffenden Einrichtungen richten einen einfachen Mechanismus ein, über den ihre Mitarbeitenden, Anbieter und Kunden verdächtige Ereignisse melden können."
+    },
+    "eu-nis2-ir-3-3-2": {
+      "code": "3.3.2",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Meldung von Ereignissen\nDie betreffenden Einrichtungen unterrichten – soweit angemessen – ihre Anbieter und Kunden über den Mechanismus für die Meldung von Ereignissen und schulen ihre Mitarbeitenden regelmäßig in Bezug auf dessen Nutzung."
+    },
+    "eu-nis2-ir-3-4-1": {
+      "code": "3.4.1",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Bewertung und Klassifizierung von Ereignissen\nDie betreffenden Einrichtungen bewerten verdächtige Ereignisse, um festzustellen, ob es sich um Sicherheitsvorfälle handelt, und – falls dies der Fall ist – um deren Art und Schwere zu bestimmen."
+    },
+    "eu-nis2-ir-3-4-2-a": {
+      "code": "3.4.2.a",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Bewertung und Klassifizierung von Ereignissen\nFür die Zwecke von Nummer 3.4.1 gehen die betreffenden Einrichtungen wie folgt vor:\nSie führen die Bewertung auf der Grundlage vorab festgelegter Kriterien und einer Triage durch, um die Priorisierung der Eindämmung und Beseitigung von Sicherheitsvorfällen zu bestimmen;"
+    },
+    "eu-nis2-ir-3-4-2-b": {
+      "code": "3.4.2.b",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Bewertung und Klassifizierung von Ereignissen\nFür die Zwecke von Nummer 3.4.1 gehen die betreffenden Einrichtungen wie folgt vor:\nsie bewerten vierteljährlich, ob wiederholte Sicherheitsvorfälle gemäß Artikel 4 dieser Verordnung vorliegen;"
+    },
+    "eu-nis2-ir-3-4-2-c": {
+      "code": "3.4.2.c",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Bewertung und Klassifizierung von Ereignissen\nFür die Zwecke von Nummer 3.4.1 gehen die betreffenden Einrichtungen wie folgt vor:\nsie überprüfen die betreffenden Protokolle für die Zwecke der Bewertung und Klassifizierung von Ereignissen;"
+    },
+    "eu-nis2-ir-3-4-2-d": {
+      "code": "3.4.2.d",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Bewertung und Klassifizierung von Ereignissen\nFür die Zwecke von Nummer 3.4.1 gehen die betreffenden Einrichtungen wie folgt vor:\nsie führen ein Verfahren für die Korrelation und Analyse von Protokollen ein, und"
+    },
+    "eu-nis2-ir-3-4-2-e": {
+      "code": "3.4.2.e",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Bewertung und Klassifizierung von Ereignissen\nFür die Zwecke von Nummer 3.4.1 gehen die betreffenden Einrichtungen wie folgt vor:\nsie bewerten und klassifizieren Ereignisse neu, falls neue Informationen verfügbar werden, oder nach der Auswertung zuvor verfügbarer Informationen."
+    },
+    "eu-nis2-ir-3-5-1": {
+      "code": "3.5.1",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Reaktion auf Sicherheitsvorfälle\nDie betreffenden Einrichtungen reagieren auf Sicherheitsvorfälle zeitnah gemäß dokumentierten Verfahren."
+    },
+    "eu-nis2-ir-3-5-2-a": {
+      "code": "3.5.2.a",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Reaktion auf Sicherheitsvorfälle\nDie Verfahren für Reaktionsmaßnahmen bei Sicherheitsvorfällen umfassen folgende Phasen:\nEindämmung des Sicherheitsvorfalls, um zu verhindern, dass sich dessen Folgen ausbreiten;"
+    },
+    "eu-nis2-ir-3-5-2-b": {
+      "code": "3.5.2.b",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Reaktion auf Sicherheitsvorfälle\nDie Verfahren für Reaktionsmaßnahmen bei Sicherheitsvorfällen umfassen folgende Phasen:\nBeseitigung, um zu verhindern, dass der Sicherheitsvorfall andauert oder erneut auftritt;"
+    },
+    "eu-nis2-ir-3-5-2-c": {
+      "code": "3.5.2.c",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Reaktion auf Sicherheitsvorfälle\nDie Verfahren für Reaktionsmaßnahmen bei Sicherheitsvorfällen umfassen folgende Phasen:\nerforderlichenfalls Wiederherstellung nach dem Sicherheitsvorfall."
+    },
+    "eu-nis2-ir-3-5-3": {
+      "code": "3.5.3",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Reaktion auf Sicherheitsvorfälle\nDie betreffenden Einrichtungen erstellen Pläne und Verfahren für die Kommunikation:"
+    },
+    "eu-nis2-ir-3-5-3-a": {
+      "code": "3.5.3.a",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Reaktion auf Sicherheitsvorfälle\nDie betreffenden Einrichtungen erstellen Pläne und Verfahren für die Kommunikation:\nmit den Computer-Notfallteams (CSIRTs) oder – soweit anwendbar – mit den zuständigen Behörden im Zusammenhang mit der Meldung von Sicherheitsvorfällen;"
+    },
+    "eu-nis2-ir-3-5-3-b": {
+      "code": "3.5.3.b",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Reaktion auf Sicherheitsvorfälle\nDie betreffenden Einrichtungen erstellen Pläne und Verfahren für die Kommunikation:\nzwischen den Mitgliedern des Personals der betreffenden Einrichtung und mit einschlägigen Interessenträgern außerhalb der betreffenden Einrichtung."
+    },
+    "eu-nis2-ir-3-5-4": {
+      "code": "3.5.4",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Reaktion auf Sicherheitsvorfälle\nDie betreffenden Einrichtungen protokollieren die Tätigkeiten zur Reaktion auf Sicherheitsvorfälle gemäß den in Nummer 3.2.1 genannten Verfahren und sammeln Nachweise."
+    },
+    "eu-nis2-ir-3-5-5": {
+      "code": "3.5.5",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Reaktion auf Sicherheitsvorfälle\nDie betreffenden Einrichtungen testen ihre Verfahren zur Reaktion auf Sicherheitsvorfälle in geplanten Zeitabständen."
+    },
+    "eu-nis2-ir-3-6-1": {
+      "code": "3.6.1",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überprüfungen nach Sicherheitsvorfällen\nNach Sicherheitsvorfällen führen die betreffenden Einrichtungen im Anschluss an die Wiederherstellung – soweit angemessen – nachträgliche Überprüfungen durch. Bei der Überprüfung nach einem Sicherheitsvorfall wird, soweit möglich, die Ursache des Vorfalls ermittelt und es werden die daraus gezogenen Lehren dokumentiert, um das Auftreten und die Folgen künftiger Vorfälle zu verringern."
+    },
+    "eu-nis2-ir-3-6-2": {
+      "code": "3.6.2",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überprüfungen nach Sicherheitsvorfällen\nDie betreffenden Einrichtungen stellen sicher, dass die Überprüfungen nach Sicherheitsvorfällen zur Verbesserung ihres Konzepts für die Netz- und Informationssicherheit, zu Risikobehandlungsmaßnahmen und Verfahren zur Bewältigung und Erkennung von Sicherheitsvorfällen sowie zur Reaktion darauf beitragen."
+    },
+    "eu-nis2-ir-3-6-3": {
+      "code": "3.6.3",
+      "section": "section-3",
+      "control": "Artikel 21 Absatz 2 Buchstabe b",
+      "requirements": "Überprüfungen nach Sicherheitsvorfällen\nDie betreffenden Einrichtungen überprüfen in geplanten Zeitabständen, ob Sicherheitsvorfälle entsprechende Überprüfungen nach sich zogen."
+    },
+    "eu-nis2-ir-4-1-1": {
+      "code": "4.1.1",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe c der Richtlinie (EU) 2022/2555 legen die betreffenden Einrichtungen einen Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs fest, der bei Sicherheitsvorfällen Anwendung findet."
+    },
+    "eu-nis2-ir-4-1-2": {
+      "code": "4.1.2",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs\nDie Abläufe der betreffenden Einrichtungen werden gemäß dem Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs wiederhergestellt. Der Plan beruht auf den Ergebnissen der gemäß Nummer 2.1 durchgeführten Risikobewertung ein und umfasst – soweit angemessen – Folgendes:"
+    },
+    "eu-nis2-ir-4-1-2-a": {
+      "code": "4.1.2.a",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs\nDie Abläufe der betreffenden Einrichtungen werden gemäß dem Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs wiederhergestellt. Der Plan beruht auf den Ergebnissen der gemäß Nummer 2.1 durchgeführten Risikobewertung ein und umfasst – soweit angemessen – Folgendes:\nZweck, Umfang und Zielgruppe;"
+    },
+    "eu-nis2-ir-4-1-2-b": {
+      "code": "4.1.2.b",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs\nDie Abläufe der betreffenden Einrichtungen werden gemäß dem Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs wiederhergestellt. Der Plan beruht auf den Ergebnissen der gemäß Nummer 2.1 durchgeführten Risikobewertung ein und umfasst – soweit angemessen – Folgendes:\nRollen und Verantwortlichkeiten;"
+    },
+    "eu-nis2-ir-4-1-2-c": {
+      "code": "4.1.2.c",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs\nDie Abläufe der betreffenden Einrichtungen werden gemäß dem Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs wiederhergestellt. Der Plan beruht auf den Ergebnissen der gemäß Nummer 2.1 durchgeführten Risikobewertung ein und umfasst – soweit angemessen – Folgendes:\nwichtige Kontaktangaben und (interne und externe) Kommunikationskanäle;"
+    },
+    "eu-nis2-ir-4-1-2-d": {
+      "code": "4.1.2.d",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs\nDie Abläufe der betreffenden Einrichtungen werden gemäß dem Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs wiederhergestellt. Der Plan beruht auf den Ergebnissen der gemäß Nummer 2.1 durchgeführten Risikobewertung ein und umfasst – soweit angemessen – Folgendes:\nBedingungen für die Aktivierung und die Deaktivierung des Plans;"
+    },
+    "eu-nis2-ir-4-1-2-e": {
+      "code": "4.1.2.e",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs\nDie Abläufe der betreffenden Einrichtungen werden gemäß dem Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs wiederhergestellt. Der Plan beruht auf den Ergebnissen der gemäß Nummer 2.1 durchgeführten Risikobewertung ein und umfasst – soweit angemessen – Folgendes:\nReihenfolge der Wiederherstellung der Betriebsabläufe;"
+    },
+    "eu-nis2-ir-4-1-2-f": {
+      "code": "4.1.2.f",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs\nDie Abläufe der betreffenden Einrichtungen werden gemäß dem Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs wiederhergestellt. Der Plan beruht auf den Ergebnissen der gemäß Nummer 2.1 durchgeführten Risikobewertung ein und umfasst – soweit angemessen – Folgendes:\nWiederherstellungspläne für bestimmte Betriebsabläufe, einschließlich der Wiederherstellungsziele;"
+    },
+    "eu-nis2-ir-4-1-2-g": {
+      "code": "4.1.2.g",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs\nDie Abläufe der betreffenden Einrichtungen werden gemäß dem Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs wiederhergestellt. Der Plan beruht auf den Ergebnissen der gemäß Nummer 2.1 durchgeführten Risikobewertung ein und umfasst – soweit angemessen – Folgendes:\nerforderliche Ressourcen, einschließlich Sicherungen und Redundanzen;"
+    },
+    "eu-nis2-ir-4-1-2-h": {
+      "code": "4.1.2.h",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs\nDie Abläufe der betreffenden Einrichtungen werden gemäß dem Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs wiederhergestellt. Der Plan beruht auf den Ergebnissen der gemäß Nummer 2.1 durchgeführten Risikobewertung ein und umfasst – soweit angemessen – Folgendes:\nWiederherstellung und Wiederaufnahme der Tätigkeiten nach vorübergehenden Maßnahmen."
+    },
+    "eu-nis2-ir-4-1-3": {
+      "code": "4.1.3",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs\nDie betreffenden Einrichtungen führen eine Analyse der betrieblichen Auswirkungen durch, um die möglichen Auswirkungen schwerwiegender Störungen auf ihre Betriebsabläufe zu bewerten, und legen auf der Grundlage der Ergebnisse Kontinuitätsanforderungen für die Netz- und Informationssysteme fest."
+    },
+    "eu-nis2-ir-4-1-4": {
+      "code": "4.1.4",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs\nDer Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs wird in geplanten Zeitabständen sowie bei erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken getestet, überprüft und – soweit angemessen – aktualisiert. Die betreffenden Einrichtungen stellen sicher, dass die aus diesen Tests gezogenen Lehren in die Pläne einfließen."
+    },
+    "eu-nis2-ir-4-2-1": {
+      "code": "4.2.1",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nDie betreffenden Einrichtungen machen Sicherungskopien der Daten und stellen ausreichend verfügbare Ressourcen, einschließlich Betriebsstätten, Netz- und Informationssysteme sowie Personal, bereit, um ein angemessenes Maß an Redundanz zu gewährleisten."
+    },
+    "eu-nis2-ir-4-2-2": {
+      "code": "4.2.2",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nAuf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung und des Betriebskontinuitätsplans legen die betreffenden Einrichtungen Sicherungspläne fest, die Folgendes umfassen:"
+    },
+    "eu-nis2-ir-4-2-2-a": {
+      "code": "4.2.2.a",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nAuf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung und des Betriebskontinuitätsplans legen die betreffenden Einrichtungen Sicherungspläne fest, die Folgendes umfassen:\nWiederherstellungszeiten;"
+    },
+    "eu-nis2-ir-4-2-2-b": {
+      "code": "4.2.2.b",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nAuf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung und des Betriebskontinuitätsplans legen die betreffenden Einrichtungen Sicherungspläne fest, die Folgendes umfassen:\nGewährleistung, dass Sicherungskopien vollständig und genau sind, einschließlich Konfigurationsdaten und Daten, die in der Umgebung von Cloud-Computing-Diensten gespeichert sind;"
+    },
+    "eu-nis2-ir-4-2-2-c": {
+      "code": "4.2.2.c",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nAuf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung und des Betriebskontinuitätsplans legen die betreffenden Einrichtungen Sicherungspläne fest, die Folgendes umfassen:\nSpeicherung von Sicherungskopien (online oder offline) an einem oder mehreren sicheren Orten, die sich nicht im selben Netz wie das System sowie in ausreichend großer Entfernung befinden, um Schäden durch einen Notfall am Hauptstandort zu vermeiden;"
+    },
+    "eu-nis2-ir-4-2-2-d": {
+      "code": "4.2.2.d",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nAuf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung und des Betriebskontinuitätsplans legen die betreffenden Einrichtungen Sicherungspläne fest, die Folgendes umfassen:\ngeeignete physische und logische Zugangskontrollen zu Sicherungskopien entsprechend der Klassifizierungsstufe der Anlagen und Werte;"
+    },
+    "eu-nis2-ir-4-2-2-e": {
+      "code": "4.2.2.e",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nAuf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung und des Betriebskontinuitätsplans legen die betreffenden Einrichtungen Sicherungspläne fest, die Folgendes umfassen:\nWiederherstellung von Daten aus Sicherungskopien;"
+    },
+    "eu-nis2-ir-4-2-2-f": {
+      "code": "4.2.2.f",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nAuf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung und des Betriebskontinuitätsplans legen die betreffenden Einrichtungen Sicherungspläne fest, die Folgendes umfassen:\nAufbewahrungsfristen entsprechend geschäftlichen und regulatorischen Anforderungen."
+    },
+    "eu-nis2-ir-4-2-3": {
+      "code": "4.2.3",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nDie betreffenden Einrichtungen führen regelmäßige Integritätsprüfungen der Sicherungskopien durch."
+    },
+    "eu-nis2-ir-4-2-4": {
+      "code": "4.2.4",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nAuf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung und des Betriebskontinuitätsplans sorgen die betreffenden Einrichtungen für eine ausreichende Verfügbarkeit von Ressourcen durch eine zumindest teilweise Redundanz der folgenden Elemente:"
+    },
+    "eu-nis2-ir-4-2-4-a": {
+      "code": "4.2.4.a",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nAuf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung und des Betriebskontinuitätsplans sorgen die betreffenden Einrichtungen für eine ausreichende Verfügbarkeit von Ressourcen durch eine zumindest teilweise Redundanz der folgenden Elemente:\nNetz- und Informationssysteme;"
+    },
+    "eu-nis2-ir-4-2-4-b": {
+      "code": "4.2.4.b",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nAuf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung und des Betriebskontinuitätsplans sorgen die betreffenden Einrichtungen für eine ausreichende Verfügbarkeit von Ressourcen durch eine zumindest teilweise Redundanz der folgenden Elemente:\nAnlagen und Werte, einschließlich Betriebsstätten, Ausrüstung und Verbrauchsmaterial;"
+    },
+    "eu-nis2-ir-4-2-4-c": {
+      "code": "4.2.4.c",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nAuf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung und des Betriebskontinuitätsplans sorgen die betreffenden Einrichtungen für eine ausreichende Verfügbarkeit von Ressourcen durch eine zumindest teilweise Redundanz der folgenden Elemente:\nPersonal mit der erforderlichen Verantwortlichkeit, Weisungsbefugnis und Kompetenz;"
+    },
+    "eu-nis2-ir-4-2-4-d": {
+      "code": "4.2.4.d",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nAuf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung und des Betriebskontinuitätsplans sorgen die betreffenden Einrichtungen für eine ausreichende Verfügbarkeit von Ressourcen durch eine zumindest teilweise Redundanz der folgenden Elemente:\ngeeignete Kommunikationskanäle."
+    },
+    "eu-nis2-ir-4-2-5": {
+      "code": "4.2.5",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nDie betreffenden Einrichtungen stellen – soweit angemessen – sicher, dass sich die Überwachung und Anpassung der Ressourcen, einschließlich Betriebsstätten, Systeme und Personal, ordnungsgemäß auf die Anforderungen an die Sicherung und Redundanz stützen."
+    },
+    "eu-nis2-ir-4-2-6": {
+      "code": "4.2.6",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Backup-Sicherungs- und Redundanzmanagement\nDie betreffenden Einrichtungen führen regelmäßige Tests der Wiederherstellung von Sicherungskopien und Redundanzen durch, um sicherzustellen, dass sie bei der Wiederherstellung zuverlässig sind und alle Kopien, Verfahren und Kenntnisse abdecken, die nötig sind, um eine wirksame Wiederherstellung durchzuführen. Die betreffenden Einrichtungen dokumentieren die Testergebnisse und ergreifen erforderlichenfalls Korrekturmaßnahmen."
+    },
+    "eu-nis2-ir-4-3-1": {
+      "code": "4.3.1",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Krisenmanagement\nDie betreffenden Einrichtungen legen ein Verfahren für das Krisenmanagement fest."
+    },
+    "eu-nis2-ir-4-3-2": {
+      "code": "4.3.2",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Krisenmanagement\nSie sorgen dafür, dass das Krisenmanagementverfahren mindestens die folgenden Elemente abdeckt:"
+    },
+    "eu-nis2-ir-4-3-2-a": {
+      "code": "4.3.2.a",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Krisenmanagement\nSie sorgen dafür, dass das Krisenmanagementverfahren mindestens die folgenden Elemente abdeckt:\nRollen und Verantwortlichkeiten des Personals und – soweit angemessen – der Anbieter und Diensteanbieter, wobei die Zuweisung der Rollen in Krisensituationen, einschließlich spezifischer zu befolgender Schritte, festgelegt wird;"
+    },
+    "eu-nis2-ir-4-3-2-b": {
+      "code": "4.3.2.b",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Krisenmanagement\nSie sorgen dafür, dass das Krisenmanagementverfahren mindestens die folgenden Elemente abdeckt:\ngeeignete Kommunikationsmittel zwischen den betreffenden Einrichtungen und den jeweils zuständigen Behörden;"
+    },
+    "eu-nis2-ir-4-3-2-c": {
+      "code": "4.3.2.c",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Krisenmanagement\nSie sorgen dafür, dass das Krisenmanagementverfahren mindestens die folgenden Elemente abdeckt:\nAnwendung angemessener Maßnahmen zur Gewährleistung der Aufrechterhaltung der Sicherheit von Netz- und Informationssystemen in Krisensituationen."
+    },
+    "eu-nis2-ir-4-3-2-p1": {
+      "code": "4.3.2 (1)",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Krisenmanagement\nSie sorgen dafür, dass das Krisenmanagementverfahren mindestens die folgenden Elemente abdeckt:\nFür die Zwecke von Buchstabe b umfasst der Informationsfluss zwischen den betreffenden Einrichtungen und den jeweils zuständigen Behörden sowohl obligatorische Mitteilungen wie Meldungen von Sicherheitsvorfällen und entsprechende Fristen als auch fakultative Mitteilungen."
+    },
+    "eu-nis2-ir-4-3-3": {
+      "code": "4.3.3",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Krisenmanagement\nDie betreffenden Einrichtungen führen ein Verfahren für die Verwaltung und Nutzung der von den CSIRTs oder – soweit anwendbar – den zuständigen Behörden erhaltenen Informationen über Sicherheitsvorfälle, Schwachstellen, Bedrohungen oder mögliche Risikominderungsmaßnahmen ein."
+    },
+    "eu-nis2-ir-4-3-4": {
+      "code": "4.3.4",
+      "section": "section-4",
+      "control": "Artikel 21 Absatz 2 Buchstabe c",
+      "requirements": "Krisenmanagement\nDie betreffenden Einrichtungen testen den Krisenmanagementplan in geplanten Zeitabständen oder nach erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken und aktualisieren ihn – soweit angemessen."
+    },
+    "eu-nis2-ir-5-1-1": {
+      "code": "5.1.1",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe d der Richtlinie (EU) 2022/2555 legen die betreffenden Einrichtungen ein Konzept für die Sicherheit der Lieferkette fest, das die Beziehungen zu ihren direkten Anbietern und Diensteanbietern regelt, setzen es um und wenden es an, um die ermittelten Risiken für die Sicherheit von Netz- und Informationssystemen zu mindern. Im Rahmen des Konzepts für die Sicherheit der Lieferkette legen die betreffenden Einrichtungen ihre Rolle in der Lieferkette fest und teilen sie ihren direkten Anbietern und Diensteanbietern mit."
+    },
+    "eu-nis2-ir-5-1-2": {
+      "code": "5.1.2",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nIm Rahmen des in Nummer 5.1.1 genannten Konzepts für die Sicherheit der Lieferkette legen die betreffenden Einrichtungen Kriterien für die Auswahl von Anbietern und Diensteanbietern und die Auftragsvergabe an sie fest. Diese Kriterien umfassen Folgendes:"
+    },
+    "eu-nis2-ir-5-1-2-a": {
+      "code": "5.1.2.a",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nIm Rahmen des in Nummer 5.1.1 genannten Konzepts für die Sicherheit der Lieferkette legen die betreffenden Einrichtungen Kriterien für die Auswahl von Anbietern und Diensteanbietern und die Auftragsvergabe an sie fest. Diese Kriterien umfassen Folgendes:\ndie Cybersicherheitsverfahren der Anbieter und Diensteanbieter, einschließlich der Sicherheit ihrer Entwicklungsprozesse;"
+    },
+    "eu-nis2-ir-5-1-2-b": {
+      "code": "5.1.2.b",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nIm Rahmen des in Nummer 5.1.1 genannten Konzepts für die Sicherheit der Lieferkette legen die betreffenden Einrichtungen Kriterien für die Auswahl von Anbietern und Diensteanbietern und die Auftragsvergabe an sie fest. Diese Kriterien umfassen Folgendes:\ndie Fähigkeit der Anbieter und Diensteanbieter, die von den betreffenden Einrichtungen festgelegten Cybersicherheitsspezifikationen zu erfüllen;"
+    },
+    "eu-nis2-ir-5-1-2-c": {
+      "code": "5.1.2.c",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nIm Rahmen des in Nummer 5.1.1 genannten Konzepts für die Sicherheit der Lieferkette legen die betreffenden Einrichtungen Kriterien für die Auswahl von Anbietern und Diensteanbietern und die Auftragsvergabe an sie fest. Diese Kriterien umfassen Folgendes:\ndie allgemeine Qualität und Resilienz der IKT-Produkte und -Dienste und die darin enthaltenen Risikomanagementmaßnahmen im Bereich der Cybersicherheit, einschließlich der Risiken und der Klassifizierungsstufe der IKT-Produkte und -Dienste;"
+    },
+    "eu-nis2-ir-5-1-2-d": {
+      "code": "5.1.2.d",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nIm Rahmen des in Nummer 5.1.1 genannten Konzepts für die Sicherheit der Lieferkette legen die betreffenden Einrichtungen Kriterien für die Auswahl von Anbietern und Diensteanbietern und die Auftragsvergabe an sie fest. Diese Kriterien umfassen Folgendes:\ndie Fähigkeit der betreffenden Einrichtungen, ihre Versorgungsquellen zu diversifizieren und – soweit anwendbar – ihre Abhängigkeit von bestimmten Anbietern zu begrenzen."
+    },
+    "eu-nis2-ir-5-1-3": {
+      "code": "5.1.3",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nBei der Erstellung ihres Konzepts für die Sicherheit der Lieferkette berücksichtigen die betreffenden Einrichtungen – soweit anwendbar – die Ergebnisse koordinierter Sicherheitsrisikobewertungen kritischer Lieferketten gemäß Artikel 22 Absatz 1 der Richtlinie (EU) 2022/2555."
+    },
+    "eu-nis2-ir-5-1-4": {
+      "code": "5.1.4",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nAuf der Grundlage des Konzepts für die Sicherheit der Lieferkette und unter Berücksichtigung der Ergebnisse der gemäß Nummer 2.1 dieses Anhangs durchgeführten Risikobewertung stellen die betreffenden Einrichtungen sicher, dass in ihren Verträgen mit Anbietern und Diensteanbietern – soweit angemessen – im Rahmen von Leistungsvereinbarungen Folgendes festgelegt wird:"
+    },
+    "eu-nis2-ir-5-1-4-a": {
+      "code": "5.1.4.a",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nAuf der Grundlage des Konzepts für die Sicherheit der Lieferkette und unter Berücksichtigung der Ergebnisse der gemäß Nummer 2.1 dieses Anhangs durchgeführten Risikobewertung stellen die betreffenden Einrichtungen sicher, dass in ihren Verträgen mit Anbietern und Diensteanbietern – soweit angemessen – im Rahmen von Leistungsvereinbarungen Folgendes festgelegt wird:\nCybersicherheitsanforderungen an die Anbieter oder Diensteanbieter, einschließlich der Anforderungen an die Sicherheit beim Erwerb von IKT-Diensten oder -Produkten gemäß Nummer 6.1;"
+    },
+    "eu-nis2-ir-5-1-4-b": {
+      "code": "5.1.4.b",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nAuf der Grundlage des Konzepts für die Sicherheit der Lieferkette und unter Berücksichtigung der Ergebnisse der gemäß Nummer 2.1 dieses Anhangs durchgeführten Risikobewertung stellen die betreffenden Einrichtungen sicher, dass in ihren Verträgen mit Anbietern und Diensteanbietern – soweit angemessen – im Rahmen von Leistungsvereinbarungen Folgendes festgelegt wird:\nSensibilisierungs-, Qualifikations- und Ausbildungsanforderungen sowie – soweit angemessen – Zertifizierungen, die von den Mitarbeitenden der Anbieter oder Diensteanbieter verlangt werden;"
+    },
+    "eu-nis2-ir-5-1-4-c": {
+      "code": "5.1.4.c",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nAuf der Grundlage des Konzepts für die Sicherheit der Lieferkette und unter Berücksichtigung der Ergebnisse der gemäß Nummer 2.1 dieses Anhangs durchgeführten Risikobewertung stellen die betreffenden Einrichtungen sicher, dass in ihren Verträgen mit Anbietern und Diensteanbietern – soweit angemessen – im Rahmen von Leistungsvereinbarungen Folgendes festgelegt wird:\nAnforderungen an die Zuverlässigkeitsüberprüfungen der Mitarbeitenden der Anbieter und Diensteanbieter;"
+    },
+    "eu-nis2-ir-5-1-4-d": {
+      "code": "5.1.4.d",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nAuf der Grundlage des Konzepts für die Sicherheit der Lieferkette und unter Berücksichtigung der Ergebnisse der gemäß Nummer 2.1 dieses Anhangs durchgeführten Risikobewertung stellen die betreffenden Einrichtungen sicher, dass in ihren Verträgen mit Anbietern und Diensteanbietern – soweit angemessen – im Rahmen von Leistungsvereinbarungen Folgendes festgelegt wird:\neine Verpflichtung der Anbieter und Diensteanbieter, den betreffenden Einrichtungen Sicherheitsvorfälle, die ein Risiko für die Sicherheit der Netz- und Informationssysteme dieser Einrichtungen darstellen, unverzüglich zu melden;"
+    },
+    "eu-nis2-ir-5-1-4-e": {
+      "code": "5.1.4.e",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nAuf der Grundlage des Konzepts für die Sicherheit der Lieferkette und unter Berücksichtigung der Ergebnisse der gemäß Nummer 2.1 dieses Anhangs durchgeführten Risikobewertung stellen die betreffenden Einrichtungen sicher, dass in ihren Verträgen mit Anbietern und Diensteanbietern – soweit angemessen – im Rahmen von Leistungsvereinbarungen Folgendes festgelegt wird:\ndas Recht auf Prüfung oder das Recht auf Erhalt von Prüfberichten;"
+    },
+    "eu-nis2-ir-5-1-4-f": {
+      "code": "5.1.4.f",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nAuf der Grundlage des Konzepts für die Sicherheit der Lieferkette und unter Berücksichtigung der Ergebnisse der gemäß Nummer 2.1 dieses Anhangs durchgeführten Risikobewertung stellen die betreffenden Einrichtungen sicher, dass in ihren Verträgen mit Anbietern und Diensteanbietern – soweit angemessen – im Rahmen von Leistungsvereinbarungen Folgendes festgelegt wird:\neine Verpflichtung der Anbieter und Diensteanbieter zur Behebung von Schwachstellen, die ein Risiko für die Sicherheit der Netz- und Informationssysteme der betreffenden Einrichtungen darstellen;"
+    },
+    "eu-nis2-ir-5-1-4-g": {
+      "code": "5.1.4.g",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nAuf der Grundlage des Konzepts für die Sicherheit der Lieferkette und unter Berücksichtigung der Ergebnisse der gemäß Nummer 2.1 dieses Anhangs durchgeführten Risikobewertung stellen die betreffenden Einrichtungen sicher, dass in ihren Verträgen mit Anbietern und Diensteanbietern – soweit angemessen – im Rahmen von Leistungsvereinbarungen Folgendes festgelegt wird:\nAnforderungen an die Unterauftragsvergabe und – sofern die betreffenden Einrichtungen die Vergabe von Unteraufträgen zulassen – Cybersicherheitsanforderungen an Unterauftragnehmer im Einklang mit den unter Buchstabe a genannten Cybersicherheitsanforderungen;"
+    },
+    "eu-nis2-ir-5-1-4-h": {
+      "code": "5.1.4.h",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nAuf der Grundlage des Konzepts für die Sicherheit der Lieferkette und unter Berücksichtigung der Ergebnisse der gemäß Nummer 2.1 dieses Anhangs durchgeführten Risikobewertung stellen die betreffenden Einrichtungen sicher, dass in ihren Verträgen mit Anbietern und Diensteanbietern – soweit angemessen – im Rahmen von Leistungsvereinbarungen Folgendes festgelegt wird:\nPflichten der Anbieter und Diensteanbieter bei Vertragskündigung, z. B. Abruf und Entsorgung der Informationen, die die Anbieter und Diensteanbieter in Wahrnehmung ihrer Aufgaben erlangten."
+    },
+    "eu-nis2-ir-5-1-5": {
+      "code": "5.1.5",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nDie betreffenden Einrichtungen berücksichtigen die in den Nummern 5.1.2 und 5.1.3 genannten Elemente im Rahmen des Auswahlverfahrens für neue Anbieter und Diensteanbieter sowie im Rahmen des Vergabeverfahrens gemäß Nummer 6.1."
+    },
+    "eu-nis2-ir-5-1-6": {
+      "code": "5.1.6",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nDie betreffenden Einrichtungen überprüfen das Konzept für die Sicherheit der Lieferkette, überwachen und bewerten Änderungen der Cybersicherheitsverfahren von Anbietern und Diensteanbietern bei wesentlichen Änderungen der Betriebsabläufe oder der Risiken oder bei erheblichen Sicherheitsvorfällen im Zusammenhang mit der Bereitstellung von IKT-Diensten oder mit Auswirkungen auf die Sicherheit der IKT-Produkte von Anbietern und Diensteanbietern und werden erforderlichenfalls im Hinblick auf diese Änderungen tätig."
+    },
+    "eu-nis2-ir-5-1-7-a": {
+      "code": "5.1.7.a",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nFür die Zwecke von Nummer 5.1.6 müssen die betreffenden Einrichtungen:\ndie Berichte über die Umsetzung der Leistungsvereinbarungen regelmäßig verfolgen – soweit anwendbar;"
+    },
+    "eu-nis2-ir-5-1-7-b": {
+      "code": "5.1.7.b",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nFür die Zwecke von Nummer 5.1.6 müssen die betreffenden Einrichtungen:\nSicherheitsvorfälle im Zusammenhang mit IKT-Produkten und -Diensten von Anbietern und Diensteanbietern überprüfen;"
+    },
+    "eu-nis2-ir-5-1-7-c": {
+      "code": "5.1.7.c",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nFür die Zwecke von Nummer 5.1.6 müssen die betreffenden Einrichtungen:\ndie Notwendigkeit außerplanmäßiger Überprüfungen prüfen und die Ergebnisse verständlich dokumentieren;"
+    },
+    "eu-nis2-ir-5-1-7-d": {
+      "code": "5.1.7.d",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Konzept für die Sicherheit der Lieferkette\nFür die Zwecke von Nummer 5.1.6 müssen die betreffenden Einrichtungen:\ndie Risiken, die sich aus Änderungen im Zusammenhang mit IKT-Produkten und -Diensten von Anbietern und Diensteanbietern ergeben, analysieren und – soweit angemessen – rechtzeitig Risikominderungsmaßnahmen ergreifen."
+    },
+    "eu-nis2-ir-5-2-p1": {
+      "code": "5.2 (1)",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Verzeichnis der Anbieter und Diensteanbieter\nDie betreffenden Einrichtungen führen ein Verzeichnis ihrer direkten Anbieter und Diensteanbieter, das Folgendes umfasst, und halten es auf dem neuesten Stand:"
+    },
+    "eu-nis2-ir-5-2-a": {
+      "code": "5.2.a",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Verzeichnis der Anbieter und Diensteanbieter\nDie betreffenden Einrichtungen führen ein Verzeichnis ihrer direkten Anbieter und Diensteanbieter, das Folgendes umfasst, und halten es auf dem neuesten Stand:\nKontaktstellen für jeden direkten Anbieter und Diensteanbieter;"
+    },
+    "eu-nis2-ir-5-2-b": {
+      "code": "5.2.b",
+      "section": "section-5",
+      "control": "Artikel 21 Absatz 2 Buchstabe d",
+      "requirements": "Verzeichnis der Anbieter und Diensteanbieter\nDie betreffenden Einrichtungen führen ein Verzeichnis ihrer direkten Anbieter und Diensteanbieter, das Folgendes umfasst, und halten es auf dem neuesten Stand:\neine Liste der IKT-Produkte, -Dienste und -Prozesse, die der direkte Anbieter oder Diensteanbieter für die betreffenden Einrichtungen bereitstellt."
+    },
+    "eu-nis2-ir-6-1-1": {
+      "code": "6.1.1",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitsmaßnahmen beim Erwerb von IKT-Diensten oder IKT-Produkten\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe e der Richtlinie (EU) 2022/2555 legen die betreffenden Einrichtungen auf der Grundlage der gemäß Nummer 2.1 durchgeführten Risikobewertung Verfahren für das Management der Risiken fest, die sich aus dem Erwerb von IKT-Diensten oder -Produkten für Komponenten ergeben, die für die Sicherheit der Netz- und Informationssysteme der betreffenden Einrichtungen unverzichtbar sind, und setzen sie um."
+    },
+    "eu-nis2-ir-6-1-2-a": {
+      "code": "6.1.2.a",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitsmaßnahmen beim Erwerb von IKT-Diensten oder IKT-Produkten\nFür die Zwecke von Nummer 6.1.1 umfassen die in Nummer 6.1.1 genannten Verfahren Folgendes:\nSicherheitsanforderungen, die für die zu erwerbenden IKT-Dienste oder -Produkte gelten;"
+    },
+    "eu-nis2-ir-6-1-2-b": {
+      "code": "6.1.2.b",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitsmaßnahmen beim Erwerb von IKT-Diensten oder IKT-Produkten\nFür die Zwecke von Nummer 6.1.1 umfassen die in Nummer 6.1.1 genannten Verfahren Folgendes:\nAnforderungen an Sicherheitsaktualisierungen während der gesamten Lebensdauer der IKT-Dienste oder -Produkte oder deren Ersatz nach Ablauf des Unterstützungszeitraums;"
+    },
+    "eu-nis2-ir-6-1-2-c": {
+      "code": "6.1.2.c",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitsmaßnahmen beim Erwerb von IKT-Diensten oder IKT-Produkten\nFür die Zwecke von Nummer 6.1.1 umfassen die in Nummer 6.1.1 genannten Verfahren Folgendes:\nInformationen zur Beschreibung der Hardware- und Softwarekomponenten, die in den IKT-Diensten oder -Produkten verwendet werden;"
+    },
+    "eu-nis2-ir-6-1-2-d": {
+      "code": "6.1.2.d",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitsmaßnahmen beim Erwerb von IKT-Diensten oder IKT-Produkten\nFür die Zwecke von Nummer 6.1.1 umfassen die in Nummer 6.1.1 genannten Verfahren Folgendes:\nInformationen zur Beschreibung der umgesetzten Cybersicherheitsfunktionen der IKT-Dienste oder -Produkte und der Konfiguration, die für ihren sicheren Betrieb erforderlich ist;"
+    },
+    "eu-nis2-ir-6-1-2-e": {
+      "code": "6.1.2.e",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitsmaßnahmen beim Erwerb von IKT-Diensten oder IKT-Produkten\nFür die Zwecke von Nummer 6.1.1 umfassen die in Nummer 6.1.1 genannten Verfahren Folgendes:\ndie Zusicherung, dass die IKT-Dienste oder -Produkte die Sicherheitsanforderungen gemäß Buchstabe a erfüllen;"
+    },
+    "eu-nis2-ir-6-1-2-f": {
+      "code": "6.1.2.f",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitsmaßnahmen beim Erwerb von IKT-Diensten oder IKT-Produkten\nFür die Zwecke von Nummer 6.1.1 umfassen die in Nummer 6.1.1 genannten Verfahren Folgendes:\nMethoden zur Validierung, dass die bereitgestellten IKT-Dienste oder -Produkte die angegebenen Sicherheitsanforderungen erfüllen, sowie die Dokumentation der Ergebnisse der Validierung."
+    },
+    "eu-nis2-ir-6-1-3": {
+      "code": "6.1.3",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitsmaßnahmen beim Erwerb von IKT-Diensten oder IKT-Produkten\nDie betreffenden Einrichtungen überprüfen die Verfahren in geplanten Zeitabständen sowie bei erheblichen Sicherheitsvorfällen und aktualisieren sie – soweit angemessen."
+    },
+    "eu-nis2-ir-6-2-1": {
+      "code": "6.2.1",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherer Entwicklungszyklus\nVor der Entwicklung eines Netz- und Informationssystems, einschließlich Software, legen die betreffenden Einrichtungen Vorschriften für die Sicherheit der Entwicklung von Netz- und Informationssystemen fest und wenden diese bei der internen Entwicklung von Netz- und Informationssystemen und bei der Auslagerung der Entwicklung von Netz- und Informationssystemen an. Die Vorschriften gelten für alle Entwicklungsphasen, einschließlich Spezifikation, Konzeption, Entwicklung, Umsetzung und Tests."
+    },
+    "eu-nis2-ir-6-2-2-a": {
+      "code": "6.2.2.a",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherer Entwicklungszyklus\nFür die Zwecke von Nummer 6.2.1 müssen die betreffenden Einrichtungen:\neine Analyse der Sicherheitsanforderungen in der Spezifikations- und Entwurfsphase jedes Entwicklungs- oder Beschaffungsvorhabens vornehmen, das von den betreffenden Einrichtungen oder im Namen dieser Einrichtungen durchgeführt wird;"
+    },
+    "eu-nis2-ir-6-2-2-b": {
+      "code": "6.2.2.b",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherer Entwicklungszyklus\nFür die Zwecke von Nummer 6.2.1 müssen die betreffenden Einrichtungen:\nbei allen Tätigkeiten zur Entwicklung von Informationssystemen bestimmte Grundsätze für den Aufbau sicherer Systeme und für ein sicheres Programmieren wie etwa die Förderung von konzeptintegrierter Cybersicherheit und Null-Vertrauen-Architekturen anwenden;"
+    },
+    "eu-nis2-ir-6-2-2-c": {
+      "code": "6.2.2.c",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherer Entwicklungszyklus\nFür die Zwecke von Nummer 6.2.1 müssen die betreffenden Einrichtungen:\nSicherheitsanforderungen in Bezug auf Entwicklungsumgebungen festlegen;"
+    },
+    "eu-nis2-ir-6-2-2-d": {
+      "code": "6.2.2.d",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherer Entwicklungszyklus\nFür die Zwecke von Nummer 6.2.1 müssen die betreffenden Einrichtungen:\nSicherheitstestverfahren im Entwicklungszyklus einführen und umsetzen;"
+    },
+    "eu-nis2-ir-6-2-2-e": {
+      "code": "6.2.2.e",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherer Entwicklungszyklus\nFür die Zwecke von Nummer 6.2.1 müssen die betreffenden Einrichtungen:\nDaten über Sicherheitstests angemessen auswählen, schützen und verwalten;"
+    },
+    "eu-nis2-ir-6-2-2-f": {
+      "code": "6.2.2.f",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherer Entwicklungszyklus\nFür die Zwecke von Nummer 6.2.1 müssen die betreffenden Einrichtungen:\ndie Testdaten entsprechend der Risikobewertung gemäß Nummer 2.1 bereinigen und anonymisieren."
+    },
+    "eu-nis2-ir-6-2-3": {
+      "code": "6.2.3",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherer Entwicklungszyklus\nBei einer ausgelagerten Entwicklung von Netz- und Informationssystemen wenden die betreffenden Einrichtungen darüber hinaus die in den Nummern 5 und 6.1 genannten Grundsätze und Verfahren an."
+    },
+    "eu-nis2-ir-6-2-4": {
+      "code": "6.2.4",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherer Entwicklungszyklus\nDie betreffenden Einrichtungen überprüfen ihre Vorschriften für die Sicherheit der Entwicklung in geplanten Zeitabständen und aktualisieren sie erforderlichenfalls."
+    },
+    "eu-nis2-ir-6-3-1": {
+      "code": "6.3.1",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Konfigurationsmanagement\nDie betreffenden Einrichtungen ergreifen geeignete Maßnahmen, um Konfigurationen, einschließlich Sicherheitskonfigurationen von Hardware, Software, Diensten und Netzen, festzulegen, zu dokumentieren, umzusetzen und zu überwachen."
+    },
+    "eu-nis2-ir-6-3-2-a": {
+      "code": "6.3.2.a",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Konfigurationsmanagement\nFür die Zwecke von Nummer 6.3.1 müssen die betreffenden Einrichtungen:\nKonfigurationen für ihre Hardware, Software, Dienste und Netze festlegen und deren Sicherheit gewährleisten;"
+    },
+    "eu-nis2-ir-6-3-2-b": {
+      "code": "6.3.2.b",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Konfigurationsmanagement\nFür die Zwecke von Nummer 6.3.1 müssen die betreffenden Einrichtungen:\nVerfahren und Instrumente zur Durchsetzung der festgelegten sicheren Konfigurationen für Hardware, Software, Dienste und Netze, für neu installierte Systeme sowie für Systeme, die über ihre gesamte Lebensdauer in Betrieb sind, festlegen und umsetzen."
+    },
+    "eu-nis2-ir-6-3-3": {
+      "code": "6.3.3",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Konfigurationsmanagement\nDie betreffenden Einrichtungen überprüfen die Konfigurationen in geplanten Zeitabständen oder bei erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken und aktualisieren sie – soweit angemessen."
+    },
+    "eu-nis2-ir-6-4-1": {
+      "code": "6.4.1",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Änderungsmanagement, Reparatur und Wartung\nDie betreffenden Einrichtungen wenden Verfahren für das Änderungsmanagement an, um Änderungen an Netz- und Informationssystemen zu kontrollieren. Die Verfahren müssen – soweit anwendbar – mit den allgemeinen Grundsätzen der betreffenden Einrichtungen in Bezug auf das Änderungsmanagement im Einklang stehen."
+    },
+    "eu-nis2-ir-6-4-2": {
+      "code": "6.4.2",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Änderungsmanagement, Reparatur und Wartung\nDie in Nummer 6.4.1 genannten Verfahren gelten für Freigaben, Änderungen und Notfalländerungen an in Betrieb befindlicher Software und Hardware sowie für Änderungen der Konfiguration. Durch die Verfahren wird sichergestellt, dass diese Änderungen dokumentiert und auf der Grundlage der gemäß Nummer 2.1 durchgeführten Risikobewertung im Hinblick auf die möglichen Auswirkungen getestet und bewertet werden, bevor sie umgesetzt werden."
+    },
+    "eu-nis2-ir-6-4-3": {
+      "code": "6.4.3",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Änderungsmanagement, Reparatur und Wartung\nKonnten die regulären Änderungsmanagementverfahren aufgrund eines Notfalls nicht befolgt werden, dokumentieren die betreffenden Einrichtungen das Ergebnis der Änderung und die Begründung für die Nichteinhaltung der Verfahren."
+    },
+    "eu-nis2-ir-6-4-4": {
+      "code": "6.4.4",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Änderungsmanagement, Reparatur und Wartung\nDie betreffenden Einrichtungen überprüfen die Verfahren in geplanten Zeitabständen sowie bei erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken und aktualisieren sie – soweit angemessen."
+    },
+    "eu-nis2-ir-6-5-1": {
+      "code": "6.5.1",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitsprüfung\nDie betreffenden Einrichtungen legen ein Konzept und Verfahren für Sicherheitsprüfungen fest, setzen sie um und wenden sie an."
+    },
+    "eu-nis2-ir-6-5-2-a": {
+      "code": "6.5.2.a",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitsprüfung\nDie betreffenden Einrichtungen:\nlegen auf der Grundlage der gemäß Nummer 2.1 durchgeführten Risikobewertung die Notwendigkeit, den Umfang, die Häufigkeit und die Art der Sicherheitsprüfungen fest;"
+    },
+    "eu-nis2-ir-6-5-2-b": {
+      "code": "6.5.2.b",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitsprüfung\nDie betreffenden Einrichtungen:\nführen Sicherheitsprüfungen nach einer dokumentierten Prüfmethode durch, die sich auf die Komponenten erstrecken, die im Rahmen einer Risikoanalyse als für den sicheren Betrieb relevant eingestuft wurden;"
+    },
+    "eu-nis2-ir-6-5-2-c": {
+      "code": "6.5.2.c",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitsprüfung\nDie betreffenden Einrichtungen:\ndokumentieren die Art, den Umfang, den Zeitraum und die Ergebnisse der Prüfungen, einschließlich der Bewertung der Kritikalität und der Risikominderungsmaßnahmen für jede Feststellung;"
+    },
+    "eu-nis2-ir-6-5-2-d": {
+      "code": "6.5.2.d",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitsprüfung\nDie betreffenden Einrichtungen:\nwenden im Falle kritischer Feststellungen Risikominderungsmaßnahmen an."
+    },
+    "eu-nis2-ir-6-5-3": {
+      "code": "6.5.3",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitsprüfung\nDie betreffenden Einrichtungen überprüfen ihre Konzepte für die Sicherheitsprüfung in geplanten Zeitabständen und aktualisieren sie – soweit angemessen."
+    },
+    "eu-nis2-ir-6-6-1": {
+      "code": "6.6.1",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitspatch-Management\nDie betreffenden Einrichtungen legen Verfahren, die mit den in Nummer 6.4.1 genannten Änderungsmanagementverfahren im Einklang stehen, und Änderungs-, Schwachstellen- und Risikomanagementverfahren sowie andere einschlägige Verfahren fest und wenden sie an, um sicherzustellen, dass:"
+    },
+    "eu-nis2-ir-6-6-1-a": {
+      "code": "6.6.1.a",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitspatch-Management\nDie betreffenden Einrichtungen legen Verfahren, die mit den in Nummer 6.4.1 genannten Änderungsmanagementverfahren im Einklang stehen, und Änderungs-, Schwachstellen- und Risikomanagementverfahren sowie andere einschlägige Verfahren fest und wenden sie an, um sicherzustellen, dass:\nSicherheitspatches innerhalb einer angemessenen Frist nach ihrer Verfügbarmachung angewendet werden;"
+    },
+    "eu-nis2-ir-6-6-1-b": {
+      "code": "6.6.1.b",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitspatch-Management\nDie betreffenden Einrichtungen legen Verfahren, die mit den in Nummer 6.4.1 genannten Änderungsmanagementverfahren im Einklang stehen, und Änderungs-, Schwachstellen- und Risikomanagementverfahren sowie andere einschlägige Verfahren fest und wenden sie an, um sicherzustellen, dass:\nSicherheitspatches getestet werden, bevor sie in Produktionssystemen angewendet werden;"
+    },
+    "eu-nis2-ir-6-6-1-c": {
+      "code": "6.6.1.c",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitspatch-Management\nDie betreffenden Einrichtungen legen Verfahren, die mit den in Nummer 6.4.1 genannten Änderungsmanagementverfahren im Einklang stehen, und Änderungs-, Schwachstellen- und Risikomanagementverfahren sowie andere einschlägige Verfahren fest und wenden sie an, um sicherzustellen, dass:\nSicherheitspatches aus vertrauenswürdigen Quellen stammen und auf ihre Integrität geprüft werden;"
+    },
+    "eu-nis2-ir-6-6-1-d": {
+      "code": "6.6.1.d",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitspatch-Management\nDie betreffenden Einrichtungen legen Verfahren, die mit den in Nummer 6.4.1 genannten Änderungsmanagementverfahren im Einklang stehen, und Änderungs-, Schwachstellen- und Risikomanagementverfahren sowie andere einschlägige Verfahren fest und wenden sie an, um sicherzustellen, dass:\nzusätzliche Maßnahmen umgesetzt und Restrisiken akzeptiert werden, wenn ein Patch nicht verfügbar ist oder nicht gemäß Nummer 6.6.2 angewendet wird."
+    },
+    "eu-nis2-ir-6-6-2": {
+      "code": "6.6.2",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Sicherheitspatch-Management\nAbweichend von Nummer 6.6.1 Buchstabe a können die betreffenden Einrichtungen verzichten, Sicherheitspatches anzuwenden, wenn die Nachteile der Anwendung der Sicherheitspatches die Vorteile für die Cybersicherheit überwiegen. Die betreffenden Einrichtungen dokumentieren und begründen dies ordnungsgemäß."
+    },
+    "eu-nis2-ir-6-7-1": {
+      "code": "6.7.1",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsicherheit\nDie betreffenden Einrichtungen ergreifen geeignete Maßnahmen, um ihre Netz- und Informationssysteme vor Cyberbedrohungen zu schützen."
+    },
+    "eu-nis2-ir-6-7-2-a": {
+      "code": "6.7.2.a",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsicherheit\nFür die Zwecke von Nummer 6.7.1 müssen die betreffenden Einrichtungen:\ndie Architektur des Netzes verständlich und aktuell dokumentieren;"
+    },
+    "eu-nis2-ir-6-7-2-b": {
+      "code": "6.7.2.b",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsicherheit\nFür die Zwecke von Nummer 6.7.1 müssen die betreffenden Einrichtungen:\nKontrollen festlegen und durchführen, um die internen Netzdomänen der betreffenden Einrichtungen vor unbefugtem Zugriff zu schützen;"
+    },
+    "eu-nis2-ir-6-7-2-c": {
+      "code": "6.7.2.c",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsicherheit\nFür die Zwecke von Nummer 6.7.1 müssen die betreffenden Einrichtungen:\ndie Kontrollen so konfigurieren, dass Zugriffe und Netzkommunikation verhindert werden, wenn dies für den Betrieb der betreffenden Einrichtungen nicht erforderlich ist;"
+    },
+    "eu-nis2-ir-6-7-2-d": {
+      "code": "6.7.2.d",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsicherheit\nFür die Zwecke von Nummer 6.7.1 müssen die betreffenden Einrichtungen:\ndie Kontrollen für den Fernzugriff auf Netz- und Informationssysteme, einschließlich des Zugangs von Diensteanbietern, festlegen und durchführen;"
+    },
+    "eu-nis2-ir-6-7-2-e": {
+      "code": "6.7.2.e",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsicherheit\nFür die Zwecke von Nummer 6.7.1 müssen die betreffenden Einrichtungen:\nkeine Systeme verwenden, die für die Verwaltung der Umsetzung der Sicherheitskonzepte für andere Zwecke verwendet werden;"
+    },
+    "eu-nis2-ir-6-7-2-f": {
+      "code": "6.7.2.f",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsicherheit\nFür die Zwecke von Nummer 6.7.1 müssen die betreffenden Einrichtungen:\nnicht benötigte Verbindungen und Dienste ausdrücklich verbieten oder deaktivieren;"
+    },
+    "eu-nis2-ir-6-7-2-g": {
+      "code": "6.7.2.g",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsicherheit\nFür die Zwecke von Nummer 6.7.1 müssen die betreffenden Einrichtungen:\n– soweit angemessen – den Zugang zu ihren Netz- und Informationssystemen ausschließlich mit von den betreffenden Einrichtungen genehmigten Geräten gewähren;"
+    },
+    "eu-nis2-ir-6-7-2-h": {
+      "code": "6.7.2.h",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsicherheit\nFür die Zwecke von Nummer 6.7.1 müssen die betreffenden Einrichtungen:\nVerbindungen von Diensteanbietern nur nach einem Genehmigungsantrag und für einen bestimmten Zeitraum, z. B. für die Dauer von Wartungsarbeiten, zulassen;"
+    },
+    "eu-nis2-ir-6-7-2-i": {
+      "code": "6.7.2.i",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsicherheit\nFür die Zwecke von Nummer 6.7.1 müssen die betreffenden Einrichtungen:\ndie Kommunikation zwischen verschiedenen Systemen nur über vertrauenswürdige Kanäle herstellen, die durch logische, kryptografische oder physikalische Trennung von anderen Kommunikationskanälen isoliert sind, und eine sichere Identifizierung ihrer Endpunkte und den Schutz der Kanaldaten vor Änderung oder Offenlegung ermöglichen;"
+    },
+    "eu-nis2-ir-6-7-2-j": {
+      "code": "6.7.2.j",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsicherheit\nFür die Zwecke von Nummer 6.7.1 müssen die betreffenden Einrichtungen:\neinen Durchführungsplan für den sicheren, angemessenen und schrittweisen vollständigen Übergang zur neuesten Generation der Kommunikationsprotokolle für die Netzwerkschicht annehmen und Maßnahmen zur Beschleunigung dieses Übergangs festlegen;"
+    },
+    "eu-nis2-ir-6-7-2-k": {
+      "code": "6.7.2.k",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsicherheit\nFür die Zwecke von Nummer 6.7.1 müssen die betreffenden Einrichtungen:\neinen Durchführungsplan für die Einführung international vereinbarter und interoperabler moderner E-Mail-Kommunikationsnormen annehmen, um die E-Mail-Kommunikation zur Minderung von Schwachstellen im Zusammenhang mit E-Mail-Bedrohungen zu sichern, und Maßnahmen zur Beschleunigung dieser Einführung festlegen;"
+    },
+    "eu-nis2-ir-6-7-2-l": {
+      "code": "6.7.2.l",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsicherheit\nFür die Zwecke von Nummer 6.7.1 müssen die betreffenden Einrichtungen:\nbewährte Verfahren für die Sicherheit des DNS sowie für die Sicherheit und Hygiene des Internet-Routings bei Verkehr, der aus dem Netz stammt und für das Netz bestimmt ist, anwenden."
+    },
+    "eu-nis2-ir-6-7-3": {
+      "code": "6.7.3",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsicherheit\nDie betreffenden Einrichtungen überprüfen diese Maßnahmen in geplanten Zeitabständen sowie bei erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken und aktualisieren sie – soweit angemessen."
+    },
+    "eu-nis2-ir-6-8-1": {
+      "code": "6.8.1",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsegmentierung\nDie betreffenden Einrichtungen segmentieren ihre Systeme entsprechend den Ergebnissen der Risikobewertung gemäß Nummer 2.1 in Netze oder Zonen. Sie segmentieren ihre eigenen Systeme und Netze von Systemen und Netzen Dritter."
+    },
+    "eu-nis2-ir-6-8-2-a": {
+      "code": "6.8.2.a",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsegmentierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\ndie funktionale, logische und physische Beziehung, einschließlich des Standorts, zwischen vertrauenswürdigen Systemen und Diensten berücksichtigen;"
+    },
+    "eu-nis2-ir-6-8-2-b": {
+      "code": "6.8.2.b",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsegmentierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\nden Zugang zu einem Netz oder einer Zone auf der Grundlage einer Bewertung seiner/ihrer Sicherheitsanforderungen gewähren;"
+    },
+    "eu-nis2-ir-6-8-2-c": {
+      "code": "6.8.2.c",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsegmentierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\nSysteme, die für den Betrieb der betreffenden Einrichtungen oder für die Sicherheit unverzichtbar sind, in gesicherten Zonen unterbringen;"
+    },
+    "eu-nis2-ir-6-8-2-d": {
+      "code": "6.8.2.d",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsegmentierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\neine demilitarisierte Zone innerhalb ihrer Kommunikationsnetze aufbauen, um die Sicherheit der Kommunikation, die aus ihren Netzen stammt oder für ihr Netz bestimmt ist, zu gewährleisten;"
+    },
+    "eu-nis2-ir-6-8-2-e": {
+      "code": "6.8.2.e",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsegmentierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\nden Zugang zu und die Kommunikation zwischen und innerhalb von Zonen auf diejenigen beschränken, die für den Betrieb der betreffenden Einrichtungen oder für die Sicherheit erforderlich sind;"
+    },
+    "eu-nis2-ir-6-8-2-f": {
+      "code": "6.8.2.f",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsegmentierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\ndas spezielle Netz für die Verwaltung von Netz- und Informationssystemen vom operativen Netz der betreffenden Einrichtungen trennen;"
+    },
+    "eu-nis2-ir-6-8-2-g": {
+      "code": "6.8.2.g",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsegmentierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\nNetzverwaltungskanäle von anderem Netzverkehr trennen;"
+    },
+    "eu-nis2-ir-6-8-2-h": {
+      "code": "6.8.2.h",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsegmentierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\ndie Produktionssysteme für die Dienste der betreffenden Einrichtungen von den Systemen trennen, die bei der Entwicklung und beim Testen, einschließlich der Sicherung, verwendet werden."
+    },
+    "eu-nis2-ir-6-8-3": {
+      "code": "6.8.3",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Netzsegmentierung\nDie betreffenden Einrichtungen überprüfen die Netzsegmentierung in geplanten Zeitabständen sowie bei erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken und aktualisieren sie – soweit angemessen."
+    },
+    "eu-nis2-ir-6-9-1": {
+      "code": "6.9.1",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Schutz gegen Schadsoftware und nicht genehmigte Software\nDie betreffenden Einrichtungen schützen ihre Netz- und Informationssysteme vor Schadsoftware und nicht genehmigter Software."
+    },
+    "eu-nis2-ir-6-9-2": {
+      "code": "6.9.2",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Schutz gegen Schadsoftware und nicht genehmigte Software\nZu diesem Zweck führen die betreffenden Einrichtungen insbesondere Maßnahmen durch, um die Verwendung von Schadsoftware oder nicht genehmigter Software aufzudecken oder zu verhindern. Die betreffenden Einrichtungen stellen – soweit angemessen – sicher, dass ihre Netz- und Informationssysteme mit einer Erkennungs- und Reaktionssoftware ausgestattet sind, die regelmäßig im Einklang mit der gemäß Nummer 2.1 durchgeführten Risikobewertung und den vertraglichen Vereinbarungen mit den Anbietern aktualisiert wird."
+    },
+    "eu-nis2-ir-6-10-1": {
+      "code": "6.10.1",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Behandlung und Offenlegung von Schwachstellen\nDie betreffenden Einrichtungen erlangen Informationen über technische Schwachstellen in ihren Netz- und Informationssystemen, bewerten ihre Exposition gegenüber solchen Schwachstellen und ergreifen geeignete Maßnahmen zum Umgang mit diesen Schwachstellen."
+    },
+    "eu-nis2-ir-6-10-2-a": {
+      "code": "6.10.2.a",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Behandlung und Offenlegung von Schwachstellen\nFür die Zwecke von Nummer 6.10.1 müssen die betreffenden Einrichtungen:\nInformationen über Schwachstellen über geeignete Kanäle, wie z. B. Ankündigungen von CSIRTs oder zuständigen Behörden oder von Anbietern oder Diensteanbietern bereitgestellte Informationen, verfolgen;"
+    },
+    "eu-nis2-ir-6-10-2-b": {
+      "code": "6.10.2.b",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Behandlung und Offenlegung von Schwachstellen\nFür die Zwecke von Nummer 6.10.1 müssen die betreffenden Einrichtungen:\n– soweit angemessen – Schwachstellen-Scans durchführen und die Ergebnisse der Scans in geplanten Zeitabständen aufzeichnen;"
+    },
+    "eu-nis2-ir-6-10-2-c": {
+      "code": "6.10.2.c",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Behandlung und Offenlegung von Schwachstellen\nFür die Zwecke von Nummer 6.10.1 müssen die betreffenden Einrichtungen:\nSchwachstellen, die von den betreffenden Einrichtungen als für ihren Betrieb kritisch eingestuft wurden, unverzüglich beheben;"
+    },
+    "eu-nis2-ir-6-10-2-d": {
+      "code": "6.10.2.d",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Behandlung und Offenlegung von Schwachstellen\nFür die Zwecke von Nummer 6.10.1 müssen die betreffenden Einrichtungen:\nsicherstellen, dass die Behandlung von Schwachstellen mit den Verfahren für das Änderungsmanagement, das Sicherheitspatch-Management, das Risikomanagement und das Management von Sicherheitsvorfällen vereinbar ist;"
+    },
+    "eu-nis2-ir-6-10-2-e": {
+      "code": "6.10.2.e",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Behandlung und Offenlegung von Schwachstellen\nFür die Zwecke von Nummer 6.10.1 müssen die betreffenden Einrichtungen:\nein Verfahren für die Offenlegung von Schwachstellen im Einklang mit den geltenden nationalen Konzepten für die koordinierte Offenlegung von Schwachstellen festlegen."
+    },
+    "eu-nis2-ir-6-10-3": {
+      "code": "6.10.3",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Behandlung und Offenlegung von Schwachstellen\nWenn dies wegen der möglichen Auswirkungen der Schwachstelle gerechtfertigt ist, erstellen die betreffenden Einrichtungen einen Plan zur Minderung der Schwachstelle und setzen ihn um. Ansonsten dokumentieren und begründen die betreffenden Einrichtungen, warum die Schwachstelle keine Abhilfemaßnahmen erfordert."
+    },
+    "eu-nis2-ir-6-10-4": {
+      "code": "6.10.4",
+      "section": "section-6",
+      "control": "Artikel 21 Absatz 2 Buchstabe e",
+      "requirements": "Behandlung und Offenlegung von Schwachstellen\nDie betreffenden Einrichtungen überprüfen in geplanten Abständen die Kanäle, die sie für die Überwachung von Informationen über Schwachstellen nutzen, und aktualisieren sie – soweit angemessen."
+    },
+    "eu-nis2-ir-7-1": {
+      "code": "7.1",
+      "section": "section-7",
+      "control": "Artikel 21 Absatz 2 Buchstabe f",
+      "requirements": "Für die Zwecke von Artikel 21 Absatz 2 Buchstabe f der Richtlinie (EU) 2022/2555 legen die betreffenden Einrichtungen ein Konzept und Verfahren fest, setzen sie um und wenden sie an, um zu bewerten, ob die ergriffenen Risikomanagementmaßnahmen im Bereich der Cybersicherheit wirksam umgesetzt und aufrechterhalten werden."
+    },
+    "eu-nis2-ir-7-2": {
+      "code": "7.2",
+      "section": "section-7",
+      "control": "Artikel 21 Absatz 2 Buchstabe f",
+      "requirements": "Das in Nummer 7.1 genannte Konzept und die entsprechenden Verfahren tragen den Ergebnissen der Risikobewertung gemäß Nummer 2.1 und früheren erheblichen Sicherheitsvorfällen Rechnung. Die betreffenden Einrichtungen müssen Folgendes bestimmen:"
+    },
+    "eu-nis2-ir-7-2-a": {
+      "code": "7.2.a",
+      "section": "section-7",
+      "control": "Artikel 21 Absatz 2 Buchstabe f",
+      "requirements": "Das in Nummer 7.1 genannte Konzept und die entsprechenden Verfahren tragen den Ergebnissen der Risikobewertung gemäß Nummer 2.1 und früheren erheblichen Sicherheitsvorfällen Rechnung. Die betreffenden Einrichtungen müssen Folgendes bestimmen:\nwelche Risikomanagementmaßnahmen im Bereich der Cybersicherheit zu überwachen und zu messen sind, einschließlich Verfahren und Kontrollen;"
+    },
+    "eu-nis2-ir-7-2-b": {
+      "code": "7.2.b",
+      "section": "section-7",
+      "control": "Artikel 21 Absatz 2 Buchstabe f",
+      "requirements": "Das in Nummer 7.1 genannte Konzept und die entsprechenden Verfahren tragen den Ergebnissen der Risikobewertung gemäß Nummer 2.1 und früheren erheblichen Sicherheitsvorfällen Rechnung. Die betreffenden Einrichtungen müssen Folgendes bestimmen:\ndie Methoden zur Überwachung, Messung, Analyse und Bewertung, sofern zutreffend, um gültige Ergebnisse sicherzustellen;"
+    },
+    "eu-nis2-ir-7-2-c": {
+      "code": "7.2.c",
+      "section": "section-7",
+      "control": "Artikel 21 Absatz 2 Buchstabe f",
+      "requirements": "Das in Nummer 7.1 genannte Konzept und die entsprechenden Verfahren tragen den Ergebnissen der Risikobewertung gemäß Nummer 2.1 und früheren erheblichen Sicherheitsvorfällen Rechnung. Die betreffenden Einrichtungen müssen Folgendes bestimmen:\nwann die Überwachung und Messung durchzuführen ist;"
+    },
+    "eu-nis2-ir-7-2-d": {
+      "code": "7.2.d",
+      "section": "section-7",
+      "control": "Artikel 21 Absatz 2 Buchstabe f",
+      "requirements": "Das in Nummer 7.1 genannte Konzept und die entsprechenden Verfahren tragen den Ergebnissen der Risikobewertung gemäß Nummer 2.1 und früheren erheblichen Sicherheitsvorfällen Rechnung. Die betreffenden Einrichtungen müssen Folgendes bestimmen:\nwer für die Überwachung und die Messung der Wirksamkeit der Risikomanagementmaßnahmen im Bereich der Cybersicherheit zuständig ist;"
+    },
+    "eu-nis2-ir-7-2-e": {
+      "code": "7.2.e",
+      "section": "section-7",
+      "control": "Artikel 21 Absatz 2 Buchstabe f",
+      "requirements": "Das in Nummer 7.1 genannte Konzept und die entsprechenden Verfahren tragen den Ergebnissen der Risikobewertung gemäß Nummer 2.1 und früheren erheblichen Sicherheitsvorfällen Rechnung. Die betreffenden Einrichtungen müssen Folgendes bestimmen:\nwann die Ergebnisse der Überwachung und der Messung zu analysieren und zu bewerten sind;"
+    },
+    "eu-nis2-ir-7-2-f": {
+      "code": "7.2.f",
+      "section": "section-7",
+      "control": "Artikel 21 Absatz 2 Buchstabe f",
+      "requirements": "Das in Nummer 7.1 genannte Konzept und die entsprechenden Verfahren tragen den Ergebnissen der Risikobewertung gemäß Nummer 2.1 und früheren erheblichen Sicherheitsvorfällen Rechnung. Die betreffenden Einrichtungen müssen Folgendes bestimmen:\nwer diese Ergebnisse analysieren und bewerten muss."
+    },
+    "eu-nis2-ir-7-3": {
+      "code": "7.3",
+      "section": "section-7",
+      "control": "Artikel 21 Absatz 2 Buchstabe f",
+      "requirements": "Die betreffenden Einrichtungen überprüfen das Konzept und die Verfahren in geplanten Zeitabständen sowie bei erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken und aktualisieren sie – soweit angemessen."
+    },
+    "eu-nis2-ir-8-1-1": {
+      "code": "8.1.1",
+      "section": "section-8",
+      "control": "Artikel 21 Absatz 2 Buchstabe g",
+      "requirements": "Sensibilisierungsmaßnahmen und grundlegende Verfahren im Bereich der Cyberhygiene\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe g der Richtlinie (EU) 2022/2555 stellen die betreffenden Einrichtungen sicher, dass sich ihre Mitarbeitenden, einschließlich der Mitglieder von Leitungsorganen, sowie direkte Anbieter und Diensteanbieter der Risiken bewusst sind, über die Bedeutung der Cybersicherheit informiert werden und Verfahren im Bereich der Cyberhygiene anwenden."
+    },
+    "eu-nis2-ir-8-1-2": {
+      "code": "8.1.2",
+      "section": "section-8",
+      "control": "Artikel 21 Absatz 2 Buchstabe g",
+      "requirements": "Sensibilisierungsmaßnahmen und grundlegende Verfahren im Bereich der Cyberhygiene\nFür die Zwecke von Nummer 8.1.1 bieten die betreffenden Einrichtungen ihren Mitarbeitenden, den Mitgliedern ihrer Leitungsorgane sowie – soweit angemessen – direkten Anbietern und Diensteanbietern gemäß Nummer 5.1.4 ein Sensibilisierungsprogramm an, das:"
+    },
+    "eu-nis2-ir-8-1-2-a": {
+      "code": "8.1.2.a",
+      "section": "section-8",
+      "control": "Artikel 21 Absatz 2 Buchstabe g",
+      "requirements": "Sensibilisierungsmaßnahmen und grundlegende Verfahren im Bereich der Cyberhygiene\nFür die Zwecke von Nummer 8.1.1 bieten die betreffenden Einrichtungen ihren Mitarbeitenden, den Mitgliedern ihrer Leitungsorgane sowie – soweit angemessen – direkten Anbietern und Diensteanbietern gemäß Nummer 5.1.4 ein Sensibilisierungsprogramm an, das:\nzeitlich so geplant ist, dass die Maßnahmen wiederholt werden und neue Mitarbeitende erreichen;"
+    },
+    "eu-nis2-ir-8-1-2-b": {
+      "code": "8.1.2.b",
+      "section": "section-8",
+      "control": "Artikel 21 Absatz 2 Buchstabe g",
+      "requirements": "Sensibilisierungsmaßnahmen und grundlegende Verfahren im Bereich der Cyberhygiene\nFür die Zwecke von Nummer 8.1.1 bieten die betreffenden Einrichtungen ihren Mitarbeitenden, den Mitgliedern ihrer Leitungsorgane sowie – soweit angemessen – direkten Anbietern und Diensteanbietern gemäß Nummer 5.1.4 ein Sensibilisierungsprogramm an, das:\nmit dem Konzept für die Sicherheit von Netz- und Informationssystemen, den themenspezifischen Konzepten und den einschlägigen Verfahren für die Sicherheit von Netz- und Informationssystemen im Einklang steht;"
+    },
+    "eu-nis2-ir-8-1-2-c": {
+      "code": "8.1.2.c",
+      "section": "section-8",
+      "control": "Artikel 21 Absatz 2 Buchstabe g",
+      "requirements": "Sensibilisierungsmaßnahmen und grundlegende Verfahren im Bereich der Cyberhygiene\nFür die Zwecke von Nummer 8.1.1 bieten die betreffenden Einrichtungen ihren Mitarbeitenden, den Mitgliedern ihrer Leitungsorgane sowie – soweit angemessen – direkten Anbietern und Diensteanbietern gemäß Nummer 5.1.4 ein Sensibilisierungsprogramm an, das:\neinschlägige Cyberbedrohungen, bestehende Risikomanagementmaßnahmen im Bereich der Cybersicherheit, Kontaktstellen und Ressourcen für zusätzliche Informationen und Beratung zu Cybersicherheitsfragen sowie Verfahren im Bereich der Cyberhygiene für Nutzer abdeckt."
+    },
+    "eu-nis2-ir-8-1-3": {
+      "code": "8.1.3",
+      "section": "section-8",
+      "control": "Artikel 21 Absatz 2 Buchstabe g",
+      "requirements": "Sensibilisierungsmaßnahmen und grundlegende Verfahren im Bereich der Cyberhygiene\nDas Sensibilisierungsprogramm wird – soweit angemessen – in geplanten Zeitabständen im Hinblick auf seine Wirksamkeit getestet. Das Sensibilisierungsprogramm wird in geplanten Zeitabständen aktualisiert und angeboten, wobei Änderungen der Verfahren im Bereich der Cyberhygiene sowie die aktuelle Bedrohungslage und die Risiken für die betreffenden Einrichtungen zu berücksichtigen sind."
+    },
+    "eu-nis2-ir-8-2-1": {
+      "code": "8.2.1",
+      "section": "section-8",
+      "control": "Artikel 21 Absatz 2 Buchstabe g",
+      "requirements": "Sicherheitsschulungen\nDie betreffenden Einrichtungen ermittelt Mitarbeitende, deren Rollen sicherheitsrelevante Fähigkeiten und Fachkenntnisse erfordern, und stellt sicher, dass sie in Bezug auf die Sicherheit von Netz- und Informationssystemen regelmäßig geschult werden."
+    },
+    "eu-nis2-ir-8-2-2": {
+      "code": "8.2.2",
+      "section": "section-8",
+      "control": "Artikel 21 Absatz 2 Buchstabe g",
+      "requirements": "Sicherheitsschulungen\nDie betreffenden Einrichtungen führen ein Schulungsprogramm im Einklang mit dem Konzept für die Sicherheit von Netz- und Informationssystemen, den themenspezifischen Konzepten und anderen einschlägigen Verfahren für die Sicherheit von Netz- und Informationssystemen ein, in dem der Schulungsbedarf für bestimmte Rollen und Positionen auf der Grundlage von Kriterien festgelegt wird, setzen es um und wenden es an."
+    },
+    "eu-nis2-ir-8-2-3": {
+      "code": "8.2.3",
+      "section": "section-8",
+      "control": "Artikel 21 Absatz 2 Buchstabe g",
+      "requirements": "Sicherheitsschulungen\nDie Schulung gemäß Nummer 8.2.1 muss für die Funktion des Mitarbeitenden relevant sein, und ihre Wirksamkeit ist zu bewerten. Die Schulung muss den bestehenden Sicherheitsmaßnahmen Rechnung tragen und Folgendes umfassen:"
+    },
+    "eu-nis2-ir-8-2-3-a": {
+      "code": "8.2.3.a",
+      "section": "section-8",
+      "control": "Artikel 21 Absatz 2 Buchstabe g",
+      "requirements": "Sicherheitsschulungen\nDie Schulung gemäß Nummer 8.2.1 muss für die Funktion des Mitarbeitenden relevant sein, und ihre Wirksamkeit ist zu bewerten. Die Schulung muss den bestehenden Sicherheitsmaßnahmen Rechnung tragen und Folgendes umfassen:\nAnweisungen für die sichere Konfiguration und den sicheren Betrieb der Netz- und Informationssysteme, einschließlich mobiler Geräte;"
+    },
+    "eu-nis2-ir-8-2-3-b": {
+      "code": "8.2.3.b",
+      "section": "section-8",
+      "control": "Artikel 21 Absatz 2 Buchstabe g",
+      "requirements": "Sicherheitsschulungen\nDie Schulung gemäß Nummer 8.2.1 muss für die Funktion des Mitarbeitenden relevant sein, und ihre Wirksamkeit ist zu bewerten. Die Schulung muss den bestehenden Sicherheitsmaßnahmen Rechnung tragen und Folgendes umfassen:\nUnterrichtung über bekannte Cyberbedrohungen;"
+    },
+    "eu-nis2-ir-8-2-3-c": {
+      "code": "8.2.3.c",
+      "section": "section-8",
+      "control": "Artikel 21 Absatz 2 Buchstabe g",
+      "requirements": "Sicherheitsschulungen\nDie Schulung gemäß Nummer 8.2.1 muss für die Funktion des Mitarbeitenden relevant sein, und ihre Wirksamkeit ist zu bewerten. Die Schulung muss den bestehenden Sicherheitsmaßnahmen Rechnung tragen und Folgendes umfassen:\nSchulung in Bezug auf das Verhalten bei sicherheitsrelevanten Ereignissen."
+    },
+    "eu-nis2-ir-8-2-4": {
+      "code": "8.2.4",
+      "section": "section-8",
+      "control": "Artikel 21 Absatz 2 Buchstabe g",
+      "requirements": "Sicherheitsschulungen\nDie betreffenden Einrichtungen führen Schulungen für Mitglieder des Personals durch, die in neue Positionen oder Rollen wechseln, die sicherheitsrelevante Fähigkeiten und Fachkenntnisse erfordern."
+    },
+    "eu-nis2-ir-8-2-5": {
+      "code": "8.2.5",
+      "section": "section-8",
+      "control": "Artikel 21 Absatz 2 Buchstabe g",
+      "requirements": "Sicherheitsschulungen\nDas Programm wird regelmäßig aktualisiert und durchgeführt, wobei geltende Konzepte und Vorschriften, zugewiesene Rollen und Verantwortlichkeiten sowie bekannte Cyberbedrohungen und technische Entwicklungen berücksichtigt werden."
+    },
+    "eu-nis2-ir-9-1": {
+      "code": "9.1",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "Für die Zwecke von Artikel 21 Absatz 2 Buchstabe h der Richtlinie (EU) 2022/2555 legen die betreffenden Einrichtungen ein Konzept und Verfahren in Bezug auf Kryptografie fest, setzen sie um und wenden sie an, um eine angemessene und wirksame Nutzung von Kryptografie sicherzustellen, damit die Vertraulichkeit, Authentizität und Integrität der Daten im Einklang mit der Anlagen- und Werteklassifizierung der betreffenden Einrichtungen und den Ergebnissen der gemäß Nummer 2.1 durchgeführten Risikobewertung geschützt sind."
+    },
+    "eu-nis2-ir-9-2-a": {
+      "code": "9.2.a",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "In dem Konzept und den Verfahren gemäß Nummer 9.1 wird Folgendes festgelegt:\nim Einklang mit der Einstufung der Anlagen und Werte der betreffenden Einrichtungen die Art, Stärke und Qualität der kryptografischen Maßnahmen, die zum Schutz der Anlagen und Werte der betreffenden Einrichtungen erforderlich sind, einschließlich der Daten, die gespeichert sind oder gerade übermittelt werden;"
+    },
+    "eu-nis2-ir-9-2-b": {
+      "code": "9.2.b",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "In dem Konzept und den Verfahren gemäß Nummer 9.1 wird Folgendes festgelegt:\ndie auf der Grundlage von Buchstabe a anzunehmenden Protokolle oder Protokollfamilien sowie kryptografische Algorithmen, Kryptierungsstärke, kryptografische Lösungen und Nutzungsverfahren, die zu genehmigen und für die Verwendung in den betreffenden Einrichtungen erforderlich sind, – soweit angemessen – nach einem Krypto-Agilitätsansatz;"
+    },
+    "eu-nis2-ir-9-2-c": {
+      "code": "9.2.c",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "In dem Konzept und den Verfahren gemäß Nummer 9.1 wird Folgendes festgelegt:\nder Ansatz der betreffenden Einrichtungen in Bezug auf das Schlüsselmanagement, – soweit angemessen – einschließlich der Methoden für:"
+    },
+    "eu-nis2-ir-9-2-c-i": {
+      "code": "9.2.c.i",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "In dem Konzept und den Verfahren gemäß Nummer 9.1 wird Folgendes festgelegt:\nder Ansatz der betreffenden Einrichtungen in Bezug auf das Schlüsselmanagement, – soweit angemessen – einschließlich der Methoden für:\ndie Generierung verschiedener Schlüssel für kryptografische Systeme und Anwendungen;"
+    },
+    "eu-nis2-ir-9-2-c-ii": {
+      "code": "9.2.c.ii",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "In dem Konzept und den Verfahren gemäß Nummer 9.1 wird Folgendes festgelegt:\nder Ansatz der betreffenden Einrichtungen in Bezug auf das Schlüsselmanagement, – soweit angemessen – einschließlich der Methoden für:\ndie Ausstellung und Erlangung von Public-Key-Zertifikaten;"
+    },
+    "eu-nis2-ir-9-2-c-iii": {
+      "code": "9.2.c.iii",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "In dem Konzept und den Verfahren gemäß Nummer 9.1 wird Folgendes festgelegt:\nder Ansatz der betreffenden Einrichtungen in Bezug auf das Schlüsselmanagement, – soweit angemessen – einschließlich der Methoden für:\ndie Verteilung von Schlüsseln an die vorgesehenen Einrichtungen, einschließlich wie der Schlüssel nach Erhalt zu aktivieren ist;"
+    },
+    "eu-nis2-ir-9-2-c-iv": {
+      "code": "9.2.c.iv",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "In dem Konzept und den Verfahren gemäß Nummer 9.1 wird Folgendes festgelegt:\nder Ansatz der betreffenden Einrichtungen in Bezug auf das Schlüsselmanagement, – soweit angemessen – einschließlich der Methoden für:\ndie Speicherung von Schlüsseln, einschließlich wie autorisierte Nutzer Zugang zu Schlüsseln erhalten;"
+    },
+    "eu-nis2-ir-9-2-c-v": {
+      "code": "9.2.c.v",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "In dem Konzept und den Verfahren gemäß Nummer 9.1 wird Folgendes festgelegt:\nder Ansatz der betreffenden Einrichtungen in Bezug auf das Schlüsselmanagement, – soweit angemessen – einschließlich der Methoden für:\ndie Änderung oder Aktualisierung von Schlüsseln, einschließlich Vorschriften darüber, wann und wie Schlüssel geändert werden können;"
+    },
+    "eu-nis2-ir-9-2-c-vi": {
+      "code": "9.2.c.vi",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "In dem Konzept und den Verfahren gemäß Nummer 9.1 wird Folgendes festgelegt:\nder Ansatz der betreffenden Einrichtungen in Bezug auf das Schlüsselmanagement, – soweit angemessen – einschließlich der Methoden für:\nden Umgang mit beeinträchtigten Schlüsseln;"
+    },
+    "eu-nis2-ir-9-2-c-vii": {
+      "code": "9.2.c.vii",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "In dem Konzept und den Verfahren gemäß Nummer 9.1 wird Folgendes festgelegt:\nder Ansatz der betreffenden Einrichtungen in Bezug auf das Schlüsselmanagement, – soweit angemessen – einschließlich der Methoden für:\nden Widerruf von Schlüsseln, einschließlich wie Schlüssel zurückzuziehen oder zu deaktivieren sind;"
+    },
+    "eu-nis2-ir-9-2-c-viii": {
+      "code": "9.2.c.viii",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "In dem Konzept und den Verfahren gemäß Nummer 9.1 wird Folgendes festgelegt:\nder Ansatz der betreffenden Einrichtungen in Bezug auf das Schlüsselmanagement, – soweit angemessen – einschließlich der Methoden für:\ndie Wiederherstellung verlorener oder beschädigter Schlüssel;"
+    },
+    "eu-nis2-ir-9-2-c-ix": {
+      "code": "9.2.c.ix",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "In dem Konzept und den Verfahren gemäß Nummer 9.1 wird Folgendes festgelegt:\nder Ansatz der betreffenden Einrichtungen in Bezug auf das Schlüsselmanagement, – soweit angemessen – einschließlich der Methoden für:\ndie Sicherung oder Archivierung von Schlüsseln;"
+    },
+    "eu-nis2-ir-9-2-c-x": {
+      "code": "9.2.c.x",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "In dem Konzept und den Verfahren gemäß Nummer 9.1 wird Folgendes festgelegt:\nder Ansatz der betreffenden Einrichtungen in Bezug auf das Schlüsselmanagement, – soweit angemessen – einschließlich der Methoden für:\ndie Vernichtung von Schlüsseln;"
+    },
+    "eu-nis2-ir-9-2-c-xi": {
+      "code": "9.2.c.xi",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "In dem Konzept und den Verfahren gemäß Nummer 9.1 wird Folgendes festgelegt:\nder Ansatz der betreffenden Einrichtungen in Bezug auf das Schlüsselmanagement, – soweit angemessen – einschließlich der Methoden für:\ndie Protokollierung und Prüfung von Managementtätigkeiten im Zusammenhang mit Schlüsseln;"
+    },
+    "eu-nis2-ir-9-2-c-xii": {
+      "code": "9.2.c.xii",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "In dem Konzept und den Verfahren gemäß Nummer 9.1 wird Folgendes festgelegt:\nder Ansatz der betreffenden Einrichtungen in Bezug auf das Schlüsselmanagement, – soweit angemessen – einschließlich der Methoden für:\ndie Festlegung von Aktivierungs- und Deaktivierungsfristen für Schlüssel, damit die Schlüssel nur für den angegebenen Zeitraum gemäß den Vorschriften der Organisation für das Schlüsselmanagement verwendet werden können."
+    },
+    "eu-nis2-ir-9-3": {
+      "code": "9.3",
+      "section": "section-9",
+      "control": "Artikel 21 Absatz 2 Buchstabe h",
+      "requirements": "Die betreffenden Einrichtungen überprüfen ihr Konzept und ihre Verfahren in geplanten Zeitabständen und aktualisieren sie – soweit angemessen –, wobei sie dem Stand der Technik im Bereich der Kryptografie Rechnung tragen."
+    },
+    "eu-nis2-ir-10-1-1": {
+      "code": "10.1.1",
+      "section": "section-10",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Sicherheit des Personals\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe i der Richtlinie (EU) 2022/2555 stellen die betreffenden Einrichtungen sicher, dass ihre Mitarbeitenden und gegebenenfalls ihre direkten Anbieter und Diensteanbieter ihre Verantwortlichkeiten im Bereich der Sicherheit verstehen und sich zu ihrer Einhaltung verpflichten, soweit dies für die angebotenen Dienste und den Arbeitsplatz angemessen ist und mit dem Konzept der betreffenden Einrichtungen für die Sicherheit von Netz- und Informationssystemen im Einklang steht."
+    },
+    "eu-nis2-ir-10-1-2-a": {
+      "code": "10.1.2.a",
+      "section": "section-10",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Sicherheit des Personals\nDie unter Nummer 10.1.1 genannte Anforderung umfasst Folgendes:\nMechanismen, mit denen sichergestellt wird, dass alle Mitarbeitenden, direkten Anbieter und Diensteanbieter gegebenenfalls die von den betreffenden Einrichtungen gemäß Nummer 8.1 angewandten Standardverfahren im Bereich der Cyberhygiene verstehen und befolgen;"
+    },
+    "eu-nis2-ir-10-1-2-b": {
+      "code": "10.1.2.b",
+      "section": "section-10",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Sicherheit des Personals\nDie unter Nummer 10.1.1 genannte Anforderung umfasst Folgendes:\nMechanismen, mit denen sichergestellt wird, dass sich alle Nutzer mit administrativem oder privilegiertem Zugang ihrer Rollen, Verantwortlichkeiten und Weisungsbefugnisse bewusst sind und entsprechend handeln;"
+    },
+    "eu-nis2-ir-10-1-2-c": {
+      "code": "10.1.2.c",
+      "section": "section-10",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Sicherheit des Personals\nDie unter Nummer 10.1.1 genannte Anforderung umfasst Folgendes:\nMechanismen, mit denen sichergestellt wird, dass die Mitglieder der Leitungsorgane ihre Rollen, Verantwortlichkeiten und Weisungsbefugnisse in Bezug auf die Sicherheit von Netz- und Informationssystemen verstehen und entsprechend handeln;"
+    },
+    "eu-nis2-ir-10-1-2-d": {
+      "code": "10.1.2.d",
+      "section": "section-10",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Sicherheit des Personals\nDie unter Nummer 10.1.1 genannte Anforderung umfasst Folgendes:\nMechanismen für die Einstellung von Personal, das für die jeweiligen Rollen qualifiziert ist, wie z. B. Überprüfung der Referenzen, Überprüfungsverfahren, Validierung von Zeugnissen oder schriftliche Prüfungen."
+    },
+    "eu-nis2-ir-10-1-3": {
+      "code": "10.1.3",
+      "section": "section-10",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Sicherheit des Personals\nDie betreffenden Einrichtungen überprüfen die Zuweisung von Personal zu bestimmten Rollen gemäß Nummer 1.2 sowie ihre Mittel für Personal in geplanten Zeitabständen und mindestens einmal jährlich. Sie aktualisieren die Zuweisung der Rollen erforderlichenfalls."
+    },
+    "eu-nis2-ir-10-2-1": {
+      "code": "10.2.1",
+      "section": "section-10",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Umgang mit und Offenlegung von Sicherheitslücken\nDie betreffenden Einrichtungen stellen – soweit durchführbar – sicher, dass Zuverlässigkeitsüberprüfungen ihrer Mitarbeitenden und – soweit anwendbar – der direkten Anbieter und Diensteanbieter gemäß Nummer 5.1.4 durchgeführt werden, wenn dies für deren Rollen, Verantwortlichkeiten und Weisungsbefugnisse erforderlich ist."
+    },
+    "eu-nis2-ir-10-2-2-a": {
+      "code": "10.2.2.a",
+      "section": "section-10",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Umgang mit und Offenlegung von Sicherheitslücken\nFür die Zwecke von Nummer 10.2.1 müssen die betreffenden Einrichtungen:\nKriterien festlegen, in denen aufgeführt ist, welche Rollen, Verantwortlichkeiten und Weisungsbefugnisse nur von Personen wahrgenommen werden dürfen, deren Zuverlässigkeit überprüft wurde;"
+    },
+    "eu-nis2-ir-10-2-2-b": {
+      "code": "10.2.2.b",
+      "section": "section-10",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Umgang mit und Offenlegung von Sicherheitslücken\nFür die Zwecke von Nummer 10.2.1 müssen die betreffenden Einrichtungen:\nsicherstellen, dass bei diesen Personen Überprüfungen gemäß Nummer 10.2.1 durchgeführt werden, bevor sie mit der Wahrnehmung dieser Rollen, Verantwortlichkeiten und Weisungsbefugnisse beginnen, wobei die geltenden Gesetze, Vorschriften und ethischen Normen im Verhältnis zu den geschäftlichen Anforderungen, der Klassifizierung der Anlagen und Werte gemäß Nummer 12.1 und den Netz- und Informationssystemen, auf die zugegriffen werden soll, sowie den wahrgenommenen Risiken zu berücksichtigen sind."
+    },
+    "eu-nis2-ir-10-2-3": {
+      "code": "10.2.3",
+      "section": "section-10",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Umgang mit und Offenlegung von Sicherheitslücken\nDie betreffenden Einrichtungen überprüfen ihr Konzept in geplanten Zeitabständen und aktualisieren es – soweit angemessen."
+    },
+    "eu-nis2-ir-10-3-1": {
+      "code": "10.3.1",
+      "section": "section-10",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Verfahren zur Beendigung oder Änderung des Beschäftigungsverhältnisses\nDie betreffenden Einrichtungen stellen sicher, dass die Verantwortlichkeiten und Pflichten in Bezug auf die Sicherheit von Netz- und Informationssystemen, die auch nach der Beendigung oder der Änderung des Beschäftigungsverhältnisses ihrer Mitarbeitenden gültig bleiben, vertraglich festgelegt und durchgesetzt werden."
+    },
+    "eu-nis2-ir-10-3-2": {
+      "code": "10.3.2",
+      "section": "section-10",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Verfahren zur Beendigung oder Änderung des Beschäftigungsverhältnisses\nFür die Zwecke von Nummer 10.3.1 nehmen die betreffenden Einrichtungen in die Arbeits- und Beschäftigungsbedingungen, den Vertrag oder die Vereinbarung der betreffenden Person die Verantwortlichkeiten und Pflichten auf, die auch nach Beendigung des Beschäftigungsverhältnisses oder des Vertrags gültig bleiben, wie z. B. Vertraulichkeitsklauseln."
+    },
+    "eu-nis2-ir-10-4-1": {
+      "code": "10.4.1",
+      "section": "section-10",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Disziplinarverfahren\nDie betreffenden Einrichtungen führen ein Disziplinarverfahren für den Umgang mit Verstößen gegen die Konzepte für die Sicherheit von Netz- und Informationssystemen ein, machen es bekannt und erhalten es aufrecht. In dem Verfahren sind die einschlägigen rechtlichen, gesetzlichen, vertraglichen und geschäftlichen Anforderungen zu berücksichtigen."
+    },
+    "eu-nis2-ir-10-4-2": {
+      "code": "10.4.2",
+      "section": "section-10",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Disziplinarverfahren\nDie betreffenden Einrichtungen überprüfen das Disziplinarverfahren in geplanten Zeitabständen sowie – soweit angemessen – bei rechtlichen Änderungen oder bei wesentlichen Änderungen der Betriebsabläufe oder der Risiken und aktualisieren es gegebenenfalls."
+    },
+    "eu-nis2-ir-11-1-1": {
+      "code": "11.1.1",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Konzept für die Zugriffskontrolle\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe i der Richtlinie (EU) 2022/2555 legen die betreffenden Einrichtungen auf der Grundlage von geschäftlichen Anforderungen sowie Anforderungen an die Sicherheit von Netz- und Informationssystemen Konzepte für die logische und physische Kontrolle des Zugangs zu ihren Netz- und Informationssystemen fest, dokumentieren sie und setzen sie um."
+    },
+    "eu-nis2-ir-11-1-2-a": {
+      "code": "11.1.2.a",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Konzept für die Zugriffskontrolle\nDie in Nummer 11.1.1. genannten Konzepte müssen:\nfür den Zugang von Personen, einschließlich Personal, Besuchern und externen Einrichtungen wie Anbietern und Diensteanbietern, gelten;"
+    },
+    "eu-nis2-ir-11-1-2-b": {
+      "code": "11.1.2.b",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Konzept für die Zugriffskontrolle\nDie in Nummer 11.1.1. genannten Konzepte müssen:\nfür den Zugang von Netz- und Informationssystemen gelten;"
+    },
+    "eu-nis2-ir-11-1-2-c": {
+      "code": "11.1.2.c",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Konzept für die Zugriffskontrolle\nDie in Nummer 11.1.1. genannten Konzepte müssen:\nsicherstellen, dass der Zugang nur Nutzern gewährt wird, die angemessen authentifiziert wurden."
+    },
+    "eu-nis2-ir-11-1-3": {
+      "code": "11.1.3",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Konzept für die Zugriffskontrolle\nDie betreffenden Einrichtungen überprüfen die Konzepte in geplanten Zeitabständen sowie bei erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken und aktualisieren sie – soweit angemessen."
+    },
+    "eu-nis2-ir-11-2-1": {
+      "code": "11.2.1",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Management von Zugangs- und Zugriffsrechten\nDie betreffenden Einrichtungen gewähren, ändern, löschen und dokumentieren Zugangs- und Zugriffsrechte für die Netz- und Informationssysteme im Einklang mit dem in Nummer 11.1 genannten Konzept für die Zugriffskontrolle."
+    },
+    "eu-nis2-ir-11-2-2-a": {
+      "code": "11.2.2.a",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Management von Zugangs- und Zugriffsrechten\nDie betreffenden Einrichtungen:\ngewähren und entziehen Zugangs- und Zugriffsrechte auf der Grundlage des Grundsatzes „Kenntnis nur, wenn nötig“ ( Need-to-know ), des Grundsatzes der Nutzungsnotwendigkeit ( Need-to-use ) und des Grundsatzes der Aufgabentrennung;"
+    },
+    "eu-nis2-ir-11-2-2-b": {
+      "code": "11.2.2.b",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Management von Zugangs- und Zugriffsrechten\nDie betreffenden Einrichtungen:\nstellen sicher, dass die Zugangs- und Zugriffsrechte bei Beendigung oder Änderung des Beschäftigungsverhältnisses entsprechend geändert werden;"
+    },
+    "eu-nis2-ir-11-2-2-c": {
+      "code": "11.2.2.c",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Management von Zugangs- und Zugriffsrechten\nDie betreffenden Einrichtungen:\nstellen sicher, dass der Zugang zu Netz- und Informationssystemen von den einschlägigen Personen genehmigt wird;"
+    },
+    "eu-nis2-ir-11-2-2-d": {
+      "code": "11.2.2.d",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Management von Zugangs- und Zugriffsrechten\nDie betreffenden Einrichtungen:\nstellen sicher, dass die Zugangs- und Zugriffsrechte dem Zugang bzw. Zugriff Dritter, wie Besucher, Anbieter und Diensteanbieter, angemessen Rechnung tragen, insbesondere durch Beschränkung der Zugangs- und Zugriffsrechte in Bezug auf Umfang und Dauer;"
+    },
+    "eu-nis2-ir-11-2-2-e": {
+      "code": "11.2.2.e",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Management von Zugangs- und Zugriffsrechten\nDie betreffenden Einrichtungen:\nführen ein Register der gewährten Zugangs- und Zugriffsrechte;"
+    },
+    "eu-nis2-ir-11-2-2-f": {
+      "code": "11.2.2.f",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Management von Zugangs- und Zugriffsrechten\nDie betreffenden Einrichtungen:\nprotokollieren das Management von Zugangs- und Zugriffsrechten."
+    },
+    "eu-nis2-ir-11-2-3": {
+      "code": "11.2.3",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Management von Zugangs- und Zugriffsrechten\nDie betreffenden Einrichtungen überprüfen die Zugangs- und Zugriffsrechte in geplanten Zeitabständen und ändern sie bei organisatorischen Änderungen. Die betreffenden Einrichtungen dokumentieren die Ergebnisse der Überprüfung, einschließlich der erforderlichen Änderungen der Zugangs- und Zugriffsrechte."
+    },
+    "eu-nis2-ir-11-3-1": {
+      "code": "11.3.1",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Privilegierte Konten und Systemverwaltungskonten\nDie betreffenden Einrichtungen halten sich an Grundsätze für das Management von privilegierten Konten und Systemverwaltungskonten als Teil des in Nummer 11.1 genannten Konzepts für die Zugriffskontrolle."
+    },
+    "eu-nis2-ir-11-3-2-a": {
+      "code": "11.3.2.a",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Privilegierte Konten und Systemverwaltungskonten\nMit den in Nummer 11.3.1 genannten Konzepten:\nmüssen starke Verfahren zur Identifizierung, Authentifizierung (z. B. Multifaktor-Authentifizierung) und Genehmigung für privilegierte Konten und Systemverwaltungskonten eingerichtet werden;"
+    },
+    "eu-nis2-ir-11-3-2-b": {
+      "code": "11.3.2.b",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Privilegierte Konten und Systemverwaltungskonten\nMit den in Nummer 11.3.1 genannten Konzepten:\nmüssen spezielle Konten eingerichtet werden, die ausschließlich für Systemverwaltungsvorgänge, wie Installation, Konfiguration, Verwaltung oder Wartung, zu verwenden sind;"
+    },
+    "eu-nis2-ir-11-3-2-c": {
+      "code": "11.3.2.c",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Privilegierte Konten und Systemverwaltungskonten\nMit den in Nummer 11.3.1 genannten Konzepten:\nmüssen die Systemverwaltungsrechte so weit wie möglich individuell zugeschnitten und einschränkt werden;"
+    },
+    "eu-nis2-ir-11-3-2-d": {
+      "code": "11.3.2.d",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Privilegierte Konten und Systemverwaltungskonten\nMit den in Nummer 11.3.1 genannten Konzepten:\nmuss festgelegt werden, dass Systemverwaltungskonten ausschließlich zur Verbindung mit Systemverwaltungssystemen verwendet werden."
+    },
+    "eu-nis2-ir-11-3-3": {
+      "code": "11.3.3",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Privilegierte Konten und Systemverwaltungskonten\nDie betreffenden Einrichtungen überprüfen die Zugangs- und Zugriffsrechte für privilegierte Konten und Systemverwaltungskonten in geplanten Zeitabständen, ändern diese bei organisatorischen Änderungen und dokumentieren die Ergebnisse der Überprüfung, einschließlich der erforderlichen Änderungen der Zugriffsrechte."
+    },
+    "eu-nis2-ir-11-4-1": {
+      "code": "11.4.1",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Systemverwaltungssysteme\nDie betreffenden Einrichtungen beschränken und kontrollieren die Nutzung von Systemverwaltungskonten im Einklang mit dem in Nummer 11.1 genannten Konzept für die Zugriffskontrolle."
+    },
+    "eu-nis2-ir-11-4-2-a": {
+      "code": "11.4.2.a",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Systemverwaltungssysteme\nFür diese Zwecke müssen die betreffenden Einrichtungen:\nSystemverwaltungssysteme ausschließlich für die Zwecke der Systemverwaltung und nicht für andere Vorgänge verwenden;"
+    },
+    "eu-nis2-ir-11-4-2-b": {
+      "code": "11.4.2.b",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Systemverwaltungssysteme\nFür diese Zwecke müssen die betreffenden Einrichtungen:\nsolche Systeme logisch von Anwendungssoftware, die nicht für Systemverwaltungszwecke verwendet wird, trennen;"
+    },
+    "eu-nis2-ir-11-4-2-c": {
+      "code": "11.4.2.c",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Systemverwaltungssysteme\nFür diese Zwecke müssen die betreffenden Einrichtungen:\nden Zugang zu Systemverwaltungssystemen durch Authentifizierung und Verschlüsselung schützen."
+    },
+    "eu-nis2-ir-11-5-1": {
+      "code": "11.5.1",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Identifizierung\nDie betreffenden Einrichtungen verwalten den gesamten Lebenszyklus der Identitäten (Kennungen) der Netz- und Informationssysteme und ihrer Nutzer."
+    },
+    "eu-nis2-ir-11-5-2-a": {
+      "code": "11.5.2.a",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Identifizierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\neindeutige Kennungen für die Netz- und Informationssysteme und deren Nutzer einrichten;"
+    },
+    "eu-nis2-ir-11-5-2-b": {
+      "code": "11.5.2.b",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Identifizierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\ndie Nutzerkennung mit einer einzigen Person verknüpfen;"
+    },
+    "eu-nis2-ir-11-5-2-c": {
+      "code": "11.5.2.c",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Identifizierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\ndie Überwachung der Kennungen der Netz- und Informationssysteme sicherstellen;"
+    },
+    "eu-nis2-ir-11-5-2-d": {
+      "code": "11.5.2.d",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Identifizierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\ndas Management von Identitäten (Kennungen) protokollieren."
+    },
+    "eu-nis2-ir-11-5-3": {
+      "code": "11.5.3",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Identifizierung\nDie betreffenden Einrichtungen genehmigen Kennungen, die mehreren Personen zugewiesen wurden, wie z. B. gemeinsame Kennungen, nur dann, wenn sie aus geschäftlichen oder operativen Gründen erforderlich sind, einem ausdrücklichen Genehmigungsverfahren unterliegen und dokumentiert werden. Die betreffenden Einrichtungen berücksichtigen Kennungen, die mehreren Personen im Rahmen des in Nummer 2.1 genannten Rahmens für das Risikomanagement im Bereich der Cybersicherheit zugewiesen wurden."
+    },
+    "eu-nis2-ir-11-5-4": {
+      "code": "11.5.4",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Identifizierung\nDie betreffenden Einrichtungen überprüfen regelmäßig die Kennungen der Netz- und Informationssysteme und ihrer Nutzer und deaktivieren sie unverzüglich, falls sie nicht mehr benötigt werden."
+    },
+    "eu-nis2-ir-11-6-1": {
+      "code": "11.6.1",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Authentifizierung\nDie betreffenden Einrichtungen verwenden sichere Authentifizierungsverfahren und -techniken auf der Grundlage von Zugangsbeschränkungen und des Konzepts für die Zugriffskontrolle."
+    },
+    "eu-nis2-ir-11-6-2-a": {
+      "code": "11.6.2.a",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Authentifizierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\nsicherstellen, dass die Stärke der Authentifizierung für die Klassifizierung der Anlage bzw. des Werts, auf die zugegriffen werden soll, angemessen ist;"
+    },
+    "eu-nis2-ir-11-6-2-b": {
+      "code": "11.6.2.b",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Authentifizierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\ndie Verwaltung geheimer Authentifizierungsinformationen und deren Zuweisung an die Nutzer durch ein Verfahren kontrollieren, das die Vertraulichkeit der Informationen gewährleistet, einschließlich Anweisungen an das Personal in Bezug auf den angemessenen Umgang mit Authentifizierungsinformationen;"
+    },
+    "eu-nis2-ir-11-6-2-c": {
+      "code": "11.6.2.c",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Authentifizierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\ndie Änderung von Authentifizierungsdaten zu Beginn, sodann in vorab festgelegten Zeitabständen und immer dann verlangen, wenn der Verdacht besteht, dass die Authentifizierungsdaten beeinträchtigt wurden;"
+    },
+    "eu-nis2-ir-11-6-2-d": {
+      "code": "11.6.2.d",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Authentifizierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\ndas Zurücksetzen der Authentifizierungsdaten und die Sperrung von Nutzern nach einer vorab festgelegten Anzahl erfolgloser Anmeldeversuche verlangen;"
+    },
+    "eu-nis2-ir-11-6-2-e": {
+      "code": "11.6.2.e",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Authentifizierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\ninaktive Sitzungen nach einem im Voraus festgelegten Zeitraum der Inaktivität beenden und"
+    },
+    "eu-nis2-ir-11-6-2-f": {
+      "code": "11.6.2.f",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Authentifizierung\nFür diese Zwecke müssen die betreffenden Einrichtungen:\nfür den Zugriff auf privilegierte Konten oder Verwaltungskonten gesonderte Authentifizierungsdaten verlangen."
+    },
+    "eu-nis2-ir-11-6-3": {
+      "code": "11.6.3",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Authentifizierung\nDie betreffenden Einrichtungen verwenden – soweit durchführbar – modernste Authentifizierungsmethoden, die dem damit verbundenen bewerteten Risiko und der Klassifizierung der Anlage bzw. des Werts, auf die zugegriffen werden soll, entsprechen, sowie eindeutige Authentifizierungsinformationen."
+    },
+    "eu-nis2-ir-11-6-4": {
+      "code": "11.6.4",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Authentifizierung\nDie betreffenden Einrichtungen überprüfen die Authentifizierungsverfahren und -techniken in geplanten Zeitabständen."
+    },
+    "eu-nis2-ir-11-7-1": {
+      "code": "11.7.1",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Multifaktor-Authentifizierung\nDie betreffenden Einrichtungen stellen sicher, dass die Nutzer – soweit angemessen – durch mehrere Authentifizierungsfaktoren oder kontinuierliche Authentifizierungsmechanismen für den Zugang zu den Netz- und Informationssystemen der betreffenden Einrichtungen im Einklang mit der Klassifizierung der Anlage bzw. des Werts, auf die zugegriffen werden soll, authentifiziert werden."
+    },
+    "eu-nis2-ir-11-7-2": {
+      "code": "11.7.2",
+      "section": "section-11",
+      "control": "Artikel 21 Absatz 2 Buchstaben i und j",
+      "requirements": "Multifaktor-Authentifizierung\nDie betreffenden Einrichtungen stellen sicher, dass die Stärke der Authentifizierung für die Klassifizierung der Anlage bzw. des Werts, auf die zugegriffen werden soll, angemessen ist."
+    },
+    "eu-nis2-ir-12-1-1": {
+      "code": "12.1.1",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Anlagen- und Werteklassifizierung\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe i der Richtlinie (EU) 2022/2555 legen die betreffenden Einrichtungen für alle Anlagen und Werte (einschließlich Informationen), die in den Anwendungsbereich ihrer Netz- und Informationssysteme fallen, Klassifizierungsstufen für das erforderliche Schutzniveau fest."
+    },
+    "eu-nis2-ir-12-1-2-a": {
+      "code": "12.1.2.a",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Anlagen- und Werteklassifizierung\nFür die Zwecke von Nummer 12.1.1 müssen die betreffenden Einrichtungen:\nein System von Klassifizierungsstufen für Anlagen und Werte festlegen;"
+    },
+    "eu-nis2-ir-12-1-2-b": {
+      "code": "12.1.2.b",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Anlagen- und Werteklassifizierung\nFür die Zwecke von Nummer 12.1.1 müssen die betreffenden Einrichtungen:\nallen Anlagen und Werte eine Klassifizierungsstufe zuordnen, die auf Vertraulichkeits-, Integritäts-, Authentizitäts- und Verfügbarkeitsanforderungen beruht, um den entsprechend ihrer Sensibilität, ihrer Kritikalität, ihres Risikos und ihres Geschäftswerts erforderlichen Schutz anzugeben;"
+    },
+    "eu-nis2-ir-12-1-2-c": {
+      "code": "12.1.2.c",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Anlagen- und Werteklassifizierung\nFür die Zwecke von Nummer 12.1.1 müssen die betreffenden Einrichtungen:\ndie Verfügbarkeitsanforderungen in Bezug auf die Anlagen und Werte an die in ihrem Notfallplan für die Aufrechterhaltung und Wiederherstellung des Betriebs festgelegten Ziele für die Bereitstellung und Wiederherstellung anpassen."
+    },
+    "eu-nis2-ir-12-1-3": {
+      "code": "12.1.3",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Anlagen- und Werteklassifizierung\nDie betreffenden Einrichtungen überprüfen regelmäßig die Klassifizierungsstufen der Anlagen und Werte und aktualisieren sie – soweit angemessen."
+    },
+    "eu-nis2-ir-12-2-1": {
+      "code": "12.2.1",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Behandlung von Anlagen und Werten\nDie betreffenden Einrichtungen legen ein Konzept für die ordnungsgemäße Behandlung von Anlagen und Werten (einschließlich Informationen) im Einklang mit ihrem Konzept für die Sicherheit ihrer Netz- und Informationssysteme fest, setzen es um und wenden es an und teilen dieses Konzept für die ordnungsgemäße Behandlung von Anlagen und Werten allen Personen mit, die Anlagen und Werte nutzen oder damit umgehen."
+    },
+    "eu-nis2-ir-12-2-2-a": {
+      "code": "12.2.2.a",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Behandlung von Anlagen und Werten\nDas Konzept muss:\nden gesamten Lebenszyklus der Anlagen und Werte abdecken, einschließlich Erwerb, Verwendung, Speicherung, Transport und Entsorgung;"
+    },
+    "eu-nis2-ir-12-2-2-b": {
+      "code": "12.2.2.b",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Behandlung von Anlagen und Werten\nDas Konzept muss:\nVorschriften für die sichere Verwendung, die sichere Speicherung, den sicheren Transport und die unwiederbringliche Löschung und Vernichtung der Anlagen und Werte;"
+    },
+    "eu-nis2-ir-12-2-2-c": {
+      "code": "12.2.2.c",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Behandlung von Anlagen und Werten\nDas Konzept muss:\nvorsehen, dass die Übertragung unter Berücksichtigung der Art der zu übertragenden Anlage bzw. des zu übertragenden Werts sicher erfolgt."
+    },
+    "eu-nis2-ir-12-2-3": {
+      "code": "12.2.3",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Behandlung von Anlagen und Werten\nDie betreffenden Einrichtungen überprüfen das Konzept in geplanten Zeitabständen sowie bei erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken und aktualisieren dieses – soweit angemessen."
+    },
+    "eu-nis2-ir-12-3-1": {
+      "code": "12.3.1",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Konzept für Wechseldatenträger\nDie betreffenden Einrichtungen legen ein Konzept für das Management von Wechseldatenträgern fest, setzen es um und wenden es an und teilen es ihren Mitarbeitenden und Dritten mit, die Wechseldatenträger in den Räumlichkeiten der betreffenden Einrichtungen oder an anderen Orten, an denen die Wechseldatenträger mit den Netz- und Informationssystemen der betreffenden Einrichtungen verbunden sind, benutzen."
+    },
+    "eu-nis2-ir-12-3-2-a": {
+      "code": "12.3.2.a",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Konzept für Wechseldatenträger\nDas Konzept muss:\neine technische Sperrung von Verbindungen mit Wechseldatenträgern vorsehen, es sei denn, es liegen organisatorische Gründe für deren Nutzung vor;"
+    },
+    "eu-nis2-ir-12-3-2-b": {
+      "code": "12.3.2.b",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Konzept für Wechseldatenträger\nDas Konzept muss:\nvorsehen, dass die Selbstausführung von Dateien von solchen Datenträgern verhindert wird und die Datenträger auf Schadcodes gescannt werden, bevor sie in den Systemen der betreffenden Einrichtungen verwendet werden können;"
+    },
+    "eu-nis2-ir-12-3-2-c": {
+      "code": "12.3.2.c",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Konzept für Wechseldatenträger\nDas Konzept muss:\nMaßnahmen zur Kontrolle und zum Schutz von tragbaren Speichergeräten, die gespeicherte und gerade übermittelte Daten enthalten, vorsehen;"
+    },
+    "eu-nis2-ir-12-3-2-d": {
+      "code": "12.3.2.d",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Konzept für Wechseldatenträger\nDas Konzept muss:\ngegebenenfalls Maßnahmen für den Einsatz kryptografischer Verfahren zum Schutz von Daten auf Wechseldatenträgern vorsehen."
+    },
+    "eu-nis2-ir-12-3-3": {
+      "code": "12.3.3",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Konzept für Wechseldatenträger\nDie betreffenden Einrichtungen überprüfen das Konzept in geplanten Zeitabständen sowie bei erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken und aktualisieren dieses – soweit angemessen."
+    },
+    "eu-nis2-ir-12-4-1": {
+      "code": "12.4.1",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Anlagen- und Werteinventar\nDie betreffenden Einrichtungen erstellen und pflegen ein vollständiges, genaues, aktuelles und kohärentes Inventar ihrer Anlagen und Werte. Sie erfassen Änderungen der Einträge im Anlagen- und Werteinventar auf nachvollziehbare Weise."
+    },
+    "eu-nis2-ir-12-4-2": {
+      "code": "12.4.2",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Anlagen- und Werteinventar\nDie Granularität des Anlagen- und Werteinventars liegt auf einem Niveau, dass den Bedürfnissen der betreffenden Einrichtungen entspricht. Das Inventar umfasst Folgendes:"
+    },
+    "eu-nis2-ir-12-4-2-a": {
+      "code": "12.4.2.a",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Anlagen- und Werteinventar\nDie Granularität des Anlagen- und Werteinventars liegt auf einem Niveau, dass den Bedürfnissen der betreffenden Einrichtungen entspricht. Das Inventar umfasst Folgendes:\ndie Liste der Betriebsabläufe und Dienste und ihre Beschreibung,"
+    },
+    "eu-nis2-ir-12-4-2-b": {
+      "code": "12.4.2.b",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Anlagen- und Werteinventar\nDie Granularität des Anlagen- und Werteinventars liegt auf einem Niveau, dass den Bedürfnissen der betreffenden Einrichtungen entspricht. Das Inventar umfasst Folgendes:\ndie Liste der Netz- und Informationssysteme und anderer zugehöriger Anlagen und Werte, die die Abläufe und die Dienste der betreffenden Einrichtungen unterstützen."
+    },
+    "eu-nis2-ir-12-4-3": {
+      "code": "12.4.3",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Anlagen- und Werteinventar\nDie betreffenden Einrichtungen überprüfen und aktualisieren regelmäßig das Inventar und ihre Anlagen und Werte und dokumentieren den Verlauf der Änderungen."
+    },
+    "eu-nis2-ir-12-5-1": {
+      "code": "12.5.1",
+      "section": "section-12",
+      "control": "Artikel 21 Absatz 2 Buchstabe i",
+      "requirements": "Abgabe, Rückgabe oder Löschung von Anlagen und Werten bei Beendigung des Beschäftigungsverhältnisses\nDie betreffenden Einrichtungen legen Verfahren fest, setzen sie um und wenden sie an, um sicherzustellen, dass ihre Anlagen und Werte, die sich in der Verwahrung des Personals befinden, bei Beendigung des Beschäftigungsverhältnisses abgegeben, zurückgegeben oder gelöscht werden, und dokumentieren die Abgabe, Rückgabe und Löschung dieser Anlagen und Werte. Ist die Abgabe, Rückgabe oder Löschung von Anlagen und Werten nicht möglich, so stellen die betreffenden Einrichtungen sicher, dass die Anlagen und Werte gemäß Nummer 12.2.2 nicht mehr auf die Netz- und Informationssysteme der betreffenden Einrichtungen zugreifen können."
+    },
+    "eu-nis2-ir-13-1-1": {
+      "code": "13.1.1",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Unterstützende Versorgungsleistungen\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe c der Richtlinie (EU) 2022/2555 verhindern die betreffenden Einrichtungen Verluste, Schäden oder Beeinträchtigungen von Netz- und Informationssystemen oder Unterbrechungen ihres Betriebs aufgrund des Ausfalls und der Störung unterstützender Versorgungsleistungen."
+    },
+    "eu-nis2-ir-13-1-2-a": {
+      "code": "13.1.2.a",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Unterstützende Versorgungsleistungen\nFür diese Zwecke müssen die betreffenden Einrichtungen – soweit angemessen –:\nihre Betriebsstätten vor Stromausfällen und anderen Störungen schützen, die durch Ausfälle bei unterstützenden Versorgungsunternehmen z. B. für Strom, Telekommunikation, Wasser, Gas, Abwasser, Lüftung und Klimatisierung verursacht werden;"
+    },
+    "eu-nis2-ir-13-1-2-b": {
+      "code": "13.1.2.b",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Unterstützende Versorgungsleistungen\nFür diese Zwecke müssen die betreffenden Einrichtungen – soweit angemessen –:\ndie Nutzung von Redundanzsystemen für Versorgungsleistungen in Erwägung ziehen;"
+    },
+    "eu-nis2-ir-13-1-2-c": {
+      "code": "13.1.2.c",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Unterstützende Versorgungsleistungen\nFür diese Zwecke müssen die betreffenden Einrichtungen – soweit angemessen –:\nVersorgungsleistungen, die Strom und Telekommunikationsdienste für den Transport von Daten oder für den Betrieb von Netz- und Informationssystemen bereitstellen, vor Abhörung und Beschädigung schützen;"
+    },
+    "eu-nis2-ir-13-1-2-d": {
+      "code": "13.1.2.d",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Unterstützende Versorgungsleistungen\nFür diese Zwecke müssen die betreffenden Einrichtungen – soweit angemessen –:\ndie unter Buchstabe c genannten Versorgungsleistungen überwachen und dem zuständigen internen oder externen Personal die Ereignisse melden, die außerhalb der in Nummer 13.2.2 Buchstabe b genannten Mindest- und Höchstkontrollwerteliegen und Auswirkungen auf die Versorgungsleistungen haben;"
+    },
+    "eu-nis2-ir-13-1-2-e": {
+      "code": "13.1.2.e",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Unterstützende Versorgungsleistungen\nFür diese Zwecke müssen die betreffenden Einrichtungen – soweit angemessen –:\nVerträge über die Notversorgung mit entsprechenden Leistungen abschließen, z. B. für Brennstoff für die Notstromversorgung;"
+    },
+    "eu-nis2-ir-13-1-2-f": {
+      "code": "13.1.2.f",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Unterstützende Versorgungsleistungen\nFür diese Zwecke müssen die betreffenden Einrichtungen – soweit angemessen –:\ndie kontinuierliche Wirksamkeit, Überwachung, Wartung und Erprobung der Netz- und Informationssysteme, die für den Betrieb des angebotenen Dienstes erforderlich sind, gewährleisten, insbesondere Strom, Temperatur- und Feuchtigkeitsregelung, Telekommunikation und Internetverbindung."
+    },
+    "eu-nis2-ir-13-1-3": {
+      "code": "13.1.3",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Unterstützende Versorgungsleistungen\nDie betreffenden Einrichtungen testen die Schutzmaßnahmen in geplanten Zeitabständen oder nach erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken und aktualisieren sie – soweit angemessen."
+    },
+    "eu-nis2-ir-13-2-1": {
+      "code": "13.2.1",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Schutz vor physischen Bedrohungen und Bedrohungen des Umfelds\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe e der Richtlinie (EU) 2022/2555 verhindern oder verringern die betreffenden Einrichtungen die Folgen von Ereignissen, die von physischen Bedrohungen und Bedrohungen des Umfelds wie Naturkatastrophen und anderen vorsätzlichen oder unbeabsichtigten Bedrohungen ausgehen, auf der Grundlage der Ergebnisse der gemäß Nummer 2.1 durchgeführten Risikobewertung."
+    },
+    "eu-nis2-ir-13-2-2-a": {
+      "code": "13.2.2.a",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Schutz vor physischen Bedrohungen und Bedrohungen des Umfelds\nFür diese Zwecke müssen die betreffenden Einrichtungen – soweit angemessen –:\nSchutzmaßnahmen gegen physische Bedrohungen und Bedrohungen des Umfelds konzipieren und umsetzen;"
+    },
+    "eu-nis2-ir-13-2-2-b": {
+      "code": "13.2.2.b",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Schutz vor physischen Bedrohungen und Bedrohungen des Umfelds\nFür diese Zwecke müssen die betreffenden Einrichtungen – soweit angemessen –:\nMindest- und Höchstkontrollwerte für physische Bedrohungen und Bedrohungen des Umfelds bestimmen;"
+    },
+    "eu-nis2-ir-13-2-2-c": {
+      "code": "13.2.2.c",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Schutz vor physischen Bedrohungen und Bedrohungen des Umfelds\nFür diese Zwecke müssen die betreffenden Einrichtungen – soweit angemessen –:\ndie Umgebungsparameter überwachen und dem zuständigen internen oder externen Personal Ereignisse melden, die außerhalb der in Buchstabe b genannten Mindest- und Höchstkontrollwerte liegen."
+    },
+    "eu-nis2-ir-13-2-3": {
+      "code": "13.2.3",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Schutz vor physischen Bedrohungen und Bedrohungen des Umfelds\nDie betreffenden Einrichtungen testen die Schutzmaßnahmen gegen physische Bedrohungen und Bedrohungen des Umfelds in geplanten Zeitabständen oder nach erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken und aktualisieren sie – soweit angemessen."
+    },
+    "eu-nis2-ir-13-3-1": {
+      "code": "13.3.1",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Perimeter und physische Zutrittskontrolle\nFür die Zwecke von Artikel 21 Absatz 2 Buchstabe i der Richtlinie (EU) 2022/2555 verhindern und überwachen die betreffenden Einrichtungen unbefugten physischen Zutritt zu, Beschädigungen von und Eingriffe in ihre Netz- und Informationssysteme."
+    },
+    "eu-nis2-ir-13-3-2-a": {
+      "code": "13.3.2.a",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Perimeter und physische Zutrittskontrolle\nFür diese Zwecke müssen die betreffenden Einrichtungen:\nauf der Grundlage der gemäß Nummer 2.1 durchgeführten Risikobewertung Sicherheitsperimeter festlegen und nutzen, um Bereiche zu schützen, in denen sich Netz- und Informationssysteme und andere zugehörige Anlagen befinden;"
+    },
+    "eu-nis2-ir-13-3-2-b": {
+      "code": "13.3.2.b",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Perimeter und physische Zutrittskontrolle\nFür diese Zwecke müssen die betreffenden Einrichtungen:\ndie unter Buchstabe a genannten Bereiche durch geeignete Zutrittskontrollen und Zugangspunkte schützen;"
+    },
+    "eu-nis2-ir-13-3-2-c": {
+      "code": "13.3.2.c",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Perimeter und physische Zutrittskontrolle\nFür diese Zwecke müssen die betreffenden Einrichtungen:\nMaßnahmen für die physische Sicherheit von Büros, Räumen und Betriebsstätten konzipieren und umsetzen;"
+    },
+    "eu-nis2-ir-13-3-2-d": {
+      "code": "13.3.2.d",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Perimeter und physische Zutrittskontrolle\nFür diese Zwecke müssen die betreffenden Einrichtungen:\nihrer Räumlichkeiten kontinuierlich in Bezug auf unbefugten physischen Zutritt überwachen."
+    },
+    "eu-nis2-ir-13-3-3": {
+      "code": "13.3.3",
+      "section": "section-13",
+      "control": "Artikel 21 Absatz 2 Buchstaben c, e und i",
+      "requirements": "Perimeter und physische Zutrittskontrolle\nDie betreffenden Einrichtungen testen die Maßnahmen zur physischen Zutrittskontrolle in geplanten Zeitabständen oder nach erheblichen Sicherheitsvorfällen oder wesentlichen Änderungen der Betriebsabläufe oder der Risiken und aktualisieren sie – soweit angemessen."
+    }
+  }
+}

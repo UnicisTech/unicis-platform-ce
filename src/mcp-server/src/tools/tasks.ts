@@ -386,7 +386,7 @@ Args:
   - taskNumber (number): Task number
   - controls (string[]): Array of control IDs (e.g. ["mvsp-1-6", "iso-2022-a-5-1"])
   - operation (string): "add" | "remove" | "change"
-  - ISO (string): Framework key — "mvsp" | "iso-2022" | "iso-2013" | "nistcsfv2" | "eunis2" | "gdpr" | "cisv81" | "soc2v2" | "c5_2020" | "owasp_asvs_v5" | "pcidss_v401" | "iso42001"
+  - ISO (string): Framework key — "mvsp" | "iso-2022" | "iso-2013" | "nistcsfv2" | "eunis2" | "eunis2_2024_2690" | "gdpr" | "cisv81" | "soc2v2" | "c5_2020" | "owasp_asvs_v5" | "pcidss_v401" | "iso42001"
 
 Returns: Confirmation.`,
       inputSchema: z
@@ -404,6 +404,7 @@ Returns: Confirmation.`,
               'iso-2013',
               'nistcsfv2',
               'eunis2',
+              'eunis2_2024_2690',
               'gdpr',
               'cisv81',
               'soc2v2',

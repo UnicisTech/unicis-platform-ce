@@ -101,6 +101,7 @@ Full setup guide → [Getting Started](#-getting-started)
 - [ISO 27001:2013 & ISO 27001:2022](https://www.unicis.tech/frameworks/iso27k?mtm_campaign=GitHub%20readme)
 - [NIST Cybersecurity Framework 2.0](https://www.unicis.tech/frameworks/nist-csf2?mtm_campaign=GitHub%20readme)
 - [Directive (EU) 2022/2555 NIS 2](https://www.unicis.tech/frameworks/eu-nis2?mtm_campaign=GitHub%20readme)
+- NIS2 Commission Implementing Regulation (EU) 2024/2690 with ENISA Technical Implementation Guidance
 - [CIS Critical Security Controls Version 8.1](https://www.unicis.tech/frameworks/cis?mtm_campaign=GitHub%20readme)
 - [Criteria Catalogue C5:2020](https://www.unicis.tech/frameworks/c5?mtm_campaign=GitHub%20readme)
 - [SOC2 Type II - System and Organization Controls](https://www.unicis.tech/frameworks/soc2?mtm_campaign=GitHub%20readme)
