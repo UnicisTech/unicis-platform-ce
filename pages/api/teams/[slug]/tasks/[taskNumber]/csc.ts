@@ -4,9 +4,10 @@ import {
   removeControlsFromIssue,
 } from 'models/csc';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { ISO } from 'types';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
+import { validateApiRequestBody } from '@/lib/api-validation';
+import { cscControlsWriteRequestSchema } from '@/lib/properties';
 
 export default async function handler(
   req: NextApiRequest,
@@ -42,36 +43,35 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const { operation, controls, ISO } = req.body;
+  const body = validateApiRequestBody(
+    cscControlsWriteRequestSchema,
+    req.body,
+    res
+  );
 
-  if (operation === 'add') {
-    await addControlsToIssue({
-      user: teamMember.user,
-      taskNumber: taskNumberAsNumber,
-      slug: slug as string,
-      controls,
-      ISO: ISO as ISO,
-    });
+  if (!body) {
+    return;
   }
 
-  if (operation === 'remove') {
-    await removeControlsFromIssue({
-      user: teamMember.user,
-      taskNumber: taskNumberAsNumber,
-      slug: slug as string,
-      controls,
-      ISO: ISO as ISO,
-    });
-  }
+  const { operation, controls, ISO } = body;
+  const params = {
+    user: teamMember.user,
+    taskNumber: taskNumberAsNumber,
+    slug: slug as string,
+    controls,
+    ISO,
+  };
 
-  if (operation === 'change') {
-    await changeControlInIssue({
-      user: teamMember.user,
-      taskNumber: taskNumberAsNumber,
-      slug: slug as string,
-      controls,
-      ISO: ISO as ISO,
-    });
+  switch (operation) {
+    case 'add':
+      await addControlsToIssue(params);
+      break;
+    case 'remove':
+      await removeControlsFromIssue(params);
+      break;
+    case 'change':
+      await changeControlInIssue(params);
+      break;
   }
 
   return res.status(200).json({ data: {}, error: null });

@@ -17,49 +17,71 @@ const riskSecuritySchema = z.enum([
   'extreme',
 ]);
 
-export const piaRiskSchema: ZodType<PiaRisk> = z.tuple([
-  z
-    .object({
-      isDataProcessingNecessary: z.enum(['necessary', 'unnecessary']),
-      isDataProcessingNecessaryAssessment: z.string(),
-      isProportionalToPurpose: z.enum(['proportional', 'not_proportional']),
-      isProportionalToPurposeAssessment: z.string(),
-    })
-    .passthrough(),
-  z
-    .object({
-      confidentialityRiskProbability: riskProbabilitySchema,
-      confidentialityRiskSecurity: riskSecuritySchema,
-      confidentialityAssessment: z.string(),
-    })
-    .passthrough(),
-  z
-    .object({
-      availabilityRiskProbability: riskProbabilitySchema,
-      availabilityRiskSecurity: riskSecuritySchema,
-      availabilityAssessment: z.string(),
-    })
-    .passthrough(),
-  z
-    .object({
-      transparencyRiskProbability: riskProbabilitySchema,
-      transparencyRiskSecurity: riskSecuritySchema,
-      transparencyAssessment: z.string(),
-    })
-    .passthrough(),
-  z
-    .object({
-      guarantees: z.string(),
-      securityMeasures: z.string(),
-      securityCompliance: z.string(),
-      dealingWithResidualRisk: z.enum([
-        'acceptable',
-        'acceptable_with_conditions',
-        'not_acceptable',
-      ]),
-      dealingWithResidualRiskAssessment: z.string(),
-      supervisoryAuthorityInvolvement: z.enum(['yes', 'no']),
-    })
-    .passthrough()
-    .nullable(),
+const processingSchema = z
+  .object({
+    isDataProcessingNecessary: z.enum(['necessary', 'unnecessary']),
+    isDataProcessingNecessaryAssessment: z.string(),
+    isProportionalToPurpose: z.enum(['proportional', 'not_proportional']),
+    isProportionalToPurposeAssessment: z.string(),
+  })
+  .passthrough();
+
+const confidentialitySchema = z
+  .object({
+    confidentialityRiskProbability: riskProbabilitySchema,
+    confidentialityRiskSecurity: riskSecuritySchema,
+    confidentialityAssessment: z.string(),
+  })
+  .passthrough();
+
+const availabilitySchema = z
+  .object({
+    availabilityRiskProbability: riskProbabilitySchema,
+    availabilityRiskSecurity: riskSecuritySchema,
+    availabilityAssessment: z.string(),
+  })
+  .passthrough();
+
+const transparencySchema = z
+  .object({
+    transparencyRiskProbability: riskProbabilitySchema,
+    transparencyRiskSecurity: riskSecuritySchema,
+    transparencyAssessment: z.string(),
+  })
+  .passthrough();
+
+const correctiveMeasuresSchema = z
+  .object({
+    guarantees: z.string(),
+    securityMeasures: z.string(),
+    securityCompliance: z.string(),
+    dealingWithResidualRisk: z.enum([
+      'acceptable',
+      'acceptable_with_conditions',
+      'not_acceptable',
+    ]),
+    dealingWithResidualRiskAssessment: z.string(),
+    supervisoryAuthorityInvolvement: z.enum(['yes', 'no']),
+  })
+  .passthrough()
+  .nullable();
+
+const piaCoreRiskSchema = z.tuple([
+  processingSchema,
+  confidentialitySchema,
+  availabilitySchema,
+  transparencySchema,
+]);
+
+const piaFullRiskSchema = z.tuple([
+  processingSchema,
+  confidentialitySchema,
+  availabilitySchema,
+  transparencySchema,
+  correctiveMeasuresSchema,
+]);
+
+export const piaRiskSchema: ZodType<PiaRisk> = z.union([
+  piaFullRiskSchema,
+  piaCoreRiskSchema.transform((risk) => [...risk, null] as PiaRisk),
 ]);

@@ -37,7 +37,7 @@ describe('GET /api/teams/[slug]/csc/[iso]', () => {
 
     const req = createMockReq({
       method: 'GET',
-      query: { slug: 'test-team', iso: 'ISO/IEC 27001:2022' },
+      query: { slug: 'test-team', iso: 'iso-2022' },
     });
     const res = createMockRes();
 
@@ -47,7 +47,7 @@ describe('GET /api/teams/[slug]/csc/[iso]', () => {
     expect(res._getBody().data.statuses).toEqual(statuses);
     expect(getCscStatusesBySlugAndIso).toHaveBeenCalledWith(
       'test-team',
-      'ISO/IEC 27001:2022'
+      'iso-2022'
     );
   });
 
@@ -56,7 +56,7 @@ describe('GET /api/teams/[slug]/csc/[iso]', () => {
 
     const req = createMockReq({
       method: 'GET',
-      query: { slug: 'test-team', iso: 'GDPR' },
+      query: { slug: 'test-team', iso: 'gdpr' },
     });
     const res = createMockRes();
 
@@ -66,10 +66,24 @@ describe('GET /api/teams/[slug]/csc/[iso]', () => {
     expect(res._getBody().data.statuses).toEqual({});
   });
 
+  it('rejects an invalid framework before querying statuses', async () => {
+    const req = createMockReq({
+      method: 'GET',
+      query: { slug: 'test-team', iso: 'ISO/IEC 27001:2022' },
+    });
+    const res = createMockRes();
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(400);
+    expect(res._getBody().error.message).toBe('Invalid ISO framework');
+    expect(getCscStatusesBySlugAndIso).not.toHaveBeenCalled();
+  });
+
   it('returns 405 for PUT', async () => {
     const req = createMockReq({
       method: 'PUT',
-      query: { slug: 'test-team', iso: 'ISO/IEC 27001:2022' },
+      query: { slug: 'test-team', iso: 'iso-2022' },
     });
     const res = createMockRes();
 
@@ -81,7 +95,7 @@ describe('GET /api/teams/[slug]/csc/[iso]', () => {
   it('returns 405 for DELETE', async () => {
     const req = createMockReq({
       method: 'DELETE',
-      query: { slug: 'test-team', iso: 'ISO/IEC 27001:2022' },
+      query: { slug: 'test-team', iso: 'iso-2022' },
     });
     const res = createMockRes();
 

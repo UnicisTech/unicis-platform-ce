@@ -3,6 +3,7 @@ import {
   asJsonObject,
   getAllCscControls,
   getCscControls,
+  getPiaRisk,
   getRpaProcedure,
   getTaskAuditLogs,
   getTaskModules,
@@ -17,6 +18,14 @@ import {
   isJsonObject,
   parseTaskProperties,
   parseTeamProperties,
+  cscControlsWriteRequestSchema,
+  cscIsoWriteRequestSchema,
+  cscStatusWriteRequestSchema,
+  piaWriteRequestSchema,
+  rmWriteRequestSchema,
+  rpaWriteRequestSchema,
+  tiaWriteRequestSchema,
+  taskMetadataWriteRequestSchema,
   appendTaskAuditLogs,
   deleteTaskProperty,
   setTaskProperty,
@@ -239,6 +248,143 @@ describe('JSON properties boundary', () => {
 
     expect(isJsonObject(value)).toBe(true);
     expect(asJsonObject(value)).toBe(value);
+  });
+});
+
+describe('properties API request schemas', () => {
+  it('prevents the generic task endpoint from bypassing property writers', () => {
+    const result = taskMetadataWriteRequestSchema.safeParse({
+      data: {
+        title: 'Allowed task metadata',
+        properties: { rm_risk: [] },
+      },
+    });
+
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error.issues[0]?.path).toEqual(['data', 'properties']);
+    }
+  });
+
+  it('accepts valid module writes with an empty previous value', () => {
+    expect(
+      rpaWriteRequestSchema.safeParse({
+        prevProcedure: [],
+        nextProcedure: validRpaProcedure,
+      }).success
+    ).toBe(true);
+    expect(
+      tiaWriteRequestSchema.safeParse({
+        prevProcedure: [],
+        nextProcedure: validShortTiaProcedure,
+      }).success
+    ).toBe(true);
+    expect(
+      piaWriteRequestSchema.safeParse({
+        prevRisk: [],
+        nextRisk: validPiaRisk,
+      }).success
+    ).toBe(true);
+    expect(
+      rmWriteRequestSchema.safeParse({
+        prevRisk: [],
+        nextRisk: validRmRisk,
+      }).success
+    ).toBe(true);
+  });
+
+  it('normalizes a four-step PIA to the canonical nullable fifth step', () => {
+    const fourStepPia = validPiaRisk.slice(0, 4);
+    const result = piaWriteRequestSchema.safeParse({
+      prevRisk: [],
+      nextRisk: fourStepPia,
+    });
+
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.nextRisk).toEqual([...fourStepPia, null]);
+    }
+    expect(getPiaRisk({ pia_risk: fourStepPia })).toEqual([
+      ...fourStepPia,
+      null,
+    ]);
+  });
+
+  it('accepts a validated previous value for module updates', () => {
+    expect(
+      rpaWriteRequestSchema.safeParse({
+        prevProcedure: validRpaProcedure,
+        nextProcedure: validRpaProcedure,
+      }).success
+    ).toBe(true);
+    expect(
+      tiaWriteRequestSchema.safeParse({
+        prevProcedure: validTiaProcedure,
+        nextProcedure: validShortTiaProcedure,
+      }).success
+    ).toBe(true);
+  });
+
+  it.each([
+    ['RPA', rpaWriteRequestSchema, 'nextProcedure'],
+    ['TIA', tiaWriteRequestSchema, 'nextProcedure'],
+    ['PIA', piaWriteRequestSchema, 'nextRisk'],
+    ['RM', rmWriteRequestSchema, 'nextRisk'],
+  ])('rejects a malformed %s payload', (_name, schema, nextProperty) => {
+    const result = schema.safeParse({
+      prevProcedure: [],
+      prevRisk: [],
+      [nextProperty]: [{ malformed: true }],
+    });
+
+    expect(result.success).toBe(false);
+  });
+
+  it('enforces operation-specific CSC control counts', () => {
+    expect(
+      cscControlsWriteRequestSchema.safeParse({
+        operation: 'add',
+        controls: ['control-1'],
+        ISO: 'mvsp',
+      }).success
+    ).toBe(true);
+    expect(
+      cscControlsWriteRequestSchema.safeParse({
+        operation: 'change',
+        controls: ['old-control', 'new-control'],
+        ISO: 'iso-2022',
+      }).success
+    ).toBe(true);
+    expect(
+      cscControlsWriteRequestSchema.safeParse({
+        operation: 'change',
+        controls: ['only-one-control'],
+        ISO: 'iso-2022',
+      }).success
+    ).toBe(false);
+  });
+
+  it('validates team CSC status and framework writes', () => {
+    expect(
+      cscStatusWriteRequestSchema.safeParse({
+        control: 'control-1',
+        value: 'well-defined',
+        framework: 'mvsp',
+      }).success
+    ).toBe(true);
+    expect(
+      cscStatusWriteRequestSchema.safeParse({
+        control: 'control-1',
+        value: 'invalid-status',
+        framework: 'mvsp',
+      }).success
+    ).toBe(false);
+    expect(cscIsoWriteRequestSchema.safeParse({ iso: ['mvsp'] }).success).toBe(
+      true
+    );
+    expect(
+      cscIsoWriteRequestSchema.safeParse({ iso: ['invalid-framework'] }).success
+    ).toBe(false);
   });
 });
 

@@ -4,6 +4,8 @@ import { throwIfNotAllowed } from 'models/user';
 import { deleteRisk, saveRisk } from 'models/pia';
 import { trackServerEvent } from '@/lib/matomo/server';
 import { MatomoEvent } from '@/lib/matomo/events';
+import { validateApiRequestBody } from '@/lib/api-validation';
+import { piaWriteRequestSchema } from '@/lib/properties';
 
 export default async function handler(
   req: NextApiRequest,
@@ -41,7 +43,13 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const { prevRisk, nextRisk } = req.body;
+  const body = validateApiRequestBody(piaWriteRequestSchema, req.body, res);
+
+  if (!body) {
+    return;
+  }
+
+  const { prevRisk, nextRisk } = body;
 
   const task = await saveRisk({
     user: teamMember.user,

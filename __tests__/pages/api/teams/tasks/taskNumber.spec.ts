@@ -199,6 +199,22 @@ describe('PUT /api/teams/[slug]/tasks/[taskNumber]', () => {
     expect(res._getStatusCode()).toBe(400);
   });
 
+  it('rejects direct properties updates through the generic task endpoint', async () => {
+    const req = createMockReq({
+      method: 'PUT',
+      query: { slug: 'test-team', taskNumber: '5' },
+      body: { data: { properties: { rm_risk: [] } } },
+    });
+    const res = createMockRes();
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(400);
+    expect(res._getBody().error.issues[0].path).toEqual(['data', 'properties']);
+    expect(getTaskBySlugAndNumber).not.toHaveBeenCalled();
+    expect(updateTask).not.toHaveBeenCalled();
+  });
+
   it('returns 404 when task not found', async () => {
     (getTaskBySlugAndNumber as jest.Mock).mockResolvedValue(null);
 

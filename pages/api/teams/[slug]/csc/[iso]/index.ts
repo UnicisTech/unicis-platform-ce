@@ -2,7 +2,8 @@ import { getCscStatusesBySlugAndIso } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
-import { ISO } from 'types';
+import { validateApiInput } from '@/lib/api-validation';
+import { isoSchema } from '@/lib/properties';
 
 export default async function handler(
   req: NextApiRequest,
@@ -34,8 +35,18 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
   throwIfNotAllowed(teamMember, 'team', 'read');
 
   const { slug, iso } = req.query;
+  const parsedIso = validateApiInput(
+    isoSchema,
+    iso,
+    res,
+    'Invalid ISO framework'
+  );
 
-  const statuses = await getCscStatusesBySlugAndIso(slug as string, iso as ISO);
+  if (!parsedIso) {
+    return;
+  }
+
+  const statuses = await getCscStatusesBySlugAndIso(slug as string, parsedIso);
 
   return res.status(200).json({ data: { statuses: statuses }, error: null });
 };

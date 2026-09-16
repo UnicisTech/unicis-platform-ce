@@ -5,6 +5,8 @@ import { deleteRisk, saveRisk } from 'models/rm';
 import { calculateRiskRating, getRiskLevelBucket } from '@/lib/rm/helpers';
 import { trackServerEvent } from '@/lib/matomo/server';
 import { MatomoEvent } from '@/lib/matomo/events';
+import { validateApiRequestBody } from '@/lib/api-validation';
+import { rmWriteRequestSchema } from '@/lib/properties';
 
 export default async function handler(
   req: NextApiRequest,
@@ -42,7 +44,13 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const { prevRisk, nextRisk } = req.body;
+  const body = validateApiRequestBody(rmWriteRequestSchema, req.body, res);
+
+  if (!body) {
+    return;
+  }
+
+  const { prevRisk, nextRisk } = body;
 
   const task = await saveRisk({
     user: teamMember.user,

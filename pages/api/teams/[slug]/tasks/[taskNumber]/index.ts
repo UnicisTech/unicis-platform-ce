@@ -17,6 +17,8 @@ import { NotificationType } from '@/generated/enums';
 import { isTaskPriority, statusLabels, priorityLabels } from '@/lib/tasks';
 import { trackServerEvent } from '@/lib/matomo/server';
 import { MatomoEvent } from '@/lib/matomo/events';
+import { validateApiRequestBody } from '@/lib/api-validation';
+import { taskMetadataWriteRequestSchema } from '@/lib/properties';
 
 export default async function handler(
   req: NextApiRequest,
@@ -90,6 +92,16 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
+  const body = validateApiRequestBody(
+    taskMetadataWriteRequestSchema,
+    req.body,
+    res
+  );
+
+  if (!body) {
+    return;
+  }
+
   const prevTask = await getTaskBySlugAndNumber(
     taskNumberAsNumber,
     slug as string,
@@ -102,7 +114,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const { data } = req.body;
+  const { data } = body;
   const sanitizedData = { ...data };
 
   if (typeof sanitizedData.description === 'string') {

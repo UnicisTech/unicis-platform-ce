@@ -4,6 +4,8 @@ import { MatomoEvent } from '@/lib/matomo/events';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
+import { validateApiRequestBody } from '@/lib/api-validation';
+import { tiaWriteRequestSchema } from '@/lib/properties';
 
 export default async function handler(
   req: NextApiRequest,
@@ -41,7 +43,13 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const { prevProcedure, nextProcedure } = req.body;
+  const body = validateApiRequestBody(tiaWriteRequestSchema, req.body, res);
+
+  if (!body) {
+    return;
+  }
+
+  const { prevProcedure, nextProcedure } = body;
 
   const task = await saveProcedure({
     user: teamMember.user,

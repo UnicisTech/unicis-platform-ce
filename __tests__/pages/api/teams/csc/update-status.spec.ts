@@ -40,7 +40,7 @@ describe('PUT /api/teams/[slug]/csc — update single control status', () => {
       body: {
         control: 'A.5.1',
         value: 'well-defined',
-        framework: 'ISO/IEC 27001:2022',
+        framework: 'iso-2022',
       },
     });
     const res = createMockRes();
@@ -53,7 +53,7 @@ describe('PUT /api/teams/[slug]/csc — update single control status', () => {
       slug: 'test-team',
       control: 'A.5.1',
       value: 'well-defined',
-      framework: 'ISO/IEC 27001:2022',
+      framework: 'iso-2022',
     });
   });
 
@@ -66,7 +66,7 @@ describe('PUT /api/teams/[slug]/csc — update single control status', () => {
       body: {
         control: 'B.7.3',
         value: 'continuously-improving',
-        framework: 'GDPR',
+        framework: 'gdpr',
       },
     });
     const res = createMockRes();
@@ -76,7 +76,7 @@ describe('PUT /api/teams/[slug]/csc — update single control status', () => {
     const call = (setCscStatus as jest.Mock).mock.calls[0][0];
     expect(call.control).toBe('B.7.3');
     expect(call.value).toBe('continuously-improving');
-    expect(call.framework).toBe('GDPR');
+    expect(call.framework).toBe('gdpr');
     expect(call.slug).toBe('test-team');
   });
 

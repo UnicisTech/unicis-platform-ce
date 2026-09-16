@@ -4,7 +4,8 @@ import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import { subscriptions } from '@/lib/subscriptions';
 import { Plan } from '@/generated/browser';
-import { ISO } from 'types';
+import { validateApiRequestBody } from '@/lib/api-validation';
+import { cscIsoWriteRequestSchema } from '@/lib/properties';
 
 export default async function handler(
   req: NextApiRequest,
@@ -44,7 +45,13 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
   throwIfNotAllowed(teamMember, 'team', 'update');
 
   const { slug } = req.query;
-  const { iso } = req.body as { iso: ISO[] };
+  const body = validateApiRequestBody(cscIsoWriteRequestSchema, req.body, res);
+
+  if (!body) {
+    return;
+  }
+
+  const { iso } = body;
   // TODO: improve .? logic, or migrate the db to make subscription mandatory
   const maxFrameworks =
     subscriptions?.[teamMember.team.subscription?.plan || Plan.COMMUNITY]

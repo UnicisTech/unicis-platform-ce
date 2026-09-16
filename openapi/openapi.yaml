@@ -474,8 +474,9 @@ components:
         controls:
           type: array
           items:
-            type: object
-          description: Array of control objects
+            type: string
+          minItems: 1
+          description: Control identifiers. The change operation requires exactly two items (old and new).
         ISO:
           type: string
           enum:
@@ -960,6 +961,8 @@ paths:
                   type: string
                   description: New status value
                   enum:
+                    - unknown
+                    - not-applicable
                     - not-performed
                     - performed-informally
                     - planned
@@ -969,8 +972,21 @@ paths:
                   example: well-defined
                 framework:
                   type: string
-                  description: ISO framework identifier
-                  example: 'ISO/IEC 27001:2022'
+                  enum:
+                    - mvsp
+                    - iso-2013
+                    - iso-2022
+                    - nistcsfv2
+                    - eunis2
+                    - gdpr
+                    - cisv81
+                    - soc2v2
+                    - c5_2020
+                    - owasp_asvs_v5
+                    - pcidss_v401
+                    - iso42001
+                  description: Canonical framework identifier
+                  example: iso-2022
       responses:
         '200':
           description: Status updated
@@ -989,6 +1005,8 @@ paths:
                         description: Full updated control-status map for the framework
                   error:
                     nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -1021,6 +1039,8 @@ paths:
                           $ref: '#/components/schemas/CscStatus'
                   error:
                     nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
