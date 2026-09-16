@@ -109,7 +109,7 @@ Returns: Confirmation.`,
       const task = await apiGet<Task>(
         `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
       );
-      const prevProcedure = task.properties?.rpa_procedure ?? [];
+      const prevProcedure = getRpaProcedure(task.properties) ?? [];
       await apiPost(`/api/teams/${slug}/tasks/${taskNumber}/rpa`, {
         prevProcedure,
         nextProcedure: procedure,
@@ -250,7 +250,7 @@ Returns: Confirmation.`,
       const task = await apiGet<Task>(
         `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
       );
-      const prevProcedure = task.properties?.tia_procedure ?? [];
+      const prevProcedure = getTiaProcedure(task.properties) ?? [];
       await apiPost(`/api/teams/${slug}/tasks/${taskNumber}/tia`, {
         prevProcedure,
         nextProcedure: procedure,
@@ -489,7 +489,7 @@ Returns: Confirmation.`,
       const task = await apiGet<Task>(
         `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
       );
-      const prevRisk = task.properties?.pia_risk ?? [];
+      const prevRisk = getPiaRisk(task.properties) ?? [];
       const nextRisk = [step0, step1, step2, step3, step4 ?? null];
       await apiPost(`/api/teams/${slug}/tasks/${taskNumber}/pia`, {
         prevRisk,

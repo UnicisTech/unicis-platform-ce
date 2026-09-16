@@ -6,10 +6,16 @@ import { getSession } from '@/lib/session';
 import { findOrCreateApp } from '@/lib/svix';
 import { Role } from '@/generated/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { ISO, TeamProperties } from 'types';
+import type { CscStatusesMap, ISO } from 'types';
 import { addSubscription } from './subscription';
 import { trackServerEvent } from '@/lib/matomo/server';
 import { MatomoEvent } from '@/lib/matomo/events';
+import {
+  getTeamCscIso,
+  getTeamCscStatuses,
+  parseTeamProperties,
+  setTeamProperty,
+} from '@/lib/properties';
 
 export const createTeam = async (param: {
   userEmail: string;
@@ -352,16 +358,17 @@ export const getCscStatusesBySlugAndIso = async (slug: string, iso: ISO) => {
     select: { properties: true },
   });
 
-  const teamProperties = (team?.properties as TeamProperties) || {};
   const cscStatusesProp = getCscStatusesProp(iso);
+  const teamProperties = parseTeamProperties(team.properties).properties;
+  const existingStatuses = teamProperties[cscStatusesProp];
 
-  if (teamProperties[cscStatusesProp]) {
+  if (existingStatuses) {
     // already exists → return it
-    return teamProperties[cscStatusesProp];
+    return existingStatuses;
   }
 
   // not found → initialize with "Unknown"
-  const initial: Record<string, string> = {};
+  const initial: CscStatusesMap = {};
   frameworks[iso].controls.forEach((control) => {
     initial[control.id] = 'unknown';
   });
@@ -369,10 +376,7 @@ export const getCscStatusesBySlugAndIso = async (slug: string, iso: ISO) => {
   await prisma.team.update({
     where: { slug },
     data: {
-      properties: {
-        ...teamProperties,
-        [cscStatusesProp]: initial,
-      },
+      properties: setTeamProperty(team.properties, cscStatusesProp, initial),
     },
   });
 
@@ -399,20 +403,20 @@ export const setCscStatus = async ({
     },
   });
 
-  const teamProperties = team ? (team.properties as TeamProperties) : {};
-
   const cscStatusesProp = getCscStatusesProp(framework);
-
-  const cscStatuses = { ...teamProperties[cscStatusesProp] };
+  const cscStatuses = {
+    ...getTeamCscStatuses(team?.properties, framework),
+  };
   cscStatuses[control] = value;
 
   await prisma.team.update({
     where: { slug: slug },
     data: {
-      properties: {
-        ...teamProperties,
-        [cscStatusesProp]: cscStatuses,
-      },
+      properties: setTeamProperty(
+        team?.properties,
+        cscStatusesProp,
+        cscStatuses
+      ),
     },
   });
 
@@ -429,19 +433,20 @@ export const getCscIso = async ({ slug }: { slug: string }): Promise<ISO[]> => {
     },
   });
 
-  const teamProperties = team ? (team.properties as TeamProperties) : {};
+  const currentIso = getTeamCscIso(team?.properties);
 
-  if (teamProperties?.csc_iso?.length) {
-    return teamProperties?.csc_iso;
+  if (currentIso.length) {
+    return currentIso;
   }
 
   // TODO: create enum form ISO type
   const initial = ['mvsp'] as ISO[];
 
-  const updatedProperties = {
-    ...teamProperties,
-    csc_iso: initial,
-  };
+  const updatedProperties = setTeamProperty(
+    team?.properties,
+    'csc_iso',
+    initial
+  );
 
   await prisma.team.update({
     where: { slug: slug },
@@ -469,12 +474,8 @@ export const setCscIso = async ({
     },
   });
 
-  const teamProperties = team ? (team.properties as TeamProperties) : {};
-
-  const updatedProperties = {
-    ...teamProperties,
-    csc_iso: iso,
-  };
+  const currentIso = getTeamCscIso(team?.properties);
+  const updatedProperties = setTeamProperty(team?.properties, 'csc_iso', iso);
 
   await prisma.team.update({
     where: { slug: slug },
@@ -485,7 +486,7 @@ export const setCscIso = async ({
 
   // Activation funnel: a team's first explicit framework selection, as
   // opposed to the implicit 'mvps' default applied in getCscIso().
-  if (!teamProperties?.csc_iso?.length && iso.length > 0) {
+  if (!currentIso.length && iso.length > 0) {
     trackServerEvent(MatomoEvent.FirstFrameworkSelected);
   }
 

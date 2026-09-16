@@ -2,7 +2,12 @@ import { fields } from '@/lib/rpa';
 import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
 import { RpaProcedureInterface } from 'types';
-import { RpaAuditLog, Diff, TaskProperties } from 'types';
+import { RpaAuditLog, Diff } from 'types';
+import {
+  appendTaskAuditLogs,
+  deleteTaskProperty,
+  setTaskProperty,
+} from '@/lib/properties';
 
 export const deleteProcedure = async (params: {
   user: Session['user'];
@@ -26,17 +31,14 @@ export const deleteProcedure = async (params: {
   }
 
   const taskId = task.id;
-  const taskProperties = task?.properties as TaskProperties;
-  delete taskProperties.rpa_procedure;
+  const taskProperties = deleteTaskProperty(task.properties, 'rpa_procedure');
 
   const updatedTask = await prisma.task.update({
     where: {
       id: taskId,
     },
     data: {
-      properties: {
-        ...taskProperties,
-      },
+      properties: taskProperties,
     },
   });
 
@@ -73,17 +75,18 @@ export const saveProcedure = async (params: {
   }
 
   const taskId = task.id;
-  const taskProperties = task?.properties as TaskProperties;
-  taskProperties.rpa_procedure = nextProcedure;
+  const taskProperties = setTaskProperty(
+    task.properties,
+    'rpa_procedure',
+    nextProcedure
+  );
 
   const updatedTask = await prisma.task.update({
     where: {
       id: taskId,
     },
     data: {
-      properties: {
-        ...taskProperties,
-      },
+      properties: taskProperties,
     },
   });
 
@@ -100,7 +103,7 @@ export const saveProcedure = async (params: {
 
 export const addAuditLogs = async (params: {
   taskId: number;
-  taskProperties: TaskProperties;
+  taskProperties: unknown;
   user: Session['user'];
   prevProcedure: RpaProcedureInterface | [];
   nextProcedure: RpaProcedureInterface | [];
@@ -122,24 +125,18 @@ export const addAuditLogs = async (params: {
     );
   }
 
-  let rpa_audit_logs = taskProperties?.rpa_audit_logs;
-
-  if (typeof rpa_audit_logs === 'undefined') {
-    rpa_audit_logs = [...newAuditItems];
-  } else {
-    rpa_audit_logs = [...rpa_audit_logs, ...newAuditItems];
-  }
-
-  taskProperties.rpa_audit_logs = rpa_audit_logs;
+  const updatedProperties = appendTaskAuditLogs(
+    taskProperties,
+    'rpa_audit_logs',
+    newAuditItems
+  );
 
   await prisma.task.update({
     where: {
       id: taskId,
     },
     data: {
-      properties: {
-        ...taskProperties,
-      },
+      properties: updatedProperties,
     },
   });
 };
@@ -150,7 +147,7 @@ export const addAuditLog = async (params: {
   event: string;
   prevValue: string | null;
   nextValue: string;
-  taskProperties: TaskProperties;
+  taskProperties: unknown;
 }) => {
   const { taskId, user, event, prevValue, nextValue, taskProperties } = params;
 
@@ -164,24 +161,18 @@ export const addAuditLog = async (params: {
     },
   };
 
-  let csc_audit_logs = taskProperties?.csc_audit_logs;
-
-  if (typeof csc_audit_logs === 'undefined') {
-    csc_audit_logs = [auditLog];
-  } else {
-    csc_audit_logs = [...csc_audit_logs, auditLog];
-  }
-
-  taskProperties.csc_audit_logs = csc_audit_logs;
+  const updatedProperties = appendTaskAuditLogs(
+    taskProperties,
+    'csc_audit_logs',
+    [auditLog]
+  );
 
   await prisma.task.update({
     where: {
       id: taskId,
     },
     data: {
-      properties: {
-        ...taskProperties,
-      },
+      properties: updatedProperties,
     },
   });
 };

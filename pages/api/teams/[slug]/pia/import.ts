@@ -3,12 +3,8 @@ import { throwIfNoTeamAccess } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNotAllowed } from 'models/user';
 import { prisma } from '@/lib/prisma';
-import type {
-  TaskProperties,
-  PiaRisk,
-  RiskProbability,
-  RiskSecurity,
-} from 'types';
+import type { PiaRisk, RiskProbability, RiskSecurity } from 'types';
+import { setTaskProperty } from '@/lib/properties';
 
 const VALID_PROBABILITIES = [
   'rare',
@@ -147,12 +143,11 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       null,
     ];
 
-    const taskProperties = (task.properties as TaskProperties) || {};
-    taskProperties.pia_risk = risk;
+    const taskProperties = setTaskProperty(task.properties, 'pia_risk', risk);
 
     await prisma.task.update({
       where: { id: task.id },
-      data: { properties: { ...taskProperties } },
+      data: { properties: taskProperties },
     });
 
     count++;

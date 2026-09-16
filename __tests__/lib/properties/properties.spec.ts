@@ -17,6 +17,10 @@ import {
   isJsonObject,
   parseTaskProperties,
   parseTeamProperties,
+  appendTaskAuditLogs,
+  deleteTaskProperty,
+  setTaskProperty,
+  setTeamProperty,
 } from '@/lib/properties';
 import {
   ISO_VALUES,
@@ -384,5 +388,76 @@ describe('team properties parser and selectors', () => {
     expect(result.properties.csc_statuses_mvsp).toBeUndefined();
     expect(result.raw.csc_iso).toEqual(['not-a-framework']);
     expect(result.issues).toHaveLength(2);
+  });
+});
+
+describe('properties writers', () => {
+  it('sets a task property immutably and preserves raw sibling values', () => {
+    const source = {
+      custom: { preserved: true },
+      rm_risk: [{ malformed: true }],
+    };
+
+    const result = setTaskProperty(source, 'rpa_procedure', validRpaProcedure);
+
+    expect(result).toEqual({
+      ...source,
+      rpa_procedure: validRpaProcedure,
+    });
+    expect(source).not.toHaveProperty('rpa_procedure');
+  });
+
+  it('deletes a task property without mutating the source', () => {
+    const source = {
+      custom: true,
+      rpa_procedure: validRpaProcedure,
+    };
+
+    const result = deleteTaskProperty(source, 'rpa_procedure');
+
+    expect(result).toEqual({ custom: true });
+    expect(source.rpa_procedure).toEqual(validRpaProcedure);
+  });
+
+  it('appends to audit arrays without discarding legacy entries', () => {
+    const source = { task_audit_logs: [validAuditLog], custom: true };
+    const secondLog = { ...validAuditLog, date: validAuditLog.date + 1 };
+    const legacyLog = { legacy: true };
+
+    expect(appendTaskAuditLogs(source, 'task_audit_logs', [secondLog])).toEqual(
+      {
+        task_audit_logs: [validAuditLog, secondLog],
+        custom: true,
+      }
+    );
+    expect(
+      appendTaskAuditLogs(
+        { task_audit_logs: [legacyLog], custom: true },
+        'task_audit_logs',
+        [validAuditLog]
+      )
+    ).toEqual({
+      task_audit_logs: [legacyLog, validAuditLog],
+      custom: true,
+    });
+  });
+
+  it('starts a new audit collection when the stored value is not an array', () => {
+    expect(
+      appendTaskAuditLogs(
+        { task_audit_logs: 'malformed', custom: true },
+        'task_audit_logs',
+        [validAuditLog]
+      )
+    ).toEqual({ task_audit_logs: [validAuditLog], custom: true });
+  });
+
+  it('sets a team property immutably and preserves unknown keys', () => {
+    const source = { custom: true, csc_iso: ['mvsp'] };
+
+    const result = setTeamProperty(source, 'csc_iso', ['iso-2022']);
+
+    expect(result).toEqual({ custom: true, csc_iso: ['iso-2022'] });
+    expect(source.csc_iso).toEqual(['mvsp']);
   });
 });

@@ -1,6 +1,6 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
-import { apiGet, apiPost, apiDelete, Task, RmRisk } from '../services/api.js';
+import { apiGet, apiPost, apiDelete, Task } from '../services/api.js';
 import { getRmRisk } from '../task-properties.js';
 
 export function registerRiskTools(server: McpServer): void {
@@ -150,7 +150,7 @@ Returns: Confirmation.`,
       const task = await apiGet<Task>(
         `/api/teams/${slug}/tasks/${taskNumber}?includeComments=false`
       );
-      const prevRisk = (task.properties?.rm_risk as RmRisk[]) ?? [];
+      const prevRisk = getRmRisk(task.properties) ?? [];
       const nextRisk = [risk, treatment];
       await apiPost(`/api/teams/${slug}/tasks/${taskNumber}/rm`, {
         prevRisk,

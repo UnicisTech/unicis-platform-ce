@@ -12,7 +12,6 @@ import { getTeamRecipientsBySlug } from '@/lib/notifications/recipients';
 import { NotificationType } from '@/generated/enums';
 import { prisma } from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { TaskProperties } from 'types';
 
 const validStatuses = new Set<string>(statuses);
 
@@ -183,8 +182,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
           duedate: prev.duedate,
           description: prev.description,
         },
-        taskProperties: ((prev.properties as TaskProperties) ||
-          {}) as TaskProperties,
+        taskProperties: prev.properties,
       });
     }
 

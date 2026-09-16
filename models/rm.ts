@@ -1,12 +1,12 @@
 import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
-import type {
-  RMProcedureInterface,
-  TaskProperties,
-  AuditLog,
-  Diff,
-} from 'types';
+import type { RMProcedureInterface, AuditLog, Diff } from 'types';
 import { fields } from '@/lib/rm';
+import {
+  appendTaskAuditLogs,
+  deleteTaskProperty,
+  setTaskProperty,
+} from '@/lib/properties';
 
 export const saveRisk = async (params: {
   user: Session['user'];
@@ -30,17 +30,14 @@ export const saveRisk = async (params: {
   }
 
   const taskId = task.id;
-  const taskProperties = task?.properties as TaskProperties;
-  taskProperties.rm_risk = nextRisk;
+  const taskProperties = setTaskProperty(task.properties, 'rm_risk', nextRisk);
 
   const updatedTask = await prisma.task.update({
     where: {
       id: taskId,
     },
     data: {
-      properties: {
-        ...taskProperties,
-      },
+      properties: taskProperties,
     },
   });
 
@@ -77,17 +74,14 @@ export const deleteRisk = async (params: {
   }
 
   const taskId = task.id;
-  const taskProperties = task?.properties as TaskProperties;
-  delete taskProperties.rm_risk;
+  const taskProperties = deleteTaskProperty(task.properties, 'rm_risk');
 
   const updatedTask = await prisma.task.update({
     where: {
       id: taskId,
     },
     data: {
-      properties: {
-        ...taskProperties,
-      },
+      properties: taskProperties,
     },
   });
 
@@ -104,7 +98,7 @@ export const deleteRisk = async (params: {
 
 export const addAuditLogs = async (params: {
   taskId: number;
-  taskProperties: TaskProperties;
+  taskProperties: unknown;
   user: Session['user'];
   prevRisk: RMProcedureInterface | [];
   nextRisk: RMProcedureInterface | [];
@@ -125,24 +119,18 @@ export const addAuditLogs = async (params: {
     );
   }
 
-  let rm_audit_logs = taskProperties?.rm_audit_logs;
-
-  if (typeof rm_audit_logs === 'undefined') {
-    rm_audit_logs = [...newAuditItems];
-  } else {
-    rm_audit_logs = [...rm_audit_logs, ...newAuditItems];
-  }
-
-  taskProperties.rm_audit_logs = rm_audit_logs;
+  const updatedProperties = appendTaskAuditLogs(
+    taskProperties,
+    'rm_audit_logs',
+    newAuditItems
+  );
 
   await prisma.task.update({
     where: {
       id: taskId,
     },
     data: {
-      properties: {
-        ...taskProperties,
-      },
+      properties: updatedProperties,
     },
   });
 };

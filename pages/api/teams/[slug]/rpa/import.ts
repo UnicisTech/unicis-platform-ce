@@ -3,7 +3,8 @@ import { throwIfNoTeamAccess } from 'models/team';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { throwIfNotAllowed } from 'models/user';
 import { prisma } from '@/lib/prisma';
-import type { TaskProperties, RpaProcedureInterface } from 'types';
+import type { RpaProcedureInterface } from 'types';
+import { setTaskProperty } from '@/lib/properties';
 
 interface ImportRpaRow {
   title: string;
@@ -124,12 +125,15 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     ];
 
-    const taskProperties = (task.properties as TaskProperties) || {};
-    taskProperties.rpa_procedure = procedure;
+    const taskProperties = setTaskProperty(
+      task.properties,
+      'rpa_procedure',
+      procedure
+    );
 
     await prisma.task.update({
       where: { id: task.id },
-      data: { properties: { ...taskProperties } },
+      data: { properties: taskProperties },
     });
 
     count++;

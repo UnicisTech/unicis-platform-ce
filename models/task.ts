@@ -1,8 +1,9 @@
 import type { Prisma } from '@/generated/client';
 import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
-import type { AuditLog, TaskProperties } from 'types';
+import type { AuditLog } from 'types';
 import { DEFAULT_TASK_PRIORITY, type TaskPriority } from '@/lib/tasks';
+import { appendTaskAuditLogs } from '@/lib/properties';
 
 export type TaskReorderInput = {
   taskNumber: number;
@@ -293,7 +294,7 @@ export const addTaskAuditLogs = async (params: {
     duedate: any;
     description: string | null;
   };
-  taskProperties: TaskProperties;
+  taskProperties: unknown;
 }) => {
   const { taskId, user, prevTask, nextTask, taskProperties } = params;
 
@@ -319,13 +320,16 @@ export const addTaskAuditLogs = async (params: {
 
   if (newLogs.length === 0) return;
 
-  const existing = taskProperties?.task_audit_logs || [];
-  taskProperties.task_audit_logs = [...existing, ...newLogs];
+  const updatedProperties = appendTaskAuditLogs(
+    taskProperties,
+    'task_audit_logs',
+    newLogs
+  );
 
   await prisma.task.update({
     where: { id: taskId },
     data: {
-      properties: { ...taskProperties },
+      properties: updatedProperties,
     },
   });
 };

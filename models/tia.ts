@@ -1,8 +1,13 @@
 import { fields } from '@/lib/tia';
 import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
-import { StoredTiaProcedureInterface, TaskProperties } from 'types';
+import { StoredTiaProcedureInterface } from 'types';
 import { TiaAuditLog, Diff } from 'types';
+import {
+  appendTaskAuditLogs,
+  deleteTaskProperty,
+  setTaskProperty,
+} from '@/lib/properties';
 
 export const deleteProcedure = async (params: {
   user: Session['user'];
@@ -26,17 +31,14 @@ export const deleteProcedure = async (params: {
   }
 
   const taskId = task.id;
-  const taskProperties = task?.properties as TaskProperties;
-  delete taskProperties.tia_procedure;
+  const taskProperties = deleteTaskProperty(task.properties, 'tia_procedure');
 
   const updatedTask = await prisma.task.update({
     where: {
       id: taskId,
     },
     data: {
-      properties: {
-        ...taskProperties,
-      },
+      properties: taskProperties,
     },
   });
 
@@ -73,17 +75,18 @@ export const saveProcedure = async (params: {
   }
 
   const taskId = task.id;
-  const taskProperties = task?.properties as TaskProperties;
-  taskProperties.tia_procedure = nextProcedure;
+  const taskProperties = setTaskProperty(
+    task.properties,
+    'tia_procedure',
+    nextProcedure
+  );
 
   const updatedTask = await prisma.task.update({
     where: {
       id: taskId,
     },
     data: {
-      properties: {
-        ...taskProperties,
-      },
+      properties: taskProperties,
     },
   });
 
@@ -100,7 +103,7 @@ export const saveProcedure = async (params: {
 
 export const addAuditLogs = async (params: {
   taskId: number;
-  taskProperties: TaskProperties;
+  taskProperties: unknown;
   user: Session['user'];
   prevProcedure: StoredTiaProcedureInterface | [];
   nextProcedure: StoredTiaProcedureInterface | [];
@@ -122,24 +125,18 @@ export const addAuditLogs = async (params: {
     );
   }
 
-  let tia_audit_logs = taskProperties?.tia_audit_logs;
-
-  if (typeof tia_audit_logs === 'undefined') {
-    tia_audit_logs = [...newAuditItems];
-  } else {
-    tia_audit_logs = [...tia_audit_logs, ...newAuditItems];
-  }
-
-  taskProperties.tia_audit_logs = tia_audit_logs;
+  const updatedProperties = appendTaskAuditLogs(
+    taskProperties,
+    'tia_audit_logs',
+    newAuditItems
+  );
 
   await prisma.task.update({
     where: {
       id: taskId,
     },
     data: {
-      properties: {
-        ...taskProperties,
-      },
+      properties: updatedProperties,
     },
   });
 };

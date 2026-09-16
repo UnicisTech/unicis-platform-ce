@@ -14,7 +14,6 @@ import { serializeForApi } from '@/lib/serialize';
 import { notificationService } from '@/lib/notifications/notification-service';
 import { getTeamRecipientsBySlug } from '@/lib/notifications/recipients';
 import { NotificationType } from '@/generated/enums';
-import type { TaskProperties } from 'types';
 import { isTaskPriority, statusLabels, priorityLabels } from '@/lib/tasks';
 import { trackServerEvent } from '@/lib/matomo/server';
 import { MatomoEvent } from '@/lib/matomo/events';
@@ -166,7 +165,7 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse) => {
       duedate: task.duedate,
       description: task.description,
     },
-    taskProperties: (task.properties || {}) as TaskProperties,
+    taskProperties: task.properties,
   });
 
   await sendEvent(teamMember.teamId, 'task.updated', task);
