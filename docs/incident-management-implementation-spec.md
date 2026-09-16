@@ -1,6 +1,6 @@
 # Unicis Platform — Incident Management Module (Implementation Spec)
 
-**Last updated:** 2026-07-02 | **Owner:** Platform Engineering | **Status:** Draft — spec only, no code written yet
+**Last updated:** 2026-09-16 | **Owner:** Platform Engineering | **Status:** Draft — spec only, no code written yet
 
 **Source material:**
 
@@ -47,7 +47,7 @@ These resolve ambiguities between OSCRAT's standalone-entity model and Unicis's 
 
 ### 3.1 No new Prisma model, no migration
 
-Like RM/PIA/TIA/RPA/CSC, the incident record lives entirely inside `Task.properties` (already `Json`). **No `prisma/schema.prisma` changes and no migration are required.** This is a deliberate parity choice with the existing four modules, all of which avoid dedicated tables for the same reason: one Task ↔ one module record, audit history stored alongside it in the same JSON blob.
+Like RM/PIA/TIA/RPA/CSC, the incident record lives entirely inside `Task.properties` (already `Json`). **No `prisma/schema.prisma` changes and no migration are required.** This is a deliberate parity choice with the existing modules. The implementation must follow [`json-properties-architecture.md`](./json-properties-architecture.md): runtime validation at read/API boundaries, immutable writers, and one atomic module-plus-audit update in a Serializable transaction.
 
 ### 3.2 "Incident Name" and "unique ID number" map to existing Task fields — not new ones
 
@@ -187,8 +187,8 @@ export type TaskIncidentProperties = {
   incident_audit_logs?: AuditLog[];
 };
 
-export type TaskWithIncidentReport = Task & {
-  properties: {
+export type TaskWithIncidentReport = Omit<Task, 'properties'> & {
+  properties: TaskIncidentProperties & {
     incident_report: IncidentReportInterface;
   };
 };
@@ -206,7 +206,18 @@ export type TaskWithIncidentReport = Task & {
    TaskAuditLogProperties;
 ```
 
-### 4.3 `lib/tasks.ts` — register the module key
+### 4.3 Runtime properties contract
+
+The TypeScript type is not a runtime guarantee for Prisma JSON. Add:
+
+- `incidentReportSchema` and `incidentWriteRequestSchema` under `lib/properties/schemas/`;
+- `incident_report` and `incident_audit_logs` to the known schemas in `parseTaskProperties`;
+- `getIncidentReport`, `hasIncidentReport`, `taskHasIncidentReport`, and `getIncidentAuditLogs` to `lib/properties/selectors.ts`;
+- `incident_audit_logs` to `TaskAuditPropertyKey` in `lib/properties/writers.ts`.
+
+The request schema must validate `nextReport`. A client `prevReport` may remain temporarily for UI/analytics compatibility, but persistence and audit diffs must derive the previous value from the transaction read.
+
+### 4.4 `lib/properties/module-keys.ts` — register the module key
 
 ```diff
  export const taskModuleKeys = [
@@ -219,113 +230,94 @@ export type TaskWithIncidentReport = Task & {
  ] as const;
 ```
 
-`isTaskModuleKey` and `hasTaskModule` need no other changes — both are generic over `taskModuleKeys` (the `csc_controls` branch in `hasTaskModule` is a special case for CSC's multi-key structure and doesn't apply to `incident_report`, which follows the plain-key branch used by `rpa_procedure`/`tia_procedure`/`pia_risk`/`rm_risk`).
+`isTaskModuleKey` is derived from this list. Add an explicit `incident_report` branch to `hasTaskModule` and include it in `getTaskModules`, using `hasIncidentReport` / the parsed value. The selector switch is exhaustive; adding only the string key is not sufficient.
 
 ---
 
 ## 5. Business Logic — `models/incident.ts` (new file)
 
-Mirrors `models/rm.ts` exactly: `saveIncidentReport`, `deleteIncidentReport`, shared `addAuditLogs`, `getDiff`.
+Follow the current atomic module pattern used by `models/rm.ts`. The previous
+value is read inside the transaction, audit entries are appended immutably, and
+the report plus its logs are persisted in one update.
 
 ```ts
-import { prisma } from '@/lib/prisma';
 import type { Session } from 'next-auth';
-import type {
-  IncidentReportInterface,
-  TaskProperties,
-  AuditLog,
-  Diff,
-} from 'types';
+import type { IncidentReportInterface, AuditLog, Diff } from 'types';
 import { incidentAuditFields } from '@/lib/incident';
+import {
+  appendTaskAuditLogs,
+  deleteTaskProperty,
+  getIncidentReport,
+  setTaskProperty,
+} from '@/lib/properties';
+import { updateTaskPropertiesBySlugAndNumber } from 'models/properties';
 
 export const saveIncidentReport = async (params: {
   user: Session['user'];
   taskNumber: number;
   slug: string;
-  prevReport: IncidentReportInterface | null;
   nextReport: IncidentReportInterface;
 }) => {
-  const { user, taskNumber, slug, prevReport, nextReport } = params;
-  const task = await prisma.task.findFirst({
-    where: { taskNumber, team: { slug } },
+  const { user, taskNumber, slug, nextReport } = params;
+
+  return updateTaskPropertiesBySlugAndNumber({
+    taskNumber,
+    slug,
+    mutate: (properties) => {
+      const prevReport = getIncidentReport(properties) ?? null;
+      const nextProperties = setTaskProperty(
+        properties,
+        'incident_report',
+        nextReport
+      );
+      return appendTaskAuditLogs(
+        nextProperties,
+        'incident_audit_logs',
+        createAuditLogs(user, prevReport, nextReport)
+      );
+    },
   });
-  if (!task) return null;
-
-  const taskId = task.id;
-  const taskProperties = task.properties as TaskProperties;
-  taskProperties.incident_report = nextReport;
-
-  const updatedTask = await prisma.task.update({
-    where: { id: taskId },
-    data: { properties: { ...taskProperties } },
-  });
-
-  await addAuditLogs({ taskId, taskProperties, user, prevReport, nextReport });
-
-  return updatedTask;
 };
 
 export const deleteIncidentReport = async (params: {
   user: Session['user'];
   taskNumber: number;
   slug: string;
-  prevReport: IncidentReportInterface | null;
 }) => {
-  const { taskNumber, slug, user, prevReport } = params;
-  const task = await prisma.task.findFirst({
-    where: { taskNumber, team: { slug } },
+  const { taskNumber, slug, user } = params;
+
+  return updateTaskPropertiesBySlugAndNumber({
+    taskNumber,
+    slug,
+    mutate: (properties) => {
+      const prevReport = getIncidentReport(properties) ?? null;
+      const nextProperties = deleteTaskProperty(properties, 'incident_report');
+      return appendTaskAuditLogs(
+        nextProperties,
+        'incident_audit_logs',
+        createAuditLogs(user, prevReport, null)
+      );
+    },
   });
-  if (!task) return null;
-
-  const taskId = task.id;
-  const taskProperties = task.properties as TaskProperties;
-  delete taskProperties.incident_report;
-
-  const updatedTask = await prisma.task.update({
-    where: { id: taskId },
-    data: { properties: { ...taskProperties } },
-  });
-
-  await addAuditLogs({
-    taskId,
-    taskProperties,
-    user,
-    prevReport,
-    nextReport: null,
-  });
-
-  return updatedTask;
 };
 
-const addAuditLogs = async (params: {
-  taskId: number;
-  taskProperties: TaskProperties;
-  user: Session['user'];
-  prevReport: IncidentReportInterface | null;
-  nextReport: IncidentReportInterface | null;
-}) => {
-  const { taskId, taskProperties, user, prevReport, nextReport } = params;
-  const newAuditItems: AuditLog[] = [];
-
+const createAuditLogs = (
+  user: Session['user'],
+  prevReport: IncidentReportInterface | null,
+  nextReport: IncidentReportInterface | null
+): AuditLog[] => {
   if (!prevReport && nextReport) {
-    newAuditItems.push(generateChangeLog(user, 'created', null));
-  } else if (!nextReport) {
-    newAuditItems.push(generateChangeLog(user, 'deleted', null));
-  } else if (prevReport) {
-    getDiff(prevReport, nextReport).forEach((changeLog) =>
-      newAuditItems.push(generateChangeLog(user, 'updated', changeLog))
+    return [generateChangeLog(user, 'created', null)];
+  }
+  if (prevReport && !nextReport) {
+    return [generateChangeLog(user, 'deleted', null)];
+  }
+  if (prevReport && nextReport) {
+    return getDiff(prevReport, nextReport).map((diff) =>
+      generateChangeLog(user, 'updated', diff)
     );
   }
-
-  taskProperties.incident_audit_logs = [
-    ...(taskProperties.incident_audit_logs ?? []),
-    ...newAuditItems,
-  ];
-
-  await prisma.task.update({
-    where: { id: taskId },
-    data: { properties: { ...taskProperties } },
-  });
+  return [];
 };
 
 const generateChangeLog = (
@@ -343,13 +335,16 @@ export const getDiff = (
     if (JSON.stringify(prev[field]) !== JSON.stringify(next[field])) {
       diff.push({
         field,
-        prevValue: prev[field] as string | string[] | undefined,
-        nextValue: next[field] as string | string[],
+        prevValue: formatAuditValue(prev[field]),
+        nextValue: formatAuditValue(next[field]),
       });
     }
   }
   return diff;
 };
+
+const formatAuditValue = (value: unknown): string =>
+  typeof value === 'string' ? value : JSON.stringify(value) ?? '';
 ```
 
 `lib/incident/index.ts` exports `incidentAuditFields` (the list of `IncidentReportInterface` keys tracked for diffs — same role as RM's `fields` export from `lib/rm/index.ts`) and `steps` (the 4 dialog step keys, §8.2).
@@ -367,6 +362,8 @@ import { throwIfNotAllowed } from 'models/user';
 import { deleteIncidentReport, saveIncidentReport } from 'models/incident';
 import { trackServerEvent } from '@/lib/matomo/server';
 import { MatomoEvent } from '@/lib/matomo/events';
+import { validateApiRequestBody } from '@/lib/api-validation';
+import { incidentWriteRequestSchema } from '@/lib/properties';
 
 export default async function handler(
   req: NextApiRequest,
@@ -395,13 +392,19 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(400).json({ error: { message: 'Invalid task number' } });
   }
 
-  const { prevReport, nextReport } = req.body;
+  const body = validateApiRequestBody(
+    incidentWriteRequestSchema,
+    req.body,
+    res
+  );
+  if (!body) return;
+
+  const { prevReport, nextReport } = body;
 
   const task = await saveIncidentReport({
     user: teamMember.user,
     taskNumber,
     slug: req.query.slug as string,
-    prevReport,
     nextReport,
   });
 
@@ -432,7 +435,6 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
     user: teamMember.user,
     taskNumber,
     slug: req.query.slug as string,
-    prevReport: req.body?.prevReport ?? null,
   });
 
   if (!task) {
@@ -447,11 +449,18 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
 
 > `MatomoEvent.IncidentCreated` / `IncidentUpdated` are new enum members to add to `lib/matomo/events.ts`, following the existing `RiskCreated`/`RiskScored` precedent.
 
+`prevReport` above is validated but is used only to choose the analytics event.
+The model deliberately ignores it for persistence and audit generation. DELETE
+does not require a body.
+
 ---
 
 ## 7. Validation Rules
 
-RM validates inline via React Hook Form `rules={{ required: ... }}` per field (no schema library despite `yup`/`zod` being available in `package.json`). Incident Report has more conditional logic (unlawful-act / cross-border details required only when their checkbox is checked; handling date must not precede detection date) — still expressible with inline RHF rules using `validate` functions, keeping parity with RM's approach rather than introducing a schema library precedent this codebase doesn't otherwise use for module dialogs.
+Use two validation layers. React Hook Form rules provide immediate UI feedback;
+the Zod `incidentReportSchema` independently enforces the same contract at the
+API boundary. Conditional requirements and date ordering therefore cannot be
+bypassed by calling the endpoint directly.
 
 | Field                      | Rule                                             |
 | -------------------------- | ------------------------------------------------ |
@@ -526,7 +535,7 @@ Follows the sticky-footer flex dialog pattern mandated by `design.md` (`flex fle
 
 | Step | Shown when                       | i18n step key                      | Fields                                                                                                                  |
 | ---- | -------------------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| 0    | `!selectedTask` (creating fresh) | _(no stepper label — task picker)_ | `TaskPicker`, filtered to `tasks.filter(t => !t.properties?.incident_report)`                                           |
+| 0    | `!selectedTask` (creating fresh) | _(no stepper label — task picker)_ | `TaskPicker`, filtered to `tasks.filter(t => !hasIncidentReport(t.properties))`                                         |
 | 1    | always                           | `incidentDetails`                  | Status, Classification, AttackType, Severity, AssetName, ReporterId, DateOfDetection, HandlingDate                      |
 | 2    | always                           | `descriptionAndScope`              | Description, Scope, RootCause                                                                                           |
 | 3    | always                           | `responseAndRemediation`           | CorrectiveActions, PreventiveActions                                                                                    |
@@ -640,7 +649,7 @@ Both rendered as `rounded-full px-2 py-0.5 text-[11px] font-semibold`, matching 
 
 ### 8.7 Audit logs
 
-`AuditLogs.tsx` wraps the **shared, already-generic** `components/interfaces/Task/AuditTimeline.tsx` exactly like `RmAuditLogs` does — reading `task.properties.incident_audit_logs`, resolving actor/reporter names via `useTeamMembersMap`, and supplying an `auditLogHelper` for field-specific value formatting (e.g. rendering `ReporterId` as a member name via the Map, translating `Status`/`Severity`/etc. enum values instead of showing raw strings).
+`AuditLogs.tsx` wraps the **shared, already-generic** `components/interfaces/Task/AuditTimeline.tsx` exactly like `RmAuditLogs` does — reading logs through `getIncidentAuditLogs(task.properties)`, resolving actor/reporter names via `useTeamMembersMap`, and supplying an `auditLogHelper` for field-specific value formatting (e.g. rendering `ReporterId` as a member name via the Map, translating `Status`/`Severity`/etc. enum values instead of showing raw strings).
 
 ---
 
@@ -650,7 +659,7 @@ Both rendered as `rounded-full px-2 py-0.5 text-[11px] font-semibold`, matching 
 | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `pages/teams/[slug]/incident-management.tsx`      | **New.** Module page, same shape as `risk-management.tsx`.                                                                                                                                   |
 | `components/shared/shell/TeamNavigation.tsx`      | Add nav entry (icon + label `t('incident-management')`) with a badge counting open incidents (status in `OPEN_INCIDENT_STATUSES`), same pattern as the existing `rm` entry (lines ~129-137). |
-| `pages/teams/[slug]/tasks/[taskNumber]/index.tsx` | Add `IncidentReportDialog` trigger + `TaskPanel` render block, following the existing TIA/PIA/RM blocks (reads `(task.properties as TaskProperties)?.incident_report`).                      |
+| `pages/teams/[slug]/tasks/[taskNumber]/index.tsx` | Add `IncidentReportDialog` trigger + `TaskPanel` render block, following the existing TIA/PIA/RM blocks; read the report through `getIncidentReport(task.properties)`.                       |
 | `components/interfaces/Task/TaskFilters.tsx`      | Add `incident_report: 'INC'` to the All-Tasks module filter map (line ~9 area).                                                                                                              |
 | `components/shared/shell/GlobalSearch.tsx`        | Add an `incident` search key + snippet builder (mirrors the RM block at lines ~127-131 and ~227-231): match on `Description`, `Scope`, `AssetName`.                                          |
 
@@ -660,9 +669,9 @@ Both rendered as `rounded-full px-2 py-0.5 text-[11px] font-semibold`, matching 
 
 ### 10.1 Required (Phase 1)
 
-- **`ActionRequiredBanner.tsx`**: add `computeOpenIncidents(tasks)` (mirrors `computeOpenRisks`, counting tasks where `properties?.incident_report` exists and `Status` is in `OPEN_INCIDENT_STATUSES`); surface as an additional banner clause, escalating banner severity if any `Severity === 'critical'` incident is open.
+- **`ActionRequiredBanner.tsx`**: add `computeOpenIncidents(tasks)` (mirrors `computeOpenRisks`, reading each report with `getIncidentReport` and counting statuses in `OPEN_INCIDENT_STATUSES`); surface as an additional banner clause, escalating banner severity if any `Severity === 'critical'` incident is open.
 - **`lib/tasks/exportTasks.ts`**: add incident columns to the All-Tasks CSV export (ID, Status, Severity, Classification, AttackType, AssetName, Reporter, DateOfDetection) — same pattern as the existing `rm_risk` columns.
-- **`lib/tasks.ts`**: `taskModuleKeys` update (§4.3) — this alone makes `hasTaskModule`/`getTaskModules` incident-aware everywhere they're already used (All Tasks badges, dashboard matrix, MCP task tools).
+- **`lib/properties/module-keys.ts` and selectors**: register the key and the explicit selector branches described in §4.4. This makes existing All Tasks badges, dashboard matrix, and MCP task tools incident-aware.
 
 ### 10.2 Not required
 
@@ -837,19 +846,21 @@ Applying `design.md`'s mandatory checklists to this module specifically:
 
 ## 14. MCP Server Tools
 
-`src/mcp-server/src/tools/incidents.ts` (new), registered alongside `registerRiskTools` in the server bootstrap — mirrors `risk.ts` 1:1 (`unicis_get_incident`, `unicis_set_incident`, `unicis_delete_incident`), each taking `{ slug, taskNumber }` plus payload, reading/writing `task.properties.incident_report` via the same `/api/teams/:slug/tasks/:taskNumber/incident` route. `src/mcp-server/src/services/api.ts` gains an `IncidentReport` type export (mirrors the existing `RmRisk` export).
+`src/mcp-server/src/tools/incidents.ts` (new), registered alongside `registerRiskTools` in the server bootstrap — mirrors `risk.ts` 1:1 (`unicis_get_incident`, `unicis_set_incident`, `unicis_delete_incident`), each taking `{ slug, taskNumber }` plus a schema-validated payload and calling the same `/api/teams/:slug/tasks/:taskNumber/incident` route. It must use the canonical `incident_report` key and must not implement a second raw-JSON write path. `src/mcp-server/src/services/api.ts` gains an `IncidentReport` type export (mirrors the existing `RmRisk` export).
 
 ---
 
 ## 15. Testing Plan
 
-| Test                                                                                                                  | Mirrors                                              |
-| --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| `__tests__/lib/tasks/status-keys.spec.ts` — add `incident_report` to the module-key assertions                        | existing `rm_risk` coverage                          |
-| `pages/api/teams/[slug]/tasks/[taskNumber]/incident.spec.ts` — POST create/update, DELETE, 404/400 cases, 405 for GET | `pages/api/teams/tasks/taskNumber.spec.ts` pattern   |
-| Playwright: incident create → appears in table → task detail panel shows it → delete removes it                       | `tasks/task-management.spec.ts` pattern              |
-| Manual: non-English locale check — no raw i18n keys rendered for status/severity/classification/attack-type labels    | design.md's "Test Requirements Before Production" #4 |
-| Manual: dialog footer visible without scrolling at 375px and 1280px, at every step                                    | design.md's "Test Requirements Before Production" #5 |
+| Test                                                                                                                                   | Mirrors                                              |
+| -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| `__tests__/lib/tasks/status-keys.spec.ts` — add `incident_report` to the module-key assertions                                         | existing `rm_risk` coverage                          |
+| `__tests__/lib/properties/properties.spec.ts` — stored schema, selector/guard, malformed value, unknown-key preservation, request body | existing module properties coverage                  |
+| `__tests__/models/incident-properties.spec.ts` — atomic create/update/delete and DB-derived audit diff                                 | RM/CSC properties model coverage                     |
+| `pages/api/teams/[slug]/tasks/[taskNumber]/incident.spec.ts` — POST create/update, DELETE, 404/400 cases, 405 for GET                  | `pages/api/teams/tasks/taskNumber.spec.ts` pattern   |
+| Playwright: incident create → appears in table → task detail panel shows it → delete removes it                                        | `tasks/task-management.spec.ts` pattern              |
+| Manual: non-English locale check — no raw i18n keys rendered for status/severity/classification/attack-type labels                     | design.md's "Test Requirements Before Production" #4 |
+| Manual: dialog footer visible without scrolling at 375px and 1280px, at every step                                                     | design.md's "Test Requirements Before Production" #5 |
 
 ---
 
@@ -859,7 +870,11 @@ Applying `design.md`'s mandatory checklists to this module specifically:
 | ------------------------------------------------------------------------ | ------------- | -------------------------------------------- |
 | `types/incident.ts`                                                      | Add           | §4.1                                         |
 | `types/base.ts`                                                          | Modify        | add `TaskIncidentProperties` to intersection |
-| `lib/tasks.ts`                                                           | Modify        | `taskModuleKeys` +1                          |
+| `lib/properties/schemas/**`                                              | Modify/Add    | stored + API request schemas                 |
+| `lib/properties/task-properties.ts`                                      | Modify        | register known stored values                 |
+| `lib/properties/selectors.ts`                                            | Modify        | report/audit selectors and task guard        |
+| `lib/properties/writers.ts`                                              | Modify        | register incident audit key                  |
+| `lib/properties/module-keys.ts`                                          | Modify        | `taskModuleKeys` + selector branches         |
 | `lib/incident/index.ts`, `helpers.ts`                                    | Add           | §5, §8.6                                     |
 | `models/incident.ts`                                                     | Add           | §5                                           |
 | `pages/api/teams/[slug]/tasks/[taskNumber]/incident.ts`                  | Add           | §6                                           |
@@ -879,6 +894,8 @@ Applying `design.md`'s mandatory checklists to this module specifically:
 | `src/mcp-server/src/tools/incidents.ts`                                  | Add           | §14                                          |
 | `src/mcp-server/src/services/api.ts`                                     | Modify        | §14                                          |
 | `__tests__/lib/tasks/status-keys.spec.ts`                                | Modify        | §15                                          |
+| `__tests__/lib/properties/properties.spec.ts`                            | Modify        | runtime contract and request validation      |
+| `__tests__/models/incident-properties.spec.ts`                           | Add           | atomic writes and DB-derived audit history   |
 | `pages/api/teams/[slug]/tasks/[taskNumber]/incident.spec.ts`             | Add           | §15                                          |
 | `prisma/schema.prisma`                                                   | **No change** | §3.1                                         |
 

@@ -6,7 +6,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { CscDashboard } from '@/components/interfaces/csc';
 import { getTeamAccess } from '@/lib/teams';
 import { getTranslationNamespaces } from '@/lib/i18n/getCscTranslationNamespaces';
-import type { ISO } from 'types';
 
 const Settings = () => {
   const { t } = useTranslation('common');
@@ -38,7 +37,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  const frameworks = (access.teamProperties?.csc_iso ?? []) as ISO[];
+  const frameworks = access.teamProperties.csc_iso ?? [];
   const cscTranslations = getTranslationNamespaces(frameworks);
 
   return {

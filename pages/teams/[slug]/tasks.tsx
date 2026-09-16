@@ -1,4 +1,4 @@
-import type { NextPageWithLayout, ISO } from 'types';
+import type { NextPageWithLayout } from 'types';
 import type { InferGetServerSidePropsType } from 'next';
 import { useTranslation } from 'next-i18next';
 import useTeam from 'hooks/useTeam';
@@ -43,7 +43,7 @@ export const getServerSideProps = async (
     };
   }
 
-  const frameworks = (access.teamProperties?.csc_iso ?? []) as ISO[];
+  const frameworks = access.teamProperties.csc_iso ?? [];
   const cscTranslations = getTranslationNamespaces(frameworks);
 
   return {

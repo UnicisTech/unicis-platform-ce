@@ -31,6 +31,39 @@ module.exports = [
     },
   },
   {
+    files: ['**/*.ts', '**/*.tsx'],
+    ignores: ['lib/properties/**/*.ts'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector:
+            "TSAsExpression > TSTypeReference > Identifier[name='TaskProperties']",
+          message:
+            'Do not cast raw JSON to TaskProperties. Use a selector or parser from @/lib/properties.',
+        },
+        {
+          selector:
+            "TSAsExpression > TSTypeReference > Identifier[name='TeamProperties']",
+          message:
+            'Do not cast raw JSON to TeamProperties. Use a selector or parser from @/lib/properties.',
+        },
+        {
+          selector:
+            "TSTypeAssertion > TSTypeReference > Identifier[name='TaskProperties']",
+          message:
+            'Do not cast raw JSON to TaskProperties. Use a selector or parser from @/lib/properties.',
+        },
+        {
+          selector:
+            "TSTypeAssertion > TSTypeReference > Identifier[name='TeamProperties']",
+          message:
+            'Do not cast raw JSON to TeamProperties. Use a selector or parser from @/lib/properties.',
+        },
+      ],
+    },
+  },
+  {
     files: [
       'next.config.js',
       'next-i18next.config.js',

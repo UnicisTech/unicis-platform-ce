@@ -28,7 +28,7 @@ import useTeamTasks from 'hooks/useTeamTasks';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import type { ISO, Task } from 'types';
+import type { Task } from 'types';
 import { cn } from '@/components/shadcn/lib/utils';
 import { hasTaskModule, isTaskModuleKey } from '@/lib/tasks';
 import type { TaskModuleKey } from '@/lib/tasks';
@@ -477,7 +477,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  const frameworks = (access.teamProperties?.csc_iso ?? []) as ISO[];
+  const frameworks = access.teamProperties.csc_iso ?? [];
   const cscTranslations = getTranslationNamespaces(frameworks);
 
   return {
