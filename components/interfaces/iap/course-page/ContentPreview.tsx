@@ -1,5 +1,5 @@
 import YouTube from 'react-youtube';
-import { extractYouTubeVideoId } from '../services/passCourseService';
+import { resolveEmbeddedVideo } from '../services/passCourseService';
 import { MarkdownPreview } from '@/components/shared/uiw/Markdown';
 import { CourseContentType } from '@/generated/browser';
 import { IapCourse } from 'types';
@@ -9,8 +9,27 @@ const ContentPreview = ({ course }: { course: IapCourse }) => {
   const { t } = useTranslation('common');
 
   switch (course.contentType) {
-    case CourseContentType.EMBEDDED_VIDEO:
-      return <YouTube videoId={extractYouTubeVideoId(course.url as string)} />;
+    case CourseContentType.EMBEDDED_VIDEO: {
+      const video = resolveEmbeddedVideo(course.url);
+      if (video?.provider === 'youtube') {
+        return <YouTube videoId={video.videoId} />;
+      }
+      if (video?.provider === 'peertube') {
+        return (
+          <div className="w-full max-w-[960px] my-[10px] mx-auto aspect-video">
+            <iframe
+              src={video.embedUrl}
+              className="w-full h-full rounded-lg"
+              title={course.name}
+              sandbox="allow-scripts allow-same-origin allow-popups allow-fullscreen"
+              allow="fullscreen"
+              allowFullScreen={true}
+            />
+          </div>
+        );
+      }
+      return <p>{t('unsupported-video-url')}</p>;
+    }
 
     case CourseContentType.PRESENTATION_PDF:
       return (

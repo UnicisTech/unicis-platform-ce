@@ -478,6 +478,7 @@
   "unknown-question-type": "不明な質問タイプ。",
   "course-presentation": "コースプレゼンテーション",
   "unknown-course-type": "不明なコースタイプ",
+  "unsupported-video-url": "サポートされていない動画URLです。YouTubeまたはPeerTubeのリンクを使用してください。",
   "iap-header": "~ {{brand}} - インタラクティブ啓発プログラム ~",
   "certificate-of-training": "研修修了証",
   "has-successfully-completed": "が以下を修了しました：",

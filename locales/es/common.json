@@ -477,6 +477,7 @@
   "unknown-question-type": "Tipo de pregunta desconocido.",
   "course-presentation": "Presentación del curso",
   "unknown-course-type": "Tipo de curso desconocido",
+  "unsupported-video-url": "URL de vídeo no compatible. Use un enlace de YouTube o PeerTube.",
   "iap-header": "~ {{brand}} - Programa de Concienciación Interactiva ~",
   "certificate-of-training": "Certificado de formación",
   "has-successfully-completed": "ha completado con éxito:",

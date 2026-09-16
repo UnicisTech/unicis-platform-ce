@@ -484,6 +484,7 @@
   "unknown-question-type": "Unknown question type.",
   "course-presentation": "Course presentation",
   "unknown-course-type": "Unknown course type",
+  "unsupported-video-url": "Unsupported video URL. Use a YouTube or PeerTube link.",
   "iap-header": "~ {{brand}} - Interactive Awareness Program ~",
   "certificate-of-training": "Certificate of Training",
   "has-successfully-completed": "has successfully completed:",
