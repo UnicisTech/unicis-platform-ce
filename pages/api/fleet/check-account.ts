@@ -24,7 +24,7 @@ export default async function handler(
     const fleetServiceToken = process.env.FLEET_SERVICE_TOKEN;
 
     if (!fleetBase || !fleetServiceToken) {
-      return res.status(500).json({ error: 'FLEET_NOT_CONFIGURED' });
+      return res.status(503).json({ error: 'FLEET_NOT_CONFIGURED' });
     }
 
     // Check if user exists in Fleet

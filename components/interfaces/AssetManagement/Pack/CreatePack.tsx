@@ -26,8 +26,6 @@ import type { User } from '@/generated/client';
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 import 'quill/dist/quill.snow.css';
 
-const DEFAULT_PLATFORM_VALUE = 'all';
-
 const CreatePack = ({
   visible,
   setVisible,
@@ -57,7 +55,6 @@ const CreatePack = ({
       try {
         const packData = {
           ...values,
-          platform: DEFAULT_PLATFORM_VALUE,
           version: DEFAULT_FLEET_CONFIG_VERSION,
           shard: DEFAULT_FLEET_CONFIG_SHARD,
           tags: selectedTags.join(','),

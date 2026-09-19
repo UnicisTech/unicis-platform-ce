@@ -61,7 +61,7 @@ export default async function handler(
 
     if (!fleetBase || !fleetServiceToken) {
       console.error('[RevokeFleet] Fleet configuration missing');
-      return res.status(500).json({ error: 'FLEET_NOT_CONFIGURED' });
+      return res.status(503).json({ error: 'FLEET_NOT_CONFIGURED' });
     }
 
     // 1. Delete enrollment record from Platform

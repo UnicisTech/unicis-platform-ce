@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { Button } from '@/components/shadcn/ui/button';
@@ -28,6 +27,14 @@ import FormattedDate from '@/components/shared/Date';
 import StatusValue from '../StatusValue';
 import { CodeBlock } from '@/components/shared/CodeBlock';
 import { Trash2 } from 'lucide-react';
+
+const asUtcDateString = (value?: string | null) => {
+  if (!value || /(?:z|[+-]\d{2}:?\d{2})$/i.test(value)) {
+    return value;
+  }
+
+  return `${value.replace(' ', 'T')}Z`;
+};
 
 const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
   const router = useRouter();
@@ -97,19 +104,23 @@ const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
                     tasks.map((task) => (
                       <TableRow
                         key={task.id}
-                        className="border-slate-100 dark:border-slate-700"
+                        className="cursor-pointer border-slate-100 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900/60"
+                        onClick={() =>
+                          router.push(
+                            `/teams/${slug}/asset-management/distributors/${task.distributed_query.id}`
+                          )
+                        }
                       >
-                        <TableCell className="min-w-72 max-w-lg px-4 py-3 align-top">
-                          <Link
-                            href={`/teams/${slug}/asset-management/distributors/${task.distributed_query.id}`}
-                          >
-                            <CodeBlock
-                              language="sql"
-                              shouldWrapLongLines
-                              showLineNumbers={false}
-                              text={task.distributed_query.sql}
-                            />
-                          </Link>
+                        <TableCell
+                          className="min-w-72 max-w-lg px-4 py-3 align-top"
+                          onClick={(event) => event.stopPropagation()}
+                        >
+                          <CodeBlock
+                            language="sql"
+                            shouldWrapLongLines
+                            showLineNumbers={false}
+                            text={task.distributed_query.sql}
+                          />
                         </TableCell>
 
                         <TableCell className="min-w-48 break-all px-4 py-3 align-top text-sm text-slate-600 dark:text-slate-300">
@@ -124,7 +135,9 @@ const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
                           {task.distributed_query.not_before ? (
                             <FormattedDate
                               style="text-sm text-slate-600 dark:text-slate-300"
-                              dateString={task.distributed_query.not_before}
+                              dateString={asUtcDateString(
+                                task.distributed_query.not_before
+                              )}
                             />
                           ) : (
                             <span className="text-slate-500 dark:text-slate-400">
@@ -165,9 +178,10 @@ const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
                               <Button
                                 size="icon"
                                 variant="destructive"
-                                onClick={() =>
+                                onClick={(event) => {
+                                  event.stopPropagation();
                                   openDeleteModal(task.distributed_query.id)
-                                }
+                                }}
                                 aria-label={t('delete')}
                                 title={t('delete')}
                               >

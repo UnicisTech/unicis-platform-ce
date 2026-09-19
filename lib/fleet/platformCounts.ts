@@ -28,7 +28,7 @@ export const computePlatformCounts = (
 ): Record<string, number> =>
   nodes?.reduce((acc: Record<string, number>, node) => {
     const rawPlatform =
-      node.node_info?.osquery_info.build_platform?.toLowerCase();
+      node.node_info?.osquery_info?.build_platform?.toLowerCase();
     if (rawPlatform && node.is_active) {
       const platform = normalizePlatformName(rawPlatform);
       acc[platform] = (acc[platform] || 0) + 1;

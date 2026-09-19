@@ -26,6 +26,7 @@ import {
 import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
 import { Button } from '@/components/shadcn/ui/button';
+import SqlValidationInput from '../SqlValidationInput';
 import {
   Select,
   SelectTrigger,
@@ -37,6 +38,7 @@ import {
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
 type QueryFormErrors = Partial<Record<'name' | 'sql' | 'interval', string>>;
+const DEFAULT_PLATFORM_VALUE = 'all';
 
 const EditQuery = ({
   visible,
@@ -56,11 +58,13 @@ const EditQuery = ({
     query.tags?.map((t) => t.value) || []
   );
   const [selectedPlatform, setSelectedPlatform] = useState<string>(
-    PLATFORMS.find(({ value }) => value === query.platform)?.value || 'all'
+    PLATFORMS.find(({ value }) => value === query.platform)?.value ||
+      DEFAULT_PLATFORM_VALUE
   );
   const [selectedInterval, setSelectedInterval] = useState<number>(
     query.interval
   );
+  const [description, setDescription] = useState(query.description || '');
   const { t } = useTranslation(['common', 'fleet']);
   const updateQuery = useUpdateQuery();
   const { mutateQueries } = useQueries(team?.id);
@@ -77,7 +81,6 @@ const EditQuery = ({
       name: (formData.get('name') as string) || '',
       sql: (formData.get('sql') as string) || '',
       interval: String(selectedInterval || ''),
-      description: (formData.get('description') as string) || '',
     };
 
     const nextErrors: QueryFormErrors = {};
@@ -99,12 +102,14 @@ const EditQuery = ({
     const queryData = {
       name: values.name,
       sql: values.sql,
-      platform: selectedPlatform,
+      ...(selectedPlatform !== DEFAULT_PLATFORM_VALUE
+        ? { platform: selectedPlatform }
+        : {}),
       version: query.version || DEFAULT_FLEET_CONFIG_VERSION,
       shard: query.shard || DEFAULT_FLEET_CONFIG_SHARD,
       interval: selectedInterval,
       value: query.value || DEFAULT_FLEET_CONFIG_VALUE,
-      description: values.description,
+      description,
       packs: selectedPacks,
       tags: selectedTags.join(','),
       removed: query.removed ?? false,
@@ -157,18 +162,15 @@ const EditQuery = ({
 
           <div>
             <Label htmlFor="sql">{t('sql-code')}</Label>
-            <Input
+            <SqlValidationInput
               ref={sqlInputRef}
               name="sql"
               defaultValue={query.sql}
-              aria-invalid={!!formErrors.sql}
+              error={formErrors.sql}
               onChange={() =>
                 setFormErrors((prev) => ({ ...prev, sql: undefined }))
               }
             />
-            {formErrors.sql && (
-              <p className="text-sm text-destructive">{formErrors.sql}</p>
-            )}
           </div>
 
           <div>
@@ -225,7 +227,11 @@ const EditQuery = ({
 
           <div>
             <Label htmlFor="description">{t('description')}</Label>
-            <ReactQuill theme="snow" defaultValue={query.description} />
+            <ReactQuill
+              theme="snow"
+              value={description}
+              onChange={setDescription}
+            />
           </div>
 
           <div>

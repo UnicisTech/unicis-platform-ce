@@ -9,9 +9,7 @@ const env = {
   agentVersion: `${process.env.OSQUERY_AGENT_VERSION || '5.16.0'}`,
   fleetUseTlsServerCerts:
     process.env.NEXT_PUBLIC_FLEET_USE_TLS_SERVER_CERTS === 'true',
-  assetRequiredPlan: normalizeSubscriptionPlan(
-    process.env.NEXT_PUBLIC_ASSET_REQUIRED_PLAN
-  ),
+  assetRequiredPlan: normalizeSubscriptionPlan(process.env.ASSET_REQUIRED_PLAN),
 
   product: 'unicis-platform',
   // redirectAfterSignIn: '/teams',

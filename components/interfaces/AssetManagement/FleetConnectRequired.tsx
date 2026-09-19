@@ -83,7 +83,8 @@ const FleetConnectRequired = ({
   const [showBootstrap, setShowBootstrap] = useState(false);
   const [isBootstrapping, setIsBootstrapping] = useState(false);
 
-  const { access, isLoading, mutateFleetAccess } = useVerifyFleetAsses();
+  const { access, isLoading, isNotConfigured, mutateFleetAccess } =
+    useVerifyFleetAsses();
   const {
     connection,
     isDisconnected,
@@ -103,7 +104,8 @@ const FleetConnectRequired = ({
     );
   const accessAuthenticated = Boolean(access?.is_active && !access.is_expired);
   const isAuthenticated =
-    !isDeleted && (authOverride ?? (accessAuthenticated || hasFleetToken));
+    !isDeleted &&
+    (authOverride ?? (isLoading ? hasFleetToken : accessAuthenticated));
   const shouldOpenEnrollmentDialog = Boolean(
     enrollmentToken && !isAuthenticated && !enrollmentDialogDismissed
   );
@@ -387,6 +389,19 @@ const FleetConnectRequired = ({
   };
 
   if (isLoading || isConnectionLoading) return <Loading />;
+
+  if (isNotConfigured) {
+    return (
+      <div className="rounded border border-amber-200 bg-amber-50 p-6 text-center dark:border-amber-800 dark:bg-amber-950/30">
+        <h1 className="text-2xl font-bold">
+          {t('fleet:fleet-not-configured')}
+        </h1>
+        <p className="mx-auto mt-4 max-w-2xl text-sm text-muted-foreground">
+          {t('fleet:fleet-not-configured-description')}
+        </p>
+      </div>
+    );
+  }
 
   if (isDisconnected) {
     return (

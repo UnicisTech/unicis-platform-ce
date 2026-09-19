@@ -21,6 +21,7 @@ export const useVerifyFleetAsses = () => {
     access: data ?? undefined,
     isLoading,
     isError: error ? 'An unexpected error occurred.' : null,
+    isNotConfigured: (error as FleetApiError | undefined)?.status === 503,
     mutateFleetAccess: mutate,
   };
 };

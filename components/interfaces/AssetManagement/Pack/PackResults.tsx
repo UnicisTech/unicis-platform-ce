@@ -268,7 +268,7 @@ const PackResults = ({ teamId, packId }: PackResultsProps) => {
       {effectiveTotal > filters.limit && (
         <div className="flex items-center justify-between rounded-lg border border-border px-4 py-3">
           <div className="text-sm text-muted-foreground">
-            {t('Page')} {currentPage} {t('of')} {totalPages}
+            {t('page')} {currentPage} {t('of')} {totalPages}
           </div>
           <div className="flex gap-2">
             <button
@@ -276,14 +276,14 @@ const PackResults = ({ teamId, packId }: PackResultsProps) => {
               disabled={filters.offset === 0}
               className="rounded-md border border-input bg-background px-3 py-1 text-sm disabled:opacity-50 hover:bg-muted transition-colors"
             >
-              {t('Previous')}
+              {t('previous')}
             </button>
             <button
               onClick={() => handlePageChange(filters.offset + filters.limit)}
               disabled={filters.offset + filters.limit >= effectiveTotal}
               className="rounded-md border border-input bg-background px-3 py-1 text-sm disabled:opacity-50 hover:bg-muted transition-colors"
             >
-              {t('Next')}
+              {t('next')}
             </button>
           </div>
         </div>

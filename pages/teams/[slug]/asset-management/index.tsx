@@ -8,6 +8,7 @@ import { getTeam } from '@/models/team';
 import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import { TeamTab } from '@/components/team';
 import FleetConnectRequired from '@/components/interfaces/AssetManagement/FleetConnectRequired';
+import { hasAssetManagementPlan } from '@/lib/asset-management';
 
 const AssetManagement = ({
   teamFeatures,
@@ -52,6 +53,12 @@ export const getServerSideProps = async (
   const team = await getTeam({ slug });
 
   if (!user) {
+    return {
+      notFound: true,
+    };
+  }
+
+  if (!hasAssetManagementPlan(team.subscription)) {
     return {
       notFound: true,
     };

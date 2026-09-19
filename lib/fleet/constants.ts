@@ -2,6 +2,7 @@
 // In the future
 
 export const PLATFORMS = [
+  { value: 'all', label: 'All platforms' },
   { value: 'windows', label: 'Windows' },
   { value: 'linux', label: 'Linux' },
   { value: 'macos', label: 'macOS' },

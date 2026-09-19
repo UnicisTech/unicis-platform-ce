@@ -21,7 +21,11 @@ export default async function handler(
     const fleetBase = process.env.FLEET_API_URL;
     const fleetToken = getFleetAccessTokenFromCookieStore(req.cookies);
 
-    if (!fleetBase || !fleetToken) {
+    if (!fleetBase) {
+      return res.status(503).json({ error: 'FLEET_NOT_CONFIGURED' });
+    }
+
+    if (!fleetToken) {
       return res.status(401).json({ error: 'Fleet not authenticated' });
     }
 

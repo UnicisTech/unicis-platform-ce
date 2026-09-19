@@ -38,12 +38,12 @@ export default async function handler(
 
     if (!fleetBase) {
       console.error('FLEET_API_URL not defined');
-      return res.status(500).json({ error: 'FLEET_NOT_CONFIGURED' });
+      return res.status(503).json({ error: 'FLEET_NOT_CONFIGURED' });
     }
 
     if (!fleetServiceToken) {
       console.error('FLEET_SERVICE_TOKEN not defined');
-      return res.status(500).json({ error: 'FLEET_SERVICE_TOKEN_MISSING' });
+      return res.status(503).json({ error: 'FLEET_SERVICE_TOKEN_MISSING' });
     }
 
     const { email, teamId, teamSlug, teamName } = (req.body ?? {}) as Body;

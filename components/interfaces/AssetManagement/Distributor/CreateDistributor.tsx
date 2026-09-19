@@ -7,7 +7,6 @@ import { validateFleetSqlQuery } from '@/lib/fleet/sqlValidation';
 import { useCreateDistributors } from '@/hooks/fleets/distributors/useCreateDistributor';
 import { useDistributors } from '@/hooks/fleets/distributors/useDistributors';
 import { Button } from '@/components/shadcn/ui/button';
-import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
 import {
   Dialog,
@@ -16,15 +15,10 @@ import {
   DialogFooter,
   DialogTitle,
 } from '@/components/shadcn/ui/dialog';
-import { Calendar } from '@/components/shadcn/ui/calendar';
+import { DateTimePickerInput } from '@/components/shadcn/ui/date-time-picker';
 import NodesSelector from '../AssetsSelector';
 import TagsSelector from '../TagsSelector';
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-} from '@/components/shadcn/ui/popover';
-import { CalendarIcon } from 'lucide-react';
+import SqlValidationInput from '../SqlValidationInput';
 
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
@@ -43,13 +37,15 @@ const CreateDistributors = ({
 }) => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const sqlInputRef = useRef<HTMLInputElement | null>(null);
+  const targetsRef = useRef<HTMLDivElement | null>(null);
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
   const [selectedNodes, setSelectedNodes] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [formErrors, setFormErrors] = useState<DistributorFormErrors>({});
   const [submitting, setSubmitting] = useState(false);
-  const [notBeforeDate, setNotBeforeDate] = useState<Date | undefined>(
-    new Date()
+  const [description, setDescription] = useState('');
+  const [notBeforeDate, setNotBeforeDate] = useState(
+    new Date().toISOString()
   );
   const { t } = useTranslation(['common', 'fleet']);
   const createDistributor = useCreateDistributors();
@@ -70,7 +66,6 @@ const CreateDistributors = ({
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    const description = formData.get('description') as string;
     const sql = formData.get('sql') as string;
     const sqlValidation = validateFleetSqlQuery(sql || '');
     const nextErrors: DistributorFormErrors = {};
@@ -88,6 +83,11 @@ const CreateDistributors = ({
 
       if (nextErrors.sql) {
         sqlInputRef.current?.focus();
+      } else if (nextErrors.nodes) {
+        targetsRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
       }
 
       return;
@@ -100,7 +100,9 @@ const CreateDistributors = ({
       sql,
       tags: selectedTags,
       nodes: selectedNodes,
-      not_before: notBeforeDate?.toISOString(),
+      not_before: notBeforeDate
+        ? new Date(notBeforeDate).toISOString()
+        : undefined,
     };
 
     setSubmitting(true);
@@ -109,6 +111,7 @@ const CreateDistributors = ({
       await createDistributor(fleetTeamId, queryData);
       toast.success(t('success'));
       mutateDistributorsTasks();
+      setDescription('');
       setVisible(false);
     } catch (error: any) {
       toast.error(error?.message || t('error'));
@@ -132,22 +135,19 @@ const CreateDistributors = ({
         >
           <div className="space-y-2">
             <Label htmlFor="sql">{t('sql-code')}</Label>
-            <Input
+            <SqlValidationInput
               ref={sqlInputRef}
               id="sql"
               name="sql"
               placeholder={t('enter-sql-code')}
-              aria-invalid={!!formErrors.sql}
+              error={formErrors.sql}
               onChange={() =>
                 setFormErrors((prev) => ({ ...prev, sql: undefined }))
               }
             />
-            {formErrors.sql && (
-              <p className="text-sm text-destructive">{formErrors.sql}</p>
-            )}
           </div>
 
-          <div className="space-y-2">
+          <div ref={targetsRef} className="space-y-2">
             <Label>{t('assign-assets')}</Label>
             <NodesSelector
               fleetTeamId={fleetTeamId}
@@ -161,33 +161,26 @@ const CreateDistributors = ({
 
           <div className="space-y-2">
             <Label htmlFor="description">{t('description')}</Label>
-            <ReactQuill theme="snow" id="description" />
+            <ReactQuill
+              theme="snow"
+              id="description"
+              value={description}
+              onChange={setDescription}
+            />
           </div>
 
           <div className="space-y-2 flex flex-col">
-            <Label>{t('not-before')}</Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="w-full max-w-[280px] justify-start text-left font-normal"
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {notBeforeDate
-                    ? notBeforeDate.toLocaleString()
-                    : t('pick-a-date')}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={notBeforeDate}
-                  onSelect={setNotBeforeDate}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
+            <Label htmlFor="not-before">{t('not-before')}</Label>
+            <DateTimePickerInput
+              id="not-before"
+              value={notBeforeDate}
+              onChange={setNotBeforeDate}
+              placeholder={t('pick-a-date-time')}
+              timeLabel={t('time')}
+              isModal
+              className="max-w-[280px]"
+              popoverClassName="pointer-events-auto z-60"
+            />
           </div>
 
           <div className="space-y-2">
