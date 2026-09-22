@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Loading, Error, Card } from '@/components/shared';
+import { Loading, Card } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
-import useTeam from 'hooks/useTeam';
 import QueryTab from '@/components/interfaces/AssetManagement/Query/QueryTab';
 import QueryDetails from '@/components/interfaces/AssetManagement/Query/QueryDetails';
 import QueryResults from '@/components/interfaces/AssetManagement/Query/QueryResults';
@@ -11,30 +10,35 @@ import { useGetQueryId } from '@/hooks/fleets/queries/useGetQueryId';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
+import { getTeam } from '@/models/team';
+import { hasAssetManagementPlan } from '@/lib/asset-management';
+import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
+import { TeamTab } from '@/components/team';
+import FleetConnectRequired from '@/components/interfaces/AssetManagement/FleetConnectRequired';
 
-const QueryById = ({ teamFeatures: _teamFeatures, user }) => {
-  const [activeTab, setActiveTab] = useState('Overview');
-  const router = useRouter();
-  const { queryId, slug } = router.query;
-  const {
-    team,
-    isLoading: isTeamLoading,
-    isError: isTeamError,
-  } = useTeam(slug as string);
-  const fleetTeamId = team?.id ?? '';
-
+const QueryResultsContent = ({ fleetTeamId, queryId }) => {
   const { query, isLoading: isQueryLoading } = useGetQueryId(
     fleetTeamId,
-    queryId as string
+    queryId
   );
 
-  if (isTeamLoading || isQueryLoading) {
+  if (isQueryLoading) {
     return <Loading />;
   }
 
-  if (isTeamError) {
-    return <Error message={'isError.message'} />;
-  }
+  if (!query) return null;
+
+  return (
+    <QueryResults
+      teamId={fleetTeamId}
+      queryId={queryId}
+      queryName={query.name}
+    />
+  );
+};
+
+const QueryContent = ({ fleetTeamId, queryId, user }) => {
+  const [activeTab, setActiveTab] = useState('Overview');
 
   return (
     <>
@@ -46,19 +50,44 @@ const QueryById = ({ teamFeatures: _teamFeatures, user }) => {
             <QueryDetails
               user={user}
               fleetTeamId={fleetTeamId}
-              queryID={queryId as string}
+              queryID={queryId}
             />
           </Card.Body>
         </Card>
       )}
 
-      {activeTab === 'Results' && query && (
-        <QueryResults
-          teamId={fleetTeamId}
-          queryId={queryId as string}
-          queryName={query.name}
-        />
+      {activeTab === 'Results' && (
+        <QueryResultsContent fleetTeamId={fleetTeamId} queryId={queryId} />
       )}
+    </>
+  );
+};
+
+const QueryById = ({ teamFeatures, team: pageTeam, user }) => {
+  const router = useRouter();
+  const { queryId } = router.query;
+
+  return (
+    <>
+      <TeamTab
+        activeTab="asset-management"
+        team={pageTeam}
+        teamFeatures={teamFeatures}
+      />
+      <AssetTab
+        activeTab="queries"
+        team={pageTeam}
+        teamFeatures={teamFeatures}
+      />
+      <FleetConnectRequired user={user} teamId={pageTeam.id}>
+        {() => (
+          <QueryContent
+            fleetTeamId={pageTeam.id}
+            queryId={queryId as string}
+            user={user}
+          />
+        )}
+      </FleetConnectRequired>
     </>
   );
 };
@@ -68,9 +97,18 @@ export const getServerSideProps = async (
 ) => {
   const session = await getSession(context.req, context.res);
   const user = await getUserBySession(session);
-  const { locale } = context;
+  const { locale, query } = context;
+  const slug = query.slug as string;
 
   if (!user) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const team = await getTeam({ slug });
+
+  if (!hasAssetManagementPlan(team.subscription)) {
     return {
       notFound: true,
     };
@@ -81,6 +119,7 @@ export const getServerSideProps = async (
       ...(locale
         ? await serverSideTranslations(locale, ['common', 'fleet'])
         : {}),
+      team: JSON.parse(JSON.stringify(team)),
       teamFeatures: env.teamFeatures,
       user: {
         id: user.id,

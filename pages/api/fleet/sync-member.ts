@@ -82,7 +82,7 @@ export default async function handler(
 
     if (!fleetBase || !fleetServiceToken) {
       console.error('Fleet configuration missing');
-      return res.status(500).json({ error: 'FLEET_NOT_CONFIGURED' });
+      return res.status(503).json({ error: 'FLEET_NOT_CONFIGURED' });
     }
 
     const fleetRole = mapPlatformRoleToFleetRole(platformMember.role);

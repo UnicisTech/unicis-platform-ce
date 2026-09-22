@@ -1,35 +1,22 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Loading, Error, Card } from '@/components/shared';
+import { Card } from '@/components/shared';
 import { GetServerSidePropsContext } from 'next';
-import useTeam from 'hooks/useTeam';
 import PackTab from '@/components/interfaces/AssetManagement/Pack/PackTab';
 import PackDetails from '@/components/interfaces/AssetManagement/Pack/PackDetails';
 import PackResults from '@/components/interfaces/AssetManagement/Pack/PackResults';
 import { getSession } from '@/lib/session';
 import { getUserBySession } from '@/models/user';
 import env from '@/lib/env';
+import { getTeam } from '@/models/team';
+import { hasAssetManagementPlan } from '@/lib/asset-management';
+import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
+import { TeamTab } from '@/components/team';
+import FleetConnectRequired from '@/components/interfaces/AssetManagement/FleetConnectRequired';
 
-const PackById = ({ teamFeatures: _teamFeatures, user }) => {
+const PackContent = ({ fleetTeamId, packId, user }) => {
   const [activeTab, setActiveTab] = useState('Overview');
-  const router = useRouter();
-  const { packId, slug } = router.query;
-
-  const {
-    team,
-    isLoading: isTeamLoading,
-    isError: isTeamError,
-  } = useTeam(slug as string);
-  const fleetTeamId = team?.id ?? '';
-
-  if (isTeamLoading) {
-    return <Loading />;
-  }
-
-  if (isTeamError) {
-    return <Error message={'isError.message'} />;
-  }
 
   return (
     <>
@@ -41,7 +28,7 @@ const PackById = ({ teamFeatures: _teamFeatures, user }) => {
             <PackDetails
               user={user}
               fleetTeamId={fleetTeamId}
-              packID={packId as string}
+              packID={packId}
             />
           </Card.Body>
         </Card>
@@ -50,10 +37,35 @@ const PackById = ({ teamFeatures: _teamFeatures, user }) => {
       {activeTab === 'Results' && (
         <Card heading="Pack Query Results">
           <Card.Body>
-            <PackResults teamId={fleetTeamId} packId={packId as string} />
+            <PackResults teamId={fleetTeamId} packId={packId} />
           </Card.Body>
         </Card>
       )}
+    </>
+  );
+};
+
+const PackById = ({ teamFeatures, team: pageTeam, user }) => {
+  const router = useRouter();
+  const { packId } = router.query;
+
+  return (
+    <>
+      <TeamTab
+        activeTab="asset-management"
+        team={pageTeam}
+        teamFeatures={teamFeatures}
+      />
+      <AssetTab activeTab="packs" team={pageTeam} teamFeatures={teamFeatures} />
+      <FleetConnectRequired user={user} teamId={pageTeam.id}>
+        {() => (
+          <PackContent
+            fleetTeamId={pageTeam.id}
+            packId={packId as string}
+            user={user}
+          />
+        )}
+      </FleetConnectRequired>
     </>
   );
 };
@@ -63,9 +75,18 @@ export const getServerSideProps = async (
 ) => {
   const session = await getSession(context.req, context.res);
   const user = await getUserBySession(session);
-  const { locale } = context;
+  const { locale, query } = context;
+  const slug = query.slug as string;
 
   if (!user) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const team = await getTeam({ slug });
+
+  if (!hasAssetManagementPlan(team.subscription)) {
     return {
       notFound: true,
     };
@@ -76,6 +97,7 @@ export const getServerSideProps = async (
       ...(locale
         ? await serverSideTranslations(locale, ['common', 'fleet'])
         : {}),
+      team: JSON.parse(JSON.stringify(team)),
       teamFeatures: env.teamFeatures,
       user: {
         id: user.id,

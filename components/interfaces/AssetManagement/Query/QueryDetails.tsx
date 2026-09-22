@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import { useTranslation } from 'next-i18next';
 import { Loading } from '@/components/shared';
 import type { User } from '@/generated/client';
@@ -29,13 +30,17 @@ import {
 } from '@/components/shadcn/ui/select';
 import { useRouter } from 'next/router';
 import useCanAccess from 'hooks/useCanAccess';
+import SqlValidationInput from '../SqlValidationInput';
 
 interface Option {
   label: string;
   value: string;
 }
 
+const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
+
 type QueryFormErrors = Partial<Record<'name' | 'sql' | 'interval', string>>;
+const DEFAULT_PLATFORM_VALUE = 'all';
 
 const QueryDetails = ({
   user: _user,
@@ -55,10 +60,13 @@ const QueryDetails = ({
   const { query, isLoading } = useGetQueryId(fleetTeamId, queryID);
 
   const nameInputRef = useRef<HTMLInputElement | null>(null);
-  const [selectedPlatform, setSelectedPlatform] = useState('all');
+  const [selectedPlatform, setSelectedPlatform] = useState(
+    DEFAULT_PLATFORM_VALUE
+  );
   const [selectedInterval, setSelectedInterval] = useState(
     DEFAULT_QUERY_INTERVAL
   );
+  const [description, setDescription] = useState('');
   const [selectedPacks, setSelectedPacks] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [deleteVisible, setDeleteVisible] = useState(false);
@@ -70,10 +78,13 @@ const QueryDetails = ({
     if (query) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedPlatform(
-        PLATFORMS.find((p) => p.value === query.platform)?.value || 'all'
+        PLATFORMS.find((p) => p.value === query.platform)?.value ||
+          DEFAULT_PLATFORM_VALUE
       );
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedInterval(query.interval);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setDescription(query.description || '');
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedPacks(query.packs?.map((p) => p.id) || []);
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -91,7 +102,6 @@ const QueryDetails = ({
       name: (formData.get('name') as string) || '',
       sql: (formData.get('sql') as string) || '',
       interval: String(selectedInterval || ''),
-      description: (formData.get('description') as string) || '',
     };
 
     const nextErrors: QueryFormErrors = {};
@@ -113,12 +123,14 @@ const QueryDetails = ({
     const queryData = {
       name: values.name,
       sql: values.sql,
-      platform: selectedPlatform,
+      ...(selectedPlatform !== DEFAULT_PLATFORM_VALUE
+        ? { platform: selectedPlatform }
+        : {}),
       version: query?.version || DEFAULT_FLEET_CONFIG_VERSION,
       shard: query?.shard || DEFAULT_FLEET_CONFIG_SHARD,
       interval: selectedInterval,
       value: query?.value || DEFAULT_FLEET_CONFIG_VALUE,
-      description: values.description,
+      description,
       packs: selectedPacks,
       tags: selectedTags.join(','),
       removed: query?.removed ?? false,
@@ -169,19 +181,16 @@ const QueryDetails = ({
 
           <div className="flex flex-col gap-2">
             <Label htmlFor="sql">{t('sql-code')}</Label>
-            <Input
+            <SqlValidationInput
               ref={sqlInputRef}
               id="sql"
               name="sql"
               defaultValue={query?.sql}
-              aria-invalid={!!formErrors.sql}
+              error={formErrors.sql}
               onChange={() =>
                 setFormErrors((prev) => ({ ...prev, sql: undefined }))
               }
             />
-            {formErrors.sql && (
-              <p className="text-sm text-destructive">{formErrors.sql}</p>
-            )}
           </div>
 
           <div className="flex flex-col gap-2">
@@ -253,6 +262,18 @@ const QueryDetails = ({
               preSelectedTag={query?.tags}
               setSectionTag={setSelectedTags}
               onSelect={() => {}}
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="description">{t('description')}</Label>
+            <ReactQuill
+              theme="snow"
+              id="description"
+              value={description}
+              onChange={(value) => {
+                setDescription(value);
+              }}
             />
           </div>
         </div>

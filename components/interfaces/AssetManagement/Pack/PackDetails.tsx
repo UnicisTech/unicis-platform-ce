@@ -14,7 +14,6 @@ import { useGetPackId } from '@/hooks/fleets/packs/useGetPackId';
 import { useUpdatePack } from '@/hooks/fleets/packs/useUpdatePack';
 import toast from 'react-hot-toast';
 import DeletePack from './DeletePack';
-import FleetConnectRequired from '../FleetConnectRequired';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Button } from '@/components/shadcn/ui/button';
@@ -29,7 +28,7 @@ interface FormData {
 const PackDetails = ({
   fleetTeamId,
   packID,
-  user,
+  user: _user,
 }: {
   fleetTeamId: string;
   user: Partial<User>;
@@ -64,7 +63,7 @@ const PackDetails = ({
           fleetTeamId,
           {
             ...values,
-            platform: pack?.platform || 'all',
+            ...(pack?.platform ? { platform: pack.platform } : {}),
             version: pack?.version || DEFAULT_FLEET_CONFIG_VERSION,
             shard: pack?.shard || DEFAULT_FLEET_CONFIG_SHARD,
           },
@@ -96,68 +95,64 @@ const PackDetails = ({
   }
 
   return (
-    <FleetConnectRequired user={user} teamId={fleetTeamId}>
-      {() => (
-        <div className="space-y-4">
-          <form
-            onSubmit={formik.handleSubmit}
-            onChange={checkFormChanges}
-            className="flex w-full flex-col gap-6"
-          >
-            <div className="flex max-w-xl flex-col gap-6">
-              {/* Name */}
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="name">{t('name')}</Label>
-                <Input
-                  id="name"
-                  name="name"
-                  value={formik.values.name}
-                  onChange={formik.handleChange}
-                  placeholder={t('enter-name')}
-                />
-                {formik.touched.name && formik.errors.name && (
-                  <p className="text-sm text-destructive">
-                    {formik.errors.name}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            {/* Buttons */}
-            <div className="mt-6 flex items-center justify-between gap-3">
-              <div>
-                {canAccess('team_fleet_pack', ['delete']) && (
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    onClick={() => openDeleteModal(pack?.id ?? '')}
-                  >
-                    {t('delete')}
-                  </Button>
-                )}
-              </div>
-              {canAccess('team_fleet_pack', ['update']) && (
-                <Button
-                  type="submit"
-                  variant="default"
-                  disabled={!isFormChanged || formik.isSubmitting}
-                >
-                  {t('save-changes')}
-                </Button>
-              )}
-            </div>
-          </form>
-
-          {/* Delete Modal */}
-          <DeletePack
-            visible={deleteVisible}
-            setVisible={setDeleteVisible}
-            packId={packToDelete!}
-            fleetTeamId={fleetTeamId}
-          />
+    <div className="space-y-4">
+      <form
+        onSubmit={formik.handleSubmit}
+        onChange={checkFormChanges}
+        className="flex w-full flex-col gap-6"
+      >
+        <div className="flex max-w-xl flex-col gap-6">
+          {/* Name */}
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="name">{t('name')}</Label>
+            <Input
+              id="name"
+              name="name"
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              placeholder={t('enter-name')}
+            />
+            {formik.touched.name && formik.errors.name && (
+              <p className="text-sm text-destructive">
+                {formik.errors.name}
+              </p>
+            )}
+          </div>
         </div>
-      )}
-    </FleetConnectRequired>
+
+        {/* Buttons */}
+        <div className="mt-6 flex items-center justify-between gap-3">
+          <div>
+            {canAccess('team_fleet_pack', ['delete']) && (
+              <Button
+                type="button"
+                variant="destructive"
+                onClick={() => openDeleteModal(pack?.id ?? '')}
+              >
+                {t('delete')}
+              </Button>
+            )}
+          </div>
+          {canAccess('team_fleet_pack', ['update']) && (
+            <Button
+              type="submit"
+              variant="default"
+              disabled={!isFormChanged || formik.isSubmitting}
+            >
+              {t('save-changes')}
+            </Button>
+          )}
+        </div>
+      </form>
+
+      {/* Delete Modal */}
+      <DeletePack
+        visible={deleteVisible}
+        setVisible={setDeleteVisible}
+        packId={packToDelete!}
+        fleetTeamId={fleetTeamId}
+      />
+    </div>
   );
 };
 

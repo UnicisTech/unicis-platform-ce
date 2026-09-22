@@ -1,5 +1,4 @@
 import { useCallback, useRef, useState } from 'react';
-import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import {
@@ -21,6 +20,7 @@ import { Input } from '@/components/shadcn/ui/input';
 import { Label } from '@/components/shadcn/ui/label';
 import { Button } from '@/components/shadcn/ui/button';
 import { ChevronRight } from 'lucide-react';
+import { getTextPreview } from '../textPreview';
 
 const TagDetails = ({
   fleetTeamId,
@@ -123,28 +123,37 @@ const TagDetails = ({
                 </div>
                 <div className="space-y-2 p-3">
                   {packs.length > 0 ? (
-                    packs.map((pack) => (
-                      <Link
-                        key={pack.id}
-                        href={`/teams/${slug}/asset-management/packs/${pack.id}`}
-                        className="group flex items-center gap-3 rounded-md border border-slate-200 bg-white px-3 py-2.5 transition-colors hover:border-slate-300 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring dark:border-slate-700 dark:bg-slate-800 dark:hover:border-slate-600 dark:hover:bg-slate-900"
-                      >
-                        <span className="min-w-0 flex-1">
-                          <span className="block truncate text-sm font-medium text-slate-900 dark:text-slate-100">
-                            {pack.name}
-                          </span>
-                          {pack.description && (
-                            <span className="mt-0.5 block truncate text-xs text-slate-500 dark:text-slate-400">
-                              {pack.description}
+                    packs.map((pack) => {
+                      const description = getTextPreview(pack.description);
+
+                      return (
+                        <button
+                          key={pack.id}
+                          type="button"
+                          onClick={() =>
+                            router.push(
+                              `/teams/${slug}/asset-management/packs/${pack.id}`
+                            )
+                          }
+                          className="group flex w-full cursor-pointer items-center gap-3 rounded-md border border-slate-200 bg-white px-3 py-2.5 text-left transition-colors hover:border-slate-300 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring dark:border-slate-700 dark:bg-slate-800 dark:hover:border-slate-600 dark:hover:bg-slate-900"
+                        >
+                          <span className="min-w-0 flex-1">
+                            <span className="block truncate text-sm font-medium text-slate-900 dark:text-slate-100">
+                              {pack.name}
                             </span>
-                          )}
-                        </span>
-                        <ChevronRight
-                          className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:text-slate-600 dark:group-hover:text-slate-200"
-                          aria-hidden="true"
-                        />
-                      </Link>
-                    ))
+                            {description && (
+                              <span className="mt-0.5 block truncate text-xs text-slate-500 dark:text-slate-400">
+                                {description}
+                              </span>
+                            )}
+                          </span>
+                          <ChevronRight
+                            className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:text-slate-600 dark:group-hover:text-slate-200"
+                            aria-hidden="true"
+                          />
+                        </button>
+                      );
+                    })
                   ) : (
                     <p className="px-3 py-6 text-center text-sm text-slate-500 dark:text-slate-400">
                       {t('no-packs-found')}
@@ -164,28 +173,40 @@ const TagDetails = ({
                 </div>
                 <div className="space-y-2 p-3">
                   {queries.length > 0 ? (
-                    queries.map((query) => (
-                      <Link
-                        key={query.id}
-                        href={`/teams/${slug}/asset-management/queries/${query.id}`}
-                        className="group flex items-center gap-3 rounded-md border border-slate-200 bg-white px-3 py-2.5 transition-colors hover:border-slate-300 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring dark:border-slate-700 dark:bg-slate-800 dark:hover:border-slate-600 dark:hover:bg-slate-900"
-                      >
-                        <span className="min-w-0 flex-1">
-                          <span className="block truncate text-sm font-medium text-slate-900 dark:text-slate-100">
-                            {query.name}
-                          </span>
-                          {(query.description || query.sql) && (
-                            <span className="mt-0.5 block truncate text-xs text-slate-500 dark:text-slate-400">
-                              {query.description || query.sql}
+                    queries.map((query) => {
+                      const description = getTextPreview(
+                        query.description,
+                        query.sql
+                      );
+
+                      return (
+                        <button
+                          key={query.id}
+                          type="button"
+                          onClick={() =>
+                            router.push(
+                              `/teams/${slug}/asset-management/queries/${query.id}`
+                            )
+                          }
+                          className="group flex w-full cursor-pointer items-center gap-3 rounded-md border border-slate-200 bg-white px-3 py-2.5 text-left transition-colors hover:border-slate-300 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring dark:border-slate-700 dark:bg-slate-800 dark:hover:border-slate-600 dark:hover:bg-slate-900"
+                        >
+                          <span className="min-w-0 flex-1">
+                            <span className="block truncate text-sm font-medium text-slate-900 dark:text-slate-100">
+                              {query.name}
                             </span>
-                          )}
-                        </span>
-                        <ChevronRight
-                          className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:text-slate-600 dark:group-hover:text-slate-200"
-                          aria-hidden="true"
-                        />
-                      </Link>
-                    ))
+                            {description && (
+                              <span className="mt-0.5 block truncate text-xs text-slate-500 dark:text-slate-400">
+                                {description}
+                              </span>
+                            )}
+                          </span>
+                          <ChevronRight
+                            className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:text-slate-600 dark:group-hover:text-slate-200"
+                            aria-hidden="true"
+                          />
+                        </button>
+                      );
+                    })
                   ) : (
                     <p className="px-3 py-6 text-center text-sm text-slate-500 dark:text-slate-400">
                       {t('fleet:no-queries-found')}

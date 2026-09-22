@@ -7,6 +7,10 @@ import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import { Button } from '@/components/shadcn/ui/button';
 import { useGetDistributedIdResult } from '@/hooks/fleets/distributors/useGetDistributorIdResult';
 import { useDeleteDistributedResult } from '@/hooks/fleets/distributors/useDeleteDistributorResult';
+import {
+  getDistributorStatusBadgeClass,
+  getResultQueryLabel,
+} from '../resultDisplay';
 
 interface DistributorResultsProps {
   distributorId: string;
@@ -21,12 +25,13 @@ const DistributorResults = ({
   const [status] = useState<'new' | 'pending' | 'complete' | 'failed'>(
     'complete'
   );
+  const [page, setPage] = useState(1);
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [resultToDelete, setResultToDelete] = useState<string | null>(null);
   const deleteResult = useDeleteDistributedResult();
 
   const { distributorsResult, isLoading, isError, mutateDistributorResult } =
-    useGetDistributedIdResult(fleetTeamId, distributorId, status);
+    useGetDistributedIdResult(fleetTeamId, distributorId, status, page);
 
   const handleDeleteResult = async () => {
     if (!resultToDelete) {
@@ -51,6 +56,15 @@ const DistributorResults = ({
   }
 
   const results = distributorsResult?.results || [];
+  const pagination = distributorsResult?.pagination;
+  const currentPage = Number(pagination?.page ?? page);
+  const totalRecords = Number(pagination?.total ?? 0);
+  const perPage = Number(pagination?.per_page ?? 0);
+  const totalPages =
+    totalRecords > 0 && perPage > 0 ? Math.ceil(totalRecords / perPage) : 0;
+  const hasPreviousPage = currentPage > 1;
+  const hasNextPage =
+    totalPages > 0 ? currentPage < totalPages : results.length > 0;
 
   return (
     <div className="space-y-4">
@@ -78,43 +92,54 @@ const DistributorResults = ({
         <div className="space-y-2">
           {results.map((result: any, index: number) => {
             const resultId = result.result_id || result.id || index;
+            const queryLabel = getResultQueryLabel(
+              result.display_query_name,
+              result.query_name || result.name
+            );
 
             return (
               <details
                 key={resultId}
                 className="group rounded-lg border border-border bg-card hover:bg-muted/30 transition-colors"
               >
-                <summary className="cursor-pointer px-4 py-3 flex items-center gap-3 list-none">
+                <summary className="cursor-pointer px-4 py-3 grid grid-cols-[24px_150px_minmax(140px,220px)_minmax(240px,1fr)_auto_auto] items-center gap-4 list-none">
                   <ChevronRight className="h-4 w-4 transition-transform group-open:rotate-90" />
 
-                  <div className="flex-1 flex items-center gap-4 flex-wrap">
-                    <span className="text-sm text-muted-foreground min-w-[140px]">
-                      {result.timestamp
-                        ? format(
-                            new Date(result.timestamp),
-                            'yyyy-MM-dd HH:mm:ss'
-                          )
-                        : t('no-timestamp')}
-                    </span>
+                  <span className="text-sm text-muted-foreground">
+                    {result.timestamp
+                      ? format(new Date(result.timestamp), 'yyyy-MM-dd HH:mm:ss')
+                      : t('no-timestamp')}
+                  </span>
 
-                    <span className="text-sm font-medium">
-                      {result.host_identifier || t('unknown-host')}
-                    </span>
-
-                    {result.status && (
-                      <span
-                        className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
-                          result.status === 'complete'
-                            ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                            : result.status === 'failed'
-                              ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
-                              : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200'
-                        }`}
-                      >
-                        {result.status}
+                  <span className="min-w-0 truncate text-sm font-semibold text-slate-800 dark:text-slate-100">
+                    {queryLabel.type && (
+                      <span className="mr-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        {queryLabel.type}:
                       </span>
                     )}
+                    {queryLabel.label}
+                  </span>
+
+                  <div className="min-w-0 space-y-1 break-words text-[13px] leading-5 text-slate-600 dark:text-slate-300">
+                    <div className="flex flex-wrap gap-x-1">
+                      <span className="font-semibold text-slate-500 dark:text-slate-400">
+                        {t('host-identifier')}:{' '}
+                      </span>
+                      <span className="break-all font-mono text-[12px]">
+                        {result.host_identifier || t('unknown-host')}
+                      </span>
+                    </div>
                   </div>
+
+                  {result.status ? (
+                    <span
+                      className={`inline-flex justify-center rounded-full px-3 py-1 text-xs font-semibold ${getDistributorStatusBadgeClass(result.status)}`}
+                    >
+                      {result.status}
+                    </span>
+                  ) : (
+                    <span />
+                  )}
 
                   <Button
                     type="button"
@@ -144,6 +169,9 @@ const DistributorResults = ({
                             'timestamp',
                             'host_identifier',
                             'status',
+                            'display_query_name',
+                            'query_name',
+                            'name',
                           ].includes(key)
                       )
                       .map(([key, value]) => (
@@ -165,6 +193,33 @@ const DistributorResults = ({
               </details>
             );
           })}
+        </div>
+      )}
+
+      {(hasPreviousPage || hasNextPage) && (
+        <div className="flex items-center justify-between rounded-lg border border-border px-4 py-3">
+          <div className="text-sm text-muted-foreground">
+            {t('page')} {currentPage}
+            {totalPages > 0 ? ` ${t('of')} ${totalPages}` : null}
+          </div>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => setPage((value) => Math.max(1, value - 1))}
+              disabled={!hasPreviousPage}
+              className="rounded-md border border-input bg-background px-3 py-1 text-sm transition-colors hover:bg-muted disabled:opacity-50"
+            >
+              {t('previous')}
+            </button>
+            <button
+              type="button"
+              onClick={() => setPage((value) => value + 1)}
+              disabled={!hasNextPage}
+              className="rounded-md border border-input bg-background px-3 py-1 text-sm transition-colors hover:bg-muted disabled:opacity-50"
+            >
+              {t('next')}
+            </button>
+          </div>
         </div>
       )}
 

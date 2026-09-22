@@ -57,9 +57,15 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
   const fleetBase = process.env.FLEET_API_URL;
   const fleetToken = getFleetAccessTokenFromCookieStore(req.cookies);
 
-  if (!fleetBase || !fleetToken) {
+  if (!fleetBase) {
+    return res.status(503).json({
+      error: { message: 'FLEET_NOT_CONFIGURED' },
+    });
+  }
+
+  if (!fleetToken) {
     return res.status(401).json({
-      error: { message: 'Fleet not configured or not authenticated' },
+      error: { message: 'Fleet not authenticated' },
     });
   }
 
@@ -109,9 +115,15 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
   const fleetBase = process.env.FLEET_API_URL;
   const fleetToken = getFleetAccessTokenFromCookieStore(req.cookies);
 
-  if (!fleetBase || !fleetToken) {
+  if (!fleetBase) {
+    return res.status(503).json({
+      error: { message: 'FLEET_NOT_CONFIGURED' },
+    });
+  }
+
+  if (!fleetToken) {
     return res.status(401).json({
-      error: { message: 'Fleet not configured or not authenticated' },
+      error: { message: 'Fleet not authenticated' },
     });
   }
 

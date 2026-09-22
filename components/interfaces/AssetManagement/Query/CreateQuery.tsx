@@ -34,6 +34,7 @@ import {
 } from '@/components/shadcn/ui/select';
 import { useForm, Controller } from 'react-hook-form';
 import { User } from '@/generated/client';
+import SqlValidationInput from '../SqlValidationInput';
 
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
@@ -104,9 +105,13 @@ export default function CreateQuery({
     clearErrors('sql');
 
     try {
+      const { platform, ...queryData } = data;
+
       await createQuery(fleetTeamId, {
-        ...data,
-        platform: data.platform,
+        ...queryData,
+        ...(platform !== DEFAULT_PLATFORM_VALUE
+          ? { platform }
+          : {}),
         version: DEFAULT_FLEET_CONFIG_VERSION,
         shard: DEFAULT_FLEET_CONFIG_SHARD,
         value: DEFAULT_FLEET_CONFIG_VALUE,
@@ -152,18 +157,13 @@ export default function CreateQuery({
 
           <div>
             <Label htmlFor="sql">{t('fleet:fleet-sql-code')}</Label>
-            <Input
+            <SqlValidationInput
               id="sql"
-              aria-invalid={!!errors.sql}
+              error={errors.sql?.message && String(errors.sql.message)}
               {...register('sql', {
                 required: t('fleet:sql-query-required'),
               })}
             />
-            {errors.sql?.message && (
-              <p className="text-sm text-destructive">
-                {String(errors.sql.message)}
-              </p>
-            )}
           </div>
 
           <div>

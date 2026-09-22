@@ -60,7 +60,7 @@ const EditPack = ({
           fleetTeamId,
           {
             ...values,
-            platform: pack.platform || 'all',
+            ...(pack.platform ? { platform: pack.platform } : {}),
             version: pack.version || DEFAULT_FLEET_CONFIG_VERSION,
             shard: pack.shard || DEFAULT_FLEET_CONFIG_SHARD,
           },
