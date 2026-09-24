@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -23,6 +23,7 @@ import { useAccessFleetAccount, useBootstrapFleet } from '@/hooks/fleets';
 import {
   fleetAccessTokenCookieName,
   fleetAccessTokenCookieOptions,
+  fleetAuthExpiredEventName,
   legacyFleetAccessTokenCookieName,
 } from '@/lib/fleet/cookies';
 import { useFleetConnection } from '@/hooks/fleets/connect/useFleetConnection';
@@ -110,6 +111,25 @@ const FleetConnectRequired = ({
     enrollmentToken && !isAuthenticated && !enrollmentDialogDismissed
   );
   const connectDialogOpen = visible || shouldOpenEnrollmentDialog;
+
+  useEffect(() => {
+    const handleFleetAuthExpired = () => {
+      setAuthOverride(false);
+      setVisible(false);
+    };
+
+    window.addEventListener(
+      fleetAuthExpiredEventName,
+      handleFleetAuthExpired
+    );
+
+    return () => {
+      window.removeEventListener(
+        fleetAuthExpiredEventName,
+        handleFleetAuthExpired
+      );
+    };
+  }, []);
 
   const handleConnectDialogOpenChange = (open: boolean) => {
     setVisible(open);

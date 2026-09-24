@@ -1,5 +1,6 @@
 import env from '@/lib/env';
 import { isFleetMockEnabled } from './mock/config';
+import { clearFleetAccessToken } from './cookies';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -31,6 +32,10 @@ const getFleetErrorMessage = async (response: Response) => {
 
 const assertFleetResponse = async (response: Response) => {
   if (response.ok) return;
+
+  if (response.status === 401) {
+    clearFleetAccessToken();
+  }
 
   throw Object.assign(new Error(await getFleetErrorMessage(response)), {
     name: 'FleetApiError',
