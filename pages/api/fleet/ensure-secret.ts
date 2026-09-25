@@ -57,6 +57,10 @@ export default async function handler(
       return res.status(200).json({ exists: true, secret });
     }
 
+    if (getRes.status === 401) {
+      return res.status(401).json({ error: 'Fleet authentication expired' });
+    }
+
     // 403 - User doesn't have permission (e.g., member role)
     if (getRes.status === 403) {
       console.log(
