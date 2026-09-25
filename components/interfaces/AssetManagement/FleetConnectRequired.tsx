@@ -84,8 +84,13 @@ const FleetConnectRequired = ({
   const [showBootstrap, setShowBootstrap] = useState(false);
   const [isBootstrapping, setIsBootstrapping] = useState(false);
 
-  const { access, isLoading, isNotConfigured, mutateFleetAccess } =
-    useVerifyFleetAsses();
+  const {
+    access,
+    isLoading,
+    isValidating,
+    isNotConfigured,
+    mutateFleetAccess,
+  } = useVerifyFleetAsses();
   const {
     connection,
     isDisconnected,
@@ -95,18 +100,9 @@ const FleetConnectRequired = ({
   } = useFleetConnection(teamId);
   const accessFleetAccount = useAccessFleetAccount();
   const bootstrapFleet = useBootstrapFleet();
-  // Mock access is session state. Ignore a token left in the browser so a
-  // reload reliably restores the initial state of the `unconfigured` scenario.
-  const hasFleetToken =
-    !mockEnabled &&
-    Boolean(
-      Cookies.get(fleetAccessTokenCookieName) ||
-        Cookies.get(legacyFleetAccessTokenCookieName)
-    );
   const accessAuthenticated = Boolean(access?.is_active && !access.is_expired);
   const isAuthenticated =
-    !isDeleted &&
-    (authOverride ?? (isLoading ? hasFleetToken : accessAuthenticated));
+    !isDeleted && (authOverride ?? (!isValidating && accessAuthenticated));
   const shouldOpenEnrollmentDialog = Boolean(
     enrollmentToken && !isAuthenticated && !enrollmentDialogDismissed
   );
@@ -408,7 +404,7 @@ const FleetConnectRequired = ({
     }
   };
 
-  if (isLoading || isConnectionLoading) return <Loading />;
+  if (isLoading || isValidating || isConnectionLoading) return <Loading />;
 
   if (isNotConfigured) {
     return (
