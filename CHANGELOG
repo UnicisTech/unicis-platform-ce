@@ -22,13 +22,13 @@ The information about Unicis Platform releases and changes is listed in order be
 *Version: v2026-09-28*
 
 - API
-  - **[OP#550]** Added a dedicated endpoint for loading task comments, including optional cursor-based pagination
+  - Added a dedicated endpoint for loading task comments, including optional cursor-based pagination
   - Added a dedicated team member avatar endpoint for comment authors
   - Task details can now be loaded without comments, reducing the initial task response size
   - Updated the OpenAPI specification to document the new comments and avatar responses
   - Added request validation for task metadata and CSC, PIA, RM, RPA, and TIA property updates
 - Improvements
-  - **[OP#551]** Introduced unified typed access to task and team JSON properties
+  - Introduced unified typed access to task and team JSON properties
   - Migrated CSC, PIA, RM, RPA, and TIA views, dashboards, audit logs, global search, and MCP tools to the shared properties interface
   - Centralized immutable property updates to prevent unrelated property data from being overwritten
   - Made property updates atomic and added retry handling for concurrent database writes
