@@ -15,6 +15,39 @@ tags:
 
 The information about Unicis Platform releases and changes is listed in order below.
 
+## [Task API, Properties & Asset Management Improvements] 2026-09-25
+
+*Release date: 2026-09-25*
+
+*Version: v2026-09-25*
+
+- API
+  - **[OP#550]** Added a dedicated endpoint for loading task comments, including optional cursor-based pagination
+  - Added a dedicated team member avatar endpoint for comment authors
+  - Task details can now be loaded without comments, reducing the initial task response size
+  - Updated the OpenAPI specification to document the new comments and avatar responses
+  - Added request validation for task metadata and CSC, PIA, RM, RPA, and TIA property updates
+- Improvements
+  - **[OP#551]** Introduced unified typed access to task and team JSON properties
+  - Migrated CSC, PIA, RM, RPA, and TIA views, dashboards, audit logs, global search, and MCP tools to the shared properties interface
+  - Centralized immutable property updates to prevent unrelated property data from being overwritten
+  - Made property updates atomic and added retry handling for concurrent database writes
+  - Updated PIA, RM, RPA, and TIA imports to create tasks together with their module-specific properties
+  - Task comments are now loaded and refreshed independently from task details
+  - Comment avatars are loaded lazily and fall back to the user’s initials when unavailable
+- Asset Management
+  - Restricted Asset Management list and detail pages to eligible subscription plans
+  - Added consistent Fleet connection handling across assets, queries, distributors, packs, and tags
+  - Added SQL validation with clearer validation feedback for queries and distributors
+  - Added date-and-time scheduling for distributed queries
+  - Improved asset, query, distributor, pack, and tag detail-page layouts and metadata display
+  - Added pagination and improved status presentation for distributed-query results
+  - Improved descriptions by displaying sanitized plain-text previews
+- Fleet Authentication
+  - Added automatic account-secret rotation when an expired secret is detected during login
+  - Fleet API requests are now blocked until access-token verification is complete
+  - Improved Fleet secret and authentication cookie handling
+
 ## [Hotfix — Bug Fixes + Security Patches] 2026-09-09
 
 *Release date: 2026-09-09*
