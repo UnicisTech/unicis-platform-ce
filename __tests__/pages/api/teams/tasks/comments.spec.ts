@@ -38,7 +38,12 @@ jest.mock('lib/serialize', () => ({
 
 import { throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
-import { deleteComment, getTaskComments, updateComment } from 'models/comment';
+import {
+  createComment,
+  deleteComment,
+  getTaskComments,
+  updateComment,
+} from 'models/comment';
 
 const baseQuery = { slug: 'test-team', taskNumber: '5' };
 const commentsPage = {
@@ -139,6 +144,31 @@ describe('/api/teams/[slug]/tasks/[taskNumber]/comments', () => {
     await handler(req, res);
 
     expect(res._getStatusCode()).toBe(404);
+  });
+
+  it('uses the comment permission when creating a comment', async () => {
+    (createComment as jest.Mock).mockResolvedValue(commentsPage.items[0]);
+    const req = createMockReq({
+      method: 'POST',
+      query: baseQuery,
+      body: { text: 'New comment' },
+    });
+    const res = createMockRes();
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(200);
+    expect(throwIfNotAllowed).toHaveBeenCalledWith(
+      mockTeamMember,
+      'task',
+      'comment'
+    );
+    expect(createComment).toHaveBeenCalledWith({
+      text: 'New comment',
+      taskNumber: 5,
+      slug: 'test-team',
+      userId: 'user-1',
+    });
   });
 
   it('scopes comment updates to the task and team from the URL', async () => {

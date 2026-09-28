@@ -1,7 +1,13 @@
 import { Role } from '@/generated/browser';
 
 export type RoleType = (typeof Role)[keyof typeof Role];
-export type Action = 'create' | 'update' | 'read' | 'delete' | 'leave';
+export type Action =
+  | 'create'
+  | 'update'
+  | 'read'
+  | 'delete'
+  | 'leave'
+  | 'comment';
 export type Resource =
   | 'team'
   | 'team_member'
@@ -312,7 +318,7 @@ export const permissions: RolePermissions = {
     },
     {
       resource: 'task',
-      actions: ['read'],
+      actions: ['read', 'comment'],
     },
     {
       resource: 'team_fleet_connect',

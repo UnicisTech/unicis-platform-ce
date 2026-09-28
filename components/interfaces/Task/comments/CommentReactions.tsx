@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import type { TaskCommentDto } from 'types';
+import useCanAccess from 'hooks/useCanAccess';
 
 const REACTION_EMOJIS = [
   { emoji: '\u{1F44D}', label: 'Thumbs up' },
@@ -12,16 +13,23 @@ const REACTION_EMOJIS = [
 ];
 
 interface CommentReactionsProps {
+  slug: string;
   comment: TaskCommentDto;
   onReact: (commentId: number, emoji: string) => Promise<void>;
 }
 
-const CommentReactions = ({ comment, onReact }: CommentReactionsProps) => {
+const CommentReactions = ({
+  slug,
+  comment,
+  onReact,
+}: CommentReactionsProps) => {
   const { data: session } = useSession();
+  const { canAccess } = useCanAccess(slug);
   const [pickerOpen, setPickerOpen] = useState(false);
   const pickerRef = useRef<HTMLDivElement>(null);
 
   const currentUserId = session?.user?.id;
+  const canReact = canAccess('task', ['comment']);
 
   // Group reactions by emoji
   const reactionGroups = (comment.reactions || []).reduce(
@@ -62,46 +70,69 @@ const CommentReactions = ({ comment, onReact }: CommentReactionsProps) => {
 
   return (
     <div className="flex flex-wrap items-center gap-1 mt-1">
-      {Object.entries(reactionGroups).map(([emoji, group]) => (
-        <button
-          key={emoji}
-          onClick={() => handleReact(emoji)}
-          title={group.users.join(', ')}
-          className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs transition-colors hover:bg-slate-100 dark:hover:bg-slate-700 ${
-            group.reactedByMe
-              ? 'border-blue-300 bg-blue-50 dark:bg-blue-950/40 dark:border-blue-700'
-              : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800'
-          }`}
-        >
-          <span>{emoji}</span>
-          <span className="text-slate-600 dark:text-slate-300">
-            {group.count}
+      {Object.entries(reactionGroups).map(([emoji, group]) => {
+        const className = `inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs ${
+          canReact
+            ? 'transition-colors hover:bg-slate-100 dark:hover:bg-slate-700'
+            : ''
+        } ${
+          group.reactedByMe
+            ? 'border-blue-300 bg-blue-50 dark:bg-blue-950/40 dark:border-blue-700'
+            : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800'
+        }`;
+        const contents = (
+          <>
+            <span>{emoji}</span>
+            <span className="text-slate-600 dark:text-slate-300">
+              {group.count}
+            </span>
+          </>
+        );
+
+        return canReact ? (
+          <button
+            key={emoji}
+            onClick={() => handleReact(emoji)}
+            title={group.users.join(', ')}
+            className={className}
+          >
+            {contents}
+          </button>
+        ) : (
+          <span
+            key={emoji}
+            title={group.users.join(', ')}
+            className={className}
+          >
+            {contents}
           </span>
-        </button>
-      ))}
-      <div className="relative" ref={pickerRef}>
-        <button
-          onClick={() => setPickerOpen(!pickerOpen)}
-          className="inline-flex items-center justify-center rounded-full border border-dashed border-slate-300 dark:border-slate-600 px-1.5 py-0.5 text-xs text-slate-400 transition-colors hover:border-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-600 dark:hover:text-slate-300"
-          title="Add reaction"
-        >
-          +
-        </button>
-        {pickerOpen && (
-          <div className="absolute bottom-full left-0 z-10 mb-1 flex gap-1 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-1.5 shadow-lg">
-            {REACTION_EMOJIS.map(({ emoji, label }) => (
-              <button
-                key={emoji}
-                onClick={() => handleReact(emoji)}
-                title={label}
-                className="rounded p-1 text-base transition-transform hover:scale-125 hover:bg-slate-100 dark:hover:bg-slate-700"
-              >
-                {emoji}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
+        );
+      })}
+      {canReact && (
+        <div className="relative" ref={pickerRef}>
+          <button
+            onClick={() => setPickerOpen(!pickerOpen)}
+            className="inline-flex items-center justify-center rounded-full border border-dashed border-slate-300 dark:border-slate-600 px-1.5 py-0.5 text-xs text-slate-400 transition-colors hover:border-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-600 dark:hover:text-slate-300"
+            title="Add reaction"
+          >
+            +
+          </button>
+          {pickerOpen && (
+            <div className="absolute bottom-full left-0 z-10 mb-1 flex gap-1 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-1.5 shadow-lg">
+              {REACTION_EMOJIS.map(({ emoji, label }) => (
+                <button
+                  key={emoji}
+                  onClick={() => handleReact(emoji)}
+                  title={label}
+                  className="rounded p-1 text-base transition-transform hover:scale-125 hover:bg-slate-100 dark:hover:bg-slate-700"
+                >
+                  {emoji}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

@@ -34,7 +34,7 @@ export default async function handler(
 
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
-  throwIfNotAllowed(teamMember, 'task', 'read');
+  throwIfNotAllowed(teamMember, 'task', 'comment');
 
   const { slug, taskNumber } = req.query;
   const slugValue = slug as string;

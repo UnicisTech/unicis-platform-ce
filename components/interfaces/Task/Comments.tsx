@@ -199,7 +199,7 @@ export default function Comments({
             ))}
         </div>
       )}
-      <AccessControl resource="task" actions={['update']} slug={slug}>
+      <AccessControl resource="task" actions={['comment']} slug={slug}>
         <div
           className={
             comments.length > 0

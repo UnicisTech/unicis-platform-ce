@@ -780,6 +780,7 @@ paths:
       operationId: createTaskComment
       tags: [Tasks]
       summary: Add a comment to a task
+      description: Adds a comment to the task. Requires `task:comment` permission.
       requestBody:
         required: true
         content:
@@ -845,6 +846,40 @@ paths:
       responses:
         '200':
           description: Comment deleted
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/teams/{slug}/tasks/{taskNumber}/reactions:
+    parameters:
+      - $ref: '#/components/parameters/slug'
+      - $ref: '#/components/parameters/taskNumber'
+
+    post:
+      operationId: toggleTaskCommentReaction
+      tags: [Tasks]
+      summary: Toggle a reaction on a task comment
+      description: Adds or removes the caller's reaction. Requires `task:comment` permission.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [commentId, emoji]
+              properties:
+                commentId:
+                  type: integer
+                emoji:
+                  type: string
+      responses:
+        '200':
+          description: Reaction toggled
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
