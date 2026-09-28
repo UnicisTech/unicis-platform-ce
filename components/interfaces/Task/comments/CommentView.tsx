@@ -4,11 +4,12 @@ import QuillEditor from '@/components/shared/QuillEditor';
 import CommentReactions from './CommentReactions';
 
 interface CommentViewProps {
+  slug: string;
   comment: TaskCommentDto;
   onReact: (commentId: number, emoji: string) => Promise<void>;
 }
 
-const CommentView = ({ comment, onReact }: CommentViewProps) => (
+const CommentView = ({ slug, comment, onReact }: CommentViewProps) => (
   <>
     <div className="quill-view-mode text-[13px] text-slate-700 dark:text-slate-200 leading-relaxed">
       <QuillEditor
@@ -17,7 +18,7 @@ const CommentView = ({ comment, onReact }: CommentViewProps) => (
         modules={{ toolbar: false }}
       />
     </div>
-    <CommentReactions comment={comment} onReact={onReact} />
+    <CommentReactions slug={slug} comment={comment} onReact={onReact} />
   </>
 );
 

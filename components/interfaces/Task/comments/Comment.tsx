@@ -91,7 +91,7 @@ const Comment = ({
             updateHandler={updateComment}
           />
         ) : (
-          <CommentView comment={comment} onReact={onReact} />
+          <CommentView slug={slug} comment={comment} onReact={onReact} />
         )}
       </div>
     </div>
