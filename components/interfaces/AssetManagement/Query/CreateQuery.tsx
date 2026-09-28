@@ -109,9 +109,7 @@ export default function CreateQuery({
 
       await createQuery(fleetTeamId, {
         ...queryData,
-        ...(platform !== DEFAULT_PLATFORM_VALUE
-          ? { platform }
-          : {}),
+        ...(platform !== DEFAULT_PLATFORM_VALUE ? { platform } : {}),
         version: DEFAULT_FLEET_CONFIG_VERSION,
         shard: DEFAULT_FLEET_CONFIG_SHARD,
         value: DEFAULT_FLEET_CONFIG_VALUE,

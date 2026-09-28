@@ -180,7 +180,7 @@ const Distributors = ({ team, user }: { team: Team; user: Partial<User> }) => {
                                 variant="destructive"
                                 onClick={(event) => {
                                   event.stopPropagation();
-                                  openDeleteModal(task.distributed_query.id)
+                                  openDeleteModal(task.distributed_query.id);
                                 }}
                                 aria-label={t('delete')}
                                 title={t('delete')}

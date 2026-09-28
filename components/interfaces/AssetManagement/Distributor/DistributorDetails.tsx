@@ -74,18 +74,9 @@ const DistributorsDetails = ({
                 )}
               </div>
             </div>
-            <DataInfo
-              header={t('script-query-id')}
-              data={distributor?.id}
-            />
-            <DataInfo
-              header={t('created-at')}
-              data={distributor?.created_at}
-            />
-            <DataInfo
-              header={t('updated-at')}
-              data={distributor?.updated_at}
-            />
+            <DataInfo header={t('script-query-id')} data={distributor?.id} />
+            <DataInfo header={t('created-at')} data={distributor?.created_at} />
+            <DataInfo header={t('updated-at')} data={distributor?.updated_at} />
           </div>
 
           {description && (

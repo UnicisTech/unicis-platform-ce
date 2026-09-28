@@ -19,11 +19,7 @@ const TagContent = ({ fleetTeamId, tagId, user }) => {
   return (
     <>
       <TagsTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <TagDetails
-        user={user}
-        fleetTeamId={fleetTeamId}
-        tagID={tagId}
-      />
+      <TagDetails user={user} fleetTeamId={fleetTeamId} tagID={tagId} />
     </>
   );
 };

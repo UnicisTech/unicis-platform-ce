@@ -32,9 +32,7 @@ const SqlValidationInput = forwardRef<
     ref
   ) => {
     const { t } = useTranslation('fleet');
-    const [sql, setSql] = useState(() =>
-      String(value ?? defaultValue ?? '')
-    );
+    const [sql, setSql] = useState(() => String(value ?? defaultValue ?? ''));
     const [validation, setValidation] = useState<ValidationState>(() =>
       sql.trim() ? { status: 'pending' } : { status: 'idle' }
     );

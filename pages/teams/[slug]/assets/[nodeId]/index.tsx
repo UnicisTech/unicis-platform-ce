@@ -22,11 +22,7 @@ const NodeContent = ({ fleetTeamId, nodeId, user }) => {
       <NodeTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {
         activeTab === 'Overview' && (
-          <NodeDetails
-            user={user}
-            fleetTeamId={fleetTeamId}
-            nodeID={nodeId}
-          />
+          <NodeDetails user={user} fleetTeamId={fleetTeamId} nodeID={nodeId} />
         )
         // <Card heading={activeTab}>
         //   <Card.Body>
@@ -44,11 +40,7 @@ const NodeContent = ({ fleetTeamId, nodeId, user }) => {
       }
       {
         activeTab === 'Result Logs' && (
-          <ResultLogs
-            user={user}
-            fleetTeamId={fleetTeamId}
-            nodeID={nodeId}
-          />
+          <ResultLogs user={user} fleetTeamId={fleetTeamId} nodeID={nodeId} />
         )
         // <Card heading={activeTab}>
         //   <Card.Body>
@@ -57,11 +49,7 @@ const NodeContent = ({ fleetTeamId, nodeId, user }) => {
       }
       {
         activeTab === 'Asset Configurations' && (
-          <AssetConfig
-            user={user}
-            fleetTeamId={fleetTeamId}
-            nodeID={nodeId}
-          />
+          <AssetConfig user={user} fleetTeamId={fleetTeamId} nodeID={nodeId} />
         )
         // <Card heading={activeTab}>
         //   <Card.Body>
@@ -80,11 +68,7 @@ const NodeById = ({ teamFeatures: _teamFeatures, team, user }) => {
   return (
     <FleetConnectRequired user={user} teamId={team.id}>
       {() => (
-        <NodeContent
-          fleetTeamId={team.id}
-          nodeId={nodeIdStr}
-          user={user}
-        />
+        <NodeContent fleetTeamId={team.id} nodeId={nodeIdStr} user={user} />
       )}
     </FleetConnectRequired>
   );

@@ -107,7 +107,10 @@ const DistributorResults = ({
 
                   <span className="text-sm text-muted-foreground">
                     {result.timestamp
-                      ? format(new Date(result.timestamp), 'yyyy-MM-dd HH:mm:ss')
+                      ? format(
+                          new Date(result.timestamp),
+                          'yyyy-MM-dd HH:mm:ss'
+                        )
                       : t('no-timestamp')}
                   </span>
 

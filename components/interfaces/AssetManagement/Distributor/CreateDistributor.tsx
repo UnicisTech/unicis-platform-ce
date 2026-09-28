@@ -44,9 +44,7 @@ const CreateDistributors = ({
   const [formErrors, setFormErrors] = useState<DistributorFormErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [description, setDescription] = useState('');
-  const [notBeforeDate, setNotBeforeDate] = useState(
-    new Date().toISOString()
-  );
+  const [notBeforeDate, setNotBeforeDate] = useState(new Date().toISOString());
   const { t } = useTranslation(['common', 'fleet']);
   const createDistributor = useCreateDistributors();
   const { mutateDistributorsTasks } = useDistributors(fleetTeamId);

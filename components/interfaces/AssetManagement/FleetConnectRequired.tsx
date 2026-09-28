@@ -114,10 +114,7 @@ const FleetConnectRequired = ({
       setVisible(false);
     };
 
-    window.addEventListener(
-      fleetAuthExpiredEventName,
-      handleFleetAuthExpired
-    );
+    window.addEventListener(fleetAuthExpiredEventName, handleFleetAuthExpired);
 
     return () => {
       window.removeEventListener(

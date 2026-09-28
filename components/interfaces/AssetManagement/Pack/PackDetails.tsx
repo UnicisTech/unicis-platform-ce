@@ -113,9 +113,7 @@ const PackDetails = ({
               placeholder={t('enter-name')}
             />
             {formik.touched.name && formik.errors.name && (
-              <p className="text-sm text-destructive">
-                {formik.errors.name}
-              </p>
+              <p className="text-sm text-destructive">{formik.errors.name}</p>
             )}
           </div>
         </div>
