@@ -410,8 +410,7 @@ export default function CreateCourse2({
                 rules={{
                   required: t('video-url') + ' is required.',
                   validate: (value) =>
-                    !!resolveEmbeddedVideo(value) ||
-                    t('unsupported-video-url'),
+                    !!resolveEmbeddedVideo(value) || t('unsupported-video-url'),
                 }}
                 render={({ field, fieldState }) => (
                   <FormItem>
