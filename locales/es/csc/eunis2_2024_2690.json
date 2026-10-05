@@ -1,0 +1,2163 @@
+{
+  "sections": {
+    "section-1": {
+      "label": "Política sobre la seguridad de los sistemas de redes y de información"
+    },
+    "section-2": {
+      "label": "Política de gestión de riesgos"
+    },
+    "section-3": {
+      "label": "Gestión de incidentes"
+    },
+    "section-4": {
+      "label": "Continuidad de las actividades y gestión de las crisis"
+    },
+    "section-5": {
+      "label": "Seguridad de las cadenas de suministro"
+    },
+    "section-6": {
+      "label": "Seguridad en la adquisición, el desarrollo y el mantenimiento de sistemas de redes y de información"
+    },
+    "section-7": {
+      "label": "Orientaciones y procedimientos para evaluar la eficacia de las medidas de gestión de riesgos de ciberseguridad"
+    },
+    "section-8": {
+      "label": "Formación en seguridad y prácticas básicas de ciberhigiene"
+    },
+    "section-9": {
+      "label": "Criptografía"
+    },
+    "section-10": {
+      "label": "Seguridad de los recursos humanos"
+    },
+    "section-11": {
+      "label": "Control de accesos"
+    },
+    "section-12": {
+      "label": "Gestión de activos"
+    },
+    "section-13": {
+      "label": "Seguridad medioambiental y física"
+    }
+  },
+  "controls": {
+    "eu-nis2-ir-1-1-1-a": {
+      "code": "1.1.1.a",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Política sobre la seguridad de las redes y sistemas de información\nA efectos del artículo 21, apartado 2, letra a), de la Directiva (UE) 2022/2555, la política de seguridad de los sistemas de redes y de información:\ndeterminará el enfoque de las entidades pertinentes para gestionar la seguridad de sus sistemas de redes y de información;"
+    },
+    "eu-nis2-ir-1-1-1-b": {
+      "code": "1.1.1.b",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Política sobre la seguridad de las redes y sistemas de información\nA efectos del artículo 21, apartado 2, letra a), de la Directiva (UE) 2022/2555, la política de seguridad de los sistemas de redes y de información:\nse adecuará a la estrategia y los objetivos operativos de las entidades pertinentes y los completará;"
+    },
+    "eu-nis2-ir-1-1-1-c": {
+      "code": "1.1.1.c",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Política sobre la seguridad de las redes y sistemas de información\nA efectos del artículo 21, apartado 2, letra a), de la Directiva (UE) 2022/2555, la política de seguridad de los sistemas de redes y de información:\nestablecerá los objetivos de seguridad de las redes y de la información;"
+    },
+    "eu-nis2-ir-1-1-1-d": {
+      "code": "1.1.1.d",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Política sobre la seguridad de las redes y sistemas de información\nA efectos del artículo 21, apartado 2, letra a), de la Directiva (UE) 2022/2555, la política de seguridad de los sistemas de redes y de información:\nse comprometerá a mejorar constantemente la seguridad de los sistemas de redes y de información;"
+    },
+    "eu-nis2-ir-1-1-1-e": {
+      "code": "1.1.1.e",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Política sobre la seguridad de las redes y sistemas de información\nA efectos del artículo 21, apartado 2, letra a), de la Directiva (UE) 2022/2555, la política de seguridad de los sistemas de redes y de información:\nse comprometerá a facilitar los recursos oportunos para su aplicación, incluidos el personal, los recursos financieros, los procedimientos, las herramientas y las tecnologías que se necesiten;"
+    },
+    "eu-nis2-ir-1-1-1-f": {
+      "code": "1.1.1.f",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Política sobre la seguridad de las redes y sistemas de información\nA efectos del artículo 21, apartado 2, letra a), de la Directiva (UE) 2022/2555, la política de seguridad de los sistemas de redes y de información:\nserá comunicada a los empleados y partes externas que proceda, que deberán aprobarla;"
+    },
+    "eu-nis2-ir-1-1-1-g": {
+      "code": "1.1.1.g",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Política sobre la seguridad de las redes y sistemas de información\nA efectos del artículo 21, apartado 2, letra a), de la Directiva (UE) 2022/2555, la política de seguridad de los sistemas de redes y de información:\npresentará los roles y responsabilidades con arreglo al punto 1.2;"
+    },
+    "eu-nis2-ir-1-1-1-h": {
+      "code": "1.1.1.h",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Política sobre la seguridad de las redes y sistemas de información\nA efectos del artículo 21, apartado 2, letra a), de la Directiva (UE) 2022/2555, la política de seguridad de los sistemas de redes y de información:\ndetallará la documentación que debe conservarse y la duración del período de conservación;"
+    },
+    "eu-nis2-ir-1-1-1-i": {
+      "code": "1.1.1.i",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Política sobre la seguridad de las redes y sistemas de información\nA efectos del artículo 21, apartado 2, letra a), de la Directiva (UE) 2022/2555, la política de seguridad de los sistemas de redes y de información:\nenumerará las políticas específicas;"
+    },
+    "eu-nis2-ir-1-1-1-j": {
+      "code": "1.1.1.j",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Política sobre la seguridad de las redes y sistemas de información\nA efectos del artículo 21, apartado 2, letra a), de la Directiva (UE) 2022/2555, la política de seguridad de los sistemas de redes y de información:\nfijará indicadores y medidas para supervisar su aplicación y el estado actual del nivel de madurez de la seguridad de las redes y de la información de las entidades pertinentes;"
+    },
+    "eu-nis2-ir-1-1-1-k": {
+      "code": "1.1.1.k",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Política sobre la seguridad de las redes y sistemas de información\nA efectos del artículo 21, apartado 2, letra a), de la Directiva (UE) 2022/2555, la política de seguridad de los sistemas de redes y de información:\nindicará la fecha de la aprobación formal por parte de los órganos de dirección de las entidades pertinentes [en adelante, «órgano(s) de dirección»]."
+    },
+    "eu-nis2-ir-1-1-2": {
+      "code": "1.1.2",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Política sobre la seguridad de las redes y sistemas de información\nEl órgano de dirección revisará y, cuando proceda, actualizará la política de seguridad de los sistemas de redes y de información al menos una vez al año, así como cuando se produzcan incidentes significativos o cambios significativos en las operaciones o los riesgos. Los resultados de las revisiones quedarán documentados."
+    },
+    "eu-nis2-ir-1-2-1": {
+      "code": "1.2.1",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Roles, responsabilidades y autoridades\nComo parte de la política de seguridad de los sistemas de redes y de información a que hace referencia el punto 1.1, las entidades pertinentes determinarán las responsabilidades y autoridades en materia de seguridad de los sistemas de redes y de información y las asignarán a distintos roles, las repartirán en función de las necesidades de la entidad y se las comunicarán a los órganos de dirección."
+    },
+    "eu-nis2-ir-1-2-2": {
+      "code": "1.2.2",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Roles, responsabilidades y autoridades\nLas entidades pertinentes exigirán a todo el personal y a terceros que apliquen la seguridad de los sistemas de redes y de información de conformidad con la política de seguridad de las redes y la información y las políticas específicas existentes, así como con los procedimientos de las entidades pertinentes."
+    },
+    "eu-nis2-ir-1-2-3": {
+      "code": "1.2.3",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Roles, responsabilidades y autoridades\nAl menos una persona informará directamente a los órganos de dirección sobre cuestiones de seguridad de los sistemas de redes y de información."
+    },
+    "eu-nis2-ir-1-2-4": {
+      "code": "1.2.4",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Roles, responsabilidades y autoridades\nEn función del tamaño de las entidades pertinentes, la seguridad de las redes y los sistemas de información corresponderá a roles o funciones específicos que se desempeñarán además de los roles existentes."
+    },
+    "eu-nis2-ir-1-2-5": {
+      "code": "1.2.5",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Roles, responsabilidades y autoridades\nAquellos cargos o áreas de responsabilidad que entren en conflicto se separarán, cuando proceda."
+    },
+    "eu-nis2-ir-1-2-6": {
+      "code": "1.2.6",
+      "section": "section-1",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Roles, responsabilidades y autoridades\nLos órganos de dirección revisarán y, cuando proceda, actualizarán los roles, responsabilidades y autoridades a intervalos planificados, así como cuando se produzcan incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-2-1-1": {
+      "code": "2.1.1",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Marco de la gestión de riesgos\nA efectos del artículo 21, apartado 2, letra a), de la Directiva (UE) 2022/2555, las entidades pertinentes establecerán y mantendrán un marco de la gestión de riesgos adecuado para detectar y abordar los riesgos que se planteen para la seguridad de los sistemas de redes y de información. Las entidades pertinentes realizarán evaluaciones de riesgos cuyos resultados documentarán y, a partir de estos últimos, establecerán un plan de tratamiento de riesgos, que aplicarán y supervisarán. Siempre que las entidades pertinentes garanticen una información adecuada a los órganos de dirección, estos últimos o, cuando proceda, las personas que sean responsables y tengan autoridad para gestionar los riesgos, aprobarán los resultados de la evaluación de riesgos y los riesgos residuales."
+    },
+    "eu-nis2-ir-2-1-2": {
+      "code": "2.1.2",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Marco de la gestión de riesgos\nA los efectos del punto 2.1.1, las entidades pertinentes establecerán procedimientos para detectar, analizar, evaluar y tratar los riesgos («proceso de gestión de riesgos de ciberseguridad»). El proceso de gestión de riesgos de ciberseguridad formará parte del proceso de gestión de riesgos general de la entidad pertinente, según proceda. Como parte del proceso de gestión de riesgos de ciberseguridad, las entidades pertinentes:"
+    },
+    "eu-nis2-ir-2-1-2-a": {
+      "code": "2.1.2.a",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Marco de la gestión de riesgos\nA los efectos del punto 2.1.1, las entidades pertinentes establecerán procedimientos para detectar, analizar, evaluar y tratar los riesgos («proceso de gestión de riesgos de ciberseguridad»). El proceso de gestión de riesgos de ciberseguridad formará parte del proceso de gestión de riesgos general de la entidad pertinente, según proceda. Como parte del proceso de gestión de riesgos de ciberseguridad, las entidades pertinentes:\nseguirán una metodología de gestión de riesgos;"
+    },
+    "eu-nis2-ir-2-1-2-b": {
+      "code": "2.1.2.b",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Marco de la gestión de riesgos\nA los efectos del punto 2.1.1, las entidades pertinentes establecerán procedimientos para detectar, analizar, evaluar y tratar los riesgos («proceso de gestión de riesgos de ciberseguridad»). El proceso de gestión de riesgos de ciberseguridad formará parte del proceso de gestión de riesgos general de la entidad pertinente, según proceda. Como parte del proceso de gestión de riesgos de ciberseguridad, las entidades pertinentes:\nestablecerán un nivel de tolerancia al riesgo conforme con la propensión al riesgo de la entidad;"
+    },
+    "eu-nis2-ir-2-1-2-c": {
+      "code": "2.1.2.c",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Marco de la gestión de riesgos\nA los efectos del punto 2.1.1, las entidades pertinentes establecerán procedimientos para detectar, analizar, evaluar y tratar los riesgos («proceso de gestión de riesgos de ciberseguridad»). El proceso de gestión de riesgos de ciberseguridad formará parte del proceso de gestión de riesgos general de la entidad pertinente, según proceda. Como parte del proceso de gestión de riesgos de ciberseguridad, las entidades pertinentes:\nestablecerán y mantendrán criterios de riesgo pertinentes;"
+    },
+    "eu-nis2-ir-2-1-2-d": {
+      "code": "2.1.2.d",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Marco de la gestión de riesgos\nA los efectos del punto 2.1.1, las entidades pertinentes establecerán procedimientos para detectar, analizar, evaluar y tratar los riesgos («proceso de gestión de riesgos de ciberseguridad»). El proceso de gestión de riesgos de ciberseguridad formará parte del proceso de gestión de riesgos general de la entidad pertinente, según proceda. Como parte del proceso de gestión de riesgos de ciberseguridad, las entidades pertinentes:\nde conformidad con un enfoque que abarque todos los riesgos, determinarán y registrarán todos los riesgos existentes para la seguridad de los sistemas de redes y de información, en especial con relación a terceros o a aquellos riesgos que puedan generar alteraciones en la disponibilidad, integridad, autenticidad y confidencialidad de los sistemas de redes y de información, incluida la detección de puntos únicos de fallo;"
+    },
+    "eu-nis2-ir-2-1-2-e": {
+      "code": "2.1.2.e",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Marco de la gestión de riesgos\nA los efectos del punto 2.1.1, las entidades pertinentes establecerán procedimientos para detectar, analizar, evaluar y tratar los riesgos («proceso de gestión de riesgos de ciberseguridad»). El proceso de gestión de riesgos de ciberseguridad formará parte del proceso de gestión de riesgos general de la entidad pertinente, según proceda. Como parte del proceso de gestión de riesgos de ciberseguridad, las entidades pertinentes:\nanalizarán los riesgos que se planteen para la seguridad de los sistemas de redes y de información, especialmente la amenaza, la probabilidad, el impacto y el nivel de riesgo, teniendo en cuenta la inteligencia sobre ciberamenazas y las vulnerabilidades;"
+    },
+    "eu-nis2-ir-2-1-2-f": {
+      "code": "2.1.2.f",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Marco de la gestión de riesgos\nA los efectos del punto 2.1.1, las entidades pertinentes establecerán procedimientos para detectar, analizar, evaluar y tratar los riesgos («proceso de gestión de riesgos de ciberseguridad»). El proceso de gestión de riesgos de ciberseguridad formará parte del proceso de gestión de riesgos general de la entidad pertinente, según proceda. Como parte del proceso de gestión de riesgos de ciberseguridad, las entidades pertinentes:\nevaluarán los riesgos detectados a partir de los criterios de riesgo;"
+    },
+    "eu-nis2-ir-2-1-2-g": {
+      "code": "2.1.2.g",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Marco de la gestión de riesgos\nA los efectos del punto 2.1.1, las entidades pertinentes establecerán procedimientos para detectar, analizar, evaluar y tratar los riesgos («proceso de gestión de riesgos de ciberseguridad»). El proceso de gestión de riesgos de ciberseguridad formará parte del proceso de gestión de riesgos general de la entidad pertinente, según proceda. Como parte del proceso de gestión de riesgos de ciberseguridad, las entidades pertinentes:\ndeterminarán y priorizarán las opciones y medidas adecuadas de tratamiento de riesgos;"
+    },
+    "eu-nis2-ir-2-1-2-h": {
+      "code": "2.1.2.h",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Marco de la gestión de riesgos\nA los efectos del punto 2.1.1, las entidades pertinentes establecerán procedimientos para detectar, analizar, evaluar y tratar los riesgos («proceso de gestión de riesgos de ciberseguridad»). El proceso de gestión de riesgos de ciberseguridad formará parte del proceso de gestión de riesgos general de la entidad pertinente, según proceda. Como parte del proceso de gestión de riesgos de ciberseguridad, las entidades pertinentes:\nsupervisarán constantemente la aplicación de las medidas de tratamiento de riesgos;"
+    },
+    "eu-nis2-ir-2-1-2-i": {
+      "code": "2.1.2.i",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Marco de la gestión de riesgos\nA los efectos del punto 2.1.1, las entidades pertinentes establecerán procedimientos para detectar, analizar, evaluar y tratar los riesgos («proceso de gestión de riesgos de ciberseguridad»). El proceso de gestión de riesgos de ciberseguridad formará parte del proceso de gestión de riesgos general de la entidad pertinente, según proceda. Como parte del proceso de gestión de riesgos de ciberseguridad, las entidades pertinentes:\ndeterminarán quién es responsable de la aplicación de las medidas de tratamiento de riesgos y cuándo deben aplicarse estas;"
+    },
+    "eu-nis2-ir-2-1-2-j": {
+      "code": "2.1.2.j",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Marco de la gestión de riesgos\nA los efectos del punto 2.1.1, las entidades pertinentes establecerán procedimientos para detectar, analizar, evaluar y tratar los riesgos («proceso de gestión de riesgos de ciberseguridad»). El proceso de gestión de riesgos de ciberseguridad formará parte del proceso de gestión de riesgos general de la entidad pertinente, según proceda. Como parte del proceso de gestión de riesgos de ciberseguridad, las entidades pertinentes:\ninformarán de manera comprensible de las medidas de tratamiento de riesgos elegidas en un plan de tratamiento de riesgos y de las razones que justifiquen la aceptación de los riesgos residuales."
+    },
+    "eu-nis2-ir-2-1-3": {
+      "code": "2.1.3",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Marco de la gestión de riesgos\nCuando detecten y prioricen las opciones y medidas adecuadas para el tratamiento de los riesgos, las entidades pertinentes tendrán en cuenta los resultados de la evaluación de riesgos, los resultados del procedimiento para evaluar la eficacia de las medidas para la gestión de riesgos de ciberseguridad, el coste de su aplicación en relación con los beneficios previstos, la clasificación de activos contemplada en el punto 12.1 y el análisis de impacto operativo a que se refiere el punto 4.1.3."
+    },
+    "eu-nis2-ir-2-1-4": {
+      "code": "2.1.4",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Marco de la gestión de riesgos\nLas entidades pertinentes revisarán y, cuando proceda, actualizarán los resultados de la evaluación de riesgos y el plan de tratamiento de riesgos a intervalos planificados y como mínimo anualmente, así como cuando se produzcan incidentes significativos o cambios significativos en las operaciones o los riegos."
+    },
+    "eu-nis2-ir-2-2-1": {
+      "code": "2.2.1",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Control del cumplimiento\nLas entidades pertinentes revisarán periódicamente el cumplimiento de sus políticas en materia de seguridad de los sistemas de redes y de información, políticas específicas, reglas y normas. Los órganos de dirección serán informados, mediante informes periódicos, del estado de seguridad de las redes y la información a partir de las revisiones del cumplimiento."
+    },
+    "eu-nis2-ir-2-2-2": {
+      "code": "2.2.2",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Control del cumplimiento\nLas entidades pertinentes pondrán en marcha un sistema eficaz de notificación del cumplimiento que será adecuado a sus estructuras, sus entornos operativos y su panorama de amenazas. El sistema de notificación del cumplimiento podrá ofrecer a los órganos de dirección una visión informada del estado en que se encuentre la gestión de riesgos de las entidades pertinentes."
+    },
+    "eu-nis2-ir-2-2-3": {
+      "code": "2.2.3",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Control del cumplimiento\nLas entidades pertinentes realizarán el control del cumplimiento a intervalos planificados, así como cuando se produzcan incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-2-3-1": {
+      "code": "2.3.1",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Revisión independiente de la seguridad de la información y las redes\nLas entidades pertinentes revisarán de forma independiente su enfoque de gestión de la seguridad de los sistemas de redes y de información y su aplicación, incluidas las personas, los procesos y las tecnologías."
+    },
+    "eu-nis2-ir-2-3-2": {
+      "code": "2.3.2",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Revisión independiente de la seguridad de la información y las redes\nLas entidades pertinentes desarrollarán y mantendrán procedimientos para llevar a cabo revisiones independientes que serán ejecutados por personas con las debidas competencias en materia de auditoría. Cuando miembros del personal de la entidad pertinente realicen una revisión independiente, las personas encargadas de la misma no podrán ejercer poder jerárquico sobre el personal de la zona objeto de la revisión. Si el tamaño de la entidad pertinente no permite esta separación del poder jerárquico, la entidad pondrá en marcha medidas alternativas para garantizar la imparcialidad de las revisiones."
+    },
+    "eu-nis2-ir-2-3-3": {
+      "code": "2.3.3",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Revisión independiente de la seguridad de la información y las redes\nLos resultados de las revisiones independientes, especialmente los resultados del control del cumplimiento de conformidad con el punto 2.2 y del control y la medición con arreglo al punto 7, se notificarán a los órganos de control. De acuerdo con los criterios de aceptación del riesgo de las entidades pertinentes, se adoptarán medidas correctoras o se aceptará el riesgo residual."
+    },
+    "eu-nis2-ir-2-3-4": {
+      "code": "2.3.4",
+      "section": "section-2",
+      "control": "Artículo 21, apartado 2, letra a)",
+      "requirements": "Revisión independiente de la seguridad de la información y las redes\nLas revisiones independientes tendrán lugar a intervalos planificados, así como cuando se produzcan incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-3-1-1": {
+      "code": "3.1.1",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Política de gestión de incidentes\nA los efectos del artículo 21, apartado 2, letra b), de la Directiva (UE) 2022/2555, las entidades pertinentes elaborarán y pondrán en marcha una política de gestión de incidentes por la que se establezcan los roles, responsabilidades y procedimientos para la detección, el análisis, la contención y la gestión de los incidentes, así como la posterior recuperación, documentación y notificación de los mismos a su debido tiempo."
+    },
+    "eu-nis2-ir-3-1-2": {
+      "code": "3.1.2",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Política de gestión de incidentes\nLa política prevista en el punto 3.1.1 será coherente con el plan de continuidad de las actividades y de recuperación en caso de catástrofe a que hace referencia el punto 4.1. La política incluirá:"
+    },
+    "eu-nis2-ir-3-1-2-a": {
+      "code": "3.1.2.a",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Política de gestión de incidentes\nLa política prevista en el punto 3.1.1 será coherente con el plan de continuidad de las actividades y de recuperación en caso de catástrofe a que hace referencia el punto 4.1. La política incluirá:\nun sistema de clasificación de incidentes que sea coherente con la evaluación y clasificación de sucesos realizada de conformidad con el punto 3.4.1;"
+    },
+    "eu-nis2-ir-3-1-2-b": {
+      "code": "3.1.2.b",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Política de gestión de incidentes\nLa política prevista en el punto 3.1.1 será coherente con el plan de continuidad de las actividades y de recuperación en caso de catástrofe a que hace referencia el punto 4.1. La política incluirá:\nplanes de comunicación eficaces, especialmente en lo relativo a la activación de los niveles sucesivos de intervención y la presentación de informes;"
+    },
+    "eu-nis2-ir-3-1-2-c": {
+      "code": "3.1.2.c",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Política de gestión de incidentes\nLa política prevista en el punto 3.1.1 será coherente con el plan de continuidad de las actividades y de recuperación en caso de catástrofe a que hace referencia el punto 4.1. La política incluirá:\nla asignación, a los empleados competentes, de roles para detectar y gestionar adecuadamente los incidentes;"
+    },
+    "eu-nis2-ir-3-1-2-d": {
+      "code": "3.1.2.d",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Política de gestión de incidentes\nLa política prevista en el punto 3.1.1 será coherente con el plan de continuidad de las actividades y de recuperación en caso de catástrofe a que hace referencia el punto 4.1. La política incluirá:\nlos documentos que han de utilizarse durante el proceso para detectar y gestionar los incidentes, como, por ejemplo, manuales de respuesta a incidentes, cuadros de activación por niveles, listas de contactos y plantillas."
+    },
+    "eu-nis2-ir-3-1-3": {
+      "code": "3.1.3",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Política de gestión de incidentes\nLos roles, responsabilidades y procedimientos establecidos en la política se probarán, revisarán y, cuando proceda, se actualizarán a intervalos planificados, así como cuando se produzcan incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-3-2-1": {
+      "code": "3.2.1",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nLas entidades pertinentes establecerán procedimientos y utilizarán herramientas para supervisar y registrar las actividades en sus sistemas de redes y de información a fin de detectar sucesos que puedan considerarse incidentes y dar una respuesta consecuente para mitigar su impacto."
+    },
+    "eu-nis2-ir-3-2-2": {
+      "code": "3.2.2",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nEn la medida de lo posible, la supervisión se automatizará y se llevará a cabo bien de forma continua bien a intervalos periódicos, en función de las capacidades operativas. Las entidades pertinentes pondrán en marcha sus actividades de seguimiento de manera que se minimicen los falsos positivos y falsos negativos."
+    },
+    "eu-nis2-ir-3-2-3": {
+      "code": "3.2.3",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nA partir de los procedimientos contemplados en el punto 3.2.1, las entidades pertinentes mantendrán, completarán y revisarán sus registros. Las entidades pertinentes establecerán una lista de los activos que deban registrarse teniendo en cuenta los resultados de la evaluación de riesgos efectuada conforme al punto 2.1. Cuando proceda, los registros incluirán información sobre:"
+    },
+    "eu-nis2-ir-3-2-3-a": {
+      "code": "3.2.3.a",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nA partir de los procedimientos contemplados en el punto 3.2.1, las entidades pertinentes mantendrán, completarán y revisarán sus registros. Las entidades pertinentes establecerán una lista de los activos que deban registrarse teniendo en cuenta los resultados de la evaluación de riesgos efectuada conforme al punto 2.1. Cuando proceda, los registros incluirán información sobre:\nel tráfico de entrada y salida de la red;"
+    },
+    "eu-nis2-ir-3-2-3-b": {
+      "code": "3.2.3.b",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nA partir de los procedimientos contemplados en el punto 3.2.1, las entidades pertinentes mantendrán, completarán y revisarán sus registros. Las entidades pertinentes establecerán una lista de los activos que deban registrarse teniendo en cuenta los resultados de la evaluación de riesgos efectuada conforme al punto 2.1. Cuando proceda, los registros incluirán información sobre:\nla creación, modificación o supresión de usuarios de los sistemas de redes y de información de las entidades pertinentes y la ampliación de los permisos;"
+    },
+    "eu-nis2-ir-3-2-3-c": {
+      "code": "3.2.3.c",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nA partir de los procedimientos contemplados en el punto 3.2.1, las entidades pertinentes mantendrán, completarán y revisarán sus registros. Las entidades pertinentes establecerán una lista de los activos que deban registrarse teniendo en cuenta los resultados de la evaluación de riesgos efectuada conforme al punto 2.1. Cuando proceda, los registros incluirán información sobre:\nel acceso a los sistemas y aplicaciones;"
+    },
+    "eu-nis2-ir-3-2-3-d": {
+      "code": "3.2.3.d",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nA partir de los procedimientos contemplados en el punto 3.2.1, las entidades pertinentes mantendrán, completarán y revisarán sus registros. Las entidades pertinentes establecerán una lista de los activos que deban registrarse teniendo en cuenta los resultados de la evaluación de riesgos efectuada conforme al punto 2.1. Cuando proceda, los registros incluirán información sobre:\nlos sucesos relacionados con la autenticación;"
+    },
+    "eu-nis2-ir-3-2-3-e": {
+      "code": "3.2.3.e",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nA partir de los procedimientos contemplados en el punto 3.2.1, las entidades pertinentes mantendrán, completarán y revisarán sus registros. Las entidades pertinentes establecerán una lista de los activos que deban registrarse teniendo en cuenta los resultados de la evaluación de riesgos efectuada conforme al punto 2.1. Cuando proceda, los registros incluirán información sobre:\ntodo acceso privilegiado a los sistemas y aplicaciones, así como las actividades realizadas por las cuentas de administración;"
+    },
+    "eu-nis2-ir-3-2-3-f": {
+      "code": "3.2.3.f",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nA partir de los procedimientos contemplados en el punto 3.2.1, las entidades pertinentes mantendrán, completarán y revisarán sus registros. Las entidades pertinentes establecerán una lista de los activos que deban registrarse teniendo en cuenta los resultados de la evaluación de riesgos efectuada conforme al punto 2.1. Cuando proceda, los registros incluirán información sobre:\nel acceso a los archivos críticos de configuración y a las copias de seguridad y todo cambio en los mismos;"
+    },
+    "eu-nis2-ir-3-2-3-g": {
+      "code": "3.2.3.g",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nA partir de los procedimientos contemplados en el punto 3.2.1, las entidades pertinentes mantendrán, completarán y revisarán sus registros. Las entidades pertinentes establecerán una lista de los activos que deban registrarse teniendo en cuenta los resultados de la evaluación de riesgos efectuada conforme al punto 2.1. Cuando proceda, los registros incluirán información sobre:\nlos registros de sucesos y los registros de las herramientas de seguridad, como antivirus, sistemas de detección de intrusiones o cortafuegos;"
+    },
+    "eu-nis2-ir-3-2-3-h": {
+      "code": "3.2.3.h",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nA partir de los procedimientos contemplados en el punto 3.2.1, las entidades pertinentes mantendrán, completarán y revisarán sus registros. Las entidades pertinentes establecerán una lista de los activos que deban registrarse teniendo en cuenta los resultados de la evaluación de riesgos efectuada conforme al punto 2.1. Cuando proceda, los registros incluirán información sobre:\nel uso de los recursos del sistema, así como su rendimiento;"
+    },
+    "eu-nis2-ir-3-2-3-i": {
+      "code": "3.2.3.i",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nA partir de los procedimientos contemplados en el punto 3.2.1, las entidades pertinentes mantendrán, completarán y revisarán sus registros. Las entidades pertinentes establecerán una lista de los activos que deban registrarse teniendo en cuenta los resultados de la evaluación de riesgos efectuada conforme al punto 2.1. Cuando proceda, los registros incluirán información sobre:\nel acceso físico a las instalaciones;"
+    },
+    "eu-nis2-ir-3-2-3-j": {
+      "code": "3.2.3.j",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nA partir de los procedimientos contemplados en el punto 3.2.1, las entidades pertinentes mantendrán, completarán y revisarán sus registros. Las entidades pertinentes establecerán una lista de los activos que deban registrarse teniendo en cuenta los resultados de la evaluación de riesgos efectuada conforme al punto 2.1. Cuando proceda, los registros incluirán información sobre:\nel acceso a los equipos y dispositivos de red y su utilización;"
+    },
+    "eu-nis2-ir-3-2-3-k": {
+      "code": "3.2.3.k",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nA partir de los procedimientos contemplados en el punto 3.2.1, las entidades pertinentes mantendrán, completarán y revisarán sus registros. Las entidades pertinentes establecerán una lista de los activos que deban registrarse teniendo en cuenta los resultados de la evaluación de riesgos efectuada conforme al punto 2.1. Cuando proceda, los registros incluirán información sobre:\nla activación, detención e interrupción de los distintos registros;"
+    },
+    "eu-nis2-ir-3-2-3-l": {
+      "code": "3.2.3.l",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nA partir de los procedimientos contemplados en el punto 3.2.1, las entidades pertinentes mantendrán, completarán y revisarán sus registros. Las entidades pertinentes establecerán una lista de los activos que deban registrarse teniendo en cuenta los resultados de la evaluación de riesgos efectuada conforme al punto 2.1. Cuando proceda, los registros incluirán información sobre:\nlos sucesos medioambientales."
+    },
+    "eu-nis2-ir-3-2-4": {
+      "code": "3.2.4",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nSe revisará periódicamente la existencia de tendencias inusuales o indeseadas en los registros. Cuando proceda, las entidades pertinentes establecerán valores adecuados para los umbrales de alerta. Cuando se superen los valores establecidos para los umbrales de alerta, saltará una alarma que será, en su caso, automática. Las entidades pertinentes se asegurarán de que, en las situaciones de alerta, se adopte a su debido tiempo una respuesta cualificada y adecuada."
+    },
+    "eu-nis2-ir-3-2-5": {
+      "code": "3.2.5",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nLas entidades pertinentes mantendrán registros, de los que harán copias de seguridad, durante un período predefinido, y los protegerán contra el acceso o los cambios no autorizados."
+    },
+    "eu-nis2-ir-3-2-6": {
+      "code": "3.2.6",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nEn la medida de lo posible, las entidades pertinentes velarán por que todos los sistemas dispongan de fuentes de información temporal sincronizadas para permitir la vinculación de registros entre sistemas de cara a la evaluación de sucesos. Las entidades pertinentes establecerán y mantendrán una lista de todos los activos que se registren y velarán por que los sistemas de seguimiento y registro sean redundantes. La disponibilidad de los sistemas de supervisión y registro se controlará con independencia de los sistemas que estén supervisando."
+    },
+    "eu-nis2-ir-3-2-7": {
+      "code": "3.2.7",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Supervisión y registro\nTanto los procedimientos como la lista de activos que se registren se revisarán y, cuando proceda, se actualizarán a intervalos regulares y después de incidentes significativos."
+    },
+    "eu-nis2-ir-3-3-1": {
+      "code": "3.3.1",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Notificación de sucesos\nLas entidades pertinentes pondrán en marcha un mecanismo sencillo que permita a sus empleados, proveedores y clientes notificar los sucesos sospechosos."
+    },
+    "eu-nis2-ir-3-3-2": {
+      "code": "3.3.2",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Notificación de sucesos\nLas entidades pertinentes informarán, cuando proceda, del mecanismo de notificación de sucesos a sus proveedores y clientes, y formarán periódicamente a sus empleados en el uso del mismo."
+    },
+    "eu-nis2-ir-3-4-1": {
+      "code": "3.4.1",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Evaluación y clasificación de sucesos\nLas entidades pertinentes evaluarán los sucesos sospechosos para determinar si constituyen incidentes y, en su caso, esclarecer su naturaleza y gravedad."
+    },
+    "eu-nis2-ir-3-4-2-a": {
+      "code": "3.4.2.a",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Evaluación y clasificación de sucesos\nA los efectos del punto 3.4.1, las entidades pertinentes realizarán las acciones siguientes:\nuna evaluación basada en criterios predefinidos fijados de antemano y en una clasificación que establezca las prioridades de contención y erradicación de incidentes;"
+    },
+    "eu-nis2-ir-3-4-2-b": {
+      "code": "3.4.2.b",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Evaluación y clasificación de sucesos\nA los efectos del punto 3.4.1, las entidades pertinentes realizarán las acciones siguientes:\nla evaluación trimestral de la existencia de incidentes recurrentes tal como contempla el artículo 4 del presente Reglamento;"
+    },
+    "eu-nis2-ir-3-4-2-c": {
+      "code": "3.4.2.c",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Evaluación y clasificación de sucesos\nA los efectos del punto 3.4.1, las entidades pertinentes realizarán las acciones siguientes:\nla revisión de los registros adecuados a efectos de la evaluación y clasificación de los sucesos;"
+    },
+    "eu-nis2-ir-3-4-2-d": {
+      "code": "3.4.2.d",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Evaluación y clasificación de sucesos\nA los efectos del punto 3.4.1, las entidades pertinentes realizarán las acciones siguientes:\nla puesta en marcha de un procedimiento para vincular los registros y el análisis;"
+    },
+    "eu-nis2-ir-3-4-2-e": {
+      "code": "3.4.2.e",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Evaluación y clasificación de sucesos\nA los efectos del punto 3.4.1, las entidades pertinentes realizarán las acciones siguientes:\ny la reevaluación y reclasificación de los sucesos cuando se disponga de nueva información o tras analizar la información disponible previamente."
+    },
+    "eu-nis2-ir-3-5-1": {
+      "code": "3.5.1",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Respuesta ante incidentes\nLas entidades pertinentes responderán a los incidentes a su debido tiempo y de conformidad con procedimientos documentados."
+    },
+    "eu-nis2-ir-3-5-2-a": {
+      "code": "3.5.2.a",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Respuesta ante incidentes\nLos procedimientos de respuesta ante los incidentes incluirán las siguientes fases:\ncontención del incidente, para evitar las consecuencias de que se propague;"
+    },
+    "eu-nis2-ir-3-5-2-b": {
+      "code": "3.5.2.b",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Respuesta ante incidentes\nLos procedimientos de respuesta ante los incidentes incluirán las siguientes fases:\nerradicación, para evitar que el incidente continúe o reaparezca;"
+    },
+    "eu-nis2-ir-3-5-2-c": {
+      "code": "3.5.2.c",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Respuesta ante incidentes\nLos procedimientos de respuesta ante los incidentes incluirán las siguientes fases:\nrecuperación tras el incidente, cuando se requiera."
+    },
+    "eu-nis2-ir-3-5-3": {
+      "code": "3.5.3",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Respuesta ante incidentes\nLas entidades pertinentes establecerán procedimientos y planes de comunicación:"
+    },
+    "eu-nis2-ir-3-5-3-a": {
+      "code": "3.5.3.a",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Respuesta ante incidentes\nLas entidades pertinentes establecerán procedimientos y planes de comunicación:\ncon los equipos de respuesta ante incidentes de seguridad informática (CSIRT) o, cuando proceda, las autoridades competentes, en materia de notificación de incidentes;"
+    },
+    "eu-nis2-ir-3-5-3-b": {
+      "code": "3.5.3.b",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Respuesta ante incidentes\nLas entidades pertinentes establecerán procedimientos y planes de comunicación:\npara la comunicación entre los miembros del personal de la entidad pertinente, y para la comunicación con las partes interesadas ajenas a la entidad."
+    },
+    "eu-nis2-ir-3-5-4": {
+      "code": "3.5.4",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Respuesta ante incidentes\nLas entidades pertinentes registrarán tanto las actividades de respuesta ante incidentes de conformidad con los procedimientos contemplados en el punto 3.2.1 como las pruebas correspondientes."
+    },
+    "eu-nis2-ir-3-5-5": {
+      "code": "3.5.5",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Respuesta ante incidentes\nLas entidades pertinentes probarán a intervalos planificados sus procedimientos de respuesta ante los incidentes."
+    },
+    "eu-nis2-ir-3-6-1": {
+      "code": "3.6.1",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Revisiones posteriores al incidente\nCuando proceda, y una vez se hayan recuperado del incidente, las entidades pertinentes llevarán a cabo revisiones posteriores al mismo. Las revisiones posteriores al incidente identificarán, cuando se pueda, la causa subyacente y se traducirán en conclusiones documentadas para reducir la ocurrencia y las consecuencias de futuros incidentes."
+    },
+    "eu-nis2-ir-3-6-2": {
+      "code": "3.6.2",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Revisiones posteriores al incidente\nLas entidades pertinentes velarán por que las revisiones posteriores a los incidentes contribuyan a mejorar su enfoque en materia de seguridad de las redes y de la información, de medidas de tratamiento de riesgos y de procedimientos de gestión, detección y respuesta ante incidentes."
+    },
+    "eu-nis2-ir-3-6-3": {
+      "code": "3.6.3",
+      "section": "section-3",
+      "control": "Artículo 21, apartado 2, letra b)",
+      "requirements": "Revisiones posteriores al incidente\nLas entidades pertinentes comprobarán a intervalos planificados si los incidentes condujeron a revisiones posteriores al incidente."
+    },
+    "eu-nis2-ir-4-1-1": {
+      "code": "4.1.1",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Plan de continuidad de las actividades y de recuperación en caso de catástrofe\nA efectos del artículo 21, apartado 2, letra c), de la Directiva (UE) 2022/2555, las entidades pertinentes establecerán y mantendrán un plan de continuidad de las actividades y de recuperación en caso de catástrofe que pondrán en marcha si se producen incidentes."
+    },
+    "eu-nis2-ir-4-1-2": {
+      "code": "4.1.2",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Plan de continuidad de las actividades y de recuperación en caso de catástrofe\nLas operaciones de las entidades pertinentes se restablecerán de acuerdo con el plan de continuidad de las actividades y de recuperación en caso de catástrofe. El plan se basará en los resultados de la evaluación de riesgos realizada con arreglo al punto 2.1 e incluirá, según proceda, lo siguiente:"
+    },
+    "eu-nis2-ir-4-1-2-a": {
+      "code": "4.1.2.a",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Plan de continuidad de las actividades y de recuperación en caso de catástrofe\nLas operaciones de las entidades pertinentes se restablecerán de acuerdo con el plan de continuidad de las actividades y de recuperación en caso de catástrofe. El plan se basará en los resultados de la evaluación de riesgos realizada con arreglo al punto 2.1 e incluirá, según proceda, lo siguiente:\nobjetivos, ámbito de aplicación y público destinatario;"
+    },
+    "eu-nis2-ir-4-1-2-b": {
+      "code": "4.1.2.b",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Plan de continuidad de las actividades y de recuperación en caso de catástrofe\nLas operaciones de las entidades pertinentes se restablecerán de acuerdo con el plan de continuidad de las actividades y de recuperación en caso de catástrofe. El plan se basará en los resultados de la evaluación de riesgos realizada con arreglo al punto 2.1 e incluirá, según proceda, lo siguiente:\nroles y responsabilidades;"
+    },
+    "eu-nis2-ir-4-1-2-c": {
+      "code": "4.1.2.c",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Plan de continuidad de las actividades y de recuperación en caso de catástrofe\nLas operaciones de las entidades pertinentes se restablecerán de acuerdo con el plan de continuidad de las actividades y de recuperación en caso de catástrofe. El plan se basará en los resultados de la evaluación de riesgos realizada con arreglo al punto 2.1 e incluirá, según proceda, lo siguiente:\ncontactos clave y canales de comunicación (internos y externos);"
+    },
+    "eu-nis2-ir-4-1-2-d": {
+      "code": "4.1.2.d",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Plan de continuidad de las actividades y de recuperación en caso de catástrofe\nLas operaciones de las entidades pertinentes se restablecerán de acuerdo con el plan de continuidad de las actividades y de recuperación en caso de catástrofe. El plan se basará en los resultados de la evaluación de riesgos realizada con arreglo al punto 2.1 e incluirá, según proceda, lo siguiente:\ncondiciones de activación y desactivación del plan;"
+    },
+    "eu-nis2-ir-4-1-2-e": {
+      "code": "4.1.2.e",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Plan de continuidad de las actividades y de recuperación en caso de catástrofe\nLas operaciones de las entidades pertinentes se restablecerán de acuerdo con el plan de continuidad de las actividades y de recuperación en caso de catástrofe. El plan se basará en los resultados de la evaluación de riesgos realizada con arreglo al punto 2.1 e incluirá, según proceda, lo siguiente:\norden de recuperación de las operaciones;"
+    },
+    "eu-nis2-ir-4-1-2-f": {
+      "code": "4.1.2.f",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Plan de continuidad de las actividades y de recuperación en caso de catástrofe\nLas operaciones de las entidades pertinentes se restablecerán de acuerdo con el plan de continuidad de las actividades y de recuperación en caso de catástrofe. El plan se basará en los resultados de la evaluación de riesgos realizada con arreglo al punto 2.1 e incluirá, según proceda, lo siguiente:\nplanes de recuperación de operaciones específicas, incluidos los objetivos de recuperación;"
+    },
+    "eu-nis2-ir-4-1-2-g": {
+      "code": "4.1.2.g",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Plan de continuidad de las actividades y de recuperación en caso de catástrofe\nLas operaciones de las entidades pertinentes se restablecerán de acuerdo con el plan de continuidad de las actividades y de recuperación en caso de catástrofe. El plan se basará en los resultados de la evaluación de riesgos realizada con arreglo al punto 2.1 e incluirá, según proceda, lo siguiente:\nrecursos necesarios, incluidas las copias de seguridad y las redundancias;"
+    },
+    "eu-nis2-ir-4-1-2-h": {
+      "code": "4.1.2.h",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Plan de continuidad de las actividades y de recuperación en caso de catástrofe\nLas operaciones de las entidades pertinentes se restablecerán de acuerdo con el plan de continuidad de las actividades y de recuperación en caso de catástrofe. El plan se basará en los resultados de la evaluación de riesgos realizada con arreglo al punto 2.1 e incluirá, según proceda, lo siguiente:\nrestablecimiento y reanudación de las actividades a partir de medidas temporales."
+    },
+    "eu-nis2-ir-4-1-3": {
+      "code": "4.1.3",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Plan de continuidad de las actividades y de recuperación en caso de catástrofe\nLas entidades pertinentes realizarán un análisis de impacto operativo para evaluar el posible impacto de las perturbaciones graves en sus operaciones y establecerán, a partir de los resultados de dicho análisis, requisitos de continuidad para los sistemas de redes y de información."
+    },
+    "eu-nis2-ir-4-1-4": {
+      "code": "4.1.4",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Plan de continuidad de las actividades y de recuperación en caso de catástrofe\nEl plan de continuidad de las actividades y el plan de recuperación en caso de catástrofe se probarán, revisarán y, cuando proceda, se actualizarán a intervalos planificados o tras incidentes significativos o cambios significativos en las operaciones o los riesgos. Las entidades pertinentes velarán por que dichos planes engloben las conclusiones extraídas en las pruebas."
+    },
+    "eu-nis2-ir-4-2-1": {
+      "code": "4.2.1",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nLas entidades pertinentes mantendrán copias de seguridad de los datos y pondrán a disposición recursos suficientes, como instalaciones, sistemas de redes y de información y personal, para velar por un nivel de redundancia adecuado."
+    },
+    "eu-nis2-ir-4-2-2": {
+      "code": "4.2.2",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nA partir de los resultados de la evaluación de riesgos realizada según el punto 2.1 y el plan de continuidad de las actividades, las entidades pertinentes establecerán planes de copia de seguridad que incluirán lo siguiente:"
+    },
+    "eu-nis2-ir-4-2-2-a": {
+      "code": "4.2.2.a",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nA partir de los resultados de la evaluación de riesgos realizada según el punto 2.1 y el plan de continuidad de las actividades, las entidades pertinentes establecerán planes de copia de seguridad que incluirán lo siguiente:\nplazos de recuperación;"
+    },
+    "eu-nis2-ir-4-2-2-b": {
+      "code": "4.2.2.b",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nA partir de los resultados de la evaluación de riesgos realizada según el punto 2.1 y el plan de continuidad de las actividades, las entidades pertinentes establecerán planes de copia de seguridad que incluirán lo siguiente:\ngarantías de que las copias de seguridad sean completas y precisas, especialmente los datos de configuración y la información almacenada en el entorno de proveedores de servicios de computación en nube;"
+    },
+    "eu-nis2-ir-4-2-2-c": {
+      "code": "4.2.2.c",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nA partir de los resultados de la evaluación de riesgos realizada según el punto 2.1 y el plan de continuidad de las actividades, las entidades pertinentes establecerán planes de copia de seguridad que incluirán lo siguiente:\nalmacenamiento de copias de seguridad (en línea o fuera de línea) en uno o varios lugares seguros, que no estén en la misma red que el sistema y que estén a una distancia suficiente para escapar de cualquier daño provocado por una catástrofe en el emplazamiento principal;"
+    },
+    "eu-nis2-ir-4-2-2-d": {
+      "code": "4.2.2.d",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nA partir de los resultados de la evaluación de riesgos realizada según el punto 2.1 y el plan de continuidad de las actividades, las entidades pertinentes establecerán planes de copia de seguridad que incluirán lo siguiente:\ncontroles adecuados de acceso lógico y físico a las copias de seguridad, de conformidad con el nivel de clasificación de activos;"
+    },
+    "eu-nis2-ir-4-2-2-e": {
+      "code": "4.2.2.e",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nA partir de los resultados de la evaluación de riesgos realizada según el punto 2.1 y el plan de continuidad de las actividades, las entidades pertinentes establecerán planes de copia de seguridad que incluirán lo siguiente:\nrecuperación de datos de las copias de seguridad;"
+    },
+    "eu-nis2-ir-4-2-2-f": {
+      "code": "4.2.2.f",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nA partir de los resultados de la evaluación de riesgos realizada según el punto 2.1 y el plan de continuidad de las actividades, las entidades pertinentes establecerán planes de copia de seguridad que incluirán lo siguiente:\nplazos de conservación sustentados en los requisitos operativos y reglamentarios."
+    },
+    "eu-nis2-ir-4-2-3": {
+      "code": "4.2.3",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nLas entidades pertinentes verificarán regularmente la integridad de las copias de seguridad."
+    },
+    "eu-nis2-ir-4-2-4": {
+      "code": "4.2.4",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nA partir de los resultados de la evaluación de riesgos realizada con arreglo al punto 2.1 y el plan de continuidad de las actividades, las entidades pertinentes garantizarán una disponibilidad suficiente de los recursos mediante, como mínimo, la redundancia parcial de lo siguiente:"
+    },
+    "eu-nis2-ir-4-2-4-a": {
+      "code": "4.2.4.a",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nA partir de los resultados de la evaluación de riesgos realizada con arreglo al punto 2.1 y el plan de continuidad de las actividades, las entidades pertinentes garantizarán una disponibilidad suficiente de los recursos mediante, como mínimo, la redundancia parcial de lo siguiente:\nlos sistemas de redes y de información;"
+    },
+    "eu-nis2-ir-4-2-4-b": {
+      "code": "4.2.4.b",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nA partir de los resultados de la evaluación de riesgos realizada con arreglo al punto 2.1 y el plan de continuidad de las actividades, las entidades pertinentes garantizarán una disponibilidad suficiente de los recursos mediante, como mínimo, la redundancia parcial de lo siguiente:\nlos activos, incluidos las instalaciones, los equipos y los suministros;"
+    },
+    "eu-nis2-ir-4-2-4-c": {
+      "code": "4.2.4.c",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nA partir de los resultados de la evaluación de riesgos realizada con arreglo al punto 2.1 y el plan de continuidad de las actividades, las entidades pertinentes garantizarán una disponibilidad suficiente de los recursos mediante, como mínimo, la redundancia parcial de lo siguiente:\nel personal con la responsabilidad, la autoridad y las competencias necesarias;"
+    },
+    "eu-nis2-ir-4-2-4-d": {
+      "code": "4.2.4.d",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nA partir de los resultados de la evaluación de riesgos realizada con arreglo al punto 2.1 y el plan de continuidad de las actividades, las entidades pertinentes garantizarán una disponibilidad suficiente de los recursos mediante, como mínimo, la redundancia parcial de lo siguiente:\nlos canales de comunicación adecuados."
+    },
+    "eu-nis2-ir-4-2-5": {
+      "code": "4.2.5",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nCuando proceda, las entidades pertinentes velarán por que la supervisión y el ajuste de los recursos, incluidas las instalaciones, los sistemas y el personal, estén debidamente fundados en los requisitos de copias de seguridad y redundancia."
+    },
+    "eu-nis2-ir-4-2-6": {
+      "code": "4.2.6",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de las copias de seguridad y las redundancias\nLas entidades pertinentes llevarán a cabo pruebas periódicas de la recuperación de copias de seguridad y las redundancias para asegurarse de que, en condiciones de recuperación, es posible depender de ellas y que engloban las copias, los procesos y los conocimientos necesarios para llevar a cabo una recuperación eficaz. Las entidades pertinentes documentarán los resultados de las pruebas y, cuando sea necesario, adoptarán medidas correctoras."
+    },
+    "eu-nis2-ir-4-3-1": {
+      "code": "4.3.1",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de crisis\nLas entidades pertinentes pondrán en marcha procesos de gestión de crisis."
+    },
+    "eu-nis2-ir-4-3-2": {
+      "code": "4.3.2",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de crisis\nLas entidades pertinentes velarán por que los procesos de gestión de crisis aborden al menos los siguientes elementos:"
+    },
+    "eu-nis2-ir-4-3-2-a": {
+      "code": "4.3.2.a",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de crisis\nLas entidades pertinentes velarán por que los procesos de gestión de crisis aborden al menos los siguientes elementos:\nlos roles y responsabilidades del personal y, cuando proceda, los proveedores y los prestadores de servicios, especificando la asignación de roles en situaciones de crisis y los pasos específicos que deben seguirse;"
+    },
+    "eu-nis2-ir-4-3-2-b": {
+      "code": "4.3.2.b",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de crisis\nLas entidades pertinentes velarán por que los procesos de gestión de crisis aborden al menos los siguientes elementos:\nlos medios de comunicación adecuados entre las entidades pertinentes y las autoridades competentes;"
+    },
+    "eu-nis2-ir-4-3-2-c": {
+      "code": "4.3.2.c",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de crisis\nLas entidades pertinentes velarán por que los procesos de gestión de crisis aborden al menos los siguientes elementos:\nla aplicación de medidas adecuadas para garantizar el mantenimiento de la seguridad de los sistemas de redes y de información en situaciones de crisis."
+    },
+    "eu-nis2-ir-4-3-2-p1": {
+      "code": "4.3.2 (1)",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de crisis\nLas entidades pertinentes velarán por que los procesos de gestión de crisis aborden al menos los siguientes elementos:\nA efectos de la letra b), el flujo de información entre las entidades pertinentes y las autoridades competentes incluirá comunicaciones obligatorias, como informes de incidentes y los plazos correspondientes, así como comunicaciones facultativas."
+    },
+    "eu-nis2-ir-4-3-3": {
+      "code": "4.3.3",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de crisis\nLas entidades pertinentes pondrán en marcha procesos para gestionar y usar la información recibida de los CSIRT o, cuando proceda, las autoridades competentes, en relación con incidentes, vulnerabilidades, amenazas o posibles medidas de mitigación."
+    },
+    "eu-nis2-ir-4-3-4": {
+      "code": "4.3.4",
+      "section": "section-4",
+      "control": "Artículo 21, apartado 2, letra c)",
+      "requirements": "Gestión de crisis\nLas entidades pertinentes comprobarán, revisarán y, cuando proceda, actualizarán los planes de gestión de la crisis de forma periódica o después de incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-5-1-1": {
+      "code": "5.1.1",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nA efectos del artículo 21, apartado 2, letra d), de la Directiva (UE) 2022/2555, las entidades pertinentes establecerán, pondrán en marcha y aplicarán una política de seguridad de las cadenas de suministros que rija las relaciones con sus proveedores y prestadores de servicios directos con el fin de mitigar los riesgos detectados para la seguridad de los sistemas de redes y de información. En la política de seguridad de las cadenas de suministros, las entidades pertinentes determinarán su papel en la cadena de suministro y se lo comunicarán a sus proveedores y prestadores de servicios directos."
+    },
+    "eu-nis2-ir-5-1-2": {
+      "code": "5.1.2",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nComo parte de la política de la cadena de suministro contemplada en el punto 5.1.1, las entidades pertinentes establecerán criterios para seleccionar y contratar a los proveedores y prestadores de servicios. Dichos criterios incluirán lo siguiente:"
+    },
+    "eu-nis2-ir-5-1-2-a": {
+      "code": "5.1.2.a",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nComo parte de la política de la cadena de suministro contemplada en el punto 5.1.1, las entidades pertinentes establecerán criterios para seleccionar y contratar a los proveedores y prestadores de servicios. Dichos criterios incluirán lo siguiente:\nlas prácticas de ciberseguridad de sus proveedores y prestadores de servicios, incluidos sus procedimientos de desarrollo seguro;"
+    },
+    "eu-nis2-ir-5-1-2-b": {
+      "code": "5.1.2.b",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nComo parte de la política de la cadena de suministro contemplada en el punto 5.1.1, las entidades pertinentes establecerán criterios para seleccionar y contratar a los proveedores y prestadores de servicios. Dichos criterios incluirán lo siguiente:\nla capacidad de los proveedores y prestadores de servicios para cumplir las especificaciones de ciberseguridad establecidas por las entidades pertinentes;"
+    },
+    "eu-nis2-ir-5-1-2-c": {
+      "code": "5.1.2.c",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nComo parte de la política de la cadena de suministro contemplada en el punto 5.1.1, las entidades pertinentes establecerán criterios para seleccionar y contratar a los proveedores y prestadores de servicios. Dichos criterios incluirán lo siguiente:\nla calidad general y la resiliencia de los productos y servicios TIC y las medidas para la gestión de riesgos de ciberseguridad integradas en ellos, incluidos los riesgos y el nivel de clasificación de los productos y servicios TIC;"
+    },
+    "eu-nis2-ir-5-1-2-d": {
+      "code": "5.1.2.d",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nComo parte de la política de la cadena de suministro contemplada en el punto 5.1.1, las entidades pertinentes establecerán criterios para seleccionar y contratar a los proveedores y prestadores de servicios. Dichos criterios incluirán lo siguiente:\nla capacidad de las entidades pertinentes de diversificar las fuentes de suministro y limitar la dependencia de un proveedor, cuando proceda."
+    },
+    "eu-nis2-ir-5-1-3": {
+      "code": "5.1.3",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nCuando establezcan su política de seguridad de la cadena de suministro, las entidades pertinentes tendrán en cuenta los resultados de las evaluaciones coordinadas de riesgos para la seguridad de las cadenas de suministro críticas realizadas de conformidad con el artículo 22, apartado 1, de la Directiva (UE) 2022/2555, según proceda."
+    },
+    "eu-nis2-ir-5-1-4": {
+      "code": "5.1.4",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nA partir de la política de seguridad de las cadenas de suministro y teniendo en cuenta los resultados de la evaluación de riesgos realizada de conformidad con el punto 2.1 del presente anexo, las entidades pertinentes se asegurarán de que sus contratos con los proveedores y prestadores de servicios especifiquen, cuando proceda mediante acuerdos de nivel de servicio, los siguientes elementos, según se requiera:"
+    },
+    "eu-nis2-ir-5-1-4-a": {
+      "code": "5.1.4.a",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nA partir de la política de seguridad de las cadenas de suministro y teniendo en cuenta los resultados de la evaluación de riesgos realizada de conformidad con el punto 2.1 del presente anexo, las entidades pertinentes se asegurarán de que sus contratos con los proveedores y prestadores de servicios especifiquen, cuando proceda mediante acuerdos de nivel de servicio, los siguientes elementos, según se requiera:\nlos requisitos de ciberseguridad correspondientes a los proveedores y prestadores de servicios, incluidos los requisitos relativos a la seguridad en la adquisición de productos y servicios TIC establecidos en el punto 6.1;"
+    },
+    "eu-nis2-ir-5-1-4-b": {
+      "code": "5.1.4.b",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nA partir de la política de seguridad de las cadenas de suministro y teniendo en cuenta los resultados de la evaluación de riesgos realizada de conformidad con el punto 2.1 del presente anexo, las entidades pertinentes se asegurarán de que sus contratos con los proveedores y prestadores de servicios especifiquen, cuando proceda mediante acuerdos de nivel de servicio, los siguientes elementos, según se requiera:\nlos requisitos relativos a la sensibilización, las capacidades y la formación y, cuando proceda, los certificados requeridos de los empleados de los proveedores o prestadores de servicios;"
+    },
+    "eu-nis2-ir-5-1-4-c": {
+      "code": "5.1.4.c",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nA partir de la política de seguridad de las cadenas de suministro y teniendo en cuenta los resultados de la evaluación de riesgos realizada de conformidad con el punto 2.1 del presente anexo, las entidades pertinentes se asegurarán de que sus contratos con los proveedores y prestadores de servicios especifiquen, cuando proceda mediante acuerdos de nivel de servicio, los siguientes elementos, según se requiera:\nlos requisitos relativos a los controles de los antecedentes personales de los empleados de los proveedores y prestadores de servicios;"
+    },
+    "eu-nis2-ir-5-1-4-d": {
+      "code": "5.1.4.d",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nA partir de la política de seguridad de las cadenas de suministro y teniendo en cuenta los resultados de la evaluación de riesgos realizada de conformidad con el punto 2.1 del presente anexo, las entidades pertinentes se asegurarán de que sus contratos con los proveedores y prestadores de servicios especifiquen, cuando proceda mediante acuerdos de nivel de servicio, los siguientes elementos, según se requiera:\nla obligación de los proveedores y prestadores de servicios de informar, sin demora indebida, a las entidades pertinentes de aquellos incidentes que presenten un riesgo para la seguridad de los sistemas de redes y de información de dichas entidades;"
+    },
+    "eu-nis2-ir-5-1-4-e": {
+      "code": "5.1.4.e",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nA partir de la política de seguridad de las cadenas de suministro y teniendo en cuenta los resultados de la evaluación de riesgos realizada de conformidad con el punto 2.1 del presente anexo, las entidades pertinentes se asegurarán de que sus contratos con los proveedores y prestadores de servicios especifiquen, cuando proceda mediante acuerdos de nivel de servicio, los siguientes elementos, según se requiera:\nel derecho de auditoría o el derecho a recibir informes de auditoría;"
+    },
+    "eu-nis2-ir-5-1-4-f": {
+      "code": "5.1.4.f",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nA partir de la política de seguridad de las cadenas de suministro y teniendo en cuenta los resultados de la evaluación de riesgos realizada de conformidad con el punto 2.1 del presente anexo, las entidades pertinentes se asegurarán de que sus contratos con los proveedores y prestadores de servicios especifiquen, cuando proceda mediante acuerdos de nivel de servicio, los siguientes elementos, según se requiera:\nla obligación de los proveedores y prestadores de servicios de hacerse cargo de las vulnerabilidades que presenten un riesgo para la seguridad de los sistemas de redes y de información de las entidades pertinentes;"
+    },
+    "eu-nis2-ir-5-1-4-g": {
+      "code": "5.1.4.g",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nA partir de la política de seguridad de las cadenas de suministro y teniendo en cuenta los resultados de la evaluación de riesgos realizada de conformidad con el punto 2.1 del presente anexo, las entidades pertinentes se asegurarán de que sus contratos con los proveedores y prestadores de servicios especifiquen, cuando proceda mediante acuerdos de nivel de servicio, los siguientes elementos, según se requiera:\nlos requisitos relativos a la subcontratación y, cuando las entidades pertinentes permitan esta última, los requisitos de ciberseguridad de los subcontratistas de conformidad con los requisitos de seguridad contemplados en la letra a);"
+    },
+    "eu-nis2-ir-5-1-4-h": {
+      "code": "5.1.4.h",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nA partir de la política de seguridad de las cadenas de suministro y teniendo en cuenta los resultados de la evaluación de riesgos realizada de conformidad con el punto 2.1 del presente anexo, las entidades pertinentes se asegurarán de que sus contratos con los proveedores y prestadores de servicios especifiquen, cuando proceda mediante acuerdos de nivel de servicio, los siguientes elementos, según se requiera:\nlas obligaciones de los proveedores y prestadores de servicios al finalizar el contrato, tales como la recuperación y eliminación de información que hayan obtenido en el ejercicio de sus funciones."
+    },
+    "eu-nis2-ir-5-1-5": {
+      "code": "5.1.5",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nLas entidades pertinentes tendrán en cuenta los elementos a que se refieren los puntos 5.1.2 y 5.1.3 como parte del proceso de selección de nuevos proveedores o prestadores de servicios, y como parte del proceso de contratación a que se refiere el punto 6.1."
+    },
+    "eu-nis2-ir-5-1-6": {
+      "code": "5.1.6",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nLas entidades pertinentes revisarán la política de seguridad de la cadena de suministro y supervisarán, evaluarán y, cuando proceda, tomarán medidas acordes con los cambios en las prácticas de ciberseguridad de los proveedores y prestadores de servicios, a intervalos planificados o cuando se produzcan cambios significativos en las operaciones o en los riesgos, o acontezcan incidentes significativos relativos a la prestación de servicios TIC o que tengan repercusiones en la seguridad del producto TIC de los proveedores y prestadores de servicios."
+    },
+    "eu-nis2-ir-5-1-7-a": {
+      "code": "5.1.7.a",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nA los efectos del punto 5.1.6, las entidades pertinentes:\nsupervisarán periódicamente los informes relativos a la aplicación de los acuerdos de nivel de servicio, cuando proceda;"
+    },
+    "eu-nis2-ir-5-1-7-b": {
+      "code": "5.1.7.b",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nA los efectos del punto 5.1.6, las entidades pertinentes:\nrevisarán los incidentes relacionados con los productos y servicios TIC de los proveedores y prestadores de servicios;"
+    },
+    "eu-nis2-ir-5-1-7-c": {
+      "code": "5.1.7.c",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nA los efectos del punto 5.1.6, las entidades pertinentes:\nevaluarán la necesidad de revisiones no programadas y recopilarán las conclusiones de manera comprensible;"
+    },
+    "eu-nis2-ir-5-1-7-d": {
+      "code": "5.1.7.d",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Política de seguridad de las cadenas de suministros\nA los efectos del punto 5.1.6, las entidades pertinentes:\nanalizarán los riesgos que planteen los cambios relativos a los productos y servicios TIC de los proveedores y prestadores de servicios y, cuando proceda, adoptarán medidas de mitigación a su debido tiempo."
+    },
+    "eu-nis2-ir-5-2-p1": {
+      "code": "5.2 (1)",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Directorio de proveedores y prestadores de servicios\nLas entidades pertinentes mantendrán y actualizarán un registro de sus proveedores y prestadores de servicios directos, en el que incluirán:"
+    },
+    "eu-nis2-ir-5-2-a": {
+      "code": "5.2.a",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Directorio de proveedores y prestadores de servicios\nLas entidades pertinentes mantendrán y actualizarán un registro de sus proveedores y prestadores de servicios directos, en el que incluirán:\nlos puntos de contacto correspondientes a cada proveedor o prestador de servicios directo;"
+    },
+    "eu-nis2-ir-5-2-b": {
+      "code": "5.2.b",
+      "section": "section-5",
+      "control": "Artículo 21, apartado 2, letra d)",
+      "requirements": "Directorio de proveedores y prestadores de servicios\nLas entidades pertinentes mantendrán y actualizarán un registro de sus proveedores y prestadores de servicios directos, en el que incluirán:\nuna lista de productos TIC, servicios TIC y procesos TIC proporcionados por el proveedor o prestador de servicios directo a las entidades pertinentes."
+    },
+    "eu-nis2-ir-6-1-1": {
+      "code": "6.1.1",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad en la adquisición de servicios TIC o productos TIC\nA los efectos del artículo 21, apartado 2, letra e), de la Directiva (UE) 2022/2555, las entidades pertinentes establecerán y pondrán en marcha procedimientos para gestionar los riesgos derivados de la adquisición de servicios o productos TIC para componentes que sean críticos para la seguridad de los sistemas de redes y de información de las entidades pertinentes, de acuerdo con la evaluación de riesgos realizada con arreglo al punto 2.1, de los proveedores o prestadores de servicios a lo largo de su vida útil."
+    },
+    "eu-nis2-ir-6-1-2-a": {
+      "code": "6.1.2.a",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad en la adquisición de servicios TIC o productos TIC\nA los efectos del punto 6.1.1, los procedimientos contemplados en el mismo incluirán:\nrequisitos de seguridad aplicables a los servicios o productos TIC que vayan a adquirirse;"
+    },
+    "eu-nis2-ir-6-1-2-b": {
+      "code": "6.1.2.b",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad en la adquisición de servicios TIC o productos TIC\nA los efectos del punto 6.1.1, los procedimientos contemplados en el mismo incluirán:\nrequisitos relativos a las actualizaciones de seguridad a lo largo de toda la vida útil de los productos o servicios TIC o a su sustitución tras el final del período de soporte;"
+    },
+    "eu-nis2-ir-6-1-2-c": {
+      "code": "6.1.2.c",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad en la adquisición de servicios TIC o productos TIC\nA los efectos del punto 6.1.1, los procedimientos contemplados en el mismo incluirán:\ninformación que describa los componentes de hardware y software utilizados en los servicios y productos TIC;"
+    },
+    "eu-nis2-ir-6-1-2-d": {
+      "code": "6.1.2.d",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad en la adquisición de servicios TIC o productos TIC\nA los efectos del punto 6.1.1, los procedimientos contemplados en el mismo incluirán:\ninformación que describa las funciones de ciberseguridad de los servicios o productos TIC puestas en marcha o la configuración necesaria para su funcionamiento seguro;"
+    },
+    "eu-nis2-ir-6-1-2-e": {
+      "code": "6.1.2.e",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad en la adquisición de servicios TIC o productos TIC\nA los efectos del punto 6.1.1, los procedimientos contemplados en el mismo incluirán:\ngarantías de que los servicios o productos TIC cumplen los requisitos de seguridad con arreglo a la letra a);"
+    },
+    "eu-nis2-ir-6-1-2-f": {
+      "code": "6.1.2.f",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad en la adquisición de servicios TIC o productos TIC\nA los efectos del punto 6.1.1, los procedimientos contemplados en el mismo incluirán:\nmétodos para validar el cumplimiento de los requisitos de seguridad declarados por parte de los servicios o productos de TIC suministrados, y documentación de los resultados de la validación."
+    },
+    "eu-nis2-ir-6-1-3": {
+      "code": "6.1.3",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad en la adquisición de servicios TIC o productos TIC\nLas entidades pertinentes revisarán y, cuando proceda, actualizarán los procedimientos a intervalos planificados, así como cuando se produzcan incidentes significativos."
+    },
+    "eu-nis2-ir-6-2-1": {
+      "code": "6.2.1",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Ciclo de vida del desarrollo seguro\nAntes de desarrollar un sistema de redes y de información, incluidos los programas informáticos, las entidades pertinentes establecerán normas para el desarrollo seguro del mismo, y las aplicarán al desarrollar estos sistemas de redes y de información internamente o cuando externalicen dicho desarrollo. Las normas englobarán todas las fases de desarrollo, como las especificaciones, el diseño, la creación, la implantación y las pruebas."
+    },
+    "eu-nis2-ir-6-2-2-a": {
+      "code": "6.2.2.a",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Ciclo de vida del desarrollo seguro\nA los efectos del punto 6.2.1, las entidades pertinentes:\nllevarán a cabo análisis de los requisitos de seguridad en las fases de especificación y diseño de cualquier proyecto de desarrollo o adquisición emprendido por ellas mismas o en su nombre;"
+    },
+    "eu-nis2-ir-6-2-2-b": {
+      "code": "6.2.2.b",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Ciclo de vida del desarrollo seguro\nA los efectos del punto 6.2.1, las entidades pertinentes:\naplicarán los principios para diseñar sistemas seguros y principios de codificación seguros a toda actividad de desarrollo de sistemas de información, tales como la promoción de la ciberseguridad desde el diseño o las arquitecturas de confianza cero;"
+    },
+    "eu-nis2-ir-6-2-2-c": {
+      "code": "6.2.2.c",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Ciclo de vida del desarrollo seguro\nA los efectos del punto 6.2.1, las entidades pertinentes:\nestablecerán requisitos de seguridad en relación con los entornos de desarrollo;"
+    },
+    "eu-nis2-ir-6-2-2-d": {
+      "code": "6.2.2.d",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Ciclo de vida del desarrollo seguro\nA los efectos del punto 6.2.1, las entidades pertinentes:\nestablecerán y aplicarán procesos de pruebas de seguridad en el ciclo de vida del desarrollo;"
+    },
+    "eu-nis2-ir-6-2-2-e": {
+      "code": "6.2.2.e",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Ciclo de vida del desarrollo seguro\nA los efectos del punto 6.2.1, las entidades pertinentes:\nseleccionarán, protegerán y gestionarán adecuadamente los datos de las pruebas de seguridad;"
+    },
+    "eu-nis2-ir-6-2-2-f": {
+      "code": "6.2.2.f",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Ciclo de vida del desarrollo seguro\nA los efectos del punto 6.2.1, las entidades pertinentes:\nsanearán y anonimizarán los datos de las pruebas con arreglo a la evaluación de riesgos realizada de conformidad con el punto 2.1."
+    },
+    "eu-nis2-ir-6-2-3": {
+      "code": "6.2.3",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Ciclo de vida del desarrollo seguro\nEn cuanto a la externalización del desarrollo de sistemas de redes y de información, las entidades pertinentes también aplicarán las políticas y procedimientos a que se refieren los puntos 5 y 6.1."
+    },
+    "eu-nis2-ir-6-2-4": {
+      "code": "6.2.4",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Ciclo de vida del desarrollo seguro\nLas entidades pertinentes revisarán y, cuando proceda, actualizarán las normas de desarrollo seguro a intervalos planificados."
+    },
+    "eu-nis2-ir-6-3-1": {
+      "code": "6.3.1",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión de configuraciones\nLas entidades pertinentes adoptarán las medidas adecuadas para establecer, documentar, poner en marcha y supervisar las configuraciones, incluidas las configuraciones de seguridad del hardware de los equipos y programas informáticos, los servicios y las redes."
+    },
+    "eu-nis2-ir-6-3-2-a": {
+      "code": "6.3.2.a",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión de configuraciones\nA los efectos del punto 6.3.1, las entidades pertinentes:\ncrearán un entorno seguro en las configuraciones de sus equipos y programas informáticos, servicios y redes y lo mantendrán;"
+    },
+    "eu-nis2-ir-6-3-2-b": {
+      "code": "6.3.2.b",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión de configuraciones\nA los efectos del punto 6.3.1, las entidades pertinentes:\nestablecerán y pondrán en marcha procesos y herramientas para dar cumplimiento a las configuraciones seguras establecidas para los equipos y programas informáticos, servicios y redes, para los sistemas de nueva instalación y los sistemas en funcionamiento a lo largo de todo su ciclo de vida."
+    },
+    "eu-nis2-ir-6-3-3": {
+      "code": "6.3.3",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión de configuraciones\nLas entidades pertinentes revisarán y, cuando proceda, actualizarán las configuraciones a intervalos planificados, así como cuando se produzcan incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-6-4-1": {
+      "code": "6.4.1",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión de cambios, reparaciones y mantenimiento\nLas entidades pertinentes aplicarán procedimientos de gestión de cambios para controlar aquellos que se produzcan en los sistemas de redes y de información. Los procedimientos serán, según proceda, coherentes con las políticas generales de las entidades pertinentes relativas a la gestión de cambios."
+    },
+    "eu-nis2-ir-6-4-2": {
+      "code": "6.4.2",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión de cambios, reparaciones y mantenimiento\nLos procedimientos contemplados en el punto 6.4.1 se aplicarán en el caso de lanzamientos, modificaciones y cambios de emergencia de cualquier equipo o programa informático en funcionamiento o de cambios en la configuración. Los procedimientos garantizarán que dichos cambios se documenten y, a partir de la evaluación de riesgos realizada de acuerdo con el punto 2.1, se prueben y evalúen teniendo en cuenta el impacto potencial antes de su aplicación."
+    },
+    "eu-nis2-ir-6-4-3": {
+      "code": "6.4.3",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión de cambios, reparaciones y mantenimiento\nEn caso de que los procedimientos habituales de gestión de cambios no puedan seguirse debido a una emergencia, las entidades pertinentes documentarán el resultado del cambio y explicarán por qué no pudieron seguirse dichos procedimientos."
+    },
+    "eu-nis2-ir-6-4-4": {
+      "code": "6.4.4",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión de cambios, reparaciones y mantenimiento\nLas entidades pertinentes revisarán y, cuando proceda, actualizarán los procedimientos a intervalos planificados, así como cuando se produzcan incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-6-5-1": {
+      "code": "6.5.1",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Pruebas de seguridad\nLas entidades pertinentes establecerán, pondrán en marcha y aplicarán orientaciones y procedimientos para las pruebas de seguridad."
+    },
+    "eu-nis2-ir-6-5-2-a": {
+      "code": "6.5.2.a",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Pruebas de seguridad\nLas entidades pertinentes:\nestablecerán, a partir de la evaluación de riesgos realizada de acuerdo con el punto 2.1, la necesidad, el alcance, la frecuencia y el tipo de pruebas de seguridad;"
+    },
+    "eu-nis2-ir-6-5-2-b": {
+      "code": "6.5.2.b",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Pruebas de seguridad\nLas entidades pertinentes:\nrealizarán pruebas de seguridad de acuerdo con una metodología de prueba documentada, que englobe los elementos señalados como relevantes para el funcionamiento seguro en un análisis de riesgos;"
+    },
+    "eu-nis2-ir-6-5-2-c": {
+      "code": "6.5.2.c",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Pruebas de seguridad\nLas entidades pertinentes:\ndocumentarán el tipo, el alcance, la fecha y los resultados de las pruebas, incluidas la evaluación del carácter esencial y las medidas de mitigación correspondientes a cada hallazgo;"
+    },
+    "eu-nis2-ir-6-5-2-d": {
+      "code": "6.5.2.d",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Pruebas de seguridad\nLas entidades pertinentes:\naplicarán medidas de mitigación en caso de que se produzcan hallazgos críticos."
+    },
+    "eu-nis2-ir-6-5-3": {
+      "code": "6.5.3",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Pruebas de seguridad\nLas entidades pertinentes revisarán y, cuando proceda, actualizarán las políticas de pruebas de seguridad a intervalos planificados."
+    },
+    "eu-nis2-ir-6-6-1": {
+      "code": "6.6.1",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión de parches de seguridad\nLas entidades pertinentes detallarán y aplicarán procedimientos coherentes con los procedimientos de gestión de cambios a que se refiere el punto 6.4.1, de gestión de vulnerabilidades, de gestión del riesgo y otros procedimientos de gestión pertinentes para garantizar que:"
+    },
+    "eu-nis2-ir-6-6-1-a": {
+      "code": "6.6.1.a",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión de parches de seguridad\nLas entidades pertinentes detallarán y aplicarán procedimientos coherentes con los procedimientos de gestión de cambios a que se refiere el punto 6.4.1, de gestión de vulnerabilidades, de gestión del riesgo y otros procedimientos de gestión pertinentes para garantizar que:\nlos parches de seguridad se apliquen en un plazo razonable desde el momento en que estén disponibles;"
+    },
+    "eu-nis2-ir-6-6-1-b": {
+      "code": "6.6.1.b",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión de parches de seguridad\nLas entidades pertinentes detallarán y aplicarán procedimientos coherentes con los procedimientos de gestión de cambios a que se refiere el punto 6.4.1, de gestión de vulnerabilidades, de gestión del riesgo y otros procedimientos de gestión pertinentes para garantizar que:\nlos parches de seguridad se sometan a ensayo antes de ponerlos en marcha en los sistemas de producción;"
+    },
+    "eu-nis2-ir-6-6-1-c": {
+      "code": "6.6.1.c",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión de parches de seguridad\nLas entidades pertinentes detallarán y aplicarán procedimientos coherentes con los procedimientos de gestión de cambios a que se refiere el punto 6.4.1, de gestión de vulnerabilidades, de gestión del riesgo y otros procedimientos de gestión pertinentes para garantizar que:\nlos parches de seguridad procedan de fuentes de confianza y se compruebe su integridad;"
+    },
+    "eu-nis2-ir-6-6-1-d": {
+      "code": "6.6.1.d",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión de parches de seguridad\nLas entidades pertinentes detallarán y aplicarán procedimientos coherentes con los procedimientos de gestión de cambios a que se refiere el punto 6.4.1, de gestión de vulnerabilidades, de gestión del riesgo y otros procedimientos de gestión pertinentes para garantizar que:\nse adopten medidas adicionales y se acepten los riesgos residuales en aquellos casos en que no haya un parche disponible o no pueda aplicarse conforme al punto 6.6.2."
+    },
+    "eu-nis2-ir-6-6-2": {
+      "code": "6.6.2",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión de parches de seguridad\nComo excepción al punto 6.6.1, letra a), las entidades pertinentes podrán optar por no aplicar parches de seguridad cuando las desventajas de aplicarlos superen los beneficios de ciberseguridad. Las entidades pertinentes documentarán y justificarán debidamente los motivos de tal decisión."
+    },
+    "eu-nis2-ir-6-7-1": {
+      "code": "6.7.1",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad de las redes\nLas entidades pertinentes adoptarán medidas adecuadas para proteger sus sistemas de redes y de información de las ciberamenazas."
+    },
+    "eu-nis2-ir-6-7-2-a": {
+      "code": "6.7.2.a",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad de las redes\nA los efectos del punto 6.7.1, las entidades pertinentes:\ndocumentarán la arquitectura de la red de manera comprensible y actualizada;"
+    },
+    "eu-nis2-ir-6-7-2-b": {
+      "code": "6.7.2.b",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad de las redes\nA los efectos del punto 6.7.1, las entidades pertinentes:\nestablecerán y aplicarán controles para proteger los dominios de red internos de las entidades pertinentes frente al acceso no autorizado;"
+    },
+    "eu-nis2-ir-6-7-2-c": {
+      "code": "6.7.2.c",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad de las redes\nA los efectos del punto 6.7.1, las entidades pertinentes:\nconfigurarán los controles para impedir el acceso y las comunicaciones de la red que no sean necesarios para el funcionamiento de las entidades pertinentes;"
+    },
+    "eu-nis2-ir-6-7-2-d": {
+      "code": "6.7.2.d",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad de las redes\nA los efectos del punto 6.7.1, las entidades pertinentes:\nestablecerán y aplicarán controles del acceso remoto a los sistemas de redes y de información, incluido el acceso por parte de los proveedores de servicios;"
+    },
+    "eu-nis2-ir-6-7-2-e": {
+      "code": "6.7.2.e",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad de las redes\nA los efectos del punto 6.7.1, las entidades pertinentes:\nno utilizarán los sistemas empleados para gestionar la aplicación de la política de seguridad para otros fines;"
+    },
+    "eu-nis2-ir-6-7-2-f": {
+      "code": "6.7.2.f",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad de las redes\nA los efectos del punto 6.7.1, las entidades pertinentes:\nprohibirán de manera explícita o desactivarán las conexiones y servicios que no sean necesarios;"
+    },
+    "eu-nis2-ir-6-7-2-g": {
+      "code": "6.7.2.g",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad de las redes\nA los efectos del punto 6.7.1, las entidades pertinentes:\ncuando proceda, únicamente permitirán el acceso a los sistemas de redes y de información de las entidades pertinentes a los dispositivos autorizados por estas últimas;"
+    },
+    "eu-nis2-ir-6-7-2-h": {
+      "code": "6.7.2.h",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad de las redes\nA los efectos del punto 6.7.1, las entidades pertinentes:\npermitirán la conexión de los proveedores de servicios previa solicitud de autorización únicamente y durante un período de tiempo limitado, como la duración de una operación de mantenimiento;"
+    },
+    "eu-nis2-ir-6-7-2-i": {
+      "code": "6.7.2.i",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad de las redes\nA los efectos del punto 6.7.1, las entidades pertinentes:\nestablecerán la comunicación entre distintos sistemas únicamente a través de canales de confianza que estén aislados mediante separación lógica, criptográfica o física de otros canales de comunicación, y facilitarán la identificación segura de su punto final y la protección de sus datos frente a la modificación o la revelación;"
+    },
+    "eu-nis2-ir-6-7-2-j": {
+      "code": "6.7.2.j",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad de las redes\nA los efectos del punto 6.7.1, las entidades pertinentes:\nadoptarán un plan de ejecución para realizar la transición hacia protocolos de comunicación de la capa de red de última generación de manera segura, adecuada y gradual, y establecerán medidas para acelerar dicha transición;"
+    },
+    "eu-nis2-ir-6-7-2-k": {
+      "code": "6.7.2.k",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad de las redes\nA los efectos del punto 6.7.1, las entidades pertinentes:\nadoptarán un plan de ejecución relativo a la implantación de normas sobre las comunicaciones por correo electrónico modernas, interoperables y aprobadas a escala internacional para proteger las comunicaciones por correo electrónico y mitigar las vulnerabilidades vinculadas a las amenazas relativas a este último, y establecerán medidas para acelerar dicha implantación;"
+    },
+    "eu-nis2-ir-6-7-2-l": {
+      "code": "6.7.2.l",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad de las redes\nA los efectos del punto 6.7.1, las entidades pertinentes:\naplicarán las mejores prácticas sobre seguridad del sistema de nombres de dominio, la seguridad del enrutamiento de internet y la higiene del enrutamiento del tráfico con origen en la red o destinado a ella."
+    },
+    "eu-nis2-ir-6-7-3": {
+      "code": "6.7.3",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Seguridad de las redes\nLas entidades pertinentes revisarán y, cuando proceda, actualizarán estas medidas a intervalos planificados o cuando se produzcan incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-6-8-1": {
+      "code": "6.8.1",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Segmentación de la red\nLas entidades pertinentes segmentarán los sistemas en redes o zonas de acuerdo con los resultados de la evaluación de riesgos a que se refiere el punto 2.1. Segmentarán sus sistemas y redes de los sistemas y redes de terceros."
+    },
+    "eu-nis2-ir-6-8-2-a": {
+      "code": "6.8.2.a",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Segmentación de la red\nA tal efecto, las entidades pertinentes:\nconsiderarán la relación funcional, lógica y física, incluida la ubicación, entre sistemas y servicios fiables;"
+    },
+    "eu-nis2-ir-6-8-2-b": {
+      "code": "6.8.2.b",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Segmentación de la red\nA tal efecto, las entidades pertinentes:\nconcederán acceso a una red o zona sobre la base de una evaluación de sus requisitos de seguridad;"
+    },
+    "eu-nis2-ir-6-8-2-c": {
+      "code": "6.8.2.c",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Segmentación de la red\nA tal efecto, las entidades pertinentes:\nmantendrán los sistemas que resulten críticos para el funcionamiento de la entidad pertinente o para la protección en zonas seguras;"
+    },
+    "eu-nis2-ir-6-8-2-d": {
+      "code": "6.8.2.d",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Segmentación de la red\nA tal efecto, las entidades pertinentes:\nimplantarán una zona desmilitarizada dentro de sus redes de comunicación para ofrecer una comunicación segura desde o hacia sus redes;"
+    },
+    "eu-nis2-ir-6-8-2-e": {
+      "code": "6.8.2.e",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Segmentación de la red\nA tal efecto, las entidades pertinentes:\nrestringirán el acceso y las comunicaciones entre zonas y dentro de ellas a lo necesario para el funcionamiento de las entidades pertinentes o la seguridad;"
+    },
+    "eu-nis2-ir-6-8-2-f": {
+      "code": "6.8.2.f",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Segmentación de la red\nA tal efecto, las entidades pertinentes:\nsepararán la red específica para la administración de los sistemas de redes y de información de la red operativa de las entidades pertinentes;"
+    },
+    "eu-nis2-ir-6-8-2-g": {
+      "code": "6.8.2.g",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Segmentación de la red\nA tal efecto, las entidades pertinentes:\nsegregarán los canales de administración de la red del resto de tráfico de la red;"
+    },
+    "eu-nis2-ir-6-8-2-h": {
+      "code": "6.8.2.h",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Segmentación de la red\nA tal efecto, las entidades pertinentes:\nsepararán los sistemas de producción de los servicios de las entidades pertinentes de los sistemas utilizados para el desarrollo y las pruebas, incluidas las copias de seguridad."
+    },
+    "eu-nis2-ir-6-8-3": {
+      "code": "6.8.3",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Segmentación de la red\nLas entidades pertinentes revisarán y, cuando proceda, actualizarán la segmentación de la red a intervalos planificados, así como cuando se produzcan incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-6-9-1": {
+      "code": "6.9.1",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Protección frente a los programas informáticos maliciosos y no autorizados\nLas entidades pertinentes protegerán sus sistemas de redes y de información frente a los programas informáticos maliciosos y no autorizados."
+    },
+    "eu-nis2-ir-6-9-2": {
+      "code": "6.9.2",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Protección frente a los programas informáticos maliciosos y no autorizados\nPara ello, las entidades pertinentes aplicarán, en particular, medidas para detectar o impedir el uso de programas informáticos maliciosos o no autorizados. Las entidades pertinentes velarán, cuando proceda, por que sus sistemas de redes y de información estén equipados con programas informáticos de detección y respuesta, que se actualicen periódicamente de conformidad con la evaluación de riesgos realizada con arreglo al punto 2.1 y los acuerdos contractuales con los proveedores."
+    },
+    "eu-nis2-ir-6-10-1": {
+      "code": "6.10.1",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión y divulgación de las vulnerabilidades\nLas entidades pertinentes recibirán información sobre las vulnerabilidades de sus sistemas de redes y de información, evaluarán su exposición a dichas vulnerabilidades y adoptarán las medidas necesarias para gestionarlas."
+    },
+    "eu-nis2-ir-6-10-2-a": {
+      "code": "6.10.2.a",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión y divulgación de las vulnerabilidades\nA los efectos del punto 6.10.1, las entidades pertinentes:\nsupervisarán la información sobre vulnerabilidades a través de los canales adecuados, tales como los anuncios de los CSIRT, las autoridades competentes o la información facilitada por los proveedores o prestadores de servicios;"
+    },
+    "eu-nis2-ir-6-10-2-b": {
+      "code": "6.10.2.b",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión y divulgación de las vulnerabilidades\nA los efectos del punto 6.10.1, las entidades pertinentes:\nrealizarán, según proceda, exploraciones de vulnerabilidad y registrarán pruebas de los resultados de las mismas, a intervalos planificados;"
+    },
+    "eu-nis2-ir-6-10-2-c": {
+      "code": "6.10.2.c",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión y divulgación de las vulnerabilidades\nA los efectos del punto 6.10.1, las entidades pertinentes:\nabordarán, sin demora indebida, las vulnerabilidades que las entidades pertinentes consideren críticas para sus operaciones;"
+    },
+    "eu-nis2-ir-6-10-2-d": {
+      "code": "6.10.2.d",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión y divulgación de las vulnerabilidades\nA los efectos del punto 6.10.1, las entidades pertinentes:\nasegurarán que su gestión de vulnerabilidades sea compatible con sus procedimientos de gestión de cambios, gestión de parches de seguridad, gestión de riesgos y gestión de incidentes;"
+    },
+    "eu-nis2-ir-6-10-2-e": {
+      "code": "6.10.2.e",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión y divulgación de las vulnerabilidades\nA los efectos del punto 6.10.1, las entidades pertinentes:\nestablecerán un procedimiento de divulgación de las vulnerabilidades de conformidad con la política coordinada de divulgación de las vulnerabilidades nacional aplicable."
+    },
+    "eu-nis2-ir-6-10-3": {
+      "code": "6.10.3",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión y divulgación de las vulnerabilidades\nCuando esté justificado por el posible impacto de la vulnerabilidad, las entidades pertinentes crearán y llevarán a la práctica un plan para mitigarla. En otros casos, las entidades pertinentes documentarán y justificarán el motivo por el que la vulnerabilidad no requiere reparación."
+    },
+    "eu-nis2-ir-6-10-4": {
+      "code": "6.10.4",
+      "section": "section-6",
+      "control": "Artículo 21, apartado 2, letra e)",
+      "requirements": "Gestión y divulgación de las vulnerabilidades\nLas entidades pertinentes revisarán y, cuando proceda, actualizarán a intervalos planificados los canales que utilizan para supervisar la información relativa a las vulnerabilidades."
+    },
+    "eu-nis2-ir-7-1": {
+      "code": "7.1",
+      "section": "section-7",
+      "control": "Artículo 21, apartado 2, letra f)",
+      "requirements": "A los efectos del artículo 21, apartado 2, letra f), de la Directiva (UE) 2022/2555, las entidades pertinentes establecerán, llevarán a la práctica y aplicarán orientaciones y procedimientos para evaluar si las medidas para la gestión de riesgos de ciberseguridad que hayan adoptado se ejecutan y mantienen de manera efectiva."
+    },
+    "eu-nis2-ir-7-2": {
+      "code": "7.2",
+      "section": "section-7",
+      "control": "Artículo 21, apartado 2, letra f)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 7.1 tendrán en cuenta los resultados de la evaluación de riesgos conforme al punto 2.1 y los incidentes significativos ocurridos en el pasado. Las entidades pertinentes determinarán:"
+    },
+    "eu-nis2-ir-7-2-a": {
+      "code": "7.2.a",
+      "section": "section-7",
+      "control": "Artículo 21, apartado 2, letra f)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 7.1 tendrán en cuenta los resultados de la evaluación de riesgos conforme al punto 2.1 y los incidentes significativos ocurridos en el pasado. Las entidades pertinentes determinarán:\nqué medidas para la gestión de riesgos de ciberseguridad deben supervisarse y medirse, incluidos los procedimientos y controles;"
+    },
+    "eu-nis2-ir-7-2-b": {
+      "code": "7.2.b",
+      "section": "section-7",
+      "control": "Artículo 21, apartado 2, letra f)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 7.1 tendrán en cuenta los resultados de la evaluación de riesgos conforme al punto 2.1 y los incidentes significativos ocurridos en el pasado. Las entidades pertinentes determinarán:\nlos métodos de supervisión, medición, análisis y evaluación, según corresponda, para asegurar resultados válidos;"
+    },
+    "eu-nis2-ir-7-2-c": {
+      "code": "7.2.c",
+      "section": "section-7",
+      "control": "Artículo 21, apartado 2, letra f)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 7.1 tendrán en cuenta los resultados de la evaluación de riesgos conforme al punto 2.1 y los incidentes significativos ocurridos en el pasado. Las entidades pertinentes determinarán:\ncuándo deben realizarse la supervisión y la medición;"
+    },
+    "eu-nis2-ir-7-2-d": {
+      "code": "7.2.d",
+      "section": "section-7",
+      "control": "Artículo 21, apartado 2, letra f)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 7.1 tendrán en cuenta los resultados de la evaluación de riesgos conforme al punto 2.1 y los incidentes significativos ocurridos en el pasado. Las entidades pertinentes determinarán:\nquiénes son los responsables de supervisar y medir la eficacia de las medidas para la gestión de riesgos de ciberseguridad;"
+    },
+    "eu-nis2-ir-7-2-e": {
+      "code": "7.2.e",
+      "section": "section-7",
+      "control": "Artículo 21, apartado 2, letra f)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 7.1 tendrán en cuenta los resultados de la evaluación de riesgos conforme al punto 2.1 y los incidentes significativos ocurridos en el pasado. Las entidades pertinentes determinarán:\ncuándo se deben analizar y evaluar los resultados de la supervisión y la medición;"
+    },
+    "eu-nis2-ir-7-2-f": {
+      "code": "7.2.f",
+      "section": "section-7",
+      "control": "Artículo 21, apartado 2, letra f)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 7.1 tendrán en cuenta los resultados de la evaluación de riesgos conforme al punto 2.1 y los incidentes significativos ocurridos en el pasado. Las entidades pertinentes determinarán:\nquiénes deben analizar y evaluar estos resultados."
+    },
+    "eu-nis2-ir-7-3": {
+      "code": "7.3",
+      "section": "section-7",
+      "control": "Artículo 21, apartado 2, letra f)",
+      "requirements": "Las entidades pertinentes revisarán y, cuando proceda, actualizarán las orientaciones y los procedimientos a intervalos planificados, así como cuando se produzcan incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-8-1-1": {
+      "code": "8.1.1",
+      "section": "section-8",
+      "control": "Artículo 21, apartado 2, letra g)",
+      "requirements": "Mejora de la sensibilización y prácticas básicas de ciberhigiene\nA los efectos del artículo 21, apartado 2, letra g), de la Directiva (UE) 2022/2555, las entidades pertinentes se asegurarán de que sus empleados, incluidos los miembros de los órganos de dirección, así como sus proveedores y prestadores de servicios directos sean conscientes de los riesgos, estén informados de la importancia de la ciberseguridad y apliquen prácticas de ciberhigiene."
+    },
+    "eu-nis2-ir-8-1-2": {
+      "code": "8.1.2",
+      "section": "section-8",
+      "control": "Artículo 21, apartado 2, letra g)",
+      "requirements": "Mejora de la sensibilización y prácticas básicas de ciberhigiene\nA los efectos del punto 8.1.1, las entidades pertinentes ofrecerán a sus empleados, incluidos los miembros de los órganos de dirección, así como a sus proveedores y prestadores de servicios directos, según proceda de conformidad con el punto 5.1.4, un programa de mejora de la sensibilización que:"
+    },
+    "eu-nis2-ir-8-1-2-a": {
+      "code": "8.1.2.a",
+      "section": "section-8",
+      "control": "Artículo 21, apartado 2, letra g)",
+      "requirements": "Mejora de la sensibilización y prácticas básicas de ciberhigiene\nA los efectos del punto 8.1.1, las entidades pertinentes ofrecerán a sus empleados, incluidos los miembros de los órganos de dirección, así como a sus proveedores y prestadores de servicios directos, según proceda de conformidad con el punto 5.1.4, un programa de mejora de la sensibilización que:\nse programará a lo largo del tiempo, de forma que se repitan las actividades e incluya a los nuevos empleados;"
+    },
+    "eu-nis2-ir-8-1-2-b": {
+      "code": "8.1.2.b",
+      "section": "section-8",
+      "control": "Artículo 21, apartado 2, letra g)",
+      "requirements": "Mejora de la sensibilización y prácticas básicas de ciberhigiene\nA los efectos del punto 8.1.1, las entidades pertinentes ofrecerán a sus empleados, incluidos los miembros de los órganos de dirección, así como a sus proveedores y prestadores de servicios directos, según proceda de conformidad con el punto 5.1.4, un programa de mejora de la sensibilización que:\nse establecerá en consonancia con la política de seguridad de las redes y la información, las políticas específicas y los procedimientos pertinentes en materia de seguridad de las redes y de la información;"
+    },
+    "eu-nis2-ir-8-1-2-c": {
+      "code": "8.1.2.c",
+      "section": "section-8",
+      "control": "Artículo 21, apartado 2, letra g)",
+      "requirements": "Mejora de la sensibilización y prácticas básicas de ciberhigiene\nA los efectos del punto 8.1.1, las entidades pertinentes ofrecerán a sus empleados, incluidos los miembros de los órganos de dirección, así como a sus proveedores y prestadores de servicios directos, según proceda de conformidad con el punto 5.1.4, un programa de mejora de la sensibilización que:\nenglobará las ciberamenazas relevantes, las medidas para la gestión de riesgos de ciberseguridad en vigor, los puntos de contacto y los recursos para obtener información adicional y asesoramiento sobre aspectos de ciberseguridad, así como las prácticas de ciberhigiene para los usuarios."
+    },
+    "eu-nis2-ir-8-1-3": {
+      "code": "8.1.3",
+      "section": "section-8",
+      "control": "Artículo 21, apartado 2, letra g)",
+      "requirements": "Mejora de la sensibilización y prácticas básicas de ciberhigiene\nEl programa de mejora de la sensibilización se probará en términos de eficacia, según proceda. El programa de mejora de la sensibilización se actualizará y se ofrecerá a intervalos planificados teniendo en cuenta los cambios en las prácticas de ciberhigiene y el panorama actual de amenazas y de riesgos para las entidades pertinentes."
+    },
+    "eu-nis2-ir-8-2-1": {
+      "code": "8.2.1",
+      "section": "section-8",
+      "control": "Artículo 21, apartado 2, letra g)",
+      "requirements": "Formación en seguridad\nLas entidades pertinentes indicarán cuáles son los empleados cuyos roles exigen capacidades y conocimientos especializados de seguridad y velarán por que reciban formación periódica sobre la seguridad de los sistemas de redes y de información."
+    },
+    "eu-nis2-ir-8-2-2": {
+      "code": "8.2.2",
+      "section": "section-8",
+      "control": "Artículo 21, apartado 2, letra g)",
+      "requirements": "Formación en seguridad\nLas entidades pertinentes establecerán, pondrán en marcha y ejecutarán un programa de formación en consonancia con la política de seguridad de las redes y de la información, las políticas específicas y otros procedimientos pertinentes en materia de seguridad de las redes y de la información que determine las necesidades de formación de ciertos roles y puestos de acuerdo con criterios concretos."
+    },
+    "eu-nis2-ir-8-2-3": {
+      "code": "8.2.3",
+      "section": "section-8",
+      "control": "Artículo 21, apartado 2, letra g)",
+      "requirements": "Formación en seguridad\nLa formación contemplada en el punto 8.2.1 se adecuará a las funciones laborales de los empleados y se evaluará su eficacia. La formación tendrá en cuenta las medidas de seguridad en vigor y englobará lo siguiente:"
+    },
+    "eu-nis2-ir-8-2-3-a": {
+      "code": "8.2.3.a",
+      "section": "section-8",
+      "control": "Artículo 21, apartado 2, letra g)",
+      "requirements": "Formación en seguridad\nLa formación contemplada en el punto 8.2.1 se adecuará a las funciones laborales de los empleados y se evaluará su eficacia. La formación tendrá en cuenta las medidas de seguridad en vigor y englobará lo siguiente:\ninstrucciones relativas a la configuración y el funcionamiento seguros de los sistemas de redes y de información, incluidos los dispositivos móviles;"
+    },
+    "eu-nis2-ir-8-2-3-b": {
+      "code": "8.2.3.b",
+      "section": "section-8",
+      "control": "Artículo 21, apartado 2, letra g)",
+      "requirements": "Formación en seguridad\nLa formación contemplada en el punto 8.2.1 se adecuará a las funciones laborales de los empleados y se evaluará su eficacia. La formación tendrá en cuenta las medidas de seguridad en vigor y englobará lo siguiente:\ninformación sobre ciberamenazas conocidas;"
+    },
+    "eu-nis2-ir-8-2-3-c": {
+      "code": "8.2.3.c",
+      "section": "section-8",
+      "control": "Artículo 21, apartado 2, letra g)",
+      "requirements": "Formación en seguridad\nLa formación contemplada en el punto 8.2.1 se adecuará a las funciones laborales de los empleados y se evaluará su eficacia. La formación tendrá en cuenta las medidas de seguridad en vigor y englobará lo siguiente:\nformación relativa al comportamiento frente a sucesos relevantes para la seguridad."
+    },
+    "eu-nis2-ir-8-2-4": {
+      "code": "8.2.4",
+      "section": "section-8",
+      "control": "Artículo 21, apartado 2, letra g)",
+      "requirements": "Formación en seguridad\nLas entidades pertinentes llevarán a cabo la formación para los miembros del personal que se trasladen a nuevos puestos o roles que requieran capacidades y conocimientos especializados en seguridad."
+    },
+    "eu-nis2-ir-8-2-5": {
+      "code": "8.2.5",
+      "section": "section-8",
+      "control": "Artículo 21, apartado 2, letra g)",
+      "requirements": "Formación en seguridad\nEl programa se actualizará y desarrollará de manera periódica teniendo en cuenta las normas y reglas aplicables, los roles asignados, las responsabilidades, así como las ciberamenazas conocidas y los avances tecnológicos."
+    },
+    "eu-nis2-ir-9-1": {
+      "code": "9.1",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "A los efectos del artículo 21, apartado 2, letra h), de la Directiva (UE) 2022/2555, las entidades pertinentes establecerán, llevarán a la práctica y aplicarán orientaciones y procedimientos relativos a la criptografía, con el objetivo de asegurar un uso adecuado y eficaz de la misma para proteger la confidencialidad, autenticidad e integridad de la información en consonancia con la clasificación de activos de las entidades pertinentes y los resultados de la evaluación de riesgos realizada de conformidad con el punto 2.1."
+    },
+    "eu-nis2-ir-9-2-a": {
+      "code": "9.2.a",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 9.1 establecerán:\nde acuerdo con la clasificación de activos de las entidades pertinentes, el tipo, la firmeza y la calidad de las medidas criptográficas necesarias para proteger los activos de dichas entidades, incluidos los datos en reposo y los datos en tránsito;"
+    },
+    "eu-nis2-ir-9-2-b": {
+      "code": "9.2.b",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 9.1 establecerán:\nteniendo en cuenta la letra a), los protocolos o las familias de protocolos que deben adoptarse, así como los algoritmos criptográficos, la solidez del cifrado, las soluciones criptográficas y las prácticas de uso que deben aprobarse y exigirse para su uso en las entidades, siguiendo, cuando proceda, un enfoque de agilidad criptográfica;"
+    },
+    "eu-nis2-ir-9-2-c": {
+      "code": "9.2.c",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 9.1 establecerán:\nel enfoque de las entidades pertinentes sobre la gestión de claves, que incluya, cuando proceda, métodos para lo siguiente:"
+    },
+    "eu-nis2-ir-9-2-c-i": {
+      "code": "9.2.c.i",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 9.1 establecerán:\nel enfoque de las entidades pertinentes sobre la gestión de claves, que incluya, cuando proceda, métodos para lo siguiente:\ngenerar distintas claves para sistemas y aplicaciones criptográficos;"
+    },
+    "eu-nis2-ir-9-2-c-ii": {
+      "code": "9.2.c.ii",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 9.1 establecerán:\nel enfoque de las entidades pertinentes sobre la gestión de claves, que incluya, cuando proceda, métodos para lo siguiente:\nexpedir y obtener certificados de clave pública;"
+    },
+    "eu-nis2-ir-9-2-c-iii": {
+      "code": "9.2.c.iii",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 9.1 establecerán:\nel enfoque de las entidades pertinentes sobre la gestión de claves, que incluya, cuando proceda, métodos para lo siguiente:\ndistribuir claves a las entidades en cuestión, incluida información sobre cómo activar las claves cuando se reciban;"
+    },
+    "eu-nis2-ir-9-2-c-iv": {
+      "code": "9.2.c.iv",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 9.1 establecerán:\nel enfoque de las entidades pertinentes sobre la gestión de claves, que incluya, cuando proceda, métodos para lo siguiente:\nalmacenar claves, incluida información sobre cómo acceden a ellas los usuarios autorizados;"
+    },
+    "eu-nis2-ir-9-2-c-v": {
+      "code": "9.2.c.v",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 9.1 establecerán:\nel enfoque de las entidades pertinentes sobre la gestión de claves, que incluya, cuando proceda, métodos para lo siguiente:\ncambiar o actualizar las claves, incluida información sobre cuándo y cómo modificarlas;"
+    },
+    "eu-nis2-ir-9-2-c-vi": {
+      "code": "9.2.c.vi",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 9.1 establecerán:\nel enfoque de las entidades pertinentes sobre la gestión de claves, que incluya, cuando proceda, métodos para lo siguiente:\ngestionar las claves en riesgo;"
+    },
+    "eu-nis2-ir-9-2-c-vii": {
+      "code": "9.2.c.vii",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 9.1 establecerán:\nel enfoque de las entidades pertinentes sobre la gestión de claves, que incluya, cuando proceda, métodos para lo siguiente:\nanular claves, incluida información sobre cómo retirarlas o desactivarlas;"
+    },
+    "eu-nis2-ir-9-2-c-viii": {
+      "code": "9.2.c.viii",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 9.1 establecerán:\nel enfoque de las entidades pertinentes sobre la gestión de claves, que incluya, cuando proceda, métodos para lo siguiente:\nrecuperar las claves perdidas o corrompidas;"
+    },
+    "eu-nis2-ir-9-2-c-ix": {
+      "code": "9.2.c.ix",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 9.1 establecerán:\nel enfoque de las entidades pertinentes sobre la gestión de claves, que incluya, cuando proceda, métodos para lo siguiente:\nhacer copias de seguridad y crear archivos de las claves;"
+    },
+    "eu-nis2-ir-9-2-c-x": {
+      "code": "9.2.c.x",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 9.1 establecerán:\nel enfoque de las entidades pertinentes sobre la gestión de claves, que incluya, cuando proceda, métodos para lo siguiente:\ndestruir claves;"
+    },
+    "eu-nis2-ir-9-2-c-xi": {
+      "code": "9.2.c.xi",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 9.1 establecerán:\nel enfoque de las entidades pertinentes sobre la gestión de claves, que incluya, cuando proceda, métodos para lo siguiente:\nhacer un registro y auditar las actividades relativas a la gestión de claves."
+    },
+    "eu-nis2-ir-9-2-c-xii": {
+      "code": "9.2.c.xii",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las orientaciones y procedimientos a que hace referencia el punto 9.1 establecerán:\nel enfoque de las entidades pertinentes sobre la gestión de claves, que incluya, cuando proceda, métodos para lo siguiente:\nfijar las fechas de activación y desactivación de las claves asegurándose de que estas solo pueden utilizarse durante el período de tiempo especificado de acuerdo con las normas de gestión de claves de la organización."
+    },
+    "eu-nis2-ir-9-3": {
+      "code": "9.3",
+      "section": "section-9",
+      "control": "Artículo 21, apartado 2, letra h)",
+      "requirements": "Las entidades pertinentes revisarán y, cuando proceda, actualizarán las orientaciones y los procedimientos a intervalos planificados teniendo en cuenta los últimos avances en criptografía."
+    },
+    "eu-nis2-ir-10-1-1": {
+      "code": "10.1.1",
+      "section": "section-10",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Seguridad de los recursos humanos\nA los efectos del artículo 21, apartado 2, letra i), de la Directiva (UE) 2022/2555, las entidades pertinentes se asegurarán de que sus empleados y sus proveedores y prestadores de servicios directos, cuando proceda, entiendan sus responsabilidades en materia de seguridad y se comprometan a ellas, según convenga con relación a los servicios ofrecidos y el puesto de trabajo y en consonancia con la política de seguridad de los sistemas de redes y de información de la entidad pertinente."
+    },
+    "eu-nis2-ir-10-1-2-a": {
+      "code": "10.1.2.a",
+      "section": "section-10",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Seguridad de los recursos humanos\nEl requisito contemplado en el punto 10.1.1 incluirá lo siguiente:\nmecanismos para garantizar que todos los empleados, proveedores y prestadores de servicios directos, cuando proceda, entiendan y respeten las prácticas estándar de ciberhigiene aplicadas por las entidades pertinentes de acuerdo con el punto 8.1;"
+    },
+    "eu-nis2-ir-10-1-2-b": {
+      "code": "10.1.2.b",
+      "section": "section-10",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Seguridad de los recursos humanos\nEl requisito contemplado en el punto 10.1.1 incluirá lo siguiente:\nmecanismos para garantizar que todos los usuarios que dispongan de acceso de administración o privilegiado conozcan sus roles, responsabilidades y autoridades y actúen de conformidad con ellos;"
+    },
+    "eu-nis2-ir-10-1-2-c": {
+      "code": "10.1.2.c",
+      "section": "section-10",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Seguridad de los recursos humanos\nEl requisito contemplado en el punto 10.1.1 incluirá lo siguiente:\nmecanismos para garantizar que los miembros de los órganos de dirección conozcan sus roles, responsabilidades y autoridades y actúen de conformidad con ellos en lo que se refiere a la seguridad de los sistemas de redes y de información;"
+    },
+    "eu-nis2-ir-10-1-2-d": {
+      "code": "10.1.2.d",
+      "section": "section-10",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Seguridad de los recursos humanos\nEl requisito contemplado en el punto 10.1.1 incluirá lo siguiente:\nmecanismos para contratar personal cualificado para los roles correspondientes, como por ejemplo, los controles de referencia, los procedimientos de evaluación, la validación de certificaciones o las pruebas escritas."
+    },
+    "eu-nis2-ir-10-1-3": {
+      "code": "10.1.3",
+      "section": "section-10",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Seguridad de los recursos humanos\nLas entidades pertinentes revisarán la asignación de personal a roles específicos, tal como se recoge en el punto 1.2, así como su atribución de recursos humanos a este respecto, a intervalos planificados y al menos una vez al año. Las entidades actualizarán la asignación cuando sea necesario."
+    },
+    "eu-nis2-ir-10-2-1": {
+      "code": "10.2.1",
+      "section": "section-10",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Comprobación de antecedentes\nLas entidades pertinentes se asegurarán, en la medida posible, de comprobar los antecedentes personales de sus empleados y, cuando proceda, de sus proveedores y prestadores de servicios directos, de conformidad con el apartado 5.1.4, cuando resulte necesario para sus roles, responsabilidades y autoridades."
+    },
+    "eu-nis2-ir-10-2-2-a": {
+      "code": "10.2.2.a",
+      "section": "section-10",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Comprobación de antecedentes\nA los efectos del punto 10.2.1, las entidades pertinentes:\naplicarán criterios que establezcan qué roles, responsabilidades y autoridades deben ejercer exclusivamente aquellas personas cuyos antecedentes hayan sido comprobados;"
+    },
+    "eu-nis2-ir-10-2-2-b": {
+      "code": "10.2.2.b",
+      "section": "section-10",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Comprobación de antecedentes\nA los efectos del punto 10.2.1, las entidades pertinentes:\nse asegurarán de que estas comprobaciones contempladas en el punto 10.2.1 se lleven a cabo antes de que estas personas empiecen a ejercer dichos roles, responsabilidades y autoridades, que tendrán en cuenta las disposiciones legales, normativas y éticas aplicables en proporción a los requisitos operativos, la clasificación de activos contemplada en el apartado 12.1 y los sistemas de redes y de información a los que va a accederse, así como los riesgos percibidos."
+    },
+    "eu-nis2-ir-10-2-3": {
+      "code": "10.2.3",
+      "section": "section-10",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Comprobación de antecedentes\nLas entidades pertinentes revisarán la política a intervalos planificados y la actualizarán según proceda."
+    },
+    "eu-nis2-ir-10-3-1": {
+      "code": "10.3.1",
+      "section": "section-10",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Terminación o cambio de los procedimientos de contratación\nLas entidades pertinentes se asegurarán de que la seguridad de los sistemas de redes y de información y las tareas que sigan siendo válidas tras la terminación o el cambio de empleo de sus empleados se definan y ejecuten contractualmente."
+    },
+    "eu-nis2-ir-10-3-2": {
+      "code": "10.3.2",
+      "section": "section-10",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Terminación o cambio de los procedimientos de contratación\nA los efectos del punto 10.3.1, las entidades pertinentes recogerán en las condiciones de empleo, contrato o acuerdo de cada persona, las responsabilidades y funciones que siguen teniendo validez una vez finalizado el empleo o contrato, como por ejemplo las cláusulas de confidencialidad."
+    },
+    "eu-nis2-ir-10-4-1": {
+      "code": "10.4.1",
+      "section": "section-10",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Procedimiento disciplinario\nLas entidades pertinentes establecerán, comunicarán y mantendrán un procedimiento disciplinario para gestionar los incumplimientos de las políticas de seguridad de los sistemas de redes y de información. El proceso tendrá en cuenta los requisitos legales, estatutarios, contractuales y empresariales pertinentes."
+    },
+    "eu-nis2-ir-10-4-2": {
+      "code": "10.4.2",
+      "section": "section-10",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Procedimiento disciplinario\nLas entidades pertinentes revisarán y, cuando proceda, actualizarán los procedimientos disciplinarios a intervalos planificados o cuando resulte necesario debido a cambios jurídicos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-11-1-1": {
+      "code": "11.1.1",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Política de control de accesos\nA los efectos del artículo 21, apartado 2, letra i), de la Directiva (UE) 2022/2555, las entidades pertinentes establecerán, documentarán y pondrán en marcha políticas de control de acceso lógico y físico relativas al acceso a sus sistemas de redes y de información; basándose en requisitos empresariales y en requisitos de seguridad de los sistemas de redes y de información."
+    },
+    "eu-nis2-ir-11-1-2-a": {
+      "code": "11.1.2.a",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Política de control de accesos\nLa política a que hace referencia el punto 11.1.1 se encargará de lo siguiente:\nel acceso de personas, como el personal, los visitantes y las entidades externas, como los proveedores y prestadores de servicios;"
+    },
+    "eu-nis2-ir-11-1-2-b": {
+      "code": "11.1.2.b",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Política de control de accesos\nLa política a que hace referencia el punto 11.1.1 se encargará de lo siguiente:\nel acceso por parte de los sistemas de redes y de información;"
+    },
+    "eu-nis2-ir-11-1-2-c": {
+      "code": "11.1.2.c",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Política de control de accesos\nLa política a que hace referencia el punto 11.1.1 se encargará de lo siguiente:\ngarantizar que solo se autorice el acceso a usuarios que hayan sido debidamente autenticados."
+    },
+    "eu-nis2-ir-11-1-3": {
+      "code": "11.1.3",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Política de control de accesos\nLas entidades pertinentes revisarán y, cuando proceda, actualizarán las políticas a intervalos planificados o cuando se produzcan incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-11-2-1": {
+      "code": "11.2.1",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Gestión de derechos de acceso\nLas entidades pertinentes ofrecerán, modificarán, retirarán y documentarán los derechos de acceso a los sistemas de redes y de información de conformidad con la política de control de accesos prevista en el punto 11.1."
+    },
+    "eu-nis2-ir-11-2-2-a": {
+      "code": "11.2.2.a",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Gestión de derechos de acceso\nLas entidades pertinentes:\nconcederán y retirarán los derechos de acceso sobre la base de los principios de necesidad de conocer, el mínimo privilegio y separación de competencias;"
+    },
+    "eu-nis2-ir-11-2-2-b": {
+      "code": "11.2.2.b",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Gestión de derechos de acceso\nLas entidades pertinentes:\nvelarán por que los derechos de acceso se modifiquen en consecuencia tras la terminación o el cambio de empleo;"
+    },
+    "eu-nis2-ir-11-2-2-c": {
+      "code": "11.2.2.c",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Gestión de derechos de acceso\nLas entidades pertinentes:\nvelarán por que las personas pertinentes autoricen el acceso a los sistemas de redes y de información;"
+    },
+    "eu-nis2-ir-11-2-2-d": {
+      "code": "11.2.2.d",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Gestión de derechos de acceso\nLas entidades pertinentes:\nvelarán por que los derechos de acceso se encarguen debidamente del acceso de terceros, como visitantes o proveedores y prestadores de servicios, especialmente limitando los derechos de acceso en su alcance y duración;"
+    },
+    "eu-nis2-ir-11-2-2-e": {
+      "code": "11.2.2.e",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Gestión de derechos de acceso\nLas entidades pertinentes:\nmantendrán un registro de los derechos de acceso concedidos;"
+    },
+    "eu-nis2-ir-11-2-2-f": {
+      "code": "11.2.2.f",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Gestión de derechos de acceso\nLas entidades pertinentes:\nrealizarán un registro de la gestión de los derechos de acceso."
+    },
+    "eu-nis2-ir-11-2-3": {
+      "code": "11.2.3",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Gestión de derechos de acceso\nLas entidades pertinentes revisarán los derechos de acceso a intervalos planificados y los modificarán según los cambios organizativos. Las entidades pertinentes documentarán los resultados de la revisión e incluirán los cambios necesarios de los derechos de acceso."
+    },
+    "eu-nis2-ir-11-3-1": {
+      "code": "11.3.1",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Cuentas privilegiadas y cuentas de administración del sistema\nLas entidades pertinentes dispondrán de orientaciones para la gestión de cuentas privilegiadas y cuentas de administración del sistema como parte de la política de control de acceso contemplada en el punto 11.1."
+    },
+    "eu-nis2-ir-11-3-2-a": {
+      "code": "11.3.2.a",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Cuentas privilegiadas y cuentas de administración del sistema\nLa política a que hace referencia el punto 11.3.1 se encargará de lo siguiente:\nestablecer procedimientos sólidos de identificación y autenticación, como la autenticación de múltiples factores, y procedimientos de autorización para cuentas privilegiadas y cuentas de administración del sistema;"
+    },
+    "eu-nis2-ir-11-3-2-b": {
+      "code": "11.3.2.b",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Cuentas privilegiadas y cuentas de administración del sistema\nLa política a que hace referencia el punto 11.3.1 se encargará de lo siguiente:\ncrear cuentas específicas que vayan a utilizarse exclusivamente para operaciones de administración del sistema, tales como la instalación, la configuración, la gestión o el mantenimiento;"
+    },
+    "eu-nis2-ir-11-3-2-c": {
+      "code": "11.3.2.c",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Cuentas privilegiadas y cuentas de administración del sistema\nLa política a que hace referencia el punto 11.3.1 se encargará de lo siguiente:\npersonalizar y restringir en la mayor medida posible los privilegios de la administración del sistema;"
+    },
+    "eu-nis2-ir-11-3-2-d": {
+      "code": "11.3.2.d",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Cuentas privilegiadas y cuentas de administración del sistema\nLa política a que hace referencia el punto 11.3.1 se encargará de lo siguiente:\nprever que las cuentas de administración del sistema solo se utilicen para conectarse a los sistemas de administración correspondientes."
+    },
+    "eu-nis2-ir-11-3-3": {
+      "code": "11.3.3",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Cuentas privilegiadas y cuentas de administración del sistema\nLas entidades pertinentes revisarán los derechos de acceso de las cuentas privilegiadas y las cuentas de administración del sistema a intervalos planificados, los modificarán teniendo en cuenta los cambios organizativos y documentarán los resultados de la revisión, incluidos los cambios necesarios en los derechos de acceso."
+    },
+    "eu-nis2-ir-11-4-1": {
+      "code": "11.4.1",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Sistemas de administración\nLas entidades pertinentes restringirán el uso de los sistemas de administración del sistema de conformidad con la política de control de accesos prevista en el punto 11.1."
+    },
+    "eu-nis2-ir-11-4-2-a": {
+      "code": "11.4.2.a",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Sistemas de administración\nA tal efecto, las entidades pertinentes:\nutilizarán únicamente sistemas de administración del sistema a efectos de administración del mismo y no para otras operaciones;"
+    },
+    "eu-nis2-ir-11-4-2-b": {
+      "code": "11.4.2.b",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Sistemas de administración\nA tal efecto, las entidades pertinentes:\nseparar lógicamente estos sistemas de los programas de aplicación que no se utilicen con fines de administración del sistema;"
+    },
+    "eu-nis2-ir-11-4-2-c": {
+      "code": "11.4.2.c",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Sistemas de administración\nA tal efecto, las entidades pertinentes:\nprotegerán el acceso a los sistemas de administración del sistema mediante la autenticación y el cifrado."
+    },
+    "eu-nis2-ir-11-5-1": {
+      "code": "11.5.1",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Identificación\nLas entidades pertinentes gestionarán todo el ciclo de vida de las identidades de los sistemas de redes y de información y sus usuarios."
+    },
+    "eu-nis2-ir-11-5-2-a": {
+      "code": "11.5.2.a",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Identificación\nA tal efecto, las entidades pertinentes:\ncrearán identidades únicas para los sistemas de redes y de información y sus usuarios;"
+    },
+    "eu-nis2-ir-11-5-2-b": {
+      "code": "11.5.2.b",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Identificación\nA tal efecto, las entidades pertinentes:\nasociarán la identidad de los usuarios a una sola persona;"
+    },
+    "eu-nis2-ir-11-5-2-c": {
+      "code": "11.5.2.c",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Identificación\nA tal efecto, las entidades pertinentes:\nse encargarán de la supervisión de las identidades de los sistemas de redes y de información;"
+    },
+    "eu-nis2-ir-11-5-2-d": {
+      "code": "11.5.2.d",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Identificación\nA tal efecto, las entidades pertinentes:\nrealizarán un registro de la gestión de las identidades."
+    },
+    "eu-nis2-ir-11-5-3": {
+      "code": "11.5.3",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Identificación\nlas entidades pertinentes solo autorizarán las identidades asignadas a múltiples personas, como las identidades compartidas, cuando sean necesarias por razones empresariales u operativas y estén sujetas a un proceso de aprobación y documentación explícito. Las entidades pertinentes tendrán en cuenta las identidades asignadas a múltiples personas en el marco de gestión de riesgos de ciberseguridad contemplado en el punto 2.1."
+    },
+    "eu-nis2-ir-11-5-4": {
+      "code": "11.5.4",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Identificación\nLas entidades pertinentes revisarán periódicamente las identidades correspondientes a los sistemas de redes y de información y sus usuarios y, cuando ya no sean necesarias, las desactivarán inmediatamente."
+    },
+    "eu-nis2-ir-11-6-1": {
+      "code": "11.6.1",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Autenticación\nLas entidades pertinentes pondrán en marcha tecnologías y procedimientos de autenticación seguros basados en las restricciones de acceso y en la política de control de acceso."
+    },
+    "eu-nis2-ir-11-6-2-a": {
+      "code": "11.6.2.a",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Autenticación\nA tal efecto, las entidades pertinentes:\ngarantizarán que la solidez de la autenticación sea adecuada para a la clasificación del activo al que se va a acceder;"
+    },
+    "eu-nis2-ir-11-6-2-b": {
+      "code": "11.6.2.b",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Autenticación\nA tal efecto, las entidades pertinentes:\ncontrolar la asignación a los usuarios y la gestión de información de autenticación secreta mediante un proceso que garantice la confidencialidad de la información, incluido el asesoramiento al personal sobre el tratamiento adecuado de la información de autenticación;"
+    },
+    "eu-nis2-ir-11-6-2-c": {
+      "code": "11.6.2.c",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Autenticación\nA tal efecto, las entidades pertinentes:\nexigir el cambio de credenciales de autenticación al principio, a intervalos predefinidos y cuando se sospeche que las credenciales corren algún peligro;"
+    },
+    "eu-nis2-ir-11-6-2-d": {
+      "code": "11.6.2.d",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Autenticación\nA tal efecto, las entidades pertinentes:\nexigir el restablecimiento de las credenciales y el bloqueo de los usuarios tras un número predefinido de intentos de conexión infructuosos;"
+    },
+    "eu-nis2-ir-11-6-2-e": {
+      "code": "11.6.2.e",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Autenticación\nA tal efecto, las entidades pertinentes:\ncerrar las sesiones inactivas tras un período de inactividad predefinido; y"
+    },
+    "eu-nis2-ir-11-6-2-f": {
+      "code": "11.6.2.f",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Autenticación\nA tal efecto, las entidades pertinentes:\nexigir credenciales separadas para obtener un acceso privilegiado o acceder a cuentas de administración."
+    },
+    "eu-nis2-ir-11-6-3": {
+      "code": "11.6.3",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Autenticación\nEn la medida de lo posible, las entidades pertinentes utilizarán los métodos de autenticación más avanzados, de conformidad con el riesgo evaluado asociado y la clasificación del activo al que se vaya a acceder, así como información de autenticación exclusiva."
+    },
+    "eu-nis2-ir-11-6-4": {
+      "code": "11.6.4",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Autenticación\nLas entidades pertinentes revisarán los procedimientos y las tecnologías de autenticación a intervalos planificados."
+    },
+    "eu-nis2-ir-11-7-1": {
+      "code": "11.7.1",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Autenticación de múltiples factores\nLas entidades pertinentes velarán por que los usuarios sean autenticados mediante múltiples factores de autenticación o mecanismos de autenticación continua para acceder a los sistemas de redes y de información la entidad, cuando proceda, de conformidad con la clasificación del activo al que se va a acceder."
+    },
+    "eu-nis2-ir-11-7-2": {
+      "code": "11.7.2",
+      "section": "section-11",
+      "control": "Artículo 21, apartado 2, letras i) y j)",
+      "requirements": "Autenticación de múltiples factores\nLas entidades pertinentes se asegurarán de que la solidez de la autenticación sea adecuada a la clasificación del activo al que se va a acceder."
+    },
+    "eu-nis2-ir-12-1-1": {
+      "code": "12.1.1",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Clasificación de activos\nA los efectos del artículo 21, apartado 2, letra i), de la Directiva (UE) 2022/2555, las entidades pertinentes establecerán los niveles de clasificación de todos los activos, incluida la información, que formen parte del ámbito de sus sistemas de redes y de información con relación al nivel de protección requerido."
+    },
+    "eu-nis2-ir-12-1-2-a": {
+      "code": "12.1.2.a",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Clasificación de activos\nA los efectos del punto 12.1.1, las entidades pertinentes:\nestablecerán un sistema de niveles de clasificación de los activos;"
+    },
+    "eu-nis2-ir-12-1-2-b": {
+      "code": "12.1.2.b",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Clasificación de activos\nA los efectos del punto 12.1.1, las entidades pertinentes:\nasociarán todos los activos con un nivel de clasificación, basado en los requisitos de confidencialidad, integridad, autenticidad y disponibilidad, para indicar la protección requerida en función de su sensibilidad, criticidad, riesgo y valor empresarial;"
+    },
+    "eu-nis2-ir-12-1-2-c": {
+      "code": "12.1.2.c",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Clasificación de activos\nA los efectos del punto 12.1.1, las entidades pertinentes:\namoldarán los requisitos de disponibilidad de los activos a los objetivos de entrega y recuperación establecidos en sus planes de continuidad de las actividades y de recuperación en caso de catástrofe."
+    },
+    "eu-nis2-ir-12-1-3": {
+      "code": "12.1.3",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Clasificación de activos\nLas entidades pertinentes realizarán revisiones periódicas de los niveles de clasificación de los activos y los actualizarán, según proceda."
+    },
+    "eu-nis2-ir-12-2-1": {
+      "code": "12.2.1",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Gestión de activos\nLas entidades pertinentes establecerán, pondrán en marcha y aplicarán una política para la correcta gestión de los activos, incluida la información, acorde con su política de seguridad de las redes y de la información y la pondrán en conocimiento de todo aquel que utilice o gestione los activos."
+    },
+    "eu-nis2-ir-12-2-2-a": {
+      "code": "12.2.2.a",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Gestión de activos\nDicha política:\nhará referencia a toda la vida útil de los activos, especialmente su adquisición, uso, almacenamiento, transporte y eliminación;"
+    },
+    "eu-nis2-ir-12-2-2-b": {
+      "code": "12.2.2.b",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Gestión de activos\nDicha política:\nestablecerá normas para su uso seguro, su almacenamiento seguro, su transporte seguro y la supresión y destrucción irreversibles de los activos;"
+    },
+    "eu-nis2-ir-12-2-2-c": {
+      "code": "12.2.2.c",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Gestión de activos\nDicha política:\npreverá que la transferencia se lleve a cabo de manera segura, de conformidad con el tipo de activo que transfiera."
+    },
+    "eu-nis2-ir-12-2-3": {
+      "code": "12.2.3",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Gestión de activos\nLas entidades pertinentes revisarán y, cuando proceda, actualizarán la política a intervalos planificados o cuando se produzcan incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-12-3-1": {
+      "code": "12.3.1",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Política de soportes extraíbles\nLas entidades pertinentes establecerán, pondrán en marcha y aplicarán una política relativa a la gestión de soportes de almacenamiento extraíbles y la pondrán en conocimiento de sus empleados y de terceros que manipulen soportes de almacenamiento extraíbles en las instalaciones de las entidades pertinentes o en otros lugares en los que los soportes extraíbles estén conectados a los sistemas de redes y de información de la entidad."
+    },
+    "eu-nis2-ir-12-3-2-a": {
+      "code": "12.3.2.a",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Política de soportes extraíbles\nDicha política:\npreverá una prohibición técnica para la conexión de soportes extraíbles salvo que existan razones internas para su uso;"
+    },
+    "eu-nis2-ir-12-3-2-b": {
+      "code": "12.3.2.b",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Política de soportes extraíbles\nDicha política:\npreverá la deshabilitación de la reproducción automática desde dichos soportes y la detección de códigos maliciosos en los mismos antes de que se utilicen en los sistemas de las entidades pertinentes;"
+    },
+    "eu-nis2-ir-12-3-2-c": {
+      "code": "12.3.2.c",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Política de soportes extraíbles\nDicha política:\npreverá medidas para controlar y proteger los soportes de almacenamiento extraíbles que contengan datos durante el tránsito y el almacenamiento;"
+    },
+    "eu-nis2-ir-12-3-2-d": {
+      "code": "12.3.2.d",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Política de soportes extraíbles\nDicha política:\nsegún proceda, preverá medidas para la utilización de técnicas criptográficas para proteger los datos contenidos en los soportes de almacenamiento extraíbles."
+    },
+    "eu-nis2-ir-12-3-3": {
+      "code": "12.3.3",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Política de soportes extraíbles\nLas entidades pertinentes revisarán y, cuando proceda, actualizarán la política a intervalos planificados o cuando se produzcan incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-12-4-1": {
+      "code": "12.4.1",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Inventario de activos\nLas entidades pertinentes crearán y mantendrán un inventario completo, preciso, actualizado y coherente de sus activos. Registrarán los cambios en las entradas del inventario de manera que puedan rastrearse."
+    },
+    "eu-nis2-ir-12-4-2": {
+      "code": "12.4.2",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Inventario de activos\nLa granularidad del inventario de los activos se situará en un nivel adecuado a las necesidades de las entidades pertinentes. El inventario incluirá lo siguiente:"
+    },
+    "eu-nis2-ir-12-4-2-a": {
+      "code": "12.4.2.a",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Inventario de activos\nLa granularidad del inventario de los activos se situará en un nivel adecuado a las necesidades de las entidades pertinentes. El inventario incluirá lo siguiente:\nla lista de operaciones y servicios y su descripción;"
+    },
+    "eu-nis2-ir-12-4-2-b": {
+      "code": "12.4.2.b",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Inventario de activos\nLa granularidad del inventario de los activos se situará en un nivel adecuado a las necesidades de las entidades pertinentes. El inventario incluirá lo siguiente:\nla lista de sistemas de redes y de información y otros activos asociados que sirvan de apoyo a las operaciones y servicios de las entidades pertinentes."
+    },
+    "eu-nis2-ir-12-4-3": {
+      "code": "12.4.3",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Inventario de activos\nLas entidades pertinentes revisarán y actualizarán periódicamente el inventario y sus activos y registrarán el historial de cambios."
+    },
+    "eu-nis2-ir-12-5-1": {
+      "code": "12.5.1",
+      "section": "section-12",
+      "control": "Artículo 21, apartado 2, letra i)",
+      "requirements": "Depósito, devolución o supresión de activos al término de la relación laboral\nLas entidades pertinentes crearán, pondrán en marcha y aplicarán procedimientos para que los activos bajo custodia del personal sean depositados, devueltos o suprimidos al término de la relación laboral, y documentarán el depósito, la devolución y la supresión de dichos activos.\n\nCuando no sea posible el depósito, la devolución o la supresión de activos, las entidades pertinentes se asegurarán de que dichos activos ya no puedan acceder a los sistemas de redes y de información de la entidad de conformidad con el punto 12.2.2."
+    },
+    "eu-nis2-ir-13-1-1": {
+      "code": "13.1.1",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Servicios públicos\nA los efectos del artículo 21, apartado 2, letra c), de la Directiva (UE) 2022/2555, las entidades pertinentes evitarán las pérdidas, los daños o riesgos de los sistemas de redes y de información o la interrupción de sus operaciones debido al fallo y la interrupción de los servicios públicos."
+    },
+    "eu-nis2-ir-13-1-2-a": {
+      "code": "13.1.2.a",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Servicios públicos\nA tal efecto, cuando proceda, las entidades pertinentes:\nprotegerán las instalaciones de los fallos eléctricos y de otras alteraciones causadas por fallos en servicios públicos como la electricidad, las telecomunicaciones, el suministro de agua, el gas, las aguas residuales, la ventilación o el aire acondicionado;"
+    },
+    "eu-nis2-ir-13-1-2-b": {
+      "code": "13.1.2.b",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Servicios públicos\nA tal efecto, cuando proceda, las entidades pertinentes:\nconsiderarán la utilización de redundancias en los servicios de utilidad pública;"
+    },
+    "eu-nis2-ir-13-1-2-c": {
+      "code": "13.1.2.c",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Servicios públicos\nA tal efecto, cuando proceda, las entidades pertinentes:\nprotegerán los servicios públicos de electricidad y telecomunicaciones, que transportan datos u ofrecen sistemas de redes y de información, frente a la interceptación y los daños;"
+    },
+    "eu-nis2-ir-13-1-2-d": {
+      "code": "13.1.2.d",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Servicios públicos\nA tal efecto, cuando proceda, las entidades pertinentes:\nsupervisarán los servicios públicos contemplados en la letra c) e informarán al personal interno o externo competente de los sucesos que tengan lugar más allá de los umbrales mínimo y máximo de control a que se refiere el punto 13.2.2, letra b), que afecten a los servicios de utilidad pública;"
+    },
+    "eu-nis2-ir-13-1-2-e": {
+      "code": "13.1.2.e",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Servicios públicos\nA tal efecto, cuando proceda, las entidades pertinentes:\nconcluirán contratos para el suministro de emergencia con los servicios correspondientes, tales como el combustible para el suministro eléctrico de emergencia;"
+    },
+    "eu-nis2-ir-13-1-2-f": {
+      "code": "13.1.2.f",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Servicios públicos\nA tal efecto, cuando proceda, las entidades pertinentes:\nGarantizarán la eficacia continua, supervisarán, mantendrán y probarán el suministro de los sistemas de redes y de información necesarios para el funcionamiento del servicio ofrecido, especialmente la electricidad, el control de la temperatura y la humedad, las telecomunicaciones y la conexión a Internet."
+    },
+    "eu-nis2-ir-13-1-3": {
+      "code": "13.1.3",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Servicios públicos\nLas entidades pertinentes comprobarán, revisarán y, cuando proceda, actualizarán las medidas de protección de forma periódica o después de incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-13-2-1": {
+      "code": "13.2.1",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Protección contra las amenazas físicas y medioambientales\nA los efectos del artículo 21, apartado 2, letra e), de la Directiva (UE) 2022/2555, las entidades pertinentes evitarán o reducirán las consecuencias de los sucesos que tengan lugar a causa de amenazas físicas y medioambientales, como las catástrofes naturales y otras amenazas intencionadas o inintencionadas, a partir de los resultados de la evaluación de riesgos realizada de conformidad con el punto 2.1."
+    },
+    "eu-nis2-ir-13-2-2-a": {
+      "code": "13.2.2.a",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Protección contra las amenazas físicas y medioambientales\nA tal efecto, cuando proceda, las entidades pertinentes:\ndiseñarán y pondrán en marcha medidas de protección contra las amenazas físicas y medioambientales;"
+    },
+    "eu-nis2-ir-13-2-2-b": {
+      "code": "13.2.2.b",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Protección contra las amenazas físicas y medioambientales\nA tal efecto, cuando proceda, las entidades pertinentes:\ndeterminarán umbrales mínimos y máximos de control de las amenazas físicas y medioambientales;"
+    },
+    "eu-nis2-ir-13-2-2-c": {
+      "code": "13.2.2.c",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Protección contra las amenazas físicas y medioambientales\nA tal efecto, cuando proceda, las entidades pertinentes:\nsupervisarán los parámetros medioambientales e informarán al personal interno o externo competente de los sucesos que tengan lugar más allá de los umbrales mínimo y máximo de control a que se refiere la letra b)."
+    },
+    "eu-nis2-ir-13-2-3": {
+      "code": "13.2.3",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Protección contra las amenazas físicas y medioambientales\nLas entidades pertinentes comprobarán, revisarán y, cuando proceda, actualizarán las medidas de protección de forma periódica o después de incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    },
+    "eu-nis2-ir-13-3-1": {
+      "code": "13.3.1",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Control de acceso perimetral y físico\nA los efectos del artículo 21, apartado 2, letra i), de la Directiva (UE) 2022/2555, las entidades pertinentes evitarán y controlarán el acceso físico no autorizado, los daños y las interferencias a sus sistemas de redes y de información."
+    },
+    "eu-nis2-ir-13-3-2-a": {
+      "code": "13.3.2.a",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Control de acceso perimetral y físico\nA tal efecto, las entidades pertinentes:\nsobre la base de la evaluación de riesgos realizada con arreglo al punto 2.1, establecerán y utilizarán perímetros de seguridad para proteger las zonas en las que se ubican los sistemas de redes y de información;"
+    },
+    "eu-nis2-ir-13-3-2-b": {
+      "code": "13.3.2.b",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Control de acceso perimetral y físico\nA tal efecto, las entidades pertinentes:\nprotegerán las zonas a que se refiere la letra a) mediante controles de entrada y puntos de acceso adecuados;"
+    },
+    "eu-nis2-ir-13-3-2-c": {
+      "code": "13.3.2.c",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Control de acceso perimetral y físico\nA tal efecto, las entidades pertinentes:\ndiseñarán e implantarán la seguridad física de las oficinas, las salas y las instalaciones;"
+    },
+    "eu-nis2-ir-13-3-2-d": {
+      "code": "13.3.2.d",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Control de acceso perimetral y físico\nA tal efecto, las entidades pertinentes:\nsupervisarán de manera continuada sus instalaciones en lo que se refiere al acceso físico no autorizado."
+    },
+    "eu-nis2-ir-13-3-3": {
+      "code": "13.3.3",
+      "section": "section-13",
+      "control": "Artículo 21, apartado 2, letras c), e) e i)",
+      "requirements": "Control de acceso perimetral y físico\nLas entidades pertinentes comprobarán, revisarán y, cuando proceda, actualizarán las medidas de control del acceso físico de forma periódica o después de incidentes significativos o cambios significativos en las operaciones o los riesgos."
+    }
+  }
+}

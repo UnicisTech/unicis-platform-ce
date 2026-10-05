@@ -7,6 +7,43 @@ export const extractYouTubeVideoId = (url: string) => {
   return match ? match[1] : undefined;
 };
 
+const PEERTUBE_PATH_REGEX =
+  /^\/(?:w|videos\/watch|videos\/embed)\/([a-zA-Z0-9-]{8,36})\/?$/;
+
+/**
+ * Resolves a PeerTube video URL (e.g. https://videos.enisa.europa.eu/w/<id>,
+ * /videos/watch/<uuid> or /videos/embed/<id>) into its embed URL.
+ */
+export const extractPeerTubeEmbedUrl = (url: string) => {
+  try {
+    const parsed = new URL(url.trim());
+    if (parsed.protocol !== 'https:') return undefined;
+    const match = parsed.pathname.match(PEERTUBE_PATH_REGEX);
+    if (!match) return undefined;
+    const embed = new URL(`/videos/embed/${match[1]}`, parsed.origin);
+    const start = parsed.searchParams.get('start');
+    if (start) embed.searchParams.set('start', start);
+    return embed.toString();
+  } catch {
+    return undefined;
+  }
+};
+
+export type EmbeddedVideoSource =
+  | { provider: 'youtube'; videoId: string }
+  | { provider: 'peertube'; embedUrl: string };
+
+export const resolveEmbeddedVideo = (
+  url: string | null | undefined
+): EmbeddedVideoSource | undefined => {
+  if (!url) return undefined;
+  const videoId = extractYouTubeVideoId(url);
+  if (videoId) return { provider: 'youtube', videoId };
+  const embedUrl = extractPeerTubeEmbedUrl(url);
+  if (embedUrl) return { provider: 'peertube', embedUrl };
+  return undefined;
+};
+
 export const shuffleArray = <T>(array: T[]): T[] => {
   const shuffledArray = [...array]; // Create a copy of the array
   for (let i = shuffledArray.length - 1; i > 0; i--) {

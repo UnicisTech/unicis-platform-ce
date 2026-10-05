@@ -1,0 +1,1320 @@
+{
+  "groups": {
+    "ID.AM-1.1": {
+      "code": "ID.AM-1.1",
+      "guidance": "• Cet inventaire comprend des ordinateurs fixes et portables, des tablettes, des téléphones mobiles, des contrôleurs logiques programmables (PLC), des capteurs, des actionneurs, des robots, des machines- outils, des micrologiciels, des switchs, des routeurs, des alimentations et d'autres composants ou dispositifs en réseau. \n• Cet inventaire doit inclure tous les actifs, qu'ils soient ou non connectés au réseau de l'organisation. \n• L'utilisation d'un outil de gestion des actifs informatiques pourrait être envisagée.",
+      "evidence": ""
+    },
+    "ID.AM-1.2": {
+      "code": "ID.AM-1.2",
+      "guidance": "• Les spécifications de l'inventaire comprennent par exemple le fabricant, le type de dispositif, le modèle, le numéro de série, les noms de machine et les adresses de réseau, l'emplacement physique... \n• La responsabilisation est l’obligation de rendre compte , d'expliquer, de justifier et d'assumer la responsabilité de ses actions, elle implique la responsabilité du résultat de la tâche ou du processus. \n• Les changements incluent le déclassement de matériel.",
+      "evidence": ""
+    },
+    "ID.AM-1.3": {
+      "code": "ID.AM-1.3",
+      "guidance": "• Tout matériel non pris en charge, sans documentation d'exception, est désigné comme non autorisé. \n• Le matériel non autorisé peut être détecté lors de l'inventaire, des demandes d'assistance de l'utilisateur ou par d'autres moyens.",
+      "evidence": ""
+    },
+    "ID.AM-1.4": {
+      "code": "ID.AM-1.4",
+      "guidance": "• Lorsque cela est possible et sûr, il convient d’automatiser ces mécanismes. \n• Il convient d’avoir un process pour traiter les actifs non autorisés sur une base fréquente ; L'organisation peut choisir de retirer l’actif du réseau, de l'empêcher de se connecter à distance au réseau ou de le mettre en quarantaine.",
+      "evidence": ""
+    },
+    "ID.AM-2.1": {
+      "code": "ID.AM-2.1",
+      "guidance": "• Cet inventaire comprend les programmes logiciels, les plateformes logicielles et les bases de données, même s'ils sont externalisés (SaaS). \n• Il convient que les accords d'externalisation fassent partie des accords contractuels avec le fournisseur. \n• Il convient que les informations de l'inventaire comprennent par exemple : le nom, la description, la version, le nombre d'utilisateurs, les données traitées, etc. \n• Il convient de faire la distinction entre les logiciels non pris en charge et les logiciels non autorisés. \n• L'utilisation d'un outil de gestion des actifs informatiques pourrait être envisagée.",
+      "evidence": ""
+    },
+    "ID.AM-2.2": {
+      "code": "ID.AM-2.2",
+      "guidance": "Il convient que l'inventaire des plateformes logicielles et des applications comprenne le titre, l'éditeur, la date d'installation/utilisation initiale et l'objectif de l'organisation pour chaque entrée ; le cas échéant, il convient d’inclure l’adresse web (URL), le ou les magasins d'applications, la ou les versions, le mécanisme de déploiement et la date de mise hors service.",
+      "evidence": ""
+    },
+    "ID.AM-2.3": {
+      "code": "ID.AM-2.3",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "ID.AM-2.4": {
+      "code": "ID.AM-2.4",
+      "guidance": "• Tout logiciel non pris en charge sans documentation d'exception, est désigné comme non autorisé. \n• Les logiciels non autorisés peuvent être détectés lors de l'inventaire, des demandes d'assistance de l'utilisateur ou par d'autres moyens.",
+      "evidence": ""
+    },
+    "ID.AM-2.5": {
+      "code": "ID.AM-2.5",
+      "guidance": "• Lorsque cela est possible et sûr, il convient d’automatiser ces mécanismes. \n• Il convient d’avoir un process pour traiter les actifs non autorisés sur une base fréquente ; L'organisation peut choisir de retirer l’actif du réseau, de l'empêcher de se connecter à distance au réseau ou de le mettre en quarantaine.",
+      "evidence": ""
+    },
+    "ID.AM-3.1": {
+      "code": "ID.AM-3.1",
+      "guidance": "• Commencez par énumérer tous les types d'informations que votre organisation stocke ou utilise. Définissez le \"type d'information\" de toute manière utile et logique pour votre organisation. Vous pouvez demander à vos employés de dresser une liste de toutes les informations qu'ils utilisent dans le cadre de leurs activités habituelles. Dressez une liste de tout ce à quoi vous pouvez penser, mais il n'est pas nécessaire d'être trop précis. Par exemple, vous pouvez conserver les noms et adresses électroniques de vos clients, les reçus de matières premières, vos informations bancaires ou d'autres informations exclusives. \n• Envisagez de mettre en correspondance ces informations avec les actifs associés identifiés dans les inventaires des dispositifs physiques, des systèmes, des plateformes logicielles et des applications utilisés au sein de l'organisation (voir ID.AM-1 & ID.AM-2).",
+      "evidence": ""
+    },
+    "ID.AM-3.2": {
+      "code": "ID.AM-3.2",
+      "guidance": "• Les informations relatives à la connexion comprennent, par exemple, les caractéristiques de l'interface, les caractéristiques des données, les ports, les protocoles, les adresses, la description des données, les exigences de sécurité et la nature de la connexion. \n• La gestion de la configuration peut être utilisée comme soutien. \n• Il convient que cette documentation ne soit pas stockée uniquement sur le réseau qu'elle représente. \n• Envisagez de conserver une copie de cette documentation dans un environnement hors ligne sûr (par exemple, disque dur hors ligne, copie papier, ...).",
+      "evidence": ""
+    },
+    "ID.AM-3.3": {
+      "code": "ID.AM-3.3",
+      "guidance": "• En connaissant les flux d'informations et de données au sein d'un système et entre les systèmes, il est possible de déterminer où les informations peuvent et ne peuvent pas aller. \n• Envisagez de : \n  o Appliquer des contrôles restreignant les connexions aux seules interfaces autorisées. \n  o Renforcer l'activité de surveillance du système chaque fois qu'il y a une indication d'un risque accru pour les opérations et les actifs critiques de l'organisation. \n  o Protéger le système contre les fuites d'informations dues aux émanations de signaux électromagnétiques.",
+      "evidence": ""
+    },
+    "ID.AM-4.1": {
+      "code": "ID.AM-4.1",
+      "guidance": "•\tOutsourcing of systems, software platforms and applications used within the organization is covered in ID.AM-1 & ID.AM-2 \n•\tExternal information systems are systems or components of systems for which organizations typically have no direct supervision and authority over the application of security requirements and controls, or the determination of the effectiveness of implemented controls on those systems i.e., services that are run in cloud, SaaS, hosting or other external environments, API (Application Programming Interface)… \n•\tMapping external services and the connections made to them and authorizing them in advance avoids wasting unnecessary resources investigating a supposedly non-authenticated connection to external systems.",
+      "evidence": ""
+    },
+    "ID.AM-4.2": {
+      "code": "ID.AM-4.2",
+      "guidance": "Envisagez d'exiger des fournisseurs de services externes qu'ils identifient et documentent les fonctions, ports, protocoles et services nécessaires aux services de connexion.",
+      "evidence": ""
+    },
+    "ID.AM-5.1": {
+      "code": "ID.AM-5.1",
+      "guidance": "• Déterminer les ressources de l'organisation (par exemple, le matériel, les dispositifs, les données, le temps, le personnel, les informations et les logiciels) :\n  o Qu'arriverait-il à mon organisation si ces ressources étaient rendues publiques, endommagées, perdues... ? \n  o Qu'arriverait-il à mon organisation lorsque l'intégrité des ressources ne serait plus garantie ? \n  o Que se passerait-il pour mon organisation si mes clients ou moi-même ne pouvions pas accéder à ces ressources ? Et organisez ces ressources en fonction de leur classification, de leur criticité et de leur valeur opérationnelle. \n• Il convient que les ressources incluent les actifs de l’organisation. \n• Créez une classification pour les informations sensibles en déterminant d'abord les catégories, par ex. \n  o Public - librement accessible à tous, même à l'extérieur. o Interne - accessible uniquement aux membres de votre organisation \n  o Confidentiel - accessible uniquement aux personnes dont les fonctions l'exigent. \n• Communiquer ces catégories et identifier les types de données qui en font partie (données RH, données financières, données juridiques, données personnelles, etc.) \n• Envisager l'utilisation du protocole de feux de circulation (TLP). \n• Il convient que la classification des données s'applique aux trois aspects : C-I-A \n• Envisagez de mettre en place un outil automatisé, tel qu'un outil de prévention des pertes de données (DLP) basé sur l'hôte, pour identifier toutes les données sensibles stockées, traitées ou transmises par le biais des actifs de l’organisation, y compris ceux situés sur place ou chez un fournisseur de services distant.",
+      "evidence": ""
+    },
+    "ID.AM-6.1": {
+      "code": "ID.AM-6.1",
+      "guidance": "Il convient d'envisager : \n• Décrire les rôles, les responsabilités et les autorités en matière de sécurité : qui, dans votre organisation, il convient de consulter, informer et tenir responsable de tout ou partie de vos actifs. \n• Fournir les rôles, les responsabilités et l'autorité en matière de sécurité pour toutes les fonctions clés de la sécurité de l'information/cyber (juridique, activités de détection...). \n• Inclure les rôles et responsabilités en matière de sécurité de l'information/cybersécurité pour les fournisseurs tiers ayant un accès physique ou logique à l'environnement TIC/OT de l'organisation.",
+      "evidence": ""
+    },
+    "ID.AM-6.2": {
+      "code": "ID.AM-6.2",
+      "guidance": "Il convient que le responsable de la sécurité de l'information soit chargé de surveiller la mise en œuvre de la stratégie de sécurité de l'information/cyber et des mesures de protection de l'organisation.",
+      "evidence": ""
+    },
+    "ID.BE-1.1": {
+      "code": "ID.BE-1.1",
+      "guidance": "• Il convient que l'organisation soit en mesure d'identifier clairement qui se trouve en amont et en aval de l'organisation et quels fournisseurs lui apportent des services, des capacités, des produits et des articles. • Il convient que l'organisation communique sa position à ses partenaires en amont et en aval afin de comprendre où ils se situent en termes d'importance critique pour les opérations de l'organisation.",
+      "evidence": ""
+    },
+    "ID.BE-1.2": {
+      "code": "ID.BE-1.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "ID.BE-2.1": {
+      "code": "ID.BE-2.1",
+      "guidance": "L'organisation couverte par la législation NIS a la responsabilité de connaître les autres organisations du même secteur afin de travailler avec elles pour atteindre les objectifs fixés par NIS pour ce secteur particulier.",
+      "evidence": ""
+    },
+    "ID.BE-3.1": {
+      "code": "ID.BE-3.1",
+      "guidance": "Il convient que les besoins en matière de protection de l'information soient déterminés, et les processus connexes révisés si nécessaire, jusqu'à l'obtention d'un ensemble réalisable.",
+      "evidence": ""
+    },
+    "ID.BE-4.1": {
+      "code": "ID.BE-4.1",
+      "guidance": "Il convient que les dépendances et les fonctions essentielles à l'organisation incluent les services de soutien.",
+      "evidence": ""
+    },
+    "ID.BE-5.1": {
+      "code": "ID.BE-5.1",
+      "guidance": "• Envisagez de mettre en œuvre des mécanismes de résilience pour prendre en charge les situations opérationnelles normales et défavorables (par exemple, failsafe, équilibrage de charge, hot swap). • Examiner les aspects de la gestion de la continuité des activités, par exemple l'analyse de l'impact sur les activités (BIA), le plan de reprise d’activités (PRA) et le plan de continuité des activités (PCA).",
+      "evidence": ""
+    },
+    "ID.BE-5.2": {
+      "code": "ID.BE-5.2",
+      "guidance": "• Envisagez de prévoir une redondance adéquate des données et du réseau (par exemple, des dispositifs de réseau redondants, des serveurs avec répartition de la charge, des matrices Raid, des services de sauvegarde, deux centres de données distincts, des connexions réseau à basculement, deux fournisseurs d'accès Internet...). \n• Envisagez de protéger les équipements/services critiques contre les pannes de courant et autres défaillances dues aux interruptions de service (par exemple, onduleurs et systèmes sans coupure, tests fréquents, contrats de service incluant une maintenance régulière, câblage électrique redondant, 2 fournisseurs de services d'alimentation différents...).",
+      "evidence": ""
+    },
+    "ID.BE-5.3": {
+      "code": "ID.BE-5.3",
+      "guidance": "• Envisagez d'appliquer la règle de sauvegarde 3-2-1 pour améliorer le RPO et le RTO (conservez au moins 3 copies de vos données, dont 2 à des endroits différents et il convient de stocker une copie hors site). \n• Envisagez de mettre en œuvre des mécanismes tels que le hot swap, l'équilibrage des charges et le failsafe pour accroître la résilience.",
+      "evidence": ""
+    },
+    "ID.GV-1.1": {
+      "code": "ID.GV-1.1",
+      "guidance": "• Les politiques et les procédures qui servent à identifier les pratiques et les attentes acceptables pour les opérations, peuvent être utilisées pour former les nouveaux employés sur vos attentes en matière de sécurité de l'information et peuvent faciliter une enquête en cas d'incident. Il convient que ces politiques et procédures soient facilement accessibles aux employés. \n• Il convient que les politiques et procédures en matière de sécurité de l'information et de cybersécurité décrivent clairement vos attentes en matière de protection des informations et des systèmes de l'organisation, ainsi que la manière dont la direction s'attend à ce que les ressources de l'organisation soient utilisées et protégées par tous les employés. \n• Il convient que les politiques et procédures soient revues et mises à jour au moins une fois par an et à chaque fois que des changements interviennent dans l'organisation ou la technologie. Chaque fois que les politiques sont modifiées, il convient d’informer les employés des changements.",
+      "evidence": ""
+    },
+    "ID.GV-1.2": {
+      "code": "ID.GV-1.2",
+      "guidance": "Il convient que la politique inclue, par exemple, les éléments suivants : \n• L'identification et l'attribution des rôles, les responsabilités, l'engagement de la direction, la coordination entre les entités organisationnelles et la conformité. Des conseils sur les profils de rôle ainsi que leurs titres, missions, tâches, aptitudes, connaissances et compétences sont disponibles dans le \"European Cybersecurity Skills Framework Role Profiles\" de ENISA. (https://www.enisa.europa.eu/publications/european-cybersecurity-skills-framework-role-profiles) \n• La coordination entre les entités organisationnelles responsables des différents aspects de la sécurité (c'est-à-dire technique, physique, personnel, cyber-physique, information, contrôle d'accès, protection des médias, gestion des vulnérabilités, maintenance, surveillance). • La couverture du cycle de vie complet des systèmes TIC/OT.",
+      "evidence": ""
+    },
+    "ID.GV-3.1": {
+      "code": "ID.GV-3.1",
+      "guidance": "Il n'y a pas de directives supplémentaires.",
+      "evidence": ""
+    },
+    "ID.GV-3.2": {
+      "code": "ID.GV-3.2",
+      "guidance": "• Il convient de procéder à des examens réguliers afin de garantir le respect permanent des exigences légales et réglementaires en matière de sécurité de l'information/cybersécurité, y compris les obligations en matière de protection de la vie privée. \n• Cette exigence s'applique également aux entrepreneurs et aux prestataires de services.",
+      "evidence": ""
+    },
+    "ID.GV-4.1": {
+      "code": "ID.GV-4.1",
+      "guidance": "Il convient d’inclure dans cette stratégie la détermination et l'affectation des ressources nécessaires à la protection des actifs critiques de l'organisation.",
+      "evidence": ""
+    },
+    "ID.GV-4.2": {
+      "code": "ID.GV-4.2",
+      "guidance": "Envisagez d'utiliser des outils de gestion des risques.",
+      "evidence": ""
+    },
+    "ID.RA-1.1": {
+      "code": "ID.RA-1.1",
+      "guidance": "• Une vulnérabilité fait référence à une faiblesse dans le matériel, les logiciels ou les procédures de l'organisation. Il s'agit d'une faille par laquelle un acteur malveillant peut accéder aux actifs de l'organisation. Une vulnérabilité expose une organisation à des menaces. • Une menace est un événement malveillant ou négatif qui tire parti d'une vulnérabilité. \n• Le risque est la possibilité de perte et de dommage lorsque la menace se concrétise.",
+      "evidence": ""
+    },
+    "ID.RA-1.2": {
+      "code": "ID.RA-1.2",
+      "guidance": "• Lorsque cela est sûr et possible, il convient d’envisager l'utilisation d'une analyse de vulnérabilité. \n• Il convient que l'organisation établisse et maintienne un programme de tests adapté à sa taille, sa complexité et sa maturité.",
+      "evidence": ""
+    },
+    "ID.RA-1.3": {
+      "code": "ID.RA-1.3",
+      "guidance": "Envisager de valider les mesures de sécurité après chaque test de pénétration",
+      "evidence": ""
+    },
+    "ID.RA-2.1": {
+      "code": "ID.RA-2.1",
+      "guidance": "Il convient qu’un programme de sensibilisation aux menaces et aux vulnérabilités inclue un contact permanent avec les groupes et associations de sécurité afin de recevoir les alertes et les conseils de sécurité. (Les groupes et associations de sécurité comprennent, par exemple, des groupes d'intérêt spéciaux, des forums, des associations professionnelles, des groupes de presse et/ou des groupes de pairs composés de professionnels de la sécurité appartenant à des organisations similaires). Il convient que cette capacité de partage aie une capacité de partage d'informations classifiées et non classifiées.",
+      "evidence": ""
+    },
+    "ID.RA-2.2": {
+      "code": "ID.RA-2.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "ID.RA-5.1": {
+      "code": "ID.RA-5.1",
+      "guidance": "• N'oubliez pas que les menaces exploitent les vulnérabilités. \n• Identifier les conséquences que les pertes de confidentialité, d'intégrité et de disponibilité peuvent avoir sur les actifs et les processus opérationnels connexes.",
+      "evidence": ""
+    },
+    "ID.RA-5.2": {
+      "code": "ID.RA-5.2",
+      "guidance": "• Il convient que l'évaluation des risques inclue les menaces provenant de personnes internes et externes. \n• Les méthodes d'analyse de risque qualitatives et/ou quantitatives (MAPGOOD, ISO27005, CIS RAM, ...) peuvent être utilisées avec des outils logiciels.",
+      "evidence": ""
+    },
+    "ID.RA-5.3": {
+      "code": "ID.RA-5.3",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "ID.RA-6.1": {
+      "code": "ID.RA-6.1",
+      "guidance": "• Il convient que la direction et les employés soient impliqués dans la sécurité de l'information et la cybersécurité. \n• Il convient de déterminer quels sont les actifs les plus importants et comment ils sont protégés. \n• Il convient que l'impact d'une compromission de ces actifs soit clair. \n• Il convient d'établir comment la mise en œuvre de mesures d'atténuation adéquates sera organisée.",
+      "evidence": ""
+    },
+    "ID.RM-1.1": {
+      "code": "ID.RM-1.1",
+      "guidance": "Les parties prenantes externes comprennent les clients, les investisseurs et les actionnaires, les fournisseurs, les agences gouvernementales et la communauté au sens large.",
+      "evidence": ""
+    },
+    "ID.RM-2.1": {
+      "code": "ID.RM-2.1",
+      "guidance": "Il convient que la détermination et l'expression de la tolérance au risque (appétit pour le risque) soient conformes aux politiques de sécurité de l'information et de cybersécurité, afin de faciliter la démonstration de la cohérence entre les politiques, la tolérance au risque et les mesures.",
+      "evidence": ""
+    },
+    "ID.RM-3.1": {
+      "code": "ID.RM-3.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "ID.SC-1.1": {
+      "code": "ID.SC-1.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "ID.SC-2.1": {
+      "code": "ID.SC-2.1",
+      "guidance": "Il convient que cette évaluation permette d'identifier et de hiérarchiser les impacts négatifs potentiels pour l'organisation des risques associés à la nature distribuée et interconnectée des chaînes d'approvisionnement en produits et services TIC/OT.",
+      "evidence": ""
+    },
+    "ID.SC-2.2": {
+      "code": "ID.SC-2.2",
+      "guidance": "Il convient d’inclure dans cette liste les coordonnées des fournisseurs, des vendeurs et des partenaires, ainsi que les services qu'ils fournissent, afin qu'ils puissent être contactés pour une assistance en cas de panne ou de dégradation du service.",
+      "evidence": ""
+    },
+    "ID.SC-3.1": {
+      "code": "ID.SC-3.1",
+      "guidance": "• Il convient que les entités qui ne sont pas soumises à la législation NIS ne considèrent que les fournisseurs et les partenaires tiers essentiels à leur activité. \n• N'oubliez pas que les exigences du GDPR doivent être respectées lorsque les informations opérationnelles contiennent des données à caractère personnel (applicable à tous les niveaux), c'est- à-dire que les mesures de sécurité doivent être abordées dans le cadre contractuel.",
+      "evidence": ""
+    },
+    "ID.SC-3.2": {
+      "code": "ID.SC-3.2",
+      "guidance": "• Il convient que les systèmes d'information contenant des logiciels (ou micrologiciels) affectés par des failles logicielles récemment annoncées (et les vulnérabilités potentielles résultant de ces failles) soient identifiés. \n• Les correctifs de sécurité récemment publiés, les Service Packs et hot fixes doivent être installés, et leur efficacité ainsi que les effets secondaires potentiels sur les systèmes d'information de l'organisation sont testés avant leur installation. Les failles découvertes lors des évaluations de sécurité, de la surveillance continue, des activités de réponse aux incidents ou du traitement des erreurs du système d'information sont également traitées rapidement. Il convient que la correction des failles soit intégrée à la gestion de la configuration en tant que changement d'urgence.",
+      "evidence": ""
+    },
+    "ID.SC-3.3": {
+      "code": "ID.SC-3.3",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "ID.SC-4.1": {
+      "code": "ID.SC-4.1",
+      "guidance": "Les entités non soumises à la législation NIS pourraient se limiter aux seuls fournisseurs et partenaires tiers critiques pour l’organisation.",
+      "evidence": ""
+    },
+    "ID.SC-4.2": {
+      "code": "ID.SC-4.2",
+      "guidance": "Il convient que la profondeur de l'examen dépende de la criticité des produits et services fournis.",
+      "evidence": ""
+    },
+    "ID.SC-5.1": {
+      "code": "ID.SC-5.1",
+      "guidance": "Les entités non soumises à la législation NIS pourraient se limiter aux seuls fournisseurs et partenaires tiers critiques pour l’organisation.",
+      "evidence": ""
+    },
+    "ID.SC-5.2": {
+      "code": "ID.SC-5.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.AC-1.1": {
+      "code": "PR.AC-1.1",
+      "guidance": "Les identités et les identifiants des dispositifs et des utilisateurs autorisés peuvent être gérées par une politique de mot de passe. Une politique de mot de passe est un ensemble de règles destinées à renforcer la sécurité des TIC/OT en encourageant l'organisation à (liste non limitative et mesures à envisager le cas échéant) : \n• Changez tous les mots de passe par défaut. \n• Veillez à ce que personne ne travaille avec des privilèges d'administrateur pour les tâches quotidiennes. \n• Conservez une liste limitée et mise à jour des comptes d'administrateur système. \n• Appliquer les règles relatives aux mots de passe, par exemple, les mots de passe doivent être plus longs qu'un nombre de caractères adéquat avec une combinaison de types de caractères et être changés périodiquement ou lorsqu'il y a un soupçon de compromission. \n• N'utilisez que des comptes individuels et ne partagez jamais vos mots de passe. \n• Désactiver immédiatement les comptes inutilisés. \n• Les droits et les privilèges sont gérés par des groupes d'utilisateurs.",
+      "evidence": ""
+    },
+    "PR.AC-1.2": {
+      "code": "PR.AC-1.2",
+      "guidance": "• Des mécanismes automatisés peuvent contribuer à la gestion et à l'audit des informations d'identification des systèmes d'information. \n• Considérons l'authentification forte des utilisateurs, c'est-à-dire une authentification basée sur l'utilisation d'au moins deux facteurs d'authentification appartenant à des catégories différentes de connaissance (quelque chose que seul l'utilisateur sait), de possession (quelque chose que seul l'utilisateur possède) ou d'inhérence (quelque chose que l'utilisateur est) qui sont indépendantes, en ce sens que la violation de l'une d'entre elles ne compromet pas la fiabilité des autres, et qui sont conçues de manière à protéger la confidentialité des données d'authentification.",
+      "evidence": ""
+    },
+    "PR.AC-1.3": {
+      "code": "PR.AC-1.3",
+      "guidance": "• Pour garantir un fonctionnement sûr, Il convient d’utiliser des comptes de service pour les processus et les services en cours d'exécution. • Envisagez l'utilisation d'une procédure d'accès formelle pour les parties externes.",
+      "evidence": ""
+    },
+    "PR.AC-1.4": {
+      "code": "PR.AC-1.4",
+      "guidance": "Envisagez l'utilisation du SSO (Single Sign On) en combinaison avec le MFA pour les systèmes critiques internes et externes de l'organisation.",
+      "evidence": ""
+    },
+    "PR.AC-1.5": {
+      "code": "PR.AC-1.5",
+      "guidance": "• Envisagez de limiter le nombre de tentatives de connexion infructueuses en mettant en place un verrouillage automatique. \n• Le compte verrouillé ne sera pas accessible tant qu'il n'aura pas été réinitialisé ou que la durée de verrouillage du compte ne sera pas écoulée.",
+      "evidence": ""
+    },
+    "PR.AC-2.1": {
+      "code": "PR.AC-2.1",
+      "guidance": "• Envisagez de gérer strictement les clés d'accès aux locaux et les codes d'alarme. Il convient de prendre en compte les règles suivantes: \n  o Récupérez toujours les clés ou les badges d'un employé lorsqu'il quitte définitivement l’organisation. \n  o Changez fréquemment les codes d'alarme de l’organisation. \n  o Ne jamais donner de clés ou de codes d'alarme à des prestataires extérieurs (agents de nettoyage, etc.), sauf s'il est possible de tracer ces accès et de les limiter techniquement à des plages horaires données. \n• Envisagez de ne pas laisser les prises d'accès au réseau interne accessibles dans les lieux publics. Ces lieux publics peuvent être des salles d'attente, des couloirs...",
+      "evidence": ""
+    },
+    "PR.AC-2.2": {
+      "code": "PR.AC-2.2",
+      "guidance": "• Les contrôles d'accès physiques peuvent inclure, par exemple, des listes de personnes autorisées, des pièces d'identité, des exigences d'escorte, des gardes, des clôtures, des tourniquets, des serrures, la surveillance de l'accès aux installations, la surveillance par caméra. \n• Il convient d’envisager les mesures suivantes : \n  o Mettez en place un système de badges et créez différentes zones de sécurité. \n  o Limitez l'accès physique aux serveurs et aux composants du réseau au personnel autorisé. \n  o Consigner tous les accès aux serveurs et aux composants du réseau. \n• Il convient que les enregistrements d'accès des visiteurs soient conservés, examinés et traités selon les besoins.",
+      "evidence": ""
+    },
+    "PR.AC-2.3": {
+      "code": "PR.AC-2.3",
+      "guidance": "Par exemple, la production, la R&D, les équipements des systèmes critiques de l'organisation (salles de serveurs,etc.).",
+      "evidence": ""
+    },
+    "PR.AC-2.4": {
+      "code": "PR.AC-2.4",
+      "guidance": "• Pensez à protéger les équipements d'alimentation, le câblage d'alimentation, le câblage réseau et les interfaces d'accès au réseau contre les dommages accidentels, les perturbations et les manipulations physiques. • Envisagez de mettre en place des systèmes d'alimentation redondants et physiquement séparés pour les opérations critiques de l'organisation.",
+      "evidence": ""
+    },
+    "PR.AC-3.1": {
+      "code": "PR.AC-3.1",
+      "guidance": "Tenez compte des éléments suivants lorsque vous utilisez un réseau sans fil : \n• Changez le mot de passe administratif lors de l'installation d'un point d'accès sans fil. \n• Configurez le point d'accès sans fil de manière à ce qu'il ne diffuse pas son identifiant (SSID). \n• Configurez votre routeur pour qu'il utilise au moins le WiFi Protected Access (WPA-2 ou WPA-3 si possible), avec la norme de cryptage avancée (AES) pour le cryptage. \n• Veillez à ce que l'accès Internet sans fil des clients soit séparé du réseau de votre organisation. \n• Il convient d’éviter de se connecter à des points d'accès sans fil inconnus ou non sécurisés, et si cela est inévitable, il faut le faire par le biais d'un réseau privé virtuel (VPN) crypté. \n• Gérer tous les dispositifs d'extrémité (fixes et mobiles) conformément aux politiques de sécurité de l'organisation.",
+      "evidence": ""
+    },
+    "PR.AC-3.2": {
+      "code": "PR.AC-3.2",
+      "guidance": "Appliquer le MFA (par exemple 2FA) sur les systèmes en contact avec l'Internet, tels que le courrier électronique, le bureau à distance et le réseau privé virtuel (VPN).",
+      "evidence": ""
+    },
+    "PR.AC-3.3": {
+      "code": "PR.AC-3.3",
+      "guidance": "Considérez ce qui suit : \n• Les méthodes d'accès à distance comprennent, par exemple, des connexions sans fil, à large bande, à un réseau privé virtuel (VPN), des connexions de dispositifs mobiles et des communications par des réseaux externes. \n• Il convient que les identifiants de connexion soient conformes aux politiques d'authentification des utilisateurs de l’organisation. \n• Il convient que l'accès à distance pour les activités de soutien ou la maintenance des actifs de l'organisation soit approuvé, enregistré et effectué de manière à empêcher tout accès non autorisé. \n• Il convient d’informer l'utilisateur de toute connexion à distance à son appareil par une indication visuelle.",
+      "evidence": ""
+    },
+    "R.AC-3.4": {
+      "code": "R.AC-3.4",
+      "guidance": "Il convient d’inclure que seule l'utilisation autorisée des fonctions privilégiées à partir d'un accès à distance est permise.",
+      "evidence": ""
+    },
+    "R.AC-3.5": {
+      "code": "R.AC-3.5",
+      "guidance": "L'accès à partir d'adresses IP prédéfinies pourrait être envisagé.",
+      "evidence": ""
+    },
+    "PR.AC-4.1": {
+      "code": "PR.AC-4.1",
+      "guidance": "Il convient de considérer les éléments suivants : \n• Établir et réviser régulièrement les listes d'accès par système (fichiers, serveurs, logiciels, bases de données, etc.), éventuellement par l'analyse de l'Active Directory dans les systèmes basés sur Windows, dans le but de déterminer qui a besoin de quel type d'accès (privilégié ou non), à quoi, pour exercer ses fonctions dans l'organisation. \n• Créez un compte distinct pour chaque utilisateur (y compris pour les sous-traitants ayant besoin d'un accès) et exigez que des mots de passe forts et uniques soient utilisés pour chaque compte. \n• Veillez à ce que tous les employés utilisent des comptes informatiques sans privilèges administratifs pour effectuer des fonctions de travail typiques. Cela inclut la séparation des comptes personnels et des comptes administratifs. \n• Pour les comptes d'invités, envisagez d'utiliser les privilèges minimaux (par exemple, l'accès à l'Internet uniquement) requis pour vos besoins opérationnels. \n• Il convient que la gestion des autorisations soit documentée dans une procédure et mise à jour le cas échéant. \n• Utilisez l'authentification unique (SSO) si nécessaire.",
+      "evidence": ""
+    },
+    "PR.AC-4.2": {
+      "code": "PR.AC-4.2",
+      "guidance": "Les moyens d'accès peuvent inclure : une clé, un mot de passe, un code ou un privilège administratif.",
+      "evidence": ""
+    },
+    "PR.AC-4.3": {
+      "code": "PR.AC-4.3",
+      "guidance": "Il convient que le principe du moindre privilège soit compris comme le principe selon lequel une architecture de sécurité doit être conçue de manière à ce que chaque employé se voie accorder les ressources système et les autorisations minimales dont il a besoin pour exercer sa fonction. \n• À considérer: \no Ne pas permettre à un employé d'avoir accès à toutes les informations de l'organisation. \no Limiter le nombre d'accès Internet et d'interconnexions avec les réseaux partenaires au strict nécessaire pour pouvoir centraliser et homogénéiser plus facilement le suivi des échanges. \no Assurez-vous que lorsqu'un employé quitte l'organisation, tout accès aux informations ou aux systèmes de l'organisation est bloqué instantanément.",
+      "evidence": ""
+    },
+    "PR.AC-4.4": {
+      "code": "PR.AC-4.4",
+      "guidance": "Considérez ce qui suit :\n• Séparez les comptes d'administrateur des comptes d'utilisateur. \n• Ne pas privilégier les comptes d'utilisateurs pour effectuer les tâches d'administration. \n• Créez des mots de passe uniques pour les administrateurs locaux et désactivez les comptes inutilisés. \n• Envisagez d'interdire la navigation sur Internet aux comptes administratifs.",
+      "evidence": ""
+    },
+    "PR.AC-4.5": {
+      "code": "PR.AC-4.5",
+      "guidance": "Envisagez d'identifier séparément chaque personne ayant accès aux systèmes critiques de l'organisation avec un nom d'utilisateur afin de supprimer les comptes et les accès génériques et anonymes.",
+      "evidence": ""
+    },
+    "PR.AC-4.6": {
+      "code": "PR.AC-4.6",
+      "guidance": "La séparation des tâches comprend, par exemple : \n• la répartition des fonctions opérationnelles et des fonctions de soutien du système entre différents rôles. \n• mener des fonctions de soutien du système avec différentes personnes. \n• ne pas permettre à une seule personne d'initier et d'approuver une transaction (financière ou autre). \n• s'assurer que le personnel de sécurité qui gère les fonctions de contrôle d'accès ne gère pas également les fonctions d'audit.",
+      "evidence": ""
+    },
+    "PR.AC-4.7": {
+      "code": "PR.AC-4.7",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.AC-4.8": {
+      "code": "PR.AC-4.8",
+      "guidance": "Les restrictions spécifiques peuvent inclure, par exemple, la limitation de l'utilisation à certains jours de la semaine, à certaines heures de la journée ou à des durées spécifiques.",
+      "evidence": ""
+    },
+    "PR.AC-4.9": {
+      "code": "PR.AC-4.9",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.AC-5.1": {
+      "code": "PR.AC-5.1",
+      "guidance": "Considérez ce qui suit : \n• Installez et faites fonctionner un pare-feu entre votre réseau interne et l'Internet. Il peut s'agir d'une fonction d'un point d'accès/routeur (sans fil) ou d'un routeur fourni par le fournisseur d'accès Internet (FAI). \n• Assurez-vous qu'un logiciel antivirus est installé sur les solutions de pare-feu achetées et veillez à ce que le mot de passe de connexion et d'administration de l'administrateur soit modifié lors de l'installation et régulièrement par la suite.\n• Installez, utilisez et mettez à jour un pare-feu logiciel sur chaque système informatique (y compris les téléphones intelligents et autres appareils en réseau). \n• Installez des pare-feu sur chacun de vos ordinateurs et réseaux, même si vous utilisez un fournisseur de services en nuage ou un réseau privé virtuel (VPN). Assurez-vous que le réseau et les systèmes de votre domicile de télétravail sont équipés de pare-feu matériels et logiciels installés, opérationnels et régulièrement mis à jour. \n• Envisagez d'installer un système de détection et de prévention des intrusions (IDPS). Ces dispositifs analysent le trafic réseau à un niveau plus détaillé et peuvent fournir un plus grand niveau de protection.",
+      "evidence": ""
+    },
+    "PR.AC-5.2": {
+      "code": "PR.AC-5.2",
+      "guidance": "• Envisagez de créer différentes zones de sécurité dans le réseau (par exemple, segmentation de base du réseau par des VLAN ou d'autres mécanismes de contrôle d'accès au réseau) et contrôlez/surveillez le trafic entre ces zones. \n• Lorsque le réseau est \"plat\", la compromission d'un composant vital du réseau peut entraîner la compromission de l'ensemble du réseau.",
+      "evidence": ""
+    },
+    "PR.AC-5.3": {
+      "code": "PR.AC-5.3",
+      "guidance": "Les mécanismes de protection des limites comprennent, par exemple, les routeurs, les gateways, les gateways unidirectionnelles, les data diodes et les pare-feu qui séparent les composants du système en réseaux ou sous-réseaux logiquement distincts.",
+      "evidence": ""
+    },
+    "PR.AC-5.4": {
+      "code": "PR.AC-5.4",
+      "guidance": "Envisagez de mettre en œuvre les recommandations suivantes : \n• Séparez votre réseau WIFI public de votre réseau professionnel. \n• Protégez votre WIFI professionnel grâce à un cryptage de pointe. \n• Mettre en œuvre une solution de contrôle d'accès au réseau (NAC). \n• Cryptez les connexions à votre réseau d'organisation. \n• Divisez votre réseau en fonction des niveaux de sécurité et appliquez des règles de pare-feu. Isolez vos réseaux pour l'administration des serveurs. \n• Forcer le VPN sur les réseaux publics. \n• Mettez en œuvre une politique de fermeture des gateways de sécurité (politique de refus de tout : n'autorisez/ouvrez que les connexions qui ont été explicitement préautorisées).",
+      "evidence": ""
+    },
+    "PR.AC-5.5": {
+      "code": "PR.AC-5.5",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.AC-5.6": {
+      "code": "PR.AC-5.6",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.AC-6.1": {
+      "code": "PR.AC-6.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.AC-6.2": {
+      "code": "PR.AC-6.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.AC-7.1": {
+      "code": "PR.AC-7.1",
+      "guidance": "Envisagez une approche de sécurité par la conception pour les nouveaux systèmes ; pour les systèmes existants, il convient d’utiliser une évaluation des risques distincte.",
+      "evidence": ""
+    },
+    "PR.AT-1.1": {
+      "code": "PR.AT-1.1",
+      "guidance": "• Les employés comprennent tous les utilisateurs et les gestionnaires des systèmes TIC/OT, et il convient qu’ils soient formés dès leur embauche, puis régulièrement, aux politiques de sécurité de l'information de l'organisation et à ce qu'on attend d'eux pour protéger les informations et les technologies de l'organisation. \n• Il convient que la formation soit continuellement mise à jour et renforcée par des campagnes de sensibilisation.",
+      "evidence": ""
+    },
+    "PR.AT-1.2": {
+      "code": "PR.AT-1.2",
+      "guidance": "À considérer : \n• Communiquez et discutez régulièrement afin de vous assurer que chacun est conscient de ses responsabilités. \n• Développez un programme de sensibilisation en rassemblant dans un document les messages que vous souhaitez transmettre à votre personnel (sujets, publics, objectifs, etc.) et votre rythme de communication sur un calendrier (hebdomadaire, mensuel, ponctuel, etc.). Communiquez de manière continue et engageante, en impliquant la direction, les collègues informaticiens, le fournisseur de services TIC et les responsables des RH et de la communication. \n• Les sujets abordés sont les suivants : reconnaissance des tentatives de fraude, hameçonnage, gestion des informations sensibles, incidents, etc. L'objectif est que tous les employés comprennent les moyens de protéger les informations de l'organisation. \n• Discutez avec votre direction, vos collègues des TIC ou votre fournisseur de services TIC de certains scénarios pratiques (par exemple, que faire en cas d'alerte au virus, de coupure de courant due à un orage, de blocage des données, de piratage d'un compte, etc.), déterminez les comportements à adopter, documentez-les et communiquez-les à l'ensemble de votre personnel. Il convient que le point de contact central en cas d'incident soit connu de tous. \n• Organisez une simulation d'un scénario pour tester vos connaissances. Envisagez de réaliser cet exercice, par exemple, au moins une fois par an.",
+      "evidence": ""
+    },
+    "PR.AT-1.3": {
+      "code": "PR.AT-1.3",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.AT-2.1": {
+      "code": "PR.AT-2.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.AT-3.1": {
+      "code": "PR.AT-3.1",
+      "guidance": "Il convient que la mise en application inclue le fait que les utilisateurs des \"parties prenantes tierces\" (par exemple, les fournisseurs, les clients, les partenaires) puissent démontrer qu'ils comprennent leurs rôles et leurs responsabilités.",
+      "evidence": ""
+    },
+    "PR.AT-3.2": {
+      "code": "PR.AT-3.2",
+      "guidance": "Les fournisseurs tiers comprennent, par exemple, des prestataires de services, des entrepreneurs et d'autres organisations fournissant le développement de systèmes, des services technologiques, des applications externalisées ou la gestion du réseau et de la sécurité.",
+      "evidence": ""
+    },
+    "PR.AT-3.3": {
+      "code": "PR.AT-3.3",
+      "guidance": "Les résultats d'audits réalisés par des tiers peuvent être utilisés comme preuves d'audit.",
+      "evidence": ""
+    },
+    "PR.AT-3.4": {
+      "code": "PR.AT-3.4",
+      "guidance": "Les résultats d'audits réalisés par des tiers peuvent être utilisés comme preuves d'audit.",
+      "evidence": ""
+    },
+    "PR.AT-4.1": {
+      "code": "PR.AT-4.1",
+      "guidance": "Des conseils sur les profils de rôle ainsi que leurs titres, missions, tâches, aptitudes, connaissances et compétences sont disponibles dans le document \"European Cybersecurity Skills Framework Role Profiles\" de ENISA. (https://www.enisa.europa.eu/publications/european-cybersecurity-skills-framework-role-profiles )",
+      "evidence": ""
+    },
+    "PR.AT-5.1": {
+      "code": "PR.AT-5.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.DS-1.1": {
+      "code": "PR.DS-1.1",
+      "guidance": "• Envisagez d'utiliser des techniques de cryptage pour le stockage des données, la transmission des données ou le transport des données (par exemple, ordinateur portable, USB). • Envisagez de crypter les appareils des utilisateurs finaux et les supports amovibles contenant des données sensibles (disques durs, ordinateurs portables, appareils mobiles, périphériques de stockage USB, etc.) Cela peut être fait par exemple avec Windows BitLocker®, VeraCrypt, Apple FileVault®, Linux® dm-crypt, ... \n• Envisagez de crypter les données sensibles stockées dans le nuage. \n• Mettre en œuvre des mesures de protection spécifiques pour empêcher l'accès non autorisé, la déformation ou la modification des données du système et des enregistrements d'audit (par exemple, droits d'accès restreints, sauvegardes quotidiennes, cryptage des données, installation de pare-feu). \n• Chiffrez les disques durs, les supports externes, les fichiers stockés, les fichiers de configuration et les données stockées dans le nuage.",
+      "evidence": ""
+    },
+    "PR.DS-2.1": {
+      "code": "PR.DS-2.1",
+      "guidance": "Si vous envoyez des documents ou des courriels sensibles, vous pouvez envisager de les crypter.",
+      "evidence": ""
+    },
+    "PR.DS-3.1": {
+      "code": "PR.DS-3.1",
+      "guidance": "• Lors de l'élimination d'actifs tangibles tels que les ordinateurs professionnels/portables, les serveurs, le(s) disque(s) dur(s) et autres supports de stockage (clés USB, papier...), assurez-vous que toutes les données professionnelles ou personnelles sensibles sont supprimées de manière sécurisée (c'est-à-dire \"effacées\" électroniquement) avant d'être retirées et ensuite physiquement détruites (ou remises en service). Cette opération est également connue sous le nom de \"assainissement\" et est donc liée à l'exigence et aux conseils de PR.IP-6. \n• Envisager d'installer une application d'effacement à distance sur les ordinateurs portables, les tablettes, les téléphones portables et autres appareils mobiles de l'organisation.",
+      "evidence": ""
+    },
+    "PR.DS-3.2": {
+      "code": "PR.DS-3.2",
+      "guidance": "Il convient que la responsabilité inclue : \n• L'autorisation pour les actifs critiques d'entrer et de sortir de l'installation. \n• Le suivi et maintien de la documentation relative aux mouvements des actifs critiques pour l’organisation.",
+      "evidence": ""
+    },
+    "PR.DS-3.3": {
+      "code": "PR.DS-3.3",
+      "guidance": "Cela peut se faire par des politiques, des processus et des procédures (reporting), des moyens techniques et organisationnels (cryptage, contrôle d'accès (AC), gestion des appareils mobiles (MDM), surveillance, effacement sécurisé, sensibilisation, accord d'utilisation signé, directives et manuels, sauvegardes, mise à jour de l'inventaire...).",
+      "evidence": ""
+    },
+    "PR.DS-3.4": {
+      "code": "PR.DS-3.4",
+      "guidance": "Les actions d'élimination comprennent des actions de assainissement des médias (voir PR.IP-6).",
+      "evidence": ""
+    },
+    "PR.DS-4.1": {
+      "code": "PR.DS-4.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.DS-4.2": {
+      "code": "PR.DS-4.2",
+      "guidance": "Sachez que les services de log peuvent devenir un goulot d'étranglement et entraver le bon fonctionnement des systèmes sources.",
+      "evidence": ""
+    },
+    "PR.DS-4.3": {
+      "code": "PR.DS-4.3",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.DS-5.1": {
+      "code": "PR.DS-5.1",
+      "guidance": "• Pensez à mettre en place des mesures de protection dédiées (droits d'accès restreints, sauvegardes quotidiennes, cryptage des données, installation de pare-feu, etc.) pour les données les plus sensibles. \n• Envisager un audit fréquent de la configuration de l'annuaire central (Active Directory dans l'environnement Windows), en se concentrant spécifiquement sur l'accès aux données des personnes clés de l'organisation.",
+      "evidence": ""
+    },
+    "PR.DS-6.1": {
+      "code": "PR.DS-6.1",
+      "guidance": "Les mécanismes de vérification de l'intégrité conformes à l'état de l'art (par exemple, les contrôles de parité, les contrôles de redondance cyclique, les hachages cryptographiques) et les outils associés peuvent surveiller automatiquement l'intégrité des systèmes d'information et des applications hébergées.",
+      "evidence": ""
+    },
+    "PR.DS-6.2": {
+      "code": "PR.DS-6.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.DS-6.3": {
+      "code": "PR.DS-6.3",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.DS-7.1": {
+      "code": "PR.DS-7.1",
+      "guidance": "• Il convient que tout changement que l'on souhaite apporter à l'environnement ICT/OT soit d'abord testé dans un environnement différent et distinct de l'environnement de production (environnement opérationnel) avant que ce changement ne soit effectivement mis en œuvre. De cette façon, l'effet de ces changements peut être analysé et des ajustements peuvent être effectués sans perturber les activités opérationnelles. \n• Envisagez d'ajouter et de tester des fonctions de cybersécurité dès le début du développement (principes du cycle de développement sécurisé).",
+      "evidence": ""
+    },
+    "PR.DS-8.1": {
+      "code": "PR.DS-8.1",
+      "guidance": "Les mécanismes de vérification de l'intégrité conformes à l'état de l'art (par exemple, les contrôles de parité, les contrôles de redondance cyclique, les hachages cryptographiques) et les outils associés peuvent surveiller automatiquement l'intégrité des systèmes d'information et des applications hébergées.",
+      "evidence": ""
+    },
+    "PR.DS-8.2": {
+      "code": "PR.DS-8.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.IP-1.1": {
+      "code": "PR.IP-1.1",
+      "guidance": "• Ce contrôle inclut le concept de la moindre fonctionnalité. \n• Les configurations de base comprennent, par exemple, des informations sur les systèmes critiques de l'organisation, les numéros de version actuels et les informations sur les correctifs des systèmes d'exploitation et des applications, les paramètres de configuration, la topologie du réseau et l'emplacement logique de ces composants dans l'architecture du système. \n• Il convient que la topologie du réseau inclue les points névralgiques de l'environnement IT/OT (connexions externes, serveurs hébergeant des données et/ou des fonctions sensibles, sécurité des services DNS, etc.)",
+      "evidence": ""
+    },
+    "PR.IP-1.2": {
+      "code": "PR.IP-1.2",
+      "guidance": "• La configuration d'un système pour fournir uniquement les capacités essentielles à la mission définies par l'organisation est connue sous le nom de \"concept de moindre fonctionnalité\". \n• Les capacités comprennent les fonctions, les ports, les protocoles, les logiciels et/ou les services.",
+      "evidence": ""
+    },
+    "PR.IP-2.1": {
+      "code": "PR.IP-2.1",
+      "guidance": "• Il convient que le cycle de vie du développement des systèmes et des applications inclue le processus d'acquisition des systèmes critiques de l'organisation et de ses composants. \n• Il convient d'envisager une formation à la sensibilisation aux vulnérabilités et à la prévention pour les développeurs (d'applications web), ainsi qu'une formation avancée à la sensibilisation à l'ingénierie sociale pour les rôles importants. \n• Lorsque l'on héberge des applications tournées vers l'internet, il convient d'envisager la mise en place d'un pare-feu pour applications web (WAF).",
+      "evidence": ""
+    },
+    "PR.IP-2.2": {
+      "code": "PR.IP-2.2",
+      "guidance": "Le cycle de développement comprend : \n• Toutes les phases de développement : spécification, conception, développement, mise en œuvre. \n• Gestion de la configuration pour les changements planifiés et non planifiés et contrôle des changements pendant le développement. \n• Suivi et résolution des failles. \n• Test de sécurité.",
+      "evidence": ""
+    },
+    "PR.IP-3.1": {
+      "code": "PR.IP-3.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.IP-3.2": {
+      "code": "PR.IP-3.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.IP-4.1": {
+      "code": "PR.IP-4.1",
+      "guidance": "• Les données des systèmes critiques de l'organisation comprennent par exemple les logiciels, les configurations et les paramètres, la documentation, les données de configuration du système, y compris les sauvegardes de la configuration de l'ordinateur, les sauvegardes de la configuration des applications, etc. \n• Envisagez une sauvegarde régulière et mettez-la hors ligne périodiquement. \n• Il convient que les objectifs de temps et de point de rétablissement doivent être pris en compte. \n• Envisagez de ne pas stocker la sauvegarde des données de l'organisation sur le même réseau que le système sur lequel résident les données originales et fournissez une copie hors ligne. Cela permet notamment d'éviter le cryptage des fichiers par les pirates (risque de ransomware).",
+      "evidence": ""
+    },
+    "PR.IP-4.2": {
+      "code": "PR.IP-4.2",
+      "guidance": "Il convient d’inclure des tests réguliers des procédures de restauration des sauvegardes.",
+      "evidence": ""
+    },
+    "PR.IP-4.3": {
+      "code": "PR.IP-4.3",
+      "guidance": "Une sauvegarde hors ligne de vos données est idéalement stockée dans un endroit physique distinct de la source de données originale et, si possible, hors site pour une protection et une sécurité supplémentaires.",
+      "evidence": ""
+    },
+    "PR.IP-4.4": {
+      "code": "PR.IP-4.4",
+      "guidance": "• Les plans connexes comprennent, par exemple, les plans de continuité des activités, les plans de reprise après sinistre, les plans de continuité des opérations, les plans de communication de crise, les plans d'infrastructure critique et les plans de réponse aux cyberincidents. \n• Il convient que la restauration des données de sauvegarde pendant les tests du plan d'urgence soit prévue.",
+      "evidence": ""
+    },
+    "PR.IP-4.5": {
+      "code": "PR.IP-4.5",
+      "guidance": "Il convient que la séparation de la sauvegarde des systèmes critiques et de la sauvegarde des informations critiques devrait permette de réduire le temps de rétablissement.",
+      "evidence": ""
+    },
+    "PR.IP-5.1": {
+      "code": "PR.IP-5.1",
+      "guidance": "Les mesures ci-dessous doivent être envisagées : \n• Protégez les équipements informatiques non surveillés avec des cadenas ou un système de casiers et de clés. \n• Il convient que les mécanismes d'extinction des incendies tiennent compte de l'environnement des systèmes critiques de l'organisation (par exemple, les systèmes d'extincteurs automatiques à eau peuvent être dangereux dans certains environnements).",
+      "evidence": ""
+    },
+    "PR.IP-5.2": {
+      "code": "PR.IP-5.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.IP-6.1": {
+      "code": "PR.IP-6.1",
+      "guidance": "• Les actions d'élimination comprennent des actions d’assainissement des médias (voir PR.DS-3). \n• Il existe deux principaux types de supports utilisés couramment : \no Supports papier (représentations physiques de l'information) \no Les supports électroniques ou informatiques (les bits et les octets contenus dans les disques durs, les mémoires vives (RAM), les mémoires mortes (ROM), les disques, les dispositifs de mémoire, les téléphones, les dispositifs informatiques mobiles, les équipements de réseau...).",
+      "evidence": ""
+    },
+    "PR.IP-6.2": {
+      "code": "PR.IP-6.2",
+      "guidance": "• Les processus d'assainissement comprennent les procédures et les équipements. \n• Envisagez d'appliquer des techniques d’assainissement non destructives aux dispositifs de stockage portables. \n• Considérez les procédures d'assainissement en fonction des exigences de confidentialité.",
+      "evidence": ""
+    },
+    "PR.IP-7.1": {
+      "code": "PR.IP-7.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.IP-7.2": {
+      "code": "PR.IP-7.2",
+      "guidance": "• Les équipes indépendantes peuvent comprendre du personnel impartial interne ou externe. \n• L'impartialité implique que les évaluateurs soient libres de tout conflit d'intérêt perçu ou réel concernant le développement, l'exploitation ou la gestion du système critique de l'organisation soumis à l'évaluation ou la détermination de l'efficacité du contrôle de sécurité.",
+      "evidence": ""
+    },
+    "PR.IP-7.3": {
+      "code": "PR.IP-7.3",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.IP-8.1": {
+      "code": "PR.IP-8.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.IP-8.2": {
+      "code": "PR.IP-8.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.IP-8.3": {
+      "code": "PR.IP-8.3",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.IP-9.1": {
+      "code": "PR.IP-9.1",
+      "guidance": "• Le plan de réponse aux incidents est la documentation d'un ensemble prédéterminé d'instructions ou de procédures pour détecter, répondre et limiter les conséquences d'une cyber-attaque malveillante. \n• Il convient d’intégrer dans les plans les objectifs de rétablissement, les priorités de rétablissement, les mesures, les rôles d'urgence, les affectations du personnel et les informations de contact. \n• Il convient que le maintien des fonctions essentielles malgré la perturbation du système et la restauration éventuelle des systèmes de l'organisation soient abordés. \n• Envisagez de définir les types d'incidents, les ressources et le soutien de gestion nécessaires pour maintenir et développer efficacement les capacités de réponse aux incidents et de contingence.",
+      "evidence": ""
+    },
+    "PR.IP-9.2": {
+      "code": "PR.IP-9.2",
+      "guidance": "Les plans connexes comprennent, par exemple, les plans de continuité des activités, les plans de reprise après sinistre, les plans de continuité des opérations, les plans de communication de crise, les plans d'infrastructure critique, les plans de réponse aux cyberincidents et les plans d'urgence pour les occupants.",
+      "evidence": ""
+    },
+    "PR.IP-11.1": {
+      "code": "PR.IP-11.1",
+      "guidance": "• Il convient que l'accès aux informations ou aux technologies critiques soit pris en compte lors du recrutement, pendant l'emploi et lors de la cessation d'activité. \n• Il convient que les vérifications des antécédents tiennent compte des lois, des règlements et de l'éthique applicables, proportionnellement aux besoins de l'organisation, à la classification des informations auxquelles il faut accéder et aux risques perçus.",
+      "evidence": ""
+    },
+    "PR.IP-11.2": {
+      "code": "PR.IP-11.2",
+      "guidance": "Il convient que le processus de sécurité des ressources humaines en matière d'information et de cybercriminalité comprenne l'accès aux informations ou aux technologies essentielles, la vérification des antécédents, le code de conduite, les rôles, les pouvoirs et les responsabilités...",
+      "evidence": ""
+    },
+    "PR.IP-12.1": {
+      "code": "PR.IP-12.1",
+      "guidance": "• Envisager de recenser les sources susceptibles de signaler les vulnérabilités des composants identifiés et de diffuser les mises à jour (sites web des éditeurs de logiciels, site web du CERT, site web de ENISA). \n• Il convient que l'organisation identifie où les vulnérabilités de son système critique peuvent être exposées à des adversaires.",
+      "evidence": ""
+    },
+    "PR.MA-1.1": {
+      "code": "PR.MA-1.1",
+      "guidance": "Il convient de considérer les éléments suivants: \n• Limitez-vous à l'installation des applications (systèmes d'exploitation, microprogrammes ou plugins) dont vous avez besoin pour gérer votre organisation et mettez-les à jour régulièrement. \n• Il convient de n’installer que la version actuelle et prise en charge par le fournisseur du logiciel que vous choisissez d'utiliser. Il peut être utile d'attribuer un jour par mois à la vérification des correctifs. \n• Il existe des produits qui peuvent analyser votre système et vous avertir lorsqu'il existe une mise à jour pour une application que vous avez installée. Si vous utilisez l'un de ces produits, assurez-vous qu'il vérifie les mises à jour pour chaque application que vous utilisez. • Installer les correctifs et les mises à jour de sécurité en temps voulu.",
+      "evidence": ""
+    },
+    "PR.MA-1.2": {
+      "code": "PR.MA-1.2",
+      "guidance": "Il convient de considérer les éléments suivants: \n• Effectuer les mises à jour de sécurité sur tous les logiciels en temps voulu. \n• Automatisez le processus de mise à jour et contrôlez son efficacité. \n• Introduire une culture interne de l'application de correctifs sur les ordinateurs de bureau, les appareils mobiles, les serveurs, les composants de réseau, etc. pour assurer le suivi des mises à jour.",
+      "evidence": ""
+    },
+    "PR.MA-1.3": {
+      "code": "PR.MA-1.3",
+      "guidance": "Les outils de maintenance peuvent inclure des équipements de test de diagnostic matériel/logiciel, des renifleurs de paquets matériel/logiciel et des ordinateurs portables.",
+      "evidence": ""
+    },
+    "PR.MA-1.4": {
+      "code": "PR.MA-1.4",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.MA-1.5": {
+      "code": "PR.MA-1.5",
+      "guidance": "Cette exigence concerne principalement les environnements OT/ICS.",
+      "evidence": ""
+    },
+    "PR.MA-1.6": {
+      "code": "PR.MA-1.6",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.MA-1.7": {
+      "code": "PR.MA-1.7",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.MA-2.1": {
+      "code": "PR.MA-2.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.MA-2.2": {
+      "code": "PR.MA-2.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.MA-2.3": {
+      "code": "PR.MA-2.3",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.PT-1.1": {
+      "code": "PR.PT-1.1",
+      "guidance": "• Assurez-vous que la fonctionnalité d'enregistrement des activités du matériel ou du logiciel de protection/détection (par exemple, les pare-feu, les antivirus) est activée. \n• Il convient que les logs soient sauvegardés et conservés pendant une période prédéfinie. \n• Il convient que les logs soient examinés pour déceler toute tendance inhabituelle ou indésirable, telle qu'une utilisation importante des sites Web de médias sociaux ou un nombre inhabituel de virus trouvés régulièrement sur un ordinateur particulier. Ces tendances peuvent indiquer un problème plus grave ou signaler la nécessité de renforcer les protections dans un domaine particulier.",
+      "evidence": ""
+    },
+    "PR.PT-1.2": {
+      "code": "PR.PT-1.2",
+      "guidance": "Les sources de temps faisant autorité comprennent, par exemple, un serveur interne NTP (Network Time Protocol), une horloge radio, une horloge atomique, une source de temps GPS.",
+      "evidence": ""
+    },
+    "PR.PT-1.3": {
+      "code": "PR.PT-1.3",
+      "guidance": "L'utilisation de serveurs System Logging Protocol (Syslog) peut être envisagée.",
+      "evidence": ""
+    },
+    "PR.PT-1.4": {
+      "code": "PR.PT-1.4",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.PT-2.1": {
+      "code": "PR.PT-2.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.PT-2.2": {
+      "code": "PR.PT-2.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.PT-2.3": {
+      "code": "PR.PT-2.3",
+      "guidance": "Il convient que la protection et le contrôle incluent le scannage de tous les dispositifs de stockage portables pour détecter les codes malveillants avant qu'ils ne soient utilisés sur les systèmes de l'organisation.",
+      "evidence": ""
+    },
+    "PR.PT-3.1": {
+      "code": "PR.PT-3.1",
+      "guidance": "Envisagez d'appliquer le principe de la moindre fonctionnalité aux systèmes d'accès et aux actifs (voir également PR.AC-4).",
+      "evidence": ""
+    },
+    "PR.PT-3.2": {
+      "code": "PR.PT-3.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.PT-3.3": {
+      "code": "PR.PT-3.3",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "PR.PT-4.1": {
+      "code": "PR.PT-4.1",
+      "guidance": "• Il convient que les filtres de messagerie détectent les courriers électroniques malveillants et que le filtrage soit configuré en fonction du type de pièces jointes des messages afin que les fichiers des types spécifiés soient automatiquement traités (par exemple, supprimés). \n• Il convient que les filtres Web avertissent l'utilisateur si un site Web est susceptible de contenir des logiciels malveillants et empêcher potentiellement les utilisateurs d'accéder à ce site.",
+      "evidence": ""
+    },
+    "PR.PT-4.2": {
+      "code": "PR.PT-4.2",
+      "guidance": "Considérez ce qui suit : \n• Le flux d'informations peut être facilité, par exemple, par l'étiquetage ou la coloration des connecteurs physiques pour faciliter le branchement manuel. \n• L'inspection du contenu des messages peut permettre d'appliquer la politique de circulation des informations. Par exemple, un message contenant une commande à un actionneur peut ne pas être autorisé à circuler entre le réseau de contrôle et tout autre réseau. \n• Les adresses physiques (par exemple, un port série) peuvent être implicitement ou explicitement associées à des étiquettes ou à des attributs (par exemple, une adresse d'I/O hardware). Les méthodes manuelles sont généralement statiques. Les mécanismes de politique d'étiquettes ou d'attributs peuvent être mis en œuvre dans le matériel, les microprogrammes et les logiciels qui contrôlent ou ont accès aux dispositifs, tels que les drivers et les contrôleurs de communications.",
+      "evidence": ""
+    },
+    "PR.PT-4.3": {
+      "code": "PR.PT-4.3",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "DE.AE-1.1": {
+      "code": "DE.AE-1.1",
+      "guidance": "• Envisagez d'activer l'enregistrement local sur tous vos systèmes et périphériques réseau et conservez-les pendant une certaine période, par exemple jusqu'à 6 mois. \n• Assurez-vous que vos logs contiennent suffisamment d'informations (source, date, utilisateur, horodatage, etc.) et que vous disposez d'un espace de stockage suffisant pour leur génération. \n• Envisagez de centraliser vos logs. \n• Envisagez le déploiement d'un outil de gestion des informations et des événements de sécurité (SIEM) qui facilitera la corrélation et l'analyse de vos données.",
+      "evidence": ""
+    },
+    "DE.AE-2.1": {
+      "code": "DE.AE-2.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "DE.AE-2.2": {
+      "code": "DE.AE-2.2",
+      "guidance": "Pensez à examiner régulièrement vos logs pour identifier les anomalies ou les événements anormaux.",
+      "evidence": ""
+    },
+    "DE.AE-3.1": {
+      "code": "DE.AE-3.1",
+      "guidance": "• Il convient que les logs soient sauvegardés et conservés pendant une période prédéfinie. \n• Il convient que les logs soient examinés pour déceler toute tendance inhabituelle ou indésirable, telle qu'une utilisation importante des sites Web de médias sociaux ou un nombre inhabituel de virus trouvés régulièrement sur un ordinateur particulier. Ces tendances peuvent indiquer un problème plus grave ou signaler la nécessité de renforcer les protections dans un domaine particulier.",
+      "evidence": ""
+    },
+    "DE.AE-3.2": {
+      "code": "DE.AE-3.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "DE.AE-3.3": {
+      "code": "DE.AE-3.3",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "DE.AE-4.1": {
+      "code": "DE.AE-4.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "DE.AE-5.1": {
+      "code": "DE.AE-5.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "DE.AE-5.2": {
+      "code": "DE.AE-5.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "DE.CM-1.1": {
+      "code": "DE.CM-1.1",
+      "guidance": "• Les terminaux comprennent les ordinateurs de bureau, les ordinateurs portables, les serveurs... \n• Envisagez, dans la mesure du possible, d'inclure les téléphones intelligents et autres appareils en réseau dans l'installation et l'exploitation des pare-feu. • Envisagez de limiter le nombre de gateways vers internet.",
+      "evidence": ""
+    },
+    "DE.CM-1.2": {
+      "code": "DE.CM-1.2",
+      "guidance": "• Il convient que la surveillance des communications réseau se fasse à la frontière externe des systèmes critiques de l'organisation et aux frontières internes clés des systèmes. \n• Lors de l'hébergement d'applications tournées vers l'internet, il convient d'envisager la mise en place d'un pare-feu pour applications web (WAF).",
+      "evidence": ""
+    },
+    "DE.CM-1.3": {
+      "code": "DE.CM-1.3",
+      "guidance": "Il convient que la surveillance de l'état de la sécurité inclue : \n• La génération d'alertes système en cas d'indications de compromission ou de compromission potentielle. \n• Détection et signalement de l'utilisation atypique des systèmes critiques de l'organisation. \n• L'établissement d'enregistrements d'audit pour des événements définis en matière d'information/cybersécurité. \n• Renforcer l'activité de surveillance du système dès qu'il y a une indication d'un risque accru. • Environnement physique, personnel et fournisseur de services.",
+      "evidence": ""
+    },
+    "DE.CM-2.1": {
+      "code": "DE.CM-2.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "DE.CM-2.2": {
+      "code": "DE.CM-2.2",
+      "guidance": "Il est recommandé d'enregistrer tous les visiteurs.",
+      "evidence": ""
+    },
+    "DE.CM-3.1": {
+      "code": "DE.CM-3.1",
+      "guidance": "Envisagez le déploiement d'un système de détection/prévention des intrusions (IDS/IPS).",
+      "evidence": ""
+    },
+    "DE.CM-3.2": {
+      "code": "DE.CM-3.2",
+      "guidance": "• Envisagez l'utilisation d'une plateforme centralisée pour la consolidation et l'exploitation des fichiers de logs. \n• Envisagez d'examiner activement les alertes générées par des activités suspectes et prenez les mesures appropriées pour remédier à la menace, par exemple en déployant un centre opérationnel de sécurité (SOC).",
+      "evidence": ""
+    },
+    "DE.CM-3.3": {
+      "code": "DE.CM-3.3",
+      "guidance": "Il convient que seuls les logiciels autorisés soient utilisés, et que les droits d'accès des utilisateurs soient limités aux données, ressources et applications spécifiques nécessaires pour accomplir une tâche requise (principe du moindre privilège).",
+      "evidence": ""
+    },
+    "DE.CM-4.1": {
+      "code": "DE.CM-4.1",
+      "guidance": "• Les logiciels malveillants comprennent les virus, les logiciels espions et les ransomwares et il convient qu’ils soients combattus par l'installation, l'utilisation et la mise à jour régulière de logiciels antivirus et anti logiciels espions sur chaque appareil utilisé dans le cadre des activités de l'organisation (y compris les ordinateurs, les smartphones, les tablettes et les serveurs). \n• Il convient que les logiciels antivirus et anti logiciels espions recherchent automatiquement les mises à jour en \"temps réel\" ou au moins quotidiennement, puis procédent à une analyse du système, le cas échéant. \n• Il convient de fournir les mêmes mécanismes de protection contre les codes malveillants pour les ordinateurs à domicile (télétravail, par exemple) ou les appareils personnels utilisés pour le travail professionnel (BYOD).",
+      "evidence": ""
+    },
+    "DE.CM-4.2": {
+      "code": "DE.CM-4.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "DE.CM-5.1": {
+      "code": "DE.CM-5.1",
+      "guidance": "• Le code mobile comprend tout programme, application ou contenu qui peut être transmis sur un réseau (par exemple, intégré dans un courrier électronique, un document ou un site web) et exécuté sur un système distant. Les technologies de code mobile comprennent par exemple les applets Java, JavaScript, HTML5, WebGL et VBScript. \n• Il convient que les décisions concernant l'utilisation du code mobile dans les systèmes organisationnels soient fondées sur le potentiel du code à causer des dommages aux systèmes en cas d'utilisation malveillante. Il convient que des restrictions d'utilisation et des conseils de mise en œuvre s'appliquent à la sélection et à l'utilisation du code mobile installé.",
+      "evidence": ""
+    },
+    "DE.CM-6.1": {
+      "code": "DE.CM-6.1",
+      "guidance": "Cette surveillance comprend l'accès du personnel non autorisé, les connexions, les dispositifs et les logiciels.",
+      "evidence": ""
+    },
+    "DE.CM-6.2": {
+      "code": "DE.CM-6.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "DE.CM-7.1": {
+      "code": "DE.CM-7.1",
+      "guidance": "• L'accès par du personnel non autorisé comprend l'accès par des prestataires de services externes. \n• Il convient que les écarts d'inventaire du système soient inclus dans le suivi. \n• Il convient que les changements de configuration non autorisés des systèmes critiques de l'organisation soient inclus dans la surveillance.",
+      "evidence": ""
+    },
+    "DE.CM-7.2": {
+      "code": "DE.CM-7.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "DE.CM-8.1": {
+      "code": "DE.CM-8.1",
+      "guidance": "Envisagez la mise en œuvre d'un programme de balayage continu des vulnérabilités ; y compris les rapports et les plans d'atténuation.",
+      "evidence": ""
+    },
+    "DE.CM-8.2": {
+      "code": "DE.CM-8.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "DE.DP-2.1": {
+      "code": "DE.DP-2.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "DE.DP-3.1": {
+      "code": "DE.DP-3.1",
+      "guidance": "• La validation comprend des tests. \n• Il convient de pouvoir démontrer la validation.",
+      "evidence": ""
+    },
+    "DE.DP-4.1": {
+      "code": "DE.DP-4.1",
+      "guidance": "Les informations de détection d'événements comprennent, par exemple, des alertes sur l'utilisation atypique d'un compte, l'accès à distance non autorisé, la connectivité sans fil, la connexion d'un dispositif mobile, la modification des paramètres de configuration, l'inventaire contrasté des composants du système, l'utilisation d'outils de maintenance et la maintenance non locale, l'accès physique, la température et l'humidité, la livraison et le retrait d'équipements, les communications aux frontières du système d'information, l'utilisation d'un code mobile, l'utilisation de la voix sur IP (VoIP) et la divulgation de logiciels malveillants.",
+      "evidence": ""
+    },
+    "DE.DP-5.1": {
+      "code": "DE.DP-5.1",
+      "guidance": "• Il en résulte une amélioration continue des processus de détection. \n• Le recours à des équipes indépendantes pour évaluer le processus de détection pourrait être envisagé.",
+      "evidence": ""
+    },
+    "DE.DP-5.2": {
+      "code": "DE.DP-5.2",
+      "guidance": "Ces activités peuvent être externalisées, de préférence auprès d'organisations accrédités.",
+      "evidence": ""
+    },
+    "RS.RP-1.1": {
+      "code": "RS.RP-1.1",
+      "guidance": "• Il convient que le processus de réponse aux incidents inclue un ensemble prédéterminé d'instructions ou de procédures pour détecter, répondre et limiter les conséquences d'une cyber-attaque malveillante. \n• Il convient que les rôles, les responsabilités et les pouvoirs prévus dans le plan de réponse aux incidents soient précis quant aux personnes impliquées, leurs coordonnées, leurs différents rôles et responsabilités, à la personne qui prend la décision de lancer les procédures de rétablissement et à celle qui sera le contact avec les parties prenantes externes appropriées. \n• Il convient d’envisager de déterminer les causes d'un événement de sécurité de l'information/cybersécurité et de mettre en œuvre une action corrective afin que l'événement ne se reproduise plus ou ne se produise pas ailleurs (une infection par un code malveillant sur une machine ne s'est pas propagée ailleurs dans le réseau). Il convient que l'efficacité de toute mesure corrective prise soit examinée. Il convient que les actions correctives soient adaptées aux effets de l'événement de sécurité de l'information/cybersécurité rencontré.",
+      "evidence": ""
+    },
+    "RS.CO-1.1": {
+      "code": "RS.CO-1.1",
+      "guidance": "Envisagez d'utiliser le Guide de gestion des incidents du CCB pour vous guider dans cet exercice et envisagez de faire appel à des experts extérieurs si nécessaire. Testez votre plan régulièrement et ajustez- le après chaque incident.",
+      "evidence": ""
+    },
+    "RS.CO-2.1": {
+      "code": "RS.CO-2.1",
+      "guidance": "Il convient que tous les utilisateurs aient un point de contact unique pour signaler tout incident et soient encouragés à le faire.",
+      "evidence": ""
+    },
+    "RS.CO-2.2": {
+      "code": "RS.CO-2.2",
+      "guidance": "Il convient que les critères de signalement soient inclus dans le plan de réponse aux incidents.",
+      "evidence": ""
+    },
+    "RS.CO-3.1": {
+      "code": "RS.CO-3.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "RS.CO-3.2": {
+      "code": "RS.CO-3.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "RS.CO-4.1": {
+      "code": "RS.CO-4.1",
+      "guidance": "• Les parties prenantes de la réponse aux incidents comprennent par exemple les gestionnaires de la mission/de l'activité, les gestionnaires des systèmes critiques de l'organisation, les intégrateurs, les fournisseurs, les bureaux des ressources humaines, les bureaux de la sécurité physique et du personnel, les services juridiques, le personnel des opérations et les bureaux des achats. \n• La coordination avec les parties prenantes se fait conformément aux plans de réponse aux incidents.",
+      "evidence": ""
+    },
+    "RS.CO-5.1": {
+      "code": "RS.CO-5.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "RS.AN-1.1": {
+      "code": "RS.AN-1.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "RS.AN-1.2": {
+      "code": "RS.AN-1.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "RS.AN-2.1": {
+      "code": "RS.AN-2.1",
+      "guidance": "• L'analyse des résultats peut consister à déterminer la corrélation entre les informations de l'événement détecté et les résultats des évaluations des risques. De cette façon, on obtient un aperçu de l'impact de l'événement sur l'ensemble de l'organisation. \n• Envisager d'inclure la détection des modifications non autorisées de ses systèmes critiques dans ses capacités de réponse aux incidents.",
+      "evidence": ""
+    },
+    "RS.AN-2.2": {
+      "code": "RS.AN-2.2",
+      "guidance": "La mise en œuvre peut aller d'un système de billetterie à un système de gestion des informations et des événements de sécurité (SIEM).",
+      "evidence": ""
+    },
+    "RS.AN-3.1": {
+      "code": "RS.AN-3.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "RS.AN-3.2": {
+      "code": "RS.AN-3.2",
+      "guidance": "Envisagez de déterminer la cause d’origine d'un incident. Si nécessaire, utilisez l'analyse forensique des informations recueillies/des informations sur les événements de cybersécurité pour y parvenir.",
+      "evidence": ""
+    },
+    "RS.AN-4.1": {
+      "code": "RS.AN-4.1",
+      "guidance": "• Il convient d’envisagée de déterminer les causes d'un incident de sécurité de l'information/cybersécurité et de mettre en œuvre une action corrective afin que l'incident ne se reproduise plus ou ne se reproduise pas ailleurs. • Il convient que l'efficacité de toute mesure corrective prise soit examinée. \n• Il convient que les actions correctives soient adaptées aux effets de l'incident de sécurité de l'information/cybersécurité rencontré.",
+      "evidence": ""
+    },
+    "RS.AN-5.1": {
+      "code": "RS.AN-5.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "RS.AN-5.2": {
+      "code": "RS.AN-5.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "RS.MI-1.1": {
+      "code": "RS.MI-1.1",
+      "guidance": "Une acceptation des risques documentée concerne les risques que l'organisation évalue comme non dangereux pour les systèmes critiques de l'organisation et pour lesquels le propriétaire du risque accepte formellement le risque (en relation avec l'appétit de l'organisation pour le risque).",
+      "evidence": ""
+    },
+    "RS.IM-1.1": {
+      "code": "RS.IM-1.1",
+      "guidance": "Envisagez de réunir les personnes concernées après chaque incident et réfléchissez ensemble aux moyens d'améliorer ce qui s'est passé, comment cela s'est passé, comment nous avons réagi, comment cela aurait pu mieux se passer, ce qui devrait être fait pour éviter que cela ne se reproduise, etc.",
+      "evidence": ""
+    },
+    "RS.IM-1.2": {
+      "code": "RS.IM-1.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "RS.IM-2.1": {
+      "code": "RS.IM-2.1",
+      "guidance": "Le contexte de l'organisation concerne la structure organisationnelle, ses systèmes critiques, les vecteurs d'attaque, les nouvelles menaces, les améliorations technologiques, l'environnement d'exploitation, les problèmes rencontrés lors de la mise en œuvre/exécution/test du plan et les enseignements tirés.",
+      "evidence": ""
+    },
+    "RC.RP-1.1": {
+      "code": "RC.RP-1.1",
+      "guidance": "• Il convient qu’un processus soit élaboré pour déterminer les mesures immédiates à prendre en cas d'incendie, d'urgence médicale, de cambriolage, de catastrophe naturelle ou d'incident de sécurité informatique.\n• Il convient que ce processus prenne en compte : \n\to Rôles et responsabilités, y compris qui prend la décision de lancer les procédures de rétablissement et qui sera le contact avec les parties prenantes externes appropriées. \n\to Ce qu'il faut faire avec les informations et les systèmes d'information de l'organisation en cas d'incident. Cela comprend l'arrêt ou le verrouillage des ordinateurs, le déplacement vers un site de secours, le retrait physique des documents importants, etc. \n\to Qui appeler en cas d'incident.",
+      "evidence": ""
+    },
+    "RC.RP-1.2": {
+      "code": "RC.RP-1.2",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "RC.IM-1.1": {
+      "code": "RC.IM-1.1",
+      "guidance": "Aucune orientation supplémentaire sur ce sujet.",
+      "evidence": ""
+    },
+    "RC.CO-1.1": {
+      "code": "RC.CO-1.1",
+      "guidance": "La gestion des relations publiques peut comprendre, par exemple, la gestion des interactions avec les médias, la coordination et l'enregistrement de toutes les demandes d'interviews, le traitement et le triage des appels téléphoniques et des demandes par e-mail, la mise en relation des demandes des médias avec les experts internes appropriés et disponibles qui sont prêts à être interviewés, le filtrage de toutes les informations fournies aux médias, l'assurance que le personnel connaît bien les politiques en matière de relations publiques et de confidentialité.",
+      "evidence": ""
+    },
+    "RC.CO-1.2": {
+      "code": "RC.CO-1.2",
+      "guidance": "Il convient que le responsable des relations publiques envisage l'utilisation de contacts externes prédéfinis (par exemple, la presse, les régulateurs, les groupes d'intérêt).",
+      "evidence": ""
+    },
+    "RC.CO-2.1": {
+      "code": "RC.CO-2.1",
+      "guidance": "Les stratégies de réponse aux crises comprennent, par exemple, des actions visant à déterminer les attributions de la crise, à modifier les perceptions de l'organisation en crise et à réduire l'effet négatif généré par la crise.",
+      "evidence": ""
+    },
+    "RC.CO-3.1": {
+      "code": "RC.CO-3.1",
+      "guidance": "La communication des activités de rétablissement à toutes les parties prenantes concernées ne s'applique qu'aux entités soumises à la législation NIS.",
+      "evidence": ""
+    }
+  },
+  "controls": {
+    "ccb-cff-id-am-1-1": "ID.AM-1.1",
+    "ccb-cff-id-am-1-2": "ID.AM-1.2",
+    "ccb-cff-id-am-1-3": "ID.AM-1.3",
+    "ccb-cff-id-am-1-4": "ID.AM-1.4",
+    "ccb-cff-id-am-2-1": "ID.AM-2.1",
+    "ccb-cff-id-am-2-2": "ID.AM-2.2",
+    "ccb-cff-id-am-2-3": "ID.AM-2.3",
+    "ccb-cff-id-am-2-4": "ID.AM-2.4",
+    "ccb-cff-id-am-2-5": "ID.AM-2.5",
+    "ccb-cff-id-am-3-1": "ID.AM-3.1",
+    "ccb-cff-id-am-3-2": "ID.AM-3.2",
+    "ccb-cff-id-am-3-3": "ID.AM-3.3",
+    "ccb-cff-id-am-4-1": "ID.AM-4.1",
+    "ccb-cff-id-am-4-2": "ID.AM-4.2",
+    "ccb-cff-id-am-5-1": "ID.AM-5.1",
+    "ccb-cff-id-am-6-1": "ID.AM-6.1",
+    "ccb-cff-id-am-6-2": "ID.AM-6.2",
+    "ccb-cff-id-be-1-1": "ID.BE-1.1",
+    "ccb-cff-id-be-1-2": "ID.BE-1.2",
+    "ccb-cff-id-be-2-1": "ID.BE-2.1",
+    "ccb-cff-id-be-3-1": "ID.BE-3.1",
+    "ccb-cff-id-be-4-1": "ID.BE-4.1",
+    "ccb-cff-id-be-5-1": "ID.BE-5.1",
+    "ccb-cff-id-be-5-2": "ID.BE-5.2",
+    "ccb-cff-id-be-5-3": "ID.BE-5.3",
+    "ccb-cff-id-gv-1-1": "ID.GV-1.1",
+    "ccb-cff-id-gv-1-2": "ID.GV-1.2",
+    "ccb-cff-id-gv-3-1": "ID.GV-3.1",
+    "ccb-cff-id-gv-3-2": "ID.GV-3.2",
+    "ccb-cff-id-gv-4-1": "ID.GV-4.1",
+    "ccb-cff-id-gv-4-2": "ID.GV-4.2",
+    "ccb-cff-id-ra-1-1": "ID.RA-1.1",
+    "ccb-cff-id-ra-1-2": "ID.RA-1.2",
+    "ccb-cff-id-ra-1-3": "ID.RA-1.3",
+    "ccb-cff-id-ra-2-1": "ID.RA-2.1",
+    "ccb-cff-id-ra-2-2": "ID.RA-2.2",
+    "ccb-cff-id-ra-5-1": "ID.RA-5.1",
+    "ccb-cff-id-ra-5-2": "ID.RA-5.2",
+    "ccb-cff-id-ra-5-3": "ID.RA-5.3",
+    "ccb-cff-id-ra-6-1": "ID.RA-6.1",
+    "ccb-cff-id-rm-1-1": "ID.RM-1.1",
+    "ccb-cff-id-rm-2-1": "ID.RM-2.1",
+    "ccb-cff-id-rm-3-1": "ID.RM-3.1",
+    "ccb-cff-id-sc-1-1": "ID.SC-1.1",
+    "ccb-cff-id-sc-2-1": "ID.SC-2.1",
+    "ccb-cff-id-sc-2-2": "ID.SC-2.2",
+    "ccb-cff-id-sc-3-1": "ID.SC-3.1",
+    "ccb-cff-id-sc-3-2": "ID.SC-3.2",
+    "ccb-cff-id-sc-3-3": "ID.SC-3.3",
+    "ccb-cff-id-sc-4-1": "ID.SC-4.1",
+    "ccb-cff-id-sc-4-2": "ID.SC-4.2",
+    "ccb-cff-id-sc-5-1": "ID.SC-5.1",
+    "ccb-cff-id-sc-5-2": "ID.SC-5.2",
+    "ccb-cff-pr-ac-1-1": "PR.AC-1.1",
+    "ccb-cff-pr-ac-1-2": "PR.AC-1.2",
+    "ccb-cff-pr-ac-1-3": "PR.AC-1.3",
+    "ccb-cff-pr-ac-1-4": "PR.AC-1.4",
+    "ccb-cff-pr-ac-1-5": "PR.AC-1.5",
+    "ccb-cff-pr-ac-2-1": "PR.AC-2.1",
+    "ccb-cff-pr-ac-2-2": "PR.AC-2.2",
+    "ccb-cff-pr-ac-2-3": "PR.AC-2.3",
+    "ccb-cff-pr-ac-2-4": "PR.AC-2.4",
+    "ccb-cff-pr-ac-3-1": "PR.AC-3.1",
+    "ccb-cff-pr-ac-3-2": "PR.AC-3.2",
+    "ccb-cff-pr-ac-3-3": "PR.AC-3.3",
+    "ccb-cff-r-ac-3-4": "R.AC-3.4",
+    "ccb-cff-r-ac-3-5": "R.AC-3.5",
+    "ccb-cff-pr-ac-4-1": "PR.AC-4.1",
+    "ccb-cff-pr-ac-4-2": "PR.AC-4.2",
+    "ccb-cff-pr-ac-4-3": "PR.AC-4.3",
+    "ccb-cff-pr-ac-4-4": "PR.AC-4.4",
+    "ccb-cff-pr-ac-4-5": "PR.AC-4.5",
+    "ccb-cff-pr-ac-4-6": "PR.AC-4.6",
+    "ccb-cff-pr-ac-4-7": "PR.AC-4.7",
+    "ccb-cff-pr-ac-4-8": "PR.AC-4.8",
+    "ccb-cff-pr-ac-4-9": "PR.AC-4.9",
+    "ccb-cff-pr-ac-5-1": "PR.AC-5.1",
+    "ccb-cff-pr-ac-5-2": "PR.AC-5.2",
+    "ccb-cff-pr-ac-5-3": "PR.AC-5.3",
+    "ccb-cff-pr-ac-5-4": "PR.AC-5.4",
+    "ccb-cff-pr-ac-5-5": "PR.AC-5.5",
+    "ccb-cff-pr-ac-5-6": "PR.AC-5.6",
+    "ccb-cff-pr-ac-6-1": "PR.AC-6.1",
+    "ccb-cff-pr-ac-6-2": "PR.AC-6.2",
+    "ccb-cff-pr-ac-7-1": "PR.AC-7.1",
+    "ccb-cff-pr-at-1-1": "PR.AT-1.1",
+    "ccb-cff-pr-at-1-2": "PR.AT-1.2",
+    "ccb-cff-pr-at-1-3": "PR.AT-1.3",
+    "ccb-cff-pr-at-2-1": "PR.AT-2.1",
+    "ccb-cff-pr-at-3-1": "PR.AT-3.1",
+    "ccb-cff-pr-at-3-2": "PR.AT-3.2",
+    "ccb-cff-pr-at-3-3": "PR.AT-3.3",
+    "ccb-cff-pr-at-3-4": "PR.AT-3.4",
+    "ccb-cff-pr-at-4-1": "PR.AT-4.1",
+    "ccb-cff-pr-at-5-1": "PR.AT-5.1",
+    "ccb-cff-pr-ds-1-1": "PR.DS-1.1",
+    "ccb-cff-pr-ds-2-1": "PR.DS-2.1",
+    "ccb-cff-pr-ds-3-1": "PR.DS-3.1",
+    "ccb-cff-pr-ds-3-2": "PR.DS-3.2",
+    "ccb-cff-pr-ds-3-3": "PR.DS-3.3",
+    "ccb-cff-pr-ds-3-4": "PR.DS-3.4",
+    "ccb-cff-pr-ds-4-1": "PR.DS-4.1",
+    "ccb-cff-pr-ds-4-2": "PR.DS-4.2",
+    "ccb-cff-pr-ds-4-3": "PR.DS-4.3",
+    "ccb-cff-pr-ds-5-1": "PR.DS-5.1",
+    "ccb-cff-pr-ds-6-1": "PR.DS-6.1",
+    "ccb-cff-pr-ds-6-2": "PR.DS-6.2",
+    "ccb-cff-pr-ds-6-3": "PR.DS-6.3",
+    "ccb-cff-pr-ds-7-1": "PR.DS-7.1",
+    "ccb-cff-pr-ds-8-1": "PR.DS-8.1",
+    "ccb-cff-pr-ds-8-2": "PR.DS-8.2",
+    "ccb-cff-pr-ip-1-1": "PR.IP-1.1",
+    "ccb-cff-pr-ip-1-2": "PR.IP-1.2",
+    "ccb-cff-pr-ip-2-1": "PR.IP-2.1",
+    "ccb-cff-pr-ip-2-2": "PR.IP-2.2",
+    "ccb-cff-pr-ip-3-1": "PR.IP-3.1",
+    "ccb-cff-pr-ip-3-2": "PR.IP-3.2",
+    "ccb-cff-pr-ip-4-1": "PR.IP-4.1",
+    "ccb-cff-pr-ip-4-2": "PR.IP-4.2",
+    "ccb-cff-pr-ip-4-3": "PR.IP-4.3",
+    "ccb-cff-pr-ip-4-4": "PR.IP-4.4",
+    "ccb-cff-pr-ip-4-5": "PR.IP-4.5",
+    "ccb-cff-pr-ip-5-1": "PR.IP-5.1",
+    "ccb-cff-pr-ip-5-2": "PR.IP-5.2",
+    "ccb-cff-pr-ip-6-1": "PR.IP-6.1",
+    "ccb-cff-pr-ip-6-2": "PR.IP-6.2",
+    "ccb-cff-pr-ip-7-1": "PR.IP-7.1",
+    "ccb-cff-pr-ip-7-2": "PR.IP-7.2",
+    "ccb-cff-pr-ip-7-3": "PR.IP-7.3",
+    "ccb-cff-pr-ip-8-1": "PR.IP-8.1",
+    "ccb-cff-pr-ip-8-2": "PR.IP-8.2",
+    "ccb-cff-pr-ip-8-3": "PR.IP-8.3",
+    "ccb-cff-pr-ip-9-1": "PR.IP-9.1",
+    "ccb-cff-pr-ip-9-2": "PR.IP-9.2",
+    "ccb-cff-pr-ip-11-1": "PR.IP-11.1",
+    "ccb-cff-pr-ip-11-2": "PR.IP-11.2",
+    "ccb-cff-pr-ip-12-1": "PR.IP-12.1",
+    "ccb-cff-pr-ma-1-1": "PR.MA-1.1",
+    "ccb-cff-pr-ma-1-2": "PR.MA-1.2",
+    "ccb-cff-pr-ma-1-3": "PR.MA-1.3",
+    "ccb-cff-pr-ma-1-4": "PR.MA-1.4",
+    "ccb-cff-pr-ma-1-5": "PR.MA-1.5",
+    "ccb-cff-pr-ma-1-6": "PR.MA-1.6",
+    "ccb-cff-pr-ma-1-7": "PR.MA-1.7",
+    "ccb-cff-pr-ma-2-1": "PR.MA-2.1",
+    "ccb-cff-pr-ma-2-2": "PR.MA-2.2",
+    "ccb-cff-pr-ma-2-3": "PR.MA-2.3",
+    "ccb-cff-pr-pt-1-1": "PR.PT-1.1",
+    "ccb-cff-pr-pt-1-2": "PR.PT-1.2",
+    "ccb-cff-pr-pt-1-3": "PR.PT-1.3",
+    "ccb-cff-pr-pt-1-4": "PR.PT-1.4",
+    "ccb-cff-pr-pt-2-1": "PR.PT-2.1",
+    "ccb-cff-pr-pt-2-2": "PR.PT-2.2",
+    "ccb-cff-pr-pt-2-3": "PR.PT-2.3",
+    "ccb-cff-pr-pt-3-1": "PR.PT-3.1",
+    "ccb-cff-pr-pt-3-2": "PR.PT-3.2",
+    "ccb-cff-pr-pt-3-3": "PR.PT-3.3",
+    "ccb-cff-pr-pt-4-1": "PR.PT-4.1",
+    "ccb-cff-pr-pt-4-2": "PR.PT-4.2",
+    "ccb-cff-pr-pt-4-3": "PR.PT-4.3",
+    "ccb-cff-de-ae-1-1": "DE.AE-1.1",
+    "ccb-cff-de-ae-2-1": "DE.AE-2.1",
+    "ccb-cff-de-ae-2-2": "DE.AE-2.2",
+    "ccb-cff-de-ae-3-1": "DE.AE-3.1",
+    "ccb-cff-de-ae-3-2": "DE.AE-3.2",
+    "ccb-cff-de-ae-3-3": "DE.AE-3.3",
+    "ccb-cff-de-ae-4-1": "DE.AE-4.1",
+    "ccb-cff-de-ae-5-1": "DE.AE-5.1",
+    "ccb-cff-de-ae-5-2": "DE.AE-5.2",
+    "ccb-cff-de-cm-1-1": "DE.CM-1.1",
+    "ccb-cff-de-cm-1-2": "DE.CM-1.2",
+    "ccb-cff-de-cm-1-3": "DE.CM-1.3",
+    "ccb-cff-de-cm-2-1": "DE.CM-2.1",
+    "ccb-cff-de-cm-2-2": "DE.CM-2.2",
+    "ccb-cff-de-cm-3-1": "DE.CM-3.1",
+    "ccb-cff-de-cm-3-2": "DE.CM-3.2",
+    "ccb-cff-de-cm-3-3": "DE.CM-3.3",
+    "ccb-cff-de-cm-4-1": "DE.CM-4.1",
+    "ccb-cff-de-cm-4-2": "DE.CM-4.2",
+    "ccb-cff-de-cm-5-1": "DE.CM-5.1",
+    "ccb-cff-de-cm-6-1": "DE.CM-6.1",
+    "ccb-cff-de-cm-6-2": "DE.CM-6.2",
+    "ccb-cff-de-cm-7-1": "DE.CM-7.1",
+    "ccb-cff-de-cm-7-2": "DE.CM-7.2",
+    "ccb-cff-de-cm-8-1": "DE.CM-8.1",
+    "ccb-cff-de-cm-8-2": "DE.CM-8.2",
+    "ccb-cff-de-dp-2-1": "DE.DP-2.1",
+    "ccb-cff-de-dp-3-1": "DE.DP-3.1",
+    "ccb-cff-de-dp-4-1": "DE.DP-4.1",
+    "ccb-cff-de-dp-5-1": "DE.DP-5.1",
+    "ccb-cff-de-dp-5-2": "DE.DP-5.2",
+    "ccb-cff-rs-rp-1-1": "RS.RP-1.1",
+    "ccb-cff-rs-co-1-1": "RS.CO-1.1",
+    "ccb-cff-rs-co-2-1": "RS.CO-2.1",
+    "ccb-cff-rs-co-2-2": "RS.CO-2.2",
+    "ccb-cff-rs-co-3-1": "RS.CO-3.1",
+    "ccb-cff-rs-co-3-2": "RS.CO-3.2",
+    "ccb-cff-rs-co-4-1": "RS.CO-4.1",
+    "ccb-cff-rs-co-5-1": "RS.CO-5.1",
+    "ccb-cff-rs-an-1-1": "RS.AN-1.1",
+    "ccb-cff-rs-an-1-2": "RS.AN-1.2",
+    "ccb-cff-rs-an-2-1": "RS.AN-2.1",
+    "ccb-cff-rs-an-2-2": "RS.AN-2.2",
+    "ccb-cff-rs-an-3-1": "RS.AN-3.1",
+    "ccb-cff-rs-an-3-2": "RS.AN-3.2",
+    "ccb-cff-rs-an-4-1": "RS.AN-4.1",
+    "ccb-cff-rs-an-5-1": "RS.AN-5.1",
+    "ccb-cff-rs-an-5-2": "RS.AN-5.2",
+    "ccb-cff-rs-mi-1-1": "RS.MI-1.1",
+    "ccb-cff-rs-im-1-1": "RS.IM-1.1",
+    "ccb-cff-rs-im-1-2": "RS.IM-1.2",
+    "ccb-cff-rs-im-2-1": "RS.IM-2.1",
+    "ccb-cff-rc-rp-1-1": "RC.RP-1.1",
+    "ccb-cff-rc-rp-1-2": "RC.RP-1.2",
+    "ccb-cff-rc-im-1-1": "RC.IM-1.1",
+    "ccb-cff-rc-co-1-1": "RC.CO-1.1",
+    "ccb-cff-rc-co-1-2": "RC.CO-1.2",
+    "ccb-cff-rc-co-2-1": "RC.CO-2.1",
+    "ccb-cff-rc-co-3-1": "RC.CO-3.1"
+  }
+}

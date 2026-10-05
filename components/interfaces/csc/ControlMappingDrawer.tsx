@@ -17,6 +17,7 @@ import {
   DrawerTitle,
 } from '@/components/shadcn/ui/drawer';
 import { getCscControls } from '@/lib/properties';
+import useControlGuidance from '@/hooks/useControlGuidance';
 
 interface ControlMappingDrawerProps {
   isOpen: boolean;
@@ -69,7 +70,12 @@ export default function ControlMappingDrawer({
   onLinkTask,
   onBulkLinkMapped,
 }: ControlMappingDrawerProps) {
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
+  const { guidance } = useControlGuidance(
+    currentFramework,
+    controlId,
+    i18n.language
+  );
   const [bulkLoading, setBulkLoading] = useState(false);
   const [perControlLoading, setPerControlLoading] = useState<string | null>(
     null
@@ -258,6 +264,35 @@ export default function ControlMappingDrawer({
         </DrawerHeader>
 
         <div className="flex-1 overflow-y-auto divide-y">
+          {guidance && (
+            <section className="p-4">
+              <details>
+                <summary className="cursor-pointer text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  {t(
+                    'csc-mapping.drawer.guidance-title',
+                    'Implementation Guidance'
+                  )}{' '}
+                  ({guidance.code})
+                </summary>
+                <p className="text-xs mt-2 leading-snug whitespace-pre-line">
+                  {guidance.guidance}
+                </p>
+                {guidance.evidence && (
+                  <>
+                    <h4 className="text-xs font-semibold mt-3">
+                      {t(
+                        'csc-mapping.drawer.evidence-title',
+                        'Examples of Evidence'
+                      )}
+                    </h4>
+                    <p className="text-xs mt-1 leading-snug whitespace-pre-line">
+                      {guidance.evidence}
+                    </p>
+                  </>
+                )}
+              </details>
+            </section>
+          )}
           <section className="p-4">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
