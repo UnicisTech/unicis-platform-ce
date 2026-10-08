@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
+import { getSession } from '@/lib/session';
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,24 +17,13 @@ export default async function handler(
     fleetPassword?: string;
   };
 
-  console.log('[EnrollComplete] Request received:', {
-    token: !!token,
-    email,
-    teamId,
-    hasPassword: !!fleetPassword,
-  });
-
-  // Support both token-based (from email link) and email+teamId (from direct login)
   if (!token && (!email || !teamId)) {
-    console.log('[EnrollComplete] Invalid payload - missing required fields');
     return res.status(400).json({ error: 'INVALID_PAYLOAD' });
   }
 
   let enrollment;
 
   if (token) {
-    // Find by token (enrollment flow from email)
-    console.log('[EnrollComplete] Looking up enrollment by token');
     enrollment = await prisma.fleetEnrollment.findUnique({
       where: { token },
       include: {
@@ -41,47 +31,45 @@ export default async function handler(
           select: {
             id: true,
             email: true,
-            firstName: true,
-            lastName: true,
           },
         },
       },
     });
 
     if (!enrollment) {
-      console.log('[EnrollComplete] Token not found');
       return res.status(404).json({ error: 'TOKEN_NOT_FOUND' });
     }
-    console.log(
-      '[EnrollComplete] Enrollment found by token for user:',
-      enrollment.user.email,
-      'status:',
-      enrollment.status
-    );
   } else {
-    // Find by email + teamId (direct login after password change)
-    console.log('[EnrollComplete] Looking up user by email:', email);
-    const user = await prisma.user.findUnique({
-      where: { email },
-      select: { id: true, email: true, firstName: true, lastName: true },
-    });
+    const session = await getSession(req, res);
+    const currentUserId = session?.user?.id;
 
-    if (!user) {
-      console.log('[EnrollComplete] User not found:', email);
-      return res.status(404).json({ error: 'USER_NOT_FOUND' });
+    if (!currentUserId) {
+      return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    console.log(
-      '[EnrollComplete] User found, looking up enrollment for userId:',
-      user.id,
-      'teamId:',
-      teamId
-    );
+    if (session.user.email?.toLowerCase() !== email?.trim().toLowerCase()) {
+      return res.status(403).json({ error: 'EMAIL_MISMATCH' });
+    }
+
+    const membership = await prisma.teamMember.findUnique({
+      where: {
+        teamId_userId: {
+          teamId: teamId!,
+          userId: currentUserId,
+        },
+      },
+      select: { id: true },
+    });
+
+    if (!membership) {
+      return res.status(403).json({ error: 'Insufficient permissions' });
+    }
+
     enrollment = await prisma.fleetEnrollment.findUnique({
       where: {
         teamId_userId: {
           teamId: teamId!,
-          userId: user.id,
+          userId: currentUserId,
         },
       },
       include: {
@@ -89,107 +77,96 @@ export default async function handler(
           select: {
             id: true,
             email: true,
-            firstName: true,
-            lastName: true,
           },
         },
       },
     });
 
     if (!enrollment) {
-      console.log(
-        '[EnrollComplete] No enrollment found for userId:',
-        user.id,
-        'teamId:',
-        teamId
-      );
       return res.status(404).json({ error: 'ENROLLMENT_NOT_FOUND' });
     }
-    console.log(
-      '[EnrollComplete] Enrollment found by email+teamId for user:',
-      enrollment.user.email,
-      'status:',
-      enrollment.status
-    );
   }
 
-  if (!enrollment) {
-    return res.status(404).json({ error: 'ENROLLMENT_NOT_FOUND' });
+  if (enrollment.expiresAt <= new Date()) {
+    return res.status(410).json({ error: 'ENROLLMENT_EXPIRED' });
   }
 
-  // Якщо вже COMPLETED - просто повертаємо success
   if (enrollment.status === 'COMPLETED') {
-    console.log(
-      '[EnrollComplete] Enrollment already completed for:',
-      enrollment.user.email
-    );
     return res.status(200).json({ success: true, alreadyCompleted: true });
   }
 
-  // Перевірка expiration - але дозволяємо completion навіть якщо expired
-  // оскільки користувач успішно авторизувався з правильним паролем
-  if (enrollment.expiresAt <= new Date()) {
-    console.log(
-      '[EnrollComplete] Enrollment expired but allowing completion since user authenticated'
-    );
+  if (!fleetPassword) {
+    return res.status(400).json({ error: 'FLEET_PASSWORD_REQUIRED' });
   }
 
-  // This endpoint should not create the account - it was already created by /api/fleet/enroll
-  // This endpoint is only called to complete the enrollment after user changes password
-  // The account and team membership were already set up in /api/fleet/enroll
+  const fleetBase = process.env.FLEET_API_URL;
 
-  console.log(
-    '[EnrollComplete] Updating enrollment status to COMPLETED for:',
-    enrollment.user.email
-  );
+  if (!fleetBase) {
+    return res.status(503).json({ error: 'FLEET_NOT_CONFIGURED' });
+  }
+
+  let loginRes: Response;
+
+  try {
+    loginRes = await fetch(`${fleetBase}/api/v1/account/access`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: enrollment.user.email,
+        password: fleetPassword,
+      }),
+    });
+  } catch (error) {
+    console.error('[EnrollComplete] Fleet login failed:', error);
+    return res.status(502).json({ error: 'FLEET_UNAVAILABLE' });
+  }
+
+  if (!loginRes.ok) {
+    return res.status(loginRes.status === 401 ? 401 : 502).json({
+      error:
+        loginRes.status === 401
+          ? 'INVALID_FLEET_CREDENTIALS'
+          : 'FLEET_LOGIN_FAILED',
+    });
+  }
+
+  const loginData = await loginRes.json().catch(() => null);
+
+  if (loginData?.is_temporary_password) {
+    return res.status(409).json({ error: 'FLEET_PASSWORD_CHANGE_REQUIRED' });
+  }
+
+  const fleetToken = loginData?.fleet_access?.secret_key;
+
+  if (!fleetToken) {
+    return res.status(502).json({ error: 'FLEET_TOKEN_MISSING' });
+  }
+
   await prisma.fleetEnrollment.update({
     where: { id: enrollment.id },
     data: { status: 'COMPLETED' },
   });
-  console.log('[EnrollComplete] Enrollment status updated successfully');
 
-  // Order Fleet secret for the enrolled user
-  const fleetBase = process.env.FLEET_API_URL;
-  const fleetServiceToken = process.env.FLEET_SERVICE_TOKEN;
-
-  if (fleetBase && fleetServiceToken) {
-    try {
-      // Login to get Fleet token
-      const loginRes = await fetch(`${fleetBase}/api/v1/account/access`, {
+  try {
+    const secretRes = await fetch(
+      `${fleetBase}/api/v1/fleet/teams/${enrollment.teamId}/secret`,
+      {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: enrollment.user.email,
-          password: fleetPassword,
-        }),
-      });
-
-      if (loginRes.ok) {
-        const loginData = await loginRes.json();
-        const fleetToken = loginData.fleet_access?.secret_key;
-
-        if (fleetToken) {
-          // Order secret
-          await fetch(
-            `${fleetBase}/api/v1/fleet/teams/${enrollment.teamId}/secret`,
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Unicis-Fleet-API-Authorization': `UnicisBearer ${fleetToken}`,
-              },
-            }
-          );
-          console.log(
-            '[EnrollComplete] Fleet secret ordered for user:',
-            enrollment.user.email
-          );
-        }
+        headers: {
+          'Content-Type': 'application/json',
+          'Unicis-Fleet-API-Authorization': `UnicisBearer ${fleetToken}`,
+        },
       }
-    } catch (error) {
-      console.error('[EnrollComplete] Failed to order Fleet secret:', error);
-      // Don't fail the enrollment if secret creation fails
+    );
+
+    if (!secretRes.ok) {
+      console.error(
+        '[EnrollComplete] Fleet secret order failed:',
+        secretRes.status
+      );
     }
+  } catch (error) {
+    console.error('[EnrollComplete] Failed to order Fleet secret:', error);
   }
 
   return res.status(200).json({ success: true });

@@ -73,6 +73,7 @@ export default async function middleware(req: NextRequest) {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            cookie: req.headers.get('cookie') ?? '',
           },
           body: JSON.stringify({ slug }),
         }

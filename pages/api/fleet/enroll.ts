@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
 import { sendFleetEnrollEmail } from '@/lib/email/sendFleetEnrollEmail';
+import { getSession } from '@/lib/session';
 import crypto from 'crypto';
 
 type Body = {
@@ -19,8 +20,8 @@ const generateTempPassword = () => {
 const mapPlatformRoleToFleetRole = (
   role?: string
 ): 'member' | 'admin' | 'owner' => {
-  if (role === 'owner') return 'owner';
-  if (role === 'admin') return 'admin';
+  if (role === 'OWNER') return 'owner';
+  if (role === 'ADMIN') return 'admin';
   return 'member';
 };
 
@@ -33,6 +34,13 @@ export default async function handler(
   }
 
   try {
+    const session = await getSession(req, res);
+    const currentUserId = session?.user?.id;
+
+    if (!currentUserId) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
     const fleetBase = process.env.FLEET_API_URL;
     const fleetServiceToken = process.env.FLEET_SERVICE_TOKEN;
 
@@ -50,6 +58,10 @@ export default async function handler(
 
     if (!email) {
       return res.status(400).json({ error: 'email is required' });
+    }
+
+    if (!teamId && !teamSlug && !teamName) {
+      return res.status(400).json({ error: 'team is required' });
     }
 
     const user = await prisma.user.findUnique({
@@ -74,6 +86,33 @@ export default async function handler(
 
     if (!team) {
       return res.status(404).json({ error: 'TEAM_NOT_FOUND' });
+    }
+
+    const currentUserMembership = await prisma.teamMember.findFirst({
+      where: {
+        teamId: team.id,
+        userId: currentUserId,
+        role: { in: ['OWNER', 'ADMIN'] },
+      },
+      select: { id: true },
+    });
+
+    if (!currentUserMembership) {
+      return res.status(403).json({ error: 'Insufficient permissions' });
+    }
+
+    const targetMembership = await prisma.teamMember.findUnique({
+      where: {
+        teamId_userId: {
+          teamId: team.id,
+          userId: user.id,
+        },
+      },
+      select: { role: true },
+    });
+
+    if (!targetMembership) {
+      return res.status(404).json({ error: 'USER_NOT_TEAM_MEMBER' });
     }
 
     const now = new Date();
@@ -126,15 +165,7 @@ export default async function handler(
       return res.status(500).json({ error: 'FLEET_CREATE_FAILED' });
     }
 
-    const membership = await prisma.teamMember.findFirst({
-      where: {
-        teamId: team.id,
-        userId: user.id,
-      },
-      select: { role: true },
-    });
-
-    const fleetRole = mapPlatformRoleToFleetRole(membership?.role);
+    const fleetRole = mapPlatformRoleToFleetRole(targetMembership.role);
 
     const memberRes = await fetch(
       `${fleetBase}/api/v1/team/${team.id}/service/members`,

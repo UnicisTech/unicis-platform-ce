@@ -147,18 +147,6 @@ const FleetConnectRequired = ({
 
         if (login?.is_temporary_password) {
           setTempPassword(fleetPassword);
-
-          if (enrollmentToken) {
-            await fetch('/api/fleet/enroll/complete', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                token: enrollmentToken,
-                fleetPassword,
-              }),
-            });
-          }
-
           setMustChangePassword(true);
           return;
         }
@@ -177,9 +165,7 @@ const FleetConnectRequired = ({
               err
             );
           });
-        }
-
-        if (teamId && user.email) {
+        } else if (teamId && user.email) {
           await fetch('/api/fleet/enroll/complete', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -273,9 +259,7 @@ const FleetConnectRequired = ({
               err
             );
           });
-        }
-
-        if (teamId && user.email) {
+        } else if (teamId && user.email) {
           await fetch('/api/fleet/enroll/complete', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
