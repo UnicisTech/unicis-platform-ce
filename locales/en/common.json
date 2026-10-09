@@ -484,6 +484,7 @@
   "unknown-question-type": "Unknown question type.",
   "course-presentation": "Course presentation",
   "unknown-course-type": "Unknown course type",
+  "unsupported-video-url": "Unsupported video URL. Use a YouTube or PeerTube link.",
   "iap-header": "~ {{brand}} - Interactive Awareness Program ~",
   "certificate-of-training": "Certificate of Training",
   "has-successfully-completed": "has successfully completed:",
@@ -1376,7 +1377,9 @@
       "link-tasks": "Link Tasks",
       "all-tasks-linked": "All tasks linked",
       "tasks-linked-count": "{{linked}}/{{total}} tasks linked",
-      "footer-hint": "Mappings are based on enabled frameworks in Cybersecurity Settings."
+      "footer-hint": "Mappings are based on enabled frameworks in Cybersecurity Settings.",
+      "guidance-title": "Implementation Guidance",
+      "evidence-title": "Examples of Evidence"
     },
     "matrix": {
       "title": "Mapping Matrix",

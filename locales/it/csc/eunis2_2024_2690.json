@@ -1,0 +1,2163 @@
+{
+  "sections": {
+    "section-1": {
+      "label": "Politica in materia di sicurezza delle reti e dei sistemi informativi"
+    },
+    "section-2": {
+      "label": "Politica di gestione dei rischi"
+    },
+    "section-3": {
+      "label": "Gestione degli incidenti"
+    },
+    "section-4": {
+      "label": "Continuità operativa e gestione delle crisi"
+    },
+    "section-5": {
+      "label": "Sicurezza della catena di approvvigionamento"
+    },
+    "section-6": {
+      "label": "Sicurezza nell'acquisizione, nello sviluppo e nella manutenzione delle reti e dei sistemi informativi"
+    },
+    "section-7": {
+      "label": "Politiche e procedure per valutare l'efficacia delle misure di gestione dei rischi di cibersicurezza"
+    },
+    "section-8": {
+      "label": "Pratiche informatiche di base e formazione in materia di sicurezza"
+    },
+    "section-9": {
+      "label": "Crittografia"
+    },
+    "section-10": {
+      "label": "Sicurezza delle risorse umane"
+    },
+    "section-11": {
+      "label": "Controllo dell'accesso"
+    },
+    "section-12": {
+      "label": "Gestione patrimoniale"
+    },
+    "section-13": {
+      "label": "Sicurezza fisica e ambientale"
+    }
+  },
+  "controls": {
+    "eu-nis2-ir-1-1-1-a": {
+      "code": "1.1.1.a",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Politica in materia di sicurezza delle reti e dei sistemi informativi\nAi fini dell'articolo 21, paragrafo 2, lettera a), della direttiva (UE) 2022/2555, la politica in materia di sicurezza delle reti e dei sistemi informativi:\ndefinire l'approccio dei soggetti pertinenti alla gestione della sicurezza della loro rete e dei loro sistemi informativi;"
+    },
+    "eu-nis2-ir-1-1-1-b": {
+      "code": "1.1.1.b",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Politica in materia di sicurezza delle reti e dei sistemi informativi\nAi fini dell'articolo 21, paragrafo 2, lettera a), della direttiva (UE) 2022/2555, la politica in materia di sicurezza delle reti e dei sistemi informativi:\nessere adeguati e complementari alla strategia e agli obiettivi aziendali dei soggetti pertinenti;"
+    },
+    "eu-nis2-ir-1-1-1-c": {
+      "code": "1.1.1.c",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Politica in materia di sicurezza delle reti e dei sistemi informativi\nAi fini dell'articolo 21, paragrafo 2, lettera a), della direttiva (UE) 2022/2555, la politica in materia di sicurezza delle reti e dei sistemi informativi:\ndefinire gli obiettivi di sicurezza delle reti e dell'informazione;"
+    },
+    "eu-nis2-ir-1-1-1-d": {
+      "code": "1.1.1.d",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Politica in materia di sicurezza delle reti e dei sistemi informativi\nAi fini dell'articolo 21, paragrafo 2, lettera a), della direttiva (UE) 2022/2555, la politica in materia di sicurezza delle reti e dei sistemi informativi:\nincludere l'impegno per il miglioramento continuo della sicurezza delle reti e dei sistemi informativi;"
+    },
+    "eu-nis2-ir-1-1-1-e": {
+      "code": "1.1.1.e",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Politica in materia di sicurezza delle reti e dei sistemi informativi\nAi fini dell'articolo 21, paragrafo 2, lettera a), della direttiva (UE) 2022/2555, la politica in materia di sicurezza delle reti e dei sistemi informativi:\nincludere l'impegno a fornire le risorse adeguate necessarie per la sua attuazione, compresi il personale, le risorse finanziarie, i processi, gli strumenti e le tecnologie necessari;"
+    },
+    "eu-nis2-ir-1-1-1-f": {
+      "code": "1.1.1.f",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Politica in materia di sicurezza delle reti e dei sistemi informativi\nAi fini dell'articolo 21, paragrafo 2, lettera a), della direttiva (UE) 2022/2555, la politica in materia di sicurezza delle reti e dei sistemi informativi:\nessere comunicati e riconosciuti dai dipendenti interessati e dalle parti esterne interessate;"
+    },
+    "eu-nis2-ir-1-1-1-g": {
+      "code": "1.1.1.g",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Politica in materia di sicurezza delle reti e dei sistemi informativi\nAi fini dell'articolo 21, paragrafo 2, lettera a), della direttiva (UE) 2022/2555, la politica in materia di sicurezza delle reti e dei sistemi informativi:\nstabilire i ruoli e le responsabilità di cui al punto 1.2;"
+    },
+    "eu-nis2-ir-1-1-1-h": {
+      "code": "1.1.1.h",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Politica in materia di sicurezza delle reti e dei sistemi informativi\nAi fini dell'articolo 21, paragrafo 2, lettera a), della direttiva (UE) 2022/2555, la politica in materia di sicurezza delle reti e dei sistemi informativi:\nelencare la documentazione da conservare e la durata di conservazione della documentazione;"
+    },
+    "eu-nis2-ir-1-1-1-i": {
+      "code": "1.1.1.i",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Politica in materia di sicurezza delle reti e dei sistemi informativi\nAi fini dell'articolo 21, paragrafo 2, lettera a), della direttiva (UE) 2022/2555, la politica in materia di sicurezza delle reti e dei sistemi informativi:\nelencare le politiche specifiche per argomento;"
+    },
+    "eu-nis2-ir-1-1-1-j": {
+      "code": "1.1.1.j",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Politica in materia di sicurezza delle reti e dei sistemi informativi\nAi fini dell'articolo 21, paragrafo 2, lettera a), della direttiva (UE) 2022/2555, la politica in materia di sicurezza delle reti e dei sistemi informativi:\nstabilisce indicatori e misure per monitorarne l'attuazione e lo stato attuale del livello di maturità della sicurezza delle reti e dell'informazione dei soggetti pertinenti;"
+    },
+    "eu-nis2-ir-1-1-1-k": {
+      "code": "1.1.1.k",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Politica in materia di sicurezza delle reti e dei sistemi informativi\nAi fini dell'articolo 21, paragrafo 2, lettera a), della direttiva (UE) 2022/2555, la politica in materia di sicurezza delle reti e dei sistemi informativi:\nindicare la data dell'approvazione formale da parte degli organi di gestione delle entità pertinenti (gli «organi di gestione»)."
+    },
+    "eu-nis2-ir-1-1-2": {
+      "code": "1.1.2",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Politica in materia di sicurezza delle reti e dei sistemi informativi\nLa politica di sicurezza delle reti e dei sistemi informativi è riesaminata e, se del caso, aggiornata dagli organi di gestione almeno una volta all'anno e ogniqualvolta si verifichino incidenti significativi o modifiche significative delle operazioni o dei rischi. L'esito delle revisioni è documentato."
+    },
+    "eu-nis2-ir-1-2-1": {
+      "code": "1.2.1",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Ruoli, responsabilità e poteri\nNell'ambito della loro politica in materia di sicurezza delle reti e dei sistemi informativi di cui al punto 1.1, i soggetti pertinenti stabiliscono le responsabilità e le autorità in materia di sicurezza delle reti e dei sistemi informativi e assegnano loro i ruoli, li assegnano in base alle esigenze dei soggetti pertinenti e li comunicano agli organi di gestione."
+    },
+    "eu-nis2-ir-1-2-2": {
+      "code": "1.2.2",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Ruoli, responsabilità e poteri\nI soggetti pertinenti impongono a tutto il personale e ai terzi di applicare la sicurezza delle reti e dei sistemi informativi conformemente alla politica di sicurezza delle reti e dell'informazione stabilita, alle politiche e alle procedure specifiche per argomento dei soggetti pertinenti."
+    },
+    "eu-nis2-ir-1-2-3": {
+      "code": "1.2.3",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Ruoli, responsabilità e poteri\nAlmeno una persona riferisce direttamente agli organi di gestione su questioni relative alla sicurezza delle reti e dei sistemi informativi."
+    },
+    "eu-nis2-ir-1-2-4": {
+      "code": "1.2.4",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Ruoli, responsabilità e poteri\nA seconda delle dimensioni dei soggetti pertinenti, la sicurezza delle reti e dei sistemi informativi è coperta da ruoli o mansioni specifici svolti in aggiunta ai ruoli esistenti."
+    },
+    "eu-nis2-ir-1-2-5": {
+      "code": "1.2.5",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Ruoli, responsabilità e poteri\nI doveri e le competenze contrastanti sono segregati, se del caso."
+    },
+    "eu-nis2-ir-1-2-6": {
+      "code": "1.2.6",
+      "section": "section-1",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Ruoli, responsabilità e poteri\nI ruoli, le responsabilità e le autorità sono riesaminati e, se del caso, aggiornati dagli organi di gestione a intervalli pianificati e in caso di incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-2-1-1": {
+      "code": "2.1.1",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Quadro di riferimento per la gestione dei rischi\nAi fini dell'articolo 21, paragrafo 2, lettera a), della direttiva (UE) 2022/2555, i soggetti pertinenti istituiscono e mantengono un quadro adeguato per la gestione dei rischi per individuare e affrontare i rischi posti alla sicurezza delle reti e dei sistemi informativi. I soggetti pertinenti effettuano e documentano le valutazioni dei rischi e, sulla base dei risultati, stabiliscono, attuano e monitorano un piano di trattamento dei rischi. I risultati della valutazione del rischio e i rischi residui sono accettati dagli organi di gestione o, se del caso, dalle persone che sono responsabili e hanno l'autorità di gestire i rischi, a condizione che i soggetti pertinenti garantiscano un'adeguata comunicazione agli organi di gestione."
+    },
+    "eu-nis2-ir-2-1-2": {
+      "code": "2.1.2",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Quadro di riferimento per la gestione dei rischi\nAi fini del punto 2.1.1, i soggetti pertinenti stabiliscono procedure per l'individuazione, l'analisi, la valutazione e il trattamento dei rischi («processo di gestione dei rischi di cibersicurezza»). Il processo di gestione dei rischi di cibersicurezza è parte integrante del processo generale di gestione dei rischi dei soggetti pertinenti, se del caso. Nell'ambito del processo di gestione dei rischi di cibersicurezza, i soggetti pertinenti:"
+    },
+    "eu-nis2-ir-2-1-2-a": {
+      "code": "2.1.2.a",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Quadro di riferimento per la gestione dei rischi\nAi fini del punto 2.1.1, i soggetti pertinenti stabiliscono procedure per l'individuazione, l'analisi, la valutazione e il trattamento dei rischi («processo di gestione dei rischi di cibersicurezza»). Il processo di gestione dei rischi di cibersicurezza è parte integrante del processo generale di gestione dei rischi dei soggetti pertinenti, se del caso. Nell'ambito del processo di gestione dei rischi di cibersicurezza, i soggetti pertinenti:\nseguire una metodologia di gestione del rischio;"
+    },
+    "eu-nis2-ir-2-1-2-b": {
+      "code": "2.1.2.b",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Quadro di riferimento per la gestione dei rischi\nAi fini del punto 2.1.1, i soggetti pertinenti stabiliscono procedure per l'individuazione, l'analisi, la valutazione e il trattamento dei rischi («processo di gestione dei rischi di cibersicurezza»). Il processo di gestione dei rischi di cibersicurezza è parte integrante del processo generale di gestione dei rischi dei soggetti pertinenti, se del caso. Nell'ambito del processo di gestione dei rischi di cibersicurezza, i soggetti pertinenti:\nstabilire il livello di tolleranza al rischio in base alla propensione al rischio dei soggetti pertinenti;"
+    },
+    "eu-nis2-ir-2-1-2-c": {
+      "code": "2.1.2.c",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Quadro di riferimento per la gestione dei rischi\nAi fini del punto 2.1.1, i soggetti pertinenti stabiliscono procedure per l'individuazione, l'analisi, la valutazione e il trattamento dei rischi («processo di gestione dei rischi di cibersicurezza»). Il processo di gestione dei rischi di cibersicurezza è parte integrante del processo generale di gestione dei rischi dei soggetti pertinenti, se del caso. Nell'ambito del processo di gestione dei rischi di cibersicurezza, i soggetti pertinenti:\nstabilire e mantenere criteri di rischio pertinenti;"
+    },
+    "eu-nis2-ir-2-1-2-d": {
+      "code": "2.1.2.d",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Quadro di riferimento per la gestione dei rischi\nAi fini del punto 2.1.1, i soggetti pertinenti stabiliscono procedure per l'individuazione, l'analisi, la valutazione e il trattamento dei rischi («processo di gestione dei rischi di cibersicurezza»). Il processo di gestione dei rischi di cibersicurezza è parte integrante del processo generale di gestione dei rischi dei soggetti pertinenti, se del caso. Nell'ambito del processo di gestione dei rischi di cibersicurezza, i soggetti pertinenti:\nin linea con un approccio multirischio, individuare e documentare i rischi posti alla sicurezza delle reti e dei sistemi informativi, in particolare in relazione a terzi, e i rischi che potrebbero comportare perturbazioni della disponibilità, dell'integrità, dell'autenticità e della riservatezza della rete e dei sistemi informativi, compresa l'individuazione di un unico punto di guasto;"
+    },
+    "eu-nis2-ir-2-1-2-e": {
+      "code": "2.1.2.e",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Quadro di riferimento per la gestione dei rischi\nAi fini del punto 2.1.1, i soggetti pertinenti stabiliscono procedure per l'individuazione, l'analisi, la valutazione e il trattamento dei rischi («processo di gestione dei rischi di cibersicurezza»). Il processo di gestione dei rischi di cibersicurezza è parte integrante del processo generale di gestione dei rischi dei soggetti pertinenti, se del caso. Nell'ambito del processo di gestione dei rischi di cibersicurezza, i soggetti pertinenti:\nanalizzare i rischi posti alla sicurezza delle reti e dei sistemi informativi, compresi la minaccia, la probabilità, l'impatto e il livello di rischio, tenendo conto dell'intelligence sulle minacce informatiche e delle vulnerabilità;"
+    },
+    "eu-nis2-ir-2-1-2-f": {
+      "code": "2.1.2.f",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Quadro di riferimento per la gestione dei rischi\nAi fini del punto 2.1.1, i soggetti pertinenti stabiliscono procedure per l'individuazione, l'analisi, la valutazione e il trattamento dei rischi («processo di gestione dei rischi di cibersicurezza»). Il processo di gestione dei rischi di cibersicurezza è parte integrante del processo generale di gestione dei rischi dei soggetti pertinenti, se del caso. Nell'ambito del processo di gestione dei rischi di cibersicurezza, i soggetti pertinenti:\nvalutare i rischi identificati in base ai criteri di rischio;"
+    },
+    "eu-nis2-ir-2-1-2-g": {
+      "code": "2.1.2.g",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Quadro di riferimento per la gestione dei rischi\nAi fini del punto 2.1.1, i soggetti pertinenti stabiliscono procedure per l'individuazione, l'analisi, la valutazione e il trattamento dei rischi («processo di gestione dei rischi di cibersicurezza»). Il processo di gestione dei rischi di cibersicurezza è parte integrante del processo generale di gestione dei rischi dei soggetti pertinenti, se del caso. Nell'ambito del processo di gestione dei rischi di cibersicurezza, i soggetti pertinenti:\nindividuare e dare priorità alle opzioni e alle misure appropriate per il trattamento dei rischi;"
+    },
+    "eu-nis2-ir-2-1-2-h": {
+      "code": "2.1.2.h",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Quadro di riferimento per la gestione dei rischi\nAi fini del punto 2.1.1, i soggetti pertinenti stabiliscono procedure per l'individuazione, l'analisi, la valutazione e il trattamento dei rischi («processo di gestione dei rischi di cibersicurezza»). Il processo di gestione dei rischi di cibersicurezza è parte integrante del processo generale di gestione dei rischi dei soggetti pertinenti, se del caso. Nell'ambito del processo di gestione dei rischi di cibersicurezza, i soggetti pertinenti:\nmonitorare costantemente l'attuazione delle misure di trattamento dei rischi;"
+    },
+    "eu-nis2-ir-2-1-2-i": {
+      "code": "2.1.2.i",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Quadro di riferimento per la gestione dei rischi\nAi fini del punto 2.1.1, i soggetti pertinenti stabiliscono procedure per l'individuazione, l'analisi, la valutazione e il trattamento dei rischi («processo di gestione dei rischi di cibersicurezza»). Il processo di gestione dei rischi di cibersicurezza è parte integrante del processo generale di gestione dei rischi dei soggetti pertinenti, se del caso. Nell'ambito del processo di gestione dei rischi di cibersicurezza, i soggetti pertinenti:\nidentificare chi è responsabile dell'attuazione delle misure di trattamento dei rischi e quando dovrebbero essere attuate;"
+    },
+    "eu-nis2-ir-2-1-2-j": {
+      "code": "2.1.2.j",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Quadro di riferimento per la gestione dei rischi\nAi fini del punto 2.1.1, i soggetti pertinenti stabiliscono procedure per l'individuazione, l'analisi, la valutazione e il trattamento dei rischi («processo di gestione dei rischi di cibersicurezza»). Il processo di gestione dei rischi di cibersicurezza è parte integrante del processo generale di gestione dei rischi dei soggetti pertinenti, se del caso. Nell'ambito del processo di gestione dei rischi di cibersicurezza, i soggetti pertinenti:\nDocumentare in modo comprensibile le misure di trattamento dei rischi scelte in un piano di trattamento dei rischi e i motivi che giustificano l'accettazione dei rischi residui."
+    },
+    "eu-nis2-ir-2-1-3": {
+      "code": "2.1.3",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Quadro di riferimento per la gestione dei rischi\nNell'individuare e stabilire le priorità delle opzioni e delle misure adeguate per il trattamento dei rischi, i soggetti pertinenti tengono conto dei risultati della valutazione dei rischi, dei risultati della procedura per valutare l'efficacia delle misure di gestione dei rischi di cibersicurezza, dei costi di attuazione in relazione al beneficio atteso, della classificazione delle attività di cui al punto 12.1 e dell'analisi dell'impatto sulle imprese di cui al punto 4.1.3."
+    },
+    "eu-nis2-ir-2-1-4": {
+      "code": "2.1.4",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Quadro di riferimento per la gestione dei rischi\nI soggetti pertinenti riesaminano e, se del caso, aggiornano i risultati della valutazione dei rischi e il piano di trattamento dei rischi a intervalli pianificati e almeno una volta all'anno e quando si verificano modifiche significative delle operazioni o dei rischi o incidenti significativi."
+    },
+    "eu-nis2-ir-2-2-1": {
+      "code": "2.2.1",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Monitoraggio della conformità\nI soggetti pertinenti riesaminano periodicamente la conformità alle loro politiche in materia di sicurezza delle reti e dei sistemi informativi, alle politiche, alle regole e agli standard specifici per argomento. Gli organi di gestione sono informati dello stato della sicurezza delle reti e dell'informazione sulla base delle verifiche di conformità mediante relazioni periodiche."
+    },
+    "eu-nis2-ir-2-2-2": {
+      "code": "2.2.2",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Monitoraggio della conformità\nI soggetti pertinenti istituiscono un sistema efficace di segnalazione della conformità che sia adeguato alle loro strutture, ai loro ambienti operativi e ai loro scenari di minacce. Il sistema di segnalazione di conformità è in grado di fornire agli organi di gestione una visione informata dello stato attuale della gestione dei rischi da parte dei soggetti pertinenti."
+    },
+    "eu-nis2-ir-2-2-3": {
+      "code": "2.2.3",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Monitoraggio della conformità\nI soggetti pertinenti effettuano il monitoraggio della conformità a intervalli pianificati e quando si verificano incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-2-3-1": {
+      "code": "2.3.1",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Revisione indipendente della sicurezza delle informazioni e delle reti\nI soggetti pertinenti riesaminano in modo indipendente il loro approccio alla gestione della sicurezza delle reti e dei sistemi informativi e alla sua attuazione, comprese le persone, i processi e le tecnologie."
+    },
+    "eu-nis2-ir-2-3-2": {
+      "code": "2.3.2",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Revisione indipendente della sicurezza delle informazioni e delle reti\nI soggetti pertinenti sviluppano e mantengono processi per condurre revisioni indipendenti, che devono essere effettuate da persone con adeguate competenze di revisione. Se l'esame indipendente è condotto da membri del personale dell'ente interessato, le persone che effettuano gli esami non devono essere nella linea di autorità del personale dell'area oggetto di esame. Se le dimensioni dei soggetti pertinenti non consentono tale separazione dei poteri di competenza, i soggetti pertinenti mettono in atto misure alternative per garantire l'imparzialità dei ricorsi."
+    },
+    "eu-nis2-ir-2-3-3": {
+      "code": "2.3.3",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Revisione indipendente della sicurezza delle informazioni e delle reti\nI risultati delle revisioni indipendenti, compresi i risultati del monitoraggio della conformità di cui al punto 2.2. e il monitoraggio e la misurazione di cui al punto 7 sono comunicati agli organi di gestione. Devono essere adottate azioni correttive o deve essere accettato il rischio residuo in base ai criteri di accettazione del rischio dei soggetti pertinenti."
+    },
+    "eu-nis2-ir-2-3-4": {
+      "code": "2.3.4",
+      "section": "section-2",
+      "control": "Articolo 21, paragrafo 2, lettera a)",
+      "requirements": "Revisione indipendente della sicurezza delle informazioni e delle reti\nLe revisioni indipendenti si svolgono a intervalli pianificati e quando si verificano incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-3-1-1": {
+      "code": "3.1.1",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Criteri di gestione degli incidenti\nAi fini dell'articolo 21, paragrafo 2, lettera b), della direttiva (UE) 2022/2555, i soggetti pertinenti stabiliscono e attuano una politica di gestione degli incidenti che stabilisce i ruoli, le responsabilità e le procedure per l'individuazione, l'analisi, il contenimento o la risposta, il recupero, la documentazione e la segnalazione tempestiva degli incidenti."
+    },
+    "eu-nis2-ir-3-1-2": {
+      "code": "3.1.2",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Criteri di gestione degli incidenti\nLa politica di cui al punto 3.1.1 deve essere coerente con il piano di continuità operativa e di ripristino in caso di disastro di cui al punto 4.1. La politica comprende:"
+    },
+    "eu-nis2-ir-3-1-2-a": {
+      "code": "3.1.2.a",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Criteri di gestione degli incidenti\nLa politica di cui al punto 3.1.1 deve essere coerente con il piano di continuità operativa e di ripristino in caso di disastro di cui al punto 4.1. La politica comprende:\nun sistema di categorizzazione degli incidenti coerente con la valutazione e la classificazione degli eventi effettuate a norma del punto 3.4.1;"
+    },
+    "eu-nis2-ir-3-1-2-b": {
+      "code": "3.1.2.b",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Criteri di gestione degli incidenti\nLa politica di cui al punto 3.1.1 deve essere coerente con il piano di continuità operativa e di ripristino in caso di disastro di cui al punto 4.1. La politica comprende:\npiani di comunicazione efficaci, anche per l'escalation e la segnalazione;"
+    },
+    "eu-nis2-ir-3-1-2-c": {
+      "code": "3.1.2.c",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Criteri di gestione degli incidenti\nLa politica di cui al punto 3.1.1 deve essere coerente con il piano di continuità operativa e di ripristino in caso di disastro di cui al punto 4.1. La politica comprende:\nassegnazione di ruoli per rilevare e rispondere in modo appropriato agli incidenti a dipendenti competenti;"
+    },
+    "eu-nis2-ir-3-1-2-d": {
+      "code": "3.1.2.d",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Criteri di gestione degli incidenti\nLa politica di cui al punto 3.1.1 deve essere coerente con il piano di continuità operativa e di ripristino in caso di disastro di cui al punto 4.1. La politica comprende:\nDocumenti da utilizzare nel corso del rilevamento e della risposta agli incidenti, come manuali di risposta agli incidenti, grafici di escalation, elenchi di contatti e modelli."
+    },
+    "eu-nis2-ir-3-1-3": {
+      "code": "3.1.3",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Criteri di gestione degli incidenti\nI ruoli, le responsabilità e le procedure stabiliti nella politica sono verificati e riesaminati e, se del caso, aggiornati a intervalli pianificati e dopo incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-3-2-1": {
+      "code": "3.2.1",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nI soggetti pertinenti stabiliscono procedure e utilizzano strumenti per monitorare e registrare le attività sulla loro rete e sui loro sistemi informativi al fine di individuare eventi che potrebbero essere considerati incidenti e rispondere di conseguenza per attenuarne l'impatto."
+    },
+    "eu-nis2-ir-3-2-2": {
+      "code": "3.2.2",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nPer quanto possibile, il monitoraggio è automatizzato ed effettuato in modo continuo o a intervalli periodici, compatibilmente con le capacità aziendali. I soggetti pertinenti svolgono le loro attività di monitoraggio in modo da ridurre al minimo i falsi positivi e i falsi negativi."
+    },
+    "eu-nis2-ir-3-2-3": {
+      "code": "3.2.3",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nSulla base delle procedure di cui al punto 3.2.1, i soggetti pertinenti conservano, documentano e rivedono i registri. I soggetti pertinenti redigono un elenco delle attività da sottoporre a registrazione sulla base dei risultati della valutazione del rischio effettuata a norma del punto 2.1. Se del caso, i registri devono includere:"
+    },
+    "eu-nis2-ir-3-2-3-a": {
+      "code": "3.2.3.a",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nSulla base delle procedure di cui al punto 3.2.1, i soggetti pertinenti conservano, documentano e rivedono i registri. I soggetti pertinenti redigono un elenco delle attività da sottoporre a registrazione sulla base dei risultati della valutazione del rischio effettuata a norma del punto 2.1. Se del caso, i registri devono includere:\ntraffico di rete in uscita e in entrata pertinente;"
+    },
+    "eu-nis2-ir-3-2-3-b": {
+      "code": "3.2.3.b",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nSulla base delle procedure di cui al punto 3.2.1, i soggetti pertinenti conservano, documentano e rivedono i registri. I soggetti pertinenti redigono un elenco delle attività da sottoporre a registrazione sulla base dei risultati della valutazione del rischio effettuata a norma del punto 2.1. Se del caso, i registri devono includere:\ncreazione, modifica o cancellazione di utenti della rete e dei sistemi informativi delle entità pertinenti ed estensione delle autorizzazioni;"
+    },
+    "eu-nis2-ir-3-2-3-c": {
+      "code": "3.2.3.c",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nSulla base delle procedure di cui al punto 3.2.1, i soggetti pertinenti conservano, documentano e rivedono i registri. I soggetti pertinenti redigono un elenco delle attività da sottoporre a registrazione sulla base dei risultati della valutazione del rischio effettuata a norma del punto 2.1. Se del caso, i registri devono includere:\naccesso a sistemi e applicazioni;"
+    },
+    "eu-nis2-ir-3-2-3-d": {
+      "code": "3.2.3.d",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nSulla base delle procedure di cui al punto 3.2.1, i soggetti pertinenti conservano, documentano e rivedono i registri. I soggetti pertinenti redigono un elenco delle attività da sottoporre a registrazione sulla base dei risultati della valutazione del rischio effettuata a norma del punto 2.1. Se del caso, i registri devono includere:\neventi relativi all'autenticazione;"
+    },
+    "eu-nis2-ir-3-2-3-e": {
+      "code": "3.2.3.e",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nSulla base delle procedure di cui al punto 3.2.1, i soggetti pertinenti conservano, documentano e rivedono i registri. I soggetti pertinenti redigono un elenco delle attività da sottoporre a registrazione sulla base dei risultati della valutazione del rischio effettuata a norma del punto 2.1. Se del caso, i registri devono includere:\ntutti gli accessi privilegiati ai sistemi e alle applicazioni e le attività svolte dagli account amministrativi;"
+    },
+    "eu-nis2-ir-3-2-3-f": {
+      "code": "3.2.3.f",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nSulla base delle procedure di cui al punto 3.2.1, i soggetti pertinenti conservano, documentano e rivedono i registri. I soggetti pertinenti redigono un elenco delle attività da sottoporre a registrazione sulla base dei risultati della valutazione del rischio effettuata a norma del punto 2.1. Se del caso, i registri devono includere:\naccesso o modifiche ai file critici di configurazione e backup;"
+    },
+    "eu-nis2-ir-3-2-3-g": {
+      "code": "3.2.3.g",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nSulla base delle procedure di cui al punto 3.2.1, i soggetti pertinenti conservano, documentano e rivedono i registri. I soggetti pertinenti redigono un elenco delle attività da sottoporre a registrazione sulla base dei risultati della valutazione del rischio effettuata a norma del punto 2.1. Se del caso, i registri devono includere:\nregistri degli eventi e registri di strumenti di sicurezza, come antivirus, sistemi di rilevamento delle intrusioni o firewall;"
+    },
+    "eu-nis2-ir-3-2-3-h": {
+      "code": "3.2.3.h",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nSulla base delle procedure di cui al punto 3.2.1, i soggetti pertinenti conservano, documentano e rivedono i registri. I soggetti pertinenti redigono un elenco delle attività da sottoporre a registrazione sulla base dei risultati della valutazione del rischio effettuata a norma del punto 2.1. Se del caso, i registri devono includere:\nutilizzo delle risorse di sistema, nonché delle loro prestazioni;"
+    },
+    "eu-nis2-ir-3-2-3-i": {
+      "code": "3.2.3.i",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nSulla base delle procedure di cui al punto 3.2.1, i soggetti pertinenti conservano, documentano e rivedono i registri. I soggetti pertinenti redigono un elenco delle attività da sottoporre a registrazione sulla base dei risultati della valutazione del rischio effettuata a norma del punto 2.1. Se del caso, i registri devono includere:\nl'accesso fisico alle strutture;"
+    },
+    "eu-nis2-ir-3-2-3-j": {
+      "code": "3.2.3.j",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nSulla base delle procedure di cui al punto 3.2.1, i soggetti pertinenti conservano, documentano e rivedono i registri. I soggetti pertinenti redigono un elenco delle attività da sottoporre a registrazione sulla base dei risultati della valutazione del rischio effettuata a norma del punto 2.1. Se del caso, i registri devono includere:\nl'accesso e l'utilizzo delle loro apparecchiature e dispositivi di rete;"
+    },
+    "eu-nis2-ir-3-2-3-k": {
+      "code": "3.2.3.k",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nSulla base delle procedure di cui al punto 3.2.1, i soggetti pertinenti conservano, documentano e rivedono i registri. I soggetti pertinenti redigono un elenco delle attività da sottoporre a registrazione sulla base dei risultati della valutazione del rischio effettuata a norma del punto 2.1. Se del caso, i registri devono includere:\nattivazione, arresto e pausa dei vari log;"
+    },
+    "eu-nis2-ir-3-2-3-l": {
+      "code": "3.2.3.l",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nSulla base delle procedure di cui al punto 3.2.1, i soggetti pertinenti conservano, documentano e rivedono i registri. I soggetti pertinenti redigono un elenco delle attività da sottoporre a registrazione sulla base dei risultati della valutazione del rischio effettuata a norma del punto 2.1. Se del caso, i registri devono includere:\neventi ambientali."
+    },
+    "eu-nis2-ir-3-2-4": {
+      "code": "3.2.4",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nI registri devono essere regolarmente esaminati per individuare eventuali tendenze insolite o indesiderate. Se del caso, i soggetti pertinenti stabiliscono valori appropriati per le soglie di allarme. Se i valori stabiliti per la soglia di allarme sono superati, deve essere attivato automaticamente un allarme, se del caso. I soggetti pertinenti provvedono affinché, in caso di allarme, sia avviata tempestivamente una risposta qualificata e adeguata."
+    },
+    "eu-nis2-ir-3-2-5": {
+      "code": "3.2.5",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nI soggetti interessati conservano ed eseguono il backup delle registrazioni per un periodo predefinito e le proteggono da accessi o modifiche non autorizzate."
+    },
+    "eu-nis2-ir-3-2-6": {
+      "code": "3.2.6",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nPer quanto possibile, i soggetti pertinenti garantiscono che tutti i sistemi dispongano di fonti temporali sincronizzate per essere in grado di correlare i log tra i sistemi per la valutazione degli eventi. I soggetti pertinenti redigono e tengono un elenco di tutti i beni che vengono registrati e garantiscono che i sistemi di monitoraggio e registrazione siano ridondanti. La disponibilità dei sistemi di monitoraggio e di registrazione è monitorata indipendentemente dai sistemi che controllano."
+    },
+    "eu-nis2-ir-3-2-7": {
+      "code": "3.2.7",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Monitoraggio e registrazione\nLe procedure e l'elenco delle attività registrate sono riesaminate e, se del caso, aggiornate a intervalli regolari e dopo incidenti significativi."
+    },
+    "eu-nis2-ir-3-3-1": {
+      "code": "3.3.1",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Segnalazione di eventi\nI soggetti pertinenti devono mettere in atto un meccanismo semplice che consenta ai propri dipendenti, fornitori e clienti di segnalare eventi sospetti."
+    },
+    "eu-nis2-ir-3-3-2": {
+      "code": "3.3.2",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Segnalazione di eventi\nI soggetti pertinenti comunicano, se del caso, il meccanismo di segnalazione degli eventi ai loro fornitori e clienti e formano regolarmente i loro dipendenti su come utilizzare il meccanismo."
+    },
+    "eu-nis2-ir-3-4-1": {
+      "code": "3.4.1",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Valutazione e classificazione degli eventi\nI soggetti pertinenti valutano gli eventi sospetti per determinare se costituiscano incidenti e, in caso affermativo, ne determinano la natura e la gravità."
+    },
+    "eu-nis2-ir-3-4-2-a": {
+      "code": "3.4.2.a",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Valutazione e classificazione degli eventi\nAi fini del punto 3.4.1, i soggetti pertinenti agiscono nel modo seguente:\neffettuare la valutazione sulla base di criteri predefiniti stabiliti in anticipo e su un triage per determinare le priorità di contenimento ed eliminazione degli incidenti;"
+    },
+    "eu-nis2-ir-3-4-2-b": {
+      "code": "3.4.2.b",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Valutazione e classificazione degli eventi\nAi fini del punto 3.4.1, i soggetti pertinenti agiscono nel modo seguente:\nvaluta l'esistenza di incidenti ricorrenti di cui all'articolo 4 del presente regolamento su base trimestrale;"
+    },
+    "eu-nis2-ir-3-4-2-c": {
+      "code": "3.4.2.c",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Valutazione e classificazione degli eventi\nAi fini del punto 3.4.1, i soggetti pertinenti agiscono nel modo seguente:\nesaminare i registri appropriati ai fini della valutazione e della classificazione degli eventi;"
+    },
+    "eu-nis2-ir-3-4-2-d": {
+      "code": "3.4.2.d",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Valutazione e classificazione degli eventi\nAi fini del punto 3.4.1, i soggetti pertinenti agiscono nel modo seguente:\nmettere in atto un processo per la correlazione e l'analisi dei log, e"
+    },
+    "eu-nis2-ir-3-4-2-e": {
+      "code": "3.4.2.e",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Valutazione e classificazione degli eventi\nAi fini del punto 3.4.1, i soggetti pertinenti agiscono nel modo seguente:\nrivalutare e riclassificare gli eventi nel caso in cui si rendano disponibili nuove informazioni o dopo l'analisi di informazioni precedentemente disponibili."
+    },
+    "eu-nis2-ir-3-5-1": {
+      "code": "3.5.1",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Risposta agli incidenti\nI soggetti pertinenti rispondono agli incidenti secondo procedure documentate e in modo tempestivo."
+    },
+    "eu-nis2-ir-3-5-2-a": {
+      "code": "3.5.2.a",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Risposta agli incidenti\nLe procedure di risposta agli incidenti comprendono le seguenti fasi:\ncontenimento dell'incidente, per prevenire la propagazione delle conseguenze dell'incidente;"
+    },
+    "eu-nis2-ir-3-5-2-b": {
+      "code": "3.5.2.b",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Risposta agli incidenti\nLe procedure di risposta agli incidenti comprendono le seguenti fasi:\neradicazione, per evitare che l'incidente prosegua o si ripresenti,"
+    },
+    "eu-nis2-ir-3-5-2-c": {
+      "code": "3.5.2.c",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Risposta agli incidenti\nLe procedure di risposta agli incidenti comprendono le seguenti fasi:\nrecupero dall'incidente, se necessario."
+    },
+    "eu-nis2-ir-3-5-3": {
+      "code": "3.5.3",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Risposta agli incidenti\nI soggetti pertinenti stabiliscono piani e procedure di comunicazione:"
+    },
+    "eu-nis2-ir-3-5-3-a": {
+      "code": "3.5.3.a",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Risposta agli incidenti\nI soggetti pertinenti stabiliscono piani e procedure di comunicazione:\ncon i gruppi di intervento per la sicurezza informatica in caso di incidente (CSIRT) o, se del caso, con le autorità competenti, in relazione alla notifica degli incidenti;"
+    },
+    "eu-nis2-ir-3-5-3-b": {
+      "code": "3.5.3.b",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Risposta agli incidenti\nI soggetti pertinenti stabiliscono piani e procedure di comunicazione:\nper la comunicazione tra i membri del personale dell'entità pertinente e per la comunicazione con le parti interessate esterne all'entità pertinente."
+    },
+    "eu-nis2-ir-3-5-4": {
+      "code": "3.5.4",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Risposta agli incidenti\nI soggetti pertinenti registrano le attività di risposta agli incidenti conformemente alle procedure di cui al punto 3.2.1 e registrano le prove."
+    },
+    "eu-nis2-ir-3-5-5": {
+      "code": "3.5.5",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Risposta agli incidenti\nI soggetti pertinenti testano a intervalli programmati le loro procedure di risposta agli incidenti."
+    },
+    "eu-nis2-ir-3-6-1": {
+      "code": "3.6.1",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Revisioni post-incidente\nSe del caso, i soggetti pertinenti effettuano revisioni successive all'incidente dopo il ripristino dagli incidenti. Le revisioni successive all'incidente devono individuare, ove possibile, la causa principale dell'incidente e tradursi in insegnamenti documentati tratti per ridurre il verificarsi e le conseguenze di incidenti futuri."
+    },
+    "eu-nis2-ir-3-6-2": {
+      "code": "3.6.2",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Revisioni post-incidente\nI soggetti pertinenti garantiscono che le revisioni successive all'incidente contribuiscano a migliorare il loro approccio alla sicurezza delle reti e dell'informazione, alle misure di trattamento dei rischi e alle procedure di gestione, individuazione e risposta agli incidenti."
+    },
+    "eu-nis2-ir-3-6-3": {
+      "code": "3.6.3",
+      "section": "section-3",
+      "control": "Articolo 21, paragrafo 2, lettera b)",
+      "requirements": "Revisioni post-incidente\nGli enti pertinenti esaminano, a intervalli pianificati, se gli incidenti hanno portato a revisioni successive all'incidente."
+    },
+    "eu-nis2-ir-4-1-1": {
+      "code": "4.1.1",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Piano di continuità operativa e disaster recovery\nAi fini dell'articolo 21, paragrafo 2, lettera c), della direttiva (UE) 2022/2555, i soggetti pertinenti stabiliscono e mantengono un piano di continuità operativa e di ripristino in caso di disastro da applicare in caso di incidenti."
+    },
+    "eu-nis2-ir-4-1-2": {
+      "code": "4.1.2",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Piano di continuità operativa e disaster recovery\nLe operazioni dei soggetti interessati devono essere ripristinate secondo il piano di continuità operativa e di ripristino in caso di disastro. Il piano si basa sui risultati della valutazione dei rischi effettuata a norma del punto 2.1 e comprende, se del caso, i seguenti elementi:"
+    },
+    "eu-nis2-ir-4-1-2-a": {
+      "code": "4.1.2.a",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Piano di continuità operativa e disaster recovery\nLe operazioni dei soggetti interessati devono essere ripristinate secondo il piano di continuità operativa e di ripristino in caso di disastro. Il piano si basa sui risultati della valutazione dei rischi effettuata a norma del punto 2.1 e comprende, se del caso, i seguenti elementi:\nscopo, ambito e pubblico;"
+    },
+    "eu-nis2-ir-4-1-2-b": {
+      "code": "4.1.2.b",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Piano di continuità operativa e disaster recovery\nLe operazioni dei soggetti interessati devono essere ripristinate secondo il piano di continuità operativa e di ripristino in caso di disastro. Il piano si basa sui risultati della valutazione dei rischi effettuata a norma del punto 2.1 e comprende, se del caso, i seguenti elementi:\nruoli e responsabilità;"
+    },
+    "eu-nis2-ir-4-1-2-c": {
+      "code": "4.1.2.c",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Piano di continuità operativa e disaster recovery\nLe operazioni dei soggetti interessati devono essere ripristinate secondo il piano di continuità operativa e di ripristino in caso di disastro. Il piano si basa sui risultati della valutazione dei rischi effettuata a norma del punto 2.1 e comprende, se del caso, i seguenti elementi:\ni contatti chiave e i canali di comunicazione (interni ed esterni);"
+    },
+    "eu-nis2-ir-4-1-2-d": {
+      "code": "4.1.2.d",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Piano di continuità operativa e disaster recovery\nLe operazioni dei soggetti interessati devono essere ripristinate secondo il piano di continuità operativa e di ripristino in caso di disastro. Il piano si basa sui risultati della valutazione dei rischi effettuata a norma del punto 2.1 e comprende, se del caso, i seguenti elementi:\ncondizioni per l'attivazione e la disattivazione del piano;"
+    },
+    "eu-nis2-ir-4-1-2-e": {
+      "code": "4.1.2.e",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Piano di continuità operativa e disaster recovery\nLe operazioni dei soggetti interessati devono essere ripristinate secondo il piano di continuità operativa e di ripristino in caso di disastro. Il piano si basa sui risultati della valutazione dei rischi effettuata a norma del punto 2.1 e comprende, se del caso, i seguenti elementi:\nordine di recupero delle operazioni;"
+    },
+    "eu-nis2-ir-4-1-2-f": {
+      "code": "4.1.2.f",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Piano di continuità operativa e disaster recovery\nLe operazioni dei soggetti interessati devono essere ripristinate secondo il piano di continuità operativa e di ripristino in caso di disastro. Il piano si basa sui risultati della valutazione dei rischi effettuata a norma del punto 2.1 e comprende, se del caso, i seguenti elementi:\npiani di risanamento per operazioni specifiche, compresi gli obiettivi di risanamento;"
+    },
+    "eu-nis2-ir-4-1-2-g": {
+      "code": "4.1.2.g",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Piano di continuità operativa e disaster recovery\nLe operazioni dei soggetti interessati devono essere ripristinate secondo il piano di continuità operativa e di ripristino in caso di disastro. Il piano si basa sui risultati della valutazione dei rischi effettuata a norma del punto 2.1 e comprende, se del caso, i seguenti elementi:\nrisorse necessarie, inclusi backup e ridondanze;"
+    },
+    "eu-nis2-ir-4-1-2-h": {
+      "code": "4.1.2.h",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Piano di continuità operativa e disaster recovery\nLe operazioni dei soggetti interessati devono essere ripristinate secondo il piano di continuità operativa e di ripristino in caso di disastro. Il piano si basa sui risultati della valutazione dei rischi effettuata a norma del punto 2.1 e comprende, se del caso, i seguenti elementi:\nripristino e ripresa delle attività da misure temporanee."
+    },
+    "eu-nis2-ir-4-1-3": {
+      "code": "4.1.3",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Piano di continuità operativa e disaster recovery\nI soggetti pertinenti effettuano un'analisi dell'impatto sulle attività per valutare l'impatto potenziale di gravi perturbazioni delle loro operazioni commerciali e, sulla base dei risultati dell'analisi dell'impatto sulle attività, stabiliscono i requisiti di continuità per la rete e i sistemi informativi."
+    },
+    "eu-nis2-ir-4-1-4": {
+      "code": "4.1.4",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Piano di continuità operativa e disaster recovery\nIl piano di continuità operativa e il piano di ripristino in caso di disastro sono testati, riesaminati e, se del caso, aggiornati a intervalli pianificati e a seguito di incidenti significativi o modifiche significative delle operazioni o dei rischi. I soggetti pertinenti garantiscono che i piani includano gli insegnamenti tratti da tali test."
+    },
+    "eu-nis2-ir-4-2-1": {
+      "code": "4.2.1",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nI soggetti pertinenti conservano copie di backup dei dati e mettono a disposizione risorse sufficienti, comprese le strutture, la rete e i sistemi informativi e il personale, per garantire un livello adeguato di ridondanza."
+    },
+    "eu-nis2-ir-4-2-2": {
+      "code": "4.2.2",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nSulla base dei risultati della valutazione dei rischi effettuata a norma del punto 2.1 e del piano di continuità operativa, i soggetti pertinenti stabiliscono piani di backup che comprendono:"
+    },
+    "eu-nis2-ir-4-2-2-a": {
+      "code": "4.2.2.a",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nSulla base dei risultati della valutazione dei rischi effettuata a norma del punto 2.1 e del piano di continuità operativa, i soggetti pertinenti stabiliscono piani di backup che comprendono:\ntempi di recupero;"
+    },
+    "eu-nis2-ir-4-2-2-b": {
+      "code": "4.2.2.b",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nSulla base dei risultati della valutazione dei rischi effettuata a norma del punto 2.1 e del piano di continuità operativa, i soggetti pertinenti stabiliscono piani di backup che comprendono:\ngaranzia che le copie di backup siano complete e accurate, compresi i dati di configurazione e i dati archiviati nell'ambiente del servizio di cloud computing;"
+    },
+    "eu-nis2-ir-4-2-2-c": {
+      "code": "4.2.2.c",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nSulla base dei risultati della valutazione dei rischi effettuata a norma del punto 2.1 e del piano di continuità operativa, i soggetti pertinenti stabiliscono piani di backup che comprendono:\nconservare copie di backup (online o offline) in una o più posizioni sicure, che non si trovino nella stessa rete del sistema e che si trovino a una distanza sufficiente per evitare eventuali danni derivanti da un disastro nel sito principale;"
+    },
+    "eu-nis2-ir-4-2-2-d": {
+      "code": "4.2.2.d",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nSulla base dei risultati della valutazione dei rischi effettuata a norma del punto 2.1 e del piano di continuità operativa, i soggetti pertinenti stabiliscono piani di backup che comprendono:\nadeguati controlli di accesso fisici e logici alle copie di backup, in conformità con il livello di classificazione degli asset;"
+    },
+    "eu-nis2-ir-4-2-2-e": {
+      "code": "4.2.2.e",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nSulla base dei risultati della valutazione dei rischi effettuata a norma del punto 2.1 e del piano di continuità operativa, i soggetti pertinenti stabiliscono piani di backup che comprendono:\nripristino dei dati dalle copie di backup;"
+    },
+    "eu-nis2-ir-4-2-2-f": {
+      "code": "4.2.2.f",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nSulla base dei risultati della valutazione dei rischi effettuata a norma del punto 2.1 e del piano di continuità operativa, i soggetti pertinenti stabiliscono piani di backup che comprendono:\nPeriodi di conservazione in base ai requisiti aziendali e normativi."
+    },
+    "eu-nis2-ir-4-2-3": {
+      "code": "4.2.3",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nI soggetti pertinenti effettuano controlli periodici dell'integrità delle copie di backup."
+    },
+    "eu-nis2-ir-4-2-4": {
+      "code": "4.2.4",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nSulla base dei risultati della valutazione dei rischi effettuata a norma del punto 2.1 e del piano di continuità operativa, i soggetti pertinenti garantiscono una sufficiente disponibilità di risorse mediante la ridondanza almeno parziale dei seguenti elementi:"
+    },
+    "eu-nis2-ir-4-2-4-a": {
+      "code": "4.2.4.a",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nSulla base dei risultati della valutazione dei rischi effettuata a norma del punto 2.1 e del piano di continuità operativa, i soggetti pertinenti garantiscono una sufficiente disponibilità di risorse mediante la ridondanza almeno parziale dei seguenti elementi:\nreti e sistemi informativi;"
+    },
+    "eu-nis2-ir-4-2-4-b": {
+      "code": "4.2.4.b",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nSulla base dei risultati della valutazione dei rischi effettuata a norma del punto 2.1 e del piano di continuità operativa, i soggetti pertinenti garantiscono una sufficiente disponibilità di risorse mediante la ridondanza almeno parziale dei seguenti elementi:\nbeni, compresi impianti, attrezzature e forniture;"
+    },
+    "eu-nis2-ir-4-2-4-c": {
+      "code": "4.2.4.c",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nSulla base dei risultati della valutazione dei rischi effettuata a norma del punto 2.1 e del piano di continuità operativa, i soggetti pertinenti garantiscono una sufficiente disponibilità di risorse mediante la ridondanza almeno parziale dei seguenti elementi:\npersonale dotato della responsabilità, dell'autorità e della competenza necessarie;"
+    },
+    "eu-nis2-ir-4-2-4-d": {
+      "code": "4.2.4.d",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nSulla base dei risultati della valutazione dei rischi effettuata a norma del punto 2.1 e del piano di continuità operativa, i soggetti pertinenti garantiscono una sufficiente disponibilità di risorse mediante la ridondanza almeno parziale dei seguenti elementi:\ncanali di comunicazione adeguati."
+    },
+    "eu-nis2-ir-4-2-5": {
+      "code": "4.2.5",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nSe del caso, i soggetti pertinenti garantiscono che il monitoraggio e l'adeguamento delle risorse, compresi gli impianti, i sistemi e il personale, siano debitamente informati dai requisiti di backup e di ridondanza."
+    },
+    "eu-nis2-ir-4-2-6": {
+      "code": "4.2.6",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione del backup e della ridondanza\nI soggetti pertinenti effettuano verifiche periodiche del ripristino delle copie di backup e delle ridondanze per garantire che, in condizioni di ripristino, si possa fare affidamento su di esse e coprano le copie, i processi e le conoscenze necessarie per eseguire un ripristino efficace. Gli enti pertinenti documentano i risultati delle prove e, se necessario, adottano misure correttive."
+    },
+    "eu-nis2-ir-4-3-1": {
+      "code": "4.3.1",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione delle crisi\nI soggetti pertinenti istituiscono un processo per la gestione delle crisi."
+    },
+    "eu-nis2-ir-4-3-2": {
+      "code": "4.3.2",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione delle crisi\nI soggetti pertinenti provvedono affinché il processo di gestione della crisi riguardi almeno i seguenti elementi:"
+    },
+    "eu-nis2-ir-4-3-2-a": {
+      "code": "4.3.2.a",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione delle crisi\nI soggetti pertinenti provvedono affinché il processo di gestione della crisi riguardi almeno i seguenti elementi:\nruoli e responsabilità del personale e, se del caso, dei fornitori e dei prestatori di servizi, specificando l'assegnazione dei ruoli in situazioni di crisi, comprese le misure specifiche da seguire;"
+    },
+    "eu-nis2-ir-4-3-2-b": {
+      "code": "4.3.2.b",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione delle crisi\nI soggetti pertinenti provvedono affinché il processo di gestione della crisi riguardi almeno i seguenti elementi:\nadeguati mezzi di comunicazione tra i soggetti interessati e le autorità competenti pertinenti;"
+    },
+    "eu-nis2-ir-4-3-2-c": {
+      "code": "4.3.2.c",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione delle crisi\nI soggetti pertinenti provvedono affinché il processo di gestione della crisi riguardi almeno i seguenti elementi:\nl'applicazione di misure adeguate per garantire il mantenimento della sicurezza delle reti e dei sistemi informativi in situazioni di crisi."
+    },
+    "eu-nis2-ir-4-3-2-p1": {
+      "code": "4.3.2 (1)",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione delle crisi\nI soggetti pertinenti provvedono affinché il processo di gestione della crisi riguardi almeno i seguenti elementi:\nAi fini della lettera b), il flusso di informazioni tra i soggetti pertinenti e le autorità competenti pertinenti comprende sia le comunicazioni obbligatorie, quali le segnalazioni di incidenti e le relative tempistiche, sia le comunicazioni non obbligatorie."
+    },
+    "eu-nis2-ir-4-3-3": {
+      "code": "4.3.3",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione delle crisi\nI soggetti pertinenti attuano un processo per la gestione e l'utilizzo delle informazioni ricevute dai CSIRT o, se del caso, dalle autorità competenti, in merito a incidenti, vulnerabilità, minacce o possibili misure di mitigazione."
+    },
+    "eu-nis2-ir-4-3-4": {
+      "code": "4.3.4",
+      "section": "section-4",
+      "control": "Articolo 21, paragrafo 2, lettera c)",
+      "requirements": "Gestione delle crisi\nI soggetti pertinenti testano, riesaminano e, se del caso, aggiornano il piano di gestione delle crisi su base periodica o a seguito di incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-5-1-1": {
+      "code": "5.1.1",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nAi fini dell'articolo 21, paragrafo 2, lettera d), della direttiva (UE) 2022/2555, i soggetti pertinenti istituiscono, attuano e applicano una politica di sicurezza della catena di approvvigionamento che disciplina le relazioni con i loro fornitori diretti e prestatori di servizi al fine di attenuare i rischi individuati per la sicurezza delle reti e dei sistemi informativi. Nella politica di sicurezza della catena di approvvigionamento, i soggetti pertinenti identificano il loro ruolo nella catena di approvvigionamento e lo comunicano ai loro fornitori diretti e prestatori di servizi."
+    },
+    "eu-nis2-ir-5-1-2": {
+      "code": "5.1.2",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nNell'ambito della politica di sicurezza della catena logistica di cui al punto 5.1.1, i soggetti pertinenti stabiliscono i criteri per la selezione e la stipula di contratti con i fornitori e i prestatori di servizi. Tali criteri comprendono i seguenti:"
+    },
+    "eu-nis2-ir-5-1-2-a": {
+      "code": "5.1.2.a",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nNell'ambito della politica di sicurezza della catena logistica di cui al punto 5.1.1, i soggetti pertinenti stabiliscono i criteri per la selezione e la stipula di contratti con i fornitori e i prestatori di servizi. Tali criteri comprendono i seguenti:\nle pratiche di cibersicurezza dei fornitori e dei prestatori di servizi, comprese le loro procedure di sviluppo sicuro;"
+    },
+    "eu-nis2-ir-5-1-2-b": {
+      "code": "5.1.2.b",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nNell'ambito della politica di sicurezza della catena logistica di cui al punto 5.1.1, i soggetti pertinenti stabiliscono i criteri per la selezione e la stipula di contratti con i fornitori e i prestatori di servizi. Tali criteri comprendono i seguenti:\nla capacità dei fornitori e dei prestatori di servizi di soddisfare le specifiche in materia di cibersicurezza stabilite dai soggetti pertinenti;"
+    },
+    "eu-nis2-ir-5-1-2-c": {
+      "code": "5.1.2.c",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nNell'ambito della politica di sicurezza della catena logistica di cui al punto 5.1.1, i soggetti pertinenti stabiliscono i criteri per la selezione e la stipula di contratti con i fornitori e i prestatori di servizi. Tali criteri comprendono i seguenti:\nla qualità e la resilienza complessive dei prodotti e dei servizi TIC e le misure di gestione dei rischi di cibersicurezza in essi integrate, compresi i rischi e il livello di classificazione dei prodotti e dei servizi TIC;"
+    },
+    "eu-nis2-ir-5-1-2-d": {
+      "code": "5.1.2.d",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nNell'ambito della politica di sicurezza della catena logistica di cui al punto 5.1.1, i soggetti pertinenti stabiliscono i criteri per la selezione e la stipula di contratti con i fornitori e i prestatori di servizi. Tali criteri comprendono i seguenti:\nla capacità dei soggetti pertinenti di diversificare le fonti di approvvigionamento e di limitare la dipendenza dal fornitore, se del caso."
+    },
+    "eu-nis2-ir-5-1-3": {
+      "code": "5.1.3",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nNell'elaborare la loro politica di sicurezza della catena di approvvigionamento, i soggetti pertinenti tengono conto dei risultati delle valutazioni coordinate dei rischi per la sicurezza delle catene di approvvigionamento critiche effettuate conformemente all'articolo 22, paragrafo 1, della direttiva (UE) 2022/2555, se del caso."
+    },
+    "eu-nis2-ir-5-1-4": {
+      "code": "5.1.4",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nSulla base della politica di sicurezza della catena di approvvigionamento e tenendo conto dei risultati della valutazione dei rischi effettuata conformemente al punto 2.1. del presente allegato, i soggetti pertinenti provvedono affinché i loro contratti con i fornitori e i prestatori di servizi specifichino, se del caso mediante accordi sul livello dei servizi, quanto segue:"
+    },
+    "eu-nis2-ir-5-1-4-a": {
+      "code": "5.1.4.a",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nSulla base della politica di sicurezza della catena di approvvigionamento e tenendo conto dei risultati della valutazione dei rischi effettuata conformemente al punto 2.1. del presente allegato, i soggetti pertinenti provvedono affinché i loro contratti con i fornitori e i prestatori di servizi specifichino, se del caso mediante accordi sul livello dei servizi, quanto segue:\ni requisiti di cibersicurezza per i fornitori o i prestatori di servizi, compresi i requisiti relativi alla sicurezza nell'acquisto di servizi o prodotti TIC di cui al punto 6.1;"
+    },
+    "eu-nis2-ir-5-1-4-b": {
+      "code": "5.1.4.b",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nSulla base della politica di sicurezza della catena di approvvigionamento e tenendo conto dei risultati della valutazione dei rischi effettuata conformemente al punto 2.1. del presente allegato, i soggetti pertinenti provvedono affinché i loro contratti con i fornitori e i prestatori di servizi specifichino, se del caso mediante accordi sul livello dei servizi, quanto segue:\nrequisiti in materia di consapevolezza, competenze e formazione e, se del caso, certificazioni richieste ai dipendenti dei fornitori o dei prestatori di servizi;"
+    },
+    "eu-nis2-ir-5-1-4-c": {
+      "code": "5.1.4.c",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nSulla base della politica di sicurezza della catena di approvvigionamento e tenendo conto dei risultati della valutazione dei rischi effettuata conformemente al punto 2.1. del presente allegato, i soggetti pertinenti provvedono affinché i loro contratti con i fornitori e i prestatori di servizi specifichino, se del caso mediante accordi sul livello dei servizi, quanto segue:\nrequisiti relativi alla verifica del background dei dipendenti dei fornitori e dei prestatori di servizi;"
+    },
+    "eu-nis2-ir-5-1-4-d": {
+      "code": "5.1.4.d",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nSulla base della politica di sicurezza della catena di approvvigionamento e tenendo conto dei risultati della valutazione dei rischi effettuata conformemente al punto 2.1. del presente allegato, i soggetti pertinenti provvedono affinché i loro contratti con i fornitori e i prestatori di servizi specifichino, se del caso mediante accordi sul livello dei servizi, quanto segue:\nl'obbligo per i fornitori e i prestatori di servizi di notificare, senza indebito ritardo, ai soggetti interessati gli incidenti che presentano un rischio per la sicurezza della rete e dei sistemi informativi di tali soggetti;"
+    },
+    "eu-nis2-ir-5-1-4-e": {
+      "code": "5.1.4.e",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nSulla base della politica di sicurezza della catena di approvvigionamento e tenendo conto dei risultati della valutazione dei rischi effettuata conformemente al punto 2.1. del presente allegato, i soggetti pertinenti provvedono affinché i loro contratti con i fornitori e i prestatori di servizi specifichino, se del caso mediante accordi sul livello dei servizi, quanto segue:\nil diritto di revisione contabile o il diritto di ricevere relazioni di revisione;"
+    },
+    "eu-nis2-ir-5-1-4-f": {
+      "code": "5.1.4.f",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nSulla base della politica di sicurezza della catena di approvvigionamento e tenendo conto dei risultati della valutazione dei rischi effettuata conformemente al punto 2.1. del presente allegato, i soggetti pertinenti provvedono affinché i loro contratti con i fornitori e i prestatori di servizi specifichino, se del caso mediante accordi sul livello dei servizi, quanto segue:\nl'obbligo per i fornitori e i prestatori di servizi di gestire le vulnerabilità che presentano un rischio per la sicurezza della rete e dei sistemi informativi dei soggetti interessati;"
+    },
+    "eu-nis2-ir-5-1-4-g": {
+      "code": "5.1.4.g",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nSulla base della politica di sicurezza della catena di approvvigionamento e tenendo conto dei risultati della valutazione dei rischi effettuata conformemente al punto 2.1. del presente allegato, i soggetti pertinenti provvedono affinché i loro contratti con i fornitori e i prestatori di servizi specifichino, se del caso mediante accordi sul livello dei servizi, quanto segue:\nrequisiti relativi al subappalto e, qualora i soggetti pertinenti consentano il subappalto, requisiti di cibersicurezza per i subappaltatori conformemente ai requisiti di cibersicurezza di cui alla lettera a);"
+    },
+    "eu-nis2-ir-5-1-4-h": {
+      "code": "5.1.4.h",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nSulla base della politica di sicurezza della catena di approvvigionamento e tenendo conto dei risultati della valutazione dei rischi effettuata conformemente al punto 2.1. del presente allegato, i soggetti pertinenti provvedono affinché i loro contratti con i fornitori e i prestatori di servizi specifichino, se del caso mediante accordi sul livello dei servizi, quanto segue:\nobblighi dei fornitori e dei prestatori di servizi alla risoluzione del contratto, quali il reperimento e l'eliminazione delle informazioni ottenute dai fornitori e dai prestatori di servizi nell'esercizio dei loro compiti."
+    },
+    "eu-nis2-ir-5-1-5": {
+      "code": "5.1.5",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nI soggetti pertinenti tengono conto degli elementi di cui ai punti 5.1.2 e 5.1.3. nell'ambito del processo di selezione di nuovi fornitori e prestatori di servizi, nonché nell'ambito del processo di approvvigionamento di cui al punto 6.1."
+    },
+    "eu-nis2-ir-5-1-6": {
+      "code": "5.1.6",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nI soggetti pertinenti riesaminano la politica di sicurezza della catena di approvvigionamento e monitorano, valutano e, se necessario, agiscono in seguito alle modifiche delle pratiche di cibersicurezza dei fornitori e dei prestatori di servizi, a intervalli pianificati e quando si verificano modifiche significative delle operazioni o dei rischi o incidenti significativi connessi alla fornitura di servizi di TIC o che hanno un impatto sulla sicurezza dei prodotti di TIC da parte di fornitori e prestatori di servizi."
+    },
+    "eu-nis2-ir-5-1-7-a": {
+      "code": "5.1.7.a",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nAi fini del punto 5.1.6, i soggetti interessati:\nmonitorare regolarmente le relazioni sull'attuazione degli accordi sul livello dei servizi, se del caso;"
+    },
+    "eu-nis2-ir-5-1-7-b": {
+      "code": "5.1.7.b",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nAi fini del punto 5.1.6, i soggetti interessati:\nesaminare gli incidenti relativi ai prodotti e ai servizi TIC da fornitori e prestatori di servizi;"
+    },
+    "eu-nis2-ir-5-1-7-c": {
+      "code": "5.1.7.c",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nAi fini del punto 5.1.6, i soggetti interessati:\nvalutare la necessità di revisioni non programmate e documentare i risultati in modo comprensibile;"
+    },
+    "eu-nis2-ir-5-1-7-d": {
+      "code": "5.1.7.d",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Politica di sicurezza della supply chain\nAi fini del punto 5.1.6, i soggetti interessati:\nanalizzare i rischi presentati dalle modifiche relative ai prodotti e ai servizi TIC da parte dei fornitori e dei prestatori di servizi e, se del caso, adottare tempestivamente misure di mitigazione."
+    },
+    "eu-nis2-ir-5-2-p1": {
+      "code": "5.2 (1)",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Elenco dei fornitori e dei prestatori di servizi\nI soggetti pertinenti tengono e tengono aggiornato un registro dei loro fornitori diretti e prestatori di servizi, tra cui:"
+    },
+    "eu-nis2-ir-5-2-a": {
+      "code": "5.2.a",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Elenco dei fornitori e dei prestatori di servizi\nI soggetti pertinenti tengono e tengono aggiornato un registro dei loro fornitori diretti e prestatori di servizi, tra cui:\npunti di contatto per ciascun fornitore diretto e fornitore di servizi;"
+    },
+    "eu-nis2-ir-5-2-b": {
+      "code": "5.2.b",
+      "section": "section-5",
+      "control": "Articolo 21, paragrafo 2, lettera d)",
+      "requirements": "Elenco dei fornitori e dei prestatori di servizi\nI soggetti pertinenti tengono e tengono aggiornato un registro dei loro fornitori diretti e prestatori di servizi, tra cui:\nun elenco dei prodotti TIC, dei servizi TIC e dei processi TIC forniti dal fornitore diretto o dal prestatore di servizi ai soggetti pertinenti."
+    },
+    "eu-nis2-ir-6-1-1": {
+      "code": "6.1.1",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza nell'acquisizione di servizi o prodotti TIC\nAi fini dell'articolo 21, paragrafo 2, lettera e), della direttiva (UE) 2022/2555, i soggetti pertinenti stabiliscono e attuano processi per gestire i rischi derivanti dall'acquisizione di servizi TIC o prodotti TIC per componenti critici per la sicurezza delle reti e dei sistemi informativi dei soggetti pertinenti, sulla base della valutazione dei rischi effettuata a norma del punto 2.1,  da fornitori o prestatori di servizi durante tutto il loro ciclo di vita."
+    },
+    "eu-nis2-ir-6-1-2-a": {
+      "code": "6.1.2.a",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza nell'acquisizione di servizi o prodotti TIC\nAi fini del punto 6.1.1., i processi di cui al punto 6.1.1. comprende:\nrequisiti di sicurezza da applicare ai servizi o ai prodotti TIC da acquistare;"
+    },
+    "eu-nis2-ir-6-1-2-b": {
+      "code": "6.1.2.b",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza nell'acquisizione di servizi o prodotti TIC\nAi fini del punto 6.1.1., i processi di cui al punto 6.1.1. comprende:\nrequisiti relativi agli aggiornamenti di sicurezza per l'intero ciclo di vita dei servizi TIC o dei prodotti TIC, o alla sostituzione dopo la fine del periodo di supporto;"
+    },
+    "eu-nis2-ir-6-1-2-c": {
+      "code": "6.1.2.c",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza nell'acquisizione di servizi o prodotti TIC\nAi fini del punto 6.1.1., i processi di cui al punto 6.1.1. comprende:\ninformazioni che descrivano i componenti hardware e software utilizzati nei servizi TIC o nei prodotti TIC;"
+    },
+    "eu-nis2-ir-6-1-2-d": {
+      "code": "6.1.2.d",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza nell'acquisizione di servizi o prodotti TIC\nAi fini del punto 6.1.1., i processi di cui al punto 6.1.1. comprende:\ninformazioni che descrivano le funzioni di cibersicurezza implementate dei servizi TIC o dei prodotti TIC e la configurazione necessaria per il loro funzionamento sicuro;"
+    },
+    "eu-nis2-ir-6-1-2-e": {
+      "code": "6.1.2.e",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza nell'acquisizione di servizi o prodotti TIC\nAi fini del punto 6.1.1., i processi di cui al punto 6.1.1. comprende:\nla garanzia che i servizi TIC o i prodotti TIC siano conformi ai requisiti di sicurezza di cui alla lettera a);"
+    },
+    "eu-nis2-ir-6-1-2-f": {
+      "code": "6.1.2.f",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza nell'acquisizione di servizi o prodotti TIC\nAi fini del punto 6.1.1., i processi di cui al punto 6.1.1. comprende:\nmetodi per convalidare che i servizi TIC o i prodotti TIC forniti siano conformi ai requisiti di sicurezza dichiarati, nonché la documentazione dei risultati della convalida."
+    },
+    "eu-nis2-ir-6-1-3": {
+      "code": "6.1.3",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza nell'acquisizione di servizi o prodotti TIC\nI soggetti pertinenti riesaminano e, se del caso, aggiornano le procedure a intervalli pianificati e quando si verificano incidenti significativi."
+    },
+    "eu-nis2-ir-6-2-1": {
+      "code": "6.2.1",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Ciclo di vita dello sviluppo sicuro\nPrima di sviluppare una rete e un sistema informativo, compreso il software, i soggetti pertinenti stabiliscono norme per lo sviluppo sicuro delle reti e dei sistemi informativi e le applicano quando sviluppano internamente le reti e i sistemi informativi o quando esternalizzano lo sviluppo delle reti e dei sistemi informativi. Le norme riguardano tutte le fasi di sviluppo, comprese le specifiche, la progettazione, lo sviluppo, l'attuazione e il collaudo."
+    },
+    "eu-nis2-ir-6-2-2-a": {
+      "code": "6.2.2.a",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Ciclo di vita dello sviluppo sicuro\nAi fini del punto 6.2.1, i soggetti interessati:\neffettuare un'analisi dei requisiti di sicurezza nelle fasi di specificazione e progettazione di qualsiasi progetto di sviluppo o acquisizione intrapreso dai soggetti pertinenti o per conto di tali soggetti;"
+    },
+    "eu-nis2-ir-6-2-2-b": {
+      "code": "6.2.2.b",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Ciclo di vita dello sviluppo sicuro\nAi fini del punto 6.2.1, i soggetti interessati:\napplicare i principi per l'ingegnerizzazione di sistemi sicuri e i principi di codifica sicura a qualsiasi attività di sviluppo dei sistemi informativi, come la promozione di architetture zero-trust basate sulla sicurezza informatica fin dalla progettazione;"
+    },
+    "eu-nis2-ir-6-2-2-c": {
+      "code": "6.2.2.c",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Ciclo di vita dello sviluppo sicuro\nAi fini del punto 6.2.1, i soggetti interessati:\nstabilire i requisiti di sicurezza relativi agli ambienti di sviluppo;"
+    },
+    "eu-nis2-ir-6-2-2-d": {
+      "code": "6.2.2.d",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Ciclo di vita dello sviluppo sicuro\nAi fini del punto 6.2.1, i soggetti interessati:\nstabilire e implementare processi di test di sicurezza nel ciclo di vita dello sviluppo;"
+    },
+    "eu-nis2-ir-6-2-2-e": {
+      "code": "6.2.2.e",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Ciclo di vita dello sviluppo sicuro\nAi fini del punto 6.2.1, i soggetti interessati:\nselezionare, proteggere e gestire in modo appropriato i dati dei test di sicurezza;"
+    },
+    "eu-nis2-ir-6-2-2-f": {
+      "code": "6.2.2.f",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Ciclo di vita dello sviluppo sicuro\nAi fini del punto 6.2.1, i soggetti interessati:\nsanificare e anonimizzare i dati dei test in base alla valutazione dei rischi effettuata ai sensi del punto 2.1."
+    },
+    "eu-nis2-ir-6-2-3": {
+      "code": "6.2.3",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Ciclo di vita dello sviluppo sicuro\nPer lo sviluppo esternalizzato di reti e sistemi informativi, i soggetti pertinenti applicano anche le politiche e le procedure di cui ai punti 5 e 6.1."
+    },
+    "eu-nis2-ir-6-2-4": {
+      "code": "6.2.4",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Ciclo di vita dello sviluppo sicuro\nI soggetti pertinenti riesaminano e, se necessario, aggiornano le loro norme in materia di sviluppo sicuro a intervalli programmati."
+    },
+    "eu-nis2-ir-6-3-1": {
+      "code": "6.3.1",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione della configurazione\nI soggetti pertinenti adottano le misure appropriate per stabilire, documentare, attuare e monitorare le configurazioni, comprese le configurazioni di sicurezza di hardware, software, servizi e reti."
+    },
+    "eu-nis2-ir-6-3-2-a": {
+      "code": "6.3.2.a",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione della configurazione\nAi fini del punto 6.3.1, i soggetti interessati:\nstabilire e garantire la sicurezza delle configurazioni dell'hardware, del software, dei servizi e delle reti;"
+    },
+    "eu-nis2-ir-6-3-2-b": {
+      "code": "6.3.2.b",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione della configurazione\nAi fini del punto 6.3.1, i soggetti interessati:\nstabilire e attuare processi e strumenti per far rispettare le configurazioni sicure stabilite per l'hardware, il software, i servizi e le reti, per i sistemi di nuova installazione e per i sistemi in funzione nel corso del loro ciclo di vita."
+    },
+    "eu-nis2-ir-6-3-3": {
+      "code": "6.3.3",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione della configurazione\nI soggetti pertinenti riesaminano e, se del caso, aggiornano le configurazioni a intervalli pianificati o quando si verificano incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-6-4-1": {
+      "code": "6.4.1",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione delle modifiche, riparazioni e manutenzione\nI soggetti pertinenti applicano procedure di gestione delle modifiche per controllare le modifiche della rete e dei sistemi informativi. Se del caso, le procedure devono essere coerenti con le politiche generali dei soggetti pertinenti in materia di gestione del cambiamento."
+    },
+    "eu-nis2-ir-6-4-2": {
+      "code": "6.4.2",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione delle modifiche, riparazioni e manutenzione\nLe procedure di cui al punto 6.4.1. si applica alle versioni, alle modifiche e ai cambiamenti di emergenza di qualsiasi software e hardware in funzione e alle modifiche alla configurazione. Le procedure garantiscono che tali modifiche siano documentate e, sulla base della valutazione dei rischi effettuata a norma del punto 2.1, testate e valutate in vista del potenziale impatto prima di essere attuate."
+    },
+    "eu-nis2-ir-6-4-3": {
+      "code": "6.4.3",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione delle modifiche, riparazioni e manutenzione\nNel caso in cui non sia stato possibile seguire le normali procedure di gestione delle modifiche a causa di un'emergenza, gli enti competenti documenteranno il risultato della modifica e la spiegazione del motivo per cui non è stato possibile seguire le procedure."
+    },
+    "eu-nis2-ir-6-4-4": {
+      "code": "6.4.4",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione delle modifiche, riparazioni e manutenzione\nI soggetti pertinenti riesaminano e, se del caso, aggiornano le procedure a intervalli pianificati e in caso di incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-6-5-1": {
+      "code": "6.5.1",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Test di sicurezza\nI soggetti pertinenti stabiliscono, attuano e applicano una politica e procedure per i test di sicurezza."
+    },
+    "eu-nis2-ir-6-5-2-a": {
+      "code": "6.5.2.a",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Test di sicurezza\nI soggetti interessati:\nstabilire, sulla base della valutazione dei rischi effettuata a norma del punto 2.1, la necessità, la portata, la frequenza e il tipo di prove di sicurezza;"
+    },
+    "eu-nis2-ir-6-5-2-b": {
+      "code": "6.5.2.b",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Test di sicurezza\nI soggetti interessati:\neffettuare prove di sicurezza secondo una metodologia di prova documentata, che copra i componenti identificati come pertinenti per il funzionamento sicuro in un'analisi dei rischi;"
+    },
+    "eu-nis2-ir-6-5-2-c": {
+      "code": "6.5.2.c",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Test di sicurezza\nI soggetti interessati:\ndocumentare il tipo, l'ambito, il tempo e i risultati delle prove, compresa la valutazione della criticità e le azioni di mitigazione per ciascun reperto;"
+    },
+    "eu-nis2-ir-6-5-2-d": {
+      "code": "6.5.2.d",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Test di sicurezza\nI soggetti interessati:\napplicare azioni di mitigazione in caso di rilievi critici."
+    },
+    "eu-nis2-ir-6-5-3": {
+      "code": "6.5.3",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Test di sicurezza\nI soggetti pertinenti riesaminano e, se del caso, aggiornano le loro politiche in materia di prove di sicurezza a intervalli programmati."
+    },
+    "eu-nis2-ir-6-6-1": {
+      "code": "6.6.1",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione delle patch di sicurezza\nI soggetti pertinenti specificano e applicano procedure coerenti con le procedure di gestione delle modifiche di cui al punto 6.4.1. nonché con la gestione delle vulnerabilità, la gestione dei rischi e altre procedure di gestione pertinenti, per garantire che:"
+    },
+    "eu-nis2-ir-6-6-1-a": {
+      "code": "6.6.1.a",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione delle patch di sicurezza\nI soggetti pertinenti specificano e applicano procedure coerenti con le procedure di gestione delle modifiche di cui al punto 6.4.1. nonché con la gestione delle vulnerabilità, la gestione dei rischi e altre procedure di gestione pertinenti, per garantire che:\nle patch di sicurezza siano applicate entro un termine ragionevole dal momento in cui sono disponibili;"
+    },
+    "eu-nis2-ir-6-6-1-b": {
+      "code": "6.6.1.b",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione delle patch di sicurezza\nI soggetti pertinenti specificano e applicano procedure coerenti con le procedure di gestione delle modifiche di cui al punto 6.4.1. nonché con la gestione delle vulnerabilità, la gestione dei rischi e altre procedure di gestione pertinenti, per garantire che:\nle patch di sicurezza vengono testate prima di essere applicate nei sistemi di produzione;"
+    },
+    "eu-nis2-ir-6-6-1-c": {
+      "code": "6.6.1.c",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione delle patch di sicurezza\nI soggetti pertinenti specificano e applicano procedure coerenti con le procedure di gestione delle modifiche di cui al punto 6.4.1. nonché con la gestione delle vulnerabilità, la gestione dei rischi e altre procedure di gestione pertinenti, per garantire che:\nle patch di sicurezza provengono da fonti attendibili e ne vengono controllate l'integrità;"
+    },
+    "eu-nis2-ir-6-6-1-d": {
+      "code": "6.6.1.d",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione delle patch di sicurezza\nI soggetti pertinenti specificano e applicano procedure coerenti con le procedure di gestione delle modifiche di cui al punto 6.4.1. nonché con la gestione delle vulnerabilità, la gestione dei rischi e altre procedure di gestione pertinenti, per garantire che:\nSono attuate misure supplementari e sono accettati i rischi residui nei casi in cui non sia disponibile una patch o non sia applicata ai sensi del punto 6.6.2."
+    },
+    "eu-nis2-ir-6-6-2": {
+      "code": "6.6.2",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione delle patch di sicurezza\nIn deroga al punto 6.6.1. a), i soggetti pertinenti possono scegliere di non applicare le patch di sicurezza quando gli svantaggi derivanti dall'applicazione delle patch di sicurezza superano i benefici della cibersicurezza. I soggetti pertinenti documentano e motivano debitamente i motivi di tale decisione."
+    },
+    "eu-nis2-ir-6-7-1": {
+      "code": "6.7.1",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza della rete\nI soggetti pertinenti adottano le misure appropriate per proteggere la loro rete e i loro sistemi informativi dalle minacce informatiche."
+    },
+    "eu-nis2-ir-6-7-2-a": {
+      "code": "6.7.2.a",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza della rete\nAi fini del punto 6.7.1, i soggetti interessati:\ndocumentare l'architettura della rete in modo comprensibile e aggiornato;"
+    },
+    "eu-nis2-ir-6-7-2-b": {
+      "code": "6.7.2.b",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza della rete\nAi fini del punto 6.7.1, i soggetti interessati:\ndeterminare e applicare controlli per proteggere i domini di rete interni dei soggetti interessati dall'accesso non autorizzato;"
+    },
+    "eu-nis2-ir-6-7-2-c": {
+      "code": "6.7.2.c",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza della rete\nAi fini del punto 6.7.1, i soggetti interessati:\nconfigurare controlli per impedire accessi e comunicazioni di rete non necessari per il funzionamento dei soggetti interessati;"
+    },
+    "eu-nis2-ir-6-7-2-d": {
+      "code": "6.7.2.d",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza della rete\nAi fini del punto 6.7.1, i soggetti interessati:\ndeterminare e applicare controlli per l'accesso remoto alla rete e ai sistemi informativi, compreso l'accesso da parte dei fornitori di servizi;"
+    },
+    "eu-nis2-ir-6-7-2-e": {
+      "code": "6.7.2.e",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza della rete\nAi fini del punto 6.7.1, i soggetti interessati:\nnon utilizzare i sistemi utilizzati per la gestione dell'attuazione della politica di sicurezza per altri scopi;"
+    },
+    "eu-nis2-ir-6-7-2-f": {
+      "code": "6.7.2.f",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza della rete\nAi fini del punto 6.7.1, i soggetti interessati:\nvietare o disattivare esplicitamente connessioni e servizi non necessari;"
+    },
+    "eu-nis2-ir-6-7-2-g": {
+      "code": "6.7.2.g",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza della rete\nAi fini del punto 6.7.1, i soggetti interessati:\nse del caso, consentire esclusivamente l'accesso alla rete e ai sistemi informativi dei soggetti pertinenti da parte di dispositivi autorizzati da tali soggetti;"
+    },
+    "eu-nis2-ir-6-7-2-h": {
+      "code": "6.7.2.h",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza della rete\nAi fini del punto 6.7.1, i soggetti interessati:\nconsentire le connessioni dei fornitori di servizi solo dopo una richiesta di autorizzazione e per un determinato periodo di tempo, ad esempio la durata di un'operazione di manutenzione;"
+    },
+    "eu-nis2-ir-6-7-2-i": {
+      "code": "6.7.2.i",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza della rete\nAi fini del punto 6.7.1, i soggetti interessati:\nstabilire la comunicazione tra sistemi distinti solo attraverso canali affidabili che sono isolati utilizzando la separazione logica, crittografica o fisica da altri canali di comunicazione e forniscono un'identificazione sicura dei loro punti finali e la protezione dei dati del canale da modifiche o divulgazioni;"
+    },
+    "eu-nis2-ir-6-7-2-j": {
+      "code": "6.7.2.j",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza della rete\nAi fini del punto 6.7.1, i soggetti interessati:\nadottare un piano di attuazione per la transizione completa verso protocolli di comunicazione a livello di rete di ultima generazione in modo sicuro, appropriato e graduale e stabilire misure per accelerare tale transizione;"
+    },
+    "eu-nis2-ir-6-7-2-k": {
+      "code": "6.7.2.k",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza della rete\nAi fini del punto 6.7.1, i soggetti interessati:\nadottare un piano di attuazione per l'introduzione di norme moderne e interoperabili per le comunicazioni di posta elettronica concordate a livello internazionale per rendere sicure le comunicazioni di posta elettronica al fine di attenuare le vulnerabilità legate alle minacce connesse alla posta elettronica e stabilire misure per accelerare tale diffusione;"
+    },
+    "eu-nis2-ir-6-7-2-l": {
+      "code": "6.7.2.l",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza della rete\nAi fini del punto 6.7.1, i soggetti interessati:\napplicare le migliori pratiche per la sicurezza del DNS, e per la sicurezza del routing Internet e l'igiene del routing del traffico proveniente da e destinato alla rete."
+    },
+    "eu-nis2-ir-6-7-3": {
+      "code": "6.7.3",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Sicurezza della rete\nI soggetti pertinenti riesaminano e, se del caso, aggiornano tali misure a intervalli pianificati e quando si verificano incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-6-8-1": {
+      "code": "6.8.1",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Segmentazione della rete\nI soggetti interessati segmentano i sistemi in reti o zone in base ai risultati della valutazione del rischio di cui al punto 2.1. Essi segmentano i loro sistemi e le loro reti dai sistemi e dalle reti di terzi."
+    },
+    "eu-nis2-ir-6-8-2-a": {
+      "code": "6.8.2.a",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Segmentazione della rete\nA tal fine, i soggetti interessati:\nconsiderare la relazione funzionale, logica e fisica, compresa l'ubicazione, tra sistemi e servizi affidabili;"
+    },
+    "eu-nis2-ir-6-8-2-b": {
+      "code": "6.8.2.b",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Segmentazione della rete\nA tal fine, i soggetti interessati:\nconcedere l'accesso a una rete o a una zona sulla base di una valutazione dei suoi requisiti di sicurezza;"
+    },
+    "eu-nis2-ir-6-8-2-c": {
+      "code": "6.8.2.c",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Segmentazione della rete\nA tal fine, i soggetti interessati:\nmantenere i sistemi critici per il funzionamento dei soggetti interessati o per la sicurezza in zone protette;"
+    },
+    "eu-nis2-ir-6-8-2-d": {
+      "code": "6.8.2.d",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Segmentazione della rete\nA tal fine, i soggetti interessati:\ndispiegare una zona demilitarizzata all'interno delle loro reti di comunicazione per garantire la sicurezza delle comunicazioni provenienti dalle loro reti o ad esse destinate;"
+    },
+    "eu-nis2-ir-6-8-2-e": {
+      "code": "6.8.2.e",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Segmentazione della rete\nA tal fine, i soggetti interessati:\nlimitare l'accesso e le comunicazioni tra le zone e all'interno delle zone a quelli necessari per il funzionamento dei soggetti pertinenti o per la sicurezza;"
+    },
+    "eu-nis2-ir-6-8-2-f": {
+      "code": "6.8.2.f",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Segmentazione della rete\nA tal fine, i soggetti interessati:\nseparare la rete dedicata per l'amministrazione delle reti e dei sistemi informativi dalla rete operativa dei soggetti interessati;"
+    },
+    "eu-nis2-ir-6-8-2-g": {
+      "code": "6.8.2.g",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Segmentazione della rete\nA tal fine, i soggetti interessati:\nseparare i canali di amministrazione della rete dal resto del traffico di rete;"
+    },
+    "eu-nis2-ir-6-8-2-h": {
+      "code": "6.8.2.h",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Segmentazione della rete\nA tal fine, i soggetti interessati:\nseparare i sistemi di produzione per i servizi dei soggetti interessati dai sistemi utilizzati nello sviluppo e nei test, compresi i backup."
+    },
+    "eu-nis2-ir-6-8-3": {
+      "code": "6.8.3",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Segmentazione della rete\nI soggetti pertinenti riesaminano e, se del caso, aggiornano la segmentazione della rete a intervalli pianificati e in caso di incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-6-9-1": {
+      "code": "6.9.1",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Protezione contro software dannoso e non autorizzato\nI soggetti interessati proteggono la loro rete e i loro sistemi informativi da software dannosi e non autorizzati."
+    },
+    "eu-nis2-ir-6-9-2": {
+      "code": "6.9.2",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Protezione contro software dannoso e non autorizzato\nA tal fine, i soggetti pertinenti attuano in particolare misure che rilevino o impediscano l'uso di software dannoso o non autorizzato. I soggetti pertinenti garantiscono, se del caso, che la loro rete e i loro sistemi informativi siano dotati di software di rilevamento e risposta, aggiornati regolarmente in conformità della valutazione del rischio effettuata a norma del punto 2.1 e degli accordi contrattuali con i fornitori."
+    },
+    "eu-nis2-ir-6-10-1": {
+      "code": "6.10.1",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione e divulgazione delle vulnerabilità\nI soggetti pertinenti ottengono informazioni sulle vulnerabilità tecniche della loro rete e dei loro sistemi informativi, valutano la loro esposizione a tali vulnerabilità e adottano misure adeguate per gestire tali vulnerabilità."
+    },
+    "eu-nis2-ir-6-10-2-a": {
+      "code": "6.10.2.a",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione e divulgazione delle vulnerabilità\nAi fini del punto 6.10.1, i soggetti pertinenti:\nmonitorare le informazioni sulle vulnerabilità attraverso canali appropriati, quali gli annunci dei CSIRT, delle autorità competenti o le informazioni fornite dai fornitori o dai prestatori di servizi;"
+    },
+    "eu-nis2-ir-6-10-2-b": {
+      "code": "6.10.2.b",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione e divulgazione delle vulnerabilità\nAi fini del punto 6.10.1, i soggetti pertinenti:\neffettuare, se del caso, scansioni delle vulnerabilità e registrare le prove dei risultati delle scansioni, a intervalli pianificati;"
+    },
+    "eu-nis2-ir-6-10-2-c": {
+      "code": "6.10.2.c",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione e divulgazione delle vulnerabilità\nAi fini del punto 6.10.1, i soggetti pertinenti:\naffrontare, senza indebito ritardo, le vulnerabilità individuate dai soggetti pertinenti come critiche per le loro operazioni;"
+    },
+    "eu-nis2-ir-6-10-2-d": {
+      "code": "6.10.2.d",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione e divulgazione delle vulnerabilità\nAi fini del punto 6.10.1, i soggetti pertinenti:\ngarantire che la gestione delle vulnerabilità sia compatibile con le procedure di gestione delle modifiche, di gestione delle patch di sicurezza, di gestione dei rischi e di gestione degli incidenti;"
+    },
+    "eu-nis2-ir-6-10-2-e": {
+      "code": "6.10.2.e",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione e divulgazione delle vulnerabilità\nAi fini del punto 6.10.1, i soggetti pertinenti:\nstabilire una procedura per la comunicazione delle vulnerabilità conformemente alla politica nazionale coordinata applicabile in materia di divulgazione delle vulnerabilità."
+    },
+    "eu-nis2-ir-6-10-3": {
+      "code": "6.10.3",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione e divulgazione delle vulnerabilità\nSe giustificato dal potenziale impatto della vulnerabilità, i soggetti pertinenti elaborano e attuano un piano per attenuare la vulnerabilità. In altri casi, i soggetti pertinenti documentano e comprovano il motivo per cui la vulnerabilità non richiede rimedio."
+    },
+    "eu-nis2-ir-6-10-4": {
+      "code": "6.10.4",
+      "section": "section-6",
+      "control": "Articolo 21, paragrafo 2, lettera e)",
+      "requirements": "Gestione e divulgazione delle vulnerabilità\nI soggetti pertinenti riesaminano e, se del caso, aggiornano a intervalli pianificati i canali utilizzati per monitorare le informazioni sulle vulnerabilità."
+    },
+    "eu-nis2-ir-7-1": {
+      "code": "7.1",
+      "section": "section-7",
+      "control": "Articolo 21, paragrafo 2, lettera f)",
+      "requirements": "Ai fini dell'articolo 21, paragrafo 2, lettera f), della direttiva (UE) 2022/2555, i soggetti pertinenti stabiliscono, attuano e applicano una politica e procedure per valutare se le misure di gestione dei rischi di cibersicurezza adottate dal soggetto pertinente siano attuate e mantenute in modo efficace."
+    },
+    "eu-nis2-ir-7-2": {
+      "code": "7.2",
+      "section": "section-7",
+      "control": "Articolo 21, paragrafo 2, lettera f)",
+      "requirements": "La politica e le procedure di cui al punto 7.1. tiene conto dei risultati della valutazione del rischio di cui al punto 2.1. e incidenti significativi passati. Gli enti pertinenti determinano:"
+    },
+    "eu-nis2-ir-7-2-a": {
+      "code": "7.2.a",
+      "section": "section-7",
+      "control": "Articolo 21, paragrafo 2, lettera f)",
+      "requirements": "La politica e le procedure di cui al punto 7.1. tiene conto dei risultati della valutazione del rischio di cui al punto 2.1. e incidenti significativi passati. Gli enti pertinenti determinano:\nquali misure di gestione dei rischi di cibersicurezza devono essere monitorate e misurate, compresi i processi e i controlli;"
+    },
+    "eu-nis2-ir-7-2-b": {
+      "code": "7.2.b",
+      "section": "section-7",
+      "control": "Articolo 21, paragrafo 2, lettera f)",
+      "requirements": "La politica e le procedure di cui al punto 7.1. tiene conto dei risultati della valutazione del rischio di cui al punto 2.1. e incidenti significativi passati. Gli enti pertinenti determinano:\ni metodi di monitoraggio, misurazione, analisi e valutazione, a seconda dei casi, per garantire risultati validi;"
+    },
+    "eu-nis2-ir-7-2-c": {
+      "code": "7.2.c",
+      "section": "section-7",
+      "control": "Articolo 21, paragrafo 2, lettera f)",
+      "requirements": "La politica e le procedure di cui al punto 7.1. tiene conto dei risultati della valutazione del rischio di cui al punto 2.1. e incidenti significativi passati. Gli enti pertinenti determinano:\nquando devono essere effettuati il monitoraggio e la misurazione;"
+    },
+    "eu-nis2-ir-7-2-d": {
+      "code": "7.2.d",
+      "section": "section-7",
+      "control": "Articolo 21, paragrafo 2, lettera f)",
+      "requirements": "La politica e le procedure di cui al punto 7.1. tiene conto dei risultati della valutazione del rischio di cui al punto 2.1. e incidenti significativi passati. Gli enti pertinenti determinano:\nchi è responsabile del monitoraggio e della misurazione dell'efficacia delle misure di gestione dei rischi di cibersicurezza;"
+    },
+    "eu-nis2-ir-7-2-e": {
+      "code": "7.2.e",
+      "section": "section-7",
+      "control": "Articolo 21, paragrafo 2, lettera f)",
+      "requirements": "La politica e le procedure di cui al punto 7.1. tiene conto dei risultati della valutazione del rischio di cui al punto 2.1. e incidenti significativi passati. Gli enti pertinenti determinano:\nquando i risultati del monitoraggio e della misurazione devono essere analizzati e valutati;"
+    },
+    "eu-nis2-ir-7-2-f": {
+      "code": "7.2.f",
+      "section": "section-7",
+      "control": "Articolo 21, paragrafo 2, lettera f)",
+      "requirements": "La politica e le procedure di cui al punto 7.1. tiene conto dei risultati della valutazione del rischio di cui al punto 2.1. e incidenti significativi passati. Gli enti pertinenti determinano:\nche deve analizzare e valutare questi risultati."
+    },
+    "eu-nis2-ir-7-3": {
+      "code": "7.3",
+      "section": "section-7",
+      "control": "Articolo 21, paragrafo 2, lettera f)",
+      "requirements": "I soggetti pertinenti riesaminano e, se del caso, aggiornano la politica e le procedure a intervalli pianificati e in caso di incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-8-1-1": {
+      "code": "8.1.1",
+      "section": "section-8",
+      "control": "Articolo 21, paragrafo 2, lettera g)",
+      "requirements": "Sensibilizzazione e pratiche di igiene informatica di base\nAi fini dell'articolo 21, paragrafo 2, lettera g), della direttiva (UE) 2022/2555, i soggetti pertinenti assicurano che i loro dipendenti, compresi i membri degli organi di gestione, nonché i fornitori diretti e i prestatori di servizi, siano consapevoli dei rischi, siano informati dell'importanza della cibersicurezza e applichino pratiche di igiene informatica."
+    },
+    "eu-nis2-ir-8-1-2": {
+      "code": "8.1.2",
+      "section": "section-8",
+      "control": "Articolo 21, paragrafo 2, lettera g)",
+      "requirements": "Sensibilizzazione e pratiche di igiene informatica di base\nAi fini del punto 8.1.1, i soggetti pertinenti offrono ai loro dipendenti, compresi i membri degli organi di gestione, nonché, se del caso, ai fornitori diretti e ai prestatori di servizi, conformemente al punto 5.1.4, un programma di sensibilizzazione che:"
+    },
+    "eu-nis2-ir-8-1-2-a": {
+      "code": "8.1.2.a",
+      "section": "section-8",
+      "control": "Articolo 21, paragrafo 2, lettera g)",
+      "requirements": "Sensibilizzazione e pratiche di igiene informatica di base\nAi fini del punto 8.1.1, i soggetti pertinenti offrono ai loro dipendenti, compresi i membri degli organi di gestione, nonché, se del caso, ai fornitori diretti e ai prestatori di servizi, conformemente al punto 5.1.4, un programma di sensibilizzazione che:\nessere programmate nel tempo, in modo che le attività siano ripetute e coprano i nuovi dipendenti;"
+    },
+    "eu-nis2-ir-8-1-2-b": {
+      "code": "8.1.2.b",
+      "section": "section-8",
+      "control": "Articolo 21, paragrafo 2, lettera g)",
+      "requirements": "Sensibilizzazione e pratiche di igiene informatica di base\nAi fini del punto 8.1.1, i soggetti pertinenti offrono ai loro dipendenti, compresi i membri degli organi di gestione, nonché, se del caso, ai fornitori diretti e ai prestatori di servizi, conformemente al punto 5.1.4, un programma di sensibilizzazione che:\nessere stabiliti in linea con la politica in materia di sicurezza delle reti e dell'informazione, con le politiche specifiche per argomento e con le procedure pertinenti in materia di sicurezza delle reti e dell'informazione;"
+    },
+    "eu-nis2-ir-8-1-2-c": {
+      "code": "8.1.2.c",
+      "section": "section-8",
+      "control": "Articolo 21, paragrafo 2, lettera g)",
+      "requirements": "Sensibilizzazione e pratiche di igiene informatica di base\nAi fini del punto 8.1.1, i soggetti pertinenti offrono ai loro dipendenti, compresi i membri degli organi di gestione, nonché, se del caso, ai fornitori diretti e ai prestatori di servizi, conformemente al punto 5.1.4, un programma di sensibilizzazione che:\ncoprire le minacce informatiche pertinenti, le misure di gestione dei rischi di cibersicurezza in vigore, i punti di contatto e le risorse per ulteriori informazioni e consigli su questioni di cibersicurezza, nonché le pratiche di igiene informatica per gli utenti."
+    },
+    "eu-nis2-ir-8-1-3": {
+      "code": "8.1.3",
+      "section": "section-8",
+      "control": "Articolo 21, paragrafo 2, lettera g)",
+      "requirements": "Sensibilizzazione e pratiche di igiene informatica di base\nIl programma di sensibilizzazione è verificato, se del caso, in termini di efficacia. Il programma di sensibilizzazione è aggiornato e offerto a intervalli pianificati, tenendo conto dei cambiamenti nelle pratiche di igiene informatica, dell'attuale panorama delle minacce e dei rischi posti ai soggetti pertinenti."
+    },
+    "eu-nis2-ir-8-2-1": {
+      "code": "8.2.1",
+      "section": "section-8",
+      "control": "Articolo 21, paragrafo 2, lettera g)",
+      "requirements": "Formazione sulla sicurezza\nI soggetti pertinenti individuano i dipendenti i cui ruoli richiedono competenze e competenze pertinenti in materia di sicurezza e garantiscono che ricevano una formazione periodica sulla sicurezza delle reti e dei sistemi informativi."
+    },
+    "eu-nis2-ir-8-2-2": {
+      "code": "8.2.2",
+      "section": "section-8",
+      "control": "Articolo 21, paragrafo 2, lettera g)",
+      "requirements": "Formazione sulla sicurezza\nI soggetti pertinenti istituiscono, attuano e applicano un programma di formazione in linea con la politica in materia di sicurezza delle reti e dell'informazione, con le politiche specifiche per argomento e con altre procedure pertinenti in materia di sicurezza delle reti e dell'informazione, che stabilisca le esigenze di formazione per determinati ruoli e posizioni sulla base di criteri."
+    },
+    "eu-nis2-ir-8-2-3": {
+      "code": "8.2.3",
+      "section": "section-8",
+      "control": "Articolo 21, paragrafo 2, lettera g)",
+      "requirements": "Formazione sulla sicurezza\nLa formazione di cui al punto 8.2.1. deve essere pertinente alla funzione lavorativa del dipendente e la sua efficacia deve essere valutata. La formazione deve prendere in considerazione le misure di sicurezza in atto e riguardare quanto segue:"
+    },
+    "eu-nis2-ir-8-2-3-a": {
+      "code": "8.2.3.a",
+      "section": "section-8",
+      "control": "Articolo 21, paragrafo 2, lettera g)",
+      "requirements": "Formazione sulla sicurezza\nLa formazione di cui al punto 8.2.1. deve essere pertinente alla funzione lavorativa del dipendente e la sua efficacia deve essere valutata. La formazione deve prendere in considerazione le misure di sicurezza in atto e riguardare quanto segue:\nistruzioni relative alla configurazione e al funzionamento sicuri della rete e dei sistemi informativi, compresi i dispositivi mobili;"
+    },
+    "eu-nis2-ir-8-2-3-b": {
+      "code": "8.2.3.b",
+      "section": "section-8",
+      "control": "Articolo 21, paragrafo 2, lettera g)",
+      "requirements": "Formazione sulla sicurezza\nLa formazione di cui al punto 8.2.1. deve essere pertinente alla funzione lavorativa del dipendente e la sua efficacia deve essere valutata. La formazione deve prendere in considerazione le misure di sicurezza in atto e riguardare quanto segue:\nbriefing sulle minacce informatiche note;"
+    },
+    "eu-nis2-ir-8-2-3-c": {
+      "code": "8.2.3.c",
+      "section": "section-8",
+      "control": "Articolo 21, paragrafo 2, lettera g)",
+      "requirements": "Formazione sulla sicurezza\nLa formazione di cui al punto 8.2.1. deve essere pertinente alla funzione lavorativa del dipendente e la sua efficacia deve essere valutata. La formazione deve prendere in considerazione le misure di sicurezza in atto e riguardare quanto segue:\nformazione del comportamento quando si verificano eventi rilevanti per la sicurezza."
+    },
+    "eu-nis2-ir-8-2-4": {
+      "code": "8.2.4",
+      "section": "section-8",
+      "control": "Articolo 21, paragrafo 2, lettera g)",
+      "requirements": "Formazione sulla sicurezza\nI soggetti pertinenti applicano la formazione ai membri del personale che si trasferiscono a nuove posizioni o ruoli che richiedono competenze e competenze pertinenti in materia di sicurezza."
+    },
+    "eu-nis2-ir-8-2-5": {
+      "code": "8.2.5",
+      "section": "section-8",
+      "control": "Articolo 21, paragrafo 2, lettera g)",
+      "requirements": "Formazione sulla sicurezza\nIl programma deve essere aggiornato ed eseguito periodicamente tenendo conto delle politiche e delle regole applicabili, dei ruoli assegnati, delle responsabilità, nonché delle minacce informatiche note e degli sviluppi tecnologici."
+    },
+    "eu-nis2-ir-9-1": {
+      "code": "9.1",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "Ai fini dell'articolo 21, paragrafo 2, lettera h), della direttiva (UE) 2022/2555, i soggetti pertinenti stabiliscono, attuano e applicano una politica e procedure relative alla crittografia, al fine di garantire un uso adeguato ed efficace della crittografia per proteggere la riservatezza, l'autenticità e l'integrità dei dati in linea con la classificazione delle attività dei soggetti pertinenti e con i risultati della valutazione del rischio effettuata a norma del punto 2.1."
+    },
+    "eu-nis2-ir-9-2-a": {
+      "code": "9.2.a",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "La politica e le procedure di cui al punto 9.1 stabiliscono:\nconformemente alla classificazione delle attività dei soggetti pertinenti, il tipo, la forza e la qualità delle misure crittografiche necessarie per proteggere i beni dei soggetti pertinenti, compresi i dati a riposo e i dati in transito;"
+    },
+    "eu-nis2-ir-9-2-b": {
+      "code": "9.2.b",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "La politica e le procedure di cui al punto 9.1 stabiliscono:\nsulla base della lettera a), i protocolli o le famiglie di protocolli da adottare, nonché gli algoritmi crittografici, la forza di cifratura, le soluzioni crittografiche e le pratiche di utilizzo da approvare e richiedere per l'uso nelle entità pertinenti, seguendo, se del caso, un approccio di agilità crittografica;"
+    },
+    "eu-nis2-ir-9-2-c": {
+      "code": "9.2.c",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "La politica e le procedure di cui al punto 9.1 stabiliscono:\nl'approccio dei soggetti pertinenti alla gestione con responsabilità strategiche, compresi, se del caso, i metodi per:"
+    },
+    "eu-nis2-ir-9-2-c-i": {
+      "code": "9.2.c.i",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "La politica e le procedure di cui al punto 9.1 stabiliscono:\nl'approccio dei soggetti pertinenti alla gestione con responsabilità strategiche, compresi, se del caso, i metodi per:\ngenerazione di chiavi diverse per sistemi e applicazioni crittografiche;"
+    },
+    "eu-nis2-ir-9-2-c-ii": {
+      "code": "9.2.c.ii",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "La politica e le procedure di cui al punto 9.1 stabiliscono:\nl'approccio dei soggetti pertinenti alla gestione con responsabilità strategiche, compresi, se del caso, i metodi per:\nemissione e ottenimento di certificati a chiave pubblica;"
+    },
+    "eu-nis2-ir-9-2-c-iii": {
+      "code": "9.2.c.iii",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "La politica e le procedure di cui al punto 9.1 stabiliscono:\nl'approccio dei soggetti pertinenti alla gestione con responsabilità strategiche, compresi, se del caso, i metodi per:\ndistribuzione delle chiavi alle entità previste, comprese le modalità di attivazione delle chiavi quando ricevute;"
+    },
+    "eu-nis2-ir-9-2-c-iv": {
+      "code": "9.2.c.iv",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "La politica e le procedure di cui al punto 9.1 stabiliscono:\nl'approccio dei soggetti pertinenti alla gestione con responsabilità strategiche, compresi, se del caso, i metodi per:\nconservazione delle chiavi, compreso il modo in cui gli utenti autorizzati ottengono l'accesso alle chiavi;"
+    },
+    "eu-nis2-ir-9-2-c-v": {
+      "code": "9.2.c.v",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "La politica e le procedure di cui al punto 9.1 stabiliscono:\nl'approccio dei soggetti pertinenti alla gestione con responsabilità strategiche, compresi, se del caso, i metodi per:\nmodifica o aggiornamento delle chiavi, comprese le regole su quando e come cambiare le chiavi;"
+    },
+    "eu-nis2-ir-9-2-c-vi": {
+      "code": "9.2.c.vi",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "La politica e le procedure di cui al punto 9.1 stabiliscono:\nl'approccio dei soggetti pertinenti alla gestione con responsabilità strategiche, compresi, se del caso, i metodi per:\ngestione delle chiavi compromesse;"
+    },
+    "eu-nis2-ir-9-2-c-vii": {
+      "code": "9.2.c.vii",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "La politica e le procedure di cui al punto 9.1 stabiliscono:\nl'approccio dei soggetti pertinenti alla gestione con responsabilità strategiche, compresi, se del caso, i metodi per:\nrevoca delle chiavi, comprese le modalità di prelievo o disattivazione delle chiavi;"
+    },
+    "eu-nis2-ir-9-2-c-viii": {
+      "code": "9.2.c.viii",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "La politica e le procedure di cui al punto 9.1 stabiliscono:\nl'approccio dei soggetti pertinenti alla gestione con responsabilità strategiche, compresi, se del caso, i metodi per:\nrecupero di chiavi perse o danneggiate;"
+    },
+    "eu-nis2-ir-9-2-c-ix": {
+      "code": "9.2.c.ix",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "La politica e le procedure di cui al punto 9.1 stabiliscono:\nl'approccio dei soggetti pertinenti alla gestione con responsabilità strategiche, compresi, se del caso, i metodi per:\nbackup o archiviazione delle chiavi;"
+    },
+    "eu-nis2-ir-9-2-c-x": {
+      "code": "9.2.c.x",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "La politica e le procedure di cui al punto 9.1 stabiliscono:\nl'approccio dei soggetti pertinenti alla gestione con responsabilità strategiche, compresi, se del caso, i metodi per:\ndistruggere le chiavi;"
+    },
+    "eu-nis2-ir-9-2-c-xi": {
+      "code": "9.2.c.xi",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "La politica e le procedure di cui al punto 9.1 stabiliscono:\nl'approccio dei soggetti pertinenti alla gestione con responsabilità strategiche, compresi, se del caso, i metodi per:\nregistrazione e verifica delle attività chiave relative alla gestione;"
+    },
+    "eu-nis2-ir-9-2-c-xii": {
+      "code": "9.2.c.xii",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "La politica e le procedure di cui al punto 9.1 stabiliscono:\nl'approccio dei soggetti pertinenti alla gestione con responsabilità strategiche, compresi, se del caso, i metodi per:\nImpostazione delle date di attivazione e disattivazione delle chiavi, garantendo che le chiavi possano essere utilizzate solo per il periodo di tempo specificato in base alle regole dell'organizzazione sulla gestione delle chiavi."
+    },
+    "eu-nis2-ir-9-3": {
+      "code": "9.3",
+      "section": "section-9",
+      "control": "Articolo 21, paragrafo 2, lettera h)",
+      "requirements": "I soggetti pertinenti riesaminano e, se del caso, aggiornano la loro politica e le loro procedure a intervalli pianificati, tenendo conto dello stato dell'arte della crittografia."
+    },
+    "eu-nis2-ir-10-1-1": {
+      "code": "10.1.1",
+      "section": "section-10",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Sicurezza delle risorse umane\nAi fini dell'articolo 21, paragrafo 2, lettera i), della direttiva (UE) 2022/2555, i soggetti pertinenti garantiscono che i loro dipendenti e fornitori diretti e prestatori di servizi, ove applicabile, comprendano e si impegnino ad assumersi le loro responsabilità in materia di sicurezza, come appropriato per i servizi offerti e il lavoro e in linea con la politica dei soggetti pertinenti in materia di sicurezza delle reti e dei sistemi informativi."
+    },
+    "eu-nis2-ir-10-1-2-a": {
+      "code": "10.1.2.a",
+      "section": "section-10",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Sicurezza delle risorse umane\nIl requisito di cui al punto 10.1.1. comprendono quanto segue:\nmeccanismi per garantire che tutti i dipendenti, i fornitori diretti e i fornitori di servizi, ove applicabile, comprendano e seguano le pratiche standard di igiene informatica che i soggetti pertinenti applicano ai sensi del punto 8.1.;"
+    },
+    "eu-nis2-ir-10-1-2-b": {
+      "code": "10.1.2.b",
+      "section": "section-10",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Sicurezza delle risorse umane\nIl requisito di cui al punto 10.1.1. comprendono quanto segue:\nmeccanismi per garantire che tutti gli utenti con accesso amministrativo o privilegiato siano consapevoli dei loro ruoli, responsabilità e autorità e agiscano in conformità con essi;"
+    },
+    "eu-nis2-ir-10-1-2-c": {
+      "code": "10.1.2.c",
+      "section": "section-10",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Sicurezza delle risorse umane\nIl requisito di cui al punto 10.1.1. comprendono quanto segue:\nmeccanismi per garantire che i membri degli organi di gestione comprendano e agiscano in conformità con il loro ruolo, le loro responsabilità e le loro autorità in materia di sicurezza delle reti e dei sistemi informativi;"
+    },
+    "eu-nis2-ir-10-1-2-d": {
+      "code": "10.1.2.d",
+      "section": "section-10",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Sicurezza delle risorse umane\nIl requisito di cui al punto 10.1.1. comprendono quanto segue:\nmeccanismi per l'assunzione di personale qualificato per i rispettivi ruoli, come controlli delle referenze, procedure di controllo, convalida delle certificazioni o prove scritte."
+    },
+    "eu-nis2-ir-10-1-3": {
+      "code": "10.1.3",
+      "section": "section-10",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Sicurezza delle risorse umane\nI soggetti pertinenti riesaminano l'assegnazione del personale a ruoli specifici di cui al punto 1.2, nonché l'impegno delle risorse umane al riguardo, a intervalli programmati e almeno una volta all'anno. Essi aggiornano l'incarico ove necessario."
+    },
+    "eu-nis2-ir-10-2-1": {
+      "code": "10.2.1",
+      "section": "section-10",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Gestione e divulgazione delle vulnerabilità\nI soggetti pertinenti garantiscono, per quanto possibile, la verifica dei precedenti dei loro dipendenti e, se del caso, dei fornitori diretti e dei prestatori di servizi conformemente al punto 5.1.4, se necessario in funzione del loro ruolo, delle loro responsabilità e delle loro autorizzazioni."
+    },
+    "eu-nis2-ir-10-2-2-a": {
+      "code": "10.2.2.a",
+      "section": "section-10",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Gestione e divulgazione delle vulnerabilità\nAi fini del punto 10.2.1, i soggetti interessati:\nmettere in atto criteri che stabiliscano quali ruoli, responsabilità e autorità devono essere esercitati solo da persone di cui è stato accertato il background;"
+    },
+    "eu-nis2-ir-10-2-2-b": {
+      "code": "10.2.2.b",
+      "section": "section-10",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Gestione e divulgazione delle vulnerabilità\nAi fini del punto 10.2.1, i soggetti interessati:\nassicurare che la verifica di cui al punto 10.2.1 sia effettuata su tali soggetti prima che inizino ad esercitare tali ruoli, responsabilità e autorità, che devono tenere in considerazione le leggi, i regolamenti e l'etica applicabili in proporzione ai requisiti aziendali, alla classificazione degli asset di cui al punto 12.1. e la rete e i sistemi informativi a cui accedere, nonché i rischi percepiti."
+    },
+    "eu-nis2-ir-10-2-3": {
+      "code": "10.2.3",
+      "section": "section-10",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Gestione e divulgazione delle vulnerabilità\nI soggetti pertinenti riesaminano e, se del caso, aggiornano la politica a intervalli pianificati e la aggiornano ove necessario."
+    },
+    "eu-nis2-ir-10-3-1": {
+      "code": "10.3.1",
+      "section": "section-10",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Procedure di cessazione o cambiamento di rapporto di lavoro\nI soggetti pertinenti provvedono affinché le responsabilità e i doveri in materia di sicurezza delle reti e dei sistemi informativi che rimangono validi dopo la cessazione o il cambiamento di rapporto di lavoro dei loro dipendenti siano definiti e applicati contrattualmente."
+    },
+    "eu-nis2-ir-10-3-2": {
+      "code": "10.3.2",
+      "section": "section-10",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Procedure di cessazione o cambiamento di rapporto di lavoro\nAi fini del punto 10.3.1, i soggetti pertinenti devono includere nei termini e nelle condizioni di impiego, nel contratto o nell'accordo della persona le responsabilità e i doveri che sono ancora validi dopo la cessazione del rapporto di lavoro o del contratto, come le clausole di riservatezza."
+    },
+    "eu-nis2-ir-10-4-1": {
+      "code": "10.4.1",
+      "section": "section-10",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Processo disciplinare\nGli enti pertinenti istituiscono, comunicano e mantengono un processo disciplinare per la gestione delle violazioni delle politiche di sicurezza delle reti e dei sistemi informativi. Il processo deve prendere in considerazione i pertinenti requisiti legali, statutari, contrattuali e commerciali."
+    },
+    "eu-nis2-ir-10-4-2": {
+      "code": "10.4.2",
+      "section": "section-10",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Processo disciplinare\nGli enti pertinenti riesaminano e, se del caso, aggiornano il processo disciplinare a intervalli pianificati e, se necessario, a causa di modifiche giuridiche o di modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-11-1-1": {
+      "code": "11.1.1",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Criteri di controllo degli accessi\nAi fini dell'articolo 21, paragrafo 2, lettera i), della direttiva (UE) 2022/2555, i soggetti pertinenti stabiliscono, documentano e attuano politiche di controllo dell'accesso logico e fisico per l'accesso alle loro reti e ai loro sistemi informativi, sulla base di requisiti aziendali e di sicurezza delle reti e dei sistemi informativi."
+    },
+    "eu-nis2-ir-11-1-2-a": {
+      "code": "11.1.2.a",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Criteri di controllo degli accessi\nLe politiche di cui al punto 11.1.1. dovere:\ngestire l'accesso da parte di persone, inclusi personale, visitatori ed entità esterne come fornitori e fornitori di servizi;"
+    },
+    "eu-nis2-ir-11-1-2-b": {
+      "code": "11.1.2.b",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Criteri di controllo degli accessi\nLe politiche di cui al punto 11.1.1. dovere:\nindirizzare l'accesso da parte della rete e dei sistemi informativi;"
+    },
+    "eu-nis2-ir-11-1-2-c": {
+      "code": "11.1.2.c",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Criteri di controllo degli accessi\nLe politiche di cui al punto 11.1.1. dovere:\nAssicurarsi che l'accesso sia concesso solo agli utenti che sono stati adeguatamente autenticati."
+    },
+    "eu-nis2-ir-11-1-3": {
+      "code": "11.1.3",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Criteri di controllo degli accessi\nI soggetti pertinenti riesaminano e, se del caso, aggiornano le politiche a intervalli pianificati e quando si verificano incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-11-2-1": {
+      "code": "11.2.1",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Gestione dei diritti di accesso\nI soggetti interessati forniscono, modificano, rimuovono e documentano i diritti di accesso alla rete e ai sistemi informativi conformemente alla politica di controllo dell'accesso di cui al punto 11.1."
+    },
+    "eu-nis2-ir-11-2-2-a": {
+      "code": "11.2.2.a",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Gestione dei diritti di accesso\nI soggetti interessati:\nassegnare e revocare i diritti di accesso in base ai principi della necessità di sapere, del privilegio minimo e della separazione dei compiti;"
+    },
+    "eu-nis2-ir-11-2-2-b": {
+      "code": "11.2.2.b",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Gestione dei diritti di accesso\nI soggetti interessati:\ngarantire che i diritti di accesso siano modificati di conseguenza in caso di cessazione o cambio di rapporto di lavoro;"
+    },
+    "eu-nis2-ir-11-2-2-c": {
+      "code": "11.2.2.c",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Gestione dei diritti di accesso\nI soggetti interessati:\ngarantire che l'accesso alla rete e ai sistemi informativi sia autorizzato dai soggetti interessati;"
+    },
+    "eu-nis2-ir-11-2-2-d": {
+      "code": "11.2.2.d",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Gestione dei diritti di accesso\nI soggetti interessati:\ngarantire che i diritti di accesso si riferiscano in modo adeguato all'accesso di terzi, quali visitatori, fornitori e prestatori di servizi, in particolare limitando i diritti di accesso in termini di portata e durata;"
+    },
+    "eu-nis2-ir-11-2-2-e": {
+      "code": "11.2.2.e",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Gestione dei diritti di accesso\nI soggetti interessati:\ntenere un registro dei diritti di accesso concessi;"
+    },
+    "eu-nis2-ir-11-2-2-f": {
+      "code": "11.2.2.f",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Gestione dei diritti di accesso\nI soggetti interessati:\nApplicare la registrazione alla gestione dei diritti di accesso."
+    },
+    "eu-nis2-ir-11-2-3": {
+      "code": "11.2.3",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Gestione dei diritti di accesso\nI soggetti pertinenti riesaminano i diritti di accesso a intervalli pianificati e li modificano in base alle modifiche organizzative. I soggetti pertinenti documentano i risultati del riesame, comprese le necessarie modifiche dei diritti di accesso."
+    },
+    "eu-nis2-ir-11-3-1": {
+      "code": "11.3.1",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Account con privilegi e account di amministrazione del sistema\nI soggetti pertinenti devono mantenere politiche per la gestione degli account privilegiati e degli account di amministrazione del sistema nell'ambito della politica di controllo dell'accesso di cui al punto 11.1."
+    },
+    "eu-nis2-ir-11-3-2-a": {
+      "code": "11.3.2.a",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Account con privilegi e account di amministrazione del sistema\nLe politiche di cui al punto 11.3.1. dovere:\nstabilire procedure di identificazione forte, autenticazione, come l'autenticazione a più fattori, e procedure di autorizzazione per gli account privilegiati e gli account di amministrazione del sistema;"
+    },
+    "eu-nis2-ir-11-3-2-b": {
+      "code": "11.3.2.b",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Account con privilegi e account di amministrazione del sistema\nLe politiche di cui al punto 11.3.1. dovere:\nimpostare account specifici da utilizzare esclusivamente per le operazioni di amministrazione del sistema, quali l'installazione, la configurazione, la gestione o la manutenzione;"
+    },
+    "eu-nis2-ir-11-3-2-c": {
+      "code": "11.3.2.c",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Account con privilegi e account di amministrazione del sistema\nLe politiche di cui al punto 11.3.1. dovere:\nindividualizzare e limitare il più possibile i privilegi di amministrazione del sistema,"
+    },
+    "eu-nis2-ir-11-3-2-d": {
+      "code": "11.3.2.d",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Account con privilegi e account di amministrazione del sistema\nLe politiche di cui al punto 11.3.1. dovere:\nSpecificare che gli account di amministrazione del sistema vengano utilizzati solo per connettersi ai sistemi di amministrazione del sistema."
+    },
+    "eu-nis2-ir-11-3-3": {
+      "code": "11.3.3",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Account con privilegi e account di amministrazione del sistema\nI soggetti pertinenti riesaminano i diritti di accesso degli account privilegiati e degli account di amministrazione del sistema a intervalli pianificati e sono modificati in base alle modifiche organizzative, e documentano i risultati del riesame, comprese le necessarie modifiche dei diritti di accesso."
+    },
+    "eu-nis2-ir-11-4-1": {
+      "code": "11.4.1",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Sistemi di amministrazione\nI soggetti pertinenti limitano e controllano l'uso dei sistemi di amministrazione del sistema conformemente alla politica di controllo dell'accesso di cui al punto 11.1."
+    },
+    "eu-nis2-ir-11-4-2-a": {
+      "code": "11.4.2.a",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Sistemi di amministrazione\nA tal fine, i soggetti interessati:\nutilizzare i sistemi di amministrazione del sistema solo per scopi di amministrazione del sistema e non per altre operazioni;"
+    },
+    "eu-nis2-ir-11-4-2-b": {
+      "code": "11.4.2.b",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Sistemi di amministrazione\nA tal fine, i soggetti interessati:\nseparare logicamente tali sistemi dal software applicativo non utilizzato per scopi amministrativi del sistema,"
+    },
+    "eu-nis2-ir-11-4-2-c": {
+      "code": "11.4.2.c",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Sistemi di amministrazione\nA tal fine, i soggetti interessati:\nProteggi l'accesso ai sistemi di amministrazione del sistema attraverso l'autenticazione e la crittografia."
+    },
+    "eu-nis2-ir-11-5-1": {
+      "code": "11.5.1",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Identificazione\nI soggetti pertinenti gestiscono l'intero ciclo di vita delle identità delle reti e dei sistemi informativi e dei loro utenti."
+    },
+    "eu-nis2-ir-11-5-2-a": {
+      "code": "11.5.2.a",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Identificazione\nA tal fine, i soggetti interessati:\nistituire identità univoche per le reti e i sistemi informativi e per i loro utenti;"
+    },
+    "eu-nis2-ir-11-5-2-b": {
+      "code": "11.5.2.b",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Identificazione\nA tal fine, i soggetti interessati:\ncollegare l'identità degli utenti a una singola persona;"
+    },
+    "eu-nis2-ir-11-5-2-c": {
+      "code": "11.5.2.c",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Identificazione\nA tal fine, i soggetti interessati:\ngarantire la supervisione delle identità delle reti e dei sistemi informativi;"
+    },
+    "eu-nis2-ir-11-5-2-d": {
+      "code": "11.5.2.d",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Identificazione\nA tal fine, i soggetti interessati:\nApplicare la registrazione alla gestione delle identità."
+    },
+    "eu-nis2-ir-11-5-3": {
+      "code": "11.5.3",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Identificazione\nI soggetti pertinenti autorizzano l'assegnazione di identità a più persone, come le identità condivise, solo se necessarie per motivi commerciali o operativi e se sono soggette a una procedura di approvazione e a una documentazione esplicite. I soggetti pertinenti tengono conto delle identità assegnate a più persone nel quadro di gestione dei rischi di cibersicurezza di cui al punto 2.1."
+    },
+    "eu-nis2-ir-11-5-4": {
+      "code": "11.5.4",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Identificazione\nI soggetti pertinenti riesaminano periodicamente l'identità delle reti e dei sistemi informativi e dei relativi utenti e, se non sono più necessari, le disattivano senza indugio."
+    },
+    "eu-nis2-ir-11-6-1": {
+      "code": "11.6.1",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Autenticazione\nI soggetti pertinenti attuano procedure e tecnologie di autenticazione sicure basate sulle restrizioni di accesso e sulla politica di controllo degli accessi."
+    },
+    "eu-nis2-ir-11-6-2-a": {
+      "code": "11.6.2.a",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Autenticazione\nA tal fine, i soggetti interessati:\ngarantire che la forza dell'autenticazione sia adeguata alla classificazione dell'asset a cui accedere;"
+    },
+    "eu-nis2-ir-11-6-2-b": {
+      "code": "11.6.2.b",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Autenticazione\nA tal fine, i soggetti interessati:\ncontrollare l'assegnazione agli utenti e la gestione delle informazioni segrete di autenticazione mediante un processo che garantisca la riservatezza delle informazioni, compresa la consulenza al personale sulla gestione appropriata delle informazioni di autenticazione;"
+    },
+    "eu-nis2-ir-11-6-2-c": {
+      "code": "11.6.2.c",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Autenticazione\nA tal fine, i soggetti interessati:\nrichiedere la modifica delle credenziali di autenticazione inizialmente, a intervalli predefiniti e in caso di sospetto che le credenziali siano state compromesse;"
+    },
+    "eu-nis2-ir-11-6-2-d": {
+      "code": "11.6.2.d",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Autenticazione\nA tal fine, i soggetti interessati:\nrichiedere il reset delle credenziali di autenticazione e il blocco degli utenti dopo un numero predefinito di tentativi di accesso non andati a buon fine;"
+    },
+    "eu-nis2-ir-11-6-2-e": {
+      "code": "11.6.2.e",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Autenticazione\nA tal fine, i soggetti interessati:\nterminare le sessioni inattive dopo un periodo di inattività predefinito; e"
+    },
+    "eu-nis2-ir-11-6-2-f": {
+      "code": "11.6.2.f",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Autenticazione\nA tal fine, i soggetti interessati:\nRichiedono credenziali separate per accedere agli account amministrativi o di accesso con privilegi."
+    },
+    "eu-nis2-ir-11-6-3": {
+      "code": "11.6.3",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Autenticazione\nI soggetti pertinenti utilizzano, per quanto possibile, metodi di autenticazione all'avanguardia, in funzione del rischio valutato associato e della classificazione dell'attività a cui accedere, nonché di informazioni di autenticazione univoche."
+    },
+    "eu-nis2-ir-11-6-4": {
+      "code": "11.6.4",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Autenticazione\nI soggetti pertinenti riesaminano le procedure e le tecnologie di autenticazione a intervalli pianificati."
+    },
+    "eu-nis2-ir-11-7-1": {
+      "code": "11.7.1",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Autenticazione a più fattori\nI soggetti pertinenti garantiscono che gli utenti siano autenticati mediante più fattori di autenticazione o meccanismi di autenticazione continua per l'accesso alla rete e ai sistemi informativi dei soggetti pertinenti, se del caso, conformemente alla classificazione del bene a cui accedere."
+    },
+    "eu-nis2-ir-11-7-2": {
+      "code": "11.7.2",
+      "section": "section-11",
+      "control": "Articolo 21, paragrafo 2, lettere i) e j)",
+      "requirements": "Autenticazione a più fattori\nI soggetti pertinenti garantiscono che il livello di autenticazione sia adeguato per la classificazione dell'attività a cui accedere."
+    },
+    "eu-nis2-ir-12-1-1": {
+      "code": "12.1.1",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Classificazione degli asset\nAi fini dell'articolo 21, paragrafo 2, lettera i), della direttiva (UE) 2022/2555, i soggetti pertinenti stabiliscono i livelli di classificazione di tutte le attività, comprese le informazioni, nell'ambito della loro rete e dei loro sistemi informativi per il livello di protezione richiesto."
+    },
+    "eu-nis2-ir-12-1-2-a": {
+      "code": "12.1.2.a",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Classificazione degli asset\nAi fini del punto 12.1.1, i soggetti interessati:\nstabilire un sistema di livelli di classificazione delle attività;"
+    },
+    "eu-nis2-ir-12-1-2-b": {
+      "code": "12.1.2.b",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Classificazione degli asset\nAi fini del punto 12.1.1, i soggetti interessati:\nassociare a tutti gli asset un livello di classificazione, basato su requisiti di riservatezza, integrità, autenticità e disponibilità, per indicare la protezione richiesta in base alla loro sensibilità, criticità, rischio e valore aziendale;"
+    },
+    "eu-nis2-ir-12-1-2-c": {
+      "code": "12.1.2.c",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Classificazione degli asset\nAi fini del punto 12.1.1, i soggetti interessati:\nallineare i requisiti di disponibilità degli asset con gli obiettivi di consegna e ripristino stabiliti nei piani di continuità aziendale e ripristino di emergenza."
+    },
+    "eu-nis2-ir-12-1-3": {
+      "code": "12.1.3",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Classificazione degli asset\nI soggetti pertinenti effettuano revisioni periodiche dei livelli di classificazione delle attività e li aggiornano, se del caso."
+    },
+    "eu-nis2-ir-12-2-1": {
+      "code": "12.2.1",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Gestione dei beni\nI soggetti pertinenti stabiliscono, attuano e applicano una politica per la corretta gestione delle risorse, comprese le informazioni, conformemente alla loro politica in materia di sicurezza delle reti e delle informazioni, e comunicano la politica per la corretta gestione delle risorse a chiunque utilizzi o gestisca le risorse."
+    },
+    "eu-nis2-ir-12-2-2-a": {
+      "code": "12.2.2.a",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Gestione dei beni\nLa politica deve:\ncoprire l'intero ciclo di vita dei beni, compresi l'acquisizione, l'uso, lo stoccaggio, il trasporto e la cessione;"
+    },
+    "eu-nis2-ir-12-2-2-b": {
+      "code": "12.2.2.b",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Gestione dei beni\nLa politica deve:\nfornire norme sull'uso sicuro, la conservazione sicura, il trasporto sicuro e la cancellazione e la distruzione irrimediabili dei beni;"
+    },
+    "eu-nis2-ir-12-2-2-c": {
+      "code": "12.2.2.c",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Gestione dei beni\nLa politica deve:\nprevedere che il trasferimento avvenga in modo sicuro, in funzione del tipo di attività da trasferire."
+    },
+    "eu-nis2-ir-12-2-3": {
+      "code": "12.2.3",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Gestione dei beni\nI soggetti pertinenti riesaminano e, se del caso, aggiornano la politica a intervalli pianificati e quando si verificano incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-12-3-1": {
+      "code": "12.3.1",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Criteri relativi ai supporti rimovibili\nI soggetti pertinenti stabiliscono, attuano e applicano una politica in materia di gestione dei supporti di archiviazione rimovibili e la comunicano ai loro dipendenti e ai terzi che gestiscono i supporti di archiviazione rimovibili presso i locali dei soggetti interessati o in altri luoghi in cui i supporti rimovibili sono collegati alla rete e ai sistemi informativi dei soggetti interessati."
+    },
+    "eu-nis2-ir-12-3-2-a": {
+      "code": "12.3.2.a",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Criteri relativi ai supporti rimovibili\nLa politica deve:\nprevedere un divieto tecnico del collegamento di supporti amovibili, a meno che non vi sia un motivo organizzativo per il loro utilizzo;"
+    },
+    "eu-nis2-ir-12-3-2-b": {
+      "code": "12.3.2.b",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Criteri relativi ai supporti rimovibili\nLa politica deve:\nprovvedere alla disabilitazione dell'autoesecuzione da tali supporti e alla scansione dei supporti alla ricerca di codice dannoso prima che siano utilizzati sui sistemi delle entità pertinenti;"
+    },
+    "eu-nis2-ir-12-3-2-c": {
+      "code": "12.3.2.c",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Criteri relativi ai supporti rimovibili\nLa politica deve:\nfornire misure per il controllo e la protezione dei dispositivi di archiviazione portatili contenenti dati durante il transito e l'archiviazione;"
+    },
+    "eu-nis2-ir-12-3-2-d": {
+      "code": "12.3.2.d",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Criteri relativi ai supporti rimovibili\nLa politica deve:\nse del caso, prevedere misure per l'uso di tecniche crittografiche per proteggere i dati su supporti di archiviazione rimovibili."
+    },
+    "eu-nis2-ir-12-3-3": {
+      "code": "12.3.3",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Criteri relativi ai supporti rimovibili\nI soggetti pertinenti riesaminano e, se del caso, aggiornano la politica a intervalli pianificati e quando si verificano incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-12-4-1": {
+      "code": "12.4.1",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Inventario delle risorse\nI soggetti pertinenti elaborano e mantengono un inventario completo, accurato, aggiornato e coerente delle loro attività. Essi registrano le modifiche apportate alle voci dell'inventario in modo tracciabile."
+    },
+    "eu-nis2-ir-12-4-2": {
+      "code": "12.4.2",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Inventario delle risorse\nLa granularità dell'inventario delle attività è a un livello adeguato alle esigenze dei soggetti interessati. L'inventario comprende i seguenti elementi:"
+    },
+    "eu-nis2-ir-12-4-2-a": {
+      "code": "12.4.2.a",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Inventario delle risorse\nLa granularità dell'inventario delle attività è a un livello adeguato alle esigenze dei soggetti interessati. L'inventario comprende i seguenti elementi:\nl'elenco delle operazioni e dei servizi e la loro descrizione,"
+    },
+    "eu-nis2-ir-12-4-2-b": {
+      "code": "12.4.2.b",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Inventario delle risorse\nLa granularità dell'inventario delle attività è a un livello adeguato alle esigenze dei soggetti interessati. L'inventario comprende i seguenti elementi:\nl'elenco delle reti e dei sistemi informativi e di altri beni associati a sostegno delle operazioni e dei servizi dei soggetti pertinenti."
+    },
+    "eu-nis2-ir-12-4-3": {
+      "code": "12.4.3",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Inventario delle risorse\nI soggetti pertinenti riesaminano e aggiornano periodicamente l'inventario e le loro attività e documentano la cronologia delle modifiche."
+    },
+    "eu-nis2-ir-12-5-1": {
+      "code": "12.5.1",
+      "section": "section-12",
+      "control": "Articolo 21, paragrafo 2, lettera i)",
+      "requirements": "Deposito, restituzione o cancellazione di beni in caso di cessazione del rapporto di lavoro\nI soggetti pertinenti istituiscono, attuano e applicano procedure atte a garantire che i loro beni che sono sotto la custodia del personale siano depositati, restituiti o cancellati al momento della cessazione del rapporto di lavoro e documentano il deposito, la restituzione e la cancellazione di tali beni. Qualora il deposito, la restituzione o la cancellazione delle attività non siano possibili, i soggetti pertinenti provvedono affinché le attività non possano più accedere alla rete e ai sistemi informativi dei soggetti pertinenti conformemente al punto 12.2.2."
+    },
+    "eu-nis2-ir-13-1-1": {
+      "code": "13.1.1",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Utilità di supporto\nAi fini dell'articolo 21, paragrafo 2, lettera c), della direttiva (UE) 2022/2555, i soggetti pertinenti prevengono la perdita, il danneggiamento o la compromissione della rete e dei sistemi informativi o l'interruzione delle loro operazioni a causa di guasti e perturbazioni delle utenze di supporto."
+    },
+    "eu-nis2-ir-13-1-2-a": {
+      "code": "13.1.2.a",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Utilità di supporto\nA tal fine, i soggetti interessati, se del caso:\nproteggere le strutture da interruzioni di corrente e altre interruzioni causate da guasti nelle utenze di supporto come elettricità, telecomunicazioni, approvvigionamento idrico, gas, fognature, ventilazione e aria condizionata;"
+    },
+    "eu-nis2-ir-13-1-2-b": {
+      "code": "13.1.2.b",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Utilità di supporto\nA tal fine, i soggetti interessati, se del caso:\nprendere in considerazione l'uso della ridondanza nei servizi di pubblica utilità;"
+    },
+    "eu-nis2-ir-13-1-2-c": {
+      "code": "13.1.2.c",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Utilità di supporto\nA tal fine, i soggetti interessati, se del caso:\nproteggere i servizi di pubblica utilità per l'energia elettrica e le telecomunicazioni, che trasportano dati o alimentano reti e sistemi informativi, da intercettazioni e danni;"
+    },
+    "eu-nis2-ir-13-1-2-d": {
+      "code": "13.1.2.d",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Utilità di supporto\nA tal fine, i soggetti interessati, se del caso:\nmonitorare i servizi di pubblica utilità di cui alla lettera c) e segnalare al personale interno o esterno competente eventi al di fuori delle soglie minime e massime di controllo di cui al punto 13.2.2, lettera b), che interessano i servizi di pubblica utilità;"
+    },
+    "eu-nis2-ir-13-1-2-e": {
+      "code": "13.1.2.e",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Utilità di supporto\nA tal fine, i soggetti interessati, se del caso:\nconcludere contratti per l'alimentazione di emergenza con i servizi corrispondenti, ad esempio per il combustibile per l'alimentazione di emergenza;"
+    },
+    "eu-nis2-ir-13-1-2-f": {
+      "code": "13.1.2.f",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Utilità di supporto\nA tal fine, i soggetti interessati, se del caso:\ngarantire l'efficacia continua, monitorare, mantenere e testare l'alimentazione della rete e dei sistemi informativi necessari per il funzionamento del servizio offerto, in particolare l'elettricità, il controllo della temperatura e dell'umidità, le telecomunicazioni e la connessione a Internet."
+    },
+    "eu-nis2-ir-13-1-3": {
+      "code": "13.1.3",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Utilità di supporto\nI soggetti pertinenti testano, riesaminano e, se del caso, aggiornano le misure di protezione su base periodica o a seguito di incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-13-2-1": {
+      "code": "13.2.1",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Protezione contro le minacce fisiche e ambientali\nAi fini dell'articolo 21, paragrafo 2, lettera e), della direttiva (UE) 2022/2555, i soggetti pertinenti prevengono o riducono le conseguenze di eventi derivanti da minacce fisiche e ambientali, quali calamità naturali e altre minacce intenzionali o non intenzionali, sulla base dei risultati della valutazione del rischio effettuata a norma del punto 2.1."
+    },
+    "eu-nis2-ir-13-2-2-a": {
+      "code": "13.2.2.a",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Protezione contro le minacce fisiche e ambientali\nA tal fine, i soggetti interessati, se del caso:\nprogettare e attuare misure di protezione contro le minacce fisiche e ambientali;"
+    },
+    "eu-nis2-ir-13-2-2-b": {
+      "code": "13.2.2.b",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Protezione contro le minacce fisiche e ambientali\nA tal fine, i soggetti interessati, se del caso:\ndeterminare le soglie minime e massime di controllo per le minacce fisiche e ambientali;"
+    },
+    "eu-nis2-ir-13-2-2-c": {
+      "code": "13.2.2.c",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Protezione contro le minacce fisiche e ambientali\nA tal fine, i soggetti interessati, se del caso:\nmonitorare i parametri ambientali e segnalare al personale interno o esterno competente gli eventi al di fuori delle soglie minime e massime di controllo di cui alla lettera b)."
+    },
+    "eu-nis2-ir-13-2-3": {
+      "code": "13.2.3",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Protezione contro le minacce fisiche e ambientali\nI soggetti pertinenti testano, riesaminano e, se del caso, aggiornano le misure di protezione contro le minacce fisiche e ambientali su base regolare o a seguito di incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    },
+    "eu-nis2-ir-13-3-1": {
+      "code": "13.3.1",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Controllo degli accessi fisici e perimetrali\nAi fini dell'articolo 21, paragrafo 2, lettera i), della direttiva (UE) 2022/2555, i soggetti pertinenti prevengono e monitorano l'accesso fisico non autorizzato, i danni e le interferenze alle loro reti e ai loro sistemi informativi."
+    },
+    "eu-nis2-ir-13-3-2-a": {
+      "code": "13.3.2.a",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Controllo degli accessi fisici e perimetrali\nA tal fine, i soggetti interessati:\nsulla base della valutazione dei rischi effettuata a norma del punto 2.1, predisporre e utilizzare perimetri di sicurezza per proteggere le aree in cui sono ubicate le reti e i sistemi informativi e altri beni associati;"
+    },
+    "eu-nis2-ir-13-3-2-b": {
+      "code": "13.3.2.b",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Controllo degli accessi fisici e perimetrali\nA tal fine, i soggetti interessati:\nproteggere le aree di cui alla lettera a) mediante adeguati controlli all'ingresso e punti di accesso;"
+    },
+    "eu-nis2-ir-13-3-2-c": {
+      "code": "13.3.2.c",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Controllo degli accessi fisici e perimetrali\nA tal fine, i soggetti interessati:\nprogettare e realizzare la sicurezza fisica di uffici, locali e strutture,"
+    },
+    "eu-nis2-ir-13-3-2-d": {
+      "code": "13.3.2.d",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Controllo degli accessi fisici e perimetrali\nA tal fine, i soggetti interessati:\nmonitorare costantemente i propri locali per verificare la presenza di accessi fisici non autorizzati."
+    },
+    "eu-nis2-ir-13-3-3": {
+      "code": "13.3.3",
+      "section": "section-13",
+      "control": "Articolo 21, paragrafo 2, lettere c), e) e i)",
+      "requirements": "Controllo degli accessi fisici e perimetrali\nI soggetti pertinenti testano, riesaminano e, se del caso, aggiornano le misure di controllo dell'accesso fisico su base periodica o a seguito di incidenti significativi o modifiche significative delle operazioni o dei rischi."
+    }
+  }
+}

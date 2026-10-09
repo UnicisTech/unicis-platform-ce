@@ -478,6 +478,7 @@
   "unknown-question-type": "Type de question inconnu.",
   "course-presentation": "Présentation du cours",
   "unknown-course-type": "Type de cours inconnu",
+  "unsupported-video-url": "URL vidéo non prise en charge. Utilisez un lien YouTube ou PeerTube.",
   "iap-header": "~ {{brand}} - Programme de sensibilisation interactif ~",
   "certificate-of-training": "Certificat de formation",
   "has-successfully-completed": "a terminé avec succès :",

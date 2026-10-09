@@ -1,0 +1,1320 @@
+{
+  "groups": {
+    "ID.AM-1.1": {
+      "code": "ID.AM-1.1",
+      "guidance": "•\tThis inventory includes fixed and portable computers, tablets, mobile phones, Programmable Logic Controllers (PLCs), sensors, actuators, robots, machine tools, firmware, network switches, routers, power supplies, and other networked components or devices. \n•\tThis inventory must include all assets, whether or not they are connected to the organization's network.\n•\tThe use of an IT asset management tool could be considered.",
+      "evidence": ""
+    },
+    "ID.AM-1.2": {
+      "code": "ID.AM-1.2",
+      "guidance": "•\tInventory specifications include for example, manufacturer, device type, model, serial number, machine names and network addresses, physical location…\n•\tAccountability is the obligation to explain, justify, and take responsibility for one's actions, it implies answerability for the outcome of the task or process.\n•\tChanges include the decommissioning of material.",
+      "evidence": ""
+    },
+    "ID.AM-1.3": {
+      "code": "ID.AM-1.3",
+      "guidance": "•\tAny unsupported hardware without an exception documentation, is designated as unauthorized.\n•\tUnauthorized hardware can be detected during inventory, requests for support by the user or other means.",
+      "evidence": ""
+    },
+    "ID.AM-1.4": {
+      "code": "ID.AM-1.4",
+      "guidance": "•\tWhere safe and feasible, these mechanisms should be automated.\n•\tThere should be a process to address unauthorized assets on a frequently  basis; The organization may choose to remove the asset from the network, deny the asset from connecting remotely to the network, or quarantine the asset.",
+      "evidence": ""
+    },
+    "ID.AM-2.1": {
+      "code": "ID.AM-2.1",
+      "guidance": "•\tThis inventory includes software programs, software platforms and databases, even if outsourced (SaaS).\n•\tOutsourcing arrangements should be part of the contractual agreements with the provider.\n•\tInformation in the inventory should include for example: name, description, version, number of users, data processed, etc.\n•\tA distinction should be made between unsupported software and unauthorized software.\n•\tThe use of an IT asset management tool could be considered.",
+      "evidence": ""
+    },
+    "ID.AM-2.2": {
+      "code": "ID.AM-2.2",
+      "guidance": "The inventory of software platforms and applications should include the title, publisher, initial install/use date, and business purpose for each entry; where appropriate, include the Uniform Resource Locator (URL), app store(s), version(s), deployment mechanism, and decommission date.",
+      "evidence": ""
+    },
+    "ID.AM-2.3": {
+      "code": "ID.AM-2.3",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "ID.AM-2.4": {
+      "code": "ID.AM-2.4",
+      "guidance": "•\tAny unsupported software without an exception documentation, is designated as unauthorized.\n•\tUnauthorized software can be detected during inventory, requests for support by the user or other means.",
+      "evidence": ""
+    },
+    "ID.AM-2.5": {
+      "code": "ID.AM-2.5",
+      "guidance": "•\tWhere safe and feasible, these mechanisms should be automated.\n•\tThere should be a process to regularly address unauthorised assets; The organization may choose to remove the asset from the network, deny the asset from connecting remotely to the network, or quarantine the asset.",
+      "evidence": ""
+    },
+    "ID.AM-3.1": {
+      "code": "ID.AM-3.1",
+      "guidance": "•\tStart by listing all the types of information your business stores or uses. Define “information type” in any useful way that makes sense to your business. You may want to have your employees make a list of all the information they use in their regular activities. List everything you can think of, but you do not need to be too specific. For example, you may keep customer names and email addresses, receipts for raw material, your banking information, or other proprietary information.\n•\tConsider mapping this information with the associated assets identified in the inventories of physical devices, systems, software platforms and applications used within the organization (see ID.AM-1 & ID.AM-2).",
+      "evidence": ""
+    },
+    "ID.AM-3.2": {
+      "code": "ID.AM-3.2",
+      "guidance": "•\tConnection information includes, for example, the interface characteristics, data characteristics, ports, protocols, addresses, description of the data, security requirements, and the nature of the connection.\n•\tConfiguration management can be used as supporting asset.\n•\tThis documentation should not be stored only on the network it represents.\n•\tConsider keeping a copy of this documentation in a safe offline environment (e.g. offline hard disk, paper hardcopy, …)",
+      "evidence": ""
+    },
+    "ID.AM-3.3": {
+      "code": "ID.AM-3.3",
+      "guidance": "•\tWith knowledge of the information/data flows within a system and between systems, it is possible to determine where information can and cannot go.\n•\tConsider:\no\tEnforcing controls restricting connections to only authorized interfaces.\no\tHeightening system monitoring activity whenever there is an indication of increased risk to organization's critical operations and assets.\no\tProtecting the system from information leakage due to electromagnetic signals emanations.",
+      "evidence": ""
+    },
+    "ID.AM-4.1": {
+      "code": "ID.AM-4.1",
+      "guidance": "•\tOutsourcing of systems, software platforms and applications used within the organization is covered in ID.AM-1 & ID.AM-2\n•\tExternal information systems are systems or components of systems for which organizations typically have no direct supervision and authority over the application of security requirements and controls, or the determination of the effectiveness of implemented controls on those systems i.e., services that are run in cloud, SaaS, hosting or other external environments, API (Application Programming Interface)…\n•\tMapping external services and the connections made to them and authorizing them in advance avoids wasting unnecessary resources investigating a supposedly non-authenticated connection to external systems.",
+      "evidence": ""
+    },
+    "ID.AM-4.2": {
+      "code": "ID.AM-4.2",
+      "guidance": "Consider requiring external service providers to identify and document the functions, ports, protocols, and services necessary for the connection services.",
+      "evidence": ""
+    },
+    "ID.AM-5.1": {
+      "code": "ID.AM-5.1",
+      "guidance": "•\tDetermine organization’s resources (e.g., hardware, devices, data, time, personnel, information, and software):\no\tWhat would happen to my business if these resources were made public, damaged, lost…?\no\tWhat would happen to my business when the integrity of resources is no longer guaranteed?\no\tWhat would happen to my business if I/my customers couldn’t access these resources? And rank these resources based on their classification, criticality, and business value.\n•\tResources should include enterprise assets. •\tCreate a classification for sensitive information by first determining categories, e.g.\no\tPublic - freely accessible to all, even externally\no\tInternal - accessible only to members of your organization\no\tConfidential - accessible only to those whose duties require access.\n•\tCommunicate these categories and identify what types of data fall into these categories (HR data, financial data, legal data, personal data, etc.).\n•\tConsider the use of the Traffic Light Protocol (TLP).\n•\tData classification should apply to the three aspects: C-I-A. Consider implementing an automated tool, such as a host-based Data Loss Prevention (DLP) tool to identify all sensitive data stored, processed, or transmitted through enterprise assets, including those located onsite or at a remote service provider.",
+      "evidence": ""
+    },
+    "ID.AM-6.1": {
+      "code": "ID.AM-6.1",
+      "guidance": "It should be considered to:\n•\tDescribe security roles, responsibilities, and authorities: who in your organization should be consulted, informed, and held accountable for all or part of your assets.\n•\tProvide security roles, responsibilities, and authority for all key functions in information/cyber security (legal, detection activities…).\n•\tInclude information/cybersecurity roles and responsibilities for third-party providers (e.g., suppliers, customers, partners) with physical or logical access to the organization’s ICT/OT environment.",
+      "evidence": ""
+    },
+    "ID.AM-6.2": {
+      "code": "ID.AM-6.2",
+      "guidance": "The information security officer should be responsible for monitoring the implementation of the organization's information/cyber security strategy and safeguards.",
+      "evidence": ""
+    },
+    "ID.BE-1.1": {
+      "code": "ID.BE-1.1",
+      "guidance": "•\tThe organisation should be able to clearly identify who is upstream and downstream of the organisation and which suppliers provide services, capabilities, products and items to the organisation.\n•\tThe organisation should communicate its position to its upstream and downstream so that it is understood where they sit in terms of critical importance to the organisation's operations.",
+      "evidence": ""
+    },
+    "ID.BE-1.2": {
+      "code": "ID.BE-1.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "ID.BE-2.1": {
+      "code": "ID.BE-2.1",
+      "guidance": "The organisation covered by NIS legislation has a responsibility to know the other organisations in the same sector in order to work with them to achieve the objectives set by NIS for that particular sector.",
+      "evidence": ""
+    },
+    "ID.BE-3.1": {
+      "code": "ID.BE-3.1",
+      "guidance": "Information protection needs should be determined, and the related processes revised as necessary.",
+      "evidence": ""
+    },
+    "ID.BE-4.1": {
+      "code": "ID.BE-4.1",
+      "guidance": "Dependencies and business critical functions should include support services.",
+      "evidence": ""
+    },
+    "ID.BE-5.1": {
+      "code": "ID.BE-5.1",
+      "guidance": "•\tConsider implementing resiliency mechanisms to support normal and adverse operational situations (e.g., failsafe, load balancing, hot swap).\n•\tConsider aspects of business continuity management in e.g. Business Impact Analyse (BIA), Disaster Recovery Plan (DRP) and Business Continuity Plan (BCP).",
+      "evidence": ""
+    },
+    "ID.BE-5.2": {
+      "code": "ID.BE-5.2",
+      "guidance": "•\tConsider provisioning adequate data and network redundancy (e.g. redundant network devices, servers with load balancing, raid arrays, backup services, 2 separate datacentres, fail-over network connections, 2 ISP's…).\n•\tConsider protecting critical equipment/services from power outages and other failures due to utility interruptions (e.g. UPS & NO-break, frequent test, service contracts that include regular maintenance, redundant power cabling, 2 different power service providers...).",
+      "evidence": ""
+    },
+    "ID.BE-5.3": {
+      "code": "ID.BE-5.3",
+      "guidance": "•\tConsider applying the 3-2-1 back-up rule to improve RPO and RTO (maintain at least 3 copies of your data, keep 2 of them at separate locations and one copy should be stored at an off-site location).\n•\tConsider implementing mechanisms such as hot swap, load balancing and failsafe to increase resilience.",
+      "evidence": ""
+    },
+    "ID.GV-1.1": {
+      "code": "ID.GV-1.1",
+      "guidance": "•\tPolicies and procedures used to identify acceptable practices and expectations for business operations, can be used to train new employees on your information security expectations, and can aid an investigation in case of an incident. These policies and procedures should be readily accessible to employees.\n•\tPolicies and procedures for information- and cybersecurity should clearly describe your expectations for protecting the organization’s information and systems, and how management expects the company’s resources to be used and protected by all employees.\n•\tPolicies and procedures should be reviewed and updated at least annually and every time there are changes in the organization or technology. Whenever the policies are changed, employees should be made aware of the changes.",
+      "evidence": ""
+    },
+    "ID.GV-1.2": {
+      "code": "ID.GV-1.2",
+      "guidance": "The policy should include, for example:\n•\tThe identification and assignment of roles, responsibilities, management commitment, coordination among organizational entities, and compliance. Guidance on role profiles along with their identified titles, missions, tasks, skills, knowledge, competences is available in the \"European Cybersecurity Skills Framework Role Profiles\" by ENISA. (https://www.enisa.europa.eu/publications/european-cybersecurity-skills-framework-role-profiles)\n•\tThe coordination among organizational entities responsible for the different aspects of security (i.e., technical, physical, personnel, cyber-physical, information, access control, media protection, vulnerability management, maintenance, monitoring)\n•\tThe coverage of the full life cycle of the ICT/OT systems.",
+      "evidence": ""
+    },
+    "ID.GV-3.1": {
+      "code": "ID.GV-3.1",
+      "guidance": "There are no additional guidelines.",
+      "evidence": ""
+    },
+    "ID.GV-3.2": {
+      "code": "ID.GV-3.2",
+      "guidance": "•\tThere should be regular reviews to ensure the continuous compliance with legal and regulatory requirements regarding information/cybersecurity, including privacy obligations.\n•\tThis requirement also applies to contractors and service providers.",
+      "evidence": ""
+    },
+    "ID.GV-4.1": {
+      "code": "ID.GV-4.1",
+      "guidance": "This strategy should include determining and allocating the required resources to protect the organisation's business-critical assets.",
+      "evidence": ""
+    },
+    "ID.GV-4.2": {
+      "code": "ID.GV-4.2",
+      "guidance": "Consider using Risk Management tools.",
+      "evidence": ""
+    },
+    "ID.RA-1.1": {
+      "code": "ID.RA-1.1",
+      "guidance": "•\tA vulnerability refers to a weakness in the organization’s hardware, software, or procedures. It is a gap through which a bad actor can gain access to the organization’s assets. A vulnerability exposes an organization to threats.\n•\tA threat is a malicious or negative event that takes advantage of a vulnerability. \n•\tThe risk is the potential for loss and damage when the threat does occur.",
+      "evidence": ""
+    },
+    "ID.RA-1.2": {
+      "code": "ID.RA-1.2",
+      "guidance": "•\tWhere safe and feasible, the use of vulnerability scanning should be considered.\n•\tThe organization should establish and maintain a testing program appropriate to its size, complexity, and maturity.",
+      "evidence": ""
+    },
+    "ID.RA-1.3": {
+      "code": "ID.RA-1.3",
+      "guidance": "Consider validating security measures after each penetration test.",
+      "evidence": ""
+    },
+    "ID.RA-2.1": {
+      "code": "ID.RA-2.1",
+      "guidance": "A threat and vulnerability awareness program should include ongoing contact with security groups and associations to receive security alerts and advisories. (Security groups and associations include, for example, special interest groups, forums, professional associations, news groups, and/or peer groups of security professionals in similar organizations).This contact can include the sharing of information about potential vulnerabilities and incidents. This sharing capability should have an unclassified and classified information sharing capability.",
+      "evidence": ""
+    },
+    "ID.RA-2.2": {
+      "code": "ID.RA-2.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "ID.RA-5.1": {
+      "code": "ID.RA-5.1",
+      "guidance": "•\tKeep in mind that threats exploit vulnerabilities.\n•\tIdentify the consequences that losses of confidentiality, integrity and availability may have on the assets and related business processes.",
+      "evidence": ""
+    },
+    "ID.RA-5.2": {
+      "code": "ID.RA-5.2",
+      "guidance": "•\tRisk assessment should include threats from insiders and external parties.\n•\tQualitative and/or quantitative  risk analysis methods \n(MAPGOOD, ISO27005, CIS RAM, …) can be used together with software tooling.",
+      "evidence": ""
+    },
+    "ID.RA-5.3": {
+      "code": "ID.RA-5.3",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "ID.RA-6.1": {
+      "code": "ID.RA-6.1",
+      "guidance": "•\tManagement and employees should be involved in information- and cybersecurity.\n•\tIt should be identified what the most important assets are, and how they are protected.\n•\tIt should be clear what impact will be if these assets are compromised.\n•\tIt should be established how the implementation of adequate mitigation measures will be organized.",
+      "evidence": ""
+    },
+    "ID.RM-1.1": {
+      "code": "ID.RM-1.1",
+      "guidance": "External stakeholders include  customers, investors and shareholders, suppliers, government agencies and the wider community.",
+      "evidence": ""
+    },
+    "ID.RM-2.1": {
+      "code": "ID.RM-2.1",
+      "guidance": "Determination and expression of risk tolerance (risk appetite) should be in line with the policies on information security and cybersecurity, to facilitate demonstration of coherence between policies, risk tolerance and measures.",
+      "evidence": ""
+    },
+    "ID.RM-3.1": {
+      "code": "ID.RM-3.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "ID.SC-1.1": {
+      "code": "ID.SC-1.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "ID.SC-2.1": {
+      "code": "ID.SC-2.1",
+      "guidance": "This assessment should identify and prioritize potential negative impacts to the organization from the risks associated with the distributed and interconnected nature of ICT/OT product and service supply chains.",
+      "evidence": ""
+    },
+    "ID.SC-2.2": {
+      "code": "ID.SC-2.2",
+      "guidance": "This list should include suppliers, vendors and partners contact information and the services they provide, so they can be contacted for assistance in the event of an outage or service degradation.",
+      "evidence": ""
+    },
+    "ID.SC-3.1": {
+      "code": "ID.SC-3.1",
+      "guidance": "•\tEntities not subject to the NIS legislation should consider business critical suppliers and third-party partners only.\n•\tKeep in mind that GDPR requirements need to be fulfilled when business information contains personal data (applicable on all levels), i.e. security measures need to be addressed in the contractual framework.",
+      "evidence": ""
+    },
+    "ID.SC-3.2": {
+      "code": "ID.SC-3.2",
+      "guidance": "•\tInformation systems containing software (or firmware) affected by recently announced software flaws (and potential vulnerabilities resulting from those flaws) should be identified.\n•\tNewly released security relevant patches, service packs, and hot fixes should be installed, and these  patches, service packs, and hot fixes are tested for effectiveness and potential side effects on the organization’s information systems before installation. Flaws discovered during security assessments, continuous monitoring, incident response activities, or information system error handling are also addressed expeditiously. Flaw remediation should be incorporated into configuration management as an emergency change.",
+      "evidence": ""
+    },
+    "ID.SC-3.3": {
+      "code": "ID.SC-3.3",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "ID.SC-4.1": {
+      "code": "ID.SC-4.1",
+      "guidance": "Entities not subject to the NIS legislation could limit themselves to business critical suppliers and third-party partners only.",
+      "evidence": ""
+    },
+    "ID.SC-4.2": {
+      "code": "ID.SC-4.2",
+      "guidance": "The depth of the review should depend on the criticality of delivered products and services.",
+      "evidence": ""
+    },
+    "ID.SC-5.1": {
+      "code": "ID.SC-5.1",
+      "guidance": "Entities not subject to the NIS legislation could limit themselves to business critical suppliers and third-party partners only.",
+      "evidence": ""
+    },
+    "ID.SC-5.2": {
+      "code": "ID.SC-5.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.AC-1.1": {
+      "code": "PR.AC-1.1",
+      "guidance": "Identities and credentials for authorized devices and users could be managed through a password policy. A password policy is a set of rules designed to enhance ICT/OT security by encouraging organization’s to:\n(Not limitative list and measures to be considered as appropriate)\n•\tChange all default passwords.\n•\tEnsure that no one works with administrator privileges for daily tasks.\n•\tKeep a limited and updated list of system administrator accounts.\n•\tEnforce password rules, e.g. passwords must be longer than a state-of-the-art number of characters with a combination of character types and changed periodically or when there is any suspicion of compromise.\n•\tUse only individual accounts and never share passwords.\n•\tImmediately disable unused accounts\n•\tRights and privileges are managed by user groups.",
+      "evidence": ""
+    },
+    "PR.AC-1.2": {
+      "code": "PR.AC-1.2",
+      "guidance": "•\tAutomated mechanisms can help to support the management and auditing of information system credentials.\n•\tConsider strong user authentication, meaning an authentication based on the use of at least two authentication factors from different categories of either knowledge (something only the user knows), possession (something only the user possesses) or inherence (something the user is) that are independent, in that the breach of one does not compromise the reliability of the others, and is designed in such a way to protect the confidentiality of the authentication data.",
+      "evidence": ""
+    },
+    "PR.AC-1.3": {
+      "code": "PR.AC-1.3",
+      "guidance": "•\tTo guarantee the safe operation, service accounts should be used for running processes and services.\n•\tConsider the use of a formal access procedure for external parties.",
+      "evidence": ""
+    },
+    "PR.AC-1.4": {
+      "code": "PR.AC-1.4",
+      "guidance": "Consider the use of SSO (Single Sign On) in combination with MFA for the organization's internal and external critical systems.",
+      "evidence": ""
+    },
+    "PR.AC-1.5": {
+      "code": "PR.AC-1.5",
+      "guidance": "•\tConsider limiting the number of failed login attempts by implementing automatic lockout.\n•\tThe locked account won’t be accessible until it has been reset or the account lockout duration elapses.",
+      "evidence": ""
+    },
+    "PR.AC-2.1": {
+      "code": "PR.AC-2.1",
+      "guidance": "•\tConsider to strictly manage keys to access the premises and alarm codes. The following rules should be considered:\no\tAlways retrieve an employee's keys or badges when they leave the company permanently.\no\tChange company alarm codes frequently.\no\tNever give keys or alarm codes to external service providers (cleaning agents, etc.), unless it is possible to trace these accesses and restrict them technically to given time slots.\n•\tConsider to not leaving internal network access outlets accessible in public areas. These public places can be waiting rooms, corridors...",
+      "evidence": ""
+    },
+    "PR.AC-2.2": {
+      "code": "PR.AC-2.2",
+      "guidance": "•\tPhysical access controls may include, for example: lists of authorized individuals, identity credentials, escort requirements, guards, fences, turnstiles, locks, monitoring of facility access, camera surveillance.\n•\tThe following measures should be considered:\no\tImplement a badge system and create different security zones.\no\tLimit physical access to servers and network components to authorized personnel.\no\tLog all access to servers and network components.\n•\tVisitor access records should be maintained, reviewed and acted upon as required.",
+      "evidence": ""
+    },
+    "PR.AC-2.3": {
+      "code": "PR.AC-2.3",
+      "guidance": "E.g. production, R&D, organization’s critical systems equipment (server rooms…)",
+      "evidence": ""
+    },
+    "PR.AC-2.4": {
+      "code": "PR.AC-2.4",
+      "guidance": "•\tConsider protecting power equipment, power cabling, network cabling, and network access interfaces from accidental damage, disruption, and physical tampering.\n•\tConsider implementing redundant and physically separated power systems for organization’s critical operations.",
+      "evidence": ""
+    },
+    "PR.AC-3.1": {
+      "code": "PR.AC-3.1",
+      "guidance": "Consider the following when wireless networking is used:\n•\tChange the administrative password upon installation of a wireless access points.\n•\tSet the wireless access point so that it does not broadcast its Service Set Identifier (SSID).\n•\tSet your router to use at least WiFi Protected Access (WPA-2 or WPA-3 where possible), with the Advanced Encryption Standard (AES) for encryption.\n•\tEnsure that wireless internet access to customers is separated from your business network.\n•\tConnecting to unknown or unsecured / guest wireless access points, should be avoided, and if unavoidable done through an encrypted virtual private network (VPN) capability.\n•\tManage all endpoint devices (fixed and mobile) according to the organization's security policies.",
+      "evidence": ""
+    },
+    "PR.AC-3.2": {
+      "code": "PR.AC-3.2",
+      "guidance": "Enforce MFA (e.g. 2FA) on Internet-facing systems, such as email, remote desktop, and Virtual Private Network (VPNs).",
+      "evidence": ""
+    },
+    "PR.AC-3.3": {
+      "code": "PR.AC-3.3",
+      "guidance": "Consider the following:\n•\tRemote access methods include, for example, wireless, broadband, Virtual Private Network (VPN) connections, mobile device connections, and communications through external networks.\n•\tLogin credentials should be in line with company's user authentication policies.\n•\tRemote access for support activities or maintenance of organizational assets should be approved, logged, and performed in a manner that prevents unauthorized access.\n•\tThe user should be made aware of any remote connection to its device by a visual indication.",
+      "evidence": ""
+    },
+    "R.AC-3.4": {
+      "code": "R.AC-3.4",
+      "guidance": "This should include that only authorized use of privileged functions from remote access is allowed.",
+      "evidence": ""
+    },
+    "R.AC-3.5": {
+      "code": "R.AC-3.5",
+      "guidance": "Access from pre-defined IP addresses could be considered.",
+      "evidence": ""
+    },
+    "PR.AC-4.1": {
+      "code": "PR.AC-4.1",
+      "guidance": "The following should be considered:\n•\tDraw up and review regularly access lists per system (files, servers, software, databases, etc.), possibly through analysis of the Active Directory in Windows-based systems, with the objective of determining who needs what kind of access (privileged or not), to what, to perform their duties in the organization.\n•\tSet up a separate account for each user (including any contractors needing access) and require that strong, unique passwords be used for each account.\n•\tEnsure that all employees use computer accounts without administrative privileges to perform typical work functions. This includes separation of personal and admin accounts.\n•\tFor guest accounts, consider using the minimal privileges (e.g. internet access only) as required for your business needs.\n•\tPermission management should be documented in a procedure and updated when appropriate.\n•\tUse 'Single Sign On' (SSO) when appropriate.",
+      "evidence": ""
+    },
+    "PR.AC-4.2": {
+      "code": "PR.AC-4.2",
+      "guidance": "Means to get access may include: a key, password, code, or administrative privilege.",
+      "evidence": ""
+    },
+    "PR.AC-4.3": {
+      "code": "PR.AC-4.3",
+      "guidance": "The principle of Least Privilege should be understood as the principle that a security architecture should be designed so that each employee is granted the minimum system resources and authorizations that the employee needs to perform its function. Consider to:\n•\tNot allow any employee to have access to all the business’s information.\n•\tLimit the number of Internet accesses and interconnections with partner networks to the strict necessary to be able to centralize and homogenize the monitoring of exchanges more easily.\n•\tEnsure that when an employee leaves the business, all access to the business’s information or systems is blocked instantly.",
+      "evidence": ""
+    },
+    "PR.AC-4.4": {
+      "code": "PR.AC-4.4",
+      "guidance": "Consider the following:\n•\tSeparate administrator accounts from user accounts.\n•\tDo not privilege user accounts to effectuate administration tasks.\n•\tCreate unique local administrator passwords and disable unused accounts.\n•\tConsider prohibiting Internet browsing from administrative accounts.",
+      "evidence": ""
+    },
+    "PR.AC-4.5": {
+      "code": "PR.AC-4.5",
+      "guidance": "Consider separately identifying each person with access to the organization's critical systems with a username to remove generic and anonymous accounts and access.",
+      "evidence": ""
+    },
+    "PR.AC-4.6": {
+      "code": "PR.AC-4.6",
+      "guidance": "Separation of duties includes, for example:\n•\tdividing operational functions and system support functions among different roles.\n•\tconducting system support functions with different individuals.\n•\tnot allow a single individual to both initiate and approve a transaction (financial or otherwise).\n•\tensuring that security personnel administering access control functions do not also administer audit functions.",
+      "evidence": ""
+    },
+    "PR.AC-4.7": {
+      "code": "PR.AC-4.7",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.AC-4.8": {
+      "code": "PR.AC-4.8",
+      "guidance": "Specific restrictions can include, for example, restricting usage to certain days of the week, time of day, or specific durations of time.",
+      "evidence": ""
+    },
+    "PR.AC-4.9": {
+      "code": "PR.AC-4.9",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.AC-5.1": {
+      "code": "PR.AC-5.1",
+      "guidance": "Consider the following:\n•\tInstall and operate a firewall between your internal network and the Internet. This may be a function of a (wireless) access point/router, or it may be a function of a router provided by the Internet Service Provider (ISP).\n•\tEnsure there is antivirus software installed on purchased firewall solutions and ensure that the administrator’s log-in and administrative password is changed upon installation and regularly thereafter.\n•\tInstall, use, and update a software firewall on each computer system (including smart phones and other networked devices).\n•\tHave firewalls on each of your computers and networks even if you use a cloud service provider or a virtual private network (VPN). Ensure that for telework home network and systems have hardware and software firewalls installed, operational, and regularly updated.\n•\tConsider installing an Intrusion Detection / Prevention System (IDPS). These devices analyze network traffic at a more detailed level and can provide a greater level of protection.",
+      "evidence": ""
+    },
+    "PR.AC-5.2": {
+      "code": "PR.AC-5.2",
+      "guidance": "•\tConsider creating different security zones in the network (e.g. Basic network segmentation through VLAN’s or other network access control mechanisms) and control/monitor the traffic between these zones.\n•\tWhen the network is \"flat\", the compromise of a vital network component can lead to the compromise of the entire network.",
+      "evidence": ""
+    },
+    "PR.AC-5.3": {
+      "code": "PR.AC-5.3",
+      "guidance": "Boundary protection mechanisms include, for example, routers, gateways, unidirectional gateways, data diodes, and firewalls separating system components into logically separate networks or subnetworks.",
+      "evidence": ""
+    },
+    "PR.AC-5.4": {
+      "code": "PR.AC-5.4",
+      "guidance": "Consider implementing the following recommendations:\n•\tSeparate your public WIFI network from your business network.\n•\tProtect your business WIFI with state-of-the-art encryption.\n•\tImplement a Network Access Control (NAC) solution.\n•\tEncrypt connections to your corporate network.\n•\tDivide your network according to security levels and apply firewall rules. Isolate your networks for server administration.\n•\tForce VPN on public networks.\n•\tImplement a closed policy for security gateways (deny all policy: only allow/open connections that have been explicitly pre-authorized).",
+      "evidence": ""
+    },
+    "PR.AC-5.5": {
+      "code": "PR.AC-5.5",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.AC-5.6": {
+      "code": "PR.AC-5.6",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.AC-6.1": {
+      "code": "PR.AC-6.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.AC-6.2": {
+      "code": "PR.AC-6.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.AC-7.1": {
+      "code": "PR.AC-7.1",
+      "guidance": "Consider a security-by-design approach for new systems; For existing systems a separate risk assessment should be used.",
+      "evidence": ""
+    },
+    "PR.AT-1.1": {
+      "code": "PR.AT-1.1",
+      "guidance": "•\tEmployees include all users and managers of the ICT/OT systems, and they should be trained immediately when hired and regularly thereafter about the company’s information security policies and what they will be expected to do to protect company’s business information and technology.\n•\tTraining should be continually updated and reinforced by awareness campaigns.",
+      "evidence": ""
+    },
+    "PR.AT-1.2": {
+      "code": "PR.AT-1.2",
+      "guidance": "Consider to:\n•\tCommunicate and discuss regularly to ensure that everyone is aware of their responsibilities.\n•\tDevelop an outreach program by gathering in a document the messages you want to convey to your staff (topics, audiences, objectives, etc.) and your communication rhythm on a calendar (weekly, monthly, one-time, etc.). Communicate continuously and in an engaging way, involving management, IT colleagues, the ICT service provider and HR and Communication managers.\n•\tCover topics such as: recognition of fraud attempts, phishing, management of sensitive information, incidents, etc. The goal is for all employees to understand ways to protect company information.\n•\tDiscuss with your management, your ICT colleagues, or your ICT service provider some practice scenarios (e.g. what to do if a virus alert is triggered, if a storm cuts off the power, if data is blocked, if an account is hacked, etc.), determine what behaviours to adopt, document and communicate them to all your staff. The central point of contact in the event of an incident should be known to all.\n•\tOrganize a simulation of a scenario to test your knowledge. Consider performing the exercise for example at least once a year.",
+      "evidence": ""
+    },
+    "PR.AT-1.3": {
+      "code": "PR.AT-1.3",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.AT-2.1": {
+      "code": "PR.AT-2.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.AT-3.1": {
+      "code": "PR.AT-3.1",
+      "guidance": "Enforcement should include that ‘third party stakeholder’-users (e.g. suppliers, customers, partners) can demonstrate the understanding of their roles and responsibilities.",
+      "evidence": ""
+    },
+    "PR.AT-3.2": {
+      "code": "PR.AT-3.2",
+      "guidance": "Third-party providers include, for example, service providers, contractors, and other organizations providing system development, technology services, outsourced applications, or network and security management.",
+      "evidence": ""
+    },
+    "PR.AT-3.3": {
+      "code": "PR.AT-3.3",
+      "guidance": "Third party audit results can be used as audit evidence.",
+      "evidence": ""
+    },
+    "PR.AT-3.4": {
+      "code": "PR.AT-3.4",
+      "guidance": "Third party audit results can be used as audit evidence.",
+      "evidence": ""
+    },
+    "PR.AT-4.1": {
+      "code": "PR.AT-4.1",
+      "guidance": "Guidance on role profiles along with their identified titles, missions, tasks, skills, knowledge, competences is available in the \"European Cybersecurity Skills Framework Role Profiles\" by ENISA. (https://www.enisa.europa.eu/publications/european-cybersecurity-skills-framework-role-profiles )",
+      "evidence": ""
+    },
+    "PR.AT-5.1": {
+      "code": "PR.AT-5.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.DS-1.1": {
+      "code": "PR.DS-1.1",
+      "guidance": "•\tConsider using encryption techniques for data storage, data transmission or data transport (e.g., laptop, USB).\n•\tConsider encrypting end-user devices and removable media containing sensitive data (e.g. hard disks, laptops, mobile device, USB storage devices, …). This could be done by e.g. Windows BitLocker®, VeraCrypt,  Apple FileVault®, Linux® dm-crypt,…\n•\tConsider encrypting sensitive data stored in the cloud. The below measures should be considered:\n•\tImplement dedicated safeguards to prevent unauthorized access, distortion, or modification of system data and audit records (e.g. restricted access rights, daily backups, data encryption, firewall installation).\n•\tEncrypt hard drives, external media, stored files, configuration files and data stored in the cloud.",
+      "evidence": ""
+    },
+    "PR.DS-2.1": {
+      "code": "PR.DS-2.1",
+      "guidance": "When the organization often sends sensitive documents or e-mails, it is recommended to encrypt those documents and/or e-mails with appropriate, supported, and authorized software tools. If you send sensitive documents or emails, you may want to consider encrypting those documents and/or emails with appropriate, supported, and authorized software tools.",
+      "evidence": ""
+    },
+    "PR.DS-3.1": {
+      "code": "PR.DS-3.1",
+      "guidance": "•\tWhen eliminating tangible assets like business computers/laptops, servers, hard drive(s) and other storage media (USB drives, paper…), ensure that all   sensitive business or personal data are securely deleted (i.e. electronically “wiped”) before they are removed and then physically destroyed (or re-commissioned). This is also known as “sanitization” and thus related to the requirement and guidance in PR.IP-6.\n•\tConsider installing a remote-wiping application on company laptops, tablets, cell phones, and other mobile devices.",
+      "evidence": ""
+    },
+    "PR.DS-3.2": {
+      "code": "PR.DS-3.2",
+      "guidance": "Accountability should include:\n•\tThe authorization for business-critical assets to enter and exit the facility.\n•\tMonitoring and maintaining documentation related to the movements of business-critical assets.",
+      "evidence": ""
+    },
+    "PR.DS-3.3": {
+      "code": "PR.DS-3.3",
+      "guidance": "This can be done by policies, processes & procedures (reporting), technical & organizational means (encryption, Access Control (AC), Mobile Device Management (MDM), monitoring, secure wipe, awareness, signed user agreement, guidelines & manuals, backups, inventory update …).",
+      "evidence": ""
+    },
+    "PR.DS-3.4": {
+      "code": "PR.DS-3.4",
+      "guidance": "Disposal actions include media sanitization actions (See PR.IP-6)",
+      "evidence": ""
+    },
+    "PR.DS-4.1": {
+      "code": "PR.DS-4.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.DS-4.2": {
+      "code": "PR.DS-4.2",
+      "guidance": "Be aware that log services can become a bottleneck and hinder the correct functioning of the source systems.",
+      "evidence": ""
+    },
+    "PR.DS-4.3": {
+      "code": "PR.DS-4.3",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.DS-5.1": {
+      "code": "PR.DS-5.1",
+      "guidance": "•\tConsider implementing dedicated protection measures (restricted access rights, daily backups, data encryption, installation of firewalls, etc.) for the most sensitive data.\n•\tConsider frequent audit of the configuration of the central directory (Active Directory in Windows environment), with specific focus on the access to data of key persons in the company.",
+      "evidence": ""
+    },
+    "PR.DS-6.1": {
+      "code": "PR.DS-6.1",
+      "guidance": "State-of-the-practice integrity-checking mechanisms (e.g., parity checks, cyclical redundancy checks, cryptographic hashes) and associated tools can automatically monitor the integrity of information systems and hosted applications.",
+      "evidence": ""
+    },
+    "PR.DS-6.2": {
+      "code": "PR.DS-6.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.DS-6.3": {
+      "code": "PR.DS-6.3",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.DS-7.1": {
+      "code": "PR.DS-7.1",
+      "guidance": "•\tAny change one wants to make to the ICT/OT environment should first be tested in an environment that is different and separate from the production environment (operational environment) before that change is effectively implemented . That way, the effect of those changes can be analysed and adjustments can be made without disrupting operational activities.\n•\tConsider adding and testing cybersecurity features as early as during development (secure development lifecycle  principles). •\tAny change one wants to make to the ICT/OT environment should first be tested in an environment that is different and separate from the production environment (operational environment) before that change is effectively implemented . That way, the effect of those changes can be analysed and adjustments can be made without disrupting operational activities.\n•\tConsider adding and testing cybersecurity features as early as during development (secure development lifecycle  principles).",
+      "evidence": ""
+    },
+    "PR.DS-8.1": {
+      "code": "PR.DS-8.1",
+      "guidance": "State-of-the-practice integrity-checking mechanisms (e.g., parity checks, cyclical redundancy checks, cryptographic hashes) and associated tools can automatically monitor the integrity of information systems and hosted applications.",
+      "evidence": ""
+    },
+    "PR.DS-8.2": {
+      "code": "PR.DS-8.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.IP-1.1": {
+      "code": "PR.IP-1.1",
+      "guidance": "•\tThis control includes the concept of least functionality.\n•\tBaseline configurations include for example, information about organization's business critical systems, current version numbers and patch information on operating systems and applications, configuration settings/parameters, network topology, and the logical placement of those components within the system architecture.\n•\tNetwork topology should include the nerve points of the IT/OT environment (external connections, servers hosting data and/or sensitive functions, DNS services security, etc.).",
+      "evidence": ""
+    },
+    "PR.IP-1.2": {
+      "code": "PR.IP-1.2",
+      "guidance": "•\tConfiguration of a system to provide only organization-defined mission essential capabilities is known as the “concept of least functionality”.\n•\tCapabilities include functions, ports, protocols, software, and/or services.",
+      "evidence": ""
+    },
+    "PR.IP-2.1": {
+      "code": "PR.IP-2.1",
+      "guidance": "•\tSystem and application development life cycle should include the acquisition process of the organization's business critical systems and its components.\n•\tVulnerability awareness and prevention training for (web application) developers, and advanced social engineering awareness training for high-profile roles should be considered.\n•\tWhen hosting internet facing applications the implementation of a web application firewall (WAF) should be considered.",
+      "evidence": ""
+    },
+    "PR.IP-2.2": {
+      "code": "PR.IP-2.2",
+      "guidance": "The development cycle includes:\n•\tAll development phases: specification , design, development, implementation.\n•\tConfiguration management for planned and unplanned changes and change control during the development.\n•\tFlaw tracking & resolution.\n•\tSecurity testing.",
+      "evidence": ""
+    },
+    "PR.IP-3.1": {
+      "code": "PR.IP-3.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.IP-3.2": {
+      "code": "PR.IP-3.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.IP-4.1": {
+      "code": "PR.IP-4.1",
+      "guidance": "•\tOrganization's business critical system's data includes for example software, configurations and settings, documentation, system configuration data including computer configuration backups, application configuration backups, etc.\n•\tConsider a regular backup and put it offline periodically.\n•\tRecovery time and recovery point objectives should be considered.\n•\tConsider not storing the organization's data backup on the same network as the system on which the original data resides and provide an offline copy. Among other things, this prevents file encryption by hackers (risk of ransomware).",
+      "evidence": ""
+    },
+    "PR.IP-4.2": {
+      "code": "PR.IP-4.2",
+      "guidance": "This should include regularly testing of the backup restore procedures.",
+      "evidence": ""
+    },
+    "PR.IP-4.3": {
+      "code": "PR.IP-4.3",
+      "guidance": "An offline backup of your data is ideally stored in a separate physical location from the original data source and where feasible offsite for extra protection and security.",
+      "evidence": ""
+    },
+    "PR.IP-4.4": {
+      "code": "PR.IP-4.4",
+      "guidance": "•\tRelated plans include, for example, Business Continuity Plans, Disaster Recovery Plans, Continuity of Operations Plans, Crisis Communications Plans, Critical Infrastructure Plans, and Cyber Incident response plans.\n•\tRestoration of backup data during contingency plan testing should be provided.",
+      "evidence": ""
+    },
+    "PR.IP-4.5": {
+      "code": "PR.IP-4.5",
+      "guidance": "Seperation of critical system backup from critical information backup should lead to a shorter recovery time.",
+      "evidence": ""
+    },
+    "PR.IP-5.1": {
+      "code": "PR.IP-5.1",
+      "guidance": "The below measures should be considered:\n•\tProtect unattended computer equipment with padlocks or a locker and key system.\n•\tFire suppression mechanisms should take the organization's critical system environment into account (e.g., water sprinkler systems could be hazardous in specific environments).",
+      "evidence": ""
+    },
+    "PR.IP-5.2": {
+      "code": "PR.IP-5.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.IP-6.1": {
+      "code": "PR.IP-6.1",
+      "guidance": "•\tDisposal actions include media sanitization actions (See PR.DS-3)\n•\tThere are two primary types of media in common use:\no\tHard copy media (physical representations of information)\no\tElectronic or soft copy media (the bits and bytes contained in hard drives, random access memory (RAM), read-only memory (ROM), disks, memory devices, phones, mobile computing devices, networking equipment…)",
+      "evidence": ""
+    },
+    "PR.IP-6.2": {
+      "code": "PR.IP-6.2",
+      "guidance": "•\tSanitation processes include procedures and equipment.\n•\tConsider applying non-destructive sanitization techniques to portable storage devices.\n•\tConsider sanitation procedures in proportion to confidentiality requirements.",
+      "evidence": ""
+    },
+    "PR.IP-7.1": {
+      "code": "PR.IP-7.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.IP-7.2": {
+      "code": "PR.IP-7.2",
+      "guidance": "Independent teams, for example, may include internal or external impartial personnel.\nImpartiality implies that assessors are free from any perceived or actual conflicts of interest regarding the development, operation, or management of the organization's critical system under assessment or to the determination of security control effectiveness.",
+      "evidence": ""
+    },
+    "PR.IP-7.3": {
+      "code": "PR.IP-7.3",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.IP-8.1": {
+      "code": "PR.IP-8.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.IP-8.2": {
+      "code": "PR.IP-8.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.IP-8.3": {
+      "code": "PR.IP-8.3",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.IP-9.1": {
+      "code": "PR.IP-9.1",
+      "guidance": "•\tThe incident response plan is the documentation of a predetermined set of instructions or procedures to detect, respond to, and limit consequences of a malicious cyber-attack.\n•\tPlans should incorporate recovery objectives, restoration priorities, metrics, contingency roles, personnel assignments and contact information.\n•\tMaintaining essential functions despite system disruption, and the eventual restoration of the organization’s systems, should be addressed.\n•\tConsider defining incident types, resources and management support needed to effectively maintain and mature the incident response and contingency capabilities.",
+      "evidence": ""
+    },
+    "PR.IP-9.2": {
+      "code": "PR.IP-9.2",
+      "guidance": "Related plans include, for example, Business Continuity Plans, Disaster Recovery Plans, Continuity of Operations Plans, Crisis Communications Plans, Critical Infrastructure Plans, Cyber incident response plans, and Occupant Emergency Plans.",
+      "evidence": ""
+    },
+    "PR.IP-11.1": {
+      "code": "PR.IP-11.1",
+      "guidance": "•\tThe access to critical information or technology should be considered when recruiting, during employment and at termination.\n•\tBackground verification checks should take into consideration applicable laws, regulations, and ethics in proportion to the business requirements, the classification of the information to be accessed and the perceived risks.",
+      "evidence": ""
+    },
+    "PR.IP-11.2": {
+      "code": "PR.IP-11.2",
+      "guidance": "The human resource information/cyber security process should include access to critical information or technology; background verification checks; code of conduct; roles, authorities, and responsibilities…",
+      "evidence": ""
+    },
+    "PR.IP-12.1": {
+      "code": "PR.IP-12.1",
+      "guidance": "•\tConsider inventorying sources likely to report vulnerabilities in the identified components and distribute updates (software publisher websites, CERT website, ENISA website).\n•\tThe organization should identify where its critical system's vulnerabilities may be exposed to adversaries.",
+      "evidence": ""
+    },
+    "PR.MA-1.1": {
+      "code": "PR.MA-1.1",
+      "guidance": "The following should be considered:\n•\tLimit yourself to only install those applications (operating systems, firmware, or plugins ) that you need to run your business and patch/update them regularly.\n•\tYou should only install a current and vendor-supported version of software you choose to use. It may be useful to assign a day each month to check for patches.\n•\tThere are products which can scan your system and notify you when there is an update for an application you have installed. If you use one of these products, make sure it checks for updates for every application you use.\n•\tInstall patches and security updates in a timely manner.",
+      "evidence": ""
+    },
+    "PR.MA-1.2": {
+      "code": "PR.MA-1.2",
+      "guidance": "Consider the below measures:\n(1) Perform security updates on all software in a timely manner.\n(2) Automate the update process and audit its effectiveness.\n(3) Introduce an internal patching culture on desktops, mobile devices, servers, network components, etc. to ensure updates are tracked.",
+      "evidence": ""
+    },
+    "PR.MA-1.3": {
+      "code": "PR.MA-1.3",
+      "guidance": "Maintenance tools can include, for example, hardware/software diagnostic test equipment, hardware/software packet sniffers and laptops.",
+      "evidence": ""
+    },
+    "PR.MA-1.4": {
+      "code": "PR.MA-1.4",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.MA-1.5": {
+      "code": "PR.MA-1.5",
+      "guidance": "This requirement maily focuses mainly on OT/ICS environments.",
+      "evidence": ""
+    },
+    "PR.MA-1.6": {
+      "code": "PR.MA-1.6",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.MA-1.7": {
+      "code": "PR.MA-1.7",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.MA-2.1": {
+      "code": "PR.MA-2.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.MA-2.2": {
+      "code": "PR.MA-2.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.MA-2.3": {
+      "code": "PR.MA-2.3",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.PT-1.1": {
+      "code": "PR.PT-1.1",
+      "guidance": "•\tEnsure the activity logging functionality of protection / detection hardware or software (e.g. firewalls, anti-virus) is enabled.\n•\tLogs should be backed up and saved for a predefined period.\n•\tThe logs should be reviewed for any unusual or unwanted trends, such as a large use of social media websites or an unusual number of viruses consistently found on a particular computer. These trends may indicate a more serious problem or signal the need for stronger protections in a particular area.",
+      "evidence": ""
+    },
+    "PR.PT-1.2": {
+      "code": "PR.PT-1.2",
+      "guidance": "Authoritative time sources include for example, an internal Network Time Protocol (NTP) server, radio clock, atomic clock, GPS time source.",
+      "evidence": ""
+    },
+    "PR.PT-1.3": {
+      "code": "PR.PT-1.3",
+      "guidance": "The use of System Logging Protocol (Syslog) servers can be considered.",
+      "evidence": ""
+    },
+    "PR.PT-1.4": {
+      "code": "PR.PT-1.4",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.PT-2.1": {
+      "code": "PR.PT-2.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.PT-2.2": {
+      "code": "PR.PT-2.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.PT-2.3": {
+      "code": "PR.PT-2.3",
+      "guidance": "Protection and control should include the scanning of all portable storage devices for malicious code before they are used on organization's systems.",
+      "evidence": ""
+    },
+    "PR.PT-3.1": {
+      "code": "PR.PT-3.1",
+      "guidance": "Consider applying the principle of least functionality to access systems and assets (see also PR.AC-4).",
+      "evidence": ""
+    },
+    "PR.PT-3.2": {
+      "code": "PR.PT-3.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.PT-3.3": {
+      "code": "PR.PT-3.3",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "PR.PT-4.1": {
+      "code": "PR.PT-4.1",
+      "guidance": "•\tE-mail filters should detect malicious e-mails, and filtering should be configured based on the type of message attachments so that files of the specified types are automatically processed (e.g. deleted).\n•\tWeb-filters should notify the user if a website may contain malware and potentially preventing users from accessing that website.",
+      "evidence": ""
+    },
+    "PR.PT-4.2": {
+      "code": "PR.PT-4.2",
+      "guidance": "Consider the following:\n•\tInformation flow may be supported, for example, by labelling or colouring physical connectors as an aid to manual hook-up.\n•\tInspection of message content may enforce information flow policy. For example, a message containing a command to an actuator may not be permitted to flow between the control network and any other network.\n•\tPhysical addresses (e.g., a serial port) may be implicitly or explicitly associated with labels or attributes (e.g., hardware I/O address). Manual methods are typically static. Label or attribute policy mechanisms may be implemented in hardware, firmware, and software that controls or has device access, such as device drivers and communications controllers.",
+      "evidence": ""
+    },
+    "PR.PT-4.3": {
+      "code": "PR.PT-4.3",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "DE.AE-1.1": {
+      "code": "DE.AE-1.1",
+      "guidance": "•\tConsider enabling local logging on all your systems and network devices and keep them for a certain period, for example up to 6 months.\n•\tEnsure that your logs contain enough information (source, date, user, timestamp, etc.) and that you have enough storage space for their generation.\n•\tConsider centralizing your logs.\n•\tConsider deploying a Security Information and Event Management tool (SIEM) that will facilitate the correlation and analysis of your data.",
+      "evidence": ""
+    },
+    "DE.AE-2.1": {
+      "code": "DE.AE-2.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "DE.AE-2.2": {
+      "code": "DE.AE-2.2",
+      "guidance": "Consider to review your logs regularly to identify anomalies or abnormal events.",
+      "evidence": ""
+    },
+    "DE.AE-3.1": {
+      "code": "DE.AE-3.1",
+      "guidance": "•\tLogs should be backed up and saved for a predefined period.\n•\tThe logs should be reviewed for any unusual or unwanted trends, such as a large use of social media websites or an unusual number of viruses consistently found on a particular computer. These trends may indicate a more serious problem or signal the need for stronger protections in a particular area.",
+      "evidence": ""
+    },
+    "DE.AE-3.2": {
+      "code": "DE.AE-3.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "DE.AE-3.3": {
+      "code": "DE.AE-3.3",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "DE.AE-4.1": {
+      "code": "DE.AE-4.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "DE.AE-5.1": {
+      "code": "DE.AE-5.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "DE.AE-5.2": {
+      "code": "DE.AE-5.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "DE.CM-1.1": {
+      "code": "DE.CM-1.1",
+      "guidance": "•\tEndpoints include desktops, laptops, servers...\n•\tConsider, where feasible, including smart phones and other networked devices when installing and operating firewalls.\n•\tConsider limiting the number of interconnection gateways to the Internet.",
+      "evidence": ""
+    },
+    "DE.CM-1.2": {
+      "code": "DE.CM-1.2",
+      "guidance": "•\tMonitoring of network communications should happen at the external boundary of the organization's business critical systems and at key internal boundaries within the systems.\n•\tWhen hosting internet facing applications the implementation of a web application firewall (WAF) should be considered.",
+      "evidence": ""
+    },
+    "DE.CM-1.3": {
+      "code": "DE.CM-1.3",
+      "guidance": "Security status monitoring should include:\n•\tThe generation of system alerts when indications of compromise or potential compromise occur.\n•\tDetection and reporting of atypical usage of organization's critical systems.\n•\tThe establishment of audit records for defined information/cybersecurity events.\n•\tBoosting system monitoring activity whenever there is an indication of increased risk.\n•\tPhysical environment, personnel, and service provider.",
+      "evidence": ""
+    },
+    "DE.CM-2.1": {
+      "code": "DE.CM-2.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "DE.CM-2.2": {
+      "code": "DE.CM-2.2",
+      "guidance": "It is recommended to log all visitors.",
+      "evidence": ""
+    },
+    "DE.CM-3.1": {
+      "code": "DE.CM-3.1",
+      "guidance": "Consider deploying an Intrusion Detection/Prevention system (IDS/IPS).",
+      "evidence": ""
+    },
+    "DE.CM-3.2": {
+      "code": "DE.CM-3.2",
+      "guidance": "Consider using a centralized log platform for the consolidation and exploitation of log files. Consider to actively investigate the alerts generated because of suspicious activities and take the appropriate actions to remediate the threat, e.g. through the deployment of a security operations centre (SOC).",
+      "evidence": ""
+    },
+    "DE.CM-3.3": {
+      "code": "DE.CM-3.3",
+      "guidance": "Only authorized software should be used and user access rights should be limited to the specific data, resources and applications needed to complete a required task (least privilege principle).",
+      "evidence": ""
+    },
+    "DE.CM-4.1": {
+      "code": "DE.CM-4.1",
+      "guidance": "•\tMalware includes viruses, spyware, and ransomware and should be countered by installing, using, and regularly updating anti-virus and anti-spyware software on every device used in company’s business (including computers, smart phones, tablets, and servers).\n•\tAnti-virus and anti-spyware software should automatically check for updates in “real-time” or at least daily followed by system scanning as appropriate.\n•\tIt should be considered to provide the same malicious code protection mechanisms for home computers (e.g. teleworking) or personal devices that are used for professional work (BYOD).",
+      "evidence": ""
+    },
+    "DE.CM-4.2": {
+      "code": "DE.CM-4.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "DE.CM-5.1": {
+      "code": "DE.CM-5.1",
+      "guidance": "•\tMobile code includes any program, application, or content that can be transmitted across a network (e.g., embedded in an email, document, or website) and executed on a remote system. Mobile code technologies include  for example Java applets, JavaScript, HTML5, WebGL, and VBScript.\n•\tDecisions regarding the use of mobile code in organizational systems should be based on the potential for the code to cause damage to the systems if used maliciously. Usage restrictions and implementation guidance should apply to the selection and use of mobile code installed.",
+      "evidence": ""
+    },
+    "DE.CM-6.1": {
+      "code": "DE.CM-6.1",
+      "guidance": "This monitoring includes unauthorized personnel access, connections, devices, and software.",
+      "evidence": ""
+    },
+    "DE.CM-6.2": {
+      "code": "DE.CM-6.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "DE.CM-7.1": {
+      "code": "DE.CM-7.1",
+      "guidance": "•\tUnauthorized personnel access includes access by external service providers.\n•\tSystem inventory discrepancies should be included in the monitoring.\n•\tUnauthorized configuration changes to organization's critical systems should be included in the monitoring.",
+      "evidence": ""
+    },
+    "DE.CM-7.2": {
+      "code": "DE.CM-7.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "DE.CM-8.1": {
+      "code": "DE.CM-8.1",
+      "guidance": "Consider the implementation of a continuous vulnerability scanning program; Including reporting and mitigation plans.",
+      "evidence": ""
+    },
+    "DE.CM-8.2": {
+      "code": "DE.CM-8.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "DE.DP-2.1": {
+      "code": "DE.DP-2.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "DE.DP-3.1": {
+      "code": "DE.DP-3.1",
+      "guidance": "•\tValidation includes testing.\n•\tValidation should be demonstrable.",
+      "evidence": ""
+    },
+    "DE.DP-4.1": {
+      "code": "DE.DP-4.1",
+      "guidance": "Event detection information includes for example, alerts on atypical account usage, unauthorized remote access, wireless connectivity, mobile device connection, altered configuration settings, contrasting system component inventory, use of maintenance tools and nonlocal maintenance, physical access, temperature and humidity, equipment delivery and removal, communications at the information system boundaries, use of mobile code, use of Voice over Internet Protocol (VoIP), and malware disclosure.",
+      "evidence": ""
+    },
+    "DE.DP-5.1": {
+      "code": "DE.DP-5.1",
+      "guidance": "•\tThis results in a continuous improvement of the detection processes.\n•\tThe use of independent teams to assess the detection process could be considered.",
+      "evidence": ""
+    },
+    "DE.DP-5.2": {
+      "code": "DE.DP-5.2",
+      "guidance": "These activities can be outsourced, preferably to accredited organizations.",
+      "evidence": ""
+    },
+    "RS.RP-1.1": {
+      "code": "RS.RP-1.1",
+      "guidance": "•\tThe incident response process should include a predetermined set of instructions or procedures to detect, respond to, and limit consequences of a malicious cyber-attack.\n•\tThe roles, responsibilities, and authorities in the incident response plan should be specific on involved people, contact info, different roles and responsibilities, and who makes the decision to initiate recovery procedures as well as who will be the contact with appropriate external stakeholders. It should be considered to determine the causes of an information/cybersecurity event and implement a corrective action in order that the event does not recur or occur elsewhere (an infection by malicious code on one machine did not have spread elsewhere in the network). The effectiveness of any corrective action taken should be reviewed. Corrective actions should be appropriate to the effects of the information/cybersecurity event encountered.\nInternal Note: Requirements are covered in PR.IP-9",
+      "evidence": ""
+    },
+    "RS.CO-1.1": {
+      "code": "RS.CO-1.1",
+      "guidance": "Consider the use the CCB Incident Management Guide to guide you through this exercise and consider bringing in outside experts if needed. Test your plan regularly and adjust it after each incident.",
+      "evidence": ""
+    },
+    "RS.CO-2.1": {
+      "code": "RS.CO-2.1",
+      "guidance": "All users should have a single point of contact to report any incident and be encouraged to do so.",
+      "evidence": ""
+    },
+    "RS.CO-2.2": {
+      "code": "RS.CO-2.2",
+      "guidance": "Criteria to report should be included in the incident response plan.",
+      "evidence": ""
+    },
+    "RS.CO-3.1": {
+      "code": "RS.CO-3.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "RS.CO-3.2": {
+      "code": "RS.CO-3.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "RS.CO-4.1": {
+      "code": "RS.CO-4.1",
+      "guidance": "•\tStakeholders for incident response include for example, mission/business owners, organization's critical system owners, integrators, vendors, human resources offices, physical and personnel security offices, legal departments, operations personnel, and procurement offices.\n•\tCoordination with stakeholders occurs consistent with incident response plans.",
+      "evidence": ""
+    },
+    "RS.CO-5.1": {
+      "code": "RS.CO-5.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "RS.AN-1.1": {
+      "code": "RS.AN-1.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "RS.AN-1.2": {
+      "code": "RS.AN-1.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "RS.AN-2.1": {
+      "code": "RS.AN-2.1",
+      "guidance": "•\tResult analysis can involve the outcome of determining the correlation between the information of the detected event and the outcome of risk assessments. In this way, insight is gained into the impact of the event across the organization.\n•\tConsider including detection of unauthorized changes to its critical systems in its incident response capabilities.",
+      "evidence": ""
+    },
+    "RS.AN-2.2": {
+      "code": "RS.AN-2.2",
+      "guidance": "Implementation could vary from a ticketing system to a Security Information and Event Management (SIEM).",
+      "evidence": ""
+    },
+    "RS.AN-3.1": {
+      "code": "RS.AN-3.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "RS.AN-3.2": {
+      "code": "RS.AN-3.2",
+      "guidance": "Consider to determine the root cause of an incident. If necessary, use forensics analysis on collected information/cybersecurity event information to achieve this.",
+      "evidence": ""
+    },
+    "RS.AN-4.1": {
+      "code": "RS.AN-4.1",
+      "guidance": "•\tIt should be considered to determine the causes of an information/cybersecurity incident and implement a corrective action in order that the incident does not recur or occur elsewhere.\n•\tThe effectiveness of any corrective action taken should be reviewed.\n•\tCorrective actions should be appropriate to the effects of the information/cybersecurity incident encountered.",
+      "evidence": ""
+    },
+    "RS.AN-5.1": {
+      "code": "RS.AN-5.1",
+      "guidance": "Internal and external sources could be e.g. internal testing, security bulletins, or security researchers.",
+      "evidence": ""
+    },
+    "RS.AN-5.2": {
+      "code": "RS.AN-5.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "RS.MI-1.1": {
+      "code": "RS.MI-1.1",
+      "guidance": "A documented risk acceptance deals with risks that the organisation assesses as not dangerous to the organisation's business critical systems and where the risk owner formally accepts the risk (related with the risk appetite of the organization)",
+      "evidence": ""
+    },
+    "RS.IM-1.1": {
+      "code": "RS.IM-1.1",
+      "guidance": "Consider bringing involved people together after each incident and reflect together on ways to improve what happened, how it happened, how we reacted, how it could have gone better, what should be done to prevent it from happening again, etc.",
+      "evidence": ""
+    },
+    "RS.IM-1.2": {
+      "code": "RS.IM-1.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "RS.IM-2.1": {
+      "code": "RS.IM-2.1",
+      "guidance": "The organization’s context relates to the organizational structure, its critical systems, attack vectors, new threats, improved technology, environment of operation, problems encountered during plan implementation/execution/testing and lessons learned.",
+      "evidence": ""
+    },
+    "RC.RP-1.1": {
+      "code": "RC.RP-1.1",
+      "guidance": "A process should be developed for what immediate actions will be taken in case of a fire, medical emergency, burglary, natural disaster, or  an information/cyber security incident.\nThis process should consider:\n•\tRoles and Responsibilities, including of who makes the decision to initiate recovery procedures and who will be the contact with appropriate external stakeholders.\n•\tWhat to do with company’s information and information systems in case of an incident. This includes shutting down or locking computers, moving to a backup site, physically removing important documents, etc.\n•\tWho to call in case of an incident.",
+      "evidence": ""
+    },
+    "RC.RP-1.2": {
+      "code": "RC.RP-1.2",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "RC.IM-1.1": {
+      "code": "RC.IM-1.1",
+      "guidance": "No additional guidance on this topic.",
+      "evidence": ""
+    },
+    "RC.CO-1.1": {
+      "code": "RC.CO-1.1",
+      "guidance": "Public relations management may include, for example, managing media interactions, coordinating and logging all requests for interviews, handling and ‘triaging’ phone calls and e-mail requests, matching media requests with appropriate and available internal experts who are ready to be interviewed, screening all of information provided to the media, ensuring personnel are familiar with public relations and privacy policies.",
+      "evidence": ""
+    },
+    "RC.CO-1.2": {
+      "code": "RC.CO-1.2",
+      "guidance": "The Public Relations Officer should consider the use of pre-define external contacts \n(e.g. press, regulators, interest groups).",
+      "evidence": ""
+    },
+    "RC.CO-2.1": {
+      "code": "RC.CO-2.1",
+      "guidance": "Crisis response strategies include, for example, actions to shape attributions of the crisis, change perceptions of the organization in crisis, and reduce the negative effect generated by the crisis.",
+      "evidence": ""
+    },
+    "RC.CO-3.1": {
+      "code": "RC.CO-3.1",
+      "guidance": "Communication of recovery activities to all relevant stakeholders applies only to entities subject to the NIS legislation.",
+      "evidence": ""
+    }
+  },
+  "controls": {
+    "ccb-cff-id-am-1-1": "ID.AM-1.1",
+    "ccb-cff-id-am-1-2": "ID.AM-1.2",
+    "ccb-cff-id-am-1-3": "ID.AM-1.3",
+    "ccb-cff-id-am-1-4": "ID.AM-1.4",
+    "ccb-cff-id-am-2-1": "ID.AM-2.1",
+    "ccb-cff-id-am-2-2": "ID.AM-2.2",
+    "ccb-cff-id-am-2-3": "ID.AM-2.3",
+    "ccb-cff-id-am-2-4": "ID.AM-2.4",
+    "ccb-cff-id-am-2-5": "ID.AM-2.5",
+    "ccb-cff-id-am-3-1": "ID.AM-3.1",
+    "ccb-cff-id-am-3-2": "ID.AM-3.2",
+    "ccb-cff-id-am-3-3": "ID.AM-3.3",
+    "ccb-cff-id-am-4-1": "ID.AM-4.1",
+    "ccb-cff-id-am-4-2": "ID.AM-4.2",
+    "ccb-cff-id-am-5-1": "ID.AM-5.1",
+    "ccb-cff-id-am-6-1": "ID.AM-6.1",
+    "ccb-cff-id-am-6-2": "ID.AM-6.2",
+    "ccb-cff-id-be-1-1": "ID.BE-1.1",
+    "ccb-cff-id-be-1-2": "ID.BE-1.2",
+    "ccb-cff-id-be-2-1": "ID.BE-2.1",
+    "ccb-cff-id-be-3-1": "ID.BE-3.1",
+    "ccb-cff-id-be-4-1": "ID.BE-4.1",
+    "ccb-cff-id-be-5-1": "ID.BE-5.1",
+    "ccb-cff-id-be-5-2": "ID.BE-5.2",
+    "ccb-cff-id-be-5-3": "ID.BE-5.3",
+    "ccb-cff-id-gv-1-1": "ID.GV-1.1",
+    "ccb-cff-id-gv-1-2": "ID.GV-1.2",
+    "ccb-cff-id-gv-3-1": "ID.GV-3.1",
+    "ccb-cff-id-gv-3-2": "ID.GV-3.2",
+    "ccb-cff-id-gv-4-1": "ID.GV-4.1",
+    "ccb-cff-id-gv-4-2": "ID.GV-4.2",
+    "ccb-cff-id-ra-1-1": "ID.RA-1.1",
+    "ccb-cff-id-ra-1-2": "ID.RA-1.2",
+    "ccb-cff-id-ra-1-3": "ID.RA-1.3",
+    "ccb-cff-id-ra-2-1": "ID.RA-2.1",
+    "ccb-cff-id-ra-2-2": "ID.RA-2.2",
+    "ccb-cff-id-ra-5-1": "ID.RA-5.1",
+    "ccb-cff-id-ra-5-2": "ID.RA-5.2",
+    "ccb-cff-id-ra-5-3": "ID.RA-5.3",
+    "ccb-cff-id-ra-6-1": "ID.RA-6.1",
+    "ccb-cff-id-rm-1-1": "ID.RM-1.1",
+    "ccb-cff-id-rm-2-1": "ID.RM-2.1",
+    "ccb-cff-id-rm-3-1": "ID.RM-3.1",
+    "ccb-cff-id-sc-1-1": "ID.SC-1.1",
+    "ccb-cff-id-sc-2-1": "ID.SC-2.1",
+    "ccb-cff-id-sc-2-2": "ID.SC-2.2",
+    "ccb-cff-id-sc-3-1": "ID.SC-3.1",
+    "ccb-cff-id-sc-3-2": "ID.SC-3.2",
+    "ccb-cff-id-sc-3-3": "ID.SC-3.3",
+    "ccb-cff-id-sc-4-1": "ID.SC-4.1",
+    "ccb-cff-id-sc-4-2": "ID.SC-4.2",
+    "ccb-cff-id-sc-5-1": "ID.SC-5.1",
+    "ccb-cff-id-sc-5-2": "ID.SC-5.2",
+    "ccb-cff-pr-ac-1-1": "PR.AC-1.1",
+    "ccb-cff-pr-ac-1-2": "PR.AC-1.2",
+    "ccb-cff-pr-ac-1-3": "PR.AC-1.3",
+    "ccb-cff-pr-ac-1-4": "PR.AC-1.4",
+    "ccb-cff-pr-ac-1-5": "PR.AC-1.5",
+    "ccb-cff-pr-ac-2-1": "PR.AC-2.1",
+    "ccb-cff-pr-ac-2-2": "PR.AC-2.2",
+    "ccb-cff-pr-ac-2-3": "PR.AC-2.3",
+    "ccb-cff-pr-ac-2-4": "PR.AC-2.4",
+    "ccb-cff-pr-ac-3-1": "PR.AC-3.1",
+    "ccb-cff-pr-ac-3-2": "PR.AC-3.2",
+    "ccb-cff-pr-ac-3-3": "PR.AC-3.3",
+    "ccb-cff-r-ac-3-4": "R.AC-3.4",
+    "ccb-cff-r-ac-3-5": "R.AC-3.5",
+    "ccb-cff-pr-ac-4-1": "PR.AC-4.1",
+    "ccb-cff-pr-ac-4-2": "PR.AC-4.2",
+    "ccb-cff-pr-ac-4-3": "PR.AC-4.3",
+    "ccb-cff-pr-ac-4-4": "PR.AC-4.4",
+    "ccb-cff-pr-ac-4-5": "PR.AC-4.5",
+    "ccb-cff-pr-ac-4-6": "PR.AC-4.6",
+    "ccb-cff-pr-ac-4-7": "PR.AC-4.7",
+    "ccb-cff-pr-ac-4-8": "PR.AC-4.8",
+    "ccb-cff-pr-ac-4-9": "PR.AC-4.9",
+    "ccb-cff-pr-ac-5-1": "PR.AC-5.1",
+    "ccb-cff-pr-ac-5-2": "PR.AC-5.2",
+    "ccb-cff-pr-ac-5-3": "PR.AC-5.3",
+    "ccb-cff-pr-ac-5-4": "PR.AC-5.4",
+    "ccb-cff-pr-ac-5-5": "PR.AC-5.5",
+    "ccb-cff-pr-ac-5-6": "PR.AC-5.6",
+    "ccb-cff-pr-ac-6-1": "PR.AC-6.1",
+    "ccb-cff-pr-ac-6-2": "PR.AC-6.2",
+    "ccb-cff-pr-ac-7-1": "PR.AC-7.1",
+    "ccb-cff-pr-at-1-1": "PR.AT-1.1",
+    "ccb-cff-pr-at-1-2": "PR.AT-1.2",
+    "ccb-cff-pr-at-1-3": "PR.AT-1.3",
+    "ccb-cff-pr-at-2-1": "PR.AT-2.1",
+    "ccb-cff-pr-at-3-1": "PR.AT-3.1",
+    "ccb-cff-pr-at-3-2": "PR.AT-3.2",
+    "ccb-cff-pr-at-3-3": "PR.AT-3.3",
+    "ccb-cff-pr-at-3-4": "PR.AT-3.4",
+    "ccb-cff-pr-at-4-1": "PR.AT-4.1",
+    "ccb-cff-pr-at-5-1": "PR.AT-5.1",
+    "ccb-cff-pr-ds-1-1": "PR.DS-1.1",
+    "ccb-cff-pr-ds-2-1": "PR.DS-2.1",
+    "ccb-cff-pr-ds-3-1": "PR.DS-3.1",
+    "ccb-cff-pr-ds-3-2": "PR.DS-3.2",
+    "ccb-cff-pr-ds-3-3": "PR.DS-3.3",
+    "ccb-cff-pr-ds-3-4": "PR.DS-3.4",
+    "ccb-cff-pr-ds-4-1": "PR.DS-4.1",
+    "ccb-cff-pr-ds-4-2": "PR.DS-4.2",
+    "ccb-cff-pr-ds-4-3": "PR.DS-4.3",
+    "ccb-cff-pr-ds-5-1": "PR.DS-5.1",
+    "ccb-cff-pr-ds-6-1": "PR.DS-6.1",
+    "ccb-cff-pr-ds-6-2": "PR.DS-6.2",
+    "ccb-cff-pr-ds-6-3": "PR.DS-6.3",
+    "ccb-cff-pr-ds-7-1": "PR.DS-7.1",
+    "ccb-cff-pr-ds-8-1": "PR.DS-8.1",
+    "ccb-cff-pr-ds-8-2": "PR.DS-8.2",
+    "ccb-cff-pr-ip-1-1": "PR.IP-1.1",
+    "ccb-cff-pr-ip-1-2": "PR.IP-1.2",
+    "ccb-cff-pr-ip-2-1": "PR.IP-2.1",
+    "ccb-cff-pr-ip-2-2": "PR.IP-2.2",
+    "ccb-cff-pr-ip-3-1": "PR.IP-3.1",
+    "ccb-cff-pr-ip-3-2": "PR.IP-3.2",
+    "ccb-cff-pr-ip-4-1": "PR.IP-4.1",
+    "ccb-cff-pr-ip-4-2": "PR.IP-4.2",
+    "ccb-cff-pr-ip-4-3": "PR.IP-4.3",
+    "ccb-cff-pr-ip-4-4": "PR.IP-4.4",
+    "ccb-cff-pr-ip-4-5": "PR.IP-4.5",
+    "ccb-cff-pr-ip-5-1": "PR.IP-5.1",
+    "ccb-cff-pr-ip-5-2": "PR.IP-5.2",
+    "ccb-cff-pr-ip-6-1": "PR.IP-6.1",
+    "ccb-cff-pr-ip-6-2": "PR.IP-6.2",
+    "ccb-cff-pr-ip-7-1": "PR.IP-7.1",
+    "ccb-cff-pr-ip-7-2": "PR.IP-7.2",
+    "ccb-cff-pr-ip-7-3": "PR.IP-7.3",
+    "ccb-cff-pr-ip-8-1": "PR.IP-8.1",
+    "ccb-cff-pr-ip-8-2": "PR.IP-8.2",
+    "ccb-cff-pr-ip-8-3": "PR.IP-8.3",
+    "ccb-cff-pr-ip-9-1": "PR.IP-9.1",
+    "ccb-cff-pr-ip-9-2": "PR.IP-9.2",
+    "ccb-cff-pr-ip-11-1": "PR.IP-11.1",
+    "ccb-cff-pr-ip-11-2": "PR.IP-11.2",
+    "ccb-cff-pr-ip-12-1": "PR.IP-12.1",
+    "ccb-cff-pr-ma-1-1": "PR.MA-1.1",
+    "ccb-cff-pr-ma-1-2": "PR.MA-1.2",
+    "ccb-cff-pr-ma-1-3": "PR.MA-1.3",
+    "ccb-cff-pr-ma-1-4": "PR.MA-1.4",
+    "ccb-cff-pr-ma-1-5": "PR.MA-1.5",
+    "ccb-cff-pr-ma-1-6": "PR.MA-1.6",
+    "ccb-cff-pr-ma-1-7": "PR.MA-1.7",
+    "ccb-cff-pr-ma-2-1": "PR.MA-2.1",
+    "ccb-cff-pr-ma-2-2": "PR.MA-2.2",
+    "ccb-cff-pr-ma-2-3": "PR.MA-2.3",
+    "ccb-cff-pr-pt-1-1": "PR.PT-1.1",
+    "ccb-cff-pr-pt-1-2": "PR.PT-1.2",
+    "ccb-cff-pr-pt-1-3": "PR.PT-1.3",
+    "ccb-cff-pr-pt-1-4": "PR.PT-1.4",
+    "ccb-cff-pr-pt-2-1": "PR.PT-2.1",
+    "ccb-cff-pr-pt-2-2": "PR.PT-2.2",
+    "ccb-cff-pr-pt-2-3": "PR.PT-2.3",
+    "ccb-cff-pr-pt-3-1": "PR.PT-3.1",
+    "ccb-cff-pr-pt-3-2": "PR.PT-3.2",
+    "ccb-cff-pr-pt-3-3": "PR.PT-3.3",
+    "ccb-cff-pr-pt-4-1": "PR.PT-4.1",
+    "ccb-cff-pr-pt-4-2": "PR.PT-4.2",
+    "ccb-cff-pr-pt-4-3": "PR.PT-4.3",
+    "ccb-cff-de-ae-1-1": "DE.AE-1.1",
+    "ccb-cff-de-ae-2-1": "DE.AE-2.1",
+    "ccb-cff-de-ae-2-2": "DE.AE-2.2",
+    "ccb-cff-de-ae-3-1": "DE.AE-3.1",
+    "ccb-cff-de-ae-3-2": "DE.AE-3.2",
+    "ccb-cff-de-ae-3-3": "DE.AE-3.3",
+    "ccb-cff-de-ae-4-1": "DE.AE-4.1",
+    "ccb-cff-de-ae-5-1": "DE.AE-5.1",
+    "ccb-cff-de-ae-5-2": "DE.AE-5.2",
+    "ccb-cff-de-cm-1-1": "DE.CM-1.1",
+    "ccb-cff-de-cm-1-2": "DE.CM-1.2",
+    "ccb-cff-de-cm-1-3": "DE.CM-1.3",
+    "ccb-cff-de-cm-2-1": "DE.CM-2.1",
+    "ccb-cff-de-cm-2-2": "DE.CM-2.2",
+    "ccb-cff-de-cm-3-1": "DE.CM-3.1",
+    "ccb-cff-de-cm-3-2": "DE.CM-3.2",
+    "ccb-cff-de-cm-3-3": "DE.CM-3.3",
+    "ccb-cff-de-cm-4-1": "DE.CM-4.1",
+    "ccb-cff-de-cm-4-2": "DE.CM-4.2",
+    "ccb-cff-de-cm-5-1": "DE.CM-5.1",
+    "ccb-cff-de-cm-6-1": "DE.CM-6.1",
+    "ccb-cff-de-cm-6-2": "DE.CM-6.2",
+    "ccb-cff-de-cm-7-1": "DE.CM-7.1",
+    "ccb-cff-de-cm-7-2": "DE.CM-7.2",
+    "ccb-cff-de-cm-8-1": "DE.CM-8.1",
+    "ccb-cff-de-cm-8-2": "DE.CM-8.2",
+    "ccb-cff-de-dp-2-1": "DE.DP-2.1",
+    "ccb-cff-de-dp-3-1": "DE.DP-3.1",
+    "ccb-cff-de-dp-4-1": "DE.DP-4.1",
+    "ccb-cff-de-dp-5-1": "DE.DP-5.1",
+    "ccb-cff-de-dp-5-2": "DE.DP-5.2",
+    "ccb-cff-rs-rp-1-1": "RS.RP-1.1",
+    "ccb-cff-rs-co-1-1": "RS.CO-1.1",
+    "ccb-cff-rs-co-2-1": "RS.CO-2.1",
+    "ccb-cff-rs-co-2-2": "RS.CO-2.2",
+    "ccb-cff-rs-co-3-1": "RS.CO-3.1",
+    "ccb-cff-rs-co-3-2": "RS.CO-3.2",
+    "ccb-cff-rs-co-4-1": "RS.CO-4.1",
+    "ccb-cff-rs-co-5-1": "RS.CO-5.1",
+    "ccb-cff-rs-an-1-1": "RS.AN-1.1",
+    "ccb-cff-rs-an-1-2": "RS.AN-1.2",
+    "ccb-cff-rs-an-2-1": "RS.AN-2.1",
+    "ccb-cff-rs-an-2-2": "RS.AN-2.2",
+    "ccb-cff-rs-an-3-1": "RS.AN-3.1",
+    "ccb-cff-rs-an-3-2": "RS.AN-3.2",
+    "ccb-cff-rs-an-4-1": "RS.AN-4.1",
+    "ccb-cff-rs-an-5-1": "RS.AN-5.1",
+    "ccb-cff-rs-an-5-2": "RS.AN-5.2",
+    "ccb-cff-rs-mi-1-1": "RS.MI-1.1",
+    "ccb-cff-rs-im-1-1": "RS.IM-1.1",
+    "ccb-cff-rs-im-1-2": "RS.IM-1.2",
+    "ccb-cff-rs-im-2-1": "RS.IM-2.1",
+    "ccb-cff-rc-rp-1-1": "RC.RP-1.1",
+    "ccb-cff-rc-rp-1-2": "RC.RP-1.2",
+    "ccb-cff-rc-im-1-1": "RC.IM-1.1",
+    "ccb-cff-rc-co-1-1": "RC.CO-1.1",
+    "ccb-cff-rc-co-1-2": "RC.CO-1.2",
+    "ccb-cff-rc-co-2-1": "RC.CO-2.1",
+    "ccb-cff-rc-co-3-1": "RC.CO-3.1"
+  }
+}

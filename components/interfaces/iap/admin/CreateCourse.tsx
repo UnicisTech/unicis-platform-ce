@@ -56,6 +56,7 @@ import {
 } from '../services/createCourseService';
 import { Loader2 } from 'lucide-react';
 import { Separator } from '@/components/shadcn/ui/separator';
+import { resolveEmbeddedVideo } from '../services/passCourseService';
 
 interface CreateCourseProps {
   teams: Team[];
@@ -406,7 +407,11 @@ export default function CreateCourse2({
               <FormField
                 control={courseForm.control}
                 name="url"
-                rules={{ required: t('video-url') + ' is required.' }}
+                rules={{
+                  required: t('video-url') + ' is required.',
+                  validate: (value) =>
+                    !!resolveEmbeddedVideo(value) || t('unsupported-video-url'),
+                }}
                 render={({ field, fieldState }) => (
                   <FormItem>
                     <FormLabel>{t('video-url')}</FormLabel>

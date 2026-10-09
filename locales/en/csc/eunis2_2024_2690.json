@@ -1,0 +1,2163 @@
+{
+  "sections": {
+    "section-1": {
+      "label": "Policy on the security of network and information systems"
+    },
+    "section-2": {
+      "label": "Risk management policy"
+    },
+    "section-3": {
+      "label": "Incident handling"
+    },
+    "section-4": {
+      "label": "Business continuity and crisis management"
+    },
+    "section-5": {
+      "label": "Supply chain security"
+    },
+    "section-6": {
+      "label": "Security in network and information systems acquisition, development and maintenance"
+    },
+    "section-7": {
+      "label": "Policies and procedures to assess the effectiveness of cybersecurity risk-management measures"
+    },
+    "section-8": {
+      "label": "Basic cyber hygiene practices and security training"
+    },
+    "section-9": {
+      "label": "Cryptography"
+    },
+    "section-10": {
+      "label": "Human resources security"
+    },
+    "section-11": {
+      "label": "Access control"
+    },
+    "section-12": {
+      "label": "Asset management"
+    },
+    "section-13": {
+      "label": "Environmental and physical security"
+    }
+  },
+  "controls": {
+    "eu-nis2-ir-1-1-1-a": {
+      "code": "1.1.1.a",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Policy on the security of network and information systems\nFor the purpose of Article 21(2), point (a) of Directive (EU) 2022/2555, the policy on the security of network and information systems shall:\nset out the relevant entities’ approach to managing the security of their network and information systems;"
+    },
+    "eu-nis2-ir-1-1-1-b": {
+      "code": "1.1.1.b",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Policy on the security of network and information systems\nFor the purpose of Article 21(2), point (a) of Directive (EU) 2022/2555, the policy on the security of network and information systems shall:\nbe appropriate to and complementary with the relevant entities’ business strategy and objectives;"
+    },
+    "eu-nis2-ir-1-1-1-c": {
+      "code": "1.1.1.c",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Policy on the security of network and information systems\nFor the purpose of Article 21(2), point (a) of Directive (EU) 2022/2555, the policy on the security of network and information systems shall:\nset out network and information security objectives;"
+    },
+    "eu-nis2-ir-1-1-1-d": {
+      "code": "1.1.1.d",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Policy on the security of network and information systems\nFor the purpose of Article 21(2), point (a) of Directive (EU) 2022/2555, the policy on the security of network and information systems shall:\ninclude a commitment to continual improvement of the security of network and information systems;"
+    },
+    "eu-nis2-ir-1-1-1-e": {
+      "code": "1.1.1.e",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Policy on the security of network and information systems\nFor the purpose of Article 21(2), point (a) of Directive (EU) 2022/2555, the policy on the security of network and information systems shall:\ninclude a commitment to provide the appropriate resources needed for its implementation, including the necessary staff, financial resources, processes, tools and technologies;"
+    },
+    "eu-nis2-ir-1-1-1-f": {
+      "code": "1.1.1.f",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Policy on the security of network and information systems\nFor the purpose of Article 21(2), point (a) of Directive (EU) 2022/2555, the policy on the security of network and information systems shall:\nbe communicated to and acknowledged by relevant employees and relevant interested external parties;"
+    },
+    "eu-nis2-ir-1-1-1-g": {
+      "code": "1.1.1.g",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Policy on the security of network and information systems\nFor the purpose of Article 21(2), point (a) of Directive (EU) 2022/2555, the policy on the security of network and information systems shall:\nlay down roles and responsibilities pursuant to point 1.2.;"
+    },
+    "eu-nis2-ir-1-1-1-h": {
+      "code": "1.1.1.h",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Policy on the security of network and information systems\nFor the purpose of Article 21(2), point (a) of Directive (EU) 2022/2555, the policy on the security of network and information systems shall:\nlist the documentation to be kept and the duration of retention of the documentation;"
+    },
+    "eu-nis2-ir-1-1-1-i": {
+      "code": "1.1.1.i",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Policy on the security of network and information systems\nFor the purpose of Article 21(2), point (a) of Directive (EU) 2022/2555, the policy on the security of network and information systems shall:\nlist the topic-specific policies;"
+    },
+    "eu-nis2-ir-1-1-1-j": {
+      "code": "1.1.1.j",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Policy on the security of network and information systems\nFor the purpose of Article 21(2), point (a) of Directive (EU) 2022/2555, the policy on the security of network and information systems shall:\nlay down indicators and measures to monitor its implementation and the current status of relevant entities’ maturity level of network and information security;"
+    },
+    "eu-nis2-ir-1-1-1-k": {
+      "code": "1.1.1.k",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Policy on the security of network and information systems\nFor the purpose of Article 21(2), point (a) of Directive (EU) 2022/2555, the policy on the security of network and information systems shall:\nindicate the date of the formal approval by the management bodies of the relevant entities (the ‘management bodies’)."
+    },
+    "eu-nis2-ir-1-1-2": {
+      "code": "1.1.2",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Policy on the security of network and information systems\nThe network and information system security policy shall be reviewed and, where appropriate, updated by management bodies at least annually and when significant incidents or significant changes to operations or risks occur. The result of the reviews shall be documented."
+    },
+    "eu-nis2-ir-1-2-1": {
+      "code": "1.2.1",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Roles, responsibilities and authorities\nAs part of their policy on the security of network and information systems referred to in point 1.1., the relevant entities shall lay down responsibilities and authorities for network and information system security and assign them to roles, allocate them according to the relevant entities’ needs, and communicate them to the management bodies."
+    },
+    "eu-nis2-ir-1-2-2": {
+      "code": "1.2.2",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Roles, responsibilities and authorities\nThe relevant entities shall require all personnel and third parties to apply network and information system security in accordance with the established network and information security policy, topic-specific policies and procedures of the relevant entities."
+    },
+    "eu-nis2-ir-1-2-3": {
+      "code": "1.2.3",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Roles, responsibilities and authorities\nAt least one person shall report directly to the management bodies on matters of network and information system security."
+    },
+    "eu-nis2-ir-1-2-4": {
+      "code": "1.2.4",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Roles, responsibilities and authorities\nDepending on the size of the relevant entities, network and information system security shall be covered by dedicated roles or duties carried out in addition to existing roles."
+    },
+    "eu-nis2-ir-1-2-5": {
+      "code": "1.2.5",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Roles, responsibilities and authorities\nConflicting duties and conflicting areas of responsibility shall be segregated, where applicable."
+    },
+    "eu-nis2-ir-1-2-6": {
+      "code": "1.2.6",
+      "section": "section-1",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Roles, responsibilities and authorities\nRoles, responsibilities and authorities shall be reviewed and, where appropriate, updated by management bodies at planned intervals and when significant incidents or significant changes to operations or risks occur."
+    },
+    "eu-nis2-ir-2-1-1": {
+      "code": "2.1.1",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Risk management framework\nFor the purpose of Article 21(2), point (a) of Directive (EU) 2022/2555, the relevant entities shall establish and maintain an appropriate risk management framework to identify and address the risks posed to the security of network and information systems. The relevant entities shall perform and document risk assessments and, based on the results, establish, implement and monitor a risk treatment plan. Risk assessment results and residual risks shall be accepted by management bodies or, where applicable, by persons who are accountable and have the authority to manage risks, provided that the relevant entities ensure adequate reporting to the management bodies."
+    },
+    "eu-nis2-ir-2-1-2": {
+      "code": "2.1.2",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Risk management framework\nFor the purpose of point 2.1.1., the relevant entities shall establish procedures for identification, analysis, assessment and treatment of risks (‘cybersecurity risk management process’). The cybersecurity risk management process shall be an integral part of the relevant entities’ overall risk management process, where applicable. As part of the cybersecurity risk management process, the relevant entities shall:"
+    },
+    "eu-nis2-ir-2-1-2-a": {
+      "code": "2.1.2.a",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Risk management framework\nFor the purpose of point 2.1.1., the relevant entities shall establish procedures for identification, analysis, assessment and treatment of risks (‘cybersecurity risk management process’). The cybersecurity risk management process shall be an integral part of the relevant entities’ overall risk management process, where applicable. As part of the cybersecurity risk management process, the relevant entities shall:\nfollow a risk management methodology;"
+    },
+    "eu-nis2-ir-2-1-2-b": {
+      "code": "2.1.2.b",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Risk management framework\nFor the purpose of point 2.1.1., the relevant entities shall establish procedures for identification, analysis, assessment and treatment of risks (‘cybersecurity risk management process’). The cybersecurity risk management process shall be an integral part of the relevant entities’ overall risk management process, where applicable. As part of the cybersecurity risk management process, the relevant entities shall:\nestablish the risk tolerance level in accordance with the risk appetite of the relevant entities;"
+    },
+    "eu-nis2-ir-2-1-2-c": {
+      "code": "2.1.2.c",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Risk management framework\nFor the purpose of point 2.1.1., the relevant entities shall establish procedures for identification, analysis, assessment and treatment of risks (‘cybersecurity risk management process’). The cybersecurity risk management process shall be an integral part of the relevant entities’ overall risk management process, where applicable. As part of the cybersecurity risk management process, the relevant entities shall:\nestablish and maintain relevant risk criteria;"
+    },
+    "eu-nis2-ir-2-1-2-d": {
+      "code": "2.1.2.d",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Risk management framework\nFor the purpose of point 2.1.1., the relevant entities shall establish procedures for identification, analysis, assessment and treatment of risks (‘cybersecurity risk management process’). The cybersecurity risk management process shall be an integral part of the relevant entities’ overall risk management process, where applicable. As part of the cybersecurity risk management process, the relevant entities shall:\nin line with an all-hazards approach, identify and document the risks posed to the security of network and information systems, in particular in relation to third parties and risks that could lead to disruptions in the availability, integrity, authenticity and confidentiality of the network and information systems, including the identification of single point of failures;"
+    },
+    "eu-nis2-ir-2-1-2-e": {
+      "code": "2.1.2.e",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Risk management framework\nFor the purpose of point 2.1.1., the relevant entities shall establish procedures for identification, analysis, assessment and treatment of risks (‘cybersecurity risk management process’). The cybersecurity risk management process shall be an integral part of the relevant entities’ overall risk management process, where applicable. As part of the cybersecurity risk management process, the relevant entities shall:\nanalyse the risks posed to the security of network and information systems, including threat, likelihood, impact, and risk level, taking into account cyber threat intelligence and vulnerabilities;"
+    },
+    "eu-nis2-ir-2-1-2-f": {
+      "code": "2.1.2.f",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Risk management framework\nFor the purpose of point 2.1.1., the relevant entities shall establish procedures for identification, analysis, assessment and treatment of risks (‘cybersecurity risk management process’). The cybersecurity risk management process shall be an integral part of the relevant entities’ overall risk management process, where applicable. As part of the cybersecurity risk management process, the relevant entities shall:\nevaluate the identified risks based on the risk criteria;"
+    },
+    "eu-nis2-ir-2-1-2-g": {
+      "code": "2.1.2.g",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Risk management framework\nFor the purpose of point 2.1.1., the relevant entities shall establish procedures for identification, analysis, assessment and treatment of risks (‘cybersecurity risk management process’). The cybersecurity risk management process shall be an integral part of the relevant entities’ overall risk management process, where applicable. As part of the cybersecurity risk management process, the relevant entities shall:\nidentify and prioritise appropriate risk treatment options and measures;"
+    },
+    "eu-nis2-ir-2-1-2-h": {
+      "code": "2.1.2.h",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Risk management framework\nFor the purpose of point 2.1.1., the relevant entities shall establish procedures for identification, analysis, assessment and treatment of risks (‘cybersecurity risk management process’). The cybersecurity risk management process shall be an integral part of the relevant entities’ overall risk management process, where applicable. As part of the cybersecurity risk management process, the relevant entities shall:\ncontinuously monitor the implementation of the risk treatment measures;"
+    },
+    "eu-nis2-ir-2-1-2-i": {
+      "code": "2.1.2.i",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Risk management framework\nFor the purpose of point 2.1.1., the relevant entities shall establish procedures for identification, analysis, assessment and treatment of risks (‘cybersecurity risk management process’). The cybersecurity risk management process shall be an integral part of the relevant entities’ overall risk management process, where applicable. As part of the cybersecurity risk management process, the relevant entities shall:\nidentify who is responsible for implementing the risk treatment measures and when they should be implemented;"
+    },
+    "eu-nis2-ir-2-1-2-j": {
+      "code": "2.1.2.j",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Risk management framework\nFor the purpose of point 2.1.1., the relevant entities shall establish procedures for identification, analysis, assessment and treatment of risks (‘cybersecurity risk management process’). The cybersecurity risk management process shall be an integral part of the relevant entities’ overall risk management process, where applicable. As part of the cybersecurity risk management process, the relevant entities shall:\ndocument the chosen risk treatment measures in a risk treatment plan and the reasons justifying the acceptance of residual risks in a comprehensible manner."
+    },
+    "eu-nis2-ir-2-1-3": {
+      "code": "2.1.3",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Risk management framework\nWhen identifying and prioritising appropriate risk treatment options and measures, the relevant entities shall take into account the risk assessment results, the results of the procedure to assess the effectiveness of cybersecurity risk-management measures, the cost of implementation in relation to the expected benefit, the asset classification referred to in point 12.1., and the business impact analysis referred to in point 4.1.3."
+    },
+    "eu-nis2-ir-2-1-4": {
+      "code": "2.1.4",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Risk management framework\nThe relevant entities shall review and, where appropriate, update the risk assessment results and the risk treatment plan at planned intervals and at least annually, and when significant changes to operations or risks or significant incidents occur."
+    },
+    "eu-nis2-ir-2-2-1": {
+      "code": "2.2.1",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Compliance monitoring\nThe relevant entities shall regularly review the compliance with their policies on network and information system security, topic-specific policies, rules, and standards. The management bodies shall be informed of the status of network and information security on the basis of the compliance reviews by means of regular reporting."
+    },
+    "eu-nis2-ir-2-2-2": {
+      "code": "2.2.2",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Compliance monitoring\nThe relevant entities shall put in place an effective compliance reporting system which shall be appropriate to their structures, operating environments and threat landscapes. The compliance reporting system shall be capable to provide to the management bodies an informed view of the current state of the relevant entities’ management of risks."
+    },
+    "eu-nis2-ir-2-2-3": {
+      "code": "2.2.3",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Compliance monitoring\nThe relevant entities shall perform the compliance monitoring at planned intervals and when significant incidents or significant changes to operations or risks occur."
+    },
+    "eu-nis2-ir-2-3-1": {
+      "code": "2.3.1",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Independent review of information and network security\nThe relevant entities shall review independently their approach to managing network and information system security and its implementation including people, processes and technologies."
+    },
+    "eu-nis2-ir-2-3-2": {
+      "code": "2.3.2",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Independent review of information and network security\nThe relevant entities shall develop and maintain processes to conduct independent reviews which shall be carried out by individuals with appropriate audit competence. Where the independent review is conducted by staff members of the relevant entity, the persons conducting the reviews shall not be in the line of authority of the personnel of the area under review. If the size of the relevant entities does not allow such separation of line of authority, the relevant entities shall put in place alternative measures to guarantee the impartiality of the reviews."
+    },
+    "eu-nis2-ir-2-3-3": {
+      "code": "2.3.3",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Independent review of information and network security\nThe results of the independent reviews, including the results from the compliance monitoring pursuant to point 2.2. and the monitoring and measurement pursuant to point 7, shall be reported to the management bodies. Corrective actions shall be taken or residual risk accepted according to the relevant entities’ risk acceptance criteria."
+    },
+    "eu-nis2-ir-2-3-4": {
+      "code": "2.3.4",
+      "section": "section-2",
+      "control": "Article 21(2), point (a)",
+      "requirements": "Independent review of information and network security\nThe independent reviews shall take place at planned intervals and when significant incidents or significant changes to operations or risks occur."
+    },
+    "eu-nis2-ir-3-1-1": {
+      "code": "3.1.1",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident handling policy\nFor the purpose of Article 21(2), point (b) of Directive (EU) 2022/2555, the relevant entities shall establish and implement an incident handling policy laying down the roles, responsibilities, and procedures for detecting, analysing, containing or responding to, recovering from, documenting and reporting of incidents in a timely manner."
+    },
+    "eu-nis2-ir-3-1-2": {
+      "code": "3.1.2",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident handling policy\nThe policy referred to in point 3.1.1 shall be coherent with the business continuity and disaster recovery plan referred to in point 4.1. The policy shall include:"
+    },
+    "eu-nis2-ir-3-1-2-a": {
+      "code": "3.1.2.a",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident handling policy\nThe policy referred to in point 3.1.1 shall be coherent with the business continuity and disaster recovery plan referred to in point 4.1. The policy shall include:\na categorisation system for incidents that is consistent with the event assessment and classification carried out pursuant to point 3.4.1.;"
+    },
+    "eu-nis2-ir-3-1-2-b": {
+      "code": "3.1.2.b",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident handling policy\nThe policy referred to in point 3.1.1 shall be coherent with the business continuity and disaster recovery plan referred to in point 4.1. The policy shall include:\neffective communication plans including for escalation and reporting;"
+    },
+    "eu-nis2-ir-3-1-2-c": {
+      "code": "3.1.2.c",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident handling policy\nThe policy referred to in point 3.1.1 shall be coherent with the business continuity and disaster recovery plan referred to in point 4.1. The policy shall include:\nassignment of roles to detect and appropriately respond to incidents to competent employees;"
+    },
+    "eu-nis2-ir-3-1-2-d": {
+      "code": "3.1.2.d",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident handling policy\nThe policy referred to in point 3.1.1 shall be coherent with the business continuity and disaster recovery plan referred to in point 4.1. The policy shall include:\ndocuments to be used in the course of incident detection and response such as incident response manuals, escalation charts, contact lists and templates."
+    },
+    "eu-nis2-ir-3-1-3": {
+      "code": "3.1.3",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident handling policy\nThe roles, responsibilities and procedures laid down in the policy shall be tested and reviewed and, where appropriate, updated at planned intervals and after significant incidents or significant changes to operations or risks."
+    },
+    "eu-nis2-ir-3-2-1": {
+      "code": "3.2.1",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nThe relevant entities shall lay down procedures and use tools to monitor and log activities on their network and information systems to detect events that could be considered as incidents and respond accordingly to mitigate the impact."
+    },
+    "eu-nis2-ir-3-2-2": {
+      "code": "3.2.2",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nTo the extent feasible, monitoring shall be automated and carried out either continuously or in periodic intervals, subject to business capabilities. The relevant entities shall implement their monitoring activities in a way which minimises false positives and false negatives."
+    },
+    "eu-nis2-ir-3-2-3": {
+      "code": "3.2.3",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nBased on the procedures referred to in point 3.2.1., the relevant entities shall maintain, document, and review logs. The relevant entities shall establish a list of assets to be subject to logging based on the results of the risk assessment carried out pursuant to point 2.1. Where appropriate, logs shall include:"
+    },
+    "eu-nis2-ir-3-2-3-a": {
+      "code": "3.2.3.a",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nBased on the procedures referred to in point 3.2.1., the relevant entities shall maintain, document, and review logs. The relevant entities shall establish a list of assets to be subject to logging based on the results of the risk assessment carried out pursuant to point 2.1. Where appropriate, logs shall include:\nrelevant outbound and inbound network traffic;"
+    },
+    "eu-nis2-ir-3-2-3-b": {
+      "code": "3.2.3.b",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nBased on the procedures referred to in point 3.2.1., the relevant entities shall maintain, document, and review logs. The relevant entities shall establish a list of assets to be subject to logging based on the results of the risk assessment carried out pursuant to point 2.1. Where appropriate, logs shall include:\ncreation, modification or deletion of users of the relevant entities’ network and information systems and extension of the permissions;"
+    },
+    "eu-nis2-ir-3-2-3-c": {
+      "code": "3.2.3.c",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nBased on the procedures referred to in point 3.2.1., the relevant entities shall maintain, document, and review logs. The relevant entities shall establish a list of assets to be subject to logging based on the results of the risk assessment carried out pursuant to point 2.1. Where appropriate, logs shall include:\naccess to systems and applications;"
+    },
+    "eu-nis2-ir-3-2-3-d": {
+      "code": "3.2.3.d",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nBased on the procedures referred to in point 3.2.1., the relevant entities shall maintain, document, and review logs. The relevant entities shall establish a list of assets to be subject to logging based on the results of the risk assessment carried out pursuant to point 2.1. Where appropriate, logs shall include:\nauthentication-related events;"
+    },
+    "eu-nis2-ir-3-2-3-e": {
+      "code": "3.2.3.e",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nBased on the procedures referred to in point 3.2.1., the relevant entities shall maintain, document, and review logs. The relevant entities shall establish a list of assets to be subject to logging based on the results of the risk assessment carried out pursuant to point 2.1. Where appropriate, logs shall include:\nall privileged access to systems and applications, and activities performed by administrative accounts;"
+    },
+    "eu-nis2-ir-3-2-3-f": {
+      "code": "3.2.3.f",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nBased on the procedures referred to in point 3.2.1., the relevant entities shall maintain, document, and review logs. The relevant entities shall establish a list of assets to be subject to logging based on the results of the risk assessment carried out pursuant to point 2.1. Where appropriate, logs shall include:\naccess or changes to critical configuration and backup files;"
+    },
+    "eu-nis2-ir-3-2-3-g": {
+      "code": "3.2.3.g",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nBased on the procedures referred to in point 3.2.1., the relevant entities shall maintain, document, and review logs. The relevant entities shall establish a list of assets to be subject to logging based on the results of the risk assessment carried out pursuant to point 2.1. Where appropriate, logs shall include:\nevent logs and logs from security tools, such as antivirus, intrusion detection systems or firewalls;"
+    },
+    "eu-nis2-ir-3-2-3-h": {
+      "code": "3.2.3.h",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nBased on the procedures referred to in point 3.2.1., the relevant entities shall maintain, document, and review logs. The relevant entities shall establish a list of assets to be subject to logging based on the results of the risk assessment carried out pursuant to point 2.1. Where appropriate, logs shall include:\nuse of system resources, as well as their performance;"
+    },
+    "eu-nis2-ir-3-2-3-i": {
+      "code": "3.2.3.i",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nBased on the procedures referred to in point 3.2.1., the relevant entities shall maintain, document, and review logs. The relevant entities shall establish a list of assets to be subject to logging based on the results of the risk assessment carried out pursuant to point 2.1. Where appropriate, logs shall include:\nphysical access to facilities;"
+    },
+    "eu-nis2-ir-3-2-3-j": {
+      "code": "3.2.3.j",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nBased on the procedures referred to in point 3.2.1., the relevant entities shall maintain, document, and review logs. The relevant entities shall establish a list of assets to be subject to logging based on the results of the risk assessment carried out pursuant to point 2.1. Where appropriate, logs shall include:\naccess to and use of their network equipment and devices;"
+    },
+    "eu-nis2-ir-3-2-3-k": {
+      "code": "3.2.3.k",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nBased on the procedures referred to in point 3.2.1., the relevant entities shall maintain, document, and review logs. The relevant entities shall establish a list of assets to be subject to logging based on the results of the risk assessment carried out pursuant to point 2.1. Where appropriate, logs shall include:\nactivation, stopping and pausing of the various logs;"
+    },
+    "eu-nis2-ir-3-2-3-l": {
+      "code": "3.2.3.l",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nBased on the procedures referred to in point 3.2.1., the relevant entities shall maintain, document, and review logs. The relevant entities shall establish a list of assets to be subject to logging based on the results of the risk assessment carried out pursuant to point 2.1. Where appropriate, logs shall include:\nenvironmental events."
+    },
+    "eu-nis2-ir-3-2-4": {
+      "code": "3.2.4",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nThe logs shall be regularly reviewed for any unusual or unwanted trends. Where appropriate, the relevant entities shall lay down appropriate values for alarm thresholds. If the laid down values for alarm threshold are exceeded, an alarm shall be triggered, where appropriate, automatically. The relevant entities shall ensure that, in case of an alarm, a qualified and appropriate response is initiated in a timely manner."
+    },
+    "eu-nis2-ir-3-2-5": {
+      "code": "3.2.5",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nThe relevant entities shall maintain and back up logs for a predefined period and shall protect them from unauthorised access or changes."
+    },
+    "eu-nis2-ir-3-2-6": {
+      "code": "3.2.6",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nTo the extent feasible, the relevant entities shall ensure that all systems have synchronised time sources to be able to correlate logs between systems for event assessment. The relevant entities shall establish and keep a list of all assets that are being logged and ensure that monitoring and logging systems are redundant. The availability of the monitoring and logging systems shall be monitored independent of the systems they are monitoring."
+    },
+    "eu-nis2-ir-3-2-7": {
+      "code": "3.2.7",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Monitoring and logging\nThe procedures as well as the list of assets that are being logged shall be reviewed and, where appropriate, updated at regular intervals and after significant incidents."
+    },
+    "eu-nis2-ir-3-3-1": {
+      "code": "3.3.1",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Event reporting\nThe relevant entities shall put in place a simple mechanism allowing their employees, suppliers, and customers to report suspicious events."
+    },
+    "eu-nis2-ir-3-3-2": {
+      "code": "3.3.2",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Event reporting\nThe relevant entities shall, where appropriate, communicate the event reporting mechanism to their suppliers and customers, and shall regularly train their employees how to use the mechanism."
+    },
+    "eu-nis2-ir-3-4-1": {
+      "code": "3.4.1",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Event assessment and classification\nThe relevant entities shall assess suspicious events to determine whether they constitute incidents and, if so, determine their nature and severity."
+    },
+    "eu-nis2-ir-3-4-2-a": {
+      "code": "3.4.2.a",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Event assessment and classification\nFor the purpose of point 3.4.1, the relevant entities shall act in the following manner:\ncarry out the assessment based on predefined criteria laid down in advance, and on a triage to determine prioritisation of incident containment and eradication;"
+    },
+    "eu-nis2-ir-3-4-2-b": {
+      "code": "3.4.2.b",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Event assessment and classification\nFor the purpose of point 3.4.1, the relevant entities shall act in the following manner:\nassess the existence of recurring incidents as referred to in Article 4 of this Regulation on a quarterly basis;"
+    },
+    "eu-nis2-ir-3-4-2-c": {
+      "code": "3.4.2.c",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Event assessment and classification\nFor the purpose of point 3.4.1, the relevant entities shall act in the following manner:\nreview the appropriate logs for the purposes of event assessment and classification;"
+    },
+    "eu-nis2-ir-3-4-2-d": {
+      "code": "3.4.2.d",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Event assessment and classification\nFor the purpose of point 3.4.1, the relevant entities shall act in the following manner:\nput in place a process for log correlation and analysis, and"
+    },
+    "eu-nis2-ir-3-4-2-e": {
+      "code": "3.4.2.e",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Event assessment and classification\nFor the purpose of point 3.4.1, the relevant entities shall act in the following manner:\nreassess and reclassify events in case of new information becoming available or after analysis of previously available information."
+    },
+    "eu-nis2-ir-3-5-1": {
+      "code": "3.5.1",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident response\nThe relevant entities shall respond to incidents in accordance with documented procedures and in a timely manner."
+    },
+    "eu-nis2-ir-3-5-2-a": {
+      "code": "3.5.2.a",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident response\nThe incident response procedures shall include the following stages:\nincident containment, to prevent the consequences of the incident from spreading;"
+    },
+    "eu-nis2-ir-3-5-2-b": {
+      "code": "3.5.2.b",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident response\nThe incident response procedures shall include the following stages:\neradication, to prevent the incident from continuing or reappearing,"
+    },
+    "eu-nis2-ir-3-5-2-c": {
+      "code": "3.5.2.c",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident response\nThe incident response procedures shall include the following stages:\nrecovery from the incident, where necessary."
+    },
+    "eu-nis2-ir-3-5-3": {
+      "code": "3.5.3",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident response\nThe relevant entities shall establish communication plans and procedures:"
+    },
+    "eu-nis2-ir-3-5-3-a": {
+      "code": "3.5.3.a",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident response\nThe relevant entities shall establish communication plans and procedures:\nwith the Computer Security Incident Response Teams (CSIRTs) or, where applicable, the competent authorities, related to incident notification;"
+    },
+    "eu-nis2-ir-3-5-3-b": {
+      "code": "3.5.3.b",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident response\nThe relevant entities shall establish communication plans and procedures:\nfor communication among staff members of the relevant entity, and for communication with relevant stakeholders external to the relevant entity."
+    },
+    "eu-nis2-ir-3-5-4": {
+      "code": "3.5.4",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident response\nThe relevant entities shall log incident response activities in accordance with the procedures referred to in point 3.2.1., and record evidence."
+    },
+    "eu-nis2-ir-3-5-5": {
+      "code": "3.5.5",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Incident response\nThe relevant entities shall test at planned intervals their incident response procedures."
+    },
+    "eu-nis2-ir-3-6-1": {
+      "code": "3.6.1",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Post-incident reviews\nWhere appropriate, the relevant entities shall carry out post-incident reviews after recovery from incidents. The post-incident reviews shall identify, where possible, the root cause of the incident and result in documented lessons learned to reduce the occurrence and consequences of future incidents."
+    },
+    "eu-nis2-ir-3-6-2": {
+      "code": "3.6.2",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Post-incident reviews\nThe relevant entities shall ensure that post-incident reviews contribute to improving their approach to network and information security, to risk treatment measures, and to incident handling, detection and response procedures."
+    },
+    "eu-nis2-ir-3-6-3": {
+      "code": "3.6.3",
+      "section": "section-3",
+      "control": "Article 21(2), point (b)",
+      "requirements": "Post-incident reviews\nThe relevant entities shall review at planned intervals if incidents led to post-incident reviews."
+    },
+    "eu-nis2-ir-4-1-1": {
+      "code": "4.1.1",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Business continuity and disaster recovery plan\nFor the purpose of Article 21(2), point (c) of Directive (EU) 2022/2555, the relevant entities shall lay down and maintain a business continuity and disaster recovery plan to apply in the case of incidents."
+    },
+    "eu-nis2-ir-4-1-2": {
+      "code": "4.1.2",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Business continuity and disaster recovery plan\nThe relevant entities’ operations shall be restored according to the business continuity and disaster recovery plan. The plan shall be based on the results of the risk assessment carried out pursuant to point 2.1 and shall include, where appropriate, the following:"
+    },
+    "eu-nis2-ir-4-1-2-a": {
+      "code": "4.1.2.a",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Business continuity and disaster recovery plan\nThe relevant entities’ operations shall be restored according to the business continuity and disaster recovery plan. The plan shall be based on the results of the risk assessment carried out pursuant to point 2.1 and shall include, where appropriate, the following:\npurpose, scope and audience;"
+    },
+    "eu-nis2-ir-4-1-2-b": {
+      "code": "4.1.2.b",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Business continuity and disaster recovery plan\nThe relevant entities’ operations shall be restored according to the business continuity and disaster recovery plan. The plan shall be based on the results of the risk assessment carried out pursuant to point 2.1 and shall include, where appropriate, the following:\nroles and responsibilities;"
+    },
+    "eu-nis2-ir-4-1-2-c": {
+      "code": "4.1.2.c",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Business continuity and disaster recovery plan\nThe relevant entities’ operations shall be restored according to the business continuity and disaster recovery plan. The plan shall be based on the results of the risk assessment carried out pursuant to point 2.1 and shall include, where appropriate, the following:\nkey contacts and (internal and external) communication channels;"
+    },
+    "eu-nis2-ir-4-1-2-d": {
+      "code": "4.1.2.d",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Business continuity and disaster recovery plan\nThe relevant entities’ operations shall be restored according to the business continuity and disaster recovery plan. The plan shall be based on the results of the risk assessment carried out pursuant to point 2.1 and shall include, where appropriate, the following:\nconditions for plan activation and deactivation;"
+    },
+    "eu-nis2-ir-4-1-2-e": {
+      "code": "4.1.2.e",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Business continuity and disaster recovery plan\nThe relevant entities’ operations shall be restored according to the business continuity and disaster recovery plan. The plan shall be based on the results of the risk assessment carried out pursuant to point 2.1 and shall include, where appropriate, the following:\norder of recovery for operations;"
+    },
+    "eu-nis2-ir-4-1-2-f": {
+      "code": "4.1.2.f",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Business continuity and disaster recovery plan\nThe relevant entities’ operations shall be restored according to the business continuity and disaster recovery plan. The plan shall be based on the results of the risk assessment carried out pursuant to point 2.1 and shall include, where appropriate, the following:\nrecovery plans for specific operations, including recovery objectives;"
+    },
+    "eu-nis2-ir-4-1-2-g": {
+      "code": "4.1.2.g",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Business continuity and disaster recovery plan\nThe relevant entities’ operations shall be restored according to the business continuity and disaster recovery plan. The plan shall be based on the results of the risk assessment carried out pursuant to point 2.1 and shall include, where appropriate, the following:\nrequired resources, including backups and redundancies;"
+    },
+    "eu-nis2-ir-4-1-2-h": {
+      "code": "4.1.2.h",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Business continuity and disaster recovery plan\nThe relevant entities’ operations shall be restored according to the business continuity and disaster recovery plan. The plan shall be based on the results of the risk assessment carried out pursuant to point 2.1 and shall include, where appropriate, the following:\nrestoring and resuming activities from temporary measures."
+    },
+    "eu-nis2-ir-4-1-3": {
+      "code": "4.1.3",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Business continuity and disaster recovery plan\nThe relevant entities shall carry out a business impact analysis to assess the potential impact of severe disruptions to their business operations and shall, based on the results of the business impact analysis, establish continuity requirements for the network and information systems."
+    },
+    "eu-nis2-ir-4-1-4": {
+      "code": "4.1.4",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Business continuity and disaster recovery plan\nThe business continuity plan and disaster recovery plan shall be tested, reviewed and, where appropriate, updated at planned intervals and following significant incidents or significant changes to operations or risks. The relevant entities shall ensure that the plans incorporate lessons learnt from such tests."
+    },
+    "eu-nis2-ir-4-2-1": {
+      "code": "4.2.1",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nThe relevant entities shall maintain backup copies of data and provide sufficient available resources, including facilities, network and information systems and staff, to ensure an appropriate level of redundancy."
+    },
+    "eu-nis2-ir-4-2-2": {
+      "code": "4.2.2",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nBased on the results of the risk assessment carried out pursuant to point 2.1 and the business continuity plan, the relevant entities shall lay down backup plans which include the following:"
+    },
+    "eu-nis2-ir-4-2-2-a": {
+      "code": "4.2.2.a",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nBased on the results of the risk assessment carried out pursuant to point 2.1 and the business continuity plan, the relevant entities shall lay down backup plans which include the following:\nrecovery times;"
+    },
+    "eu-nis2-ir-4-2-2-b": {
+      "code": "4.2.2.b",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nBased on the results of the risk assessment carried out pursuant to point 2.1 and the business continuity plan, the relevant entities shall lay down backup plans which include the following:\nassurance that backup copies are complete and accurate, including configuration data and data stored in cloud computing service environment;"
+    },
+    "eu-nis2-ir-4-2-2-c": {
+      "code": "4.2.2.c",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nBased on the results of the risk assessment carried out pursuant to point 2.1 and the business continuity plan, the relevant entities shall lay down backup plans which include the following:\nstoring backup copies (online or offline) in a safe location or locations, which are not in the same network as the system, and are at sufficient distance to escape any damage from a disaster at the main site;"
+    },
+    "eu-nis2-ir-4-2-2-d": {
+      "code": "4.2.2.d",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nBased on the results of the risk assessment carried out pursuant to point 2.1 and the business continuity plan, the relevant entities shall lay down backup plans which include the following:\nappropriate physical and logical access controls to backup copies, in accordance with the asset classification level;"
+    },
+    "eu-nis2-ir-4-2-2-e": {
+      "code": "4.2.2.e",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nBased on the results of the risk assessment carried out pursuant to point 2.1 and the business continuity plan, the relevant entities shall lay down backup plans which include the following:\nrestoring data from backup copies;"
+    },
+    "eu-nis2-ir-4-2-2-f": {
+      "code": "4.2.2.f",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nBased on the results of the risk assessment carried out pursuant to point 2.1 and the business continuity plan, the relevant entities shall lay down backup plans which include the following:\nretention periods based on business and regulatory requirements."
+    },
+    "eu-nis2-ir-4-2-3": {
+      "code": "4.2.3",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nThe relevant entities shall perform regular integrity checks on the backup copies."
+    },
+    "eu-nis2-ir-4-2-4": {
+      "code": "4.2.4",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nBased on the results of the risk assessment carried out pursuant to point 2.1 and the business continuity plan, the relevant entities shall ensure sufficient availability of resources by at least partial redundancy of the following:"
+    },
+    "eu-nis2-ir-4-2-4-a": {
+      "code": "4.2.4.a",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nBased on the results of the risk assessment carried out pursuant to point 2.1 and the business continuity plan, the relevant entities shall ensure sufficient availability of resources by at least partial redundancy of the following:\nnetwork and information systems;"
+    },
+    "eu-nis2-ir-4-2-4-b": {
+      "code": "4.2.4.b",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nBased on the results of the risk assessment carried out pursuant to point 2.1 and the business continuity plan, the relevant entities shall ensure sufficient availability of resources by at least partial redundancy of the following:\nassets, including facilities, equipment and supplies;"
+    },
+    "eu-nis2-ir-4-2-4-c": {
+      "code": "4.2.4.c",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nBased on the results of the risk assessment carried out pursuant to point 2.1 and the business continuity plan, the relevant entities shall ensure sufficient availability of resources by at least partial redundancy of the following:\npersonnel with the necessary responsibility, authority and competence;"
+    },
+    "eu-nis2-ir-4-2-4-d": {
+      "code": "4.2.4.d",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nBased on the results of the risk assessment carried out pursuant to point 2.1 and the business continuity plan, the relevant entities shall ensure sufficient availability of resources by at least partial redundancy of the following:\nappropriate communication channels."
+    },
+    "eu-nis2-ir-4-2-5": {
+      "code": "4.2.5",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nWhere appropriate, the relevant entities shall ensure that monitoring and adjustment of resources, including facilities, systems and personnel, is duly informed by backup and redundancy requirements."
+    },
+    "eu-nis2-ir-4-2-6": {
+      "code": "4.2.6",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Backup and redundancy management\nThe relevant entities shall carry out regular testing of the recovery of backup copies and redundancies to ensure that, in recovery conditions, they can be relied upon and cover the copies, processes and knowledge to perform an effective recovery. The relevant entities shall document the results of the tests and, where needed, take corrective action."
+    },
+    "eu-nis2-ir-4-3-1": {
+      "code": "4.3.1",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Crisis management\nThe relevant entities shall put in place a process for crisis management."
+    },
+    "eu-nis2-ir-4-3-2": {
+      "code": "4.3.2",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Crisis management\nThe relevant entities shall ensure that the crisis management process addresses at least the following elements:"
+    },
+    "eu-nis2-ir-4-3-2-a": {
+      "code": "4.3.2.a",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Crisis management\nThe relevant entities shall ensure that the crisis management process addresses at least the following elements:\nroles and responsibilities for personnel and, where appropriate, suppliers and service providers, specifying the allocation of roles in crisis situations, including specific steps to follow;"
+    },
+    "eu-nis2-ir-4-3-2-b": {
+      "code": "4.3.2.b",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Crisis management\nThe relevant entities shall ensure that the crisis management process addresses at least the following elements:\nappropriate communication means between the relevant entities and relevant competent authorities;"
+    },
+    "eu-nis2-ir-4-3-2-c": {
+      "code": "4.3.2.c",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Crisis management\nThe relevant entities shall ensure that the crisis management process addresses at least the following elements:\napplication of appropriate measures to ensure the maintenance of network and information system security in crisis situations."
+    },
+    "eu-nis2-ir-4-3-2-p1": {
+      "code": "4.3.2 (1)",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Crisis management\nThe relevant entities shall ensure that the crisis management process addresses at least the following elements:\nFor the purpose of point (b), the flow of information between the relevant entities and relevant competent authorities shall include both obligatory communications, such as incident reports and related timelines, and non- obligatory communications."
+    },
+    "eu-nis2-ir-4-3-3": {
+      "code": "4.3.3",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Crisis management\nThe relevant entities shall implement a process for managing and making use of information received from the CSIRTs or, where applicable, the competent authorities, concerning incidents, vulnerabilities, threats or possible mitigation measures."
+    },
+    "eu-nis2-ir-4-3-4": {
+      "code": "4.3.4",
+      "section": "section-4",
+      "control": "Article 21(2), point (c)",
+      "requirements": "Crisis management\nThe relevant entities shall test, review and, where appropriate, update the crisis management plan on a regular basis or following significant incidents or significant changes to operations or risks."
+    },
+    "eu-nis2-ir-5-1-1": {
+      "code": "5.1.1",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nFor the purpose of Article 21(2), point (d) of Directive (EU) 2022/2555, the relevant entities shall establish, implement and apply a supply chain security policy which governs the relations with their direct suppliers and service providers in order to mitigate the identified risks to the security of network and information systems. In the supply chain security policy, the relevant entities shall identify their role in the supply chain and communicate it to their direct suppliers and service providers."
+    },
+    "eu-nis2-ir-5-1-2": {
+      "code": "5.1.2",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nAs part of the supply chain security policy referred to in point 5.1.1, the relevant entities shall lay down criteria to select and contract suppliers and service providers. Those criteria shall include the following:"
+    },
+    "eu-nis2-ir-5-1-2-a": {
+      "code": "5.1.2.a",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nAs part of the supply chain security policy referred to in point 5.1.1, the relevant entities shall lay down criteria to select and contract suppliers and service providers. Those criteria shall include the following:\nthe cybersecurity practices of the suppliers and service providers, including their secure development procedures;"
+    },
+    "eu-nis2-ir-5-1-2-b": {
+      "code": "5.1.2.b",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nAs part of the supply chain security policy referred to in point 5.1.1, the relevant entities shall lay down criteria to select and contract suppliers and service providers. Those criteria shall include the following:\nthe ability of the suppliers and service providers to meet cybersecurity specifications set by the relevant entities;"
+    },
+    "eu-nis2-ir-5-1-2-c": {
+      "code": "5.1.2.c",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nAs part of the supply chain security policy referred to in point 5.1.1, the relevant entities shall lay down criteria to select and contract suppliers and service providers. Those criteria shall include the following:\nthe overall quality and resilience of ICT products and ICT services and the cybersecurity risk-management measures embedded in them, including the risks and classification level of the ICT products and ICT services;"
+    },
+    "eu-nis2-ir-5-1-2-d": {
+      "code": "5.1.2.d",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nAs part of the supply chain security policy referred to in point 5.1.1, the relevant entities shall lay down criteria to select and contract suppliers and service providers. Those criteria shall include the following:\nthe ability of the relevant entities to diversify sources of supply and limit vendor lock-in, where applicable."
+    },
+    "eu-nis2-ir-5-1-3": {
+      "code": "5.1.3",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nWhen establishing their supply chain security policy, relevant entities shall take into account the results of the coordinated security risk assessments of critical supply chains carried out in accordance with Article 22(1) of Directive (EU) 2022/2555, where applicable."
+    },
+    "eu-nis2-ir-5-1-4": {
+      "code": "5.1.4",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nBased on the supply chain security policy and taking into account the results of the risk assessment carried out in accordance with point 2.1. of this Annex, the relevant entities shall ensure that their contracts with the suppliers and service providers specify, where appropriate through service level agreements, the following, where appropriate:"
+    },
+    "eu-nis2-ir-5-1-4-a": {
+      "code": "5.1.4.a",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nBased on the supply chain security policy and taking into account the results of the risk assessment carried out in accordance with point 2.1. of this Annex, the relevant entities shall ensure that their contracts with the suppliers and service providers specify, where appropriate through service level agreements, the following, where appropriate:\ncybersecurity requirements for the suppliers or service providers, including requirements as regards the security in acquisition of ICT services or ICT products set out in point 6.1.;"
+    },
+    "eu-nis2-ir-5-1-4-b": {
+      "code": "5.1.4.b",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nBased on the supply chain security policy and taking into account the results of the risk assessment carried out in accordance with point 2.1. of this Annex, the relevant entities shall ensure that their contracts with the suppliers and service providers specify, where appropriate through service level agreements, the following, where appropriate:\nrequirements regarding awareness, skills and training, and where appropriate certifications, required from the suppliers’ or service providers’ employees;"
+    },
+    "eu-nis2-ir-5-1-4-c": {
+      "code": "5.1.4.c",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nBased on the supply chain security policy and taking into account the results of the risk assessment carried out in accordance with point 2.1. of this Annex, the relevant entities shall ensure that their contracts with the suppliers and service providers specify, where appropriate through service level agreements, the following, where appropriate:\nrequirements regarding the verification of the background of the suppliers’ and service providers’ employees;"
+    },
+    "eu-nis2-ir-5-1-4-d": {
+      "code": "5.1.4.d",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nBased on the supply chain security policy and taking into account the results of the risk assessment carried out in accordance with point 2.1. of this Annex, the relevant entities shall ensure that their contracts with the suppliers and service providers specify, where appropriate through service level agreements, the following, where appropriate:\nan obligation on suppliers and service providers to notify, without undue delay, the relevant entities of incidents that present a risk to the security of the network and information systems of those entities;"
+    },
+    "eu-nis2-ir-5-1-4-e": {
+      "code": "5.1.4.e",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nBased on the supply chain security policy and taking into account the results of the risk assessment carried out in accordance with point 2.1. of this Annex, the relevant entities shall ensure that their contracts with the suppliers and service providers specify, where appropriate through service level agreements, the following, where appropriate:\nthe right to audit or right to receive audit reports;"
+    },
+    "eu-nis2-ir-5-1-4-f": {
+      "code": "5.1.4.f",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nBased on the supply chain security policy and taking into account the results of the risk assessment carried out in accordance with point 2.1. of this Annex, the relevant entities shall ensure that their contracts with the suppliers and service providers specify, where appropriate through service level agreements, the following, where appropriate:\nan obligation on suppliers and service providers to handle vulnerabilities that present a risk to the security of the network and information systems of the relevant entities;"
+    },
+    "eu-nis2-ir-5-1-4-g": {
+      "code": "5.1.4.g",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nBased on the supply chain security policy and taking into account the results of the risk assessment carried out in accordance with point 2.1. of this Annex, the relevant entities shall ensure that their contracts with the suppliers and service providers specify, where appropriate through service level agreements, the following, where appropriate:\nrequirements regarding subcontracting and, where the relevant entities allow subcontracting, cybersecurity requirements for subcontractors in accordance with the cybersecurity requirements referred to in point (a);"
+    },
+    "eu-nis2-ir-5-1-4-h": {
+      "code": "5.1.4.h",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nBased on the supply chain security policy and taking into account the results of the risk assessment carried out in accordance with point 2.1. of this Annex, the relevant entities shall ensure that their contracts with the suppliers and service providers specify, where appropriate through service level agreements, the following, where appropriate:\nobligations on the suppliers and service providers at the termination of the contract, such as retrieval and disposal of the information obtained by the suppliers and service providers in the exercise of their tasks."
+    },
+    "eu-nis2-ir-5-1-5": {
+      "code": "5.1.5",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nThe relevant entities shall take into account the elements referred to in point 5.1.2 and 5.1.3. as part of the selection process of new suppliers and service providers, as well as part of the procurement process referred to in point 6.1."
+    },
+    "eu-nis2-ir-5-1-6": {
+      "code": "5.1.6",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nThe relevant entities shall review the supply chain security policy, and monitor, evaluate and, where necessary, act upon changes in the cybersecurity practices of suppliers and service providers, at planned intervals and when significant changes to operations or risks or significant incidents related to the provision of ICT services or having impact on the security of the ICT products from suppliers and service providers occur."
+    },
+    "eu-nis2-ir-5-1-7-a": {
+      "code": "5.1.7.a",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nFor the purpose of point 5.1.6., the relevant entities shall:\nregularly monitor reports on the implementation of the service level agreements, where applicable;"
+    },
+    "eu-nis2-ir-5-1-7-b": {
+      "code": "5.1.7.b",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nFor the purpose of point 5.1.6., the relevant entities shall:\nreview incidents related to ICT products and ICT services from suppliers and service providers;"
+    },
+    "eu-nis2-ir-5-1-7-c": {
+      "code": "5.1.7.c",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nFor the purpose of point 5.1.6., the relevant entities shall:\nassess the need for unscheduled reviews and document the findings in a comprehensible manner;"
+    },
+    "eu-nis2-ir-5-1-7-d": {
+      "code": "5.1.7.d",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Supply chain security policy\nFor the purpose of point 5.1.6., the relevant entities shall:\nanalyse the risks presented by changes related to ICT products and ICT services from suppliers and service providers and, where appropriate, take mitigating measures in a timely manner."
+    },
+    "eu-nis2-ir-5-2-p1": {
+      "code": "5.2 (1)",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Directory of suppliers and service providers\nThe relevant entities shall maintain and keep up to date a registry of their direct suppliers and service providers, including:"
+    },
+    "eu-nis2-ir-5-2-a": {
+      "code": "5.2.a",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Directory of suppliers and service providers\nThe relevant entities shall maintain and keep up to date a registry of their direct suppliers and service providers, including:\ncontact points for each direct supplier and service provider;"
+    },
+    "eu-nis2-ir-5-2-b": {
+      "code": "5.2.b",
+      "section": "section-5",
+      "control": "Article 21(2), point (d)",
+      "requirements": "Directory of suppliers and service providers\nThe relevant entities shall maintain and keep up to date a registry of their direct suppliers and service providers, including:\na list of ICT products, ICT services, and ICT processes provided by the direct supplier or service provider to the relevant entities."
+    },
+    "eu-nis2-ir-6-1-1": {
+      "code": "6.1.1",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security in acquisition of ICT services or ICT products\nFor the purpose of Article 21(2), point (e) of Directive (EU) 2022/2555, the relevant entities shall set and implement processes to manage risks stemming from the acquisition of ICT services or ICT products for components that are critical for the relevant entities’ security of network and information systems, based on the risk assessment carried out pursuant to point 2.1, from suppliers or service providers throughout their life cycle."
+    },
+    "eu-nis2-ir-6-1-2-a": {
+      "code": "6.1.2.a",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security in acquisition of ICT services or ICT products\nFor the purpose of point 6.1.1., the processes referred to in point 6.1.1. shall include:\nsecurity requirements to apply to the ICT services or ICT products to be acquired;"
+    },
+    "eu-nis2-ir-6-1-2-b": {
+      "code": "6.1.2.b",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security in acquisition of ICT services or ICT products\nFor the purpose of point 6.1.1., the processes referred to in point 6.1.1. shall include:\nrequirements regarding security updates throughout the entire lifetime of the ICT services or ICT products, or replacement after the end of the support period;"
+    },
+    "eu-nis2-ir-6-1-2-c": {
+      "code": "6.1.2.c",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security in acquisition of ICT services or ICT products\nFor the purpose of point 6.1.1., the processes referred to in point 6.1.1. shall include:\ninformation describing the hardware and software components used in the ICT services or ICT products;"
+    },
+    "eu-nis2-ir-6-1-2-d": {
+      "code": "6.1.2.d",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security in acquisition of ICT services or ICT products\nFor the purpose of point 6.1.1., the processes referred to in point 6.1.1. shall include:\ninformation describing the implemented cybersecurity functions of the ICT services or ICT products and the configuration required for their secure operation;"
+    },
+    "eu-nis2-ir-6-1-2-e": {
+      "code": "6.1.2.e",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security in acquisition of ICT services or ICT products\nFor the purpose of point 6.1.1., the processes referred to in point 6.1.1. shall include:\nassurance that the ICT services or ICT products comply with the security requirements according to point (a);"
+    },
+    "eu-nis2-ir-6-1-2-f": {
+      "code": "6.1.2.f",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security in acquisition of ICT services or ICT products\nFor the purpose of point 6.1.1., the processes referred to in point 6.1.1. shall include:\nmethods for validating that the delivered ICT services or ICT products are compliant to the stated security requirements, as well as documentation of the results of the validation."
+    },
+    "eu-nis2-ir-6-1-3": {
+      "code": "6.1.3",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security in acquisition of ICT services or ICT products\nThe relevant entities shall review and, where appropriate, update the processes at planned intervals and when significant incidents occur."
+    },
+    "eu-nis2-ir-6-2-1": {
+      "code": "6.2.1",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Secure development life cycle\nBefore developing a network and information system, including software, the relevant entities shall lay down rules for the secure development of network and information systems and apply them when developing network and information systems in-house, or when outsourcing the development of network and information systems. The rules shall cover all development phases, including specification, design, development, implementation and testing."
+    },
+    "eu-nis2-ir-6-2-2-a": {
+      "code": "6.2.2.a",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Secure development life cycle\nFor the purpose of point 6.2.1., the relevant entities shall:\ncarry out an analysis of security requirements at the specification and design phases of any development or acquisition project undertaken by the relevant entities or on behalf of those entities;"
+    },
+    "eu-nis2-ir-6-2-2-b": {
+      "code": "6.2.2.b",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Secure development life cycle\nFor the purpose of point 6.2.1., the relevant entities shall:\napply principles for engineering secure systems and secure coding principles to any information system development activities such as promoting cybersecurity-by-design, zero-trust architectures;"
+    },
+    "eu-nis2-ir-6-2-2-c": {
+      "code": "6.2.2.c",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Secure development life cycle\nFor the purpose of point 6.2.1., the relevant entities shall:\nlay down security requirements regarding development environments;"
+    },
+    "eu-nis2-ir-6-2-2-d": {
+      "code": "6.2.2.d",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Secure development life cycle\nFor the purpose of point 6.2.1., the relevant entities shall:\nestablish and implement security testing processes in the development life cycle;"
+    },
+    "eu-nis2-ir-6-2-2-e": {
+      "code": "6.2.2.e",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Secure development life cycle\nFor the purpose of point 6.2.1., the relevant entities shall:\nappropriately select, protect and manage security test data;"
+    },
+    "eu-nis2-ir-6-2-2-f": {
+      "code": "6.2.2.f",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Secure development life cycle\nFor the purpose of point 6.2.1., the relevant entities shall:\nsanitise and anonymise testing data according to the risk assessment carried out pursuant to point 2.1."
+    },
+    "eu-nis2-ir-6-2-3": {
+      "code": "6.2.3",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Secure development life cycle\nFor outsourced development of network and information systems, the relevant entities shall also apply the policies and procedures referred to in points 5 and 6.1."
+    },
+    "eu-nis2-ir-6-2-4": {
+      "code": "6.2.4",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Secure development life cycle\nThe relevant entities shall review and, where necessary, update their secure development rules at planned intervals."
+    },
+    "eu-nis2-ir-6-3-1": {
+      "code": "6.3.1",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Configuration management\nThe relevant entities shall take the appropriate measures to establish, document, implement, and monitor configurations, including security configurations of hardware, software, services and networks."
+    },
+    "eu-nis2-ir-6-3-2-a": {
+      "code": "6.3.2.a",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Configuration management\nFor the purpose of point 6.3.1., the relevant entities shall:\nlay down and ensure security in configurations for their hardware, software, services and networks;"
+    },
+    "eu-nis2-ir-6-3-2-b": {
+      "code": "6.3.2.b",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Configuration management\nFor the purpose of point 6.3.1., the relevant entities shall:\nlay down and implement processes and tools to enforce the laid down secure configurations for hardware, software, services and networks, for newly installed systems as well as for systems in operation over their lifetime."
+    },
+    "eu-nis2-ir-6-3-3": {
+      "code": "6.3.3",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Configuration management\nThe relevant entities shall review and, where appropriate, update configurations at planned intervals or when significant incidents or significant changes to operations or risks occur."
+    },
+    "eu-nis2-ir-6-4-1": {
+      "code": "6.4.1",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Change management, repairs and maintenance\nThe relevant entities shall apply change management procedures to control changes of network and information systems. Where applicable, the procedures shall be consistent with the relevant entities’ general policies concerning change management."
+    },
+    "eu-nis2-ir-6-4-2": {
+      "code": "6.4.2",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Change management, repairs and maintenance\nThe procedures referred to in point 6.4.1. shall be applied for releases, modifications and emergency changes of any software and hardware in operation and changes to the configuration. The procedures shall ensure that those changes are documented and, based on the risk assessment carried out pursuant to point 2.1, tested and assessed in view of the potential impact before being implemented."
+    },
+    "eu-nis2-ir-6-4-3": {
+      "code": "6.4.3",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Change management, repairs and maintenance\nIn the event that the regular change management procedures could not be followed due to an emergency, the relevant entities shall document the result of the change, and the explanation for why the procedures could not be followed."
+    },
+    "eu-nis2-ir-6-4-4": {
+      "code": "6.4.4",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Change management, repairs and maintenance\nThe relevant entities shall review and, where appropriate, update the procedures at planned intervals and when significant incidents or significant changes to operations or risks."
+    },
+    "eu-nis2-ir-6-5-1": {
+      "code": "6.5.1",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security testing\nThe relevant entities shall establish, implement and apply a policy and procedures for security testing."
+    },
+    "eu-nis2-ir-6-5-2-a": {
+      "code": "6.5.2.a",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security testing\nThe relevant entities shall:\nestablish, based on the risk assessment carried out pursuant to point 2.1, the need, scope, frequency and type of security tests;"
+    },
+    "eu-nis2-ir-6-5-2-b": {
+      "code": "6.5.2.b",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security testing\nThe relevant entities shall:\ncarry out security tests according to a documented test methodology, covering the components identified as relevant for secure operation in a risk analysis;"
+    },
+    "eu-nis2-ir-6-5-2-c": {
+      "code": "6.5.2.c",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security testing\nThe relevant entities shall:\ndocument the type, scope, time and results of the tests, including assessment of criticality and mitigating actions for each finding;"
+    },
+    "eu-nis2-ir-6-5-2-d": {
+      "code": "6.5.2.d",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security testing\nThe relevant entities shall:\napply mitigating actions in case of critical findings."
+    },
+    "eu-nis2-ir-6-5-3": {
+      "code": "6.5.3",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security testing\nThe relevant entities shall review and, where appropriate, update their security testing policies at planned intervals."
+    },
+    "eu-nis2-ir-6-6-1": {
+      "code": "6.6.1",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security patch management\nThe relevant entities shall specify and apply procedures, coherent with the change management procedures referred to in point 6.4.1. as well as with vulnerability management, risk management and other relevant management procedures, for ensuring that:"
+    },
+    "eu-nis2-ir-6-6-1-a": {
+      "code": "6.6.1.a",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security patch management\nThe relevant entities shall specify and apply procedures, coherent with the change management procedures referred to in point 6.4.1. as well as with vulnerability management, risk management and other relevant management procedures, for ensuring that:\nsecurity patches are applied within a reasonable time after they become available;"
+    },
+    "eu-nis2-ir-6-6-1-b": {
+      "code": "6.6.1.b",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security patch management\nThe relevant entities shall specify and apply procedures, coherent with the change management procedures referred to in point 6.4.1. as well as with vulnerability management, risk management and other relevant management procedures, for ensuring that:\nsecurity patches are tested before being applied in production systems;"
+    },
+    "eu-nis2-ir-6-6-1-c": {
+      "code": "6.6.1.c",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security patch management\nThe relevant entities shall specify and apply procedures, coherent with the change management procedures referred to in point 6.4.1. as well as with vulnerability management, risk management and other relevant management procedures, for ensuring that:\nsecurity patches come from trusted sources and are checked for integrity;"
+    },
+    "eu-nis2-ir-6-6-1-d": {
+      "code": "6.6.1.d",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security patch management\nThe relevant entities shall specify and apply procedures, coherent with the change management procedures referred to in point 6.4.1. as well as with vulnerability management, risk management and other relevant management procedures, for ensuring that:\nadditional measures are implemented and residual risks are accepted in cases where a patch is not available or not applied pursuant to point 6.6.2."
+    },
+    "eu-nis2-ir-6-6-2": {
+      "code": "6.6.2",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Security patch management\nBy way of derogation from point 6.6.1.(a), the relevant entities may choose not to apply security patches when the disadvantages of applying the security patches outweigh the cybersecurity benefits. The relevant entities shall duly document and substantiate the reasons for any such decision."
+    },
+    "eu-nis2-ir-6-7-1": {
+      "code": "6.7.1",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network security\nThe relevant entities shall take the appropriate measures to protect their network and information systems from cyber threats."
+    },
+    "eu-nis2-ir-6-7-2-a": {
+      "code": "6.7.2.a",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network security\nFor the purpose of point 6.7.1., the relevant entities shall:\ndocument the architecture of the network in a comprehensible and up to date manner;"
+    },
+    "eu-nis2-ir-6-7-2-b": {
+      "code": "6.7.2.b",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network security\nFor the purpose of point 6.7.1., the relevant entities shall:\ndetermine and apply controls to protect the relevant entities’ internal network domains from unauthorised access;"
+    },
+    "eu-nis2-ir-6-7-2-c": {
+      "code": "6.7.2.c",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network security\nFor the purpose of point 6.7.1., the relevant entities shall:\nconfigure controls to prevent accesses and network communication not required for the operation of the relevant entities;"
+    },
+    "eu-nis2-ir-6-7-2-d": {
+      "code": "6.7.2.d",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network security\nFor the purpose of point 6.7.1., the relevant entities shall:\ndetermine and apply controls for remote access to network and information systems, including access by service providers;"
+    },
+    "eu-nis2-ir-6-7-2-e": {
+      "code": "6.7.2.e",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network security\nFor the purpose of point 6.7.1., the relevant entities shall:\nnot use systems used for administration of the security policy implementation for other purposes;"
+    },
+    "eu-nis2-ir-6-7-2-f": {
+      "code": "6.7.2.f",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network security\nFor the purpose of point 6.7.1., the relevant entities shall:\nexplicitly forbid or deactivate unneeded connections and services;"
+    },
+    "eu-nis2-ir-6-7-2-g": {
+      "code": "6.7.2.g",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network security\nFor the purpose of point 6.7.1., the relevant entities shall:\nwhere appropriate, exclusively allow access to the relevant entities’ network and information systems by devices authorised by those entities;"
+    },
+    "eu-nis2-ir-6-7-2-h": {
+      "code": "6.7.2.h",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network security\nFor the purpose of point 6.7.1., the relevant entities shall:\nallow connections of service providers only after an authorisation request and for a set time period, such as the duration of a maintenance operation;"
+    },
+    "eu-nis2-ir-6-7-2-i": {
+      "code": "6.7.2.i",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network security\nFor the purpose of point 6.7.1., the relevant entities shall:\nestablish communication between distinct systems only through trusted channels that are isolated using logical, cryptographic or physical separation from other communication channels and provide assured identification of their end points and protection of the channel data from modification or disclosure;"
+    },
+    "eu-nis2-ir-6-7-2-j": {
+      "code": "6.7.2.j",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network security\nFor the purpose of point 6.7.1., the relevant entities shall:\nadopt an implementation plan for the full transition towards latest generation network layer communication protocols in a secure, appropriate and gradual way and establish measures to accelerate such transition;"
+    },
+    "eu-nis2-ir-6-7-2-k": {
+      "code": "6.7.2.k",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network security\nFor the purpose of point 6.7.1., the relevant entities shall:\nadopt an implementation plan for the deployment of internationally agreed and interoperable modern e-mail communications standards to secure e-mail communications to mitigate vulnerabilities linked to e-mail-related threats and establish measures to accelerate such deployment;"
+    },
+    "eu-nis2-ir-6-7-2-l": {
+      "code": "6.7.2.l",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network security\nFor the purpose of point 6.7.1., the relevant entities shall:\napply best practices for the security of the DNS, and for Internet routing security and routing hygiene of traffic originating from and destined to the network."
+    },
+    "eu-nis2-ir-6-7-3": {
+      "code": "6.7.3",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network security\nThe relevant entities shall review and, where appropriate, update these measures at planned intervals and when significant incidents or significant changes to operations or risks occur."
+    },
+    "eu-nis2-ir-6-8-1": {
+      "code": "6.8.1",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network segmentation\nThe relevant entities shall segment systems into networks or zones in accordance with the results of the risk assessment referred to in point 2.1. They shall segment their systems and networks from third parties’ systems and networks."
+    },
+    "eu-nis2-ir-6-8-2-a": {
+      "code": "6.8.2.a",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network segmentation\nFor that purpose, the relevant entities shall:\nconsider the functional, logical and physical relationship, including location, between trustworthy systems and services;"
+    },
+    "eu-nis2-ir-6-8-2-b": {
+      "code": "6.8.2.b",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network segmentation\nFor that purpose, the relevant entities shall:\ngrant access to a network or zone based on an assessment of its security requirements;"
+    },
+    "eu-nis2-ir-6-8-2-c": {
+      "code": "6.8.2.c",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network segmentation\nFor that purpose, the relevant entities shall:\nkeep systems that are critical to the relevant entities operation or to safety in secured zones;"
+    },
+    "eu-nis2-ir-6-8-2-d": {
+      "code": "6.8.2.d",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network segmentation\nFor that purpose, the relevant entities shall:\ndeploy a demilitarised zone within their communication networks to ensure secure communication originating from or destined to their networks;"
+    },
+    "eu-nis2-ir-6-8-2-e": {
+      "code": "6.8.2.e",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network segmentation\nFor that purpose, the relevant entities shall:\nrestrict access and communications between and within zones to those necessary for the operation of the relevant entities or for safety;"
+    },
+    "eu-nis2-ir-6-8-2-f": {
+      "code": "6.8.2.f",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network segmentation\nFor that purpose, the relevant entities shall:\nseparate the dedicated network for administration of network and information systems from the relevant entities’ operational network;"
+    },
+    "eu-nis2-ir-6-8-2-g": {
+      "code": "6.8.2.g",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network segmentation\nFor that purpose, the relevant entities shall:\nsegregate network administration channels from other network traffic;"
+    },
+    "eu-nis2-ir-6-8-2-h": {
+      "code": "6.8.2.h",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network segmentation\nFor that purpose, the relevant entities shall:\nseparate the production systems for the relevant entities’ services from systems used in development and testing, including backups."
+    },
+    "eu-nis2-ir-6-8-3": {
+      "code": "6.8.3",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Network segmentation\nThe relevant entities shall review and, where appropriate, update network segmentation at planned intervals and when significant incidents or significant changes to operations or risks."
+    },
+    "eu-nis2-ir-6-9-1": {
+      "code": "6.9.1",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Protection against malicious and unauthorised software\nThe relevant entities shall protect their network and information systems against malicious and unauthorised software."
+    },
+    "eu-nis2-ir-6-9-2": {
+      "code": "6.9.2",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Protection against malicious and unauthorised software\nFor that purpose, the relevant entities shall in particular implement measures that detect or prevent the use of malicious or unauthorised software. The relevant entities shall, where appropriate, ensure that their network and information systems are equipped with detection and response software, which is updated regularly in accordance with the risk assessment carried out pursuant to point 2.1 and the contractual agreements with the providers."
+    },
+    "eu-nis2-ir-6-10-1": {
+      "code": "6.10.1",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Vulnerability handling and disclosure\nThe relevant entities shall obtain information about technical vulnerabilities in their network and information systems, evaluate their exposure to such vulnerabilities, and take appropriate measures to manage the vulnerabilities."
+    },
+    "eu-nis2-ir-6-10-2-a": {
+      "code": "6.10.2.a",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Vulnerability handling and disclosure\nFor the purpose of point 6.10.1., the relevant entities shall:\nmonitor information about vulnerabilities through appropriate channels, such as announcements of CSIRTs, competent authorities or information provided by suppliers or service providers;"
+    },
+    "eu-nis2-ir-6-10-2-b": {
+      "code": "6.10.2.b",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Vulnerability handling and disclosure\nFor the purpose of point 6.10.1., the relevant entities shall:\nperform, where appropriate, vulnerability scans, and record evidence of the results of the scans, at planned intervals;"
+    },
+    "eu-nis2-ir-6-10-2-c": {
+      "code": "6.10.2.c",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Vulnerability handling and disclosure\nFor the purpose of point 6.10.1., the relevant entities shall:\naddress, without undue delay, vulnerabilities identified by the relevant entities as critical to their operations;"
+    },
+    "eu-nis2-ir-6-10-2-d": {
+      "code": "6.10.2.d",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Vulnerability handling and disclosure\nFor the purpose of point 6.10.1., the relevant entities shall:\nensure that their vulnerability handling is compatible with their change management, security patch management, risk management and incident management procedures;"
+    },
+    "eu-nis2-ir-6-10-2-e": {
+      "code": "6.10.2.e",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Vulnerability handling and disclosure\nFor the purpose of point 6.10.1., the relevant entities shall:\nlay down a procedure for disclosing vulnerabilities in accordance with the applicable national coordinated vulnerability disclosure policy."
+    },
+    "eu-nis2-ir-6-10-3": {
+      "code": "6.10.3",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Vulnerability handling and disclosure\nWhen justified by the potential impact of the vulnerability, the relevant entities shall create and implement a plan to mitigate the vulnerability. In other cases, the relevant entities shall document and substantiate the reason why the vulnerability does not require remediation."
+    },
+    "eu-nis2-ir-6-10-4": {
+      "code": "6.10.4",
+      "section": "section-6",
+      "control": "Article 21(2), point (e)",
+      "requirements": "Vulnerability handling and disclosure\nThe relevant entities shall review and, where appropriate, update at planned intervals the channels they use for monitoring vulnerability information."
+    },
+    "eu-nis2-ir-7-1": {
+      "code": "7.1",
+      "section": "section-7",
+      "control": "Article 21(2), point (f)",
+      "requirements": "For the purpose of Article 21(2), point (f) of Directive (EU) 2022/2555, the relevant entities shall establish, implement and apply a policy and procedures to assess whether the cybersecurity risk-management measures taken by the relevant entity are effectively implemented and maintained."
+    },
+    "eu-nis2-ir-7-2": {
+      "code": "7.2",
+      "section": "section-7",
+      "control": "Article 21(2), point (f)",
+      "requirements": "The policy and procedures referred to in point 7.1. shall take into account results of the risk assessment pursuant to point 2.1. and past significant incidents. The relevant entities shall determine:"
+    },
+    "eu-nis2-ir-7-2-a": {
+      "code": "7.2.a",
+      "section": "section-7",
+      "control": "Article 21(2), point (f)",
+      "requirements": "The policy and procedures referred to in point 7.1. shall take into account results of the risk assessment pursuant to point 2.1. and past significant incidents. The relevant entities shall determine:\nwhat cybersecurity risk-management measures are to be monitored and measured, including processes and controls;"
+    },
+    "eu-nis2-ir-7-2-b": {
+      "code": "7.2.b",
+      "section": "section-7",
+      "control": "Article 21(2), point (f)",
+      "requirements": "The policy and procedures referred to in point 7.1. shall take into account results of the risk assessment pursuant to point 2.1. and past significant incidents. The relevant entities shall determine:\nthe methods for monitoring, measurement, analysis and evaluation, as applicable, to ensure valid results;"
+    },
+    "eu-nis2-ir-7-2-c": {
+      "code": "7.2.c",
+      "section": "section-7",
+      "control": "Article 21(2), point (f)",
+      "requirements": "The policy and procedures referred to in point 7.1. shall take into account results of the risk assessment pursuant to point 2.1. and past significant incidents. The relevant entities shall determine:\nwhen the monitoring and measuring is to be performed;"
+    },
+    "eu-nis2-ir-7-2-d": {
+      "code": "7.2.d",
+      "section": "section-7",
+      "control": "Article 21(2), point (f)",
+      "requirements": "The policy and procedures referred to in point 7.1. shall take into account results of the risk assessment pursuant to point 2.1. and past significant incidents. The relevant entities shall determine:\nwho is responsible for monitoring and measuring the effectiveness of the cybersecurity risk-management measures;"
+    },
+    "eu-nis2-ir-7-2-e": {
+      "code": "7.2.e",
+      "section": "section-7",
+      "control": "Article 21(2), point (f)",
+      "requirements": "The policy and procedures referred to in point 7.1. shall take into account results of the risk assessment pursuant to point 2.1. and past significant incidents. The relevant entities shall determine:\nwhen the results from monitoring and measurement are to be analysed and evaluated;"
+    },
+    "eu-nis2-ir-7-2-f": {
+      "code": "7.2.f",
+      "section": "section-7",
+      "control": "Article 21(2), point (f)",
+      "requirements": "The policy and procedures referred to in point 7.1. shall take into account results of the risk assessment pursuant to point 2.1. and past significant incidents. The relevant entities shall determine:\nwho has to analyse and evaluate these results."
+    },
+    "eu-nis2-ir-7-3": {
+      "code": "7.3",
+      "section": "section-7",
+      "control": "Article 21(2), point (f)",
+      "requirements": "The relevant entities shall review and, where appropriate, update the policy and procedures at planned intervals and when significant incidents or significant changes to operations or risks."
+    },
+    "eu-nis2-ir-8-1-1": {
+      "code": "8.1.1",
+      "section": "section-8",
+      "control": "Article 21(2), point (g)",
+      "requirements": "Awareness raising and basic cyber hygiene practices\nFor the purpose of Article 21(2), point (g) of Directive (EU) 2022/2555, the relevant entities shall ensure that their employees, including members of management bodies, as well as direct suppliers and service providers are aware of risks, are informed of the importance of cybersecurity and apply cyber hygiene practices."
+    },
+    "eu-nis2-ir-8-1-2": {
+      "code": "8.1.2",
+      "section": "section-8",
+      "control": "Article 21(2), point (g)",
+      "requirements": "Awareness raising and basic cyber hygiene practices\nFor the purpose of point 8.1.1., the relevant entities shall offer to their employees, including members of management bodies, as well as to direct suppliers and service providers where appropriate in accordance with point 5.1.4., an awareness raising programme, which shall:"
+    },
+    "eu-nis2-ir-8-1-2-a": {
+      "code": "8.1.2.a",
+      "section": "section-8",
+      "control": "Article 21(2), point (g)",
+      "requirements": "Awareness raising and basic cyber hygiene practices\nFor the purpose of point 8.1.1., the relevant entities shall offer to their employees, including members of management bodies, as well as to direct suppliers and service providers where appropriate in accordance with point 5.1.4., an awareness raising programme, which shall:\nbe scheduled over time, so that the activities are repeated and cover new employees;"
+    },
+    "eu-nis2-ir-8-1-2-b": {
+      "code": "8.1.2.b",
+      "section": "section-8",
+      "control": "Article 21(2), point (g)",
+      "requirements": "Awareness raising and basic cyber hygiene practices\nFor the purpose of point 8.1.1., the relevant entities shall offer to their employees, including members of management bodies, as well as to direct suppliers and service providers where appropriate in accordance with point 5.1.4., an awareness raising programme, which shall:\nbe established in line with the network and information security policy, topic- specific policies and relevant procedures on network and information security;"
+    },
+    "eu-nis2-ir-8-1-2-c": {
+      "code": "8.1.2.c",
+      "section": "section-8",
+      "control": "Article 21(2), point (g)",
+      "requirements": "Awareness raising and basic cyber hygiene practices\nFor the purpose of point 8.1.1., the relevant entities shall offer to their employees, including members of management bodies, as well as to direct suppliers and service providers where appropriate in accordance with point 5.1.4., an awareness raising programme, which shall:\ncover relevant cyber threats, the cybersecurity risk-management measures in place, contact points and resources for additional information and advice on cybersecurity matters, as well as cyber hygiene practices for users."
+    },
+    "eu-nis2-ir-8-1-3": {
+      "code": "8.1.3",
+      "section": "section-8",
+      "control": "Article 21(2), point (g)",
+      "requirements": "Awareness raising and basic cyber hygiene practices\nThe awareness raising programme shall, where appropriate, be tested in terms of effectiveness. The awareness raising programme shall be updated and offered at planned intervals taking into account changes in cyber hygiene practices, and the current threat landscape and risks posed to the relevant entities."
+    },
+    "eu-nis2-ir-8-2-1": {
+      "code": "8.2.1",
+      "section": "section-8",
+      "control": "Article 21(2), point (g)",
+      "requirements": "Security training\nThe relevant entities shall identify employees, whose roles require security relevant skill sets and expertise, and ensure that they receive regular training on network and information system security."
+    },
+    "eu-nis2-ir-8-2-2": {
+      "code": "8.2.2",
+      "section": "section-8",
+      "control": "Article 21(2), point (g)",
+      "requirements": "Security training\nThe relevant entities shall establish, implement and apply a training program in line with the network and information security policy, topic-specific policies and other relevant procedures on network and information security which lays down the training needs for certain roles and positions based on criteria."
+    },
+    "eu-nis2-ir-8-2-3": {
+      "code": "8.2.3",
+      "section": "section-8",
+      "control": "Article 21(2), point (g)",
+      "requirements": "Security training\nThe training referred to in point 8.2.1. shall be relevant to the job function of the employee and its effectiveness shall be assessed. Training shall take into consideration security measures in place and cover the following:"
+    },
+    "eu-nis2-ir-8-2-3-a": {
+      "code": "8.2.3.a",
+      "section": "section-8",
+      "control": "Article 21(2), point (g)",
+      "requirements": "Security training\nThe training referred to in point 8.2.1. shall be relevant to the job function of the employee and its effectiveness shall be assessed. Training shall take into consideration security measures in place and cover the following:\ninstructions regarding the secure configuration and operation of the network and information systems, including mobile devices;"
+    },
+    "eu-nis2-ir-8-2-3-b": {
+      "code": "8.2.3.b",
+      "section": "section-8",
+      "control": "Article 21(2), point (g)",
+      "requirements": "Security training\nThe training referred to in point 8.2.1. shall be relevant to the job function of the employee and its effectiveness shall be assessed. Training shall take into consideration security measures in place and cover the following:\nbriefing on known cyber threats;"
+    },
+    "eu-nis2-ir-8-2-3-c": {
+      "code": "8.2.3.c",
+      "section": "section-8",
+      "control": "Article 21(2), point (g)",
+      "requirements": "Security training\nThe training referred to in point 8.2.1. shall be relevant to the job function of the employee and its effectiveness shall be assessed. Training shall take into consideration security measures in place and cover the following:\ntraining of the behaviour when security-relevant events occur."
+    },
+    "eu-nis2-ir-8-2-4": {
+      "code": "8.2.4",
+      "section": "section-8",
+      "control": "Article 21(2), point (g)",
+      "requirements": "Security training\nThe relevant entities shall apply training to staff members who transfer to new positions or roles which require security relevant skill sets and expertise."
+    },
+    "eu-nis2-ir-8-2-5": {
+      "code": "8.2.5",
+      "section": "section-8",
+      "control": "Article 21(2), point (g)",
+      "requirements": "Security training\nThe program shall be updated and run periodically taking into account applicable policies and rules, assigned roles, responsibilities, as well as known cyber threats and technological developments."
+    },
+    "eu-nis2-ir-9-1": {
+      "code": "9.1",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "For the purpose of Article 21(2), point (h) of Directive (EU) 2022/2555, the relevant entities shall establish, implement and apply a policy and procedures related to cryptography, with a view to ensuring adequate and effective use of cryptography to protect the confidentiality, authenticity and integrity of data in line with the relevant entities’ asset classification and the results of the risk assessment carried out pursuant to point 2.1."
+    },
+    "eu-nis2-ir-9-2-a": {
+      "code": "9.2.a",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The policy and procedures referred to in point 9.1 shall establish:\nin accordance with the relevant entities’ classification of assets, the type, strength and quality of the cryptographic measures required to protect the relevant entities’ assets, including data at rest and data in transit;"
+    },
+    "eu-nis2-ir-9-2-b": {
+      "code": "9.2.b",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The policy and procedures referred to in point 9.1 shall establish:\nbased on point (a), the protocols or families of protocols to be adopted, as well as cryptographic algorithms, cipher strength, cryptographic solutions and usage practices to be approved and required for use in the relevant entities, following, where appropriate, a cryptographic agility approach;"
+    },
+    "eu-nis2-ir-9-2-c": {
+      "code": "9.2.c",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The policy and procedures referred to in point 9.1 shall establish:\nthe relevant entities’ approach to key management, including, where appropriate, methods for the following:"
+    },
+    "eu-nis2-ir-9-2-c-i": {
+      "code": "9.2.c.i",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The policy and procedures referred to in point 9.1 shall establish:\nthe relevant entities’ approach to key management, including, where appropriate, methods for the following:\ngenerating different keys for cryptographic systems and applications;"
+    },
+    "eu-nis2-ir-9-2-c-ii": {
+      "code": "9.2.c.ii",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The policy and procedures referred to in point 9.1 shall establish:\nthe relevant entities’ approach to key management, including, where appropriate, methods for the following:\nissuing and obtaining public key certificates;"
+    },
+    "eu-nis2-ir-9-2-c-iii": {
+      "code": "9.2.c.iii",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The policy and procedures referred to in point 9.1 shall establish:\nthe relevant entities’ approach to key management, including, where appropriate, methods for the following:\ndistributing keys to intended entities, including how to activate keys when received;"
+    },
+    "eu-nis2-ir-9-2-c-iv": {
+      "code": "9.2.c.iv",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The policy and procedures referred to in point 9.1 shall establish:\nthe relevant entities’ approach to key management, including, where appropriate, methods for the following:\nstoring keys, including how authorised users obtain access to keys;"
+    },
+    "eu-nis2-ir-9-2-c-v": {
+      "code": "9.2.c.v",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The policy and procedures referred to in point 9.1 shall establish:\nthe relevant entities’ approach to key management, including, where appropriate, methods for the following:\nchanging or updating keys, including rules on when and how to change keys;"
+    },
+    "eu-nis2-ir-9-2-c-vi": {
+      "code": "9.2.c.vi",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The policy and procedures referred to in point 9.1 shall establish:\nthe relevant entities’ approach to key management, including, where appropriate, methods for the following:\ndealing with compromised keys;"
+    },
+    "eu-nis2-ir-9-2-c-vii": {
+      "code": "9.2.c.vii",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The policy and procedures referred to in point 9.1 shall establish:\nthe relevant entities’ approach to key management, including, where appropriate, methods for the following:\nrevoking keys including how to withdraw or deactivate keys;"
+    },
+    "eu-nis2-ir-9-2-c-viii": {
+      "code": "9.2.c.viii",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The policy and procedures referred to in point 9.1 shall establish:\nthe relevant entities’ approach to key management, including, where appropriate, methods for the following:\nrecovering lost or corrupted keys;"
+    },
+    "eu-nis2-ir-9-2-c-ix": {
+      "code": "9.2.c.ix",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The policy and procedures referred to in point 9.1 shall establish:\nthe relevant entities’ approach to key management, including, where appropriate, methods for the following:\nbacking up or archiving keys;"
+    },
+    "eu-nis2-ir-9-2-c-x": {
+      "code": "9.2.c.x",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The policy and procedures referred to in point 9.1 shall establish:\nthe relevant entities’ approach to key management, including, where appropriate, methods for the following:\ndestroying keys;"
+    },
+    "eu-nis2-ir-9-2-c-xi": {
+      "code": "9.2.c.xi",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The policy and procedures referred to in point 9.1 shall establish:\nthe relevant entities’ approach to key management, including, where appropriate, methods for the following:\nlogging and auditing of key management-related activities;"
+    },
+    "eu-nis2-ir-9-2-c-xii": {
+      "code": "9.2.c.xii",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The policy and procedures referred to in point 9.1 shall establish:\nthe relevant entities’ approach to key management, including, where appropriate, methods for the following:\nsetting activation and deactivation dates for keys ensuring that the keys can only be used for the specified period of time according to the organization's rules on key management."
+    },
+    "eu-nis2-ir-9-3": {
+      "code": "9.3",
+      "section": "section-9",
+      "control": "Article 21(2), point (h)",
+      "requirements": "The relevant entities shall review and, where appropriate, update their policy and procedures at planned intervals, taking into account the state of the art in cryptography."
+    },
+    "eu-nis2-ir-10-1-1": {
+      "code": "10.1.1",
+      "section": "section-10",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Human resources security\nFor the purpose of Article 21(2), point (i) of Directive (EU) 2022/2555, the relevant entities shall ensure that their employees and direct suppliers and service providers, wherever applicable, understand and commit to their security responsibilities, as appropriate for the offered services and the job and in line with the relevant entities’ policy on the security of network and information systems."
+    },
+    "eu-nis2-ir-10-1-2-a": {
+      "code": "10.1.2.a",
+      "section": "section-10",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Human resources security\nThe requirement referred to in point 10.1.1. shall include the following:\nmechanisms to ensure that all employees, direct suppliers and service providers, wherever applicable, understand and follow the standard cyber hygiene practices that the relevant entities apply pursuant to point 8.1.;"
+    },
+    "eu-nis2-ir-10-1-2-b": {
+      "code": "10.1.2.b",
+      "section": "section-10",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Human resources security\nThe requirement referred to in point 10.1.1. shall include the following:\nmechanisms to ensure that all users with administrative or privileged access are aware of and act in accordance with their roles, responsibilities and authorities;"
+    },
+    "eu-nis2-ir-10-1-2-c": {
+      "code": "10.1.2.c",
+      "section": "section-10",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Human resources security\nThe requirement referred to in point 10.1.1. shall include the following:\nmechanisms to ensure that members of management bodies understand and act in accordance with their role, responsibilities and authorities regarding network and information system security;"
+    },
+    "eu-nis2-ir-10-1-2-d": {
+      "code": "10.1.2.d",
+      "section": "section-10",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Human resources security\nThe requirement referred to in point 10.1.1. shall include the following:\nmechanisms for hiring personnel qualified for the respective roles, such as reference checks, vetting procedures, validation of certifications, or written tests."
+    },
+    "eu-nis2-ir-10-1-3": {
+      "code": "10.1.3",
+      "section": "section-10",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Human resources security\nThe relevant entities shall review the assignment of personnel to specific roles as referred to in point 1.2., as well as their commitment of human resources in that regard, at planned intervals and at least annually. They shall update the assignment where necessary."
+    },
+    "eu-nis2-ir-10-2-1": {
+      "code": "10.2.1",
+      "section": "section-10",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Vulnerability handling and disclosure\nThe relevant entities shall ensure to the extent feasible verification of the background of their employees, and where applicable of direct suppliers and service providers in accordance with point 5.1.4, if necessary for their role, responsibilities and authorisations."
+    },
+    "eu-nis2-ir-10-2-2-a": {
+      "code": "10.2.2.a",
+      "section": "section-10",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Vulnerability handling and disclosure\nFor the purpose of point 10.2.1., the relevant entities shall:\nput in place criteria, which set out which roles, responsibilities and authorities shall only be exercised by persons whose background has been verified;"
+    },
+    "eu-nis2-ir-10-2-2-b": {
+      "code": "10.2.2.b",
+      "section": "section-10",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Vulnerability handling and disclosure\nFor the purpose of point 10.2.1., the relevant entities shall:\nensure that verification referred to in point 10.2.1 is performed on these persons before they start exercising these roles, responsibilities and authorities, which shall take into consideration the applicable laws, regulations, and ethics in proportion to the business requirements, the asset classification as referred to in point 12.1. and the network and information systems to be accessed, and the perceived risks."
+    },
+    "eu-nis2-ir-10-2-3": {
+      "code": "10.2.3",
+      "section": "section-10",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Vulnerability handling and disclosure\nThe relevant entities shall review and, where appropriate, update the policy at planned intervals and update it where necessary."
+    },
+    "eu-nis2-ir-10-3-1": {
+      "code": "10.3.1",
+      "section": "section-10",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Termination or change of employment procedures\nThe relevant entities shall ensure that network and information system security responsibilities and duties that remain valid after termination or change of employment of their employees are contractually defined and enforced."
+    },
+    "eu-nis2-ir-10-3-2": {
+      "code": "10.3.2",
+      "section": "section-10",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Termination or change of employment procedures\nFor the purpose of point 10.3.1., the relevant entities shall include in the individual’s terms and conditions of employment, contract or agreement the responsibilities and duties that are still valid after termination of employment or contract, such as confidentiality clauses."
+    },
+    "eu-nis2-ir-10-4-1": {
+      "code": "10.4.1",
+      "section": "section-10",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Disciplinary process\nThe relevant entities shall establish, communicate and maintain a disciplinary process for handling violations of network and information system security policies. The process shall take into consideration relevant legal, statutory, contractual and business requirements."
+    },
+    "eu-nis2-ir-10-4-2": {
+      "code": "10.4.2",
+      "section": "section-10",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Disciplinary process\nThe relevant entities shall review and, where appropriate, update the disciplinary process at planned intervals, and when necessary due to legal changes or significant changes to operations or risks."
+    },
+    "eu-nis2-ir-11-1-1": {
+      "code": "11.1.1",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Access control policy\nFor the purpose of Article 21(2), point (i) of Directive (EU) 2022/2555, the relevant entities shall establish, document and implement logical and physical access control policies for the access to their network and information systems, based on business requirements as well as network and information system security requirements."
+    },
+    "eu-nis2-ir-11-1-2-a": {
+      "code": "11.1.2.a",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Access control policy\nThe policies referred to in point 11.1.1. shall:\naddress access by persons, including staff, visitors, and external entities such as suppliers and service providers;"
+    },
+    "eu-nis2-ir-11-1-2-b": {
+      "code": "11.1.2.b",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Access control policy\nThe policies referred to in point 11.1.1. shall:\naddress access by network and information systems;"
+    },
+    "eu-nis2-ir-11-1-2-c": {
+      "code": "11.1.2.c",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Access control policy\nThe policies referred to in point 11.1.1. shall:\nensure that access is only granted to users that have been adequately authenticated."
+    },
+    "eu-nis2-ir-11-1-3": {
+      "code": "11.1.3",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Access control policy\nThe relevant entities shall review and, where appropriate, update the policies at planned intervals and when significant incidents or significant changes to operations or risks occur."
+    },
+    "eu-nis2-ir-11-2-1": {
+      "code": "11.2.1",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Management of access rights\nThe relevant entities shall provide, modify, remove and document access rights to network and information systems in accordance with the access control policy referred to in point 11.1."
+    },
+    "eu-nis2-ir-11-2-2-a": {
+      "code": "11.2.2.a",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Management of access rights\nThe relevant entities shall:\nassign and revoke access rights based on the principles of need-to-know, least privilege and separation of duties;"
+    },
+    "eu-nis2-ir-11-2-2-b": {
+      "code": "11.2.2.b",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Management of access rights\nThe relevant entities shall:\nensure that access rights are modified accordingly upon termination or change of employment;"
+    },
+    "eu-nis2-ir-11-2-2-c": {
+      "code": "11.2.2.c",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Management of access rights\nThe relevant entities shall:\nensure that access to network and information systems is authorised by the relevant persons;"
+    },
+    "eu-nis2-ir-11-2-2-d": {
+      "code": "11.2.2.d",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Management of access rights\nThe relevant entities shall:\nensure that access rights appropriately address third-party access, such as visitors, suppliers and service providers, in particular by limiting access rights in scope and in duration;"
+    },
+    "eu-nis2-ir-11-2-2-e": {
+      "code": "11.2.2.e",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Management of access rights\nThe relevant entities shall:\nmaintain a register of access rights granted;"
+    },
+    "eu-nis2-ir-11-2-2-f": {
+      "code": "11.2.2.f",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Management of access rights\nThe relevant entities shall:\napply logging to the management of access rights."
+    },
+    "eu-nis2-ir-11-2-3": {
+      "code": "11.2.3",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Management of access rights\nThe relevant entities shall review access rights at planned intervals and shall modify them based on organisational changes. The relevant entities shall document the results of the review including the necessary changes of access rights."
+    },
+    "eu-nis2-ir-11-3-1": {
+      "code": "11.3.1",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Privileged accounts and system administration accounts\nThe relevant entities shall maintain policies for management of privileged accounts and system administration accounts as part of the access control policy referred to in point 11.1."
+    },
+    "eu-nis2-ir-11-3-2-a": {
+      "code": "11.3.2.a",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Privileged accounts and system administration accounts\nThe policies referred to in point 11.3.1. shall:\nestablish strong identification, authentication such as multi-factor authentication, and authorisation procedures for privileged accounts and system administration accounts;"
+    },
+    "eu-nis2-ir-11-3-2-b": {
+      "code": "11.3.2.b",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Privileged accounts and system administration accounts\nThe policies referred to in point 11.3.1. shall:\nset up specific accounts to be used for system administration operations exclusively, such as installation, configuration, management or maintenance;"
+    },
+    "eu-nis2-ir-11-3-2-c": {
+      "code": "11.3.2.c",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Privileged accounts and system administration accounts\nThe policies referred to in point 11.3.1. shall:\nindividualise and restrict system administration privileges to the highest extent possible,"
+    },
+    "eu-nis2-ir-11-3-2-d": {
+      "code": "11.3.2.d",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Privileged accounts and system administration accounts\nThe policies referred to in point 11.3.1. shall:\nprovide that system administration accounts are only used to connect to system administration systems."
+    },
+    "eu-nis2-ir-11-3-3": {
+      "code": "11.3.3",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Privileged accounts and system administration accounts\nThe relevant entities shall review access rights of privileged accounts and system administration accounts at planned intervals and be modified based on organisational changes, and shall document the results of the review, including the necessary changes of access rights."
+    },
+    "eu-nis2-ir-11-4-1": {
+      "code": "11.4.1",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Administration systems\nThe relevant entities shall restrict and control the use of system administration systems in accordance with the access control policy referred to in point 11.1."
+    },
+    "eu-nis2-ir-11-4-2-a": {
+      "code": "11.4.2.a",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Administration systems\nFor that purpose, the relevant entities shall:\nonly use system administration systems for system administration purposes, and not for any other operations;"
+    },
+    "eu-nis2-ir-11-4-2-b": {
+      "code": "11.4.2.b",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Administration systems\nFor that purpose, the relevant entities shall:\nseparate logically such systems from application software not used for system administrative purposes,"
+    },
+    "eu-nis2-ir-11-4-2-c": {
+      "code": "11.4.2.c",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Administration systems\nFor that purpose, the relevant entities shall:\nprotect access to system administration systems through authentication and encryption."
+    },
+    "eu-nis2-ir-11-5-1": {
+      "code": "11.5.1",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Identification\nThe relevant entities shall manage the full life cycle of identities of network and information systems and their users."
+    },
+    "eu-nis2-ir-11-5-2-a": {
+      "code": "11.5.2.a",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Identification\nFor that purpose, the relevant entities shall:\nset up unique identities for network and information systems and their users;"
+    },
+    "eu-nis2-ir-11-5-2-b": {
+      "code": "11.5.2.b",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Identification\nFor that purpose, the relevant entities shall:\nlink the identity of users to a single person;"
+    },
+    "eu-nis2-ir-11-5-2-c": {
+      "code": "11.5.2.c",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Identification\nFor that purpose, the relevant entities shall:\nensure oversight of identities of network and information systems;"
+    },
+    "eu-nis2-ir-11-5-2-d": {
+      "code": "11.5.2.d",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Identification\nFor that purpose, the relevant entities shall:\napply logging to the management of identities."
+    },
+    "eu-nis2-ir-11-5-3": {
+      "code": "11.5.3",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Identification\nThe relevant entities shall only permit identities assigned to multiple persons, such as shared identities, where they are necessary for business or operational reasons and are subject to an explicit approval process and documentation. The relevant entities shall take identities assigned to multiple persons into account in the cybersecurity risk management framework referred to in point 2.1."
+    },
+    "eu-nis2-ir-11-5-4": {
+      "code": "11.5.4",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Identification\nThe relevant entities shall regularly review the identities for network and information systems and their users and, if no longer needed, deactivate them without delay."
+    },
+    "eu-nis2-ir-11-6-1": {
+      "code": "11.6.1",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Authentication\nThe relevant entities shall implement secure authentication procedures and technologies based on access restrictions and the policy on access control."
+    },
+    "eu-nis2-ir-11-6-2-a": {
+      "code": "11.6.2.a",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Authentication\nFor that purpose, the relevant entities shall:\nensure the strength of authentication is appropriate to the classification of the asset to be accessed;"
+    },
+    "eu-nis2-ir-11-6-2-b": {
+      "code": "11.6.2.b",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Authentication\nFor that purpose, the relevant entities shall:\ncontrol the allocation to users and management of secret authentication information by a process that ensures the confidentiality of the information, including advising personnel on appropriate handling of authentication information;"
+    },
+    "eu-nis2-ir-11-6-2-c": {
+      "code": "11.6.2.c",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Authentication\nFor that purpose, the relevant entities shall:\nrequire the change of authentication credentials initially, at predefined intervals and upon suspicion that the credentials were compromised;"
+    },
+    "eu-nis2-ir-11-6-2-d": {
+      "code": "11.6.2.d",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Authentication\nFor that purpose, the relevant entities shall:\nrequire the reset of authentication credentials and the blocking of users after a predefined number of unsuccessful log-in attempts;"
+    },
+    "eu-nis2-ir-11-6-2-e": {
+      "code": "11.6.2.e",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Authentication\nFor that purpose, the relevant entities shall:\nterminate inactive sessions after a predefined period of inactivity; and"
+    },
+    "eu-nis2-ir-11-6-2-f": {
+      "code": "11.6.2.f",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Authentication\nFor that purpose, the relevant entities shall:\nrequire separate credentials to access privileged access or administrative accounts."
+    },
+    "eu-nis2-ir-11-6-3": {
+      "code": "11.6.3",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Authentication\nThe relevant entities shall to the extent feasible use state-of-the-art authentication methods, in accordance with the associated assessed risk and the classification of the asset to be accessed, and unique authentication information."
+    },
+    "eu-nis2-ir-11-6-4": {
+      "code": "11.6.4",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Authentication\nThe relevant entities shall review the authentication procedures and technologies at planned intervals."
+    },
+    "eu-nis2-ir-11-7-1": {
+      "code": "11.7.1",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Multi-factor authentication\nThe relevant entities shall ensure that users are authenticated by multiple authentication factors or continuous authentication mechanisms for accessing the relevant entities’ network and information systems, where appropriate, in accordance with the classification of the asset to be accessed."
+    },
+    "eu-nis2-ir-11-7-2": {
+      "code": "11.7.2",
+      "section": "section-11",
+      "control": "Article 21(2), points (i) and (j)",
+      "requirements": "Multi-factor authentication\nThe relevant entities shall ensure that the strength of authentication is appropriate for the classification of the asset to be accessed."
+    },
+    "eu-nis2-ir-12-1-1": {
+      "code": "12.1.1",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Asset classification\nFor the purpose of Article 21(2), point (i) of Directive (EU) 2022/2555, the relevant entities shall lay down classification levels of all assets, including information, in scope of their network and information systems for the level of protection required."
+    },
+    "eu-nis2-ir-12-1-2-a": {
+      "code": "12.1.2.a",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Asset classification\nFor the purpose of point 12.1.1., the relevant entities shall:\nlay down a system of classification levels for assets;"
+    },
+    "eu-nis2-ir-12-1-2-b": {
+      "code": "12.1.2.b",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Asset classification\nFor the purpose of point 12.1.1., the relevant entities shall:\nassociate all assets with a classification level, based on confidentiality, integrity, authenticity and availability requirements, to indicate the protection required according to their sensitivity, criticality, risk and business value;"
+    },
+    "eu-nis2-ir-12-1-2-c": {
+      "code": "12.1.2.c",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Asset classification\nFor the purpose of point 12.1.1., the relevant entities shall:\nalign the availability requirements of the assets with the delivery and recovery objectives set out in their business continuity and disaster recovery plans."
+    },
+    "eu-nis2-ir-12-1-3": {
+      "code": "12.1.3",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Asset classification\nThe relevant entities shall conduct periodic reviews of the classification levels of assets and update them, where appropriate."
+    },
+    "eu-nis2-ir-12-2-1": {
+      "code": "12.2.1",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Handling of assets\nThe relevant entities shall establish, implement and apply a policy for the proper handling of assets, including information, in accordance with their network and information security policy, and shall communicate the policy on proper handling of assets to anyone who uses or handles assets."
+    },
+    "eu-nis2-ir-12-2-2-a": {
+      "code": "12.2.2.a",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Handling of assets\nThe policy shall:\ncover the entire life cycle of the assets, including acquisition, use, storage, transportation and disposal;"
+    },
+    "eu-nis2-ir-12-2-2-b": {
+      "code": "12.2.2.b",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Handling of assets\nThe policy shall:\nprovide rules on the safe use, safe storage, safe transport, and the irretrievable deletion and destruction of the assets;"
+    },
+    "eu-nis2-ir-12-2-2-c": {
+      "code": "12.2.2.c",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Handling of assets\nThe policy shall:\nprovide that the transfer shall take place in a secure manner, in accordance with the type of asset to be transferred."
+    },
+    "eu-nis2-ir-12-2-3": {
+      "code": "12.2.3",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Handling of assets\nThe relevant entities shall review and, where appropriate, update the policy at planned intervals and when significant incidents or significant changes to operations or risks occur."
+    },
+    "eu-nis2-ir-12-3-1": {
+      "code": "12.3.1",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Removable media policy\nThe relevant entities shall establish, implement and apply a policy on the management of removable storage media and communicate it to their employees and third parties who handle removable storage media at the relevant entities’ premises or other locations where the removable media is connected to the relevant entities’ network and information systems."
+    },
+    "eu-nis2-ir-12-3-2-a": {
+      "code": "12.3.2.a",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Removable media policy\nThe policy shall:\nprovide for a technical prohibition of the connection of removable media unless there is an organisational reason for their use;"
+    },
+    "eu-nis2-ir-12-3-2-b": {
+      "code": "12.3.2.b",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Removable media policy\nThe policy shall:\nprovide for disabling self-execution from such media and scanning the media for malicious code before they are used on the relevant entities’ systems;"
+    },
+    "eu-nis2-ir-12-3-2-c": {
+      "code": "12.3.2.c",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Removable media policy\nThe policy shall:\nprovide measures for controlling and protecting portable storage devices containing data while in transit and in storage;"
+    },
+    "eu-nis2-ir-12-3-2-d": {
+      "code": "12.3.2.d",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Removable media policy\nThe policy shall:\nwhere appropriate, provide measures for the use of cryptographic techniques to protect data on removable storage media."
+    },
+    "eu-nis2-ir-12-3-3": {
+      "code": "12.3.3",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Removable media policy\nThe relevant entities shall review and, where appropriate, update the policy at planned intervals and when significant incidents or significant changes to operations or risks occur."
+    },
+    "eu-nis2-ir-12-4-1": {
+      "code": "12.4.1",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Asset inventory\nThe relevant entities shall develop and maintain a complete, accurate, up-to-date and consistent inventory of their assets. They shall record changes to the entries in the inventory in a traceable manner."
+    },
+    "eu-nis2-ir-12-4-2": {
+      "code": "12.4.2",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Asset inventory\nThe granularity of the inventory of the assets shall be at a level appropriate for the needs of the relevant entities. The inventory shall include the following:"
+    },
+    "eu-nis2-ir-12-4-2-a": {
+      "code": "12.4.2.a",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Asset inventory\nThe granularity of the inventory of the assets shall be at a level appropriate for the needs of the relevant entities. The inventory shall include the following:\nthe list of operations and services and their description,"
+    },
+    "eu-nis2-ir-12-4-2-b": {
+      "code": "12.4.2.b",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Asset inventory\nThe granularity of the inventory of the assets shall be at a level appropriate for the needs of the relevant entities. The inventory shall include the following:\nthe list of network and information systems and other associated assets supporting the relevant entities’ operations and services."
+    },
+    "eu-nis2-ir-12-4-3": {
+      "code": "12.4.3",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Asset inventory\nThe relevant entities shall regularly review and update the inventory and their assets and document the history of changes."
+    },
+    "eu-nis2-ir-12-5-1": {
+      "code": "12.5.1",
+      "section": "section-12",
+      "control": "Article 21(2), point (i)",
+      "requirements": "Deposit, return or deletion of assets upon termination of employment\nThe relevant entities shall establish, implement and apply procedures which ensure that their assets which are under custody of personnel are deposited, returned or deleted upon termination of employment, and shall document the deposit, return and deletion of those assets. Where the deposit, return or deletion of assets is not possible, the relevant entities shall ensure that the assets can no longer access the relevant entities’ network and information systems in accordance with point 12.2.2."
+    },
+    "eu-nis2-ir-13-1-1": {
+      "code": "13.1.1",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Supporting utilities\nFor the purpose of Article 21(2)(c) of Directive (EU) 2022/2555, the relevant entities shall prevent loss, damage or compromise of network and information systems or interruption to their operations due to the failure and disruption of supporting utilities."
+    },
+    "eu-nis2-ir-13-1-2-a": {
+      "code": "13.1.2.a",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Supporting utilities\nFor that purpose, the relevant entities shall, where appropriate:\nprotect facilities from power failures and other disruptions caused by failures in supporting utilities such as electricity, telecommunications, water supply, gas, sewage, ventilation and air conditioning;"
+    },
+    "eu-nis2-ir-13-1-2-b": {
+      "code": "13.1.2.b",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Supporting utilities\nFor that purpose, the relevant entities shall, where appropriate:\nconsider the use of redundancy in utilities services;"
+    },
+    "eu-nis2-ir-13-1-2-c": {
+      "code": "13.1.2.c",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Supporting utilities\nFor that purpose, the relevant entities shall, where appropriate:\nprotect utility services for electricity and telecommunications, which transport data or supply network and information systems, against interception and damage;"
+    },
+    "eu-nis2-ir-13-1-2-d": {
+      "code": "13.1.2.d",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Supporting utilities\nFor that purpose, the relevant entities shall, where appropriate:\nmonitor the utility services referred to in point (c) and report to the competent internal or external personnel events outside the minimum and maximum control thresholds referred to in point 13.2.2(b) affecting the utility services;"
+    },
+    "eu-nis2-ir-13-1-2-e": {
+      "code": "13.1.2.e",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Supporting utilities\nFor that purpose, the relevant entities shall, where appropriate:\nconclude contracts for the emergency supply with corresponding services, such as for the fuel for emergency power supply;"
+    },
+    "eu-nis2-ir-13-1-2-f": {
+      "code": "13.1.2.f",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Supporting utilities\nFor that purpose, the relevant entities shall, where appropriate:\nensure continuous effectiveness, monitor, maintain and test the supply of the network and information systems necessary for the operation of the service offered, in particular the electricity, temperature and humidity control, telecommunications and Internet connection."
+    },
+    "eu-nis2-ir-13-1-3": {
+      "code": "13.1.3",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Supporting utilities\nThe relevant entities shall test, review and, where appropriate, update the protection measures on a regular basis or following significant incidents or significant changes to operations or risks."
+    },
+    "eu-nis2-ir-13-2-1": {
+      "code": "13.2.1",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Protection against physical and environmental threats\nFor the purpose of Article 21(2)(e) of Directive (EU) 2022/2555, the relevant entities shall prevent or reduce the consequences of events originating from physical and environmental threats, such as natural disasters and other intentional or unintentional threats, based on the results of the risk assessment carried out pursuant to point 2.1."
+    },
+    "eu-nis2-ir-13-2-2-a": {
+      "code": "13.2.2.a",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Protection against physical and environmental threats\nFor that purpose, the relevant entities shall, where appropriate:\ndesign and implement protection measures against physical and environmental threats;"
+    },
+    "eu-nis2-ir-13-2-2-b": {
+      "code": "13.2.2.b",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Protection against physical and environmental threats\nFor that purpose, the relevant entities shall, where appropriate:\ndetermine minimum and maximum control thresholds for physical and environmental threats;"
+    },
+    "eu-nis2-ir-13-2-2-c": {
+      "code": "13.2.2.c",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Protection against physical and environmental threats\nFor that purpose, the relevant entities shall, where appropriate:\nmonitor environmental parameters and report to the competent internal or external personnel events outside the minimum and maximum control thresholds referred to in point (b)."
+    },
+    "eu-nis2-ir-13-2-3": {
+      "code": "13.2.3",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Protection against physical and environmental threats\nThe relevant entities shall test, review and, where appropriate, update the protection measures against physical and environmental threats on a regular basis or following significant incidents or significant changes to operations or risks."
+    },
+    "eu-nis2-ir-13-3-1": {
+      "code": "13.3.1",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Perimeter and physical access control\nFor the purpose of Article 21(2)(i) of Directive (EU) 2022/2555, the relevant entities shall prevent and monitor unauthorised physical access, damage and interference to their network and information systems."
+    },
+    "eu-nis2-ir-13-3-2-a": {
+      "code": "13.3.2.a",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Perimeter and physical access control\nFor that purpose, the relevant entities shall:\non the basis of the risk assessment carried out pursuant to point 2.1, lay down and use security perimeters to protect areas where network and information systems and other associated assets are located;"
+    },
+    "eu-nis2-ir-13-3-2-b": {
+      "code": "13.3.2.b",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Perimeter and physical access control\nFor that purpose, the relevant entities shall:\nprotect the areas referred to in point (a) by appropriate entry controls and access points;"
+    },
+    "eu-nis2-ir-13-3-2-c": {
+      "code": "13.3.2.c",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Perimeter and physical access control\nFor that purpose, the relevant entities shall:\ndesign and implement physical security for offices, rooms and facilities,"
+    },
+    "eu-nis2-ir-13-3-2-d": {
+      "code": "13.3.2.d",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Perimeter and physical access control\nFor that purpose, the relevant entities shall:\ncontinuously monitor their premises for unauthorised physical access."
+    },
+    "eu-nis2-ir-13-3-3": {
+      "code": "13.3.3",
+      "section": "section-13",
+      "control": "Article 21(2), points (c), (e) and (i)",
+      "requirements": "Perimeter and physical access control\nThe relevant entities shall test, review and, where appropriate, update the physical access control measures on a regular basis or following significant incidents or significant changes to operations or risks."
+    }
+  }
+}
