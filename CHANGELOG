@@ -15,6 +15,31 @@ tags:
 
 The information about Unicis Platform releases and changes is listed in order below.
 
+## [Fleet Security Fixes + New Compliance Frameworks] 2026-10-09
+
+*Release date: 2026-10-09*
+
+*Version: v2026-10-09*
+
+- Security
+  - Fleet enrollment now requires an authenticated session; only team owners and admins can enroll team members
+  - Fleet enrollment completion now requires an authenticated session matching the enrolled user and verifies team membership
+  - Enrollment completion now verifies Fleet credentials, rejects temporary passwords, and no longer accepts expired enrollment tokens
+  - Fixed platform owner and admin roles not mapping correctly to Fleet roles
+  - Removed the unauthenticated Fleet debug-enrollments endpoint that exposed enrollment details
+  - Removed verbose Fleet enrollment logging that included user emails
+  - Plan check endpoints now require authentication and team membership
+  - Added regression tests for Fleet enrollment and plan endpoint authorization
+- Compliance Frameworks
+  - Added EU NIS 2 Implementing Regulation 2024/2690 with ENISA Technical Implementation Guidance in English, German, Spanish, French, and Italian
+  - Added CCB CyberFundamentals (CyFun) 2023 in English and French
+  - Added control guidance and framework mappings for both frameworks
+  - Registered the new frameworks in subscription plans, MCP server, OpenAPI specification, and README
+- Awareness Training
+  - Added support for PeerTube embedded videos in awareness courses
+- Acknowledgements
+  - Thanks to security researcher [kta1kri](https://github.com/kta1kri) for responsibly reporting the Fleet security issues fixed in this release
+
 ## [Task API, Properties & Asset Management Improvements] 2026-09-28
 
 *Release date: 2026-09-28*
