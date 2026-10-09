@@ -6,7 +6,7 @@
 
 # Unicis Platform — Open-Source GRC, Without the Auditor Markup
 
-**The open-source alternative to Vanta and Drata.** Self-host it or run it as SaaS — same code, same features, no vendor lock-in. Built for CISOs, DPOs, and compliance teams shipping ISO 27001, GDPR, NIS2, SOC 2, and 8 more frameworks out of the box.
+**The open-source alternative to Vanta and Drata.** Self-host it or run it as SaaS — same code, same features, no vendor lock-in. Built for CISOs, DPOs, and compliance teams shipping ISO 27001, GDPR, NIS2, SOC 2, and 10 more frameworks out of the box.
 
 ### ⭐ If this is useful to you, star the repo — it's the main signal that tells us to keep building.
 
@@ -36,7 +36,7 @@
 
 - **No vendor lock-in.** Apache 2.0 licensed. Fork it, self-host it, modify it.
 - **AI-native.** Ships with an [MCP server](src/mcp-server) — manage your entire GRC workflow through Claude, Cursor, or any MCP-compatible assistant, in natural language.
-- **11 frameworks mapped**, cross-referenced, with one-click SoA export (HTML/PDF/Excel).
+- **13 frameworks mapped**, cross-referenced, with one-click SoA export (HTML/PDF/Excel).
 - **Self-host or SaaS**, same codebase — no feature gap between the two.
 - **7-language UI** (EN, FR, DE, ES, IT, JA, PT-BR).
 
@@ -46,7 +46,7 @@
 | --------------------------------- | ----------------- | ------------ | -------------- | ------- |
 | MCP / AI-assistant integration    | ✅ Live           | —            | —              | —       |
 | Self-hosted + SaaS, same codebase | ✅                | ✅           | ✅             | ✅      |
-| Frameworks out of the box         | 11                | fewer        | fewer          | fewer   |
+| Frameworks out of the box         | 13                | fewer        | fewer          | fewer   |
 | Full SoA export                   | ✅ HTML/PDF/Excel | —            | —              | partial |
 
 ### Quickstart
@@ -101,8 +101,8 @@ Full setup guide → [Getting Started](#-getting-started)
 - [ISO 27001:2013 & ISO 27001:2022](https://www.unicis.tech/frameworks/iso27k?mtm_campaign=GitHub%20readme)
 - [NIST Cybersecurity Framework 2.0](https://www.unicis.tech/frameworks/nist-csf2?mtm_campaign=GitHub%20readme)
 - [Directive (EU) 2022/2555 NIS 2](https://www.unicis.tech/frameworks/eu-nis2?mtm_campaign=GitHub%20readme)
-- NIS2 Commission Implementing Regulation (EU) 2024/2690 with ENISA Technical Implementation Guidance
-- CCB CyberFundamentals Framework (CyFun) 2023-03-01
+- [NIS2 Commission Implementing Regulation (EU) 2024/2690 with ENISA Technical Implementation Guidance](https://www.unicis.tech/frameworks/nis2-implementing-regulation?mtm_campaign=GitHub%20readme)
+- [CCB CyberFundamentals Framework (CyFun) 2023-03-01](https://www.unicis.tech/frameworks/cyfun?mtm_campaign=GitHub%20readme)
 - [CIS Critical Security Controls Version 8.1](https://www.unicis.tech/frameworks/cis?mtm_campaign=GitHub%20readme)
 - [Criteria Catalogue C5:2020](https://www.unicis.tech/frameworks/c5?mtm_campaign=GitHub%20readme)
 - [SOC2 Type II - System and Organization Controls](https://www.unicis.tech/frameworks/soc2?mtm_campaign=GitHub%20readme)
@@ -121,6 +121,12 @@ Full setup guide → [Getting Started](#-getting-started)
 - Custom ...
 
 ## ✨ What's New
+
+**New Compliance Frameworks** — EU NIS2 Commission Implementing Regulation (EU) 2024/2690 with ENISA Technical Implementation Guidance, and the CCB CyberFundamentals Framework (CyFun) 2023-03-01. Both ship with control guidance, cross-framework mappings, and are available through the REST API and MCP server.
+
+**PeerTube in Awareness Courses** — the Interactive Awareness Program now supports PeerTube embedded videos alongside existing video sources, so self-hosted and privacy-friendly video can be used in training courses.
+
+**Fleet Security Hardening** — Fleet enrollment and plan API routes now require an authenticated session and team permissions, enrollment completion verifies Fleet credentials and expiry, and the debug enrollments endpoint was removed. Thanks to [kta1kri](https://github.com/kta1kri) for the responsible disclosure.
 
 **Fleet Server + Asset Management** — a dedicated Fleet Server backend for osquery device orchestration and the new Asset Management module for browsing, searching, and inspecting enrolled endpoints. Per-platform breakdowns (Windows, Linux, macOS), task analysis, and per-asset detail pages with status logs, result logs, and configuration viewer. Fully responsive on mobile. Fleet Server code is private and available exclusively for Ultimate plan users.
 
@@ -326,7 +332,7 @@ syft dir:unicis-platform -o cyclonedx-xml > sbom-cyclonedx.xml
 - [Privacy Impact Assessment](https://www.unicis.tech/solutions/privacy/pia?mtm_campaign=GitHub)
 - [Cybersecurity Controls](https://www.unicis.tech/solutions/cybersecurity/controls?mtm_campaign=GitHub) — including export/import of Statement of Applicability (SoA) in HTML, PDF, and Excel
 - [Cybersecurity Risk Management](https://www.unicis.tech/solutions/cybersecurity/risk-management?mtm_campaign=GitHub)
-- [Interactive Awareness Program](https://www.unicis.tech/solutions/compliance/awareness?mtm_campaign=GitHub)
+- [Interactive Awareness Program](https://www.unicis.tech/solutions/compliance/awareness?mtm_campaign=GitHub) — including PeerTube embedded videos in courses
 - [REST API](https://www.unicis.tech/docs/platform/introduction?mtm_campaign=GitHub) — OpenAPI 3.0 spec with Swagger UI at `/api-docs`
 - [Notifications](https://www.unicis.tech/docs/platform/settings/?mtm_campaign=GitHub#notifications) — In-app, email, and web push
 - [Asset Inventory Management](https://www.unicis.tech/solutions/cybersecurity/asset-inventory?mtm_campaign=GitHub) — Fleet Server backend for osquery endpoint management; browse, search, and inspect enrolled devices (Ultimate plan)
