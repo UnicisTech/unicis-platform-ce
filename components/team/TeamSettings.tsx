@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import useCanAccess from 'hooks/useCanAccess';
 //TODO: insolate updateTeamSchema logic
 //import { updateTeamSchema } from '@/lib/zod';
 import { defaultHeaders, domainRegex } from '@/lib/common';
@@ -28,6 +29,7 @@ interface TeamSettingsProps {
 const TeamSettings: React.FC<TeamSettingsProps> = ({ team }) => {
   const router = useRouter();
   const { t } = useTranslation('common');
+  const canUpdate = useCanAccess(team.slug).canAccess('team', ['update']);
 
   const formik = useFormik({
     initialValues: {
@@ -74,6 +76,7 @@ const TeamSettings: React.FC<TeamSettingsProps> = ({ team }) => {
               name="name"
               value={formik.values.name}
               onChange={formik.handleChange}
+              disabled={!canUpdate}
             />
             {formik.touched.name && formik.errors.name && (
               <p className="text-destructive text-sm">{formik.errors.name}</p>
@@ -87,6 +90,7 @@ const TeamSettings: React.FC<TeamSettingsProps> = ({ team }) => {
               name="slug"
               value={formik.values.slug}
               onChange={formik.handleChange}
+              disabled={!canUpdate}
             />
             {formik.touched.slug && formik.errors.slug && (
               <p className="text-destructive text-sm">{formik.errors.slug}</p>
@@ -100,6 +104,7 @@ const TeamSettings: React.FC<TeamSettingsProps> = ({ team }) => {
               name="domain"
               value={formik.values.domain}
               onChange={formik.handleChange}
+              disabled={!canUpdate}
               placeholder="example.com"
             />
             {formik.touched.domain && formik.errors.domain && (

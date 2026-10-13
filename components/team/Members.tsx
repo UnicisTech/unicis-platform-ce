@@ -234,7 +234,11 @@ const Members = ({ team }: { team: Team }) => {
           title={t('members')}
           description={t('members-description')}
           action={
-            <Button size="sm" onClick={() => setVisible(!visible)}>
+            <Button
+              size="sm"
+              disabled={!canAccess('team_member', ['create'])}
+              onClick={() => setVisible(!visible)}
+            >
               {t('add-member')}
             </Button>
           }
@@ -295,7 +299,11 @@ const Members = ({ team }: { team: Team }) => {
                             enrollView.isRevoke ? 'destructive' : 'outline'
                           }
                           size="sm"
-                          disabled={enrollView.disabled || isEnrollLoading}
+                          disabled={
+                            enrollView.disabled ||
+                            isEnrollLoading ||
+                            !canAccess('team_member', ['update'])
+                          }
                           onClick={() =>
                             enrollView.isRevoke
                               ? handleRevokeFleetAccess(member)

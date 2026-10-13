@@ -67,9 +67,7 @@ const AssetsContent = ({ team, user, isAuditor }: AssetsContentProps) => {
     nodes: allNodes,
     isLoading: isNodesLoading,
     isError: nodesError,
-  } = useNodes(team.id, status, {
-    skip: isAuditor,
-  });
+  } = useNodes(team.id, status);
   const {
     auditorStats,
     isLoading: isAuditorStatsLoading,
@@ -77,7 +75,9 @@ const AssetsContent = ({ team, user, isAuditor }: AssetsContentProps) => {
   } = useAuditorStats(team.id);
   const { canAccess } = useCanAccess(team.slug);
   const nodes = allNodes || [];
-  const isAssetsLoading = isAuditor ? isAuditorStatsLoading : isNodesLoading;
+  const isAssetsLoading = isAuditor
+    ? isAuditorStatsLoading || isNodesLoading
+    : isNodesLoading;
   const assetsError = isAuditor ? auditorStatsError : nodesError;
   const totalAssets = isAuditor ? auditorStats?.total_nodes ?? 0 : nodes.length;
 
@@ -112,15 +112,14 @@ const AssetsContent = ({ team, user, isAuditor }: AssetsContentProps) => {
         isAuditor={isAuditor}
       />
       <AssetTaskAnalysis teamId={team.id} isAuditor={isAuditor} />
-      {!isAuditor && (
-        <Nodes
-          nodes={nodes}
-          team={team}
-          user={user}
-          setStatus={setStatus}
-          status={status}
-        />
-      )}
+      <Nodes
+        nodes={nodes}
+        team={team}
+        user={user}
+        setStatus={setStatus}
+        status={status}
+        readOnly={isAuditor}
+      />
     </>
   );
 };
