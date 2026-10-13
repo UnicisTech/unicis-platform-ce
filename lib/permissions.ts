@@ -321,6 +321,10 @@ export const permissions: RolePermissions = {
       actions: ['read', 'comment'],
     },
     {
+      resource: 'csc',
+      actions: ['read'],
+    },
+    {
       resource: 'team_fleet_connect',
       actions: ['read'],
     },

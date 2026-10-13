@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { X, Link2, Check, Loader2 } from 'lucide-react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import type { ISO, Task } from 'types';
 import { isoValueToLabel } from '@/lib/csc/csc-frameworks';
@@ -39,6 +41,8 @@ interface ControlMappingDrawerProps {
     mappedControls: Array<{ controlId: string; framework: ISO }>,
     sourceControlId?: string
   ) => Promise<void>;
+  /** Hide all task-linking controls (e.g. for the auditor role) */
+  readOnly?: boolean;
 }
 
 const RELATIONSHIP_BADGE: Record<string, 'default' | 'secondary' | 'outline'> =
@@ -69,8 +73,10 @@ export default function ControlMappingDrawer({
   tasks,
   onLinkTask,
   onBulkLinkMapped,
+  readOnly = false,
 }: ControlMappingDrawerProps) {
   const { t, i18n } = useTranslation('common');
+  const { slug } = useRouter().query;
   const { guidance } = useControlGuidance(
     currentFramework,
     controlId,
@@ -298,22 +304,24 @@ export default function ControlMappingDrawer({
               <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 {t('csc-mapping.drawer.mappings-title', 'Mapped Controls')}
               </h3>
-              {linkedTasks.length > 0 && totalUnlinkedPairs > 0 && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-7 text-xs gap-1.5"
-                  disabled={isAnyLoading}
-                  onClick={handleLinkAllMapped}
-                >
-                  {bulkLoading ? (
-                    <Loader2 className="h-3 w-3 animate-spin" />
-                  ) : (
-                    <Link2 className="h-3 w-3" />
-                  )}
-                  {t('csc-mapping.drawer.link-all-mapped')}
-                </Button>
-              )}
+              {!readOnly &&
+                linkedTasks.length > 0 &&
+                totalUnlinkedPairs > 0 && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-7 text-xs gap-1.5"
+                    disabled={isAnyLoading}
+                    onClick={handleLinkAllMapped}
+                  >
+                    {bulkLoading ? (
+                      <Loader2 className="h-3 w-3 animate-spin" />
+                    ) : (
+                      <Link2 className="h-3 w-3" />
+                    )}
+                    {t('csc-mapping.drawer.link-all-mapped')}
+                  </Button>
+                )}
             </div>
 
             {!mappingEntry || otherFrameworks.length === 0 ? (
@@ -442,7 +450,7 @@ export default function ControlMappingDrawer({
                                   )}
 
                                   {/* Cross-framework task-linking row */}
-                                  {linkedTasks.length > 0 && (
+                                  {!readOnly && linkedTasks.length > 0 && (
                                     <div className="flex items-center gap-2 mt-1.5">
                                       {allLinked ? (
                                         <span className="inline-flex items-center gap-1 text-[11px] text-green-600 dark:text-green-400 font-medium">
@@ -494,32 +502,33 @@ export default function ControlMappingDrawer({
                                   )}
 
                                   {/* Individual task links (expandable when multiple) */}
-                                  {unlinkedForControl.length > 1 && (
-                                    <div className="mt-1 space-y-0.5">
-                                      {unlinkedForControl.map((task) => (
-                                        <button
-                                          key={task.id}
-                                          disabled={isAnyLoading}
-                                          onClick={() =>
-                                            handleLinkOneTask(
-                                              task.taskNumber,
-                                              mappedId,
-                                              fw
-                                            )
-                                          }
-                                          className="flex items-center gap-1.5 text-[10px] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors disabled:opacity-50"
-                                        >
-                                          <Link2 className="h-2.5 w-2.5 shrink-0" />
-                                          <span className="font-mono">
-                                            #{task.taskNumber}
-                                          </span>
-                                          <span className="truncate max-w-[160px]">
-                                            {task.title}
-                                          </span>
-                                        </button>
-                                      ))}
-                                    </div>
-                                  )}
+                                  {!readOnly &&
+                                    unlinkedForControl.length > 1 && (
+                                      <div className="mt-1 space-y-0.5">
+                                        {unlinkedForControl.map((task) => (
+                                          <button
+                                            key={task.id}
+                                            disabled={isAnyLoading}
+                                            onClick={() =>
+                                              handleLinkOneTask(
+                                                task.taskNumber,
+                                                mappedId,
+                                                fw
+                                              )
+                                            }
+                                            className="flex items-center gap-1.5 text-[10px] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors disabled:opacity-50"
+                                          >
+                                            <Link2 className="h-2.5 w-2.5 shrink-0" />
+                                            <span className="font-mono">
+                                              #{task.taskNumber}
+                                            </span>
+                                            <span className="truncate max-w-[160px]">
+                                              {task.title}
+                                            </span>
+                                          </button>
+                                        ))}
+                                      </div>
+                                    )}
                                 </div>
                               </div>
                             </div>
@@ -555,12 +564,17 @@ export default function ControlMappingDrawer({
                   >
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-                          #{task.taskNumber}
-                        </span>
-                        <span className="text-xs font-medium truncate">
-                          {task.title}
-                        </span>
+                        <Link
+                          href={`/teams/${slug}/tasks/${task.taskNumber}`}
+                          className="flex items-center gap-2 min-w-0 hover:underline"
+                        >
+                          <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
+                            #{task.taskNumber}
+                          </span>
+                          <span className="text-xs font-medium truncate">
+                            {task.title}
+                          </span>
+                        </Link>
                       </div>
                       {task.status && (
                         <span className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 block capitalize">
@@ -578,7 +592,7 @@ export default function ControlMappingDrawer({
               </div>
             )}
 
-            {unlinkedTasks.length > 0 && (
+            {!readOnly && unlinkedTasks.length > 0 && (
               <div className="mt-4">
                 <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2">
                   {t(
