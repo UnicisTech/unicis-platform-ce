@@ -359,6 +359,8 @@ export async function getServerSideProps({
     'csc/mvsp',
     'csc/nistcsfv2',
     'csc/eunis2',
+    'csc/eunis2_2024_2690',
+    'csc/ccb_cff_2023',
     'csc/gdpr',
     'csc/cisv81',
     'csc/soc2v2',
