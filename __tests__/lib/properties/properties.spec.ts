@@ -422,6 +422,61 @@ describe('task properties parser', () => {
     expect(result.issues[0]?.path[0]).toBe('rpa_procedure');
     expect(hasRpaProcedure({ rpa_procedure: [] })).toBe(false);
   });
+
+  it.each([
+    'task_audit_logs',
+    'rpa_audit_logs',
+    'tia_audit_logs',
+    'pia_audit_logs',
+    'rm_audit_logs',
+  ])('reads %s entries written by session users without roles', (property) => {
+    const sessionLog = {
+      ...validAuditLog,
+      actor: { id: 'user-1', name: 'User' },
+    };
+    const result = parseTaskProperties({ [property]: [sessionLog] });
+
+    expect(result.properties[property]).toEqual([sessionLog]);
+    expect(result.issues).toEqual([]);
+  });
+
+  it('reads CSC entries written by session users without roles', () => {
+    const sessionLog = {
+      actor: { id: 'user-1', name: 'User' },
+      date: validAuditLog.date,
+      event: 'added',
+      diff: { prevValue: null, nextValue: 'control-1' },
+    };
+    const result = parseTaskProperties({ csc_audit_logs: [sessionLog] });
+
+    expect(result.properties.csc_audit_logs).toEqual([sessionLog]);
+    expect(result.issues).toEqual([]);
+  });
+
+  it('keeps valid audit entries when a neighboring entry is malformed', () => {
+    const invalidLog = { ...validAuditLog, date: 'not-a-date' };
+    const properties = {
+      task_audit_logs: [validAuditLog, invalidLog, validAuditLog],
+    };
+    const result = parseTaskProperties(properties);
+
+    expect(result.properties.task_audit_logs).toEqual([
+      validAuditLog,
+      validAuditLog,
+    ]);
+    expect(result.raw.task_audit_logs).toEqual([
+      validAuditLog,
+      invalidLog,
+      validAuditLog,
+    ]);
+    expect(result.issues.map((issue) => issue.path)).toEqual([
+      ['task_audit_logs', 1, 'date'],
+    ]);
+    expect(getTaskAuditLogs(properties)).toEqual([
+      validAuditLog,
+      validAuditLog,
+    ]);
+  });
 });
 
 describe('task properties selectors', () => {

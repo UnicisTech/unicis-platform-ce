@@ -184,8 +184,11 @@ export type Diff = {
   nextValue: string | string[];
 } | null;
 
+export type AuditActor = Omit<Session['user'], 'roles'> &
+  Partial<Pick<Session['user'], 'roles'>>;
+
 export type AuditLog = {
-  actor: Session['user'];
+  actor: AuditActor;
   date: number;
   event: string;
   diff: Diff;

@@ -1,5 +1,5 @@
 import { CscStatus } from '@/lib/csc/csc-statuses';
-import type { Session } from 'next-auth';
+import type { AuditActor } from './base';
 
 export interface FrameworkSection {
   id: string;
@@ -22,7 +22,7 @@ export type CscOption = {
 };
 
 export type CscAuditLog = {
-  actor: Session['user'];
+  actor: AuditActor;
   date: number;
   event: string;
   diff: {
