@@ -2,8 +2,9 @@
  * Merges direct mappings of an imported framework into
  * lib/csc/framework-mappings.ts:
  *   - keeps the direct mappings (e.g. from CISO Assistant mapping libraries)
- *   - adds transitive mappings through ISO 27001:2022 (pivot) to every
- *     framework the pivot control is already mapped to (GDPR, MVSP, C5, …)
+ *   - adds transitive mappings through a pivot framework (ISO 27001:2022 by
+ *     default, NIST CSF 2.0 for CyFun 2025) to every framework the pivot
+ *     control is already mapped to (GDPR, MVSP, C5, …)
  *   - adds reverse entries so every relation is bidirectional
  *
  * Output is inserted as text (not re-serialised) so existing entries and
@@ -20,6 +21,7 @@ const FRAMEWORKS_DIR = path.join(ROOT, 'lib/csc/frameworks');
 const FILE_TO_ISO = {
   'c5_2020.ts': 'c5_2020',
   'ccb_cff_2023.ts': 'ccb_cff_2023',
+  'ccb_cff_2025.ts': 'ccb_cff_2025',
   'cis_v_81.ts': 'cisv81',
   'eu_nis2.ts': 'eunis2',
   'eu_nis2_2024_2690.ts': 'eunis2_2024_2690',
@@ -64,10 +66,17 @@ const addTo = (map, key, iso, id) => {
  * @param {string} opts.isoKey      framework key, e.g. 'ccb_cff_2023'
  * @param {string} opts.title       section title used as idempotency marker
  * @param {string[]} opts.controlIds imported control ids in framework order
+ * @param {string} [opts.pivot]     pivot framework key, default 'iso-2022'
  * @param {Map<string, Record<string, Set<string>>>} opts.direct
  *        imported control id → { targetIso: Set(targetIds) }
  */
-function mergeFrameworkMappings({ isoKey, title, controlIds, direct }) {
+function mergeFrameworkMappings({
+  isoKey,
+  title,
+  controlIds,
+  direct,
+  pivot = 'iso-2022',
+}) {
   const source = fs.readFileSync(MAPPINGS_PATH, 'utf8');
   const START = 'const frameworkMappings: FrameworkMappings = ';
   const bodyStart = source.indexOf(START) + START.length;
@@ -91,8 +100,8 @@ function mergeFrameworkMappings({ isoKey, title, controlIds, direct }) {
     for (const [iso, ids] of Object.entries(entry.mappings)) {
       if (iso === isoKey) continue;
       for (const t of ids) {
-        if (key.startsWith('iso-2022-')) addTo(pivotNeighbours, key, iso, t);
-        if (t.startsWith('iso-2022-') && isoOf.has(key)) {
+        if (isoOf.get(key) === pivot) addTo(pivotNeighbours, key, iso, t);
+        if (isoOf.get(t) === pivot && isoOf.has(key)) {
           addTo(pivotNeighbours, t, isoOf.get(key), key);
         }
       }
@@ -104,10 +113,10 @@ function mergeFrameworkMappings({ isoKey, title, controlIds, direct }) {
     for (const [iso, ids] of Object.entries(byIso)) {
       for (const t of ids) addTo(combined, id, iso, t);
     }
-    for (const pivot of byIso['iso-2022'] || []) {
-      const neighbours = pivotNeighbours.get(pivot) || {};
+    for (const pivotId of byIso[pivot] || []) {
+      const neighbours = pivotNeighbours.get(pivotId) || {};
       for (const [iso, ids] of Object.entries(neighbours)) {
-        if (iso === isoKey || iso === 'iso-2022') continue;
+        if (iso === isoKey || iso === pivot) continue;
         for (const t of ids) addTo(combined, id, iso, t);
       }
     }

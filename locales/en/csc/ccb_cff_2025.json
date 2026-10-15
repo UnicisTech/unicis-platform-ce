@@ -1,0 +1,2241 @@
+{
+  "sections": {
+    "gv": {
+      "label": "Govern"
+    },
+    "id": {
+      "label": "Identify"
+    },
+    "pr": {
+      "label": "Protect"
+    },
+    "de": {
+      "label": "Detect"
+    },
+    "rs": {
+      "label": "Respond"
+    },
+    "rc": {
+      "label": "Recover"
+    }
+  },
+  "controls": {
+    "ccb-cff-2025-gv-oc-01-1": {
+      "code": "GV.OC-01.1",
+      "section": "gv",
+      "control": "Organisational mission for cybersecurity",
+      "requirements": "GV.OC-01: The organisational mission is understood and informs cybersecurityrisk management\nThe organisation's mission shall be established, communicated and shall form the basis for information and cybersecurity risk management.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-oc-02-1": {
+      "code": "GV.OC-02.1",
+      "section": "gv",
+      "control": "Stakeholder needs and expectations",
+      "requirements": "GV.OC-02: Internal and external stakeholders are understood, and their needs and expectations regarding cybersecurity risk management are understood and considered\nThe organisation shall demonstrate it understands and considers the needs and expectations of both internal and external stakeholders regarding information and cybersecurity risk management.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-oc-03-1": {
+      "code": "GV.OC-03.1",
+      "section": "gv",
+      "control": "Legal and regulatory requirements identification",
+      "requirements": "GV.OC-03: Legal, regulatory, and contractual requirements regarding cybersecurity are understood and managed\nLegal and regulatory requirements regarding information and cybersecurity shall be identified and implemented.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-oc-03-2": {
+      "code": "GV.OC-03.2",
+      "section": "gv",
+      "control": "Legal obligations continuous management",
+      "requirements": "GV.OC-03: Legal, regulatory, and contractual requirements regarding cybersecurity are understood and managed\nLegal, regulatory, and contractual obligations related to information and cybersecurity shall be continuously managed to ensure they remain accurate, up to date, and effectively applied.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-oc-04-1": {
+      "code": "GV.OC-04.1",
+      "section": "gv",
+      "control": "Critical services identification and prioritisation",
+      "requirements": "GV.OC-04: Critical objectives, capabilities, and services that external stakeholders depend on or expect from the organisation are understood and communicated.\nThe organisation shall identify, document, and communicate the critical objectives, capabilities, and services relied upon by external stakeholders, prioritise them based on criticality, and integrate this prioritisation into the risk assessment process\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-oc-04-2": {
+      "code": "GV.OC-04.2",
+      "section": "gv",
+      "control": "Cybersecurity requirements for essential operations",
+      "requirements": "GV.OC-04: Critical objectives, capabilities, and services that external stakeholders depend on or expect from the organisation are understood and communicated.\nThe organisation shall define and document cybersecurity requirements for essential operations, validate them through testing and audits, maintain records of results and corrective actions, and regularly update requirements based on evolving risks\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-oc-04-3": {
+      "code": "GV.OC-04.3",
+      "section": "gv",
+      "control": "Redundancy for availability",
+      "requirements": "GV.OC-04: Critical objectives, capabilities, and services that external stakeholders depend on or expect from the organisation are understood and communicated.\nRedundancy shall be implemented to meet availability requirements as defined by the organisation, legislation and/or regulations\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-oc-04-4": {
+      "code": "GV.OC-04.4",
+      "section": "gv",
+      "control": "Recovery time and point objectives",
+      "requirements": "GV.OC-04: Critical objectives, capabilities, and services that external stakeholders depend on or expect from the organisation are understood and communicated.\nRecovery time and recovery point objectives for the resumption of essential ICT/OT system processes shall be defined and monitored.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-oc-05-1": {
+      "code": "GV.OC-05.1",
+      "section": "gv",
+      "control": "Supply chain role and dependencies",
+      "requirements": "GV.OC-05: Outcomes, capabilities, and services that the organisation depends on are understood and communicated.\nThe organisation shall identify, document, and communicate its role in the supply chain, including the external capabilities, services, and dependencies it relies on (upstream), as well as its interactions with downstream stakeholders.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-rm-01-1": {
+      "code": "GV.RM-01.1",
+      "section": "gv",
+      "control": "Cybersecurity objectives approval",
+      "requirements": "GV.RM-01: Risk management objectives are established and agreed to by organisational stakeholders\nInformation/cybersecurity objectives shall be identified, agreed to by organisational stakeholders and approved by senior management\nImportant - management aspects · Essential - management aspects",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IG",
+        "EG"
+      ]
+    },
+    "ccb-cff-2025-gv-rm-02-1": {
+      "code": "GV.RM-02.1",
+      "section": "gv",
+      "control": "Risk appetite and tolerance statements",
+      "requirements": "GV.RM-02: Risk appetite and risk tolerance statements are established, communicated, and maintained\nRisk appetite and risk tolerance statements shall be defined, documented, approved by senior management, communicated, and maintained.\nImportant - management aspects · Essential - management aspects",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IG",
+        "EG"
+      ]
+    },
+    "ccb-cff-2025-gv-rm-03-1": {
+      "code": "GV.RM-03.1",
+      "section": "gv",
+      "control": "Cybersecurity risk management strategy",
+      "requirements": "GV.RM-03: Cybersecurity risk management activities and outcomes are included in enterprise risk management processes\nAs part of the organisation-wide risk management strategy, a comprehensive strategy to manage information and cybersecurity risks shall be developed and updated when changes occur.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-rm-03-2": {
+      "code": "GV.RM-03.2",
+      "section": "gv",
+      "control": "Cybersecurity risk documentation",
+      "requirements": "GV.RM-03: Cybersecurity risk management activities and outcomes are included in enterprise risk management processes\nInformation and Cybersecurity risks shall be documented, as part of the enterprise risk management processes, formally approved by senior management, and updated when changes occur.\nImportant - management aspects · Essential - management aspects",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IG",
+        "EG"
+      ]
+    },
+    "ccb-cff-2025-gv-rm-04-1": {
+      "code": "GV.RM-04.1",
+      "section": "gv",
+      "control": "Risk treatment plan communication",
+      "requirements": "GV.RM-04: Strategic direction that describes appropriate risk response options is established and communicated\nA high-level plan or vision shall be formally established and clearly communicated to everyone involved on how to manage risks, including the different strategies the organisation can employ to deal with identified risks based on risk appetite or risk tolerance level.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-rm-05-1": {
+      "code": "GV.RM-05.1",
+      "section": "gv",
+      "control": "Risk communication channels",
+      "requirements": "GV.RM-05: Lines of communication across the organisation are established for cybersecurity risks, including risks from suppliers and other third parties\nTo support the high-level risk management vision, the organisation shall establish clear lines of communication for cybersecurity risks, including those arising from suppliers and third parties.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-rr-01-1": {
+      "code": "GV.RR-01.1",
+      "section": "gv",
+      "control": "Top management cybersecurity accountability",
+      "requirements": "GV.RR-01: Organisational leadership is responsible and accountable for cybersecurity risk and fosters a culture that is risk-aware, ethical, and continually improving\nOrganisation's top management shall be responsible and accountable for cybersecurity risk and shall foster a culture that is risk-aware, ethical, and continually improving.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-rr-02-1": {
+      "code": "GV.RR-02.1",
+      "section": "gv",
+      "control": "Cybersecurity roles and responsibilities",
+      "requirements": "GV.RR-02: Roles, responsibilities, and authorities related to cybersecurity risk management are established, communicated, understood, and enforced\nInformation security and cybersecurity roles, responsibilities and authorities for employees, suppliers, customers, and partners shall be documented, reviewed, authorised, kept up to date, communicated, and coordinated internally and externally.\nImportant - key measures · Essential - key measures",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IK",
+        "EK",
+        "IG",
+        "EG"
+      ]
+    },
+    "ccb-cff-2025-gv-rr-02-2": {
+      "code": "GV.RR-02.2",
+      "section": "gv",
+      "control": "Senior information security officer appointment",
+      "requirements": "GV.RR-02: Roles, responsibilities, and authorities related to cybersecurity risk management are established, communicated, understood, and enforced\nThe organisation shall appoint a senior-level executive information security officer.\nEssential - management aspects",
+      "implementation_groups": [
+        "E",
+        "EG"
+      ]
+    },
+    "ccb-cff-2025-gv-rr-03-1": {
+      "code": "GV.RR-03.1",
+      "section": "gv",
+      "control": "Cybersecurity resource allocation",
+      "requirements": "GV.RR-03: Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies\nSufficient resources shall be allocated in line with the cybersecurity risk strategy, roles, responsibilities and policies.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-rr-03-2": {
+      "code": "GV.RR-03.2",
+      "section": "gv",
+      "control": "Response and recovery plan maintenance roles",
+      "requirements": "GV.RR-03: Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies\nThe organisation shall assign roles and responsibilities for reviewing and updating response and recovery plans, ensuring they reflect changes in the risk environment and remain effective.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-rr-04-1": {
+      "code": "GV.RR-04.1",
+      "section": "gv",
+      "control": "Critical personnel authentication",
+      "requirements": "GV.RR-04: Cybersecurity is included in human resources practices\nPersonnel with access to the organisation’s most critical information or technology shall be authenticated.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-rr-04-2": {
+      "code": "GV.RR-04.2",
+      "section": "gv",
+      "control": "HR cybersecurity process",
+      "requirements": "GV.RR-04: Cybersecurity is included in human resources practices\nA cybersecurity process for human resources shall be developed and maintained applicable at recruitment, during employment and at termination of employment.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-po-01-1": {
+      "code": "GV.PO-01.1",
+      "section": "gv",
+      "control": "Cybersecurity policies and procedures",
+      "requirements": "GV.PO-01: Policy for managing cybersecurity risks is established based on organisational context, cybersecurity strategy, and priorities and is communicated and enforced\nPolicies and procedures for managing information and cybersecurity shall be established, documented, reviewed, approved, updated when changes occur, communicated and enforced.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-po-01-2": {
+      "code": "GV.PO-01.2",
+      "section": "gv",
+      "control": "Cryptography and encryption policy",
+      "requirements": "GV.PO-01: Policy for managing cybersecurity risks is established based on organisational context, cybersecurity strategy, and priorities and is communicated and enforced\nOrganisational-wide information and cybersecurity policies and procedures shall include the use of cryptography and, where appropriate, encryption, reflect changes in requirements, threats, technology and organisational roles, and be approved by senior management, who oversee its implementation.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-ov-02-1": {
+      "code": "GV.OV-02.1",
+      "section": "gv",
+      "control": "Risk management strategy review",
+      "requirements": "GV.OV-02: The cybersecurity risk management strategy is reviewed and adjusted to ensure coverage of organisational requirements and risks\nThe information and cybersecurity risk management strategy shall be reviewed and adjusted to ensure coverage of organisational requirements and risks.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-ov-03-1": {
+      "code": "GV.OV-03.1",
+      "section": "gv",
+      "control": "Cybersecurity performance evaluation",
+      "requirements": "GV.OV-03: Organisational cybersecurity risk management performance is evaluated and reviewed for adjustments needed\nThe organisation's cybersecurity risk management performance shall be evaluated, reviewed and adjusted when necessary\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-sc-01-1": {
+      "code": "GV.SC-01.1",
+      "section": "gv",
+      "control": "Supply chain risk management programme",
+      "requirements": "GV.SC-01: A cybersecurity supply chain risk management program, strategy, objectives, policies, and processes are established and agreed to by organisational stakeholders\nA cybersecurity supply chain risk management program, strategy, objectives, policies, and processes shall be documented, reviewed, updated when changes occur, and approved by organisational stakeholders.\nEssential - management aspects",
+      "implementation_groups": [
+        "E",
+        "EG"
+      ]
+    },
+    "ccb-cff-2025-gv-sc-02-1": {
+      "code": "GV.SC-02.1",
+      "section": "gv",
+      "control": "Third-party personnel change notification",
+      "requirements": "GV.SC-02: Cybersecurity roles and responsibilities for suppliers, customers, and partners are established, communicated, and coordinated internally and externally\nThird-party providers shall notify any transfer, termination or transition of personnel with physical or logical access to business-critical system elements of the organisation.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-sc-03-1": {
+      "code": "GV.SC-03.1",
+      "section": "gv",
+      "control": "Supply chain risk integration",
+      "requirements": "GV.SC-03: Cybersecurity supply chain risk management is integrated into cybersecurity and enterprise risk management, risk assessment, and improvement processes\nInformation- and Cybersecurity supply chain risk management shall be integrated into information/cybersecurity and enterprise risk management, risk assessment, and improvement processes.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-sc-05-1": {
+      "code": "GV.SC-05.1",
+      "section": "gv",
+      "control": "Supply chain cybersecurity contractual requirements",
+      "requirements": "GV.SC-05: Requirements to address cybersecurity risks in supply chains are established, prioritised, and integrated into contracts and other types of agreements with suppliers and other relevant third parties\nRequirements for addressing cybersecurity risks and the sharing of sensitive information in supply chains shall be established, prioritised, integrated into contracts and other types of formal agreements, and enforced.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-sc-05-2": {
+      "code": "GV.SC-05.2",
+      "section": "gv",
+      "control": "Supplier flaw resolution requirements",
+      "requirements": "GV.SC-05: Requirements to address cybersecurity risks in supply chains are established, prioritised, and integrated into contracts and other types of agreements with suppliers and other relevant third parties\nContractual information/cybersecurity requirements for suppliers and external partners shall be implemented to ensure a verifiable flaw resolution process and to ensure that deficiencies identified during information/cybersecurity testing and evaluation are remedied.\nEssential - key measures",
+      "implementation_groups": [
+        "E",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-gv-sc-05-3": {
+      "code": "GV.SC-05.3",
+      "section": "gv",
+      "control": "Supplier security programme review rights",
+      "requirements": "GV.SC-05: Requirements to address cybersecurity risks in supply chains are established, prioritised, and integrated into contracts and other types of agreements with suppliers and other relevant third parties\nThe organisation shall establish contractual requirements permitting the organisation to review the information/cybersecurity programs implemented by suppliers and third-party partners.\nEssential - key measures",
+      "implementation_groups": [
+        "E",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-gv-sc-06-1": {
+      "code": "GV.SC-06.1",
+      "section": "gv",
+      "control": "Supplier due diligence",
+      "requirements": "GV.SC-06: Planning and due diligence are performed to reduce risks before entering into formal supplier or other third-party relationships\nPlanning and due diligence shall be carried out to reduce risks before entering into formal relationships with suppliers or other third parties.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-sc-07-1": {
+      "code": "GV.SC-07.1",
+      "section": "gv",
+      "control": "Supplier risk assessment",
+      "requirements": "GV.SC-07: The risks posed by a supplier, their products and services, and other third parties are understood, recorded, prioritised, assessed, responded to, and monitored over the course of the relationship\nThe risks posed by a supplier, its products and services and other third parties shall be identified, documented, prioritised, mitigated and assessed at least annually and when changes occur during the relationship.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-sc-07-2": {
+      "code": "GV.SC-07.2",
+      "section": "gv",
+      "control": "Critical supplier registry",
+      "requirements": "GV.SC-07: The risks posed by a supplier, their products and services, and other third parties are understood, recorded, prioritised, assessed, responded to, and monitored over the course of the relationship\nA documented list of all critical suppliers, vendors and partners of the organisation that may be involved in a major incident shall be established, kept up-to-date and made available online and off-line with due regard to confidentiality and security.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-sc-07-3": {
+      "code": "GV.SC-07.3",
+      "section": "gv",
+      "control": "Third-party security compliance audits",
+      "requirements": "GV.SC-07: The risks posed by a supplier, their products and services, and other third parties are understood, recorded, prioritised, assessed, responded to, and monitored over the course of the relationship\nThe organisation shall audit business-critical third-party service providers for security compliance.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-sc-07-4": {
+      "code": "GV.SC-07.4",
+      "section": "gv",
+      "control": "Supplier contractual conformity verification",
+      "requirements": "GV.SC-07: The risks posed by a supplier, their products and services, and other third parties are understood, recorded, prioritised, assessed, responded to, and monitored over the course of the relationship\nThe organisation shall ensure conformity with information/cybersecurity contractual obligations by suppliers and third-party partners through regular reviews of independent audits, assessments, and third-party evaluations.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-sc-08-1": {
+      "code": "GV.SC-08.1",
+      "section": "gv",
+      "control": "Supplier incident planning contacts",
+      "requirements": "GV.SC-08: Relevant suppliers and other third parties are included in incident planning, response, and recovery activities\nThe organisation shall identify and document key personnel from relevant suppliers and other third parties to include them in incident planning, response, and recovery activities.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-sc-09-1": {
+      "code": "GV.SC-09.1",
+      "section": "gv",
+      "control": "Supply chain security monitoring",
+      "requirements": "GV.SC-09: Supply chain security practices are integrated into cybersecurity and enterprise risk management programs, and their performance is monitored throughout the technology product and service life cycle\nSupply chain security practices shall be integrated into information/cybersecurity and enterprise risk management programs, and their performance shall be monitored throughout the product and service life cycle.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-gv-sc-10-1": {
+      "code": "GV.SC-10.1",
+      "section": "gv",
+      "control": "Post-termination supply chain risk management",
+      "requirements": "GV.SC-10: Cybersecurity supply chain risk management plans include provisions for activities that occur after the conclusion of a partnership or service agreement\nCybersecurity supply chain risk management plans shall include actions and responsibilities for managing risks that may arise after a supplier relationship or service agreement has ended.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-01-1": {
+      "code": "ID.AM-01.1",
+      "section": "id",
+      "control": "Hardware asset inventory",
+      "requirements": "ID.AM-01: Inventories of hardware managed by the organisation are maintained.\nAn inventory of physical and virtual infrastructure assets—such as hardware, network devices, and cloud-hosted environments—that support information processing shall be documented, reviewed, and updated as changes occur.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-01-2": {
+      "code": "ID.AM-01.2",
+      "section": "id",
+      "control": "Asset inventory accuracy and completeness",
+      "requirements": "ID.AM-01: Inventories of hardware managed by the organisation are maintained.\nThe inventory of enterprise assets associated with information and information processing facilities shall reflect changes in the organisation’s context and include all information necessary for effective accountability.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-01-3": {
+      "code": "ID.AM-01.3",
+      "section": "id",
+      "control": "Unauthorised hardware handling",
+      "requirements": "ID.AM-01: Inventories of hardware managed by the organisation are maintained.\nWhen unauthorised hardware is detected, it shall be quarantined for possible exception handling, removed, or replaced, and the inventory shall be updated accordingly.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-01-4": {
+      "code": "ID.AM-01.4",
+      "section": "id",
+      "control": "Unauthorised hardware detection mechanisms",
+      "requirements": "ID.AM-01: Inventories of hardware managed by the organisation are maintained.\nMechanisms for detecting the presence of unauthorised hardware and firmware components within the organisation’s ICT/OT environment shall be identified.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-02-1": {
+      "code": "ID.AM-02.1",
+      "section": "id",
+      "control": "Software and services inventory",
+      "requirements": "ID.AM-02: Inventories of software, services, and systems managed by the organisation are maintained\nAn inventory of software, digital services, and business systems used within the organisation shall be documented, reviewed, and updated as changes occur.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-02-2": {
+      "code": "ID.AM-02.2",
+      "section": "id",
+      "control": "Software inventory accuracy and completeness",
+      "requirements": "ID.AM-02: Inventories of software, services, and systems managed by the organisation are maintained\nThe inventory reflecting which software, services and systems are used in the organisation shall reflect changes in the  organisation’s context and include all information necessary for effective accountability.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-02-3": {
+      "code": "ID.AM-02.3",
+      "section": "id",
+      "control": "Software management accountability",
+      "requirements": "ID.AM-02: Inventories of software, services, and systems managed by the organisation are maintained\nThe people responsible and accountable for managing software platforms and applications within the organisation shall be formally identified.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-02-4": {
+      "code": "ID.AM-02.4",
+      "section": "id",
+      "control": "Unauthorised software handling",
+      "requirements": "ID.AM-02: Inventories of software, services, and systems managed by the organisation are maintained\nWhen unauthorised software is detected, it shall be quarantined for possible exception handling, removed, or replaced, and the inventory shall be updated accordingly.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-02-5": {
+      "code": "ID.AM-02.5",
+      "section": "id",
+      "control": "Unauthorised software detection mechanisms",
+      "requirements": "ID.AM-02: Inventories of software, services, and systems managed by the organisation are maintained\nMechanisms for detecting the presence of unauthorised software within the organisation’s ICT/OT environment shall be identified.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-03-2": {
+      "code": "ID.AM-03.2",
+      "section": "id",
+      "control": "Internal network and data flow mapping",
+      "requirements": "ID.AM-03: Representations of the organisation's authorised network communication and internal and external network data flows are maintained\nThe organisation's network communication and internal data flows shall be mapped, documented, authorised, and updated when changes occur.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-03-3": {
+      "code": "ID.AM-03.3",
+      "section": "id",
+      "control": "External network and data flow mapping",
+      "requirements": "ID.AM-03: Representations of the organisation's authorised network communication and internal and external network data flows are maintained\nThe organisation's network communication and external data flows shall be mapped, documented, authorised, and updated when changes occur.\nEssential - key measures",
+      "implementation_groups": [
+        "E",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-id-am-04-1": {
+      "code": "ID.AM-04.1",
+      "section": "id",
+      "control": "External services inventory and approval",
+      "requirements": "ID.AM-04: Inventories of services provided by suppliers are maintained.\nOrganisations shall keep a clear and up-to-date list of all external services it uses, including how they connect to their systems. These services shall be reviewed and approved before use, and the list shall be updated whenever changes happen.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-04-2": {
+      "code": "ID.AM-04.2",
+      "section": "id",
+      "control": "External system data flow documentation",
+      "requirements": "ID.AM-04: Inventories of services provided by suppliers are maintained.\nThe organisation shall map, document and authorise the flow of information to/from external systems and update the flow when changes occur.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-05-1": {
+      "code": "ID.AM-05.1",
+      "section": "id",
+      "control": "Asset classification and prioritisation",
+      "requirements": "ID.AM-05: Assets are prioritised based on classification, criticality, resources, and impact on the mission.\nThe organisation’s assets shall be prioritised based on classification, criticality, and business value.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-07-1": {
+      "code": "ID.AM-07.1",
+      "section": "id",
+      "control": "Data identification",
+      "requirements": "ID.AM-07: Inventories of data and corresponding metadata for designated data types are maintained\nData that the organisation stores and uses shall be identified..\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-07-2": {
+      "code": "ID.AM-07.2",
+      "section": "id",
+      "control": "Data inventory and metadata management",
+      "requirements": "ID.AM-07: Inventories of data and corresponding metadata for designated data types are maintained\nInventories of data and associated metadata shall be maintained for designated data types.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-08-2": {
+      "code": "ID.AM-08.2",
+      "section": "id",
+      "control": "Patch and security update installation",
+      "requirements": "ID.AM-08: Systems, hardware, software, services, and data are managed throughout their life cycles.\nPatches and security updates for operating systems and critical system components shall be installed.\nBasic - key measures · Important - key measures · Essential - key measures",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E",
+        "BK",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-id-am-08-3": {
+      "code": "ID.AM-08.3",
+      "section": "id",
+      "control": "Asset lifecycle accountability",
+      "requirements": "ID.AM-08: Systems, hardware, software, services, and data are managed throughout their life cycles.\nThe organisation shall enforce accountability for all its business-critical assets throughout the system lifecycle, including removal, transfers, and disposition.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-08-4": {
+      "code": "ID.AM-08.4",
+      "section": "id",
+      "control": "Asset loss and damage protection",
+      "requirements": "ID.AM-08: Systems, hardware, software, services, and data are managed throughout their life cycles.\nThe organisation shall ensure that the necessary measures are taken to deal with loss, misuse, damage, or theft of assets.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-08-5": {
+      "code": "ID.AM-08.5",
+      "section": "id",
+      "control": "Asset disposal approval and tracking",
+      "requirements": "ID.AM-08: Systems, hardware, software, services, and data are managed throughout their life cycles.\nThe organisation shall ensure that disposal actions are approved, tracked, documented, and verified.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-08-6": {
+      "code": "ID.AM-08.6",
+      "section": "id",
+      "control": "Preventive maintenance planning",
+      "requirements": "ID.AM-08: Systems, hardware, software, services, and data are managed throughout their life cycles.\nThe organisation shall plan, perform and document preventive maintenance and repairs on its critical system components according to approved processes and tools.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-08-7": {
+      "code": "ID.AM-08.7",
+      "section": "id",
+      "control": "Maintenance equipment removal prevention",
+      "requirements": "ID.AM-08: Systems, hardware, software, services, and data are managed throughout their life cycles.\nThe organisation shall prevent unauthorised removal of maintenance equipment containing critical system information of the organisation.\nEssential - key measures",
+      "implementation_groups": [
+        "E",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-id-am-08-8": {
+      "code": "ID.AM-08.8",
+      "section": "id",
+      "control": "Maintenance tools approval and monitoring",
+      "requirements": "ID.AM-08: Systems, hardware, software, services, and data are managed throughout their life cycles.\nThe organisation shall pre-approve, monitor and enforce maintenance tools for use on its critical systems.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-08-9": {
+      "code": "ID.AM-08.9",
+      "section": "id",
+      "control": "Maintenance tools malware inspection",
+      "requirements": "ID.AM-08: Systems, hardware, software, services, and data are managed throughout their life cycles.\nMaintenance tools and portable storage devices shall be inspected as they enter the facility and shall be protected by anti-malware solutions that scan them for malicious code before they are used on the organisation's systems.\nEssential - key measures",
+      "implementation_groups": [
+        "E",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-id-am-08-10": {
+      "code": "ID.AM-08.10",
+      "section": "id",
+      "control": "Post-maintenance security verification",
+      "requirements": "ID.AM-08: Systems, hardware, software, services, and data are managed throughout their life cycles.\nThe organisation shall verify security controls following maintenance or repairs/patching, and take action as appropriate.\nEssential - key measures",
+      "implementation_groups": [
+        "E",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-id-am-08-11": {
+      "code": "ID.AM-08.11",
+      "section": "id",
+      "control": "Remote maintenance pre-approval and logging",
+      "requirements": "ID.AM-08: Systems, hardware, software, services, and data are managed throughout their life cycles.\nRemote maintenance and diagnostic activities of organisational assets shall be pre-approved and the performance logged.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-08-12": {
+      "code": "ID.AM-08.12",
+      "section": "id",
+      "control": "Remote maintenance strong authentication",
+      "requirements": "ID.AM-08: Systems, hardware, software, services, and data are managed throughout their life cycles.\nSetting up non-local maintenance and diagnostic sessions over remote network connections shall require strong authenticators and such connections shall be terminated when non-local maintenance is completed.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-am-08-13": {
+      "code": "ID.AM-08.13",
+      "section": "id",
+      "control": "Remote maintenance system security equivalence",
+      "requirements": "ID.AM-08: Systems, hardware, software, services, and data are managed throughout their life cycles.\nThe organisation shall require remote maintenance diagnostic services to be performed from a system that implements security features similar to the security features implemented on the equivalent organisation's critical system.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-ra-01-1": {
+      "code": "ID.RA-01.1",
+      "section": "id",
+      "control": "Threat and vulnerability identification",
+      "requirements": "ID.RA-01: Vulnerabilities in assets are identified, validated, and recorded\nThreats and vulnerabilities shall be identified in all relevant assets, including software, network and system architectures, and facilities that house critical computing assets.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-ra-01-2": {
+      "code": "ID.RA-01.2",
+      "section": "id",
+      "control": "Continuous vulnerability monitoring",
+      "requirements": "ID.RA-01: Vulnerabilities in assets are identified, validated, and recorded\nA process shall be established to continuously monitor, identify, and document vulnerabilities of the organisation's business critical systems.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-ra-01-3": {
+      "code": "ID.RA-01.3",
+      "section": "id",
+      "control": "Vulnerability review and remediation process",
+      "requirements": "ID.RA-01: Vulnerabilities in assets are identified, validated, and recorded\nThe organisation shall establish and maintain a documented process that enables continuous review, analysis and remediation of vulnerabilities and provides for information sharing where applicable.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-ra-01-4": {
+      "code": "ID.RA-01.4",
+      "section": "id",
+      "control": "Penetration and load testing",
+      "requirements": "ID.RA-01: Vulnerabilities in assets are identified, validated, and recorded\nTo ensure that organisation's operations are not adversely affected by the testing process, performance/load testing and penetration testing on the organisation’s systems shall be carried out with care.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-ra-01-5": {
+      "code": "ID.RA-01.5",
+      "section": "id",
+      "control": "Non-disruptive vulnerability scanning",
+      "requirements": "ID.RA-01: Vulnerabilities in assets are identified, validated, and recorded\nVulnerability scanning shall not adversely impact system functions.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-ra-01-6": {
+      "code": "ID.RA-01.6",
+      "section": "id",
+      "control": "Comprehensive vulnerability management",
+      "requirements": "ID.RA-01: Vulnerabilities in assets are identified, validated, and recorded\nVulnerabilities shall be identified and managed in all relevant assets, including software, network and system architectures, and facilities.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-ra-02-1": {
+      "code": "ID.RA-02.1",
+      "section": "id",
+      "control": "Threat and vulnerability awareness programme",
+      "requirements": "ID.RA-02: Cyber threat intelligence is received from information sharing forums and sources.\nA threat and vulnerability awareness program that includes a cross-organisation information-sharing capability shall be implemented.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-ra-02-2": {
+      "code": "ID.RA-02.2",
+      "section": "id",
+      "control": "Automated security alert dissemination",
+      "requirements": "ID.RA-02: Cyber threat intelligence is received from information sharing forums and sources.\nAutomated mechanisms shall be implemented to disseminate security alerts and advisories to relevant organisation stakeholders.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-ra-03-1": {
+      "code": "ID.RA-03.1",
+      "section": "id",
+      "control": "Threat assessment for assets",
+      "requirements": "ID.RA-03: Internal and external threats to the organisation are identified and recorded.\nThreats shall be identified and assessed in relation to all relevant assets, including software, network and system architectures, and facilities.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-ra-05-1": {
+      "code": "ID.RA-05.1",
+      "section": "id",
+      "control": "Risk assessment execution",
+      "requirements": "ID.RA-05: Threats, vulnerabilities, likelihoods, and impacts are used to understand inherent risk and inform risk response prioritisation.\nThe organisation shall conduct risk assessments in which risk is determined by threats, vulnerabilities and the impact on business processes and assets.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-ra-05-2": {
+      "code": "ID.RA-05.2",
+      "section": "id",
+      "control": "Documented risk assessment with likelihood",
+      "requirements": "ID.RA-05: Threats, vulnerabilities, likelihoods, and impacts are used to understand inherent risk and inform risk response prioritisation.\nThe organisation shall conduct and document risk assessments in which risk is determined by threats, vulnerabilities, impact on business processes and assets, and likelihood of their occurrence.\nImportant - management aspects · Essential - management aspects",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IG",
+        "EG"
+      ]
+    },
+    "ccb-cff-2025-id-ra-05-3": {
+      "code": "ID.RA-05.3",
+      "section": "id",
+      "control": "Risk assessment results dissemination",
+      "requirements": "ID.RA-05: Threats, vulnerabilities, likelihoods, and impacts are used to understand inherent risk and inform risk response prioritisation.\nRisk assessment results shall be disseminated to relevant stakeholders.\nEssential - management aspects",
+      "implementation_groups": [
+        "E",
+        "EG"
+      ]
+    },
+    "ccb-cff-2025-id-ra-06-1": {
+      "code": "ID.RA-06.1",
+      "section": "id",
+      "control": "Risk response planning and tracking",
+      "requirements": "ID.RA-06: Risk responses are chosen, prioritised, planned, tracked, and communicated.\nRisk responses shall be identified, prioritised, planned, tracked and communicated.\nImportant - management aspects · Essential - management aspects",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IG",
+        "EG"
+      ]
+    },
+    "ccb-cff-2025-id-ra-08-1": {
+      "code": "ID.RA-08.1",
+      "section": "id",
+      "control": "Vulnerability management plan",
+      "requirements": "ID.RA-08: Processes for receiving, analysing, and responding to vulnerability disclosures are established .\nThe organisation shall establish and implement a vulnerability management plan to identify, analyse, assess, mitigate and communicate all types of vulnerabilities including in the form of a Coordinated Vulnerability Disclosure (CVD) according to applicable legal modalities.\nImportant - key measures · Essential - key measures",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-id-ra-08-2": {
+      "code": "ID.RA-08.2",
+      "section": "id",
+      "control": "Automated vulnerability remediation tracking",
+      "requirements": "ID.RA-08: Processes for receiving, analysing, and responding to vulnerability disclosures are established .\nThe organisation shall implement automated mechanisms for disseminating and tracking remedial measures related to vulnerability information that automatically handles vulnerability data collection, disseminates information, tracks remedial measures, includes reporting and accountability, and enables continuous monitoring.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-im-02-1": {
+      "code": "ID.IM-02.1",
+      "section": "id",
+      "control": "Security testing and exercises",
+      "requirements": "ID.IM-02: Improvements are identified from security tests and exercises, including those done in coordination with suppliers and relevant third parties.\nSecurity tests and exercises, including those conducted with suppliers and relevant third parties, shall be used to identify areas for improvement.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-im-03-1": {
+      "code": "ID.IM-03.1",
+      "section": "id",
+      "control": "Post-incident lessons learned",
+      "requirements": "ID.IM-03: Improvements are identified from execution of operational processes, procedures, and activities.\nThe organisation shall conduct post-incident evaluations to analyse lessons learned from incident response and recovery and consequently improve processes / procedures / technologies to enhance its cyber resilience.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-im-03-2": {
+      "code": "ID.IM-03.2",
+      "section": "id",
+      "control": "Incident handling process improvement",
+      "requirements": "ID.IM-03: Improvements are identified from execution of operational processes, procedures, and activities.\nThe organisation shall incorporate lessons learned from incident handling activities into updated or new incident handling processes and/or procedures that are framed by appropriate training after review, approval and testing.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-im-03-3": {
+      "code": "ID.IM-03.3",
+      "section": "id",
+      "control": "Continuous improvement from assessments",
+      "requirements": "ID.IM-03: Improvements are identified from execution of operational processes, procedures, and activities.\nThe organisation shall identify improvements derived from the monitoring, measurements, assessments, and lessons learned and consequently translate this into improved processes / procedures / technologies to enhance its cyber resilience (continuous improvement).\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-im-03-4": {
+      "code": "ID.IM-03.4",
+      "section": "id",
+      "control": "Incident information sharing with partners",
+      "requirements": "ID.IM-03: Improvements are identified from execution of operational processes, procedures, and activities.\nThe organisation shall collaborate and share information about its critical system's related security incidents and mitigation measures with designated partners.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-im-03-5": {
+      "code": "ID.IM-03.5",
+      "section": "id",
+      "control": "Protection technology effectiveness sharing",
+      "requirements": "ID.IM-03: Improvements are identified from execution of operational processes, procedures, and activities.\nCommunication of effectiveness of protection technologies shall be shared with relevant stakeholders.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-im-03-6": {
+      "code": "ID.IM-03.6",
+      "section": "id",
+      "control": "Automated information sharing mechanisms",
+      "requirements": "ID.IM-03: Improvements are identified from execution of operational processes, procedures, and activities.\nThe organisation shall implement, where feasible, automated mechanisms to facilitate the process of information sharing and collaboration.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-im-03-7": {
+      "code": "ID.IM-03.7",
+      "section": "id",
+      "control": "Independent security assessments",
+      "requirements": "ID.IM-03: Improvements are identified from execution of operational processes, procedures, and activities.\nThe organisation shall implement independent teams to assess its processes, best practices, and technology solutions to safeguard critical systems and assets.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-im-03-8": {
+      "code": "ID.IM-03.8",
+      "section": "id",
+      "control": "Security plan continual improvement",
+      "requirements": "ID.IM-03: Improvements are identified from execution of operational processes, procedures, and activities.\nThe organisation shall ensure that the security plan for its critical systems facilitates the review, testing, and continual improvement of the security protection processes.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-id-im-03-9": {
+      "code": "ID.IM-03.9",
+      "section": "id",
+      "control": "Specialised security assessments",
+      "requirements": "ID.IM-03: Improvements are identified from execution of operational processes, procedures, and activities.\nThe organisation shall conduct specialised assessments including in-depth monitoring, vulnerability scanning, malicious user testing, insider threat assessment, performance/load testing, and verification and validation testing on the organisation's critical systems.\nEssential - management aspects",
+      "implementation_groups": [
+        "E",
+        "EG"
+      ]
+    },
+    "ccb-cff-2025-id-im-04-1": {
+      "code": "ID.IM-04.1",
+      "section": "id",
+      "control": "Contingency and continuity plans",
+      "requirements": "ID.IM-04: Incident response plans and other cybersecurity plans that affect operations are established, communicated, maintained, and improved.\nContingency and continuity plans shall be established, communicated, maintained, tested, validated, and improved.\nImportant - management aspects · Essential - management aspects",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IG",
+        "EG"
+      ]
+    },
+    "ccb-cff-2025-id-im-04-2": {
+      "code": "ID.IM-04.2",
+      "section": "id",
+      "control": "Incident response plan coordination",
+      "requirements": "ID.IM-04: Incident response plans and other cybersecurity plans that affect operations are established, communicated, maintained, and improved.\nThe organisation shall coordinate the development and the testing of Incident Response Plans and other cybersecurity plans that affect operations with stakeholders to ensure that these plans align with overall organisational goals and enhance resilience.\nEssential - management aspects",
+      "implementation_groups": [
+        "E",
+        "EG"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-01-1": {
+      "code": "PR.AA-01.1",
+      "section": "pr",
+      "control": "Identity and credential management",
+      "requirements": "PR.AA-01: Identities and credentials for authorised users, services, and hardware are managed by the organisation\nIdentities and credentials for authorised users, services, and hardware shall be managed.\nBasic - key measures · Important - key measures · Essential - key measures",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E",
+        "BK",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-01-2": {
+      "code": "PR.AA-01.2",
+      "section": "pr",
+      "control": "Automated identity and credential management",
+      "requirements": "PR.AA-01: Identities and credentials for authorised users, services, and hardware are managed by the organisation\nIdentities and credentials for authorised users, services and hardware shall be managed through automated mechanisms whenever feasible.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-01-3": {
+      "code": "PR.AA-01.3",
+      "section": "pr",
+      "control": "Inactive credential deactivation",
+      "requirements": "PR.AA-01: Identities and credentials for authorised users, services, and hardware are managed by the organisation\nSystem credentials shall be deactivated after a specified period of inactivity unless it would compromise the safe operation of (critical) processes.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-01-4": {
+      "code": "PR.AA-01.4",
+      "section": "pr",
+      "control": "Multi-factor authentication for critical systems",
+      "requirements": "PR.AA-01: Identities and credentials for authorised users, services, and hardware are managed by the organisation\nFor transactions within the organisation's critical systems, the organisation shall\nimplement Multi Factor Authentication (MFA), cryptographic certificates, identity tokens, cryptographic keys and other credentials as appropriate and where feasible.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-01-5": {
+      "code": "PR.AA-01.5",
+      "section": "pr",
+      "control": "Atypical credential usage monitoring",
+      "requirements": "PR.AA-01: Identities and credentials for authorised users, services, and hardware are managed by the organisation\nThe organisation’s critical systems shall be monitored for atypical use of system credentials. Credentials associated with significant risk shall be disabled.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-02-1": {
+      "code": "PR.AA-02.1",
+      "section": "pr",
+      "control": "Identity verification before credential issuance",
+      "requirements": "PR.AA-02: Identities are proofed and bound to credentials based on the context of interactions.\nThe organisation shall implement documented procedures for verifying the identity of individuals before issuing credentials that provide access to the organisation's systems.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-02-2": {
+      "code": "PR.AA-02.2",
+      "section": "pr",
+      "control": "Unique credential enforcement",
+      "requirements": "PR.AA-02: Identities are proofed and bound to credentials based on the context of interactions.\nThe organisation shall ensure that unique credentials are used for each authenticated user, device, and process interacting with the organisation's critical systems. These credentials shall be verified, and the unique identifiers shall be captured during system interactions. Exceptions may be made for emergency access (\"breakglass\" procedures), provided such access is strictly controlled, logged, and reviewed.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-03-1": {
+      "code": "PR.AA-03.1",
+      "section": "pr",
+      "control": "Wireless access point security",
+      "requirements": "PR.AA-03: Users, services, and hardware are authenticated.\nAll wireless access points used by the organisation, including those providing guest access, shall be securely configured, managed, and monitored to prevent unauthorised  access and ensure network integrity.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-03-2": {
+      "code": "PR.AA-03.2",
+      "section": "pr",
+      "control": "MFA for remote network access",
+      "requirements": "PR.AA-03: Users, services, and hardware are authenticated.\nMulti-Factor Authentication (MFA) shall be required to access the organisation's networks remotely.\nBasic - key measures · Important - key measures · Essential - key measures",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E",
+        "BK",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-03-3": {
+      "code": "PR.AA-03.3",
+      "section": "pr",
+      "control": "Remote access restrictions and authorisation",
+      "requirements": "PR.AA-03: Users, services, and hardware are authenticated.\nThe organisation shall define, document, and implement usage restrictions, connection requirements, and authorisation procedures for remote access to its critical systems. These controls shall ensure that only approved users can connect, using secure methods, with access limited to what is necessary for their role.\nImportant - key measures · Essential - key measures",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-03-4": {
+      "code": "PR.AA-03.4",
+      "section": "pr",
+      "control": "Remote access monitoring and encryption",
+      "requirements": "PR.AA-03: Users, services, and hardware are authenticated.\nRemote access to the organisation’s critical systems shall be monitored and cryptographic mechanisms shall be implemented where determined necessary.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-03-5": {
+      "code": "PR.AA-03.5",
+      "section": "pr",
+      "control": "External system connection security",
+      "requirements": "PR.AA-03: Users, services, and hardware are authenticated.\nThe security for connections with external systems shall be verified and framed by documented agreements.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-04-1": {
+      "code": "PR.AA-04.1",
+      "section": "pr",
+      "control": "Identity assertion protection",
+      "requirements": "PR.AA-04: Identity assertions are protected, conveyed, and verified\nIdentity assertions shall be protected, conveyed, and verified\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-05-1": {
+      "code": "PR.AA-05.1",
+      "section": "pr",
+      "control": "Access permissions management",
+      "requirements": "PR.AA-05: Access permissions, entitlements, and authorisations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties.\nAccess permissions, rights, and authorisations shall be defined, managed, enforced and reviewed.\nBasic - key measures · Important - key measures · Essential - key measures",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E",
+        "BK",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-05-2": {
+      "code": "PR.AA-05.2",
+      "section": "pr",
+      "control": "Access needs determination",
+      "requirements": "PR.AA-05: Access permissions, entitlements, and authorisations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties.\nIt shall be determined who needs access to the organisation's business-critical information and technology and the means to gain access.\nBasic - key measures · Important - key measures · Essential - key measures",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E",
+        "BK",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-05-3": {
+      "code": "PR.AA-05.3",
+      "section": "pr",
+      "control": "Least privilege enforcement",
+      "requirements": "PR.AA-05: Access permissions, entitlements, and authorisations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties.\nAccess rights, privileges and authorisations shall be restricted to the systems and specific information needed to perform the tasks (the principle of Least Privilege).\nBasic - key measures · Important - key measures · Essential - key measures",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E",
+        "BK",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-05-4": {
+      "code": "PR.AA-05.4",
+      "section": "pr",
+      "control": "Administrative privilege restriction",
+      "requirements": "PR.AA-05: Access permissions, entitlements, and authorisations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties.\nNo one shall have administrative privileges for routine day-to-day tasks.\nBasic - key measures · Important - key measures · Essential - key measures",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E",
+        "BK",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-05-5": {
+      "code": "PR.AA-05.5",
+      "section": "pr",
+      "control": "Automated user account management",
+      "requirements": "PR.AA-05: Access permissions, entitlements, and authorisations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties.\nWhere technically, operationally, and economically feasible—without compromising system integrity, safety, or compliance—automated mechanisms shall be implemented to manage user accounts on critical ICT and OT systems. Feasibility shall be determined based on system capabilities, integration potential, risk assessment, and business impact.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-05-6": {
+      "code": "PR.AA-05.6",
+      "section": "pr",
+      "control": "Separation of duties",
+      "requirements": "PR.AA-05: Access permissions, entitlements, and authorisations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties.\nSeparation of duties (SoD) shall be ensured in the management of access rights.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-05-7": {
+      "code": "PR.AA-05.7",
+      "section": "pr",
+      "control": "Privileged user management and monitoring",
+      "requirements": "PR.AA-05: Access permissions, entitlements, and authorisations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties.\nPrivileged users shall be managed and monitored.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-05-8": {
+      "code": "PR.AA-05.8",
+      "section": "pr",
+      "control": "Time and location based access restrictions",
+      "requirements": "PR.AA-05: Access permissions, entitlements, and authorisations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties.\nAccount usage restrictions for specific time periods and locations shall be taken\ninto account in the organisation's security access policy and applied accordingly.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-05-9": {
+      "code": "PR.AA-05.9",
+      "section": "pr",
+      "control": "Privileged user audit",
+      "requirements": "PR.AA-05: Access permissions, entitlements, and authorisations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties.\nPrivileged users shall be managed, monitored and audited.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-06-1": {
+      "code": "PR.AA-06.1",
+      "section": "pr",
+      "control": "Physical access management and monitoring",
+      "requirements": "PR.AA-06: Physical access to assets is managed, monitored, and enforced commensurate with risk.\nPhysical access to all organisational assets, including critical zones, shall be managed, monitored, and enforced based on risk.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-06-2": {
+      "code": "PR.AA-06.2",
+      "section": "pr",
+      "control": "Emergency physical access procedures",
+      "requirements": "PR.AA-06: Physical access to assets is managed, monitored, and enforced commensurate with risk.\nPhysical access controls shall include specific procedures for emergency situations, ensuring continued protection of critical and non-critical assets during such events.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-06-3": {
+      "code": "PR.AA-06.3",
+      "section": "pr",
+      "control": "Critical zone additional access controls",
+      "requirements": "PR.AA-06: Physical access to assets is managed, monitored, and enforced commensurate with risk.\nCritical zones shall have additional physical access controls beyond those applied to general facilities.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-aa-06-4": {
+      "code": "PR.AA-06.4",
+      "section": "pr",
+      "control": "Critical zone asset physical protection",
+      "requirements": "PR.AA-06: Physical access to assets is managed, monitored, and enforced commensurate with risk.\nAssets located within critical zones shall be physically protected against unauthorised access, damage, or interference.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-at-01-1": {
+      "code": "PR.AT-01.1",
+      "section": "pr",
+      "control": "Cybersecurity awareness and training programme",
+      "requirements": "PR.AT-01: Personnel are provided with awareness and training so that they possess the knowledge and skills to perform general tasks with cybersecurity risks in mind.\nThe organisation shall establish and maintain a cybersecurity awareness and training programme to ensure that all personnel understand how to perform their tasks securely and responsibly.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-at-01-2": {
+      "code": "PR.AT-01.2",
+      "section": "pr",
+      "control": "Insider threat awareness training",
+      "requirements": "PR.AT-01: Personnel are provided with awareness and training so that they possess the knowledge and skills to perform general tasks with cybersecurity risks in mind.\nThe organisation shall include insider threat awareness and reporting in its cybersecurity training to help personnel recognise and respond to potential internal risks.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-at-01-3": {
+      "code": "PR.AT-01.3",
+      "section": "pr",
+      "control": "Incident role-specific training",
+      "requirements": "PR.AT-01: Personnel are provided with awareness and training so that they possess the knowledge and skills to perform general tasks with cybersecurity risks in mind.\nPersonnel shall receive training to understand their specific roles, responsibilities, and priorities during a cybersecurity or information security incident, including the steps they need to follow to respond effectively.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-at-01-4": {
+      "code": "PR.AT-01.4",
+      "section": "pr",
+      "control": "Training effectiveness evaluation",
+      "requirements": "PR.AT-01: Personnel are provided with awareness and training so that they possess the knowledge and skills to perform general tasks with cybersecurity risks in mind.\nThe organisation shall evaluate whether its cybersecurity awareness training is effective in improving knowledge, behaviour, and readiness across the organisation.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-at-02-1": {
+      "code": "PR.AT-02.1",
+      "section": "pr",
+      "control": "Management cybersecurity training",
+      "requirements": "PR.AT-02: Individuals in specialised roles are provided with awareness and training so that they possess the knowledge and skills to perform relevant tasks with cybersecurity risks in mind.\nMembers of management bodies shall be able to demonstrate that they have completed training that gives them a solid understanding of information and cybersecurity and risk management so that they can assess information and cyber security risks and their consequences and propose the necessary risk mitigation, considering their roles, responsibilities and authorities.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-at-02-2": {
+      "code": "PR.AT-02.2",
+      "section": "pr",
+      "control": "Specialised role training",
+      "requirements": "PR.AT-02: Individuals in specialised roles are provided with awareness and training so that they possess the knowledge and skills to perform relevant tasks with cybersecurity risks in mind.\nIndividuals in specialised roles shall be provided with awareness and training before privileges are granted, so that they possess the knowledge and skills to perform relevant tasks with cybersecurity risks in mind.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-at-02-3": {
+      "code": "PR.AT-02.3",
+      "section": "pr",
+      "control": "Privileged user qualification",
+      "requirements": "PR.AT-02: Individuals in specialised roles are provided with awareness and training so that they possess the knowledge and skills to perform relevant tasks with cybersecurity risks in mind.\nPrivileged users shall be qualified before privileges are granted, and these users shall be able to demonstrate the understanding of their roles, responsibilities, and authorities.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ds-01-1": {
+      "code": "PR.DS-01.1",
+      "section": "pr",
+      "control": "Software and firmware integrity checks",
+      "requirements": "PR.DS-01: The confidentiality, integrity, and availability of data-at-rest are protected.\nThe organisation shall implement software, firmware, and information integrity checks to detect unauthorised changes to its critical system components during storage, transport, start-up and when determined necessary.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ds-01-2": {
+      "code": "PR.DS-01.2",
+      "section": "pr",
+      "control": "Automated integrity violation notification",
+      "requirements": "PR.DS-01: The confidentiality, integrity, and availability of data-at-rest are protected.\nThe organisation shall implement automated tools where feasible to provide notification upon discovering discrepancies during integrity verification.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ds-01-3": {
+      "code": "PR.DS-01.3",
+      "section": "pr",
+      "control": "Automated integrity violation response",
+      "requirements": "PR.DS-01: The confidentiality, integrity, and availability of data-at-rest are protected.\nThe organisation shall define and implement automated responses to detected integrity violations, using predefined safeguards that are proportionate to the severity and impact of the violation.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ds-01-4": {
+      "code": "PR.DS-01.4",
+      "section": "pr",
+      "control": "Portable storage media policy",
+      "requirements": "PR.DS-01: The confidentiality, integrity, and availability of data-at-rest are protected.\nThe organisation shall define and enforce clear policies and practical safeguards to manage and restrict the use of portable storage media, in order to reduce the risk of data leakage, unauthorised access, and malware introduction.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ds-01-5": {
+      "code": "PR.DS-01.5",
+      "section": "pr",
+      "control": "Removable media restriction",
+      "requirements": "PR.DS-01: The confidentiality, integrity, and availability of data-at-rest are protected.\nThe organisation shall only allow the use of removable media when absolutely necessary and shall put technical measures in place to block automatic execution of files from these devices.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ds-01-6": {
+      "code": "PR.DS-01.6",
+      "section": "pr",
+      "control": "Data at rest confidentiality",
+      "requirements": "PR.DS-01: The confidentiality, integrity, and availability of data-at-rest are protected.\nThe organisation shall protect the confidentiality of its critical assets while at rest.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ds-01-9": {
+      "code": "PR.DS-01.9",
+      "section": "pr",
+      "control": "Secure asset disposal",
+      "requirements": "PR.DS-01: The confidentiality, integrity, and availability of data-at-rest are protected.\nEnterprise assets shall be disposed of safely.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ds-02-1": {
+      "code": "PR.DS-02.1",
+      "section": "pr",
+      "control": "Portable storage device protection in transit",
+      "requirements": "PR.DS-02: The confidentiality, integrity, and availability of data-in-transit are protected\nPortable storage devices containing system data shall be controlled and protected while in transit and in storage.\nEssential - key measures",
+      "implementation_groups": [
+        "E",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-pr-ds-02-2": {
+      "code": "PR.DS-02.2",
+      "section": "pr",
+      "control": "Data in transit protection",
+      "requirements": "PR.DS-02: The confidentiality, integrity, and availability of data-in-transit are protected\nThe organisation shall protect its critical and sensitive information while in transit.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ds-10-1": {
+      "code": "PR.DS-10.1",
+      "section": "pr",
+      "control": "Denial-of-service protection",
+      "requirements": "PR.DS-10: The confidentiality, integrity, and availability of data-in-use are protected\nThe organisation’s critical systems shall be protected against denial-of-service attacks or at least the effect of such attacks shall be limited.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ds-11-1": {
+      "code": "PR.DS-11.1",
+      "section": "pr",
+      "control": "Critical data backup",
+      "requirements": "PR.DS-11: Backups of data are created, protected, maintained, and tested.\nBackups for the organisation's business-critical data shall be performed and stored on a different system from the device on which the original data resides.\nBasic - key measures · Important - key measures · Essential - key measures",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E",
+        "BK",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-pr-ds-11-2": {
+      "code": "PR.DS-11.2",
+      "section": "pr",
+      "control": "Backup reliability and integrity verification",
+      "requirements": "PR.DS-11: Backups of data are created, protected, maintained, and tested.\nThe reliability and integrity of backups shall be verified and tested regularly.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ds-11-3": {
+      "code": "PR.DS-11.3",
+      "section": "pr",
+      "control": "Secure offsite backup storage",
+      "requirements": "PR.DS-11: Backups of data are created, protected, maintained, and tested.\nThe organisation shall maintain secure backups of business-critical data in a separate storage location to ensure data availability in case of system failure or data loss. Backup storage shall apply equivalent security controls as the primary environment.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ds-11-4": {
+      "code": "PR.DS-11.4",
+      "section": "pr",
+      "control": "Backup recoverability testing",
+      "requirements": "PR.DS-11: Backups of data are created, protected, maintained, and tested.\nThe organisation shall regularly verify the integrity and recoverability of backups through coordinated testing with all relevant continuity and incident response functions. Backup testing shall be integrated into broader resilience planning, including business continuity, disaster recovery, and cyber incident response.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ds-11-5": {
+      "code": "PR.DS-11.5",
+      "section": "pr",
+      "control": "System and data backup separation",
+      "requirements": "PR.DS-11: Backups of data are created, protected, maintained, and tested.\nBackups of critical systems (such as operating systems, configurations, and applications) shall be kept separate from backups of critical information (such as business data, documents, and databases) to support faster and more reliable recovery.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-01-1": {
+      "code": "PR.PS-01.1",
+      "section": "pr",
+      "control": "Baseline configuration management",
+      "requirements": "PR.PS-01: Configuration management practices are established and applied.\nThe organisation shall develop, document, and maintain a baseline configuration for its business critical systems.\nImportant - key measures · Essential - key measures",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-01-2": {
+      "code": "PR.PS-01.2",
+      "section": "pr",
+      "control": "Essential functions configuration",
+      "requirements": "PR.PS-01: Configuration management practices are established and applied.\nThe organisation shall configure its business-critical systems to operate with only the essential functions needed for their intended purpose. This includes reviewing and updating baseline configurations to disable any non-essential capabilities.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-01-3": {
+      "code": "PR.PS-01.3",
+      "section": "pr",
+      "control": "Unnecessary services and ports disabling",
+      "requirements": "PR.PS-01: Configuration management practices are established and applied.\nThe organisation shall identify and disable specific functions, ports, protocols, and services within its critical systems that are not required for business operations.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-01-4": {
+      "code": "PR.PS-01.4",
+      "section": "pr",
+      "control": "Software execution whitelisting",
+      "requirements": "PR.PS-01: Configuration management practices are established and applied.\nThe organisation shall implement technical safeguards to enforce a policy of ‘deny-all’ and ‘permit-by-exception’ so that only authorised software programmes are executed.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-01-5": {
+      "code": "PR.PS-01.5",
+      "section": "pr",
+      "control": "Configuration change monitoring",
+      "requirements": "PR.PS-01: Configuration management practices are established and applied.\nUnauthorised configuration changes to organisation's systems shall be monitored and addressed with the appropriate mitigation actions.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-02-1": {
+      "code": "PR.PS-02.1",
+      "section": "pr",
+      "control": "Software usage and installation restrictions",
+      "requirements": "PR.PS-02: Software is maintained, replaced, and removed commensurate with risk.\nThe organisation shall enforce restrictions on software usage and installation, and ensure that software is maintained, replaced, or removed based on its associated risk.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-03-1": {
+      "code": "PR.PS-03.1",
+      "section": "pr",
+      "control": "Hardware lifecycle risk management",
+      "requirements": "PR.PS-03: Hardware is maintained, replaced, and removed commensurate with risk.\nHardware used in business-critical environments shall be maintained, replaced, or removed based on its associated security and operational risk.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-04-1": {
+      "code": "PR.PS-04.1",
+      "section": "pr",
+      "control": "Log maintenance and monitoring",
+      "requirements": "PR.PS-04: Log records are generated and made available for continuous monitoring.\nLogs shall be maintained, documented, and monitored.\nBasic - key measures · Important - key measures · Essential - key measures",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E",
+        "BK",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-04-2": {
+      "code": "PR.PS-04.2",
+      "section": "pr",
+      "control": "Log time synchronisation",
+      "requirements": "PR.PS-04: Log records are generated and made available for continuous monitoring.\nThe organisation shall ensure that logbook records contain an authoritative time source or internal clock time stamp that is compared and synchronised with an authoritative time source.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-04-3": {
+      "code": "PR.PS-04.3",
+      "section": "pr",
+      "control": "Audit data offloading",
+      "requirements": "PR.PS-04: Log records are generated and made available for continuous monitoring.\nAudit data from the organisation's critical systems shall be moved to an alternative system.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-04-4": {
+      "code": "PR.PS-04.4",
+      "section": "pr",
+      "control": "Audit processing failure alerts",
+      "requirements": "PR.PS-04: Log records are generated and made available for continuous monitoring.\nThe organisation shall ensure that audit processing failures on the organisation's systems generate alerts and trigger defined responses.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-04-5": {
+      "code": "PR.PS-04.5",
+      "section": "pr",
+      "control": "Enhanced audit logging capabilities",
+      "requirements": "PR.PS-04: Log records are generated and made available for continuous monitoring.\nThe organisation shall ensure that authorised personnel can extend or enhance audit logging and monitoring capabilities when needed to support investigations or incident response.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-05-1": {
+      "code": "PR.PS-05.1",
+      "section": "pr",
+      "control": "Web and email filtering",
+      "requirements": "PR.PS-05: Installation and execution of unauthorised software are prevented.\nWeb and e-mail filters shall be installed and used.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-05-2": {
+      "code": "PR.PS-05.2",
+      "section": "pr",
+      "control": "Unauthorised software execution prevention",
+      "requirements": "PR.PS-05: Installation and execution of unauthorised software are prevented.\nInstallation and execution of unauthorised software shall be prevented.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-06-1": {
+      "code": "PR.PS-06.1",
+      "section": "pr",
+      "control": "Secure system development lifecycle",
+      "requirements": "PR.PS-06: Secure software development practices are integrated, and their performance is monitored throughout the software development life cycle.\nSecurity shall be considered throughout the lifecycle of systems and applications, whether developed internally or acquired externally.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-06-2": {
+      "code": "PR.PS-06.2",
+      "section": "pr",
+      "control": "Change testing and validation",
+      "requirements": "PR.PS-06: Secure software development practices are integrated, and their performance is monitored throughout the software development life cycle.\nChanges and exceptions shall be tested and validated before being implemented into operational systems.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-06-3": {
+      "code": "PR.PS-06.3",
+      "section": "pr",
+      "control": "Secure software development practices",
+      "requirements": "PR.PS-06: Secure software development practices are integrated, and their performance is monitored throughout the software development life cycle.\nSecure software development practices shall be integrated into all phases of the software development lifecycle, and their effectiveness should be regularly monitored and improved.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ps-06-4": {
+      "code": "PR.PS-06.4",
+      "section": "pr",
+      "control": "Security impact analysis for changes",
+      "requirements": "PR.PS-06: Secure software development practices are integrated, and their performance is monitored throughout the software development life cycle.\nFor planned changes to the organisation's critical systems, a security impact analysis shall be performed in a separate test environment before implementation in an operational environment.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ir-01-1": {
+      "code": "PR.IR-01.1",
+      "section": "pr",
+      "control": "Firewall installation and configuration",
+      "requirements": "PR.IR-01: Networks and environments are protected from unauthorised logical access and usage.\nFirewalls shall be installed, configured, and actively maintained on all networks used by the organisation to protect against unauthorised  access and cyber threats.\nBasic - key measures · Important - key measures · Essential - key measures",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E",
+        "BK",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-pr-ir-01-2": {
+      "code": "PR.IR-01.2",
+      "section": "pr",
+      "control": "Network segmentation and segregation",
+      "requirements": "PR.IR-01: Networks and environments are protected from unauthorised logical access and usage.\nTo safeguard critical systems, organisations shall implement network segmentation and segregation aligned with trust boundaries and asset criticality, thereby limiting threat propagation and enforcing strict access control.\nBasic - key measures · Important - key measures · Essential - key measures",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E",
+        "BK",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-pr-ir-01-3": {
+      "code": "PR.IR-01.3",
+      "section": "pr",
+      "control": "Critical system connection control",
+      "requirements": "PR.IR-01: Networks and environments are protected from unauthorised logical access and usage.\nTo ensure operational stability and security, the organisation shall, without exception, identify, document, and control connections between components of its critical systems.\nImportant - key measures · Essential - key measures",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-pr-ir-01-4": {
+      "code": "PR.IR-01.4",
+      "section": "pr",
+      "control": "Boundary protection measures",
+      "requirements": "PR.IR-01: Networks and environments are protected from unauthorised logical access and usage.\nThe organisation shall implement appropriate boundary protection measures to monitor and control communications at external and key internal boundaries of its critical systems, across both IT and OT environments, to ensure secure and reliable operations.\nImportant - key measures · Essential - key measures",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-pr-ir-01-5": {
+      "code": "PR.IR-01.5",
+      "section": "pr",
+      "control": "Authenticated proxy and URL filtering",
+      "requirements": "PR.IR-01: Networks and environments are protected from unauthorised logical access and usage.\nThe organisation shall implement, where feasible, authenticated proxy servers or firewalls with URL filtering and threat intelligence capabilities for defined communications traffic between its critical systems and external networks.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ir-01-6": {
+      "code": "PR.IR-01.6",
+      "section": "pr",
+      "control": "Secure failure of boundary devices",
+      "requirements": "PR.IR-01: Networks and environments are protected from unauthorised logical access and usage.\nThe organisation shall ensure that its critical systems are designed to fail securely and remain protected in the event of an operational failure of a border protection device.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ir-01-7": {
+      "code": "PR.IR-01.7",
+      "section": "pr",
+      "control": "Environment separation (dev/test/prod)",
+      "requirements": "PR.IR-01: Networks and environments are protected from unauthorised logical access and usage.\nThe organisation shall ensure that development and test environments are strictly separated from the production environment, particularly in ICS/OT systems where any crossover could compromise safety, endanger health, or disrupt essential operations.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ir-01-8": {
+      "code": "PR.IR-01.8",
+      "section": "pr",
+      "control": "Information flow control",
+      "requirements": "PR.IR-01: Networks and environments are protected from unauthorised logical access and usage.\nThe organisation shall define, monitor, and control the flow of information and data within and between its critical systems to ensure that only authorised and secure exchanges occur, regardless of network boundaries or system architecture.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ir-01-9": {
+      "code": "PR.IR-01.9",
+      "section": "pr",
+      "control": "External telecommunications security",
+      "requirements": "PR.IR-01: Networks and environments are protected from unauthorised logical access and usage.\nThe organisation shall manage interfaces with external telecommunications services as part of its broader network security policy, by defining how traffic is controlled, ensuring the confidentiality and integrity of transmitted information, and reviewing and documenting any exceptions to established rules.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ir-02-1": {
+      "code": "PR.IR-02.1",
+      "section": "pr",
+      "control": "Environmental and safety controls",
+      "requirements": "PR.IR-02: The organisation's technology assets are protected from environmental threats.\nThe organisation shall define, implement and maintain policies and procedures related to emergency and safety systems, fire protection systems and environmental controls for its critical systems.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ir-02-2": {
+      "code": "PR.IR-02.2",
+      "section": "pr",
+      "control": "Fire detection and notification",
+      "requirements": "PR.IR-02: The organisation's technology assets are protected from environmental threats.\nThe organisation shall implement fire detection devices that activate and notify key personnel automatically in the event of a fire.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ir-03-1": {
+      "code": "PR.IR-03.1",
+      "section": "pr",
+      "control": "System resilience and recovery mechanisms",
+      "requirements": "PR.IR-03: Mechanisms are implemented to achieve resilience requirements in normal and adverse situations\nThe organisation shall implement mechanisms to ensure that critical systems and services remain operational or can be quickly restored during both normal operations and adverse conditions.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-pr-ir-04-1": {
+      "code": "PR.IR-04.1",
+      "section": "pr",
+      "control": "Resource capacity planning",
+      "requirements": "PR.IR-04: Adequate resource capacity to ensure availability is maintained.\nAdequate resource capacity planning shall ensure that availability of organisation's critical system information processing, networking, telecommunications, and data storage is maintained.\nImportant - management aspects · Essential - management aspects",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IG",
+        "EG"
+      ]
+    },
+    "ccb-cff-2025-de-cm-01-1": {
+      "code": "DE.CM-01.1",
+      "section": "de",
+      "control": "Network boundary firewall operation",
+      "requirements": "DE.CM-01: Networks and network services are monitored to find potentially adverse events.\nFirewalls shall be installed and operated at the network boundaries, including endpoint firewalls.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-cm-01-2": {
+      "code": "DE.CM-01.2",
+      "section": "de",
+      "control": "Anti-malware installation and updates",
+      "requirements": "DE.CM-01: Networks and network services are monitored to find potentially adverse events.\nAnti-virus, -spyware, and other -malware programs shall be installed and updated.\nBasic - key measures · Important - key measures · Essential - key measures",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E",
+        "BK",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-de-cm-01-3": {
+      "code": "DE.CM-01.3",
+      "section": "de",
+      "control": "Unauthorised system usage detection",
+      "requirements": "DE.CM-01: Networks and network services are monitored to find potentially adverse events.\nThe organisation shall monitor and identify unauthorised use of its business critical systems through the detection of unauthorised local connections, network connections and remote connections.\nImportant - key measures · Essential - key measures",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-de-cm-01-4": {
+      "code": "DE.CM-01.4",
+      "section": "de",
+      "control": "Continuous network threat monitoring",
+      "requirements": "DE.CM-01: Networks and network services are monitored to find potentially adverse events.\nThe organisation shall continuously monitor its network to spot signs of cyber threats or unusual activity, using clearly defined rules for what counts as a potential security incident.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-cm-02-1": {
+      "code": "DE.CM-02.1",
+      "section": "de",
+      "control": "Physical environment monitoring",
+      "requirements": "DE.CM-02: The physical environment is monitored to find potentially adverse events.\nThe physical environment shall be monitored to find potentially adverse events.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-cm-02-2": {
+      "code": "DE.CM-02.2",
+      "section": "de",
+      "control": "Physical intrusion detection for critical systems",
+      "requirements": "DE.CM-02: The physical environment is monitored to find potentially adverse events.\nPhysical access to the organisation's critical systems and devices, in addition to physical access monitoring to the facility, shall be supplemented by physical intrusion alarms, surveillance equipment, and independent monitoring teams.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-cm-03-1": {
+      "code": "DE.CM-03.1",
+      "section": "de",
+      "control": "Endpoint and network behaviour monitoring",
+      "requirements": "DE.CM-03: Personnel activity and technology usage are monitored to find potentially adverse events.\nEnd point and network protection tools to monitor end-user behaviour for dangerous activity shall be implemented.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-cm-03-2": {
+      "code": "DE.CM-03.2",
+      "section": "de",
+      "control": "Endpoint and network protection management",
+      "requirements": "DE.CM-03: Personnel activity and technology usage are monitored to find potentially adverse events.\nEnd point and network protection tools that monitor end-user behaviour for dangerous activity shall be managed.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-cm-06-1": {
+      "code": "DE.CM-06.1",
+      "section": "de",
+      "control": "External service provider monitoring",
+      "requirements": "DE.CM-06: External service provider activities and services are monitored to find potentially adverse events.\nExternal service provider activities and services shall be secured and monitored to find potentially adverse events.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-cm-06-2": {
+      "code": "DE.CM-06.2",
+      "section": "de",
+      "control": "External provider personnel security monitoring",
+      "requirements": "DE.CM-06: External service provider activities and services are monitored to find potentially adverse events.\nExternal service providers' conformance with personnel security policies and procedures and contract security requirements shall be monitored relative to their cybersecurity risks.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-cm-09-1": {
+      "code": "DE.CM-09.1",
+      "section": "de",
+      "control": "Computing environment adverse event detection",
+      "requirements": "DE.CM-09: Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events.\nThe organisation shall monitor computing hardware, software, runtime environments, and their data to detect potentially adverse events.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-cm-09-2": {
+      "code": "DE.CM-09.2",
+      "section": "de",
+      "control": "Hardware integrity tampering detection",
+      "requirements": "DE.CM-09: Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events.\nThe organisation shall implement hardware integrity checks to detect unauthorised tampering of critical system hardware. Controls shall be proportionate to the organisation’s risk profile and operational capacity.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-cm-09-3": {
+      "code": "DE.CM-09.3",
+      "section": "de",
+      "control": "Hardware tampering incident response",
+      "requirements": "DE.CM-09: Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events.\nThe organisation's incident response plan shall include measures to detect unauthorised tampering with the hardware of critical systems.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-cm-09-4": {
+      "code": "DE.CM-09.4",
+      "section": "de",
+      "control": "Alert accuracy and false positive management",
+      "requirements": "DE.CM-09: Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events.\nThe organisation shall establish a system to accurately distinguish between legitimate alerts and false positives, ensuring effective detection and removal of malicious code.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-ae-02-1": {
+      "code": "DE.AE-02.1",
+      "section": "de",
+      "control": "Security event analysis",
+      "requirements": "DE.AE-02: Potentially adverse events are analysed to better understand associated activities.\nCybersecurity and information security events shall be reviewed and analysed to identify potential attack targets and methods, in accordance with applicable laws, regulations, standards, and policies.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-ae-02-2": {
+      "code": "DE.AE-02.2",
+      "section": "de",
+      "control": "Automated event analysis",
+      "requirements": "DE.AE-02: Potentially adverse events are analysed to better understand associated activities.\nThe organisation shall implement automated mechanisms where feasible to review and analyse detected events.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-ae-03-1": {
+      "code": "DE.AE-03.1",
+      "section": "de",
+      "control": "Detection tool logging and review",
+      "requirements": "DE.AE-03: Information is correlated from multiple sources.\nThe logging functionality of protection and detection tools shall be enabled. Logs shall be backed up and retained for a predefined period and regularly reviewed to identify unusual or potentially harmful activity.\nBasic - key measures · Important - key measures · Essential - key measures",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E",
+        "BK",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-de-ae-03-2": {
+      "code": "DE.AE-03.2",
+      "section": "de",
+      "control": "Event data correlation from multiple sources",
+      "requirements": "DE.AE-03: Information is correlated from multiple sources.\nThe organisation shall ensure that event data from critical systems is collected and correlated using information from multiple relevant sources.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-ae-03-3": {
+      "code": "DE.AE-03.3",
+      "section": "de",
+      "control": "Event and vulnerability data correlation",
+      "requirements": "DE.AE-03: Information is correlated from multiple sources.\nThe organisation shall combine event analysis with information from vulnerability scans, system performance data, monitoring of critical systems, and facility monitoring, where feasible.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-ae-04-1": {
+      "code": "DE.AE-04.1",
+      "section": "de",
+      "control": "Adverse event impact assessment",
+      "requirements": "DE.AE-04: The estimated impact and scope of adverse events are understood\nThe organisation shall assess the negative impacts of detected events on its operations, assets, and individuals, and shall link these impacts to the results of its risk assessments.\nEssential - management aspects",
+      "implementation_groups": [
+        "E",
+        "EG"
+      ]
+    },
+    "ccb-cff-2025-de-ae-06-1": {
+      "code": "DE.AE-06.1",
+      "section": "de",
+      "control": "Adverse event notification",
+      "requirements": "DE.AE-06: Information on adverse events is provided to authorised staff and tools\nInformation about adverse events shall be promptly delivered to authorised personnel and systems to enable timely detection, investigation, and response.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-de-ae-08-1": {
+      "code": "DE.AE-08.1",
+      "section": "de",
+      "control": "Incident reporting criteria",
+      "requirements": "DE.AE-08: Incidents are declared when adverse events meet the defined incident criteria.\nIncidents shall be reported when adverse events meet defined and documented incident criteria.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rs-ma-01-1": {
+      "code": "RS.MA-01.1",
+      "section": "rs",
+      "control": "Incident response plan execution",
+      "requirements": "RS.MA-01: The incident response plan is executed in coordination with relevant third parties once an incident is declared.\nAn incident response plan, including defined roles, responsibilities, and authorities, shall be executed during or after a cybersecurity event affecting the organisation's critical systems.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rs-ma-01-2": {
+      "code": "RS.MA-01.2",
+      "section": "rs",
+      "control": "Incident response stakeholder coordination",
+      "requirements": "RS.MA-01: The incident response plan is executed in coordination with relevant third parties once an incident is declared.\nThe organisation shall coordinate information/cybersecurity incident response actions with all predefined stakeholders.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rs-ma-02-1": {
+      "code": "RS.MA-02.1",
+      "section": "rs",
+      "control": "Incident triage and validation",
+      "requirements": "RS.MA-02: Incident reports are triaged and validated.\nInformation/cybersecurity incident reports shall be triaged and validated in accordance with the organisation’s incident response procedures.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rs-ma-02-2": {
+      "code": "RS.MA-02.2",
+      "section": "rs",
+      "control": "Automated incident investigation tools",
+      "requirements": "RS.MA-02: Incident reports are triaged and validated.\nAutomated tools shall be used to support the investigation and impact assessment of validated cybersecurity incidents.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rs-ma-03-1": {
+      "code": "RS.MA-03.1",
+      "section": "rs",
+      "control": "Incident categorisation and escalation",
+      "requirements": "RS.MA-03: Incidents are categorised and prioritised.\nInformation/cybersecurity incidents shall be categorised, prioritised and escalated as determined in the incident response plan.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rs-ma-05-1": {
+      "code": "RS.MA-05.1",
+      "section": "rs",
+      "control": "Recovery initiation criteria",
+      "requirements": "RS.MA-05: The criteria for initiating incident recovery are applied.\nClear criteria shall be defined and applied to determine when incident recovery processes need to be initiated.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rs-an-03-1": {
+      "code": "RS.AN-03.1",
+      "section": "rs",
+      "control": "Incident root cause analysis",
+      "requirements": "RS.AN-03: Analysis is performed to establish what has taken place during an incident and the root cause of the incident\nEach incident shall be analysed to determine what occurred and to identify its\nroot cause.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rs-an-06-1": {
+      "code": "RS.AN-06.1",
+      "section": "rs",
+      "control": "Investigation record integrity",
+      "requirements": "RS.AN-06: Actions performed during an investigation are recorded, and the records’ integrity and provenance are preserved\nActions performed during an investigation shall be recorded, and the records' integrity and provenance shall be preserved.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rs-an-07-1": {
+      "code": "RS.AN-07.1",
+      "section": "rs",
+      "control": "Incident data collection and protection",
+      "requirements": "RS.AN-07: Incident data and metadata are collected, and their integrity and provenance are preserved\nIncident data and metadata shall be collected and protected to ensure their accuracy, authenticity, and traceability.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rs-an-08-1": {
+      "code": "RS.AN-08.1",
+      "section": "rs",
+      "control": "Incident magnitude estimation",
+      "requirements": "RS.AN-08: An incident's magnitude is estimated and validated\nAn incident’s magnitude shall be estimated and validated.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rs-co-02-1": {
+      "code": "RS.CO-02.1",
+      "section": "rs",
+      "control": "Internal incident communication",
+      "requirements": "RS.CO-02: Internal and external stakeholders are notified of incidents.\nInformation about cybersecurity incidents shall be communicated to employees in a way that is clear and easy to understand.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rs-co-02-2": {
+      "code": "RS.CO-02.2",
+      "section": "rs",
+      "control": "External incident reporting",
+      "requirements": "RS.CO-02: Internal and external stakeholders are notified of incidents.\nCybersecurity incidents shall be shared with relevant external stakeholders within the timeframes defined in the Incident Response Plan, including reporting significant incidents to authorities as required by law.\nImportant - key measures · Essential - key measures",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-rs-mi-01-1": {
+      "code": "RS.MI-01.1",
+      "section": "rs",
+      "control": "Incident containment and elimination",
+      "requirements": "RS.MI-01: Incidents are contained.\nCybersecurity incidents shall be contained and eliminated. Any decision to accept and retain certain cybersecurity risks shall be formally documented.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rs-mi-01-2": {
+      "code": "RS.MI-01.2",
+      "section": "rs",
+      "control": "Unauthorised access and data leakage mitigation",
+      "requirements": "RS.MI-01: Incidents are contained.\nThe organisation shall detect unauthorised access or data leakage and take appropriate mitigation actions, including monitoring of critical systems at external boundaries and key internal points.\nImportant - key measures · Essential - key measures",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IK",
+        "EK"
+      ]
+    },
+    "ccb-cff-2025-rc-rp-01-1": {
+      "code": "RC.RP-01.1",
+      "section": "rc",
+      "control": "Recovery process execution",
+      "requirements": "RC.RP-01: The recovery portion of the incident response plan is executed once initiated from the incident response process.\nA recovery process for disasters and information/cybersecurity incidents shall be developed and executed.\nBasic · Important · Essential",
+      "implementation_groups": [
+        "B",
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rc-rp-02-1": {
+      "code": "RC.RP-02.1",
+      "section": "rc",
+      "control": "Operational continuity maintenance",
+      "requirements": "RC.RP-02: Recovery actions are selected, scoped, prioritised, and performed\nThe organisation's essential functions and services shall be continued with little or no loss of operational continuity, and continuity shall be maintained until full system recovery.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rc-rp-05-1": {
+      "code": "RC.RP-05.1",
+      "section": "rc",
+      "control": "Restored system integrity verification",
+      "requirements": "RC.RP-05: The integrity of restored assets is verified, systems and services are restored, and normal operating status is confirmed.\nThe integrity of restored systems and assets shall be verified before they are returned to service. Systems and services shall be fully restored, and normal operations shall be confirmed.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rc-rp-06-1": {
+      "code": "RC.RP-06.1",
+      "section": "rc",
+      "control": "Incident recovery closure",
+      "requirements": "RC.RP-06: The end of incident recovery is declared based on criteria, and incident-related documentation is completed.\nThe end of incident recovery shall be formally declared based on predefined criteria, and all incident-related documentation shall be completed and reviewed.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rc-co-03-1": {
+      "code": "RC.CO-03.1",
+      "section": "rc",
+      "control": "Recovery progress communication",
+      "requirements": "RC.CO-03: Recovery activities and progress in restoring operational capabilities are communicated to designated internal and external stakeholders.\nRecovery activities and progress in restoring operational capabilities shall be communicated to designated internal and external stakeholders in accordance with established communication procedures.\nImportant - management aspects · Essential - management aspects",
+      "implementation_groups": [
+        "I",
+        "E",
+        "IG",
+        "EG"
+      ]
+    },
+    "ccb-cff-2025-rc-co-04-1": {
+      "code": "RC.CO-04.1",
+      "section": "rc",
+      "control": "Public incident recovery updates",
+      "requirements": "RC.CO-04: Public updates on incident recovery are shared using approved methods and messaging.\nPublic updates on incident recovery shall be shared using approved communication methods and messaging, in accordance with established procedures.\nImportant · Essential",
+      "implementation_groups": [
+        "I",
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rc-co-04-2": {
+      "code": "RC.CO-04.2",
+      "section": "rc",
+      "control": "Public relations officer for incident recovery",
+      "requirements": "RC.CO-04: Public updates on incident recovery are shared using approved methods and messaging.\nThe organisation shall assign a Public Relations Officer (PRO) to manage public communications during information/cybersecurity incident recovery, ensuring that public updates are shared while maintaining the confidentiality, integrity, and accuracy of the information.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    },
+    "ccb-cff-2025-rc-co-04-3": {
+      "code": "RC.CO-04.3",
+      "section": "rc",
+      "control": "Crisis communication strategy",
+      "requirements": "RC.CO-04: Public updates on incident recovery are shared using approved methods and messaging.\nThe organisation shall implement a crisis communication strategy to mitigate negative impacts during a crisis and help restore its reputation afterward.\nEssential",
+      "implementation_groups": [
+        "E"
+      ]
+    }
+  }
+}

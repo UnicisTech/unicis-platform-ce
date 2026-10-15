@@ -5,6 +5,7 @@ import type { ISO } from 'types';
 export const FRAMEWORKS_WITH_GUIDANCE: ISO[] = [
   'eunis2_2024_2690',
   'ccb_cff_2023',
+  'ccb_cff_2025',
 ];
 
 export interface ControlGuidance {
