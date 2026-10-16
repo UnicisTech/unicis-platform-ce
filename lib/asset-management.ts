@@ -8,3 +8,13 @@ export const hasAssetManagementPlan = (subscription?: Subscription | null) => {
     env.assetRequiredPlan
   );
 };
+
+/** Asset Management settings (tags, queries, packs, distributors) are not available to auditors. */
+export const isTeamAuditor = async (teamId: string, userId: string) => {
+  const { prisma } = await import('@/lib/prisma');
+  const member = await prisma.teamMember.findFirst({
+    where: { teamId, userId },
+    select: { role: true },
+  });
+  return member?.role === 'AUDITOR';
+};

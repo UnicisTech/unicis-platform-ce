@@ -15,6 +15,35 @@ tags:
 
 The information about Unicis Platform releases and changes is listed in order below.
 
+## [CyFun 2025, Auditor Access + Security & Dependency Updates] 2026-10-16
+
+*Release date: 2026-10-16*
+
+*Version: v2026-10-16*
+
+- Compliance Frameworks
+  - Added CCB CyberFundamentals (CyFun) 2025 in English and French, alongside the existing CyFun 2023 framework
+  - Added control guidance and cross-framework mappings for CyFun 2025, using NIST CSF 2.0 as the mapping pivot
+  - Registered CyFun 2025 in subscription plans, the MCP server, and the OpenAPI specification
+  - Unified framework names as EU NIS2 IR, CyFun 2023, and CyFun 2025; added missing task-page translation namespaces
+- Auditor Access
+  - Added read-only access to Cybersecurity Management System controls, related control mappings, and linked tasks
+  - Added read-only access to Risk Management, including risk exports
+  - Auditors can now browse enrolled assets without add, delete, or log-deletion actions
+  - Restricted Asset Management configuration pages for auditors and disabled team, framework, member, and Fleet enrollment changes where permissions do not allow them
+  - CSC status updates now require task-update permission at the API level
+- Fixes
+  - Fixed activity-log validation for session users whose actor records do not include API-key roles
+  - Activity timelines now retain valid entries when individual log entries fail validation, instead of rejecting the entire log array
+  - Profile headers now show the user's name, password and Fleet settings use consistent profile titles, and the duplicate account-page heading was removed
+  - CSC linked tasks now display compact task-number links with task titles available on hover
+- Security & Dependency Updates
+  - Updated application and MCP server dependencies, including Next.js 16.3.8, Prisma 7.10.1, Axios, Sharp, SAML libraries, Hono, Babel, and fflate
+  - Removed the bundled npm application dependency and replaced middleware route matching with picomatch
+  - Upgraded daisyUI to 5.7.38 and Jest to 30.5.2
+  - Added regression tests for middleware route handling and activity-log validation
+  - Regenerated SPDX and CycloneDX SBOMs from both project lockfiles, including development dependencies
+
 ## [Fleet Security Fixes + New Compliance Frameworks] 2026-10-09
 
 *Release date: 2026-10-09*

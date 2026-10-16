@@ -17,7 +17,7 @@ const Account: NextPageWithLayout<AccountProps> = ({
 }) => {
   return (
     <>
-      <AccountTab activeTab="account" user={user} />
+      <AccountTab activeTab="account" user={user} showHeading={false} />
       <UpdateAccount user={user} allowEmailChange={allowEmailChange} />
     </>
   );

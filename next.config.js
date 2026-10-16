@@ -20,7 +20,6 @@ const nextConfig = {
     '/api/**': ['./node_modules/openid-client/**', './node_modules/jose/**'],
   },
   images: {
-    domains: ['platform.unicis.tech'],
     unoptimized: true,
   },
   i18n, // Localization settings

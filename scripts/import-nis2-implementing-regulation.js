@@ -266,7 +266,7 @@ for (const file of [arg('iso27001'), arg('nist')]) {
 
 const { mapped } = mergeFrameworkMappings({
   isoKey: ISO_KEY,
-  title: 'EU NIS2 Implementing Regulation 2024/2690',
+  title: 'EU NIS2 IR',
   controlIds: controls.map(controlId),
   direct,
 });

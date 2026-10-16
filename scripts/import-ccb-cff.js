@@ -244,7 +244,7 @@ for (const file of [arg('iso27001'), arg('nis2')]) {
 
 const { mapped } = mergeFrameworkMappings({
   isoKey: ISO_KEY,
-  title: 'CCB CyberFundamentals 2023-03-01',
+  title: 'CyFun 2023',
   controlIds: controls.map(controlId),
   direct,
 });

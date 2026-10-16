@@ -1,7 +1,7 @@
-import micromatch from 'micromatch';
 import { getToken } from 'next-auth/jwt';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import picomatch from 'picomatch/posix';
 
 // Add routes that don't require authentication
 const unAuthenticatedRoutes = [
@@ -17,9 +17,12 @@ const unAuthenticatedRoutes = [
 ];
 
 const ulimitedPlanRoutes = [
-  '/teams/:slug/asset/**',
-  '/teams/:slug/asset-management/**',
+  '/teams/*/asset/**',
+  '/teams/*/asset-management/**',
 ];
+
+const isUnauthenticatedRoute = picomatch(unAuthenticatedRoutes);
+const isUnlimitedPlanRoute = picomatch(ulimitedPlanRoutes);
 
 const getInternalAppOrigin = (req: NextRequest) => {
   const configuredOrigin = process.env.NEXT_INTERNAL_APP_URL?.trim();
@@ -37,12 +40,9 @@ const getInternalAppOrigin = (req: NextRequest) => {
 
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const patterns = ulimitedPlanRoutes.map((route) =>
-    route.replace(':slug', '*')
-  );
 
   // Bypass routes that don't require authentication
-  if (micromatch.isMatch(pathname, unAuthenticatedRoutes)) {
+  if (isUnauthenticatedRoute(pathname)) {
     return NextResponse.next();
   }
 
@@ -58,7 +58,7 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  if (micromatch.isMatch(pathname, patterns)) {
+  if (isUnlimitedPlanRoute(pathname)) {
     const slugMatch = pathname.match(
       /\/teams\/([^/]+)\/(asset|asset-management)/
     );

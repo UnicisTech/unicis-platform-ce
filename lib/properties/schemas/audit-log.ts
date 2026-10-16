@@ -9,12 +9,15 @@ const auditActorSchema = z
     name: z.string().nullable().optional(),
     email: z.string().nullable().optional(),
     image: z.string().nullable().optional(),
-    roles: z.array(
-      z.object({
-        teamId: z.string(),
-        role: z.nativeEnum(Role),
-      })
-    ),
+    // Session users have no roles; API key actors include them.
+    roles: z
+      .array(
+        z.object({
+          teamId: z.string(),
+          role: z.nativeEnum(Role),
+        })
+      )
+      .optional(),
   })
   .passthrough();
 

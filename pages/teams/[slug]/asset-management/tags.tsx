@@ -10,7 +10,7 @@ import Tags from '@/components/interfaces/AssetManagement/Tag/Tags';
 import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import { TeamTab } from '@/components/team';
 import FleetConnectRequired from '@/components/interfaces/AssetManagement/FleetConnectRequired';
-import { hasAssetManagementPlan } from '@/lib/asset-management';
+import { hasAssetManagementPlan, isTeamAuditor } from '@/lib/asset-management';
 
 const AllTags: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -46,6 +46,12 @@ export const getServerSideProps = async (
   }
 
   if (!hasAssetManagementPlan(team.subscription)) {
+    return {
+      notFound: true,
+    };
+  }
+
+  if (await isTeamAuditor(team.id, user.id)) {
     return {
       notFound: true,
     };

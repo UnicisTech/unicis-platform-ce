@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import useCanAccess from 'hooks/useCanAccess';
 import type { User } from '@/generated/client';
 import { useResults } from '@/hooks/fleets/results/useResults';
 import { useDeleteAssetResultLog } from '@/hooks/fleets/Nodes/useDeleteResult';
@@ -36,6 +38,8 @@ const ResultLogs = ({
     offset: 0,
   });
   const deleteLog = useDeleteAssetResultLog();
+  const { slug } = useRouter().query as { slug: string };
+  const canDelete = useCanAccess(slug).canAccess('team_fleet_node', ['delete']);
 
   const { results, total, isLoading, isError, mutate } = useResults(
     fleetTeamId,
@@ -167,22 +171,26 @@ const ResultLogs = ({
                       </span>
                     </div>
 
-                    <Button
-                      type="button"
-                      size="icon"
-                      variant="ghost"
-                      onClick={(event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        void handleDeleteResult(result.id);
-                      }}
-                      disabled={deletingId === result.id}
-                      className="h-8 w-8 justify-self-end text-destructive hover:bg-destructive/10 hover:text-destructive"
-                      title={t('delete-result')}
-                      aria-label={t('delete-result')}
-                    >
-                      <Trash2 className="h-4 w-4" aria-hidden="true" />
-                    </Button>
+                    {canDelete ? (
+                      <Button
+                        type="button"
+                        size="icon"
+                        variant="ghost"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          void handleDeleteResult(result.id);
+                        }}
+                        disabled={deletingId === result.id}
+                        className="h-8 w-8 justify-self-end text-destructive hover:bg-destructive/10 hover:text-destructive"
+                        title={t('delete-result')}
+                        aria-label={t('delete-result')}
+                      >
+                        <Trash2 className="h-4 w-4" aria-hidden="true" />
+                      </Button>
+                    ) : (
+                      <span className="w-8" aria-hidden="true" />
+                    )}
                   </summary>
 
                   <div className="border-t border-slate-100 bg-white/70 px-4 py-4 dark:border-slate-700 dark:bg-slate-800/40 sm:pl-11">

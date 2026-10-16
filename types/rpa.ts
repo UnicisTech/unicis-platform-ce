@@ -1,7 +1,6 @@
 import type { Dispatch, SetStateAction } from 'react';
 import type { Task } from './dto';
-import type { Session } from 'next-auth';
-import type { Diff, Option } from './base';
+import type { AuditActor, Diff, Option } from './base';
 
 export type RpaProcedureInterface = [
   {
@@ -71,7 +70,7 @@ export interface RpaConfig {
 
 //TODO: RpaAuditLog and TiaAuditLog, use AuditLog from base.ts instead
 export type RpaAuditLog = {
-  actor: Session['user'];
+  actor: AuditActor;
   date: number;
   event: string;
   diff: Diff;

@@ -1,6 +1,5 @@
 import type { Task } from './dto';
-import type { Session } from 'next-auth';
-import type { Diff } from './base';
+import type { AuditActor, Diff } from './base';
 
 type R_Yes_No = 'yes' | 'no';
 
@@ -22,7 +21,7 @@ export type TiaOption = {
 
 //TODO: RpaAuditLog and TiaAuditLog, use AuditLog from base.ts instead
 export type TiaAuditLog = {
-  actor: Session['user'];
+  actor: AuditActor;
   date: number;
   event: string;
   diff: Diff;

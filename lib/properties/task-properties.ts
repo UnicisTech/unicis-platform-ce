@@ -1,5 +1,6 @@
 import { ISO_VALUES } from 'types/csc';
 import type { TaskProperties } from 'types/base';
+import type { ZodTypeAny } from 'zod';
 import { asJsonObject, isJsonObject } from './json';
 import {
   auditLogSchema,
@@ -21,14 +22,52 @@ const knownTaskPropertySchemas = {
   tia_procedure: tiaProcedureSchema,
   pia_risk: piaRiskSchema,
   rm_risk: rmRiskSchema,
-  task_audit_logs: auditLogSchema.array(),
-  rpa_audit_logs: auditLogSchema.array(),
-  tia_audit_logs: auditLogSchema.array(),
-  pia_audit_logs: auditLogSchema.array(),
-  rm_audit_logs: auditLogSchema.array(),
-  csc_audit_logs: cscAuditLogSchema.array(),
   csc_controls: cscControlsSchema,
 } as const;
+
+const auditLogPropertySchemas = {
+  task_audit_logs: auditLogSchema,
+  rpa_audit_logs: auditLogSchema,
+  tia_audit_logs: auditLogSchema,
+  pia_audit_logs: auditLogSchema,
+  rm_audit_logs: auditLogSchema,
+  csc_audit_logs: cscAuditLogSchema,
+} as const;
+
+const parseAuditLogProperty = (
+  property: string,
+  schema: ZodTypeAny,
+  raw: ReturnType<typeof asJsonObject>,
+  parsed: ReturnType<typeof asJsonObject>,
+  issues: PropertyValidationIssue[]
+) => {
+  const value = raw[property];
+  if (typeof value === 'undefined') return;
+
+  if (!Array.isArray(value)) {
+    parseKnownProperty({
+      property,
+      schema: schema.array(),
+      raw,
+      parsed,
+      issues,
+    });
+    return;
+  }
+
+  parsed[property] = value.flatMap((log, index) => {
+    const result = schema.safeParse(log);
+    if (result.success) return [result.data];
+
+    issues.push(
+      ...result.error.issues.map((issue) => ({
+        path: [property, index, ...issue.path],
+        message: issue.message,
+      }))
+    );
+    return [];
+  });
+};
 
 const cscControlProperties = ISO_VALUES.map(
   (iso) => `csc_controls_${iso}` as const
@@ -50,6 +89,10 @@ export const parseTaskProperties = (
 
   for (const [property, schema] of Object.entries(knownTaskPropertySchemas)) {
     parseKnownProperty({ property, schema, raw, parsed, issues });
+  }
+
+  for (const [property, schema] of Object.entries(auditLogPropertySchemas)) {
+    parseAuditLogProperty(property, schema, raw, parsed, issues);
   }
 
   for (const property of cscControlProperties) {

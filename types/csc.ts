@@ -1,5 +1,5 @@
 import { CscStatus } from '@/lib/csc/csc-statuses';
-import type { Session } from 'next-auth';
+import type { AuditActor } from './base';
 
 export interface FrameworkSection {
   id: string;
@@ -22,7 +22,7 @@ export type CscOption = {
 };
 
 export type CscAuditLog = {
-  actor: Session['user'];
+  actor: AuditActor;
   date: number;
   event: string;
   diff: {
@@ -65,6 +65,7 @@ export const ISO_VALUES = [
   'eunis2',
   'eunis2_2024_2690',
   'ccb_cff_2023',
+  'ccb_cff_2025',
   'gdpr',
   'cisv81',
   'soc2v2',

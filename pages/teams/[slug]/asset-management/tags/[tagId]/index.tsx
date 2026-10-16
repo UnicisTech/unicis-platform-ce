@@ -8,7 +8,7 @@ import env from '@/lib/env';
 import TagsTab from '@/components/interfaces/AssetManagement/Tag/TagsTab';
 import TagDetails from '@/components/interfaces/AssetManagement/Tag/TagDetails';
 import { getTeam } from '@/models/team';
-import { hasAssetManagementPlan } from '@/lib/asset-management';
+import { hasAssetManagementPlan, isTeamAuditor } from '@/lib/asset-management';
 import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import { TeamTab } from '@/components/team';
 import FleetConnectRequired from '@/components/interfaces/AssetManagement/FleetConnectRequired';
@@ -66,6 +66,12 @@ export const getServerSideProps = async (
   const team = await getTeam({ slug });
 
   if (!hasAssetManagementPlan(team.subscription)) {
+    return {
+      notFound: true,
+    };
+  }
+
+  if (await isTeamAuditor(team.id, user.id)) {
     return {
       notFound: true,
     };
