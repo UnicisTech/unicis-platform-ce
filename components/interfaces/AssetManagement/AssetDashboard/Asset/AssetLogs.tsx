@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import useCanAccess from 'hooks/useCanAccess';
 import { Error, Loading } from '@/components/shared';
 import type { User } from '@/generated/client';
 // import { IssuePanelContainer } from '@/sharedStyles';
@@ -15,6 +17,8 @@ const AssetLogs = ({
   user: Partial<User>;
   nodeID: string;
 }) => {
+  const { slug } = useRouter().query as { slug: string };
+  const { canAccess } = useCanAccess(slug);
   const [, setStatusToDelete] = useState<string>();
   const deleteLog = useDeleteAssetLog();
 
@@ -45,7 +49,11 @@ const AssetLogs = ({
     // <IssuePanelContainer>
     <TableBuilder
       data={logs?.status_logs ?? []}
-      onDelete={handleDeleteStatus}
+      onDelete={
+        canAccess('team_fleet_node', ['delete'])
+          ? handleDeleteStatus
+          : undefined
+      }
     />
     // </IssuePanelContainer>
   );

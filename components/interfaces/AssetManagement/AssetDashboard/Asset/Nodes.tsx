@@ -46,12 +46,15 @@ const getNodeSearchText = (node: Node) =>
 const Nodes = ({
   team,
   user,
+  readOnly = false,
   nodes,
   setStatus,
   status,
 }: {
   team: Team;
   user: Partial<User>;
+  /** Hide add/delete actions (auditor role) */
+  readOnly?: boolean;
   nodes: Node[];
   setStatus: (status: string) => void;
   status: string;
@@ -140,7 +143,7 @@ const Nodes = ({
                 ) : null
               )}
 
-              {canAccess('team_fleet_node', ['read']) && (
+              {!readOnly && canAccess('team_fleet_node', ['read']) && (
                 <Button
                   variant="default"
                   size="sm"

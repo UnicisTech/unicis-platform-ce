@@ -19,12 +19,15 @@ const TasksList = ({
   const { slug } = router.query;
 
   return (
-    <div className="flex flex-col">
-      {selectedTasks.map((task, index) => (
-        <Link key={index} href={`/teams/${slug}/tasks/${task.taskNumber}`}>
-          <div className="flex items-center justify-start space-x-2">
-            <span className="underline">{task.title}</span>
-          </div>
+    <div className="flex flex-wrap gap-x-3 gap-y-1">
+      {selectedTasks.map((task) => (
+        <Link
+          key={task.taskNumber}
+          href={`/teams/${slug}/tasks/${task.taskNumber}`}
+          title={task.title}
+          className="underline whitespace-nowrap"
+        >
+          #{task.taskNumber}
         </Link>
       ))}
     </div>

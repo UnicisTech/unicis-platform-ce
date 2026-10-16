@@ -9,7 +9,7 @@ import env from '@/lib/env';
 import DistributorsDetails from '@/components/interfaces/AssetManagement/Distributor/DistributorDetails';
 import DistributorsResults from '@/components/interfaces/AssetManagement/Distributor/DistributorResults';
 import { getTeam } from '@/models/team';
-import { hasAssetManagementPlan } from '@/lib/asset-management';
+import { hasAssetManagementPlan, isTeamAuditor } from '@/lib/asset-management';
 import AssetTab from '@/components/interfaces/AssetManagement/AssetTab';
 import { TeamTab } from '@/components/team';
 import FleetConnectRequired from '@/components/interfaces/AssetManagement/FleetConnectRequired';
@@ -84,6 +84,12 @@ export const getServerSideProps = async (
   const team = await getTeam({ slug });
 
   if (!hasAssetManagementPlan(team.subscription)) {
+    return {
+      notFound: true,
+    };
+  }
+
+  if (await isTeamAuditor(team.id, user.id)) {
     return {
       notFound: true,
     };

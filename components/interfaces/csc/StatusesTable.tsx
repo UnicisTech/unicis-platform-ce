@@ -10,7 +10,8 @@ import useCanAccess from 'hooks/useCanAccess';
 import { ISO } from 'types';
 import TasksList from './TasksList';
 import PaginationControls from '@/components/shadcn/ui/audit-pagination';
-import { CscStatus } from '@/lib/csc/csc-statuses';
+import { CscStatus, CSC_STATUS_TO_CSS } from '@/lib/csc/csc-statuses';
+import { cn } from '@/components/shadcn/lib/utils';
 import frameworks from '@/lib/csc/frameworks';
 import ControlCodeLink from './ControlCodeLink';
 import ControlMappingDrawer from './ControlMappingDrawer';
@@ -71,6 +72,7 @@ const StatusesTable = ({
 }) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess(slug);
+  const canEdit = canAccess('task', ['update']);
 
   // ── Mapping drawer state ───────────────────────────────────
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -261,16 +263,18 @@ const StatusesTable = ({
                   scope="col"
                   className="px-3 py-2 text-left text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide w-12"
                 >
-                  <input
-                    type="checkbox"
-                    checked={
-                      selectedIds.size === pageData.length &&
-                      pageData.length > 0
-                    }
-                    onChange={toggleAll}
-                    aria-label="Select all controls on this page"
-                    className="w-4 h-4"
-                  />
+                  {canEdit && (
+                    <input
+                      type="checkbox"
+                      checked={
+                        selectedIds.size === pageData.length &&
+                        pageData.length > 0
+                      }
+                      onChange={toggleAll}
+                      aria-label="Select all controls on this page"
+                      className="w-4 h-4"
+                    />
+                  )}
                 </th>
                 <th
                   scope="col"
@@ -323,13 +327,15 @@ const StatusesTable = ({
                   <tr key={control.id}>
                     {/* Selection checkbox */}
                     <td className="px-3 py-2 w-12">
-                      <input
-                        type="checkbox"
-                        checked={selectedIds.has(control.id)}
-                        onChange={() => toggleSelect(control.id)}
-                        aria-label={`Select ${code}`}
-                        className="w-4 h-4"
-                      />
+                      {canEdit && (
+                        <input
+                          type="checkbox"
+                          checked={selectedIds.has(control.id)}
+                          onChange={() => toggleSelect(control.id)}
+                          aria-label={`Select ${code}`}
+                          className="w-4 h-4"
+                        />
+                      )}
                     </td>
                     {/* Clickable control code — opens mapping drawer */}
                     <td className="px-3 py-2">
@@ -349,7 +355,7 @@ const StatusesTable = ({
                       </span>
                     </td>
                     <td className="px-3 py-2">
-                      {canAccess('task', ['update']) ? (
+                      {canEdit ? (
                         <div className="w-40">
                           <StatusSelector
                             key={`${control.id}:${statuses[control.id]}`}
@@ -366,13 +372,22 @@ const StatusesTable = ({
                           />
                         </div>
                       ) : (
-                        <span className="whitespace-pre-line">
-                          {statuses[control.id]}
+                        <span
+                          className={cn(
+                            'inline-flex h-10 w-40 items-center rounded-md border border-input px-3 text-sm font-bold',
+                            CSC_STATUS_TO_CSS[
+                              (statuses[control.id] ?? 'unknown') as CscStatus
+                            ]
+                          )}
+                        >
+                          {t(
+                            `statuses.${statuses[control.id] ?? 'unknown'}.label`
+                          )}
                         </span>
                       )}
                     </td>
                     <td className="px-3 py-2 max-w-80">
-                      {canAccess('task', ['update']) ? (
+                      {canEdit ? (
                         <TaskSelector
                           tasks={tasks}
                           control={control.id}
@@ -401,7 +416,7 @@ const StatusesTable = ({
       </div>
 
       {/* Bulk action bar — shown when rows are selected */}
-      {selectedIds.size > 0 && (
+      {canEdit && selectedIds.size > 0 && (
         <BulkActionBar
           selectedCount={selectedIds.size}
           step={activeBulkActionStep}
@@ -506,6 +521,7 @@ const StatusesTable = ({
           tasks={tasks}
           onLinkTask={onLinkTask}
           onBulkLinkMapped={onBulkLinkMapped}
+          readOnly={!canEdit}
         />
       )}
     </>

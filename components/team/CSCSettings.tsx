@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
+import useCanAccess from 'hooks/useCanAccess';
 import type { Subscription, TeamWithSubscriptionDto } from 'types';
 import useSubscription, { subscriptionParams } from 'hooks/useSubscription';
 import { Label } from '@/components/shadcn/ui/label';
@@ -23,6 +24,7 @@ interface CSCSettingsProps {
 
 const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
   const { t } = useTranslation('common');
+  const canUpdate = useCanAccess(team.slug).canAccess('team', ['update']);
   const { avaliableISO } = useSubscription(team.subscription as Subscription);
   const enabledFrameworks = getTeamCscIso(team.properties);
 
@@ -96,13 +98,17 @@ const CSCSettings: React.FC<CSCSettingsProps> = ({ team }) => {
                   formik.setFieldTouched('iso', true, false);
                 }}
                 defaultValue={enabledFrameworks}
+                disabled={!canUpdate}
               />
             </div>
             <div className="items-center pt-0 flex justify-end">
               <Button
                 type="submit"
                 disabled={
-                  !formik.isValid || !formik.dirty || formik.isSubmitting
+                  !canUpdate ||
+                  !formik.isValid ||
+                  !formik.dirty ||
+                  formik.isSubmitting
                 }
               >
                 {formik.isSubmitting && <Loader2 className="animate-spin" />}
