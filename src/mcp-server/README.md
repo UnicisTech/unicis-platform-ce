@@ -122,8 +122,9 @@ The CSC module maps tasks to controls across major security frameworks. Statuses
 | `mvsp`             | MVSP                                      |
 | `nistcsfv2`        | NIST CSF v2                               |
 | `eunis2`           | EU NIS2                                   |
-| `eunis2_2024_2690` | EU NIS2 IR |
+| `eunis2_2024_2690` | EU NIS2 IR                                |
 | `ccb_cff_2023`     | CyFun 2023                                |
+| `ccb_cff_2025`     | CyFun 2025                                |
 | `gdpr`             | GDPR                                      |
 | `cisv81`           | CIS CSC v8.1                              |
 | `soc2v2`           | SOC2 v2                                   |

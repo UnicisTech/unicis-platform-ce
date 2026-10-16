@@ -6,6 +6,7 @@ import nist_csf_v2 from './nist_csf_v2';
 import eu_nis2 from './eu_nis2';
 import eu_nis2_2024_2690 from './eu_nis2_2024_2690';
 import ccb_cff_2023 from './ccb_cff_2023';
+import ccb_cff_2025 from './ccb_cff_2025';
 import gdpr from './gdpr';
 import cis_v_81 from './cis_v_81';
 import soc2V2 from './soc2-v2';
@@ -23,6 +24,7 @@ const frameworks = {
   eunis2: eu_nis2,
   eunis2_2024_2690: eu_nis2_2024_2690,
   ccb_cff_2023: ccb_cff_2023,
+  ccb_cff_2025: ccb_cff_2025,
   gdpr: gdpr,
   cisv81: cis_v_81,
   soc2v2: soc2V2,
