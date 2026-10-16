@@ -44,6 +44,8 @@ function useModuleTitle(): ModuleTitle {
   const { teamCourses } = useIap(false, slug);
   const { iso } = useCscIso(slug);
   const { team } = useTeam(slug);
+  const { data: session } = useSession();
+  const userName = session?.user?.name;
   const fleetTeamId = team?.id ?? '';
   const nodeId = typeof query.nodeId === 'string' ? query.nodeId : '';
   const queryId = typeof query.queryId === 'string' ? query.queryId : '';
@@ -108,14 +110,18 @@ function useModuleTitle(): ModuleTitle {
     // Global / account routes (no team slug)
     const path = asPath.split('?')[0];
     if (path === '/teams') return { title: t('all-teams'), count: 0 };
-    if (path === '/settings/account') return { title: t('profile'), count: 0 };
+    if (path === '/settings/account')
+      return {
+        title: userName ? `${t('profile')}: ${userName}` : t('profile'),
+        count: 0,
+      };
     if (path === '/settings/fleet')
       return {
-        title: t('fleet:fleet-settings', { defaultValue: 'Fleet Settings' }),
+        title: `${t('profile')}: ${t('fleet:fleet-settings', { defaultValue: 'Fleet Settings' })}`,
         count: 0,
       };
     if (path === '/settings/password')
-      return { title: t('password'), count: 0 };
+      return { title: `${t('profile')}: ${t('password')}`, count: 0 };
     if (path === '/notifications')
       return { title: t('notifications.title'), count: 0 };
     if (path === '/notifications/settings')
@@ -256,6 +262,7 @@ function useModuleTitle(): ModuleTitle {
     tag?.value,
     tagId,
     team?.name,
+    userName,
     t,
   ]);
 }
