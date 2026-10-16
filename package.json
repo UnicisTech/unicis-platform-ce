@@ -192,16 +192,17 @@
     "ws": "^8.21.0",
     "form-data": "^4.0.6",
     "protobufjs": "^7.6.1",
-    "hono": "^4.12.25",
+    "hono": "^4.13.13",
     "@grpc/grpc-js": "^1.14.5",
     "i18next-fs-backend": "^2.6.6",
     "@types/react": "18.3.12",
     "@boxyhq/saml-jackson": {
       "@boxyhq/saml20": "1.22.0"
     },
-    "@hono/node-server": "1.19.14",
+    "@hono/node-server": "1.19.15",
     "quill": "2.0.2",
-    "@babel/core": "^7.24.0",
+    "@babel/core": "7.29.6",
+    "fflate": "^0.8.3",
     "@azure/msal-node": "3.8.8"
   }
 }
