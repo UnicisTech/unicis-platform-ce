@@ -15,6 +15,17 @@ tags:
 
 The information about Unicis Platform releases and changes is listed in order below.
 
+## [Node.js Security Update] 2026-10-27
+
+*Release date: 2026-10-27*
+
+*Version: v2026-10-27*
+
+- Security
+  - Updated Node.js to 22.23.4 to address [CVE-2026-111497](https://nodejs.org/en/blog/vulnerability/october-2026-security-releases), a Brotli decoder vulnerability that can lead to remote code execution, and other issues fixed in the October 2026 Node.js security release
+
+**Upgrade recommended.** Rebuild and redeploy Docker installations to use the patched runtime. For installations running the platform or MCP server outside Docker, update Node.js to 22.23.4 and restart the services.
+
 ## [CyFun 2025, Auditor Access + Security & Dependency Updates] 2026-10-16
 
 *Release date: 2026-10-16*
